@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8278682_3d5fb854",
+        "filename": "vmbase/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-07-03T09:57:52Z",
+      "side": 1,
+      "message": "Would it make sense to move this to the start of `rust_entry`, so it applies to earlier function calls as well?",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 50,
+        "endChar": 10
+      },
+      "revId": "9577fc77512d9ec894e40227edab9adb992e0da0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96f0c41c_5bda5e0a",
+        "filename": "vmbase/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-07-03T09:57:52Z",
+      "side": 1,
+      "message": "It seems this overwrites the entire stack guard, including the null byte that we explicitly write in `entry.S`. Was that the intention?",
+      "revId": "9577fc77512d9ec894e40227edab9adb992e0da0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
