@@ -9,6 +9,7 @@ aidl_interface {
     // This is never accessed directly. Apps are expected to use this indirectly via the Java
     // wrapper android.system.virtualmachine.
     unstable: true,
+    vendor_available: true,
     backend: {
         java: {
             sdk_version: "module_current",
@@ -77,6 +78,7 @@ aidl_interface {
     name: "android.system.virtualizationcommon",
     srcs: ["android/system/virtualizationcommon/**/*.aidl"],
     unstable: true,
+    vendor_available: true,
     backend: {
         java: {
             sdk_version: "module_current",

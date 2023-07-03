@@ -4,6 +4,7 @@ package {
 
 cc_binary {
     name: "vm_demo_native",
+    vendor: true,
     srcs: ["main.cpp"],
     static_libs: [
         "libbase",
