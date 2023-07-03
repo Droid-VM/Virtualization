@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2a0b35d_bfd5033e",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-03T12:01:19Z",
+      "side": 1,
+      "message": "I wonder if we can just shrink this into a single call. The caller can invoke `hyp::mmio_guard()` to obtain `\u0026dyn MmioGuard`. `get_hypervisor()` seems a bit redundant with the current code.",
+      "range": {
+        "startLine": 55,
+        "startChar": 30,
+        "endLine": 55,
+        "endChar": 63
+      },
+      "revId": "3bd0e848c267b4cd4eaec18d1f96a434197d9cd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
