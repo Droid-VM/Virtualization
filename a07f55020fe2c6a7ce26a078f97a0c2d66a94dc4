@@ -85,6 +85,24 @@
       "parentUuid": "0a9ee6c5_02fe7907",
       "revId": "a07f55020fe2c6a7ce26a078f97a0c2d66a94dc4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0aa88a5c_f967cd49",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-04T14:10:33Z",
+      "side": 1,
+      "message": "\u003e What if the user of vmbase wants to extend what happens on a particular exception, eg. custom IRQ handling?\n\nI didn\u0027t move all the exception handling, only `sync_exception_current` is moved to vmbase as the translation/permission fault handling is tied to MemoryTracker and required by a normal flow.\nAn alternative to keep the extensibility is to duplicate this code in rialto.\n\n\u003e Why not extract the MemoryTracker functionality into helpers but leave the exception callbacks in place?\n\nWhat do you mean by extracting the MemoryTracker functionality into helpers? Can you detail this approach a bit?",
+      "parentUuid": "99718f73_9c2d7fb2",
+      "revId": "a07f55020fe2c6a7ce26a078f97a0c2d66a94dc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
