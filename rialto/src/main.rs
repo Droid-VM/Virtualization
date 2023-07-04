@@ -27,12 +27,13 @@ use core::num::NonZeroUsize;
 use core::result;
 use core::slice;
 use fdtpci::PciInfo;
-use hyp::{get_hypervisor, HypervisorCap, KvmError};
+use hyp::{HypervisorCap, KvmError};
 use libfdt::FdtError;
 use log::{debug, error, info};
 use vmbase::{
     configure_heap,
     fdt::SwiotlbInfo,
+    hvc::get_hypervisor,
     layout::{self, crosvm},
     main,
     memory::{MemoryTracker, PageTable, MEMORY, PAGE_SIZE, SIZE_64KB},

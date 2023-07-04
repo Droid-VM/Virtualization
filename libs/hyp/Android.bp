@@ -9,7 +9,6 @@ rust_library_rlib {
     prefer_rlib: true,
     rustlibs: [
         "libbitflags",
-        "libonce_cell_nostd",
         "libsmccc",
         "libuuid_nostd",
     ],

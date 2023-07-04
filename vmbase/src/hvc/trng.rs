@@ -54,4 +54,4 @@ impl From<i64> for Error {
     }
 }
 
-pub type Result<T> = result::Result<T, Error>;
+pub(crate) type Result<T> = result::Result<T, Error>;

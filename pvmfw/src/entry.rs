@@ -23,15 +23,17 @@ use core::mem::{drop, size_of};
 use core::num::NonZeroUsize;
 use core::ops::Range;
 use core::slice;
-use hyp::{get_hypervisor, HypervisorCap};
+use hyp::HypervisorCap;
 use log::debug;
 use log::error;
 use log::info;
 use log::warn;
 use log::LevelFilter;
+
 use vmbase::util::RangeExt as _;
 use vmbase::{
     configure_heap, console,
+    hvc::get_hypervisor,
     layout::{self, crosvm},
     logger, main,
     memory::{min_dcache_line_size, MemoryTracker, MEMORY, SIZE_128KB, SIZE_4KB},

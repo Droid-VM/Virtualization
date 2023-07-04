@@ -22,7 +22,6 @@ mod gunyah;
 mod kvm;
 
 use crate::error::{Error, Result};
-use alloc::boxed::Box;
 pub use common::Hypervisor;
 pub use common::HypervisorCap;
 pub use common::MMIO_GUARD_GRANULE_SIZE;
@@ -31,18 +30,22 @@ use geniezone::GeniezoneHypervisor;
 use gunyah::GunyahHypervisor;
 pub use kvm::KvmError;
 use kvm::KvmHypervisor;
-use once_cell::race::OnceBox;
 use smccc::hvc64;
 use uuid::Uuid;
 
-enum HypervisorBackend {
+/// Supported hypervisor backends.
+pub enum HypervisorBackend {
+    /// KVM hypervisor backend.
     Kvm,
+    /// Gunyah hypervisor backend.
     Gunyah,
+    /// Geniezone hypervisor backend.
     Geniezone,
 }
 
 impl HypervisorBackend {
-    fn get_hypervisor(&self) -> &'static dyn Hypervisor {
+    /// Returns a reference to the corresponding `Hypervisor` implementation.
+    pub fn get_hypervisor(&self) -> &'static dyn Hypervisor {
         match self {
             Self::Kvm => &KvmHypervisor,
             Self::Gunyah => &GunyahHypervisor,
@@ -90,13 +93,7 @@ fn query_vendor_hyp_call_uid() -> Uuid {
     Uuid::from_u128_le(uuid)
 }
 
-fn detect_hypervisor() -> HypervisorBackend {
+/// Returns the detected `HypervisorBackend`.
+pub fn detect_hypervisor() -> HypervisorBackend {
     query_vendor_hyp_call_uid().try_into().expect("Unknown hypervisor")
-}
-
-/// Gets the hypervisor singleton.
-pub fn get_hypervisor() -> &'static dyn Hypervisor {
-    static HYPERVISOR: OnceBox<HypervisorBackend> = OnceBox::new();
-
-    HYPERVISOR.get_or_init(|| Box::new(detect_hypervisor())).get_hypervisor()
 }
