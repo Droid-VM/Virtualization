@@ -15,13 +15,36 @@
 //! Exception handlers.
 
 use core::arch::asm;
-use vmbase::{console::emergency_write_str, eprintln, power::reboot};
+use vmbase::{
+    console::emergency_write_str,
+    eprintln,
+    exceptions::{print_exception_failure, Esr, ExceptionRegisters, HandleExceptionError},
+    logger,
+    memory::{handle_permission_fault, handle_translation_fault},
+    power::reboot,
+};
+
+fn handle_exception(exception_registers: &ExceptionRegisters) -> Result<(), HandleExceptionError> {
+    // Handle all translation faults on both read and write, and MMIO guard map
+    // flagged invalid pages or blocks that caused the exception.
+    // Handle permission faults for DBM flagged entries, and flag them as dirty on write.
+    match exception_registers.esr {
+        Esr::DataAbortTranslationFault => handle_translation_fault(exception_registers.far),
+        Esr::DataAbortPermissionFault => handle_permission_fault(exception_registers.far),
+        _ => Err(HandleExceptionError::UnknownException),
+    }
+}
 
 #[no_mangle]
-extern "C" fn sync_exception_current() {
-    emergency_write_str("sync_exception_current\n");
-    print_esr();
-    reboot();
+extern "C" fn sync_exception_current(elr: u64, _spsr: u64) {
+    // Disable logging in exception handler to prevent unsafe writes to UART.
+    let _guard = logger::suppress();
+
+    let exception_registers = ExceptionRegisters::read_el1();
+    if let Err(e) = handle_exception(&exception_registers) {
+        print_exception_failure(&exception_registers, elr, e, "sync_exception_current");
+        reboot()
+    }
 }
 
 #[no_mangle]
