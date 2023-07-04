@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3b86df9_28f68203",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-07-04T09:48:30Z",
+      "side": 1,
+      "message": "It was kinda nice that `SHARED_POOL\u003dnull` acted as a safeguard for calling alloc before init. Any way how we could keep that?",
+      "range": {
+        "startLine": 324,
+        "startChar": 0,
+        "endLine": 324,
+        "endChar": 50
+      },
+      "revId": "c300f633b4fc4960b196fcbb35d859dc72ceb8a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "053dde33_f11b5920",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-07-04T09:48:30Z",
+      "side": 1,
+      "message": "Users of this will need to keep in mind that this will allocate from the heap rather than a dedicated memory pool depending on which protection mode they run in. Is that a problem or not?",
+      "range": {
+        "startLine": 337,
+        "startChar": 30,
+        "endLine": 337,
+        "endChar": 43
+      },
+      "revId": "c300f633b4fc4960b196fcbb35d859dc72ceb8a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
