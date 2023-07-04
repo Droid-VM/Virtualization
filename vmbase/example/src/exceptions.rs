@@ -18,13 +18,6 @@ use core::arch::asm;
 use vmbase::{eprintln, power::reboot};
 
 #[no_mangle]
-extern "C" fn sync_exception_current(_elr: u64, _spsr: u64) {
-    eprintln!("sync_exception_current");
-    print_esr();
-    reboot();
-}
-
-#[no_mangle]
 extern "C" fn irq_current(_elr: u64, _spsr: u64) {
     eprintln!("irq_current");
     reboot();

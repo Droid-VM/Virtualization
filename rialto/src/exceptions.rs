@@ -18,13 +18,6 @@ use core::arch::asm;
 use vmbase::{console::emergency_write_str, eprintln, power::reboot};
 
 #[no_mangle]
-extern "C" fn sync_exception_current() {
-    emergency_write_str("sync_exception_current\n");
-    print_esr();
-    reboot();
-}
-
-#[no_mangle]
 extern "C" fn irq_current() {
     emergency_write_str("irq_current\n");
     reboot();
