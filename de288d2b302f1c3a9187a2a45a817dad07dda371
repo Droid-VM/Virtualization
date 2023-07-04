@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "87e1e81b_a7843ea4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-04T15:06:57Z",
+      "side": 1,
+      "message": "I don\u0027t see the logic in this. There\u0027s no hypervisor state here, just the ability to detect different hypervisors and knowledge of what each one does. Both seem squarely related to what libhyp does.\nAnd it means someone adding a new hyp only has to change libhyp which seems like a good thing.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 29
+      },
+      "revId": "de288d2b302f1c3a9187a2a45a817dad07dda371",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "95dbd493_195c9111",
