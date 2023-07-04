@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c70a65a_6005f54b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-04T15:18:30Z",
+      "side": 1,
+      "message": "Channeling my inner Pierre-Clément: moving code \u0026 changing it at the same time makes things hard on the reviewer. It is much easier if you do them in two steps.",
+      "revId": "c78dcef74642ca8527a30827c4393ef62f3b1564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "098f8b7c_bcf4b8e7",
+        "filename": "vmbase/src/exceptions.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-04T15:18:30Z",
+      "side": 1,
+      "message": "I think this should stay in the client code, since they may want to add further branches to the match here.",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 1
+      },
+      "revId": "c78dcef74642ca8527a30827c4393ef62f3b1564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7df73e3_c7593302",
+        "filename": "vmbase/src/exceptions.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-04T15:18:30Z",
+      "side": 1,
+      "message": "Rather than just moving this function, you could maybe have a \"log exception failure\" method that does the whole \"if !handling uart { log what went wrong } \" thing.",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 1
+      },
+      "revId": "c78dcef74642ca8527a30827c4393ef62f3b1564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
