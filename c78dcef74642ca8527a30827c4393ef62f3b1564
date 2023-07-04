@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6262c325_55ca5c6d",
+        "filename": "vmbase/src/exceptions.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-04T15:51:50Z",
+      "side": 1,
+      "message": "\u003e It would be nice to dedup the ESR parsing code, though. That does sound like a separate crate, though, not vmbase\n\nIt could start in vmbase, until we need it elsewhere?",
+      "parentUuid": "c582a4bf_615a92cc",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 1
+      },
+      "revId": "c78dcef74642ca8527a30827c4393ef62f3b1564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e7df73e3_c7593302",
         "filename": "vmbase/src/exceptions.rs",
         "patchSetId": 2
