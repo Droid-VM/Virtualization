@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3407fcfc_234ec632",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-04T14:32:16Z",
+      "side": 1,
+      "message": "Or RegularKvmHypervisor?",
+      "parentUuid": "85eaf618_b276a760",
+      "range": {
+        "startLine": 75,
+        "startChar": 18,
+        "endLine": 75,
+        "endChar": 31
+      },
+      "revId": "618a273b0894d87cad89b71b817818c77398c501",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2fb4ee4a_805cfe6b",
         "filename": "libs/hyp/src/hypervisor/mod.rs",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2023-07-03T08:41:00Z",
       "side": 1,
       "message": "Can we use one single call in mem share to decide that all the MMIO guard and mem share features are not available? @dbrazdil@google.com recommended not to collate this [1].\n\n[1] https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2624020/comment/b000e4eb_d90c513e/",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 81
+      },
+      "revId": "618a273b0894d87cad89b71b817818c77398c501",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31810867_28584caa",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-04T14:32:16Z",
+      "side": 1,
+      "message": "It seems to me that David was saying we should assume the features are independent - which is what we have here - and not try to reduce it to a single boolean.",
+      "parentUuid": "2fb4ee4a_805cfe6b",
       "range": {
         "startLine": 64,
         "startChar": 0,
