@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d450e543_17985fce",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-04T16:28:22Z",
+      "side": 1,
+      "message": "```suggestion\n    let new_params \u003d match vm_config.params.take() {\n        None \u003d\u003e param.to_owned(),\n        Some(params) \u003d\u003e {\n            params.push(\u0027 \u0027);\n            params.push_str(param);\n            params\n        }\n    };\n```",
+      "range": {
+        "startLine": 583,
+        "startChar": 0,
+        "endLine": 591,
+        "endChar": 39
+      },
+      "revId": "4810f567ef2b1df9ea44a009d3740a44f5e0484b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

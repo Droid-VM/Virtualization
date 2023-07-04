@@ -187,6 +187,30 @@
       },
       "revId": "2ec91adb6d25a7888d6d5756b4d4cef85a51e336",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69d8dac7_57945d1e",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-04T16:28:22Z",
+      "side": 1,
+      "message": "\u0026mut String, I think? It was the reference I was missing.\nBut you shouldn\u0027t need the clone at all, since you\u0027re already modifying in place.\nSomething like my suggested edit might work?",
+      "parentUuid": "4332c130_503c0a45",
+      "range": {
+        "startLine": 588,
+        "startChar": 18,
+        "endLine": 588,
+        "endChar": 29
+      },
+      "revId": "2ec91adb6d25a7888d6d5756b4d4cef85a51e336",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
