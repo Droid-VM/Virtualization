@@ -263,7 +263,7 @@ impl MemoryTracker {
 
     /// Handles translation fault for blocks flagged for lazy MMIO mapping by enabling the page
     /// table entry and MMIO guard mapping the block. Breaks apart a block entry if required.
-    pub fn handle_mmio_fault(&mut self, addr: usize) -> Result<()> {
+    pub(crate) fn handle_mmio_fault(&mut self, addr: usize) -> Result<()> {
         let page_range = page_4kb_of(addr)..page_4kb_of(addr) + MMIO_GUARD_GRANULE_SIZE;
         self.page_table
             .modify_range(&page_range, &verify_lazy_mapped_block)
@@ -293,7 +293,7 @@ impl MemoryTracker {
     /// Handles permission fault for read-only blocks by setting writable-dirty state.
     /// In general, this should be called from the exception handler when hardware dirty
     /// state management is disabled or unavailable.
-    pub fn handle_permission_fault(&mut self, addr: usize) -> Result<()> {
+    pub(crate) fn handle_permission_fault(&mut self, addr: usize) -> Result<()> {
         self.page_table
             .modify_range(&(addr..addr + 1), &mark_dirty_block)
             .map_err(|_| MemoryTrackerError::SetPteDirtyFailed)
