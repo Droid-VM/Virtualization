@@ -121,6 +121,24 @@
       "parentUuid": "0aa88a5c_f967cd49",
       "revId": "a07f55020fe2c6a7ce26a078f97a0c2d66a94dc4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36ff6d27_209a8cc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-07-04T14:32:38Z",
+      "side": 1,
+      "message": "Re-reading your answer and maybe one thing that may not be clear - `sync_exception_current` is a handler for all **synchronous exceptions from EL1 caught by EL1** (\"current\"). There are other entry points for asynchronous exceptions, exceptions from lower levels (EL0) and combination thereof. \n\nYou seem to suggest that moving `sync_exception_current` still leaves the client with the other entry points. That\u0027s true, but they might want to handle more than just the two types of same-level synchronous exceptions that pvmfw currently handles.",
+      "parentUuid": "525475d0_f789c535",
+      "revId": "a07f55020fe2c6a7ce26a078f97a0c2d66a94dc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
