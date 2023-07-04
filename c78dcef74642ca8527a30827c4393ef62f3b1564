@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c582a4bf_615a92cc",
+        "filename": "vmbase/src/exceptions.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-07-04T15:49:33Z",
+      "side": 1,
+      "message": "+1. I could imagine this being a default fallback handler but that could break clients in the future if vmbase starts handling more exceptions.\n\nIt would be nice to dedup the ESR parsing code, though. That does sound like a separate crate, though, not vmbase. But maybe people disagree?",
+      "parentUuid": "098f8b7c_bcf4b8e7",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 1
+      },
+      "revId": "c78dcef74642ca8527a30827c4393ef62f3b1564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e7df73e3_c7593302",
         "filename": "vmbase/src/exceptions.rs",
         "patchSetId": 2
