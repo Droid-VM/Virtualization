@@ -33,6 +33,23 @@
       "message": "Move Pierre to CC as he\u0027s OOO",
       "revId": "a07f55020fe2c6a7ce26a078f97a0c2d66a94dc4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a9ee6c5_02fe7907",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-07-04T13:24:04Z",
+      "side": 1,
+      "message": "Is this a good idea? What if the user of vmbase wants to extend what happens on a particular exception, eg. custom IRQ handling? Why not extract the MemoryTracker functionality into helpers but leave the exception callbacks in place?",
+      "revId": "a07f55020fe2c6a7ce26a078f97a0c2d66a94dc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
