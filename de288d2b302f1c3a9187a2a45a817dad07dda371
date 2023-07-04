@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e55998d_9fb92568",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-04T15:45:25Z",
+      "side": 1,
+      "message": "\u003e When adding libhyp, our intention was for it to function as a library that supports various hypervisor backends. While it should provide the ability to detect which hypervisor backend is currently in use, it should not be responsible for recording this state.\n\nI still don\u0027t see how this makes things better. Anybody using libhyp (and to be fair we only have one user, and it\u0027s not clear we\u0027d have more) would end up duplicating the static, wouldn\u0027t they?\n\nAnd if we adopt your good suggestion of adding hyp::get_mmio_guard etc, then if we add a new capability we\u0027d have to make changes in 2 places. To me that implies the current set of responsibilities makes sense.\n\n\u003e \n\u003e Furthermore, it is generally not recommended for shared libraries to keep static variables, as doing so can lead to issues with reentrancy, thread safety, and other potential problems.\n\nIt\u0027s an immutable static with a thread safe initializer.",
+      "parentUuid": "aa824ccc_354be53d",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 29
+      },
+      "revId": "de288d2b302f1c3a9187a2a45a817dad07dda371",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "95dbd493_195c9111",
