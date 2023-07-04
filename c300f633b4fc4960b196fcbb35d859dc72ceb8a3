@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5956a794_f52a08b8",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-04T13:41:10Z",
+      "side": 1,
+      "message": "Should we warn/log if this isn\u0027t true?\nIf it\u0027s erroneously missing in a pvm I assume we will crash horribly; ideally we\u0027d give some indication before that.",
+      "range": {
+        "startLine": 109,
+        "startChar": 11,
+        "endLine": 109,
+        "endChar": 34
+      },
+      "revId": "c300f633b4fc4960b196fcbb35d859dc72ceb8a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d3b86df9_28f68203",
         "filename": "vmbase/src/memory/shared.rs",
         "patchSetId": 1
@@ -19,6 +42,53 @@
         "startChar": 0,
         "endLine": 324,
         "endChar": 50
+      },
+      "revId": "c300f633b4fc4960b196fcbb35d859dc72ceb8a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6860464_ef9c3dd5",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-04T13:41:10Z",
+      "side": 1,
+      "message": "Especially if you do alloc, init, dealloc - that will try to free using the wrong allocator.",
+      "parentUuid": "d3b86df9_28f68203",
+      "range": {
+        "startLine": 324,
+        "startChar": 0,
+        "endLine": 324,
+        "endChar": 50
+      },
+      "revId": "c300f633b4fc4960b196fcbb35d859dc72ceb8a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3a1f046_1deab191",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-04T13:41:10Z",
+      "side": 1,
+      "message": "You don\u0027t know that - you don\u0027t check it, and this function is marked safe so it has to deal with anything it\u0027s passed.",
+      "range": {
+        "startLine": 336,
+        "startChar": 8,
+        "endLine": 336,
+        "endChar": 45
       },
       "revId": "c300f633b4fc4960b196fcbb35d859dc72ceb8a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
