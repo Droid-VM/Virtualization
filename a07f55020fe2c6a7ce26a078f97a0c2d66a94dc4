@@ -103,6 +103,24 @@
       "parentUuid": "99718f73_9c2d7fb2",
       "revId": "a07f55020fe2c6a7ce26a078f97a0c2d66a94dc4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "525475d0_f789c535",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-07-04T14:26:04Z",
+      "side": 1,
+      "message": "`sync_exception_current` is what\u0027s called when the CPU triggers an exception. That can happen for many different reasons, only some of which are relevant to page table management - see here: https://developer.arm.com/documentation/ddi0595/2020-12/AArch64-Registers/ESR-EL1--Exception-Syndrome-Register--EL1-\n\nThis particular implementation handles `DataAbortTranslationFault` and `DataAbortPermissionFault`, and will panic with a generic error message for all the other kinds of exceptions that exist.\n\nBy moving the entrypoint of the exception to `vmbase`, you are preventing users of that library from handling the other kinds of exceptions. Overriding can be useful for many reasons. For example, they might want to write a custom panic handler that provides extra information about certain types of errors. Or they might want to support a debugger that triggers an exception after every instruction.\n\nI would only move `handle_translation_fault` and `handle_permission_fault` (with their dependencies), and leave `sync_exception_current`, `handling_uart_exception` and `handle_exception` inside each client. It\u0027s absolutely fine to have some duplication there.",
+      "parentUuid": "0aa88a5c_f967cd49",
+      "revId": "a07f55020fe2c6a7ce26a078f97a0c2d66a94dc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
