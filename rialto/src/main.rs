@@ -30,19 +30,20 @@ use fdtpci::PciInfo;
 use hyp::{get_hypervisor, HypervisorCap, KvmError};
 use libfdt::FdtError;
 use log::{debug, error, info};
+use virtio_drivers::transport::{pci::bus::PciRoot, DeviceType, Transport};
 use vmbase::{
     configure_heap,
     fdt::SwiotlbInfo,
     layout::{self, crosvm},
     main,
-    memory::{MemoryTracker, PageTable, MEMORY, PAGE_SIZE, SIZE_64KB},
+    memory::{MemoryTracker, PageTable, MEMORY, PAGE_SIZE, SIZE_128KB},
     power::reboot,
+    virtio::pci::{self, PciTransportIterator, VirtIOSocket},
 };
 
 fn new_page_table() -> Result<PageTable> {
     let mut page_table = PageTable::default();
 
-    page_table.map_device(&crosvm::MMIO_RANGE)?;
     page_table.map_data(&layout::scratch_range())?;
     page_table.map_data(&layout::stack_range(40 * PAGE_SIZE))?;
     page_table.map_code(&layout::text_range())?;
@@ -91,8 +92,6 @@ unsafe fn try_main(fdt_addr: usize) -> Result<()> {
     let fdt = unsafe { slice::from_raw_parts(fdt_range.start as *mut u8, fdt_range.len()) };
     // We do not need to validate the DT since it is already validated in pvmfw.
     let fdt = libfdt::Fdt::from_slice(fdt)?;
-    let pci_info = PciInfo::from_fdt(fdt)?;
-    debug!("PCI: {pci_info:#x?}");
 
     let memory_range = fdt.first_memory_range()?;
     MEMORY.lock().as_mut().unwrap().shrink(&memory_range).map_err(|e| {
@@ -116,7 +115,25 @@ unsafe fn try_main(fdt_addr: usize) -> Result<()> {
             e
         })?;
     }
+
+    let pci_info = PciInfo::from_fdt(fdt)?;
+    debug!("PCI: {pci_info:#x?}");
+    let mut pci_root = pci::initialise(pci_info, MEMORY.lock().as_mut().unwrap())
+        .map_err(Error::PciInitializationFailed)?;
+    debug!("PCI root: {pci_root:#x?}");
+    let socket_device = find_socket_device(&mut pci_root)?;
+    debug!("Found socket device: guest cid = {:?}", socket_device.guest_cid());
     Ok(())
+}
+
+fn find_socket_device(pci_root: &mut PciRoot) -> Result<VirtIOSocket> {
+    if let Some(transport) =
+        PciTransportIterator::new(pci_root).find(|t| DeviceType::Socket == t.device_type())
+    {
+        let device = VirtIOSocket::new(transport).map_err(Error::VirtIOSocketCreationFailed)?;
+        return Ok(device);
+    }
+    Err(Error::MissingVirtIOSocketDevice)
 }
 
 fn memory_protection_granule() -> result::Result<usize, hyp::Error> {
@@ -165,4 +182,4 @@ pub fn main(fdt_addr: u64, _a1: u64, _a2: u64, _a3: u64) {
 }
 
 main!(main);
-configure_heap!(SIZE_64KB);
+configure_heap!(SIZE_128KB);
