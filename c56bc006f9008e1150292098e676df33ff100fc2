@@ -1,6 +1,46 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db506421_8eb4a8d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-04T14:18:13Z",
+      "side": 1,
+      "message": "+1 to Alice\u0027s comments",
+      "revId": "c56bc006f9008e1150292098e676df33ff100fc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9581e996_28253389",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-04T14:18:13Z",
+      "side": 1,
+      "message": "Handle? It\u0027s a reference, isn\u0027t it?\nOr just \"Returns the hypervisor\u0027s ...\"",
+      "range": {
+        "startLine": 25,
+        "startChar": 18,
+        "endLine": 25,
+        "endChar": 24
+      },
+      "revId": "c56bc006f9008e1150292098e676df33ff100fc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de27cd28_68455a9b",
@@ -37,6 +77,30 @@
       "writtenOn": "2023-07-03T08:26:36Z",
       "side": 1,
       "message": "Should we make this separate as following the make the code even less decoupled and easier to extend?\n\n```\nimpl\u003cT: MmioGuardedHypervisor\u003e Hypervisor for T {\n    fn get_mmio_guard(\u0026self) -\u003e Option\u003c\u0026dyn MmioGuardedHypervisor\u003e {\n        Some(self)\n    }\n}\n\nimpl\u003cT: MemSharingHypervisor\u003e Hypervisor for T {\n    fn get_mem_share(\u0026self) -\u003e Option\u003c\u0026dyn MemSharingHypervisor\u003e {\n        Some(self)\n    }\n}\n```",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 1
+      },
+      "revId": "c56bc006f9008e1150292098e676df33ff100fc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f89df3ef_8fa6b1a0",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-04T14:18:13Z",
+      "side": 1,
+      "message": "I don\u0027t think that works - you can\u0027t have 2 impl Hypervisors for one T.\nAlthough I like the idea.\n\nPerhaps we should just remove this, and do it explicitly for each hyp. That scales better to new capabilities.",
+      "parentUuid": "ab0ae937_a7c92748",
       "range": {
         "startLine": 66,
         "startChar": 0,
