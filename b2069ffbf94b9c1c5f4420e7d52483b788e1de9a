@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a89664b5_e42de921",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-04T14:54:06Z",
+      "side": 1,
+      "message": "It would be nice to have your helpful explanation as to why this can\u0027t be done in Rust as a comment here.",
+      "range": {
+        "startLine": 217,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 0
+      },
+      "revId": "b2069ffbf94b9c1c5f4420e7d52483b788e1de9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cce73aea_c6fa98af",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-04T14:54:06Z",
+      "side": 1,
+      "message": "Why do we need a string terminator?\nHow does this relate to the previous lines? \nCould we just clear the relevant bits in x29 first?",
+      "range": {
+        "startLine": 226,
+        "startChar": 0,
+        "endLine": 227,
+        "endChar": 16
+      },
+      "revId": "b2069ffbf94b9c1c5f4420e7d52483b788e1de9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37f40982_934ac217",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-04T14:54:06Z",
+      "side": 1,
+      "message": "We should probably mention somewhere that we only have one TLS block because we know we have only one thread.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 39
+      },
+      "revId": "b2069ffbf94b9c1c5f4420e7d52483b788e1de9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afd53017_7a858e53",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-04T14:54:06Z",
+      "side": 1,
+      "message": "-\u003e The register is set to a valid value in Entry.S and not subsequently changed\nOr something like that?",
+      "range": {
+        "startLine": 56,
+        "startChar": 16,
+        "endLine": 56,
+        "endChar": 67
+      },
+      "revId": "b2069ffbf94b9c1c5f4420e7d52483b788e1de9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
