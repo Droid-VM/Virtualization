@@ -19,7 +19,7 @@ use core::{fmt, result};
 use fdtpci::PciError;
 use hyp::Error as HypervisorError;
 use libfdt::FdtError;
-use vmbase::memory::MemoryTrackerError;
+use vmbase::{memory::MemoryTrackerError, virtio::pci};
 
 pub type Result<T> = result::Result<T, Error>;
 
@@ -37,6 +37,12 @@ pub enum Error {
     InvalidPci(PciError),
     /// Failed memory operation.
     MemoryOperationFailed(MemoryTrackerError),
+    /// Failed to initialize PCI.
+    PciInitializationFailed(pci::PciError),
+    /// Failed to create VirtIO Socket device.
+    VirtIOSocketCreationFailed(virtio_drivers::Error),
+    /// Missing socket device.
+    MissingVirtIOSocketDevice,
 }
 
 impl fmt::Display for Error {
@@ -50,6 +56,11 @@ impl fmt::Display for Error {
             Self::InvalidFdt(e) => write!(f, "Invalid FDT: {e}"),
             Self::InvalidPci(e) => write!(f, "Invalid PCI: {e}"),
             Self::MemoryOperationFailed(e) => write!(f, "Failed memory operation: {e}"),
+            Self::PciInitializationFailed(e) => write!(f, "Failed to initialize PCI: {e}"),
+            Self::VirtIOSocketCreationFailed(e) => {
+                write!(f, "Failed to create VirtIO Socket device: {e}")
+            }
+            Self::MissingVirtIOSocketDevice => write!(f, "Missing VirtIO Socket device."),
         }
     }
 }
