@@ -22,7 +22,7 @@ use fdtpci::PciInfo;
 use log::debug;
 use once_cell::race::OnceBox;
 use virtio_drivers::{
-    device::blk,
+    device::{blk, socket},
     transport::pci::{
         bus::{BusDeviceIterator, PciRoot},
         virtio_device_type, PciTransport,
@@ -78,6 +78,11 @@ pub fn initialise(pci_info: PciInfo, memory: &mut MemoryTracker) -> Result<PciRo
 /// Virtio Block device.
 pub type VirtIOBlk = blk::VirtIOBlk<HalImpl, PciTransport>;
 
+/// Virtio Socket device.
+///
+/// Spec: https://docs.oasis-open.org/virtio/virtio/v1.2/csd01/virtio-v1.2-csd01.html 5.10
+pub type VirtIOSocket = socket::VirtIOSocket<HalImpl, PciTransport>;
+
 /// An iterator that iterates over the PCI transport for each device.
 pub struct PciTransportIterator<'a> {
     pci_root: &'a mut PciRoot,
@@ -97,7 +102,9 @@ impl<'a> Iterator for PciTransportIterator<'a> {
 
     fn next(&mut self) -> Option<Self::Item> {
         loop {
+            debug!("Searching PCI device...");
             let (device_function, info) = self.bus.next()?;
+            debug!("Found PCI device: {} at {}", info, device_function);
             let (status, command) = self.pci_root.get_status_command(device_function);
             debug!(
                 "Found PCI device {} at {}, status {:?} command {:?}",
