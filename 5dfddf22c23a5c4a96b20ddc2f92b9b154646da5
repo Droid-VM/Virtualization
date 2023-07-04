@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4bdd2f3_c769686c",
+        "filename": "virtualizationmanager/src/payload.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-04T12:54:27Z",
+      "side": 1,
+      "message": "I wonder if we should have a full list of all these partition names somewhere. \nMaybe extract some constants, or just a big comment? There\u0027s a useful reference at line 246, but that only covers the payload.",
+      "range": {
+        "startLine": 406,
+        "startChar": 20,
+        "endLine": 406,
+        "endChar": 37
+      },
+      "revId": "5dfddf22c23a5c4a96b20ddc2f92b9b154646da5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
