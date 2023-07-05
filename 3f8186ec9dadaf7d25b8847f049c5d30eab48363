@@ -16,6 +16,52 @@
       "message": "Hi, PTAL.",
       "revId": "3f8186ec9dadaf7d25b8847f049c5d30eab48363",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb572061_ba15b460",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-05T11:51:02Z",
+      "side": 1,
+      "message": "Time for `struct ExceptionInfo{ esr: Esr, far: usize}` ?\n\nIt could be used in a few places.",
+      "range": {
+        "startLine": 133,
+        "startChar": 37,
+        "endLine": 133,
+        "endChar": 49
+      },
+      "revId": "3f8186ec9dadaf7d25b8847f049c5d30eab48363",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "030ea8bc_21ffbc34",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-05T11:51:02Z",
+      "side": 1,
+      "message": "Now I\u0027m wondering if this should be VirtualAddress.\nBut that is definitely out scope for this CL.",
+      "range": {
+        "startLine": 133,
+        "startChar": 43,
+        "endLine": 133,
+        "endChar": 48
+      },
+      "revId": "3f8186ec9dadaf7d25b8847f049c5d30eab48363",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
