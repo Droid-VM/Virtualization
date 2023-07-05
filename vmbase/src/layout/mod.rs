@@ -17,7 +17,7 @@
 pub mod crosvm;
 
 use crate::console::BASE_ADDRESS;
-use core::ops::Range;
+use aarch64_paging::paging::MemoryRegion;
 use core::ptr::addr_of;
 
 /// First address that can't be translated by a level 1 TTBR0_EL1.
@@ -31,61 +31,61 @@ macro_rules! linker_addr {
     }};
 }
 
-/// Get the address range between a pair of linker-defined symbols.
+/// Gets the virtual address range between a pair of linker-defined symbols.
 #[macro_export]
 macro_rules! linker_region {
     ($begin:ident,$end:ident) => {{
         let start = linker_addr!($begin);
         let end = linker_addr!($end);
 
-        start..end
+        MemoryRegion::new(start, end)
     }};
 }
 
 /// Memory reserved for the DTB.
-pub fn dtb_range() -> Range<usize> {
+pub fn dtb_range() -> MemoryRegion {
     linker_region!(dtb_begin, dtb_end)
 }
 
 /// Executable code.
-pub fn text_range() -> Range<usize> {
+pub fn text_range() -> MemoryRegion {
     linker_region!(text_begin, text_end)
 }
 
 /// Read-only data.
-pub fn rodata_range() -> Range<usize> {
+pub fn rodata_range() -> MemoryRegion {
     linker_region!(rodata_begin, rodata_end)
 }
 
 /// Initialised writable data.
-pub fn data_range() -> Range<usize> {
+pub fn data_range() -> MemoryRegion {
     linker_region!(data_begin, data_end)
 }
 
 /// Zero-initialized writable data.
-pub fn bss_range() -> Range<usize> {
+pub fn bss_range() -> MemoryRegion {
     linker_region!(bss_begin, bss_end)
 }
 
 /// Writable data region for the stack.
-pub fn stack_range(stack_size: usize) -> Range<usize> {
+pub fn stack_range(stack_size: usize) -> MemoryRegion {
     let end = linker_addr!(init_stack_pointer);
     let start = end.checked_sub(stack_size).unwrap();
     assert!(start >= linker_addr!(stack_limit));
 
-    start..end
+    MemoryRegion::new(start, end)
 }
 
 /// All writable sections, excluding the stack.
-pub fn scratch_range() -> Range<usize> {
+pub fn scratch_range() -> MemoryRegion {
     linker_region!(eh_stack_limit, bss_end)
 }
 
 /// UART console range.
-pub fn console_uart_range() -> Range<usize> {
+pub fn console_uart_range() -> MemoryRegion {
     const CONSOLE_LEN: usize = 1; // `uart::Uart` only uses one u8 register.
 
-    BASE_ADDRESS..(BASE_ADDRESS + CONSOLE_LEN)
+    MemoryRegion::new(BASE_ADDRESS, BASE_ADDRESS + CONSOLE_LEN)
 }
 
 /// Read-write data (original).

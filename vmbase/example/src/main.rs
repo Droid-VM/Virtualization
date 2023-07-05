@@ -52,14 +52,13 @@ pub fn main(arg0: u64, arg1: u64, arg2: u64, arg3: u64) {
     info!("Hello world");
     info!("x0={:#018x}, x1={:#018x}, x2={:#018x}, x3={:#018x}", arg0, arg1, arg2, arg3);
     print_addresses();
-    assert_eq!(arg0, dtb_range().start.0 as u64);
+    assert_eq!(arg0, dtb_range().start().0 as u64);
     check_data();
     check_stack_guard();
 
     info!("Checking FDT...");
     let fdt = dtb_range();
-    let fdt =
-        unsafe { core::slice::from_raw_parts_mut(fdt.start.0 as *mut u8, fdt.end.0 - fdt.start.0) };
+    let fdt = unsafe { core::slice::from_raw_parts_mut(fdt.start().0 as *mut u8, fdt.len()) };
     let fdt = Fdt::from_mut_slice(fdt).unwrap();
     info!("FDT passed verification.");
     check_fdt(fdt);
@@ -80,13 +79,13 @@ pub fn main(arg0: u64, arg1: u64, arg2: u64, arg3: u64) {
         .unwrap();
     idmap
         .map_range(
-            &text_range().into(),
+            &text_range(),
             Attributes::VALID | Attributes::NORMAL | Attributes::NON_GLOBAL | Attributes::READ_ONLY,
         )
         .unwrap();
     idmap
         .map_range(
-            &rodata_range().into(),
+            &rodata_range(),
             Attributes::VALID
                 | Attributes::NORMAL
                 | Attributes::NON_GLOBAL
@@ -96,7 +95,7 @@ pub fn main(arg0: u64, arg1: u64, arg2: u64, arg3: u64) {
         .unwrap();
     idmap
         .map_range(
-            &scratch_range().into(),
+            &scratch_range(),
             Attributes::VALID
                 | Attributes::NORMAL
                 | Attributes::NON_GLOBAL
@@ -105,7 +104,7 @@ pub fn main(arg0: u64, arg1: u64, arg2: u64, arg3: u64) {
         .unwrap();
     idmap
         .map_range(
-            &boot_stack_range().into(),
+            &boot_stack_range(),
             Attributes::VALID
                 | Attributes::NORMAL
                 | Attributes::NON_GLOBAL
@@ -114,7 +113,7 @@ pub fn main(arg0: u64, arg1: u64, arg2: u64, arg3: u64) {
         .unwrap();
     idmap
         .map_range(
-            &dtb_range().into(),
+            &dtb_range(),
             Attributes::VALID
                 | Attributes::NORMAL
                 | Attributes::NON_GLOBAL

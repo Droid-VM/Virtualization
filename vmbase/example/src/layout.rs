@@ -16,7 +16,6 @@
 
 use aarch64_paging::paging::{MemoryRegion, VirtualAddress};
 use core::arch::asm;
-use core::ops::Range;
 use log::info;
 use vmbase::layout;
 use vmbase::STACK_CHK_GUARD;
@@ -24,44 +23,40 @@ use vmbase::STACK_CHK_GUARD;
 /// The first 1 GiB of memory are used for MMIO.
 pub const DEVICE_REGION: MemoryRegion = MemoryRegion::new(0, 0x40000000);
 
-fn into_va_range(r: Range<usize>) -> Range<VirtualAddress> {
-    VirtualAddress(r.start)..VirtualAddress(r.end)
-}
-
 /// Memory reserved for the DTB.
-pub fn dtb_range() -> Range<VirtualAddress> {
-    into_va_range(layout::dtb_range())
+pub fn dtb_range() -> MemoryRegion {
+    layout::dtb_range()
 }
 
 /// Executable code.
-pub fn text_range() -> Range<VirtualAddress> {
-    into_va_range(layout::text_range())
+pub fn text_range() -> MemoryRegion {
+    layout::text_range()
 }
 
 /// Read-only data.
-pub fn rodata_range() -> Range<VirtualAddress> {
-    into_va_range(layout::rodata_range())
+pub fn rodata_range() -> MemoryRegion {
+    layout::rodata_range()
 }
 
 /// Initialised writable data.
-pub fn data_range() -> Range<VirtualAddress> {
-    into_va_range(layout::data_range())
+pub fn data_range() -> MemoryRegion {
+    layout::data_range()
 }
 
 /// Zero-initialized writable data.
-pub fn bss_range() -> Range<VirtualAddress> {
-    into_va_range(layout::bss_range())
+pub fn bss_range() -> MemoryRegion {
+    layout::bss_range()
 }
 
 /// Writable data region for the stack.
-pub fn boot_stack_range() -> Range<VirtualAddress> {
+pub fn boot_stack_range() -> MemoryRegion {
     const PAGE_SIZE: usize = 4 << 10;
-    into_va_range(layout::stack_range(40 * PAGE_SIZE))
+    layout::stack_range(40 * PAGE_SIZE)
 }
 
 /// Writable data region for allocations.
-pub fn scratch_range() -> Range<VirtualAddress> {
-    into_va_range(layout::scratch_range())
+pub fn scratch_range() -> MemoryRegion {
+    layout::scratch_range()
 }
 
 fn data_load_address() -> VirtualAddress {
@@ -74,29 +69,24 @@ fn binary_end() -> VirtualAddress {
 
 pub fn print_addresses() {
     let dtb = dtb_range();
-    info!("dtb:        {}..{} ({} bytes)", dtb.start, dtb.end, dtb.end - dtb.start);
+    info!("dtb:        {}..{} ({} bytes)", dtb.start(), dtb.end(), dtb.len());
     let text = text_range();
-    info!("text:       {}..{} ({} bytes)", text.start, text.end, text.end - text.start);
+    info!("text:       {}..{} ({} bytes)", text.start(), text.end(), text.len());
     let rodata = rodata_range();
-    info!("rodata:     {}..{} ({} bytes)", rodata.start, rodata.end, rodata.end - rodata.start);
+    info!("rodata:     {}..{} ({} bytes)", rodata.start(), rodata.end(), rodata.len());
     info!("binary end: {}", binary_end());
     let data = data_range();
     info!(
         "data:       {}..{} ({} bytes, loaded at {})",
-        data.start,
-        data.end,
-        data.end - data.start,
+        data.start(),
+        data.end(),
+        data.len(),
         data_load_address(),
     );
     let bss = bss_range();
-    info!("bss:        {}..{} ({} bytes)", bss.start, bss.end, bss.end - bss.start);
+    info!("bss:        {}..{} ({} bytes)", bss.start(), bss.end(), bss.len());
     let boot_stack = boot_stack_range();
-    info!(
-        "boot_stack: {}..{} ({} bytes)",
-        boot_stack.start,
-        boot_stack.end,
-        boot_stack.end - boot_stack.start
-    );
+    info!("boot_stack: {}..{} ({} bytes)", boot_stack.start(), boot_stack.end(), boot_stack.len());
 }
 
 /// Bionic-compatible thread-local storage entry, at the given offset from TPIDR_EL0.

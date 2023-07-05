@@ -17,25 +17,26 @@
 #![deny(unsafe_op_in_unsafe_fn)]
 
 use crate::helpers::PVMFW_PAGE_SIZE;
+use aarch64_paging::paging::MemoryRegion;
 use aarch64_paging::MapError;
 use core::result;
 use log::error;
 use vmbase::{
     layout,
-    memory::{MemoryRange, PageTable, SIZE_2MB, SIZE_4KB},
+    memory::{PageTable, SIZE_2MB, SIZE_4KB},
     util::align_up,
 };
 
 /// Returns memory range reserved for the appended payload.
-pub fn appended_payload_range() -> MemoryRange {
+pub fn appended_payload_range() -> MemoryRegion {
     let start = align_up(layout::binary_end(), SIZE_4KB).unwrap();
     // pvmfw is contained in a 2MiB region so the payload can't be larger than the 2MiB alignment.
     let end = align_up(start, SIZE_2MB).unwrap();
-    start..end
+    MemoryRegion::new(start, end)
 }
 
 /// Region allocated for the stack.
-pub fn stack_range() -> MemoryRange {
+pub fn stack_range() -> MemoryRegion {
     const STACK_PAGES: usize = 8;
 
     layout::stack_range(STACK_PAGES * PVMFW_PAGE_SIZE)
