@@ -16,6 +16,29 @@
       "message": "Hi, PTAL",
       "revId": "a3d644a7c10e00e1e712235057ddbc96b77ce97b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34908a1c_fbc8c292",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-05T12:56:46Z",
+      "side": 1,
+      "message": "Should modify_range take Range\u003cVirtualAddress\u003e and/or MemoryRegion? Specifically we should do the +1 on VirtualAddress not usize.\nOr are you doing that separately?",
+      "range": {
+        "startLine": 298,
+        "startChar": 13,
+        "endLine": 298,
+        "endChar": 25
+      },
+      "revId": "a3d644a7c10e00e1e712235057ddbc96b77ce97b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
