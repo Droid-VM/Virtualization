@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab45add0_26601355",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-05T08:18:44Z",
+      "side": 1,
+      "message": "Thanks for the reviews",
+      "revId": "c78dcef74642ca8527a30827c4393ef62f3b1564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "098f8b7c_bcf4b8e7",
@@ -89,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b77d2e17_bab13631",
+        "filename": "vmbase/src/exceptions.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-05T08:18:44Z",
+      "side": 1,
+      "message": "Let me first move this `handle_exception` to the client code. Agree that we can dedup the ESR parsing code when it will be needed.",
+      "parentUuid": "6262c325_55ca5c6d",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 1
+      },
+      "revId": "c78dcef74642ca8527a30827c4393ef62f3b1564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7df73e3_c7593302",
@@ -102,6 +143,30 @@
       "writtenOn": "2023-07-04T15:18:30Z",
       "side": 1,
       "message": "Rather than just moving this function, you could maybe have a \"log exception failure\" method that does the whole \"if !handling uart { log what went wrong } \" thing.",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 1
+      },
+      "revId": "c78dcef74642ca8527a30827c4393ef62f3b1564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ceafb6a_fa12e043",
+        "filename": "vmbase/src/exceptions.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-05T08:18:44Z",
+      "side": 1,
+      "message": "Addressed https://r.android.com/2648720",
+      "parentUuid": "e7df73e3_c7593302",
       "range": {
         "startLine": 127,
         "startChar": 0,
