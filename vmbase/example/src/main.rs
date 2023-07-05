@@ -27,23 +27,46 @@ use crate::layout::{
     bionic_tls, boot_stack_range, dtb_range, print_addresses, rodata_range, scratch_range,
     stack_chk_guard, text_range, DEVICE_REGION,
 };
-use crate::pci::{check_pci, get_bar_region};
-use aarch64_paging::{idmap::IdMap, paging::Attributes};
+use crate::pci::check_pci;
+use aarch64_paging::MapError;
 use alloc::{vec, vec::Vec};
+use core::ops::Range;
 use fdtpci::PciInfo;
 use libfdt::Fdt;
 use log::{debug, error, info, trace, warn, LevelFilter};
-use vmbase::{configure_heap, cstr, logger, main, memory::SIZE_64KB};
+use vmbase::{
+    configure_heap, cstr, logger, main,
+    memory::{PageTable, SIZE_64KB},
+};
 
 static INITIALISED_DATA: [u32; 4] = [1, 2, 3, 4];
 static mut ZEROED_DATA: [u32; 10] = [0; 10];
 static mut MUTABLE_DATA: [u32; 4] = [1, 2, 3, 4];
 
-const ASID: usize = 1;
-const ROOT_LEVEL: usize = 1;
-
 main!(main);
 configure_heap!(SIZE_64KB);
+
+fn init_page_table(pci_bar_range: Range<usize>) -> Result<(), MapError> {
+    let mut page_table = PageTable::default();
+
+    page_table.map_device(&DEVICE_REGION)?;
+    page_table.map_code(&text_range())?;
+    page_table.map_rodata(&rodata_range())?;
+    page_table.map_data(&scratch_range())?;
+    page_table.map_data(&boot_stack_range())?;
+    page_table.map_rodata(&dtb_range())?;
+    page_table.map_device(&pci_bar_range)?;
+
+    info!("Activating IdMap...");
+    // SAFETY: page_table duplicates the static mappings for everything that the Rust code is
+    // aware of so activating it shouldn't have any visible effect.
+    unsafe {
+        page_table.activate();
+    }
+    info!("Activated.");
+
+    Ok(())
+}
 
 /// Entry point for VM bootloader.
 pub fn main(arg0: u64, arg1: u64, arg2: u64, arg3: u64) {
@@ -52,14 +75,13 @@ pub fn main(arg0: u64, arg1: u64, arg2: u64, arg3: u64) {
     info!("Hello world");
     info!("x0={:#018x}, x1={:#018x}, x2={:#018x}, x3={:#018x}", arg0, arg1, arg2, arg3);
     print_addresses();
-    assert_eq!(arg0, dtb_range().start.0 as u64);
+    assert_eq!(arg0, dtb_range().start as u64);
     check_data();
     check_stack_guard();
 
     info!("Checking FDT...");
     let fdt = dtb_range();
-    let fdt =
-        unsafe { core::slice::from_raw_parts_mut(fdt.start.0 as *mut u8, fdt.end.0 - fdt.start.0) };
+    let fdt = unsafe { core::slice::from_raw_parts_mut(fdt.start as *mut u8, fdt.end - fdt.start) };
     let fdt = Fdt::from_mut_slice(fdt).unwrap();
     info!("FDT passed verification.");
     check_fdt(fdt);
@@ -71,68 +93,8 @@ pub fn main(arg0: u64, arg1: u64, arg2: u64, arg3: u64) {
 
     check_alloc();
 
-    let mut idmap = IdMap::new(ASID, ROOT_LEVEL);
-    idmap
-        .map_range(
-            &DEVICE_REGION,
-            Attributes::VALID | Attributes::DEVICE_NGNRE | Attributes::EXECUTE_NEVER,
-        )
-        .unwrap();
-    idmap
-        .map_range(
-            &text_range().into(),
-            Attributes::VALID | Attributes::NORMAL | Attributes::NON_GLOBAL | Attributes::READ_ONLY,
-        )
-        .unwrap();
-    idmap
-        .map_range(
-            &rodata_range().into(),
-            Attributes::VALID
-                | Attributes::NORMAL
-                | Attributes::NON_GLOBAL
-                | Attributes::READ_ONLY
-                | Attributes::EXECUTE_NEVER,
-        )
-        .unwrap();
-    idmap
-        .map_range(
-            &scratch_range().into(),
-            Attributes::VALID
-                | Attributes::NORMAL
-                | Attributes::NON_GLOBAL
-                | Attributes::EXECUTE_NEVER,
-        )
-        .unwrap();
-    idmap
-        .map_range(
-            &boot_stack_range().into(),
-            Attributes::VALID
-                | Attributes::NORMAL
-                | Attributes::NON_GLOBAL
-                | Attributes::EXECUTE_NEVER,
-        )
-        .unwrap();
-    idmap
-        .map_range(
-            &dtb_range().into(),
-            Attributes::VALID
-                | Attributes::NORMAL
-                | Attributes::NON_GLOBAL
-                | Attributes::READ_ONLY
-                | Attributes::EXECUTE_NEVER,
-        )
-        .unwrap();
-    idmap
-        .map_range(
-            &get_bar_region(&pci_info),
-            Attributes::VALID | Attributes::DEVICE_NGNRE | Attributes::EXECUTE_NEVER,
-        )
-        .unwrap();
-
-    info!("Activating IdMap...");
-    trace!("{:?}", idmap);
-    idmap.activate();
-    info!("Activated.");
+    let pci_bar_range = (pci_info.bar_range.start as usize)..(pci_info.bar_range.end as usize);
+    init_page_table(pci_bar_range).unwrap();
 
     check_data();
     check_dice();

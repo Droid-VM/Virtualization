@@ -14,10 +14,8 @@
 
 //! Functions to scan the PCI bus for VirtIO device.
 
-use aarch64_paging::paging::MemoryRegion;
 use alloc::alloc::{alloc_zeroed, dealloc, handle_alloc_error, Layout};
 use core::{mem::size_of, ptr::NonNull};
-use fdtpci::PciInfo;
 use log::{debug, info};
 use virtio_drivers::{
     device::{blk::VirtIOBlk, console::VirtIOConsole},
@@ -102,11 +100,6 @@ fn check_virtio_console_device(transport: impl Transport) {
         console.send(c).expect("Failed to send character to VirtIO console device");
     }
     info!("Wrote to VirtIO console.");
-}
-
-/// Gets the memory region in which BARs are allocated.
-pub fn get_bar_region(pci_info: &PciInfo) -> MemoryRegion {
-    MemoryRegion::new(pci_info.bar_range.start as usize, pci_info.bar_range.end as usize)
 }
 
 struct HalImpl;
