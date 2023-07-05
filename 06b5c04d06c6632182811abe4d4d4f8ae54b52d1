@@ -16,6 +16,29 @@
       "message": "Hi Alan, thanks for the review. Could you please take another look?",
       "revId": "06b5c04d06c6632182811abe4d4d4f8ae54b52d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "870341da_6b8fbd09",
+        "filename": "rialto/src/exceptions.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-05T09:34:39Z",
+      "side": 1,
+      "message": "I\u0027d still like to see most of this in vmbase - one method to get everything we need to call handle_exception, one to deal with the aftermath?",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 5
+      },
+      "revId": "06b5c04d06c6632182811abe4d4d4f8ae54b52d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
