@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aea05a0_210c77eb",
+        "filename": "vmbase/example/src/layout.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-05T16:20:58Z",
+      "side": 1,
+      "message": "These functions seem unnecessary now, you can just use the ones from vmbase directly.",
+      "revId": "7a80fa2b37078674187e5ca68fc603b796936171",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c6f28d8_05fd3ecd",
+        "filename": "vmbase/src/layout/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-05T16:20:58Z",
+      "side": 1,
+      "message": "This aligns both stand and end to `PAGE_SIZE`. Is that what you want here?",
+      "revId": "7a80fa2b37078674187e5ca68fc603b796936171",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
