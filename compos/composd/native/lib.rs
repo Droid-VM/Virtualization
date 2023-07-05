@@ -14,6 +14,9 @@
 
 //! Native helpers for composd.
 
+#![deny(unsafe_op_in_unsafe_fn)]
+#![deny(clippy::undocumented_unsafe_blocks)]
+
 pub use art::*;
 
 mod art {

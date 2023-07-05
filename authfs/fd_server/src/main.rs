@@ -22,6 +22,9 @@
 //! For example, `exec 9</path/to/file fd_server --ro-fds 9` starts the binder service. A client
 //! client can then request the content of file 9 by offset and size.
 
+#![deny(unsafe_op_in_unsafe_fn)]
+#![deny(clippy::undocumented_unsafe_blocks)]
+
 mod aidl;
 
 use anyhow::{bail, Result};
