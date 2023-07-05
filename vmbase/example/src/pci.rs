@@ -111,11 +111,20 @@ pub fn get_bar_region(pci_info: &PciInfo) -> MemoryRegion {
 
 struct HalImpl;
 
+/// SAFETY: See the 'Implementation Safety' comments on methods below for how they fulfill the
+/// safety requirements of the unsafe `Hal` trait.
 unsafe impl Hal for HalImpl {
+    /// # Implementation Safety
+    ///
+    /// `dma_alloc` ensures the returned DMA buffer is not aliased with any other allocation or
+    /// reference in the program until it is deallocated by `dma_dealloc` by allocating a unique
+    /// block of memory using `alloc_zeroed`, which is guaranteed to allocate valid, unique and
+    /// zeroed memory. We request an alignment of at least `PAGE_SIZE` from `alloc_zeroed`.
     fn dma_alloc(pages: usize, _direction: BufferDirection) -> (PhysAddr, NonNull<u8>) {
         debug!("dma_alloc: pages={}", pages);
+        assert_ne!(pages, 0);
         let layout = Layout::from_size_align(pages * PAGE_SIZE, PAGE_SIZE).unwrap();
-        // Safe because the layout has a non-zero size.
+        // SAFETY: the layout has a non-zero size because we just checked that pages is non-zero.
         let vaddr = unsafe { alloc_zeroed(layout) };
         let vaddr =
             if let Some(vaddr) = NonNull::new(vaddr) { vaddr } else { handle_alloc_error(layout) };
@@ -126,14 +135,19 @@ unsafe impl Hal for HalImpl {
     unsafe fn dma_dealloc(paddr: PhysAddr, vaddr: NonNull<u8>, pages: usize) -> i32 {
         debug!("dma_dealloc: paddr={:#x}, pages={}", paddr, pages);
         let layout = Layout::from_size_align(pages * PAGE_SIZE, PAGE_SIZE).unwrap();
-        // Safe because the memory was allocated by `dma_alloc` above using the same allocator, and
-        // the layout is the same as was used then.
+        // SAFETY: the memory was allocated by `dma_alloc` above using the same allocator, and the
+        // layout is the same as was used then.
         unsafe {
             dealloc(vaddr.as_ptr(), layout);
         }
         0
     }
 
+    /// # Implementation Safety
+    ///
+    /// The returned pointer must be valid because the `paddr` describes a valid MMIO region, and we
+    /// previously mapped the entire PCI MMIO range. It can't alias any other allocations because
+    /// the PCI MMIO range doesn't overlap with any other memory ranges.
     unsafe fn mmio_phys_to_virt(paddr: PhysAddr, _size: usize) -> NonNull<u8> {
         NonNull::new(paddr as _).unwrap()
     }
