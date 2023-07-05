@@ -39,6 +39,30 @@
       },
       "revId": "a3d644a7c10e00e1e712235057ddbc96b77ce97b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4be967b_ec884a96",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-05T12:59:16Z",
+      "side": 1,
+      "message": "Yeah. I\u0027m considering changing all the Range\u003cusize\u003e in in PageTable to MemoryRegion as I described [here](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2646784/comment/0eb30b01_7c031828/).\n\nThat\u0027ll be a separate cl after this one.",
+      "parentUuid": "34908a1c_fbc8c292",
+      "range": {
+        "startLine": 298,
+        "startChar": 13,
+        "endLine": 298,
+        "endChar": 25
+      },
+      "revId": "a3d644a7c10e00e1e712235057ddbc96b77ce97b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
