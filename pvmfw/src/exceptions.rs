@@ -14,6 +14,7 @@
 
 //! Exception handlers.
 
+use aarch64_paging::paging::VirtualAddress;
 use core::fmt;
 use vmbase::console;
 use vmbase::logger;
@@ -90,14 +91,14 @@ impl fmt::Display for Esr {
 }
 
 #[inline]
-fn handle_translation_fault(far: usize) -> Result<(), HandleExceptionError> {
+fn handle_translation_fault(far: VirtualAddress) -> Result<(), HandleExceptionError> {
     let mut guard = MEMORY.try_lock().ok_or(HandleExceptionError::PageTableUnavailable)?;
     let memory = guard.as_mut().ok_or(HandleExceptionError::PageTableNotInitialized)?;
     Ok(memory.handle_mmio_fault(far)?)
 }
 
 #[inline]
-fn handle_permission_fault(far: usize) -> Result<(), HandleExceptionError> {
+fn handle_permission_fault(far: VirtualAddress) -> Result<(), HandleExceptionError> {
     let mut guard = MEMORY.try_lock().ok_or(HandleExceptionError::PageTableUnavailable)?;
     let memory = guard.as_mut().ok_or(HandleExceptionError::PageTableNotInitialized)?;
     Ok(memory.handle_permission_fault(far)?)
@@ -136,13 +137,13 @@ fn print_exception_failure(
 struct El1ExceptionRegisters {
     /// The value of the EL1 exception syndrome register.
     esr: Esr,
-    /// The value of the fault address register.
-    far: usize,
+    /// The faulting virtual address read from the fault address register.
+    far: VirtualAddress,
 }
 
 impl fmt::Display for El1ExceptionRegisters {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "El1ExceptionRegisters: esr={}, far={:#08x}", self.esr, self.far)
+        write!(f, "El1ExceptionRegisters: esr={}, far={:#08x}", self.esr, self.far.0)
     }
 }
 
@@ -153,11 +154,11 @@ impl El1ExceptionRegisters {
     fn read() -> Self {
         let esr: Esr = read_sysreg!("esr_el1").into();
         let far = read_sysreg!("far_el1");
-        Self { esr, far }
+        Self { esr, far: VirtualAddress(far) }
     }
 
     fn is_uart_exception(&self) -> bool {
-        self.esr == Esr::DataAbortSyncExternalAbort && page_4kb_of(self.far) == UART_PAGE
+        self.esr == Esr::DataAbortSyncExternalAbort && page_4kb_of(self.far.0) == UART_PAGE
     }
 }
 
