@@ -126,13 +126,22 @@ fn print_exception_failure(esr: Esr, far: usize, elr: u64, e: HandleExceptionErr
     }
 }
 
+/// Reads the EL1 exception syndrome register (`esr_el1`) and fault address
+/// register (`far_el1`) and returns a tuple of `(Esr, usize)`, where `Esr` is
+/// the exception syndrome register value and `usize` is the fault address
+/// register value.
+fn read_el1_exception_registers() -> (Esr, usize) {
+    let esr: Esr = read_sysreg!("esr_el1").into();
+    let far = read_sysreg!("far_el1");
+    (esr, far)
+}
+
 #[no_mangle]
 extern "C" fn sync_exception_current(elr: u64, _spsr: u64) {
     // Disable logging in exception handler to prevent unsafe writes to UART.
     let _guard = logger::suppress();
-    let esr: Esr = read_sysreg!("esr_el1").into();
-    let far = read_sysreg!("far_el1");
 
+    let (esr, far) = read_el1_exception_registers();
     if let Err(e) = handle_exception(esr, far) {
         print_exception_failure(esr, far, elr, e);
         reboot()
