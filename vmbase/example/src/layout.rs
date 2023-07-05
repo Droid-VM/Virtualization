@@ -64,12 +64,20 @@ pub fn print_addresses() {
     );
 }
 
-/// Bionic-compatible thread-local storage entry, at the given offset from TPIDR_EL0.
-pub fn bionic_tls(off: usize) -> u64 {
+/// Reads the Bionic-compatible thread-local storage entry at the given offset from TPIDR_EL0.
+///
+/// # Safety
+///
+/// * `TPIDR_EL0` must point to a valid region of memory, aligned to an 8 byte boundary, with no
+///   aliases.
+/// * `offset` must be within bounds of the memory region, and a multiple of 8.
+pub unsafe fn bionic_tls(offset: usize) -> u64 {
     let mut base: usize;
+    // SAFETY: The caller guarantees that TPIDR_EL0 points to a valid unaliased region and `offset`
+    // is within its bounds and has appropriate alignment, so the resulting pointer is also valid.
     unsafe {
         asm!("mrs {base}, tpidr_el0", base = out(reg) base);
-        let ptr = (base + off) as *const u64;
+        let ptr = (base + offset) as *const u64;
         *ptr
     }
 }
