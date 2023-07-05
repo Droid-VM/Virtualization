@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "36f25452_068b2e40",
+        "filename": "microdroid/fstab.microdroid",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-07-05T11:41:29Z",
+      "side": 1,
+      "message": "The /dev/block/by-name/ symlinks are created by the userspace. The first_stage_init has the following boot flow:\n\n1. Read the fstab \u0026 filter out mount points that shouldn\u0027t be mounted in first_stage_init\n2. Get the set of devices that should be for the mounts.\n3. Walk the /sys/devices and generate \"add\" uevent for every found device\n4. Handle the uevent callbacks from kernel\n5. After all required devices were generated, stop the process\n\nIn our case, we have 2 options:\n\nOption A: always generate uevents for all the devices. This will regress a boot time (which might be OK, we don\u0027t have many devices). Additionally, it will be a more involved change in first_stage_init.\n\nOption B: tell first_stage_init when we need to wait for microdroid-vendor device (this cl). While this option is uglier, it solves the problem, and unblocks engineers that depend on being able to have /vendor partition in Microdroid.\n\nI went with option B, as a temporary approach, while I work on the proper long-term solution.",
+      "parentUuid": "3cba7826_664a7d83",
+      "range": {
+        "startLine": 3,
+        "startChar": 45,
+        "endLine": 4,
+        "endChar": 40
+      },
+      "revId": "4810f567ef2b1df9ea44a009d3740a44f5e0484b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d450e543_17985fce",
         "filename": "virtualizationmanager/src/aidl.rs",
         "patchSetId": 2
@@ -83,6 +107,24 @@
       "writtenOn": "2023-07-05T00:51:50Z",
       "side": 1,
       "message": "Did you test this with \"protected\" VMs? pvmfw will filter this out [1]. As I suggested above, I prefer to no relying on cmdline parameter.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/pvmfw/src/fdt.rs;drc\u003d0d52747770baa14d44c0779b5505095b4251f2e9;l\u003d825",
+      "revId": "4810f567ef2b1df9ea44a009d3740a44f5e0484b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad023da2_fd2447d6",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-07-05T11:41:29Z",
+      "side": 1,
+      "message": "Yes, it works for protected debuggable VMs. The non-debuggable VMs are not supported yet, since we anyway need to implement the verification of /vendor partition first.\n\nReplied in the comment above on why I chose the cmdline param approach",
+      "parentUuid": "7b19d808_4f4e3880",
       "revId": "4810f567ef2b1df9ea44a009d3740a44f5e0484b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
