@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "202d5f32_3b7abf10",
+        "filename": "vmbase/src/exceptions.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-05T11:30:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00ffa7d4_feb8d437",
+      "range": {
+        "startLine": 103,
+        "startChar": 7,
+        "endLine": 103,
+        "endChar": 31
+      },
+      "revId": "bfbc304ad94081c6cc2d2948da4ce961cdb5d0bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a18c6aa9_62550818",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-07-05T10:14:21Z",
       "side": 1,
       "message": "This is not guaranteed from any of the inputs. The same ESR/FAR/ELR values can correspond to a different type of exception, eg. `sync_exception_lower`. If I were you, I wouldn\u0027t try to move this function - it has nothing to do with exception parsing and everything to do with how the client wants to handle the exception. Otherwise we could at least rename it, or pass an enum of which handler it corresponds to.",
+      "range": {
+        "startLine": 123,
+        "startChar": 19,
+        "endLine": 123,
+        "endChar": 41
+      },
+      "revId": "bfbc304ad94081c6cc2d2948da4ce961cdb5d0bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82c4a679_45a9da86",
+        "filename": "vmbase/src/exceptions.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-05T11:30:58Z",
+      "side": 1,
+      "message": "Is it okay like this https://r.android.com/2648481?",
+      "parentUuid": "a18c6aa9_62550818",
       "range": {
         "startLine": 123,
         "startChar": 19,
