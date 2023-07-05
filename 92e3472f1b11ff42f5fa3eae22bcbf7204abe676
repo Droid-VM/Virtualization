@@ -36,6 +36,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17409c02_736e3ab2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-05T08:53:44Z",
+      "side": 1,
+      "message": "Sorry for the late review.",
+      "revId": "92e3472f1b11ff42f5fa3eae22bcbf7204abe676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11dd515c_49edf757",
@@ -78,6 +95,75 @@
         "startChar": 0,
         "endLine": 325,
         "endChar": 50
+      },
+      "revId": "92e3472f1b11ff42f5fa3eae22bcbf7204abe676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c072b001_6f8e8b1f",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-05T08:53:44Z",
+      "side": 1,
+      "message": "We should add tests here for the new set/get methods.",
+      "range": {
+        "startLine": 466,
+        "startChar": 16,
+        "endLine": 466,
+        "endChar": 38
+      },
+      "revId": "92e3472f1b11ff42f5fa3eae22bcbf7204abe676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62d7a50d_9927575c",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-05T08:53:44Z",
+      "side": 1,
+      "message": "Should something like this apply to console input?",
+      "range": {
+        "startLine": 544,
+        "startChar": 0,
+        "endLine": 551,
+        "endChar": 0
+      },
+      "revId": "92e3472f1b11ff42f5fa3eae22bcbf7204abe676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "707e7161_d2646170",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-05T08:53:44Z",
+      "side": 1,
+      "message": "Should we also make differences in console input incompatible?",
+      "range": {
+        "startLine": 588,
+        "startChar": 61,
+        "endLine": 588,
+        "endChar": 80
       },
       "revId": "92e3472f1b11ff42f5fa3eae22bcbf7204abe676",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
