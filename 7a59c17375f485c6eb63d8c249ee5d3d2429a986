@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bc42c44_0cc603a9",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-05T12:51:13Z",
+      "side": 1,
+      "message": "Just ExceptionRegisters or ExceptionInfo?\nThe fact it came from EL1 doesn\u0027t need to be part of the type; we could read the same struct from far_el2 and esr_el2.",
+      "range": {
+        "startLine": 107,
+        "startChar": 30,
+        "endLine": 107,
+        "endChar": 51
+      },
+      "revId": "7a59c17375f485c6eb63d8c249ee5d3d2429a986",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
