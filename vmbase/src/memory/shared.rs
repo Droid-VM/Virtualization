@@ -20,7 +20,7 @@ use super::page_table::{is_leaf_pte, PageTable, MMIO_LAZY_MAP_FLAG};
 use super::util::{page_4kb_of, virt_to_phys};
 use crate::dsb;
 use crate::util::RangeExt as _;
-use aarch64_paging::paging::{Attributes, Descriptor, MemoryRegion as VaRange};
+use aarch64_paging::paging::{Attributes, Descriptor, MemoryRegion as VaRange, VirtualAddress};
 use alloc::alloc::{alloc_zeroed, dealloc, handle_alloc_error};
 use alloc::boxed::Box;
 use alloc::vec::Vec;
@@ -263,8 +263,8 @@ impl MemoryTracker {
 
     /// Handles translation fault for blocks flagged for lazy MMIO mapping by enabling the page
     /// table entry and MMIO guard mapping the block. Breaks apart a block entry if required.
-    pub fn handle_mmio_fault(&mut self, addr: usize) -> Result<()> {
-        let page_range = page_4kb_of(addr)..page_4kb_of(addr) + MMIO_GUARD_GRANULE_SIZE;
+    pub fn handle_mmio_fault(&mut self, addr: VirtualAddress) -> Result<()> {
+        let page_range = page_4kb_of(addr.0)..page_4kb_of(addr.0) + MMIO_GUARD_GRANULE_SIZE;
         self.page_table
             .modify_range(&page_range, &verify_lazy_mapped_block)
             .map_err(|_| MemoryTrackerError::InvalidPte)?;
@@ -293,9 +293,9 @@ impl MemoryTracker {
     /// Handles permission fault for read-only blocks by setting writable-dirty state.
     /// In general, this should be called from the exception handler when hardware dirty
     /// state management is disabled or unavailable.
-    pub fn handle_permission_fault(&mut self, addr: usize) -> Result<()> {
+    pub fn handle_permission_fault(&mut self, addr: VirtualAddress) -> Result<()> {
         self.page_table
-            .modify_range(&(addr..addr + 1), &mark_dirty_block)
+            .modify_range(&(addr.0..addr.0 + 1), &mark_dirty_block)
             .map_err(|_| MemoryTrackerError::SetPteDirtyFailed)
     }
 }
