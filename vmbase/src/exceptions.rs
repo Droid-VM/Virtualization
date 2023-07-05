@@ -15,8 +15,9 @@
 //! Helper functions and structs for exception handlers.
 
 use crate::{
-    console, eprintln,
+    console, eprintln, logger,
     memory::{page_4kb_of, MemoryTrackerError, MEMORY},
+    read_sysreg,
 };
 use core::fmt;
 
@@ -124,4 +125,15 @@ pub fn print_exception_failure(esr: Esr, far: usize, elr: u64, e: HandleExceptio
         eprintln!("{e}");
         eprintln!("{esr}, far={far:#08x}, elr={elr:#08x}");
     }
+}
+
+/// Disables logging in the exception handler to prevent unsafe writes to UART,
+/// reads the `esr_el1` and `far_el1` system registers, and returns a tuple of
+/// `(Esr, usize)`, where `Esr` is the exception syndrome register value and
+/// `usize` is the fault address register value.
+pub fn prepare_exception_handling() -> (Esr, usize) {
+    let _guard = logger::suppress();
+    let esr: Esr = read_sysreg!("esr_el1").into();
+    let far = read_sysreg!("far_el1");
+    (esr, far)
 }

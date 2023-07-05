@@ -17,10 +17,9 @@
 use vmbase::{
     eprintln,
     exceptions::{
-        handle_permission_fault, handle_translation_fault, print_exception_failure, Esr,
-        HandleExceptionError,
+        handle_permission_fault, handle_translation_fault, prepare_exception_handling,
+        print_exception_failure, Esr, HandleExceptionError,
     },
-    logger,
     power::reboot,
     read_sysreg,
 };
@@ -38,11 +37,7 @@ fn handle_exception(esr: Esr, far: usize) -> Result<(), HandleExceptionError> {
 
 #[no_mangle]
 extern "C" fn sync_exception_current(elr: u64, _spsr: u64) {
-    // Disable logging in exception handler to prevent unsafe writes to UART.
-    let _guard = logger::suppress();
-    let esr: Esr = read_sysreg!("esr_el1").into();
-    let far = read_sysreg!("far_el1");
-
+    let (esr, far) = prepare_exception_handling();
     if let Err(e) = handle_exception(esr, far) {
         print_exception_failure(esr, far, elr, e);
         reboot()
