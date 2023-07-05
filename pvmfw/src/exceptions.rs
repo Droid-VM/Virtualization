@@ -103,13 +103,13 @@ fn handle_permission_fault(far: usize) -> Result<(), HandleExceptionError> {
     Ok(memory.handle_permission_fault(far)?)
 }
 
-fn handle_exception(esr: Esr, far: usize) -> Result<(), HandleExceptionError> {
+fn handle_exception(exception_registers: &ExceptionRegisters) -> Result<(), HandleExceptionError> {
     // Handle all translation faults on both read and write, and MMIO guard map
     // flagged invalid pages or blocks that caused the exception.
     // Handle permission faults for DBM flagged entries, and flag them as dirty on write.
-    match esr {
-        Esr::DataAbortTranslationFault => handle_translation_fault(far),
-        Esr::DataAbortPermissionFault => handle_permission_fault(far),
+    match exception_registers.esr {
+        Esr::DataAbortTranslationFault => handle_translation_fault(exception_registers.far),
+        Esr::DataAbortPermissionFault => handle_permission_fault(exception_registers.far),
         _ => Err(HandleExceptionError::UnknownException),
     }
 }
@@ -117,18 +117,46 @@ fn handle_exception(esr: Esr, far: usize) -> Result<(), HandleExceptionError> {
 /// Prints the details of an exception failure, excluding UART exceptions.
 #[inline]
 fn print_exception_failure(
-    esr: Esr,
-    far: usize,
+    exception_registers: &ExceptionRegisters,
     elr: u64,
     e: HandleExceptionError,
     exception_name: &str,
 ) {
-    let is_uart_exception = esr == Esr::DataAbortSyncExternalAbort && page_4kb_of(far) == UART_PAGE;
     // Don't print to the UART if we are handling an exception it could raise.
-    if !is_uart_exception {
+    if !exception_registers.is_uart_exception() {
         eprintln!("{exception_name}");
         eprintln!("{e}");
-        eprintln!("{esr}, far={far:#08x}, elr={elr:#08x}");
+        eprintln!("{exception_registers}, elr={elr:#08x}",);
+    }
+}
+
+/// A struct representing the values of the exception syndrome register
+/// and fault address register.
+struct ExceptionRegisters {
+    /// The value of the exception syndrome register.
+    esr: Esr,
+    /// The value of the fault address register.
+    far: usize,
+}
+
+impl fmt::Display for ExceptionRegisters {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "ExceptionRegisters: esr={}, far={:#08x}", self.esr, self.far)
+    }
+}
+
+impl ExceptionRegisters {
+    /// Reads the values of the EL1 exception syndrome register (`esr_el1`)
+    /// and fault address register (`far_el1`) and returns a new instance of
+    /// `ExceptionRegisters` with these values.
+    fn read_el1() -> Self {
+        let esr: Esr = read_sysreg!("esr_el1").into();
+        let far = read_sysreg!("far_el1");
+        Self { esr, far }
+    }
+
+    fn is_uart_exception(&self) -> bool {
+        self.esr == Esr::DataAbortSyncExternalAbort && page_4kb_of(self.far) == UART_PAGE
     }
 }
 
@@ -136,11 +164,10 @@ fn print_exception_failure(
 extern "C" fn sync_exception_current(elr: u64, _spsr: u64) {
     // Disable logging in exception handler to prevent unsafe writes to UART.
     let _guard = logger::suppress();
-    let esr: Esr = read_sysreg!("esr_el1").into();
-    let far = read_sysreg!("far_el1");
 
-    if let Err(e) = handle_exception(esr, far) {
-        print_exception_failure(esr, far, elr, e, "sync_exception_current");
+    let exception_registers = ExceptionRegisters::read_el1();
+    if let Err(e) = handle_exception(&exception_registers) {
+        print_exception_failure(&exception_registers, elr, e, "sync_exception_current");
         reboot()
     }
 }
