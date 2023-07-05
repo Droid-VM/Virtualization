@@ -16,6 +16,29 @@
       "message": "Hi Alan, PTAL.",
       "revId": "217105b17802438804b16b178c3351fa995b0f73",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60cb2ab7_7d9b0362",
+        "filename": "vmbase/src/exceptions.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-05T10:20:16Z",
+      "side": 1,
+      "message": "Moving this into this helper means we stop suppressing logging on return, so it needs to stay where it was.\n\nAnd then we can probably have a more specific name for this method.",
+      "range": {
+        "startLine": 135,
+        "startChar": 2,
+        "endLine": 135,
+        "endChar": 36
+      },
+      "revId": "217105b17802438804b16b178c3351fa995b0f73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
