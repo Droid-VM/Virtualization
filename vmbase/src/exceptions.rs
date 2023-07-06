@@ -105,31 +105,42 @@ pub struct ArmException {
     pub esr: Esr,
     /// The faulting virtual address read from the fault address register.
     pub far: VirtualAddress,
+    /// The address of the instruction that triggered the exception.
+    elr: VirtualAddress,
+    /// The saved program status register for the exception handler.
+    spsr: u64,
 }
 
 impl fmt::Display for ArmException {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "ArmException: esr={}, far={:#08x}", self.esr, self.far.0)
+        write!(
+            f,
+            "ArmException: esr={}, far={:#08x}, elr={}, spsr={:#08x}",
+            self.esr, self.far.0, self.elr, self.spsr
+        )
     }
 }
 
 impl ArmException {
-    /// Reads the values of the EL1 exception syndrome register (`esr_el1`)
-    /// and fault address register (`far_el1`) and returns a new instance of
-    /// `ArmException` with these values.
+    /// Creates a new `ArmException` instance by reading the values of the EL1
+    /// exception syndrome register (`esr_el1`) and the fault address register
+    /// (`far_el1`), as well as the current values of the EL1 program counter
+    /// (`elr_el1`) and saved program status register (`spsr_el1`).
     pub fn from_el1_regs() -> Self {
         let esr: Esr = read_sysreg!("esr_el1").into();
         let far = read_sysreg!("far_el1");
-        Self { esr, far: VirtualAddress(far) }
+        let elr = read_sysreg!("elr_el1");
+        let spsr = read_sysreg!("spsr_el1");
+        Self { esr, far: VirtualAddress(far), elr: VirtualAddress(elr), spsr: spsr as u64 }
     }
 
     /// Prints the details of an obj and the exception, excluding UART exceptions.
-    pub fn print<T: fmt::Display>(&self, obj: T, exception_name: &str, elr: u64) {
+    pub fn print<T: fmt::Display>(&self, obj: T, exception_name: &str) {
         // Don't print to the UART if we are handling an exception it could raise.
         if !self.is_uart_exception() {
             eprintln!("{exception_name}");
             eprintln!("{obj}");
-            eprintln!("{}, elr={:#08x}", self, elr);
+            eprintln!("{}", self);
         }
     }
 

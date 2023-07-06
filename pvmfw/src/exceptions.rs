@@ -35,31 +35,31 @@ fn handle_exception(exception: &ArmException) -> Result<(), HandleExceptionError
 }
 
 #[no_mangle]
-extern "C" fn sync_exception_current(elr: u64, _spsr: u64) {
+extern "C" fn sync_exception_current() {
     // Disable logging in exception handler to prevent unsafe writes to UART.
     let _guard = logger::suppress();
 
     let exception = ArmException::from_el1_regs();
     if let Err(e) = handle_exception(&exception) {
-        exception.print(e, "sync_exception_current", elr);
+        exception.print(e, "sync_exception_current");
         reboot()
     }
 }
 
 #[no_mangle]
-extern "C" fn irq_current(_elr: u64, _spsr: u64) {
+extern "C" fn irq_current() {
     eprintln!("irq_current");
     reboot();
 }
 
 #[no_mangle]
-extern "C" fn fiq_current(_elr: u64, _spsr: u64) {
+extern "C" fn fiq_current() {
     eprintln!("fiq_current");
     reboot();
 }
 
 #[no_mangle]
-extern "C" fn serr_current(_elr: u64, _spsr: u64) {
+extern "C" fn serr_current() {
     let esr = read_sysreg!("esr_el1");
     eprintln!("serr_current");
     eprintln!("esr={esr:#08x}");
@@ -67,7 +67,7 @@ extern "C" fn serr_current(_elr: u64, _spsr: u64) {
 }
 
 #[no_mangle]
-extern "C" fn sync_lower(_elr: u64, _spsr: u64) {
+extern "C" fn sync_lower() {
     let esr = read_sysreg!("esr_el1");
     eprintln!("sync_lower");
     eprintln!("esr={esr:#08x}");
@@ -75,19 +75,19 @@ extern "C" fn sync_lower(_elr: u64, _spsr: u64) {
 }
 
 #[no_mangle]
-extern "C" fn irq_lower(_elr: u64, _spsr: u64) {
+extern "C" fn irq_lower() {
     eprintln!("irq_lower");
     reboot();
 }
 
 #[no_mangle]
-extern "C" fn fiq_lower(_elr: u64, _spsr: u64) {
+extern "C" fn fiq_lower() {
     eprintln!("fiq_lower");
     reboot();
 }
 
 #[no_mangle]
-extern "C" fn serr_lower(_elr: u64, _spsr: u64) {
+extern "C" fn serr_lower() {
     let esr = read_sysreg!("esr_el1");
     eprintln!("serr_lower");
     eprintln!("esr={esr:#08x}");
