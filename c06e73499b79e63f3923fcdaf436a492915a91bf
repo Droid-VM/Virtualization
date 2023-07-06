@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "eea66c53_45be20f1",
+        "filename": "vmbase/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-06T10:15:49Z",
+      "side": 1,
+      "message": "I guess that would work too, putting it in the source just seemed neater to me. That said, I plan to get rid of this eventually and turn both lints on globally for all first-party Rust code in Android.\n\n(Note that these attributes in the top-level module apply to all submodules too, i.e. the whole crate, not just this file.)",
+      "parentUuid": "fbf8b639_0f6ab60d",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 44
+      },
+      "revId": "c06e73499b79e63f3923fcdaf436a492915a91bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c0e856f5_17f4e2ca",
         "filename": "vmbase/src/memory/shared.rs",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2023-07-06T10:04:35Z",
       "side": 1,
       "message": "I have a pending CL for this, but last time I tried to update the crate bad things happened \u0026 I haven\u0027t got round to trying again.",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 58
+      },
+      "revId": "c06e73499b79e63f3923fcdaf436a492915a91bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57cffdaa_4b5f773b",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-06T10:15:49Z",
+      "side": 1,
+      "message": "Huh, what sort of bad things?",
+      "parentUuid": "c0e856f5_17f4e2ca",
       "range": {
         "startLine": 72,
         "startChar": 0,
@@ -60,6 +108,30 @@
       "writtenOn": "2023-07-06T10:04:35Z",
       "side": 1,
       "message": "SAFETY: rather than # Safety because this isn\u0027t pub?\n\nThat seems a little odd.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 11
+      },
+      "revId": "c06e73499b79e63f3923fcdaf436a492915a91bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "156595ad_19c99f3b",
+        "filename": "vmbase/src/virtio/hal.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-06T10:15:49Z",
+      "side": 1,
+      "message": "Because it is an implementation describing how it satisfies the safety requirements of the trait, rather than an unsafe trait documenting its safety requirements. (Equivalent to how you have `# Safety` on an unsafe function but `SAFETY: ` on the unsafe block to call it.)",
+      "parentUuid": "54ca7425_29d6b9aa",
       "range": {
         "startLine": 35,
         "startChar": 0,
