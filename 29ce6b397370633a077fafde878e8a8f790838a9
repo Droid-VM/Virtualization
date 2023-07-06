@@ -143,6 +143,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd82ff46_b5bfda40",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-06T12:20:50Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a4933bea_d8e0e4a3",
+      "range": {
+        "startLine": 233,
+        "startChar": 13,
+        "endLine": 233,
+        "endChar": 55
+      },
+      "revId": "29ce6b397370633a077fafde878e8a8f790838a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f1c069b6_507346ff",
@@ -245,6 +269,24 @@
       "side": 1,
       "message": "How? `From\u003cops::Range\u003cusize\u003e\u003e` is not implemented for `MemoryRegion`.",
       "parentUuid": "036700e9_b8b74c62",
+      "revId": "29ce6b397370633a077fafde878e8a8f790838a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75adfcc8_3df43825",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-06T12:20:50Z",
+      "side": 1,
+      "message": "Ah, I misread the types.",
+      "parentUuid": "642b7ff1_b7ade751",
       "revId": "29ce6b397370633a077fafde878e8a8f790838a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
