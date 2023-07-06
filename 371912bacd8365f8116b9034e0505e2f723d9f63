@@ -16,6 +16,52 @@
       "message": "Hi, PTAL.",
       "revId": "371912bacd8365f8116b9034e0505e2f723d9f63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e354ae16_e952fe1f",
+        "filename": "vmbase/src/virtio/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-06T09:03:05Z",
+      "side": 1,
+      "message": "Nit: Add a `use` for `PhantomData` rather than using the full path here and below.",
+      "range": {
+        "startLine": 85,
+        "startChar": 13,
+        "endLine": 85,
+        "endChar": 38
+      },
+      "revId": "371912bacd8365f8116b9034e0505e2f723d9f63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38180af1_04173ea9",
+        "filename": "vmbase/src/virtio/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-06T09:03:05Z",
+      "side": 1,
+      "message": "How about calling this `hal`? `marker` isn\u0027t very descriptive.",
+      "range": {
+        "startLine": 85,
+        "startChar": 4,
+        "endLine": 85,
+        "endChar": 11
+      },
+      "revId": "371912bacd8365f8116b9034e0505e2f723d9f63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
