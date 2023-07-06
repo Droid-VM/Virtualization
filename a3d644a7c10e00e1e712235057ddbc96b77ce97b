@@ -63,6 +63,30 @@
       },
       "revId": "a3d644a7c10e00e1e712235057ddbc96b77ce97b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcb80e05_6eb86745",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-06T10:31:46Z",
+      "side": 1,
+      "message": "I think it might be better to combine them, or at least do them in the other order. There\u0027s too much conversion going on here.",
+      "parentUuid": "f4be967b_ec884a96",
+      "range": {
+        "startLine": 298,
+        "startChar": 13,
+        "endLine": 298,
+        "endChar": 25
+      },
+      "revId": "a3d644a7c10e00e1e712235057ddbc96b77ce97b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
