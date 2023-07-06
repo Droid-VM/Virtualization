@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d153f27_2ed26f48",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-06T15:37:48Z",
+      "side": 1,
+      "message": "Done in aosp/2646388",
+      "parentUuid": "5afa9374_dadbb8cf",
+      "range": {
+        "startLine": 55,
+        "startChar": 30,
+        "endLine": 55,
+        "endChar": 63
+      },
+      "revId": "3bd0e848c267b4cd4eaec18d1f96a434197d9cd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37d24dca_fb860398",
@@ -61,6 +85,30 @@
       "writtenOn": "2023-07-04T14:36:57Z",
       "side": 1,
       "message": "Unrelated: that implies that main should be unsafe, and should have that as its safety clause.",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 20
+      },
+      "revId": "3bd0e848c267b4cd4eaec18d1f96a434197d9cd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1abe537d_aa97f6db",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-06T15:37:48Z",
+      "side": 1,
+      "message": "Ack; @aliceywang@google.com.",
+      "parentUuid": "37d24dca_fb860398",
       "range": {
         "startLine": 140,
         "startChar": 0,

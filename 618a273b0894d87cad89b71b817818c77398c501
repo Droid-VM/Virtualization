@@ -22,6 +22,30 @@
       },
       "revId": "618a273b0894d87cad89b71b817818c77398c501",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e901f92f_71a33a45",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-06T15:37:48Z",
+      "side": 0,
+      "message": "It isn\u0027t explicitly handled but is still \"used\" in the sense that it allows a specialized error message to be logged instead of the generic one. I\u0027m not convinced this adds much and would tend to agree with you that we could remove it but, as I plan to rework `hyp::Error`, I\u0027ll resolve this comment and we can discuss this at that point.",
+      "parentUuid": "ad17580f_c71bb950",
+      "range": {
+        "startLine": 64,
+        "startChar": 28,
+        "endLine": 64,
+        "endChar": 49
+      },
+      "revId": "618a273b0894d87cad89b71b817818c77398c501",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
