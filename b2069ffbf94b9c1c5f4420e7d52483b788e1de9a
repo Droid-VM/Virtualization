@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7acc67a9_2560fb83",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-06T15:39:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a89664b5_e42de921",
+      "range": {
+        "startLine": 217,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 0
+      },
+      "revId": "b2069ffbf94b9c1c5f4420e7d52483b788e1de9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cce73aea_c6fa98af",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-07-04T14:54:06Z",
       "side": 1,
       "message": "Why do we need a string terminator?\nHow does this relate to the previous lines? \nCould we just clear the relevant bits in x29 first?",
+      "range": {
+        "startLine": 226,
+        "startChar": 0,
+        "endLine": 227,
+        "endChar": 16
+      },
+      "revId": "b2069ffbf94b9c1c5f4420e7d52483b788e1de9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e658330b_b2ee4bad",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-06T15:39:26Z",
+      "side": 1,
+      "message": "\u003e Why do we need a string terminator?\n\u003e\n\u003e How does this relate to the previous lines?\n\nTo act as a last-resort `\u0027\\0\u0027` for functions getting C strings from the stack; see [Inseob\u0027s comment](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2399623/comment/ecaaee80_9ed26ab0/) on aosp/2399623 and aosp/2429952.\n\n\u003e Could we just clear the relevant bits in x29 first?\n\nThe `STRB` is a neat way to handle both big- and little-endian at once; see [this comment](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2429952/comments/1b5ece91_a0849b8c) on aosp/2429952.\n\nAnyway, these particular lines will be removed by aosp/2646393; see [Jakob\u0027s comment](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2646393/comment/96f0c41c_5bda5e0a/).",
+      "parentUuid": "cce73aea_c6fa98af",
       "range": {
         "startLine": 226,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c8c7fcf_b8d9f9b3",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-06T15:39:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37f40982_934ac217",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 39
+      },
+      "revId": "b2069ffbf94b9c1c5f4420e7d52483b788e1de9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "afd53017_7a858e53",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-07-04T14:54:06Z",
       "side": 1,
       "message": "-\u003e The register is set to a valid value in Entry.S and not subsequently changed\nOr something like that?",
+      "range": {
+        "startLine": 56,
+        "startChar": 16,
+        "endLine": 56,
+        "endChar": 67
+      },
+      "revId": "b2069ffbf94b9c1c5f4420e7d52483b788e1de9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "439e1288_7332cd5d",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-06T15:39:26Z",
+      "side": 1,
+      "message": "Right, I wanted this to be more generic as I was introducing a type-checked `__set_tls` (which I then dropped) and to support any potential future thread-switching but I can make the comment specific to the current implementation.",
+      "parentUuid": "afd53017_7a858e53",
       "range": {
         "startLine": 56,
         "startChar": 16,
