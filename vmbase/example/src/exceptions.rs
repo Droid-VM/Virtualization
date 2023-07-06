@@ -18,52 +18,52 @@ use core::arch::asm;
 use vmbase::{eprintln, power::reboot};
 
 #[no_mangle]
-extern "C" fn sync_exception_current(_elr: u64, _spsr: u64) {
+extern "C" fn sync_exception_current() {
     eprintln!("sync_exception_current");
     print_esr();
     reboot();
 }
 
 #[no_mangle]
-extern "C" fn irq_current(_elr: u64, _spsr: u64) {
+extern "C" fn irq_current() {
     eprintln!("irq_current");
     reboot();
 }
 
 #[no_mangle]
-extern "C" fn fiq_current(_elr: u64, _spsr: u64) {
+extern "C" fn fiq_current() {
     eprintln!("fiq_current");
     reboot();
 }
 
 #[no_mangle]
-extern "C" fn serr_current(_elr: u64, _spsr: u64) {
+extern "C" fn serr_current() {
     eprintln!("serr_current");
     print_esr();
     reboot();
 }
 
 #[no_mangle]
-extern "C" fn sync_lower(_elr: u64, _spsr: u64) {
+extern "C" fn sync_lower() {
     eprintln!("sync_lower");
     print_esr();
     reboot();
 }
 
 #[no_mangle]
-extern "C" fn irq_lower(_elr: u64, _spsr: u64) {
+extern "C" fn irq_lower() {
     eprintln!("irq_lower");
     reboot();
 }
 
 #[no_mangle]
-extern "C" fn fiq_lower(_elr: u64, _spsr: u64) {
+extern "C" fn fiq_lower() {
     eprintln!("fiq_lower");
     reboot();
 }
 
 #[no_mangle]
-extern "C" fn serr_lower(_elr: u64, _spsr: u64) {
+extern "C" fn serr_lower() {
     eprintln!("serr_lower");
     print_esr();
     reboot();
