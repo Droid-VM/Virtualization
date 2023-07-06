@@ -34,6 +34,24 @@
       "parentUuid": "989ead64_8f5b02e9",
       "revId": "0ae33e94be2b1bdcff351088b7526049a9738695",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d53c7617_86b7e2c5",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-06T10:21:35Z",
+      "side": 0,
+      "message": "True. Maybe we should remove the log from the iterator, or make it a lower log level? The device initialisation log is fine for devices which we handle, but when debugging it can be useful to see more information about devices which weren\u0027t recognised or handled.",
+      "parentUuid": "c9c03c66_916ef32f",
+      "revId": "0ae33e94be2b1bdcff351088b7526049a9738695",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
