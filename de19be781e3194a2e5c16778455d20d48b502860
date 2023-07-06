@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd0cd87c_9b51c8f1",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-06T14:15:22Z",
+      "side": 1,
+      "message": "Nit: VirtualAddress implements Debug \u0026 Display, so you don\u0027t need the .0 (nor the :#08x)",
+      "range": {
+        "startLine": 128,
+        "startChar": 65,
+        "endLine": 128,
+        "endChar": 75
+      },
+      "revId": "de19be781e3194a2e5c16778455d20d48b502860",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
