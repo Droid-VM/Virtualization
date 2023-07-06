@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36d7b6a1_fd4ccdd3",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-06T15:37:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9581e996_28253389",
+      "range": {
+        "startLine": 25,
+        "startChar": 18,
+        "endLine": 25,
+        "endChar": 24
+      },
+      "revId": "c56bc006f9008e1150292098e676df33ff100fc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de27cd28_68455a9b",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-07-03T08:26:36Z",
       "side": 1,
       "message": "Should we drop the `get_` prefix here? It\u0027s less verbose without it.\n\nhttps://rust-lang.github.io/api-guidelines/naming.html#getter-names-follow-rust-convention-c-getter",
+      "range": {
+        "startLine": 26,
+        "startChar": 7,
+        "endLine": 26,
+        "endChar": 11
+      },
+      "revId": "c56bc006f9008e1150292098e676df33ff100fc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "006c4eb9_79b2c0bc",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-06T15:37:35Z",
+      "side": 1,
+      "message": "It\u0027s always better to have function names as actions but thanks for the pointer to the Rust API guidelines; I\u0027ve renamed these as `.as_\u003c...\u003e()` according to [this section](https://rust-lang.github.io/api-guidelines/naming.html#ad-hoc-conversions-follow-as_-to_-into_-conventions-c-conv).",
+      "parentUuid": "de27cd28_68455a9b",
       "range": {
         "startLine": 26,
         "startChar": 7,
@@ -111,6 +159,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "184fccf5_73aecbac",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-06T15:37:35Z",
+      "side": 1,
+      "message": "That would be a logical way to approach this but Rust doesn\u0027t support partial implementation of traits.\n\n\u003e Perhaps we should just remove this, and do it explicitly for each hyp.\n\nDone",
+      "parentUuid": "f89df3ef_8fa6b1a0",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 1
+      },
+      "revId": "c56bc006f9008e1150292098e676df33ff100fc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4677b591_0e02e555",
@@ -124,6 +196,30 @@
       "writtenOn": "2023-07-03T08:26:36Z",
       "side": 1,
       "message": "nit: Maybe just call the trait `MemSharer` so that here we\u0027ll have `mem_sharer.share()`? This would make this code easier to read.",
+      "range": {
+        "startLine": 404,
+        "startChar": 16,
+        "endLine": 404,
+        "endChar": 25
+      },
+      "revId": "c56bc006f9008e1150292098e676df33ff100fc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc05f2ff_5ce38528",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-06T15:37:35Z",
+      "side": 1,
+      "message": "Agreed that \"`mem_share.share()`\" is confusing; I\u0027ve renamed `get_mem_share` and the local `mem_share` variables accordingly.",
+      "parentUuid": "4677b591_0e02e555",
       "range": {
         "startLine": 404,
         "startChar": 16,
