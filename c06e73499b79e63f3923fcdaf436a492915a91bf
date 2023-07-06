@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbf8b639_0f6ab60d",
+        "filename": "vmbase/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-06T10:04:35Z",
+      "side": 1,
+      "message": "Can we make this the default for all of vmbase via the .bp ?",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 44
+      },
+      "revId": "c06e73499b79e63f3923fcdaf436a492915a91bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0e856f5_17f4e2ca",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-06T10:04:35Z",
+      "side": 1,
+      "message": "I have a pending CL for this, but last time I tried to update the crate bad things happened \u0026 I haven\u0027t got round to trying again.",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 58
+      },
+      "revId": "c06e73499b79e63f3923fcdaf436a492915a91bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54ca7425_29d6b9aa",
+        "filename": "vmbase/src/virtio/hal.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-06T10:04:35Z",
+      "side": 1,
+      "message": "SAFETY: rather than # Safety because this isn\u0027t pub?\n\nThat seems a little odd.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 11
+      },
+      "revId": "c06e73499b79e63f3923fcdaf436a492915a91bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
