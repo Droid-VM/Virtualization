@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "90e4d911_48683c54",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-07-06T11:00:25Z",
+      "side": 1,
+      "message": "This could be a `print` method on the struct you\u0027re introducing. And `elr` and `exception_name` its fields.",
+      "range": {
+        "startLine": 119,
+        "startChar": 3,
+        "endLine": 119,
+        "endChar": 26
+      },
+      "revId": "0bb16d14de35cea11ba155079199c69790b76704",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f7cf22d2_39c6fe82",
         "filename": "pvmfw/src/exceptions.rs",
         "patchSetId": 8
