@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0433435a_7e0084f4",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-06T09:59:16Z",
+      "side": 1,
+      "message": "Elsewhere in Virt I\u0027ve been adding this in the .bp rather than in the source files, since it makes it the default for any new files. See e.g. https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/pvmfw/Android.bp;drc\u003d17e203289de0f8fc956befb5296a8517056d0a8b;l\u003d11.\n\n(And maybe we should do the same for clippy, via clippy_lints.)",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 32
+      },
+      "revId": "83ef285e0d862c323d0a48fbca6b7202d7a973e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
