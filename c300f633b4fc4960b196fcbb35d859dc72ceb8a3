@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6fef87e_a2f0b2b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-06T15:36:55Z",
+      "side": 1,
+      "message": "A different (and simpler and cleaner) approach to initializing `SHARED_POOL` that addresses the concerns in the CL is implemented by aosp/2646795.",
+      "revId": "c300f633b4fc4960b196fcbb35d859dc72ceb8a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5956a794_f52a08b8",
@@ -14,6 +31,30 @@
       "writtenOn": "2023-07-04T13:41:10Z",
       "side": 1,
       "message": "Should we warn/log if this isn\u0027t true?\nIf it\u0027s erroneously missing in a pvm I assume we will crash horribly; ideally we\u0027d give some indication before that.",
+      "range": {
+        "startLine": 109,
+        "startChar": 11,
+        "endLine": 109,
+        "endChar": 34
+      },
+      "revId": "c300f633b4fc4960b196fcbb35d859dc72ceb8a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a12e02f0_1dc91835",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-06T15:36:55Z",
+      "side": 1,
+      "message": "Good point, aosp/2646795 logs it.",
+      "parentUuid": "5956a794_f52a08b8",
       "range": {
         "startLine": 109,
         "startChar": 11,
@@ -61,6 +102,30 @@
       "side": 1,
       "message": "Especially if you do alloc, init, dealloc - that will try to free using the wrong allocator.",
       "parentUuid": "d3b86df9_28f68203",
+      "range": {
+        "startLine": 324,
+        "startChar": 0,
+        "endLine": 324,
+        "endChar": 50
+      },
+      "revId": "c300f633b4fc4960b196fcbb35d859dc72ceb8a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2aabd962_9a87f5f8",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-06T15:36:55Z",
+      "side": 1,
+      "message": "\u003e Especially if you do alloc, init, dealloc - that will try to free using the wrong allocator.\n\nYes, I really don\u0027t like this either ...",
+      "parentUuid": "f6860464_ef9c3dd5",
       "range": {
         "startLine": 324,
         "startChar": 0,
