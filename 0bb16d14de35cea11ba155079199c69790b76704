@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc7f582c_17a5e44b",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-06T11:12:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90e4d911_48683c54",
+      "range": {
+        "startLine": 119,
+        "startChar": 3,
+        "endLine": 119,
+        "endChar": 26
+      },
+      "revId": "0bb16d14de35cea11ba155079199c69790b76704",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7cf22d2_39c6fe82",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a755fa17_e8fb3654",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-06T11:12:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7cf22d2_39c6fe82",
+      "range": {
+        "startLine": 133,
+        "startChar": 26,
+        "endLine": 134,
+        "endChar": 31
+      },
+      "revId": "0bb16d14de35cea11ba155079199c69790b76704",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24593e92_872125c5",
@@ -77,6 +125,30 @@
       "writtenOn": "2023-07-06T10:11:44Z",
       "side": 1,
       "message": "Yeah, technically that\u0027s what is inside but could we maybe give it a shorter name by focusing on what it represents? Perhaps just `Exception` or `ArmException` if we want to be more specific?\n\nYou actually have a method called `is_uart_exception`, so that just underlines my point.\n\nAlso writing `exception_registers` everywhere is just way too verbose.",
+      "range": {
+        "startLine": 135,
+        "startChar": 7,
+        "endLine": 135,
+        "endChar": 25
+      },
+      "revId": "0bb16d14de35cea11ba155079199c69790b76704",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "061ce536_c6965ecb",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-06T11:12:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24593e92_872125c5",
       "range": {
         "startLine": 135,
         "startChar": 7,
@@ -206,6 +278,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2ac20fb_5de71760",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-06T11:12:52Z",
+      "side": 1,
+      "message": "Ok. Let\u0027s change to `from_el1_regs()` since `Registers` is removed from the class name.",
+      "parentUuid": "cbe60667_9a6f12dc",
+      "range": {
+        "startLine": 152,
+        "startChar": 7,
+        "endLine": 152,
+        "endChar": 15
+      },
+      "revId": "0bb16d14de35cea11ba155079199c69790b76704",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8fb14b74_ee2c8787",
@@ -219,6 +315,30 @@
       "writtenOn": "2023-07-06T10:11:44Z",
       "side": 1,
       "message": "These are also exception registers, but we read them in assembly before we jump to this function. I think we could remove that and just read them in the constructor as well.",
+      "range": {
+        "startLine": 164,
+        "startChar": 37,
+        "endLine": 164,
+        "endChar": 57
+      },
+      "revId": "0bb16d14de35cea11ba155079199c69790b76704",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b4972ef_64ae761c",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-06T11:12:52Z",
+      "side": 1,
+      "message": "You mean moving this [1] to the constructor directly right? For that we probably need to change all the signatures of exception handling functions. I can address it in a subsequent cl.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/vmbase/exceptions.S;l\u003d44;drc\u003df71e6eece2e09e332aea4d0cc97c2b80ae4212f2",
+      "parentUuid": "8fb14b74_ee2c8787",
       "range": {
         "startLine": 164,
         "startChar": 37,
