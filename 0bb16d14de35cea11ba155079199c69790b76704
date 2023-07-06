@@ -159,6 +159,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbe60667_9a6f12dc",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-07-06T10:57:07Z",
+      "side": 1,
+      "message": "Yeah, but then Rust generally avoids global state, so this is a bit of a special case. To me it flows better to write:\n```\nlet ex \u003d Exception::from_el1_regs();\n```\nbut can live either way...",
+      "parentUuid": "e2891433_11d15450",
+      "range": {
+        "startLine": 152,
+        "startChar": 7,
+        "endLine": 152,
+        "endChar": 15
+      },
+      "revId": "0bb16d14de35cea11ba155079199c69790b76704",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8fb14b74_ee2c8787",
