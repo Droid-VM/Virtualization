@@ -18,9 +18,6 @@
  * Saves the volatile registers onto the stack. This currently takes 14
  * instructions, so it can be used in exception handlers with 18 instructions
  * left.
- *
- * On return, x0 and x1 are initialised to elr_el2 and spsr_el2 respectively,
- * which can be used as the first and second arguments of a subsequent call.
  */
 .macro save_volatile_to_stack
 	/* Reserve stack space and save registers x0-x18, x29 & x30. */
@@ -35,14 +32,6 @@
 	stp x16, x17, [sp, #8 * 16]
 	str x18, [sp, #8 * 18]
 	stp x29, x30, [sp, #8 * 20]
-
-	/*
-	 * Save elr_el1 & spsr_el1. This such that we can take nested exception
-	 * and still be able to unwind.
-	 */
-	mrs x0, elr_el1
-	mrs x1, spsr_el1
-	stp x0, x1, [sp, #8 * 22]
 .endm
 
 /**
@@ -63,11 +52,6 @@
 	ldp x16, x17, [sp, #8 * 16]
 	ldr x18, [sp, #8 * 18]
 	ldp x29, x30, [sp, #8 * 20]
-
-	/* Restore registers elr_el1 & spsr_el1, using x0 & x1 as scratch. */
-	ldp x0, x1, [sp, #8 * 22]
-	msr elr_el1, x0
-	msr spsr_el1, x1
 
 	/* Restore x0 & x1, and release stack space. */
 	ldp x0, x1, [sp], #8 * 24
