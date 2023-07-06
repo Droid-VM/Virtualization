@@ -113,6 +113,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "05ca6e0e_6631befe",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-07-06T10:47:05Z",
+      "side": 1,
+      "message": "Conversion: yes, and this converts system regs to an Exception object\n\nConsuming: no, you have traits like `FromStr` which do not consume the input",
+      "parentUuid": "0487eff8_8744300d",
+      "range": {
+        "startLine": 152,
+        "startChar": 7,
+        "endLine": 152,
+        "endChar": 15
+      },
+      "revId": "0bb16d14de35cea11ba155079199c69790b76704",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8fb14b74_ee2c8787",
         "filename": "pvmfw/src/exceptions.rs",
         "patchSetId": 8
