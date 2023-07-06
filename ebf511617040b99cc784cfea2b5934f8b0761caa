@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0642ccbf_170565f3",
+        "filename": "vmbase/example/src/layout.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-06T09:07:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b906bca_21b92599",
+      "range": {
+        "startLine": 25,
+        "startChar": 25,
+        "endLine": 25,
+        "endChar": 38
+      },
+      "revId": "ebf511617040b99cc784cfea2b5934f8b0761caa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ce687c1_5d84ba4e",
@@ -85,6 +109,30 @@
       "writtenOn": "2023-07-05T10:16:42Z",
       "side": 1,
       "message": "All these methods, and init_page_table itself, should take a MemoryRegion, should they not?\n(Or perhaps a Range\u003cVirtualAddress\u003e, although MemoryRegion exists precisely to represent that notions.)",
+      "range": {
+        "startLine": 52,
+        "startChar": 15,
+        "endLine": 52,
+        "endChar": 25
+      },
+      "revId": "ebf511617040b99cc784cfea2b5934f8b0761caa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7251348a_273aefa1",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-06T09:07:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ce687c1_5d84ba4e",
       "range": {
         "startLine": 52,
         "startChar": 15,
