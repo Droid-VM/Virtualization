@@ -22,6 +22,30 @@
       },
       "revId": "0991ffa5cd5620fd2f9382097884b2c6b16c02f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "873e3d36_d83b08ca",
+        "filename": "vmbase/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-06T15:38:06Z",
+      "side": 1,
+      "message": "Done; note that I plan to clean this up as a small follow-up now that all of the code is in vmbase by calling `eprintln` in `panic` only if the console is available, allowing us to unwrap here and avoid the duplicate call to `reboot`.",
+      "parentUuid": "a457a2a9_2e8bed70",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 5
+      },
+      "revId": "0991ffa5cd5620fd2f9382097884b2c6b16c02f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
