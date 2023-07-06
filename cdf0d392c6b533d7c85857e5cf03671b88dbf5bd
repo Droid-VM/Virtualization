@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c2395a0_c495ce23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-06T16:21:01Z",
+      "side": 1,
+      "message": "I\u0027m not convinced this is an improvement.",
+      "revId": "cdf0d392c6b533d7c85857e5cf03671b88dbf5bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e26e3f33_14c004d5",
+        "filename": "vmbase/src/exceptions.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-06T16:21:01Z",
+      "side": 1,
+      "message": "It\u0027s not the current value of the program counter, it\u0027s the value at the point when the exception happened.",
+      "range": {
+        "startLine": 127,
+        "startChar": 36,
+        "endLine": 127,
+        "endChar": 77
+      },
+      "revId": "cdf0d392c6b533d7c85857e5cf03671b88dbf5bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
