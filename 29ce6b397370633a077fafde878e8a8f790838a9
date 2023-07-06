@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6cc0e13_ea48acf1",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-06T10:28:58Z",
+      "side": 1,
+      "message": "This looks like it could be a helper method on MemoryRegion",
+      "range": {
+        "startLine": 233,
+        "startChar": 13,
+        "endLine": 233,
+        "endChar": 55
+      },
+      "revId": "29ce6b397370633a077fafde878e8a8f790838a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1c069b6_507346ff",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-06T10:28:58Z",
+      "side": 1,
+      "message": "aarch64::MemoryRegion throughout?\nThat gives you .start(), .len() etc",
+      "range": {
+        "startLine": 32,
+        "startChar": 35,
+        "endLine": 32,
+        "endChar": 56
+      },
+      "revId": "29ce6b397370633a077fafde878e8a8f790838a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
