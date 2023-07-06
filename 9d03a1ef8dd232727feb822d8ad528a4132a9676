@@ -22,6 +22,30 @@
       },
       "revId": "9d03a1ef8dd232727feb822d8ad528a4132a9676",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ed246d6_0d7e84ea",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-06T12:47:12Z",
+      "side": 1,
+      "message": "No. This will stay like this. `*_range` functions return `Range\u003cVirtualAddress\u003e` and `map_*` takes a `MemoryRegion`, which is a page-aligned virtual address range. The conversion here does this alignment.",
+      "parentUuid": "e7080c3d_cb754817",
+      "range": {
+        "startLine": 54,
+        "startChar": 37,
+        "endLine": 54,
+        "endChar": 44
+      },
+      "revId": "9d03a1ef8dd232727feb822d8ad528a4132a9676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
