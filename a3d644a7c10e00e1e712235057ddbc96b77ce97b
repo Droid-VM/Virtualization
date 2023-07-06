@@ -87,6 +87,30 @@
       },
       "revId": "a3d644a7c10e00e1e712235057ddbc96b77ce97b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2346325_877fbdfc",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-06T13:08:26Z",
+      "side": 1,
+      "message": "I rebased this change on top of https://r.android.com/c/2649020. `modify_range` now takes `MemoryRegion`.",
+      "parentUuid": "dcb80e05_6eb86745",
+      "range": {
+        "startLine": 298,
+        "startChar": 13,
+        "endLine": 298,
+        "endChar": 25
+      },
+      "revId": "a3d644a7c10e00e1e712235057ddbc96b77ce97b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
