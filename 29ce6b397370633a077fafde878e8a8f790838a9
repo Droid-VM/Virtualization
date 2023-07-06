@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e4ad9295_cfd07ee8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-06T10:56:55Z",
+      "side": 1,
+      "message": "Range\u003cVirtualAddress\u003e",
+      "range": {
+        "startLine": 11,
+        "startChar": 16,
+        "endLine": 11,
+        "endChar": 28
+      },
+      "revId": "29ce6b397370633a077fafde878e8a8f790838a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b6cc0e13_ea48acf1",
         "filename": "pvmfw/src/entry.rs",
         "patchSetId": 3
@@ -14,6 +37,30 @@
       "writtenOn": "2023-07-06T10:28:58Z",
       "side": 1,
       "message": "This looks like it could be a helper method on MemoryRegion",
+      "range": {
+        "startLine": 233,
+        "startChar": 13,
+        "endLine": 233,
+        "endChar": 55
+      },
+      "revId": "29ce6b397370633a077fafde878e8a8f790838a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a03304b_8062d71b",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-06T10:56:55Z",
+      "side": 1,
+      "message": "I think `payload_range.into()` should work.",
+      "parentUuid": "b6cc0e13_ea48acf1",
       "range": {
         "startLine": 233,
         "startChar": 13,
@@ -43,6 +90,47 @@
         "endLine": 32,
         "endChar": 56
       },
+      "revId": "29ce6b397370633a077fafde878e8a8f790838a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85cd8e5f_f253b6ff",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-06T10:56:55Z",
+      "side": 1,
+      "message": "`MemoryRegion` is page-aligned, which the payload isn\u0027t necessarily.",
+      "parentUuid": "f1c069b6_507346ff",
+      "range": {
+        "startLine": 32,
+        "startChar": 35,
+        "endLine": 32,
+        "endChar": 56
+      },
+      "revId": "29ce6b397370633a077fafde878e8a8f790838a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "036700e9_b8b74c62",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-06T10:56:55Z",
+      "side": 1,
+      "message": "Can you just use `range.into()` here and below, rather than needing `get_va_range`?",
       "revId": "29ce6b397370633a077fafde878e8a8f790838a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
