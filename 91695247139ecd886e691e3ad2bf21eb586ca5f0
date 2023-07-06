@@ -88,6 +88,24 @@
       "parentUuid": "4931b7f1_2b3578d5",
       "revId": "91695247139ecd886e691e3ad2bf21eb586ca5f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbf930fa_c71130fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-06T16:02:11Z",
+      "side": 1,
+      "message": "I realize this code is going away, but shouldn\u0027t it be\n`strb xzr, [x30, #7]` ? That would put a zero in the very last byte of the stack, rather than the first byte of the last 64 bit word.\n(Endianness is irrelevant for this - although it would be if we tried to munge x29.)",
+      "parentUuid": "dd3e54e7_aaae4b82",
+      "revId": "91695247139ecd886e691e3ad2bf21eb586ca5f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
