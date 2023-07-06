@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6ffd1d6_2d51c88b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-06T11:37:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4ad9295_cfd07ee8",
+      "range": {
+        "startLine": 11,
+        "startChar": 16,
+        "endLine": 11,
+        "endChar": 28
+      },
+      "revId": "29ce6b397370633a077fafde878e8a8f790838a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6cc0e13_ea48acf1",
@@ -84,6 +108,30 @@
       "writtenOn": "2023-07-06T11:34:09Z",
       "side": 1,
       "message": "That looks much nicer.",
+      "parentUuid": "4a03304b_8062d71b",
+      "range": {
+        "startLine": 233,
+        "startChar": 13,
+        "endLine": 233,
+        "endChar": 55
+      },
+      "revId": "29ce6b397370633a077fafde878e8a8f790838a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4933bea_d8e0e4a3",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-06T11:37:47Z",
+      "side": 1,
+      "message": "`MemoryTracker::payload_range` is of type `Range\u003cusize\u003e` [1]. To totally get rid of `Range\u003cusize\u003e` in `MemoryTracker`, we need to implement `Default` for `Range\u003cVirtualAddress\u003e` in the upstream code.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/vmbase/src/memory/shared.rs;l\u003d69;drc\u003dc06e73499b79e63f3923fcdaf436a492915a91bf",
       "parentUuid": "4a03304b_8062d71b",
       "range": {
         "startLine": 233,
@@ -179,6 +227,24 @@
       "writtenOn": "2023-07-06T10:56:55Z",
       "side": 1,
       "message": "Can you just use `range.into()` here and below, rather than needing `get_va_range`?",
+      "revId": "29ce6b397370633a077fafde878e8a8f790838a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "642b7ff1_b7ade751",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-06T11:37:47Z",
+      "side": 1,
+      "message": "How? `From\u003cops::Range\u003cusize\u003e\u003e` is not implemented for `MemoryRegion`.",
+      "parentUuid": "036700e9_b8b74c62",
       "revId": "29ce6b397370633a077fafde878e8a8f790838a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
