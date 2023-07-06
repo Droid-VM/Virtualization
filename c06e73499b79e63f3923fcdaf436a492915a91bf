@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "44758d53_d485aa08",
+        "filename": "vmbase/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-06T10:49:31Z",
+      "side": 1,
+      "message": "\u003e (Note that these attributes in the top-level module apply to all submodules too, i.e. the whole crate, not just this file.)\n\nAhhh, I think I\u0027d missed that.\n\nTurning it on globally is the neatest, definitely, so I guess it doesn\u0027t really matter much what the interim looks like.",
+      "parentUuid": "eea66c53_45be20f1",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 44
+      },
+      "revId": "c06e73499b79e63f3923fcdaf436a492915a91bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c0e856f5_17f4e2ca",
         "filename": "vmbase/src/memory/shared.rs",
         "patchSetId": 1
