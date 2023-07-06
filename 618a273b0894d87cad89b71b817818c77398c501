@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e007300f_42fea8ea",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-06T15:37:42Z",
+      "side": 1,
+      "message": "\u003e The current naming makes it look like `KvmHypervisor` is more generic than `ProtectedKvmHypervisor`.\n\nAgreed; unfortunately, the upstream terminology clashes with class naming conventions.\n\nI guess `RegularKvmHypervisor`, although redundant, makes this clearer at first sight.",
+      "parentUuid": "3407fcfc_234ec632",
+      "range": {
+        "startLine": 75,
+        "startChar": 18,
+        "endLine": 75,
+        "endChar": 31
+      },
+      "revId": "618a273b0894d87cad89b71b817818c77398c501",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2fb4ee4a_805cfe6b",
@@ -108,6 +132,30 @@
       "writtenOn": "2023-07-06T15:22:30Z",
       "side": 1,
       "message": "Acknowledged",
+      "parentUuid": "31810867_28584caa",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 81
+      },
+      "revId": "618a273b0894d87cad89b71b817818c77398c501",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91e1a884_6b0fc651",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-06T15:37:42Z",
+      "side": 1,
+      "message": "Yes, the independent features are represented by `libhyp` as distinct traits and we support having none, one or the other, or both.\n\nThis `match` assumes what KVM currently provides: a \"regular\" API (no MMIO_GUARD, no MEM_SHARE) and a \"protected\" one (has both), whereas the other 2 combinations aren\u0027t supported. Differentiating between them is done in a best effort approach while avoiding to validate the whole API at constructor-time. If a call is missing (say this `match` concludes that this it\u0027s running pKVM but MMIO_GUARD isn\u0027t actually implemented), it will fail and be reported at the call site.",
       "parentUuid": "31810867_28584caa",
       "range": {
         "startLine": 64,
