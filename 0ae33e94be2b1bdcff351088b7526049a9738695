@@ -16,6 +16,24 @@
       "message": "Let\u0027s keep this log line, it\u0027s useful for debugging.",
       "revId": "0ae33e94be2b1bdcff351088b7526049a9738695",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9c03c66_916ef32f",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-06T09:15:41Z",
+      "side": 0,
+      "message": "Done. But actually we log the device type in the iterator and the features in the device initialization. The logging without this line is like\n```\n07-06 10:04:31.383 shell 12915 12930 I vmbase  : vmbase_example_test: [DEBUG]   VirtIO Block\n07-06 10:04:31.385 shell 12915 12930 I vmbase  : vmbase_example_test: [INFO] device features: BlkFeature(SEG_MAX | RO | BLK_SIZE | RING_EVENT_IDX | VERSION_1)\n...\n07-06 10:04:31.401 shell 12915 12930 I vmbase  : vmbase_example_test: [DEBUG] Found PCI device 1af4:1053 (class 00.ff, rev 01) Standard at 00:07.0, status Status(CAPABILITIES_LIST) command Command(MEMORY_SPACE)\n07-06 10:04:31.401 shell 12915 12930 I vmbase  : vmbase_example_test: [DEBUG]   VirtIO Socket\n07-06 10:04:31.403 shell 12915 12930 I vmbase  : vmbase_example_test: [DEBUG] Device features: Feature(RING_EVENT_IDX | VERSION_1)\n```",
+      "parentUuid": "989ead64_8f5b02e9",
+      "revId": "0ae33e94be2b1bdcff351088b7526049a9738695",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
