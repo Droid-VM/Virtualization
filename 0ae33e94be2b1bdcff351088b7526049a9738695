@@ -52,6 +52,24 @@
       "parentUuid": "c9c03c66_916ef32f",
       "revId": "0ae33e94be2b1bdcff351088b7526049a9738695",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3aaffd33_2f6ec51a",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-06T11:43:26Z",
+      "side": 0,
+      "message": "It\u0027s ok to log the device type inside the iterator, but it\u0027s more convenient to log the raw feature `transport.read_device_features()` inside the loop as it is now.",
+      "parentUuid": "d53c7617_86b7e2c5",
+      "revId": "0ae33e94be2b1bdcff351088b7526049a9738695",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
