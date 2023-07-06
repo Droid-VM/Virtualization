@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "645ae2d4_b66d822a",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-06T09:55:27Z",
+      "side": 1,
+      "message": "At this stage, the specific device selection is not critical. In a subsequent commit, I will test the communication between the host and Rialto using the first socket device that is fetched. If a specific device is required later, we can adjust the selection accordingly.",
+      "parentUuid": "d16962ca_d200eeec",
+      "range": {
+        "startLine": 131,
+        "startChar": 9,
+        "endLine": 131,
+        "endChar": 13
+      },
+      "revId": "fe44861a71319bf3627c3c4c64dda515bca62833",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81d59d16_09a95d2d",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-07-05T09:43:19Z",
       "side": 1,
       "message": "Why does this need to change?\n\n(Also, this value is determined here, and isn\u0027t really anything to do with the memory module; we shouldn\u0027t be constrained by what constants are exposed there. I\u0027d expect this to be something like \"128 * SIZE_1KB\".)",
+      "range": {
+        "startLine": 184,
+        "startChar": 16,
+        "endLine": 184,
+        "endChar": 26
+      },
+      "revId": "fe44861a71319bf3627c3c4c64dda515bca62833",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b02ba46d_381041c5",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-06T09:55:27Z",
+      "side": 1,
+      "message": "The VirtIO socket device assigns an array of virtqueue on heap, each item having 512 bytes, with 64KiB, we hit an error when initializing the driver [1]:\n```\n07-06 11:44:14.784 shell 15546 15573 I rialto  : rialto_test: [DEBUG]   VirtIO Socket\n07-06 11:44:14.785 shell 15546 15573 I rialto  : rialto_test: [DEBUG] Device features: Feature(RING_EVENT_IDX | VERSION_1 | ACCESS_PLATFORM)\n07-06 11:44:14.785 shell 15546 15573 I rialto  : rialto_test: [DEBUG] config: 0x2022000\n07-06 11:44:14.786 shell 15546 15573 I rialto  : rialto_test: [DEBUG] guest cid: 2169\n07-06 11:44:14.788 shell 15546 15573 I rialto  : rialto_test: panicked at \u0027memory allocation of 512 bytes failed\u0027, prebuilts/rust/linux-x86/1.70.0/src/stdlibs/library/alloc/src/alloc.rs:409:13\n```\n[1] https://cs.android.com/android/platform/superproject/+/master:external/rust/crates/virtio-drivers/src/device/socket/vsock.rs;l\u003d267;drc\u003d91b9730f88c54183aae71e4b79d093ed1914c9a2\n\nAbout SIZE_128KB, it is consistent with pvmfw\u0027s heap configuration [2].\n[2] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/pvmfw/src/entry.rs;l\u003d64;drc\u003d6a4808c03a31e6546ea5f68a976b1dd68f5b9f93",
+      "parentUuid": "81d59d16_09a95d2d",
       "range": {
         "startLine": 184,
         "startChar": 16,
