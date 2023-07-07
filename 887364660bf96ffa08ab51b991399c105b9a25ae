@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13df051a_26bdc880",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-07T08:10:25Z",
+      "side": 0,
+      "message": "Right. Rialto also needs it. We keep this in the client code to allow clients to add other branches more easily. See the discusssion\n\nhttps://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2648739/comment/098f8b7c_bcf4b8e7/",
+      "parentUuid": "fc0ebd04_54fce156",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 1
+      },
+      "revId": "887364660bf96ffa08ab51b991399c105b9a25ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf03b509_60aca348",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-07-06T16:33:20Z",
       "side": 0,
       "message": "Note that there are some details such as this that are very important to get right.",
+      "range": {
+        "startLine": 159,
+        "startChar": 4,
+        "endLine": 160,
+        "endChar": 36
+      },
+      "revId": "887364660bf96ffa08ab51b991399c105b9a25ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "985fe8fd_4fa54c6a",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-07T08:10:25Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "cf03b509_60aca348",
       "range": {
         "startLine": 159,
         "startChar": 4,

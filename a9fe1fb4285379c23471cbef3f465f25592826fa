@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8eb511d0_b3b96920",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-07T08:10:25Z",
+      "side": 1,
+      "message": "We could consider having a framework in `vmbase` for clients to register their handlers, which `MemoryTracker` could use internally. One option is to define a static in `vmbase/exception.rs` storing a reference to an `ExceptionHandler` trait, and move the code there as a default implementation of the trait. Clients could customize the trait as needed and register an implementation at the beginning of execution. Does this align with what you want?\n\nHowever, I think that the current approach is simpler and more straightforward than introducing another static variable to the code.",
+      "parentUuid": "81e2cdae_07728b34",
+      "revId": "a9fe1fb4285379c23471cbef3f465f25592826fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0b92d046_ab62e71d",
         "filename": "vmbase/src/memory/shared.rs",
         "patchSetId": 12
@@ -31,6 +49,30 @@
       "writtenOn": "2023-07-06T16:33:20Z",
       "side": 1,
       "message": "Why isn\u0027t this under `exceptions.rs`? Permission/Translation faults don\u0027t necessarily originate from MMIO_GUARD/MEM_SHARE.",
+      "range": {
+        "startLine": 467,
+        "startChar": 0,
+        "endLine": 481,
+        "endChar": 1
+      },
+      "revId": "a9fe1fb4285379c23471cbef3f465f25592826fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36a9a8ed_0e73139b",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-07T08:10:25Z",
+      "side": 1,
+      "message": "I put them under `exception.rs` initially. @dbrazdil@google.com suggested this in\n\nhttps://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2648739/comment/00ffa7d4_feb8d437/\n\nTBH, I don\u0027t have a strong preference regarding the placement of these two functions. Both locations seem acceptable.One subtle difference is that if we include them in `memory.rs`, we can make `MemoryTracker::handle_*_fault` private. This would allow us to expose only one pair of these handler functions, instead of two.",
+      "parentUuid": "0b92d046_ab62e71d",
       "range": {
         "startLine": 467,
         "startChar": 0,
