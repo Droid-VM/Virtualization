@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "55c49a8a_2a9e2eff",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-07T15:34:39Z",
+      "side": 1,
+      "message": "\u003e Typically, the size of the seed should be at least as large as the size of the random array that the PRNG is supposed to generate.\n\nWait, this confuses me:\n\n1. Doesn\u0027t a PRNG work by seeding it once with a seed (order of magnitude: tens of bytes) before using it to produce _any_ amount of random bytes (potentially Gigs of data)?\n1. If the PRNG requires as many bytes of seed as it produces of pseudo-entropy then what\u0027s the point of the PRNG? Cryptographically, why not use the entropy contained in the seed in the first place? And, in our particular case of `vmbase`, what are we gaining from adding support for a PRNG if it doesn\u0027t reduce the pressure on the TRNG?\n\n\u003e [1] https://www.openssl.org/docs/man1.0.2/man3/RAND_bytes.html\n\nDo we want to expose both `RAND_bytes` and `RAND_pseudo_bytes` to clients? Are those actually mapping to TRNG and PRNG, respectively? If we keep the seed secret from the host, isn\u0027t `RAND_pseudo_bytes` enough for generating the DICE salt stored in the instance.img?",
+      "parentUuid": "27e6e86c_67e90260",
+      "range": {
+        "startLine": 72,
+        "startChar": 37,
+        "endLine": 72,
+        "endChar": 39
+      },
+      "revId": "d5879d7e72f397ad8a06d4556beeeea440c96233",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "427187ac_d8835b24",
         "filename": "vmbase/src/rand.rs",
         "patchSetId": 4
@@ -97,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0245f867_e5253718",
+        "filename": "vmbase/src/rand.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-07T15:34:39Z",
+      "side": 1,
+      "message": "That\u0027s a sound architecture and I like the idea of completely wrapping away TRNG (in the end, can\u0027t we assume the TRNG to only ever be dedicated to seeding the PRNG?). What do you think of keeping 2 client-facing modules: `vmbase::rand` (or `::prng`, although a more generic name is probably better) for simply generating random bytes and `crypto` for actual crypto operations such as AEAD?\n\nI find it confusing that a client only interested in random values would need to import (and initialize?) `vmbase::crypto`. Both modules could internally be built on top of a `bssl` module (either coming from `vmbase` or from `libs/`) where most of the code currently existing in `pvmfw/crypto.rs` (including the error handling stuff) would go. Alternatively, the TRNG and PRNG could be initialized on the first access, like `get_hypervisor`(?)\n\nRegarding function names, I agree that having the name `prng::seed()` is much clearer than `prng::init()` but there\u0027s more to initializing the PRNG than seeding it as the TRNG needs to be initialized (and, if we support more than one, selected) so `rand::init` would abstract away those considerations in a way that\u0027s clear enough to the blissfully oblivious client. Of course, internally, the PRNG-seeding function should be named `seed`!",
+      "parentUuid": "affffbc6_777ad134",
+      "range": {
+        "startLine": 169,
+        "startChar": 7,
+        "endLine": 169,
+        "endChar": 16
+      },
+      "revId": "d5879d7e72f397ad8a06d4556beeeea440c96233",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b223dc5d_cccb77a8",
         "filename": "vmbase/src/rand.rs",
         "patchSetId": 4
@@ -132,6 +180,30 @@
       "side": 1,
       "message": "Right. Since `ERR_get_error` will require some parsing, I thought to implement it in another cl.\n\n\u003e pvmfw/src/crypto.rs which could be extracted into vmbase...\n\nAgree. See the comment above.",
       "parentUuid": "b223dc5d_cccb77a8",
+      "range": {
+        "startLine": 184,
+        "startChar": 8,
+        "endLine": 184,
+        "endChar": 46
+      },
+      "revId": "d5879d7e72f397ad8a06d4556beeeea440c96233",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28130ebc_93712ef8",
+        "filename": "vmbase/src/rand.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-07T15:34:39Z",
+      "side": 1,
+      "message": "Yeah, their error-handling API is ... interesting. I\u0027m not too happy with what I came up with in `pvmfw/crypto.rs` either, BTW, as an iterator-wrapping `Error` type is weird. I\u0027ve considered reworking that to only ever get the top-most error (why would there be more than one anyway?!) but never got to it ... We can review that at a later point though, and for now, your PRNG calls could simply re-use the existing infrastructure.",
+      "parentUuid": "ce50f429_1071de94",
       "range": {
         "startLine": 184,
         "startChar": 8,
