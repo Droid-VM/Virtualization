@@ -16,6 +16,24 @@
       "message": "I think Andrew already has CLs covering all/most of this?",
       "revId": "0cf11b0f072892290c5c1632da59a1ae3a1cb648",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89d552d2_6be861b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-07T16:59:09Z",
+      "side": 1,
+      "message": "Yes, I checked b/290018030 and there weren\u0027t any pending CLs for vmbase clients so I implemented these after seeing aosp/2648486 assuming (wrongly) that Andrew was only focusing on libraries.\n\nHappy to abandon any subset of these CLs, as desired; sorry for the confusion.",
+      "parentUuid": "74f3edc9_95cfbabf",
+      "revId": "0cf11b0f072892290c5c1632da59a1ae3a1cb648",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
