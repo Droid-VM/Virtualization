@@ -22,6 +22,30 @@
       },
       "revId": "3c24c571534c5c5e9b96891185ef4dff143a9fcd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d65eba6d_b29a00e0",
+        "filename": "tests/hostside/java/com/android/microdroid/test/DebugPolicyHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-07T12:00:44Z",
+      "side": 1,
+      "message": "This seems to be the only place.\n\nI already checked the all `enableAdbRoot()` uses in the repo (including yours), but they looked all OK because it\u0027s either..\n\n- case 1) microdroid (which we 100% know whether adb root is possible or not)\n- case 2) `RootTargetPreparer` ensures that `adb root` is already possible before running the code",
+      "parentUuid": "c86b5acb_7bef31e2",
+      "range": {
+        "startLine": 118,
+        "startChar": 44,
+        "endLine": 118,
+        "endChar": 75
+      },
+      "revId": "3c24c571534c5c5e9b96891185ef4dff143a9fcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
