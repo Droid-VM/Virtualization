@@ -85,17 +85,17 @@ struct MemorySlices<'a> {
 
 impl<'a> MemorySlices<'a> {
     fn new(fdt: usize, kernel: usize, kernel_size: usize) -> Result<Self, RebootReason> {
-        // SAFETY - SIZE_2MB is non-zero.
-        const FDT_SIZE: NonZeroUsize = unsafe { NonZeroUsize::new_unchecked(crosvm::FDT_MAX_SIZE) };
+        // SAFETY: SIZE_2MB is non-zero.
+        let fdt_size: NonZeroUsize = unsafe { NonZeroUsize::new_unchecked(crosvm::FDT_MAX_SIZE) };
         // TODO - Only map the FDT as read-only, until we modify it right before jump_to_payload()
         // e.g. by generating a DTBO for a template DT in main() and, on return, re-map DT as RW,
         // overwrite with the template DT and apply the DTBO.
-        let range = MEMORY.lock().as_mut().unwrap().alloc_mut(fdt, FDT_SIZE).map_err(|e| {
+        let range = MEMORY.lock().as_mut().unwrap().alloc_mut(fdt, fdt_size).map_err(|e| {
             error!("Failed to allocate the FDT range: {e}");
             RebootReason::InternalError
         })?;
 
-        // SAFETY - The tracker validated the range to be in main memory, mapped, and not overlap.
+        // SAFETY: The tracker validated the range to be in main memory, mapped, and not overlap.
         let fdt = unsafe { slice::from_raw_parts_mut(range.start as *mut u8, range.len()) };
         let fdt = libfdt::Fdt::from_mut_slice(fdt).map_err(|e| {
             error!("Failed to spawn the FDT wrapper: {e}");
@@ -155,8 +155,8 @@ impl<'a> MemorySlices<'a> {
             return Err(RebootReason::InvalidPayload);
         };
 
-        // SAFETY - The tracker validated the range to be in main memory, mapped, and not overlap.
         let kernel =
+        // SAFETY: The tracker validated the range to be in main memory, mapped, and not overlap.
             unsafe { slice::from_raw_parts(kernel_range.start as *const u8, kernel_range.len()) };
 
         let ramdisk = if let Some(r) = info.initrd_range {
@@ -166,7 +166,7 @@ impl<'a> MemorySlices<'a> {
                 RebootReason::InvalidRamdisk
             })?;
 
-            // SAFETY - The region was validated by memory to be in main memory, mapped, and
+            // SAFETY: The region was validated by memory to be in main memory, mapped, and
             // not overlap.
             Some(unsafe { slice::from_raw_parts(r.start as *const u8, r.len()) })
         } else {
@@ -214,7 +214,7 @@ fn main_wrapper(
         RebootReason::InternalError
     })?;
 
-    // SAFETY - We only get the appended payload from here, once. The region was statically mapped,
+    // SAFETY: We only get the appended payload from here, once. The region was statically mapped,
     // then remapped by `init_page_table()`.
     let appended_data = unsafe { get_appended_data_slice() };
 
@@ -296,7 +296,7 @@ fn jump_to_payload(fdt_address: u64, payload_start: u64, bcc: Range<usize>) -> !
     // Disable the exception vector, caches and page table and then jump to the payload at the
     // given address, passing it the given FDT pointer.
     //
-    // SAFETY - We're exiting pvmfw by passing the register values we need to a noreturn asm!().
+    // SAFETY: We're exiting pvmfw by passing the register values we need to a noreturn asm!().
     unsafe {
         asm!(
             "cmp {scratch}, {bcc}",
