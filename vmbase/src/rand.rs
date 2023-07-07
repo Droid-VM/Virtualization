@@ -15,6 +15,8 @@
 //! Functions and drivers for obtaining true entropy.
 
 use crate::hvc::{self, TrngRng64Entropy};
+use bssl_ffi::{RAND_bytes, RAND_seed};
+use core::ffi::{c_int, c_void};
 use core::fmt;
 use core::mem::size_of;
 use smccc::{self, Hvc};
@@ -31,6 +33,12 @@ pub enum Error {
     UnsupportedSmcccVersion(smccc::arch::Version),
     /// Unsupported SMCCC TRNG version.
     UnsupportedTrngVersion(hvc::trng::Version),
+    /// Failed to generate random numbers with PRNG.
+    PrngFailed,
+    /// Unsupported RAND_* function.
+    UnsupportedRandFunc,
+    /// Unknown RAND_* function return value.
+    UnknownRandFuncReturn(i32),
 }
 
 impl From<smccc::arch::Error> for Error {
@@ -56,6 +64,9 @@ impl fmt::Display for Error {
             Self::Trng(e) => write!(f, "SMCCC TRNG error: {e}"),
             Self::UnsupportedSmcccVersion(v) => write!(f, "Unsupported SMCCC version {v}"),
             Self::UnsupportedTrngVersion(v) => write!(f, "Unsupported SMCCC TRNG version {v}"),
+            Self::PrngFailed => write!(f, "Failed to generate random numbers with PRNG."),
+            Self::UnsupportedRandFunc => write!(f, "Unsupported RAND_* function."),
+            Self::UnknownRandFuncReturn(ret) => write!(f, "Unknown RAND_* function result: {ret}"),
         }
     }
 }
@@ -152,4 +163,25 @@ extern "C" fn CRYPTO_sysrand(out: *mut u8, req: usize) {
     // SAFETY: We need to assume that out points to valid memory of size req.
     let s = unsafe { core::slice::from_raw_parts_mut(out, req) };
     fill_with_entropy(s).unwrap()
+}
+
+/// Seeds the PRNG with the provided data.
+pub fn rand_seed(data: &[u8]) {
+    // SAFETY: `data` is a valid slice.
+    unsafe {
+        RAND_seed(data.as_ptr() as *const c_void, data.len() as c_int);
+    }
+}
+
+/// Generates a sequence of random bytes using the PRNG and stores them in the
+/// provided destination buffer.
+pub fn rand_bytes(dest: &mut [u8]) -> Result<()> {
+    // SAFETY: `dest` is a valid slice for writing.
+    let ret = unsafe { RAND_bytes(dest.as_mut_ptr(), dest.len()) };
+    match ret {
+        1 => Ok(()),
+        0 => Err(Error::PrngFailed),
+        -1 => Err(Error::UnsupportedRandFunc),
+        _ => Err(Error::UnknownRandFuncReturn(ret)),
+    }
 }
