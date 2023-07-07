@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c86b5acb_7bef31e2",
+        "filename": "tests/hostside/java/com/android/microdroid/test/DebugPolicyHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-07T11:29:47Z",
+      "side": 1,
+      "message": "Oh wow, it returns a boolean, in addition to potentially throwing, and there\u0027s no warning if you ignore it?\n\nFrom a quick scan there are other places where we\u0027re assuming root is available:\nhttps://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java;drc\u003d6baa83895c2376f35e5cb48a2b8215fe2bdff617;l\u003d549\n\nhttps://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java;drc\u003d6baa83895c2376f35e5cb48a2b8215fe2bdff617;l\u003d822\n\nShould we fix those at the same time? Or is there some reason they are not already failing?",
+      "range": {
+        "startLine": 118,
+        "startChar": 44,
+        "endLine": 118,
+        "endChar": 75
+      },
+      "revId": "3c24c571534c5c5e9b96891185ef4dff143a9fcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
