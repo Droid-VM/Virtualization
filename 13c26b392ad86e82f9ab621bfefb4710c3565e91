@@ -1,0 +1,320 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ab9b3cc_171be987",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-07T17:14:17Z",
+      "side": 1,
+      "message": "Thanks for doing this!",
+      "revId": "13c26b392ad86e82f9ab621bfefb4710c3565e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be6f11b8_33a11840",
+        "filename": "docs/debug/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-07T17:14:17Z",
+      "side": 1,
+      "message": "\"largely about\" ?\n\nWe do support non-protected, and they have some potential use cases - e.g. running untrusted code inside a VM to limit the damage it can do.",
+      "range": {
+        "startLine": 3,
+        "startChar": 7,
+        "endLine": 3,
+        "endChar": 12
+      },
+      "revId": "13c26b392ad86e82f9ab621bfefb4710c3565e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60b25b08_f3c13ad2",
+        "filename": "docs/debug/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-07T17:14:17Z",
+      "side": 1,
+      "message": "I think this needs a big caveat to say debuggable -\u003e not really protected.",
+      "range": {
+        "startLine": 6,
+        "startChar": 26,
+        "endLine": 8,
+        "endChar": 61
+      },
+      "revId": "13c26b392ad86e82f9ab621bfefb4710c3565e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a16ef0a_3a474378",
+        "filename": "docs/debug/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-07T17:14:17Z",
+      "side": 1,
+      "message": "Stylistic uber-nit: I dislike the trailing colon here because it\u0027s not followed by a list.\n\"The following sections describe the two ways debugging can be enabled.\" ?",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 37
+      },
+      "revId": "13c26b392ad86e82f9ab621bfefb4710c3565e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f47bd2bb_39abbe1a",
+        "filename": "docs/debug/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-07T17:14:17Z",
+      "side": 1,
+      "message": "These commas really don\u0027t look right. I\u0027d just omit them",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 4
+      },
+      "revId": "13c26b392ad86e82f9ab621bfefb4710c3565e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f016a0d_72a61949",
+        "filename": "docs/debug/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-07T17:14:17Z",
+      "side": 1,
+      "message": "If you do \"m vm_shell\" then you can invoke it as just \"vm_shell ...\".\n\nWhich is what I do, but maybe that doesn\u0027t need saying here.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 45
+      },
+      "revId": "13c26b392ad86e82f9ab621bfefb4710c3565e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "527da5fc_ff619b7e",
+        "filename": "docs/debug/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-07T17:14:17Z",
+      "side": 1,
+      "message": "This is the default here, no need to specify it. (It has to be, or there\u0027d be no way to get the shell.)",
+      "range": {
+        "startLine": 37,
+        "startChar": 93,
+        "endLine": 37,
+        "endChar": 100
+      },
+      "revId": "13c26b392ad86e82f9ab621bfefb4710c3565e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6cb1a06_3966e441",
+        "filename": "docs/debug/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-07T17:14:17Z",
+      "side": 1,
+      "message": "I like this, but maybe earlier?",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 28
+      },
+      "revId": "13c26b392ad86e82f9ab621bfefb4710c3565e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa1f658d_6070048f",
+        "filename": "docs/debug/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-07T17:14:17Z",
+      "side": 1,
+      "message": "Who is the target audience for this? Is this for SOCs/OEMs or for app developers?\nI somewhat suspect it\u0027s the former, in which case we should maybe say that.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 49
+      },
+      "revId": "13c26b392ad86e82f9ab621bfefb4710c3565e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfcb3d30_d1312371",
+        "filename": "docs/debug/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-07T17:14:17Z",
+      "side": 1,
+      "message": "nit: The main",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 4
+      },
+      "revId": "13c26b392ad86e82f9ab621bfefb4710c3565e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea8cb178_5eb97927",
+        "filename": "docs/debug/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-07T17:14:17Z",
+      "side": 1,
+      "message": "Doesn\u0027t it need signing in some way?",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 62
+      },
+      "revId": "13c26b392ad86e82f9ab621bfefb4710c3565e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8480c0c9_74e82aa0",
+        "filename": "docs/debug/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-07T17:14:17Z",
+      "side": 1,
+      "message": "Pixel devices\n(Beware the brand police)\n\nThere\u0027s at least one other instance.",
+      "range": {
+        "startLine": 87,
+        "startChar": 19,
+        "endLine": 87,
+        "endChar": 25
+      },
+      "revId": "13c26b392ad86e82f9ab621bfefb4710c3565e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fddae58_2636ee91",
+        "filename": "docs/debug/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-07T17:14:17Z",
+      "side": 1,
+      "message": "Link to the source?",
+      "range": {
+        "startLine": 119,
+        "startChar": 26,
+        "endLine": 119,
+        "endChar": 39
+      },
+      "revId": "13c26b392ad86e82f9ab621bfefb4710c3565e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1be6c966_91139a9e",
+        "filename": "docs/debug/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-07T17:14:17Z",
+      "side": 1,
+      "message": "This feels much more detailed than the rest of the page. Should this be a section in gdb.md? Or a separate file altogether? It would be quite short, but maybe that\u0027s a good thing.",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 53
+      },
+      "revId": "13c26b392ad86e82f9ab621bfefb4710c3565e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
