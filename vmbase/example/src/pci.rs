@@ -120,11 +120,16 @@ pub fn get_bar_region(pci_info: &PciInfo) -> MemoryRegion {
 
 struct HalImpl;
 
+// SAFETY: Each method of this implementation follows the "implementation safety" requirements
+// documented in the virtio_drivers::Hal trait (see individual methods).
 unsafe impl Hal for HalImpl {
+    // SAFETY: Returns a valid pointer aligned to PAGE_SIZE that won’t alias any other allocations
+    // or references in the program until it is deallocated by dma_dealloc and the pages have been
+    // zeroed.
     fn dma_alloc(pages: usize, _direction: BufferDirection) -> (PhysAddr, NonNull<u8>) {
         debug!("dma_alloc: pages={}", pages);
         let layout = Layout::from_size_align(pages * PAGE_SIZE, PAGE_SIZE).unwrap();
-        // Safe because the layout has a non-zero size.
+        // SAFETY: layout has a non-zero size.
         let vaddr = unsafe { alloc_zeroed(layout) };
         let vaddr =
             if let Some(vaddr) = NonNull::new(vaddr) { vaddr } else { handle_alloc_error(layout) };
@@ -135,14 +140,16 @@ unsafe impl Hal for HalImpl {
     unsafe fn dma_dealloc(paddr: PhysAddr, vaddr: NonNull<u8>, pages: usize) -> i32 {
         debug!("dma_dealloc: paddr={:#x}, pages={}", paddr, pages);
         let layout = Layout::from_size_align(pages * PAGE_SIZE, PAGE_SIZE).unwrap();
-        // Safe because the memory was allocated by `dma_alloc` above using the same allocator, and
-        // the layout is the same as was used then.
+        // SAFETY: The memory was allocated by `dma_alloc` above using the same allocator, and the
+        // layout is the same as was used then.
         unsafe {
             dealloc(vaddr.as_ptr(), layout);
         }
         0
     }
 
+    // SAFETY: Returns a valid pointer that won’t alias any other allocations or references in the
+    // program.
     unsafe fn mmio_phys_to_virt(paddr: PhysAddr, _size: usize) -> NonNull<u8> {
         NonNull::new(paddr as _).unwrap()
     }
