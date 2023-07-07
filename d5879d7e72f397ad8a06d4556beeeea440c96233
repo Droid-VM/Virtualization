@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27e6e86c_67e90260",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-07T15:00:30Z",
+      "side": 1,
+      "message": "The size is small because it is only meant for testing purposes. I just want to print something to be sure that it works.\n\nTypically, the size of the seed should be at least as large as the size of the random array that the PRNG is supposed to generate. If the seed size is smaller than the size of the random array, the PRNG may produce patterns or cycles in the generated random numbers.\n\nThe `RAND_bytes()` function checks that the PRNG is seeded with sufficient randomness, as documented in [1].\n\n[1] https://www.openssl.org/docs/man1.0.2/man3/RAND_bytes.html",
+      "parentUuid": "9132301f_ad742d0b",
+      "range": {
+        "startLine": 72,
+        "startChar": 37,
+        "endLine": 72,
+        "endChar": 39
+      },
+      "revId": "d5879d7e72f397ad8a06d4556beeeea440c96233",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "427187ac_d8835b24",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "affffbc6_777ad134",
+        "filename": "vmbase/src/rand.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-07T15:00:30Z",
+      "side": 1,
+      "message": "We can refactor the existing `vmbase/rand.rs` and `pvmfw/crypto.rs` into a new module `vmbase/crypto/`, which will contain the following files:\n\n- `trng.rs`: This file will contain the existing TRNG code, including the `trng::random_array()` function.\n- `error.rs`: This file will define error types specific to cryptographic operations.\n- `prng.rs`: This file will contain the new PRNG code, including\n  * `prng::seed()`. I would prefer to keep the name seed as it is more clear and less generic than `init` from a cryptographic standpoint.\n  * `prng::random_array()`\n- `aead.rs`: We can consider moving the `pvmfw/crypto.rs` AEAD code to this file. This will also make it easier for Rialto to use the AEAD code in the future.\n\nwdyt?",
+      "parentUuid": "427187ac_d8835b24",
+      "range": {
+        "startLine": 169,
+        "startChar": 7,
+        "endLine": 169,
+        "endChar": 16
+      },
+      "revId": "d5879d7e72f397ad8a06d4556beeeea440c96233",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b223dc5d_cccb77a8",
         "filename": "vmbase/src/rand.rs",
         "patchSetId": 4
@@ -60,6 +108,30 @@
       "writtenOn": "2023-07-07T14:21:50Z",
       "side": 1,
       "message": "I believe that the library expects us to call `ERR_get_error`, here. Have a look at `pvmfw/src/crypto.rs` which could be extracted into vmbase (although we wouldn\u0027t call `crypto::init` from `rust_entry` and instead let the client decide if they want it) and where `rand_seed`/`rand_bytes` could be added.",
+      "range": {
+        "startLine": 184,
+        "startChar": 8,
+        "endLine": 184,
+        "endChar": 46
+      },
+      "revId": "d5879d7e72f397ad8a06d4556beeeea440c96233",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce50f429_1071de94",
+        "filename": "vmbase/src/rand.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-07T15:00:30Z",
+      "side": 1,
+      "message": "Right. Since `ERR_get_error` will require some parsing, I thought to implement it in another cl.\n\n\u003e pvmfw/src/crypto.rs which could be extracted into vmbase...\n\nAgree. See the comment above.",
+      "parentUuid": "b223dc5d_cccb77a8",
       "range": {
         "startLine": 184,
         "startChar": 8,
