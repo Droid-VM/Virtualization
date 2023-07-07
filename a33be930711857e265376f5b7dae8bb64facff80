@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da748727_777d8ba6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-07T10:43:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64a79e0d_6354609b",
+      "range": {
+        "startLine": 13,
+        "startChar": 65,
+        "endLine": 13,
+        "endChar": 71
+      },
+      "revId": "a33be930711857e265376f5b7dae8bb64facff80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16d99b41_28cd11ed",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-07-07T10:30:35Z",
       "side": 1,
       "message": "So if the hypervisor does have the capability (which pkvm does?) this will never trigger even on a non-protected VM, which means this won\u0027t get tested?\nIs there a way we can use this mode for any non-protected VM?",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 12
+      },
+      "revId": "a33be930711857e265376f5b7dae8bb64facff80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd53d011_d0b6c5d8",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-07T10:43:11Z",
+      "side": 1,
+      "message": "`ProtectedKvm` has it but `RegularKvm` doesn\u0027t so this code path gets tested by `rialto_test` from aosp/2646389 onward.",
+      "parentUuid": "16d99b41_28cd11ed",
       "range": {
         "startLine": 117,
         "startChar": 0,
