@@ -15,10 +15,13 @@
 //! Functions and drivers for obtaining true entropy.
 
 use crate::hvc;
+use bssl_ffi::{RAND_bytes, RAND_seed};
+use core::ffi::{c_int, c_void};
 use core::fmt;
 use core::mem::size_of;
 
 /// Error type for rand operations.
+#[derive(Clone)]
 pub enum Error {
     /// Error during SMCCC TRNG call.
     Trng(hvc::trng::Error),
@@ -117,4 +120,19 @@ extern "C" fn CRYPTO_sysrand(out: *mut u8, req: usize) {
     // SAFETY: We need to assume that out points to valid memory of size req.
     let s = unsafe { core::slice::from_raw_parts_mut(out, req) };
     fill_with_entropy(s).unwrap()
+}
+
+/// Seeds the PRNG with the provided data.
+pub fn rand_seed(data: &[u8]) {
+    // SAFETY: `data` is a valid slice.
+    unsafe {
+        RAND_seed(data.as_ptr() as *const c_void, data.len() as c_int);
+    }
+}
+
+/// Generates a sequence of random bytes using the PRNG and stores them in the
+/// provided destination buffer.
+pub fn rand_bytes(dest: &mut [u8]) {
+    // SAFETY: `dest` is a valid slice for wr.
+    unsafe { RAND_bytes(dest.as_mut_ptr(), dest.len()) };
 }
