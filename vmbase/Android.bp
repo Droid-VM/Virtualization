@@ -74,6 +74,7 @@ rust_library_rlib {
     srcs: ["src/lib.rs"],
     rustlibs: [
         "libaarch64_paging",
+        "libbssl_ffi_nostd",
         "libbuddy_system_allocator",
         "libfdtpci",
         "libhyp",
