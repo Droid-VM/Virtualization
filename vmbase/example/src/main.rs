@@ -36,6 +36,7 @@ use vmbase::{
     layout::{dtb_range, rodata_range, scratch_range, stack_chk_guard, text_range},
     logger, main,
     memory::{PageTable, SIZE_64KB},
+    rand,
 };
 
 static INITIALISED_DATA: [u32; 4] = [1, 2, 3, 4];
@@ -64,6 +65,19 @@ fn init_page_table(pci_bar_range: &MemoryRegion) -> Result<(), MapError> {
     }
     info!("Activated.");
 
+    Ok(())
+}
+
+fn check_prng() -> rand::Result<()> {
+    const RANDOM_ARRAY_SIZE: usize = 16;
+
+    let seed: [u8; RANDOM_ARRAY_SIZE] = rand::random_array()?;
+    rand::rand_seed(&seed);
+    info!("Seeded the PRNG with data: {seed:?}");
+
+    let mut random_array = [0u8; RANDOM_ARRAY_SIZE];
+    rand::rand_bytes(&mut random_array)?;
+    info!("Generated random array: {random_array:?}");
     Ok(())
 }
 
@@ -97,6 +111,7 @@ pub fn main(arg0: u64, arg1: u64, arg2: u64, arg3: u64) {
 
     check_data();
     check_dice();
+    check_prng().unwrap();
 
     let mut pci_root = unsafe { pci_info.make_pci_root() };
     check_pci(&mut pci_root);
