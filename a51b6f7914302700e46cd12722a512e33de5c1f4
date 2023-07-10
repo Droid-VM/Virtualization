@@ -22,6 +22,53 @@
       },
       "revId": "a51b6f7914302700e46cd12722a512e33de5c1f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c1fee9f_f32f0b4f",
+        "filename": "vmbase/src/rand.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-10T10:15:07Z",
+      "side": 1,
+      "message": "I\u0027m not sure I follow; this code needs `remainder.len()` bytes of entropy so requests `SMCCC_TRNG_RND64(remainder.len() * u8::BITS)` bits of entropy, which are returned in registers x0-x2 (total 3*64 bits), when then copy those into the `entropy` array, which is used to give a programmatic way to sub-slice x0-x2 and only consumes `remainder.len()` bytes from it, so no entropy is wasted, right? Note that `entropy` might contain less than `MAX_BYTES_PER_CALL` bytes of entropy, btw!",
+      "parentUuid": "3b6f6b96_aed1c079",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 70
+      },
+      "revId": "a51b6f7914302700e46cd12722a512e33de5c1f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5df62fbb_008a3622",
+        "filename": "vmbase/src/rand.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-10T10:15:07Z",
+      "side": 1,
+      "message": "@alanstokes@google.com making me re-read this part made me realize that getting rid of the tuple in the API should allow us to simplify all of this into\n```\nlet rnd \u003d repeat_trng_rnd(remainder.len())?;\nlet entropy \u003d \u0026rnd[(rnd.len() - 1 - remainder.len())..]; // is there a better way to express this?\nremainder.clone_from_slice(entropy);\n```",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 64
+      },
+      "revId": "a51b6f7914302700e46cd12722a512e33de5c1f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
