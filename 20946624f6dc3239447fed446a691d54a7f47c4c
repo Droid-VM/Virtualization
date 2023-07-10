@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e1e4d20_ae22c99f",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-10T13:00:08Z",
+      "side": 1,
+      "message": "uber-nit: why not `assert_ne!(layout.size(), 0)` to avoid one level of indirection in the assumption?",
+      "range": {
+        "startLine": 134,
+        "startChar": 8,
+        "endLine": 134,
+        "endChar": 29
+      },
+      "revId": "20946624f6dc3239447fed446a691d54a7f47c4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
