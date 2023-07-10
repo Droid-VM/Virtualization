@@ -45,6 +45,30 @@
       },
       "revId": "6e219f578ba3dce56ac8dd9fc846b8f7990cb4fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db899771_923c1169",
+        "filename": "pvmfw/src/crypto.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-10T13:08:47Z",
+      "side": 1,
+      "message": "`file.as_mut_ptr()` and `line.as_mut_ptr()` are C-style \"return pointers\" and are the only Rust-visible addresses `ERR_get_error_line` is expected to access (and Rust guarantees them to be valid pointers).",
+      "parentUuid": "7dc3721a_9a908ac1",
+      "range": {
+        "startLine": 51,
+        "startChar": 63,
+        "endLine": 51,
+        "endChar": 81
+      },
+      "revId": "6e219f578ba3dce56ac8dd9fc846b8f7990cb4fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
