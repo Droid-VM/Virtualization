@@ -52,6 +52,29 @@
       "parentUuid": "89d552d2_6be861b3",
       "revId": "0cf11b0f072892290c5c1632da59a1ae3a1cb648",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3592846c_dbc0f6c8",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-10T08:44:15Z",
+      "side": 1,
+      "message": "\"Should be safe\" seems a little weak.\nWe\u0027re not accessing the variable, only its address.\n\nMore generally: for vmbase/example I think I generally prefer Andrew\u0027s wording in aosp/2646972.",
+      "range": {
+        "startLine": 130,
+        "startChar": 15,
+        "endLine": 130,
+        "endChar": 74
+      },
+      "revId": "0cf11b0f072892290c5c1632da59a1ae3a1cb648",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
