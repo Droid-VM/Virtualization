@@ -26,6 +26,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0d9f46f4_f137f36c",
+        "filename": "docs/custom_vm.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-07-10T09:53:01Z",
+      "side": 1,
+      "message": "+1. This is usually done as:\n```\ncat \u003e vm_config.json \u003c\u003cEOF\n{\n  \"kernel\": \"/data/local/tmp/kernel\",\n  \"initrd\": \"/data/local/tmp/ramdisk\",\n  \"params\": \"rdinit\u003d/bin/init\"\n}\nEOF\n```",
+      "parentUuid": "64b5925c_d3fef304",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 1
+      },
+      "revId": "7763b19a40a0818db1125aa766035a438b10d777",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3736a463_b5b285bb",
+        "filename": "docs/getting_started.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-07-10T09:53:01Z",
+      "side": 1,
+      "message": "nit: This is selling us a bit short - all gs101/201 devices are supported. tangorpro and felix are in AOSP.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 27
+      },
+      "revId": "7763b19a40a0818db1125aa766035a438b10d777",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "953a08cd_16959ba1",
         "filename": "docs/getting_started.md",
         "patchSetId": 1
