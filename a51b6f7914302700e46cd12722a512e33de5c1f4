@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6dd5181e_49914eb4",
+        "filename": "vmbase/src/rand.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-10T10:38:57Z",
+      "side": 1,
+      "message": "Non-random bits must be set to 0 by the FW.\n\n\u003e I assume the \"to_ne_bytes\" here is important for that reason; add a comment here?\n\nCorrect, I will add a comment about the layout of the result as it\u0027s quite confusing (also note `rnd` being indexed in reverse).",
+      "parentUuid": "bb7abfb9_c5808dc5",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 70
+      },
+      "revId": "a51b6f7914302700e46cd12722a512e33de5c1f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5df62fbb_008a3622",
         "filename": "vmbase/src/rand.rs",
         "patchSetId": 5
