@@ -115,6 +115,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a7c45bf_d284e761",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1031048
+      },
+      "writtenOn": "2023-07-10T19:02:51Z",
+      "side": 1,
+      "message": "BoringSSL maintainer here. Looks like this has gone a bit off the rails, so let me try to pull this back. You shouldn\u0027t be using the OpenSSL docs when targeting BoringSSL, if you\u0027re trying to figure things out to this detail. What is written above about BoringSSL\u0027s PRNG is not correct and does not reflect what the library does.\n\nBoringSSL\u0027s API is documented here:\nhttps://commondatastorage.googleapis.com/chromium-boringssl-docs/rand.h.html\n\nIt is straightforward: if you want random bytes, you call `RAND_bytes.` `RAND_seed` basically does not do anything. It only exists as a compatibility hack. You should not call that function. It will not do anything for you.\nhttps://boringssl.googlesource.com/boringssl/+/refs/heads/master/crypto/rand_extra/rand_extra.c#20\n\nRather, BoringSSL seeds its PRNG internally, based on entropy from the platform. To build BoringSSL, it is a requirement that you all have sorted out getting entropy to BoringSSL (go/boringssl-entropy). Given this builds, I gather you\u0027ve already done that... is this pvmfw?",
+      "parentUuid": "31f1b6fe_2a28e399",
+      "range": {
+        "startLine": 72,
+        "startChar": 37,
+        "endLine": 72,
+        "endChar": 39
+      },
+      "revId": "d5879d7e72f397ad8a06d4556beeeea440c96233",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "427187ac_d8835b24",
         "filename": "vmbase/src/rand.rs",
         "patchSetId": 4
