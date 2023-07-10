@@ -69,6 +69,30 @@
       },
       "revId": "a51b6f7914302700e46cd12722a512e33de5c1f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57ec92d0_109f6f9a",
+        "filename": "vmbase/src/rand.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-10T10:16:04Z",
+      "side": 1,
+      "message": "actually\n```\nlet entropy \u003d \u0026rnd[(rnd.len() - remainder.len())..]\n```",
+      "parentUuid": "5df62fbb_008a3622",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 64
+      },
+      "revId": "a51b6f7914302700e46cd12722a512e33de5c1f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
