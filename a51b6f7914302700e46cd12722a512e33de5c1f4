@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb7abfb9_c5808dc5",
+        "filename": "vmbase/src/rand.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-10T10:23:28Z",
+      "side": 1,
+      "message": "Ah, sorry, I missed you were passing in the remainder.\nBut that makes my question on the other CL about where the entropy ends up when you don\u0027t ask for all the bits more important.\nI assume the \"to_ne_bytes\" here is important for that reason; add a comment here?",
+      "parentUuid": "9c1fee9f_f32f0b4f",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 70
+      },
+      "revId": "a51b6f7914302700e46cd12722a512e33de5c1f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5df62fbb_008a3622",
         "filename": "vmbase/src/rand.rs",
         "patchSetId": 5
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "actually\n```\nlet entropy \u003d \u0026rnd[(rnd.len() - remainder.len())..]\n```",
       "parentUuid": "5df62fbb_008a3622",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 64
+      },
+      "revId": "a51b6f7914302700e46cd12722a512e33de5c1f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76a3a08b_aba480c7",
+        "filename": "vmbase/src/rand.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-10T10:23:28Z",
+      "side": 1,
+      "message": "That does look a lot neater. But still needs a comment!",
+      "parentUuid": "57ec92d0_109f6f9a",
       "range": {
         "startLine": 113,
         "startChar": 0,
