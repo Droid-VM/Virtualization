@@ -14,7 +14,6 @@
 
 //! Functions and drivers for obtaining true entropy.
 
-use crate::hvc;
 use core::fmt;
 use core::mem::{size_of, size_of_val, transmute};
 use smccc::{self, Hvc};
@@ -28,11 +27,11 @@ pub enum Error {
     /// Error during architectural SMCCC call.
     Smccc(smccc::arch::Error),
     /// Error during SMCCC TRNG call.
-    Trng(hvc::trng::Error),
+    Trng(smccc::trng::Error),
     /// Unsupported SMCCC version.
     UnsupportedSmcccVersion(smccc::arch::Version),
     /// Unsupported SMCCC TRNG version.
-    UnsupportedTrngVersion(hvc::trng::Version),
+    UnsupportedTrngVersion(smccc::trng::Version),
 }
 
 impl From<smccc::arch::Error> for Error {
@@ -41,8 +40,8 @@ impl From<smccc::arch::Error> for Error {
     }
 }
 
-impl From<hvc::trng::Error> for Error {
-    fn from(e: hvc::trng::Error) -> Self {
+impl From<smccc::trng::Error> for Error {
+    fn from(e: smccc::trng::Error) -> Self {
         Self::Trng(e)
     }
 }
@@ -77,14 +76,14 @@ pub(crate) fn init() -> Result<()> {
     }
 
     // TRNG_RND requires SMCCC TRNG v1.0.
-    match hvc::trng_version()? {
-        hvc::trng::Version { major: 1, minor: _ } => (),
+    match smccc::trng::version::<Hvc>()? {
+        smccc::trng::Version { major: 1, minor: _ } => (),
         version => return Err(Error::UnsupportedTrngVersion(version)),
     }
 
     // TRNG_RND64 doesn't define any special capabilities so ignore the successful result.
-    let _ = hvc::trng_features(hvc::ARM_SMCCC_TRNG_RND64).map_err(|e| {
-        if e == hvc::trng::Error::NotSupported {
+    let _ = smccc::trng::features::<Hvc>(smccc::trng::TRNG_RND64).map_err(|e| {
+        if e == smccc::trng::Error::NotSupported {
             // SMCCC TRNG is currently our only source of entropy.
             Error::NoEntropySource
         } else {
@@ -123,8 +122,8 @@ fn repeat_trng_rnd(n_bytes: usize) -> Result<Entropy> {
 /// The rest of the array should be ignored.
 fn rnd64(n_bytes: usize) -> Result<Option<Entropy>> {
     let bits = usize::try_from(u8::BITS).unwrap();
-    let result = hvc::trng_rnd64((n_bytes * bits).try_into().unwrap());
-    let entropy = if matches!(result, Err(hvc::trng::Error::NoEntropy)) {
+    let result = smccc::trng::rnd64::<Hvc>(n_bytes * bits);
+    let entropy = if matches!(result, Err(smccc::trng::Error::NoEntropy)) {
         None
     } else {
         let r = result?;
