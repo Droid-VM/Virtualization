@@ -94,6 +94,9 @@ apex_defaults {
         "fd_server",
         "vm",
     ],
+    sh_binaries: [
+        "prepare_device_vfio",
+    ],
     prebuilts: [
         "com.android.virt.init.rc",
         "features_com.android.virt.xml",
@@ -134,6 +137,12 @@ prebuilt_etc {
     src: "virtualizationservice.rc",
     filename: "init.rc",
     installable: false,
+}
+
+sh_binary {
+    name: "prepare_device_vfio",
+    src: "prepare_device_vfio.sh",
+    filename: "prepare_device_vfio.sh",
 }
 
 // Virt apex needs a custom signer for its payload
