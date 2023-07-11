@@ -61,7 +61,7 @@ impl TryFrom<Uuid> for HypervisorBackend {
             GunyahHypervisor::UUID => Ok(HypervisorBackend::Gunyah),
             RegularKvmHypervisor::UUID => {
                 // Protected KVM has the same UUID so differentiate based on MEM_SHARE.
-                match ProtectedKvmHypervisor.as_mem_sharer().unwrap().granule() {
+                match ProtectedKvmHypervisor.as_mmio_guard().unwrap().granule() {
                     Ok(_) => Ok(HypervisorBackend::ProtectedKvm),
                     Err(Error::KvmError(KvmError::NotSupported, _)) => {
                         Ok(HypervisorBackend::RegularKvm)
