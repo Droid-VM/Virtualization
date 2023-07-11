@@ -17,11 +17,13 @@
 #![no_main]
 #![no_std]
 
+mod communication;
 mod error;
 mod exceptions;
 
 extern crate alloc;
 
+use crate::communication::DataChannel;
 use crate::error::{Error, Result};
 use core::num::NonZeroUsize;
 use core::slice;
@@ -30,6 +32,7 @@ use hyp::{get_mem_sharer, get_mmio_guard};
 use libfdt::FdtError;
 use log::{debug, error, info};
 use virtio_drivers::{
+    device::socket::VsockAddr,
     transport::{pci::bus::PciRoot, DeviceType, Transport},
     Hal,
 };
@@ -45,6 +48,10 @@ use vmbase::{
         HalImpl,
     },
 };
+
+const PROTECTED_VM_PORT: u32 = 5679;
+const NON_PROTECTED_VM_PORT: u32 = 5680;
+const HOST_CID: u64 = 2;
 
 fn new_page_table() -> Result<PageTable> {
     let mut page_table = PageTable::default();
@@ -119,6 +126,18 @@ unsafe fn try_main(fdt_addr: usize) -> Result<()> {
     debug!("PCI root: {pci_root:#x?}");
     let socket_device = find_socket_device::<HalImpl>(&mut pci_root)?;
     debug!("Found socket device: guest cid = {:?}", socket_device.guest_cid());
+
+    let mut data_channel = DataChannel::from(socket_device);
+    let port = if get_mmio_guard().is_some() {
+        // Use MMIO support to determine whether the VM is protected.
+        PROTECTED_VM_PORT
+    } else {
+        NON_PROTECTED_VM_PORT
+    };
+    data_channel.connect(VsockAddr { cid: HOST_CID, port })?;
+    data_channel.process_recv()?;
+    data_channel.shutdown()?;
+    info!("Shutdown the connection");
     Ok(())
 }
 
