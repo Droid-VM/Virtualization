@@ -30,6 +30,8 @@ use hyp::{get_mem_sharer, get_mmio_guard};
 use libfdt::FdtError;
 use log::{debug, error, info};
 use virtio_drivers::{
+    self,
+    device::socket::{SingleConnectionManager, VsockAddr, VsockEventType},
     transport::{pci::bus::PciRoot, DeviceType, Transport},
     Hal,
 };
@@ -45,6 +47,10 @@ use vmbase::{
         HalImpl,
     },
 };
+
+const PORT: u32 = 5679;
+const HOST_CID: u64 = 2;
+const MAX_RECV_BUFFER_SIZE_BYTES: usize = 256;
 
 fn new_page_table() -> Result<PageTable> {
     let mut page_table = PageTable::default();
@@ -119,6 +125,24 @@ unsafe fn try_main(fdt_addr: usize) -> Result<()> {
     debug!("PCI root: {pci_root:#x?}");
     let socket_device = find_socket_device::<HalImpl>(&mut pci_root)?;
     debug!("Found socket device: guest cid = {:?}", socket_device.guest_cid());
+
+    let mut connection_manager = SingleConnectionManager::new(socket_device);
+    connection_manager.connect(VsockAddr { cid: HOST_CID, port: PORT }, PORT)?;
+    connection_manager.wait_for_connect()?;
+
+    debug!("Connected to the vsock server");
+    let mut buffer = [0u8; MAX_RECV_BUFFER_SIZE_BYTES];
+    // Buffer too short is handled by the socket device driver
+    let recv_event = connection_manager.wait_for_recv(&mut buffer)?;
+    let VsockEventType::Received {length, ..} = recv_event.event_type else {
+        error!("Received unexpected socket event {:?}", recv_event);
+        return Err(Error::ReceivingDataFailed);
+    };
+    // Echo the received message.
+    connection_manager.send(&buffer[..length])?;
+
+    connection_manager.shutdown()?;
+    info!("Shutdown the connection");
     Ok(())
 }
 

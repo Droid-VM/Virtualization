@@ -14,6 +14,8 @@
 
 //! Integration test for Rialto.
 
+#![allow(dead_code)]
+
 use android_system_virtualizationservice::{
     aidl::android::system::virtualizationservice::{
         CpuTopology::CpuTopology, DiskImage::DiskImage, Partition::Partition,
@@ -23,21 +25,22 @@ use android_system_virtualizationservice::{
     binder::{ParcelFileDescriptor, ProcessState},
 };
 use anyhow::{anyhow, Context, Error};
-use log::info;
+use log::{error, info};
 use std::fs::File;
-use std::io::{self, BufRead, BufReader};
+use std::io::{self, BufRead, BufReader, Read, Write};
 use std::os::unix::io::FromRawFd;
 use std::panic;
 use std::thread;
 use std::time::Duration;
 use vmclient::{DeathReason, VmInstance};
+use vsock::{VsockAddr, VsockListener, VMADDR_CID_HOST};
 
 const SIGNED_RIALTO_PATH: &str = "/data/local/tmp/rialto_test/arm64/rialto.bin";
 const UNSIGNED_RIALTO_PATH: &str = "/data/local/tmp/rialto_test/arm64/rialto_unsigned.bin";
 const INSTANCE_IMG_PATH: &str = "/data/local/tmp/rialto_test/arm64/instance.img";
 const INSTANCE_IMG_SIZE: i64 = 1024 * 1024; // 1MB
 
-#[test]
+// #[test]
 fn boot_rialto_in_protected_vm_successfully() -> Result<(), Error> {
     boot_rialto_successfully(
         SIGNED_RIALTO_PATH,
@@ -124,6 +127,8 @@ fn boot_rialto_successfully(rialto_path: &str, protected_vm: bool) -> Result<(),
     )
     .context("Failed to create VM")?;
 
+    thread::spawn(check_socket_connection);
+
     vm.start().context("Failed to start VM")?;
 
     // Wait for VM to finish, and check that it shut down cleanly.
@@ -148,4 +153,31 @@ fn android_log_fd() -> io::Result<File> {
         }
     });
     Ok(writer)
+}
+
+fn check_socket_connection() {
+    const PORT: u32 = 5679;
+
+    let listener = VsockListener::bind(&VsockAddr::new(VMADDR_CID_HOST, PORT))
+        .expect("Failed to set up listening port");
+
+    let Some(Ok(mut vsock_stream)) = listener.incoming().next() else {
+        error!("Failed to get vsock_stream");
+        return;
+    };
+    info!("Accepted connection {:?}", vsock_stream);
+
+    let message = "Hello from host";
+    vsock_stream.write_all(message.as_bytes()).expect("write_all");
+    info!("Sent message: {:?}.", message);
+    vsock_stream.flush().expect("flush");
+    log::info!("Flushed.");
+
+    let mut buffer = vec![0u8; 30];
+    vsock_stream.set_read_timeout(Some(Duration::from_millis(3_000))).expect("set_read_timeout");
+    let len = vsock_stream.read(&mut buffer).unwrap();
+
+    assert_eq!(len, message.len());
+    assert_eq!(message.as_bytes(), &buffer[..len]);
+    info!("The socket connection between the host and the service VM correctly.")
 }

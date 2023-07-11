@@ -87,6 +87,7 @@ unsafe impl Hal for HalImpl {
 
     unsafe fn share(buffer: NonNull<[u8]>, direction: BufferDirection) -> PhysAddr {
         let size = buffer.len();
+        log::info!("H::share will call alloc_shared for {} bytes", size);
 
         let bounce = alloc_shared(bb_layout(size))
             .expect("Failed to allocate and share VirtIO bounce buffer with host");
