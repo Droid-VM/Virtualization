@@ -345,7 +345,8 @@ impl Drop for MemoryTracker {
 /// Allocates a memory range of at least the given size and alignment that is shared with the host.
 /// Returns a pointer to the buffer.
 pub(crate) fn alloc_shared(layout: Layout) -> hyp::Result<NonNull<u8>> {
-    assert_ne!(layout.size(), 0);
+    // TODO(b/291586508): Check that the layout size cannot be zero once virtio_drivers::VirtQueue
+    // handles the empty buffer share/unshare.
     let Some(buffer) = try_shared_alloc(layout) else {
         handle_alloc_error(layout);
     };
