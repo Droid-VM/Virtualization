@@ -141,6 +141,30 @@
       },
       "revId": "6e219f578ba3dce56ac8dd9fc846b8f7990cb4fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "967db525_874cf293",
+        "filename": "pvmfw/src/crypto.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-11T15:54:03Z",
+      "side": 1,
+      "message": "Done. I\u0027ve also removed the use of `MaybeUninit` as it seems unnecessary, and just initialised the variables instead.",
+      "parentUuid": "79d1a05b_18e417a8",
+      "range": {
+        "startLine": 51,
+        "startChar": 63,
+        "endLine": 51,
+        "endChar": 81
+      },
+      "revId": "6e219f578ba3dce56ac8dd9fc846b8f7990cb4fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
