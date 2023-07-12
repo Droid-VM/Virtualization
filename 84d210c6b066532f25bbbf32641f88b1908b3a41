@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5187a4fb_aa3b70f5",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-12T09:43:22Z",
+      "side": 1,
+      "message": "Should this be part of the trait? We don\u0027t want implementations to replace it.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 46
+      },
+      "revId": "84d210c6b066532f25bbbf32641f88b1908b3a41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9d37c64_e6acff4d",
+        "filename": "libs/hyp/src/hypervisor/geniezone.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-12T09:43:22Z",
+      "side": 1,
+      "message": "Uber-nit: Notsupported -\u003e NotSupported.\n\nAlso, since the right hand sides for these two lines are the same, change the pattern to \nErr(a) | Err(b) ?",
+      "range": {
+        "startLine": 101,
+        "startChar": 60,
+        "endLine": 101,
+        "endChar": 81
+      },
+      "revId": "84d210c6b066532f25bbbf32641f88b1908b3a41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
