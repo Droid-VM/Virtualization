@@ -93,6 +93,30 @@
       },
       "revId": "bcb680865eac3002ae2bef049665759b5e4d3904",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee8211d8_db2db090",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-07-12T17:38:09Z",
+      "side": 1,
+      "message": "When a process terminates, the kernel releases the resources owned by the process and notifies the child\u0027s parent of its demise. So I believe this will close all the open file descriptor \u0026 should release (atleast pkvm) guest memory, this behaviour maybe hypervisor dependent.\n\ncc++ quintin@",
+      "parentUuid": "994ac9fa_b527007a",
+      "range": {
+        "startLine": 789,
+        "startChar": 55,
+        "endLine": 789,
+        "endChar": 72
+      },
+      "revId": "bcb680865eac3002ae2bef049665759b5e4d3904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
