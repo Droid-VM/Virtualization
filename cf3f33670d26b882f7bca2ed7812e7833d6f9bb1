@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4099b939_f3ae5ce3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-12T09:00:11Z",
+      "side": 1,
+      "message": "Much clearer!",
+      "revId": "cf3f33670d26b882f7bca2ed7812e7833d6f9bb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5dc75b7_19c057ed",
+        "filename": "vmbase/src/rand.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-12T09:00:11Z",
+      "side": 1,
+      "message": "I would be slightly tempted to use to_le_bytes here; then the transmute just feels slightly less scary.\nYou could also avoid the transmute by copying 8 bytes at a time into the result array; I suspect the compiler would be able to optimize it all out.\nBut it\u0027s also fine as it stands.",
+      "range": {
+        "startLine": 141,
+        "startChar": 28,
+        "endLine": 141,
+        "endChar": 33
+      },
+      "revId": "cf3f33670d26b882f7bca2ed7812e7833d6f9bb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
