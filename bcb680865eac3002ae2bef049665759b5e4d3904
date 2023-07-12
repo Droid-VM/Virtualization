@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaf17e58_4b652214",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 768,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-12T16:02:25Z",
+      "side": 1,
+      "message": "Nit: I wouldn\u0027t call this shutdown, since this is isn\u0027t the normal/recommended shutdown flow.\ntestHardStopTime, testVmKillTime?",
+      "range": {
+        "startLine": 768,
+        "startChar": 16,
+        "endLine": 768,
+        "endChar": 32
+      },
+      "revId": "bcb680865eac3002ae2bef049665759b5e4d3904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96db93fb_318c1217",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-12T16:02:25Z",
+      "side": 1,
+      "message": "You\u0027re timing how long the call to stop() takes, but is stop() blocked until the VM is fully gone? I know the hyp has to do cleanup in this situation, but I\u0027m not convinced the kill of crosvm (which is what stop() does) will be blocked by it.",
+      "range": {
+        "startLine": 789,
+        "startChar": 55,
+        "endLine": 789,
+        "endChar": 72
+      },
+      "revId": "bcb680865eac3002ae2bef049665759b5e4d3904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
