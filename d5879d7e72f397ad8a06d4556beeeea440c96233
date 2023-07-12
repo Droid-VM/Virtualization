@@ -211,6 +211,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b0f8f36c_146e009b",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-12T11:13:21Z",
+      "side": 1,
+      "message": "Hi David, thanks for chipping in and clearing all of this up for us!\n\nSo, to summarize, `vmbase` (which is an internal low-level library of pvmfw) should:\n\n- keep using the TRNG for `CRYPTO_sysrand{,_for_seed}` (soon-to-be `getentropy`; b/290898063), which BSSL uses to seed its internal PRNG;\n- keep exposing a direct API for the TRNG (currently exposed through `fill_with_entropy` and its syntactic sugar `random_array`) as this seems to be required by some `vmbase` clients, according to previous comments;\n- start exposing a `RAND_bytes` wrapper (say \"`fill_with_pseudo_random`\"/\"`pseudo_random_array`\") to allow its clients to get pseudo-random bytes where their use-cases don\u0027t require full TRNG (the original goal of b/280032923, which this CL addresses)\n\nand, in particular, this CL will address the last point.\n\nAm I missing anything?",
+      "parentUuid": "b37f97e7_493fdb2c",
+      "range": {
+        "startLine": 72,
+        "startChar": 37,
+        "endLine": 72,
+        "endChar": 39
+      },
+      "revId": "d5879d7e72f397ad8a06d4556beeeea440c96233",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "427187ac_d8835b24",
         "filename": "vmbase/src/rand.rs",
         "patchSetId": 4
