@@ -69,6 +69,30 @@
       },
       "revId": "bcb680865eac3002ae2bef049665759b5e4d3904",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "994ac9fa_b527007a",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-12T16:55:18Z",
+      "side": 1,
+      "message": "Ah, I hadn\u0027t dug deeply enough.\nSo that is waiting for crosvm to exit (around line 340).\nBut has the hyp finished by then? (I honestly don\u0027t know.)",
+      "parentUuid": "41c1cc85_2d153017",
+      "range": {
+        "startLine": 789,
+        "startChar": 55,
+        "endLine": 789,
+        "endChar": 72
+      },
+      "revId": "bcb680865eac3002ae2bef049665759b5e4d3904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
