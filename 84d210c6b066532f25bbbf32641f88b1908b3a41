@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6479c22b_01e803c7",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-12T11:18:53Z",
+      "side": 1,
+      "message": "Yeah, so let\u0027s not worry,",
+      "parentUuid": "e031a842_c214a0d8",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 46
+      },
+      "revId": "84d210c6b066532f25bbbf32641f88b1908b3a41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9d37c64_e6acff4d",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Done in aosp/2654007.\n\nAlso, I\u0027m not convinced about the mapping `NotRequired \u003d\u003e MmioGuardNotsupported` either but let\u0027s keep it as-is.",
       "parentUuid": "c9d37c64_e6acff4d",
+      "range": {
+        "startLine": 101,
+        "startChar": 60,
+        "endLine": 101,
+        "endChar": 81
+      },
+      "revId": "84d210c6b066532f25bbbf32641f88b1908b3a41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d53ef119_179379a6",
+        "filename": "libs/hyp/src/hypervisor/geniezone.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-12T11:18:53Z",
+      "side": 1,
+      "message": "\u003e Also, I\u0027m not convinced about the mapping `NotRequired \u003d\u003e MmioGuardNotsupported` either but let\u0027s keep it as-is.\n\nMmm, I was wondering too.",
+      "parentUuid": "b23f10ad_5bd8e542",
       "range": {
         "startLine": 101,
         "startChar": 60,
