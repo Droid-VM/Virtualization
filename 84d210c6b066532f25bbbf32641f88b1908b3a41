@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e031a842_c214a0d8",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-12T10:44:03Z",
+      "side": 1,
+      "message": "You\u0027re right that we don\u0027t but how would you expose it to clients (which rely on `get_mmio_guard()`) otherwise?\n\nNote that the existence of this method is temporary, anyway.",
+      "parentUuid": "5187a4fb_aa3b70f5",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 46
+      },
+      "revId": "84d210c6b066532f25bbbf32641f88b1908b3a41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c9d37c64_e6acff4d",
         "filename": "libs/hyp/src/hypervisor/geniezone.rs",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2023-07-12T09:43:22Z",
       "side": 1,
       "message": "Uber-nit: Notsupported -\u003e NotSupported.\n\nAlso, since the right hand sides for these two lines are the same, change the pattern to \nErr(a) | Err(b) ?",
+      "range": {
+        "startLine": 101,
+        "startChar": 60,
+        "endLine": 101,
+        "endChar": 81
+      },
+      "revId": "84d210c6b066532f25bbbf32641f88b1908b3a41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b23f10ad_5bd8e542",
+        "filename": "libs/hyp/src/hypervisor/geniezone.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-12T10:44:03Z",
+      "side": 1,
+      "message": "Done in aosp/2654007.\n\nAlso, I\u0027m not convinced about the mapping `NotRequired \u003d\u003e MmioGuardNotsupported` either but let\u0027s keep it as-is.",
+      "parentUuid": "c9d37c64_e6acff4d",
       "range": {
         "startLine": 101,
         "startChar": 60,
