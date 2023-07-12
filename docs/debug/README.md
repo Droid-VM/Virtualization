@@ -22,7 +22,8 @@ There currently are two levels defined: NONE and FULL. NONE means that the VM
 is not debuggable at all, and FULL means that [all the debugging
 features](#debugging-features) are supported.
 
-Debug level is by default NONE. You can set it to FULL either via a Java API
+Debug level is by default FULL for the "run-microdroid" command and NONE for
+the "run" command. You can set it to FULL either via a Java API
 call in your app or via a command line argument `--debug` as follows:
 
 ```java
