@@ -45,6 +45,30 @@
       },
       "revId": "bcb680865eac3002ae2bef049665759b5e4d3904",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41c1cc85_2d153017",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-07-12T16:47:32Z",
+      "side": 1,
+      "message": "VmState supports maintaining `monitor_vm_exit_thread` \u0026 kill() which is called by stop() seems to be waiting for it to finish? \n cs/h/android/platform/superproject/+/master:packages/modules/Virtualization/virtualizationmanager/src/crosvm.rs?l\u003d494",
+      "parentUuid": "96db93fb_318c1217",
+      "range": {
+        "startLine": 789,
+        "startChar": 55,
+        "endLine": 789,
+        "endChar": 72
+      },
+      "revId": "bcb680865eac3002ae2bef049665759b5e4d3904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
