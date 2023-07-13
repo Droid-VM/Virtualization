@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "effbb987_a5da9b48",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 768,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-13T09:02:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aaf17e58_4b652214",
+      "range": {
+        "startLine": 768,
+        "startChar": 16,
+        "endLine": 768,
+        "endChar": 32
+      },
+      "revId": "bcb680865eac3002ae2bef049665759b5e4d3904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96db93fb_318c1217",
@@ -133,6 +157,30 @@
       "side": 1,
       "message": "Yep, the KVM fd opened by crosvm will be closed when the crosvm process dies, which should synchronously trigger the pKVM teardown procedure which will return all guest pages back to the host (after being poisoned obv).",
       "parentUuid": "ee8211d8_db2db090",
+      "range": {
+        "startLine": 789,
+        "startChar": 55,
+        "endLine": 789,
+        "endChar": 72
+      },
+      "revId": "bcb680865eac3002ae2bef049665759b5e4d3904",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef4b0ceb_c421c6e4",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-13T09:02:46Z",
+      "side": 1,
+      "message": "Oh, that\u0027s excellent.",
+      "parentUuid": "5ea4099d_3edd8c14",
       "range": {
         "startLine": 789,
         "startChar": 55,
