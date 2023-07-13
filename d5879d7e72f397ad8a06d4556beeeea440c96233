@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0aeb87f_cfa3f76f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-13T13:08:31Z",
+      "side": 1,
+      "message": "Hi everyone,\n\nI\u0027ll close this cl as there\u0027s no obvious gain of introducing the current boringssl PRNG given our usecases. We\u0027ll continue with our TRNG for now. See b/280032923 for more context.",
+      "revId": "d5879d7e72f397ad8a06d4556beeeea440c96233",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9132301f_ad742d0b",
