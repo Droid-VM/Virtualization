@@ -69,6 +69,54 @@
       },
       "revId": "6f11d9e2920b15a6ff9681a0bcca7782ee2c0062",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a687f838_1bf0affe",
+        "filename": "docs/debug/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-13T08:59:47Z",
+      "side": 1,
+      "message": "Good point. For the Java API the default is NONE.",
+      "parentUuid": "675f2f68_5e804d5d",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 18
+      },
+      "revId": "6f11d9e2920b15a6ff9681a0bcca7782ee2c0062",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e556e1b5_57a5c700",
+        "filename": "docs/debug/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-13T08:59:47Z",
+      "side": 1,
+      "message": "It makes sense for FULL to be the default for vm_shell, because otherwise the attempt to connect to the shell will fail.\nI suspect that\u0027s why it is the default for run_microdroid - there\u0027s not a lot of point doing that with debug NONE, since you won\u0027t get any logs and the resulting VM doesn\u0027t do very much.\nvm_shell should definitely continue to use FULL, but that\u0027s a separate script.\nTBH I\u0027d be tempted to make FULL the default everywhere - vm run is primarily a tool we use while debugging. But consistency in either direction is fine by me.\nAny change is likely to break some of our tests, of course.",
+      "parentUuid": "863e870b_3c3df082",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 18
+      },
+      "revId": "6f11d9e2920b15a6ff9681a0bcca7782ee2c0062",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
