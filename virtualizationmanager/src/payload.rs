@@ -81,6 +81,9 @@ struct ApexInfo {
 
     #[serde(rename = "provideSharedApexLibs")]
     provide_shared_apex_libs: bool,
+
+    #[serde(rename = "preinstalledModulePath")]
+    preinstalled_path: PathBuf,
 }
 
 impl ApexInfoList {
@@ -283,6 +286,8 @@ fn make_payload_disk(
     apex_infos.sort_by_key(|info| (&info.name, &info.version, &info.last_update_seconds));
     info!("Microdroid payload APEXes: {:?}", apex_infos.iter().map(|ai| &ai.name));
 
+    check_no_vendor_apexes(&apex_infos, &apex_list)?;
+
     let metadata_file = make_metadata_file(app_config, &apex_infos, temporary_directory)?;
     // put metadata at the first partition
     let mut partitions = vec![Partition {
@@ -374,6 +379,22 @@ fn find_apex_names_in_classpath(classpath_vars: &str) -> Result<HashSet<String>>
     }
 
     Ok(apexes)
+}
+
+fn check_no_vendor_apexes(
+    requested_apexes: &Vec<&ApexInfo>,
+    apex_list: &ApexInfoList,
+) -> Result<()> {
+    for apex in requested_apexes {
+        if apex_list
+            .list
+            .iter()
+            .any(|ai| ai.name == apex.name && ai.preinstalled_path.starts_with("/vendor"))
+        {
+            bail!("Vendor APEX {} is not supported in Microdroid", apex.name);
+        }
+    }
+    Ok(())
 }
 
 // Collect ApexInfos from VM config
