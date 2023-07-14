@@ -16,6 +16,24 @@
       "message": "Perhaps, a more idiomatic approach might be using \"@RunWith(Parameterized.class)\" so that running on both configs becomes the default without having to write two methods for the same test. Then if a test is for only one of the configs, the test could skip the other config explicitly. See MicrodroidTests.java.\n\nThis could be a follow-up task, if needed.",
       "revId": "28578b7aae0134587faf8030536cc9ed075c238b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56ab84bc_410f6d6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-14T11:30:39Z",
+      "side": 1,
+      "message": "Yeah. Although we already had the subset of tests that run debuggable / non-debuggable, and they are harder to make fit the pattern.\nI\u0027m afraid I thought that would be more work than I was willing to do on this.",
+      "parentUuid": "53bde001_66b2c7ea",
+      "revId": "28578b7aae0134587faf8030536cc9ed075c238b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
