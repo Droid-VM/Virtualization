@@ -1105,9 +1105,9 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         List<DataItem> rootArrayItems = ((Array) dataItems.get(0)).getDataItems();
         assertThat(rootArrayItems.size()).isAtLeast(2); // Public key and one certificate
         if (mProtectedVm) {
-            // pvmfw truncates the DICE chain it gets, so we expect exactly entries for: public key,
-            // Microdroid and app payload.
-            assertThat(rootArrayItems.size()).isEqualTo(3);
+            // When a true DICE chain is created, we expect at least one entry for the boot
+            // before pvmfw, then pvmfw, vm_entry (Microdroid kerne) and Microdroid payload entries.
+            assertThat(rootArrayItems.size()).isAtLeast(4);
         }
     }
 
