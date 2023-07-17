@@ -17,6 +17,7 @@ package android.system.virtualizationservice;
 
 /** A specification of device to be assigned to the virtual machine. */
 @RustDerive(Clone=true)
+@VintfStability
 parcelable AssignableDevice {
     /** Path to SysFS node of the device. */
     String node;

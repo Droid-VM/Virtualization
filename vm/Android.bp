@@ -9,7 +9,7 @@ rust_defaults {
     edition: "2021",
     prefer_rlib: true,
     rustlibs: [
-        "android.system.virtualizationservice-rust",
+        "android.system.virtualizationservice-V1-rust",
         "libanyhow",
         "libbinder_rs",
         "libclap",

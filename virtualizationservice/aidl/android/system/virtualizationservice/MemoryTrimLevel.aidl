@@ -19,6 +19,7 @@ package android.system.virtualizationservice;
  * Memory trim levels propagated from the app to the VM.
  */
 @Backing(type="int")
+@VintfStability
 enum MemoryTrimLevel {
     /* Same meaning as in ComponentCallbacks2 */
     TRIM_MEMORY_RUNNING_CRITICAL = 0,

@@ -13,7 +13,7 @@ android_test {
         "MicrodroidTestHelper",
         "androidx.test.runner",
         "androidx.test.ext.junit",
-        "com.android.microdroid.testservice-java",
+        "com.android.microdroid.testservice-V1-java",
         "truth-prebuilt",
     ],
     jni_libs: [
@@ -35,7 +35,7 @@ cc_library_shared {
     srcs: ["src/native/*.cpp"],
     local_include_dirs: ["src/native/include"],
     static_libs: [
-        "com.android.microdroid.testservice-ndk",
+        "com.android.microdroid.testservice-V1-ndk",
     ],
     shared_libs: [
         "libbase",

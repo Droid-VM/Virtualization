@@ -5,7 +5,8 @@ package {
 aidl_interface {
     name: "com.android.microdroid.testservice",
     srcs: ["com/android/microdroid/testservice/**/*.aidl"],
-    unstable: true,
+    stability: "vintf",
+    frozen: false,
     vendor_available: true,
     flags: [
         "-Werror",

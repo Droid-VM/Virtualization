@@ -9,7 +9,7 @@ java_defaults {
         "general-tests",
     ],
     static_libs: [
-        "com.android.microdroid.testservice-java",
+        "com.android.microdroid.testservice-V1-java",
         "com.android.microdroid.test.vmshare_service-java",
     ],
     sdk_version: "test_current",
@@ -64,7 +64,7 @@ cc_defaults {
         "libvm_payload#current",
     ],
     static_libs: [
-        "com.android.microdroid.testservice-ndk",
+        "com.android.microdroid.testservice-V1-ndk",
         "libbase",
         "libfstab",
         "libfsverity_digests_proto_cc",

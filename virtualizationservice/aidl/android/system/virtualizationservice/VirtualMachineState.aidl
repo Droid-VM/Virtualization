@@ -19,6 +19,7 @@ package android.system.virtualizationservice;
  * The lifecycle state of a VM.
  */
 @Backing(type="int")
+@VintfStability
 enum VirtualMachineState {
     /**
      * The VM has been created but not yet started.

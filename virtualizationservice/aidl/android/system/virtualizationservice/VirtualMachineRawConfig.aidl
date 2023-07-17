@@ -19,6 +19,7 @@ import android.system.virtualizationservice.CpuTopology;
 import android.system.virtualizationservice.DiskImage;
 
 /** Raw configuration for running a VM. */
+@VintfStability
 parcelable VirtualMachineRawConfig {
     /** Name of VM */
     String name;

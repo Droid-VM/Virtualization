@@ -175,6 +175,16 @@ public class VmShareServiceImpl extends Service {
         }
 
         @Override
+        public int getInterfaceVersion() {
+            return ITestService.VERSION;
+        }
+
+        @Override
+        public String getInterfaceHash() {
+            return ITestService.HASH;
+        }
+
+        @Override
         public int addInteger(int a, int b) throws RemoteException {
             return mServiceInVm.addInteger(a, b);
         }

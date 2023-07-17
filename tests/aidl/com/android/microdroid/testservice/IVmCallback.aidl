@@ -20,6 +20,7 @@ package com.android.microdroid.testservice;
  *
  * {@hide}
  */
+@VintfStability
 interface IVmCallback {
     /** Requests the VM to asynchronously call the app's onEchoRequestReceived() callback. */
     void echoMessage(String message);

@@ -22,6 +22,7 @@ import android.system.virtualizationcommon.ErrorCode;
  * An object which a client may register with the VirtualizationService to get callbacks about the
  * state of a particular VM.
  */
+@VintfStability
 oneway interface IVirtualMachineCallback {
     /**
      * Called when the payload starts in the VM.

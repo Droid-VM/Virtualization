@@ -8,7 +8,7 @@ java_library {
     name: "com.android.microdroid.test.vmshare_service-java",
     srcs: ["com/**/*.aidl"],
     sdk_version: "test_current",
-    static_libs: ["com.android.microdroid.testservice-java"],
+    static_libs: ["com.android.microdroid.testservice-V1-java"],
     aidl: {
         include_dirs: ["packages/modules/Virtualization/tests/aidl/"],
     },

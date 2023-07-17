@@ -8,8 +8,8 @@ rust_library {
     srcs: ["src/lib.rs"],
     edition: "2021",
     rustlibs: [
-        "android.system.virtualizationcommon-rust",
-        "android.system.virtualizationservice-rust",
+        "android.system.virtualizationcommon-V1-rust",
+        "android.system.virtualizationservice-V1-rust",
         "libbinder_rs",
         "libcommand_fds",
         "liblog_rust",

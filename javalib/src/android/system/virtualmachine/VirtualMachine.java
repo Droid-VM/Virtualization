@@ -1329,6 +1329,16 @@ public class VirtualMachine implements AutoCloseable {
 
     /** Map the raw AIDL (& binder) callbacks to what the client expects. */
     private class CallbackTranslator extends IVirtualMachineCallback.Stub {
+        @Override
+        public int getInterfaceVersion() {
+            return IVirtualMachineCallback.VERSION;
+        }
+
+        @Override
+        public String getInterfaceHash() {
+            return IVirtualMachineCallback.HASH;
+        }
+
         private final IVirtualizationService mService;
         private final DeathRecipient mDeathRecipient;
 

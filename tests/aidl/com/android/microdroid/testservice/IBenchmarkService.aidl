@@ -17,6 +17,7 @@
 package com.android.microdroid.testservice;
 
 /** {@hide} */
+@VintfStability
 interface IBenchmarkService {
     const int PORT = 5677;
 

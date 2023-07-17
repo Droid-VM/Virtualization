@@ -52,7 +52,7 @@ rust_test {
     prefer_rlib: true,
     edition: "2021",
     rustlibs: [
-        "android.system.virtualizationservice-rust",
+        "android.system.virtualizationservice-V1-rust",
         "libandroid_logger",
         "libanyhow",
         "liblibc",

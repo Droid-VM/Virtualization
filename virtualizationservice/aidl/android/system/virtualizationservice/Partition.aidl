@@ -16,6 +16,7 @@
 package android.system.virtualizationservice;
 
 /** A partition to be assembled into a composite image. */
+@VintfStability
 parcelable Partition {
     /** A label for the partition. */
     @utf8InCpp String label;

@@ -22,6 +22,7 @@ import com.android.microdroid.testservice.IVmCallback;
  *
  * {@hide}
  */
+@VintfStability
 interface IAppCallback {
     /** Invites the app to call vmCallback#echoMessage() */
     void setVmCallback(IVmCallback vmCallback);

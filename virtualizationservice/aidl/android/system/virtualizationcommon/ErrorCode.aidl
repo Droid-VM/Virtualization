@@ -19,6 +19,7 @@ package android.system.virtualizationcommon;
  * Errors reported from within a VM.
  */
 @Backing(type="int")
+@VintfStability
 enum ErrorCode {
     /**
      * Error code for all other errors not listed below.

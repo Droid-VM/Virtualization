@@ -434,6 +434,16 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         IAppCallback appCallback =
                 new IAppCallback.Stub() {
                     @Override
+                    public int getInterfaceVersion() {
+                        return IAppCallback.VERSION;
+                    }
+
+                    @Override
+                    public String getInterfaceHash() {
+                        return IAppCallback.HASH;
+                    }
+
+                    @Override
                     public void setVmCallback(IVmCallback vmCallback) {
                         // Do this on a separate thread to simulate an asynchronous trigger,
                         // and to make sure it doesn't happen in the context of an inbound binder

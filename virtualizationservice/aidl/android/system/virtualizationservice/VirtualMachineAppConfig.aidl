@@ -19,6 +19,7 @@ import android.system.virtualizationservice.CpuTopology;
 import android.system.virtualizationservice.VirtualMachinePayloadConfig;
 
 /** Configuration for running an App in a VM */
+@VintfStability
 parcelable VirtualMachineAppConfig {
     /** Name of VM */
     String name;
@@ -42,6 +43,7 @@ parcelable VirtualMachineAppConfig {
      */
     @nullable ParcelFileDescriptor encryptedStorageImage;
 
+    @VintfStability
     union Payload {
         /**
          * Path to a JSON file in an APK containing the configuration.
@@ -59,6 +61,7 @@ parcelable VirtualMachineAppConfig {
     /** Detailed configuration for the VM, specifying how the payload will be run. */
     Payload payload;
 
+    @VintfStability
     enum DebugLevel {
         /** Not debuggable at all */
         NONE,
@@ -87,6 +90,7 @@ parcelable VirtualMachineAppConfig {
     /**
      * Encapsulates parameters that require android.permission.USE_CUSTOM_VIRTUAL_MACHINE.
      */
+    @VintfStability
     parcelable CustomConfig {
         /**
          * If specified, boot Microdroid VM with the given kernel.
