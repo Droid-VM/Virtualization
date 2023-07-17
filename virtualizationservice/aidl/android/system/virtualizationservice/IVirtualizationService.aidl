@@ -20,6 +20,7 @@ import android.system.virtualizationservice.PartitionType;
 import android.system.virtualizationservice.VirtualMachineConfig;
 import android.system.virtualizationservice.VirtualMachineDebugInfo;
 
+@VintfStability
 interface IVirtualizationService {
     /**
      * Create the VM with the given config file, and return a handle to it ready to start it. If

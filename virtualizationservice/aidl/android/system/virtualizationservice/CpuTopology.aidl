@@ -17,6 +17,7 @@ package android.system.virtualizationservice;
 
 /** The vCPU topology that will be generated for the VM. */
 @Backing(type="byte")
+@VintfStability
 enum CpuTopology {
     /** One vCPU */
     ONE_CPU = 0,

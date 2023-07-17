@@ -24,7 +24,7 @@ cc_library_shared {
     ],
     apex_available: ["com.android.virt"],
     shared_libs: [
-        "android.system.virtualizationservice-ndk",
+        "android.system.virtualizationservice-V1-ndk",
         "libbase",
         "libbinder_ndk",
         "libbinder_rpc_unstable",

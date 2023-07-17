@@ -19,6 +19,7 @@ package android.system.virtualizationcommon;
  * The reason why a VM died.
  */
 @Backing(type="int")
+@VintfStability
 enum DeathReason {
     /** There was an error waiting for the VM. */
     INFRASTRUCTURE_ERROR = 0,

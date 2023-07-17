@@ -18,6 +18,7 @@ package android.system.virtualizationservice;
 import android.system.virtualizationservice.VirtualMachineState;
 
 /** Information about a running VM, for debug purposes only. */
+@VintfStability
 parcelable VirtualMachineDebugInfo {
     /** The CID assigned to the VM. */
     int cid;

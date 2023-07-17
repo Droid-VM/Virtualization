@@ -19,6 +19,7 @@ import android.system.virtualizationservice.VirtualMachineAppConfig;
 import android.system.virtualizationservice.VirtualMachineRawConfig;
 
 /** Configuration for running a VM */
+@VintfStability
 union VirtualMachineConfig {
     /** Configuration for a VM to run an app */
     VirtualMachineAppConfig appConfig;

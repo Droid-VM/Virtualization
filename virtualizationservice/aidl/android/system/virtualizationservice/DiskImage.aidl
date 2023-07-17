@@ -18,6 +18,7 @@ package android.system.virtualizationservice;
 import android.system.virtualizationservice.Partition;
 
 /** A disk image to be made available to the VM. */
+@VintfStability
 parcelable DiskImage {
     /**
      * The disk image, if it already exists. Exactly one of this and `partitions` must be specified.

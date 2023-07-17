@@ -8,7 +8,7 @@ cc_binary {
     srcs: ["main.cpp"],
     static_libs: [
         "libbase",
-        "android.system.virtualizationservice-ndk",
+        "android.system.virtualizationservice-V1-ndk",
         "com.android.microdroid.testservice-ndk",
     ],
     shared_libs: [

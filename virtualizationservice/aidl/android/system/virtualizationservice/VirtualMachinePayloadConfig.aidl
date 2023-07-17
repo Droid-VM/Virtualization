@@ -16,6 +16,7 @@
 
 package android.system.virtualizationservice;
 
+@VintfStability
 parcelable VirtualMachinePayloadConfig {
     /**
      * Name of the payload executable file in the lib/<ABI> folder of an APK. The payload is in the

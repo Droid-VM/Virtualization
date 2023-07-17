@@ -20,6 +20,7 @@ package android.system.virtualizationservice;
  * initializeWritablePartition.
  */
 @Backing(type="int")
+@VintfStability
 enum PartitionType {
     /**
      * The partition is simply initialized as all zeros

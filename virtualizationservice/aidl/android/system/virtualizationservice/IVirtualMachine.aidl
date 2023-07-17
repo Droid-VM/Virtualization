@@ -19,6 +19,7 @@ import android.system.virtualizationservice.IVirtualMachineCallback;
 import android.system.virtualizationservice.MemoryTrimLevel;
 import android.system.virtualizationservice.VirtualMachineState;
 
+@VintfStability
 interface IVirtualMachine {
     /** Get the CID allocated to the VM. */
     int getCid();
