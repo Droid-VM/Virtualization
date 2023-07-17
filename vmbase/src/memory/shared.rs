@@ -359,6 +359,10 @@ fn try_shared_alloc(layout: Layout) -> Option<NonNull<u8>> {
     if let Some(buffer) = shared_pool.alloc_aligned(layout) {
         Some(NonNull::new(buffer as _).unwrap())
     } else if let Some(shared_memory) = SHARED_MEMORY.lock().as_mut() {
+        // Adjusts the refill layout size to the next power of two as this is the actual size
+        // of the memory allocated in `alloc_aligned()`.
+        let layout =
+            Layout::from_size_align(layout.size().next_power_of_two(), layout.align()).unwrap();
         shared_memory.refill(&mut shared_pool, layout);
         shared_pool.alloc_aligned(layout).map(|buffer| NonNull::new(buffer as _).unwrap())
     } else {
