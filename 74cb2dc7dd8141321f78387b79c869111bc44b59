@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fb7d9ea_2aba73ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-17T10:03:29Z",
+      "side": 1,
+      "message": "Could we have a test for this? It should be possible if the device has at least one vendor APEX. Although I suppose the config file would need to be dynamic.",
+      "revId": "74cb2dc7dd8141321f78387b79c869111bc44b59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb8f387b_31da0248",
+        "filename": "virtualizationmanager/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-17T10:03:29Z",
+      "side": 1,
+      "message": "Should this be an allowlist rather than a denylist?\nAre there other places unwanted APEXes might come from?",
+      "range": {
+        "startLine": 392,
+        "startChar": 46,
+        "endLine": 392,
+        "endChar": 90
+      },
+      "revId": "74cb2dc7dd8141321f78387b79c869111bc44b59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
