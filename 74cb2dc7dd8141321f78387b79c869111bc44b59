@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "175bb3e1_f8a593a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-07-17T14:01:06Z",
+      "side": 1,
+      "message": "I think having an end-to-end test will be a bit challenging. I\u0027ll look into refactoring the code in payload.rs to have a better unit test coverage. WDYT?",
+      "parentUuid": "7fb7d9ea_2aba73ef",
+      "revId": "74cb2dc7dd8141321f78387b79c869111bc44b59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fb8f387b_31da0248",
         "filename": "virtualizationmanager/src/payload.rs",
         "patchSetId": 1
@@ -31,6 +49,30 @@
       "writtenOn": "2023-07-17T10:03:29Z",
       "side": 1,
       "message": "Should this be an allowlist rather than a denylist?\nAre there other places unwanted APEXes might come from?",
+      "range": {
+        "startLine": 392,
+        "startChar": 46,
+        "endLine": 392,
+        "endChar": 90
+      },
+      "revId": "74cb2dc7dd8141321f78387b79c869111bc44b59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b62237f1_a5c53251",
+        "filename": "virtualizationmanager/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-07-17T14:01:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb8f387b_31da0248",
       "range": {
         "startLine": 392,
         "startChar": 46,
