@@ -16,6 +16,24 @@
       "message": "Changing the layout here but not in `dealloc_shared` means that we are passing a different layout to `dealloc_aligned` than we pass to `alloc_aliged`. This may happen to work for now, but it\u0027s not guaranteed to do so, as the documentation for `dealloc_aligned` says \"The layout must be exactly the same as when it was allocated.\".\n\nWe could fix this by doing the same transformation to the layout in `dealloc_shared` as we do here, but I think a better solution would be to pass the requested layout to `alloc_aligned`, and only use a larger layout for `refill`.",
       "revId": "df6bacc21fb357d701da06c404f46096a337c3bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "955d4d91_8936c7df",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-18T10:43:04Z",
+      "side": 1,
+      "message": "Mm, it makes sense to adjust the refill layout only if we want to pass exactly the same argument to `alloc_aligned` and `dealloc_aligned`. Although `dealloc_aligned` actually does the same transformation[1] in its implementation, so passing the initial layout or the transformed layout should lead to the same result.\n\nAdjusted in https://r.android.com/2661197.\n\n[1] https://docs.rs/buddy_system_allocator/latest/src/buddy_system_allocator/frame.rs.html#142",
+      "parentUuid": "24e2bf86_fc1cf555",
+      "revId": "df6bacc21fb357d701da06c404f46096a337c3bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
