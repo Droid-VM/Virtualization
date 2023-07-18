@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8be4ffd7_b8051dd0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-18T08:12:33Z",
+      "side": 1,
+      "message": "Done. Sure, I\u0027ll send a PR there to include this in its doc.",
+      "parentUuid": "c85c332d_571e6973",
+      "range": {
+        "startLine": 10,
+        "startChar": 50,
+        "endLine": 12,
+        "endChar": 16
+      },
+      "revId": "faa515a644d40bd2b3b066818458518517d916a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a3a6df1_59338896",
@@ -37,6 +61,24 @@
       "writtenOn": "2023-07-17T17:47:25Z",
       "side": 1,
       "message": "Thanks for having caught this!\n\nIt would be neat to have test coverage of this (fails without your fix and starts passing with this CL) but I don\u0027t see a way without having a payload like `vmbase_example` but which runs in a pVM (or is there?), which might or might not be too much work to set up; given that you have quite some experience with those tests, WDYT?",
+      "revId": "faa515a644d40bd2b3b066818458518517d916a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32431a1e_1d7701ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-18T08:12:33Z",
+      "side": 1,
+      "message": "That\u0027s a good point. I\u0027m also considering testing the memory management to `vmbase_example`, but that still won\u0027t allow us to reach this function easily. As `shared_alloc` is only called in the `vmbase::HalImpl`, and `vmbase_example` plugs in its own `HalImpl` so we still don\u0027t access this function.\n\nOtherwise, we will have a regression test (fails without this adjustment) when testing the rialto vsock connection [1]. Because when we connect the virtio vsock device, we always add a header of 44 bytes to its rx virtqueue, thus allocating a buffer of 44 bytes here.\n\n[1] https://r.android.com/c/platform/packages/modules/Virtualization/+/2658870/1/rialto/tests/test.rs",
+      "parentUuid": "8a3a6df1_59338896",
       "revId": "faa515a644d40bd2b3b066818458518517d916a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -64,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43bbdebf_572aba92",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-18T08:12:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c01ebdad_658307c5",
+      "range": {
+        "startLine": 362,
+        "startChar": 8,
+        "endLine": 364,
+        "endChar": 20
+      },
+      "revId": "faa515a644d40bd2b3b066818458518517d916a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9026f2b_e229fca4",
@@ -77,6 +143,30 @@
       "writtenOn": "2023-07-17T17:47:25Z",
       "side": 1,
       "message": "This might not cover the whole story as, looking at the code of [`FrameAllocator::alloc_aligned`](https://docs.rs/buddy_system_allocator/latest/src/buddy_system_allocator/frame.rs.html#93):\n```\nlet size \u003d max(layout.size().next_power_of_two(), layout.align());\n```\nso you\u0027ll still hit the bug if `layout.align() \u003e layout.size.next_power_of_two()` (which might be a theoretical case for now but we want our software to be robust). Instead, could we (re)define `layout` with that `size`?",
+      "range": {
+        "startLine": 365,
+        "startChar": 12,
+        "endLine": 365,
+        "endChar": 86
+      },
+      "revId": "faa515a644d40bd2b3b066818458518517d916a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0f85900_5f89d01f",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-18T08:12:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9026f2b_e229fca4",
       "range": {
         "startLine": 365,
         "startChar": 12,
