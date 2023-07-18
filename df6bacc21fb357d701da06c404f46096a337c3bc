@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24e2bf86_fc1cf555",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-18T10:11:06Z",
+      "side": 1,
+      "message": "Changing the layout here but not in `dealloc_shared` means that we are passing a different layout to `dealloc_aligned` than we pass to `alloc_aliged`. This may happen to work for now, but it\u0027s not guaranteed to do so, as the documentation for `dealloc_aligned` says \"The layout must be exactly the same as when it was allocated.\".\n\nWe could fix this by doing the same transformation to the layout in `dealloc_shared` as we do here, but I think a better solution would be to pass the requested layout to `alloc_aligned`, and only use a larger layout for `refill`.",
+      "revId": "df6bacc21fb357d701da06c404f46096a337c3bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
