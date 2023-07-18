@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a47c1c28_33c0f33a",
+        "filename": "rialto/AndroidTest.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-18T16:45:08Z",
+      "side": 1,
+      "message": "Ahem",
+      "range": {
+        "startLine": 17,
+        "startChar": 39,
+        "endLine": 17,
+        "endChar": 50
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d28c960_0ab712be",
+        "filename": "rialto/AndroidTest.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-18T16:45:08Z",
+      "side": 1,
+      "message": "Also needs updating",
+      "range": {
+        "startLine": 19,
+        "startChar": 3,
+        "endLine": 19,
+        "endChar": 99
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "536abd61_988f8c54",
+        "filename": "rialto/AndroidTest.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-18T16:45:08Z",
+      "side": 1,
+      "message": "You shouldn\u0027t need this with RootTargetPreparer, and we really don\u0027t want it.\nWith \"adb root\", shell runs with the \"su\" label rather than \"shell\", and \"su\" is exempt from selinux. That\u0027s a better test than disabling all of selinux for everything.",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 89
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c397606e_91ca92ca",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-18T16:45:08Z",
+      "side": 1,
+      "message": "There\u0027s no particular reason to use the same port at each end is there?\nIt seems comment-worthy anyway, since you\u0027re passing destination.port as src_port which looks wrong.",
+      "range": {
+        "startLine": 41,
+        "startChar": 53,
+        "endLine": 41,
+        "endChar": 69
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08eb32c1_e58a9a20",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-18T16:45:08Z",
+      "side": 1,
+      "message": "What if you don\u0027t receive the whole message, either because it\u0027s bigger than one buffer, or it arrives in 2 pieces?",
+      "range": {
+        "startLine": 51,
+        "startChar": 11,
+        "endLine": 51,
+        "endChar": 67
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19a2fafb_a5d23086",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-18T16:45:08Z",
+      "side": 1,
+      "message": "{recv_event:?}",
+      "range": {
+        "startLine": 54,
+        "startChar": 52,
+        "endLine": 54,
+        "endChar": 70
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8098c14c_599fdb26",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-18T16:45:08Z",
+      "side": 1,
+      "message": "Maybe VMADDR_CID_HOST, since that\u0027s the name we use elsewhere?\n\nAlthough I wonder if that \u0026 the related local \u0026 hypervisor CIDs should be exposed by the vsock library.",
+      "range": {
+        "startLine": 54,
+        "startChar": 10,
+        "endLine": 54,
+        "endChar": 18
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b260518e_353da5dd",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-18T16:45:08Z",
+      "side": 1,
+      "message": "I\u0027d wrap this up in a little helper function called \"[is_]protected_vm\" just to move the non-obviousness out of this function.",
+      "range": {
+        "startLine": 56,
+        "startChar": 18,
+        "endLine": 57,
+        "endChar": 69
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08bb70dc_228bc7af",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-18T16:45:08Z",
+      "side": 1,
+      "message": "Can we have these defined in 1 place?",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 40
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3aee767_1df1f1db",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-18T16:45:08Z",
+      "side": 1,
+      "message": "Is this change needed in this CL? It looks wrong.",
+      "range": {
+        "startLine": 348,
+        "startChar": 0,
+        "endLine": 349,
+        "endChar": 46
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
