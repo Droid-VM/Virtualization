@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "acf9930b_3a6e51ed",
+        "filename": "rialto/AndroidTest.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-19T10:14:40Z",
+      "side": 1,
+      "message": "Please don\u0027t do that. Disabling SELinux for all processes is not a good test environment. Running shell as root is much more normal, and a bunch of our tests already require that.",
+      "parentUuid": "3e55efbd_ad329d74",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 89
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c397606e_91ca92ca",
         "filename": "rialto/src/communication.rs",
         "patchSetId": 6
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "I think there\u0027s no particular reason to use different ports in rialto and host.",
       "parentUuid": "c397606e_91ca92ca",
+      "range": {
+        "startLine": 41,
+        "startChar": 53,
+        "endLine": 41,
+        "endChar": 69
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76a5baac_584e7dd0",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-19T10:14:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c17c2aa1_f5cf6345",
       "range": {
         "startLine": 41,
         "startChar": 53,
@@ -226,6 +274,30 @@
       "side": 1,
       "message": "We should receive an error [1] if the buffer is too short. I added a TODO here to handle this in a subsequent cl. We probably also need some upstream change like including the real length in the error etc. Actually, I mostly want to make it work with a simple scenario in this cl and check the error cases later.\n\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:external/rust/crates/virtio-drivers/src/device/socket/vsock.rs;l\u003d495;drc\u003d91b9730f88c54183aae71e4b79d093ed1914c9a2",
       "parentUuid": "08eb32c1_e58a9a20",
+      "range": {
+        "startLine": 51,
+        "startChar": 11,
+        "endLine": 51,
+        "endChar": 67
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4d93887_1a25c00b",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-19T10:14:40Z",
+      "side": 1,
+      "message": "Sockets are stream not packet oriented, so it is always possible in theory that you only receive part of what is sent (although unlikely in practice).\nProbably doesn\u0027t matter for this test, but you will need to handle it in the real communication.",
+      "parentUuid": "124d7098_9abe4cbd",
       "range": {
         "startLine": 51,
         "startChar": 11,
@@ -414,6 +486,30 @@
       "side": 1,
       "message": "Not for now as these tests are e2e tests and they treat rialto as black box. Rialto doesn\u0027t have a library shared with the host for now. We can move these values to the communication protocol library later as it will be shared between rialto and the host. wdyt?",
       "parentUuid": "08bb70dc_228bc7af",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 40
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c909859c_ab921d59",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-19T10:14:40Z",
+      "side": 1,
+      "message": "OK, SG.",
+      "parentUuid": "17a76728_8da5a97e",
       "range": {
         "startLine": 36,
         "startChar": 0,
