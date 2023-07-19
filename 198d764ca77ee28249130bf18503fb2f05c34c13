@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff20a01d_2e2aceca",
+        "filename": "rialto/AndroidTest.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-19T07:39:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47c1c28_33c0f33a",
+      "range": {
+        "startLine": 17,
+        "startChar": 39,
+        "endLine": 17,
+        "endChar": 50
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d28c960_0ab712be",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-07-18T16:45:08Z",
       "side": 1,
       "message": "Also needs updating",
+      "range": {
+        "startLine": 19,
+        "startChar": 3,
+        "endLine": 19,
+        "endChar": 99
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddc7c73f_36d9102d",
+        "filename": "rialto/AndroidTest.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-19T07:39:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d28c960_0ab712be",
       "range": {
         "startLine": 19,
         "startChar": 3,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3e55efbd_ad329d74",
+        "filename": "rialto/AndroidTest.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-19T07:39:53Z",
+      "side": 1,
+      "message": "Right. I only need one of them. I removed the `RootTargetPreparer` above as I only need to disable selinux. It appears that `RootTargetPreparer` grants additional privileges that are not necessary for my use case.",
+      "parentUuid": "536abd61_988f8c54",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 89
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c397606e_91ca92ca",
         "filename": "rialto/src/communication.rs",
         "patchSetId": 6
@@ -83,6 +155,30 @@
       "writtenOn": "2023-07-18T16:45:08Z",
       "side": 1,
       "message": "There\u0027s no particular reason to use the same port at each end is there?\nIt seems comment-worthy anyway, since you\u0027re passing destination.port as src_port which looks wrong.",
+      "range": {
+        "startLine": 41,
+        "startChar": 53,
+        "endLine": 41,
+        "endChar": 69
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c17c2aa1_f5cf6345",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-19T07:39:53Z",
+      "side": 1,
+      "message": "I think there\u0027s no particular reason to use different ports in rialto and host.",
+      "parentUuid": "c397606e_91ca92ca",
       "range": {
         "startLine": 41,
         "startChar": 53,
@@ -118,6 +214,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "124d7098_9abe4cbd",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-19T07:39:53Z",
+      "side": 1,
+      "message": "We should receive an error [1] if the buffer is too short. I added a TODO here to handle this in a subsequent cl. We probably also need some upstream change like including the real length in the error etc. Actually, I mostly want to make it work with a simple scenario in this cl and check the error cases later.\n\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:external/rust/crates/virtio-drivers/src/device/socket/vsock.rs;l\u003d495;drc\u003d91b9730f88c54183aae71e4b79d093ed1914c9a2",
+      "parentUuid": "08eb32c1_e58a9a20",
+      "range": {
+        "startLine": 51,
+        "startChar": 11,
+        "endLine": 51,
+        "endChar": 67
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19a2fafb_a5d23086",
         "filename": "rialto/src/communication.rs",
         "patchSetId": 6
@@ -129,6 +249,30 @@
       "writtenOn": "2023-07-18T16:45:08Z",
       "side": 1,
       "message": "{recv_event:?}",
+      "range": {
+        "startLine": 54,
+        "startChar": 52,
+        "endLine": 54,
+        "endChar": 70
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05f5ab0b_45085e93",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-19T07:39:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19a2fafb_a5d23086",
       "range": {
         "startLine": 54,
         "startChar": 52,
@@ -162,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58b69c41_a16333c6",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-19T07:39:53Z",
+      "side": 1,
+      "message": "Done. It\u0027s not in the library yet, but it\u0027s possible to add this const to the library for the next release.",
+      "parentUuid": "8098c14c_599fdb26",
+      "range": {
+        "startLine": 54,
+        "startChar": 10,
+        "endLine": 54,
+        "endChar": 18
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b260518e_353da5dd",
@@ -175,6 +343,30 @@
       "writtenOn": "2023-07-18T16:45:08Z",
       "side": 1,
       "message": "I\u0027d wrap this up in a little helper function called \"[is_]protected_vm\" just to move the non-obviousness out of this function.",
+      "range": {
+        "startLine": 56,
+        "startChar": 18,
+        "endLine": 57,
+        "endChar": 69
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "865ea556_ed122ebf",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-19T07:39:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b260518e_353da5dd",
       "range": {
         "startLine": 56,
         "startChar": 18,
@@ -210,6 +402,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "17a76728_8da5a97e",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-19T07:39:53Z",
+      "side": 1,
+      "message": "Not for now as these tests are e2e tests and they treat rialto as black box. Rialto doesn\u0027t have a library shared with the host for now. We can move these values to the communication protocol library later as it will be shared between rialto and the host. wdyt?",
+      "parentUuid": "08bb70dc_228bc7af",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 40
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d3aee767_1df1f1db",
         "filename": "vmbase/src/memory/shared.rs",
         "patchSetId": 6
@@ -221,6 +437,30 @@
       "writtenOn": "2023-07-18T16:45:08Z",
       "side": 1,
       "message": "Is this change needed in this CL? It looks wrong.",
+      "range": {
+        "startLine": 348,
+        "startChar": 0,
+        "endLine": 349,
+        "endChar": 46
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14fbfde3_712fa033",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-19T07:39:53Z",
+      "side": 1,
+      "message": "Yes, this is needed for the current cl. When the socket device connects or shuts down, the driver puts an empty buffer in its rx queue, that panics if we block assigning empty buffer here. I need to remove this non-zero check temporarily so the socket driver can work. \n\nUpdated the comment. I\u0027ll add this back once we fix this bug upstream.\n\nYou can find more context in the bug link and Andrew is working on a fix [1].\n\n[1] https://github.com/rcore-os/virtio-drivers/pull/103#pullrequestreview-1535314695",
+      "parentUuid": "d3aee767_1df1f1db",
       "range": {
         "startLine": 348,
         "startChar": 0,
