@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49d422cc_d09cf871",
+        "filename": "apex/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-07-19T10:33:44Z",
+      "side": 1,
+      "message": "Instead of installing it on the device, could we rewrite the script to run over ADB from the PC? We have scripts like `vm_shell.sh` that would be a precedent here.",
+      "range": {
+        "startLine": 97,
+        "startChar": 4,
+        "endLine": 99,
+        "endChar": 6
+      },
+      "revId": "3737aa8ad2cbd78592bb6b3f8a99e2682db53586",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "08a6f1bb_69a5b3e6",
         "filename": "apex/prepare_device_vfio.sh",
         "patchSetId": 5
