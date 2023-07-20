@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "71a6e737_9bd65e4d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-07-20T09:02:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39e21002_dc9f22e0",
+      "range": {
+        "startLine": 9,
+        "startChar": 72,
+        "endLine": 9,
+        "endChar": 75
+      },
+      "revId": "3737aa8ad2cbd78592bb6b3f8a99e2682db53586",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "952fc527_29d84b03",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
@@ -88,6 +112,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa49f948_546c11ee",
+        "filename": "apex/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-07-20T09:02:41Z",
+      "side": 1,
+      "message": "I have updated it to run commands over adb.",
+      "parentUuid": "60f9b761_1435a475",
+      "range": {
+        "startLine": 97,
+        "startChar": 4,
+        "endLine": 99,
+        "endChar": 6
+      },
+      "revId": "3737aa8ad2cbd78592bb6b3f8a99e2682db53586",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "08a6f1bb_69a5b3e6",
@@ -101,6 +149,30 @@
       "writtenOn": "2023-07-19T10:28:41Z",
       "side": 1,
       "message": "Is this Samsung IOMMU specific?",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 2
+      },
+      "revId": "3737aa8ad2cbd78592bb6b3f8a99e2682db53586",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35140332_b70d158a",
+        "filename": "apex/prepare_device_vfio.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-07-20T09:02:41Z",
+      "side": 1,
+      "message": "Yes, VFIO requires unsafe interrupts to be allowed when the IOMMU driver reports lack of support for `IOMMU_CAP_INTR_REMAP` (interrupt isolation), which is the case with the Samsung driver.",
+      "parentUuid": "08a6f1bb_69a5b3e6",
       "range": {
         "startLine": 74,
         "startChar": 0,
