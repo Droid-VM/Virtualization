@@ -455,6 +455,13 @@ impl VirtualizationService {
             }
         };
 
+        if !config.devices.is_empty() {
+            check_assign_devices_to_virtual_machine()?;
+        }
+        let bound_devices_info = GLOBAL_SERVICE.bindDevicesToVfioDriver(&config.devices)?;
+        let vfio_devices = bound_devices_info.sysfsNodes;
+        let vfio_dtbo = maybe_clone_file(&bound_devices_info.dtbo)?;
+
         // Actually start the VM.
         let crosvm_config = CrosvmConfig {
             cid,
@@ -478,6 +485,8 @@ impl VirtualizationService {
             platform_version: parse_platform_version_req(&config.platformVersion)?,
             detect_hangup: is_app_config,
             gdb_port,
+            vfio_devices,
+            vfio_dtbo,
         };
         let instance = Arc::new(
             VmInstance::new(
@@ -664,6 +673,8 @@ fn load_app_config(
         &mut vm_config,
     )?;
 
+    vm_config.devices = config.devices.clone();
+
     Ok(vm_config)
 }
 
@@ -750,6 +761,11 @@ fn check_manage_access() -> binder::Result<()> {
 /// Check whether the caller of the current Binder method is allowed to create custom VMs
 fn check_use_custom_virtual_machine() -> binder::Result<()> {
     check_permission("android.permission.USE_CUSTOM_VIRTUAL_MACHINE")
+}
+
+/// Check whether the caller of the current Binder method is allowed to assign devices to VMs
+fn check_assign_devices_to_virtual_machine() -> binder::Result<()> {
+    check_permission("android.permission.ASSIGN_DEVICES_TO_VIRTUAL_MACHINE")
 }
 
 /// Return whether a partition is exempt from selinux label checks, because we know that it does

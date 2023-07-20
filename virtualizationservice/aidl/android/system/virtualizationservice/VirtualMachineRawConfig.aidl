@@ -15,6 +15,7 @@
  */
 package android.system.virtualizationservice;
 
+import android.system.virtualizationservice.AssignableDevice;
 import android.system.virtualizationservice.CpuTopology;
 import android.system.virtualizationservice.DiskImage;
 
@@ -69,4 +70,6 @@ parcelable VirtualMachineRawConfig {
      * If set to zero, then gdb server won't be started.
      */
     int gdbPort = 0;
+
+    AssignableDevice[] devices;
 }

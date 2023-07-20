@@ -16,6 +16,7 @@
 
 use crate::create_partition::command_create_partition;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
+    AssignableDevice::AssignableDevice,
     CpuTopology::CpuTopology,
     IVirtualizationService::IVirtualizationService,
     PartitionType::PartitionType,
@@ -66,6 +67,7 @@ pub fn command_run_app(
     gdb: Option<NonZeroU16>,
     kernel: Option<&Path>,
     vendor: Option<&Path>,
+    devices: Vec<String>,
 ) -> Result<(), Error> {
     let apk_file = File::open(apk).context("Failed to open APK file")?;
 
@@ -150,6 +152,8 @@ pub fn command_run_app(
         vendorImage: vendor,
     };
 
+    let devices = devices.into_iter().map(AssignableDevice::Node).collect::<Vec<_>>();
+
     let config = VirtualMachineConfig::AppConfig(VirtualMachineAppConfig {
         name: name.unwrap_or_else(|| String::from("VmRunApp")),
         apk: apk_fd.into(),
@@ -163,6 +167,7 @@ pub fn command_run_app(
         memoryMib: mem.unwrap_or(0) as i32, // 0 means use the VM default
         cpuTopology: cpu_topology,
         customConfig: Some(custom_config),
+        devices,
     });
     run(service, &config, &payload_config_str, console_out_path, console_in_path, log_path)
 }
@@ -208,6 +213,7 @@ pub fn command_run_microdroid(
     gdb: Option<NonZeroU16>,
     kernel: Option<&Path>,
     vendor: Option<&Path>,
+    devices: Vec<String>,
 ) -> Result<(), Error> {
     let apk = find_empty_payload_apk_path()?;
     println!("found path {}", apk.display());
@@ -242,6 +248,7 @@ pub fn command_run_microdroid(
         gdb,
         kernel,
         vendor,
+        devices,
     )
 }
 

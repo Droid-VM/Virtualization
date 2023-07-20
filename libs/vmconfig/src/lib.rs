@@ -15,6 +15,7 @@
 //! Struct for VM configuration with JSON (de)serialization and AIDL parcelables
 
 use android_system_virtualizationservice::{
+    aidl::android::system::virtualizationservice::AssignableDevice::AssignableDevice as AidlAssignableDevice,
     aidl::android::system::virtualizationservice::DiskImage::DiskImage as AidlDiskImage,
     aidl::android::system::virtualizationservice::Partition::Partition as AidlPartition,
     aidl::android::system::virtualizationservice::VirtualMachineRawConfig::VirtualMachineRawConfig,
@@ -57,6 +58,9 @@ pub struct VmConfig {
     /// Version or range of versions of the virtual platform that this config is compatible with.
     /// The format follows SemVer (https://semver.org).
     pub platform_version: VersionReq,
+    /// Devices assigned to the VM.
+    #[serde(default)]
+    pub devices: Vec<AssignableDevice>,
 }
 
 impl VmConfig {
@@ -103,6 +107,11 @@ impl VmConfig {
             protectedVm: self.protected,
             memoryMib: memory_mib,
             platformVersion: self.platform_version.to_string(),
+            devices: self
+                .devices
+                .iter()
+                .map(AssignableDevice::to_parcelable)
+                .collect::<Result<_, Error>>()?,
             ..Default::default()
         })
     }
@@ -152,6 +161,24 @@ impl Partition {
             image: Some(open_parcel_file(&self.path, self.writable)?),
             writable: self.writable,
             label: self.label.to_owned(),
+        })
+    }
+}
+
+/// A device assigned to the VM.
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+pub enum AssignableDevice {
+    /// SysFS node.
+    Node(String),
+    /// Type of device (like TPU).
+    Type(String),
+}
+
+impl AssignableDevice {
+    fn to_parcelable(&self) -> Result<AidlAssignableDevice> {
+        Ok(match self {
+            AssignableDevice::Node(s) => AidlAssignableDevice::Node(s.to_owned()),
+            AssignableDevice::Type(s) => AidlAssignableDevice::Type(s.to_owned()),
         })
     }
 }

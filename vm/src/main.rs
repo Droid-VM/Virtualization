@@ -119,6 +119,10 @@ enum Opt {
         /// Path to disk image containing vendor-specific modules.
         #[clap(long)]
         vendor: Option<PathBuf>,
+
+        /// SysFS nodes to assign
+        #[clap(long)]
+        devices: Vec<String>,
     },
     /// Run a virtual machine with Microdroid inside
     RunMicrodroid {
@@ -187,6 +191,10 @@ enum Opt {
         /// Path to disk image containing vendor-specific modules.
         #[clap(long)]
         vendor: Option<PathBuf>,
+
+        /// SysFS nodes to assign
+        #[clap(long)]
+        devices: Vec<String>,
     },
     /// Run a virtual machine
     Run {
@@ -308,6 +316,7 @@ fn main() -> Result<(), Error> {
             gdb,
             kernel,
             vendor,
+            devices,
         } => command_run_app(
             name,
             get_service()?.as_ref(),
@@ -330,6 +339,7 @@ fn main() -> Result<(), Error> {
             gdb,
             kernel.as_deref(),
             vendor.as_deref(),
+            devices,
         ),
         Opt::RunMicrodroid {
             name,
@@ -347,6 +357,7 @@ fn main() -> Result<(), Error> {
             gdb,
             kernel,
             vendor,
+            devices,
         } => command_run_microdroid(
             name,
             get_service()?.as_ref(),
@@ -364,6 +375,7 @@ fn main() -> Result<(), Error> {
             gdb,
             kernel.as_deref(),
             vendor.as_deref(),
+            devices,
         ),
         Opt::Run { name, config, cpu_topology, task_profiles, console, console_in, log, gdb } => {
             command_run(
