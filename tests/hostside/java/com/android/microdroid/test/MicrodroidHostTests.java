@@ -523,12 +523,16 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @Test
     public void testTombstonesAreGeneratedUponUserspaceCrashOnNonPvm() throws Exception {
         assumeNonProtectedVmSupported();
+        // TODO(b/291867858): crashdump is failing on hwasan build.
+        assumeFalse("crashdump is failing on hwasan build ", isHwasan());
         testTombstonesAreGeneratedUponUserspaceCrash(false);
     }
 
     @Test
     public void testTombstonesAreGeneratedUponUserspaceCrashOnPvm() throws Exception {
         assumeProtectedVmSupported();
+        // TODO(b/291867858): crashdump is failing on hwasan build.
+        assumeFalse("crashdump is failing on hwasan build ", isHwasan());
         testTombstonesAreGeneratedUponUserspaceCrash(true);
     }
 
@@ -548,6 +552,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     public void testTombstonesAreNotGeneratedIfNotExportedUponUserspaceCrashOnNonPvm()
             throws Exception {
         assumeNonProtectedVmSupported();
+        // TODO(b/291867858): crashdump is failing on hwasan build.
+        assumeFalse("crashdump is failing on hwasan build ", isHwasan());
         testTombstonesAreNotGeneratedIfNotExportedUponUserspaceCrash(false);
     }
 
@@ -555,6 +561,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     public void testTombstonesAreNotGeneratedIfNotExportedUponUserspaceCrashOnPvm()
             throws Exception {
         assumeProtectedVmSupported();
+        // TODO(b/291867858): crashdump is failing on hwasan build.
+        assumeFalse("crashdump is failing on hwasan build ", isHwasan());
         testTombstonesAreNotGeneratedIfNotExportedUponUserspaceCrash(true);
     }
 
@@ -573,6 +581,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     private void testTombstonesAreGeneratedUponKernelCrash(boolean protectedVm) throws Exception {
         assumeFalse("Cuttlefish is not supported", isCuttlefish());
         assumeFalse("Skipping test because ramdump is disabled on user build", isUserBuild());
+
         assertThat(
                         isTombstoneGeneratedWithCmd(
                                 protectedVm,
@@ -587,12 +596,16 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @Test
     public void testTombstonesAreGeneratedUponKernelCrashOnNonPvm() throws Exception {
         assumeNonProtectedVmSupported();
+        // TODO(b/291867858): crashdump is failing on hwasan build.
+        assumeFalse("crashdump is failing on hwasan build ", isHwasan());
         testTombstonesAreGeneratedUponKernelCrash(/* protectedVm=*/ false);
     }
 
     @Test
     public void testTombstonesAreGeneratedUponKernelCrashOnPvm() throws Exception {
         assumeProtectedVmSupported();
+        // TODO(b/291867858): crashdump is failing on hwasan build.
+        assumeFalse("crashdump is failing on hwasan build ", isHwasan());
         testTombstonesAreGeneratedUponKernelCrash(/* protectedVm=*/ true);
     }
 
@@ -636,6 +649,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @Test
     public void testTombstonesAreGeneratedWithCrashPayloadOnPvm() throws Exception {
         assumeProtectedVmSupported();
+        // TODO(b/291867858): crashdump is failing on hwasan build.
+        assumeFalse("crashdump is failing on hwasan build ", isHwasan());
         assertThat(
                         isTombstoneGeneratedWithCrashPayload(
                                 /*protectedVm=*/ true, /*debuggable=*/ true))
@@ -645,6 +660,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @Test
     public void testTombstonesAreGeneratedWithCrashPayloadOnNonPvm() throws Exception {
         assumeNonProtectedVmSupported();
+        // TODO(b/291867858): crashdump is failing on hwasan build.
+        assumeFalse("crashdump is failing on hwasan build ", isHwasan());
         assertThat(
                         isTombstoneGeneratedWithCrashPayload(
                                 /*protectedVm=*/ false, /*debuggable=*/ true))
@@ -655,6 +672,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     public void testTombstonesAreNotGeneratedWithCrashPayloadWhenNonDebuggableOnPvm()
             throws Exception {
         assumeProtectedVmSupported();
+        // TODO(b/291867858): crashdump is failing on hwasan build.
+        assumeFalse("crashdump is failing on hwasan build ", isHwasan());
         assertThat(
                         isTombstoneGeneratedWithCrashPayload(
                                 /*protectedVm=*/ true, /*debuggable=*/ false))
@@ -665,6 +684,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     public void testTombstonesAreNotGeneratedWithCrashPayloadWhenNonDebuggableOnNonPvm()
             throws Exception {
         assumeNonProtectedVmSupported();
+        // TODO(b/291867858): crashdump is failing on hwasan build.
+        assumeFalse("crashdump is failing on hwasan build ", isHwasan());
         assertThat(
                         isTombstoneGeneratedWithCrashPayload(
                                 /*protectedVm=*/ false, /*debuggable=*/ false))
@@ -680,6 +701,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @Test
     public void testTombstonesAreGeneratedWithCrashConfigOnPvm() throws Exception {
         assumeProtectedVmSupported();
+        // TODO(b/291867858): crashdump is failing on hwasan build.
+        assumeFalse("crashdump is failing on hwasan build ", isHwasan());
         assertThat(isTombstoneGeneratedWithCrashConfig(/*protectedVm=*/ true, /*debuggable=*/ true))
                 .isTrue();
     }
@@ -687,6 +710,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @Test
     public void testTombstonesAreGeneratedWithCrashConfigOnNonPvm() throws Exception {
         assumeNonProtectedVmSupported();
+        // TODO(b/291867858): crashdump is failing on hwasan build.
+        assumeFalse("crashdump is failing on hwasan build ", isHwasan());
         assertThat(
                         isTombstoneGeneratedWithCrashConfig(
                                 /*protectedVm=*/ false, /*debuggable=*/ true))
@@ -697,6 +722,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     public void testTombstonesAreNotGeneratedWithCrashConfigWhenNonDebuggableOnPvm()
             throws Exception {
         assumeProtectedVmSupported();
+        // TODO(b/291867858): crashdump is failing on hwasan build.
+        assumeFalse("crashdump is failing on hwasan build ", isHwasan());
         assertThat(
                         isTombstoneGeneratedWithCrashConfig(
                                 /*protectedVm=*/ true, /*debuggable=*/ false))
@@ -707,6 +734,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     public void testTombstonesAreNotGeneratedWithCrashConfigWhenNonDebuggableOnNonPvm()
             throws Exception {
         assumeNonProtectedVmSupported();
+        // TODO(b/291867858): crashdump is failing on hwasan build.
+        assumeFalse("crashdump is failing on hwasan build ", isHwasan());
         assertThat(
                         isTombstoneGeneratedWithCrashConfig(
                                 /*protectedVm=*/ false, /*debuggable=*/ false))
