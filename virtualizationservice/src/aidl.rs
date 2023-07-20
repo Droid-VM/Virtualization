@@ -23,6 +23,7 @@ use android_system_virtualizationservice::{
     aidl::android::system::virtualizationservice::VirtualMachineDebugInfo::VirtualMachineDebugInfo,
     binder::ParcelFileDescriptor,
 };
+use android_system_virtualizationservice::binder::ParcelFileDescriptor;
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::{
     AtomVmBooted::AtomVmBooted,
     AtomVmCreationRequested::AtomVmCreationRequested,
@@ -181,6 +182,23 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
             node: "/sys/bus/platform/devices/16d00000.eh".to_owned(),
         }])
     }
+
+    fn bindDevicesToVfioDriver(
+        &self,
+        devices: &[String],
+    ) -> binder::Result<Option<ParcelFileDescriptor>> {
+        check_assign_devices_to_virtual_machine()?;
+
+        devices.iter().unique().map(bind_devices).collect::<Result<_, _>>()?;
+
+        // TODO(b/278008182): create a file descriptor containing DTBO for devices.
+        Ok(None)
+    }
+}
+
+fn bind_device(_device: &String) -> binder::Result<()> {
+    // TODO(b/278008182): unbind driver and bind to VFIO
+    Ok(())
 }
 
 #[derive(Debug, Default)]
