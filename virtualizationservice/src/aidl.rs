@@ -33,15 +33,16 @@ use android_system_virtualizationservice_internal::aidl::android::system::virtua
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::VM_TOMBSTONES_SERVICE_PORT;
 use anyhow::{anyhow, ensure, Context, Result};
 use binder::{self, BinderFeatures, ExceptionCode, Interface, LazyServiceGuard, Status, Strong};
+use itertools::Itertools;
 use libc::VMADDR_CID_HOST;
 use log::{error, info, warn};
 use rustutils::system_properties;
 use std::collections::HashMap;
-use std::fs::{create_dir, remove_dir_all, set_permissions, Permissions};
+use std::fs::{canonicalize, create_dir, remove_dir_all, set_permissions, Permissions};
 use std::io::{Read, Write};
 use std::os::unix::fs::PermissionsExt;
 use std::os::unix::raw::{pid_t, uid_t};
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex, Weak};
 use tombstoned_client::{DebuggerdDumpType, TombstonedConnection};
 use vsock::{VsockListener, VsockStream};
@@ -181,6 +182,55 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
             node: "/sys/bus/platform/devices/16d00000.eh".to_owned(),
         }])
     }
+
+    fn bindDevicesToVfioDriver(
+        &self,
+        devices: &[String],
+    ) -> binder::Result<Option<ParcelFileDescriptor>> {
+        check_use_custom_virtual_machine()?;
+
+        devices.iter().unique().try_for_each(|x| bind_device(x))?;
+
+        // TODO(b/278008182): create a file descriptor containing DTBO for devices.
+        Ok(None)
+    }
+}
+
+fn bind_device(device: &str) -> binder::Result<()> {
+    const SYSFS_PLATFORM_DEVICES: &str = "/sys/devices/platform/";
+    const VFIO_PLATFORM_DRIVER: &str = "/sys/bus/platform/drivers/vfio-platform";
+
+    // Check platform device exists
+    let dev_sysfs_path = canonicalize(device).map_err(|e| {
+        Status::new_exception_str(
+            ExceptionCode::SERVICE_SPECIFIC,
+            Some(format!("can't canonicalize: {e:?}")),
+        )
+    })?;
+    if !dev_sysfs_path.as_path().starts_with(SYSFS_PLATFORM_DEVICES) {
+        return Err(Status::new_exception_str(
+            ExceptionCode::ILLEGAL_ARGUMENT,
+            Some(format!("{device} is not a platform device")),
+        ));
+    }
+
+    // Check platform device is bound to VFIO driver
+    let dev_driver_path = canonicalize(dev_sysfs_path.as_path().join("driver")).map_err(|e| {
+        Status::new_exception_str(
+            ExceptionCode::SERVICE_SPECIFIC,
+            Some(format!("can't canonicalize: {e:?}")),
+        )
+    })?;
+    if dev_driver_path != Path::new(VFIO_PLATFORM_DRIVER) {
+        // TODO(b/278008182): unbind driver and bind to VFIO
+        return Err(Status::new_exception_str(
+            ExceptionCode::UNSUPPORTED_OPERATION,
+            Some("not implemented".to_owned()),
+        ));
+    }
+
+    // already bound to VFIO driver
+    Ok(())
 }
 
 #[derive(Debug, Default)]
