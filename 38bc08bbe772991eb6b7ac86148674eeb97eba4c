@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae24e037_078d7ceb",
+        "filename": "virtualizationmanager/src/payload.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-20T15:48:43Z",
+      "side": 1,
+      "message": "This seems redundant? If it doesn\u0027t start with \"/system\" then it definitely doesn\u0027t start with \"/system_ext\".\n\n(If you want to generalize, have an array of allowed prefixes \u0026 iterate?)",
+      "range": {
+        "startLine": 385,
+        "startChar": 7,
+        "endLine": 385,
+        "endChar": 65
+      },
+      "revId": "38bc08bbe772991eb6b7ac86148674eeb97eba4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e120f86_2cb87b3e",
+        "filename": "virtualizationmanager/src/payload.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-20T15:48:43Z",
+      "side": 1,
+      "message": "1 ?",
+      "range": {
+        "startLine": 657,
+        "startChar": 23,
+        "endLine": 657,
+        "endChar": 24
+      },
+      "revId": "38bc08bbe772991eb6b7ac86148674eeb97eba4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d72229b_def19d91",
+        "filename": "virtualizationmanager/src/payload.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-20T15:48:43Z",
+      "side": 1,
+      "message": "Add preinstalled_path(\"/vendor\"), since that\u0027s the case we care about?\n(Or was that the missing \"// 1\" ?)",
+      "range": {
+        "startLine": 659,
+        "startChar": 0,
+        "endLine": 661,
+        "endChar": 40
+      },
+      "revId": "38bc08bbe772991eb6b7ac86148674eeb97eba4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5035208d_39889bde",
+        "filename": "virtualizationmanager/src/payload.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-20T15:48:43Z",
+      "side": 1,
+      "message": "Separate test method?",
+      "range": {
+        "startLine": 673,
+        "startChar": 0,
+        "endLine": 685,
+        "endChar": 10
+      },
+      "revId": "38bc08bbe772991eb6b7ac86148674eeb97eba4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
