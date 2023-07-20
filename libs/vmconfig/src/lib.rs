@@ -57,6 +57,9 @@ pub struct VmConfig {
     /// Version or range of versions of the virtual platform that this config is compatible with.
     /// The format follows SemVer (https://semver.org).
     pub platform_version: VersionReq,
+    /// SysFS paths of devices assigned to the VM.
+    #[serde(default)]
+    pub devices: Vec<String>,
 }
 
 impl VmConfig {
@@ -103,6 +106,7 @@ impl VmConfig {
             protectedVm: self.protected,
             memoryMib: memory_mib,
             platformVersion: self.platform_version.to_string(),
+            devices: self.devices.clone(),
             ..Default::default()
         })
     }
