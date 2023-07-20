@@ -135,6 +135,7 @@ impl ComposClient {
                 taskProfiles: parameters.task_profiles.clone(),
                 ..Default::default()
             }),
+            devices: vec![],
         });
 
         // Let logs go to logcat.

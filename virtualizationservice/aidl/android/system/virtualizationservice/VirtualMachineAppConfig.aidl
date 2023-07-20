@@ -15,6 +15,7 @@
  */
 package android.system.virtualizationservice;
 
+import android.system.virtualizationservice.AssignableDevice;
 import android.system.virtualizationservice.CpuTopology;
 import android.system.virtualizationservice.VirtualMachinePayloadConfig;
 
@@ -112,4 +113,6 @@ parcelable VirtualMachineAppConfig {
 
     /** Configuration parameters guarded by android.permission.USE_CUSTOM_VIRTUAL_MACHINE */
     @nullable CustomConfig customConfig;
+
+    AssignableDevice[] devices;
 }
