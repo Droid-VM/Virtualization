@@ -113,6 +113,7 @@ fn boot_rialto_successfully(rialto_path: &str, protected_vm: bool) -> Result<(),
         platformVersion: "~1.0".to_string(),
         taskProfiles: vec![],
         gdbPort: 0, // No gdb
+        devices: vec![],
     });
     let vm = VmInstance::create(
         service.as_ref(),
