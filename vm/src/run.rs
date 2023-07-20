@@ -42,6 +42,14 @@ use vmclient::{ErrorCode, VmInstance};
 use vmconfig::{open_parcel_file, VmConfig};
 use zip::ZipArchive;
 
+fn path_to_string(path: &Path) -> Result<String, Error> {
+    if let Some(s) = path.to_str() {
+        Ok(s.to_owned())
+    } else {
+        bail!("Failed to convert path {path:?} to String")
+    }
+}
+
 /// Run a VM from the given APK, idsig, and config.
 #[allow(clippy::too_many_arguments)]
 pub fn command_run_app(
@@ -66,6 +74,7 @@ pub fn command_run_app(
     gdb: Option<NonZeroU16>,
     kernel: Option<&Path>,
     vendor: Option<&Path>,
+    devices: Vec<PathBuf>,
 ) -> Result<(), Error> {
     let apk_file = File::open(apk).context("Failed to open APK file")?;
 
@@ -148,6 +157,7 @@ pub fn command_run_app(
         gdbPort: gdb.map(u16::from).unwrap_or(0) as i32, // 0 means no gdb
         taskProfiles: task_profiles,
         vendorImage: vendor,
+        devices: devices.iter().map(|x| path_to_string(x)).collect::<Result<_, _>>()?,
     };
 
     let config = VirtualMachineConfig::AppConfig(VirtualMachineAppConfig {
@@ -208,6 +218,7 @@ pub fn command_run_microdroid(
     gdb: Option<NonZeroU16>,
     kernel: Option<&Path>,
     vendor: Option<&Path>,
+    devices: Vec<PathBuf>,
 ) -> Result<(), Error> {
     let apk = find_empty_payload_apk_path()?;
     println!("found path {}", apk.display());
@@ -242,6 +253,7 @@ pub fn command_run_microdroid(
         gdb,
         kernel,
         vendor,
+        devices,
     )
 }
 
