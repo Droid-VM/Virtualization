@@ -57,6 +57,17 @@ pub struct VmConfig {
     /// Version or range of versions of the virtual platform that this config is compatible with.
     /// The format follows SemVer (https://semver.org).
     pub platform_version: VersionReq,
+    /// SysFS paths of devices assigned to the VM.
+    #[serde(default)]
+    pub devices: Vec<PathBuf>,
+}
+
+fn path_to_string(path: &Path) -> Result<String, Error> {
+    if let Some(s) = path.to_str() {
+        Ok(s.to_owned())
+    } else {
+        bail!("Failed to convert path {path:?} to String")
+    }
 }
 
 impl VmConfig {
@@ -103,6 +114,7 @@ impl VmConfig {
             protectedVm: self.protected,
             memoryMib: memory_mib,
             platformVersion: self.platform_version.to_string(),
+            devices: self.devices.iter().map(|x| path_to_string(x)).collect::<Result<_>>()?,
             ..Default::default()
         })
     }
