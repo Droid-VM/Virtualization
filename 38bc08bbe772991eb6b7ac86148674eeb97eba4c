@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c11e584_efe25a8a",
+        "filename": "virtualizationmanager/src/payload.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-07-20T20:31:33Z",
+      "side": 1,
+      "message": "pre_installed path is PathBuf, which has a different semantics of starts_with than strings, it basically compares pieces of the path, so /system_ext/foo/bar doesn\u0027t start with /system.\n\nSwitched to array of prefixes",
+      "parentUuid": "ae24e037_078d7ceb",
+      "range": {
+        "startLine": 385,
+        "startChar": 7,
+        "endLine": 385,
+        "endChar": 65
+      },
+      "revId": "38bc08bbe772991eb6b7ac86148674eeb97eba4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e120f86_2cb87b3e",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-07-20T15:48:43Z",
       "side": 1,
       "message": "1 ?",
+      "range": {
+        "startLine": 657,
+        "startChar": 23,
+        "endLine": 657,
+        "endChar": 24
+      },
+      "revId": "38bc08bbe772991eb6b7ac86148674eeb97eba4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2e631dc_003a8981",
+        "filename": "virtualizationmanager/src/payload.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-07-20T20:31:33Z",
+      "side": 1,
+      "message": "Oops, done",
+      "parentUuid": "1e120f86_2cb87b3e",
       "range": {
         "startLine": 657,
         "startChar": 23,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a2ee042_369f9877",
+        "filename": "virtualizationmanager/src/payload.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-07-20T20:31:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d72229b_def19d91",
+      "range": {
+        "startLine": 659,
+        "startChar": 0,
+        "endLine": 661,
+        "endChar": 40
+      },
+      "revId": "38bc08bbe772991eb6b7ac86148674eeb97eba4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5035208d_39889bde",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-07-20T15:48:43Z",
       "side": 1,
       "message": "Separate test method?",
+      "range": {
+        "startLine": 673,
+        "startChar": 0,
+        "endLine": 685,
+        "endChar": 10
+      },
+      "revId": "38bc08bbe772991eb6b7ac86148674eeb97eba4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff817847_21e13a61",
+        "filename": "virtualizationmanager/src/payload.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-07-20T20:31:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5035208d_39889bde",
       "range": {
         "startLine": 673,
         "startChar": 0,
