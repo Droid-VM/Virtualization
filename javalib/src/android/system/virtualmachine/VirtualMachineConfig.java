@@ -518,6 +518,7 @@ public final class VirtualMachineConfig {
             VirtualMachineAppConfig.CustomConfig customConfig =
                     new VirtualMachineAppConfig.CustomConfig();
             customConfig.taskProfiles = new String[0];
+            customConfig.devices = new String[0];
             try {
                 customConfig.vendorImage =
                         ParcelFileDescriptor.open(mVendorDiskImage, MODE_READ_ONLY);
