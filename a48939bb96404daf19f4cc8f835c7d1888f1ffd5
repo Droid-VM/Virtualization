@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "db328746_a2c768af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-07-20T16:20:09Z",
+      "side": 1,
+      "message": "uber nit: it\u0027s an acronym - \"HWASAN\" (here and everywhere else)",
+      "range": {
+        "startLine": 7,
+        "startChar": 37,
+        "endLine": 7,
+        "endChar": 43
+      },
+      "revId": "a48939bb96404daf19f4cc8f835c7d1888f1ffd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "f2e16cd1_0648acf9",
@@ -14,6 +37,69 @@
       "writtenOn": "2023-07-20T15:22:49Z",
       "side": 1,
       "message": "Tested on panther (with the hwasan build) to ensure these tests are indeed skipped",
+      "revId": "a48939bb96404daf19f4cc8f835c7d1888f1ffd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "623276bb_ec0ab3fd",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-07-20T16:20:09Z",
+      "side": 1,
+      "message": "remove?",
+      "revId": "a48939bb96404daf19f4cc8f835c7d1888f1ffd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b437f1ac_f7ef15bd",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-07-20T16:20:09Z",
+      "side": 1,
+      "message": "These aren\u0027t failing AFAIK - crashdump (dumping RAM after a reboot) works fine after I disabled HWASAN on it. Let\u0027s keep these running. Only the userspace ones need to be skipped.",
+      "range": {
+        "startLine": 597,
+        "startChar": 16,
+        "endLine": 597,
+        "endChar": 65
+      },
+      "revId": "a48939bb96404daf19f4cc8f835c7d1888f1ffd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4322e76_ebeb3bdd",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-07-20T16:20:09Z",
+      "side": 1,
+      "message": "This is not the problem here - the problem is that tombstones aren\u0027t generated on HWASAN Microdroid",
+      "range": {
+        "startLine": 653,
+        "startChar": 21,
+        "endLine": 653,
+        "endChar": 57
+      },
       "revId": "a48939bb96404daf19f4cc8f835c7d1888f1ffd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
