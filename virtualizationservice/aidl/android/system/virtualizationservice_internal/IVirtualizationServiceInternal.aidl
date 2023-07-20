@@ -15,10 +15,12 @@
  */
 package android.system.virtualizationservice_internal;
 
+import android.system.virtualizationservice.AssignableDevice;
 import android.system.virtualizationservice.VirtualMachineDebugInfo;
 import android.system.virtualizationservice_internal.AtomVmBooted;
 import android.system.virtualizationservice_internal.AtomVmCreationRequested;
 import android.system.virtualizationservice_internal.AtomVmExited;
+import android.system.virtualizationservice_internal.BoundDevicesInfo;
 import android.system.virtualizationservice_internal.IGlobalVmContext;
 
 interface IVirtualizationServiceInternal {
@@ -64,4 +66,9 @@ interface IVirtualizationServiceInternal {
      * Get a list of assignable device types.
      */
     String[] getAssignableDeviceTypes();
+
+    /**
+     * Bind devices to vfio driver. Returns a list of corresponding sysfs nodes.
+     */
+    BoundDevicesInfo bindDevicesToVfioDriver(in AssignableDevice[] devices);
 }

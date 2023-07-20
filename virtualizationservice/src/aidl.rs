@@ -18,14 +18,16 @@ use crate::{get_calling_pid, get_calling_uid};
 use crate::atom::{forward_vm_booted_atom, forward_vm_creation_atom, forward_vm_exited_atom};
 use crate::rkpvm::request_certificate;
 use android_os_permissions_aidl::aidl::android::os::IPermissionController;
-use android_system_virtualizationservice::{
-    aidl::android::system::virtualizationservice::VirtualMachineDebugInfo::VirtualMachineDebugInfo,
-    binder::ParcelFileDescriptor,
+use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
+    AssignableDevice::AssignableDevice,
+    VirtualMachineDebugInfo::VirtualMachineDebugInfo,
 };
+use android_system_virtualizationservice::binder::ParcelFileDescriptor;
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::{
     AtomVmBooted::AtomVmBooted,
     AtomVmCreationRequested::AtomVmCreationRequested,
     AtomVmExited::AtomVmExited,
+    BoundDevicesInfo::BoundDevicesInfo,
     IGlobalVmContext::{BnGlobalVmContext, IGlobalVmContext},
     IVirtualizationServiceInternal::IVirtualizationServiceInternal,
 };
@@ -177,6 +179,39 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
         // TODO(b/291191362): read VM DTBO to find assignable devices.
         Ok(vec!["eh".to_string()])
     }
+
+    fn bindDevicesToVfioDriver(
+        &self,
+        devices: &[AssignableDevice],
+    ) -> binder::Result<BoundDevicesInfo> {
+        check_assign_devices_to_virtual_machine()?;
+
+        // TODO(b/278008182): we shouldn't allow duplicates here.
+        let sysfs_nodes = devices.iter().map(bind_device).collect::<Result<_, _>>()?;
+
+        // TODO(b/278008182): create a file descriptor for sysfs_nodes.
+        Ok(BoundDevicesInfo { sysfsNodes: sysfs_nodes, dtbo: None })
+    }
+}
+
+// Returns a sysfs node
+fn bind_device(device: &AssignableDevice) -> binder::Result<String> {
+    let sysfs_path = match device {
+        AssignableDevice::Node(x) => x,
+        AssignableDevice::Type(x) => {
+            if x == "eh" {
+                "/sys/bus/platform/devices/16d00000.eh"
+            } else {
+                return Err(Status::new_exception_str(
+                    ExceptionCode::SERVICE_SPECIFIC,
+                    Some("no such device"),
+                ));
+            }
+        }
+    };
+
+    // TODO(b/278008182): unbind driver and bind to VFIO
+    Ok(sysfs_path.to_owned())
 }
 
 #[derive(Debug, Default)]
