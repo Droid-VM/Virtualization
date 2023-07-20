@@ -40,5 +40,11 @@
   <permission android:name="android.permission.DEBUG_VIRTUAL_MACHINE"
       android:protectionLevel="signature" />
 
+  <!-- @hide Allows an application to assign devices to Virtual Machines.
+       <p>Not for use by third-party applications.
+  -->
+  <permission android:name="android.permission.ASSIGN_DEVICES_TO_VIRTUAL_MACHINE"
+      android:protectionLevel="signature|development" />
+
   <application android:hasCode="false" />
 </manifest>

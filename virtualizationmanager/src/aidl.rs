@@ -270,6 +270,12 @@ impl IVirtualizationService for VirtualizationService {
         // Delegate to the global service, including checking the debug permission.
         GLOBAL_SERVICE.debugListVms()
     }
+
+    /// Get a list of assignable device types.
+    fn getAssignableDeviceTypes(&self) -> binder::Result<Vec<String>> {
+        // Delegate to the global service, including checking the device assignment permission.
+        GLOBAL_SERVICE.getAssignableDeviceTypes()
+    }
 }
 
 impl VirtualizationService {

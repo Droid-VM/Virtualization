@@ -170,6 +170,13 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
             Status::new_exception_str(ExceptionCode::SERVICE_SPECIFIC, Some(e.to_string()))
         })
     }
+
+    fn getAssignableDeviceTypes(&self) -> binder::Result<Vec<String>> {
+        check_assign_devices_to_virtual_machine()?;
+
+        // TODO(b/291191362): read VM DTBO to find assignable devices.
+        Ok(vec!["eh".to_string()])
+    }
 }
 
 #[derive(Debug, Default)]
@@ -392,4 +399,9 @@ fn check_debug_access() -> binder::Result<()> {
 /// Check whether the caller of the current Binder method is allowed to manage VMs
 fn check_manage_access() -> binder::Result<()> {
     check_permission("android.permission.MANAGE_VIRTUAL_MACHINE")
+}
+
+/// Check whether the caller of the current Binder method is allowed to assign devices to VMs
+fn check_assign_devices_to_virtual_machine() -> binder::Result<()> {
+    check_permission("android.permission.ASSIGN_DEVICES_TO_VIRTUAL_MACHINE")
 }

@@ -59,4 +59,9 @@ interface IVirtualizationServiceInternal {
      * @return the X.509 encoded certificate.
      */
     byte[] requestCertificate(in byte[] csr, in ParcelFileDescriptor instanceImgFd);
+
+    /**
+     * Get a list of assignable device types.
+     */
+    String[] getAssignableDeviceTypes();
 }

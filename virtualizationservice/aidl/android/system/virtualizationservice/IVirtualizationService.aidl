@@ -55,4 +55,9 @@ interface IVirtualizationService {
      * and as such is only permitted from the shell user.
      */
     VirtualMachineDebugInfo[] debugListVms();
+
+    /**
+     * Get a list of assignable device types.
+     */
+    String[] getAssignableDeviceTypes();
 }
