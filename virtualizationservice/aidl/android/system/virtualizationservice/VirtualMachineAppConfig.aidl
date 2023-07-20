@@ -112,4 +112,7 @@ parcelable VirtualMachineAppConfig {
 
     /** Configuration parameters guarded by android.permission.USE_CUSTOM_VIRTUAL_MACHINE */
     @nullable CustomConfig customConfig;
+
+    /** List of SysFS nodes of devices to be assigned */
+    String[] devices;
 }
