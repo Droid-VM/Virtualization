@@ -50,6 +50,24 @@
       "message": "Isn\u0027t `try_shared_alloc` still going to fail when it\u0027s passed a layout with zero size?",
       "revId": "e6a37aaefb0258af0d8142c7e21d53ddcece2991",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5088699e_a6466375",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-20T07:37:48Z",
+      "side": 1,
+      "message": "No it doesn\u0027t fail as the vsock tests added in this cl pass. With the current socket driver code, the empty buffer is added at connection and shutdown.",
+      "parentUuid": "27323881_650e4f14",
+      "revId": "e6a37aaefb0258af0d8142c7e21d53ddcece2991",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
