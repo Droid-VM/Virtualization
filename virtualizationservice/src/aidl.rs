@@ -181,6 +181,23 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
             node: "/sys/bus/platform/devices/16d00000.eh".to_owned(),
         }])
     }
+
+    fn bindDevicesToVfioDriver(
+        &self,
+        devices: &[String],
+    ) -> binder::Result<Option<ParcelFileDescriptor>> {
+        check_assign_devices_to_virtual_machine()?;
+
+        devices.iter().unique().try_for_each(|x| bind_device(x))?;
+
+        // TODO(b/278008182): create a file descriptor containing DTBO for devices.
+        Ok(None)
+    }
+}
+
+fn bind_device(_device: &str) -> binder::Result<()> {
+    // TODO(b/278008182): unbind driver and bind to VFIO
+    Ok(())
 }
 
 #[derive(Debug, Default)]
