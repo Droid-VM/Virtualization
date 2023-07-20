@@ -65,4 +65,9 @@ interface IVirtualizationServiceInternal {
      * Get a list of assignable device types.
      */
     AssignableDevice[] getAssignableDevices();
+
+    /**
+     * Bind devices to vfio driver. Returns a file descriptor for DTBO.
+     */
+    @nullable ParcelFileDescriptor bindDevicesToVfioDriver(in String[] devices);
 }

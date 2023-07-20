@@ -33,6 +33,7 @@ use android_system_virtualizationservice_internal::aidl::android::system::virtua
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::VM_TOMBSTONES_SERVICE_PORT;
 use anyhow::{anyhow, ensure, Context, Result};
 use binder::{self, BinderFeatures, ExceptionCode, Interface, LazyServiceGuard, Status, Strong};
+use itertools::Itertools;
 use libc::VMADDR_CID_HOST;
 use log::{error, info, warn};
 use rustutils::system_properties;
@@ -181,6 +182,23 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
             node: "/sys/bus/platform/devices/16d00000.eh".to_owned(),
         }])
     }
+
+    fn bindDevicesToVfioDriver(
+        &self,
+        devices: &[String],
+    ) -> binder::Result<Option<ParcelFileDescriptor>> {
+        check_assign_devices_to_virtual_machine()?;
+
+        devices.iter().unique().try_for_each(|x| bind_device(x))?;
+
+        // TODO(b/278008182): create a file descriptor containing DTBO for devices.
+        Ok(None)
+    }
+}
+
+fn bind_device(_device: &str) -> binder::Result<()> {
+    // TODO(b/278008182): unbind driver and bind to VFIO
+    Ok(())
 }
 
 #[derive(Debug, Default)]
