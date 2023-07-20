@@ -66,6 +66,7 @@ pub fn command_run_app(
     gdb: Option<NonZeroU16>,
     kernel: Option<&Path>,
     vendor: Option<&Path>,
+    devices: Vec<String>,
 ) -> Result<(), Error> {
     let apk_file = File::open(apk).context("Failed to open APK file")?;
 
@@ -163,6 +164,7 @@ pub fn command_run_app(
         memoryMib: mem.unwrap_or(0) as i32, // 0 means use the VM default
         cpuTopology: cpu_topology,
         customConfig: Some(custom_config),
+        devices,
     });
     run(service, &config, &payload_config_str, console_out_path, console_in_path, log_path)
 }
@@ -208,6 +210,7 @@ pub fn command_run_microdroid(
     gdb: Option<NonZeroU16>,
     kernel: Option<&Path>,
     vendor: Option<&Path>,
+    devices: Vec<String>,
 ) -> Result<(), Error> {
     let apk = find_empty_payload_apk_path()?;
     println!("found path {}", apk.display());
@@ -242,6 +245,7 @@ pub fn command_run_microdroid(
         gdb,
         kernel,
         vendor,
+        devices,
     )
 }
 
