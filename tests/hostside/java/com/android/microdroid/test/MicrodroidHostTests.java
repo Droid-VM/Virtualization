@@ -559,6 +559,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     public void testTombstonesAreGeneratedUponUserspaceCrash() throws Exception {
+        // TODO(b/291867858): crashdump is failing on hwasan build.
+        assumeFalse("crashdump is failing on hwasan build ", isHwasan());
         assertThat(
                         isTombstoneGeneratedWithCmd(
                                 false,
@@ -571,6 +573,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     public void testTombstonesAreNotGeneratedIfNotExportedUponUserspaceCrash() throws Exception {
+        // TODO(b/291867858): crashdump is failing on hwasan build.
+        assumeFalse("crashdump is failing on hwasan build ", isHwasan());
         assertThat(
                         isTombstoneGeneratedWithCmd(
                                 false,
@@ -584,6 +588,9 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     private void testTombstonesAreGeneratedUponKernelCrash(boolean protectedVm) throws Exception {
         assumeFalse("Cuttlefish is not supported", isCuttlefish());
         assumeFalse("Skipping test because ramdump is disabled on user build", isUserBuild());
+        // TODO(b/291867858): crashdump is failing on hwasan build.
+        assumeFalse("crashdump is failing on hwasan build ", isHwasan());
+
         assertThat(
                         isTombstoneGeneratedWithCmd(
                                 protectedVm,
@@ -593,6 +600,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                                 ">",
                                 "/proc/sysrq-trigger"))
                 .isTrue();
+
     }
 
     @Test
