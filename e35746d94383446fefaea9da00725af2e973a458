@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e3d26283_3250176a",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice_internal/BoundDevicesInfo.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-21T05:03:52Z",
+      "side": 1,
+      "message": "Question: Can it be `null` or is it temporal solution? If it\u0027s latter, then let\u0027s add TODO",
+      "range": {
+        "startLine": 21,
+        "startChar": 5,
+        "endLine": 21,
+        "endChar": 13
+      },
+      "revId": "e35746d94383446fefaea9da00725af2e973a458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1a5c07a_8b938645",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-21T05:03:52Z",
+      "side": 1,
+      "message": "`get_device_node`? comment, function name, and code doesn\u0027t match.",
+      "range": {
+        "startLine": 198,
+        "startChar": 3,
+        "endLine": 198,
+        "endChar": 14
+      },
+      "revId": "e35746d94383446fefaea9da00725af2e973a458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1cbc06ae_146a82bd",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 1
