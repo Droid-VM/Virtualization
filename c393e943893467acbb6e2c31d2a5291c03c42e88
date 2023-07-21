@@ -89,6 +89,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10b23fea_41f1d0dc",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-07-21T09:21:18Z",
+      "side": 1,
+      "message": "Tiny suggestion: renaming like `dtbo` or `devices_dtbo`? I thought that dtbo itself is not strongly related to the vfio. Ignore this if I\u0027m wrong.",
+      "range": {
+        "startLine": 463,
+        "startChar": 12,
+        "endLine": 463,
+        "endChar": 21
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "74320256_34521f9c",
         "filename": "virtualizationmanager/src/crosvm.rs",
         "patchSetId": 2
@@ -146,6 +169,30 @@
       "writtenOn": "2023-07-21T04:46:27Z",
       "side": 1,
       "message": "Where is this?",
+      "range": {
+        "startLine": 18,
+        "startChar": 44,
+        "endLine": 18,
+        "endChar": 60
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "350d8167_8dd35e02",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineRawConfig.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-07-21T09:21:18Z",
+      "side": 1,
+      "message": "It\u0027s in previous change.\n\nhttps://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2666697/1/virtualizationservice/aidl/android/system/virtualizationservice/AssignableDevice.aidl",
+      "parentUuid": "c7169398_41825f1c",
       "range": {
         "startLine": 18,
         "startChar": 44,
@@ -243,6 +290,29 @@
         "startChar": 4,
         "endLine": 236,
         "endChar": 8
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "078372fe_503a2d4e",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-07-21T09:21:18Z",
+      "side": 1,
+      "message": "QQ: Do we support device assignment in command_run?",
+      "range": {
+        "startLine": 380,
+        "startChar": 0,
+        "endLine": 380,
+        "endChar": 98
       },
       "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
