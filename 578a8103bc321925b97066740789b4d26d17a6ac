@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d751e09a_3c15d081",
+        "filename": "javalib/AndroidManifest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-21T02:27:45Z",
+      "side": 1,
+      "message": "`signature|privileged|development` to match with `MANAGE_VIRTUAL_MACHINE`?",
+      "range": {
+        "startLine": 47,
+        "startChar": 31,
+        "endLine": 47,
+        "endChar": 52
+      },
+      "revId": "578a8103bc321925b97066740789b4d26d17a6ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2836715a_98fd81c5",
         "filename": "virtualizationmanager/src/aidl.rs",
         "patchSetId": 1
@@ -37,6 +60,30 @@
       "writtenOn": "2023-07-21T00:57:32Z",
       "side": 1,
       "message": "Where the string `eh` come from? Is it from compatible property of specific node in DT?",
+      "range": {
+        "startLine": 178,
+        "startChar": 16,
+        "endLine": 178,
+        "endChar": 20
+      },
+      "revId": "578a8103bc321925b97066740789b4d26d17a6ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "780e1d51_08de182a",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-21T02:27:45Z",
+      "side": 1,
+      "message": "That\u0027s the missing detail from jiyong\u0027s doc, and I think that it\u0027s sufficient for now.\n\nJiyong originally proposed to include `devicekind\u003d\"eh\"` in the `VM DTBO`, but it\u0027s now removed without explanation.\n\nI assumes that it could be one of follows:\n\n- Option 1) Just return list of nodes in the VM DTBO.\n  - Pros: Easy and Simple\n  - Cons: How to distinguish dummy node (e.g. how to exclude `pv IOMMU`?)\n- Option 2) Expect vendors to add a config file for the mapping from device type and `VM node name`\n  - Pros: Straitforward when getting list of device type\n  - Cons: Bit more complex because we need to define config file format / location / ..",
+      "parentUuid": "274db5f2_231767b2",
       "range": {
         "startLine": 178,
         "startChar": 16,
