@@ -1,0 +1,251 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5444c307_5623c697",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-21T04:46:27Z",
+      "side": 1,
+      "message": "I\u0027m little confused about the types for the assignable devices.\n\nIn another CL for permission (aosp/2666696), you return `String` for assignable device type\u0027s identifier.\n\nHowever, this change allows to choose between node name and device type. What would be the unique identifier between two? What about only accept one of two, or translate as soon as possible?",
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ed86fb0_64ee9dcc",
+        "filename": "libs/vmconfig/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-21T04:46:27Z",
+      "side": 1,
+      "message": "What would be the uniq identifier of the assignable device?\n\nWould it be a `Node` (as in the params) or `Type` (as in the permission CL)?\nWould there be a use case where `Type` and `Node` can be mixed? If not, what about translate into another type when necessary?",
+      "range": {
+        "startLine": 170,
+        "startChar": 9,
+        "endLine": 170,
+        "endChar": 25
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d44b7432_afe1ee8c",
+        "filename": "libs/vmconfig/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-21T04:46:27Z",
+      "side": 1,
+      "message": "VM DTBO? VM DTBO would have host\u0027s device info, but opposite wouldn\u0027t happen.",
+      "range": {
+        "startLine": 171,
+        "startChar": 8,
+        "endLine": 171,
+        "endChar": 13
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7d19035_2926e3c7",
+        "filename": "libs/vmconfig/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-21T04:46:27Z",
+      "side": 1,
+      "message": "Let\u0027s drop \u0027like TPU\u0027 -- we wouldn\u0027t provide any predefined types, so example would only confuse readers.",
+      "range": {
+        "startLine": 173,
+        "startChar": 8,
+        "endLine": 173,
+        "endChar": 34
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74320256_34521f9c",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-21T04:46:27Z",
+      "side": 1,
+      "message": "`Node` or `Type`?",
+      "range": {
+        "startLine": 118,
+        "startChar": 26,
+        "endLine": 118,
+        "endChar": 32
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8205c51e_578d63c4",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-21T04:46:27Z",
+      "side": 1,
+      "message": "minor, you can ignore) TODO with bug number is preferred to track remaining work.",
+      "range": {
+        "startLine": 406,
+        "startChar": 11,
+        "endLine": 406,
+        "endChar": 15
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7169398_41825f1c",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineRawConfig.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-21T04:46:27Z",
+      "side": 1,
+      "message": "Where is this?",
+      "range": {
+        "startLine": 18,
+        "startChar": 44,
+        "endLine": 18,
+        "endChar": 60
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0451380f_ac4a2d23",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-21T04:46:27Z",
+      "side": 1,
+      "message": "VM DTBO",
+      "range": {
+        "startLine": 123,
+        "startChar": 12,
+        "endLine": 123,
+        "endChar": 17
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f38884c4_dc6276f7",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-21T04:46:27Z",
+      "side": 1,
+      "message": "\u0027Device types for assigning to VM\u0027?\n\nReasons:\n- We should overlay VM DTBO to host, so there would be no sysfs.\n- \u0027assign\u0027 to where?",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 33
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33ad6b5e_02ead548",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-21T04:46:27Z",
+      "side": 1,
+      "message": "VM DTBO",
+      "range": {
+        "startLine": 195,
+        "startChar": 12,
+        "endLine": 195,
+        "endChar": 17
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98a4ceb1_14bcc723",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-21T04:46:27Z",
+      "side": 1,
+      "message": "also add printing assignable devices?",
+      "range": {
+        "startLine": 236,
+        "startChar": 4,
+        "endLine": 236,
+        "endChar": 8
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
