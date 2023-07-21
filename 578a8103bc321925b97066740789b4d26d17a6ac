@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2836715a_98fd81c5",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1248,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-07-21T00:57:32Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by RustFormatter: Please reformat the following line(s) to:\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nPlease reformat the following line(s) to:\n\n                return Err(Status::new_service_specific_error_str(\n                    -1,\n                    Some(format!(\"cannot find a VM with CID {}\", cid)),\n                ));\n            };\n            let instance_img_path \u003d vm.temporary_directory.join(\"rkpvm_instance.img\");\n            let instance_img \u003d OpenOptions::new()",
+      "range": {
+        "startLine": 1242,
+        "startChar": 0,
+        "endLine": 1248,
+        "endChar": 0
+      },
+      "revId": "578a8103bc321925b97066740789b4d26d17a6ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "274db5f2_231767b2",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-07-21T00:57:32Z",
+      "side": 1,
+      "message": "Where the string `eh` come from? Is it from compatible property of specific node in DT?",
+      "range": {
+        "startLine": 178,
+        "startChar": 16,
+        "endLine": 178,
+        "endChar": 20
+      },
+      "revId": "578a8103bc321925b97066740789b4d26d17a6ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
