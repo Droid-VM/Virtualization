@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "143154ec_5b8841ee",
+        "filename": "virtualizationmanager/src/payload.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-21T08:17:48Z",
+      "side": 1,
+      "message": "\u003e PathBuf, which has a different semantics of starts_with than strings\n\nAha! That sounds rather useful.",
+      "parentUuid": "7c11e584_efe25a8a",
+      "range": {
+        "startLine": 385,
+        "startChar": 7,
+        "endLine": 385,
+        "endChar": 65
+      },
+      "revId": "38bc08bbe772991eb6b7ac86148674eeb97eba4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e120f86_2cb87b3e",
