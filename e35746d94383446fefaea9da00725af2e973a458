@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cbc06ae_146a82bd",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-07-21T03:00:43Z",
+      "side": 1,
+      "message": "Does `eh` device always have sysfs node as 16d00000.eh? Isn\u0027t it chipset specific? I think it needs a TODO comment at least for supporting other chipsets.",
+      "range": {
+        "startLine": 203,
+        "startChar": 43,
+        "endLine": 203,
+        "endChar": 54
+      },
+      "revId": "e35746d94383446fefaea9da00725af2e973a458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
