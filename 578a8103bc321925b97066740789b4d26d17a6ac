@@ -109,6 +109,30 @@
       },
       "revId": "578a8103bc321925b97066740789b4d26d17a6ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a28f1821_23148f7d",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-07-21T03:08:41Z",
+      "side": 1,
+      "message": "I prefer returning the list of nodes, maybe `VM node name` like `eh@16d00000`? In the following change inseob@ made, it seems more detailed information of the node(e.g. `16d00000`) is needed.\n\nhttps://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2666697/comment/1cbc06ae_146a82bd/",
+      "parentUuid": "780e1d51_08de182a",
+      "range": {
+        "startLine": 178,
+        "startChar": 16,
+        "endLine": 178,
+        "endChar": 20
+      },
+      "revId": "578a8103bc321925b97066740789b4d26d17a6ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
