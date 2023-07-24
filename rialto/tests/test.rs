@@ -24,6 +24,7 @@ use android_system_virtualizationservice::{
 };
 use anyhow::{anyhow, bail, Context, Error};
 use log::info;
+use service_vm_comm::{ByteChannel, MessageChannel};
 use std::fs::File;
 use std::io::{self, BufRead, BufReader, Read, Write};
 use std::os::unix::io::FromRawFd;
@@ -31,7 +32,7 @@ use std::panic;
 use std::thread;
 use std::time::Duration;
 use vmclient::{DeathReason, VmInstance};
-use vsock::{VsockListener, VMADDR_CID_HOST};
+use vsock::{VsockListener, VsockStream, VMADDR_CID_HOST};
 
 // TODO(b/291732060): Move the port numbers to the common library shared between the host
 // and rialto.
@@ -179,17 +180,41 @@ fn try_check_socket_connection(port: u32) -> Result<(), Error> {
     };
     info!("Accepted connection {:?}", vsock_stream);
 
-    let message = "Hello from host";
-    vsock_stream.write_all(message.as_bytes())?;
-    vsock_stream.flush()?;
+    vsock_stream.set_read_timeout(Some(Duration::from_millis(1_000)))?;
+    let mut byte_channel = HostByteChannel::new(&mut vsock_stream);
+    let mut message_channel = MessageChannel::new(&mut byte_channel);
+
+    let message = "Hello from host ".repeat(6);
+    const MAX_RECV_BUFFER_SIZE_BYTES: usize = 64;
+    assert!(message.len() > MAX_RECV_BUFFER_SIZE_BYTES);
+    message_channel.send_message(message.as_bytes())?;
     info!("Sent message: {:?}.", message);
 
-    let mut buffer = vec![0u8; 30];
-    vsock_stream.set_read_timeout(Some(Duration::from_millis(1_000)))?;
-    let len = vsock_stream.read(&mut buffer)?;
-
-    assert_eq!(message.len(), len);
-    buffer[..len].reverse();
-    assert_eq!(message.as_bytes(), &buffer[..len]);
+    let mut res = message_channel.recv_message()?;
+    assert_eq!(message.len(), res.len());
+    res.reverse();
+    assert_eq!(message.as_bytes(), &res[..]);
     Ok(())
+}
+
+struct HostByteChannel<'a> {
+    vsock_stream: &'a mut VsockStream,
+}
+
+impl<'a> HostByteChannel<'a> {
+    fn new(vsock_stream: &'a mut VsockStream) -> Self {
+        Self { vsock_stream }
+    }
+}
+
+impl<'a> ByteChannel<Error> for HostByteChannel<'a> {
+    fn send_bytes(&mut self, bytes: &[u8]) -> Result<(), Error> {
+        self.vsock_stream.write_all(bytes)?;
+        self.vsock_stream.flush()?;
+        Ok(())
+    }
+
+    fn recv_bytes(&mut self, buffer: &mut [u8]) -> Result<usize, Error> {
+        Ok(self.vsock_stream.read(buffer)?)
+    }
 }

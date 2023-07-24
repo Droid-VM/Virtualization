@@ -1,0 +1,18 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_library_rlib {
+    name: "libservice_vm_comm",
+    crate_name: "service_vm_comm",
+    srcs: ["src/lib.rs"],
+    prefer_rlib: true,
+    no_stdlibs: true,
+    stdlibs: [
+        "libcore.rust_sysroot",
+    ],
+    rustlibs: [
+        "libzerocopy_nostd",
+    ],
+    apex_available: ["com.android.virt"],
+}
