@@ -1,6 +1,69 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "acc25a90_8b4c4f4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-24T08:52:45Z",
+      "side": 1,
+      "message": "We\u0027re nowhere near the Java API yet, but a random thought: we should add \"supports device assignment\" to VirtualMachineManager#getCapabilities.",
+      "revId": "9c770aef6199a0e72762731b44b54540c567bf7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee1fe18a_ff21a55b",
+        "filename": "javalib/AndroidManifest.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-24T08:52:45Z",
+      "side": 1,
+      "message": "What\u0027s the purpose of this new permission? It has the same protection level as MANAGE_VIRTUAL_MACHINE. Do we expect that to change?\n(See also https://docs.google.com/document/d/1brM5CIII82ev9WOipxBqa5nrqGjcdggTE_Fz9PM3E5k/edit?resourcekey\u003d0-vhTHUGNlitXom6nK71kGOQ)",
+      "range": {
+        "startLine": 46,
+        "startChar": 47,
+        "endLine": 46,
+        "endChar": 80
+      },
+      "revId": "9c770aef6199a0e72762731b44b54540c567bf7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d12e640b_76c0583b",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/AssignableDevice.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-24T08:52:45Z",
+      "side": 1,
+      "message": "Is this going to be an enum, or are we actually going to allow arbitrary strings?\nIf the latter, how does an app know how to interpret / specify a \"kind\"?",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 25,
+        "endChar": 10
+      },
+      "revId": "9c770aef6199a0e72762731b44b54540c567bf7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ceca97ae_22bbd4d9",
@@ -14,6 +77,30 @@
       "writtenOn": "2023-07-24T08:17:20Z",
       "side": 1,
       "message": "Question: This API is for querying assignable devices. Should we also protect this with permission, although the permission\u0027s name and desc only says \u0027assign\u0027?",
+      "range": {
+        "startLine": 176,
+        "startChar": 8,
+        "endLine": 176,
+        "endChar": 47
+      },
+      "revId": "9c770aef6199a0e72762731b44b54540c567bf7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b283d6fb_6249037c",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-24T08:52:45Z",
+      "side": 1,
+      "message": "s/assign/manage/ ?\n\nIf we need a new permission, I would apply it to both query \u0026 assignment. There\u0027s no point querying the devices if you can\u0027t assign them.",
+      "parentUuid": "ceca97ae_22bbd4d9",
       "range": {
         "startLine": 176,
         "startChar": 8,
