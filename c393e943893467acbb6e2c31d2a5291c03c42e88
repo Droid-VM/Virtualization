@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "193c9e75_6206a4c9",
+        "filename": "libs/vmconfig/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-24T09:55:59Z",
+      "side": 1,
+      "message": "Just out of my curiosity: can we specify paravirtualized devices? (e.g. pv IOMMU?) Is it safe to assume that all paravirtualized devices are only assigned indirectly (so we don\u0027t need to pass them here)?",
+      "parentUuid": "4f88ad89_e2b6439c",
+      "range": {
+        "startLine": 171,
+        "startChar": 8,
+        "endLine": 171,
+        "endChar": 13
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d7d19035_2926e3c7",
         "filename": "libs/vmconfig/src/lib.rs",
         "patchSetId": 2
