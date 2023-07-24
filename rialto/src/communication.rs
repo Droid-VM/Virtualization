@@ -14,8 +14,11 @@
 
 //! Supports for the communication between rialto and host.
 
-use crate::error::{Error, Result};
+use crate::error::Result;
+use ciborium_io::{Read, Write};
+use core::result;
 use log::info;
+use service_vm_comm::{Request, Response};
 use virtio_drivers::{
     self,
     device::socket::{
@@ -25,39 +28,36 @@ use virtio_drivers::{
     Hal,
 };
 
-const MAX_RECV_BUFFER_SIZE_BYTES: usize = 64;
-
-pub struct DataChannel<H: Hal, T: Transport> {
+pub struct VsockStream<H: Hal, T: Transport> {
     connection_manager: SingleConnectionManager<H, T>,
 }
 
-impl<H: Hal, T: Transport> From<VirtIOSocket<H, T>> for DataChannel<H, T> {
-    fn from(socket_device_driver: VirtIOSocket<H, T>) -> Self {
-        Self { connection_manager: SingleConnectionManager::new(socket_device_driver) }
-    }
-}
+impl<H: Hal, T: Transport> VsockStream<H, T> {
+    pub fn new(
+        socket_device_driver: VirtIOSocket<H, T>,
+        peer_addr: VsockAddr,
+    ) -> virtio_drivers::Result<Self> {
+        let mut connection_manager = SingleConnectionManager::new(socket_device_driver);
+        // Use the same port on rialto and peer for convenience.
+        connection_manager.connect(peer_addr, peer_addr.port)?;
+        connection_manager.wait_for_connect()?;
+        info!("Connected to the peer {peer_addr:?}");
 
-impl<H: Hal, T: Transport> DataChannel<H, T> {
-    /// Connects to the given destination.
-    pub fn connect(&mut self, destination: VsockAddr) -> virtio_drivers::Result {
-        // Use the same port on rialto and host for convenience.
-        self.connection_manager.connect(destination, destination.port)?;
-        self.connection_manager.wait_for_connect()?;
-        info!("Connected to the destination {destination:?}");
-        Ok(())
+        Ok(Self { connection_manager })
     }
 
-    /// Processes the received requests and sends back a reply.
-    pub fn handle_incoming_request(&mut self) -> Result<()> {
-        let mut buffer = [0u8; MAX_RECV_BUFFER_SIZE_BYTES];
+    pub fn read_request(&mut self) -> Result<Request> {
+        Ok(ciborium::from_reader(self)?)
+    }
 
-        // TODO(b/274441673): Handle the scenario when the given buffer is too short.
-        let len = self.wait_for_recv(&mut buffer).map_err(Error::ReceivingDataFailed)?;
+    pub fn write_response(&mut self, response: &Response) -> Result<()> {
+        Ok(ciborium::into_writer(response, self)?)
+    }
 
-        // TODO(b/291732060): Implement the communication protocol.
-        // Just reverse the received message for now.
-        buffer[..len].reverse();
-        self.connection_manager.send(&buffer[..len])?;
+    /// Shuts down the data channel.
+    pub fn force_close(&mut self) -> virtio_drivers::Result {
+        self.connection_manager.force_close()?;
+        info!("Connection shutdown.");
         Ok(())
     }
 
@@ -75,11 +75,40 @@ impl<H: Hal, T: Transport> DataChannel<H, T> {
             }
         }
     }
+}
 
-    /// Shuts down the data channel.
-    pub fn force_close(&mut self) -> virtio_drivers::Result {
-        self.connection_manager.force_close()?;
-        info!("Connection shutdown.");
+impl<H: Hal, T: Transport> Read for VsockStream<H, T> {
+    type Error = virtio_drivers::Error;
+
+    fn read_exact(&mut self, data: &mut [u8]) -> result::Result<(), Self::Error> {
+        let mut start = 0;
+        while start < data.len() {
+            let len = self.wait_for_recv(&mut data[start..])?;
+            start += len;
+        }
+        Ok(())
+    }
+}
+
+impl<H: Hal, T: Transport> Write for VsockStream<H, T> {
+    type Error = virtio_drivers::Error;
+
+    fn write_all(&mut self, data: &[u8]) -> result::Result<(), Self::Error> {
+        const RETRY_MAX: usize = 3;
+
+        for _ in 0..RETRY_MAX {
+            match self.connection_manager.send(data) {
+                Ok(_) => return Ok(()),
+                Err(virtio_drivers::Error::SocketDeviceError(
+                    SocketError::InsufficientBufferSpaceInPeer,
+                )) => {}
+                Err(e) => return Err(e),
+            }
+        }
+        Err(SocketError::InsufficientBufferSpaceInPeer.into())
+    }
+
+    fn flush(&mut self) -> result::Result<(), Self::Error> {
         Ok(())
     }
 }
