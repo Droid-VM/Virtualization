@@ -15,7 +15,9 @@
 //! Supports for the communication between rialto and host.
 
 use crate::error::{Error, Result};
+use core::result;
 use log::info;
+use service_vm_comm::{ByteChannel, MessageChannel};
 use virtio_drivers::{
     self,
     device::socket::{
@@ -24,9 +26,6 @@ use virtio_drivers::{
     transport::Transport,
     Hal,
 };
-
-const MAX_RECV_BUFFER_SIZE_BYTES: usize = 64;
-
 pub struct DataChannel<H: Hal, T: Transport> {
     connection_manager: SingleConnectionManager<H, T>,
 }
@@ -49,15 +48,13 @@ impl<H: Hal, T: Transport> DataChannel<H, T> {
 
     /// Processes the received requests and sends back a reply.
     pub fn handle_incoming_request(&mut self) -> Result<()> {
-        let mut buffer = [0u8; MAX_RECV_BUFFER_SIZE_BYTES];
-
-        // TODO(b/274441673): Handle the scenario when the given buffer is too short.
-        let len = self.wait_for_recv(&mut buffer).map_err(Error::ReceivingDataFailed)?;
+        let mut message_channel = MessageChannel::new(self);
+        let mut message = message_channel.recv_message()?;
 
         // TODO(b/291732060): Implement the communication protocol.
         // Just reverse the received message for now.
-        buffer[..len].reverse();
-        self.connection_manager.send(&buffer[..len])?;
+        message.reverse();
+        message_channel.send_message(&message)?;
         Ok(())
     }
 
@@ -81,5 +78,15 @@ impl<H: Hal, T: Transport> DataChannel<H, T> {
         self.connection_manager.force_close()?;
         info!("Connection shutdown.");
         Ok(())
+    }
+}
+
+impl<H: Hal, T: Transport> ByteChannel<Error> for DataChannel<H, T> {
+    fn send_bytes(&mut self, bytes: &[u8]) -> result::Result<(), Error> {
+        self.connection_manager.send(bytes).map_err(Error::SendingDataFailed)
+    }
+
+    fn recv_bytes(&mut self, buffer: &mut [u8]) -> result::Result<usize, Error> {
+        self.wait_for_recv(buffer).map_err(Error::ReceivingDataFailed)
     }
 }
