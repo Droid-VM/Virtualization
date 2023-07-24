@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ceca97ae_22bbd4d9",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-24T08:17:20Z",
+      "side": 1,
+      "message": "Question: This API is for querying assignable devices. Should we also protect this with permission, although the permission\u0027s name and desc only says \u0027assign\u0027?",
+      "range": {
+        "startLine": 176,
+        "startChar": 8,
+        "endLine": 176,
+        "endChar": 47
+      },
+      "revId": "9c770aef6199a0e72762731b44b54540c567bf7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fad52e07_311d4d28",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-24T08:17:20Z",
+      "side": 1,
+      "message": "minor question; you can ack and investigate later) panther says `/sys/bus/platform/devices/17100000.eh` is symlink to `/sys/bus/platform/17100000.eh`. Just out of curiousity, is it OK to give symlink here?",
+      "range": {
+        "startLine": 181,
+        "startChar": 19,
+        "endLine": 181,
+        "endChar": 56
+      },
+      "revId": "9c770aef6199a0e72762731b44b54540c567bf7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
