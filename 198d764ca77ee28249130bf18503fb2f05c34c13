@@ -166,6 +166,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce42ca78_49de87ac",
+        "filename": "rialto/AndroidTest.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-24T10:04:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acf9930b_3a6e51ed",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 89
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c397606e_91ca92ca",
@@ -298,6 +322,30 @@
       "side": 1,
       "message": "Sockets are stream not packet oriented, so it is always possible in theory that you only receive part of what is sent (although unlikely in practice).\nProbably doesn\u0027t matter for this test, but you will need to handle it in the real communication.",
       "parentUuid": "124d7098_9abe4cbd",
+      "range": {
+        "startLine": 51,
+        "startChar": 11,
+        "endLine": 51,
+        "endChar": 67
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c7a626f_366bd3c1",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-24T10:04:41Z",
+      "side": 1,
+      "message": "Right. I added a TODO here. We can first land this cl to ensure that sending one single message works. In a subsequent cl, I\u0027ll make the message long enough to surpass the MAX_BUFFER_LENGTH to test this scenario. Addressed in aosp/2672356.",
+      "parentUuid": "a4d93887_1a25c00b",
       "range": {
         "startLine": 51,
         "startChar": 11,
