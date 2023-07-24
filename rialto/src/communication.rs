@@ -14,72 +14,182 @@
 
 //! Supports for the communication between rialto and host.
 
-use crate::error::{Error, Result};
-use log::info;
+use crate::error::Result;
+use ciborium_io::{Read, Write};
+use core::result;
+use log::{info, warn};
+use service_vm_comm::{Request, Response};
 use virtio_drivers::{
     self,
     device::socket::{
-        SingleConnectionManager, SocketError, VirtIOSocket, VsockAddr, VsockEventType,
+        SocketError, VirtIOSocket, VsockAddr, VsockConnectionManager, VsockEvent, VsockEventType,
     },
     transport::Transport,
     Hal,
 };
 
-const MAX_RECV_BUFFER_SIZE_BYTES: usize = 64;
-
-pub struct DataChannel<H: Hal, T: Transport> {
-    connection_manager: SingleConnectionManager<H, T>,
+pub struct VsockStream<H: Hal, T: Transport> {
+    connection_manager: VsockConnectionManager<H, T>,
+    /// Peer address. The same port is used on rialto and peer for convenience.
+    peer_addr: VsockAddr,
 }
 
-impl<H: Hal, T: Transport> From<VirtIOSocket<H, T>> for DataChannel<H, T> {
-    fn from(socket_device_driver: VirtIOSocket<H, T>) -> Self {
-        Self { connection_manager: SingleConnectionManager::new(socket_device_driver) }
+impl<H: Hal, T: Transport> VsockStream<H, T> {
+    pub fn new(
+        socket_device_driver: VirtIOSocket<H, T>,
+        peer_addr: VsockAddr,
+    ) -> virtio_drivers::Result<Self> {
+        let mut vsock_stream = Self {
+            connection_manager: VsockConnectionManager::new(socket_device_driver),
+            peer_addr,
+        };
+        vsock_stream.connect()?;
+        Ok(vsock_stream)
     }
-}
 
-impl<H: Hal, T: Transport> DataChannel<H, T> {
-    /// Connects to the given destination.
-    pub fn connect(&mut self, destination: VsockAddr) -> virtio_drivers::Result {
-        // Use the same port on rialto and host for convenience.
-        self.connection_manager.connect(destination, destination.port)?;
-        self.connection_manager.wait_for_connect()?;
-        info!("Connected to the destination {destination:?}");
+    fn connect(&mut self) -> virtio_drivers::Result {
+        self.connection_manager.connect(self.peer_addr, self.peer_addr.port)?;
+        self.wait_for_connect()?;
+        info!("Connected to the peer {:?}", self.peer_addr);
         Ok(())
     }
 
-    /// Processes the received requests and sends back a reply.
-    pub fn handle_incoming_request(&mut self) -> Result<()> {
-        let mut buffer = [0u8; MAX_RECV_BUFFER_SIZE_BYTES];
-
-        // TODO(b/274441673): Handle the scenario when the given buffer is too short.
-        let len = self.wait_for_recv(&mut buffer).map_err(Error::ReceivingDataFailed)?;
-
-        // TODO(b/291732060): Implement the communication protocol.
-        // Just reverse the received message for now.
-        buffer[..len].reverse();
-        self.connection_manager.send(&buffer[..len])?;
-        Ok(())
-    }
-
-    fn wait_for_recv(&mut self, buffer: &mut [u8]) -> virtio_drivers::Result<usize> {
+    fn wait_for_connect(&mut self) -> virtio_drivers::Result {
         loop {
-            match self.connection_manager.wait_for_recv(buffer)?.event_type {
-                VsockEventType::Disconnected { .. } => {
-                    return Err(SocketError::ConnectionFailed.into())
+            if let Some(event) = self.wait_for_event_from_peer()? {
+                match event {
+                    VsockEventType::Connected => return Ok(()),
+                    VsockEventType::Disconnected { .. } => {
+                        return Err(SocketError::ConnectionFailed.into());
+                    }
+                    // We shouldn't receive the following event before the connection is
+                    // established.
+                    VsockEventType::Received { .. }
+                    | VsockEventType::ConnectionRequest
+                    | VsockEventType::CreditRequest
+                    | VsockEventType::CreditUpdate => {
+                        return Err(SocketError::InvalidOperation.into());
+                    }
                 }
-                VsockEventType::Received { length, .. } => return Ok(length),
-                VsockEventType::Connected
-                | VsockEventType::ConnectionRequest
-                | VsockEventType::CreditRequest
-                | VsockEventType::CreditUpdate => {}
             }
         }
     }
 
+    fn wait_for_event_from_peer(&mut self) -> virtio_drivers::Result<Option<VsockEventType>> {
+        let event = self.connection_manager.wait_for_event()?;
+        if self.matches_peer_address(&event) {
+            Ok(Some(event.event_type))
+        } else {
+            warn!("Received event from the wrong peer: {event:?}");
+            Ok(None)
+        }
+    }
+
+    /// Returns whether the event matches our peer address.
+    fn matches_peer_address(&self, event: &VsockEvent) -> bool {
+        event.source == self.peer_addr && event.destination.port == self.peer_addr.port
+    }
+
+    pub fn read_request(&mut self) -> Result<Request> {
+        Ok(ciborium::from_reader(self)?)
+    }
+
+    pub fn write_response(&mut self, response: &Response) -> Result<()> {
+        Ok(ciborium::into_writer(response, self)?)
+    }
+
     /// Shuts down the data channel.
-    pub fn force_close(&mut self) -> virtio_drivers::Result {
-        self.connection_manager.force_close()?;
+    pub fn shutdown(&mut self) -> virtio_drivers::Result {
+        self.connection_manager.force_close(self.peer_addr, self.peer_addr.port)?;
         info!("Connection shutdown.");
+        Ok(())
+    }
+
+    fn recv(&mut self, buffer: &mut [u8]) -> virtio_drivers::Result<usize> {
+        let length = self.wait_for_recv()?;
+        let read_length =
+            self.connection_manager.recv(self.peer_addr, self.peer_addr.port, buffer)?;
+        assert_eq!(length, read_length);
+        Ok(length)
+    }
+
+    fn wait_for_recv(&mut self) -> virtio_drivers::Result<usize> {
+        loop {
+            let Some(event) = self.wait_for_event_from_peer()? else {
+                continue;
+            };
+            match event {
+                VsockEventType::Disconnected { .. } => {
+                    return Err(SocketError::ConnectionFailed.into());
+                }
+                VsockEventType::Received { length, .. } => return Ok(length),
+                VsockEventType::Connected | VsockEventType::ConnectionRequest => {
+                    return Err(SocketError::InvalidOperation.into());
+                }
+                // The credit request and update are handled internally by the connection manager.
+                VsockEventType::CreditRequest | VsockEventType::CreditUpdate => {}
+            }
+        }
+    }
+
+    fn wait_for_send(&mut self, buffer: &[u8]) -> virtio_drivers::Result {
+        loop {
+            match self.connection_manager.send(self.peer_addr, self.peer_addr.port, buffer) {
+                Ok(_) => return Ok(()),
+                Err(virtio_drivers::Error::SocketDeviceError(
+                    SocketError::InsufficientBufferSpaceInPeer,
+                )) => self.poll_for_credit_update()?,
+                Err(e) => return Err(e),
+            }
+        }
+    }
+
+    /// Polls the rx queue to check credit in the peer.
+    /// The credit update is handled internally by the connection manager.
+    fn poll_for_credit_update(&mut self) -> virtio_drivers::Result {
+        if let Some(event) = self.wait_for_event_from_peer()? {
+            match event {
+                VsockEventType::Disconnected { .. } => {
+                    return Err(SocketError::ConnectionFailed.into());
+                }
+                VsockEventType::Connected | VsockEventType::ConnectionRequest => {
+                    return Err(SocketError::InvalidOperation.into());
+                }
+                // When there is a received event, the received data is buffered in the
+                // connection manager's internal receive buffer, so we don't need to do
+                // anything here.
+                VsockEventType::Received { .. }
+                | VsockEventType::CreditRequest
+                | VsockEventType::CreditUpdate => {}
+            }
+        }
+        Ok(())
+    }
+}
+
+impl<H: Hal, T: Transport> Read for VsockStream<H, T> {
+    type Error = virtio_drivers::Error;
+
+    fn read_exact(&mut self, data: &mut [u8]) -> result::Result<(), Self::Error> {
+        let mut start = 0;
+        while start < data.len() {
+            let len = self.recv(&mut data[start..])?;
+            start += len;
+        }
+        Ok(())
+    }
+}
+
+impl<H: Hal, T: Transport> Write for VsockStream<H, T> {
+    type Error = virtio_drivers::Error;
+
+    fn write_all(&mut self, data: &[u8]) -> result::Result<(), Self::Error> {
+        self.wait_for_send(data)
+    }
+
+    fn flush(&mut self) -> result::Result<(), Self::Error> {
+        // TODO(b/293411448): Optimize the data sending by saving the data to write
+        // in a local buffer and then flushing only when the buffer is full.
         Ok(())
     }
 }
