@@ -358,6 +358,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3513c2d0_3f31816c",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-24T10:23:37Z",
+      "side": 1,
+      "message": "That TODO doesn\u0027t cover the scenario I mentioned (although it is also needed).\nEven if your buffer is big enough, you may only receive a partial message.\nYou need to wait until you have received a complete request. (And you need to work out how to know when that has happened.)\n\nI suspect you\u0027re going to have to implement some sort of blocking read function, which pulls data from the buffer - sized as requested by the other party, as Andrew says - or waits for another request if there isn\u0027t any. Then the CBOR parsing can work with that.",
+      "parentUuid": "4c7a626f_366bd3c1",
+      "range": {
+        "startLine": 51,
+        "startChar": 11,
+        "endLine": 51,
+        "endChar": 67
+      },
+      "revId": "198d764ca77ee28249130bf18503fb2f05c34c13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19a2fafb_a5d23086",
         "filename": "rialto/src/communication.rs",
         "patchSetId": 6
