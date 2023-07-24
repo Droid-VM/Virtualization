@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17217170_8f46df6c",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice_internal/IVirtualizationServiceInternal.aidl",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-24T09:31:06Z",
+      "side": 1,
+      "message": "What is the format of these strings?",
+      "range": {
+        "startLine": 72,
+        "startChar": 71,
+        "endLine": 72,
+        "endChar": 78
+      },
+      "revId": "b027b2be838acca92c880f0fc434b2874244d54d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68100501_40fb30fc",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-24T09:31:06Z",
+      "side": 1,
+      "message": "I\u0027d prefer this (or possibly bind_device()) returns a \"not implemented\" error, until it is.\nClaiming success without doing what is requested just creates a trap for the unwary.",
+      "range": {
+        "startLine": 195,
+        "startChar": 8,
+        "endLine": 195,
+        "endChar": 10
+      },
+      "revId": "b027b2be838acca92c880f0fc434b2874244d54d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
