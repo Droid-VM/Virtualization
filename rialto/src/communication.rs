@@ -15,6 +15,7 @@
 //! Supports for the communication between rialto and host.
 
 use crate::error::{Error, Result};
+use alloc::vec::Vec;
 use log::info;
 use virtio_drivers::{
     self,
@@ -50,14 +51,23 @@ impl<H: Hal, T: Transport> DataChannel<H, T> {
     /// Processes the received requests and sends back a reply.
     pub fn handle_incoming_request(&mut self) -> Result<()> {
         let mut buffer = [0u8; MAX_RECV_BUFFER_SIZE_BYTES];
+        let mut res = Vec::new();
 
-        // TODO(b/274441673): Handle the scenario when the given buffer is too short.
-        let len = self.wait_for_recv(&mut buffer).map_err(Error::ReceivingDataFailed)?;
+        loop {
+            let len = self.wait_for_recv(&mut buffer).map_err(Error::ReceivingDataFailed)?;
+            if len == 0 {
+                break;
+            }
+            res.extend(&buffer[..len]);
+            if len < MAX_RECV_BUFFER_SIZE_BYTES {
+                break;
+            }
+        }
 
         // TODO(b/291732060): Implement the communication protocol.
         // Just reverse the received message for now.
-        buffer[..len].reverse();
-        self.connection_manager.send(&buffer[..len])?;
+        res.reverse();
+        self.connection_manager.send(&res)?;
         Ok(())
     }
 

@@ -178,12 +178,17 @@ fn try_check_socket_connection(port: u32) -> Result<(), Error> {
     };
     info!("Accepted connection {:?}", vsock_stream);
 
-    let message = "Hello from host";
+    let message = "Hello from host".repeat(6);
+
+    const MAX_RECV_BUFFER_SIZE_BYTES: usize = 64;
+    assert!(message.len() > MAX_RECV_BUFFER_SIZE_BYTES);
+    assert!(message.len() < 2 * MAX_RECV_BUFFER_SIZE_BYTES);
+
     vsock_stream.write_all(message.as_bytes())?;
     vsock_stream.flush()?;
     info!("Sent message: {:?}.", message);
 
-    let mut buffer = vec![0u8; 30];
+    let mut buffer = vec![0u8; MAX_RECV_BUFFER_SIZE_BYTES * 2];
     vsock_stream.set_read_timeout(Some(Duration::from_millis(1_000)))?;
     let len = vsock_stream.read(&mut buffer)?;
 
