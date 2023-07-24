@@ -14,8 +14,11 @@
 
 //! Supports for the communication between rialto and host.
 
-use crate::error::{Error, Result};
+use crate::error::Result;
+use ciborium_io::{Read, Write};
+use core::result;
 use log::info;
+use service_vm_comm::{Request, Response};
 use virtio_drivers::{
     self,
     device::socket::{
@@ -24,8 +27,6 @@ use virtio_drivers::{
     transport::Transport,
     Hal,
 };
-
-const MAX_RECV_BUFFER_SIZE_BYTES: usize = 64;
 
 pub struct DataChannel<H: Hal, T: Transport> {
     connection_manager: SingleConnectionManager<H, T>,
@@ -49,18 +50,28 @@ impl<H: Hal, T: Transport> DataChannel<H, T> {
 
     /// Processes the received requests and sends back a reply.
     pub fn handle_incoming_request(&mut self) -> Result<()> {
-        let mut buffer = [0u8; MAX_RECV_BUFFER_SIZE_BYTES];
-
-        // TODO(b/274441673): Handle the scenario when the given buffer is too short.
-        let len = self.wait_for_recv(&mut buffer).map_err(Error::ReceivingDataFailed)?;
-
-        // TODO(b/291732060): Implement the communication protocol.
-        // Just reverse the received message for now.
-        buffer[..len].reverse();
-        self.connection_manager.send(&buffer[..len])?;
+        let mut stream = VsockStream { connection_manager: &mut self.connection_manager };
+        let request: Request = ciborium::from_reader(&mut stream)?;
+        let response = match request {
+            Request::Reverse(v) => Response::Reverse(v.into_iter().rev().collect()),
+        };
+        ciborium::into_writer(&response, &mut stream)?;
         Ok(())
     }
 
+    /// Shuts down the data channel.
+    pub fn force_close(&mut self) -> virtio_drivers::Result {
+        self.connection_manager.force_close()?;
+        info!("Connection shutdown.");
+        Ok(())
+    }
+}
+
+struct VsockStream<'a, H: Hal, T: Transport> {
+    connection_manager: &'a mut SingleConnectionManager<H, T>,
+}
+
+impl<'a, H: Hal, T: Transport> VsockStream<'a, H, T> {
     fn wait_for_recv(&mut self, buffer: &mut [u8]) -> virtio_drivers::Result<usize> {
         loop {
             match self.connection_manager.wait_for_recv(buffer)?.event_type {
@@ -75,11 +86,40 @@ impl<H: Hal, T: Transport> DataChannel<H, T> {
             }
         }
     }
+}
 
-    /// Shuts down the data channel.
-    pub fn force_close(&mut self) -> virtio_drivers::Result {
-        self.connection_manager.force_close()?;
-        info!("Connection shutdown.");
+impl<'a, H: Hal, T: Transport> Read for VsockStream<'a, H, T> {
+    type Error = virtio_drivers::Error;
+
+    fn read_exact(&mut self, data: &mut [u8]) -> result::Result<(), Self::Error> {
+        let mut start = 0;
+        while start < data.len() {
+            let len = self.wait_for_recv(&mut data[start..])?;
+            start += len;
+        }
+        Ok(())
+    }
+}
+
+impl<'a, H: Hal, T: Transport> Write for VsockStream<'a, H, T> {
+    type Error = virtio_drivers::Error;
+
+    fn write_all(&mut self, data: &[u8]) -> result::Result<(), Self::Error> {
+        const RETRY_MAX: usize = 3;
+
+        for _ in 0..RETRY_MAX {
+            match self.connection_manager.send(data) {
+                Ok(_) => return Ok(()),
+                Err(virtio_drivers::Error::SocketDeviceError(
+                    SocketError::InsufficientBufferSpaceInPeer,
+                )) => {}
+                Err(e) => return Err(e),
+            }
+        }
+        Err(SocketError::InsufficientBufferSpaceInPeer.into())
+    }
+
+    fn flush(&mut self) -> result::Result<(), Self::Error> {
         Ok(())
     }
 }

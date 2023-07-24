@@ -23,7 +23,10 @@ use vmbase::{memory::MemoryTrackerError, virtio::pci};
 
 pub type Result<T> = result::Result<T, Error>;
 
-#[derive(Clone, Debug)]
+type CiboriumSerError = ciborium::ser::Error<virtio_drivers::Error>;
+type CiboriumDeError = ciborium::de::Error<virtio_drivers::Error>;
+
+#[derive(Debug)]
 pub enum Error {
     /// Hypervisor error.
     Hypervisor(HypervisorError),
@@ -43,8 +46,10 @@ pub enum Error {
     MissingVirtIOSocketDevice,
     /// Failed VirtIO driver operation.
     VirtIODriverOperationFailed(virtio_drivers::Error),
-    /// Failed to receive data.
-    ReceivingDataFailed(virtio_drivers::Error),
+    /// Failed to serialize with ciborium.
+    CiboriumSerFailed(CiboriumSerError),
+    /// Failed to deserialize with ciborium.
+    CiboriumDeFailed(CiboriumDeError),
 }
 
 impl fmt::Display for Error {
@@ -65,7 +70,12 @@ impl fmt::Display for Error {
             Self::VirtIODriverOperationFailed(e) => {
                 write!(f, "Failed VirtIO driver operation: {e}")
             }
-            Self::ReceivingDataFailed(e) => write!(f, "Failed to receive data: {e}"),
+            Self::CiboriumSerFailed(e) => {
+                write!(f, "Failed to serialize with ciborium: {e}")
+            }
+            Self::CiboriumDeFailed(e) => {
+                write!(f, "Failed to deserialize with ciborium: {e}")
+            }
         }
     }
 }
@@ -103,5 +113,17 @@ impl From<MemoryTrackerError> for Error {
 impl From<virtio_drivers::Error> for Error {
     fn from(e: virtio_drivers::Error) -> Self {
         Self::VirtIODriverOperationFailed(e)
+    }
+}
+
+impl From<CiboriumSerError> for Error {
+    fn from(e: CiboriumSerError) -> Self {
+        Self::CiboriumSerFailed(e)
+    }
+}
+
+impl From<CiboriumDeError> for Error {
+    fn from(e: CiboriumDeError) -> Self {
+        Self::CiboriumDeFailed(e)
     }
 }
