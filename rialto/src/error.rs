@@ -45,6 +45,8 @@ pub enum Error {
     VirtIODriverOperationFailed(virtio_drivers::Error),
     /// Failed to receive data.
     ReceivingDataFailed(virtio_drivers::Error),
+    /// Failed to send data.
+    SendingDataFailed(virtio_drivers::Error),
 }
 
 impl fmt::Display for Error {
@@ -66,6 +68,7 @@ impl fmt::Display for Error {
                 write!(f, "Failed VirtIO driver operation: {e}")
             }
             Self::ReceivingDataFailed(e) => write!(f, "Failed to receive data: {e}"),
+            Self::SendingDataFailed(e) => write!(f, "Failed to send data: {e}"),
         }
     }
 }
