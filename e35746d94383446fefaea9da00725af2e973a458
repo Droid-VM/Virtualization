@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "321662ef_4c340830",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice_internal/BoundDevicesInfo.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-24T08:47:03Z",
+      "side": 1,
+      "message": "Question) Can it be possible if we assign a device? This would be DT of the guest VM, so I feel like that a device would requires sysfs node.",
+      "parentUuid": "e98fed1b_c81947fa",
+      "range": {
+        "startLine": 21,
+        "startChar": 5,
+        "endLine": 21,
+        "endChar": 13
+      },
+      "revId": "e35746d94383446fefaea9da00725af2e973a458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d1a5c07a_8b938645",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 1
