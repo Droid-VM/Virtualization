@@ -24,8 +24,9 @@ use android_system_virtualizationservice::{
 };
 use anyhow::{anyhow, bail, Context, Error};
 use log::info;
+use service_vm_comm::{Request, Response};
 use std::fs::File;
-use std::io::{self, BufRead, BufReader, Read, Write};
+use std::io::{self, BufRead, BufReader};
 use std::os::unix::io::FromRawFd;
 use std::panic;
 use std::thread;
@@ -179,17 +180,16 @@ fn try_check_socket_connection(port: u32) -> Result<(), Error> {
     };
     info!("Accepted connection {:?}", vsock_stream);
 
-    let message = "Hello from host";
-    vsock_stream.write_all(message.as_bytes())?;
-    vsock_stream.flush()?;
-    info!("Sent message: {:?}.", message);
-
-    let mut buffer = vec![0u8; 30];
     vsock_stream.set_read_timeout(Some(Duration::from_millis(1_000)))?;
-    let len = vsock_stream.read(&mut buffer)?;
 
-    assert_eq!(message.len(), len);
-    buffer[..len].reverse();
-    assert_eq!(message.as_bytes(), &buffer[..len]);
+    let message = "Hello from host ".repeat(6);
+    let request = Request::Reverse(message.as_bytes().to_vec());
+
+    ciborium::into_writer(&request, &mut vsock_stream)?;
+    info!("Sent message: {:?}.", message);
+    let response: Response = ciborium::from_reader(&mut vsock_stream)?;
+
+    let expected_response_arr: Vec<u8> = message.as_bytes().iter().rev().cloned().collect();
+    assert_eq!(Response::Reverse(expected_response_arr), response);
     Ok(())
 }
