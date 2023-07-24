@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61d59b79_37ac8eff",
+        "filename": "libs/vmconfig/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-07-24T05:45:50Z",
+      "side": 1,
+      "message": "I refactored this, so now app specifies device node only.",
+      "parentUuid": "9ed86fb0_64ee9dcc",
+      "range": {
+        "startLine": 170,
+        "startChar": 9,
+        "endLine": 170,
+        "endChar": 25
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d44b7432_afe1ee8c",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-07-21T04:46:27Z",
       "side": 1,
       "message": "VM DTBO? VM DTBO would have host\u0027s device info, but opposite wouldn\u0027t happen.",
+      "range": {
+        "startLine": 171,
+        "startChar": 8,
+        "endLine": 171,
+        "endChar": 13
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f88ad89_e2b6439c",
+        "filename": "libs/vmconfig/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-07-24T05:45:50Z",
+      "side": 1,
+      "message": "It\u0027s not VM DTBO. VM DTBO shouldn\u0027t be here. VM DTBO should be handled by virtualization service.",
+      "parentUuid": "d44b7432_afe1ee8c",
       "range": {
         "startLine": 171,
         "startChar": 8,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bf91fdb_2a9679fc",
+        "filename": "libs/vmconfig/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-07-24T05:45:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7d19035_2926e3c7",
+      "range": {
+        "startLine": 173,
+        "startChar": 8,
+        "endLine": 173,
+        "endChar": 34
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10b23fea_41f1d0dc",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-07-21T09:21:18Z",
       "side": 1,
       "message": "Tiny suggestion: renaming like `dtbo` or `devices_dtbo`? I thought that dtbo itself is not strongly related to the vfio. Ignore this if I\u0027m wrong.",
+      "range": {
+        "startLine": 463,
+        "startChar": 12,
+        "endLine": 463,
+        "endChar": 21
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36887d12_45bb1264",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-07-24T05:45:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10b23fea_41f1d0dc",
       "range": {
         "startLine": 463,
         "startChar": 12,
@@ -133,6 +229,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56e4b733_768870d3",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-07-24T05:45:50Z",
+      "side": 1,
+      "message": "Now it\u0027s sysfs node, so it\u0027s String.",
+      "parentUuid": "74320256_34521f9c",
+      "range": {
+        "startLine": 118,
+        "startChar": 26,
+        "endLine": 118,
+        "endChar": 32
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8205c51e_578d63c4",
@@ -146,6 +266,30 @@
       "writtenOn": "2023-07-21T04:46:27Z",
       "side": 1,
       "message": "minor, you can ignore) TODO with bug number is preferred to track remaining work.",
+      "range": {
+        "startLine": 406,
+        "startChar": 11,
+        "endLine": 406,
+        "endChar": 15
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "562b27f7_59077292",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-07-24T05:45:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8205c51e_578d63c4",
       "range": {
         "startLine": 406,
         "startChar": 11,
@@ -203,6 +347,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f39a01b_a6697d64",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineRawConfig.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-07-24T05:45:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "350d8167_8dd35e02",
+      "range": {
+        "startLine": 18,
+        "startChar": 44,
+        "endLine": 18,
+        "endChar": 60
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0451380f_ac4a2d23",
@@ -249,6 +417,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb71e40b_039d7f75",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-07-24T05:45:50Z",
+      "side": 1,
+      "message": "ditto.",
+      "parentUuid": "0451380f_ac4a2d23",
+      "range": {
+        "startLine": 123,
+        "startChar": 12,
+        "endLine": 123,
+        "endChar": 17
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78fecb77_2d7e9791",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-07-24T05:45:50Z",
+      "side": 1,
+      "message": "updated comment",
+      "parentUuid": "f38884c4_dc6276f7",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 33
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33ad6b5e_02ead548",
@@ -262,6 +478,30 @@
       "writtenOn": "2023-07-21T04:46:27Z",
       "side": 1,
       "message": "VM DTBO",
+      "range": {
+        "startLine": 195,
+        "startChar": 12,
+        "endLine": 195,
+        "endChar": 17
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b78dfc5_52f2af33",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-07-24T05:45:50Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "33ad6b5e_02ead548",
       "range": {
         "startLine": 195,
         "startChar": 12,
@@ -295,6 +535,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14ff5159_334f8b7f",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-07-24T05:45:50Z",
+      "side": 1,
+      "message": "Hmm, I\u0027m not sure if we should print actual devices. Added vfio information.",
+      "parentUuid": "98a4ceb1_14bcc723",
+      "range": {
+        "startLine": 236,
+        "startChar": 4,
+        "endLine": 236,
+        "endChar": 8
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "078372fe_503a2d4e",
@@ -308,6 +572,30 @@
       "writtenOn": "2023-07-21T09:21:18Z",
       "side": 1,
       "message": "QQ: Do we support device assignment in command_run?",
+      "range": {
+        "startLine": 380,
+        "startChar": 0,
+        "endLine": 380,
+        "endChar": 98
+      },
+      "revId": "c393e943893467acbb6e2c31d2a5291c03c42e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e31b3eee_a7823395",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-07-24T05:45:50Z",
+      "side": 1,
+      "message": "Yes, command_run specifies config file, which can specify devices.",
+      "parentUuid": "078372fe_503a2d4e",
       "range": {
         "startLine": 380,
         "startChar": 0,
