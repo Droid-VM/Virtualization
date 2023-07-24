@@ -3,6 +3,98 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c4654ac_6a3a842f",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-24T10:13:23Z",
+      "side": 1,
+      "message": "..Default::default()   ?",
+      "range": {
+        "startLine": 138,
+        "startChar": 12,
+        "endLine": 138,
+        "endChar": 27
+      },
+      "revId": "a37715f7c0b16f992465d8c300a849bced28efdd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ceb1e982_16ad083b",
+        "filename": "libs/vmconfig/src/lib.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-24T10:13:23Z",
+      "side": 1,
+      "message": "Need to document the string format here too",
+      "range": {
+        "startLine": 62,
+        "startChar": 21,
+        "endLine": 62,
+        "endChar": 27
+      },
+      "revId": "a37715f7c0b16f992465d8c300a849bced28efdd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba02d4d6_43343664",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-24T10:13:23Z",
+      "side": 1,
+      "message": "Could all of these be ..Default::default()  ?",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 24
+      },
+      "revId": "a37715f7c0b16f992465d8c300a849bced28efdd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "940cf130_4fbf18a8",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-24T10:13:23Z",
+      "side": 1,
+      "message": "I\u0027m not convinced this is right. The devices could be specified in either the VirtualMachineAppConfig or the config file, right? In which case you should probably make it part of VirtualMachinePayloadConfig, and modify create_vm_payload_config().",
+      "range": {
+        "startLine": 676,
+        "startChar": 0,
+        "endLine": 676,
+        "endChar": 47
+      },
+      "revId": "a37715f7c0b16f992465d8c300a849bced28efdd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7e1b9cce_f5680b0c",
         "filename": "virtualizationmanager/src/crosvm.rs",
         "patchSetId": 7
