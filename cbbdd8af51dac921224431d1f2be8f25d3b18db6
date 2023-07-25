@@ -33,6 +33,24 @@
       "message": "Why do you need this?",
       "revId": "cbbdd8af51dac921224431d1f2be8f25d3b18db6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fad07d55_ef95df89",
+        "filename": "libs/service_vm_comm/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-25T14:36:37Z",
+      "side": 1,
+      "message": "It\u0027s useful to let the std crate use `std::` for compatibility. For example, when attempting to make the error[1]\u0027s std version compatible with anyhow, simply inheriting `std::error::Error` is not sufficient; we must also implement `std::fmt` for it.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:system/security/diced/open_dice/src/error.rs;l\u003d36;drc\u003def9992466d7d6396add73cf1e5b18ebe1dd36677",
+      "parentUuid": "e83f1ca2_dbffeffb",
+      "revId": "cbbdd8af51dac921224431d1f2be8f25d3b18db6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
