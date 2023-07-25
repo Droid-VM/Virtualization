@@ -21,4 +21,4 @@ mod bytes;
 
 extern crate alloc;
 
-pub use bytes::{ByteChannel, PrefixedByteChannel};
+pub use bytes::{host_port, ByteChannel, PrefixedByteChannel};

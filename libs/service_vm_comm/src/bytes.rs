@@ -22,6 +22,18 @@ use zerocopy::{
     AsBytes, FromBytes,
 };
 
+/// Returns the host port number for the given VM protection state.
+pub fn host_port(is_protected_vm: bool) -> u32 {
+    const PROTECTED_VM_PORT: u32 = 5679;
+    const NON_PROTECTED_VM_PORT: u32 = 5680;
+
+    if is_protected_vm {
+        PROTECTED_VM_PORT
+    } else {
+        NON_PROTECTED_VM_PORT
+    }
+}
+
 #[repr(packed)]
 #[derive(AsBytes, FromBytes, Clone, Debug)]
 struct Header {
