@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "efdd6b5b_6420e751",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-25T15:18:26Z",
+      "side": 1,
+      "message": "In our discussions this morning I think we agreed:\n- For now, we don\u0027t want to include this in the Java APIs.\n- And we probably want it behind the CUSTOM_VIRTUAL_MACHINE permission, so we don\u0027t (yet) need a new one.\n- And that simplifies things a bit - you can just support it via config file; only apps with the custom permission can use those. Or if you want it to be available without a config file, you can add it in the CustomConfig member of VirtualMachineAppConfig - again we already have the permissions checks for any use of that.",
+      "revId": "9c770aef6199a0e72762731b44b54540c567bf7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ee1fe18a_ff21a55b",
         "filename": "javalib/AndroidManifest.xml",
         "patchSetId": 2
