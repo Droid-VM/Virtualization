@@ -51,6 +51,24 @@
       "parentUuid": "e83f1ca2_dbffeffb",
       "revId": "cbbdd8af51dac921224431d1f2be8f25d3b18db6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb04fcb5_d07cadbb",
+        "filename": "libs/service_vm_comm/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-25T14:38:14Z",
+      "side": 1,
+      "message": "`std::fmt::Debug` is just an alias for `core::fmt::Debug`, they are the same type. You can implement it whether or not you have `std`.",
+      "parentUuid": "fad07d55_ef95df89",
+      "revId": "cbbdd8af51dac921224431d1f2be8f25d3b18db6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
