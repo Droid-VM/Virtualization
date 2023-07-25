@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41ef3403_c23be874",
+        "filename": "libs/service_vm_comm/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-25T10:54:04Z",
+      "side": 1,
+      "message": "Naming nit: nothing in this crate is vm specific; this is just a simple message communication protocol on top of a reliable stream.\n\nMore important: I\u0027m not convinced you need this at all if you\u0027re planning on using CBOR. Each CBOR value (and a message can just be a value) is self-describing, so you know when you\u0027ve reached the end.\n\nIf you implement the ciborium_io Read \u0026 Write traits on your vsock (and they are pretty close to your ByteChannel, then you automatically get CBOR send \u0026 receive.\n\nWhich then makes my other comments here irrelevant.\n\n(Note that on the host side, the Ciborium Read \u0026 Write traits are implemented for the std::io Read and Write traits, so Ciborium can work directly with a socket out of the box.)",
+      "range": {
+        "startLine": 6,
+        "startChar": 11,
+        "endLine": 6,
+        "endChar": 29
+      },
+      "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f61b21b0_bb4600bf",
+        "filename": "libs/service_vm_comm/src/bytes.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-25T10:54:04Z",
+      "side": 1,
+      "message": "I\u0027m not sure which is better, but an alternative way to do this is to have the Error type be declared inside the trait - e.g. https://docs.rs/ciborium-io/0.2.1/ciborium_io/trait.Read.html.",
+      "range": {
+        "startLine": 34,
+        "startChar": 21,
+        "endLine": 34,
+        "endChar": 24
+      },
+      "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a46ccbe_c2d07430",
+        "filename": "libs/service_vm_comm/src/bytes.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-25T10:54:04Z",
+      "side": 1,
+      "message": "recv_message() ?\n\nYou\u0027re converting a byte-oriented stream to a message-oriented one.",
+      "range": {
+        "startLine": 61,
+        "startChar": 11,
+        "endLine": 61,
+        "endChar": 21
+      },
+      "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2f96ac8_cab8010d",
+        "filename": "libs/service_vm_comm/src/bytes.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-25T10:54:04Z",
+      "side": 1,
+      "message": "I\u0027m slightly surprised this works - I didn\u0027t think U32\u003c\u003e implemented the conversion. But header.len.get() might be more direct.",
+      "range": {
+        "startLine": 69,
+        "startChar": 18,
+        "endLine": 69,
+        "endChar": 39
+      },
+      "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
