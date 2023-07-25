@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59c77339_b7207fde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-25T13:17:13Z",
+      "side": 1,
+      "message": "I\u0027m not convinced that blocking interfaces in a single-threaded environment are going to work. I\u0027m pretty sure you\u0027re either going to need a scheduler with multiple threads, or something async or async-like with a main loop polling everything.",
+      "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41ef3403_c23be874",
@@ -26,6 +43,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "477944b2_a6786346",
+        "filename": "libs/service_vm_comm/src/bytes.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-25T13:17:13Z",
+      "side": 1,
+      "message": "Why packed? Isn\u0027t this going to result in unaligned loads?",
+      "range": {
+        "startLine": 25,
+        "startChar": 7,
+        "endLine": 25,
+        "endChar": 13
+      },
+      "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f61b21b0_bb4600bf",
         "filename": "libs/service_vm_comm/src/bytes.rs",
         "patchSetId": 4
@@ -43,6 +83,47 @@
         "endLine": 34,
         "endChar": 24
       },
+      "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3182670_68cec91b",
+        "filename": "libs/service_vm_comm/src/bytes.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-25T13:17:13Z",
+      "side": 1,
+      "message": "Yeah, I think the error type should be a member type of the trait, not a type parameter. Think of it this way: would you ever want to implement both `ByteChannel\u003cMyError\u003e` and `ByteChannel\u003cOtherError\u003e` for the same type?",
+      "parentUuid": "f61b21b0_bb4600bf",
+      "range": {
+        "startLine": 34,
+        "startChar": 21,
+        "endLine": 34,
+        "endChar": 24
+      },
+      "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17d7d634_3841f1ab",
+        "filename": "libs/service_vm_comm/src/bytes.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-25T13:17:13Z",
+      "side": 1,
+      "message": "Why a reference here, rather than having the `PrefixedByteChannel` take ownership of the `ByteChannel`?",
       "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -89,6 +170,74 @@
         "endLine": 69,
         "endChar": 39
       },
+      "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5676df49_9a3f9246",
+        "filename": "libs/service_vm_comm/src/bytes.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-25T13:17:13Z",
+      "side": 1,
+      "message": "There is no guarantee that this is true. `res` may also contain the start of the next message.",
+      "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31d1c57a_712a0595",
+        "filename": "libs/service_vm_comm/src/bytes.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-25T13:17:13Z",
+      "side": 1,
+      "message": "You could avoid a bunch of reallocation by calling `res.reserve(target_len - res.len())` at the start of this function.",
+      "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d35a4680_e07470bf",
+        "filename": "libs/service_vm_comm/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-25T13:17:13Z",
+      "side": 1,
+      "message": "Are you planning to add other modules?",
+      "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1b5bfa0_a33dec68",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-25T13:17:13Z",
+      "side": 1,
+      "message": "You\u0027ll need to handle retrying somewhere, if the peer doesn\u0027t currently have enough buffer space for the connection.",
       "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
