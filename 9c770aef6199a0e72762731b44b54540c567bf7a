@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d6c3d02b_c9220d9a",
+        "filename": "javalib/AndroidManifest.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-07-25T07:38:38Z",
+      "side": 1,
+      "message": "At first I thought that some apps may only need a VM, and some other apps need devices, and we need to distinguish them.\n\nFor the protection level, I have no preference; I just followed MANAGE_VIRTUAL_MACHINE.",
+      "parentUuid": "ee1fe18a_ff21a55b",
+      "range": {
+        "startLine": 46,
+        "startChar": 47,
+        "endLine": 46,
+        "endChar": 80
+      },
+      "revId": "9c770aef6199a0e72762731b44b54540c567bf7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d12e640b_76c0583b",
         "filename": "virtualizationservice/aidl/android/system/virtualizationservice/AssignableDevice.aidl",
         "patchSetId": 2
@@ -173,6 +197,30 @@
       "side": 1,
       "message": "No apologies needed, it\u0027s a perfectly valid point.\nThere are definitely cases where it is useful to be able to query what is available without being able to modify; I just think this is different. (We aren\u0027t allowing you to manage the set of assignable devices, for example.)",
       "parentUuid": "e9166075_1c969c34",
+      "range": {
+        "startLine": 176,
+        "startChar": 8,
+        "endLine": 176,
+        "endChar": 47
+      },
+      "revId": "9c770aef6199a0e72762731b44b54540c567bf7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1abb9a31_84391aff",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-07-25T07:38:38Z",
+      "side": 1,
+      "message": "I\u0027m not sure if we want a separate permission. Are there possible use cases?",
+      "parentUuid": "b717eddb_95d643d8",
       "range": {
         "startLine": 176,
         "startChar": 8,
