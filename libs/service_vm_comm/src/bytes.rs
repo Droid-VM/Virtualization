@@ -15,8 +15,10 @@
 //! This module contains the structs and functions about the byte
 //! transmission.
 
+#[cfg(not(feature = "std"))]
 use alloc::vec::Vec;
-use core::{marker::PhantomData, mem::size_of};
+
+use std::{marker::PhantomData, mem::size_of};
 use zerocopy::{
     byteorder::{LittleEndian, U32},
     AsBytes, FromBytes,

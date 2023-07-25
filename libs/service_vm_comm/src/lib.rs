@@ -15,10 +15,14 @@
 //! This library contains the communication protocol used between the host
 //! and the service VM.
 
-#![no_std]
+#![cfg_attr(not(feature = "std"), no_std)]
+
+#[cfg(not(feature = "std"))]
+extern crate core as std;
+
+#[cfg(not(feature = "std"))]
+extern crate alloc;
 
 mod bytes;
-
-extern crate alloc;
 
 pub use bytes::{ByteChannel, PrefixedByteChannel};
