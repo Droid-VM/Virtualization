@@ -213,6 +213,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3acdc3c_c026fb6f",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-26T13:49:50Z",
+      "side": 1,
+      "message": "I didn\u0027t implement the drop here as drop cannot forward the error if the connection failed to close.",
+      "parentUuid": "1680a6ac_de36da43",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 55
+      },
+      "revId": "cc53d7b6f587c4678f8c6fbb2ee65231ebb655f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3edd3ee5_55f1f40b",
@@ -236,6 +260,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd985afe_f09b1700",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-26T13:49:50Z",
+      "side": 1,
+      "message": "We can safely ignore CreditRequest as SingleConnectionManager already maintains the connection information, including the local buffer length. Once we receive a buffer, the connection manager updates the information and sends an update to the peer systematically [1]. Therefore, the request should already have been processed.\n\nSimilarly, it\u0027s also acceptable to ignore the CreditUpdate in this case, as we check the peer\u0027s credit before sending the buffer [2]. If there is not enough credit available, we will request an update again.\n\nI\u0027ll add this as comment to the code.\n\n[1] https://github.com/rcore-os/virtio-drivers/blob/master/src/device/socket/singleconnectionmanager.rs#L70\n[2] https://github.com/rcore-os/virtio-drivers/blob/7cbbef12243fa309a758a90fa377ebfe3063f6ef/src/device/socket/vsock.rs#L331",
+      "parentUuid": "3edd3ee5_55f1f40b",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 52
+      },
+      "revId": "cc53d7b6f587c4678f8c6fbb2ee65231ebb655f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e959e476_1d739e83",
@@ -249,6 +297,30 @@
       "writtenOn": "2023-07-26T12:26:59Z",
       "side": 1,
       "message": "It would be interesting to see what the actual usage pattern by ciborium is, but I wonder if the write_all method should just append to a local buffer, calling flush if it fills up, while the actual writes to the vsock happen only in flush.",
+      "range": {
+        "startLine": 122,
+        "startChar": 7,
+        "endLine": 122,
+        "endChar": 12
+      },
+      "revId": "cc53d7b6f587c4678f8c6fbb2ee65231ebb655f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72cb74fe_3f895d70",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-26T13:49:50Z",
+      "side": 1,
+      "message": "I also investigated this point as the test seemed to be running slower than before. One thing I noticed is that data is mostly sent and received byte by byte for I/O, and `flush()` is not called in the test flow. I tried the approach you suggested, or simply added a log in `flush()`, but nothing indicated that this function was ever invoked.",
+      "parentUuid": "e959e476_1d739e83",
       "range": {
         "startLine": 122,
         "startChar": 7,
