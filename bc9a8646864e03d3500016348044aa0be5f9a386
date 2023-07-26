@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bde9be5_c75d074f",
+        "filename": "libs/service_vm_comm/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-26T11:51:52Z",
+      "side": 1,
+      "message": "Done. Thanks for the suggestion. I have re-implemented the communication protocol library with `serde` and (de)serialize the bytes in the host and rialto with `ciborium`.\n\nIt\u0027s true that in that sense the `ciborium_io`\u0027s `Read`\u0026`Write` can replace my own ByteChannel and I don\u0027t need to build another layer of `MessageChannel` on top of it.",
+      "parentUuid": "41ef3403_c23be874",
+      "range": {
+        "startLine": 6,
+        "startChar": 11,
+        "endLine": 6,
+        "endChar": 29
+      },
+      "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "477944b2_a6786346",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-07-25T13:17:13Z",
       "side": 1,
       "message": "Why packed? Isn\u0027t this going to result in unaligned loads?",
+      "range": {
+        "startLine": 25,
+        "startChar": 7,
+        "endLine": 25,
+        "endChar": 13
+      },
+      "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49b65975_142bba5d",
+        "filename": "libs/service_vm_comm/src/bytes.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-26T11:51:52Z",
+      "side": 1,
+      "message": "I re-implemented this library with `ciborium_io`\u0027s Read and Write traits instead of the ByteChannel. So that we don\u0027t need this layer on top of the ByteChannel anymore.",
+      "parentUuid": "477944b2_a6786346",
       "range": {
         "startLine": 25,
         "startChar": 7,
@@ -111,6 +159,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f2f974d_7c02c043",
+        "filename": "libs/service_vm_comm/src/bytes.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-26T11:51:52Z",
+      "side": 1,
+      "message": "Thanks for the comment. We can use the ciborium_io\u0027s Read \u0026 Write directly here.",
+      "parentUuid": "b3182670_68cec91b",
+      "range": {
+        "startLine": 34,
+        "startChar": 21,
+        "endLine": 34,
+        "endChar": 24
+      },
+      "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17d7d634_3841f1ab",
@@ -128,6 +200,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cad51ac3_9a5a474e",
+        "filename": "libs/service_vm_comm/src/bytes.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-26T11:51:52Z",
+      "side": 1,
+      "message": "I removed PrefixedByteChannel to use the infrastructure of serde directly.",
+      "parentUuid": "17d7d634_3841f1ab",
+      "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a46ccbe_c2d07430",
@@ -141,6 +231,30 @@
       "writtenOn": "2023-07-25T10:54:04Z",
       "side": 1,
       "message": "recv_message() ?\n\nYou\u0027re converting a byte-oriented stream to a message-oriented one.",
+      "range": {
+        "startLine": 61,
+        "startChar": 11,
+        "endLine": 61,
+        "endChar": 21
+      },
+      "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e759af3a_c1ce4a12",
+        "filename": "libs/service_vm_comm/src/bytes.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-26T11:51:52Z",
+      "side": 1,
+      "message": "This is no longer needed.",
+      "parentUuid": "0a46ccbe_c2d07430",
       "range": {
         "startLine": 61,
         "startChar": 11,
@@ -174,6 +288,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8016d8ab_7a57e00f",
+        "filename": "libs/service_vm_comm/src/bytes.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-26T11:51:52Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e2f96ac8_cab8010d",
+      "range": {
+        "startLine": 69,
+        "startChar": 18,
+        "endLine": 69,
+        "endChar": 39
+      },
+      "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5676df49_9a3f9246",
@@ -187,6 +325,24 @@
       "writtenOn": "2023-07-25T13:17:13Z",
       "side": 1,
       "message": "There is no guarantee that this is true. `res` may also contain the start of the next message.",
+      "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "516bab06_a370223c",
+        "filename": "libs/service_vm_comm/src/bytes.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-26T11:51:52Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5676df49_9a3f9246",
       "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -208,6 +364,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02b5804f_6b7b97a3",
+        "filename": "libs/service_vm_comm/src/bytes.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-26T11:51:52Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "31d1c57a_712a0595",
+      "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d35a4680_e07470bf",
@@ -225,6 +399,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58347365_1d1e7588",
+        "filename": "libs/service_vm_comm/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-26T11:51:52Z",
+      "side": 1,
+      "message": "Probably. This library is intended to contain the shared communication protocol, as well as additional modules that may include helper functions in the future.",
+      "parentUuid": "d35a4680_e07470bf",
+      "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1b5bfa0_a33dec68",
@@ -238,6 +430,24 @@
       "writtenOn": "2023-07-25T13:17:13Z",
       "side": 1,
       "message": "You\u0027ll need to handle retrying somewhere, if the peer doesn\u0027t currently have enough buffer space for the connection.",
+      "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9efa54c2_6219cc3e",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-26T11:51:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1b5bfa0_a33dec68",
       "revId": "bc9a8646864e03d3500016348044aa0be5f9a386",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
