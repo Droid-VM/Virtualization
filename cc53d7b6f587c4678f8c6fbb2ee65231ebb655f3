@@ -333,6 +333,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3f1e60d0_85afb841",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-26T14:08:22Z",
+      "side": 1,
+      "message": "Aha! I suspect that the call to flush (for small output) is left up to us.\nOnce you\u0027ve used Ciborium to write the request to the socket, you should call flush() to ensure all buffered bytes are written.\nCombined with my suggestion above that should restore efficiency.\n\n(That could be handled in a follow up.)",
+      "parentUuid": "72cb74fe_3f895d70",
+      "range": {
+        "startLine": 122,
+        "startChar": 7,
+        "endLine": 122,
+        "endChar": 12
+      },
+      "revId": "cc53d7b6f587c4678f8c6fbb2ee65231ebb655f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "79a44c19_9b40bddb",
         "filename": "rialto/src/error.rs",
         "patchSetId": 11
