@@ -34,6 +34,29 @@
       "parentUuid": "c1bcea27_995268bd",
       "revId": "23c84c9f93c4fd9ab8ddcf586ceb7607f29ff88e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4b86b7c_3af82e4e",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1031048
+      },
+      "writtenOn": "2023-07-26T08:33:18Z",
+      "side": 1,
+      "message": "Optional: Now that this is using a fallible `getentropy` function, we could cleanly return an error instead of calling `.unwrap()`.\n\nThough this doesn\u0027t actually matter because, either way, BoringSSL will abort. :-)",
+      "range": {
+        "startLine": 100,
+        "startChar": 29,
+        "endLine": 100,
+        "endChar": 39
+      },
+      "revId": "23c84c9f93c4fd9ab8ddcf586ceb7607f29ff88e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
