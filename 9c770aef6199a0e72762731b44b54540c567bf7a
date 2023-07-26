@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1784017_e9b68472",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-07-26T05:03:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efdd6b5b_6420e751",
+      "revId": "9c770aef6199a0e72762731b44b54540c567bf7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee1fe18a_ff21a55b",
@@ -82,6 +100,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f873203_44313160",
+        "filename": "javalib/AndroidManifest.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-07-26T05:03:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6c3d02b_c9220d9a",
+      "range": {
+        "startLine": 46,
+        "startChar": 47,
+        "endLine": 46,
+        "endChar": 80
+      },
+      "revId": "9c770aef6199a0e72762731b44b54540c567bf7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d12e640b_76c0583b",
@@ -119,6 +161,30 @@
       "side": 1,
       "message": "nit; Jiyong removed `devicekind` prop from VM DTBO after the meeting.",
       "parentUuid": "d12e640b_76c0583b",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 25,
+        "endChar": 10
+      },
+      "revId": "9c770aef6199a0e72762731b44b54540c567bf7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f3bab3c_1f0b6afd",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/AssignableDevice.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-07-26T05:03:12Z",
+      "side": 1,
+      "message": "\u003e are we actually going to allow arbitrary strings?\n\nFor now, yes.\n\n\u003e If the latter, how does an app know how to interpret / specify a \"kind\"?\n\nApps can take a look at devices and parse it; I don\u0027t think we can instead define a list of predefined kinds, until we are going to support generic APIs for such devices (which is not the case for now)",
+      "parentUuid": "c726f92a_7b0cb719",
       "range": {
         "startLine": 25,
         "startChar": 4,
@@ -238,6 +304,30 @@
       "side": 1,
       "message": "I\u0027m not sure if we want a separate permission. Are there possible use cases?",
       "parentUuid": "b717eddb_95d643d8",
+      "range": {
+        "startLine": 176,
+        "startChar": 8,
+        "endLine": 176,
+        "endChar": 47
+      },
+      "revId": "9c770aef6199a0e72762731b44b54540c567bf7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf8f2c31_7b21d7b0",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-07-26T05:03:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1abb9a31_84391aff",
       "range": {
         "startLine": 176,
         "startChar": 8,
