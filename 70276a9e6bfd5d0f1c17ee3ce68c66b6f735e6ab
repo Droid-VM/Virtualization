@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ddf8381_08c21dfc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-26T09:43:05Z",
+      "side": 1,
+      "message": "Nit: client -\u003e platform ?",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 20
+      },
+      "revId": "70276a9e6bfd5d0f1c17ee3ce68c66b6f735e6ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32c99540_abde90a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-26T09:43:05Z",
+      "side": 1,
+      "message": "Apps shouldn\u0027t be using this, they should only be using the Java API.\nCallers, clients?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 6
+      },
+      "revId": "70276a9e6bfd5d0f1c17ee3ce68c66b6f735e6ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "367d944e_cc93c378",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-26T09:43:05Z",
+      "side": 1,
+      "message": "\"releasing {device}\" is neater.\nMore importantly: this should probably be \"NOT RELEASING {device}\"\n(Scary caps deliberate)",
+      "range": {
+        "startLine": 408,
+        "startChar": 12,
+        "endLine": 408,
+        "endChar": 42
+      },
+      "revId": "70276a9e6bfd5d0f1c17ee3ce68c66b6f735e6ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0790b7ed_51c25e6c",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-26T09:43:05Z",
+      "side": 1,
+      "message": "I think this could do with a better name, since it returns a value.\nsysfs_path_for_platform_device ?\n\n\nAlso, we should pass paths as Path / PathBuf as much as possible, translating at the edges (e.g. AIDL).",
+      "range": {
+        "startLine": 693,
+        "startChar": 3,
+        "endLine": 693,
+        "endChar": 24
+      },
+      "revId": "70276a9e6bfd5d0f1c17ee3ce68c66b6f735e6ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
