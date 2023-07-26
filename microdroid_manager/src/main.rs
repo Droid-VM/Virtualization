@@ -15,6 +15,9 @@
 //! Microdroid Manager
 
 mod dice;
+mod dice_chain;
+mod dice_payload;
+mod dice_policy;
 mod instance;
 mod ioutil;
 mod payload;
