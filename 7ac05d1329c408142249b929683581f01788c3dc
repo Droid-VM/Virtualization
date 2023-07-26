@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "672c8755_be3f3d76",
+        "filename": "libs/service_vm_comm/src/lib.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-26T16:37:16Z",
+      "side": 1,
+      "message": "What happens if you leave this in for `std` builds?",
+      "revId": "7ac05d1329c408142249b929683581f01788c3dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fc5beef_d7f2966d",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-26T16:37:16Z",
+      "side": 1,
+      "message": "If sending fails due to the peer having insufficient connection buffer space, then trying again immediately is just going to fail in the exact same way. Even if the peer does have more buffer space by the time we try again we wouldn\u0027t know about it, because we haven\u0027t polled the receive queue to get the credit update.\n\nThat\u0027s what I meant in my previous comment: I don\u0027t think blocking interfaces in a single-threaded environment are going to work.\n\nIf sending fails, you need to poll the receive queue for a bit, copying any incoming data into your connection buffer, before trying again. Using `VsockConnectionManager` rather than `SingleConnectionManager` will at least handle the buffering for you, but you still need to make sure you\u0027re regularly polling to avoid deadlock.",
+      "revId": "7ac05d1329c408142249b929683581f01788c3dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
