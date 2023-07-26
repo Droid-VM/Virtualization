@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eac94354_52b21777",
+        "filename": "libs/service_vm_comm/src/message.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-26T13:08:25Z",
+      "side": 1,
+      "message": "Not needed anymore",
+      "parentUuid": "b54c7324_e618e9d2",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 27
+      },
+      "revId": "cc53d7b6f587c4678f8c6fbb2ee65231ebb655f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e926ad8a_77914527",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-07-26T12:26:59Z",
       "side": 1,
       "message": "I\u0027d expect this to be handled by #[derive(Serialize, Deserialize)] on Request.\nPart of the point of using serde is that it writes the serialization code for you.\nI\u0027m not exactly sure how that would get mapped to CBOR by Ciborium (but https://serde.rs/enum-representations.html#enum-representations seems to give some control), but since we own both ends we don\u0027t really care. It also means you don\u0027t have to define your own discriminants, that is also part of the job of the serialization code.\nSee https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:external/rust/crates/ciborium/tests/codec.rs;drc\u003d585dd3e610b1ba180365b30e8ad7569933dfa3d8;l\u003d394 for an example with Ciborium.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 1
+      },
+      "revId": "cc53d7b6f587c4678f8c6fbb2ee65231ebb655f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69bee504_7ad13dd4",
+        "filename": "libs/service_vm_comm/src/message.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-26T13:08:25Z",
+      "side": 1,
+      "message": "I understand that. We will use `#[derive(Serialize, Deserialize)]` for the content structs of Request such as `struct GenKeyPairRequest` later. Actually I started with using `#[derive(Serialize, Deserialize)]`, somehow it didn\u0027t work in the beginning with enum.",
+      "parentUuid": "e926ad8a_77914527",
       "range": {
         "startLine": 45,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e468964_4681e490",
+        "filename": "libs/service_vm_comm/src/message.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-26T13:08:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "697aaa4d_864ce530",
+      "range": {
+        "startLine": 61,
+        "startChar": 7,
+        "endLine": 61,
+        "endChar": 21
+      },
+      "revId": "cc53d7b6f587c4678f8c6fbb2ee65231ebb655f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b8fcdcb_7af0e73e",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-07-26T12:26:59Z",
       "side": 1,
       "message": "I guess this works for now, but the structure feels wrong. \nAt the very least the thing that maps requests to responses should be somewhere outside this function, probably outside this file.\nAnd the lifetime of the stream feels a bit weird.\n\nDo we need a DataChannel class at all? The calling code is:\n    let mut data_channel \u003d DataChannel::from(socket_device);\n    data_channel.connect(host_addr())?;\n    data_channel.handle_incoming_request()?;\n    data_channel.force_close()?;\n    \nShould it be more like\nlet mut stream \u003d VsockStream::from(socket_device, host_addr())?;\n\u003cloop reading requests \u0026 sending responses\u003e\n\u003cdrop stream, closing things down\u003e",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 55
+      },
+      "revId": "cc53d7b6f587c4678f8c6fbb2ee65231ebb655f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1680a6ac_de36da43",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-26T13:08:25Z",
+      "side": 1,
+      "message": "That\u0027s a good point. I moved the Request and Response handling to main for now. I\u0027ll add a module dedicated to the request handling later.",
+      "parentUuid": "7b8fcdcb_7af0e73e",
       "range": {
         "startLine": 53,
         "startChar": 0,
@@ -152,6 +248,30 @@
       "writtenOn": "2023-07-26T12:26:59Z",
       "side": 1,
       "message": "SerializationFailed\n\n(Ciborium is mostly a detail?)",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 50,
+        "endChar": 21
+      },
+      "revId": "cc53d7b6f587c4678f8c6fbb2ee65231ebb655f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f365b2a_2ef6114f",
+        "filename": "rialto/src/error.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-26T13:08:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79a44c19_9b40bddb",
       "range": {
         "startLine": 50,
         "startChar": 4,
