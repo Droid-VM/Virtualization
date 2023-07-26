@@ -12,11 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//! Logic for SecretRetreival of a pVM.
+//! Logic for SecretRetrieval of a pVM.
 
-use anyhow::Result;
+use crate::dice_chain::DiceChain;
+use anyhow::{ensure, Result};
 use diced_open_dice::{DiceArtifacts, OwnedDiceArtifacts};
 use keystore2_crypto::ZVec;
+use log::info;
 use openssl::hkdf::hkdf;
 use openssl::md::Md;
 // TODO: Re-evaluate what is the right size of rollback protected secrets
@@ -41,8 +43,14 @@ pub enum VmSecret {
 impl VmSecret {
     pub fn new(dice_artifacts: OwnedDiceArtifacts) -> Result<VmSecret> {
         if is_rp_secrets_supported() {
-            // TODO(291213394): Change this to real dice protected secrets from Secretkeeeper.
+            ensure!(dice_artifacts.bcc().is_some(), "Dice chain missing");
+            // TODO(291213394): Change this to real dice protected secrets from SecretKeeper.
             let fake_rp_secret = ZVec::new(VM_SECRET_SIZE)?;
+            let dice_chain = DiceChain::from_cbor(dice_artifacts.bcc().unwrap())?;
+            info!("Dice chain {:?}; {:?}", dice_chain.root_public_key, dice_chain.payloads);
+            // let policy = Policy::guarding_secret(&dice.bcc);
+            // info!("Policy{:?}; bcc{:?}", policy, bcc);
+            // vs.get_secret();
             return Ok(Self::V2 { dice: dice_artifacts, rp_secret: fake_rp_secret });
         }
         Ok(Self::V1 { dice: dice_artifacts })
