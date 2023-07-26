@@ -57,6 +57,30 @@
       },
       "revId": "23c84c9f93c4fd9ab8ddcf586ceb7607f29ff88e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d9b0223_bf4a064b",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-07-26T12:01:37Z",
+      "side": 1,
+      "message": "In general, Rust recommends panicking ASAP when an error that can\u0027t be handled occurs and, as there\u0027s no way to handle a failure in `fill_with_entropy` here (where we get a `Result::Error`), trusting the C code to do _the right thing_ from a vague `EIO` doesn\u0027t make sense, irrespective of how the C caller is implemented.",
+      "parentUuid": "e4b86b7c_3af82e4e",
+      "range": {
+        "startLine": 100,
+        "startChar": 29,
+        "endLine": 100,
+        "endChar": 39
+      },
+      "revId": "23c84c9f93c4fd9ab8ddcf586ceb7607f29ff88e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
