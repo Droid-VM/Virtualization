@@ -87,6 +87,24 @@
       "parentUuid": "2392aed7_5217e700",
       "revId": "7ac05d1329c408142249b929683581f01788c3dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dba58f35_57cbe46c",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-27T14:37:30Z",
+      "side": 1,
+      "message": "Thank you for the suggestion. Let\u0027s begin by implementing polling for now. If necessary, we can consider changing this to an async model or incorporating a scheduler, as you recommended in option 1 in the future.\n\nCan you please review the latest PS?",
+      "parentUuid": "4f5c42b0_234ef944",
+      "revId": "7ac05d1329c408142249b929683581f01788c3dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
