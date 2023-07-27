@@ -105,6 +105,24 @@
       "parentUuid": "4f5c42b0_234ef944",
       "revId": "7ac05d1329c408142249b929683581f01788c3dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1eca59db_a0862a4f",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-27T14:53:47Z",
+      "side": 1,
+      "message": "One thing that simplifies things, I hope, is that once started the sole purpose of this VM is to receive requests and handle them and then send back a response, and it\u0027s very synchronous/single threaded at that level.",
+      "parentUuid": "dba58f35_57cbe46c",
+      "revId": "7ac05d1329c408142249b929683581f01788c3dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
