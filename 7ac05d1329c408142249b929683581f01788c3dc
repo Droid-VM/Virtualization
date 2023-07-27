@@ -141,6 +141,24 @@
       "parentUuid": "1eca59db_a0862a4f",
       "revId": "7ac05d1329c408142249b929683581f01788c3dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa537aea_e9570fc6",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-27T18:11:59Z",
+      "side": 1,
+      "message": "You\u0027ve still got the same deadlock in `wait_for_send` in PS20, you haven\u0027t added any polling.",
+      "parentUuid": "9f1bee60_f14f2b4f",
+      "revId": "7ac05d1329c408142249b929683581f01788c3dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
