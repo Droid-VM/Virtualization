@@ -69,6 +69,24 @@
       "parentUuid": "8fc5beef_d7f2966d",
       "revId": "7ac05d1329c408142249b929683581f01788c3dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f5c42b0_234ef944",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-07-27T13:49:03Z",
+      "side": 1,
+      "message": "I guess in this case you\u0027ll just get spurious failures rather than deadlock as you only retry a fixed number of times, but the general problem is the same.\n\nSuppose that the other end has a connection buffer of 64 bytes, and the last message we processed from it gave us `buf_alloc` 64 and `fwd_cnt` 0 so we\u0027ve stored these as `peer_buf_alloc` and `peer_fwd_cnt` respectively. Meanwhile we\u0027ve sent 48 bytes to the connection, so our `tx_cnt` is 48. Suppose we then call `send` with 20 bytes to send. `peer_buf_alloc - (tx_cnt - peer_fwd_cnt)` is 16, so the way send is currently implemented it will not send any data, just a credit request, and then return `SocketError::InsufficientBufferSpaceInPeer`.\n\nWe could, and probably should, change this to instead send as many bytes as the peer currently has space for rather than nothing at all. That will be necessary to handle the case where we try to send more data in one go than the size of the recipient\u0027s connection buffer, but doesn\u0027t solve the main issue here.\n\nWhat we need to do is try sending the data again once the peer has some available buffer space, i.e. once `peer_fwd_cnt` has increased. But the only way we can update `peer_fwd_cnt` is by processing the rx queue. The peer might send us a credit update, but it might just send some data for the connection, or indeed might already have done so before we even tried to send our data, we just didn\u0027t check it yet. Any message associated with the connection may contain an updated `fwd_cnt`, but we need to process them in order. So for retrying the send to have any chance of succeeding, we first need to poll the rx queue at least once, and quite possibly multiple times, until we get a sufficiently high `fwd_cnt` (or perhaps a higher `buf_alloc`). But doing so is likely to result in us getting more data to process too. `VsockConnectionManager` will buffer the incoming data in its own connection buffers, so for now it might be enough here to just keep calling `poll` as long as `send` keeps failing, assuming the peer respects the credit we give it, and doesn\u0027t have any dependency of its own between sending and receiving.\n\nFor a proper solution, I can think of three approaches you could take.\n\n1. Implement a scheduler, have one thread responsible for polling the `VsockConnectionManager`, and ensure that any sending always happens on a different thread. Then when sending fails on such a thread you can just yield, perhaps sleep for a short time, and try again. You could make this more efficient by having the available interrupt for the virtqueue wake up the appropriate threads.\n2. Implement an async executor, and have a similar model but with async tasks rather than threads. One task keeps polling the `VsockConnectionManager`, perhaps in a `select!` with other work that needs to be done, and a separate task (or tasks) is responsible for calling `recv` and `send`. To do this nicely I guess we\u0027d ideally want to make `send` an async function that yields until it is able to send, but you could also make it work with a loop to keep retrying and yielding to the executor with a short sleep or similar.\n3. Implement some async-like system yourself, keeping track of the state manually. You\u0027d have to make sure each function just made as much progress as it could without blocking and then saved its state (e.g. how much data it had managed to send so far) before returning, and then have a main loop calling everything repeatedly to give them a chance to make progress.",
+      "parentUuid": "2392aed7_5217e700",
+      "revId": "7ac05d1329c408142249b929683581f01788c3dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
