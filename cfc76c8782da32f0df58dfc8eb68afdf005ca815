@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "44c0d8f3_7d045d7d",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-28T01:59:50Z",
+      "side": 1,
+      "message": "Uh, the usage wasn\u0027t clear to me.\n\nCould you chain CLs (this CL + aosp/2666698) so we can see dependencies more clearly?",
+      "parentUuid": "fbb140b5_62620dae",
+      "range": {
+        "startLine": 188,
+        "startChar": 49,
+        "endLine": 188,
+        "endChar": 55
+      },
+      "revId": "cfc76c8782da32f0df58dfc8eb68afdf005ca815",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "48647469_8d51f199",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 9
@@ -108,6 +132,30 @@
       "side": 1,
       "message": "I just wanted to make sure that it\u0027s tracked by Rust. We could call close() ASAP but I thought this is more consistent.\n\nBTW, in the future, I think we may want to replace this to memfd",
       "parentUuid": "5fa9fdc1_e7dbc23b",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 204,
+        "endChar": 0
+      },
+      "revId": "cfc76c8782da32f0df58dfc8eb68afdf005ca815",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90ceb4d0_8a54851c",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-28T01:59:50Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "737bca18_942dd2a8",
       "range": {
         "startLine": 202,
         "startChar": 0,
