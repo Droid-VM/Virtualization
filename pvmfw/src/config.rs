@@ -17,6 +17,7 @@ use core::fmt;
 use core::mem;
 use core::ops::Range;
 use core::result;
+use log::info;
 use vmbase::util::unchecked_align_up;
 use zerocopy::{FromBytes, LayoutVerified};
 
@@ -85,6 +86,8 @@ pub enum EntryError {
     InvalidOffset(usize),
     /// Size must be zero when offset is and not be when it isn't.
     InvalidSize(usize),
+    /// Header entry is unsupported by the version. Version is (major, minor).
+    Unsupported(Version),
     /// Entry isn't fully within the configuration data structure.
     OutOfBounds { offset: usize, size: usize, body_offset: usize, total_size: usize },
 }
@@ -94,6 +97,7 @@ impl fmt::Display for EntryError {
         match self {
             Self::InvalidOffset(offset) => write!(f, "Invalid offset: {offset:#x?}"),
             Self::InvalidSize(sz) => write!(f, "Invalid size: {sz:#x?}"),
+            Self::Unsupported(version) => write!(f, "Not supported by version {version}"),
             Self::OutOfBounds { offset, size, body_offset, total_size } => {
                 let entry = *offset..(*offset + *size);
                 let range = *body_offset..*total_size;
@@ -106,6 +110,7 @@ impl fmt::Display for EntryError {
 impl<'a> Header<'a> {
     const MAGIC: u32 = u32::from_ne_bytes(*b"pvmf");
     const VERSION_1_0: Version = Version { major: 1, minor: 0 };
+    const VERSION_1_1: Version = Version { major: 1, minor: 1 };
 
     pub fn new(data: &'a mut [u8]) -> Result<Self> {
         let header_size = mem::size_of::<HeaderPrefix>();
@@ -127,7 +132,14 @@ impl<'a> Header<'a> {
             return Err(Error::InvalidFlags(header.flags));
         }
 
-        let entry_count = Entry::COUNT as usize;
+        let last_entry_index = match header.version {
+            Self::VERSION_1_0 => Entry::DebugPolicy,
+            Self::VERSION_1_1 => Entry::VmDtbo,
+            _ => {
+                return Err(Error::UnsupportedVersion(self.version));
+            }
+        } as usize;
+        let entry_count = last_entry_index + 1;
         let entry_size = mem::size_of::<HeaderEntry>() * entry_count;
         let entries =
             data.get(header_size..(header_size + entry_size)).ok_or(Error::BufferTooSmall)?;
@@ -155,11 +167,11 @@ impl<'a> Header<'a> {
     fn get_body_range(&self, entry: Entry) -> Result<Option<Range<usize>>> {
         let entry_index = entry as usize;
         if entry_index >= self.entry_count {
-            // TODO(jaewan): define suitable error here
-            return Err(Error::InvalidEntry(entry, EntryError::InvalidOffset(0)));
+            return Err(Error::InvalidEntry(entry, EntryError::Unsupported(self.version)));
         }
         let e = self.entries[entry_index];
-        match self._get_body_range(e) {
+
+        match self._get_body_range(offset, size) {
             Ok(r) => Ok(r),
             Err(EntryError::InvalidSize(0)) => {
                 // As our bootloader currently uses this (non-compliant) case, permit it for now.
@@ -205,10 +217,11 @@ impl<'a> Header<'a> {
 pub enum Entry {
     Bcc,
     DebugPolicy,
+    VmDtbo,
     COUNT,
 }
 
-#[repr(packed)]
+#[repr(C, packed)]
 #[derive(Clone, Copy, Debug, FromBytes)]
 struct HeaderEntry {
     offset: u32,
@@ -238,13 +251,23 @@ pub struct Config<'a> {
 }
 
 impl<'a> Config<'a> {
+    const SUPPORTED_VERSIONS: [Version; 2] = [Header::VERSION_1_0, Header::VERSION_1_1];
+
     /// Take ownership of a pvmfw configuration consisting of its header and following entries.
     pub fn new(data: &'a mut [u8]) -> Result<Self> {
         let header = Header::new(data)?;
+        info!("pvmfw config version: {}", header.version);
 
         let bcc_range =
             header.get_body_range(Entry::Bcc)?.ok_or(Error::MissingEntry(Entry::Bcc))?;
         let dp_range = header.get_body_range(Entry::DebugPolicy)?;
+        if version == Header::VERSION_1_1 {
+            let vm_dtbo_range = header.get_body_range(Entry::VmDtbo)?;
+            // TODO(b/291191157): Provision device assignment with this.
+            if let Some(vm_dtbo_range) = vm_dtbo_range {
+                info!("Found VM DTBO at {:?}", vm_dtbo_range);
+            }
+        }
 
         let body_size = header.body_size();
         let total_size = header.total_size();
