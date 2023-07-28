@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4babf29_1678c412",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-07-28T06:09:02Z",
+      "side": 1,
+      "message": "I\u0027d like to keep both of them, because one is just to verify that the device is bound to VFIO driver, and the other is to do binding (which will be done as a follow up change).",
+      "parentUuid": "113b1dfe_91c445d1",
+      "range": {
+        "startLine": 698,
+        "startChar": 0,
+        "endLine": 702,
+        "endChar": 0
+      },
+      "revId": "fc69630a8728d7fe46ebb5b96c50d833467951f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c55f058d_bcf6402b",
@@ -60,6 +84,30 @@
       "writtenOn": "2023-07-28T01:54:33Z",
       "side": 1,
       "message": "`Path::new(VFIO_PLATFORM_DRIVER).with_context(|| format!(...))?`",
+      "range": {
+        "startLine": 705,
+        "startChar": 26,
+        "endLine": 707,
+        "endChar": 5
+      },
+      "revId": "fc69630a8728d7fe46ebb5b96c50d833467951f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "651de8c5_f83ef9d4",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-07-28T06:09:02Z",
+      "side": 1,
+      "message": "Sorry but `Path` doesn\u0027t have `with_context`?",
+      "parentUuid": "c55f058d_bcf6402b",
       "range": {
         "startLine": 705,
         "startChar": 26,
@@ -93,6 +141,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b61bf0a4_7ade409f",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-07-28T06:09:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d155722_dcdb1670",
+      "range": {
+        "startLine": 81,
+        "startChar": 16,
+        "endLine": 81,
+        "endChar": 24
+      },
+      "revId": "fc69630a8728d7fe46ebb5b96c50d833467951f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e56c245_87dd4632",
@@ -106,6 +178,30 @@
       "writtenOn": "2023-07-28T01:54:33Z",
       "side": 1,
       "message": "`..Default::default()`?",
+      "range": {
+        "startLine": 106,
+        "startChar": 9,
+        "endLine": 106,
+        "endChar": 24
+      },
+      "revId": "fc69630a8728d7fe46ebb5b96c50d833467951f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07e89fcc_1a39e4f2",
+        "filename": "vmbase/example/tests/test.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-07-28T06:09:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e56c245_87dd4632",
       "range": {
         "startLine": 106,
         "startChar": 9,
