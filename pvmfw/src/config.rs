@@ -18,6 +18,7 @@ use core::fmt;
 use core::mem;
 use core::ops::Range;
 use core::result;
+use log::info;
 use vmbase::util::unchecked_align_up;
 use zerocopy::{FromBytes, LayoutVerified};
 
@@ -101,6 +102,7 @@ impl fmt::Display for EntryError {
 impl Header {
     const MAGIC: u32 = u32::from_ne_bytes(*b"pvmf");
     const VERSION_1_0: u32 = Self::version(1, 0);
+    const VERSION_1_1: u32 = Self::version(1, 1);
     const PADDED_SIZE: usize = unchecked_align_up(mem::size_of::<Self>(), mem::size_of::<u64>());
 
     pub const fn version(major: u16, minor: u16) -> u32 {
@@ -120,7 +122,21 @@ impl Header {
     }
 
     fn get_body_range(&self, entry: Entry) -> Result<Option<Range<usize>>> {
-        let e = self.entries[entry as usize];
+        let entry_max = match self.version {
+            Header::VERSION_1_0 => Ok(2), // BCC + DP
+            Header::VERSION_1_1 => Ok(3), // BCC + DP + VM DTBO
+            _ => {
+                let (major, minor) = self.version_tuple();
+                Err(Error::UnsupportedVersion(major, minor))
+            }
+        }?;
+        let entry_index = entry as usize;
+
+        if entry_max <= entry_index {
+            return Ok(None);
+        }
+
+        let e = self.entries[entry_index];
         let offset = e.offset as usize;
         let size = e.size as usize;
 
@@ -163,10 +179,11 @@ impl Header {
 pub enum Entry {
     Bcc = 0,
     DebugPolicy = 1,
+    VmDtbo = 2,
 }
 
 impl Entry {
-    const COUNT: usize = 2;
+    const COUNT: usize = 3;
 }
 
 #[repr(packed)]
@@ -181,9 +198,12 @@ pub struct Config<'a> {
     body: &'a mut [u8],
     bcc_range: Range<usize>,
     dp_range: Option<Range<usize>>,
+    vm_dtbo_range: Option<Range<usize>>,
 }
 
 impl<'a> Config<'a> {
+    const SUPPORTED_VERSIONS: [u32; 2] = [Header::VERSION_1_0, Header::VERSION_1_1];
+
     /// Take ownership of a pvmfw configuration consisting of its header and following entries.
     pub fn new(data: &'a mut [u8]) -> Result<Self> {
         let header = data.get(..Header::PADDED_SIZE).ok_or(Error::BufferTooSmall)?;
@@ -196,7 +216,11 @@ impl<'a> Config<'a> {
             return Err(Error::InvalidMagic);
         }
 
-        if header.version != Header::VERSION_1_0 {
+        let (major, minor) = header.version_tuple();
+        info!("pvmfw config version: {major}.{minor}");
+
+        let version = header.version;
+        if !Config::SUPPORTED_VERSIONS.contains(&version) {
             let (major, minor) = header.version_tuple();
             return Err(Error::UnsupportedVersion(major, minor));
         }
@@ -208,6 +232,7 @@ impl<'a> Config<'a> {
         let bcc_range =
             header.get_body_range(Entry::Bcc)?.ok_or(Error::MissingEntry(Entry::Bcc))?;
         let dp_range = header.get_body_range(Entry::DebugPolicy)?;
+        let vm_dtbo_range = header.get_body_range(Entry::VmDtbo)?;
 
         let body_size = header.body_size();
         let total_size = header.total_size();
@@ -217,7 +242,7 @@ impl<'a> Config<'a> {
             .get_mut(..body_size)
             .ok_or(Error::InvalidSize(total_size))?;
 
-        Ok(Self { body, bcc_range, dp_range })
+        Ok(Self { body, bcc_range, dp_range, vm_dtbo_range })
     }
 
     /// Get slice containing the platform BCC.
@@ -236,6 +261,12 @@ impl<'a> Config<'a> {
         } else {
             None
         };
+
+        // TODO(b/291191157): Provision device assignment with this.
+        //                    Currently only used to prevent Rust compilation error.
+        if self.vm_dtbo_range.is_some() {
+            info!("VM DTBO exists, but ignored for now");
+        }
 
         (bcc, dp)
     }
