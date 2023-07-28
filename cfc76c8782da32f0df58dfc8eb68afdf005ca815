@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e802664_bb62225e",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-28T07:15:31Z",
+      "side": 1,
+      "message": "My apology. gerrit now shows relation chains in different place for narrow monitor setup :$",
+      "parentUuid": "90fb807a_dbf5355e",
+      "range": {
+        "startLine": 188,
+        "startChar": 49,
+        "endLine": 188,
+        "endChar": 55
+      },
+      "revId": "cfc76c8782da32f0df58dfc8eb68afdf005ca815",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48647469_8d51f199",
@@ -133,6 +157,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "48647469_8d51f199",
+      "range": {
+        "startLine": 191,
+        "startChar": 23,
+        "endLine": 191,
+        "endChar": 29
+      },
+      "revId": "cfc76c8782da32f0df58dfc8eb68afdf005ca815",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc95c598_06234862",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-28T07:15:31Z",
+      "side": 1,
+      "message": "Uh, I meant in incoming aidl calls.\n\n`create_vm_internal()` has other incoming data verifications, so I actually proposed you to check outside of this method. Sorry I wasn\u0027t clearer.",
+      "parentUuid": "75606f81_979b4409",
       "range": {
         "startLine": 191,
         "startChar": 23,

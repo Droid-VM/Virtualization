@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fe2a63b_b9910a93",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-07-28T07:15:31Z",
+      "side": 1,
+      "message": "minor) We probably would only have less than 5 items, so initializing HashSet may be more overhead.\n\nJust FYI, here\u0027s brute-force check.\n```\n    devices.iter().skip(1).enumerate().try_for_each(|(i, x)| {\n        println!(\"checking for duplication of {i}: {x}\");\n        match devices.iter().take(i + 1).find(|y| x.eq(*y)) {\n            Some(_) \u003d\u003e {\n                println!(\"duplicated device {x}\");\n                Err(())\n            },\n            None \u003d\u003e Ok(())\n        }\n    })?;\n```",
+      "range": {
+        "startLine": 191,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 37
+      },
+      "revId": "1ca0f65617c25f9f30039c5cc986a9096f6900a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
