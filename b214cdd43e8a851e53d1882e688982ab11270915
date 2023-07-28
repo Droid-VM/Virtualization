@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af58cf3b_aab492db",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-07-28T12:00:00Z",
+      "side": 1,
+      "message": "I don\u0027t think we will be using VFIO NOIOMMU mode.",
+      "range": {
+        "startLine": 222,
+        "startChar": 15,
+        "endLine": 222,
+        "endChar": 33
+      },
+      "revId": "b214cdd43e8a851e53d1882e688982ab11270915",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8848df9a_777123c8",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-07-28T12:00:00Z",
+      "side": 1,
+      "message": "Instead of writing to sysfs, we can pass a kernel parameter `vfio-iommu-type1.allow_unsafe_interrupts\u003d1`.",
+      "range": {
+        "startLine": 224,
+        "startChar": 15,
+        "endLine": 224,
+        "endChar": 43
+      },
+      "revId": "b214cdd43e8a851e53d1882e688982ab11270915",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
