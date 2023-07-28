@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c6c64c6_56cdcc1f",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-28T08:07:22Z",
+      "side": 1,
+      "message": "Should that be a fatal error?",
+      "range": {
+        "startLine": 63,
+        "startChar": 16,
+        "endLine": 63,
+        "endChar": 24
+      },
+      "revId": "ac813f7330fe293b6f21fa4eaa163e12fea4c515",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6230ddf0_6e10cb0b",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-28T08:07:22Z",
+      "side": 1,
+      "message": "Why is this an error, but the others (which also shouldn\u0027t happen?) are ignored?",
+      "range": {
+        "startLine": 70,
+        "startChar": 16,
+        "endLine": 70,
+        "endChar": 47
+      },
+      "revId": "ac813f7330fe293b6f21fa4eaa163e12fea4c515",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96647eb7_6a9fa01d",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-28T08:07:22Z",
+      "side": 1,
+      "message": "our",
+      "range": {
+        "startLine": 78,
+        "startChar": 42,
+        "endLine": 78,
+        "endChar": 51
+      },
+      "revId": "ac813f7330fe293b6f21fa4eaa163e12fea4c515",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70dbaffe_5132a96f",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-28T08:07:22Z",
+      "side": 1,
+      "message": "Extract a helper function, since this is duplicated?",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 13
+      },
+      "revId": "ac813f7330fe293b6f21fa4eaa163e12fea4c515",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9c642f7_f5a51fe1",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-28T08:07:22Z",
+      "side": 1,
+      "message": "These should never happen -\u003e treat as errors?",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 51
+      },
+      "revId": "ac813f7330fe293b6f21fa4eaa163e12fea4c515",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "401b7ca9_cd3ed029",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-28T08:07:22Z",
+      "side": 1,
+      "message": "Needs update?",
+      "range": {
+        "startLine": 120,
+        "startChar": 60,
+        "endLine": 120,
+        "endChar": 83
+      },
+      "revId": "ac813f7330fe293b6f21fa4eaa163e12fea4c515",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "628ade25_383ab135",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-28T08:07:22Z",
+      "side": 1,
+      "message": "It seems like we\u0027re throwing away useful information here.",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 128,
+        "endChar": 52
+      },
+      "revId": "ac813f7330fe293b6f21fa4eaa163e12fea4c515",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b3f39b0_e743b91b",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-28T08:07:22Z",
+      "side": 1,
+      "message": "We need to wait for events and deal with them here, don\u0027t we?\nEspecially credit updates.",
+      "range": {
+        "startLine": 139,
+        "startChar": 22,
+        "endLine": 139,
+        "endChar": 33
+      },
+      "revId": "ac813f7330fe293b6f21fa4eaa163e12fea4c515",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56e430cf_a5138b06",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-28T08:07:22Z",
+      "side": 1,
+      "message": "Add a TODO to your optimize bug?",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 14
+      },
+      "revId": "ac813f7330fe293b6f21fa4eaa163e12fea4c515",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
