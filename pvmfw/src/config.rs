@@ -18,6 +18,7 @@ use core::fmt;
 use core::mem;
 use core::ops::Range;
 use core::result;
+use log::info;
 use vmbase::util::unchecked_align_up;
 use zerocopy::{FromBytes, LayoutVerified};
 
@@ -34,7 +35,7 @@ struct Header {
     /// Feature flags; currently reserved and must be zero.
     flags: u32,
     /// (offset, size) pairs used to locate individual entries appended to the header.
-    entries: [HeaderEntry; Entry::COUNT],
+    entries: [HeaderEntry; Entry::COUNT as usize],
 }
 
 #[derive(Debug)]
@@ -80,6 +81,8 @@ pub enum EntryError {
     InvalidOffset(usize),
     /// Size must be zero when offset is and not be when it isn't.
     InvalidSize(usize),
+    /// Header entry is unsupported by the version. Version is (major, minor).
+    Unsupported(Version),
     /// Entry isn't fully within the configuration data structure.
     OutOfBounds { offset: usize, size: usize, limit: usize },
 }
@@ -89,6 +92,7 @@ impl fmt::Display for EntryError {
         match self {
             Self::InvalidOffset(offset) => write!(f, "Invalid offset: {offset:#x?}"),
             Self::InvalidSize(sz) => write!(f, "Invalid size: {sz:#x?}"),
+            Self::Unsupported(version) => write!(f, "Not supported by version {version}"),
             Self::OutOfBounds { offset, size, limit } => {
                 let range = Header::PADDED_SIZE..*limit;
                 let entry = *offset..(*offset + *size);
@@ -101,6 +105,7 @@ impl fmt::Display for EntryError {
 impl Header {
     const MAGIC: u32 = u32::from_ne_bytes(*b"pvmf");
     const VERSION_1_0: Version = Version { major: 1, minor: 0 };
+    const VERSION_1_1: Version = Version { major: 1, minor: 1 };
     const PADDED_SIZE: usize = unchecked_align_up(mem::size_of::<Self>(), mem::size_of::<u64>());
 
     pub fn total_size(&self) -> usize {
@@ -111,10 +116,26 @@ impl Header {
         self.total_size() - Self::PADDED_SIZE
     }
 
+    fn entries(&self) -> Result<&[HeaderEntry]> {
+        let last_entry = match self.version {
+            Self::VERSION_1_0 => Entry::DebugPolicy,
+            Self::VERSION_1_1 => Entry::VmDtbo,
+            _ => {
+                return Err(Error::UnsupportedVersion(self.version));
+            }
+        };
+
+        Ok(&self.entries[..=(last_entry as usize)])
+    }
+
     fn get_body_range(&self, entry: Entry) -> Result<Option<Range<usize>>> {
-        let e = self.entries[entry as usize];
-        let offset = e.offset as usize;
-        let size = e.size as usize;
+        let entry_index = entry as usize;
+
+        let (offset, size) = if let Some(e) = self.entries()?.get(entry_index) {
+            (e.offset as usize, e.size as usize)
+        } else {
+            return Err(Error::InvalidEntry(entry, EntryError::Unsupported(self.version)));
+        };
 
         match self._get_body_range(offset, size) {
             Ok(r) => Ok(r),
@@ -152,16 +173,15 @@ impl Header {
 }
 
 #[derive(Clone, Copy, Debug)]
+#[repr(usize)]
 pub enum Entry {
-    Bcc = 0,
-    DebugPolicy = 1,
+    Bcc,
+    DebugPolicy,
+    VmDtbo,
+    COUNT,
 }
 
-impl Entry {
-    const COUNT: usize = 2;
-}
-
-#[repr(packed)]
+#[repr(C, packed)]
 #[derive(Clone, Copy, Debug, FromBytes)]
 struct HeaderEntry {
     offset: u32,
@@ -191,6 +211,8 @@ pub struct Config<'a> {
 }
 
 impl<'a> Config<'a> {
+    const SUPPORTED_VERSIONS: [Version; 2] = [Header::VERSION_1_0, Header::VERSION_1_1];
+
     /// Take ownership of a pvmfw configuration consisting of its header and following entries.
     pub fn new(data: &'a mut [u8]) -> Result<Self> {
         let header = data.get(..Header::PADDED_SIZE).ok_or(Error::BufferTooSmall)?;
@@ -203,8 +225,10 @@ impl<'a> Config<'a> {
             return Err(Error::InvalidMagic);
         }
 
-        if header.version != Header::VERSION_1_0 {
-            return Err(Error::UnsupportedVersion(header.version));
+        let version = header.version;
+        info!("pvmfw config version: {}", header.version);
+        if !Config::SUPPORTED_VERSIONS.contains(&version) {
+            return Err(Error::UnsupportedVersion(version));
         }
 
         if header.flags != 0 {
@@ -214,6 +238,13 @@ impl<'a> Config<'a> {
         let bcc_range =
             header.get_body_range(Entry::Bcc)?.ok_or(Error::MissingEntry(Entry::Bcc))?;
         let dp_range = header.get_body_range(Entry::DebugPolicy)?;
+        if version == Header::VERSION_1_1 {
+            let vm_dtbo_range = header.get_body_range(Entry::VmDtbo)?;
+            // TODO(b/291191157): Provision device assignment with this.
+            if let Some(vm_dtbo_range) = vm_dtbo_range {
+                info!("Found VM DTBO at {:?}", vm_dtbo_range);
+            }
+        }
 
         let body_size = header.body_size();
         let total_size = header.total_size();
