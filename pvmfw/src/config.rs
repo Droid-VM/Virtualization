@@ -101,6 +101,7 @@ impl fmt::Display for EntryError {
 impl Header {
     const MAGIC: u32 = u32::from_ne_bytes(*b"pvmf");
     const VERSION_1_0: u32 = Self::version(1, 0);
+    const VERSION_1_1: u32 = Self::version(1, 0);    
     const PADDED_SIZE: usize = unchecked_align_up(mem::size_of::<Self>(), mem::size_of::<u64>());
 
     pub const fn version(major: u16, minor: u16) -> u32 {
@@ -120,7 +121,22 @@ impl Header {
     }
 
     fn get_body_range(&self, entry: Entry) -> Result<Option<Range<usize>>> {
-        let e = self.entries[entry as usize];
+        let entry_index as usize;
+        let entry_max match self.version() {
+            VERSION_1_0 => 2, // BCC + DP
+            VERSION_1_1 => 3, // BCC + DP + VM DTBO
+            version => {
+                log::error!("Unsupported version {ve}");
+                Err(Error::UnsupportedVersion(self.major, self.minor));
+            }
+        }?;
+
+        if (entry_max <= entry_index) {
+            log::error!("Config entry {entry:?} uses non-zero offset with zero size");
+            Ok(None)
+        }
+
+        let e = self.entries[entry_index];
         let offset = e.offset as usize;
         let size = e.size as usize;
 
@@ -181,9 +197,12 @@ pub struct Config<'a> {
     body: &'a mut [u8],
     bcc_range: Range<usize>,
     dp_range: Option<Range<usize>>,
+    vm_dtbo_range: Option<Range<usize>>,
 }
 
 impl<'a> Config<'a> {
+    const SUPPORTED_VERSIONS = [Header::VERSION_1_0, Header::VERSION_1_1];
+
     /// Take ownership of a pvmfw configuration consisting of its header and following entries.
     pub fn new(data: &'a mut [u8]) -> Result<Self> {
         let header = data.get(..Header::PADDED_SIZE).ok_or(Error::BufferTooSmall)?;
@@ -196,7 +215,7 @@ impl<'a> Config<'a> {
             return Err(Error::InvalidMagic);
         }
 
-        if header.version != Header::VERSION_1_0 {
+        if !SUPPORTED_VERSIONS.contains(header.version) {
             let (major, minor) = header.version_tuple();
             return Err(Error::UnsupportedVersion(major, minor));
         }
@@ -208,6 +227,7 @@ impl<'a> Config<'a> {
         let bcc_range =
             header.get_body_range(Entry::Bcc)?.ok_or(Error::MissingEntry(Entry::Bcc))?;
         let dp_range = header.get_body_range(Entry::DebugPolicy)?;
+        let vm_dtbo_range = header.get_body_range(Entry::VmDtbo)?;
 
         let body_size = header.body_size();
         let total_size = header.total_size();
@@ -217,7 +237,7 @@ impl<'a> Config<'a> {
             .get_mut(..body_size)
             .ok_or(Error::InvalidSize(total_size))?;
 
-        Ok(Self { body, bcc_range, dp_range })
+        Ok(Self { body, bcc_range, dp_range, vm_dtbo })
     }
 
     /// Get slice containing the platform BCC.
