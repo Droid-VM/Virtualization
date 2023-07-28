@@ -35,18 +35,23 @@ public final class Pvmfw {
     private static final int BUFFER_SIZE = 1024;
     private static final int HEADER_SIZE = Integer.BYTES * 8; // Header has 8 integers.
     private static final int HEADER_MAGIC = 0x666d7670;
-    private static final int HEADER_VERSION = getVersion(1, 0);
+    private static final int HEADER_DEFAULT_VERSION = getVersion(1, 0);
     private static final int HEADER_FLAGS = 0;
 
     @NonNull private final File mPvmfwBinFile;
     @NonNull private final File mBccFile;
     @Nullable private final File mDebugPolicyFile;
+    private final int mVersion;
 
     private Pvmfw(
-            @NonNull File pvmfwBinFile, @NonNull File bccFile, @Nullable File debugPolicyFile) {
+            @NonNull File pvmfwBinFile,
+            @NonNull File bccFile,
+            @Nullable File debugPolicyFile,
+            int version) {
         mPvmfwBinFile = Objects.requireNonNull(pvmfwBinFile);
         mBccFile = Objects.requireNonNull(bccFile);
         mDebugPolicyFile = debugPolicyFile;
+        mVersion = version;
     }
 
     /**
@@ -66,13 +71,20 @@ public final class Pvmfw {
 
         ByteBuffer header = ByteBuffer.allocate(HEADER_SIZE).order(LITTLE_ENDIAN);
         header.putInt(HEADER_MAGIC);
-        header.putInt(HEADER_VERSION);
+        header.putInt(mVersion);
         header.putInt(totalSize);
         header.putInt(HEADER_FLAGS);
         header.putInt(bccOffset);
         header.putInt(bccSize);
         header.putInt(debugPolicyOffset);
         header.putInt(debugPolicySize);
+
+        if (hasVmDtbo(mVersion)) {
+            // Add placeholder entry for dummy VM DTBO.
+            // TODO(jaewan): Add tests for VM DTBO instead of adding dummy offsets.
+            header.putInt(0);
+            header.putInt(0);
+        }
 
         try (FileOutputStream pvmfw = new FileOutputStream(outFile)) {
             appendFile(pvmfw, mPvmfwBinFile);
@@ -110,6 +122,12 @@ public final class Pvmfw {
         }
     }
 
+    private static boolean hasVmDtbo(int version) {
+        int major = getMajorVersion(version);
+        int minor = getMinorVersion(version);
+        return major > 1 || (major == 1 && minor >= 1);
+    }
+
     private static int alignTo(int x, int size) {
         return (x + size - 1) & ~(size - 1);
     }
@@ -118,15 +136,25 @@ public final class Pvmfw {
         return ((major & 0xFFFF) << 16) | (minor & 0xFFFF);
     }
 
+    private static int getMajorVersion(int version) {
+        return (version >> 16) & 0xFFFF;
+    }
+
+    private static int getMinorVersion(int version) {
+        return version & 0xFFFF;
+    }
+
     /** Builder for {@link Pvmfw}. */
     public static final class Builder {
         @NonNull private final File mPvmfwBinFile;
         @NonNull private final File mBccFile;
         @Nullable private File mDebugPolicyFile;
+        private int mVersion;
 
         public Builder(@NonNull File pvmfwBinFile, @NonNull File bccFile) {
             mPvmfwBinFile = Objects.requireNonNull(pvmfwBinFile);
             mBccFile = Objects.requireNonNull(bccFile);
+            mVersion = HEADER_DEFAULT_VERSION;
         }
 
         @NonNull
@@ -136,8 +164,14 @@ public final class Pvmfw {
         }
 
         @NonNull
+        public Builder setVersion(int major, int minor) {
+            mVersion = getVersion(major, minor);
+            return this;
+        }
+
+        @NonNull
         public Pvmfw build() {
-            return new Pvmfw(mPvmfwBinFile, mBccFile, mDebugPolicyFile);
+            return new Pvmfw(mPvmfwBinFile, mBccFile, mDebugPolicyFile, mVersion);
         }
     }
 }
