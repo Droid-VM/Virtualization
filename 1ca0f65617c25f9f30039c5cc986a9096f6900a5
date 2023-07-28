@@ -22,6 +22,30 @@
       },
       "revId": "1ca0f65617c25f9f30039c5cc986a9096f6900a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4af466b_072a63d9",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-07-28T08:55:32Z",
+      "side": 1,
+      "message": "Thanks for suggestion, but let me this as-is (as I think hashset version has better readability and this won\u0027t be bottleneck anyway)",
+      "parentUuid": "1fe2a63b_b9910a93",
+      "range": {
+        "startLine": 191,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 37
+      },
+      "revId": "1ca0f65617c25f9f30039c5cc986a9096f6900a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
