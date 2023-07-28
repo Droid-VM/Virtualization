@@ -1,0 +1,48 @@
+// Copyright 2023 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+//! Android VirtualizationService
+
+mod aidl;
+
+use crate::aidl::{
+    BINDER_SERVICE_IDENTIFIER,
+    VirtualizationServiceHelper
+};
+use android_logger::{Config, FilterBuilder};
+use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IVirtualizationServiceHelper::BnVirtualizationServiceHelper;
+use binder::{register_lazy_service, BinderFeatures, ProcessState};
+use log::{info, Level};
+
+const LOG_TAG: &str = "VirtualizationServiceHelper";
+
+fn main() {
+    android_logger::init_once(
+        Config::default()
+            .with_tag(LOG_TAG)
+            .with_min_level(Level::Info)
+            .with_log_id(android_logger::LogId::System)
+            .with_filter(
+                // Reduce logspam by silencing logs from the disk crate which don't provide much
+                // information to us.
+                FilterBuilder::new().parse("info,disk=off").build(),
+            ),
+    );
+
+    let service = VirtualizationServiceHelper::init();
+    let service = BnVirtualizationServiceHelper::new_binder(service, BinderFeatures::default());
+    register_lazy_service(BINDER_SERVICE_IDENTIFIER, service.as_binder()).unwrap();
+    info!("Registered Binder service, joining threadpool.");
+    ProcessState::join_thread_pool();
+}
