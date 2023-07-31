@@ -22,6 +22,29 @@
       },
       "revId": "1a074bd248f888ebfdf051391e85f994b97550d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d352039c_a3c3e8ee",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-07-31T15:30:34Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we try not to read this if the version is 1.0?",
+      "range": {
+        "startLine": 235,
+        "startChar": 8,
+        "endLine": 235,
+        "endChar": 66
+      },
+      "revId": "1a074bd248f888ebfdf051391e85f994b97550d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
