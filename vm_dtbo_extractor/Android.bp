@@ -11,6 +11,7 @@ rust_binary {
     rustlibs: [
         "libanyhow",
         "liblog_rust",
+        "librustutils",
     ],
     apex_available: ["com.android.virt"],
 }
