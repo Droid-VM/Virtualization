@@ -1,0 +1,16 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_binary {
+    name: "vm_dtbo_extractor",
+    crate_name: "vm_dtbo_extractor",
+    srcs: ["src/main.rs"],
+    edition: "2021",
+    prefer_rlib: true,
+    rustlibs: [
+        "libanyhow",
+        "liblog_rust",
+    ],
+    apex_available: ["com.android.virt"],
+}
