@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "36d85a18_d4de2743",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-07-31T14:57:37Z",
+      "side": 1,
+      "message": "can you replace this with a specific example?",
+      "range": {
+        "startLine": 15,
+        "startChar": 31,
+        "endLine": 15,
+        "endChar": 43
+      },
+      "revId": "a8ae50e37e6d12c8581a48413c3c3653ecb2520e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1073d0ce_b8f7a713",
@@ -53,6 +76,75 @@
         "startChar": 0,
         "endLine": 521,
         "endChar": 49
+      },
+      "revId": "a8ae50e37e6d12c8581a48413c3c3653ecb2520e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3896c08_123c19b6",
+        "filename": "libs/vmconfig/src/lib.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-07-31T14:57:37Z",
+      "side": 1,
+      "message": "can be `x.to_str().cloned().ok_or(anyhow!(\"error message\"))`",
+      "range": {
+        "startLine": 117,
+        "startChar": 49,
+        "endLine": 117,
+        "endChar": 63
+      },
+      "revId": "a8ae50e37e6d12c8581a48413c3c3653ecb2520e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8751d9e_5c35d9f8",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-07-31T14:57:37Z",
+      "side": 1,
+      "message": "In Rust, we usually use the same variable name for this kind of conversion.",
+      "range": {
+        "startLine": 701,
+        "startChar": 8,
+        "endLine": 701,
+        "endChar": 22
+      },
+      "revId": "a8ae50e37e6d12c8581a48413c3c3653ecb2520e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74dbef73_05020e23",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-07-31T14:57:37Z",
+      "side": 1,
+      "message": "the path is already canicalized. so not needed here?",
+      "range": {
+        "startLine": 707,
+        "startChar": 55,
+        "endLine": 707,
+        "endChar": 70
       },
       "revId": "a8ae50e37e6d12c8581a48413c3c3653ecb2520e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
