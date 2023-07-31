@@ -16,6 +16,29 @@
       "message": "I\u0027ll rework this so we don\u0027t need to run VS as root.",
       "revId": "61db25ba1e193e57ef2c45e7bbd210b1a0aabf62",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2c83af3_7e82b6cf",
+        "filename": "apex/virtualizationservice.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-07-31T14:40:53Z",
+      "side": 1,
+      "message": "The plan is to make a new separate binary which is responsible for the vfio operations and run it as root.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 14
+      },
+      "revId": "61db25ba1e193e57ef2c45e7bbd210b1a0aabf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
