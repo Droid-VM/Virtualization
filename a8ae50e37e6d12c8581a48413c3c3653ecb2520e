@@ -16,6 +16,46 @@
       "message": "I resolved the test failure. Can I get +2?",
       "revId": "a8ae50e37e6d12c8581a48413c3c3653ecb2520e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06b5e84a_2426069c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-31T09:30:05Z",
+      "side": 1,
+      "message": "I don\u0027t know enough about whether this is doing the right thing to be comfortable with +2 ing.",
+      "revId": "a8ae50e37e6d12c8581a48413c3c3653ecb2520e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "945c3453_324c61e8",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-07-31T09:30:05Z",
+      "side": 1,
+      "message": "Uber-nit: Android has a deep-seated dislike of allocations.\nThe common idiom is\nprivate static String[] EMPTY_STRING_ARRAY \u003d {};\nAnd then just reuse that single allocation.",
+      "range": {
+        "startLine": 520,
+        "startChar": 0,
+        "endLine": 521,
+        "endChar": 49
+      },
+      "revId": "a8ae50e37e6d12c8581a48413c3c3653ecb2520e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
