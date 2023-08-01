@@ -43,6 +43,184 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "016d44f6_d66a2234",
+        "filename": "vm_dtbo_extractor/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-01T07:53:21Z",
+      "side": 1,
+      "message": "If this is with `#[repr(C)]`, then you can just transmute the \u0026[u32] into this.",
+      "revId": "d94c4973ddb347cd540d5fad7610d252cf2c5223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc0db466_a27771ba",
+        "filename": "vm_dtbo_extractor/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-01T07:53:21Z",
+      "side": 1,
+      "message": "You have to check the magic number and fail if it doesn\u0027t match",
+      "range": {
+        "startLine": 51,
+        "startChar": 30,
+        "endLine": 51,
+        "endChar": 36
+      },
+      "revId": "d94c4973ddb347cd540d5fad7610d252cf2c5223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06bb7954_f3219991",
+        "filename": "vm_dtbo_extractor/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-01T07:53:21Z",
+      "side": 1,
+      "message": "These are unnecessary copies.",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 32
+      },
+      "revId": "d94c4973ddb347cd540d5fad7610d252cf2c5223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6482ec61_31594517",
+        "filename": "vm_dtbo_extractor/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-01T07:53:21Z",
+      "side": 1,
+      "message": "ditto. repr(C)",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 21
+      },
+      "revId": "d94c4973ddb347cd540d5fad7610d252cf2c5223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "427ccdab_692cfe1b",
+        "filename": "vm_dtbo_extractor/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-01T07:53:21Z",
+      "side": 1,
+      "message": "This never fails",
+      "range": {
+        "startLine": 83,
+        "startChar": 30,
+        "endLine": 83,
+        "endChar": 36
+      },
+      "revId": "d94c4973ddb347cd540d5fad7610d252cf2c5223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6b2d65a_1006cd6a",
+        "filename": "vm_dtbo_extractor/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-01T07:53:21Z",
+      "side": 1,
+      "message": "unnecessary copies",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 28
+      },
+      "revId": "d94c4973ddb347cd540d5fad7610d252cf2c5223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e569cbdf_15f3fd0b",
+        "filename": "vm_dtbo_extractor/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-01T07:53:21Z",
+      "side": 1,
+      "message": "PathBuf?",
+      "range": {
+        "startLine": 98,
+        "startChar": 33,
+        "endLine": 98,
+        "endChar": 39
+      },
+      "revId": "d94c4973ddb347cd540d5fad7610d252cf2c5223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d665e336_2073ae2b",
+        "filename": "vm_dtbo_extractor/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-01T07:53:21Z",
+      "side": 1,
+      "message": "why is this called binding, not slot_suffix?",
+      "range": {
+        "startLine": 99,
+        "startChar": 8,
+        "endLine": 99,
+        "endChar": 15
+      },
+      "revId": "d94c4973ddb347cd540d5fad7610d252cf2c5223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "227dc64d_e1951025",
         "filename": "vm_dtbo_extractor/src/main.rs",
         "patchSetId": 2
@@ -82,6 +260,52 @@
         "startChar": 25,
         "endLine": 111,
         "endChar": 38
+      },
+      "revId": "d94c4973ddb347cd540d5fad7610d252cf2c5223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1399caa_245bae9a",
+        "filename": "vm_dtbo_extractor/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-01T07:53:21Z",
+      "side": 1,
+      "message": "You can prepare a buffer which has the same size as DtTableHeader and read into it.",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 5
+      },
+      "revId": "d94c4973ddb347cd540d5fad7610d252cf2c5223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47288ba6_4740e623",
+        "filename": "vm_dtbo_extractor/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-01T07:53:21Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 5
       },
       "revId": "d94c4973ddb347cd540d5fad7610d252cf2c5223",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
