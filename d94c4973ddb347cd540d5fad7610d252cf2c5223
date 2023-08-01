@@ -16,6 +16,75 @@
       "message": "I just created a change, though it won\u0027t be merged because of permission issue.\nAdded you all as cc, please look at the code.\n\n- Creating a new binary vm_dtbo_extractor\n- Adding vm_dtbo_extractor into com.android.virt apex\n- Getting full dtbo.img path considering A/B update.\n- Extracting dt_table_header \u0026 dt_table_entry information.\n- Saving each dtbo file into other place like /data/vm_dtbo. Saved file could be seen with fdtdump. I think it\u0027s available to use libfdt with small modification from current code.",
       "revId": "d94c4973ddb347cd540d5fad7610d252cf2c5223",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c232d1bb_30afb114",
+        "filename": "vm_dtbo_extractor/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-01T07:19:50Z",
+      "side": 1,
+      "message": "or `DTBO_IMG_PATH_FORMAT: \u0026str \u003d \"/dev/block/by_name/dtbo{}\";`?",
+      "range": {
+        "startLine": 24,
+        "startChar": 6,
+        "endLine": 24,
+        "endChar": 26
+      },
+      "revId": "d94c4973ddb347cd540d5fad7610d252cf2c5223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "227dc64d_e1951025",
+        "filename": "vm_dtbo_extractor/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-01T07:19:50Z",
+      "side": 1,
+      "message": "`let slot_suffix \u003d binding.as_deref().context(\"slot_suffix is none\")?;`",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 88
+      },
+      "revId": "d94c4973ddb347cd540d5fad7610d252cf2c5223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5d679e4_14bc1ad0",
+        "filename": "vm_dtbo_extractor/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-01T07:19:50Z",
+      "side": 1,
+      "message": "Question) Is it big endian? I couldn\u0027t find any mention in DTB/DTBo partition while Android + DT are little endian.",
+      "range": {
+        "startLine": 111,
+        "startChar": 25,
+        "endLine": 111,
+        "endChar": 38
+      },
+      "revId": "d94c4973ddb347cd540d5fad7610d252cf2c5223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
