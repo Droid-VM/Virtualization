@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0f997a71_5f30eac2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-01T02:41:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36d85a18_d4de2743",
+      "range": {
+        "startLine": 15,
+        "startChar": 31,
+        "endLine": 15,
+        "endChar": 43
+      },
+      "revId": "a8ae50e37e6d12c8581a48413c3c3653ecb2520e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "1073d0ce_b8f7a713",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 12
@@ -81,6 +105,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4e35124_009c7a62",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-01T02:41:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "945c3453_324c61e8",
+      "range": {
+        "startLine": 520,
+        "startChar": 0,
+        "endLine": 521,
+        "endChar": 49
+      },
+      "revId": "a8ae50e37e6d12c8581a48413c3c3653ecb2520e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3896c08_123c19b6",
@@ -94,6 +142,30 @@
       "writtenOn": "2023-07-31T14:57:37Z",
       "side": 1,
       "message": "can be `x.to_str().cloned().ok_or(anyhow!(\"error message\"))`",
+      "range": {
+        "startLine": 117,
+        "startChar": 49,
+        "endLine": 117,
+        "endChar": 63
+      },
+      "revId": "a8ae50e37e6d12c8581a48413c3c3653ecb2520e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21daf57a_48bfeef7",
+        "filename": "libs/vmconfig/src/lib.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-01T02:41:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3896c08_123c19b6",
       "range": {
         "startLine": 117,
         "startChar": 49,
@@ -127,6 +199,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a95d3879_e52a8908",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-01T02:41:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8751d9e_5c35d9f8",
+      "range": {
+        "startLine": 701,
+        "startChar": 8,
+        "endLine": 701,
+        "endChar": 22
+      },
+      "revId": "a8ae50e37e6d12c8581a48413c3c3653ecb2520e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74dbef73_05020e23",
@@ -140,6 +236,30 @@
       "writtenOn": "2023-07-31T14:57:37Z",
       "side": 1,
       "message": "the path is already canicalized. so not needed here?",
+      "range": {
+        "startLine": 707,
+        "startChar": 55,
+        "endLine": 707,
+        "endChar": 70
+      },
+      "revId": "a8ae50e37e6d12c8581a48413c3c3653ecb2520e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c296a50d_64c16e7e",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-01T02:41:59Z",
+      "side": 1,
+      "message": "yes we need here, because \"driver\" is another symlink and we need to canonicalize again.",
+      "parentUuid": "74dbef73_05020e23",
       "range": {
         "startLine": 707,
         "startChar": 55,
