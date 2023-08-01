@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "024dc637_bfceae5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-08-01T10:52:42Z",
+      "side": 1,
+      "message": "@inseob@google.com \nNot about this change directly, what do you prefer for implementing AIDL service for getting VM DTBO from dtbo.img? For me, either is fine.\n\n- Merging AIDL service about getting VM DTBO into VfioHandler.\n- Constructing a distinguished AIDL service having root permission.",
+      "revId": "22bae5432e07ed5f6bea82b819480328b71b7c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a52361f1_4f721db6",
         "filename": "apex/virtualizationservice.rc",
         "patchSetId": 6
