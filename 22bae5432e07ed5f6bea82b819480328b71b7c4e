@@ -1,0 +1,176 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a402fb1b_365a5b15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-01T10:01:48Z",
+      "side": 1,
+      "message": "c",
+      "revId": "22bae5432e07ed5f6bea82b819480328b71b7c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a52361f1_4f721db6",
+        "filename": "apex/virtualizationservice.rc",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-01T10:01:48Z",
+      "side": 1,
+      "message": "Remove this. Otherwise, this will automatically be started when the class \u0027main\u0027 is started.",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 14
+      },
+      "revId": "22bae5432e07ed5f6bea82b819480328b71b7c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "556ec2da_6449b24e",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-01T10:01:48Z",
+      "side": 1,
+      "message": "We don\u0027t have to use pipe. We can just return FD of the DTBO",
+      "range": {
+        "startLine": 54,
+        "startChar": 36,
+        "endLine": 54,
+        "endChar": 59
+      },
+      "revId": "22bae5432e07ed5f6bea82b819480328b71b7c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8130b358_8e3b5609",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-01T10:01:48Z",
+      "side": 1,
+      "message": "Path is a pointer-like struct. I don\u0027t think we have to lazily create them.",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 53
+      },
+      "revId": "22bae5432e07ed5f6bea82b819480328b71b7c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "671e11bd_822a3865",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-01T10:01:48Z",
+      "side": 1,
+      "message": "This is what std::fs::write does.",
+      "revId": "22bae5432e07ed5f6bea82b819480328b71b7c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1a7199f_fe84be50",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-01T10:01:48Z",
+      "side": 1,
+      "message": "This doesn\u0027t explain why it failed. Can we check the cases separately and throw the exception accordingly?",
+      "range": {
+        "startLine": 162,
+        "startChar": 8,
+        "endLine": 165,
+        "endChar": 10
+      },
+      "revId": "22bae5432e07ed5f6bea82b819480328b71b7c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0e66a70_436ad3d1",
+        "filename": "virtualizationservice/vfio_handler/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-01T10:01:48Z",
+      "side": 1,
+      "message": "Do we use the disk crate here?",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 68
+      },
+      "revId": "22bae5432e07ed5f6bea82b819480328b71b7c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da496e92_9e032a47",
+        "filename": "virtualizationservice/vfio_handler/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-01T10:01:48Z",
+      "side": 1,
+      "message": "You can use get_descriptor() method from IVfioHandler instead",
+      "range": {
+        "startLine": 45,
+        "startChar": 26,
+        "endLine": 45,
+        "endChar": 51
+      },
+      "revId": "22bae5432e07ed5f6bea82b819480328b71b7c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
