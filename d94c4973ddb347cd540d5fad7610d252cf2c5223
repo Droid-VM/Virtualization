@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dbcd71c_fe0b7ebc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-08-01T06:19:47Z",
+      "side": 1,
+      "message": "I just created a change, though it won\u0027t be merged because of permission issue.\nAdded you all as cc, please look at the code.\n\n- Creating a new binary vm_dtbo_extractor\n- Adding vm_dtbo_extractor into com.android.virt apex\n- Getting full dtbo.img path considering A/B update.\n- Extracting dt_table_header \u0026 dt_table_entry information.\n- Saving each dtbo file into other place like /data/vm_dtbo. Saved file could be seen with fdtdump. I think it\u0027s available to use libfdt with small modification from current code.",
+      "revId": "d94c4973ddb347cd540d5fad7610d252cf2c5223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
