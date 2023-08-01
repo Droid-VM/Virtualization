@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3580e7cb_2c424017",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-01T10:12:24Z",
+      "side": 1,
+      "message": "As a follow-up (i.e. not in this CL), let\u0027s write some tests and run them in CI.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 17
+      },
+      "revId": "9f6f21702072d0a34ed8d3e4e1c4dda22e6d4d7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "281db6e6_34090e06",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-01T10:12:24Z",
+      "side": 1,
+      "message": "Can this be directly to the vfio_handler service? Why does it have to go through VS?",
+      "range": {
+        "startLine": 477,
+        "startChar": 29,
+        "endLine": 477,
+        "endChar": 43
+      },
+      "revId": "9f6f21702072d0a34ed8d3e4e1c4dda22e6d4d7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adc43e71_84d31376",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-01T10:12:24Z",
+      "side": 1,
+      "message": "Is this really needed for Path?",
+      "range": {
+        "startLine": 693,
+        "startChar": 0,
+        "endLine": 693,
+        "endChar": 14
+      },
+      "revId": "9f6f21702072d0a34ed8d3e4e1c4dda22e6d4d7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
