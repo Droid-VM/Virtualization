@@ -76,6 +76,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08b708a3_49be7da9",
+        "filename": "apex/virtualizationservice.rc",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-02T05:03:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a52361f1_4f721db6",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 14
+      },
+      "revId": "22bae5432e07ed5f6bea82b819480328b71b7c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9507d71e_5b081026",
@@ -89,6 +113,30 @@
       "writtenOn": "2023-08-01T10:11:14Z",
       "side": 1,
       "message": "return an error, don\u0027t panic",
+      "range": {
+        "startLine": 193,
+        "startChar": 16,
+        "endLine": 193,
+        "endChar": 60
+      },
+      "revId": "22bae5432e07ed5f6bea82b819480328b71b7c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c302ff5d_4724f778",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-02T05:03:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9507d71e_5b081026",
       "range": {
         "startLine": 193,
         "startChar": 16,
@@ -124,6 +172,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe948691_9310feba",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-02T05:03:32Z",
+      "side": 1,
+      "message": "Then how do we create the DTBO? IIUC we need to assemble a DTBO for this VM out of VM DTBO, so we anyway need a new file (it could be pipe, memfd, or a temporary file) and I chose pipe here for convenience for now.",
+      "parentUuid": "556ec2da_6449b24e",
+      "range": {
+        "startLine": 54,
+        "startChar": 36,
+        "endLine": 54,
+        "endChar": 59
+      },
+      "revId": "22bae5432e07ed5f6bea82b819480328b71b7c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8130b358_8e3b5609",
         "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
         "patchSetId": 6
@@ -135,6 +207,30 @@
       "writtenOn": "2023-08-01T10:01:48Z",
       "side": 1,
       "message": "Path is a pointer-like struct. I don\u0027t think we have to lazily create them.",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 53
+      },
+      "revId": "22bae5432e07ed5f6bea82b819480328b71b7c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f374c212_5c018c7d",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-02T05:03:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8130b358_8e3b5609",
       "range": {
         "startLine": 69,
         "startChar": 0,
@@ -162,6 +258,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cc1fa31_7949689e",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-02T05:03:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "671e11bd_822a3865",
+      "revId": "22bae5432e07ed5f6bea82b819480328b71b7c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1a7199f_fe84be50",
@@ -175,6 +289,30 @@
       "writtenOn": "2023-08-01T10:01:48Z",
       "side": 1,
       "message": "This doesn\u0027t explain why it failed. Can we check the cases separately and throw the exception accordingly?",
+      "range": {
+        "startLine": 162,
+        "startChar": 8,
+        "endLine": 165,
+        "endChar": 10
+      },
+      "revId": "22bae5432e07ed5f6bea82b819480328b71b7c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d66b3f57_e3fcac64",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-02T05:03:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1a7199f_fe84be50",
       "range": {
         "startLine": 162,
         "startChar": 8,
@@ -208,6 +346,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86131671_34d35062",
+        "filename": "virtualizationservice/vfio_handler/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-02T05:03:32Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "b0e66a70_436ad3d1",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 68
+      },
+      "revId": "22bae5432e07ed5f6bea82b819480328b71b7c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da496e92_9e032a47",
@@ -221,6 +383,30 @@
       "writtenOn": "2023-08-01T10:01:48Z",
       "side": 1,
       "message": "You can use get_descriptor() method from IVfioHandler instead",
+      "range": {
+        "startLine": 45,
+        "startChar": 26,
+        "endLine": 45,
+        "endChar": 51
+      },
+      "revId": "22bae5432e07ed5f6bea82b819480328b71b7c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b56d84d_4fcc1420",
+        "filename": "virtualizationservice/vfio_handler/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-02T05:03:32Z",
+      "side": 1,
+      "message": "Seems that it returns \"android.system.virtualizationservice_internal.IVfioHandler\", not \"android.system.vfio_handler\" I defined.",
+      "parentUuid": "da496e92_9e032a47",
       "range": {
         "startLine": 45,
         "startChar": 26,
