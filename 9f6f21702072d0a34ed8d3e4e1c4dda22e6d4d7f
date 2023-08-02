@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "88f47571_fa8eea2d",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-02T01:45:52Z",
+      "side": 1,
+      "message": "It could but I wanted to make vfio_handler as small as possible (including things like permission checks) and accessible only from VS. I want to leave this as-is, but it\u0027s not a strong opinion so I\u0027m fine to directly connect to vfio_handler",
+      "parentUuid": "281db6e6_34090e06",
+      "range": {
+        "startLine": 477,
+        "startChar": 29,
+        "endLine": 477,
+        "endChar": 43
+      },
+      "revId": "9f6f21702072d0a34ed8d3e4e1c4dda22e6d4d7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "adc43e71_84d31376",
         "filename": "virtualizationmanager/src/crosvm.rs",
         "patchSetId": 15
@@ -60,6 +84,30 @@
       "writtenOn": "2023-08-01T10:12:24Z",
       "side": 1,
       "message": "Is this really needed for Path?",
+      "range": {
+        "startLine": 693,
+        "startChar": 0,
+        "endLine": 693,
+        "endChar": 14
+      },
+      "revId": "9f6f21702072d0a34ed8d3e4e1c4dda22e6d4d7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbd87770_634d2dc9",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-02T01:45:52Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "adc43e71_84d31376",
       "range": {
         "startLine": 693,
         "startChar": 0,
