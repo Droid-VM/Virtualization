@@ -196,6 +196,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aabd70fb_4c2c852e",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-02T06:23:09Z",
+      "side": 1,
+      "message": "Create it as a regular file. Pipe looks sub-optimal since you (vfio_handler) will have to read the data from the regular file and feed the data to the write-end of the pipe. Why can\u0027t you just send the FD of the regular file?",
+      "parentUuid": "fe948691_9310feba",
+      "range": {
+        "startLine": 54,
+        "startChar": 36,
+        "endLine": 54,
+        "endChar": 59
+      },
+      "revId": "22bae5432e07ed5f6bea82b819480328b71b7c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8130b358_8e3b5609",
         "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
         "patchSetId": 6
