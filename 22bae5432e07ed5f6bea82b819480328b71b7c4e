@@ -415,6 +415,30 @@
       },
       "revId": "22bae5432e07ed5f6bea82b819480328b71b7c4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1872ecee_ce451446",
+        "filename": "virtualizationservice/vfio_handler/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-02T05:38:54Z",
+      "side": 1,
+      "message": "Right, why don\u0027t we use that instead of defining the new name for the service (and keeping it the same across vfio_handler and VS)?",
+      "parentUuid": "8b56d84d_4fcc1420",
+      "range": {
+        "startLine": 45,
+        "startChar": 26,
+        "endLine": 45,
+        "endChar": 51
+      },
+      "revId": "22bae5432e07ed5f6bea82b819480328b71b7c4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
