@@ -62,7 +62,7 @@ fn main(
     current_bcc_handover: &[u8],
     mut debug_policy: Option<&mut [u8]>,
 ) -> Result<Range<usize>, RebootReason> {
-    info!("pVM firmware");
+    info!("pVM firmware [TESTING TreeHugger]");
     debug!("FDT: {:?}", fdt.as_ptr());
     debug!("Signed kernel: {:?} ({:#x} bytes)", signed_kernel.as_ptr(), signed_kernel.len());
     debug!("AVB public key: addr={:?}, size={:#x} ({1})", PUBLIC_KEY.as_ptr(), PUBLIC_KEY.len());
