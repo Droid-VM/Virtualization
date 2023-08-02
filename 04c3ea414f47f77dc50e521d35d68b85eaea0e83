@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b9c0c82_c3123c33",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-02T10:36:18Z",
+      "side": 1,
+      "message": "Although we\u0027ll eventually need a full (more formal) spec of this file, could we still add a bit more detail here e.g. explaining what it allows us to achieve and how it is intended to be used?",
+      "range": {
+        "startLine": 190,
+        "startChar": 47,
+        "endLine": 190,
+        "endChar": 55
+      },
+      "revId": "04c3ea414f47f77dc50e521d35d68b85eaea0e83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cebcc5d6_81daeb1d",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-02T10:36:18Z",
+      "side": 1,
+      "message": "Okay so in the end, pvmfw receives a single DTBO instead of a set of DTBOs (one per \"assignable unit\") so how will pvmfw be able to detect that incompatible/partial subsets of those assignable units have been assigned?\n\nFor example, if two devices are in the same IOMMU group, doesn\u0027t pvmfw need to validate that they actually share a pvIOMMU group? Or did we conclude that this part of validation had been moved to the hypervisor so that pvmfw\u0027s validation work is reduced to a per-device granularity, @smostafa@google.com?",
+      "range": {
+        "startLine": 190,
+        "startChar": 22,
+        "endLine": 190,
+        "endChar": 31
+      },
+      "revId": "04c3ea414f47f77dc50e521d35d68b85eaea0e83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3024dace_4c4e0f25",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-02T10:36:18Z",
+      "side": 1,
+      "message": "This error is raised when the header version doesn\u0027t support the entry index (which type-checking forces to always be _valid_, for at least one version) so I\u0027m worried that this error message might be misleading. Could we rework it to also contain the version (which, on a side note, it might be wise to turn into its own type, I recon?) e.g.\n```\nSelf::Unsupported((major, minor)) \u003d\u003e write!(f, \"Not supported by version {major}.{minor}\")\n```\nResulting in the combined error message:\n```\nInvalid Entry::VmDtbo entry: Not supported by version 1.0\n```\ninstead of what would currently be generated:\n```\nInvalid Entry::VmDtbo entry: Invalid entry index: 2\n```",
+      "range": {
+        "startLine": 95,
+        "startChar": 52,
+        "endLine": 95,
+        "endChar": 80
+      },
+      "revId": "04c3ea414f47f77dc50e521d35d68b85eaea0e83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6888da5_200e9c7c",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-02T10:36:18Z",
+      "side": 1,
+      "message": "Could you introduce a private method to get the `entries` as a slice, abstracting away the management of a maximum index, e.g.\n```\nfn entries(\u0026self) -\u003e Result\u003c\u0026[HeaderEntry]\u003e {\n    let last_entry \u003d match self.version {\n        Header::VERSION_1_0 \u003d\u003e Entry::DebugPolicy,\n        Header::VERSION_1_1 \u003d\u003e Entry::VmDtbo,\n        _ \u003d\u003e {\n            let (major, minor) \u003d self.version_tuple();\n            return Err(Error::UnsupportedVersion(major, minor));\n        }\n    };\n\n    Ok(\u0026self.entries[..\u003d(last_entry as usize)])\n}\n```\nwhich should then allow you to bound-check in the usual way\n```\nlet (offset, size) \u003d if let Some(e) \u003d self.entries().get(entry_index) {\n    (e.offset as usize, e.size as usize)\n} else {\n    return Err(Error::InvalidEntry(entry, ...));\n};\n```",
+      "range": {
+        "startLine": 128,
+        "startChar": 8,
+        "endLine": 135,
+        "endChar": 11
+      },
+      "revId": "04c3ea414f47f77dc50e521d35d68b85eaea0e83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "647d27bc_7c89e6da",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-02T10:36:18Z",
+      "side": 1,
+      "message": "Could you please add a comment here because even I - the author of this code - had to remind myself about this\n```\n// Make sure to keep Entry::COUNT up-to-date when adding variants here.\n```\nand, while here, add\n```\n// TODO(feature(variant_count)): Use mem::variant_count::\u003cEntry\u003e() once stable.\n```\nabove `COUNT`? Thanks!",
+      "range": {
+        "startLine": 185,
+        "startChar": 14,
+        "endLine": 185,
+        "endChar": 15
+      },
+      "revId": "04c3ea414f47f77dc50e521d35d68b85eaea0e83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e4158b4_ba65dd30",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-02T10:36:18Z",
+      "side": 1,
+      "message": "nit: this CL might as well already add the field `Config::vm_dtbo_range`, which could be logged here (so that it isn\u0027t flagged as \"unused\" by the compiler) or even already passed to `Fdt::from{,_mut}_slice` for validation in `src/entry.rs`.",
+      "range": {
+        "startLine": 241,
+        "startChar": 43,
+        "endLine": 241,
+        "endChar": 58
+      },
+      "revId": "04c3ea414f47f77dc50e521d35d68b85eaea0e83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
