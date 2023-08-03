@@ -5,7 +5,10 @@ package {
 aidl_interface {
     name: "android.system.virtualizationservice",
     srcs: ["android/system/virtualizationservice/**/*.aidl"],
-    imports: ["android.system.virtualizationcommon"],
+    imports: [
+        "android.system.virtualizationcommon",
+        "android.hardware.secretkeeper-V1",
+    ],
     // This is never accessed directly. Apps are expected to use this indirectly via the Java
     // wrapper android.system.virtualmachine.
     unstable: true,

@@ -91,6 +91,8 @@ const ANDROID_VM_INSTANCE_VERSION: u16 = 1;
 
 const MICRODROID_OS_NAME: &str = "microdroid";
 
+const SECRETKEEPER_IDENTIFIER: &str = "android.hardware.secretkeeper";
+
 const UNFORMATTED_STORAGE_MAGIC: &str = "UNFORMATTED-STORAGE";
 
 /// crosvm requires all partitions to be a multiple of 4KiB.
@@ -100,6 +102,11 @@ lazy_static! {
     pub static ref GLOBAL_SERVICE: Strong<dyn IVirtualizationServiceInternal> =
         wait_for_interface(BINDER_SERVICE_IDENTIFIER)
             .expect("Could not connect to VirtualizationServiceInternal");
+    // TODO: we could use a different name for HAL & TA
+    pub static ref SECRETKEEPER: Strong<dyn ISecretkeeper> =
+        wait_for_interface(SECRETKEEPER_IDENTIFIER)
+            .expect("Could not connect to Secretkeeper");
+
 }
 
 fn create_or_update_idsig_file(
@@ -1227,6 +1234,11 @@ impl IVirtualMachineService for VirtualMachineService {
                 Some(format!("cannot find a VM with CID {}", cid)),
             ))
         }
+    }
+
+    fn getSecretkeeper(&self) -> binder::Result<Strong<dyn ISecretkeeper>> {
+        // Strong<dyn ISecretkeeper>
+        Ok(BnISecretkeeper::new_binder(SecretKeeper {}, BinderFeatures::default()))
     }
 
     fn requestCertificate(&self, csr: &[u8]) -> binder::Result<Vec<u8>> {
