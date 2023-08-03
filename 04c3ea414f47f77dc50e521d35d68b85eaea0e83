@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "190fa7b8_ae6359f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-03T02:01:36Z",
+      "side": 1,
+      "message": "Pierre, let me answer your questions first because I may not upload next patchset today. Hope this answers your questions.",
+      "revId": "04c3ea414f47f77dc50e521d35d68b85eaea0e83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b9c0c82_c3123c33",
@@ -37,6 +54,30 @@
       "writtenOn": "2023-08-02T10:36:18Z",
       "side": 1,
       "message": "Okay so in the end, pvmfw receives a single DTBO instead of a set of DTBOs (one per \"assignable unit\") so how will pvmfw be able to detect that incompatible/partial subsets of those assignable units have been assigned?\n\nFor example, if two devices are in the same IOMMU group, doesn\u0027t pvmfw need to validate that they actually share a pvIOMMU group? Or did we conclude that this part of validation had been moved to the hypervisor so that pvmfw\u0027s validation work is reduced to a per-device granularity, @smostafa@google.com?",
+      "range": {
+        "startLine": 190,
+        "startChar": 22,
+        "endLine": 190,
+        "endChar": 31
+      },
+      "revId": "04c3ea414f47f77dc50e521d35d68b85eaea0e83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b7d9b9b_086b2931",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-03T02:01:36Z",
+      "side": 1,
+      "message": "\u003e Okay so in the end, pvmfw receives a single DTBO instead of a set of DTBOs (one per \"assignable unit\") so how will pvmfw be able to detect that incompatible/partial subsets of those assignable units have been assigned?\n\nI assumes that it\u0027s opposite. We\u0027ll have a single DTBO with multiple nodes/props that describes full capability of device assignments. Virtualization service will receive device assignment requests (inseob is working on it) and would build proper DT based on the VM DTBO and the request. (seungjae is working on it).\n\nSo I assumes that `pvmfw` only need to check whether incoming device tree contains unidentified nor unexpectedly modified DT compared from VM DTBO.\n\nsee: go/avf-dtverify\n\n\u003e For example, if two devices are in the same IOMMU group, doesn\u0027t pvmfw need to validate that they actually share a pvIOMMU group? Or did we conclude that this part of validation had been moved to the hypervisor so that pvmfw\u0027s validation work is reduced to a per-device granularity, \n\nI assumes that we\u0027ll do most of non-security related validation outside of the `pvmfw` to also support unprotected VMs. So I only expected smaller amount of validation in `pvmfw`.\n\n\nBTW, how did you add someone\u0027s LDAP in the formatted form?",
+      "parentUuid": "cebcc5d6_81daeb1d",
       "range": {
         "startLine": 190,
         "startChar": 22,
@@ -106,6 +147,30 @@
       "writtenOn": "2023-08-02T10:36:18Z",
       "side": 1,
       "message": "Could you please add a comment here because even I - the author of this code - had to remind myself about this\n```\n// Make sure to keep Entry::COUNT up-to-date when adding variants here.\n```\nand, while here, add\n```\n// TODO(feature(variant_count)): Use mem::variant_count::\u003cEntry\u003e() once stable.\n```\nabove `COUNT`? Thanks!",
+      "range": {
+        "startLine": 185,
+        "startChar": 14,
+        "endLine": 185,
+        "endChar": 15
+      },
+      "revId": "04c3ea414f47f77dc50e521d35d68b85eaea0e83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a07cfe11_7efa8216",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-03T02:01:36Z",
+      "side": 1,
+      "message": "I\u0027ll try to find a way to automatically evaluate `COUNT`. That could be more solid solution.",
+      "parentUuid": "647d27bc_7c89e6da",
       "range": {
         "startLine": 185,
         "startChar": 14,
