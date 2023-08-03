@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "00732ecf_afbecc63",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-03T10:21:15Z",
+      "side": 1,
+      "message": "For this part, VS could just open the file for writing itself?\nIt already owns the directory and has full rw access there, so there\u0027s no need to mess with fds here. (Below is different, since that\u0027s going to crosvm.)\nYou could even return the readable fd from VS, although I\u0027m not sure how much of a win that is.\nThat simplifies the sepolicy.",
+      "range": {
+        "startLine": 478,
+        "startChar": 0,
+        "endLine": 487,
+        "endChar": 93
+      },
+      "revId": "f2c9dfa5e4e31b016ec9fb441e9637747f51f251",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0398b7bc_a9903469",
