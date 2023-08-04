@@ -32,7 +32,7 @@ use android_system_virtualizationservice_internal::aidl::android::system::virtua
 };
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::VM_TOMBSTONES_SERVICE_PORT;
 use anyhow::{anyhow, ensure, Context, Result};
-use binder::{self, BinderFeatures, ExceptionCode, Interface, LazyServiceGuard, Status, Strong};
+use binder::{self, BinderFeatures, ExceptionCode, Interface, LazyServiceGuard, Status, Strong, IntoBinderResult};
 use lazy_static::lazy_static;
 use libc::VMADDR_CID_HOST;
 use log::{error, info, warn};
@@ -49,6 +49,20 @@ use tombstoned_client::{DebuggerdDumpType, TombstonedConnection};
 use vsock::{VsockListener, VsockStream};
 use nix::fcntl::OFlag;
 use nix::unistd::{chown, pipe2, Uid};
+
+/// Convenient trait for logging an error while returning it
+trait LogResult<T, E> {
+    fn or_log(self) -> std::result::Result<T, E>;
+}
+
+impl<T, E: std::fmt::Display> LogResult<T, E> for std::result::Result<T, E> {
+    fn or_log(self) -> std::result::Result<T, E> {
+        self.map_err(|e| {
+            error!("{e}");
+            e
+        })
+    }
+}
 
 /// The unique ID of a VM used (together with a port number) for vsock communication.
 pub type Cid = u32;
@@ -104,15 +118,10 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
 
         match ret {
             0 => Ok(()),
-            -1 => Err(Status::new_exception_str(
-                ExceptionCode::ILLEGAL_STATE,
-                Some(std::io::Error::last_os_error().to_string()),
-            )),
-            n => Err(Status::new_exception_str(
-                ExceptionCode::ILLEGAL_STATE,
-                Some(format!("Unexpected return value from prlimit(): {n}")),
-            )),
+            -1 => Err(std::io::Error::last_os_error().into()),
+            n => Err(anyhow!("Unexpected return value from prlimit(): {n}")),
         }
+        .or_binder_exception(ExceptionCode::ILLEGAL_STATE)
     }
 
     fn allocateGlobalVmContext(
@@ -124,9 +133,9 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
         let requester_uid = get_calling_uid();
         let requester_debug_pid = requester_debug_pid as pid_t;
         let state = &mut *self.state.lock().unwrap();
-        state.allocate_vm_context(requester_uid, requester_debug_pid).map_err(|e| {
-            Status::new_exception_str(ExceptionCode::ILLEGAL_STATE, Some(e.to_string()))
-        })
+        state
+            .allocate_vm_context(requester_uid, requester_debug_pid)
+            .or_binder_exception(ExceptionCode::ILLEGAL_STATE)
     }
 
     fn atomVmBooted(&self, atom: &AtomVmBooted) -> Result<(), Status> {
@@ -169,10 +178,10 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
     ) -> binder::Result<Vec<u8>> {
         check_manage_access()?;
         info!("Received csr. Getting certificate...");
-        request_certificate(csr, instance_img_fd).map_err(|e| {
-            error!("Failed to get certificate. Error: {e:?}");
-            Status::new_exception_str(ExceptionCode::SERVICE_SPECIFIC, Some(e.to_string()))
-        })
+        request_certificate(csr, instance_img_fd)
+            .context("Failed to get certificate")
+            .or_log()
+            .or_service_specific_exception(-1)
     }
 
     fn getAssignableDevices(&self) -> binder::Result<Vec<AssignableDevice>> {
@@ -191,21 +200,16 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
         let mut set = HashSet::new();
         for device in devices.iter() {
             if !set.insert(device) {
-                return Err(Status::new_exception_str(
-                    ExceptionCode::ILLEGAL_ARGUMENT,
-                    Some(format!("duplicated device {device}")),
-                ));
+                return Err(anyhow!("duplicated device {device}"))
+                    .or_binder_exception(ExceptionCode::ILLEGAL_ARGUMENT);
             }
             bind_device(device)?;
         }
 
         // TODO(b/278008182): create a file descriptor containing DTBO for devices.
-        let (raw_read, raw_write) = pipe2(OFlag::O_CLOEXEC).map_err(|e| {
-            Status::new_exception_str(
-                ExceptionCode::SERVICE_SPECIFIC,
-                Some(format!("can't create fd for DTBO: {e:?}")),
-            )
-        })?;
+        let (raw_read, raw_write) = pipe2(OFlag::O_CLOEXEC)
+            .context("can't create fd for DTBO")
+            .or_service_specific_exception(-1)?;
         // SAFETY: We are the sole owner of this FD as we just created it, and it is valid and open.
         let read_fd = unsafe { File::from_raw_fd(raw_read) };
         // SAFETY: We are the sole owner of this FD as we just created it, and it is valid and open.
@@ -223,32 +227,21 @@ lazy_static! {
 
 fn bind_device(device: &str) -> binder::Result<()> {
     // Check platform device exists
-    let dev_sysfs_path = canonicalize(device).map_err(|e| {
-        Status::new_exception_str(
-            ExceptionCode::SERVICE_SPECIFIC,
-            Some(format!("can't canonicalize: {e:?}")),
-        )
-    })?;
+    let dev_sysfs_path =
+        canonicalize(device).context("can't canonicalize").or_service_specific_exception(-1)?;
     if !dev_sysfs_path.starts_with(*SYSFS_PLATFORM_DEVICES) {
-        return Err(Status::new_exception_str(
-            ExceptionCode::ILLEGAL_ARGUMENT,
-            Some(format!("{device} is not a platform device")),
-        ));
+        return Err(anyhow!("{device} is not a platform device"))
+            .or_binder_exception(ExceptionCode::ILLEGAL_ARGUMENT);
     }
 
     // Check platform device is bound to VFIO driver
-    let dev_driver_path = canonicalize(dev_sysfs_path.join("driver")).map_err(|e| {
-        Status::new_exception_str(
-            ExceptionCode::SERVICE_SPECIFIC,
-            Some(format!("can't canonicalize: {e:?}")),
-        )
-    })?;
+    let dev_driver_path = canonicalize(dev_sysfs_path.join("driver"))
+        .context("can't canonicalize")
+        .or_service_specific_exception(-1)?;
     if dev_driver_path != *VFIO_PLATFORM_DRIVER {
         // TODO(b/278008182): unbind driver and bind to VFIO
-        return Err(Status::new_exception_str(
-            ExceptionCode::UNSUPPORTED_OPERATION,
-            Some("not implemented".to_owned()),
-        ));
+        return Err(anyhow!("not implemented"))
+            .or_binder_exception(ExceptionCode::UNSUPPORTED_OPERATION);
     }
 
     // already bound to VFIO driver
@@ -460,10 +453,8 @@ fn check_permission(perm: &str) -> binder::Result<()> {
     if perm_svc.checkPermission(perm, calling_pid, calling_uid as i32)? {
         Ok(())
     } else {
-        Err(Status::new_exception_str(
-            ExceptionCode::SECURITY,
-            Some(format!("does not have the {} permission", perm)),
-        ))
+        Err(anyhow!("does not have the {} permission", perm))
+            .or_binder_exception(ExceptionCode::SECURITY)
     }
 }
 
