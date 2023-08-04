@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "51d651de_bfc05ecd",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-04T06:23:06Z",
+      "side": 1,
+      "message": "I\u0027m not sure I agree, because all other files are created by `virtualizationmanager` (even though they\u0027re labeled as `virtualizationservice_data_file`). I think it\u0027s important to centralize the control of `/data/misc/virtualizationservice`, so I\u0027d like to keep this as-is.",
+      "parentUuid": "00732ecf_afbecc63",
+      "range": {
+        "startLine": 478,
+        "startChar": 0,
+        "endLine": 487,
+        "endChar": 93
+      },
+      "revId": "f2c9dfa5e4e31b016ec9fb441e9637747f51f251",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0398b7bc_a9903469",
         "filename": "virtualizationmanager/src/aidl.rs",
         "patchSetId": 3
