@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b69891ad_ca6b6966",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-08-04T16:39:29Z",
+      "side": 1,
+      "message": "I think I prefer the original here, it\u0027s clearer to just create an error and return it, rather than create one sort of error, wrap it in a result, then convert it to a different sort of error.",
+      "revId": "f9a9ad601ab8309de0b560428a107b0f88eac246",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd6e59b6_c00f5b90",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-08-04T16:39:29Z",
+      "side": 1,
+      "message": "Ditto, the original is clearer.",
+      "revId": "f9a9ad601ab8309de0b560428a107b0f88eac246",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54a1168d_43c425e5",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-08-04T16:39:29Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be simpler to use `or_binder_exception_with` here and below?",
+      "revId": "f9a9ad601ab8309de0b560428a107b0f88eac246",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccd93c0f_933a3aad",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-08-04T16:39:29Z",
+      "side": 1,
+      "message": "I think the old version is simpler here.",
+      "revId": "f9a9ad601ab8309de0b560428a107b0f88eac246",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "503c370d_41c7c627",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-08-04T16:39:29Z",
+      "side": 1,
+      "message": "`or_service_specific_exception_with`",
+      "revId": "f9a9ad601ab8309de0b560428a107b0f88eac246",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f065073_e24f9f3c",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-08-04T16:39:29Z",
+      "side": 1,
+      "message": "`or_binder_exception_with`",
+      "revId": "f9a9ad601ab8309de0b560428a107b0f88eac246",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7984c9eb_6ff88f8a",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-08-04T16:39:29Z",
+      "side": 1,
+      "message": "If you use the `_with` variants below you can avoid adding a dependency on anyhow.",
+      "revId": "f9a9ad601ab8309de0b560428a107b0f88eac246",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
