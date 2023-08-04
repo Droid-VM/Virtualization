@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ea9ca211_866fe095",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-04T08:22:53Z",
+      "side": 1,
+      "message": "Ack, fair enough.\nI\u0027d forgotten we\u0027d moved ownership to VirtMgr.",
+      "parentUuid": "51d651de_bfc05ecd",
+      "range": {
+        "startLine": 478,
+        "startChar": 0,
+        "endLine": 487,
+        "endChar": 93
+      },
+      "revId": "f2c9dfa5e4e31b016ec9fb441e9637747f51f251",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0398b7bc_a9903469",
         "filename": "virtualizationmanager/src/aidl.rs",
         "patchSetId": 3
@@ -84,6 +108,30 @@
       "writtenOn": "2023-08-03T10:16:19Z",
       "side": 1,
       "message": "Please fix this WARNING reported by RustFormatter: Please reformat the following line(s) to:\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nPlease reformat the following line(s) to:\n\n        let Some(device) \u003d path.file_name() else {\n            return Err(Status::new_exception_str(\n                ExceptionCode::ILLEGAL_ARGUMENT,\n                Some(format!(\"can\u0027t get device name from {path:?}\")),\n            ));\n        };\n        let Some(device_str) \u003d device.to_str() else {",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 0
+      },
+      "revId": "f2c9dfa5e4e31b016ec9fb441e9637747f51f251",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90ee9ac6_6192ca25",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-04T08:22:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0afe435_d1584bbf",
       "range": {
         "startLine": 123,
         "startChar": 0,
