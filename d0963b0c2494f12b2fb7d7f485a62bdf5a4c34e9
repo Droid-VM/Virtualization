@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d309880_c210c605",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 22
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-07T10:32:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3ce699b_878c5b17",
+      "range": {
+        "startLine": 76,
+        "startChar": 7,
+        "endLine": 76,
+        "endChar": 42
+      },
+      "revId": "d0963b0c2494f12b2fb7d7f485a62bdf5a4c34e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63a66852_4674c948",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e669def_c0accb6b",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 22
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-07T10:32:46Z",
+      "side": 1,
+      "message": "If someone else sends a connection request, we just stop the RKP VM completely. In that sense someone can just keep sending connection requests to RKP VM to prevent it from working completely.",
+      "parentUuid": "63a66852_4674c948",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 20
+      },
+      "revId": "d0963b0c2494f12b2fb7d7f485a62bdf5a4c34e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "147f6d40_d1f0d9a5",
         "filename": "rialto/src/communication.rs",
         "patchSetId": 22
@@ -60,6 +108,30 @@
       "writtenOn": "2023-08-07T10:11:56Z",
       "side": 1,
       "message": "Line too long.\n(Doesn\u0027t the formatter deal with that?)",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 104
+      },
+      "revId": "d0963b0c2494f12b2fb7d7f485a62bdf5a4c34e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "439f034f_771d6318",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 22
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-07T10:32:46Z",
+      "side": 1,
+      "message": "Done. The formatter doesn\u0027t change this.",
+      "parentUuid": "147f6d40_d1f0d9a5",
       "range": {
         "startLine": 127,
         "startChar": 0,
