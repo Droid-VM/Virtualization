@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3ce699b_878c5b17",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 22
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-07T10:11:56Z",
+      "side": 1,
+      "message": "Maybe \"wait_for_event_from_peer\" ?",
+      "range": {
+        "startLine": 76,
+        "startChar": 7,
+        "endLine": 76,
+        "endChar": 42
+      },
+      "revId": "d0963b0c2494f12b2fb7d7f485a62bdf5a4c34e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63a66852_4674c948",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 22
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-07T10:11:56Z",
+      "side": 1,
+      "message": "Ignoring this still feels wrong.\nIf we can\u0027t handle simultaneous connections (which something else should be preventing?), shouldn\u0027t we reject a new one?",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 20
+      },
+      "revId": "d0963b0c2494f12b2fb7d7f485a62bdf5a4c34e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "147f6d40_d1f0d9a5",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 22
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-07T10:11:56Z",
+      "side": 1,
+      "message": "Line too long.\n(Doesn\u0027t the formatter deal with that?)",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 104
+      },
+      "revId": "d0963b0c2494f12b2fb7d7f485a62bdf5a4c34e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
