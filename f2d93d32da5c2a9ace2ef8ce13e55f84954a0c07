@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5302ff58_2a4f07cb",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-07T07:49:33Z",
+      "side": 1,
+      "message": "changed the name to \"dtbo\".",
+      "parentUuid": "ddb07c20_1d4fcf36",
+      "range": {
+        "startLine": 477,
+        "startChar": 0,
+        "endLine": 477,
+        "endChar": 65
+      },
+      "revId": "f2d93d32da5c2a9ace2ef8ce13e55f84954a0c07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a679d3d_b249e70c",
@@ -90,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3013d5fc_dcc9aaee",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-07T07:49:33Z",
+      "side": 1,
+      "message": "Is it? I get:\n\n```\nerror[E0599]: no method named `with_log` found for enum `std::result::Result` in the current scope\n   --\u003e packages/modules/Virtualization/virtualizationmanager/src/aidl.rs:489:18\n    |\n487 |               let dtbo \u003d File::open(\u0026dtbo_path)\n    |  ________________________-\n488 | |                 .with_context(|| format!(\"Failed to open VM DTBO file {dtbo_path:?}\"))\n489 | |                 .with_log()\n    | |                 -^^^^^^^^ method not found in `Result\u003cFile, Error\u003e`\n    | |_________________|\n    | \n```",
+      "parentUuid": "7a679d3d_b249e70c",
+      "range": {
+        "startLine": 479,
+        "startChar": 23,
+        "endLine": 485,
+        "endChar": 16
+      },
+      "revId": "f2d93d32da5c2a9ace2ef8ce13e55f84954a0c07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "92b8a9a5_47f9f538",
         "filename": "virtualizationmanager/src/aidl.rs",
         "patchSetId": 6
@@ -101,6 +149,30 @@
       "writtenOn": "2023-08-07T06:29:46Z",
       "side": 1,
       "message": "this too",
+      "range": {
+        "startLine": 490,
+        "startChar": 45,
+        "endLine": 496,
+        "endChar": 16
+      },
+      "revId": "f2d93d32da5c2a9ace2ef8ce13e55f84954a0c07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e8c1a3e_b96636de",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-07T07:49:33Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "92b8a9a5_47f9f538",
       "range": {
         "startLine": 490,
         "startChar": 45,
