@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e20a6654_cd7bf636",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 22
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-07T10:36:41Z",
+      "side": 1,
+      "message": "I don\u0027t understand. This probably should never happen - I would guess VS will make sure it doesn\u0027t? And only VS will be able to connect?\nSo the attack should be blocked anyway.\nBut my question stands - if we do get an unexpected request, should we reject it, rather than ignoring it? (While leaving the existing connection up.)",
+      "parentUuid": "6e669def_c0accb6b",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 20
+      },
+      "revId": "d0963b0c2494f12b2fb7d7f485a62bdf5a4c34e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "147f6d40_d1f0d9a5",
         "filename": "rialto/src/communication.rs",
         "patchSetId": 22
