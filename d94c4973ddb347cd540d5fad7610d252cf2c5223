@@ -265,6 +265,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d52276ed_4b70dae2",
+        "filename": "vm_dtbo_extractor/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-08-07T07:42:43Z",
+      "side": 1,
+      "message": "It seems it uses big endian, though there\u0027s any documentation regarding endianness of dt_table_header and dt_table_entry.\n\nAbout dtbo.img,\n- [dt_table_header](https://source.corp.google.com/h/android/platform/superproject/main/+/main:system/libufdt/utils/src/dt_table.c;l\u003d31-40)\n- [dt_table_entry](https://source.corp.google.com/h/android/platform/superproject/main/+/main:system/libufdt/utils/src/mkdtimg_core.c;l\u003d217-224)\n- [cpu_to_fdt32](https://source.corp.google.com/h/android/platform/superproject/main/+/refs/heads/main:external/dtc/libfdt/libfdt_env.h;l\u003d31-32)\n\nAbout .dtbo files,\n- [fdt_header](https://devicetree-specification.readthedocs.io/en/v0.1/flattened-format.html#header)",
+      "parentUuid": "c5d679e4_14bc1ad0",
+      "range": {
+        "startLine": 111,
+        "startChar": 25,
+        "endLine": 111,
+        "endChar": 38
+      },
+      "revId": "d94c4973ddb347cd540d5fad7610d252cf2c5223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1399caa_245bae9a",
