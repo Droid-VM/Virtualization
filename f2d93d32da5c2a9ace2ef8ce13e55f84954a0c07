@@ -16,6 +16,29 @@
       "message": "Hi all, can I get +2?",
       "revId": "f2d93d32da5c2a9ace2ef8ce13e55f84954a0c07",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97f0f5dc_100d9121",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-08-07T04:38:09Z",
+      "side": 1,
+      "message": "I understood this path is for sending dtbo information to crosvm via `/data/misc/virtualizationservice/**`. Shouldn\u0027t it be a `*.dtbo` file, not a `dtbo.img`? For me, the naming `dtbo.img` sounds like adding `dt_table_header` from the host.\n\nhttps://source.android.com/docs/core/architecture/dto/partitions",
+      "range": {
+        "startLine": 477,
+        "startChar": 0,
+        "endLine": 477,
+        "endChar": 65
+      },
+      "revId": "f2d93d32da5c2a9ace2ef8ce13e55f84954a0c07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
