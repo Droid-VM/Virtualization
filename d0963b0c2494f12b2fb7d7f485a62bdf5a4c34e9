@@ -119,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e91625c_17813af3",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 22
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-08T13:01:29Z",
+      "side": 1,
+      "message": "I just checked the connection manager with Andrew. This case is actually handled inside the multi connection manager, we do send a message back to reject the request [1] (it is ignored in the single connection manager [2]).\n\n[1] https://github.com/rcore-os/virtio-drivers/blob/master/src/device/socket/multiconnectionmanager.rs#L176\n[2] https://github.com/rcore-os/virtio-drivers/blob/master/src/device/socket/singleconnectionmanager.rs#L101",
+      "parentUuid": "e20a6654_cd7bf636",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 20
+      },
+      "revId": "d0963b0c2494f12b2fb7d7f485a62bdf5a4c34e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "147f6d40_d1f0d9a5",
