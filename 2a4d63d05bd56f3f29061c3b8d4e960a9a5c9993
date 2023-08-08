@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36a65df9_5c36b1ba",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 24
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-08T14:56:39Z",
+      "side": 1,
+      "message": "That\u0027s right. Thanks for spotting this. I blocked if there\u0027s nothing in the receive buffer.",
+      "parentUuid": "d7d084c7_1019b1aa",
+      "revId": "2a4d63d05bd56f3f29061c3b8d4e960a9a5c9993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "838ed601_6da612da",
@@ -102,6 +120,30 @@
       "writtenOn": "2023-08-08T14:23:48Z",
       "side": 1,
       "message": "Import this?\nIf only to make the formatting easier to read",
+      "range": {
+        "startLine": 139,
+        "startChar": 20,
+        "endLine": 139,
+        "endChar": 60
+      },
+      "revId": "2a4d63d05bd56f3f29061c3b8d4e960a9a5c9993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92d57130_cd23fe65",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 24
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-08T14:56:39Z",
+      "side": 1,
+      "message": "There\u0027s already `Error` defined for the crate, it\u0027ll be a bit confusing to have another raw Error. I can replace this with a const.",
+      "parentUuid": "166d94b2_e5ee10ab",
       "range": {
         "startLine": 139,
         "startChar": 20,

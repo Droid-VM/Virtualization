@@ -193,6 +193,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1b97bced_47642b3a",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 22
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-08T14:56:39Z",
+      "side": 1,
+      "message": "\u003e So we don\u0027t need to check the peer address at all here?\n\nLooks like it based on the current implementation\n\nhttps://github.com/rcore-os/virtio-drivers/blob/master/src/device/socket/multiconnectionmanager.rs#L180",
+      "parentUuid": "e9e2d725_6bfe0ef7",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 20
+      },
+      "revId": "d0963b0c2494f12b2fb7d7f485a62bdf5a4c34e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "147f6d40_d1f0d9a5",
         "filename": "rialto/src/communication.rs",
         "patchSetId": 22
