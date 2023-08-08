@@ -16,6 +16,24 @@
       "message": "The peer is allowed to send credit requests and credit updates at any time. We shouldn\u0027t consider receiving them an error.\n\nReceiving a connection request here shouldn\u0027t happen, because we didn\u0027t listen on any ports so the ConnectionManager should automatically send a RST and not return the event to us.\n\nReceiving data before the connection is open is unexpected, but I\u0027m not convinced that we should consider it an error.",
       "revId": "7ec9b590a6b7af1d47ab5268ab7a6e80a46c6294",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00beb936_fff78d74",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-08T14:23:48Z",
+      "side": 1,
+      "message": "I\u0027m happy if we ignore some of them - as long as there\u0027s a comment explaining why.",
+      "parentUuid": "3d7718ad_1224422e",
+      "revId": "7ec9b590a6b7af1d47ab5268ab7a6e80a46c6294",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
