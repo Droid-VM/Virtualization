@@ -619,6 +619,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "11b83181_10b69510",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-08T18:15:31Z",
+      "side": 1,
+      "message": "Unfortunately this cl cannot handle so long messages for the moment. An array of 500 bytes almost looks its limit here. Let\u0027s land this cl just as a first implementation of the protocol and proceed with the handling of long messages in another cl, wdyt?",
+      "parentUuid": "e0c1a6b2_da40b06f",
+      "range": {
+        "startLine": 139,
+        "startChar": 22,
+        "endLine": 139,
+        "endChar": 33
+      },
+      "revId": "ac813f7330fe293b6f21fa4eaa163e12fea4c515",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "56e430cf_a5138b06",
         "filename": "rialto/src/communication.rs",
         "patchSetId": 20
