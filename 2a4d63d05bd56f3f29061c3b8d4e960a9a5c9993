@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f432cf1d_c2316650",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 24
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-08T14:28:19Z",
+      "side": 1,
+      "message": "I see. I\u0027ll just do a polling here.",
+      "parentUuid": "2a1125c0_37d6509f",
+      "revId": "2a4d63d05bd56f3f29061c3b8d4e960a9a5c9993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "838ed601_6da612da",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-08-08T13:28:42Z",
       "side": 1,
       "message": "This isn\u0027t necessarily true, as some data may have been received earlier (e.g. during the polling in `wait_for_send`). I think you should just ignore the length returned by `wait_for_recv` and go by what `recv` returns.",
+      "revId": "2a4d63d05bd56f3f29061c3b8d4e960a9a5c9993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "570e269b_bf6ec4d0",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 24
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-08T14:28:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "838ed601_6da612da",
       "revId": "2a4d63d05bd56f3f29061c3b8d4e960a9a5c9993",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
