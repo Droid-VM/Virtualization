@@ -112,6 +112,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e8ab2d4_f46d45b0",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-08T12:37:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "88e9815c_030f370d",
+      "range": {
+        "startLine": 190,
+        "startChar": 22,
+        "endLine": 190,
+        "endChar": 31
+      },
+      "revId": "04c3ea414f47f77dc50e521d35d68b85eaea0e83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "891941d4_e5fd3eb0",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-08T12:37:41Z",
+      "side": 1,
+      "message": "Added bit more details here.\n\nI believe that documenting VM DTBO itself is outside of the CL\u0027s scope. VM DTBO would be used by both protected/unprotected VM and `pvmfw` would only used for provision.",
+      "parentUuid": "6b9c0c82_c3123c33",
+      "range": {
+        "startLine": 190,
+        "startChar": 47,
+        "endLine": 190,
+        "endChar": 55
+      },
+      "revId": "04c3ea414f47f77dc50e521d35d68b85eaea0e83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3024dace_4c4e0f25",
@@ -135,6 +183,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a5e8b4c_6f43bd93",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-08T12:37:41Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "3024dace_4c4e0f25",
+      "range": {
+        "startLine": 95,
+        "startChar": 52,
+        "endLine": 95,
+        "endChar": 80
+      },
+      "revId": "04c3ea414f47f77dc50e521d35d68b85eaea0e83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6888da5_200e9c7c",
@@ -148,6 +220,54 @@
       "writtenOn": "2023-08-02T10:36:18Z",
       "side": 1,
       "message": "Could you introduce a private method to get the `entries` as a slice, abstracting away the management of a maximum index, e.g.\n```\nfn entries(\u0026self) -\u003e Result\u003c\u0026[HeaderEntry]\u003e {\n    let last_entry \u003d match self.version {\n        Header::VERSION_1_0 \u003d\u003e Entry::DebugPolicy,\n        Header::VERSION_1_1 \u003d\u003e Entry::VmDtbo,\n        _ \u003d\u003e {\n            let (major, minor) \u003d self.version_tuple();\n            return Err(Error::UnsupportedVersion(major, minor));\n        }\n    };\n\n    Ok(\u0026self.entries[..\u003d(last_entry as usize)])\n}\n```\nwhich should then allow you to bound-check in the usual way\n```\nlet (offset, size) \u003d if let Some(e) \u003d self.entries().get(entry_index) {\n    (e.offset as usize, e.size as usize)\n} else {\n    return Err(Error::InvalidEntry(entry, ...));\n};\n```",
+      "range": {
+        "startLine": 128,
+        "startChar": 8,
+        "endLine": 135,
+        "endChar": 11
+      },
+      "revId": "04c3ea414f47f77dc50e521d35d68b85eaea0e83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7236f74b_52e4afc9",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-08T12:37:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6888da5_200e9c7c",
+      "range": {
+        "startLine": 128,
+        "startChar": 8,
+        "endLine": 135,
+        "endChar": 11
+      },
+      "revId": "04c3ea414f47f77dc50e521d35d68b85eaea0e83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7eb408f5_dabadcdf",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-08T12:37:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6888da5_200e9c7c",
       "range": {
         "startLine": 128,
         "startChar": 8,
@@ -205,6 +325,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96ad27cb_b199bd53",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-08T12:37:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a07cfe11_7efa8216",
+      "range": {
+        "startLine": 185,
+        "startChar": 14,
+        "endLine": 185,
+        "endChar": 15
+      },
+      "revId": "04c3ea414f47f77dc50e521d35d68b85eaea0e83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e4158b4_ba65dd30",
@@ -218,6 +362,30 @@
       "writtenOn": "2023-08-02T10:36:18Z",
       "side": 1,
       "message": "nit: this CL might as well already add the field `Config::vm_dtbo_range`, which could be logged here (so that it isn\u0027t flagged as \"unused\" by the compiler) or even already passed to `Fdt::from{,_mut}_slice` for validation in `src/entry.rs`.",
+      "range": {
+        "startLine": 241,
+        "startChar": 43,
+        "endLine": 241,
+        "endChar": 58
+      },
+      "revId": "04c3ea414f47f77dc50e521d35d68b85eaea0e83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe568414_fdbf9ee1",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-08T12:37:41Z",
+      "side": 1,
+      "message": "Changed to log `vm_dtb_range` -- tried the latter already but it requires more change in `src/entry.rs`.",
+      "parentUuid": "9e4158b4_ba65dd30",
       "range": {
         "startLine": 241,
         "startChar": 43,
