@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b256d2b1_055e0d32",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 26
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-08T16:31:49Z",
+      "side": 1,
+      "message": "I don\u0027t understand. Why a busy wait here when we have a blocking call available?\nThe previous version looked better.",
+      "range": {
+        "startLine": 74,
+        "startChar": 16,
+        "endLine": 74,
+        "endChar": 25
+      },
+      "revId": "79335cc6ab60aeec28a0de6776e233b90265e430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04cb770f_f002a0b2",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 26
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-08T16:31:49Z",
+      "side": 1,
+      "message": "This should be a wait not a poll?",
+      "range": {
+        "startLine": 138,
+        "startChar": 38,
+        "endLine": 138,
+        "endChar": 42
+      },
+      "revId": "79335cc6ab60aeec28a0de6776e233b90265e430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
