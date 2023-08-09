@@ -16,6 +16,47 @@
       "message": "Inseob, I still need +2 here. Could you take a look and approve if LGTM?",
       "revId": "2227eaa6b102bfd75928c1879643f57ab47a3766",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53f19385_380c383c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-09T14:57:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8f8f26a4_b2b818dd",
+      "revId": "2227eaa6b102bfd75928c1879643f57ab47a3766",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0911bea3_e9cc6f91",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-09T14:57:34Z",
+      "side": 1,
+      "message": "The rule of 3 strongly suggests this should be extracted to libs/.\n(But that could be another CL.)",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 23
+      },
+      "revId": "2227eaa6b102bfd75928c1879643f57ab47a3766",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
