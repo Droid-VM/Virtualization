@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f40eef53_f6e41bd9",
+        "filename": "libs/avb/TEST_MAPPING",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1078119
+      },
+      "writtenOn": "2023-08-09T15:59:53Z",
+      "side": 0,
+      "message": "With this moved to libavb, I switched to just `presubmit` rather than `avf-presubmit`, is that correct? And should I remove it from this gcl file first before landing this CL, or should it stay in since the tests still exists just in a different repo?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 66
+      },
+      "revId": "f36347b06ad5d68febaa65fd6f8025a47329bb14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
