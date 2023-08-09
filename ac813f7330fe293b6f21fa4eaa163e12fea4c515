@@ -643,6 +643,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1253f761_0efaa72a",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-09T09:20:10Z",
+      "side": 1,
+      "message": "The CL description talks about \"enabling long messages\".\nGiven we have code here to handle sending \u0026 receiving in multiple chunks, it feels like we should be able to handle arbitrarily long messages. If we can\u0027t then I\u0027d like to understand why not.\nI\u0027d rather check in something that works than something that looks like it works but doesn\u0027t.",
+      "parentUuid": "11b83181_10b69510",
+      "range": {
+        "startLine": 139,
+        "startChar": 22,
+        "endLine": 139,
+        "endChar": 33
+      },
+      "revId": "ac813f7330fe293b6f21fa4eaa163e12fea4c515",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "56e430cf_a5138b06",
         "filename": "rialto/src/communication.rs",
         "patchSetId": 20

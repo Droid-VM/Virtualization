@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1570683_bb22713d",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 26
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-09T09:20:10Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8eedda2f_fb62a917",
+      "range": {
+        "startLine": 74,
+        "startChar": 16,
+        "endLine": 74,
+        "endChar": 25
+      },
+      "revId": "79335cc6ab60aeec28a0de6776e233b90265e430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04cb770f_f002a0b2",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "The whole function is a wait call. I just wanted to re-use `poll_event_from_peer()` so I moved the `spin_loop()` in this call.",
       "parentUuid": "04cb770f_f002a0b2",
+      "range": {
+        "startLine": 138,
+        "startChar": 38,
+        "endLine": 138,
+        "endChar": 42
+      },
+      "revId": "79335cc6ab60aeec28a0de6776e233b90265e430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f9d4634_583bc6d7",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 26
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-09T09:20:10Z",
+      "side": 1,
+      "message": "Ahh, of course. I\u0027d forgotten that we don\u0027t have any way to block.",
+      "parentUuid": "3516fc67_81ec58d6",
       "range": {
         "startLine": 138,
         "startChar": 38,
