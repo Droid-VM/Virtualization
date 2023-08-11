@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8a9efdc_98f9f9a5",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 924,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-11T16:49:59Z",
+      "side": 1,
+      "message": "Why not move all of this to a method on vm_secret?\n\n(Which might help with that TODO.)",
+      "range": {
+        "startLine": 915,
+        "startChar": 0,
+        "endLine": 924,
+        "endChar": 93
+      },
+      "revId": "5ffa16034091fb62b963b574a423d1c1c630e972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95df87db_519a61d5",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-11T16:49:59Z",
+      "side": 1,
+      "message": "This name seems wrong now? get_instance_secret?",
+      "range": {
+        "startLine": 51,
+        "startChar": 20,
+        "endLine": 51,
+        "endChar": 38
+      },
+      "revId": "5ffa16034091fb62b963b574a423d1c1c630e972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cbb5f60_a9012a7a",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-11T16:49:59Z",
+      "side": 1,
+      "message": "I\u0027m not sure I like the RP abbreviation, here and elsewhere.\nEven SK would be better - ultimately this constant will be defined by SecretKeeper?\n\nMaybe sealed_secret ?",
+      "range": {
+        "startLine": 23,
+        "startChar": 6,
+        "endLine": 23,
+        "endChar": 8
+      },
+      "revId": "5ffa16034091fb62b963b574a423d1c1c630e972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b521ebe_d149f99e",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-11T16:49:59Z",
+      "side": 1,
+      "message": "Not the most illuminating comment!\n\nWhy does this exist?",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 15
+      },
+      "revId": "5ffa16034091fb62b963b574a423d1c1c630e972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62133e90_c044f0a5",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-11T16:49:59Z",
+      "side": 1,
+      "message": "Can we have names rather than numbers?\n\nDiceBasedSecret, RollbackProtectedSecret ?",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 6
+      },
+      "revId": "5ffa16034091fb62b963b574a423d1c1c630e972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
