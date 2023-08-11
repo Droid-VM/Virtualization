@@ -19,6 +19,7 @@ rust_defaults {
     },
     prefer_rlib: true,
     rustlibs: [
+        "android.hardware.secretkeeper-V1-rust",
         "android.system.virtualizationcommon-rust",
         "android.system.virtualizationservice-rust",
         "android.system.virtualizationservice_internal-rust",
