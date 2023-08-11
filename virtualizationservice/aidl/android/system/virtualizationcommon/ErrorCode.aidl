@@ -40,4 +40,9 @@ enum ErrorCode {
      * Error code indicating that the payload config is invalid.
      */
     PAYLOAD_CONFIG_INVALID = 3,
+
+    /**
+     * Error code indicating VM failed to connect to Secretkeeper.
+     */
+    CONNECTION_FAILED_TO_SECRETKEEPER = 4,
 }

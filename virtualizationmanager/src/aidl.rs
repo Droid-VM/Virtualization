@@ -48,6 +48,7 @@ use android_system_virtualizationservice_internal::aidl::android::system::virtua
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::{
         BnVirtualMachineService, IVirtualMachineService,
 };
+use android_hardware_secretkeeper::aidl::android::hardware::secretkeeper::ISecretkeeper::{BnSecretkeeper, ISecretkeeper};
 use anyhow::{anyhow, bail, Context, Result};
 use apkverify::{HashAlgorithm, V4Signature};
 use avflog::LogResult;
@@ -94,6 +95,8 @@ const ANDROID_VM_INSTANCE_MAGIC: &str = "Android-VM-instance";
 const ANDROID_VM_INSTANCE_VERSION: u16 = 1;
 
 const MICRODROID_OS_NAME: &str = "microdroid";
+
+const SECRETKEEPER_IDENTIFIER: &str = "android.hardware.secretkeeper.ISecretkeeper/nonsecure";
 
 const UNFORMATTED_STORAGE_MAGIC: &str = "UNFORMATTED-STORAGE";
 
@@ -1213,6 +1216,13 @@ impl IVirtualMachineService for VirtualMachineService {
         }
     }
 
+    fn getSecretkeeper(&self) -> binder::Result<Strong<dyn ISecretkeeper>> {
+        Ok(BnSecretkeeper::new_binder(
+            SecretkeeperProxy(wait_for_interface(SECRETKEEPER_IDENTIFIER)?),
+            BinderFeatures::default(),
+        ))
+    }
+
     fn requestCertificate(&self, csr: &[u8]) -> binder::Result<Vec<u8>> {
         let cid = self.cid;
         let Some(vm) = self.state.lock().unwrap().get_vm(cid) else {
@@ -1356,5 +1366,19 @@ mod tests {
             VirtualMachineRawConfig { params: Some("foo=5".to_owned()), ..Default::default() };
         append_kernel_param("bar=42", &mut vm_config);
         assert_eq!(vm_config.params, Some("foo=5 bar=42".to_owned()))
+    }
+}
+
+struct SecretkeeperProxy(Strong<dyn ISecretkeeper>);
+
+impl Interface for SecretkeeperProxy {}
+
+impl ISecretkeeper for SecretkeeperProxy {
+    fn store(&self, payload: &[u8]) -> binder::Result<()> {
+        self.0.store(payload)
+    }
+
+    fn read(&self, payload: &[u8]) -> binder::Result<Vec<u8>> {
+        self.0.read(payload)
     }
 }
