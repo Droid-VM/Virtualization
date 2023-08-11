@@ -15,6 +15,7 @@
  */
 package android.system.virtualmachineservice;
 
+import android.hardware.secretkeeper.ISecretkeeper;
 import android.system.virtualizationcommon.ErrorCode;
 
 /** {@hide} */
@@ -52,4 +53,9 @@ interface IVirtualMachineService {
      * @return the X.509 encoded certificate.
      */
     byte[] requestCertificate(in byte[] csr);
+
+    /**
+     * Request proxy to Secretkeeper. This is used by pVM to store Anti-Rollback protected secrets.
+     */
+    ISecretkeeper getSecretkeeper();
 }

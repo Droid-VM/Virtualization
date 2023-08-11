@@ -14,11 +14,15 @@
 
 //! Class for encapsulating & managing represent VM secrets.
 
-use anyhow::Result;
+use anyhow::{ensure, Result};
+use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::IVirtualMachineService;
+use binder::Strong;
 use diced_open_dice::{DiceArtifacts, OwnedDiceArtifacts};
 use keystore2_crypto::ZVec;
 use openssl::hkdf::hkdf;
 use openssl::md::Md;
+use openssl::sha;
+use rand::Fill;
 
 const ENCRYPTEDSTORE_KEY_IDENTIFIER: &str = "encryptedstore_key";
 
@@ -53,11 +57,29 @@ pub enum VmSecret {
 }
 
 impl VmSecret {
-    pub fn new(dice_artifacts: OwnedDiceArtifacts) -> Result<VmSecret> {
+    pub fn new(
+        dice_artifacts: OwnedDiceArtifacts,
+        vm_service: &Strong<dyn IVirtualMachineService>,
+    ) -> Result<VmSecret> {
         if is_sk_supported() {
-            // TODO(b/291213394): Change this to real Sk protected secret.
-            let fake_skp_secret = ZVec::new(SK_SECRET_SIZE)?;
-            return Ok(Self::V2 { dice: dice_artifacts, skp_secret: fake_skp_secret });
+            ensure!(dice_artifacts.bcc().is_some(), "Dice chain missing");
+            let mut skp_secret;
+
+            // TODO(b/291213394): This should contains policy/dice chain for client authentication.
+            let auth_det = Vec::new();
+            let sk_service = vm_service.getSecretkeeper().map_err(|e| {
+                super::MicrodroidError::FailedToConnectToSecretkeeper(e.to_string())
+            })?;
+            if super::is_new_instance() {
+                // Secret is generated (from rng) for a new instance and
+                // stored in Secretkeeper HAL with dice policy based authentication.
+                skp_secret = Vec::with_capacity(SK_SECRET_SIZE);
+                skp_secret.try_fill(&mut rand::thread_rng())?;
+                sk_service.store(&skp_secret)?;
+            } else {
+                skp_secret = sk_service.read(&auth_det)?;
+            }
+            return Ok(Self::V2 { dice: dice_artifacts, skp_secret: ZVec::try_from(skp_secret)? });
         }
         Ok(Self::V1 { dice: dice_artifacts })
     }
@@ -71,7 +93,10 @@ impl VmSecret {
     fn get_vm_secret(&self, salt: &[u8], identifier: &[u8], key: &mut [u8]) -> Result<()> {
         match self {
             Self::V2 { dice, skp_secret } => {
-                hkdf(key, Md::sha256(), &skp_secret.concat(dice.cdi_seal())?, salt, identifier)?
+                let mut hasher = sha::Sha256::new();
+                hasher.update(dice.cdi_seal());
+                hasher.update(skp_secret);
+                hkdf(key, Md::sha256(), &hasher.finish(), salt, identifier)?
             }
             Self::V1 { dice } => hkdf(key, Md::sha256(), dice.cdi_seal(), salt, identifier)?,
         }
