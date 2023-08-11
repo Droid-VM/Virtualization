@@ -14,12 +14,15 @@
 
 //! Class for encapsulating & managing represent VM secrets.
 
-use anyhow::Result;
+use anyhow::{Context, ensure, Result};
+use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::IVirtualMachineService;
+use binder::Strong;
 use diced_open_dice::{DiceArtifacts, OwnedDiceArtifacts};
 use keystore2_crypto::ZVec;
 use openssl::hkdf::hkdf;
 use openssl::md::Md;
 
+use rand::Fill;
 const RP_SECRET_SIZE: usize = 64;
 
 /// VM Secrets.
@@ -41,11 +44,28 @@ pub enum VmSecret {
 }
 
 impl VmSecret {
-    pub fn new(dice_artifacts: OwnedDiceArtifacts) -> Result<VmSecret> {
+    pub fn new(
+        dice_artifacts: OwnedDiceArtifacts,
+        vm_service: &Strong<dyn IVirtualMachineService>,
+    ) -> Result<VmSecret> {
         if is_rp_secrets_supported() {
-            // TODO(291213394): Change this to real rp_secret from Secretkeeper.
-            let fake_rp_secret = ZVec::new(RP_SECRET_SIZE)?;
-            return Ok(Self::V2 { dice: dice_artifacts, rp_secret: fake_rp_secret });
+            ensure!(dice_artifacts.bcc().is_some(), "Dice chain missing");
+            let mut rp_secret;
+
+            // TODO(b/291213394): This should contains policy/dice chain for client authentication.
+            let auth_det = Vec::new();
+            let sk_service =
+                vm_service.getSecretkeeper().context("Cannot connect to Secretkeeper").map_err(
+                    |e| super::MicrodroidError::FailedToConnectToSecretkeeper(e.to_string()),
+                )?;
+            if super::is_new_instance() {
+                rp_secret = Vec::with_capacity(RP_SECRET_SIZE);
+                rp_secret.try_fill(&mut rand::thread_rng())?;
+                sk_service.store(&rp_secret)?;
+            } else {
+                rp_secret = sk_service.read(&auth_det)?;
+            }
+            return Ok(Self::V2 { dice: dice_artifacts, rp_secret: ZVec::try_from(rp_secret)? });
         }
         Ok(Self::V1 { dice: dice_artifacts })
     }
