@@ -94,6 +94,8 @@ const ENCRYPTEDSTORE_KEYSIZE: usize = 32;
 
 #[derive(thiserror::Error, Debug)]
 enum MicrodroidError {
+    #[error("Cannot connect to Secretkeeper HAL: {0}")]
+    FailedToConnectToSecretkeeper(String),
     #[error("Cannot connect to virtualization service: {0}")]
     FailedToConnectToVirtualizationService(String),
     #[error("Payload has changed: {0}")]
@@ -114,7 +116,9 @@ fn translate_error(err: &Error) -> (ErrorCode, String) {
             MicrodroidError::InvalidConfig(msg) => {
                 (ErrorCode::PAYLOAD_CONFIG_INVALID, msg.to_string())
             }
-
+            MicrodroidError::FailedToConnectToSecretkeeper(msg) => {
+                (ErrorCode::CONNECTION_FAILED_TO_SECRETKEEPER, msg.to_string())
+            }
             // Connection failure won't be reported to VS; return the default value
             MicrodroidError::FailedToConnectToVirtualizationService(msg) => {
                 (ErrorCode::UNKNOWN, msg.to_string())
@@ -130,6 +134,9 @@ fn write_death_reason_to_serial(err: &Error) -> Result<()> {
         Borrowed(match e {
             MicrodroidError::FailedToConnectToVirtualizationService(_) => {
                 "MICRODROID_FAILED_TO_CONNECT_TO_VIRTUALIZATION_SERVICE"
+            }
+            MicrodroidError::FailedToConnectToSecretkeeper(_) => {
+                "MICRODROID_FAILED_TO_CONNECT_TO_SECRETKEEPER"
             }
             MicrodroidError::PayloadChanged(_) => "MICRODROID_PAYLOAD_HAS_CHANGED",
             MicrodroidError::PayloadVerificationFailed(_) => {
@@ -415,7 +422,8 @@ fn try_run_payload(
     // To minimize the exposure to untrusted data, derive dice profile as soon as possible.
     info!("DICE derivation for payload");
     let dice_artifacts = dice_derivation(dice, &verified_data, &payload_metadata)?;
-    let vm_secret = VmSecret::new(dice_artifacts).context("Failed to create VM secrets")?;
+    let vm_secret =
+        VmSecret::new(dice_artifacts, service).context("Failed to create VM secrets")?;
 
     // Run encryptedstore binary to prepare the storage
     let encryptedstore_child = if Path::new(ENCRYPTEDSTORE_BACKING_DEVICE).exists() {
