@@ -63,6 +63,7 @@ fn main(
     mut debug_policy: Option<&mut [u8]>,
 ) -> Result<Range<usize>, RebootReason> {
     info!("pVM firmware");
+    info1("do not submit this -- just for running prebuilt ToT")
     debug!("FDT: {:?}", fdt.as_ptr());
     debug!("Signed kernel: {:?} ({:#x} bytes)", signed_kernel.as_ptr(), signed_kernel.len());
     debug!("AVB public key: addr={:?}, size={:#x} ({1})", PUBLIC_KEY.as_ptr(), PUBLIC_KEY.len());
