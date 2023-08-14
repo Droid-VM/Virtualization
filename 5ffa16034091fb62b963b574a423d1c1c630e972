@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a5a54fd_9d6bd385",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 924,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-14T16:27:20Z",
+      "side": 1,
+      "message": "That way, we\u0027ll need to maintain list of salts in vm_secret.rs which imo, will restrict it a bit. Ideally I would like vm_secret to be like a library encapsulating 1 secret \u0026 api to expand it to multiple secrets by supplying salt \u0026 identifiers.",
+      "parentUuid": "b8a9efdc_98f9f9a5",
+      "range": {
+        "startLine": 915,
+        "startChar": 0,
+        "endLine": 924,
+        "endChar": 93
+      },
+      "revId": "5ffa16034091fb62b963b574a423d1c1c630e972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95df87db_519a61d5",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-08-11T16:49:59Z",
       "side": 1,
       "message": "This name seems wrong now? get_instance_secret?",
+      "range": {
+        "startLine": 51,
+        "startChar": 20,
+        "endLine": 51,
+        "endChar": 38
+      },
+      "revId": "5ffa16034091fb62b963b574a423d1c1c630e972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "939cafbd_d82324a4",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-14T16:27:20Z",
+      "side": 1,
+      "message": "That was caused due to incorrect merge conflict resolution. Fixed it.",
+      "parentUuid": "95df87db_519a61d5",
       "range": {
         "startLine": 51,
         "startChar": 20,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9175ec03_4659b46d",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-14T16:27:20Z",
+      "side": 1,
+      "message": "How about skp_secret (Secretkeeper protected secrets)\n\nsealed_secret - the other secret is also \"sealing\" CDI, so we need to differentiate them.",
+      "parentUuid": "4cbb5f60_a9012a7a",
+      "range": {
+        "startLine": 23,
+        "startChar": 6,
+        "endLine": 23,
+        "endChar": 8
+      },
+      "revId": "5ffa16034091fb62b963b574a423d1c1c630e972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b521ebe_d149f99e",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26608823_5b41583c",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-14T16:27:20Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "7b521ebe_d149f99e",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 15
+      },
+      "revId": "5ffa16034091fb62b963b574a423d1c1c630e972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62133e90_c044f0a5",
@@ -106,6 +202,30 @@
       "writtenOn": "2023-08-11T16:49:59Z",
       "side": 1,
       "message": "Can we have names rather than numbers?\n\nDiceBasedSecret, RollbackProtectedSecret ?",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 6
+      },
+      "revId": "5ffa16034091fb62b963b574a423d1c1c630e972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7da4321d_2b3fec0c",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-14T16:27:20Z",
+      "side": 1,
+      "message": "I think numbering would be better to enforce an order in rollout. For ex, we know V1 is deprecated after V2 is rollout out, and we need to support those for next 7(?) years.\n\nAlso, I suspect we will have more versions of these (say if Secretkeeper is behind Secure HAL). We will need to transition secrets from Vi -\u003e Vi+1 without breaking the secrets. Therefore, I prefer a clear ordering of the secrets.",
+      "parentUuid": "62133e90_c044f0a5",
       "range": {
         "startLine": 35,
         "startChar": 4,
