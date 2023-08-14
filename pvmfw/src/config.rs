@@ -18,7 +18,7 @@ use core::fmt;
 use core::mem;
 use core::ops::Range;
 use core::result;
-use vmbase::util::unchecked_align_up;
+use vmbase::util::{unchecked_align_up, RangeExt};
 use zerocopy::{FromBytes, LayoutVerified};
 
 /// Configuration data header.
@@ -53,8 +53,8 @@ pub enum Error {
     InvalidSize(usize),
     /// Header entry is missing.
     MissingEntry(Entry),
-    /// Header entry is invalid.
-    InvalidEntry(Entry, EntryError),
+    /// Range described by entry does not fit within config data.
+    EntryOutOfBounds(Entry, Range<usize>, Range<usize>),
 }
 
 impl fmt::Display for Error {
@@ -67,87 +67,44 @@ impl fmt::Display for Error {
             Self::InvalidFlags(v) => write!(f, "Flags value {v:#x} is incorrect or reserved"),
             Self::InvalidSize(sz) => write!(f, "Total size ({sz:#x}) overflows reserved region"),
             Self::MissingEntry(entry) => write!(f, "Mandatory {entry:?} entry is missing"),
-            Self::InvalidEntry(entry, e) => write!(f, "Invalid {entry:?} entry: {e}"),
+            Self::EntryOutOfBounds(entry, range, limits) => {
+                write!(
+                    f,
+                    "Entry {entry:?} out of bounds: {range:#x?} must be within range {limits:#x?}"
+                )
+            }
         }
     }
 }
 
 pub type Result<T> = result::Result<T, Error>;
 
-#[derive(Debug)]
-pub enum EntryError {
-    /// Offset isn't between the fixed minimum value and size of configuration data.
-    InvalidOffset(usize),
-    /// Size must be zero when offset is and not be when it isn't.
-    InvalidSize(usize),
-    /// Entry isn't fully within the configuration data structure.
-    OutOfBounds { offset: usize, size: usize, limit: usize },
-}
-
-impl fmt::Display for EntryError {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self {
-            Self::InvalidOffset(offset) => write!(f, "Invalid offset: {offset:#x?}"),
-            Self::InvalidSize(sz) => write!(f, "Invalid size: {sz:#x?}"),
-            Self::OutOfBounds { offset, size, limit } => {
-                let range = Header::PADDED_SIZE..*limit;
-                let entry = *offset..(*offset + *size);
-                write!(f, "Out of bounds: {entry:#x?} must be within range {range:#x?}")
-            }
-        }
-    }
-}
-
 impl Header {
     const MAGIC: u32 = u32::from_ne_bytes(*b"pvmf");
     const VERSION_1_0: Version = Version { major: 1, minor: 0 };
-    const PADDED_SIZE: usize = unchecked_align_up(mem::size_of::<Self>(), mem::size_of::<u64>());
 
     pub fn total_size(&self) -> usize {
         self.total_size as usize
     }
 
-    pub fn body_size(&self) -> usize {
-        self.total_size() - Self::PADDED_SIZE
+    pub fn body_offset(&self) -> usize {
+        unchecked_align_up(mem::size_of::<Self>(), mem::size_of::<u64>())
     }
 
     fn get_body_range(&self, entry: Entry) -> Result<Option<Range<usize>>> {
-        let e = self.entries[entry as usize];
-        let offset = e.offset as usize;
-        let size = e.size as usize;
+        let Some(range) = self.entries[entry as usize].as_range() else {
+            return Ok(None);
+        };
 
-        match self._get_body_range(offset, size) {
-            Ok(r) => Ok(r),
-            Err(EntryError::InvalidSize(0)) => {
-                // As our bootloader currently uses this (non-compliant) case, permit it for now.
-                log::warn!("Config entry {entry:?} uses non-zero offset with zero size");
-                // TODO(b/262181812): Either make this case valid or fix the bootloader.
-                Ok(None)
-            }
-            Err(e) => Err(Error::InvalidEntry(entry, e)),
+        let limits = self.body_offset()..self.total_size();
+        if !range.is_within(&limits) {
+            return Err(Error::EntryOutOfBounds(entry, range, limits));
         }
-    }
 
-    fn _get_body_range(
-        &self,
-        offset: usize,
-        size: usize,
-    ) -> result::Result<Option<Range<usize>>, EntryError> {
-        match (offset, size) {
-            (0, 0) => Ok(None),
-            (0, size) | (_, size @ 0) => Err(EntryError::InvalidSize(size)),
-            _ => {
-                let start = offset
-                    .checked_sub(Header::PADDED_SIZE)
-                    .ok_or(EntryError::InvalidOffset(offset))?;
-                let end = start
-                    .checked_add(size)
-                    .filter(|x| *x <= self.body_size())
-                    .ok_or(EntryError::OutOfBounds { offset, size, limit: self.total_size() })?;
+        let start = range.start.checked_sub(limits.start).unwrap();
+        let end = range.end.checked_sub(limits.start).unwrap();
 
-                Ok(Some(start..end))
-            }
-        }
+        Ok(Some(start..end))
     }
 }
 
@@ -166,6 +123,18 @@ impl Entry {
 struct HeaderEntry {
     offset: u32,
     size: u32,
+}
+
+impl HeaderEntry {
+    pub fn as_range(&self) -> Option<Range<usize>> {
+        let size = usize::try_from(self.size).unwrap();
+        if size != 0 {
+            let offset = self.offset.try_into().unwrap();
+            Some(offset..(offset + size))
+        } else {
+            None
+        }
+    }
 }
 
 #[repr(C, packed)]
@@ -192,11 +161,13 @@ pub struct Config<'a> {
 
 impl<'a> Config<'a> {
     /// Take ownership of a pvmfw configuration consisting of its header and following entries.
-    pub fn new(data: &'a mut [u8]) -> Result<Self> {
-        let header = data.get(..Header::PADDED_SIZE).ok_or(Error::BufferTooSmall)?;
+    pub fn new(bytes: &'a mut [u8]) -> Result<Self> {
+        if bytes.len() < mem::size_of::<Header>() {
+            return Err(Error::BufferTooSmall);
+        }
 
-        let (header, _) =
-            LayoutVerified::<_, Header>::new_from_prefix(header).ok_or(Error::HeaderMisaligned)?;
+        let (header, rest) =
+            LayoutVerified::<_, Header>::new_from_prefix(bytes).ok_or(Error::HeaderMisaligned)?;
         let header = header.into_ref();
 
         if header.magic != Header::MAGIC {
@@ -211,19 +182,18 @@ impl<'a> Config<'a> {
             return Err(Error::InvalidFlags(header.flags));
         }
 
+        // Now that we can access the Header, validate its total_size and resize the byte slice.
+        let total_size = header.total_size();
+        let body_offset = header.body_offset();
+        let size_rest =
+            total_size.checked_sub(body_offset).ok_or(Error::InvalidSize(total_size))?;
+        let rest = rest.get_mut(..size_rest).ok_or(Error::InvalidSize(total_size))?;
+
         let bcc_range =
             header.get_body_range(Entry::Bcc)?.ok_or(Error::MissingEntry(Entry::Bcc))?;
         let dp_range = header.get_body_range(Entry::DebugPolicy)?;
 
-        let body_size = header.body_size();
-        let total_size = header.total_size();
-        let body = data
-            .get_mut(Header::PADDED_SIZE..)
-            .ok_or(Error::BufferTooSmall)?
-            .get_mut(..body_size)
-            .ok_or(Error::InvalidSize(total_size))?;
-
-        Ok(Self { body, bcc_range, dp_range })
+        Ok(Self { body: rest, bcc_range, dp_range })
     }
 
     /// Get slice containing the platform BCC.
