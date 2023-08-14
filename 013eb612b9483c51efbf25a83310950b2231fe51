@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f71b5813_b44ac5e7",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/Pvmfw.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-14T15:32:06Z",
+      "side": 1,
+      "message": "Let me keep this as-is because those VM DTBO file wouldn\u0027t be used by any test. I\u0027ll add the function with VM DTBO provisioning.",
+      "parentUuid": "03372ccc_3ab2cbf5",
+      "range": {
+        "startLine": 88,
+        "startChar": 15,
+        "endLine": 88,
+        "endChar": 83
+      },
+      "revId": "013eb612b9483c51efbf25a83310950b2231fe51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "755a0bc6_c653b8a3",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-08-14T14:26:45Z",
       "side": 1,
       "message": "nit: Given that the config entry list can only grow, it might make sense to express this as\n```\nif (version \u003e getVersion(1, 5)) {\n    return Integer.BYTES * ...;\n}\nif (version \u003e getVersion(1, 4)) {\n    return Integer.BYTES * ...;\n}\n...\nif (version \u003e getVersion(1, 1)) {\n    return Integer.BYTES * 10;\n}\nreturn Integer.BYTES * 8;\n```\n(where the first `if`s are there to illustrate how the code would grow)",
+      "range": {
+        "startLine": 130,
+        "startChar": 8,
+        "endLine": 133,
+        "endChar": 70
+      },
+      "revId": "013eb612b9483c51efbf25a83310950b2231fe51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e06e6a88_7f9678b3",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/Pvmfw.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-14T15:32:06Z",
+      "side": 1,
+      "message": "Let me keep this as-is. Current structure is bit more readable to me because it says what\u0027s added between versions.",
+      "parentUuid": "755a0bc6_c653b8a3",
       "range": {
         "startLine": 130,
         "startChar": 8,
