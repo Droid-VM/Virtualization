@@ -33,8 +33,6 @@ struct Header {
     total_size: u32,
     /// Feature flags; currently reserved and must be zero.
     flags: u32,
-    /// (offset, size) pairs used to locate individual entries appended to the header.
-    entries: [HeaderEntry; Entry::COUNT],
 }
 
 #[derive(Debug)]
@@ -87,35 +85,32 @@ impl Header {
         self.total_size as usize
     }
 
-    pub fn body_offset(&self) -> usize {
-        unchecked_align_up(mem::size_of::<Self>(), mem::size_of::<u64>())
+    pub fn body_offset(&self) -> Result<usize> {
+        let entries_offset = unchecked_align_up(mem::size_of::<Self>(), mem::size_of::<u64>());
+
+        Ok(entries_offset + mem::size_of::<HeaderEntry>() * self.entry_count()?)
     }
 
-    fn get_body_range(&self, entry: Entry) -> Result<Option<Range<usize>>> {
-        let Some(range) = self.entries[entry as usize].as_range() else {
-            return Ok(None);
+    pub fn entry_count(&self) -> Result<usize> {
+        let last_entry = match self.version {
+            Self::VERSION_1_0 => Entry::DebugPolicy,
+            v => return Err(Error::UnsupportedVersion(v)),
         };
 
-        let limits = self.body_offset()..self.total_size();
-        if !range.is_within(&limits) {
-            return Err(Error::EntryOutOfBounds(entry, range, limits));
-        }
-
-        let start = range.start.checked_sub(limits.start).unwrap();
-        let end = range.end.checked_sub(limits.start).unwrap();
-
-        Ok(Some(start..end))
+        Ok(last_entry as usize + 1)
     }
 }
 
 #[derive(Clone, Copy, Debug)]
 pub enum Entry {
-    Bcc = 0,
-    DebugPolicy = 1,
+    Bcc,
+    DebugPolicy,
+    #[allow(non_camel_case_types)] // TODO: Use mem::variant_count once stable.
+    _VARIANT_COUNT,
 }
 
 impl Entry {
-    const COUNT: usize = 2;
+    const COUNT: usize = Self::_VARIANT_COUNT as usize;
 }
 
 #[repr(packed)]
@@ -155,8 +150,7 @@ impl fmt::Display for Version {
 #[derive(Debug)]
 pub struct Config<'a> {
     body: &'a mut [u8],
-    bcc_range: Range<usize>,
-    dp_range: Option<Range<usize>>,
+    ranges: [Option<Range<usize>>; Entry::COUNT],
 }
 
 impl<'a> Config<'a> {
@@ -174,10 +168,6 @@ impl<'a> Config<'a> {
             return Err(Error::InvalidMagic);
         }
 
-        if header.version != Header::VERSION_1_0 {
-            return Err(Error::UnsupportedVersion(header.version));
-        }
-
         if header.flags != 0 {
             return Err(Error::InvalidFlags(header.flags));
         }
@@ -190,22 +180,33 @@ impl<'a> Config<'a> {
             return Err(Error::InvalidSize(total_size));
         };
 
-        let bcc_range =
-            header.get_body_range(Entry::Bcc)?.ok_or(Error::MissingEntry(Entry::Bcc))?;
-        let dp_range = header.get_body_range(Entry::DebugPolicy)?;
+        let (header_entries, body) =
+            LayoutVerified::<_, [HeaderEntry]>::new_slice_from_prefix(rest, header.entry_count()?)
+                .ok_or(Error::BufferTooSmall)?;
 
-        Ok(Self { body: rest, bcc_range, dp_range })
+        let limits = header.body_offset()?..total_size;
+        let ranges = [
+            // TODO: Find a way to do this programmatically even if the trait
+            // `core::marker::Copy` is not implemented for `core::ops::Range<usize>`.
+            Self::validated_body_range(Entry::Bcc, &header_entries, &limits)?,
+            Self::validated_body_range(Entry::DebugPolicy, &header_entries, &limits)?,
+        ];
+
+        Ok(Self { body, ranges })
     }
 
     /// Get slice containing the platform BCC.
-    pub fn get_entries(&mut self) -> (&mut [u8], Option<&mut [u8]>) {
-        let bcc_start = self.bcc_range.start;
-        let bcc_end = self.bcc_range.len();
+    pub fn get_entries(&mut self) -> Result<(&mut [u8], Option<&mut [u8]>)> {
+        // This assumes that the blobs are in-order w.r.t. the entries.
+        let bcc_range = self.get_entry_range(Entry::Bcc).ok_or(Error::MissingEntry(Entry::Bcc))?;
+        let dp_range = self.get_entry_range(Entry::DebugPolicy);
+        let bcc_start = bcc_range.start;
+        let bcc_end = bcc_range.len();
         let (_, rest) = self.body.split_at_mut(bcc_start);
         let (bcc, rest) = rest.split_at_mut(bcc_end);
 
-        let dp = if let Some(dp_range) = &self.dp_range {
-            let dp_start = dp_range.start.checked_sub(self.bcc_range.end).unwrap();
+        let dp = if let Some(dp_range) = dp_range {
+            let dp_start = dp_range.start.checked_sub(bcc_range.end).unwrap();
             let dp_end = dp_range.len();
             let (_, rest) = rest.split_at_mut(dp_start);
             let (dp, _) = rest.split_at_mut(dp_end);
@@ -214,6 +215,31 @@ impl<'a> Config<'a> {
             None
         };
 
-        (bcc, dp)
+        Ok((bcc, dp))
+    }
+
+    pub fn get_entry_range(&self, entry: Entry) -> Option<Range<usize>> {
+        self.ranges[entry as usize].clone()
+    }
+
+    fn validated_body_range(
+        entry: Entry,
+        header_entries: &[HeaderEntry],
+        limits: &Range<usize>,
+    ) -> Result<Option<Range<usize>>> {
+        if let Some(header_entry) = header_entries.get(entry as usize) {
+            if let Some(r) = header_entry.as_range() {
+                return if r.is_within(limits) {
+                    let start = r.start.checked_sub(limits.start).unwrap();
+                    let end = r.end.checked_sub(limits.start).unwrap();
+
+                    Ok(Some(start..end))
+                } else {
+                    Err(Error::EntryOutOfBounds(entry, r, limits.clone()))
+                };
+            }
+        }
+
+        Ok(None)
     }
 }
