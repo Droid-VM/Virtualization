@@ -39,6 +39,167 @@
       "message": "Applied comments from aosp/2682557, please let me know if I missed something.",
       "revId": "5b09d96f9cc5603aed49609f5b655eb02a68bf60",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cff1c60_11703834",
+        "filename": "virtualizationservice/vfio_handler/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-14T02:10:12Z",
+      "side": 1,
+      "message": "redundant?",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 25
+      },
+      "revId": "5b09d96f9cc5603aed49609f5b655eb02a68bf60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "545bb467_04671a56",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-14T02:10:12Z",
+      "side": 1,
+      "message": "`\"/dev/block/by-name/dtbo{slot_suffix}\"`",
+      "range": {
+        "startLine": 207,
+        "startChar": 29,
+        "endLine": 207,
+        "endChar": 69
+      },
+      "revId": "5b09d96f9cc5603aed49609f5b655eb02a68bf60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a6547c3_4214a1d8",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-14T02:10:12Z",
+      "side": 1,
+      "message": "SAFETY comment?",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 70
+      },
+      "revId": "5b09d96f9cc5603aed49609f5b655eb02a68bf60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "232de246_bc7749ca",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-14T02:10:12Z",
+      "side": 1,
+      "message": "I\u0027m not sure but possibly `index \u003e\u003d header._dt_entry_count`?",
+      "range": {
+        "startLine": 238,
+        "startChar": 0,
+        "endLine": 238,
+        "endChar": 39
+      },
+      "revId": "5b09d96f9cc5603aed49609f5b655eb02a68bf60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c73562f7_65115607",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-14T02:10:12Z",
+      "side": 1,
+      "message": "This block is duplicated. Can we have a utility function?",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 257,
+        "endChar": 54
+      },
+      "revId": "5b09d96f9cc5603aed49609f5b655eb02a68bf60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b61805b2_04a70bb3",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-14T02:10:12Z",
+      "side": 1,
+      "message": "return error, rather than panic?",
+      "range": {
+        "startLine": 272,
+        "startChar": 44,
+        "endLine": 272,
+        "endChar": 50
+      },
+      "revId": "5b09d96f9cc5603aed49609f5b655eb02a68bf60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eadae7cc_aac9776a",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-14T02:10:12Z",
+      "side": 1,
+      "message": "`File::open()`?",
+      "range": {
+        "startLine": 294,
+        "startChar": 0,
+        "endLine": 298,
+        "endChar": 0
+      },
+      "revId": "5b09d96f9cc5603aed49609f5b655eb02a68bf60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
