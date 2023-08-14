@@ -120,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a88c2d72_ca21c2ea",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-14T13:51:45Z",
+      "side": 1,
+      "message": "You could add static constructor (ex: `new_from_file`) to `DtTableHeader` and `DtTableEntry`. In the constructor, you read the file to get the values, do the be-le conversion, and finally create the struct out of the read values.",
+      "parentUuid": "3d1a5baf_96ed753c",
+      "range": {
+        "startLine": 230,
+        "startChar": 0,
+        "endLine": 231,
+        "endChar": 70
+      },
+      "revId": "0875f43e78e91e77ebab0bc7d99bf17d1f12d2e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ac9d087_54eb7ecf",
         "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
         "patchSetId": 2
