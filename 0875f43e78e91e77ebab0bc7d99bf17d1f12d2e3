@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1436239_775d943a",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-14T03:24:46Z",
+      "side": 1,
+      "message": "You are depending on the coincidental fact that DtTableHeader and DtTableEntry have the same size, but that\u0027s very fragile.",
+      "range": {
+        "startLine": 210,
+        "startChar": 8,
+        "endLine": 210,
+        "endChar": 13
+      },
+      "revId": "0875f43e78e91e77ebab0bc7d99bf17d1f12d2e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05036206_9a8bf60b",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-14T03:24:46Z",
+      "side": 1,
+      "message": "use `ReadBytesExt` trait from the `byteorder` crate.",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 1
+      },
+      "revId": "0875f43e78e91e77ebab0bc7d99bf17d1f12d2e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c7e8e85_19af689e",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-14T03:24:46Z",
+      "side": 1,
+      "message": "Use serde to safely implement the de-serialization",
+      "range": {
+        "startLine": 230,
+        "startChar": 0,
+        "endLine": 231,
+        "endChar": 70
+      },
+      "revId": "0875f43e78e91e77ebab0bc7d99bf17d1f12d2e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ac9d087_54eb7ecf",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-14T03:24:46Z",
+      "side": 1,
+      "message": "use serde",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 54
+      },
+      "revId": "0875f43e78e91e77ebab0bc7d99bf17d1f12d2e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
