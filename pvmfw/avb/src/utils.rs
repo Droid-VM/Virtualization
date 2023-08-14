@@ -14,7 +14,7 @@
 
 //! Common utility functions.
 
-use crate::error::AvbIOError;
+use avb::IoError as AvbIOError;
 use core::ptr::NonNull;
 use core::result;
 

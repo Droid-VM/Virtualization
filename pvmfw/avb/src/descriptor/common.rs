@@ -14,8 +14,8 @@
 
 //! Structs and functions used by all the descriptors.
 
-use crate::error::AvbIOError;
 use crate::utils::{self, is_not_null};
+use avb::IoError as AvbIOError;
 use core::mem::MaybeUninit;
 
 /// # Safety

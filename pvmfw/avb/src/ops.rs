@@ -14,11 +14,12 @@
 
 //! Structs and functions relating to `AvbOps`.
 
-use crate::error::{
-    slot_verify_result_to_verify_payload_result, to_avb_io_result, AvbIOError, AvbSlotVerifyError,
-};
 use crate::partition::PartitionName;
 use crate::utils::{self, as_ref, is_not_null, to_nonnull, write};
+use avb::{
+    internal::{result_to_io_enum, slot_verify_enum_to_result},
+    IoError as AvbIOError, SlotVerifyError as AvbSlotVerifyError,
+};
 use avb_bindgen::{
     avb_slot_verify, avb_slot_verify_data_free, AvbHashtreeErrorMode, AvbIOResult, AvbOps,
     AvbPartitionData, AvbSlotVerifyData, AvbSlotVerifyFlags, AvbVBMetaData,
@@ -113,7 +114,7 @@ impl Ops {
                 out_data.as_mut_ptr(),
             )
         };
-        slot_verify_result_to_verify_payload_result(result)?;
+        slot_verify_enum_to_result(result)?;
         // SAFETY: This is safe because `out_data` has been properly initialized after
         // calling `avb_slot_verify` and it returns OK.
         let out_data = unsafe { out_data.assume_init() };
@@ -125,7 +126,7 @@ extern "C" fn read_is_device_unlocked(
     _ops: *mut AvbOps,
     out_is_unlocked: *mut bool,
 ) -> AvbIOResult {
-    to_avb_io_result(write(out_is_unlocked, false))
+    result_to_io_enum(write(out_is_unlocked, false))
 }
 
 extern "C" fn get_preloaded_partition(
@@ -135,7 +136,7 @@ extern "C" fn get_preloaded_partition(
     out_pointer: *mut *mut u8,
     out_num_bytes_preloaded: *mut usize,
 ) -> AvbIOResult {
-    to_avb_io_result(try_get_preloaded_partition(
+    result_to_io_enum(try_get_preloaded_partition(
         ops,
         partition,
         num_bytes,
@@ -165,7 +166,7 @@ extern "C" fn read_from_partition(
     buffer: *mut c_void,
     out_num_read: *mut usize,
 ) -> AvbIOResult {
-    to_avb_io_result(try_read_from_partition(
+    result_to_io_enum(try_read_from_partition(
         ops,
         partition,
         offset,
@@ -211,7 +212,7 @@ extern "C" fn get_size_of_partition(
     partition: *const c_char,
     out_size_num_bytes: *mut u64,
 ) -> AvbIOResult {
-    to_avb_io_result(try_get_size_of_partition(ops, partition, out_size_num_bytes))
+    result_to_io_enum(try_get_size_of_partition(ops, partition, out_size_num_bytes))
 }
 
 fn try_get_size_of_partition(
@@ -235,7 +236,7 @@ extern "C" fn read_rollback_index(
     // `avb_slot_verify()`.
     // We set `out_rollback_index` to 0 to ensure that the default rollback index (0)
     // is never smaller than it, thus the rollback index check will pass.
-    to_avb_io_result(write(out_rollback_index, 0))
+    result_to_io_enum(write(out_rollback_index, 0))
 }
 
 extern "C" fn get_unique_guid_for_partition(
@@ -258,7 +259,7 @@ extern "C" fn validate_vbmeta_public_key(
     public_key_metadata_length: usize,
     out_is_trusted: *mut bool,
 ) -> AvbIOResult {
-    to_avb_io_result(try_validate_vbmeta_public_key(
+    result_to_io_enum(try_validate_vbmeta_public_key(
         ops,
         public_key_data,
         public_key_length,

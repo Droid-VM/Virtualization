@@ -14,8 +14,8 @@
 
 //! Struct and functions relating to well-known partition names.
 
-use crate::error::AvbIOError;
 use crate::utils::is_not_null;
+use avb::IoError as AvbIOError;
 use core::ffi::{c_char, CStr};
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]

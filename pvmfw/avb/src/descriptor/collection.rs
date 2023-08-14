@@ -17,9 +17,10 @@
 use super::common::get_valid_descriptor;
 use super::hash::HashDescriptor;
 use super::property::PropertyDescriptor;
-use crate::error::{AvbIOError, AvbSlotVerifyError};
 use crate::partition::PartitionName;
 use crate::utils::{self, is_not_null, to_usize, usize_checked_add};
+use crate::PvmfwVerifyError;
+use avb::{IoError as AvbIOError, SlotVerifyError as AvbSlotVerifyError};
 use avb_bindgen::{
     avb_descriptor_foreach, avb_descriptor_validate_and_byteswap, AvbDescriptor, AvbDescriptorTag,
     AvbVBMetaData,
@@ -45,7 +46,7 @@ impl<'a> Descriptors<'a> {
     /// Behavior is undefined if any of the following conditions are violated:
     /// * `vbmeta.vbmeta_data` must be non-null and points to a valid VBMeta.
     /// * `vbmeta.vbmeta_data` must be valid for reading `vbmeta.vbmeta_size` bytes.
-    pub(crate) unsafe fn from_vbmeta(vbmeta: AvbVBMetaData) -> Result<Self, AvbSlotVerifyError> {
+    pub(crate) unsafe fn from_vbmeta(vbmeta: AvbVBMetaData) -> Result<Self, PvmfwVerifyError> {
         is_not_null(vbmeta.vbmeta_data).map_err(|_| AvbSlotVerifyError::Io)?;
         let mut res: Result<Self, AvbIOError> = Ok(Self::default());
         // SAFETY: It is safe as the raw pointer `vbmeta.vbmeta_data` is a non-null pointer and
@@ -59,9 +60,9 @@ impl<'a> Descriptors<'a> {
             )
         };
         if output == res.is_ok() {
-            res.map_err(AvbSlotVerifyError::InvalidDescriptors)
+            res.map_err(PvmfwVerifyError::InvalidDescriptors)
         } else {
-            Err(AvbSlotVerifyError::InvalidMetadata)
+            Err(AvbSlotVerifyError::InvalidMetadata.into())
         }
     }
 

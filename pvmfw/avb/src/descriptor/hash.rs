@@ -15,9 +15,9 @@
 //! Structs and functions relating to the hash descriptor.
 
 use super::common::get_valid_descriptor;
-use crate::error::AvbIOError;
 use crate::partition::PartitionName;
 use crate::utils::{self, to_usize, usize_checked_add};
+use avb::IoError as AvbIOError;
 use avb_bindgen::{
     avb_hash_descriptor_validate_and_byteswap, AvbDescriptor, AvbHashDescriptor,
     AVB_SHA256_DIGEST_SIZE,

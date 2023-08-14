@@ -11,6 +11,7 @@ rust_library_rlib {
     flags: ["-Dunsafe_op_in_unsafe_fn"],
     rustlibs: [
         "libavb_bindgen_nostd",
+        "libavb_rs",
         "libtinyvec_nostd",
     ],
     whole_static_libs: [
@@ -47,6 +48,7 @@ rust_test {
     rustlibs: [
         "libanyhow",
         "libavb_bindgen",
+        "libavb_rs",
         "libhex",
         "libpvmfw_avb_nostd",
         "libopenssl",
