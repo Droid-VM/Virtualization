@@ -19,9 +19,15 @@ use android_system_virtualizationservice_internal::aidl::android::system::virtua
 use android_system_virtualizationservice_internal::binder::ParcelFileDescriptor;
 use binder::{self, ExceptionCode, Interface, IntoBinderResult};
 use lazy_static::lazy_static;
-use std::fs::{read_link, write};
-use std::io::Write;
-use std::path::Path;
+use std::fs::{read_link, write, File};
+use std::io::{Read, Seek, SeekFrom, Write};
+use std::mem::size_of;
+use std::path::{Path, PathBuf};
+use rustutils::system_properties;
+use zerocopy::{
+    byteorder::{BigEndian, U32},
+    FromBytes,
+};
 
 #[derive(Debug, Default)]
 pub struct VfioHandler {}
@@ -45,18 +51,10 @@ impl IVfioHandler for VfioHandler {
             return Err(anyhow!("VFIO-platform not supported"))
                 .or_binder_exception(ExceptionCode::UNSUPPORTED_OPERATION);
         }
-
         devices.iter().try_for_each(|x| bind_device(Path::new(x)))?;
 
-        let mut dtbo = dtbo
-            .as_ref()
-            .try_clone()
-            .context("Failed to clone File from ParcelFileDescriptor")
-            .or_binder_exception(ExceptionCode::BAD_PARCELABLE)?;
-        // TODO(b/291191362): write DTBO for devices to dtbo.
-        dtbo.write(b"\n")
-            .context("Can't write to ParcelFileDescriptor")
-            .or_binder_exception(ExceptionCode::BAD_PARCELABLE)?;
+        write_dtbo(dtbo)?;
+
         Ok(())
     }
 }
@@ -65,6 +63,48 @@ const DEV_VFIO_PATH: &str = "/dev/vfio/vfio";
 const SYSFS_PLATFORM_DEVICES_PATH: &str = "/sys/devices/platform/";
 const VFIO_PLATFORM_DRIVER_PATH: &str = "/sys/bus/platform/drivers/vfio-platform";
 const SYSFS_PLATFORM_DRIVERS_PROBE_PATH: &str = "/sys/bus/platform/drivers_probe";
+const DT_TABLE_MAGIC: u32 = 0xd7b7ab1e;
+
+/// The structure of DT table header in dtbo.img.
+/// https://source.android.com/docs/core/architecture/dto/partitions
+#[repr(C)]
+#[derive(Debug, FromBytes)]
+struct DtTableHeader {
+    /// DT_TABLE_MAGIC
+    magic: U32<BigEndian>,
+    /// includes dt_table_header + all dt_table_entry and all dtb/dtbo
+    _total_size: U32<BigEndian>,
+    /// sizeof(dt_table_header)
+    _header_size: U32<BigEndian>,
+    /// sizeof(dt_table_entry)
+    dt_entry_size: U32<BigEndian>,
+    /// number of dt_table_entry
+    dt_entry_count: U32<BigEndian>,
+    /// offset to the first dt_table_entry from head of dt_table_header
+    dt_entries_offset: U32<BigEndian>,
+    /// flash page size we assume
+    _page_size: U32<BigEndian>,
+    /// DTBO image version, the current version is 0. The version will be
+    /// incremented when the dt_table_header struct is updated.
+    _version: U32<BigEndian>,
+}
+
+/// The structure of each DT table entry (v0) in dtbo.img.
+/// https://source.android.com/docs/core/architecture/dto/partitions
+#[repr(C)]
+#[derive(Debug, FromBytes)]
+struct DtTableEntry {
+    /// size of each DT
+    dt_size: U32<BigEndian>,
+    /// offset from head of dt_table_header
+    dt_offset: U32<BigEndian>,
+    /// optional, must be zero if unused
+    _id: U32<BigEndian>,
+    /// optional, must be zero if unused
+    _rev: U32<BigEndian>,
+    /// optional, must be zero if unused
+    _custom: [U32<BigEndian>; 4],
+}
 
 lazy_static! {
     static ref IS_VFIO_SUPPORTED: bool = is_vfio_supported();
@@ -157,4 +197,119 @@ fn bind_device(path: &Path) -> binder::Result<()> {
 
     check_platform_device(&path)?;
     bind_vfio_driver(&path)
+}
+
+fn get_dtbo_img_path() -> binder::Result<PathBuf> {
+    let slot_suffix = system_properties::read("ro.boot.slot_suffix")
+        .context("Failed to read ro.boot.slot_suffix")
+        .or_service_specific_exception(-1)?;
+
+    let Some(slot_suffix) = slot_suffix.as_deref() else {
+        return Err(anyhow!("slot_suffix is none")).or_service_specific_exception(-1)?;
+    };
+    Ok(PathBuf::from(format!("/dev/block/by-name/dtbo{slot_suffix}")))
+}
+
+fn read_values(file: &mut File, size: u64, offset: u64) -> binder::Result<Vec<u8>> {
+    file.seek(SeekFrom::Start(offset))
+        .context("Cannot seek the offset")
+        .or_service_specific_exception(-1)?;
+    let mut buffer = Vec::new();
+    let size = size
+        .try_into()
+        .context("Failed to convert type")
+        .or_binder_exception(ExceptionCode::ILLEGAL_STATE)?;
+    buffer.resize(size, 0);
+    file.read_exact(&mut buffer)
+        .context("Failed to read buffer")
+        .or_service_specific_exception(-1)?;
+    Ok(buffer)
+}
+
+fn read_u32_values(file: &mut File, size_u32: u64, offset: u64) -> binder::Result<Vec<u8>> {
+    let Some(rate) = size_of::<u32>().checked_div(size_of::<u8>()) else {
+        return Err(anyhow!("Unexpected arithmetic result"))
+            .or_binder_exception(ExceptionCode::ILLEGAL_STATE);
+    };
+    let rate = rate
+        .try_into()
+        .context("Failed to convert type")
+        .or_binder_exception(ExceptionCode::ILLEGAL_STATE)?;
+    let Some(size_u8) = size_u32.checked_mul(rate) else {
+        return Err(anyhow!("Unexpected arithmetic result"))
+            .or_binder_exception(ExceptionCode::ILLEGAL_STATE);
+    };
+    read_values(file, size_u8, offset)
+}
+
+fn get_dt_table_header(file: &mut File) -> binder::Result<DtTableHeader> {
+    let values = read_u32_values(file, 8, 0)?;
+    let dt_table_header = DtTableHeader::read_from(values.as_slice())
+        .context("Failed to convert type into DtTableHeader")
+        .or_service_specific_exception(-1)?;
+    if dt_table_header.magic.get() != DT_TABLE_MAGIC {
+        return Err(anyhow!("Invalid dt_table magic")).or_service_specific_exception(-1)?;
+    }
+    Ok(dt_table_header)
+}
+
+fn get_dt_table_entry(
+    file: &mut File,
+    header: &DtTableHeader,
+    index: u32,
+) -> binder::Result<DtTableEntry> {
+    if index >= header.dt_entry_count.get() {
+        return Err(anyhow!("Invalid dtbo index")).or_service_specific_exception(-1)?;
+    }
+    let Some(prev_dt_entry_total_size) = header.dt_entry_size.get().checked_mul(index) else {
+        return Err(anyhow!("Unexpected arithmetic result"))
+            .or_binder_exception(ExceptionCode::ILLEGAL_STATE);
+    };
+    let Some(dt_entry_offset) =
+        prev_dt_entry_total_size.checked_add(header.dt_entries_offset.get())
+    else {
+        return Err(anyhow!("Unexpected arithmetic result"))
+            .or_binder_exception(ExceptionCode::ILLEGAL_STATE);
+    };
+    let values = read_u32_values(file, 8, dt_entry_offset.into())?;
+    let dt_table_entry = DtTableEntry::read_from(values.as_slice())
+        .context("Failed to convert type into DtTableEntry")
+        .or_service_specific_exception(-1)?;
+    Ok(dt_table_entry)
+}
+
+fn filter_dtbo_from_img(
+    dtbo_img_file: &mut File,
+    entry: &DtTableEntry,
+    dtbo_fd: &ParcelFileDescriptor,
+) -> binder::Result<()> {
+    let buffer =
+        read_values(dtbo_img_file, entry.dt_size.get().into(), entry.dt_offset.get().into())?;
+
+    let mut dtbo_fd = dtbo_fd
+        .as_ref()
+        .try_clone()
+        .context("Failed to clone File from ParcelFileDescriptor")
+        .or_binder_exception(ExceptionCode::BAD_PARCELABLE)?;
+
+    // TODO(b/291191362): Filter dtbo.img, not writing all information.
+    dtbo_fd
+        .write_all(&buffer)
+        .context("Failed to write dtbo file")
+        .or_service_specific_exception(-1)?;
+    Ok(())
+}
+
+fn write_dtbo(dtbo_fd: &ParcelFileDescriptor) -> binder::Result<()> {
+    let dtbo_path = get_dtbo_img_path()?;
+    let mut dtbo_img = File::open(dtbo_path)
+        .context("Failed to open DTBO partition")
+        .or_service_specific_exception(-1)?;
+
+    let dt_table_header = get_dt_table_header(&mut dtbo_img)?;
+    // TODO(b/291190552): Use vm_dtbo_idx from bootconfig.
+    let vm_dtbo_idx = 3;
+    let dt_table_entry = get_dt_table_entry(&mut dtbo_img, &dt_table_header, vm_dtbo_idx)?;
+    filter_dtbo_from_img(&mut dtbo_img, &dt_table_entry, dtbo_fd)?;
+    Ok(())
 }
