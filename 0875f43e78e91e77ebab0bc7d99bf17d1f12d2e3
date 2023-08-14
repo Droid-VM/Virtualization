@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3107013a_6e85f56c",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-08-14T07:46:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05036206_9a8bf60b",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 1
+      },
+      "revId": "0875f43e78e91e77ebab0bc7d99bf17d1f12d2e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c7e8e85_19af689e",
@@ -60,6 +84,30 @@
       "writtenOn": "2023-08-14T03:24:46Z",
       "side": 1,
       "message": "Use serde to safely implement the de-serialization",
+      "range": {
+        "startLine": 230,
+        "startChar": 0,
+        "endLine": 231,
+        "endChar": 70
+      },
+      "revId": "0875f43e78e91e77ebab0bc7d99bf17d1f12d2e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d1a5baf_96ed753c",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-08-14T07:46:25Z",
+      "side": 1,
+      "message": "To use serde, I think I need to make a custom deserializer, since both serde_json and serde_cbor is not for the raw data.\n\nHowever, wouldn\u0027t it be better to use initializer of struct to avoid unsafe?",
+      "parentUuid": "1c7e8e85_19af689e",
       "range": {
         "startLine": 230,
         "startChar": 0,
