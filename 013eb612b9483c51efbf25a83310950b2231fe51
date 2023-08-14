@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1f0ac03_44b90c24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-14T14:26:45Z",
+      "side": 1,
+      "message": "Thanks for adding test coverage of the config data!",
+      "revId": "013eb612b9483c51efbf25a83310950b2231fe51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03372ccc_3ab2cbf5",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/Pvmfw.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-14T14:26:45Z",
+      "side": 1,
+      "message": "Could you already pipe here a `mVmDtboFile` (similar to `mDebugPolicyFile`) so that this low-level test code is already good-to-go?",
+      "range": {
+        "startLine": 88,
+        "startChar": 15,
+        "endLine": 88,
+        "endChar": 83
+      },
+      "revId": "013eb612b9483c51efbf25a83310950b2231fe51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "755a0bc6_c653b8a3",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/Pvmfw.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-14T14:26:45Z",
+      "side": 1,
+      "message": "nit: Given that the config entry list can only grow, it might make sense to express this as\n```\nif (version \u003e getVersion(1, 5)) {\n    return Integer.BYTES * ...;\n}\nif (version \u003e getVersion(1, 4)) {\n    return Integer.BYTES * ...;\n}\n...\nif (version \u003e getVersion(1, 1)) {\n    return Integer.BYTES * 10;\n}\nreturn Integer.BYTES * 8;\n```\n(where the first `if`s are there to illustrate how the code would grow)",
+      "range": {
+        "startLine": 130,
+        "startChar": 8,
+        "endLine": 133,
+        "endChar": 70
+      },
+      "revId": "013eb612b9483c51efbf25a83310950b2231fe51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77d24df9_bd3a810f",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/Pvmfw.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-14T14:26:45Z",
+      "side": 1,
+      "message": "So this test doesn\u0027t add coverage for v1.1, is this intended?",
+      "range": {
+        "startLine": 168,
+        "startChar": 23,
+        "endLine": 168,
+        "endChar": 45
+      },
+      "revId": "013eb612b9483c51efbf25a83310950b2231fe51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
