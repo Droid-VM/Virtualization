@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3087d4e2_8bb6735d",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-15T15:15:56Z",
+      "side": 1,
+      "message": "question: why not `vec`? We wouldn\u0027t need full `Entry::COUNT` if `pvmfw` config is older version.",
+      "range": {
+        "startLine": 153,
+        "startChar": 10,
+        "endLine": 153,
+        "endChar": 49
+      },
+      "revId": "e7d57d9e1888fe63375ec88603989c4d58419f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45b733e3_2ba5a2ac",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-15T15:15:56Z",
+      "side": 1,
+      "message": "ditto: handles 8 bytes padding between header and body? `const_assert()` is also ok.",
+      "range": {
+        "startLine": 184,
+        "startChar": 48,
+        "endLine": 184,
+        "endChar": 69
+      },
+      "revId": "e7d57d9e1888fe63375ec88603989c4d58419f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "424d49b6_bd111776",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-15T15:15:56Z",
+      "side": 1,
+      "message": "this cannot be `None`, so you can `unwrap()` to remove depth.",
+      "range": {
+        "startLine": 230,
+        "startChar": 36,
+        "endLine": 230,
+        "endChar": 70
+      },
+      "revId": "e7d57d9e1888fe63375ec88603989c4d58419f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a6d7203_1ac96b99",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-15T15:15:56Z",
+      "side": 1,
+      "message": "`checked_sub()` looks too much because `r.is_within(limits)`",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 235,
+        "endChar": 0
+      },
+      "revId": "e7d57d9e1888fe63375ec88603989c4d58419f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
