@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8e7bf5c3_3f5f1dfe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-15T14:57:55Z",
+      "side": 1,
+      "message": "Good point, will rephrase!",
+      "parentUuid": "bfd9004a_da2cbc5d",
+      "range": {
+        "startLine": 7,
+        "startChar": 7,
+        "endLine": 7,
+        "endChar": 15
+      },
+      "revId": "e93f235b9c2ff4ff19b3121890e3ab92cc33411f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "76b46dda_ea4d854c",
         "filename": "pvmfw/src/config.rs",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2023-08-15T14:47:17Z",
       "side": 1,
       "message": "may be irrelevant) should we differentiate `BufferTooSmall` vs `HeaderMisaligned`? If we group them together (e.g. `Error:CastFailure(bytes_len: usize, type_len: usize, type_align_len: usize)`) then we can rely on `LayoutVerified`\u0027s internal check and code would be much simpler.",
+      "range": {
+        "startLine": 170,
+        "startChar": 70,
+        "endLine": 170,
+        "endChar": 93
+      },
+      "revId": "e93f235b9c2ff4ff19b3121890e3ab92cc33411f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fec746bd_adc2434f",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-15T14:57:55Z",
+      "side": 1,
+      "message": "+1, I simply didn\u0027t want to remove the granularity of the errors; I can address this here or in a follow-up.",
+      "parentUuid": "76b46dda_ea4d854c",
       "range": {
         "startLine": 170,
         "startChar": 70,
@@ -84,6 +132,30 @@
       "side": 1,
       "message": "`header.body_offset()` instead?",
       "parentUuid": "9b7fc18c_6ec5dc7d",
+      "range": {
+        "startLine": 187,
+        "startChar": 44,
+        "endLine": 187,
+        "endChar": 91
+      },
+      "revId": "e93f235b9c2ff4ff19b3121890e3ab92cc33411f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "986b75f4_44ee4953",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-15T14:57:55Z",
+      "side": 1,
+      "message": "Correct, although there isn\u0027t any padding in practice because `size_of::\u003cHeader\u003e()` is a multiple of what we pad to (`size_of::\u003cu64\u003e()`); I\u0027ve considered adding a `const_assert` checking that fact, would you like me to add that here? Alternatively, we could also keep `PADDED_SIZE` for this purpose (which will remain `const` once we get rid of `Header::entries`), WDYT?\n\nUsing `body_offset()` would make the following CL have to immediately change it back to `size_of::\u003cHeader\u003e` (as the entries are being moved out of `Header`) so not sure it brings us much.",
+      "parentUuid": "4cf04e88_6120aa41",
       "range": {
         "startLine": 187,
         "startChar": 44,
