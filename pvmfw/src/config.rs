@@ -80,10 +80,12 @@ pub type Result<T> = result::Result<T, Error>;
 impl Header {
     const MAGIC: u32 = u32::from_ne_bytes(*b"pvmf");
     const VERSION_1_0: Version = Version { major: 1, minor: 0 };
+    const VERSION_1_1: Version = Version { major: 1, minor: 1 };
 
     pub fn entry_count(&self) -> Result<usize> {
         let last_entry = match self.version {
             Self::VERSION_1_0 => Entry::DebugPolicy,
+            Self::VERSION_1_1 => Entry::VmDtbo,
             v => return Err(Error::UnsupportedVersion(v)),
         };
 
@@ -103,6 +105,7 @@ impl Header {
 pub enum Entry {
     Bcc,
     DebugPolicy,
+    VmDtbo,
     #[allow(non_camel_case_types)] // TODO: Use mem::variant_count once stable.
     _VARIANT_COUNT,
 }
@@ -187,6 +190,7 @@ impl<'a> Config<'a> {
             // `core::marker::Copy` is not implemented for `core::ops::Range<usize>`.
             Self::validated_body_range(Entry::Bcc, &header_entries, &limits)?,
             Self::validated_body_range(Entry::DebugPolicy, &header_entries, &limits)?,
+            Self::validated_body_range(Entry::VmDtbo, &header_entries, &limits)?,
         ];
 
         Ok(Self { body, ranges })
