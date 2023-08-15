@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfd9004a_da2cbc5d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-15T14:47:17Z",
+      "side": 1,
+      "message": "This CL changes behaviorss, so technically it\u0027s not a refactoring.",
+      "range": {
+        "startLine": 7,
+        "startChar": 7,
+        "endLine": 7,
+        "endChar": 15
+      },
+      "revId": "e93f235b9c2ff4ff19b3121890e3ab92cc33411f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76b46dda_ea4d854c",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-15T14:47:17Z",
+      "side": 1,
+      "message": "may be irrelevant) should we differentiate `BufferTooSmall` vs `HeaderMisaligned`? If we group them together (e.g. `Error:CastFailure(bytes_len: usize, type_len: usize, type_align_len: usize)`) then we can rely on `LayoutVerified`\u0027s internal check and code would be much simpler.",
+      "range": {
+        "startLine": 170,
+        "startChar": 70,
+        "endLine": 170,
+        "endChar": 93
+      },
+      "revId": "e93f235b9c2ff4ff19b3121890e3ab92cc33411f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b7fc18c_6ec5dc7d",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-15T14:47:17Z",
+      "side": 1,
+      "message": "there can be a padding between headers and body, so we can\u0027t simply use `mem::size_of::\u003cHeader\u003e` for knowing the beginning of the body.",
+      "range": {
+        "startLine": 187,
+        "startChar": 44,
+        "endLine": 187,
+        "endChar": 91
+      },
+      "revId": "e93f235b9c2ff4ff19b3121890e3ab92cc33411f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
