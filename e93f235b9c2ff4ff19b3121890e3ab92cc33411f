@@ -50,6 +50,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a28957f_cf408099",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-15T15:03:43Z",
+      "side": 1,
+      "message": "Can these ever fail if range.is_within limits?",
+      "range": {
+        "startLine": 104,
+        "startChar": 32,
+        "endLine": 104,
+        "endChar": 43
+      },
+      "revId": "e93f235b9c2ff4ff19b3121890e3ab92cc33411f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d0b97be_41bca5ca",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-15T15:03:43Z",
+      "side": 1,
+      "message": "checked_add, or comment why we don\u0027t need it?",
+      "range": {
+        "startLine": 133,
+        "startChar": 26,
+        "endLine": 133,
+        "endChar": 39
+      },
+      "revId": "e93f235b9c2ff4ff19b3121890e3ab92cc33411f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20b1a747_971f0af9",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-15T15:03:43Z",
+      "side": 1,
+      "message": "rest -\u003e body ?",
+      "range": {
+        "startLine": 169,
+        "startChar": 21,
+        "endLine": 169,
+        "endChar": 25
+      },
+      "revId": "e93f235b9c2ff4ff19b3121890e3ab92cc33411f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "76b46dda_ea4d854c",
         "filename": "pvmfw/src/config.rs",
         "patchSetId": 4
@@ -90,6 +159,29 @@
         "startChar": 70,
         "endLine": 170,
         "endChar": 93
+      },
+      "revId": "e93f235b9c2ff4ff19b3121890e3ab92cc33411f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43c8b041_a46445ca",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-15T15:03:43Z",
+      "side": 1,
+      "message": "Nit: comment should be one line further up?\n\nMore importantly: when would the original rest here be bigger than rest_size?",
+      "range": {
+        "startLine": 186,
+        "startChar": 1,
+        "endLine": 186,
+        "endChar": 2
       },
       "revId": "e93f235b9c2ff4ff19b3121890e3ab92cc33411f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
