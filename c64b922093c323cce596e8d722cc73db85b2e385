@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d27c7c8_c6a01288",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 18
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-15T17:11:35Z",
+      "side": 1,
+      "message": "Acknowledged (not sure if there\u0027s an AI, here?)",
+      "parentUuid": "129bcbfc_1efb2167",
+      "range": {
+        "startLine": 190,
+        "startChar": 2,
+        "endLine": 190,
+        "endChar": 22
+      },
+      "revId": "c64b922093c323cce596e8d722cc73db85b2e385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f4a0f85_e7b34573",
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "What would it add? We know that `vm_dtbo_range.is_some()` is only possible in v1.1; what does this part of the code gain from distinguishing between `None` because v1.0 and `None` because v1.1 but it wasn\u0027t provided?",
       "parentUuid": "2f4a0f85_e7b34573",
+      "range": {
+        "startLine": 212,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 52
+      },
+      "revId": "c64b922093c323cce596e8d722cc73db85b2e385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9694e4a_000f497b",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-15T17:11:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7693a681_917eb953",
       "range": {
         "startLine": 212,
         "startChar": 0,
@@ -226,6 +274,30 @@
       "side": 1,
       "message": "@jaewan@google.com?",
       "parentUuid": "6c74d870_621f7dac",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 55
+      },
+      "revId": "c64b922093c323cce596e8d722cc73db85b2e385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "734f16a0_bb2bfa22",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/Pvmfw.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-15T17:11:35Z",
+      "side": 1,
+      "message": "Acknowledged (Jaewan to follow-up, if necessary)",
+      "parentUuid": "553aa37f_91f1bed8",
       "range": {
         "startLine": 137,
         "startChar": 0,
