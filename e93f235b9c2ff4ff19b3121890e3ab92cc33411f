@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d24dfa8_aeaef915",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-15T16:55:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e7bf5c3_3f5f1dfe",
+      "range": {
+        "startLine": 7,
+        "startChar": 7,
+        "endLine": 7,
+        "endChar": 15
+      },
+      "revId": "e93f235b9c2ff4ff19b3121890e3ab92cc33411f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4d0bbcb_6bc05c0f",
@@ -61,6 +85,30 @@
       "writtenOn": "2023-08-15T15:06:29Z",
       "side": 1,
       "message": "Uber nit: I can\u0027t actually figure out how this change relates to this bug (which was closed \u003e 6 months ago).\nIt does seem to be a little related to b/262592861, although that is also closed.",
+      "range": {
+        "startLine": 9,
+        "startChar": 8,
+        "endLine": 9,
+        "endChar": 19
+      },
+      "revId": "e93f235b9c2ff4ff19b3121890e3ab92cc33411f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06876291_9696297b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-15T16:55:56Z",
+      "side": 1,
+      "message": "You\u0027re right, I\u0027ve referenced the right bug.",
+      "parentUuid": "f4d0bbcb_6bc05c0f",
       "range": {
         "startLine": 9,
         "startChar": 8,
@@ -94,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1ada728_28a9f70b",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-15T16:55:56Z",
+      "side": 1,
+      "message": "No, which is why I just `unwrap` them but we could go one step further and remove the `checked_sub` (as Jaewan also suggested in aosp/2707329); done!",
+      "parentUuid": "7a28957f_cf408099",
+      "range": {
+        "startLine": 104,
+        "startChar": 32,
+        "endLine": 104,
+        "endChar": 43
+      },
+      "revId": "e93f235b9c2ff4ff19b3121890e3ab92cc33411f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d0b97be_41bca5ca",
@@ -117,6 +189,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "364a5238_8ef318aa",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-15T16:55:56Z",
+      "side": 1,
+      "message": "I had assumed that `is_within` would detect the overflow but it doesn\u0027t so thanks for catching that!",
+      "parentUuid": "8d0b97be_41bca5ca",
+      "range": {
+        "startLine": 133,
+        "startChar": 26,
+        "endLine": 133,
+        "endChar": 39
+      },
+      "revId": "e93f235b9c2ff4ff19b3121890e3ab92cc33411f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20b1a747_971f0af9",
@@ -130,6 +226,30 @@
       "writtenOn": "2023-08-15T15:03:43Z",
       "side": 1,
       "message": "rest -\u003e body ?",
+      "range": {
+        "startLine": 169,
+        "startChar": 21,
+        "endLine": 169,
+        "endChar": 25
+      },
+      "revId": "e93f235b9c2ff4ff19b3121890e3ab92cc33411f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be71439a_196dab60",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-15T16:55:56Z",
+      "side": 1,
+      "message": "Used `rest` so that it already matches the meaning of the variable from the next CL onward (to limit the diff); I hope it\u0027s fine if I keep it this way.",
+      "parentUuid": "20b1a747_971f0af9",
       "range": {
         "startLine": 169,
         "startChar": 21,
@@ -224,6 +344,30 @@
       "writtenOn": "2023-08-15T15:03:43Z",
       "side": 1,
       "message": "Nit: comment should be one line further up?\n\nMore importantly: when would the original rest here be bigger than rest_size?",
+      "range": {
+        "startLine": 186,
+        "startChar": 1,
+        "endLine": 186,
+        "endChar": 2
+      },
+      "revId": "e93f235b9c2ff4ff19b3121890e3ab92cc33411f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dec38f6_5169dc67",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-15T16:55:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43c8b041_a46445ca",
       "range": {
         "startLine": 186,
         "startChar": 1,
@@ -343,6 +487,30 @@
       "side": 1,
       "message": "\u003e Using body_offset() would make the following CL have to immediately change it back to size_of::\u003cHeader\u003e (as the entries are being moved out of Header) so not sure it brings us much.\n\nCould you elaborate more? I thought that body always points to the start of BCC, with/without entries in the header.\n\nIf `body_offset()` doesn\u0027t work, then I\u0027m fine with `const_assert()`",
       "parentUuid": "986b75f4_44ee4953",
+      "range": {
+        "startLine": 187,
+        "startChar": 44,
+        "endLine": 187,
+        "endChar": 91
+      },
+      "revId": "e93f235b9c2ff4ff19b3121890e3ab92cc33411f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e743fff9_c9df23ee",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-15T16:55:56Z",
+      "side": 1,
+      "message": "\u003e I like the const_assert idea.\n\nDone!\n\n\u003e Could you elaborate more?\n\nIn this CL, the \"body\" of the config data follows the `Header` immediately so that it can be located (ignoring theoretical padding) at the C-like pointer `\u0026bytes[sizeof(Header)]` and `body_offset() \u003d\u003d size_of::\u003cHeader\u003e()`.\n\nOnce aosp/2707329 removes the `Header::entries` field, what immediately follows the (now shorter) `Header` isn\u0027t the body but the array of entries, which we will want to locate first (as we\u0027re using `zerocopy` to split the slice chunk-by-chunk), and `body_offset()` won\u0027t be of any help. Note that, in that case, the body starts at `size_of::\u003cHeader\u003e() + size_of_val(header_entries)` (again, ignoring theoretical padding).",
+      "parentUuid": "38350f83_5230ca24",
       "range": {
         "startLine": 187,
         "startChar": 44,
