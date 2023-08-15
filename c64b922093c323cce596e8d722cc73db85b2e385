@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03cd7ab5_bae88e63",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 18
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-15T16:56:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7309db9_3ab4af23",
+      "range": {
+        "startLine": 142,
+        "startChar": 49,
+        "endLine": 142,
+        "endChar": 58
+      },
+      "revId": "c64b922093c323cce596e8d722cc73db85b2e385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "faf0a93a_203578c3",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "129bcbfc_1efb2167",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 18
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-15T16:56:34Z",
+      "side": 1,
+      "message": "No, entry 2 is dedicated to the VM DTBO, if any.",
+      "parentUuid": "faf0a93a_203578c3",
+      "range": {
+        "startLine": 190,
+        "startChar": 2,
+        "endLine": 190,
+        "endChar": 22
+      },
+      "revId": "c64b922093c323cce596e8d722cc73db85b2e385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f4a0f85_e7b34573",
         "filename": "pvmfw/src/config.rs",
         "patchSetId": 18
@@ -60,6 +108,30 @@
       "writtenOn": "2023-08-15T16:14:13Z",
       "side": 1,
       "message": "Shouldn\u0027t there be a version check here?",
+      "range": {
+        "startLine": 212,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 52
+      },
+      "revId": "c64b922093c323cce596e8d722cc73db85b2e385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7693a681_917eb953",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-15T16:56:34Z",
+      "side": 1,
+      "message": "What would it add? We know that `vm_dtbo_range.is_some()` is only possible in v1.1; what does this part of the code gain from distinguishing between `None` because v1.0 and `None` because v1.1 but it wasn\u0027t provided?",
+      "parentUuid": "2f4a0f85_e7b34573",
       "range": {
         "startLine": 212,
         "startChar": 0,
@@ -130,6 +202,30 @@
       "writtenOn": "2023-08-15T16:14:13Z",
       "side": 1,
       "message": "Is this better than `version \u003e\u003d 0x1_0001` ?",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 55
+      },
+      "revId": "c64b922093c323cce596e8d722cc73db85b2e385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "553aa37f_91f1bed8",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/Pvmfw.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-15T16:56:34Z",
+      "side": 1,
+      "message": "@jaewan@google.com?",
+      "parentUuid": "6c74d870_621f7dac",
       "range": {
         "startLine": 137,
         "startChar": 0,
