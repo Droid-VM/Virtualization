@@ -16,6 +16,75 @@
       "message": "Hi Nikita!",
       "revId": "81b1e315c92465d058b40196efd0a3b59c8046f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a3dd787_b1a0bcd9",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-15T13:50:25Z",
+      "side": 1,
+      "message": "This is the wrong bug - it\u0027s marked Fixed. (We should probably have created a much more tailored one at the time.)",
+      "range": {
+        "startLine": 917,
+        "startChar": 7,
+        "endLine": 917,
+        "endChar": 24
+      },
+      "revId": "81b1e315c92465d058b40196efd0a3b59c8046f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c221390b_8c94953a",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-15T13:50:25Z",
+      "side": 1,
+      "message": "Nit: Line too long",
+      "range": {
+        "startLine": 38,
+        "startChar": 1,
+        "endLine": 38,
+        "endChar": 100
+      },
+      "revId": "81b1e315c92465d058b40196efd0a3b59c8046f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3e923b0_072d5d2e",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-15T13:50:25Z",
+      "side": 1,
+      "message": "If you want to check this in this should be false - you can always change that locally.",
+      "range": {
+        "startLine": 79,
+        "startChar": 4,
+        "endLine": 79,
+        "endChar": 8
+      },
+      "revId": "81b1e315c92465d058b40196efd0a3b59c8046f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
