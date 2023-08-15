@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b9db4b1_28c5ccb6",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-15T16:56:12Z",
+      "side": 1,
+      "message": "This `align_up` is confusing, I\u0027ll remove it and add `const_assert`s for this.",
+      "parentUuid": "cc89f24b_15b1b4f2",
+      "range": {
+        "startLine": 89,
+        "startChar": 72,
+        "endLine": 89,
+        "endChar": 93
+      },
+      "revId": "e7d57d9e1888fe63375ec88603989c4d58419f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90208230_b90feec6",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-08-15T15:20:41Z",
       "side": 1,
       "message": "checked_add?\n\n(Maybe even checked_mul, although entry_count is trusted)",
+      "range": {
+        "startLine": 91,
+        "startChar": 11,
+        "endLine": 91,
+        "endChar": 28
+      },
+      "revId": "e7d57d9e1888fe63375ec88603989c4d58419f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f95fd950_0edbd175",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-15T16:56:12Z",
+      "side": 1,
+      "message": "Why not, I\u0027ll `unwrap` them as they\u0027re very unlikely to fail (except bug) but it\u0027s still good to have the check.",
+      "parentUuid": "90208230_b90feec6",
       "range": {
         "startLine": 91,
         "startChar": 11,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a516efb1_6f5cb679",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-15T16:56:12Z",
+      "side": 1,
+      "message": "To merge bounds-checking and optional entries into a single `Option` check (with unconditional access), given the value of `Entry::COUNT`, there\u0027s probably no point in making the code more complicated with a `Vec` (or `ArrayVec`), IMO.",
+      "parentUuid": "3087d4e2_8bb6735d",
+      "range": {
+        "startLine": 153,
+        "startChar": 10,
+        "endLine": 153,
+        "endChar": 49
+      },
+      "revId": "e7d57d9e1888fe63375ec88603989c4d58419f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45b733e3_2ba5a2ac",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-08-15T15:15:56Z",
       "side": 1,
       "message": "ditto: handles 8 bytes padding between header and body? `const_assert()` is also ok.",
+      "range": {
+        "startLine": 184,
+        "startChar": 48,
+        "endLine": 184,
+        "endChar": 69
+      },
+      "revId": "e7d57d9e1888fe63375ec88603989c4d58419f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba2511a3_f09c1ac8",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-15T16:56:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45b733e3_2ba5a2ac",
       "range": {
         "startLine": 184,
         "startChar": 48,
@@ -118,6 +214,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c1192e2_63d2fa76",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-15T16:56:12Z",
+      "side": 1,
+      "message": "That\u0027s the case today so we can\u0027t implement it with\n```\nlet mut ranges \u003d [None; _];\nfor r in \u0026mut ranges {\n    *r \u003d ...\n}\n```",
+      "parentUuid": "1be7af93_15913fd2",
+      "range": {
+        "startLine": 189,
+        "startChar": 60,
+        "endLine": 190,
+        "endChar": 85
+      },
+      "revId": "e7d57d9e1888fe63375ec88603989c4d58419f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ee981c7_030a6488",
         "filename": "pvmfw/src/config.rs",
         "patchSetId": 7
@@ -129,6 +249,30 @@
       "writtenOn": "2023-08-15T15:20:41Z",
       "side": 1,
       "message": "Is that a documented requirement?\nIdeally we wouldn\u0027t need to.",
+      "range": {
+        "startLine": 200,
+        "startChar": 3,
+        "endLine": 200,
+        "endChar": 71
+      },
+      "revId": "e7d57d9e1888fe63375ec88603989c4d58419f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16a1dbf2_f06c8664",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-15T16:56:12Z",
+      "side": 1,
+      "message": "No, it isn\u0027t and I agree that we don\u0027t want to be making this assumption (we panic if it\u0027s violated). TBH, I\u0027m really unhappy about this implementation but keeping the borrow checker happy while partitioning a slice into non-overlapping sub-slices isn\u0027t trivial ... This function should eventually be re-written to address this but I\u0027ll consider this out-of-scope for these CLs.",
+      "parentUuid": "9ee981c7_030a6488",
       "range": {
         "startLine": 200,
         "startChar": 3,
@@ -199,6 +343,30 @@
       "writtenOn": "2023-08-15T15:15:56Z",
       "side": 1,
       "message": "`checked_sub()` looks too much because `r.is_within(limits)`",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 235,
+        "endChar": 0
+      },
+      "revId": "e7d57d9e1888fe63375ec88603989c4d58419f36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1463f97_f8ed624d",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-15T16:56:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a6d7203_1ac96b99",
       "range": {
         "startLine": 233,
         "startChar": 0,
