@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42546ba1_f668ac95",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-15T15:51:46Z",
+      "side": 1,
+      "message": "Please check `entry_count()` -- For config 1.0, current code would read beginning of the BCC as VM DTBO\u0027s entry and offset.",
+      "range": {
+        "startLine": 242,
+        "startChar": 0,
+        "endLine": 242,
+        "endChar": 72
+      },
+      "revId": "c64b922093c323cce596e8d722cc73db85b2e385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
