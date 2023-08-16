@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22f9e45a_4be0a03f",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-16T07:13:10Z",
+      "side": 1,
+      "message": "you\u0027re reading most of fields here, so please remove prefix underscore",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 0
+      },
+      "revId": "619ab8bf32cc247697addca4c993d3a0ec5a0dff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8ac2ab8_70af238d",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-16T07:13:10Z",
+      "side": 1,
+      "message": "ditto; please remove underscores if you\u0027re using them for real.",
+      "range": {
+        "startLine": 96,
+        "startChar": 21,
+        "endLine": 106,
+        "endChar": 33
+      },
+      "revId": "619ab8bf32cc247697addca4c993d3a0ec5a0dff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9d44e03_32c2f741",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-16T07:13:10Z",
+      "side": 1,
+      "message": "why it\u0027s necessary? We can just read file into buffer, and then cast with `FromBytes::read_from` (or `LayoutVerified::`)",
+      "range": {
+        "startLine": 229,
+        "startChar": 3,
+        "endLine": 229,
+        "endChar": 18
+      },
+      "revId": "619ab8bf32cc247697addca4c993d3a0ec5a0dff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f77b3e6_612457c9",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-16T07:13:10Z",
+      "side": 1,
+      "message": "`mem::size_of::\u003cDtTableHeader\u003e`",
+      "range": {
+        "startLine": 246,
+        "startChar": 39,
+        "endLine": 246,
+        "endChar": 40
+      },
+      "revId": "619ab8bf32cc247697addca4c993d3a0ec5a0dff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52130be0_ebc7c8ea",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-16T07:13:10Z",
+      "side": 1,
+      "message": "no underscore",
+      "range": {
+        "startLine": 250,
+        "startChar": 23,
+        "endLine": 250,
+        "endChar": 29
+      },
+      "revId": "619ab8bf32cc247697addca4c993d3a0ec5a0dff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "360e353c_bf5743a6",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-16T07:13:10Z",
+      "side": 1,
+      "message": "`dt_entry_count`. You\u0027re reading this for real so no need for prefix `_`.",
+      "range": {
+        "startLine": 261,
+        "startChar": 23,
+        "endLine": 261,
+        "endChar": 38
+      },
+      "revId": "619ab8bf32cc247697addca4c993d3a0ec5a0dff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c8a2c4d_c074b779",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-16T07:13:10Z",
+      "side": 1,
+      "message": "mem::size_of::\u003cDtTableEntry\u003e",
+      "range": {
+        "startLine": 273,
+        "startChar": 39,
+        "endLine": 273,
+        "endChar": 40
+      },
+      "revId": "619ab8bf32cc247697addca4c993d3a0ec5a0dff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
