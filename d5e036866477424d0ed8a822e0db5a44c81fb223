@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e63700f3_af8faa6a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-16T10:01:08Z",
+      "side": 1,
+      "message": "We shouldn\u0027t do that until it\u0027s ready.\nCan you have some programmatic way to enable it for tests?\n(Sounds a lot like a feature flag.)",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 5
+      },
+      "revId": "d5e036866477424d0ed8a822e0db5a44c81fb223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e47b7422_27663bfb",
@@ -14,6 +37,29 @@
       "writtenOn": "2023-08-16T09:49:09Z",
       "side": 1,
       "message": "Ive tested it locally (by starting the nonsecure service manually/turning off selinux) \u0026 test passes. I have to include  those in the patches for the presubmits to pass.",
+      "revId": "d5e036866477424d0ed8a822e0db5a44c81fb223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30e8500a_6ca39cd7",
+        "filename": "virtualizationservice/aidl/android/system/virtualmachineservice/IVirtualMachineService.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-16T10:01:08Z",
+      "side": 1,
+      "message": "K -\u003e k",
+      "range": {
+        "startLine": 58,
+        "startChar": 24,
+        "endLine": 58,
+        "endChar": 36
+      },
       "revId": "d5e036866477424d0ed8a822e0db5a44c81fb223",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
