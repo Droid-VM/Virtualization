@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ac2a8a3_a3c6cfae",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-16T01:56:39Z",
+      "side": 1,
+      "message": "As I mentioned offline, `zerocopy` crates helps you to transmute raw bytes into struct without any copy/modification/`unsafe`.\n\n- Define your struct with `#[derive(FromBytes)]` and use `LayoutVerified::new_from_prefix`.\n\ne.g. \nhttps://source.corp.google.com/h/android/platform/superproject/main/+/main:packages/modules/Virtualization/pvmfw/src/config.rs?q\u003dpvmfw%2Fsrc%2Fconfig.rs\u0026sq\u003drepo:android%2Fplatform%2Fsuperproject%2Fmain%20b:main\n\n\n- You can also explicitly annotate each fields whether their\u0027s little endian / big endian. U32\u003cBigEndian\u003e\n\ne.g. \nhttps://source.corp.google.com/h/android/platform/superproject/main/+/main:external/rust/crates/virtio-drivers/src/device/socket/protocol.rs;l\u003d51?q\u003df:rs$%20%5CbLittleEndian%5Cb\u0026sq\u003drepo:android%2Fplatform%2Fsuperproject%2Fmain%20b:main",
+      "range": {
+        "startLine": 69,
+        "startChar": 7,
+        "endLine": 69,
+        "endChar": 20
+      },
+      "revId": "0926658ccc54b6f4ceb7e3d52acd53495a6577b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
