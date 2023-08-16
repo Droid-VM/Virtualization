@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b4d0ef9_6790129f",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-16T08:51:08Z",
+      "side": 1,
+      "message": "minor comment; you may ignore) you can also validate `dtbo.img` with this.",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 16
+      },
+      "revId": "64484bde9ada216873b6e825e410602ae59f8b20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "792a3e60_c535ffaf",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-16T08:51:08Z",
+      "side": 1,
+      "message": "Question) can we inline the function as follows?\n\n```\nlazy_static! {\n  static ref IS_VFIO_SUPPORTED: bool \u003d {\n    Path::new(DEV_VFIO_PATH).exists() \u0026\u0026 Path::new(VFIO_PLATFORM_DRIVER_PATH).exists()\n  };\n}\n```",
+      "range": {
+        "startLine": 110,
+        "startChar": 41,
+        "endLine": 110,
+        "endChar": 58
+      },
+      "revId": "64484bde9ada216873b6e825e410602ae59f8b20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b1d9ff2_6e1c249c",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-16T08:51:08Z",
+      "side": 1,
+      "message": "`vec![0_u8; size]`",
+      "range": {
+        "startLine": 217,
+        "startChar": 21,
+        "endLine": 218,
+        "endChar": 27
+      },
+      "revId": "64484bde9ada216873b6e825e410602ae59f8b20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
