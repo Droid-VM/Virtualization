@@ -18,7 +18,7 @@ use core::fmt;
 use core::mem;
 use core::ops::Range;
 use core::result;
-use log::info;
+use log::{info, warn};
 use static_assertions::const_assert_eq;
 use vmbase::util::RangeExt;
 use zerocopy::{FromBytes, LayoutVerified};
@@ -47,8 +47,6 @@ pub enum Error {
     InvalidMagic,
     /// Version of the header isn't supported.
     UnsupportedVersion(Version),
-    /// Header sets flags incorrectly or uses reserved flags.
-    InvalidFlags(u32),
     /// Header describes configuration data that doesn't fit in the expected buffer.
     InvalidSize(usize),
     /// Header entry is missing.
@@ -64,7 +62,6 @@ impl fmt::Display for Error {
             Self::HeaderMisaligned => write!(f, "Reserved region is misaligned"),
             Self::InvalidMagic => write!(f, "Wrong magic number"),
             Self::UnsupportedVersion(v) => write!(f, "Version {v} not supported"),
-            Self::InvalidFlags(v) => write!(f, "Flags value {v:#x} is incorrect or reserved"),
             Self::InvalidSize(sz) => write!(f, "Total size ({sz:#x}) overflows reserved region"),
             Self::MissingEntry(entry) => write!(f, "Mandatory {entry:?} entry is missing"),
             Self::EntryOutOfBounds(entry, range, limits) => {
@@ -101,7 +98,17 @@ impl Header {
     }
 
     pub fn entry_count(&self) -> Result<usize> {
+        // This const ensures that the match below isn't partially updated for new versions.
+        const LATEST: Version = Header::VERSION_1_1;
+        // These consts are necessary as Rust doesn't support expressions in match arms.
+        const LATEST_MAJOR: u16 = LATEST.major;
+        const NEXT_MINOR: u16 = LATEST.minor + 1;
+
         let last_entry = match self.version {
+            Version { major: LATEST_MAJOR, minor: NEXT_MINOR.. } => {
+                warn!("Parsing unknown config data version {} as version {LATEST}", self.version);
+                return Ok(Entry::COUNT);
+            }
             Self::VERSION_1_0 => Entry::DebugPolicy,
             Self::VERSION_1_1 => Entry::VmDtbo,
             v => return Err(Error::UnsupportedVersion(v)),
@@ -181,8 +188,9 @@ impl<'a> Config<'a> {
             return Err(Error::InvalidMagic);
         }
 
-        if header.flags != 0 {
-            return Err(Error::InvalidFlags(header.flags));
+        let header_flags = header.flags;
+        if header_flags != 0 {
+            warn!("Ignoring unknown config flags: {header_flags:#x}");
         }
 
         info!("pvmfw config version: {}", header.version);
