@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7da2a2dc_1dd632f3",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-08-17T07:57:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b4d0ef9_6790129f",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 16
+      },
+      "revId": "64484bde9ada216873b6e825e410602ae59f8b20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "792a3e60_c535ffaf",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-08-16T08:51:08Z",
       "side": 1,
       "message": "Question) can we inline the function as follows?\n\n```\nlazy_static! {\n  static ref IS_VFIO_SUPPORTED: bool \u003d {\n    Path::new(DEV_VFIO_PATH).exists() \u0026\u0026 Path::new(VFIO_PLATFORM_DRIVER_PATH).exists()\n  };\n}\n```",
+      "range": {
+        "startLine": 110,
+        "startChar": 41,
+        "endLine": 110,
+        "endChar": 58
+      },
+      "revId": "64484bde9ada216873b6e825e410602ae59f8b20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0916bec1_cf3a3084",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-08-17T07:57:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "792a3e60_c535ffaf",
       "range": {
         "startLine": 110,
         "startChar": 41,
@@ -117,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87ba919b_d86cafd7",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-08-17T07:57:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "239fb2e8_037ca2df",
+      "range": {
+        "startLine": 217,
+        "startChar": 21,
+        "endLine": 218,
+        "endChar": 27
+      },
+      "revId": "64484bde9ada216873b6e825e410602ae59f8b20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34dcdd66_ca83b030",
@@ -154,6 +226,30 @@
       "side": 1,
       "message": "+1",
       "parentUuid": "34dcdd66_ca83b030",
+      "range": {
+        "startLine": 256,
+        "startChar": 17,
+        "endLine": 256,
+        "endChar": 59
+      },
+      "revId": "64484bde9ada216873b6e825e410602ae59f8b20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c6cd301_5c8f9d08",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-08-17T07:57:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffab6572_e702eacb",
       "range": {
         "startLine": 256,
         "startChar": 17,
