@@ -104,6 +104,8 @@ impl Header {
         let last_entry = match self.version {
             Self::VERSION_1_0 => Entry::DebugPolicy,
             Self::VERSION_1_1 => Entry::VmDtbo,
+            // Unknown versions are treated as the latest known one.
+            Version { major: 1, minor: _ } => return Ok(Entry::COUNT),
             v => return Err(Error::UnsupportedVersion(v)),
         };
 
