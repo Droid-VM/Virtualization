@@ -49,6 +49,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bcd81519_44f4a839",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-17T04:18:23Z",
+      "side": 1,
+      "message": "why do you mix two styles in the same function? (i.e. why do you use both `?` and `return Err`. You can merge with above nor repeat the same things.\n\n```\n    let slot_suffix \u003d system_properties::read(\"ro.boot.slot_suffix\")\n        .context(\"Failed to read ro.boot.slot_suffix\")\n        .or_service_specific_exception(-1)?\n        .ok_or_else(|| Err(anyhow!(\"..\"))\n        .or_service_specific_exception(-1)?;\n```\n\nOr just replace this if block.\n\n```\nlet slot_suffix \u003d slot_suffix\n         .ok_or_else(|| Err(anyhow!(\"..\"))\n        .or_service_specific_exception(-1)?;\n```",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 0
+      },
+      "revId": "64484bde9ada216873b6e825e410602ae59f8b20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4b1d9ff2_6e1c249c",
         "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
         "patchSetId": 7
@@ -107,6 +130,30 @@
       "writtenOn": "2023-08-16T10:46:27Z",
       "side": 1,
       "message": "DtTableEntry at index X is invalid.",
+      "range": {
+        "startLine": 256,
+        "startChar": 17,
+        "endLine": 256,
+        "endChar": 59
+      },
+      "revId": "64484bde9ada216873b6e825e410602ae59f8b20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffab6572_e702eacb",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-17T04:18:23Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "34dcdd66_ca83b030",
       "range": {
         "startLine": 256,
         "startChar": 17,
