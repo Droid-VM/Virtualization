@@ -15,6 +15,7 @@ android_test {
         "androidx.test.ext.junit",
         "com.android.microdroid.testservice-java",
         "truth-prebuilt",
+        "perf-setup",
     ],
     jni_libs: [
         "MicrodroidBenchmarkNativeLib",
