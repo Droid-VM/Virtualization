@@ -27,7 +27,10 @@ android_test {
     use_embedded_native_libs: true,
     compile_multilib: "64",
     required: ["perf-setup"],
-    host_required: ["MicrodroidTestPreparer"],
+    host_required: [
+        "MicrodroidTestPreparer",
+        "perf-setup",
+    ],
 }
 
 cc_library_shared {
