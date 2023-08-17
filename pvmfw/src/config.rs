@@ -18,7 +18,7 @@ use core::fmt;
 use core::mem;
 use core::ops::Range;
 use core::result;
-use log::info;
+use log::{info, warn};
 use static_assertions::const_assert_eq;
 use vmbase::util::RangeExt;
 use zerocopy::{FromBytes, LayoutVerified};
@@ -101,7 +101,17 @@ impl Header {
     }
 
     pub fn entry_count(&self) -> Result<usize> {
+        // This const ensures that the match below isn't partially updated for new versions.
+        const LATEST: Version = Header::VERSION_1_1;
+        // These consts are necessary as Rust doesn't support expressions in match arms.
+        const LATEST_MAJOR: u16 = LATEST.major;
+        const NEXT_MINOR: u16 = LATEST.minor + 1;
+
         let last_entry = match self.version {
+            Version { major: LATEST_MAJOR, minor: NEXT_MINOR.. } => {
+                warn!("Parsing unknown config data version {} as version {LATEST}", self.version);
+                return Ok(Entry::COUNT);
+            }
             Self::VERSION_1_0 => Entry::DebugPolicy,
             Self::VERSION_1_1 => Entry::VmDtbo,
             v => return Err(Error::UnsupportedVersion(v)),
