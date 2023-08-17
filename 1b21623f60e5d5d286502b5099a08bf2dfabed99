@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d0f12d4c_6e1472d7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-17T12:06:59Z",
+      "side": 1,
+      "message": "IMO, this depends on the role that the config data plays between ABL and pvmfw: either we consider pvmfw to \"be in control\" and pick what it needs from the config data (ignoring anything else and logging/rebooting as necessary if something is missing) or we consider ABL to be in control, relying on config entries to instruct pvmfw how to behave.\n\nI\u0027ve always considered the situation to be the former (so that ignoring entries isn\u0027t an issue) but what you\u0027re describing matches the latter. If that\u0027s the case, pvmfw should **never** be behind ABL (in terms of config version support) and/or this CL should be abandoned because we wouldn\u0027t be able to guarantee that the relative new features ABL tries to use will actually be understood by pvmfw, which becomes a serious issue if that feature is security-sensitive.\n\nWhat do you recommend I do about this?",
+      "parentUuid": "1754fd5c_03df8372",
+      "range": {
+        "startLine": 14,
+        "startChar": 24,
+        "endLine": 14,
+        "endChar": 57
+      },
+      "revId": "1b21623f60e5d5d286502b5099a08bf2dfabed99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c3da8c4f_1879800d",
         "filename": "pvmfw/src/config.rs",
         "patchSetId": 1
@@ -42,6 +66,53 @@
         "startChar": 12,
         "endLine": 108,
         "endChar": 70
+      },
+      "revId": "1b21623f60e5d5d286502b5099a08bf2dfabed99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2baf15f4_054eee66",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-17T12:06:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3da8c4f_1879800d",
+      "range": {
+        "startLine": 108,
+        "startChar": 12,
+        "endLine": 108,
+        "endChar": 70
+      },
+      "revId": "1b21623f60e5d5d286502b5099a08bf2dfabed99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ce969ca_185592d3",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-17T12:06:59Z",
+      "side": 1,
+      "message": "Should this also be removed? Otherwise, the same issue will arise once these flags start being used.",
+      "range": {
+        "startLine": 186,
+        "startChar": 11,
+        "endLine": 186,
+        "endChar": 28
       },
       "revId": "1b21623f60e5d5d286502b5099a08bf2dfabed99",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
