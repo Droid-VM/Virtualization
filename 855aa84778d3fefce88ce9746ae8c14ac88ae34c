@@ -22,6 +22,29 @@
       },
       "revId": "855aa84778d3fefce88ce9746ae8c14ac88ae34c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb5bd0e3_63b1264b",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-18T06:55:15Z",
+      "side": 1,
+      "message": "You can probably get the vm_dtbo with sysprop `ro.boot.hypervisor.vm_dtbo_idx`",
+      "range": {
+        "startLine": 291,
+        "startChar": 0,
+        "endLine": 293,
+        "endChar": 0
+      },
+      "revId": "855aa84778d3fefce88ce9746ae8c14ac88ae34c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
