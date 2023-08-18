@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "608e1fe9_9d9cf961",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-18T06:44:38Z",
+      "side": 1,
+      "message": "`with_context()` is preferred because it would lazily format format string only when there\u0027s an error for real.",
+      "range": {
+        "startLine": 252,
+        "startChar": 9,
+        "endLine": 252,
+        "endChar": 16
+      },
+      "revId": "855aa84778d3fefce88ce9746ae8c14ac88ae34c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
