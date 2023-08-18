@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd4dc29d_03cde2d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-18T00:24:17Z",
+      "side": 1,
+      "message": "lidation",
+      "revId": "84e0bed61af322ae491be00a9bc649e1fdbc48cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "260085e5_ae91c271",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-18T00:24:17Z",
+      "side": 1,
+      "message": "minor suggestion, you can ignore) If new entry(s) are added, calculated `entry_size` and actual entry size would mismatch.  `body_offset` is still useful, though.\n\nCan we rename `body_offset` and/or remove check around it? technically we can only know the location of known places with entry, and we don\u0027t know rest of area.",
+      "range": {
+        "startLine": 100,
+        "startChar": 11,
+        "endLine": 100,
+        "endChar": 51
+      },
+      "revId": "84e0bed61af322ae491be00a9bc649e1fdbc48cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d565dcd_9ae3b904",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-18T00:24:17Z",
+      "side": 1,
+      "message": "```\nlet last_entry \u003d match self.version {\n  Self::VERSION_1_0 \u003d\u003e Entry::DebugPolicy,\n  Self::VERSION_1_1 \u003d\u003e Entry::VmDtbo,\n  version if version.major \u003d\u003d 1 \u003d\u003e {\n    warn!(\"Parsing unknown config data version {} as version {LATEST}\", self.version);\n    return Ok(Entry::COUNT);\n  }\n  v \u003d\u003e return Err(Error::UnsupportedVersion(v)),\n}\n```",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 0
+      },
+      "revId": "84e0bed61af322ae491be00a9bc649e1fdbc48cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
