@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f99ec29_b15e5e51",
+        "filename": "pvmfw/avb/src/descriptor/collection.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1078119
+      },
+      "writtenOn": "2023-08-21T18:51:19Z",
+      "side": 1,
+      "message": "I thought that as a general-purpose Rust library it was a little cleaner to use the namespace in the error name and avoid duplicating it in the type e.g. `avb::IoError` instead of `avb::AvbIoError`.\n\nTo limit churn I just modified these files to `use as` the old name, but I\u0027m also happy to switch all usages over to either `avb::IoError` or just `IoError` if you would prefer.",
+      "range": {
+        "startLine": 23,
+        "startChar": 4,
+        "endLine": 23,
+        "endChar": 31
+      },
+      "revId": "5f5961b7d5c8c2c485b364022550684b6ee51560",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
