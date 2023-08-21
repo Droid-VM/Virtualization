@@ -22,6 +22,30 @@
       },
       "revId": "f36347b06ad5d68febaa65fd6f8025a47329bb14",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f16bc087_2e78db9f",
+        "filename": "libs/avb/TEST_MAPPING",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-21T08:18:04Z",
+      "side": 0,
+      "message": "Right, but they should both run in presubmit, that\u0027s not a problem. However, since the bindgen is moved to `libavb/`, this test should also be moved out of avf test config [1] in busytown to stay next to the other libavb tests [2] there. @zeuthen@google.com, could you provide some pointers on where the libavb tests are configured in busytown?\n\n\n[1] http://google3/wireless/android/busytown/ath_config/configs/prod/avf/tests.gcl;l\u003d27;rcl\u003d545947529\n[2] https://cs.android.com/android/platform/superproject/main/+/main:external/avb/TEST_MAPPING",
+      "parentUuid": "f40eef53_f6e41bd9",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 66
+      },
+      "revId": "f36347b06ad5d68febaa65fd6f8025a47329bb14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
