@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3af6489a_24d7614a",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-21T20:11:34Z",
+      "side": 1,
+      "message": "I fixed it in a separate patch.",
+      "parentUuid": "8a3dd787_b1a0bcd9",
+      "range": {
+        "startLine": 917,
+        "startChar": 7,
+        "endLine": 917,
+        "endChar": 24
+      },
+      "revId": "81b1e315c92465d058b40196efd0a3b59c8046f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c221390b_8c94953a",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e2c928f_a06f5577",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-21T20:11:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c221390b_8c94953a",
+      "range": {
+        "startLine": 38,
+        "startChar": 1,
+        "endLine": 38,
+        "endChar": 100
+      },
+      "revId": "81b1e315c92465d058b40196efd0a3b59c8046f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3e923b0_072d5d2e",
@@ -77,6 +125,30 @@
       "writtenOn": "2023-08-15T13:50:25Z",
       "side": 1,
       "message": "If you want to check this in this should be false - you can always change that locally.",
+      "range": {
+        "startLine": 79,
+        "startChar": 4,
+        "endLine": 79,
+        "endChar": 8
+      },
+      "revId": "81b1e315c92465d058b40196efd0a3b59c8046f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9bb7f60_3370819f",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-21T20:11:34Z",
+      "side": 1,
+      "message": "As noted in the other patch - this does not affect the security of pVM. Explained in comments.",
+      "parentUuid": "a3e923b0_072d5d2e",
       "range": {
         "startLine": 79,
         "startChar": 4,
