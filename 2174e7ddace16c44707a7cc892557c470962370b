@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "318c3184_bb6ddcff",
+        "filename": "virtualizationservice/vfio_handler/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-08-22T01:28:19Z",
+      "side": 1,
+      "message": "I found this difficult to follow. How about writing like this:\n\n```\nlet vm_dtbo_idx \u003d system_properties::read(...)\n    .context(...)\n    .ok_or_else(...)\n    .or_service_specific_exception(-1)?;\n    \nlet vm_dtbo_idx \u003d vm_dtbo_idx.parse().context(\"vm_dtbo_idx is not an integer\").or_service_specific_exception(-1)?;\n```\n\n(I\u0027m not an Rust expert, so this may be wrong.. ignore if so)",
+      "range": {
+        "startLine": 291,
+        "startChar": 0,
+        "endLine": 297,
+        "endChar": 44
+      },
+      "revId": "2174e7ddace16c44707a7cc892557c470962370b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
