@@ -1,0 +1,349 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b7682d8_014b180c",
+        "filename": "libs/dice_policy/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-22T11:13:48Z",
+      "side": 1,
+      "message": "?\nThe style guide mandates 2021 for now, I think?",
+      "range": {
+        "startLine": 9,
+        "startChar": 20,
+        "endLine": 9,
+        "endChar": 46
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9b633a1_5ce8ec5e",
+        "filename": "libs/dice_policy/TEST_MAPPING",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-22T11:13:48Z",
+      "side": 1,
+      "message": "Should you import this into our root TEST_MAPPING?\n(Or just directly add this test there?)",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 1
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6555b132_b890001b",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-22T11:13:48Z",
+      "side": 1,
+      "message": "Nit: This should probably be //! too, and go after the comment below.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 68
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69fb1136_c79e5cbd",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-22T11:13:48Z",
+      "side": 1,
+      "message": "Nit: line too long - here, and a few below.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 105
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e84f959_50376394",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-22T11:13:48Z",
+      "side": 1,
+      "message": "Possibly Box\u003c[Constraint\u003e] ? We don\u0027t need resize-ability once it\u0027s built. Maybe.",
+      "range": {
+        "startLine": 37,
+        "startChar": 23,
+        "endLine": 37,
+        "endChar": 26
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d376c17e_c556209c",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-22T11:13:48Z",
+      "side": 1,
+      "message": "NodeConstraints maybe?",
+      "range": {
+        "startLine": 37,
+        "startChar": 7,
+        "endLine": 37,
+        "endChar": 22
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43ad1926_9ee90886",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-22T11:13:48Z",
+      "side": 1,
+      "message": "NotLessConstraint ?",
+      "range": {
+        "startLine": 42,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 16
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fa3f75b_55174d6b",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-22T11:13:48Z",
+      "side": 1,
+      "message": "Comment on what this is?\nIs this what Paul called a Path? Because it might be useful to avoid use of \"key\" which is overloaded in this context.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 27
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddfbccbd_eaea42bf",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-22T11:13:48Z",
+      "side": 1,
+      "message": "Great than or equal to. (Or possibly, not less than?)\nDo we restrict this to numeric values only?\nActually, the answers to those questions are above - maybe this comment should be on the Constraint enum?",
+      "range": {
+        "startLine": 50,
+        "startChar": 7,
+        "endLine": 50,
+        "endChar": 29
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c84d591_95ec2c1e",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-22T11:13:48Z",
+      "side": 1,
+      "message": "You almost certainly need a root key constraint - i.e. must have exactly this root key.",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 91
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "795658f2_c725c5de",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-22T11:13:48Z",
+      "side": 1,
+      "message": "The key property is that the resulting policy should match the same entity, or a newer version of it, but not a different entity or an older version.\nMaybe the function should be called \"matching_dice_chain\"? Or \"sealing\"?",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 82
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d475ca3d_d0547000",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-22T11:13:48Z",
+      "side": 1,
+      "message": "Can you include a (pseudo-)CDDL of what the policy looks like?",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 12
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27bade6b_10bdb2de",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-22T11:13:48Z",
+      "side": 1,
+      "message": "This seems like a good thing to extract as a function.\nAre all the clone calls needed? That seems expensive.\nThe Ciborium Value type is a little annoying to work with. You could use as_bytes, or directly pattern match:\n\nmatch val { Bytes(v) \u003d\u003e",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 9
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "401f8cb5_7b2d889a",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-22T11:13:48Z",
+      "side": 1,
+      "message": "This might be clearer if done before the loop above.",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 94
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06d0c99b_afd22947",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-22T11:13:48Z",
+      "side": 1,
+      "message": "I\u0027m not sure cargo usage is encouraged.\nIf you do `m hwtrust` then you can directly run `hwtrust --verbose verify-dice-chain \u003cbcc\u003e`\n(Oh except that Andrew just changes the command from `verify-dice-chain` to just `dice-chain`)",
+      "range": {
+        "startLine": 193,
+        "startChar": 8,
+        "endLine": 193,
+        "endChar": 17
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
