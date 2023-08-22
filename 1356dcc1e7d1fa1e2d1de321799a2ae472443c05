@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32851b05_1379c6c6",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-22T09:59:02Z",
+      "side": 1,
+      "message": "Rather than making one identifier special, I suggest splitting this into 2 methods,\n\nderive_encrypted_store_key\nderive_payload_key\n\nBoth call get_vm_secret with appropriate parameters. The former can have the key identifier (as well as the salt) local to this file - main.rs shouldn\u0027t need to care.",
+      "range": {
+        "startLine": 84,
+        "startChar": 19,
+        "endLine": 84,
+        "endChar": 83
+      },
+      "revId": "1356dcc1e7d1fa1e2d1de321799a2ae472443c05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
