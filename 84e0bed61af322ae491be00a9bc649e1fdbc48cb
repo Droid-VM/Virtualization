@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9aba24c1_88092dbd",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-23T17:48:15Z",
+      "side": 1,
+      "message": "I could rename it to `body_lowest_bound`, for example, to show that it is the lowest known value below which `Entry::offset` values could ever be permitted to go, but I\u0027m not sure it adds much clarity?\n\nWhich check around `body_offset` are you suggesting I remove? The `r.is_within(limits)` in `validated_body_range`? The only problem with that check when treating a v1.x config as a v1.y (with y \u003c x) is that the check is more permissive than necessary (but we can\u0027t do any better because we have no way of knowing how many entries were introduced between the version), so why would we need to get rid of it?\n\nTo illustrate, the layout would be:\n```\n+---- v1.y ----+---- v1.x ----+ (currently: y\u003d1)\n|              |              |\n|    HEADER    |    HEADER    |\n|              |              |\n+--------------+--------------+\n|              |              |\n|   n ENTRIES  |   m ENTRIES  |\n|              |              |\n+--------------+              | \u003d\u003d\u003e A\n|              |              |\n|     BODY     +--------------+ \u003d\u003d\u003e B\n|              |              |\n|              |     BODY     |\n|              |              |\n+--------------+--------------+ \u003d\u003d\u003e E\n```\nand pvmfw, instead of checking for the entries to point within `[B; E[` (which it can\u0027t) will validate using `[A; E[`: not perfect but not completely wrong either. So why remove it?\n\nNote that these checks, even if they prevent OOB accesses, aren\u0027t intended for security anyway given that the config data is always trusted.",
+      "parentUuid": "260085e5_ae91c271",
+      "range": {
+        "startLine": 100,
+        "startChar": 11,
+        "endLine": 100,
+        "endChar": 51
+      },
+      "revId": "84e0bed61af322ae491be00a9bc649e1fdbc48cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9d565dcd_9ae3b904",
         "filename": "pvmfw/src/config.rs",
         "patchSetId": 2
@@ -54,6 +78,30 @@
       "writtenOn": "2023-08-18T00:24:17Z",
       "side": 1,
       "message": "```\nlet last_entry \u003d match self.version {\n  Self::VERSION_1_0 \u003d\u003e Entry::DebugPolicy,\n  Self::VERSION_1_1 \u003d\u003e Entry::VmDtbo,\n  version if version.major \u003d\u003d 1 \u003d\u003e {\n    warn!(\"Parsing unknown config data version {} as version {LATEST}\", self.version);\n    return Ok(Entry::COUNT);\n  }\n  v \u003d\u003e return Err(Error::UnsupportedVersion(v)),\n}\n```",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 0
+      },
+      "revId": "84e0bed61af322ae491be00a9bc649e1fdbc48cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b017601c_dfd09bb9",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-23T17:48:15Z",
+      "side": 1,
+      "message": "The main reason why I\u0027ve done it this (verbose) way was to actually take advantage of Rust in order to ensure that the `match` couldn\u0027t be updated without also updating the `LATEST` version (so that it is impossible for the `warn!` to bit-rot) i.e. to prevent the fact that\n```diff\n@@ -114,6 +115,11 @@ impl Header {\n             }\n             Self::VERSION_1_0 \u003d\u003e Entry::DebugPolicy,\n             Self::VERSION_1_1 \u003d\u003e Entry::VmDtbo,\n+            Self::VERSION_1_2 \u003d\u003e Entry::Example,\n             version if version.major \u003d\u003d 1 \u003d\u003e {\n                 warn!(\"Parsing unknown config data version {} as version {LATEST}\", self.version);\n                 return Ok(Entry::COUNT);\n```\nin your example would NOT generate a compilation error while\n```\n         let last_entry \u003d match self.version {\n             Version { major: LATEST_MAJOR, minor: NEXT_MINOR.. } \u003d\u003e {\n                 warn!(\"Parsing unknown config data version {} as version {LATEST}\", self.version);\n                 return Ok(Entry::COUNT);\n             }\n             Self::VERSION_1_0 \u003d\u003e Entry::DebugPolicy,\n             Self::VERSION_1_1 \u003d\u003e Entry::VmDtbo,\n+            Self::VERSION_1_2 \u003d\u003e Entry::Example,\n             v \u003d\u003e return Err(Error::UnsupportedVersion(v)),\n         };\n```\nwould:\n```\nerror: unreachable pattern\n   --\u003e packages/modules/Virtualization/pvmfw/src/config.rs:118:13\n    |\n118 |             Self::VERSION_1_2 \u003d\u003e Entry::Example,\n    | ^^^^^^^^^^^^^^^^^\n    \u003d note: `-D unreachable-patterns` implied by `-D warnings`\n```\n\nBut I agree that the resulting code (like is often the case with \"safe\" Rust code) is less comfortable on the eye and wouldn\u0027t be against taking your suggestion.\n\nGiven this, what do you recommend I do?",
+      "parentUuid": "9d565dcd_9ae3b904",
       "range": {
         "startLine": 110,
         "startChar": 0,
