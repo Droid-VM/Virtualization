@@ -3,6 +3,46 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0dc94728_17f3dff6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-23T08:17:00Z",
+      "side": 1,
+      "message": "LGTM. Thans!",
+      "revId": "5f5961b7d5c8c2c485b364022550684b6ee51560",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c862c6fd_0b90c52f",
+        "filename": "pvmfw/avb/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-23T08:17:00Z",
+      "side": 1,
+      "message": "Can we add `_nostd` suffix to this name as the others?",
+      "range": {
+        "startLine": 14,
+        "startChar": 9,
+        "endLine": 14,
+        "endChar": 18
+      },
+      "revId": "5f5961b7d5c8c2c485b364022550684b6ee51560",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2f99ec29_b15e5e51",
         "filename": "pvmfw/avb/src/descriptor/collection.rs",
         "patchSetId": 1
@@ -19,6 +59,53 @@
         "startChar": 4,
         "endLine": 23,
         "endChar": 31
+      },
+      "revId": "5f5961b7d5c8c2c485b364022550684b6ee51560",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57a3a338_dd1563d9",
+        "filename": "pvmfw/avb/src/descriptor/collection.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-23T08:17:00Z",
+      "side": 1,
+      "message": "Thanks :) I think it\u0027s fine without `as`, `avb::IoError` looks neat!",
+      "parentUuid": "2f99ec29_b15e5e51",
+      "range": {
+        "startLine": 23,
+        "startChar": 4,
+        "endLine": 23,
+        "endChar": 31
+      },
+      "revId": "5f5961b7d5c8c2c485b364022550684b6ee51560",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cba43b86_8e40884e",
+        "filename": "pvmfw/avb/src/descriptor/collection.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-23T08:17:00Z",
+      "side": 1,
+      "message": "This is OK for now. But since it can be useful to move the descriptor parsing part also to the generic library, we might also need some error like this when failing to parse the descriptor.",
+      "range": {
+        "startLine": 63,
+        "startChar": 24,
+        "endLine": 63,
+        "endChar": 60
       },
       "revId": "5f5961b7d5c8c2c485b364022550684b6ee51560",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
