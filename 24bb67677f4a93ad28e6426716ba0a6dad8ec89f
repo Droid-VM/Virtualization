@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "319e5615_d08a5821",
+        "filename": "libs/dice_policy/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-23T20:51:31Z",
+      "side": 1,
+      "message": "Oh you\u0027re right. That explains the error when I tried using updated version\nhttps://g3doc.corp.google.com/company/teams/android-security/platform_security/android_rust/style_guide/index.md?cl\u003dhead",
+      "parentUuid": "7b7682d8_014b180c",
+      "range": {
+        "startLine": 9,
+        "startChar": 20,
+        "endLine": 9,
+        "endChar": 46
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9b633a1_5ce8ec5e",
@@ -70,6 +94,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6a8deb9_27282185",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-23T20:51:31Z",
+      "side": 1,
+      "message": "Done. I suspect I will have to move this construction_from_dice chain into a separate module when we introduce other functionality such as comparing a dice chain with a policy.",
+      "parentUuid": "6555b132_b890001b",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 68
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69fb1136_c79e5cbd",
@@ -83,6 +131,30 @@
       "writtenOn": "2023-08-22T11:13:48Z",
       "side": 1,
       "message": "Nit: line too long - here, and a few below.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 105
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "771706a6_75d2e166",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-23T20:51:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69fb1136_c79e5cbd",
       "range": {
         "startLine": 21,
         "startChar": 0,
@@ -139,6 +211,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8288c72_6e1148ed",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-23T20:51:31Z",
+      "side": 1,
+      "message": "Sounds good (in particular first node is not a cert, but a key)",
+      "parentUuid": "d376c17e_c556209c",
+      "range": {
+        "startLine": 37,
+        "startChar": 7,
+        "endLine": 37,
+        "endChar": 22
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7c9dd75_097cdc97",
@@ -152,6 +248,30 @@
       "writtenOn": "2023-08-22T11:20:07Z",
       "side": 1,
       "message": "Should probably mark this non_exhaustive btw.",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 17
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb932ca3_fc0aa993",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-23T20:51:31Z",
+      "side": 1,
+      "message": "Good idea. Done",
+      "parentUuid": "c7c9dd75_097cdc97",
       "range": {
         "startLine": 40,
         "startChar": 0,
@@ -185,6 +305,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3aaa90db_e2b39993",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-23T20:51:31Z",
+      "side": 1,
+      "message": "Non-negative naming are tricky in explanation. I\u0027ve renamed it to GreaterOrEqualToConstraint.",
+      "parentUuid": "43ad1926_9ee90886",
+      "range": {
+        "startLine": 42,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 16
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1fa3f75b_55174d6b",
@@ -198,6 +342,30 @@
       "writtenOn": "2023-08-22T11:13:48Z",
       "side": 1,
       "message": "Comment on what this is?\nIs this what Paul called a Path? Because it might be useful to avoid use of \"key\" which is overloaded in this context.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 27
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "354aded0_c6a991ac",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-23T20:51:31Z",
+      "side": 1,
+      "message": "Not sure what path is. But `KeySpec` is actually the \"key\" that can be used to find the value in the payload. It is will be a series of cbor_map keys for nested structures. The final `NodeConstraints` will be indexed by keyspec.\n\nKeySpec sounds about right to me, but I can change it to KeyPath if you htink that is more appropriate. Plz reopen the comment if so.",
+      "parentUuid": "1fa3f75b_55174d6b",
       "range": {
         "startLine": 46,
         "startChar": 0,
@@ -231,6 +399,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d103d6ab_683f5ec2",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-23T20:51:31Z",
+      "side": 1,
+      "message": "Yes, We do restrict it to Integer.",
+      "parentUuid": "ddfbccbd_eaea42bf",
+      "range": {
+        "startLine": 50,
+        "startChar": 7,
+        "endLine": 50,
+        "endChar": 29
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c84d591_95ec2c1e",
@@ -244,6 +436,30 @@
       "writtenOn": "2023-08-22T11:13:48Z",
       "side": 1,
       "message": "You almost certainly need a root key constraint - i.e. must have exactly this root key.",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 91
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41481b51_5e07c474",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-23T20:51:31Z",
+      "side": 1,
+      "message": "I have encoded that as, the whole DiceNode should match as is, ie:\n\nNodeConstraints {\n    [Constraint::ExactMatchConstraint { KeySpec(\"\"), firstDiceNode} ]\n}\n\nwhere firstDiceNode will be the Cose key for root_public_key",
+      "parentUuid": "1c84d591_95ec2c1e",
       "range": {
         "startLine": 54,
         "startChar": 0,
@@ -279,6 +495,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "222b9a9f_f7d320d2",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-23T20:51:31Z",
+      "side": 1,
+      "message": "Maybe we can leave the DicePolicy struct generic \u0026 rename the `from_dice_chain` -\u003e `for_ar_protected_sealing()`. Any naming recommendation?",
+      "parentUuid": "795658f2_c725c5de",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 82
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d475ca3d_d0547000",
         "filename": "libs/dice_policy/src/lib.rs",
         "patchSetId": 3
@@ -290,6 +530,30 @@
       "writtenOn": "2023-08-22T11:13:48Z",
       "side": 1,
       "message": "Can you include a (pseudo-)CDDL of what the policy looks like?",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 12
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cc3aafb_982cba29",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-23T20:51:31Z",
+      "side": 1,
+      "message": "Ack. WIP. That may change the serialize_into_cbor() function, unless we directly serialize the while DicePolicy object",
+      "parentUuid": "d475ca3d_d0547000",
       "range": {
         "startLine": 63,
         "startChar": 0,
@@ -325,6 +589,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a0639a15_70a1ffda",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-23T20:51:31Z",
+      "side": 1,
+      "message": "\u003e good thing to extract as a function\nDone\n\nThe clone() are hard to get around much. I tried again. PTAL",
+      "parentUuid": "27bade6b_10bdb2de",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 9
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "401f8cb5_7b2d889a",
         "filename": "libs/dice_policy/src/lib.rs",
         "patchSetId": 3
@@ -336,6 +624,30 @@
       "writtenOn": "2023-08-22T11:13:48Z",
       "side": 1,
       "message": "This might be clearer if done before the loop above.",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 94
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4ef7622_f156d1b9",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-23T20:51:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "401f8cb5_7b2d889a",
       "range": {
         "startLine": 139,
         "startChar": 0,
@@ -359,6 +671,30 @@
       "writtenOn": "2023-08-22T11:13:48Z",
       "side": 1,
       "message": "I\u0027m not sure cargo usage is encouraged.\nIf you do `m hwtrust` then you can directly run `hwtrust --verbose verify-dice-chain \u003cbcc\u003e`\n(Oh except that Andrew just changes the command from `verify-dice-chain` to just `dice-chain`)",
+      "range": {
+        "startLine": 193,
+        "startChar": 8,
+        "endLine": 193,
+        "endChar": 17
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c3f2529_112197b7",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-23T20:51:31Z",
+      "side": 1,
+      "message": "Thanks. I\u0027ve changed the comment to indicate that.",
+      "parentUuid": "06d0c99b_afd22947",
       "range": {
         "startLine": 193,
         "startChar": 8,
