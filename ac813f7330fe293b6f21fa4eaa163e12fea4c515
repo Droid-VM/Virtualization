@@ -713,6 +713,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11878f71_bc553d8c",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-24T08:48:16Z",
+      "side": 1,
+      "message": "Ok. I found the problem. There are several issues:\n1. With ciborium_io, when we send a vector of `N` bytes, the actual size is `2N + header size(12 bytes)`, because each item in the vector has a type Tag attached to it. So when we send a vector of 506 bytes, the actual size is 506*2+12\u003d1024 bytes.\n2. With long messages (\u003e800 bytes), the tests become flaky when running many times. It\u0027s hard to reproduce this, I think it might be related to resource limitation in rialto when the host sends lots of small messages of 1 byte. This is resolved when we change to `BufWriter` in host and send the messages by big chunks.\n3. A credit update is missing in the vsock connection manager\u0027s `recv()`. Once this is fixed and we use buffer writer, we can send messages longer than its max buffer 1024 bytes without problem. I\u0027ll send a PR in the upstream repo to fix it.",
+      "parentUuid": "b25efa6f_cb61ca07",
+      "range": {
+        "startLine": 139,
+        "startChar": 22,
+        "endLine": 139,
+        "endChar": 33
+      },
+      "revId": "ac813f7330fe293b6f21fa4eaa163e12fea4c515",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56e430cf_a5138b06",
