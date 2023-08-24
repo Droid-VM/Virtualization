@@ -89,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6beb548_a18a4060",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-24T10:32:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "978904c6_f9c0459b",
+      "range": {
+        "startLine": 100,
+        "startChar": 11,
+        "endLine": 100,
+        "endChar": 51
+      },
+      "revId": "84e0bed61af322ae491be00a9bc649e1fdbc48cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d565dcd_9ae3b904",
@@ -150,6 +174,30 @@
       "side": 1,
       "message": "What if we mistakenly update `NEXT_MINOR` with greater value when adding new fields? (e.g. `5` when adding `Entry::Example`)\n\nTo me, `NEXT_MINOR` is an another burden for developers if it isn\u0027t automatically calculated. However, you prefer developers to manually update `NEXT_MINOR` so it might be a personal preference. I\u0027ll let you decide between two options. Feel free to resolve accordingly.",
       "parentUuid": "b017601c_dfd09bb9",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 0
+      },
+      "revId": "84e0bed61af322ae491be00a9bc649e1fdbc48cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9541be81_c8530ae7",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-24T10:32:47Z",
+      "side": 1,
+      "message": "\u003e To me, `NEXT_MINOR` is an another burden for developers if it isn\u0027t automatically calculated. However, you prefer developers to manually update `NEXT_MINOR` so it might be a personal preference.\n\n`NEXT_MINOR` _is_ automatically derived (from `LATEST`):\n```\nconst NEXT_MINOR: u16 \u003d LATEST.minor + 1;\n```\n\nand this is the whole point of the verbose `match`: to ensure that developers have updated `LATEST` whenever they add a new branch to the `match`. This isn\u0027t a personal preference, it\u0027s a fact that we want valid code and valid code doesn\u0027t print out misleading warnings, which would happen if `LATEST` goes out-of-date w.r.t. the code (i.e. the `match` branches).\n\nNow, having to update `LATEST` (which is also required in your suggestion!) might be seen as a burden, but I don\u0027t see a simple way to write the `match` so that the value can be deduced.\n\n\u003e What if we mistakenly update `NEXT_MINOR` with greater value when adding new fields?\n\nRight, I was only anticipating the case of a forgetful developer, which would easily be missed during the review process (as `LATEST` wouldn\u0027t be touched so might not be brought to the attention of the reviewer and wouldn\u0027t trigger a pre-submit failure).\n\nBut yes, we could make the `match` even more verbose with\n```\n- v \u003d\u003e return Err(Error::UnsupportedVersion(v)),\n+ v if v.major !\u003d LATEST_MAJOR \u003d\u003e return Err(Error::UnsupportedVersion(v)),\n```\nto get the compiler to raise a \"missed case in `match`\" error, in that case ...\n\nAnyway, I\u0027ll go back to the straightforward (but less robust) implementation and resolve this, although I\u0027m under the impression that there has been a misunderstanding here.",
+      "parentUuid": "e05ff281_a5311e5a",
       "range": {
         "startLine": 110,
         "startChar": 0,
