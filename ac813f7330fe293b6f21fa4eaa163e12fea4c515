@@ -811,6 +811,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "65048e43_d0c378fc",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-24T13:16:52Z",
+      "side": 1,
+      "message": "\u003e Vec\u003cu8\u003e is treated as a sequence of Positive numbers instead of a byte array\n\nI suspect making it an \u0026[u8] rather than a Vec\u003cu8\u003e, and adding a lifetime annotation, would fix that - and might be a good idea anyway, since it allows for one less copy on each end. https://serde.rs/lifetimes.html#borrowing-data-in-a-derived-impl\n\n\u003e I think it\u0027s logical to update it within the connection manager.\n\nAck, makes sense.",
+      "parentUuid": "32bc22a3_ddb815f5",
+      "range": {
+        "startLine": 139,
+        "startChar": 22,
+        "endLine": 139,
+        "endChar": 33
+      },
+      "revId": "ac813f7330fe293b6f21fa4eaa163e12fea4c515",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "56e430cf_a5138b06",
         "filename": "rialto/src/communication.rs",
         "patchSetId": 20
