@@ -25,6 +25,7 @@ extern crate alloc;
 
 use crate::communication::VsockStream;
 use crate::error::{Error, Result};
+use ciborium_io::Write;
 use core::num::NonZeroUsize;
 use core::slice;
 use fdtpci::PciInfo;
@@ -143,6 +144,7 @@ unsafe fn try_main(fdt_addr: usize) -> Result<()> {
         Request::Reverse(v) => Response::Reverse(v.into_iter().rev().collect()),
     };
     vsock_stream.write_response(&response)?;
+    vsock_stream.flush()?;
     vsock_stream.shutdown()?;
 
     Ok(())
