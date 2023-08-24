@@ -763,6 +763,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6b081ac6_74c1925e",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-24T10:46:55Z",
+      "side": 1,
+      "message": "\u003e With ciborium_io, when we send a vector of N bytes, the actual size is 2N + header size(12 bytes)\n\nWow, that\u0027s impressively inefficient. And a little odd - CBOR has native types to represent a byte array (or a string). I wonder if there\u0027s a way to make it do the right thing?\n\n\u003e This is resolved when we change to BufWriter in host and send the messages by big chunks.\n\nFlakiness is a little worrying. But buffering at both ends is essential anyway, we should probably try to get that in asap.\n\n\u003e A credit update is missing in the vsock connection manager\u0027s recv()\n\nI don\u0027t understand Andrew\u0027s library well enough to understand if that\u0027s the right fix. Is updating credit the responsibility of the connection manager (based on its buffer size) or the client (based on how much data it is willing to receive)? I notice that credit_update() is public in virtiosocket - can you instead call it explicitly in your code?",
+      "parentUuid": "f37d0a35_4e44b50f",
+      "range": {
+        "startLine": 139,
+        "startChar": 22,
+        "endLine": 139,
+        "endChar": 33
+      },
+      "revId": "ac813f7330fe293b6f21fa4eaa163e12fea4c515",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "56e430cf_a5138b06",
         "filename": "rialto/src/communication.rs",
         "patchSetId": 20
