@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eba4eed_3f8608ba",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 29
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-24T14:43:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6effdf41_d1b34b67",
+      "range": {
+        "startLine": 71,
+        "startChar": 12,
+        "endLine": 71,
+        "endChar": 78
+      },
+      "revId": "912a76ff647d05c2662d1a8bd8e8de47f7151e3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "932d5197_9b0a92bb",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-08-24T13:16:52Z",
       "side": 1,
       "message": "That doesn\u0027t look exactly like what it does.",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 56
+      },
+      "revId": "912a76ff647d05c2662d1a8bd8e8de47f7151e3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4603abbb_fbeb4249",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 29
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-24T14:43:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "932d5197_9b0a92bb",
       "range": {
         "startLine": 116,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ce152b7_958481c9",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 29
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-24T14:43:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5dba7344_b3a6c5e9",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 128,
+        "endChar": 33
+      },
+      "revId": "912a76ff647d05c2662d1a8bd8e8de47f7151e3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53cbc7df_c0fc074a",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b4ee582_23a1fa3a",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 29
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-24T14:43:48Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be reachable on the current logic in virtio-drivers. Let\u0027s change this to an assert.",
+      "parentUuid": "53cbc7df_c0fc074a",
+      "range": {
+        "startLine": 161,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 69
+      },
+      "revId": "912a76ff647d05c2662d1a8bd8e8de47f7151e3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5dcc86ad_904cbe97",
@@ -106,6 +202,30 @@
       "writtenOn": "2023-08-24T13:16:52Z",
       "side": 1,
       "message": "Can you create a specific blocking bug for that?",
+      "range": {
+        "startLine": 187,
+        "startChar": 18,
+        "endLine": 187,
+        "endChar": 86
+      },
+      "revId": "912a76ff647d05c2662d1a8bd8e8de47f7151e3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "475691b9_177f7700",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 29
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-24T14:43:48Z",
+      "side": 1,
+      "message": "Since this is the blocking reason for sending long messages, I updated the description of the bug b/292080257 for it.",
+      "parentUuid": "5dcc86ad_904cbe97",
       "range": {
         "startLine": 187,
         "startChar": 18,

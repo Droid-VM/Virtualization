@@ -833,6 +833,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8972f23f_6f339f00",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-24T14:43:48Z",
+      "side": 1,
+      "message": "\u003e I suspect making it an \u0026[u8] rather than a Vec\u003cu8\u003e, and adding a lifetime annotation, would fix that...\n\nOut of curiosity I also tried to change the `Vec\u003cu8\u003e` to `\u0026[u8]`, the result is the same as indicated in the [serde doc](https://serde.rs/impl-serialize.html#other-special-cases): serialize_bytes is not used. For example, to send an array `Reverse([97, 97, 97, 97, 97])`, the actual bytes are as following for both Vec\u003cu8\u003e and \u0026[u8]\n```\n[.., 161, 103, 82, 101, 118, 101, 114, 115, 101, 133, 24, 97, 24, 97, 24, 97, 24, 97, 24, 97]\n```\n\n\u003e and might be a good idea anyway, since it allows for one less copy on each end.\n\nserde has zero-copy deserialization[1], there\u0027s no intermediate copy between the reading and the final data structure. Like for the following deserialization code, it\u0027s hard to match the lifetime of the Request to anything if it has a lifetime attribute\n```\npub fn read_request(\u0026mut self) -\u003e Result\u003cRequest\u003e {\n        Ok(ciborium::from_reader(self)?)\n    }\n```\n[1] https://serde.rs/lifetimes.html#borrowing-data-in-a-derived-impl",
+      "parentUuid": "65048e43_d0c378fc",
+      "range": {
+        "startLine": 139,
+        "startChar": 22,
+        "endLine": 139,
+        "endChar": 33
+      },
+      "revId": "ac813f7330fe293b6f21fa4eaa163e12fea4c515",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56e430cf_a5138b06",
