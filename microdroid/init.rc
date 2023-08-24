@@ -55,6 +55,7 @@ on init && property:ro.boot.microdroid.debuggable=1
     mount tracefs tracefs /sys/kernel/tracing gid=3012
 
 on property:init_debug_policy.adbd.enabled=1
+    write /dev/kmsg "test567, packages/modules/Virtualization/microdroid/init.rc start adbd"
     start adbd
 
 # Mount filesystems and start core system services.
