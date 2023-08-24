@@ -787,6 +787,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "32bc22a3_ddb815f5",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-24T12:17:56Z",
+      "side": 1,
+      "message": "\u003e Wow, that\u0027s impressively inefficient. And a little odd - CBOR has native types to represent a byte array (or a string). I wonder if there\u0027s a way to make it do the right thing?\n\nIt\u0027s true that the serialization of `Vec\u003cu8\u003e` is quite inefficient, because `Vec\u003cu8\u003e` is treated as a sequence of Positive numbers instead of a byte array[1]. This is specified as a special case in the serde doc[2]. We can improve this with [serde_bytes](https://docs.rs/serde_bytes/latest/serde_bytes/) if this becomes a bottleneck for performance later.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:external/rust/crates/ciborium/src/ser/mod.rs;l\u003d165;drc\u003d585dd3e610b1ba180365b30e8ad7569933dfa3d8\n[2] https://serde.rs/impl-serialize.html#other-special-cases\n\n\u003e I don\u0027t understand Andrew\u0027s library well enough to understand if that\u0027s the right fix. Is updating credit the responsibility of the connection manager (based on its buffer size) or the client (based on how much data it is willing to receive)? \n\nSince all the credit and buffer info are kept inside the connection manager, I think it\u0027s logical to update it within the connection manager. This is also coherent with what we do in ConnectionManager#send(): First we check the credit, if not enough we request the credit and then send.\n\n\u003e I notice that credit_update() is public in virtiosocket - can you instead call it explicitly in your code?\n\nThe connection manager keeps tracks of all the credit info like `buf_alloc` and `fwd_cnt`. They are the params to pass to `credit_update()`. I don\u0027t have access to them outside the connection manager. Also `credit_update()` is public in the socket device driver but not in the connection manager we have here.",
+      "parentUuid": "6b081ac6_74c1925e",
+      "range": {
+        "startLine": 139,
+        "startChar": 22,
+        "endLine": 139,
+        "endChar": 33
+      },
+      "revId": "ac813f7330fe293b6f21fa4eaa163e12fea4c515",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "56e430cf_a5138b06",
         "filename": "rialto/src/communication.rs",
         "patchSetId": 20
