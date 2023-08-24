@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "978904c6_f9c0459b",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-24T00:23:07Z",
+      "side": 1,
+      "message": "Renaming to `body_lowest_bound` looks good.\n\nMy point was not about removing `body_offset` but giving better name. When I proposed, I couldn\u0027t find any good name there so I rather proposed to remove it as a fallback. But your name looks good so I wouldn\u0027t tell you to remove it. Please rename and resolve this.",
+      "parentUuid": "9aba24c1_88092dbd",
+      "range": {
+        "startLine": 100,
+        "startChar": 11,
+        "endLine": 100,
+        "endChar": 51
+      },
+      "revId": "84e0bed61af322ae491be00a9bc649e1fdbc48cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9d565dcd_9ae3b904",
         "filename": "pvmfw/src/config.rs",
         "patchSetId": 2
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "The main reason why I\u0027ve done it this (verbose) way was to actually take advantage of Rust in order to ensure that the `match` couldn\u0027t be updated without also updating the `LATEST` version (so that it is impossible for the `warn!` to bit-rot) i.e. to prevent the fact that\n```diff\n@@ -114,6 +115,11 @@ impl Header {\n             }\n             Self::VERSION_1_0 \u003d\u003e Entry::DebugPolicy,\n             Self::VERSION_1_1 \u003d\u003e Entry::VmDtbo,\n+            Self::VERSION_1_2 \u003d\u003e Entry::Example,\n             version if version.major \u003d\u003d 1 \u003d\u003e {\n                 warn!(\"Parsing unknown config data version {} as version {LATEST}\", self.version);\n                 return Ok(Entry::COUNT);\n```\nin your example would NOT generate a compilation error while\n```\n         let last_entry \u003d match self.version {\n             Version { major: LATEST_MAJOR, minor: NEXT_MINOR.. } \u003d\u003e {\n                 warn!(\"Parsing unknown config data version {} as version {LATEST}\", self.version);\n                 return Ok(Entry::COUNT);\n             }\n             Self::VERSION_1_0 \u003d\u003e Entry::DebugPolicy,\n             Self::VERSION_1_1 \u003d\u003e Entry::VmDtbo,\n+            Self::VERSION_1_2 \u003d\u003e Entry::Example,\n             v \u003d\u003e return Err(Error::UnsupportedVersion(v)),\n         };\n```\nwould:\n```\nerror: unreachable pattern\n   --\u003e packages/modules/Virtualization/pvmfw/src/config.rs:118:13\n    |\n118 |             Self::VERSION_1_2 \u003d\u003e Entry::Example,\n    | ^^^^^^^^^^^^^^^^^\n    \u003d note: `-D unreachable-patterns` implied by `-D warnings`\n```\n\nBut I agree that the resulting code (like is often the case with \"safe\" Rust code) is less comfortable on the eye and wouldn\u0027t be against taking your suggestion.\n\nGiven this, what do you recommend I do?",
       "parentUuid": "9d565dcd_9ae3b904",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 0
+      },
+      "revId": "84e0bed61af322ae491be00a9bc649e1fdbc48cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e05ff281_a5311e5a",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-24T00:23:07Z",
+      "side": 1,
+      "message": "What if we mistakenly update `NEXT_MINOR` with greater value when adding new fields? (e.g. `5` when adding `Entry::Example`)\n\nTo me, `NEXT_MINOR` is an another burden for developers if it isn\u0027t automatically calculated. However, you prefer developers to manually update `NEXT_MINOR` so it might be a personal preference. I\u0027ll let you decide between two options. Feel free to resolve accordingly.",
+      "parentUuid": "b017601c_dfd09bb9",
       "range": {
         "startLine": 110,
         "startChar": 0,
