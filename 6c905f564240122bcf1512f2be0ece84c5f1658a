@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81c7d27f_eee515b5",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-24T15:39:45Z",
+      "side": 1,
+      "message": "You mentioned that sometimes we need to unwrap a `bytes .cbor` value into the CBOR before doing the index operation, e.g. for config desc. Is that coming?",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 27
+      },
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57010a76_1dafb77a",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-24T15:39:45Z",
+      "side": 1,
+      "message": "node",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 8
+      },
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bc2f35f_dab97db4",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-24T15:39:45Z",
+      "side": 1,
+      "message": "uber-nit: Self",
+      "range": {
+        "startLine": 77,
+        "startChar": 65,
+        "endLine": 77,
+        "endChar": 75
+      },
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b577743_8ef09db0",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-24T15:39:45Z",
+      "side": 1,
+      "message": "It\u0027s not a cert though? It\u0027s a public key. And I agree we should do an exact match, but you should explain why.",
+      "range": {
+        "startLine": 92,
+        "startChar": 60,
+        "endLine": 92,
+        "endChar": 82
+      },
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eff2c24a_7445ba5e",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-24T15:39:45Z",
+      "side": 1,
+      "message": "Can you explain keys_to_copy?",
+      "range": {
+        "startLine": 132,
+        "startChar": 42,
+        "endLine": 132,
+        "endChar": 54
+      },
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a6b9517_ce8bd533",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-24T15:39:45Z",
+      "side": 1,
+      "message": "Ciborium ignores trailing data, which you probably don\u0027t want to allow.\nSee https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/pvmfw/src/bcc.rs;drc\u003dc5e5fa3dc179276981acd26ea27e1b599bcb69ea;l\u003d221 for a solution.",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 1
+      },
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
