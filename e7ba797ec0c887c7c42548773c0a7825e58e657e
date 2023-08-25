@@ -46,6 +46,30 @@
       },
       "revId": "e7ba797ec0c887c7c42548773c0a7825e58e657e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3207cbb_d4dae67a",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-25T10:19:03Z",
+      "side": 1,
+      "message": "Suppose I write 1 byte, and it\u0027s added to the buffer.\nThen I write 1k. You are currently sending it immediately, without sending the previous byte, which means the data is sent in the wrong order.",
+      "parentUuid": "13395421_0d08f8e2",
+      "range": {
+        "startLine": 186,
+        "startChar": 11,
+        "endLine": 186,
+        "endChar": 38
+      },
+      "revId": "e7ba797ec0c887c7c42548773c0a7825e58e657e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
