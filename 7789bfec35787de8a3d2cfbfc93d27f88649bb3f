@@ -16,6 +16,24 @@
       "message": "RFC: As I was modifying this code, I thought of adding coverage for more config versions but 1. this increases the duration of the tests (is it acceptable?) and 2. having a single `@Test` iterating through those inputs is simpler but might not follow the way tests should be written (I notice that `testConfigVersion1_0_boots` and `testConfigVersion1_1_boots` are distinct)?",
       "revId": "7789bfec35787de8a3d2cfbfc93d27f88649bb3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dc30834_14d1bdf9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-08-25T18:42:21Z",
+      "side": 1,
+      "message": "Well, this can be sufficient for now.\nIdeally this test is better to be in the Parametrized test or small tests here + unit tests in pvmfw. But this looks OK to me.",
+      "parentUuid": "35a8ad23_8cfd9526",
+      "revId": "7789bfec35787de8a3d2cfbfc93d27f88649bb3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
