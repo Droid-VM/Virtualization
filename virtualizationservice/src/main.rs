@@ -17,6 +17,7 @@
 mod aidl;
 mod atom;
 mod rkpvm;
+mod rpc;
 
 use crate::aidl::{
     remove_temporary_dir, BINDER_SERVICE_IDENTIFIER, TEMPORARY_DIRECTORY,
@@ -58,7 +59,19 @@ fn main() {
     let service = VirtualizationServiceInternal::init();
     let service = BnVirtualizationServiceInternal::new_binder(service, BinderFeatures::default());
     register_lazy_service(BINDER_SERVICE_IDENTIFIER, service.as_binder()).unwrap();
-    info!("Registered Binder service, joining threadpool.");
+    info!("Registered Binder service {}, joining threadpool.", BINDER_SERVICE_IDENTIFIER);
+
+    // IRemotelyProvisionedComponent service.
+    let rpc_service = rpc::new_binder();
+    register_lazy_service(
+        rpc::REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME,
+        rpc_service.as_binder(),
+    )
+    .unwrap();
+    info!(
+        "Registered Binder service {}, joining threadpool.",
+        rpc::REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME
+    );
     ProcessState::join_thread_pool();
 }
 
