@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7a123f7_a6e0c4fb",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-25T09:07:21Z",
+      "side": 1,
+      "message": "You can just declare the data parameter as mut.",
+      "range": {
+        "startLine": 185,
+        "startChar": 7,
+        "endLine": 185,
+        "endChar": 38
+      },
+      "revId": "5a8a8e8d821537188004f1f250751aec0c2c62bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b5cb5d0_80a808b0",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-25T09:07:21Z",
+      "side": 1,
+      "message": "Suppose I want to send 1MiB. The effect of this loop is that I send it 512 bytes at a time, copying each chunk into the buffer - but it would be better to just make a single call to wait_for_send.\n\nSo I suggest you have 3 options:\n- data is bigger than WRITE_BUF_CAPACITY: flush(), then write all of data.\n- data fits in buffer: just append it to the buffer\n- data doesn\u0027t currently fit in buffer: exactly what you have here.",
+      "range": {
+        "startLine": 186,
+        "startChar": 8,
+        "endLine": 186,
+        "endChar": 40
+      },
+      "revId": "5a8a8e8d821537188004f1f250751aec0c2c62bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f6dc00c_63dc1863",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-25T09:07:21Z",
+      "side": 1,
+      "message": "This forces a copy, doesn\u0027t it? Can\u0027t we just write directly from write_buf and then call clear()?",
+      "range": {
+        "startLine": 202,
+        "startChar": 21,
+        "endLine": 202,
+        "endChar": 51
+      },
+      "revId": "5a8a8e8d821537188004f1f250751aec0c2c62bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92e9de0a_9e22645d",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-25T09:07:21Z",
+      "side": 1,
+      "message": "Skip this if buffer is empty?",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 203,
+        "endChar": 35
+      },
+      "revId": "5a8a8e8d821537188004f1f250751aec0c2c62bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
