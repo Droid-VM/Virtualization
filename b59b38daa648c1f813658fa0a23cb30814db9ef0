@@ -22,6 +22,30 @@
       },
       "revId": "b59b38daa648c1f813658fa0a23cb30814db9ef0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbf77a7f_4168e5b3",
+        "filename": "pvmfw/avb/src/descriptor/collection.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1078119
+      },
+      "writtenOn": "2023-08-25T18:48:03Z",
+      "side": 1,
+      "message": "Ah interesting it seems that I had an older version of `rustfmt` which for some reason didn\u0027t fix this line, after `rustup update` it now matches what the linter says. Thanks!",
+      "parentUuid": "c9a552a5_fa94dbac",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 0
+      },
+      "revId": "b59b38daa648c1f813658fa0a23cb30814db9ef0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
