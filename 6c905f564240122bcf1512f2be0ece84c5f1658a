@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8dc9ae1_cce5c5aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060907
+      },
+      "writtenOn": "2023-08-25T00:07:31Z",
+      "side": 1,
+      "message": "I\u0027m surprised that you\u0027re starting with the chain -\u003e policy code rather than the (chain, policy) -\u003e bool code!",
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f7af3e4_2a40ef37",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1060907
+      },
+      "writtenOn": "2023-08-25T00:07:31Z",
+      "side": 1,
+      "message": "In my spec these are identified with integers.",
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81c7d27f_eee515b5",
@@ -14,6 +48,30 @@
       "writtenOn": "2023-08-24T15:39:45Z",
       "side": 1,
       "message": "You mentioned that sometimes we need to unwrap a `bytes .cbor` value into the CBOR before doing the index operation, e.g. for config desc. Is that coming?",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 27
+      },
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "311d6a45_0b72ba6c",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1060907
+      },
+      "writtenOn": "2023-08-25T00:07:31Z",
+      "side": 1,
+      "message": "If that\u0027s necessary, it\u0027s a failing in my spec that I don\u0027t talk about it I think.",
+      "parentUuid": "81c7d27f_eee515b5",
       "range": {
         "startLine": 64,
         "startChar": 0,
@@ -66,6 +124,40 @@
         "endLine": 77,
         "endChar": 75
       },
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df04a17a_535b7560",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1060907
+      },
+      "writtenOn": "2023-08-25T00:07:31Z",
+      "side": 1,
+      "message": "Why is keys_to_copy a CBOR array?",
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaac873e_5eec32e9",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1060907
+      },
+      "writtenOn": "2023-08-25T00:07:31Z",
+      "side": 1,
+      "message": "The policy code",
       "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -135,6 +227,47 @@
         "endLine": 212,
         "endChar": 1
       },
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45bb6596_326ec442",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1060907
+      },
+      "writtenOn": "2023-08-25T00:07:31Z",
+      "side": 1,
+      "message": "https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/pvmfw/src/bcc.rs;l\u003d224 specifically",
+      "parentUuid": "2a6b9517_ce8bd533",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 1
+      },
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85aedba8_6931ff13",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1060907
+      },
+      "writtenOn": "2023-08-25T00:07:31Z",
+      "side": 1,
+      "message": "This test seems a lot less thorough than it should be. It should assert an exact resulting policy.\n\nAlso perhaps our tests should store the test data as CBOR diagnostic notation instead of binary, so it\u0027s human-readable. I\u0027ve asked about the cbor-diag crate in Rusty Droids.",
       "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
