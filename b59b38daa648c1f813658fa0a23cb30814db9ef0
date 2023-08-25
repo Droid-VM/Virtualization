@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9a552a5_fa94dbac",
+        "filename": "pvmfw/avb/src/descriptor/collection.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-25T07:51:46Z",
+      "side": 1,
+      "message": "Looks like you need to run rustfmt on this file.\n\nPlease fix this WARNING reported by RustFormatter: Please reformat the following line(s) to:\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nPlease reformat the following line(s) to:\n\n    ) -\u003e bool {\n        // SAFETY: It is safe because the caller ensures that `user_data` points to a valid struct and\n        // is initialized.\n        let Some(res) \u003d (unsafe { (user_data as *mut Result\u003cDescriptors, avb::IoError\u003e).as_mut() })\n        else {\n            return false;\n        };\n        let Ok(descriptors) \u003d res else {",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 0
+      },
+      "revId": "b59b38daa648c1f813658fa0a23cb30814db9ef0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
