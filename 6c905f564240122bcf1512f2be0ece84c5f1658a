@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "262b95b5_966f857d",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-25T08:10:13Z",
+      "side": 1,
+      "message": "I think it\u0027s necessary - Configuration Descriptor is a nested CBOR, and it contains Component name and Security version, both of which we want to constrain.",
+      "parentUuid": "311d6a45_0b72ba6c",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 27
+      },
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57010a76_1dafb77a",
         "filename": "libs/dice_policy/src/lib.rs",
         "patchSetId": 5
@@ -268,6 +292,24 @@
       "writtenOn": "2023-08-25T00:07:31Z",
       "side": 1,
       "message": "This test seems a lot less thorough than it should be. It should assert an exact resulting policy.\n\nAlso perhaps our tests should store the test data as CBOR diagnostic notation instead of binary, so it\u0027s human-readable. I\u0027ve asked about the cbor-diag crate in Rusty Droids.",
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8604ff0_af5a1f65",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-25T08:10:13Z",
+      "side": 1,
+      "message": "Wow, I don\u0027t think I\u0027d ever noticed that in the CBOR RFC.",
+      "parentUuid": "85aedba8_6931ff13",
       "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
