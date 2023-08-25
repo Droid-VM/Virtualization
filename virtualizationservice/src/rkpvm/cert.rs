@@ -12,9 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//! Handles the RKP (Remote Key Provisioning) VM and host communication.
-//! The RKP VM will be recognized and attested by the RKP server periodically and
-//! serves as a trusted platform to attest a client VM.
+//! This module is responsible for handling certificate requests issued by client
+//! VMs.
 
 use android_system_virtualizationservice::{
     aidl::android::system::virtualizationservice::{
