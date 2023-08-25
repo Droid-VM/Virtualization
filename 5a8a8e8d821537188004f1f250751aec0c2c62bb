@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c4524d5_e9799f16",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-25T09:57:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7a123f7_a6e0c4fb",
+      "range": {
+        "startLine": 185,
+        "startChar": 7,
+        "endLine": 185,
+        "endChar": 38
+      },
+      "revId": "5a8a8e8d821537188004f1f250751aec0c2c62bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b5cb5d0_80a808b0",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-08-25T09:07:21Z",
       "side": 1,
       "message": "Suppose I want to send 1MiB. The effect of this loop is that I send it 512 bytes at a time, copying each chunk into the buffer - but it would be better to just make a single call to wait_for_send.\n\nSo I suggest you have 3 options:\n- data is bigger than WRITE_BUF_CAPACITY: flush(), then write all of data.\n- data fits in buffer: just append it to the buffer\n- data doesn\u0027t currently fit in buffer: exactly what you have here.",
+      "range": {
+        "startLine": 186,
+        "startChar": 8,
+        "endLine": 186,
+        "endChar": 40
+      },
+      "revId": "5a8a8e8d821537188004f1f250751aec0c2c62bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "875a66b5_08eb81df",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-25T09:57:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b5cb5d0_80a808b0",
       "range": {
         "startLine": 186,
         "startChar": 8,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf30c3dd_ac3ef65b",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-25T09:57:02Z",
+      "side": 1,
+      "message": "You mean like this?\n```\nself.wait_for_send(\u0026self.write_buf)?;\nself.write_buf.clear();\n```\nThis doesn\u0027t compile\n```\nerror[E0502]: cannot borrow `*self` as mutable because it is also borrowed as immutable\n   --\u003e packages/modules/Virtualization/rialto/src/communication.rs:205:9\n    |\n205 |         self.wait_for_send(\u0026self.write_buf)?;\n    |         ^^^^^-------------^---------------^\n    |         |    |             |\n    |         |    |             immutable borrow occurs here\n    |         |    immutable borrow later used by call\n    |         mutable borrow occurs here\n```\nfrankly I also want to make it work this way",
+      "parentUuid": "4f6dc00c_63dc1863",
+      "range": {
+        "startLine": 202,
+        "startChar": 21,
+        "endLine": 202,
+        "endChar": 51
+      },
+      "revId": "5a8a8e8d821537188004f1f250751aec0c2c62bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "92e9de0a_9e22645d",
         "filename": "rialto/src/communication.rs",
         "patchSetId": 2
@@ -83,6 +155,30 @@
       "writtenOn": "2023-08-25T09:07:21Z",
       "side": 1,
       "message": "Skip this if buffer is empty?",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 203,
+        "endChar": 35
+      },
+      "revId": "5a8a8e8d821537188004f1f250751aec0c2c62bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4196afa4_31a1c02d",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-25T09:57:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92e9de0a_9e22645d",
       "range": {
         "startLine": 202,
         "startChar": 0,
