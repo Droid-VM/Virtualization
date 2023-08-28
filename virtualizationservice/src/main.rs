@@ -17,6 +17,7 @@
 mod aidl;
 mod atom;
 mod rkpvm;
+mod service_vm;
 
 use crate::aidl::{
     remove_temporary_dir, BINDER_SERVICE_IDENTIFIER, TEMPORARY_DIRECTORY,
@@ -64,8 +65,13 @@ fn main() {
 
 /// Remove any files under `TEMPORARY_DIRECTORY`.
 fn clear_temporary_files() -> Result<(), Error> {
-    for dir_entry in read_dir(TEMPORARY_DIRECTORY)? {
-        remove_temporary_dir(&dir_entry?.path())?
+    for entry in read_dir(TEMPORARY_DIRECTORY)? {
+        let entry_path = entry?.path();
+        if entry_path == service_vm::instance_img_path() {
+            // Keeps the instance image of the service VM in this directory.
+            continue;
+        }
+        remove_temporary_dir(&entry_path)?;
     }
     Ok(())
 }
