@@ -20,7 +20,7 @@ mod rkpvm;
 
 use crate::aidl::{
     remove_temporary_dir, BINDER_SERVICE_IDENTIFIER, TEMPORARY_DIRECTORY,
-    VirtualizationServiceInternal
+    SERVICE_VM_INSTANCE_IMG_NAME, VirtualizationServiceInternal
 };
 use android_logger::{Config, FilterBuilder};
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IVirtualizationServiceInternal::BnVirtualizationServiceInternal;
@@ -64,8 +64,13 @@ fn main() {
 
 /// Remove any files under `TEMPORARY_DIRECTORY`.
 fn clear_temporary_files() -> Result<(), Error> {
-    for dir_entry in read_dir(TEMPORARY_DIRECTORY)? {
-        remove_temporary_dir(&dir_entry?.path())?
+    for entry in read_dir(TEMPORARY_DIRECTORY)? {
+        let dir_entry = entry?;
+        if dir_entry.file_name().to_str() == Some(SERVICE_VM_INSTANCE_IMG_NAME) {
+            // Keeps the instance image of the service VM in this directory.
+            continue;
+        }
+        remove_temporary_dir(&dir_entry.path())?;
     }
     Ok(())
 }
