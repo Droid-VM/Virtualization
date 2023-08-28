@@ -59,7 +59,12 @@ interface IVirtualizationServiceInternal {
      *         both reading and writing.
      * @return the X.509 encoded certificate.
      */
-    byte[] requestCertificate(in byte[] csr, in ParcelFileDescriptor instanceImgFd);
+    byte[] requestCertificate(in byte[] csr);
+
+    /**
+     * @return the path to the instance image of the service VM.
+     */
+    String serviceVmInstanceImg();
 
     /**
      * Get a list of assignable devices.
