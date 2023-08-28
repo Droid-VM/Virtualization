@@ -252,6 +252,36 @@ impl IVirtualizationService for VirtualizationService {
         Ok(())
     }
 
+    fn serviceVmInstanceImg(&self) -> binder::Result<ParcelFileDescriptor> {
+        let instance_img_path: PathBuf = GLOBAL_SERVICE.serviceVmInstanceImg()?.into();
+        if instance_img_path.exists() {
+            return OpenOptions::new()
+                .read(true)
+                .write(true)
+                .open(instance_img_path)
+                .map(ParcelFileDescriptor::new)
+                .with_log()
+                .or_service_specific_exception(-1);
+        }
+        let instance_img = OpenOptions::new()
+            .create(true)
+            .read(true)
+            .write(true)
+            .open(instance_img_path)
+            .map(ParcelFileDescriptor::new)
+            .with_log()
+            .or_service_specific_exception(-1)?;
+
+        const INSTANCE_IMG_SIZE_BYTES: i64 = 1 << 20; // 1MB
+
+        self.initializeWritablePartition(
+            &instance_img,
+            INSTANCE_IMG_SIZE_BYTES,
+            PartitionType::ANDROID_VM_INSTANCE,
+        )?;
+        Ok(instance_img)
+    }
+
     /// Get a list of all currently running VMs. This method is only intended for debug purposes,
     /// and as such is only permitted from the shell user.
     fn debugListVms(&self) -> binder::Result<Vec<VirtualMachineDebugInfo>> {
@@ -1214,22 +1244,7 @@ impl IVirtualMachineService for VirtualMachineService {
     }
 
     fn requestCertificate(&self, csr: &[u8]) -> binder::Result<Vec<u8>> {
-        let cid = self.cid;
-        let Some(vm) = self.state.lock().unwrap().get_vm(cid) else {
-            error!("requestCertificate is called from an unknown CID {cid}");
-            return Err(anyhow!("cannot find a VM with CID {}", cid))
-                .or_service_specific_exception(-1);
-        };
-        let instance_img_path = vm.temporary_directory.join("rkpvm_instance.img");
-        let instance_img = OpenOptions::new()
-            .create(true)
-            .read(true)
-            .write(true)
-            .open(instance_img_path)
-            .context("Failed to create rkpvm_instance.img file")
-            .with_log()
-            .or_service_specific_exception(-1)?;
-        GLOBAL_SERVICE.requestCertificate(csr, &ParcelFileDescriptor::new(instance_img))
+        GLOBAL_SERVICE.requestCertificate(csr)
     }
 }
 

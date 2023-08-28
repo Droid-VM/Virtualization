@@ -57,6 +57,9 @@ pub const BINDER_SERVICE_IDENTIFIER: &str = "android.system.virtualizationservic
 /// Directory in which to write disk image files used while running VMs.
 pub const TEMPORARY_DIRECTORY: &str = "/data/misc/virtualizationservice";
 
+/// Filename of the instance image of the service VM.
+pub const SERVICE_VM_INSTANCE_IMG_NAME: &str = "service_vm_instance.img";
+
 /// The first CID to assign to a guest VM managed by the VirtualizationService. CIDs lower than this
 /// are reserved for the host or other usage.
 const GUEST_CID_MIN: Cid = 2048;
@@ -156,17 +159,17 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
         Ok(cids)
     }
 
-    fn requestCertificate(
-        &self,
-        csr: &[u8],
-        instance_img_fd: &ParcelFileDescriptor,
-    ) -> binder::Result<Vec<u8>> {
+    fn requestCertificate(&self, csr: &[u8]) -> binder::Result<Vec<u8>> {
         check_manage_access()?;
         info!("Received csr. Getting certificate...");
-        request_certificate(csr, instance_img_fd)
+        request_certificate(csr)
             .context("Failed to get certificate")
             .with_log()
             .or_service_specific_exception(-1)
+    }
+
+    fn serviceVmInstanceImg(&self) -> binder::Result<String> {
+        Ok(format!("{TEMPORARY_DIRECTORY}/{SERVICE_VM_INSTANCE_IMG_NAME}"))
     }
 
     fn getAssignableDevices(&self) -> binder::Result<Vec<AssignableDevice>> {

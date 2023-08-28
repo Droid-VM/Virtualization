@@ -19,7 +19,7 @@
 use android_system_virtualizationservice::{
     aidl::android::system::virtualizationservice::{
         CpuTopology::CpuTopology, DiskImage::DiskImage, Partition::Partition,
-        PartitionType::PartitionType, VirtualMachineConfig::VirtualMachineConfig,
+        VirtualMachineConfig::VirtualMachineConfig,
         VirtualMachineRawConfig::VirtualMachineRawConfig,
     },
     binder::{ParcelFileDescriptor, ProcessState},
@@ -32,10 +32,7 @@ use vmclient::VmInstance;
 
 const RIALTO_PATH: &str = "/apex/com.android.virt/etc/rialto.bin";
 
-pub(crate) fn request_certificate(
-    csr: &[u8],
-    instance_img_fd: &ParcelFileDescriptor,
-) -> Result<Vec<u8>> {
+pub(crate) fn request_certificate(csr: &[u8]) -> Result<Vec<u8>> {
     // We need to start the thread pool for Binder to work properly, especially link_to_death.
     ProcessState::start_thread_pool();
 
@@ -46,18 +43,7 @@ pub(crate) fn request_certificate(
     // If using an empty payload, the service code will be part of pvmfw.
     let rialto = File::open(RIALTO_PATH).context("Failed to open Rialto kernel binary")?;
 
-    // TODO(b/272226230): Initialize the partition from virtualization manager.
-    const INSTANCE_IMG_SIZE_BYTES: i64 = 1 << 20; // 1MB
-    service
-        .initializeWritablePartition(
-            instance_img_fd,
-            INSTANCE_IMG_SIZE_BYTES,
-            PartitionType::ANDROID_VM_INSTANCE,
-        )
-        .context("Failed to initialize instange.img")?;
-    let instance_img =
-        instance_img_fd.as_ref().try_clone().context("Failed to clone instance.img")?;
-    let instance_img = ParcelFileDescriptor::new(instance_img);
+    let instance_img = service.serviceVmInstanceImg()?;
     let writable_partitions = vec![Partition {
         label: "vm-instance".to_owned(),
         image: Some(instance_img),
