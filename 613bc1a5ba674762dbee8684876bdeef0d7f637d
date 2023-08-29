@@ -90,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a173539_759dd1a3",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-29T12:43:46Z",
+      "side": 1,
+      "message": "Let\u0027s move `initializeWritablePartition()` to a library first, since that will untangle lots of things here.\n\nActually my final goal is to have `IVitualizationServiceInternal#serviceVm() -\u003e ServiceVm` that wraps all this initialization here. There will also be `IVitualizationService#serviceVm()` but it only forwards the request to `IVitualizationServiceInternal` in it.",
+      "parentUuid": "23162053_3fa03fde",
+      "range": {
+        "startLine": 277,
+        "startChar": 8,
+        "endLine": 277,
+        "endChar": 13
+      },
+      "revId": "613bc1a5ba674762dbee8684876bdeef0d7f637d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b57c4e96_d6d81132",
         "filename": "virtualizationservice/aidl/android/system/virtualizationservice/IVirtualizationService.aidl",
         "patchSetId": 3
