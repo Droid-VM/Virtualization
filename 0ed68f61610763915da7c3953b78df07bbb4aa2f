@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "137d51c1_045ef3ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-29T16:20:38Z",
+      "side": 1,
+      "message": "You also need to update https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:system/core/rootdir/init.rc;drc\u003db97b7d7f6747b7959f387b2a9ed288e67760558f;l\u003d845, or your instance image will be wiped on boot. That may take a little care, since we do want any old tmp files present in the old location to be deleted.\n\nAn alternative would be to leave this misc dir alone, and use /data/apex/com.android.virt for things that aren\u0027t intended to be wiped on boot. You\u0027ll need to do some sepolicy work for that though.",
+      "revId": "0ed68f61610763915da7c3953b78df07bbb4aa2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e4ed9b4_cc773e4a",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-29T16:20:38Z",
+      "side": 1,
+      "message": "MISC_DIRECTORY.join(\"tmp\")",
+      "range": {
+        "startLine": 74,
+        "startChar": 4,
+        "endLine": 74,
+        "endChar": 42
+      },
+      "revId": "0ed68f61610763915da7c3953b78df07bbb4aa2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
