@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c7ed5755_b7134d82",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-29T14:49:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ef21cc4_3b457bff",
+      "range": {
+        "startLine": 7,
+        "startChar": 54,
+        "endLine": 7,
+        "endChar": 61
+      },
+      "revId": "613bc1a5ba674762dbee8684876bdeef0d7f637d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "079a9157_b9806d46",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -160,6 +184,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1574f069_9dca51c7",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-29T14:49:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b75e125a_db2ac785",
+      "range": {
+        "startLine": 277,
+        "startChar": 8,
+        "endLine": 277,
+        "endChar": 13
+      },
+      "revId": "613bc1a5ba674762dbee8684876bdeef0d7f637d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b57c4e96_d6d81132",
@@ -173,6 +221,30 @@
       "writtenOn": "2023-08-29T12:35:23Z",
       "side": 1,
       "message": "I don\u0027t think this should be here either.",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 48
+      },
+      "revId": "613bc1a5ba674762dbee8684876bdeef0d7f637d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba05b3cf_b422e799",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/IVirtualizationService.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-29T14:49:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b57c4e96_d6d81132",
       "range": {
         "startLine": 44,
         "startChar": 0,
@@ -206,6 +278,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fefa1fd2_37db2875",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice_internal/IVirtualizationServiceInternal.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-29T14:49:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a02a3516_8692294e",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 34
+      },
+      "revId": "613bc1a5ba674762dbee8684876bdeef0d7f637d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7fc2abc8_b22b5d56",
@@ -229,6 +325,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ce5a391_db8b5894",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-29T14:49:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7fc2abc8_b22b5d56",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 5
+      },
+      "revId": "613bc1a5ba674762dbee8684876bdeef0d7f637d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "503c52f1_65234e44",
@@ -242,6 +362,30 @@
       "writtenOn": "2023-08-29T12:35:23Z",
       "side": 1,
       "message": "Eurgh.\nIdeally we would move all the temporary files somewhere else (/data/misc/virtualizationservice/tmp, maybe, or /data/misc/apexdata/com.android.virt/tmp) so we didn\u0027t need this sort of special casing.\nMigration might be a little tricky though. Last time ended up being very messy - e.g. https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:system/core/rootdir/init.rc;drc\u003db97b7d7f6747b7959f387b2a9ed288e67760558f;l\u003d844.",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 9
+      },
+      "revId": "613bc1a5ba674762dbee8684876bdeef0d7f637d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55e89ee5_8b1c3e90",
+        "filename": "virtualizationservice/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-29T14:49:27Z",
+      "side": 1,
+      "message": "Addressed it https://r.android.com/2731053",
+      "parentUuid": "503c52f1_65234e44",
       "range": {
         "startLine": 69,
         "startChar": 0,
