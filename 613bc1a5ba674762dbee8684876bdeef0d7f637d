@@ -16,6 +16,29 @@
       "message": "Hi Alan, could you take a look?",
       "revId": "613bc1a5ba674762dbee8684876bdeef0d7f637d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53615866_f1e8956b",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-29T09:37:30Z",
+      "side": 1,
+      "message": "Alan: Based on what we discussed last time, we want the singleton of the service VM to live in VS instead of VirtMgr here, then it\u0027s better to initialize the instance image in VS. In that sense, can I move `initializeWritablePartition()` to VS or a library shared between VS and VirtMgr since this function is stateless?\n\nFYI @dbrazdil@google.com",
+      "range": {
+        "startLine": 277,
+        "startChar": 8,
+        "endLine": 277,
+        "endChar": 13
+      },
+      "revId": "613bc1a5ba674762dbee8684876bdeef0d7f637d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
