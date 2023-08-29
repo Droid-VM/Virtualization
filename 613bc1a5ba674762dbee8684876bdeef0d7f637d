@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b78964b2_2256032c",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-29T12:50:21Z",
+      "side": 1,
+      "message": "\u003e Let\u0027s move initializeWritablePartition() to a library first,\n\nAgreed.\n\n\u003e Actually my final goal is to have IVitualizationServiceInternal#serviceVm() -\u003e ServiceVm that wraps all this initialization here.\n\nI\u0027m not convinced by that. We might want to just expose a higher-level method to perform an attestation, which would be implemented in virtualization service (not virt mgr). VS would use the normal IVirtualizationService methods to create the service VM.\n\n\u003e There will also be IVitualizationService#serviceVm() but it only forwards the request to IVitualizationServiceInternal in it.\n\nAgain, that doesn\u0027t sound like the right level of abstraction.",
+      "parentUuid": "7a173539_759dd1a3",
+      "range": {
+        "startLine": 277,
+        "startChar": 8,
+        "endLine": 277,
+        "endChar": 13
+      },
+      "revId": "613bc1a5ba674762dbee8684876bdeef0d7f637d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b57c4e96_d6d81132",
         "filename": "virtualizationservice/aidl/android/system/virtualizationservice/IVirtualizationService.aidl",
         "patchSetId": 3
