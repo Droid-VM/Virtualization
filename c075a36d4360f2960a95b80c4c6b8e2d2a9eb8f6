@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4c1ecfd_8c702af0",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-29T16:13:48Z",
+      "side": 1,
+      "message": "What if there is already an instance running?\nI don\u0027t think we should ever have 2 service VMs running at the same time.\nOptions are to fail the new request, or re-use the existing instance.\n\n(For the latter, I was doing something similar for CompOS at one point, using a Weak pointer to retrieve the running instance if there was one - e.g. aosp/2172175.)",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 38
+      },
+      "revId": "c075a36d4360f2960a95b80c4c6b8e2d2a9eb8f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ea33ffa_f51923b8",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-29T16:13:48Z",
+      "side": 1,
+      "message": "This should happen in main.rs; it\u0027s a once per process thing.\nSlightly surprised we don\u0027t already, but we should do it there.",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 38
+      },
+      "revId": "c075a36d4360f2960a95b80c4c6b8e2d2a9eb8f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "becb8800_e1ad41a5",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-29T16:13:48Z",
+      "side": 1,
+      "message": "Failed to connect to VirtMgr",
+      "range": {
+        "startLine": 43,
+        "startChar": 45,
+        "endLine": 43,
+        "endChar": 70
+      },
+      "revId": "c075a36d4360f2960a95b80c4c6b8e2d2a9eb8f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20e96c53_1bf92a5d",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-29T16:13:48Z",
+      "side": 1,
+      "message": "This could usefully be a named constant. (And possibly configurable at some point.)\nWhy 300?",
+      "range": {
+        "startLine": 69,
+        "startChar": 19,
+        "endLine": 69,
+        "endChar": 22
+      },
+      "revId": "c075a36d4360f2960a95b80c4c6b8e2d2a9eb8f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60b51136_217ae172",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-29T16:13:48Z",
+      "side": 1,
+      "message": "You can omit a lot of the things above, can\u0027t you, since they are the defaults?",
+      "range": {
+        "startLine": 73,
+        "startChar": 5,
+        "endLine": 73,
+        "endChar": 28
+      },
+      "revId": "c075a36d4360f2960a95b80c4c6b8e2d2a9eb8f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9f01f8f_352a953a",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-29T16:13:48Z",
+      "side": 1,
+      "message": "You need to be a little careful here - VmInstance expects to handle callbacks from the VM, which it will never get, so the state will never be correct.\n(I guess you\u0027ll also need some polling loop to figure out if the VM\u0027s vsock is ready to connect to - or will we handle that as a connection from the VM to us?)",
+      "range": {
+        "startLine": 75,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 22
+      },
+      "revId": "c075a36d4360f2960a95b80c4c6b8e2d2a9eb8f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b751272_8c1b1853",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-29T16:13:48Z",
+      "side": 1,
+      "message": "This is a little obscure. Introduce some named variables to make it clearer what\u0027s being omitted?",
+      "range": {
+        "startLine": 75,
+        "startChar": 41,
+        "endLine": 75,
+        "endChar": 63
+      },
+      "revId": "c075a36d4360f2960a95b80c4c6b8e2d2a9eb8f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03dcb277_5824d7c6",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-29T16:13:48Z",
+      "side": 1,
+      "message": "Something to worry about, if probably not now: What if for whatever reason we are unable to start the VM with the existing instance image? In those circumstances we should probably delete it \u0026 start again.",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 5
+      },
+      "revId": "c075a36d4360f2960a95b80c4c6b8e2d2a9eb8f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "871a22b6_2fd8eeb2",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-29T16:13:48Z",
+      "side": 1,
+      "message": "Extract to the top, along with the memory MiB.\nWhy did you choose this size?",
+      "range": {
+        "startLine": 95,
+        "startChar": 3,
+        "endLine": 95,
+        "endChar": 56
+      },
+      "revId": "c075a36d4360f2960a95b80c4c6b8e2d2a9eb8f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
