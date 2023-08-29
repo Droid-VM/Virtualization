@@ -138,6 +138,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b75e125a_db2ac785",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-29T12:58:22Z",
+      "side": 1,
+      "message": "\u003e\u003e Let\u0027s move initializeWritablePartition() to a library first,\n\n\u003e Agreed.\n\nActually, wait. Why doesn\u0027t VS just call IVirtualizationService#initializeWritablePartition?\n\nVirt Mgr doesn\u0027t need to know that it\u0027s related to the service VM. And we expect VS to be a client of IVirtualizationService for virtual machine creation, which this relates to.",
+      "parentUuid": "b78964b2_2256032c",
+      "range": {
+        "startLine": 277,
+        "startChar": 8,
+        "endLine": 277,
+        "endChar": 13
+      },
+      "revId": "613bc1a5ba674762dbee8684876bdeef0d7f637d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b57c4e96_d6d81132",
         "filename": "virtualizationservice/aidl/android/system/virtualizationservice/IVirtualizationService.aidl",
         "patchSetId": 3
