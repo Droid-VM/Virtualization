@@ -55,7 +55,7 @@ pub type Cid = u32;
 pub const BINDER_SERVICE_IDENTIFIER: &str = "android.system.virtualizationservice";
 
 /// Directory in which to write disk image files used while running VMs.
-pub const TEMPORARY_DIRECTORY: &str = "/data/misc/virtualizationservice";
+pub const MISC_DIRECTORY: &str = "/data/misc/virtualizationservice";
 
 /// The first CID to assign to a guest VM managed by the VirtualizationService. CIDs lower than this
 /// are reserved for the host or other usage.
@@ -68,6 +68,10 @@ const CHUNK_RECV_MAX_LEN: usize = 1024;
 
 fn is_valid_guest_cid(cid: Cid) -> bool {
     (GUEST_CID_MIN..=GUEST_CID_MAX).contains(&cid)
+}
+
+pub fn temp_dir() -> PathBuf {
+    Path::new(MISC_DIRECTORY).join("tmp")
 }
 
 /// Singleton service for allocating globally-unique VM resources, such as the CID, and running
@@ -209,7 +213,7 @@ struct GlobalVmInstance {
 impl GlobalVmInstance {
     fn get_temp_dir(&self) -> PathBuf {
         let cid = self.cid;
-        format!("{TEMPORARY_DIRECTORY}/{cid}").into()
+        temp_dir().join(format!("{cid}"))
     }
 }
 

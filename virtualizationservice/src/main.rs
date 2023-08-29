@@ -19,7 +19,7 @@ mod atom;
 mod rkpvm;
 
 use crate::aidl::{
-    remove_temporary_dir, BINDER_SERVICE_IDENTIFIER, TEMPORARY_DIRECTORY,
+    remove_temporary_dir, BINDER_SERVICE_IDENTIFIER, temp_dir,
     VirtualizationServiceInternal
 };
 use android_logger::{Config, FilterBuilder};
@@ -64,7 +64,7 @@ fn main() {
 
 /// Remove any files under `TEMPORARY_DIRECTORY`.
 fn clear_temporary_files() -> Result<(), Error> {
-    for dir_entry in read_dir(TEMPORARY_DIRECTORY)? {
+    for dir_entry in read_dir(temp_dir())? {
         remove_temporary_dir(&dir_entry?.path())?
     }
     Ok(())
