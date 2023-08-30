@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d0899287_bed503bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-30T13:17:35Z",
+      "side": 1,
+      "message": "Strange, the partition is \"vm-instance\", which is included in `is_safe_app_partition()`, but I still failed in this function:\n```\nCaused by:\n    Status(-8, EX_SERVICE_SPECIFIC): \u0027-1: Failed to get certificate\n    \n    Caused by:\n        0: Failed to create service VM\n        1: Status(-8, EX_SERVICE_SPECIFIC): \u0027-1: Partition vm-instance invalid\n           \n           Caused by:\n               Label u:object_r:apex_module_data_file:s0 is not allowed\u0027\u0027\u0027\n```",
+      "parentUuid": "472041a0_51bca68b",
+      "revId": "0ed68f61610763915da7c3953b78df07bbb4aa2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e4ed9b4_cc773e4a",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 1
