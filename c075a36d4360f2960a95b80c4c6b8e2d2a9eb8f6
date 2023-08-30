@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d9f71b3_85f9bf55",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-30T09:48:01Z",
+      "side": 1,
+      "message": "OK, but I think it\u0027s important - partly because it\u0027s a little tricky, and mostly for system health reasons.",
+      "parentUuid": "723aa4c6_8cc77f95",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 38
+      },
+      "revId": "c075a36d4360f2960a95b80c4c6b8e2d2a9eb8f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ea33ffa_f51923b8",
@@ -330,6 +354,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8edd5d3_01eec761",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-30T09:48:01Z",
+      "side": 1,
+      "message": "VmInstance creates a callback \u0026 registers it with VirtMgr. I don\u0027t think there\u0027s necessarily a problem, but that code expects the callback to be invoked, which it won\u0027t be, so odd things may happen.",
+      "parentUuid": "10e1cf45_3402b56d",
+      "range": {
+        "startLine": 75,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 22
+      },
+      "revId": "c075a36d4360f2960a95b80c4c6b8e2d2a9eb8f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03dcb277_5824d7c6",
@@ -379,6 +427,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f0c57a95_ee956010",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-30T09:48:01Z",
+      "side": 1,
+      "message": "Then you can never recover. \nGenerating a new VM secret invalidates the blob, but that will fix itself next time rkpd talks to us, won\u0027t it?",
+      "parentUuid": "c0a231d2_4fa76557",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 5
+      },
+      "revId": "c075a36d4360f2960a95b80c4c6b8e2d2a9eb8f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "871a22b6_2fd8eeb2",
         "filename": "virtualizationservice/src/service_vm.rs",
         "patchSetId": 5
@@ -414,6 +486,30 @@
       "side": 1,
       "message": "Done. I noticed that for ordinary VM this is 10MB[1], I don\u0027t think it needs to be so big for the service VM. Since only pvmfw saves the encrypted VM secret in it, I chose a smaller size. It\u0027s probably still too big for the current usage. Would you like to make it even smaller?\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/javalib/src/android/system/virtualmachine/VirtualMachine.java;l\u003d197;drc\u003d29526dd8c067e8b7635d9fbf0e3e542c76f251da",
       "parentUuid": "871a22b6_2fd8eeb2",
+      "range": {
+        "startLine": 95,
+        "startChar": 3,
+        "endLine": 95,
+        "endChar": 56
+      },
+      "revId": "c075a36d4360f2960a95b80c4c6b8e2d2a9eb8f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acb9e1a0_e1acc78a",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-30T09:48:01Z",
+      "side": 1,
+      "message": "The instance image only lazily grows to the maximum size, so it probably doesn\u0027t matter much.\nI think we should be able to tune down the Memory MiB, but that\u0027s not urgent.",
+      "parentUuid": "bc8055a2_7d2fdaea",
       "range": {
         "startLine": 95,
         "startChar": 3,
