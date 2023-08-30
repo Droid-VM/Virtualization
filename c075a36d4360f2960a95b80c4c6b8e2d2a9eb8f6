@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "723aa4c6_8cc77f95",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-30T08:37:39Z",
+      "side": 1,
+      "message": "Sure. Thanks for the pointer. I\u0027ll address that in a subsequent cl. This one focuses on reusing the same instance image file across different VMs. I added a TODO here.",
+      "parentUuid": "d4c1ecfd_8c702af0",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 38
+      },
+      "revId": "c075a36d4360f2960a95b80c4c6b8e2d2a9eb8f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ea33ffa_f51923b8",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-08-29T16:13:48Z",
       "side": 1,
       "message": "This should happen in main.rs; it\u0027s a once per process thing.\nSlightly surprised we don\u0027t already, but we should do it there.",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 38
+      },
+      "revId": "c075a36d4360f2960a95b80c4c6b8e2d2a9eb8f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27406c98_ba4f0351",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-30T08:37:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ea33ffa_f51923b8",
       "range": {
         "startLine": 39,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f05a768d_0cfbfdef",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-30T08:37:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "becb8800_e1ad41a5",
+      "range": {
+        "startLine": 43,
+        "startChar": 45,
+        "endLine": 43,
+        "endChar": 70
+      },
+      "revId": "c075a36d4360f2960a95b80c4c6b8e2d2a9eb8f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20e96c53_1bf92a5d",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f9f86f3_e0d83622",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-30T08:37:39Z",
+      "side": 1,
+      "message": "Done. No particular reason. It worked in the rialto test, then I copied it here. I think we can optimize all these parameters (memory, instance image etc) once we make everything work.",
+      "parentUuid": "20e96c53_1bf92a5d",
+      "range": {
+        "startLine": 69,
+        "startChar": 19,
+        "endLine": 69,
+        "endChar": 22
+      },
+      "revId": "c075a36d4360f2960a95b80c4c6b8e2d2a9eb8f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60b51136_217ae172",
@@ -106,6 +202,30 @@
       "writtenOn": "2023-08-29T16:13:48Z",
       "side": 1,
       "message": "You can omit a lot of the things above, can\u0027t you, since they are the defaults?",
+      "range": {
+        "startLine": 73,
+        "startChar": 5,
+        "endLine": 73,
+        "endChar": 28
+      },
+      "revId": "c075a36d4360f2960a95b80c4c6b8e2d2a9eb8f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc76aeed_7c5a7fe4",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-30T08:37:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60b51136_217ae172",
       "range": {
         "startLine": 73,
         "startChar": 5,
@@ -162,6 +282,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14bf9435_adf16a4e",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-30T08:37:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b751272_8c1b1853",
+      "range": {
+        "startLine": 75,
+        "startChar": 41,
+        "endLine": 75,
+        "endChar": 63
+      },
+      "revId": "c075a36d4360f2960a95b80c4c6b8e2d2a9eb8f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10e1cf45_3402b56d",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-30T08:37:39Z",
+      "side": 1,
+      "message": "I don\u0027t need a callback for the moment.\n\nAbout the vsock connection, we can handle it as a connection from the VM to the host as in the rialto test [1].\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/rialto/tests/test.rs;l\u003d135;drc\u003d748b032fb17d902378d523505413885943cc93dc",
+      "parentUuid": "d9f01f8f_352a953a",
+      "range": {
+        "startLine": 75,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 22
+      },
+      "revId": "c075a36d4360f2960a95b80c4c6b8e2d2a9eb8f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03dcb277_5824d7c6",
@@ -187,6 +355,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c0a231d2_4fa76557",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-30T08:37:39Z",
+      "side": 1,
+      "message": "There\u0027s a problem if we start with a new instance image in this case: Since with the new instance image pvmfw will generate a new VM secret, we will not have the same sealing CDI in the service VM to decrypt the key blob. In that case it\u0027s better to break directly here when we failed to open the existing image.",
+      "parentUuid": "03dcb277_5824d7c6",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 5
+      },
+      "revId": "c075a36d4360f2960a95b80c4c6b8e2d2a9eb8f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "871a22b6_2fd8eeb2",
         "filename": "virtualizationservice/src/service_vm.rs",
         "patchSetId": 5
@@ -198,6 +390,30 @@
       "writtenOn": "2023-08-29T16:13:48Z",
       "side": 1,
       "message": "Extract to the top, along with the memory MiB.\nWhy did you choose this size?",
+      "range": {
+        "startLine": 95,
+        "startChar": 3,
+        "endLine": 95,
+        "endChar": 56
+      },
+      "revId": "c075a36d4360f2960a95b80c4c6b8e2d2a9eb8f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc8055a2_7d2fdaea",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-30T08:37:39Z",
+      "side": 1,
+      "message": "Done. I noticed that for ordinary VM this is 10MB[1], I don\u0027t think it needs to be so big for the service VM. Since only pvmfw saves the encrypted VM secret in it, I chose a smaller size. It\u0027s probably still too big for the current usage. Would you like to make it even smaller?\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/javalib/src/android/system/virtualmachine/VirtualMachine.java;l\u003d197;drc\u003d29526dd8c067e8b7635d9fbf0e3e542c76f251da",
+      "parentUuid": "871a22b6_2fd8eeb2",
       "range": {
         "startLine": 95,
         "startChar": 3,
