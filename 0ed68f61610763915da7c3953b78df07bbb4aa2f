@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7fd21e88_30870f6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-30T10:03:29Z",
+      "side": 1,
+      "message": "\u003e An alternative would be to leave this misc dir alone, and use /data/apex/com.android.virt for things that aren\u0027t intended to be wiped on boot. You\u0027ll need to do some sepolicy work for that though.\n\nHonestly I think this is your best option.",
+      "parentUuid": "137d51c1_045ef3ef",
+      "revId": "0ed68f61610763915da7c3953b78df07bbb4aa2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e4ed9b4_cc773e4a",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 1
