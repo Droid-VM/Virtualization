@@ -33,6 +33,75 @@
       "message": "Looks like you need to add sepolicy for your new HAL:\n\n08-30 12:11:50.976   188   188 I auditd  : avc:  denied  { find } for pid\u003d3372 uid\u003d10101 name\u003dandroid.hardware.security.keymint.IRemotelyProvisionedComponent/avf scontext\u003du:r:rkpdapp:s0:c101,c256,c512,c768 tcontext\u003du:object_r:default_android_service:s0 tclass\u003dservice_manager permissive\u003d0\n\n\nAnd we\u0027re going to have to figure out how to put this behind a flag.",
       "revId": "d7f70997f33e048fe66be64d7bd44455682761de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0ba7963_34536e12",
+        "filename": "apex/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-08-30T13:41:18Z",
+      "side": 1,
+      "message": "Ideally we should only add this if the rkpd feature is ready...",
+      "range": {
+        "startLine": 65,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 6
+      },
+      "revId": "d7f70997f33e048fe66be64d7bd44455682761de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1083a79_2ddbc9f7",
+        "filename": "apex/virtualizationservice.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-08-30T13:41:18Z",
+      "side": 1,
+      "message": "Ideally we should only include this line if feature is ready...",
+      "range": {
+        "startLine": 20,
+        "startChar": 4,
+        "endLine": 20,
+        "endChar": 86
+      },
+      "revId": "d7f70997f33e048fe66be64d7bd44455682761de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d44e4f0_9e569c74",
+        "filename": "virtualizationservice/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-08-30T13:41:18Z",
+      "side": 1,
+      "message": "Remove? We are not joining threadpool after this line anymore",
+      "range": {
+        "startLine": 64,
+        "startChar": 41,
+        "endLine": 64,
+        "endChar": 59
+      },
+      "revId": "d7f70997f33e048fe66be64d7bd44455682761de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
