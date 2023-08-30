@@ -451,6 +451,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "11781826_50d567cf",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-30T12:00:23Z",
+      "side": 1,
+      "message": "It depends on who starts the service VM.\n\n1. If the the client VM, then it serves nothing to use a new instance image. It will still crash later since it won\u0027t be able to decrypt any key_blob fetched from rkpd. In this case, it\u0027s better to fail early at this point.\n2. If it\u0027s rkpd, then we can take a new instance image and also invalidates all the previous keys in rkpd\u0027s pool.\n\nWe can implement 2. once we have the second the entry point for the service VM.",
+      "parentUuid": "f0c57a95_ee956010",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 5
+      },
+      "revId": "c075a36d4360f2960a95b80c4c6b8e2d2a9eb8f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "871a22b6_2fd8eeb2",
         "filename": "virtualizationservice/src/service_vm.rs",
         "patchSetId": 5
