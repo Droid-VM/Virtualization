@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a7e12647_fcf773d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-30T12:51:23Z",
+      "side": 1,
+      "message": "Ah, sorry, I was misremembering the path.\n\nI meant /data/misc/apexdata/com.android.virt (which does already exist - apexd creates it).\n\n/data/misc/apexdata is supposed to be for APEXes to store their data - we used /data/misc/virtualizationservice because we didn\u0027t realize that, and then it was too late to change: b/200912937. But we can leave the existing files where they are and use it for new things.\n\nWe will probably want to change the sepolicy for it though - by default it is labeled apex_module_data_file which isn\u0027t that helpful. apex_compos_data_file is an example where we did that.",
+      "parentUuid": "13f00c80_4fc9268c",
+      "revId": "0ed68f61610763915da7c3953b78df07bbb4aa2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e4ed9b4_cc773e4a",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 1
