@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2410641_385d6aeb",
+        "filename": "apex/virtualizationservice.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-30T11:43:08Z",
+      "side": 1,
+      "message": "Done. Thanks for the pointer.",
+      "parentUuid": "0b1bc82c_f3f3eaa5",
+      "range": {
+        "startLine": 1,
+        "startChar": 30,
+        "endLine": 1,
+        "endChar": 36
+      },
+      "revId": "f9b02b16afbf663f8ef37189fef7362759da7465",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff8bb9e9_e9eeb0ca",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-08-29T14:34:42Z",
       "side": 1,
       "message": "Should this be rkpvm?",
+      "range": {
+        "startLine": 5,
+        "startChar": 46,
+        "endLine": 5,
+        "endChar": 49
+      },
+      "revId": "f9b02b16afbf663f8ef37189fef7362759da7465",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8b43dee_43bfdbcb",
+        "filename": "apex/virtualizationservice.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-30T11:43:08Z",
+      "side": 1,
+      "message": "I feel it\u0027s more clear with `avf`. It\u0027s easier for people from other teams to understand where this impl is from. The HAL is implemented in the AVF framework, RKP VM is mostly an internal detail for remote attestation.",
+      "parentUuid": "ff8bb9e9_e9eeb0ca",
       "range": {
         "startLine": 5,
         "startChar": 46,
@@ -81,6 +129,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74514b39_8baeaa68",
+        "filename": "apex/virtualizationservice.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-30T11:43:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "890f20b7_1f38f961",
+      "revId": "f9b02b16afbf663f8ef37189fef7362759da7465",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4d92ee8_a23282c8",
@@ -94,6 +160,30 @@
       "writtenOn": "2023-08-29T14:34:42Z",
       "side": 1,
       "message": "Can we have a different name? RPC is a little ambiguous.\nremote_provisioning?",
+      "range": {
+        "startLine": 20,
+        "startChar": 4,
+        "endLine": 20,
+        "endChar": 7
+      },
+      "revId": "f9b02b16afbf663f8ef37189fef7362759da7465",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38370d3f_dabd22d5",
+        "filename": "virtualizationservice/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-30T11:43:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4d92ee8_a23282c8",
       "range": {
         "startLine": 20,
         "startChar": 4,
@@ -127,6 +217,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a62967f_4f1ad563",
+        "filename": "virtualizationservice/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-30T11:43:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6415d88e_61cec679",
+      "range": {
+        "startLine": 64,
+        "startChar": 7,
+        "endLine": 64,
+        "endChar": 45
+      },
+      "revId": "f9b02b16afbf663f8ef37189fef7362759da7465",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3239ff10_a84b6bf6",
@@ -140,6 +254,30 @@
       "writtenOn": "2023-08-29T14:34:42Z",
       "side": 1,
       "message": "This could do with a more explicit name too.\n(And we should probably rename the existing service, since it\u0027s now ambiguous.)",
+      "range": {
+        "startLine": 65,
+        "startChar": 8,
+        "endLine": 65,
+        "endChar": 19
+      },
+      "revId": "f9b02b16afbf663f8ef37189fef7362759da7465",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95ed201a_da3e1a46",
+        "filename": "virtualizationservice/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-30T11:43:08Z",
+      "side": 1,
+      "message": "Renamed",
+      "parentUuid": "3239ff10_a84b6bf6",
       "range": {
         "startLine": 65,
         "startChar": 8,
@@ -173,6 +311,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c894ab9_45003b70",
+        "filename": "virtualizationservice/src/rpc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-30T11:43:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d578db84_cefe2963",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 74
+      },
+      "revId": "f9b02b16afbf663f8ef37189fef7362759da7465",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31081372_f3452ef8",
@@ -186,6 +348,30 @@
       "writtenOn": "2023-08-29T14:34:42Z",
       "side": 1,
       "message": "Consider logging whenever you return an error from a Binder call.\n(Possibly using Jiyong\u0027s new .with_log() method: https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/avflog/src/lib.rs;drc\u003dd7bd2f259b547ec25e3c64c0e740366164b07a6b;l\u003d27)\n\nHis IntoBinderResult may also be useful in the future.",
+      "range": {
+        "startLine": 61,
+        "startChar": 7,
+        "endLine": 61,
+        "endChar": 78
+      },
+      "revId": "f9b02b16afbf663f8ef37189fef7362759da7465",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c37f07ee_dc85bf54",
+        "filename": "virtualizationservice/src/rpc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-08-30T11:43:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31081372_f3452ef8",
       "range": {
         "startLine": 61,
         "startChar": 7,
