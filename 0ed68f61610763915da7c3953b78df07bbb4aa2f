@@ -128,6 +128,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "761da109_3ccbd2dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-30T13:24:39Z",
+      "side": 1,
+      "message": "Ahhhhhhhh - that\u0027s because this is a custom VM not an app VM: https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/virtualizationmanager/src/aidl.rs;drc\u003dd7bd2f259b547ec25e3c64c0e740366164b07a6b;l\u003d389\n\nBut, even a custom VM will have a vm-instance, which can\u0027t (easily) be used to smuggle code in, since it\u0027s accessed by pvmfw.\n\nSo I think we should add a is_safe_raw_partition() which allows only vm-instance.",
+      "parentUuid": "d0899287_bed503bd",
+      "revId": "0ed68f61610763915da7c3953b78df07bbb4aa2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e4ed9b4_cc773e4a",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 1
