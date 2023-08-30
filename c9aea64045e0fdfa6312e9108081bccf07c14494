@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c84ad9c_1b4df627",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-08-30T15:20:29Z",
+      "side": 1,
+      "message": "So `PvmfwHostTestCases` will be dedicated to tests running with a modified (\"custom\") pvmfw image (`--protected-vm-with-firmware`) but `MicrodroidHostTestCases` will still contain tests for pvmfw, as long as they target the one provided by the hypervisor (e.g. `MicrodroidHostTests#protectedVmRunsPvmfw`), correct?",
+      "range": {
+        "startLine": 13,
+        "startChar": 16,
+        "endLine": 13,
+        "endChar": 34
+      },
+      "revId": "c9aea64045e0fdfa6312e9108081bccf07c14494",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
