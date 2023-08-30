@@ -41,11 +41,6 @@ use std::process::Command;
 use std::time::SystemTime;
 use vmconfig::open_parcel_file;
 
-/// The list of APEXes which microdroid requires.
-// TODO(b/192200378) move this to microdroid.json?
-const MICRODROID_REQUIRED_APEXES: [&str; 1] = ["com.android.os.statsd"];
-const MICRODROID_REQUIRED_APEXES_DEBUG: [&str; 1] = ["com.android.adbd"];
-
 const APEX_INFO_LIST_PATH: &str = "/apex/apex-info-list.xml";
 
 const PACKAGE_MANAGER_NATIVE_SERVICE: &str = "package_native";
@@ -395,17 +390,17 @@ fn collect_apex_infos<'a>(
     apex_configs: &[ApexConfig],
     debug_config: &DebugConfig,
 ) -> Result<Vec<&'a ApexInfo>> {
-    let mut additional_apexes: Vec<&str> = MICRODROID_REQUIRED_APEXES.to_vec();
-    if debug_config.should_include_debug_apexes() {
-        additional_apexes.extend(MICRODROID_REQUIRED_APEXES_DEBUG.to_vec());
-    }
+    // APEXes which any Microdroid VM needs.
+    // TODO(b/192200378) move this to microdroid.json?
+    let required_apexes: &[_] =
+        if debug_config.should_include_debug_apexes() { &["com.android.adbd"] } else { &[] };
 
     let apex_infos = apex_list
         .list
         .iter()
         .filter(|ai| {
             apex_configs.iter().any(|cfg| ai.matches(cfg) && ai.is_active)
-                || additional_apexes.iter().any(|name| name == &ai.name && ai.is_active)
+                || required_apexes.iter().any(|name| name == &ai.name && ai.is_active)
                 || ai.provide_shared_apex_libs
         })
         .collect();
