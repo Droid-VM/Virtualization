@@ -105,6 +105,30 @@
       },
       "revId": "80850dd5ac0fa19f5af8db013c35fa3000b74231",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81bc7057_35c4f50a",
+        "filename": "microdroid/linker.config.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-08-31T14:29:28Z",
+      "side": 1,
+      "message": "These are libraries that the platform (i.e. part of Microdroid or Android that is not packaged as APEXes) expects from APEXes. \n\nIf removing those adbd libs didn\u0027t cause any problem, it means that there\u0027s no reference to the libs from outside of the adbd APEX (in the current Microdroid implementation). \n\nIn other words, having these is not necessary, but isn\u0027t harmful as well.",
+      "parentUuid": "8d8572f7_294a5026",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 2
+      },
+      "revId": "80850dd5ac0fa19f5af8db013c35fa3000b74231",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
