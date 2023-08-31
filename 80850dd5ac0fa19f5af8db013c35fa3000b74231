@@ -81,6 +81,30 @@
       },
       "revId": "80850dd5ac0fa19f5af8db013c35fa3000b74231",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d8572f7_294a5026",
+        "filename": "microdroid/linker.config.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-31T13:49:32Z",
+      "side": 1,
+      "message": "Actually that\u0027s not quite true. In /linkerconfig/ld.config.txt (without this change) we have\n```\nnamespace.default.link.com_android_adbd.shared_libs \u003d libadb_pairing_auth.so:libadb_pairing_connection.so:libadb_pairing_server.so\n```\n\nAnd in /apex/com.android/adbd/lib64 we do have those libraries.\n\nOTOH adb is working just fine when I remove the linkerconfig. Which suggests they aren\u0027t needed in our configuration?",
+      "parentUuid": "3a28c718_470f8e93",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 2
+      },
+      "revId": "80850dd5ac0fa19f5af8db013c35fa3000b74231",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
