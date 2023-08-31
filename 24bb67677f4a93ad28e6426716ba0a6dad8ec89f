@@ -71,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0cecc74_8872523c",
+        "filename": "libs/dice_policy/TEST_MAPPING",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-31T16:36:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9b633a1_5ce8ec5e",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 1
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6555b132_b890001b",
@@ -254,6 +278,30 @@
         "startChar": 7,
         "endLine": 37,
         "endChar": 22
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67323b19_2268157c",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-31T16:36:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e84f959_50376394",
+      "range": {
+        "startLine": 37,
+        "startChar": 23,
+        "endLine": 37,
+        "endChar": 26
       },
       "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -589,6 +637,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02093ff7_5a003159",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-31T16:36:22Z",
+      "side": 1,
+      "message": "I generalised it to take keys_to_copy \u0026 construct any policy.",
+      "parentUuid": "92f7e8ae_de876b7f",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 82
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d475ca3d_d0547000",
@@ -626,6 +698,30 @@
       "side": 1,
       "message": "Ack. WIP. That may change the serialize_into_cbor() function, unless we directly serialize the while DicePolicy object",
       "parentUuid": "d475ca3d_d0547000",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 12
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed727e7f_5393fd50",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-31T16:36:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cc3aafb_982cba29",
       "range": {
         "startLine": 63,
         "startChar": 0,
@@ -697,6 +793,30 @@
       "side": 1,
       "message": "I think you should be able to use \u0026Value rather then Value, and just avoid into_array etc.\n\nYou should be able to create e.g. fn get_array(\u0026Value) -\u003e Result\u003c\u0026[Value]\u003e.",
       "parentUuid": "a0639a15_70a1ffda",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 9
+      },
+      "revId": "24bb67677f4a93ad28e6426716ba0a6dad8ec89f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96d4d1f1_e2c6d117",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-31T16:36:22Z",
+      "side": 1,
+      "message": "The function `CoseSign1::from_cbor_value` which is nested deep in these function calls do not take \u0026Value (but only Value), makes this tricky.",
+      "parentUuid": "da0f5c73_e0c36aa8",
       "range": {
         "startLine": 130,
         "startChar": 0,

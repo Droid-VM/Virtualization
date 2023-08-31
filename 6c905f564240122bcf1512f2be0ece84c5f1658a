@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c849758_8dc326c6",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-31T16:36:22Z",
+      "side": 1,
+      "message": "Yeah, that does simplify things a bit. I changed them to i64. Thanks.",
+      "parentUuid": "8f7af3e4_2a40ef37",
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81c7d27f_eee515b5",
@@ -106,6 +124,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8de1c10_9e96c906",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-31T16:36:22Z",
+      "side": 1,
+      "message": "Yes the value of config descriptor itself is `bstr` type that needs to be unwrapped into map types.\n\nSee fn `get_map_from_value` in the latest patchset.",
+      "parentUuid": "262b95b5_966f857d",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 27
+      },
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57010a76_1dafb77a",
@@ -119,6 +161,30 @@
       "writtenOn": "2023-08-24T15:39:45Z",
       "side": 1,
       "message": "node",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 8
+      },
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fbc3e9e_27035e71",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-31T16:36:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57010a76_1dafb77a",
       "range": {
         "startLine": 70,
         "startChar": 4,
@@ -152,6 +218,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a7ee818_8bca1c79",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-31T16:36:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0bc2f35f_dab97db4",
+      "range": {
+        "startLine": 77,
+        "startChar": 65,
+        "endLine": 77,
+        "endChar": 75
+      },
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df04a17a_535b7560",
@@ -169,6 +259,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b50da667_be8bdfac",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-31T16:36:22Z",
+      "side": 1,
+      "message": "It was from back from the time I thought CBOR Value is so flexible \u0026 cool. \nI now think, it adds unnecessary complications \u0026 so have changed into [vec\u003cint\u003e]. Further, I moved it out of this method, so the library doesn\u0027t have the keys_to_copy hardcoded.",
+      "parentUuid": "df04a17a_535b7560",
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aaac873e_5eec32e9",
@@ -182,6 +290,24 @@
       "writtenOn": "2023-08-25T00:07:31Z",
       "side": 1,
       "message": "The policy code",
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1020da9_9ce8f71c",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-31T16:36:22Z",
+      "side": 1,
+      "message": "This seems like an incomplete comment. Plz reopen.",
+      "parentUuid": "aaac873e_5eec32e9",
       "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -209,6 +335,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ccae3d1_9e9768c3",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-31T16:36:22Z",
+      "side": 1,
+      "message": "I should actually convert it to explicit_key Dice chain format \u0026 use bstr as the value. Let me do that in a following patch. Fixed the comment.",
+      "parentUuid": "4b577743_8ef09db0",
+      "range": {
+        "startLine": 92,
+        "startChar": 60,
+        "endLine": 92,
+        "endChar": 82
+      },
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eff2c24a_7445ba5e",
@@ -222,6 +372,30 @@
       "writtenOn": "2023-08-24T15:39:45Z",
       "side": 1,
       "message": "Can you explain keys_to_copy?",
+      "range": {
+        "startLine": 132,
+        "startChar": 42,
+        "endLine": 132,
+        "endChar": 54
+      },
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7855827e_44f41097",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-31T16:36:22Z",
+      "side": 1,
+      "message": "Done (as an argument to the method)",
+      "parentUuid": "eff2c24a_7445ba5e",
       "range": {
         "startLine": 132,
         "startChar": 42,
@@ -279,6 +453,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a44c707_ddd5f551",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-31T16:36:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45bb6596_326ec442",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 1
+      },
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85aedba8_6931ff13",
@@ -310,6 +508,24 @@
       "side": 1,
       "message": "Wow, I don\u0027t think I\u0027d ever noticed that in the CBOR RFC.",
       "parentUuid": "85aedba8_6931ff13",
+      "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72888342_850796eb",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-08-31T16:36:22Z",
+      "side": 1,
+      "message": "I\u0027ve added the test `policy_dice_size_is_same` to comprehensively check the resulting policy structure.\n\nI don\u0027t think cbor-diag could be much useful as it for nested cbor strutures in dice chain. Please do let me know if you have ideas on more comprehensive coverage.",
+      "parentUuid": "b8604ff0_af5a1f65",
       "revId": "6c905f564240122bcf1512f2be0ece84c5f1658a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
