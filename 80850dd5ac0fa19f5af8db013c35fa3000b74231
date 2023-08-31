@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "263a514c_98c7d260",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-31T10:07:55Z",
+      "side": 1,
+      "message": "Done. (I switched to a map to avoid renumbering, and to try to make things clearer.)",
+      "parentUuid": "03c51a77_d6bf47f2",
+      "revId": "80850dd5ac0fa19f5af8db013c35fa3000b74231",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a3ba3e4_5c14250f",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-08-30T23:19:55Z",
       "side": 1,
       "message": "why? not all of the libs on the left side are from statsd apex",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 2
+      },
+      "revId": "80850dd5ac0fa19f5af8db013c35fa3000b74231",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a28c718_470f8e93",
+        "filename": "microdroid/linker.config.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-08-31T10:07:55Z",
+      "side": 1,
+      "message": "I tried to explain in the commit message:\n- AFAICT none of these libraries are actually present in Microdroid (well, in /system/lib64 anyway);\n- None of them seem to be mentioned in the generated ld.config files;\n- Removing them didn\u0027t break anything.\n\nBut I don\u0027t entirely understand what this was doing, so it\u0027s entirely possible I\u0027ve missed something.",
+      "parentUuid": "6a3ba3e4_5c14250f",
       "range": {
         "startLine": 1,
         "startChar": 0,
