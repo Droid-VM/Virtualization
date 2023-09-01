@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3eb38bbd_6f98a5c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-09-01T12:53:12Z",
+      "side": 1,
+      "message": "I think so, we are basically following their recommendation \"If aconfig doesn\u0027t work for you, then use build time flags\". Since we are conditionally changing the content of the microdroid system image, we can\u0027t use aconfig.",
+      "parentUuid": "2dc28ecc_f13fa7bf",
+      "revId": "3973d389ccb25f461814841f107b526cb9dea97e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7093657c_2c7829e1",
