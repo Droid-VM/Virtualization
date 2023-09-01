@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "80580fcf_d741d227",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-01T15:10:43Z",
+      "side": 1,
+      "message": "Hmm, Thinking more on this, I think key_path makes it sound like a path to key, while this is the key in the key-value sense. I\u0027m leaving it KeySpec for now.\n\n@paulcrowley@google.com wdyt?",
+      "parentUuid": "5245db73_4faa5686",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 22
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6086d2c2_3367e0b9",
         "filename": "libs/dice_policy/src/lib.rs",
         "patchSetId": 6
@@ -37,6 +61,30 @@
       "writtenOn": "2023-09-01T09:50:01Z",
       "side": 1,
       "message": "Is this still true?",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 36
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a81f027c_b29664ab",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-01T15:10:43Z",
+      "side": 1,
+      "message": "Yes, atleast the value corresponding to the KeySpec should be restricted to `bool / int / tstr / bstr`.\n\nI have not restricted it yet (because I am allowing it to be CBOR map for the first node). Its in the TODO(b/291238565) \u0026 can only be done once this library support conversion to Explicit-key DiceCertChain, which is also a TODO(b/298217847). I will do it the following patches.",
+      "parentUuid": "6086d2c2_3367e0b9",
       "range": {
         "startLine": 53,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a8d9451_cfb54eb6",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-01T15:10:43Z",
+      "side": 1,
+      "message": "As discussed offline, lets introduce the pub enum `ConstraintIdentifier`, change the data struct for `keys_to_copy`, but keep the `NodeConstraints` same, removing the need for custom serializer/deserializer. The later is impl detail of the library anyway and not visible to caller.",
+      "parentUuid": "b8902394_00b9bdd7",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 54
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0fa6141_b983735c",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-09-01T09:50:01Z",
       "side": 1,
       "message": "This could do with a comment.\nDo you really need 64 bits?",
+      "range": {
+        "startLine": 70,
+        "startChar": 28,
+        "endLine": 70,
+        "endChar": 50
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14906f78_1072da5a",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-01T15:10:43Z",
+      "side": 1,
+      "message": "Ive converted ConstraintIdentifier to enum, but I used 64 bits wherever possible, the cbor label can be large, so I think its better not to restrict those.",
+      "parentUuid": "f0fa6141_b983735c",
       "range": {
         "startLine": 70,
         "startChar": 28,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27e329e2_fa8eba94",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-01T15:10:43Z",
+      "side": 1,
+      "message": "lets call it constraint_spec, which is a list of (ConstraintIdentifier, KeySpec) tuple.",
+      "parentUuid": "0a874ea6_8c520452",
+      "range": {
+        "startLine": 89,
+        "startChar": 9,
+        "endLine": 89,
+        "endChar": 21
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c493dfc5_08f2758a",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-09-01T09:50:01Z",
       "side": 1,
       "message": "key -\u003e keySpec, or path",
+      "range": {
+        "startLine": 91,
+        "startChar": 13,
+        "endLine": 91,
+        "endChar": 16
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76c88cb5_ed5379f1",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-01T15:10:43Z",
+      "side": 1,
+      "message": "Keeping it KeySpec. Thanks",
+      "parentUuid": "c493dfc5_08f2758a",
       "range": {
         "startLine": 91,
         "startChar": 13,
@@ -162,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "078b5353_954cf681",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-01T15:10:43Z",
+      "side": 1,
+      "message": "No more valid comment",
+      "parentUuid": "5b63f9da_c2fdd71e",
+      "range": {
+        "startLine": 147,
+        "startChar": 51,
+        "endLine": 147,
+        "endChar": 75
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ee6627c_39ed7072",
@@ -175,6 +343,30 @@
       "writtenOn": "2023-09-01T09:50:01Z",
       "side": 1,
       "message": "These could be made identical (I don\u0027t understand why you have clone in one branch not the other), so you could merge them into one.",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 13
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a24b5ff1_0ba09434",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-01T15:10:43Z",
+      "side": 1,
+      "message": "You\u0027re right, simplifies this method so much.",
+      "parentUuid": "0ee6627c_39ed7072",
       "range": {
         "startLine": 153,
         "startChar": 0,
@@ -208,6 +400,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fc4cae6_2197b30a",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-01T15:10:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74ed1f0b_cd2b0f6b",
+      "range": {
+        "startLine": 176,
+        "startChar": 79,
+        "endLine": 176,
+        "endChar": 82
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5ff3632_50128036",
@@ -221,6 +437,30 @@
       "writtenOn": "2023-09-01T09:50:01Z",
       "side": 1,
       "message": "Hmm. So you\u0027re making the \"unwrap .bstr cbor\" implicit rather than explicit?",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 185,
+        "endChar": 68
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6da2295a_3c6ada78",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-01T15:10:43Z",
+      "side": 1,
+      "message": "Yes, its a cleaner approach I think",
+      "parentUuid": "f5ff3632_50128036",
       "range": {
         "startLine": 183,
         "startChar": 0,
@@ -254,6 +494,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc06abad_47f942cc",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-01T15:10:43Z",
+      "side": 1,
+      "message": "map is a reference (\u0026Vec\u003c(Value, Value)\u003e) while this func will return Vec\u003c(Value, Value)\u003e because of restriction put by `value_from_bytes`\u0027s return value.\n\nHence I think I will need to clone.",
+      "parentUuid": "a2b4ce57_a333a856",
+      "range": {
+        "startLine": 186,
+        "startChar": 30,
+        "endLine": 186,
+        "endChar": 41
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73928e41_23ecab57",
@@ -267,6 +531,30 @@
       "writtenOn": "2023-09-01T09:50:01Z",
       "side": 1,
       "message": "This could take a reference to a slice",
+      "range": {
+        "startLine": 191,
+        "startChar": 28,
+        "endLine": 191,
+        "endChar": 47
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b1c0ba2_c9fc2ea8",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-01T15:10:43Z",
+      "side": 1,
+      "message": "You\u0027re right. This one can, I changed it (\u0026 it will it return a reference too). \n\nBut `get_map_from_value` \u0026 caller of that function cannot return reference because of `value_from_bytes()` return a Value. PTAL.",
+      "parentUuid": "73928e41_23ecab57",
       "range": {
         "startLine": 191,
         "startChar": 28,
