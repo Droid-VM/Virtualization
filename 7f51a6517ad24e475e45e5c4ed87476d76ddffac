@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc8b3a18_c0436328",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-01T15:33:14Z",
+      "side": 1,
+      "message": "I was thinking just path, not key_path. \nIf you want it double-barreled, maybe value_path, constraint_path?\n\n(I dislike keySpec because it doesn\u0027t specify a key, and key is potentially ambiguous in this context; also we mentioned the key might sometimes be an array index which isn\u0027t exactly a key.)",
+      "parentUuid": "80580fcf_d741d227",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 22
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6086d2c2_3367e0b9",
         "filename": "libs/dice_policy/src/lib.rs",
         "patchSetId": 6
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Yes, atleast the value corresponding to the KeySpec should be restricted to `bool / int / tstr / bstr`.\n\nI have not restricted it yet (because I am allowing it to be CBOR map for the first node). Its in the TODO(b/291238565) \u0026 can only be done once this library support conversion to Explicit-key DiceCertChain, which is also a TODO(b/298217847). I will do it the following patches.",
       "parentUuid": "6086d2c2_3367e0b9",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 36
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "478bb3ce_23abf917",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-01T15:33:14Z",
+      "side": 1,
+      "message": "I think you currently only allow ints in a keySpec, and keySpec if specified as [value+].",
+      "parentUuid": "a81f027c_b29664ab",
       "range": {
         "startLine": 53,
         "startChar": 0,
