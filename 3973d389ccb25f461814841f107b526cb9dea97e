@@ -16,6 +16,46 @@
       "message": "Have we reached to a consensus with the trunk stable team?",
       "revId": "3973d389ccb25f461814841f107b526cb9dea97e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "372b04bf_302f7f97",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-01T08:45:22Z",
+      "side": 1,
+      "message": "Looks pretty neat to me.",
+      "revId": "3973d389ccb25f461814841f107b526cb9dea97e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7093657c_2c7829e1",
+        "filename": "Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-01T08:45:22Z",
+      "side": 1,
+      "message": "Just to make sure I understand this: if we added another flag, we\u0027d keep these 2 rules, but add another entry to `bool_variables`, and to `soong_config_variables`?\nAnd then the total set of `cfgs` would depend on which variables were set?",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 1
+      },
+      "revId": "3973d389ccb25f461814841f107b526cb9dea97e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
