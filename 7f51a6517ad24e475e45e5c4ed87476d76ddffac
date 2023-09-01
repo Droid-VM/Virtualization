@@ -1,0 +1,280 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5245db73_4faa5686",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-01T09:50:01Z",
+      "side": 1,
+      "message": "With respect to Paul, I think \"path\" would be a better name.",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 22
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6086d2c2_3367e0b9",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-01T09:50:01Z",
+      "side": 1,
+      "message": "Is this still true?",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 36
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8902394_00b9bdd7",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-01T09:50:01Z",
+      "side": 1,
+      "message": "Could both of these be separate Rust unit-only enums, marked nonexhaustive?\nThat way the type system prevents using a constraint where a key is expected, or vice versa, and all the types will be clearer.\nAlthough you\u0027d need to either import the serde_repr crate or write your own serializer/deserializer for those types. Or pass around as enums and convert to/from the structs you are serializing?",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 54
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0fa6141_b983735c",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-01T09:50:01Z",
+      "side": 1,
+      "message": "This could do with a comment.\nDo you really need 64 bits?",
+      "range": {
+        "startLine": 70,
+        "startChar": 28,
+        "endLine": 70,
+        "endChar": 50
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a874ea6_8c520452",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-01T09:50:01Z",
+      "side": 1,
+      "message": "I feel this could do with a better name:\npaths_to_constrain\npath_constraints\nkey_specs_to_constrain\n\nSince each one is a constraint + a path.",
+      "range": {
+        "startLine": 89,
+        "startChar": 9,
+        "endLine": 89,
+        "endChar": 21
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c493dfc5_08f2758a",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-01T09:50:01Z",
+      "side": 1,
+      "message": "key -\u003e keySpec, or path",
+      "range": {
+        "startLine": 91,
+        "startChar": 13,
+        "endLine": 91,
+        "endChar": 16
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b63f9da_c2fdd71e",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-01T09:50:01Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 147,
+        "startChar": 51,
+        "endLine": 147,
+        "endChar": 75
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ee6627c_39ed7072",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-01T09:50:01Z",
+      "side": 1,
+      "message": "These could be made identical (I don\u0027t understand why you have clone in one branch not the other), so you could merge them into one.",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 13
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74ed1f0b_cd2b0f6b",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-01T09:50:01Z",
+      "side": 1,
+      "message": "Might be useful to show key_path as well.",
+      "range": {
+        "startLine": 176,
+        "startChar": 79,
+        "endLine": 176,
+        "endChar": 82
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5ff3632_50128036",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-01T09:50:01Z",
+      "side": 1,
+      "message": "Hmm. So you\u0027re making the \"unwrap .bstr cbor\" implicit rather than explicit?",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 185,
+        "endChar": 68
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2b4ce57_a333a856",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-01T09:50:01Z",
+      "side": 1,
+      "message": "I think you could avoid this using Cow.",
+      "range": {
+        "startLine": 186,
+        "startChar": 30,
+        "endLine": 186,
+        "endChar": 41
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73928e41_23ecab57",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-01T09:50:01Z",
+      "side": 1,
+      "message": "This could take a reference to a slice",
+      "range": {
+        "startLine": 191,
+        "startChar": 28,
+        "endLine": 191,
+        "endChar": 47
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
