@@ -143,6 +143,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de79b065_feb246c2",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-01T17:31:33Z",
+      "side": 1,
+      "message": "You\u0027re right. It looks like labels in dice nodes are integers only. I\u0027m leaving these in TODOs till I add support for `Explicit-key DiceCertChain`",
+      "parentUuid": "478bb3ce_23abf917",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 36
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8902394_00b9bdd7",
