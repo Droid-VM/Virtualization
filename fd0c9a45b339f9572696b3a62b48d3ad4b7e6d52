@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24948d83_40daa33f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-04T16:56:33Z",
+      "side": 1,
+      "message": "Nifty!",
+      "revId": "fd0c9a45b339f9572696b3a62b48d3ad4b7e6d52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ed0c0fc_9d7296be",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-04T16:56:33Z",
+      "side": 1,
+      "message": "Do we actually need to include this in the API \u0026 the AIDL service?\nIt means a lot of churn when we add \u0026 remove flags.\nWe could just hardwire the string at the isFeatureEnabled call site.\nA typo could lead to a feature not being used when it is enabled, but not vice versa which would be more harmful.",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 60
+      },
+      "revId": "fd0c9a45b339f9572696b3a62b48d3ad4b7e6d52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32d629aa_7e61baf5",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-04T16:56:33Z",
+      "side": 1,
+      "message": "I was wondering about (ab)using this for feature detection. But I think your way is better - it doesn\u0027t pollute the SystemApi, and we really want strings here.\n(Although for some of our features we may want to expose capabilities, but that\u0027ll become clearer a lot further down the line.)",
+      "range": {
+        "startLine": 131,
+        "startChar": 15,
+        "endLine": 131,
+        "endChar": 34
+      },
+      "revId": "fd0c9a45b339f9572696b3a62b48d3ad4b7e6d52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee821317_8d0a4676",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-04T16:56:33Z",
+      "side": 1,
+      "message": "No it doesn\u0027t?",
+      "range": {
+        "startLine": 312,
+        "startChar": 66,
+        "endLine": 312,
+        "endChar": 96
+      },
+      "revId": "fd0c9a45b339f9572696b3a62b48d3ad4b7e6d52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b152835d_2a9c51bc",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-04T16:56:33Z",
+      "side": 1,
+      "message": "You could just move the implementation here?\nWe don\u0027t need the global singleton to do it for us.",
+      "range": {
+        "startLine": 270,
+        "startChar": 0,
+        "endLine": 270,
+        "endChar": 48
+      },
+      "revId": "fd0c9a45b339f9572696b3a62b48d3ad4b7e6d52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
