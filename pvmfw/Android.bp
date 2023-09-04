@@ -5,7 +5,10 @@ package {
 rust_ffi_static {
     name: "libpvmfw",
     crate_name: "pvmfw",
-    defaults: ["vmbase_ffi_defaults"],
+    defaults: [
+        "vmbase_ffi_defaults",
+        "avf_build_flags_rust",
+    ],
     srcs: ["src/main.rs"],
     features: [
         "legacy",
@@ -48,6 +51,7 @@ rust_test {
     host_supported: true,
     // For now, only bootargs.rs is written to be conditionally compiled with std.
     srcs: ["src/bootargs.rs"],
+    defaults: ["avf_build_flags_rust"],
     test_suites: ["general-tests"],
     test_options: {
         unit_test: true,
@@ -130,7 +134,10 @@ genrule {
 
 rust_library_rlib {
     name: "libpvmfw_embedded_key",
-    defaults: ["vmbase_rlib_defaults"],
+    defaults: [
+        "vmbase_rlib_defaults",
+        "avf_build_flags_rust",
+    ],
     srcs: [":pvmfw_embedded_key_rs"],
     crate_name: "pvmfw_embedded_key",
 }
@@ -186,7 +193,10 @@ cc_genrule {
 
 rust_library_rlib {
     name: "libpvmfw_fdt_template",
-    defaults: ["vmbase_rlib_defaults"],
+    defaults: [
+        "vmbase_rlib_defaults",
+        "avf_build_flags_rust",
+    ],
     srcs: [":pvmfw_fdt_template_rs"],
     crate_name: "pvmfw_fdt_template",
 }

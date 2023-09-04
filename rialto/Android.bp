@@ -6,7 +6,10 @@ rust_ffi_static {
     name: "librialto",
     crate_name: "rialto",
     srcs: ["src/main.rs"],
-    defaults: ["vmbase_ffi_defaults"],
+    defaults: [
+        "vmbase_ffi_defaults",
+        "avf_build_flags_rust",
+    ],
     rustlibs: [
         "libaarch64_paging",
         "libciborium_io_nostd",
@@ -95,6 +98,7 @@ prebuilt_etc {
 rust_test {
     name: "rialto_test",
     crate_name: "rialto_test",
+    defaults: ["avf_build_flags_rust"],
     srcs: ["tests/test.rs"],
     prefer_rlib: true,
     edition: "2021",
