@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "878c6af6_181c111e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-04T11:48:13Z",
+      "side": 1,
+      "message": "Addressed in https://r.android.com/2738393. But the tests can pass now without this adjustment of sepolicy since we don\u0027t register the RKP service anymore.",
+      "parentUuid": "8165e769_2cfa3c78",
+      "revId": "d7f70997f33e048fe66be64d7bd44455682761de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0ba7963_34536e12",
@@ -82,6 +100,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a96003e_da50b066",
+        "filename": "apex/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-04T11:48:13Z",
+      "side": 1,
+      "message": "Ok. Let me first remove this line from this change.",
+      "parentUuid": "f14a33c9_5cb0b72c",
+      "range": {
+        "startLine": 65,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 6
+      },
+      "revId": "d7f70997f33e048fe66be64d7bd44455682761de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1083a79_2ddbc9f7",
@@ -105,6 +147,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e429914c_6bf4420a",
+        "filename": "apex/virtualizationservice.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-04T11:48:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1083a79_2ddbc9f7",
+      "range": {
+        "startLine": 20,
+        "startChar": 4,
+        "endLine": 20,
+        "endChar": 86
+      },
+      "revId": "d7f70997f33e048fe66be64d7bd44455682761de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d44e4f0_9e569c74",
@@ -118,6 +184,30 @@
       "writtenOn": "2023-08-30T13:41:18Z",
       "side": 1,
       "message": "Remove? We are not joining threadpool after this line anymore",
+      "range": {
+        "startLine": 64,
+        "startChar": 41,
+        "endLine": 64,
+        "endChar": 59
+      },
+      "revId": "d7f70997f33e048fe66be64d7bd44455682761de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33f7f525_9de26b67",
+        "filename": "virtualizationservice/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-04T11:48:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d44e4f0_9e569c74",
       "range": {
         "startLine": 64,
         "startChar": 41,
