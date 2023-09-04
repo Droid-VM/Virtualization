@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "88ea5434_665a53ae",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-09-04T21:21:18Z",
+      "side": 1,
+      "message": "We need this to be at least @TestApi unless we want our CTS tests to build against hidden APIs, which I think is a bad idea.\n\n\u003e We could just hardwire the string at the isFeatureEnabled call site.\n\nDo you mean in the test itself? Or implement isFeatureEnabled entired in VirtualMachineManager? The former I think won\u0027t work because the CTS binary is built separately from the device images. If it is the later, then it will take sometime to implement, and I was thinking of doing it as a long term solution once build time flags support is more mature.\n\n\u003e A typo could lead to a feature not being used when it is enabled, but not vice versa which would be more harmful.\n\nWith the current approach an engineer need to define a constant in one place (IVirtualizationService.aidl), and reference it other places (VirtualMachineManager.java for @TestApi constant), and virtualizationmanager/src/aidl.rs for the check. I think the only place where the typo can occur is the src/aidl.rs (check against a wrong cfg), and unfortunately we will need to be careful for the time being.\n\nNote: this change is just to unblock folks for writing CTS tests against their flag-guarded features, while we figure out the more scalable approach. Does this make sense?",
+      "parentUuid": "4ed0c0fc_9d7296be",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 60
+      },
+      "revId": "fd0c9a45b339f9572696b3a62b48d3ad4b7e6d52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "32d629aa_7e61baf5",
@@ -87,6 +111,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0ecfabc_c6b85209",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-09-04T21:21:18Z",
+      "side": 1,
+      "message": "VirtualizationService.getInstance() can throw VirtualMachineException",
+      "parentUuid": "ee821317_8d0a4676",
+      "range": {
+        "startLine": 312,
+        "startChar": 66,
+        "endLine": 312,
+        "endChar": 96
+      },
+      "revId": "fd0c9a45b339f9572696b3a62b48d3ad4b7e6d52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b152835d_2a9c51bc",
@@ -100,6 +148,30 @@
       "writtenOn": "2023-09-04T16:56:33Z",
       "side": 1,
       "message": "You could just move the implementation here?\nWe don\u0027t need the global singleton to do it for us.",
+      "range": {
+        "startLine": 270,
+        "startChar": 0,
+        "endLine": 270,
+        "endChar": 48
+      },
+      "revId": "fd0c9a45b339f9572696b3a62b48d3ad4b7e6d52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4479a6d1_fff3cf0e",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-09-04T21:21:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b152835d_2a9c51bc",
       "range": {
         "startLine": 270,
         "startChar": 0,
