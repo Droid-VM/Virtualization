@@ -263,6 +263,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac79dde1_360fe288",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-04T11:08:23Z",
+      "side": 1,
+      "message": "Mmm, but we\u0027re never going to need many ConstraintIdentifiers. If we make those u16 or something it helps to clarify that the 2 uses of i64 aren\u0027t at all the same.",
+      "parentUuid": "14906f78_1072da5a",
+      "range": {
+        "startLine": 70,
+        "startChar": 28,
+        "endLine": 70,
+        "endChar": 50
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0a874ea6_8c520452",
         "filename": "libs/dice_policy/src/lib.rs",
         "patchSetId": 6
@@ -580,6 +604,30 @@
       "side": 1,
       "message": "map is a reference (\u0026Vec\u003c(Value, Value)\u003e) while this func will return Vec\u003c(Value, Value)\u003e because of restriction put by `value_from_bytes`\u0027s return value.\n\nHence I think I will need to clone.",
       "parentUuid": "a2b4ce57_a333a856",
+      "range": {
+        "startLine": 186,
+        "startChar": 30,
+        "endLine": 186,
+        "endChar": 41
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5afcf36_e9ad6b11",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-04T11:08:23Z",
+      "side": 1,
+      "message": "But that\u0027s what Cow\u003cVec\u003c(Value, Value)\u003e would allow - it can hold either an owned Vec (for value_from_bytes) or a reference to one (if returning the original map).\nAnd the caller only needs a reference, so nothing would force the redundant clone to happen.",
+      "parentUuid": "bc06abad_47f942cc",
       "range": {
         "startLine": 186,
         "startChar": 30,

@@ -3,6 +3,98 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c96c360a_a008602f",
+        "filename": "libs/dice_policy/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-04T11:08:23Z",
+      "side": 1,
+      "message": "I suspect at some point you\u0027re going to need a no_std version of this.\nWhich should be fine, except for anyhow.\nDoesn\u0027t need to be solved right now.",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 1
+      },
+      "revId": "053ea2c3525d2836bb36269f9b6e439aa98e1619",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa7afc44_545d93f4",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-04T11:08:23Z",
+      "side": 1,
+      "message": "Nit: Also Eq, throughout.",
+      "range": {
+        "startLine": 67,
+        "startChar": 29,
+        "endLine": 67,
+        "endChar": 38
+      },
+      "revId": "053ea2c3525d2836bb36269f9b6e439aa98e1619",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16a7b6ac_23b728d2",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-04T11:08:23Z",
+      "side": 1,
+      "message": "This could do with a comment saying what the fields in the tuple are.\n(Giving the tuple type a name, as I suggested below, might also be useful.)",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 54
+      },
+      "revId": "053ea2c3525d2836bb36269f9b6e439aa98e1619",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cf087bc_e7665619",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-04T11:08:23Z",
+      "side": 1,
+      "message": "Nit: Various comment lines too long",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 111
+      },
+      "revId": "053ea2c3525d2836bb36269f9b6e439aa98e1619",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7b31a002_53eaa3ba",
         "filename": "libs/dice_policy/src/lib.rs",
         "patchSetId": 8
@@ -26,6 +118,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2191e20d_cd0f089f",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-04T11:08:23Z",
+      "side": 1,
+      "message": "with_capacity(dice_chain.len()) ?",
+      "range": {
+        "startLine": 131,
+        "startChar": 62,
+        "endLine": 131,
+        "endChar": 65
+      },
+      "revId": "053ea2c3525d2836bb36269f9b6e439aa98e1619",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d9989482_4d89770c",
         "filename": "libs/dice_policy/src/lib.rs",
         "patchSetId": 8
@@ -42,6 +157,52 @@
         "startChar": 34,
         "endLine": 158,
         "endChar": 56
+      },
+      "revId": "053ea2c3525d2836bb36269f9b6e439aa98e1619",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fab6c095_9bd65593",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-04T11:08:23Z",
+      "side": 1,
+      "message": "You can just declare the parameter mut",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 22
+      },
+      "revId": "053ea2c3525d2836bb36269f9b6e439aa98e1619",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe085a00_cf16c74a",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-04T11:08:23Z",
+      "side": 1,
+      "message": "It probably doesn\u0027t matter, but can\u0027t you omit \u0027a here?\nThe lifetime of the result is only constrained by the lifetime of the map.",
+      "range": {
+        "startLine": 200,
+        "startChar": 60,
+        "endLine": 200,
+        "endChar": 62
       },
       "revId": "053ea2c3525d2836bb36269f9b6e439aa98e1619",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
