@@ -264,6 +264,11 @@ impl IVirtualizationService for VirtualizationService {
         // Delegate to the global service, including checking the permission.
         GLOBAL_SERVICE.getAssignableDevices()
     }
+
+    /// Returns whether given feature is enabled
+    fn isFeatureEnabled(&self, feature: &str) -> binder::Result<bool> {
+        GLOBAL_SERVICE.isFeatureEnabled(feature)
+    }
 }
 
 impl VirtualizationService {

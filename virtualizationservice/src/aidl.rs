@@ -20,6 +20,7 @@ use crate::rkpvm::request_certificate;
 use android_os_permissions_aidl::aidl::android::os::IPermissionController;
 use android_system_virtualizationservice::{
     aidl::android::system::virtualizationservice::AssignableDevice::AssignableDevice,
+    aidl::android::system::virtualizationservice::IVirtualizationService::FEATURE_PAYLOAD_NON_ROOT,
     aidl::android::system::virtualizationservice::VirtualMachineDebugInfo::VirtualMachineDebugInfo,
     binder::ParcelFileDescriptor,
 };
@@ -222,6 +223,17 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
 
         vfio_service.bindDevicesToVfioDriver(devices, dtbo)?;
         Ok(())
+    }
+
+    fn isFeatureEnabled(&self, feature: &str) -> binder::Result<bool> {
+        check_manage_access()?;
+
+        // This approach is quite cumbersome, but will do the work for the short term.
+        // TODO(b/298012279): make this scalable.
+        match feature {
+            FEATURE_PAYLOAD_NON_ROOT => Ok(cfg!(payload_not_root)),
+            _ => Ok(false),
+        }
     }
 }
 

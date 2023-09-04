@@ -73,4 +73,7 @@ interface IVirtualizationServiceInternal {
      * @param dtbo writable file descriptor to store VM DTBO.
      */
     void bindDevicesToVfioDriver(in String[] devices, in ParcelFileDescriptor dtbo);
+
+    /** Returns whether given feature is enabled. */
+    boolean isFeatureEnabled(in String feature);
 }
