@@ -22,5 +22,5 @@ extern crate alloc;
 mod message;
 mod vsock;
 
-pub use message::{Request, Response};
+pub use message::{AttestationError, EcdsaP256KeyPair, Request, Response};
 pub use vsock::host_port;

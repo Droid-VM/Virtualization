@@ -27,6 +27,12 @@ pub enum Request {
     /// Reverse the order of the bytes in the provided byte array.
     /// Currently this is only used for testing.
     Reverse(Vec<u8>),
+
+    /// Generates a new ECDSA P-256 key pair that can be attested by the remote
+    /// server.
+    /// The boolean indicates whether the generated key is for testing purposes
+    /// only.
+    GenerateEcdsaP256KeyPair(bool),
 }
 
 /// Represents a response to a request sent to the service VM.
@@ -36,4 +42,23 @@ pub enum Request {
 pub enum Response {
     /// Reverse the order of the bytes in the provided byte array.
     Reverse(Vec<u8>),
+
+    /// Generates a new ECDSA P-256 key pair and returns the key pair.
+    GenerateEcdsaP256KeyPair(Result<EcdsaP256KeyPair, AttestationError>),
 }
+
+/// Represents an ECDSA P-256 key pair.
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+pub struct EcdsaP256KeyPair {
+    /// Contains a CBOR-encoded public key specified in:
+    ///
+    /// hardware/interfaces/security/rkp/aidl/android/hardware/security/keymint/MacedPublicKey.aidl
+    pub maced_public_key: Vec<u8>,
+
+    /// Contains a handle to the private key.
+    pub key_blob: Vec<u8>,
+}
+
+/// Represents the errors encountered during the attestation.
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+pub enum AttestationError {}

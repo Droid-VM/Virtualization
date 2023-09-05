@@ -12,9 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//! This module contains functions for the request processing.
+//! This module contains functions related to the attestation of the
+//! service VM via the RKP server.
 
-mod api;
-mod rkp;
+use alloc::vec::Vec;
+use service_vm_comm::{AttestationError, EcdsaP256KeyPair};
 
-pub use api::process_request;
+pub(super) fn generate_ecdsa_p256_key_pair(
+    _test_mode: bool,
+) -> Result<EcdsaP256KeyPair, AttestationError> {
+    // TODO(b/299055662): Generate the key pair.
+    let key_pair = EcdsaP256KeyPair { maced_public_key: Vec::new(), key_blob: Vec::new() };
+    Ok(key_pair)
+}

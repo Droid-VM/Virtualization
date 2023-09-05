@@ -14,6 +14,7 @@
 
 //! This module contains the main API for the request processing module.
 
+use super::rkp;
 use alloc::vec::Vec;
 use service_vm_comm::{Request, Response};
 
@@ -23,6 +24,10 @@ use service_vm_comm::{Request, Response};
 pub fn process_request(request: Request) -> Response {
     match request {
         Request::Reverse(v) => Response::Reverse(reverse(v)),
+        Request::GenerateEcdsaP256KeyPair(test_mode) => {
+            let res = rkp::generate_ecdsa_p256_key_pair(test_mode);
+            Response::GenerateEcdsaP256KeyPair(res)
+        }
     }
 }
 
