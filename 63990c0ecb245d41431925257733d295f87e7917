@@ -16,6 +16,190 @@
       "message": "Hi Alan, PTAL",
       "revId": "63990c0ecb245d41431925257733d295f87e7917",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a4c65b1_b24c1c52",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T15:33:51Z",
+      "side": 1,
+      "message": "Can you make this a struct with named fields for ease of reading?\nAnd then you might want to give it some methods - wait_until_not_running(), e.g.",
+      "range": {
+        "startLine": 42,
+        "startChar": 31,
+        "endLine": 42,
+        "endChar": 53
+      },
+      "revId": "63990c0ecb245d41431925257733d295f87e7917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61089a4a_8c9f2988",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T15:33:51Z",
+      "side": 1,
+      "message": "Why do you need the Arc? This is constructed once and will never be dropped.\nBoth Mutex and Condvar are Send \u0026 Sync and you don\u0027t need them to be mutable.",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 43,
+        "endChar": 16
+      },
+      "revId": "63990c0ecb245d41431925257733d295f87e7917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e07adf8c_8ffd2dc4",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T15:33:51Z",
+      "side": 1,
+      "message": "`wait_while` on Condvar encapsulates this whole loop.\n\nShould you apply a timeout?",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 5
+      },
+      "revId": "63990c0ecb245d41431925257733d295f87e7917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad1924d2_f7453ad5",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T15:33:51Z",
+      "side": 1,
+      "message": "You should only set this if start_vm() succeeds.",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 29
+      },
+      "revId": "63990c0ecb245d41431925257733d295f87e7917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aef4973_b3918f24",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T15:33:51Z",
+      "side": 1,
+      "message": "On general OO principles I think you should have\n\nstruct ServiceVm { vm_instance: VmInstance }\n\nAnd then make this an impl on ServiceVm.\n\n(Every ServiceVm has a VmInstance, but not ever VmInstance is a ServiceVm.)\n\nAnd the Drop of ServiceVm should do the shutdown if it hasn\u0027t already happened.",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 64
+      },
+      "revId": "63990c0ecb245d41431925257733d295f87e7917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2da85974_a4c658ee",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T15:33:51Z",
+      "side": 1,
+      "message": "This must be true - we have a VmInstance, so there is a VM.",
+      "range": {
+        "startLine": 67,
+        "startChar": 2,
+        "endLine": 67,
+        "endChar": 26
+      },
+      "revId": "63990c0ecb245d41431925257733d295f87e7917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75fb06a2_c979520f",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T15:33:51Z",
+      "side": 1,
+      "message": "This waits for the instance to exit, but doesn\u0027t tell it to exit.\nI think you should either:\n1. Just drop the VmInstance, which will kill the VM.\n2. Send the VM a message asking it to exit, then wait_for_death_with_timeout, and then drop the VmInstance (which will kill it).\n\nTBH I would go for the first option, it\u0027s simpler, and you don\u0027t need to wait for the service VM to do any tidying up.\n\nNote that wait_for_death_with_timeout assumes that the VmInstance will get the OnDied callback - which I think you will, although you won\u0027t get most of the other callbacks since they need to be triggere by the VM itself.",
+      "range": {
+        "startLine": 71,
+        "startChar": 13,
+        "endLine": 71,
+        "endChar": 40
+      },
+      "revId": "63990c0ecb245d41431925257733d295f87e7917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d5bd33a_838eb974",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T15:33:51Z",
+      "side": 1,
+      "message": "I don\u0027t think this is an error - in fact I think shutdown can never fail, and you should make it the Drop implementation of \u003csome struct\u003e instead.\n\nWhen the VmInstance is dropped the VM will be killed anyway. So shutdown has succeeded, even if slightly inelegantly.\nMost importantly you must set is_running false even if you get a timeout, because the VM is going away.",
+      "range": {
+        "startLine": 72,
+        "startChar": 12,
+        "endLine": 72,
+        "endChar": 70
+      },
+      "revId": "63990c0ecb245d41431925257733d295f87e7917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
