@@ -23,10 +23,13 @@ use android_system_virtualizationservice::{
     },
     binder::ParcelFileDescriptor,
 };
-use anyhow::{Context, Result};
+use anyhow::{anyhow, Context, Result};
+use lazy_static::lazy_static;
 use log::info;
 use std::fs::{File, OpenOptions};
 use std::path::Path;
+use std::sync::{Arc, Condvar, Mutex};
+use std::time::Duration;
 use vmclient::VmInstance;
 
 const VIRT_DATA_DIR: &str = "/data/misc/apexdata/com.android.virt";
@@ -35,10 +38,45 @@ const INSTANCE_IMG_NAME: &str = "service_vm_instance.img";
 const INSTANCE_IMG_SIZE_BYTES: i64 = 1 << 20; // 1MB
 const MEMORY_MB: i32 = 300;
 
-/// Starts the service VM and returns its instance.
-/// The same instance image is used for different VMs.
-/// TODO(b/278858244): Allow only one service VM running at each time.
+lazy_static! {
+    static ref IS_RUNNING: Arc<(Mutex<bool>, Condvar)> =
+        Arc::new((Mutex::new(false), Condvar::new()));
+}
+
+/// Starts the service VM.
+/// At each time only one service should be runnning.
 pub fn start() -> Result<VmInstance> {
+    let is_running = Arc::clone(&IS_RUNNING);
+    let (is_running, cvar) = &*is_running;
+    let mut is_running_guard = is_running.lock().unwrap();
+    while *is_running_guard {
+        // Wait until the current service VM shuts down.
+        is_running_guard = cvar.wait(is_running_guard).unwrap();
+    }
+    *is_running_guard = true;
+    start_vm()
+}
+
+/// Shuts down the given service VM instance.
+pub fn shutdown(service_vm_instance: VmInstance) -> Result<()> {
+    let is_running = Arc::clone(&IS_RUNNING);
+    let (is_running, cvar) = &*is_running;
+    let mut is_running_guard = is_running.lock().unwrap();
+    if *is_running_guard {
+        // TODO(b/274441673): The host can send the CSR to the RKP VM for attestation.
+        // Wait for VM to finish.
+        service_vm_instance
+            .wait_for_death_with_timeout(Duration::from_secs(10))
+            .ok_or_else(|| anyhow!("Timed out waiting for VM exit"))?;
+        info!("Shutdown the service VM successfully.");
+        *is_running_guard = false;
+
+        cvar.notify_one();
+    }
+    Ok(())
+}
+
+fn start_vm() -> Result<VmInstance> {
     let virtmgr = vmclient::VirtualizationService::new().context("Failed to spawn VirtMgr")?;
     let service = virtmgr.connect().context("Failed to connect to VirtMgr")?;
     info!("Connected to VirtMgr for service VM");

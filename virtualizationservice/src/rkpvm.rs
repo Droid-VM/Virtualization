@@ -17,18 +17,12 @@
 //! serves as a trusted platform to attest a client VM.
 
 use crate::service_vm;
-use anyhow::{anyhow, Result};
-use log::info;
-use std::time::Duration;
+use anyhow::Result;
 
 pub(crate) fn request_certificate(csr: &[u8]) -> Result<Vec<u8>> {
     let vm = service_vm::start()?;
 
-    // TODO(b/274441673): The host can send the CSR to the RKP VM for attestation.
-    // Wait for VM to finish.
-    vm.wait_for_death_with_timeout(Duration::from_secs(10))
-        .ok_or_else(|| anyhow!("Timed out waiting for VM exit"))?;
+    service_vm::shutdown(vm)?;
 
-    info!("service_vm: Finished getting the certificate");
     Ok([b"Return: ", csr].concat())
 }
