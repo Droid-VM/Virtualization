@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b79763ed_e03e7e33",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2105,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T14:14:39Z",
+      "side": 1,
+      "message": "Can we extract an `assumeFeatureEnabled()` helper for this?",
+      "range": {
+        "startLine": 2103,
+        "startChar": 0,
+        "endLine": 2105,
+        "endChar": 84
+      },
+      "revId": "df65ec54ad0df77dca3bf77c6eff2e8f783f7dc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "803b5b48_67fa48e5",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 1119,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T14:14:39Z",
+      "side": 1,
+      "message": "I suspect you can reduce the nesting a bit with let else:\n\nlet VirtualMachineConfig::AppConfig(config) \u003d config else return Ok(());",
+      "range": {
+        "startLine": 1106,
+        "startChar": 0,
+        "endLine": 1119,
+        "endChar": 5
+      },
+      "revId": "df65ec54ad0df77dca3bf77c6eff2e8f783f7dc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20ee0596_226ee818",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 1124,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T14:14:39Z",
+      "side": 1,
+      "message": "Nit: Rename check_no_vendor_modules, or check_does_not_use_vendor_modules ?",
+      "range": {
+        "startLine": 1124,
+        "startChar": 8,
+        "endLine": 1124,
+        "endChar": 33
+      },
+      "revId": "df65ec54ad0df77dca3bf77c6eff2e8f783f7dc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1bea962_a76ac29e",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T14:14:39Z",
+      "side": 1,
+      "message": "Meh? I expect the compiler can figure that out.",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 21
+      },
+      "revId": "df65ec54ad0df77dca3bf77c6eff2e8f783f7dc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
