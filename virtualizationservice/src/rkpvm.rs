@@ -16,7 +16,6 @@
 //! The RKP VM will be recognized and attested by the RKP server periodically and
 //! serves as a trusted platform to attest a client VM.
 
-use crate::service_vm;
 use anyhow::{anyhow, Result};
 use log::info;
 use std::time::Duration;

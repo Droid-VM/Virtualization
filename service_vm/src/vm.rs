@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//! Service VM.
+//! This module contains the functions to start the Service VM.
 
 use android_system_virtualizationservice::{
     aidl::android::system::virtualizationservice::{
