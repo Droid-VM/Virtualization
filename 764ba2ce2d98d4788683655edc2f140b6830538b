@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ddd3f44_bd2c66f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-05T15:36:21Z",
+      "side": 1,
+      "message": "Thanks for the review.",
+      "revId": "764ba2ce2d98d4788683655edc2f140b6830538b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b96d0e91_6a97517e",
@@ -31,6 +48,30 @@
       "writtenOn": "2023-09-05T14:36:18Z",
       "side": 1,
       "message": "Nit: Sent -\u003e Sending",
+      "range": {
+        "startLine": 44,
+        "startChar": 11,
+        "endLine": 44,
+        "endChar": 15
+      },
+      "revId": "764ba2ce2d98d4788683655edc2f140b6830538b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0ee8aa1_7f79f7f5",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-05T15:36:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b96d0e91_6a97517e",
       "range": {
         "startLine": 44,
         "startChar": 11,
@@ -64,6 +105,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c7459db_d653d143",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-05T15:36:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed49ed6c_c2ef0142",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 5
+      },
+      "revId": "764ba2ce2d98d4788683655edc2f140b6830538b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7acbdad_7f105128",
@@ -77,6 +142,30 @@
       "writtenOn": "2023-09-05T14:36:18Z",
       "side": 1,
       "message": "I don\u0027t think this should panic on failure",
+      "range": {
+        "startLine": 117,
+        "startChar": 8,
+        "endLine": 117,
+        "endChar": 60
+      },
+      "revId": "764ba2ce2d98d4788683655edc2f140b6830538b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7bc009b_81460258",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-05T15:36:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7acbdad_7f105128",
       "range": {
         "startLine": 117,
         "startChar": 8,
@@ -110,6 +199,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d06e687_1a1aad70",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-05T15:36:21Z",
+      "side": 1,
+      "message": "Oh right. That\u0027s not needed.",
+      "parentUuid": "2903a592_d1cb33f8",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 54
+      },
+      "revId": "764ba2ce2d98d4788683655edc2f140b6830538b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1b46753_68719939",
@@ -133,6 +246,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e812044_1c9a6854",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-05T15:36:21Z",
+      "side": 1,
+      "message": "Done. I moved the vsock setup to `start()`.",
+      "parentUuid": "a1b46753_68719939",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 55
+      },
+      "revId": "764ba2ce2d98d4788683655edc2f140b6830538b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd8bf77c_5c16db0b",
@@ -146,6 +283,30 @@
       "writtenOn": "2023-09-05T14:36:18Z",
       "side": 1,
       "message": "I think you can avoid the clone: `\u0026mut vsock_stream`.\n(If `x` implements Write, then so does `\u0026mut x`.)",
+      "range": {
+        "startLine": 131,
+        "startChar": 69,
+        "endLine": 131,
+        "endChar": 89
+      },
+      "revId": "764ba2ce2d98d4788683655edc2f140b6830538b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22935833_50f704ac",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-05T15:36:21Z",
+      "side": 1,
+      "message": "This doesn\u0027t work because there are two borrows here\n```\nerror[E0499]: cannot borrow `vsock_stream` as mutable more than once at a time\n  --\u003e packages/modules/Virtualization/virtualizationservice/src/service_vm.rs:75:56\n   |\n70 |         let mut buffer \u003d BufWriter::with_capacity(WRITE_BUFFER_CAPACITY, \u0026mut vsock_stream);\n   |                                                                          ----------------- first mutable borrow occurs here\n...\n75 |         let response: Response \u003d ciborium::from_reader(\u0026mut vsock_stream)?;\n   |                                                        ^^^^^^^^^^^^^^^^^ second mutable borrow occurs here\n...\n78 |     }\n   |     - first borrow might be used here, when `buffer` is dropped and runs the `Drop` code for type `std::io::BufWriter`\n```",
+      "parentUuid": "bd8bf77c_5c16db0b",
       "range": {
         "startLine": 131,
         "startChar": 69,
