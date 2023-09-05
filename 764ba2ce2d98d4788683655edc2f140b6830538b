@@ -16,6 +16,144 @@
       "message": "Hi Alan, PTAL",
       "revId": "764ba2ce2d98d4788683655edc2f140b6830538b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b96d0e91_6a97517e",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T14:36:18Z",
+      "side": 1,
+      "message": "Nit: Sent -\u003e Sending",
+      "range": {
+        "startLine": 44,
+        "startChar": 11,
+        "endLine": 44,
+        "endChar": 15
+      },
+      "revId": "764ba2ce2d98d4788683655edc2f140b6830538b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed49ed6c_c2ef0142",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T14:36:18Z",
+      "side": 1,
+      "message": "Matching on a Result is a bit unusual.\n\nIsn\u0027t this\n```\nresult.map(|Response::Reverse(cert)| cert).context(\"Failed to process request\")\n```\n?",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 5
+      },
+      "revId": "764ba2ce2d98d4788683655edc2f140b6830538b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7acbdad_7f105128",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T14:36:18Z",
+      "side": 1,
+      "message": "I don\u0027t think this should panic on failure",
+      "range": {
+        "startLine": 117,
+        "startChar": 8,
+        "endLine": 117,
+        "endChar": 60
+      },
+      "revId": "764ba2ce2d98d4788683655edc2f140b6830538b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2903a592_d1cb33f8",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T14:36:18Z",
+      "side": 1,
+      "message": "Why do we have a separate thread if we just block on it?",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 54
+      },
+      "revId": "764ba2ce2d98d4788683655edc2f140b6830538b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1b46753_68719939",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T14:36:18Z",
+      "side": 1,
+      "message": "Setting up the vsock should be part of starting the VM, shouldn\u0027t it, rather than waiting until we want to send a request? (Suppose we want to send 2 requests to the VM).\n\nAlso, and more importantly: normally we connect from host to VM, to make sure we are connecting to the right VM.\nIn your case I can see why you want to do it this way, because we have no easy way to know when the VM is ready for us to connect to it; but we should still check it\u0027s the right VM. I think you need to find out what the CID of the other end of the socket is, and make sure it matches the CID of the VM you started.",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 55
+      },
+      "revId": "764ba2ce2d98d4788683655edc2f140b6830538b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd8bf77c_5c16db0b",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T14:36:18Z",
+      "side": 1,
+      "message": "I think you can avoid the clone: `\u0026mut vsock_stream`.\n(If `x` implements Write, then so does `\u0026mut x`.)",
+      "range": {
+        "startLine": 131,
+        "startChar": 69,
+        "endLine": 131,
+        "endChar": 89
+      },
+      "revId": "764ba2ce2d98d4788683655edc2f140b6830538b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
