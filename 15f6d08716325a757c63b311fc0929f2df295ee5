@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22669304_3c13a036",
+        "filename": "virtualizationservice/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-09-05T19:37:39Z",
+      "side": 1,
+      "message": "RKPD currently only knows how to talk to manifest-declared HALs. See https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/RemoteKeyProvisioning/app/src/com/android/rkpdapp/interfaces/ServiceManagerInterface.java;drc\u003dbf760269ab745fbb811b294b8f33ff433d803b30;l\u003d55\n\nI don\u0027t think this instance of IRPC will be declared in a manifest, will it? If not, we\u0027ll have to cook up a registration mechanism for AVF to inform RKPD of the service.",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 26
+      },
+      "revId": "15f6d08716325a757c63b311fc0929f2df295ee5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
