@@ -113,6 +113,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "afd4bff1_23e8b466",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-09-05T08:29:07Z",
+      "side": 1,
+      "message": "\u003e Correct, but we have multiple versions of CTS binaries: test_suites_\u003carch\u003e_\u003crelease\u003e. So checking the flag at the call site (i.e. the test) should work as long as we don\u0027t do a mixture like running trunk_staging test_suites on the next build of a device.\n\nOh, I didn\u0027t know that we are going to have a CTS build per release configuration. Is this already implemented? However, I think we will still need something like isFeatureEnabled API, since we are starting to get unbundled mainline modules as users of AVF (e.g. rkpd), and for them we need to provide a mechanism to query what features are enabled on device.\n\nAdditionally, as I mentioned above, propagating build time flags and generating the java code based on their values will take sometime to implement, and I don\u0027t want to block engineers from guarding their code by build time flags \u0026 writing tests for their features.\n\n\u003e I was disagreeing with listing the names of the features as constants in the API. That means changing the API and the AIDL every time we add (or remove) a feature, and I\u0027m not sure it gives us much value.\n\nWe need to have the feature constants exposed as @TestApi, otherwise our tests against will use the \"hidden APIs\".\n\nAs for removing a feature, I assume you are referring to releasing a future in next release? I wasn\u0027t able to find much docs on how the stabilization will be done in the new world, so I am waiting for the overall realization story to become cleaner and then look into how we can integrate with it.\n\n\u003e So I was suggesting the test use isFeatureEnabled(\"com.android.kvm.PAYLOAD_NON_ROOT\").\n\nIn this case the same string will need to be defined in 2 places instead of 1, won\u0027t it?",
+      "parentUuid": "178ff11f_18889b5f",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 60
+      },
+      "revId": "fd0c9a45b339f9572696b3a62b48d3ad4b7e6d52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "32d629aa_7e61baf5",
