@@ -30,6 +30,7 @@ rust_binary {
         "libanyhow",
         "libavflog",
         "libbinder_rs",
+        "libciborium",
         "liblibc",
         "liblog_rust",
         "libnix",
@@ -40,6 +41,7 @@ rust_binary {
         "libvsock",
         "libserde",
         "libserde_xml_rs",
+        "libservice_vm_comm",
     ],
     apex_available: ["com.android.virt"],
 }

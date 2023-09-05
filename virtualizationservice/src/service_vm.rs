@@ -23,31 +23,93 @@ use android_system_virtualizationservice::{
     },
     binder::ParcelFileDescriptor,
 };
-use anyhow::{Context, Result};
+use anyhow::{anyhow, ensure, Context, Result};
 use log::info;
+use service_vm_comm::{host_port, Request, Response};
 use std::fs::{File, OpenOptions};
+use std::io::{BufWriter, Write};
 use std::path::Path;
+use std::time::Duration;
 use vmclient::VmInstance;
+use vsock::{VsockAddr, VsockListener, VsockStream, VMADDR_CID_HOST};
 
 const VIRT_DATA_DIR: &str = "/data/misc/apexdata/com.android.virt";
 const RIALTO_PATH: &str = "/apex/com.android.virt/etc/rialto.bin";
 const INSTANCE_IMG_NAME: &str = "service_vm_instance.img";
 const INSTANCE_IMG_SIZE_BYTES: i64 = 1 << 20; // 1MB
 const MEMORY_MB: i32 = 300;
+const WRITE_BUFFER_CAPACITY: usize = 512;
+const READ_TIMEOUT: Duration = Duration::from_secs(5);
+const WRITE_TIMEOUT: Duration = Duration::from_secs(2);
+
+/// Service VM.
+pub struct ServiceVm {
+    vsock_stream: VsockStream,
+    /// VmInstance will be dropped when ServiceVm goes out of scope.
+    #[allow(dead_code)]
+    vm: VmInstance,
+}
+
+impl ServiceVm {
+    /// Processes the request in the service VM.
+    pub fn process_request(&mut self, request: &Request) -> Result<Response> {
+        self.write_request(request)?;
+        self.read_response()
+    }
+
+    /// Sends the request to the service VM.
+    fn write_request(&mut self, request: &Request) -> Result<()> {
+        let mut buffer = BufWriter::with_capacity(WRITE_BUFFER_CAPACITY, &mut self.vsock_stream);
+        ciborium::into_writer(request, &mut buffer)?;
+        buffer.flush().context("Failed to flush the buffer")?;
+        info!("Sent request to the service VM.");
+        Ok(())
+    }
+
+    /// Reads the response from the service VM.
+    fn read_response(&mut self) -> Result<Response> {
+        let response: Response = ciborium::from_reader(&mut self.vsock_stream)
+            .context("Failed to read the response from the service VM")?;
+        info!("Received response from the service VM.");
+        Ok(response)
+    }
+}
 
 /// Starts the service VM and returns its instance.
 /// The same instance image is used for different VMs.
 /// TODO(b/278858244): Allow only one service VM running at each time.
-pub fn start() -> Result<VmInstance> {
+pub fn start() -> Result<ServiceVm> {
+    // Sets up the vsock server on the host.
+    let protected_vm = true;
+    let port = host_port(protected_vm);
+    let vsock_listener = VsockListener::bind_with_cid_port(VMADDR_CID_HOST, port)?;
+
+    // Starts the service VM.
     let virtmgr = vmclient::VirtualizationService::new().context("Failed to spawn VirtMgr")?;
     let service = virtmgr.connect().context("Failed to connect to VirtMgr")?;
     info!("Connected to VirtMgr for service VM");
 
     let vm = vm_instance(service.as_ref())?;
-
     vm.start().context("Failed to start service VM")?;
     info!("Service VM started");
-    Ok(vm)
+
+    // Accepts the connection from the service VM.
+    let vsock_stream =
+        vsock_listener.incoming().next().ok_or_else(|| anyhow!("Failed to get vsock_stream"))??;
+    info!("Accepted connection {:?}", vsock_stream);
+    let peer_addr = vsock_stream.peer_addr()?;
+    let service_vm_addr = VsockAddr::new(u32::try_from(vm.cid()).unwrap(), port);
+    ensure!(
+        peer_addr == service_vm_addr,
+        "The peer address {} doesn't match the address of the service VM {}",
+        peer_addr,
+        service_vm_addr
+    );
+    vsock_stream.set_read_timeout(Some(READ_TIMEOUT))?;
+    vsock_stream.set_write_timeout(Some(WRITE_TIMEOUT))?;
+
+    let service_vm = ServiceVm { vsock_stream, vm };
+    Ok(service_vm)
 }
 
 fn vm_instance(service: &dyn IVirtualizationService) -> Result<VmInstance> {
