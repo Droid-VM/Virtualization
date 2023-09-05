@@ -115,6 +115,30 @@
       },
       "revId": "df65ec54ad0df77dca3bf77c6eff2e8f783f7dc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5dc7bfe_01302a2d",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T14:17:49Z",
+      "side": 1,
+      "message": "I don\u0027t think that works - you can\u0027t compile a function that references a field that doesn\u0027t exist in the current cfg.\nI was suggesting keeping the function but just losing the inline directive.",
+      "parentUuid": "93b94878_f20bdd60",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 21
+      },
+      "revId": "df65ec54ad0df77dca3bf77c6eff2e8f783f7dc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
