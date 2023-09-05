@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86c16e03_e5b0c61b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T16:24:45Z",
+      "side": 1,
+      "message": "Can you show that? As a second CL on top of this one, probably?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 32
+      },
+      "revId": "d0637ebe522d89c5c2cb59e7ecb88223174463e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "850a129d_ff8e484b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T16:24:45Z",
+      "side": 1,
+      "message": "It would help me, and I suspect you, if you stacked these CLs rather than having them all independent. You\u0027re going to have to do a fair amount of resolving merge conflicts to get them submitted anyway.",
+      "revId": "d0637ebe522d89c5c2cb59e7ecb88223174463e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52cc547b_dec09daa",
+        "filename": "service_vm/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T16:24:45Z",
+      "side": 1,
+      "message": "Comment could do with a little more content.\n\nMore importantly, the name is potentially confusing. This isn\u0027t the code for the service VM (that\u0027s in Rialto). This is the code to manage the service VM and interact with it.\n\nservice_vm_instance, service_vm_connection, service_vm_manager ?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 15
+      },
+      "revId": "d0637ebe522d89c5c2cb59e7ecb88223174463e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f540735f_97580d60",
+        "filename": "service_vm/src/vm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T16:24:45Z",
+      "side": 1,
+      "message": "start, stop \u0026 communicate with ?",
+      "range": {
+        "startLine": 15,
+        "startChar": 42,
+        "endLine": 15,
+        "endChar": 47
+      },
+      "revId": "d0637ebe522d89c5c2cb59e7ecb88223174463e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
