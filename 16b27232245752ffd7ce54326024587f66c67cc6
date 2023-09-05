@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfc6dfcf_40a7ce16",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T15:44:17Z",
+      "side": 1,
+      "message": "Do you need a write timeout too?",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 59
+      },
+      "revId": "16b27232245752ffd7ce54326024587f66c67cc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8519ce8_6b789606",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T15:44:17Z",
+      "side": 1,
+      "message": "All this should also be part of start(). It\u0027s all one-off connection code, not per-request.",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 59
+      },
+      "revId": "16b27232245752ffd7ce54326024587f66c67cc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
