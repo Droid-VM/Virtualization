@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "29219ff0_0cda1159",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-05T00:46:33Z",
+      "side": 1,
+      "message": "\u003e CTS binary is built separately from the device images\n\nCorrect, but we have multiple versions of CTS binaries: test_suites_\u003carch\u003e_\u003crelease\u003e. So checking the flag at the call site (i.e. the test) should work as long as we don\u0027t do a mixture like running trunk_staging test_suites on the next build of a device.",
+      "parentUuid": "88ea5434_665a53ae",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 60
+      },
+      "revId": "fd0c9a45b339f9572696b3a62b48d3ad4b7e6d52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "32d629aa_7e61baf5",
