@@ -326,6 +326,8 @@ impl VirtualizationService {
         let requester_uid = get_calling_uid();
         let requester_debug_pid = get_calling_pid();
 
+        check_config_features(config)?;
+
         // Allocating VM context checks the MANAGE_VIRTUAL_MACHINE permission.
         let (vm_context, cid, temporary_directory) = self.create_vm_context(requester_debug_pid)?;
 
@@ -1098,6 +1100,30 @@ fn extract_gdb_port(config: &VirtualMachineConfig) -> Option<NonZeroU16> {
             NonZeroU16::new(config.customConfig.as_ref().map(|c| c.gdbPort).unwrap_or(0) as u16)
         }
     }
+}
+
+fn check_uses_vendor_modules(config: &VirtualMachineConfig) -> binder::Result<()> {
+    if let VirtualMachineConfig::AppConfig(config) = config {
+        if let Some(custom_config) = &config.customConfig {
+            if custom_config.vendorImage.is_some() || custom_config.customKernelImage.is_some() {
+                Err(anyhow!("vendor modules feature is disabled"))
+                    .or_binder_exception(ExceptionCode::UNSUPPORTED_OPERATION)
+            } else {
+                Ok(())
+            }
+        } else {
+            Ok(())
+        }
+    } else {
+        Ok(())
+    }
+}
+
+fn check_config_features(config: &VirtualMachineConfig) -> binder::Result<()> {
+    if !cfg!(vendor_modules) {
+        check_uses_vendor_modules(config)?;
+    }
+    Ok(())
 }
 
 fn clone_or_prepare_logger_fd(

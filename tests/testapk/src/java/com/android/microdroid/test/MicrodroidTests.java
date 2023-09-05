@@ -2099,6 +2099,11 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     public void configuringVendorDiskImageRequiresCustomPermission() throws Exception {
         assumeSupportedDevice();
 
+        VirtualMachineManager vmm = getVirtualMachineManager();
+        assumeTrue(
+                VirtualMachineManager.FEATURE_VENDOR_MODULES + " not enabled",
+                vmm.isFeatureEnabled(VirtualMachineManager.FEATURE_VENDOR_MODULES));
+
         File vendorDiskImage =
                 new File("/data/local/tmp/cts/microdroid/test_microdroid_vendor_image.img");
         VirtualMachineConfig config =
@@ -2122,6 +2127,11 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     @Test
     public void bootsWithVendorPartition() throws Exception {
         assumeSupportedDevice();
+
+        VirtualMachineManager vmm = getVirtualMachineManager();
+        assumeTrue(
+                VirtualMachineManager.FEATURE_VENDOR_MODULES + " not enabled",
+                vmm.isFeatureEnabled(VirtualMachineManager.FEATURE_VENDOR_MODULES));
 
         grantPermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
 
