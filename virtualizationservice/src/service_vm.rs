@@ -23,31 +23,78 @@ use android_system_virtualizationservice::{
     },
     binder::ParcelFileDescriptor,
 };
-use anyhow::{Context, Result};
+use anyhow::{anyhow, Context, Result};
 use log::info;
+use service_vm_comm::{host_port, Request, Response};
 use std::fs::{File, OpenOptions};
+use std::io::{BufWriter, Write};
 use std::path::Path;
+use std::time::Duration;
 use vmclient::VmInstance;
+use vsock::{VsockListener, VMADDR_CID_HOST};
 
 const VIRT_DATA_DIR: &str = "/data/misc/apexdata/com.android.virt";
 const RIALTO_PATH: &str = "/apex/com.android.virt/etc/rialto.bin";
 const INSTANCE_IMG_NAME: &str = "service_vm_instance.img";
 const INSTANCE_IMG_SIZE_BYTES: i64 = 1 << 20; // 1MB
 const MEMORY_MB: i32 = 300;
+const WRITE_BUFFER_CAPACITY: usize = 512;
+const READ_TIMEOUT: Duration = Duration::from_millis(5_000);
+
+/// Service VM.
+pub struct ServiceVm {
+    vm: VmInstance,
+    vsock_listener: VsockListener,
+}
+
+impl ServiceVm {
+    /// Shuts down the service VM.
+    pub fn shutdown(&self) -> Result<()> {
+        self.vm
+            .wait_for_death_with_timeout(Duration::from_secs(10))
+            .ok_or_else(|| anyhow!("Timed out waiting for VM exit"))?;
+        info!("Shut down the service VM");
+        Ok(())
+    }
+
+    /// Processes the request in the service VM.
+    pub fn process_request(&self, request: Request) -> Result<Response> {
+        let mut vsock_stream = self
+            .vsock_listener
+            .incoming()
+            .next()
+            .ok_or_else(|| anyhow!("Failed to get vsock_stream"))??;
+        info!("Accepted connection {:?}", vsock_stream);
+        vsock_stream.set_read_timeout(Some(READ_TIMEOUT))?;
+
+        let mut buffer = BufWriter::with_capacity(WRITE_BUFFER_CAPACITY, vsock_stream.clone());
+        ciborium::into_writer(&request, &mut buffer)?;
+        buffer.flush()?;
+        info!("Sent request to the service VM.");
+
+        let response: Response = ciborium::from_reader(&mut vsock_stream)?;
+        info!("Received response from the service VM.");
+        Ok(response)
+    }
+}
 
 /// Starts the service VM and returns its instance.
 /// The same instance image is used for different VMs.
 /// TODO(b/278858244): Allow only one service VM running at each time.
-pub fn start() -> Result<VmInstance> {
+pub fn start() -> Result<ServiceVm> {
     let virtmgr = vmclient::VirtualizationService::new().context("Failed to spawn VirtMgr")?;
     let service = virtmgr.connect().context("Failed to connect to VirtMgr")?;
     info!("Connected to VirtMgr for service VM");
 
     let vm = vm_instance(service.as_ref())?;
-
     vm.start().context("Failed to start service VM")?;
     info!("Service VM started");
-    Ok(vm)
+
+    let protected_vm = true;
+    let port = host_port(protected_vm);
+    let vsock_listener = VsockListener::bind_with_cid_port(VMADDR_CID_HOST, port)?;
+    let service_vm = ServiceVm { vm, vsock_listener };
+    Ok(service_vm)
 }
 
 fn vm_instance(service: &dyn IVirtualizationService) -> Result<VmInstance> {
