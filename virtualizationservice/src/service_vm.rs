@@ -23,17 +23,25 @@ use android_system_virtualizationservice::{
     },
     binder::ParcelFileDescriptor,
 };
-use anyhow::{Context, Result};
+use anyhow::{anyhow, Context, Result};
 use log::info;
+use service_vm_comm::{host_port, Request, Response};
 use std::fs::{File, OpenOptions};
+use std::io::{BufWriter, Write};
 use std::path::Path;
+use std::sync::mpsc;
+use std::thread;
+use std::time::Duration;
 use vmclient::VmInstance;
+use vsock::{VsockListener, VMADDR_CID_HOST};
 
 const VIRT_DATA_DIR: &str = "/data/misc/apexdata/com.android.virt";
 const RIALTO_PATH: &str = "/apex/com.android.virt/etc/rialto.bin";
 const INSTANCE_IMG_NAME: &str = "service_vm_instance.img";
 const INSTANCE_IMG_SIZE_BYTES: i64 = 1 << 20; // 1MB
 const MEMORY_MB: i32 = 300;
+const WRITE_BUFFER_CAPACITY: usize = 512;
+const READ_TIMEOUT: Duration = Duration::from_millis(3_000);
 
 /// Starts the service VM and returns its instance.
 /// The same instance image is used for different VMs.
@@ -99,4 +107,33 @@ fn instance_img(service: &dyn IVirtualizationService) -> Result<ParcelFileDescri
         PartitionType::ANDROID_VM_INSTANCE,
     )?;
     Ok(instance_img)
+}
+
+/// Processes the request in the service VM.
+pub fn process_request(request: Request) -> Result<Response> {
+    let (sender, receiver) = mpsc::channel();
+    thread::spawn(move || {
+        let result = send_request(request);
+        sender.send(result).expect("Failed to send result");
+    });
+    receiver.recv().context("Failed to receive data")?
+}
+
+fn send_request(request: Request) -> Result<Response> {
+    let protected_vm = true;
+    let port = host_port(protected_vm);
+    let listener = VsockListener::bind_with_cid_port(VMADDR_CID_HOST, port)?;
+    let mut vsock_stream =
+        listener.incoming().next().ok_or_else(|| anyhow!("Failed to get vsock_stream"))??;
+    info!("Accepted connection {:?}", vsock_stream);
+    vsock_stream.set_read_timeout(Some(READ_TIMEOUT))?;
+
+    let mut buffer = BufWriter::with_capacity(WRITE_BUFFER_CAPACITY, vsock_stream.clone());
+    ciborium::into_writer(&request, &mut buffer)?;
+    buffer.flush()?;
+    info!("Sent request to the service VM.");
+
+    let response: Response = ciborium::from_reader(&mut vsock_stream)?;
+    info!("Received response from the service VM.");
+    Ok(response)
 }
