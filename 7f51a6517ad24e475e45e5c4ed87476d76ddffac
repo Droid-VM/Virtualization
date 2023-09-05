@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d3eafd1_8f52e9f5",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-05T16:45:03Z",
+      "side": 1,
+      "message": "I\u0027m using `ConstraintSpec` \u0026 `ConstraintType` as pub structs that can be used by lib clients. Since this (what has been referred to as `key_spec` so far) will also be constructed by lib users, lets call it all it constraint_path",
+      "parentUuid": "cc8b3a18_c0436328",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 22
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6086d2c2_3367e0b9",
@@ -275,6 +299,30 @@
       "side": 1,
       "message": "Mmm, but we\u0027re never going to need many ConstraintIdentifiers. If we make those u16 or something it helps to clarify that the 2 uses of i64 aren\u0027t at all the same.",
       "parentUuid": "14906f78_1072da5a",
+      "range": {
+        "startLine": 70,
+        "startChar": 28,
+        "endLine": 70,
+        "endChar": 50
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b0e74e8_a4e972f9",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-05T16:45:03Z",
+      "side": 1,
+      "message": "Changed. Also renamed `ConstraintIdentifier` to `ConstraintType`",
+      "parentUuid": "ac79dde1_360fe288",
       "range": {
         "startLine": 70,
         "startChar": 28,
@@ -628,6 +676,30 @@
       "side": 1,
       "message": "But that\u0027s what Cow\u003cVec\u003c(Value, Value)\u003e would allow - it can hold either an owned Vec (for value_from_bytes) or a reference to one (if returning the original map).\nAnd the caller only needs a reference, so nothing would force the redundant clone to happen.",
       "parentUuid": "bc06abad_47f942cc",
+      "range": {
+        "startLine": 186,
+        "startChar": 30,
+        "endLine": 186,
+        "endChar": 41
+      },
+      "revId": "7f51a6517ad24e475e45e5c4ed87476d76ddffac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efb9b63a_491e958b",
+        "filename": "libs/dice_policy/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-05T16:45:03Z",
+      "side": 1,
+      "message": "Done. Thanks for raising this. Cow is pretty useful (in this case). [Can be scary with lifetimes, but recursion helped simplify it further].",
+      "parentUuid": "c5afcf36_e9ad6b11",
       "range": {
         "startLine": 186,
         "startChar": 30,
