@@ -89,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "178ff11f_18889b5f",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T07:45:36Z",
+      "side": 1,
+      "message": "\u003e\u003e We could just hardwire the string at the isFeatureEnabled call site.\n\n\u003e Do you mean in the test itself? Or implement isFeatureEnabled entired in VirtualMachineManager? The former I think won\u0027t work because the CTS binary is built separately from the device images. If it is the later, then it will take sometime to implement, and I was thinking of doing it as a long term solution once build time flags support is more mature.\n\n\nI wasn\u0027t disagreeing with your `isFeatureEnabled()` at all - I think that\u0027s exactly right.\n\nI was disagreeing with listing the names of the features as constants in the API. That means changing the API and the AIDL every time we add (or remove) a feature, and I\u0027m not sure it gives us much value.\n\nSo I was suggesting the test use `isFeatureEnabled(\"com.android.kvm.PAYLOAD_NON_ROOT\")`.\n\nThere\u0027s a risk of putting the wrong string there, but I don\u0027t think it\u0027s likely to be much of a problem in practice.",
+      "parentUuid": "29219ff0_0cda1159",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 60
+      },
+      "revId": "fd0c9a45b339f9572696b3a62b48d3ad4b7e6d52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "32d629aa_7e61baf5",

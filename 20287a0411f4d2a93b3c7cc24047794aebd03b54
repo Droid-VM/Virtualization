@@ -16,6 +16,29 @@
       "message": "LGTM, thanks for not using PM features.",
       "revId": "20287a0411f4d2a93b3c7cc24047794aebd03b54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7128d760_e1810c65",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-05T07:45:36Z",
+      "side": 1,
+      "message": "This is definitely the right thing to return. Should we log the non-existent feature name though?",
+      "range": {
+        "startLine": 277,
+        "startChar": 12,
+        "endLine": 277,
+        "endChar": 27
+      },
+      "revId": "20287a0411f4d2a93b3c7cc24047794aebd03b54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
