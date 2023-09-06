@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "704e0cbc_9409e384",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-06T12:41:05Z",
+      "side": 1,
+      "message": "Can we make this `/service_vm_manager` rather than `/service_vm/service_vm_manager`?\nWe don\u0027t need the nesting yet, and it\u0027s not clear we will. So this seems like premature generalisation.",
+      "revId": "7fab9ddbee3c76de1bc157674518f0dddf1698b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "865cf90e_cc337688",
+        "filename": "service_vm/service_vm_manager/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-06T12:41:05Z",
+      "side": 1,
+      "message": "I\u0027m not convinced that the separate lib.rs is actually helping here. This is a simple 1-file library; why not rename vm.rs to lib.rs?\n\nIf it gets more complicated we can refactor later.",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 31
+      },
+      "revId": "7fab9ddbee3c76de1bc157674518f0dddf1698b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
