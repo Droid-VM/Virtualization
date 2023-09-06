@@ -224,6 +224,30 @@
       },
       "revId": "63990c0ecb245d41431925257733d295f87e7917",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ff73b3b_b3a68e07",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-06T12:36:11Z",
+      "side": 1,
+      "message": "Yeah that should work.\nIf you need a more controlled shutdown you\u0027d want something like this, but I don\u0027t think you do.",
+      "parentUuid": "39ae4434_32af46a7",
+      "range": {
+        "startLine": 72,
+        "startChar": 12,
+        "endLine": 72,
+        "endChar": 70
+      },
+      "revId": "63990c0ecb245d41431925257733d295f87e7917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
