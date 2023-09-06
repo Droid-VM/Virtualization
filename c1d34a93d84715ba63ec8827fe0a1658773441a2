@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09a3d35e_352f53eb",
+        "filename": "service_vm/service_vm_manager/src/vm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-06T12:47:08Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be pub ?",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 3
+      },
+      "revId": "c1d34a93d84715ba63ec8827fe0a1658773441a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5f3befe_b765a218",
+        "filename": "service_vm/service_vm_manager/src/vm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-06T12:47:08Z",
+      "side": 1,
+      "message": "We really need:\n```\nenum VmType { ProtectedVm, NonProtectedVm }\n```\nThen we can get rid of all the constants \u0026 local variables and just say what we mean at each call site.",
+      "range": {
+        "startLine": 97,
+        "startChar": 32,
+        "endLine": 97,
+        "endChar": 51
+      },
+      "revId": "c1d34a93d84715ba63ec8827fe0a1658773441a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07e2eb5b_1f82af53",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-06T12:47:08Z",
+      "side": 1,
+      "message": "This function doesn\u0027t have any need to exist at this point.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 1
+      },
+      "revId": "c1d34a93d84715ba63ec8827fe0a1658773441a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
