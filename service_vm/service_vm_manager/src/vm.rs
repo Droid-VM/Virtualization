@@ -42,6 +42,7 @@ const MEMORY_MB: i32 = 300;
 const WRITE_BUFFER_CAPACITY: usize = 512;
 const READ_TIMEOUT: Duration = Duration::from_secs(5);
 const WRITE_TIMEOUT: Duration = Duration::from_secs(2);
+const PROTECTED_VM: bool = true;
 
 /// Service VM.
 pub struct ServiceVm {
@@ -87,17 +88,18 @@ impl ServiceVm {
 /// The same instance image is used for different VMs.
 /// TODO(b/278858244): Allow only one service VM running at each time.
 pub fn start() -> Result<ServiceVm> {
+    let vm = vm_instance()?;
+    start_vm(vm, PROTECTED_VM)
+}
+
+/// Starts the given VM instance and sets up the vsock connection with it.
+/// Returns a `ServiceVm` instance.
+pub fn start_vm(vm: VmInstance, protected_vm: bool) -> Result<ServiceVm> {
     // Sets up the vsock server on the host.
-    let protected_vm = true;
     let port = host_port(protected_vm);
     let vsock_listener = VsockListener::bind_with_cid_port(VMADDR_CID_HOST, port)?;
 
     // Starts the service VM.
-    let virtmgr = vmclient::VirtualizationService::new().context("Failed to spawn VirtMgr")?;
-    let service = virtmgr.connect().context("Failed to connect to VirtMgr")?;
-    info!("Connected to VirtMgr for service VM");
-
-    let vm = vm_instance(service.as_ref())?;
     vm.start().context("Failed to start service VM")?;
     info!("Service VM started");
 
@@ -112,8 +114,12 @@ pub fn start() -> Result<ServiceVm> {
     Ok(service_vm)
 }
 
-fn vm_instance(service: &dyn IVirtualizationService) -> Result<VmInstance> {
-    let instance_img = instance_img(service)?;
+fn vm_instance() -> Result<VmInstance> {
+    let virtmgr = vmclient::VirtualizationService::new().context("Failed to spawn VirtMgr")?;
+    let service = virtmgr.connect().context("Failed to connect to VirtMgr")?;
+    info!("Connected to VirtMgr for service VM");
+
+    let instance_img = instance_img(service.as_ref())?;
     let writable_partitions = vec![Partition {
         label: "vm-instance".to_owned(),
         image: Some(instance_img),
@@ -124,7 +130,7 @@ fn vm_instance(service: &dyn IVirtualizationService) -> Result<VmInstance> {
         name: String::from("Service VM"),
         bootloader: Some(ParcelFileDescriptor::new(rialto)),
         disks: vec![DiskImage { image: None, partitions: writable_partitions, writable: true }],
-        protectedVm: true,
+        protectedVm: PROTECTED_VM,
         memoryMib: MEMORY_MB,
         cpuTopology: CpuTopology::ONE_CPU,
         platformVersion: "~1.0".to_string(),
@@ -135,7 +141,7 @@ fn vm_instance(service: &dyn IVirtualizationService) -> Result<VmInstance> {
     let console_in = None;
     let log = None;
     let callback = None;
-    VmInstance::create(service, &config, console_out, console_in, log, callback)
+    VmInstance::create(service.as_ref(), &config, console_out, console_in, log, callback)
         .context("Failed to create service VM")
 }
 

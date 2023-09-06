@@ -12,9 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//! This library provides a set of API to start, stop and communicate with
-//! the Service VM.
+//! This module contains the functions that interact with the Service VM
+//! manager and ensure that at any given time only one service VM is running.
 
-mod vm;
+use anyhow::Result;
+use service_vm_manager::{self, ServiceVm};
 
-pub use vm::{start, start_vm, ServiceVm};
+/// Starts the service VM and returns its instance.
+/// The same instance image is used for different VMs.
+/// TODO(b/278858244): Allow only one service VM running at each time.
+pub fn start() -> Result<ServiceVm> {
+    service_vm_manager::start()
+}
