@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0561105a_89d5a07b",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-06T13:00:36Z",
+      "side": 1,
+      "message": "..., which will kill the VM.",
+      "range": {
+        "startLine": 48,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 68
+      },
+      "revId": "2c17c31cdd07dbf8bbe823c0d25f6bbcd87fdaad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "608444f0_b0377d5b",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-06T13:00:36Z",
+      "side": 1,
+      "message": "Move this function into `impl ServiceVm` ?  It\u0027s a constructor.",
+      "range": {
+        "startLine": 81,
+        "startChar": 7,
+        "endLine": 81,
+        "endChar": 12
+      },
+      "revId": "2c17c31cdd07dbf8bbe823c0d25f6bbcd87fdaad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "658fe56c_bc1f372a",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-06T13:00:36Z",
+      "side": 1,
+      "message": "This would be so much better as an enum",
+      "range": {
+        "startLine": 83,
+        "startChar": 8,
+        "endLine": 83,
+        "endChar": 27
+      },
+      "revId": "2c17c31cdd07dbf8bbe823c0d25f6bbcd87fdaad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea3618f2_f5d7f111",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-06T13:00:36Z",
+      "side": 1,
+      "message": "Since you only ever accept one connection, you can just use `vsock_listener.accept()` - no need for the iterator.\nAs a bonus, that also gives you the peer address.",
+      "range": {
+        "startLine": 98,
+        "startChar": 7,
+        "endLine": 98,
+        "endChar": 40
+      },
+      "revId": "2c17c31cdd07dbf8bbe823c0d25f6bbcd87fdaad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2299bf57_b98c8bde",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-06T13:00:36Z",
+      "side": 1,
+      "message": "I don\u0027t think you need to care about what port it\u0027s using, only it\u0027s CID",
+      "range": {
+        "startLine": 101,
+        "startChar": 75,
+        "endLine": 101,
+        "endChar": 79
+      },
+      "revId": "2c17c31cdd07dbf8bbe823c0d25f6bbcd87fdaad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
