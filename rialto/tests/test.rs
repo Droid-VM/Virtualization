@@ -22,17 +22,16 @@ use android_system_virtualizationservice::{
     },
     binder::{ParcelFileDescriptor, ProcessState},
 };
-use anyhow::{anyhow, bail, Context, Result};
+use anyhow::{Context, Result};
 use log::info;
 use service_vm_comm::{Request, Response, VmType};
+use service_vm_manager::ServiceVm;
 use std::fs::File;
-use std::io::{self, BufRead, BufReader, BufWriter, Write};
+use std::io::{self, BufRead, BufReader};
 use std::os::unix::io::FromRawFd;
 use std::panic;
 use std::thread;
-use std::time::Duration;
-use vmclient::{DeathReason, VmInstance};
-use vsock::{VsockListener, VMADDR_CID_HOST};
+use vmclient::VmInstance;
 
 const SIGNED_RIALTO_PATH: &str = "/data/local/tmp/rialto_test/arm64/rialto.bin";
 const UNSIGNED_RIALTO_PATH: &str = "/data/local/tmp/rialto_test/arm64/rialto_unsigned.bin";
@@ -62,6 +61,21 @@ fn boot_rialto_successfully(rialto_path: &str, vm_type: VmType) -> Result<()> {
     // We need to start the thread pool for Binder to work properly, especially link_to_death.
     ProcessState::start_thread_pool();
 
+    let mut vm = ServiceVm::start_vm(vm_instance(rialto_path, vm_type)?, vm_type)?;
+
+    // TODO(b/292080257): Test with message longer than the receiver's buffer capacity
+    // 1024 bytes once the guest virtio-vsock driver fixes the credit update in recv().
+    let message = "abc".repeat(166);
+    let request = Request::Reverse(message.as_bytes().to_vec());
+    let response = vm.process_request(&request)?;
+    info!("Received response: {response:?}.");
+
+    let expected_response: Vec<u8> = message.as_bytes().iter().rev().cloned().collect();
+    assert_eq!(Response::Reverse(expected_response), response);
+    Ok(())
+}
+
+fn vm_instance(rialto_path: &str, vm_type: VmType) -> Result<VmInstance> {
     let virtmgr =
         vmclient::VirtualizationService::new().context("Failed to spawn VirtualizationService")?;
     let service = virtmgr.connect().context("Failed to connect to VirtualizationService")?;
@@ -96,7 +110,6 @@ fn boot_rialto_successfully(rialto_path: &str, vm_type: VmType) -> Result<()> {
         }
         VmType::NonProtectedVm => vec![],
     };
-
     let config = VirtualMachineConfig::RawConfig(VirtualMachineRawConfig {
         name: String::from("RialtoTest"),
         kernel: None,
@@ -111,7 +124,7 @@ fn boot_rialto_successfully(rialto_path: &str, vm_type: VmType) -> Result<()> {
         gdbPort: 0, // No gdb
         ..Default::default()
     });
-    let vm = VmInstance::create(
+    VmInstance::create(
         service.as_ref(),
         &config,
         Some(console),
@@ -119,29 +132,7 @@ fn boot_rialto_successfully(rialto_path: &str, vm_type: VmType) -> Result<()> {
         Some(log),
         None,
     )
-    .context("Failed to create VM")?;
-
-    let check_socket_handle =
-        thread::spawn(move || try_check_socket_connection(vm_type.port()).unwrap());
-
-    vm.start().context("Failed to start VM")?;
-
-    // Wait for VM to finish, and check that it shut down cleanly.
-    let death_reason = vm
-        .wait_for_death_with_timeout(Duration::from_secs(10))
-        .ok_or_else(|| anyhow!("Timed out waiting for VM exit"))?;
-    assert_eq!(death_reason, DeathReason::Shutdown);
-
-    match check_socket_handle.join() {
-        Ok(_) => {
-            info!(
-                "Received the echoed message. \
-                   The socket connection between the host and the service VM works correctly."
-            )
-        }
-        Err(_) => bail!("The socket connection check failed."),
-    }
-    Ok(())
+    .context("Failed to create VM")
 }
 
 fn android_log_fd() -> io::Result<File> {
@@ -158,33 +149,4 @@ fn android_log_fd() -> io::Result<File> {
         }
     });
     Ok(writer)
-}
-
-fn try_check_socket_connection(port: u32) -> Result<()> {
-    info!("Setting up the listening socket on port {port}...");
-    let listener = VsockListener::bind_with_cid_port(VMADDR_CID_HOST, port)?;
-    info!("Listening on port {port}...");
-
-    let mut vsock_stream =
-        listener.incoming().next().ok_or_else(|| anyhow!("Failed to get vsock_stream"))??;
-    info!("Accepted connection {:?}", vsock_stream);
-    vsock_stream.set_read_timeout(Some(Duration::from_millis(1_000)))?;
-
-    const WRITE_BUFFER_CAPACITY: usize = 512;
-    let mut buffer = BufWriter::with_capacity(WRITE_BUFFER_CAPACITY, vsock_stream.clone());
-
-    // TODO(b/292080257): Test with message longer than the receiver's buffer capacity
-    // 1024 bytes once the guest virtio-vsock driver fixes the credit update in recv().
-    let message = "abc".repeat(166);
-    let request = Request::Reverse(message.as_bytes().to_vec());
-    ciborium::into_writer(&request, &mut buffer)?;
-    buffer.flush()?;
-    info!("Sent request: {request:?}.");
-
-    let response: Response = ciborium::from_reader(&mut vsock_stream)?;
-    info!("Received response: {response:?}.");
-
-    let expected_response: Vec<u8> = message.as_bytes().iter().rev().cloned().collect();
-    assert_eq!(Response::Reverse(expected_response), response);
-    Ok(())
 }
