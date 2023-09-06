@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46d21719_b2786cfe",
+        "filename": "libs/service_vm_comm/src/message.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-06T08:26:25Z",
+      "side": 1,
+      "message": "Oh you are right. I\u0027ll just remove this boolean then.",
+      "parentUuid": "968006bd_9b331369",
+      "range": {
+        "startLine": 33,
+        "startChar": 1,
+        "endLine": 34,
+        "endChar": 13
+      },
+      "revId": "58b69b3ff69435e3253cae8cbe1d7c9ad267f6ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64656706_70ec1cd8",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-09-05T15:54:24Z",
       "side": 1,
       "message": "This is the response, so the comment should be something like \"Returns the new ECDSA key pair\".",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 70
+      },
+      "revId": "58b69b3ff69435e3253cae8cbe1d7c9ad267f6ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e38f7925_9bc4c083",
+        "filename": "libs/service_vm_comm/src/message.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-06T08:26:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64656706_70ec1cd8",
       "range": {
         "startLine": 45,
         "startChar": 0,
@@ -89,6 +137,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37478679_3428ed8a",
+        "filename": "libs/service_vm_comm/src/message.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-06T08:26:25Z",
+      "side": 1,
+      "message": "Right. I thought to pass the error during the request processing back to the host, or we can also make this error part of the rialto/error.rs and just treat the request processing error the same way as other rialto errors.",
+      "parentUuid": "1e345c46_09816509",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 28
+      },
+      "revId": "58b69b3ff69435e3253cae8cbe1d7c9ad267f6ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1c9a28e2_8eedcf8e",
         "filename": "rialto/src/requests/rkp.rs",
         "patchSetId": 1
@@ -100,6 +172,30 @@
       "writtenOn": "2023-09-05T15:54:24Z",
       "side": 1,
       "message": "Can you expand the acronym on first use here?",
+      "range": {
+        "startLine": 16,
+        "startChar": 23,
+        "endLine": 16,
+        "endChar": 26
+      },
+      "revId": "58b69b3ff69435e3253cae8cbe1d7c9ad267f6ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50bb0662_dd9994af",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-06T08:26:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c9a28e2_8eedcf8e",
       "range": {
         "startLine": 16,
         "startChar": 23,
