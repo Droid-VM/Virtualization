@@ -49,6 +49,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1175babd_9ad59348",
+        "filename": "service_vm/service_vm_manager/src/vm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-06T13:13:30Z",
+      "side": 1,
+      "message": "You mean adding an parceable enum and replacing it everywhere or just in this library?",
+      "parentUuid": "b5f3befe_b765a218",
+      "range": {
+        "startLine": 97,
+        "startChar": 32,
+        "endLine": 97,
+        "endChar": 51
+      },
+      "revId": "c1d34a93d84715ba63ec8827fe0a1658773441a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bae3f21_09f885e8",
+        "filename": "service_vm/service_vm_manager/src/vm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-06T13:13:30Z",
+      "side": 1,
+      "message": "It needs to be `pub` so that `rialto_test` can call it with a customized VmInstance.",
+      "parentUuid": "09a3d35e_352f53eb",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 3
+      },
+      "revId": "c1d34a93d84715ba63ec8827fe0a1658773441a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "07e2eb5b_1f82af53",
         "filename": "virtualizationservice/src/service_vm.rs",
         "patchSetId": 1
@@ -60,6 +108,30 @@
       "writtenOn": "2023-09-06T12:47:08Z",
       "side": 1,
       "message": "This function doesn\u0027t have any need to exist at this point.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 1
+      },
+      "revId": "c1d34a93d84715ba63ec8827fe0a1658773441a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f10d133_d1b6b270",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-06T13:13:30Z",
+      "side": 1,
+      "message": "Oh that\u0027s true. I\u0027ll move it to the next cl when ensuring that only one service VM is running.",
+      "parentUuid": "07e2eb5b_1f82af53",
       "range": {
         "startLine": 21,
         "startChar": 0,
