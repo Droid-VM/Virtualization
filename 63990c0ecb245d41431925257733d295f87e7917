@@ -200,6 +200,30 @@
       },
       "revId": "63990c0ecb245d41431925257733d295f87e7917",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39ae4434_32af46a7",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-06T11:05:55Z",
+      "side": 1,
+      "message": "Ah so I can just drop the `VmInstance` here directly. Thanks. Then I don\u0027t need to implement shutdown or drop, right? since when the `ServiceVm` in https://r.android.com/2738638 goes out of the scope, VmInstance and VsockStream will be dropped automatically.",
+      "parentUuid": "0d5bd33a_838eb974",
+      "range": {
+        "startLine": 72,
+        "startChar": 12,
+        "endLine": 72,
+        "endChar": 70
+      },
+      "revId": "63990c0ecb245d41431925257733d295f87e7917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
