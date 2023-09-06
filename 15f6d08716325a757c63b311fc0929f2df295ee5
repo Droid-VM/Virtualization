@@ -46,6 +46,30 @@
       },
       "revId": "15f6d08716325a757c63b311fc0929f2df295ee5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "551624bf_3df9a87a",
+        "filename": "virtualizationservice/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-09-06T16:49:27Z",
+      "side": 1,
+      "message": "Aha, yeah. That should do it! Sorry I only looked at Patchset 5 😊\n\nI\u0027m pretty sure you\u0027ll have to change the package name back to `android.hardware.security.keymint` for it to be found by rkpd, though.\n\nWe also need to figure out how to deal with rkp_factory_extraction_tool. It would be best to have a chat about that offline -- I\u0027ll send a message to you and Alan and we can discuss.",
+      "parentUuid": "1a847cc5_d8333179",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 26
+      },
+      "revId": "15f6d08716325a757c63b311fc0929f2df295ee5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
