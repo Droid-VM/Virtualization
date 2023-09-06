@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f8668cb_262cf52e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-06T14:58:26Z",
+      "side": 1,
+      "message": "Done. But I think maybe at some point we will want to group all the service_vm libs/app. There are the client App, service_vm_comm and service_vm_manager.",
+      "parentUuid": "704e0cbc_9409e384",
+      "revId": "7fab9ddbee3c76de1bc157674518f0dddf1698b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "865cf90e_cc337688",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-09-06T12:41:05Z",
       "side": 1,
       "message": "I\u0027m not convinced that the separate lib.rs is actually helping here. This is a simple 1-file library; why not rename vm.rs to lib.rs?\n\nIf it gets more complicated we can refactor later.",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 31
+      },
+      "revId": "7fab9ddbee3c76de1bc157674518f0dddf1698b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9c5c6db_9566c6ac",
+        "filename": "service_vm/service_vm_manager/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-06T14:58:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "865cf90e_cc337688",
       "range": {
         "startLine": 5,
         "startChar": 0,
