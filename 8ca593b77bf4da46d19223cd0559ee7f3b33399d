@@ -39,6 +39,30 @@
       },
       "revId": "8ca593b77bf4da46d19223cd0559ee7f3b33399d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d7cb9e8_58e0e0df",
+        "filename": "rialto/src/requests/api.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-07T15:13:04Z",
+      "side": 1,
+      "message": "I also have some hesitations here. If we introduce an error, it will clearly never be reachable. Similarly, if we introduce a Response, it won\u0027t be sent to the host like its counterparts.\n\nWhat if we introduce a parent Request type called ServiceVmRequest, and the current Request type becomes an entry within it? It could look something like this:\n\n```\nenum ServiceVmRequest {\n    Processing(Request), // requests to be processed, current request \n    System(SystemRequest), // e.g. shutdown, requests to be processed by rialto, no response expected.\n}\n```\nBy doing this, we can maintain symmetry between Request and Response. Additionally, we can restrict the `process_request` API in both the host and the service VM to only handle the subtype Request.\n\nwdyt?",
+      "parentUuid": "faf50eb5_f954984f",
+      "range": {
+        "startLine": 36,
+        "startChar": 29,
+        "endLine": 36,
+        "endChar": 88
+      },
+      "revId": "8ca593b77bf4da46d19223cd0559ee7f3b33399d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
