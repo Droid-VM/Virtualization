@@ -27,11 +27,8 @@ use log::info;
 use service_vm_comm::{Request, Response, VmType};
 use service_vm_manager::ServiceVm;
 use std::fs::File;
-use std::io::{self, BufRead, BufReader};
-use std::os::unix::io::FromRawFd;
 use std::panic;
 use std::path::PathBuf;
-use std::thread;
 use vmclient::VmInstance;
 
 const SIGNED_RIALTO_PATH: &str = "/data/local/tmp/rialto_test/arm64/rialto.bin";
@@ -94,8 +91,8 @@ fn vm_instance(vm_type: VmType) -> Result<VmInstance> {
     let service = virtmgr.connect().context("Failed to connect to VirtualizationService")?;
 
     let rialto = File::open(rialto_path(vm_type)).context("Failed to open Rialto kernel binary")?;
-    let console = android_log_fd()?;
-    let log = android_log_fd()?;
+    let console = service_vm_manager::android_log_fd()?;
+    let log = service_vm_manager::android_log_fd()?;
 
     let disks = match vm_type {
         VmType::ProtectedVm => {
@@ -114,9 +111,6 @@ fn vm_instance(vm_type: VmType) -> Result<VmInstance> {
     };
     let config = VirtualMachineConfig::RawConfig(VirtualMachineRawConfig {
         name: String::from("RialtoTest"),
-        kernel: None,
-        initrd: None,
-        params: None,
         bootloader: Some(ParcelFileDescriptor::new(rialto)),
         disks,
         protectedVm: vm_type.is_protected(),
@@ -135,20 +129,4 @@ fn vm_instance(vm_type: VmType) -> Result<VmInstance> {
         None,
     )
     .context("Failed to create VM")
-}
-
-fn android_log_fd() -> io::Result<File> {
-    let (reader_fd, writer_fd) = nix::unistd::pipe()?;
-
-    // SAFETY: These are new FDs with no previous owner.
-    let reader = unsafe { File::from_raw_fd(reader_fd) };
-    // SAFETY: These are new FDs with no previous owner.
-    let writer = unsafe { File::from_raw_fd(writer_fd) };
-
-    thread::spawn(|| {
-        for line in BufReader::new(reader).lines() {
-            info!("{}", line.unwrap());
-        }
-    });
-    Ok(writer)
 }
