@@ -16,6 +16,29 @@
       "message": "Hi Alan, PTAL",
       "revId": "8ca593b77bf4da46d19223cd0559ee7f3b33399d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faf50eb5_f954984f",
+        "filename": "rialto/src/requests/api.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-07T14:55:19Z",
+      "side": 1,
+      "message": "You could handle it here and return a psuedo-error to indicate shutdown?\nOr you could actually send a response and then shutdown.\n\n(Neither is inherently better, it\u0027s just having an enum where one option can never happen is bothering me.)",
+      "range": {
+        "startLine": 36,
+        "startChar": 29,
+        "endLine": 36,
+        "endChar": 88
+      },
+      "revId": "8ca593b77bf4da46d19223cd0559ee7f3b33399d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
