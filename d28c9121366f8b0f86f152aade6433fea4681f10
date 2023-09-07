@@ -46,6 +46,30 @@
       },
       "revId": "d28c9121366f8b0f86f152aade6433fea4681f10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d86a49f3_89040431",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-07T11:39:02Z",
+      "side": 1,
+      "message": "Ok. I can log a warning in case of timeout expiration.\n\nOtherwise I\u0027d like to add a Request type `Shutdown` in a subsequent cl and loop the request processing in rialto. Once we receive a Shutdown request, we exit rialto. wdyt?",
+      "parentUuid": "5986bd59_aab0504d",
+      "range": {
+        "startLine": 113,
+        "startChar": 8,
+        "endLine": 115,
+        "endChar": 53
+      },
+      "revId": "d28c9121366f8b0f86f152aade6433fea4681f10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
