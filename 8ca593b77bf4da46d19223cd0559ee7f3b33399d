@@ -63,6 +63,30 @@
       },
       "revId": "8ca593b77bf4da46d19223cd0559ee7f3b33399d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c00543f_f20499bb",
+        "filename": "rialto/src/requests/api.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-07T15:19:57Z",
+      "side": 1,
+      "message": "Mmm, that could work.\nOr indeed we can simplify the second branch:\n```\nenum ServiceVmRequest {\n    Process(Request),\n    Shutdown\n}\n```",
+      "parentUuid": "0d7cb9e8_58e0e0df",
+      "range": {
+        "startLine": 36,
+        "startChar": 29,
+        "endLine": 36,
+        "endChar": 88
+      },
+      "revId": "8ca593b77bf4da46d19223cd0559ee7f3b33399d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
