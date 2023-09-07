@@ -141,6 +141,30 @@
       },
       "revId": "9f64fddd6e32ca6b1b6d17a8c8f518d73a55b3af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2acd1fb9_598b3ad6",
+        "filename": "virtualizationservice/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-07T12:53:54Z",
+      "side": 1,
+      "message": "I think you could work around the issue by putting the dtbo file in a sub directory. For example, \"common\" or \"global\".",
+      "parentUuid": "2ab14517_cc3a86a4",
+      "range": {
+        "startLine": 73,
+        "startChar": 8,
+        "endLine": 73,
+        "endChar": 32
+      },
+      "revId": "9f64fddd6e32ca6b1b6d17a8c8f518d73a55b3af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
