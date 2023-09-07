@@ -24,7 +24,7 @@ type MacedPublicKey = Vec<u8>;
 /// Represents a request to be sent to the service VM.
 ///
 /// Each request has a corresponding response item.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub enum Request {
     /// Reverse the order of the bytes in the provided byte array.
     /// Currently this is only used for testing.
@@ -37,6 +37,10 @@ pub enum Request {
     /// Creates a certificate signing request to be sent to the
     /// provisioning server.
     GenerateCertificateRequest(GenerateCertificateRequestParams),
+
+    /// Shutdown request is intended to be processed by the system to shut down
+    /// the service VM, and no response is expected from it.
+    Shutdown,
 }
 
 /// Represents a response to a request sent to the service VM.
@@ -55,7 +59,7 @@ pub enum Response {
 }
 
 /// Represents the params passed to GenerateCertificateRequest
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct GenerateCertificateRequestParams {
     /// Contains the set of keys to certify.
     pub keys_to_sign: Vec<MacedPublicKey>,

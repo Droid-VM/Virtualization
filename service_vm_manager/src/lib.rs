@@ -24,14 +24,14 @@ use android_system_virtualizationservice::{
     },
     binder::ParcelFileDescriptor,
 };
-use anyhow::{ensure, Context, Result};
+use anyhow::{anyhow, ensure, Context, Result};
 use log::{info, warn};
 use service_vm_comm::{Request, Response, VmType};
 use std::fs::{File, OpenOptions};
 use std::io::{BufWriter, Write};
 use std::path::{Path, PathBuf};
 use std::time::Duration;
-use vmclient::VmInstance;
+use vmclient::{DeathReason, VmInstance};
 use vsock::{VsockListener, VsockStream, VMADDR_CID_HOST};
 
 const VIRT_DATA_DIR: &str = "/data/misc/apexdata/com.android.virt";
@@ -88,6 +88,10 @@ impl ServiceVm {
 
     /// Processes the request in the service VM.
     pub fn process_request(&mut self, request: &Request) -> Result<Response> {
+        ensure!(
+            request != &Request::Shutdown,
+            "Shutdown request shouldn't be sent to this function."
+        );
         self.write_request(request)?;
         self.read_response()
     }
@@ -108,14 +112,22 @@ impl ServiceVm {
         info!("Received response from the service VM.");
         Ok(response)
     }
+
+    /// Shuts down the service VM.
+    fn shutdown(&mut self) -> Result<DeathReason> {
+        self.write_request(&Request::Shutdown)?;
+        self.vm
+            .wait_for_death_with_timeout(Duration::from_secs(10))
+            .ok_or_else(|| anyhow!("Timed out to exit the service VM"))
+    }
 }
 
 impl Drop for ServiceVm {
     fn drop(&mut self) {
         // Wait till the service VM finishes releasing all the resources.
-        match self.vm.wait_for_death_with_timeout(Duration::from_secs(10)) {
-            Some(e) => info!("Exit the service VM: {e:?}"),
-            None => warn!("Timed out waiting for service VM exit"),
+        match self.shutdown() {
+            Ok(reason) => info!("Exit the service VM successfully: {reason:?}"),
+            Err(e) => warn!("Failed to exit the service VM: {e:?}"),
         }
     }
 }

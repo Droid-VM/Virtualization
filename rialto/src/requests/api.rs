@@ -33,6 +33,7 @@ pub fn process_request(request: Request) -> Result<Response> {
             let res = rkp::generate_certificate_request(p)?;
             Response::GenerateCertificateRequest(res)
         }
+        Request::Shutdown => panic!("Shutdown request is not handled in this function"),
     };
     Ok(response)
 }
