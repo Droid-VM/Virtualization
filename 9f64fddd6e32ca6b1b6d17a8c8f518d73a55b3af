@@ -117,6 +117,30 @@
       },
       "revId": "9f64fddd6e32ca6b1b6d17a8c8f518d73a55b3af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ab14517_cc3a86a4",
+        "filename": "virtualizationservice/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-09-07T11:57:50Z",
+      "side": 1,
+      "message": "I have to, or it causes a panic. When reading `TEMPORARY_DIRECTORY`, it includes directory per `cid` and dtbo file. When `dtbo` file is given as parameter into the function `remove_temporary_dir`, it occurs an error so that virtualizationservice is not executed well.\n\nhttps://source.corp.google.com/h/android/platform/superproject/main/+/main:packages/modules/Virtualization/virtualizationservice/src/aidl.rs;l\u003d349\n\nSo I want to ask if I need to support removing dtbo file when clearing temporary directory or not.",
+      "parentUuid": "0a329473_796710a0",
+      "range": {
+        "startLine": 73,
+        "startChar": 8,
+        "endLine": 73,
+        "endChar": 32
+      },
+      "revId": "9f64fddd6e32ca6b1b6d17a8c8f518d73a55b3af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
