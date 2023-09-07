@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0f93d32_1973eb9d",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-07T11:09:45Z",
+      "side": 1,
+      "message": "I think we still need to wait here before proceeding with the drop. Without this wait, the VM may exit immediately after receiving the Response. It is preferable to wait for Rialto to execute all the code after [1] in order to properly release the resources.\n\nWithout this waiting, I have observed some issues, such as the vsock address still being in use error, when attempting to run the service VM for a second time.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/rialto/src/main.rs;l\u003d144;drc\u003d1d9a587aa5c108dec7a5a19b8ae6d26fd4094602",
+      "range": {
+        "startLine": 113,
+        "startChar": 8,
+        "endLine": 115,
+        "endChar": 53
+      },
+      "revId": "d28c9121366f8b0f86f152aade6433fea4681f10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

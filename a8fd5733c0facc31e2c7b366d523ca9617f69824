@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21031462_ffb7e8d0",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-07T11:09:45Z",
+      "side": 1,
+      "message": "We can make these 10 seconds.",
+      "parentUuid": "b3ac709f_c638a1d5",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 55
+      },
+      "revId": "a8fd5733c0facc31e2c7b366d523ca9617f69824",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25a1c7ab_b31eb0e4",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-09-07T10:47:33Z",
       "side": 1,
       "message": "This could block forever, so we should probably do something about that.\nUnfortunately it\u0027s a bit messy. (Nonblocking socket + select/poll + timeout loop, I think.)\nTODO + bug?",
+      "range": {
+        "startLine": 72,
+        "startChar": 55,
+        "endLine": 72,
+        "endChar": 63
+      },
+      "revId": "a8fd5733c0facc31e2c7b366d523ca9617f69824",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "499a6690_7a39c40f",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-07T11:09:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25a1c7ab_b31eb0e4",
       "range": {
         "startLine": 72,
         "startChar": 55,
