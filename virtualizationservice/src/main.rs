@@ -25,7 +25,7 @@ use crate::aidl::{
 };
 use android_logger::{Config, FilterBuilder};
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IVirtualizationServiceInternal::BnVirtualizationServiceInternal;
-use anyhow::Error;
+use anyhow::{anyhow, Error};
 use binder::{register_lazy_service, BinderFeatures, ProcessState, ThreadState};
 use log::{info, Level};
 use std::fs::read_dir;
@@ -65,10 +65,14 @@ fn main() {
     ProcessState::join_thread_pool();
 }
 
-/// Remove any files under `TEMPORARY_DIRECTORY`.
+/// Remove any files under `TEMPORARY_DIRECTORY` except dtbo file.
 fn clear_temporary_files() -> Result<(), Error> {
     for dir_entry in read_dir(TEMPORARY_DIRECTORY)? {
-        remove_temporary_dir(&dir_entry?.path())?
+        let path = dir_entry?.path();
+        let file_name = path.file_name().ok_or_else(|| anyhow!("File name missing"))?;
+        if file_name != "dtbo" {
+            remove_temporary_dir(&path)?;
+        }
     }
     Ok(())
 }
