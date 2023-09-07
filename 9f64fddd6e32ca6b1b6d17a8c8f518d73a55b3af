@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2928b06_1c3fc67d",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-07T08:03:26Z",
+      "side": 1,
+      "message": "please use the new or_service_specific_exception",
+      "range": {
+        "startLine": 220,
+        "startChar": 47,
+        "endLine": 226,
+        "endChar": 14
+      },
+      "revId": "9f64fddd6e32ca6b1b6d17a8c8f518d73a55b3af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28c2de3e_87e58ec0",
+        "filename": "virtualizationservice/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-07T08:03:26Z",
+      "side": 1,
+      "message": "We should delete this directory upon rebooting because dtbo might have been updated.",
+      "range": {
+        "startLine": 73,
+        "startChar": 8,
+        "endLine": 73,
+        "endChar": 32
+      },
+      "revId": "9f64fddd6e32ca6b1b6d17a8c8f518d73a55b3af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
