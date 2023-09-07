@@ -22,6 +22,30 @@
       },
       "revId": "d28c9121366f8b0f86f152aade6433fea4681f10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5986bd59_aab0504d",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-07T11:29:08Z",
+      "side": 1,
+      "message": "Well, in that case I think you should have an explicit \"please exit\" request to send to Rialto, and send it before waiting here. (That\u0027s what we do for other VMs.)\nThe current semantics that Rialto exits as soon as it processes a request don\u0027t seem right.\n`expect` here is definitely wrong - if the timeout expires we need to kill the VM anyway (by letting the drop finish), not panic. You should probably just log a warning.",
+      "parentUuid": "c0f93d32_1973eb9d",
+      "range": {
+        "startLine": 113,
+        "startChar": 8,
+        "endLine": 115,
+        "endChar": 53
+      },
+      "revId": "d28c9121366f8b0f86f152aade6433fea4681f10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
