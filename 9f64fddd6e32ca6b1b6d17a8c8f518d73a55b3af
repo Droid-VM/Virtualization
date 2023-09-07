@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af9877f0_fcb4b2d0",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-09-07T08:19:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2928b06_1c3fc67d",
+      "range": {
+        "startLine": 220,
+        "startChar": 47,
+        "endLine": 226,
+        "endChar": 14
+      },
+      "revId": "9f64fddd6e32ca6b1b6d17a8c8f518d73a55b3af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28c2de3e_87e58ec0",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-09-07T08:03:26Z",
       "side": 1,
       "message": "We should delete this directory upon rebooting because dtbo might have been updated.",
+      "range": {
+        "startLine": 73,
+        "startChar": 8,
+        "endLine": 73,
+        "endChar": 32
+      },
+      "revId": "9f64fddd6e32ca6b1b6d17a8c8f518d73a55b3af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6d846e4_86ac6b05",
+        "filename": "virtualizationservice/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-09-07T08:19:05Z",
+      "side": 1,
+      "message": "Agree, but I have no idea how to remove the directory upon rebooting. Shall I remove dtbo files when `virtualizationservice` ends and starts again like other temporary files?",
+      "parentUuid": "28c2de3e_87e58ec0",
       "range": {
         "startLine": 73,
         "startChar": 8,
