@@ -107,7 +107,7 @@ public class VirtualMachineManager {
     @Retention(RetentionPolicy.SOURCE)
     @StringDef(
             prefix = "FEATURE_",
-            value = {FEATURE_PAYLOAD_NOT_ROOT, FEATURE_VENDOR_MODULES})
+            value = {FEATURE_PAYLOAD_NOT_ROOT, FEATURE_VENDOR_MODULES, FEATURE_SAMPLE_FLAG})
     public @interface Features {}
 
     /**
@@ -127,6 +127,14 @@ public class VirtualMachineManager {
     @TestApi
     public static final String FEATURE_VENDOR_MODULES =
             IVirtualizationService.FEATURE_VENDOR_MODULES;
+
+    /**
+     * Sample feature
+     *
+     * @hide
+     */
+    @TestApi
+    public static final String FEATURE_SAMPLE_FLAG = IVirtualizationService.FEATURE_SAMPLE_FLAG;
 
     /**
      * Returns a set of flags indicating what this implementation of virtualization is capable of.

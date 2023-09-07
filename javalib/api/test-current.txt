@@ -20,6 +20,7 @@ package android.system.virtualmachine {
   public class VirtualMachineManager {
     method @RequiresPermission(android.system.virtualmachine.VirtualMachine.MANAGE_VIRTUAL_MACHINE_PERMISSION) public boolean isFeatureEnabled(String) throws android.system.virtualmachine.VirtualMachineException;
     field public static final String FEATURE_PAYLOAD_NOT_ROOT = "com.android.kvm.PAYLOAD_NON_ROOT";
+    field public static final String FEATURE_SAMPLE_FLAG = "com.android.kvm.SAMPLE_FLAG";
     field public static final String FEATURE_VENDOR_MODULES = "com.android.kvm.VENDOR_MODULES";
   }
 

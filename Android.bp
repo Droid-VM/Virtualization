@@ -35,6 +35,7 @@ soong_config_module_type {
     bool_variables: [
         "release_avf_enable_multi_tenant_microdroid_vm",
         "release_avf_enable_vendor_modules",
+        "release_avf_sample_flag",
     ],
     properties: [
         "cfgs",
@@ -49,6 +50,9 @@ avf_flag_aware_rust_defaults {
         },
         release_avf_enable_vendor_modules: {
             cfgs: ["vendor_modules"],
+        },
+        release_avf_sample_flag: {
+            cfgs: ["sample_flag"],
         },
     },
 }
