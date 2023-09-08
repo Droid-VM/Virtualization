@@ -22,6 +22,30 @@
       },
       "revId": "639f2058782e7b5dbb062574673708b1debe8cc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41126305_f29865eb",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-09-08T02:13:55Z",
+      "side": 1,
+      "message": "That file is controlled under `virtualizationservice_data_file`, so it\u0027s already managed like per-VM files.\n\nhttps://source.corp.google.com/h/android/platform/superproject/main/+/main:system/sepolicy/private/file_contexts;l\u003d663",
+      "parentUuid": "aeac72f4_d94ba8f4",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 47
+      },
+      "revId": "639f2058782e7b5dbb062574673708b1debe8cc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
