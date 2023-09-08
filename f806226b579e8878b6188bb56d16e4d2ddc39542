@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c722a787_60d8ce12",
+        "filename": "service_vm_manager/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-08T12:17:14Z",
+      "side": 1,
+      "message": "Right. In theory, this mutex can be held during all the start period. We should definitely do some profiling once everything is done, maybe it\u0027ll be necessary to introduce some states here instead of using a boolean `is_running`. We\u0027ll see that later.",
+      "parentUuid": "86eec951_4dc48b6f",
+      "range": {
+        "startLine": 66,
+        "startChar": 32,
+        "endLine": 66,
+        "endChar": 36
+      },
+      "revId": "f806226b579e8878b6188bb56d16e4d2ddc39542",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0555219_aa223b89",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-09-08T11:39:36Z",
       "side": 1,
       "message": "I think it\u0027s safe, and probably a good idea, to move this after the call to shutdown.\nWe own the VM, we can stop it without needing the mutex; we only need the mutex locked to update is_running.\n(And we could expose a method to lock, set it false, and notify from SERVICE_VM_STATE rather than having it here.)",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 71
+      },
+      "revId": "f806226b579e8878b6188bb56d16e4d2ddc39542",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e83e2e6_997d9af6",
+        "filename": "service_vm_manager/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-08T12:17:14Z",
+      "side": 1,
+      "message": "You\u0027re right. When one service VM wants to start while another one is shutting down, the starting should be blocked anyway since `is_running` is `true`.",
+      "parentUuid": "c0555219_aa223b89",
       "range": {
         "startLine": 168,
         "startChar": 0,
