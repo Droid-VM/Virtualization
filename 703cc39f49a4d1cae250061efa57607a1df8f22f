@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c01da24_d04fc04c",
+        "filename": "virtualizationservice/src/remote_provisioning.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-08T13:32:35Z",
+      "side": 1,
+      "message": "Do we need any context here - at least what function it is?\n\nWe should keep the  .with_log() for all of these.\n\nWhy ILLEGAL_STATE? Is there any service specific exception that would be more appropriate?",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 64
+      },
+      "revId": "703cc39f49a4d1cae250061efa57607a1df8f22f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
