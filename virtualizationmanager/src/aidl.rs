@@ -1236,8 +1236,20 @@ impl IVirtualMachineService for VirtualMachineService {
         }
     }
 
+    #[cfg(remote_attestation)]
     fn requestCertificate(&self, csr: &[u8]) -> binder::Result<Vec<u8>> {
         GLOBAL_SERVICE.requestCertificate(csr)
+    }
+
+    #[cfg(not(remote_attestation))]
+    fn requestCertificate(&self, _csr: &[u8]) -> binder::Result<Vec<u8>> {
+        Err(Status::new_exception_str(
+            ExceptionCode::UNSUPPORTED_OPERATION,
+            Some(
+                "requestCertificate is not supported with the remote_attestation feature disabled",
+            ),
+        ))
+        .with_log()
     }
 }
 
