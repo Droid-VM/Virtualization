@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a5fc184_b0771574",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-08T10:10:33Z",
+      "side": 1,
+      "message": "Ah, looks like my local build incantation misses that :-(\nDone.",
+      "parentUuid": "4e136d55_727d1755",
+      "range": {
+        "startLine": 118,
+        "startChar": 5,
+        "endLine": 118,
+        "endChar": 12
+      },
+      "revId": "c6f754f50a4457f66c25162bbb403cc461ed26b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a929d0b_74937590",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-09-07T16:58:26Z",
       "side": 1,
       "message": "You also need to update virtualizationmanager/src/aidl.rs\n\n(Sorry for the cumbersome process :( I will think on how to improve it)",
+      "range": {
+        "startLine": 25,
+        "startChar": 17,
+        "endLine": 25,
+        "endChar": 37
+      },
+      "revId": "c6f754f50a4457f66c25162bbb403cc461ed26b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92238977_d695149c",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/IVirtualizationService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-08T10:10:33Z",
+      "side": 1,
+      "message": "I was in a bit of a hurry cos I wanted to get the other 2 CLs out by EoD.",
+      "parentUuid": "8a929d0b_74937590",
       "range": {
         "startLine": 25,
         "startChar": 17,

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c86de8a_b307e875",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-08T10:10:33Z",
+      "side": 1,
+      "message": "I had this logic the wrong way round :-(\n\nNow old behavior is preserved if the cfg is not enabled, as desired.",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 50
+      },
+      "revId": "3d52a9752756a40c1277ee8d44e89d16ef286421",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
