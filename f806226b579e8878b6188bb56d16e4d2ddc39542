@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86eec951_4dc48b6f",
+        "filename": "service_vm_manager/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-08T11:39:36Z",
+      "side": 1,
+      "message": "Note that this can block for quite a long time (e.g. while another VM is starting), and that isn\u0027t accounted for in the timeout.\nI\u0027m not sure that matters, but we should be aware of it.",
+      "range": {
+        "startLine": 66,
+        "startChar": 32,
+        "endLine": 66,
+        "endChar": 36
+      },
+      "revId": "f806226b579e8878b6188bb56d16e4d2ddc39542",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0555219_aa223b89",
+        "filename": "service_vm_manager/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-08T11:39:36Z",
+      "side": 1,
+      "message": "I think it\u0027s safe, and probably a good idea, to move this after the call to shutdown.\nWe own the VM, we can stop it without needing the mutex; we only need the mutex locked to update is_running.\n(And we could expose a method to lock, set it false, and notify from SERVICE_VM_STATE rather than having it here.)",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 71
+      },
+      "revId": "f806226b579e8878b6188bb56d16e4d2ddc39542",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
