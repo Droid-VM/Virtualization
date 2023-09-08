@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc2a0052_60432d65",
+        "filename": "service_vm_manager/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-08T10:15:51Z",
+      "side": 1,
+      "message": "I would rephrase this - e.g. \"Service VM shutdown request failed, killing it\"\n(The VM is definitely going away.)",
+      "range": {
+        "startLine": 129,
+        "startChar": 29,
+        "endLine": 129,
+        "endChar": 65
+      },
+      "revId": "3f5144ab4de1479a42bd299d6072a57dcfb4dee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
