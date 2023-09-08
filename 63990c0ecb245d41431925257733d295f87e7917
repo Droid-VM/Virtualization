@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11c7815a_bdba3088",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-08T09:49:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a4c65b1_b24c1c52",
+      "range": {
+        "startLine": 42,
+        "startChar": 31,
+        "endLine": 42,
+        "endChar": 53
+      },
+      "revId": "63990c0ecb245d41431925257733d295f87e7917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61089a4a_8c9f2988",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-09-05T15:33:51Z",
       "side": 1,
       "message": "Why do you need the Arc? This is constructed once and will never be dropped.\nBoth Mutex and Condvar are Send \u0026 Sync and you don\u0027t need them to be mutable.",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 43,
+        "endChar": 16
+      },
+      "revId": "63990c0ecb245d41431925257733d295f87e7917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ed86351_9ec168be",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-08T09:49:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61089a4a_8c9f2988",
       "range": {
         "startLine": 43,
         "startChar": 8,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fe881d9_4ba17531",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-08T09:49:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e07adf8c_8ffd2dc4",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 5
+      },
+      "revId": "63990c0ecb245d41431925257733d295f87e7917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad1924d2_f7453ad5",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-09-05T15:33:51Z",
       "side": 1,
       "message": "You should only set this if start_vm() succeeds.",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 29
+      },
+      "revId": "63990c0ecb245d41431925257733d295f87e7917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f73fcaec_e782ebfa",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-08T09:49:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad1924d2_f7453ad5",
       "range": {
         "startLine": 58,
         "startChar": 0,
@@ -133,6 +229,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c26916a_7230473c",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-08T09:49:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8aef4973_b3918f24",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 64
+      },
+      "revId": "63990c0ecb245d41431925257733d295f87e7917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2da85974_a4c658ee",
@@ -156,6 +276,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "924d6df1_1bbd7155",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-08T09:49:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2da85974_a4c658ee",
+      "range": {
+        "startLine": 67,
+        "startChar": 2,
+        "endLine": 67,
+        "endChar": 26
+      },
+      "revId": "63990c0ecb245d41431925257733d295f87e7917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75fb06a2_c979520f",
@@ -169,6 +313,30 @@
       "writtenOn": "2023-09-05T15:33:51Z",
       "side": 1,
       "message": "This waits for the instance to exit, but doesn\u0027t tell it to exit.\nI think you should either:\n1. Just drop the VmInstance, which will kill the VM.\n2. Send the VM a message asking it to exit, then wait_for_death_with_timeout, and then drop the VmInstance (which will kill it).\n\nTBH I would go for the first option, it\u0027s simpler, and you don\u0027t need to wait for the service VM to do any tidying up.\n\nNote that wait_for_death_with_timeout assumes that the VmInstance will get the OnDied callback - which I think you will, although you won\u0027t get most of the other callbacks since they need to be triggere by the VM itself.",
+      "range": {
+        "startLine": 71,
+        "startChar": 13,
+        "endLine": 71,
+        "endChar": 40
+      },
+      "revId": "63990c0ecb245d41431925257733d295f87e7917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95a250aa_527fc307",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-08T09:49:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75fb06a2_c979520f",
       "range": {
         "startLine": 71,
         "startChar": 13,
@@ -240,6 +408,30 @@
       "side": 1,
       "message": "Yeah that should work.\nIf you need a more controlled shutdown you\u0027d want something like this, but I don\u0027t think you do.",
       "parentUuid": "39ae4434_32af46a7",
+      "range": {
+        "startLine": 72,
+        "startChar": 12,
+        "endLine": 72,
+        "endChar": 70
+      },
+      "revId": "63990c0ecb245d41431925257733d295f87e7917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd3cea13_b7aabb6c",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-08T09:49:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ff73b3b_b3a68e07",
       "range": {
         "startLine": 72,
         "startChar": 12,
