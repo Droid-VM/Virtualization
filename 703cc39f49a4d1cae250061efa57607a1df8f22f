@@ -22,6 +22,30 @@
       },
       "revId": "703cc39f49a4d1cae250061efa57607a1df8f22f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d08b2d6f_4e3c9b6f",
+        "filename": "virtualizationservice/src/remote_provisioning.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-08T13:56:09Z",
+      "side": 1,
+      "message": "I don\u0027t see any error specified for the general case based on the [spec](https://cs.android.com/android/platform/superproject/main/+/main:hardware/interfaces/security/rkp/aidl/android/hardware/security/keymint/IRemotelyProvisionedComponent.aidl;l\u003d229;drc\u003d6aae9b643247f78d8f47c544a3d790f137d9341d).\n\nI added context and with_log.",
+      "parentUuid": "5c01da24_d04fc04c",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 64
+      },
+      "revId": "703cc39f49a4d1cae250061efa57607a1df8f22f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
