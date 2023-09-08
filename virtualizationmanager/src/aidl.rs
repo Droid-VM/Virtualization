@@ -1107,6 +1107,10 @@ fn check_config_features(config: &VirtualMachineConfig) -> binder::Result<()> {
     Ok(())
 }
 
+fn is_remote_attestation_supported() -> bool {
+    cfg!(remote_attestation)
+}
+
 fn clone_or_prepare_logger_fd(
     debug_config: &DebugConfig,
     fd: Option<&ParcelFileDescriptor>,
@@ -1237,7 +1241,11 @@ impl IVirtualMachineService for VirtualMachineService {
     }
 
     fn requestCertificate(&self, csr: &[u8]) -> binder::Result<Vec<u8>> {
-        GLOBAL_SERVICE.requestCertificate(csr)
+        if is_remote_attestation_supported() {
+            GLOBAL_SERVICE.requestCertificate(csr)
+        } else {
+            Ok(Vec::new())
+        }
     }
 }
 
