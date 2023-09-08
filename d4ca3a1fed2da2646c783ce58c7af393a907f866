@@ -16,6 +16,121 @@
       "message": "Thanks for the review. Could you take another look?",
       "revId": "d4ca3a1fed2da2646c783ce58c7af393a907f866",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12adf015_692c6372",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-08T10:28:07Z",
+      "side": 1,
+      "message": "Can you rebase this CL on your other stack? We shouldn\u0027t be changing the semantics of shutdown, again.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 19
+      },
+      "revId": "d4ca3a1fed2da2646c783ce58c7af393a907f866",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f3089ca_5df04bd9",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-08T10:28:07Z",
+      "side": 1,
+      "message": "I\u0027ve always found it useful to name these after the condition which is true when they are notified. It makes the calls to wait \u0026 notify more self-explanatory.\n\nstopped, or vm_stopped, maybe?",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 8
+      },
+      "revId": "d4ca3a1fed2da2646c783ce58c7af393a907f866",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deb51347_ebc3fe86",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-08T10:28:07Z",
+      "side": 1,
+      "message": "let (guard, wait_result)\u003d",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 18
+      },
+      "revId": "d4ca3a1fed2da2646c783ce58c7af393a907f866",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61310162_b91dbe2c",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-08T10:28:07Z",
+      "side": 1,
+      "message": "This should be the drop() of some object - either ServiceVm, or some wrapper of it. We need to make sure that it happens automatically, rather than relying on callers to do the right thing.\n\nTBH I\u0027d be tempted to move this logic next to ServiceVm and have ServiceVm::drop do this work. Keeping them separate just complicates things.",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 46
+      },
+      "revId": "d4ca3a1fed2da2646c783ce58c7af393a907f866",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9709c9f_05e40465",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-08T10:28:07Z",
+      "side": 1,
+      "message": "That can never happen unless the logic here is buggy.\n\nSo we can either not bother testing for it, or panic rather than returning an error.",
+      "range": {
+        "startLine": 72,
+        "startChar": 2,
+        "endLine": 72,
+        "endChar": 70
+      },
+      "revId": "d4ca3a1fed2da2646c783ce58c7af393a907f866",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
