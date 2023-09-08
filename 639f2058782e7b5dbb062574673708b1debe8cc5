@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aeac72f4_d94ba8f4",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-09-08T01:59:13Z",
+      "side": 1,
+      "message": "Question) what\u0027s the ownership and permission of this file? How we ensure that the file is only accessible by `virtualizationservice` (for creating and sharing FD) + `vfio_handler` (for writing)?\n\nSEPolicy doesn\u0027t seem to disallow access to this file from random processes (e.g. shell)",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 47
+      },
+      "revId": "639f2058782e7b5dbb062574673708b1debe8cc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
