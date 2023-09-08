@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1028941_a1b1e4b5",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1110,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-08T15:39:52Z",
+      "side": 1,
+      "message": "I\u0027d prefer we inlined this, just so it\u0027s really obvious it\u0027s a cfg, and a compile time constant.",
+      "range": {
+        "startLine": 1110,
+        "startChar": 3,
+        "endLine": 1110,
+        "endChar": 34
+      },
+      "revId": "2aefe72aa56fc432ad722c5c445a24bc5eb7394e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbb37a36_4d9e7c34",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1249,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-08T15:39:52Z",
+      "side": 1,
+      "message": "I wonder if this is a case where we should use annotations.\n\n#[cfg(r_a)]\nfn rC() { new code }\n\n#[cfg(!r_a)]\nfn rC() { old code }\n\nAlthough I quite like cfg! tbh.",
+      "range": {
+        "startLine": 1243,
+        "startChar": 0,
+        "endLine": 1249,
+        "endChar": 5
+      },
+      "revId": "2aefe72aa56fc432ad722c5c445a24bc5eb7394e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
