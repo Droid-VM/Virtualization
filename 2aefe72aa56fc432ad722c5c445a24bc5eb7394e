@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7e91e36_596b73cf",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1110,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-09-08T15:42:41Z",
+      "side": 1,
+      "message": "+1, the cfg!(remote_attestation) is already one line, there is no need for an additional function",
+      "parentUuid": "c1028941_a1b1e4b5",
+      "range": {
+        "startLine": 1110,
+        "startChar": 3,
+        "endLine": 1110,
+        "endChar": 34
+      },
+      "revId": "2aefe72aa56fc432ad722c5c445a24bc5eb7394e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bbb37a36_4d9e7c34",
         "filename": "virtualizationmanager/src/aidl.rs",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2023-09-08T15:39:52Z",
       "side": 1,
       "message": "I wonder if this is a case where we should use annotations.\n\n#[cfg(r_a)]\nfn rC() { new code }\n\n#[cfg(!r_a)]\nfn rC() { old code }\n\nAlthough I quite like cfg! tbh.",
+      "range": {
+        "startLine": 1243,
+        "startChar": 0,
+        "endLine": 1249,
+        "endChar": 5
+      },
+      "revId": "2aefe72aa56fc432ad722c5c445a24bc5eb7394e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "366be589_488653e1",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1249,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-09-08T15:42:41Z",
+      "side": 1,
+      "message": "For this case I think I slightly prefer the [#cfg(...)] / [#cfg(not(...)] approach a bit more, since in the long term we can teach aidl compiler to automatically generate the #[cfg(not(...)] stanza, since it will always return UNSUPPORED_OPERATION error",
+      "parentUuid": "bbb37a36_4d9e7c34",
       "range": {
         "startLine": 1243,
         "startChar": 0,
