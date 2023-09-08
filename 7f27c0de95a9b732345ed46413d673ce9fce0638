@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f15f6a3_94dea76a",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-08T11:41:04Z",
+      "side": 1,
+      "message": "This number will depend on vendor dice implementation, right? We can expect some SOCs to have fewer derivation. Also, this value will change when we add dice cert for Microdroid vendor node. It would be nice to have this as a constant string atleast with a Note explaining how do we get this as the minimum number (easier to debug if the test fails)?\n\nUnrealated to the patch though.",
+      "range": {
+        "startLine": 1112,
+        "startChar": 60,
+        "endLine": 1112,
+        "endChar": 61
+      },
+      "revId": "7f27c0de95a9b732345ed46413d673ce9fce0638",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
