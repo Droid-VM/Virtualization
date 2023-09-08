@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8199b00_d793ed5c",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-08T11:21:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12adf015_692c6372",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 19
+      },
+      "revId": "d4ca3a1fed2da2646c783ce58c7af393a907f866",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f3089ca_5df04bd9",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-09-08T10:28:07Z",
       "side": 1,
       "message": "I\u0027ve always found it useful to name these after the condition which is true when they are notified. It makes the calls to wait \u0026 notify more self-explanatory.\n\nstopped, or vm_stopped, maybe?",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 8
+      },
+      "revId": "d4ca3a1fed2da2646c783ce58c7af393a907f866",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75b21362_026bd167",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-08T11:21:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f3089ca_5df04bd9",
       "range": {
         "startLine": 33,
         "startChar": 4,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79b2c584_f094f876",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-08T11:21:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "deb51347_ebc3fe86",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 18
+      },
+      "revId": "d4ca3a1fed2da2646c783ce58c7af393a907f866",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61310162_b91dbe2c",
@@ -110,6 +182,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48bae8d5_5edfd50f",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-08T11:21:25Z",
+      "side": 1,
+      "message": "Ok, I can move this to drop.",
+      "parentUuid": "61310162_b91dbe2c",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 46
+      },
+      "revId": "d4ca3a1fed2da2646c783ce58c7af393a907f866",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9709c9f_05e40465",
@@ -123,6 +219,30 @@
       "writtenOn": "2023-09-08T10:28:07Z",
       "side": 1,
       "message": "That can never happen unless the logic here is buggy.\n\nSo we can either not bother testing for it, or panic rather than returning an error.",
+      "range": {
+        "startLine": 72,
+        "startChar": 2,
+        "endLine": 72,
+        "endChar": 70
+      },
+      "revId": "d4ca3a1fed2da2646c783ce58c7af393a907f866",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d05db825_3e7ef037",
+        "filename": "virtualizationservice/src/service_vm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-08T11:21:25Z",
+      "side": 1,
+      "message": "I\u0027ll remove this check since the test doesn\u0027t ensure the uniqueness of the single service VM.",
+      "parentUuid": "f9709c9f_05e40465",
       "range": {
         "startLine": 72,
         "startChar": 2,
