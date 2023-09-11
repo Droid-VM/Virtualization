@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20ede9b0_eeb4bc2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-11T12:24:56Z",
+      "side": 1,
+      "message": "Thanks for the review. Could you take another look?",
+      "revId": "53b074dba42bcaa36fabb535638786526b202bd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3b51772_37586920",
@@ -31,6 +48,30 @@
       "writtenOn": "2023-09-11T11:41:44Z",
       "side": 1,
       "message": "We should return error with UNSUPPORTED_OPERATION code, e.g. something along the lines of:\n\n```\nreturn Err(anyhow!(\"remote_attestation feature is disabled\"))\n                .or_binder_exception(ExceptionCode::UNSUPPORTED_OPERATION);\n```",
+      "range": {
+        "startLine": 1246,
+        "startChar": 8,
+        "endLine": 1246,
+        "endChar": 22
+      },
+      "revId": "53b074dba42bcaa36fabb535638786526b202bd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c69f7444_28ab2389",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 1246,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-11T12:24:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3b51772_37586920",
       "range": {
         "startLine": 1246,
         "startChar": 8,
