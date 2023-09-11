@@ -46,6 +46,30 @@
       },
       "revId": "29b1478ebf2c202bba475e110f9631b321eca774",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "262aa070_e0a647ff",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1253,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-09-11T13:55:58Z",
+      "side": 1,
+      "message": "You can use cfg!(remote_attestation) macro. Unlike the [#cfg(...)] attribute, the macro doesn\u0027t remove the code if the feature is disabled.\n\nAlternatively, I think you can add #[cfg(request_certificate)] to the `use crate::rkpvm::request_certificate` statement, e.g.:\n\n```\n#[cfg(request_certificate)]\nuse crate::rkpvm::request_certificate;\n```",
+      "parentUuid": "dc326eae_93a76d02",
+      "range": {
+        "startLine": 1244,
+        "startChar": 4,
+        "endLine": 1253,
+        "endChar": 5
+      },
+      "revId": "29b1478ebf2c202bba475e110f9631b321eca774",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
