@@ -218,6 +218,7 @@ def AddHashFooter(args, key, image_path, partition_name, additional_descriptors=
     if info:
         image_size = ReadBytesSize(info['Image size'])
         algorithm = info['Algorithm']
+        rollback_index = info['Rollback Index']
         partition_size = str(image_size)
 
         cmd = ['avbtool', 'add_hash_footer',
@@ -225,6 +226,7 @@ def AddHashFooter(args, key, image_path, partition_name, additional_descriptors=
                '--algorithm', algorithm,
                '--partition_name', partition_name,
                '--partition_size', partition_size,
+               '--rollback_index', rollback_index,
                '--image', image_path]
         if args.signing_args:
             cmd.extend(shlex.split(args.signing_args))
