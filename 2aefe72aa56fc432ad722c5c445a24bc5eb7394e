@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "019c692e_e3490d96",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1110,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-11T08:07:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7e91e36_596b73cf",
+      "range": {
+        "startLine": 1110,
+        "startChar": 3,
+        "endLine": 1110,
+        "endChar": 34
+      },
+      "revId": "2aefe72aa56fc432ad722c5c445a24bc5eb7394e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bbb37a36_4d9e7c34",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "For this case I think I slightly prefer the [#cfg(...)] / [#cfg(not(...)] approach a bit more, since in the long term we can teach aidl compiler to automatically generate the #[cfg(not(...)] stanza, since it will always return UNSUPPORED_OPERATION error",
       "parentUuid": "bbb37a36_4d9e7c34",
+      "range": {
+        "startLine": 1243,
+        "startChar": 0,
+        "endLine": 1249,
+        "endChar": 5
+      },
+      "revId": "2aefe72aa56fc432ad722c5c445a24bc5eb7394e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d9a436a_5cd3a5fd",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1249,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-11T08:07:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "366be589_488653e1",
       "range": {
         "startLine": 1243,
         "startChar": 0,
