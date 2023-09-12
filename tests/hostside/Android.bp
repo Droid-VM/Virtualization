@@ -11,6 +11,7 @@ java_test_host {
     ],
     libs: [
         "androidx.annotation_annotation",
+        "cts-host-utils",
         "tradefed",
     ],
     static_libs: [
