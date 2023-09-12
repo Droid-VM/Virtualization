@@ -28,6 +28,7 @@ extern crate alloc;
 use crate::communication::VsockStream;
 use crate::error::{Error, Result};
 use crate::fdt::read_dice_range_from;
+use bssl_ffi::CRYPTO_library_init;
 use ciborium_io::Write;
 use core::num::NonZeroUsize;
 use core::slice;
@@ -143,6 +144,11 @@ unsafe fn try_main(fdt_addr: usize) -> Result<()> {
         // intended for debugging purposes.
         VmType::NonProtectedVm => None,
     };
+
+    // SAFETY: Initializes the crypto library. It is safe to call this function multiple times.
+    unsafe {
+        CRYPTO_library_init();
+    }
 
     let pci_info = PciInfo::from_fdt(fdt)?;
     debug!("PCI: {pci_info:#x?}");

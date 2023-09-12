@@ -137,7 +137,6 @@ impl From<DiceError> for Error {
         Self::DiceOperationFailed(e)
     }
 }
-
 impl From<RequestProcessingError> for Error {
     fn from(e: RequestProcessingError) -> Self {
         Self::RequestProcessingFailed(e)

@@ -2,13 +2,13 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
-rust_ffi_static {
-    name: "librialto",
+rust_defaults {
+    name: "librialto_defaults",
     crate_name: "rialto",
-    srcs: ["src/main.rs"],
     defaults: ["vmbase_ffi_defaults"],
     rustlibs: [
         "libaarch64_paging",
+        "libbssl_ffi_nostd",
         "libciborium_io_nostd",
         "libciborium_nostd",
         "libdiced_open_dice_nostd",
@@ -20,7 +20,17 @@ rust_ffi_static {
         "libtinyvec_nostd",
         "libvirtio_drivers",
         "libvmbase",
+        "libzeroize_nostd",
     ],
+    whole_static_libs: [
+        "libcrypto_baremetal",
+    ],
+}
+
+rust_ffi_static {
+    name: "librialto",
+    srcs: ["src/main.rs"],
+    defaults: ["librialto_defaults"],
 }
 
 cc_binary {
