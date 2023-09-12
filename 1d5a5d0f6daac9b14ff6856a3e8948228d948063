@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33b2690e_62bd97ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-12T14:20:50Z",
+      "side": 1,
+      "message": "\u003e propagating build time flags to sign_virt_apex is most likely going to be tricky\n\nSome projects may require significant change (for ex. signing the RKP VM image \u0026 maybe signing Microdroid vendor images). I wonder to what extent can we make this script backward compatible.\n\nMaybe we can come back to this later",
+      "parentUuid": "4e223ac9_24e83f88",
+      "revId": "1d5a5d0f6daac9b14ff6856a3e8948228d948063",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a775115f_f2c0b2d0",
@@ -67,6 +85,30 @@
       "writtenOn": "2023-09-12T11:53:15Z",
       "side": 1,
       "message": "Should we only add this if the rollback index is present in the info? What happens if you pass the footer built with the flag disabled (i.e. old behaviour) to the sign_virt_apex with this changes?",
+      "range": {
+        "startLine": 229,
+        "startChar": 15,
+        "endLine": 229,
+        "endChar": 50
+      },
+      "revId": "1d5a5d0f6daac9b14ff6856a3e8948228d948063",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af00039f_12c1baf1",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-12T14:20:50Z",
+      "side": 1,
+      "message": "Hmm, okay. I would like to mandate rollback_index is vbmeta of the images (for Android V+), but that can be covered in separate VTS. Happy to leave this change backward compatible.",
+      "parentUuid": "a775115f_f2c0b2d0",
       "range": {
         "startLine": 229,
         "startChar": 15,
