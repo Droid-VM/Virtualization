@@ -13,15 +13,21 @@
 // limitations under the License.
 
 //! This module contains functions related to the attestation of the
-//! service VM via the RKP (Remote Key Provisionning) server.
+//! service VM via the RKP (Remote Key Provisioning) server.
 
+use super::ec_key::EcKey;
 use crate::error::Result;
 use alloc::vec::Vec;
 use service_vm_comm::{EcdsaP256KeyPair, GenerateCertificateRequestParams};
 
 pub(super) fn generate_ecdsa_p256_key_pair() -> Result<EcdsaP256KeyPair> {
-    // TODO(b/299055662): Generate the key pair.
-    let key_pair = EcdsaP256KeyPair { maced_public_key: Vec::new(), key_blob: Vec::new() };
+    let ec_key = EcKey::new_p256()?;
+
+    // TODO(b/279425980): Encrypt the private key in a key blob.
+    let key_blob = ec_key.private_key()?.as_slice().to_vec();
+
+    // TODO(b/300068317): Build MACed public key.
+    let key_pair = EcdsaP256KeyPair { maced_public_key: Vec::new(), key_blob };
     Ok(key_pair)
 }
 
