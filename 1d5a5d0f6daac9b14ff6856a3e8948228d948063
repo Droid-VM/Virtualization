@@ -34,6 +34,47 @@
       "parentUuid": "c97b2660_5a90651a",
       "revId": "1d5a5d0f6daac9b14ff6856a3e8948228d948063",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e223ac9_24e83f88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-09-12T11:53:15Z",
+      "side": 1,
+      "message": "They are somewhat related. See my other comment.\n\nFWIW, I think that propagating build time flags to sign_virt_apex is most likely going to be tricky (especially if releasetoools are built separately). Instead we should make sure that changes in the sign_virt_apex.py are backwards compatible.",
+      "parentUuid": "531c7f3d_672843a7",
+      "revId": "1d5a5d0f6daac9b14ff6856a3e8948228d948063",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a775115f_f2c0b2d0",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-09-12T11:53:15Z",
+      "side": 1,
+      "message": "Should we only add this if the rollback index is present in the info? What happens if you pass the footer built with the flag disabled (i.e. old behaviour) to the sign_virt_apex with this changes?",
+      "range": {
+        "startLine": 229,
+        "startChar": 15,
+        "endLine": 229,
+        "endChar": 50
+      },
+      "revId": "1d5a5d0f6daac9b14ff6856a3e8948228d948063",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
