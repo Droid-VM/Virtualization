@@ -50,6 +50,8 @@ pub enum Error {
     SerializationFailed(CiboriumSerError),
     /// Failed to deserialize.
     DeserializationFailed(CiboriumDeError),
+    /// Failed to process request.
+    RequestProcessingFailed(RequestProcessingError),
 }
 
 impl fmt::Display for Error {
@@ -72,6 +74,7 @@ impl fmt::Display for Error {
             }
             Self::SerializationFailed(e) => write!(f, "Failed to serialize: {e}"),
             Self::DeserializationFailed(e) => write!(f, "Failed to deserialize: {e}"),
+            Self::RequestProcessingFailed(e) => write!(f, "Failed to process request: {e}"),
         }
     }
 }
@@ -121,5 +124,37 @@ impl From<CiboriumSerError> for Error {
 impl From<CiboriumDeError> for Error {
     fn from(e: CiboriumDeError) -> Self {
         Self::DeserializationFailed(e)
+    }
+}
+
+impl From<RequestProcessingError> for Error {
+    fn from(e: RequestProcessingError) -> Self {
+        Self::RequestProcessingFailed(e)
+    }
+}
+
+/// Errors related to request processing.
+#[derive(Debug)]
+pub enum RequestProcessingError {
+    /// Null pointer encountered during BoringSSL object creation.
+    NullBoringSSLObject(&'static str),
+    /// Failed to generate keys.
+    KeyGenerationFailed,
+    /// Failed to get the public key.
+    GettingPublicKeyFailed,
+    /// Failed to get the private key.
+    GettingPrivateKeyFailed,
+}
+
+impl fmt::Display for RequestProcessingError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            Self::NullBoringSSLObject(name) => {
+                write!(f, "Null pointer encountered when creating the boringssl object: {name}")
+            }
+            Self::KeyGenerationFailed => write!(f, "Failed to generate keys."),
+            Self::GettingPublicKeyFailed => write!(f, "Failed to get the public key."),
+            Self::GettingPrivateKeyFailed => write!(f, "Failed to get the private key."),
+        }
     }
 }
