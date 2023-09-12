@@ -9,6 +9,7 @@ rust_ffi_static {
     defaults: ["vmbase_ffi_defaults"],
     rustlibs: [
         "libaarch64_paging",
+        "libbssl_ffi_nostd",
         "libciborium_io_nostd",
         "libciborium_nostd",
         "libhyp",
@@ -19,6 +20,10 @@ rust_ffi_static {
         "libtinyvec_nostd",
         "libvirtio_drivers",
         "libvmbase",
+        "libzeroize_nostd",
+    ],
+    whole_static_libs: [
+        "libcrypto_baremetal",
     ],
 }
 
