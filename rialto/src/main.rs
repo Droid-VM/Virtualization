@@ -26,6 +26,7 @@ extern crate alloc;
 
 use crate::communication::VsockStream;
 use crate::error::{Error, Result};
+use bssl_ffi::CRYPTO_library_init;
 use ciborium_io::Write;
 use core::num::NonZeroUsize;
 use core::slice;
@@ -129,6 +130,11 @@ unsafe fn try_main(fdt_addr: usize) -> Result<()> {
             error!("Failed to initialize heap-based pseudo-shared pool.");
             e
         })?;
+    }
+
+    // SAFETY: Initializes the crypto library. It is safe to call this function multiple times.
+    unsafe {
+        CRYPTO_library_init();
     }
 
     let pci_info = PciInfo::from_fdt(fdt)?;
