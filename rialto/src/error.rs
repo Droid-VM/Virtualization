@@ -50,6 +50,8 @@ pub enum Error {
     SerializationFailed(CiboriumSerError),
     /// Failed to deserialize.
     DeserializationFailed(CiboriumDeError),
+    /// Failed to process request.
+    RequestProcessingFailed(RequestProcessingError),
 }
 
 impl fmt::Display for Error {
@@ -72,6 +74,7 @@ impl fmt::Display for Error {
             }
             Self::SerializationFailed(e) => write!(f, "Failed to serialize: {e}"),
             Self::DeserializationFailed(e) => write!(f, "Failed to deserialize: {e}"),
+            Self::RequestProcessingFailed(e) => write!(f, "Failed to process request: {e}"),
         }
     }
 }
@@ -121,5 +124,32 @@ impl From<CiboriumSerError> for Error {
 impl From<CiboriumDeError> for Error {
     fn from(e: CiboriumDeError) -> Self {
         Self::DeserializationFailed(e)
+    }
+}
+
+impl From<RequestProcessingError> for Error {
+    fn from(e: RequestProcessingError) -> Self {
+        Self::RequestProcessingFailed(e)
+    }
+}
+
+/// Errors related to request processing.
+#[derive(Debug)]
+pub enum RequestProcessingError {
+    /// Failed to generate keys.
+    KeyGeneration,
+    /// Failed to get the private key.
+    GettingPrivateKey,
+    /// An internal error happened.
+    InternalError(&'static str),
+}
+
+impl fmt::Display for RequestProcessingError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            Self::KeyGeneration => write!(f, "Failed to generate keys"),
+            Self::GettingPrivateKey => write!(f, "Failed to get the private key"),
+            Self::InternalError(context) => write!(f, "Encountered an internal error: {context}"),
+        }
     }
 }
