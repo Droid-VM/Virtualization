@@ -16,19 +16,22 @@
 //! service VM via the RKP (Remote Key Provisioning) server.
 
 use super::ec_key::EcKey;
+use super::pub_key::build_maced_public_key;
 use crate::error::Result;
 use alloc::vec::Vec;
 use service_vm_comm::{EcdsaP256KeyPair, GenerateCertificateRequestParams};
 
 pub(super) fn generate_ecdsa_p256_key_pair() -> Result<EcdsaP256KeyPair> {
+    // TODO(b/300590857): Derive the HMAC key from the DICE sealing CDI.
+    let hmac_key = [];
     let ec_key = EcKey::new_p256()?;
+    let maced_public_key = build_maced_public_key(ec_key.cose_public_key()?, &hmac_key)?;
 
     // TODO(b/279425980): Encrypt the private key in a key blob.
     // Remove the printing of the private key.
     log::debug!("Private key: {:?}", ec_key.private_key()?.as_slice());
 
-    // TODO(b/300068317): Build MACed public key.
-    let key_pair = EcdsaP256KeyPair { maced_public_key: Vec::new(), key_blob: Vec::new() };
+    let key_pair = EcdsaP256KeyPair { maced_public_key, key_blob: Vec::new() };
     Ok(key_pair)
 }
 
