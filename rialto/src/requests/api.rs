@@ -15,7 +15,7 @@
 //! This module contains the main API for the request processing module.
 
 use super::rkp;
-use crate::error::Result;
+use crate::error::{RequestProcessingError, Result};
 use alloc::vec::Vec;
 use service_vm_comm::{Request, Response};
 
@@ -32,10 +32,13 @@ pub fn process_request(request: Request) -> Result<Response> {
             let res = rkp::generate_ecdsa_p256_key_pair(&hmac_key)?;
             Response::GenerateEcdsaP256KeyPair(res)
         }
-        Request::GenerateCertificateRequest(p) => {
-            let res = rkp::generate_certificate_request(p)?;
-            Response::GenerateCertificateRequest(res)
-        }
+        Request::GenerateCertificateRequest(p) => match rkp::generate_certificate_request(p) {
+            Ok(v) => Response::GenerateCertificateRequest(Ok(v)),
+            Err(RequestProcessingError::RemoteProvisioningError(e)) => {
+                Response::GenerateCertificateRequest(Err(e))
+            }
+            Err(e) => return Err(e.into()),
+        },
     };
     Ok(response)
 }
