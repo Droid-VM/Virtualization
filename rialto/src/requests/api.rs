@@ -22,6 +22,7 @@ use service_vm_comm::{Request, Response};
 /// Processes a request and returns the corresponding response.
 /// This function serves as the entry point for the request processing
 /// module.
+/// TODO(b/287233786): Pass the DICE chain as parameter to `process_request`.
 pub fn process_request(request: Request) -> Result<Response> {
     let response = match request {
         Request::Reverse(v) => Response::Reverse(reverse(v)),
