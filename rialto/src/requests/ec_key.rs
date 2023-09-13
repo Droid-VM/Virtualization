@@ -15,23 +15,35 @@
 //! Contains struct and functions that wraps the API related to EC_KEY in
 //! BoringSSL.
 
+use alloc::vec;
 use alloc::vec::Vec;
+use bssl_ffi::BN_bn2bin;
+use bssl_ffi::BN_clear_free;
+use bssl_ffi::BN_new;
+use bssl_ffi::BN_num_bytes;
 use bssl_ffi::CBB_cleanup;
 use bssl_ffi::CBB_finish;
 use bssl_ffi::CBB_init;
 use bssl_ffi::EC_KEY_check_key;
 use bssl_ffi::EC_KEY_free;
 use bssl_ffi::EC_KEY_generate_key;
+use bssl_ffi::EC_KEY_get0_group;
+use bssl_ffi::EC_KEY_get0_public_key;
 use bssl_ffi::EC_KEY_marshal_private_key;
 use bssl_ffi::EC_KEY_new_by_curve_name;
+use bssl_ffi::EC_POINT_get_affine_coordinates;
 use bssl_ffi::NID_X9_62_prime256v1; // EC P-256 CURVE Nid
 use bssl_ffi::OPENSSL_free;
+use bssl_ffi::BIGNUM;
 use bssl_ffi::CBB;
+use bssl_ffi::EC_GROUP;
 use bssl_ffi::EC_KEY;
+use bssl_ffi::EC_POINT;
 use core::mem::MaybeUninit;
-use core::ptr;
+use core::ptr::{self, NonNull};
 use core::result;
 use core::slice;
+use coset::{iana, CoseKey, CoseKeyBuilder};
 use service_vm_comm::{BoringSSLApiName, RequestProcessingError};
 use zeroize::{Zeroize, ZeroizeOnDrop};
 
@@ -82,7 +94,61 @@ impl EcKey {
         validate_boringssl_return(ret, BoringSSLApiName::EC_KEY_check_key)
     }
 
-    // TODO(b/300068317): Returns the CoseKey for the public key.
+    /// Returns the `CoseKey` for the public key.
+    pub fn cose_public_key(&self) -> Result<CoseKey> {
+        const ALGO: iana::Algorithm = iana::Algorithm::ES256;
+        const CURVE: iana::EllipticCurve = iana::EllipticCurve::P_256;
+
+        let (x, y) = self.public_key_coordinates()?;
+        let key = CoseKeyBuilder::new_ec2_pub_key(CURVE, x, y).algorithm(ALGO).build();
+        Ok(key)
+    }
+
+    /// Returns the x and y coordinates of the public key.
+    fn public_key_coordinates(&self) -> Result<(Vec<u8>, Vec<u8>)> {
+        let ec_group = self.ec_group()?;
+        let ec_point = self.public_key_ec_point()?;
+        let x = BigNum::new()?;
+        let y = BigNum::new()?;
+        let ctx = ptr::null_mut();
+        // SAFETY: All the parameters are checked non-null and initialized when needed.
+        // The last parameter `ctx` is generated when needed inside the function.
+        let ret = unsafe {
+            EC_POINT_get_affine_coordinates(ec_group, ec_point, x.as_mut_ptr(), y.as_mut_ptr(), ctx)
+        };
+        validate_boringssl_return(ret, BoringSSLApiName::EC_POINT_get_affine_coordinates)?;
+        Ok((x.bytes()?, y.bytes()?))
+    }
+
+    /// Returns a pointer to the public key point inside `EC_KEY`. The memory region pointed
+    /// by the pointer is owned by the `EC_KEY`.
+    fn public_key_ec_point(&self) -> Result<*const EC_POINT> {
+        let ec_point =
+           // SAFETY: It is safe since the key pair has been generated and stored in the
+           // `EC_KEY` pointer.
+           unsafe { EC_KEY_get0_public_key(self.0) };
+        if ec_point.is_null() {
+            Err(RequestProcessingError::BoringSSLCallFailed(
+                BoringSSLApiName::EC_KEY_get0_public_key,
+            ))
+        } else {
+            Ok(ec_point)
+        }
+    }
+
+    /// Returns a pointer to the `EC_GROUP` object inside `EC_KEY`. The memory region pointed
+    /// by the pointer is owned by the `EC_KEY`.
+    fn ec_group(&self) -> Result<*const EC_GROUP> {
+        let group =
+           // SAFETY: It is safe since the key pair has been generated and stored in the
+           // `EC_KEY` pointer.
+           unsafe { EC_KEY_get0_group(self.0) };
+        if group.is_null() {
+            Err(RequestProcessingError::BoringSSLCallFailed(BoringSSLApiName::EC_KEY_get0_group))
+        } else {
+            Ok(group)
+        }
+    }
 
     /// Returns the DER-encoded ECPrivateKey structure described in RFC 5915 Section 3:
     ///
@@ -176,6 +242,53 @@ fn validate_boringssl_return(ret: i32, api_name: BoringSSLApiName) -> Result<()>
     } else {
         assert_eq!(ret, 0, "Unexpected return value {ret} for {api_name:?}");
         Err(RequestProcessingError::BoringSSLCallFailed(api_name))
+    }
+}
+
+struct BigNum(NonNull<BIGNUM>);
+
+impl Drop for BigNum {
+    fn drop(&mut self) {
+        // SAFETY: The pointer has been created with `BN_new`.
+        unsafe { BN_clear_free(self.as_mut_ptr()) }
+    }
+}
+
+impl BigNum {
+    fn new() -> Result<Self> {
+        // SAFETY: The returned pointer is checked below.
+        let bn = unsafe { BN_new() };
+        if bn.is_null() {
+            Err(RequestProcessingError::BoringSSLCallFailed(BoringSSLApiName::BN_new))
+        } else {
+            // SAFETY: `bn` has been checked to be non-null.
+            let bn = unsafe { NonNull::new_unchecked(bn) };
+            Ok(Self(bn))
+        }
+    }
+
+    fn num_bytes(&self) -> Result<usize> {
+        // SAFETY: The pointer has been created with `BN_new`.
+        let len = unsafe { BN_num_bytes(self.as_mut_ptr()) };
+        len.try_into().map_err(|_| {
+            RequestProcessingError::BoringSSLCallFailed(BoringSSLApiName::BN_num_bytes)
+        })
+    }
+
+    fn bytes(&self) -> Result<Vec<u8>> {
+        let len = self.num_bytes()?;
+        let mut res = vec![0u8; len];
+        // SAFETY: The pointer has been created with `BN_new`.
+        let read_len = unsafe { BN_bn2bin(self.as_mut_ptr(), res.as_mut_ptr()) };
+        if read_len == len {
+            Ok(res)
+        } else {
+            Err(RequestProcessingError::BoringSSLCallFailed(BoringSSLApiName::BN_bn2bin))
+        }
+    }
+
+    fn as_mut_ptr(&self) -> *mut BIGNUM {
+        self.0.as_ptr()
     }
 }
 
