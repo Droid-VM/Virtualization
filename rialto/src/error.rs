@@ -142,6 +142,8 @@ pub enum RequestProcessingError {
     GettingPrivateKey,
     /// An internal error happened.
     InternalError(&'static str),
+    /// An error happened during the interaction with coset.
+    CosetError(coset::CoseError),
 }
 
 impl fmt::Display for RequestProcessingError {
@@ -150,6 +152,13 @@ impl fmt::Display for RequestProcessingError {
             Self::KeyGeneration => write!(f, "Failed to generate keys."),
             Self::GettingPrivateKey => write!(f, "Failed to get the private key."),
             Self::InternalError(context) => write!(f, "Encountered an internal error: {context}."),
+            Self::CosetError(e) => write!(f, "Encountered an error with coset: {e}."),
         }
+    }
+}
+
+impl From<coset::CoseError> for RequestProcessingError {
+    fn from(e: coset::CoseError) -> Self {
+        Self::CosetError(e)
     }
 }
