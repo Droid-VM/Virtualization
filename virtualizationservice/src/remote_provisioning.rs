@@ -19,7 +19,7 @@ use android_hardware_security_rkp::aidl::android::hardware::security::keymint::{
     DeviceInfo::DeviceInfo,
     IRemotelyProvisionedComponent::{
         BnRemotelyProvisionedComponent, IRemotelyProvisionedComponent, STATUS_FAILED,
-        STATUS_REMOVED,
+        STATUS_INVALID_MAC, STATUS_REMOVED,
     },
     MacedPublicKey::MacedPublicKey,
     ProtectedData::ProtectedData,
@@ -28,6 +28,7 @@ use android_hardware_security_rkp::aidl::android::hardware::security::keymint::{
 use anyhow::Context;
 use avflog::LogResult;
 use binder::{BinderFeatures, Interface, IntoBinderResult, Result as BinderResult, Status, Strong};
+use service_vm_comm::RemoteProvisioningError;
 
 /// Constructs a binder object that implements `IRemotelyProvisionedComponent`.
 pub(crate) fn new_binder() -> Strong<dyn IRemotelyProvisionedComponent> {
@@ -94,10 +95,19 @@ impl IRemotelyProvisionedComponent for AvfRemotelyProvisionedComponent {
         keysToSign: &[MacedPublicKey],
         challenge: &[u8],
     ) -> BinderResult<Vec<u8>> {
-        // TODO(b/299259624): Validate the MAC of the keys to certify.
-        rkpvm::generate_certificate_request(keysToSign, challenge)
+        let res = rkpvm::generate_certificate_request(keysToSign, challenge)
             .context("Failed to generate certificate request")
             .with_log()
-            .or_service_specific_exception(STATUS_FAILED)
+            .or_service_specific_exception(STATUS_FAILED)?;
+        match res {
+            Ok(csr) => Ok(csr),
+            Err(RemoteProvisioningError::InvalidMac) => {
+                Err(Status::new_service_specific_error_str(
+                    STATUS_INVALID_MAC,
+                    Some("Invalid MAC found in a MACed public key."),
+                ))
+                .with_log()
+            }
+        }
     }
 }
