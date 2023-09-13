@@ -16,10 +16,13 @@
 //! between the host and the service VM.
 
 use alloc::vec::Vec;
-
+use core::result;
 use serde::{Deserialize, Serialize};
 
 type MacedPublicKey = Vec<u8>;
+
+/// Represents the type of result for generating certificate request.
+pub type CertificateRequestResult = result::Result<Vec<u8>, RemoteProvisioningError>;
 
 /// The main request type to be sent to the service VM.
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -63,7 +66,14 @@ pub enum Response {
     GenerateEcdsaP256KeyPair(EcdsaP256KeyPair),
 
     /// Returns a CBOR Certificate Signing Request (Csr) serialized into a byte array.
-    GenerateCertificateRequest(Vec<u8>),
+    GenerateCertificateRequest(CertificateRequestResult),
+}
+
+/// Represents the error types defined in the IRemotelyProvisionedComponent spec.
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+pub enum RemoteProvisioningError {
+    /// Any key to sign lacks a valid MAC. Maps to `STATUS_INVALID_MAC`.
+    InvalidMac,
 }
 
 /// Represents the params passed to GenerateCertificateRequest

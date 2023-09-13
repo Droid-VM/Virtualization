@@ -18,7 +18,9 @@
 
 use android_hardware_security_rkp::aidl::android::hardware::security::keymint::MacedPublicKey::MacedPublicKey;
 use anyhow::{bail, Context, Result};
-use service_vm_comm::{EcdsaP256KeyPair, GenerateCertificateRequestParams, Request, Response};
+use service_vm_comm::{
+    CertificateRequestResult, EcdsaP256KeyPair, GenerateCertificateRequestParams, Request, Response,
+};
 use service_vm_manager::ServiceVm;
 
 pub(crate) fn request_certificate(csr: &[u8]) -> Result<Vec<u8>> {
@@ -45,7 +47,7 @@ pub(crate) fn generate_ecdsa_p256_key_pair() -> Result<EcdsaP256KeyPair> {
 pub(crate) fn generate_certificate_request(
     keys_to_sign: &[MacedPublicKey],
     challenge: &[u8],
-) -> Result<Vec<u8>> {
+) -> Result<CertificateRequestResult> {
     let params = GenerateCertificateRequestParams {
         keys_to_sign: keys_to_sign.iter().map(|v| v.macedKey.to_vec()).collect(),
         challenge: challenge.to_vec(),
@@ -54,7 +56,7 @@ pub(crate) fn generate_certificate_request(
 
     let mut vm = ServiceVm::start()?;
     match vm.process_request(request).context("Failed to process request")? {
-        Response::GenerateCertificateRequest(csr) => Ok(csr),
+        Response::GenerateCertificateRequest(res) => Ok(res),
         _ => bail!("Incorrect response type"),
     }
 }
