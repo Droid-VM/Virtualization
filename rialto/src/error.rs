@@ -144,6 +144,11 @@ pub enum RequestProcessingError {
     InternalError(&'static str),
     /// An error happened during the interaction with coset.
     CosetError(coset::CoseError),
+    /// This error type contains the errors defined in the IRPC spec.
+    /// It should be forwarded to the HAL.
+    /// TODO: Add sub type for this error.
+    /// TODO: Sends this error back to the host.
+    RemoteProvisioningError,
 }
 
 impl fmt::Display for RequestProcessingError {
@@ -153,6 +158,9 @@ impl fmt::Display for RequestProcessingError {
             Self::GettingPrivateKey => write!(f, "Failed to get the private key."),
             Self::InternalError(context) => write!(f, "Encountered an internal error: {context}."),
             Self::CosetError(e) => write!(f, "Encountered an error with coset: {e}."),
+            Self::RemoteProvisioningError => {
+                write!(f, "Encountered an error defined in the IRPC spec.")
+            }
         }
     }
 }
