@@ -20,9 +20,26 @@ use alloc::vec::Vec;
 use bssl_ffi::EVP_sha256;
 use bssl_ffi::HMAC;
 use core::result;
-use coset::{iana, CborSerializable, CoseKey, CoseMac0Builder, HeaderBuilder};
+use coset::{iana, CborSerializable, CoseKey, CoseMac0, CoseMac0Builder, HeaderBuilder};
+use service_vm_comm::RemoteProvisioningError;
 
 type Result<T> = result::Result<T, RequestProcessingError>;
+
+/// Verifies the MAC of the given public key.
+/// TODO(b/299256925): Return the validated public key.
+pub fn validate_public_key(maced_public_key: &[u8]) -> Result<()> {
+    let cose_mac = CoseMac0::from_slice(maced_public_key)?;
+    cose_mac.verify_tag(&[], verify_tag)
+}
+
+fn verify_tag(tag: &[u8], data: &[u8]) -> Result<()> {
+    let computed_tag = compute_hmac_sha256(data)?;
+    if tag == computed_tag {
+        Ok(())
+    } else {
+        Err(RequestProcessingError::RemoteProvisioningError(RemoteProvisioningError::InvalidMac))
+    }
+}
 
 /// Returns the MACed public key.
 pub fn build_maced_public_key(public_key: CoseKey) -> Result<Vec<u8>> {

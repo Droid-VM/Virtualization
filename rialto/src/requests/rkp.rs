@@ -16,10 +16,13 @@
 //! service VM via the RKP (Remote Key Provisioning) server.
 
 use super::ec_key::EcKey;
-use super::pub_key::build_maced_public_key;
-use crate::error::Result;
+use super::pub_key::{build_maced_public_key, validate_public_key};
+use crate::error::RequestProcessingError;
 use alloc::vec::Vec;
+use core::result;
 use service_vm_comm::{EcdsaP256KeyPair, GenerateCertificateRequestParams};
+
+type Result<T> = result::Result<T, RequestProcessingError>;
 
 pub(super) fn generate_ecdsa_p256_key_pair() -> Result<EcdsaP256KeyPair> {
     let ec_key = EcKey::new_p256()?;
@@ -33,8 +36,11 @@ pub(super) fn generate_ecdsa_p256_key_pair() -> Result<EcdsaP256KeyPair> {
 }
 
 pub(super) fn generate_certificate_request(
-    _params: GenerateCertificateRequestParams,
+    params: GenerateCertificateRequestParams,
 ) -> Result<Vec<u8>> {
+    for key_to_sign in params.keys_to_sign {
+        validate_public_key(&key_to_sign)?;
+    }
     // TODO(b/299256925): Generate the certificate request
     Ok(Vec::new())
 }
