@@ -14,15 +14,32 @@
 
 //! Handles the construction of the MACed public key.
 
-use crate::error::RequestProcessingError;
+use alloc::string::String;
 use alloc::vec;
 use alloc::vec::Vec;
 use bssl_ffi::EVP_sha256;
 use bssl_ffi::HMAC;
 use core::result;
-use coset::{iana, CborSerializable, CoseKey, CoseMac0Builder, HeaderBuilder};
+use coset::{iana, CborSerializable, CoseKey, CoseMac0, CoseMac0Builder, HeaderBuilder};
+use service_vm_comm::RequestProcessingError;
 
 type Result<T> = result::Result<T, RequestProcessingError>;
+
+/// Verifies the MAC of the given public key.
+/// TODO(b/299256925): Return the validated public key.
+pub fn validate_public_key(maced_public_key: &[u8], hmac_key: &[u8]) -> Result<()> {
+    let cose_mac = CoseMac0::from_slice(maced_public_key)?;
+    cose_mac.verify_tag(&[], |tag, data| verify_tag(tag, data, hmac_key))
+}
+
+fn verify_tag(tag: &[u8], data: &[u8], hmac_key: &[u8]) -> Result<()> {
+    let computed_tag = hmac_sha256(hmac_key, data)?;
+    if tag == computed_tag {
+        Ok(())
+    } else {
+        Err(RequestProcessingError::InvalidMac)
+    }
+}
 
 /// Returns the MACed public key.
 pub fn build_maced_public_key(public_key: CoseKey, hmac_key: &[u8]) -> Result<Vec<u8>> {
@@ -44,7 +61,7 @@ fn hmac_sha256(key: &[u8], data: &[u8]) -> Result<Vec<u8>> {
     // as a potentially NULL pointer.
     let digester = unsafe { EVP_sha256() };
     if digester.is_null() {
-        return Err(RequestProcessingError::InternalError("EVP_sha256"));
+        return Err(RequestProcessingError::InternalError(String::from("EVP_sha256")));
     }
     // SAFETY: Only reads from/writes to the provided slices and supports digester was checked not
     // be NULL.
@@ -63,6 +80,6 @@ fn hmac_sha256(key: &[u8], data: &[u8]) -> Result<Vec<u8>> {
     if !ret.is_null() && out_len == out.len() {
         Ok(out)
     } else {
-        Err(RequestProcessingError::InternalError("HMAC"))
+        Err(RequestProcessingError::InternalError(String::from("HMAC")))
     }
 }

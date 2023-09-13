@@ -15,7 +15,7 @@
 //! Contains struct and functions that wraps the API related to EC_KEY in
 //! BoringSSL.
 
-use crate::error::RequestProcessingError;
+use alloc::string::String;
 use alloc::vec;
 use alloc::vec::Vec;
 use bssl_ffi::BN_bn2bin;
@@ -44,6 +44,7 @@ use core::ptr;
 use core::result;
 use core::slice;
 use coset::{iana, CoseKey, CoseKeyBuilder};
+use service_vm_comm::RequestProcessingError;
 use zeroize::{Zeroize, ZeroizeOnDrop};
 
 type Result<T> = result::Result<T, RequestProcessingError>;
@@ -55,7 +56,7 @@ impl EcKey {
         // SAFETY: The returned pointer is checked below.
         let key = unsafe { EC_KEY_new_by_curve_name(NID_X9_62_prime256v1) };
         if key.is_null() {
-            return Err(RequestProcessingError::InternalError("EC_KEY_new"));
+            return Err(RequestProcessingError::InternalError(String::from("EC_KEY_new")));
         }
         // SAFETY: We assume that the non-null pointer points to a valid `EC_KEY`.
         // The randomness is provided by `getentropy()` in `vmbase`.
@@ -95,7 +96,9 @@ impl EcKey {
         if ret == 1 {
             Ok((x.bytes()?, y.bytes()?))
         } else {
-            Err(RequestProcessingError::InternalError("EC_POINT_get_affine_coordinates"))
+            Err(RequestProcessingError::InternalError(String::from(
+                "EC_POINT_get_affine_coordinates",
+            )))
         }
     }
 
@@ -105,7 +108,7 @@ impl EcKey {
            // `EC_KEY` pointer.
            unsafe { EC_KEY_get0_public_key(self.0) };
         if ec_point.is_null() {
-            Err(RequestProcessingError::InternalError("EC_KEY_get0_public_key"))
+            Err(RequestProcessingError::InternalError(String::from("EC_KEY_get0_public_key")))
         } else {
             Ok(ec_point)
         }
@@ -117,7 +120,7 @@ impl EcKey {
            // `EC_KEY` pointer.
            unsafe { EC_KEY_get0_group(self.0) };
         if group.is_null() {
-            Err(RequestProcessingError::InternalError("EC_KEY_get0_group"))
+            Err(RequestProcessingError::InternalError(String::from("EC_KEY_get0_group")))
         } else {
             Ok(group)
         }
@@ -168,7 +171,7 @@ impl Cbb {
             // SAFETY: The CBB object should be initialized since `CBB_init` succeeds.
             Ok(Self(unsafe { cbb.assume_init() }))
         } else {
-            Err(RequestProcessingError::InternalError("CBB_init"))
+            Err(RequestProcessingError::InternalError(String::from("CBB_init")))
         }
     }
 
@@ -179,7 +182,7 @@ impl Cbb {
         // creation.
         let ret = unsafe { CBB_finish(self.as_mut(), &mut out_data, &mut out_len) };
         if ret != 1 {
-            return Err(RequestProcessingError::InternalError("CBB_finish"));
+            return Err(RequestProcessingError::InternalError(String::from("CBB_finish")));
         }
         // It is legal for BoringSSL to return null pointer in case of an empty buffer.
         if out_data.is_null() {
@@ -219,7 +222,7 @@ impl BigNum {
         // SAFETY: The returned pointer is checked below.
         let bn = unsafe { BN_new() };
         if bn.is_null() {
-            return Err(RequestProcessingError::InternalError("BN_new"));
+            return Err(RequestProcessingError::InternalError(String::from("BN_new")));
         }
         Ok(Self(bn))
     }
@@ -238,7 +241,7 @@ impl BigNum {
         if read_len == len {
             Ok(res)
         } else {
-            Err(RequestProcessingError::InternalError("BN_bn2bin"))
+            Err(RequestProcessingError::InternalError(String::from("BN_bn2bin")))
         }
     }
 }
