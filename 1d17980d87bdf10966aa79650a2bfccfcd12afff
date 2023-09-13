@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e990313b_a94b7a5d",
+        "filename": "rialto/src/requests/keys.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-13T09:50:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6dc4b03f_e278676a",
+      "revId": "1d17980d87bdf10966aa79650a2bfccfcd12afff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bcf0b9ca_6b6b3a0e",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-09-12T19:15:33Z",
       "side": 1,
       "message": "While this *works*, making your own buffer type here seems a little excessive. Can you not just return a `Vec\u003cu8\u003e` or something? If you use `EC_POINT_point2oct`, you can write to buffer that you provide, so it doesn\u0027t have to be owned by `OPENSSL_malloc`.",
+      "range": {
+        "startLine": 59,
+        "startChar": 39,
+        "endLine": 59,
+        "endChar": 45
+      },
+      "revId": "1d17980d87bdf10966aa79650a2bfccfcd12afff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49bb4d83_d97ab3df",
+        "filename": "rialto/src/requests/keys.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-13T09:50:45Z",
+      "side": 1,
+      "message": "Regarding the `Buffer` structure, it\u0027s quite handy to use it with the `bssl` API. It works in this case and also with `CBB` when serializing the private key in DER.\n\nIn comparison with `Vec\u003cu8\u003e`, I can also use the bssl API to free and zerorize the heap.\n\nOtherwise I removed this function for now as I mainly need a `CoseKey` for the public key, so eventually I might just need the API to get the X, Y coordinates for the coset API. I\u0027ll address it in a subsequent cl.",
+      "parentUuid": "bcf0b9ca_6b6b3a0e",
       "range": {
         "startLine": 59,
         "startChar": 39,
@@ -58,6 +100,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72047b7c_6615fe95",
+        "filename": "rialto/src/requests/keys.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-13T09:50:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e36a3bf9_3d2dc1bd",
+      "revId": "1d17980d87bdf10966aa79650a2bfccfcd12afff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e41f6691_16f08155",
@@ -71,6 +131,24 @@
       "writtenOn": "2023-09-12T19:15:33Z",
       "side": 1,
       "message": "You can just pass in a null BN_CTX to all these. The library will internally create one as needed.",
+      "revId": "1d17980d87bdf10966aa79650a2bfccfcd12afff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42d68f9d_ec8504eb",
+        "filename": "rialto/src/requests/keys.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-13T09:50:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e41f6691_16f08155",
       "revId": "1d17980d87bdf10966aa79650a2bfccfcd12afff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -98,6 +176,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa2fe59d_e3db5284",
+        "filename": "rialto/src/requests/keys.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-13T09:50:45Z",
+      "side": 1,
+      "message": "I change the return to DER encoded private key. Buffer is still needed to work with CBB.",
+      "parentUuid": "3e4d754d_a3e8063f",
+      "range": {
+        "startLine": 77,
+        "startChar": 40,
+        "endLine": 77,
+        "endChar": 46
+      },
+      "revId": "1d17980d87bdf10966aa79650a2bfccfcd12afff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31a4b694_f0e0fb2c",
@@ -111,6 +213,24 @@
       "writtenOn": "2023-09-12T19:15:33Z",
       "side": 1,
       "message": "Same comment as above.",
+      "revId": "1d17980d87bdf10966aa79650a2bfccfcd12afff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d32675c7_9c66a9df",
+        "filename": "rialto/src/requests/keys.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-13T09:50:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31a4b694_f0e0fb2c",
       "revId": "1d17980d87bdf10966aa79650a2bfccfcd12afff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
