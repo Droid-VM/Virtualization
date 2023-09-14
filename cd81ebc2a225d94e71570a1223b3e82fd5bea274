@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85f4cb57_7a5859a8",
+        "filename": "libs/service_vm_comm/src/message.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-09-14T16:59:48Z",
+      "side": 1,
+      "message": "Is there benefit in creating a new error type just for this result?\n\nStated differently: will an API client be expected to take action based on different error codes? Or are the error codes simply informational?\n\nIf they are informational, then I\u0027m not seeing a good reason to create specific errors here, as it\u0027s just going to generate code to deal with errors of varying types (often just mapping one error type to another).",
+      "range": {
+        "startLine": 25,
+        "startChar": 60,
+        "endLine": 25,
+        "endChar": 83
+      },
+      "revId": "cd81ebc2a225d94e71570a1223b3e82fd5bea274",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9406c34b_62309841",
+        "filename": "libs/service_vm_comm/src/message.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-09-14T16:59:48Z",
+      "side": 1,
+      "message": "Is there distinct benefit in creating a new error type just for this result?\n\nStated differently: will an API client be expected to take action based on different error codes? Or are the error codes simply informational?\n\nIf they are informational, then I\u0027m not seeing a good reason to create specific errors here, as it\u0027s just going to generate code to deal with errors of varying types.",
+      "range": {
+        "startLine": 25,
+        "startChar": 60,
+        "endLine": 25,
+        "endChar": 83
+      },
+      "revId": "cd81ebc2a225d94e71570a1223b3e82fd5bea274",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "408bc29d_8d8176cc",
+        "filename": "rialto/src/requests/api.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-09-14T16:59:48Z",
+      "side": 1,
+      "message": "I did a little digging, and it seems as if we don\u0027t write a response to the requester. In that case, how does the requester know what went wrong? Do we just close the connection on them and they just give up w/o knowing what happened?",
+      "range": {
+        "startLine": 40,
+        "startChar": 12,
+        "endLine": 40,
+        "endChar": 43
+      },
+      "revId": "cd81ebc2a225d94e71570a1223b3e82fd5bea274",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4018950f_85852ed0",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-09-14T16:59:48Z",
+      "side": 1,
+      "message": "Does this actually work with a 0 length key?\n\nI\u0027d assume that the hmac function would complain fairly loudly about that.",
+      "range": {
+        "startLine": 44,
+        "startChar": 43,
+        "endLine": 44,
+        "endChar": 51
+      },
+      "revId": "cd81ebc2a225d94e71570a1223b3e82fd5bea274",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3af047a_f17c99a2",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-09-14T16:59:48Z",
+      "side": 1,
+      "message": "nit: it would be nice to print out the unexpected value here for debugging failures.",
+      "range": {
+        "startLine": 106,
+        "startChar": 39,
+        "endLine": 106,
+        "endChar": 43
+      },
+      "revId": "cd81ebc2a225d94e71570a1223b3e82fd5bea274",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
