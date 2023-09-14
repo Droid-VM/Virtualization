@@ -16,6 +16,103 @@
       "message": "Hi, could you please take a look?",
       "revId": "9f1ab388029da83b5f675670d62cb71fecd6d3af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "657c1662_2b129692",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-14T13:46:14Z",
+      "side": 1,
+      "message": "I *think* `BN_new()` is all that\u0027s needed -- `BN_init()` says it \"initialises a stack allocated `BIGNUM`\", which this isn\u0027t.",
+      "revId": "9f1ab388029da83b5f675670d62cb71fecd6d3af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fb52f2a_50007111",
+        "filename": "rialto/src/requests/pub_key.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-14T13:46:14Z",
+      "side": 1,
+      "message": "Even though you\u0027re going to cover this later, it still might make sense to make the method signatures match what they\u0027ll need to be later, i.e. have an externally provided `hmac_key` here that gets used in a closure in `try_create_tag`.",
+      "revId": "9f1ab388029da83b5f675670d62cb71fecd6d3af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ab67bab_d94b5cde",
+        "filename": "rialto/src/requests/pub_key.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-14T13:46:14Z",
+      "side": 1,
+      "message": "Is there a transformation/KDF step when using a DICE chain as an HMAC key?",
+      "revId": "9f1ab388029da83b5f675670d62cb71fecd6d3af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6d7dc0e_18cbce6c",
+        "filename": "rialto/src/requests/pub_key.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-14T13:46:14Z",
+      "side": 1,
+      "message": "Is the cast needed?",
+      "range": {
+        "startLine": 60,
+        "startChar": 24,
+        "endLine": 60,
+        "endChar": 36
+      },
+      "revId": "9f1ab388029da83b5f675670d62cb71fecd6d3af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "841ed7ee_b5be04d2",
+        "filename": "rialto/src/requests/pub_key.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-14T13:46:14Z",
+      "side": 1,
+      "message": "Should this be `||`?",
+      "range": {
+        "startLine": 69,
+        "startChar": 21,
+        "endLine": 69,
+        "endChar": 23
+      },
+      "revId": "9f1ab388029da83b5f675670d62cb71fecd6d3af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
