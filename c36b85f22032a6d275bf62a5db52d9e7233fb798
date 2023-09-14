@@ -33,6 +33,24 @@
       "message": "nit: \"request processing\" is a bit of a generic name, and at the moment all the uses are crypto-related. Is this going to be used for other things, or would it make sense to rename it to something like `CryptoProcessingError` or `RkpProcessingError`?",
       "revId": "c36b85f22032a6d275bf62a5db52d9e7233fb798",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d657e597_68cbdc9f",
+        "filename": "rialto/src/error.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-14T13:34:17Z",
+      "side": 1,
+      "message": "Actually, I made it a bit generic intentionally because `rialto` is supposed to be used as the base of the service VM where we can handle different types of requests. RKP or crypto requests are mostly a subset of it. In the remote attestation project, I\u0027m going to add 3 requests, only the 2 are relevant to RKP HAL, I haven\u0027t implemented the third type yet [1].\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/virtualizationservice/src/rkpvm.rs;l\u003d29;drc\u003df3482600a5764ce8c853f2d51c43767454f080ec",
+      "parentUuid": "86edf3f6_4db68cb7",
+      "revId": "c36b85f22032a6d275bf62a5db52d9e7233fb798",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

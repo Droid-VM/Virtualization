@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7b0b6fe_262417fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-14T13:34:17Z",
+      "side": 1,
+      "message": "No worries. Thanks for the review! could you take another look?",
+      "parentUuid": "fcf134c0_bb95b637",
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "963fa7d1_7de3043f",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-09-14T12:47:24Z",
       "side": 1,
       "message": "super-nit: other error messages don\u0027t end in a full-stop",
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db3640ba_af0cfceb",
+        "filename": "rialto/src/error.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-14T13:34:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "963fa7d1_7de3043f",
       "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a0119943_8b6b95ba",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-14T13:34:17Z",
+      "side": 1,
+      "message": "If we want to return `Vec\u003cu8\u003e`, we probably need a struct that wraps the vector and securely zeroes out the data afterward, as the data is highly confidential. However, considering that `OPENSSL_free` already performs this task, I am hesitant to introduce an additional layer that duplicates the same functionality. Anyway, for users external to this module, they only need to use the `as_slice()` API provided by this struct, making the usage indistinguishable between `Buffer` and `Vec`.",
+      "parentUuid": "3d619d1c_92b9d733",
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "f21de35e_a92f8604",
         "filename": "rialto/src/requests/ec_key.rs",
         "patchSetId": 7
@@ -65,6 +119,24 @@
       "writtenOn": "2023-09-14T12:47:24Z",
       "side": 1,
       "message": "In an ideal world, we\u0027d have a standard / common wrapper crate that subsumed a lot of the functionality below here...",
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92f21f7d_9a33e6f4",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-14T13:34:17Z",
+      "side": 1,
+      "message": "agree",
+      "parentUuid": "f21de35e_a92f8604",
       "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -88,6 +160,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e7b76a34_050ec48b",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-14T13:34:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8a7a03a_da10bb97",
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0b99f8cd_b6a19c53",
         "filename": "rialto/src/requests/ec_key.rs",
         "patchSetId": 7
@@ -99,6 +189,24 @@
       "writtenOn": "2023-09-14T12:47:24Z",
       "side": 1,
       "message": "What are your conventions/policies around `assert!` in production code?",
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80a79a4e_9b846a43",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-14T13:34:17Z",
+      "side": 1,
+      "message": "This is only an internal check, it should never fail. Especially this function is private and we checked the parameters before invoking it. I added them here mostly for code clarity.",
+      "parentUuid": "0b99f8cd_b6a19c53",
       "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -116,6 +224,30 @@
       "writtenOn": "2023-09-14T12:47:24Z",
       "side": 1,
       "message": "uber-nit: be nice to use consistent spelling (nonnull / non-null / non-NULL)",
+      "range": {
+        "startLine": 111,
+        "startChar": 62,
+        "endLine": 111,
+        "endChar": 69
+      },
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35eec3bb_c9a677d8",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-14T13:34:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03c9898c_0e719ef9",
       "range": {
         "startLine": 111,
         "startChar": 62,
@@ -149,6 +281,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d995098_4c100d27",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-14T13:34:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12b5fdba_98a49dcd",
+      "range": {
+        "startLine": 112,
+        "startChar": 45,
+        "endLine": 112,
+        "endChar": 48
+      },
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0edd9ce9_1633c731",
@@ -162,6 +318,24 @@
       "writtenOn": "2023-09-14T12:47:24Z",
       "side": 1,
       "message": "Would this be better as `fn finish(self)` (i.e. moving `self` in)?",
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "270a97f6_2294e159",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-14T13:34:17Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s a good idea.",
+      "parentUuid": "0edd9ce9_1633c731",
       "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -183,6 +357,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "beeb2c25_aeec96c8",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-14T13:34:17Z",
+      "side": 1,
+      "message": "I think they are only supposed to be implemented by smart pointers [1], which is not exactly the case here. Maybe `AsMut`?\n\n[1] https://doc.rust-lang.org/std/ops/trait.DerefMut.html",
+      "parentUuid": "bb07ee9c_06827289",
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "983b6193_1365ae4b",
@@ -196,6 +388,24 @@
       "writtenOn": "2023-09-14T12:47:24Z",
       "side": 1,
       "message": "s/Provisionning/Provisioning/",
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b357d5ba_4ff17364",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-14T13:34:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "983b6193_1365ae4b",
       "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
