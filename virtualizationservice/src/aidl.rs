@@ -27,6 +27,7 @@ use android_system_virtualizationservice_internal::aidl::android::system::virtua
     AtomVmBooted::AtomVmBooted,
     AtomVmCreationRequested::AtomVmCreationRequested,
     AtomVmExited::AtomVmExited,
+    BoundDevice::BoundDevice,
     IGlobalVmContext::{BnGlobalVmContext, IGlobalVmContext},
     IVirtualizationServiceInternal::IVirtualizationServiceInternal,
     IVfioHandler::{BpVfioHandler, IVfioHandler},
@@ -179,44 +180,14 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
     fn getAssignableDevices(&self) -> binder::Result<Vec<AssignableDevice>> {
         check_use_custom_virtual_machine()?;
 
-        let mut ret = Vec::new();
-        let xml_path = Path::new("/vendor/etc/avf/assignable_devices.xml");
-        if !xml_path.exists() {
-            return Ok(ret);
+        let mut ret = vec![];
+        for device in get_assignable_devices()?.device.into_iter() {
+            ret.push(AssignableDevice { node: device.sysfs_path, kind: device.kind });
         }
-
-        let xml = fs::read(xml_path)
-            .context("Failed to read assignable_devices.xml")
-            .with_log()
-            .or_service_specific_exception(-1)?;
-
-        let xml = String::from_utf8(xml)
-            .context("assignable_devices.xml is not a valid UTF-8 file")
-            .with_log()
-            .or_service_specific_exception(-1)?;
-
-        let devices: Devices = serde_xml_rs::from_str(&xml)
-            .context("can't parse assignable_devices.xml")
-            .with_log()
-            .or_service_specific_exception(-1)?;
-
-        let mut device_set = HashSet::new();
-
-        for device in devices.device.into_iter() {
-            if device_set.contains(&device.sysfs_path) {
-                warn!("duplicated assignable device {device:?}; ignoring...")
-            } else if Path::new(&device.sysfs_path).exists() {
-                device_set.insert(device.sysfs_path.clone());
-                ret.push(AssignableDevice { kind: device.kind, node: device.sysfs_path });
-            } else {
-                warn!("assignable device {device:?} doesn't exist; ignoring...");
-            }
-        }
-
         Ok(ret)
     }
 
-    fn bindDevicesToVfioDriver(&self, devices: &[String]) -> binder::Result<()> {
+    fn bindDevicesToVfioDriver(&self, devices: &[String]) -> binder::Result<Vec<BoundDevice>> {
         check_use_custom_virtual_machine()?;
 
         let vfio_service: Strong<dyn IVfioHandler> =
@@ -233,7 +204,20 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
             vfio_service.writeVmDtbo(&ParcelFileDescriptor::new(dtbo))?;
         }
 
-        Ok(())
+        let mut ret = vec![];
+        for assignable_device in get_assignable_devices()?.device.into_iter() {
+            for bound_device in devices.iter() {
+                if &assignable_device.sysfs_path == bound_device {
+                    ret.push(BoundDevice {
+                        sysfsPath: bound_device.clone(),
+                        dtboNode: assignable_device.dtbo_node,
+                    });
+                    break;
+                }
+            }
+        }
+
+        Ok(ret)
     }
 }
 
@@ -241,12 +225,52 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
 #[derive(Debug, Deserialize)]
 struct Device {
     kind: String,
+    dtbo_node: String,
     sysfs_path: String,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Default, Deserialize)]
 struct Devices {
     device: Vec<Device>,
+}
+
+fn get_assignable_devices() -> binder::Result<Devices> {
+    let xml_path = Path::new("/vendor/etc/avf/assignable_devices.xml");
+    if !xml_path.exists() {
+        return Ok(Devices { ..Default::default() });
+    }
+
+    let xml = fs::read(xml_path)
+        .context("Failed to read assignable_devices.xml")
+        .with_log()
+        .or_service_specific_exception(-1)?;
+
+    let xml = String::from_utf8(xml)
+        .context("assignable_devices.xml is not a valid UTF-8 file")
+        .with_log()
+        .or_service_specific_exception(-1)?;
+
+    let mut devices: Devices = serde_xml_rs::from_str(&xml)
+        .context("can't parse assignable_devices.xml")
+        .with_log()
+        .or_service_specific_exception(-1)?;
+
+    let mut device_set = HashSet::new();
+    devices.device.retain(move |device| {
+        if device_set.contains(&device.sysfs_path) {
+            warn!("duplicated assignable device {device:?}; ignoring...");
+            return false;
+        }
+
+        if !Path::new(&device.sysfs_path).exists() {
+            warn!("assignable device {device:?} doesn't exist; ignoring...");
+            return false;
+        }
+
+        device_set.insert(device.sysfs_path.clone());
+        true
+    });
+    Ok(devices)
 }
 
 #[derive(Debug, Default)]

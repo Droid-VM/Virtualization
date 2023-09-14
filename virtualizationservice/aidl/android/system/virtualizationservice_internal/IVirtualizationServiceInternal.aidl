@@ -20,6 +20,7 @@ import android.system.virtualizationservice.VirtualMachineDebugInfo;
 import android.system.virtualizationservice_internal.AtomVmBooted;
 import android.system.virtualizationservice_internal.AtomVmCreationRequested;
 import android.system.virtualizationservice_internal.AtomVmExited;
+import android.system.virtualizationservice_internal.BoundDevice;
 import android.system.virtualizationservice_internal.IGlobalVmContext;
 
 interface IVirtualizationServiceInternal {
@@ -68,6 +69,7 @@ interface IVirtualizationServiceInternal {
      * Bind given devices to vfio driver.
      *
      * @param devices paths of sysfs nodes of devices to assign.
+     * @return a list of pairs (sysfs path, DTBO node label) for devices.
      */
-    void bindDevicesToVfioDriver(in String[] devices);
+    BoundDevice[] bindDevicesToVfioDriver(in String[] devices);
 }
