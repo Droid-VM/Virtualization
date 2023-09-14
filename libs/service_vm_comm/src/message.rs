@@ -88,6 +88,12 @@ pub enum RequestProcessingError {
 
     /// Any key to sign lacks a valid MAC. Maps to `STATUS_INVALID_MAC`.
     InvalidMac,
+
+    /// No payload found in a key to sign.
+    KeyToSignHasEmptyPayload,
+
+    /// An error happened when serializing to/from a `Value`.
+    CborValueError,
 }
 
 impl fmt::Display for RequestProcessingError {
@@ -98,6 +104,10 @@ impl fmt::Display for RequestProcessingError {
             Self::InternalError(context) => write!(f, "Encountered an internal error: {context}"),
             Self::CosetError => write!(f, "Encountered an error with coset"),
             Self::InvalidMac => write!(f, "A key to sign lacks a valid MAC."),
+            Self::KeyToSignHasEmptyPayload => write!(f, "No payload found in a key to sign."),
+            Self::CborValueError => {
+                write!(f, "An error happened when serializing to/from a CBOR Value.")
+            }
         }
     }
 }
@@ -106,6 +116,13 @@ impl From<coset::CoseError> for RequestProcessingError {
     fn from(e: coset::CoseError) -> Self {
         error!("Coset error: {e}");
         Self::CosetError
+    }
+}
+
+impl From<ciborium::value::Error> for RequestProcessingError {
+    fn from(e: ciborium::value::Error) -> Self {
+        error!("CborValueError: {e}");
+        Self::CborValueError
     }
 }
 
