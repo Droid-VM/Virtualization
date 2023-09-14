@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ea7bb6b_ffd5e1fc",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-14T14:16:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "657c1662_2b129692",
+      "revId": "9f1ab388029da83b5f675670d62cb71fecd6d3af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8fb52f2a_50007111",
@@ -54,6 +72,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "71c264a4_01f85a0b",
+        "filename": "rialto/src/requests/pub_key.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-14T14:16:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fb52f2a_50007111",
+      "revId": "9f1ab388029da83b5f675670d62cb71fecd6d3af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2ab67bab_d94b5cde",
         "filename": "rialto/src/requests/pub_key.rs",
         "patchSetId": 5
@@ -65,6 +101,24 @@
       "writtenOn": "2023-09-14T13:46:14Z",
       "side": 1,
       "message": "Is there a transformation/KDF step when using a DICE chain as an HMAC key?",
+      "revId": "9f1ab388029da83b5f675670d62cb71fecd6d3af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "586c1929_54c749eb",
+        "filename": "rialto/src/requests/pub_key.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-14T14:16:48Z",
+      "side": 1,
+      "message": "I\u0027ll take the sealing CDI from DICE and apply HKDF with a salt on it as input here. This will be filled later once we get the DICE chain (b/287233786). I updated the comment here.",
+      "parentUuid": "2ab67bab_d94b5cde",
       "revId": "9f1ab388029da83b5f675670d62cb71fecd6d3af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -92,6 +146,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23586fa5_7df0e65a",
+        "filename": "rialto/src/requests/pub_key.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-14T14:16:48Z",
+      "side": 1,
+      "message": "It is needed. Without it there\u0027s an error:\n```\nerror[E0308]: mismatched types\n  --\u003e packages/modules/Virtualization/rialto/src/requests/pub_key.rs:60:13\n   |\n58 |         HMAC(\n   |         ---- arguments to this function are incorrect\n59 |             digester,\n60 |             key.as_ptr(),\n   |             ^^^^^^^^^^^^ expected `*const c_void`, found `*const u8`\n   |\n   \u003d note: expected raw pointer `*const core::ffi::c_void`\n              found raw pointer `*const u8`\n```",
+      "parentUuid": "a6d7dc0e_18cbce6c",
+      "range": {
+        "startLine": 60,
+        "startChar": 24,
+        "endLine": 60,
+        "endChar": 36
+      },
+      "revId": "9f1ab388029da83b5f675670d62cb71fecd6d3af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "841ed7ee_b5be04d2",
@@ -105,6 +183,30 @@
       "writtenOn": "2023-09-14T13:46:14Z",
       "side": 1,
       "message": "Should this be `||`?",
+      "range": {
+        "startLine": 69,
+        "startChar": 21,
+        "endLine": 69,
+        "endChar": 23
+      },
+      "revId": "9f1ab388029da83b5f675670d62cb71fecd6d3af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3920f87a_af74fa8b",
+        "filename": "rialto/src/requests/pub_key.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-14T14:16:48Z",
+      "side": 1,
+      "message": "Oh you\u0027re right!",
+      "parentUuid": "841ed7ee_b5be04d2",
       "range": {
         "startLine": 69,
         "startChar": 21,
