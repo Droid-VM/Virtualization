@@ -147,6 +147,10 @@ pub enum RequestProcessingError {
     /// This error type contains the errors defined in the IRPC spec.
     /// It should be forwarded to the HAL.
     RemoteProvisioningError(service_vm_comm::RemoteProvisioningError),
+    /// No payload found in a key to sign.
+    KeyToSignHasEmptyPayload,
+    /// An error happened when serializing to/from a `Value`.
+    CborValueError(ciborium::value::Error),
 }
 
 impl fmt::Display for RequestProcessingError {
@@ -159,6 +163,10 @@ impl fmt::Display for RequestProcessingError {
             Self::RemoteProvisioningError(e) => {
                 write!(f, "Encountered an error defined in the IRPC spec: {e:?}")
             }
+            Self::KeyToSignHasEmptyPayload => write!(f, "No payload found in a key to sign."),
+            Self::CborValueError(e) => {
+                write!(f, "An error happened when serializing to/from a CBOR Value: {e}")
+            }
         }
     }
 }
@@ -166,5 +174,11 @@ impl fmt::Display for RequestProcessingError {
 impl From<coset::CoseError> for RequestProcessingError {
     fn from(e: coset::CoseError) -> Self {
         Self::CosetError(e)
+    }
+}
+
+impl From<ciborium::value::Error> for RequestProcessingError {
+    fn from(e: ciborium::value::Error) -> Self {
+        Self::CborValueError(e)
     }
 }

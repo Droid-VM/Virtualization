@@ -26,10 +26,11 @@ use service_vm_comm::RemoteProvisioningError;
 type Result<T> = result::Result<T, RequestProcessingError>;
 
 /// Verifies the MAC of the given public key.
-/// TODO(b/299256925): Return the validated public key.
-pub fn validate_public_key(maced_public_key: &[u8]) -> Result<()> {
+pub fn validate_public_key(maced_public_key: &[u8]) -> Result<CoseKey> {
     let cose_mac = CoseMac0::from_slice(maced_public_key)?;
-    cose_mac.verify_tag(&[], verify_tag)
+    cose_mac.verify_tag(&[], verify_tag)?;
+    let payload = cose_mac.payload.ok_or(RequestProcessingError::KeyToSignHasEmptyPayload)?;
+    Ok(CoseKey::from_slice(&payload)?)
 }
 
 fn verify_tag(tag: &[u8], data: &[u8]) -> Result<()> {
