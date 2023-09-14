@@ -1,0 +1,170 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bb07424_babb6eb5",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1031048
+      },
+      "writtenOn": "2023-09-14T17:11:29Z",
+      "side": 1,
+      "message": "This is irrelevant to safety. BoringSSL allows freeing null pointers. We just cleanly do nothing. The actual safety requirement is that `key` was allocated by BoringSSL and isn\u0027t used after this point.",
+      "revId": "7cea90c8946cc6658d7075bf53d8f2797b3801b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "febad49b_aafb33cf",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1031048
+      },
+      "writtenOn": "2023-09-14T17:11:29Z",
+      "side": 1,
+      "message": "What are the requirements for the serialization here? This encoding is more verbose than what you were previously using, but it includes the curve.\n\nDepending on what you want, including the curve is either a benefit or a risk.\n\nIf, at the point you parse the input, you don\u0027t know the key type out-of-band, it\u0027s helpful to have it in-band. But then you need to reason through what happens if the input contains a key type you didn\u0027t expect.\n\nIf, at that point, you already know the key type, this is just a waste of bytes and adds risks when if you parse something of the wrong type and break internal invariants.\n\nSince this CL is missing the parsing half, I can\u0027t be sure of this. (Though I also don\u0027t have the cycles to fully review your cryptographic design. This is also why, per the comment below, why we (BoringSSL team) will not support code like this and instead will be requiring teams use the official bindings.)",
+      "revId": "7cea90c8946cc6658d7075bf53d8f2797b3801b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f40f13dd_0f384b81",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1031048
+      },
+      "writtenOn": "2023-09-14T17:11:29Z",
+      "side": 1,
+      "message": "As above, we don\u0027t care that the point is non-null for safety.",
+      "range": {
+        "startLine": 82,
+        "startChar": 38,
+        "endLine": 82,
+        "endChar": 54
+      },
+      "revId": "7cea90c8946cc6658d7075bf53d8f2797b3801b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae82392e_fae1f751",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1031048
+      },
+      "writtenOn": "2023-09-14T17:11:29Z",
+      "side": 1,
+      "message": "This function should be marked unsafe, no? Otherwise you can, in safe code, take a garbage pointer, wrap it in `Buffer::new` and then use `as_slice` to get a bad slice out of it.\n\nNot only that, a bad pointer will cause `drop` to break things. So actually you have a lot of safety requirements. `ptr` must have been allocated by `OPENSSL_malloc` (or be null; see below), and `len` bytes from it must be valid and initialized. And then also `new` takes ownership of the buffer. None of that is documented.",
+      "revId": "7cea90c8946cc6658d7075bf53d8f2797b3801b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8a34af9_27ef9054",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1031048
+      },
+      "writtenOn": "2023-09-14T17:11:29Z",
+      "side": 1,
+      "message": "This is irrelevant for safety. BoringSSL\u0027s `OPENSSL_free` follows the standard C expectations that passing null is okay.\n\nRather, this is only safe because of preconditions (as yet undocumented, see above) on `Buffer::new`.",
+      "range": {
+        "startLine": 113,
+        "startChar": 18,
+        "endLine": 113,
+        "endChar": 100
+      },
+      "revId": "7cea90c8946cc6658d7075bf53d8f2797b3801b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "679c41e7_967e17b8",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1031048
+      },
+      "writtenOn": "2023-09-14T17:11:29Z",
+      "side": 1,
+      "message": "The `out_len \u003e 0` check is a memory leak. If you initialize a `CBB` with non-zero initial capacity, then don\u0027t write anything to it, we will return you a buffer with length zero but allocated buffer.",
+      "range": {
+        "startLine": 140,
+        "startChar": 46,
+        "endLine": 140,
+        "endChar": 57
+      },
+      "revId": "7cea90c8946cc6658d7075bf53d8f2797b3801b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9acc233b_d3eb97b8",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1031048
+      },
+      "writtenOn": "2023-09-14T17:11:29Z",
+      "side": 1,
+      "message": "This null check is also off, but it is slightly complicated. In C, (null, 0) is a perfectly valid representation of the empty buffer. This differs from Rust, where it isn\u0027t. Rust, unfortunately, made a mistake and made decisions that make it very unsafe to use with FFI. This is part of why we\u0027re making our own crate in BoringSSL. We do not support teams calling into BoringSSL bindgen output like this, so code like this really should be working with us. Unfortunately, Android Rust isn\u0027t \n\nIf you initialize a `CBB` with zero capacity, it\u0027s perfectly valid for BoringSSL to return (null, 0). I think it actually won\u0027t right now, but the API contract is you must tolerate it.\n\nI think the thing to is drop all the null and zero-length checks here and in `Buffer::new`. Instead, `as_slice` should special-case zero-length slices.\n\nSome context on where Rust messed this up: https://groups.google.com/a/google.com/g/unsafe-rust-crabal/c/42XI6HuDvcU\n\nOr use `Vec` as previously suggested, and then you don\u0027t need to spread it across so many places. 😊",
+      "range": {
+        "startLine": 140,
+        "startChar": 23,
+        "endLine": 140,
+        "endChar": 43
+      },
+      "revId": "7cea90c8946cc6658d7075bf53d8f2797b3801b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "661c1abc_3d470b69",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1031048
+      },
+      "writtenOn": "2023-09-14T17:11:29Z",
+      "side": 1,
+      "message": "You mentioned you leak `Buffer` out the public API of this module for zeroizing, but then this copy it into `Vec\u003cu8\u003e` anyway. So you\u0027re not actually getting any benefit from zerozing. If not, why not just use more idiomatic Rust stuff?",
+      "range": {
+        "startLine": 27,
+        "startChar": 52,
+        "endLine": 27,
+        "endChar": 61
+      },
+      "revId": "7cea90c8946cc6658d7075bf53d8f2797b3801b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
