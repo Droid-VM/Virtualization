@@ -1,0 +1,203 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcf134c0_bb95b637",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-14T12:47:24Z",
+      "side": 1,
+      "message": "I\u0027m still catching up on context, so apologies if any comments aren\u0027t relevant in this environment",
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "963fa7d1_7de3043f",
+        "filename": "rialto/src/error.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-14T12:47:24Z",
+      "side": 1,
+      "message": "super-nit: other error messages don\u0027t end in a full-stop",
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d619d1c_92b9d733",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-14T12:47:24Z",
+      "side": 1,
+      "message": "It might be nicer to do the conversion to `Vec\u003cu8\u003e` here, and then the `Buffer` type (which holds raw pointers) need not be exported.",
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f21de35e_a92f8604",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-14T12:47:24Z",
+      "side": 1,
+      "message": "In an ideal world, we\u0027d have a standard / common wrapper crate that subsumed a lot of the functionality below here...",
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8a7a03a_da10bb97",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-14T12:47:24Z",
+      "side": 1,
+      "message": "Be nice to say something about ownership (even though it\u0027s obvious from the `Drop` impl)",
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b99f8cd_b6a19c53",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-14T12:47:24Z",
+      "side": 1,
+      "message": "What are your conventions/policies around `assert!` in production code?",
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03c9898c_0e719ef9",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-14T12:47:24Z",
+      "side": 1,
+      "message": "uber-nit: be nice to use consistent spelling (nonnull / non-null / non-NULL)",
+      "range": {
+        "startLine": 111,
+        "startChar": 62,
+        "endLine": 111,
+        "endChar": 69
+      },
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12b5fdba_98a49dcd",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-14T12:47:24Z",
+      "side": 1,
+      "message": "nit: maybe s/key/data/ as there\u0027s nothing in `Buffer` that\u0027s key-specific.",
+      "range": {
+        "startLine": 112,
+        "startChar": 45,
+        "endLine": 112,
+        "endChar": 48
+      },
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0edd9ce9_1633c731",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-14T12:47:24Z",
+      "side": 1,
+      "message": "Would this be better as `fn finish(self)` (i.e. moving `self` in)?",
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb07ee9c_06827289",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-14T12:47:24Z",
+      "side": 1,
+      "message": "Not sure whether implementing `DerefMut + Deref` and thus getting `Deref` coercion for `Cbb` would be helpful here?",
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "983b6193_1365ae4b",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-14T12:47:24Z",
+      "side": 1,
+      "message": "s/Provisionning/Provisioning/",
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

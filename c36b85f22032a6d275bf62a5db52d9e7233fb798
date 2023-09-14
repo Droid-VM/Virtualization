@@ -16,6 +16,23 @@
       "message": "Hi, could you please review this cl?",
       "revId": "c36b85f22032a6d275bf62a5db52d9e7233fb798",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86edf3f6_4db68cb7",
+        "filename": "rialto/src/error.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-14T12:47:24Z",
+      "side": 1,
+      "message": "nit: \"request processing\" is a bit of a generic name, and at the moment all the uses are crypto-related. Is this going to be used for other things, or would it make sense to rename it to something like `CryptoProcessingError` or `RkpProcessingError`?",
+      "revId": "c36b85f22032a6d275bf62a5db52d9e7233fb798",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
