@@ -61,8 +61,7 @@ pub const fn align_up(addr: usize, alignment: usize) -> Option<usize> {
 /// Aligns the given address to the given alignment, if it is a power of two.
 ///
 /// Returns `None` if the alignment isn't a power of two.
-#[allow(dead_code)] // Currently unused but might be needed again.
-const fn align_down(addr: usize, alignment: usize) -> Option<usize> {
+pub const fn align_down(addr: usize, alignment: usize) -> Option<usize> {
     if !alignment.is_power_of_two() {
         None
     } else {
