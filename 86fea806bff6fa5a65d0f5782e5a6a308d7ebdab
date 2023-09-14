@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbf4877b_7bc81f29",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-09-14T18:43:35Z",
+      "side": 1,
+      "message": "We should add a new certificate type here.\n\nPlease log a bug on https://b.corp.google.com/components/956633 to add support for a new certificate type?",
+      "range": {
+        "startLine": 44,
+        "startChar": 6,
+        "endLine": 44,
+        "endChar": 22
+      },
+      "revId": "86fea806bff6fa5a65d0f5782e5a6a308d7ebdab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e426eda_4de906fc",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-09-14T18:43:35Z",
+      "side": 1,
+      "message": "You can add an empty `UdsCerts` array if you want to get this closer to \"real\" -- though eventually we\u0027ll need to populate it with actual UDS certs when SoCs have them available.",
+      "range": {
+        "startLine": 77,
+        "startChar": 34,
+        "endLine": 77,
+        "endChar": 42
+      },
+      "revId": "86fea806bff6fa5a65d0f5782e5a6a308d7ebdab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32925734_18d8716d",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-09-14T18:43:35Z",
+      "side": 1,
+      "message": "Maybe integrate with `libhwtrust` someday for testing?",
+      "range": {
+        "startLine": 112,
+        "startChar": 3,
+        "endLine": 112,
+        "endChar": 12
+      },
+      "revId": "86fea806bff6fa5a65d0f5782e5a6a308d7ebdab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
