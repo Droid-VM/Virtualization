@@ -341,7 +341,8 @@ impl<'a> FdtNode<'a> {
         self.fdt
     }
 
-    fn next_compatible(self, compatible: &CStr) -> Result<Option<Self>> {
+    /// Returns the compatible node of the given name that is next to this node.
+    pub fn next_compatible(self, compatible: &CStr) -> Result<Option<Self>> {
         // SAFETY: Accesses (read-only) are constrained to the DT totalsize.
         let ret = unsafe {
             libfdt_bindgen::fdt_node_offset_by_compatible(

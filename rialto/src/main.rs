@@ -20,15 +20,20 @@
 mod communication;
 mod error;
 mod exceptions;
+mod fdt;
 mod requests;
 
 extern crate alloc;
 
 use crate::communication::VsockStream;
 use crate::error::{Error, Result};
+use crate::fdt::read_dice_range_from;
+use aarch64_paging::paging::VirtualAddress;
 use ciborium_io::Write;
 use core::num::NonZeroUsize;
+use core::ops::Range;
 use core::slice;
+use diced_open_dice::bcc_handover_parse;
 use fdtpci::PciInfo;
 use hyp::{get_mem_sharer, get_mmio_guard};
 use libfdt::FdtError;
@@ -44,7 +49,7 @@ use vmbase::{
     fdt::SwiotlbInfo,
     layout::{self, crosvm},
     main,
-    memory::{MemoryTracker, PageTable, MEMORY, PAGE_SIZE, SIZE_128KB},
+    memory::{MemoryTracker, PageTable, MEMORY, PAGE_SIZE, SIZE_128KB, SIZE_2MB},
     power::reboot,
     virtio::{
         pci::{self, PciTransportIterator, VirtIOSocket},
@@ -65,6 +70,14 @@ fn vm_type() -> VmType {
     }
 }
 
+/// Returns the `writable_data` region defined in the linker script of pvmfw.
+fn pvmfw_writable_data_region() -> Range<VirtualAddress> {
+    const WRITABLE_DATA_START: usize = 0x7fe00000;
+
+    let end = WRITABLE_DATA_START + SIZE_2MB;
+    VirtualAddress(WRITABLE_DATA_START)..VirtualAddress(end)
+}
+
 fn new_page_table() -> Result<PageTable> {
     let mut page_table = PageTable::default();
 
@@ -72,6 +85,9 @@ fn new_page_table() -> Result<PageTable> {
     page_table.map_data(&layout::stack_range(40 * PAGE_SIZE).into())?;
     page_table.map_code(&layout::text_range().into())?;
     page_table.map_rodata(&layout::rodata_range().into())?;
+    // Maps the `writable_data` region of pvmfw as read-only data to allow the
+    // reading of DICE data.
+    page_table.map_rodata(&pvmfw_writable_data_region().into())?;
     page_table.map_device(&layout::console_uart_range().into())?;
 
     Ok(page_table)
@@ -130,6 +146,21 @@ unsafe fn try_main(fdt_addr: usize) -> Result<()> {
             e
         })?;
     }
+    let _bcc_handover = match vm_type() {
+        VmType::ProtectedVm => {
+            let dice_range = read_dice_range_from(fdt)?;
+            info!("DICE range: {dice_range:#x?}");
+            let dice_start = dice_range.start as *const u8;
+            // SAFETY: This region was written by pvmfw. The page table initialization guarantees
+            // that there's no memory overlap, and the region is mapped as read-only data.
+            let bcc_handover = unsafe { slice::from_raw_parts(dice_start, dice_range.len()) };
+            let bcc_handover = bcc_handover_parse(bcc_handover)?;
+            Some(bcc_handover)
+        }
+        // Currently, no DICE data is retrieved for non-protected VMs, as these VMs are solely
+        // intended for debugging purposes.
+        VmType::NonProtectedVm => None,
+    };
 
     let pci_info = PciInfo::from_fdt(fdt)?;
     debug!("PCI: {pci_info:#x?}");
@@ -140,6 +171,7 @@ unsafe fn try_main(fdt_addr: usize) -> Result<()> {
     debug!("Found socket device: guest cid = {:?}", socket_device.guest_cid());
 
     let mut vsock_stream = VsockStream::new(socket_device, host_addr())?;
+    // TODO(b/287233786): Pass the bcc_handover to process_request.
     while let ServiceVmRequest::Process(req) = vsock_stream.read_request()? {
         let response = requests::process_request(req)?;
         vsock_stream.write_response(&response)?;
