@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef74ce38_23b9c161",
+        "filename": "libs/service_vm_comm/src/message.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-09-15T17:32:43Z",
+      "side": 1,
+      "message": "Sorry about the duped comment! I was using two different tabs to review and managed to mess this up somehow 😊",
+      "parentUuid": "cfb863be_da78b2ed",
+      "range": {
+        "startLine": 25,
+        "startChar": 60,
+        "endLine": 25,
+        "endChar": 83
+      },
+      "revId": "cd81ebc2a225d94e71570a1223b3e82fd5bea274",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "408bc29d_8d8176cc",
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "Currently, we are missing a mechanism to propagate errors from the RKP VM to the host. In the event of a failure, the host receives a generic failure message from the VM and subsequently shuts it down. However, due to the generic nature of the failure, the host cannot determine whether it is an invalid MAC error or not. This is why I want to introduce RemoteProvisioningError.\n\nAlternatively, instead of creating a new `RemoteProvisioningError`, it is also feasible to forward all `RequestProcessingError` to the host. This approach may be cleaner. What about like this \u003d\u003e https://r.android.com/c/2753747",
       "parentUuid": "408bc29d_8d8176cc",
+      "range": {
+        "startLine": 40,
+        "startChar": 12,
+        "endLine": 40,
+        "endChar": 43
+      },
+      "revId": "cd81ebc2a225d94e71570a1223b3e82fd5bea274",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c5270e6_e0d39db9",
+        "filename": "rialto/src/requests/api.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-09-15T17:32:43Z",
+      "side": 1,
+      "message": "The update looks good, thanks.\n\nI was a bit worried about a proliferation of different error types, resulting in lots of boilerplate to convert from one to another. Jumping right to the error type that clients will see seems like a nice simplification.",
+      "parentUuid": "fff07895_f669526e",
       "range": {
         "startLine": 40,
         "startChar": 12,
