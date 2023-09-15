@@ -14,13 +14,14 @@
 
 //! Handles the construction of the MACed public key.
 
-use crate::error::RequestProcessingError;
+use alloc::string::String;
 use alloc::vec;
 use alloc::vec::Vec;
 use bssl_ffi::EVP_sha256;
 use bssl_ffi::HMAC;
 use core::result;
 use coset::{iana, CborSerializable, CoseKey, CoseMac0Builder, HeaderBuilder};
+use service_vm_comm::RequestProcessingError;
 
 type Result<T> = result::Result<T, RequestProcessingError>;
 
@@ -47,7 +48,7 @@ fn hmac_sha256(key: &[u8], data: &[u8]) -> Result<Vec<u8>> {
     // as a potentially NULL pointer.
     let digester = unsafe { EVP_sha256() };
     if digester.is_null() {
-        return Err(RequestProcessingError::InternalError("EVP_sha256"));
+        return Err(RequestProcessingError::InternalError(String::from("EVP_sha256")));
     }
     // SAFETY: Only reads from/writes to the provided slices and supports digester was checked not
     // be NULL.
@@ -65,6 +66,6 @@ fn hmac_sha256(key: &[u8], data: &[u8]) -> Result<Vec<u8>> {
     if !ret.is_null() && out_len == (out.len() as u32) {
         Ok(out)
     } else {
-        Err(RequestProcessingError::InternalError("HMAC"))
+        Err(RequestProcessingError::InternalError(String::from("HMAC")))
     }
 }
