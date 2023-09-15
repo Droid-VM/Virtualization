@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b47bdec_f4638336",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-15T08:21:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3bb07424_babb6eb5",
+      "revId": "7cea90c8946cc6658d7075bf53d8f2797b3801b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "febad49b_aafb33cf",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-09-14T17:11:29Z",
       "side": 1,
       "message": "What are the requirements for the serialization here? This encoding is more verbose than what you were previously using, but it includes the curve.\n\nDepending on what you want, including the curve is either a benefit or a risk.\n\nIf, at the point you parse the input, you don\u0027t know the key type out-of-band, it\u0027s helpful to have it in-band. But then you need to reason through what happens if the input contains a key type you didn\u0027t expect.\n\nIf, at that point, you already know the key type, this is just a waste of bytes and adds risks when if you parse something of the wrong type and break internal invariants.\n\nSince this CL is missing the parsing half, I can\u0027t be sure of this. (Though I also don\u0027t have the cycles to fully review your cryptographic design. This is also why, per the comment below, why we (BoringSSL team) will not support code like this and instead will be requiring teams use the official bindings.)",
+      "revId": "7cea90c8946cc6658d7075bf53d8f2797b3801b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "297d4973_2ff99cad",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-15T08:21:27Z",
+      "side": 1,
+      "message": "Thanks for the explanation. Yes, I do want to parse the key and use it for signing later. In go/avf-rkpvm-keyblob \u003e Background, I have described the generation and usage scenario of this private key.\n\nApart from that, the doc described the management of the private key generated here. The key is generated and encrypted, then is passed to rkpd. Later we retrieve the encrypted key blob from rkpd, decrypt it and use it to sign. The retrieval process requires a different set of APIs, which have not been implemented yet. My plan is to add these APIs around November.\n\nActually in the first PS I didn\u0027t take any format, because my main intention was to verify that the generation of the key pair works smoothly with the integration of boringssl.",
+      "parentUuid": "febad49b_aafb33cf",
       "revId": "7cea90c8946cc6658d7075bf53d8f2797b3801b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -58,6 +94,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ca0bc30_37c2de31",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-15T08:21:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f40f13dd_0f384b81",
+      "range": {
+        "startLine": 82,
+        "startChar": 38,
+        "endLine": 82,
+        "endChar": 54
+      },
+      "revId": "7cea90c8946cc6658d7075bf53d8f2797b3801b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae82392e_fae1f751",
@@ -75,6 +135,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a55c7edc_77ff7d02",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-15T08:21:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae82392e_fae1f751",
+      "revId": "7cea90c8946cc6658d7075bf53d8f2797b3801b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8a34af9_27ef9054",
@@ -88,6 +166,30 @@
       "writtenOn": "2023-09-14T17:11:29Z",
       "side": 1,
       "message": "This is irrelevant for safety. BoringSSL\u0027s `OPENSSL_free` follows the standard C expectations that passing null is okay.\n\nRather, this is only safe because of preconditions (as yet undocumented, see above) on `Buffer::new`.",
+      "range": {
+        "startLine": 113,
+        "startChar": 18,
+        "endLine": 113,
+        "endChar": 100
+      },
+      "revId": "7cea90c8946cc6658d7075bf53d8f2797b3801b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "172980b0_77101ae5",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-15T08:21:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8a34af9_27ef9054",
       "range": {
         "startLine": 113,
         "startChar": 18,
@@ -144,6 +246,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e666b35_9c87dc65",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-15T08:21:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "679c41e7_967e17b8",
+      "range": {
+        "startLine": 140,
+        "startChar": 46,
+        "endLine": 140,
+        "endChar": 57
+      },
+      "revId": "7cea90c8946cc6658d7075bf53d8f2797b3801b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d963e3f5_b1e323ab",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-15T08:21:27Z",
+      "side": 1,
+      "message": "I see your point, thanks for the explanation. It does sound like dropping `Buffer` can be a good idea to avoid handling all these special cases in several places.",
+      "parentUuid": "9acc233b_d3eb97b8",
+      "range": {
+        "startLine": 140,
+        "startChar": 23,
+        "endLine": 140,
+        "endChar": 43
+      },
+      "revId": "7cea90c8946cc6658d7075bf53d8f2797b3801b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "661c1abc_3d470b69",
@@ -157,6 +307,30 @@
       "writtenOn": "2023-09-14T17:11:29Z",
       "side": 1,
       "message": "You mentioned you leak `Buffer` out the public API of this module for zeroizing, but then this copy it into `Vec\u003cu8\u003e` anyway. So you\u0027re not actually getting any benefit from zerozing. If not, why not just use more idiomatic Rust stuff?",
+      "range": {
+        "startLine": 27,
+        "startChar": 52,
+        "endLine": 27,
+        "endChar": 61
+      },
+      "revId": "7cea90c8946cc6658d7075bf53d8f2797b3801b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10fcff17_dd026c2b",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-15T08:21:27Z",
+      "side": 1,
+      "message": "Sorry for the confusion. This is just a placeholder till the private key encryption mechanism will be implemented (DD: go/avf-rkpvm-keyblob).\n\nI don\u0027t plan to send the plaintext private key out of the VM or copy it to any buffer. Only the encrypted key blob should be sent out. Let me remove this.",
+      "parentUuid": "661c1abc_3d470b69",
       "range": {
         "startLine": 27,
         "startChar": 52,
