@@ -19,6 +19,7 @@ use core::{fmt, result};
 use fdtpci::PciError;
 use hyp::Error as HypervisorError;
 use libfdt::FdtError;
+use service_vm_comm::RequestProcessingError;
 use vmbase::{memory::MemoryTrackerError, virtio::pci};
 
 pub type Result<T> = result::Result<T, Error>;
@@ -130,35 +131,5 @@ impl From<CiboriumDeError> for Error {
 impl From<RequestProcessingError> for Error {
     fn from(e: RequestProcessingError) -> Self {
         Self::RequestProcessingFailed(e)
-    }
-}
-
-/// Errors related to request processing.
-#[derive(Debug)]
-pub enum RequestProcessingError {
-    /// Failed to generate keys.
-    KeyGeneration,
-    /// Failed to get the private key.
-    GettingPrivateKey,
-    /// An internal error happened.
-    InternalError(&'static str),
-    /// An error happened during the interaction with coset.
-    CosetError(coset::CoseError),
-}
-
-impl fmt::Display for RequestProcessingError {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self {
-            Self::KeyGeneration => write!(f, "Failed to generate keys"),
-            Self::GettingPrivateKey => write!(f, "Failed to get the private key"),
-            Self::InternalError(context) => write!(f, "Encountered an internal error: {context}"),
-            Self::CosetError(e) => write!(f, "Encountered an error with coset: {e}"),
-        }
-    }
-}
-
-impl From<coset::CoseError> for RequestProcessingError {
-    fn from(e: coset::CoseError) -> Self {
-        Self::CosetError(e)
     }
 }
