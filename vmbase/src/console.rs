@@ -66,7 +66,7 @@ pub unsafe fn init(base_addresses: &[usize]) {
 /// Writes a formatted string followed by a newline to the n-th console.
 ///
 /// Panics if the n-th console was not initialized by calling [`init`] first.
-pub(crate) fn writeln(n: usize, format_args: Arguments) {
+pub fn writeln(n: usize, format_args: Arguments) {
     let mut guard = CONSOLES[n].lock();
     let uart = guard.as_mut().unwrap();
 
