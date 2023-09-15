@@ -19,6 +19,7 @@ use crate::crypto;
 use crate::fdt;
 use crate::memory;
 use core::arch::asm;
+use core::fmt::Write;
 use core::mem::{drop, size_of};
 use core::num::NonZeroUsize;
 use core::ops::Range;
@@ -29,13 +30,15 @@ use log::error;
 use log::info;
 use log::warn;
 use log::LevelFilter;
+use static_assertions::const_assert_eq;
 use vmbase::util::RangeExt as _;
 use vmbase::{
     configure_heap, console,
     layout::{self, crosvm},
     main,
-    memory::{min_dcache_line_size, MemoryTracker, MEMORY, SIZE_128KB, SIZE_4KB},
+    memory::{min_dcache_line_size, page_4kb_of, MemoryTracker, MEMORY, SIZE_128KB, SIZE_4KB},
     power::reboot,
+    uart::Uart,
 };
 use zeroize::Zeroize;
 
@@ -59,6 +62,21 @@ pub enum RebootReason {
     SecretDerivationError,
 }
 
+impl RebootReason {
+    pub fn as_avf_reboot_string(&self) -> &'static str {
+        match self {
+            Self::InvalidBcc => "PVM_FIRMWARE_INVALID_BCC",
+            Self::InvalidConfig => "PVM_FIRMWARE_INVALID_CONFIG_DATA",
+            Self::InternalError => "PVM_FIRMWARE_INTERNAL_ERROR",
+            Self::InvalidFdt => "PVM_FIRMWARE_INVALID_FDT",
+            Self::InvalidPayload => "PVM_FIRMWARE_INVALID_PAYLOAD",
+            Self::InvalidRamdisk => "PVM_FIRMWARE_INVALID_RAMDISK",
+            Self::PayloadVerificationError => "PVM_FIRMWARE_PAYLOAD_VERIFICATION_FAILED",
+            Self::SecretDerivationError => "PVM_FIRMWARE_SECRET_DERIVATION_FAILED",
+        }
+    }
+}
+
 main!(start);
 configure_heap!(SIZE_128KB);
 
@@ -66,11 +84,23 @@ configure_heap!(SIZE_128KB);
 pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, _arg3: u64) {
     // Limitations in this function:
     // - can't access non-pvmfw memory (only statically-mapped memory)
-    // - can't access MMIO (therefore, no logging)
+    // - can't access MMIO (except the console, already configured by vmbase)
 
     match main_wrapper(fdt_address as usize, payload_start as usize, payload_size as usize) {
         Ok((entry, bcc)) => jump_to_payload(fdt_address, entry.try_into().unwrap(), bcc),
-        Err(_) => reboot(), // TODO(b/220071963) propagate the reason back to the host.
+        Err(e) => {
+            const_assert_eq!(
+                page_4kb_of(console::SECONDARY_ADDRESS),
+                page_4kb_of(console::BASE_ADDRESS)
+            );
+            // SAFETY: SECONDARY_ADDRESS is properly mapped as MMIO and MMIO_GUARD-ed, as it is in
+            // the same page as BASE_ADDRESS. No locking is required as this is the only
+            // part of pvmfw using it (non-reentrant).
+            let mut uart = unsafe { Uart::new(console::SECONDARY_ADDRESS) };
+
+            write!(&mut uart, "{}", e.as_avf_reboot_string()).unwrap();
+            reboot()
+        }
     }
 
     // if we reach this point and return, vmbase::entry::rust_entry() will call power::shutdown().

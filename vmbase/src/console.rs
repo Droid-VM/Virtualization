@@ -20,6 +20,8 @@ use spin::mutex::SpinMutex;
 
 /// Base memory-mapped address of the primary UART device.
 pub const BASE_ADDRESS: usize = 0x3f8;
+/// Base memory-mapped address of the secondary UART device.
+pub const SECONDARY_ADDRESS: usize = 0x2f8;
 
 static CONSOLE: SpinMutex<Option<Uart>> = SpinMutex::new(None);
 
