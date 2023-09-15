@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "402e8470_33d06576",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-09-15T18:15:30Z",
+      "side": 1,
+      "message": "nit: should use map for `uds_certs` and array for `dice_cert_chain`.\n\nThough this won\u0027t parse _anyway_ since `dice_cert_chain` is empty, so this is mostly academic 😊",
+      "range": {
+        "startLine": 79,
+        "startChar": 20,
+        "endLine": 79,
+        "endChar": 32
+      },
+      "revId": "3b3f9e8e2a34500d3d776159448c0ad7da5ce06c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
