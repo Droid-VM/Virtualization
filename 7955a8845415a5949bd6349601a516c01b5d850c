@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f52457f_e6f10ba5",
+        "filename": "virtualizationservice/src/remote_provisioning.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-09-15T17:44:02Z",
+      "side": 1,
+      "message": "Seems like we could change `to_service_specific_error` to accept a `Response` directly, reducing a bit of duplicated code. Beware, I probably have bugs here (editing code in gerrit is messy business!)\n\n```\nfn to_service_specific_error(response: Response) -\u003e BinderResult\u003cVec\u003cu8\u003e\u003e {\n    match response {\n        Response::Err(e) \u003d\u003e match e {\n            RequestProcessingError::InvalidMac \u003d\u003e {\n                Status::new_service_specific_error_str(STATUS_INVALID_MAC, Some(format!(\"{e}\")))\n            }\n            _ \u003d\u003e Status::new_service_specific_error_str(\n                STATUS_FAILED,\n                Some(format!(\"Failed to process request: {e}.\")),\n            ),\n        }\n        other \u003d\u003e Err(Status::new_service_specific_error_str(\n            STATUS_FAILED,\n            Some(\"Incorrect response type: {other:?}\"),\n        )),\n    }\n}\n```\n\nThen the response processing for each caller gets simpler, e.g.\n\n```\nmatch res {\n    Response::GenerateCertificateRequest(res) \u003d\u003e Ok(res),\n    _ \u003d\u003e to_service_specific_error(res),\n}\n```",
+      "range": {
+        "startLine": 134,
+        "startChar": 3,
+        "endLine": 134,
+        "endChar": 28
+      },
+      "revId": "7955a8845415a5949bd6349601a516c01b5d850c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
