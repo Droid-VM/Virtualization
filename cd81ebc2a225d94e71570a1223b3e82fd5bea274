@@ -47,6 +47,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49e0c92c_33f7a3c9",
+        "filename": "libs/service_vm_comm/src/message.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-15T13:33:38Z",
+      "side": 1,
+      "message": "Currently the service VM doesn\u0027t forward any specific error type to the HAL, so when the RKP VM fails, we always send STATUS_FAILED [1]. However, based on the HAL spec, we should send [STATUS_INVALID_MAC](https://cs.android.com/android/platform/superproject/+/master:hardware/interfaces/security/rkp/aidl/android/hardware/security/keymint/IRemotelyProvisionedComponent.aidl;l\u003d230;drc\u003d6aae9b643247f78d8f47c544a3d790f137d9341d) if the MAC validation fails. That requires the RKP VM to forward certain types of errors back to the host so that the HAL impl in the host can react accordingly.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/virtualizationservice/src/remote_provisioning.rs;l\u003d111;drc\u003d2628d332805c96198d598cc2698f312c7ebf627e",
+      "parentUuid": "85f4cb57_7a5859a8",
+      "range": {
+        "startLine": 25,
+        "startChar": 60,
+        "endLine": 25,
+        "endChar": 83
+      },
+      "revId": "cd81ebc2a225d94e71570a1223b3e82fd5bea274",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfb863be_da78b2ed",
+        "filename": "libs/service_vm_comm/src/message.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-15T13:33:38Z",
+      "side": 1,
+      "message": "This is answered in the comment above.",
+      "parentUuid": "9406c34b_62309841",
+      "range": {
+        "startLine": 25,
+        "startChar": 60,
+        "endLine": 25,
+        "endChar": 83
+      },
+      "revId": "cd81ebc2a225d94e71570a1223b3e82fd5bea274",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "408bc29d_8d8176cc",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-09-14T16:59:48Z",
       "side": 1,
       "message": "I did a little digging, and it seems as if we don\u0027t write a response to the requester. In that case, how does the requester know what went wrong? Do we just close the connection on them and they just give up w/o knowing what happened?",
+      "range": {
+        "startLine": 40,
+        "startChar": 12,
+        "endLine": 40,
+        "endChar": 43
+      },
+      "revId": "cd81ebc2a225d94e71570a1223b3e82fd5bea274",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fff07895_f669526e",
+        "filename": "rialto/src/requests/api.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-15T13:33:38Z",
+      "side": 1,
+      "message": "Currently, we are missing a mechanism to propagate errors from the RKP VM to the host. In the event of a failure, the host receives a generic failure message from the VM and subsequently shuts it down. However, due to the generic nature of the failure, the host cannot determine whether it is an invalid MAC error or not. This is why I want to introduce RemoteProvisioningError.\n\nAlternatively, instead of creating a new `RemoteProvisioningError`, it is also feasible to forward all `RequestProcessingError` to the host. This approach may be cleaner. What about like this \u003d\u003e https://r.android.com/c/2753747",
+      "parentUuid": "408bc29d_8d8176cc",
       "range": {
         "startLine": 40,
         "startChar": 12,
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b24bf73c_284989f4",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-15T13:33:38Z",
+      "side": 1,
+      "message": "It looks like it works as the tests go through this function without any problem,",
+      "parentUuid": "4018950f_85852ed0",
+      "range": {
+        "startLine": 44,
+        "startChar": 43,
+        "endLine": 44,
+        "endChar": 51
+      },
+      "revId": "cd81ebc2a225d94e71570a1223b3e82fd5bea274",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3af047a_f17c99a2",
@@ -106,6 +202,30 @@
       "writtenOn": "2023-09-14T16:59:48Z",
       "side": 1,
       "message": "nit: it would be nice to print out the unexpected value here for debugging failures.",
+      "range": {
+        "startLine": 106,
+        "startChar": 39,
+        "endLine": 106,
+        "endChar": 43
+      },
+      "revId": "cd81ebc2a225d94e71570a1223b3e82fd5bea274",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "179f8551_dc5f1f2c",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-15T13:33:38Z",
+      "side": 1,
+      "message": "Done. Otherwise all the response info is logged above in the line 102.",
+      "parentUuid": "e3af047a_f17c99a2",
       "range": {
         "startLine": 106,
         "startChar": 39,
