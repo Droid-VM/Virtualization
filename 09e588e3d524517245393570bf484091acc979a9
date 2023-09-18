@@ -16,6 +16,80 @@
       "message": "Thanks for the reviews. Could you take another look?",
       "revId": "09e588e3d524517245393570bf484091acc979a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8b65e09_2a96f208",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-18T12:14:44Z",
+      "side": 1,
+      "message": "What are the conventions for doc comments in this project?",
+      "revId": "09e588e3d524517245393570bf484091acc979a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d70800d_7dfd145e",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-18T12:14:44Z",
+      "side": 1,
+      "message": "nit: it would be nice to mention the specific ASN.1 structure (`ECPrivateKey` presumably) that the data is encoded as.",
+      "revId": "09e588e3d524517245393570bf484091acc979a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c64dbf82_f40ebbff",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-18T12:14:44Z",
+      "side": 1,
+      "message": "The `Buffer` name is now a bit  unhelpful -- the point of this type (as compared to `Vec\u003cu8\u003e`) is that it zeroizes.\n\nSpeaking of which, ISTR seeing an earlier CL that was going to extract the `ZVec` type out of keystore, which does something similar. Is that available for use, do you know?",
+      "range": {
+        "startLine": 91,
+        "startChar": 11,
+        "endLine": 91,
+        "endChar": 17
+      },
+      "revId": "09e588e3d524517245393570bf484091acc979a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dacdc79_e70fe42d",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-18T12:14:44Z",
+      "side": 1,
+      "message": "Some unit tests, here or in a later CL, would be good.",
+      "revId": "09e588e3d524517245393570bf484091acc979a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

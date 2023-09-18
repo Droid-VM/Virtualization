@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9897cac8_2c74a480",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-18T12:14:44Z",
+      "side": 1,
+      "message": "(Re-awakening this comment to use as a locus of discussion).\n\nHaving each place that wants to use BoringSSL from Rust invent its own bindings to `bssl-sys` is a bad idea, so I do think we need to figure out something better -- but maybe hold the discussion in b/177080016?\n\nHowever, I did want to highlight that davidben@ said BoringSSL\n\n\u003e will not support code like this and instead will be requiring teams use the official bindings\n\nAre the official bindings the ones in `rust/bssl-crypto/` ?  What is their status in terms of using them in Android?",
+      "parentUuid": "92f21f7d_9a33e6f4",
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e8a7a03a_da10bb97",
         "filename": "rialto/src/requests/ec_key.rs",
         "patchSetId": 7
@@ -371,6 +389,24 @@
       "side": 1,
       "message": "I think they are only supposed to be implemented by smart pointers [1], which is not exactly the case here. Maybe `AsMut`?\n\n[1] https://doc.rust-lang.org/std/ops/trait.DerefMut.html",
       "parentUuid": "bb07ee9c_06827289",
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "454136c1_9dab2a2c",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-18T12:14:44Z",
+      "side": 1,
+      "message": "The example in the Rust docs (https://doc.rust-lang.org/std/ops/trait.DerefMut.html#examples) seemed to align pretty closely with this code, but *not* having deref coercion is probably clearer here anyway (given there\u0027s FFI stuff going on).",
+      "parentUuid": "beeb2c25_aeec96c8",
       "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
