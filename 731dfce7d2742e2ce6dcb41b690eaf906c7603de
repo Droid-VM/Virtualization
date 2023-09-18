@@ -16,6 +16,29 @@
       "message": "Hi @drysdale@google.comd,\n\ncould you continue reviewing this cl too?",
       "revId": "731dfce7d2742e2ce6dcb41b690eaf906c7603de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03fc6bda_9f227901",
+        "filename": "rialto/src/requests/pub_key.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-18T12:57:36Z",
+      "side": 1,
+      "message": "Given that this function can return an error, maybe `.map_err()?` ?",
+      "range": {
+        "startLine": 62,
+        "startChar": 42,
+        "endLine": 62,
+        "endChar": 51
+      },
+      "revId": "731dfce7d2742e2ce6dcb41b690eaf906c7603de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
