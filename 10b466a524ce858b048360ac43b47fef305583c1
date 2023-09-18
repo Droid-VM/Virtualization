@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0292eeb3_a26e3b26",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-18T09:49:21Z",
+      "side": 1,
+      "message": "This looks wrong to me.\nWe still need to run a test on protected VM only if protected VMs are supported - and ditto for non-protected.\n\nSo I think we need to test both mProtectedVm and supportsMicrodroid(mProtectedVm).\n\n(Are these tests running on CF? I\u0027d expect the assumeProtected ones to fail there.)",
+      "range": {
+        "startLine": 1010,
+        "startChar": 0,
+        "endLine": 1016,
+        "endChar": 5
+      },
+      "revId": "10b466a524ce858b048360ac43b47fef305583c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
