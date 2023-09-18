@@ -161,6 +161,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e8a5e8a8_580d9c86",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-18T12:43:12Z",
+      "side": 1,
+      "message": "I am open to using the official nostd bssl bindings or moving this code there if it already exists. Alternatively, can we land this change first to unblock the implementation of the RKP HAL? and I will migrate to the official bindings as soon as they become available.",
+      "parentUuid": "9897cac8_2c74a480",
+      "revId": "f4dff9cc5cddd6c7380238bc25c06613c54e9b13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e8a7a03a_da10bb97",
         "filename": "rialto/src/requests/ec_key.rs",
         "patchSetId": 7

@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2eba519_f7365eeb",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-18T12:43:12Z",
+      "side": 1,
+      "message": "Done. I didn\u0027t pay much attention to the doc in this directory since it\u0027s mostly a binary instead of a lib, but it\u0027s possible to add rust docs for public methods/structs to improve the readability.",
+      "parentUuid": "c8b65e09_2a96f208",
+      "revId": "09e588e3d524517245393570bf484091acc979a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d70800d_7dfd145e",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-09-18T12:14:44Z",
       "side": 1,
       "message": "nit: it would be nice to mention the specific ASN.1 structure (`ECPrivateKey` presumably) that the data is encoded as.",
+      "revId": "09e588e3d524517245393570bf484091acc979a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1810b8c1_c82fe175",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-18T12:43:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d70800d_7dfd145e",
       "revId": "09e588e3d524517245393570bf484091acc979a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -75,6 +111,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d8ee7b4_5a8032d5",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-18T12:43:12Z",
+      "side": 1,
+      "message": "`ZVec`[1] is not extracted in a separate lib yet. It\u0027s also not ready to be converted in `nostd` environment as it depends on `nix`.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:system/security/keystore2/src/crypto/zvec.rs;drc\u003da47698a88fc422c208628f443d156e64343c51ca",
+      "parentUuid": "c64dbf82_f40ebbff",
+      "range": {
+        "startLine": 91,
+        "startChar": 11,
+        "endLine": 91,
+        "endChar": 17
+      },
+      "revId": "09e588e3d524517245393570bf484091acc979a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8dacdc79_e70fe42d",
@@ -88,6 +148,24 @@
       "writtenOn": "2023-09-18T12:14:44Z",
       "side": 1,
       "message": "Some unit tests, here or in a later CL, would be good.",
+      "revId": "09e588e3d524517245393570bf484091acc979a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b740612_18db19eb",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-18T12:43:12Z",
+      "side": 1,
+      "message": "Sure. But maybe it\u0027s better to unit test these methods in the wrapper library instead of adding them to rialto?",
+      "parentUuid": "8dacdc79_e70fe42d",
       "revId": "09e588e3d524517245393570bf484091acc979a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
