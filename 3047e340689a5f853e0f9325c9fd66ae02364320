@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e704fc52_a080f6b1",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-18T14:45:09Z",
+      "side": 1,
+      "message": "Should some/all of this be in the console module? It\u0027s responsible creating the primary UART after all.",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 76
+      },
+      "revId": "3047e340689a5f853e0f9325c9fd66ae02364320",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c361e7a3_156fcaa0",
+        "filename": "vmbase/src/console.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-18T14:45:09Z",
+      "side": 1,
+      "message": "Nit: the naming looks awkward now\nPRIMARY_BASE_ADDRESS / SECONDARY_BASE_ADDRESS ?",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 43
+      },
+      "revId": "3047e340689a5f853e0f9325c9fd66ae02364320",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
