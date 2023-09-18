@@ -22,6 +22,30 @@
       },
       "revId": "7955a8845415a5949bd6349601a516c01b5d850c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1dc7296_2e24e9f8",
+        "filename": "virtualizationservice/src/remote_provisioning.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-18T13:28:43Z",
+      "side": 1,
+      "message": "Done. Thanks for the suggestion. Just it\u0027s not so convenient to return `BinderResult\u003cVec\u003cu8\u003e\u003e` here because each response wraps a different type. I\u0027ll use this structure but still return Status then :)",
+      "parentUuid": "7f52457f_e6f10ba5",
+      "range": {
+        "startLine": 134,
+        "startChar": 3,
+        "endLine": 134,
+        "endChar": 28
+      },
+      "revId": "7955a8845415a5949bd6349601a516c01b5d850c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
