@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15dafaa4_ee1e50a8",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-19T12:17:04Z",
+      "side": 1,
+      "message": "Does this deal with (or need to deal with) padding of coordinates to required length?\n\n(Probably need a unit test case to ensure that this is dealt with correctly, especially as it\u0027s only a 1/256 chance of encountering it.)",
+      "revId": "823e775f4df70e739fe42b1ec36b47b8e548c008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "781aa143_fad2ffc8",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-19T12:17:04Z",
+      "side": 1,
+      "message": "Could do with a comment to reassure about ownership of the return value.",
+      "revId": "823e775f4df70e739fe42b1ec36b47b8e548c008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd169382_0001c5da",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-19T12:17:04Z",
+      "side": 1,
+      "message": "Comment on ownership of return value?",
+      "revId": "823e775f4df70e739fe42b1ec36b47b8e548c008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8c4f5b6_6a9933d0",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-19T12:17:04Z",
+      "side": 1,
+      "message": "Need unit tests again.",
+      "revId": "823e775f4df70e739fe42b1ec36b47b8e548c008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d951b5ca_5eef88f1",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-19T12:17:04Z",
+      "side": 1,
+      "message": "There\u0027s a possible inconsistency here, in that `Cbb` holds a local `CBB` but `BigNum` holds a pointer to a heap `BIGNUM`.\n\n(Which in turn makes me worry -- are we sure that a plain `CBB` is safe in Rust?  Will it correctly survive moves?)",
+      "revId": "823e775f4df70e739fe42b1ec36b47b8e548c008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1eee990_00272eca",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-19T12:17:04Z",
+      "side": 1,
+      "message": "Is this needed (and below)?  I though `*mut T` coerces to `*const T` (https://doc.rust-lang.org/reference/type-coercions.html#coercion-types)",
+      "range": {
+        "startLine": 241,
+        "startChar": 47,
+        "endLine": 241,
+        "endChar": 63
+      },
+      "revId": "823e775f4df70e739fe42b1ec36b47b8e548c008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
