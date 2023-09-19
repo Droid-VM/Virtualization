@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3075d172_58e54cde",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-19T13:03:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4dfabbb_1a2e8530",
+      "revId": "aa4a784f1aaaa7f62e47a1fe7a0d0bdd3829877b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e23fa1f5_61727ebf",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-09-19T11:12:41Z",
       "side": 1,
       "message": "Is it worth also calling `EC_KEY_check_key()` for safety?",
+      "revId": "aa4a784f1aaaa7f62e47a1fe7a0d0bdd3829877b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adb69376_d8ef7df6",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-19T13:03:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e23fa1f5_61727ebf",
       "revId": "aa4a784f1aaaa7f62e47a1fe7a0d0bdd3829877b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -75,6 +111,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60caaa37_855f61d5",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-19T13:03:01Z",
+      "side": 1,
+      "message": "I think this is only a hint and it can be resized later if needed. We can give it 256 just to be sure there\u0027s enough space. Our heap allocator only allocates power of 2 bytes in rialto.",
+      "parentUuid": "6a249a30_1153dd72",
+      "range": {
+        "startLine": 71,
+        "startChar": 44,
+        "endLine": 71,
+        "endChar": 47
+      },
+      "revId": "aa4a784f1aaaa7f62e47a1fe7a0d0bdd3829877b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6dd92312_07a948cb",
@@ -88,6 +148,24 @@
       "writtenOn": "2023-09-19T11:12:41Z",
       "side": 1,
       "message": "Could do with a comment explaining what happens for `out_len` of zero.",
+      "revId": "aa4a784f1aaaa7f62e47a1fe7a0d0bdd3829877b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f246007_b7920970",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-19T13:03:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6dd92312_07a948cb",
       "revId": "aa4a784f1aaaa7f62e47a1fe7a0d0bdd3829877b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

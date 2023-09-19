@@ -186,6 +186,24 @@
       "parentUuid": "8b740612_18db19eb",
       "revId": "09e588e3d524517245393570bf484091acc979a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baea3143_855b4e92",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-19T13:03:01Z",
+      "side": 1,
+      "message": "`rialto` doesn\u0027t have unit tests for now. We only have e2e tests. My original plan was to check the deserialization of the private key once the keyblob will be there.\n\nTo unit test the current `ec_key.rs` file, I think it only makes sense to check the deserialization of the DER-encoded private key, for that I\u0027ll need to make a nostd variant for `libsec1` and its dependences. Considering the size of the cl, I think we can address that in a later cl if it\u0027s okay for you. I also filed a bug and added a TODO here to track this.",
+      "parentUuid": "99b9b7ee_3ab27001",
+      "revId": "09e588e3d524517245393570bf484091acc979a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
