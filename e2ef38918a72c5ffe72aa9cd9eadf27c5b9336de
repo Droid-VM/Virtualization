@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c2e24b0_e094a702",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-09-19T01:57:42Z",
+      "side": 1,
+      "message": "Well, I think they are conceptually different (`VfioDevice` represents crosvm\u0027s arguments, wwhereas `BoundDevice` represents the result of AIDL method).",
+      "parentUuid": "dcf48e6d_83cd6543",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 1
+      },
+      "revId": "e2ef38918a72c5ffe72aa9cd9eadf27c5b9336de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1cf7c01a_6496626c",
         "filename": "virtualizationmanager/src/crosvm.rs",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2023-09-17T09:03:12Z",
       "side": 1,
       "message": "Why do you put this in Box?",
+      "range": {
+        "startLine": 153,
+        "startChar": 16,
+        "endLine": 153,
+        "endChar": 34
+      },
+      "revId": "e2ef38918a72c5ffe72aa9cd9eadf27c5b9336de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6ef4d57_52af4bd4",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-09-19T01:57:42Z",
+      "side": 1,
+      "message": "Rust compiler complains that the size difference between `NotStarted` and other enums is too big, and recommends me boxing `CrosvmConfig`.",
+      "parentUuid": "1cf7c01a_6496626c",
       "range": {
         "startLine": 153,
         "startChar": 16,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae482b8e_e5699ad9",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice_internal/BoundDevice.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-09-19T01:57:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "466c968d_80651f16",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 1
+      },
+      "revId": "e2ef38918a72c5ffe72aa9cd9eadf27c5b9336de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc178791_728816c3",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-09-17T09:03:12Z",
       "side": 1,
       "message": "A more idiomatic approach would be using map and collect.",
+      "range": {
+        "startLine": 185,
+        "startChar": 12,
+        "endLine": 185,
+        "endChar": 20
+      },
+      "revId": "e2ef38918a72c5ffe72aa9cd9eadf27c5b9336de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7f1aedc_9681ea01",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-09-19T01:57:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc178791_728816c3",
       "range": {
         "startLine": 185,
         "startChar": 12,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ae34d80_5eb94b32",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-09-19T01:57:42Z",
+      "side": 1,
+      "message": "used filter_map",
+      "parentUuid": "842fafdc_d903e859",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 66
+      },
+      "revId": "e2ef38918a72c5ffe72aa9cd9eadf27c5b9336de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "564bd9da_dc267688",
@@ -139,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5da5fd14_680ef786",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-09-19T01:57:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "564bd9da_dc267688",
+      "range": {
+        "startLine": 211,
+        "startChar": 0,
+        "endLine": 214,
+        "endChar": 23
+      },
+      "revId": "e2ef38918a72c5ffe72aa9cd9eadf27c5b9336de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a7d6325_fea3898d",
@@ -152,6 +296,30 @@
       "writtenOn": "2023-09-17T09:03:12Z",
       "side": 1,
       "message": "This is potentially dangerous (or hard to debug) because we won\u0027t be noticed even if there\u0027s duplicated entries.",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 26
+      },
+      "revId": "e2ef38918a72c5ffe72aa9cd9eadf27c5b9336de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb80e978_5705fcaa",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-09-19T01:57:42Z",
+      "side": 1,
+      "message": "there should be no duplicated entries, both for `device` (handled by virtmgr) and `get_assignable_devices`.",
+      "parentUuid": "4a7d6325_fea3898d",
       "range": {
         "startLine": 215,
         "startChar": 0,
