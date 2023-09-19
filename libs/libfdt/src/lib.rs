@@ -17,10 +17,14 @@
 
 #![no_std]
 
+extern crate alloc;
+
 mod iterators;
 
 pub use iterators::{AddressRange, CellIterator, MemRegIterator, RangesIterator, Reg, RegIterator};
 
+use alloc::vec;
+use alloc::vec::Vec;
 use core::cmp::max;
 use core::ffi::{c_int, c_void, CStr};
 use core::fmt;
@@ -882,5 +886,46 @@ impl Fdt {
 
     fn totalsize(&self) -> usize {
         u32::from_be(self.header().totalsize) as usize
+    }
+}
+
+/// Fdt with owned vector
+#[derive(Debug)]
+#[repr(transparent)]
+pub struct OwnedFdt {
+    buffer: Vec<u8>,
+}
+
+impl OwnedFdt {
+    const DEVICE_TREE_EMPTY_TREE_SIZE_BYTES: usize = 100; // rough estimation.
+
+    /// Creates from an empty tree overlaid with given buffer.
+    ///
+    /// This API internally creates an internal copy of overlay_buf to prevent potential damage.
+    /// May impact performance.
+    pub fn from_overlay_onto_new_fdt(overlay_buf: Option<&[u8]>) -> Result<Self> {
+        let overlay_buf_size = overlay_buf.map(|v| v.len()).unwrap_or_default();
+
+        let fdt_estimated_size = overlay_buf_size + Self::DEVICE_TREE_EMPTY_TREE_SIZE_BYTES;
+        let mut fdt_buf = vec![0_u8; fdt_estimated_size];
+        let fdt = Fdt::create_empty_tree(fdt_buf.as_mut_slice())?;
+
+        if let (Some(overlay_buf), true) = (overlay_buf, overlay_buf_size > 0) {
+            let mut overlay_buf = overlay_buf.to_vec();
+            let overlay_fdt = Fdt::from_mut_slice(overlay_buf.as_mut_slice())?;
+
+            // SAFETY: When fail, damaged buffers wouldn't be returned.
+            unsafe {
+                fdt.apply_overlay(overlay_fdt)?;
+            }
+        }
+
+        Ok(Self { buffer: fdt_buf })
+    }
+
+    /// Returns Fdt
+    pub fn as_fdt(&self) -> &Fdt {
+        // SAFETY: Checked validity of buffer when instantiate.
+        unsafe { Fdt::unchecked_from_slice(&self.buffer) }
     }
 }
