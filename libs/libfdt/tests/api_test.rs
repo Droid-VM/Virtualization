@@ -16,7 +16,8 @@
 
 //! Integration tests of the library libfdt.
 
-use libfdt::{Fdt, FdtError};
+use core::ffi::CStr;
+use libfdt::{Fdt, FdtError, OwnedFdt};
 use std::fs;
 use std::ops::Range;
 
@@ -25,6 +26,13 @@ const TEST_TREE_WITH_MULTIPLE_MEMORY_RANGES_PATH: &str =
     "data/test_tree_multiple_memory_ranges.dtb";
 const TEST_TREE_WITH_EMPTY_MEMORY_RANGE_PATH: &str = "data/test_tree_empty_memory_range.dtb";
 const TEST_TREE_WITH_NO_MEMORY_NODE_PATH: &str = "data/test_tree_no_memory_node.dtb";
+const TEST_TREE_OVERLAY_PATH: &str = "data/test_tree_overlay.dtbo";
+
+macro_rules! cstr {
+    ($str:literal) => {{
+        CStr::from_bytes_with_nul(concat!($str, "\0").as_bytes()).unwrap()
+    }};
+}
 
 #[test]
 fn retrieving_memory_from_fdt_with_one_memory_range_succeeds() {
@@ -92,4 +100,17 @@ fn node_subnode() {
         .unwrap()
         .map(|node| node.name().unwrap().to_bytes_with_nul())
         .eq(expected));
+}
+
+#[test]
+fn owned_fdt() {
+    let data = fs::read(TEST_TREE_OVERLAY_PATH).unwrap();
+    let owned_fdt = OwnedFdt::from_overlay_onto_new_fdt(Some(&data)).unwrap();
+    let fdt = owned_fdt.as_fdt();
+    let root = fdt.root().unwrap();
+    assert_eq!(123, root.getprop_u32(cstr!("version")).unwrap().unwrap());
+
+    let node = fdt.node(cstr!("/node@test")).unwrap().unwrap();
+    assert_eq!(cstr!("hello"), node.getprop_str(cstr!("type")).unwrap().unwrap());
+    assert!(fdt.node(cstr!("/node@overlay")).unwrap().is_none());
 }

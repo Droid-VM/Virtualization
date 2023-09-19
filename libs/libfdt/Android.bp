@@ -33,6 +33,7 @@ rust_library_rlib {
     edition: "2021",
     no_stdlibs: true,
     prefer_rlib: true,
+    host_supported: true,
     stdlibs: [
         "libcore.rust_sysroot",
     ],
@@ -57,6 +58,7 @@ rust_test {
         ":fdt_test_tree_multiple_memory_ranges_dtb",
         ":fdt_test_tree_empty_memory_range_dtb",
         ":fdt_test_tree_no_memory_node_dtb",
+        ":fdt_test_tree_overlay_dtbo",
     ],
     prefer_rlib: true,
     rustlibs: [
@@ -90,4 +92,11 @@ genrule {
     defaults: ["test_avf_dts_to_dtb"],
     srcs: ["tests/data/test_tree_no_memory_node.dts"],
     out: ["data/test_tree_no_memory_node.dtb"],
+}
+
+genrule {
+    name: "fdt_test_tree_overlay_dtbo",
+    defaults: ["test_avf_dts_to_dtb"],
+    srcs: ["tests/data/test_tree_overlay.dtsi"],
+    out: ["data/test_tree_overlay.dtbo"],
 }
