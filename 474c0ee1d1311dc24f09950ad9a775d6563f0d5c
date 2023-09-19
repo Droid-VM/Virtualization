@@ -39,6 +39,30 @@
       },
       "revId": "474c0ee1d1311dc24f09950ad9a775d6563f0d5c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "400c66e7_4754c26a",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-19T14:21:28Z",
+      "side": 1,
+      "message": "That is just for the memory reg. It is handled in pvmfw [1]. There are other places where we fetch the firs range but it\u0027s not always checked to ensure that it is the only range [2].\n\nI\u0027ll refactor [2] to use this function in a subsequent cl.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/pvmfw/src/fdt.rs;l\u003d140;drc\u003d8025197803a4244163379e0219af4108516ede88\n[2] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/pvmfw/src/fdt.rs;l\u003d446;drc\u003d8025197803a4244163379e0219af4108516ede88",
+      "parentUuid": "817158bb_64f94f5f",
+      "range": {
+        "startLine": 358,
+        "startChar": 0,
+        "endLine": 361,
+        "endChar": 5
+      },
+      "revId": "474c0ee1d1311dc24f09950ad9a775d6563f0d5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
