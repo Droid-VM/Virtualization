@@ -16,6 +16,80 @@
       "message": "Hi David,\n\nThanks for the review. Could you take another look?",
       "revId": "aa4a784f1aaaa7f62e47a1fe7a0d0bdd3829877b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4dfabbb_1a2e8530",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-19T11:12:41Z",
+      "side": 1,
+      "message": "If you moved `key` into an `EcKey` as soon as you know it\u0027s a valid pointer, then you should get RAII behaviour and not need the `EC_KEY_free` in error paths.",
+      "revId": "aa4a784f1aaaa7f62e47a1fe7a0d0bdd3829877b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e23fa1f5_61727ebf",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-19T11:12:41Z",
+      "side": 1,
+      "message": "Is it worth also calling `EC_KEY_check_key()` for safety?",
+      "revId": "aa4a784f1aaaa7f62e47a1fe7a0d0bdd3829877b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a249a30_1153dd72",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-19T11:12:41Z",
+      "side": 1,
+      "message": "Why 128 as initial capacity?\n\nMaybe look at the size of an encoded P-256 key (e.g. by adding a `println!` to a unit test) and use that as a more accurate guess?  (My personal guess is 149.)",
+      "range": {
+        "startLine": 71,
+        "startChar": 44,
+        "endLine": 71,
+        "endChar": 47
+      },
+      "revId": "aa4a784f1aaaa7f62e47a1fe7a0d0bdd3829877b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dd92312_07a948cb",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-19T11:12:41Z",
+      "side": 1,
+      "message": "Could do with a comment explaining what happens for `out_len` of zero.",
+      "revId": "aa4a784f1aaaa7f62e47a1fe7a0d0bdd3829877b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -168,6 +168,24 @@
       "parentUuid": "8dacdc79_e70fe42d",
       "revId": "09e588e3d524517245393570bf484091acc979a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99b9b7ee_3ab27001",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-19T11:12:41Z",
+      "side": 1,
+      "message": "It\u0027s better to unit test these methods in the same place (and CL) that they\u0027re written in.\n\nIf the code migrates to a wrapper library later, the unit tests can migrate with them",
+      "parentUuid": "8b740612_18db19eb",
+      "revId": "09e588e3d524517245393570bf484091acc979a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
