@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e713758_25d61a89",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-19T12:13:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44ee14b5_6cd01f86",
+      "range": {
+        "startLine": 344,
+        "startChar": 67,
+        "endLine": 344,
+        "endChar": 69
+      },
+      "revId": "c6d819614e378769597a2dd0e6478b500e4db4e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24efb348_6a31ddb2",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ca3069b_b47ce48e",
+        "filename": "rialto/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-19T12:13:30Z",
+      "side": 1,
+      "message": "I did some refactoring here. Actually I think the entire API of Fdt/FdtNode can be simplified by replacing `Result\u003cOption\u003cT\u003e\u003e` with `Result\u003cT\u003e`. In the case of `Result\u003cNone\u003e`, we can simply return `FdtError::NotFound`. Users can then catch this error and choose to handle it accordingly\n\nNow this code appears verbose mostly due to this need of translating from `Result\u003cNone\u003e` to `FdtError::NotFound` in this cl and elsewhere [1].\n\nIf you\u0027d like, we can refactor the fdt API in a separate cl to reduce the unnecessary translation.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/pvmfw/src/fdt.rs;drc\u003d8025197803a4244163379e0219af4108516ede88 \u003e search FdtError::NotFound",
+      "parentUuid": "24efb348_6a31ddb2",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 87
+      },
+      "revId": "c6d819614e378769597a2dd0e6478b500e4db4e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e150541_92332b75",
@@ -77,6 +125,30 @@
       "writtenOn": "2023-09-19T11:17:02Z",
       "side": 1,
       "message": "This doesn\u0027t look right. You\u0027re assuming this is the base address, but the source of truth is the linker script.\nIf you need to know where the writable area is, you need to define a new symbol for it in the .ld, and then add it to vmbase/src/linker.rs and vmbase/src/layout/mod.rs.\n\nBut accessing the whole writable data section seems wrong anyway. Writable data is a composite of stack, heap, BSS etc; which bit of it is the DICE data in? And why?\n\nAlternatively: we know exactly where the DICE range is, why don\u0027t we just map that (well, all the pages containing it)?",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 0
+      },
+      "revId": "c6d819614e378769597a2dd0e6478b500e4db4e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c97a643c_92303996",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-19T12:13:30Z",
+      "side": 1,
+      "message": "I see. That might require some change on the Memory API since this range is not within the total range, it cannot pass the range check. Let me handle this in a subsequent cl and we\u0027ll just fetch the range from the FDT in this cl.",
+      "parentUuid": "4e150541_92332b75",
       "range": {
         "startLine": 74,
         "startChar": 0,
