@@ -375,6 +375,11 @@ impl<'a> FdtNode<'a> {
             .try_into()
             .map_err(|_| FdtError::Internal)
     }
+
+    /// Returns an iterator of subnodes
+    pub fn subnode(&'a self) -> Result<SubnodeIterator<'a>> {
+        SubnodeIterator::new(self)
+    }
 }
 
 /// Mutable FDT node.
@@ -604,6 +609,40 @@ impl<'a> Iterator for CompatibleIterator<'a> {
         }
 
         next
+    }
+}
+
+/// Iterator over subnodes
+#[derive(Debug)]
+pub struct SubnodeIterator<'a> {
+    subnode: Option<FdtNode<'a>>,
+}
+
+impl<'a> SubnodeIterator<'a> {
+    fn new(node: &FdtNode<'a>) -> Result<Self> {
+        // SAFETY: Accesses (read-only) are constrained to the DT totalsize.
+        let ret = unsafe { libfdt_bindgen::fdt_first_subnode(node.fdt.as_ptr(), node.offset) };
+
+        let subnode = fdt_err_or_option(ret)?.map(|offset| FdtNode { fdt: node.fdt, offset });
+        Ok(SubnodeIterator { subnode })
+    }
+}
+
+impl<'a> Iterator for SubnodeIterator<'a> {
+    type Item = FdtNode<'a>;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        let res = self.subnode;
+
+        if let Some(subnode) = self.subnode {
+            let ret =
+                // SAFETY: Accesses (read-only) are constrained to the DT totalsize.
+                unsafe { libfdt_bindgen::fdt_next_subnode(subnode.fdt.as_ptr(), subnode.offset) };
+
+            self.subnode = fdt_err(ret).ok().map(|offset| FdtNode { fdt: subnode.fdt, offset });
+        }
+
+        res
     }
 }
 
