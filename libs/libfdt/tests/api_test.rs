@@ -70,3 +70,12 @@ fn retrieving_memory_from_fdt_with_no_memory_node_fails() {
     assert_eq!(fdt.memory().unwrap_err(), FdtError::NotFound);
     assert_eq!(fdt.first_memory_range(), Err(FdtError::NotFound));
 }
+
+#[test]
+fn node_name() {
+    let data = fs::read(TEST_TREE_WITH_NO_MEMORY_NODE_PATH).unwrap();
+    let fdt = Fdt::from_slice(&data).unwrap();
+
+    let chosen = fdt.chosen().unwrap().unwrap();
+    assert_eq!(b"chosen\0", chosen.name().unwrap().to_bytes_with_nul());
+}
