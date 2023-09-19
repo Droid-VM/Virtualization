@@ -22,6 +22,30 @@
       },
       "revId": "10b466a524ce858b048360ac43b47fef305583c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f6ab30d_4da6289b",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-09-19T02:05:00Z",
+      "side": 1,
+      "message": "`supportsMicrodroid(mProtectedVm)` is checked in `@Before` phase (Line 983) for all test methods, and `assumeProtectedVm` and `assumeNonProtectedVm` is checked in `@Test` phase for some test methods to be run with specific protection type only.\n\nSo I think current code tests both `mProtectedVm` and `supportsMicrodroid(mProtectedVm)`, isn\u0027t it?",
+      "parentUuid": "0292eeb3_a26e3b26",
+      "range": {
+        "startLine": 1010,
+        "startChar": 0,
+        "endLine": 1016,
+        "endChar": 5
+      },
+      "revId": "10b466a524ce858b048360ac43b47fef305583c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
