@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bde5ba4_949e942b",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-19T02:32:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2c2e24b0_e094a702",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 1
+      },
+      "revId": "e2ef38918a72c5ffe72aa9cd9eadf27c5b9336de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1cf7c01a_6496626c",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Rust compiler complains that the size difference between `NotStarted` and other enums is too big, and recommends me boxing `CrosvmConfig`.",
       "parentUuid": "1cf7c01a_6496626c",
+      "range": {
+        "startLine": 153,
+        "startChar": 16,
+        "endLine": 153,
+        "endChar": 34
+      },
+      "revId": "e2ef38918a72c5ffe72aa9cd9eadf27c5b9336de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9ad5cd5_63bdc033",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-19T02:32:40Z",
+      "side": 1,
+      "message": "Yeah, that makes sense. I think adding a new field to CrosvmConfig has triggered the threshold.",
+      "parentUuid": "f6ef4d57_52af4bd4",
       "range": {
         "startLine": 153,
         "startChar": 16,
@@ -320,6 +368,30 @@
       "side": 1,
       "message": "there should be no duplicated entries, both for `device` (handled by virtmgr) and `get_assignable_devices`.",
       "parentUuid": "4a7d6325_fea3898d",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 26
+      },
+      "revId": "e2ef38918a72c5ffe72aa9cd9eadf27c5b9336de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96f08693_8e1de6ff",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-19T02:32:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bb80e978_5705fcaa",
       "range": {
         "startLine": 215,
         "startChar": 0,
