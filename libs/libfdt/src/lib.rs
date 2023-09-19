@@ -251,6 +251,28 @@ impl<'a> FdtNode<'a> {
         }
     }
 
+    /// Returns the node name.
+    pub fn name(&self) -> Result<&'a CStr> {
+        let mut len: i32 = 0;
+        // SAFETY: Accesses are constrained to the DT totalsize (validated by ctor) and the
+        // function respects the passed number of characters.
+        let name = unsafe {
+            libfdt_bindgen::fdt_get_name(self.fdt.as_ptr(), self.offset, &mut len as *mut i32)
+        } as *const u8;
+
+        let len = match fdt_err(len) {
+            Ok(len) => len,
+            Err(err) => return Err(err),
+        };
+        let len = usize::try_from(len).map_err(|_| FdtError::Internal)?;
+
+        let offset =
+            (name as usize).checked_sub(self.fdt.as_ptr() as usize).ok_or(FdtError::Internal)?;
+
+        let name = self.fdt.buffer.get(offset..=(offset + len)).ok_or(FdtError::Internal)?;
+        CStr::from_bytes_with_nul(name).map_err(|_| FdtError::Internal)
+    }
+
     /// Retrieve the value of a given <string> property.
     pub fn getprop_str(&self, name: &CStr) -> Result<Option<&CStr>> {
         let value = if let Some(bytes) = self.getprop(name)? {
