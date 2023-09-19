@@ -16,6 +16,75 @@
       "message": "Hi, could you review this cl?",
       "revId": "c6d819614e378769597a2dd0e6478b500e4db4e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44ee14b5_6cd01f86",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-19T11:17:02Z",
+      "side": 1,
+      "message": "Nit: to -\u003e after",
+      "range": {
+        "startLine": 344,
+        "startChar": 67,
+        "endLine": 344,
+        "endChar": 69
+      },
+      "revId": "c6d819614e378769597a2dd0e6478b500e4db4e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24efb348_6a31ddb2",
+        "filename": "rialto/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-19T11:17:02Z",
+      "side": 1,
+      "message": "I wonder if you should wrap this up in a helper which just returns Option\u003c(addr, size)\u003e, and call ok_or just once?\nSimilarly, the three lines below could be a helper function returning Option\u003cRange\u003e.",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 87
+      },
+      "revId": "c6d819614e378769597a2dd0e6478b500e4db4e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e150541_92332b75",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-19T11:17:02Z",
+      "side": 1,
+      "message": "This doesn\u0027t look right. You\u0027re assuming this is the base address, but the source of truth is the linker script.\nIf you need to know where the writable area is, you need to define a new symbol for it in the .ld, and then add it to vmbase/src/linker.rs and vmbase/src/layout/mod.rs.\n\nBut accessing the whole writable data section seems wrong anyway. Writable data is a composite of stack, heap, BSS etc; which bit of it is the DICE data in? And why?\n\nAlternatively: we know exactly where the DICE range is, why don\u0027t we just map that (well, all the pages containing it)?",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 0
+      },
+      "revId": "c6d819614e378769597a2dd0e6478b500e4db4e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
