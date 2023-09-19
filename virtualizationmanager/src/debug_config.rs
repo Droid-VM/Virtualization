@@ -24,12 +24,11 @@ use std::path::{Path, PathBuf};
 use std::ffi::{CString, NulError};
 use log::{warn, info};
 use rustutils::system_properties;
-use libfdt::{Fdt, FdtError};
+use libfdt::{Fdt, FdtError, OwnedFdt};
 use lazy_static::lazy_static;
 
 const CUSTOM_DEBUG_POLICY_OVERLAY_SYSPROP: &str =
     "hypervisor.virtualizationmanager.debug_policy.path";
-const DEVICE_TREE_EMPTY_TREE_SIZE_BYTES: usize = 100; // rough estimation.
 
 struct DPPath {
     node_path: CString,
@@ -101,51 +100,6 @@ fn get_fdt_prop_bool(fdt: &Fdt, path: &DPPath) -> Result<bool> {
     }
 }
 
-/// Fdt with owned vector.
-struct OwnedFdt {
-    buffer: Vec<u8>,
-}
-
-impl OwnedFdt {
-    fn from_overlay_onto_new_fdt(overlay_file_path: &Path) -> Result<Self> {
-        let mut overlay_buf = match fs::read(overlay_file_path) {
-            Ok(fdt) => fdt,
-            Err(error) if error.kind() == ErrorKind::NotFound => Default::default(),
-            Err(error) => {
-                Err(error).with_context(|| format!("Failed to read {overlay_file_path:?}"))?
-            }
-        };
-
-        let overlay_buf_size = overlay_buf.len();
-
-        let fdt_estimated_size = overlay_buf_size + DEVICE_TREE_EMPTY_TREE_SIZE_BYTES;
-        let mut fdt_buf = vec![0_u8; fdt_estimated_size];
-        let fdt = Fdt::create_empty_tree(fdt_buf.as_mut_slice())
-            .map_err(Error::msg)
-            .context("Failed to create an empty device tree")?;
-
-        if !overlay_buf.is_empty() {
-            let overlay_fdt = Fdt::from_mut_slice(overlay_buf.as_mut_slice())
-                .map_err(Error::msg)
-                .with_context(|| "Malformed {overlay_file_path:?}")?;
-
-            // SAFETY: Return immediately if error happens. Damaged fdt_buf and fdt are discarded.
-            unsafe {
-                fdt.apply_overlay(overlay_fdt).map_err(Error::msg).with_context(|| {
-                    "Failed to overlay {overlay_file_path:?} onto empty device tree"
-                })?;
-            }
-        }
-
-        Ok(Self { buffer: fdt_buf })
-    }
-
-    fn as_fdt(&self) -> &Fdt {
-        // SAFETY: Checked validity of buffer when instantiate.
-        unsafe { Fdt::unchecked_from_slice(&self.buffer) }
-    }
-}
-
 /// Debug configurations for both debug level and debug policy
 #[derive(Debug)]
 pub struct DebugConfig {
@@ -203,16 +157,25 @@ impl DebugConfig {
         self.debug_level != DebugLevel::NONE || self.debug_policy_ramdump
     }
 
-    // TODO: Remove this code path in user build for removing libfdt depenency.
     fn from_custom_debug_overlay_policy(debug_level: DebugLevel, path: &Path) -> Result<Self> {
-        match OwnedFdt::from_overlay_onto_new_fdt(path) {
+        let overlay_buf = match fs::read(path) {
+            Ok(fdt) => Some(fdt),
+            Err(error) if error.kind() == ErrorKind::NotFound => None,
+            Err(error) => Err(error)
+                .map_err(Error::msg)
+                .with_context(|| format!("Failed to read {path:?}"))?,
+        };
+
+        match OwnedFdt::from_overlay_onto_new_fdt(overlay_buf.as_deref()) {
             Ok(fdt) => Ok(Self {
                 debug_level,
                 debug_policy_log: get_fdt_prop_bool(fdt.as_fdt(), &DP_LOG_PATH)?,
                 debug_policy_ramdump: get_fdt_prop_bool(fdt.as_fdt(), &DP_RAMDUMP_PATH)?,
                 debug_policy_adb: get_fdt_prop_bool(fdt.as_fdt(), &DP_ADB_PATH)?,
             }),
-            Err(err) => Err(err),
+            Err(err) => Err(err)
+                .map_err(Error::msg)
+                .with_context(|| format!("Failed to apply custom debug policy overlay {path:?}"))?,
         }
     }
 

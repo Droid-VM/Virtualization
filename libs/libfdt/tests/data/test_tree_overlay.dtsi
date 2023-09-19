@@ -1,0 +1,15 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+	node@overlay {
+		target-path = "/";
+
+		__overlay__ {
+			version = <123>;
+			node@test {
+				type = "hello";
+			};
+		};
+	};
+};
