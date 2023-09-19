@@ -1,5 +1,5 @@
 // Copyright 2022, The Android Open Source Project
-//
+
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -389,6 +389,11 @@ impl<'a> FdtNode<'a> {
             .try_into()
             .map_err(|_| FdtError::Internal)
     }
+
+    /// Returns an iterator of subnodes
+    pub fn subnodes(&'a self) -> Result<SubnodeIterator<'a>> {
+        SubnodeIterator::new(self)
+    }
 }
 
 /// Mutable FDT node.
@@ -618,6 +623,41 @@ impl<'a> Iterator for CompatibleIterator<'a> {
         }
 
         next
+    }
+}
+
+/// Iterator over subnodes
+#[derive(Debug)]
+pub struct SubnodeIterator<'a> {
+    node: Option<FdtNode<'a>>,
+}
+
+impl<'a> SubnodeIterator<'a> {
+    fn new(node: &FdtNode<'a>) -> Result<Self> {
+        // SAFETY: Accesses (read-only) are constrained to the DT totalsize.
+        let offset = unsafe { libfdt_bindgen::fdt_first_subnode(node.fdt.as_ptr(), node.offset) };
+
+        Ok(match fdt_err_or_option(offset)? {
+            Some(offset) => Self { node: Some(FdtNode { fdt: node.fdt, offset }) },
+            None => Self { node: None },
+        })
+    }
+}
+
+impl<'a> Iterator for SubnodeIterator<'a> {
+    type Item = FdtNode<'a>;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        let res = self.node;
+
+        if let Some(node) = self.node {
+            // SAFETY: Accesses (read-only) are constrained to the DT totalsize.
+            let ret = unsafe { libfdt_bindgen::fdt_next_subnode(node.fdt.as_ptr(), node.offset) };
+
+            self.node = fdt_err(ret).ok().map(|offset| FdtNode { fdt: node.fdt, offset });
+        }
+
+        res
     }
 }
 
