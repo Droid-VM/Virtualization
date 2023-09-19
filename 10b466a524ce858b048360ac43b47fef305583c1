@@ -46,6 +46,30 @@
       },
       "revId": "10b466a524ce858b048360ac43b47fef305583c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "130046c6_d50850d4",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-19T08:47:03Z",
+      "side": 1,
+      "message": "\u003e supportsMicrodroid(mProtectedVm) is checked in @Before \n\nAhhh, I was looking for that, and missed it. Sorry, you\u0027re quite correct.\n\n(I\u0027m used to before/after being at the top of the file.)",
+      "parentUuid": "8f6ab30d_4da6289b",
+      "range": {
+        "startLine": 1010,
+        "startChar": 0,
+        "endLine": 1016,
+        "endChar": 5
+      },
+      "revId": "10b466a524ce858b048360ac43b47fef305583c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
