@@ -79,3 +79,17 @@ fn node_name() {
     let chosen = fdt.chosen().unwrap().unwrap();
     assert_eq!(b"chosen\0", chosen.name().unwrap().to_bytes_with_nul());
 }
+
+#[test]
+fn node_subnode() {
+    let data = fs::read(TEST_TREE_WITH_NO_MEMORY_NODE_PATH).unwrap();
+    let fdt = Fdt::from_slice(&data).unwrap();
+    let root = fdt.root().unwrap();
+    let expected: Vec<&[u8]> = vec![b"cpus\0", b"randomnode\0", b"chosen\0"];
+
+    assert!(root
+        .subnodes()
+        .unwrap()
+        .map(|node| node.name().unwrap().to_bytes_with_nul())
+        .eq(expected));
+}
