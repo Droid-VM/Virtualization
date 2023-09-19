@@ -16,6 +16,29 @@
       "message": "Hi Alan, thanks for the review! could you take another look?",
       "revId": "474c0ee1d1311dc24f09950ad9a775d6563f0d5c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "817158bb_64f94f5f",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-19T12:27:23Z",
+      "side": 1,
+      "message": "Hmm, I have this feeling we\u0027ve discussed this before, and I\u0027ve forgotten the outcome.\nBut we should probably treat multiple ranges as an error, rather than silently ignoring all but the first.",
+      "range": {
+        "startLine": 358,
+        "startChar": 0,
+        "endLine": 361,
+        "endChar": 5
+      },
+      "revId": "474c0ee1d1311dc24f09950ad9a775d6563f0d5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
