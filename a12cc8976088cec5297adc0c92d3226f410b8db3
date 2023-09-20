@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d5f713a_d86a2c92",
+        "filename": "rialto/Android.bp",
+        "patchSetId": 15
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-20T15:28:27Z",
+      "side": 1,
+      "message": "Done. It also works with with static_lib.",
+      "parentUuid": "05b94f8c_38730288",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 26,
+        "endChar": 21
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83681136_a4aadaeb",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ef0945c_0280d2c6",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-20T15:28:27Z",
+      "side": 1,
+      "message": "Done. Looks like it gets here automatically after the rebase. I also wanted to put it before all the crypto operations.",
+      "parentUuid": "83681136_a4aadaeb",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 5
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07db760d_0ab56d82",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-09-20T13:47:39Z",
       "side": 1,
       "message": "I wonder if this should have a longer name. check_success, check_boolean_result, map_boolean_result?\n\nAnd perhaps we should panic if ret is neither 1 nor 0, since I think that\u0027s not supposed to happen for the return values where this function is appropriate.",
+      "range": {
+        "startLine": 43,
+        "startChar": 3,
+        "endLine": 43,
+        "endChar": 15
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1a21592_882980d9",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-20T15:28:27Z",
+      "side": 1,
+      "message": "Done. Otherwise we can retrieve more detailed error here with [ERR_get_error()](https://commondatastorage.googleapis.com/chromium-boringssl-docs/err.h.html#ERR_get_error) later when the value is not 1, to make this API more sophisticated.",
+      "parentUuid": "07db760d_0ab56d82",
       "range": {
         "startLine": 43,
         "startChar": 3,
@@ -106,6 +178,30 @@
       "writtenOn": "2023-09-20T13:47:39Z",
       "side": 1,
       "message": "Given that it\u0027s the code here that both generates the key and signs it, why do we need to include the key type in the serialization?",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 63
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9fdb4bf_3e8ba71a",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-20T15:28:27Z",
+      "side": 1,
+      "message": "What do you mean by \"signing\" it?\n\nThe private key generated here is encrypted and sent to rkpd. It\u0027ll be fetched later during the client VM attestation for signing.",
+      "parentUuid": "16ef4790_8eddb4f0",
       "range": {
         "startLine": 85,
         "startChar": 0,
