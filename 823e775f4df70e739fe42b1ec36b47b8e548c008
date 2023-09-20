@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b8ec040_b13a0217",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-20T15:17:22Z",
+      "side": 1,
+      "message": "\u003e Does this deal with (or need to deal with) padding of coordinates to required length?\n\n@drysdale@google.com Where is that requirement documented? It doesn\u0027t seem to be mentioned at the definition of new_ec2_pub_key.",
+      "parentUuid": "19aaeead_d66be374",
+      "revId": "823e775f4df70e739fe42b1ec36b47b8e548c008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "781aa143_fad2ffc8",
         "filename": "rialto/src/requests/ec_key.rs",
         "patchSetId": 11
@@ -172,6 +190,24 @@
       "side": 1,
       "message": "\u003e There\u0027s a possible inconsistency here...\n\nIt\u0027s true there\u0027s some inconsistency in terms of style, since `BIGNUM` is created with `BN_new()` returning a pointer to `BIGNUM` and `CBB` is created with `CBB_init()`. But internally both hold a pointer to a buffer on heap.\n\nWhy do you think the CBB here is unsafe?",
       "parentUuid": "d951b5ca_5eef88f1",
+      "revId": "823e775f4df70e739fe42b1ec36b47b8e548c008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bdca294_1577185c",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-20T15:17:22Z",
+      "side": 1,
+      "message": "I was wondering about the moves too.\n\nIn C, if I wrote:\n\nCBB x \u003d ... ;\nCBB y \u003d x;\n\nAnd never do anything with x again, is y guaranteed to be a valid CBB?\n\nIf not, we probably want Cbb to contain a Box\u003cCBB\u003e.\n\nBTW - could we use CBB_init_fixed to simplify things?",
+      "parentUuid": "81997434_a335c508",
       "revId": "823e775f4df70e739fe42b1ec36b47b8e548c008",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },

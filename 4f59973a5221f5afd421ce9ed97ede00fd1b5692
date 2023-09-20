@@ -16,6 +16,190 @@
       "message": "Hi,\n\nCould you take another look? +Alan, could you also review this cl?",
       "revId": "4f59973a5221f5afd421ce9ed97ede00fd1b5692",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "882942a1_0ff62820",
+        "filename": "libs/service_vm_comm/src/message.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-20T15:17:22Z",
+      "side": 1,
+      "message": "Is this actually better than just using strings?\n(The derived Debug impl is going to mean all the strings are in the image anyway)",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 1
+      },
+      "revId": "4f59973a5221f5afd421ce9ed97ede00fd1b5692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c751fb7_b1a7360b",
+        "filename": "rialto/src/requests/api.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-20T15:17:22Z",
+      "side": 1,
+      "message": "Alternatively: This should be a method on some object, which contains relevant state.",
+      "range": {
+        "startLine": 25,
+        "startChar": 23,
+        "endLine": 25,
+        "endChar": 77
+      },
+      "revId": "4f59973a5221f5afd421ce9ed97ede00fd1b5692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "809a132a_4d81afeb",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-20T15:17:22Z",
+      "side": 1,
+      "message": "This could be NonNull, I guess? Not sure that is better (or, indeed, worse).",
+      "range": {
+        "startLine": 241,
+        "startChar": 14,
+        "endLine": 241,
+        "endChar": 25
+      },
+      "revId": "4f59973a5221f5afd421ce9ed97ede00fd1b5692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fabc58e_3e1b1bbb",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-20T15:17:22Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure this doesn\u0027t pad.\n\nIf we need padding, we should use a fixed size buffer here, rather than checking BN_num_bytes, and use BN_bn2bin_padded instead.",
+      "range": {
+        "startLine": 266,
+        "startChar": 32,
+        "endLine": 266,
+        "endChar": 41
+      },
+      "revId": "4f59973a5221f5afd421ce9ed97ede00fd1b5692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5e79005_c23fadc3",
+        "filename": "rialto/src/requests/pub_key.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-20T15:17:22Z",
+      "side": 1,
+      "message": "let external_aad \u003d \u0026[];",
+      "range": {
+        "startLine": 35,
+        "startChar": 65,
+        "endLine": 35,
+        "endChar": 85
+      },
+      "revId": "4f59973a5221f5afd421ce9ed97ede00fd1b5692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f4c042c_cd98c7ec",
+        "filename": "rialto/src/requests/pub_key.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-20T15:17:22Z",
+      "side": 1,
+      "message": "Doesn\u0027t just `cose_mac.to_vec()` work?",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 26
+      },
+      "revId": "4f59973a5221f5afd421ce9ed97ede00fd1b5692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f50d02ff_715593ff",
+        "filename": "rialto/src/requests/pub_key.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-20T15:17:22Z",
+      "side": 1,
+      "message": "If it\u0027s fixed size, could we just return an array rather than a Vec?",
+      "range": {
+        "startLine": 44,
+        "startChar": 18,
+        "endLine": 44,
+        "endChar": 45
+      },
+      "revId": "4f59973a5221f5afd421ce9ed97ede00fd1b5692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "884d9a01_b35c32b8",
+        "filename": "rialto/src/requests/pub_key.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-20T15:17:22Z",
+      "side": 1,
+      "message": "I don\u0027t think EVP_sha256() can ever return null.",
+      "range": {
+        "startLine": 49,
+        "startChar": 16,
+        "endLine": 49,
+        "endChar": 23
+      },
+      "revId": "4f59973a5221f5afd421ce9ed97ede00fd1b5692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
