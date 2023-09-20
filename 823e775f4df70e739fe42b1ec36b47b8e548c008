@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "19aaeead_d66be374",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-20T09:14:06Z",
+      "side": 1,
+      "message": "Frankly it\u0027s not very clear from the based on the implementation [1], we definitely should have some unit tests here to check this.\n\n[1] http://google3/third_party/openssl/boringssl/src/crypto/fipsmodule/ec/p256.c;l\u003d416;rcl\u003d566891073",
+      "parentUuid": "15dafaa4_ee1e50a8",
+      "revId": "823e775f4df70e739fe42b1ec36b47b8e548c008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "781aa143_fad2ffc8",
         "filename": "rialto/src/requests/ec_key.rs",
         "patchSetId": 11
@@ -31,6 +49,24 @@
       "writtenOn": "2023-09-19T12:17:04Z",
       "side": 1,
       "message": "Could do with a comment to reassure about ownership of the return value.",
+      "revId": "823e775f4df70e739fe42b1ec36b47b8e548c008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88900c51_48b8e35d",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-20T09:14:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "781aa143_fad2ffc8",
       "revId": "823e775f4df70e739fe42b1ec36b47b8e548c008",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24601e20_21bd2e96",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-20T09:14:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd169382_0001c5da",
+      "revId": "823e775f4df70e739fe42b1ec36b47b8e548c008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8c4f5b6_6a9933d0",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-09-19T12:17:04Z",
       "side": 1,
       "message": "Need unit tests again.",
+      "revId": "823e775f4df70e739fe42b1ec36b47b8e548c008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8867c20_9d5a6880",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-20T09:14:06Z",
+      "side": 1,
+      "message": "Acknowledged. Added todo. I\u0027ll test this after we move the lib out.",
+      "parentUuid": "a8c4f5b6_6a9933d0",
       "revId": "823e775f4df70e739fe42b1ec36b47b8e548c008",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -88,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "81997434_a335c508",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-20T09:14:06Z",
+      "side": 1,
+      "message": "\u003e There\u0027s a possible inconsistency here...\n\nIt\u0027s true there\u0027s some inconsistency in terms of style, since `BIGNUM` is created with `BN_new()` returning a pointer to `BIGNUM` and `CBB` is created with `CBB_init()`. But internally both hold a pointer to a buffer on heap.\n\nWhy do you think the CBB here is unsafe?",
+      "parentUuid": "d951b5ca_5eef88f1",
+      "revId": "823e775f4df70e739fe42b1ec36b47b8e548c008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1eee990_00272eca",
         "filename": "rialto/src/requests/ec_key.rs",
         "patchSetId": 11
@@ -99,6 +189,30 @@
       "writtenOn": "2023-09-19T12:17:04Z",
       "side": 1,
       "message": "Is this needed (and below)?  I though `*mut T` coerces to `*const T` (https://doc.rust-lang.org/reference/type-coercions.html#coercion-types)",
+      "range": {
+        "startLine": 241,
+        "startChar": 47,
+        "endLine": 241,
+        "endChar": 63
+      },
+      "revId": "823e775f4df70e739fe42b1ec36b47b8e548c008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58c98b6a_60aacf3d",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-20T09:14:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1eee990_00272eca",
       "range": {
         "startLine": 241,
         "startChar": 47,
