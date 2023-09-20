@@ -199,11 +199,11 @@ pub struct FdtNode<'a> {
 }
 
 impl<'a> FdtNode<'a> {
-    /// Create immutable node from a mutable node at the same offset
+    /// Creates immutable node from a mutable node at the same offset.
     pub fn from_mut(other: &'a FdtNodeMut) -> Self {
         FdtNode { fdt: other.fdt, offset: other.offset }
     }
-    /// Find parent node.
+    /// Returns parent node.
     pub fn parent(&self) -> Result<Self> {
         // SAFETY: Accesses (read-only) are constrained to the DT totalsize.
         let ret = unsafe { libfdt_bindgen::fdt_parent_offset(self.fdt.as_ptr(), self.offset) };
@@ -211,12 +211,12 @@ impl<'a> FdtNode<'a> {
         Ok(Self { fdt: self.fdt, offset: fdt_err(ret)? })
     }
 
-    /// Retrieve the standard (deprecated) device_type <string> property.
+    /// Returns the standard (deprecated) device_type <string> property.
     pub fn device_type(&self) -> Result<Option<&CStr>> {
         self.getprop_str(CStr::from_bytes_with_nul(b"device_type\0").unwrap())
     }
 
-    /// Retrieve the standard reg <prop-encoded-array> property.
+    /// Returns the standard reg <prop-encoded-array> property.
     pub fn reg(&self) -> Result<Option<RegIterator<'a>>> {
         let reg = CStr::from_bytes_with_nul(b"reg\0").unwrap();
 
@@ -232,7 +232,7 @@ impl<'a> FdtNode<'a> {
         }
     }
 
-    /// Retrieves the standard ranges property.
+    /// Returns the standard ranges property.
     pub fn ranges<A, P, S>(&self) -> Result<Option<RangesIterator<'a, A, P, S>>> {
         let ranges = CStr::from_bytes_with_nul(b"ranges\0").unwrap();
         if let Some(cells) = self.getprop_cells(ranges)? {
@@ -251,7 +251,7 @@ impl<'a> FdtNode<'a> {
         }
     }
 
-    /// Retrieve the value of a given <string> property.
+    /// Returns the value of a given <string> property.
     pub fn getprop_str(&self, name: &CStr) -> Result<Option<&CStr>> {
         let value = if let Some(bytes) = self.getprop(name)? {
             Some(CStr::from_bytes_with_nul(bytes).map_err(|_| FdtError::BadValue)?)
@@ -261,7 +261,7 @@ impl<'a> FdtNode<'a> {
         Ok(value)
     }
 
-    /// Retrieve the value of a given property as an array of cells.
+    /// Returns the value of a given property as an array of cells.
     pub fn getprop_cells(&self, name: &CStr) -> Result<Option<CellIterator<'a>>> {
         if let Some(cells) = self.getprop(name)? {
             Ok(Some(CellIterator::new(cells)))
@@ -270,7 +270,7 @@ impl<'a> FdtNode<'a> {
         }
     }
 
-    /// Retrieve the value of a given <u32> property.
+    /// Returns the value of a given <u32> property.
     pub fn getprop_u32(&self, name: &CStr) -> Result<Option<u32>> {
         let value = if let Some(bytes) = self.getprop(name)? {
             Some(u32::from_be_bytes(bytes.try_into().map_err(|_| FdtError::BadValue)?))
@@ -280,7 +280,7 @@ impl<'a> FdtNode<'a> {
         Ok(value)
     }
 
-    /// Retrieve the value of a given <u64> property.
+    /// Returns the value of a given <u64> property.
     pub fn getprop_u64(&self, name: &CStr) -> Result<Option<u64>> {
         let value = if let Some(bytes) = self.getprop(name)? {
             Some(u64::from_be_bytes(bytes.try_into().map_err(|_| FdtError::BadValue)?))
@@ -290,7 +290,7 @@ impl<'a> FdtNode<'a> {
         Ok(value)
     }
 
-    /// Retrieve the value of a given property.
+    /// Returns the value of a given property.
     pub fn getprop(&self, name: &CStr) -> Result<Option<&'a [u8]>> {
         if let Some((prop, len)) = Self::getprop_internal(self.fdt, self.offset, name)? {
             let offset = (prop as usize)
@@ -303,7 +303,7 @@ impl<'a> FdtNode<'a> {
         }
     }
 
-    /// Return the pointer and size of the property named `name`, in a node at offset `offset`, in
+    /// Returns the pointer and size of the property named `name`, in a node at offset `offset`, in
     /// a device tree `fdt`. The pointer is guaranteed to be non-null, in which case error returns.
     fn getprop_internal(
         fdt: &'a Fdt,
@@ -336,7 +336,7 @@ impl<'a> FdtNode<'a> {
         Ok(Some((prop.cast::<c_void>(), len)))
     }
 
-    /// Get reference to the containing device tree.
+    /// Returns reference to the containing device tree.
     pub fn fdt(&self) -> &Fdt {
         self.fdt
     }
@@ -376,7 +376,7 @@ pub struct FdtNodeMut<'a> {
 }
 
 impl<'a> FdtNodeMut<'a> {
-    /// Append a property name-value (possibly empty) pair to the given node.
+    /// Appends a property name-value (possibly empty) pair to the given node.
     pub fn appendprop<T: AsRef<[u8]>>(&mut self, name: &CStr, value: &T) -> Result<()> {
         // SAFETY: Accesses are constrained to the DT totalsize (validated by ctor).
         let ret = unsafe {
@@ -392,7 +392,7 @@ impl<'a> FdtNodeMut<'a> {
         fdt_err_expect_zero(ret)
     }
 
-    /// Append a (address, size) pair property to the given node.
+    /// Appends a (address, size) pair property to the given node.
     pub fn appendprop_addrrange(&mut self, name: &CStr, addr: u64, size: u64) -> Result<()> {
         // SAFETY: Accesses are constrained to the DT totalsize (validated by ctor).
         let ret = unsafe {
@@ -409,7 +409,9 @@ impl<'a> FdtNodeMut<'a> {
         fdt_err_expect_zero(ret)
     }
 
-    /// Create or change a property name-value pair to the given node.
+    /// Sets a property name-value pair to the given node.
+    ///
+    /// This may create a new prop or replace existing value.
     pub fn setprop(&mut self, name: &CStr, value: &[u8]) -> Result<()> {
         // SAFETY: New value size is constrained to the DT totalsize
         //          (validated by underlying libfdt).
@@ -426,8 +428,10 @@ impl<'a> FdtNodeMut<'a> {
         fdt_err_expect_zero(ret)
     }
 
-    /// Replace the value of the given property with the given value, and ensure that the given
-    /// value has the same length as the current value length
+    /// Sets the value of the given property with the given value, and ensure that the given
+    /// value has the same length as the current value length.
+    ///
+    /// This can only be used to replace existing value.
     pub fn setprop_inplace(&mut self, name: &CStr, value: &[u8]) -> Result<()> {
         // SAFETY: fdt size is not altered
         let ret = unsafe {
@@ -443,19 +447,23 @@ impl<'a> FdtNodeMut<'a> {
         fdt_err_expect_zero(ret)
     }
 
-    /// Replace the value of the given (address, size) pair property with the given value, and
-    /// ensure that the given value has the same length as the current value length
+    /// Sets the value of the given (address, size) pair property with the given value, and
+    /// ensure that the given value has the same length as the current value length.
+    ///
+    /// This can only be used to replace existing value.
     pub fn setprop_addrrange_inplace(&mut self, name: &CStr, addr: u64, size: u64) -> Result<()> {
         let pair = [addr.to_be(), size.to_be()];
         self.setprop_inplace(name, pair.as_bytes())
     }
 
-    /// Create or change a flag-like empty property.
+    /// Sets a flag-like empty property.
+    ///
+    /// This may create a new prop or replace existing value.
     pub fn setprop_empty(&mut self, name: &CStr) -> Result<()> {
         self.setprop(name, &[])
     }
 
-    /// Delete the given property.
+    /// Deletes the given property.
     pub fn delprop(&mut self, name: &CStr) -> Result<()> {
         // SAFETY: Accesses are constrained to the DT totalsize (validated by ctor) when the
         // library locates the node's property. Removing the property may shift the offsets of
@@ -468,7 +476,7 @@ impl<'a> FdtNodeMut<'a> {
         fdt_err_expect_zero(ret)
     }
 
-    /// Overwrite the given property with FDT_NOP, effectively removing it from the DT.
+    /// Sets the given property with FDT_NOP, effectively removing it from the DT.
     pub fn nop_property(&mut self, name: &CStr) -> Result<()> {
         // SAFETY: Accesses are constrained to the DT totalsize (validated by ctor) when the
         // library locates the node's property.
@@ -479,7 +487,7 @@ impl<'a> FdtNodeMut<'a> {
         fdt_err_expect_zero(ret)
     }
 
-    /// Reduce the size of the given property to new_size
+    /// Trims the size of the given property to new_size.
     pub fn trimprop(&mut self, name: &CStr, new_size: usize) -> Result<()> {
         let (prop, len) =
             FdtNode::getprop_internal(self.fdt, self.offset, name)?.ok_or(FdtError::NotFound)?;
@@ -504,12 +512,12 @@ impl<'a> FdtNodeMut<'a> {
         fdt_err_expect_zero(ret)
     }
 
-    /// Get reference to the containing device tree.
+    /// Returns reference to the containing device tree.
     pub fn fdt(&mut self) -> &mut Fdt {
         self.fdt
     }
 
-    /// Add a new subnode to the given node and return it as a FdtNodeMut on success.
+    /// Adds a new subnode to the given node and return it as a FdtNodeMut on success.
     pub fn add_subnode(&'a mut self, name: &CStr) -> Result<Self> {
         // SAFETY: Accesses are constrained to the DT totalsize (validated by ctor).
         let ret = unsafe {
@@ -526,7 +534,7 @@ impl<'a> FdtNodeMut<'a> {
         Ok(FdtNode { fdt: &*self.fdt, offset: fdt_err(ret)? })
     }
 
-    /// Return the compatible node of the given name that is next to this node
+    /// Returns the compatible node of the given name that is next to this node
     pub fn next_compatible(self, compatible: &CStr) -> Result<Option<Self>> {
         // SAFETY: Accesses (read-only) are constrained to the DT totalsize.
         let ret = unsafe {
@@ -540,8 +548,8 @@ impl<'a> FdtNodeMut<'a> {
         Ok(fdt_err_or_option(ret)?.map(|offset| Self { fdt: self.fdt, offset }))
     }
 
-    /// Replace this node and its subtree with nop tags, effectively removing it from the tree, and
-    /// then return the next compatible node of the given name.
+    /// Deletes the node effectively by setting this node and its subtree with nop tags.
+    /// Returns the next compatible node of the given name.
     // Side note: without this, filterint out excessive compatible nodes from the DT is impossible.
     // The reason is that libfdt ensures that the node from where the search for the next
     // compatible node is started is always a valid one -- except for the special case of offset =
@@ -669,7 +677,7 @@ impl Fdt {
         unsafe { mem::transmute::<&mut [u8], &mut Self>(fdt) }
     }
 
-    /// Update this FDT from a slice containing another FDT
+    /// Updates this FDT from a slice containing another FDT.
     pub fn copy_from_slice(&mut self, new_fdt: &[u8]) -> Result<()> {
         if self.buffer.len() < new_fdt.len() {
             Err(FdtError::NoSpace)
@@ -684,7 +692,7 @@ impl Fdt {
         }
     }
 
-    /// Make the whole slice containing the DT available to libfdt.
+    /// Unpacks the whole slice to make FDT writable.
     pub fn unpack(&mut self) -> Result<()> {
         // SAFETY: "Opens" the DT in-place (supported use-case) by updating its header and
         // internal structures to make use of the whole self.fdt slice but performs no accesses
@@ -699,7 +707,7 @@ impl Fdt {
         fdt_err_expect_zero(ret)
     }
 
-    /// Pack the DT to take a minimum amount of memory.
+    /// Packs the DT to take a minimum amount of memory.
     ///
     /// Doesn't shrink the underlying memory slice.
     pub fn pack(&mut self) -> Result<()> {
@@ -743,22 +751,22 @@ impl Fdt {
         self.memory()?.next().ok_or(FdtError::NotFound)
     }
 
-    /// Retrieve the standard /chosen node.
+    /// Returns the standard /chosen node.
     pub fn chosen(&self) -> Result<Option<FdtNode>> {
         self.node(CStr::from_bytes_with_nul(b"/chosen\0").unwrap())
     }
 
-    /// Retrieve the standard /chosen node as mutable.
+    /// Returns the standard /chosen node as mutable.
     pub fn chosen_mut(&mut self) -> Result<Option<FdtNodeMut>> {
         self.node_mut(CStr::from_bytes_with_nul(b"/chosen\0").unwrap())
     }
 
-    /// Get the root node of the tree.
+    /// Returns the root node of the tree.
     pub fn root(&self) -> Result<FdtNode> {
         self.node(CStr::from_bytes_with_nul(b"/\0").unwrap())?.ok_or(FdtError::Internal)
     }
 
-    /// Find a tree node by its full path.
+    /// Returns a tree node by its full path.
     pub fn node(&self, path: &CStr) -> Result<Option<FdtNode>> {
         Ok(self.path_offset(path)?.map(|offset| FdtNode { fdt: self, offset }))
     }
@@ -768,17 +776,17 @@ impl Fdt {
         CompatibleIterator::new(self, compatible)
     }
 
-    /// Get the mutable root node of the tree.
+    /// Returns the mutable root node of the tree.
     pub fn root_mut(&mut self) -> Result<FdtNodeMut> {
         self.node_mut(CStr::from_bytes_with_nul(b"/\0").unwrap())?.ok_or(FdtError::Internal)
     }
 
-    /// Find a mutable tree node by its full path.
+    /// Returns a mutable tree node by its full path.
     pub fn node_mut(&mut self, path: &CStr) -> Result<Option<FdtNodeMut>> {
         Ok(self.path_offset(path)?.map(|offset| FdtNodeMut { fdt: self, offset }))
     }
 
-    /// Return the device tree as a slice (may be smaller than the containing buffer).
+    /// Returns the device tree as a slice (may be smaller than the containing buffer).
     pub fn as_slice(&self) -> &[u8] {
         &self.buffer[..self.totalsize()]
     }
@@ -806,7 +814,7 @@ impl Fdt {
         fdt_err_expect_zero(ret)
     }
 
-    /// Return a shared pointer to the device tree.
+    /// Returns a shared pointer to the device tree.
     pub fn as_ptr(&self) -> *const c_void {
         self.buffer.as_ptr().cast::<_>()
     }
