@@ -143,6 +143,25 @@ impl MemoryTracker {
         self.add(region)
     }
 
+    /// Allocates the address range for a const slice.
+    ///
+    /// # Safety
+    ///
+    /// Callers of this method need to ensure that the `range` is valid for mapping as read-only
+    /// data.
+    pub unsafe fn alloc_range_outside_main_memory(
+        &mut self,
+        range: &MemoryRange,
+    ) -> Result<MemoryRange> {
+        let region = MemoryRegion { range: range.clone(), mem_type: MemoryType::ReadOnly };
+        self.check_no_overlap(&region)?;
+        self.page_table.map_rodata(&get_va_range(range)).map_err(|e| {
+            error!("Error during range allocation: {e}");
+            MemoryTrackerError::FailedToMap
+        })?;
+        self.add(region)
+    }
+
     /// Allocate the address range for a mutable slice; returns None if failed.
     pub fn alloc_range_mut(&mut self, range: &MemoryRange) -> Result<MemoryRange> {
         let region = MemoryRegion { range: range.clone(), mem_type: MemoryType::ReadWrite };
@@ -203,6 +222,12 @@ impl MemoryTracker {
         if !region.range.is_within(&self.total) {
             return Err(MemoryTrackerError::OutOfRange);
         }
+        self.check_no_overlap(region)
+    }
+
+    /// Checks that the given region doesn't overlap with any other previously allocated regions,
+    /// and that the regions ArrayVec has capacity to add it.
+    fn check_no_overlap(&self, region: &MemoryRegion) -> Result<()> {
         if self.regions.iter().any(|r| region.range.overlaps(&r.range)) {
             return Err(MemoryTrackerError::Overlaps);
         }
