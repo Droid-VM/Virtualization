@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ce1fc94_b05a3ee5",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-20T15:35:20Z",
+      "side": 1,
+      "message": "\u003e I wonder if this should have a longer name. check_success, check_boolean_result, map_boolean_result?",
+      "parentUuid": "f1a21592_882980d9",
+      "range": {
+        "startLine": 43,
+        "startChar": 3,
+        "endLine": 43,
+        "endChar": 15
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e7c08b51_69913f52",
         "filename": "rialto/src/requests/ec_key.rs",
         "patchSetId": 15
@@ -202,6 +226,30 @@
       "side": 1,
       "message": "What do you mean by \"signing\" it?\n\nThe private key generated here is encrypted and sent to rkpd. It\u0027ll be fetched later during the client VM attestation for signing.",
       "parentUuid": "16ef4790_8eddb4f0",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 63
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cdb66b4_9a8da318",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-20T15:35:20Z",
+      "side": 1,
+      "message": "Sorry, we generate it, then later we sign with it. No other party can access it, nor substitute a different key.\n\nSo we know the one we get back is the one we generated, so we know its exact type.",
+      "parentUuid": "c9fdb4bf_3e8ba71a",
       "range": {
         "startLine": 85,
         "startChar": 0,
