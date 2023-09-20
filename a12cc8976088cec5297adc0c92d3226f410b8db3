@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05b94f8c_38730288",
+        "filename": "rialto/Android.bp",
+        "patchSetId": 15
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-20T13:47:39Z",
+      "side": 1,
+      "message": "Why isn\u0027t this just static_libs ?",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 26,
+        "endChar": 21
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83681136_a4aadaeb",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-20T13:47:39Z",
+      "side": 1,
+      "message": "Why is this here, rather than earlier or later? A comment might be helpful.\n\nIt feels like it should be done as early as possible - so maybe before the bcc_handover stuff?",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 5
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07db760d_0ab56d82",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-20T13:47:39Z",
+      "side": 1,
+      "message": "I wonder if this should have a longer name. check_success, check_boolean_result, map_boolean_result?\n\nAnd perhaps we should panic if ret is neither 1 nor 0, since I think that\u0027s not supposed to happen for the return values where this function is appropriate.",
+      "range": {
+        "startLine": 43,
+        "startChar": 3,
+        "endLine": 43,
+        "endChar": 15
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7c08b51_69913f52",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-20T13:47:39Z",
+      "side": 1,
+      "message": "Can generate_key return a key that fails check_key?",
+      "range": {
+        "startLine": 63,
+        "startChar": 15,
+        "endLine": 63,
+        "endChar": 24
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16ef4790_8eddb4f0",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-20T13:47:39Z",
+      "side": 1,
+      "message": "Given that it\u0027s the code here that both generates the key and signs it, why do we need to include the key type in the serialization?",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 63
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb7c623d_c02833ca",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-20T13:47:39Z",
+      "side": 1,
+      "message": "I\u0027d be very tempted to move this up to just after the declaration of EcKey - it\u0027s crucial to understanding the safety.",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 1
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0af7f29_2f9eedfd",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-20T13:47:39Z",
+      "side": 1,
+      "message": "I guess we can\u0027t use the keystore_crypto2 one because it requires std.",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 1
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "815e6a93_52d05e64",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-20T13:47:39Z",
+      "side": 1,
+      "message": "It might be worth mentioning that this zeroes out_data",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 157,
+        "endChar": 45
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cf9afcc_eb7a8d93",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-20T13:47:39Z",
+      "side": 1,
+      "message": "Ditto about moving this earlier",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 1
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
