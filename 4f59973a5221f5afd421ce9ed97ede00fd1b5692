@@ -82,6 +82,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed253585_03b8513c",
+        "filename": "libs/service_vm_comm/src/message.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-21T14:13:17Z",
+      "side": 1,
+      "message": "Ahh, I see.",
+      "parentUuid": "f925bfea_15fa8109",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 1
+      },
+      "revId": "4f59973a5221f5afd421ce9ed97ede00fd1b5692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c751fb7_b1a7360b",
@@ -225,6 +249,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "de314849_4200efd3",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-21T14:13:17Z",
+      "side": 1,
+      "message": "https://www.rfc-editor.org/rfc/rfc9053#section-7.1.1 \"Leading-zero octets MUST be preserved\" - i.e. we need padding.\n(Thanks David.)\n\nNot padding also leaks some information, but since this is a public key that doesn\u0027t seem to be a problem.",
+      "parentUuid": "a41526a1_71862569",
+      "range": {
+        "startLine": 266,
+        "startChar": 32,
+        "endLine": 266,
+        "endChar": 41
+      },
+      "revId": "4f59973a5221f5afd421ce9ed97ede00fd1b5692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c5e79005_c23fadc3",
         "filename": "rialto/src/requests/pub_key.rs",
         "patchSetId": 12
@@ -319,6 +367,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "38dbc793_4d18215c",
+        "filename": "rialto/src/requests/pub_key.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-21T14:13:17Z",
+      "side": 1,
+      "message": "Don\u0027t we have a From implementation for CoseError -\u003e RequestProcessingError ?",
+      "parentUuid": "109660a2_d2888bc9",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 26
+      },
+      "revId": "4f59973a5221f5afd421ce9ed97ede00fd1b5692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f50d02ff_715593ff",
         "filename": "rialto/src/requests/pub_key.rs",
         "patchSetId": 12
@@ -354,6 +426,30 @@
       "side": 1,
       "message": "We can, but I don\u0027t see much benefit in adding another layer of conversion here. Since this function is only used by CoseMac to create the MAC tag an to verify the tag, and in both cases the return value needs to be a vector, we still need to convert the array to vector eventually.",
       "parentUuid": "f50d02ff_715593ff",
+      "range": {
+        "startLine": 44,
+        "startChar": 18,
+        "endLine": 44,
+        "endChar": 45
+      },
+      "revId": "4f59973a5221f5afd421ce9ed97ede00fd1b5692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48545c6b_e9c77d28",
+        "filename": "rialto/src/requests/pub_key.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-21T14:13:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0006a3e2_1df12b10",
       "range": {
         "startLine": 44,
         "startChar": 18,
