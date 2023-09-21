@@ -214,6 +214,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a89781de_eaa534de",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-21T09:48:06Z",
+      "side": 1,
+      "message": "\u003e BTW - could we use CBB_init_fixed to simplify things?\n\nWe probably can use it for the ECPrivateKey case. But it\u0027s not always easy to estimate the buffer length in general.",
+      "parentUuid": "3bdca294_1577185c",
+      "revId": "823e775f4df70e739fe42b1ec36b47b8e548c008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1eee990_00272eca",
         "filename": "rialto/src/requests/ec_key.rs",
         "patchSetId": 11
