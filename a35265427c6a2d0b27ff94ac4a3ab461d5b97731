@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7620e90_f0f6d9a7",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-21T13:08:29Z",
+      "side": 1,
+      "message": "This isn\u0027t true - there are valid uses for non-protected VMs; they are useful for containing untrusted code, for example - where the threat is the VM attacking the host rather than vice versa.",
+      "range": {
+        "startLine": 156,
+        "startChar": 71,
+        "endLine": 157,
+        "endChar": 43
+      },
+      "revId": "a35265427c6a2d0b27ff94ac4a3ab461d5b97731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6e4c3cf_8be22cab",
         "filename": "rialto/src/main.rs",
         "patchSetId": 5
@@ -38,6 +61,30 @@
       "side": 1,
       "message": "Are you suggesting passing an `Option` to `process_request` instead?\n\nWhile that works for pvmfw as only supports protected VMs. It can raise an error when the DICE chain is missing and after it only handles the case with a valid DICE chain.\n\nFor rialto, since we aim to support both protected and non protected VMs, it would be more nature to use a sample DICE chain here than to create fake data at each usage point.\n\nOtherwise obtaining real data for non-protected VMs might not be straightforward. Since this functionality is intended for debugging purposes only for now, using a sample DICE chain is convenient in this scenario.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/microdroid_manager/src/dice.rs;l\u003d61;drc\u003d95084dfd8587992bb384759544678fd0ab5cef8b",
       "parentUuid": "f6e4c3cf_8be22cab",
+      "range": {
+        "startLine": 158,
+        "startChar": 33,
+        "endLine": 158,
+        "endChar": 93
+      },
+      "revId": "a35265427c6a2d0b27ff94ac4a3ab461d5b97731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43072069_77f0c7ce",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-21T13:08:29Z",
+      "side": 1,
+      "message": "The sample chain is fake data - it\u0027s mostly intended for testing. So we shouldn\u0027t be using it in production code.\n\nI\u0027m suggesting creating a valid but minimal DICE chain.\n\nBut - what does it mean for Rialto to support a non-protected VM? Such a VM shouldn\u0027t get any attestation certificate, should it?",
+      "parentUuid": "ba78216f_fa906538",
       "range": {
         "startLine": 158,
         "startChar": 33,
