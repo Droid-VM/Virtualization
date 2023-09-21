@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97bc2333_fb5e125b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-21T12:12:53Z",
+      "side": 1,
+      "message": "Hi Pierre-Clément, can you also take a look?",
+      "revId": "9f3ca839577222a428e0869fb6c0be4f93494c08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02684338_0eca931e",
@@ -14,6 +31,30 @@
       "writtenOn": "2023-09-21T12:10:19Z",
       "side": 1,
       "message": "Naming is definitely better, thanks.\nMaybe check_allocatable_internal, check_allocatable_external ? Not sure that\u0027s that much better.",
+      "range": {
+        "startLine": 222,
+        "startChar": 7,
+        "endLine": 222,
+        "endChar": 24
+      },
+      "revId": "9f3ca839577222a428e0869fb6c0be4f93494c08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9dc05b0_085dc359",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-21T12:12:53Z",
+      "side": 1,
+      "message": "I think check_allocatable is quite clear. Not sure what\u0027s internal/external really means in the other two names.",
+      "parentUuid": "02684338_0eca931e",
       "range": {
         "startLine": 222,
         "startChar": 7,
