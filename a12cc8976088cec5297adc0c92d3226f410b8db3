@@ -166,6 +166,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "508b256e_ad2d4bbd",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-21T08:33:46Z",
+      "side": 1,
+      "message": "what about `validate_boringssl_return`? since it actually validates the return value of a BoringSSL API call.",
+      "parentUuid": "8ce1fc94_b05a3ee5",
+      "range": {
+        "startLine": 43,
+        "startChar": 3,
+        "endLine": 43,
+        "endChar": 15
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7c08b51_69913f52",
@@ -179,6 +203,30 @@
       "writtenOn": "2023-09-20T13:47:39Z",
       "side": 1,
       "message": "Can generate_key return a key that fails check_key?",
+      "range": {
+        "startLine": 63,
+        "startChar": 15,
+        "endLine": 63,
+        "endChar": 24
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15fbad13_f8f285b3",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-21T08:33:46Z",
+      "side": 1,
+      "message": "If `generate_key` succeeds, I don\u0027t think the generated key pair can ever fail the check. I think it doesn\u0027t hurt to perform all these checks [1].\n\n[1] https://source.corp.google.com/h/github/freebsd/freebsd-src/+/main:crypto/openssl/crypto/ec/ec_key.c;l\u003d572;drc\u003db077aed33b7b6aefca7b17ddb250cf521f938613",
+      "parentUuid": "e7c08b51_69913f52",
       "range": {
         "startLine": 63,
         "startChar": 15,
@@ -262,6 +310,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5530bf22_5f912e7d",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-21T08:33:46Z",
+      "side": 1,
+      "message": "\u003e ... we generate it, then later we sign with it.\n\nRight. Considering that the private key is not immediately consumed but obtained at a later time, it would be more reliable to obtain the DER encoding along with other relevant information. So we can perform additional checks, such as ensuring that the private key corresponds to the public key covered in the certificate.",
+      "parentUuid": "4cdb66b4_9a8da318",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 63
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fb7c623d_c02833ca",
         "filename": "rialto/src/requests/ec_key.rs",
         "patchSetId": 15
@@ -273,6 +345,30 @@
       "writtenOn": "2023-09-20T13:47:39Z",
       "side": 1,
       "message": "I\u0027d be very tempted to move this up to just after the declaration of EcKey - it\u0027s crucial to understanding the safety.",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 1
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4567eb23_ef6166fb",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-21T08:33:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb7c623d_c02833ca",
       "range": {
         "startLine": 101,
         "startChar": 0,
@@ -306,6 +402,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78d85cda_5d475912",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-21T08:33:46Z",
+      "side": 1,
+      "message": "Yes. We can\u0027t use that. The `ZVec` there depends on nix. It doesn\u0027t look straightforward to convert it to nostd.",
+      "parentUuid": "b0af7f29_2f9eedfd",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 1
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "815e6a93_52d05e64",
@@ -329,6 +449,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44507414_a342b6b9",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-21T08:33:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "815e6a93_52d05e64",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 157,
+        "endChar": 45
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cf9afcc_eb7a8d93",
@@ -342,6 +486,30 @@
       "writtenOn": "2023-09-20T13:47:39Z",
       "side": 1,
       "message": "Ditto about moving this earlier",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 1
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04d039ea_c8a510ef",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-21T08:33:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cf9afcc_eb7a8d93",
       "range": {
         "startLine": 169,
         "startChar": 0,
