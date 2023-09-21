@@ -17,12 +17,13 @@
 use super::rkp;
 use crate::error::Result;
 use alloc::vec::Vec;
+use diced_open_dice::DiceArtifactsData;
 use service_vm_comm::{Request, Response};
 
 /// Processes a request and returns the corresponding response.
 /// This function serves as the entry point for the request processing
 /// module.
-pub fn process_request(request: Request) -> Result<Response> {
+pub fn process_request(request: Request, _dice_artifacts: &DiceArtifactsData) -> Result<Response> {
     let response = match request {
         Request::Reverse(v) => Response::Reverse(reverse(v)),
         Request::GenerateEcdsaP256KeyPair => rkp::generate_ecdsa_p256_key_pair()
