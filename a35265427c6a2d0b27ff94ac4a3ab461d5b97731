@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6e4c3cf_8be22cab",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-21T12:21:04Z",
+      "side": 1,
+      "message": "Rather than use this rather bogus test data, I wonder if we should just create a fairly minimal real one.\n(That also avoids the whole Box\u003cdyn\u003e thing.)\n\nFixed, or random, CDIs, no prior DICE nodes - a little like https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/pvmfw/src/bcc.rs;drc\u003dc5e5fa3dc179276981acd26ea27e1b599bcb69ea;l\u003d55.",
+      "range": {
+        "startLine": 158,
+        "startChar": 33,
+        "endLine": 158,
+        "endChar": 93
+      },
+      "revId": "a35265427c6a2d0b27ff94ac4a3ab461d5b97731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
