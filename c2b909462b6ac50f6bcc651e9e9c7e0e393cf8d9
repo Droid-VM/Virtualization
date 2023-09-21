@@ -16,6 +16,46 @@
       "message": "Hi Alan, PTAL",
       "revId": "c2b909462b6ac50f6bcc651e9e9c7e0e393cf8d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2ca2e2a_98acf6e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-21T10:02:25Z",
+      "side": 1,
+      "message": "Context would help - I assume this is related to aosp/2755030, but it\u0027s not stacked with it.\nTBH I don\u0027t find having it as a standalone CL works; the reason for changing the name is because we now have 2 similar functions we need to differentiate.\nCan you just make this change as part of that other CL?",
+      "revId": "c2b909462b6ac50f6bcc651e9e9c7e0e393cf8d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abfd1c1a_d9865d81",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-21T10:02:25Z",
+      "side": 1,
+      "message": "Can we name it by its purpose rather than by exactly what it does?\n\ncheck_allocatable?",
+      "range": {
+        "startLine": 203,
+        "startChar": 7,
+        "endLine": 203,
+        "endChar": 41
+      },
+      "revId": "c2b909462b6ac50f6bcc651e9e9c7e0e393cf8d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
