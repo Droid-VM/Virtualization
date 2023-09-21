@@ -158,6 +158,30 @@
       },
       "revId": "9f3ca839577222a428e0869fb6c0be4f93494c08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a1608e7_dd1c7ba1",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-21T14:44:45Z",
+      "side": 1,
+      "message": "There can\u0027t be a clash because pvmfw doesn\u0027t run in \"main memory\" (0x8000_0000 and above), as configured in its linker script.",
+      "parentUuid": "a79bdea0_ad300a4b",
+      "range": {
+        "startLine": 231,
+        "startChar": 7,
+        "endLine": 231,
+        "endChar": 23
+      },
+      "revId": "9f3ca839577222a428e0869fb6c0be4f93494c08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
