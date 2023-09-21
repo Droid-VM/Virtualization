@@ -134,6 +134,30 @@
       },
       "revId": "9f3ca839577222a428e0869fb6c0be4f93494c08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a79bdea0_ad300a4b",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-21T14:29:54Z",
+      "side": 1,
+      "message": "Where does pvmfw check that there\u0027s no clash between regions when creating the page table?",
+      "parentUuid": "55168aa2_8aef41d2",
+      "range": {
+        "startLine": 231,
+        "startChar": 7,
+        "endLine": 231,
+        "endChar": 23
+      },
+      "revId": "9f3ca839577222a428e0869fb6c0be4f93494c08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
