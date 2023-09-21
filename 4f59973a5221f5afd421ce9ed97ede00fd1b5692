@@ -271,6 +271,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76bf5dcf_80ae55cb",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-21T15:42:09Z",
+      "side": 1,
+      "message": "Thanks for the pointer. Fixed padding.",
+      "parentUuid": "de314849_4200efd3",
+      "range": {
+        "startLine": 266,
+        "startChar": 32,
+        "endLine": 266,
+        "endChar": 41
+      },
+      "revId": "4f59973a5221f5afd421ce9ed97ede00fd1b5692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5e79005_c23fadc3",
@@ -379,6 +403,30 @@
       "side": 1,
       "message": "Don\u0027t we have a From implementation for CoseError -\u003e RequestProcessingError ?",
       "parentUuid": "109660a2_d2888bc9",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 26
+      },
+      "revId": "4f59973a5221f5afd421ce9ed97ede00fd1b5692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c71e26a_f2f38192",
+        "filename": "rialto/src/requests/pub_key.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-21T15:42:09Z",
+      "side": 1,
+      "message": "We have. That\u0027s why Ok(cose_mac.to_vec()?) works. Leaving `cose_mac.to_vec()` causes:\n```\n28 | pub fn build_maced_public_key(public_key: CoseKey, hmac_key: \u0026[u8]) -\u003e Result\u003cVec\u003cu8\u003e\u003e {\n   |                                                                        --------------- expected `core::result::Result\u003calloc::vec::Vec\u003cu8\u003e, service_vm_comm::RequestProcessingError\u003e` because of return type\n...\n38 |     cose_mac.to_vec()\n   |     ^^^^^^^^^^^^^^^^^ expected `Result\u003cVec\u003cu8\u003e, ...\u003e`, found `Result\u003cVec\u003cu8\u003e, CoseError\u003e`\n   |\n   \u003d note: expected enum `core::result::Result\u003c_, service_vm_comm::RequestProcessingError\u003e`\n              found enum `core::result::Result\u003c_, coset::CoseError\u003e`\nhelp: use `?` to coerce and return an appropriate `Err`, and wrap the resulting value in `Ok` so the expression remains of type `Result`\n   |\n38 |     Ok(cose_mac.to_vec()?)\n```",
+      "parentUuid": "38dbc793_4d18215c",
       "range": {
         "startLine": 37,
         "startChar": 4,
