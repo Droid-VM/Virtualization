@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16258d98_dfb69060",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-21T13:56:15Z",
+      "side": 1,
+      "message": "I meant inside the tracked region  or outside. Meh.",
+      "parentUuid": "c9dc05b0_085dc359",
+      "range": {
+        "startLine": 222,
+        "startChar": 7,
+        "endLine": 222,
+        "endChar": 24
+      },
+      "revId": "9f3ca839577222a428e0869fb6c0be4f93494c08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74d2cef0_180e35ff",
@@ -78,6 +102,30 @@
       "writtenOn": "2023-09-21T12:52:26Z",
       "side": 1,
       "message": "I haven\u0027t dived into the code but keep in mind that `MemoryTracker` (and in particular this code) was written for pvmfw, which runs _outside_ of the main memory region unlike guest kernels such as Rialto.\n\nTherefore, this method probably doesn\u0027t check for clashes between `region` and the running image from Rialto (the entries of which are created in `new_page_table`) and is, in some way, broken for Rialto asi t  could overwrite parts of \"itself\" by (unknowingly) mapping something over its own address ranges.\n\nIn general, I believe that this issue and what this CL is achieving should be addressed by re-architecting/generalizing the code to cover them both instead of adding \"special cases\" like `alloc_range_outside_main_memory` does but this can be considered a clean-up and doesn\u0027t have to block this CL; @alanstokes@google.com, WDYT?",
+      "range": {
+        "startLine": 231,
+        "startChar": 7,
+        "endLine": 231,
+        "endChar": 23
+      },
+      "revId": "9f3ca839577222a428e0869fb6c0be4f93494c08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55168aa2_8aef41d2",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-21T13:56:15Z",
+      "side": 1,
+      "message": "Yes, I agree, with both.",
+      "parentUuid": "74d2cef0_180e35ff",
       "range": {
         "startLine": 231,
         "startChar": 7,
