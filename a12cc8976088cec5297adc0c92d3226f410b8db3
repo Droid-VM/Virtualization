@@ -214,6 +214,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fd64088_ba0f1d94",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-21T15:00:19Z",
+      "side": 1,
+      "message": "Ok. What about `map_int_to_result` or `check_int_result` maybe?",
+      "parentUuid": "c6af76df_450a0397",
+      "range": {
+        "startLine": 43,
+        "startChar": 3,
+        "endLine": 43,
+        "endChar": 15
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7c08b51_69913f52",
@@ -275,6 +299,30 @@
       "side": 1,
       "message": "If the check will always succeed, then doing it is a waste.",
       "parentUuid": "15fbad13_f8f285b3",
+      "range": {
+        "startLine": 63,
+        "startChar": 15,
+        "endLine": 63,
+        "endChar": 24
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de6ec325_357848b9",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-21T15:00:19Z",
+      "side": 1,
+      "message": "euh, we can remove this call then. In their own rust api, they even didn\u0027t expose this function.\n\nhttp://cs/h/team/beto-rust-devs/beto-rust/+/main:third_party/boringssl/rust/bssl-crypto/src/ec.rs?l\u003d1",
+      "parentUuid": "0f25afdc_7fe66f5c",
       "range": {
         "startLine": 63,
         "startChar": 15,
@@ -394,6 +442,30 @@
       "side": 1,
       "message": "So are we going to check that the key type is what we expect? How does that benefit us?\n\nIf we only support one key type, then we should just persist the key; if we store any extra information then we have to check it is as expected when we retrieved it.",
       "parentUuid": "5530bf22_5f912e7d",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 63
+      },
+      "revId": "a12cc8976088cec5297adc0c92d3226f410b8db3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09be4c8b_dc474c55",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-21T15:00:19Z",
+      "side": 1,
+      "message": "Actually the curve doesn\u0027t matter so much since we only support one curve. I mostly want to verify that the public key in the certificate corresponds to the one stored in the private key during client VM attestation. \nDuring the attestation process, we receive a certificate and an encrypted private key. After decrypting the private key, there may be a discrepancy between the private key and the public key. It\u0027s more reassuring if we can do a verification there.",
+      "parentUuid": "6b9ac164_c58ff6c9",
       "range": {
         "startLine": 85,
         "startChar": 0,
