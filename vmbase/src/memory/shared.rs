@@ -135,7 +135,7 @@ impl MemoryTracker {
     /// Allocate the address range for a const slice; returns None if failed.
     pub fn alloc_range(&mut self, range: &MemoryRange) -> Result<MemoryRange> {
         let region = MemoryRegion { range: range.clone(), mem_type: MemoryType::ReadOnly };
-        self.check(&region)?;
+        self.check_within_bounds_and_no_overlap(&region)?;
         self.page_table.map_rodata(&get_va_range(range)).map_err(|e| {
             error!("Error during range allocation: {e}");
             MemoryTrackerError::FailedToMap
@@ -146,7 +146,7 @@ impl MemoryTracker {
     /// Allocate the address range for a mutable slice; returns None if failed.
     pub fn alloc_range_mut(&mut self, range: &MemoryRange) -> Result<MemoryRange> {
         let region = MemoryRegion { range: range.clone(), mem_type: MemoryType::ReadWrite };
-        self.check(&region)?;
+        self.check_within_bounds_and_no_overlap(&region)?;
         self.page_table.map_data_dbm(&get_va_range(range)).map_err(|e| {
             error!("Error during mutable range allocation: {e}");
             MemoryTrackerError::FailedToMap
@@ -196,10 +196,11 @@ impl MemoryTracker {
         Ok(())
     }
 
-    /// Checks that the given region is within the range of the `MemoryTracker` and doesn't overlap
-    /// with any other previously allocated regions, and that the regions ArrayVec has capacity to
-    /// add it.
-    fn check(&self, region: &MemoryRegion) -> Result<()> {
+    /// Checks that the memory region meets the following criteria:
+    /// - It is within the range of the `MemoryTracker`.
+    /// - It does not overlap with any previously allocated regions.
+    /// - The `regions` ArrayVec has sufficient capacity to add it.
+    fn check_within_bounds_and_no_overlap(&self, region: &MemoryRegion) -> Result<()> {
         if !region.range.is_within(&self.total) {
             return Err(MemoryTrackerError::OutOfRange);
         }
