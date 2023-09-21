@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da88c790_084af157",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-21T14:38:20Z",
+      "side": 1,
+      "message": "I updated the comments.",
+      "parentUuid": "d74cd443_c136644f",
+      "range": {
+        "startLine": 156,
+        "startChar": 71,
+        "endLine": 157,
+        "endChar": 43
+      },
+      "revId": "a35265427c6a2d0b27ff94ac4a3ab461d5b97731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6e4c3cf_8be22cab",
@@ -157,6 +181,30 @@
       "side": 1,
       "message": "Hmm, I think that\u0027s also a bad thing.\n\nOK, if we\u0027re talking only about non-protected Rialto for testing then I guess it doesn\u0027t matter as much. I just dislike that sample data - it\u0027s over-complicated.\nI\u0027ll create a P2 bug to see if we can get rid of it.",
       "parentUuid": "e00b7071_5206b29a",
+      "range": {
+        "startLine": 158,
+        "startChar": 33,
+        "endLine": 158,
+        "endChar": 93
+      },
+      "revId": "a35265427c6a2d0b27ff94ac4a3ab461d5b97731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e738f787_d598982e",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-21T14:38:20Z",
+      "side": 1,
+      "message": "It\u0027s testing only for now. We can fetch the real DICE chain when it becomes relevant.",
+      "parentUuid": "9df8c784_2cd00578",
       "range": {
         "startLine": 158,
         "startChar": 33,
