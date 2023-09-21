@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3d5b16a_0628a407",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-21T07:32:14Z",
+      "side": 1,
+      "message": "`MEMORY` is a mutex. I cannot move this part as a temporary variable and the temporty value will be freed before borrowing. Here\u0027s the error:\n```\nerror[E0716]: temporary value dropped while borrowed\n   --\u003e packages/modules/Virtualization/rialto/src/main.rs:141:30\n    |\n141 |                 let memory \u003d MEMORY.lock().as_mut().unwrap();\n    |                              ^^^^^^^^^^^^^                  - temporary value is freed at the end of this statement\n    |                              |\n    |                              creates a temporary value which is freed while still in use\n...\n145 |                 unsafe { memory.alloc_range_outside_main_memory(\u0026dice_range) }\n    |                          --------------------------------------------------- borrow later used here\n    |\n    \u003d note: consider using a `let` binding to create a longer lived value\n```\n\nI can move `map_err` out to get this part more compact.",
+      "parentUuid": "aac410ad_7331d944",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 29
+      },
+      "revId": "f90f4c0c326e68f8f1117084ead1be9190421534",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32a6d465_0571f5d9",
@@ -71,6 +95,30 @@
       "writtenOn": "2023-09-20T13:03:42Z",
       "side": 1,
       "message": "Nit: s/has/check/  \n(has_x suggests a function returning a bool)",
+      "range": {
+        "startLine": 157,
+        "startChar": 13,
+        "endLine": 157,
+        "endChar": 27
+      },
+      "revId": "f90f4c0c326e68f8f1117084ead1be9190421534",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cad9396f_bf936318",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-21T07:32:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32a6d465_0571f5d9",
       "range": {
         "startLine": 157,
         "startChar": 13,
