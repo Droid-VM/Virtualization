@@ -110,6 +110,30 @@
       },
       "revId": "f0ef5bd1cbb67efa52f203a62c5087e2113d427d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5ea3d7d_50ba9e41",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-22T16:48:02Z",
+      "side": 1,
+      "message": "We have uses for CBOR that don\u0027t need open_dice, and currently open_dice doesn\u0027t have any Ciborium dependency (I think - at least in the interface). So I\u0027d be reluctant to couple them.\n\nBut having multiple pretty-much identical copies of code always pains me, hence the library suggestion.",
+      "parentUuid": "7666e56a_886e3262",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 1
+      },
+      "revId": "f0ef5bd1cbb67efa52f203a62c5087e2113d427d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
