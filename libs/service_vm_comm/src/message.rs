@@ -99,6 +99,9 @@ pub enum RequestProcessingError {
     /// An error happened during the interaction with coset.
     CosetError,
 
+    /// An error happened during the interaction with DICE.
+    DiceError,
+
     /// Any key to sign lacks a valid MAC. Maps to `STATUS_INVALID_MAC`.
     InvalidMac,
 
@@ -116,6 +119,7 @@ impl fmt::Display for RequestProcessingError {
                 write!(f, "Failed to invoke a BoringSSL API: {api_name:?}")
             }
             Self::CosetError => write!(f, "Encountered an error with coset"),
+            Self::DiceError => write!(f, "Encountered an error with DICE"),
             Self::InvalidMac => write!(f, "A key to sign lacks a valid MAC."),
             Self::KeyToSignHasEmptyPayload => write!(f, "No payload found in a key to sign."),
             Self::CborValueError => {
