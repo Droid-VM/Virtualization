@@ -107,6 +107,9 @@ pub enum RequestProcessingError {
 
     /// An error happened when serializing to/from a `Value`.
     CborValueError,
+
+    /// Failed to compute the HMAC key.
+    FailedToComputeHmacKey,
 }
 
 impl fmt::Display for RequestProcessingError {
@@ -121,6 +124,7 @@ impl fmt::Display for RequestProcessingError {
             Self::CborValueError => {
                 write!(f, "An error happened when serializing to/from a CBOR Value.")
             }
+            Self::FailedToComputeHmacKey => write!(f, "Failed to compute the HMAC key"),
         }
     }
 }
