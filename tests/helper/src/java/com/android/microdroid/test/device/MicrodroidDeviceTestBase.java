@@ -555,4 +555,8 @@ public abstract class MicrodroidDeviceTestBase {
     protected boolean isFeatureEnabled(String featureName) throws Exception {
         return getVirtualMachineManager().isFeatureEnabled(featureName);
     }
+
+    private void assumeProtectedVM() {
+        assumeTrue("Skip on non-protected VM", mProtectedVm);
+    }
 }
