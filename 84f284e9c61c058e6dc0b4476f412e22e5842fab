@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32d7ae40_b7cc95a8",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 22
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-22T09:30:44Z",
+      "side": 1,
+      "message": "Can you just use NonNull::new() here?\nThat does the null check for you, there\u0027s no need for the unsafe new_unchecked.",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 70
+      },
+      "revId": "84f284e9c61c058e6dc0b4476f412e22e5842fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f6373b0_5f5d5aa0",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 22
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-22T09:30:44Z",
+      "side": 1,
+      "message": "Unfortunately I think this is even more unsafe than it was.\nIf this struct is moved, the CBB will still be pointing to the old buf, with potentially disastrous consequences. You have a self-referential struct, which is tricky in Rust.\n\nI can see 2 options:\n- Create a struct with just the zeroized buffer, and only tranisently create the CBB in a single scope, very carefully, with a bunch of safety comments.\n- Do what you have now, but add PhantomPinned to FixedSizeCbb, and return Pin\u003cBox\u003cFixedSizeCbb\u003e\u003e.\n\n\nGiven currently you only use a CBB in privat_key(), where the buffer and the CBB only exist for the duration of the function, the former might be simplest; you don\u0027t yet need a safe Rust abstraction over CBB.",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 1
+      },
+      "revId": "84f284e9c61c058e6dc0b4476f412e22e5842fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f35d3545_c5f48055",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 22
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-22T09:30:44Z",
+      "side": 1,
+      "message": "It isn\u0027t now.",
+      "range": {
+        "startLine": 118,
+        "startChar": 77,
+        "endLine": 118,
+        "endChar": 85
+      },
+      "revId": "84f284e9c61c058e6dc0b4476f412e22e5842fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e139f5c7_2b21f0cc",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 22
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-22T09:30:44Z",
+      "side": 1,
+      "message": "This is technically unnecessary now.",
+      "range": {
+        "startLine": 120,
+        "startChar": 17,
+        "endLine": 120,
+        "endChar": 28
+      },
+      "revId": "84f284e9c61c058e6dc0b4476f412e22e5842fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6fb97ae_9ac04ebc",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 22
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-22T09:30:44Z",
+      "side": 1,
+      "message": "It\u0027s infallible, so no need to check the result.",
+      "range": {
+        "startLine": 130,
+        "startChar": 6,
+        "endLine": 130,
+        "endChar": 65
+      },
+      "revId": "84f284e9c61c058e6dc0b4476f412e22e5842fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6befffe4_e478b913",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 22
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-22T09:30:44Z",
+      "side": 1,
+      "message": "Here too",
+      "range": {
+        "startLine": 131,
+        "startChar": 63,
+        "endLine": 131,
+        "endChar": 71
+      },
+      "revId": "84f284e9c61c058e6dc0b4476f412e22e5842fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7748e2d0_9808c882",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 22
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-22T09:30:44Z",
+      "side": 1,
+      "message": "And here",
+      "range": {
+        "startLine": 138,
+        "startChar": 12,
+        "endLine": 138,
+        "endChar": 20
+      },
+      "revId": "84f284e9c61c058e6dc0b4476f412e22e5842fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
