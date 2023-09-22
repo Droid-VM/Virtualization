@@ -558,4 +558,19 @@ public abstract class MicrodroidDeviceTestBase {
     protected interface RunTestsAgainstTestService {
         void runTests(ITestService testService, TestResults testResults) throws Exception;
     }
+<<<<<<< HEAD   (6ef6c1 Run tests on both pVMs and non-pVMS)
+=======
+
+    protected void assumeFeatureEnabled(String featureName) throws Exception {
+        assumeTrue(featureName + " not enabled", isFeatureEnabled(featureName));
+    }
+
+    protected boolean isFeatureEnabled(String featureName) throws Exception {
+        return getVirtualMachineManager().isFeatureEnabled(featureName);
+    }
+
+    protected void assumeProtectedVM() {
+        assumeTrue("Skip on non-protected VM", mProtectedVm);
+    }
+>>>>>>> CHANGE (2174d4 Skip changingDebuggability related tests on Non-pVM)
 }
