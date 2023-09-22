@@ -946,12 +946,18 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     @Test
     @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-7"})
     public void changingNonDebuggableVmDebuggableInvalidatesVmIdentity() throws Exception {
+        // Debuggability changes initrd which is verified by pvmfw.
+        // Therefore, skip this on non-protected VM.
+        assumeProtectedVM();
         changeDebugLevel(DEBUG_LEVEL_NONE, DEBUG_LEVEL_FULL);
     }
 
     @Test
     @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-7"})
     public void changingDebuggableVmNonDebuggableInvalidatesVmIdentity() throws Exception {
+        // Debuggability changes initrd which is verified by pvmfw.
+        // Therefore, skip this on non-protected VM.
+        assumeProtectedVM();
         changeDebugLevel(DEBUG_LEVEL_FULL, DEBUG_LEVEL_NONE);
     }
 
@@ -2253,6 +2259,10 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                 .withMessage("Skip on 5.4 kernel. b/218303240")
                 .that(KERNEL_VERSION)
                 .isNotEqualTo("5.4");
+    }
+
+    private void assumeProtectedVM() {
+        assumeTrue("Skip on non-protected VM", mProtectedVm);
     }
 
     private void assumeFeatureEnabled(String featureName) throws Exception {
