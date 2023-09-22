@@ -24,6 +24,7 @@ use ciborium::{cbor, value::Value};
 use core::result;
 use coset::{iana, AsCborValue, CoseSign1, CoseSign1Builder, HeaderBuilder};
 use diced_open_dice::DiceArtifacts;
+use log::error;
 use service_vm_comm::{EcdsaP256KeyPair, GenerateCertificateRequestParams, RequestProcessingError};
 
 type Result<T> = result::Result<T, RequestProcessingError>;
@@ -54,7 +55,7 @@ const CERTIFICATE_TYPE: &str = "keymint";
 /// generateCertificateRequestV2.cddl
 pub(super) fn generate_certificate_request(
     params: GenerateCertificateRequestParams,
-    _dice_artifacts: &dyn DiceArtifacts,
+    dice_artifacts: &dyn DiceArtifacts,
 ) -> Result<Vec<u8>> {
     // TODO(b/300590857): Derive the HMAC key from the DICE sealing CDI.
     let hmac_key = [];
@@ -80,7 +81,10 @@ pub(super) fn generate_certificate_request(
     // Builds `AuthenticatedRequest<CsrPayload>`.
     // TODO(b/287233786): Add UdsCerts and DiceCertChain here.
     let uds_certs = Value::Map(Vec::new());
-    let dice_cert_chain = Value::Array(Vec::new());
+    let dice_cert_chain: Value = dice_artifacts
+        .bcc()
+        .map(read_to_value)
+        .ok_or(RequestProcessingError::MissingDiceChain)??;
     let auth_req = cbor!([
         Value::Integer(AUTH_REQ_SCHEMA_V1.into()),
         uds_certs,
@@ -112,4 +116,51 @@ fn cbor_to_vec(v: &Value) -> Result<Vec<u8>> {
     let mut data = Vec::new();
     ciborium::into_writer(v, &mut data).map_err(coset::CoseError::from)?;
     Ok(data)
+}
+
+/// Read a CBOR `Value` from a byte slice, failing if any extra data remains
+/// after the `Value` has been read.
+fn read_to_value(data: &[u8]) -> Result<Value> {
+    let mut mr = MeasuringReader::new(data);
+    let value = ciborium::from_reader(&mut mr).map_err(|e| {
+        error!("Failed to deserialize the data into CBOR value: {e}");
+        RequestProcessingError::CborValueError
+    })?;
+    if mr.is_empty() {
+        Ok(value)
+    } else {
+        error!("CBOR input has extra data.");
+        Err(RequestProcessingError::CborValueError)
+    }
+}
+
+/// Marker structure indicating that the EOF was encountered when reading CBOR data.
+#[derive(Debug)]
+struct EndOfFile;
+
+/// Wrapper around a byte slice to allow left-over data to be detected.
+struct MeasuringReader<'a>(&'a [u8]);
+
+impl<'a> MeasuringReader<'a> {
+    fn new(buf: &'a [u8]) -> MeasuringReader<'a> {
+        MeasuringReader(buf)
+    }
+
+    fn is_empty(&self) -> bool {
+        self.0.is_empty()
+    }
+}
+
+impl<'a> ciborium_io::Read for &mut MeasuringReader<'a> {
+    type Error = EndOfFile;
+
+    fn read_exact(&mut self, data: &mut [u8]) -> result::Result<(), Self::Error> {
+        if data.len() > self.0.len() {
+            return Err(EndOfFile);
+        }
+        let (prefix, suffix) = self.0.split_at(data.len());
+        data.copy_from_slice(prefix);
+        self.0 = suffix;
+        Ok(())
+    }
 }
