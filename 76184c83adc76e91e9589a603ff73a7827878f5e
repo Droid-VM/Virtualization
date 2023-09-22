@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "263f7d58_7e33d8f1",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-22T16:56:33Z",
+      "side": 1,
+      "message": "Done. It looks like we always add a fixed salt like this in microdroid\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/microdroid_manager/src/vm_secret.rs;l\u003d88;drc\u003d3d3a70a04aae0e4d2362514d9843f997c8143cdd",
+      "parentUuid": "c73abf32_53c6736b",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 2
+      },
+      "revId": "76184c83adc76e91e9589a603ff73a7827878f5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d111f57_9b7eb5cb",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0408814e_1db4274e",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-22T16:56:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d111f57_9b7eb5cb",
+      "range": {
+        "startLine": 101,
+        "startChar": 3,
+        "endLine": 101,
+        "endChar": 19
+      },
+      "revId": "76184c83adc76e91e9589a603ff73a7827878f5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82d62187_b1a75089",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-09-22T16:14:11Z",
       "side": 1,
       "message": "That doesn\u0027t look right.\n\nI think the cdi_seal should be the ikm; that\u0027s our source of entropy.\n\nAnd the info parameter, which you\u0027re currently using cdi_seal for, should just be some string to identify this use - e.g. \"rialto private key hmac key\". See https://datatracker.ietf.org/doc/html/rfc5869#section-3.2.",
+      "range": {
+        "startLine": 103,
+        "startChar": 3,
+        "endLine": 103,
+        "endChar": 18
+      },
+      "revId": "76184c83adc76e91e9589a603ff73a7827878f5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ee6bac4_88fd2c36",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-22T16:56:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82d62187_b1a75089",
       "range": {
         "startLine": 103,
         "startChar": 3,
