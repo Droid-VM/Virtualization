@@ -16,6 +16,29 @@
       "message": "Hi Alan,\n\nI limited the usage of `cbb` just in the function scope. Could you please take another look?",
       "revId": "33d94df11bb4180cb301fabe155f3d2009e1be62",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b92eb659_79d575d2",
+        "filename": "rialto/src/requests/ec_key.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-22T10:37:27Z",
+      "side": 1,
+      "message": "An important part of the safety here is that buf is never moved, and remains valid for the lifetime of cbb. We should say that.",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 75
+      },
+      "revId": "33d94df11bb4180cb301fabe155f3d2009e1be62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
