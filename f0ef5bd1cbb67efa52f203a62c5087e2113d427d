@@ -16,6 +16,52 @@
       "message": "Hi, PTAL.",
       "revId": "f0ef5bd1cbb67efa52f203a62c5087e2113d427d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d61bddcd_be046b11",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-22T16:21:56Z",
+      "side": 1,
+      "message": "Needs updating",
+      "range": {
+        "startLine": 82,
+        "startChar": 43,
+        "endLine": 82,
+        "endChar": 56
+      },
+      "revId": "f0ef5bd1cbb67efa52f203a62c5087e2113d427d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b091c1e_d26a2da0",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-22T16:21:56Z",
+      "side": 1,
+      "message": "You don\u0027t need this.\nAnd it\u0027s gone from Coset now: https://github.com/google/coset/pull/73/commits/35cc9b5a536e458cb0e3af77dcfa12dfca865c6f\n\nWe have multiple copies of this logic - maybe we should extract https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/pvmfw/src/bcc.rs;drc\u003dc5e5fa3dc179276981acd26ea27e1b599bcb69ea;l\u003d221 to some library.",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 1
+      },
+      "revId": "f0ef5bd1cbb67efa52f203a62c5087e2113d427d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
