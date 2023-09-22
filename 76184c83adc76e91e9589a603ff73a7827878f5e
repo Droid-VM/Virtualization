@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c73abf32_53c6736b",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-22T16:14:11Z",
+      "side": 1,
+      "message": "Needs a comment to say where this came from.\n\nAlso, I\u0027m not entirely sure this salt is needed; it has 0 entropy since it\u0027s fixed for all our uses. OTOH it doesn\u0027t hurt. (In our existing uses of hkdf sometimes we use it \u0026 sometimes we don\u0027t.)",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 2
+      },
+      "revId": "76184c83adc76e91e9589a603ff73a7827878f5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d111f57_9b7eb5cb",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-22T16:14:11Z",
+      "side": 1,
+      "message": "s/compute/derive/",
+      "range": {
+        "startLine": 101,
+        "startChar": 3,
+        "endLine": 101,
+        "endChar": 19
+      },
+      "revId": "76184c83adc76e91e9589a603ff73a7827878f5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82d62187_b1a75089",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-22T16:14:11Z",
+      "side": 1,
+      "message": "That doesn\u0027t look right.\n\nI think the cdi_seal should be the ikm; that\u0027s our source of entropy.\n\nAnd the info parameter, which you\u0027re currently using cdi_seal for, should just be some string to identify this use - e.g. \"rialto private key hmac key\". See https://datatracker.ietf.org/doc/html/rfc5869#section-3.2.",
+      "range": {
+        "startLine": 103,
+        "startChar": 3,
+        "endLine": 103,
+        "endChar": 18
+      },
+      "revId": "76184c83adc76e91e9589a603ff73a7827878f5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
