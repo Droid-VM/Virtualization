@@ -22,6 +22,30 @@
       },
       "revId": "6d2acf6dd7cca11f2b7f56fdc2aab16984f5e31b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a1ecf29_d97b3119",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2267,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-25T11:42:42Z",
+      "side": 1,
+      "message": "Moved. There is another assumeProtectedVM() that Microdroid Host tests use. Unfortunately, these 2 classes don\u0027t seem to be sharing code :/",
+      "parentUuid": "33d87f5c_3d31fd7b",
+      "range": {
+        "startLine": 2264,
+        "startChar": 0,
+        "endLine": 2267,
+        "endChar": 0
+      },
+      "revId": "6d2acf6dd7cca11f2b7f56fdc2aab16984f5e31b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
