@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "72d0cb1f_7bdacb45",
+        "filename": "rialto/src/requests/cbb.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-09-25T17:20:28Z",
+      "side": 1,
+      "message": "an",
+      "range": {
+        "startLine": 20,
+        "startChar": 32,
+        "endLine": 20,
+        "endChar": 33
+      },
+      "revId": "3fde542d8a326d2f12329d93aa9ac21e2d5ab712",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "914fee83_a61bb70d",
         "filename": "rialto/src/requests/cbb.rs",
         "patchSetId": 1
@@ -44,6 +67,23 @@
         "endLine": 30,
         "endChar": 8
       },
+      "revId": "3fde542d8a326d2f12329d93aa9ac21e2d5ab712",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d085545_34bbcc85",
+        "filename": "rialto/src/requests/cbb.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-09-25T17:20:28Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this take `\u0026\u0027a mut [u8]`, so the returned lifetime is tied to the buffer\u0027s lifetime?",
       "revId": "3fde542d8a326d2f12329d93aa9ac21e2d5ab712",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
