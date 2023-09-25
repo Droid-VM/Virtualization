@@ -182,6 +182,30 @@
       },
       "revId": "f0ef5bd1cbb67efa52f203a62c5087e2113d427d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfc727ca_2f61c74f",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-25T12:29:57Z",
+      "side": 1,
+      "message": "Fair enough. It can be handy if we just implement [CborSerializable](https://docs.rs/coset/0.3.4/coset/trait.CborSerializable.html) for `Value`. Can we do it directly in coset? I know that pvmfw doesn\u0027t need coset, but all the three other places (rialto, microdroid and hwtrust) require it.",
+      "parentUuid": "e5fcc39b_91719e50",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 1
+      },
+      "revId": "f0ef5bd1cbb67efa52f203a62c5087e2113d427d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
