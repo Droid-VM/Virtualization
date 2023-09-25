@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d10de31_a431fd8f",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-25T16:41:09Z",
+      "side": 1,
+      "message": "Add a safety comment explaining why name can\u0027t be null when dereferenced below.",
+      "range": {
+        "startLine": 261,
+        "startChar": 10,
+        "endLine": 261,
+        "endChar": 23
+      },
+      "revId": "5ee36c90dc49173530d3f0f7df9f64b63b4beb11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecdfddce_3bbb7e5b",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-25T16:41:09Z",
+      "side": 1,
+      "message": "let len \u003d fdt_err(len)?;",
+      "range": {
+        "startLine": 263,
+        "startChar": 8,
+        "endLine": 266,
+        "endChar": 10
+      },
+      "revId": "5ee36c90dc49173530d3f0f7df9f64b63b4beb11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b0e5768_e958a9f2",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-25T16:41:09Z",
+      "side": 1,
+      "message": "You could merge this into the previous line",
+      "range": {
+        "startLine": 267,
+        "startChar": 8,
+        "endLine": 267,
+        "endChar": 72
+      },
+      "revId": "5ee36c90dc49173530d3f0f7df9f64b63b4beb11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04989127_b3107852",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-25T16:41:09Z",
+      "side": 1,
+      "message": "why?",
+      "range": {
+        "startLine": 272,
+        "startChar": 47,
+        "endLine": 272,
+        "endChar": 48
+      },
+      "revId": "5ee36c90dc49173530d3f0f7df9f64b63b4beb11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
