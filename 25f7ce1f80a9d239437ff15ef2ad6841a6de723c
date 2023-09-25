@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb8f8344_89618bae",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-25T10:07:05Z",
+      "side": 1,
+      "message": "This type is only used in one place, and I\u0027m not convinced it aids readability - since we still need to call `Zeroizing::new([0u8; HMAC_KEY_LENGTH])`.\nIf it was a newtype it might, but I\u0027m not sure that\u0027s necessary.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 48
+      },
+      "revId": "25f7ce1f80a9d239437ff15ef2ad6841a6de723c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
