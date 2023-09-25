@@ -222,31 +222,39 @@ impl<'a> Config<'a> {
     }
 
     /// Get slice containing the platform BCC.
-    pub fn get_entries(&mut self) -> Result<(&mut [u8], Option<&mut [u8]>)> {
+    pub fn get_entries(&mut self) -> Result<(&mut [u8], Option<&mut [u8]>, Option<&[u8]>)> {
         // This assumes that the blobs are in-order w.r.t. the entries.
         let bcc_range = self.get_entry_range(Entry::Bcc).ok_or(Error::MissingEntry(Entry::Bcc))?;
         let dp_range = self.get_entry_range(Entry::DebugPolicy);
         let vm_dtbo_range = self.get_entry_range(Entry::VmDtbo);
-        // TODO(b/291191157): Provision device assignment with this.
-        if let Some(vm_dtbo_range) = vm_dtbo_range {
-            info!("Found VM DTBO at {:?}", vm_dtbo_range);
-        }
         let bcc_start = bcc_range.start;
         let bcc_end = bcc_range.len();
         let (_, rest) = self.body.split_at_mut(bcc_start);
         let (bcc, rest) = rest.split_at_mut(bcc_end);
+        let mut rest_offset = bcc_range.end;
 
-        let dp = if let Some(dp_range) = dp_range {
-            let dp_start = dp_range.start.checked_sub(bcc_range.end).unwrap();
+        let (rest, dp) = if let Some(dp_range) = dp_range {
+            let dp_start = dp_range.start.checked_sub(rest_offset).unwrap();
             let dp_end = dp_range.len();
             let (_, rest) = rest.split_at_mut(dp_start);
-            let (dp, _) = rest.split_at_mut(dp_end);
-            Some(dp)
+            let (dp, rest) = rest.split_at_mut(dp_end);
+            rest_offset = dp_range.end;
+            (rest, Some(dp))
+        } else {
+            (rest, None)
+        };
+
+        let vm_dtbo = if let Some(vm_dtbo_range) = vm_dtbo_range {
+            let vm_dtbo_start = vm_dtbo_range.start.checked_sub(rest_offset).unwrap();
+            let vm_dtbo_end = vm_dtbo_range.len();
+            let (_, rest) = rest.split_at(vm_dtbo_start);
+            let (vm_dtbo, _) = rest.split_at(vm_dtbo_end);
+            Some(vm_dtbo)
         } else {
             None
         };
 
-        Ok((bcc, dp))
+        Ok((bcc, dp, vm_dtbo))
     }
 
     pub fn get_entry_range(&self, entry: Entry) -> Option<Range<usize>> {

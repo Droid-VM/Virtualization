@@ -23,6 +23,7 @@ mod bcc;
 mod bootargs;
 mod config;
 mod crypto;
+mod devices;
 mod dice;
 mod entry;
 mod exceptions;

@@ -15,6 +15,7 @@
 //! High-level FDT functions.
 
 use crate::bootargs::BootArgsIterator;
+use crate::devices::validate_devices;
 use crate::helpers::GUEST_PAGE_SIZE;
 use crate::Box;
 use crate::RebootReason;
@@ -600,9 +601,14 @@ impl DeviceTreeInfo {
     }
 }
 
-pub fn sanitize_device_tree(fdt: &mut Fdt) -> Result<DeviceTreeInfo, RebootReason> {
+pub fn sanitize_device_tree(
+    fdt: &mut Fdt,
+    vm_dtbo: Option<&[u8]>,
+) -> Result<DeviceTreeInfo, RebootReason> {
     let info = parse_device_tree(fdt)?;
     debug!("Device tree info: {:?}", info);
+
+    validate_devices(fdt, vm_dtbo).map_err(|_| RebootReason::InvalidFdt)?;
 
     fdt.copy_from_slice(pvmfw_fdt_template::RAW).map_err(|e| {
         error!("Failed to instantiate FDT from the template DT: {e}");

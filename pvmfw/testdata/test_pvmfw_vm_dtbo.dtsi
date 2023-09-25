@@ -1,0 +1,17 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+	fragment@eh {
+		target-path = "/";
+		__overlay__ {
+			eh: eh@1FF00000 {
+				compatible = "android,eh";
+				android,eh,ignore-gctrl-reset;
+				android,pvmfw,phy-reg = <0x0 0x12F00000 0x1000>;
+				android,pvmfw,phy-iommu = <0x0 0x12E40000>;
+				android,pvmfw,phy-sid = <3>;
+			};
+		};
+	};
+};

@@ -111,7 +111,7 @@ pub fn get_or_generate_instance_salt(
     let entry = locate_entry(&mut instance_img)?;
     trace!("Found pvmfw instance.img entry: {entry:?}");
 
-    let key = hkdf_sh512::<32>(secret, /*salt=*/ &[], b"vm-instance");
+    let key = hkdf_sh512::<32>(secret, /* salt= */ &[], b"vm-instance");
     let mut blk = [0; BLK_SIZE];
     match entry {
         PvmfwEntry::Existing { header_index, payload_size } => {
