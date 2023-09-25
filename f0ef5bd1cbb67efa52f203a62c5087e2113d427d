@@ -134,6 +134,30 @@
       },
       "revId": "f0ef5bd1cbb67efa52f203a62c5087e2113d427d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cf82019_7e693df0",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-25T08:22:49Z",
+      "side": 1,
+      "message": "Think we can start extracting this logic when we have [three](https://en.wikipedia.org/wiki/Rule_of_three_(computer_programming)) usages? The function itself is pretty small. I\u0027m afraid by moving it to a new library we are going to need additional code for new error and converting the error for each caller.",
+      "parentUuid": "e5ea3d7d_50ba9e41",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 1
+      },
+      "revId": "f0ef5bd1cbb67efa52f203a62c5087e2113d427d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
