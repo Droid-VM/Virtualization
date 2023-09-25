@@ -16,6 +16,46 @@
       "message": "Hi Seth, Alan, PTAL.",
       "revId": "74c8d354753e2e5ad72beaad8c66b309b7c3e794",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5c8c32b_1941fa5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-09-25T18:53:09Z",
+      "side": 1,
+      "message": "LGTM, just some nitpicking about the error space.",
+      "revId": "74c8d354753e2e5ad72beaad8c66b309b7c3e794",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac45bb12_9ed36c4a",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-09-25T18:53:09Z",
+      "side": 1,
+      "message": "I\u0027m not sure `DiceError` makes sense as a type of error. Just looking at the list of errors, it\u0027s not clear to me what \"an error with DICE\" even means.\n\nBoth cases here where `DiceError` is returned strike me as internal errors (e.g. \"should never happen\").\n\nHow about:\n  * `CryptoError` (since these issues are really due to some crypto stack barfing)\n  * `InternalError` (since these should really never happen)",
+      "range": {
+        "startLine": 98,
+        "startChar": 8,
+        "endLine": 98,
+        "endChar": 41
+      },
+      "revId": "74c8d354753e2e5ad72beaad8c66b309b7c3e794",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
