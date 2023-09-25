@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "132fde46_b422b519",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-25T12:42:44Z",
+      "side": 1,
+      "message": "Based on the formula [1], without salt, the output of the first step of HKDF will be fixed. Since the sealing CDI will be used in other scenarios, I think it\u0027s better to secure all the steps.\n\n[1] https://datatracker.ietf.org/doc/html/rfc5869#section-2.3",
+      "parentUuid": "52fa0359_52079fce",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 2
+      },
+      "revId": "76184c83adc76e91e9589a603ff73a7827878f5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d111f57_9b7eb5cb",
