@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "001e3430_25afde39",
+        "filename": "rialto/src/requests/cbb.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-09-26T09:51:44Z",
+      "side": 1,
+      "message": "No, I just tested it in playground and it doesn\u0027t make the lifetimes the same in this case. The lifetime elision rules don\u0027t apply here because the output lifetime is not elided: it\u0027s part of the impl block, not the function. So as it stands the caller can use this to create a `CbbFixed` with any arbitrary lifetime they choose, perhaps `\u0027static`, no matter what the lifetime of the buffer reference is.",
+      "parentUuid": "b0e770b0_806f96a2",
+      "revId": "3fde542d8a326d2f12329d93aa9ac21e2d5ab712",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f0f494cf_53df345e",
         "filename": "rialto/src/requests/cbb.rs",
         "patchSetId": 1
