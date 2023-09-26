@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82824897_70c77989",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-26T15:58:47Z",
+      "side": 1,
+      "message": "nit: `subnode`?",
+      "range": {
+        "startLine": 626,
+        "startChar": 4,
+        "endLine": 626,
+        "endChar": 8
+      },
+      "revId": "f3933a2812ff314396bfc456a1573e8e3a05ca0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "526bc7aa_7ead0b4b",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-26T15:58:47Z",
+      "side": 1,
+      "message": "Please encapsulate the FFI in `FdtNode::first_subnode`, allowing you to streamline this ctor:\n```\nlet subnode \u003d node.first_subnode()?;\n\nOk(Self { subnode })\n```",
+      "range": {
+        "startLine": 632,
+        "startChar": 46,
+        "endLine": 632,
+        "endChar": 63
+      },
+      "revId": "f3933a2812ff314396bfc456a1573e8e3a05ca0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dd51f70_c617a3bc",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-26T15:58:47Z",
+      "side": 1,
+      "message": "Same, encapsulate and streamline:\n```\nlet subnode \u003d self.subnode?;\n\nself.subnode \u003d subnode.next_subnode().ok().flatten();\n\nself.subnode\n```",
+      "range": {
+        "startLine": 649,
+        "startChar": 47,
+        "endLine": 649,
+        "endChar": 63
+      },
+      "revId": "f3933a2812ff314396bfc456a1573e8e3a05ca0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09a02caa_733a6c7c",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-26T15:58:47Z",
+      "side": 1,
+      "message": "Would it be possible to store the expected values as `str` and\n```\nfor (node, name) \u003d subnodes.zip(expected) {\n    assert_eq!(node.name().unwrap().to_str().unwrap(), name);\n}\n```\nso that the `assert` framework understands that we\u0027re comparing strings and, if the assertion fails, 1. reports the exact strings that didn\u0027t match (not just that some `bool` was `false`) and 2. (hopefully) prints their actual values as strings, not `[u8]`?",
+      "range": {
+        "startLine": 93,
+        "startChar": 8,
+        "endLine": 94,
+        "endChar": 22
+      },
+      "revId": "f3933a2812ff314396bfc456a1573e8e3a05ca0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
