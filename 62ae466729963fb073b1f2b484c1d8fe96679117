@@ -114,6 +114,53 @@
       },
       "revId": "62ae466729963fb073b1f2b484c1d8fe96679117",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "395bec19_20e76dd3",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-09-26T02:15:49Z",
+      "side": 1,
+      "message": "Question: Can we use anyhow directly? It\u0027s currently not used, but I wonder whether it\u0027s intended or not. If we can use anyhow, codes can be simplified.",
+      "parentUuid": "3a82d4e5_5d212911",
+      "range": {
+        "startLine": 83,
+        "startChar": 8,
+        "endLine": 83,
+        "endChar": 77
+      },
+      "revId": "62ae466729963fb073b1f2b484c1d8fe96679117",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6330b710_c9ba6796",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-09-26T02:15:49Z",
+      "side": 1,
+      "message": "note: formatter forcefully adds this.",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 72
+      },
+      "revId": "62ae466729963fb073b1f2b484c1d8fe96679117",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
