@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bca68163_81554833",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-09-26T02:13:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8daeca41_102bd285",
+      "revId": "01c41939737af6320f270ea98dfa3936ae6b37ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4315d37_8d3e9592",
@@ -41,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5141d50f_26b8e20c",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-09-26T02:13:02Z",
+      "side": 1,
+      "message": "Used at L917 to initialize vector for `OwnedFdt`.\n\nI tried use `alloc::vec::{self, Vec}` to merge with below, then it gives following compilation error. (regenerated error details from rust playground)\n\n```\nerror: cannot find macro `vec` in this scope\n --\u003e src/main.rs:8:22\n  |\n8 |     let v: Vec\u003cu8\u003e \u003d vec![0, 1, 2];\n  |                      ^^^\n  |\nnote: `vec` is imported here, but it is a module, not a macro\n --\u003e src/main.rs:5:18\n  |\n5 | use alloc::vec::{self, Vec};\n  |                  ^^^^\nhelp: consider importing one of these items\n```",
+      "parentUuid": "e4315d37_8d3e9592",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 15
+      },
+      "revId": "01c41939737af6320f270ea98dfa3936ae6b37ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3dc8832_e586336c",
@@ -54,6 +96,30 @@
       "writtenOn": "2023-09-25T16:48:16Z",
       "side": 1,
       "message": "Is this identical to the original code?",
+      "range": {
+        "startLine": 898,
+        "startChar": 0,
+        "endLine": 938,
+        "endChar": 1
+      },
+      "revId": "01c41939737af6320f270ea98dfa3936ae6b37ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4a69207_4ce20a4d",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-09-26T02:13:02Z",
+      "side": 1,
+      "message": "Logically the same, but with two changes:\n\n- Change 1) Input param is changed from file path (for reading buffer) to buffer.\n- Change 2) Errors are returned directly, becuase `FdtError` can be returned directly in `libfdt`.",
+      "parentUuid": "c3dc8832_e586336c",
       "range": {
         "startLine": 898,
         "startChar": 0,
