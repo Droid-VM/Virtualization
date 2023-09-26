@@ -17,6 +17,10 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 
 mod cbb;
+mod digest;
+mod hmac;
 
 pub use bssl_error::{ApiName, Error, Result};
 pub use cbb::CbbFixed;
+pub use digest::Md;
+pub use hmac::hmac_sha256;
