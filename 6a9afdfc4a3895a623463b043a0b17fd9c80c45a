@@ -22,6 +22,121 @@
       },
       "revId": "6a9afdfc4a3895a623463b043a0b17fd9c80c45a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "765fa82f_20c51ef1",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-26T15:58:04Z",
+      "side": 1,
+      "message": "Honestly, I think this could `unwrap` as it has nothing to do with libfdt, it\u0027s the Rust compiler/target that can\u0027t fit a `c_int` in its `usize`.",
+      "range": {
+        "startLine": 262,
+        "startChar": 43,
+        "endLine": 262,
+        "endChar": 76
+      },
+      "revId": "6a9afdfc4a3895a623463b043a0b17fd9c80c45a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "613d1474_2733244e",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-26T15:58:04Z",
+      "side": 1,
+      "message": "You could make use of `ptr::offset_from` for this.",
+      "range": {
+        "startLine": 264,
+        "startChar": 21,
+        "endLine": 264,
+        "endChar": 93
+      },
+      "revId": "6a9afdfc4a3895a623463b043a0b17fd9c80c45a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dba23db0_cb2a8418",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-26T15:58:04Z",
+      "side": 1,
+      "message": "As `fdt_get_name` returns a `const char*`, you could simply pass its result to `CStr::from_ptr`.\n\nIIUC, the reason for the extra code is because you\u0027d like to bound-check this with `buffer.get()`, which is a great idea. Could you extract that \"subslicing\" operation into its own `Fdt` method, for re-use (e.g. `.get_from_ptr(const u8*, usize)`?",
+      "range": {
+        "startLine": 262,
+        "startChar": 0,
+        "endLine": 267,
+        "endChar": 71
+      },
+      "revId": "6a9afdfc4a3895a623463b043a0b17fd9c80c45a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0536985_9e6a2110",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-26T15:58:04Z",
+      "side": 1,
+      "message": "Thanks for adding unit tests!\n\nCould you please also cover other interesting cases, such as `fdt.root().name()` or a path with multiple components (`fdt.node(\"/a/b/c\").name() \u003d\u003d \"c\"`)?",
+      "range": {
+        "startLine": 80,
+        "startChar": 71,
+        "endLine": 80,
+        "endChar": 72
+      },
+      "revId": "6a9afdfc4a3895a623463b043a0b17fd9c80c45a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41b92fbb_8da70f31",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-26T15:58:04Z",
+      "side": 1,
+      "message": "Wouldn\u0027t this result in more readable error messages:\n```\nassert_eq!(chosen.name().unwrap().to_str().unwrap(), \"chosen\");\n```\n?",
+      "range": {
+        "startLine": 80,
+        "startChar": 51,
+        "endLine": 80,
+        "endChar": 68
+      },
+      "revId": "6a9afdfc4a3895a623463b043a0b17fd9c80c45a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
