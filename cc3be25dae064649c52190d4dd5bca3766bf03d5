@@ -70,6 +70,30 @@
       },
       "revId": "cc3be25dae064649c52190d4dd5bca3766bf03d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "597fb015_fbb1c9e7",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2023-09-26T14:24:38Z",
+      "side": 1,
+      "message": "This HMAC key derivation is outside of the Open Profile for DICE specification. The HMAC used in the IRemotelyProvisionedComponent HAL is so that the HAL implementation can check that it\u0027s being passed public keys that it generated in generateEcdsaP256KeyPair() (without being given the private key blob).\n\nSeth might know the history better so might be able to give better guidance, but it sounds like giving the HMAC key the same stability properties as the key that will be used to wrap the private keys would be good consistency. The HMAC key could be weaker as it would only allow a CSR to be generated for keys that are no longer have their private keys accessible.",
+      "parentUuid": "677bd880_6bf068fb",
+      "range": {
+        "startLine": 39,
+        "startChar": 29,
+        "endLine": 39,
+        "endChar": 47
+      },
+      "revId": "cc3be25dae064649c52190d4dd5bca3766bf03d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
