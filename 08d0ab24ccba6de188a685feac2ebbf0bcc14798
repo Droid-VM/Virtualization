@@ -110,6 +110,30 @@
       },
       "revId": "08d0ab24ccba6de188a685feac2ebbf0bcc14798",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37aa3f7e_682980fe",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-26T16:20:31Z",
+      "side": 1,
+      "message": "If a function is not reachable, the linker is very likely to get rid of it, yes.\n\nThe moment we have functions like\n```\nfn choose(arg: bool) {\n    if arg { do_something() } else { do_something_else() }\n}\n```\nI wouldn\u0027t rely on the linker to figure out that we never actually need `do_something_else` if, for example, we only call `choose(true)`.\n\nIf all of the code is in the same crate, I guess that it\u0027s more likely for `rustc` to see this an make the optimization (effectively in-lining `choose` at the call-site and optimizing out the unreachable branch of the `if`) but still, I wouldn\u0027t rely on it.\n\n\u003e How to check this?\n\nA good start would be to inspect the symbols (using `nm` or similar) and see that you find `EVP_sha512` but not `EVP_sha256`. You could also compare the size of the pvmfw binary (using `bloaty` on the ELF or looking at the `pvmfw.bin` size) before and after your patch.",
+      "parentUuid": "59d4e306_f24d12e1",
+      "range": {
+        "startLine": 125,
+        "startChar": 64,
+        "endLine": 125,
+        "endChar": 90
+      },
+      "revId": "08d0ab24ccba6de188a685feac2ebbf0bcc14798",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
