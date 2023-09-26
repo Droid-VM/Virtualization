@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feb9f85d_7afacdbc",
+        "filename": "libs/bssl/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-26T12:35:23Z",
+      "side": 1,
+      "message": "Or should we pub use EcKey and ZVec instead?\nPerhaps the caller shouldn\u0027t care about our internal module structure.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 15
+      },
+      "revId": "2d8ec4fa67a28d72e18760a2f18d487f071d0bcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
