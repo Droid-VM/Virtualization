@@ -23,7 +23,6 @@ use core::result;
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum HashAlgorithm {
     Sha256,
-    #[allow(dead_code)]
     Sha512,
 }
 

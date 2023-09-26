@@ -27,6 +27,8 @@ pub type Result<T> = result::Result<T, Error>;
 pub enum Error {
     /// Failed to invoke a BoringSSL API.
     CallFailed(ApiName),
+    /// Received a return value other than 0 or 1 from a BoringSSL API.
+    UnexpectedReturnValue(ApiName, i32),
 }
 
 impl fmt::Display for Error {
@@ -34,6 +36,13 @@ impl fmt::Display for Error {
         match self {
             Self::CallFailed(api_name) => {
                 write!(f, "Failed to invoke the BoringSSL API: {api_name:?}")
+            }
+            Self::UnexpectedReturnValue(api_name, ret) => {
+                write!(
+                    f,
+                    "Received a return value ({}) other than 0 or 1 from the BoringSSL API: {:?}",
+                    ret, api_name
+                )
             }
         }
     }
@@ -58,4 +67,5 @@ pub enum ApiName {
     EVP_sha256,
     EVP_sha512,
     HMAC,
+    HKDF,
 }
