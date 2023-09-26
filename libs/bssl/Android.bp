@@ -26,5 +26,7 @@ rust_library_rlib {
     rustlibs: [
         "libbssl_ffi_nostd",
         "libbssl_error_nostd",
+        "libzeroize_nostd",
+        "libcoset_nostd",
     ],
 }

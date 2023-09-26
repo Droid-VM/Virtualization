@@ -16,7 +16,10 @@
 
 #![cfg_attr(not(feature = "std"), no_std)]
 
+extern crate alloc;
+
 mod cbb;
+pub mod ec_key;
 
 pub use bssl_error::{ApiName, Error, Result};
 pub use cbb::CbbFixed;
