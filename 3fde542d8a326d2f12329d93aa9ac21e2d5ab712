@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b0e770b0_806f96a2",
+        "filename": "rialto/src/requests/cbb.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-26T09:28:42Z",
+      "side": 1,
+      "message": "\u003e Isn\u0027t that what\u0027s happening anyway, just hidden by lifetime elision?\n\nYeah, that\u0027s my understanding.\n\nThat\u0027s possibly clearer in the later patch set where I switched from `impl\u003c\u0027a\u003e CbbFixed\u003c\u0027a\u003e` to `impl CbbFixed\u003c\u0027_\u003e`. (Because the compiler suggested it in an error message.) I wasn\u0027t entirely familiar with that syntax, but it seems to be an explicit request for lifetime elision / automatic lifetimes.",
+      "parentUuid": "5b404bf1_61af40c1",
+      "revId": "3fde542d8a326d2f12329d93aa9ac21e2d5ab712",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f0f494cf_53df345e",
         "filename": "rialto/src/requests/cbb.rs",
         "patchSetId": 1
