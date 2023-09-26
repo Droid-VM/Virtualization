@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a7e2435_a48d33b6",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-26T16:03:59Z",
+      "side": 1,
+      "message": "TODO: revisit this once you start using `cstr!`",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 44
+      },
+      "revId": "5b081cabf23717fd891b23ffee2533801422ca98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ed0d7b0_16dd862b",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-26T16:03:59Z",
+      "side": 1,
+      "message": "So this is applying the VM DTBO to an empty DT: can you remind me why we needed to pass an overlay to pvmfw (from ABL) instead of a regular DT?",
+      "range": {
+        "startLine": 82,
+        "startChar": 27,
+        "endLine": 82,
+        "endChar": 52
+      },
+      "revId": "5b081cabf23717fd891b23ffee2533801422ca98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3863698e_87ad9559",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-26T16:03:59Z",
+      "side": 1,
+      "message": "(Personal taste so happy to agree to disagree and you may just resolve this comment, if you wish)\n\nI think that a `for` loop would be clearer and flatter, here.",
+      "range": {
+        "startLine": 90,
+        "startChar": 9,
+        "endLine": 90,
+        "endChar": 21
+      },
+      "revId": "5b081cabf23717fd891b23ffee2533801422ca98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fd88249_5178b0f9",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-26T16:03:59Z",
+      "side": 1,
+      "message": "This absolutely doesn\u0027t work as the guest kernel binds against nodes (mostly) based on their `\u003ccompatible\u003e` property and actually (mostly) ignores their names so a malicious host could abuse this implementation by giving its malicious nodes names from `CROSVM_NODES`, effectively bypassing their validation you\u0027re adding. Note how `patch_device_tree` ignored nodes path. For example, would it make sense to validate (and mark for being carried over) any node that has the `\u003candroid,pvmfw,...\u003e` properties and their dependencies?",
+      "range": {
+        "startLine": 92,
+        "startChar": 15,
+        "endLine": 92,
+        "endChar": 44
+      },
+      "revId": "5b081cabf23717fd891b23ffee2533801422ca98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e76d48f_ab836131",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-26T16:03:59Z",
+      "side": 1,
+      "message": "Could you please detail (for example in the commit message) what the high-level verification algorithm is and why it guarantees the security of the guest?",
+      "range": {
+        "startLine": 96,
+        "startChar": 12,
+        "endLine": 104,
+        "endChar": 13
+      },
+      "revId": "5b081cabf23717fd891b23ffee2533801422ca98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed777348_3a11fee9",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-26T16:03:59Z",
+      "side": 1,
+      "message": "I thought you were going to do the validation/filtering at this step. All the effort in `validate_devices` is being wasted here as the nodes aren\u0027t being carried over?",
+      "range": {
+        "startLine": 618,
+        "startChar": 4,
+        "endLine": 618,
+        "endChar": 35
+      },
+      "revId": "5b081cabf23717fd891b23ffee2533801422ca98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
