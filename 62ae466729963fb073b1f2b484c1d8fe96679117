@@ -164,6 +164,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c82f4cf_b71c61e9",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-26T04:01:01Z",
+      "side": 1,
+      "message": "I still think ErrorLogger is a too much of abstraction. This can be done without defining a new trait.\n\n```\n.or_else(|e| { error!(\"context message: {e}\"); Err(e) })?;\n```",
+      "parentUuid": "b8787a4c_f5707ca0",
+      "range": {
+        "startLine": 83,
+        "startChar": 8,
+        "endLine": 83,
+        "endChar": 77
+      },
+      "revId": "62ae466729963fb073b1f2b484c1d8fe96679117",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6330b710_c9ba6796",
