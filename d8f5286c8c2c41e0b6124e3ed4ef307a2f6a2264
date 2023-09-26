@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4b4a603_55e1a98e",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-26T15:59:37Z",
+      "side": 1,
+      "message": "I find the logic here extremely convoluted: if there\u0027s no DTBO (`overlay_buf \u003d\u003d None`), we create an empty DT (`from_overlay_onto_new_fdt(None)`) to read the properties (`get_fdt_prop_bool`) from - which obviously won\u0027t be found as it\u0027s empty - or fall back to a default value (`_ \u003d\u003e return Ok(false)` in `get_fdt_prop_bool`). And all this to obtain the same resulting constructed `DebugConfig` than if `from_custom_debug_overlay_policy` had returned `Err`, making `DebugConfig::new` use its default value (line 136) ...\n\nWhy not simply\n```suggestion\n        let overlay_buf \u003d fs::read(path)\n            .map_err(Error::msg)\n            .with_context(|| format!(\"Failed to read {path:?}\"))?;\n```\n?",
+      "range": {
+        "startLine": 161,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 10
+      },
+      "revId": "d8f5286c8c2c41e0b6124e3ed4ef307a2f6a2264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a79916d_90980d56",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-26T15:59:37Z",
+      "side": 1,
+      "message": "I don\u0027t believe this requires any `libs/libfdt` changes as the underlying logic is straightforward:\n\n1. allocate and populate empty DT\n1. apply the overlay\n1. read the properties from their canonical `/avf/...` paths from the result\n\nnote that there\u0027s no need to backup the DTBO, like `from_overlay_onto_new_fdt` currently does, as `overlay_buf` will go out of scope and be released when we return.\n\nThe code would look something like\n```\nlet mut overlay_buf \u003d fs::read(path).map_err(...).with_context(...)?;\nlet overlay \u003d Fdt::from_mut_slice(\u0026mut overlay_buf)...?;\n\nlet mut fdt_buf \u003d vec![0_u8; fdt_estimated_size];\nlet fdt \u003d Fdt::create_empty_tree(\u0026mut fdt_buf)...?;\n\nlet fdt \u003d fdt.apply_overlay(overlay)...?; // LMK if borrow checker complains.\n\nOk(Self {\n    debug_level,\n    debug_policy_log: get_fdt_prop_bool(fdt, \u0026DP_LOG_PATH)?,\n    debug_policy_ramdump: get_fdt_prop_bool(fdt, \u0026DP_RAMDUMP_PATH)?,\n    debug_policy_adb: get_fdt_prop_bool(fdt, \u0026DP_ADB_PATH)?,\n})\n```\n\nRegarding `fdt_estimated_size`, can\u0027t we simply use `overlay.totalsize()`? Naively, I would expect the DTBO to contain all the fields that will end up in the DT and more so that `fdt.totalsize() \u003c overlay.totalsize()`; what am I missing?",
+      "range": {
+        "startLine": 169,
+        "startChar": 24,
+        "endLine": 169,
+        "endChar": 49
+      },
+      "revId": "d8f5286c8c2c41e0b6124e3ed4ef307a2f6a2264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52e5e4e2_0945fe84",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-26T15:59:37Z",
+      "side": 1,
+      "message": "Alternatively to my comment above, do we have the option to not even bother to apply the DTBO and read from it directly, treating it like a regular DT? Of course, the path would differ from what we currently access but overall, it would be more efficient, if we can reliably predict what the path looks like.\n\nTo illustrate using `test_tree_overlay.dtsi`, reading `\u003cversion\u003e` of `/` in the resulting DT can be achieved by reading the property from `/node@overlay/__overlay__` in the DTBO.\n\nWDYT?",
+      "range": {
+        "startLine": 172,
+        "startChar": 67,
+        "endLine": 172,
+        "endChar": 78
+      },
+      "revId": "d8f5286c8c2c41e0b6124e3ed4ef307a2f6a2264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
