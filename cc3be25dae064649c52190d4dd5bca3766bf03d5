@@ -22,6 +22,30 @@
       },
       "revId": "cc3be25dae064649c52190d4dd5bca3766bf03d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90ae01c2_5fd87963",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-26T07:40:29Z",
+      "side": 1,
+      "message": "According to the spec [1], is the info `\"CDI_Seal\"` only used to derive the sealing CDI value? However, in our case, we are using the sealing CDI to derive another key instead of deriving the sealing CDI for the next layer.\n\n[1] http://doc/17qIc6ZR285dKkHyKmZ0dkdZm31fhXFLP2C5FFZa9tvw#heading\u003dh.f8aiifrcw1jq",
+      "parentUuid": "c772849f_8b939b03",
+      "range": {
+        "startLine": 39,
+        "startChar": 29,
+        "endLine": 39,
+        "endChar": 47
+      },
+      "revId": "cc3be25dae064649c52190d4dd5bca3766bf03d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
