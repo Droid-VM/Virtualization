@@ -211,6 +211,54 @@
       },
       "revId": "5ee36c90dc49173530d3f0f7df9f64b63b4beb11",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0253fdc3_cdeebaa5",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-09-26T05:20:22Z",
+      "side": 1,
+      "message": "`CStr::from_bytes_with_nul(name)` also validates whether the given slice has only one null at the end. Should I also update safety comment for it?",
+      "parentUuid": "13e0b20a_00b71b5c",
+      "range": {
+        "startLine": 272,
+        "startChar": 47,
+        "endLine": 272,
+        "endChar": 48
+      },
+      "revId": "5ee36c90dc49173530d3f0f7df9f64b63b4beb11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef31dff8_6c7cbc70",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-09-26T05:20:22Z",
+      "side": 1,
+      "message": "Done, and also modified safety block a bit so invalid output isn\u0027t used outside of the safety block.\n\nFYI, the returned name is also validated outside of the safety block (range with `checked_sub()` and `fdt.buffer.get()`, null-terminating with `CStr::from_bytes_with_nul()`), but those check doesn\u0027t need to be in the safe block.",
+      "parentUuid": "13e0b20a_00b71b5c",
+      "range": {
+        "startLine": 272,
+        "startChar": 47,
+        "endLine": 272,
+        "endChar": 48
+      },
+      "revId": "5ee36c90dc49173530d3f0f7df9f64b63b4beb11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
