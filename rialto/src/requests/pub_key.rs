@@ -16,8 +16,7 @@
 
 use alloc::vec;
 use alloc::vec::Vec;
-use bssl::{self, ApiName};
-use bssl_ffi::EVP_sha256;
+use bssl::{self, ApiName, Md};
 use bssl_ffi::HMAC;
 use core::result;
 use coset::{iana, CborSerializable, CoseKey, CoseMac0, CoseMac0Builder, HeaderBuilder};
@@ -62,17 +61,12 @@ fn hmac_sha256(key: &[u8], data: &[u8]) -> bssl::Result<Vec<u8>> {
 
     let mut out = vec![0u8; SHA256_HMAC_LEN];
     let mut out_len = 0;
-    // SAFETY: The function shouldn't access any Rust variable and the returned value is accepted
-    // as a potentially NULL pointer.
-    let digester = unsafe { EVP_sha256() };
-    if digester.is_null() {
-        return Err(bssl::Error::CallFailed(ApiName::EVP_sha256));
-    }
+    let digester = Md::sha256()?;
     // SAFETY: Only reads from/writes to the provided slices and supports digester was checked not
     // be NULL.
     let ret = unsafe {
         HMAC(
-            digester,
+            digester.as_ref(),
             key.as_ptr() as *const _,
             key.len(),
             data.as_ptr(),
