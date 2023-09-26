@@ -119,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a672890_d997ff5d",
+        "filename": "libs/bssl/src/digest.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-26T15:07:48Z",
+      "side": 1,
+      "message": "I changed this class to `pub(crate)`. Here\u0027s the hkdf cl aosp/2763073",
+      "parentUuid": "be1a92ba_2ceac76d",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 1
+      },
+      "revId": "12f84b30dfad6a84b8d04f1686459db73c126a87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30cd9662_82c8adb5",
