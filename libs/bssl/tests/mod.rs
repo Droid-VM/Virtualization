@@ -12,22 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//! Safe wrappers around the BoringSSL API.
+//! API tests of the crate `bssl_avf`.
 
-#![cfg_attr(not(feature = "std"), no_std)]
-
-extern crate alloc;
-
-mod cbb;
-mod digest;
-mod ec_key;
-mod hkdf;
-mod hmac;
-mod util;
-
-pub use bssl_avf_error::{ApiName, Error, Result};
-pub use cbb::CbbFixed;
-pub use digest::Digester;
-pub use ec_key::{EcKey, ZVec};
-pub use hkdf::hkdf;
-pub use hmac::hmac_sha256;
+mod api_test;
+mod hkdf_test;
