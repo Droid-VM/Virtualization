@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use bssl_avf::{hmac_sha256, Result};
+use bssl_avf::{hkdf, hmac_sha256, Digester, Result};
 
 const DATA1: [u8; 32] = [
     0xdb, 0x16, 0xcc, 0xbf, 0xf0, 0xc4, 0xbc, 0x93, 0xc3, 0x5f, 0x11, 0xc5, 0xfa, 0xae, 0x03, 0x6c,
@@ -36,5 +36,37 @@ fn hmac_sha256_returns_correct_result() -> Result<()> {
         0x8d, 0x07,
     ];
     assert_eq!(EXPECTED_HMAC, hmac_sha256(&DATA1, &DATA2)?);
+    Ok(())
+}
+
+#[test]
+fn hkdf_sha512_returns_correct_result() -> Result<()> {
+    // The expected result can be computed with the fomular at:
+    // https://datatracker.ietf.org/doc/html/rfc5869#section-2.2
+    const EXPECTED_RESULT: [u8; 32] = [
+        0xbf, 0x8e, 0x33, 0x46, 0xec, 0xc0, 0x2b, 0xd8, 0xde, 0x41, 0x98, 0xbc, 0x67, 0x4a, 0x09,
+        0xfe, 0x37, 0x0e, 0x07, 0x5b, 0xc8, 0xdb, 0x31, 0x01, 0x4b, 0x56, 0x18, 0x28, 0x2c, 0xf4,
+        0x56, 0xab,
+    ];
+    let secret = &DATA1;
+    let salt = &DATA2;
+    let info = b"hkdf_sha512 test info";
+    let res = hkdf::<32>(secret, salt, info, Digester::sha512())?;
+    assert_eq!(EXPECTED_RESULT, res);
+    Ok(())
+}
+
+#[test]
+fn hkdf_sha256_returns_correct_result() -> Result<()> {
+    const EXPECTED_RESULT: [u8; 32] = [
+        0x55, 0x77, 0xbd, 0x2c, 0xc7, 0xf5, 0x9b, 0xde, 0x00, 0xa5, 0x86, 0x8a, 0x45, 0xba, 0xab,
+        0x9d, 0xa2, 0x63, 0x30, 0x47, 0xcf, 0xb6, 0x91, 0x66, 0xbd, 0x02, 0xe1, 0x7f, 0x0f, 0x0b,
+        0xf2, 0x74,
+    ];
+    let secret = &DATA1;
+    let salt = &DATA2;
+    let info = b"hkdf_sha256 test info";
+    let res = hkdf::<32>(secret, salt, info, Digester::sha256())?;
+    assert_eq!(EXPECTED_RESULT, res);
     Ok(())
 }

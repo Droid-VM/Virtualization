@@ -31,8 +31,7 @@ impl Digester {
         Self(unsafe { &*p })
     }
 
-    /// Returns a `Digester` implementing `SHA-512` algorithm.
-    #[allow(dead_code)]
+    /// Returns a Digetser implementing `SHA-512` algorithm.
     pub fn sha512() -> Self {
         // SAFETY: This function does not access any Rust variables and simply returns
         // a pointer to the static variable in BoringSSL.
