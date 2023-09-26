@@ -187,6 +187,30 @@
       },
       "revId": "5ee36c90dc49173530d3f0f7df9f64b63b4beb11",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13e0b20a_00b71b5c",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-26T03:44:16Z",
+      "side": 1,
+      "message": "Is it guaranteed that the returned name ends with null? If so, please add that also as a safety comment.",
+      "parentUuid": "feefcdbe_d5685523",
+      "range": {
+        "startLine": 272,
+        "startChar": 47,
+        "endLine": 272,
+        "endChar": 48
+      },
+      "revId": "5ee36c90dc49173530d3f0f7df9f64b63b4beb11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
