@@ -46,6 +46,30 @@
       },
       "revId": "cc3be25dae064649c52190d4dd5bca3766bf03d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "677bd880_6bf068fb",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-26T13:56:01Z",
+      "side": 1,
+      "message": "\u003e Open Profile for DICE says that info should be \"CDI_Attest\" for attestation keys.\n\nWhere does it say that? (I\u0027m sure it does, I just can\u0027t find it.)\n\nIf the RKP VM has changed, it should need to re-attest? Which suggests that CDI_Attest would be more correct.\n\nIf we use the sealing ID then the HMAC key will almost never change, which in itself seems a bad thing.",
+      "parentUuid": "90ae01c2_5fd87963",
+      "range": {
+        "startLine": 39,
+        "startChar": 29,
+        "endLine": 39,
+        "endChar": 47
+      },
+      "revId": "cc3be25dae064649c52190d4dd5bca3766bf03d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
