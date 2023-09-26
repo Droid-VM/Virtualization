@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd04b6eb_c93253e2",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-09-26T02:12:22Z",
+      "side": 1,
+      "message": "Done, and also changed code a bit to clearly show that it\u0027s not dereferenced directly.",
+      "parentUuid": "3d10de31_a431fd8f",
+      "range": {
+        "startLine": 261,
+        "startChar": 10,
+        "endLine": 261,
+        "endChar": 23
+      },
+      "revId": "5ee36c90dc49173530d3f0f7df9f64b63b4beb11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ecdfddce_3bbb7e5b",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-09-25T16:41:09Z",
       "side": 1,
       "message": "let len \u003d fdt_err(len)?;",
+      "range": {
+        "startLine": 263,
+        "startChar": 8,
+        "endLine": 266,
+        "endChar": 10
+      },
+      "revId": "5ee36c90dc49173530d3f0f7df9f64b63b4beb11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "174911b3_3fec23b1",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-09-26T02:12:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecdfddce_3bbb7e5b",
       "range": {
         "startLine": 263,
         "startChar": 8,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72559288_83545e80",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-09-26T02:12:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b0e5768_e958a9f2",
+      "range": {
+        "startLine": 267,
+        "startChar": 8,
+        "endLine": 267,
+        "endChar": 72
+      },
+      "revId": "5ee36c90dc49173530d3f0f7df9f64b63b4beb11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04989127_b3107852",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-09-25T16:41:09Z",
       "side": 1,
       "message": "why?",
+      "range": {
+        "startLine": 272,
+        "startChar": 47,
+        "endLine": 272,
+        "endChar": 48
+      },
+      "revId": "5ee36c90dc49173530d3f0f7df9f64b63b4beb11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "feefcdbe_d5685523",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-09-26T02:12:22Z",
+      "side": 1,
+      "message": "`CStr::from_bytes_with_nul()` expects bytes to include nul at the end, while returned len from `libfdt_bindgen::fdt_get_name` doesn\u0027t include nul.",
+      "parentUuid": "04989127_b3107852",
       "range": {
         "startLine": 272,
         "startChar": 47,
