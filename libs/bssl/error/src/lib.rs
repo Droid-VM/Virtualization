@@ -58,4 +58,5 @@ pub enum ApiName {
     EVP_sha256,
     EVP_sha512,
     HMAC,
+    HKDF,
 }
