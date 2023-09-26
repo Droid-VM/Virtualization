@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+mod hkdf_test;
+
 use bssl_avf::{hmac_sha256, Result};
 
 const DATA1: [u8; 32] = [
