@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c7e02d2_928812d4",
+        "filename": "libs/bssl/src/digest.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-27T09:51:06Z",
+      "side": 1,
+      "message": "Frankly, I would prefer to stick with the original API and the Rust openssl API [1]. Moreover, since the Digester is used in various scenarios, such as HKDF, it would be more straightforward to maintain its focus as a wrapper of `EVP_MD` and use it across different scenarios, rather than adding a trait for each case.\n\n[1] https://fengsp.github.io/pencil/openssl/crypto/hmac/fn.hmac.html",
+      "parentUuid": "854fd8c7_7e781bd8",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 1
+      },
+      "revId": "c1adc451de8f872eb1dfd2669481988012d19371",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39f9a569_0cd4975b",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-09-27T09:21:23Z",
       "side": 1,
       "message": "Given that for bssl these can never fail, I would either panic here, or just not have the check at all.",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 37
+      },
+      "revId": "c1adc451de8f872eb1dfd2669481988012d19371",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb9de39f_bdd276d7",
+        "filename": "libs/bssl/src/digest.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-27T09:51:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39f9a569_0cd4975b",
       "range": {
         "startLine": 53,
         "startChar": 0,
