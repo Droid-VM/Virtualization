@@ -16,6 +16,52 @@
       "message": "Hi Alan, could you take another look at this cl?",
       "revId": "c1adc451de8f872eb1dfd2669481988012d19371",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "854fd8c7_7e781bd8",
+        "filename": "libs/bssl/src/digest.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-27T09:21:23Z",
+      "side": 1,
+      "message": "Rather than doing this as a runtime choice, how about defining a trait for MessageDigester, which would provide a const for the digest size, and a function to return the EVP_MD? Then provide implementations for each hash function we need.\n\nThat makes it much easier to see that we will never link in spurious code, and moves work from runtime to compile time.\n\nhmac() could perhaps then be a default method on the trait.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 1
+      },
+      "revId": "c1adc451de8f872eb1dfd2669481988012d19371",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39f9a569_0cd4975b",
+        "filename": "libs/bssl/src/digest.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-27T09:21:23Z",
+      "side": 1,
+      "message": "Given that for bssl these can never fail, I would either panic here, or just not have the check at all.",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 37
+      },
+      "revId": "c1adc451de8f872eb1dfd2669481988012d19371",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
