@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0daf15ee_b4ba7eea",
+        "filename": "libs/bssl/src/digest.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-27T13:38:41Z",
+      "side": 1,
+      "message": "NonNull takes a mut pointer as input. I don\u0027t want to change this to *mut.\n\nhttps://doc.rust-lang.org/stable/std/ptr/struct.NonNull.html#method.new",
+      "parentUuid": "c3cf4568_cc857678",
+      "range": {
+        "startLine": 23,
+        "startChar": 20,
+        "endLine": 23,
+        "endChar": 26
+      },
+      "revId": "2a6ac802303bf3cda02d554223354a3a5e24a6ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f57f1817_f216cd69",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-09-27T12:47:52Z",
       "side": 1,
       "message": "Nit: This could return a reference rather than a pointer (as you suggested for CbbFixed).\nI fact I think you could return \u0026\u0027static EVP_MD, which makes it clear in the type system that the result is invalid indefinitely, can be cached etc.",
+      "range": {
+        "startLine": 50,
+        "startChar": 28,
+        "endLine": 50,
+        "endChar": 41
+      },
+      "revId": "2a6ac802303bf3cda02d554223354a3a5e24a6ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74ee7b60_2e69debe",
+        "filename": "libs/bssl/src/digest.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-27T13:38:41Z",
+      "side": 1,
+      "message": "I can wrap directly `\u0026\u0027static EVP_MD` directly instead of the pointer.",
+      "parentUuid": "f57f1817_f216cd69",
       "range": {
         "startLine": 50,
         "startChar": 28,
