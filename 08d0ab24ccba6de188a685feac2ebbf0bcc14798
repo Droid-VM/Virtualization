@@ -134,6 +134,30 @@
       },
       "revId": "08d0ab24ccba6de188a685feac2ebbf0bcc14798",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "910f849f_53d6389d",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-27T10:10:05Z",
+      "side": 1,
+      "message": "Thank you for bringing up this point. Indeed, when `Digester` was an enum, all the supported algorithms are pulled in. But after I changed `Digester` to struct, we only pull in the `EVP_sha512` as before this cl.\n\nOtherwise, this cl makes pvmfw_bin grow from 497792 bytes to 497952 bytes.\n\nCan you take another look?",
+      "parentUuid": "37aa3f7e_682980fe",
+      "range": {
+        "startLine": 125,
+        "startChar": 64,
+        "endLine": 125,
+        "endChar": 90
+      },
+      "revId": "08d0ab24ccba6de188a685feac2ebbf0bcc14798",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
