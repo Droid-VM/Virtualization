@@ -93,6 +93,30 @@
       },
       "revId": "2a6ac802303bf3cda02d554223354a3a5e24a6ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c2a8cb9_353adf71",
+        "filename": "libs/bssl/src/digest.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-27T13:41:47Z",
+      "side": 1,
+      "message": "Yes, but I think it\u0027s worth exposing that to callers.\nThat means not implementing AsRef - but I think that\u0027s fine. We\u0027re not going to have generic functions taking AsRef\u003cEVP_MD\u003e.",
+      "parentUuid": "74ee7b60_2e69debe",
+      "range": {
+        "startLine": 50,
+        "startChar": 28,
+        "endLine": 50,
+        "endChar": 41
+      },
+      "revId": "2a6ac802303bf3cda02d554223354a3a5e24a6ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
