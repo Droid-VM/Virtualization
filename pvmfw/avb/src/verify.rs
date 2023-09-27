@@ -36,6 +36,8 @@ pub struct VerifiedBootData<'a> {
     pub public_key: &'a [u8],
     /// VM capabilities.
     pub capabilities: Vec<Capability>,
+    /// Rollback index of kernel.
+    pub rollback_index: u64,
 }
 
 /// This enum corresponds to the `DebugLevel` in `VirtualMachineConfig`.
@@ -153,6 +155,7 @@ pub fn verify_payload<'a>(
     let kernel_verify_result = ops.verify_partition(PartitionName::Kernel.as_cstr())?;
 
     let vbmeta_images = kernel_verify_result.vbmeta_images()?;
+    let rollback_indexes = kernel_verify_result.rollback_indexes()?;
     verify_only_one_vbmeta_exists(vbmeta_images)?;
     let vbmeta_image = vbmeta_images[0];
     verify_vbmeta_is_from_kernel_partition(&vbmeta_image)?;
@@ -171,6 +174,8 @@ pub fn verify_payload<'a>(
             initrd_digest: None,
             public_key: trusted_public_key,
             capabilities,
+            // TODO(b/302093437): Use explicit rollback_index_location instead of default index(0)
+            rollback_index: rollback_indexes[0],
         });
     }
 
@@ -196,5 +201,6 @@ pub fn verify_payload<'a>(
         initrd_digest: Some(*initrd_descriptor.digest),
         public_key: trusted_public_key,
         capabilities,
+        rollback_index: rollback_indexes[0],
     })
 }
