@@ -18,6 +18,7 @@
 
 extern crate alloc;
 
+mod aead;
 mod cbb;
 mod digest;
 mod ec_key;
@@ -26,6 +27,8 @@ mod hmac;
 mod util;
 
 pub use bssl_avf_error::{ApiName, Error, Result};
+
+pub use aead::{Aead, AeadCtx, AEAD_DEFAULT_TAG_LENGTH};
 pub use cbb::CbbFixed;
 pub use digest::Digester;
 pub use ec_key::{EcKey, ZVec};
