@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9b09a4ca_f0ba116a",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-27T13:37:33Z",
+      "side": 1,
+      "message": "\u003e ... it should be the responsibility of the calling method to chose the appropriate index.\n\nIt\u0027s not about index checking.\n\nThis is not the same as the function `vbmeta_images(\u0026self)`. I mean, there\u0027s no check and this function never throws any error, why do you need `Result`?",
+      "parentUuid": "8c8477be_dc018f1e",
+      "range": {
+        "startLine": 342,
+        "startChar": 58,
+        "endLine": 342,
+        "endChar": 82
+      },
+      "revId": "724ceccc040a2e9d5338ebf2670fb80af8770251",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aa02e22f_6f5d8edd",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 2

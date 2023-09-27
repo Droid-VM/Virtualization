@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02bde11b_7f4a4127",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-27T13:37:33Z",
+      "side": 1,
+      "message": "It\u0027s a bit strange to ref and points a single integer. What about mapping \u003c\u0026u64\u003e to Option\u003cu64\u003e first before unwrapping?\n\n```suggestion\nlet rollback_index \u003d\nrollback_indexes.first().copied().unwrap_or(DEFAULT_ROLLBACK_INDEX);\n```",
+      "range": {
+        "startLine": 182,
+        "startChar": 28,
+        "endLine": 182,
+        "endChar": 29
+      },
+      "revId": "e7d8f0c4592b044b92592345c28091633a0f5db4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bba9e087_b00e65a0",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-27T13:37:33Z",
+      "side": 1,
+      "message": "This also needs to be changed.",
+      "range": {
+        "startLine": 208,
+        "startChar": 40,
+        "endLine": 208,
+        "endChar": 43
+      },
+      "revId": "e7d8f0c4592b044b92592345c28091633a0f5db4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
