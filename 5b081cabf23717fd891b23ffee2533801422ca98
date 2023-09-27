@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88cef694_c1596a77",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-09-27T16:10:59Z",
+      "side": 1,
+      "message": "`cstr!` doesn\u0027t work in `const` because of `unwrap()`.\n\n\nIf you prefer no-`const`, let\u0027s discuss more at existing comment.\n\nhttps://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2761476/comment/97d9077a_df2d981e/",
+      "parentUuid": "3a7e2435_a48d33b6",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 44
+      },
+      "revId": "5b081cabf23717fd891b23ffee2533801422ca98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ed0d7b0_16dd862b",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-09-26T16:03:59Z",
       "side": 1,
       "message": "So this is applying the VM DTBO to an empty DT: can you remind me why we needed to pass an overlay to pvmfw (from ABL) instead of a regular DT?",
+      "range": {
+        "startLine": 82,
+        "startChar": 27,
+        "endLine": 82,
+        "endChar": 52
+      },
+      "revId": "5b081cabf23717fd891b23ffee2533801422ca98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cd96aa6_75c14833",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-09-27T16:10:59Z",
+      "side": 1,
+      "message": "There\u0027s no desperate reason here; we keep the VM devices in VM DTBO in host DT, and simply copied it from the `ABL`.\n\nWould you prefer ABL to provide overlaid VM DTBO in `pvmfw`\u0027s config? I\u0027m OK with it (and Jiyong as well). But my concern is debug policy.\n\nIf we get overlaid VM DTBO, then I feel bad if debug policy works differently. But unfortunately we already released the debug policy guideline and it\u0027s breaking change.\n\nSo here are options from top of my head:\n\nOption 1) Just get VM DTBO from ABL (i.e. keep it as-is)\n\nOption 2) New `pvmfw` config (`v1.1`) takes debug policy DTBO while VM DTBO should be provided as overlaid. (i.e. format differs between debug policy DTBO and VM DTBO)\n\nOption 3) New `pvmfw` config (`v1.1`) isn\u0027t compatible with older version (`v1.0`)-- it takes overlaid debug policy and VM DTBO. VM DTBO can be mandatory.\n\nOption 4) New `pvmfw` config (`v1.1`) supports both overlay DT and overlaid DT. Heuristic is needed to distinguish between two. (perhaps search for `__overlay__`?)\n\n\nWhat do you think? If ABL sends overlaid VM DTBO, then we don\u0027t need `OwnedFdt` nor applying overlay for every VM boot.",
+      "parentUuid": "3ed0d7b0_16dd862b",
       "range": {
         "startLine": 82,
         "startChar": 27,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "574e675d_287ef52f",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-09-27T16:10:59Z",
+      "side": 1,
+      "message": "I just wanted to use `iter()` as much as possible as a Rust newbie.",
+      "parentUuid": "3863698e_87ad9559",
+      "range": {
+        "startLine": 90,
+        "startChar": 9,
+        "endLine": 90,
+        "endChar": 21
+      },
+      "revId": "5b081cabf23717fd891b23ffee2533801422ca98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8fd88249_5178b0f9",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-09-26T16:03:59Z",
       "side": 1,
       "message": "This absolutely doesn\u0027t work as the guest kernel binds against nodes (mostly) based on their `\u003ccompatible\u003e` property and actually (mostly) ignores their names so a malicious host could abuse this implementation by giving its malicious nodes names from `CROSVM_NODES`, effectively bypassing their validation you\u0027re adding. Note how `patch_device_tree` ignored nodes path. For example, would it make sense to validate (and mark for being carried over) any node that has the `\u003candroid,pvmfw,...\u003e` properties and their dependencies?",
+      "range": {
+        "startLine": 92,
+        "startChar": 15,
+        "endLine": 92,
+        "endChar": 44
+      },
+      "revId": "5b081cabf23717fd891b23ffee2533801422ca98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d59b85c8_ec42ac5b",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-09-27T16:10:59Z",
+      "side": 1,
+      "message": "@jiyong@google.com\n\nSounds good. But can I expect `\u003candroid,pvmfw,...\u003e` in non-assignable devices? (e.g. IOMMU driver, ..). I\u0027m worrying if I may filter-out useful nodes as well.",
+      "parentUuid": "8fd88249_5178b0f9",
       "range": {
         "startLine": 92,
         "startChar": 15,
@@ -129,6 +225,30 @@
       "writtenOn": "2023-09-26T16:03:59Z",
       "side": 1,
       "message": "I thought you were going to do the validation/filtering at this step. All the effort in `validate_devices` is being wasted here as the nodes aren\u0027t being carried over?",
+      "range": {
+        "startLine": 618,
+        "startChar": 4,
+        "endLine": 618,
+        "endChar": 35
+      },
+      "revId": "5b081cabf23717fd891b23ffee2533801422ca98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "774331f8_88d48276",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-09-27T16:10:59Z",
+      "side": 1,
+      "message": "dito. Follow up CL will apply filtered device tree nodes to the template DT.\n\nSo this CL does early verification before we search nodes for applying to template DT.",
+      "parentUuid": "ed777348_3a11fee9",
       "range": {
         "startLine": 618,
         "startChar": 4,
