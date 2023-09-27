@@ -16,11 +16,11 @@
 
 use core::fmt;
 use core::mem;
+use core::num::NonZeroUsize;
 use core::ops::Range;
 use core::result;
 use log::{info, warn};
 use static_assertions::const_assert_eq;
-use vmbase::util::RangeExt;
 use zerocopy::{FromBytes, LayoutVerified};
 
 /// Configuration data header.
@@ -133,19 +133,6 @@ struct HeaderEntry {
     size: u32,
 }
 
-impl HeaderEntry {
-    pub fn as_range(&self) -> Option<Range<usize>> {
-        let size = usize::try_from(self.size).unwrap();
-        if size != 0 {
-            let offset = self.offset.try_into().unwrap();
-            // Allow overflows here for the Range to properly describe the entry (validated later).
-            Some(offset..(offset + size))
-        } else {
-            None
-        }
-    }
-}
-
 #[repr(C, packed)]
 #[derive(Clone, Copy, Debug, Eq, FromBytes, PartialEq)]
 pub struct Version {
@@ -161,10 +148,31 @@ impl fmt::Display for Version {
     }
 }
 
+/// Range with non-empty length.
+#[derive(Debug, Copy, Clone)]
+struct NonEmptyRange {
+    start: usize,
+    size: NonZeroUsize,
+}
+
+impl NonEmptyRange {
+    pub fn new(start: usize, size: usize) -> Option<Self> {
+        Some(Self { start, size: NonZeroUsize::new(size)? })
+    }
+
+    fn end(&self) -> usize {
+        self.start + self.len()
+    }
+
+    fn len(&self) -> usize {
+        self.size.into()
+    }
+}
+
 #[derive(Debug)]
 pub struct Config<'a> {
     body: &'a mut [u8],
-    ranges: [Option<Range<usize>>; Entry::COUNT],
+    ranges: [Option<NonEmptyRange>; Entry::COUNT],
 }
 
 impl<'a> Config<'a> {
@@ -209,14 +217,27 @@ impl<'a> Config<'a> {
         // Validate that we won't get an invalid alignment in the following due to padding to u64.
         const_assert_eq!(mem::size_of::<HeaderEntry>() % mem::size_of::<u64>(), 0);
 
+        // Ensure entries are in the body.
         let limits = header.body_lowest_bound()?..total_size;
-        let ranges = [
-            // TODO: Find a way to do this programmatically even if the trait
-            // `core::marker::Copy` is not implemented for `core::ops::Range<usize>`.
-            Self::validated_body_range(Entry::Bcc, &header_entries, &limits)?,
-            Self::validated_body_range(Entry::DebugPolicy, &header_entries, &limits)?,
-            Self::validated_body_range(Entry::VmDtbo, &header_entries, &limits)?,
-        ];
+        let mut ranges: [Option<NonEmptyRange>; Entry::COUNT] = [None; Entry::COUNT];
+        for entry in [Entry::Bcc, Entry::DebugPolicy, Entry::VmDtbo] {
+            let Some(header_entry) = header_entries.get(entry as usize) else { continue };
+            let entry_offset = header_entry.offset as usize;
+            let entry_size = header_entry.size as usize;
+
+            if entry_size == 0 {
+                continue;
+            }
+            let range = entry_offset..(entry_offset + entry_size);
+            if limits.start > range.start || range.end > limits.end {
+                return Err(Error::EntryOutOfBounds(entry, range, limits));
+            }
+
+            ranges[entry as usize] = NonEmptyRange::new(
+                range.start - limits.start,
+                header_entry.size.try_into().unwrap(),
+            );
+        }
 
         Ok(Self { body, ranges })
     }
@@ -237,7 +258,7 @@ impl<'a> Config<'a> {
         let (bcc, rest) = rest.split_at_mut(bcc_end);
 
         let dp = if let Some(dp_range) = dp_range {
-            let dp_start = dp_range.start.checked_sub(bcc_range.end).unwrap();
+            let dp_start = dp_range.start.checked_sub(bcc_range.end()).unwrap();
             let dp_end = dp_range.len();
             let (_, rest) = rest.split_at_mut(dp_start);
             let (dp, _) = rest.split_at_mut(dp_end);
@@ -249,28 +270,7 @@ impl<'a> Config<'a> {
         Ok((bcc, dp))
     }
 
-    pub fn get_entry_range(&self, entry: Entry) -> Option<Range<usize>> {
-        self.ranges[entry as usize].clone()
-    }
-
-    fn validated_body_range(
-        entry: Entry,
-        header_entries: &[HeaderEntry],
-        limits: &Range<usize>,
-    ) -> Result<Option<Range<usize>>> {
-        if let Some(header_entry) = header_entries.get(entry as usize) {
-            if let Some(r) = header_entry.as_range() {
-                return if r.start <= r.end && r.is_within(limits) {
-                    let start = r.start - limits.start;
-                    let end = r.end - limits.start;
-
-                    Ok(Some(start..end))
-                } else {
-                    Err(Error::EntryOutOfBounds(entry, r, limits.clone()))
-                };
-            }
-        }
-
-        Ok(None)
+    fn get_entry_range(&self, entry: Entry) -> Option<NonEmptyRange> {
+        self.ranges[entry as usize]
     }
 }
