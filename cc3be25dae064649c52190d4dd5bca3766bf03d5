@@ -166,6 +166,30 @@
       },
       "revId": "cc3be25dae064649c52190d4dd5bca3766bf03d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6503b9b8_7a6511f9",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2023-09-27T14:10:28Z",
+      "side": 1,
+      "message": "You don\u0027t have any stability guarantees from the attestation CDI so I wouldn\u0027t rely on it for something like this. Also, Seth said in his last comment that \"RKP keys that are certified when booting an older bootchain must remain valid for signing operations on updated bootchains\" so you need some level of stability give how rkpd currently works.",
+      "parentUuid": "01a2310e_d5728119",
+      "range": {
+        "startLine": 39,
+        "startChar": 29,
+        "endLine": 39,
+        "endChar": 47
+      },
+      "revId": "cc3be25dae064649c52190d4dd5bca3766bf03d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
