@@ -199,7 +199,7 @@ impl<const N: usize> TryFrom<BigNum> for [u8; N] {
     }
 }
 
-fn check_int_result(ret: i32, api_name: ApiName) -> Result<()> {
+pub(crate) fn check_int_result(ret: i32, api_name: ApiName) -> Result<()> {
     if ret == 1 {
         Ok(())
     } else {

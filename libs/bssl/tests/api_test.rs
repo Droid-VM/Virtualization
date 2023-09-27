@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use bssl_avf::{hmac_sha256, Result};
+use bssl_avf::{hmac_sha256, Aead, AeadCtx, Result, AEAD_DEFAULT_TAG_LENGTH};
 
 const DATA1: [u8; 32] = [
     0xdb, 0x16, 0xcc, 0xbf, 0xf0, 0xc4, 0xbc, 0x93, 0xc3, 0x5f, 0x11, 0xc5, 0xfa, 0xae, 0x03, 0x6c,
@@ -36,5 +36,23 @@ fn hmac_sha256_returns_correct_result() -> Result<()> {
         0x8d, 0x07,
     ];
     assert_eq!(EXPECTED_HMAC, hmac_sha256(&DATA1, &DATA2)?);
+    Ok(())
+}
+
+#[test]
+fn aead_aes_256_gcm_randnonce_encrypts_and_decrypts_successfully() -> Result<()> {
+    const MESSAGE: &[u8] = b"aead_aes_256_gcm_randnonce message";
+    let key = &DATA1;
+    let aead_ctx = AeadCtx::new(Aead::aes_256_gcm_randnonce(), key, AEAD_DEFAULT_TAG_LENGTH)?;
+    let mut encrypted_message = vec![0u8; MESSAGE.len() + aead_ctx.aead().max_overhead()];
+
+    let encrypted_len = aead_ctx.seal(MESSAGE, &mut encrypted_message)?;
+    assert!(MESSAGE != &encrypted_message[..encrypted_len]);
+
+    let mut decrypted_message = vec![0u8; encrypted_len];
+    let decrypted_len =
+        aead_ctx.open(&encrypted_message[..encrypted_len], &mut decrypted_message)?;
+
+    assert_eq!(MESSAGE, &decrypted_message[..decrypted_len]);
     Ok(())
 }
