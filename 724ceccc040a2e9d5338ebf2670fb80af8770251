@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "000104ca_709179f3",
+        "filename": "pvmfw/avb/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-27T13:23:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf161ec0_a597f095",
+      "range": {
+        "startLine": 204,
+        "startChar": 11,
+        "endLine": 204,
+        "endChar": 15
+      },
+      "revId": "724ceccc040a2e9d5338ebf2670fb80af8770251",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a23733d1_c1295ea9",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-09-27T12:06:28Z",
       "side": 1,
       "message": "Why do we need to return a Result here instead of `\u0026[u64]` directly?",
+      "range": {
+        "startLine": 342,
+        "startChar": 58,
+        "endLine": 342,
+        "endChar": 82
+      },
+      "revId": "724ceccc040a2e9d5338ebf2670fb80af8770251",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c8477be_dc018f1e",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-27T13:23:04Z",
+      "side": 1,
+      "message": "ops.rs is closer to avb (an extension in fact) \u0026 should not have to deal with extracting appropriate rollback_index. IMO, it should be the responsibility of the calling method (like `verify_payload()` in verify.rs) to chose the appropriate index.\n\nSimilar pattern can be seen in other methods such as vbmeta_images() which return [AvbVBMetaData] and does not have logic for extracting kernel vbmeta from it.",
+      "parentUuid": "a23733d1_c1295ea9",
       "range": {
         "startLine": 342,
         "startChar": 58,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47c9af15_08f69c87",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-27T13:23:04Z",
+      "side": 1,
+      "message": "Good point. I\u0027ve changed it to get(0).unwrap_or, so it won\u0027t return error either.\nThis default (0) value should will be checked by pvmfw if the guestOS has capability for anti_rollback_secret",
+      "parentUuid": "aa02e22f_6f5d8edd",
+      "range": {
+        "startLine": 178,
+        "startChar": 44,
+        "endLine": 178,
+        "endChar": 47
+      },
+      "revId": "724ceccc040a2e9d5338ebf2670fb80af8770251",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9bade243_34ce2f51",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-09-27T12:06:28Z",
       "side": 1,
       "message": "Does the rust test run both versions with this flag on and off?",
+      "range": {
+        "startLine": 120,
+        "startChar": 27,
+        "endLine": 120,
+        "endChar": 46
+      },
+      "revId": "724ceccc040a2e9d5338ebf2670fb80af8770251",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acc03988_4c67944f",
+        "filename": "pvmfw/avb/tests/utils.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-27T13:23:04Z",
+      "side": 1,
+      "message": "Not sure if I understand the question..\n\nThis test is using the latest_signed_kernel img. If the flag is disabled (llpvm_changes \u003d\u003d false), the latest kernel will contains default rollback_index 0, otherwise it will have the rollback_index 0. We use `soong_config_variables` for the same\n\nSee https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/microdroid/Android.bp;l\u003d449?q\u003drollback_index\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain:packages%2Fmodules%2FVirtualization%2F",
+      "parentUuid": "9bade243_34ce2f51",
       "range": {
         "startLine": 120,
         "startChar": 27,
