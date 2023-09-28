@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "278a12f6_2ebe3cb1",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-28T15:07:03Z",
+      "side": 1,
+      "message": "I also considered this option, but it would result in two default values for `AeadCtx::new()`: `None` and `Some(AEAD_DEFAULT_TAG_LENGTH)`. That feels a bit confusing.",
+      "parentUuid": "57fd7e75_ca85c528",
+      "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6268b389_4b631cd2",
         "filename": "libs/bssl/src/aead.rs",
         "patchSetId": 3
@@ -48,6 +66,24 @@
       "writtenOn": "2023-09-28T11:25:54Z",
       "side": 1,
       "message": "Using this variant (with an embedded/inaccessible nonce) is likely to be limiting in a wider context; for example, it won\u0027t be compatible with COSE types that use `unprotected.iv`  (cf. all the examples in RFC9052 C.3/C.4)\n\nThe BoringSSL header also says:\n\n\u003e Warning: this is for use for FIPS compliance only. It is probably not suitable for other uses.",
+      "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a29ae17_c3351bfb",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-28T15:07:03Z",
+      "side": 1,
+      "message": "\u003e  it won\u0027t be compatible with COSE types that use unprotected.iv\n\nAlthough this function is not be ideal for general use, it meets our specific requirements in rialto, as we do not require direct access to the nonce. It is convenient to rely on BoringSSL for nonce generation and parsing instead of doing it ourselves like [1].\n\n\u003e this is for use for FIPS compliance only. It is probably not suitable for other uses.\n\nIndeed. David Benjamin also mentioned that this API was specifically introduced for ensuring FIPS compliance. However, it aligns with our use cases.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/microdroid_manager/src/instance.rs;l\u003d126;drc\u003d061478bca140291c354e8cf0d9d8aa9f47be8396",
+      "parentUuid": "6268b389_4b631cd2",
       "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -75,6 +111,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49b21513_68332248",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-28T15:07:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5220e1a8_ec005938",
+      "range": {
+        "startLine": 52,
+        "startChar": 33,
+        "endLine": 52,
+        "endChar": 48
+      },
+      "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f950fa66_ee646a3c",
@@ -88,6 +148,24 @@
       "writtenOn": "2023-09-28T11:25:54Z",
       "side": 1,
       "message": "What happens if it\u0027s not?",
+      "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07be43ee_b45133a2",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-28T15:07:03Z",
+      "side": 1,
+      "message": "I updated the comment.\nThis is checked in the beginning of the call.\n\nhttp://google3/third_party/openssl/boringssl/src/crypto/fipsmodule/cipher/aead.c;l\u003d123;rcl\u003d429113831",
+      "parentUuid": "f950fa66_ee646a3c",
       "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -111,6 +189,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "350cb7dd_13053bba",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-28T15:07:03Z",
+      "side": 1,
+      "message": "The AAD is set up here [1] from the ad. I don\u0027t see an easy way to get this value out. Otherwise for the encrypted keyblob, we can pass a raw vector directly instead of `Cose_Encrypt0`.\n\n[1] http://google3/third_party/openssl/boringssl/src/crypto/fipsmodule/cipher/e_aes.c;l\u003d1065;rcl\u003d569168093",
+      "parentUuid": "a2b1d8ec_a17367c7",
+      "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ddad1a38_06288fe8",
         "filename": "libs/bssl/src/aead.rs",
         "patchSetId": 3
@@ -122,6 +218,24 @@
       "writtenOn": "2023-09-28T11:25:54Z",
       "side": 1,
       "message": "The doc comment says `out` length should be \"at least\" (data+max_overhead), but does this imply thats `out` length must be *exactly* (data+actual_overhead)?",
+      "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6e93b37_93a6e85f",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-28T15:07:03Z",
+      "side": 1,
+      "message": "No. It\u0027s just to make sure that the buffer is large enough. The check is here [1].\n\n[1] http://google3/third_party/openssl/boringssl/src/crypto/fipsmodule/cipher/aead.c;l\u003d123;rcl\u003d429113831",
+      "parentUuid": "ddad1a38_06288fe8",
       "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -143,6 +257,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37782be8_5910e79b",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-28T15:07:03Z",
+      "side": 1,
+      "message": "The policy is checked in BoringSSL [1], same for the one above. Later I\u0027ll add the logic to retrieve the BoringSSL error stack, and we should raise it together with the API name.\n\n[1] http://google3/third_party/openssl/boringssl/src/crypto/fipsmodule/cipher/aead.c;l\u003d213;rcl\u003d429113831",
+      "parentUuid": "339b912a_8bbb7a17",
+      "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "849b4b7f_a1a855d2",
@@ -156,6 +288,24 @@
       "writtenOn": "2023-09-28T11:25:54Z",
       "side": 1,
       "message": "Could also mention that `data` and `out` are guaranteed not to alias by Rust\u0027s borrow rules.",
+      "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99be7e3e_3469649c",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-28T15:07:03Z",
+      "side": 1,
+      "message": "Done. Actually the alias is also checked in BoringSSL [1]\n\n[1] http://google3/third_party/openssl/boringssl/src/crypto/fipsmodule/cipher/aead.c;l\u003d190;rcl\u003d429113831",
+      "parentUuid": "849b4b7f_a1a855d2",
       "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -177,6 +327,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5709a5b5_ed36b9b3",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-28T15:07:03Z",
+      "side": 1,
+      "message": "Yes. We should have \n\n`out_len` \u003c\u003d `out.len()` \u003d\u003d `max_out_len` \u003d\u003d length of the ciphertext",
+      "parentUuid": "ef4340e0_98490444",
+      "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e85049fe_c4935bd0",
@@ -190,6 +358,24 @@
       "writtenOn": "2023-09-28T11:25:54Z",
       "side": 1,
       "message": "It would be nice to include a test that deliberately corrupts the ciphertext, and confirms that decryption fails.\n\n(Similarly, a test that passes in a different AAD than was used in encryption should also fail.)",
+      "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26cd8c3a_3cffc248",
+        "filename": "libs/bssl/tests/api_test.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-28T15:07:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e85049fe_c4935bd0",
       "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
