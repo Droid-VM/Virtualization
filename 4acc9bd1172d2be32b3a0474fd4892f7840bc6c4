@@ -16,6 +16,182 @@
       "message": "Hi David, PTAL.",
       "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57fd7e75_ca85c528",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-28T11:25:54Z",
+      "side": 1,
+      "message": "This feels like it\u0027s leaking BoringSSL-specific implementation details into outside world. Could we make this private to the module, and (e.g.) shift `AeadCtx::new()` to take `tag_len: Option\u003cusize\u003e`, with `None` indicating \"use default\" ?",
+      "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6268b389_4b631cd2",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-28T11:25:54Z",
+      "side": 1,
+      "message": "Using this variant (with an embedded/inaccessible nonce) is likely to be limiting in a wider context; for example, it won\u0027t be compatible with COSE types that use `unprotected.iv`  (cf. all the examples in RFC9052 C.3/C.4)\n\nThe BoringSSL header also says:\n\n\u003e Warning: this is for use for FIPS compliance only. It is probably not suitable for other uses.",
+      "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5220e1a8_ec005938",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-28T11:25:54Z",
+      "side": 1,
+      "message": "\"configuration\"",
+      "range": {
+        "startLine": 52,
+        "startChar": 33,
+        "endLine": 52,
+        "endChar": 48
+      },
+      "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f950fa66_ee646a3c",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-28T11:25:54Z",
+      "side": 1,
+      "message": "What happens if it\u0027s not?",
+      "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2b1d8ec_a17367c7",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-28T11:25:54Z",
+      "side": 1,
+      "message": "`AeadCtx` doesn\u0027t really implement an AEAD currently, as there\u0027s no way to specify AAD.   \n\n(This in turn means it cannot be used for a `COSE_Encrypt0`, because even an empty \"external\" AAD gets turned into a non-empty AAD for the AES-GCM invocation, because of the `Enc_structure` stuff in RFC 9052 s5.3)",
+      "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddad1a38_06288fe8",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-28T11:25:54Z",
+      "side": 1,
+      "message": "The doc comment says `out` length should be \"at least\" (data+max_overhead), but does this imply thats `out` length must be *exactly* (data+actual_overhead)?",
+      "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "339b912a_8bbb7a17",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-28T11:25:54Z",
+      "side": 1,
+      "message": "What happens if it\u0027s not?  Maybe police this in the code, not just a comment?",
+      "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "849b4b7f_a1a855d2",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-28T11:25:54Z",
+      "side": 1,
+      "message": "Could also mention that `data` and `out` are guaranteed not to alias by Rust\u0027s borrow rules.",
+      "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef4340e0_98490444",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-28T11:25:54Z",
+      "side": 1,
+      "message": "I\u0027m a bit confused by the lengths here ... does `out_len` end up being the size of the plaintext, which would be less than the size of the ciphertext?",
+      "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e85049fe_c4935bd0",
+        "filename": "libs/bssl/tests/api_test.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-28T11:25:54Z",
+      "side": 1,
+      "message": "It would be nice to include a test that deliberately corrupts the ciphertext, and confirms that decryption fails.\n\n(Similarly, a test that passes in a different AAD than was used in encryption should also fail.)",
+      "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
