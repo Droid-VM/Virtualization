@@ -16,6 +16,109 @@
       "message": "Hi, can you continue reviewing this cl?",
       "revId": "f042ef39994e911022e335494cb61e13366157ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30ec2aa2_db574fe4",
+        "filename": "libs/bssl/src/digest.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-28T09:19:17Z",
+      "side": 1,
+      "message": "\"Digester\"\n\n(Also, it\u0027s nice to put things like this in square brackets and back-ticks, so generated docs will auto-link.)",
+      "range": {
+        "startLine": 34,
+        "startChar": 18,
+        "endLine": 34,
+        "endChar": 26
+      },
+      "revId": "f042ef39994e911022e335494cb61e13366157ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a18c9946_0519a1e6",
+        "filename": "libs/bssl/src/hkdf.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-28T09:19:17Z",
+      "side": 1,
+      "message": "\"using provided `digester`\"",
+      "range": {
+        "startLine": 23,
+        "startChar": 28,
+        "endLine": 23,
+        "endChar": 35
+      },
+      "revId": "f042ef39994e911022e335494cb61e13366157ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6753942f_6b08b7a0",
+        "filename": "libs/bssl/tests/api_test.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-28T09:19:17Z",
+      "side": 1,
+      "message": "nit: might be nicer to use standard test vectors, e.g. RFC4231",
+      "revId": "f042ef39994e911022e335494cb61e13366157ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bac7f83_36561b48",
+        "filename": "libs/bssl/tests/api_test.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-28T09:19:17Z",
+      "side": 1,
+      "message": "\"formula\"",
+      "range": {
+        "startLine": 44,
+        "startChar": 52,
+        "endLine": 44,
+        "endChar": 59
+      },
+      "revId": "f042ef39994e911022e335494cb61e13366157ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6d4155d_4bb8cacb",
+        "filename": "libs/bssl/tests/api_test.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-09-28T09:19:17Z",
+      "side": 1,
+      "message": "nit: use test vectors from RFC 5869 section A?",
+      "revId": "f042ef39994e911022e335494cb61e13366157ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
