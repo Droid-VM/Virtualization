@@ -53,15 +53,18 @@ pub enum DebugLevel {
 }
 
 /// VM Capability.
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum Capability {
     /// Remote attestation.
     RemoteAttest,
+    /// Secretkeeper protected secrets.
+    SecretkeeperProtection,
 }
 
 impl Capability {
     const KEY: &[u8] = b"com.android.virt.cap";
     const REMOTE_ATTEST: &[u8] = b"remote_attest";
+    const SECRETKEEPER_PROTECTION: &[u8] = b"secretkeeper_protection";
     const SEPARATOR: u8 = b'|';
 
     fn get_capabilities(property_value: &[u8]) -> Result<Vec<Self>, PvmfwVerifyError> {
@@ -70,6 +73,7 @@ impl Capability {
         for v in property_value.split(|b| *b == Self::SEPARATOR) {
             let cap = match v {
                 Self::REMOTE_ATTEST => Self::RemoteAttest,
+                Self::SECRETKEEPER_PROTECTION => Self::SecretkeeperProtection,
                 _ => return Err(PvmfwVerifyError::UnknownVbmetaProperty),
             };
             if res.contains(&cap) {
