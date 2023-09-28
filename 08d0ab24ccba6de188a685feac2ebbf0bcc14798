@@ -158,6 +158,30 @@
       },
       "revId": "08d0ab24ccba6de188a685feac2ebbf0bcc14798",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eccb9c1b_04648282",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-28T16:06:43Z",
+      "side": 1,
+      "message": "\u003e But after I changed `Digester` to struct, we only pull in the `EVP_sha512` as before this cl.\n\nMakes sense because we\u0027re now passing a function pointer directly to `hkdf` so the toolchain doesn\u0027t get confused.\n\n\u003e Otherwise, this cl makes pvmfw_bin grow from 497792 bytes to 497952 bytes.\n\nThanks for the numbers! It wasn\u0027t that bad but my worry with merging something like that was that pvmfw would have kept growing for each new hash algo added ...",
+      "parentUuid": "910f849f_53d6389d",
+      "range": {
+        "startLine": 125,
+        "startChar": 64,
+        "endLine": 125,
+        "endChar": 90
+      },
+      "revId": "08d0ab24ccba6de188a685feac2ebbf0bcc14798",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

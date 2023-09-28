@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22cc12ce_4d80cb08",
+        "filename": "libs/bssl/src/digest.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-28T16:06:43Z",
+      "side": 1,
+      "message": "Uber-nit (and I\u0027m aware your CL isn\u0027t touching this code): shouldn\u0027t these functions have names that imply that they are constructors as they are currently likely to be misinterpreted as actually implementing the hashing algorithm. Something to keep in mind if we\u0027re further modifying this code.",
+      "range": {
+        "startLine": 25,
+        "startChar": 11,
+        "endLine": 25,
+        "endChar": 17
+      },
+      "revId": "b64ec1126d2b53edf2322dd7b570702cc4d1fd6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
