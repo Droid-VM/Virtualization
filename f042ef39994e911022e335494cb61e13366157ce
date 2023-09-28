@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aef250e5_f9745a76",
+        "filename": "libs/bssl/src/digest.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-28T12:08:01Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "30ec2aa2_db574fe4",
+      "range": {
+        "startLine": 34,
+        "startChar": 18,
+        "endLine": 34,
+        "endChar": 26
+      },
+      "revId": "f042ef39994e911022e335494cb61e13366157ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a18c9946_0519a1e6",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-09-28T09:19:17Z",
       "side": 1,
       "message": "\"using provided `digester`\"",
+      "range": {
+        "startLine": 23,
+        "startChar": 28,
+        "endLine": 23,
+        "endChar": 35
+      },
+      "revId": "f042ef39994e911022e335494cb61e13366157ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "007f6d24_857dcebf",
+        "filename": "libs/bssl/src/hkdf.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-28T12:08:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a18c9946_0519a1e6",
       "range": {
         "startLine": 23,
         "startChar": 28,
@@ -81,6 +129,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad03cb56_ef1e051d",
+        "filename": "libs/bssl/tests/api_test.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-28T12:08:01Z",
+      "side": 1,
+      "message": "Thanks. I\u0027ll address this in another cl.",
+      "parentUuid": "6753942f_6b08b7a0",
+      "revId": "f042ef39994e911022e335494cb61e13366157ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4bac7f83_36561b48",
@@ -104,6 +170,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0a6ac5e_de88ea89",
+        "filename": "libs/bssl/tests/api_test.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-28T12:08:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bac7f83_36561b48",
+      "range": {
+        "startLine": 44,
+        "startChar": 52,
+        "endLine": 44,
+        "endChar": 59
+      },
+      "revId": "f042ef39994e911022e335494cb61e13366157ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6d4155d_4bb8cacb",
@@ -117,6 +207,24 @@
       "writtenOn": "2023-09-28T09:19:17Z",
       "side": 1,
       "message": "nit: use test vectors from RFC 5869 section A?",
+      "revId": "f042ef39994e911022e335494cb61e13366157ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "562634d2_f636fed2",
+        "filename": "libs/bssl/tests/api_test.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-28T12:08:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6d4155d_4bb8cacb",
       "revId": "f042ef39994e911022e335494cb61e13366157ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
