@@ -22,6 +22,30 @@
       },
       "revId": "b64ec1126d2b53edf2322dd7b570702cc4d1fd6e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7822ac51_4714fadb",
+        "filename": "libs/bssl/src/digest.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-29T09:13:12Z",
+      "side": 1,
+      "message": "The rust openssl also refers to this function using the same name [1][2]. Since David Benjamin highlights concerns about the quality of the rust openssl, I would like to expose a similar bssl API as it. This will allow for a smoother transition to bssl if we decide to use it in Microdroid as well.\n\n[1] https://docs.rs/openssl/0.10.57/src/openssl/md.rs.html#139\n[2] https://docs.rs/openssl/0.10.57/src/openssl/hash.rs.html#118-120",
+      "parentUuid": "22cc12ce_4d80cb08",
+      "range": {
+        "startLine": 25,
+        "startChar": 11,
+        "endLine": 25,
+        "endChar": 17
+      },
+      "revId": "b64ec1126d2b53edf2322dd7b570702cc4d1fd6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
