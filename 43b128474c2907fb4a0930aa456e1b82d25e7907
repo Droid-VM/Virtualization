@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3048ccb_a2e55526",
+        "filename": "pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-29T07:37:06Z",
+      "side": 1,
+      "message": "This pattern repeats in several places. What about adding an API like `has_capability()` to `VerifiedBootData` like the one in [kernel](https://android.googlesource.com/kernel/common/+/bce1305c0ece3/include/linux/capability.h#204) to enhance the readability here?",
+      "range": {
+        "startLine": 424,
+        "startChar": 30,
+        "endLine": 424,
+        "endChar": 52
+      },
+      "revId": "43b128474c2907fb4a0930aa456e1b82d25e7907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "225f3bb5_3366515b",
+        "filename": "pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-09-29T07:37:06Z",
+      "side": 1,
+      "message": "We can add `Copy` to the derive of Capability to avoid referencing it every time.",
+      "range": {
+        "startLine": 425,
+        "startChar": 53,
+        "endLine": 425,
+        "endChar": 54
+      },
+      "revId": "43b128474c2907fb4a0930aa456e1b82d25e7907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
