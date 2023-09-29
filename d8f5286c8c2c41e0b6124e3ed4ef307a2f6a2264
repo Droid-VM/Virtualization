@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e330b64a_6a4af993",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T09:02:37Z",
+      "side": 1,
+      "message": "\u003e So you\u0027re proposing to change the behavior when the custom debug policy file is missing. Am I correct?\n\nNo, I\u0027m proposing to refactor the code when `CUSTOM_DEBUG_POLICY_OVERLAY_SYSPROP` is set to the path of a non-existent file (which is different from the case where no custom DP is configured) in order to remove the convoluted logic described in great detail above **without modifying the behaviour** as the suggestion keeps constructing\n```\nSelf {\n    debug_level,\n    debug_policy_log: false,\n    debug_policy_ramdump: false,\n    debug_policy_adb: false,\n}\n```",
+      "parentUuid": "2938477e_fa7f7e4a",
+      "range": {
+        "startLine": 161,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 10
+      },
+      "revId": "d8f5286c8c2c41e0b6124e3ed4ef307a2f6a2264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a79916d_90980d56",
         "filename": "virtualizationmanager/src/debug_config.rs",
         "patchSetId": 3
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Re backup:\n\nBackup is to ensure that overlay remain unchanged after it\u0027s being overlaid. As you may know, overlay API amends both base and overlay while applying overlay.\n\nDo you prefer to keep it damaged? Technically we don\u0027t need to back in here and later usages, but later uses in `pvmfw` wasn\u0027t trivial to track it.\n\nUltimate solution would be refactoring `pvmfw` to move ownership of VM DTBO from `pvmfw` config payload to entries when used. With such change, I can drop VM DTBO immediately after trying overlay so backup isn\u0027t necessary. But I failed to refactor so, so wrote the API in this way. What do you think?\n\n\nRE size: you\u0027re correct. I\u0027ll fix so.",
       "parentUuid": "5a79916d_90980d56",
+      "range": {
+        "startLine": 169,
+        "startChar": 24,
+        "endLine": 169,
+        "endChar": 49
+      },
+      "revId": "d8f5286c8c2c41e0b6124e3ed4ef307a2f6a2264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "740b7fb8_f4ef3e1f",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T09:02:37Z",
+      "side": 1,
+      "message": "\u003e Do you prefer to keep it damaged?\n\nYes, why not? `overlay_buf` goes out of scope right after anyway.\n\nMy comment was only about `from_custom_debug_overlay_policy` and `from_overlay_onto_new_fdt` so not sure why pvmfw changes would be required?",
+      "parentUuid": "872bd68f_fb997f78",
       "range": {
         "startLine": 169,
         "startChar": 24,
@@ -156,6 +204,30 @@
       "side": 1,
       "message": "If you want discuss more about getting overlaid VM DTBO from the ABL, let\u0027s talk more at next CL\n\nhttps://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2761476/comment/3ed0d7b0_16dd862b/",
       "parentUuid": "45166e81_7d17e465",
+      "range": {
+        "startLine": 172,
+        "startChar": 67,
+        "endLine": 172,
+        "endChar": 78
+      },
+      "revId": "d8f5286c8c2c41e0b6124e3ed4ef307a2f6a2264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b58147a_4dbadf17",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T09:02:37Z",
+      "side": 1,
+      "message": "\u003e In order to find right node, we should travel DT while understanding overlay syntax\n\nYes, that\u0027s what I was getting to (and it would surely be more efficient than applying the DTBO) but I agree that it\u0027s far from trivial if we want to be fully generic ...",
+      "parentUuid": "f9d9d8e0_f53e5356",
       "range": {
         "startLine": 172,
         "startChar": 67,
