@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "560bcd4f_6e586c9b",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T09:00:36Z",
+      "side": 1,
+      "message": "`NonEmptyRange`? Also, could this simply wrap a `Range\u003cusize\u003e`?",
+      "range": {
+        "startLine": 26,
+        "startChar": 11,
+        "endLine": 26,
+        "endChar": 16
+      },
+      "revId": "adeec28c0f384a770716e236b39518f1f968536e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f9ba989_228a0309",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T09:00:36Z",
+      "side": 1,
+      "message": "Why is this guy moving around?",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 20
+      },
+      "revId": "adeec28c0f384a770716e236b39518f1f968536e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f9d3cb8_db3190d9",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T09:00:36Z",
+      "side": 1,
+      "message": "I\u0027d keep the \"type implementing a non-empty range\" dissociated from any pvmfw-specific errors.\n\nWe can follow `NonZeroUsize` and have a ctor that `-\u003e Option\u003cSelf\u003e` e.g.\n```\nlet len \u003d NonZeroUsize::new(len)?;\nlet end \u003d len.checked_add(start)?.get();\n\nSome(start..end)\n```",
+      "range": {
+        "startLine": 161,
+        "startChar": 35,
+        "endLine": 161,
+        "endChar": 51
+      },
+      "revId": "adeec28c0f384a770716e236b39518f1f968536e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d208cd79_e595e58e",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T09:00:36Z",
+      "side": 1,
+      "message": "`range[i]` are already initialized to `None` so you can flatten this loop by moving to the next entry if the current one is missing or wrong.",
+      "range": {
+        "startLine": 240,
+        "startChar": 16,
+        "endLine": 240,
+        "endChar": 20
+      },
+      "revId": "adeec28c0f384a770716e236b39518f1f968536e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
