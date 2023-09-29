@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acc24654_7e9b5adc",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T09:02:18Z",
+      "side": 1,
+      "message": "`{previous,last}_end`?",
+      "range": {
+        "startLine": 229,
+        "startChar": 16,
+        "endLine": 229,
+        "endChar": 24
+      },
+      "revId": "4b0b0d2fc36d025e78ffdd3be6f85fe9d8c5bca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdeb6e48_266a8959",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T09:02:18Z",
+      "side": 1,
+      "message": "`.start`, I guess?",
+      "range": {
+        "startLine": 250,
+        "startChar": 36,
+        "endLine": 250,
+        "endChar": 39
+      },
+      "revId": "4b0b0d2fc36d025e78ffdd3be6f85fe9d8c5bca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2be6cb9c_3e0c48f0",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T09:02:18Z",
+      "side": 1,
+      "message": "It\u0027s probably not the cleanest to have a function that takes an `Option` to return `None` if the input was `None`.\n\nCould we instead have\n```\nunsafe fn body_slice_mut(\u0026mut self, range: Range) -\u003e \u0026\u0027a mut [u8]\n```\nand `Option::map` the `*_range` variables at the call site? Note that the body range will always be w.r.t. `self.body`.",
+      "range": {
+        "startLine": 290,
+        "startChar": 14,
+        "endLine": 290,
+        "endChar": 32
+      },
+      "revId": "4b0b0d2fc36d025e78ffdd3be6f85fe9d8c5bca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
