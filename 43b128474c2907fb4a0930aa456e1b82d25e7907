@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec2275ae_adf9d9d5",
+        "filename": "pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-29T12:45:01Z",
+      "side": 1,
+      "message": "I\u0027m generally against adding pub methods for a type, when the underlying data structures already support it.  (`vec` exposes `contains()`). Nevertheless, lets do it.",
+      "parentUuid": "4fd596f0_a71c69e0",
+      "range": {
+        "startLine": 424,
+        "startChar": 30,
+        "endLine": 424,
+        "endChar": 52
+      },
+      "revId": "43b128474c2907fb4a0930aa456e1b82d25e7907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "225f3bb5_3366515b",
