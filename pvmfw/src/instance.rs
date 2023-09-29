@@ -35,6 +35,7 @@ use vmbase::virtio::pci::{PciTransportIterator, VirtIOBlk};
 use vmbase::virtio::HalImpl;
 use zerocopy::AsBytes;
 use zerocopy::FromBytes;
+use zerocopy::FromZeroes;
 
 pub enum Error {
     /// Unexpected I/O error while accessing the underlying disk.
@@ -163,7 +164,7 @@ pub fn get_or_generate_instance_salt(
     }
 }
 
-#[derive(FromBytes)]
+#[derive(FromZeroes, FromBytes)]
 #[repr(C, packed)]
 struct Header {
     magic: [u8; Header::MAGIC.len()],
@@ -247,7 +248,7 @@ fn locate_entry(partition: &mut Partition) -> Result<PvmfwEntry> {
 /// Marks the start of an instance.img entry.
 ///
 /// Note: Virtualization/microdroid_manager/src/instance.rs uses the name "partition".
-#[derive(AsBytes, FromBytes)]
+#[derive(AsBytes, FromZeroes, FromBytes)]
 #[repr(C, packed)]
 struct EntryHeader {
     uuid: u128,
@@ -268,7 +269,7 @@ impl EntryHeader {
     }
 }
 
-#[derive(AsBytes, FromBytes)]
+#[derive(AsBytes, FromZeroes, FromBytes)]
 #[repr(C)]
 struct EntryBody {
     code_hash: Hash,
