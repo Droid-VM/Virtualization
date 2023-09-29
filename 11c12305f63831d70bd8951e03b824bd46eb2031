@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "320011a6_e1276ac1",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T08:59:05Z",
+      "side": 1,
+      "message": "nit: `ret`, that\u0027s not just an offset",
+      "range": {
+        "startLine": 625,
+        "startChar": 12,
+        "endLine": 625,
+        "endChar": 18
+      },
+      "revId": "11c12305f63831d70bd8951e03b824bd46eb2031",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2306602_c09ea181",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T08:59:05Z",
+      "side": 1,
+      "message": "nit:\n```\nlet subnode \u003d fdt_err_or_option(ret)?.map(|offset| {\n    FdtNode { fdt: node.fdt, offset }\n});\n```",
+      "range": {
+        "startLine": 627,
+        "startChar": 11,
+        "endLine": 630,
+        "endChar": 9
+      },
+      "revId": "11c12305f63831d70bd8951e03b824bd46eb2031",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

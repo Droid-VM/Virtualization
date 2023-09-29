@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d01c72c7_c5a88b0b",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T08:59:05Z",
+      "side": 1,
+      "message": "To answer the offline question of why add a function that we know will only be used once: for consistency with the model of this crate being a \"Rustified\" wrapper around the FFI, where we already have a 1-to-1 mapping between C functions and `Fdt{,Node,NodeMut}` methods and to improve clarity at the callsite, as illustrated above.",
+      "parentUuid": "526bc7aa_7ead0b4b",
+      "range": {
+        "startLine": 632,
+        "startChar": 46,
+        "endLine": 632,
+        "endChar": 63
+      },
+      "revId": "f3933a2812ff314396bfc456a1573e8e3a05ca0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0dd51f70_c617a3bc",
         "filename": "libs/libfdt/src/lib.rs",
         "patchSetId": 4
