@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d4d09a3_e8637f9b",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-29T09:50:36Z",
+      "side": 1,
+      "message": "The comment should ideally explain how rollback protection is provided (being part of dice node, payload storing them in Secretkeeper etc, unlike how avb does - `rollback_index \u003e\u003d stored_rollback_index`), but since the infrastructure in not done, I\u0027ve left the comment TODO as well.",
+      "parentUuid": "5dd0f891_a4a48513",
+      "range": {
+        "startLine": 235,
+        "startChar": 12,
+        "endLine": 235,
+        "endChar": 21
+      },
+      "revId": "2455dfd43011e71ba1f3021621bd8f852f4d20d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d01c43b_3ce477a9",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-09-29T09:44:39Z",
       "side": 1,
       "message": "Wuh?",
+      "range": {
+        "startLine": 400,
+        "startChar": 45,
+        "endLine": 400,
+        "endChar": 49
+      },
+      "revId": "2455dfd43011e71ba1f3021621bd8f852f4d20d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02bf5b33_3a81a98b",
+        "filename": "pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-29T09:50:36Z",
+      "side": 1,
+      "message": "That\u0027s the \"salt\" (same as the one used in `avb_add_hash_footer` when building the image). This test suite seem to be hevily using different salts for different image.",
+      "parentUuid": "2d01c43b_3ce477a9",
       "range": {
         "startLine": 400,
         "startChar": 45,
