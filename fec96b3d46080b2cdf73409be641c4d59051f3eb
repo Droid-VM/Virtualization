@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32f3bd8f_af123b5b",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-29T09:35:50Z",
+      "side": 1,
+      "message": "Lets not create more variables. I\u0027ve changed rollback_indexes -\u003e rollback_index \u0026 it achieves the same :)",
+      "parentUuid": "45ab55ac_2f351075",
+      "range": {
+        "startLine": 182,
+        "startChar": 28,
+        "endLine": 182,
+        "endChar": 88
+      },
+      "revId": "fec96b3d46080b2cdf73409be641c4d59051f3eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad6bf113_58f33b87",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-09-29T07:25:22Z",
       "side": 1,
       "message": "Since all the other fields are the same in this struct. It\u0027s more readable if we just create a variable for `security_version` to keep the if more focus instead of making the conditional branch on `config_values`.\n\n```suggestion\nlet security_version \u003d if cfg!(llpvm_changes) { Some(self.security_version) } else { None };\n```\n\nThis will also facilitate the change of remote attestation marker addition.",
+      "range": {
+        "startLine": 72,
+        "startChar": 16,
+        "endLine": 72,
+        "endChar": 62
+      },
+      "revId": "fec96b3d46080b2cdf73409be641c4d59051f3eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5f74ec0_7d117b66",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-09-29T09:35:50Z",
+      "side": 1,
+      "message": "That\u0027s nit, but I changed it.",
+      "parentUuid": "ad6bf113_58f33b87",
       "range": {
         "startLine": 72,
         "startChar": 16,
