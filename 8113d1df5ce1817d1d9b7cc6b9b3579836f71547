@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cdefb26_f4987728",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T08:58:33Z",
+      "side": 1,
+      "message": "There\u0027s no character count being past, right?\n\nAll we can do is trust that `fdt_get_name` doesn\u0027t overrun the DT as, if the name is badly formed (e.g. missing `\\0`), the C code will most likely read the bytes until it comes across a zero bytes (which could, in theory, be past the end of the DT region).",
+      "range": {
+        "startLine": 258,
+        "startChar": 11,
+        "endLine": 258,
+        "endChar": 61
+      },
+      "revId": "8113d1df5ce1817d1d9b7cc6b9b3579836f71547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b71e26ff_a557c5a3",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T08:58:33Z",
+      "side": 1,
+      "message": "Why, `\\0`? Is that not included in `len` ...?",
+      "range": {
+        "startLine": 263,
+        "startChar": 51,
+        "endLine": 263,
+        "endChar": 54
+      },
+      "revId": "8113d1df5ce1817d1d9b7cc6b9b3579836f71547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

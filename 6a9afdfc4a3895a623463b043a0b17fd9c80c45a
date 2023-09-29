@@ -189,6 +189,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bc963fd_17b3daee",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T08:58:33Z",
+      "side": 1,
+      "message": "\u003e `CStr::from_ptr` is unsafe, and not sure whether it improves readability. Let me keep this as-is.\n \nI wasn\u0027t suggesting you use it, the approach with bounding `from_bytes_with_nul` using `lenp` was undeniably superior 😊 In a sense, the reason why it\u0027s marked unsafe is exactly because the standard library wants the caller to do what you are doing here: sanity-check the C string.",
+      "parentUuid": "5f986f55_1d5f531e",
+      "range": {
+        "startLine": 262,
+        "startChar": 0,
+        "endLine": 267,
+        "endChar": 71
+      },
+      "revId": "6a9afdfc4a3895a623463b043a0b17fd9c80c45a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0536985_9e6a2110",
