@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use bssl_avf::{Aead, AeadCtx, ApiName, Error, Result};
+use bssl_avf::{Aead, AeadCtx, ApiName, CipherError, Error, ReasonCode, Result};
 
 const KEY1: [u8; 32] = [
     0xdb, 0x16, 0xcc, 0xbf, 0xf0, 0xc4, 0xbc, 0x93, 0xc3, 0x5f, 0x11, 0xc5, 0xfa, 0xae, 0x03, 0x6c,
@@ -48,9 +48,11 @@ fn aes_256_gcm_randnonce_fails_to_decrypt_with_wrong_key() -> Result<()> {
     let aead_ctx2 = AeadCtx::new(Aead::aes_256_gcm_randnonce(), &KEY2, tag_len)?;
     let mut plaintext = vec![0u8; ciphertext.len()];
 
-    let res = aead_ctx2.open(&ciphertext, nonce, ad, &mut plaintext);
+    let err = aead_ctx2.open(&ciphertext, nonce, ad, &mut plaintext).unwrap_err();
 
-    assert_eq!(res, Err(Error::CallFailed(ApiName::EVP_AEAD_CTX_open)));
+    let expected_err =
+        Error::CallFailed(ApiName::EVP_AEAD_CTX_open, ReasonCode::Cipher(CipherError::BadDecrypt));
+    assert_eq!(expected_err, err);
     Ok(())
 }
 
@@ -63,9 +65,11 @@ fn aes_256_gcm_randnonce_fails_to_decrypt_with_different_ad() -> Result<()> {
     let aead_ctx = AeadCtx::new(Aead::aes_256_gcm_randnonce(), &KEY1, tag_len)?;
     let mut plaintext = vec![0u8; ciphertext.len()];
 
-    let res = aead_ctx.open(&ciphertext, nonce, ad2, &mut plaintext);
+    let err = aead_ctx.open(&ciphertext, nonce, ad2, &mut plaintext).unwrap_err();
 
-    assert_eq!(res, Err(Error::CallFailed(ApiName::EVP_AEAD_CTX_open)));
+    let expected_err =
+        Error::CallFailed(ApiName::EVP_AEAD_CTX_open, ReasonCode::Cipher(CipherError::BadDecrypt));
+    assert_eq!(expected_err, err);
     Ok(())
 }
 
@@ -79,8 +83,11 @@ fn aes_256_gcm_randnonce_fails_to_decrypt_corrupted_ciphertext() -> Result<()> {
     let aead_ctx = AeadCtx::new(Aead::aes_256_gcm_randnonce(), &KEY1, tag_len)?;
     let mut plaintext = vec![0u8; ciphertext.len()];
 
-    let res = aead_ctx.open(&ciphertext, nonce, ad, &mut plaintext);
-    assert_eq!(res, Err(Error::CallFailed(ApiName::EVP_AEAD_CTX_open)));
+    let err = aead_ctx.open(&ciphertext, nonce, ad, &mut plaintext).unwrap_err();
+
+    let expected_err =
+        Error::CallFailed(ApiName::EVP_AEAD_CTX_open, ReasonCode::Cipher(CipherError::BadDecrypt));
+    assert_eq!(expected_err, err);
     Ok(())
 }
 

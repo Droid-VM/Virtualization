@@ -14,8 +14,8 @@
 
 //! Wrappers of the AEAD functions in BoringSSL aead.h.
 
-use crate::util::check_int_result;
-use bssl_avf_error::{ApiName, Error, Result};
+use crate::util::{check_int_result, to_call_failed_error};
+use bssl_avf_error::{ApiName, Result};
 use bssl_ffi::{
     EVP_AEAD_CTX_free, EVP_AEAD_CTX_new, EVP_AEAD_CTX_open, EVP_AEAD_CTX_seal,
     EVP_AEAD_max_overhead, EVP_AEAD_nonce_length, EVP_aead_aes_256_gcm_randnonce, EVP_AEAD,
@@ -78,7 +78,7 @@ impl AeadCtx {
         // SAFETY: This function only reads the given data and the returned pointer is
         // checked below.
         let ctx = unsafe { EVP_AEAD_CTX_new(aead.0, key.as_ptr(), key.len(), tag_len) };
-        let ctx = NonNull::new(ctx).ok_or(Error::CallFailed(ApiName::EVP_AEAD_CTX_new))?;
+        let ctx = NonNull::new(ctx).ok_or(to_call_failed_error(ApiName::EVP_AEAD_CTX_new))?;
         Ok(Self { ctx, aead })
     }
 
@@ -113,7 +113,7 @@ impl AeadCtx {
             )
         };
         check_int_result(ret, ApiName::EVP_AEAD_CTX_seal)?;
-        out.get(0..out_len).ok_or(Error::CallFailed(ApiName::EVP_AEAD_CTX_seal))
+        out.get(0..out_len).ok_or(to_call_failed_error(ApiName::EVP_AEAD_CTX_seal))
     }
 
     /// Authenticates `data` and decrypts it to `out`.
@@ -148,7 +148,7 @@ impl AeadCtx {
             )
         };
         check_int_result(ret, ApiName::EVP_AEAD_CTX_open)?;
-        out.get(0..out_len).ok_or(Error::CallFailed(ApiName::EVP_AEAD_CTX_open))
+        out.get(0..out_len).ok_or(to_call_failed_error(ApiName::EVP_AEAD_CTX_open))
     }
 
     /// Returns the `Aead` represented by this `AeadCtx`.
