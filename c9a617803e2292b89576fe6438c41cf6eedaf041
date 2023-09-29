@@ -16,6 +16,75 @@
       "message": "Leaving some comments to discuss.",
       "revId": "c9a617803e2292b89576fe6438c41cf6eedaf041",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "288a13c7_f79cac56",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T09:04:39Z",
+      "side": 1,
+      "message": "I notice that in some cases you define `const` paths to tests files, here you define a wrapping function (`vm_dtbo`) and below, you `fs::read` the literal file path inline; I don\u0027t have an opinion on which one\u0027s better (probably not third one) but we should be consistent across the files and only use one.",
+      "range": {
+        "startLine": 108,
+        "startChar": 17,
+        "endLine": 108,
+        "endChar": 42
+      },
+      "revId": "c9a617803e2292b89576fe6438c41cf6eedaf041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a14fd1e_fae45764",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T09:04:39Z",
+      "side": 1,
+      "message": "I guess the idea here is to validate that we didn\u0027t break the safety requirements of `from_bytes_with_nul_unchecked` but I\u0027m pretty sure that this is undefined as, if we assume that we have undefined behavior when declaring `CROSVM_NODES`, we can\u0027t assume that `to_bytes_with_nul` will work properly, making this test unreliable.",
+      "range": {
+        "startLine": 113,
+        "startChar": 8,
+        "endLine": 115,
+        "endChar": 99
+      },
+      "revId": "c9a617803e2292b89576fe6438c41cf6eedaf041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd871748_e224c070",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T09:04:39Z",
+      "side": 1,
+      "message": "Same as in previous CL: should we use `assert_eq!(..., Ok(()))` so that the potential assertion error (hopefully) contains the `Err`? Or should we simply `unwrap`?",
+      "range": {
+        "startLine": 122,
+        "startChar": 8,
+        "endLine": 122,
+        "endChar": 14
+      },
+      "revId": "c9a617803e2292b89576fe6438c41cf6eedaf041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

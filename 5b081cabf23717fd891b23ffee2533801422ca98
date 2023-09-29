@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "25cc5799_5d430b5c",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T09:04:39Z",
+      "side": 1,
+      "message": "\u003e Would you prefer ABL to provide overlaid VM DTBO in pvmfw\u0027s config?\n\nIf we\u0027re only ever going to use it as a DT (not DTBO), yes, as it will avoid increasing pVM boots for no reason. But back to my original question: wasn\u0027t there a reason for it to be a DTBO? Something to do with needing it to map the VM DTBO nodes to their respective targeted guest DT node? Or following phandles? I can\u0027t remember ...\n\n\u003e If we get overlaid VM DTBO, then I feel bad if debug policy works differently.\n\nThose are different and I don\u0027t believe we should look for any symmetry: the DP DTBO is intended to be applied by pvmfw to the DT so is naturally an overlay. OTOH, the VM DTBO is only ever consulted as a trusted reference.",
+      "parentUuid": "2cd96aa6_75c14833",
+      "range": {
+        "startLine": 82,
+        "startChar": 27,
+        "endLine": 82,
+        "endChar": 52
+      },
+      "revId": "5b081cabf23717fd891b23ffee2533801422ca98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3863698e_87ad9559",
         "filename": "pvmfw/src/devices.rs",
         "patchSetId": 3
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "I just wanted to use `iter()` as much as possible as a Rust newbie.",
       "parentUuid": "3863698e_87ad9559",
+      "range": {
+        "startLine": 90,
+        "startChar": 9,
+        "endLine": 90,
+        "endChar": 21
+      },
+      "revId": "5b081cabf23717fd891b23ffee2533801422ca98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9a46b14_431a6aa3",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T09:04:39Z",
+      "side": 1,
+      "message": "Fair enough!",
+      "parentUuid": "574e675d_287ef52f",
       "range": {
         "startLine": 90,
         "startChar": 9,
@@ -179,6 +227,30 @@
       "side": 1,
       "message": "@jiyong@google.com\n\nSounds good. But can I expect `\u003candroid,pvmfw,...\u003e` in non-assignable devices? (e.g. IOMMU driver, ..). I\u0027m worrying if I may filter-out useful nodes as well.",
       "parentUuid": "8fd88249_5178b0f9",
+      "range": {
+        "startLine": 92,
+        "startChar": 15,
+        "endLine": 92,
+        "endChar": 44
+      },
+      "revId": "5b081cabf23717fd891b23ffee2533801422ca98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c01aa935_6289533e",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T09:04:39Z",
+      "side": 1,
+      "message": "Yes, some assigned device nodes will depend on other nodes (phandles) and those dependencies must also be verified and kept.",
+      "parentUuid": "d59b85c8_ec42ac5b",
       "range": {
         "startLine": 92,
         "startChar": 15,
@@ -249,6 +321,30 @@
       "side": 1,
       "message": "dito. Follow up CL will apply filtered device tree nodes to the template DT.\n\nSo this CL does early verification before we search nodes for applying to template DT.",
       "parentUuid": "ed777348_3a11fee9",
+      "range": {
+        "startLine": 618,
+        "startChar": 4,
+        "endLine": 618,
+        "endChar": 35
+      },
+      "revId": "5b081cabf23717fd891b23ffee2533801422ca98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c9f099e_bd154475",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T09:04:39Z",
+      "side": 1,
+      "message": "But why not integrate with the `patch_device_tree` flow instead? Why 2 steps?",
+      "parentUuid": "774331f8_88d48276",
       "range": {
         "startLine": 618,
         "startChar": 4,

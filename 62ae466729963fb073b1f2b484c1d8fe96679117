@@ -120,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0dddf8cc_4788bbf3",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T09:04:39Z",
+      "side": 1,
+      "message": "Why don\u0027t we redefine `cstr` (or introduce a `const_cstr`) as\n\n```\nmacro_rules! cstr {\n    ($str:literal) \u003d\u003e {{\n        #[allow(unused_unsafe)] // In case the macro is used within an unsafe block.\n        unsafe { core::ffi::CStr::from_bytes_with_nul_unchecked(concat!($str, \"\\0\").as_bytes()) }\n    }};\n}\n```\n\nAs the `Safety` comment of `from_bytes_with_nul_unchecked` says that\n\n\u003e The provided slice must be nul-terminated and not contain any interior nul bytes.\n\nthat macro would meet the former while the latter is very unlikely to happen (who\u0027d \"`cstr!(\"xxx\\0yyy\")`\"?!), would be caught by us during review and is actually caught by the compiler in my playground:\n```\n  --\u003e /rustc/d5c2e9c342b358556da91d61ed4133f6f50fc0c3/library/core/src/ffi/c_str.rs:443:17\n   |\n   \u003d note: the evaluated program panicked at \u0027input contained interior nul\u0027, /rustc/d5c2e9c342b358556da91d61ed4133f6f50fc0c3/library/core/src/ffi/c_str.rs:443:17\n   |\nnote: inside `CStr::from_bytes_with_nul_unchecked::const_impl`\n  --\u003e /rustc/d5c2e9c342b358556da91d61ed4133f6f50fc0c3/library/core/src/ffi/c_str.rs:443:17\nnote: inside `CStr::from_bytes_with_nul_unchecked`\n  --\u003e /rustc/d5c2e9c342b358556da91d61ed4133f6f50fc0c3/library/core/src/ffi/c_str.rs:453:18\nnote: inside `A`\n  --\u003e src/main.rs:6:18\n   |\n6  |         unsafe { core::ffi::CStr::from_bytes_with_nul_unchecked(concat!($str, \"\\0\").as_bytes()) }\n   |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n...\n11 |     const A: \u0026CStr \u003d cstr!(\"xxx\\0yyy\");\n   |                      ----------------- in this macro invocation\n   \u003d note: this error originates in the macro `$crate::panic::panic_2021` which comes from the expansion of the macro `cstr`\n```",
+      "parentUuid": "a1ee5622_068abb98",
+      "range": {
+        "startLine": 35,
+        "startChar": 8,
+        "endLine": 35,
+        "endChar": 64
+      },
+      "revId": "62ae466729963fb073b1f2b484c1d8fe96679117",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a27fdcb3_31b137a9",
         "filename": "pvmfw/src/devices.rs",
         "patchSetId": 1
@@ -321,6 +345,30 @@
       "writtenOn": "2023-09-26T02:15:49Z",
       "side": 1,
       "message": "note: formatter forcefully adds this.",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 72
+      },
+      "revId": "62ae466729963fb073b1f2b484c1d8fe96679117",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69816969_2674fd98",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-09-29T09:04:39Z",
+      "side": 1,
+      "message": "Thanks for the comment, I was wondering about this!\n\nIf you want, feel free to submit as a one-liner CL we\u0027ll autosubmit and get this out of the way as it\u0027s likely to lead to clashes with Alice\u0027s changes.",
+      "parentUuid": "6330b710_c9ba6796",
       "range": {
         "startLine": 114,
         "startChar": 0,
