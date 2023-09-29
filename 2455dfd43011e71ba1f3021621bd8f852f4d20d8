@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ad2b041_057eb484",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-29T10:01:13Z",
+      "side": 1,
+      "message": "I don\u0027t object to the comment, but a bug number in a TODO should reference a bug that tells me what is going to change.",
+      "parentUuid": "1d4d09a3_e8637f9b",
+      "range": {
+        "startLine": 235,
+        "startChar": 12,
+        "endLine": 235,
+        "endChar": 21
+      },
+      "revId": "2455dfd43011e71ba1f3021621bd8f852f4d20d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2d01c43b_3ce477a9",
         "filename": "pvmfw/avb/tests/api_test.rs",
         "patchSetId": 5
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "That\u0027s the \"salt\" (same as the one used in `avb_add_hash_footer` when building the image). This test suite seem to be hevily using different salts for different image.",
       "parentUuid": "2d01c43b_3ce477a9",
+      "range": {
+        "startLine": 400,
+        "startChar": 45,
+        "endLine": 400,
+        "endChar": 49
+      },
+      "revId": "2455dfd43011e71ba1f3021621bd8f852f4d20d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c380786f_972b9a2e",
+        "filename": "pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-09-29T10:01:13Z",
+      "side": 1,
+      "message": "Aha!\nI\u0027d be tempted to do this as\n\nlet salt \u003d hex::decode(\"1211\")?;",
+      "parentUuid": "02bf5b33_3a81a98b",
       "range": {
         "startLine": 400,
         "startChar": 45,
