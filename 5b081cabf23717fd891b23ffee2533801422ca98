@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a83c0dc_6080ace3",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-02T17:01:11Z",
+      "side": 1,
+      "message": "\u003e \u003e Would you prefer ABL to provide overlaid VM DTBO in pvmfw\u0027s config?\n\n\u003e If we\u0027re only ever going to use it as a DT (not DTBO), yes, as it will avoid increasing pVM boots for no reason. But back to my original question: wasn\u0027t there a reason for it to be a DTBO? Something to do with needing it to map the VM DTBO nodes to their respective targeted guest DT node? Or following phandles? I can\u0027t remember ...\n\nNot much reason other than VM DTBO is shipped to host in `dtbo.img`, where there are only DTBOs and no DT. ABL simply copies the VM DTBO from the `dtbo.img` to `pvmfw` config with no modification.\n\n\u003e \u003e If we get overlaid VM DTBO, then I feel bad if debug policy works differently.\n\n\u003e Those are different and I don\u0027t believe we should look for any symmetry: the DP DTBO is intended to be applied by pvmfw to the DT so is naturally an overlay. OTOH, the VM DTBO is only ever consulted as a trusted reference.\n\nIf you aren\u0027t bothered by symmetry, then I wouldn\u0027t care so as well.",
+      "parentUuid": "25cc5799_5d430b5c",
+      "range": {
+        "startLine": 82,
+        "startChar": 27,
+        "endLine": 82,
+        "endChar": 52
+      },
+      "revId": "5b081cabf23717fd891b23ffee2533801422ca98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3863698e_87ad9559",
         "filename": "pvmfw/src/devices.rs",
         "patchSetId": 3
@@ -263,6 +287,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "457e0bda_e8a30ef3",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-02T17:01:11Z",
+      "side": 1,
+      "message": "BTW, can we simply ignore any unknown node from the `crosvm`? I thought that we wouldn\u0027t boot VM even though we wouldn\u0027t use such unknown nodes.",
+      "parentUuid": "c01aa935_6289533e",
+      "range": {
+        "startLine": 92,
+        "startChar": 15,
+        "endLine": 92,
+        "endChar": 44
+      },
+      "revId": "5b081cabf23717fd891b23ffee2533801422ca98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e76d48f_ab836131",
         "filename": "pvmfw/src/devices.rs",
         "patchSetId": 3
@@ -345,6 +393,30 @@
       "side": 1,
       "message": "But why not integrate with the `patch_device_tree` flow instead? Why 2 steps?",
       "parentUuid": "774331f8_88d48276",
+      "range": {
+        "startLine": 618,
+        "startChar": 4,
+        "endLine": 618,
+        "endChar": 35
+      },
+      "revId": "5b081cabf23717fd891b23ffee2533801422ca98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53b73510_00dc498b",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-02T17:01:11Z",
+      "side": 1,
+      "message": "Just to define my codes in a separate place for running unit test. Build target `rust_test` silently adds `libstd` dependency while `pvmfw` is build with `no_std`, and this was the best solution that I could think of.",
+      "parentUuid": "2c9f099e_bd154475",
       "range": {
         "startLine": 618,
         "startChar": 4,
