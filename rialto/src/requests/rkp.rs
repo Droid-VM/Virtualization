@@ -15,6 +15,7 @@
 //! This module contains functions related to the attestation of the
 //! service VM via the RKP (Remote Key Provisioning) server.
 
+use super::keyblob;
 use super::pub_key::{build_maced_public_key, validate_public_key};
 use alloc::string::String;
 use alloc::vec;
@@ -25,6 +26,7 @@ use core::result;
 use coset::{iana, AsCborValue, CoseSign1, CoseSign1Builder, HeaderBuilder};
 use diced_open_dice::{kdf, keypair_from_seed, sign, DiceArtifacts, PrivateKey};
 use log::error;
+use serde::Serialize;
 use service_vm_comm::{EcdsaP256KeyPair, GenerateCertificateRequestParams, RequestProcessingError};
 use zeroize::Zeroizing;
 
@@ -44,13 +46,11 @@ pub(super) fn generate_ecdsa_p256_key_pair(
 ) -> Result<EcdsaP256KeyPair> {
     let hmac_key = derive_hmac_key(dice_artifacts)?;
     let ec_key = EcKey::new_p256()?;
+
     let maced_public_key = build_maced_public_key(ec_key.cose_public_key()?, hmac_key.as_ref())?;
+    let key_blob = keyblob::encrypt(ec_key.private_key()?.as_slice(), dice_artifacts.cdi_seal())?;
 
-    // TODO(b/279425980): Encrypt the private key in a key blob.
-    // Remove the printing of the private key.
-    log::debug!("Private key: {:?}", ec_key.private_key()?.as_slice());
-
-    let key_pair = EcdsaP256KeyPair { maced_public_key, key_blob: Vec::new() };
+    let key_pair = EcdsaP256KeyPair { maced_public_key, key_blob: to_cbor(&key_blob)? };
     Ok(key_pair)
 }
 
@@ -80,7 +80,7 @@ pub(super) fn generate_certificate_request(
         // TODO(b/299256925): Add device info in CBOR format here.
         Value::Array(public_keys),
     ])?;
-    let csr_payload = cbor_to_vec(&csr_payload)?;
+    let csr_payload = to_cbor(&csr_payload)?;
 
     // Builds `SignedData`.
     let signed_data_payload =
@@ -101,7 +101,7 @@ pub(super) fn generate_certificate_request(
         dice_cert_chain,
         signed_data,
     ])?;
-    cbor_to_vec(&auth_req)
+    to_cbor(&auth_req)
 }
 
 fn derive_hmac_key(dice_artifacts: &dyn DiceArtifacts) -> Result<Zeroizing<[u8; HMAC_KEY_LENGTH]>> {
@@ -123,7 +123,7 @@ fn build_signed_data(payload: &Value, dice_artifacts: &dyn DiceArtifacts) -> Res
     let protected = HeaderBuilder::new().algorithm(signing_algorithm).build();
     let signed_data = CoseSign1Builder::new()
         .protected(protected)
-        .payload(cbor_to_vec(payload)?)
+        .payload(to_cbor(payload)?)
         .try_create_signature(&[], |message| sign_message(message, &cdi_leaf_priv))?
         .build();
     Ok(signed_data)
@@ -143,7 +143,7 @@ fn sign_message(message: &[u8], private_key: &PrivateKey) -> Result<Vec<u8>> {
         .to_vec())
 }
 
-fn cbor_to_vec(v: &Value) -> Result<Vec<u8>> {
+fn to_cbor<T: ?Sized + Serialize>(v: &T) -> Result<Vec<u8>> {
     let mut data = Vec::new();
     ciborium::into_writer(v, &mut data).map_err(coset::CoseError::from)?;
     Ok(data)
