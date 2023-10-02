@@ -142,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd2581f4_5a4b2313",
+        "filename": "rialto/src/requests/keyblob.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-02T14:55:59Z",
+      "side": 1,
+      "message": "I wasn\u0027t sure what a \"root key\" was. But secret is good.",
+      "parentUuid": "19bccc0a_274a406b",
+      "range": {
+        "startLine": 47,
+        "startChar": 43,
+        "endLine": 47,
+        "endChar": 55
+      },
+      "revId": "38693d093122b1b4576e363141a450cfdc5f1989",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22beae9a_ec61199f",
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "You mean in test or right here in the code? \n\nRegarding the tests, I plan to integrate `hwtrust` later to check the generated CSR b/300625792.",
       "parentUuid": "22beae9a_ec61199f",
+      "range": {
+        "startLine": 77,
+        "startChar": 22,
+        "endLine": 77,
+        "endChar": 27
+      },
+      "revId": "38693d093122b1b4576e363141a450cfdc5f1989",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4151d67_1cb80d6a",
+        "filename": "rialto/src/requests/rkp.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-02T14:55:59Z",
+      "side": 1,
+      "message": "In tests. \n\n\u003e I plan to integrate hwtrust later to check the generated CSR\n\nAck, SG.",
+      "parentUuid": "b6b3940d_90dc7993",
       "range": {
         "startLine": 77,
         "startChar": 22,
