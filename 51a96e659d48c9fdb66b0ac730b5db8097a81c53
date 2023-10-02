@@ -16,6 +16,80 @@
       "message": "Hi Alan, PTAL.",
       "revId": "51a96e659d48c9fdb66b0ac730b5db8097a81c53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cebe706_6ee3074c",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-02T07:59:38Z",
+      "side": 1,
+      "message": "Now that `nonce` is included, what are the constraints on its size?\n\nFor the specific AEAD used here, will this be entirely ignored?\n\nIf different AEADs are allowed in the future, will there need to be a `nonce_size() -\u003e usize` method somewhere to indicate what\u0027s required?\n\n(More generally, I wonder if we can use the Rust type system more to reduce the number of footguns still inherited from BoringSSL...)",
+      "revId": "51a96e659d48c9fdb66b0ac730b5db8097a81c53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92794347_0e3f7776",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-02T07:59:38Z",
+      "side": 1,
+      "message": "super-nit: errors are returned, not thrown (passim)",
+      "range": {
+        "startLine": 104,
+        "startChar": 90,
+        "endLine": 104,
+        "endChar": 96
+      },
+      "revId": "51a96e659d48c9fdb66b0ac730b5db8097a81c53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0391e422_34b5c615",
+        "filename": "libs/bssl/tests/aead_test.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-02T07:59:38Z",
+      "side": 1,
+      "message": "It would be nice if we could figure out a more ergonomic API that didn\u0027t require the caller to always remember to do this second step of truncation.  Maybe return the subslice?",
+      "revId": "51a96e659d48c9fdb66b0ac730b5db8097a81c53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2662d4cd_302cdffb",
+        "filename": "libs/bssl/tests/aead_test.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-02T07:59:38Z",
+      "side": 1,
+      "message": "nit: would `assert_ne!` work here?",
+      "revId": "51a96e659d48c9fdb66b0ac730b5db8097a81c53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9af04b70_ae9d115d",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-02T07:59:38Z",
+      "side": 1,
+      "message": "If `AEAD_DEFAULT_TAG_LENGTH` is private, then a user can\u0027t specify `Some(AEAD_DEFAULT_TAG_LENGTH)`.  But maybe an `enum` would be clearer:\n\n```rust\npub enum AeadTagLength {\n  Default,\n  Specified(usize),\n}\n```",
+      "parentUuid": "278a12f6_2ebe3cb1",
+      "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6268b389_4b631cd2",
         "filename": "libs/bssl/src/aead.rs",
         "patchSetId": 3
@@ -201,6 +219,24 @@
       "side": 1,
       "message": "The AAD is set up here [1] from the ad. I don\u0027t see an easy way to get this value out. Otherwise for the encrypted keyblob, we can pass a raw vector directly instead of `Cose_Encrypt0`.\n\n[1] http://google3/third_party/openssl/boringssl/src/crypto/fipsmodule/cipher/e_aes.c;l\u003d1065;rcl\u003d569168093",
       "parentUuid": "a2b1d8ec_a17367c7",
+      "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bb0581a_f240844f",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-02T07:59:38Z",
+      "side": 1,
+      "message": "I\u0027m not quite sure what you mean here, but the updated API allows for specification of the AAD (and the nonce) so does now implement AEAD functionality.",
+      "parentUuid": "350cb7dd_13053bba",
       "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
