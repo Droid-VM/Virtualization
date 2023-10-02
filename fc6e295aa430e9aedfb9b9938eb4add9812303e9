@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "009eee35_69cc1691",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-02T10:07:08Z",
+      "side": 1,
+      "message": "It might make sense to derive copy?",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 35
+      },
+      "revId": "fc6e295aa430e9aedfb9b9938eb4add9812303e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0063cc5_0d2e8c70",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-02T10:07:08Z",
+      "side": 1,
+      "message": "There can\u0027t be any nulls.",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 59
+      },
+      "revId": "fc6e295aa430e9aedfb9b9938eb4add9812303e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc490b6c_ed7c4d64",
+        "filename": "libs/bssl/tests/aead_test.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-02T10:07:08Z",
+      "side": 1,
+      "message": "Where do these come from? (Are they special, or just random)\nWould standard test vectors be better?",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 2
+      },
+      "revId": "fc6e295aa430e9aedfb9b9938eb4add9812303e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

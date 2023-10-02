@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a15f6fd3_3eff6e8f",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-02T10:07:08Z",
+      "side": 1,
+      "message": "+1 to using a more normal function with explicit nonce. That seems more likely to assist with reusability. And I\u0027d prefer to see the random generation explicit.\n(It also makes it easier to test, I think, if you can control the nonce?)",
+      "parentUuid": "1a29ae17_c3351bfb",
+      "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5220e1a8_ec005938",
         "filename": "libs/bssl/src/aead.rs",
         "patchSetId": 3
