@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd352221_3a1fb959",
+        "filename": "libs/bssl/error/src/code.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-02T09:05:54Z",
+      "side": 1,
+      "message": "nit: it would be nice to have a comment indicating the provenance of these values (which is presumably some BoringSSL header file).  Ditto below for cipher errors.",
+      "revId": "2df3494b6f1c7621137e09865aebf3dba6b9d2d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72d58983_7e8733be",
+        "filename": "libs/bssl/src/err.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-02T09:05:54Z",
+      "side": 1,
+      "message": "Are `ERR_LIB_USER` errors possible?",
+      "revId": "2df3494b6f1c7621137e09865aebf3dba6b9d2d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
