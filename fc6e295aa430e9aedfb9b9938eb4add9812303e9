@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c845c7b_e23252ca",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-02T14:21:41Z",
+      "side": 1,
+      "message": "Possible. But it\u0027s not exactly needed for now.",
+      "parentUuid": "009eee35_69cc1691",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 35
+      },
+      "revId": "fc6e295aa430e9aedfb9b9938eb4add9812303e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0063cc5_0d2e8c70",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "020bb554_06922b53",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-02T14:21:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0063cc5_0d2e8c70",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 59
+      },
+      "revId": "fc6e295aa430e9aedfb9b9938eb4add9812303e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc490b6c_ed7c4d64",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-10-02T10:07:08Z",
       "side": 1,
       "message": "Where do these come from? (Are they special, or just random)\nWould standard test vectors be better?",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 2
+      },
+      "revId": "fc6e295aa430e9aedfb9b9938eb4add9812303e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d77e6f6_460b030a",
+        "filename": "libs/bssl/tests/aead_test.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-02T14:21:41Z",
+      "side": 1,
+      "message": "These vectors are generated randomly. It\u0027s not very straightforward to test with standard test vectors[1]. As discussed with David previously, bssl wraps the AEAD with AeadCtx, so that we don\u0027t have the values like `AAD` to set up the test. The `AAD` is derived from `ad` internally [2].\n\n[1] https://datatracker.ietf.org/doc/html/rfc7714#section-16.2\n[2] http://google3/third_party/openssl/boringssl/src/crypto/fipsmodule/cipher/e_aes.c;l\u003d1065;rcl\u003d565182837",
+      "parentUuid": "dc490b6c_ed7c4d64",
       "range": {
         "startLine": 17,
         "startChar": 0,
