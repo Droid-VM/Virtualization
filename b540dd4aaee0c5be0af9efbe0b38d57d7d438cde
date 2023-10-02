@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afc7802b_8eee7f06",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-02T15:28:02Z",
+      "side": 1,
+      "message": "Done. Added the citation.\n\nHere is the usage of the API: https://r.android.com/2770558",
+      "parentUuid": "74a6c0fa_2b457e7e",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 36,
+        "endChar": 65
+      },
+      "revId": "b540dd4aaee0c5be0af9efbe0b38d57d7d438cde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b26800a_04751d02",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-10-02T14:37:51Z",
       "side": 1,
       "message": "This would more naturally be just \"Aead\" (and then would match the comment).\nAlternatively, the caller could just use the one they passed you.\nBoth are enabled by Copy.",
+      "range": {
+        "startLine": 154,
+        "startChar": 26,
+        "endLine": 154,
+        "endChar": 31
+      },
+      "revId": "b540dd4aaee0c5be0af9efbe0b38d57d7d438cde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f96efc60_c3c2be40",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-02T15:28:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b26800a_04751d02",
       "range": {
         "startLine": 154,
         "startChar": 26,
