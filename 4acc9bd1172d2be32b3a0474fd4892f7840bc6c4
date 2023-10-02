@@ -71,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17dcde80_4be70ab4",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-02T08:38:47Z",
+      "side": 1,
+      "message": "Done. I meant users can always specify `Some(0)`, but it will be the same with enum. Then an `Option` would be simpler in this case.",
+      "parentUuid": "9af04b70_ae9d115d",
+      "revId": "4acc9bd1172d2be32b3a0474fd4892f7840bc6c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6268b389_4b631cd2",

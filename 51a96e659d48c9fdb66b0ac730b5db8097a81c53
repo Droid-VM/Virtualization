@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24de657a_967e9936",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-02T08:38:47Z",
+      "side": 1,
+      "message": "Hi David, thanks for the review, could you take another look?",
+      "revId": "51a96e659d48c9fdb66b0ac730b5db8097a81c53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cebe706_6ee3074c",
@@ -31,6 +48,24 @@
       "writtenOn": "2023-10-02T07:59:38Z",
       "side": 1,
       "message": "Now that `nonce` is included, what are the constraints on its size?\n\nFor the specific AEAD used here, will this be entirely ignored?\n\nIf different AEADs are allowed in the future, will there need to be a `nonce_size() -\u003e usize` method somewhere to indicate what\u0027s required?\n\n(More generally, I wonder if we can use the Rust type system more to reduce the number of footguns still inherited from BoringSSL...)",
+      "revId": "51a96e659d48c9fdb66b0ac730b5db8097a81c53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3232964_6745aaa4",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-02T08:38:47Z",
+      "side": 1,
+      "message": "If the nonce length doesn\u0027t match, an error will be raised [1]. It\u0027s also possible to get the nonce length of the given aead with `EVP_AEAD_nonce_length`.\n\nI would like to keep `AeadCtx` generic here to make it compatible with different AEADs.\n\n[1] http://google3/third_party/openssl/boringssl/src/crypto/fipsmodule/cipher/e_aes.c;l\u003d1177;rcl\u003d565182837",
+      "parentUuid": "4cebe706_6ee3074c",
       "revId": "51a96e659d48c9fdb66b0ac730b5db8097a81c53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -58,6 +93,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0370d9df_d0f8cfd0",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-02T08:38:47Z",
+      "side": 1,
+      "message": "Done. thanks",
+      "parentUuid": "92794347_0e3f7776",
+      "range": {
+        "startLine": 104,
+        "startChar": 90,
+        "endLine": 104,
+        "endChar": 96
+      },
+      "revId": "51a96e659d48c9fdb66b0ac730b5db8097a81c53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0391e422_34b5c615",
@@ -75,6 +134,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7bb0ab5_eed40b34",
+        "filename": "libs/bssl/tests/aead_test.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-02T08:38:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0391e422_34b5c615",
+      "revId": "51a96e659d48c9fdb66b0ac730b5db8097a81c53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2662d4cd_302cdffb",
@@ -88,6 +165,24 @@
       "writtenOn": "2023-10-02T07:59:38Z",
       "side": 1,
       "message": "nit: would `assert_ne!` work here?",
+      "revId": "51a96e659d48c9fdb66b0ac730b5db8097a81c53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a58b8014_d16aa6bf",
+        "filename": "libs/bssl/tests/aead_test.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-02T08:38:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2662d4cd_302cdffb",
       "revId": "51a96e659d48c9fdb66b0ac730b5db8097a81c53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
