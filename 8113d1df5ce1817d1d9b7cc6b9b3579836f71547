@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12b740d0_80638480",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-02T15:20:39Z",
+      "side": 1,
+      "message": "Re: character count \\\nMy mistake. Removed.\n\nRe: potential badly formed string \\\nI think that we\u0027re still safe because newly added `get_from_ptr()` ensures access is constraint within the `fdt` and `CStr::from_bytes_with_nul()` ensures `null` terminate. (similar with `getprop_str()`)",
+      "parentUuid": "5cdefb26_f4987728",
+      "range": {
+        "startLine": 258,
+        "startChar": 11,
+        "endLine": 258,
+        "endChar": 61
+      },
+      "revId": "8113d1df5ce1817d1d9b7cc6b9b3579836f71547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b71e26ff_a557c5a3",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-09-29T08:58:33Z",
       "side": 1,
       "message": "Why, `\\0`? Is that not included in `len` ...?",
+      "range": {
+        "startLine": 263,
+        "startChar": 51,
+        "endLine": 263,
+        "endChar": 54
+      },
+      "revId": "8113d1df5ce1817d1d9b7cc6b9b3579836f71547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c71b805_5b7538cc",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-02T15:20:39Z",
+      "side": 1,
+      "message": "`\\0` isn\u0027t included in the len, as most C functions do.",
+      "parentUuid": "b71e26ff_a557c5a3",
       "range": {
         "startLine": 263,
         "startChar": 51,
