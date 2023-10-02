@@ -15,7 +15,7 @@
 //! Handles the encryption and decryption of the key blob.
 
 use alloc::vec::Vec;
-use bssl_avf::{hkdf, Digester};
+use bssl_avf::{hkdf, Aead, AeadCtx, Digester};
 use core::result;
 use log::error;
 use serde::{Deserialize, Serialize};
@@ -26,6 +26,12 @@ use zeroize::Zeroizing;
 type Result<T> = result::Result<T, RequestProcessingError>;
 
 const KEK_INFO: &[u8] = b"rialto keyblob kek";
+/// To encrypt the private key, an empty nonce is utilized. This is because each key
+/// undergoes encryption using a distinct KEK, which is derived from a secret and a random
+/// salt. Since the KEK already incorporates randomness, there is no need for an additional
+/// random nonce.
+const PRIVATE_KEY_NONCE: &[u8; 12] = [0; 12];
+const PRIVATE_KEY_AD: &[u8] = b"rialto private key additional data";
 
 // Encrypted key blob.
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -44,16 +50,19 @@ pub(super) struct EncryptedKeyBlobV1 {
     encrypted_private_key: Vec<u8>,
 }
 
-pub(super) fn encrypt(_private_key: &[u8], kek_secret: &[u8]) -> Result<EncryptedKeyBlob> {
+pub(super) fn encrypt(private_key: &[u8], kek_secret: &[u8]) -> Result<EncryptedKeyBlob> {
     let kek_salt = rand::random_array().map_err(|e| {
         error!("Failed to generate the salt for KEK: {e:?}");
         RequestProcessingError::RandomArrayGenerationFailed
     })?;
-    let _kek =
+    let kek =
         hkdf::<32>(kek_secret, &kek_salt, KEK_INFO, Digester::sha512()).map(Zeroizing::new)?;
 
-    // TODO(b/279425980): Encrypt the private key with AES-256-GCM once the API is available.
-    let encrypted_private_key = Vec::new();
-    let key_blob = EncryptedKeyBlobV1 { kek_salt, encrypted_private_key };
+    let tag_len = None;
+    let aead_ctx = AeadCtx::new(Aead::aes_256_gcm(), &kek, tag_len)?;
+    let out = vec![0u8; private_key.len() + aead_ctx.aead().max_overhead()];
+    let ciphertext = aead_ctx.seal(private_key, PRIVATE_KEY_NONCE, PRIVATE_KEY_AD, &mut out)?;
+
+    let key_blob = EncryptedKeyBlobV1 { kek_salt, encrypted_private_key: ciphertext.to_vec() };
     Ok(EncryptedKeyBlob::V1(key_blob))
 }
