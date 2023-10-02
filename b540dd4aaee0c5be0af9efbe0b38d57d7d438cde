@@ -16,6 +16,52 @@
       "message": "Hi,\n\nCould you take another look?",
       "revId": "b540dd4aaee0c5be0af9efbe0b38d57d7d438cde",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74a6c0fa_2b457e7e",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-02T14:37:51Z",
+      "side": 1,
+      "message": "Citation?\nShould this be a constant, or otherwise exposed?\n\nTBH it would be nice to see the actual use of this function in code. Evaluating an API is hard without seeing the usage in practice.",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 36,
+        "endChar": 65
+      },
+      "revId": "b540dd4aaee0c5be0af9efbe0b38d57d7d438cde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b26800a_04751d02",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-02T14:37:51Z",
+      "side": 1,
+      "message": "This would more naturally be just \"Aead\" (and then would match the comment).\nAlternatively, the caller could just use the one they passed you.\nBoth are enabled by Copy.",
+      "range": {
+        "startLine": 154,
+        "startChar": 26,
+        "endLine": 154,
+        "endChar": 31
+      },
+      "revId": "b540dd4aaee0c5be0af9efbe0b38d57d7d438cde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
