@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a8257d3_400465fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-02T12:04:21Z",
+      "side": 1,
+      "message": "Hi David, thanks for the review!\n\n+Alan, could you take another look?",
+      "revId": "47287e794a02170e0392cc766b3fb9a8e076a62f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d050113a_ca52bc1f",
@@ -31,6 +48,30 @@
       "writtenOn": "2023-10-02T09:34:58Z",
       "side": 1,
       "message": "What if there are multiple errors in the queue? Aren\u0027t we interested in all of them?",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 22,
+        "endChar": 55
+      },
+      "revId": "47287e794a02170e0392cc766b3fb9a8e076a62f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10b4b09d_ee533b59",
+        "filename": "libs/bssl/src/err.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-02T12:04:21Z",
+      "side": 1,
+      "message": "Generally, a function will break when an error occurs. This means that an API call will either succeed or return a single error. Since we do not accumulate multiple errors in this library by stacking the calls, I think that the retrieval of multiple errors is not particularly relevant for now.",
+      "parentUuid": "d050113a_ca52bc1f",
       "range": {
         "startLine": 22,
         "startChar": 4,
