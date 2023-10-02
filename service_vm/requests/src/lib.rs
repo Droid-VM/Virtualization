@@ -19,7 +19,10 @@
 extern crate alloc;
 
 mod api;
+mod keyblob;
 mod pub_key;
 mod rkp;
+mod traits;
 
 pub use api::process_request;
+pub use traits::Rng;
