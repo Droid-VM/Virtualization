@@ -12,18 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//! This library contains functions for the request processing.
+//! Traits representing functionalities required by this library.
 
-#![no_std]
+use core::fmt::Debug;
 
-extern crate alloc;
+/// This trait represents a random number generator that is designed to produce
+/// cryptographically secure random data.
+pub trait Rng {
+    /// Represents the error type returned by the `Rng` in case of failure.
+    type Error: Debug;
 
-mod api;
-mod cbor;
-mod keyblob;
-mod pub_key;
-mod rkp;
-mod traits;
-
-pub use api::process_request;
-pub use traits::Rng;
+    /// Fills the specified buffer with random data.
+    fn fill_bytes(&mut self, dest: &mut [u8]) -> Result<(), Self::Error>;
+}

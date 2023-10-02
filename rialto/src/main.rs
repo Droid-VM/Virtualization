@@ -38,7 +38,7 @@ use hyp::{get_mem_sharer, get_mmio_guard};
 use libfdt::FdtError;
 use log::{debug, error, info};
 use service_vm_comm::{ServiceVmRequest, VmType};
-use service_vm_requests::process_request;
+use service_vm_requests::{process_request, Rng};
 use virtio_drivers::{
     device::socket::{VsockAddr, VMADDR_CID_HOST},
     transport::{pci::bus::PciRoot, DeviceType, Transport},
@@ -51,6 +51,7 @@ use vmbase::{
     main,
     memory::{MemoryTracker, PageTable, MEMORY, PAGE_SIZE, SIZE_128KB},
     power::reboot,
+    rand,
     virtio::{
         pci::{self, PciTransportIterator, VirtIOSocket},
         HalImpl,
@@ -178,7 +179,7 @@ unsafe fn try_main(fdt_addr: usize) -> Result<()> {
 
     let mut vsock_stream = VsockStream::new(socket_device, host_addr())?;
     while let ServiceVmRequest::Process(req) = vsock_stream.read_request()? {
-        let response = process_request(req, bcc_handover.as_ref());
+        let response = process_request(req, bcc_handover.as_ref(), &mut Trng);
         vsock_stream.write_response(&response)?;
         vsock_stream.flush()?;
     }
@@ -226,6 +227,16 @@ pub fn main(fdt_addr: u64, _a1: u64, _a2: u64, _a3: u64) {
             unshare_all_memory();
             reboot()
         }
+    }
+}
+
+struct Trng;
+
+impl Rng for Trng {
+    type Error = rand::Error;
+
+    fn fill_bytes(&mut self, dest: &mut [u8]) -> rand::Result<()> {
+        rand::fill_with_entropy(dest)
     }
 }
 
