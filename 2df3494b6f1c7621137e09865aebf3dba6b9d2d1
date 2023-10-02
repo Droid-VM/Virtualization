@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73804b8b_94f3f479",
+        "filename": "libs/bssl/error/src/code.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-02T09:26:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd352221_3a1fb959",
+      "revId": "2df3494b6f1c7621137e09865aebf3dba6b9d2d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72d58983_7e8733be",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-10-02T09:05:54Z",
       "side": 1,
       "message": "Are `ERR_LIB_USER` errors possible?",
+      "revId": "2df3494b6f1c7621137e09865aebf3dba6b9d2d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b2f98a8_06f3c3a6",
+        "filename": "libs/bssl/src/err.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-02T09:26:09Z",
+      "side": 1,
+      "message": "As we don\u0027t have user defined functions in this library yet, there is no corresponding error to map to here.",
+      "parentUuid": "72d58983_7e8733be",
       "revId": "2df3494b6f1c7621137e09865aebf3dba6b9d2d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
