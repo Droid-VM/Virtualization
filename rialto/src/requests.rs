@@ -15,6 +15,7 @@
 //! This module contains functions for the request processing.
 
 mod api;
+mod keyblob;
 mod pub_key;
 mod rkp;
 
