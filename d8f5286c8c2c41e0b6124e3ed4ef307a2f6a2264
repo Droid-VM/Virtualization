@@ -145,6 +145,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c0a8d4b4_4cfb06ba",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-02T16:27:59Z",
+      "side": 1,
+      "message": "I designed `OwnedFdt::from_overlay_into_new_fdt()` to take `Option\u003c\u0026[u8]\u003e` (without \u0026mut). I thought that \u0027applying overlay damages overlay\u0027 was unnatural and wanted to make generic API. Once I design the API in this way, I had to create an internal copy to overlay.\n\nHowever, given your proposal, it seems that it\u0027s OK to take `Option\u003c\u0026mut [u8]\u003e` with sufficient explanation. Am I correct?\n\nI mentioned `pvmfw` case just because I didn\u0027t considered `Option\u003c\u0026mut [u8]\u003e` as an option but only considered to move ownership (`Option\u003c[u8]\u003e?`) to prevent damaged buffer isn\u0027t used any further. But moving ownership wasn\u0027t trivial in `pvmfw` for me and I was stuck there. I still think that it\u0027s the best option, but I simply couldn\u0027t make it happen.",
+      "parentUuid": "740b7fb8_f4ef3e1f",
+      "range": {
+        "startLine": 169,
+        "startChar": 24,
+        "endLine": 169,
+        "endChar": 49
+      },
+      "revId": "d8f5286c8c2c41e0b6124e3ed4ef307a2f6a2264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52e5e4e2_0945fe84",
         "filename": "virtualizationmanager/src/debug_config.rs",
         "patchSetId": 3
