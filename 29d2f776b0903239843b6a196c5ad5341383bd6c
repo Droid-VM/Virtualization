@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43f5e0eb_5f386063",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-02T18:11:21Z",
+      "side": 1,
+      "message": "\"will\"",
+      "range": {
+        "startLine": 13,
+        "startChar": 20,
+        "endLine": 13,
+        "endChar": 23
+      },
+      "revId": "29d2f776b0903239843b6a196c5ad5341383bd6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2bc08fb_cac483c7",
+        "filename": "rialto/src/requests/keyblob.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-02T18:11:21Z",
+      "side": 1,
+      "message": "I wondered whether there\u0027s any additional metadata that could or should be bound into the KEK derivation, but I *think* this is OK for the limited context here.  Worth checking with a cryptographer though?\n\nAlso, have we considered using COSE types for this?  (We invented our own format rather than using `COSE_Encrypt0` and `COSE_Key` for KeyMint, but there was a lot more historical metadata needed there.)",
+      "revId": "29d2f776b0903239843b6a196c5ad5341383bd6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
