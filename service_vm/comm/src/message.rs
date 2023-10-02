@@ -93,6 +93,9 @@ pub enum RequestProcessingError {
 
     /// The DICE chain of the service VM is missing.
     MissingDiceChain,
+
+    /// Failed to generate a random array.
+    RandomArrayGenerationFailed,
 }
 
 impl fmt::Display for RequestProcessingError {
@@ -109,6 +112,7 @@ impl fmt::Display for RequestProcessingError {
                 write!(f, "An error happened when serializing to/from a CBOR Value.")
             }
             Self::MissingDiceChain => write!(f, "The DICE chain of the service VM is missing"),
+            Self::RandomArrayGenerationFailed => write!(f, "Failed to generate a random array"),
         }
     }
 }
