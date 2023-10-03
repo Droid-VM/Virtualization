@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30176252_0959cbbe",
+        "filename": "rialto/src/requests/keyblob.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-03T07:55:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81c0f504_6fa9954b",
+      "range": {
+        "startLine": 29,
+        "startChar": 35,
+        "endLine": 29,
+        "endChar": 40
+      },
+      "revId": "c34e0b47080dc684a6b24ad4ddd485ba3d77fcd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0dd006f_cc6ee5fa",
@@ -70,6 +94,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e830c195_3d5fae73",
+        "filename": "rialto/src/requests/keyblob.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-03T07:55:03Z",
+      "side": 1,
+      "message": "In general, for AES-GCM, it is advisable to utilize a 12-byte nonce, as recommended in both the referenced paper [1] and the bssl specification [2]. The purpose of the nonce is to set up the 16-byte IV. The first 12 bytes of the IV are populated by the nonce, while the remaining 4 bytes represent the GCM counter. When a nonce _with other lengths are effectively randomized, which means one must consider collisions_ [3].\n\n[1]: NIST SP 800-38D: https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-38d.pdf \u003e 5.2.1.1 Input data\n[2] https://commondatastorage.googleapis.com/chromium-boringssl-docs/aead.h.html#EVP_aead_aes_256_gcm\n[3] http://google3/third_party/openssl/boringssl/src/crypto/fipsmodule/modes/gcm.c;l\u003d258;rcl\u003d570057516",
+      "parentUuid": "8d5ce3f7_043ed924",
+      "range": {
+        "startLine": 33,
+        "startChar": 41,
+        "endLine": 33,
+        "endChar": 43
+      },
+      "revId": "c34e0b47080dc684a6b24ad4ddd485ba3d77fcd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2f4834d_11fc39e4",
+        "filename": "rialto/src/requests/keyblob.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-03T07:55:03Z",
+      "side": 1,
+      "message": "This is fine since the security of GCM primarily relies on the uniqueness of the IV/key combination[1]. By ensuring that a unique key is used each time, the uniqueness of the IV/key combination is already guaranteed, and the probability of encountering the same IV/key is no greater than 2^-32. However, given the significance of these factors, it also wouldn\u0027t hurt to incorporate a random nonce as an added precaution. What are your thoughts on this? @drysdale@google.com\n\nI\u0027ll merge this cl into the previous one and ask a cryptographer to take a look.\n\n[1] [NIST SP 800-38D](https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-38d.pdf) \u003e 8 Uniqueness Requirement on IVs and Keys",
+      "parentUuid": "f0dd006f_cc6ee5fa",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 45
+      },
+      "revId": "c34e0b47080dc684a6b24ad4ddd485ba3d77fcd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0aebbf5_382e0c14",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-10-02T15:38:35Z",
       "side": 1,
       "message": "Additional data is optional, and adds to the size of the output. So you can just use an empty array.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 68
+      },
+      "revId": "c34e0b47080dc684a6b24ad4ddd485ba3d77fcd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "657c7e62_4b9c82db",
+        "filename": "rialto/src/requests/keyblob.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-03T07:55:03Z",
+      "side": 1,
+      "message": "I will remove this, as no contextual data is necessary given that rialto serves as both the sender and receiver. However, it\u0027s worth noting that the AD does not increase the size of the output, as it is solely appended to the ciphertext for computing the authentication tag [1][2]. It is not included in the ciphertext itself.\n\n[1] https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-38d.pdf 7 GCM spec\n[2] https://commondatastorage.googleapis.com/chromium-boringssl-docs/aead.h.html",
+      "parentUuid": "d0aebbf5_382e0c14",
       "range": {
         "startLine": 34,
         "startChar": 0,
