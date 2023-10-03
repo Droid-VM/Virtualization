@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31a98c8e_9d961493",
+        "filename": "rialto/src/requests/keyblob.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-03T15:09:48Z",
+      "side": 1,
+      "message": "Maybe we should implement this now?\n\nIf nothing else it would allow you to write a test where you go from (private_key, secret) -\u003e EncryptedKeyBlob -\u003e CBOR -\u003e (EncryptedKeyBlob, secret) -\u003e private_key.",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 93
+      },
+      "revId": "78cadce09d1bc7dc09bfface93bac03be06e50f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
