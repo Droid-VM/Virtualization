@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9a3c47c2_5ec68e6b",
+        "filename": "rialto/src/requests/keyblob.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-03T14:48:43Z",
+      "side": 1,
+      "message": "Possible. Done.",
+      "parentUuid": "e34273aa_350f1303",
+      "revId": "f52f904b58fc92e390261156e2d7900ee8a676b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c575dbb6_32faab3b",
         "filename": "rialto/src/requests/keyblob.rs",
         "patchSetId": 6
@@ -31,6 +49,24 @@
       "writtenOn": "2023-10-03T13:45:19Z",
       "side": 1,
       "message": "Personal preference: I\u0027d probably make this an `EncryptedKeyBlob::new()` method.",
+      "revId": "f52f904b58fc92e390261156e2d7900ee8a676b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f40365e0_49147ad5",
+        "filename": "rialto/src/requests/keyblob.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-03T14:48:43Z",
+      "side": 1,
+      "message": "It\u0027s possible. We can make `EncryptedKeyBlob::decrypt(kek_secret: \u0026[u8]) -\u003e Result\u003cZVec\u003e` to decrypt the private key from it later.",
+      "parentUuid": "c575dbb6_32faab3b",
       "revId": "f52f904b58fc92e390261156e2d7900ee8a676b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
