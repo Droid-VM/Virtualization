@@ -39,6 +39,30 @@
       },
       "revId": "ec6d4a16ed196724dbaacb88599e99bc961b541a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2899518_2f824661",
+        "filename": "rialto/src/requests/keyblob.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-03T12:45:56Z",
+      "side": 1,
+      "message": "You mean it won\u0027t help if we do something similar to the hmac key here [1]?\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/rialto/src/requests/rkp.rs;l\u003d113;drc\u003d0161bb0cafb70ef0d42097a69cfbcd95dbf6e8d1",
+      "parentUuid": "bdea27ce_4abf6129",
+      "range": {
+        "startLine": 66,
+        "startChar": 71,
+        "endLine": 66,
+        "endChar": 91
+      },
+      "revId": "ec6d4a16ed196724dbaacb88599e99bc961b541a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
