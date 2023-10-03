@@ -63,6 +63,30 @@
       },
       "revId": "ec6d4a16ed196724dbaacb88599e99bc961b541a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "921e0d7c_4d0a7431",
+        "filename": "rialto/src/requests/keyblob.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-03T12:56:24Z",
+      "side": 1,
+      "message": "That\u0027s definitely better than what you have here. But I\u0027m not sure it\u0027s guaranteed to do the zeroing we want: https://docs.rs/zeroize/latest/zeroize/#stackheap-zeroing-notes.\n\n@drysdale@google.com might have suggestions?",
+      "parentUuid": "b2899518_2f824661",
+      "range": {
+        "startLine": 66,
+        "startChar": 71,
+        "endLine": 66,
+        "endChar": 91
+      },
+      "revId": "ec6d4a16ed196724dbaacb88599e99bc961b541a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
