@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc31803a_21f63ff6",
+        "filename": "rialto/src/requests/keyblob.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-03T09:53:16Z",
+      "side": 1,
+      "message": "That\u0027s not the point I\u0027m making. You\u0027ve defined an aead module which encapsulates how to do aead and offers AES-GCM as one implementation.\nSo why does the magic number 12 appear in the client code rather than in the module?\n\nI\u0027d suggest making it a named constant inside aead.",
+      "parentUuid": "e830c195_3d5fae73",
+      "range": {
+        "startLine": 33,
+        "startChar": 41,
+        "endLine": 33,
+        "endChar": 43
+      },
+      "revId": "c34e0b47080dc684a6b24ad4ddd485ba3d77fcd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0aebbf5_382e0c14",
         "filename": "rialto/src/requests/keyblob.rs",
         "patchSetId": 1

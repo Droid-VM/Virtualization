@@ -16,6 +16,29 @@
       "message": "Hi, could you please take a look at this cl?",
       "revId": "ec6d4a16ed196724dbaacb88599e99bc961b541a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdea27ce_4abf6129",
+        "filename": "rialto/src/requests/keyblob.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-03T09:53:16Z",
+      "side": 1,
+      "message": "Doesn\u0027t that mean we\u0027re potentially leaving a non-zeroized copy in memory?\n(Mind you, even returning a Zeroized wouldn\u0027t necessarily help, since if we move from a Zeroized the compiler is under no obligation to clear the old value.)",
+      "range": {
+        "startLine": 66,
+        "startChar": 71,
+        "endLine": 66,
+        "endChar": 91
+      },
+      "revId": "ec6d4a16ed196724dbaacb88599e99bc961b541a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
