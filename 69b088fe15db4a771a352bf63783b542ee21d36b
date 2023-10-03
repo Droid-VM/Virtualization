@@ -33,6 +33,24 @@
       "message": "(super-nit: could also mention that there\u0027s no aliasing between inputs and `out`)",
       "revId": "69b088fe15db4a771a352bf63783b542ee21d36b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0327fce1_2425362c",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-03T11:54:14Z",
+      "side": 1,
+      "message": "In theory, there can be aliasing between the `data` and `out` of this API, but this is verified in the code.",
+      "parentUuid": "169f7215_e704bed3",
+      "revId": "69b088fe15db4a771a352bf63783b542ee21d36b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
