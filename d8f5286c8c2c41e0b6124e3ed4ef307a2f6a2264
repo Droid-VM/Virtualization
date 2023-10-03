@@ -169,6 +169,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c5f54a64_8e207ede",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-03T11:56:14Z",
+      "side": 1,
+      "message": "\u003e I thought that \u0027applying overlay damages overlay\u0027 was unnatural and wanted to make generic API.\n\nPerhaps but that\u0027s what the underlying C API implements.\n\n\u003e Once I design the API in this way, I had to create an internal copy to overlay.\n\nExactly, it should instead be left to the caller to decide if they need to keep the DTBO untouched (in most cases, such as here, they don\u0027t) and pay the cost of backing it up or not.\n\n\u003e However, given your proposal, it seems that it\u0027s OK to take `Option\u003c\u0026mut [u8]\u003e` with sufficient explanation. Am I correct?\n\nNo, let me rephrase: `from_overlay_onto_new_fdt` and `OwnedFdt` are unnecessary in `from_custom_debug_overlay_policy` and can be completely dropped. Instead (see code in my first comment), you can simply `?` on `fs::read()` (see other thread), then apply the DTBO on the result of `Fdt::create_empty_tree` called on a `vec!` (leaving the heap allocation in the caller).\n\nNo `Option` at all (because we\u0027ve `?`) and a DTBO passed `\u0026mut [u8]`, as it\u0027s about to go out of scope.",
+      "parentUuid": "c0a8d4b4_4cfb06ba",
+      "range": {
+        "startLine": 169,
+        "startChar": 24,
+        "endLine": 169,
+        "endChar": 49
+      },
+      "revId": "d8f5286c8c2c41e0b6124e3ed4ef307a2f6a2264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52e5e4e2_0945fe84",
         "filename": "virtualizationmanager/src/debug_config.rs",
         "patchSetId": 3
