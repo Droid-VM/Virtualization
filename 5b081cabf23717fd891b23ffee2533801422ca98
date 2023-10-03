@@ -145,6 +145,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ad3b536_c0c66f3c",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-03T11:58:03Z",
+      "side": 1,
+      "message": "\u003e ABL simply copies the VM DTBO from the dtbo.img to pvmfw config with no modification.\n\nYes, so there _could_ be some processing at that point, passing a non-overlay DT to pvmfw; let me sync with Jakob on this to clear up what pvmfw would gain from a DTBO (e.g. extra reference indirection though `/symbols`).\n\n\u003e If you aren\u0027t bothered by symmetry, then I wouldn\u0027t care so as well.\n\nAck!",
+      "parentUuid": "1a83c0dc_6080ace3",
+      "range": {
+        "startLine": 82,
+        "startChar": 27,
+        "endLine": 82,
+        "endChar": 52
+      },
+      "revId": "5b081cabf23717fd891b23ffee2533801422ca98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3863698e_87ad9559",
         "filename": "pvmfw/src/devices.rs",
         "patchSetId": 3
@@ -311,6 +335,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e98589e9_9124bcc8",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-03T11:58:03Z",
+      "side": 1,
+      "message": "If you mean ignore them during validation (so that they end up in the guest DT): no, the rationale being that a malicious host could use that to exploit a vulnerability in a part of the guest that isn\u0027t usually run. For example, a driver for a device that isn\u0027t created by `crosvm` but is - for some reason - part of the guest kernel may contain vulnerabilities that the host could exploit.",
+      "parentUuid": "457e0bda_e8a30ef3",
+      "range": {
+        "startLine": 92,
+        "startChar": 15,
+        "endLine": 92,
+        "endChar": 44
+      },
+      "revId": "5b081cabf23717fd891b23ffee2533801422ca98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e76d48f_ab836131",
         "filename": "pvmfw/src/devices.rs",
         "patchSetId": 3
@@ -417,6 +465,30 @@
       "side": 1,
       "message": "Just to define my codes in a separate place for running unit test. Build target `rust_test` silently adds `libstd` dependency while `pvmfw` is build with `no_std`, and this was the best solution that I could think of.",
       "parentUuid": "2c9f099e_bd154475",
+      "range": {
+        "startLine": 618,
+        "startChar": 4,
+        "endLine": 618,
+        "endChar": 35
+      },
+      "revId": "5b081cabf23717fd891b23ffee2533801422ca98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9721ff22_49f03b8c",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-03T11:58:03Z",
+      "side": 1,
+      "message": "I see, we can keep it like this for now (although I\u0027m still not sure how you\u0027re going to carry the nodes for DA over to the template DT) but it would definitely be cleaner to address the issue (of `pvmfw` not being compatible with `rust_test`) instead of circumventing it; if that\u0027s something you can help with, it would be greatly appreciated as we\u0027d be able to unit test `patch_device_tree` and more!",
+      "parentUuid": "53b73510_00dc498b",
       "range": {
         "startLine": 618,
         "startChar": 4,
