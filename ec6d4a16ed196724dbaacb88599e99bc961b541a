@@ -135,6 +135,30 @@
       },
       "revId": "ec6d4a16ed196724dbaacb88599e99bc961b541a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27135ef5_d3503af9",
+        "filename": "rialto/src/requests/keyblob.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-03T14:02:38Z",
+      "side": 1,
+      "message": "\u003e We probably also should secure the derived key in pvmfw [1]\n\nYes.\n\n\u003e The change to make hkdf return a zeroizing type looks like a good approach to me.\n\nAgreed.",
+      "parentUuid": "2d0bd300_2aeb8d56",
+      "range": {
+        "startLine": 66,
+        "startChar": 71,
+        "endLine": 66,
+        "endChar": 91
+      },
+      "revId": "ec6d4a16ed196724dbaacb88599e99bc961b541a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
