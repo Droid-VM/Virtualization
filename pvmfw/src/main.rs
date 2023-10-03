@@ -22,7 +22,6 @@ extern crate alloc;
 mod bcc;
 mod bootargs;
 mod config;
-mod crypto;
 mod dice;
 mod entry;
 mod exceptions;
