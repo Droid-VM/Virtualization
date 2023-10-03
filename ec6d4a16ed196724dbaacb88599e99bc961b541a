@@ -111,6 +111,30 @@
       },
       "revId": "ec6d4a16ed196724dbaacb88599e99bc961b541a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d0bd300_2aeb8d56",
+        "filename": "rialto/src/requests/keyblob.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-03T13:45:19Z",
+      "side": 1,
+      "message": "The change to make `hkdf` return a zeroizing type looks like a good approach to me.",
+      "parentUuid": "7dfeff52_b9212153",
+      "range": {
+        "startLine": 66,
+        "startChar": 71,
+        "endLine": 66,
+        "endChar": 91
+      },
+      "revId": "ec6d4a16ed196724dbaacb88599e99bc961b541a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
