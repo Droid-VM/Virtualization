@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b757e8a9_279081e4",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-03T15:54:31Z",
+      "side": 0,
+      "message": "Not sure why we need to get rid of these error variants and the added information they provide (which has shown to be valuable when debugging, in the past); can\u0027t they simply wrap `bssl_avf::Error`?",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 14
+      },
+      "revId": "69b088fe15db4a771a352bf63783b542ee21d36b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

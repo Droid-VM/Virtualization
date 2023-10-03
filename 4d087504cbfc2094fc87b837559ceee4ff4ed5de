@@ -16,6 +16,52 @@
       "message": "Hi Pierre-Clément, could you take a look?",
       "revId": "4d087504cbfc2094fc87b837559ceee4ff4ed5de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2050a2d_a03e162d",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-03T15:54:31Z",
+      "side": 1,
+      "message": "Could `bssl_avf` provide a safe wrapper or - even better - track internally that BSSL has been properly initialized, so that client code doesn\u0027t have to deal with it?",
+      "range": {
+        "startLine": 195,
+        "startChar": 4,
+        "endLine": 195,
+        "endChar": 10
+      },
+      "revId": "4d087504cbfc2094fc87b837559ceee4ff4ed5de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55894b2f_5438fcdf",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-03T15:54:31Z",
+      "side": 1,
+      "message": "I\u0027m not too familiar with this but, if `ad` and `nonce` are optional, why doesn\u0027t the API take them as `Option`s?",
+      "range": {
+        "startLine": 110,
+        "startChar": 24,
+        "endLine": 110,
+        "endChar": 25
+      },
+      "revId": "4d087504cbfc2094fc87b837559ceee4ff4ed5de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
