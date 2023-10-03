@@ -70,6 +70,30 @@
       },
       "revId": "78cadce09d1bc7dc09bfface93bac03be06e50f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45906bd4_31b37ac3",
+        "filename": "rialto/src/requests/keyblob.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-03T17:54:34Z",
+      "side": 1,
+      "message": "`EncryptedKeyBlob` is as internal struct. Currently it is inside rialto, which we test as a black box and rialto itself doesn\u0027t have unit tests. Such kind of unit tests can only be added after we move the `requests` out of rialto.\n\nHowever, I agree that this test is valuable. It serves as a good example of how testing non-public APIs can also be beneficial.",
+      "parentUuid": "7aaa9c42_788adeb1",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 93
+      },
+      "revId": "78cadce09d1bc7dc09bfface93bac03be06e50f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
