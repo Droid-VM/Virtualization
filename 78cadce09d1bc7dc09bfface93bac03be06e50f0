@@ -22,6 +22,30 @@
       },
       "revId": "78cadce09d1bc7dc09bfface93bac03be06e50f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af03cba7_d5ac1157",
+        "filename": "rialto/src/requests/keyblob.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-03T15:35:38Z",
+      "side": 1,
+      "message": "Since the decryption of the private key is part of the client VM attestation and the functions and structs here are internal, this function will remain dead code for a while if we implement it now. We can implement it later since it is straightforward.",
+      "parentUuid": "31a98c8e_9d961493",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 93
+      },
+      "revId": "78cadce09d1bc7dc09bfface93bac03be06e50f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
