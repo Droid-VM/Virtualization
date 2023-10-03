@@ -16,6 +16,23 @@
       "message": "Hi David, could you please take another look at this cl?",
       "revId": "69b088fe15db4a771a352bf63783b542ee21d36b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "169f7215_e704bed3",
+        "filename": "libs/bssl/src/aead.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-03T10:59:51Z",
+      "side": 1,
+      "message": "(super-nit: could also mention that there\u0027s no aliasing between inputs and `out`)",
+      "revId": "69b088fe15db4a771a352bf63783b542ee21d36b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
