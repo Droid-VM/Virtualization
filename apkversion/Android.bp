@@ -1,0 +1,16 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+cc_binary {
+    name: "apkversion",
+    srcs: ["main.cpp"],
+    shared_libs: [
+        "libandroidfw",
+        "libbase",
+        "libdl",
+        "libdl_android",
+        "liblog",
+        "libutils",
+    ],
+}

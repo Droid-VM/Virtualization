@@ -119,6 +119,7 @@ flag_aware_microdroid_system_image {
         lib64: {
             deps: [
                 "apkdmverity",
+                "apkversion",
                 "authfs",
                 "authfs_service",
                 "encryptedstore",
