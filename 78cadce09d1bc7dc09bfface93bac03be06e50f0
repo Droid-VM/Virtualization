@@ -94,6 +94,30 @@
       },
       "revId": "78cadce09d1bc7dc09bfface93bac03be06e50f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b94d091_2ae5e4ff",
+        "filename": "rialto/src/requests/keyblob.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-04T09:09:07Z",
+      "side": 1,
+      "message": "OK, can we do that please?\nIf we need to move requests out of Rialto then we can do that as a first CL.\n\nAdding the key encryption without the key decryption just feels a bit weird, and we need both parts.",
+      "parentUuid": "45906bd4_31b37ac3",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 93
+      },
+      "revId": "78cadce09d1bc7dc09bfface93bac03be06e50f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
