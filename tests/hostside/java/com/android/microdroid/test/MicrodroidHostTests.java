@@ -92,7 +92,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     private static final int MIN_MEM_ARM64 = 145;
     private static final int MIN_MEM_X86_64 = 196;
 
-    private static final int BOOT_COMPLETE_TIMEOUT = 30000; // 30 seconds
+    private static final int BOOT_COMPLETE_TIMEOUT = 20000; // 20 seconds
 
     private static class VmInfo {
         final Process mProcess;
@@ -499,7 +499,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         String result =
                 tryRunOnHost(
                         "timeout",
-                        "10s",
+                        "3s",
                         "adb",
                         "-s",
                         getDevice().getSerialNumber(),
