@@ -14,6 +14,10 @@
 
 //! This module contains functions for the request processing.
 
+#![cfg_attr(not(feature = "std"), no_std)]
+
+extern crate alloc;
+
 mod api;
 mod pub_key;
 mod rkp;
