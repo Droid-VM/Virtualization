@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0a725b9_05c36945",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-05T09:55:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46642845_68fc3b97",
+      "revId": "1598bb01535d8147a06fadbb96d6be45008f168b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5462c59_a6e70cd9",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-10-05T09:27:41Z",
       "side": 1,
       "message": "Why is this `cfg`-based -- is there actually a `std` feature for this new crate?",
+      "revId": "1598bb01535d8147a06fadbb96d6be45008f168b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb822bb9_77ae21a0",
+        "filename": "service_vm/requests/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-05T09:55:10Z",
+      "side": 1,
+      "message": "I think we might want to test it with std later. We can remove it as it\u0027s not needed for now.",
+      "parentUuid": "d5462c59_a6e70cd9",
       "revId": "1598bb01535d8147a06fadbb96d6be45008f168b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
