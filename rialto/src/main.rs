@@ -21,7 +21,6 @@ mod communication;
 mod error;
 mod exceptions;
 mod fdt;
-mod requests;
 
 extern crate alloc;
 
@@ -178,7 +177,7 @@ unsafe fn try_main(fdt_addr: usize) -> Result<()> {
 
     let mut vsock_stream = VsockStream::new(socket_device, host_addr())?;
     while let ServiceVmRequest::Process(req) = vsock_stream.read_request()? {
-        let response = requests::process_request(req, bcc_handover.as_ref())?;
+        let response = service_vm_requests::process_request(req, bcc_handover.as_ref());
         vsock_stream.write_response(&response)?;
         vsock_stream.flush()?;
     }
