@@ -93,6 +93,30 @@
       },
       "revId": "19529e9de5c939a10625e37529963bd2c7dd899c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c048aa0b_d990e735",
+        "filename": "service_vm/requests/src/util.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-05T16:29:05Z",
+      "side": 1,
+      "message": "Hmm. Except that to_vec takes a value and produces CBOR, which makes \"cbor::to_\" a bit odd.\nAnd similarly the slice contains the CBOR; we\u0027re not producing cbor from a slice.\n\ncbor::from_value / cbor::to_value?\n\nOr even cbor::serialize / cbor::deserialize ?",
+      "parentUuid": "48edfc15_b5b4d841",
+      "range": {
+        "startLine": 15,
+        "startChar": 4,
+        "endLine": 15,
+        "endChar": 11
+      },
+      "revId": "19529e9de5c939a10625e37529963bd2c7dd899c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
