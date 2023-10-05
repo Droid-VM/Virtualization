@@ -21,5 +21,6 @@ extern crate alloc;
 mod api;
 mod pub_key;
 mod rkp;
+mod util;
 
 pub use api::process_request;
