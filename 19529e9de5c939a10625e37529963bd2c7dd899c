@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7174e45_6331f20a",
+        "filename": "service_vm/requests/src/rkp.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-05T15:13:12Z",
+      "side": 1,
+      "message": "That ?? is a bit weird.\n\nI think this could be:\n\nfrom_cbor(dice_artifacts.bcc().ok_or(RequestProcessingError::MissingDiceChain)?)?",
+      "range": {
+        "startLine": 96,
+        "startChar": 91,
+        "endLine": 96,
+        "endChar": 93
+      },
+      "revId": "19529e9de5c939a10625e37529963bd2c7dd899c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92a4e153_9179a60d",
+        "filename": "service_vm/requests/src/util.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-05T15:13:12Z",
+      "side": 1,
+      "message": "Nit: I have a distrust of \"util\" or \"misc\" files, they tend to end up full of totally unrelated things.\ncbor.rs, cbor_utils.rs? With a comment \"Utility functions for CBOR serialization\" or similar.",
+      "range": {
+        "startLine": 15,
+        "startChar": 4,
+        "endLine": 15,
+        "endChar": 11
+      },
+      "revId": "19529e9de5c939a10625e37529963bd2c7dd899c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
