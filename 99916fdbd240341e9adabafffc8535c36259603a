@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ad3a3b2_9f7d8a6c",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-05T16:23:57Z",
+      "side": 1,
+      "message": "Can we avoid abbreviations?",
+      "range": {
+        "startLine": 233,
+        "startChar": 6,
+        "endLine": 235,
+        "endChar": 17
+      },
+      "revId": "99916fdbd240341e9adabafffc8535c36259603a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5d8dff2_14287a22",
+        "filename": "service_vm/requests/src/keyblob.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-05T16:23:57Z",
+      "side": 1,
+      "message": "Can we explain what KEK stands for, once, somewhere near the top?",
+      "range": {
+        "startLine": 35,
+        "startChar": 6,
+        "endLine": 35,
+        "endChar": 9
+      },
+      "revId": "99916fdbd240341e9adabafffc8535c36259603a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c66a2061_fab1ce37",
+        "filename": "service_vm/requests/src/keyblob.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-05T16:23:57Z",
+      "side": 1,
+      "message": "Make this to_ rather than into_? We don\u0027t need to consume self, and don\u0027t get any benefit by doing so.",
+      "range": {
+        "startLine": 97,
+        "startChar": 18,
+        "endLine": 97,
+        "endChar": 27
+      },
+      "revId": "99916fdbd240341e9adabafffc8535c36259603a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf6754a8_5b0644a6",
+        "filename": "service_vm/requests/src/keyblob.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-05T16:23:57Z",
+      "side": 1,
+      "message": "Uber-nit: The asymmetry of having decrypt here but encrypt on EncryptedKeyBlob is paining me. Can we fix that?\nIdeally encrypt \u0026 decrypt would be next to each other, since they are so closely related.",
+      "range": {
+        "startLine": 104,
+        "startChar": 7,
+        "endLine": 104,
+        "endChar": 26
+      },
+      "revId": "99916fdbd240341e9adabafffc8535c36259603a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78e232e7_c4a28d0e",
+        "filename": "service_vm/requests/src/keyblob.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-05T16:23:57Z",
+      "side": 1,
+      "message": "I realize it\u0027s rather late to mention this, but this is a fairly terrible name.\n\nAeadContext would be better (abbreviations are generally bad).\n\nBut \"Context\" doesn\u0027t feel quite right. AeadInstance?\nPerhaps context is enough, given that it\u0027s deliberately fairly close to the bssl API.",
+      "range": {
+        "startLine": 108,
+        "startChar": 23,
+        "endLine": 108,
+        "endChar": 30
+      },
+      "revId": "99916fdbd240341e9adabafffc8535c36259603a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb06aa61_2e6a8cdf",
+        "filename": "service_vm/requests/src/keyblob.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-05T16:23:57Z",
+      "side": 1,
+      "message": "You don\u0027t need a deterministic RNG here, I think?\nCould this just call rand::Rng?\n\n(And if this is stateless, then all impls are, and we could stop passing instances around?)",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 18
+      },
+      "revId": "99916fdbd240341e9adabafffc8535c36259603a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cea7c1b1_5cdc768e",
+        "filename": "service_vm/requests/src/traits.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-05T16:23:57Z",
+      "side": 1,
+      "message": "It would be useful to mention that this exists to allow substituting the source of randomness in tests.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 41
+      },
+      "revId": "99916fdbd240341e9adabafffc8535c36259603a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
