@@ -22,6 +22,30 @@
       },
       "revId": "a2a967d36dd68ee765082b8b9fb3acb7c7d2890e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3005c1a2_a9543fa7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-10-05T05:35:51Z",
+      "side": 1,
+      "message": "Yes, exactly. Testing background is same with CTS quality bar.\n\n- testTombstonesAreNotGeneratedWithCrashConfigWhenNonDebuggable[protectedVm\u003dfalse] : 34.58s -\u003e about 20s\n- testTombstonesAreNotGeneratedWithCrashPayloadWhenNonDebuggable[protectedVm\u003dfalse] : 31.44s -\u003e about 20s\n- testTombstonesAreNotGeneratedIfNotExportedUponUserspaceCrash[protectedVm\u003dfalse] : 41.04s -\u003e about 30s\n\nFYI, observed log was like below before the improvement. It just wait 10 second until timeout.\n```\n10-04 18:23:11 D/RunUtil: Running command [timeout, 10s, adb, -s, 127.0.0.1:37157, logcat, -m, 1, -e, Received [0-9]+ bytes from guest \u0026 wrote to tombstone file|Ramdump \"[^ ]+/ramdump\" sent to tombstoned, -T, 2023-10-05 01:22:50.219099784] with timeout: 10s\n10-04 18:23:21 I/RunUtil: runTimed: Calling interrupt, status is TIMED_OUT\n```",
+      "parentUuid": "b0a01bc0_18378cd2",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 31
+      },
+      "revId": "a2a967d36dd68ee765082b8b9fb3acb7c7d2890e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
