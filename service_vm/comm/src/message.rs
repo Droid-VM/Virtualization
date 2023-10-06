@@ -50,6 +50,25 @@ pub enum Request {
     /// Creates a certificate signing request to be sent to the
     /// provisioning server.
     GenerateCertificateRequest(GenerateCertificateRequestParams),
+
+    /// Requests the service VM to attest the client VM and issue a certificate
+    /// if the attestation succeeds.
+    RequestCertificate(RequestCertificateParams),
+}
+
+/// Represents the params passed to RequestCertificate
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct RequestCertificateParams {
+    /// The CBOR encoded `Csr` signed by the CDI_Leaf_Priv of the client VM's DICE chain
+    /// and the private key to be attested.
+    pub csr: Vec<u8>,
+
+    /// The key blob retrieved from RKPD.
+    pub remotely_provisioned_key_blob: Vec<u8>,
+
+    /// Sequence of DER-encoded X.509 certificates that make up the remotely provisioned
+    /// key's certificate chain.
+    pub remotely_provisioned_cert_chain: Vec<u8>,
 }
 
 /// Represents a response to a request sent to the service VM.
@@ -65,6 +84,10 @@ pub enum Response {
 
     /// Returns a CBOR Certificate Signing Request (Csr) serialized into a byte array.
     GenerateCertificateRequest(Vec<u8>),
+
+    /// Returns a Google-rooted X.509 encoded certificate chain with an exension describing
+    /// the attested client VM.
+    RequestCertificate(Vec<u8>),
 
     /// Encountered an error during the request processing.
     Err(RequestProcessingError),
@@ -93,6 +116,9 @@ pub enum RequestProcessingError {
 
     /// The DICE chain of the service VM is missing.
     MissingDiceChain,
+
+    /// Failed to decrypt the remotely provisioned key blob.
+    FailedToDecryptKeyBlob,
 }
 
 impl fmt::Display for RequestProcessingError {
@@ -109,6 +135,9 @@ impl fmt::Display for RequestProcessingError {
                 write!(f, "An error happened when serializing to/from a CBOR Value.")
             }
             Self::MissingDiceChain => write!(f, "The DICE chain of the service VM is missing"),
+            Self::FailedToDecryptKeyBlob => {
+                write!(f, "Failed to decrypt the remotely provisioned key blob")
+            }
         }
     }
 }
