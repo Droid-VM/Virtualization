@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ac10de3_9a0529b3",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-06T10:18:49Z",
+      "side": 1,
+      "message": "Yeah, making `Range` non-`Copy` is an understandable decision but can also be a pain when trying to use the standard library to implement range-managing logic ...",
+      "parentUuid": "314d64dd_5d97b869",
+      "range": {
+        "startLine": 26,
+        "startChar": 11,
+        "endLine": 26,
+        "endChar": 16
+      },
+      "revId": "adeec28c0f384a770716e236b39518f1f968536e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f9ba989_228a0309",

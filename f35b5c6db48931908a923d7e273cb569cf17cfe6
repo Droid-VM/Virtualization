@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f2e8d7d_266e545c",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-06T10:18:49Z",
+      "side": 1,
+      "message": "This could overflow, potentially leading to bugs: do we want to check that in the ctor or panic here?",
+      "range": {
+        "startLine": 164,
+        "startChar": 19,
+        "endLine": 164,
+        "endChar": 20
+      },
+      "revId": "f35b5c6db48931908a923d7e273cb569cf17cfe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d56671f_0e79babd",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-06T10:18:49Z",
+      "side": 1,
+      "message": "Might as well make use of your latest creation:\n```\nlet Some(range) \u003d NonEmptyRange::new(entry_offset, entry_size) else { continue };\n```",
+      "range": {
+        "startLine": 228,
+        "startChar": 12,
+        "endLine": 231,
+        "endChar": 66
+      },
+      "revId": "f35b5c6db48931908a923d7e273cb569cf17cfe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e8758c3_7a8c212b",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-06T10:18:49Z",
+      "side": 1,
+      "message": "we have `vmbase::RangeExt::is_within` that already implements this (and is much more readable, IMO); would it make sense for you to implement `NonEmptyRange::as_range(\u0026self) -\u003e Range\u003cusize\u003e` (and perhaps `Into\u003cRange\u003cusize\u003e\u003e`) allowing you to make use of that helper here?",
+      "range": {
+        "startLine": 232,
+        "startChar": 15,
+        "endLine": 232,
+        "endChar": 67
+      },
+      "revId": "f35b5c6db48931908a923d7e273cb569cf17cfe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b823c07e_87185be4",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-06T10:18:49Z",
+      "side": 1,
+      "message": "Isn\u0027t this `entry_size` or `range.len()`? BTW, could the `as usize` on lines 225-226 be turned into (hopefully compiler-optimized) `.try_into().unwrap()`, just in case?",
+      "range": {
+        "startLine": 238,
+        "startChar": 16,
+        "endLine": 238,
+        "endChar": 53
+      },
+      "revId": "f35b5c6db48931908a923d7e273cb569cf17cfe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
