@@ -22,6 +22,30 @@
       },
       "revId": "69b088fe15db4a771a352bf63783b542ee21d36b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e2c9dd4_9315ae1c",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-06T10:14:19Z",
+      "side": 0,
+      "message": "The `bssl_avf::Error` includes both the api name and the failure reason code from bssl (e.g., [1]). The api name already tells whether the failure occurred during the \"open\" or \"seal\". The `bssl_avf::Error` is already wrapped in BoringSslFailed in line 61.\n\nFurthermore, since in `bssl_avf` we retrieve the error as soon as a call fails, theoretically we don\u0027t need an error iterator. However, if you would like to include the failing file and line number from bssl to help debugging, we can add them to `bssl_avf::Error` too later.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/bssl/tests/aead_test.rs;l\u003d97;drc\u003d69b088fe15db4a771a352bf63783b542ee21d36b",
+      "parentUuid": "b757e8a9_279081e4",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 14
+      },
+      "revId": "69b088fe15db4a771a352bf63783b542ee21d36b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

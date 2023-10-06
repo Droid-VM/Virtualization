@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94cfca17_7e6c59b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-06T10:14:19Z",
+      "side": 1,
+      "message": "Hi Pierre-Clément,\n\nThanks for the review and sorry for the late reply.",
+      "revId": "4d087504cbfc2094fc87b837559ceee4ff4ed5de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2050a2d_a03e162d",
@@ -43,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "17556bd8_b7c4f044",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-06T10:14:19Z",
+      "side": 1,
+      "message": "Sure I can wrap this function in bssl_avf so that pvmfw doesn\u0027t need to depend on `bssl_ffi` anymore. But we probably don\u0027t need to track the calling since it\u0027s safe to call it multiple times [1]. wdyt?\n\n[1] https://commondatastorage.googleapis.com/chromium-boringssl-docs/crypto.h.html",
+      "parentUuid": "e2050a2d_a03e162d",
+      "range": {
+        "startLine": 195,
+        "startChar": 4,
+        "endLine": 195,
+        "endChar": 10
+      },
+      "revId": "4d087504cbfc2094fc87b837559ceee4ff4ed5de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55894b2f_5438fcdf",
         "filename": "pvmfw/src/instance.rs",
         "patchSetId": 1
@@ -54,6 +95,30 @@
       "writtenOn": "2023-10-03T15:54:31Z",
       "side": 1,
       "message": "I\u0027m not too familiar with this but, if `ad` and `nonce` are optional, why doesn\u0027t the API take them as `Option`s?",
+      "range": {
+        "startLine": 110,
+        "startChar": 24,
+        "endLine": 110,
+        "endChar": 25
+      },
+      "revId": "4d087504cbfc2094fc87b837559ceee4ff4ed5de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af44d5a4_ddcae001",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-06T10:14:19Z",
+      "side": 1,
+      "message": "The nonce is only optional in the two `*_randnonce` APIs, while for all other AEAD algorithms[1], it is mandatory. In fact, both the nonce and the key are essential for ensuring the security of the AEAD algorithm. Users typically prefer to have control over the nonce or to use it to build a specific format, such as CoseEncrypt. Also the bssl team does recommend to use the two `*_randnonce` APIs.\n\nRegarding `ad`, since it serves to provide contextual info to the algorithm similar to the `info` field of HKDF, I just make them take the same type to keep the consistency.\n\n[1] https://commondatastorage.googleapis.com/chromium-boringssl-docs/aead.h.html",
+      "parentUuid": "55894b2f_5438fcdf",
       "range": {
         "startLine": 110,
         "startChar": 24,
