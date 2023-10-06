@@ -50,6 +50,36 @@ pub enum Request {
     /// Creates a certificate signing request to be sent to the
     /// provisioning server.
     GenerateCertificateRequest(GenerateCertificateRequestParams),
+
+    /// Requests the service VM to attest the client VM and issue a certificate
+    /// if the attestation succeeds.
+    ///
+    /// TODO(b/241428146): Retrieve the key blob and its certificate from rkpd
+    /// and add them to the params.
+    RequestCertificate(VmCsr),
+}
+
+/// Represents a CSR (Certificate Signing Request) from a client VM to be
+/// attested.
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct VmCsr {
+    /// The public key of `CoseKey` type to be attested.
+    pub public_key: Vec<u8>,
+
+    /// Client VM descriptor.
+    pub vm_descriptor: VmDescriptor,
+
+    /// A `CoseSign1` signature over the client VM's description `vm_descriptor`.
+    /// It should be signed with the corresponding private key of the public
+    /// key in this struct.
+    pub signature: Vec<u8>,
+}
+
+/// Describes the client VM to be attested.
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct VmDescriptor {
+    /// DICE certificate chain of the client VM.
+    pub dice_cert_chain: Vec<u8>,
 }
 
 /// Represents a response to a request sent to the service VM.
@@ -65,6 +95,10 @@ pub enum Response {
 
     /// Returns a CBOR Certificate Signing Request (Csr) serialized into a byte array.
     GenerateCertificateRequest(Vec<u8>),
+
+    /// Returns a Google-rooted X.509 encoded certificate chain with an exension describing
+    /// the attested client VM.
+    RequestCertificate(Vec<u8>),
 
     /// Encountered an error during the request processing.
     Err(RequestProcessingError),

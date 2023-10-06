@@ -14,6 +14,7 @@
 
 //! This module contains the main API for the request processing module.
 
+use crate::client_vm;
 use crate::rkp;
 use alloc::vec::Vec;
 use diced_open_dice::DiceArtifacts;
@@ -31,6 +32,8 @@ pub fn process_request(request: Request, dice_artifacts: &dyn DiceArtifacts) -> 
             rkp::generate_certificate_request(p, dice_artifacts)
                 .map_or_else(Response::Err, Response::GenerateCertificateRequest)
         }
+        Request::RequestCertificate(csr) => client_vm::request_certificate(csr, dice_artifacts)
+            .map_or_else(Response::Err, Response::RequestCertificate),
     }
 }
 
