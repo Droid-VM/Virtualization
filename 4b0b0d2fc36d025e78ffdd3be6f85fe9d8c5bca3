@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fa5b7cd_f663124a",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-06T08:54:16Z",
+      "side": 1,
+      "message": "Picked `last_end`, because previous one may be `None`.",
+      "parentUuid": "acc24654_7e9b5adc",
+      "range": {
+        "startLine": 229,
+        "startChar": 16,
+        "endLine": 229,
+        "endChar": 24
+      },
+      "revId": "4b0b0d2fc36d025e78ffdd3be6f85fe9d8c5bca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bdeb6e48_266a8959",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "580e3e26_a8abddaf",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-06T08:54:16Z",
+      "side": 1,
+      "message": "oops. Done",
+      "parentUuid": "bdeb6e48_266a8959",
+      "range": {
+        "startLine": 250,
+        "startChar": 36,
+        "endLine": 250,
+        "endChar": 39
+      },
+      "revId": "4b0b0d2fc36d025e78ffdd3be6f85fe9d8c5bca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2be6cb9c_3e0c48f0",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-09-29T09:02:18Z",
       "side": 1,
       "message": "It\u0027s probably not the cleanest to have a function that takes an `Option` to return `None` if the input was `None`.\n\nCould we instead have\n```\nunsafe fn body_slice_mut(\u0026mut self, range: Range) -\u003e \u0026\u0027a mut [u8]\n```\nand `Option::map` the `*_range` variables at the call site? Note that the body range will always be w.r.t. `self.body`.",
+      "range": {
+        "startLine": 290,
+        "startChar": 14,
+        "endLine": 290,
+        "endChar": 32
+      },
+      "revId": "4b0b0d2fc36d025e78ffdd3be6f85fe9d8c5bca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4efc5645_bedf6b86",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-06T08:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2be6cb9c_3e0c48f0",
       "range": {
         "startLine": 290,
         "startChar": 14,
