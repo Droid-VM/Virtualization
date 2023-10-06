@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aafacb17_aab86464",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-06T09:39:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ad3a3b2_9f7d8a6c",
+      "range": {
+        "startLine": 233,
+        "startChar": 6,
+        "endLine": 235,
+        "endChar": 17
+      },
+      "revId": "99916fdbd240341e9adabafffc8535c36259603a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5d8dff2_14287a22",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-05T16:23:57Z",
       "side": 1,
       "message": "Can we explain what KEK stands for, once, somewhere near the top?",
+      "range": {
+        "startLine": 35,
+        "startChar": 6,
+        "endLine": 35,
+        "endChar": 9
+      },
+      "revId": "99916fdbd240341e9adabafffc8535c36259603a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53ff7954_3f1518c5",
+        "filename": "service_vm/requests/src/keyblob.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-06T09:39:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5d8dff2_14287a22",
       "range": {
         "startLine": 35,
         "startChar": 6,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e2e2a966_56abc3c7",
+        "filename": "service_vm/requests/src/keyblob.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-06T09:39:32Z",
+      "side": 1,
+      "message": "Do we really need to keep both the object and its serialized CBOR representation at the same time? Additionally, I noticed that the CborSerializable [1] trait in  coset also consumes the object when converting it to a vector.\n\n[1] https://docs.rs/coset/0.3.4/coset/trait.CborSerializable.html",
+      "parentUuid": "c66a2061_fab1ce37",
+      "range": {
+        "startLine": 97,
+        "startChar": 18,
+        "endLine": 97,
+        "endChar": 27
+      },
+      "revId": "99916fdbd240341e9adabafffc8535c36259603a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cf6754a8_5b0644a6",
         "filename": "service_vm/requests/src/keyblob.rs",
         "patchSetId": 11
@@ -83,6 +155,30 @@
       "writtenOn": "2023-10-05T16:23:57Z",
       "side": 1,
       "message": "Uber-nit: The asymmetry of having decrypt here but encrypt on EncryptedKeyBlob is paining me. Can we fix that?\nIdeally encrypt \u0026 decrypt would be next to each other, since they are so closely related.",
+      "range": {
+        "startLine": 104,
+        "startChar": 7,
+        "endLine": 104,
+        "endChar": 26
+      },
+      "revId": "99916fdbd240341e9adabafffc8535c36259603a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb91223f_3189df70",
+        "filename": "service_vm/requests/src/keyblob.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-06T09:39:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf6754a8_5b0644a6",
       "range": {
         "startLine": 104,
         "startChar": 7,
@@ -118,6 +214,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "007fb220_207b9173",
+        "filename": "service_vm/requests/src/keyblob.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-06T09:39:32Z",
+      "side": 1,
+      "message": "Since this wrapper is intended to encapsulate the `EVP_AEAD_CTX` object from bssl, I feel it consistent to use the naming conventions from bssl for the wrapper\u0027s API in general. However, if you prefer a more descriptive name like \"Context\", I\u0027m fine to replace `Ctx` with `Context` for AEAD and other bssl objects. wdyt?",
+      "parentUuid": "78e232e7_c4a28d0e",
+      "range": {
+        "startLine": 108,
+        "startChar": 23,
+        "endLine": 108,
+        "endChar": 30
+      },
+      "revId": "99916fdbd240341e9adabafffc8535c36259603a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fb06aa61_2e6a8cdf",
         "filename": "service_vm/requests/src/keyblob.rs",
         "patchSetId": 11
@@ -129,6 +249,30 @@
       "writtenOn": "2023-10-05T16:23:57Z",
       "side": 1,
       "message": "You don\u0027t need a deterministic RNG here, I think?\nCould this just call rand::Rng?\n\n(And if this is stateless, then all impls are, and we could stop passing instances around?)",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 18
+      },
+      "revId": "99916fdbd240341e9adabafffc8535c36259603a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a02da413_d1021325",
+        "filename": "service_vm/requests/src/keyblob.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-06T09:39:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb06aa61_2e6a8cdf",
       "range": {
         "startLine": 149,
         "startChar": 0,
@@ -152,6 +296,30 @@
       "writtenOn": "2023-10-05T16:23:57Z",
       "side": 1,
       "message": "It would be useful to mention that this exists to allow substituting the source of randomness in tests.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 41
+      },
+      "revId": "99916fdbd240341e9adabafffc8535c36259603a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2030faae_37d52ba8",
+        "filename": "service_vm/requests/src/traits.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-06T09:39:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cea7c1b1_5cdc768e",
       "range": {
         "startLine": 19,
         "startChar": 0,
