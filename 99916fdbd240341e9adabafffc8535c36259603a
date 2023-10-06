@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bcf5e3ec_cb5349ec",
+        "filename": "service_vm/requests/src/keyblob.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-06T09:45:52Z",
+      "side": 1,
+      "message": "But your cbor::serialize() doesn\u0027t. (If it would be useful for it to do so, then that\u0027s fine.)\nIt doesn\u0027t really matter, but you\u0027re forcing a restriction on your caller for no obvious reason.",
+      "parentUuid": "e2e2a966_56abc3c7",
+      "range": {
+        "startLine": 97,
+        "startChar": 18,
+        "endLine": 97,
+        "endChar": 27
+      },
+      "revId": "99916fdbd240341e9adabafffc8535c36259603a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cf6754a8_5b0644a6",
         "filename": "service_vm/requests/src/keyblob.rs",
         "patchSetId": 11
@@ -226,6 +250,30 @@
       "side": 1,
       "message": "Since this wrapper is intended to encapsulate the `EVP_AEAD_CTX` object from bssl, I feel it consistent to use the naming conventions from bssl for the wrapper\u0027s API in general. However, if you prefer a more descriptive name like \"Context\", I\u0027m fine to replace `Ctx` with `Context` for AEAD and other bssl objects. wdyt?",
       "parentUuid": "78e232e7_c4a28d0e",
+      "range": {
+        "startLine": 108,
+        "startChar": 23,
+        "endLine": 108,
+        "endChar": 30
+      },
+      "revId": "99916fdbd240341e9adabafffc8535c36259603a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db9c0eb9_d5e103a8",
+        "filename": "service_vm/requests/src/keyblob.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-06T09:45:52Z",
+      "side": 1,
+      "message": "That would be an improvement.",
+      "parentUuid": "007fb220_207b9173",
       "range": {
         "startLine": 108,
         "startChar": 23,
