@@ -159,6 +159,9 @@ impl<H: Hal, T: Transport> VsockStream<H, T> {
     }
 }
 
+/// The capacity of the buffer defined in virtio-drivers/../connectionmanager.
+const BUFFER_CAPACITY: usize = 1024;
+
 impl<H: Hal, T: Transport> Read for VsockStream<H, T> {
     type Error = virtio_drivers::Error;
 
@@ -173,6 +176,12 @@ impl<H: Hal, T: Transport> Read for VsockStream<H, T> {
                 len
             };
             start += len;
+        }
+        let buffer_available_bytes = self
+            .connection_manager
+            .recv_buffer_available_bytes(self.peer_addr, self.peer_addr.port)?;
+        if buffer_available_bytes >= BUFFER_CAPACITY {
+            self.connection_manager.update_credit(self.peer_addr, self.peer_addr.port)?;
         }
         Ok(())
     }
