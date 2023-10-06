@@ -18,17 +18,22 @@
 
 use android_hardware_security_rkp::aidl::android::hardware::security::keymint::MacedPublicKey::MacedPublicKey;
 use anyhow::{bail, Context, Result};
-use service_vm_comm::{GenerateCertificateRequestParams, Request, Response};
+use service_vm_comm::{GenerateCertificateRequestParams, Request, Response, VmCsr, VmDescriptor};
 use service_vm_manager::ServiceVm;
 
-pub(crate) fn request_certificate(csr: &[u8]) -> Result<Vec<u8>> {
+pub(crate) fn request_certificate(_csr: &[u8]) -> Result<Vec<u8>> {
     let mut vm = ServiceVm::start()?;
 
-    // TODO(b/271275206): Send the correct request type with client VM's
-    // information to be attested.
-    let request = Request::Reverse(csr.to_vec());
+    // TODO(b/278717513): Fill the following fields with real data in the
+    // client VM.
+    let csr = VmCsr {
+        public_key: vec![],
+        vm_descriptor: VmDescriptor { dice_cert_chain: vec![] },
+        signature: vec![],
+    };
+    let request = Request::RequestCertificate(csr);
     match vm.process_request(request).context("Failed to process request")? {
-        Response::Reverse(cert) => Ok(cert),
+        Response::RequestCertificate(cert) => Ok(cert),
         _ => bail!("Incorrect response type"),
     }
 }
