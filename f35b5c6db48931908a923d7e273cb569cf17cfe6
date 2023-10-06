@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57eda647_a9983924",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-06T11:55:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f2e8d7d_266e545c",
+      "range": {
+        "startLine": 164,
+        "startChar": 19,
+        "endLine": 164,
+        "endChar": 20
+      },
+      "revId": "f35b5c6db48931908a923d7e273cb569cf17cfe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d56671f_0e79babd",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-06T10:18:49Z",
       "side": 1,
       "message": "Might as well make use of your latest creation:\n```\nlet Some(range) \u003d NonEmptyRange::new(entry_offset, entry_size) else { continue };\n```",
+      "range": {
+        "startLine": 228,
+        "startChar": 12,
+        "endLine": 231,
+        "endChar": 66
+      },
+      "revId": "f35b5c6db48931908a923d7e273cb569cf17cfe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cce498f6_01b48974",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-06T11:55:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d56671f_0e79babd",
       "range": {
         "startLine": 228,
         "startChar": 12,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98c66877_e3a4c7e4",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-06T11:55:39Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "2e8758c3_7a8c212b",
+      "range": {
+        "startLine": 232,
+        "startChar": 15,
+        "endLine": 232,
+        "endChar": 67
+      },
+      "revId": "f35b5c6db48931908a923d7e273cb569cf17cfe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b823c07e_87185be4",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-10-06T10:18:49Z",
       "side": 1,
       "message": "Isn\u0027t this `entry_size` or `range.len()`? BTW, could the `as usize` on lines 225-226 be turned into (hopefully compiler-optimized) `.try_into().unwrap()`, just in case?",
+      "range": {
+        "startLine": 238,
+        "startChar": 16,
+        "endLine": 238,
+        "endChar": 53
+      },
+      "revId": "f35b5c6db48931908a923d7e273cb569cf17cfe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24edd021_4458a5fd",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-06T11:55:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b823c07e_87185be4",
       "range": {
         "startLine": 238,
         "startChar": 16,
