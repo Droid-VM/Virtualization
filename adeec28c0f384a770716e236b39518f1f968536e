@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "314d64dd_5d97b869",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-06T08:54:06Z",
+      "side": 1,
+      "message": "Love the naming. Done, and also changed to use `NonZeroUsize`.\n\nQuestion about wrapping `Range\u003cusize\u003e`: Then I can\u0027t `#[derive(Copy)]` and this implementation seem to be easy enough to build from the scratch. What do you think of building from the scratch, especially because I now use `NonZeroUsize`?",
+      "parentUuid": "560bcd4f_6e586c9b",
+      "range": {
+        "startLine": 26,
+        "startChar": 11,
+        "endLine": 26,
+        "endChar": 16
+      },
+      "revId": "adeec28c0f384a770716e236b39518f1f968536e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4f9ba989_228a0309",
         "filename": "pvmfw/src/config.rs",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2023-09-29T09:00:36Z",
       "side": 1,
       "message": "Why is this guy moving around?",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 20
+      },
+      "revId": "adeec28c0f384a770716e236b39518f1f968536e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b04c06c6_bd1e7aef",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-06T08:54:06Z",
+      "side": 1,
+      "message": "Reverted.",
+      "parentUuid": "4f9ba989_228a0309",
       "range": {
         "startLine": 47,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f4dbb18_93f53a13",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-06T08:54:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f9d3cb8_db3190d9",
+      "range": {
+        "startLine": 161,
+        "startChar": 35,
+        "endLine": 161,
+        "endChar": 51
+      },
+      "revId": "adeec28c0f384a770716e236b39518f1f968536e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d208cd79_e595e58e",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-09-29T09:00:36Z",
       "side": 1,
       "message": "`range[i]` are already initialized to `None` so you can flatten this loop by moving to the next entry if the current one is missing or wrong.",
+      "range": {
+        "startLine": 240,
+        "startChar": 16,
+        "endLine": 240,
+        "endChar": 20
+      },
+      "revId": "adeec28c0f384a770716e236b39518f1f968536e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8385084_95a1733a",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-06T08:54:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d208cd79_e595e58e",
       "range": {
         "startLine": 240,
         "startChar": 16,
