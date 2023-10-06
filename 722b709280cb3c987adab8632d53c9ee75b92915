@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d46b1c61_3a9c4f33",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-06T10:18:27Z",
+      "side": 1,
+      "message": "What about we implement a `pvmfw`-agnostic function that would extract multiple sub-slices from a single slice (an extension of `slice::split_at_mut` similar to `slice::get_many_mut` but for index ranges) in `vmbase` and use that with these ranges on `self.body`? If i\u0027m not mistaken, it could check that the ranges are in-order and don\u0027t overlap and be safe or assume so and be `unsafe`; WDYT?",
+      "range": {
+        "startLine": 268,
+        "startChar": 8,
+        "endLine": 276,
+        "endChar": 9
+      },
+      "revId": "722b709280cb3c987adab8632d53c9ee75b92915",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
