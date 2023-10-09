@@ -98,6 +98,24 @@
       "parentUuid": "39fe3b61_50845fae",
       "revId": "906f26100c84eeadbb5973fb1940d003dcccee1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7626ec1b_01975833",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-10-09T09:01:46Z",
+      "side": 1,
+      "message": "Right, if the receive buffer is full then there are 1024 bytes available to read. When the buffer is empty there are 0 bytes available to read.",
+      "parentUuid": "c735756f_06870a20",
+      "revId": "906f26100c84eeadbb5973fb1940d003dcccee1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
