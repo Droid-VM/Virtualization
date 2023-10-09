@@ -27,7 +27,11 @@ use android_hardware_security_rkp::aidl::android::hardware::security::keymint::{
 };
 use anyhow::Context;
 use avflog::LogResult;
-use binder::{BinderFeatures, Interface, IntoBinderResult, Result as BinderResult, Status, Strong};
+use binder::{
+    BinderFeatures, ExceptionCode, Interface, IntoBinderResult, Result as BinderResult, Status,
+    Strong,
+};
+use hypervisor_props::is_protected_vm_supported;
 use service_vm_comm::{RequestProcessingError, Response};
 
 /// Constructs a binder object that implements `IRemotelyProvisionedComponent`.
@@ -49,7 +53,7 @@ impl IRemotelyProvisionedComponent for AvfRemotelyProvisionedComponent {
             versionNumber: 3,
             rpcAuthorName: String::from("Android Virtualization Framework"),
             supportedEekCurve: CURVE_NONE,
-            uniqueId: Some(String::from("Android Virtualization Framework 1")),
+            uniqueId: Some(String::from("AVF Remote Provisioning 1")),
             supportedNumKeysInCsr: MIN_SUPPORTED_NUM_KEYS_IN_CSR,
         })
     }
@@ -59,6 +63,8 @@ impl IRemotelyProvisionedComponent for AvfRemotelyProvisionedComponent {
         testMode: bool,
         macedPublicKey: &mut MacedPublicKey,
     ) -> BinderResult<Vec<u8>> {
+        check_protected_vm_is_supported("generateEcdsaP256KeyPair")?;
+        check_remote_attestation_feature_is_enabled("generateEcdsaP256KeyPair")?;
         if testMode {
             return Err(Status::new_service_specific_error_str(
                 STATUS_REMOVED,
@@ -101,6 +107,16 @@ impl IRemotelyProvisionedComponent for AvfRemotelyProvisionedComponent {
         keysToSign: &[MacedPublicKey],
         challenge: &[u8],
     ) -> BinderResult<Vec<u8>> {
+        check_protected_vm_is_supported("generateCertificateRequestV2")?;
+        check_remote_attestation_feature_is_enabled("generateCertificateRequestV2")?;
+        if !cfg!(remote_attestation) {
+            return Err(Status::new_exception_str(
+                ExceptionCode::UNSUPPORTED_OPERATION,
+                Some("generateCertificateRequestV2 is not supported with the remote_attestation feature disabled"),
+            ))
+            .with_log();
+        }
+
         const MAX_CHALLENGE_SIZE: usize = 64;
         if challenge.len() > MAX_CHALLENGE_SIZE {
             let message = format!(
@@ -119,6 +135,32 @@ impl IRemotelyProvisionedComponent for AvfRemotelyProvisionedComponent {
             Response::GenerateCertificateRequest(res) => Ok(res),
             _ => Err(to_service_specific_error(res)),
         }
+        .with_log()
+    }
+}
+
+fn check_protected_vm_is_supported(api_name: &str) -> BinderResult<()> {
+    if is_protected_vm_supported().unwrap_or(false) {
+        Ok(())
+    } else {
+        Err(Status::new_exception_str(
+            ExceptionCode::UNSUPPORTED_OPERATION,
+            Some(format!("{api_name} is not supported when protected VM is not supported")),
+        ))
+        .with_log()
+    }
+}
+
+fn check_remote_attestation_feature_is_enabled(api_name: &str) -> BinderResult<()> {
+    if cfg!(remote_attestation) {
+        Ok(())
+    } else {
+        Err(Status::new_exception_str(
+            ExceptionCode::UNSUPPORTED_OPERATION,
+            Some(format!(
+                "{api_name} is not supported with the remote_attestation feature disabled"
+            )),
+        ))
         .with_log()
     }
 }
