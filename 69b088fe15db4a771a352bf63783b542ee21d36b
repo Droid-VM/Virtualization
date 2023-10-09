@@ -46,6 +46,30 @@
       },
       "revId": "69b088fe15db4a771a352bf63783b542ee21d36b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fb939f4_96a30e96",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-09T09:57:32Z",
+      "side": 0,
+      "message": "\u003e The api name already tells whether the failure occurred during the \"open\" or \"seal\".\n\nNeat!\n\n\u003e Furthermore, since in `bssl_avf` we retrieve the error as soon as a call fails, theoretically we don\u0027t need an error iterator.\n\nThat makes sense and I wanted to make this assumption when implementing these wrappers but couldn\u0027t find a definitive guarantee that checking for errors after each call meant at most one error code (AFAIR, the rationale was that a single call made by the client could result in multiple internal failures); do you have a reference for this?\n\nBTW, I really disliked the error iterator so any solution that can get rid of it (in a correct way) is fine by me! We could even assert that there wasn\u0027t more than one error in the FFI error list ...\n\n\u003e However, if you would like to include the failing file and line number from bssl to help debugging, we can add them to `bssl_avf::Error` too later.\n\nI don\u0027t remember exactly how that was implemented but more information is usually better when debugging so yes, please.",
+      "parentUuid": "9e2c9dd4_9315ae1c",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 14
+      },
+      "revId": "69b088fe15db4a771a352bf63783b542ee21d36b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

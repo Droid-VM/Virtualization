@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4239c1ba_d8dba1ec",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-09T09:57:32Z",
+      "side": 1,
+      "message": "\u003e Sure I can wrap this function in bssl_avf so that pvmfw doesn\u0027t need to depend on bssl_ffi anymore.\n\nSGTM\n\n\u003e But we probably don\u0027t need to track the calling since it\u0027s safe to call it multiple times [1]. wdyt?\n\nI meant track it so that it\u0027s still called once before any other BSSL function; are you suggesting `bssl_avf` would call `CRYPTO_library_init` every time it calls a BSSL function? That would provide the encapsulation but I\u0027m not sure how expensive unnecessary calls are (and, if inexpensive today, if our Rust wrapper should be built on that assumption)? Anyway, any solution moving this to `bssl_avf` is better for correctness of clients, IMO.",
+      "parentUuid": "17556bd8_b7c4f044",
+      "range": {
+        "startLine": 195,
+        "startChar": 4,
+        "endLine": 195,
+        "endChar": 10
+      },
+      "revId": "4d087504cbfc2094fc87b837559ceee4ff4ed5de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55894b2f_5438fcdf",
         "filename": "pvmfw/src/instance.rs",
         "patchSetId": 1
@@ -119,6 +143,30 @@
       "side": 1,
       "message": "The nonce is only optional in the two `*_randnonce` APIs, while for all other AEAD algorithms[1], it is mandatory. In fact, both the nonce and the key are essential for ensuring the security of the AEAD algorithm. Users typically prefer to have control over the nonce or to use it to build a specific format, such as CoseEncrypt. Also the bssl team does recommend to use the two `*_randnonce` APIs.\n\nRegarding `ad`, since it serves to provide contextual info to the algorithm similar to the `info` field of HKDF, I just make them take the same type to keep the consistency.\n\n[1] https://commondatastorage.googleapis.com/chromium-boringssl-docs/aead.h.html",
       "parentUuid": "55894b2f_5438fcdf",
+      "range": {
+        "startLine": 110,
+        "startChar": 24,
+        "endLine": 110,
+        "endChar": 25
+      },
+      "revId": "4d087504cbfc2094fc87b837559ceee4ff4ed5de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9389e49_aa34cc82",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-09T09:57:32Z",
+      "side": 1,
+      "message": "\u003e Also the bssl team does recommend to use the two `*_randnonce` APIs.\n\nI\u0027m out of my realm here but I vaguely remember discussions about avoiding `_randnonce` and generating the nonce ourselves (to pass it to the non-`randnonce` functions): could you confirm that you actually meant \"does\" (not \"does not\") in the above and/or if you think there would be value in doing so?\n\nLeaving this comment thread resolved as it\u0027s out-of-scope for this CL.",
+      "parentUuid": "af44d5a4_ddcae001",
       "range": {
         "startLine": 110,
         "startChar": 24,
