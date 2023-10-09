@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "338481dd_022d8be4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-09T08:19:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a26c9053_288ebd70",
+      "range": {
+        "startLine": 11,
+        "startChar": 26,
+        "endLine": 11,
+        "endChar": 30
+      },
+      "revId": "906f26100c84eeadbb5973fb1940d003dcccee1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e65be44f_d6b6e341",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -54,6 +78,24 @@
       "writtenOn": "2023-10-06T16:08:20Z",
       "side": 1,
       "message": "Shouldn\u0027t you be checking for when 0 bytes are available to read?\n\nAlso, I think this needs to be inside the loop above, or perhaps inside `VsockStream::recv`. Otherwise you\u0027ll still have the same issue if `read_exact` is called with a large buffer.",
+      "revId": "906f26100c84eeadbb5973fb1940d003dcccee1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c735756f_06870a20",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-09T08:19:53Z",
+      "side": 1,
+      "message": "\u003e Shouldn\u0027t you be checking for when 0 bytes are available to read?\n\nChecking for 0 bytes availability does not work in this case. When the host sends a chunk of 1024 bytes to the guest VM, the receive buffer immediately becomes full, with 0 bytes available. Sending an update to the host at this point serves nothing, as the buffer allocation is already full and the `fwd_cnt` is 0. We need to send an update when the buffer is empty after we read everything, where we have `fwd_cnt` \u003d\u003d `buf_alloc`. This way, the host will know that we are ready to receive again upon receiving this message.",
+      "parentUuid": "39fe3b61_50845fae",
       "revId": "906f26100c84eeadbb5973fb1940d003dcccee1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
