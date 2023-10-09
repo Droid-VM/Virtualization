@@ -49,7 +49,7 @@ impl IRemotelyProvisionedComponent for AvfRemotelyProvisionedComponent {
             versionNumber: 3,
             rpcAuthorName: String::from("Android Virtualization Framework"),
             supportedEekCurve: CURVE_NONE,
-            uniqueId: Some(String::from("Android Virtualization Framework 1")),
+            uniqueId: Some(String::from("AVF Remote Provisioning 1")),
             supportedNumKeysInCsr: MIN_SUPPORTED_NUM_KEYS_IN_CSR,
         })
     }

@@ -161,7 +161,7 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
     fn requestCertificate(&self, csr: &[u8]) -> binder::Result<Vec<u8>> {
         check_manage_access()?;
         info!("Received csr. Getting certificate...");
-        if cfg!(remote_attestation) {
+        if !cfg!(remote_attestation) {
             request_certificate(csr)
                 .context("Failed to get certificate")
                 .with_log()
