@@ -8,6 +8,7 @@ rust_binary {
     defaults: ["avf_build_flags_rust"],
     edition: "2021",
     srcs: ["src/main.rs"],
+    init_rc: ["vfio_handler.rc"],
     // Only build on targets which crosvm builds on.
     enabled: false,
     target: {
