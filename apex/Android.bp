@@ -112,6 +112,9 @@ apex_defaults {
     apps: [
         "EmptyPayloadApp",
     ],
+    vintf_fragments: [
+        "virtualizationservice.xml",
+    ],
 }
 
 apex_defaults {
