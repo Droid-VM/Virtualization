@@ -62,6 +62,9 @@ apex_defaults {
         "libvirtualizationservice_jni",
         "libvirtualmachine_jni",
     ],
+    vintf_fragments: [
+        "virtualizationservice.xml",
+    ],
 }
 
 apex_defaults {
