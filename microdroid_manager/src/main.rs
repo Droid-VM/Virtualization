@@ -33,13 +33,14 @@ use android_system_virtualization_payload::aidl::android::system::virtualization
     ENCRYPTEDSTORE_MOUNTPOINT,
 };
 use anyhow::{anyhow, bail, ensure, Context, Error, Result};
+use apkmanifest::extract_manifest_info;
 use apkverify::{get_public_key_der, verify, V4Signature};
 use binder::Strong;
 use diced_open_dice::OwnedDiceArtifacts;
 use glob::glob;
 use itertools::sorted;
 use libc::VMADDR_CID_HOST;
-use log::{error, info};
+use log::{error, info, warn};
 use keystore2_crypto::ZVec;
 use microdroid_metadata::{write_metadata, Metadata, PayloadMetadata};
 use microdroid_payload_config::{OsConfig, Task, TaskType, VmPayloadConfig};
@@ -424,7 +425,7 @@ fn try_run_payload(
     zipfuse.mount(
         MountForExec::Allowed,
         "fscontext=u:object_r:zipfusefs:s0,context=u:object_r:system_file:s0",
-        Path::new("/dev/block/mapper/microdroid-apk"),
+        Path::new(DM_MOUNTED_APK_PATH),
         Path::new(VM_APK_CONTENTS_PATH),
         "microdroid_manager.apk.mounted".to_owned(),
     )?;
@@ -466,6 +467,12 @@ fn try_run_payload(
 
     // Wait until zipfuse has mounted the APKs so we can access the payload
     zipfuse.wait_until_done()?;
+
+    let manifest_path = Path::new(VM_APK_CONTENTS_PATH).join("AndroidManifest.xml");
+    match extract_manifest_info(&manifest_path) {
+        Err(e) => warn!("Failed to read manifest from APK: {e:?}"),
+        Ok(manifest_info) => info!("Manifest package name is {}", manifest_info.package),
+    };
 
     register_vm_payload_service(
         allow_restricted_apis,
