@@ -27,14 +27,15 @@ use android_logger::{Config, FilterBuilder};
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IVirtualizationServiceInternal::BnVirtualizationServiceInternal;
 use anyhow::Error;
 use binder::{register_lazy_service, BinderFeatures, ProcessState, ThreadState};
+use hypervisor_props::is_protected_vm_supported;
 use log::{info, Level};
 use std::fs::{create_dir, read_dir};
 use std::os::unix::raw::{pid_t, uid_t};
 use std::path::Path;
 
 const LOG_TAG: &str = "VirtualizationService";
-const _REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME: &str =
-    "android.system.virtualization.IRemotelyProvisionedComponent/avf";
+const REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME: &str =
+    "android.hardware.security.keymint.IRemotelyProvisionedComponent/avf";
 
 fn get_calling_pid() -> pid_t {
     ThreadState::get_calling_pid()
@@ -69,10 +70,17 @@ fn main() {
     register_lazy_service(BINDER_SERVICE_IDENTIFIER, service.as_binder()).unwrap();
     info!("Registered Binder service {}.", BINDER_SERVICE_IDENTIFIER);
 
-    // The IRemotelyProvisionedComponent service is only supposed to be triggered by rkpd for
-    // RKP VM attestation.
-    let _remote_provisioning_service = remote_provisioning::new_binder();
-    // TODO(b/274881098): Register the RKP service when the implementation is ready.
+    if is_protected_vm_supported().unwrap_or(false) {
+        // The IRemotelyProvisionedComponent service is only supposed to be triggered by rkpd for
+        // RKP VM attestation.
+        let remote_provisioning_service = remote_provisioning::new_binder();
+        register_lazy_service(
+            REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME,
+            remote_provisioning_service.as_binder(),
+        )
+        .unwrap();
+        info!("Registered Binder service {}.", REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME);
+    }
 
     ProcessState::join_thread_pool();
 }
