@@ -33,6 +33,24 @@
       "message": "Seems like you missed importing assumeTrue here.",
       "revId": "4386ffd7c769a8e374edd2e60080aaabacf7fdf7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fc43d5f_eddc0341",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-10-10T11:59:48Z",
+      "side": 1,
+      "message": "Missed it, the patch that introduced that dependency was never cherrypicked \u0026 presubmit here does not do any build tests. Let me revert this one \u0026 recreate the correct one.",
+      "parentUuid": "b1822d8f_6754c4bc",
+      "revId": "4386ffd7c769a8e374edd2e60080aaabacf7fdf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
