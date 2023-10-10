@@ -35,6 +35,8 @@
 
 __BEGIN_DECLS
 
+struct AttestationResult;
+
 /**
  * Get the VM's DICE attestation chain.
  *
@@ -64,13 +66,37 @@ size_t AVmPayload_getDiceAttestationCdi(void* _Nullable data, size_t size);
  * \param challenge A pointer to the challenge buffer.
  * \param challenge_size size of the challenge, the maximum supported challenge size is
  *                       64 bytes.
- * \param buffer A pointer to the certificate buffer.
- * \param size number of bytes that can be written to the certificate buffer.
  *
- * \return the total size of the certificate
+ * \return the attestation result. The result remains valid until it is freed with
+ *         `AVmPayload_freeAttestationResult`.
  */
-size_t AVmPayload_requestAttestation(const void* _Nonnull challenge, size_t challenge_size,
-                                     void* _Nullable buffer, size_t size)
+struct AttestationResult* _Nonnull AVmPayload_requestAttestation(const void* _Nonnull challenge,
+                                                                 size_t challenge_size)
+        __INTRODUCED_IN(__ANDROID_API_V__);
+
+/**
+ * Frees all the data owned by the provided attestation result, including the result itself.
+ *
+ * \param result A pointer to the attestation result.
+ */
+void AVmPayload_freeAttestationResult(struct AttestationResult* _Nonnull result)
+        __INTRODUCED_IN(__ANDROID_API_V__);
+
+/**
+ * Reads the certificate chain from the provided attestation result. The certificate chain
+ * consists of a sequence of DER-encoded X.509 certificates that form the attestation key's
+ * certificate chain.
+ *
+ * \param data A pointer to the memory where the certificate chain will be written
+ *             (can be null if size is 0).
+ * \param size The maximum number of bytes that can be written to the data buffer. If `size`
+ *             is smaller than the total size of the certificate chain, the chain will be
+ *             truncated to this `size`.
+ *
+ * \return The total size of the certificate chain.
+ */
+size_t AVmPayload_getCertificateChainFromResult(struct AttestationResult* _Nonnull result,
+                                                void* _Nullable data, size_t size)
         __INTRODUCED_IN(__ANDROID_API_V__);
 
 __END_DECLS
