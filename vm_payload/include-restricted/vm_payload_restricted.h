@@ -35,6 +35,21 @@
 
 __BEGIN_DECLS
 
+struct AAttestationResult;
+
+/**
+ * Remote attestation status types returned from remote attestation functions.
+ */
+typedef enum {
+    /** The remote attestatio completes successfully. */
+    ATTESTATION_OK = 0,
+
+    ATTESTATION_UNKNOWN_ERROR = -10000,
+
+    /** The challenge size is not between 0 and 64. */
+    ATTESTATION_ERROR_INVALID_CHALLENGE = ATTESTATION_UNKNOWN_ERROR - 1,
+} attestation_status_t;
+
 /**
  * Get the VM's DICE attestation chain.
  *
@@ -63,15 +78,41 @@ size_t AVmPayload_getDiceAttestationCdi(void* _Nullable data, size_t size);
  *
  * \param challenge A pointer to the challenge buffer.
  * \param challenge_size size of the challenge, the maximum supported challenge size is
- *                       64 bytes. An error will be returned if an invalid challenge is
- *                       passed.
- * \param buffer A pointer to the certificate buffer.
- * \param size number of bytes that can be written to the certificate buffer.
+ *          64 bytes. The status `attestation_status_t::ATTESTATION_ERROR_INVALID_CHALLENGE`
+ *          will be returned if an invalid challenge is passed.
+ * \param result The remote attestation result will be filled here if the attestation
+ *               succeeds. The result remains valid until it is freed with
+ *              `AVmPayload_freeAttestationResult`.
  *
- * \return the total size of the certificate
+ * \return ATTESTATION_OK on successful attestation.
  */
-size_t AVmPayload_requestAttestation(const void* _Nonnull challenge, size_t challenge_size,
-                                     void* _Nullable buffer, size_t size)
+attestation_status_t AVmPayload_requestAttestation(
+        const void* _Nonnull challenge, size_t challenge_size,
+        struct AAttestationResult* _Nullable* _Nonnull result) __INTRODUCED_IN(__ANDROID_API_V__);
+
+/**
+ * Frees all the data owned by the provided attestation result, including the result itself.
+ *
+ * \param result A pointer to the attestation result.
+ */
+void AVmPayload_freeAttestationResult(struct AttestationResult* _Nonnull result)
+        __INTRODUCED_IN(__ANDROID_API_V__);
+
+/**
+ * Reads the certificate chain from the provided attestation result. The certificate chain
+ * consists of a sequence of DER-encoded X.509 certificates that form the attestation key's
+ * certificate chain.
+ *
+ * \param data A pointer to the memory where the certificate chain will be written
+ *             (can be null if size is 0).
+ * \param size The maximum number of bytes that can be written to the data buffer. If `size`
+ *             is smaller than the total size of the certificate chain, the chain will be
+ *             truncated to this `size`.
+ *
+ * \return The total size of the certificate chain.
+ */
+size_t AVmPayload_getCertificateChainFromResult(struct AAttestationResult* _Nonnull result,
+                                                void* _Nullable data, size_t size)
         __INTRODUCED_IN(__ANDROID_API_V__);
 
 __END_DECLS
