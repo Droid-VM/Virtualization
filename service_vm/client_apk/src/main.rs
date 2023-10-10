@@ -14,10 +14,19 @@
 
 //! Main executable of Service VM client.
 
-use anyhow::Result;
+use anyhow::{ensure, Result};
 use log::{error, info};
-use std::{ffi::c_void, panic};
-use vm_payload_bindgen::AVmPayload_requestAttestation;
+use std::{
+    ffi::{c_void, CStr},
+    mem::MaybeUninit,
+    panic, ptr,
+};
+use vm_payload_bindgen::{
+    attestation_status_t, AAttestationResult, AAttestationResult_resultToString,
+    AVmPayload_freeAttestationResult, AVmPayload_getCertificateChainFromResult,
+    AVmPayload_getPrivateKeyFromResult, AVmPayload_requestAttestation,
+    AVmPayload_signWithAttestedKey,
+};
 
 /// Entry point of the Service VM client.
 #[allow(non_snake_case)]
@@ -40,6 +49,24 @@ pub extern "C" fn AVmPayload_main() {
 
 fn try_main() -> Result<()> {
     info!("Welcome to Service VM Client!");
+
+    let mut res = MaybeUninit::uninit();
+    let too_big_challenge = &[0u8; 66];
+    // SAFETY: It is safe as we only read the challenge within its bounds and the
+    // function does not retain any reference to it.
+    let status = unsafe {
+        AVmPayload_requestAttestation(
+            too_big_challenge.as_ptr() as *const c_void,
+            too_big_challenge.len(),
+            res.as_mut_ptr(),
+        )
+    };
+    ensure!(
+        status == attestation_status_t::ATTESTATION_ERROR_INVALID_CHALLENGE,
+        "Unexpeteced status: {:?}",
+        status
+    );
+    log_status(status);
     // The data below is only a placeholder generated randomly with urandom
     let challenge = &[
         0x6c, 0xad, 0x52, 0x50, 0x15, 0xe7, 0xf4, 0x1d, 0xa5, 0x60, 0x7e, 0xd2, 0x7d, 0xf1, 0x51,
@@ -47,31 +74,98 @@ fn try_main() -> Result<()> {
         0x11, 0x7b,
     ];
     info!("Sending challenge: {:?}", challenge);
-    let certificate = request_attestation(challenge);
-    info!("Certificate: {:?}", certificate);
+    // SAFETY: It is safe as we only read the challenge within its bounds and the
+    // function does not retain any reference to it.
+    let status = unsafe {
+        AVmPayload_requestAttestation(
+            challenge.as_ptr() as *const c_void,
+            challenge.len(),
+            res.as_mut_ptr(),
+        )
+    };
+    ensure!(status == attestation_status_t::ATTESTATION_OK, "Unexpeteced status: {:?}", status);
+    log_status(status);
+    // SAFETY: The result should be filled as the attestation succeeds.
+    let res = unsafe { res.assume_init() };
+
+    let cert_chain = get_certificate_chain(res)?;
+    info!("Attestation result certificateChain = {:?}", cert_chain);
+
+    let private_key = get_private_key(res)?;
+    info!("Attestation result privateKey = {:?}", private_key);
+
+    let message = b"Hello from Service VM client";
+    info!("Signing message: {:?}", message);
+    let signature = sign_with_attested_key(res, message)?;
+    info!("Signature: {:?}", signature);
+
+    // SAFETY: The result is returned by `AVmPayload_requestAttestation` and is only freed here.
+    unsafe { AVmPayload_freeAttestationResult(res) };
     Ok(())
 }
 
-fn request_attestation(challenge: &[u8]) -> Vec<u8> {
-    // SAFETY: It is safe as we only request the size of the certificate in this call.
-    let certificate_size = unsafe {
-        AVmPayload_requestAttestation(
-            challenge.as_ptr() as *const c_void,
-            challenge.len(),
-            [].as_mut_ptr(),
-            0,
-        )
-    };
-    let mut certificate = vec![0u8; certificate_size];
-    // SAFETY: It is safe as we only write the data into the given buffer within the buffer
-    // size in this call.
+fn get_certificate_chain(res: *mut AAttestationResult) -> Result<Vec<u8>> {
+    let size =
+        // SAFETY: The result is returned by `AVmPayload_requestAttestation` and should be valid
+        // before getting freed.
+        unsafe { AVmPayload_getCertificateChainFromResult(res, ptr::null_mut(), 0) };
+    let mut cert_chain = vec![0u8; size];
+    // SAFETY: The result is returned by `AVmPayload_requestAttestation` and should be valid
+    // before getting freed.
     unsafe {
-        AVmPayload_requestAttestation(
-            challenge.as_ptr() as *const c_void,
-            challenge.len(),
-            certificate.as_mut_ptr() as *mut c_void,
-            certificate.len(),
+        AVmPayload_getCertificateChainFromResult(
+            res,
+            cert_chain.as_mut_ptr() as *mut c_void,
+            cert_chain.len(),
         );
-    };
-    certificate
+    }
+    Ok(cert_chain)
+}
+
+fn get_private_key(res: *mut AAttestationResult) -> Result<Vec<u8>> {
+    let size =
+        // SAFETY: The result is returned by `AVmPayload_requestAttestation` and should be valid
+        // before getting freed.
+        unsafe { AVmPayload_getPrivateKeyFromResult(res, ptr::null_mut(), 0) };
+    let mut private_key = vec![0u8; size];
+    // SAFETY: The result is returned by `AVmPayload_requestAttestation` and should be valid
+    // before getting freed.
+    unsafe {
+        AVmPayload_getPrivateKeyFromResult(
+            res,
+            private_key.as_mut_ptr() as *mut c_void,
+            private_key.len(),
+        );
+    }
+    Ok(private_key)
+}
+
+fn sign_with_attested_key(res: *mut AAttestationResult, message: &[u8]) -> Result<Vec<u8>> {
+    let size =
+        // SAFETY: The result is returned by `AVmPayload_requestAttestation` and should be valid
+        // before getting freed.
+        unsafe { AVmPayload_signWithAttestedKey(res, message.as_ptr() as *const c_void, message.len(), ptr::null_mut(), 0) };
+    let mut signature = vec![0u8; size];
+    // SAFETY: The result is returned by `AVmPayload_requestAttestation` and should be valid
+    // before getting freed.
+    unsafe {
+        AVmPayload_signWithAttestedKey(
+            res,
+            message.as_ptr() as *const c_void,
+            message.len(),
+            signature.as_mut_ptr() as *mut c_void,
+            signature.len(),
+        );
+    }
+    Ok(signature)
+}
+
+fn log_status(status: attestation_status_t) {
+    // SAFETY: It's safe to convert the return status from `AVmPayload_requestAttestation` to
+    // string.
+    let message = unsafe { AAttestationResult_resultToString(status) };
+    // SAFETY: The pointer returned by `AAttestationResult_resultToString` should point to a
+    // valid string.
+    let message = unsafe { CStr::from_ptr(message) };
+    info!("Status: {:?}", message);
 }
