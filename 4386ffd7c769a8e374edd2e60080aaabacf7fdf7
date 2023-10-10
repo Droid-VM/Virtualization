@@ -51,6 +51,24 @@
       "parentUuid": "b1822d8f_6754c4bc",
       "revId": "4386ffd7c769a8e374edd2e60080aaabacf7fdf7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41888578_6dc9e018",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-10T13:58:40Z",
+      "side": 1,
+      "message": "@rossyeh@google.com @svpawar@google.com Why do we have a branch that merges into AOSP main that has no presubmit checks at all? That is clearly going to lead to build breakages.\n\nWe had exactly the same problem last year, and it caused a lot of pain - see b/258851320 - e.g. comments 18 and 23.",
+      "parentUuid": "1fc43d5f_eddc0341",
+      "revId": "4386ffd7c769a8e374edd2e60080aaabacf7fdf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
