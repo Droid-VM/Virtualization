@@ -15,8 +15,11 @@
 //! This module contains the requests and responses definitions exchanged
 //! between the host and the service VM.
 
+use alloc::vec;
 use alloc::vec::Vec;
+use ciborium::Value;
 use core::fmt;
+use coset::{self, CborSerializable, CoseError};
 use log::error;
 use serde::{Deserialize, Serialize};
 
@@ -155,4 +158,73 @@ pub struct EcdsaP256KeyPair {
 
     /// Contains a handle to the private key.
     pub key_blob: Vec<u8>,
+}
+
+/// Represents the data sent from the client VM to the service VM for attestation.
+///
+/// It will be signed by both CDI_Leaf_Priv of the client VM's DICE chain and
+/// the private key corresponding to the public key to be attested.
+#[derive(Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
+pub struct CsrPayload {
+    /// A random array with a length between 0 and 64.
+    /// It will be included in the certificate chain in the attestation result,
+    /// serving as proof of the freshness of the result.
+    pub challenge: Vec<u8>,
+
+    /// Public key to be attested.
+    pub public_key: Vec<u8>,
+
+    /// The DICE certificate chain of the client VM.
+    pub dice_cert_chain: Vec<u8>,
+}
+
+impl CsrPayload {
+    /// Serializes this object to a CBOR-encoded vector.
+    pub fn into_cbor_vec(self) -> coset::Result<Vec<u8>> {
+        let value = Value::Array(vec![
+            Value::Bytes(self.challenge),
+            Value::Bytes(self.public_key),
+            Value::Bytes(self.dice_cert_chain),
+        ]);
+        value.to_vec()
+    }
+
+    /// Creates an object instance from the provided CBOR-encoded slice.
+    pub fn from_cbor_slice(data: &[u8]) -> coset::Result<Self> {
+        let value = Value::from_slice(data)?;
+        let Value::Array(mut arr) = value else {
+            return Err(CoseError::UnexpectedItem(cbor_value_type(&value), "array"));
+        };
+        if arr.len() != 3 {
+            return Err(CoseError::UnexpectedItem("array", "array with 3 items"));
+        }
+        Ok(Self {
+            dice_cert_chain: try_as_bytes(arr.remove(2))?,
+            public_key: try_as_bytes(arr.remove(1))?,
+            challenge: try_as_bytes(arr.remove(0))?,
+        })
+    }
+}
+
+fn try_as_bytes(v: Value) -> coset::Result<Vec<u8>> {
+    if let Value::Bytes(data) = v {
+        Ok(data)
+    } else {
+        Err(CoseError::UnexpectedItem(cbor_value_type(&v), "bytes"))
+    }
+}
+
+fn cbor_value_type(v: &Value) -> &'static str {
+    match v {
+        Value::Integer(_) => "int",
+        Value::Bytes(_) => "bstr",
+        Value::Float(_) => "float",
+        Value::Text(_) => "tstr",
+        Value::Bool(_) => "bool",
+        Value::Null => "nul",
+        Value::Tag(_, _) => "tag",
+        Value::Array(_) => "array",
+        Value::Map(_) => "map",
+        _ => "other",
+    }
 }
