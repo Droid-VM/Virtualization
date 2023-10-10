@@ -21,6 +21,10 @@ package android.system.virtualization.payload;
  * Microdroid Manager for execution.
  */
 interface IVmPayloadService {
+    /** The constants STATUS_* are status code returned by this service. */
+    /** Failed to prepare the CSR and key pair for attestation. */
+    const int STATUS_FAILED_TO_PREPARE_CSR_AND_KEY = 1;
+
     /** Socket name of the service IVmPayloadService. */
     const String VM_PAYLOAD_SERVICE_SOCKET_NAME = "vm_payload_service";
 
@@ -32,6 +36,26 @@ interface IVmPayloadService {
      * is not enabled.
      */
     const String ENCRYPTEDSTORE_MOUNTPOINT = "/mnt/encryptedstore";
+
+    /**
+     * An {@link AttestationResult} holds an attested private key and the remotely
+     * provisioned certificate chain covering its corresponding public key.
+     */
+    parcelable AttestationResult {
+        /**
+         * COSE_Key encoded EC P-256 private key, which is attested.
+         *
+         * The corresponding public key is included in the leaf certificate of
+         * the certificate chain.
+         */
+        byte[] privateKey;
+
+        /**
+         * Sequence of DER-encoded X.509 certificates that make up the attestation
+         * key's certificate chain.
+         */
+        byte[] certificateChain;
+    }
 
     /** Notifies that the payload is ready to serve. */
     void notifyPayloadReady();
@@ -75,7 +99,21 @@ interface IVmPayloadService {
      * serving as proof of the freshness of the result.
      *
      * @param challenge the maximum supported challenge size is 64 bytes.
-     * @return the X.509 encoded certificate.
+     *
+     * @return An {@link AttestationResult} parcelable containing an attested key pair and its
+     *         certification chain.
      */
-    byte[] requestAttestation(in byte[] challenge);
+    AttestationResult requestAttestation(in byte[] challenge);
+
+    /**
+     * Signs the given message using ECDSA with the provided EC private key in the attestation
+     * result.
+     *
+     * @param message the message to be signed with ECDSA.
+     * @param res An {@link AttestationResult} containing the private key to sign the given
+     *            message.
+     *
+     * @return a DER-encoded ECDSASignature.
+     */
+    byte[] ecdsaSign(in byte[] message, in AttestationResult res);
 }
