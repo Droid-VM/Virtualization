@@ -14,20 +14,28 @@
 
 //! This module handles the interaction with virtual machine payload service.
 
-use android_system_virtualization_payload::aidl::android::system::virtualization::payload::IVmPayloadService::{
-    ENCRYPTEDSTORE_MOUNTPOINT, IVmPayloadService, VM_PAYLOAD_SERVICE_SOCKET_NAME, VM_APK_CONTENTS_PATH};
-use anyhow::{ensure, bail, Context, Result};
-use binder::{Strong, unstable_api::{AIBinder, new_spibinder}};
+use android_system_virtualization_payload::aidl::android::system::virtualization::payload:: IVmPayloadService::{
+    IVmPayloadService, ENCRYPTEDSTORE_MOUNTPOINT, VM_APK_CONTENTS_PATH,
+    VM_PAYLOAD_SERVICE_SOCKET_NAME, AttestationResult::AttestationResult,
+};
+use anyhow::{bail, ensure, Context, Result};
+use binder::{
+    unstable_api::{new_spibinder, AIBinder},
+    Strong,
+};
 use lazy_static::lazy_static;
 use log::{error, info, Level};
-use rpcbinder::{RpcSession, RpcServer};
+use rpcbinder::{RpcServer, RpcSession};
 use std::convert::Infallible;
 use std::ffi::CString;
 use std::fmt::Debug;
 use std::os::raw::{c_char, c_void};
 use std::path::Path;
 use std::ptr;
-use std::sync::{Mutex, atomic::{AtomicBool, Ordering}};
+use std::sync::{
+    atomic::{AtomicBool, Ordering},
+    Mutex,
+};
 
 lazy_static! {
     static ref VM_APK_CONTENTS_PATH_C: CString =
@@ -38,6 +46,12 @@ lazy_static! {
 }
 
 static ALREADY_NOTIFIED: AtomicBool = AtomicBool::new(false);
+
+mod attestation_status_t {
+    pub(super) const AATESTATION_OK: i32 = 0;
+    pub(super) const AATESTATION_UNKNOWN_ERROR: i32 = -10000;
+    pub(super) const AATESTATION_ERROR_INVALID_CHALLENGE: i32 = AATESTATION_UNKNOWN_ERROR - 1;
+}
 
 /// Return a connection to the payload service in Microdroid Manager. Uses the existing connection
 /// if there is one, otherwise attempts to create a new one.
@@ -263,42 +277,86 @@ fn try_get_dice_attestation_cdi() -> Result<Vec<u8>> {
 /// Behavior is undefined if any of the following conditions are violated:
 ///
 /// * `challenge` must be [valid] for reads of `challenge_size` bytes.
-/// * `buffer` must be [valid] for writes of `size` bytes. `buffer` can be null if `size` is 0.
+/// * `res` must be [valid] to write the attestation result.
 ///
 /// [valid]: ptr#safety
 #[no_mangle]
 pub unsafe extern "C" fn AVmPayload_requestAttestation(
     challenge: *const u8,
     challenge_size: usize,
-    buffer: *mut u8,
-    size: usize,
-) -> usize {
+    res: *mut *mut AttestationResult,
+) -> i32 {
     initialize_logging();
-
+    if challenge_size > 64 {
+        return attestation_status_t::AATESTATION_ERROR_INVALID_CHALLENGE;
+    }
     // SAFETY: See the requirements on `challenge` above.
     let challenge = unsafe { std::slice::from_raw_parts(challenge, challenge_size) };
-    let certificate = unwrap_or_abort(try_request_attestation(challenge));
-
-    if size != 0 || buffer.is_null() {
-        // SAFETY: See the requirements on `buffer` above. The number of bytes copied doesn't exceed
-        // the length of either buffer, and `certificate` cannot overlap `buffer` because we just
-        // allocated it.
-        unsafe {
-            ptr::copy_nonoverlapping(
-                certificate.as_ptr(),
-                buffer,
-                std::cmp::min(certificate.len(), size),
-            );
-        }
+    let attestation_res = unwrap_or_abort(try_request_attestation(challenge));
+    // SAFETY: The validity of `res` is guaranteed by the caller.
+    unsafe {
+        *res = Box::into_raw(Box::new(attestation_res));
     }
-    certificate.len()
+    attestation_status_t::AATESTATION_OK
 }
 
-fn try_request_attestation(challenge: &[u8]) -> Result<Vec<u8>> {
-    let certificate = get_vm_payload_service()?
-        .requestAttestation(challenge)
-        .context("Failed to request attestation")?;
-    Ok(certificate)
+fn try_request_attestation(public_key: &[u8]) -> Result<AttestationResult> {
+    get_vm_payload_service()?
+        .requestAttestation(public_key)
+        .context("Failed to request attestation")
+}
+
+/// Reads the certificate chain in the given attestation result.
+///
+/// # Safety
+///
+/// Behavior is undefined if any of the following conditions are violated:
+///
+/// * `data` must be [valid] for writes of `size` bytes, if size > 0.
+/// * `res` must point to a valid `AttestationResult`.
+///
+/// [valid]: ptr#safety
+#[no_mangle]
+pub unsafe extern "C" fn AVmPayload_getCertificateChainFromResult(
+    res: *const AttestationResult,
+    data: *mut u8,
+    size: usize,
+) -> usize {
+    if res.is_null() {
+        return 0;
+    }
+    // SAFETY: Caller should ensure that `res` points to a valid `AttestationResult`.
+    let cert_chain = unsafe { &(*res).certificateChain };
+    if size != 0 {
+        // SAFETY: See the requirements on `data` above. The number of bytes copied doesn't exceed
+        // the length of either buffer, and `cdi` cannot overlap `data` because we just allocated
+        // it. We allow data to be null, which is never valid, but only if size == 0 which is
+        // checked above.
+        unsafe {
+            ptr::copy_nonoverlapping(
+                cert_chain.as_ptr(),
+                data,
+                std::cmp::min(cert_chain.len(), size),
+            )
+        };
+    }
+    cert_chain.len()
+}
+
+/// Frees all the data owned by given attestation result and result itself.
+///
+/// # Safety
+///
+/// Behavior is undefined if any of the following conditions are violated:
+///
+/// * `res` must point to a valid `AttestationResult` and has not been freed before.
+#[no_mangle]
+pub unsafe extern "C" fn AVmPayload_freeAttestationResult(res: *mut AttestationResult) {
+    if res.is_null() {
+        return;
+    }
+    // SAFETY: The result is only freed once is ensured by the caller.
+    let _ = unsafe { Box::from_raw(res) };
 }
 
 /// Gets the path to the APK contents.
