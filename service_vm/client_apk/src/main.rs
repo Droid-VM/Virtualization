@@ -40,25 +40,36 @@ pub extern "C" fn AVmPayload_main() {
 
 fn try_main() -> Result<()> {
     info!("Welcome to Service VM Client!");
-    let csr = b"Hello from Service VM";
-    info!("Sending: {:?}", csr);
-    let certificate = request_certificate(csr);
+
+    // TODO(b/303827859): Generate the key pair with a cryptographic library link Tink.
+    // The data below is only a placeholder generated randomly with urandom
+    let public_key = &[
+        0x6c, 0xad, 0x52, 0x50, 0x15, 0xe7, 0xf4, 0x1d, 0xa5, 0x60, 0x7e, 0xd2, 0x7d, 0xf1, 0x51,
+        0x67, 0xc3, 0x3e, 0x73, 0x9b, 0x30, 0xbd, 0x04, 0x20, 0x2e, 0xde, 0x3b, 0x1d, 0xc8, 0x07,
+        0x11, 0x7b,
+    ];
+    let certificate = request_certificate(public_key);
     info!("Certificate: {:?}", certificate);
     Ok(())
 }
 
-fn request_certificate(csr: &[u8]) -> Vec<u8> {
+fn request_certificate(public_key: &[u8]) -> Vec<u8> {
     // SAFETY: It is safe as we only request the size of the certificate in this call.
     let certificate_size = unsafe {
-        AVmPayload_requestCertificate(csr.as_ptr() as *const c_void, csr.len(), [].as_mut_ptr(), 0)
+        AVmPayload_requestCertificate(
+            public_key.as_ptr() as *const c_void,
+            public_key.len(),
+            [].as_mut_ptr(),
+            0,
+        )
     };
     let mut certificate = vec![0u8; certificate_size];
     // SAFETY: It is safe as we only write the data into the given buffer within the buffer
     // size in this call.
     unsafe {
         AVmPayload_requestCertificate(
-            csr.as_ptr() as *const c_void,
-            csr.len(),
+            public_key.as_ptr() as *const c_void,
+            public_key.len(),
             certificate.as_mut_ptr() as *mut c_void,
             certificate.len(),
         );

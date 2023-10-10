@@ -253,29 +253,29 @@ fn try_get_dice_attestation_cdi() -> Result<Vec<u8>> {
     get_vm_payload_service()?.getDiceAttestationCdi().context("Cannot get attestation CDI")
 }
 
-/// Requests a certificate using the provided certificate signing request (CSR).
+/// Requests a certificate covering the given public key.
 /// Panics on failure.
 ///
 /// # Safety
 ///
 /// Behavior is undefined if any of the following conditions are violated:
 ///
-/// * `csr` must be [valid] for reads of `csr_size` bytes.
+/// * `public_key` must be [valid] for reads of `public_key_size` bytes.
 /// * `buffer` must be [valid] for writes of `size` bytes. `buffer` can be null if `size` is 0.
 ///
 /// [valid]: ptr#safety
 #[no_mangle]
 pub unsafe extern "C" fn AVmPayload_requestCertificate(
-    csr: *const u8,
-    csr_size: usize,
+    public_key: *const u8,
+    public_key_size: usize,
     buffer: *mut u8,
     size: usize,
 ) -> usize {
     initialize_logging();
 
-    // SAFETY: See the requirements on `csr` above.
-    let csr = unsafe { std::slice::from_raw_parts(csr, csr_size) };
-    let certificate = unwrap_or_abort(try_request_certificate(csr));
+    // SAFETY: See the requirements on `public_key` above.
+    let public_key = unsafe { std::slice::from_raw_parts(public_key, public_key_size) };
+    let certificate = unwrap_or_abort(try_request_certificate(public_key));
 
     if size != 0 || buffer.is_null() {
         // SAFETY: See the requirements on `buffer` above. The number of bytes copied doesn't exceed
@@ -292,9 +292,9 @@ pub unsafe extern "C" fn AVmPayload_requestCertificate(
     certificate.len()
 }
 
-fn try_request_certificate(csr: &[u8]) -> Result<Vec<u8>> {
+fn try_request_certificate(public_key: &[u8]) -> Result<Vec<u8>> {
     let certificate = get_vm_payload_service()?
-        .requestCertificate(csr)
+        .requestCertificate(public_key)
         .context("Failed to request certificate")?;
     Ok(certificate)
 }
