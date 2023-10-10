@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65ef76a4_6b979f7c",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-10T09:52:34Z",
+      "side": 1,
+      "message": "\"Overwriting\" to make it clear to a reader that\u0027s not familiar with the internal representation of DTs?",
+      "range": {
+        "startLine": 587,
+        "startChar": 40,
+        "endLine": 587,
+        "endChar": 47
+      },
+      "revId": "e9c6d65e0b6c52f33feaaa30e6a39559fb26a460",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f45c882c_5b6dcb96",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-10T09:52:34Z",
+      "side": 1,
+      "message": "That\u0027s not correct; it\u0027s the DT that\u0027s being unpacked, not the slice.\n\nFeel free to rephrase this as\n```\nUnpacks the DT to cover the whole slice it is contained in.\n```\nor something similar because what you have is less clear than the original, IMO.",
+      "range": {
+        "startLine": 704,
+        "startChar": 8,
+        "endLine": 704,
+        "endChar": 53
+      },
+      "revId": "e9c6d65e0b6c52f33feaaa30e6a39559fb26a460",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
