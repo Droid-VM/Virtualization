@@ -16,6 +16,12 @@
 
 use anyhow::Result;
 use log::{error, info};
+use openssl::{
+    bn::BigNumContext,
+    ec::{EcGroup, EcKey},
+    nid::Nid,
+    PointConversionForm,
+};
 use std::{ffi::c_void, panic};
 use vm_payload_bindgen::AVmPayload_requestCertificate;
 
@@ -40,25 +46,38 @@ pub extern "C" fn AVmPayload_main() {
 
 fn try_main() -> Result<()> {
     info!("Welcome to Service VM Client!");
-    let csr = b"Hello from Service VM";
-    info!("Sending: {:?}", csr);
-    let certificate = request_certificate(csr);
+
+    let nid = Nid::X9_62_PRIME256V1; // NIST P-256 curve
+    let group = EcGroup::from_curve_name(nid)?;
+    let key = EcKey::generate(&group)?;
+    let mut ctx = BigNumContext::new()?;
+
+    let public_key =
+        &key.public_key().to_bytes(&group, PointConversionForm::COMPRESSED, &mut ctx)?;
+
+    info!("Sending: {:?}", public_key);
+    let certificate = request_certificate(public_key);
     info!("Certificate: {:?}", certificate);
     Ok(())
 }
 
-fn request_certificate(csr: &[u8]) -> Vec<u8> {
+fn request_certificate(public_key: &[u8]) -> Vec<u8> {
     // SAFETY: It is safe as we only request the size of the certificate in this call.
     let certificate_size = unsafe {
-        AVmPayload_requestCertificate(csr.as_ptr() as *const c_void, csr.len(), [].as_mut_ptr(), 0)
+        AVmPayload_requestCertificate(
+            public_key.as_ptr() as *const c_void,
+            public_key.len(),
+            [].as_mut_ptr(),
+            0,
+        )
     };
     let mut certificate = vec![0u8; certificate_size];
     // SAFETY: It is safe as we only write the data into the given buffer within the buffer
     // size in this call.
     unsafe {
         AVmPayload_requestCertificate(
-            csr.as_ptr() as *const c_void,
-            csr.len(),
+            public_key.as_ptr() as *const c_void,
+            public_key.len(),
             certificate.as_mut_ptr() as *mut c_void,
             certificate.len(),
         );

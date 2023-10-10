@@ -69,11 +69,10 @@ interface IVmPayloadService {
     byte[] getDiceAttestationCdi();
 
     /**
-     * Requests a certificate using the provided certificate signing request (CSR).
+     * Requests a certificate covering the given public key.
      *
-     * TODO(b/271275206): Define the format of the CSR properly.
-     * @param csr the certificate signing request.
+     * @param public_key the public key generated in the client VM.
      * @return the X.509 encoded certificate.
      */
-    byte[] requestCertificate(in byte[] csr);
+    byte[] requestCertificate(in byte[] public_key);
 }
