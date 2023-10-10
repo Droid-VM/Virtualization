@@ -134,6 +134,24 @@
       "parentUuid": "7626ec1b_01975833",
       "revId": "906f26100c84eeadbb5973fb1940d003dcccee1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28c22056_7f325242",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-10-10T13:55:40Z",
+      "side": 1,
+      "message": "It sounds like we are meaning different things by \u0027available bytes\u0027. I expect the number of available bytes to mean the number of bytes which are available to read, which matches what `VsockConnectionManager::recv_buffer_available_bytes` is documented to return. It looks like it is instead returning the number of unused bytes in the receive buffer, which is not very helpful because the caller doesn\u0027t know how big the buffer is. We should fix that.",
+      "parentUuid": "9eb515a2_9fe94e0b",
+      "revId": "906f26100c84eeadbb5973fb1940d003dcccee1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
