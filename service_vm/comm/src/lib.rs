@@ -19,9 +19,11 @@
 
 extern crate alloc;
 
+mod csr;
 mod message;
 mod vsock;
 
+pub use csr::CsrPayload;
 pub use message::{
     EcdsaP256KeyPair, GenerateCertificateRequestParams, Request, RequestProcessingError, Response,
     ServiceVmRequest,

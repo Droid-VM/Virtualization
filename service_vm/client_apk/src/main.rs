@@ -16,8 +16,11 @@
 
 use anyhow::Result;
 use log::{error, info};
-use std::{ffi::c_void, panic};
-use vm_payload_bindgen::AVmPayload_requestCertificate;
+use std::{ffi::c_void, panic, ptr};
+use vm_payload_bindgen::{
+    AVmPayload_freeAttestationResult, AVmPayload_getCertificateChainFromResult,
+    AVmPayload_requestAttestation,
+};
 
 /// Entry point of the Service VM client.
 #[allow(non_snake_case)]
@@ -40,28 +43,31 @@ pub extern "C" fn AVmPayload_main() {
 
 fn try_main() -> Result<()> {
     info!("Welcome to Service VM Client!");
-    let csr = b"Hello from Service VM";
-    info!("Sending: {:?}", csr);
-    let certificate = request_certificate(csr);
-    info!("Certificate: {:?}", certificate);
-    Ok(())
-}
 
-fn request_certificate(csr: &[u8]) -> Vec<u8> {
+    // The data below is only a placeholder generated randomly with urandom
+    let challenge = &[
+        0x6c, 0xad, 0x52, 0x50, 0x15, 0xe7, 0xf4, 0x1d, 0xa5, 0x60, 0x7e, 0xd2, 0x7d, 0xf1, 0x51,
+        0x67, 0xc3, 0x3e, 0x73, 0x9b, 0x30, 0xbd, 0x04, 0x20, 0x2e, 0xde, 0x3b, 0x1d, 0xc8, 0x07,
+        0x11, 0x7b,
+    ];
     // SAFETY: It is safe as we only request the size of the certificate in this call.
-    let certificate_size = unsafe {
-        AVmPayload_requestCertificate(csr.as_ptr() as *const c_void, csr.len(), [].as_mut_ptr(), 0)
+    let res = unsafe {
+        AVmPayload_requestAttestation(challenge.as_ptr() as *const c_void, challenge.len())
     };
-    let mut certificate = vec![0u8; certificate_size];
-    // SAFETY: It is safe as we only write the data into the given buffer within the buffer
-    // size in this call.
+    let cert_chain_size =
+        // SAFETY: The result is returned by `AVmPayload_requestAttestation`.
+        unsafe { AVmPayload_getCertificateChainFromResult(res, ptr::null_mut(), 0) };
+    let mut cert_chain = vec![0u8; cert_chain_size];
+    // SAFETY: The result is returned by `AVmPayload_requestAttestation`.
     unsafe {
-        AVmPayload_requestCertificate(
-            csr.as_ptr() as *const c_void,
-            csr.len(),
-            certificate.as_mut_ptr() as *mut c_void,
-            certificate.len(),
+        AVmPayload_getCertificateChainFromResult(
+            res,
+            cert_chain.as_mut_ptr() as *mut c_void,
+            cert_chain.len(),
         );
-    };
-    certificate
+    }
+    info!("Attestation result certificateChain = {:?}", cert_chain);
+    // SAFETY: The result is returned by `AVmPayload_requestAttestation` and is only freed here.
+    unsafe { AVmPayload_freeAttestationResult(res) };
+    Ok(())
 }
