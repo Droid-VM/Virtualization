@@ -5,8 +5,12 @@ package {
 aidl_interface {
     name: "android.system.virtualization.payload",
     srcs: ["android/system/virtualization/payload/*.aidl"],
+    imports: ["android.system.virtualizationcommon"],
     unstable: true,
     backend: {
+        java: {
+            sdk_version: "module_current",
+        },
         rust: {
             enabled: true,
             apex_available: [
