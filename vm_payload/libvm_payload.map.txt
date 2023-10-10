@@ -8,6 +8,8 @@ LIBVM_PAYLOAD {
     AVmPayload_getApkContentsPath;       # systemapi introduced=34
     AVmPayload_getEncryptedStoragePath;  # systemapi introduced=34
     AVmPayload_requestAttestation;       # systemapi introduced=35
+    AVmPayload_freeAttestationResult;    # systemapi introduced=35
+    AVmPayload_getCertificateChainFromResult; # systemapi introduced=35
   local:
     *;
 };
