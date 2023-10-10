@@ -156,3 +156,18 @@ pub struct EcdsaP256KeyPair {
     /// Contains a handle to the private key.
     pub key_blob: Vec<u8>,
 }
+
+/// Represents the data sent from the client VM to the service VM for attestation.
+#[derive(Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
+pub struct CsrPayload {
+    /// A random array with a length between 0 and 64.
+    /// It will be included in the certificate chain in the attestation result,
+    /// serving as proof of the freshness of the result.
+    pub challenge: Vec<u8>,
+
+    /// Public key to be attested.
+    pub public_key: Vec<u8>,
+
+    /// The DICE certificate chain of the client VM.
+    pub dice_cert_chain: Vec<u8>,
+}
