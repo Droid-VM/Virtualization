@@ -33,6 +33,9 @@ rust_bindgen {
     defaults: ["avf_build_flags_rust"],
     source_stem: "bindings",
     apex_available: ["com.android.compos"],
+    bindgen_flags: [
+        "--default-enum-style rust",
+    ],
     visibility: [
         "//packages/modules/Virtualization/compos",
         "//packages/modules/Virtualization/service_vm/client_apk",
