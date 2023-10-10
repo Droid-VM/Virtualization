@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "580b7254_a9a6abb9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-10T15:14:51Z",
+      "side": 1,
+      "message": "Which CDI?",
+      "range": {
+        "startLine": 14,
+        "startChar": 31,
+        "endLine": 14,
+        "endChar": 44
+      },
+      "revId": "86f8ffa72ea00f50b6dd6d80eeebc08ee8d746fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c52d1e09_aba80797",
@@ -14,6 +37,144 @@
       "writtenOn": "2023-10-10T11:29:48Z",
       "side": 1,
       "message": "Hi Alan, PTAL.",
+      "revId": "86f8ffa72ea00f50b6dd6d80eeebc08ee8d746fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9588b5c1_48d121f2",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-10T15:14:51Z",
+      "side": 1,
+      "message": "This just looks wrong.\n\nWhat format is the public key? What algorithms are supported?\n\nThe API should require the client to prove they own the corresponding private key.\n\n(This is one reason I think we should manage the keypair generation.)",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 52
+      },
+      "revId": "86f8ffa72ea00f50b6dd6d80eeebc08ee8d746fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60c7c690_ac383594",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-10T15:14:51Z",
+      "side": 1,
+      "message": "What is this? Do we own this schema?\nWhat is the schema? (The code below is building some sort of CBOR structure, but it\u0027s hard to tell what.)",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 47
+      },
+      "revId": "86f8ffa72ea00f50b6dd6d80eeebc08ee8d746fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7df80c85_10c180fe",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-10T15:14:51Z",
+      "side": 1,
+      "message": "That affects the API too?",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 84
+      },
+      "revId": "86f8ffa72ea00f50b6dd6d80eeebc08ee8d746fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6fae1e4_f89123d7",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-10T15:14:51Z",
+      "side": 1,
+      "message": "Why do we wrap this in an array?\nWe seem to be converting an array of bytes to a CBOR-encoded array of bytes - but I\u0027m not sure why.",
+      "range": {
+        "startLine": 89,
+        "startChar": 36,
+        "endLine": 89,
+        "endChar": 71
+      },
+      "revId": "86f8ffa72ea00f50b6dd6d80eeebc08ee8d746fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "071de94e_1241af08",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-10T15:14:51Z",
+      "side": 1,
+      "message": "This should include \"attest\". (But not sure it needs \"leaf\" - no other CDI is available to us.)",
+      "range": {
+        "startLine": 123,
+        "startChar": 3,
+        "endLine": 123,
+        "endChar": 23
+      },
+      "revId": "86f8ffa72ea00f50b6dd6d80eeebc08ee8d746fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fc1d0e9_8e648c45",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-10T15:14:51Z",
+      "side": 1,
+      "message": "All this code already exists in service_vm/requests/src/rkp.rs; we shouldn\u0027t be duplicating code like that.",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 0
+      },
       "revId": "86f8ffa72ea00f50b6dd6d80eeebc08ee8d746fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
