@@ -20,6 +20,8 @@ import static android.content.pm.PackageManager.FEATURE_VIRTUALIZATION_FRAMEWORK
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.TruthJUnit.assume;
 
+import static com.google.common.truth.TruthJUnit.assumeTrue;
+
 import android.app.Instrumentation;
 import android.app.UiAutomation;
 import android.content.Context;
