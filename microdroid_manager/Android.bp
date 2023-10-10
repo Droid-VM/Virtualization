@@ -24,6 +24,7 @@ rust_defaults {
         "libbyteorder",
         "libcap_rust",
         "libciborium",
+        "libcoset",
         "libdiced_open_dice",
         "libdiced_sample_inputs",
         "libglob",
@@ -45,6 +46,7 @@ rust_defaults {
         "libserde",
         "libserde_cbor",
         "libserde_json",
+        "libservice_vm_comm",
         "libthiserror",
         "libuuid",
         "libvsock",
@@ -69,6 +71,7 @@ rust_test {
     defaults: ["microdroid_manager_defaults"],
     test_suites: ["general-tests"],
     rustlibs: [
+        "libhwtrust",
         "libtempfile",
     ],
     multilib: {
