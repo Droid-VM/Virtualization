@@ -152,6 +152,24 @@
       "parentUuid": "9eb515a2_9fe94e0b",
       "revId": "906f26100c84eeadbb5973fb1940d003dcccee1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52dd22ad_e1496695",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-11T09:20:23Z",
+      "side": 1,
+      "message": "Oops, I understood `available_bytes` as the available space for receiving data, to be consistent with the existing `RingBuffer.available` API in the code. It\u0027s clearer to call it `recv_buffer_used_bytes` in this context. Could you take a look at https://github.com/rcore-os/virtio-drivers/pull/114/ ?",
+      "parentUuid": "28c22056_7f325242",
+      "revId": "906f26100c84eeadbb5973fb1940d003dcccee1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
