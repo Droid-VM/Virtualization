@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "913a0713_1eeabccb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-11T07:15:16Z",
+      "side": 1,
+      "message": "There had been a discussion on the team chat room regarding it.\n\nLet me paste relevant style guides from the chat (all agrees to use 3rd person declartive)\n\n- https://www.oracle.com/technical-resources/articles/java/javadoc-tool.html#styleguide (from http://shortn/_wzE2RFi40Y)\n- http://shortn/_CAIh9Zd8BB\n- http://shortn/_HOHu7HyISt\n- http://shortn/_KIrBh5CFUf\n\n\nI also CCed you to there, in case you\u0027d missed the discussion.",
+      "parentUuid": "9ac429c0_74f3f11e",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 41
+      },
+      "revId": "e9c6d65e0b6c52f33feaaa30e6a39559fb26a460",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65ef76a4_6b979f7c",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21d78f92_0d458ba4",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-11T07:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65ef76a4_6b979f7c",
+      "range": {
+        "startLine": 587,
+        "startChar": 40,
+        "endLine": 587,
+        "endChar": 47
+      },
+      "revId": "e9c6d65e0b6c52f33feaaa30e6a39559fb26a460",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f45c882c_5b6dcb96",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-10-10T09:52:34Z",
       "side": 1,
       "message": "That\u0027s not correct; it\u0027s the DT that\u0027s being unpacked, not the slice.\n\nFeel free to rephrase this as\n```\nUnpacks the DT to cover the whole slice it is contained in.\n```\nor something similar because what you have is less clear than the original, IMO.",
+      "range": {
+        "startLine": 704,
+        "startChar": 8,
+        "endLine": 704,
+        "endChar": 53
+      },
+      "revId": "e9c6d65e0b6c52f33feaaa30e6a39559fb26a460",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37d1f10a_db08b232",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-11T07:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f45c882c_5b6dcb96",
       "range": {
         "startLine": 704,
         "startChar": 8,
