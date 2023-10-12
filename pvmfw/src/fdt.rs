@@ -15,6 +15,7 @@
 //! High-level FDT functions.
 
 use crate::bootargs::BootArgsIterator;
+use crate::devices::DeviceInfo;
 use crate::helpers::GUEST_PAGE_SIZE;
 use crate::Box;
 use crate::RebootReason;
@@ -600,9 +601,31 @@ impl DeviceTreeInfo {
     }
 }
 
-pub fn sanitize_device_tree(fdt: &mut Fdt) -> Result<DeviceTreeInfo, RebootReason> {
+pub fn sanitize_device_tree(
+    fdt: &mut Fdt,
+    vm_dtbo: Option<&mut [u8]>,
+) -> Result<DeviceTreeInfo, RebootReason> {
     let info = parse_device_tree(fdt)?;
     debug!("Device tree info: {:?}", info);
+
+    let vm_dtbo = vm_dtbo
+        .map(|dtbo| {
+            libfdt::Fdt::from_mut_slice(dtbo).map_err(|e| {
+                error!("Failed to load VM DTBO: {e}");
+                RebootReason::InvalidFdt
+            })
+        })
+        .transpose()?;
+
+    let device_info = vm_dtbo
+        .map(|dtbo| {
+            DeviceInfo::new_filtered(dtbo, fdt).map_err(|e| {
+                error!("Failed to read device info from DT: {e}");
+                RebootReason::InvalidFdt
+            })
+        })
+        .transpose()?
+        .flatten();
 
     fdt.copy_from_slice(pvmfw_fdt_template::RAW).map_err(|e| {
         error!("Failed to instantiate FDT from the template DT: {e}");
@@ -610,10 +633,22 @@ pub fn sanitize_device_tree(fdt: &mut Fdt) -> Result<DeviceTreeInfo, RebootReaso
     })?;
 
     patch_device_tree(fdt, &info)?;
+
+    if let Some(device_info) = device_info {
+        // SAFETY: Damaged vm_dtbo wouldn't be used after this..
+        // If VM DTBO is used outside of this API, then Fdt::from_*() can validate its state.
+        unsafe {
+            device_info.apply_overlay_and_patch(fdt).map_err(|e| {
+                error!("Failed to apply VM DTBO: {e}");
+                RebootReason::InvalidFdt
+            })?;
+        }
+    }
+
     Ok(info)
 }
 
-fn parse_device_tree(fdt: &libfdt::Fdt) -> Result<DeviceTreeInfo, RebootReason> {
+fn parse_device_tree(fdt: &Fdt) -> Result<DeviceTreeInfo, RebootReason> {
     let kernel_range = read_kernel_range_from(fdt).map_err(|e| {
         error!("Failed to read kernel range from DT: {e}");
         RebootReason::InvalidFdt
