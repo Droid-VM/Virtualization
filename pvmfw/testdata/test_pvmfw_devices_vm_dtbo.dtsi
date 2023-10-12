@@ -1,0 +1,32 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+	fragment@eh {
+		target-path = "/";
+		__overlay__ {
+			eh {
+				compatible = "android,eh";
+				android,eh,ignore-gctrl-reset;
+				android,pvmfw,phy-reg = <0x0 0x12F00000 0x1000>;
+				android,pvmfw,phy-iommu = <0x0 0x12E40000>;
+				android,pvmfw,phy-sid = <3>;
+			};
+		};
+	};
+
+	fragment@sensor {
+		target-path = "/pci";
+		__overlay__ {
+			light {
+				compatible = "android,light";
+				version = <0x1 0x2>;
+			};
+		};
+	};
+
+	__symbols__ {
+		eh: "/fragment@eh/__overlay__/eh";
+		sensor: "/fragment@sensor/__overlay__/light";
+	}
+};
