@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7eef1e54_8bfc8167",
+        "filename": "service_vm/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-12T09:59:34Z",
+      "side": 1,
+      "message": "This might be a better overview link: https://source.android.com/docs/core/ota/modular-system/remote-key-provisioning.\n\nBut we should probably mention that the RKP VM acts as a remotely provisioned component.",
+      "range": {
+        "startLine": 17,
+        "startChar": 6,
+        "endLine": 17,
+        "endChar": 178
+      },
+      "revId": "89764e7d2816ee5a53fb026587b0ed9faef58774",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eecb21d1_45e37122",
+        "filename": "service_vm/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-12T09:59:34Z",
+      "side": 1,
+      "message": "I don\u0027t think this is true. pvmfw verifies the RKP VM. \n\nThe remote provisioning server (and note there may be more than one) just checks the DICE chain.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 12
+      },
+      "revId": "89764e7d2816ee5a53fb026587b0ed9faef58774",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0aa1ee79_f0913eda",
+        "filename": "service_vm/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-12T09:59:34Z",
+      "side": 1,
+      "message": "I think this is perhaps over-promising.\nWe verify the DICE chain, ensure that the client VM is running Microdroid, and then certify the payload running within it.\nOnly Microdroid VMs are supported - we should say that. (And link to Microdroid.)",
+      "range": {
+        "startLine": 30,
+        "startChar": 73,
+        "endLine": 32,
+        "endChar": 20
+      },
+      "revId": "89764e7d2816ee5a53fb026587b0ed9faef58774",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bf791ad_1cde2876",
+        "filename": "service_vm/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-12T09:59:34Z",
+      "side": 1,
+      "message": "This renders better: https://android.googlesource.com/platform/external/open-dice/+/main/docs/android.md",
+      "range": {
+        "startLine": 34,
+        "startChar": 13,
+        "endLine": 34,
+        "endChar": 112
+      },
+      "revId": "89764e7d2816ee5a53fb026587b0ed9faef58774",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac81551e_f1b0ccdd",
+        "filename": "service_vm/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-12T09:59:34Z",
+      "side": 1,
+      "message": "Nit: add trailing newline",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 112
+      },
+      "revId": "89764e7d2816ee5a53fb026587b0ed9faef58774",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
