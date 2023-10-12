@@ -20,8 +20,8 @@
 mod iterators;
 
 pub use iterators::{
-    AddressRange, CellIterator, CompatibleIterator, MemRegIterator, RangesIterator, Reg,
-    RegIterator, SubnodeIterator,
+    AddressRange, CellIterator, CompatibleIterator, MemRegIterator, PropertyIterator,
+    RangesIterator, Reg, RegIterator, SubnodeIterator,
 };
 
 use core::cmp::max;
@@ -191,6 +191,77 @@ impl TryFrom<c_int> for SizeCells {
             x if x == Self::Double as c_int => Ok(Self::Double),
             _ => Err(FdtError::BadNCells),
         }
+    }
+}
+
+/// DT property wrapper to abstract endianess changes
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug)]
+struct FdtPropertyStruct<'a> {
+    fdt_property: &'a libfdt_bindgen::fdt_property,
+}
+
+impl<'a> FdtPropertyStruct<'a> {
+    fn name_offset(&self) -> c_int {
+        u32::from_be(self.fdt_property.nameoff).try_into().unwrap()
+    }
+
+    fn len(&self) -> usize {
+        u32::from_be(self.fdt_property.len).try_into().unwrap()
+    }
+
+    fn data_ptr(&self) -> *const c_void {
+        self.fdt_property.data.as_ptr().cast::<_>()
+    }
+}
+
+/// DT property.
+#[derive(Clone, Copy, Debug)]
+pub struct FdtProperty<'a> {
+    fdt: &'a Fdt,
+    offset: c_int,
+    property: FdtPropertyStruct<'a>,
+}
+
+impl<'a> FdtProperty<'a> {
+    fn new(fdt: &'a Fdt, offset: c_int) -> Result<Self> {
+        let mut len = 0;
+        let prop =
+            // SAFETY: Accesses (read-only) are constrained to the DT totalsize.
+            unsafe { libfdt_bindgen::fdt_get_property_by_offset(fdt.as_ptr(), offset, &mut len) };
+        if prop.is_null() {
+            fdt_err(len)?;
+            return Err(FdtError::Internal); // shouldn't happen.
+        }
+        // SAFETY: prop is only returned when it points to valid property
+        let property = FdtPropertyStruct { fdt_property: unsafe { &*(prop.cast::<_>()) } };
+        Ok(Self { fdt, offset, property })
+    }
+
+    /// Returns the property name
+    pub fn name(&self) -> Result<&'a CStr> {
+        let name =
+            // SAFETY: Accesses (read-only) are constrained to the DT totalsize.
+            unsafe { libfdt_bindgen::fdt_string(self.fdt.as_ptr(), self.property.name_offset()) };
+        if name.is_null() {
+            return Err(FdtError::Internal);
+        }
+
+        // SAFETY: Non-null name ptr is valid null-terminating string within FDT.
+        Ok(unsafe { CStr::from_ptr(name) })
+    }
+
+    /// Returns the property value
+    pub fn value(&self) -> Result<&'a [u8]> {
+        Ok(self.fdt.get_from_ptr(self.property.data_ptr(), self.property.len()).unwrap())
+    }
+
+    fn next_property(&self) -> Result<Option<Self>> {
+        let ret =
+            // SAFETY: Accesses (read-only) are constrained to the DT totalsize.
+            unsafe { libfdt_bindgen::fdt_next_property_offset(self.fdt.as_ptr(), self.offset) };
+
+        fdt_err_or_option(ret)?.map(|offset| Self::new(self.fdt, offset)).transpose()
     }
 }
 
@@ -402,6 +473,19 @@ impl<'a> FdtNode<'a> {
         let ret = unsafe { libfdt_bindgen::fdt_next_subnode(self.fdt.as_ptr(), self.offset) };
 
         Ok(fdt_err_or_option(ret)?.map(|offset| FdtNode { fdt: self.fdt, offset }))
+    }
+
+    /// Returns an iterator of properties
+    pub fn properties(&'a self) -> Result<PropertyIterator<'a>> {
+        PropertyIterator::new(self)
+    }
+
+    fn first_property(&self) -> Result<Option<FdtProperty<'a>>> {
+        let ret =
+            // SAFETY: Accesses (read-only) are constrained to the DT totalsize.
+            unsafe { libfdt_bindgen::fdt_first_property_offset(self.fdt.as_ptr(), self.offset) };
+
+        fdt_err_or_option(ret)?.map(|offset| FdtProperty::new(self.fdt, offset)).transpose()
     }
 }
 
