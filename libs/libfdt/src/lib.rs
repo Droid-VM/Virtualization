@@ -1071,7 +1071,8 @@ impl Fdt {
         self.buffer.as_ptr().cast::<_>()
     }
 
-    fn as_mut_ptr(&mut self) -> *mut c_void {
+    /// DELME Returns a shared pointer to the device tree.
+    pub fn as_mut_ptr(&mut self) -> *mut c_void {
         self.buffer.as_mut_ptr().cast::<_>()
     }
 

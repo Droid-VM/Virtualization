@@ -16,7 +16,7 @@
 
 //! Integration tests of the library libfdt.
 
-use libfdt::{Fdt, FdtError, Phandle};
+use libfdt::{Fdt, FdtError, FdtNodeMut, Phandle};
 use std::ffi::{CStr, CString};
 use std::fs;
 use std::ops::Range;
