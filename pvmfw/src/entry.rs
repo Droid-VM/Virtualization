@@ -83,7 +83,12 @@ struct MemorySlices<'a> {
 }
 
 impl<'a> MemorySlices<'a> {
-    fn new(fdt: usize, kernel: usize, kernel_size: usize) -> Result<Self, RebootReason> {
+    fn new(
+        fdt: usize,
+        kernel: usize,
+        kernel_size: usize,
+        vm_dtbo: Option<&mut [u8]>,
+    ) -> Result<Self, RebootReason> {
         let fdt_size = NonZeroUsize::new(crosvm::FDT_MAX_SIZE).unwrap();
         // TODO - Only map the FDT as read-only, until we modify it right before jump_to_payload()
         // e.g. by generating a DTBO for a template DT in main() and, on return, re-map DT as RW,
@@ -100,7 +105,16 @@ impl<'a> MemorySlices<'a> {
             RebootReason::InvalidFdt
         })?;
 
-        let info = fdt::sanitize_device_tree(fdt)?;
+        let vm_dtbo = vm_dtbo
+            .map(|dtbo| {
+                libfdt::Fdt::from_mut_slice(dtbo).map_err(|e| {
+                    error!("Failed to load VM DTBO: {e}");
+                    RebootReason::InvalidFdt
+                })
+            })
+            .transpose()?;
+
+        let info = fdt::sanitize_device_tree(fdt, vm_dtbo)?;
         debug!("Fdt passed validation!");
 
         let memory_range = info.memory_range;
@@ -207,7 +221,7 @@ fn main_wrapper(
         RebootReason::InvalidConfig
     })?;
 
-    let (bcc_slice, debug_policy) = appended.get_entries();
+    let (bcc_slice, debug_policy, vm_dtbo) = appended.get_entries();
 
     // Up to this point, we were using the built-in static (from .rodata) page tables.
     MEMORY.lock().replace(MemoryTracker::new(
@@ -217,7 +231,7 @@ fn main_wrapper(
         Some(memory::appended_payload_range()),
     ));
 
-    let slices = MemorySlices::new(fdt, payload, payload_size)?;
+    let slices = MemorySlices::new(fdt, payload, payload_size, vm_dtbo)?;
 
     // This wrapper allows main() to be blissfully ignorant of platform details.
     let next_bcc = crate::main(slices.fdt, slices.kernel, slices.ramdisk, bcc_slice, debug_policy)?;
@@ -427,10 +441,10 @@ impl<'a> AppendedPayload<'a> {
         }
     }
 
-    fn get_entries(&mut self) -> (&mut [u8], Option<&mut [u8]>) {
+    fn get_entries(&mut self) -> (&mut [u8], Option<&mut [u8]>, Option<&mut [u8]>) {
         match self {
             Self::Config(ref mut cfg) => cfg.get_entries(),
-            Self::LegacyBcc(ref mut bcc) => (bcc, None),
+            Self::LegacyBcc(ref mut bcc) => (bcc, None, None),
         }
     }
 }
