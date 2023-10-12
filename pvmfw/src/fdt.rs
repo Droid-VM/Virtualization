@@ -15,9 +15,10 @@
 //! High-level FDT functions.
 
 use crate::bootargs::BootArgsIterator;
+use crate::device::{DeviceInfo, VmDtboInfo};
 use crate::helpers::GUEST_PAGE_SIZE;
+use crate::reboot_reason::RebootReason;
 use crate::Box;
-use crate::RebootReason;
 use alloc::ffi::CString;
 use alloc::vec::Vec;
 use core::cmp::max;
@@ -92,6 +93,10 @@ fn read_initrd_range_from(fdt: &Fdt) -> libfdt::Result<Option<Range<usize>>> {
     }
 
     Ok(None)
+}
+
+fn apply_device_overlays(fdt: &mut Fdt) -> libfdt::Result<Option<CString>> {
+    apply_device_overlays
 }
 
 fn patch_initrd_range(fdt: &mut Fdt, initrd_range: &Range<usize>) -> libfdt::Result<()> {
@@ -590,6 +595,7 @@ pub struct DeviceTreeInfo {
     pci_info: PciInfo,
     serial_info: SerialInfo,
     pub swiotlb_info: SwiotlbInfo,
+    pub device_info: Option<DeviceInfo>,
 }
 
 impl DeviceTreeInfo {
@@ -600,8 +606,11 @@ impl DeviceTreeInfo {
     }
 }
 
-pub fn sanitize_device_tree(fdt: &mut Fdt) -> Result<DeviceTreeInfo, RebootReason> {
-    let info = parse_device_tree(fdt)?;
+pub fn sanitize_device_tree(
+    fdt: &mut Fdt,
+    vm_dtbo: Option<&mut Fdt>,
+) -> Result<DeviceTreeInfo, RebootReason> {
+    let info = parse_device_tree(fdt, vm_dtbo)?;
     debug!("Device tree info: {:?}", info);
 
     fdt.copy_from_slice(pvmfw_fdt_template::RAW).map_err(|e| {
@@ -613,7 +622,7 @@ pub fn sanitize_device_tree(fdt: &mut Fdt) -> Result<DeviceTreeInfo, RebootReaso
     Ok(info)
 }
 
-fn parse_device_tree(fdt: &libfdt::Fdt) -> Result<DeviceTreeInfo, RebootReason> {
+fn parse_device_tree(fdt: &Fdt, vm_dtbo: Option<&mut Fdt>) -> Result<DeviceTreeInfo, RebootReason> {
     let kernel_range = read_kernel_range_from(fdt).map_err(|e| {
         error!("Failed to read kernel range from DT: {e}");
         RebootReason::InvalidFdt
@@ -657,6 +666,16 @@ fn parse_device_tree(fdt: &libfdt::Fdt) -> Result<DeviceTreeInfo, RebootReason> 
     })?;
     validate_swiotlb_info(&swiotlb_info, &memory_range)?;
 
+    if let Some(vm_dtbo) = vm_dtbo {
+        if let Some(vm_dtbo_info) = VmDtboInfo::new(vm_dtbo)? {
+            let assigned_device_info = DeviceInfo::new_from_fdt(fdt).map_err(|e| {
+                error!("Failed to read device info from DT: {e}");
+                RebootReason::InvalidFdt
+            })?;
+            validate_device_info(&info)?;
+        }
+    }
+
     Ok(DeviceTreeInfo {
         kernel_range,
         initrd_range,
@@ -666,6 +685,7 @@ fn parse_device_tree(fdt: &libfdt::Fdt) -> Result<DeviceTreeInfo, RebootReason> 
         pci_info,
         serial_info,
         swiotlb_info,
+        device_info,
     })
 }
 
@@ -715,6 +735,12 @@ fn patch_device_tree(fdt: &mut Fdt, info: &DeviceTreeInfo) -> Result<(), RebootR
         error!("Failed to patch timer info to DT: {e}");
         RebootReason::InvalidFdt
     })?;
+    if Some(device_info) = info.device_info {
+        patch_device(fdt, device_info).map_err(|e| {
+            error!("Failed to patch timer info to DT: {e}");
+            RebootReason::InvalidFdt
+        })?;
+    }
 
     fdt.pack().map_err(|e| {
         error!("Failed to pack DT after patching: {e}");

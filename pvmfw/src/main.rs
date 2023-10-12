@@ -31,13 +31,14 @@ mod gpt;
 mod helpers;
 mod instance;
 mod memory;
+mod reboot_reason;
 
 use crate::bcc::Bcc;
 use crate::dice::PartialInputs;
-use crate::entry::RebootReason;
 use crate::fdt::modify_for_next_stage;
 use crate::helpers::GUEST_PAGE_SIZE;
 use crate::instance::get_or_generate_instance_salt;
+use crate::reboot_reason::RebootReason;
 use alloc::borrow::Cow;
 use alloc::boxed::Box;
 use core::ops::Range;
