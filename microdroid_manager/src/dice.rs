@@ -13,12 +13,14 @@
 // limitations under the License.
 
 use crate::dice_driver::DiceDriver;
+use crate::instance::ApkData;
 use crate::{is_debuggable, MicrodroidData};
 use anyhow::{bail, Context, Result};
-use ciborium::{cbor, ser};
+use ciborium::{cbor, ser, Value};
 use diced_open_dice::OwnedDiceArtifacts;
 use microdroid_metadata::PayloadMetadata;
-use openssl::sha::Sha512;
+use openssl::sha::{sha512, Sha512};
+use std::iter::once;
 
 /// Perform an open DICE derivation for the payload.
 pub fn dice_derivation(
@@ -26,6 +28,11 @@ pub fn dice_derivation(
     verified_data: &MicrodroidData,
     payload_metadata: &PayloadMetadata,
 ) -> Result<OwnedDiceArtifacts> {
+    let subcomponents = build_subcomponent_list(verified_data);
+
+    let config_descriptor = format_payload_config_descriptor(payload_metadata, &subcomponents)
+        .context("Building config descriptor")?;
+
     // Calculate compound digests of code and authorities
     let mut code_hash_ctx = Sha512::new();
     let mut authority_hash_ctx = Sha512::new();
@@ -42,8 +49,6 @@ pub fn dice_derivation(
     let code_hash = code_hash_ctx.finish();
     let authority_hash = authority_hash_ctx.finish();
 
-    let config_descriptor = format_payload_config_descriptor(payload_metadata)?;
-
     // Check debuggability, conservatively assuming it is debuggable
     let debuggable = is_debuggable()?;
 
@@ -52,34 +57,74 @@ pub fn dice_derivation(
     dice.derive(code_hash, &config_descriptor, authority_hash, debuggable, hidden)
 }
 
-/// Returns a configuration descriptor of the given payload following the BCC's specification:
-/// https://cs.android.com/android/platform/superproject/+/master:hardware/interfaces/security/rkp/aidl/android/hardware/security/keymint/ProtectedData.aidl
-/// {
-///   -70002: "Microdroid payload",
-///   ? -71000: tstr ; payload_config_path
-///   ? -71001: PayloadConfig
-/// }
-/// PayloadConfig = {
-///   1: tstr ; payload_binary_name
-/// }
-fn format_payload_config_descriptor(payload: &PayloadMetadata) -> Result<Vec<u8>> {
-    const MICRODROID_PAYLOAD_COMPONENT_NAME: &str = "Microdroid payload";
+struct Subcomponent<'a> {
+    name: String,
+    version: u64,
+    code_hash: &'a [u8],
+    authority_hash: Box<[u8]>,
+}
 
-    let config_descriptor_cbor_value = match payload {
-        PayloadMetadata::ConfigPath(payload_config_path) => cbor!({
-            -70002 => MICRODROID_PAYLOAD_COMPONENT_NAME,
-            -71000 => payload_config_path
-        }),
-        PayloadMetadata::Config(payload_config) => cbor!({
-            -70002 => MICRODROID_PAYLOAD_COMPONENT_NAME,
-            -71001 => {1 => payload_config.payload_binary_name}
-        }),
-        _ => bail!("Failed to match the payload against a config type: {:?}", payload),
+impl<'a> Subcomponent<'a> {
+    fn to_value(&self) -> Result<Value> {
+        Ok(cbor!({
+           1 => self.name,
+           2 => self.version,
+           3 => self.code_hash,
+           4 => self.authority_hash
+        })?)
     }
-    .context("Failed to build a CBOR Value from payload metadata")?;
-    let mut config_descriptor = Vec::new();
 
-    ser::into_writer(&config_descriptor_cbor_value, &mut config_descriptor)?;
+    fn for_apk(apk: &'a ApkData) -> Self {
+        Self {
+            name: "apk:".to_string() + &apk.package_name,
+            version: apk.version_code,
+            code_hash: &apk.root_hash,
+            authority_hash:               // TODO(b/305925597): Hash the certificate not the pubkey
+            Box::new(sha512(&apk.pubkey)),
+        }
+    }
+}
+
+fn build_subcomponent_list(verified_data: &MicrodroidData) -> Vec<Subcomponent> {
+    if !cfg!(dice_changes) {
+        return vec![];
+    }
+
+    let mut list: Vec<_> = once(&verified_data.apk_data)
+        .chain(&verified_data.extra_apks_data)
+        .map(Subcomponent::for_apk)
+        .collect();
+    // sort_unstable_by_key doesn't work here: https://github.com/rust-lang/rust/issues/34162
+    list.sort_unstable_by(|a, b| a.name.cmp(&b.name));
+    list
+}
+
+// Returns a configuration descriptor of the given payload. See vm_config.cddl for a definition
+// of the format.
+fn format_payload_config_descriptor(
+    payload: &PayloadMetadata,
+    subcomponents: &[Subcomponent],
+) -> Result<Vec<u8>> {
+    let mut map = Vec::new();
+    map.push((cbor!(-70002)?, cbor!("Microdroid payload")?));
+    map.push(match payload {
+        PayloadMetadata::ConfigPath(payload_config_path) => {
+            (cbor!(-71000)?, cbor!(payload_config_path)?)
+        }
+        PayloadMetadata::Config(payload_config) => {
+            (cbor!(-71001)?, cbor!({1 => payload_config.payload_binary_name})?)
+        }
+        _ => bail!("Failed to match the payload against a config type: {:?}", payload),
+    });
+
+    if !subcomponents.is_empty() {
+        let values =
+            subcomponents.iter().map(Subcomponent::to_value).collect::<Result<Vec<_>>>()?;
+        map.push((cbor!(-71002)?, cbor!(values)?));
+    }
+
+    let mut config_descriptor = Vec::new();
+    ser::into_writer(&Value::Map(map), &mut config_descriptor)?;
     Ok(config_descriptor)
 }
 
