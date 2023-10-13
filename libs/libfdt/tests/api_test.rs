@@ -73,6 +73,30 @@ fn retrieving_memory_from_fdt_with_no_memory_node_fails() {
 }
 
 #[test]
+fn node_with_path_len() {
+    let data = fs::read(TEST_TREE_WITH_NO_MEMORY_NODE_PATH).unwrap();
+    let fdt = Fdt::from_slice(&data).unwrap();
+
+    let node_path = CStr::from_bytes_with_nul(b"/cpus/PowerPc,970@1\0").unwrap();
+    let expected = vec!["cpus", "PowerPc,970@1"];
+
+    node_path
+        .to_bytes()
+        .iter()
+        .enumerate()
+        .filter(|entry| entry.0 > 0 && *entry.1 == b'/')
+        .map(|entry| entry.0)
+        .zip(expected)
+        .for_each(|iter| {
+            let pos = iter.0;
+            let expect = iter.1;
+            let node = fdt.node_with_path_len(node_path, pos).unwrap().unwrap();
+
+            assert_eq!(node.name().unwrap().to_str().unwrap(), expect);
+        });
+}
+
+#[test]
 fn node_name() {
     let data = fs::read(TEST_TREE_WITH_NO_MEMORY_NODE_PATH).unwrap();
     let fdt = Fdt::from_slice(&data).unwrap();
