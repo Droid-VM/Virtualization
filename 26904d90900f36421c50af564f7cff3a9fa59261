@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08e4b7c8_95850bdc",
+        "filename": "service_vm/README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-10-13T19:33:25Z",
+      "side": 1,
+      "message": "nit: needs a comma\n\n```suggestion\nThe Service VM is a lightweight, bare-metal virtual machine specifically designed\n```",
+      "range": {
+        "startLine": 3,
+        "startChar": 20,
+        "endLine": 3,
+        "endChar": 42
+      },
+      "revId": "26904d90900f36421c50af564f7cff3a9fa59261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37c16658_a307181b",
+        "filename": "service_vm/README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-10-13T19:33:25Z",
+      "side": 1,
+      "message": "It\u0027s not clear to me what this means.\n\nWhen I read \"image\", I think \"on disk\", but the secret is never in the disk of the client VM, right? It\u0027s only ever in guest memory.",
+      "range": {
+        "startLine": 7,
+        "startChar": 26,
+        "endLine": 7,
+        "endChar": 40
+      },
+      "revId": "26904d90900f36421c50af564f7cff3a9fa59261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf628bd3_a0554750",
+        "filename": "service_vm/README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-10-13T19:33:25Z",
+      "side": 1,
+      "message": "We should name these other virtual machines to disambiguate from the Service VM.\n\nPerhaps \"Client VM\"?\n\nEDIT: I see that you say \"client VM\" below. Let\u0027s start using that term earlier on in this doc.",
+      "range": {
+        "startLine": 8,
+        "startChar": 4,
+        "endLine": 8,
+        "endChar": 19
+      },
+      "revId": "26904d90900f36421c50af564f7cff3a9fa59261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc600f73_0aa6457b",
+        "filename": "service_vm/README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-10-13T19:33:25Z",
+      "side": 1,
+      "message": "How is this enforced?",
+      "range": {
+        "startLine": 9,
+        "startChar": 40,
+        "endLine": 9,
+        "endChar": 50
+      },
+      "revId": "26904d90900f36421c50af564f7cff3a9fa59261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dac1fef1_d84ebb56",
+        "filename": "service_vm/README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-10-13T19:33:25Z",
+      "side": 1,
+      "message": "should this say \"dependency of\"?\n\nThis write-up makes it sound as if the Service and RKP VMs are distinct (and not really composed).",
+      "range": {
+        "startLine": 13,
+        "startChar": 20,
+        "endLine": 13,
+        "endChar": 32
+      },
+      "revId": "26904d90900f36421c50af564f7cff3a9fa59261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2164956c_93f10279",
+        "filename": "service_vm/README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-10-13T19:33:25Z",
+      "side": 1,
+      "message": "nit: not sure I\u0027d say \"trusted\" here.\n\nFrom RKP\u0027s perspective, we\u0027re saying it\u0027s a \"genuine\" device. We\u0027re certain it\u0027s a \"real android thing\" when we give it certs. It\u0027s up to the 3rd party to decide if they trust it or not. e.g. they may decide certain devices are _not_ trustworthy (as a contrived example, third parties may only trust phones, not TVs)",
+      "range": {
+        "startLine": 23,
+        "startChar": 42,
+        "endLine": 23,
+        "endChar": 49
+      },
+      "revId": "26904d90900f36421c50af564f7cff3a9fa59261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
