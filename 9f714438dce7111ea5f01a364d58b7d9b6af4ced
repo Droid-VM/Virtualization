@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa91d061_46aee893",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-13T08:25:28Z",
+      "side": 1,
+      "message": "Why ignore this? Shouldn\u0027t it be returned when `prop.is_null()` (line 241)?",
+      "range": {
+        "startLine": 235,
+        "startChar": 16,
+        "endLine": 235,
+        "endChar": 17
+      },
+      "revId": "9f714438dce7111ea5f01a364d58b7d9b6af4ced",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ae78448_e9c27af6",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-13T08:25:28Z",
+      "side": 1,
+      "message": "`.cast::\u003c_\u003e()` so that we let the compiler do the right thing for us w.r.t. constness and types.",
+      "range": {
+        "startLine": 244,
+        "startChar": 27,
+        "endLine": 244,
+        "endChar": 66
+      },
+      "revId": "9f714438dce7111ea5f01a364d58b7d9b6af4ced",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fe61ae2_aa030e62",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-13T08:25:28Z",
+      "side": 1,
+      "message": "`BTreeMap` so that your test is resilient to the properties moving around and/or being reported in a different order?",
+      "range": {
+        "startLine": 109,
+        "startChar": 18,
+        "endLine": 109,
+        "endChar": 21
+      },
+      "revId": "9f714438dce7111ea5f01a364d58b7d9b6af4ced",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42a2df4f_323d8988",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-13T08:25:28Z",
+      "side": 1,
+      "message": "hi! 😊 (remove?)",
+      "range": {
+        "startLine": 117,
+        "startChar": 18,
+        "endLine": 117,
+        "endChar": 23
+      },
+      "revId": "9f714438dce7111ea5f01a364d58b7d9b6af4ced",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
