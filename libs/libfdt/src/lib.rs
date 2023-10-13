@@ -833,7 +833,13 @@ impl Fdt {
 
     /// Find a tree node by its full path.
     pub fn node(&self, path: &CStr) -> Result<Option<FdtNode>> {
-        Ok(self.path_offset(path)?.map(|offset| FdtNode { fdt: self, offset }))
+        Ok(self.path_offset(path.to_bytes())?.map(|offset| FdtNode { fdt: self, offset }))
+    }
+
+    /// Find a tree node by its full path with path length.
+    /// Convenient method to prevent allocation for finding ancestor.
+    pub fn node_with_path_len(&self, path: &CStr, len: usize) -> Result<Option<FdtNode>> {
+        Ok(self.path_offset(&path.to_bytes()[0..len])?.map(|offset| FdtNode { fdt: self, offset }))
     }
 
     /// Iterate over nodes with a given compatible string.
@@ -848,7 +854,7 @@ impl Fdt {
 
     /// Find a mutable tree node by its full path.
     pub fn node_mut(&mut self, path: &CStr) -> Result<Option<FdtNodeMut>> {
-        Ok(self.path_offset(path)?.map(|offset| FdtNodeMut { fdt: self, offset }))
+        Ok(self.path_offset(path.to_bytes())?.map(|offset| FdtNodeMut { fdt: self, offset }))
     }
 
     /// Return the device tree as a slice (may be smaller than the containing buffer).
@@ -856,8 +862,8 @@ impl Fdt {
         &self.buffer[..self.totalsize()]
     }
 
-    fn path_offset(&self, path: &CStr) -> Result<Option<c_int>> {
-        let len = path.to_bytes().len().try_into().map_err(|_| FdtError::BadPath)?;
+    fn path_offset(&self, path: &[u8]) -> Result<Option<c_int>> {
+        let len = path.len().try_into().map_err(|_| FdtError::BadPath)?;
         // SAFETY: Accesses are constrained to the DT totalsize (validated by ctor) and the
         // function respects the passed number of characters.
         let ret = unsafe {
