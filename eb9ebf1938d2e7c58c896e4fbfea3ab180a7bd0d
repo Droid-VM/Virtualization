@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff18243f_e9949a2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-10-13T02:55:52Z",
+      "side": 1,
+      "message": "Comments are all nits. Feel free to ignore or handle them later.",
+      "revId": "eb9ebf1938d2e7c58c896e4fbfea3ab180a7bd0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a401710_f6a68fce",
+        "filename": "libs/apkmanifest/native/apkmanifest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-10-13T02:55:52Z",
+      "side": 1,
+      "message": "could be `OR_RETURN(findManifestElement(tree));`",
+      "range": {
+        "startLine": 149,
+        "startChar": 18,
+        "endLine": 150,
+        "endChar": 44
+      },
+      "revId": "eb9ebf1938d2e7c58c896e4fbfea3ab180a7bd0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c926bd22_062ac678",
+        "filename": "libs/apkmanifest/native/apkmanifest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-10-13T02:55:52Z",
+      "side": 1,
+      "message": "Do we need to check if `info` has the non-empty name and non-zero version in it?",
+      "range": {
+        "startLine": 180,
+        "startChar": 11,
+        "endLine": 180,
+        "endChar": 15
+      },
+      "revId": "eb9ebf1938d2e7c58c896e4fbfea3ab180a7bd0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b306d4e_6cabe86f",
+        "filename": "libs/apkmanifest/native/apkmanifest.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-10-13T02:55:52Z",
+      "side": 1,
+      "message": "Do you want to specify the lifetime of this string?",
+      "range": {
+        "startLine": 39,
+        "startChar": 6,
+        "endLine": 39,
+        "endChar": 11
+      },
+      "revId": "eb9ebf1938d2e7c58c896e4fbfea3ab180a7bd0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
