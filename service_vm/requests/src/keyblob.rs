@@ -14,7 +14,6 @@
 
 //! Handles the encryption and decryption of the key blob.
 
-use crate::cbor;
 use alloc::vec;
 use alloc::vec::Vec;
 use bssl_avf::{hkdf, rand_bytes, Aead, AeadContext, Digester, AES_GCM_NONCE_LENGTH};
@@ -74,11 +73,11 @@ impl EncryptedKeyBlob {
     // TODO(b/241428146): This function will be used once the retrieval mechanism is available.
     #[cfg(test)]
     pub(crate) fn from_cbor_slice(slice: &[u8]) -> coset::Result<Self> {
-        cbor::deserialize(slice)
+        cbor_util::deserialize(slice)
     }
 
     pub(crate) fn to_cbor_vec(&self) -> coset::Result<Vec<u8>> {
-        cbor::serialize(&self)
+        cbor_util::serialize(&self)
     }
 }
 
