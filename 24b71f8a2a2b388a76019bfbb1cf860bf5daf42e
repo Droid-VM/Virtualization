@@ -142,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0f2e90f_3577e4b6",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 2057895
+      },
+      "writtenOn": "2023-10-15T19:40:43Z",
+      "side": 1,
+      "message": "\u003e Done",
+      "parentUuid": "435c10bd_8705dc5d",
+      "range": {
+        "startLine": 741,
+        "startChar": 0,
+        "endLine": 743,
+        "endChar": 0
+      },
+      "revId": "24b71f8a2a2b388a76019bfbb1cf860bf5daf42e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f17c0e3_d68ed3ab",
@@ -251,6 +275,30 @@
       "side": 1,
       "message": "Yes, my point was: if `libfdt` is going to modify the DTBO we pass to it, why not pass the copy instead of the original? That way, we don\u0027t care about `fdt_apply_overlay` corrupting its input DTBO because we\u0027re discarding it when returning from `apply_debug_policy` anyway, and don\u0027t need to do any clean-up of the DTBO on error.",
       "parentUuid": "5494459e_45c32d15",
+      "range": {
+        "startLine": 745,
+        "startChar": 0,
+        "endLine": 745,
+        "endChar": 60
+      },
+      "revId": "24b71f8a2a2b388a76019bfbb1cf860bf5daf42e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "887a9ecd_9aaacf31",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 2057895
+      },
+      "writtenOn": "2023-10-15T19:40:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "46af00dd_04d48ec3",
       "range": {
         "startLine": 745,
         "startChar": 0,
