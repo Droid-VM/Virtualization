@@ -110,6 +110,30 @@
       },
       "revId": "2b23c51d6f21a242193da51beb66358256e38362",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a10045b5_83802a4b",
+        "filename": "libs/dice/open_dice/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-16T12:47:47Z",
+      "side": 1,
+      "message": "Yes. We added them to every Rust target under Virtualization, and for consistency we should continue that.\nIf we don\u0027t add them now, at some point in the future we\u0027re going to have a really puzzling bug.",
+      "parentUuid": "fe5a3598_ba96d9e6",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 25
+      },
+      "revId": "2b23c51d6f21a242193da51beb66358256e38362",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
