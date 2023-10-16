@@ -16,6 +16,115 @@
       "message": "Unfortunately I\u0027ve confused git by renaming dice.rs and then creating a new dice.rs.",
       "revId": "49b9cbda395f988b4939f6a5c309daabcf7d0217",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61491101_e6b39ce8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-16T09:28:39Z",
+      "side": 1,
+      "message": "LGTM with the restructuring.",
+      "revId": "49b9cbda395f988b4939f6a5c309daabcf7d0217",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0edf4e78_ce666d75",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-16T09:28:39Z",
+      "side": 1,
+      "message": "nit: Sometimes we import from the namespace directly with `use::[Struct]`, sometimes we use `use::[module]::[Struct]`. Should we stay consistent with one style?",
+      "range": {
+        "startLine": 16,
+        "startChar": 9,
+        "endLine": 16,
+        "endChar": 11
+      },
+      "revId": "49b9cbda395f988b4939f6a5c309daabcf7d0217",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b898481_e33e6bf7",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-16T09:28:39Z",
+      "side": 1,
+      "message": "Why do we need to move this?",
+      "range": {
+        "startLine": 319,
+        "startChar": 0,
+        "endLine": 320,
+        "endChar": 8
+      },
+      "revId": "49b9cbda395f988b4939f6a5c309daabcf7d0217",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab303c93_e31d0ebb",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-16T09:28:39Z",
+      "side": 1,
+      "message": "`get_current_sdk` is only used in `get_public_key_from_apk`, why it isn\u0027t moved together with it?",
+      "range": {
+        "startLine": 575,
+        "startChar": 3,
+        "endLine": 575,
+        "endChar": 18
+      },
+      "revId": "49b9cbda395f988b4939f6a5c309daabcf7d0217",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e2f89b1_ce47c5db",
+        "filename": "microdroid_manager/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-16T09:28:39Z",
+      "side": 1,
+      "message": "You can use `hex::encode`. `libhex` is already in microdroid_manager.\n\nhttps://docs.rs/hex/latest/hex/fn.encode.html",
+      "range": {
+        "startLine": 225,
+        "startChar": 21,
+        "endLine": 225,
+        "endChar": 34
+      },
+      "revId": "49b9cbda395f988b4939f6a5c309daabcf7d0217",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
