@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1972ab4_f863dc08",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-16T10:43:05Z",
+      "side": 1,
+      "message": "These names are defined at the top level, not in a module. (Arguably they should be moved, but that\u0027s another CL.)",
+      "parentUuid": "0edf4e78_ce666d75",
+      "range": {
+        "startLine": 16,
+        "startChar": 9,
+        "endLine": 16,
+        "endChar": 11
+      },
+      "revId": "49b9cbda395f988b4939f6a5c309daabcf7d0217",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b898481_e33e6bf7",
@@ -71,6 +95,30 @@
       "writtenOn": "2023-10-16T09:28:39Z",
       "side": 1,
       "message": "Why do we need to move this?",
+      "range": {
+        "startLine": 319,
+        "startChar": 0,
+        "endLine": 320,
+        "endChar": 8
+      },
+      "revId": "49b9cbda395f988b4939f6a5c309daabcf7d0217",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d90f95e8_2c6d9554",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-16T10:43:05Z",
+      "side": 1,
+      "message": "Ah, we don\u0027t. I was trying to move it a lot further down, missing it was referenced on line 322.\n\nRestored.",
+      "parentUuid": "4b898481_e33e6bf7",
       "range": {
         "startLine": 319,
         "startChar": 0,
@@ -104,6 +152,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70a4dfba_3c91127e",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-16T10:43:05Z",
+      "side": 1,
+      "message": "Good spot. Done.",
+      "parentUuid": "ab303c93_e31d0ebb",
+      "range": {
+        "startLine": 575,
+        "startChar": 3,
+        "endLine": 575,
+        "endChar": 18
+      },
+      "revId": "49b9cbda395f988b4939f6a5c309daabcf7d0217",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e2f89b1_ce47c5db",
@@ -117,6 +189,30 @@
       "writtenOn": "2023-10-16T09:28:39Z",
       "side": 1,
       "message": "You can use `hex::encode`. `libhex` is already in microdroid_manager.\n\nhttps://docs.rs/hex/latest/hex/fn.encode.html",
+      "range": {
+        "startLine": 225,
+        "startChar": 21,
+        "endLine": 225,
+        "endChar": 34
+      },
+      "revId": "49b9cbda395f988b4939f6a5c309daabcf7d0217",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dd4b733_1e652371",
+        "filename": "microdroid_manager/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-16T10:43:05Z",
+      "side": 1,
+      "message": "Thanks - done",
+      "parentUuid": "2e2f89b1_ce47c5db",
       "range": {
         "startLine": 225,
         "startChar": 21,
