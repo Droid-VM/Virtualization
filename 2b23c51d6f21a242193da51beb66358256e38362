@@ -16,6 +16,52 @@
       "message": "Hi, PTAL.",
       "revId": "2b23c51d6f21a242193da51beb66358256e38362",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbe5806d_9a2ca8c9",
+        "filename": "libs/dice/OWNERS",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-16T10:51:24Z",
+      "side": 1,
+      "message": "We don\u0027t need this here, our top-level OWNERS covers it.\n\n(Unless Andrew wants to keep ownership, which is fine by me - but then we just need him here.)",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 0
+      },
+      "revId": "2b23c51d6f21a242193da51beb66358256e38362",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc31aea9_bad5dad7",
+        "filename": "libs/dice/open_dice/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-16T10:51:24Z",
+      "side": 1,
+      "message": "Can we add avf_build_flags_rust as a defaults here (and anywhere else we need it), so that we have flags available everywhere?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 25
+      },
+      "revId": "2b23c51d6f21a242193da51beb66358256e38362",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
