@@ -16,6 +16,23 @@
       "message": "Hi Andrew, could you take another look at the cl?",
       "revId": "47654776c5d3b6dcd58dd0a45dfa0cb60547b4f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cd49aba_be700c2e",
+        "filename": "rialto/src/communication.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-10-17T10:22:42Z",
+      "side": 1,
+      "message": "I\u0027m a bit worried that this is going to result in repeatedly sending duplicate credit updates while we wait for the other end to send some data, as `recv` is called in a loop from `read_exact`. How about instead making this condition:\n\n```\nif buffer_available_bytes \u003d\u003d 0 \u0026\u0026 bytes_read \u003e 0 {\n```\n\nThat way, we\u0027ll only send a single credit update when the receive buffer becomes empty, rather than continuing to send updates as long as it remains empty.",
+      "revId": "47654776c5d3b6dcd58dd0a45dfa0cb60547b4f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
