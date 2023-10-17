@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "7a04cbb2_64ed23ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-17T14:30:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "580b7254_a9a6abb9",
+      "range": {
+        "startLine": 14,
+        "startChar": 31,
+        "endLine": 14,
+        "endChar": 44
+      },
+      "revId": "86f8ffa72ea00f50b6dd6d80eeebc08ee8d746fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c52d1e09_aba80797",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cab439f5_e8396663",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-17T14:30:59Z",
+      "side": 1,
+      "message": "I updated the API as we discussed in the doc.",
+      "parentUuid": "9588b5c1_48d121f2",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 52
+      },
+      "revId": "86f8ffa72ea00f50b6dd6d80eeebc08ee8d746fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60c7c690_ac383594",
@@ -77,6 +125,30 @@
       "writtenOn": "2023-10-10T15:14:51Z",
       "side": 1,
       "message": "What is this? Do we own this schema?\nWhat is the schema? (The code below is building some sort of CBOR structure, but it\u0027s hard to tell what.)",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 47
+      },
+      "revId": "86f8ffa72ea00f50b6dd6d80eeebc08ee8d746fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96780400_c30c1540",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-17T14:30:59Z",
+      "side": 1,
+      "message": "After some consideration, I thin that including a version number in this context may not be necessary. The process of building the csr in microdroid_manager and subsequently using it in the RKP VM has very little delay and the two entities are updated together. RKP VM doesn\u0027t need to anticipate reading CSR from older version in that sense.",
+      "parentUuid": "60c7c690_ac383594",
       "range": {
         "startLine": 38,
         "startChar": 0,
@@ -110,6 +182,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f2d0ce7_afd51b03",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-17T14:30:59Z",
+      "side": 1,
+      "message": "The format has been changed here.",
+      "parentUuid": "7df80c85_10c180fe",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 84
+      },
+      "revId": "86f8ffa72ea00f50b6dd6d80eeebc08ee8d746fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6fae1e4_f89123d7",
@@ -123,6 +219,30 @@
       "writtenOn": "2023-10-10T15:14:51Z",
       "side": 1,
       "message": "Why do we wrap this in an array?\nWe seem to be converting an array of bytes to a CBOR-encoded array of bytes - but I\u0027m not sure why.",
+      "range": {
+        "startLine": 89,
+        "startChar": 36,
+        "endLine": 89,
+        "endChar": 71
+      },
+      "revId": "86f8ffa72ea00f50b6dd6d80eeebc08ee8d746fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de5157af_7b91da1e",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-17T14:30:59Z",
+      "side": 1,
+      "message": "The format has been changed here.",
+      "parentUuid": "a6fae1e4_f89123d7",
       "range": {
         "startLine": 89,
         "startChar": 36,
@@ -156,6 +276,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ae4b555_5fd01988",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-17T14:30:59Z",
+      "side": 1,
+      "message": "Done. This function has been moved to `diced_open_dice` crate. The name `CDI_Leaf_Priv` is from the RKP HAL spec [1].\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:hardware/interfaces/security/rkp/aidl/android/hardware/security/keymint/IRemotelyProvisionedComponent.aidl;l\u003d52;drc\u003d6aae9b643247f78d8f47c544a3d790f137d9341d",
+      "parentUuid": "071de94e_1241af08",
+      "range": {
+        "startLine": 123,
+        "startChar": 3,
+        "endLine": 123,
+        "endChar": 23
+      },
+      "revId": "86f8ffa72ea00f50b6dd6d80eeebc08ee8d746fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7fc1d0e9_8e648c45",
@@ -169,6 +313,30 @@
       "writtenOn": "2023-10-10T15:14:51Z",
       "side": 1,
       "message": "All this code already exists in service_vm/requests/src/rkp.rs; we shouldn\u0027t be duplicating code like that.",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 0
+      },
+      "revId": "86f8ffa72ea00f50b6dd6d80eeebc08ee8d746fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "599b828f_3e95ee01",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-17T14:30:59Z",
+      "side": 1,
+      "message": "This is different now. `rkp` builds a `CoseSign1` object with a single signature, here we build `CoseSign` with 2 signatures.",
+      "parentUuid": "7fc1d0e9_8e648c45",
       "range": {
         "startLine": 106,
         "startChar": 0,
