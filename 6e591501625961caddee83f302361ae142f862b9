@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90eabda4_50618625",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-17T13:31:51Z",
+      "side": 1,
+      "message": "not needed -- invented to grab all iommu node information. But decided to pre-populate the pviommu node in the platform DT with fixed list of properties. So not necssary.",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 15
+      },
+      "revId": "6e591501625961caddee83f302361ae142f862b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
