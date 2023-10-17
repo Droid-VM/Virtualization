@@ -1,0 +1,418 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1640c9b2_ddc6241d",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/AttestationResult.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-17T16:08:26Z",
+      "side": 1,
+      "message": "Do we need this?",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 8
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81746cf5_f811d92e",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/AttestationResult.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-17T16:08:26Z",
+      "side": 1,
+      "message": "FWIW I think you can now put the parcelable in the main AIDL file, rather than a separate one.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 1
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fef01f5_9769716a",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-17T16:08:26Z",
+      "side": 1,
+      "message": "How are other errors communicated?\nAlso: This isn\u0027t going to be a test API, so we should probably remove this.",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 74
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e163a19_7f586d77",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-17T16:08:26Z",
+      "side": 1,
+      "message": "Let\u0027s do that now? Either in this CL or a predecessor.",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 67
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28377e62_0d0db70f",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-17T16:08:26Z",
+      "side": 1,
+      "message": "This won\u0027t produce the CBOR you specified in the design?\n(Also I think you said the default serialization is really bad for byte arrays. It might be easier/more efficient to build a simple CBOR array here, e.g. using the cbor! macro.)",
+      "range": {
+        "startLine": 98,
+        "startChar": 22,
+        "endLine": 98,
+        "endChar": 56
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09ab5c5f_ec0145bf",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-17T16:08:26Z",
+      "side": 1,
+      "message": "The naming needs improving, for both the function and the variable (\"cdi_leaf\" is obscure, there are 2 CDIs, \"priv\" is an abbreviation).\nattestation_private_key ?",
+      "range": {
+        "startLine": 100,
+        "startChar": 8,
+        "endLine": 100,
+        "endChar": 45
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1684f9f1_81e1aac4",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-17T16:08:26Z",
+      "side": 1,
+      "message": "Can we do that now?",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 79
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24f9a32b_f20fdf0a",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-17T16:08:26Z",
+      "side": 1,
+      "message": "?",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 67
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f31d7b0_a71853de",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-17T16:08:26Z",
+      "side": 1,
+      "message": "Needs updating",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 86
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b998742a_8da735b5",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-17T16:08:26Z",
+      "side": 1,
+      "message": "I think you need more than that.",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 77
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97354ef4_78080d90",
+        "filename": "service_vm/comm/src/message.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-17T16:08:26Z",
+      "side": 1,
+      "message": "I think you should mention it is wrapped up in a signature",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 82
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e448e886_73b81f97",
+        "filename": "vm_payload/include-restricted/vm_payload_restricted.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-17T16:08:26Z",
+      "side": 1,
+      "message": "I think we should move all of this to vm_payload.h, since that\u0027s where it\u0027s going to end up - as long as we have a flag check on the implementation.\nBut we should see what @ioffe@google.com thinks.",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 52
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c74aeb8d_45c3761f",
+        "filename": "vm_payload/include-restricted/vm_payload_restricted.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-17T16:08:26Z",
+      "side": 1,
+      "message": "We should say this remains valid until free is called.",
+      "range": {
+        "startLine": 70,
+        "startChar": 11,
+        "endLine": 70,
+        "endChar": 34
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b5a4977_a3d01e89",
+        "filename": "vm_payload/include-restricted/vm_payload_restricted.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-17T16:08:26Z",
+      "side": 1,
+      "message": "How do we indicate failure?\ngo/android-ndk-api-guidelines#methods-with-non-trivial-error-possibilities",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 43
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f18f4c34_361338a0",
+        "filename": "vm_payload/include-restricted/vm_payload_restricted.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-17T16:08:26Z",
+      "side": 1,
+      "message": "In what format?",
+      "range": {
+        "startLine": 85,
+        "startChar": 3,
+        "endLine": 85,
+        "endChar": 65
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d502b1f9_a6de3695",
+        "filename": "vm_payload/include-restricted/vm_payload_restricted.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-17T16:08:26Z",
+      "side": 1,
+      "message": "I think we need to say that the chain is truncated at this size, but the return value tells you how big it would have been.",
+      "range": {
+        "startLine": 89,
+        "startChar": 15,
+        "endLine": 89,
+        "endChar": 82
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "359b89eb_9106d878",
+        "filename": "vm_payload/include-restricted/vm_payload_restricted.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-17T16:08:26Z",
+      "side": 1,
+      "message": "Can we also have a function to retrieve the private key, and/or sign with it?",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 11
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "464847c4_be0371f5",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-17T16:08:26Z",
+      "side": 1,
+      "message": "We should do a flag check here, and fail / panic if the flag isn\u0027t enabled.",
+      "range": {
+        "startLine": 286,
+        "startChar": 0,
+        "endLine": 289,
+        "endChar": 44
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
