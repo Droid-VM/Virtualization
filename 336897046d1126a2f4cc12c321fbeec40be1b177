@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae074974_5ede78af",
+        "filename": "libs/cborutil/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-17T15:09:37Z",
+      "side": 1,
+      "message": "Include the flags please",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 6
+      },
+      "revId": "336897046d1126a2f4cc12c321fbeec40be1b177",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b138943f_82f21470",
+        "filename": "libs/cborutil/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-17T15:09:37Z",
+      "side": 1,
+      "message": "It seems slightly odd to import the error type from Coset when we don\u0027t otherwise use it at all. Although it does work for our current use cases.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 31
+      },
+      "revId": "336897046d1126a2f4cc12c321fbeec40be1b177",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0db2eb6_b6897940",
+        "filename": "service_vm/requests/src/keyblob.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-17T15:09:37Z",
+      "side": 1,
+      "message": "Inline \u0026 remove these?",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 5
+      },
+      "revId": "336897046d1126a2f4cc12c321fbeec40be1b177",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
