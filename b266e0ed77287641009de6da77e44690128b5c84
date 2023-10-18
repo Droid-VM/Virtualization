@@ -16,6 +16,29 @@
       "message": "Gentle reminder",
       "revId": "b266e0ed77287641009de6da77e44690128b5c84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "353790eb_9e0e839c",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-18T08:34:46Z",
+      "side": 1,
+      "message": "Ideally, we\u0027d want to have the smallest granularity possible for `unsafe` i.e. (if I\u0027m not mistaken)\n\n```\nlet ptr \u003d self.body.as_mut_ptr() as usize;\n(\n    unsafe { Self::from_raw_range_mut(ptr, bcc_range.unwrap()) },\n    dp_range.map(|r| unsafe { Self::from_raw_range_mut(ptr, r) }),\n)\n```\n\nhopefully, no linter will be harmed in the process of merging this!",
+      "range": {
+        "startLine": 275,
+        "startChar": 0,
+        "endLine": 281,
+        "endChar": 9
+      },
+      "revId": "b266e0ed77287641009de6da77e44690128b5c84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
