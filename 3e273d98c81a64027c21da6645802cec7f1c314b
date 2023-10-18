@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b2630c1_4489c7ee",
+        "filename": "libs/apkmanifest/src/apkmanifest.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-18T06:37:33Z",
+      "side": 1,
+      "message": "Deriving `Default` seems likely to produce something unhelpful, but I guess that the same as Jiyong\u0027s comment on `unwrap_or_default`",
+      "range": {
+        "startLine": 31,
+        "startChar": 16,
+        "endLine": 31,
+        "endChar": 23
+      },
+      "revId": "3e273d98c81a64027c21da6645802cec7f1c314b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "411b7888_b3ab58b0",
@@ -20,6 +43,46 @@
         "endLine": 64,
         "endChar": 30
       },
+      "revId": "3e273d98c81a64027c21da6645802cec7f1c314b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96e7e66e_ffbf5208",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-18T06:37:33Z",
+      "side": 1,
+      "message": "idle query: I wonder if `alloc::format!(\"apk:{}\", apk.package_name)` would be clearer/faster?",
+      "range": {
+        "startLine": 79,
+        "startChar": 18,
+        "endLine": 79,
+        "endChar": 56
+      },
+      "revId": "3e273d98c81a64027c21da6645802cec7f1c314b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a39418fc_8ae41b1a",
+        "filename": "microdroid_manager/src/verify.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-18T06:37:33Z",
+      "side": 1,
+      "message": "(preexisting, maybe) I\u0027ve not delved into the existing code, but having three different `Vec`s that are assumed to have the same indexing seems like it might be better as a single `Vec` of some struct with three bits of information.",
       "revId": "3e273d98c81a64027c21da6645802cec7f1c314b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
