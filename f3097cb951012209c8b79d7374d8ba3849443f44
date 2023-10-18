@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7582d284_5228a802",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-18T08:02:01Z",
+      "side": 1,
+      "message": "addendum: I don\u0027t need `get_depth()`, so wrapper of `fdt_supernode_atdepth_offset()` could be the only API related with the depth. Would it be working solution for you?\n\nNot directly related: I would add `FdtMut::subnode_with_name_len()`, and I\u0027m unsure whether I also need to add `FdtMut::subnode()` and/or `Fdt::node_with_path_len()` for consistency. Can I only add necessary API to our `libfdt` wrapper?",
+      "parentUuid": "a6bb3788_fdf330c5",
+      "revId": "f3097cb951012209c8b79d7374d8ba3849443f44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de81d04b_09f3a407",
