@@ -91,10 +91,14 @@ pub fn keypair_from_seed(seed: &[u8; PRIVATE_KEY_SEED_SIZE]) -> Result<(PublicKe
     Ok((public_key, private_key))
 }
 
-/// Derives the CDI_Leaf_Priv from the provided `dice_artifacts`.
+/// Derives the `CDI_Leaf_Priv` from the provided `dice_artifacts`.
 ///
 /// The corresponding public key is included in the leaf certificate of the DICE chain
 /// contained in `dice_artifacts`.
+///
+/// Refer to the following documentation for more information about `CDI_Leaf_Priv`:
+///
+/// security/rkp/aidl/android/hardware/security/keymint/IRemotelyProvisionedComponent.aidl
 pub fn derive_cdi_leaf_priv(dice_artifacts: &dyn DiceArtifacts) -> Result<PrivateKey> {
     let cdi_priv_key_seed = derive_cdi_private_key_seed(dice_artifacts.cdi_attest())?;
     let (_, private_key) = keypair_from_seed(cdi_priv_key_seed.as_array())?;
