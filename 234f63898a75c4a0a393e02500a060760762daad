@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cbc74b9_f1b70cfc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-18T14:15:28Z",
+      "side": 1,
+      "message": "Thanks for the review.\n\n@ioffe@google.com Could you do the NDK-API review of this cl? Thanks.",
+      "revId": "234f63898a75c4a0a393e02500a060760762daad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "203fb028_ad950f51",
@@ -14,6 +31,30 @@
       "writtenOn": "2023-10-18T13:56:59Z",
       "side": 1,
       "message": "Unrelated to this cl, but this can\u0027t be right.\nnull is never valid (https://doc.rust-lang.org/std/ptr/index.html#safety), so must never be passed to copy_nonoverlapping \nI think you can just delete this and rely on size !\u003d 0.",
+      "range": {
+        "startLine": 282,
+        "startChar": 17,
+        "endLine": 282,
+        "endChar": 36
+      },
+      "revId": "234f63898a75c4a0a393e02500a060760762daad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8776f083_8c79b275",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-18T14:15:28Z",
+      "side": 1,
+      "message": "Ack. This will be deleted in the next cl.",
+      "parentUuid": "203fb028_ad950f51",
       "range": {
         "startLine": 282,
         "startChar": 17,
