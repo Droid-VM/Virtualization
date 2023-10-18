@@ -269,6 +269,21 @@ impl<'a> FdtNode<'a> {
         Ok(Self { fdt: self.fdt, offset: fdt_err(ret)? })
     }
 
+    /// Returns supernode with depth. Note that root is at depth 0.
+    pub fn supernode_at_depth(&self, supernode_depth: usize) -> Result<Self> {
+        // SAFETY: Accesses (read-only) are constrained to the DT totalsize.
+        let ret = unsafe {
+            libfdt_bindgen::fdt_supernode_atdepth_offset(
+                self.fdt.as_ptr(),
+                self.offset,
+                supernode_depth.try_into().unwrap(),
+                ptr::null_mut(),
+            )
+        };
+
+        Ok(Self { fdt: self.fdt, offset: fdt_err(ret)? })
+    }
+
     /// Returns the standard (deprecated) device_type <string> property.
     pub fn device_type(&self) -> Result<Option<&CStr>> {
         self.getprop_str(CStr::from_bytes_with_nul(b"device_type\0").unwrap())

@@ -118,3 +118,17 @@ fn node_properties() {
         assert_eq!(node.get().unwrap(), expect.1);
     }
 }
+
+#[test]
+fn node_supernode_at_depth() {
+    let data = fs::read(TEST_TREE_WITH_NO_MEMORY_NODE_PATH).unwrap();
+    let fdt = Fdt::from_slice(&data).unwrap();
+    let node =
+        fdt.node(CStr::from_bytes_with_nul(b"/cpus/PowerPC,970@1\0").unwrap()).unwrap().unwrap();
+    let expected = vec!["", "cpus", "PowerPC,970@1"];
+
+    for (depth, expect) in expected.iter().enumerate() {
+        let supernode = node.supernode_at_depth(depth).unwrap();
+        assert_eq!(supernode.name().unwrap().to_str().unwrap(), *expect);
+    }
+}
