@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b3e9362_db0ec59a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-18T08:13:23Z",
+      "side": 1,
+      "message": "Something like:\n```\nlet ancestor \u003d fdt.node(cstr!(\"/x\"))?;\nlet node \u003d fdt.node(cstr!(\"/x/y/z\"))?;\n\nassert!(node.supernode_at_depth(1), ancestor);\n```\n? If it\u0027s useful, why not?\n\n\u003e  I don\u0027t need `get_depth()`, so wrapper of `fdt_supernode_atdepth_offset()` could be the only API related with the depth.\n\nSGTM, we can always add `get_depth()` when/if needed.\n\n\u003e Can I only add necessary API to our `libfdt` wrapper?\n\nYes, don\u0027t think you need to go the extra mile and have perfect symmetry everywhere: if you can add it, good, but otherwise, let\u0027s not be too fussy about code that isn\u0027t being called.",
+      "parentUuid": "a6bb3788_fdf330c5",
+      "revId": "f3097cb951012209c8b79d7374d8ba3849443f44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de81d04b_09f3a407",
@@ -67,6 +85,30 @@
       "writtenOn": "2023-10-13T08:29:53Z",
       "side": 1,
       "message": "Based on my other comment, `path_offset_namelen` could probably just be directly exposed to clients, if needed. But do you actually need this functionality to be public? This feels like a building block that we\u0027d use in other higher-level features (within the library); you mention finding ancestors, why not expose _that_ as the `pub` API?\n\nWould you mind sharing the client code for this (even as WIP), to better get the full picture?",
+      "range": {
+        "startLine": 842,
+        "startChar": 4,
+        "endLine": 842,
+        "endChar": 7
+      },
+      "revId": "f3097cb951012209c8b79d7374d8ba3849443f44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68d24cf8_455ec99a",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-18T08:13:23Z",
+      "side": 1,
+      "message": "Even if you might not use this (based on your comment about `_atdepth`), there\u0027s value in this CL we could already merge in your refactor of `path_offset`. Consider removing `node_with_path_len` (perhaps by moving it to the WIP) and I\u0027ll +2 this CL, as I believe that it\u0027s a better API than before, even if your changes don\u0027t end up using it.",
+      "parentUuid": "de81d04b_09f3a407",
       "range": {
         "startLine": 842,
         "startChar": 4,
@@ -114,6 +156,30 @@
       "side": 1,
       "message": "btw; how did you include suggested edit in the commit reply?",
       "parentUuid": "baa9bd1e_b7060868",
+      "range": {
+        "startLine": 867,
+        "startChar": 7,
+        "endLine": 867,
+        "endChar": 55
+      },
+      "revId": "f3097cb951012209c8b79d7374d8ba3849443f44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e253de5_f661e54d",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-18T08:13:23Z",
+      "side": 1,
+      "message": "Either click \"SUGGEST EDIT\" when typing a comment (it doesn\u0027t always appear; the joys of UI!) or use the special markdown\n```\n```suggestion\n    fn path_offset_namelen(\u0026self, path: \u0026[u8]) -\u003e Result\u003cOption\u003cc_int\u003e\u003e {\n[...]\n```\nand Gerrit will figure out the diff with the highlighted comment!",
+      "parentUuid": "dfc07cc2_05713132",
       "range": {
         "startLine": 867,
         "startChar": 7,
