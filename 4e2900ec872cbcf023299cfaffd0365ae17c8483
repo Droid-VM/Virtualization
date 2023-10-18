@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4c315b6_4a028df2",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/AttestationResult.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-18T12:01:22Z",
+      "side": 1,
+      "message": "Done. We can remove this.",
+      "parentUuid": "1640c9b2_ddc6241d",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 8
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81746cf5_f811d92e",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-17T16:08:26Z",
       "side": 1,
       "message": "FWIW I think you can now put the parcelable in the main AIDL file, rather than a separate one.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 1
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba546c2e_7b9e0f2b",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/AttestationResult.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-18T12:01:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81746cf5_f811d92e",
       "range": {
         "startLine": 19,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38b6a6dd_023bd95d",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-18T12:01:22Z",
+      "side": 1,
+      "message": "Removed. The errors are communicated through `binder::Result` here.",
+      "parentUuid": "7fef01f5_9769716a",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 74
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e163a19_7f586d77",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-10-17T16:08:26Z",
       "side": 1,
       "message": "Let\u0027s do that now? Either in this CL or a predecessor.",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 67
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68af10ed_e134c234",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-18T12:01:22Z",
+      "side": 1,
+      "message": "Done. aosp/2796132",
+      "parentUuid": "1e163a19_7f586d77",
       "range": {
         "startLine": 81,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a793d7dc_c6642b3c",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-18T12:01:22Z",
+      "side": 1,
+      "message": "Done. As this internal structure is only communicated between the microdroid and RKP VM, the format can be flexible. It would be more convenient to directly serialize the struct using `ciborium/serde` instead of building with cbor directly.\nDeserializing from a CBOR array in this case would require lots of boilerplate code (see to the latest PS).\n\nIf the byte array size is a concern, we can import [serde_bytes](https://docs.rs/serde_bytes/latest/serde_bytes/) to make it more compact. That would also allow other `Vec\u003cu8\u003e` fields in the `requests` module to benefit from the bytes format.",
+      "parentUuid": "28377e62_0d0db70f",
+      "range": {
+        "startLine": 98,
+        "startChar": 22,
+        "endLine": 98,
+        "endChar": 56
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09ab5c5f_ec0145bf",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-10-17T16:08:26Z",
       "side": 1,
       "message": "The naming needs improving, for both the function and the variable (\"cdi_leaf\" is obscure, there are 2 CDIs, \"priv\" is an abbreviation).\nattestation_private_key ?",
+      "range": {
+        "startLine": 100,
+        "startChar": 8,
+        "endLine": 100,
+        "endChar": 45
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "514dfc21_634d5910",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-18T12:01:22Z",
+      "side": 1,
+      "message": "Let\u0027s keep this term to be consistent with the RKP doc as discussed offline.",
+      "parentUuid": "09ab5c5f_ec0145bf",
       "range": {
         "startLine": 100,
         "startChar": 8,
@@ -162,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea595b0d_03a960a6",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-18T12:01:22Z",
+      "side": 1,
+      "message": "Let\u0027s handle this in a subsequent cl, the current one is already quite big.",
+      "parentUuid": "1684f9f1_81e1aac4",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 79
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24f9a32b_f20fdf0a",
@@ -175,6 +343,30 @@
       "writtenOn": "2023-10-17T16:08:26Z",
       "side": 1,
       "message": "?",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 67
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ab3012e_87187ff2",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-18T12:01:22Z",
+      "side": 1,
+      "message": "There supposed to be two signatures, the first one signed with CDI_Leaf_Priv, the second one signed with the private key corresponding to the public key in the CSR. This code block only checks the first signature since the second one is not implemented yet.",
+      "parentUuid": "24f9a32b_f20fdf0a",
       "range": {
         "startLine": 194,
         "startChar": 0,
@@ -208,6 +400,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97b6810e_47c693d6",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-18T12:01:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f31d7b0_a71853de",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 86
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b998742a_8da735b5",
@@ -231,6 +447,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e2c8583_ff231237",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-18T12:01:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b998742a_8da735b5",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 77
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97354ef4_78080d90",
@@ -244,6 +484,30 @@
       "writtenOn": "2023-10-17T16:08:26Z",
       "side": 1,
       "message": "I think you should mention it is wrapped up in a signature",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 82
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "557bb686_63fedb64",
+        "filename": "service_vm/comm/src/message.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-18T12:01:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97354ef4_78080d90",
       "range": {
         "startLine": 159,
         "startChar": 0,
@@ -300,6 +564,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77bdfdf3_2d30b6f5",
+        "filename": "vm_payload/include-restricted/vm_payload_restricted.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-18T12:01:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c74aeb8d_45c3761f",
+      "range": {
+        "startLine": 70,
+        "startChar": 11,
+        "endLine": 70,
+        "endChar": 34
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b5a4977_a3d01e89",
@@ -346,6 +634,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "808af9f5_0436186b",
+        "filename": "vm_payload/include-restricted/vm_payload_restricted.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-18T12:01:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f18f4c34_361338a0",
+      "range": {
+        "startLine": 85,
+        "startChar": 3,
+        "endLine": 85,
+        "endChar": 65
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d502b1f9_a6de3695",
@@ -359,6 +671,30 @@
       "writtenOn": "2023-10-17T16:08:26Z",
       "side": 1,
       "message": "I think we need to say that the chain is truncated at this size, but the return value tells you how big it would have been.",
+      "range": {
+        "startLine": 89,
+        "startChar": 15,
+        "endLine": 89,
+        "endChar": 82
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37e1ed12_78f173e5",
+        "filename": "vm_payload/include-restricted/vm_payload_restricted.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-18T12:01:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d502b1f9_a6de3695",
       "range": {
         "startLine": 89,
         "startChar": 15,
@@ -392,6 +728,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "824a08af_d9ce82f5",
+        "filename": "vm_payload/include-restricted/vm_payload_restricted.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-18T12:01:22Z",
+      "side": 1,
+      "message": "Let\u0027s first discuss this in the doc before adding it here.",
+      "parentUuid": "359b89eb_9106d878",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 11
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "464847c4_be0371f5",
@@ -405,6 +765,30 @@
       "writtenOn": "2023-10-17T16:08:26Z",
       "side": 1,
       "message": "We should do a flag check here, and fail / panic if the flag isn\u0027t enabled.",
+      "range": {
+        "startLine": 286,
+        "startChar": 0,
+        "endLine": 289,
+        "endChar": 44
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e1b0f14_d760650e",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-18T12:01:22Z",
+      "side": 1,
+      "message": "This call is guarded by a flag at a lower level: \n\nhttps://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/virtualizationservice/src/aidl.rs;l\u003d164;drc\u003d35e818dd44390ef0d05a312a9cb3c0b6199cafc8",
+      "parentUuid": "464847c4_be0371f5",
       "range": {
         "startLine": 286,
         "startChar": 0,
