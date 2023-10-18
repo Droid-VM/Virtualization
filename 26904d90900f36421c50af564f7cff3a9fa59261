@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "657a059a_7a8234b2",
+        "filename": "service_vm/README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-10-18T16:26:52Z",
+      "side": 1,
+      "message": "Thanks for the great offline chat. I\u0027m adding a note here to be sure we don\u0027t forget:\n\n1. This secret is really more of a salt, but it\u0027s encrypted so that only pvmfw can read it.\n2. The salt is mixed into the CDI calculation for each VM that\u0027s loaded by pvmfw.\n3. The result is that this CDI values are consistent for a given instance of a VM across all boots.\n\nWe should have some sort of description here about the secret, otherwise it\u0027s very mysterious sounding (which is what gave me slight pause in the first place).",
+      "parentUuid": "44ade02c_301c5a2a",
+      "range": {
+        "startLine": 7,
+        "startChar": 26,
+        "endLine": 7,
+        "endChar": 40
+      },
+      "revId": "26904d90900f36421c50af564f7cff3a9fa59261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bf628bd3_a0554750",
         "filename": "service_vm/README.md",
         "patchSetId": 5
