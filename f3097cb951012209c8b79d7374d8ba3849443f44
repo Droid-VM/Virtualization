@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6bb3788_fdf330c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-18T07:52:57Z",
+      "side": 1,
+      "message": "BTW; actually I also considered to wrap `fdt_supernode_atdepth_offset()`. It\u0027s more convenient for my use cases to find `__overlay__`, but I\u0027m doubt whether I can add the API without having other depth related APIs. What do you think?",
+      "parentUuid": "a0fa14ec_3cc4f5c8",
+      "revId": "f3097cb951012209c8b79d7374d8ba3849443f44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de81d04b_09f3a407",
@@ -54,6 +72,30 @@
       "writtenOn": "2023-10-13T08:29:53Z",
       "side": 1,
       "message": "I absolutely agree with the idea behind this change but could the API change be\n\n```suggestion\n    fn path_offset_namelen(\u0026self, path: \u0026[u8]) -\u003e Result\u003cOption\u003cc_int\u003e\u003e {\n```\n\nas we don\u0027t need a properly terminated `CStr` at all (so why mandate one?), `\u0026[u8]` has an inherent length (so no need for an extra argument), and the name describes the functionality while better aligning with `libfdt`.\n\nThen `node()` and `node_mut()` can call `self.path_offset_namelen(path.to_bytes())`.",
+      "range": {
+        "startLine": 867,
+        "startChar": 7,
+        "endLine": 867,
+        "endChar": 55
+      },
+      "revId": "f3097cb951012209c8b79d7374d8ba3849443f44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfc07cc2_05713132",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-18T07:52:57Z",
+      "side": 1,
+      "message": "btw; how did you include suggested edit in the commit reply?",
+      "parentUuid": "baa9bd1e_b7060868",
       "range": {
         "startLine": 867,
         "startChar": 7,
