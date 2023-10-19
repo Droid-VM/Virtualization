@@ -26,6 +26,7 @@ const TEST_TREE_WITH_MULTIPLE_MEMORY_RANGES_PATH: &str =
     "data/test_tree_multiple_memory_ranges.dtb";
 const TEST_TREE_WITH_EMPTY_MEMORY_RANGE_PATH: &str = "data/test_tree_empty_memory_range.dtb";
 const TEST_TREE_WITH_NO_MEMORY_NODE_PATH: &str = "data/test_tree_no_memory_node.dtb";
+const TEST_TREE_PHANDLE_PATH: &str = "data/test_tree_phandle.dtb";
 
 #[test]
 fn retrieving_memory_from_fdt_with_one_memory_range_succeeds() {
@@ -131,4 +132,21 @@ fn node_supernode_at_depth() {
         let supernode = node.supernode_at_depth(depth).unwrap();
         assert_eq!(supernode.name().unwrap().to_str().unwrap(), *expect);
     }
+}
+
+#[test]
+fn max_phandle() {
+    let data = fs::read(TEST_TREE_PHANDLE_PATH).unwrap();
+    let fdt = Fdt::from_slice(&data).unwrap();
+
+    assert_eq!(fdt.max_phandle().unwrap(), 0xFF);
+}
+
+#[test]
+fn node_with_phandle() {
+    let data = fs::read(TEST_TREE_PHANDLE_PATH).unwrap();
+    let fdt = Fdt::from_slice(&data).unwrap();
+    let node = fdt.node_with_phandle(0x22).unwrap().unwrap();
+
+    assert_eq!(node.name().unwrap().to_str().unwrap(), "node_abc");
 }

@@ -868,6 +868,23 @@ impl Fdt {
         CompatibleIterator::new(self, compatible)
     }
 
+    /// Returns max phandle in the tree.
+    pub fn max_phandle(&self) -> Result<u32> {
+        let mut phandle: u32 = 0;
+        // SAFETY: Accesses (read-only) are constrained to the DT totalsize.
+        let ret = unsafe { libfdt_bindgen::fdt_find_max_phandle(self.as_ptr(), &mut phandle) };
+
+        fdt_err_expect_zero(ret)?;
+        Ok(phandle)
+    }
+
+    /// Returns a node with the phandle
+    pub fn node_with_phandle(&self, phandle: u32) -> Result<Option<FdtNode>> {
+        // SAFETY: Accesses (read-only) are constrained to the DT totalsize.
+        let ret = unsafe { libfdt_bindgen::fdt_node_offset_by_phandle(self.as_ptr(), phandle) };
+        Ok(fdt_err_or_option(ret)?.map(|offset| FdtNode { fdt: self, offset }))
+    }
+
     /// Returns the mutable root node of the tree.
     pub fn root_mut(&mut self) -> Result<FdtNodeMut> {
         self.node_mut(CStr::from_bytes_with_nul(b"/\0").unwrap())?.ok_or(FdtError::Internal)
