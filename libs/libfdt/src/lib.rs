@@ -697,6 +697,14 @@ impl<'a> FdtNodeMut<'a> {
 
         Ok(next_offset.map(|offset| Self { fdt: self.fdt, offset }))
     }
+
+    /// Sets this node with FDT_NOP, effectively removing it from the DT.
+    pub fn nop(self) -> Result<()> {
+        // SAFETY: Accesses are constrained to the DT totalsize (validated by ctor)
+        let ret = unsafe { libfdt_bindgen::fdt_nop_node(self.fdt.as_mut_ptr(), self.offset) };
+
+        fdt_err_expect_zero(ret)
+    }
 }
 
 /// Wrapper around low-level libfdt functions.
