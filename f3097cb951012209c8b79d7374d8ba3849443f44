@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5084321b_96eee639",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-19T13:46:57Z",
+      "side": 1,
+      "message": "Glad to hear that. Uploaded series of changes that I expected to use. PTAL.",
+      "parentUuid": "5b3e9362_db0ec59a",
+      "revId": "f3097cb951012209c8b79d7374d8ba3849443f44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de81d04b_09f3a407",
@@ -109,6 +127,30 @@
       "side": 1,
       "message": "Even if you might not use this (based on your comment about `_atdepth`), there\u0027s value in this CL we could already merge in your refactor of `path_offset`. Consider removing `node_with_path_len` (perhaps by moving it to the WIP) and I\u0027ll +2 this CL, as I believe that it\u0027s a better API than before, even if your changes don\u0027t end up using it.",
       "parentUuid": "de81d04b_09f3a407",
+      "range": {
+        "startLine": 842,
+        "startChar": 4,
+        "endLine": 842,
+        "endChar": 7
+      },
+      "revId": "f3097cb951012209c8b79d7374d8ba3849443f44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd3626e9_aca685ee",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-19T13:46:57Z",
+      "side": 1,
+      "message": "Ack, and done.",
+      "parentUuid": "68d24cf8_455ec99a",
       "range": {
         "startLine": 842,
         "startChar": 4,
