@@ -617,7 +617,7 @@ impl<'a> FdtNodeMut<'a> {
         fdt_err_expect_zero(ret)
     }
 
-    /// Sets the given property with FDT_NOP, effectively removing it from the DT.
+    /// Deletes the given property effectivly from DT, by setting it with FDT_NOP.
     pub fn nop_property(&mut self, name: &CStr) -> Result<()> {
         // SAFETY: Accesses are constrained to the DT totalsize (validated by ctor) when the
         // library locates the node's property.
@@ -718,6 +718,14 @@ impl<'a> FdtNodeMut<'a> {
         fdt_err_expect_zero(ret)?;
 
         Ok(next_offset.map(|offset| Self { fdt: self.fdt, offset }))
+    }
+
+    /// Deletes this node effectivly from DT, by setting it with FDT_NOP
+    pub fn nop(self) -> Result<()> {
+        // SAFETY: Accesses are constrained to the DT totalsize (validated by ctor).
+        let ret = unsafe { libfdt_bindgen::fdt_nop_node(self.fdt.as_mut_ptr(), self.offset) };
+
+        fdt_err_expect_zero(ret)
     }
 }
 
