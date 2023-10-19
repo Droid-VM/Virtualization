@@ -416,6 +416,7 @@ virt_apex_files = {
     'super.img': 'etc/fs/microdroid_super.img',
     'initrd_normal.img': 'etc/microdroid_initrd_normal.img',
     'initrd_debuggable.img': 'etc/microdroid_initrd_debuggable.img',
+    'rialto': 'etc/rialto.bin',
 }
 
 
@@ -467,6 +468,10 @@ def SignVirtApex(args):
               initrd_normal_hashdesc, initrd_debug_hashdesc],
           wait=[initrd_n_f, initrd_d_f])
 
+    # Re-sign rialto if it exists. Rialto only exists in arm64 environment.
+    if os.path.exists(files['rialto']):
+        Async(AddHashFooter, args, key, files['rialto'], partition_name='boot')
+
 
 def VerifyVirtApex(args):
     key = args.key
@@ -489,11 +494,14 @@ def VerifyVirtApex(args):
         assert info is not None, f'no avbinfo: {file}'
         assert info['Public key (sha1)'] == pubkey_digest, f'pubkey mismatch: {file}'
 
-    for f in files.values():
-        if f in (files['initrd_normal.img'], files['initrd_debuggable.img']):
+    for name, f in files.items():
+        if name in ('initrd_normal.img', 'initrd_debuggable.img'):
             # TODO(b/245277660): Verify that ramdisks contain the correct vbmeta digest
             continue
-        if f == files['super.img']:
+        if name == 'rialto' and not os.path.exists(f):
+            # Rialto only exists in arm64 environment.
+            continue
+        if name == 'super.img':
             Async(check_avb_pubkey, system_a_img)
         else:
             # Check pubkey for other files using avbtool
