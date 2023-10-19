@@ -646,6 +646,37 @@ impl<'a> FdtNodeMut<'a> {
         Ok(Self { fdt: self.fdt, offset: fdt_err(ret)? })
     }
 
+    /// Adds a new subnode to the given node with name and len, and return it as a FdtNodeMut on
+    /// success.
+    pub fn add_subnode_with_name_len(&'a mut self, name: &CStr, len: usize) -> Result<Self> {
+        // SAFETY: Accesses are constrained to the DT totalsize (validated by ctor).
+        let ret = unsafe {
+            libfdt_bindgen::fdt_add_subnode_namelen(
+                self.fdt.as_mut_ptr(),
+                self.offset,
+                name.as_ptr(),
+                len.try_into().unwrap(),
+            )
+        };
+
+        Ok(Self { fdt: self.fdt, offset: fdt_err(ret)? })
+    }
+
+    /// Returns the subnode of the given name with len.
+    pub fn subnode_with_name_len(&'a mut self, name: &CStr, len: usize) -> Result<Option<Self>> {
+        // SAFETY: Accesses are constrained to the DT totalsize (validated by ctor).
+        let ret = unsafe {
+            libfdt_bindgen::fdt_subnode_offset_namelen(
+                self.fdt.as_ptr(),
+                self.offset,
+                name.as_ptr(),
+                len.try_into().unwrap(),
+            )
+        };
+
+        Ok(fdt_err_or_option(ret)?.map(|offset| Self { fdt: self.fdt, offset }))
+    }
+
     fn parent(&'a self) -> Result<FdtNode<'a>> {
         // SAFETY: Accesses (read-only) are constrained to the DT totalsize.
         let ret = unsafe { libfdt_bindgen::fdt_parent_offset(self.fdt.as_ptr(), self.offset) };
