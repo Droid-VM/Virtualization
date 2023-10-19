@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a4c3bac3_592bcda5",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-19T16:39:01Z",
+      "side": 1,
+      "message": "What do you gain from masking the error returned by the library? The documentation says:\n```\n * returns:\n *\tpointer to the structure representing the property\n *\t\tif lenp is non-NULL, *lenp contains the length of the property\n *\t\tvalue (\u003e\u003d0)\n *\tNULL, on error\n *\t\tif lenp is non-NULL, *lenp contains an error code (\u003c0):\n *\t\t-FDT_ERR_BADOFFSET, nodeoffset did not point to FDT_PROP tag\n *\t\t-FDT_ERR_BADMAGIC,\n *\t\t-FDT_ERR_BADVERSION,\n *\t\t-FDT_ERR_BADSTATE,\n *\t\t-FDT_ERR_BADSTRUCTURE,\n *\t\t-FDT_ERR_TRUNCATED, standard meanings\n```\nso keep `len` and `fdt_err(len)?` like we do everywhere else?",
+      "parentUuid": "84af209a_9a8484a8",
+      "range": {
+        "startLine": 235,
+        "startChar": 16,
+        "endLine": 235,
+        "endChar": 17
+      },
+      "revId": "9f714438dce7111ea5f01a364d58b7d9b6af4ced",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6ae78448_e9c27af6",
         "filename": "libs/libfdt/src/lib.rs",
         "patchSetId": 3

@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cda63866_c3bab740",
+        "filename": "libs/libfdt/src/iterators.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-19T16:39:01Z",
+      "side": 1,
+      "message": "The extra level of nesting to assign `None` to `None` (if `self.prop.is_none()`) is confusing; why not simply:\n```suggestion\n        let res \u003d self.prop?;\n\n        self.prop \u003d res.next().ok()?;\n```\n\n\nAlso, note that, if `next().is_err()`, we don\u0027t update `self.prop` so that this `Iterator` will retry the call on the following `next`, which might not fail anymore, violating the expected Rust `Iterator` behavior. This is why I was using `.ok().flatten()` instead of `.ok()?` in a similar comment some time ago: if we get `Err()` once, we return `None` forever after.",
+      "range": {
+        "startLine": 344,
+        "startChar": 0,
+        "endLine": 346,
+        "endChar": 65
+      },
+      "revId": "f504bafa535b67f8e7fa278d0f2549b4d015837d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2eb94380_b4f16924",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-19T16:39:01Z",
+      "side": 1,
+      "message": "Could you introduce a `transparent` wrapper around `libfdt_bindgen::fdt_property` providing methods abstracting away the endianness conversion (similar to `Fdt::totalsize()`)? This would allow you to clearly express `FdtProperty::fdt_property` as the `as_ref` of a `impl AsRef\u003cFdtPropertyStruct\u003e for FdtProperty` (where you\u0027d build the `FdtError` and `unwrap` as the property should always be valid).",
+      "range": {
+        "startLine": 208,
+        "startChar": 35,
+        "endLine": 208,
+        "endChar": 63
+      },
+      "revId": "f504bafa535b67f8e7fa278d0f2549b4d015837d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7980a66e_6030a740",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-19T16:39:01Z",
+      "side": 1,
+      "message": "Wrong copy-paste",
+      "range": {
+        "startLine": 215,
+        "startChar": 19,
+        "endLine": 215,
+        "endChar": 76
+      },
+      "revId": "f504bafa535b67f8e7fa278d0f2549b4d015837d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95e42757_d8645acb",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-19T16:39:01Z",
+      "side": 1,
+      "message": "`value`?",
+      "range": {
+        "startLine": 220,
+        "startChar": 11,
+        "endLine": 220,
+        "endChar": 14
+      },
+      "revId": "f504bafa535b67f8e7fa278d0f2549b4d015837d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c075ce2_83b270a3",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-19T16:39:01Z",
+      "side": 1,
+      "message": "`next_property` as `next` suggests `Iterator`.",
+      "range": {
+        "startLine": 227,
+        "startChar": 7,
+        "endLine": 227,
+        "endChar": 11
+      },
+      "revId": "f504bafa535b67f8e7fa278d0f2549b4d015837d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5dcecdb_e1e121ad",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-19T16:39:01Z",
+      "side": 1,
+      "message": "Introduce `cstr!` in this commit and use it as you add new strings (including here, which is currently being missed by child commit aosp/2797455).",
+      "range": {
+        "startLine": 110,
+        "startChar": 18,
+        "endLine": 111,
+        "endChar": 58
+      },
+      "revId": "f504bafa535b67f8e7fa278d0f2549b4d015837d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb3dde27_45717cc6",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-19T16:39:01Z",
+      "side": 1,
+      "message": "Could you please also add coverage for an empty property?",
+      "range": {
+        "startLine": 113,
+        "startChar": 32,
+        "endLine": 113,
+        "endChar": 33
+      },
+      "revId": "f504bafa535b67f8e7fa278d0f2549b4d015837d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f044e19_f918ba28",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-19T16:39:01Z",
+      "side": 1,
+      "message": "One cool thing about Rust is that it supports nested expansion!\n\nSo:\n\n```suggestion\n    for (prop, (name, value)) in root.properties().unwrap().zip(expected) {\n        assert_eq!(prop.name().unwrap().to_str().unwrap(), name);\n        assert_eq!(prop.get(), Ok(value));\n```",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 50
+      },
+      "revId": "f504bafa535b67f8e7fa278d0f2549b4d015837d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
