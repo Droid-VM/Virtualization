@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84af209a_9a8484a8",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-19T13:46:25Z",
+      "side": 1,
+      "message": "Changed not to pass it.",
+      "parentUuid": "fa91d061_46aee893",
+      "range": {
+        "startLine": 235,
+        "startChar": 16,
+        "endLine": 235,
+        "endChar": 17
+      },
+      "revId": "9f714438dce7111ea5f01a364d58b7d9b6af4ced",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ae78448_e9c27af6",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-13T08:25:28Z",
       "side": 1,
       "message": "`.cast::\u003c_\u003e()` so that we let the compiler do the right thing for us w.r.t. constness and types.",
+      "range": {
+        "startLine": 244,
+        "startChar": 27,
+        "endLine": 244,
+        "endChar": 66
+      },
+      "revId": "9f714438dce7111ea5f01a364d58b7d9b6af4ced",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce32b852_695539ce",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-19T13:46:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ae78448_e9c27af6",
       "range": {
         "startLine": 244,
         "startChar": 27,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0960e63f_6ff7cfcf",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-19T13:46:25Z",
+      "side": 1,
+      "message": "I choose `Vec` on purpose to also test property order, although the order isn\u0027t useful as of now.",
+      "parentUuid": "3fe61ae2_aa030e62",
+      "range": {
+        "startLine": 109,
+        "startChar": 18,
+        "endLine": 109,
+        "endChar": 21
+      },
+      "revId": "9f714438dce7111ea5f01a364d58b7d9b6af4ced",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42a2df4f_323d8988",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-10-13T08:25:28Z",
       "side": 1,
       "message": "hi! 😊 (remove?)",
+      "range": {
+        "startLine": 117,
+        "startChar": 18,
+        "endLine": 117,
+        "endChar": 23
+      },
+      "revId": "9f714438dce7111ea5f01a364d58b7d9b6af4ced",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0de25ff8_c1570c73",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-19T13:46:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42a2df4f_323d8988",
       "range": {
         "startLine": 117,
         "startChar": 18,
