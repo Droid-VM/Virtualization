@@ -416,6 +416,7 @@ virt_apex_files = {
     'super.img': 'etc/fs/microdroid_super.img',
     'initrd_normal.img': 'etc/microdroid_initrd_normal.img',
     'initrd_debuggable.img': 'etc/microdroid_initrd_debuggable.img',
+    'rialto': 'etc/rialto.bin',
 }
 
 
@@ -466,6 +467,9 @@ def SignVirtApex(args):
           additional_descriptors=[
               initrd_normal_hashdesc, initrd_debug_hashdesc],
           wait=[initrd_n_f, initrd_d_f])
+
+    # Re-sign rialto.
+    Async(AddHashFooter, args, key, files['rialto'], partition_name='boot')
 
 
 def VerifyVirtApex(args):
