@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "954d346a_4c0ac00a",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 698,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-20T13:55:31Z",
+      "side": 1,
+      "message": "Grrr! I guess we could have\n\n- `unsafe fn nop_self(\u0026self) -\u003e Result\u003c()\u003e` wrapping the FFI\n- `pub fn nop(self) -\u003e Result\u003c()\u003e` calling `self.nop_self()?`\n- `delete_and_next_compatible` also calls it and can re-use `self.fdt`\n\n? Would that work?",
+      "parentUuid": "5ce92b53_e3d5ef28",
+      "range": {
+        "startLine": 691,
+        "startChar": 0,
+        "endLine": 698,
+        "endChar": 68
+      },
+      "revId": "fed8d61366526ce48284ad2e432fe4fed3763c6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8bde3c26_b62e92c1",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Done for here and `nop_property`.",
       "parentUuid": "8bde3c26_b62e92c1",
+      "range": {
+        "startLine": 702,
+        "startChar": 11,
+        "endLine": 702,
+        "endChar": 14
+      },
+      "revId": "fed8d61366526ce48284ad2e432fe4fed3763c6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a36f804e_a2ae16cd",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-20T13:55:31Z",
+      "side": 1,
+      "message": "Thanks but the linter now complains about a typo (\"`effectivly`\")",
+      "parentUuid": "359d2f88_0f4ab259",
       "range": {
         "startLine": 702,
         "startChar": 11,
