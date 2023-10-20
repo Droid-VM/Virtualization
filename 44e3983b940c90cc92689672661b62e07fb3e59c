@@ -1,0 +1,345 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70a142c8_e8f217a5",
+        "filename": "secretkeeper/secretkeeper_comm/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-20T14:10:11Z",
+      "side": 1,
+      "message": "Dunno what your local naming conventions are, but having `secretkeeper_` in the directory name seems excessive.",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b8b062d_89a49f86",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/error.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-20T14:10:11Z",
+      "side": 1,
+      "message": "This comment should be more explicit about what file/type the values here are supposed to be in sync with.",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6049fce1_b237af33",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/error.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-20T14:10:11Z",
+      "side": 1,
+      "message": "Need an explicit discriminant value here for clarity/back-compatibility.",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db5ff22b_9b40012c",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/error.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-20T14:10:11Z",
+      "side": 1,
+      "message": "If this crate is `std`-using, it might be nice to `impl std::error::Error`",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa60d784_1a79fa26",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/error.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-20T14:10:11Z",
+      "side": 1,
+      "message": "`impl Error`?  Would need a `Display` impl though.",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c9f0e28_9a4c3d2d",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/error.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-20T14:10:11Z",
+      "side": 1,
+      "message": "Is there anywhere here that copes with fallible allocation?  (If it is something that the code needs to deal with, we probably need a distinct error code for it.)",
+      "range": {
+        "startLine": 78,
+        "startChar": 38,
+        "endLine": 78,
+        "endChar": 69
+      },
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d715424_bed9de51",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/packet.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-20T14:10:11Z",
+      "side": 1,
+      "message": "In general, the comments should describe what the data structure is/represents, not how some other chunk of code might use it.  The whole point of layers is that they\u0027re independent -- if we happened to have a pre-existing e2ee channel then we wouldn\u0027t bother with a crypto layer and this code would behave exactly the same.\n\n(passim)",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9365c0f1_e229e5f1",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/packet.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-20T14:10:11Z",
+      "side": 1,
+      "message": "This implies that `self.0` is required to be an array.  As a general rule, we should use the type system to make invalid states inexpressible, rather than including checks and error handling.  In this case, could the structure just hold the contents (`struct RequestPacker(pub Vec\u003cValue\u003e)`) and add/remove the `Value::Array()` envelope on serialize/deserialize?",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d01bed1_e87cea18",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/packet.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-20T14:10:11Z",
+      "side": 1,
+      "message": "nit: it\u0027s nice to linkify and use a code font for anything that\u0027s an identifier, i.e. surround with square brackets and backtick.\n\n(passim)",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6551711_a0f6bf3d",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/packet.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-20T14:10:11Z",
+      "side": 1,
+      "message": "maybe move these two helpers into `utils.rs`?",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e15c3151_944c9d40",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/request.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-20T14:10:11Z",
+      "side": 1,
+      "message": "Why specify `opcode` externally?  It just raises the question of what the impl should do if it\u0027s wrong.",
+      "range": {
+        "startLine": 36,
+        "startChar": 12,
+        "endLine": 36,
+        "endChar": 27
+      },
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa3a5bdf_b223507f",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/request.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-20T14:10:11Z",
+      "side": 1,
+      "message": "This looks like it would be better as an associated constant rather than a method -- or would that cause problems elsewhere (e.g. due to object safety)?",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd74cfd8_811c42e8",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/request.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-20T14:10:11Z",
+      "side": 1,
+      "message": "I\u0027ve not joined the dots with the code that uses this yet, but is the intermediate hop of the `RequestPacket` needed?  If every place that calls `serialize_to_packet()` immediately follows it with a call to `RequestPacket::serialize_to_bytes()` then maybe drop the `Packet` structure and have a `serialize_to_bytes()` method here instead.",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b1254bb_7963ac88",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/request.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-20T14:10:11Z",
+      "side": 1,
+      "message": "Will it ever make sense for a concrete type to replace these default method impls?  If not, maybe move them out of the trait.",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1681d90b_033d665b",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/request_response_impl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-20T14:10:11Z",
+      "side": 1,
+      "message": "Does the `repr` matter?",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7414f5e3_c4d0ae26",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/request_response_impl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-20T14:10:11Z",
+      "side": 1,
+      "message": "This check makes me wonder whether the code might flow better with two distinct traits, one for OK responses and one for error responses.",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d69afb8_75be685f",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/response.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-20T14:10:11Z",
+      "side": 1,
+      "message": "Need a more explicit link to the external API type(s) that this needs to be in sync with.",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a24c9aac_174abe83",
+        "filename": "secretkeeper/secretkeeper_comm/src/util.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-20T14:10:11Z",
+      "side": 1,
+      "message": "I think `value.as_integer().ok_or(InternalError)?` would work without a `clone()` here.",
+      "range": {
+        "startLine": 22,
+        "startChar": 14,
+        "endLine": 22,
+        "endChar": 86
+      },
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c9739d3_6078e79f",
+        "filename": "secretkeeper/secretkeeper_comm/tests/data_types.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-10-20T14:10:11Z",
+      "side": 1,
+      "message": "Do the tests need to be inside `cfg` and a `tests` module?  (I\u0027ve not used rdroidtest...)",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
