@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a652e2e6_e1e62647",
+        "filename": "vmbase/src/memory/page_table.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2023-10-20T17:39:39Z",
+      "side": 1,
+      "message": "Yeah I suspect this is used to map ranges of memory and MMIO as they are discovered, and if they don\u0027t intersect, there should never be any BBM violations.",
+      "parentUuid": "b9a05ddf_28ecd799",
+      "revId": "7c2a0dbc25669dc29766adfe1b30625d5aa4a1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ca972724_0c9d4d0e",
         "filename": "vmbase/src/memory/page_table.rs",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2023-10-20T17:11:03Z",
       "side": 1,
       "message": "This could potentially unmap some memory that `f` (or an interrupt handler) is relying on: maybe some MMIO range used by a device, or something like the device tree that `f` might read.\n\nWe should probably mark `deactivate` as unsafe, and also this function.",
+      "revId": "7c2a0dbc25669dc29766adfe1b30625d5aa4a1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6518fae3_0e8a4193",
+        "filename": "vmbase/src/memory/page_table.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2023-10-20T17:39:39Z",
+      "side": 1,
+      "message": "Yes,  perhaps it would be better to drop this fallback and introduce the possibility to map regions down to pages eagerly.\n\nThe only current user calls it to clear the READ_ONLY bit, which is BBM safe as long as it doesn\u0027t result in splitting of block entries",
+      "parentUuid": "ca972724_0c9d4d0e",
       "revId": "7c2a0dbc25669dc29766adfe1b30625d5aa4a1f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
