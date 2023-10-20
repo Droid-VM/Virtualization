@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ff8a60a5_b6a22e41",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-20T13:55:59Z",
+      "side": 1,
+      "message": "```suggestion\n        self.add_subnode_namelen(name, name.to_bytes().len())\n```\naccording to other comments",
+      "parentUuid": "e2ac5087_8579fd01",
+      "range": {
+        "startLine": 641,
+        "startChar": 0,
+        "endLine": 646,
+        "endChar": 57
+      },
+      "revId": "3ece1df75afb050261c490db166a39217b71ae43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04a249bd_609d4323",
         "filename": "libs/libfdt/src/lib.rs",
         "patchSetId": 1
@@ -224,6 +248,54 @@
         "startChar": 47,
         "endLine": 666,
         "endChar": 70
+      },
+      "revId": "3ece1df75afb050261c490db166a39217b71ae43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9d83a9e_0650c506",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-20T13:55:59Z",
+      "side": 1,
+      "message": "Ack; fair point!",
+      "parentUuid": "43f17b00_ad3a2055",
+      "range": {
+        "startLine": 666,
+        "startChar": 47,
+        "endLine": 666,
+        "endChar": 70
+      },
+      "revId": "3ece1df75afb050261c490db166a39217b71ae43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30fc2179_f31de72a",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-20T13:55:59Z",
+      "side": 1,
+      "message": "Not done? Please use `{add_,}subnode_namelen()` to match libfdt and avoid the proliferation of almost-identical function names!",
+      "parentUuid": "84573da9_4a20d33b",
+      "range": {
+        "startLine": 666,
+        "startChar": 11,
+        "endLine": 666,
+        "endChar": 32
       },
       "revId": "3ece1df75afb050261c490db166a39217b71ae43",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
