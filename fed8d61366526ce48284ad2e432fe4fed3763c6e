@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ce92b53_e3d5ef28",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 698,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-20T12:45:40Z",
+      "side": 1,
+      "message": "I couldn\u0027t make it clean.\n\n`FdtNodeMut` requires `\u0026mut Fdt` to instantiate, but `self.nop()` would consumes self and Fdt would be gone as well. Do you have an idea with it? I could only imagine keeping Fdt\u0027s raw ptr and size with unsafe call, and restore it when instantiating FdtNodeMut. But it didn\u0027t look better than this.",
+      "parentUuid": "48b4cf89_ae6ea1e8",
+      "range": {
+        "startLine": 691,
+        "startChar": 0,
+        "endLine": 698,
+        "endChar": 68
+      },
+      "revId": "fed8d61366526ce48284ad2e432fe4fed3763c6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8bde3c26_b62e92c1",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-19T16:41:27Z",
       "side": 1,
       "message": "I know that there already is a `.nop_property` method but I wonder if this name is clear enough. The method above uses the term `delete`, which more clearly communicates the intention but doesn\u0027t convey the small cost (a simple overwriting). I\u0027ll let you decide which one\u0027s better.",
+      "range": {
+        "startLine": 702,
+        "startChar": 11,
+        "endLine": 702,
+        "endChar": 14
+      },
+      "revId": "fed8d61366526ce48284ad2e432fe4fed3763c6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "359d2f88_0f4ab259",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-20T12:45:40Z",
+      "side": 1,
+      "message": "Done for here and `nop_property`.",
+      "parentUuid": "8bde3c26_b62e92c1",
       "range": {
         "startLine": 702,
         "startChar": 11,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc80ec6b_30f32cd8",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-20T12:45:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab7b02ba_805beebb",
+      "range": {
+        "startLine": 167,
+        "startChar": 4,
+        "endLine": 167,
+        "endChar": 60
+      },
+      "revId": "fed8d61366526ce48284ad2e432fe4fed3763c6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe00d4d8_7f1fa3dc",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-10-19T16:41:27Z",
       "side": 1,
       "message": "Lol, this made me look into the implementation of `fdt_pack` and all it does is move the DT blocks around, so the \"body\" (where the nodes are) is left unchanged ... not as useful as I had assumed (because the function isn\u0027t documented!) it was.\n\nFor this reason, I believe that there\u0027s little value in using `.unpack()`/`.pack()` in this test and it might even add more confusion than anything else so you might want to remove those calls.",
+      "range": {
+        "startLine": 175,
+        "startChar": 59,
+        "endLine": 175,
+        "endChar": 94
+      },
+      "revId": "fed8d61366526ce48284ad2e432fe4fed3763c6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a33363e9_bc72c14e",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-20T12:45:40Z",
+      "side": 1,
+      "message": "Removed size check, but leaving the re-check after the `unpack()` + `pack()`.",
+      "parentUuid": "fe00d4d8_7f1fa3dc",
       "range": {
         "startLine": 175,
         "startChar": 59,
