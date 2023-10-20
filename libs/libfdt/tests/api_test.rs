@@ -17,7 +17,7 @@
 //! Integration tests of the library libfdt.
 
 use libfdt::{Fdt, FdtError, Phandle};
-use std::ffi::CStr;
+use std::ffi::{CStr, CString};
 use std::fs;
 use std::ops::Range;
 
@@ -180,4 +180,38 @@ fn node_nop() {
 
     assert!(fdt.node_with_phandle(Phandle(0xFF)).unwrap().is_none());
     assert!(fdt.node(cstr!("/node_z/node_zz")).unwrap().is_none());
+}
+
+#[test]
+fn node_add_subnode_with_namelen() {
+    let mut data = fs::read(TEST_TREE_PHANDLE_PATH).unwrap();
+    data.resize(data.len() * 2, 0_u8);
+
+    let fdt = Fdt::from_mut_slice(&mut data).unwrap();
+    fdt.unpack().unwrap();
+
+    let node_path = cstr!("/node_z/node_zz");
+    let subnode_name = cstr!("123456789");
+
+    for len in 1..subnode_name.to_bytes().len() {
+        let mut node = fdt.node_mut(node_path).unwrap().unwrap();
+        assert!(node.subnode_with_namelen(subnode_name, len).unwrap().is_none());
+
+        let mut node = fdt.node_mut(node_path).unwrap().unwrap();
+        node.add_subnode_with_namelen(subnode_name, len).unwrap();
+
+        let mut node = fdt.node_mut(node_path).unwrap().unwrap();
+        assert!(node.subnode_with_namelen(subnode_name, len).unwrap().is_some());
+    }
+
+    for len in 1..subnode_name.to_bytes().len() {
+        let name =
+            CString::from_vec_with_nul([&subnode_name.to_bytes()[0..len], b"\0"].concat()).unwrap();
+        let path = CString::from_vec_with_nul(
+            [node_path.to_bytes(), b"/", name.to_bytes_with_nul()].concat(),
+        )
+        .unwrap();
+        let subnode = fdt.node(&path).unwrap().unwrap();
+        assert_eq!(subnode.name().unwrap().to_str().unwrap(), name.to_str().unwrap());
+    }
 }
