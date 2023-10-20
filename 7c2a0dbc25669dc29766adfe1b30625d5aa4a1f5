@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9a05ddf_28ecd799",
+        "filename": "vmbase/src/memory/page_table.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-10-20T17:11:03Z",
+      "side": 1,
+      "message": "This could potentially unmap some memory that an exception handler is relying on. The caller needs to ensure that either all exception handlers only rely on the initial pagetable, that they are disabled before calling this, or that there are no possible BBM violations, so this function should be marked as unsafe.\n\nAlternatively, is it ever actually expected to be called in a way that results in a BBM violation? If not, then let\u0027s just keep it as it was before so we get an error if there is one.",
+      "revId": "7c2a0dbc25669dc29766adfe1b30625d5aa4a1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca972724_0c9d4d0e",
+        "filename": "vmbase/src/memory/page_table.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-10-20T17:11:03Z",
+      "side": 1,
+      "message": "This could potentially unmap some memory that `f` (or an interrupt handler) is relying on: maybe some MMIO range used by a device, or something like the device tree that `f` might read.\n\nWe should probably mark `deactivate` as unsafe, and also this function.",
+      "revId": "7c2a0dbc25669dc29766adfe1b30625d5aa4a1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
