@@ -57,16 +57,20 @@
 //!
 //! value = bool / int / tstr / bstr
 
-use anyhow::{anyhow, bail, Context, Result};
+use anyhow::{anyhow, bail, ensure, Context, Result};
 use ciborium::Value;
 use coset::{AsCborValue, CoseSign1};
+use num_derive::FromPrimitive;
+use num_traits::FromPrimitive;
 use std::borrow::Cow;
+use std::iter::zip;
 
 const DICE_POLICY_VERSION: u64 = 1;
 
 /// Constraint Types supported in Dice policy.
+#[repr(u16)]
 #[non_exhaustive]
-#[derive(Clone, Copy, Debug, PartialEq)]
+#[derive(Clone, Copy, Debug, FromPrimitive, PartialEq)]
 pub enum ConstraintType {
     /// Enforce exact match criteria, indicating the policy should match
     /// if the dice chain has exact same specified values.
@@ -140,13 +144,7 @@ impl DicePolicy {
     ///     ConstraintSpec(ConstraintType::GreaterOrEqual, vec![2, 200]),// matches any value >= 5
     ///    ];
     pub fn from_dice_chain(dice_chain: &[u8], constraint_spec: &[ConstraintSpec]) -> Result<Self> {
-        // TODO(b/298217847): Check if the given dice chain adheres to Explicit-key DiceCertChain
-        // format and if not, convert it before policy construction.
-        let dice_chain = value_from_bytes(dice_chain).context("Unable to decode top-level CBOR")?;
-        let dice_chain = match dice_chain {
-            Value::Array(array) if array.len() >= 2 => array,
-            _ => bail!("Expected an array of at least length 2, found: {:?}", dice_chain),
-        };
+        let dice_chain = deserialize_dice_chain(dice_chain)?;
         let mut constraints_list: Vec<NodeConstraints> = Vec::with_capacity(dice_chain.len());
         let mut it = dice_chain.into_iter();
 
@@ -167,6 +165,62 @@ impl DicePolicy {
             node_constraints_list: constraints_list.into_boxed_slice(),
         })
     }
+
+    /// Dice chain policy verifier - Compare the input dice chain against this Dice policy.
+    /// The method returns Ok() if the dice chain meets the constraints set in Dice policy,
+    /// otherwise returns error in case of mismatch.
+    /// TODO(b/291238565) Create a separate error module for DicePolicy mismatches.
+    pub fn matches_dice_chain(&self, dice_chain: &[u8]) -> Result<()> {
+        let dice_chain = deserialize_dice_chain(dice_chain)?;
+        ensure!(
+            dice_chain.len() == self.node_constraints_list.len(),
+            format!(
+                "Dice chain size({}) does not match policy({})",
+                dice_chain.len(),
+                self.node_constraints_list.len()
+            )
+        );
+
+        for (n, (dice_node, node_constraints)) in
+            zip(dice_chain, self.node_constraints_list.iter()).enumerate()
+        {
+            let dice_node_payload = if n == 0 {
+                dice_node
+            } else {
+                cbor_value_from_cose_sign(dice_node)
+                    .with_context(|| format!("Unable to get Cose payload at: {}", n))?
+            };
+            check_constraints_on_node(node_constraints, &dice_node_payload)
+                .context(format!("Mismatch found at {}", n))?;
+        }
+        Ok(())
+    }
+}
+
+fn check_constraints_on_node(node_constraints: &NodeConstraints, dice_node: &Value) -> Result<()> {
+    for constraint in node_constraints.0.iter() {
+        check_constraint_on_node(constraint, dice_node)?;
+    }
+    Ok(())
+}
+
+fn check_constraint_on_node(constraint: &Constraint, dice_node: &Value) -> Result<()> {
+    let value_in_node = lookup_value_in_nested_map(dice_node, &constraint.1)?;
+    match ConstraintType::from_u16(constraint.0).ok_or(anyhow!("Unexpected Constraint type"))? {
+        ConstraintType::ExactMatch => ensure!(value_in_node == constraint.2),
+        ConstraintType::GreaterOrEqual => {
+            let value_in_node = value_in_node
+                .into_integer()
+                .map_err(|e| anyhow!("Expected a cbor integer: {:?}", e))?;
+            let value_min = constraint
+                .2
+                .clone()
+                .into_integer()
+                .map_err(|e| anyhow!("Expected a cbor integer: {:?}", e))?;
+            ensure!(value_in_node >= value_min);
+        }
+    };
+    Ok(())
 }
 
 // Take the payload of a dice node & construct the constraints on it.
@@ -231,6 +285,17 @@ fn cbor_value_from_cose_sign(cbor: Value) -> Result<Value> {
         Some(payload) => Ok(value_from_bytes(&payload)?),
     }
 }
+fn deserialize_dice_chain(dice_chain_bytes: &[u8]) -> Result<Vec<Value>> {
+    // TODO(b/298217847): Check if the given dice chain adheres to Explicit-key DiceCertChain
+    // format and if not, convert it.
+    let dice_chain =
+        value_from_bytes(dice_chain_bytes).context("Unable to decode top-level CBOR")?;
+    let dice_chain = match dice_chain {
+        Value::Array(array) if array.len() >= 2 => array,
+        _ => bail!("Expected an array of at least length 2, found: {:?}", dice_chain),
+    };
+    Ok(dice_chain)
+}
 
 /// Decodes the provided binary CBOR-encoded value and returns a
 /// ciborium::Value struct wrapped in Result.
@@ -263,19 +328,23 @@ mod tests {
     // `hwtrust --verbose dice-chain [path]/composbcc`
     const COMPOS_DICE_CHAIN_SIZE: usize = 5;
     const EXAMPLE_STRING: &str = "testing_dice_policy";
-    const EXAMPLE_NUM: i64 = 59765;
+    const EXAMPLE_NUM_1: i64 = 59765;
+    const EXAMPLE_NUM_2: i64 = 59766;
 
     struct TestExample {
         input_dice: Vec<u8>,
         constraint_spec: Vec<ConstraintSpec>,
         expected_dice_policy: DicePolicy,
+        // input_dice_updated is almost the same as the input_dice,
+        // just one of the value is EXAMPLE_NUM_2 instead of EXAMPLE_NUM_1
+        input_dice_updated: Vec<u8>,
     }
 
     impl TestExample {
         fn init() -> Self {
             let rot_key = CoseKey::default().to_cbor_value().unwrap();
             let nested_payload = cbor!({
-                100 => EXAMPLE_NUM
+                100 => EXAMPLE_NUM_1
             })
             .unwrap();
             let payload = cbor!({
@@ -317,12 +386,35 @@ mod tests {
                         Constraint(
                             ConstraintType::GreaterOrEqual as u16,
                             vec![3, 100],
-                            Value::from(EXAMPLE_NUM),
+                            Value::from(EXAMPLE_NUM_1),
                         ),
                     ])),
                 ]),
             };
-            TestExample { input_dice, constraint_spec, expected_dice_policy }
+
+            // Updated dice chain
+            let nested_payload_2 = cbor!({
+                100 => EXAMPLE_NUM_2
+            })
+            .unwrap();
+            let payload_2 = cbor!({
+                1 => EXAMPLE_STRING,
+                2 => "some_other_example_string",
+                3 => Value::Bytes(value_to_bytes(&nested_payload_2).unwrap()),
+            })
+            .unwrap();
+            let payload_2 = value_to_bytes(&payload_2).unwrap();
+            let input_dice_updated = CoseSign1 {
+                protected: ProtectedHeader::default(),
+                unprotected: Header::default(),
+                payload: Some(payload_2),
+                signature: b"ddef".to_vec(),
+            }
+            .to_cbor_value()
+            .unwrap();
+            let input_dice_updated = Value::Array([rot_key.clone(), input_dice_updated].to_vec());
+            let input_dice_updated = value_to_bytes(&input_dice_updated).unwrap();
+            TestExample { input_dice, constraint_spec, expected_dice_policy, input_dice_updated }
         }
     }
 
@@ -334,6 +426,42 @@ mod tests {
 
         // Assert policy is exactly as expected!
         assert_eq!(policy, example.expected_dice_policy);
+    }
+
+    test!(policy_matches_original_dice_chain);
+    fn policy_matches_original_dice_chain() {
+        let ex = TestExample::init();
+        assert!(
+            DicePolicy::from_dice_chain(&ex.input_dice, &ex.constraint_spec)
+                .unwrap()
+                .matches_dice_chain(&ex.input_dice)
+                .is_ok(),
+            "The dice chain did not match the policy constructed out of it!"
+        );
+    }
+
+    test!(policy_matches_updated_dice_chain);
+    fn policy_matches_updated_dice_chain() {
+        let ex = TestExample::init();
+        assert!(
+            DicePolicy::from_dice_chain(&ex.input_dice, &ex.constraint_spec)
+                .unwrap()
+                .matches_dice_chain(&ex.input_dice_updated)
+                .is_ok(),
+            "The updated dice chain did not match the original policy!"
+        );
+    }
+
+    test!(policy_mismatch_downgraded_dice_chain);
+    fn policy_mismatch_downgraded_dice_chain() {
+        let ex = TestExample::init();
+        assert!(
+            DicePolicy::from_dice_chain(&ex.input_dice_updated, &ex.constraint_spec)
+                .unwrap()
+                .matches_dice_chain(&ex.input_dice)
+                .is_err(),
+            "The (downgraded) dice chain matched the policy constructed out of the 'updated' dice chain!!"
+        );
     }
 
     test!(policy_dice_size_is_same);
