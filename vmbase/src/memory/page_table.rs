@@ -86,40 +86,52 @@ impl PageTable {
         self.idmap.activate()
     }
 
+    fn map_range(&mut self, range: &MemoryRegion, flags: Attributes) -> Result<()> {
+        self.idmap.map_range(range, flags).or_else(|e| match e {
+            MapError::BreakBeforeMakeViolation(_) => {
+                self.idmap.deactivate();
+                let e = self.idmap.map_range(range, flags);
+                self.idmap.activate();
+                e
+            }
+            _ => Err(e),
+        })
+    }
+
     /// Maps the given range of virtual addresses to the physical addresses as lazily mapped
     /// nGnRE device memory.
     pub fn map_device_lazy(&mut self, range: &MemoryRegion) -> Result<()> {
-        self.idmap.map_range(range, DEVICE_LAZY)
+        self.map_range(range, DEVICE_LAZY)
     }
 
     /// Maps the given range of virtual addresses to the physical addresses as valid device
     /// nGnRE device memory.
     pub fn map_device(&mut self, range: &MemoryRegion) -> Result<()> {
-        self.idmap.map_range(range, DEVICE)
+        self.map_range(range, DEVICE)
     }
 
     /// Maps the given range of virtual addresses to the physical addresses as non-executable
     /// and writable normal memory.
     pub fn map_data(&mut self, range: &MemoryRegion) -> Result<()> {
-        self.idmap.map_range(range, DATA)
+        self.map_range(range, DATA)
     }
 
     /// Maps the given range of virtual addresses to the physical addresses as non-executable,
     /// read-only and writable-clean normal memory.
     pub fn map_data_dbm(&mut self, range: &MemoryRegion) -> Result<()> {
-        self.idmap.map_range(range, DATA_DBM)
+        self.map_range(range, DATA_DBM)
     }
 
     /// Maps the given range of virtual addresses to the physical addresses as read-only
     /// normal memory.
     pub fn map_code(&mut self, range: &MemoryRegion) -> Result<()> {
-        self.idmap.map_range(range, CODE)
+        self.map_range(range, CODE)
     }
 
     /// Maps the given range of virtual addresses to the physical addresses as non-executable
     /// and read-only normal memory.
     pub fn map_rodata(&mut self, range: &MemoryRegion) -> Result<()> {
-        self.idmap.map_range(range, RODATA)
+        self.map_range(range, RODATA)
     }
 
     /// Applies the provided updater function to a number of PTEs corresponding to a given memory
@@ -128,7 +140,15 @@ impl PageTable {
     where
         F: Fn(&MemoryRegion, &mut Descriptor, usize) -> result::Result<(), ()>,
     {
-        self.idmap.modify_range(range, f)
+        self.idmap.modify_range(range, f).or_else(|e| match e {
+            MapError::BreakBeforeMakeViolation(_) => {
+                self.idmap.deactivate();
+                let e = self.idmap.modify_range(range, f);
+                self.idmap.activate();
+                e
+            }
+            _ => Err(e),
+        })
     }
 
     /// Applies the provided callback function to a number of PTEs corresponding to a given memory
