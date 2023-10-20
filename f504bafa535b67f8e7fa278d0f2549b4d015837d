@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "59250ecd_539f5a78",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-20T13:54:13Z",
+      "side": 1,
+      "message": "Sorry if this wasn\u0027t clear to you but the point of a `transparent` struct is that you can (effectively) implement object-oriented methods for pointers. So my suggestion was something along the lines of\n```\n#[repr(transparent)]\nstruct FdtPropertyStruct(libfdt_bindgen::fdt_property);\n\nimpl FdtPropertyStruct {\n    fn name_offset(\u0026self) -\u003e u32 { u32::from_be(self.0.nameoff) }\n    // other fields\n}\n\n// not sure this is necessary\nimpl AsRef\u003cFdtPropertyStruct\u003e for libfdt_bindgen::fdt_property {\n    fn as_ref(\u0026self) -\u003e \u0026FdtPropertyStruct {\n        unsafe { self as _ }\n    }\n}\n```\nso that you can transform the `*const libfdt_bindgen::fdt_property` into a `\u0026FdtPropertyStruct` (free!)\n```\nimpl AsRef\u003cFdtPropertyStruct\u003e for FdtProperty {\n    fn as_ref(\u0026self) -\u003e \u0026FdtPropertyStruct {\n        let ptr \u003d fdt_get_property_by_offset(self.fdt, self.offset).unwrap();\n        // ...\n        unsafe {\u0026*ptr}\n    }\n}\n```\nand start using your methods, transparently taking care of the endianness (e.g. \"`self.as_ref().name_offset()`\") with no overhead!\n\n\u003e  I only wrapped `\u0026libfdt_bindgen::fdt_property` because `libfdt_bindgen::fdt_property` didn\u0027t impl `Copy` while `Copy` is very useful.\n\nPerhaps, are you confusing the structure (by value) and a reference to it (which is always `Copy`)?",
+      "parentUuid": "b407118e_cc016b33",
+      "range": {
+        "startLine": 208,
+        "startChar": 35,
+        "endLine": 208,
+        "endChar": 63
+      },
+      "revId": "f504bafa535b67f8e7fa278d0f2549b4d015837d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7980a66e_6030a740",
         "filename": "libs/libfdt/src/lib.rs",
         "patchSetId": 5
@@ -273,6 +297,30 @@
       "side": 1,
       "message": "This CL doesn\u0027t need `cstr!`, because `FdtProperty` only supports to return bytes and not string.",
       "parentUuid": "e5dcecdb_e1e121ad",
+      "range": {
+        "startLine": 110,
+        "startChar": 18,
+        "endLine": 111,
+        "endChar": 58
+      },
+      "revId": "f504bafa535b67f8e7fa278d0f2549b4d015837d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1e2186b_871d0b7b",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-20T13:54:13Z",
+      "side": 1,
+      "message": "Ah, yes you\u0027re right; my bad!",
+      "parentUuid": "525e1ab6_6bfb0319",
       "range": {
         "startLine": 110,
         "startChar": 18,
