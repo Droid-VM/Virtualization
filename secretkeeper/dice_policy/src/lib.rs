@@ -174,7 +174,7 @@ fn payload_to_constraints(
     payload: Value,
     constraint_spec: &[ConstraintSpec],
 ) -> Result<NodeConstraints> {
-    let mut node_constraints: Vec<Constraint> = Vec::new();
+    let mut node_constraints: Vec<Constraint> = Vec::with_capacity(constraint_spec.len());
     for constraint_item in constraint_spec {
         let constraint_path = constraint_item.path.to_vec();
         if constraint_path.is_empty() {
@@ -265,6 +265,77 @@ mod tests {
     const EXAMPLE_STRING: &str = "testing_dice_policy";
     const EXAMPLE_NUM: i64 = 59765;
 
+    struct TestExample {
+        input_dice: Vec<u8>,
+        constraint_spec: Vec<ConstraintSpec>,
+        expected_dice_policy: DicePolicy,
+    }
+
+    impl TestExample {
+        fn init() -> Self {
+            let rot_key = CoseKey::default().to_cbor_value().unwrap();
+            let nested_payload = cbor!({
+                100 => EXAMPLE_NUM
+            })
+            .unwrap();
+            let payload = cbor!({
+                1 => EXAMPLE_STRING,
+                2 => "some_other_example_string",
+                3 => Value::Bytes(value_to_bytes(&nested_payload).unwrap()),
+            })
+            .unwrap();
+            let payload = value_to_bytes(&payload).unwrap();
+            let dice_node = CoseSign1 {
+                protected: ProtectedHeader::default(),
+                unprotected: Header::default(),
+                payload: Some(payload),
+                signature: b"ddef".to_vec(),
+            }
+            .to_cbor_value()
+            .unwrap();
+            let input_dice = Value::Array([rot_key.clone(), dice_node].to_vec());
+
+            let input_dice = value_to_bytes(&input_dice).unwrap();
+            let constraint_spec = vec![
+                ConstraintSpec::new(ConstraintType::ExactMatch, vec![1]).unwrap(),
+                ConstraintSpec::new(ConstraintType::GreaterOrEqual, vec![3, 100]).unwrap(),
+            ];
+            let expected_dice_policy = DicePolicy {
+                version: 1,
+                node_constraints_list: Box::new([
+                    NodeConstraints(Box::new([Constraint(
+                        ConstraintType::ExactMatch as u16,
+                        vec![],
+                        rot_key.clone(),
+                    )])),
+                    NodeConstraints(Box::new([
+                        Constraint(
+                            ConstraintType::ExactMatch as u16,
+                            vec![1],
+                            Value::Text(EXAMPLE_STRING.to_string()),
+                        ),
+                        Constraint(
+                            ConstraintType::GreaterOrEqual as u16,
+                            vec![3, 100],
+                            Value::from(EXAMPLE_NUM),
+                        ),
+                    ])),
+                ]),
+            };
+            TestExample { input_dice, constraint_spec, expected_dice_policy }
+        }
+    }
+
+    test!(policy_structure_check);
+    fn policy_structure_check() {
+        let example = TestExample::init();
+        let policy =
+            DicePolicy::from_dice_chain(&example.input_dice, &example.constraint_spec).unwrap();
+
+        // Assert policy is exactly as expected!
+        assert_eq!(policy, example.expected_dice_policy);
+    }
+
     test!(policy_dice_size_is_same);
     fn policy_dice_size_is_same() {
         let input_dice = include_bytes!("../testdata/composbcc");
@@ -276,65 +347,6 @@ mod tests {
         ];
         let policy = DicePolicy::from_dice_chain(input_dice, &constraint_spec).unwrap();
         assert_eq!(policy.node_constraints_list.len(), COMPOS_DICE_CHAIN_SIZE);
-    }
-
-    test!(policy_structure_check);
-    fn policy_structure_check() {
-        let rot_key = CoseKey::default().to_cbor_value().unwrap();
-        let nested_payload = cbor!({
-            100 => EXAMPLE_NUM
-        })
-        .unwrap();
-        let payload = cbor!({
-            1 => EXAMPLE_STRING,
-            2 => "some_other_example_string",
-            3 => Value::Bytes(value_to_bytes(&nested_payload).unwrap()),
-        })
-        .unwrap();
-        let payload = value_to_bytes(&payload).unwrap();
-        let dice_node = CoseSign1 {
-            protected: ProtectedHeader::default(),
-            unprotected: Header::default(),
-            payload: Some(payload),
-            signature: b"ddef".to_vec(),
-        }
-        .to_cbor_value()
-        .unwrap();
-        let input_dice = Value::Array([rot_key.clone(), dice_node].to_vec());
-
-        let input_dice = value_to_bytes(&input_dice).unwrap();
-        let constraint_spec = [
-            ConstraintSpec::new(ConstraintType::ExactMatch, vec![1]).unwrap(),
-            ConstraintSpec::new(ConstraintType::GreaterOrEqual, vec![3, 100]).unwrap(),
-        ];
-        let policy = DicePolicy::from_dice_chain(&input_dice, &constraint_spec).unwrap();
-
-        // Assert policy is exactly as expected!
-        assert_eq!(
-            policy,
-            DicePolicy {
-                version: 1,
-                node_constraints_list: Box::new([
-                    NodeConstraints(Box::new([Constraint(
-                        ConstraintType::ExactMatch as u16,
-                        vec![],
-                        rot_key
-                    )])),
-                    NodeConstraints(Box::new([
-                        Constraint(
-                            ConstraintType::ExactMatch as u16,
-                            vec![1],
-                            Value::Text(EXAMPLE_STRING.to_string())
-                        ),
-                        Constraint(
-                            ConstraintType::GreaterOrEqual as u16,
-                            vec![3, 100],
-                            Value::from(EXAMPLE_NUM)
-                        )
-                    ])),
-                ])
-            }
-        );
     }
 
     /// Encodes a ciborium::Value into bytes.
