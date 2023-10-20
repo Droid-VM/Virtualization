@@ -64,6 +64,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d8a0d27_d11de979",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-20T12:46:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04a249bd_609d4323",
+      "range": {
+        "startLine": 649,
+        "startChar": 55,
+        "endLine": 650,
+        "endChar": 16
+      },
+      "revId": "3ece1df75afb050261c490db166a39217b71ae43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "612ccd53_a24d086d",
@@ -133,6 +157,78 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "edb97229_7963fc5b",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-20T12:46:06Z",
+      "side": 1,
+      "message": "It\u0027s indeed helpful, but I would only need it in the test, so let me defer add it.",
+      "parentUuid": "612ccd53_a24d086d",
+      "range": {
+        "startLine": 666,
+        "startChar": 11,
+        "endLine": 666,
+        "endChar": 32
+      },
+      "revId": "3ece1df75afb050261c490db166a39217b71ae43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84573da9_4a20d33b",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-20T12:46:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb1a7bcf_035436b4",
+      "range": {
+        "startLine": 666,
+        "startChar": 11,
+        "endLine": 666,
+        "endChar": 32
+      },
+      "revId": "3ece1df75afb050261c490db166a39217b71ae43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43f17b00_ad3a2055",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-20T12:46:06Z",
+      "side": 1,
+      "message": "I thought that it\u0027s different. -- `\u0026CStr` guarantees no null character in the middle, so I\u0027d prefer to use it in the user facing interface. (previously we discussed about private API) What do you think?",
+      "parentUuid": "44d042f0_bfafcd56",
+      "range": {
+        "startLine": 666,
+        "startChar": 47,
+        "endLine": 666,
+        "endChar": 70
+      },
+      "revId": "3ece1df75afb050261c490db166a39217b71ae43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1dae357_9ccf0cc7",
@@ -146,6 +242,30 @@
       "writtenOn": "2023-10-19T16:41:55Z",
       "side": 1,
       "message": "First, check that it `is_none`.",
+      "range": {
+        "startLine": 195,
+        "startChar": 8,
+        "endLine": 195,
+        "endChar": 14
+      },
+      "revId": "3ece1df75afb050261c490db166a39217b71ae43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1442556_58399b34",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-20T12:46:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1dae357_9ccf0cc7",
       "range": {
         "startLine": 195,
         "startChar": 8,
