@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b8672840_05464017",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 872,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-20T13:55:14Z",
+      "side": 1,
+      "message": "I meant to get compiler-enforced validation of phandle values e.g.\n```\nconst fn new(value: u32) -\u003e Option\u003cSelf\u003e {\n    if value \u003e 0 \u0026\u0026 value \u003c\u003d FDT_MAX_PHANDLE {\n        Some(Self(value))\n    } else {\n         None\n    }\n}\n```\nas there have been libfdt bugs in the past caused by invalid phandles being passed or returned by the library.",
+      "parentUuid": "a32babc7_579567d5",
+      "range": {
+        "startLine": 872,
+        "startChar": 40,
+        "endLine": 872,
+        "endChar": 43
+      },
+      "revId": "f2a9e7a21fe51e00b1c7cb3be46f71efaca86608",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "972eeece_33a40d4b",
         "filename": "libs/libfdt/tests/api_test.rs",
         "patchSetId": 1
