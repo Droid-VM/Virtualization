@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c284a04_76bfc010",
+        "filename": "libs/libfdt/src/iterators.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-20T12:37:49Z",
+      "side": 1,
+      "message": "Kind of applied your suggestion.\n\nI need to keep Option\u003cSelf::Item\u003e for return later, so `res` shouldn\u0027t be expanded here.",
+      "parentUuid": "cda63866_c3bab740",
+      "range": {
+        "startLine": 344,
+        "startChar": 0,
+        "endLine": 346,
+        "endChar": 65
+      },
+      "revId": "f504bafa535b67f8e7fa278d0f2549b4d015837d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2eb94380_b4f16924",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-19T16:39:01Z",
       "side": 1,
       "message": "Could you introduce a `transparent` wrapper around `libfdt_bindgen::fdt_property` providing methods abstracting away the endianness conversion (similar to `Fdt::totalsize()`)? This would allow you to clearly express `FdtProperty::fdt_property` as the `as_ref` of a `impl AsRef\u003cFdtPropertyStruct\u003e for FdtProperty` (where you\u0027d build the `FdtError` and `unwrap` as the property should always be valid).",
+      "range": {
+        "startLine": 208,
+        "startChar": 35,
+        "endLine": 208,
+        "endChar": 63
+      },
+      "revId": "f504bafa535b67f8e7fa278d0f2549b4d015837d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b407118e_cc016b33",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-20T12:37:49Z",
+      "side": 1,
+      "message": "Kind of done. I only wrapped `\u0026libfdt_bindgen::fdt_property` because `libfdt_bindgen::fdt_property` didn\u0027t impl `Copy` while `Copy` is very useful.\n\nPTAL. Hope this works for you.",
+      "parentUuid": "2eb94380_b4f16924",
       "range": {
         "startLine": 208,
         "startChar": 35,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f264314_0edc4296",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-20T12:37:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7980a66e_6030a740",
+      "range": {
+        "startLine": 215,
+        "startChar": 19,
+        "endLine": 215,
+        "endChar": 76
+      },
+      "revId": "f504bafa535b67f8e7fa278d0f2549b4d015837d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95e42757_d8645acb",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-10-19T16:39:01Z",
       "side": 1,
       "message": "`value`?",
+      "range": {
+        "startLine": 220,
+        "startChar": 11,
+        "endLine": 220,
+        "endChar": 14
+      },
+      "revId": "f504bafa535b67f8e7fa278d0f2549b4d015837d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b527936d_84990a06",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-20T12:37:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95e42757_d8645acb",
       "range": {
         "startLine": 220,
         "startChar": 11,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b35cc44_e9695585",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-20T12:37:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c075ce2_83b270a3",
+      "range": {
+        "startLine": 227,
+        "startChar": 7,
+        "endLine": 227,
+        "endChar": 11
+      },
+      "revId": "f504bafa535b67f8e7fa278d0f2549b4d015837d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5dcecdb_e1e121ad",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-10-19T16:39:01Z",
       "side": 1,
       "message": "Introduce `cstr!` in this commit and use it as you add new strings (including here, which is currently being missed by child commit aosp/2797455).",
+      "range": {
+        "startLine": 110,
+        "startChar": 18,
+        "endLine": 111,
+        "endChar": 58
+      },
+      "revId": "f504bafa535b67f8e7fa278d0f2549b4d015837d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "525e1ab6_6bfb0319",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-20T12:37:49Z",
+      "side": 1,
+      "message": "This CL doesn\u0027t need `cstr!`, because `FdtProperty` only supports to return bytes and not string.",
+      "parentUuid": "e5dcecdb_e1e121ad",
       "range": {
         "startLine": 110,
         "startChar": 18,
@@ -162,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65002841_49f9438e",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-20T12:37:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb3dde27_45717cc6",
+      "range": {
+        "startLine": 113,
+        "startChar": 32,
+        "endLine": 113,
+        "endChar": 33
+      },
+      "revId": "f504bafa535b67f8e7fa278d0f2549b4d015837d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f044e19_f918ba28",
@@ -175,6 +343,30 @@
       "writtenOn": "2023-10-19T16:39:01Z",
       "side": 1,
       "message": "One cool thing about Rust is that it supports nested expansion!\n\nSo:\n\n```suggestion\n    for (prop, (name, value)) in root.properties().unwrap().zip(expected) {\n        assert_eq!(prop.name().unwrap().to_str().unwrap(), name);\n        assert_eq!(prop.get(), Ok(value));\n```",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 50
+      },
+      "revId": "f504bafa535b67f8e7fa278d0f2549b4d015837d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40f71cc0_4ac7472e",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-20T12:37:49Z",
+      "side": 1,
+      "message": "Done. cool.",
+      "parentUuid": "1f044e19_f918ba28",
       "range": {
         "startLine": 116,
         "startChar": 0,
