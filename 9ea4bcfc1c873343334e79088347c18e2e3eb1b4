@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6285319a_0c9434c5",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2023-10-23T12:41:03Z",
+      "side": 1,
+      "message": "To map a range down to pages eagerly? I\u0027ve proposed (ab)using Attributes::TABLE_OR_PAGE for this.",
+      "parentUuid": "3101b321_6570635b",
+      "range": {
+        "startLine": 330,
+        "startChar": 0,
+        "endLine": 331,
+        "endChar": 92
+      },
+      "revId": "9ea4bcfc1c873343334e79088347c18e2e3eb1b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f4f78a32_b9954734",
         "filename": "vmbase/src/memory/shared.rs",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-23T12:31:51Z",
       "side": 1,
       "message": "nit: could this be expressed as `assert_eq!(level, 3)` where `3` is actually a `const` obtained from `MMIO_GUARD_GRANULE_SIZE`?",
+      "range": {
+        "startLine": 502,
+        "startChar": 0,
+        "endLine": 504,
+        "endChar": 55
+      },
+      "revId": "9ea4bcfc1c873343334e79088347c18e2e3eb1b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b05c981_3944ba8a",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2023-10-23T12:41:03Z",
+      "side": 1,
+      "message": "yeah i can change that",
+      "parentUuid": "f4f78a32_b9954734",
       "range": {
         "startLine": 502,
         "startChar": 0,
