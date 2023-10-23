@@ -39,6 +39,30 @@
       },
       "revId": "7926388fa26ad70e8efa4966f500a3f6ea647ce6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a15f43ae_f5473af7",
+        "filename": "vmbase/src/memory/page_table.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2023-10-23T12:32:08Z",
+      "side": 1,
+      "message": "Yeah, point taken.\n\nSo would you prefer a bool argument to map_range instead? Or a separate method?",
+      "parentUuid": "73c64a2c_0fd64c59",
+      "range": {
+        "startLine": 112,
+        "startChar": 44,
+        "endLine": 112,
+        "endChar": 72
+      },
+      "revId": "7926388fa26ad70e8efa4966f500a3f6ea647ce6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
