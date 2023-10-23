@@ -322,11 +322,18 @@ impl MemoryTracker {
         let page_range: VaRange = (page_start..page_start + MMIO_GUARD_GRANULE_SIZE).into();
         let mmio_guard = get_mmio_guard().unwrap();
         self.page_table
-            .modify_range(&page_range, &verify_lazy_mapped_block)
+            .modify_range(&page_range, &|mr: &VaRange, desc: &mut Descriptor, _: usize| {
+                let flags = desc.flags().expect("Unsupported PTE flags set");
+                if flags.contains(MMIO_LAZY_MAP_FLAG) && !flags.contains(Attributes::VALID) {
+                    desc.modify_flags(Attributes::VALID, Attributes::empty());
+                    Ok(())
+                } else {
+                    Err(())
+                }
+            })
             .map_err(|_| MemoryTrackerError::InvalidPte)?;
         mmio_guard.map(page_start.0)?;
-        // Maps a single device page, breaking up block mappings if necessary.
-        self.page_table.map_device(&page_range).map_err(|_| MemoryTrackerError::FailedToMap)
+        Ok(())
     }
 
     /// Flush all memory regions marked as writable-dirty.
@@ -464,23 +471,6 @@ impl Drop for MemorySharer {
             // SAFETY: The region was obtained from alloc_zeroed() with the recorded layout.
             unsafe { dealloc(base as *mut _, layout) };
         }
-    }
-}
-
-/// Checks whether block flags indicate it should be MMIO guard mapped.
-fn verify_lazy_mapped_block(
-    _range: &VaRange,
-    desc: &mut Descriptor,
-    level: usize,
-) -> result::Result<(), ()> {
-    let flags = desc.flags().expect("Unsupported PTE flags set");
-    if !is_leaf_pte(&flags, level) {
-        return Ok(()); // Skip table PTEs as they aren't tagged with MMIO_LAZY_MAP_FLAG.
-    }
-    if flags.contains(MMIO_LAZY_MAP_FLAG) && !flags.contains(Attributes::VALID) {
-        Ok(())
-    } else {
-        Err(())
     }
 }
 
