@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "67dde7bc_0557dee6",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2023-10-23T22:31:40Z",
+      "side": 1,
+      "message": "OK, so i guess you are asking whether we can replace this logic entirely with something based on modify_range()? I think that should be possible: modify_range() will split the range when necessary, and these lazy regions are initially mapped non-valid so i don\u0027t think it is possible to trigger a BBM fault by remapping these regions.\n\nI\u0027ll have a stab at simplifying this",
+      "parentUuid": "6285319a_0c9434c5",
+      "range": {
+        "startLine": 330,
+        "startChar": 0,
+        "endLine": 331,
+        "endChar": 92
+      },
+      "revId": "9ea4bcfc1c873343334e79088347c18e2e3eb1b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f4f78a32_b9954734",
         "filename": "vmbase/src/memory/shared.rs",
         "patchSetId": 1
