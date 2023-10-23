@@ -107,7 +107,9 @@ impl PageTable {
     /// Maps the given range of virtual addresses to the physical addresses as non-executable,
     /// read-only and writable-clean normal memory.
     pub fn map_data_dbm(&mut self, range: &MemoryRegion) -> Result<()> {
-        self.idmap.map_range(range, DATA_DBM)
+        // Map the region down to pages to minimize the size of the regions that will be marked
+        // dirty once a store hits them.
+        self.idmap.map_range(range, DATA_DBM | Attributes::TABLE_OR_PAGE)
     }
 
     /// Maps the given range of virtual addresses to the physical addresses as read-only
