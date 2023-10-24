@@ -106,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a9697d8_a8eb0228",
+        "filename": "vm_payload/include-restricted/vm_payload_restricted.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-24T13:14:31Z",
+      "side": 1,
+      "message": "This cl basically renames the existing API all along the pipeline, so that the next cl (aosp/2778936) can focus on updating the functionality.\n\nYou can review that one together with this one.",
+      "parentUuid": "33a2f48b_6784c139",
+      "range": {
+        "startLine": 61,
+        "startChar": 1,
+        "endLine": 62,
+        "endChar": 51
+      },
+      "revId": "234f63898a75c4a0a393e02500a060760762daad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67168189_99f5c7b2",
