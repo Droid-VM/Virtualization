@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88d05605_adb5b799",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-10-24T10:56:00Z",
+      "side": 1,
+      "message": "Why is this error being converted to `FailedToMap` now? Before the error returned by `mmio_guard.map` was being returned directly.",
+      "range": {
+        "startLine": 339,
+        "startChar": 36,
+        "endLine": 339,
+        "endChar": 81
+      },
+      "revId": "a60c3b27450ac93ac62033c7a66f84172aff75e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
