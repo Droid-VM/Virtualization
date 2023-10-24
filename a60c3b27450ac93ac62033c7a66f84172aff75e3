@@ -22,6 +22,30 @@
       },
       "revId": "a60c3b27450ac93ac62033c7a66f84172aff75e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3795b73f_a0b96116",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2023-10-24T12:15:39Z",
+      "side": 1,
+      "message": "This puzzled me a bit.\n\nThe following works\n\n    Ok(mmio_guard.map(page_start.0)?)\n    \nbut this produces an error\n\n    mmio_guard.map(page_start.0)\n\nAIUI the former coerces the error type whereas the latter doesn\u0027t, and I wasn\u0027t sure if the coercion produces what we want.\n\n```\n\nerror[E0308]: mismatched types\n   --\u003e packages/modules/Virtualization/vmbase/src/memory/shared.rs:341:9\n    |\n322 |     fn handle_mmio_fault(\u0026mut self, addr: VirtualAddress) -\u003e Result\u003c()\u003e {\n    |                                                              ---------- expected `core::result::Result\u003c(), memory::error::MemoryTrackerError\u003e` because of return type\n...\n341 |         mmio_guard.map(page_start.0)\n    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Result\u003c(), MemoryTrackerError\u003e`, found `Result\u003c(), Error\u003e`\n    |\n    \u003d note: expected enum `core::result::Result\u003c_, memory::error::MemoryTrackerError\u003e`\n               found enum `core::result::Result\u003c_, hyp::Error\u003e`\nhelp: use `?` to coerce and return an appropriate `Err`, and wrap the resulting value in `Ok` so the expression remains of type `Result`\n    |\n341 |         Ok(mmio_guard.map(page_start.0)?)\n    |         +++                            ++\n    \n```",
+      "parentUuid": "88d05605_adb5b799",
+      "range": {
+        "startLine": 339,
+        "startChar": 36,
+        "endLine": 339,
+        "endChar": 81
+      },
+      "revId": "a60c3b27450ac93ac62033c7a66f84172aff75e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
