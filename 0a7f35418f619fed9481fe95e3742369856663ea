@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccdb8d17_25c39643",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-24T09:04:51Z",
+      "side": 1,
+      "message": "I thought we had linters running in the CI?\n\nYou might want to `rustfmt`",
+      "range": {
+        "startLine": 498,
+        "startChar": 14,
+        "endLine": 498,
+        "endChar": 38
+      },
+      "revId": "0a7f35418f619fed9481fe95e3742369856663ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcbcfa32_15ee6551",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-24T09:04:51Z",
+      "side": 1,
+      "message": "I\u0027m surprised that `rustfmt` doesn\u0027t complain about this not being uppercase(?)",
+      "range": {
+        "startLine": 498,
+        "startChar": 14,
+        "endLine": 498,
+        "endChar": 38
+      },
+      "revId": "0a7f35418f619fed9481fe95e3742369856663ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
