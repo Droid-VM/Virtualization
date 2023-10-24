@@ -37,6 +37,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "91498565_332360db",
+        "filename": "vm_payload/include-restricted/vm_payload_restricted.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-10-24T10:07:03Z",
+      "side": 1,
+      "message": "Please add comment on what happens if invalid challenge or (challenge_size \u003d 0 || challenge_size \u003e 64) is passed.",
+      "range": {
+        "startLine": 61,
+        "startChar": 1,
+        "endLine": 62,
+        "endChar": 51
+      },
+      "revId": "234f63898a75c4a0a393e02500a060760762daad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67168189_99f5c7b2",
+        "filename": "vm_payload/libvm_payload.map.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-10-24T10:07:03Z",
+      "side": 1,
+      "message": "Apologies if I already mentioned this before, we should add #introduced\u003d34 for these symbols as well. Fine to do in a separate cl if you prefer",
+      "range": {
+        "startLine": 3,
+        "startChar": 4,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "234f63898a75c4a0a393e02500a060760762daad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "203fb028_ad950f51",
         "filename": "vm_payload/src/api.rs",
         "patchSetId": 2
