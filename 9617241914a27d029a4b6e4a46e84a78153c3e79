@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1f25de80_5b94afb8",
+        "filename": "apex/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-24T16:15:10Z",
+      "side": 1,
+      "message": "I\u0027m afraid not.\n\nThe flag is mostly to cover us on pre-V releases - none of these changes should be visible there, regardless of AVF support.\n\nBut we need to return unsupported on devices that support AVF but only for non-protected VMs. Currently we can only determine that at runtime.",
+      "parentUuid": "65055006_8a34e389",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 6
+      },
+      "revId": "9617241914a27d029a4b6e4a46e84a78153c3e79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8474a339_c6dc1379",
         "filename": "apex/virtualizationservice.rc",
         "patchSetId": 8
