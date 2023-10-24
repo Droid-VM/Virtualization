@@ -57,6 +57,10 @@ use vmbase::virtio::pci;
 
 const NEXT_BCC_SIZE: usize = GUEST_PAGE_SIZE;
 
+unsafe fn test_ayeaye() {
+    // Doesn't actually do anything.
+}
+
 fn main(
     fdt: &mut Fdt,
     signed_kernel: &[u8],
@@ -64,6 +68,7 @@ fn main(
     current_bcc_handover: &[u8],
     mut debug_policy: Option<&mut [u8]>,
 ) -> Result<Range<usize>, RebootReason> {
+    test_ayeaye();
     info!("pVM firmware");
     debug!("FDT: {:?}", fdt.as_ptr());
     debug!("Signed kernel: {:?} ({:#x} bytes)", signed_kernel.as_ptr(), signed_kernel.len());
