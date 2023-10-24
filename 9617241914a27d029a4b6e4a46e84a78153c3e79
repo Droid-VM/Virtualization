@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "65055006_8a34e389",
+        "filename": "apex/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-10-24T16:05:06Z",
+      "side": 1,
+      "message": "Would using the build-time flag here mean we don\u0027t need to deal with unsupported errors?\n\nThat is... can we count on all devices that expose the HAL to also fully support the RKP VM? If so, that\u0027s the ideal solution I think.",
+      "parentUuid": "c65462a2_8ec6d4dd",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 6
+      },
+      "revId": "9617241914a27d029a4b6e4a46e84a78153c3e79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8474a339_c6dc1379",
         "filename": "apex/virtualizationservice.rc",
         "patchSetId": 8
@@ -82,6 +106,29 @@
         "startChar": 0,
         "endLine": 80,
         "endChar": 88
+      },
+      "revId": "9617241914a27d029a4b6e4a46e84a78153c3e79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "089567be_d5fba176",
+        "filename": "virtualizationservice/src/remote_provisioning.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-10-24T16:05:06Z",
+      "side": 1,
+      "message": "nit: I\u0027m not sure carrying strings around like this this is necessary, since the caller knows which method failed.\n\nI only nag about it because explicitly copying function names into strings is error prone (at least it is in the absence of something like the `function_name` crate).",
+      "range": {
+        "startLine": 148,
+        "startChar": 47,
+        "endLine": 148,
+        "endChar": 61
       },
       "revId": "9617241914a27d029a4b6e4a46e84a78153c3e79",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
