@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1b753ae_99c0b657",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-24T13:25:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "173afbec_438f4a77",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 38
+      },
+      "revId": "e10062a4f93513d77923a8b3e9b9f5c1ad91d9a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05abdca2_eb0ce7f4",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-24T12:27:48Z",
       "side": 1,
       "message": "Some sort of ZVec wiping of this seems like a good idea - and in the various other places it appears.",
+      "range": {
+        "startLine": 85,
+        "startChar": 13,
+        "endLine": 85,
+        "endChar": 24
+      },
+      "revId": "e10062a4f93513d77923a8b3e9b9f5c1ad91d9a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "927471dc_73277e8f",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-24T13:25:55Z",
+      "side": 1,
+      "message": "Done. But this vector will be anyway be passed as plaintext from microdroid to vm_payload.",
+      "parentUuid": "05abdca2_eb0ce7f4",
       "range": {
         "startLine": 85,
         "startChar": 13,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "650bd86e_290ef424",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-24T13:25:55Z",
+      "side": 1,
+      "message": "This function returns a [PrivateKey](https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/dice/open_dice/src/dice.rs;l\u003d110;drc\u003d94a06358687288ba0762c568dd6087639cc7b15c) type, which is zeroized on drop.",
+      "parentUuid": "ee8faff9_40fa4869",
+      "range": {
+        "startLine": 120,
+        "startChar": 8,
+        "endLine": 120,
+        "endChar": 21
+      },
+      "revId": "e10062a4f93513d77923a8b3e9b9f5c1ad91d9a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "095e4a8c_fb2a03c8",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01acdaa7_df08d63a",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-24T13:25:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "095e4a8c_fb2a03c8",
+      "range": {
+        "startLine": 130,
+        "startChar": 30,
+        "endLine": 130,
+        "endChar": 40
+      },
+      "revId": "e10062a4f93513d77923a8b3e9b9f5c1ad91d9a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18b990e0_e7fed976",
@@ -106,6 +202,30 @@
       "writtenOn": "2023-10-24T12:27:48Z",
       "side": 1,
       "message": "And the function does not retain any reference to it.",
+      "range": {
+        "startLine": 53,
+        "startChar": 15,
+        "endLine": 53,
+        "endChar": 74
+      },
+      "revId": "e10062a4f93513d77923a8b3e9b9f5c1ad91d9a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1553b46_cddaae98",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-24T13:25:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18b990e0_e7fed976",
       "range": {
         "startLine": 53,
         "startChar": 15,
