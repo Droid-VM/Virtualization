@@ -46,6 +46,30 @@
       },
       "revId": "a60c3b27450ac93ac62033c7a66f84172aff75e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "287bd232_5899b043",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-10-24T12:54:06Z",
+      "side": 1,
+      "message": "Yeah, the `?` operator applies `From::from` to errors. That\u0027s what was being done before so I assume it is still desired, unless we want to discard details of the error here for some reason.",
+      "parentUuid": "3795b73f_a0b96116",
+      "range": {
+        "startLine": 339,
+        "startChar": 36,
+        "endLine": 339,
+        "endChar": 81
+      },
+      "revId": "a60c3b27450ac93ac62033c7a66f84172aff75e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
