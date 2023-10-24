@@ -16,6 +16,75 @@
       "message": "Hi, PTAL.",
       "revId": "9617241914a27d029a4b6e4a46e84a78153c3e79",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c65462a2_8ec6d4dd",
+        "filename": "apex/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-24T15:44:15Z",
+      "side": 1,
+      "message": "This should be conditional on our build-time flag.",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 6
+      },
+      "revId": "9617241914a27d029a4b6e4a46e84a78153c3e79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8474a339_c6dc1379",
+        "filename": "apex/virtualizationservice.rc",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-24T15:44:15Z",
+      "side": 1,
+      "message": "And so should this. Unfortunately that\u0027s a bit harder.\n\nI suggest:\n- Split this into 2, moving vfio_handler into its own .rc file. (We should probably have done that originally, although I can understand why we didn\u0027t.)\n- Have a current + next version of this file, and then change the Android.bp to include the relevant one. It\u0027s ugly, since it introduces duplication, but it works - see e.g. aosp/2755031.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 86
+      },
+      "revId": "9617241914a27d029a4b6e4a46e84a78153c3e79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "068574b9_678a2fec",
+        "filename": "virtualizationservice/src/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-24T15:44:15Z",
+      "side": 1,
+      "message": "And we should only do this if the feature is enabled.\n(Then you don\u0027t need the runtime checks below - although you still need the separate checks for protected VMs.)",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 88
+      },
+      "revId": "9617241914a27d029a4b6e4a46e84a78153c3e79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
