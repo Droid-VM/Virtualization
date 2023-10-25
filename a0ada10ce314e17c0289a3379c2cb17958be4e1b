@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f8b78fb_0ff16f00",
+        "filename": "secretkeeper/dice_policy/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-25T12:32:18Z",
+      "side": 1,
+      "message": "I would be tempted to move this into the test where it\u0027s used, or at least closer to it.",
+      "range": {
+        "startLine": 261,
+        "startChar": 0,
+        "endLine": 264,
+        "endChar": 44
+      },
+      "revId": "a0ada10ce314e17c0289a3379c2cb17958be4e1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92e59411_0b9417fb",
+        "filename": "secretkeeper/dice_policy/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-25T12:32:18Z",
+      "side": 1,
+      "message": "Move inside the method below?",
+      "range": {
+        "startLine": 265,
+        "startChar": 0,
+        "endLine": 266,
+        "endChar": 35
+      },
+      "revId": "a0ada10ce314e17c0289a3379c2cb17958be4e1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a449f8d_68e4f62a",
+        "filename": "secretkeeper/dice_policy/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-25T12:32:18Z",
+      "side": 1,
+      "message": "s/init/new/\n\nAlso, a comment on either the struct or this function, just to explain what this is doing? It\u0027s a lot of code to grok otherwise.",
+      "range": {
+        "startLine": 275,
+        "startChar": 11,
+        "endLine": 275,
+        "endChar": 15
+      },
+      "revId": "a0ada10ce314e17c0289a3379c2cb17958be4e1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "745cbaa3_0e774a41",
+        "filename": "secretkeeper/dice_policy/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-25T12:32:18Z",
+      "side": 1,
+      "message": "A comment somewhere here that the element with key 2 is deliberately ignored might be useful.",
+      "range": {
+        "startLine": 299,
+        "startChar": 0,
+        "endLine": 303,
+        "endChar": 51
+      },
+      "revId": "a0ada10ce314e17c0289a3379c2cb17958be4e1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8330aa3_bf06fdc5",
+        "filename": "secretkeeper/dice_policy/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-25T12:32:18Z",
+      "side": 1,
+      "message": "Self",
+      "range": {
+        "startLine": 325,
+        "startChar": 12,
+        "endLine": 325,
+        "endChar": 23
+      },
+      "revId": "a0ada10ce314e17c0289a3379c2cb17958be4e1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
