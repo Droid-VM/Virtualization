@@ -132,6 +132,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "668e8716_88578a2d",
+        "filename": "vm_payload/include-restricted/vm_payload_restricted.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-10-25T11:39:47Z",
+      "side": 1,
+      "message": "To be honest, I found it quite difficult to review these as 2 separate patches. However, since we already had this \"non-API\" API in vm_payload_restricted.h, and you are just renaming it in this patch, I guess it is ok to be a separate patch ¯\\_(ツ)_/¯",
+      "parentUuid": "6a9697d8_a8eb0228",
+      "range": {
+        "startLine": 61,
+        "startChar": 1,
+        "endLine": 62,
+        "endChar": 51
+      },
+      "revId": "234f63898a75c4a0a393e02500a060760762daad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "67168189_99f5c7b2",
         "filename": "vm_payload/libvm_payload.map.txt",
         "patchSetId": 2
