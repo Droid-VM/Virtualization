@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38882645_69ce4860",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-25T10:05:20Z",
+      "side": 1,
+      "message": "I\u0027d recommend introducing a dedicated error type, like all other modules do, wrapping `FdtError` type when necessary and allowing proper dedicated errors to be returned otherwise (as `FdtError::Internal` is already being overused in this CL and I\u0027m not sure how you\u0027ll represent the result of the HVCs using `FdtError`).",
+      "range": {
+        "startLine": 74,
+        "startChar": 72,
+        "endLine": 74,
+        "endChar": 82
+      },
+      "revId": "fd2dadb62ceb33d7670445e7a0c5eeade8d032a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ee10d95_a8144d19",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-25T10:05:20Z",
+      "side": 1,
+      "message": "Wrong check: `\u003c#interrupt-cells\u003e` defines the number of cells **per interrupt** but `interrupts.len()` should be the number of interrupts (`.collect()` currently makes it the product of the two).\n\nTo illustrate, `/timer` has:\n```\ninterrupts \u003d \u003cGIC_PPI 0xd IRQ_TYPE_LEVEL_LOW\n              GIC_PPI 0xe IRQ_TYPE_LEVEL_LOW\n\t      GIC_PPI 0xb IRQ_TYPE_LEVEL_LOW\n\t      GIC_PPI 0xa IRQ_TYPE_LEVEL_LOW\u003e;\n```\ni.e. 4 interrupts with 3 cells per interrupt.",
+      "range": {
+        "startLine": 87,
+        "startChar": 11,
+        "endLine": 87,
+        "endChar": 50
+      },
+      "revId": "fd2dadb62ceb33d7670445e7a0c5eeade8d032a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67bfb216_e224716b",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-25T10:05:20Z",
+      "side": 1,
+      "message": "But `self` isn\u0027t `vm_dtbo` so consuming it doesn\u0027t help.\n\nFor example,\n```\n// vm_dtbo: \u0026mut Fdt\nlet info \u003d DeviceInfo::new_validated(vm_dtbo, fdt).unwrap().unwrap();\n// can\u0027t use vm_dtbo here as it\u0027s borrowed (good!)\ninfo.apply_overlay_and_patch(mut_fdt).unwrap();\n// can use vm_dtbo again as the borrower is gone (bad!)\n```\n\nAt the very least, this method should be `unsafe` although this is probably symptomatic of the OOP abstraction not being well encapsulated.",
+      "range": {
+        "startLine": 187,
+        "startChar": 8,
+        "endLine": 187,
+        "endChar": 64
+      },
+      "revId": "fd2dadb62ceb33d7670445e7a0c5eeade8d032a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb0380ba_56f918df",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-25T10:05:20Z",
+      "side": 1,
+      "message": "Can\u0027t this be done in the constructor, so that you don\u0027t need to carry around the `(AssignableDevice { ... }, None)`?",
+      "range": {
+        "startLine": 192,
+        "startChar": 8,
+        "endLine": 192,
+        "endChar": 54
+      },
+      "revId": "fd2dadb62ceb33d7670445e7a0c5eeade8d032a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba5aaa5b_91d55803",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-25T10:05:20Z",
+      "side": 1,
+      "message": "let\u0027s not commit statements used during development; if you want actual debug statements, use `debug!`.",
+      "range": {
+        "startLine": 198,
+        "startChar": 12,
+        "endLine": 198,
+        "endChar": 19
+      },
+      "revId": "fd2dadb62ceb33d7670445e7a0c5eeade8d032a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ceafe3ed_d3648871",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-25T10:05:20Z",
+      "side": 1,
+      "message": "Similarly, this VM DTBO patching could probably be folded into the constructor\u0027s loop so that we don\u0027t loop 4 times through `devices`.",
+      "range": {
+        "startLine": 216,
+        "startChar": 8,
+        "endLine": 216,
+        "endChar": 49
+      },
+      "revId": "fd2dadb62ceb33d7670445e7a0c5eeade8d032a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "221ef73d_d03aaa7a",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-25T10:05:20Z",
+      "side": 1,
+      "message": "Should we trim from `fdt` any symbol that was added by the VM DTBO, at this point?",
+      "range": {
+        "startLine": 236,
+        "startChar": 8,
+        "endLine": 236,
+        "endChar": 9
+      },
+      "revId": "fd2dadb62ceb33d7670445e7a0c5eeade8d032a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "436e5859_94bef323",
+        "filename": "pvmfw/src/reboot_reason.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-25T10:05:20Z",
+      "side": 1,
+      "message": "Empty file?",
+      "revId": "fd2dadb62ceb33d7670445e7a0c5eeade8d032a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
