@@ -615,6 +615,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "40440d50_e25140e2",
+        "filename": "vm_payload/include-restricted/vm_payload_restricted.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-25T12:02:49Z",
+      "side": 1,
+      "message": "Yeah, agreed. I was more wondering about whether it was ok to add things there now, from a flagging perspective - but I think as long as we can guarantee the API will fail harmlessly when the flag is off, we\u0027re good.\n\n(I horribly mis-phrased my original comment I\u0027m afraid.)\n\nThis still isn\u0027t actually an NDK API of course, since in general 3P apps cannot access it, but a quasi-NDK one.",
+      "parentUuid": "4b055e2c_d7af85cc",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 52
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c74aeb8d_45c3761f",
         "filename": "vm_payload/include-restricted/vm_payload_restricted.h",
         "patchSetId": 7
