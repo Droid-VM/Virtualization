@@ -164,6 +164,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9ae90a9e_bc00c003",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-25T12:00:30Z",
+      "side": 1,
+      "message": "It\u0027s a non-null pointer to a nullable pointer. result may not be null, but on entry or return *result may be.",
+      "parentUuid": "982ba1fc_80ccbb14",
+      "range": {
+        "startLine": 148,
+        "startChar": 35,
+        "endLine": 148,
+        "endChar": 54
+      },
+      "revId": "5921e6e3a9b14dde01079b852c84978806d4b1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19de60af_65246ae1",
         "filename": "vm_payload/include/vm_payload.h",
         "patchSetId": 19
