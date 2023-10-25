@@ -591,6 +591,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4b055e2c_d7af85cc",
+        "filename": "vm_payload/include-restricted/vm_payload_restricted.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-10-25T11:57:12Z",
+      "side": 1,
+      "message": "If this is going to be used by 1p apps, then it should be moved to vm_payload.h\n\nvm_payload_restricted.h is for vm_payload APIs that are only used by platform VMs (so not really APIs)",
+      "parentUuid": "e448e886_73b81f97",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 52
+      },
+      "revId": "4e2900ec872cbcf023299cfaffd0365ae17c8483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c74aeb8d_45c3761f",
         "filename": "vm_payload/include-restricted/vm_payload_restricted.h",
         "patchSetId": 7

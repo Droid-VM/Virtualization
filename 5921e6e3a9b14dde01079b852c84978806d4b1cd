@@ -1,0 +1,257 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5d21d92_984260e3",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-10-25T11:57:12Z",
+      "side": 1,
+      "message": "Should we check if the feature is enabled? Or is the check done somewhere else?",
+      "range": {
+        "startLine": 84,
+        "startChar": 3,
+        "endLine": 84,
+        "endChar": 89
+      },
+      "revId": "5921e6e3a9b14dde01079b852c84978806d4b1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed795ea2_6bae9568",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-10-25T11:57:12Z",
+      "side": 1,
+      "message": "Illegal state sounds like a wrong exception code here... Will illegal argument make more sense?",
+      "range": {
+        "startLine": 88,
+        "startChar": 33,
+        "endLine": 88,
+        "endChar": 61
+      },
+      "revId": "5921e6e3a9b14dde01079b852c84978806d4b1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "415fce80_8581ad3c",
+        "filename": "service_vm/comm/src/csr.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-10-25T11:57:12Z",
+      "side": 1,
+      "message": "Please add unit tests for this file",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 50
+      },
+      "revId": "5921e6e3a9b14dde01079b852c84978806d4b1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e8a221f_2083955a",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-10-25T11:57:12Z",
+      "side": 1,
+      "message": "Please add comment \"Introduced in API 35\".\nSee: go/android-ndk-api-guidelines#compatibilty-types-enums\n\n\nAlso, shouldn\u0027t we add some fields for this struct? E.g. private key and certificate chain?",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 26
+      },
+      "revId": "5921e6e3a9b14dde01079b852c84978806d4b1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d2a6dfb_a8d68d65",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-10-25T11:57:12Z",
+      "side": 1,
+      "message": "Please add comment \"Introduced in in API 35\".\nSee: go/android-ndk-api-guidelines#compatibilty-types-enums",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 3
+      },
+      "revId": "5921e6e3a9b14dde01079b852c84978806d4b1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60a71a94_68cc463d",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-10-25T11:57:12Z",
+      "side": 1,
+      "message": "Please add backing type for this enum",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 12
+      },
+      "revId": "5921e6e3a9b14dde01079b852c84978806d4b1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "982ba1fc_80ccbb14",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-10-25T11:57:12Z",
+      "side": 1,
+      "message": "Is it nullable or nonnull? :)",
+      "range": {
+        "startLine": 148,
+        "startChar": 35,
+        "endLine": 148,
+        "endChar": 54
+      },
+      "revId": "5921e6e3a9b14dde01079b852c84978806d4b1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19de60af_65246ae1",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-10-25T11:57:12Z",
+      "side": 1,
+      "message": "What will happen if caller passes invalid attestation result?",
+      "range": {
+        "startLine": 150,
+        "startChar": 1,
+        "endLine": 151,
+        "endChar": 92
+      },
+      "revId": "5921e6e3a9b14dde01079b852c84978806d4b1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9374e0f1_67c2f133",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-10-25T11:57:12Z",
+      "side": 1,
+      "message": "What will happen if |size| is smaller than the total size of the certificate chain? Will this method still return total size? Or will it return |size|?",
+      "range": {
+        "startLine": 169,
+        "startChar": 11,
+        "endLine": 169,
+        "endChar": 50
+      },
+      "revId": "5921e6e3a9b14dde01079b852c84978806d4b1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffd3d29a_fbd83539",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-10-25T11:57:12Z",
+      "side": 1,
+      "message": "Should we add a comment that these constants must be kept in sync with the enum in the vm_payload.h? Can we add a test enforcing that they are in sync?",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 1
+      },
+      "revId": "5921e6e3a9b14dde01079b852c84978806d4b1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d02c01e8_434dac4a",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-10-25T11:57:12Z",
+      "side": 1,
+      "message": "Is it possible to add tests for these APIs?",
+      "range": {
+        "startLine": 284,
+        "startChar": 25,
+        "endLine": 284,
+        "endChar": 54
+      },
+      "revId": "5921e6e3a9b14dde01079b852c84978806d4b1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
