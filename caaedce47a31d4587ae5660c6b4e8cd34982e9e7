@@ -22,6 +22,30 @@
       },
       "revId": "caaedce47a31d4587ae5660c6b4e8cd34982e9e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "300f5f70_d735f75b",
+        "filename": "vmbase/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-26T10:53:31Z",
+      "side": 1,
+      "message": "Ah, that\u0027s why I wasn\u0027t using `log` before!\n\nThanks for catching this, I\u0027ll rework it.",
+      "parentUuid": "d0bc05a2_fa8bbce6",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 98
+      },
+      "revId": "caaedce47a31d4587ae5660c6b4e8cd34982e9e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
