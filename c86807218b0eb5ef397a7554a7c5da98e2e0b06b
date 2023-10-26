@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "be758c65_8e6eff88",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-26T11:51:13Z",
+      "side": 1,
+      "message": "TBH, I don\u0027t know what\u0027s standard.. Picked `ANDROID_PRODUCT_OUT` because it starts with `ANDROID_`.",
+      "parentUuid": "e402635b_e8dc5528",
+      "range": {
+        "startLine": 434,
+        "startChar": 12,
+        "endLine": 434,
+        "endChar": 15
+      },
+      "revId": "c86807218b0eb5ef397a7554a7c5da98e2e0b06b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "658341f1_7391d6d7",
         "filename": "pvmfw/README.md",
         "patchSetId": 5
@@ -49,6 +73,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "3ffd1697_290accc5",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-26T11:51:13Z",
+      "side": 1,
+      "message": "Ack. I still couldn\u0027t find better name -- `mkbootimg` is used to build actual `bootimg` but this tool isn\u0027t..",
+      "parentUuid": "658341f1_7391d6d7",
+      "range": {
+        "startLine": 437,
+        "startChar": 0,
+        "endLine": 437,
+        "endChar": 10
+      },
+      "revId": "c86807218b0eb5ef397a7554a7c5da98e2e0b06b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "88a0d618_ff7bb652",
         "filename": "tests/pvmfw/tools/PvmfwTool.java",
         "patchSetId": 5
@@ -60,6 +108,30 @@
       "writtenOn": "2023-10-26T11:16:49Z",
       "side": 1,
       "message": "This probably should have been a separate commit or, at least, documented in the commit message. Oh, well ...",
+      "range": {
+        "startLine": 28,
+        "startChar": 45,
+        "endLine": 28,
+        "endChar": 53
+      },
+      "revId": "c86807218b0eb5ef397a7554a7c5da98e2e0b06b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d9e9dbb_cb1bc9ad",
+        "filename": "tests/pvmfw/tools/PvmfwTool.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-26T11:51:13Z",
+      "side": 1,
+      "message": "Separated into 3 pieces.",
+      "parentUuid": "88a0d618_ff7bb652",
       "range": {
         "startLine": 28,
         "startChar": 45,
