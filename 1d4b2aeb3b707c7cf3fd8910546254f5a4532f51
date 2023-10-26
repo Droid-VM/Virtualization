@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c234294d_35b3110b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-26T16:18:11Z",
+      "side": 1,
+      "message": "Also typo: constrained",
+      "range": {
+        "startLine": 19,
+        "startChar": 39,
+        "endLine": 19,
+        "endChar": 50
+      },
+      "revId": "1d4b2aeb3b707c7cf3fd8910546254f5a4532f51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac5c72a9_216632f5",
+        "filename": "secretkeeper/dice_policy/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-26T16:18:11Z",
+      "side": 1,
+      "message": "I wouldn\u0027t reformat this, it\u0027s much more readable before.\nYou can ignore the lint. Or possibly put it in a markdown code block? I\u0027m not sure if that shuts it up.",
+      "range": {
+        "startLine": 139,
+        "startChar": 4,
+        "endLine": 142,
+        "endChar": 100
+      },
+      "revId": "1d4b2aeb3b707c7cf3fd8910546254f5a4532f51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6eadaa9e_d69187e4",
+        "filename": "secretkeeper/dice_policy/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-26T16:18:11Z",
+      "side": 1,
+      "message": "Does this have to be nested? I think it could be just another function, and that would make it easier to read.",
+      "range": {
+        "startLine": 347,
+        "startChar": 0,
+        "endLine": 376,
+        "endChar": 13
+      },
+      "revId": "1d4b2aeb3b707c7cf3fd8910546254f5a4532f51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7684b8d2_71cec018",
+        "filename": "secretkeeper/dice_policy/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-26T16:18:11Z",
+      "side": 1,
+      "message": "constrain",
+      "range": {
+        "startLine": 391,
+        "startChar": 40,
+        "endLine": 391,
+        "endChar": 50
+      },
+      "revId": "1d4b2aeb3b707c7cf3fd8910546254f5a4532f51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

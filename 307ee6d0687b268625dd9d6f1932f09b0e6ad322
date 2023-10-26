@@ -333,6 +333,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "041c9cd5_c932e8ed",
+        "filename": "secretkeeper/dice_policy/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-26T16:18:11Z",
+      "side": 1,
+      "message": "If from_dice_chain returns Err(x), x is not logged - so we won\u0027t know why it failed. And that\u0027s the most interesting part of a test.\n\nI think you can in fact just call unwrap() - if there is an error then that will panic, which will log the error and cause the test to fail. Or use expect! to include your helpful message.",
+      "parentUuid": "1300216f_9d705b81",
+      "range": {
+        "startLine": 434,
+        "startChar": 0,
+        "endLine": 440,
+        "endChar": 10
+      },
+      "revId": "307ee6d0687b268625dd9d6f1932f09b0e6ad322",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6be9396d_7d427295",
         "filename": "secretkeeper/dice_policy/src/lib.rs",
         "patchSetId": 2
