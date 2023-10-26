@@ -426,10 +426,16 @@ partition. To do that, set the system property `hypervisor.pvmfw.path` to point
 to the pvmfw image you pushed as shown below:
 
 ```shell
-m pvmfw_img
-adb push out/target/product/generic_arm64/system/etc/pvmfw.img /data/local/tmp/pvmfw.img
+m pvmfw-tool pvmfw_bin
+PVMFW_BIN=${OUT}/system/etc/pvmfw.bin
+BCC_DAT=${ANDROID_BUILD_TOP}/packages/modules/Virtualization/tests/pvmfw/assets/bcc.dat
+CUSTOM_PVMFW_IMG=/data/local/tmp/pvmfw.img
+
+pvmfw-tool custom_pvmfw.img ${PVMFW_BIN} ${BCC_DAT}
+
+adb push custom_pvmfw.img ${CUSTOM_PVMFW_IMG}
 adb root
-adb shell setprop hypervisor.pvmfw.path /data/local/tmp/pvmfw.img
+adb shell setprop hypervisor.pvmfw.path ${CUSTOM_PVMFW_IMG}
 ```
 
 Then run a protected VM, for example:
