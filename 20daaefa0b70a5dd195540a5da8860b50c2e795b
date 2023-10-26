@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abda242a_67012a3c",
+        "filename": "vmbase/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-26T11:57:26Z",
+      "side": 1,
+      "message": "Isn\u0027t that exactly what expect() does?\nhttps://doc.rust-lang.org/src/core/result.rs.html#1651",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 5
+      },
+      "revId": "20daaefa0b70a5dd195540a5da8860b50c2e795b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
