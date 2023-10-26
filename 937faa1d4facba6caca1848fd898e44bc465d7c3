@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11526e1d_806acc3a",
+        "filename": "TEST_MAPPING",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-26T10:41:35Z",
+      "side": 1,
+      "message": "Don\u0027t forget this",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 66
+      },
+      "revId": "937faa1d4facba6caca1848fd898e44bc465d7c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c8c601f_133a1b1c",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/packet.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-26T10:41:35Z",
+      "side": 1,
+      "message": "If this is pub, the encapsulation is pretty weak.",
+      "range": {
+        "startLine": 56,
+        "startChar": 26,
+        "endLine": 56,
+        "endChar": 40
+      },
+      "revId": "937faa1d4facba6caca1848fd898e44bc465d7c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4c98907_4f86e3b8",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/packet.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-26T10:41:35Z",
+      "side": 1,
+      "message": "Rather than cloning a potentially large area, could this take self by value?",
+      "range": {
+        "startLine": 70,
+        "startChar": 37,
+        "endLine": 70,
+        "endChar": 51
+      },
+      "revId": "937faa1d4facba6caca1848fd898e44bc465d7c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db7beade_d308ca21",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/request_response_impl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-26T10:41:35Z",
+      "side": 1,
+      "message": "Why is the opcode passed to us if there\u0027s only one possible value?",
+      "range": {
+        "startLine": 48,
+        "startChar": 11,
+        "endLine": 48,
+        "endChar": 39
+      },
+      "revId": "937faa1d4facba6caca1848fd898e44bc465d7c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10615322_c1a6e84f",
+        "filename": "secretkeeper/secretkeeper_comm/src/util.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-26T10:41:35Z",
+      "side": 1,
+      "message": "There are so many copies of this code all over the place.\nNot sure it\u0027s worth the effort to centralize though.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 5
+      },
+      "revId": "937faa1d4facba6caca1848fd898e44bc465d7c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
