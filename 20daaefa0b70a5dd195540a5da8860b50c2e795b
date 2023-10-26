@@ -22,6 +22,30 @@
       },
       "revId": "20daaefa0b70a5dd195540a5da8860b50c2e795b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45385cfb_a5cdb58e",
+        "filename": "vmbase/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-26T12:24:08Z",
+      "side": 1,
+      "message": "Doesn\u0027t `.expect()` print `\"{e:?}\"` instead of `\"{e}\"`?",
+      "parentUuid": "abda242a_67012a3c",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 5
+      },
+      "revId": "20daaefa0b70a5dd195540a5da8860b50c2e795b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
