@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e402635b_e8dc5528",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-26T11:16:49Z",
+      "side": 1,
+      "message": "Good point! Isn\u0027t the standard env variable `ANDROID_BUILD_OUT` (or `ANDROID_OUT`)?",
+      "range": {
+        "startLine": 434,
+        "startChar": 12,
+        "endLine": 434,
+        "endChar": 15
+      },
+      "revId": "c86807218b0eb5ef397a7554a7c5da98e2e0b06b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "658341f1_7391d6d7",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-26T11:16:49Z",
+      "side": 1,
+      "message": "As I [commented then](https://android-review.googlesource.com/c/platform/packages/modules/Virtualization/+/2423330/comment/422f8cfa_0478479e/), I wish this script had a more descriptive name (in the vein of `mkbootimg` and friends). In particular now that we\u0027re advertising the use of it.",
+      "range": {
+        "startLine": 437,
+        "startChar": 0,
+        "endLine": 437,
+        "endChar": 10
+      },
+      "revId": "c86807218b0eb5ef397a7554a7c5da98e2e0b06b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88a0d618_ff7bb652",
+        "filename": "tests/pvmfw/tools/PvmfwTool.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-26T11:16:49Z",
+      "side": 1,
+      "message": "This probably should have been a separate commit or, at least, documented in the commit message. Oh, well ...",
+      "range": {
+        "startLine": 28,
+        "startChar": 45,
+        "endLine": 28,
+        "endChar": 53
+      },
+      "revId": "c86807218b0eb5ef397a7554a7c5da98e2e0b06b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
