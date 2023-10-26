@@ -34,6 +34,24 @@
       "parentUuid": "117d0c44_e3aefd1c",
       "revId": "3aa97b0b26b115a9cd0adabdfb8888c58cac1895",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "975d4a86_3f165e8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-26T12:27:10Z",
+      "side": 1,
+      "message": "There\u0027s no `main()` in Java. And executable\u0027s entry point can only be specified with the Java manifest. `pvmfw-tool-manifest.txt` is the manifest for the `pvmfw-tool`. Without this CL, Java can\u0027t locate main and it wouldn\u0027t start at all.\n\nPreviously, I moved the hostside custom pvmfw test, but forgot to modify `.txt`.",
+      "parentUuid": "ccf9a31e_2f6ab760",
+      "revId": "3aa97b0b26b115a9cd0adabdfb8888c58cac1895",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
