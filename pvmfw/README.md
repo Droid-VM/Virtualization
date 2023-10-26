@@ -431,6 +431,16 @@ can be appended to the `pvmfw.bin` image, making use of the "legacy" mode that
 predates the configuration data format:
 
 ```shell
+<<<<<<< PATCH SET (8b9b34 pvmfw-tool: Make pvmfw-tool usable for testing custom pvmfw)
+m pvmfw-tool pvmfw_bin
+PVMFW_BIN=${OUT}/system/etc/pvmfw.bin
+BCC_DAT=${ANDROID_BUILD_TOP}/packages/modules/Virtualization/tests/pvmfw/assets/bcc.dat
+CUSTOM_PVMFW_IMG=/data/local/tmp/pvmfw.img
+
+pvmfw-tool custom_pvmfw.img ${PVMFW_BIN} ${BCC_DAT}
+
+adb push custom_pvmfw.img ${CUSTOM_PVMFW_IMG}
+=======
 m pvmfw_bin
 cp out/target/product/generic_arm64/system/etc/pvmfw.bin ${PVMFW_BIN}
 truncate -s '%4KiB' ${PVMFW_BIN} && cat ${CONFIG_OR_BCC} >> ${PVMFW_BIN}
@@ -441,8 +451,9 @@ The result can then be pushed to the device. Pointing the system property
 
 ```shell
 adb push ${PVMFW_BIN} /data/local/tmp/pvmfw.img
+>>>>>>> BASE      (3d9cac Merge "Fix license" into main)
 adb root
-adb shell setprop hypervisor.pvmfw.path /data/local/tmp/pvmfw.img
+adb shell setprop hypervisor.pvmfw.path ${CUSTOM_PVMFW_IMG}
 ```
 
 Then run a protected VM, for example:
