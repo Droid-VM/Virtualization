@@ -186,6 +186,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b82dea0c_cca40cd8",
+        "filename": "apex/virtualizationservice.rc",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-10-27T14:15:45Z",
+      "side": 1,
+      "message": "+1, and the vfio_handler itself should be guarded by the build time flag as well.",
+      "parentUuid": "8474a339_c6dc1379",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 86
+      },
+      "revId": "9617241914a27d029a4b6e4a46e84a78153c3e79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "068574b9_678a2fec",
         "filename": "virtualizationservice/src/main.rs",
         "patchSetId": 8

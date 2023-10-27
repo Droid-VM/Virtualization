@@ -70,6 +70,30 @@
       },
       "revId": "1abe8a4f5da559c42acd006f1b29a8e8a6386c08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4b85666_ebb65830",
+        "filename": "virtualizationservice/vfio_handler/Android.bp",
+        "patchSetId": 12
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-10-27T14:15:45Z",
+      "side": 1,
+      "message": "I think the current approach should work as well. There is an easy way to check:\n\nbuild the APEX, and then use `deapexer list out/dist/com.android.virt.apex` to list its content.\n\nIf this approach doesn\u0027t work, then adding the vfio_handler.rc as one of the init_rc properties of the com.android.virt APEX will definitely work.\n\nHaving said all of that, we should also conditionally add the vfio_handler.rc based on the value of the ENABLE_DEVICE_ASSIGNMENT flag",
+      "parentUuid": "6e71e352_7bfc340a",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 33
+      },
+      "revId": "1abe8a4f5da559c42acd006f1b29a8e8a6386c08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
