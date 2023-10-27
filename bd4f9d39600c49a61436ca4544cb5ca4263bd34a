@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0dc06cc_a9ca0f3f",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-27T11:37:32Z",
+      "side": 1,
+      "message": "Uber-nit: this could be encapsulated as a struct method `FdtPropertyStruct::get_by_offset(\u0026\u0027a Fdt, c_int) -\u003e Result\u003c\u0026\u0027a Self\u003e`.",
+      "range": {
+        "startLine": 228,
+        "startChar": 12,
+        "endLine": 235,
+        "endChar": 69
+      },
+      "revId": "bd4f9d39600c49a61436ca4544cb5ca4263bd34a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8eddccb1_47e9882e",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-27T11:37:32Z",
+      "side": 1,
+      "message": "```suggestion\n        self.fdt.get_from_ptr(self.property.data_ptr(), self.property.data_len())\n```\nTo let the caller log the error (with more context)?",
+      "range": {
+        "startLine": 246,
+        "startChar": 8,
+        "endLine": 246,
+        "endChar": 94
+      },
+      "revId": "bd4f9d39600c49a61436ca4544cb5ca4263bd34a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
