@@ -46,6 +46,30 @@
       },
       "revId": "1abe8a4f5da559c42acd006f1b29a8e8a6386c08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e71e352_7bfc340a",
+        "filename": "virtualizationservice/vfio_handler/Android.bp",
+        "patchSetId": 12
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-27T14:12:58Z",
+      "side": 1,
+      "message": "I think that\u0027s fine - as long as it\u0027s an /etc/*.rc I believe it gets picked up; there are other APEXes doing that.\nYou could rename the other one for consistency.\n@ioffe@google.com is the expert.",
+      "parentUuid": "2f98cd91_efaf9190",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 33
+      },
+      "revId": "1abe8a4f5da559c42acd006f1b29a8e8a6386c08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
