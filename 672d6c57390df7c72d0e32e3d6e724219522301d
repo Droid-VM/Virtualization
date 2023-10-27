@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c268b3f8_0c93423d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-27T16:18:11Z",
+      "side": 1,
+      "message": "Fixed build issue in `x86*` target. `c_char` is `*const i8` there, whil `CStr::to_bytes()`",
+      "revId": "672d6c57390df7c72d0e32e3d6e724219522301d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "795200f5_ee869c01",
@@ -24,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "012120c4_ebb5d8d1",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-27T16:18:11Z",
+      "side": 1,
+      "message": "Done.\n\nFYI, `subnode_with_namelen()` can find empty name, but `node()` can\u0027t find empty name because `fdt_path_offset()` ignores the trailing `/` or consecutive \u0027/\u0027.",
+      "parentUuid": "795200f5_ee869c01",
+      "range": {
+        "startLine": 196,
+        "startChar": 15,
+        "endLine": 196,
+        "endChar": 16
+      },
+      "revId": "672d6c57390df7c72d0e32e3d6e724219522301d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00c6f541_d41d1a1c",
@@ -37,6 +78,30 @@
       "writtenOn": "2023-10-27T11:36:50Z",
       "side": 1,
       "message": "nit: I don\u0027t think `name` has to be a `CString` and you can let the standard handle the terminating `\u0027\\0\u0027` for you:\n```\nlet name: String \u003d subnode_name.to_bytes().take(len).collect();\nlet path \u003d CString::new(format!(\"{node_path}/{name}\")).unwrap();\n```\n(untested but you get the idea)",
+      "range": {
+        "startLine": 209,
+        "startChar": 12,
+        "endLine": 209,
+        "endChar": 38
+      },
+      "revId": "672d6c57390df7c72d0e32e3d6e724219522301d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0acbdb92_b9f905af",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-27T16:18:11Z",
+      "side": 1,
+      "message": "Thank you for the suggestion. I didn\u0027t considered `format!`, but it looks neat solution. Done",
+      "parentUuid": "00c6f541_d41d1a1c",
       "range": {
         "startLine": 209,
         "startChar": 12,
