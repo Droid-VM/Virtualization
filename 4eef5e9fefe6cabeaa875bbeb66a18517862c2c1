@@ -22,6 +22,30 @@
       },
       "revId": "4eef5e9fefe6cabeaa875bbeb66a18517862c2c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "274082d8_9d4556cb",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-27T16:17:26Z",
+      "side": 1,
+      "message": "Implemented `From` instead, as `From` documentation says \u0027Onen should always prefer implementing `From` over `Into`\u0027.",
+      "parentUuid": "30589bb3_d42d757f",
+      "range": {
+        "startLine": 501,
+        "startChar": 19,
+        "endLine": 501,
+        "endChar": 22
+      },
+      "revId": "4eef5e9fefe6cabeaa875bbeb66a18517862c2c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
