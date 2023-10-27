@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "795200f5_ee869c01",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-27T11:36:50Z",
+      "side": 1,
+      "message": "I wonder what happens when `subnode_with_namelen(nodelen\u003d0)`, would you mind adding coverage for it?",
+      "range": {
+        "startLine": 196,
+        "startChar": 15,
+        "endLine": 196,
+        "endChar": 16
+      },
+      "revId": "672d6c57390df7c72d0e32e3d6e724219522301d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00c6f541_d41d1a1c",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-27T11:36:50Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think `name` has to be a `CString` and you can let the standard handle the terminating `\u0027\\0\u0027` for you:\n```\nlet name: String \u003d subnode_name.to_bytes().take(len).collect();\nlet path \u003d CString::new(format!(\"{node_path}/{name}\")).unwrap();\n```\n(untested but you get the idea)",
+      "range": {
+        "startLine": 209,
+        "startChar": 12,
+        "endLine": 209,
+        "endChar": 38
+      },
+      "revId": "672d6c57390df7c72d0e32e3d6e724219522301d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
