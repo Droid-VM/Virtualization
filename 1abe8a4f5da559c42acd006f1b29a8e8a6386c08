@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37f6ec43_7de0abd2",
+        "filename": "virtualizationservice/vfio_handler/Android.bp",
+        "patchSetId": 12
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-27T13:55:50Z",
+      "side": 1,
+      "message": "I don\u0027t think this does the right thing - we need the .rc file inside the APEX, and I suspect this puts it outside.\nI could be wrong, but I think you need this to be a prebuilt like the other one.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 33
+      },
+      "revId": "1abe8a4f5da559c42acd006f1b29a8e8a6386c08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
