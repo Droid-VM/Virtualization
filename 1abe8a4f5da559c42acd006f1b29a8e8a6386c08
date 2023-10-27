@@ -118,6 +118,30 @@
       },
       "revId": "1abe8a4f5da559c42acd006f1b29a8e8a6386c08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34efeac7_0ac323c1",
+        "filename": "virtualizationservice/vfio_handler/Android.bp",
+        "patchSetId": 12
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-27T14:39:05Z",
+      "side": 1,
+      "message": "I don\u0027t see `vfio_hanlder.rc` in the list with the current approach. I moved the file to /apex.\n\n\u003e Having said all of that, we should also conditionally add the vfio_handler.rc based on the value of the ENABLE_DEVICE_ASSIGNMENT flag\n\n@inseob@google.com fyi",
+      "parentUuid": "b4b85666_ebb65830",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 33
+      },
+      "revId": "1abe8a4f5da559c42acd006f1b29a8e8a6386c08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
