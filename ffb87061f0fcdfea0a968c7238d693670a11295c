@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28ed484e_21740b46",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-27T11:37:10Z",
+      "side": 1,
+      "message": "That\u0027s not correct, **all** the cells of the node are overwritten by [`fdt_nop_node()`](https://cs.android.com/android/platform/superproject/main/+/148330e81f990517e3b59aeb0b3df791ead0030d:external/dtc/libfdt/fdt_wip.c;l\u003d83;drc\u003d148330e81f990517e3b59aeb0b3df791ead0030d):\n```\nint fdt_nop_node(void *fdt, int nodeoffset)\n{\n\tint endoffset;\n\n\tendoffset \u003d fdt_node_end_offset_(fdt, nodeoffset);\n\tif (endoffset \u003c 0)\n\t\treturn endoffset;\n\n\tfdt_nop_region_(fdt_offset_ptr_w(fdt, nodeoffset, 0),\n\t\t\tendoffset - nodeoffset);\n\treturn 0;\n}\n```\n(this comment also applies to the documentation of `.nop_self()`)",
+      "range": {
+        "startLine": 718,
+        "startChar": 35,
+        "endLine": 718,
+        "endChar": 66
+      },
+      "revId": "ffb87061f0fcdfea0a968c7238d693670a11295c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
