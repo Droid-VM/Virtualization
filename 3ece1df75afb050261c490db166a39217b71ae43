@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41076424_7fc7fc61",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-27T07:10:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff8a60a5_b6a22e41",
+      "range": {
+        "startLine": 641,
+        "startChar": 0,
+        "endLine": 646,
+        "endChar": 57
+      },
+      "revId": "3ece1df75afb050261c490db166a39217b71ae43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04a249bd_609d4323",
@@ -291,6 +315,30 @@
       "side": 1,
       "message": "Not done? Please use `{add_,}subnode_namelen()` to match libfdt and avoid the proliferation of almost-identical function names!",
       "parentUuid": "84573da9_4a20d33b",
+      "range": {
+        "startLine": 666,
+        "startChar": 11,
+        "endLine": 666,
+        "endChar": 32
+      },
+      "revId": "3ece1df75afb050261c490db166a39217b71ae43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65a80bcd_d855533a",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-27T07:10:45Z",
+      "side": 1,
+      "message": "Revised functions a bit. I picked `_with_namelen` and not `_namelen` on purpose, because `with` seems to be the naming convention for differentiates functions with parameters.",
+      "parentUuid": "30fc2179_f31de72a",
       "range": {
         "startLine": 666,
         "startChar": 11,
