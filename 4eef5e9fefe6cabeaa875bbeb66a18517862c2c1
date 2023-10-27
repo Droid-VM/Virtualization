@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30589bb3_d42d757f",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-27T11:37:17Z",
+      "side": 1,
+      "message": "Would you mind `impl Into\u003cu32\u003e for Phandle` and make this private so that the user doesn\u0027t have to know the structure\u0027s layout (\"`.0`\") and client code isn\u0027t able to bypass RAII by using `Phandle(x)`?",
+      "range": {
+        "startLine": 501,
+        "startChar": 19,
+        "endLine": 501,
+        "endChar": 22
+      },
+      "revId": "4eef5e9fefe6cabeaa875bbeb66a18517862c2c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
