@@ -212,6 +212,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a05b9903_e5d2ec9b",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-10-30T18:00:03Z",
+      "side": 1,
+      "message": "IMO, VMDTBO `__symbols__` node can be NOPed right before applying the overlay. \n\nIf there were more overlays to apply, then it should be kept. Or, if we want to compare the contents of crosvm `__symbols__` node with `fdt` `__symbols__` node as part of DT validation.",
+      "parentUuid": "78d63670_2848262e",
+      "range": {
+        "startLine": 236,
+        "startChar": 8,
+        "endLine": 236,
+        "endChar": 9
+      },
+      "revId": "fd2dadb62ceb33d7670445e7a0c5eeade8d032a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "436e5859_94bef323",
         "filename": "pvmfw/src/reboot_reason.rs",
         "patchSetId": 3
