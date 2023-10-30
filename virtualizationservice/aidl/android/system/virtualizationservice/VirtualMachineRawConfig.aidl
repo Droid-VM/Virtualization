@@ -72,4 +72,7 @@ parcelable VirtualMachineRawConfig {
 
     /** List of SysFS nodes of devices to be assigned */
     String[] devices;
+
+    /** Public key of the vendor partition. */
+    byte[] vendor_public_key;
 }
