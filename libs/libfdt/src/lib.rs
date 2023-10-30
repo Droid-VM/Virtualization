@@ -505,18 +505,29 @@ impl<'a> FdtNode<'a> {
 pub struct Phandle(u32);
 
 impl Phandle {
+    /// Maximum valid value for device tree phandles.
+    pub const MAX: Self = Self(libfdt_bindgen::FDT_MAX_PHANDLE);
+
     /// Creates a new Phandle
-    pub fn new(value: u32) -> Result<Self> {
-        if value == 0 || value > libfdt_bindgen::FDT_MAX_PHANDLE {
-            return Err(FdtError::BadPhandle);
+    pub const fn new(value: u32) -> Option<Self> {
+        if value == 0 || value > Self::MAX.0 {
+            return None;
         }
-        Ok(Self(value))
+        Some(Self(value))
     }
 }
 
 impl From<Phandle> for u32 {
     fn from(phandle: Phandle) -> u32 {
         phandle.0
+    }
+}
+
+impl TryFrom<u32> for Phandle {
+    type Error = FdtError;
+
+    fn try_from(value: u32) -> Result<Self> {
+        Self::new(value).ok_or(FdtError::BadPhandle)
     }
 }
 
@@ -964,7 +975,7 @@ impl Fdt {
         let ret = unsafe { libfdt_bindgen::fdt_find_max_phandle(self.as_ptr(), &mut phandle) };
 
         fdt_err_expect_zero(ret)?;
-        Phandle::new(phandle)
+        phandle.try_into()
     }
 
     /// Returns a node with the phandle

@@ -142,10 +142,22 @@ fn node_supernode_at_depth() {
 
 #[test]
 fn phandle_new() {
-    let phandle_u32 = 0x55;
-    let phandle = Phandle::new(phandle_u32).unwrap();
+    let valid_phandles =
+        [0x1, 0x55, u32::from(Phandle::MAX).checked_sub(1).unwrap(), u32::from(Phandle::MAX)];
 
-    assert_eq!(u32::from(phandle), phandle_u32);
+    for value in valid_phandles {
+        let phandle: Phandle = Phandle::new(value).unwrap();
+
+        assert_eq!(value.try_into(), Ok(phandle));
+        assert_eq!(u32::from(phandle), value);
+    }
+
+    let bad_phandles = [0, u32::from(Phandle::MAX).checked_add(1).unwrap()];
+
+    for value in bad_phandles {
+        assert_eq!(Phandle::new(value), None);
+        assert_eq!(Phandle::try_from(value), Err(FdtError::BadPhandle));
+    }
 }
 
 #[test]
