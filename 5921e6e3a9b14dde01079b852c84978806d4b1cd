@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6708a9de_4fd3cc54",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-30T10:29:27Z",
+      "side": 1,
+      "message": "It is checked in virtualizationservice [1]\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/virtualizationservice/src/aidl.rs;l\u003d164;drc\u003d35e818dd44390ef0d05a312a9cb3c0b6199cafc8",
+      "parentUuid": "f5d21d92_984260e3",
+      "range": {
+        "startLine": 84,
+        "startChar": 3,
+        "endLine": 84,
+        "endChar": 89
+      },
+      "revId": "5921e6e3a9b14dde01079b852c84978806d4b1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed795ea2_6bae9568",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-25T11:57:12Z",
       "side": 1,
       "message": "Illegal state sounds like a wrong exception code here... Will illegal argument make more sense?",
+      "range": {
+        "startLine": 88,
+        "startChar": 33,
+        "endLine": 88,
+        "endChar": 61
+      },
+      "revId": "5921e6e3a9b14dde01079b852c84978806d4b1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4194d3bc_c9c9f7c0",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-30T10:29:27Z",
+      "side": 1,
+      "message": "That\u0027s also a bit weird. The argument for this function is \"challenge\", which has been checked in vm_payload that it isn\u0027t illegal when it\u0027s passed here.",
+      "parentUuid": "ed795ea2_6bae9568",
       "range": {
         "startLine": 88,
         "startChar": 33,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92c29a51_e26cb79d",
+        "filename": "service_vm/comm/src/csr.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-30T10:29:27Z",
+      "side": 1,
+      "message": "Done. Otherwise the (de)serialization is also tested in microdroid_manager_test.",
+      "parentUuid": "415fce80_8581ad3c",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 50
+      },
+      "revId": "5921e6e3a9b14dde01079b852c84978806d4b1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e8a221f_2083955a",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-10-25T11:57:12Z",
       "side": 1,
       "message": "Please add comment \"Introduced in API 35\".\nSee: go/android-ndk-api-guidelines#compatibilty-types-enums\n\n\nAlso, shouldn\u0027t we add some fields for this struct? E.g. private key and certificate chain?",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 26
+      },
+      "revId": "5921e6e3a9b14dde01079b852c84978806d4b1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3112a08_dddfe53f",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-30T10:29:27Z",
+      "side": 1,
+      "message": "This is just an opaque handle. Users will pass it back to the API to retrieve the private key and the certificate chain.",
+      "parentUuid": "2e8a221f_2083955a",
       "range": {
         "startLine": 32,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4dcf538_b54876ed",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-30T10:29:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d2a6dfb_a8d68d65",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 3
+      },
+      "revId": "5921e6e3a9b14dde01079b852c84978806d4b1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60a71a94_68cc463d",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-10-25T11:57:12Z",
       "side": 1,
       "message": "Please add backing type for this enum",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 12
+      },
+      "revId": "5921e6e3a9b14dde01079b852c84978806d4b1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "150b0a5f_de828c4f",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-30T10:29:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60a71a94_68cc463d",
       "range": {
         "startLine": 37,
         "startChar": 0,
@@ -233,6 +377,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f45d8958_e14c0523",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-30T10:29:27Z",
+      "side": 1,
+      "message": "I added some comment explaining the conditions for invoking this API to avoid undefined behavior.",
+      "parentUuid": "19de60af_65246ae1",
+      "range": {
+        "startLine": 150,
+        "startChar": 1,
+        "endLine": 151,
+        "endChar": 92
+      },
+      "revId": "5921e6e3a9b14dde01079b852c84978806d4b1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9374e0f1_67c2f133",
@@ -246,6 +414,30 @@
       "writtenOn": "2023-10-25T11:57:12Z",
       "side": 1,
       "message": "What will happen if |size| is smaller than the total size of the certificate chain? Will this method still return total size? Or will it return |size|?",
+      "range": {
+        "startLine": 169,
+        "startChar": 11,
+        "endLine": 169,
+        "endChar": 50
+      },
+      "revId": "5921e6e3a9b14dde01079b852c84978806d4b1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e284d5b_c4bf13d6",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-30T10:29:27Z",
+      "side": 1,
+      "message": "\u003e What will happen if |size| is smaller than the total size of the certificate chain..\n\nThe result will be truncated in this case. This is explained in |size| above. The return value is always the total size of the cert chain.",
+      "parentUuid": "9374e0f1_67c2f133",
       "range": {
         "startLine": 169,
         "startChar": 11,
@@ -305,6 +497,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5d3c1182_13a1edb1",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-30T10:29:27Z",
+      "side": 1,
+      "message": "\u003e Can we import these from the header via bindgen or something?\n\nI attempted to define this enum in Rust and then just declare it in vm_payload.h to prevent duplicate definitions in two places. However, I encountered two problems:\n\n1. ISO C++ forbids forward references to \u0027enum\u0027 types.\n```\npackages/modules/Virtualization/vm_payload/include/vm_payload.h:39:6: error: ISO C++ forbids forward references to \u0027enum\u0027 types\nenum attestation_status_t;\n     ^\npackages/modules/Virtualization/vm_payload/include/vm_payload.h:140:27: error: \u0027AVmPayload_requestAttestation\u0027 has C-linkage specified, but returns incomplete type \u0027enum attestation_status_t\u0027 which could be incompatible with C [-Werror,-Wreturn-type-c-linkage]\nenum attestation_status_t AVmPayload_requestAttestation(\n                          ^\n```\n2. As the header file no longer includes the enum, it results in an empty enum in the bindgen code used by the client. This is inconvenient if clients want to check the enum value and react accordingly. In `bindings.rs` we have\n```\n#[repr(i32)]\n#[doc \u003d \" Introduced in API 35.\\n Remote attestation status types returned from remote attestation functions.\"]\n#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]\npub enum attestation_status_t {\n    __bindgen_cannot_repr_c_on_empty_enum \u003d 0,\n}\n```\n\n\u003e Should we add a comment that these constants must be kept in sync with the enum in the vm_payload.h? \n\nI added a comment for this.\n\n\u003e Can we add a test enforcing that they are in sync?\n\nHow would you like to check that?",
+      "parentUuid": "f63a02e2_dbe173cc",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 1
+      },
+      "revId": "5921e6e3a9b14dde01079b852c84978806d4b1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d02c01e8_434dac4a",
         "filename": "vm_payload/src/api.rs",
         "patchSetId": 19
@@ -316,6 +532,30 @@
       "writtenOn": "2023-10-25T11:57:12Z",
       "side": 1,
       "message": "Is it possible to add tests for these APIs?",
+      "range": {
+        "startLine": 284,
+        "startChar": 25,
+        "endLine": 284,
+        "endChar": 54
+      },
+      "revId": "5921e6e3a9b14dde01079b852c84978806d4b1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30f7f073_47ab9821",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-30T10:29:27Z",
+      "side": 1,
+      "message": "We can add e2e tests for this API once the remote attestation feature is complete. The current cl only focuses on the client VM input part, we don\u0027t have a valid output to test yet.",
+      "parentUuid": "d02c01e8_434dac4a",
       "range": {
         "startLine": 284,
         "startChar": 25,
