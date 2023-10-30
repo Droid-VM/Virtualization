@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34d1da34_24d1fe63",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-30T16:25:48Z",
+      "side": 1,
+      "message": "I\u0027m sorry but I couldn\u0027t think of a good usecase of having `const Phandle`. Could you elaborate more about the motivation?\n\nI\u0027m asking this because explicit phandle is discouraged [1]. Here\u0027s the snippet from the doc.\n\n\u003e Most devicetrees in DTS (see Appendix A) will not contain explicit phandle properties. The DTC tool automatically inserts the phandle properties when the DTS is compiled into the binary DTB format.\n\n.. so I couldn\u0027t think of a good use case of having hardcoded phandle value in the code. Could you help me to understand the motivation better? I\u0027m worrying whether having `Phandle::new()` encourages bad pattern or not.\n\n[1]: https://devicetree-specification.readthedocs.io/en/latest/chapter2-devicetree-basics.html#phandle",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 0
+      },
+      "revId": "18c539d3ded9aa2bc5eae1f1eee536bb69f6a3a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "947ce8f9_bd02a5b1",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-30T16:25:48Z",
+      "side": 1,
+      "message": "You may also want to define `MIN` for consistency.",
+      "range": {
+        "startLine": 509,
+        "startChar": 14,
+        "endLine": 509,
+        "endChar": 17
+      },
+      "revId": "18c539d3ded9aa2bc5eae1f1eee536bb69f6a3a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "678b1201_03f74b2b",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-30T16:25:48Z",
+      "side": 1,
+      "message": "Question: We already have `Phandle::new()`. Why would we also need `try_from()`?",
+      "range": {
+        "startLine": 526,
+        "startChar": 0,
+        "endLine": 533,
+        "endChar": 0
+      },
+      "revId": "18c539d3ded9aa2bc5eae1f1eee536bb69f6a3a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c14a96a_8e2f2e32",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-30T16:25:48Z",
+      "side": 1,
+      "message": "Q) is this necessary?",
+      "range": {
+        "startLine": 149,
+        "startChar": 19,
+        "endLine": 149,
+        "endChar": 28
+      },
+      "revId": "18c539d3ded9aa2bc5eae1f1eee536bb69f6a3a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
