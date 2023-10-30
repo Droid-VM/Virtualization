@@ -17,6 +17,7 @@
 mod aidl;
 mod atom;
 mod remote_provisioning;
+mod rkpd_client;
 mod rkpvm;
 
 use crate::aidl::{
@@ -33,7 +34,7 @@ use std::os::unix::raw::{pid_t, uid_t};
 use std::path::Path;
 
 const LOG_TAG: &str = "VirtualizationService";
-const REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME: &str =
+pub(crate) const REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME: &str =
     "android.hardware.security.keymint.IRemotelyProvisionedComponent/avf";
 
 fn get_calling_pid() -> pid_t {

@@ -16,6 +16,7 @@
 //! The RKP VM will be recognized and attested by the RKP server periodically and
 //! serves as a trusted platform to attest a client VM.
 
+use crate::rkpd_client::get_attestation_key;
 use android_hardware_security_rkp::aidl::android::hardware::security::keymint::MacedPublicKey::MacedPublicKey;
 use anyhow::{bail, Context, Result};
 use service_vm_comm::{GenerateCertificateRequestParams, Request, Response};
@@ -27,6 +28,7 @@ pub(crate) fn request_certificate(csr: &[u8]) -> Result<Vec<u8>> {
     // TODO(b/271275206): Send the correct request type with client VM's
     // information to be attested.
     let request = Request::Reverse(csr.to_vec());
+    let _attestation_key = get_attestation_key();
     match vm.process_request(request).context("Failed to process request")? {
         Response::Reverse(cert) => Ok(cert),
         _ => bail!("Incorrect response type"),
