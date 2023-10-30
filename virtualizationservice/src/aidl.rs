@@ -158,11 +158,11 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
         Ok(cids)
     }
 
-    fn requestAttestation(&self, csr: &[u8]) -> binder::Result<Vec<u8>> {
+    fn requestAttestation(&self, csr: &[u8], client_vm_cid: i32) -> binder::Result<Vec<u8>> {
         check_manage_access()?;
         info!("Received csr. Requestting attestation...");
         if cfg!(remote_attestation) {
-            request_attestation(csr)
+            request_attestation(csr, client_vm_cid)
                 .context("Failed to request attestation")
                 .with_log()
                 .or_service_specific_exception(-1)

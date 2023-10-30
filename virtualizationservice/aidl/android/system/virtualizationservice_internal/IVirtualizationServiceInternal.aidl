@@ -59,10 +59,12 @@ interface IVirtualizationServiceInternal {
      * Requests a certificate chain for the provided certificate signing request (CSR).
      *
      * @param csr The certificate signing request.
+     * @param clientVmCid The Client VM CID. The uniqueness of the client VM CID ensures
+     *                    that no two client VMs with different CIDs are able to correlate keys.
      * @return A sequence of DER-encoded X.509 certificates that make up the attestation
      *         key's certificate chain. The attestation key is provided in the CSR.
      */
-    byte[] requestAttestation(in byte[] csr);
+    byte[] requestAttestation(in byte[] csr, int clientVmCid);
 
     /**
      * Get a list of assignable devices.
