@@ -527,6 +527,19 @@ pub struct FdtNodeMut<'a> {
 }
 
 impl<'a> FdtNodeMut<'a> {
+    /// Creates a new FdtNodeMut with offset.
+    ///
+    /// # Safety
+    ///
+    /// Prefer using Rust wrapper instead of using raw offset.
+    pub unsafe fn from_offset(fdt: &'a mut Fdt, offset: c_int) -> Result<Self> {
+        // SAFETY: Accesses are constrained to the DT totalsize.
+        // (validated by fdt_check_node_offset_).
+        let ret = unsafe { libfdt_bindgen::fdt_check_node_offset_(fdt.as_ptr(), offset) };
+        fdt_err(ret)?;
+        Ok(Self { fdt, offset })
+    }
+
     /// Appends a property name-value (possibly empty) pair to the given node.
     pub fn appendprop<T: AsRef<[u8]>>(&mut self, name: &CStr, value: &T) -> Result<()> {
         // SAFETY: Accesses are constrained to the DT totalsize (validated by ctor).
@@ -785,6 +798,15 @@ impl<'a> FdtNodeMut<'a> {
         let ret = unsafe { libfdt_bindgen::fdt_nop_node(self.fdt.as_mut_ptr(), self.offset) };
 
         fdt_err_expect_zero(ret)
+    }
+
+    /// Returns offset of the FdtNodeMut.
+    ///
+    /// # Safety
+    ///
+    /// Prefer using Rust wrapper instead of using raw offset.
+    pub unsafe fn offset(&self) -> c_int {
+        self.offset
     }
 }
 
