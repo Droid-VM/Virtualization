@@ -61,6 +61,7 @@ use binder::{
 };
 use disk::QcowFile;
 use lazy_static::lazy_static;
+use libfdt::Fdt;
 use log::{debug, error, info, warn};
 use microdroid_payload_config::{OsConfig, Task, TaskType, VmPayloadConfig};
 use nix::unistd::pipe;
@@ -69,7 +70,7 @@ use rustutils::system_properties;
 use semver::VersionReq;
 use std::collections::HashSet;
 use std::convert::TryInto;
-use std::ffi::CStr;
+use std::ffi::{CStr, CString};
 use std::fs::{canonicalize, read_dir, remove_file, File, OpenOptions};
 use std::io::{BufRead, BufReader, Error, ErrorKind, Write};
 use std::num::{NonZeroU16, NonZeroU32};
@@ -77,6 +78,7 @@ use std::os::unix::io::{FromRawFd, IntoRawFd};
 use std::os::unix::raw::pid_t;
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex, Weak};
+use vbmeta::VbMetaImage;
 use vmconfig::VmConfig;
 use vsock::VsockStream;
 use zip::ZipArchive;
@@ -99,6 +101,9 @@ const ANDROID_VM_INSTANCE_VERSION: u16 = 1;
 const MICRODROID_OS_NAME: &str = "microdroid";
 
 const UNFORMATTED_STORAGE_MAGIC: &str = "UNFORMATTED-STORAGE";
+
+/// Roughly estimated sufficient size for storing vendor public key into DTBO.
+const EMPTY_VENDOR_DT_OVERLAY_BUF_SIZE: usize = 10000;
 
 /// crosvm requires all partitions to be a multiple of 4KiB.
 const PARTITION_GRANULARITY_BYTES: u64 = 4096;
@@ -458,6 +463,13 @@ impl VirtualizationService {
             }
         };
 
+        if !config.vendor_public_key.is_empty() {
+            let dtbo_for_vendor_image = temporary_directory.join("dtbo_vendor");
+            create_dtbo_for_vendor_image(&config.vendor_public_key, &dtbo_for_vendor_image)
+                .context("Failed to write vendor_public_key")
+                .or_service_specific_exception(-1)?;
+        }
+
         let vfio_devices = if !config.devices.is_empty() {
             let mut set = HashSet::new();
             for device in config.devices.iter() {
@@ -521,6 +533,27 @@ impl VirtualizationService {
         state.add_vm(Arc::downgrade(&instance));
         Ok(VirtualMachine::create(instance))
     }
+}
+
+fn create_dtbo_for_vendor_image(vendor_public_key: &[u8], dtbo: &PathBuf) -> Result<()> {
+    let mut buf = vec![0; EMPTY_VENDOR_DT_OVERLAY_BUF_SIZE];
+    let fdt = Fdt::create_empty_tree(buf.as_mut_slice())
+        .map_err(|e| anyhow!("Failed to create FDT: {:?}", e))?;
+    let mut root = fdt.root_mut().map_err(|e| anyhow!("Failed to get root node: {:?}", e))?;
+
+    let avf_node_name = CString::new("avf")?;
+    let mut node = root
+        .add_subnode(avf_node_name.as_c_str())
+        .map_err(|e| anyhow!("Failed to create avf node: {:?}", e))?;
+
+    let vendor_public_key_name = core::ffi::CStr::from_bytes_with_nul(b"vendor_public_key\0")?;
+    node.setprop(vendor_public_key_name, vendor_public_key)
+        .map_err(|e| anyhow!("Failed to set avf/vendor_public_key: {:?}", e))?;
+
+    fdt.pack().map_err(|e| anyhow!("Failed to pack fdt: {:?}", e))?;
+    let mut file = File::create(dtbo)?;
+    file.write_all(fdt.as_slice())?;
+    Ok(file.flush()?)
 }
 
 fn write_zero_filler(zero_filler_path: &Path) -> Result<()> {
@@ -652,7 +685,16 @@ fn load_app_config(
         vm_config.gdbPort = custom_config.gdbPort;
 
         if let Some(file) = custom_config.vendorImage.as_ref() {
-            add_microdroid_vendor_image(clone_file(file)?, &mut vm_config);
+            let file = clone_file(file)?;
+            let size =
+                file.metadata().context("Failed to get metadata from microdroid-vendor.img")?.len();
+            let vbmeta = VbMetaImage::verify_reader_region(&file, 0, size)
+                .context("Failed to get vbmeta from microdroid-vendor.img")?;
+            vm_config.vendor_public_key = vbmeta
+                .public_key()
+                .ok_or(anyhow!("No public key is extracted from microdroid-vendor.img"))?
+                .to_vec();
+            add_microdroid_vendor_image(file, &mut vm_config);
             append_kernel_param("androidboot.microdroid.mount_vendor=1", &mut vm_config)
         }
 
