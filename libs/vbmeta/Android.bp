@@ -18,6 +18,10 @@ rust_defaults {
 rust_library {
     name: "libvbmeta_rust",
     defaults: ["libvbmeta_rust.defaults"],
+    apex_available: [
+        "//apex_available:platform",
+        "com.android.virt",
+    ],
 }
 
 rust_test_host {
