@@ -63,6 +63,30 @@
       },
       "revId": "3c36ad011b66423cc88f2c0d9449972c1793611a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a9b34ca_7c56701c",
+        "filename": "apex/virtualizationservice_attestation_enabled.rc",
+        "patchSetId": 13
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-30T17:24:09Z",
+      "side": 1,
+      "message": "The daemon (virtualizationservice) should get auto-started when anyone requests the interface - it\u0027s part of being a lazy service. We don\u0027t want it running all the time.",
+      "parentUuid": "b08d41d4_7738dcef",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 22,
+        "endChar": 11
+      },
+      "revId": "3c36ad011b66423cc88f2c0d9449972c1793611a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
