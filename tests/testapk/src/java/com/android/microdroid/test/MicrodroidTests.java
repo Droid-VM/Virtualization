@@ -24,7 +24,6 @@ import static android.system.virtualmachine.VirtualMachineConfig.DEBUG_LEVEL_FUL
 import static android.system.virtualmachine.VirtualMachineConfig.DEBUG_LEVEL_NONE;
 import static android.system.virtualmachine.VirtualMachineManager.CAPABILITY_NON_PROTECTED_VM;
 import static android.system.virtualmachine.VirtualMachineManager.CAPABILITY_PROTECTED_VM;
-
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 import static com.google.common.truth.TruthJUnit.assume;
@@ -2019,11 +2018,10 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                         | OsConstants.S_IROTH
                         | OsConstants.S_IWOTH
                         | OsConstants.S_IXOTH;
-        int expectedPermissions =
-                OsConstants.S_IRUSR
-                        | OsConstants.S_IXUSR
-                        | OsConstants.S_IRGRP
-                        | OsConstants.S_IXGRP;
+        int expectedPermissions = OsConstants.S_IRUSR | OsConstants.S_IXUSR;
+        if (isFeatureEnabled(VirtualMachineManager.FEATURE_MULTI_TENANT)) {
+            expectedPermissions |= OsConstants.S_IRGRP | OsConstants.S_IXGRP;
+        }
         assertThat(testResults.mFileMode & allPermissionsMask).isEqualTo(expectedPermissions);
     }
 
