@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ab68939_1599e66d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-10-30T14:20:00Z",
+      "side": 1,
+      "message": "Can we also add unit tests and (or) CTS for this change? E.g. we should cover cases when a unsigned vendor image is passed, or when corrupted vendor image is passed (in both cases we should check that VM didn\u0027t start).",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 118
+      },
+      "revId": "d29499cf82db7cd186976a1265a3290ef1306db0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57ae0921_5ee5286d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-10-30T14:20:00Z",
+      "side": 1,
+      "message": "Adding ptosi@ to take a look as well, since I don\u0027t know much about libfdt :)",
+      "revId": "d29499cf82db7cd186976a1265a3290ef1306db0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77b33c05_ca0274a0",
+        "filename": "libs/vbmeta/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-10-30T14:20:00Z",
+      "side": 1,
+      "message": "Why do we need to make libvbmeta_rust available to platform?",
+      "range": {
+        "startLine": 22,
+        "startChar": 8,
+        "endLine": 22,
+        "endChar": 36
+      },
+      "revId": "d29499cf82db7cd186976a1265a3290ef1306db0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00deb52f_5381deb5",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-10-30T14:20:00Z",
+      "side": 1,
+      "message": "Can we add unit tests for this function please? :)",
+      "range": {
+        "startLine": 538,
+        "startChar": 3,
+        "endLine": 538,
+        "endChar": 31
+      },
+      "revId": "d29499cf82db7cd186976a1265a3290ef1306db0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
