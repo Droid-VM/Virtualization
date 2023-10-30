@@ -85,6 +85,52 @@
       },
       "revId": "d29499cf82db7cd186976a1265a3290ef1306db0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ad1d9c9_a86ee825",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-30T14:40:20Z",
+      "side": 1,
+      "message": "Did you mean \"`avf`\" instead of \"`\u0026avf`\" as that is an invalid node name (see the DT spec, 2.2.1)?",
+      "range": {
+        "startLine": 544,
+        "startChar": 63,
+        "endLine": 544,
+        "endChar": 67
+      },
+      "revId": "d29499cf82db7cd186976a1265a3290ef1306db0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4dab88b_87716ac1",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-30T14:40:20Z",
+      "side": 1,
+      "message": "Could you use (`std::ffi::`)`CStr` imported on line 73, to avoid mixing `std` and `core`?\n\nAlternatively, you could let the standard handle the `\u0027\\0\u0027` and `b\"\"` for you:\n```\nlet avf_node_name \u003d CString::new(\"avf\")?;\n```\ngetting a `\u0026CStr` out of it either through `\u0026` or `.as_c_str()`.",
+      "range": {
+        "startLine": 544,
+        "startChar": 24,
+        "endLine": 544,
+        "endChar": 39
+      },
+      "revId": "d29499cf82db7cd186976a1265a3290ef1306db0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
