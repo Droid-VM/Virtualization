@@ -21,7 +21,11 @@ use anyhow::{bail, Context, Result};
 use service_vm_comm::{GenerateCertificateRequestParams, Request, Response};
 use service_vm_manager::ServiceVm;
 
-pub(crate) fn request_attestation(csr: &[u8]) -> Result<Vec<u8>> {
+pub(crate) fn request_attestation(
+    csr: &[u8],
+    _remotely_provisioned_keyblob: &[u8],
+    _remotely_provisioned_certs: &[u8],
+) -> Result<Vec<u8>> {
     let mut vm = ServiceVm::start()?;
 
     // TODO(b/271275206): Send the correct request type with client VM's
