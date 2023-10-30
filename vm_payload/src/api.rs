@@ -330,6 +330,9 @@ fn parse_service_specific_error(e: i32) -> attestation_status_t {
         e if e == attestation_status_t::ATTESTATION_ERROR_CSR_AND_KEY_GENERATION as i32 => {
             attestation_status_t::ATTESTATION_ERROR_CSR_AND_KEY_GENERATION
         }
+        e if e == attestation_status_t::ATTESTATION_ERROR_PROVISIONED_KEYS_RETRIEVAL as i32 => {
+            attestation_status_t::ATTESTATION_ERROR_PROVISIONED_KEYS_RETRIEVAL
+        }
         _ => attestation_status_t::ATTESTATION_UNKNOWN_ERROR,
     }
 }
@@ -357,6 +360,10 @@ pub extern "C" fn AVmAttestationResult_resultToString(
         .unwrap(),
         attestation_status_t::ATTESTATION_ERROR_BINDER_TRANSACTION => {
             CStr::from_bytes_with_nul(b"A binder error occurred during the binder transaction.\0")
+                .unwrap()
+        }
+        attestation_status_t::ATTESTATION_ERROR_PROVISIONED_KEYS_RETRIEVAL => {
+            CStr::from_bytes_with_nul(b"Failed to retrieve the remotely provisioned keys.\0")
                 .unwrap()
         }
         _ => CStr::from_bytes_with_nul(

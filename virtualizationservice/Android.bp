@@ -34,6 +34,7 @@ rust_binary {
         "liblibc",
         "liblog_rust",
         "libnix",
+        "librkpd_client",
         "librustutils",
         "libvmclient",
         "libstatslog_virtualization_rust",
@@ -43,6 +44,7 @@ rust_binary {
         "libserde_xml_rs",
         "libservice_vm_comm",
         "libservice_vm_manager",
+        "libvm_payload_status_bindgen",
     ],
     apex_available: ["com.android.virt"],
 }

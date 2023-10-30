@@ -39,7 +39,9 @@ rust_bindgen {
     visibility: [
         ":__subpackages__",
         "//packages/modules/Virtualization/microdroid_manager",
+        "//packages/modules/Virtualization/virtualizationservice",
     ],
+    apex_available: ["com.android.virt"],
 }
 
 // Rust wrappers round the C API for Rust clients.

@@ -57,6 +57,9 @@ typedef enum attestation_status_t : int32_t {
 
     /** A binder error occurred during the binder transaction. */
     ATTESTATION_ERROR_BINDER_TRANSACTION = -10004,
+
+    /** Failed to retrieve the remotely provisioned keys. */
+    ATTESTATION_ERROR_PROVISIONED_KEYS_RETRIEVAL = -10005,
 } attestation_status_t;
 
 /**
