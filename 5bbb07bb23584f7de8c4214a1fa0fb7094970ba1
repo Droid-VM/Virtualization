@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cb0dcfe_1438d6cc",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-30T16:53:18Z",
+      "side": 1,
+      "message": "you may want to change here and other places with `to_str()` for consistency.",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 79
+      },
+      "revId": "5bbb07bb23584f7de8c4214a1fa0fb7094970ba1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "788eb9cc_9d99b469",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-30T16:53:18Z",
+      "side": 1,
+      "message": "Two questions:\n\nQuestion 1) What\u0027s the criteria for calling `unwrap()` vs compare with `Ok(value)`? (i.e. what about `assert_eq!(node.name().unwrap(), name.as_c_str());`?\nI used `name().unwrap()` because error isn\u0027t expected when getting name from valid FDT. I may use the pattern here for testing `name()` itself, but not sure for other places. What do you think?\n\nQuestion 2) what about `assert_eq!(node.name(), Ok(cstr!(\"node_zz\"));`, or move L178 to L181 define `name` when it\u0027s actually used?",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 182,
+        "endChar": 0
+      },
+      "revId": "5bbb07bb23584f7de8c4214a1fa0fb7094970ba1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
