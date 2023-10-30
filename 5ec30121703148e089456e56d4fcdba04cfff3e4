@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74bba889_559763ca",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-30T14:40:02Z",
+      "side": 1,
+      "message": "Can this ever fail? Didn\u0027t we construct this key?",
+      "range": {
+        "startLine": 233,
+        "startChar": 3,
+        "endLine": 233,
+        "endChar": 22
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccdbc208_951ec6e7",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-30T14:40:02Z",
+      "side": 1,
+      "message": "Nit: (Not for this CL): This is for manual testing, I think?\nWe should probably say that here, and perhaps rename client_apk to test_apk.\nAnd can we start actually running it as a test?",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 41
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ec05be5_882848a1",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-30T14:40:02Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 66,
+        "startChar": 9,
+        "endLine": 66,
+        "endChar": 20
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46aaa357_cdc32e11",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-30T14:40:02Z",
+      "side": 1,
+      "message": "In that case this function should be marked unsafe.\nPerhaps better to convert to a reference before calling these?",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 32
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "496e6d3b_46358bff",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-30T14:40:02Z",
+      "side": 1,
+      "message": "What about cert_chain?",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 28
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28ebb050_da8925f1",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-30T14:40:02Z",
+      "side": 1,
+      "message": "You need to say why.",
+      "range": {
+        "startLine": 164,
+        "startChar": 15,
+        "endLine": 165,
+        "endChar": 14
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b9d969d_9b3aa436",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-30T14:40:02Z",
+      "side": 1,
+      "message": "should -\u003e is guaranteed to\n(In general \"should\" is a bad word in a safety clause; the requirements \"must\" be met.)",
+      "range": {
+        "startLine": 167,
+        "startChar": 75,
+        "endLine": 167,
+        "endChar": 81
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "659a17ee_9cb6c815",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-30T14:40:02Z",
+      "side": 1,
+      "message": "No cdi here",
+      "range": {
+        "startLine": 397,
+        "startChar": 45,
+        "endLine": 397,
+        "endChar": 48
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef396e11_95ec5f22",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-30T14:40:02Z",
+      "side": 1,
+      "message": "You require it to be non-null, so this isn\u0027t needed.",
+      "range": {
+        "startLine": 457,
+        "startChar": 0,
+        "endLine": 459,
+        "endChar": 5
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82e7462f_05c013f5",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-30T14:40:02Z",
+      "side": 1,
+      "message": "Maybe an explicit call to `drop()` would be clearer?",
+      "range": {
+        "startLine": 461,
+        "startChar": 4,
+        "endLine": 461,
+        "endChar": 9
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
