@@ -141,6 +141,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d0ed4432_5cc45900",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-30T17:09:03Z",
+      "side": 1,
+      "message": "I can move this to ctor, but multiple loop is still required; Could you double check whether your suggestion is to remove loops?\n\nI need to iterate multiple times anyway because of the borrow checker. For example, when iterating `__symbols__`, I can\u0027t edit `FDT` because iterator keeps immutable references.\n\nI may fold loops for \u0027Clean up unused node and unused properties\u0027, and \u0027Clean up unsued symbols in __symbols__\u0027, but then getting `FdtNodeMut` in the loop looks tricky. Three options:\n\n- Option 1) call `vm_dtbo.node_mut(SYMBOLS_NODE_PATH)` whenever needed: Code will work, but I feel little bad because of unnecessary FDT traversals for getting the same node.\n- Option 2) (unsafe) keep the offset of the `__symbols__` node and use it to regain `FdtNodeMut` for editing `__symbols__` (aosp/2810553): Faster, but seems like a dark magic.\n- Option 3) Keep multiple loops\n\nI previously picked Option 3), but Option 1) seems to be your favorite. Could you share your opinion?",
+      "parentUuid": "ceafe3ed_d3648871",
+      "range": {
+        "startLine": 216,
+        "startChar": 8,
+        "endLine": 216,
+        "endChar": 49
+      },
+      "revId": "fd2dadb62ceb33d7670445e7a0c5eeade8d032a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "221ef73d_d03aaa7a",
         "filename": "pvmfw/src/devices.rs",
         "patchSetId": 3
@@ -152,6 +176,30 @@
       "writtenOn": "2023-10-25T10:05:20Z",
       "side": 1,
       "message": "Should we trim from `fdt` any symbol that was added by the VM DTBO, at this point?",
+      "range": {
+        "startLine": 236,
+        "startChar": 8,
+        "endLine": 236,
+        "endChar": 9
+      },
+      "revId": "fd2dadb62ceb33d7670445e7a0c5eeade8d032a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78d63670_2848262e",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-30T17:09:03Z",
+      "side": 1,
+      "message": "Dear @jakobvukalovic@google.com,\n\nShould we keep symbols from VM DTBO or not?",
+      "parentUuid": "221ef73d_d03aaa7a",
       "range": {
         "startLine": 236,
         "startChar": 8,
