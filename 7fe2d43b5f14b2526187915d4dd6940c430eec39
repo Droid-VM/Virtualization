@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f597975_9487a046",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-31T13:23:33Z",
+      "side": 1,
+      "message": "Would this be neater as a `map_err()`?",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 14
+      },
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52ad53d4_cd5d18a8",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-31T13:23:33Z",
+      "side": 1,
+      "message": "NonNull is copy so you don\u0027t need a reference.",
+      "range": {
+        "startLine": 109,
+        "startChar": 30,
+        "endLine": 109,
+        "endChar": 31
+      },
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0867b898_4ceedc39",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-31T13:23:33Z",
+      "side": 1,
+      "message": "That isn\u0027t true?",
+      "range": {
+        "startLine": 346,
+        "startChar": 44,
+        "endLine": 347,
+        "endChar": 23
+      },
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

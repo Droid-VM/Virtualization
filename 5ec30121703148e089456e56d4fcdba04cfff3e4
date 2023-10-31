@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5d65f9f0_d429f039",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-31T13:23:33Z",
+      "side": 1,
+      "message": "So, what should we do if they don\u0027t correspond?\nThe assert calls below will panic, but we might also just return  a failure.\n\nI think the 2 options that make sense are:\n- Unconditionally panic if it\u0027s wrong, ideally with a helpful error message. I\u0027d do that by making this function return bool and then having one assert on it.\n- Don\u0027t bother checking at all.",
+      "parentUuid": "fc5bea95_73b28fa8",
+      "range": {
+        "startLine": 233,
+        "startChar": 3,
+        "endLine": 233,
+        "endChar": 22
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ccdbc208_951ec6e7",
         "filename": "service_vm/client_apk/src/main.rs",
         "patchSetId": 23
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Yes, currently, this is only for manual testing. However, I do plan to convert it into a test (and/or use it as a demo app) when the client attestation progresses further. It is a bit premature to create a test APK at this stage since this change only addresses the API for client VM attestation. We still need to send this data to the RKP VM and obtain a result. Additionally, we need to see how to mock RKPD to provide remotely provisioned keys.",
       "parentUuid": "ccdbc208_951ec6e7",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 41
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9792406_88aa99bb",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-31T13:23:33Z",
+      "side": 1,
+      "message": "Mmm, I just thought renaming it would make it clearer to reviewers that this isn\u0027t production code.",
+      "parentUuid": "95ecb1c3_9084ea1d",
       "range": {
         "startLine": 14,
         "startChar": 0,
@@ -179,6 +227,30 @@
       "side": 1,
       "message": "I changed `res` to the type `NonNull\u003cAAttestationResult\u003e` then we can keep it without unsafe, wdyt?",
       "parentUuid": "46aaa357_cdc32e11",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 32
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e98a75df_e1387979",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-31T13:23:33Z",
+      "side": 1,
+      "message": "I don\u0027t think that helps - this function still has safety requirements on the pointer, so it isn\u0027t a safe function.\nBut you could call as_ref on the pointer and then pass references to these - then you can explain why you meet the safety requirements.\nOr just mark the function unsafe and comment on its requirements - which then allows you to have shorter safety comments inside the function.",
+      "parentUuid": "f8a13060_be13ad8f",
       "range": {
         "startLine": 109,
         "startChar": 0,
