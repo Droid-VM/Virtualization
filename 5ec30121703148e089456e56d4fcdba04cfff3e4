@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc5bea95_73b28fa8",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-31T10:31:58Z",
+      "side": 1,
+      "message": "This shouldn\u0027t fail and we constructed the key. It primarily verifies that the key parameters in the `CoseKey` correspond to the curve/algorithm we support, ensuring that we can correctly use the EC P-256 curve to restore the key after it (line 228).",
+      "parentUuid": "74bba889_559763ca",
+      "range": {
+        "startLine": 233,
+        "startChar": 3,
+        "endLine": 233,
+        "endChar": 22
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ccdbc208_951ec6e7",
         "filename": "service_vm/client_apk/src/main.rs",
         "patchSetId": 23
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95ecb1c3_9084ea1d",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-31T10:31:58Z",
+      "side": 1,
+      "message": "Yes, currently, this is only for manual testing. However, I do plan to convert it into a test (and/or use it as a demo app) when the client attestation progresses further. It is a bit premature to create a test APK at this stage since this change only addresses the API for client VM attestation. We still need to send this data to the RKP VM and obtain a result. Additionally, we need to see how to mock RKPD to provide remotely provisioned keys.",
+      "parentUuid": "ccdbc208_951ec6e7",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 41
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6ec05be5_882848a1",
         "filename": "service_vm/client_apk/src/main.rs",
         "patchSetId": 23
@@ -60,6 +108,30 @@
       "writtenOn": "2023-10-30T14:40:02Z",
       "side": 1,
       "message": "typo",
+      "range": {
+        "startLine": 66,
+        "startChar": 9,
+        "endLine": 66,
+        "endChar": 20
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4b5b8fb_b9902933",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-31T10:31:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec05be5_882848a1",
       "range": {
         "startLine": 66,
         "startChar": 9,
@@ -95,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f8a13060_be13ad8f",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-31T10:31:58Z",
+      "side": 1,
+      "message": "I changed `res` to the type `NonNull\u003cAAttestationResult\u003e` then we can keep it without unsafe, wdyt?",
+      "parentUuid": "46aaa357_cdc32e11",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 32
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "496e6d3b_46358bff",
         "filename": "service_vm/client_apk/src/main.rs",
         "patchSetId": 23
@@ -106,6 +202,30 @@
       "writtenOn": "2023-10-30T14:40:02Z",
       "side": 1,
       "message": "What about cert_chain?",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 28
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbcb6a11_0b72ac2c",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-31T10:31:58Z",
+      "side": 1,
+      "message": "I added that we only write within the bounds of cert_chain.",
+      "parentUuid": "496e6d3b_46358bff",
       "range": {
         "startLine": 113,
         "startChar": 0,
@@ -139,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2133cb19_3cdf9345",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-31T10:31:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28ebb050_da8925f1",
+      "range": {
+        "startLine": 164,
+        "startChar": 15,
+        "endLine": 165,
+        "endChar": 14
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b9d969d_9b3aa436",
@@ -152,6 +296,30 @@
       "writtenOn": "2023-10-30T14:40:02Z",
       "side": 1,
       "message": "should -\u003e is guaranteed to\n(In general \"should\" is a bad word in a safety clause; the requirements \"must\" be met.)",
+      "range": {
+        "startLine": 167,
+        "startChar": 75,
+        "endLine": 167,
+        "endChar": 81
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be0192d8_57933541",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-31T10:31:58Z",
+      "side": 1,
+      "message": "Done. Thanks.",
+      "parentUuid": "3b9d969d_9b3aa436",
       "range": {
         "startLine": 167,
         "startChar": 75,
@@ -185,6 +353,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01ec89ec_fe1b7638",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-31T10:31:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "659a17ee_9cb6c815",
+      "range": {
+        "startLine": 397,
+        "startChar": 45,
+        "endLine": 397,
+        "endChar": 48
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef396e11_95ec5f22",
@@ -208,6 +400,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12f61f84_215ae775",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-31T10:31:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef396e11_95ec5f22",
+      "range": {
+        "startLine": 457,
+        "startChar": 0,
+        "endLine": 459,
+        "endChar": 5
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82e7462f_05c013f5",
@@ -221,6 +437,30 @@
       "writtenOn": "2023-10-30T14:40:02Z",
       "side": 1,
       "message": "Maybe an explicit call to `drop()` would be clearer?",
+      "range": {
+        "startLine": 461,
+        "startChar": 4,
+        "endLine": 461,
+        "endChar": 9
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "109ab116_1883ae7a",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-31T10:31:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82e7462f_05c013f5",
       "range": {
         "startLine": 461,
         "startChar": 4,

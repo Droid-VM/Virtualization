@@ -119,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31e76aba_a99c0dfd",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-31T10:31:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7258b6a9_41a8a535",
+      "range": {
+        "startLine": 88,
+        "startChar": 33,
+        "endLine": 88,
+        "endChar": 61
+      },
+      "revId": "5921e6e3a9b14dde01079b852c84978806d4b1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "415fce80_8581ad3c",
@@ -557,6 +581,30 @@
       "side": 1,
       "message": "vm_payload.h should be the source of truth for this, since it\u0027s all clients get.\n\nHence the suggestion to use bindgen to make it available to Rust, rather than vice versa.",
       "parentUuid": "5d3c1182_13a1edb1",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 1
+      },
+      "revId": "5921e6e3a9b14dde01079b852c84978806d4b1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea25fadf_4486e48c",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-10-31T10:31:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e13555c_59c0a129",
       "range": {
         "startLine": 50,
         "startChar": 0,
