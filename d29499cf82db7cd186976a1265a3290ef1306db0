@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "54b0abb1_5df68fa4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-10-31T05:57:09Z",
+      "side": 1,
+      "message": "What does corrupted vendor image mean? Is it good to understand that there\u0027s 2 vendor partition in the same image? Or vendor image contains system partition so that colliding our microdroid system image?",
+      "parentUuid": "8ab68939_1599e66d",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 118
+      },
+      "revId": "d29499cf82db7cd186976a1265a3290ef1306db0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "57ae0921_5ee5286d",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e11f99df_c08c1351",
+        "filename": "libs/vbmeta/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-10-31T05:57:09Z",
+      "side": 1,
+      "message": "Thanks for mentioning. I was new for using `apex_available`, so I thought I should mark `//apex_available:platform` through dependencies like I did on `com.android.virt`, but it wasn\u0027t. Done!",
+      "parentUuid": "77b33c05_ca0274a0",
+      "range": {
+        "startLine": 22,
+        "startChar": 8,
+        "endLine": 22,
+        "endChar": 36
+      },
+      "revId": "d29499cf82db7cd186976a1265a3290ef1306db0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00deb52f_5381deb5",
@@ -77,6 +125,30 @@
       "writtenOn": "2023-10-30T14:20:00Z",
       "side": 1,
       "message": "Can we add unit tests for this function please? :)",
+      "range": {
+        "startLine": 538,
+        "startChar": 3,
+        "endLine": 538,
+        "endChar": 31
+      },
+      "revId": "d29499cf82db7cd186976a1265a3290ef1306db0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7b2f169_ab6df511",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-10-31T05:57:09Z",
+      "side": 1,
+      "message": "Sure. I\u0027ll work on that.",
+      "parentUuid": "00deb52f_5381deb5",
       "range": {
         "startLine": 538,
         "startChar": 3,
@@ -123,6 +195,54 @@
       "writtenOn": "2023-10-30T14:40:20Z",
       "side": 1,
       "message": "Could you use (`std::ffi::`)`CStr` imported on line 73, to avoid mixing `std` and `core`?\n\nAlternatively, you could let the standard handle the `\u0027\\0\u0027` and `b\"\"` for you:\n```\nlet avf_node_name \u003d CString::new(\"avf\")?;\n```\ngetting a `\u0026CStr` out of it either through `\u0026` or `.as_c_str()`.",
+      "range": {
+        "startLine": 544,
+        "startChar": 24,
+        "endLine": 544,
+        "endChar": 39
+      },
+      "revId": "d29499cf82db7cd186976a1265a3290ef1306db0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af0414c8_c200a565",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-10-31T05:57:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ad1d9c9_a86ee825",
+      "range": {
+        "startLine": 544,
+        "startChar": 63,
+        "endLine": 544,
+        "endChar": 67
+      },
+      "revId": "d29499cf82db7cd186976a1265a3290ef1306db0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d93f96f0_998683ef",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-10-31T05:57:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4dab88b_87716ac1",
       "range": {
         "startLine": 544,
         "startChar": 24,
