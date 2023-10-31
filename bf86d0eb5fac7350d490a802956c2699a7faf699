@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9270b489_b658439e",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-10-31T04:10:33Z",
+      "side": 1,
+      "message": "nit: it would be nicer if you can present some example inputs and expected output as part of the doc",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 31
+      },
+      "revId": "bf86d0eb5fac7350d490a802956c2699a7faf699",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee838c56_c403824f",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-10-31T04:10:33Z",
+      "side": 1,
+      "message": "nit: this function is `unsafe`. Should this call be inside an unsafe block?",
+      "range": {
+        "startLine": 629,
+        "startChar": 20,
+        "endLine": 629,
+        "endChar": 43
+      },
+      "revId": "bf86d0eb5fac7350d490a802956c2699a7faf699",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
