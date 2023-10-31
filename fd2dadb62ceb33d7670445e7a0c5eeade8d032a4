@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "597fc585_037fac0f",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-31T12:16:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38882645_69ce4860",
+      "range": {
+        "startLine": 74,
+        "startChar": 72,
+        "endLine": 74,
+        "endChar": 82
+      },
+      "revId": "fd2dadb62ceb33d7670445e7a0c5eeade8d032a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ee10d95_a8144d19",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-25T10:05:20Z",
       "side": 1,
       "message": "Wrong check: `\u003c#interrupt-cells\u003e` defines the number of cells **per interrupt** but `interrupts.len()` should be the number of interrupts (`.collect()` currently makes it the product of the two).\n\nTo illustrate, `/timer` has:\n```\ninterrupts \u003d \u003cGIC_PPI 0xd IRQ_TYPE_LEVEL_LOW\n              GIC_PPI 0xe IRQ_TYPE_LEVEL_LOW\n\t      GIC_PPI 0xb IRQ_TYPE_LEVEL_LOW\n\t      GIC_PPI 0xa IRQ_TYPE_LEVEL_LOW\u003e;\n```\ni.e. 4 interrupts with 3 cells per interrupt.",
+      "range": {
+        "startLine": 87,
+        "startChar": 11,
+        "endLine": 87,
+        "endChar": 50
+      },
+      "revId": "fd2dadb62ceb33d7670445e7a0c5eeade8d032a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4138d41f_54c8d008",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-31T12:16:26Z",
+      "side": 1,
+      "message": "Done. Thank you for the info.",
+      "parentUuid": "8ee10d95_a8144d19",
       "range": {
         "startLine": 87,
         "startChar": 11,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6547b29_b30b8db0",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-31T12:16:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67bfb216_e224716b",
+      "range": {
+        "startLine": 187,
+        "startChar": 8,
+        "endLine": 187,
+        "endChar": 64
+      },
+      "revId": "fd2dadb62ceb33d7670445e7a0c5eeade8d032a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb0380ba_56f918df",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9bdb9b1_6934e3e5",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-31T12:16:26Z",
+      "side": 1,
+      "message": "Done, and slightly modified logic not to keep tuple.",
+      "parentUuid": "fb0380ba_56f918df",
+      "range": {
+        "startLine": 192,
+        "startChar": 8,
+        "endLine": 192,
+        "endChar": 54
+      },
+      "revId": "fd2dadb62ceb33d7670445e7a0c5eeade8d032a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba5aaa5b_91d55803",
@@ -106,6 +202,30 @@
       "writtenOn": "2023-10-25T10:05:20Z",
       "side": 1,
       "message": "let\u0027s not commit statements used during development; if you want actual debug statements, use `debug!`.",
+      "range": {
+        "startLine": 198,
+        "startChar": 12,
+        "endLine": 198,
+        "endChar": 19
+      },
+      "revId": "fd2dadb62ceb33d7670445e7a0c5eeade8d032a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1f72add_54aa071e",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-31T12:16:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba5aaa5b_91d55803",
       "range": {
         "startLine": 198,
         "startChar": 12,
@@ -153,6 +273,30 @@
       "side": 1,
       "message": "I can move this to ctor, but multiple loop is still required; Could you double check whether your suggestion is to remove loops?\n\nI need to iterate multiple times anyway because of the borrow checker. For example, when iterating `__symbols__`, I can\u0027t edit `FDT` because iterator keeps immutable references.\n\nI may fold loops for \u0027Clean up unused node and unused properties\u0027, and \u0027Clean up unsued symbols in __symbols__\u0027, but then getting `FdtNodeMut` in the loop looks tricky. Three options:\n\n- Option 1) call `vm_dtbo.node_mut(SYMBOLS_NODE_PATH)` whenever needed: Code will work, but I feel little bad because of unnecessary FDT traversals for getting the same node.\n- Option 2) (unsafe) keep the offset of the `__symbols__` node and use it to regain `FdtNodeMut` for editing `__symbols__` (aosp/2810553): Faster, but seems like a dark magic.\n- Option 3) Keep multiple loops\n\nI previously picked Option 3), but Option 1) seems to be your favorite. Could you share your opinion?",
       "parentUuid": "ceafe3ed_d3648871",
+      "range": {
+        "startLine": 216,
+        "startChar": 8,
+        "endLine": 216,
+        "endChar": 49
+      },
+      "revId": "fd2dadb62ceb33d7670445e7a0c5eeade8d032a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7b79293_bbbdc297",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-31T12:16:26Z",
+      "side": 1,
+      "message": "Well, we would remove `__symbols__` as a whole, so we wouldn\u0027t need dirty logic here. I\u0027ll revisit discussion when necessary.",
+      "parentUuid": "d0ed4432_5cc45900",
       "range": {
         "startLine": 216,
         "startChar": 8,
@@ -234,6 +378,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a59d4c3_ad68c08f",
+        "filename": "pvmfw/src/devices.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-31T12:16:26Z",
+      "side": 1,
+      "message": "Fair enough. Done.",
+      "parentUuid": "a05b9903_e5d2ec9b",
+      "range": {
+        "startLine": 236,
+        "startChar": 8,
+        "endLine": 236,
+        "endChar": 9
+      },
+      "revId": "fd2dadb62ceb33d7670445e7a0c5eeade8d032a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "436e5859_94bef323",
@@ -247,6 +415,24 @@
       "writtenOn": "2023-10-25T10:05:20Z",
       "side": 1,
       "message": "Empty file?",
+      "revId": "fd2dadb62ceb33d7670445e7a0c5eeade8d032a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cbe3c35_ded00278",
+        "filename": "pvmfw/src/reboot_reason.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-10-31T12:16:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "436e5859_94bef323",
       "revId": "fd2dadb62ceb33d7670445e7a0c5eeade8d032a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
