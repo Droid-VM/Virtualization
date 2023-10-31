@@ -49,6 +49,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "55bbbd7e_bc5c91d4",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-31T13:28:05Z",
+      "side": 1,
+      "message": "I think you need to specify the exact signature algorithm used (e.g. your use of SHA512 as the digest is important).",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 22
+      },
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0867b898_4ceedc39",
         "filename": "vm_payload/src/api.rs",
         "patchSetId": 25
@@ -65,6 +88,29 @@
         "startChar": 44,
         "endLine": 347,
         "endChar": 23
+      },
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81eb15aa_b5308592",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-31T13:28:05Z",
+      "side": 1,
+      "message": "Why do we send this to the service rather than doing it locally?",
+      "range": {
+        "startLine": 398,
+        "startChar": 4,
+        "endLine": 398,
+        "endChar": 39
       },
       "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
