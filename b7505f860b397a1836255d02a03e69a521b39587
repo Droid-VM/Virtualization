@@ -22,6 +22,30 @@
       },
       "revId": "b7505f860b397a1836255d02a03e69a521b39587",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c49a0ec4_c417bbcb",
+        "filename": "microdroid_manager/src/vm_config.cddl",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-31T17:50:16Z",
+      "side": 1,
+      "message": "Do we? The Android Profile for DICE reserves [-70000, -70999] which is why we use -71000. These values are specific to the Microdroid payload node, other DICE nodes can use them for other purposes.",
+      "parentUuid": "b0543958_4be3dfc7",
+      "range": {
+        "startLine": 16,
+        "startChar": 7,
+        "endLine": 16,
+        "endChar": 13
+      },
+      "revId": "b7505f860b397a1836255d02a03e69a521b39587",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

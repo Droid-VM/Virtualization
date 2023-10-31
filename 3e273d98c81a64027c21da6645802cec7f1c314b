@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e2982ec_77c10fc4",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-31T17:50:16Z",
+      "side": 1,
+      "message": "There\u0027s no parsing here.\nI\u0027m slightly reluctant to extract this; it\u0027s a simple local helper, it does exactly what is needed here, and I expect to tweak it a bit when coping with APEXes.\nThe only commonality is the keys in the map, but the source of truth for that is the CDDL.",
+      "parentUuid": "432f9158_c9380c68",
+      "range": {
+        "startLine": 60,
+        "startChar": 7,
+        "endLine": 60,
+        "endChar": 19
+      },
+      "revId": "3e273d98c81a64027c21da6645802cec7f1c314b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "411b7888_b3ab58b0",
@@ -60,6 +84,30 @@
       "writtenOn": "2023-10-18T01:04:04Z",
       "side": 1,
       "message": "Why do these two have different types? Can code_hash be in the box?",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 30
+      },
+      "revId": "3e273d98c81a64027c21da6645802cec7f1c314b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ecd7b90_354a0766",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-31T17:50:16Z",
+      "side": 1,
+      "message": "Because we own the authority hash (we compute it), but we can borrow the code hash because it\u0027s already in the ApkData. I don\u0027t see a need to copy it unnecessarily.",
+      "parentUuid": "411b7888_b3ab58b0",
       "range": {
         "startLine": 63,
         "startChar": 0,
@@ -95,6 +143,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8b2ad6d6_7b28be9d",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-31T17:50:16Z",
+      "side": 1,
+      "message": "We more often use Ciborium directly, I think?\nThis doesn\u0027t implement that trait, and in the context seems unambiguous.",
+      "parentUuid": "098e1683_a9ee8756",
+      "range": {
+        "startLine": 68,
+        "startChar": 7,
+        "endLine": 68,
+        "endChar": 15
+      },
+      "revId": "3e273d98c81a64027c21da6645802cec7f1c314b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "96e7e66e_ffbf5208",
         "filename": "microdroid_manager/src/dice.rs",
         "patchSetId": 3
@@ -106,6 +178,30 @@
       "writtenOn": "2023-10-18T06:37:33Z",
       "side": 1,
       "message": "idle query: I wonder if `alloc::format!(\"apk:{}\", apk.package_name)` would be clearer/faster?",
+      "range": {
+        "startLine": 79,
+        "startChar": 18,
+        "endLine": 79,
+        "endChar": 56
+      },
+      "revId": "3e273d98c81a64027c21da6645802cec7f1c314b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f5db740_8ea39c42",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-31T17:50:16Z",
+      "side": 1,
+      "message": "It\u0027s definitely clearer - thanks!",
+      "parentUuid": "96e7e66e_ffbf5208",
       "range": {
         "startLine": 79,
         "startChar": 18,
@@ -139,6 +235,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1288a186_4bff57c0",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-31T17:50:16Z",
+      "side": 1,
+      "message": "I don\u0027t think so. It would be eccentric to list the same APK more than once, but it\u0027s legitimate, and we should describe the VM exactly as constructed.",
+      "parentUuid": "3d2ec5bf_3663f8a2",
+      "range": {
+        "startLine": 97,
+        "startChar": 18,
+        "endLine": 97,
+        "endChar": 19
+      },
+      "revId": "3e273d98c81a64027c21da6645802cec7f1c314b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3966dfbd_7637722b",
@@ -152,6 +272,30 @@
       "writtenOn": "2023-10-18T07:54:34Z",
       "side": 1,
       "message": "Why do we need to sort the list?",
+      "range": {
+        "startLine": 99,
+        "startChar": 9,
+        "endLine": 99,
+        "endChar": 13
+      },
+      "revId": "3e273d98c81a64027c21da6645802cec7f1c314b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddd78154_e049db45",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-31T17:50:16Z",
+      "side": 1,
+      "message": "Hmm, it\u0027s good question.\nIn the design doc I suggested sorting to get a consistent order, but the APKs in a VM have a well-defined order specified by the creating app.\nThat\u0027s not true of APEXes, but we don\u0027t have those yet.\nI\u0027ll remove this for now.",
+      "parentUuid": "3966dfbd_7637722b",
       "range": {
         "startLine": 99,
         "startChar": 9,
@@ -187,6 +331,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "7f6495f8_3d32bc80",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-31T17:50:16Z",
+      "side": 1,
+      "message": "Hmm, that\u0027s a good idea.\n(It feels like overkill to import coset just for that, but you\u0027re right we\u0027ll need it anyway.)",
+      "parentUuid": "49844a58_3111d7b2",
+      "range": {
+        "startLine": 127,
+        "startChar": 4,
+        "endLine": 129,
+        "endChar": 25
+      },
+      "revId": "3e273d98c81a64027c21da6645802cec7f1c314b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a39418fc_8ae41b1a",
         "filename": "microdroid_manager/src/verify.rs",
         "patchSetId": 3
@@ -198,6 +366,24 @@
       "writtenOn": "2023-10-18T06:37:33Z",
       "side": 1,
       "message": "(preexisting, maybe) I\u0027ve not delved into the existing code, but having three different `Vec`s that are assumed to have the same indexing seems like it might be better as a single `Vec` of some struct with three bits of information.",
+      "revId": "3e273d98c81a64027c21da6645802cec7f1c314b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c80a39a6_e68ab2d7",
+        "filename": "microdroid_manager/src/verify.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-31T17:50:16Z",
+      "side": 1,
+      "message": "I agree, but I\u0027m not sure I want to mess with it right now.",
+      "parentUuid": "a39418fc_8ae41b1a",
       "revId": "3e273d98c81a64027c21da6645802cec7f1c314b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -215,6 +401,30 @@
       "writtenOn": "2023-10-18T01:04:04Z",
       "side": 1,
       "message": "Why is this safe?",
+      "range": {
+        "startLine": 196,
+        "startChar": 16,
+        "endLine": 196,
+        "endChar": 29
+      },
+      "revId": "3e273d98c81a64027c21da6645802cec7f1c314b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5ec27f7_23868a64",
+        "filename": "microdroid_manager/src/verify.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-10-31T17:50:16Z",
+      "side": 1,
+      "message": "I added a comment, since it\u0027s non-obvious. Does it seem reasonable?",
+      "parentUuid": "33537abe_ffd4baad",
       "range": {
         "startLine": 196,
         "startChar": 16,
