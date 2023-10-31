@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "08228a5a_82f6b268",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-31T11:14:58Z",
+      "side": 1,
+      "message": "Tests were the reason I first added this (before realizing that we can\u0027t yet `unwrap` in `const` context) but I agree that pvmfw is unlikely to have hardcoded phandles. Anyway, there\u0027s no harm in having a `const` constructor.\n\n\u003e I\u0027m worrying whether having `Phandle::new()` encourages bad pattern or not.\n\nI get where you\u0027re coming from (although note that we already have `::new()` in the code) but should we really prevent something at the Rust level because it _most of the time_ (not always!) is bad practice in DTS? There are good reasons for wanting to access `phandles` by values known at compile time.",
+      "parentUuid": "34d1da34_24d1fe63",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 0
+      },
+      "revId": "18c539d3ded9aa2bc5eae1f1eee536bb69f6a3a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "947ce8f9_bd02a5b1",
         "filename": "libs/libfdt/src/lib.rs",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-30T16:25:48Z",
       "side": 1,
       "message": "You may also want to define `MIN` for consistency.",
+      "range": {
+        "startLine": 509,
+        "startChar": 14,
+        "endLine": 509,
+        "endChar": 17
+      },
+      "revId": "18c539d3ded9aa2bc5eae1f1eee536bb69f6a3a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5020c82b_38fbfb5d",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-31T11:14:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "947ce8f9_bd02a5b1",
       "range": {
         "startLine": 509,
         "startChar": 14,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83d53cdd_3965af9d",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-31T11:14:58Z",
+      "side": 1,
+      "message": "See commit message: to decouple `FdtError` from the type and better align with the standard",
+      "parentUuid": "678b1201_03f74b2b",
+      "range": {
+        "startLine": 526,
+        "startChar": 0,
+        "endLine": 533,
+        "endChar": 0
+      },
+      "revId": "18c539d3ded9aa2bc5eae1f1eee536bb69f6a3a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c14a96a_8e2f2e32",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-10-30T16:25:48Z",
       "side": 1,
       "message": "Q) is this necessary?",
+      "range": {
+        "startLine": 149,
+        "startChar": 19,
+        "endLine": 149,
+        "endChar": 28
+      },
+      "revId": "18c539d3ded9aa2bc5eae1f1eee536bb69f6a3a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "456f1cb1_4fcf9e7c",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-31T11:14:58Z",
+      "side": 1,
+      "message": "Removed; it was with `const` but that\u0027s currently unstable :(",
+      "parentUuid": "5c14a96a_8e2f2e32",
       "range": {
         "startLine": 149,
         "startChar": 19,
