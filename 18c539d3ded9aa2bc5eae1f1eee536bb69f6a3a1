@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f36748ad_da800f62",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-10-31T13:20:45Z",
+      "side": 1,
+      "message": "I fully agree with the YAGNI principle and where you\u0027re coming from: note that both `::new()` and `TryFrom` are already being used so only the \"`const`\" in `pub fn const new` is currently unused which I personally wouldn\u0027t consider too problematic.\n\nI also now see how the commit message (in particular, title) of this CL mislead the reader, as I now think that the main value of this commit is the decoupling of `::new` and `FdtError`, not the `const`.",
+      "parentUuid": "4d85938c_745d150b",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 0
+      },
+      "revId": "18c539d3ded9aa2bc5eae1f1eee536bb69f6a3a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "947ce8f9_bd02a5b1",
