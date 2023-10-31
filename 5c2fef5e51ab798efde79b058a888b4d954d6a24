@@ -232,6 +232,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ee8921ad_b4bdd6c5",
+        "filename": "virtualizationservice/src/rkpd_client.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-10-31T17:05:29Z",
+      "side": 1,
+      "message": "Right, I totally misunderstood your initial comment and thought you were referring to `SafeSender` (and was also perplexed why you thought it was Send + Sync 😊).\n\nYeah, the `Mutex` here is pointless. We should be able to completely drop `SafeSender`, I think.",
+      "parentUuid": "951f4fea_1567d919",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 1
+      },
+      "revId": "5c2fef5e51ab798efde79b058a888b4d954d6a24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0ae3372b_5ce8b340",
         "filename": "virtualizationservice/src/rkpd_client.rs",
         "patchSetId": 2
