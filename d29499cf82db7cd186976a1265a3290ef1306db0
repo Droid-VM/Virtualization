@@ -185,6 +185,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4ef7d631_ec6a81ba",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-01T10:24:05Z",
+      "side": 1,
+      "message": "Would you mind also testing the case where the DTB file already exists and contains a different key, to ensure that the function properly overwrites it, preventing the injection of external keys?",
+      "parentUuid": "f202561c_60fce985",
+      "range": {
+        "startLine": 538,
+        "startChar": 3,
+        "endLine": 538,
+        "endChar": 31
+      },
+      "revId": "d29499cf82db7cd186976a1265a3290ef1306db0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ad1d9c9_a86ee825",
         "filename": "virtualizationmanager/src/aidl.rs",
         "patchSetId": 1
