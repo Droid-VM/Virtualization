@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "25d0d492_8cdc34d9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-01T13:59:34Z",
+      "side": 1,
+      "message": "ApkData will \u0026 other information in Microdroid partition of the instance image will need to be removed because of changing secret derivation (See b/291306122).\n\nThere is no harm in adding it now, but we should ensure that it is not necessary \u0026 will be removed soon.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "fc280c2bc0e3613caffdc8af91d91b2f3a404139",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3a4e3780_c7547f89",
@@ -14,6 +37,52 @@
       "writtenOn": "2023-11-01T01:25:59Z",
       "side": 1,
       "message": "LGTM, but I don\u0027t think I can +2 because I don\u0027t fully understand every details of this CL.",
+      "revId": "fc280c2bc0e3613caffdc8af91d91b2f3a404139",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17c846d4_52d203d4",
+        "filename": "microdroid_manager/src/vm_config.cddl",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-01T13:59:34Z",
+      "side": 1,
+      "message": "NIT: \"the payload of Microdroid based VM\"?",
+      "range": {
+        "startLine": 1,
+        "startChar": 66,
+        "endLine": 1,
+        "endChar": 84
+      },
+      "revId": "fc280c2bc0e3613caffdc8af91d91b2f3a404139",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ed587a2_5acd36d1",
+        "filename": "microdroid_manager/src/vm_config.cddl",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-01T13:59:34Z",
+      "side": 1,
+      "message": "Just to confirm - you\u0027re intending on using this list of SubcomponentDescriptor to contain  \u0027extra apk\u0027 and not the payload apk, right? If so, can we call `Component name` \u003d Microdroid misc/extra payload?\n\nAlso, does the order of these extra apk will have influence in the secret?",
+      "range": {
+        "startLine": 18,
+        "startChar": 17,
+        "endLine": 18,
+        "endChar": 40
+      },
       "revId": "fc280c2bc0e3613caffdc8af91d91b2f3a404139",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
