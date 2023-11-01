@@ -247,3 +247,15 @@ fn node_add_subnode_with_namelen() {
         assert_eq!(subnode.name(), Ok(name.as_c_str()));
     }
 }
+
+#[test]
+fn fdt_symbols() {
+    let mut data = fs::read(TEST_TREE_PHANDLE_PATH).unwrap();
+    let fdt = Fdt::from_mut_slice(&mut data).unwrap();
+
+    let symbols = fdt.symbols().unwrap().unwrap();
+    assert_eq!(symbols.name(), Ok(cstr!("__symbols__")));
+
+    // Validates type.
+    let _symbols: FdtNodeMut = fdt.symbols_mut().unwrap().unwrap();
+}
