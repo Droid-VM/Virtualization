@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "304396b5_9b172826",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice_internal/IVirtualizationServiceInternal.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-01T10:56:07Z",
+      "side": 1,
+      "message": "When you say \"ever get the same key assigned to them\", that\u0027s the key used to sign their certificate, rather than the actual private key they get?\nAnd what we\u0027re trying to stop is that key being used as a cross-app device identifier.",
+      "parentUuid": "56846c5f_3535a112",
+      "range": {
+        "startLine": 63,
+        "startChar": 81,
+        "endLine": 63,
+        "endChar": 95
+      },
+      "revId": "5c2fef5e51ab798efde79b058a888b4d954d6a24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6aa24017_37f24b45",
         "filename": "virtualizationservice/src/rkpd_client.rs",
         "patchSetId": 2
@@ -78,6 +102,30 @@
       "writtenOn": "2023-10-31T15:35:33Z",
       "side": 1,
       "message": "This looks wrong to me:\nCIDs are transient, so if the same VM is run again it will not have the same CID. And they get reused on next boot, so a different VM might end up with the same CID.\n\nIf you need a VM-specific ID, the salt is probably the closest thing we have - although it doesn\u0027t fit in 32 bits.",
+      "range": {
+        "startLine": 39,
+        "startChar": 17,
+        "endLine": 39,
+        "endChar": 37
+      },
+      "revId": "5c2fef5e51ab798efde79b058a888b4d954d6a24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28c5ca64_923c215b",
+        "filename": "virtualizationservice/src/rkpd_client.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-01T10:56:07Z",
+      "side": 1,
+      "message": "Could we just use the UID of the owning app here? That\u0027s easy for virtmgr to get (just call `getuid()`).\nThat would mean that if one app owned 2 VMs they could end up certs signed with the same key. That doesn\u0027t seem like a problem.\n(We allow a VM to be transferred to another app - but again I think that doesn\u0027t matter. An app could also send its cert to another app.)",
+      "parentUuid": "6aa24017_37f24b45",
       "range": {
         "startLine": 39,
         "startChar": 17,
