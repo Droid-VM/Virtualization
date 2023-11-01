@@ -1,6 +1,74 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3adefcd_93c005bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-01T07:52:13Z",
+      "side": 1,
+      "message": "Alan asked me to take a look, but I\u0027m still a bit lacking in background/context so apologies if any queries would be obvious to others.",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11b20340_162e3ab8",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
+        "patchSetId": 25
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-01T07:52:13Z",
+      "side": 1,
+      "message": "It would be good to document the order (root to leaf or v.v.?)\n\nAlso, does this just have multiple certificates concatenated?  Would it be easier for consumers to have the distinct certs separate?",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7125d473_904e51ec",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
+        "patchSetId": 25
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-01T07:52:13Z",
+      "side": 1,
+      "message": "Do you need the full `AttestationResult` to go in here, rather than just the private key?",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f04e054_b31247ea",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-01T07:52:13Z",
+      "side": 1,
+      "message": "Is this the correct algorithm value (SHA-256 not SHA-512) ?",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f597975_9487a046",
@@ -20,6 +88,91 @@
         "endLine": 98,
         "endChar": 14
       },
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec76f683_bbb10ac9",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-01T07:52:13Z",
+      "side": 1,
+      "message": "nit: `remote_attestation` isn\u0027t a (Rust) feature",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05415e67_571e20aa",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-01T07:52:13Z",
+      "side": 1,
+      "message": "There\u0027s no `kid` so presumably we\u0027re relying on having a known order for the two signatures?",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8e1885e_ad00f618",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-01T07:52:13Z",
+      "side": 1,
+      "message": "Why SHA-512 (with P-256)?  IANAC but it seems unusual, and I found:\n\nhttps://groups.google.com/a/chromium.org/g/security-dev/c/SlfABuvvQas/m/qOil2X4UBQAJ: \"Hashes larger than SHA-256 (respectively, SHA-384) signed with P-256 (respectively, P-384) get truncated to size, so the larger hash is not useful.\"",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e472643_37a91e2f",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-01T07:52:13Z",
+      "side": 1,
+      "message": "Maybe add a safe `request_attestation(challenge: \u0026[u8]) -\u003e Result\u003cNonNull\u003cAVmAttestationResult\u003e, attestation_status_t\u003e` helper for here and below?  \n\nOr have a `struct` wrapper, and then `impl Drop` to call `AVmPayload_freeAttestationResult`, so that error paths don\u0027t leak?",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c005d1d6_709bdd76",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-01T07:52:13Z",
+      "side": 1,
+      "message": "Given that this is a test, why not use `coset` to check that the COSE_Key parses?",
       "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -49,6 +202,91 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6903c0b9_437441dd",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-01T07:52:13Z",
+      "side": 1,
+      "message": "nit: this function does two things, be nicer if it just did one (i.e. convert to a `CStr`, which the caller can then use in a log).",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af84b73b_a9e4c113",
+        "filename": "service_vm/comm/src/csr.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-01T07:52:13Z",
+      "side": 1,
+      "message": "Idle thought -- you could re-use the `coset::CborSerializable` trait here and below, although that would tie the API here to that of `coset` (cf. https://effective-rust.com/re-export.html)",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d938bd4f_6d554d64",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-01T07:52:13Z",
+      "side": 1,
+      "message": "(personal preference) Maybe use an explicit number here, so debugging sessions don\u0027t involve maths homework?",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e85775bf_e29d18de",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-01T07:52:13Z",
+      "side": 1,
+      "message": "Document string lifetime?",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c8d30d3_11a2e861",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-01T07:52:13Z",
+      "side": 1,
+      "message": "Maybe worth being more explicit about how to use this (and other) functions -- call once with `nullptr` to get the size, then call again with a buffer of that size.  (Or maybe not, I guess it\u0027s a common enough pattern)",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55bbbd7e_bc5c91d4",
         "filename": "vm_payload/include/vm_payload.h",
         "patchSetId": 25
@@ -66,6 +304,40 @@
         "endLine": 190,
         "endChar": 22
       },
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b0fb13e_0103d127",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-01T07:52:13Z",
+      "side": 1,
+      "message": "Is there an RFC reference for `ECDSASignature` ?",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2da2e58b_8e0f4956",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-01T07:52:13Z",
+      "side": 1,
+      "message": "Be nice to document chain order.",
       "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
