@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "85c4ca0d_37fe3d37",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-01T15:06:36Z",
+      "side": 1,
+      "message": "Yeah, I agree. (Also presumably we keep it in the \"Sk not available case.)\n\nI wasn\u0027t sure what it was going to look like, so I decided to just take the easy option for now.",
+      "parentUuid": "25d0d492_8cdc34d9",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "fc280c2bc0e3613caffdc8af91d91b2f3a404139",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3a4e3780_c7547f89",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31c118d7_25e1bfe6",
+        "filename": "microdroid_manager/src/vm_config.cddl",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-01T15:06:36Z",
+      "side": 1,
+      "message": "Reworded.",
+      "parentUuid": "17c846d4_52d203d4",
+      "range": {
+        "startLine": 1,
+        "startChar": 66,
+        "endLine": 1,
+        "endChar": 84
+      },
+      "revId": "fc280c2bc0e3613caffdc8af91d91b2f3a404139",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ed587a2_5acd36d1",
@@ -77,6 +125,30 @@
       "writtenOn": "2023-11-01T13:59:34Z",
       "side": 1,
       "message": "Just to confirm - you\u0027re intending on using this list of SubcomponentDescriptor to contain  \u0027extra apk\u0027 and not the payload apk, right? If so, can we call `Component name` \u003d Microdroid misc/extra payload?\n\nAlso, does the order of these extra apk will have influence in the secret?",
+      "range": {
+        "startLine": 18,
+        "startChar": 17,
+        "endLine": 18,
+        "endChar": 40
+      },
+      "revId": "fc280c2bc0e3613caffdc8af91d91b2f3a404139",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69e0d4a4_dd8e5465",
+        "filename": "microdroid_manager/src/vm_config.cddl",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-01T15:06:36Z",
+      "side": 1,
+      "message": "This includes both the payload APK (which is always first) and any extra APKs in the order they\u0027re specified by the config. (See go/vm-dice-chain.)\n\n\u003e Also, does the order of these extra apk will have influence in the secret?\n\nYes - that\u0027s already true. See https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/microdroid_manager/src/dice.rs;drc\u003d1125e0107e873b8bbffafd6dfadb8f2109f3d7eb;l\u003d32.",
+      "parentUuid": "2ed587a2_5acd36d1",
       "range": {
         "startLine": 18,
         "startChar": 17,
