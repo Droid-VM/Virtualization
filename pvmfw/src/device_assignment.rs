@@ -47,8 +47,11 @@ const UNUSED_VM_DTBO_PROP: [&CStr; 3] = [
 
 const REG_PROP_NAME: &CStr = const_cstr!("reg");
 const INTERRUPTS_PROP_NAME: &CStr = const_cstr!("interrupts");
+const IOMMUS_PROPS: &Cstr = const_cstr!("iommus");
+
 // TODO(b/277993056): Keep constants derived from platform.dts in one place.
 const CELLS_PER_INTERRUPT: usize = 3; // from /intc node in platform.dts
+const CELLS_IN_IOMMUS: usize = 1; // #iommu-cells = <0>
 
 /// Errors in device assignment.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -59,6 +62,8 @@ pub enum DeviceAssignmentError {
     InvalidSymbols,
     /// Invalid <interrupts>
     InvalidInterrupts,
+    /// Invalid <iommus>
+    InvalidIommus,
     /// Unsupported overlay target syntax. Only supports <target-path> with full path.
     UnsupportedOverlayTarget,
     /// Unexpected error from libfdt
@@ -80,6 +85,7 @@ impl fmt::Display for DeviceAssignmentError {
                 "Invalid property in /__symbols__. Must point to valid assignable device node."
             ),
             Self::InvalidInterrupts => write!(f, "Invalid <interrupts>"),
+            Self::InvalidIommus => wriate!(f, "Invalid <iommus>"),
             Self::UnsupportedOverlayTarget => {
                 write!(f, "Unsupported overlay target. Only supports 'target-path = \"/\"'")
             }
@@ -194,6 +200,12 @@ struct AssignableDeviceInfo {
     overlay_target_path: CString,
 }
 
+#[derive(Debug)]
+struct PVIommu {
+    // ID from pviommu node
+    id: u32,
+}
+
 /// Assigned device information parsed from crosvm DT.
 /// Keeps everything in the owned data because underlying FDT will be reused for platform DT.
 #[derive(Debug)]
@@ -204,6 +216,8 @@ struct AssignedDeviceInfo {
     reg: Vec<u8>,
     // <interrupts> property from the crosvm DT
     interrupts: Vec<u8>,
+    // <iommus> property from crosvm DT. `#iommu-cells = <0>`
+    iommus: PVIommu,
 }
 
 impl AssignedDeviceInfo {
@@ -222,6 +236,8 @@ impl AssignedDeviceInfo {
         Ok(node.getprop(INTERRUPTS_PROP_NAME).unwrap().unwrap().into())
     }
 
+    fn parse_iommus(node: &FdtNode) -> Result<PVIommu> {}
+
     // TODO(b/277993056): Read and validate iommu
     fn new(fdt: &Fdt, node_path: &CStr) -> Result<Option<Self>> {
         let Some(node) = fdt.node(node_path)? else { return Ok(None) };
@@ -231,10 +247,14 @@ impl AssignedDeviceInfo {
 
         let interrupts = Self::parse_interrupts(&node)?;
 
+        // iommu
+        let iommus = parse_iommus(node)?;
+
         Ok(Some(Self {
             node_path: node_path.into(),
             reg: reg.to_vec(),
             interrupts: interrupts.to_vec(),
+            iommus,
         }))
     }
 
