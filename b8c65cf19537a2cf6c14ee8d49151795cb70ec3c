@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81f257f2_1a0fc842",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 1433,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-11-02T06:00:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "718295d5_b1aa4293",
+      "range": {
+        "startLine": 1433,
+        "startChar": 21,
+        "endLine": 1433,
+        "endChar": 25
+      },
+      "revId": "b8c65cf19537a2cf6c14ee8d49151795cb70ec3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b116037_f9e44f8e",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-01T10:24:05Z",
       "side": 1,
       "message": "Did you mean `key_from_dtbo`?\n\nOtherwise, can\u0027t you simply merge both checks into\n```\nassert_eq!(key_from_dtbo, Some(vendor_public_key));\n```\n? Or do you need `bail!`?",
+      "range": {
+        "startLine": 1442,
+        "startChar": 19,
+        "endLine": 1442,
+        "endChar": 36
+      },
+      "revId": "b8c65cf19537a2cf6c14ee8d49151795cb70ec3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cd9c970_aebf3dfe",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 1442,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-11-02T06:00:58Z",
+      "side": 1,
+      "message": "Done, thanks :)",
+      "parentUuid": "9b116037_f9e44f8e",
       "range": {
         "startLine": 1442,
         "startChar": 19,
