@@ -22,6 +22,30 @@
       },
       "revId": "f163d7629a9e9535b5a339492acdb13738991ec2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd4e6855_833c1838",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 979,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-02T15:42:05Z",
+      "side": 1,
+      "message": "Let me keep it as-is.\n\nI don\u0027t understand what\u0027s your expectation of `libfdt/src/lib.rs`. Previously you mentioned that it\u0027s a thin layer for FFI calls, but now you\u0027re proposing to add helper method(s) specifically for `pvmfw` specific use cases. I thought that this is for FFI adaptor to provide Rust style interfaces, but we\u0027re adding more and more.\nCould you share me your opinion about what\u0027s allowed here? How to classify a new API between here and `vmbase/fdt.rs`?\n\n\nMy random thoughts: (you don\u0027t need to answer)\n  - If we add `symbols()` and `symbols_node()`, then why don\u0027t we rename `root()` to `root_node()`, and `memory()` to `memory_reg()`? Naming doesn\u0027t seem to be consistent, especially if we add both `symbols()` and `symbols_node()`\n  - I think that `for (symbol, path) in fdt.symbols()` is shorter and clean because iterator hides `Result` for getting `name` and `value`.\n  - `for (symbol, path) in fdt.symbols()` sounds like that you\u0027re expecting to add another iterator that returns tuple of `(\u0026CStr, \u0026CStr)`. However, such API isn\u0027t defined in `DTC`\u0027s `libfdt` and `libfdt/src/lib.rs` is more diverge. Would such iterator worth to add it? The one liner can be implemented with existing APIs with +3 lines. It can be acceptable.",
+      "parentUuid": "cbef87fb_963aa190",
+      "range": {
+        "startLine": 979,
+        "startChar": 11,
+        "endLine": 979,
+        "endChar": 18
+      },
+      "revId": "f163d7629a9e9535b5a339492acdb13738991ec2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
