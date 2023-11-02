@@ -246,6 +246,24 @@
       "parentUuid": "cf5b1694_ed9429bd",
       "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df8b1abd_a1901c65",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-11-02T18:27:11Z",
+      "side": 1,
+      "message": "The comment is true of the `vm_dtbo` as it is passed in as a byte slice, but not as far as I can see of `fdt`. The caller passes in an `\u0026mut Fdt`, so what\u0027s to stop it continuing to use it after `sanitize_device_tree` returns an error?",
+      "parentUuid": "08e22edd_4a1d70c5",
+      "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

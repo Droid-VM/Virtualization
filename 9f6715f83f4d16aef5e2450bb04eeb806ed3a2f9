@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe8e8611_bd7d5a02",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-11-02T18:27:11Z",
+      "side": 1,
+      "message": "In fact this is safe because `VmDtbo` is a transparent wrapper around `Fdt`, so they have the same representation.",
+      "revId": "9f6715f83f4d16aef5e2450bb04eeb806ed3a2f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
