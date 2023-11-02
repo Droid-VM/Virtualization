@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbef87fb_963aa190",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 979,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-02T10:27:28Z",
+      "side": 1,
+      "message": "Would you mind naming these `symbols_node` and `symbols_node_mut`?\n\nWhat I had in mind was\n```\n    pub fn symbols(\u0026self) -\u003e Result\u003cPropertyIterator\u003e {\n        if let Some(node) \u003d self.node(cstr!(\"/__symbols__\"))? {\n            node.properties()\n        } else {\n            Ok(PropertyIterator::empty())\n        }\n```\n(and the same for `.aliases()`) making client code super readable with\n```\nfor (symbol, path) in fdt.symbols()? {\n```\nbut as this syntax anyway requires introducing an iterator that provides the tuple, let\u0027s not do it now but later as a clean-up. Still, let\u0027s reserve the `.symbols()` name for it.",
+      "range": {
+        "startLine": 979,
+        "startChar": 11,
+        "endLine": 979,
+        "endChar": 18
+      },
+      "revId": "f163d7629a9e9535b5a339492acdb13738991ec2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
