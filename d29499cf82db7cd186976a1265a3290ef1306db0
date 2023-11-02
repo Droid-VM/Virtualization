@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d81549e3_23fc4631",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-11-02T04:39:25Z",
+      "side": 1,
+      "message": "Okay, I understood. However I cannot implement corrupted vendor image test right now, since it needs verification algorithm for microdroid vendor image, doesn\u0027t it?\n\nMaybe the changes should be separated like below,\n1. Creating DTBO for vendor public key (this change)\n2. CTS test for unsigned vendor image\n3. Verification in first_stage_init\n4. CTS test for corrupted vendor image",
+      "parentUuid": "aa2c0d8a_0bebc426",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 118
+      },
+      "revId": "d29499cf82db7cd186976a1265a3290ef1306db0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "57ae0921_5ee5286d",
@@ -221,6 +245,30 @@
       "side": 1,
       "message": "Would you mind also testing the case where the DTB file already exists and contains a different key, to ensure that the function properly overwrites it, preventing the injection of external keys?",
       "parentUuid": "f202561c_60fce985",
+      "range": {
+        "startLine": 538,
+        "startChar": 3,
+        "endLine": 538,
+        "endChar": 31
+      },
+      "revId": "d29499cf82db7cd186976a1265a3290ef1306db0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b13efce_1085ef86",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-11-02T04:39:25Z",
+      "side": 1,
+      "message": "Do we need that test? I thought there would be no existing DTB containing the key. Where could exist?",
+      "parentUuid": "4ef7d631_ec6a81ba",
       "range": {
         "startLine": 538,
         "startChar": 3,
