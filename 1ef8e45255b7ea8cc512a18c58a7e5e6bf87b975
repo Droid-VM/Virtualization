@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "794351d8_2e0ed0a4",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-02T17:37:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a651f11a_efe205e1",
+      "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0576c94e_764eb972",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-11-02T14:10:42Z",
       "side": 1,
       "message": "This function is simply validating the path before stripping its first 2 components so should probably be `(\u0026self, \u0026CStr) -\u003e Result\u003c\u0026CStr\u003e` (or even `-\u003e Option\u003c\u0026CStr\u003e`). Then, the caller can always decide to copy the `\u0026CStr` into its own `CString`. Also, would you mind renaming it to the action it performs on its input (as it doesn\u0027t \"overlay\") e.g. `strip_overlay_(path_)prefix`?\n\nThe implementation could also be made _much_ simpler (easier to review):\n\n1. turn the input `path` into bytes, validate it\u0027s absolute, and split it up:\n\n  ```\n  let chars \u003d path.to_bytes_with_nul();\n  if !chars.starts_with(b\"/\") {\n      return Err(...);\n  }\n  \n  let mut chars_iter \u003d chars[1..].iter();\n  let fragment_len \u003d chars_iter.position(|c| *c \u003d\u003d b\u0027/\u0027).ok_or(...)?;\n  let overlay_len \u003d chars_iter.position(|c| *c \u003d\u003d b\u0027/\u0027).ok_or(...)?;\n  let prefix_len \u003d b\"/\".len() + fragment_len + overlay_len;\n  let (overlay_path, target_path) \u003d chars.split_at(prefix_len + 1);\n  ```\n\n1. validate the `overlay_path` (not sure if this is actually required, TBH)\n\n  ```\n  let (fragment_name, overlay_name) \u003d overlay_path[1..].split_at(fragment_len);\n  let overlay_name \u003d \u0026overlay_name[1..]; // Skip \u0027/\u0027\n  if fragment_name.is_empty() || overlay_name !\u003d b\"__overlay__\" {\n      return Err(...);\n  }\n  ```\n\n1. validate the `__overlay__` node (this could be moved to ctor, BTW)\n\n  ```\n  let overlay_path \u003d CString::new(overlay_path).unwrap();\n  let overlay_node \u003d self.as_fdt().node(\u0026overlay_path)?.ok_or(...)?;\n  let overlay_node_target_path \u003d overlay_node.getprop_str(cstr!(\"target-path\"))?;\n  if overlay_node_target_path !\u003d Some(cstr!(\"/\")) {\n      return Err(...);\n  }\n  ```\n\n1. finally, return the sub-slice of the `CStr` without having to copy anything:\n\n  ```\n  CStr::from_bytes_with_nul(target_path).map_err(...)\n  ```",
+      "range": {
+        "startLine": 142,
+        "startChar": 4,
+        "endLine": 142,
+        "endChar": 80
+      },
+      "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aa485e7_9f04f2ed",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-02T17:37:41Z",
+      "side": 1,
+      "message": "Re naming: Let me keep this name.\n\nNaming from the `fdt_overlay_target_offset()`, and `strip_overlay_(path_)prefix()` seems like a string operation, but API parses path to build valid and simplified path.\n\n-----\n\nRe simplifying code: I would do, but with different approach because stripping until `__overlay__` node isn\u0027t trivial.\n\nLet me explain with your code snippet.\n\n```\nlet chars \u003d path.to_bytes_with_nul();\nif !chars.starts_with(b\"/\") {\n   return Err(...);\n}\n\nlet mut chars_iter \u003d chars[1..].iter();\nlet fragment_len \u003d chars_iter.position(|c| *c \u003d\u003d b\u0027/\u0027).ok_or(...)?;\nlet overlay_len \u003d chars_iter.position(|c| *c \u003d\u003d b\u0027/\u0027).ok_or(...)?;\nlet prefix_len \u003d b\"/\".len() + fragment_len + overlay_len;\nlet (overlay_path, target_path) \u003d chars.split_at(prefix_len + 1);\n```\n\nThis code doesn\u0027t work. `libfdt` allows consecutive `/`, so `/////fragment@a/__overlay__/node_a` is the same as `/fragment@a/__overlay__/node_a`. So we can\u0027t simply count `/` to get node name at certain depth.\n\nIn other word, `fragment_len` and `overlay_len` may be incorrect. I need extra logic for the calculation.\n\nSo let me remove providing more precise path buffer size with `Vec::with_capacity()`.  It may allocate bit more bytes, but it would simplify code.\n\n-----\n\nRe Return:\nLet me keep this.\n\nI can change to return `\u0026CStr`, but two issues (may not be a blocker)\n  - Issue1: Code looks dirtier because I need handwritten tokenizer to get subslice from the `overlay_node_path`.\n  - Issue2: Technically this is getting overlay target path, but only allows `target-path \u003d \"/\"`. It\u0027s coincident that `\u0026CStr` can be returned for the result, but there could be extra prefix in general.\n\nJust FYI, here\u0027s my hand-written tokenizer to return `\u0026CStr`. Tell me if you prefer this style.\n\n```\n        /// \"target-path\" validation is the same.\n        \n        let overlay_node_name_bytes \u003d Self::OVERLAY_NODE_NAME.to_bytes();\n        let len \u003d overlay_node_path_bytes.len();\n        let (mut pos, mut depth) \u003d (0, 0);\n        while depth \u003c 2 \u0026\u0026 pos \u003c len {\n            while pos \u003c len \u0026\u0026 overlay_node_path_bytes[pos] \u003d\u003d b\u0027/\u0027\n                pos +\u003d 1;\n            }\n            depth +\u003d 1;\n            let name_start_pos \u003d pos;\n            while pos \u003c len \u0026\u0026 overlay_node_path_bytes[pos] !\u003d b\u0027/\u0027 {\n                pos +\u003d 1;\n            }\n            if depth \u003d\u003d 2 \u0026\u0026 overlay_node_path_bytes[name_start_pos..pos] !\u003d overlay_node_name_bytes {\n                return Err(DeviceAssignmentError::InvalidDtbo);\n            }\n        }\n                \n        Ok(CStr::from_bytes_with_nul(overlaid_node_path_bytes[pos..]).unwrap());\n```",
+      "parentUuid": "0576c94e_764eb972",
       "range": {
         "startLine": 142,
         "startChar": 4,
@@ -66,6 +108,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "723e6126_45cdce55",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-02T17:37:41Z",
+      "side": 1,
+      "message": "Could you be specific about your proposal?\n\nIn patchset #3 at https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2792452/comment/fb0380ba_56f918df/, you recommended the same -- filter unsued node/props in ctor.\n\nBut when we discussed via VC, you proposed to modify `vm_dtbo` in `fdt.rs`\u0027s `patch()`. Here\u0027s the copy from our discussion note.\n\n```\nparse() {\n   let device_info \u003d DeviceInfo::new_filtered(fdt, vm_dtbo);  // vm_dtbo wouldn\u0027t be modified here.\n}\n\npatch() {\n  device_info.prepare_for_overlay(vm_dtbo);\n  fdt.apply_overlay(vm_dtbo);\n  device_info.patch(fdt);\n}\n```\n\nAnd it seems like that you\u0027re proposing earlier proposal again. Am I understanding correctly?\n\nTo be crystal clear, could you share your thoughts about where to filter unused nodes / properties? My preference is to do so in `DeviceAssignmentInfo::new()`, called by `parse_device_tree()` in `fdt.rs`.",
+      "parentUuid": "6a0cf3ac_4046c6ed",
+      "range": {
+        "startLine": 290,
+        "startChar": 12,
+        "endLine": 290,
+        "endChar": 13
+      },
+      "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c2a320e8_77495a80",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 17
@@ -77,6 +143,24 @@
       "writtenOn": "2023-11-02T10:40:40Z",
       "side": 1,
       "message": "This should still document why it\u0027s safe, namely that both FDT and overlay are discarded if this call fails because the unwrap causes a panic.",
+      "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d914480c_741a77c1",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-02T17:37:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2a320e8_77495a80",
       "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -94,6 +178,24 @@
       "writtenOn": "2023-11-02T10:40:40Z",
       "side": 1,
       "message": "What\u0027s to stop the caller of this function doing something else with `fdt` after it returns?",
+      "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08e22edd_4a1d70c5",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-02T17:37:41Z",
+      "side": 1,
+      "message": "Fdt is valid if this is `Ok`. `Fdt::apply_overlay(dtbo)` is `unsafe` because it damages `dtbo` even when it\u0027s `Ok`.",
+      "parentUuid": "cf5b1694_ed9429bd",
       "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
