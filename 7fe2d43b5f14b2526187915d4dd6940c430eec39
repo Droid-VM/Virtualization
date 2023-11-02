@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5f27fea_d014fa8e",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
+        "patchSetId": 25
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-02T13:09:29Z",
+      "side": 1,
+      "message": "This is more than just a concatenation of certificates; it is intended to be a certificate chain. In this chain, each certificate\u0027s private key signs the next certificate. The root certificate is trusted by Google, and the leaf certificate includes the public key that corresponds to the private key, as outlined in the DD [1].\n\nI added this to the doc.\n\n[1] http://doc/1SetVcA-i6MyyWpgXc1fULkklDAUsOQBVYpYJfspfsF8#heading\u003dh.6yrugcqgy0gn \u003e Diagram: Extending the Google-backed certificate chain with a new certificate after client VM attestation",
+      "parentUuid": "11b20340_162e3ab8",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7125d473_904e51ec",
@@ -70,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5e54dd6_d482fc4f",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
+        "patchSetId": 25
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-02T13:09:29Z",
+      "side": 1,
+      "message": "+1. It\u0027s also simpler for users to pass the AR result here directly.",
+      "parentUuid": "a23bfa9b_479ae0c7",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f04e054_b31247ea",
@@ -87,6 +123,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5eb14f88_ffdf5f7d",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-02T13:09:29Z",
+      "side": 1,
+      "message": "This is correct now with the ECDSA changed to SHA-256.",
+      "parentUuid": "2f04e054_b31247ea",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f597975_9487a046",
@@ -100,6 +154,30 @@
       "writtenOn": "2023-10-31T13:23:33Z",
       "side": 1,
       "message": "Would this be neater as a `map_err()`?",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 14
+      },
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd2c5ddb_49ba6a22",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-02T13:09:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f597975_9487a046",
       "range": {
         "startLine": 89,
         "startChar": 0,
@@ -129,6 +207,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a278c9ea_a898496f",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-02T13:09:29Z",
+      "side": 1,
+      "message": "True. I added android in front.",
+      "parentUuid": "ec76f683_bbb10ac9",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "05415e67_571e20aa",
         "filename": "microdroid_manager/src/vm_payload_service.rs",
         "patchSetId": 25
@@ -140,6 +236,24 @@
       "writtenOn": "2023-11-01T07:52:13Z",
       "side": 1,
       "message": "There\u0027s no `kid` so presumably we\u0027re relying on having a known order for the two signatures?",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2750e56b_9e316a99",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-02T13:09:29Z",
+      "side": 1,
+      "message": "Yes. There\u0027s no `kid` API of the `CoseSignBuilder` to add the signatures, it just works like a vector, the first one added takes the location 0. The two signatures are also checked below.",
+      "parentUuid": "05415e67_571e20aa",
       "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -161,6 +275,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4329c740_f8798a63",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-02T13:09:29Z",
+      "side": 1,
+      "message": "Thanks for the information. I changed this to sha256.",
+      "parentUuid": "c8e1885e_ad00f618",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e472643_37a91e2f",
@@ -178,6 +310,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "873f9f2b_f5643492",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-02T13:09:29Z",
+      "side": 1,
+      "message": "That\u0027s a good idea, thanks for the suggestion.",
+      "parentUuid": "6e472643_37a91e2f",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c005d1d6_709bdd76",
@@ -191,6 +341,24 @@
       "writtenOn": "2023-11-01T07:52:13Z",
       "side": 1,
       "message": "Given that this is a test, why not use `coset` to check that the COSE_Key parses?",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "749cf8ca_9b0449aa",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-02T13:09:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c005d1d6_709bdd76",
       "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -218,6 +386,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d5caf08_9187da81",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-02T13:09:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52ad53d4_cd5d18a8",
+      "range": {
+        "startLine": 109,
+        "startChar": 30,
+        "endLine": 109,
+        "endChar": 31
+      },
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6903c0b9_437441dd",
@@ -231,6 +423,24 @@
       "writtenOn": "2023-11-01T07:52:13Z",
       "side": 1,
       "message": "nit: this function does two things, be nicer if it just did one (i.e. convert to a `CStr`, which the caller can then use in a log).",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "317fd341_1458f35c",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-02T13:09:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6903c0b9_437441dd",
       "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -269,6 +479,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "054f75e4_4055b2db",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-02T13:09:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d938bd4f_6d554d64",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e85775bf_e29d18de",
@@ -288,6 +516,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d4ed06f5_3313e3ef",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-02T13:09:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e85775bf_e29d18de",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "7c8d30d3_11a2e861",
         "filename": "vm_payload/include/vm_payload.h",
         "patchSetId": 25
@@ -299,6 +545,24 @@
       "writtenOn": "2023-11-01T07:52:13Z",
       "side": 1,
       "message": "Maybe worth being more explicit about how to use this (and other) functions -- call once with `nullptr` to get the size, then call again with a buffer of that size.  (Or maybe not, I guess it\u0027s a common enough pattern)",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bb8208c_260e51ee",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-02T13:09:29Z",
+      "side": 1,
+      "message": "It\u0027s true that this pattern is quite common and is also used in some other libraries like open-dice. Sometimes user can also pre-assign a large enough buffer and use it for this function.",
+      "parentUuid": "7c8d30d3_11a2e861",
       "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -326,6 +590,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6c40272_21763444",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-02T13:09:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55bbbd7e_bc5c91d4",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 22
+      },
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b0fb13e_0103d127",
@@ -343,6 +631,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bc61631_65aecca3",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-02T13:09:29Z",
+      "side": 1,
+      "message": "Yes. This one https://datatracker.ietf.org/doc/html/rfc6979#section-2.4. I added it to the doc.",
+      "parentUuid": "2b0fb13e_0103d127",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2da2e58b_8e0f4956",
@@ -356,6 +662,24 @@
       "writtenOn": "2023-11-01T07:52:13Z",
       "side": 1,
       "message": "Be nice to document chain order.",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c492a683_fb77db4e",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-02T13:09:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2da2e58b_8e0f4956",
       "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -383,6 +707,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3a4c15d_ce58cec4",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-02T13:09:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0867b898_4ceedc39",
+      "range": {
+        "startLine": 346,
+        "startChar": 44,
+        "endLine": 347,
+        "endChar": 23
+      },
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81eb15aa_b5308592",
@@ -396,6 +744,30 @@
       "writtenOn": "2023-10-31T13:28:05Z",
       "side": 1,
       "message": "Why do we send this to the service rather than doing it locally?",
+      "range": {
+        "startLine": 398,
+        "startChar": 4,
+        "endLine": 398,
+        "endChar": 39
+      },
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f84071f_355b1ac6",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-02T13:09:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81eb15aa_b5308592",
       "range": {
         "startLine": 398,
         "startChar": 4,

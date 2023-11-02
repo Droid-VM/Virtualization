@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00d1ada3_a4f8dc03",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-02T13:09:29Z",
+      "side": 1,
+      "message": "We don\u0027t need this in rebuild anymore with the DER-encoded ECPrivateKey format.",
+      "parentUuid": "5d65f9f0_d429f039",
+      "range": {
+        "startLine": 233,
+        "startChar": 3,
+        "endLine": 233,
+        "endChar": 22
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ccdbc208_951ec6e7",
@@ -133,6 +157,30 @@
       "side": 1,
       "message": "Mmm, I just thought renaming it would make it clearer to reviewers that this isn\u0027t production code.",
       "parentUuid": "95ecb1c3_9084ea1d",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 41
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02970d7c_beda1235",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-02T13:09:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9792406_88aa99bb",
       "range": {
         "startLine": 14,
         "startChar": 0,
@@ -251,6 +299,30 @@
       "side": 1,
       "message": "I don\u0027t think that helps - this function still has safety requirements on the pointer, so it isn\u0027t a safe function.\nBut you could call as_ref on the pointer and then pass references to these - then you can explain why you meet the safety requirements.\nOr just mark the function unsafe and comment on its requirements - which then allows you to have shorter safety comments inside the function.",
       "parentUuid": "f8a13060_be13ad8f",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 32
+      },
+      "revId": "5ec30121703148e089456e56d4fcdba04cfff3e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e2dd8dc_b12cb87e",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-02T13:09:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e98a75df_e1387979",
       "range": {
         "startLine": 109,
         "startChar": 0,
