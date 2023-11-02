@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6c6f339_0b323930",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-02T09:04:39Z",
+      "side": 1,
+      "message": "The CI error is a bit weird.\n```\nerror[E0277]: the trait bound `coset::CoseError: std::error::Error` is not satisfied\n--\u003e packages/modules/Virtualization/microdroid_manager/src/dice.rs:125:32\n|\n125 |     Ok(Value::Map(map).to_vec()?)\n|                                ^ the trait `std::error::Error` is not implemented for `coset::CoseError`\n```\n\n`CoseError` does implement `std::error::Error` [1]\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:external/rust/crates/coset/src/common/mod.rs;l\u003d99;drc\u003d16f92bd6772396b4e48d07ee8c4f07f434f9f39e",
+      "revId": "9b8b8ec6e0e2a7bb67be0c2b8c751cb193bf7168",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
