@@ -305,6 +305,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "84153544_144c4efa",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-02T14:53:31Z",
+      "side": 1,
+      "message": "The path is predictable so another entity could try to hijack it. I don\u0027t expect this to be an issue with the current implementation (as you `File::create`) but we don\u0027t want it to become one in the future. Implementing the test itself is trivial: just run the test you have twice with different keys but the same path.",
+      "parentUuid": "5b13efce_1085ef86",
+      "range": {
+        "startLine": 538,
+        "startChar": 3,
+        "endLine": 538,
+        "endChar": 31
+      },
+      "revId": "d29499cf82db7cd186976a1265a3290ef1306db0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ad1d9c9_a86ee825",
         "filename": "virtualizationmanager/src/aidl.rs",
         "patchSetId": 1
