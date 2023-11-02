@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fb9935e_1c54c350",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/error.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-02T17:15:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b8b062d_89a49f86",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6049fce1_b237af33",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-10-20T14:10:11Z",
       "side": 1,
       "message": "Need an explicit discriminant value here for clarity/back-compatibility.",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e3a9ab0_9a473ff5",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/error.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-02T17:15:35Z",
+      "side": 1,
+      "message": "Sorry, missed it. Done now I\u0027d probably need to revisit these errorcodes, once the whole HAL spec/ VTS is done",
+      "parentUuid": "6049fce1_b237af33",
       "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "79bc2bf3_436dcad0",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/error.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-02T17:15:35Z",
+      "side": 1,
+      "message": "Done. Thanks (This lib will be used in tz too)",
+      "parentUuid": "db5ff22b_9b40012c",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "aa60d784_1a79fa26",
         "filename": "secretkeeper/secretkeeper_comm/src/data_types/error.rs",
         "patchSetId": 3
@@ -82,6 +136,24 @@
       "writtenOn": "2023-10-20T14:10:11Z",
       "side": 1,
       "message": "`impl Error`?  Would need a `Display` impl though.",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f68a7b0_b88d3432",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/error.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-02T17:15:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa60d784_1a79fa26",
       "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -109,6 +181,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bca4f5df_c44a3381",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/error.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-02T17:15:35Z",
+      "side": 1,
+      "message": "My initial thought were around `ciborium::ser::into_writer` which uses Write impl for Vec. (See function `value_to_bytes`). It returns `Result\u003c(), Error\u003cW::Error\u003e\u003e`, but when write impl for Vec seems to indicate that it would rather panic on memory unavailability instead of returning error.\n\nI have changed the comment now. (So far I have not seen fallible allocation returning errors)",
+      "parentUuid": "2c9f0e28_9a4c3d2d",
+      "range": {
+        "startLine": 78,
+        "startChar": 38,
+        "endLine": 78,
+        "endChar": 69
+      },
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d715424_bed9de51",
@@ -122,6 +218,24 @@
       "writtenOn": "2023-10-20T14:10:11Z",
       "side": 1,
       "message": "In general, the comments should describe what the data structure is/represents, not how some other chunk of code might use it.  The whole point of layers is that they\u0027re independent -- if we happened to have a pre-existing e2ee channel then we wouldn\u0027t bother with a crypto layer and this code would behave exactly the same.\n\n(passim)",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69da3bfc_6259e515",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/packet.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-02T17:15:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d715424_bed9de51",
       "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -143,6 +257,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05d67064_ea7fd81a",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/packet.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-02T17:15:35Z",
+      "side": 1,
+      "message": "Good point. Done",
+      "parentUuid": "9365c0f1_e229e5f1",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d01bed1_e87cea18",
@@ -160,6 +292,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25984147_24d5aa5e",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/packet.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-02T17:15:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d01bed1_e87cea18",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6551711_a0f6bf3d",
@@ -173,6 +323,24 @@
       "writtenOn": "2023-10-20T14:10:11Z",
       "side": 1,
       "message": "maybe move these two helpers into `utils.rs`?",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f697bf22_d649d1d0",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/packet.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-02T17:15:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6551711_a0f6bf3d",
       "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -200,6 +368,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfda5750_bfb30974",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/request.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-02T17:15:35Z",
+      "side": 1,
+      "message": "As specified in the other comment by Alan - \n\nI was hoping init would sanity checks the args (*opcode), but I\u0027ve removed opcode \u0026 used associated constant for it. Constructor should still check the args for type.",
+      "parentUuid": "e15c3151_944c9d40",
+      "range": {
+        "startLine": 36,
+        "startChar": 12,
+        "endLine": 36,
+        "endChar": 27
+      },
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa3a5bdf_b223507f",
@@ -217,6 +409,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20f6a347_421b5f3a",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/request.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-02T17:15:35Z",
+      "side": 1,
+      "message": "Good idea. I realize `get_opcode` is not really a required method other than the fact the default implementation of `serialize_to_packet()` requires it, but associated constant is sufficient. Thank you",
+      "parentUuid": "fa3a5bdf_b223507f",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd74cfd8_811c42e8",
@@ -230,6 +440,24 @@
       "writtenOn": "2023-10-20T14:10:11Z",
       "side": 1,
       "message": "I\u0027ve not joined the dots with the code that uses this yet, but is the intermediate hop of the `RequestPacket` needed?  If every place that calls `serialize_to_packet()` immediately follows it with a call to `RequestPacket::serialize_to_bytes()` then maybe drop the `Packet` structure and have a `serialize_to_bytes()` method here instead.",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a203c43_372552ee",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/request.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-02T17:15:35Z",
+      "side": 1,
+      "message": "It is required on the receiver end. The fact that all received requests deserialize to `RequestPacket`, enable receiver to:\n1) Accept bytes\n2) Deserialize the bytes -\u003e RequestPacket\n3) RequestPacket::get_opcode(\u0026packet) \u0026\n4) accordingly deserialize it to appropriate Request (like `GetVersionRequest`/`GetSecretRequest`)",
+      "parentUuid": "bd74cfd8_811c42e8",
       "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -253,6 +481,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cd9f7f4f_1369df40",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/request.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-02T17:15:35Z",
+      "side": 1,
+      "message": "\u003e Will it ever make sense for a concrete type to replace these default method impls\n\nNo not really\n\n\u003e If not, maybe move them out of the trait.\n\nThese methods take \u0026self, if we move them out of trait, what will be the arg? `dyn RequestPacket` gets tricky because trait object needs to be introduced, alternatively we can use generic with this trait as the bound. But I don\u0027t know what is the advantage of wither over the status quo?\n\nLets discuss this offline.",
+      "parentUuid": "8b1254bb_7963ac88",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1681d90b_033d665b",
         "filename": "secretkeeper/secretkeeper_comm/src/data_types/request_response_impl.rs",
         "patchSetId": 3
@@ -264,6 +510,24 @@
       "writtenOn": "2023-10-20T14:10:11Z",
       "side": 1,
       "message": "Does the `repr` matter?",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acc7c265_ec33f3da",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/request_response_impl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-02T17:15:35Z",
+      "side": 1,
+      "message": "No not really, removing.. (I was thinking of constraining the Opcode, but we don\u0027t do so in the cddl, so I guess its okay).",
+      "parentUuid": "1681d90b_033d665b",
       "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -302,6 +566,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0237d9df_2db9eadc",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/response.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-02T17:15:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d69afb8_75be685f",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a24c9aac_174abe83",
@@ -315,6 +597,30 @@
       "writtenOn": "2023-10-20T14:10:11Z",
       "side": 1,
       "message": "I think `value.as_integer().ok_or(InternalError)?` would work without a `clone()` here.",
+      "range": {
+        "startLine": 22,
+        "startChar": 14,
+        "endLine": 22,
+        "endChar": 86
+      },
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86bf1059_89f0807a",
+        "filename": "secretkeeper/secretkeeper_comm/src/util.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-02T17:15:35Z",
+      "side": 1,
+      "message": "It worked. Changed. Thanks!",
+      "parentUuid": "a24c9aac_174abe83",
       "range": {
         "startLine": 22,
         "startChar": 14,

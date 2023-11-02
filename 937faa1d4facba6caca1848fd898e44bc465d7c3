@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f1424925_42e98e68",
+        "filename": "TEST_MAPPING",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-02T17:15:35Z",
+      "side": 1,
+      "message": "Thanks. PTAL : cl/578892640",
+      "parentUuid": "11526e1d_806acc3a",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 66
+      },
+      "revId": "937faa1d4facba6caca1848fd898e44bc465d7c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9c8c601f_133a1b1c",
         "filename": "secretkeeper/secretkeeper_comm/src/data_types/packet.rs",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-26T10:41:35Z",
       "side": 1,
       "message": "If this is pub, the encapsulation is pretty weak.",
+      "range": {
+        "startLine": 56,
+        "startChar": 26,
+        "endLine": 56,
+        "endChar": 40
+      },
+      "revId": "937faa1d4facba6caca1848fd898e44bc465d7c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91444033_50000fd4",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/packet.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-02T17:15:35Z",
+      "side": 1,
+      "message": "Changes it to private field, added a getter \u0026 constructor (needed for methods in Request/Response traits)",
+      "parentUuid": "9c8c601f_133a1b1c",
       "range": {
         "startLine": 56,
         "startChar": 26,
@@ -60,6 +108,30 @@
       "writtenOn": "2023-10-26T10:41:35Z",
       "side": 1,
       "message": "Rather than cloning a potentially large area, could this take self by value?",
+      "range": {
+        "startLine": 70,
+        "startChar": 37,
+        "endLine": 70,
+        "endChar": 51
+      },
+      "revId": "937faa1d4facba6caca1848fd898e44bc465d7c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98de0530_651b2a9a",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/packet.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-02T17:15:35Z",
+      "side": 1,
+      "message": "Good idea, we can simply move the Request/ResponsePacket into the method. It wont be required anymore after serialization.",
+      "parentUuid": "b4c98907_4f86e3b8",
       "range": {
         "startLine": 70,
         "startChar": 37,
@@ -95,6 +167,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "93e5f85f_6b1e6120",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/request_response_impl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-02T17:15:35Z",
+      "side": 1,
+      "message": "I was hoping init would sanity checks the args ( \u0026 opcode), but I\u0027ve removed opcode \u0026 used associated constant for it. Constructor should still check the args for type.",
+      "parentUuid": "db7beade_d308ca21",
+      "range": {
+        "startLine": 48,
+        "startChar": 11,
+        "endLine": 48,
+        "endChar": 39
+      },
+      "revId": "937faa1d4facba6caca1848fd898e44bc465d7c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "10615322_c1a6e84f",
         "filename": "secretkeeper/secretkeeper_comm/src/util.rs",
         "patchSetId": 4
@@ -106,6 +202,30 @@
       "writtenOn": "2023-10-26T10:41:35Z",
       "side": 1,
       "message": "There are so many copies of this code all over the place.\nNot sure it\u0027s worth the effort to centralize though.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 5
+      },
+      "revId": "937faa1d4facba6caca1848fd898e44bc465d7c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e7ef950_844aff20",
+        "filename": "secretkeeper/secretkeeper_comm/src/util.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-02T17:15:35Z",
+      "side": 1,
+      "message": "Its tricky, we\u0027ll need to get an ops library that all the code will depend on.",
+      "parentUuid": "10615322_c1a6e84f",
       "range": {
         "startLine": 22,
         "startChar": 0,
