@@ -329,6 +329,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "75ab1f45_cfeb5093",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-11-02T14:54:26Z",
+      "side": 1,
+      "message": "We do :) If the code expects that the DTBO shouldn\u0027t exist, then we should check for that and act accordingly if DTBO does exist (fail the function, or remove the existing DTBO and create the new one)",
+      "parentUuid": "5b13efce_1085ef86",
+      "range": {
+        "startLine": 538,
+        "startChar": 3,
+        "endLine": 538,
+        "endChar": 31
+      },
+      "revId": "d29499cf82db7cd186976a1265a3290ef1306db0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ad1d9c9_a86ee825",
         "filename": "virtualizationmanager/src/aidl.rs",
         "patchSetId": 1
