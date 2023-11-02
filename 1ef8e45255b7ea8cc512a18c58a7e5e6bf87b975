@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a651f11a_efe205e1",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-11-02T10:40:40Z",
+      "side": 1,
+      "message": "Can you transmute `fdt` rather than `dtbo`? It would be slightly more clear why it is correct.",
+      "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2a320e8_77495a80",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-11-02T10:40:40Z",
+      "side": 1,
+      "message": "This should still document why it\u0027s safe, namely that both FDT and overlay are discarded if this call fails because the unwrap causes a panic.",
+      "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf5b1694_ed9429bd",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-11-02T10:40:40Z",
+      "side": 1,
+      "message": "What\u0027s to stop the caller of this function doing something else with `fdt` after it returns?",
+      "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
