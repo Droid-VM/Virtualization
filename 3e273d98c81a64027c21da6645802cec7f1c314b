@@ -191,6 +191,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e16f92db_0f9c9902",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-02T09:21:33Z",
+      "side": 1,
+      "message": "Yes, we will need to parse the DICE chain, including subcomponents. I\u0027m not convinced that will re-use any of the code here.\nWe definitely shouldn\u0027t be using libhwtrust, although perhaps we can use ideas from it.",
+      "parentUuid": "c1321bc4_4aa8621d",
+      "range": {
+        "startLine": 68,
+        "startChar": 7,
+        "endLine": 68,
+        "endChar": 15
+      },
+      "revId": "3e273d98c81a64027c21da6645802cec7f1c314b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "96e7e66e_ffbf5208",
         "filename": "microdroid_manager/src/dice.rs",
         "patchSetId": 3
