@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0de77a6_50f22527",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 28
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-02T17:06:25Z",
+      "side": 1,
+      "message": "cdi_leaf_headers?\n(See comment below)",
+      "range": {
+        "startLine": 147,
+        "startChar": 8,
+        "endLine": 147,
+        "endChar": 20
+      },
+      "revId": "700b1b17a4d84c81c1479af12deff762a74218e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db4560f0_c0e9c465",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 28
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-02T17:06:25Z",
+      "side": 1,
+      "message": "Nit: build_headers?\n(Although this returns a CoseSignature, it doesn\u0027t actually contain the signature, just protected/unprotected headers)",
+      "range": {
+        "startLine": 162,
+        "startChar": 3,
+        "endLine": 162,
+        "endChar": 18
+      },
+      "revId": "700b1b17a4d84c81c1479af12deff762a74218e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "718168de_e6d34848",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 28
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-02T17:06:25Z",
+      "side": 1,
+      "message": "Why do we clone this? We drop the original immediately.",
+      "range": {
+        "startLine": 164,
+        "startChar": 42,
+        "endLine": 164,
+        "endChar": 59
+      },
+      "revId": "700b1b17a4d84c81c1479af12deff762a74218e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7bcdd90_ba39ac35",
+        "filename": "service_vm/test_apk/src/main.rs",
+        "patchSetId": 28
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-02T17:06:25Z",
+      "side": 1,
+      "message": "One reason for adding this is so we can write a test - we should be able to check that we can verify the signature against the public key in the attestation lead cert.\nI guess that\u0027s coming later?",
+      "range": {
+        "startLine": 198,
+        "startChar": 8,
+        "endLine": 198,
+        "endChar": 38
+      },
+      "revId": "700b1b17a4d84c81c1479af12deff762a74218e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e56229d_cdb68be1",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-02T17:06:25Z",
+      "side": 1,
+      "message": "I\u0027d explicitly mention \"ECDSA-P256\" here, since that seems the commonly understood name.",
+      "range": {
+        "startLine": 194,
+        "startChar": 32,
+        "endLine": 194,
+        "endChar": 33
+      },
+      "revId": "700b1b17a4d84c81c1479af12deff762a74218e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

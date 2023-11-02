@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8d8534e6_0b6e3ab6",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
+        "patchSetId": 25
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-02T17:06:25Z",
+      "side": 1,
+      "message": "Nonetheless, would it be easier for client id we represent this as a byte[][], so each cert is separate?\n\n(We will also need to define the cert extension in the final cert that describes the payload, but that is for the future.)",
+      "parentUuid": "d5f27fea_d014fa8e",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7125d473_904e51ec",
         "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
         "patchSetId": 25
@@ -219,6 +237,29 @@
       "side": 1,
       "message": "True. I added android in front.",
       "parentUuid": "ec76f683_bbb10ac9",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9f2defb_90fa3b80",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-02T17:06:25Z",
+      "side": 1,
+      "message": "The error handling is certainly simpler now, which is good.\nBut these strings look quite useful.\nAdd `.context(\"Failed to serialize public key\")` etc?",
+      "range": {
+        "startLine": 152,
+        "startChar": 29,
+        "endLine": 152,
+        "endChar": 60
+      },
       "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
