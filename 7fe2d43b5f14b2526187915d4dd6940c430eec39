@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e3f24672_cc92a418",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
+        "patchSetId": 25
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-03T11:56:17Z",
+      "side": 1,
+      "message": "Hmm. Well, the question was, what is easier for clients?\nAt one level separating out the certs seems helpful.\nOTOH I suspect most clients will just send the cert somewhere - e.g. to the app and thence to some server - where the actual parsing and verification will have to happen. So perhaps just a flat array of bytes is easier. It is certainly easier to expose as a C API.\n\n@drysdale@google.com might have an opinion.",
+      "parentUuid": "1a693b52_ffe40b94",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7125d473_904e51ec",
         "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
         "patchSetId": 25
