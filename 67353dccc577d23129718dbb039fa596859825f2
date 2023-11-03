@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e874d1e0_f589da0a",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 22
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-11-03T15:17:12Z",
+      "side": 1,
+      "message": "Optional, but you could reduce duplication by having `sanitize_device_tree` return the `\u0026mut Fdt` seeing as it already has it.",
+      "revId": "67353dccc577d23129718dbb039fa596859825f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
