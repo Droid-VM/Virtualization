@@ -268,6 +268,9 @@ impl<'a> FdtProperty<'a> {
 }
 
 /// DT node.
+// FdtNode and FdtNodeMut must have the same repexcept for mutability of Fdt.
+// See: FdtNodeMute::as_node()
+#[repr(C)]
 #[derive(Clone, Copy, Debug)]
 pub struct FdtNode<'a> {
     fdt: &'a Fdt,
@@ -548,6 +551,9 @@ impl TryFrom<u32> for Phandle {
 }
 
 /// Mutable FDT node.
+// FdtNode and FdtNodeMut must have the same repexcept for mutability of Fdt.
+// See: FdtNodeMute::as_node()
+#[repr(C)]
 #[derive(Debug)]
 pub struct FdtNodeMut<'a> {
     fdt: &'a mut Fdt,
@@ -694,6 +700,12 @@ impl<'a> FdtNodeMut<'a> {
     /// Returns reference to the containing device tree.
     pub fn fdt(&mut self) -> &mut Fdt {
         self.fdt
+    }
+
+    /// Returns immutable FdtNode of this node.
+    pub fn as_node(&self) -> &'a FdtNode {
+        // Safety: FdtNodeMut and FdtNode has the same representation
+        unsafe { mem::transmute::<&FdtNodeMut, &FdtNode>(self) }
     }
 
     /// Adds a new subnode to the given node and return it as a FdtNodeMut on success.
