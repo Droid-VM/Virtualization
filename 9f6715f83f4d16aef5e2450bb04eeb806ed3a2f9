@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c4c5b85_961649f4",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-03T12:38:06Z",
+      "side": 1,
+      "message": "I thought that `AsRef` requires type to be `Sized`. Maybe misunderstanding?\n\n```\npub trait AsRef\u003cT: ?Sized\u003e {\n    // Required method\n    fn as_ref(\u0026self) -\u003e \u0026T;\n}\n```\n\nNot directly related: If it\u0027s allowed, can we implement `AsRef` between `FdtNode` and `FdtNdoeMut`?",
+      "parentUuid": "55e07f8a_4bea7906",
+      "revId": "9f6715f83f4d16aef5e2450bb04eeb806ed3a2f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe8e8611_bd7d5a02",

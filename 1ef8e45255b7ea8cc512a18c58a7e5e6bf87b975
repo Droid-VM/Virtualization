@@ -155,6 +155,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe2fa8e1_5c5f0cde",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-03T12:38:06Z",
+      "side": 1,
+      "message": "Picked `locate_overlay_target_path`.\n\nRegarding `/`, double slashes are considered to be the same as one slash in pathname (see: `3.271 Pathname` from https://pubs.opengroup.org/onlinepubs/9699919799/. Found at  \nhttp://shortn/_MLBfGz7Ly7), so we\u0027d better to handle it as well. Ping me if you\u0027d like to discuss further.",
+      "parentUuid": "259c0735_6d2983a1",
+      "range": {
+        "startLine": 142,
+        "startChar": 4,
+        "endLine": 142,
+        "endChar": 80
+      },
+      "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a0cf3ac_4046c6ed",
@@ -370,6 +394,24 @@
       "side": 1,
       "message": "Nothing forces the caller to abort the program if this function returns an error. If the caller is required to do that for correctness, then yes, `sanitize_device_tree` should be unsafe, with a safety comment documenting what the caller is required to do.\n\nA better option would be for `sanitize_device_tree` to be safe but prevent the caller from using `fdt` in the error case. One way you could do this is by keeping track of whether the FDT is valid and checking that before any operation on it. This would probably require a bunch of refactoring in the `libfdt` wrapper to use a custom type for FDT references rather than just using `\u0026Fdt` and `\u0026mut Fdt`.\n\nAlternatively, `sanitize_device_tree` could take the FDT as a byte slice and call `Fdt::from_mut_slice` itself, and only return the `\u0026mut Fdt` in the success case.",
       "parentUuid": "b404c63e_29f2a452",
+      "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0de559ca_9da65106",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-03T12:38:06Z",
+      "side": 1,
+      "message": "SG either way, but that would be outside of the CL scope. Let me handle it in another CL.",
+      "parentUuid": "97fffab4_2cf1ac61",
       "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
