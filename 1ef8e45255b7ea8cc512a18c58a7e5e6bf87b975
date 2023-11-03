@@ -179,6 +179,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd95f4ef_0a6c65c9",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-03T13:29:50Z",
+      "side": 1,
+      "message": "DT paths are defined by the DT spec, not the POSIX spec, which is therefore irrelevant here.\n\nOtherwise, shouldn\u0027t we also support `.` and `..`? ;)",
+      "parentUuid": "fe2fa8e1_5c5f0cde",
+      "range": {
+        "startLine": 142,
+        "startChar": 4,
+        "endLine": 142,
+        "endChar": 80
+      },
+      "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a0cf3ac_4046c6ed",
