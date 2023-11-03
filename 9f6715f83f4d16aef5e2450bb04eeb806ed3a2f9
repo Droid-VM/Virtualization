@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f76c8dd_eb0a2a9b",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-03T06:36:47Z",
+      "side": 1,
+      "message": "Good catch. Removed `AsRef` because it doesn\u0027t make good sense to me.",
+      "parentUuid": "8ffd8d4d_b3684ffd",
+      "revId": "9f6715f83f4d16aef5e2450bb04eeb806ed3a2f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe8e8611_bd7d5a02",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-11-02T18:27:11Z",
       "side": 1,
       "message": "In fact this is safe because `VmDtbo` is a transparent wrapper around `Fdt`, so they have the same representation.",
+      "revId": "9f6715f83f4d16aef5e2450bb04eeb806ed3a2f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec7f10ae_7ae3c101",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-03T06:36:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe8e8611_bd7d5a02",
       "revId": "9f6715f83f4d16aef5e2450bb04eeb806ed3a2f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
