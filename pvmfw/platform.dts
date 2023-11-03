@@ -261,4 +261,64 @@
 		clock-frequency = <10>;
 		timeout-sec = <8>;
 	};
+
+	pviommu_0: pviommu@0 {
+		compatible = "pkvm,pviommu";
+		id = <PLACEHOLDER>;
+		#iommu-cells = <0>;
+	};
+
+	pviommu_1: pviommu@1 {
+		compatible = "pkvm,pviommu";
+		id = <PLACEHOLDER>;
+		#iommu-cells = <0>;
+	};
+
+	pviommu_2: pviommu@2 {
+		compatible = "pkvm,pviommu";
+		id = <PLACEHOLDER>;
+		#iommu-cells = <0>;
+	};
+
+	pviommu_3: pviommu@3 {
+		compatible = "pkvm,pviommu";
+		id = <PLACEHOLDER>;
+		#iommu-cells = <0>;
+	};
+
+	pviommu_4: pviommu@4 {
+		compatible = "pkvm,pviommu";
+		id = <PLACEHOLDER>;
+		#iommu-cells = <0>;
+	};
+
+	pviommu_5: pviommu@5 {
+		compatible = "pkvm,pviommu";
+		id = <PLACEHOLDER>;
+		#iommu-cells = <0>;
+	};
+
+	pviommu_6: pviommu@6 {
+		compatible = "pkvm,pviommu";
+		id = <PLACEHOLDER>;
+		#iommu-cells = <0>;
+	};
+
+	pviommu_7: pviommu@7 {
+		compatible = "pkvm,pviommu";
+		id = <PLACEHOLDER>;
+		#iommu-cells = <0>;
+	};
+
+	pviommu_8: pviommu@8 {
+		compatible = "pkvm,pviommu";
+		id = <PLACEHOLDER>;
+		#iommu-cells = <0>;
+	};
+
+	pviommu_9: pviommu@9 {
+		compatible = "pkvm,pviommu";
+		id = <PLACEHOLDER>;
+		#iommu-cells = <0>;
+	};
 };
