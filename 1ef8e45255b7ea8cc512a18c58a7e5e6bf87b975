@@ -354,6 +354,24 @@
       "parentUuid": "df8b1abd_a1901c65",
       "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97fffab4_2cf1ac61",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-11-03T11:59:20Z",
+      "side": 1,
+      "message": "Nothing forces the caller to abort the program if this function returns an error. If the caller is required to do that for correctness, then yes, `sanitize_device_tree` should be unsafe, with a safety comment documenting what the caller is required to do.\n\nA better option would be for `sanitize_device_tree` to be safe but prevent the caller from using `fdt` in the error case. One way you could do this is by keeping track of whether the FDT is valid and checking that before any operation on it. This would probably require a bunch of refactoring in the `libfdt` wrapper to use a custom type for FDT references rather than just using `\u0026Fdt` and `\u0026mut Fdt`.\n\nAlternatively, `sanitize_device_tree` could take the FDT as a byte slice and call `Fdt::from_mut_slice` itself, and only return the `\u0026mut Fdt` in the success case.",
+      "parentUuid": "b404c63e_29f2a452",
+      "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
