@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6f5b9eb_d3923240",
+        "filename": "secretkeeper/secretkeeper_comm/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-03T16:29:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2084be5_925dc448",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b8b062d_89a49f86",
@@ -511,6 +529,24 @@
       "side": 1,
       "message": "\u003e Will it ever make sense for a concrete type to replace these default method impls\n\nNo not really\n\n\u003e If not, maybe move them out of the trait.\n\nThese methods take \u0026self, if we move them out of trait, what will be the arg? `dyn RequestPacket` gets tricky because trait object needs to be introduced, alternatively we can use generic with this trait as the bound. But I don\u0027t know what is the advantage of wither over the status quo?\n\nLets discuss this offline.",
       "parentUuid": "8b1254bb_7963ac88",
+      "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe8a7c05_f20ec20e",
+        "filename": "secretkeeper/secretkeeper_comm/src/data_types/request.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-03T16:29:48Z",
+      "side": 1,
+      "message": "As discussed, lets leave it status quo, we\u0027re not using dyn objects, so this has no performance costs",
+      "parentUuid": "cd9f7f4f_1369df40",
       "revId": "44e3983b940c90cc92689672661b62e07fb3e59c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
