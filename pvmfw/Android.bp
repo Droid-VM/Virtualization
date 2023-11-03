@@ -74,6 +74,13 @@ genrule {
 }
 
 genrule {
+    name: "test_pvmfw_devices_with_assigned_devices",
+    defaults: ["dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_with_assigned_devices.dts"],
+    out: ["test_pvmfw_devices_with_assigned_devices.dtb"],
+}
+
+genrule {
     name: "test_pvmfw_devices_with_eh",
     defaults: ["dts_to_dtb"],
     srcs: ["testdata/test_pvmfw_devices_with_eh.dts"],
@@ -97,6 +104,7 @@ rust_test {
     data: [
         ":test_pvmfw_devices_vm_dtbo",
         ":test_pvmfw_devices_vm_dtbo_without_symbols",
+        ":test_pvmfw_devices_with_assigned_devices",
         ":test_pvmfw_devices_with_eh",
     ],
     // To use libpvmfw_fdt_template for testing
