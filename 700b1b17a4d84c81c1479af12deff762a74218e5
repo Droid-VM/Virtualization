@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f65bd21_f4ee99b9",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 28
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-03T11:42:29Z",
+      "side": 1,
+      "message": "This is a `CoseSignature`, although it\u0027s empty, it\u0027s weird to call it header.",
+      "parentUuid": "b0de77a6_50f22527",
+      "range": {
+        "startLine": 147,
+        "startChar": 8,
+        "endLine": 147,
+        "endChar": 20
+      },
+      "revId": "700b1b17a4d84c81c1479af12deff762a74218e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db4560f0_c0e9c465",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-02T17:06:25Z",
       "side": 1,
       "message": "Nit: build_headers?\n(Although this returns a CoseSignature, it doesn\u0027t actually contain the signature, just protected/unprotected headers)",
+      "range": {
+        "startLine": 162,
+        "startChar": 3,
+        "endLine": 162,
+        "endChar": 18
+      },
+      "revId": "700b1b17a4d84c81c1479af12deff762a74218e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01cbbed2_031feddf",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 28
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-03T11:42:29Z",
+      "side": 1,
+      "message": "We do build an empty `CoseSignature` structure here, which will be filled in `try_add_created_signature`. Maybe `build_empty_signature`, I also explained this in the function doc.",
+      "parentUuid": "db4560f0_c0e9c465",
       "range": {
         "startLine": 162,
         "startChar": 3,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3e49fe9_dfa3de33",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 28
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-03T11:42:29Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "718168de_e6d34848",
+      "range": {
+        "startLine": 164,
+        "startChar": 42,
+        "endLine": 164,
+        "endChar": 59
+      },
+      "revId": "700b1b17a4d84c81c1479af12deff762a74218e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d7bcdd90_ba39ac35",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b88ba5c_0dd6b35f",
+        "filename": "service_vm/test_apk/src/main.rs",
+        "patchSetId": 28
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-03T11:42:29Z",
+      "side": 1,
+      "message": "I planed to add such test even without this API. The verification also requires crypt library that this VM doesn\u0027t have access to. So we probably need to export the public key cert/private key/signature to the host for the verification.\n\nWe can do that when the certificate chain output will be ready.",
+      "parentUuid": "d7bcdd90_ba39ac35",
+      "range": {
+        "startLine": 198,
+        "startChar": 8,
+        "endLine": 198,
+        "endChar": 38
+      },
+      "revId": "700b1b17a4d84c81c1479af12deff762a74218e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e56229d_cdb68be1",
@@ -106,6 +202,30 @@
       "writtenOn": "2023-11-02T17:06:25Z",
       "side": 1,
       "message": "I\u0027d explicitly mention \"ECDSA-P256\" here, since that seems the commonly understood name.",
+      "range": {
+        "startLine": 194,
+        "startChar": 32,
+        "endLine": 194,
+        "endChar": 33
+      },
+      "revId": "700b1b17a4d84c81c1479af12deff762a74218e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cb361aa_fc1ce34d",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-03T11:42:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e56229d_cdb68be1",
       "range": {
         "startLine": 194,
         "startChar": 32,

@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a693b52_ffe40b94",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
+        "patchSetId": 25
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-03T11:42:29Z",
+      "side": 1,
+      "message": "Done.\n\n`byte[][]` doesn\u0027t compile with error:\n```\nERROR: packages/modules/Virtualization/microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl:54.27-63.15: Multi-dimensional arrays must be fixed size.\n```\nI added a `Certificate` wrapping the `byte[]`. think it\u0027s more clear.\n\nBut I\u0027m not sure how we should return a nested vector to client in the NDK API?",
+      "parentUuid": "8d8534e6_0b6e3ab6",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7125d473_904e51ec",
         "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
         "patchSetId": 25
@@ -254,6 +272,30 @@
       "writtenOn": "2023-11-02T17:06:25Z",
       "side": 1,
       "message": "The error handling is certainly simpler now, which is good.\nBut these strings look quite useful.\nAdd `.context(\"Failed to serialize public key\")` etc?",
+      "range": {
+        "startLine": 152,
+        "startChar": 29,
+        "endLine": 152,
+        "endChar": 60
+      },
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da2138c5_bec2084a",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-03T11:42:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9f2defb_90fa3b80",
       "range": {
         "startLine": 152,
         "startChar": 29,
