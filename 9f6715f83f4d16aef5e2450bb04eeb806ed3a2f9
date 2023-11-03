@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c4e60504_bf8af3c6",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-11-03T13:17:30Z",
+      "side": 1,
+      "message": "No, `?Sized` means that `T` doesn\u0027t need to be `Sized`. `Sized` is special and usually required, this is an exception. See https://doc.rust-lang.org/std/marker/trait.Sized.html: \"All type parameters have an implicit bound of Sized. The special syntax ?Sized can be used to remove this bound if it’s not appropriate.\"",
+      "parentUuid": "2c4c5b85_961649f4",
+      "revId": "9f6715f83f4d16aef5e2450bb04eeb806ed3a2f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe8e8611_bd7d5a02",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 18

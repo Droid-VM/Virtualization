@@ -414,6 +414,24 @@
       "parentUuid": "97fffab4_2cf1ac61",
       "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff9b36fc_d46d3420",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-11-03T13:17:30Z",
+      "side": 1,
+      "message": "As it stands you are introducing unsoundness in this CL that was not present before, so please fix that before submitting it. The simplest options are to make `sanitize_device_tree` unsafe or have it take the fdt as a byte slice.",
+      "parentUuid": "0de559ca_9da65106",
+      "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
