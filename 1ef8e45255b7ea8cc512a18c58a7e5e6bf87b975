@@ -456,6 +456,24 @@
       "parentUuid": "0de559ca_9da65106",
       "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9721a546_b55e3c93",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-03T15:13:41Z",
+      "side": 1,
+      "message": "Done by picking byte slice approach.\n\nBut one question for clarification: `sanitize_device_tree()` had already modified `fdt` for many reasons (e.g. `fdt.copy_from_slice(...)`, `patch_device_tree()`) and just return with invalid `fdt` contents when something goes wrong. Could you explain more details about the reason for `unsafe sanitize_device_tree()` in this CL? Is it because `apply_overlay()` may break `fdt` structure?",
+      "parentUuid": "ff9b36fc_d46d3420",
+      "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
