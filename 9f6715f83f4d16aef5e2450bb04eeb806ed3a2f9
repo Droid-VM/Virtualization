@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "55e07f8a_4bea7906",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-03T10:19:24Z",
+      "side": 1,
+      "message": "`T: AsRef\u003cU\u003e` simply means that any `\u0026T` can be trivially turned it into a `\u0026U` (Andrew, correct me if I\u0027m wrong), which is very fitting for `Dtbo` and `Fdt` ...\n\nAnyway, at least remove the comment?",
+      "parentUuid": "6f76c8dd_eb0a2a9b",
+      "revId": "9f6715f83f4d16aef5e2450bb04eeb806ed3a2f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe8e8611_bd7d5a02",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 18
