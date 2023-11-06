@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f13ab1c7_c92daf4d",
+        "filename": "service_vm/comm/src/message.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-11-06T19:14:24Z",
+      "side": 1,
+      "message": "I\u0027m a bit confused by this request format:\n\n1. How does the client VM get the key blob? Why are they responsible for dealing with RKP key blobs at all? Shouldn\u0027t the service VM just be dealing with that?\n1. Why is the cert chain an input? That should be an output.\n1. Is the `csr` the same as `AuthenticatedRequest`, as documented in `generateCertificateRequestV2.cddl`? We should just be explicit here so folks know what \"CSR\" means.\n    * Assuming it is `AuthenticatedRequest`, what assistance are we providing to client VM authors to generate it? Building up the request structure is non-trivial work, and I assume we want to build some common utility that client VMs reuse.\n    \nMy understanding is that the service VM is responsible for talking to rkpd (much like how apps call keystore2, then keystore2 talks to rkpds -- the app has no idea rkpd is even involved).",
+      "range": {
+        "startLine": 61,
+        "startChar": 11,
+        "endLine": 61,
+        "endChar": 35
+      },
+      "revId": "e880216d6901ee4fa651189d6f4dd085a8fe2331",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84b6ca16_a480d1ea",
+        "filename": "service_vm/comm/src/message.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-11-06T19:14:24Z",
+      "side": 1,
+      "message": "nit: \"trusted by Google\" feels like the wrong phrase here. Since Google _is_ the root, I sure hope Google trusts itself 😄\n\nThe trust relationship is the other way around: anyone receiving this chain needs to trust that Google root.",
+      "range": {
+        "startLine": 91,
+        "startChar": 71,
+        "endLine": 91,
+        "endChar": 88
+      },
+      "revId": "e880216d6901ee4fa651189d6f4dd085a8fe2331",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
