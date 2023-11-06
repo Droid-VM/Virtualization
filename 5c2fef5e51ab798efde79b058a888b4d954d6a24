@@ -139,6 +139,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1951ee2e_32f7c698",
+        "filename": "virtualizationservice/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-06T11:00:50Z",
+      "side": 1,
+      "message": "We should keep this, we will need it.",
+      "range": {
+        "startLine": 73,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 33
+      },
+      "revId": "5c2fef5e51ab798efde79b058a888b4d954d6a24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6aa24017_37f24b45",
         "filename": "virtualizationservice/src/rkpd_client.rs",
         "patchSetId": 2
@@ -436,6 +459,30 @@
       "side": 1,
       "message": "I think the `Mutex` used here actually facilitates compilation, since   [tokio::oneshot::Sender](https://docs.rs/tokio/latest/tokio/sync/oneshot/struct.Sender.html#method.send) consumes the sender, unlike the [std::Sender](https://doc.rust-lang.org/stable/std/sync/mpsc/struct.Sender.html#method.send). Therefore, directly calling` tokio::oneshot::Sender::send()` in each callback implementation, as shown below, would trigger a move that is incompatible with the callback AIDL signature:\n```\nfn onSuccess(\u0026self, registration: \u0026Strong\u003cdyn IRegistration\u003e) -\u003e binder::Result\u003c()\u003e {\n        let _wp \u003d wd::watch_millis(\"IGetRegistrationCallback::onSuccess\", 500);\n        let _ \u003d self.registration_tx.send(Ok(registration.clone()));\n        Ok(())\n    }\n```",
       "parentUuid": "ee8921ad_b4bdd6c5",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 1
+      },
+      "revId": "5c2fef5e51ab798efde79b058a888b4d954d6a24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a718efaa_b14341a4",
+        "filename": "virtualizationservice/src/rkpd_client.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-06T11:00:50Z",
+      "side": 1,
+      "message": "I don\u0027t understand that, but a better comment might be \"I\u0027ve deleted this file so none of this is relevant now\".",
+      "parentUuid": "42133ae2_115adcf2",
       "range": {
         "startLine": 59,
         "startChar": 0,
