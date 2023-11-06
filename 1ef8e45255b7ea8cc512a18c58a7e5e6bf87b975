@@ -203,6 +203,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "426535ec_90df43c7",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-06T15:05:23Z",
+      "side": 1,
+      "message": "Sorry about confusion. I only meant that consecutive `/` are often considered as the same as a single `/`.\n\nIIUC, you\u0027re saying that we don\u0027t need to handle consecutive `/` because \u0027node name should be nonempty\u0027 implies no consecutive `/`. But I don\u0027t think so. If it is, `dtc` should return error for consecutive `/` to comply with DT spec, but it doesn\u0027t. `dtc` may be violating the spec for backward compatibility, but I don\u0027t know the motivation and following `dtc` behavior seemed to be more natural.\n\nI thought that you\u0027re proposing not to accept consecutive `/` for simpler code. But if it\u0027s not and you want to be more strict on input data, then I would change my mind. Tell me if it\u0027s the case.",
+      "parentUuid": "cd95f4ef_0a6c65c9",
+      "range": {
+        "startLine": 142,
+        "startChar": 4,
+        "endLine": 142,
+        "endChar": 80
+      },
+      "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a0cf3ac_4046c6ed",
