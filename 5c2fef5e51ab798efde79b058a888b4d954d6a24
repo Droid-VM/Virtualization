@@ -160,6 +160,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f3e6239_9dfff916",
+        "filename": "virtualizationservice/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T13:49:24Z",
+      "side": 1,
+      "message": "This will be done in another cl where we expose the IRPC service: https://r.android.com/2775450\n\nThis cl focuses on retrieving the remotely provisioned keys, which is orthogonal with that cl.",
+      "parentUuid": "1951ee2e_32f7c698",
+      "range": {
+        "startLine": 73,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 33
+      },
+      "revId": "5c2fef5e51ab798efde79b058a888b4d954d6a24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6aa24017_37f24b45",
@@ -483,6 +507,30 @@
       "side": 1,
       "message": "I don\u0027t understand that, but a better comment might be \"I\u0027ve deleted this file so none of this is relevant now\".",
       "parentUuid": "42133ae2_115adcf2",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 1
+      },
+      "revId": "5c2fef5e51ab798efde79b058a888b4d954d6a24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "300a8697_cde47644",
+        "filename": "virtualizationservice/src/rkpd_client.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T13:49:24Z",
+      "side": 1,
+      "message": "Yes, we deleted this file here but the `SafeSender` still exists in `rkpd_client` of keystore2.",
+      "parentUuid": "a718efaa_b14341a4",
       "range": {
         "startLine": 59,
         "startChar": 0,

@@ -22,6 +22,30 @@
       },
       "revId": "cc8aaafbccabf92722402a7278d618761b36c6dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2abb901a_9e1af426",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T13:49:24Z",
+      "side": 1,
+      "message": "These fields will be sent into the RKP VM and the keyblob will be decrypted to provide the private key. That is done in the subsequent cl:\nhttps://r.android.com/2775450",
+      "parentUuid": "c834dde6_dc3feb09",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 39
+      },
+      "revId": "cc8aaafbccabf92722402a7278d618761b36c6dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
