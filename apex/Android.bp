@@ -103,9 +103,13 @@ apex_defaults {
         "com.android.virt.init.rc",
         "features_com.android.virt.xml",
         "microdroid_initrd_debuggable",
+        "microdroid_gki_initrd_debuggable",
         "microdroid_initrd_normal",
+        "microdroid_gki_initrd_normal",
         "microdroid.json",
+        "microdroid_gki.json",
         "microdroid_kernel",
+        "microdroid_gki_kernel",
         "rialto_bin",
     ],
     host_required: [

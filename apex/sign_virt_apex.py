@@ -412,10 +412,13 @@ def GenVbmetaImage(args, image, output, partition_name):
 # dict of (key, file) for re-sign/verification. keys are un-versioned for readability.
 virt_apex_files = {
     'kernel': 'etc/fs/microdroid_kernel',
+    'gki_kernel': 'etc/fs/microdroid_gki_kernel',
     'vbmeta.img': 'etc/fs/microdroid_vbmeta.img',
     'super.img': 'etc/fs/microdroid_super.img',
     'initrd_normal.img': 'etc/microdroid_initrd_normal.img',
+    'gki_initrd_normal.img': 'etc/microdroid_gki_initrd_normal.img',
     'initrd_debuggable.img': 'etc/microdroid_initrd_debuggable.img',
+    'gki_initrd_debuggable.img': 'etc/microdroid_gki_initrd_debuggable.img',
 }
 
 
