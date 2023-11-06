@@ -353,6 +353,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "15f18055_ad4b6f49",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-11-06T03:20:33Z",
+      "side": 1,
+      "message": "Ah, okay. The situation DTBO already exists is improper, so I decided to throw error in the function. Also added the test for hijacking that.\n\nHowever, the unit test doesn\u0027t cover the attack that overwriting DTBO file after the creation. And I think it should be covered in pvmfw for protected VM, not in the unit test of the host.",
+      "parentUuid": "75ab1f45_cfeb5093",
+      "range": {
+        "startLine": 538,
+        "startChar": 3,
+        "endLine": 538,
+        "endChar": 31
+      },
+      "revId": "d29499cf82db7cd186976a1265a3290ef1306db0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ad1d9c9_a86ee825",
         "filename": "virtualizationmanager/src/aidl.rs",
         "patchSetId": 1
