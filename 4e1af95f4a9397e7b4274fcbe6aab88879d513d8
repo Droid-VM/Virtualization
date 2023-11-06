@@ -407,6 +407,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfe882e0_e0448ec4",
+        "filename": "service_vm/test_apk/src/main.rs",
+        "patchSetId": 32
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-06T14:58:52Z",
+      "side": 1,
+      "message": "Box::new([0u8; size])\n\n(as_mut_ptr() and len() should still work via deref)",
+      "parentUuid": "18e42ad0_efcc8d6d",
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6dc1641c_f782ccc5",

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87e03b5d_3dcd48b7",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 33
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-06T14:58:52Z",
+      "side": 1,
+      "message": "I think we should allow an empty challenge; that\u0027s up to the caller. We can just use our own empty array if need be.\n(If we don\u0027t, that needs to be part of the API documentation.)",
+      "range": {
+        "startLine": 289,
+        "startChar": 46,
+        "endLine": 289,
+        "endChar": 65
+      },
+      "revId": "fa131e62ee1b47043594f83b0f4d260a6a527595",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
