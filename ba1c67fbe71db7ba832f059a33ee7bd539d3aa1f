@@ -1,0 +1,395 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87c12866_b48ed017",
+        "filename": "pvmfw/Android.bp",
+        "patchSetId": 23
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-06T19:58:01Z",
+      "side": 1,
+      "message": "Shouldn\u0027t these be `.dts`?",
+      "range": {
+        "startLine": 65,
+        "startChar": 48,
+        "endLine": 65,
+        "endChar": 52
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c2deb34_7d4a46d8",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-06T19:58:01Z",
+      "side": 1,
+      "message": "These properties will be used to verify the assigned devices; rename to `MASKED_`, `FILTERED_`, or something along these lines?",
+      "range": {
+        "startLine": 42,
+        "startChar": 6,
+        "endLine": 42,
+        "endChar": 25
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d0f7544_aef41426",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-06T19:58:01Z",
+      "side": 1,
+      "message": "Please follow the style of aosp/2651825:\n```\n// SAFETY:\n```",
+      "range": {
+        "startLine": 107,
+        "startChar": 8,
+        "endLine": 107,
+        "endChar": 18
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15dab8f3_1a4c97b9",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-06T19:58:01Z",
+      "side": 1,
+      "message": "`CStr` can be compared:\n```\nlet target_path \u003d fragment_node.getprop_str(Self::TARGET_PATH_PROP)?\n                               .ok_or(DeviceAssignmentError::InvalidDtbo)?;\nif target_path !\u003d cstr!(\"/\") {\n```",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 64
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faa3bd64_9789f202",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-06T19:58:01Z",
+      "side": 1,
+      "message": "typo: `path`",
+      "range": {
+        "startLine": 189,
+        "startChar": 17,
+        "endLine": 189,
+        "endChar": 22
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b6f4a79_87193154",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-06T19:58:01Z",
+      "side": 1,
+      "message": "nit: IMO, this would read better if the object was unconditionally built from a device node:\n```\nfn new(node: \u0026FdtNode, node_path: \u0026CStr, dtbo_node_path: \u0026CStr) -\u003e Result\u003cSelf\u003e\n```\nallowing you to\n```\nlet node_path \u003d vm_dtbo.locate_overlay_target_path(dtbo_node_path)?;\nif let Some(node) \u003d fdt.node(\u0026node_path)? {\n    let info \u003d AssignedDeviceInfo::new(node, \u0026node_path, dtbo_node_path)?;\n    assigned_devices.push(info);\n```",
+      "range": {
+        "startLine": 264,
+        "startChar": 0,
+        "endLine": 265,
+        "endChar": 60
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1062f904_ecc7cafb",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-06T19:58:01Z",
+      "side": 1,
+      "message": "Nit: you could move the caller policy logic out of the object with `::new() -\u003e Result\u003cSelf\u003e` and providing\n```\npub fn has_assigned_devices(\u0026self) -\u003e bool {\n     !self.assigned_devices.is_empty()\n}\n```\nallowing the caller to decide, on its own, how it wants to deal with no device having been assigned.",
+      "range": {
+        "startLine": 273,
+        "startChar": 12,
+        "endLine": 273,
+        "endChar": 28
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "440fd2a3_72fa4611",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-06T19:58:01Z",
+      "side": 1,
+      "message": "Add `/__symbols__` to `filtered_dtbo_paths`?",
+      "range": {
+        "startLine": 302,
+        "startChar": 8,
+        "endLine": 304,
+        "endChar": 31
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77387820_60905ab7",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-06T19:58:01Z",
+      "side": 1,
+      "message": "The error message is exactly why I submitted aosp/2809915; would you mind using\n```\nassert_eq!(x, None);\nassert_ne!(x, None);\n```\nin place of `assert!(x.is_{some,none}())` here and below?\n\nThis will automatically (and always) give you an error message like what you want here.\n\nWhen testing a function that `-\u003e Result\u003cOption\u003cT\u003e\u003e`, you could even replace:\n```\nlet x \u003d foo().unwrap();\nassert_eq!(x, None);\n```\nwith\n```\nassert_eq!(foo(), Ok(None));\n```\nto give more context to the panic message than `.unwrap()` holds on its own.",
+      "range": {
+        "startLine": 348,
+        "startChar": 39,
+        "endLine": 348,
+        "endChar": 78
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59157b22_d3a16697",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-06T19:58:01Z",
+      "side": 1,
+      "message": "Why not use the standard `CString::new`?",
+      "range": {
+        "startLine": 361,
+        "startChar": 0,
+        "endLine": 362,
+        "endChar": 72
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0c9a94d_7208b710",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-06T19:58:01Z",
+      "side": 1,
+      "message": "Turn `expected` into an array (\"`expected_devices`\") and\n```\nassert_eq!(device_info.assigned_devices, \u0026expected_devices);\n```\n?",
+      "range": {
+        "startLine": 367,
+        "startChar": 0,
+        "endLine": 368,
+        "endChar": 62
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dedce65a_ea27eb1f",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-06T19:58:01Z",
+      "side": 1,
+      "message": "nit: use a tuple so that the error message for a `value` mismatch contains the `name`:\n```\nassert_eq!((prop.name(), prop.value()), (Ok(name), Ok(value)));\n```",
+      "range": {
+        "startLine": 430,
+        "startChar": 0,
+        "endLine": 431,
+        "endChar": 64
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b4ad515_afc30d21",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-06T19:58:01Z",
+      "side": 1,
+      "message": "nit: `if let Some(vm_dtbo) \u003d vm_dtbo` (same line 696)",
+      "range": {
+        "startLine": 615,
+        "startChar": 18,
+        "endLine": 615,
+        "endChar": 33
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39d108f0_617e56cd",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-06T19:58:01Z",
+      "side": 1,
+      "message": "typo: `overlaid`",
+      "range": {
+        "startLine": 764,
+        "startChar": 50,
+        "endLine": 764,
+        "endChar": 59
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "124d8bc0_a4f0a952",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-06T19:58:01Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 767,
+        "startChar": 36,
+        "endLine": 767,
+        "endChar": 41
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fe3fbe4_0162fe30",
+        "filename": "pvmfw/testdata/test_pvmfw_devices_vm_dtbo.dtsi",
+        "patchSetId": 23
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-06T19:58:01Z",
+      "side": 1,
+      "message": "It\u0027s probably better not to commit anything like this to AOSP.\n\nWould you mind replacing any reference to `eh` (in the DTS and source docs) with a fake device, including these properties?",
+      "range": {
+        "startLine": 11,
+        "startChar": 33,
+        "endLine": 11,
+        "endChar": 43
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a86a5c0b_59fec57a",
+        "filename": "pvmfw/testdata/test_pvmfw_devices_vm_dtbo.dtsi",
+        "patchSetId": 23
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-06T19:58:01Z",
+      "side": 1,
+      "message": "Can\u0027t you `/include/` the DTS `_without_symbols`, here?",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 3
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
