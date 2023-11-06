@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4a280d43_105716a0",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
+        "patchSetId": 25
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-06T08:05:39Z",
+      "side": 1,
+      "message": "I\u0027d lean towards separating the certs, because not all X.509 libraries have a convenient entrypoint for dealing with concatenated DER certs (e.g. [Go does](https://pkg.go.dev/crypto/x509#ParseCertificates) but the Rust `x509-cert` crate only copes with [concatenated PEM format](https://docs.rs/x509-cert/latest/x509_cert/certificate/struct.CertificateInner.html#method.load_pem_chain), and I\u0027m not sure about [BoringSSL](https://cs.android.com/android/platform/superproject/main/+/main:external/boringssl/src/crypto/x509/x_x509.c?q\u003d%22d2i_X509%28%22)).\n\nIt\u0027s much easier to concatenate DER data than it is to separate it...",
+      "parentUuid": "e3f24672_cc92a418",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7125d473_904e51ec",
         "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
         "patchSetId": 25
@@ -460,6 +478,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "c005d1d6_709bdd76",
+      "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d288c96_f752d00f",
+        "filename": "service_vm/client_apk/src/main.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-06T08:05:39Z",
+      "side": 1,
+      "message": "Done where? I couldn\u0027t immediately spot it after the code re-orgs.",
+      "parentUuid": "749cf8ca_9b0449aa",
       "revId": "7fe2d43b5f14b2526187915d4dd6940c430eec39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
