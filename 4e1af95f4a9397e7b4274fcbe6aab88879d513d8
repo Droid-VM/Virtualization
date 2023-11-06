@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "844018b6_adee02a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T14:28:51Z",
+      "side": 1,
+      "message": "I checked that the slice size is not 0 in the code.",
+      "parentUuid": "379dd0db_6fe9963a",
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b88ffde4_95e257bd",
@@ -64,6 +82,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9b638e0_b64041e4",
+        "filename": "service_vm/test_apk/src/main.rs",
+        "patchSetId": 32
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T14:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b88ffde4_95e257bd",
+      "range": {
+        "startLine": 94,
+        "startChar": 16,
+        "endLine": 94,
+        "endChar": 19
+      },
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2352ac0_2921177a",
+        "filename": "service_vm/test_apk/src/main.rs",
+        "patchSetId": 32
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T14:28:51Z",
+      "side": 1,
+      "message": "Done. Thanks for the suggestion. True I don\u0027t really need MaybeUninit here.",
+      "parentUuid": "d17b027a_5d0f91c5",
+      "range": {
+        "startLine": 94,
+        "startChar": 22,
+        "endLine": 94,
+        "endChar": 44
+      },
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86837d0e_3435705c",
@@ -77,6 +143,24 @@
       "writtenOn": "2023-11-03T17:12:26Z",
       "side": 1,
       "message": "Nit: You should mention that it doesn\u0027t read through `res.as_mut_ptr()` unless you remove the MaybeUninit.",
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e28930ef_6484a930",
+        "filename": "service_vm/test_apk/src/main.rs",
+        "patchSetId": 32
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T14:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86837d0e_3435705c",
       "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -111,6 +195,24 @@
       "writtenOn": "2023-11-03T17:12:26Z",
       "side": 1,
       "message": "SAFETY: This seems correct, but I\u0027d prefer if we didn\u0027t have it at all, given it\u0027s a single word wide and avoiding its initialization isn\u0027t worth the cost of this complexity.",
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b86bc28b_c7dccc7d",
+        "filename": "service_vm/test_apk/src/main.rs",
+        "patchSetId": 32
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T14:28:51Z",
+      "side": 1,
+      "message": "I removed it.",
+      "parentUuid": "a0399bf2_de37a5a2",
       "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -185,6 +287,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "09501995_91f748e3",
+        "filename": "service_vm/test_apk/src/main.rs",
+        "patchSetId": 32
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T14:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54bd2396_37a19bee",
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "91a59b77_87da6adc",
         "filename": "service_vm/test_apk/src/main.rs",
         "patchSetId": 32
@@ -219,6 +339,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "611f606f_65aa6079",
+        "filename": "service_vm/test_apk/src/main.rs",
+        "patchSetId": 32
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T14:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4f468af_c3ab2b7a",
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "1f4185aa_1a0fe1c7",
         "filename": "service_vm/test_apk/src/main.rs",
         "patchSetId": 32
@@ -247,6 +385,24 @@
       "writtenOn": "2023-11-03T17:12:26Z",
       "side": 1,
       "message": "Nit: Consider Box\u003c[u8]\u003e",
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18e42ad0_efcc8d6d",
+        "filename": "service_vm/test_apk/src/main.rs",
+        "patchSetId": 32
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T14:28:51Z",
+      "side": 1,
+      "message": "I kept the vector type here but just convert the result to `Box\u003c[u8]\u003e` at return. Is there any simpler way to do this?",
+      "parentUuid": "aa9bcf4c_30bf6ef5",
       "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -287,6 +443,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "11c1047c_98d062cd",
+        "filename": "service_vm/test_apk/src/main.rs",
+        "patchSetId": 32
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T14:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1901e15b_9efb68b8",
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "af941e51_b1693e67",
         "filename": "service_vm/test_apk/src/main.rs",
         "patchSetId": 32
@@ -321,6 +495,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f3a1307a_d0e8b16c",
+        "filename": "service_vm/test_apk/src/main.rs",
+        "patchSetId": 32
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T14:28:51Z",
+      "side": 1,
+      "message": "Done. Same question as above.",
+      "parentUuid": "bf302ec6_6191dfa6",
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d11b5a66_ba254e67",
         "filename": "service_vm/test_apk/src/main.rs",
         "patchSetId": 32
@@ -349,6 +541,24 @@
       "writtenOn": "2023-11-03T17:12:26Z",
       "side": 1,
       "message": "Nit: Assert",
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6e5b742_a102a1d3",
+        "filename": "service_vm/test_apk/src/main.rs",
+        "patchSetId": 32
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T14:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39154464_46051304",
       "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -404,6 +614,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3702b28c_28832817",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 32
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T14:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0bbae65_315fbe3a",
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0878d607_7a38b5ee",
@@ -417,6 +645,24 @@
       "writtenOn": "2023-11-03T17:12:26Z",
       "side": 1,
       "message": "UB: This is not legal if message_size is zero, see the documentation on `from_raw_parts` - the pointer cannot be null, *even if* the element count is 0",
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a749719_4d28850f",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 32
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T14:28:51Z",
+      "side": 1,
+      "message": "I checked that the `challenge` size must not be zero.",
+      "parentUuid": "0878d607_7a38b5ee",
       "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -455,6 +701,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88689bc0_bc5b0396",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 32
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T14:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "878a0e3f_91c62172",
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "162306e3_b7c6ea3a",
@@ -472,6 +736,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbc54759_346bd826",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 32
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T14:28:51Z",
+      "side": 1,
+      "message": "Done. Removed.",
+      "parentUuid": "162306e3_b7c6ea3a",
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "037eeee7_aefccbeb",
@@ -485,6 +767,24 @@
       "writtenOn": "2023-11-03T17:12:26Z",
       "side": 1,
       "message": "Nit: Consider asserting data being non-null to catch usage errors?",
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e3b0304_f92708d5",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 32
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T14:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "037eeee7_aefccbeb",
       "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -523,6 +823,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9a5c360_1340646d",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 32
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T14:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c7905f7_00a3623b",
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "642afa56_945e6650",
@@ -536,6 +854,24 @@
       "writtenOn": "2023-11-03T17:12:26Z",
       "side": 1,
       "message": "This becomes unnecessary after changing the type signature.",
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad75d09c_df0df081",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 32
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T14:28:51Z",
+      "side": 1,
+      "message": "Done. Removed.",
+      "parentUuid": "642afa56_945e6650",
       "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -557,6 +893,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "159d58a7_e27ea57c",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 32
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T14:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e0fef50_f9723f68",
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aadde00e_7490d20c",
@@ -570,6 +924,24 @@
       "writtenOn": "2023-11-03T17:12:26Z",
       "side": 1,
       "message": "Nit: Consider asserting data being non-null to catch usage errors?",
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c291f013_7e1d8a1d",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 32
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T14:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aadde00e_7490d20c",
       "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -608,6 +980,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ceabba1_49c90a17",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 32
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T14:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91a5f22b_6b8e0a42",
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c89aa273_e8a81e54",
@@ -625,6 +1015,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1f14d0f_6c2b48f9",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 32
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T14:28:51Z",
+      "side": 1,
+      "message": "Done. Removed",
+      "parentUuid": "c89aa273_e8a81e54",
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ec65bf6_41538835",
@@ -638,6 +1046,24 @@
       "writtenOn": "2023-11-03T17:12:26Z",
       "side": 1,
       "message": "Nit: Assert data non-null to help with programmer misuse",
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c07db88_93fcc1de",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 32
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T14:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ec65bf6_41538835",
       "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
