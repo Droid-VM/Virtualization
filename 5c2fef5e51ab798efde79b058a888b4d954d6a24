@@ -208,6 +208,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e469259c_17010d00",
+        "filename": "virtualizationservice/src/rkpd_client.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T10:04:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9dc5f51_b551a414",
+      "range": {
+        "startLine": 39,
+        "startChar": 17,
+        "endLine": 39,
+        "endChar": 37
+      },
+      "revId": "5c2fef5e51ab798efde79b058a888b4d954d6a24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e37469a_5035da05",
@@ -269,6 +293,30 @@
       "side": 1,
       "message": "I don\u0027t see why not, unless the dependencies are huge. \n(I should learn some async Rust.)",
       "parentUuid": "e92d1319_389d79ed",
+      "range": {
+        "startLine": 43,
+        "startChar": 3,
+        "endLine": 43,
+        "endChar": 24
+      },
+      "revId": "5c2fef5e51ab798efde79b058a888b4d954d6a24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd073ddc_7fac7ef8",
+        "filename": "virtualizationservice/src/rkpd_client.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T10:04:53Z",
+      "side": 1,
+      "message": "Done. https://r.android.com/2817560",
+      "parentUuid": "2992b90d_16229d2f",
       "range": {
         "startLine": 43,
         "startChar": 3,
@@ -374,6 +422,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42133ae2_115adcf2",
+        "filename": "virtualizationservice/src/rkpd_client.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T10:04:53Z",
+      "side": 1,
+      "message": "I think the `Mutex` used here actually facilitates compilation, since   [tokio::oneshot::Sender](https://docs.rs/tokio/latest/tokio/sync/oneshot/struct.Sender.html#method.send) consumes the sender, unlike the [std::Sender](https://doc.rust-lang.org/stable/std/sync/mpsc/struct.Sender.html#method.send). Therefore, directly calling` tokio::oneshot::Sender::send()` in each callback implementation, as shown below, would trigger a move that is incompatible with the callback AIDL signature:\n```\nfn onSuccess(\u0026self, registration: \u0026Strong\u003cdyn IRegistration\u003e) -\u003e binder::Result\u003c()\u003e {\n        let _wp \u003d wd::watch_millis(\"IGetRegistrationCallback::onSuccess\", 500);\n        let _ \u003d self.registration_tx.send(Ok(registration.clone()));\n        Ok(())\n    }\n```",
+      "parentUuid": "ee8921ad_b4bdd6c5",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 1
+      },
+      "revId": "5c2fef5e51ab798efde79b058a888b4d954d6a24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ae3372b_5ce8b340",
@@ -387,6 +459,30 @@
       "writtenOn": "2023-10-31T15:35:33Z",
       "side": 1,
       "message": "Blank line between methods.",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 0
+      },
+      "revId": "5c2fef5e51ab798efde79b058a888b4d954d6a24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbb3a5e1_03c3e978",
+        "filename": "virtualizationservice/src/rkpd_client.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T10:04:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ae3372b_5ce8b340",
       "range": {
         "startLine": 95,
         "startChar": 0,
