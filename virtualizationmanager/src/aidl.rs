@@ -638,9 +638,15 @@ fn load_app_config(
         bail!("Unknown OS \"{}\"", os_name);
     }
 
+    let gki = config.customConfig.as_ref().map_or(false, |c| c.gki);
+
     // It is safe to construct a filename based on the os_name because we've already checked that it
     // is one of the allowed values.
-    let vm_config_path = PathBuf::from(format!("/apex/com.android.virt/etc/{}.json", os_name));
+    let vm_config_path = if gki {
+        PathBuf::from(format!("/apex/com.android.virt/etc/{}_gki.json", os_name))
+    } else {
+        PathBuf::from(format!("/apex/com.android.virt/etc/{}.json", os_name))
+    };
     let vm_config_file = File::open(vm_config_path)?;
     let mut vm_config = VmConfig::load(&vm_config_file)?.to_parcelable()?;
 

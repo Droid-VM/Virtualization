@@ -432,7 +432,12 @@ pub fn add_microdroid_system_images(
         DebugLevel::FULL => "debuggable",
         _ => return Err(anyhow!("unsupported debug level: {:?}", config.debugLevel)),
     };
-    let initrd = format!("/apex/com.android.virt/etc/microdroid_initrd_{}.img", debug_suffix);
+    let gki = config.customConfig.as_ref().map_or(false, |c| c.gki);
+    let initrd = if gki {
+        format!("/apex/com.android.virt/etc/microdroid_gki_initrd_{}.img", debug_suffix)
+    } else {
+        format!("/apex/com.android.virt/etc/microdroid_initrd_{}.img", debug_suffix)
+    };
     vm_config.initrd = Some(open_parcel_file(Path::new(&initrd), false)?);
 
     let mut writable_partitions = vec![Partition {
