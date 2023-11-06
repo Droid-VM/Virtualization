@@ -99,6 +99,8 @@ const ANDROID_VM_INSTANCE_VERSION: u16 = 1;
 
 const MICRODROID_OS_NAME: &str = "microdroid";
 
+const MICRODROID_GKI_OS_NAME: &str = "microdroid_gki";
+
 const UNFORMATTED_STORAGE_MAGIC: &str = "UNFORMATTED-STORAGE";
 
 /// crosvm requires all partitions to be a multiple of 4KiB.
@@ -610,6 +612,16 @@ fn append_kernel_param(param: &str, vm_config: &mut VirtualMachineRawConfig) {
     }
 }
 
+fn is_valid_os(os_name: &str) -> bool {
+    if os_name == MICRODROID_OS_NAME {
+        return true;
+    }
+    if cfg!(vendor_modules) && os_name == MICRODROID_GKI_OS_NAME {
+        return true;
+    }
+    false
+}
+
 fn load_app_config(
     config: &VirtualMachineAppConfig,
     debug_config: &DebugConfig,
@@ -633,9 +645,9 @@ fn load_app_config(
         Payload::PayloadConfig(payload_config) => create_vm_payload_config(payload_config)?,
     };
 
-    // For now, the only supported OS is Microdroid
+    // For now, the only supported OS is Microdroid and Microdroid GKI
     let os_name = vm_payload_config.os.name.as_str();
-    if os_name != MICRODROID_OS_NAME {
+    if !is_valid_os(os_name) {
         bail!("Unknown OS \"{}\"", os_name);
     }
 
@@ -669,7 +681,7 @@ fn load_app_config(
     vm_config.cpuTopology = config.cpuTopology;
 
     // Microdroid takes additional init ramdisk & (optionally) storage image
-    add_microdroid_system_images(config, instance_file, storage_image, &mut vm_config)?;
+    add_microdroid_system_images(config, instance_file, storage_image, os_name, &mut vm_config)?;
 
     // Include Microdroid payload disk (contains apks, idsigs) in vm config
     add_microdroid_payload_images(
@@ -704,8 +716,9 @@ fn create_vm_payload_config(
     }
 
     let task = Task { type_: TaskType::MicrodroidLauncher, command: payload_binary_name.clone() };
+    let name = payload_config.osName.clone();
     Ok(VmPayloadConfig {
-        os: OsConfig { name: MICRODROID_OS_NAME.to_owned() },
+        os: OsConfig { name },
         task: Some(task),
         apexes: vec![],
         extra_apks: vec![],
