@@ -110,6 +110,10 @@ pub struct MicrodroidConfig {
     /// SysFS nodes of devices to assign to VM
     #[arg(long)]
     devices: Vec<PathBuf>,
+
+    /// If set, use GKI instead of microdroid kernel
+    #[arg(long)]
+    gki: bool,
 }
 
 impl MicrodroidConfig {

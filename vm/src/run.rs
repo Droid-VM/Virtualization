@@ -125,6 +125,7 @@ pub fn command_run_app(config: RunAppConfig) -> Result<(), Error> {
 
     let custom_config = CustomConfig {
         customKernelImage: kernel,
+        gki: config.microdroid.gki,
         gdbPort: config.debug.gdb.map(u16::from).unwrap_or(0) as i32, // 0 means no gdb
         taskProfiles: config.common.task_profiles,
         vendorImage: vendor,

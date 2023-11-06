@@ -95,6 +95,11 @@ parcelable VirtualMachineAppConfig {
         @nullable ParcelFileDescriptor customKernelImage;
 
         /**
+         * If true, use GKI instead of microdroid kernel.
+         */
+        boolean gki;
+
+        /**
          * Port at which crosvm will start a gdb server to debug guest kernel.
          * If set to zero, then gdb server won't be started.
          *
