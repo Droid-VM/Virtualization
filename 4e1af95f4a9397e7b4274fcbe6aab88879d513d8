@@ -425,6 +425,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "65f242b4_6062b739",
+        "filename": "service_vm/test_apk/src/main.rs",
+        "patchSetId": 32
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-06T15:49:18Z",
+      "side": 1,
+      "message": "`size` needs to be constant in this case. There\u0027s compile error in this case:\n```\nerror[E0435]: attempt to use a non-constant value in a constant\n   --\u003e packages/modules/Virtualization/service_vm/test_apk/src/main.rs:166:42\n    |\n162 |     let size \u003d\n    |     -------- help: consider using `const` instead of `let`: `const size`\n...\n166 |     let mut private_key \u003d Box::new([0u8; size]);\n    |                                          ^^^^ non-constant value\n\nerror: aborting due to previous error\n```",
+      "parentUuid": "dfe882e0_e0448ec4",
+      "revId": "4e1af95f4a9397e7b4274fcbe6aab88879d513d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6dc1641c_f782ccc5",
