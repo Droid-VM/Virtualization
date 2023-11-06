@@ -23,4 +23,10 @@ parcelable VirtualMachinePayloadConfig {
      * function invoked.
      */
     @utf8InCpp String payloadBinaryName;
+
+    /**
+     * Name of the OS to run the payload. Currently "microdroid" and "microdroid_gki" is supported.
+     * Defaults to "microdroid".
+     */
+    @utf8InCpp @nullable String osName;
 }
