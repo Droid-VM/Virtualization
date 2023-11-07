@@ -52,6 +52,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33f9efca_c553e7af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-07T12:11:32Z",
+      "side": 1,
+      "message": "Thanks for the comments!\nA few responses below, and I\u0027ll send out a fix later.",
+      "revId": "32bbc2efa1bd1d64d34037a90038782ba02c51fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "443480b5_4f66182c",
@@ -71,6 +88,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a24cc37_5bd58254",
+        "filename": "javalib/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-07T12:11:32Z",
+      "side": 1,
+      "message": "That\u0027s very weird. VirtualMachineManager did exist in API level 33 - at least on a few devices - but the getSystemService() support very definitely didn\u0027t.\nWhat device did you try, with what OS version?",
+      "parentUuid": "443480b5_4f66182c",
+      "revId": "32bbc2efa1bd1d64d34037a90038782ba02c51fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a49325c1_01165460",
         "filename": "javalib/README.md",
         "patchSetId": 4
@@ -82,6 +117,24 @@
       "writtenOn": "2023-11-07T02:47:54Z",
       "side": 1,
       "message": "related to the api level - can a device have this feature enabled but not have the desired api level for the virtualization api?",
+      "revId": "32bbc2efa1bd1d64d34037a90038782ba02c51fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2a90bcc_0d5f2024",
+        "filename": "javalib/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-07T12:11:32Z",
+      "side": 1,
+      "message": "No. But I should say so.",
+      "parentUuid": "a49325c1_01165460",
       "revId": "32bbc2efa1bd1d64d34037a90038782ba02c51fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -150,6 +203,24 @@
       "writtenOn": "2023-11-07T02:47:54Z",
       "side": 1,
       "message": "Out of curiosity, what happens if it\u0027s the same name? is that okay as well?",
+      "revId": "32bbc2efa1bd1d64d34037a90038782ba02c51fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "051b8b92_0f8a3d1c",
+        "filename": "javalib/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-07T12:11:32Z",
+      "side": 1,
+      "message": "It will fail, as if you trued to call create() with an existing name.\n(The implementation creates a directory with the name you specify, if the directory already exists it\u0027s treated as an error.)\nIf you\u0027re transferring from one app to another, which is the real point of this, then both ends can use the same name. (The parent directory will then be different so no clash occurs.)",
+      "parentUuid": "a63ea926_800b2c72",
       "revId": "32bbc2efa1bd1d64d34037a90038782ba02c51fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
