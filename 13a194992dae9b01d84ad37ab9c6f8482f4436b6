@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0027d24_b2d6bc39",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-07T10:16:50Z",
+      "side": 1,
+      "message": "nit: just chain them and avoid explicitly `return`-ing:\n```\nif let Some(prop) \u003d self.getprop_u32(cstr!(\"phandle\"))? {\n    Ok(Some(prop.try_into()?))\n} else if let Some(prop) \u003d self.getprop_u32(cstr!(\"linux,phandle\"))? {\n    Ok(Some(prop.try_into()?))\n} else {\n    Ok(None)\n}\n```",
+      "range": {
+        "startLine": 514,
+        "startChar": 8,
+        "endLine": 520,
+        "endChar": 16
+      },
+      "revId": "13a194992dae9b01d84ad37ab9c6f8482f4436b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
