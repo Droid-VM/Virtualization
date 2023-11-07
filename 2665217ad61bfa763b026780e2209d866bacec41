@@ -22,6 +22,30 @@
       },
       "revId": "2665217ad61bfa763b026780e2209d866bacec41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "767899c3_2e3b66f1",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-11-07T01:24:05Z",
+      "side": 1,
+      "message": "I thought using GKI is the same level config as using the custom kernel. Also there are many codes using `MICRODROID_OS_NAME` so I thought this is simpler. WDYT?",
+      "parentUuid": "949ee6eb_76e6ba73",
+      "range": {
+        "startLine": 636,
+        "startChar": 0,
+        "endLine": 639,
+        "endChar": 5
+      },
+      "revId": "2665217ad61bfa763b026780e2209d866bacec41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
