@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0013405_a178068a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-11-07T08:33:53Z",
+      "side": 1,
+      "message": "Unsafe review: Only new unsafe code in a test.",
+      "revId": "e649d976521dbc87849fe01877dfefbb856c1b10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b1eb08c_1ffcabdf",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-11-07T08:33:53Z",
+      "side": 1,
+      "message": "You can eliminate this unsafe block:\n```rust\nmacro_rules! const_cstr {\n    ($str:literal) \u003d\u003e {{\n        const S: \u0026str \u003d concat!($str, \"\\0\");\n        const C: \u0026::core::ffi::CStr \u003d match ::core::ffi::CStr::from_bytes_with_nul(S.as_bytes()) {\n            Ok(v) \u003d\u003e v,\n            Err(_) \u003d\u003e panic!(\"string contains interior NUL\"),\n        };\n        C\n    }};\n}\n```\nSince the panic is in a const, the check is guaranteed to happen at compile time. There is no runtime cost of this.",
+      "revId": "e649d976521dbc87849fe01877dfefbb856c1b10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2847e7bd_31c3685d",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-11-07T08:33:53Z",
+      "side": 1,
+      "message": "This is in a test, so it\u0027s not a big deal, but could you link to the declaration of the unsafe method being called here?",
+      "revId": "e649d976521dbc87849fe01877dfefbb856c1b10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
