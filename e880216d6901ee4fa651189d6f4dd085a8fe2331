@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "946c8385_68c41bd5",
+        "filename": "service_vm/comm/src/message.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-07T16:39:46Z",
+      "side": 1,
+      "message": "1. The client VM doesn\u0027t get the key blob, the key blob is sent from the host to the service VM, which is the only one who can decrypt the private key in it.\n\n2. I dropped the cert chain. Initially I thought to parse the cert chain in RKP VM and validate that the public key match the private key in the key blob, but we can also validate this outside RKP VM.\n\n3. The CSR and APIs for clients are the ones we discussed in the doc[1] and they will be added in another cl [2], basically the client VM only need to provide a challenge and Microdroid will format it into a CSR as described in the doc. I plan to add that `.cddl` to the codebase later after that cl lands.\n\n\u003e the service VM is responsible for talking to rkpd (much like how apps call keystore2, then keystore2 talks to rkpds -- the app has no idea rkpd is even involved).\n\nThat\u0027s correct. The detailed communication flow is after the API section in the doc [1].\n\n[1] http://doc/1SetVcA-i6MyyWpgXc1fULkklDAUsOQBVYpYJfspfsF8#heading\u003dh.euag42bceom\n[2] https://r.android.com/c/platform/packages/modules/Virtualization/+/2778936/37/service_vm/comm/src/csr.rs",
+      "parentUuid": "f13ab1c7_c92daf4d",
+      "range": {
+        "startLine": 61,
+        "startChar": 11,
+        "endLine": 61,
+        "endChar": 35
+      },
+      "revId": "e880216d6901ee4fa651189d6f4dd085a8fe2331",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84b6ca16_a480d1ea",
         "filename": "service_vm/comm/src/message.rs",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-06T19:14:24Z",
       "side": 1,
       "message": "nit: \"trusted by Google\" feels like the wrong phrase here. Since Google _is_ the root, I sure hope Google trusts itself 😄\n\nThe trust relationship is the other way around: anyone receiving this chain needs to trust that Google root.",
+      "range": {
+        "startLine": 91,
+        "startChar": 71,
+        "endLine": 91,
+        "endChar": 88
+      },
+      "revId": "e880216d6901ee4fa651189d6f4dd085a8fe2331",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e15b9514_c18fb889",
+        "filename": "service_vm/comm/src/message.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-07T16:39:46Z",
+      "side": 1,
+      "message": "I see. Thanks.",
+      "parentUuid": "84b6ca16_a480d1ea",
       "range": {
         "startLine": 91,
         "startChar": 71,
