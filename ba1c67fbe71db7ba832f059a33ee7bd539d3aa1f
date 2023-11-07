@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "78fc7791_ed27d65c",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-07T15:21:35Z",
+      "side": 1,
+      "message": "Please fix the typo in `FILERED_VM_DTBO_PROP`",
+      "parentUuid": "a1a92cd3_878c112e",
+      "range": {
+        "startLine": 42,
+        "startChar": 6,
+        "endLine": 42,
+        "endChar": 25
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d0f7544_aef41426",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 23
@@ -283,6 +307,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60d6bfe8_a84ec690",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-07T15:21:35Z",
+      "side": 1,
+      "message": "\u003e Could you explain detail about your suggestion?\n\nSimilarly to the other `-\u003e Result\u003cOption\u003cSelf\u003e\u003e` ctor, it makes the intention of the higher-level (calling) code clearer. Here, the reader sees that we `assigned_devices.push()` only if the `node` exists in `fdt`. There, that we `.filter()`/`.patch()` only if `.has_assigned_devices()`.\n\nOtherwise, as the code currently stands, the reader must go into the ctor to see what and why it ever returns `None` ... This would probably be alleviated by specializing the names of the `new` methods to convey what `None` means.\n\n\u003e In general, I feel weird if distinct parameters points to the same information.\n\nI agree it isn\u0027t a great API design choice but that\u0027s to avoid the DT traversal from `node.path()`.",
+      "parentUuid": "1328d715_32523a26",
+      "range": {
+        "startLine": 264,
+        "startChar": 0,
+        "endLine": 265,
+        "endChar": 60
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1062f904_ecc7cafb",
@@ -330,6 +378,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee228059_b47accb4",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-07T15:21:35Z",
+      "side": 1,
+      "message": "Exactly, having the \"short-circuit\" logic at the top-level instead of buried deep in here would show more clearly that fact (and there\u0027s no measurable performance difference between the 2 implementations).",
+      "parentUuid": "0f113df1_cb2889a5",
+      "range": {
+        "startLine": 273,
+        "startChar": 12,
+        "endLine": 273,
+        "endChar": 28
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "440fd2a3_72fa4611",
@@ -367,6 +439,30 @@
       "side": 1,
       "message": "Let me keep as-is. Otherwise we end up with access `__symbols__` node in two ways -- one with `Fdt::symbols_*()` and `Fdt::node(cstr!(\"/__symbols__\")`.\n\nAlternatively I can generate symbols path with by concatenating `/` and `symbols().name()`, but doesn\u0027t look fancy idea.",
       "parentUuid": "440fd2a3_72fa4611",
+      "range": {
+        "startLine": 302,
+        "startChar": 8,
+        "endLine": 304,
+        "endChar": 31
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2bf7e56_06562589",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-07T15:21:35Z",
+      "side": 1,
+      "message": "I think you\u0027re overthinking this; you have a list of nodes to remove (`filtered_dtbo_paths`) and you want to remove a node (`/__symbols__`) so why would you treat the latter as a special case (with its own code) when it could simply be a regular case of the former?",
+      "parentUuid": "d2141f30_08a3a186",
       "range": {
         "startLine": 302,
         "startChar": 8,
@@ -790,6 +886,30 @@
       "side": 1,
       "message": "Let me keep this as-is here, and investigate further in another CL.\n\nI couldn\u0027t make it cleanly. `dtc` runs at the `${ANDROID_BUILD_TOP}`, so I had to also specify full path.  (e.g. `/include/ \"package/apps/Virtualization/pvmfw/testdata/test_pvmfw_devices_vm_dtbo_base.dtsi`) IIUC, we discourage to specify full path for a build rule or include path, so it doesn\u0027t look like a good solution.\n\nIt may be possible with extra modification with `dts_to_dtb`, but seems to be outside of this CL scope.",
       "parentUuid": "a86a5c0b_59fec57a",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 3
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7576bb5_f769a8d0",
+        "filename": "pvmfw/testdata/test_pvmfw_devices_vm_dtbo.dtsi",
+        "patchSetId": 23
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-07T15:21:35Z",
+      "side": 1,
+      "message": "I see, that\u0027s annoying. I thought I remembered `/include/` being used elsewhere(?)\n\n\u003e Let me keep this as-is here, and investigate further in another CL. [...] It may be possible with extra modification with `dts_to_dtb`\n\nSGTM",
+      "parentUuid": "0a3bf105_82a3abe9",
       "range": {
         "startLine": 4,
         "startChar": 0,
