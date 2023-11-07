@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdf2a25c_a9687f77",
+        "filename": "service_vm/comm/src/message.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-11-07T17:14:07Z",
+      "side": 1,
+      "message": "```suggestion\n    /// The key blob retrieved from RKPD by virtualizationservice.\n```",
+      "revId": "c99fda33f898acec6b27a9308eafaca61cbf6804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88d2821e_8ab52361",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-11-07T17:14:07Z",
+      "side": 1,
+      "message": "Do you plan to add real service specific exceptions?\n\nLooks like the virtualizationservice almost always returns `-1`, which might make debugging difficult.\n\ne.g. What if someone only has logs from the other side of the communication with virtualizationservice? If all the binder errors are just `-1`, then they don\u0027t even know where to start debugging.",
+      "range": {
+        "startLine": 172,
+        "startChar": 43,
+        "endLine": 172,
+        "endChar": 45
+      },
+      "revId": "c99fda33f898acec6b27a9308eafaca61cbf6804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
