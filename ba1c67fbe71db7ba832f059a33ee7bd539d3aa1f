@@ -119,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db808759_df7672cb",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-07T16:15:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78fc7791_ed27d65c",
+      "range": {
+        "startLine": 42,
+        "startChar": 6,
+        "endLine": 42,
+        "endChar": 25
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d0f7544_aef41426",
@@ -331,6 +355,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92fbabf6_e0830b9d",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-07T16:15:09Z",
+      "side": 1,
+      "message": "Seems like that returning `Result\u003cOption\u003c\u003e\u003e` from `new()` is one of the problem here. Let me rename to `parse()`. It matches more with other similar APIs in `fdt.rs`.",
+      "parentUuid": "60d6bfe8_a84ec690",
+      "range": {
+        "startLine": 264,
+        "startChar": 0,
+        "endLine": 265,
+        "endChar": 60
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1062f904_ecc7cafb",
@@ -463,6 +511,30 @@
       "side": 1,
       "message": "I think you\u0027re overthinking this; you have a list of nodes to remove (`filtered_dtbo_paths`) and you want to remove a node (`/__symbols__`) so why would you treat the latter as a special case (with its own code) when it could simply be a regular case of the former?",
       "parentUuid": "d2141f30_08a3a186",
+      "range": {
+        "startLine": 302,
+        "startChar": 8,
+        "endLine": 304,
+        "endChar": 31
+      },
+      "revId": "ba1c67fbe71db7ba832f059a33ee7bd539d3aa1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b300828_e7306630",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-07T16:15:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2bf7e56_06562589",
       "range": {
         "startLine": 302,
         "startChar": 8,
