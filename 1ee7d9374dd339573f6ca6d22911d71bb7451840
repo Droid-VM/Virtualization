@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b74d145_4380563d",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-07T10:25:01Z",
+      "side": 0,
+      "message": "What if `DeviceAssignmentInfo::patch` first patched the pvIOMMU nodes, creating a look-up table of their phandles, which it would pass to this function?\n\nThis would keep your neat `patch` delegation by patching `\u003ciommus\u003e` in here:\n```\nlet iommus \u003d Vec::new();\nfor id in self.iommus {\n    let phandle \u003d phandles.get(id)...;\n    iommus.extend_from_slice(\u0026u32::from(phandle).to_be_bytes());\n}\ndst.setprop(cstr!(\"iommus\"), iommus)\n```",
+      "range": {
+        "startLine": 236,
+        "startChar": 8,
+        "endLine": 236,
+        "endChar": 50
+      },
+      "revId": "1ee7d9374dd339573f6ca6d22911d71bb7451840",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

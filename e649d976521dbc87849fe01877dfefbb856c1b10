@@ -37,6 +37,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "171a4f0d_675c4a49",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 8
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-07T10:25:01Z",
+      "side": 1,
+      "message": "Instead of a label, you might want to manually give these a `\u003cphandle\u003e` so that we don\u0027t create an unnecessary `/aliases`.",
+      "range": {
+        "startLine": 265,
+        "startChar": 1,
+        "endLine": 265,
+        "endChar": 10
+      },
+      "revId": "e649d976521dbc87849fe01877dfefbb856c1b10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ec439d1_1a64b889",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 8
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-07T10:25:01Z",
+      "side": 1,
+      "message": "The `@` suffix should describe how the device is found on its bus; for platform devices, that\u0027s the base of the `\u003creg\u003e` property, which `pviommu`s don\u0027t have.\n\nTo comply with the spec, would you mind renaming all `pviommu@N` to `pviommuN`?",
+      "range": {
+        "startLine": 265,
+        "startChar": 12,
+        "endLine": 265,
+        "endChar": 21
+      },
+      "revId": "e649d976521dbc87849fe01877dfefbb856c1b10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4b1eb08c_1ffcabdf",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 8
@@ -48,6 +94,93 @@
       "writtenOn": "2023-11-07T08:33:53Z",
       "side": 1,
       "message": "You can eliminate this unsafe block:\n```rust\nmacro_rules! const_cstr {\n    ($str:literal) \u003d\u003e {{\n        const S: \u0026str \u003d concat!($str, \"\\0\");\n        const C: \u0026::core::ffi::CStr \u003d match ::core::ffi::CStr::from_bytes_with_nul(S.as_bytes()) {\n            Ok(v) \u003d\u003e v,\n            Err(_) \u003d\u003e panic!(\"string contains interior NUL\"),\n        };\n        C\n    }};\n}\n```\nSince the panic is in a const, the check is guaranteed to happen at compile time. There is no runtime cost of this.",
+      "revId": "e649d976521dbc87849fe01877dfefbb856c1b10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8815addc_2ab53713",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-07T10:25:01Z",
+      "side": 1,
+      "message": "Neat!",
+      "parentUuid": "4b1eb08c_1ffcabdf",
+      "revId": "e649d976521dbc87849fe01877dfefbb856c1b10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ade42995_5c3cb32d",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-07T10:25:01Z",
+      "side": 1,
+      "message": "That\u0027s not what `#iommu-cells \u003d 0` means, you can still have multiple IOMMUs per DMA master so `AssignedDeviceInfo::iommus` should be a `Vec`.\n\nFor this reason, `PvIommu::new` taking the node of the DMA master doesn\u0027t really work (what if it has `iommus \u003d \u003c1\u003e, \u003c2\u003e, \u003c3\u003e;`?). As we have one DT node per pvIOMMU, I guess it would make more sense for `PvIommu::new` to take the node of the pvIOMMU (not the DMA master), which you can iterate through by `\u003ccompatible\u003e`.",
+      "range": {
+        "startLine": 229,
+        "startChar": 59,
+        "endLine": 230,
+        "endChar": 11
+      },
+      "revId": "e649d976521dbc87849fe01877dfefbb856c1b10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19c4edc1_f63f9ab5",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-07T10:25:01Z",
+      "side": 1,
+      "message": "`setprop_inplace`? (same for `\"id\"`)",
+      "range": {
+        "startLine": 358,
+        "startChar": 16,
+        "endLine": 358,
+        "endChar": 23
+      },
+      "revId": "e649d976521dbc87849fe01877dfefbb856c1b10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb67a184_52f24e1d",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-07T10:25:01Z",
+      "side": 1,
+      "message": "Should `pvmfw` also ensure that pvIOMMU IDs are unique?",
+      "range": {
+        "startLine": 360,
+        "startChar": 60,
+        "endLine": 360,
+        "endChar": 69
+      },
       "revId": "e649d976521dbc87849fe01877dfefbb856c1b10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
