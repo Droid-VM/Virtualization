@@ -22,6 +22,30 @@
       },
       "revId": "b445dc619a1f05eec6cd067ec37d4757bba5dc04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1a961f7_83612486",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-11-07T05:56:39Z",
+      "side": 1,
+      "message": "I think we can\u0027t labeling whole vendor partition including `/vendor/etc/microdroid/.*`, because of existence of `vendor_configs_file`. But creating a new type for `/vendor/etc/microdroid/.*` only looks possible.",
+      "parentUuid": "63441529_74234812",
+      "range": {
+        "startLine": 803,
+        "startChar": 11,
+        "endLine": 803,
+        "endChar": 30
+      },
+      "revId": "b445dc619a1f05eec6cd067ec37d4757bba5dc04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
