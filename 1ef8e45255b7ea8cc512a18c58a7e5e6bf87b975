@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "877654c7_fe2c6841",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-07T14:03:50Z",
+      "side": 1,
+      "message": "`Fdt::as_mut_ptr()` is private and I couldn\u0027t find a good usecase outside of less scary cast.\n\nWould it worth to make it `pub`? `transmute` looks scary but it\u0027s straitforward because of `#[repr(transparent)]`.",
+      "parentUuid": "4c8c93fb_d10f3957",
+      "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0576c94e_764eb972",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 17
@@ -259,6 +277,30 @@
       "side": 1,
       "message": "\u003e `dtc` may be violating the spec for backward compatibility, but I don\u0027t know the motivation and following `dtc` behavior seemed to be more natural.\n\nYou\u0027re looking at a project that tries as much as possible to allow drop-in upgrades without breaking any existing use-cases (i.e. you should be able to update `libfdt` without modifying/recompiling your DTBs). Some of those theoretical use-cases may rely on DTs that were compiled in the OF era, 30 years ago, long before the DT specification.\n\n`pvmfw` doesn\u0027t have this constraint as its code is being written before the first production VM DTBO gets compiled, long after the publication of the DT specification, and therefore doesn\u0027t need to be made unnecessarily complex to support use-cases that are invalid by today\u0027s standards ...\n\n---\n\nAnyway, as you _really_ want to keep this implementation, let\u0027s at least make it easier to digest by working with `\u0026str` and its iterators:\n```\nlet dtbo_path \u003d dtbo_node_path.to_str().map_err(...)?;\nif !dtbo_path.starts_with(\"/\") { return Err(...); }\n```\n```\nlet mut components \u003d dtbo_path.split_terminator(\"/\").filter(|\u0026s| !s.is_empty());\n```\nthen, skip the fragment name:\n```\ncomponents.next().ok_or(...)?;\n```\nvalidate the overlay node name:\n```\nlet overlay_node_name \u003d components.next().ok_or(...)?;\nif overlay_node_name !\u003d Some(\"__overlay__\") {\n    return Err(...);\n}\n```\nand concatenate the rest of the components that will make up the `CString`:\n```\nlet mut bytes \u003d Vec::new();\nfor name in components {\n    bytes.push(b\u0027/\u0027);\n    bytes.extend_from_slice(name.as_bytes());\n}\nbytes.push(b\u0027\\0\u0027);\n```",
       "parentUuid": "426535ec_90df43c7",
+      "range": {
+        "startLine": 142,
+        "startChar": 4,
+        "endLine": 142,
+        "endChar": 80
+      },
+      "revId": "1ef8e45255b7ea8cc512a18c58a7e5e6bf87b975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09c4d21b_124dacaa",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-07T14:03:50Z",
+      "side": 1,
+      "message": "Done, but with little modification from your suggestion. PTAL.",
+      "parentUuid": "8c11b40b_8c25c071",
       "range": {
         "startLine": 142,
         "startChar": 4,
