@@ -70,6 +70,30 @@
       },
       "revId": "b445dc619a1f05eec6cd067ec37d4757bba5dc04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cc7eece_1f9783e3",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-11-07T12:44:39Z",
+      "side": 1,
+      "message": "For anything that is not a shared lib or a binary, ./etc is the easiest and the usual place to put those. It\u0027s a lot more difficult (Soong change is required) to put them in a new top-level directory under /. So, yeah, I think somewhere under etc/ should be fine.",
+      "parentUuid": "7b2d0668_b1ec3683",
+      "range": {
+        "startLine": 803,
+        "startChar": 11,
+        "endLine": 803,
+        "endChar": 30
+      },
+      "revId": "b445dc619a1f05eec6cd067ec37d4757bba5dc04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
