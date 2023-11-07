@@ -46,6 +46,30 @@
       },
       "revId": "2665217ad61bfa763b026780e2209d866bacec41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "940285a2_d093b016",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-07T10:11:05Z",
+      "side": 1,
+      "message": "Well, it\u0027s just that the 2 code changes below would be unnecessary if we just used a different os_name. The os_name is the key we use to pick the config including the kernel path. It\u0027s practically designed for this purpose.\n\nWe will need to change anywhere that currently uses Microdroid but instead wants GKI, but we have to do that either way.\n\nYou\u0027re currently only exposing this option via config file, not the API, which I think is intentional?",
+      "parentUuid": "767899c3_2e3b66f1",
+      "range": {
+        "startLine": 636,
+        "startChar": 0,
+        "endLine": 639,
+        "endChar": 5
+      },
+      "revId": "2665217ad61bfa763b026780e2209d866bacec41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
