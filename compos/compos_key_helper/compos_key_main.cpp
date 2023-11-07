@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+// Needs to be included before <vm_payload_restricted.h>:
+// <format.h> includes cxxabi.h, which uses __attribute__((noreturn))
+// <vm_payload_restricted.h> includes <stdonreturn.h> indirectly,
+// which defineds noreturn and conflicts with the use of the attribute.
+#include <android-base/format.h>
+
 #include <android-base/file.h>
 #include <android-base/logging.h>
 #include <unistd.h>
