@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f378ba7d_c39c3ff1",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 37
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2023-11-07T20:48:40Z",
+      "side": 1,
+      "message": "nit, should allow _Nullable \u0026 just no-op if it\u0027s null (matches regular free() behavior)",
+      "range": {
+        "startLine": 174,
+        "startChar": 60,
+        "endLine": 174,
+        "endChar": 68
+      },
+      "revId": "f924a80035b5e9586755a1752d5d3050f18cfa3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
