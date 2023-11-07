@@ -33,6 +33,125 @@
       "message": "This really is a great write-up. Thank you, Alan!",
       "revId": "32bbc2efa1bd1d64d34037a90038782ba02c51fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac915e70_173db0b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1704384
+      },
+      "writtenOn": "2023-11-07T02:47:54Z",
+      "side": 1,
+      "message": "Thank you for these docs! added some minor comments",
+      "revId": "32bbc2efa1bd1d64d34037a90038782ba02c51fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "443480b5_4f66182c",
+        "filename": "javalib/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1704384
+      },
+      "writtenOn": "2023-11-07T02:47:54Z",
+      "side": 1,
+      "message": "Do you think we could also indicate API level support here? i.e. the API is available starting 34. I mention this specifically because when testing on a API level 33 device, the `VirtualMachineManager` was not null and any subsequent invocations on it didn\u0027t throw an error. Basically it failed silently. Perhaps there\u0027s just a stub on that API version.",
+      "revId": "32bbc2efa1bd1d64d34037a90038782ba02c51fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a49325c1_01165460",
+        "filename": "javalib/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1704384
+      },
+      "writtenOn": "2023-11-07T02:47:54Z",
+      "side": 1,
+      "message": "related to the api level - can a device have this feature enabled but not have the desired api level for the virtualization api?",
+      "revId": "32bbc2efa1bd1d64d34037a90038782ba02c51fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99c6bed9_749f74bc",
+        "filename": "javalib/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1704384
+      },
+      "writtenOn": "2023-11-07T02:47:54Z",
+      "side": 1,
+      "message": "nit: \"is supported via\"",
+      "revId": "32bbc2efa1bd1d64d34037a90038782ba02c51fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12a3a9f1_aab30f51",
+        "filename": "javalib/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1704384
+      },
+      "writtenOn": "2023-11-07T02:47:54Z",
+      "side": 1,
+      "message": "if at all available, could be beneficial if we indicate what this reasonable time would be.",
+      "revId": "32bbc2efa1bd1d64d34037a90038782ba02c51fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fae4b881_d66604eb",
+        "filename": "javalib/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1704384
+      },
+      "writtenOn": "2023-11-07T02:47:54Z",
+      "side": 1,
+      "message": "if `onPayloadStopped` is called on `stop()` as well, wouldn\u0027t it be more accurate to say something along the lines of \"After a successful call to stop(), the status of the VM will be STATUS_STOPPED, which will also be propagated to the `onPayloadStopped() callback\".\n\nPlease feel free to paraphrase or ignore. The current wording makes it seem that onPayloadStopped() may not be invoked when stop() is called. So just wanted to highlight that.",
+      "revId": "32bbc2efa1bd1d64d34037a90038782ba02c51fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a63ea926_800b2c72",
+        "filename": "javalib/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1704384
+      },
+      "writtenOn": "2023-11-07T02:47:54Z",
+      "side": 1,
+      "message": "Out of curiosity, what happens if it\u0027s the same name? is that okay as well?",
+      "revId": "32bbc2efa1bd1d64d34037a90038782ba02c51fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
