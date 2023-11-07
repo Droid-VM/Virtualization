@@ -46,6 +46,30 @@
       },
       "revId": "b445dc619a1f05eec6cd067ec37d4757bba5dc04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b2d0668_b1ec3683",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-07T10:31:44Z",
+      "side": 1,
+      "message": "Is vendor/etc the right place anyway, for code?\nBut I agree, we should have a specific label for wherever we put microdroid vendor stuff.",
+      "parentUuid": "d1a961f7_83612486",
+      "range": {
+        "startLine": 803,
+        "startChar": 11,
+        "endLine": 803,
+        "endChar": 30
+      },
+      "revId": "b445dc619a1f05eec6cd067ec37d4757bba5dc04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
