@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3838c36d_2ea9ced4",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
+        "patchSetId": 36
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-07T12:04:55Z",
+      "side": 1,
+      "message": "No; that depends on the RKP Server, and we don\u0027t mandate use of any specific server.\n\"Root certificate\" is fine.",
+      "range": {
+        "startLine": 62,
+        "startChar": 44,
+        "endLine": 62,
+        "endChar": 60
+      },
+      "revId": "654f404adf54b2d31a78a3ae3d3879f16ef1c263",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e84627a_738c4c86",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 36
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-07T12:04:55Z",
+      "side": 1,
+      "message": "I would remove all the `attestation_status_t::` prefixes. They only apply to C++ clients, and this header is deliberately C friendly (for sufficiently recent C). And they don\u0027t aid readability.",
+      "range": {
+        "startLine": 144,
+        "startChar": 34,
+        "endLine": 144,
+        "endChar": 56
+      },
+      "revId": "654f404adf54b2d31a78a3ae3d3879f16ef1c263",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55bd742f_0cf082f8",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 36
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-07T12:04:55Z",
+      "side": 1,
+      "message": "s/result/status/ ?",
+      "range": {
+        "startLine": 163,
+        "startChar": 42,
+        "endLine": 163,
+        "endChar": 48
+      },
+      "revId": "654f404adf54b2d31a78a3ae3d3879f16ef1c263",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3c770f4_9ed834e3",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 36
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-07T12:04:55Z",
+      "side": 1,
+      "message": "Nit: getCertificateCount, I think.",
+      "range": {
+        "startLine": 233,
+        "startChar": 28,
+        "endLine": 233,
+        "endChar": 48
+      },
+      "revId": "654f404adf54b2d31a78a3ae3d3879f16ef1c263",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74d72c1b_d6da7905",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 36
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-07T12:04:55Z",
+      "side": 1,
+      "message": "s/Google-rooted/root/",
+      "range": {
+        "startLine": 241,
+        "startChar": 63,
+        "endLine": 241,
+        "endChar": 88
+      },
+      "revId": "654f404adf54b2d31a78a3ae3d3879f16ef1c263",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daca8d53_482d43a1",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 36
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-07T12:04:55Z",
+      "side": 1,
+      "message": "We shouldn\u0027t specify that we panic (especially in the C world).\nWe should just say the index must be in range (and perhaps should define that range: [0..getCertificateCount())).\nThen if it isn\u0027t the behavior is undefined and we\u0027re entitled to panic/abort or do anything else.",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 244,
+        "endChar": 59
+      },
+      "revId": "654f404adf54b2d31a78a3ae3d3879f16ef1c263",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b80e32ef_2fbedfc9",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 36
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-07T12:04:55Z",
+      "side": 1,
+      "message": "Also index must be in range.",
+      "range": {
+        "startLine": 433,
+        "startChar": 0,
+        "endLine": 435,
+        "endChar": 38
+      },
+      "revId": "654f404adf54b2d31a78a3ae3d3879f16ef1c263",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
