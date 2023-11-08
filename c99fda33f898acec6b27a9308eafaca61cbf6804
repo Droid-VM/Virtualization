@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1343484b_14431a67",
+        "filename": "service_vm/comm/src/message.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-08T14:43:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdf2a25c_a9687f77",
+      "revId": "c99fda33f898acec6b27a9308eafaca61cbf6804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88d2821e_8ab52361",
@@ -55,6 +73,30 @@
       "side": 1,
       "message": "We actually incorporate the error message text in the binder status (https://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/libs/binder/rust/src/error.rs;drc\u003de731c4900ba0bd9872da6645720ebb8963e2e54b;l\u003d449), and usually log it on both sides.\nIt\u0027s worked out reasonably well.",
       "parentUuid": "88d2821e_8ab52361",
+      "range": {
+        "startLine": 172,
+        "startChar": 43,
+        "endLine": 172,
+        "endChar": 45
+      },
+      "revId": "c99fda33f898acec6b27a9308eafaca61cbf6804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0a35e2e_6fcc0603",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-08T14:43:14Z",
+      "side": 1,
+      "message": "I want to send a service-specific error back here later and forward it to the client as an `attestation_status_t` that client VM payload can react to. Since the error will traverse across several services [1], I\u0027m wondering what the best way is to propagate such errors without having to add service-specific errors to each service one by one and map them in each of them.\n\n[1] http://go/sequencediagram/view/4803323280490496",
+      "parentUuid": "9b6367c4_f9e6be66",
       "range": {
         "startLine": 172,
         "startChar": 43,
