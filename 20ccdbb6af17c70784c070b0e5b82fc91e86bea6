@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9830a19_f66335e0",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1334152
+      },
+      "writtenOn": "2023-11-08T16:35:15Z",
+      "side": 1,
+      "message": "Might it no be better to change prng_seeder\u0027s rc file to trigger `on property:ro.cold_boot_done\u003dtrue`?  Or would that impact other devices too much?",
+      "revId": "20ccdbb6af17c70784c070b0e5b82fc91e86bea6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
