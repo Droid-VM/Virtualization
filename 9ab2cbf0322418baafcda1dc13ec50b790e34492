@@ -16,6 +16,24 @@
       "message": "A pointer to the CDDL seems important since this is in AOSP and we should document the format.\n\nI\u0027m guessing you\u0027ll have a the CDDL in aosp eventually (I did a quick search and didn\u0027t see it). In the future, once you have the doc, please link to it from here, and maybe in the implementation function too.",
       "revId": "9ab2cbf0322418baafcda1dc13ec50b790e34492",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63c967b8_f28720bb",
+        "filename": "service_vm/comm/src/message.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-08T09:24:12Z",
+      "side": 1,
+      "message": "+1 - I missed that, I thought we\u0027d already done that.\nThere\u0027s a draft of the CDDL in the design doc, where we\u0027ve been discussing it, but we should indeed have it here.",
+      "parentUuid": "5bb496f6_671a902f",
+      "revId": "9ab2cbf0322418baafcda1dc13ec50b790e34492",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
