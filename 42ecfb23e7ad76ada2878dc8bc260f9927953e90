@@ -87,6 +87,30 @@
       },
       "revId": "42ecfb23e7ad76ada2878dc8bc260f9927953e90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10860230_3aeabde9",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-08T14:32:48Z",
+      "side": 1,
+      "message": "\u003e If that\u0027s your reason, why do you keep `FILTERED_VM_DTBO_PROP` here?\n\nBecause in-lining the literals would require manually unrolling the loop, which isn\u0027t DRY...?\n\n\u003e you could [...] define this in `filter()`.\n\nYes, I wanted to do that but it seemed out-of-scope for this CL and didn\u0027t feel important enough to get another CL reviewed for it; as I see that you agree that it would be an improvement, I\u0027ve done so in aosp/2822530",
+      "parentUuid": "ad552f2c_a57b01ec",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 35
+      },
+      "revId": "42ecfb23e7ad76ada2878dc8bc260f9927953e90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
