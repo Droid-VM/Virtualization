@@ -63,6 +63,30 @@
       },
       "revId": "42ecfb23e7ad76ada2878dc8bc260f9927953e90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad552f2c_a57b01ec",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-08T14:19:08Z",
+      "side": 1,
+      "message": "If that\u0027s your reason, why do you keep `FILTERED_VM_DTBO_PROP` here? Consistency looks broken here.\n\nFor an example, you could just inline the array in the loop or define this in `filter()`.",
+      "parentUuid": "7d56877b_fc6f0ff7",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 35
+      },
+      "revId": "42ecfb23e7ad76ada2878dc8bc260f9927953e90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
