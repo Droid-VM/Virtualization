@@ -80,6 +80,20 @@ genrule {
     out: ["test_pvmfw_devices_with_rng.dtb"],
 }
 
+genrule {
+    name: "test_pvmfw_devices_with_rng_iommu",
+    defaults: ["dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_with_rng_iommu.dts"],
+    out: ["test_pvmfw_devices_with_rng_iommu.dtb"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_with_multiple_devices_iommus",
+    defaults: ["dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_with_multiple_devices_iommus.dts"],
+    out: ["test_pvmfw_devices_with_multiple_devices_iommus.dtb"],
+}
+
 rust_test {
     name: "libpvmfw.device_assignment.test",
     srcs: ["src/device_assignment.rs"],
@@ -98,6 +112,8 @@ rust_test {
         ":test_pvmfw_devices_vm_dtbo",
         ":test_pvmfw_devices_vm_dtbo_without_symbols",
         ":test_pvmfw_devices_with_rng",
+        ":test_pvmfw_devices_with_rng_iommu",
+        ":test_pvmfw_devices_with_multiple_devices_iommus",
     ],
     // To use libpvmfw_fdt_template for testing
     enabled: false,
@@ -224,7 +240,7 @@ cc_genrule {
     srcs: [":pvmfw_platform.dts.preprocessed"],
     out: ["lib.rs"],
     tools: ["dtc"],
-    cmd: "$(location dtc) -I dts -O dtb -o $(genDir)/compiled.dtbo $(in) && " +
+    cmd: "$(location dtc) -@ -I dts -O dtb -o $(genDir)/compiled.dtbo $(in) && " +
         "(" +
         "    echo '#![no_std]';" +
         "    echo '#![allow(missing_docs)]';" +
