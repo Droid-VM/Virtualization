@@ -1099,7 +1099,8 @@ impl Fdt {
         self.buffer.as_mut_ptr().cast::<_>()
     }
 
-    fn capacity(&self) -> usize {
+    /// Returns delme
+    pub fn capacity(&self) -> usize {
         self.buffer.len()
     }
 
