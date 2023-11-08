@@ -39,6 +39,30 @@
       },
       "revId": "42ecfb23e7ad76ada2878dc8bc260f9927953e90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d56877b_fc6f0ff7",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-08T09:51:33Z",
+      "side": 1,
+      "message": "Readability, mostly:\n```\nfdt.node(cstr!(\"/path/to/node\"))\n```\nis much clearer than\n```\nfdt.node(MY_NODE_PATH)\n```\nIn particular, now that it has no runtime cost.\n\nAlso, to align with the previous style (see Jiyong\u0027s DT validation).",
+      "parentUuid": "56a6a1b8_2d3a477f",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 35
+      },
+      "revId": "42ecfb23e7ad76ada2878dc8bc260f9927953e90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
