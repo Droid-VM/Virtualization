@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e1140d8_7b26cf06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-08T03:20:15Z",
+      "side": 1,
+      "message": "I",
+      "revId": "42ecfb23e7ad76ada2878dc8bc260f9927953e90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56a6a1b8_2d3a477f",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-08T03:20:15Z",
+      "side": 1,
+      "message": "Question: What\u0027s your criteria for inlining constants (\u003d move `REG_PROP_NAME` inside the code) vs defining constant (\u003d keeps `FILTERED_VM_DTBO_PROP` here?)\nI always define constants for compiler to detect typos and also reduce unnecessary repeated calculation. Others prefers to inline constants not to lookup actual contents.\n\nWhat\u0027s now it\u0027s mixed here and I\u0027m little confused.",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 35
+      },
+      "revId": "42ecfb23e7ad76ada2878dc8bc260f9927953e90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
