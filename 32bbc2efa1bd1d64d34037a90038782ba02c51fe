@@ -86,6 +86,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbd86fe5_b298559f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-08T11:12:15Z",
+      "side": 1,
+      "message": "Thanks for the helpful comments.\nI\u0027ve tried to address them over in aosp/2822010.",
+      "revId": "32bbc2efa1bd1d64d34037a90038782ba02c51fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "443480b5_4f66182c",
@@ -156,6 +173,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d20d5fc_d71aece4",
+        "filename": "javalib/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-08T11:12:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2a90bcc_0d5f2024",
+      "revId": "32bbc2efa1bd1d64d34037a90038782ba02c51fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "551b6f50_6defee90",
@@ -169,6 +204,30 @@
       "writtenOn": "2023-11-07T16:51:14Z",
       "side": 1,
       "message": "Do you want to make mention of split apks and how to handle them? Or point to existing Android documentation about it? Unless it\u0027s common knowledge amongst Android devs.",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 77
+      },
+      "revId": "32bbc2efa1bd1d64d34037a90038782ba02c51fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7e6fbeb_08011fa2",
+        "filename": "javalib/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-08T11:12:15Z",
+      "side": 1,
+      "message": "I would much rather not try to explain that.\nInstead I\u0027m going to gently discourage use of this - it\u0027s really an advanced option.\n(The function documentation does mention split APKs.)",
+      "parentUuid": "551b6f50_6defee90",
       "range": {
         "startLine": 119,
         "startChar": 0,
@@ -196,6 +255,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "762df44b_e15e3892",
+        "filename": "javalib/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-08T11:12:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99c6bed9_749f74bc",
+      "revId": "32bbc2efa1bd1d64d34037a90038782ba02c51fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12a3a9f1_aab30f51",
@@ -213,6 +290,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22fb1dc0_5885bd31",
+        "filename": "javalib/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-08T11:12:15Z",
+      "side": 1,
+      "message": "https://en.wikipedia.org/wiki/Man_on_the_Clapham_omnibus\n\nDone.",
+      "parentUuid": "12a3a9f1_aab30f51",
+      "revId": "32bbc2efa1bd1d64d34037a90038782ba02c51fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fae4b881_d66604eb",
@@ -226,6 +321,24 @@
       "writtenOn": "2023-11-07T02:47:54Z",
       "side": 1,
       "message": "if `onPayloadStopped` is called on `stop()` as well, wouldn\u0027t it be more accurate to say something along the lines of \"After a successful call to stop(), the status of the VM will be STATUS_STOPPED, which will also be propagated to the `onPayloadStopped() callback\".\n\nPlease feel free to paraphrase or ignore. The current wording makes it seem that onPayloadStopped() may not be invoked when stop() is called. So just wanted to highlight that.",
+      "revId": "32bbc2efa1bd1d64d34037a90038782ba02c51fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cadccde_6ca4c214",
+        "filename": "javalib/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-08T11:12:15Z",
+      "side": 1,
+      "message": "That\u0027s an excellent point. I wasn\u0027t actually sure whether you got the callback after calling stop(), which suggests we should document it. But the code says you do, and so does my demo app. So I tried to make that clear.\n\n(I also fixed the name of the callback - onPayloadStopped() doesn\u0027t exist.)",
+      "parentUuid": "fae4b881_d66604eb",
       "revId": "32bbc2efa1bd1d64d34037a90038782ba02c51fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -261,6 +374,24 @@
       "side": 1,
       "message": "It will fail, as if you trued to call create() with an existing name.\n(The implementation creates a directory with the name you specify, if the directory already exists it\u0027s treated as an error.)\nIf you\u0027re transferring from one app to another, which is the real point of this, then both ends can use the same name. (The parent directory will then be different so no clash occurs.)",
       "parentUuid": "a63ea926_800b2c72",
+      "revId": "32bbc2efa1bd1d64d34037a90038782ba02c51fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2b4f003_68d6d027",
+        "filename": "javalib/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-08T11:12:15Z",
+      "side": 1,
+      "message": "I removed the reference to new name here. I think the mention under importFromDescriptor below is enough.",
+      "parentUuid": "051b8b92_0f8a3d1c",
       "revId": "32bbc2efa1bd1d64d34037a90038782ba02c51fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
