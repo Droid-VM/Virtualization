@@ -105,6 +105,30 @@
       },
       "revId": "c99fda33f898acec6b27a9308eafaca61cbf6804",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f94a971d_64a071a4",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-08T15:17:21Z",
+      "side": 1,
+      "message": "Define the values in some common library?\nIf we\u0027re going to return them from the client API, that could be the source of truth - and you already have a bindgen library for Rust, IIRC.",
+      "parentUuid": "d0a35e2e_6fcc0603",
+      "range": {
+        "startLine": 172,
+        "startChar": 43,
+        "endLine": 172,
+        "endChar": 45
+      },
+      "revId": "c99fda33f898acec6b27a9308eafaca61cbf6804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
