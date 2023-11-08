@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc8b8eb7_d5905d12",
+        "filename": "service_vm/comm/src/csr.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2023-11-08T19:41:05Z",
+      "side": 1,
+      "message": "nit: `.context` on these would be helpful so we can see what is failing to decode.\n\ne.g. `try_as_bytes(arr.remove(1)).context(\"signed_csr_payload\")?`",
+      "range": {
+        "startLine": 57,
+        "startChar": 58,
+        "endLine": 57,
+        "endChar": 60
+      },
+      "revId": "40f6b15b5cf0998ce9a13f4caaec4a9de779255a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
