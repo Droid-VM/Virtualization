@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a925f556_9b450c4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-09T12:07:50Z",
+      "side": 1,
+      "message": "Nit: It\u0027s still a binder status. It just uses attestation_status_t values as the service-specific error codes.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 39
+      },
+      "revId": "391b92e3d047d35e0d6ee0c6bd2e91c31d24d876",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "05e0812b_6ea68b56",
@@ -14,6 +37,52 @@
       "writtenOn": "2023-11-09T09:09:21Z",
       "side": 1,
       "message": "Hi Alan, PTAL.",
+      "revId": "391b92e3d047d35e0d6ee0c6bd2e91c31d24d876",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac8d8f7d_0a1c515d",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-09T12:07:50Z",
+      "side": 1,
+      "message": "That seems too implementation-specific to expose in the API.\n\nWhat the caller cares about is what they should do about it.\n\nThere are 3 possibilities I can think of:\n1. The caller made a bad call and needs to fix their code.\n2. This device does not support attestation, will not, and nothing the caller can do will change that. Any subsequent attempt will also fail.\n3. Attestation is supported, but something went wrong. Trying again at another time might work.\n\nMaybe we should just have error codes for those? That way it\u0027s easy to deal with them in the calling code.\n\nThe details can then be in human-readable form in the log.\n\nAnd FWIW for type 1. I am ok for the code to panic, just as it would if they passed null for a non-nullable pointer, as long as we log something.",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 50
+      },
+      "revId": "391b92e3d047d35e0d6ee0c6bd2e91c31d24d876",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e73a7fa_0686d188",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-09T12:07:50Z",
+      "side": 1,
+      "message": "I\u0027m not sure these all fit in the same bucket in my proposed 3 options.\nMost of them indicate we have a bug, I think? But TRANSACTION_FAILED could mean the other end died unexpectedly, which is retriable.",
+      "range": {
+        "startLine": 315,
+        "startChar": 0,
+        "endLine": 321,
+        "endChar": 48
+      },
       "revId": "391b92e3d047d35e0d6ee0c6bd2e91c31d24d876",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
