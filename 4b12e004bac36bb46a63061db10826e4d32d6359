@@ -22,6 +22,30 @@
       },
       "revId": "4b12e004bac36bb46a63061db10826e4d32d6359",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f6f9b73_a6cc1615",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-11-09T12:41:48Z",
+      "side": 1,
+      "message": "SG for holding. I don\u0027t want you to grant CR +2 right now, just FYI :)\n\nBTW, dtbo_vendor shouldn\u0027t be filter unlike dtbo for device assignment. So I don\u0027t think I need to wait until filtering logic is merged into AOSP, just supporting `--device-tree-overlay` is enough, isn\u0027t it?",
+      "parentUuid": "296a58c0_9703eca8",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 21
+      },
+      "revId": "4b12e004bac36bb46a63061db10826e4d32d6359",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
