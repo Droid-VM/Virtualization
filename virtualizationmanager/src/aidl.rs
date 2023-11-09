@@ -464,12 +464,18 @@ impl VirtualizationService {
             }
         };
 
-        if !config.vendor_public_key.is_empty() {
+        let dtbo_vendor = if !config.vendor_public_key.is_empty() {
             let dtbo_for_vendor_image = temporary_directory.join("dtbo_vendor");
             create_dtbo_for_vendor_image(&config.vendor_public_key, &dtbo_for_vendor_image)
                 .context("Failed to write vendor_public_key")
                 .or_service_specific_exception(-1)?;
-        }
+            let file = File::open(dtbo_for_vendor_image)
+                .context("Failed to open dtbo_vendor")
+                .or_service_specific_exception(-1)?;
+            Some(file)
+        } else {
+            None
+        };
 
         let vfio_devices = if !config.devices.is_empty() {
             let mut set = HashSet::new();
@@ -518,6 +524,7 @@ impl VirtualizationService {
             detect_hangup: is_app_config,
             gdb_port,
             vfio_devices,
+            dtbo_vendor,
         };
         let instance = Arc::new(
             VmInstance::new(
