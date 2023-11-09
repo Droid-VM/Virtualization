@@ -33,6 +33,40 @@
       "message": "Note that `num_traits` is not currently mapped into Trusty, so it might be easier to use `enumn` instead (which is).",
       "revId": "c0616c81d84b196fbd71521f629ef797077dab45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecc1e102_7ee3dc77",
+        "filename": "secretkeeper/comm/src/data_types/request.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-09T16:11:23Z",
+      "side": 1,
+      "message": "I\u0027ve not looked through the places where this entrypoint is used, but I wonder whether this could consume `self` and reduce the need for copying of `Vec\u003cValue\u003e`s?  (`serialize_to_packet` below would also need to change).",
+      "revId": "c0616c81d84b196fbd71521f629ef797077dab45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a42a2ec_dadc136b",
+        "filename": "secretkeeper/comm/src/lib.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-09T16:11:23Z",
+      "side": 1,
+      "message": "`#![no_std]` if we want to make it as easy as possible for vendors to use this library in their secure environment builds.",
+      "revId": "c0616c81d84b196fbd71521f629ef797077dab45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
