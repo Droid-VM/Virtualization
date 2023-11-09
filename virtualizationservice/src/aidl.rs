@@ -21,6 +21,7 @@ use android_os_permissions_aidl::aidl::android::os::IPermissionController;
 use android_system_virtualizationcommon::aidl::android::system::virtualizationcommon::Certificate::Certificate;
 use android_system_virtualizationservice::{
     aidl::android::system::virtualizationservice::AssignableDevice::AssignableDevice,
+    aidl::android::system::virtualizationservice::IBoundDevice::{IBoundDevice, BnBoundDevice},
     aidl::android::system::virtualizationservice::VirtualMachineDebugInfo::VirtualMachineDebugInfo,
     binder::ParcelFileDescriptor,
 };
@@ -29,7 +30,6 @@ use android_system_virtualizationservice_internal::aidl::android::system::virtua
     AtomVmCreationRequested::AtomVmCreationRequested,
     AtomVmExited::AtomVmExited,
     IGlobalVmContext::{BnGlobalVmContext, IGlobalVmContext},
-    IVirtualizationServiceInternal::BoundDevice::BoundDevice,
     IVirtualizationServiceInternal::IVirtualizationServiceInternal,
     IVfioHandler::{BpVfioHandler, IVfioHandler},
 };
@@ -72,6 +72,44 @@ const CHUNK_RECV_MAX_LEN: usize = 1024;
 
 fn is_valid_guest_cid(cid: Cid) -> bool {
     (GUEST_CID_MIN..=GUEST_CID_MAX).contains(&cid)
+}
+
+// Device bound to VFIO driver.
+struct BoundDevice {
+    sysfs_path: String,
+    dtbo_label: String,
+}
+
+impl Interface for BoundDevice {}
+
+impl IBoundDevice for BoundDevice {
+    fn getSysfsPath(&self) -> binder::Result<String> {
+        Ok(self.sysfs_path.clone())
+    }
+
+    fn getDtboLabel(&self) -> binder::Result<String> {
+        Ok(self.dtbo_label.clone())
+    }
+}
+
+impl Drop for BoundDevice {
+    fn drop(&mut self) {
+        self.unbind_device(&self.sysfs_path).unwrap_or_else(|e| {
+            error!("did not restore {} driver: {}", self.sysfs_path, e);
+        });
+    }
+}
+
+impl BoundDevice {
+    fn new_binder(sysfs_path: String, dtbo_label: String) -> Strong<dyn IBoundDevice> {
+        BnBoundDevice::new_binder(BoundDevice { sysfs_path, dtbo_label }, BinderFeatures::default())
+    }
+
+    fn unbind_device(&self, device: &str) -> binder::Result<()> {
+        let vfio_service: Strong<dyn IVfioHandler> =
+            wait_for_interface(<BpVfioHandler as IVfioHandler>::get_descriptor())?;
+        vfio_service.unbindDeviceFromVfioDriver(device)
+    }
 }
 
 /// Singleton service for allocating globally-unique VM resources, such as the CID, and running
@@ -207,24 +245,25 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
             .collect::<Vec<_>>())
     }
 
-    fn bindDevicesToVfioDriver(&self, devices: &[String]) -> binder::Result<Vec<BoundDevice>> {
+    fn bindDevicesToVfioDriver(
+        &self,
+        devices: &[String],
+    ) -> binder::Result<Vec<Strong<dyn IBoundDevice>>> {
         check_use_custom_virtual_machine()?;
 
         let vfio_service: Strong<dyn IVfioHandler> =
             wait_for_interface(<BpVfioHandler as IVfioHandler>::get_descriptor())?;
-        vfio_service.bindDevicesToVfioDriver(devices)?;
 
-        Ok(get_assignable_devices()?
-            .device
-            .into_iter()
-            .filter_map(|x| {
-                if devices.contains(&x.sysfs_path) {
-                    Some(BoundDevice { sysfsPath: x.sysfs_path, dtboLabel: x.dtbo_label })
-                } else {
-                    None
-                }
-            })
-            .collect::<Vec<_>>())
+        let mut bound_devices = vec![];
+        for dev in get_assignable_devices()?.device {
+            if !devices.contains(&dev.sysfs_path) {
+                warn!("device {} is not assignable", dev.sysfs_path);
+                continue;
+            };
+            vfio_service.bindDeviceToVfioDriver(&dev.sysfs_path)?;
+            bound_devices.push(BoundDevice::new_binder(dev.sysfs_path, dev.dtbo_label));
+        }
+        Ok(bound_devices)
     }
 
     fn getDtboFile(&self) -> binder::Result<ParcelFileDescriptor> {

@@ -25,11 +25,18 @@ import android.system.virtualizationservice_internal.IGlobalVmContext;
 /** VFIO related methods which should be done as root. */
 interface IVfioHandler {
     /**
-     * Bind given devices to vfio driver.
+     * Bind given device to vfio driver.
      *
-     * @param devices paths of sysfs nodes of devices to assign.
+     * @param device path of sysfs nodes of device to assign.
      */
-    void bindDevicesToVfioDriver(in String[] devices);
+    void bindDeviceToVfioDriver(in String device);
+
+    /**
+     * Unbind given device from vfio driver.
+     *
+     * @param device sysfs node path of device to unbind.
+     */
+    void unbindDeviceFromVfioDriver(in String device);
 
     /**
      * Store VM DTBO via the file descriptor.
