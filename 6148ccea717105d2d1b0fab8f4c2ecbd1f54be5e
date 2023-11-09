@@ -22,6 +22,30 @@
       },
       "revId": "6148ccea717105d2d1b0fab8f4c2ecbd1f54be5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "683703a9_1fa3b271",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-09T14:26:01Z",
+      "side": 1,
+      "message": "Ah, Alice explained offline that since we no longer return fine-grained error codes to the API client (because there\u0027s nothing much they can do with them), we don\u0027t need them here.",
+      "parentUuid": "eecec01a_ddd13787",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 48
+      },
+      "revId": "6148ccea717105d2d1b0fab8f4c2ecbd1f54be5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
