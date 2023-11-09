@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6d0e81b_bd0e2857",
+        "filename": "compos/compos_key_helper/compos_key_main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2023-11-09T00:17:53Z",
+      "side": 1,
+      "message": "This seems quite error prone?  It requires any (new) client to remember adding a random header file before they include the targeting ones (e.g. vm_payload_restricted.h here).  What would be a more scalable solution?",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 57
+      },
+      "revId": "4f9fb961307c3b57e4c84537d94ac159971800b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
