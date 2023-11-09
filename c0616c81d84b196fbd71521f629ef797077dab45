@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d66f532f_ba841066",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-09T16:00:02Z",
+      "side": 1,
+      "message": "This code probably needs to live somewhere else -- I\u0027m assuming we\u0027ll need this library in Trusty for building a TA, and I don\u0027t think we want to map the whole `packages/modules/Virtualization` repo into the Trusty tree.\n\nMaybe a new `system/secretkeeper/` repo, analogous to `system/{keymint,keymaster,gatekeeper,authgraph}/` ?",
+      "revId": "c0616c81d84b196fbd71521f629ef797077dab45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21399713_ad55ff4e",
+        "filename": "secretkeeper/comm/Android.bp",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-09T16:00:02Z",
+      "side": 1,
+      "message": "Note that `num_traits` is not currently mapped into Trusty, so it might be easier to use `enumn` instead (which is).",
+      "revId": "c0616c81d84b196fbd71521f629ef797077dab45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
