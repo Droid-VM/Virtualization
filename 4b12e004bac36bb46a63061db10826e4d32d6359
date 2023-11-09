@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "296a58c0_9703eca8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-11-09T10:45:07Z",
+      "side": 1,
+      "message": "FYI, the [CL](https://chromium-review.googlesource.com/c/crosvm/crosvm/+/4855969) this depends on adds an [additional switch](https://chromium-review.googlesource.com/c/crosvm/crosvm/+/4855969/29/src/crosvm/cmdline.rs) for filtered overlays, as opposed to unfiltered ones. As it stands, the parameter should be `--device-tree-overlays\u003d{path},filter`, but let\u0027s hold off until that change is merged.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 21
+      },
+      "revId": "4b12e004bac36bb46a63061db10826e4d32d6359",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
