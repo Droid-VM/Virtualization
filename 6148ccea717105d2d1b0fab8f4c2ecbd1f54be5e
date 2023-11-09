@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eecec01a_ddd13787",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-09T14:17:15Z",
+      "side": 1,
+      "message": "Now this seems to have regressed?\nThis is no longer based on aosp/2822400?\n\nThat sort of change makes reviews a lot harder - the delta between PS 12 and 14 is now very weird.\n\nAnd I\u0027d rather we kept the error code change here - it was asked for as part of the review of this CL.",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 48
+      },
+      "revId": "6148ccea717105d2d1b0fab8f4c2ecbd1f54be5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
