@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91bb6d43_3cfbbbb4",
+        "filename": "vmbase/src/memory/page_table.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-09T15:35:04Z",
+      "side": 1,
+      "message": "We were previously emulating the unsafeness with this method (even if `activate` was safe); should we now update this comment to point to the safety requirement of `activate`, as I expect them to be duplicates?",
+      "range": {
+        "startLine": 82,
+        "startChar": 8,
+        "endLine": 84,
+        "endChar": 42
+      },
+      "revId": "28e439f40a0af608cd5efb521f172ea8dcc04edc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
