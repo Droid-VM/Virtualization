@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89d9d5c2_1d300616",
+        "filename": "service_vm/comm/src/client_vm_csr.cddl",
+        "patchSetId": 12
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-09T12:19:49Z",
+      "side": 1,
+      "message": "Nit: Move this before CsrPayload?\nThis is the root type for this CDDL.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 1
+      },
+      "revId": "ac3bb5c6c863a9a32566de873f7a0217c3b57a80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfffa702_290d8158",
+        "filename": "service_vm/comm/src/client_vm_csr.cddl",
+        "patchSetId": 12
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-09T12:19:49Z",
+      "side": 1,
+      "message": "bstr .cbor CsrPayload",
+      "range": {
+        "startLine": 25,
+        "startChar": 13,
+        "endLine": 25,
+        "endChar": 23
+      },
+      "revId": "ac3bb5c6c863a9a32566de873f7a0217c3b57a80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17246635_16cc19b4",
+        "filename": "service_vm/comm/src/client_vm_csr.cddl",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-09T12:19:49Z",
+      "side": 1,
+      "message": "bstr .cbor CsrPayload",
+      "range": {
+        "startLine": 52,
+        "startChar": 13,
+        "endLine": 52,
+        "endChar": 23
+      },
+      "revId": "ac3bb5c6c863a9a32566de873f7a0217c3b57a80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a19abcf_91fe51e8",
+        "filename": "service_vm/comm/src/client_vm_csr.cddl",
+        "patchSetId": 12
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-09T12:19:49Z",
+      "side": 1,
+      "message": "Can we expand the details of this, just like the keymint PublicKey?",
+      "range": {
+        "startLine": 56,
+        "startChar": 13,
+        "endLine": 56,
+        "endChar": 21
+      },
+      "revId": "ac3bb5c6c863a9a32566de873f7a0217c3b57a80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c1b87de_3093cad3",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-09T12:19:49Z",
+      "side": 1,
+      "message": "Can we return an error here, since the implementation is incomplete?",
+      "range": {
+        "startLine": 45,
+        "startChar": 1,
+        "endLine": 45,
+        "endChar": 18
+      },
+      "revId": "ac3bb5c6c863a9a32566de873f7a0217c3b57a80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6371ac5_06b87962",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-09T12:19:49Z",
+      "side": 1,
+      "message": "How will we do that?",
+      "range": {
+        "startLine": 185,
+        "startChar": 34,
+        "endLine": 186,
+        "endChar": 39
+      },
+      "revId": "ac3bb5c6c863a9a32566de873f7a0217c3b57a80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b93b2f1f_34ece67b",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-09T12:19:49Z",
+      "side": 1,
+      "message": "Ideally we\u0027d avoid a clone here.",
+      "range": {
+        "startLine": 188,
+        "startChar": 87,
+        "endLine": 188,
+        "endChar": 95
+      },
+      "revId": "ac3bb5c6c863a9a32566de873f7a0217c3b57a80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4025c201_9820dba1",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-09T12:19:49Z",
+      "side": 1,
+      "message": "Why isn\u0027t this RequestClientVmAttestation?",
+      "range": {
+        "startLine": 38,
+        "startChar": 18,
+        "endLine": 38,
+        "endChar": 25
+      },
+      "revId": "ac3bb5c6c863a9a32566de873f7a0217c3b57a80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
