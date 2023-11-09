@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f3cde224_c816dc9d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-09T13:18:30Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "a925f556_9b450c4a",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 39
+      },
+      "revId": "391b92e3d047d35e0d6ee0c6bd2e91c31d24d876",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "05e0812b_6ea68b56",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ccc57b6_7d91ba99",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-09T13:18:30Z",
+      "side": 1,
+      "message": "As discussed offline, we can simplify this to 3 types of errors.",
+      "parentUuid": "ac8d8f7d_0a1c515d",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 50
+      },
+      "revId": "391b92e3d047d35e0d6ee0c6bd2e91c31d24d876",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e73a7fa_0686d188",
@@ -77,6 +125,30 @@
       "writtenOn": "2023-11-09T12:07:50Z",
       "side": 1,
       "message": "I\u0027m not sure these all fit in the same bucket in my proposed 3 options.\nMost of them indicate we have a bug, I think? But TRANSACTION_FAILED could mean the other end died unexpectedly, which is retriable.",
+      "range": {
+        "startLine": 315,
+        "startChar": 0,
+        "endLine": 321,
+        "endChar": 48
+      },
+      "revId": "391b92e3d047d35e0d6ee0c6bd2e91c31d24d876",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10e4b85d_c678135f",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-09T13:18:30Z",
+      "side": 1,
+      "message": "If we just want 3 types of errors, either they shouldn\u0027t happen like ILLEGAL_STATE , the rest should fit into `ATTESTATION_ERROR_ATTESTATION_FAILED`.",
+      "parentUuid": "0e73a7fa_0686d188",
       "range": {
         "startLine": 315,
         "startChar": 0,
