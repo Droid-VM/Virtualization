@@ -16,7 +16,6 @@
 
 use android_system_virtualization_payload::aidl::android::system::virtualization::payload::IVmPayloadService::{
     BnVmPayloadService, IVmPayloadService, VM_PAYLOAD_SERVICE_SOCKET_NAME, AttestationResult::AttestationResult,
-    STATUS_FAILED_TO_PREPARE_CSR_AND_KEY
 };
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::IVirtualMachineService;
 use anyhow::{anyhow, Context, Result};
@@ -41,6 +40,7 @@ use openssl::{
 };
 use service_vm_comm::{Csr, CsrPayload};
 use std::os::unix::io::OwnedFd;
+use vm_payload_status_bindgen::attestation_status_t;
 use zeroize::Zeroizing;
 
 const ATTESTATION_KEY_NID: Nid = Nid::X9_62_PRIME256V1; // NIST P-256 curve
@@ -93,8 +93,8 @@ impl IVmPayloadService for VmPayloadService {
         let (private_key, csr) = generate_attestation_key_and_csr(challenge, self.secret.dice())
             .map_err(|e| {
                 Status::new_service_specific_error_str(
-                    STATUS_FAILED_TO_PREPARE_CSR_AND_KEY,
-                    Some(format!("Failed to prepare the CSR and key pair: {e:?}")),
+                    attestation_status_t::ATTESTATION_ERROR_CSR_AND_KEY_GENERATION as i32,
+                    Some(format!("Failed to generate the CSR and key pair: {e:?}")),
                 )
             })
             .with_log()?;

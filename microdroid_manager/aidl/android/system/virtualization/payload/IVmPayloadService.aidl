@@ -23,10 +23,6 @@ import android.system.virtualizationcommon.Certificate;
  * Microdroid Manager for execution.
  */
 interface IVmPayloadService {
-    /** The constants STATUS_* are status code returned by this service. */
-    /** Failed to prepare the CSR and key pair for attestation. */
-    const int STATUS_FAILED_TO_PREPARE_CSR_AND_KEY = 1;
-
     /** Socket name of the service IVmPayloadService. */
     const String VM_PAYLOAD_SERVICE_SOCKET_NAME = "vm_payload_service";
 

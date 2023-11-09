@@ -36,7 +36,10 @@ rust_bindgen {
         "--default-enum-style rust",
         "--allowlist-type=attestation_status_t",
     ],
-    visibility: [":__subpackages__"],
+    visibility: [
+        ":__subpackages__",
+        "//packages/modules/Virtualization/microdroid_manager",
+    ],
 }
 
 // Rust wrappers round the C API for Rust clients.

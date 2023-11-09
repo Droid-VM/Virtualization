@@ -51,6 +51,7 @@ rust_defaults {
         "libuuid",
         "libvsock",
         "librand",
+        "libvm_payload_status_bindgen",
         "libzeroize",
     ],
     init_rc: ["microdroid_manager.rc"],

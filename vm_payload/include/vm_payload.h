@@ -48,6 +48,15 @@ typedef enum attestation_status_t : int32_t {
 
     /** The challenge size is not between 0 and 64. */
     ATTESTATION_ERROR_INVALID_CHALLENGE = -10001,
+
+    /** Failed to generate the CSR and key pair for attestation. */
+    ATTESTATION_ERROR_CSR_AND_KEY_GENERATION = -10002,
+
+    /** Remote attestation is not supported in the current environment. */
+    ATTESTATION_ERROR_UNSUPPORTED = -10003,
+
+    /** A binder error occurred during the binder transaction. */
+    ATTESTATION_ERROR_BINDER_TRANSACTION = -10004,
 } attestation_status_t;
 
 /**
