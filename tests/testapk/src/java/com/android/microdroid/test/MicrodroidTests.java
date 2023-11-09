@@ -2131,6 +2131,11 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     @Test
     public void bootsWithVendorPartition() throws Exception {
         assumeSupportedDevice();
+        assumeFalse(
+                "Cuttlefish doesn't support device tree under /sys/firmware/devicetree/base",
+                isCuttlefish());
+        assumeFalse(
+                "boot with vendor partition is failing in HWASAN enabled Microdroid.", isHwasan());
         assumeFeatureEnabled(VirtualMachineManager.FEATURE_VENDOR_MODULES);
 
         grantPermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);

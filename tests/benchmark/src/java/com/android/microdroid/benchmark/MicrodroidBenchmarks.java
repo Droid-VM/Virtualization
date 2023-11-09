@@ -262,6 +262,11 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
 
     @Test
     public void testMicrodroidDebugBootTime_withVendorPartition() throws Exception {
+        assumeFalse(
+                "Cuttlefish doesn't support device tree under /sys/firmware/devicetree/base",
+                isCuttlefish());
+        assumeFalse(
+                "boot with vendor partition is failing in HWASAN enabled Microdroid.", isHwasan());
         assumeFeatureEnabled(VirtualMachineManager.FEATURE_VENDOR_MODULES);
 
         File vendorDiskImage =
