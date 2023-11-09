@@ -1029,6 +1029,13 @@ impl Fdt {
         Ok(fdt_err_or_option(ret)?.map(|offset| FdtNode { fdt: self, offset }))
     }
 
+    /// Returns a mutable node with the phandle
+    pub fn node_mut_with_phandle(&mut self, phandle: Phandle) -> Result<Option<FdtNodeMut>> {
+        // SAFETY: Accesses are constrained to the DT totalsize.
+        let ret = unsafe { libfdt_bindgen::fdt_node_offset_by_phandle(self.as_ptr(), phandle.0) };
+        Ok(fdt_err_or_option(ret)?.map(|offset| FdtNodeMut { fdt: self, offset }))
+    }
+
     /// Returns the mutable root node of the tree.
     pub fn root_mut(&mut self) -> Result<FdtNodeMut> {
         self.node_mut(cstr!("/"))?.ok_or(FdtError::Internal)
