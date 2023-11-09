@@ -81,4 +81,11 @@ interface IVirtualizationServiceInternal {
      * @return a list of pairs (sysfs path, DTBO node label) for devices.
      */
     BoundDevice[] bindDevicesToVfioDriver(in String[] devices);
+
+    /**
+     * Unbind given devices from vfio driver.
+     *
+     * @param devices paths of sysfs nodes of devices to assign.
+     */
+    void unbindDevicesFromVfioDriver(in String[] devices);
 }

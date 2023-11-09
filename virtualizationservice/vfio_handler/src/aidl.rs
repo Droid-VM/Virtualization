@@ -52,6 +52,16 @@ impl IVfioHandler for VfioHandler {
         Ok(())
     }
 
+    fn unbindDevicesFromVfioDriver(&self, devices: &[String]) -> binder::Result<()> {
+        // permission check is already done by IVirtualizationServiceInternal.
+        if !*IS_VFIO_SUPPORTED {
+            return Err(anyhow!("VFIO-platform not supported"))
+                .or_binder_exception(ExceptionCode::UNSUPPORTED_OPERATION);
+        }
+        devices.iter().try_for_each(|x| unbind_device(Path::new(x)))?;
+        Ok(())
+    }
+
     fn writeVmDtbo(&self, dtbo_fd: &ParcelFileDescriptor) -> binder::Result<()> {
         let dtbo_path = get_dtbo_img_path()?;
         let mut dtbo_img = File::open(dtbo_path)
@@ -79,6 +89,11 @@ const SYSFS_PLATFORM_DEVICES_PATH: &str = "/sys/devices/platform/";
 const VFIO_PLATFORM_DRIVER_PATH: &str = "/sys/bus/platform/drivers/vfio-platform";
 const SYSFS_PLATFORM_DRIVERS_PROBE_PATH: &str = "/sys/bus/platform/drivers_probe";
 const DT_TABLE_MAGIC: u32 = 0xd7b7ab1e;
+const VFIO_PLATFORM_DRIVER_NAME: &str = "vfio-platform";
+// To remove the override and match the device driver by "compatible" string again,
+// driver_override file must be cleared. Writing an empty string (same as
+// `echo -n "" > driver_override`) won't' clear the file, so append a newline char.
+const DEFAULT_DRIVER: &str = "\n";
 
 /// The structure of DT table header in dtbo.img.
 /// https://source.android.com/docs/core/architecture/dto/partitions
@@ -146,18 +161,15 @@ fn get_device_iommu_group(path: &Path) -> Option<u64> {
     group.to_str()?.parse().ok()
 }
 
-fn is_bound_to_vfio_driver(path: &Path) -> bool {
-    let Ok(driver_path) = read_link(path.join("driver")) else {
-        return false;
-    };
-    let Some(driver) = driver_path.file_name() else {
-        return false;
-    };
-    driver.to_str().unwrap_or("") == "vfio-platform"
+fn current_driver(path: &Path) -> Option<String> {
+    let driver_path = read_link(path.join("driver")).ok()?;
+    let bound_driver = driver_path.file_name()?;
+    bound_driver.to_str().map(str::to_string)
 }
 
-fn bind_vfio_driver(path: &Path) -> binder::Result<()> {
-    if is_bound_to_vfio_driver(path) {
+// Try to bind device driver by writing its name to driver_override and triggering driver probe.
+fn try_bind_driver(path: &Path, driver: &str) -> binder::Result<()> {
+    if Some(driver) == current_driver(path).as_deref() {
         // already bound
         return Ok(());
     }
@@ -177,10 +189,13 @@ fn bind_vfio_driver(path: &Path) -> binder::Result<()> {
             .with_context(|| format!("could not unbind {device_str}"))
             .or_service_specific_exception(-1)?;
     }
+    if path.join("driver").exists() {
+        return Err(anyhow!("could not unbind {device_str}")).or_service_specific_exception(-1);
+    }
 
-    // bind to VFIO
-    write(path.join("driver_override"), b"vfio-platform")
-        .with_context(|| format!("could not bind {device_str} to vfio-platform"))
+    // bind to new driver
+    write(path.join("driver_override"), driver.as_bytes())
+        .with_context(|| format!("could not bind {device_str} to '{driver}' driver"))
         .or_service_specific_exception(-1)?;
 
     write(SYSFS_PLATFORM_DRIVERS_PROBE_PATH, device_str.as_bytes())
@@ -188,13 +203,9 @@ fn bind_vfio_driver(path: &Path) -> binder::Result<()> {
         .or_service_specific_exception(-1)?;
 
     // final check
-    if !is_bound_to_vfio_driver(path) {
-        return Err(anyhow!("{path:?} still not bound to vfio driver"))
-            .or_service_specific_exception(-1);
-    }
-
-    if get_device_iommu_group(path).is_none() {
-        return Err(anyhow!("can't get iommu group for {path:?}"))
+    let new_driver = current_driver(path);
+    if new_driver.is_none() || Some(driver) != new_driver.as_deref() && driver != DEFAULT_DRIVER {
+        return Err(anyhow!("{path:?} still not bound to '{driver}' driver"))
             .or_service_specific_exception(-1);
     }
 
@@ -208,7 +219,29 @@ fn bind_device(path: &Path) -> binder::Result<()> {
         .or_binder_exception(ExceptionCode::ILLEGAL_ARGUMENT)?;
 
     check_platform_device(&path)?;
-    bind_vfio_driver(&path)
+    try_bind_driver(&path, VFIO_PLATFORM_DRIVER_NAME)?;
+
+    if get_device_iommu_group(&path).is_none() {
+        Err(anyhow!("can't get iommu group for {path:?}")).or_service_specific_exception(-1)
+    } else {
+        Ok(())
+    }
+}
+
+fn unbind_device(path: &Path) -> binder::Result<()> {
+    let path = path
+        .canonicalize()
+        .with_context(|| format!("can't canonicalize {path:?}"))
+        .or_binder_exception(ExceptionCode::ILLEGAL_ARGUMENT)?;
+
+    check_platform_device(&path)?;
+    try_bind_driver(&path, DEFAULT_DRIVER)?;
+
+    if Some(VFIO_PLATFORM_DRIVER_NAME) == current_driver(&path).as_deref() {
+        Err(anyhow!("{path:?} still bound to vfio driver")).or_service_specific_exception(-1)
+    } else {
+        Ok(())
+    }
 }
 
 fn get_dtbo_img_path() -> binder::Result<PathBuf> {
