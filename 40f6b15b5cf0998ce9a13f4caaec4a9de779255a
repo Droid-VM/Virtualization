@@ -22,6 +22,30 @@
       },
       "revId": "40f6b15b5cf0998ce9a13f4caaec4a9de779255a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c19ae6a4_4131be3e",
+        "filename": "service_vm/comm/src/csr.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-09T09:11:20Z",
+      "side": 1,
+      "message": "The `coset::Result` returned here does not include a `context` extension like `anyhow`. Actually this library is used in both the std (host) and nostd (service VM) environments for converting between bytes and structs. While it\u0027s possible to change the return to `anyhow::Result` in std, it would pose a problem in nostd as we do not support anyhow errors there yet (errors in nostd [1][2]).\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/rialto/src/error.rs;l\u003d32;drc\u003dd80e99e2a8bfe9fb12beac38f00f229074c613b4\n[2] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/service_vm/comm/src/message.rs;l\u003d75;drc\u003d881d14eda1542640493c3eb58920c10b11a52713",
+      "parentUuid": "cc8b8eb7_d5905d12",
+      "range": {
+        "startLine": 57,
+        "startChar": 58,
+        "endLine": 57,
+        "endChar": 60
+      },
+      "revId": "40f6b15b5cf0998ce9a13f4caaec4a9de779255a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
