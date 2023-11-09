@@ -32,6 +32,13 @@ interface IVfioHandler {
     void bindDevicesToVfioDriver(in String[] devices);
 
     /**
+     * Unbind given devices from vfio driver.
+     *
+     * @param devices paths of sysfs nodes of devices to unbind.
+     */
+    void unbindDevicesFromVfioDriver(in String[] devices);
+
+    /**
      * Store VM DTBO via the file descriptor.
      *
      * @param dtbo writable file descriptor to store VM DTBO.

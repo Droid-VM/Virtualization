@@ -14,7 +14,7 @@
 
 //! Functions for running instances of `crosvm`.
 
-use crate::aidl::{remove_temporary_files, Cid, VirtualMachineCallbacks};
+use crate::aidl::{remove_temporary_files, Cid, VirtualMachineCallbacks, GLOBAL_SERVICE};
 use crate::atom::{get_num_cpus, write_vm_exited_stats_sync};
 use crate::debug_config::DebugConfig;
 use anyhow::{anyhow, bail, Context, Error, Result};
@@ -410,10 +410,22 @@ impl VmInstance {
             error!("Error removing temporary files from {:?}: {}", self.temporary_directory, e);
         });
 
-        // TODO(b/278008182): clean up assigned devices.
-        for device in vfio_devices.iter() {
-            info!("NOT RELEASING {device:?}");
-        }
+        Self::cleanup_assigned_devices(vfio_devices);
+    }
+
+    // Unbinds VFIO driver from devices
+    fn cleanup_assigned_devices(vfio_devices: Vec<VfioDevice>) {
+        if let Ok(device_paths) = vfio_devices
+            .into_iter()
+            .map(|d| d.sysfs_path.into_os_string().into_string())
+            .collect::<std::result::Result<Vec<_>, _>>()
+        {
+            GLOBAL_SERVICE.unbindDevicesFromVfioDriver(&device_paths).unwrap_or_else(|e| {
+                error!("Error unbinding VFIO driver: {e}");
+            });
+        } else {
+            error!("Error unbinding VFIO driver, devices not released");
+        };
     }
 
     /// Waits until payload is started, or timeout expires. When timeout occurs, kill

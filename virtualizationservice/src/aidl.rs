@@ -218,6 +218,12 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
             })
             .collect::<Vec<_>>())
     }
+
+    fn unbindDevicesFromVfioDriver(&self, devices: &[String]) -> binder::Result<()> {
+        let vfio_service: Strong<dyn IVfioHandler> =
+            wait_for_interface(<BpVfioHandler as IVfioHandler>::get_descriptor())?;
+        vfio_service.unbindDevicesFromVfioDriver(devices)
+    }
 }
 
 // KEEP IN SYNC WITH assignable_devices.xsd
