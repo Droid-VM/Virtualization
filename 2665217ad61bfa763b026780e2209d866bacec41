@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6a3c6142_4cc56c99",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-11-09T08:48:52Z",
+      "side": 1,
+      "message": "\u003e The os_name is the key we use to pick the config including the kernel path.\n\nYeah, this is what I was thinking.\n\n\u003e We will need to change anywhere that currently uses Microdroid but instead wants GKI, but we have to do that either way.\n\nWill take a look and resolve it if this works.\n\n\u003e You\u0027re currently only exposing this option via config file, not the API, which I think is intentional?\n\nYes. I don\u0027t think we need to publish this as a public API for now.",
+      "parentUuid": "940285a2_d093b016",
+      "range": {
+        "startLine": 636,
+        "startChar": 0,
+        "endLine": 639,
+        "endChar": 5
+      },
+      "revId": "2665217ad61bfa763b026780e2209d866bacec41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b5bd672_617e2828",
         "filename": "vm/src/main.rs",
         "patchSetId": 2
@@ -85,6 +109,30 @@
       "writtenOn": "2023-11-07T12:37:49Z",
       "side": 1,
       "message": "why not make use of this filed, instead of adding the gki boolean below?",
+      "range": {
+        "startLine": 103,
+        "startChar": 4,
+        "endLine": 103,
+        "endChar": 28
+      },
+      "revId": "2665217ad61bfa763b026780e2209d866bacec41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfab8a14_fa2cfe2a",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-11-09T08:48:52Z",
+      "side": 1,
+      "message": "Because microdroid gki requires not only kernel but also initrd. I tried merging modules (zram, zsmalloc) into the normal initrd, but that caused normal microdroid to load the modules, which is unexpected and not good.\n\nAre there any better ways to selectively load kernel modules only for GKI?",
+      "parentUuid": "5b5bd672_617e2828",
       "range": {
         "startLine": 103,
         "startChar": 4,
