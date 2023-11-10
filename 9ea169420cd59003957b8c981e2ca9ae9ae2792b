@@ -39,6 +39,30 @@
       },
       "revId": "9ea169420cd59003957b8c981e2ca9ae9ae2792b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "752be1b1_64cf6ba5",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1884477
+      },
+      "writtenOn": "2023-11-10T17:51:11Z",
+      "side": 1,
+      "message": "[[noreturn]] is C23 / C++11, I am concerned about the portability",
+      "parentUuid": "6490bb63_cbb51d7b",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 25
+      },
+      "revId": "9ea169420cd59003957b8c981e2ca9ae9ae2792b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
