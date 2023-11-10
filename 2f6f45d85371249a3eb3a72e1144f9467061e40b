@@ -16,6 +16,98 @@
       "message": "Now ready to get review again.",
       "revId": "2f6f45d85371249a3eb3a72e1144f9467061e40b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05aea1c3_727781ef",
+        "filename": "pvmfw/Android.bp",
+        "patchSetId": 11
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-10T12:11:27Z",
+      "side": 1,
+      "message": "This is a very important change (even though it looks nothing like it): would you mind doing it in its own commit, as I\u0027d like to be able to reference it on its own in the future? Thanks!",
+      "range": {
+        "startLine": 243,
+        "startChar": 26,
+        "endLine": 243,
+        "endChar": 30
+      },
+      "revId": "2f6f45d85371249a3eb3a72e1144f9467061e40b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e1ee4db_24574760",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-10T12:11:27Z",
+      "side": 1,
+      "message": "Simply use a `Vec` as the code isn\u0027t differentiating between `None` and `Some(vec![])` e.g.\n```\nfor assigned_device in \u0026self.assigned_devices {\n    let Some(iommus) \u003d \u0026assigned_device.iommus else { continue; };\n    for iommu in iommus { ... }\n}\n```",
+      "range": {
+        "startLine": 208,
+        "startChar": 12,
+        "endLine": 208,
+        "endChar": 22
+      },
+      "revId": "2f6f45d85371249a3eb3a72e1144f9467061e40b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42e7c66e_75d7c5e8",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-10T12:11:27Z",
+      "side": 1,
+      "message": "Why start ignoring errors here?",
+      "range": {
+        "startLine": 358,
+        "startChar": 39,
+        "endLine": 358,
+        "endChar": 44
+      },
+      "revId": "2f6f45d85371249a3eb3a72e1144f9467061e40b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a09e87e5_db4b3eb5",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-10T12:11:27Z",
+      "side": 1,
+      "message": "This will break once we extend the topology to multiple devices per pvIOMMU.\n\nWhat about treating pvIOMMUs as another special set of assigned devices by introducing `DeviceAssignmentInfo::(assigned_)pviommus: BTreeSet\u003cu32\u003e` of `id`? You\u0027d get the uniqueness check in the ctor for free and could implement `patch` like this:\n\nFirst, patch the template pvIOMMUs, recording their DTC-generated phandles [*]:\n\n```\nlet mut compatible \u003d fdt.root_mut()?.next_compatible(PVIOMMU_COMPATIBLE)?;\nlet mut pviommu_phandles: BTreeMap\u003cu32, Phandle\u003e;\nfor id in self.assigned_pviommus {\n    let mut pviommu \u003d compatible.ok_or(DeviceAssignmentError::TooManyPvIommu)?;\n    let phandle \u003d pviommu.as_node().phandle()?.unwrap();\n    pviommu.setprop_inplace(cstr!(\"id\"), \u0026u32::to_be_bytes(iommu.id))?;\n    pviommu_phandles.insert(id, phandle);\n    compatible \u003d pviommu.next_compatible(PVIOMMU_COMPATIBLE)?;\n}\n```\n\nThen, filter out the remaining template pvIOMMUs:\n```\nwhile let Some(compatible) \u003d compatible.delete_and_next_compatible(PVIOMMU_COMPATIBLE)? {\n    // Having an empty loop body is weird!\n    // I wonder if there\u0027s a better way to express this?\n}\n```\n\nFinally, patch the VM DTBO devices by looking up pvIOMMU phandles by `id`:\n```\nfor device in \u0026self.assigned_devices {\n    device.patch(fdt, \u0026pviommu_phandles)?;\n}\n```\n\n---\n\n[*]: As a nit, I think the iterator-like reference could be DRY-ed with\n```\nlet mut compatible \u003d fdt.root_mut()?;\n// ...\nfor id in self.assigned_pviommus {\n    let mut pviommu \u003d compatible.next_compatible(PVIOMMU_COMPATIBLE)?\n                                .ok_or(DeviceAssignmentError::TooManyPvIommu)?;\n    // ...\n    // nothing to do at end of loop!\n}\n```",
+      "range": {
+        "startLine": 369,
+        "startChar": 0,
+        "endLine": 376,
+        "endChar": 18
+      },
+      "revId": "2f6f45d85371249a3eb3a72e1144f9467061e40b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

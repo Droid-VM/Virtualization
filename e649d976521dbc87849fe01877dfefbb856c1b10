@@ -131,6 +131,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "819d673b_26deb1e9",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 8
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-10T12:11:27Z",
+      "side": 1,
+      "message": "I just realized that we already use labels elsewhere (`clk`, `intc`) so `/aliases` is probably already being generated, anyway. OOC, could you please decompile the DTB and check?\n\n\u003e Would you prefer to have explicit phandle? Then I can simplify code bit further because we can know phandles of pviommu without iteration.\n\nRight, it is more robust to extract the phandles from the platform DT. I was misremembering that we were already using hardcoded phandles but I now realize that I was mixing up this implementation with crosvm\u0027s.\n\nSo no, let\u0027s keep the DTC-generate phandles in `platform.dts` and parse the DT in crosvm to extract them; given how many times we already traverse the DT, the performance impact is probably insignificant.\n\nSorry for the confusion.",
+      "parentUuid": "bf6a0286_e72f2717",
+      "range": {
+        "startLine": 265,
+        "startChar": 1,
+        "endLine": 265,
+        "endChar": 10
+      },
+      "revId": "e649d976521dbc87849fe01877dfefbb856c1b10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4b1eb08c_1ffcabdf",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 8
