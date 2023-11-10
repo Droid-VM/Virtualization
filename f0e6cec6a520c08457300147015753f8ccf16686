@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae258f84_f5407260",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-10T12:12:13Z",
+      "side": 1,
+      "message": "Nice catch!",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 5
+      },
+      "revId": "f0e6cec6a520c08457300147015753f8ccf16686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "618ec25a_a7bfa999",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-10T12:12:13Z",
+      "side": 1,
+      "message": "isn\u0027t this `libfdt::Result`?",
+      "range": {
+        "startLine": 406,
+        "startChar": 13,
+        "endLine": 406,
+        "endChar": 22
+      },
+      "revId": "f0e6cec6a520c08457300147015753f8ccf16686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70accac1_0e6e41bd",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-10T12:12:13Z",
+      "side": 1,
+      "message": "Making the `expected` values `\u0026[u8]` instead of `Vec` would save you from having to copy the property values onto the heap.",
+      "range": {
+        "startLine": 418,
+        "startChar": 60,
+        "endLine": 418,
+        "endChar": 67
+      },
+      "revId": "f0e6cec6a520c08457300147015753f8ccf16686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "846a0161_2465caf7",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-10T12:12:13Z",
+      "side": 1,
+      "message": "I\u0027ll repeat my suggestion of making `expected` a `HashMap` :)",
+      "range": {
+        "startLine": 420,
+        "startChar": 19,
+        "endLine": 420,
+        "endChar": 26
+      },
+      "revId": "f0e6cec6a520c08457300147015753f8ccf16686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
