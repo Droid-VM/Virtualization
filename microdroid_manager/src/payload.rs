@@ -17,7 +17,7 @@
 use crate::instance::ApexData;
 use crate::ioutil::wait_for_file;
 use anyhow::Result;
-use log::info;
+use log::{info, warn};
 use microdroid_metadata::{read_metadata, ApexPayload, Metadata};
 use std::time::Duration;
 
@@ -39,11 +39,15 @@ pub fn get_apex_data_from_payload(metadata: &Metadata) -> Result<Vec<ApexData>> 
         .map(|apex| {
             let name = apex.name.clone();
             let apex_path = format!("/dev/block/by-name/{}", apex.partition_name);
-            let result = apexutil::verify(&apex_path)?;
+            let verified = apexutil::verify(&apex_path)?;
+            if name != verified.name {
+                warn!("Apex named {} is named {} in its manifest", name, verified.name);
+            }
             Ok(ApexData {
-                name,
-                public_key: result.public_key,
-                root_digest: result.root_digest,
+                name: verified.name,
+                version: verified.version,
+                public_key: verified.public_key,
+                root_digest: verified.root_digest,
                 last_update_seconds: apex.last_update_seconds,
                 is_factory: apex.is_factory,
             })
