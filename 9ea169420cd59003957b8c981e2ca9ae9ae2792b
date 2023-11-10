@@ -87,6 +87,30 @@
       },
       "revId": "9ea169420cd59003957b8c981e2ca9ae9ae2792b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "880701e8_15a03b9e",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2023-11-10T18:13:00Z",
+      "side": 1,
+      "message": "We are not using c17 though: https://android.googlesource.com/platform/build/soong/+/master/cc/config/global.go/#359",
+      "parentUuid": "f63eb5fd_183dea63",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 25
+      },
+      "revId": "9ea169420cd59003957b8c981e2ca9ae9ae2792b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
