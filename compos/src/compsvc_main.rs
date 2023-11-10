@@ -38,6 +38,7 @@ fn main() {
     }
 }
 
+#[allow(unreachable_code)]
 fn try_main() -> Result<()> {
     android_logger::init_once(
         android_logger::Config::default().with_tag("compsvc").with_min_level(log::Level::Debug),
