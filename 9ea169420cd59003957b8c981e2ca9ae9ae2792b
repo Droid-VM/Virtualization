@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be19ae74_0cde2190",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2023-11-10T17:30:58Z",
+      "side": 1,
+      "message": "Feel free to remove the topic / decouple from other changes if you want, since this is a sole improvement.",
+      "revId": "9ea169420cd59003957b8c981e2ca9ae9ae2792b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6490bb63_cbb51d7b",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2023-11-10T17:30:58Z",
+      "side": 1,
+      "message": "I suppose `[[noreturn]]` is better?",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 25
+      },
+      "revId": "9ea169420cd59003957b8c981e2ca9ae9ae2792b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
