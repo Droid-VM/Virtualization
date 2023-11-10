@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b52d810_7864c1ae",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-10T12:12:36Z",
+      "side": 1,
+      "message": "Sorry for not thinking about this during the first round of reviews but would you mind naming this `get_phandle` to 1. follow the `get` Rust methods that typically return `Option` and 2. align with `fdt_get_phandle`?",
+      "range": {
+        "startLine": 509,
+        "startChar": 11,
+        "endLine": 509,
+        "endChar": 18
+      },
+      "revId": "dc49a5a3128c2063635ad91b1d3f8a233701139a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
