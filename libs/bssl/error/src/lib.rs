@@ -34,6 +34,9 @@ pub enum Error {
 
     /// An unexpected internal error occurred.
     InternalError,
+
+    /// The size of the affine coordinates does not match the expected size.
+    EcKeyAffineCoordinateSizeUnmatch(usize, usize),
 }
 
 impl fmt::Display for Error {
@@ -43,6 +46,13 @@ impl fmt::Display for Error {
                 write!(f, "Failed to invoke the BoringSSL API: {api_name:?}. Reason: {reason}")
             }
             Self::InternalError => write!(f, "An unexpected internal error occurred"),
+            Self::EcKeyAffineCoordinateSizeUnmatch(actual, expected) => {
+                write!(
+                    f,
+                    "The size of the affine coordinates '{}' does not match the expected size '{}'",
+                    actual, expected
+                )
+            }
         }
     }
 }
@@ -53,6 +63,7 @@ impl fmt::Display for Error {
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub enum ApiName {
     BN_new,
+    BN_bin2bn,
     BN_bn2bin_padded,
     CBB_flush,
     CBB_len,
@@ -62,6 +73,7 @@ pub enum ApiName {
     EC_KEY_get0_public_key,
     EC_KEY_marshal_private_key,
     EC_KEY_new_by_curve_name,
+    EC_KEY_set_public_key_affine_coordinates,
     EC_POINT_get_affine_coordinates,
     EVP_AEAD_CTX_new,
     EVP_AEAD_CTX_open,

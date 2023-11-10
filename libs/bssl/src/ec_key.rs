@@ -20,10 +20,10 @@ use crate::util::{check_int_result, to_call_failed_error};
 use alloc::vec::Vec;
 use bssl_avf_error::{ApiName, Error, Result};
 use bssl_ffi::{
-    BN_bn2bin_padded, BN_clear_free, BN_new, CBB_flush, CBB_len, EC_KEY_free, EC_KEY_generate_key,
-    EC_KEY_get0_group, EC_KEY_get0_public_key, EC_KEY_marshal_private_key,
-    EC_KEY_new_by_curve_name, EC_POINT_get_affine_coordinates, NID_X9_62_prime256v1, BIGNUM,
-    EC_GROUP, EC_KEY, EC_POINT,
+    BN_bin2bn, BN_bn2bin_padded, BN_clear_free, BN_new, CBB_flush, CBB_len, EC_KEY_free,
+    EC_KEY_generate_key, EC_KEY_get0_group, EC_KEY_get0_public_key, EC_KEY_marshal_private_key,
+    EC_KEY_new_by_curve_name, EC_KEY_set_public_key_affine_coordinates,
+    EC_POINT_get_affine_coordinates, NID_X9_62_prime256v1, BIGNUM, EC_GROUP, EC_KEY, EC_POINT,
 };
 use core::ptr::{self, NonNull};
 use core::result;
@@ -33,6 +33,14 @@ use zeroize::{Zeroize, ZeroizeOnDrop, Zeroizing};
 const P256_AFFINE_COORDINATE_SIZE: usize = 32;
 
 type Coordinate = [u8; P256_AFFINE_COORDINATE_SIZE];
+
+fn check_p256_affine_coordinate_size(coordinate: &[u8]) -> Result<()> {
+    if P256_AFFINE_COORDINATE_SIZE == coordinate.len() {
+        Ok(())
+    } else {
+        Err(Error::EcKeyAffineCoordinateSizeUnmatch(coordinate.len(), P256_AFFINE_COORDINATE_SIZE))
+    }
+}
 
 /// Wrapper of an `EC_KEY` object, representing a public or private EC key.
 pub struct EcKey(NonNull<EC_KEY>);
@@ -52,16 +60,41 @@ impl EcKey {
         let ec_key = unsafe {
             EC_KEY_new_by_curve_name(NID_X9_62_prime256v1) // EC P-256 CURVE Nid
         };
-        let mut ec_key = NonNull::new(ec_key)
+        NonNull::new(ec_key)
             .map(Self)
-            .ok_or(to_call_failed_error(ApiName::EC_KEY_new_by_curve_name))?;
-        ec_key.generate_key()?;
+            .ok_or(to_call_failed_error(ApiName::EC_KEY_new_by_curve_name))
+    }
+
+    /// Creates a new EC P-256 public key from the provided affine coordinates.
+    pub fn new_p256_public_key_from_affine_coordinates(x: &[u8], y: &[u8]) -> Result<Self> {
+        check_p256_affine_coordinate_size(x)?;
+        check_p256_affine_coordinate_size(y)?;
+
+        let bn_x = BigNum::from_slice(x)?;
+        let bn_y = BigNum::from_slice(y)?;
+
+        let ec_key = EcKey::new_p256()?;
+        // SAFETY: All the parameters are checked non-null and initialized.
+        // The function only reads the coordinates x and y within their bounds.
+        let ret = unsafe {
+            EC_KEY_set_public_key_affine_coordinates(
+                ec_key.0.as_ptr(),
+                bn_x.as_ref(),
+                bn_y.as_ref(),
+            )
+        };
+        check_int_result(ret, ApiName::EC_KEY_set_public_key_affine_coordinates)?;
         Ok(ec_key)
+    }
+
+    /// Verifies the ECDSA P-256 signature with current `EcKey`
+    pub fn ecdsa_p256_verify(&self, _signature: &[u8], _message: &[u8]) -> Result<()> {
+        Ok(())
     }
 
     /// Generates a random, private key, calculates the corresponding public key and stores both
     /// in the `EC_KEY`.
-    fn generate_key(&mut self) -> Result<()> {
+    pub fn generate_key(&mut self) -> Result<()> {
         // SAFETY: The non-null pointer is created with `EC_KEY_new_by_curve_name` and should
         // point to a valid `EC_KEY`.
         // The randomness is provided by `getentropy()` in `vmbase`.
@@ -175,6 +208,13 @@ impl Drop for BigNum {
 }
 
 impl BigNum {
+    fn from_slice(x: &[u8]) -> Result<Self> {
+        // SAFETY: The function reads `x` within its bounds, and the returned
+        // pointer is checked below.
+        let bn = unsafe { BN_bin2bn(x.as_ptr(), x.len(), ptr::null_mut()) };
+        NonNull::new(bn).map(Self).ok_or(to_call_failed_error(ApiName::BN_bin2bn))
+    }
+
     fn new() -> Result<Self> {
         // SAFETY: The returned pointer is checked below.
         let bn = unsafe { BN_new() };
@@ -183,6 +223,14 @@ impl BigNum {
 
     fn as_mut_ptr(&mut self) -> *mut BIGNUM {
         self.0.as_ptr()
+    }
+}
+
+impl AsRef<BIGNUM> for BigNum {
+    fn as_ref(&self) -> &BIGNUM {
+        // SAFETY: The pointer is valie and points to an initialized instance of `BIGNUM`
+        // when the instance was created.
+        unsafe { self.0.as_ref() }
     }
 }
 

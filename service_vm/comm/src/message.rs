@@ -120,6 +120,9 @@ pub enum RequestProcessingError {
 
     /// The requested operation has not been implemented.
     OperationUnimplemented,
+
+    /// Failed to decode the public key to be attested.
+    PublicKeyDecodingFailed,
 }
 
 impl fmt::Display for RequestProcessingError {
@@ -141,6 +144,9 @@ impl fmt::Display for RequestProcessingError {
             }
             Self::OperationUnimplemented => {
                 write!(f, "The requested operation has not been implemented")
+            }
+            Self::PublicKeyDecodingFailed => {
+                write!(f, "Failed to decode the public key to be attested")
             }
         }
     }
