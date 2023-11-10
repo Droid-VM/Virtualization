@@ -22,6 +22,30 @@
       },
       "revId": "28e439f40a0af608cd5efb521f172ea8dcc04edc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3f48408_f0548bd7",
+        "filename": "vmbase/src/memory/page_table.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2023-11-10T07:20:04Z",
+      "side": 1,
+      "message": "There are cases where the aarch64-paging crate might be integrated in a way that would justify masking the underlying unsafeness here (e.g., if the crate manages the lower VA space but the Rust code and data resides in the upper one)\n\nIn this particular case, the PageTable instance may cover Rust\u0027s code and data, but the impl has no way of ensuring that everything is mapped correctly, making PageTable::activate() inherently unsafe (but there is no disagreement on that)\n\nI think it makes sense to retain this explicit safety annotation, even if it may boil down to a duplication, as it is relevant for this particular integration of the aarch64-paging crate.",
+      "parentUuid": "91bb6d43_3cfbbbb4",
+      "range": {
+        "startLine": 82,
+        "startChar": 8,
+        "endLine": 84,
+        "endChar": 42
+      },
+      "revId": "28e439f40a0af608cd5efb521f172ea8dcc04edc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
