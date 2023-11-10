@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0398035_a56c1557",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1026,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-10T12:11:50Z",
+      "side": 1,
+      "message": "We can avoid introducing more `unsafe` by refactoring this (like we did for `path_offset`) into\n```\npub fn node_with_phandle(\u0026self, phandle: Phandle) -\u003e Result\u003cOption\u003cFdtNode\u003e\u003e {\n    let offset \u003d self.node_offset_by_phandle(phandle)?;\n    Ok(offset.map(|offset| FdtNode { fdt: self, offset }))\n}\n\nfn node_offset_by_phandle(\u0026self, phandle: Phandle) -\u003e Result\u003cOption\u003cc_int\u003e\u003e {\n    let ret \u003d unsafe { ... };\n    fdt_err_or_option(ret)\n}\n```\nallowing you to safely\n```\npub fn node_mut_with_phandle(\u0026self, phandle: Phandle) -\u003e Result\u003cOption\u003cFdtNode\u003e\u003e {\n    let offset \u003d self.node_offset_by_phandle(phandle)?;\n    Ok(offset.map(|offset| FdtNodeMut { fdt: self, offset }))\n}\n```",
+      "range": {
+        "startLine": 1026,
+        "startChar": 11,
+        "endLine": 1026,
+        "endChar": 28
+      },
+      "revId": "e409a2fe9815730e038e958677f6579e9fe393da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
