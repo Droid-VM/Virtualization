@@ -55,9 +55,8 @@ fn try_main() -> Result<()> {
     // is the same type as sys::AIBinder. It is safe for on_ready to be invoked at any time, with
     // any parameter.
     unsafe {
-        AVmPayload_runVsockRpcServer(service, COMPOS_VSOCK_PORT, Some(on_ready), param);
+        AVmPayload_runVsockRpcServer(service, COMPOS_VSOCK_PORT, Some(on_ready), param)
     }
-    Ok(())
 }
 
 extern "C" fn on_ready(_param: *mut c_void) {
