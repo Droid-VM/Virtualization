@@ -18,9 +18,10 @@
 use crate::keyblob::decrypt_private_key;
 use alloc::vec::Vec;
 use core::result;
+use coset::{CborSerializable, CoseSign};
 use diced_open_dice::DiceArtifacts;
 use log::error;
-use service_vm_comm::{ClientVmAttestationParams, RequestProcessingError};
+use service_vm_comm::{ClientVmAttestationParams, Csr, RequestProcessingError};
 
 type Result<T> = result::Result<T, RequestProcessingError>;
 
@@ -28,6 +29,8 @@ pub(super) fn request_attestation(
     params: ClientVmAttestationParams,
     dice_artifacts: &dyn DiceArtifacts,
 ) -> Result<Vec<u8>> {
+    let csr = Csr::from_cbor_slice(&params.csr)?;
+    let _cose_sign = CoseSign::from_slice(&csr.signed_csr_payload)?;
     // TODO(b/309440321): Verify the signatures in the csr.
 
     // TODO(b/278717513): Compare client VM's DICE chain up to pvmfw cert with
