@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ac8c837_ca035383",
+        "filename": "libs/bssl/src/cbs.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-10T14:39:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b2eeb61_bba07e6d",
+      "range": {
+        "startLine": 23,
+        "startChar": 34,
+        "endLine": 23,
+        "endChar": 35
+      },
+      "revId": "233638b88eb91e5af8b2eff142eafc4c033ba41e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66a89be3_4563ba30",
@@ -54,6 +78,24 @@
       "writtenOn": "2023-11-10T13:51:48Z",
       "side": 1,
       "message": "If this check fails shouldn\u0027t the function panic, rather than silently doing nothing?",
+      "revId": "233638b88eb91e5af8b2eff142eafc4c033ba41e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f704808_753c64e2",
+        "filename": "vmbase/src/heap.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-10T14:39:18Z",
+      "side": 1,
+      "message": "I changed this to an `assert`.",
+      "parentUuid": "66a89be3_4563ba30",
       "revId": "233638b88eb91e5af8b2eff142eafc4c033ba41e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
