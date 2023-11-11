@@ -18,11 +18,11 @@ use super::common::get_valid_descriptor;
 use super::hash::HashDescriptor;
 use super::property::PropertyDescriptor;
 use crate::partition::PartitionName;
-use crate::utils::{self, is_not_null, to_usize, usize_checked_add};
+use crate::utils::{self, to_usize, usize_checked_add};
 use crate::PvmfwVerifyError;
+use avb::VbmetaData;
 use avb_bindgen::{
     avb_descriptor_foreach, avb_descriptor_validate_and_byteswap, AvbDescriptor, AvbDescriptorTag,
-    AvbVBMetaData,
 };
 use core::{ffi::c_void, mem::size_of, slice};
 use tinyvec::ArrayVec;
@@ -36,24 +36,16 @@ pub(crate) struct Descriptors<'a> {
 }
 
 impl<'a> Descriptors<'a> {
-    /// Builds `Descriptors` from `AvbVBMetaData`.
-    /// Returns an error if the given `AvbVBMetaData` contains non-hash descriptor, hash
+    /// Builds `Descriptors` from `VbmetaData`.
+    /// Returns an error if the given `VbmetaData` contains non-hash descriptor, hash
     /// descriptor of unknown `PartitionName` or duplicated hash descriptors.
-    ///
-    /// # Safety
-    ///
-    /// Behavior is undefined if any of the following conditions are violated:
-    /// * `vbmeta.vbmeta_data` must be non-null and points to a valid VBMeta.
-    /// * `vbmeta.vbmeta_data` must be valid for reading `vbmeta.vbmeta_size` bytes.
-    pub(crate) unsafe fn from_vbmeta(vbmeta: AvbVBMetaData) -> Result<Self, PvmfwVerifyError> {
-        is_not_null(vbmeta.vbmeta_data).map_err(|_| avb::SlotVerifyError::Io)?;
+    pub(crate) fn from_vbmeta(vbmeta: &VbmetaData) -> Result<Self, PvmfwVerifyError> {
         let mut res: Result<Self, avb::IoError> = Ok(Self::default());
-        // SAFETY: It is safe as the raw pointer `vbmeta.vbmeta_data` is a non-null pointer and
-        // points to a valid VBMeta structure.
+        // SAFETY: It is safe as `vbmeta.data()` contains a valid VBMeta structure.
         let output = unsafe {
             avb_descriptor_foreach(
-                vbmeta.vbmeta_data,
-                vbmeta.vbmeta_size,
+                vbmeta.data().as_ptr(),
+                vbmeta.data().len(),
                 Some(check_and_save_descriptor),
                 &mut res as *mut _ as *mut c_void,
             )
@@ -74,7 +66,7 @@ impl<'a> Descriptors<'a> {
     pub(crate) fn find_hash_descriptor(
         &self,
         partition_name: PartitionName,
-    ) -> Result<&HashDescriptor, avb::SlotVerifyError> {
+    ) -> Result<&HashDescriptor, avb::SlotVerifyError<'static>> {
         self.hash_descriptors
             .iter()
             .find(|d| d.partition_name == partition_name)
@@ -120,8 +112,8 @@ impl<'a> Descriptors<'a> {
 ///
 /// Behavior is undefined if any of the following conditions are violated:
 /// * The `descriptor` pointer must be non-null and points to a valid `AvbDescriptor` struct.
-/// * The `user_data` pointer must be non-null, points to a valid
-///   `Result<Descriptors, avb::IoError>`
+/// * The `user_data` pointer must be non-null, points to a valid `Result<Descriptors,
+///   avb::IoError>`
 ///  struct and is initialized.
 unsafe extern "C" fn check_and_save_descriptor(
     descriptor: *const AvbDescriptor,

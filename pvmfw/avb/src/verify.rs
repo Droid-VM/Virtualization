@@ -20,10 +20,9 @@ use crate::partition::PartitionName;
 use crate::PvmfwVerifyError;
 use alloc::vec;
 use alloc::vec::Vec;
-use avb_bindgen::{AvbPartitionData, AvbVBMetaData};
-use core::ffi::c_char;
+use avb::{PartitionData, VbmetaData};
 
-// We use this for the rollback_index field if AvbSlotVerifyDataWrap has empty rollback_indexes
+// We use this for the rollback_index field if SlotVerifyData has empty rollback_indexes
 const DEFAULT_ROLLBACK_INDEX: u64 = 0;
 
 /// Verified data returned when the payload verification succeeds.
@@ -93,9 +92,9 @@ impl Capability {
 }
 
 fn verify_only_one_vbmeta_exists(
-    vbmeta_images: &[AvbVBMetaData],
+    vbmeta_data: &[VbmetaData],
 ) -> Result<(), avb::SlotVerifyError<'static>> {
-    if vbmeta_images.len() == 1 {
+    if vbmeta_data.len() == 1 {
         Ok(())
     } else {
         Err(avb::SlotVerifyError::InvalidMetadata)
@@ -103,9 +102,9 @@ fn verify_only_one_vbmeta_exists(
 }
 
 fn verify_vbmeta_is_from_kernel_partition(
-    vbmeta_image: &AvbVBMetaData,
+    vbmeta_image: &VbmetaData,
 ) -> Result<(), avb::SlotVerifyError<'static>> {
-    match (vbmeta_image.partition_name as *const c_char).try_into() {
+    match vbmeta_image.partition_name().try_into() {
         Ok(PartitionName::Kernel) => Ok(()),
         _ => Err(avb::SlotVerifyError::InvalidMetadata),
     }
@@ -122,7 +121,7 @@ fn verify_vbmeta_has_only_one_hash_descriptor(
 }
 
 fn verify_loaded_partition_has_expected_length(
-    loaded_partitions: &[AvbPartitionData],
+    loaded_partitions: &[PartitionData],
     partition_name: PartitionName,
     expected_len: usize,
 ) -> Result<(), avb::SlotVerifyError<'static>> {
@@ -130,14 +129,14 @@ fn verify_loaded_partition_has_expected_length(
         // Only one partition should be loaded in each verify result.
         return Err(avb::SlotVerifyError::Io);
     }
-    let loaded_partition = loaded_partitions[0];
-    if !PartitionName::try_from(loaded_partition.partition_name as *const c_char)
+    let loaded_partition = &loaded_partitions[0];
+    if !PartitionName::try_from(loaded_partition.partition_name())
         .map_or(false, |p| p == partition_name)
     {
         // Only the requested partition should be loaded.
         return Err(avb::SlotVerifyError::Io);
     }
-    if loaded_partition.data_size == expected_len {
+    if loaded_partition.data().len() == expected_len {
         Ok(())
     } else {
         Err(avb::SlotVerifyError::Verification(None))
@@ -158,6 +157,24 @@ fn verify_property_and_get_capabilities(
         .and_then(Capability::get_capabilities)
 }
 
+fn verify_initrd(
+    ops: &mut Ops,
+    partition_name: PartitionName,
+    expected_initrd: &[u8],
+) -> Result<(), avb::SlotVerifyError<'static>> {
+    match ops.verify_partition(partition_name.as_cstr()) {
+        Ok(result) => {
+            verify_loaded_partition_has_expected_length(
+                result.partition_data(),
+                partition_name,
+                expected_initrd.len(),
+            )?;
+            Ok(())
+        }
+        _ => Err(avb::SlotVerifyError::Verification(None)),
+    }
+}
+
 /// Verifies the payload (signed kernel + initrd) against the trusted public key.
 pub fn verify_payload<'a>(
     kernel: &[u8],
@@ -166,55 +183,63 @@ pub fn verify_payload<'a>(
 ) -> Result<VerifiedBootData<'a>, PvmfwVerifyError> {
     let mut payload = Payload::new(kernel, initrd, trusted_public_key);
     let mut ops = Ops::from(&mut payload);
-    let kernel_verify_result = ops.verify_partition(PartitionName::Kernel.as_cstr())?;
 
-    let vbmeta_images = kernel_verify_result.vbmeta_images()?;
-    // TODO(b/302093437): Use explicit rollback_index_location instead of default
-    // location (first element).
-    let rollback_index =
-        *kernel_verify_result.rollback_indexes().first().unwrap_or(&DEFAULT_ROLLBACK_INDEX);
-    verify_only_one_vbmeta_exists(vbmeta_images)?;
-    let vbmeta_image = vbmeta_images[0];
-    verify_vbmeta_is_from_kernel_partition(&vbmeta_image)?;
-    // SAFETY: It is safe because the `vbmeta_image` is collected from `AvbSlotVerifyData`,
-    // which is returned by `avb_slot_verify()` when the verification succeeds. It is
-    // guaranteed by libavb to be non-null and to point to a valid VBMeta structure.
-    let descriptors = unsafe { Descriptors::from_vbmeta(vbmeta_image)? };
-    let capabilities = verify_property_and_get_capabilities(&descriptors)?;
-    let kernel_descriptor = descriptors.find_hash_descriptor(PartitionName::Kernel)?;
+    // These values are all extracted from the first verification run before the second. This is
+    // necessary because the verification data borrows `ops` (since it may contain aliases to
+    // preloaded partition contents) but verification itself mutably borrows `ops`, so we have to
+    // drop previous verification data before we can verify again.
+    let capabilities: Vec<Capability>;
+    let kernel_digest: Digest;
+    let initrd_normal_digest: Result<Digest, avb::SlotVerifyError>;
+    let initrd_debug_digest: Result<Digest, avb::SlotVerifyError>;
+    let rollback_index: u64;
+    {
+        let kernel_verify_result = ops.verify_partition(PartitionName::Kernel.as_cstr())?;
 
-    if initrd.is_none() {
-        verify_vbmeta_has_only_one_hash_descriptor(&descriptors)?;
-        return Ok(VerifiedBootData {
-            debug_level: DebugLevel::None,
-            kernel_digest: *kernel_descriptor.digest,
-            initrd_digest: None,
-            public_key: trusted_public_key,
-            capabilities,
-            rollback_index,
-        });
+        let vbmeta_data = kernel_verify_result.vbmeta_data();
+        // TODO(b/302093437): Use explicit rollback_index_location instead of default
+        // location (first element).
+        rollback_index =
+            *kernel_verify_result.rollback_indexes().first().unwrap_or(&DEFAULT_ROLLBACK_INDEX);
+        verify_only_one_vbmeta_exists(vbmeta_data)?;
+        let vbmeta_image = &vbmeta_data[0];
+        verify_vbmeta_is_from_kernel_partition(vbmeta_image)?;
+        let descriptors = Descriptors::from_vbmeta(vbmeta_image)?;
+        capabilities = verify_property_and_get_capabilities(&descriptors)?;
+        let kernel_descriptor = descriptors.find_hash_descriptor(PartitionName::Kernel)?;
+
+        if initrd.is_none() {
+            verify_vbmeta_has_only_one_hash_descriptor(&descriptors)?;
+            return Ok(VerifiedBootData {
+                debug_level: DebugLevel::None,
+                kernel_digest: *kernel_descriptor.digest,
+                initrd_digest: None,
+                public_key: trusted_public_key,
+                capabilities,
+                rollback_index,
+            });
+        }
+
+        kernel_digest = *kernel_descriptor.digest;
+        initrd_normal_digest =
+            descriptors.find_hash_descriptor(PartitionName::InitrdNormal).map(|d| *d.digest);
+        initrd_debug_digest =
+            descriptors.find_hash_descriptor(PartitionName::InitrdDebug).map(|d| *d.digest);
     }
 
     let initrd = initrd.unwrap();
-    let (debug_level, initrd_verify_result, initrd_partition_name) =
-        if let Ok(result) = ops.verify_partition(PartitionName::InitrdNormal.as_cstr()) {
-            (DebugLevel::None, result, PartitionName::InitrdNormal)
-        } else if let Ok(result) = ops.verify_partition(PartitionName::InitrdDebug.as_cstr()) {
-            (DebugLevel::Full, result, PartitionName::InitrdDebug)
+    let (debug_level, initrd_digest) =
+        if verify_initrd(&mut ops, PartitionName::InitrdNormal, initrd).is_ok() {
+            (DebugLevel::None, initrd_normal_digest)
+        } else if verify_initrd(&mut ops, PartitionName::InitrdDebug, initrd).is_ok() {
+            (DebugLevel::Full, initrd_debug_digest)
         } else {
             return Err(avb::SlotVerifyError::Verification(None).into());
         };
-    let loaded_partitions = initrd_verify_result.loaded_partitions()?;
-    verify_loaded_partition_has_expected_length(
-        loaded_partitions,
-        initrd_partition_name,
-        initrd.len(),
-    )?;
-    let initrd_descriptor = descriptors.find_hash_descriptor(initrd_partition_name)?;
     Ok(VerifiedBootData {
         debug_level,
-        kernel_digest: *kernel_descriptor.digest,
-        initrd_digest: Some(*initrd_descriptor.digest),
+        kernel_digest,
+        initrd_digest: Some(initrd_digest?),
         public_key: trusted_public_key,
         capabilities,
         rollback_index,

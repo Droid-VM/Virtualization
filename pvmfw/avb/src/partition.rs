@@ -14,8 +14,7 @@
 
 //! Struct and functions relating to well-known partition names.
 
-use crate::utils::is_not_null;
-use core::ffi::{c_char, CStr};
+use core::ffi::CStr;
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub(crate) enum PartitionName {
@@ -48,17 +47,6 @@ impl PartitionName {
             Self::InitrdNormal => Self::INITRD_NORMAL_PARTITION_NAME,
             Self::InitrdDebug => Self::INITRD_DEBUG_PARTITION_NAME,
         }
-    }
-}
-
-impl TryFrom<*const c_char> for PartitionName {
-    type Error = avb::IoError;
-
-    fn try_from(partition_name: *const c_char) -> Result<Self, Self::Error> {
-        is_not_null(partition_name)?;
-        // SAFETY: It is safe as the raw pointer `partition_name` is a nonnull pointer.
-        let partition_name = unsafe { CStr::from_ptr(partition_name) };
-        partition_name.try_into()
     }
 }
 
