@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72bf78d1_6d6c4219",
+        "filename": "compos/src/compsvc_main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2023-11-13T19:02:52Z",
+      "side": 1,
+      "message": "@srhines@google.com to review if this is OK.  rustc can now identify that `AVmPayload_runVsockRpcServer` doesn\u0027t return and marks the last statement as unreachable (not sure why it didn\u0027t with `_NoReturn`).  Is there an another option in rust to say this function either returns with an error or never returns.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 26
+      },
+      "revId": "8aa2adef7c7f093c88afe2b89f0e0f9591096c41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
