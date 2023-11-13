@@ -22,6 +22,30 @@
       },
       "revId": "8aa2adef7c7f093c88afe2b89f0e0f9591096c41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29e8ea76_b6aaa6a0",
+        "filename": "compos/src/compsvc_main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2023-11-13T20:21:09Z",
+      "side": 1,
+      "message": "There\u0027s a nightly feature called `never` (https://doc.rust-lang.org/std/primitive.never.html#infinite-loops), for which this could be written to return `Result\u003c!, Error\u003e`, but that\u0027s not available officially yet (and we don\u0027t allow nightly features in Android). Instead, I think the current best practice is to return `Option\u003cError\u003e` instead. @mmaurer@google.com - can you think of any better way of handling this case?",
+      "parentUuid": "72bf78d1_6d6c4219",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 26
+      },
+      "revId": "8aa2adef7c7f093c88afe2b89f0e0f9591096c41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
