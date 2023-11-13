@@ -22,6 +22,30 @@
       },
       "revId": "dc49a5a3128c2063635ad91b1d3f8a233701139a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f66b7b3_fa262749",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-13T05:34:26Z",
+      "side": 1,
+      "message": "Done, but couple of follow-up questions:\n\n- Q1) Other methods also omit `get-` (e.g. `first_subnode()`, `next_compatible()`, `chosen()`, `symbols()`, `node()` ...) when it returns `Result\u003cOption\u003c\u003e\u003e` while matching `fdt_*` doesn\u0027t have `get`. For example, `node()` end up with calling `fdt_path_offset()` and it omits `get_`. Would you prefer to name APIs with return `Result\u003cOption\u003c\u003e\u003e`?\n\n- Q2) What about APIs that returns `Result\u003cOption\u003c*Iterator\u003e\u003e`? (e.g. `reg()`, `ranges()`) Do we also name them `get_regs()`, `get_ranges()`? Asking this simply because I haven\u0027t seen iterator APIs with `get_()`.\n\nI would work on follow-ups given your opinion.",
+      "parentUuid": "9b52d810_7864c1ae",
+      "range": {
+        "startLine": 509,
+        "startChar": 11,
+        "endLine": 509,
+        "endChar": 18
+      },
+      "revId": "dc49a5a3128c2063635ad91b1d3f8a233701139a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
