@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cbb87cd1_672a4ffa",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-13T13:36:58Z",
+      "side": 1,
+      "message": "follow up question: If two devices can share the same `pviommu`, then should we treat \u0027multiple pviommus with the same id\u0027 as error? What about we just merging those pviommus?\n\nFor an example, let me assume following FDT.\n\n```\n/{\n  a { \u003ciommus\u003e \u003d \u003c\u0026pviommu_a\u003e; };\n  b { \u003ciommus\u003e \u003d \u003c\u0026pviommu_b\u003e; };\n  pviommu_a: pviommu_a { ... \u003cid\u003e\u003d\u003c0x1\u003e; .. };\n  pviommu_b: pviommu_b { ... \u003cid\u003e\u003d\u003c0x1\u003e; .. };\n}\n```\n\nInstead of considering it as error, what about treat it as warning and patch platform DT as follows?\n\n```\n/{\n  a { \u003ciommus\u003e \u003d \u003c\u0026pviommu_a\u003e; };\n  b { \u003ciommus\u003e \u003d \u003c\u0026pviommu_a\u003e; };  // pvmfw consider pviommu_a and pviommu_b as the same. so share one pviommu.\n  pviommu_a: pviommu_a { ... \u003cid\u003e\u003d\u003c0x1\u003e; .. };\n}\n```",
+      "parentUuid": "bfe0c465_e099bec6",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 290,
+        "endChar": 1
+      },
+      "revId": "5d139c8977760880bd085ba389ff95ec88f08576",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "56f6d2b6_082863e7",
         "filename": "pvmfw/testdata/test_pvmfw_devices_with_multiple_devices_iommus.dts",
         "patchSetId": 13
