@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f81327b_db45f100",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-11-13T05:41:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a3c6142_4cc56c99",
+      "range": {
+        "startLine": 636,
+        "startChar": 0,
+        "endLine": 639,
+        "endChar": 5
+      },
+      "revId": "2665217ad61bfa763b026780e2209d866bacec41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b5bd672_617e2828",
@@ -157,6 +181,30 @@
       "side": 1,
       "message": "I think there are several options.\n\nOption 1. Add a new bootconfig like `androidboot.load_modules\u003d[true|false]` and let init respect it. Note that we already have `androidboot.load_modules_parallel`. Then we can use the same initrd across gki and microdroid kernels.\n\nOption 2. Add initrd to this struct. \n\nOption 3. Remove this (`kernel`) property and let `gki` select both kernel and initrd.\n\nOption 4. Use `devices.len() \u003e 0` or `vendor.isSome()` as an indicator to use gki and the initrd with modules in it.",
       "parentUuid": "cfab8a14_fa2cfe2a",
+      "range": {
+        "startLine": 103,
+        "startChar": 4,
+        "endLine": 103,
+        "endChar": 28
+      },
+      "revId": "2665217ad61bfa763b026780e2209d866bacec41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11732286_55af5f0b",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-11-13T05:41:49Z",
+      "side": 1,
+      "message": "As I chose another OS name, I simply put two initrd modules.",
+      "parentUuid": "08023b20_b20fb5da",
       "range": {
         "startLine": 103,
         "startChar": 4,
