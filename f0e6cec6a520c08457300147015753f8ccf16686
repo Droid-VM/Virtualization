@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c5ff02c_6e826b43",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-13T05:35:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "618ec25a_a7bfa999",
+      "range": {
+        "startLine": 406,
+        "startChar": 13,
+        "endLine": 406,
+        "endChar": 22
+      },
+      "revId": "f0e6cec6a520c08457300147015753f8ccf16686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70accac1_0e6e41bd",
@@ -70,6 +94,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1866078_3c8737b7",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-13T05:35:12Z",
+      "side": 1,
+      "message": "I need some endianness translation via `into_fdt_prop()` in `expected`, so returning with `\u0026[u8]` requires explicit binding (i.e. `into_fdt_prop(vec![0x0, 0xF, 0x4])` should be kept in a variable) to the expected value. Let me keep this as-is because this is test and having `Vec\u003cu8\u003e` looks more readable for me.",
+      "parentUuid": "70accac1_0e6e41bd",
+      "range": {
+        "startLine": 418,
+        "startChar": 60,
+        "endLine": 418,
+        "endChar": 67
+      },
+      "revId": "f0e6cec6a520c08457300147015753f8ccf16686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "846a0161_2465caf7",
@@ -83,6 +131,30 @@
       "writtenOn": "2023-11-10T12:12:13Z",
       "side": 1,
       "message": "I\u0027ll repeat my suggestion of making `expected` a `HashMap` :)",
+      "range": {
+        "startLine": 420,
+        "startChar": 19,
+        "endLine": 420,
+        "endChar": 26
+      },
+      "revId": "f0e6cec6a520c08457300147015753f8ccf16686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acac7524_5de34e69",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-13T05:35:12Z",
+      "side": 1,
+      "message": "I couldn\u0027t make it clean.\n- `HashMap` expects key to be `Hash`\n- `BTreeMap` expects key to be `Ord`, and both key and value be `Copy`.\n\n`Result\u003c_\u003e` supports none of `Hash` nor `Ord`. I need extra logic to tell `Map` about \n\nI agree that this looks stupid, but this is one-liner and easier to understand. It looks sufficient for a test code.\n\nTell me again if you prefer `Map` anyway.",
+      "parentUuid": "846a0161_2465caf7",
       "range": {
         "startLine": 420,
         "startChar": 19,
