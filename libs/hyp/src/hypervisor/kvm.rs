@@ -14,7 +14,9 @@
 
 //! Wrappers around calls to the KVM hypervisor.
 
-use super::common::{Hypervisor, MemSharingHypervisor, MmioGuardedHypervisor};
+use super::common::{
+    DeviceAssigningHypervisor, Hypervisor, MemSharingHypervisor, MmioGuardedHypervisor,
+};
 use crate::error::{Error, Result};
 use crate::util::page_address;
 use core::fmt::{self, Display, Formatter};
@@ -70,6 +72,9 @@ const VENDOR_HYP_KVM_MMIO_GUARD_ENROLL_FUNC_ID: u32 = 0xc6000006;
 const VENDOR_HYP_KVM_MMIO_GUARD_MAP_FUNC_ID: u32 = 0xc6000007;
 const VENDOR_HYP_KVM_MMIO_GUARD_UNMAP_FUNC_ID: u32 = 0xc6000008;
 
+const VENDOR_HYP_KVM_DEV_REQ_MMIO_FUNC_ID: u32 = 0xc6000012;
+const VENDOR_HYP_KVM_DEV_REQ_DMA_FUNC_ID: u32 = 0xc6000013;
+
 pub(super) struct RegularKvmHypervisor;
 
 impl RegularKvmHypervisor {
@@ -88,6 +93,10 @@ impl Hypervisor for ProtectedKvmHypervisor {
     }
 
     fn as_mem_sharer(&self) -> Option<&dyn MemSharingHypervisor> {
+        Some(self)
+    }
+
+    fn as_device_assigner(&self) -> Option<&dyn DeviceAssigningHypervisor> {
         Some(self)
     }
 }
@@ -159,4 +168,28 @@ fn checked_hvc64_expect_zero(function: u32, args: [u64; 17]) -> Result<()> {
 
 fn checked_hvc64(function: u32, args: [u64; 17]) -> Result<u64> {
     positive_or_error_64(hvc64(function, args)[0]).map_err(|e| Error::KvmError(e, function))
+}
+
+impl DeviceAssigningHypervisor for ProtectedKvmHypervisor {
+    /// Requests MMIO. Returns phys_addr when success.
+    fn request_mmio(&self, base_ipa: u64, size: u64) -> Result<u64> {
+        let args = [0u64; 17];
+        args[0] = base_ipa;
+        args[1] = size;
+
+        checked_hvc64(VENDOR_HYP_KVM_DEV_REQ_MMIO_FUNC_ID, args)
+    }
+
+    /// Requests DMA. Returns tuple of (phys_iommu_id, phys_sid) when success
+    fn request_dma(&self, pviommu_id: u64, vsid: Option<u64>) -> Result<(u64, u64)> {
+        // Defined by arch/arm64/kvm/hyp/include/nvhe/pviommu-host.h with (-1)
+        const SID_DONT_CARE: u32 = u32::MAX;
+
+        let args = [0u64; 17];
+        args[0] = pviommu_id;
+        args[1] = vsid.unwrap_or(SID_DONT_CARE.into());
+
+        let ret = hvc64(VENDOR_HYP_KVM_DEV_REQ_DMA_FUNC_ID, args);
+        Ok((positive_or_error_64(ret[0])?, ret[1]))
+    }
 }
