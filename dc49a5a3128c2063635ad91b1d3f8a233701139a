@@ -70,6 +70,30 @@
       },
       "revId": "dc49a5a3128c2063635ad91b1d3f8a233701139a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d5b9994_7577230c",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-13T12:10:41Z",
+      "side": 1,
+      "message": "\u003e Would you prefer to name APIs with return `Result\u003cOption\u003c\u003e\u003e`?\n\nI personally would\u0027ve preferred those names but let\u0027s not waste your time on this, at this point. Once we\u0027ve delivered, we could go back and clean up the code (I also have a few things I\u0027d like to improve but never got time to!).\n\n\u003e What about APIs that returns `Result\u003cOption\u003c*Iterator\u003e\u003e`?\n\nI don\u0027t get that API as `Result\u003c*Iterator\u003e` seems sufficient to me: what would the difference between `Ok(None)` and `Ok(Some(*Iterator::empty()))` be?\n\nAnyway, I agree that in this case, `get_` isn\u0027t natural.\n\n---\n\n(resolving as this discussion isn\u0027t blocking this CL, but feel free to reply)",
+      "parentUuid": "7f66b7b3_fa262749",
+      "range": {
+        "startLine": 509,
+        "startChar": 11,
+        "endLine": 509,
+        "endChar": 18
+      },
+      "revId": "dc49a5a3128c2063635ad91b1d3f8a233701139a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
