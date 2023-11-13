@@ -14,7 +14,9 @@
 
 //! Wrappers around calls to the KVM hypervisor.
 
-use super::common::{Hypervisor, MemSharingHypervisor, MmioGuardedHypervisor};
+use super::common::{
+    DeviceAssigningHypervisor, Hypervisor, MemSharingHypervisor, MmioGuardedHypervisor,
+};
 use crate::error::{Error, Result};
 use crate::util::page_address;
 use core::fmt::{self, Display, Formatter};
@@ -69,6 +71,9 @@ const VENDOR_HYP_KVM_MMIO_GUARD_INFO_FUNC_ID: u32 = 0xc6000005;
 const VENDOR_HYP_KVM_MMIO_GUARD_ENROLL_FUNC_ID: u32 = 0xc6000006;
 const VENDOR_HYP_KVM_MMIO_GUARD_MAP_FUNC_ID: u32 = 0xc6000007;
 const VENDOR_HYP_KVM_MMIO_GUARD_UNMAP_FUNC_ID: u32 = 0xc6000008;
+
+const VENDOR_HYP_KVM_DEV_REQ_MMIO_FUNC_ID: u32 = 0xc6000012;
+const VENDOR_HYP_KVM_DEV_REQ_DMA_FUNC_ID: u32 = 0xc6000013;
 
 pub(super) struct RegularKvmHypervisor;
 
@@ -159,4 +164,16 @@ fn checked_hvc64_expect_zero(function: u32, args: [u64; 17]) -> Result<()> {
 
 fn checked_hvc64(function: u32, args: [u64; 17]) -> Result<u64> {
     positive_or_error_64(hvc64(function, args)[0]).map_err(|e| Error::KvmError(e, function))
+}
+
+impl DeviceAssigningHypervisor for ProtectedKvmHypervisor {
+    /// Requests MMIO. Returns phys_addr when success.
+    fn request_mmio(&self, reg_vaddr: u64, reg_size: u64) -> Result<u64> {
+        let args = [0u64; 17];
+    }
+
+    /// Requests DMA. Returns tuple of (phys_iommu_id, phys_sid) when success
+    fn request_dma(&self, pviommu_id: u64, vsid: Option<u64>) -> Result<(u64, u64)> {
+        let args = [0u64; 17];
+    }
 }
