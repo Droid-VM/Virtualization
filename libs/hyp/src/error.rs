@@ -35,6 +35,10 @@ pub enum Error {
     UnsupportedHypervisorUuid(Uuid),
     /// The MMIO_GUARD granule used by the hypervisor is not supported.
     UnsupportedMmioGuardGranule(usize),
+    /// Invalid <reg> in assigned device
+    InvalidRegError,
+    /// Invalid <iommus> in assigned device
+    InvalidIommusError,
 }
 
 impl fmt::Display for Error {
@@ -56,6 +60,7 @@ impl fmt::Display for Error {
             Self::UnsupportedMmioGuardGranule(g) => {
                 write!(f, "Unsupported MMIO guard granule: {g}")
             }
+            Self::ValidationError => write!(f, "Failed to validate"),
         }
     }
 }
