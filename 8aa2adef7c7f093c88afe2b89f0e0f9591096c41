@@ -46,6 +46,30 @@
       },
       "revId": "8aa2adef7c7f093c88afe2b89f0e0f9591096c41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ad2d449_e555193a",
+        "filename": "compos/src/compsvc_main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2023-11-13T21:56:54Z",
+      "side": 1,
+      "message": "Short answer: Remove `Ok(())`, remove the semicolon in the unsafe block, everything will work without disabling the lint.\n\nLong answer:\n`!` as a *general type* is unstable. (This is what lets you do e.g. `Result\u003c(), !\u003e` or similar). `!` specifically as a return type will work fine. This is why this situation was able to happen - bindgen is putting `!` in the return position of `AVmPayload_runVsockRpcServer`. So `fn foo() -\u003e ! { panic!(\"oh no\") }` is totally legal, `fn foo() -\u003e Result\u003c!\u003e {Ok(panic!(\"oh no\"))}` still needs the unstable feature.\n\nHowever, you don\u0027t need to put this in the type - because `!` is a divergent type, it implicitly coerces to any other type you want,  `Result\u003c()\u003e` included. This is why removing the semi and the Ok(()) works - you return the `!` \"value\" that comes out of a function that can\u0027t finish, and so it matches any type.",
+      "parentUuid": "29e8ea76_b6aaa6a0",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 26
+      },
+      "revId": "8aa2adef7c7f093c88afe2b89f0e0f9591096c41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
