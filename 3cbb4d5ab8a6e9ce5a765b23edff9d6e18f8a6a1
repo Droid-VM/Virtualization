@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3674af46_a401287e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-13T09:50:43Z",
+      "side": 1,
+      "message": "Hi David,\n\nCould you please review the cl? The code for generating the client VM CSR/key has been moved from microdroid to a new file to enable its reuse in the e2e tests. The only modification made to the code is the adjustment of the output type of the API `generate_attestation_key_and_csr` for clarity.",
+      "revId": "3cbb4d5ab8a6e9ce5a765b23edff9d6e18f8a6a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
