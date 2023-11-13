@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f1663e8_5c48d846",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-11-13T13:54:25Z",
+      "side": 1,
+      "message": "This addition should be guarded on value of AVF_ENABLE_VENDOR_MODULES flag",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 27
+      },
+      "revId": "44fe15f2ee932a7cdd7a8084a4fe80b355dcd530",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1d2c9bb_b360fa17",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-11-13T13:54:25Z",
+      "side": 1,
+      "message": "Note: feel free to do this in a separate patch.\n\nI think we should restructure how the kernel \u0026 initrd images are stored in the com.android.virt APEX, to make it easier to check what GKI versions com.android.virt supports.\n\nWhat do you think about the following structure:\n\netc/fs\n  etc/fs/microdroid_super.img\n  etc/fs/microdroid_vbmeta.img\n  etc/fs/kernels/\n    etc/fs/kernels/microdroid/\n      etc/fs/kernels/microdroid/microdroid_kernel.img\n      etc/fs/kernels/microdroid/microdroid_initrd_{normal|debuggable}.img\n    etc/fs/kernels/gki_6.1/\n      etc/fs/kernels/gki_6.1/gki_6.1.img\n      etc/fs/kernels/gki_6.1_initrd_{normal|debuggable}.img",
+      "range": {
+        "startLine": 415,
+        "startChar": 19,
+        "endLine": 415,
+        "endChar": 48
+      },
+      "revId": "44fe15f2ee932a7cdd7a8084a4fe80b355dcd530",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b940d3aa_beab29e0",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-11-13T13:54:25Z",
+      "side": 1,
+      "message": "We most likely end up supporting multiple different GKI versions. We should encode the version scheme here.",
+      "range": {
+        "startLine": 409,
+        "startChar": 11,
+        "endLine": 409,
+        "endChar": 48
+      },
+      "revId": "44fe15f2ee932a7cdd7a8084a4fe80b355dcd530",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
