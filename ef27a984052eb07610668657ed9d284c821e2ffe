@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65052c23_8d41f98e",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-13T05:51:23Z",
+      "side": 1,
+      "message": "Should we flag this, and maybe the `vm` change?",
+      "range": {
+        "startLine": 640,
+        "startChar": 40,
+        "endLine": 640,
+        "endChar": 73
+      },
+      "revId": "ef27a984052eb07610668657ed9d284c821e2ffe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2a27275_44970a1f",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-13T05:51:23Z",
+      "side": 1,
+      "message": "uber-nit: can we move this computation out of the initializer, and define a local `name`?\n(Purely personal preference, feel free to ignore - but it\u0027s nice when the initializer only does the expected thing so the reader can skim it.)",
+      "range": {
+        "startLine": 711,
+        "startChar": 12,
+        "endLine": 711,
+        "endChar": 91
+      },
+      "revId": "ef27a984052eb07610668657ed9d284c821e2ffe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "038d1dd4_2d7fa121",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachinePayloadConfig.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-13T05:51:23Z",
+      "side": 1,
+      "message": "Can we make this required rather than optional?\nIt would simplify the server, and we control the client.\nOr is that disruptive in terms of flagging?",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 39
+      },
+      "revId": "ef27a984052eb07610668657ed9d284c821e2ffe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
