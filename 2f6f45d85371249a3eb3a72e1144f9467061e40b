@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4005d152_20b8bdbb",
+        "filename": "pvmfw/Android.bp",
+        "patchSetId": 11
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-13T08:32:32Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "05aea1c3_727781ef",
+      "range": {
+        "startLine": 243,
+        "startChar": 26,
+        "endLine": 243,
+        "endChar": 30
+      },
+      "revId": "2f6f45d85371249a3eb3a72e1144f9467061e40b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e1ee4db_24574760",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-11-10T12:11:27Z",
       "side": 1,
       "message": "Simply use a `Vec` as the code isn\u0027t differentiating between `None` and `Some(vec![])` e.g.\n```\nfor assigned_device in \u0026self.assigned_devices {\n    let Some(iommus) \u003d \u0026assigned_device.iommus else { continue; };\n    for iommu in iommus { ... }\n}\n```",
+      "range": {
+        "startLine": 208,
+        "startChar": 12,
+        "endLine": 208,
+        "endChar": 22
+      },
+      "revId": "2f6f45d85371249a3eb3a72e1144f9467061e40b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4407d542_6ab19504",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-13T08:32:32Z",
+      "side": 1,
+      "message": "Done.\n\nDear @jakobvukalovic@google.com,\ncould you take a look whether how may I set `\u003ciommus\u003e` when it\u0027s empty? Should I have the prop with empty value or remove the prop completely?",
+      "parentUuid": "5e1ee4db_24574760",
       "range": {
         "startLine": 208,
         "startChar": 12,
@@ -89,6 +137,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "90169805_d2736ece",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-13T08:32:32Z",
+      "side": 1,
+      "message": "I invented a new test cases whose VM DTBO doesn\u0027t include `android,pvmfw,*`. And I (somehow) thought that the case may be valid.\n\nsee: `device_info_multiple_devices_iommus()`\n\nShould I consider the test case as invalid and return error here?",
+      "parentUuid": "42e7c66e_75d7c5e8",
+      "range": {
+        "startLine": 358,
+        "startChar": 39,
+        "endLine": 358,
+        "endChar": 44
+      },
+      "revId": "2f6f45d85371249a3eb3a72e1144f9467061e40b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a09e87e5_db4b3eb5",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 11
@@ -100,6 +172,30 @@
       "writtenOn": "2023-11-10T12:11:27Z",
       "side": 1,
       "message": "This will break once we extend the topology to multiple devices per pvIOMMU.\n\nWhat about treating pvIOMMUs as another special set of assigned devices by introducing `DeviceAssignmentInfo::(assigned_)pviommus: BTreeSet\u003cu32\u003e` of `id`? You\u0027d get the uniqueness check in the ctor for free and could implement `patch` like this:\n\nFirst, patch the template pvIOMMUs, recording their DTC-generated phandles [*]:\n\n```\nlet mut compatible \u003d fdt.root_mut()?.next_compatible(PVIOMMU_COMPATIBLE)?;\nlet mut pviommu_phandles: BTreeMap\u003cu32, Phandle\u003e;\nfor id in self.assigned_pviommus {\n    let mut pviommu \u003d compatible.ok_or(DeviceAssignmentError::TooManyPvIommu)?;\n    let phandle \u003d pviommu.as_node().phandle()?.unwrap();\n    pviommu.setprop_inplace(cstr!(\"id\"), \u0026u32::to_be_bytes(iommu.id))?;\n    pviommu_phandles.insert(id, phandle);\n    compatible \u003d pviommu.next_compatible(PVIOMMU_COMPATIBLE)?;\n}\n```\n\nThen, filter out the remaining template pvIOMMUs:\n```\nwhile let Some(compatible) \u003d compatible.delete_and_next_compatible(PVIOMMU_COMPATIBLE)? {\n    // Having an empty loop body is weird!\n    // I wonder if there\u0027s a better way to express this?\n}\n```\n\nFinally, patch the VM DTBO devices by looking up pvIOMMU phandles by `id`:\n```\nfor device in \u0026self.assigned_devices {\n    device.patch(fdt, \u0026pviommu_phandles)?;\n}\n```\n\n---\n\n[*]: As a nit, I think the iterator-like reference could be DRY-ed with\n```\nlet mut compatible \u003d fdt.root_mut()?;\n// ...\nfor id in self.assigned_pviommus {\n    let mut pviommu \u003d compatible.next_compatible(PVIOMMU_COMPATIBLE)?\n                                .ok_or(DeviceAssignmentError::TooManyPvIommu)?;\n    // ...\n    // nothing to do at end of loop!\n}\n```",
+      "range": {
+        "startLine": 369,
+        "startChar": 0,
+        "endLine": 376,
+        "endChar": 18
+      },
+      "revId": "2f6f45d85371249a3eb3a72e1144f9467061e40b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94ecb5b1_f157fb29",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-13T08:32:32Z",
+      "side": 1,
+      "message": "\u003e This will break once we extend the topology to multiple devices per pvIOMMU.\n\nI\u0027m sorry but could you elaborate details when would my code break? I can accept your suggestion anyway, but I want to understand to prevent potential issue after I accept your suggestion.\n\n\n-----\n\n\u003e filter remaining pvIOMMUs ..\n\nThank you for reminding me of `delete_and_next_compatible()`.\n\nBut the variable wouldn\u0027t be empty because \n\ni.e. `while let Some(compatible) \u003d compatible.delete_and_next_compatible(PVIOMMU_COMPATIBLE)` gives compilation error because `compatible` isn\u0027t updated.\n\n-----\n\u003e I think the iterator-like reference could be DRY-ed with\n\nAccepted your naming. `next_compatible()` consumes self, so `compatible` needs update. I couldn\u0027t find a good way to remove end of loop treatment.",
+      "parentUuid": "a09e87e5_db4b3eb5",
       "range": {
         "startLine": 369,
         "startChar": 0,
