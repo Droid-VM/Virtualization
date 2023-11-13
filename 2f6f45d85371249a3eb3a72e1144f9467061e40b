@@ -112,6 +112,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d3c0953_fe30fab4",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-13T12:08:46Z",
+      "side": 1,
+      "message": "The property is [currently only added if there\u0027s a pvIOMMU to attach](https://crrev.com/c/5009547/4/arch/src/fdt.rs#91) and having an empty `\u003ciommus\u003e` doesn\u0027t seem to have a particular meaning, [AFAICT](https://www.kernel.org/doc/Documentation/devicetree/bindings/iommu/iommu.txt), so it shouldn\u0027t be generated if `iommus.is_empty()`, which I guess might exist for device-like physical memory that is not DMA-capable.",
+      "parentUuid": "4407d542_6ab19504",
+      "range": {
+        "startLine": 208,
+        "startChar": 12,
+        "endLine": 208,
+        "endChar": 22
+      },
+      "revId": "2f6f45d85371249a3eb3a72e1144f9467061e40b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42e7c66e_75d7c5e8",
@@ -161,6 +185,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0bc0f7e3_e662df61",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-13T12:08:46Z",
+      "side": 1,
+      "message": "Oh, I see! That makes sense but let\u0027s make it explicit that not all errors are OK, though.\n\nFor example, assuming that `nop_property()` returns `FdtError::NotFound`, you could\n```\nmatch node.nop_property(prop) {\n    Err(FdtError::NotFound) \u003d\u003e {},\n    result \u003d\u003e result?,\n}\n```",
+      "parentUuid": "90169805_d2736ece",
+      "range": {
+        "startLine": 358,
+        "startChar": 39,
+        "endLine": 358,
+        "endChar": 44
+      },
+      "revId": "2f6f45d85371249a3eb3a72e1144f9467061e40b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a09e87e5_db4b3eb5",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 11
@@ -196,6 +244,30 @@
       "side": 1,
       "message": "\u003e This will break once we extend the topology to multiple devices per pvIOMMU.\n\nI\u0027m sorry but could you elaborate details when would my code break? I can accept your suggestion anyway, but I want to understand to prevent potential issue after I accept your suggestion.\n\n\n-----\n\n\u003e filter remaining pvIOMMUs ..\n\nThank you for reminding me of `delete_and_next_compatible()`.\n\nBut the variable wouldn\u0027t be empty because \n\ni.e. `while let Some(compatible) \u003d compatible.delete_and_next_compatible(PVIOMMU_COMPATIBLE)` gives compilation error because `compatible` isn\u0027t updated.\n\n-----\n\u003e I think the iterator-like reference could be DRY-ed with\n\nAccepted your naming. `next_compatible()` consumes self, so `compatible` needs update. I couldn\u0027t find a good way to remove end of loop treatment.",
       "parentUuid": "a09e87e5_db4b3eb5",
+      "range": {
+        "startLine": 369,
+        "startChar": 0,
+        "endLine": 376,
+        "endChar": 18
+      },
+      "revId": "2f6f45d85371249a3eb3a72e1144f9467061e40b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8aa2381d_408522bd",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-13T12:08:46Z",
+      "side": 1,
+      "message": "\u003e I\u0027m sorry but could you elaborate details when would my code break?\n\nSure; see new thread.\n\n\u003e\u003e filter remaining pvIOMMUs ..\n\u003e\n\u003e Thank you for reminding me of `delete_and_next_compatible()`.\n\u003e\n\u003e But the variable wouldn\u0027t be empty [...]\n\nIMO, the way you\u0027ve expressed it in this PS is more readable than my suggestion!\n\n\u003e `next_compatible()` consumes self, so `compatible` needs update.\n\nI see, thanks for giving it a try!",
+      "parentUuid": "94ecb5b1_f157fb29",
       "range": {
         "startLine": 369,
         "startChar": 0,
