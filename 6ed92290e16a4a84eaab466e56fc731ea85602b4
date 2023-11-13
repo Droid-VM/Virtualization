@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37bf6657_81a16b42",
+        "filename": "compos/src/compsvc_main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2023-11-13T23:09:21Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by RustFormatter: Please reformat the following line(s) to:\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nPlease reformat the following line(s) to:\n\n        // SAFETY: We hold a strong pointer, so the raw pointer remains valid. The bindgen AIBinder\n        // is the same type as sys::AIBinder. It is safe for on_ready to be invoked at any time, with\n        // any parameter.\n        unsafe { AVmPayload_runVsockRpcServer(service, COMPOS_VSOCK_PORT, Some(on_ready), param) }\n    }\n\n    extern \"C\" fn on_ready(_param: *mut c_void) {",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 0
+      },
+      "revId": "6ed92290e16a4a84eaab466e56fc731ea85602b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
