@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24bb4545_9995eff4",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-13T14:32:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "731953d6_2bd79624",
+      "range": {
+        "startLine": 114,
+        "startChar": 29,
+        "endLine": 114,
+        "endChar": 30
+      },
+      "revId": "3cbb4d5ab8a6e9ce5a765b23edff9d6e18f8a6a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3bff7f2_a2a9434f",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-11-13T11:20:04Z",
       "side": 1,
       "message": "Did we choose these parameters or do they come from RKP? Could you add a comment?\n(sorry, I know you\u0027re just moving this but I\u0027m curious)",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 55
+      },
+      "revId": "3cbb4d5ab8a6e9ce5a765b23edff9d6e18f8a6a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3bf6340_b9d4935b",
+        "filename": "service_vm/client_vm_csr/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-13T14:32:51Z",
+      "side": 1,
+      "message": "We choose to support the same key type as the remotely provisioned keys. Comment added.",
+      "parentUuid": "c3bff7f2_a2a9434f",
       "range": {
         "startLine": 35,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6eef51f_2fdf3962",
+        "filename": "service_vm/client_vm_csr/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-13T14:32:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33fea6df_8bbe2bd3",
+      "range": {
+        "startLine": 147,
+        "startChar": 27,
+        "endLine": 147,
+        "endChar": 29
+      },
+      "revId": "3cbb4d5ab8a6e9ce5a765b23edff9d6e18f8a6a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90a3e313_889c925a",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-11-13T11:20:04Z",
       "side": 1,
       "message": "What\u0027s the purpose of this? Is it to verify that the CBOR parses? If so, could you add a comment that that\u0027s the goal? Otherwise someone might look at this and remove it as dead code.",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 68
+      },
+      "revId": "3cbb4d5ab8a6e9ce5a765b23edff9d6e18f8a6a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22acdc45_92adbe5d",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-13T14:32:51Z",
+      "side": 1,
+      "message": "The objective is mentioned in the TODOs in line 34 and line 36 below. In general, our first step is to verify the [CSR signatures](https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/service_vm/comm/src/client_vm_csr.cddl;l\u003d29;drc\u003d9aeb406b2f1cdb2d772e0e43373cafe9ff5f9a80) to ensure that the CSR originates from the owner of the DICE chain and keys to attested. Secondly, we need to verify the DICE chain in the CSR.\n\nSpecifically, since the BoringSSL nostd wrapper is currently lacking most cryptographic functions, first I need to construct the BoringSSL [EcKey](https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/bssl/src/ec_key.rs;l\u003d38;drc\u003d47287e794a02170e0392cc766b3fb9a8e076a62f) from the COSE encoded [public_key](https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/service_vm/comm/src/csr.rs;l\u003d72;drc\u003d86cb4b0a34914b0531dbf1fb975ff688fda5d216) in the CSR (aosp/2826074). Following that, we also need to add the ECDSA verify functions to check the CSR signature using the ECkey. Similarly, I also need to construct ECKey for the remotely provisioned private key (aosp/2812433) and add ECDSA sign to sign the new certificate.",
+      "parentUuid": "90a3e313_889c925a",
       "range": {
         "startLine": 32,
         "startChar": 4,
