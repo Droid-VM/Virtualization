@@ -22,6 +22,30 @@
       },
       "revId": "ae716cccd64295bb001657bafcb60010f65a0c71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdd6f5ef_6f982cda",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1175,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-11-14T06:32:35Z",
+      "side": 1,
+      "message": "After seeing your comment, I thought that VirtualMachineRawConfig shouldn\u0027t contain vendor_public_key as field, so did refactor instead.",
+      "parentUuid": "3d11ac40_470ced80",
+      "range": {
+        "startLine": 1175,
+        "startChar": 8,
+        "endLine": 1175,
+        "endChar": 31
+      },
+      "revId": "ae716cccd64295bb001657bafcb60010f65a0c71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
