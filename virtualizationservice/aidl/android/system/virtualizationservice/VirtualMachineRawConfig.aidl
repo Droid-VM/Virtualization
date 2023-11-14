@@ -69,7 +69,4 @@ parcelable VirtualMachineRawConfig {
      * If set to zero, then gdb server won't be started.
      */
     int gdbPort = 0;
-
-    /** List of SysFS nodes of devices to be assigned */
-    String[] devices;
 }

@@ -37,7 +37,7 @@ use lazy_static::lazy_static;
 use libc::VMADDR_CID_HOST;
 use log::{error, info, warn};
 use rustutils::system_properties;
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use std::fs::{canonicalize, create_dir, remove_dir_all, set_permissions, File, Permissions};
 use std::io::{Read, Write};
 use std::os::fd::FromRawFd;
@@ -188,7 +188,16 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
     fn bindDevicesToVfioDriver(&self, devices: &[String]) -> binder::Result<ParcelFileDescriptor> {
         check_use_custom_virtual_machine()?;
 
-        devices.iter().try_for_each(|x| bind_device(x))?;
+        let mut set = HashSet::new();
+        for device in devices.iter() {
+            if !set.insert(device) {
+                return Err(Status::new_exception_str(
+                    ExceptionCode::ILLEGAL_ARGUMENT,
+                    Some(format!("duplicated device {device}")),
+                ));
+            }
+            bind_device(device)?;
+        }
 
         // TODO(b/278008182): create a file descriptor containing DTBO for devices.
         let (raw_read, raw_write) = pipe2(OFlag::O_CLOEXEC).map_err(|e| {

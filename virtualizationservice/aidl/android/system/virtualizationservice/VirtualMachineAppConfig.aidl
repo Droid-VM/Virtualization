@@ -108,9 +108,6 @@ parcelable VirtualMachineAppConfig {
 
         /** A disk image containing vendor specific modules. */
         @nullable ParcelFileDescriptor vendorImage;
-
-        /** List of SysFS nodes of devices to be assigned */
-        String[] devices;
     }
 
     /** Configuration parameters guarded by android.permission.USE_CUSTOM_VIRTUAL_MACHINE */
