@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f01c11e_5cd69fec",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-11-14T04:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddb7472f_be70de6c",
+      "range": {
+        "startLine": 640,
+        "startChar": 40,
+        "endLine": 640,
+        "endChar": 73
+      },
+      "revId": "ef27a984052eb07610668657ed9d284c821e2ffe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2a27275_44970a1f",
@@ -85,6 +109,30 @@
       "writtenOn": "2023-11-13T05:51:23Z",
       "side": 1,
       "message": "uber-nit: can we move this computation out of the initializer, and define a local `name`?\n(Purely personal preference, feel free to ignore - but it\u0027s nice when the initializer only does the expected thing so the reader can skim it.)",
+      "range": {
+        "startLine": 711,
+        "startChar": 12,
+        "endLine": 711,
+        "endChar": 91
+      },
+      "revId": "ef27a984052eb07610668657ed9d284c821e2ffe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97e05d6c_ba1ff3d8",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-11-14T04:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2a27275_44970a1f",
       "range": {
         "startLine": 711,
         "startChar": 12,
@@ -118,6 +166,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbbd2db6_ac37bc5b",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachinePayloadConfig.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-11-14T04:30:26Z",
+      "side": 1,
+      "message": "We can still flag on the Rust code, so I think it\u0027s fine to make this required.",
+      "parentUuid": "038d1dd4_2d7fa121",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 39
+      },
+      "revId": "ef27a984052eb07610668657ed9d284c821e2ffe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eee64db0_f7cd99b6",
@@ -141,6 +213,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2dc4edf_5b727a51",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-11-14T04:30:26Z",
+      "side": 1,
+      "message": "Ah! I didn\u0027t know that this is for vendor modules.",
+      "parentUuid": "eee64db0_f7cd99b6",
+      "range": {
+        "startLine": 100,
+        "startChar": 1,
+        "endLine": 103,
+        "endChar": 28
+      },
+      "revId": "ef27a984052eb07610668657ed9d284c821e2ffe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27111ec2_ff9554fd",
@@ -154,6 +250,30 @@
       "writtenOn": "2023-11-13T14:00:11Z",
       "side": 1,
       "message": "This should be guarded by the #[cfg(vendor_modules)] like kernel and vendor options above.",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 52
+      },
+      "revId": "ef27a984052eb07610668657ed9d284c821e2ffe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b54d3680_6e01abee",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-11-14T04:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27111ec2_ff9554fd",
       "range": {
         "startLine": 114,
         "startChar": 0,
