@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a60d1db_77fbae6c",
+        "filename": "secretkeeper/comm/src/data_types/error.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-14T17:49:53Z",
+      "side": 1,
+      "message": "I\u0027ve removed `impl std::error::Error`, doesn\u0027t look necessary.",
+      "parentUuid": "ee398030_0dfec6f9",
+      "revId": "71b4a49341bed1e392ce375f06c442d51e6cade4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ecc1e77e_3e4691c3",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-11-14T12:28:03Z",
       "side": 1,
       "message": "Does this need `#[cfg(feature \u003d \"std\")]`?",
+      "revId": "71b4a49341bed1e392ce375f06c442d51e6cade4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07febda0_943c58ab",
+        "filename": "secretkeeper/comm/src/data_types/error.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-14T17:49:53Z",
+      "side": 1,
+      "message": "I\u0027ve removed `impl std::error::Error`, doesnt look necessary.",
+      "parentUuid": "ecc1e77e_3e4691c3",
       "revId": "71b4a49341bed1e392ce375f06c442d51e6cade4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
