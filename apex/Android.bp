@@ -73,11 +73,13 @@ soong_config_module_type {
     config_namespace: "ANDROID",
     bool_variables: [
         "release_avf_enable_device_assignment",
+        "release_avf_enable_remote_attestation",
         "release_avf_enable_vendor_modules",
     ],
     properties: [
         "arch",
         "prebuilts",
+        "vintf_fragments",
     ],
 }
 
@@ -111,8 +113,19 @@ avf_flag_aware_apex_defaults {
         "fd_server",
         "vm",
     ],
+    soong_config_variables: {
+        release_avf_enable_remote_attestation: {
+            prebuilts: ["com.android.virt.init_attestation_enabled.rc"],
+            vintf_fragments: [
+                "virtualizationservice.xml",
+            ],
+            conditions_default: {
+                prebuilts: ["com.android.virt.init.rc"],
+            },
+        },
+    },
     prebuilts: [
-        "com.android.virt.init.rc",
+        "com.android.virt.vfio_handler.rc",
         "features_com.android.virt.xml",
         "microdroid_initrd_debuggable",
         "microdroid_initrd_normal",
@@ -169,9 +182,23 @@ android_app_certificate {
 }
 
 prebuilt_etc {
+    name: "com.android.virt.vfio_handler.rc",
+    src: "vfio_handler.rc",
+    filename: "vfio_handler.rc",
+    installable: false,
+}
+
+prebuilt_etc {
     name: "com.android.virt.init.rc",
     src: "virtualizationservice.rc",
-    filename: "init.rc",
+    filename: "virtualizationservice.rc",
+    installable: false,
+}
+
+prebuilt_etc {
+    name: "com.android.virt.init_attestation_enabled.rc",
+    src: "virtualizationservice_attestation_enabled.rc",
+    filename: "virtualizationservice.rc",
     installable: false,
 }
 
