@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1d81742_bfb103b7",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-11-14T12:08:57Z",
+      "side": 1,
+      "message": "Does this build on release configurations that have RELEASE_AVF_ENABLE_VENDOR_MODULES disabled? (e.g. any configuration after trunk_staging).\n\nI suspect that you will need to do the same trick as for the vendor (see the impl MicrodroidConfig)",
+      "range": {
+        "startLine": 115,
+        "startChar": 12,
+        "endLine": 115,
+        "endChar": 36
+      },
+      "revId": "31676e2ca5bf5510b0a0201fa77c8224cb81a8ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53ec36da_ae55868a",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-11-14T12:08:57Z",
+      "side": 1,
+      "message": "Should we just remove this parameter from the aidl?",
+      "range": {
+        "startLine": 127,
+        "startChar": 8,
+        "endLine": 127,
+        "endChar": 32
+      },
+      "revId": "31676e2ca5bf5510b0a0201fa77c8224cb81a8ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
