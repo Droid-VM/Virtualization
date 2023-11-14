@@ -716,14 +716,7 @@ fn vfio_argument_for_platform_device(device: &VfioDevice) -> Result<String, Erro
     }
 
     if let Some(p) = path.to_str() {
-        // TODO(ptosi): Remove this discovery once we've fully transitioned away from the HACK.
-        let crosvm_run_help = Command::new(CROSVM_PATH)
-            .args(["run", "--help"])
-            .output()
-            .context("failed to read crosvm help")?;
-        let help = String::from_utf8_lossy(&crosvm_run_help.stdout);
-        let iommu = if help.contains("pkvm-iommu") { "pkvm-iommu" } else { "viommu" };
-        Ok(format!("--vfio={p},iommu={iommu},dt-symbol={0}", device.dtbo_label))
+        Ok(format!("--vfio={p},iommu=pkvm-iommu,dt-symbol={0}", device.dtbo_label))
     } else {
         bail!("invalid path {path:?}");
     }
