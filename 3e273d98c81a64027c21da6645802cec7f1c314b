@@ -354,6 +354,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5861c02_6b10b335",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-14T06:52:05Z",
+      "side": 1,
+      "message": "Just to close this out: actually, the APEXes do have a consistent order, specified by the host. It\u0027s actually alphabetical order, but the VM doesn\u0027t need to know or care.\nI\u0027ve updated the doc to remove the reference to sorting.",
+      "parentUuid": "ddd78154_e049db45",
+      "range": {
+        "startLine": 99,
+        "startChar": 9,
+        "endLine": 99,
+        "endChar": 13
+      },
+      "revId": "3e273d98c81a64027c21da6645802cec7f1c314b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49844a58_3111d7b2",
