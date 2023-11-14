@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "287d0cae_b98af904",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-14T11:14:22Z",
+      "side": 1,
+      "message": "Lets do it in a separate patch.",
+      "parentUuid": "d66f532f_ba841066",
+      "revId": "c0616c81d84b196fbd71521f629ef797077dab45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21399713_ad55ff4e",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-11-09T16:00:02Z",
       "side": 1,
       "message": "Note that `num_traits` is not currently mapped into Trusty, so it might be easier to use `enumn` instead (which is).",
+      "revId": "c0616c81d84b196fbd71521f629ef797077dab45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42a5ce11_3832eb1f",
+        "filename": "secretkeeper/comm/Android.bp",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-14T11:14:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21399713_ad55ff4e",
       "revId": "c0616c81d84b196fbd71521f629ef797077dab45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb81edde_5c0fc346",
+        "filename": "secretkeeper/comm/src/data_types/request.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-14T11:14:22Z",
+      "side": 1,
+      "message": "Self will be unsized \u0026 unfortunately unsized function parameters are not stable yet - https://github.com/rust-lang/rust/issues/48055",
+      "parentUuid": "ecc1e102_7ee3dc77",
+      "revId": "c0616c81d84b196fbd71521f629ef797077dab45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a42a2ec_dadc136b",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-11-09T16:11:23Z",
       "side": 1,
       "message": "`#![no_std]` if we want to make it as easy as possible for vendors to use this library in their secure environment builds.",
+      "revId": "c0616c81d84b196fbd71521f629ef797077dab45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97777db2_89605b1f",
+        "filename": "secretkeeper/comm/src/lib.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-14T11:14:22Z",
+      "side": 1,
+      "message": "Done. I\u0027ve added a configuration conditional checks.",
+      "parentUuid": "8a42a2ec_dadc136b",
       "revId": "c0616c81d84b196fbd71521f629ef797077dab45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
