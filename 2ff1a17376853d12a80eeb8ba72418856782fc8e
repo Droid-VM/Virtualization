@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed383001_94a8c176",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-15T13:01:53Z",
+      "side": 1,
+      "message": "nit: name this `iommus` as it\u0027s about to hold the vSIDs and follows the DT property, like the other existing members here (`reg` and `interrupts`). Same comment for `pviommu_phandles` in `parse()` as it points to the `\u003ciommus\u003e` property.",
+      "range": {
+        "startLine": 226,
+        "startChar": 4,
+        "endLine": 226,
+        "endChar": 13
+      },
+      "revId": "2ff1a17376853d12a80eeb8ba72418856782fc8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8a07b33_6b13234d",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-15T13:01:53Z",
+      "side": 1,
+      "message": "This loop assumes a value for `#iommu-cells` but nothing validates it: please add a `TODO` so that it can be addressed in an upcoming CL.",
+      "range": {
+        "startLine": 253,
+        "startChar": 40,
+        "endLine": 253,
+        "endChar": 41
+      },
+      "revId": "2ff1a17376853d12a80eeb8ba72418856782fc8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bbc1924_44eb3cac",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-15T13:01:53Z",
+      "side": 1,
+      "message": "I like the way you have `AssignedDeviceInfo::parse()` calling `parse_{interrupts,iommus}()`; why not also turn this into an internal method?\n\nAlso, could you rename the result of this block \"``pviommu_ids``\" (like its corresponding parameter in `AssignedDeviceInfo::parse_iommus()`) because there\u0027s another \"`pviommus_phandles`\" in `patch()`, but it has the \"reverse\" type (`BTreeMap\u003cPvIommuId, Phandle\u003e`-vs-`\u003cPhandle, PvIommuId\u003e`) which makes the whole thing quite confusing?\n\nOn this point (nit), could other `pviommus_phandles` be named `pviommu_phandles`?",
+      "range": {
+        "startLine": 326,
+        "startChar": 11,
+        "endLine": 326,
+        "endChar": 38
+      },
+      "revId": "2ff1a17376853d12a80eeb8ba72418856782fc8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56e744d1_e43a65d3",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-15T13:01:53Z",
+      "side": 1,
+      "message": "What about doing it the other way around and have an \"extractor\" allowing `assert_eq` directly in the test?\n\ne.g.\n```\n#[derive(Eq, Debug)]\nstruct FdtNodeProps {\n    compatible: Option\u003c\u0026\u0027static CStr\u003e,\n    reg: Option\u003cVec\u003cu32\u003e\u003e,\n    interrupts: Option\u003cVec\u003cu32\u003e\u003e,\n    iommus: Option\u003cVec\u003cu32\u003e\u003e,\n}\n\nimpl FdtNodeProps {\n    fn from_fdt(fdt: \u0026Fdt, path: \u0026CStr) -\u003e Option\u003cSelf\u003e {\n        let node \u003d fdt.node(path).unwrap()?;\n        let compatible \u003d ...;\n        let reg \u003d ...;\n        let interrupts \u003d ...;\n        let iommus \u003d ...;\n        Ok(Self { ... })\n    }\n}\n```\nand, in tests:\n```\nlet expected_nodes \u003d [ // You could also use a HashMap for this\n    (\n        cstr!(\"/...\"),\n        FdtNodeProps { ... },\n    ),\n    ...\n];\n\nfor (path, expected) in expected_nodes {\n    let values \u003d FdtNodeValues::from_fdt(fdt, path);\n    assert_eq!(values, Some(expected)); // if possible, also log {path}\n}\n```\n\nThe test could first extract (and validate) the IOMMU ID-to-phandle separately.",
+      "range": {
+        "startLine": 452,
+        "startChar": 0,
+        "endLine": 461,
+        "endChar": 73
+      },
+      "revId": "2ff1a17376853d12a80eeb8ba72418856782fc8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54a1e202_c4c51528",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-15T13:01:53Z",
+      "side": 1,
+      "message": "This seems to turn the test into applying a valid VM DTBO to an empty template DT; if you think it\u0027s a valid use-case, feel free to introduce a dedicated `#[test]` but this one looks good as it was.",
+      "range": {
+        "startLine": 541,
+        "startChar": 0,
+        "endLine": 543,
+        "endChar": 65
+      },
+      "revId": "2ff1a17376853d12a80eeb8ba72418856782fc8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2e6b6a8_b4f1cd43",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-15T13:01:53Z",
+      "side": 1,
+      "message": "Do we want a dedicated error variant for this case? We have one for \"too many\" so \"not unique\" makes sense to me. As an added bonus, it would make this unit test more robust.",
+      "range": {
+        "startLine": 729,
+        "startChar": 59,
+        "endLine": 729,
+        "endChar": 72
+      },
+      "revId": "2ff1a17376853d12a80eeb8ba72418856782fc8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
