@@ -63,6 +63,7 @@ java_sdk_library {
     impl_library_visibility: [
         "//packages/modules/Virtualization:__subpackages__",
     ],
+    contribute_to_api: true,
 }
 
 java_api_contribution {
