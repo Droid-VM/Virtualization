@@ -30,3 +30,6 @@ pub mod error;
 
 /// Defines packet structures passed between functional layer & the layer below.
 pub mod packet;
+
+/// Defines data structures (other than request/response) specified by the HAL
+pub mod types;

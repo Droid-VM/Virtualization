@@ -55,6 +55,6 @@ rust_test {
     srcs: ["tests/*.rs"],
     test_suites: ["general-tests"],
     rustlibs: [
-        "libsecretkeeper_comm",
+        "libsecretkeeper_comm_nostd",
     ],
 }
