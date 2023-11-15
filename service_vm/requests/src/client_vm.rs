@@ -17,7 +17,7 @@
 
 use crate::keyblob::decrypt_private_key;
 use alloc::vec::Vec;
-use bssl_avf::EcKey;
+use bssl_avf::{sha256, EcKey};
 use core::result;
 use coset::{CborSerializable, CoseSign};
 use diced_open_dice::DiceArtifacts;
@@ -46,7 +46,7 @@ pub(super) fn request_attestation(
 
     let ec_public_key = EcKey::from_cose_public_key(&csr_payload.public_key)?;
     cose_sign.verify_signature(1, aad, |signature, message| {
-        ec_public_key.ecdsa_verify(signature, message)
+        ecdsa_verify(&ec_public_key, signature, message)
     })?;
 
     // TODO(b/278717513): Compare client VM's DICE chain in the `csr` up to pvmfw
@@ -63,4 +63,9 @@ pub(super) fn request_attestation(
     // TODO(b/309441500): Build a new certificate signed with the remotely provisioned
     // `_private_key`.
     Err(RequestProcessingError::OperationUnimplemented)
+}
+
+fn ecdsa_verify(key: &EcKey, signature: &[u8], message: &[u8]) -> bssl_avf::Result<()> {
+    let digest = sha256(message)?;
+    key.ecdsa_verify(signature, &digest)
 }
