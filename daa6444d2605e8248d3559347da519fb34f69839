@@ -1,0 +1,584 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a35f1e4c_3ac0acf9",
+        "filename": "secretkeeper/comm/Android.bp",
+        "patchSetId": 12
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "Need `lints: \"android\"` here?",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe000eea_ae4ef412",
+        "filename": "secretkeeper/comm/Android.bp",
+        "patchSetId": 12
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "The \"std\" feature isn\u0027t used, so could drop this (and then not need 2 targets)",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ec172b4_b1c3d7f6",
+        "filename": "secretkeeper/comm/src/cbor_convert.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "Missing doc comment.",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f884277b_4efec977",
+        "filename": "secretkeeper/comm/src/cbor_convert.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "super-nit: grammar",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91c75745_c54a6313",
+        "filename": "secretkeeper/comm/src/data_types/error.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "Module doc comment missing. (passim).",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb26f3ea_5ed5db18",
+        "filename": "secretkeeper/comm/src/data_types/error.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "Can this be more specific (e.g. as `#[allow(missing_docs)]` just before the `derive`)?",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35cb3af3_e022375d",
+        "filename": "secretkeeper/comm/src/data_types/error.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "super-nit: \"API\"",
+      "range": {
+        "startLine": 31,
+        "startChar": 29,
+        "endLine": 31,
+        "endChar": 32
+      },
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bf4eaf1_e6bdc6bd",
+        "filename": "secretkeeper/comm/src/data_types/error.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "This value is not in SecretManagement.cddl.  If it\u0027s a local-only value, could do with a comment (and maybe use a discriminant that\u0027s offset by a bit).",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21db449b_d85f494d",
+        "filename": "secretkeeper/comm/src/data_types/error.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "question: are the `Display` implementations (here and below) actually needed (especially now there\u0027s no `Error` impl)?",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dc1fb2f_1bec13b6",
+        "filename": "secretkeeper/comm/src/data_types/error.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "nit: grammar",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74448c2f_bf53ad2a",
+        "filename": "secretkeeper/comm/src/data_types/error.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "Add unit tests for `Response::new()`?",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e5070f2_63b13740",
+        "filename": "secretkeeper/comm/src/data_types/mod.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "The Android Rust style guide prefers `data_types.rs` to `data_types/mod.rs`.  (I\u0027m not keen on that recommendation myself, so I won\u0027t complain if you stick with `mod.rs`...)",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27b586da_9b468ba8",
+        "filename": "secretkeeper/comm/src/data_types/mod.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "Doc comments aren\u0027t relevant here -- I believe the doc generation process will ignore them. (passim).",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae226bf6_3f30ce6a",
+        "filename": "secretkeeper/comm/src/data_types/packet.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "I\u0027m generally in favour of newtypes, but this struct seems to add very little functionality on top of `Vec\u003cValue\u003e` (just the `opcode()` method I think?)",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f2ed4b6_3a60de30",
+        "filename": "secretkeeper/comm/src/data_types/packet.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "super-nit: `Success` (with backticks) or success (with lowercase initial letter)",
+      "range": {
+        "startLine": 109,
+        "startChar": 38,
+        "endLine": 109,
+        "endChar": 65
+      },
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e83629c_0cbb447a",
+        "filename": "secretkeeper/comm/src/data_types/request.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "nit: grammar",
+      "range": {
+        "startLine": 35,
+        "startChar": 23,
+        "endLine": 35,
+        "endChar": 49
+      },
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2385a0ff_03c79405",
+        "filename": "secretkeeper/comm/src/data_types/request.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "Dunno if there\u0027s an official guideline anywhere, but JavaDoc style parameter lists aren\u0027t common in Rust",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce5e964e_ba26877a",
+        "filename": "secretkeeper/comm/src/data_types/request.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "The implementations of this trait look to mostly be using `\u0026args[n]`, so this is probably better as `\u0026[Value]`.  That would also allow use of `\u0026req[1..]` rather than `req.remove(0)` in `deserialize_from_packet()`.",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82eaf6d1_ef92b49a",
+        "filename": "secretkeeper/comm/src/data_types/request.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "The combination of `\u0026self` and returning a `Vec` forces the implementation to allocate in all circumstances -- maybe either consume (`fn args(self) -\u003e Vec\u003cValue\u003e`) or return a reference (`fn args(\u0026self) -\u003e \u0026[Value]`) and let the caller decide if they need to clone or not.",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09148124_8c00cd19",
+        "filename": "secretkeeper/comm/src/data_types/request.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "super-nit: sentence describes how some other code somewhere else might work",
+      "range": {
+        "startLine": 45,
+        "startChar": 54,
+        "endLine": 46,
+        "endChar": 72
+      },
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60e6bcf2_b7b4dfd7",
+        "filename": "secretkeeper/comm/src/data_types/request.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "nit: for code identifiers, add backticks; for things that are in scope, also add square brackets so generated docs have links (passim)",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "575dcb7d_562bd4f2",
+        "filename": "secretkeeper/comm/src/data_types/request.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "golf: Can these 7 lines be made simpler/clearer?  Something like:\n```\nif req.get(0) !\u003d Some(\u0026Value::Integer(Self.OPCODE)) {\n  return Err(Error::RequestMalformed);\n}\n```",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70b3c44c_215035c2",
+        "filename": "secretkeeper/comm/src/data_types/request_response_impl.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "Need a note about what CDDL type this needs to be in sync with.",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bfdcdb7_75cc4393",
+        "filename": "secretkeeper/comm/src/data_types/request_response_impl.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "Why non-exhaustive?",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5656f873_2deae861",
+        "filename": "secretkeeper/comm/src/data_types/request_response_impl.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "super-nit: use `Self` / `GetVersionRequest` consistently (and below)",
+      "range": {
+        "startLine": 54,
+        "startChar": 20,
+        "endLine": 54,
+        "endChar": 37
+      },
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac5b049d_b688de05",
+        "filename": "secretkeeper/comm/src/data_types/response.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "(Same comments as for request.rs)",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a741a906_dee184a9",
+        "filename": "secretkeeper/comm/src/data_types/response.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "This won\u0027t generate a doc section correctly.",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89660cc2_65d547f1",
+        "filename": "secretkeeper/comm/src/lib.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "I don\u0027t think there\u0027s any use of the \"std\" feature now, so just `#![no_std]`.",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddac9998_b04161d1",
+        "filename": "secretkeeper/comm/src/lib.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "This comment would belong better as a `//!` comment in `data_types.rs`",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80400772_7061f9fc",
+        "filename": "secretkeeper/comm/src/lib.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "super-nit: \"CBOR\"",
+      "range": {
+        "startLine": 28,
+        "startChar": 27,
+        "endLine": 28,
+        "endChar": 31
+      },
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f42ea150_71fb4f0b",
+        "filename": "secretkeeper/comm/tests/data_types.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "You need some tests that have the expected serialized bytes for each case -- if you make a self-consistent change, these tests will still pass but any attempt to upgrade HAL/TA separately will result in inability to communicate.",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e314db1_1e9b8948",
+        "filename": "secretkeeper/comm/tests/data_types.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-16T10:02:01Z",
+      "side": 1,
+      "message": "Remove or fix?",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
