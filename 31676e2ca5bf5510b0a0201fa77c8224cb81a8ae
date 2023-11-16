@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55ba212e_a3629ca1",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-11-16T06:44:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1d81742_bfb103b7",
+      "range": {
+        "startLine": 115,
+        "startChar": 12,
+        "endLine": 115,
+        "endChar": 36
+      },
+      "revId": "31676e2ca5bf5510b0a0201fa77c8224cb81a8ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53ec36da_ae55868a",
@@ -95,6 +119,30 @@
       "side": 1,
       "message": "I\u0027m fine with removing this, but I\u0027m not sure as this was introduced before we work on vendor modules. WDYT?",
       "parentUuid": "53ec36da_ae55868a",
+      "range": {
+        "startLine": 127,
+        "startChar": 8,
+        "endLine": 127,
+        "endChar": 32
+      },
+      "revId": "31676e2ca5bf5510b0a0201fa77c8224cb81a8ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8faf4979_dc37fe60",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-11-16T06:44:59Z",
+      "side": 1,
+      "message": "marking as resolved as we can remove this anytime later.",
+      "parentUuid": "1c127248_428fcafc",
       "range": {
         "startLine": 127,
         "startChar": 8,
