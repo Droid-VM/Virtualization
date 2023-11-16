@@ -71,6 +71,9 @@ impl GetVersionResponse {
     pub fn new(version: u64) -> Self {
         Self { version }
     }
+    pub fn version(&self) -> u64 {
+        self.version
+    }
 }
 
 impl Response for GetVersionResponse {

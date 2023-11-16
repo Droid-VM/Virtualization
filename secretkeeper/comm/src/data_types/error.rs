@@ -34,16 +34,27 @@ pub const ERROR_OK: u16 = 0; // All real errors must have non-zero error_codes
 pub enum SecretkeeperError {
     /// Request was Malformed.
     RequestMalformed = 1,
+    /// Requested Entry not found.
+    EntryNotFound = 2,
     /// Unexpected error in server.
-    UnexpectedServerError = 2,
+    UnexpectedServerError = 3,
+    /// Errors originating in serializer or deserializer
+    SerializationError = 4,
     // TODO(b/291228655): Add other errors such as DicePolicyError.
+    /// Policy library threw error
+    DicePolicyError = 5,
 }
 
 impl fmt::Display for SecretkeeperError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             Self::RequestMalformed => write!(f, "Request was malformed"),
+            Self::EntryNotFound => write!(f, "Requested Entry not found"),
             Self::UnexpectedServerError => write!(f, "Unexpected Error in server"),
+            Self::SerializationError => {
+                write!(f, "Errors originating in serializer or deserializer")
+            }
+            Self::DicePolicyError => write!(f, "Policy library threw error"),
         }
     }
 }
@@ -81,6 +92,10 @@ pub enum Error {
     ConversionError,
     /// These are unexpected errors, which should never really happen.
     UnexpectedError,
+    // /// Storage related error
+    // StorageError(StorageError),
+    /// Policy library threw error, TODO more content please
+    DicePolicyError,
 }
 
 impl fmt::Display for Error {
@@ -95,6 +110,7 @@ impl fmt::Display for Error {
                 write!(f, "An error happened while converting one type to another.")
             }
             Self::UnexpectedError => write!(f, "Unexpected error"),
+            Self::DicePolicyError => write!(f, "Policy library threw error"),
         }
     }
 }
@@ -114,5 +130,26 @@ impl From<ciborium::Value> for Error {
 impl From<core::num::TryFromIntError> for Error {
     fn from(_e: core::num::TryFromIntError) -> Self {
         Self::ConversionError
+    }
+}
+
+// impl From<StorageError> for Error {
+//     fn from(e: StorageError) -> Self {
+//         Self::StorageError(e)
+//     }
+// }
+
+/// Errors from storage API, TODO - maybe move to libsecretkeepercore
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum StorageError {
+    /// Requested Entry not found.
+    EntryNotFound = 1,
+}
+
+impl fmt::Display for StorageError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            Self::EntryNotFound => write!(f, "Requested Entry not found"),
+        }
     }
 }
