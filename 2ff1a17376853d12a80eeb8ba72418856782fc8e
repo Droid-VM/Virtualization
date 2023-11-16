@@ -189,6 +189,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2ff1227_52b26711",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-16T15:20:00Z",
+      "side": 1,
+      "message": "FYI, the reason for naming it `FdtNodeProps` was to decouple it from \"assigned devices\" as, from the perspective of the test, they\u0027re nothing more than DT nodes with standard properties.",
+      "parentUuid": "a81446b7_58f05931",
+      "range": {
+        "startLine": 452,
+        "startChar": 0,
+        "endLine": 461,
+        "endChar": 73
+      },
+      "revId": "2ff1a17376853d12a80eeb8ba72418856782fc8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54a1e202_c4c51528",
@@ -226,6 +250,30 @@
       "side": 1,
       "message": "This is not a valid use-case, so didn\u0027t add test.\n\nI changed this just because `pvmfw_fdt_template::RAW` has unpatched PV IOMMU IDs so couldn\u0027t pass duplication ID check. I could have added a new base `dts` for this test, but it looked too much for me.",
       "parentUuid": "54a1e202_c4c51528",
+      "range": {
+        "startLine": 541,
+        "startChar": 0,
+        "endLine": 543,
+        "endChar": 65
+      },
+      "revId": "2ff1a17376853d12a80eeb8ba72418856782fc8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a6407da_3bea7acf",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-16T15:20:00Z",
+      "side": 1,
+      "message": "I see.\n\nYes, passing `pvmfw_fdt_template::RAW` as the input DT was probably not the cleanest thing to do in the first place. However, running the test on an empty DT doesn\u0027t sound much better as the test expects a DT `without_assigned_devices` but still bootable, right? Having a dedicated DTS would solve this and, IMO, the `.dsti` I was suggesting (in a previous CL) we introduce would make that trivial.\n\nFor now, feel free to `#[ignore]` the test, with a `TODO` that we\u0027ll address later.",
+      "parentUuid": "d304f379_0801d743",
       "range": {
         "startLine": 541,
         "startChar": 0,
