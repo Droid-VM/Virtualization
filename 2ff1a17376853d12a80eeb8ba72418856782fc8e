@@ -213,6 +213,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47beefd7_470daf2d",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-16T16:12:17Z",
+      "side": 1,
+      "message": "Well, I named `AssignedDeviceNode` because `parse()` enforces certain expectations about `\u003creg\u003e`, `\u003cinterrupts\u003e`, and `\u003ciommus\u003e`. And those expectation didn\u0027t look standard for an arbitrary device node. Tell me again if you prefer other name.",
+      "parentUuid": "f2ff1227_52b26711",
+      "range": {
+        "startLine": 452,
+        "startChar": 0,
+        "endLine": 461,
+        "endChar": 73
+      },
+      "revId": "2ff1a17376853d12a80eeb8ba72418856782fc8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54a1e202_c4c51528",
@@ -274,6 +298,30 @@
       "side": 1,
       "message": "I see.\n\nYes, passing `pvmfw_fdt_template::RAW` as the input DT was probably not the cleanest thing to do in the first place. However, running the test on an empty DT doesn\u0027t sound much better as the test expects a DT `without_assigned_devices` but still bootable, right? Having a dedicated DTS would solve this and, IMO, the `.dsti` I was suggesting (in a previous CL) we introduce would make that trivial.\n\nFor now, feel free to `#[ignore]` the test, with a `TODO` that we\u0027ll address later.",
       "parentUuid": "d304f379_0801d743",
+      "range": {
+        "startLine": 541,
+        "startChar": 0,
+        "endLine": 543,
+        "endChar": 65
+      },
+      "revId": "2ff1a17376853d12a80eeb8ba72418856782fc8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28be5872_2c766d00",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-16T16:12:17Z",
+      "side": 1,
+      "message": "I\u0027m sorry but what does `#[ignore]` mean? The test passes and it validates whether `DeviceAssignmentInfo::parse()` returns `None`. Do you want me to ignore this test?\n\nRe bootable DT: I only added test data to validate device assignment and none of them would be bootable. I only added random nodes to mock platform DT, and having a real would end up with adding lots of unnecessary nodes that the test wouldn\u0027t read. Do you prefer to put real one?",
+      "parentUuid": "2a6407da_3bea7acf",
       "range": {
         "startLine": 541,
         "startChar": 0,
