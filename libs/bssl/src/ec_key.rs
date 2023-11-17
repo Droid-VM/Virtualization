@@ -17,6 +17,7 @@
 
 use crate::cbb::CbbFixed;
 use crate::cbs::Cbs;
+use crate::evp::EvpPKey;
 use crate::util::{check_int_result, to_call_failed_error};
 use alloc::vec;
 use alloc::vec::Vec;
@@ -26,7 +27,8 @@ use bssl_ffi::{
     ECDSA_verify, EC_GROUP_new_by_curve_name, EC_KEY_check_key, EC_KEY_free, EC_KEY_generate_key,
     EC_KEY_get0_group, EC_KEY_get0_public_key, EC_KEY_marshal_private_key,
     EC_KEY_new_by_curve_name, EC_KEY_parse_private_key, EC_KEY_set_public_key_affine_coordinates,
-    EC_POINT_get_affine_coordinates, NID_X9_62_prime256v1, BIGNUM, EC_GROUP, EC_KEY, EC_POINT,
+    EC_POINT_get_affine_coordinates, EVP_PKEY_assign_EC_KEY, NID_X9_62_prime256v1, BIGNUM,
+    EC_GROUP, EC_KEY, EC_POINT,
 };
 use ciborium::Value;
 use core::ptr::{self, NonNull};
@@ -287,6 +289,20 @@ impl EcKey {
         // and it has been flushed, thus it has no active children.
         let len = unsafe { CBB_len(cbb.as_ref()) };
         Ok(buf.get(0..len).ok_or(to_call_failed_error(ApiName::CBB_len))?.to_vec().into())
+    }
+
+    /// Returns a DER-encoded SubjectPublicKeyInfo structure as specified
+    /// in RFC 5280 s4.1.2.7:
+    ///
+    /// https://www.rfc-editor.org/rfc/rfc5280.html#section-4.1.2.7
+    pub fn subject_public_key_info(&self) -> Result<Vec<u8>> {
+        let mut evp_pkey = EvpPKey::new()?;
+        // SAFETY: The function only sets the underlying public key of the
+        // initialized and non-null `EVP_PKEY` to point to the given
+        // `EC_KEY`. There's no other memory access in this function.
+        let ret = unsafe { EVP_PKEY_assign_EC_KEY(evp_pkey.as_mut_ptr(), self.0.as_ptr()) };
+        check_int_result(ret, ApiName::EVP_PKEY_assign_EC_KEY)?;
+        evp_pkey.subject_public_key_info()
     }
 }
 

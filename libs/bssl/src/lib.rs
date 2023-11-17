@@ -24,6 +24,7 @@ mod cbs;
 mod digest;
 mod ec_key;
 mod err;
+mod evp;
 mod hkdf;
 mod hmac;
 mod rand;
