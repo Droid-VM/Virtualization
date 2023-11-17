@@ -288,6 +288,11 @@ impl EcKey {
         let len = unsafe { CBB_len(cbb.as_ref()) };
         Ok(buf.get(0..len).ok_or(to_call_failed_error(ApiName::CBB_len))?.to_vec().into())
     }
+
+    /// Returns the pointer to the inner `EC_Key`.
+    pub(crate) fn as_mut_ptr(&mut self) -> *mut EC_KEY {
+        self.0.as_ptr()
+    }
 }
 
 fn get_label_value_as_bytes(key: &CoseKey, label: Label) -> Result<&[u8]> {

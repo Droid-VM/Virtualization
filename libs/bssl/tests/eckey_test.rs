@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use bssl_avf::{sha256, ApiName, EcKey, EcdsaError, Error, Result};
+use bssl_avf::{sha256, ApiName, EcKey, EcdsaError, Error, EvpPKey, Result};
 use coset::CborSerializable;
 
 const MESSAGE1: &[u8] = b"test message 1";
@@ -26,6 +26,21 @@ fn ec_private_key_serialization() -> Result<()> {
     let deserialized_ec_key = EcKey::from_ec_private_key(der_encoded_ec_private_key.as_slice())?;
 
     assert_eq!(ec_key.cose_public_key()?, deserialized_ec_key.cose_public_key()?);
+    Ok(())
+}
+
+#[test]
+fn ec_key_to_subject_public_key_info_serialization() -> Result<()> {
+    let mut ec_key = EcKey::new_p256()?;
+    ec_key.generate_key()?;
+    let mut evp_pkey = EvpPKey::new()?;
+    evp_pkey.set_ec_key(&mut ec_key)?;
+
+    let subject_public_key_info = evp_pkey.subject_public_key_info()?;
+
+    // TODO(b/312155033): Deserialize `subject_public_key_info` as `spki::SubjectPublicKeyInfo`
+    // and check the deserialized object once the `spki` crate will be available.
+    assert!(!subject_public_key_info.is_empty());
     Ok(())
 }
 
