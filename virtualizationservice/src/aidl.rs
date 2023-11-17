@@ -180,10 +180,14 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
                 .context("Failed to parse the remotely provisioned certificate chain")
                 .with_log()
                 .or_service_specific_exception(-1)?;
-            let certificate = request_attestation(csr, &attestation_key.keyBlob)
-                .context("Failed to request attestation")
-                .with_log()
-                .or_service_specific_exception(-1)?;
+            let certificate = request_attestation(
+                csr,
+                &attestation_key.keyBlob,
+                &certificate_chain[0].encodedCertificate,
+            )
+            .context("Failed to request attestation")
+            .with_log()
+            .or_service_specific_exception(-1)?;
             certificate_chain.insert(0, Certificate { encodedCertificate: certificate });
 
             Ok(certificate_chain)
