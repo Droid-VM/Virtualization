@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1aefc860_50a1160c",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-17T15:25:51Z",
+      "side": 1,
+      "message": "uber-nit: would you mind `s/PV IOMMU/pvIOMMU/` in user-facing strings and comments, to align with the way they\u0027ve named it in the hypervisor?",
+      "range": {
+        "startLine": 88,
+        "startChar": 26,
+        "endLine": 88,
+        "endChar": 34
+      },
+      "revId": "57df6293601dd3d0a1eb189b8c621b744c3e3c5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
