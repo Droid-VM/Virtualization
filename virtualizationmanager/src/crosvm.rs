@@ -116,6 +116,7 @@ pub struct CrosvmConfig {
     pub detect_hangup: bool,
     pub gdb_port: Option<NonZeroU16>,
     pub vfio_devices: Vec<VfioDevice>,
+    pub dtbo: Option<File>,
     pub dtbo_vendor: Option<File>,
 }
 
@@ -723,11 +724,17 @@ fn vfio_argument_for_platform_device(device: &VfioDevice) -> Result<String, Erro
     }
 }
 
-fn append_platform_devices(command: &mut Command, config: &CrosvmConfig) -> Result<(), Error> {
-    for device in &config.vfio_devices {
-        command.arg(vfio_argument_for_platform_device(device)?);
+fn append_platform_devices(
+    command: &mut Command,
+    preserved_fds: &mut Vec<RawFd>,
+    config: &CrosvmConfig,
+) -> Result<(), Error> {
+    if let Some(dtbo) = &config.dtbo {
+        for device in &config.vfio_devices {
+            command.arg(vfio_argument_for_platform_device(device)?);
+        }
+        command.arg(format!("--device-tree-overlay={}", add_preserved_fd(preserved_fds, dtbo)));
     }
-    // TODO(b/291192693): add dtbo to command line when assigned device is not empty.
     Ok(())
 }
 
@@ -889,7 +896,7 @@ fn run_vm(
 
     // TODO(b/285855436): Pass dtbo_vendor after --device-tree-overlay crosvm option is supported.
 
-    append_platform_devices(&mut command, &config)?;
+    append_platform_devices(&mut command, &mut preserved_fds, &config)?;
 
     debug!("Preserving FDs {:?}", preserved_fds);
     command.preserved_fds(preserved_fds);
