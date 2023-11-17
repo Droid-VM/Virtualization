@@ -22,12 +22,14 @@ use android_system_virtualizationservice::{
     binder::{ParcelFileDescriptor, ProcessState},
 };
 use anyhow::{bail, Context, Result};
+use bssl_avf::{sha256, EcKey, EvpPKey};
 use ciborium::value::Value;
 use client_vm_csr::generate_attestation_key_and_csr;
+use coset::{CborSerializable, CoseMac0, CoseSign};
 use log::info;
 use service_vm_comm::{
-    ClientVmAttestationParams, EcdsaP256KeyPair, GenerateCertificateRequestParams, Request,
-    RequestProcessingError, Response, VmType,
+    ClientVmAttestationParams, Csr, CsrPayload, EcdsaP256KeyPair, GenerateCertificateRequestParams,
+    Request, Response, VmType,
 };
 use service_vm_manager::ServiceVm;
 use std::fs::File;
@@ -35,6 +37,7 @@ use std::io;
 use std::panic;
 use std::path::PathBuf;
 use vmclient::VmInstance;
+use x509_parser::{certificate::X509Certificate, prelude::FromDer, x509::SubjectPublicKeyInfo};
 
 const UNSIGNED_RIALTO_PATH: &str = "/data/local/tmp/rialto_test/arm64/rialto_unsigned.bin";
 const INSTANCE_IMG_PATH: &str = "/data/local/tmp/rialto_test/arm64/instance.img";
@@ -55,7 +58,7 @@ fn check_processing_requests(vm_type: VmType) -> Result<()> {
     check_processing_reverse_request(&mut vm)?;
     let key_pair = check_processing_generating_key_pair_request(&mut vm)?;
     check_processing_generating_certificate_request(&mut vm, &key_pair.maced_public_key)?;
-    check_attestation_request(&mut vm, &key_pair.key_blob)?;
+    check_attestation_request(&mut vm, &key_pair)?;
     Ok(())
 }
 
@@ -110,7 +113,10 @@ fn check_processing_generating_certificate_request(
     }
 }
 
-fn check_attestation_request(vm: &mut ServiceVm, key_blob: &[u8]) -> Result<()> {
+fn check_attestation_request(
+    vm: &mut ServiceVm,
+    remotely_provisioned_key_pair: &EcdsaP256KeyPair,
+) -> Result<()> {
     /// The following data was generated randomly with urandom.
     const CHALLENGE: [u8; 16] = [
         0x7d, 0x86, 0x58, 0x79, 0x3a, 0x09, 0xdf, 0x1c, 0xa5, 0x80, 0x80, 0x15, 0x2b, 0x13, 0x17,
@@ -120,8 +126,8 @@ fn check_attestation_request(vm: &mut ServiceVm, key_blob: &[u8]) -> Result<()> 
     let attestation_data = generate_attestation_key_and_csr(&CHALLENGE, &dice_artifacts)?;
 
     let params = ClientVmAttestationParams {
-        csr: attestation_data.csr.into_cbor_vec()?,
-        remotely_provisioned_key_blob: key_blob.to_vec(),
+        csr: attestation_data.csr.clone().into_cbor_vec()?,
+        remotely_provisioned_key_blob: remotely_provisioned_key_pair.key_blob.to_vec(),
     };
     let request = Request::RequestClientVmAttestation(params);
 
@@ -129,10 +135,61 @@ fn check_attestation_request(vm: &mut ServiceVm, key_blob: &[u8]) -> Result<()> 
     info!("Received response: {response:?}.");
 
     match response {
-        // TODO(b/309441500): Check the certificate once it is implemented.
-        Response::Err(RequestProcessingError::OperationUnimplemented) => Ok(()),
+        Response::RequestClientVmAttestation(certificate) => {
+            check_certificate_for_client_vm(
+                &certificate,
+                &remotely_provisioned_key_pair.maced_public_key,
+                &attestation_data.csr,
+            )?;
+            Ok(())
+        }
         _ => bail!("Incorrect response type: {response:?}"),
     }
+}
+
+fn check_certificate_for_client_vm(
+    certificate: &[u8],
+    maced_public_key: &[u8],
+    csr: &Csr,
+) -> Result<()> {
+    let cose_mac = CoseMac0::from_slice(maced_public_key)?;
+    let authority_public_key = EcKey::from_cose_public_key(&cose_mac.payload.unwrap()).unwrap();
+    let (remaining, cert) = X509Certificate::from_der(certificate)?;
+    assert!(remaining.is_empty());
+
+    // Checks the certificate signature against the authority public key.
+    let digest = sha256(cert.tbs_certificate.as_ref()).unwrap();
+    authority_public_key
+        .ecdsa_verify(cert.signature_value.as_ref(), &digest)
+        .expect("Failed to verify the certificate signature with the authority public key");
+
+    // Checks that the certificate's subject public key is equal to the key in the CSR.
+    let cose_sign = CoseSign::from_slice(&csr.signed_csr_payload)?;
+    let csr_payload =
+        cose_sign.payload.as_ref().and_then(|v| CsrPayload::from_cbor_slice(v).ok()).unwrap();
+    let subject_public_key = EcKey::from_cose_public_key(&csr_payload.public_key).unwrap();
+    let expected_spki_data =
+        EvpPKey::try_from(subject_public_key).unwrap().subject_public_key_info().unwrap();
+    let (remaining, expected_spki) = SubjectPublicKeyInfo::from_der(&expected_spki_data)?;
+    assert!(remaining.is_empty());
+    assert_eq!(&expected_spki, cert.public_key());
+
+    // Checks the certificate extension.
+    const ATTESTATION_EXTENSION_OID: &str = "1.3.6.1.4.1.11129.2.1.29.1";
+    let extensions = cert.extensions();
+    assert_eq!(1, extensions.len());
+    let extension = &extensions[0];
+    assert_eq!(String::from(ATTESTATION_EXTENSION_OID), extension.oid.to_id_string());
+    assert!(!extension.critical);
+
+    // Checks other fields on the certificate
+    assert_eq!(
+        String::from("CN=Android Protected Virtual Machine Key"),
+        cert.subject().to_string()
+    );
+    assert_eq!(String::from("CN=Android Virtualization Framework"), cert.issuer().to_string());
+
+    Ok(())
 }
 
 /// TODO(b/300625792): Check the CSR with libhwtrust once the CSR is complete.
