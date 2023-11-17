@@ -194,6 +194,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "12ca9380_efe4a559",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-17T10:25:27Z",
+      "side": 1,
+      "message": "\u003e I thought that that\u0027s why we\u0027re patching platform DT instead of having lots of validation checks. Am I misunderstanding?\n\nGood question, that\u0027s an important point; IMO, the platform DT patching should be an implementation detail.\n\nIdeally, pvmfw should have no impact on the DT (other than adding the `open-dice` node) and should only validate it. This is to 1. have a consistent behaviour between protected and non-protected (that is, if pvmfw doesn\u0027t abort the boot) and 2. avoid unexpected results where the VMM passes some input which \"disappears\" before reaching the guest, which is always an unpleasant thing to debug for uesrs (we\u0027ve had that in the past with missing PCI devices).\n\nThe reason why we don\u0027t just read the nodes one-by-one is because we weren\u0027t comfortable that such an implementation wouldn\u0027t miss some corner cases and, as proving a negative is wrong, we decided to implement the platform patching instead. A regrettable side-effect of this is that unexpected nodes or node properties are silently dropped but that wasn\u0027t the intention! Ideally, those should lead to the boot being aborted or, at the very least, a warning in the logs.\n\n\u003e  If pvmfw got 12 PV IOMMUs while only 9 are assigned for real, then we\u0027ll fail to boot because we only have 10 pre-populated PV IOMMUs for patching.\n\nIf we have a hard-limit of 10 pvIOMMUs and the VMM passes more, I think it\u0027s fine to fail, no matter if they\u0027re attached or not? pvmfw can\u0027t assume that the VMM is wrong in adding those extra pvIOMMUs; it might have a good reason we don\u0027t know of for doing so. Therefore, returning an error (effectively saying \"what you\u0027re trying to do isn\u0027t possible\") sounds perfectly reasonable to me.\n\nBut well-spotted corner case! ;)\n\n\u003e I can do one of following\n\nAs mentioned above, I personally find Option 2 easier to understand and maintain.",
+      "parentUuid": "7bf5d45a_e40a9695",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 290,
+        "endChar": 1
+      },
+      "revId": "5d139c8977760880bd085ba389ff95ec88f08576",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "56f6d2b6_082863e7",
         "filename": "pvmfw/testdata/test_pvmfw_devices_with_multiple_devices_iommus.dts",
         "patchSetId": 13

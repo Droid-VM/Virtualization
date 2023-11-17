@@ -334,6 +334,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a7631720_5005338d",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-17T10:25:27Z",
+      "side": 1,
+      "message": "\u003e Do you want me to ignore this test?\n\nYou said that you had to hack the test because \"_`pvmfw_fdt_template::RAW` [...] couldn\u0027t pass duplication ID check_\" but, as we both say, the right way would\u0027ve been a DTS `without_assigned_devices` that isn\u0027t empty either.\n\n\u003e Do you prefer to put real one?\n\nThat would make for a more realistic test (which I guess is the reason why you used the template DT in the first place) but, as I said above, this isn\u0027t CL-blocking. Basically, either:\n\n- revert your changes to `device_info_new_without_assigned_devices` and `#[ignore]`+`TODO` until we have a proper DTS; or\n- keep your changes but rename it to `device_info_empty_device_tree` as you\u0027ve now re-scoped the test",
+      "parentUuid": "28be5872_2c766d00",
+      "range": {
+        "startLine": 541,
+        "startChar": 0,
+        "endLine": 543,
+        "endChar": 65
+      },
+      "revId": "2ff1a17376853d12a80eeb8ba72418856782fc8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c2e6b6a8_b4f1cd43",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 15
