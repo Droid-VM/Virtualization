@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c3fb214_72a055dc",
+        "filename": "secretkeeper/comm/Android.bp",
+        "patchSetId": 12
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "(Done) This isn\u0027t used much in Virtualization dir, but that shouldn\u0027t stop us, in particular because we are moving this library to a new gerrit projects.",
+      "parentUuid": "a35f1e4c_3ac0acf9",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe000eea_ae4ef412",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-11-16T10:02:01Z",
       "side": 1,
       "message": "The \"std\" feature isn\u0027t used, so could drop this (and then not need 2 targets)",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc773855_454d9143",
+        "filename": "secretkeeper/comm/Android.bp",
+        "patchSetId": 12
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "I was thinking the same, a bit unnecessary overhead if we intend to only use the no_std version. I\u0027m keeping the name `libsecretkeeper_comm_nostd` to be explicit to library users that this is indeed that.",
+      "parentUuid": "fe000eea_ae4ef412",
       "revId": "daa6444d2605e8248d3559347da519fb34f69839",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "882d92ee_f8a61eec",
+        "filename": "secretkeeper/comm/src/cbor_convert.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec172b4_b1c3d7f6",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f884277b_4efec977",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-11-16T10:02:01Z",
       "side": 1,
       "message": "super-nit: grammar",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05eb5de4_af8bf7b7",
+        "filename": "secretkeeper/comm/src/cbor_convert.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f884277b_4efec977",
       "revId": "daa6444d2605e8248d3559347da519fb34f69839",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -86,6 +158,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13a497e3_fabf50dc",
+        "filename": "secretkeeper/comm/src/data_types/error.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "Compiler doesnt complain since it is documented in mod.rs\n\nBut I\u0027ve moved all module comment to individual files",
+      "parentUuid": "91c75745_c54a6313",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb26f3ea_5ed5db18",
@@ -99,6 +189,24 @@
       "writtenOn": "2023-11-16T10:02:01Z",
       "side": 1,
       "message": "Can this be more specific (e.g. as `#[allow(missing_docs)]` just before the `derive`)?",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54e02325_fd4c7925",
+        "filename": "secretkeeper/comm/src/data_types/error.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "It seem infeasible to further narrow down the missing_docs silence without changing the proc macro.",
+      "parentUuid": "bb26f3ea_5ed5db18",
       "revId": "daa6444d2605e8248d3559347da519fb34f69839",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -126,6 +234,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ba6c78b_ed8c35d9",
+        "filename": "secretkeeper/comm/src/data_types/error.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35cb3af3_e022375d",
+      "range": {
+        "startLine": 31,
+        "startChar": 29,
+        "endLine": 31,
+        "endChar": 32
+      },
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1bf4eaf1_e6bdc6bd",
@@ -139,6 +271,24 @@
       "writtenOn": "2023-11-16T10:02:01Z",
       "side": 1,
       "message": "This value is not in SecretManagement.cddl.  If it\u0027s a local-only value, could do with a comment (and maybe use a discriminant that\u0027s offset by a bit).",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af9a6ba7_cbc4dbf3",
+        "filename": "secretkeeper/comm/src/data_types/error.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "This should be in SecretManagement.cddl. Thanks for pointing it. The ErrorCode is not exhaustive yet.",
+      "parentUuid": "1bf4eaf1_e6bdc6bd",
       "revId": "daa6444d2605e8248d3559347da519fb34f69839",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -160,6 +310,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5843ee8_1d4bb29e",
+        "filename": "secretkeeper/comm/src/data_types/error.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "I wanted to log it, but let me implement Debug instead of Display.",
+      "parentUuid": "21db449b_d85f494d",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8dc1fb2f_1bec13b6",
@@ -177,6 +345,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2729c207_743123b9",
+        "filename": "secretkeeper/comm/src/data_types/error.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8dc1fb2f_1bec13b6",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74448c2f_bf53ad2a",
@@ -190,6 +376,24 @@
       "writtenOn": "2023-11-16T10:02:01Z",
       "side": 1,
       "message": "Add unit tests for `Response::new()`?",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8931bda_a05c2e3d",
+        "filename": "secretkeeper/comm/src/data_types/error.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "I\u0027ve added request_creation \u0026 response_creation along with other unit tests",
+      "parentUuid": "74448c2f_bf53ad2a",
       "revId": "daa6444d2605e8248d3559347da519fb34f69839",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -228,6 +432,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac554f28_52b84b75",
+        "filename": "secretkeeper/comm/src/data_types/mod.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "rustdoc didnt complain on them being here, but i moved them now. Thanks",
+      "parentUuid": "27b586da_9b468ba8",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae226bf6_3f30ce6a",
@@ -245,6 +467,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e98350d_9121e3ae",
+        "filename": "secretkeeper/comm/src/data_types/packet.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "Yes. [Opcode is an importantly functionality, it lets the receiver of the packet know what concrete Request to deserialize it to]. Also, this lets us draw a analogy to `RequestPacket` in cddl, whihch is a cbor::Arrray\n\nWe\u0027ll need another struct ProtectedRequestPacket, which will be similar, but contains ciphertext instead.",
+      "parentUuid": "ae226bf6_3f30ce6a",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f2ed4b6_3a60de30",
@@ -258,6 +498,30 @@
       "writtenOn": "2023-11-16T10:02:01Z",
       "side": 1,
       "message": "super-nit: `Success` (with backticks) or success (with lowercase initial letter)",
+      "range": {
+        "startLine": 109,
+        "startChar": 38,
+        "endLine": 109,
+        "endChar": 65
+      },
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35abb5dd_8375d339",
+        "filename": "secretkeeper/comm/src/data_types/packet.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f2ed4b6_3a60de30",
       "range": {
         "startLine": 109,
         "startChar": 38,
@@ -293,6 +557,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f259e2c6_1c3bf699",
+        "filename": "secretkeeper/comm/src/data_types/request.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "9e83629c_0cbb447a",
+      "range": {
+        "startLine": 35,
+        "startChar": 23,
+        "endLine": 35,
+        "endChar": 49
+      },
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2385a0ff_03c79405",
         "filename": "secretkeeper/comm/src/data_types/request.rs",
         "patchSetId": 12
@@ -304,6 +592,24 @@
       "writtenOn": "2023-11-16T10:02:01Z",
       "side": 1,
       "message": "Dunno if there\u0027s an official guideline anywhere, but JavaDoc style parameter lists aren\u0027t common in Rust",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56613ec4_9f83301c",
+        "filename": "secretkeeper/comm/src/data_types/request.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "https://doc.rust-lang.org/rust-by-example/meta/doc.html\nDonno if it generates correct documentation though",
+      "parentUuid": "2385a0ff_03c79405",
       "revId": "daa6444d2605e8248d3559347da519fb34f69839",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -325,6 +631,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3148c547_5c37095d",
+        "filename": "secretkeeper/comm/src/data_types/request.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "Implementation of this trait for other request types like StoreSecret would need the args to be passed by value [otherwise there will be multiple clones of values]. GetVersion is a rather simple example with empty args. \nTo have a look at how other requets implements this trait, see WIP patch \n\nhttps://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2833051/1/secretkeeper/comm/src/data_types/request_response_impl.rs",
+      "parentUuid": "ce5e964e_ba26877a",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82eaf6d1_ef92b49a",
@@ -338,6 +662,24 @@
       "writtenOn": "2023-11-16T10:02:01Z",
       "side": 1,
       "message": "The combination of `\u0026self` and returning a `Vec` forces the implementation to allocate in all circumstances -- maybe either consume (`fn args(self) -\u003e Vec\u003cValue\u003e`) or return a reference (`fn args(\u0026self) -\u003e \u0026[Value]`) and let the caller decide if they need to clone or not.",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e90088c9_aebfb07b",
+        "filename": "secretkeeper/comm/src/data_types/request.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "Option1:\nI actually do want args \u0026 serialize_to_packet to consume Self. Unfortunately, Consuming Self will leads to unsized param \u0026 this is not stable yet - https://github.com/rust-lang/rust/issues/48055\n\nOption2:\nfn args(\u0026self) -\u003e \u0026[Value]). The implementation of the trait can maintain \narguments in whatever form they like, it doesn\u0027t have to be vector. For ex, \n\n```\npub struct StoreSecretRequest {\n    // Unique identifier of the secret\n    id: Id,\n    // The secret the client wishes to store\n    secret: Secret,\n    // The dice policy corresponding to the secret\n    sealing_policy: Vec\u003cu8\u003e,\n}\n```\n\nSo I\u0027m not sure if returning a slice of Values in such cases is possible at all",
+      "parentUuid": "82eaf6d1_ef92b49a",
       "revId": "daa6444d2605e8248d3559347da519fb34f69839",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -365,6 +707,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e75a78b_c06edf89",
+        "filename": "secretkeeper/comm/src/data_types/request.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "Ive removed it now. Thanks",
+      "parentUuid": "09148124_8c00cd19",
+      "range": {
+        "startLine": 45,
+        "startChar": 54,
+        "endLine": 46,
+        "endChar": 72
+      },
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60e6bcf2_b7b4dfd7",
@@ -378,6 +744,24 @@
       "writtenOn": "2023-11-16T10:02:01Z",
       "side": 1,
       "message": "nit: for code identifiers, add backticks; for things that are in scope, also add square brackets so generated docs have links (passim)",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff7c4d63_8e4f1362",
+        "filename": "secretkeeper/comm/src/data_types/request.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60e6bcf2_b7b4dfd7",
       "revId": "daa6444d2605e8248d3559347da519fb34f69839",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -399,6 +783,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b725265a_fe08f533",
+        "filename": "secretkeeper/comm/src/data_types/request.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "Yes that would work. Neat Thanks!",
+      "parentUuid": "575dcb7d_562bd4f2",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70b3c44c_215035c2",
@@ -416,6 +818,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84b41196_cfb66a8d",
+        "filename": "secretkeeper/comm/src/data_types/request_response_impl.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70b3c44c_215035c2",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bfdcdb7_75cc4393",
@@ -429,6 +849,24 @@
       "writtenOn": "2023-11-16T10:02:01Z",
       "side": 1,
       "message": "Why non-exhaustive?",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddba5d46_cbe876d6",
+        "filename": "secretkeeper/comm/src/data_types/request_response_impl.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "We may want to make it backward compatible, it will be useful that the downstream dependencies do not assume that this is the exhaustive list for ever.",
+      "parentUuid": "0bfdcdb7_75cc4393",
       "revId": "daa6444d2605e8248d3559347da519fb34f69839",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -456,6 +894,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5858591_ff86155a",
+        "filename": "secretkeeper/comm/src/data_types/request_response_impl.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5656f873_2deae861",
+      "range": {
+        "startLine": 54,
+        "startChar": 20,
+        "endLine": 54,
+        "endChar": 37
+      },
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac5b049d_b688de05",
@@ -469,6 +931,24 @@
       "writtenOn": "2023-11-16T10:02:01Z",
       "side": 1,
       "message": "(Same comments as for request.rs)",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7588064_3ad51a60",
+        "filename": "secretkeeper/comm/src/data_types/response.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac5b049d_b688de05",
       "revId": "daa6444d2605e8248d3559347da519fb34f69839",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -507,6 +987,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32091c79_f3c2c8ee",
+        "filename": "secretkeeper/comm/src/lib.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "Done. I was initially thinking of creating the std version of the lib.",
+      "parentUuid": "89660cc2_65d547f1",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ddac9998_b04161d1",
@@ -520,6 +1018,24 @@
       "writtenOn": "2023-11-16T10:02:01Z",
       "side": 1,
       "message": "This comment would belong better as a `//!` comment in `data_types.rs`",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8682a955_f540ce02",
+        "filename": "secretkeeper/comm/src/lib.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddac9998_b04161d1",
       "revId": "daa6444d2605e8248d3559347da519fb34f69839",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -547,6 +1063,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41a5b7b4_a66b56a6",
+        "filename": "secretkeeper/comm/src/lib.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80400772_7061f9fc",
+      "range": {
+        "startLine": 28,
+        "startChar": 27,
+        "endLine": 28,
+        "endChar": 31
+      },
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f42ea150_71fb4f0b",
@@ -564,6 +1104,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4d33427_2edecd67",
+        "filename": "secretkeeper/comm/tests/data_types.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "I agree. Those should be VTS (the tests in this file are just for library unit tests). \nLet me create a TODO for those tests \u0026 I can add them after I merge other methods too (Get/Store secret). The HAL is not frozen yet, I\u0027d make sure I finish the TODO before it is frozen.",
+      "parentUuid": "f42ea150_71fb4f0b",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e314db1_1e9b8948",
@@ -577,6 +1135,24 @@
       "writtenOn": "2023-11-16T10:02:01Z",
       "side": 1,
       "message": "Remove or fix?",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb6cde53_f009a053",
+        "filename": "secretkeeper/comm/tests/data_types.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-17T18:35:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e314db1_1e9b8948",
       "revId": "daa6444d2605e8248d3559347da519fb34f69839",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
