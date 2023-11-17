@@ -120,6 +120,9 @@ pub enum RequestProcessingError {
 
     /// The requested operation has not been implemented.
     OperationUnimplemented,
+
+    /// An error happened during the DER encoding/decoding.
+    DerError,
 }
 
 impl fmt::Display for RequestProcessingError {
@@ -142,6 +145,9 @@ impl fmt::Display for RequestProcessingError {
             Self::OperationUnimplemented => {
                 write!(f, "The requested operation has not been implemented")
             }
+            Self::DerError => {
+                write!(f, "An error happened during the DER encoding/decoding")
+            }
         }
     }
 }
@@ -163,6 +169,14 @@ impl From<ciborium::value::Error> for RequestProcessingError {
     fn from(e: ciborium::value::Error) -> Self {
         error!("CborValueError: {e}");
         Self::CborValueError
+    }
+}
+
+#[cfg(not(feature = "std"))]
+impl From<der::Error> for RequestProcessingError {
+    fn from(e: der::Error) -> Self {
+        error!("DER encoding/decoding error: {e}");
+        Self::DerError
     }
 }
 
