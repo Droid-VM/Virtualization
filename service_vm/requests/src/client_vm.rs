@@ -15,11 +15,13 @@
 //! This module contains functions related to the attestation of the
 //! client VM.
 
+use crate::cert;
 use crate::keyblob::decrypt_private_key;
 use alloc::vec::Vec;
 use bssl_avf::{sha256, EcKey};
 use core::result;
 use coset::{CborSerializable, CoseSign};
+use der::Encode;
 use diced_open_dice::DiceArtifacts;
 use log::error;
 use service_vm_comm::{ClientVmAttestationParams, Csr, CsrPayload, RequestProcessingError};
@@ -50,6 +52,7 @@ pub(super) fn request_attestation(
     cose_sign.verify_signature(ATTESTATION_KEY_SIGNATURE_INDEX, aad, |signature, message| {
         ecdsa_verify(&ec_public_key, signature, message)
     })?;
+    let subject_public_key_info = ec_public_key.subject_public_key_info()?;
 
     // TODO(b/278717513): Compare client VM's DICE chain in the `csr` up to pvmfw
     // cert with RKP VM's DICE chain.
@@ -60,15 +63,23 @@ pub(super) fn request_attestation(
                 error!("Failed to decrypt the remotely provisioned key blob: {e}");
                 RequestProcessingError::FailedToDecryptKeyBlob
             })?;
-    let _ec_private_key = EcKey::from_ec_private_key(private_key.as_slice())?;
+    let ec_private_key = EcKey::from_ec_private_key(private_key.as_slice())?;
 
-    // TODO(b/309441500): Build a new certificate signed with the remotely provisioned
-    // `_private_key`.
-    Err(RequestProcessingError::OperationUnimplemented)
+    let attestation_ext = cert::AttestationExtension::new(&csr_payload.challenge).to_vec()?;
+    let tbs_cert = cert::build_tbs_certificate(&subject_public_key_info, &attestation_ext)?;
+
+    let signature = ecdsa_sign(&ec_private_key, &tbs_cert.to_vec()?)?;
+    let certificate = cert::build_certificate(tbs_cert, &signature)?;
+    Ok(certificate.to_vec()?)
 }
 
 fn ecdsa_verify(key: &EcKey, signature: &[u8], message: &[u8]) -> bssl_avf::Result<()> {
     // The message was signed with ECDSA with curve P-256 and SHA-256 at the signature generation.
     let digest = sha256(message)?;
     key.ecdsa_verify(signature, &digest)
+}
+
+fn ecdsa_sign(key: &EcKey, message: &[u8]) -> bssl_avf::Result<Vec<u8>> {
+    let digest = sha256(message)?;
+    key.ecdsa_sign(&digest)
 }
