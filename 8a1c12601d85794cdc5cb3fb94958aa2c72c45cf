@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01b867c5_ae814007",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-11-20T16:00:38Z",
+      "side": 1,
+      "message": "Double checking - is any of what you\u0027re printing in this CL supposed to be confidential? Logging crypto is generally considered to be a bad idea, but AFAICT you\u0027re only printing public key information?",
+      "range": {
+        "startLine": 255,
+        "startChar": 60,
+        "endLine": 255,
+        "endChar": 65
+      },
+      "revId": "8a1c12601d85794cdc5cb3fb94958aa2c72c45cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d8d1ddf_89beed18",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-11-20T16:00:38Z",
+      "side": 1,
+      "message": "Name your constants",
+      "range": {
+        "startLine": 48,
+        "startChar": 31,
+        "endLine": 48,
+        "endChar": 32
+      },
+      "revId": "8a1c12601d85794cdc5cb3fb94958aa2c72c45cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
