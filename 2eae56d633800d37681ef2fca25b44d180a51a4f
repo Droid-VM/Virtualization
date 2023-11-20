@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b24224d_17715db6",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2023-11-20T17:41:36Z",
+      "side": 1,
+      "message": "I just had a look and the code already does that\nhttps://android-kvm.googlesource.com/linux/+/refs/heads/smostafa/for/dev-assign-Android14-6.1/arch/arm64/kvm/hyp/nvhe/device/device.c#87",
+      "parentUuid": "d9c40f06_8bd2847a",
+      "range": {
+        "startLine": 83,
+        "startChar": 46,
+        "endLine": 83,
+        "endChar": 53
+      },
+      "revId": "2eae56d633800d37681ef2fca25b44d180a51a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8a87ff5a_990b17ce",
@@ -254,6 +278,29 @@
         "startChar": 28,
         "endLine": 193,
         "endChar": 48
+      },
+      "revId": "2eae56d633800d37681ef2fca25b44d180a51a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79cf8d11_bb1034b7",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2023-11-20T17:41:36Z",
+      "side": 1,
+      "message": "This HVC has three returns\n\n0 \u003d\u003e error code\n1 \u003d\u003e iommu id\n2 \u003d\u003e sid\n\nhttps://android-kvm.googlesource.com/linux/+/refs/heads/smostafa/for/dev-assign-Android14-6.1/arch/arm64/kvm/hyp/nvhe/device/device.c#138",
+      "range": {
+        "startLine": 193,
+        "startChar": 8,
+        "endLine": 193,
+        "endChar": 56
       },
       "revId": "2eae56d633800d37681ef2fca25b44d180a51a4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
