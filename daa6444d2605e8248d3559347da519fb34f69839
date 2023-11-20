@@ -330,6 +330,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a743bff0_7979e4e5",
+        "filename": "secretkeeper/comm/src/data_types/error.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-20T11:15:40Z",
+      "side": 1,
+      "message": "I\u0027m not sure that the `Debug` implementations (here and below) adds much compared to the `derive(Debug)` version.",
+      "parentUuid": "e5843ee8_1d4bb29e",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8dc1fb2f_1bec13b6",
         "filename": "secretkeeper/comm/src/data_types/error.rs",
         "patchSetId": 12
@@ -485,6 +503,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f77b8d9d_e547942a",
+        "filename": "secretkeeper/comm/src/data_types/packet.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-20T11:15:40Z",
+      "side": 1,
+      "message": "It feels a bit like this is adding a layer of complexity for very little gain in functionality.  However, let\u0027s not hold up getting the CL in -- we can discuss and possibly change later.",
+      "parentUuid": "3e98350d_9121e3ae",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f2ed4b6_3a60de30",
@@ -616,6 +652,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b27ed592_6f4245ee",
+        "filename": "secretkeeper/comm/src/data_types/request.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-20T11:15:40Z",
+      "side": 1,
+      "message": "Yeah, there\u0027s no mention of \"Arguments\" sections there, nor at https://doc.rust-lang.org/book/ch14-02-publishing-to-crates-io.html#commonly-used-sections",
+      "parentUuid": "56613ec4_9f83301c",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce5e964e_ba26877a",
         "filename": "secretkeeper/comm/src/data_types/request.rs",
         "patchSetId": 12
@@ -680,6 +734,24 @@
       "side": 1,
       "message": "Option1:\nI actually do want args \u0026 serialize_to_packet to consume Self. Unfortunately, Consuming Self will leads to unsized param \u0026 this is not stable yet - https://github.com/rust-lang/rust/issues/48055\n\nOption2:\nfn args(\u0026self) -\u003e \u0026[Value]). The implementation of the trait can maintain \narguments in whatever form they like, it doesn\u0027t have to be vector. For ex, \n\n```\npub struct StoreSecretRequest {\n    // Unique identifier of the secret\n    id: Id,\n    // The secret the client wishes to store\n    secret: Secret,\n    // The dice policy corresponding to the secret\n    sealing_policy: Vec\u003cu8\u003e,\n}\n```\n\nSo I\u0027m not sure if returning a slice of Values in such cases is possible at all",
       "parentUuid": "82eaf6d1_ef92b49a",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33144eba_562f0c9a",
+        "filename": "secretkeeper/comm/src/data_types/request.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-20T11:15:40Z",
+      "side": 1,
+      "message": "We keep hitting oddities because of the need for object safety.  Perhaps re-visit *not* using trait objects? (We can do this subsequent to this CL.)",
+      "parentUuid": "e90088c9_aebfb07b",
       "revId": "daa6444d2605e8248d3559347da519fb34f69839",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -867,6 +939,24 @@
       "side": 1,
       "message": "We may want to make it backward compatible, it will be useful that the downstream dependencies do not assume that this is the exhaustive list for ever.",
       "parentUuid": "0bfdcdb7_75cc4393",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b6f235b_38d3701e",
+        "filename": "secretkeeper/comm/src/data_types/request_response_impl.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-20T11:15:40Z",
+      "side": 1,
+      "message": "I think the opposite is true -- if it\u0027s non-exhaustive, then any code that uses this library will be forced to make code changes when a new message arrives.",
+      "parentUuid": "ddba5d46_cbe876d6",
       "revId": "daa6444d2605e8248d3559347da519fb34f69839",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
