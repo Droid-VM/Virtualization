@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af57ed28_62eb9c58",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-20T16:42:35Z",
+      "side": 1,
+      "message": "Done. Otherwise since `signature.len() \u003d\u003d ECDSA_size()`, it has less chance to explode.",
+      "parentUuid": "d0dc91a4_f6cf4424",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 53
+      },
+      "revId": "266ebd12fec016abf6e7d5cbd92f1e158897924e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3f37dce_5f24f19e",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-20T16:22:45Z",
       "side": 1,
       "message": "Fix in the previous CL, which introduced this",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 69
+      },
+      "revId": "266ebd12fec016abf6e7d5cbd92f1e158897924e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a1b7e14_3aecbad6",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-20T16:42:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3f37dce_5f24f19e",
       "range": {
         "startLine": 41,
         "startChar": 0,
