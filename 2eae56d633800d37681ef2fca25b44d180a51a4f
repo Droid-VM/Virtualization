@@ -192,6 +192,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "75cd7986_97624e7a",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2023-11-20T18:58:48Z",
+      "side": 1,
+      "message": "\u003e Many results of rgrep \u0027reg \u003d\u0027 arch/arm64/boot/dts/ aren\u0027t 4KiB-aligned in size.\n\nDoes any of these actually have the rest of the page free but are described with less than that, so they are assignable by HW but would be rejected by pKVM?\n\nI am not sure how we can address this, for example VFIO will not allow mapping devices to user space if they are not aligned to `PAGE_SIZE`[1], I think it is a valid requirement, and pKVM should reject assignment if the device is not aligned and for devices that need to do so, they should fix their device tree.\n\nOne other approach would be to allow any device to be registered for assignment and pKVM would unmap the MMIO from the host with `PAGE_SIZE` alignment when the device is assigned, however I don\u0027t like that as it is less transparent.\n\n[1] https://elixir.bootlin.com/linux/v6.2/source/drivers/vfio/platform/vfio_platform_common.c#L169",
+      "parentUuid": "18d1fdb9_0fa66843",
+      "range": {
+        "startLine": 83,
+        "startChar": 46,
+        "endLine": 83,
+        "endChar": 53
+      },
+      "revId": "2eae56d633800d37681ef2fca25b44d180a51a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8a87ff5a_990b17ce",
