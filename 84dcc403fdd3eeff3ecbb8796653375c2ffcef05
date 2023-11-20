@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b9a665f_c3f54f0d",
+        "filename": "secretkeeper/comm/src/cbor_convert.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-20T14:55:15Z",
+      "side": 1,
+      "message": "Fixed it, here \u0026 at other places",
+      "parentUuid": "4db06b94_b6b3462a",
+      "range": {
+        "startLine": 17,
+        "startChar": 30,
+        "endLine": 17,
+        "endChar": 34
+      },
+      "revId": "84dcc403fdd3eeff3ecbb8796653375c2ffcef05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c31e5c3b_e484e28a",
@@ -70,6 +94,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "110704d9_726bc099",
+        "filename": "secretkeeper/comm/src/data_types/error.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-20T14:55:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c31e5c3b_e484e28a",
+      "range": {
+        "startLine": 17,
+        "startChar": 4,
+        "endLine": 17,
+        "endChar": 5
+      },
+      "revId": "84dcc403fdd3eeff3ecbb8796653375c2ffcef05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa3edbdd_2ad61590",
+        "filename": "secretkeeper/comm/src/data_types/error.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-20T14:55:15Z",
+      "side": 1,
+      "message": "Fixed. Thanks",
+      "parentUuid": "001c877c_46923379",
+      "range": {
+        "startLine": 17,
+        "startChar": 66,
+        "endLine": 17,
+        "endChar": 70
+      },
+      "revId": "84dcc403fdd3eeff3ecbb8796653375c2ffcef05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "adc22f60_ac6de333",
@@ -83,6 +155,24 @@
       "writtenOn": "2023-11-20T11:15:40Z",
       "side": 1,
       "message": "Need a couple of error tests to exercise the checks in `Response::new`",
+      "revId": "84dcc403fdd3eeff3ecbb8796653375c2ffcef05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bba5c73_ac0672fe",
+        "filename": "secretkeeper/comm/tests/data_types.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-20T14:55:15Z",
+      "side": 1,
+      "message": "I added `invalid_get_version_response_creation` \u0026 `invalid_get_version_request_creation`.\n\nThe thing is, they are very request specific (get_version unit tests will be different from get_secret; but we should have unit tests for all anyway). Please not that `Response::new`  does NOT return a trait object, but the concrete struct object.",
+      "parentUuid": "adc22f60_ac6de333",
       "revId": "84dcc403fdd3eeff3ecbb8796653375c2ffcef05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

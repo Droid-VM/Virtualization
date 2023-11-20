@@ -346,6 +346,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80eed8c3_abffb325",
+        "filename": "secretkeeper/comm/src/data_types/error.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-20T14:55:15Z",
+      "side": 1,
+      "message": "I was thinking we could later use it for ErrorMessage \u0026 hence writing something custom may help. But as we discussed, lets just stick to error_code.\n\nSticking to derive(Debug) as recommended.",
+      "parentUuid": "a743bff0_7979e4e5",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8dc1fb2f_1bec13b6",
@@ -668,6 +686,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa036ced_b27abf44",
+        "filename": "secretkeeper/comm/src/data_types/request.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-20T14:55:15Z",
+      "side": 1,
+      "message": "The rustdoc generates an appropriate section...\nhttps://screenshot.googleplex.com/99Ai6cCCnjMLpC5 (at **/data_types/request/trait.Request.html#arguments)",
+      "parentUuid": "b27ed592_6f4245ee",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce5e964e_ba26877a",
@@ -752,6 +788,24 @@
       "side": 1,
       "message": "We keep hitting oddities because of the need for object safety.  Perhaps re-visit *not* using trait objects? (We can do this subsequent to this CL.)",
       "parentUuid": "e90088c9_aebfb07b",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "857e317b_65f141c3",
+        "filename": "secretkeeper/comm/src/data_types/request.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-20T14:55:15Z",
+      "side": 1,
+      "message": "We\u0027re actually not using trait object (atleast not for Request/Response). I use trait just to ensure some behaviour is shared by all Requests/responses (defined in this module), but we never use trait objects.\n\nWe hit the problem of unsized param is not due to object safety because we wanted to give have default impl of `serialize_to_packet`.",
+      "parentUuid": "33144eba_562f0c9a",
       "revId": "daa6444d2605e8248d3559347da519fb34f69839",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -961,6 +1015,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06f79926_56765bd1",
+        "filename": "secretkeeper/comm/src/data_types/request_response_impl.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-20T14:55:15Z",
+      "side": 1,
+      "message": "I believe non_exhaustive limits the downstream by requiring it have a wildcard arm while matching the enum. \n\nThis way it ensures that the downstream doesnt break when the enum is extended. Have a look at `process_opaque_request_unhandled_error` in the secretkeeper implementation (which is downstream)",
+      "parentUuid": "6b6f235b_38d3701e",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5656f873_2deae861",
@@ -1056,6 +1128,24 @@
       "writtenOn": "2023-11-16T10:02:01Z",
       "side": 1,
       "message": "This won\u0027t generate a doc section correctly.",
+      "revId": "daa6444d2605e8248d3559347da519fb34f69839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1245e10a_66146109",
+        "filename": "secretkeeper/comm/src/data_types/response.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-20T14:55:15Z",
+      "side": 1,
+      "message": "Fixed it. Thanks",
+      "parentUuid": "a741a906_dee184a9",
       "revId": "daa6444d2605e8248d3559347da519fb34f69839",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
