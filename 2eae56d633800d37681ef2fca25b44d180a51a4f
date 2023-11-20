@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce5a145d_a1beb611",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-20T17:18:20Z",
+      "side": 1,
+      "message": "@smostafa@google.com let\u0027s use the pKVM ABI to define this API.\n\nDoes \"success\" simply mean that there exists a region of `size` bytes starting at `base_ipa` that\u0027s mapped to a physical MMIO region? Or does the match need to be exact e.g. if there exist a region of `0x2000` bytes at `0x10000`, does `request_mmio(0x11000, 0x1000)` succeed?\n\nAlso, must `size` be a multiple of the (stage-2?) page size? What if there are 2 contiguous 2KiB regions in the same page? Does the hypervisor expect a single call per page?",
+      "range": {
+        "startLine": 83,
+        "startChar": 46,
+        "endLine": 83,
+        "endChar": 53
+      },
+      "revId": "2eae56d633800d37681ef2fca25b44d180a51a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8a87ff5a_990b17ce",
