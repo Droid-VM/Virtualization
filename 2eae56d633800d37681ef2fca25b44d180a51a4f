@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7ff50d9_e9be50ec",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2023-11-20T17:47:23Z",
+      "side": 1,
+      "message": "\u003e This is exactly what Result\u003cu64\u003e means 😊\n\nAh, I said function but I meant the HVC.\n\n\u003e  assigned as a group with all the other devices in said page but doesn\u0027t cover the whole page\n\nDo you mean that 2 VMs or host and a VM would share part of a page of the MMIO of the device?",
+      "parentUuid": "03c26f1c_28b9814b",
+      "range": {
+        "startLine": 83,
+        "startChar": 46,
+        "endLine": 83,
+        "endChar": 53
+      },
+      "revId": "2eae56d633800d37681ef2fca25b44d180a51a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8a87ff5a_990b17ce",
