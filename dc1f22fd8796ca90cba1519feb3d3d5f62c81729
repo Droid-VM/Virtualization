@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "269d11c5_07b1203a",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-11-20T17:12:00Z",
+      "side": 1,
+      "message": "What sort of guarantee that this will actually happen are we looking for here? This process could crash and then this cleanup would never happen. That\u0027s not a problem for something like the temp files above because we will simply clean them up when a new VM is started.\n\nOne way of also improving this is garbage collection - VfioHandler could return an object on assignment and unbind when the refcount drops to zero. We have those mechanics in place.",
+      "range": {
+        "startLine": 414,
+        "startChar": 0,
+        "endLine": 414,
+        "endChar": 53
+      },
+      "revId": "dc1f22fd8796ca90cba1519feb3d3d5f62c81729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
