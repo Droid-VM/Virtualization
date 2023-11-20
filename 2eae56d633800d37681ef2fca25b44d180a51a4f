@@ -95,6 +95,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1f1697f1_446c9266",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-20T17:08:58Z",
+      "side": 1,
+      "message": "@smostafa@google.com\n\n`SID_DONT_CARE` is just a macro (`#define SID_DONT_CARE (-1)`) in `pviommu-host.h`, but it\u0027s used as `u32` in `arch/arm64/kvm/hyp/nvhe/iommu/pviommu-host.c`.\n\n`pkvm_pviommu_route()` takes `vsid` as `u32`, so I thought that `u32` is bit more correct although knowing that `vsid` is `u32` involves too much internal details.\n\nSo my follow-up questions are:\n\n  - Would it be better to change `SID_DONT_CARE` to `u64::MAX`?\n  - Should I change `vsid` param to `Option\u003cu32\u003e` or validate given `vsid` is in valid `u32` range?",
+      "parentUuid": "0dd1dfb2_20fad144",
+      "range": {
+        "startLine": 186,
+        "startChar": 35,
+        "endLine": 186,
+        "endChar": 38
+      },
+      "revId": "2eae56d633800d37681ef2fca25b44d180a51a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e374ac2_d2182b5e",
         "filename": "libs/hyp/src/hypervisor/kvm.rs",
         "patchSetId": 12
