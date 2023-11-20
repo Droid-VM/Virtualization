@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a87ff5a_990b17ce",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-20T16:54:49Z",
+      "side": 1,
+      "message": "For now, we can assume that `DeviceAssigningHypervisor` will only be used by pvmfw if a VM DTBO has been found so making `ProtectedKvmHypervisor::as_device_assigner` succeed unconditionally is fine.\n\nFYI, long term, I\u0027d like to refactor `libhyp` to dynamically discover the pKVM capabilities (b/290380929#comment11) but that requires more refactoring of the crate. That isn\u0027t a blocker for your work.",
+      "range": {
+        "startLine": 100,
+        "startChar": 8,
+        "endLine": 100,
+        "endChar": 12
+      },
+      "revId": "2eae56d633800d37681ef2fca25b44d180a51a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f10e820e_f5b8d076",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-20T16:54:49Z",
+      "side": 1,
+      "message": "Trait methods are typically only documented in the trait (as you\u0027re already doing in `common.rs`) so this is redundant.",
+      "range": {
+        "startLine": 174,
+        "startChar": 4,
+        "endLine": 174,
+        "endChar": 7
+      },
+      "revId": "2eae56d633800d37681ef2fca25b44d180a51a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dd1dfb2_20fad144",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-20T16:54:49Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be `u64`? `u32::MAX as u64` isn\u0027t \"`-1`\" in a `u64`.",
+      "range": {
+        "startLine": 186,
+        "startChar": 35,
+        "endLine": 186,
+        "endChar": 38
+      },
+      "revId": "2eae56d633800d37681ef2fca25b44d180a51a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e374ac2_d2182b5e",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-20T16:54:49Z",
+      "side": 1,
+      "message": "@smostafa@google.com, this prevents token `0` from being used which seems to contradict with your desire of decoupling physIOMMU tokens from their base MMIO PAs (where I guess you\u0027re assuming that `NULL` isn\u0027t a valid MMIO address)?",
+      "range": {
+        "startLine": 193,
+        "startChar": 28,
+        "endLine": 193,
+        "endChar": 48
+      },
+      "revId": "2eae56d633800d37681ef2fca25b44d180a51a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
