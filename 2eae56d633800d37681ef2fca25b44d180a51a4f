@@ -168,6 +168,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "18d1fdb9_0fa66843",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-20T18:34:41Z",
+      "side": 1,
+      "message": "\u003e That\u0027s what is done now, (in the link I sent above)\n\nAck; I thought you were adding more details and had missed that you were actually correcting yourself.\n\n\u003e I believe the best solution for this is to make `regs` `PAGE_SIZE` aligned and the driver would ignore the rest of the MMIO. [...] For the second case, I guess they would be described as one device, as each one can\u0027t be isolated separately.\n\nRight; I feel like this is conflating driver binding with \"assignability\". The former, either happening in the guest or host, should only use `\u003creg\u003e` (not more) and have no dependency on `PAGE_SIZE` (hidden behind `ioremap`, as you said), while only assignment (to VMs or even regular VFIO) does.\n\nI guess this isn\u0027t something we\u0027re addressing here but I wonder if a cleaner sub-page registration of the `\"pkvm,device-assignment\"` nodes would be possible, to support the calls I\u0027m describing above, which could be added later in a backward-compatible way AFAICT.\n\n\u003e I am not sure if there is any case like this exists\n\nMany results of `rgrep \u0027reg \u003d\u0027 arch/arm64/boot/dts/` aren\u0027t 4KiB-aligned in size.",
+      "parentUuid": "94f86720_f990c22e",
+      "range": {
+        "startLine": 83,
+        "startChar": 46,
+        "endLine": 83,
+        "endChar": 53
+      },
+      "revId": "2eae56d633800d37681ef2fca25b44d180a51a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8a87ff5a_990b17ce",
