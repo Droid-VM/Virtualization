@@ -120,6 +120,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "0454a386_ded34420",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-20T17:55:20Z",
+      "side": 1,
+      "message": "\u003e Ah, I said function but I meant the HVC.\n\nI see; why don\u0027t you want to use the SMCCC `R0` result? Negative values/the sign bit?\n\n\u003e Do you mean that 2 VMs or host and a VM would share part of a page of the MMIO of the device?\n\nNo, I meant assigning **to the same pVM** `devA` alone when (host DT)\n```\n/{\n    devA@0x1000 { reg \u003d \u003c0x1000 0x800\u003e };\n    // nothing else uses page 0x1000\n}\n```\nor `devA` and `devB` when\n```\n/{\n    devA@0x1000 { reg \u003d \u003c0x1000 0x800\u003e };\n    devB@0x1800 { reg \u003d \u003c0x1800 0x800\u003e };\n}\n```\nwhich are both valid assignments AFAICT and would result in (resp.) the HVCs\n```\nrequest_mmio(0x1000, 0x800);\n```\nand\n```\nrequest_mmio(0x1000, 0x800);\nrequest_mmio(0x1800, 0x800);\n```\nall of which would (incorrectly, IMO) fail if `size` (or even `base_ipa`) had to be page-aligned?",
+      "parentUuid": "f7ff50d9_e9be50ec",
+      "range": {
+        "startLine": 83,
+        "startChar": 46,
+        "endLine": 83,
+        "endChar": 53
+      },
+      "revId": "2eae56d633800d37681ef2fca25b44d180a51a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8a87ff5a_990b17ce",
