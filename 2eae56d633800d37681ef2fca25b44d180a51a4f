@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "03c26f1c_28b9814b",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-20T17:43:34Z",
+      "side": 1,
+      "message": "\u003e it would be better to change that and return 2 values, an error code and the token if error code \u003d\u003d 0.\n\nThis is exactly what `Result\u003cu64\u003e` means 😊\n\n\u003e Regarding the size, currently, the function must pass the range as seen in the device tree\n\nAck so that must be documented here.\n\n\u003e If we have a resource less than that, so this device can\u0027t be assigned.\n\nBut aren\u0027t there cases where the MMIO is isolated in its own page (so assignable) or assigned as a group with all the other devices in said page but doesn\u0027t cover the whole page? In that case `\u003creg\u003e` would contain less than `PAGE_SIZE` (as the guest driver doesn\u0027t need/shouldn\u0027t get more) but should still be verifiable through this interface, no?",
+      "parentUuid": "d9c40f06_8bd2847a",
+      "range": {
+        "startLine": 83,
+        "startChar": 46,
+        "endLine": 83,
+        "endChar": 53
+      },
+      "revId": "2eae56d633800d37681ef2fca25b44d180a51a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8a87ff5a_990b17ce",
