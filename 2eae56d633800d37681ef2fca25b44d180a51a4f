@@ -216,6 +216,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f26426f_f2ff0c0d",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-20T19:21:50Z",
+      "side": 1,
+      "message": "Okay, thanks for the pointers; so as long as [1] exists, we won\u0027t have a uAPI to assign devices with sub-page granularity anyway, even if it might make sense in some particular cases.\n\nKeeping this comment thread open for @jaewan@google.com to document these points, as we\u0027ll need to validate these assumptions when pvmfw gets extended to DA on other hypervisors i.e. the hypervisor rejects misaligned `base_ipa` \u0026 `size` (remember that `PAGE_SIZE` might not be 4KiB!) or `size` not covering the whole region and, on success, the result is a _token_, not a PA (pKVM currently having token\u003d\u003dPA is an implementation detail).\n\nAlso, can we rename the method to something more descriptive such as `get_phys_mmio_token`, because it currently sounds like it\u0027s requesting the actual MMIO assignment to be performed? Similarly, `get_phys_iommu_token` below?",
+      "parentUuid": "75cd7986_97624e7a",
+      "range": {
+        "startLine": 83,
+        "startChar": 46,
+        "endLine": 83,
+        "endChar": 53
+      },
+      "revId": "2eae56d633800d37681ef2fca25b44d180a51a4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8a87ff5a_990b17ce",
