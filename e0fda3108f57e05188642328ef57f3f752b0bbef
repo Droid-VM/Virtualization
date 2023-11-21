@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "48374075_2fca029f",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-21T10:27:53Z",
+      "side": 1,
+      "message": "That\u0027s an implementation detail of pKVM, which might not be true for other hypervisors (they might no rely on lazy mapping of guest memory and/or MMIO) and which isn\u0027t visible to pvmfw (assuming that the VMM has properly `mmap`-ed the MMIO before booting the pVM) so no need to mention it in these hypervisor-agnostic methods.",
+      "range": {
+        "startLine": 85,
+        "startChar": 8,
+        "endLine": 85,
+        "endChar": 71
+      },
+      "revId": "e0fda3108f57e05188642328ef57f3f752b0bbef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1171e5ce_82aac9c2",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-21T10:27:53Z",
+      "side": 1,
+      "message": "nit: group these with the other `impl`s, before the helper functions.",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 179,
+        "endChar": 4
+      },
+      "revId": "e0fda3108f57e05188642328ef57f3f752b0bbef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "654c36cb_3c8ac245",
         "filename": "libs/hyp/src/hypervisor/kvm.rs",
         "patchSetId": 13
