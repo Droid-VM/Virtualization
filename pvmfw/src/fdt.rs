@@ -711,10 +711,20 @@ fn parse_device_tree(fdt: &Fdt, vm_dtbo: Option<&VmDtbo>) -> Result<DeviceTreeIn
     validate_swiotlb_info(&swiotlb_info, &memory_range)?;
 
     let device_assignment = match vm_dtbo {
-        Some(vm_dtbo) => DeviceAssignmentInfo::parse(fdt, vm_dtbo).map_err(|e| {
-            error!("Failed to parse device assignment from DT and VM DTBO: {e}");
-            RebootReason::InvalidFdt
-        })?,
+        Some(vm_dtbo) => {
+            let hypervisor = hyp::get_device_assigner();
+            match DeviceAssignmentInfo::parse(fdt, vm_dtbo, hypervisor) {
+                Ok(info) => Ok(info),
+                Err(DeviceAssignmentError::NoDeviceAssigningHypervisor) => {
+                    warn!("Device assignment would be ignored because device assigning hypervisor is missing");
+                    Ok(None)
+                }
+                Err(e) => {
+                    error!("Failed to parse device assignment from DT and VM DTBO: {e}");
+                    RebootReason::InvalidFdt
+                }
+            }?
+        }
         None => None,
     };
 
