@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7fa78639_c329f723",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-11-21T11:01:35Z",
+      "side": 1,
+      "message": "We can wait but we know what the option looks like because it was accepted upstream. We also already merged aosp/2828244, which is in the same situation. And actually all of VFIO is broken today if you think about it - crosvm might parse the cmdline options but it will crash immediately after.",
+      "parentUuid": "0b316c68_e27fe9da",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 36
+      },
+      "revId": "26944e3b8eed54efe0ae69c281f037a0318807bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7044f5d5_72381949",
         "filename": "virtualizationmanager/src/crosvm.rs",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-21T01:22:56Z",
       "side": 1,
       "message": "To use `--device-tree-overlay`, AFAIR you should add suffix like `--device-tree-overlay\u003d/path/to/file,filter`\n\nhttps://source.chromium.org/chromiumos/chromiumos/codesearch/+/main:src/platform/crosvm/src/crosvm/config.rs;l\u003d1689-1701",
+      "range": {
+        "startLine": 736,
+        "startChar": 0,
+        "endLine": 736,
+        "endChar": 96
+      },
+      "revId": "26944e3b8eed54efe0ae69c281f037a0318807bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bec898d7_839e839f",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-11-21T11:01:35Z",
+      "side": 1,
+      "message": "good catch!",
+      "parentUuid": "7044f5d5_72381949",
       "range": {
         "startLine": 736,
         "startChar": 0,
