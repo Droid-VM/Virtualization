@@ -68,6 +68,30 @@
       },
       "revId": "e0fda3108f57e05188642328ef57f3f752b0bbef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2db682bb_3b722a6a",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-21T10:39:35Z",
+      "side": 1,
+      "message": "This LGTM as `pkvm_device_request_mmio` has\n```\nu64 ipa \u003d smccc_get_arg1(vcpu);\nu64 size \u003d smccc_get_arg2(vcpu);\n```\nthen\n```\nsmccc_set_retval(vcpu, SMCCC_RET_SUCCESS, token, 0, 0)\n```\nor\n```\nsmccc_set_retval(vcpu, SMCCC_RET_INVALID_PARAMETER, 0, 0, 0)\n```\nso we pass FID + 2 arguments (`base_ipa` \u0026 `size`) to the HVC, then check the returned X0 in `checked_hvc64_expect_results` (\"`success_or_error_64(ret)`\") before returning X1 on success (\"`Ok(ret[0])`\").\n\nWhat am I missing?",
+      "parentUuid": "654c36cb_3c8ac245",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 23
+      },
+      "revId": "e0fda3108f57e05188642328ef57f3f752b0bbef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
