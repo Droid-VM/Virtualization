@@ -16,6 +16,52 @@
       "message": "Local test is passing on \n\n```\n[28/118] com.android.microdroid.test.MicrodroidTests#outputIsRedirectedToLogcatIfNotCaptured[protectedVm\u003dfalse]: PASSED (2.007s) \n...\n[87/118] com.android.microdroid.test.MicrodroidTests#outputIsRedirectedToLogcatIfNotCaptured[protectedVm\u003dtrue]: PASSED (2.985s)  \n...\narm64-v8a MicrodroidTestApp: Passed: 112, Failed: 0, Ignored: 0, Assumption Failed: 6, \n```\n\nThe build was panther-userdebug from AP1A.231120.001.X1 (git_24Q1-release where targets are using the -next config).",
       "revId": "3e07c4fdfbc4621a342c5bebf90c81cd3c3a6dcf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7292ab0_7c4afe62",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-21T15:19:51Z",
+      "side": 1,
+      "message": "Line too long.\n(I thought we had upload hooks to complain about that?)",
+      "range": {
+        "startLine": 436,
+        "startChar": 17,
+        "endLine": 436,
+        "endChar": 106
+      },
+      "revId": "3e07c4fdfbc4621a342c5bebf90c81cd3c3a6dcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c651f1a_81e73fc1",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1620,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-21T15:19:51Z",
+      "side": 1,
+      "message": "I guess you checked, but I didn\u0027t realize multiple -e options were allowed, nor that they were ORed.",
+      "range": {
+        "startLine": 1617,
+        "startChar": 0,
+        "endLine": 1620,
+        "endChar": 88
+      },
+      "revId": "3e07c4fdfbc4621a342c5bebf90c81cd3c3a6dcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
