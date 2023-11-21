@@ -22,6 +22,30 @@
       },
       "revId": "cad8d5e78acaaf62e2ce38e943a4318fa34aec83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "021cd272_a8772996",
+        "filename": "libs/libfdt/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-11-21T01:03:09Z",
+      "side": 1,
+      "message": "Yes, the other dts file [includes it](https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/libfdt/tests/data/test_tree_one_memory_range.dts;l\u003d1;drc\u003d2422bdc31e7be8ce73a9b1ed1e39c2f6db925b18), which worked without sandboxing, but won\u0027t work with sandboxing unless it\u0027s included in the `srcs` property.",
+      "parentUuid": "f2ff66ce_77000aff",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 50
+      },
+      "revId": "cad8d5e78acaaf62e2ce38e943a4318fa34aec83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
