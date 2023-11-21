@@ -55,6 +55,8 @@ pub enum DeviceAssignmentError {
     InvalidInterrupts,
     /// Invalid <iommus>
     InvalidIommus,
+    /// Invalid pvIOMMU node
+    InvalidPvIommu,
     /// Too many pvIOMMU
     TooManyPvIommu,
     /// Duplicated pvIOMMU IDs exist
@@ -83,6 +85,7 @@ impl fmt::Display for DeviceAssignmentError {
             ),
             Self::InvalidInterrupts => write!(f, "Invalid <interrupts>"),
             Self::InvalidIommus => write!(f, "Invalid <iommus>"),
+            Self::InvalidPvIommu => write!(f, "Invalid pvIOMMU node"),
             Self::TooManyPvIommu => write!(
                 f,
                 "Too many pvIOMMU node. Insufficient pre-populated pvIOMMUs in platform DT"
@@ -195,10 +198,20 @@ struct PvIommu {
 
 impl PvIommu {
     fn parse(node: &FdtNode) -> Result<Self> {
-        let id = node.getprop_u32(cstr!("id"))?.ok_or(DeviceAssignmentError::InvalidIommus)?;
+        let iommu_cells = node
+            .getprop_u32(cstr!("#iommu-cells"))?
+            .ok_or(DeviceAssignmentError::InvalidPvIommu)?;
+        // Ensures <#iommu_cells> = 1. (i.e. An `<iommu>` entry contains pair of (pviommu_id, vsid))
+        if iommu_cells != 1 {
+            return Err(DeviceAssignmentError::InvalidPvIommu);
+        }
+        let id = node.getprop_u32(cstr!("id"))?.ok_or(DeviceAssignmentError::InvalidPvIommu)?;
         Ok(Self { id })
     }
 }
+
+#[derive(Debug, Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+struct VSID(u32);
 
 /// Assigned device information parsed from crosvm DT.
 /// Keeps everything in the owned data because underlying FDT will be reused for platform DT.
@@ -212,8 +225,8 @@ struct AssignedDeviceInfo {
     reg: Vec<u8>,
     // <interrupts> property from the crosvm DT
     interrupts: Vec<u8>,
-    // Parsed <iommus> property from the crosvm DT.
-    iommus: Vec<PvIommu>,
+    // Parsed <iommus> property from the crosvm DT. Tuple of PvIommu and vSID.
+    iommus: Vec<(PvIommu, VSID)>,
 }
 
 impl AssignedDeviceInfo {
@@ -233,17 +246,26 @@ impl AssignedDeviceInfo {
     }
 
     // TODO(b/277993056): Also validate /__local_fixups__ to ensure that <iommus> has phandle.
-    // TODO(b/277993056): Also keep vSID.
-    // TODO(b/277993056): Validate #iommu-cells values.
-    fn parse_iommus(node: &FdtNode, pviommus: &BTreeMap<Phandle, PvIommu>) -> Result<Vec<PvIommu>> {
+    fn parse_iommus(
+        node: &FdtNode,
+        pviommus: &BTreeMap<Phandle, PvIommu>,
+    ) -> Result<Vec<(PvIommu, VSID)>> {
         let mut iommus = vec![];
-        let Some(cells) = node.getprop_cells(cstr!("iommus"))? else {
+        let Some(mut cells) = node.getprop_cells(cstr!("iommus"))? else {
             return Ok(iommus);
         };
-        for cell in cells {
+        while let Some(cell) = cells.next() {
+            // Parse pvIOMMU ID
             let phandle = Phandle::try_from(cell).or(Err(DeviceAssignmentError::InvalidIommus))?;
             let pviommu = pviommus.get(&phandle).ok_or(DeviceAssignmentError::InvalidIommus)?;
-            iommus.push(*pviommu)
+
+            // Parse VSID
+            let Some(cell) = cells.next() else {
+                return Err(DeviceAssignmentError::InvalidIommus);
+            };
+            let vsid = VSID(cell);
+
+            iommus.push((*pviommu, vsid));
         }
         Ok(iommus)
     }
@@ -275,15 +297,12 @@ impl AssignedDeviceInfo {
         let mut dst = fdt.node_mut(&self.node_path)?.unwrap();
         dst.setprop(cstr!("reg"), &self.reg)?;
         dst.setprop(cstr!("interrupts"), &self.interrupts)?;
-
-        let iommus: Vec<u8> = self
-            .iommus
-            .iter()
-            .flat_map(|pviommu| {
-                let phandle = pviommu_phandles.get(pviommu).unwrap();
-                u32::from(*phandle).to_be_bytes()
-            })
-            .collect();
+        let mut iommus = Vec::with_capacity(8 * self.iommus.len());
+        for (pviommu, vsid) in &self.iommus {
+            let phandle = pviommu_phandles.get(pviommu).unwrap();
+            iommus.extend_from_slice(&u32::from(*phandle).to_be_bytes());
+            iommus.extend_from_slice(&vsid.0.to_be_bytes());
+        }
         dst.setprop(cstr!("iommus"), &iommus)?;
 
         Ok(())
@@ -303,7 +322,6 @@ impl DeviceAssignmentInfo {
     /// Parses pvIOMMUs in fdt
     // Note: This will validate pvIOMMU ids' uniqueness, even when unassigned.
     fn parse_pviommus(fdt: &Fdt) -> Result<BTreeMap<Phandle, PvIommu>> {
-        // TODO(b/277993056): Validated `<#iommu-cells>`.
         let mut pviommus = BTreeMap::new();
         for compatible in fdt.compatible_nodes(Self::PVIOMMU_COMPATIBLE)? {
             let Some(phandle) = compatible.get_phandle()? else {
@@ -460,8 +478,9 @@ mod tests {
                 .getprop(cstr!("interrupts"))?
                 .ok_or(DeviceAssignmentError::InvalidInterrupts)?;
             let mut iommus = vec![];
-            if let Some(cells) = node.getprop_cells(cstr!("iommus"))? {
-                for cell in cells {
+            if let Some(mut cells) = node.getprop_cells(cstr!("iommus"))? {
+                while let Some(cell) = cells.next() {
+                    // pvIOMMU id
                     let phandle = Phandle::try_from(cell)?;
                     let pviommu = fdt
                         .node_with_phandle(phandle)?
@@ -474,6 +493,12 @@ mod tests {
                         .getprop_u32(cstr!("id"))?
                         .ok_or(DeviceAssignmentError::InvalidIommus)?;
                     iommus.push(id);
+
+                    // VSID
+                    let Some(cell) = cells.next() else {
+                        return Err(DeviceAssignmentError::InvalidIommus);
+                    };
+                    iommus.push(cell);
                 }
             }
             Ok(Self { path: path.into(), reg: reg.into(), interrupts: interrupts.into(), iommus })
@@ -630,7 +655,7 @@ mod tests {
             path: CString::new("/rng").unwrap(),
             reg: into_fdt_prop(vec![0x0, 0x9, 0x0, 0xFF]),
             interrupts: into_fdt_prop(vec![0x0, 0xF, 0x4]),
-            iommus: vec![0x4],
+            iommus: vec![0x4, 0xFF0],
         };
 
         let node = AssignedDeviceNode::parse(platform_dt, &expected.path);
@@ -665,13 +690,13 @@ mod tests {
                 path: CString::new("/rng").unwrap(),
                 reg: into_fdt_prop(vec![0x0, 0x9, 0x0, 0xFF]),
                 interrupts: into_fdt_prop(vec![0x0, 0xF, 0x4]),
-                iommus: vec![0x4, 0x9],
+                iommus: vec![0x4, 0xFF0, 0x9, 0xFF1],
             },
             AssignedDeviceNode {
                 path: CString::new("/light").unwrap(),
                 reg: into_fdt_prop(vec![0x100, 0x9]),
                 interrupts: into_fdt_prop(vec![0x0, 0xF, 0x5]),
-                iommus: vec![0x40, 0x50, 0x60],
+                iommus: vec![0x40, 0xFFA, 0x50, 0xFFB, 0x60, 0xFFC],
             },
         ];
 
@@ -708,13 +733,13 @@ mod tests {
                 path: CString::new("/rng").unwrap(),
                 reg: into_fdt_prop(vec![0x0, 0x9, 0x0, 0xFF]),
                 interrupts: into_fdt_prop(vec![0x0, 0xF, 0x4]),
-                iommus: vec![0x4, 0x9],
+                iommus: vec![0x4, 0xFF0, 0x9, 0xFF1],
             },
             AssignedDeviceNode {
                 path: CString::new("/light").unwrap(),
                 reg: into_fdt_prop(vec![0x100, 0x9]),
                 interrupts: into_fdt_prop(vec![0x0, 0xF, 0x5]),
-                iommus: vec![0x9, 0x40],
+                iommus: vec![0x9, 0xFF1, 0x40, 0xFFA],
             },
         ];
 
