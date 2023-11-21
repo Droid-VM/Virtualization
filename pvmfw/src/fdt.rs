@@ -31,6 +31,7 @@ use core::ops::Range;
 use cstr::cstr;
 use fdtpci::PciMemoryFlags;
 use fdtpci::PciRangeType;
+use hyp::DeviceAssigningHypervisor;
 use libfdt::AddressRange;
 use libfdt::CellIterator;
 use libfdt::Fdt;
@@ -694,10 +695,29 @@ fn parse_device_tree(fdt: &Fdt, vm_dtbo: Option<&VmDtbo>) -> Result<DeviceTreeIn
     validate_swiotlb_info(&swiotlb_info, &memory_range)?;
 
     let device_assignment = match vm_dtbo {
-        Some(vm_dtbo) => DeviceAssignmentInfo::parse(fdt, vm_dtbo).map_err(|e| {
-            error!("Failed to parse device assignment from DT and VM DTBO: {e}");
-            RebootReason::InvalidFdt
-        })?,
+        Some(vm_dtbo) => {
+            // TODO(b/277993056): Pass real hypervisor
+            struct StubHypervisor {}
+            impl DeviceAssigningHypervisor for StubHypervisor {
+                fn get_phys_mmio_token(&self, base_ipa: u64, size: u64) -> hyp::Result<u64> {
+                    Ok(0_u64)
+                }
+
+                fn get_phys_iommu_token(
+                    &self,
+                    pviommu_id: u64,
+                    vsid: u64,
+                ) -> hyp::Result<(u64, u64)> {
+                    Ok((0_u64, 0_u64))
+                }
+            }
+            let hypervisor = StubHypervisor {};
+
+            DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor).map_err(|e| {
+                error!("Failed to parse device assignment from DT and VM DTBO: {e}");
+                RebootReason::InvalidFdt
+            })?
+        }
         None => None,
     };
 
