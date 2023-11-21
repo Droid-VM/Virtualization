@@ -16,6 +16,29 @@
       "message": "Hi Taylor, \nCould you please review the CL again? I only reordered the function calls to create a more user-friendly API from the PS you reviewed and the latest PS.\n\n+David, could you please take a look at this CL as well?",
       "revId": "2043eba836cd31b317aaec2338b32372834d459d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cb2f4fd_b0ad3301",
+        "filename": "libs/bssl/src/evp.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-11-21T18:08:07Z",
+      "side": 1,
+      "message": "So who controls the lifetime of that inner key object? Should this have lifetime linked to that entity? Otherwise how do we know that the underlying object hasn\u0027t been freed?",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 27
+      },
+      "revId": "2043eba836cd31b317aaec2338b32372834d459d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
