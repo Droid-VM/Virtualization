@@ -26,6 +26,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c07b5282_3625e2f3",
+        "filename": "libs/apexutil/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-11-21T13:59:48Z",
+      "side": 1,
+      "message": "Do we have a use for it? If not, then I suggest not introducing it :) We can always add it later when we find a use case",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 28
+      },
+      "revId": "1659bfd059f6afcd51e0cfbe267922a284bb6d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bb0c427_f5bc7e78",
+        "filename": "libs/apexutil/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-11-21T13:59:48Z",
+      "side": 1,
+      "message": "?",
+      "range": {
+        "startLine": 123,
+        "startChar": 77,
+        "endLine": 123,
+        "endChar": 80
+      },
+      "revId": "1659bfd059f6afcd51e0cfbe267922a284bb6d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bcb66a73_e314a2df",
         "filename": "libs/apexutil/src/lib.rs",
         "patchSetId": 3
@@ -42,6 +88,29 @@
         "startChar": 7,
         "endLine": 150,
         "endChar": 74
+      },
+      "revId": "1659bfd059f6afcd51e0cfbe267922a284bb6d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a4a153d_d38b0216",
+        "filename": "libs/apexutil/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-11-21T13:59:48Z",
+      "side": 1,
+      "message": "Can you add tests for negative scenarios please? :) There are some test APEXEs used in tests in system/apex/ that can help.\n\nAlso, should this be moved to system/apex? It seems to be generic enough?",
+      "range": {
+        "startLine": 168,
+        "startChar": 7,
+        "endLine": 168,
+        "endChar": 45
       },
       "revId": "1659bfd059f6afcd51e0cfbe267922a284bb6d3b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
