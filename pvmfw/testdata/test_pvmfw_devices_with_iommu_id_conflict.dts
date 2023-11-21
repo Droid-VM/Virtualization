@@ -2,6 +2,9 @@
 /plugin/;
 
 / {
+	#address-cells = <2>;
+	#size-cells = <2>;
+
 	chosen {
 		stdout-path = "/uart@3f8";
 		linux,pci-probe-only = <1>;
@@ -65,7 +68,7 @@
 
     light@70000000 {
         compatible = "android,light";
-        reg = <0x100 0x9>;
+        reg = <0x100 0x9 0x9 0x100 0xA 0xB 0xC 0xD>;
         interrupts = <0x0 0xF 0x5>;
         iommus = <&pviommu_0>, <&pviommu_a>, <&pviommu_b>;
     };
