@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eaeda093_78b9173c",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-21T12:37:49Z",
+      "side": 1,
+      "message": "I feel like you might have been confused by the use of the overloaded term _map_.\n\nLet me try to clear this up:\n\n1. VFIO requires the MMIO to be _mapped_ into the process (VMM) address space with `mmap` i.e. EL0 (stage-1) page tables must be updated by (host) EL1\n1. KVM requires the VMM to _map_ any guest memory with `KVM_SET_USER_MEMORY_REGION` i.e. (guest) EL1 PTs must be updated by EL2\n\nNote that the respective page table entries can be created immediately or at any point until the first access: as long as the accesses appear to get through, the (resp.) process or guest VM can\u0027t see what happened behind the scene (and when): that\u0027s the \"lazy _mapping_\" part.\n\nIn particular, for pKVM:\n\n3. as guests are spawned with \"empty\" stage-2, every first access to a page (MMIO or regular memory) triggers a fault, which EL2 handles by lazily _mapping_ the resource i.e. adding a stage-2 page table entry\n\nSo only point 2. actually matters (b/308642771) to this HVC i.e. the hypervisor only needs to be aware of the existence of the MMIO donation and **the corresponding stage-2 _mappings_ (if any) don\u0027t matter** until the first access. Conceptually, the HVC could work without yet creating the mapping, as long as pKVM holds enough data to prevent TOCTOU when it maps it later on e.g. on actual first access.\n\nI hope this clears it up and my previous comment now makes sense!",
+      "parentUuid": "6abbdacf_b46533c9",
+      "range": {
+        "startLine": 85,
+        "startChar": 8,
+        "endLine": 85,
+        "endChar": 71
+      },
+      "revId": "e0fda3108f57e05188642328ef57f3f752b0bbef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1171e5ce_82aac9c2",
         "filename": "libs/hyp/src/hypervisor/kvm.rs",
         "patchSetId": 13
