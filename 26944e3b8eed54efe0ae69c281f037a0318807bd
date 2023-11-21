@@ -50,6 +50,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7e392305_c87b25d9",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-11-21T11:13:41Z",
+      "side": 1,
+      "message": "Should we return an error if `config.dtbo` is `None` and VFIO devices are given?",
+      "range": {
+        "startLine": 732,
+        "startChar": 11,
+        "endLine": 732,
+        "endChar": 15
+      },
+      "revId": "26944e3b8eed54efe0ae69c281f037a0318807bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7044f5d5_72381949",
         "filename": "virtualizationmanager/src/crosvm.rs",
         "patchSetId": 1
@@ -90,6 +113,29 @@
         "startChar": 0,
         "endLine": 736,
         "endChar": 96
+      },
+      "revId": "26944e3b8eed54efe0ae69c281f037a0318807bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdb56a98_dbcd74e5",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-11-21T11:13:41Z",
+      "side": 1,
+      "message": "Please add `,filter` after the path to filter out unused DT nodes. See [https://chromium-review.googlesource.com/c/crosvm/crosvm/+/4855969/32/src/crosvm/cmdline.rs#1121](https://chromium-review.googlesource.com/c/crosvm/crosvm/+/4855969/32/src/crosvm/cmdline.rs#1121)",
+      "range": {
+        "startLine": 736,
+        "startChar": 51,
+        "endLine": 736,
+        "endChar": 53
       },
       "revId": "26944e3b8eed54efe0ae69c281f037a0318807bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
