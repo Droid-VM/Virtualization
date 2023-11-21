@@ -74,6 +74,7 @@ rust_test {
     srcs: ["src/device_assignment.rs"],
     defaults: ["libpvmfw.test.defaults"],
     rustlibs: [
+        "libhyp",
         "liblibfdt",
         "liblog_rust",
         "libpvmfw_fdt_template",
