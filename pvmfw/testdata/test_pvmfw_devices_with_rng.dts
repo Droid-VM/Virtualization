@@ -2,6 +2,9 @@
 /plugin/;
 
 / {
+	#address-cells = <2>;
+	#size-cells = <2>;
+
 	chosen {
 		stdout-path = "/uart@3f8";
 		linux,pci-probe-only = <1>;
