@@ -1,3 +1,4 @@
+
 /*
  * Copyright (C) 2023 The Android Open Source Project
  *
@@ -13,9 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 //! Unit tests for testing serialization & deserialization of exported data_types.
-
 use ciborium::Value;
 use secretkeeper_comm::data_types::error::{Error, SecretkeeperError, ERROR_OK};
 use secretkeeper_comm::data_types::packet::{RequestPacket, ResponsePacket, ResponseType};
@@ -23,15 +22,12 @@ use secretkeeper_comm::data_types::request::Request;
 use secretkeeper_comm::data_types::request_response_impl::Opcode;
 use secretkeeper_comm::data_types::request_response_impl::{GetVersionRequest, GetVersionResponse};
 use secretkeeper_comm::data_types::response::Response;
-
 #[cfg(test)]
 rdroidtest::test_main!();
-
 #[cfg(test)]
 mod tests {
     use super::*;
     use rdroidtest::test;
-
     test!(request_serialization_deserialization);
     fn request_serialization_deserialization() {
         let req = GetVersionRequest {};
@@ -44,7 +40,6 @@ mod tests {
         let req_deserialized = *GetVersionRequest::deserialize_from_packet(packet).unwrap();
         assert_eq!(req, req_deserialized);
     }
-
     test!(success_response_serialization_deserialization);
     fn success_response_serialization_deserialization() {
         let response = GetVersionResponse::new(1);
@@ -57,7 +52,6 @@ mod tests {
         let response_deserialized = *GetVersionResponse::deserialize_from_packet(packet).unwrap();
         assert_eq!(response, response_deserialized);
     }
-
     test!(error_response_serialization_deserialization);
     fn error_response_serialization_deserialization() {
         let response = SecretkeeperError::RequestMalformed;
@@ -70,20 +64,17 @@ mod tests {
         let response_deserialized = *SecretkeeperError::deserialize_from_packet(packet).unwrap();
         assert_eq!(response, response_deserialized);
     }
-
     test!(request_creation);
     fn request_creation() {
         let req: GetVersionRequest = *Request::new(vec![]).unwrap();
         assert_eq!(req, GetVersionRequest {});
     }
-
     test!(response_creation);
     fn response_creation() {
         let res: GetVersionResponse =
             *Response::new(vec![Value::from(ERROR_OK), Value::from(5)]).unwrap();
         assert_eq!(res.version(), 5);
     }
-
     test!(invalid_get_version_request_creation);
     fn invalid_get_version_request_creation() {
         // A request with non-zero arg is considered invalid.
@@ -92,7 +83,6 @@ mod tests {
             Error::RequestMalformed
         );
     }
-
     test!(invalid_get_version_response_creation);
     fn invalid_get_version_response_creation() {
         // A response with non-zero error_code is an invalid success response.
@@ -104,7 +94,6 @@ mod tests {
             .unwrap_err(),
             Error::ResponseMalformed
         );
-
         // A response with incorrect size of array is invalid.
         assert_eq!(
             <GetVersionResponse as Response>::new(vec![
@@ -115,12 +104,10 @@ mod tests {
             .unwrap_err(),
             Error::ResponseMalformed
         );
-
         // A response with incorrect type is invalid.
         <GetVersionResponse as Response>::new(vec![Value::from(ERROR_OK), Value::from("a tstr")])
             .unwrap_err();
     }
-
     test!(invalid_error_response_creation);
     fn invalid_error_response_creation() {
         // A response with ERROR_OK(0) as the error_code is an invalid error response.

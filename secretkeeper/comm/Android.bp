@@ -48,5 +48,7 @@ rust_test {
     test_suites: ["general-tests"],
     rustlibs: [
         "libsecretkeeper_comm_nostd",
+        "libauthgraph_boringssl",
+        "libauthgraph_core",
     ],
 }
