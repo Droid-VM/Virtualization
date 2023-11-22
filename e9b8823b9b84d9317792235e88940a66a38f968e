@@ -22,6 +22,30 @@
       },
       "revId": "e9b8823b9b84d9317792235e88940a66a38f968e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b22f89a_e9c7daa7",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-11-22T13:41:36Z",
+      "side": 1,
+      "message": "Hard-coding the value sounds good to me to unblock the development, but we will need to figure out what is the correct long term solution (having the microdroid-vendor SPL in microdroid_vbmeta doesn\u0027t sound right).\n\nCan you file a tracking bug for this and mention it here (e.g. \"TODO(b/xxxx): remove after figuring out long-term solution\")",
+      "parentUuid": "fe39a423_68e6bd8a",
+      "range": {
+        "startLine": 395,
+        "startChar": 4,
+        "endLine": 395,
+        "endChar": 18
+      },
+      "revId": "e9b8823b9b84d9317792235e88940a66a38f968e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
