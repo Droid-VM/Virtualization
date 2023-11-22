@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e7a74ad_76535488",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1078119
+      },
+      "writtenOn": "2023-11-22T23:39:17Z",
+      "side": 1,
+      "message": "note: slight re-structuring here necessary due to limitations of the current borrow-checker implementation. I believe this particular instance is https://github.com/rust-lang/rfcs/blob/master/text/2094-nll.md#problem-case-2-conditional-control-flow, which results in `\u0026ops` being mutably borrowed twice in both the `if` and `else if` at the same time even though logically it could have been released in-between.",
+      "range": {
+        "startLine": 232,
+        "startChar": 0,
+        "endLine": 238,
+        "endChar": 10
+      },
+      "revId": "6465eca71cf73202aa147411a2ef1e85fd61dd65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
