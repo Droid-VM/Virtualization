@@ -390,7 +390,11 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @CddTest(requirements = {"9.17/C-2-1", "9.17/C-2-2", "9.17/C-2-6"})
     public void protectedVmRunsPvmfw() throws Exception {
         // Arrange
+<<<<<<< HEAD   (aaf6c1 Merge "Revert^4 "[rkp] Expose RKP Hal implementation in virt)
         assumeProtectedVm();
+=======
+        assumeProtectedVmSupported();
+>>>>>>> BRANCH (5d0223 Don't run non-protected tests if not supported)
         final String configPath = "assets/vm_config_apex.json";
 
         // Act
@@ -418,16 +422,26 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @CddTest(requirements = {"9.17/C-2-1", "9.17/C-2-2", "9.17/C-2-6"})
     public void protectedVmWithImageSignedWithDifferentKeyRunsPvmfw() throws Exception {
         // Arrange
+<<<<<<< HEAD   (aaf6c1 Merge "Revert^4 "[rkp] Expose RKP Hal implementation in virt)
         assumeProtectedVm();
+=======
+        assumeProtectedVmSupported();
+>>>>>>> BRANCH (5d0223 Don't run non-protected tests if not supported)
         File key = findTestFile("test.com.android.virt.pem");
 
         // Act
         VmInfo vmInfo =
                 runMicrodroidWithResignedImages(
                         key,
+<<<<<<< HEAD   (aaf6c1 Merge "Revert^4 "[rkp] Expose RKP Hal implementation in virt)
                         /* keyOverrides= */ Map.of(),
                         /* isProtected= */ true,
                         /* updateBootconfigs= */ true);
+=======
+                        /*keyOverrides=*/ Map.of(),
+                        /* protectedVm=*/ true,
+                        /*updateBootconfigs=*/ true);
+>>>>>>> BRANCH (5d0223 Don't run non-protected tests if not supported)
 
         // Assert
         vmInfo.mProcess.waitFor(5L, TimeUnit.SECONDS);
@@ -442,7 +456,11 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @CddTest(requirements = {"9.17/C-2-2", "9.17/C-2-6"})
     public void testBootSucceedsWhenNonProtectedVmStartsWithImagesSignedWithDifferentKey()
             throws Exception {
+<<<<<<< HEAD   (aaf6c1 Merge "Revert^4 "[rkp] Expose RKP Hal implementation in virt)
         assumeNonProtectedVm();
+=======
+        assumeNonProtectedVmSupported();
+>>>>>>> BRANCH (5d0223 Don't run non-protected tests if not supported)
         File key = findTestFile("test.com.android.virt.pem");
         Map<String, File> keyOverrides = Map.of();
         VmInfo vmInfo =
@@ -461,8 +479,12 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @Test
     @CddTest(requirements = {"9.17/C-2-2", "9.17/C-2-6"})
     public void testBootFailsWhenVbMetaDigestDoesNotMatchBootconfig() throws Exception {
+<<<<<<< HEAD   (aaf6c1 Merge "Revert^4 "[rkp] Expose RKP Hal implementation in virt)
         // protectedVmWithImageSignedWithDifferentKeyRunsPvmfw() is the protected case.
         assumeNonProtectedVm();
+=======
+        assumeNonProtectedVmSupported();
+>>>>>>> BRANCH (5d0223 Don't run non-protected tests if not supported)
         // Sign everything with key1 except vbmeta
         File key = findTestFile("test.com.android.virt.pem");
         // To be able to stop it, it should be a daemon.
@@ -541,8 +563,12 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     public void testTombstonesAreGeneratedUponUserspaceCrash() throws Exception {
+<<<<<<< HEAD   (aaf6c1 Merge "Revert^4 "[rkp] Expose RKP Hal implementation in virt)
         // TODO(b/291867858): tombstones are failing in HWASAN enabled Microdroid.
         assumeFalse("tombstones are failing in HWASAN enabled Microdroid.", isHwasan());
+=======
+        assumeNonProtectedVmSupported();
+>>>>>>> BRANCH (5d0223 Don't run non-protected tests if not supported)
         assertThat(
                         isTombstoneGeneratedWithCmd(
                                 mProtectedVm,
@@ -555,8 +581,12 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     public void testTombstonesAreNotGeneratedIfNotExportedUponUserspaceCrash() throws Exception {
+<<<<<<< HEAD   (aaf6c1 Merge "Revert^4 "[rkp] Expose RKP Hal implementation in virt)
         // TODO(b/291867858): tombstones are failing in HWASAN enabled Microdroid.
         assumeFalse("tombstones are failing in HWASAN enabled Microdroid.", isHwasan());
+=======
+        assumeNonProtectedVmSupported();
+>>>>>>> BRANCH (5d0223 Don't run non-protected tests if not supported)
         assertThat(
                         isTombstoneGeneratedWithCmd(
                                 mProtectedVm,
@@ -582,8 +612,26 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                 .isTrue();
     }
 
+<<<<<<< HEAD   (aaf6c1 Merge "Revert^4 "[rkp] Expose RKP Hal implementation in virt)
     private boolean isTombstoneGeneratedWithVmRunApp(
             boolean protectedVm, boolean debuggable, String... additionalArgs) throws Exception {
+=======
+    @Test
+    public void testTombstonesAreGeneratedUponKernelCrashOnNonPvm() throws Exception {
+        assumeNonProtectedVmSupported();
+        testTombstonesAreGeneratedUponKernelCrash(/* protectedVm=*/ false);
+    }
+
+    @Test
+    public void testTombstonesAreGeneratedUponKernelCrashOnPvm() throws Exception {
+        assumeProtectedVmSupported();
+        testTombstonesAreGeneratedUponKernelCrash(/* protectedVm=*/ true);
+    }
+
+    private boolean isTombstoneGeneratedWithVmRunApp(boolean debuggable, String... additionalArgs)
+            throws Exception {
+        assumeNonProtectedVmSupported();
+>>>>>>> BRANCH (5d0223 Don't run non-protected tests if not supported)
         // we can't use microdroid builder as it wants ADB connection (debuggable)
         CommandRunner android = new CommandRunner(getDevice());
         String testStartTime = android.runWithTimeout(1000, "date", "'+%Y-%m-%d %H:%M:%S.%N'");
@@ -659,6 +707,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     public void testTelemetryPushedAtoms() throws Exception {
+        assumeNonProtectedVmSupported();
         // Reset statsd config and report before the test
         ConfigUtils.removeConfig(getDevice());
         ReportUtils.clearReports(getDevice());
@@ -736,6 +785,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @Test
     @CddTest(requirements = {"9.17/C-1-1", "9.17/C-1-2", "9.17/C/1-3"})
     public void testMicrodroidBoots() throws Exception {
+        assumeNonProtectedVmSupported();
         CommandRunner android = new CommandRunner(getDevice());
 
         final String configPath = "assets/vm_config.json"; // path inside the APK
@@ -810,6 +860,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     public void testMicrodroidRamUsage() throws Exception {
+        assumeNonProtectedVmSupported();
         final String configPath = "assets/vm_config.json";
         mMicrodroidDevice =
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
@@ -1015,6 +1066,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         "android.permission.USE_CUSTOM_VIRTUAL_MACHINE");
     }
 
+<<<<<<< HEAD   (aaf6c1 Merge "Revert^4 "[rkp] Expose RKP Hal implementation in virt)
     private void assumeProtectedVm() throws Exception {
         assumeTrue("This test is only for protected VM.", mProtectedVm);
     }
@@ -1046,6 +1098,18 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
             break;
         }
         return devices;
+=======
+    private void assumeProtectedVmSupported() throws Exception {
+        assumeTrue(
+                "Test skipped because protected VMs are not supported",
+                getAndroidDevice().supportsMicrodroid(true));
+    }
+
+    private void assumeNonProtectedVmSupported() throws Exception {
+        assumeTrue(
+                "Test skipped because non-protected VMs are not supported",
+                getAndroidDevice().supportsMicrodroid(false));
+>>>>>>> BRANCH (5d0223 Don't run non-protected tests if not supported)
     }
 
     private TestDevice getAndroidDevice() {
