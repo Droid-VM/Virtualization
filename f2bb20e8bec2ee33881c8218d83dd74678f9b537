@@ -69,6 +69,30 @@
       },
       "revId": "f2bb20e8bec2ee33881c8218d83dd74678f9b537",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7236ba98_ddf95819",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-22T14:19:48Z",
+      "side": 1,
+      "message": "Oh that is a good point. What if os_name contains \"../\"?\n\nSounds like we should have stricter validation. A fairly tight regex + the path test?",
+      "parentUuid": "1228d903_4b5c0adf",
+      "range": {
+        "startLine": 703,
+        "startChar": 8,
+        "endLine": 703,
+        "endChar": 86
+      },
+      "revId": "f2bb20e8bec2ee33881c8218d83dd74678f9b537",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
