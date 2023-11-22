@@ -39,6 +39,30 @@
       },
       "revId": "2043eba836cd31b317aaec2338b32372834d459d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc34597b_dc667c26",
+        "filename": "libs/bssl/src/evp.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-22T10:02:45Z",
+      "side": 1,
+      "message": "Thank you for bringing up this point. I think it would be better for `EvpPKey` to take ownership of the inner key in order to resolve the lifetime issue and ensure proper memory deallocation. Otherwise, it seems difficult to free the `EVP_PKEY` object alone without affecting the inner key.",
+      "parentUuid": "5cb2f4fd_b0ad3301",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 27
+      },
+      "revId": "2043eba836cd31b317aaec2338b32372834d459d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
