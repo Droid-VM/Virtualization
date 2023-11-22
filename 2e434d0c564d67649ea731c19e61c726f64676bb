@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89d8fda8_be80d227",
+        "filename": "libs/bssl/src/evp.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-11-22T12:26:51Z",
+      "side": 1,
+      "message": "I believe the code is correct but the SAFETY comment omits the fact that the lifetimes of `pkey` and `key` are now linked. @cramertj@google.com @qwandor@google.com could you PTAL and perhaps help us oxidize this?",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 81
+      },
+      "revId": "2e434d0c564d67649ea731c19e61c726f64676bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
