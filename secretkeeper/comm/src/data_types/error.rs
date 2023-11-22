@@ -73,6 +73,9 @@ pub enum Error {
     ConversionError,
     /// These are unexpected errors, which should never really happen.
     UnexpectedError,
+    /// NonceSequence overflowed. This could happen when too many
+    /// encryptions have happened with the same key.
+    NonceSequenceOverflow,
 }
 
 impl From<ciborium::value::Error> for Error {

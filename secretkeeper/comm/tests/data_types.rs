@@ -23,7 +23,11 @@ use secretkeeper_comm::data_types::request::Request;
 use secretkeeper_comm::data_types::request_response_impl::Opcode;
 use secretkeeper_comm::data_types::request_response_impl::{GetVersionRequest, GetVersionResponse};
 use secretkeeper_comm::data_types::response::Response;
-
+use authgraph_core::{
+    key::{AesKey, Nonce12},
+};
+use authgraph_boringssl::BoringAes;
+use authgraph_core::traits::AesGcm;
 #[cfg(test)]
 rdroidtest::test_main!();
 
@@ -31,6 +35,7 @@ rdroidtest::test_main!();
 mod tests {
     use super::*;
     use rdroidtest::test;
+    const KEY: AesKey = AesKey(*b"thirty_two_bytes_long_sentences_");
 
     test!(request_serialization_deserialization);
     fn request_serialization_deserialization() {
@@ -41,6 +46,11 @@ mod tests {
             RequestPacket::from_bytes(&packet.clone().into_bytes().unwrap()).unwrap(),
             packet
         );
+        let nonce = Nonce12(*b"1243567890ab");
+        let aad = b"";
+        let ct = BoringAes{}.encrypt(&KEY, &packet.clone().into_bytes().unwrap(), aad, &nonce).unwrap();
+        let pt = BoringAes{}.decrypt(&KEY, &ct, aad, &nonce).unwrap();
+        assert_eq!(pt, packet.clone().into_bytes().unwrap());
         let req_deserialized = *GetVersionRequest::deserialize_from_packet(packet).unwrap();
         assert_eq!(req, req_deserialized);
     }
