@@ -548,6 +548,7 @@ public abstract class MicrodroidDeviceTestBase {
         void runTests(ITestService testService, TestResults testResults) throws Exception;
     }
 
+<<<<<<< HEAD   (15f3bc [automerger skipped] Revert "Skip changingDebuggability rela)
     protected void assumeFeatureEnabled(String featureName) throws Exception {
         assumeTrue(featureName + " not enabled", isFeatureEnabled(featureName));
     }
@@ -556,6 +557,8 @@ public abstract class MicrodroidDeviceTestBase {
         return getVirtualMachineManager().isFeatureEnabled(featureName);
     }
 
+=======
+>>>>>>> BRANCH (b3fcdc Revert^2 "Skip changingDebuggability related tests on Non-pV)
     protected void assumeProtectedVM() {
         assumeTrue("Skip on non-protected VM", mProtectedVm);
     }
