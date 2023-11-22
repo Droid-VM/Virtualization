@@ -101,7 +101,7 @@ const ANDROID_VM_INSTANCE_VERSION: u16 = 1;
 
 const MICRODROID_OS_NAME: &str = "microdroid";
 
-const MICRODROID_GKI_OS_NAME: &str = "microdroid_gki";
+const MICRODROID_GKI_OS_NAME_PREFIX: &str = "microdroid_gki";
 
 const UNFORMATTED_STORAGE_MAGIC: &str = "UNFORMATTED-STORAGE";
 
@@ -698,12 +698,12 @@ fn append_kernel_param(param: &str, vm_config: &mut VirtualMachineRawConfig) {
 
 fn is_valid_os(os_name: &str) -> bool {
     if os_name == MICRODROID_OS_NAME {
-        return true;
+        true
+    } else if cfg!(vendor_modules) && os_name.starts_with(MICRODROID_GKI_OS_NAME_PREFIX) {
+        PathBuf::from(format!("/apex/com.android.virt/etc/{}.json", os_name)).exists()
+    } else {
+        false
     }
-    if cfg!(vendor_modules) && os_name == MICRODROID_GKI_OS_NAME {
-        return true;
-    }
-    false
 }
 
 fn load_app_config(
