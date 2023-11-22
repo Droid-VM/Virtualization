@@ -44,6 +44,10 @@ import com.android.os.StatsLog;
 import com.android.tradefed.device.DeviceNotAvailableException;
 import com.android.tradefed.device.ITestDevice;
 import com.android.tradefed.device.TestDevice;
+<<<<<<< HEAD   (1a7a6d [automerger skipped] Don't run non-protected tests if not su)
+=======
+import com.android.tradefed.testtype.DeviceJUnit4ClassRunner;
+>>>>>>> BRANCH (6ef6c1 Run tests on both pVMs and non-pVMS)
 import com.android.tradefed.testtype.DeviceJUnit4ClassRunner.TestMetrics;
 import com.android.tradefed.util.CommandResult;
 import com.android.tradefed.util.FileUtil;
@@ -425,9 +429,15 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         VmInfo vmInfo =
                 runMicrodroidWithResignedImages(
                         key,
+<<<<<<< HEAD   (1a7a6d [automerger skipped] Don't run non-protected tests if not su)
                         /* keyOverrides= */ Map.of(),
                         /* isProtected= */ true,
                         /* updateBootconfigs= */ true);
+=======
+                        /*keyOverrides=*/ Map.of(),
+                        /*isProtected=*/ true,
+                        /*updateBootconfigs=*/ true);
+>>>>>>> BRANCH (6ef6c1 Run tests on both pVMs and non-pVMS)
 
         // Assert
         vmInfo.mProcess.waitFor(5L, TimeUnit.SECONDS);
@@ -462,7 +472,11 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @CddTest(requirements = {"9.17/C-2-2", "9.17/C-2-6"})
     public void testBootFailsWhenVbMetaDigestDoesNotMatchBootconfig() throws Exception {
         // protectedVmWithImageSignedWithDifferentKeyRunsPvmfw() is the protected case.
+<<<<<<< HEAD   (1a7a6d [automerger skipped] Don't run non-protected tests if not su)
         assumeNonProtectedVm();
+=======
+        assumeNonProtectedVmSupported();
+>>>>>>> BRANCH (6ef6c1 Run tests on both pVMs and non-pVMS)
         // Sign everything with key1 except vbmeta
         File key = findTestFile("test.com.android.virt.pem");
         // To be able to stop it, it should be a daemon.
@@ -540,12 +554,32 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+<<<<<<< HEAD   (1a7a6d [automerger skipped] Don't run non-protected tests if not su)
     public void testTombstonesAreGeneratedUponUserspaceCrash() throws Exception {
         // TODO(b/291867858): tombstones are failing in HWASAN enabled Microdroid.
         assumeFalse("tombstones are failing in HWASAN enabled Microdroid.", isHwasan());
+=======
+    public void testTombstonesAreGeneratedUponUserspaceCrashOnNonPvm() throws Exception {
+        assumeNonProtectedVmSupported();
+        testTombstonesAreGeneratedUponUserspaceCrash(false);
+    }
+
+    @Test
+    public void testTombstonesAreGeneratedUponUserspaceCrashOnPvm() throws Exception {
+        assumeProtectedVmSupported();
+        testTombstonesAreGeneratedUponUserspaceCrash(true);
+    }
+
+    private void testTombstonesAreGeneratedUponUserspaceCrash(boolean protectedVm)
+            throws Exception {
+>>>>>>> BRANCH (6ef6c1 Run tests on both pVMs and non-pVMS)
         assertThat(
                         isTombstoneGeneratedWithCmd(
+<<<<<<< HEAD   (1a7a6d [automerger skipped] Don't run non-protected tests if not su)
                                 mProtectedVm,
+=======
+                                protectedVm,
+>>>>>>> BRANCH (6ef6c1 Run tests on both pVMs and non-pVMS)
                                 "assets/vm_config.json",
                                 "kill",
                                 "-SIGSEGV",
@@ -554,12 +588,34 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+<<<<<<< HEAD   (1a7a6d [automerger skipped] Don't run non-protected tests if not su)
     public void testTombstonesAreNotGeneratedIfNotExportedUponUserspaceCrash() throws Exception {
         // TODO(b/291867858): tombstones are failing in HWASAN enabled Microdroid.
         assumeFalse("tombstones are failing in HWASAN enabled Microdroid.", isHwasan());
+=======
+    public void testTombstonesAreNotGeneratedIfNotExportedUponUserspaceCrashOnNonPvm()
+            throws Exception {
+        assumeNonProtectedVmSupported();
+        testTombstonesAreNotGeneratedIfNotExportedUponUserspaceCrash(false);
+    }
+
+    @Test
+    public void testTombstonesAreNotGeneratedIfNotExportedUponUserspaceCrashOnPvm()
+            throws Exception {
+        assumeProtectedVmSupported();
+        testTombstonesAreNotGeneratedIfNotExportedUponUserspaceCrash(true);
+    }
+
+    private void testTombstonesAreNotGeneratedIfNotExportedUponUserspaceCrash(boolean protectedVm)
+            throws Exception {
+>>>>>>> BRANCH (6ef6c1 Run tests on both pVMs and non-pVMS)
         assertThat(
                         isTombstoneGeneratedWithCmd(
+<<<<<<< HEAD   (1a7a6d [automerger skipped] Don't run non-protected tests if not su)
                                 mProtectedVm,
+=======
+                                protectedVm,
+>>>>>>> BRANCH (6ef6c1 Run tests on both pVMs and non-pVMS)
                                 "assets/vm_config_no_tombstone.json",
                                 "kill",
                                 "-SIGSEGV",
@@ -582,6 +638,21 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                 .isTrue();
     }
 
+<<<<<<< HEAD   (1a7a6d [automerger skipped] Don't run non-protected tests if not su)
+=======
+    @Test
+    public void testTombstonesAreGeneratedUponKernelCrashOnNonPvm() throws Exception {
+        assumeNonProtectedVmSupported();
+        testTombstonesAreGeneratedUponKernelCrash(/* protectedVm=*/ false);
+    }
+
+    @Test
+    public void testTombstonesAreGeneratedUponKernelCrashOnPvm() throws Exception {
+        assumeProtectedVmSupported();
+        testTombstonesAreGeneratedUponKernelCrash(/* protectedVm=*/ true);
+    }
+
+>>>>>>> BRANCH (6ef6c1 Run tests on both pVMs and non-pVMS)
     private boolean isTombstoneGeneratedWithVmRunApp(
             boolean protectedVm, boolean debuggable, String... additionalArgs) throws Exception {
         // we can't use microdroid builder as it wants ADB connection (debuggable)
@@ -620,14 +691,23 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+<<<<<<< HEAD   (1a7a6d [automerger skipped] Don't run non-protected tests if not su)
     public void testTombstonesAreGeneratedWithCrashPayload() throws Exception {
         // TODO(b/291867858): tombstones are failing in HWASAN enabled Microdroid.
         assumeFalse("tombstones are failing in HWASAN enabled Microdroid.", isHwasan());
         assertThat(isTombstoneGeneratedWithCrashPayload(mProtectedVm, /* debuggable= */ true))
+=======
+    public void testTombstonesAreGeneratedWithCrashPayloadOnPvm() throws Exception {
+        assumeProtectedVmSupported();
+        assertThat(
+                        isTombstoneGeneratedWithCrashPayload(
+                                /*protectedVm=*/ true, /*debuggable=*/ true))
+>>>>>>> BRANCH (6ef6c1 Run tests on both pVMs and non-pVMS)
                 .isTrue();
     }
 
     @Test
+<<<<<<< HEAD   (1a7a6d [automerger skipped] Don't run non-protected tests if not su)
     public void testTombstonesAreNotGeneratedWithCrashPayloadWhenNonDebuggable() throws Exception {
         // TODO(b/291867858): tombstones are failing in HWASAN enabled Microdroid.
         assumeFalse("tombstones are failing in HWASAN enabled Microdroid.", isHwasan());
@@ -659,6 +739,91 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     public void testTelemetryPushedAtoms() throws Exception {
+=======
+    public void testTombstonesAreGeneratedWithCrashPayloadOnNonPvm() throws Exception {
+        assumeNonProtectedVmSupported();
+        assertThat(
+                        isTombstoneGeneratedWithCrashPayload(
+                                /*protectedVm=*/ false, /*debuggable=*/ true))
+                .isTrue();
+    }
+
+    @Test
+    public void testTombstonesAreNotGeneratedWithCrashPayloadWhenNonDebuggableOnPvm()
+            throws Exception {
+        assumeProtectedVmSupported();
+        assertThat(
+                        isTombstoneGeneratedWithCrashPayload(
+                                /*protectedVm=*/ true, /*debuggable=*/ false))
+                .isFalse();
+    }
+
+    @Test
+    public void testTombstonesAreNotGeneratedWithCrashPayloadWhenNonDebuggableOnNonPvm()
+            throws Exception {
+        assumeNonProtectedVmSupported();
+        assertThat(
+                        isTombstoneGeneratedWithCrashPayload(
+                                /*protectedVm=*/ false, /*debuggable=*/ false))
+                .isFalse();
+    }
+
+    private boolean isTombstoneGeneratedWithCrashConfig(boolean protectedVm, boolean debuggable)
+            throws Exception {
+        return isTombstoneGeneratedWithVmRunApp(
+                protectedVm, debuggable, "--config-path", "assets/vm_config_crash.json");
+    }
+
+    @Test
+    public void testTombstonesAreGeneratedWithCrashConfigOnPvm() throws Exception {
+        assumeProtectedVmSupported();
+        assertThat(isTombstoneGeneratedWithCrashConfig(/*protectedVm=*/ true, /*debuggable=*/ true))
+                .isTrue();
+    }
+
+    @Test
+    public void testTombstonesAreGeneratedWithCrashConfigOnNonPvm() throws Exception {
+        assumeNonProtectedVmSupported();
+        assertThat(
+                        isTombstoneGeneratedWithCrashConfig(
+                                /*protectedVm=*/ false, /*debuggable=*/ true))
+                .isTrue();
+    }
+
+    @Test
+    public void testTombstonesAreNotGeneratedWithCrashConfigWhenNonDebuggableOnPvm()
+            throws Exception {
+        assumeProtectedVmSupported();
+        assertThat(
+                        isTombstoneGeneratedWithCrashConfig(
+                                /*protectedVm=*/ true, /*debuggable=*/ false))
+                .isFalse();
+    }
+
+    @Test
+    public void testTombstonesAreNotGeneratedWithCrashConfigWhenNonDebuggableOnNonPvm()
+            throws Exception {
+        assumeNonProtectedVmSupported();
+        assertThat(
+                        isTombstoneGeneratedWithCrashConfig(
+                                /*protectedVm=*/ false, /*debuggable=*/ false))
+                .isFalse();
+    }
+
+    @Test
+    public void testTelemetryPushedAtomsOnNonPvm() throws Exception {
+        assumeNonProtectedVmSupported();
+        testTelemetryPushedAtoms(false);
+    }
+
+    @Test
+    public void testTelemetryPushedAtomsOnPvm() throws Exception {
+        assumeProtectedVmSupported();
+        testTelemetryPushedAtoms(true);
+    }
+
+    private void testTelemetryPushedAtoms(boolean protectedVm) throws Exception {
+>>>>>>> BRANCH (6ef6c1 Run tests on both pVMs and non-pVMS)
         // Reset statsd config and report before the test
         ConfigUtils.removeConfig(getDevice());
         ReportUtils.clearReports(getDevice());
@@ -679,7 +844,11 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         .debugLevel("full")
                         .memoryMib(minMemorySize())
                         .cpuTopology("match_host")
+<<<<<<< HEAD   (1a7a6d [automerger skipped] Don't run non-protected tests if not su)
                         .protectedVm(mProtectedVm)
+=======
+                        .protectedVm(protectedVm)
+>>>>>>> BRANCH (6ef6c1 Run tests on both pVMs and non-pVMS)
                         .build(device);
         microdroid.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
         device.shutdownMicrodroid(microdroid);
@@ -706,7 +875,11 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                 data.get(0).getAtom().getVmCreationRequested();
         assertThat(atomVmCreationRequested.getHypervisor())
                 .isEqualTo(AtomsProto.VmCreationRequested.Hypervisor.PKVM);
+<<<<<<< HEAD   (1a7a6d [automerger skipped] Don't run non-protected tests if not su)
         assertThat(atomVmCreationRequested.getIsProtected()).isEqualTo(mProtectedVm);
+=======
+        assertThat(atomVmCreationRequested.getIsProtected()).isEqualTo(protectedVm);
+>>>>>>> BRANCH (6ef6c1 Run tests on both pVMs and non-pVMS)
         assertThat(atomVmCreationRequested.getCreationSucceeded()).isTrue();
         assertThat(atomVmCreationRequested.getBinderExceptionCode()).isEqualTo(0);
         assertThat(atomVmCreationRequested.getVmIdentifier()).isEqualTo("VmRunApp");
@@ -735,7 +908,23 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     @CddTest(requirements = {"9.17/C-1-1", "9.17/C-1-2", "9.17/C/1-3"})
+<<<<<<< HEAD   (1a7a6d [automerger skipped] Don't run non-protected tests if not su)
     public void testMicrodroidBoots() throws Exception {
+=======
+    public void testMicrodroidBootsOnPvm() throws Exception {
+        assumeProtectedVmSupported();
+        testMicrodroidBoots(true);
+    }
+
+    @Test
+    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-1-2", "9.17/C/1-3"})
+    public void testMicrodroidBootsOnNonPvm() throws Exception {
+        assumeNonProtectedVmSupported();
+        testMicrodroidBoots(false);
+    }
+
+    private void testMicrodroidBoots(boolean protectedVm) throws Exception {
+>>>>>>> BRANCH (6ef6c1 Run tests on both pVMs and non-pVMS)
         CommandRunner android = new CommandRunner(getDevice());
 
         final String configPath = "assets/vm_config.json"; // path inside the APK
@@ -744,7 +933,11 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         .debugLevel("full")
                         .memoryMib(minMemorySize())
                         .cpuTopology("match_host")
+<<<<<<< HEAD   (1a7a6d [automerger skipped] Don't run non-protected tests if not su)
                         .protectedVm(mProtectedVm)
+=======
+                        .protectedVm(protectedVm)
+>>>>>>> BRANCH (6ef6c1 Run tests on both pVMs and non-pVMS)
                         .build(getAndroidDevice());
         mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
         CommandRunner microdroid = new CommandRunner(mMicrodroidDevice);
@@ -809,14 +1002,33 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+<<<<<<< HEAD   (1a7a6d [automerger skipped] Don't run non-protected tests if not su)
     public void testMicrodroidRamUsage() throws Exception {
+=======
+    public void testMicrodroidRamUsageOnPvm() throws Exception {
+        assumeProtectedVmSupported();
+        testMicrodroidRamUsage(true);
+    }
+
+    @Test
+    public void testMicrodroidRamUsageOnNonPvm() throws Exception {
+        assumeNonProtectedVmSupported();
+        testMicrodroidRamUsage(false);
+    }
+
+    private void testMicrodroidRamUsage(boolean protectedVm) throws Exception {
+>>>>>>> BRANCH (6ef6c1 Run tests on both pVMs and non-pVMS)
         final String configPath = "assets/vm_config.json";
         mMicrodroidDevice =
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
                         .debugLevel("full")
                         .memoryMib(minMemorySize())
                         .cpuTopology("match_host")
+<<<<<<< HEAD   (1a7a6d [automerger skipped] Don't run non-protected tests if not su)
                         .protectedVm(mProtectedVm)
+=======
+                        .protectedVm(protectedVm)
+>>>>>>> BRANCH (6ef6c1 Run tests on both pVMs and non-pVMS)
                         .build(getAndroidDevice());
         mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
         mMicrodroidDevice.enableAdbRoot();
