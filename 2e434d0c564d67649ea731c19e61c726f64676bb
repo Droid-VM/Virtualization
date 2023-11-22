@@ -22,6 +22,30 @@
       },
       "revId": "2e434d0c564d67649ea731c19e61c726f64676bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e08b4fa_5609ae74",
+        "filename": "libs/bssl/src/evp.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-22T13:05:08Z",
+      "side": 1,
+      "message": "The inner key is set here and used in the function below. I added safety comments in both places.",
+      "parentUuid": "89d8fda8_be80d227",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 81
+      },
+      "revId": "2e434d0c564d67649ea731c19e61c726f64676bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
