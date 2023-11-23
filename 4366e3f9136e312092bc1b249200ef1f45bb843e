@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d0470f8_0cdb46c4",
+        "filename": "virtualizationservice/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-23T16:54:30Z",
+      "side": 1,
+      "message": "Are you going to end up using different crates for certificate generation (`x509-cert`) and parsing (`x509-parser`) ?",
+      "revId": "4366e3f9136e312092bc1b249200ef1f45bb843e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "495e6d36_dc2fa90c",
+        "filename": "virtualizationservice/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-23T16:54:30Z",
+      "side": 1,
+      "message": "For binary files like this it\u0027s helpful to document the provenance of the file.",
+      "revId": "4366e3f9136e312092bc1b249200ef1f45bb843e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75dc56ac_0ca53b14",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-23T16:54:30Z",
+      "side": 1,
+      "message": "nit: name of the function feels slightly odd, given that the return value doesn\u0027t include parsed certificates.",
+      "revId": "4366e3f9136e312092bc1b249200ef1f45bb843e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
