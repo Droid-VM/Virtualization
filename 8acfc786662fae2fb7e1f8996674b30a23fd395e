@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80892dda_d1746b4e",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-23T08:06:23Z",
+      "side": 1,
+      "message": "Could you remove the printing in main.rs[1] since now the remote attestation is used? That was only a placeholder.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/pvmfw/src/main.rs;l\u003d117;drc\u003dc6e023b137c44d704d484e88450d8553db31b56a",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 59,
+        "endChar": 11
+      },
+      "revId": "8acfc786662fae2fb7e1f8996674b30a23fd395e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5acde84_b12c2adf",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-23T08:06:23Z",
+      "side": 1,
+      "message": "nice to have: As the logic here is becoming more and more complex, it could be beneficial to have some unit tests to check this conversion from `VerifiedBootData` to next stage `BccHandover` give expected result in different scenarios (RKP VM, Microdroid VM, (non)debuggable...).",
+      "range": {
+        "startLine": 64,
+        "startChar": 11,
+        "endLine": 64,
+        "endChar": 25
+      },
+      "revId": "8acfc786662fae2fb7e1f8996674b30a23fd395e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
