@@ -2,8 +2,8 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
-rust_binary {
-    name: "virtualizationservice",
+rust_defaults {
+    name: "virtualizationservice_defaults",
     crate_name: "virtualizationservice",
     defaults: ["avf_build_flags_rust"],
     edition: "2021",
@@ -45,8 +45,14 @@ rust_binary {
         "libserde_xml_rs",
         "libservice_vm_comm",
         "libservice_vm_manager",
+        "libx509_parser",
     ],
     apex_available: ["com.android.virt"],
+}
+
+rust_binary {
+    name: "virtualizationservice",
+    defaults: ["virtualizationservice_defaults"],
 }
 
 xsd_config {
@@ -54,4 +60,18 @@ xsd_config {
     srcs: ["assignable_devices.xsd"],
     api_dir: "schema",
     package_name: "android.system.virtualizationservice",
+}
+
+rust_test {
+    name: "virtualizationservice_test",
+    defaults: ["virtualizationservice_defaults"],
+    test_suites: ["general-tests"],
+    data: [
+        ":test_rkp_cert_chain",
+    ],
+}
+
+filegroup {
+    name: "test_rkp_cert_chain",
+    srcs: ["testdata/rkp_cert_chain.der"],
 }
