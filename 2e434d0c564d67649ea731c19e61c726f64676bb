@@ -46,6 +46,30 @@
       },
       "revId": "2e434d0c564d67649ea731c19e61c726f64676bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06e80a26_5b1e68df",
+        "filename": "libs/bssl/src/evp.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-11-23T11:57:25Z",
+      "side": 1,
+      "message": "Seems reasonable to me. If you want to make it extra clear, you could add a comment on the `_inner_key` field of `EvpPKey` explaining the relationship.",
+      "parentUuid": "8e08b4fa_5609ae74",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 81
+      },
+      "revId": "2e434d0c564d67649ea731c19e61c726f64676bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
