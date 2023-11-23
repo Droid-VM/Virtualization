@@ -1,6 +1,75 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "185fe8c7_151c8e43",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-23T09:59:55Z",
+      "side": 1,
+      "message": "The `mut` is no longer necessary for the Payload. None of the operations in `Ops` currently require it to be mutable.",
+      "range": {
+        "startLine": 48,
+        "startChar": 13,
+        "endLine": 48,
+        "endChar": 21
+      },
+      "revId": "6465eca71cf73202aa147411a2ef1e85fd61dd65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5656f79_c4fa4e15",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-23T09:59:55Z",
+      "side": 1,
+      "message": "We don\u0027t want to ignore the errors from the original verify_partition call on initrd.",
+      "range": {
+        "startLine": 174,
+        "startChar": 8,
+        "endLine": 174,
+        "endChar": 9
+      },
+      "revId": "6465eca71cf73202aa147411a2ef1e85fd61dd65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "266d202f_caa83db3",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-23T09:59:55Z",
+      "side": 1,
+      "message": "This looks like a hack. Actually as `Ops` is only a lightweight wrapper now around payload, can we just create a different ops for the second verification instead of taking this hack?",
+      "range": {
+        "startLine": 196,
+        "startChar": 4,
+        "endLine": 196,
+        "endChar": 5
+      },
+      "revId": "6465eca71cf73202aa147411a2ef1e85fd61dd65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9e7a74ad_76535488",
