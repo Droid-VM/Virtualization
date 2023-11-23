@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74952bb9_80f52bd6",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-23T10:13:41Z",
+      "side": 1,
+      "message": "I feel you shouldn\u0027t need the explicit `*` because of automatic deref, but Rust constantly surprises me.",
+      "range": {
+        "startLine": 703,
+        "startChar": 39,
+        "endLine": 703,
+        "endChar": 40
+      },
+      "revId": "b10ebc74fa41c21aeb3cc45f54fee00483c3393a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
