@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f9bbd65_befbdccb",
+        "filename": "virtualizationservice/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-24T10:05:55Z",
+      "side": 1,
+      "message": "This is an `std` environment, and virt only has access to the rust-crypto `nostd` crates for now. Taking the `nostd` crate might potentially cause conflicts with other crates that `virtualizationservice` depends on later for their common dependencies.\n\nMoreover, when it comes to parsing the chain into individual certificates, `x509_parser` appears to be more convenient as it returns the trailing slice in return. On the other hand, `x509_cert` always results in an [error](https://docs.rs/der/0.6.1/der/enum.ErrorKind.html#variant.TrailingData) wrapping its own data type.",
+      "parentUuid": "3d0470f8_0cdb46c4",
+      "revId": "4366e3f9136e312092bc1b249200ef1f45bb843e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "495e6d36_dc2fa90c",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eafbff6c_28679e15",
+        "filename": "virtualizationservice/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-24T10:05:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "495e6d36_dc2fa90c",
+      "revId": "4366e3f9136e312092bc1b249200ef1f45bb843e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75dc56ac_0ca53b14",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-11-23T16:54:30Z",
       "side": 1,
       "message": "nit: name of the function feels slightly odd, given that the return value doesn\u0027t include parsed certificates.",
+      "revId": "4366e3f9136e312092bc1b249200ef1f45bb843e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc7eb461_e2f188d6",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-24T10:05:55Z",
+      "side": 1,
+      "message": "What about `split_x509_certificate_chain`? I feel \"split\" provides more clarity  than \"parse\" here.",
+      "parentUuid": "75dc56ac_0ca53b14",
       "revId": "4366e3f9136e312092bc1b249200ef1f45bb843e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
