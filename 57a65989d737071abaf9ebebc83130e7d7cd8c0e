@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4308cfe_848b91a1",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-24T10:45:35Z",
+      "side": 1,
+      "message": "Nit: I find the naming confusing.\nUse cert_chain directly instead of remaining (you can mark it mut even though it\u0027s a parameter) and rename to_read as remaining, consistent with other places?",
+      "range": {
+        "startLine": 303,
+        "startChar": 13,
+        "endLine": 303,
+        "endChar": 20
+      },
+      "revId": "57a65989d737071abaf9ebebc83130e7d7cd8c0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca80ccc3_704a6062",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-24T10:45:35Z",
+      "side": 1,
+      "message": "This is doing a lot more work than we actually need, since we immediately throw away all the parsed data - we just need to skip over one DER object.\nIs there a low-level function that will do that?",
+      "range": {
+        "startLine": 303,
+        "startChar": 27,
+        "endLine": 303,
+        "endChar": 63
+      },
+      "revId": "57a65989d737071abaf9ebebc83130e7d7cd8c0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
