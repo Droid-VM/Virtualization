@@ -45,6 +45,54 @@
       },
       "revId": "57a65989d737071abaf9ebebc83130e7d7cd8c0e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ad0a4f8_9b372744",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-24T13:54:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4308cfe_848b91a1",
+      "range": {
+        "startLine": 303,
+        "startChar": 13,
+        "endLine": 303,
+        "endChar": 20
+      },
+      "revId": "57a65989d737071abaf9ebebc83130e7d7cd8c0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5803ab8d_ccf2000e",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-24T13:54:14Z",
+      "side": 1,
+      "message": "I checked some alternative options such as parse_der/[parse_der_sequence](https://docs.rs/der-parser/latest/der_parser/der/fn.parse_der_sequence.html), but they also involve recursive parsing of all elements, so I don\u0027t think there would be significant benefits if we switch to them. On the other hand, by parsing the X509 certificate here, we not only validate the DER encoding but also the X509 format of the underlying certificate from RKPD.",
+      "parentUuid": "ca80ccc3_704a6062",
+      "range": {
+        "startLine": 303,
+        "startChar": 27,
+        "endLine": 303,
+        "endChar": 63
+      },
+      "revId": "57a65989d737071abaf9ebebc83130e7d7cd8c0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
