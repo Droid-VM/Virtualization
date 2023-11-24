@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bff52a0c_e52f83ba",
+        "filename": "libs/apexutil/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-24T14:38:23Z",
+      "side": 0,
+      "message": "Is it safe to remove this now? Maybe put this in a separate cl?\n\nI tried to remove these lines some time ago and the cl passed all the presubmit checks, but the CI still broke in the end.\n\nhttps://r.android.com/2351482",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 34,
+        "endChar": 10
+      },
+      "revId": "c66a480084f976df9cb2988d5d98d0338e882970",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
