@@ -130,6 +130,12 @@ pub enum RequestProcessingError {
 
     /// An error happened during the DER encoding/decoding.
     DerError,
+
+    /// The DICE chain from the client VM is invalid.
+    InvalidDiceChain,
+
+    /// The DICE chain from the client VM does not match the one from the service VM.
+    DiceChainUnmatch,
 }
 
 impl fmt::Display for RequestProcessingError {
@@ -154,6 +160,15 @@ impl fmt::Display for RequestProcessingError {
             }
             Self::DerError => {
                 write!(f, "An error happened during the DER encoding/decoding")
+            }
+            Self::InvalidDiceChain => {
+                write!(f, "The DICE chain from the client VM is invalid")
+            }
+            Self::DiceChainUnmatch => {
+                write!(
+                    f,
+                    "The DICE chain from the client VM does not match the one from the service VM"
+                )
             }
         }
     }
