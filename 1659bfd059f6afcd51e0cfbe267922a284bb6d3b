@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70013506_4e33082a",
+        "filename": "libs/apexutil/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-24T09:54:04Z",
+      "side": 1,
+      "message": "Interesting. I had a chat with a couple of the Rust experts over here.\nWe agreed that it doesn\u0027t seem worthwhile - it is potentially a pessimisation (it shrinks to fit, which may require allocation + copy), it is potentially less useful to clients, and it doesn\u0027t bring any obvious benefit and makes the code slightly more complicated and slightly less easy to read.\nIt might make more sense in a constrained no_std environment, but that isn\u0027t where we are.",
+      "parentUuid": "624afaf9_e176d005",
+      "range": {
+        "startLine": 79,
+        "startChar": 20,
+        "endLine": 79,
+        "endChar": 27
+      },
+      "revId": "1659bfd059f6afcd51e0cfbe267922a284bb6d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c07b5282_3625e2f3",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-21T13:59:48Z",
       "side": 1,
       "message": "Do we have a use for it? If not, then I suggest not introducing it :) We can always add it later when we find a use case",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 28
+      },
+      "revId": "1659bfd059f6afcd51e0cfbe267922a284bb6d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "130b70fc_2fb00ab1",
+        "filename": "libs/apexutil/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-24T09:54:04Z",
+      "side": 1,
+      "message": "I\u0027m not introducing it, I\u0027m moving it; keeping it as a separate function would have made my refactoring messier.",
+      "parentUuid": "c07b5282_3625e2f3",
       "range": {
         "startLine": 82,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d69579d4_d5e33ad7",
+        "filename": "libs/apexutil/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-24T09:54:04Z",
+      "side": 1,
+      "message": "In theory at least this operation can never return FileNotFound since it doesn\u0027t specify a file to operate on, and hence this string will never be used.\nBut I wanted something here just in case.",
+      "parentUuid": "8bb0c427_f5bc7e78",
+      "range": {
+        "startLine": 123,
+        "startChar": 77,
+        "endLine": 123,
+        "endChar": 80
+      },
+      "revId": "1659bfd059f6afcd51e0cfbe267922a284bb6d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bcb66a73_e314a2df",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-11-14T11:43:35Z",
       "side": 1,
       "message": "nit: think it\u0027s more clear to write this as `impl From\u003cApexManifest\u003e for ApexManifestInfo`",
+      "range": {
+        "startLine": 150,
+        "startChar": 7,
+        "endLine": 150,
+        "endChar": 74
+      },
+      "revId": "1659bfd059f6afcd51e0cfbe267922a284bb6d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9b7e20d_8e3fc681",
+        "filename": "libs/apexutil/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-24T09:54:04Z",
+      "side": 1,
+      "message": "I can\u0027t do that, because it can fail.\nI could use try_from, but I\u0027m not sure that makes the single call site better.\n\nAnd tbh I don\u0027t see this as a conversion; it parses \u0026 then extracts the specific data we care about.",
+      "parentUuid": "bcb66a73_e314a2df",
       "range": {
         "startLine": 150,
         "startChar": 7,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f69d537f_0ff29a73",
+        "filename": "libs/apexutil/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-24T09:54:04Z",
+      "side": 1,
+      "message": "\u003e Can you add tests for negative scenarios please? :) There are some test APEXEs used in tests in system/apex/ that can help.\n\nYes, seems reasonable. I\u0027m doing a separate CL for that though because it\u0027s quite a big change in its own right.\n\n\u003e \n\u003e Also, should this be moved to system/apex? It seems to be generic enough?\n\nThat seems like premature generalization. It\u0027s currently very specific to my use case; I\u0027d have no objection to exposing it more widely if there was a use case.",
+      "parentUuid": "8a4a153d_d38b0216",
+      "range": {
+        "startLine": 168,
+        "startChar": 7,
+        "endLine": 168,
+        "endChar": 45
+      },
+      "revId": "1659bfd059f6afcd51e0cfbe267922a284bb6d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be040751_3b28ccca",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-11-14T11:43:35Z",
       "side": 1,
       "message": "Can we save this in a binary file and just load the expected data from the file to compare?",
+      "range": {
+        "startLine": 175,
+        "startChar": 13,
+        "endLine": 175,
+        "endChar": 36
+      },
+      "revId": "1659bfd059f6afcd51e0cfbe267922a284bb6d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "971e03d8_5f4f195f",
+        "filename": "libs/apexutil/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-24T09:54:04Z",
+      "side": 1,
+      "message": "We could, but I\u0027m not strongly motivated to do so.",
+      "parentUuid": "be040751_3b28ccca",
       "range": {
         "startLine": 175,
         "startChar": 13,
