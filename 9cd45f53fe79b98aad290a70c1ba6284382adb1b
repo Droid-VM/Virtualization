@@ -501,6 +501,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6700916_839d4731",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-24T14:19:15Z",
+      "side": 1,
+      "message": "Oh, that\u0027s good.",
+      "parentUuid": "26bec718_c4d4aacf",
+      "range": {
+        "startLine": 66,
+        "startChar": 44,
+        "endLine": 66,
+        "endChar": 84
+      },
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a007d385_4e0e3032",
@@ -716,6 +740,30 @@
       "side": 1,
       "message": "Done. BTW, we only receive the reference of `csr` as a parameter in the AIDL, so either the conversion to a vec needs to be done upstream or here.",
       "parentUuid": "785168d7_6c63c192",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 70
+      },
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f5e7209_0d16269c",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-24T14:19:15Z",
+      "side": 1,
+      "message": "Yeah - my claim is just that if we need an owned version we should take by value. It can\u0027t make things worse, but it does allow avoiding a copy in some circumstances.\n(There\u0027s a similar guideline in C++ these days.)",
+      "parentUuid": "3f666620_fdc06c72",
       "range": {
         "startLine": 34,
         "startChar": 0,
