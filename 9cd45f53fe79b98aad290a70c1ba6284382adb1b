@@ -455,6 +455,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5e125e0e_6aa4fad4",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-24T11:34:38Z",
+      "side": 1,
+      "message": "Interesting.\n\nI also note over there that the leaf cert has \"X509v3 Key Usage: critical Key Encipherment, Data Encipherment\".\n\nWe\u0027re going to need \"Certificate Signing\", or we can\u0027t validly extend the chain.\n\nSomething to discuss with Seth?",
+      "parentUuid": "e6d15b51_fc4335bb",
+      "range": {
+        "startLine": 66,
+        "startChar": 44,
+        "endLine": 66,
+        "endChar": 84
+      },
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a007d385_4e0e3032",
         "filename": "service_vm/requests/src/client_vm.rs",
         "patchSetId": 6
@@ -490,6 +514,30 @@
       "side": 1,
       "message": "Exactly.\n\n- For the DER-encoded ECPrivateKey bytes [1]\n- `ec_private_key` is an EcKey for which BoringSSL zeros all the memory on drop [2]\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/service_vm/requests/src/keyblob.rs;l\u003d101;drc\u003d9aeb406b2f1cdb2d772e0e43373cafe9ff5f9a80\n[2] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/bssl/src/ec_key.rs;l\u003d54;drc\u003d0271ee0085476761fe94878962017c24cb124cae",
       "parentUuid": "a007d385_4e0e3032",
+      "range": {
+        "startLine": 79,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 19
+      },
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c81764cd_5517e5be",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-24T11:34:38Z",
+      "side": 1,
+      "message": "It might be worth mentioning that in a comment.",
+      "parentUuid": "e7a94138_7768f0ba",
       "range": {
         "startLine": 79,
         "startChar": 8,
@@ -572,6 +620,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "beed14be_112fd305",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 70
+      },
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "785168d7_6c63c192",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-24T11:34:38Z",
+      "side": 1,
+      "message": "Also csr?",
+      "parentUuid": "956dbe24_d01e12d0",
       "range": {
         "startLine": 34,
         "startChar": 0,
