@@ -477,6 +477,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26bec718_c4d4aacf",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-24T14:12:15Z",
+      "side": 1,
+      "message": "Actually, the certificate chain in [1] is generated in Keymint, so the leaf certificate does not originate from RKP, but from Keymint.\n\nThe RKP certificate is the second certificate in the chain and it contains the following extensions:\n```\n    X509v3 extensions:\n            ...\n            X509v3 Key Usage: critical\n                Certificate Signing\n            X509v3 Basic Constraints: critical\n                CA:true\n            Android RKP Information:\n                a1:...\n```\nThe key usage is set to `Certificate Signing`. In our case, we will not have the Keymint certificate; we will only be extending the RKP certificate.",
+      "parentUuid": "5e125e0e_6aa4fad4",
+      "range": {
+        "startLine": 66,
+        "startChar": 44,
+        "endLine": 66,
+        "endChar": 84
+      },
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a007d385_4e0e3032",
@@ -538,6 +562,30 @@
       "side": 1,
       "message": "It might be worth mentioning that in a comment.",
       "parentUuid": "e7a94138_7768f0ba",
+      "range": {
+        "startLine": 79,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 19
+      },
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d12ad35e_500160ee",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-24T14:12:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c81764cd_5517e5be",
       "range": {
         "startLine": 79,
         "startChar": 8,
@@ -644,6 +692,30 @@
       "side": 1,
       "message": "Also csr?",
       "parentUuid": "956dbe24_d01e12d0",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 70
+      },
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f666620_fdc06c72",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-24T14:12:15Z",
+      "side": 1,
+      "message": "Done. BTW, we only receive the reference of `csr` as a parameter in the AIDL, so either the conversion to a vec needs to be done upstream or here.",
+      "parentUuid": "785168d7_6c63c192",
       "range": {
         "startLine": 34,
         "startChar": 0,
