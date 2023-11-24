@@ -41,4 +41,7 @@ rust_test {
     name: "libservice_vm_requests.test",
     defaults: ["libservice_vm_requests_nostd_defaults"],
     test_suites: ["general-tests"],
+    rustlibs: [
+        "libdiced_sample_inputs_nostd",
+    ],
 }

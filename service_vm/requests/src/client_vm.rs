@@ -16,6 +16,7 @@
 //! client VM.
 
 use crate::cert;
+use crate::dice::Chain;
 use crate::keyblob::decrypt_private_key;
 use alloc::vec::Vec;
 use bssl_avf::{rand_bytes, sha256, EcKey, EvpPKey};
@@ -29,6 +30,7 @@ use x509_cert::{certificate::Certificate, name::Name};
 
 type Result<T> = result::Result<T, RequestProcessingError>;
 
+const DICE_CDI_LEAF_SIGNATURE_INDEX: usize = 0;
 const ATTESTATION_KEY_SIGNATURE_INDEX: usize = 1;
 
 pub(super) fn request_attestation(
@@ -43,20 +45,26 @@ pub(super) fn request_attestation(
     })?;
     let csr_payload = CsrPayload::from_cbor_slice(csr_payload)?;
 
+    // Verifies and builds client VM's DICE chain.
+    let service_vm_dice_chain =
+        dice_artifacts.bcc().ok_or(RequestProcessingError::MissingDiceChain)?;
+    let client_vm_dice_chain =
+        Chain::verify_cbor_slice(&csr.dice_cert_chain, service_vm_dice_chain)?;
+
     // AAD is empty as defined in service_vm/comm/client_vm_csr.cddl.
     let aad = &[];
 
-    // TODO(b/310931749): Verify the first signature with CDI_Leaf_Pub of
-    // the DICE chain in `cose_sign`.
+    // Verifies the first signature with the leaf private key in the DICE chain.
+    cose_sign.verify_signature(DICE_CDI_LEAF_SIGNATURE_INDEX, aad, |signature, message| {
+        client_vm_dice_chain.leaf().subject_public_key().verify(signature, message)
+    })?;
 
+    // Verifies the second signature with the public key in the CSR payload.
     let ec_public_key = EcKey::from_cose_public_key(&csr_payload.public_key)?;
     cose_sign.verify_signature(ATTESTATION_KEY_SIGNATURE_INDEX, aad, |signature, message| {
         ecdsa_verify(&ec_public_key, signature, message)
     })?;
     let subject_public_key_info = EvpPKey::try_from(ec_public_key)?.subject_public_key_info()?;
-
-    // TODO(b/278717513): Compare client VM's DICE chain in the `csr` up to pvmfw
-    // cert with RKP VM's DICE chain.
 
     // Builds the TBSCertificate.
     // The serial number can be up to 20 bytes according to RFC5280 s4.1.2.2.
