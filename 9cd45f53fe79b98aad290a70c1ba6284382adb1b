@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd1092ab_80503bf2",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-24T11:19:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee8d9216_a4abbaaa",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 6
+      },
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f5c71f9_47b46ab1",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-24T10:19:58Z",
       "side": 1,
       "message": "Don\u0027t we also need to check the contents of the extension?",
+      "range": {
+        "startLine": 191,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 33
+      },
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ec65bdf_426f6b21",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-24T11:19:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f5c71f9_47b46ab1",
       "range": {
         "startLine": 191,
         "startChar": 0,
@@ -64,6 +112,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7413c5d_7a695e23",
+        "filename": "service_vm/comm/src/message.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-24T11:19:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ed608e1_9fdb9285",
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "234c6591_0724ae99",
@@ -77,6 +143,30 @@
       "writtenOn": "2023-11-24T10:19:58Z",
       "side": 1,
       "message": "Why?",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 28
+      },
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8b2efac_d9713197",
+        "filename": "service_vm/comm/src/message.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-24T11:19:18Z",
+      "side": 1,
+      "message": "The std version of `der` is [host only](https://cs.android.com/android/platform/superproject/main/+/main:external/rust/crates/der/Android.bp;l\u003d34;drc\u003d02195119a451cb0405bd665ca71ec56bedc50209), we cannot use it directly here. Additionally, as the host only needs to deserialize `RequestProcessingError`, this conversion is not required for the std version.",
+      "parentUuid": "234c6591_0724ae99",
       "range": {
         "startLine": 180,
         "startChar": 0,
@@ -110,6 +200,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5783413a_f9ad6afe",
+        "filename": "service_vm/requests/src/cert.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-24T11:19:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fea282fc_25772f02",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 63
+      },
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ae2d62c_dc516e6e",
@@ -123,6 +237,24 @@
       "writtenOn": "2023-11-23T17:11:50Z",
       "side": 1,
       "message": "nit: indent or use ```",
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8b8bd97_0389cd1a",
+        "filename": "service_vm/requests/src/cert.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-24T11:19:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ae2d62c_dc516e6e",
       "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -150,6 +282,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84d9c1a0_65981998",
+        "filename": "service_vm/requests/src/cert.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-24T11:19:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d64f0d1e_682c238a",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 32
+      },
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9f9e038_651e8f97",
@@ -163,6 +319,30 @@
       "writtenOn": "2023-11-24T10:19:58Z",
       "side": 1,
       "message": "It\u0027s probably also worth saying that we\u0027re supposed to have a different serial number for every cert we sign.\n160 random bytes should make that fairly certain.",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 77
+      },
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a1e4f0a_5c752136",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-24T11:19:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9f9e038_651e8f97",
       "range": {
         "startLine": 60,
         "startChar": 0,
@@ -208,6 +388,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f34eacd4_f872cf00",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-24T11:19:18Z",
+      "side": 1,
+      "message": "Thanks, that\u0027s a good point, I should take the issuer directly from the RKP cert\u0027s subject field.",
+      "parentUuid": "6319f0f9_0ed57467",
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90d845cd_b60c960f",
@@ -221,6 +419,30 @@
       "writtenOn": "2023-11-24T10:19:58Z",
       "side": 1,
       "message": "So every cert gets the same name? I guess that\u0027s ok.",
+      "range": {
+        "startLine": 66,
+        "startChar": 44,
+        "endLine": 66,
+        "endChar": 84
+      },
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6d15b51_fc4335bb",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-24T11:19:18Z",
+      "side": 1,
+      "message": "Yes, the name is only descriptive here. Based on the sample Keymint chain David dumped from the Keymint CTS test[1], the cert added by Keymint is also like this without a unique identifier, though the RKP cert\u0027s subject also includes its serial number.\n\n@drysdale@google.com FYI\n\n[1] http://gpaste/5934310218006528",
+      "parentUuid": "90d845cd_b60c960f",
       "range": {
         "startLine": 66,
         "startChar": 44,
@@ -254,6 +476,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7a94138_7768f0ba",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-24T11:19:18Z",
+      "side": 1,
+      "message": "Exactly.\n\n- For the DER-encoded ECPrivateKey bytes [1]\n- `ec_private_key` is an EcKey for which BoringSSL zeros all the memory on drop [2]\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/service_vm/requests/src/keyblob.rs;l\u003d101;drc\u003d9aeb406b2f1cdb2d772e0e43373cafe9ff5f9a80\n[2] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/bssl/src/ec_key.rs;l\u003d54;drc\u003d0271ee0085476761fe94878962017c24cb124cae",
+      "parentUuid": "a007d385_4e0e3032",
+      "range": {
+        "startLine": 79,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 19
+      },
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e321aa6_c2c22921",
@@ -271,6 +517,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "edd5ed3b_5f1acacb",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-24T11:19:18Z",
+      "side": 1,
+      "message": "I added a check in the previous cl (aosp/2845853) to ensure the chain is not empty.",
+      "parentUuid": "6e321aa6_c2c22921",
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "beed14be_112fd305",
@@ -284,6 +548,30 @@
       "writtenOn": "2023-11-24T10:19:58Z",
       "side": 1,
       "message": "If these need to be Vec, why don\u0027t we just take them as an owned Vec rather than \u0026[u8]?\n(So if the caller already has a Vec they can just give it to us, instead of a copy being forced.)",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 70
+      },
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "956dbe24_d01e12d0",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-24T11:19:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "beed14be_112fd305",
       "range": {
         "startLine": 34,
         "startChar": 0,
