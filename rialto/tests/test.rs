@@ -29,7 +29,7 @@ use coset::{CborSerializable, CoseMac0, CoseSign};
 use log::info;
 use service_vm_comm::{
     ClientVmAttestationParams, Csr, CsrPayload, EcdsaP256KeyPair, GenerateCertificateRequestParams,
-    Request, Response, VmType,
+    Request, RequestProcessingError, Response, VmType,
 };
 use service_vm_manager::ServiceVm;
 use std::fs;
@@ -65,7 +65,7 @@ fn check_processing_requests(vm_type: VmType) -> Result<()> {
     check_processing_reverse_request(&mut vm)?;
     let key_pair = check_processing_generating_key_pair_request(&mut vm)?;
     check_processing_generating_certificate_request(&mut vm, &key_pair.maced_public_key)?;
-    check_attestation_request(&mut vm, &key_pair)?;
+    check_attestation_request(&mut vm, &key_pair, vm_type)?;
     Ok(())
 }
 
@@ -123,6 +123,7 @@ fn check_processing_generating_certificate_request(
 fn check_attestation_request(
     vm: &mut ServiceVm,
     remotely_provisioned_key_pair: &EcdsaP256KeyPair,
+    vm_type: VmType,
 ) -> Result<()> {
     /// The following data was generated randomly with urandom.
     const CHALLENGE: [u8; 16] = [
@@ -151,12 +152,20 @@ fn check_attestation_request(
 
     match response {
         Response::RequestClientVmAttestation(certificate) => {
+            assert_eq!(vm_type, VmType::NonProtectedVm);
             check_certificate_for_client_vm(
                 &certificate,
                 &remotely_provisioned_key_pair.maced_public_key,
                 &attestation_data.csr,
                 &cert,
             )?;
+            Ok(())
+        }
+        Response::Err(RequestProcessingError::DiceChainUnmatch) => {
+            // The end-to-end test for protected VM attestation doesn't work because RKP VM compares
+            // the fake DICE chain in the CSR with its own DICE chain. We cannot generate a valid
+            // DICE chain with the same payloads up to pvmfw.
+            assert_eq!(vm_type, VmType::ProtectedVm);
             Ok(())
         }
         _ => bail!("Incorrect response type: {response:?}"),

@@ -14,13 +14,14 @@
 
 //! This library contains functions for the request processing.
 
-#![no_std]
+#![cfg_attr(not(test), no_std)]
 
 extern crate alloc;
 
 mod api;
 mod cert;
 mod client_vm;
+mod dice;
 mod keyblob;
 mod pub_key;
 mod rkp;
