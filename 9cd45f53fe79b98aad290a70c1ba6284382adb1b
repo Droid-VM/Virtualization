@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ee8d9216_a4abbaaa",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-24T10:19:58Z",
+      "side": 1,
+      "message": "Some sort of comment on what this is doing would be helpful.",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 6
+      },
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f5c71f9_47b46ab1",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-24T10:19:58Z",
+      "side": 1,
+      "message": "Don\u0027t we also need to check the contents of the extension?",
+      "range": {
+        "startLine": 191,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 33
+      },
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ed608e1_9fdb9285",
         "filename": "service_vm/comm/src/message.rs",
         "patchSetId": 6
@@ -14,6 +60,52 @@
       "writtenOn": "2023-11-23T17:11:50Z",
       "side": 1,
       "message": "nit: mention format of data.",
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "234c6591_0724ae99",
+        "filename": "service_vm/comm/src/message.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-24T10:19:58Z",
+      "side": 1,
+      "message": "Why?",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 28
+      },
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fea282fc_25772f02",
+        "filename": "service_vm/requests/src/cert.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-24T10:19:58Z",
+      "side": 1,
+      "message": "Comment should reference cl/584542390.\n\nAnd the name should correspond: AVF_ATTESTATION_EXTENSION_V1.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 63
+      },
       "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -37,6 +129,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d64f0d1e_682c238a",
+        "filename": "service_vm/requests/src/cert.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-24T10:19:58Z",
+      "side": 1,
+      "message": "vec!(Extension{...})",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 32
+      },
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9f9e038_651e8f97",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-24T10:19:58Z",
+      "side": 1,
+      "message": "It\u0027s probably also worth saying that we\u0027re supposed to have a different serial number for every cert we sign.\n160 random bytes should make that fairly certain.",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 77
+      },
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6319f0f9_0ed57467",
         "filename": "service_vm/requests/src/client_vm.rs",
         "patchSetId": 6
@@ -54,6 +192,70 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dcfc5e5a_fe4176cc",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-24T10:19:58Z",
+      "side": 1,
+      "message": "Yeah, we need to copy the issuer from the subject of the parent cert.",
+      "parentUuid": "6319f0f9_0ed57467",
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90d845cd_b60c960f",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-24T10:19:58Z",
+      "side": 1,
+      "message": "So every cert gets the same name? I guess that\u0027s ok.",
+      "range": {
+        "startLine": 66,
+        "startChar": 44,
+        "endLine": 66,
+        "endChar": 84
+      },
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a007d385_4e0e3032",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-24T10:19:58Z",
+      "side": 1,
+      "message": "These 2 private keys are zeroed on drop, I assume?",
+      "range": {
+        "startLine": 79,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 19
+      },
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e321aa6_c2c22921",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 6
@@ -65,6 +267,29 @@
       "writtenOn": "2023-11-23T17:11:50Z",
       "side": 1,
       "message": "Is `certificate_chain` guaranteed to be non-empty?",
+      "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "beed14be_112fd305",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-24T10:19:58Z",
+      "side": 1,
+      "message": "If these need to be Vec, why don\u0027t we just take them as an owned Vec rather than \u0026[u8]?\n(So if the caller already has a Vec they can just give it to us, instead of a copy being forced.)",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 70
+      },
       "revId": "9cd45f53fe79b98aad290a70c1ba6284382adb1b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
