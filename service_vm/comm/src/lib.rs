@@ -15,7 +15,7 @@
 //! This library contains the communication protocol used between the host
 //! and the service VM.
 
-#![cfg_attr(not(feature = "std"), no_std)]
+#![no_std]
 
 extern crate alloc;
 
@@ -23,7 +23,7 @@ mod csr;
 mod message;
 mod vsock;
 
-pub use csr::{Csr, CsrPayload};
+pub use csr::{cbor_value_type, try_as_bytes, Csr, CsrPayload};
 pub use message::{
     ClientVmAttestationParams, EcdsaP256KeyPair, GenerateCertificateRequestParams, Request,
     RequestProcessingError, Response, ServiceVmRequest,
