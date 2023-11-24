@@ -22,6 +22,30 @@
       },
       "revId": "c66a480084f976df9cb2988d5d98d0338e882970",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85cdbf67_c57c017a",
+        "filename": "libs/apexutil/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-24T15:56:59Z",
+      "side": 0,
+      "message": "One difference is I\u0027m removing the \"host_supported: true\" above, which I think is important.\n\nOtherwise, this is b/204562227, which is allegedly fixed.\n\nBut a separate CL sounds like a good idea, given the hassle involved in reverting.",
+      "parentUuid": "bff52a0c_e52f83ba",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 34,
+        "endChar": 10
+      },
+      "revId": "c66a480084f976df9cb2988d5d98d0338e882970",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
