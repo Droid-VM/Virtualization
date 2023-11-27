@@ -16,12 +16,13 @@
 
 //! Defines the packet structures passed between functional layer & the layer below.
 
-pub use ciborium::Value;
+use ciborium::Value;
 
-use crate::cbor_convert::{value_from_bytes, value_to_bytes, value_to_integer};
+use crate::cbor_convert::value_to_integer;
 use crate::data_types::error::Error;
 use crate::data_types::error::ERROR_OK;
 use crate::data_types::request_response_impl::Opcode;
+use crate::data_types::{CborBytesConversion, ValueConversion};
 use alloc::vec::Vec;
 
 /// Encapsulate Request-like data that functional layer operates on. All structures
@@ -29,7 +30,7 @@ use alloc::vec::Vec;
 /// Similarly all [`RequestPacket`] can be deserialized to concrete Requests.
 /// Keep in sync with HAL spec (in particular RequestPacket):
 ///     security/secretkeeper/aidl/android/hardware/security/secretkeeper/SecretManagement.cddl
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, PartialEq)]
 pub struct RequestPacket(Vec<Value>);
 
 impl RequestPacket {
@@ -54,22 +55,24 @@ impl RequestPacket {
 
         Opcode::n(num).ok_or(Error::RequestMalformed)
     }
+}
 
-    /// Serialize the [`ResponsePacket`] to bytes
-    pub fn into_bytes(self) -> Result<Vec<u8>, Error> {
-        value_to_bytes(&Value::Array(self.0))
+impl ValueConversion for RequestPacket {
+    fn from_value(val: Value) -> Result<Self, Error> {
+        Ok(Self(val.into_array()?))
     }
-
-    /// Deserialize the bytes into [`ResponsePacket`]
-    pub fn from_bytes(bytes: &[u8]) -> Result<Self, Error> {
-        Ok(RequestPacket(value_from_bytes(bytes)?.into_array()?))
+    fn value(&self) -> Value {
+        Value::from(self.0.as_slice())
     }
 }
+
+// Serialize/Deserialize the [`RequestPacket`] to bytes
+impl CborBytesConversion for RequestPacket {}
 
 /// Encapsulate Response like data that the functional layer operates on. All structures
 /// that implements `data_types::response::Response` can be serialized to [`ResponsePacket`].
 /// Similarly all [`ResponsePacket`] can be deserialized to concrete Response.
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, PartialEq)]
 pub struct ResponsePacket(Vec<Value>);
 
 impl ResponsePacket {
@@ -96,17 +99,20 @@ impl ResponsePacket {
             Ok(ResponseType::Error)
         }
     }
+}
 
-    /// Serialize the [`ResponsePacket`] to bytes
-    pub fn into_bytes(self) -> Result<Vec<u8>, Error> {
-        value_to_bytes(&Value::Array(self.0))
+impl ValueConversion for ResponsePacket {
+    fn from_value(val: Value) -> Result<Self, Error> {
+        Ok(Self(val.into_array()?))
     }
 
-    /// Deserialize the bytes into [`ResponsePacket`]
-    pub fn from_bytes(bytes: &[u8]) -> Result<Self, Error> {
-        Ok(ResponsePacket(value_from_bytes(bytes)?.into_array()?))
+    fn value(&self) -> Value {
+        Value::from(self.0.as_slice())
     }
 }
+
+// Serialize/Deserialize the [`ResponsePacket`] to bytes
+impl CborBytesConversion for ResponsePacket {}
 
 /// Responses can be different type - `Success`-like or `Error`-like.
 #[derive(Debug, Eq, PartialEq)]
