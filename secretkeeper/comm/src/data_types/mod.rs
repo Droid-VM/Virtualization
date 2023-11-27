@@ -20,6 +20,7 @@
 //!      platform/hardware/interfaces/security/\
 //!      secretkeeper/aidl/android/hardware/security/secretkeeper/SecretManagement.cddl
 
+pub mod cbor_ser;
 pub mod error;
 pub mod packet;
 pub mod request;
