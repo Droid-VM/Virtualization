@@ -62,6 +62,7 @@ use ciborium::Value;
 use coset::{AsCborValue, CoseSign1};
 use num_derive::FromPrimitive;
 use num_traits::FromPrimitive;
+use serde::{Deserialize, Serialize};
 use std::borrow::Cow;
 use std::iter::zip;
 
@@ -100,15 +101,15 @@ impl ConstraintSpec {
 // TODO(b/291238565): Restrict (nested_)key & value type to (bool/int/tstr/bstr).
 // and maybe convert it into struct.
 /// Each constraint (on a dice node) is a tuple: (ConstraintType, constraint_path, value)
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 struct Constraint(u16, Vec<i64>, Value);
 
 /// List of all constraints on a dice node.
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 struct NodeConstraints(Box<[Constraint]>);
 
 /// Module for working with dice policy.
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct DicePolicy {
     version: u64,
     node_constraints_list: Box<[NodeConstraints]>, // Constraint on each entry in dice chain.
@@ -195,6 +196,11 @@ impl DicePolicy {
                 .context(format!("Mismatch found at {}", n))?;
         }
         Ok(())
+    }
+
+    /// TODO
+    pub fn deserialize_from_bytes(bytes: &[u8]) -> Result<Self> {
+        Ok(serde_cbor::from_slice(bytes)?)
     }
 }
 
@@ -501,4 +507,11 @@ mod tests {
         ciborium::ser::into_writer(&value, &mut bytes)?;
         Ok(bytes)
     }
+}
+
+/// Given an Android dice chain, authenticate it against a given policy. This method returns
+/// Ok(()) in case of successful authentication, otherwise returns error incase of failure.
+pub fn authenticate_against_dice_policy(dice_chain: &[u8], policy: &[u8]) -> Result<()> {
+    DicePolicy::deserialize_from_bytes(policy)?.matches_dice_chain(dice_chain)?;
+    Ok(())
 }

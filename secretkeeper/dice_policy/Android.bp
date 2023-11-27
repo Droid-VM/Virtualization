@@ -8,14 +8,16 @@ rust_defaults {
     defaults: ["avf_build_flags_rust"],
     srcs: ["src/lib.rs"],
     edition: "2021",
-    prefer_rlib: true,
     rustlibs: [
         "libanyhow",
         "libciborium",
         "libcoset",
         "libnum_traits",
+        "libserde",
+        "libserde_cbor",
     ],
     proc_macros: ["libnum_derive"],
+    vendor_available: true,
 }
 
 rust_library {
