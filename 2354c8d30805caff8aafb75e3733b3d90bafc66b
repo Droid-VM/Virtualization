@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf3b18ba_a12b821e",
+        "filename": "secretkeeper/comm/src/data_types/cbor_ser.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-27T19:21:07Z",
+      "side": 1,
+      "message": "Ack. I just saw these. The trait declarations of each of the recommendations use custom errors (CoseError/CborError), while `secretkeeper_comm` doesnt use those.\n\nAlso, I have inclined not to reuse traits from other library because the data_types have nothing to do with authgraph or coset lib at the moment.\n\n`libsecretkeeper_comm` does not depend on either yet. (Although I think, that will change with encryption layer? We\u0027ll need to add libcoset atleast)\n\nI have renamed the methods to those in the `coset`.",
+      "parentUuid": "9f503f87_b348d1aa",
+      "revId": "2354c8d30805caff8aafb75e3733b3d90bafc66b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a21ab138_0a5b543d",
@@ -41,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66315f04_43b138dd",
+        "filename": "secretkeeper/comm/src/data_types/cbor_ser.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-27T19:21:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a21ab138_0a5b543d",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 45
+      },
+      "revId": "2354c8d30805caff8aafb75e3733b3d90bafc66b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e02d6aaa_fb1a13f9",
@@ -54,6 +96,30 @@
       "writtenOn": "2023-11-27T17:26:43Z",
       "side": 1,
       "message": "Does this need to be a separate trait? Couldn\u0027t these functions be added to ValueConversion?",
+      "range": {
+        "startLine": 38,
+        "startChar": 10,
+        "endLine": 38,
+        "endChar": 29
+      },
+      "revId": "2354c8d30805caff8aafb75e3733b3d90bafc66b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edaf483e_808fc070",
+        "filename": "secretkeeper/comm/src/data_types/cbor_ser.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-11-27T19:21:07Z",
+      "side": 1,
+      "message": "Few structures do not need `CborBytesConversion`. \n\nDicePolicy library has several examples of this where a cbor array would have field which need not be bstr. For ex nodeConstraint\n(In SecretManagement.cddl) - `ErrorCode` can just be Value \u0026 need not be serialized to bytes.",
+      "parentUuid": "e02d6aaa_fb1a13f9",
       "range": {
         "startLine": 38,
         "startChar": 10,
