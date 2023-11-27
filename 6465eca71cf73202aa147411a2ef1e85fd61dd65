@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42eccacd_379760af",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1078119
+      },
+      "writtenOn": "2023-11-27T18:33:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "185fe8c7_151c8e43",
+      "range": {
+        "startLine": 48,
+        "startChar": 13,
+        "endLine": 48,
+        "endChar": 21
+      },
+      "revId": "6465eca71cf73202aa147411a2ef1e85fd61dd65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5656f79_c4fa4e15",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a49e2f3c_5e10b499",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1078119
+      },
+      "writtenOn": "2023-11-27T18:33:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5656f79_c4fa4e15",
+      "range": {
+        "startLine": 174,
+        "startChar": 8,
+        "endLine": 174,
+        "endChar": 9
+      },
+      "revId": "6465eca71cf73202aa147411a2ef1e85fd61dd65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "266d202f_caa83db3",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-11-23T09:59:55Z",
       "side": 1,
       "message": "This looks like a hack. Actually as `Ops` is only a lightweight wrapper now around payload, can we just create a different ops for the second verification instead of taking this hack?",
+      "range": {
+        "startLine": 196,
+        "startChar": 4,
+        "endLine": 196,
+        "endChar": 5
+      },
+      "revId": "6465eca71cf73202aa147411a2ef1e85fd61dd65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7b5db9d_b953bebb",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1078119
+      },
+      "writtenOn": "2023-11-27T18:33:03Z",
+      "side": 1,
+      "message": "That works beautifully thanks!",
+      "parentUuid": "266d202f_caa83db3",
       "range": {
         "startLine": 196,
         "startChar": 4,
