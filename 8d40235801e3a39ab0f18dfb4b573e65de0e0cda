@@ -16,6 +16,23 @@
       "message": "FWIW the only change to unsafe code here is adding \"#[cfg(not(test))]\" to one function - because it requires a bare metal environment, while our tests use std.",
       "revId": "8d40235801e3a39ab0f18dfb4b573e65de0e0cda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62198c12_4f4d3e00",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2023-11-27T17:24:24Z",
+      "side": 1,
+      "message": "Shouldn\u0027t be a blocker because it\u0027s not *newly wrong* unsafe, but `slice::from_raw_parts{_mut}` *require* that all memory in the slice come from the same allocation. An allocation here is either a single stack variable, a single declared static global variable, or a single returned value from the dynamic allocator.\n\nSee https://doc.rust-lang.org/std/slice/fn.from_raw_parts.html#safety\n\nYou either need to add this condition to the docs, or, if you\u0027re intending on using this to zero large swaths of memory including multiple objects, make a `flushed_zeroize_raw` to be implemented in terms of a pointer and length, and make `flushed_zeroize` used elsewhere just a safe adapter onto that function,and use `flushed_zeroize_raw` from here.",
+      "revId": "8d40235801e3a39ab0f18dfb4b573e65de0e0cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
