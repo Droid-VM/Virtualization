@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9f503f87_b348d1aa",
+        "filename": "secretkeeper/comm/src/data_types/cbor_ser.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-27T17:37:49Z",
+      "side": 1,
+      "message": "Could you re-use [`coset::AsCborValue`](https://docs.rs/coset/latest/coset/trait.AsCborValue.html) /  [`coset::CborSerializable`](https://docs.rs/coset/latest/coset/trait.CborSerializable.html), or [`authgraph_wire::cbor::AsCborValue`](https://cs.android.com/android/platform/superproject/main/+/main:system/authgraph/wire/src/cbor.rs?q\u003dAsCborValue) rather than inventing new traits?  Or is there an orphan trait rule restriction coming into play?",
+      "revId": "2354c8d30805caff8aafb75e3733b3d90bafc66b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a21ab138_0a5b543d",
         "filename": "secretkeeper/comm/src/data_types/cbor_ser.rs",
         "patchSetId": 2
