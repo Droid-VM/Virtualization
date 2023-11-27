@@ -37,7 +37,13 @@ pub enum SecretkeeperError {
     UnexpectedServerError = 1,
     // Indicates the Request was malformed & hence couldn't be served.
     RequestMalformed = 2,
-    // TODO(b/291228655): Add other errors such as DicePolicyError.
+    /// Requested Entry not found.
+    EntryNotFound = 3,
+    /// Errors originating during serialization or deserialization
+    SerializationError = 4,
+    // TODO(b/291238565) Extend DicePolicyError to contain how the authentication failed.
+    /// Policy library threw error.
+    DicePolicyError = 5,
 }
 
 // [`SecretkeeperError`] is a valid [`Response`] type.
