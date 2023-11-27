@@ -26,6 +26,7 @@ rust_defaults {
     lints: "android",
     rustlibs: [
         "libciborium",
+        "libzeroize",
     ],
     proc_macros: ["libenumn"],
     vendor_available: true,

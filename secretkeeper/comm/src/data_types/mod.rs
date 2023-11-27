@@ -26,3 +26,42 @@ pub mod packet;
 pub mod request;
 pub mod request_response_impl;
 pub mod response;
+use crate::data_types::cbor_ser::{CborBytesConversion, ValueConversion};
+use crate::data_types::error::Error;
+use alloc::boxed::Box;
+use ciborium::Value;
+use zeroize::ZeroizeOnDrop;
+
+/// Size of the `id` bstr in SecretManagement.cddl
+pub const ID_SIZE: usize = 64;
+/// Size of the `secret` bstr in SecretManagement.cddl
+pub const SECRET_SIZE: usize = 32;
+
+/// Identifier of Secret. See `id` in SecretManagement.cddl
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Id(pub Box<[u8; ID_SIZE]>);
+impl ValueConversion for Id {
+    fn from_cbor_value(value: Value) -> Result<Self, Error> {
+        Ok(Self(value.into_bytes()?.try_into().map_err(|_| Error::ConversionError)?))
+    }
+
+    fn to_cbor_value(self) -> Value {
+        Value::Bytes(self.0.to_vec())
+    }
+}
+impl CborBytesConversion for Id {}
+
+/// Secret - corresponds to `secret` in SecretManagement.cddl
+// Note This is sensitive data. Do not log!
+#[derive(Clone, Eq, PartialEq, ZeroizeOnDrop)]
+pub struct Secret(pub Box<[u8; SECRET_SIZE]>); // TODO: Implement ZeroOnDrop
+impl ValueConversion for Secret {
+    fn from_cbor_value(val: Value) -> Result<Self, Error> {
+        Ok(Self(val.into_bytes()?.try_into().map_err(|_| Error::ConversionError)?))
+    }
+
+    fn to_cbor_value(self) -> Value {
+        Value::Bytes(self.0.to_vec())
+    }
+}
+impl CborBytesConversion for Secret {}
