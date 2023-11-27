@@ -83,7 +83,7 @@ pub struct RegIterator<'a> {
 /// Represents a contiguous region within the address space defined by the parent bus.
 /// Commonly means the offsets and lengths of MMIO blocks, but may have a different meaning on some
 /// bus types. Addresses in the address space defined by the root node are CPU real addresses.
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq)]
 pub struct Reg<T> {
     /// Base address of the region.
     pub addr: T,
