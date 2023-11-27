@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38b23d9b_cfd145b7",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-27T15:58:22Z",
+      "side": 1,
+      "message": "I\u0027d prefer to keep it; I can see it being useful for debugging.",
+      "parentUuid": "80892dda_d1746b4e",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 59,
+        "endChar": 11
+      },
+      "revId": "8acfc786662fae2fb7e1f8996674b30a23fd395e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5acde84_b12c2adf",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-23T08:06:23Z",
       "side": 1,
       "message": "nice to have: As the logic here is becoming more and more complex, it could be beneficial to have some unit tests to check this conversion from `VerifiedBootData` to next stage `BccHandover` give expected result in different scenarios (RKP VM, Microdroid VM, (non)debuggable...).",
+      "range": {
+        "startLine": 64,
+        "startChar": 11,
+        "endLine": 64,
+        "endChar": 25
+      },
+      "revId": "8acfc786662fae2fb7e1f8996674b30a23fd395e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eee94c9_6091338e",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-27T15:58:22Z",
+      "side": 1,
+      "message": "Good idea. I\u0027m doing that in a separate CL since it\u0027s quite a lot of churn.",
+      "parentUuid": "b5acde84_b12c2adf",
       "range": {
         "startLine": 64,
         "startChar": 11,
