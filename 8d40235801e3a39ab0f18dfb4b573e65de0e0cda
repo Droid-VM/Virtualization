@@ -33,6 +33,24 @@
       "message": "Shouldn\u0027t be a blocker because it\u0027s not *newly wrong* unsafe, but `slice::from_raw_parts{_mut}` *require* that all memory in the slice come from the same allocation. An allocation here is either a single stack variable, a single declared static global variable, or a single returned value from the dynamic allocator.\n\nSee https://doc.rust-lang.org/std/slice/fn.from_raw_parts.html#safety\n\nYou either need to add this condition to the docs, or, if you\u0027re intending on using this to zero large swaths of memory including multiple objects, make a `flushed_zeroize_raw` to be implemented in terms of a pointer and length, and make `flushed_zeroize` used elsewhere just a safe adapter onto that function,and use `flushed_zeroize_raw` from here.",
       "revId": "8d40235801e3a39ab0f18dfb4b573e65de0e0cda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4671e96_e595f5cd",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-27T17:56:41Z",
+      "side": 1,
+      "message": "Oh, interesting. This is only ever called from C code. And the C code can\u0027t allocated memory, and AFAICT only calls this function on individual arrays on the stack, which I guess is ok. (I\u0027m pretty sure C doesn\u0027t guarantee stack layout, so trying to do multiple buffers in one go would be UB there too.)\n\n\u003e  make a flushed_zeroize_raw to be implemented in terms of a pointer and length, and make flushed_zeroize used elsewhere just a safe adapter onto that function\n\nBut TBH I think I like that more; the underlying code is using raw addresses so that shouldn\u0027t be a problem.",
+      "parentUuid": "62198c12_4f4d3e00",
+      "revId": "8d40235801e3a39ab0f18dfb4b573e65de0e0cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
