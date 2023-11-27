@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dda51aa_5c4e565a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-11-27T16:46:05Z",
+      "side": 1,
+      "message": "Will it make sense to have subdirs under the etc/fs? It might make it easier to figure out what kernels are supported from inspecting the com.android.virt APEX",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 61
+      },
+      "revId": "7a1fc8fabe5918e94f661473879b2215185f8a62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "416118fe_e5915c66",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-11-27T16:46:05Z",
+      "side": 1,
+      "message": "We are adding a non-trivial logic to the sign_virt_apex script. Please add tests to cover it. Feel free to do this in a follow-up cl if you prefer",
+      "range": {
+        "startLine": 425,
+        "startChar": 0,
+        "endLine": 425,
+        "endChar": 27
+      },
+      "revId": "7a1fc8fabe5918e94f661473879b2215185f8a62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
