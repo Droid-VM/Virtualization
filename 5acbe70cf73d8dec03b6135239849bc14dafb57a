@@ -1,0 +1,228 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "710c6076_a32c4063",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-28T10:53:20Z",
+      "side": 1,
+      "message": "Most of them are nits. Thank you for the refactoring! :)",
+      "revId": "5acbe70cf73d8dec03b6135239849bc14dafb57a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d8cc330_7216ff89",
+        "filename": "pvmfw/avb/src/descriptor/collection.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-28T10:53:20Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this take `\u0026\u0027a VbmetaData`, so the returned Descriptors\u0027 lifetime is tied to `vbmeta`\u0027s lifetime?",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 86
+      },
+      "revId": "5acbe70cf73d8dec03b6135239849bc14dafb57a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfd017f3_6f47dd2f",
+        "filename": "pvmfw/avb/src/descriptor/collection.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-28T10:53:20Z",
+      "side": 1,
+      "message": "It\u0027s convenient if `avb` can give an `IoResult` corresponding to `IoError`.",
+      "range": {
+        "startLine": 43,
+        "startChar": 21,
+        "endLine": 43,
+        "endChar": 47
+      },
+      "revId": "5acbe70cf73d8dec03b6135239849bc14dafb57a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "961a7f68_30f434f1",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-28T10:53:20Z",
+      "side": 1,
+      "message": "Old bug: Can you just change this to a function `new` in `Ops`. `From` is usually for a conversion from value to value, as we want to create a value from a reference without taking the ownership, better not to use `From`.",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 1
+      },
+      "revId": "5acbe70cf73d8dec03b6135239849bc14dafb57a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc2b72b6_af93b86c",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-28T10:53:20Z",
+      "side": 1,
+      "message": "nit: Could you either annotate this field as `None, // xxx` or create a variable for it to make this code easier to read?",
+      "range": {
+        "startLine": 65,
+        "startChar": 12,
+        "endLine": 65,
+        "endChar": 16
+      },
+      "revId": "5acbe70cf73d8dec03b6135239849bc14dafb57a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "586eacc9_99a79ff0",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-28T10:53:20Z",
+      "side": 1,
+      "message": "It can be helpful if `avb` crate can provide this `Result` type, other impls of the trait `Ops` can also use it.",
+      "range": {
+        "startLine": 84,
+        "startChar": 63,
+        "endLine": 84,
+        "endChar": 70
+      },
+      "revId": "5acbe70cf73d8dec03b6135239849bc14dafb57a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff556b6e_b1f507c8",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-28T10:53:20Z",
+      "side": 1,
+      "message": "use `avb::IoError`?",
+      "range": {
+        "startLine": 123,
+        "startChar": 12,
+        "endLine": 123,
+        "endChar": 24
+      },
+      "revId": "5acbe70cf73d8dec03b6135239849bc14dafb57a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9349d70_c204f6d3",
+        "filename": "pvmfw/avb/src/utils.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-28T10:53:20Z",
+      "side": 1,
+      "message": "This should be in `avb`.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 60
+      },
+      "revId": "5acbe70cf73d8dec03b6135239849bc14dafb57a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e42c9e66_25c6a066",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-28T10:53:20Z",
+      "side": 1,
+      "message": "use `avb::SlotVerifyError` ?",
+      "range": {
+        "startLine": 119,
+        "startChar": 12,
+        "endLine": 119,
+        "endChar": 32
+      },
+      "revId": "5acbe70cf73d8dec03b6135239849bc14dafb57a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c95f13e8_4d64f712",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-28T10:53:20Z",
+      "side": 1,
+      "message": "Perhaps make it more compact without match?\n\n```suggestion\n    let result \u003d ops.verify_partition(partition_name.as_cstr()).map_err(|e| e.without_verify_data())?;\n    verify_loaded_partition_has_expected_length(\n         result.partition_data(),\n         partition_name,\n         expected_initrd.len(),\n    )\n```",
+      "range": {
+        "startLine": 166,
+        "startChar": 4,
+        "endLine": 176,
+        "endChar": 5
+      },
+      "revId": "5acbe70cf73d8dec03b6135239849bc14dafb57a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
