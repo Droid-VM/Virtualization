@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bef437e_42cb8b68",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-28T17:17:10Z",
+      "side": 1,
+      "message": "I should just delete that - the answer is no.",
+      "parentUuid": "1f40d5c0_f5747667",
+      "range": {
+        "startLine": 94,
+        "startChar": 45,
+        "endLine": 94,
+        "endChar": 56
+      },
+      "revId": "305fb68e0578787971fbe6645b6cc1e632fdeb51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c7dbf9f_3bee28e5",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-28T16:36:31Z",
       "side": 1,
       "message": "Why are we renaming verified_data?",
+      "range": {
+        "startLine": 249,
+        "startChar": 8,
+        "endLine": 249,
+        "endChar": 22
+      },
+      "revId": "305fb68e0578787971fbe6645b6cc1e632fdeb51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d6e80d7_cf2d83ae",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-28T17:17:10Z",
+      "side": 1,
+      "message": "It\u0027s not all actually verified.\nSome of it is actually verified by apexd when it runs, or even by dm-verity as we read the APEX/APK.\nI wanted to be careful not to give the impression that this data was 100% trusted at this point.",
+      "parentUuid": "9c7dbf9f_3bee28e5",
       "range": {
         "startLine": 249,
         "startChar": 8,
