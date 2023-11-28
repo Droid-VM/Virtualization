@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d797c8e3_f9245669",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-11-28T12:57:44Z",
+      "side": 1,
+      "message": "This means that every time we update the genrules in system/apex/apexd we will potentially break the unit tests here, which might be annoying. However, I don\u0027t think that we update the genrules that often, so we can start with this approach and see how much pain it will cause :)",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 0
+      },
+      "revId": "3726dbb870dfd1c4bc62bdad1e0bae375220fa3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
