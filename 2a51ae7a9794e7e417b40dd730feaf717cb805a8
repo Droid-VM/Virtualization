@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8016ffc_b8ddab11",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-28T11:40:29Z",
+      "side": 1,
+      "message": "Instead of fixing this typo (\"`\u003ciommus\u003e`\") in aosp/2849456, do it here?",
+      "range": {
+        "startLine": 204,
+        "startChar": 50,
+        "endLine": 204,
+        "endChar": 55
+      },
+      "revId": "2a51ae7a9794e7e417b40dd730feaf717cb805a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4975483_aeffc643",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-28T11:40:29Z",
+      "side": 1,
+      "message": "I agree it doesn\u0027t necessarily look better but I believe that this should be `Vsid`.\n\nFrom the [API naming guidelines](https://rust-lang.github.io/api-guidelines/naming.html):\n\n\u003e In `UpperCamelCase`, acronyms and contractions of compound words count as one word: use `Uuid` rather than `UUID`, `Usize` rather than `USize` or `Stdin` rather than `StdIn`.",
+      "range": {
+        "startLine": 214,
+        "startChar": 7,
+        "endLine": 214,
+        "endChar": 11
+      },
+      "revId": "2a51ae7a9794e7e417b40dd730feaf717cb805a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d0aa3b4_a5cfbb31",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-28T11:40:29Z",
+      "side": 1,
+      "message": "uber-nit: \"vSID\" (same below)",
+      "range": {
+        "startLine": 228,
+        "startChar": 73,
+        "endLine": 228,
+        "endChar": 77
+      },
+      "revId": "2a51ae7a9794e7e417b40dd730feaf717cb805a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
