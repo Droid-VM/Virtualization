@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a3792ed_fc9bad91",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-28T10:33:12Z",
+      "side": 1,
+      "message": "There\u0027s very little code/logic here that isn\u0027t tested elsewhere.\nI think this can be covered by integration tests.",
+      "parentUuid": "73198286_1d42ddea",
+      "range": {
+        "startLine": 61,
+        "startChar": 11,
+        "endLine": 61,
+        "endChar": 25
+      },
+      "revId": "8d40235801e3a39ab0f18dfb4b573e65de0e0cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86eefe45_d3b1ae85",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-11-28T09:23:05Z",
       "side": 1,
       "message": "Why do you change the flag? Isn\u0027t this cl only supposed to introduce unit tests?",
+      "range": {
+        "startLine": 87,
+        "startChar": 30,
+        "endLine": 87,
+        "endChar": 51
+      },
+      "revId": "8d40235801e3a39ab0f18dfb4b573e65de0e0cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0866160_bc844049",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-28T10:33:12Z",
+      "side": 1,
+      "message": "See the commit message.\nI\u0027m using dice_changes for everything that changes the DICE chain, and then both llpvm and rkpvm need that flag too.",
+      "parentUuid": "86eefe45_d3b1ae85",
       "range": {
         "startLine": 87,
         "startChar": 30,
@@ -99,6 +147,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9657656_50074047",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-28T10:33:12Z",
+      "side": 1,
+      "message": "I spoke too soon; I\u0027ve gone for the first option and clarified the safety documentation.",
+      "parentUuid": "f4671e96_e595f5cd",
+      "revId": "8d40235801e3a39ab0f18dfb4b573e65de0e0cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bef71133_0c95ef00",
@@ -112,6 +178,30 @@
       "writtenOn": "2023-11-28T09:23:05Z",
       "side": 1,
       "message": "not blocking: Since we are adding the DICE tests in this cl, could we also include tests for the authority_hash and code_hash? There are certain conversions that depend on whether there is an initrd. Alternatively, you can add a TODO and I will follow up later.",
+      "range": {
+        "startLine": 134,
+        "startChar": 8,
+        "endLine": 136,
+        "endChar": 34
+      },
+      "revId": "8d40235801e3a39ab0f18dfb4b573e65de0e0cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50b415cb_a3edbe69",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-28T10:33:12Z",
+      "side": 1,
+      "message": "That would just be a unit test of to_dice_hash?\nFeel free to add if you think that\u0027s useful.",
+      "parentUuid": "bef71133_0c95ef00",
       "range": {
         "startLine": 134,
         "startChar": 8,
@@ -145,6 +235,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fb7fe78_d3622ebc",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-28T10:33:12Z",
+      "side": 1,
+      "message": "I actually started with that, and then switched to this.\nThe reason is because it should give better error messages - I\u0027d much rather have \"expected None, got Some(foo)\" than \"got true rather than false\".\nAlso it\u0027s more symmetric with the other checks.",
+      "parentUuid": "ad25d7cd_278f870c",
+      "range": {
+        "startLine": 175,
+        "startChar": 7,
+        "endLine": 175,
+        "endChar": 65
+      },
+      "revId": "8d40235801e3a39ab0f18dfb4b573e65de0e0cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72be6f3a_1ae1a6c0",
@@ -158,6 +272,30 @@
       "writtenOn": "2023-11-28T09:23:05Z",
       "side": 1,
       "message": "If it is only to deserialize `Value`, it is more convenient to directly use `coset` (cbor_util also depends on coset). We can use `AsCborSerializable` and have `Value::from_slice()`.",
+      "range": {
+        "startLine": 203,
+        "startChar": 37,
+        "endLine": 203,
+        "endChar": 42
+      },
+      "revId": "8d40235801e3a39ab0f18dfb4b573e65de0e0cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ec3acdc_6973f467",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-28T10:33:12Z",
+      "side": 1,
+      "message": "I think this sufficiently expresses the intent, I don\u0027t think it\u0027s worth changing.",
+      "parentUuid": "72be6f3a_1ae1a6c0",
       "range": {
         "startLine": 203,
         "startChar": 37,
