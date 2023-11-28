@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62725f91_81f7b535",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-28T11:42:10Z",
+      "side": 1,
+      "message": "Make this a tuple (`(u64, u64)` or `(usize, usize)`) so that you don\u0027t have to carry the `Option` of `Reg::size` around?",
+      "range": {
+        "startLine": 230,
+        "startChar": 13,
+        "endLine": 230,
+        "endChar": 21
+      },
+      "revId": "22c526614390c7db6a9ed141150b9970dce9275f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fec1444_662afc79",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-28T11:42:10Z",
+      "side": 1,
+      "message": "nit: `.ok_or()?` like below?",
+      "range": {
+        "startLine": 242,
+        "startChar": 41,
+        "endLine": 242,
+        "endChar": 48
+      },
+      "revId": "22c526614390c7db6a9ed141150b9970dce9275f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6612d41e_1fb6561c",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-28T11:42:10Z",
+      "side": 1,
+      "message": "The commit message says that it\u0027s adding validation but that is only partially true as you\u0027re ignoring the (successful) result, which you should be validating against `\u003candroid,pvmfw,phy-reg\u003e`, no? It\u0027s fine if, for some reason, you want to add that in another commit but please then leave a `TODO` and clarify the situation in the commit message.",
+      "range": {
+        "startLine": 249,
+        "startChar": 12,
+        "endLine": 249,
+        "endChar": 13
+      },
+      "revId": "22c526614390c7db6a9ed141150b9970dce9275f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e4e4b4f_44ded6f0",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-28T11:42:10Z",
+      "side": 1,
+      "message": "It would be nice to get some logs on what the HVC returned in `Err` as that has proven to be helpful during integration efforts. I\u0027m not a big fan of sprinkling `error!` around the codebase but IMO, this is a good candidate for explicitly logging the `Err` (before re-throwing).",
+      "range": {
+        "startLine": 251,
+        "startChar": 16,
+        "endLine": 251,
+        "endChar": 17
+      },
+      "revId": "22c526614390c7db6a9ed141150b9970dce9275f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37405148_611db2c3",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-28T11:42:10Z",
+      "side": 1,
+      "message": "nit: add this parameter at the end of the list, to follow what you introduce in `parse_reg`?",
+      "range": {
+        "startLine": 277,
+        "startChar": 50,
+        "endLine": 277,
+        "endChar": 51
+      },
+      "revId": "22c526614390c7db6a9ed141150b9970dce9275f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7149b92d_234c4901",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-28T11:42:10Z",
+      "side": 1,
+      "message": "Same comments as for the MMIO about checking the result (or `TODO`) and logging the HVC `Err` before `?`.",
+      "range": {
+        "startLine": 296,
+        "startChar": 11,
+        "endLine": 296,
+        "endChar": 22
+      },
+      "revId": "22c526614390c7db6a9ed141150b9970dce9275f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ffab791_85ff284e",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-28T11:42:10Z",
+      "side": 1,
+      "message": "I love this, we could do so much more testing-wise for pvmfw by building on this idea!\n\nMay I recommend we make the mock hypervisor fully configurable from the test itself i.e. no implicit results (such as the `Ok(0)` currently in `::new`)?\n\nFor example, the MMIO interface could be (untested but you get the idea):\n```\nstruct MockHypervisor {\n    mmio_tokens: hyp::Result\u003cHashMap::\u003c(u64, u64), u64\u003e\u003e,\n}\n\nimpl MockHypervisor {\n    fn new() -\u003e Self {\n        Self { mmio_tokens: Ok(HashMap::new()) }\n    }\n\n    fn insert_mmio_token(\u0026mut self, ipa: u64, size: u64, pa: u64) {\n        if let Ok(ref mut tokens) \u003d self.mmio_tokens {\n            tokens.insert((ipa, size), pa);\n        } // This ignores Err() but we could also unwrap.\n    }\n\n    fn force_error_get_phys_mmio_token(\u0026mut self, e: hyp::Error) {\n        self.mmio_tokens \u003d Err(e);\n    }\n}\n\nimpl DeviceAssigningHypervisor for MockHypervisor {\n    fn get_phys_mmio_token(\u0026self, ipa: u64, size: u64) -\u003e hyp::Result\u003cu64\u003e {\n        let tokens \u003d self.mmio_tokens.as_ref()?;\n\n        tokens.get((ipa, size)).cloned().ok_or(Err(\n            hyp::Error::KvmError(\n                hyp::KvmError::InvalidParameter,\n                0xc6000012, /* VENDOR_HYP_KVM_DEV_REQ_MMIO_FUNC_ID */\n            )\n        )\n    }\n}\n```\n(and exact same approach for pvIOMMUs), which would allow tests to configure the mock as they please before passing it to the function-under-test while somehow mimicking the actual EL2 implementation. AFAICT, this API would fit _any_ test-case, including those covering PA mismatches, which are currently missing.",
+      "range": {
+        "startLine": 498,
+        "startChar": 0,
+        "endLine": 501,
+        "endChar": 5
+      },
+      "revId": "22c526614390c7db6a9ed141150b9970dce9275f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
