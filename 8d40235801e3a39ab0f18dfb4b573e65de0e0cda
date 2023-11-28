@@ -20,6 +20,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "73198286_1d42ddea",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-28T09:23:05Z",
+      "side": 1,
+      "message": "not blocking: Testing this function can be valuable as it serves as the entry point for this module, and it is essential to validate how the `VerifiedBootData` gets included in the DICE chain finally.",
+      "range": {
+        "startLine": 61,
+        "startChar": 11,
+        "endLine": 61,
+        "endChar": 25
+      },
+      "revId": "8d40235801e3a39ab0f18dfb4b573e65de0e0cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86eefe45_d3b1ae85",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-28T09:23:05Z",
+      "side": 1,
+      "message": "Why do you change the flag? Isn\u0027t this cl only supposed to introduce unit tests?",
+      "range": {
+        "startLine": 87,
+        "startChar": 30,
+        "endLine": 87,
+        "endChar": 51
+      },
+      "revId": "8d40235801e3a39ab0f18dfb4b573e65de0e0cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "62198c12_4f4d3e00",
         "filename": "pvmfw/src/dice.rs",
         "patchSetId": 1
@@ -49,6 +95,75 @@
       "side": 1,
       "message": "Oh, interesting. This is only ever called from C code. And the C code can\u0027t allocated memory, and AFAICT only calls this function on individual arrays on the stack, which I guess is ok. (I\u0027m pretty sure C doesn\u0027t guarantee stack layout, so trying to do multiple buffers in one go would be UB there too.)\n\n\u003e  make a flushed_zeroize_raw to be implemented in terms of a pointer and length, and make flushed_zeroize used elsewhere just a safe adapter onto that function\n\nBut TBH I think I like that more; the underlying code is using raw addresses so that shouldn\u0027t be a problem.",
       "parentUuid": "62198c12_4f4d3e00",
+      "revId": "8d40235801e3a39ab0f18dfb4b573e65de0e0cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bef71133_0c95ef00",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-28T09:23:05Z",
+      "side": 1,
+      "message": "not blocking: Since we are adding the DICE tests in this cl, could we also include tests for the authority_hash and code_hash? There are certain conversions that depend on whether there is an initrd. Alternatively, you can add a TODO and I will follow up later.",
+      "range": {
+        "startLine": 134,
+        "startChar": 8,
+        "endLine": 136,
+        "endChar": 34
+      },
+      "revId": "8d40235801e3a39ab0f18dfb4b573e65de0e0cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad25d7cd_278f870c",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-28T09:23:05Z",
+      "side": 1,
+      "message": "nit: Perhaps more expressive with the following line? Same for the other checks.\n```suggestion\n        assert!(!config_map.contains_key(\u0026COMPONENT_VERSION_KEY));\n```",
+      "range": {
+        "startLine": 175,
+        "startChar": 7,
+        "endLine": 175,
+        "endChar": 65
+      },
+      "revId": "8d40235801e3a39ab0f18dfb4b573e65de0e0cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72be6f3a_1ae1a6c0",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-28T09:23:05Z",
+      "side": 1,
+      "message": "If it is only to deserialize `Value`, it is more convenient to directly use `coset` (cbor_util also depends on coset). We can use `AsCborSerializable` and have `Value::from_slice()`.",
+      "range": {
+        "startLine": 203,
+        "startChar": 37,
+        "endLine": 203,
+        "endChar": 42
+      },
       "revId": "8d40235801e3a39ab0f18dfb4b573e65de0e0cda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
