@@ -1,0 +1,186 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39cf9147_19a7fbe7",
+        "filename": "secretkeeper/core/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-28T10:53:45Z",
+      "side": 1,
+      "message": "Why does this need to be a separate crate?",
+      "revId": "2149cb76d6cdaa004e48d4bc0ba4cd93fe13d0c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5518e0b_5106ddb7",
+        "filename": "secretkeeper/core/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-28T10:53:45Z",
+      "side": 1,
+      "message": "\"its\"",
+      "range": {
+        "startLine": 36,
+        "startChar": 92,
+        "endLine": 36,
+        "endChar": 96
+      },
+      "revId": "2149cb76d6cdaa004e48d4bc0ba4cd93fe13d0c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15dad93b_d035fad4",
+        "filename": "secretkeeper/core/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-28T10:53:45Z",
+      "side": 1,
+      "message": "Capitalization of words seems a bit random here.",
+      "revId": "2149cb76d6cdaa004e48d4bc0ba4cd93fe13d0c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6c1155e_94f5bbd8",
+        "filename": "secretkeeper/core/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-28T10:53:45Z",
+      "side": 1,
+      "message": "I\u0027d expect this code to end up running in a single-threaded TA, so any synchronization should live outside (i.e. lose the `Arc`)",
+      "revId": "2149cb76d6cdaa004e48d4bc0ba4cd93fe13d0c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfbff201_b672874c",
+        "filename": "secretkeeper/core/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-28T10:53:45Z",
+      "side": 1,
+      "message": "There\u0027s a lot of this error conversion code -- can we shrink it somehow? Maybe `impl From` for something, or just have a local helper like\n```rust\n#[inline]\nfn serialerr() -\u003e SecretkeeperError {\n  SecretkeeperError::SerializationError\n}\n```\nthat allows mapping to shrink to `.map_err(serialerr)?`.",
+      "revId": "2149cb76d6cdaa004e48d4bc0ba4cd93fe13d0c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "468a763b_924198f9",
+        "filename": "secretkeeper/core/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-28T10:53:45Z",
+      "side": 1,
+      "message": "I think the name and the first line of the comment bury the lede somewhat -- this isn\u0027t just a \"get\", it\u0027s a \"get-and-authenticate\".",
+      "revId": "2149cb76d6cdaa004e48d4bc0ba4cd93fe13d0c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "067cf13f_bab0ab61",
+        "filename": "secretkeeper/core/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-28T10:53:45Z",
+      "side": 1,
+      "message": "... actually it\u0027s a \"get-and-authenticate-and-update\".",
+      "revId": "2149cb76d6cdaa004e48d4bc0ba4cd93fe13d0c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaa2f01e_924685bd",
+        "filename": "secretkeeper/core/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-28T10:53:45Z",
+      "side": 1,
+      "message": "I suspect this will be better taking `key` and `value` as `\u0026[u8]` not `Vec\u003cu8\u003e` \u0026ndash; an implementation of the trait may not need ownership to operate, and this would then save unnecessary allocation above.",
+      "revId": "2149cb76d6cdaa004e48d4bc0ba4cd93fe13d0c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bfa26a1_4eb67277",
+        "filename": "secretkeeper/core/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-28T10:53:45Z",
+      "side": 1,
+      "message": "We should keep an eye on whether `\u0026mut self` ends up being more ergonomic here -- logically a \"store\" operation is likely to mutate the item implementing the interface, so `\u0026self` might impose a requirement for interior mutability. OTOH a \"real\" implementation might just pass the mutability elsewhere (e.g. to a secure storage filesystem) and so not need interior mutability.",
+      "range": {
+        "startLine": 184,
+        "startChar": 13,
+        "endLine": 184,
+        "endChar": 18
+      },
+      "revId": "2149cb76d6cdaa004e48d4bc0ba4cd93fe13d0c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60cf1024_06981241",
+        "filename": "secretkeeper/core/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-28T10:53:45Z",
+      "side": 1,
+      "message": "Schema?",
+      "revId": "2149cb76d6cdaa004e48d4bc0ba4cd93fe13d0c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
