@@ -29,7 +29,9 @@ pub mod response;
 use crate::data_types::cbor_ser::{CborBytesConversion, ValueConversion};
 use crate::data_types::error::Error;
 use alloc::boxed::Box;
+use authgraph_derive::AsCborValue;
 use ciborium::Value;
+use wire::cbor::AsCborValue;
 use zeroize::ZeroizeOnDrop;
 
 /// Size of the `id` bstr in SecretManagement.cddl
@@ -53,15 +55,5 @@ impl CborBytesConversion for Id {}
 
 /// Secret - corresponds to `secret` in SecretManagement.cddl
 // Note This is sensitive data. Do not log!
-#[derive(Clone, Eq, PartialEq, ZeroizeOnDrop)]
+#[derive(Clone, Eq, PartialEq, ZeroizeOnDrop, AsCborValue)]
 pub struct Secret(pub Box<[u8; SECRET_SIZE]>); // TODO: Implement ZeroOnDrop
-impl ValueConversion for Secret {
-    fn from_cbor_value(val: Value) -> Result<Self, Error> {
-        Ok(Self(val.into_bytes()?.try_into().map_err(|_| Error::ConversionError)?))
-    }
-
-    fn to_cbor_value(self) -> Value {
-        Value::Bytes(self.0.to_vec())
-    }
-}
-impl CborBytesConversion for Secret {}
