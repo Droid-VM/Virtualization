@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97856bc1_9e617597",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-28T11:17:35Z",
+      "side": 1,
+      "message": "The logic for this function resides upstream. By testing this function, we verify the entire flow from `VerifiedBootData` to the final DICE chain. This not only offers better overall coverage but also focuses on the objects that are relevant to us, the config descriptor is only an intermediate value during the conversion. Nevertheless, I agree that including this validation in some integration tests would also be fine.",
+      "parentUuid": "2a3792ed_fc9bad91",
+      "range": {
+        "startLine": 61,
+        "startChar": 11,
+        "endLine": 61,
+        "endChar": 25
+      },
+      "revId": "8d40235801e3a39ab0f18dfb4b573e65de0e0cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86eefe45_d3b1ae85",
@@ -214,6 +238,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "752efd62_757681c3",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-28T11:17:35Z",
+      "side": 1,
+      "message": "Could you add a TODO here so that we have it on our radar?",
+      "parentUuid": "50b415cb_a3edbe69",
+      "range": {
+        "startLine": 134,
+        "startChar": 8,
+        "endLine": 136,
+        "endChar": 34
+      },
+      "revId": "8d40235801e3a39ab0f18dfb4b573e65de0e0cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ad25d7cd_278f870c",
         "filename": "pvmfw/src/dice.rs",
         "patchSetId": 1
@@ -249,6 +297,30 @@
       "side": 1,
       "message": "I actually started with that, and then switched to this.\nThe reason is because it should give better error messages - I\u0027d much rather have \"expected None, got Some(foo)\" than \"got true rather than false\".\nAlso it\u0027s more symmetric with the other checks.",
       "parentUuid": "ad25d7cd_278f870c",
+      "range": {
+        "startLine": 175,
+        "startChar": 7,
+        "endLine": 175,
+        "endChar": 65
+      },
+      "revId": "8d40235801e3a39ab0f18dfb4b573e65de0e0cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0db377b0_0dfb792d",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-28T11:17:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4fb7fe78_d3622ebc",
       "range": {
         "startLine": 175,
         "startChar": 7,
