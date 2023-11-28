@@ -43,6 +43,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "306c054c_154850c2",
+        "filename": "secretkeeper/core/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-28T12:07:07Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Common Typos: Common typo found: \"to it\u0027s\" -- should it be \"to its\"?\n\nAnalyzer Description: Linter for catching common typos motivated by go/todo-fail and go/lol-codesearch. Shared with google3 common typos library go/common-typos.\nOwner: ayeaye-team@google.com\n\nCommon typo found: \"to it\u0027s\" -- should it be \"to its\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 36,
+        "startChar": 89,
+        "endLine": 36,
+        "endChar": 96
+      },
+      "revId": "2149cb76d6cdaa004e48d4bc0ba4cd93fe13d0c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15dad93b_d035fad4",
         "filename": "secretkeeper/core/src/lib.rs",
         "patchSetId": 1
@@ -71,6 +94,29 @@
       "writtenOn": "2023-11-28T10:53:45Z",
       "side": 1,
       "message": "I\u0027d expect this code to end up running in a single-threaded TA, so any synchronization should live outside (i.e. lose the `Arc`)",
+      "revId": "2149cb76d6cdaa004e48d4bc0ba4cd93fe13d0c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f551e1b_3c84872e",
+        "filename": "secretkeeper/core/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-28T12:07:07Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Inclusive Language: Prefer to use inclusive terms like \u0027valid\u0027, \u0027validity check\u0027 or \u0027initial check\u0027; see https://source.android.com/setup/contribute/respectful-code for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reaso...\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: inclusive-language-in-code@google.com\n\nPrefer to use inclusive terms like \u0027valid\u0027, \u0027validity check\u0027 or \u0027initial check\u0027; see https://source.android.com/setup/contribute/respectful-code for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 101,
+        "startChar": 11,
+        "endLine": 101,
+        "endChar": 17
+      },
       "revId": "2149cb76d6cdaa004e48d4bc0ba4cd93fe13d0c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -161,6 +207,29 @@
         "startChar": 13,
         "endLine": 184,
         "endChar": 18
+      },
+      "revId": "2149cb76d6cdaa004e48d4bc0ba4cd93fe13d0c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4cdec00_1bb790ff",
+        "filename": "secretkeeper/core/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-28T12:07:07Z",
+      "side": 1,
+      "message": "You could implement Debug and omit the Secret explicitly there, which might actually be useful.",
+      "range": {
+        "startLine": 189,
+        "startChar": 31,
+        "endLine": 189,
+        "endChar": 58
       },
       "revId": "2149cb76d6cdaa004e48d4bc0ba4cd93fe13d0c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
