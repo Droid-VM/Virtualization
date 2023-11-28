@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faecf38b_99581067",
+        "filename": "secretkeeper/comm/src/data_types/mod.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-28T10:38:47Z",
+      "side": 1,
+      "message": "Why is the `Box\u003c \u003e` needed?",
+      "range": {
+        "startLine": 42,
+        "startChar": 18,
+        "endLine": 42,
+        "endChar": 21
+      },
+      "revId": "de673165f0da2e62b0a89b8c936e479500282f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "353e2c6b_f6877f8a",
+        "filename": "secretkeeper/comm/src/data_types/mod.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-28T10:38:47Z",
+      "side": 1,
+      "message": "Is this not done with `[derive(ZeroizeOnDrop)]` ?",
+      "range": {
+        "startLine": 57,
+        "startChar": 47,
+        "endLine": 57,
+        "endChar": 76
+      },
+      "revId": "de673165f0da2e62b0a89b8c936e479500282f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a06ab88_6a7e345f",
+        "filename": "secretkeeper/comm/src/data_types/request_response_impl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-28T10:38:47Z",
+      "side": 1,
+      "message": "Why just `PartialEq` and not `Eq`? (passim)",
+      "range": {
+        "startLine": 102,
+        "startChar": 20,
+        "endLine": 102,
+        "endChar": 29
+      },
+      "revId": "de673165f0da2e62b0a89b8c936e479500282f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6959d162_a2d3f5eb",
+        "filename": "secretkeeper/comm/src/data_types/request_response_impl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-28T10:38:47Z",
+      "side": 1,
+      "message": "personal preference: given that this is a type just used to transport information around, you could just make all the fields `pub` and lose the accessors. (Passim)",
+      "revId": "de673165f0da2e62b0a89b8c936e479500282f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4434fab_0e734c39",
+        "filename": "secretkeeper/comm/src/data_types/request_response_impl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-28T10:38:47Z",
+      "side": 1,
+      "message": "There\u0027s getting to be a lot of boilerplate code in this file -- I think we should revisit my earlier suggestion of using a derive macro (possibly even directly re-using the one in `system/authgraph/derive`).",
+      "revId": "de673165f0da2e62b0a89b8c936e479500282f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d51ef1e_2fb6d38f",
+        "filename": "secretkeeper/comm/src/data_types/request_response_impl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-28T10:38:47Z",
+      "side": 1,
+      "message": "golf: how about something like:\n```rust\nmatch \u0026args[..] {\n  [id, secret, policy] \u003d\u003e {\n    let id \u003d Id::from_cbor_value(id).map_err(|_| Error::RequestMalformed)?;\n    let secret \u003d Secret::from_cbor_value(secret).map_err(|_| Error::RequestMalformed)?;\n    let sealing_policy \u003d policy.into_bytes()?;\n    Ok(Self{ id, secret, sealing_policy })\n  }\n  _ \u003d\u003e Err(Error::RequestMalformed),\n}\n```",
+      "revId": "de673165f0da2e62b0a89b8c936e479500282f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
