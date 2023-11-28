@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89f7edae_00ddf774",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-11-28T11:02:25Z",
+      "side": 1,
+      "message": "This is a good start, but we should run all MicrodroidTests both with microdroid kernel \u0026 with GKIs.\n\nThe tricky bit is too this in a way that doesn\u0027t impact our presubmit latency. I suggest running the suite on all supported kernels only in postsubmit",
+      "range": {
+        "startLine": 816,
+        "startChar": 16,
+        "endLine": 816,
+        "endChar": 42
+      },
+      "revId": "8cfe4a6213803ee47db65044dcb397d9dc490323",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5687722_e6f92052",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-11-28T11:02:25Z",
+      "side": 1,
+      "message": "Should we only run this test if RELEASE_AVF_ENABLE_VENDOR_MODULES flag is enabled?",
+      "range": {
+        "startLine": 817,
+        "startChar": 8,
+        "endLine": 817,
+        "endChar": 67
+      },
+      "revId": "8cfe4a6213803ee47db65044dcb397d9dc490323",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
