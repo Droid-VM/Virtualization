@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98e136e6_f2a99ec3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-11-28T01:35:52Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to do that. We can check json files under `etc/` to figure out that.",
+      "parentUuid": "4dda51aa_5c4e565a",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 61
+      },
+      "revId": "7a1fc8fabe5918e94f661473879b2215185f8a62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "416118fe_e5915c66",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-27T16:46:05Z",
       "side": 1,
       "message": "We are adding a non-trivial logic to the sign_virt_apex script. Please add tests to cover it. Feel free to do this in a follow-up cl if you prefer",
+      "range": {
+        "startLine": 425,
+        "startChar": 0,
+        "endLine": 425,
+        "endChar": 27
+      },
+      "revId": "7a1fc8fabe5918e94f661473879b2215185f8a62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d426500_f7098735",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-11-28T01:35:52Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "416118fe_e5915c66",
       "range": {
         "startLine": 425,
         "startChar": 0,
