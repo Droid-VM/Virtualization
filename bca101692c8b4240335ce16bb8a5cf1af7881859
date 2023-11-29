@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b5ae373d_1c5ca5a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-11-29T15:09:02Z",
+      "side": 1,
+      "message": "I am a bit uncomfortable to merge this even as temporary patch. Can we at least restrict this to protected-debuggable VMs?\n\nNote: it might be already the case, since we have a check in first_stage_init that prevents booting non-debuggable VM with microdroid vendor partition: https://cs.android.com/android/platform/superproject/main/+/main:system/core/init/first_stage_init.cpp;l\u003d406;drc\u003db4987345ff1f97d529cc23b03ca73b58ff7a7e1b",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 65
+      },
+      "revId": "bca101692c8b4240335ce16bb8a5cf1af7881859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c7967c63_bd7dc30e",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
