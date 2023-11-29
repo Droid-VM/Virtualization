@@ -162,6 +162,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7696ecb_dec130bb",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T17:49:46Z",
+      "side": 1,
+      "message": "If it\u0027s hard to think of a good name, it probably means there\u0027s something wrong.\nThinking about it, I think the problem is that you have a function that does 2 things, which makes naming harder; and in general a function should do one thing.\nThe solution would be to expose 2 functions.\n- One to check the prefixes - which you already have, validate_client_vm_dice_chain_prefix_match. The client can call that directly instead of having ClientVmDiceChain do so for it. \n- One to validate the signatures \u0026 parse the DICE chain into a ClientVmDiceChain. validate_signatures_and_parse_dice_chain?",
+      "parentUuid": "db6349bf_760c7e8c",
+      "range": {
+        "startLine": 48,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 16
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ab40a286_6e5e12d2",
         "filename": "service_vm/requests/src/dice.rs",
         "patchSetId": 7
@@ -740,6 +764,30 @@
       "side": 1,
       "message": "\u003e Can we make sure that requesting an attestation for a pVM will always fail, until we have all the necessary checks in place? That won\u0027t break your tests, I think?\n\nUnfortunately, if we interrupt the verification midway, we will no longer be able to verify the certificate in the `rialto_test`, as the certificate is only issued if all verifications are successfully completed. Having the rialto_test is crucial because it assesses the entire request processing flow with the integration of rialto/pvmfw/vmbase, and not as flaky as the java tests. More specifically, unlike the unit tests in `service_vm_requires` or `bssl`, it provides a comprehensive coverage that allowed us to catch some low-level errors in libc/virtio-driver of vmbase such as [1] in the past.\n\nIn this case, I believe we should rely on the flag. Anyway, we will not issue any certificates until the flag is enabled.\n\n[1] https://r.android.com/2660016",
       "parentUuid": "ad2ba86d_deaf1788",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 94
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0721aab9_c6e1b2d3",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T17:49:46Z",
+      "side": 1,
+      "message": "I thought the working rialto_test was for a non-protected VM?",
+      "parentUuid": "8f94687b_f40cfa28",
       "range": {
         "startLine": 134,
         "startChar": 0,
