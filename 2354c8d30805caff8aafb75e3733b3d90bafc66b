@@ -128,6 +128,30 @@
       },
       "revId": "2354c8d30805caff8aafb75e3733b3d90bafc66b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01f15dbe_df97ce05",
+        "filename": "secretkeeper/comm/src/data_types/cbor_ser.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T13:25:08Z",
+      "side": 1,
+      "message": "Then just don\u0027t call those functions on those types?\n\nAnything that can be converted to a Value can be converted to a CBOR encoded byte stream. If you don\u0027t need that, what\u0027s the harm?",
+      "parentUuid": "edaf483e_808fc070",
+      "range": {
+        "startLine": 38,
+        "startChar": 10,
+        "endLine": 38,
+        "endChar": 29
+      },
+      "revId": "2354c8d30805caff8aafb75e3733b3d90bafc66b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
