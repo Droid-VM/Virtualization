@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "03f354b8_c56235c1",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-11-29T07:54:30Z",
+      "side": 1,
+      "message": "Hmm, it\u0027s difficult as GKI versions can be differ by devices.\n\nProbably we can add GKI version as a new test variable, like:\n\n    @Parameterized.Parameters(name \u003d \"gkiVersion\u003d{0}\")\n    public static Collection\u003cObject[]\u003e params() {\n        return List.of(new Object[] {\"\"}, new Object[] {\"6.1\"}); /* to be amended whenever we add a GKI */\n    }\n\nDoes it look good? One caveat is that we may forget to amend the variable. Or any other suggestions?\n\n\u003e The tricky bit is too this in a way that doesn\u0027t impact our presubmit latency. I suggest running the suite on all supported kernels only in postsubmit\n\nIn the meantime I\u0027ll check this.",
+      "parentUuid": "89f7edae_00ddf774",
+      "range": {
+        "startLine": 816,
+        "startChar": 16,
+        "endLine": 816,
+        "endChar": 42
+      },
+      "revId": "8cfe4a6213803ee47db65044dcb397d9dc490323",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c5687722_e6f92052",
         "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
         "patchSetId": 1
