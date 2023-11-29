@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f7c2158_7ce8dd0b",
+        "filename": "pvmfw/avb/src/descriptor/collection.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1078119
+      },
+      "writtenOn": "2023-11-29T01:19:43Z",
+      "side": 1,
+      "message": "Ah yep good catch I think you\u0027re right, done.",
+      "parentUuid": "8d8cc330_7216ff89",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 86
+      },
+      "revId": "5acbe70cf73d8dec03b6135239849bc14dafb57a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfd017f3_6f47dd2f",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-11-28T10:53:20Z",
       "side": 1,
       "message": "It\u0027s convenient if `avb` can give an `IoResult` corresponding to `IoError`.",
+      "range": {
+        "startLine": 43,
+        "startChar": 21,
+        "endLine": 43,
+        "endChar": 47
+      },
+      "revId": "5acbe70cf73d8dec03b6135239849bc14dafb57a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a643e8e7_a1ccabd6",
+        "filename": "pvmfw/avb/src/descriptor/collection.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1078119
+      },
+      "writtenOn": "2023-11-29T01:19:43Z",
+      "side": 1,
+      "message": "Ack, added in https://r.android.com/2851526",
+      "parentUuid": "bfd017f3_6f47dd2f",
       "range": {
         "startLine": 43,
         "startChar": 21,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4616c525_6f97cf6c",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1078119
+      },
+      "writtenOn": "2023-11-29T01:19:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "961a7f68_30f434f1",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 1
+      },
+      "revId": "5acbe70cf73d8dec03b6135239849bc14dafb57a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc2b72b6_af93b86c",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-11-28T10:53:20Z",
       "side": 1,
       "message": "nit: Could you either annotate this field as `None, // xxx` or create a variable for it to make this code easier to read?",
+      "range": {
+        "startLine": 65,
+        "startChar": 12,
+        "endLine": 65,
+        "endChar": 16
+      },
+      "revId": "5acbe70cf73d8dec03b6135239849bc14dafb57a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4580ea22_c1ab3133",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1078119
+      },
+      "writtenOn": "2023-11-29T01:19:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc2b72b6_af93b86c",
       "range": {
         "startLine": 65,
         "startChar": 12,
@@ -133,6 +229,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d377ad7f_09b2bd4f",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1078119
+      },
+      "writtenOn": "2023-11-29T01:19:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "586eacc9_99a79ff0",
+      "range": {
+        "startLine": 84,
+        "startChar": 63,
+        "endLine": 84,
+        "endChar": 70
+      },
+      "revId": "5acbe70cf73d8dec03b6135239849bc14dafb57a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff556b6e_b1f507c8",
@@ -146,6 +266,30 @@
       "writtenOn": "2023-11-28T10:53:20Z",
       "side": 1,
       "message": "use `avb::IoError`?",
+      "range": {
+        "startLine": 123,
+        "startChar": 12,
+        "endLine": 123,
+        "endChar": 24
+      },
+      "revId": "5acbe70cf73d8dec03b6135239849bc14dafb57a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ca07892_fc0bca97",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1078119
+      },
+      "writtenOn": "2023-11-29T01:19:43Z",
+      "side": 1,
+      "message": "Ack we do use this a lot, wasn\u0027t sure if it was helpful to always keep the `avb::` namespace as an indicator that this is a libavb type, but I think it\u0027s clear enough that we can just `use` it to avoid repetition.\n\nI\u0027ve gone ahead and `use`\u0027d the other libavb types as well but LMK if you want to keep any of the other namespaces in place.",
+      "parentUuid": "ff556b6e_b1f507c8",
       "range": {
         "startLine": 123,
         "startChar": 12,
@@ -179,6 +323,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c8cf137_d1b1f70d",
+        "filename": "pvmfw/avb/src/utils.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1078119
+      },
+      "writtenOn": "2023-11-29T01:19:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9349d70_c204f6d3",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 60
+      },
+      "revId": "5acbe70cf73d8dec03b6135239849bc14dafb57a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e42c9e66_25c6a066",
@@ -202,6 +370,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3181c1c4_57fe6cf2",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1078119
+      },
+      "writtenOn": "2023-11-29T01:19:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e42c9e66_25c6a066",
+      "range": {
+        "startLine": 119,
+        "startChar": 12,
+        "endLine": 119,
+        "endChar": 32
+      },
+      "revId": "5acbe70cf73d8dec03b6135239849bc14dafb57a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c95f13e8_4d64f712",
@@ -215,6 +407,30 @@
       "writtenOn": "2023-11-28T10:53:20Z",
       "side": 1,
       "message": "Perhaps make it more compact without match?\n\n```suggestion\n    let result \u003d ops.verify_partition(partition_name.as_cstr()).map_err(|e| e.without_verify_data())?;\n    verify_loaded_partition_has_expected_length(\n         result.partition_data(),\n         partition_name,\n         expected_initrd.len(),\n    )\n```",
+      "range": {
+        "startLine": 166,
+        "startChar": 4,
+        "endLine": 176,
+        "endChar": 5
+      },
+      "revId": "5acbe70cf73d8dec03b6135239849bc14dafb57a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28eac4bd_2fa7becd",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1078119
+      },
+      "writtenOn": "2023-11-29T01:19:43Z",
+      "side": 1,
+      "message": "Much better, thanks!",
+      "parentUuid": "c95f13e8_4d64f712",
       "range": {
         "startLine": 166,
         "startChar": 4,
