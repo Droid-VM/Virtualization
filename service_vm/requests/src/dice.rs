@@ -42,9 +42,6 @@ const SUBJECT_PUBLIC_KEY: i64 = -4670552;
 /// ]
 #[derive(Debug, Clone)]
 pub(crate) struct ClientVmDiceChain {
-    /// TODO(b/310931749): Verify the Client VM CSR using the subject public key in the leaf
-    /// payload.
-    #[allow(dead_code)]
     pub(crate) payloads: Vec<DiceChainEntryPayload>,
 }
 
@@ -93,6 +90,11 @@ impl ClientVmDiceChain {
             "The payloads must contain at least three DiceChainEntryPayloads"
         );
         Ok(Self { payloads })
+    }
+
+    /// Returns true if all payloads in the DICE chain are in secure mode.
+    pub(crate) fn all_entries_are_secure(&self) -> bool {
+        self.payloads.iter().all(|p| p.is_secure_mode)
     }
 }
 

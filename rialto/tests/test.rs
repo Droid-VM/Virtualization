@@ -261,8 +261,13 @@ fn check_certificate_for_client_vm(
     let (remaining, extension) = parse_der(extension.value)?;
     assert!(remaining.is_empty());
     let attestation_ext = extension.as_sequence()?;
-    assert_eq!(1, attestation_ext.len());
+    assert_eq!(2, attestation_ext.len());
     assert_eq!(csr_payload.challenge, attestation_ext[0].as_slice()?);
+    let is_vm_secure = attestation_ext[1].as_bool()?;
+    assert!(
+        !is_vm_secure,
+        "The VM shouldn't be secure as the last payload added in the test is in Debug mode"
+    );
 
     // Checks other fields on the certificate
     assert_eq!(X509Version::V3, cert.version());
