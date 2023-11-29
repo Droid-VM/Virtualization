@@ -26,6 +26,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9667124c_cc25eb0c",
+        "filename": "secretkeeper/comm/src/data_types/mod.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T13:30:08Z",
+      "side": 1,
+      "message": "Why not just add your own Display/Debug impl that omits the data, and just says \"\u003csecret\u003e\"?",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 43
+      },
+      "revId": "de673165f0da2e62b0a89b8c936e479500282f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "353e2c6b_f6877f8a",
         "filename": "secretkeeper/comm/src/data_types/mod.rs",
         "patchSetId": 3
@@ -83,6 +106,24 @@
       "writtenOn": "2023-11-28T10:38:47Z",
       "side": 1,
       "message": "personal preference: given that this is a type just used to transport information around, you could just make all the fields `pub` and lose the accessors. (Passim)",
+      "revId": "de673165f0da2e62b0a89b8c936e479500282f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4f8d9b4_62402c0f",
+        "filename": "secretkeeper/comm/src/data_types/request_response_impl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T13:30:08Z",
+      "side": 1,
+      "message": "+1\nThere\u0027s no real encapsulation here.",
+      "parentUuid": "6959d162_a2d3f5eb",
       "revId": "de673165f0da2e62b0a89b8c936e479500282f12",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
