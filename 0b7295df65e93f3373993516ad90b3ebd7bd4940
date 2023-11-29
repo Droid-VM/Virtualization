@@ -16,6 +16,374 @@
       "message": "Hi Alan, could you please take a look?",
       "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3a21bd9_81a5b037",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T12:37:37Z",
+      "side": 1,
+      "message": "cstr!(\"...\")",
+      "range": {
+        "startLine": 200,
+        "startChar": 29,
+        "endLine": 200,
+        "endChar": 88
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab7853b9_34e0eadf",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T12:37:37Z",
+      "side": 1,
+      "message": "\"Verify\" is pretty nebulous, both in the comment and the name.\nWhat exactly does this function do?",
+      "range": {
+        "startLine": 48,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 16
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab40a286_6e5e12d2",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T12:37:37Z",
+      "side": 1,
+      "message": "They aren\u0027t payloads, and that\u0027s a little confusing.\nNodes or certificates. (I think Andrew prefers certificates these days, although the first entry isn\u0027t one.)\n\nI know formally they are the payload inside the cert, but I really don\u0027t think that helps - since we use thew term payload for lots of other things.",
+      "range": {
+        "startLine": 63,
+        "startChar": 16,
+        "endLine": 63,
+        "endChar": 24
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df857691_d6a30537",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T12:37:37Z",
+      "side": 1,
+      "message": "You mean after the common part?",
+      "range": {
+        "startLine": 73,
+        "startChar": 74,
+        "endLine": 73,
+        "endChar": 95
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83ef5802_2dbba29c",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T12:37:37Z",
+      "side": 1,
+      "message": "Same here.\ncheck_client_dice_chain_common_prefix_matches, or something like that?\n\n(We\u0027re not checking signatures which is what I would expect \"verify DICE chain\" to involve.)",
+      "range": {
+        "startLine": 85,
+        "startChar": 3,
+        "endLine": 85,
+        "endChar": 40
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "026e71e4_4c0c39df",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T12:37:37Z",
+      "side": 1,
+      "message": "I think you mean just pvmfw.\n(\"pvmfw payload\" sounds like what pvmfw runs, not what pvmfw is.)",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 32
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b5e7cb2_c40c58d7",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T12:37:37Z",
+      "side": 1,
+      "message": "kernel?",
+      "range": {
+        "startLine": 93,
+        "startChar": 30,
+        "endLine": 93,
+        "endChar": 37
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce7a3933_2beb06ec",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T12:37:37Z",
+      "side": 1,
+      "message": "certificate",
+      "range": {
+        "startLine": 97,
+        "startChar": 24,
+        "endLine": 97,
+        "endChar": 31
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abbf432b_4b58ad18",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T12:37:37Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be !\u003d ?",
+      "range": {
+        "startLine": 99,
+        "startChar": 34,
+        "endLine": 99,
+        "endChar": 36
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61cda9ec_74dc420c",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T12:37:37Z",
+      "side": 1,
+      "message": "Where\u0027s the check that the Microdroid kernel is as expected?\n\nAnd we probably want a TODO to do something with the Microdroid payload node.",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 56
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "116e5fa4_5d67cd5a",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T12:37:37Z",
+      "side": 1,
+      "message": "Note that @ioffe@google.com is planning on adding another node for vendor code.",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 56
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f3fb6f3_df661ab7",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T12:37:37Z",
+      "side": 1,
+      "message": "I\u0027m not really happy with this having no implementation here.\nSeems like that work should come before this CL, not after.",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 94
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8ef9920_40f6dfdb",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T12:37:37Z",
+      "side": 1,
+      "message": "Maybe CertificatePayload?",
+      "range": {
+        "startLine": 144,
+        "startChar": 18,
+        "endLine": 144,
+        "endChar": 25
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b2c71fe_8ed55458",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T12:37:37Z",
+      "side": 1,
+      "message": "It\u0027s not just a CBOR value if it\u0027s required to be a CoseSign1.\n\nverify_cose_signature_and_extract_payload?",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 24
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cca060db_5bbfd266",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T12:37:37Z",
+      "side": 1,
+      "message": "You copied the logic from pvmfw, but not the comment - and that\u0027s quite important.\n```\n        // Mode is supposed to be encoded as a 1-byte bstr, but some implementations instead\n        // encode it as an integer. Accept either. See b/273552826.\n        // If Mode is omitted, it should be treated as if it was Unknown, according to the Open\n        // Profile for DICE spec.\n```\nI suggest copying it here - and as mentioned below, you need to handle the omitted case.",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 9
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad1d5677_f8d45524",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T12:37:37Z",
+      "side": 1,
+      "message": "The spec allows Mode to be omitted, in which case it is treated as Unknown (ie not secure).\nAlso: I suspect Payload and Builder should just have setters/getters for an integer Mode; we can use that to determine is_secure.",
+      "range": {
+        "startLine": 287,
+        "startChar": 1,
+        "endLine": 287,
+        "endChar": 85
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
