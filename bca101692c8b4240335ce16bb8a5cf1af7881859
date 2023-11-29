@@ -22,6 +22,30 @@
       },
       "revId": "bca101692c8b4240335ce16bb8a5cf1af7881859",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc135fef_7803639d",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-11-29T11:58:54Z",
+      "side": 1,
+      "message": "Exactly. Taking the vendor public key from the host will protect from the attack changing a part of the image, but it won\u0027t for the whole image. So we needs the validation comes from the pvmfw config data (ABL) to validate the key.\n\nBTW, this patch is needed for enabling vendor partition verification of non-protected VM as well. For non-protected VM, the verification would be enabled with applying this one(aosp/2823592). However when it applied, obviously init stage requires proper key for the protected VM as well to run microdroid.",
+      "parentUuid": "23aededd_10c92d21",
+      "range": {
+        "startLine": 721,
+        "startChar": 7,
+        "endLine": 722,
+        "endChar": 47
+      },
+      "revId": "bca101692c8b4240335ce16bb8a5cf1af7881859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
