@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c7967c63_bd7dc30e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-29T12:13:27Z",
+      "side": 1,
+      "message": "BTW, if we plan to have all the plumbing (e.g. aosp/2823592) in place in Microdroid to load (and trust) the vendor partition based on a DT-provided key and merge this CL, making pvmfw pass (and therefore trust) a host-provided key, there will be a point in time where the snapshot of AOSP has this obvious way for a malicious host to inject code into the guest kernel through vendor modules, right?\n\nI must admit I haven\u0027t followed too closely the way release cycles are now working with trunk stable but, if possible, it might be wise to delay merging the current CL until we also have the verification in place, even if that means hard-coding the pubkey in pvmfw, at first (assuming that the private part isn\u0027t public i.e. we\u0027re using a non-public test key); WDYT?",
+      "revId": "bca101692c8b4240335ce16bb8a5cf1af7881859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23aededd_10c92d21",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 1
@@ -38,6 +55,30 @@
       "side": 1,
       "message": "Exactly. Taking the vendor public key from the host will protect from the attack changing a part of the image, but it won\u0027t for the whole image. So we needs the validation comes from the pvmfw config data (ABL) to validate the key.\n\nBTW, this patch is needed for enabling vendor partition verification of non-protected VM as well. For non-protected VM, the verification would be enabled with applying this one(aosp/2823592). However when it applied, obviously init stage requires proper key for the protected VM as well to run microdroid.",
       "parentUuid": "23aededd_10c92d21",
+      "range": {
+        "startLine": 721,
+        "startChar": 7,
+        "endLine": 722,
+        "endChar": 47
+      },
+      "revId": "bca101692c8b4240335ce16bb8a5cf1af7881859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4b18ecb_7e37c396",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-29T12:13:27Z",
+      "side": 1,
+      "message": "Cool, would you mind clearing this up in the TODO?\n\n\u003e BTW, this patch is needed for enabling vendor partition verification of non-protected VM as well.\n\nDo you mean `--protected-vm-with-firmware`?\n\nBecause AFAIK, pvmfw doesn\u0027t run for non-protected VMs.",
+      "parentUuid": "fc135fef_7803639d",
       "range": {
         "startLine": 721,
         "startChar": 7,
