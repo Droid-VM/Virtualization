@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23aededd_10c92d21",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-11-29T10:18:21Z",
+      "side": 1,
+      "message": "To be sure I understand the intention: what this `TODO` is tracking isn\u0027t about not reading the pubkey from the input DT (which we\u0027ll keep doing) but instead about validating it (i.e. also reading the one from the config data and comparing them), is that right?",
+      "range": {
+        "startLine": 721,
+        "startChar": 7,
+        "endLine": 722,
+        "endChar": 47
+      },
+      "revId": "bca101692c8b4240335ce16bb8a5cf1af7881859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
