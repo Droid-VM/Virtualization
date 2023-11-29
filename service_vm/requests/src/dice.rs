@@ -42,8 +42,6 @@ const SUBJECT_PUBLIC_KEY: i64 = -4670552;
 /// ]
 #[derive(Debug, Clone)]
 pub(crate) struct ClientVmDiceChain {
-    /// TODO(b/310931749): This field will be used to derive the boolean is_vm_secure later.
-    #[allow(dead_code)]
     pub(crate) payloads: Vec<DiceChainEntryPayload>,
 }
 
@@ -93,6 +91,11 @@ impl ClientVmDiceChain {
             "The client VM DICE chain must contain at least three DiceChainEntryPayloads"
         );
         Ok(Self { payloads })
+    }
+
+    /// Returns true if all payloads in the DICE chain are in normal mode.
+    pub(crate) fn all_entries_are_secure(&self) -> bool {
+        self.payloads.iter().all(|p| p.mode == DiceMode::kDiceModeNormal)
     }
 }
 
@@ -151,8 +154,6 @@ pub(crate) struct DiceChainEntryPayload {
     /// TODO(b/310931749): Verify the DICE chain entry using the subject public key.
     #[allow(dead_code)]
     subject_public_key: PublicKey,
-    /// TODO(b/313428920): Derive is_vm_secure from the mode.
-    #[allow(dead_code)]
     mode: DiceMode,
     /// TODO(b/271275206): Verify Microdroid kernel authority and code hashes.
     #[allow(dead_code)]
