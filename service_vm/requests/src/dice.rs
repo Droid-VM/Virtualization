@@ -80,6 +80,11 @@ impl Chain {
         }
         Ok(Self { payloads })
     }
+
+    /// Returns true if all payloads in the DICE chain are in secure mode.
+    pub(crate) fn is_secure_mode(&self) -> bool {
+        self.payloads.iter().all(|p| p.is_secure_mode)
+    }
 }
 
 fn verify_dice_chain_up_to_pvmfw_payload(
@@ -143,8 +148,6 @@ impl PublicKey {
 #[derive(Debug, Clone)]
 pub(crate) struct Payload {
     pub(crate) subject_public_key: PublicKey,
-    /// TODO(b/313428920): Include `is_secure_mode` the certificate extension for attestation.
-    #[allow(dead_code)]
     is_secure_mode: bool,
     /// TODO(b/271275206): Verify Microdroid kernel authority and code hashes.
     #[allow(dead_code)]

@@ -76,7 +76,11 @@ pub(super) fn request_attestation(
     rand_bytes(&mut serial_number)?;
     let subject = Name::encode_from_string("CN=Android Protected Virtual Machine Key")?;
     let rkp_cert = Certificate::from_der(&params.remotely_provisioned_cert)?;
-    let attestation_ext = cert::AttestationExtension::new(&csr_payload.challenge).to_vec()?;
+    let attestation_ext = cert::AttestationExtension::new(
+        &csr_payload.challenge,
+        client_vm_dice_chain.is_secure_mode(),
+    )
+    .to_vec()?;
     let tbs_cert = cert::build_tbs_certificate(
         &serial_number,
         rkp_cert.tbs_certificate.subject,
