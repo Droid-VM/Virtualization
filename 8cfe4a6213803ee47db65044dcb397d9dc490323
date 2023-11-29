@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1c9283a0_03ae71c9",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-11-29T15:13:09Z",
+      "side": 1,
+      "message": "\u003e Does it look good? One caveat is that we may forget to amend the variable. Or any other suggestions?\n\n\nAt some point we will definitely forget to update the variable :) We should look in the solutions where the get list of supported kernels from the device, and run tests against all of them. Having said that, I don\u0027t have an idea on how we can achieve this. Happy to brainstorm this with you if you want :)\n\nAlso, feel free to address this comment in a follow-up patch.",
+      "parentUuid": "03f354b8_c56235c1",
+      "range": {
+        "startLine": 816,
+        "startChar": 16,
+        "endLine": 816,
+        "endChar": 42
+      },
+      "revId": "8cfe4a6213803ee47db65044dcb397d9dc490323",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c5687722_e6f92052",
         "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
         "patchSetId": 1
