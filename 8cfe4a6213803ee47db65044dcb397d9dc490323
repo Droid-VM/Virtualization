@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31e9a8a7_ee811488",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-11-29T23:58:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1c9283a0_03ae71c9",
+      "range": {
+        "startLine": 816,
+        "startChar": 16,
+        "endLine": 816,
+        "endChar": 42
+      },
+      "revId": "8cfe4a6213803ee47db65044dcb397d9dc490323",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5687722_e6f92052",
@@ -85,6 +109,30 @@
       "writtenOn": "2023-11-28T11:02:25Z",
       "side": 1,
       "message": "Should we only run this test if RELEASE_AVF_ENABLE_VENDOR_MODULES flag is enabled?",
+      "range": {
+        "startLine": 817,
+        "startChar": 8,
+        "endLine": 817,
+        "endChar": 67
+      },
+      "revId": "8cfe4a6213803ee47db65044dcb397d9dc490323",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54eebcd0_031a68ca",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-11-29T23:58:47Z",
+      "side": 1,
+      "message": "I think this is fine because supportedVersions will be empty if `RELEASE_AVF_ENABLE_VENDOR_MODULES` flag is disabled.",
+      "parentUuid": "c5687722_e6f92052",
       "range": {
         "startLine": 817,
         "startChar": 8,
