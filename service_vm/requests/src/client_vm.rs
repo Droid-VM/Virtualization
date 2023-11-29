@@ -47,7 +47,7 @@ pub(super) fn request_attestation(
     // Verifies and builds client VM's DICE chain.
     let service_vm_dice_chain =
         dice_artifacts.bcc().ok_or(RequestProcessingError::MissingDiceChain)?;
-    let _client_vm_dice_chain =
+    let client_vm_dice_chain =
         ClientVmDiceChain::verify(&csr.dice_cert_chain, service_vm_dice_chain)?;
 
     // AAD is empty as defined in service_vm/comm/client_vm_csr.cddl.
@@ -72,7 +72,11 @@ pub(super) fn request_attestation(
     rand_bytes(&mut serial_number)?;
     let subject = Name::encode_from_string("CN=Android Protected Virtual Machine Key")?;
     let rkp_cert = Certificate::from_der(&params.remotely_provisioned_cert)?;
-    let attestation_ext = cert::AttestationExtension::new(&csr_payload.challenge).to_vec()?;
+    let attestation_ext = cert::AttestationExtension::new(
+        &csr_payload.challenge,
+        client_vm_dice_chain.all_entries_are_secure(),
+    )
+    .to_vec()?;
     let tbs_cert = cert::build_tbs_certificate(
         &serial_number,
         rkp_cert.tbs_certificate.subject,
