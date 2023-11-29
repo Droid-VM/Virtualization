@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "68e074d8_0378a1c3",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T14:38:13Z",
+      "side": 1,
+      "message": "Please change the function name to explain what it does - verify is just too generic.",
+      "parentUuid": "183b1c76_8f4977da",
+      "range": {
+        "startLine": 48,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 16
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ab40a286_6e5e12d2",
         "filename": "service_vm/requests/src/dice.rs",
         "patchSetId": 7
@@ -161,6 +185,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "393e221e_c79058d1",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T14:38:13Z",
+      "side": 1,
+      "message": "Yes, I know, but it\u0027s still a very confusing term in our context, since we use payload to mean the code running in the VM (which is described by a DiceChainEntryPayload).\n\nYou can use DiceChainEntryPayload, although I think CertPayload would be fine. (It\u0027s not exactly the same thing as DCEP since we\u0027ve decoded it a bit.)\n\nBut I really don\u0027t like the use of payload in the variable names etc because of the inherent ambiguity. entry, node_data, cert_details, ... ?",
+      "parentUuid": "e64b1498_d1d6ad5b",
+      "range": {
+        "startLine": 63,
+        "startChar": 16,
+        "endLine": 63,
+        "endChar": 24
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "df857691_d6a30537",
         "filename": "service_vm/requests/src/dice.rs",
         "patchSetId": 7
@@ -196,6 +244,30 @@
       "side": 1,
       "message": "No, the pvmfw entry is a common part. What I mean is that the chain must always contain a minimum of three `DiceChainEntry` or `DiceChainEntryPayload` elements when we reach this point after the validation. In the `verify_dice_chain_up_to_pvmfw_payload` function, we have already checked the following:\n\n- service_vm_dice_chain.len() \u003e\u003d 3\n- client_vm_dice_chain.len() \u003d\u003d service_vm_dice_chain.len() - 1 + 2\n\nThis means client_vm_dice_chain.len() \u003e\u003d 4, while at the 0\u0027s index, we have the root key rather that a `DiceChainEntry`, we should have payloads.len() \u003e\u003d 3 here. This assertion is included here solely to enhance code clarity and to ensure that we can confidently access the last two items in payloads later on.",
       "parentUuid": "df857691_d6a30537",
+      "range": {
+        "startLine": 73,
+        "startChar": 74,
+        "endLine": 73,
+        "endChar": 95
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aea87dc9_4db788f1",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T14:38:13Z",
+      "side": 1,
+      "message": "Can you change the comment. \"After the validation\" is a bit obscure.",
+      "parentUuid": "fba637fa_26ba1cf1",
       "range": {
         "startLine": 73,
         "startChar": 74,
@@ -560,6 +632,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad2ba86d_deaf1788",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T14:38:13Z",
+      "side": 1,
+      "message": "Checking in known insecure code that will sign certs makes me nervous. (That also applies to the Microdroid checks.)\nI know this is behind a flag, but even so.\n\nCan we make sure that requesting an attestation for a pVM will always fail, until we have all the necessary checks in place? That won\u0027t break your tests, I think?",
+      "parentUuid": "5438b733_b93bb279",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 94
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f8ef9920_40f6dfdb",
         "filename": "service_vm/requests/src/dice.rs",
         "patchSetId": 7
@@ -642,6 +738,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "7b2c71fe_8ed55458",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 24
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4967a82_b0679b4c",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-11-29T14:38:13Z",
+      "side": 1,
+      "message": "Comment needs some work.",
+      "parentUuid": "fea1112b_20e6e886",
       "range": {
         "startLine": 160,
         "startChar": 0,
