@@ -184,6 +184,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76c92229_99152ba4",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-30T08:51:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7696ecb_dec130bb",
+      "range": {
+        "startLine": 48,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 16
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab40a286_6e5e12d2",
@@ -788,6 +812,30 @@
       "side": 1,
       "message": "I thought the working rialto_test was for a non-protected VM?",
       "parentUuid": "8f94687b_f40cfa28",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 94
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f4683fd_b14279e0",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-30T08:51:39Z",
+      "side": 1,
+      "message": "rialto_test works for both protected and non-protected VM. When testing a protected VM, we expect it to fail at the DICE chain comparison step, while a non-protected VM should go till the end and return a certificate that we can examine for its content.\n\nFrom an infrastructure POV, the code that runs through both types of VMs is almost identical. Both VMs are built with the vmbase(memory,vsock..)/rialto/request_processing layers. The main difference is the MMIO support and the retrieval of the DICE chain in rialto. In essence, the request processing performed by the protected rialto is extensively covered by the e2e non-protected rialto_test.\n\nBy making the attestation to fail midway, we miss out on testing the section of code that follows the failure. This can be a problem as `vmbase` is also modified by other developers, and there is a risk that something could break in this section of code.",
+      "parentUuid": "0721aab9_c6e1b2d3",
       "range": {
         "startLine": 134,
         "startChar": 0,
