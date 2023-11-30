@@ -18,7 +18,7 @@
 use crate::cert;
 use crate::keyblob::decrypt_private_key;
 use alloc::vec::Vec;
-use bssl_avf::{rand_bytes, sha256, EcKey, EvpPKey};
+use bssl_avf::{evp, rand_bytes, sha256, EcKey};
 use core::result;
 use coset::{CborSerializable, CoseSign};
 use der::{Decode, Encode};
@@ -53,7 +53,7 @@ pub(super) fn request_attestation(
     cose_sign.verify_signature(ATTESTATION_KEY_SIGNATURE_INDEX, aad, |signature, message| {
         ecdsa_verify(&ec_public_key, signature, message)
     })?;
-    let subject_public_key_info = EvpPKey::try_from(ec_public_key)?.subject_public_key_info()?;
+    let subject_public_key_info = evp::PKey::try_from(ec_public_key)?.subject_public_key_info()?;
 
     // TODO(b/278717513): Compare client VM's DICE chain in the `csr` up to pvmfw
     // cert with RKP VM's DICE chain.

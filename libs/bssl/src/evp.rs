@@ -15,25 +15,30 @@
 //! Wrappers of the EVP functions in BoringSSL evp.h.
 
 use crate::cbb::CbbFixed;
+use crate::digest::{Digester, DigesterContext};
 use crate::ec_key::EcKey;
 use crate::util::{check_int_result, to_call_failed_error};
 use alloc::vec::Vec;
 use bssl_avf_error::{ApiName, Result};
 use bssl_ffi::{
-    CBB_flush, CBB_len, EVP_PKEY_free, EVP_PKEY_new, EVP_PKEY_set1_EC_KEY, EVP_marshal_public_key,
-    EVP_PKEY,
+    CBB_flush, CBB_len, EVP_DigestVerify, EVP_DigestVerifyInit, EVP_PKEY_free, EVP_PKEY_new,
+    EVP_PKEY_new_raw_public_key, EVP_PKEY_set1_EC_KEY, EVP_marshal_public_key, EVP_PKEY,
+    EVP_PKEY_ED25519, EVP_PKEY_X25519,
 };
-use core::ptr::NonNull;
+use core::ptr::{self, NonNull};
 
 /// Wrapper of an `EVP_PKEY` object, representing a public or private key.
-pub struct EvpPKey {
+///
+/// This struct either owns an inner key or borrows a raw key.
+pub struct PKey<'a> {
     pkey: NonNull<EVP_PKEY>,
-    /// Since this struct owns the inner key, the inner key remains valid as
+    _inner_raw_key: Option<&'a [u8]>,
+    /// Since this struct owns the inner EC key, the inner EC key remains valid as
     /// long as the pointer to `EVP_PKEY` is valid.
-    _inner_key: EcKey,
+    _inner_ec_key: Option<EcKey>,
 }
 
-impl Drop for EvpPKey {
+impl Drop for PKey<'_> {
     fn drop(&mut self) {
         // SAFETY: It is safe because `EVP_PKEY` has been allocated by BoringSSL and isn't
         // used after this.
@@ -48,23 +53,23 @@ fn new_pkey() -> Result<NonNull<EVP_PKEY>> {
     NonNull::new(key).ok_or(to_call_failed_error(ApiName::EVP_PKEY_new))
 }
 
-impl TryFrom<EcKey> for EvpPKey {
+impl TryFrom<EcKey> for PKey<'_> {
     type Error = bssl_avf_error::Error;
 
     fn try_from(key: EcKey) -> Result<Self> {
         let pkey = new_pkey()?;
-        // SAFETY: The function only sets the inner key of the initialized and
+        // SAFETY: The function only sets the inner EC key of the initialized and
         // non-null `EVP_PKEY` to point to the given `EC_KEY`. It only reads from
         // and writes to the initialized `EVP_PKEY`.
         // Since this struct owns the inner key, the inner key remains valid as
         // long as `EVP_PKEY` is valid.
         let ret = unsafe { EVP_PKEY_set1_EC_KEY(pkey.as_ptr(), key.0.as_ptr()) };
         check_int_result(ret, ApiName::EVP_PKEY_set1_EC_KEY)?;
-        Ok(Self { pkey, _inner_key: key })
+        Ok(Self { pkey, _inner_ec_key: Some(key), _inner_raw_key: None })
     }
 }
 
-impl EvpPKey {
+impl<'a> PKey<'a> {
     /// Returns a DER-encoded SubjectPublicKeyInfo structure as specified
     /// in RFC 5280 s4.1.2.7:
     ///
@@ -87,4 +92,82 @@ impl EvpPKey {
         let len = unsafe { CBB_len(cbb.as_ref()) };
         Ok(buf.get(0..len).ok_or(to_call_failed_error(ApiName::CBB_len))?.to_vec())
     }
+
+    /// This function takes a raw public key and returns an `EvpPKey` object wrapping the data
+    ///
+    /// Currently the only supported raw formats are X25519 and Ed25519, where the formats
+    /// are specified in RFC 7748 and RFC 8032 respectively.
+    pub fn new_raw_public_key(raw_public_key: &'a [u8], type_: Type) -> Result<Self> {
+        let engine = ptr::null_mut(); // Engine is not used.
+        let pkey =
+            // SAFETY: The function only reads from the given raw public key within its bounds.
+            // The returned pointer is checked below.
+            unsafe {
+                EVP_PKEY_new_raw_public_key(
+                    type_.0,
+                    engine,
+                    raw_public_key.as_ptr(),
+                    raw_public_key.len(),
+                )
+            };
+        let pkey =
+            NonNull::new(pkey).ok_or(to_call_failed_error(ApiName::EVP_PKEY_new_raw_public_key))?;
+        Ok(Self { pkey, _inner_raw_key: Some(raw_public_key), _inner_ec_key: None })
+    }
+
+    /// Verifies the given `signature` of the `message` using the current public key.
+    ///
+    /// The `message` will be hashed using the given `digester` before verification.
+    ///
+    /// For algorithms like Ed25519 that do not use pre-hashed inputs, the `digester` should
+    /// be `None`.
+    pub fn verify(
+        &self,
+        signature: &[u8],
+        message: &[u8],
+        digester: Option<Digester>,
+    ) -> Result<()> {
+        let mut digester_context = DigesterContext::new()?;
+        // The `EVP_PKEY_CTX` is set to null as this function does not collect the context
+        // during the verification.
+        let pkey_context = ptr::null_mut();
+        let engine = ptr::null_mut(); // Use the default engine.
+        let ret =
+            // SAFETY: All the non-null parameters passed to this function have been properly
+            // initialized as required in the BoringSSL spec.
+            unsafe {
+                EVP_DigestVerifyInit(
+                    digester_context.as_mut_ptr(),
+                    pkey_context,
+                    digester.map_or(ptr::null(), |d| d.0),
+                    engine,
+                    self.pkey.as_ptr(),
+                )
+            };
+        check_int_result(ret, ApiName::EVP_DigestVerifyInit)?;
+
+        // SAFETY: The function only reads from the given slices within their bounds.
+        // The `EVP_PKEY_CTX` is successfully initialized before this call.
+        let ret = unsafe {
+            EVP_DigestVerify(
+                digester_context.as_mut_ptr(),
+                signature.as_ptr(),
+                signature.len(),
+                message.as_ptr(),
+                message.len(),
+            )
+        };
+        check_int_result(ret, ApiName::EVP_DigestVerify)
+    }
+}
+
+/// Type of the keys supported by `EvpPKey`.
+#[derive(Debug, Copy, Clone, PartialEq, Eq)]
+pub struct Type(i32);
+
+impl Type {
+    /// EVP_PKEY_X25519
+    pub const X25519: Type = Type(EVP_PKEY_X25519);
+    /// EVP_PKEY_ED25519
+    pub const ED25519: Type = Type(EVP_PKEY_ED25519);
 }
