@@ -146,6 +146,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2942f7fa_53f9957a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-11-30T11:03:09Z",
+      "side": 1,
+      "message": "For protected \u0026 non-debuggable VMs,\n```\nadb shell /apex/com.android.virt/bin/vm run-microdroid --vendor /vendor/etc/avf/microdroid/microdroid_vendor.img --protected --debug none\n```\n\nFor non-protected \u0026 non-debuggable VMs,\n```\nadb shell /apex/com.android.virt/bin/vm run-microdroid --vendor /vendor/etc/avf/microdroid/microdroid_vendor.img --debug none\n```\n\nIt was observed w/ latest git_main as well, regardless this patch.",
+      "parentUuid": "3e755078_8ac651b3",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 65
+      },
+      "revId": "bca101692c8b4240335ce16bb8a5cf1af7881859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "102b4ad0_f1c55fe3",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
