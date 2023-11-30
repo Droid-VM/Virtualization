@@ -74,6 +74,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "102b4ad0_f1c55fe3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-11-30T04:10:51Z",
+      "side": 1,
+      "message": "nit: respect the text width limit",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 217
+      },
+      "revId": "bca101692c8b4240335ce16bb8a5cf1af7881859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c7967c63_bd7dc30e",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -103,6 +126,24 @@
       "side": 1,
       "message": "So, are you worrying about pvmfw itself could be untrustable so that it can cause a problem when there\u0027s an update except pvmfw?\n\nI think it\u0027s a good catch.. I haven\u0027t thought about updatability of pvmfw, but I agree w/ you it may cause a security problem. I\u0027ll keep this change as `CR-1` until finding a way to solve this.\nCould you briefly explain about the updatability of pvmfw? Is the update cycle binded to virt APEX?",
       "parentUuid": "c7967c63_bd7dc30e",
+      "revId": "bca101692c8b4240335ce16bb8a5cf1af7881859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48461281_16c6971c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-11-30T04:10:51Z",
+      "side": 1,
+      "message": "DA is still behind the flag, so we don\u0027t have to worry about this CL being permanent.",
+      "parentUuid": "cd4cc306_0a1dbd25",
       "revId": "bca101692c8b4240335ce16bb8a5cf1af7881859",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
