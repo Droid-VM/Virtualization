@@ -872,6 +872,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "43777f27_a3e4fe25",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-30T14:16:06Z",
+      "side": 1,
+      "message": "Yes. The attestation for the protected rialto is expected to fail in this test during the DICE chain comparison step. This is because currently we are unable to create a valid DICE chain that shares the same prefix as the RKP VM DICE chain but also has two additional nodes in this test.",
+      "parentUuid": "a7a4d2be_20d7aa26",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 94
+      },
+      "revId": "0b7295df65e93f3373993516ad90b3ebd7bd4940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f8ef9920_40f6dfdb",
         "filename": "service_vm/requests/src/dice.rs",
         "patchSetId": 7
