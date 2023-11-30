@@ -51,6 +51,24 @@
       "parentUuid": "5cde148b_6e06d0ca",
       "revId": "28bb18b2430edc84b9fdb618084909fa75f2869e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb8299a0_4a530d81",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-11-30T13:59:18Z",
+      "side": 1,
+      "message": "No, the suggested change does not affect the semantics. Function signatures are never inferred from usage. Omitting the `\u003c\u0027_\u003e` is just legacy syntax and both versions use lifetime elision with the same rules.",
+      "parentUuid": "08cddd07_1a053c77",
+      "revId": "28bb18b2430edc84b9fdb618084909fa75f2869e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
