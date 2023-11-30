@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d80344c0_a74a8c0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-11-30T11:40:29Z",
+      "side": 1,
+      "message": "Unsafe code LGTM.",
+      "revId": "28bb18b2430edc84b9fdb618084909fa75f2869e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cde148b_6e06d0ca",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-11-30T11:40:29Z",
+      "side": 1,
+      "message": "This should say `EcGroup\u003c\u0027_\u003e` to emphasize that this type has a lifetime annotation. I\u0027m surprised you didn\u0027t get a warning from this.",
+      "revId": "28bb18b2430edc84b9fdb618084909fa75f2869e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
