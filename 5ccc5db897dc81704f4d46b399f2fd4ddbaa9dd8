@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "287574a5_06bb7f71",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-30T16:20:41Z",
+      "side": 1,
+      "message": "nit: re-use a local variable (`let group \u003d ec_key.ec_group()?;`)?",
+      "revId": "5ccc5db897dc81704f4d46b399f2fd4ddbaa9dd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a467681a_3c0b6c16",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-11-30T16:20:41Z",
+      "side": 1,
+      "message": "nit: prefer `curve_nid` rather than `curve_name` -- \"name\" makes me think of standard curve name strings (\"secp384r1\" etc.)",
+      "revId": "5ccc5db897dc81704f4d46b399f2fd4ddbaa9dd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
