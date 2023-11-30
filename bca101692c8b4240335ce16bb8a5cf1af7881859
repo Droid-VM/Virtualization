@@ -134,6 +134,30 @@
       },
       "revId": "bca101692c8b4240335ce16bb8a5cf1af7881859",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5169ae6c_8f7e4448",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-11-30T02:20:40Z",
+      "side": 1,
+      "message": "\u003e Cool, would you mind clearing this up in the TODO?\n\nWhy not? I\u0027ll leave more detailed information for that.\n\n\u003e Do you mean --protected-vm-with-firmware?\n\nI meant `--protected` in fact, but it looks same.\nhttps://source.corp.google.com/h/android/platform/superproject/main/+/main:packages/modules/Virtualization/virtualizationmanager/src/crosvm.rs;l\u003d775-780\n\nThough pvmfw doesn\u0027t run for non-protected VMs, but it runs for protected-debuggable VMs. Without this patch, enabling dm-verity for non-protected VM by merging aosp/2823592 will cause breaking tests.\n- https://source.corp.google.com/h/android/platform/superproject/main/+/main:packages/modules/Virtualization/tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java;l\u003d2132\n- https://source.corp.google.com/h/android/platform/superproject/main/+/main:packages/modules/Virtualization/tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java;l\u003d264\n\nSo I thought we have 3 kinds of solutions, and the last one was what I chose when pushing this change:\n- Don\u0027t enable verification with aosp/2823592, until final solution using ABL for protected VMs is landed.\n\n- Guard the test by making assumption running on non-protected VMs only. Then enable the verification with aosp/2823592. BTW, I should make assumption someday, since ABL won\u0027t have public key of vendor image for testing obviously. However, making assumption right now would lead suspending CI for protected VM w/ vendor image.\n\n- Use the temporary solution right now by merging this change. Though it\u0027s not enough satisfied way, but merging it wouldn\u0027t decrease the level of security.",
+      "parentUuid": "b4b18ecb_7e37c396",
+      "range": {
+        "startLine": 721,
+        "startChar": 7,
+        "endLine": 722,
+        "endChar": 47
+      },
+      "revId": "bca101692c8b4240335ce16bb8a5cf1af7881859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
