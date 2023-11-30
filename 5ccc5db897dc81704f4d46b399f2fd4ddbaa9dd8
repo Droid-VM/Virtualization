@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c591ce9d_e44c1a14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-30T16:44:26Z",
+      "side": 1,
+      "message": "Thanks for the review",
+      "revId": "5ccc5db897dc81704f4d46b399f2fd4ddbaa9dd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "287574a5_06bb7f71",
@@ -18,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f9e48c3_5987d05c",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-30T16:44:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "287574a5_06bb7f71",
+      "revId": "5ccc5db897dc81704f4d46b399f2fd4ddbaa9dd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a467681a_3c0b6c16",
@@ -31,6 +66,24 @@
       "writtenOn": "2023-11-30T16:20:41Z",
       "side": 1,
       "message": "nit: prefer `curve_nid` rather than `curve_name` -- \"name\" makes me think of standard curve name strings (\"secp384r1\" etc.)",
+      "revId": "5ccc5db897dc81704f4d46b399f2fd4ddbaa9dd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a531cd3_638024cd",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-11-30T16:44:26Z",
+      "side": 1,
+      "message": "+1. I was hesitating between using `curve_nid` for better clarity or sticking to the bssl\u0027s API name.",
+      "parentUuid": "a467681a_3c0b6c16",
       "revId": "5ccc5db897dc81704f4d46b399f2fd4ddbaa9dd8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
