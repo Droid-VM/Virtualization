@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bcee062d_737ed922",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-11-30T10:52:06Z",
+      "side": 1,
+      "message": "\u003e I also thought it would be okay since we have the guard for restricting w/ debuggable VMs only. But after double-checking it, it seems this guard doesn\u0027t be applied to the protected VMs?\n\nIt should. If it doesn\u0027t, then it\u0027s a bug.\n\n\u003e In latest git_main, we can pass vendor image into protected-nondebuggable VMs w/o any verification of that image. For nonprotected-nondebuggable VMs, it\u0027s blocked. Shall I file a bug of it?\n\nAre you sure starting protected nondebuggable VMs works? I suspect that it won\u0027t because of:\n\n\n1. pvmfw filtering out the `androidboot.microdroid.mount_vendor` kernel param\n2. and if the (1) is not true, then the check in first_stage_init should fail the boot.\n\n\u003e For nonprotected-nondebuggable VMs, it\u0027s blocked\n\nThis is WAI due to the check in the first_stage_init",
+      "parentUuid": "3b6dc730_1638783d",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 65
+      },
+      "revId": "bca101692c8b4240335ce16bb8a5cf1af7881859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "102b4ad0_f1c55fe3",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
