@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b81b9e1d_337efff7",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-30T08:02:32Z",
+      "side": 1,
+      "message": "I introduced `DeviceReg` and put helpers together. PTAL.",
+      "parentUuid": "62725f91_81f7b535",
+      "range": {
+        "startLine": 230,
+        "startChar": 13,
+        "endLine": 230,
+        "endChar": 21
+      },
+      "revId": "22c526614390c7db6a9ed141150b9970dce9275f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0fec1444_662afc79",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-28T11:42:10Z",
       "side": 1,
       "message": "nit: `.ok_or()?` like below?",
+      "range": {
+        "startLine": 242,
+        "startChar": 41,
+        "endLine": 242,
+        "endChar": 48
+      },
+      "revId": "22c526614390c7db6a9ed141150b9970dce9275f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d110cf1_143b7cb0",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-30T08:02:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0fec1444_662afc79",
       "range": {
         "startLine": 242,
         "startChar": 41,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cd798d3_e8eb7fcb",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-30T08:02:32Z",
+      "side": 1,
+      "message": "Added TODO to make this CL simpler",
+      "parentUuid": "6612d41e_1fb6561c",
+      "range": {
+        "startLine": 249,
+        "startChar": 12,
+        "endLine": 249,
+        "endChar": 13
+      },
+      "revId": "22c526614390c7db6a9ed141150b9970dce9275f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e4e4b4f_44ded6f0",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-11-28T11:42:10Z",
       "side": 1,
       "message": "It would be nice to get some logs on what the HVC returned in `Err` as that has proven to be helpful during integration efforts. I\u0027m not a big fan of sprinkling `error!` around the codebase but IMO, this is a good candidate for explicitly logging the `Err` (before re-throwing).",
+      "range": {
+        "startLine": 251,
+        "startChar": 16,
+        "endLine": 251,
+        "endChar": 17
+      },
+      "revId": "22c526614390c7db6a9ed141150b9970dce9275f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a20777a_c71fe38a",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-30T08:02:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e4e4b4f_44ded6f0",
       "range": {
         "startLine": 251,
         "startChar": 16,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ae78580_d2c4482d",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-30T08:02:32Z",
+      "side": 1,
+      "message": "Change `parse_reg` instead",
+      "parentUuid": "37405148_611db2c3",
+      "range": {
+        "startLine": 277,
+        "startChar": 50,
+        "endLine": 277,
+        "endChar": 51
+      },
+      "revId": "22c526614390c7db6a9ed141150b9970dce9275f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7149b92d_234c4901",
@@ -139,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "893da32d_75d0638d",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-30T08:02:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7149b92d_234c4901",
+      "range": {
+        "startLine": 296,
+        "startChar": 11,
+        "endLine": 296,
+        "endChar": 22
+      },
+      "revId": "22c526614390c7db6a9ed141150b9970dce9275f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ffab791_85ff284e",
@@ -152,6 +296,30 @@
       "writtenOn": "2023-11-28T11:42:10Z",
       "side": 1,
       "message": "I love this, we could do so much more testing-wise for pvmfw by building on this idea!\n\nMay I recommend we make the mock hypervisor fully configurable from the test itself i.e. no implicit results (such as the `Ok(0)` currently in `::new`)?\n\nFor example, the MMIO interface could be (untested but you get the idea):\n```\nstruct MockHypervisor {\n    mmio_tokens: hyp::Result\u003cHashMap::\u003c(u64, u64), u64\u003e\u003e,\n}\n\nimpl MockHypervisor {\n    fn new() -\u003e Self {\n        Self { mmio_tokens: Ok(HashMap::new()) }\n    }\n\n    fn insert_mmio_token(\u0026mut self, ipa: u64, size: u64, pa: u64) {\n        if let Ok(ref mut tokens) \u003d self.mmio_tokens {\n            tokens.insert((ipa, size), pa);\n        } // This ignores Err() but we could also unwrap.\n    }\n\n    fn force_error_get_phys_mmio_token(\u0026mut self, e: hyp::Error) {\n        self.mmio_tokens \u003d Err(e);\n    }\n}\n\nimpl DeviceAssigningHypervisor for MockHypervisor {\n    fn get_phys_mmio_token(\u0026self, ipa: u64, size: u64) -\u003e hyp::Result\u003cu64\u003e {\n        let tokens \u003d self.mmio_tokens.as_ref()?;\n\n        tokens.get((ipa, size)).cloned().ok_or(Err(\n            hyp::Error::KvmError(\n                hyp::KvmError::InvalidParameter,\n                0xc6000012, /* VENDOR_HYP_KVM_DEV_REQ_MMIO_FUNC_ID */\n            )\n        )\n    }\n}\n```\n(and exact same approach for pvIOMMUs), which would allow tests to configure the mock as they please before passing it to the function-under-test while somehow mimicking the actual EL2 implementation. AFAICT, this API would fit _any_ test-case, including those covering PA mismatches, which are currently missing.",
+      "range": {
+        "startLine": 498,
+        "startChar": 0,
+        "endLine": 501,
+        "endChar": 5
+      },
+      "revId": "22c526614390c7db6a9ed141150b9970dce9275f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b36f7f5_267a9253",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-11-30T08:02:32Z",
+      "side": 1,
+      "message": "Kind of took the idea. Changed to use `HashMap` but didn\u0027t make them `Result` nor add extra helper methods.",
+      "parentUuid": "1ffab791_85ff284e",
       "range": {
         "startLine": 498,
         "startChar": 0,
