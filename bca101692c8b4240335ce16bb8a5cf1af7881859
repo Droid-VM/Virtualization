@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cd4cc306_0a1dbd25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-11-30T03:04:46Z",
+      "side": 1,
+      "message": "So, are you worrying about pvmfw itself could be untrustable so that it can cause a problem when there\u0027s an update except pvmfw?\n\nI think it\u0027s a good catch.. I haven\u0027t thought about updatability of pvmfw, but I agree w/ you it may cause a security problem. I\u0027ll keep this change as `CR-1` until finding a way to solve this.\nCould you briefly explain about the updatability of pvmfw? Is the update cycle binded to virt APEX?",
+      "parentUuid": "c7967c63_bd7dc30e",
+      "revId": "bca101692c8b4240335ce16bb8a5cf1af7881859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23aededd_10c92d21",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 1
