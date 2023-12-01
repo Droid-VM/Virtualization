@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4199df7_8c600540",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-01T08:08:39Z",
+      "side": 1,
+      "message": "Thanks for the review",
+      "revId": "d3a964074a0cc5c4121a83966442ff39d5d014fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c5232b5_9f7ae365",
@@ -14,6 +31,30 @@
       "writtenOn": "2023-11-30T17:03:41Z",
       "side": 1,
       "message": "If you\u0027re doing this, you could just skip the call to process_request?",
+      "range": {
+        "startLine": 188,
+        "startChar": 0,
+        "endLine": 188,
+        "endChar": 85
+      },
+      "revId": "d3a964074a0cc5c4121a83966442ff39d5d014fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c332467b_1ea32920",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-01T08:08:39Z",
+      "side": 1,
+      "message": "That\u0027s not the same. This conditional branch prevents the code from issuing the certificate to pVM, but it doesn\u0027t affect the test. The protected Rialto can still process the attestation request until it reaches the DICE chain comparison and breaks as expected.",
+      "parentUuid": "8c5232b5_9f7ae365",
       "range": {
         "startLine": 188,
         "startChar": 0,
