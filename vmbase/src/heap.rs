@@ -85,6 +85,51 @@ unsafe extern "C" fn calloc(nmemb: usize, size: usize) -> *mut c_void {
     allocate(size, true).map_or(ptr::null_mut(), |p| p.cast::<c_void>().as_ptr())
 }
 
+/// # Safety Requirements
+///
+/// The following safety requirements must be met by the caller:
+/// - `p` must be null or point to a currently-allocated block returned by allocate (either
+///  directly or via malloc or calloc).
+#[no_mangle]
+unsafe extern "C" fn realloc(p: *mut c_void, size: usize) -> *mut c_void {
+    let Some(size) = NonZeroUsize::new(size) else {
+        // SAFETY: `p` is either null or points to a currently-allocated block returned by
+        // `allocate`` (either directly or via malloc or calloc). Both cases are handled by
+        // `free`.
+        unsafe {
+            free(p);
+        }
+        return ptr::null_mut();
+    };
+    let Some(p) = NonNull::new(p) else {
+        // SAFETY: `size` is non-zero.
+        return unsafe { malloc(size.get()) };
+    };
+    // SAFETY: `p` is non-null and was allocated by allocate, which prepends a correctly aligned
+    // usize.
+    let old_size = unsafe { *p.cast::<usize>().as_ptr().offset(-1) };
+    let old_size = NonZeroUsize::new(old_size).unwrap();
+    if size <= old_size {
+        return p.as_ptr();
+    }
+    // SAFETY: `new_size` is non-zero.
+    let new_ptr = unsafe { malloc(size.get()) };
+    if !new_ptr.is_null() {
+        // Copy the old context into the new object before freeing the old object.
+        // SAFETY: `new_ptr` is non-null and was allocated by `allocate`, which prepends a
+        // correctly aligned usize.
+        unsafe {
+            ptr::copy_nonoverlapping(p.as_ptr(), new_ptr, old_size.get());
+        }
+        // SAFETY: `p` is either null or points to a currently-allocated block returned by
+        // `allocate`.
+        unsafe {
+            free(p.as_ptr());
+        }
+    }
+    new_ptr
+}
+
 #[no_mangle]
 unsafe extern "C" fn __memset_chk(
     dest: *mut c_void,
