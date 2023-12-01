@@ -85,6 +85,67 @@ unsafe extern "C" fn calloc(nmemb: usize, size: usize) -> *mut c_void {
     allocate(size, true).map_or(ptr::null_mut(), |p| p.cast::<c_void>().as_ptr())
 }
 
+/// Changes the size of the memory block pointed to by `p` to `size` bytes.
+/// The contents of the memory will be unchanged in the range from the start of the region up to the
+/// minimum of the old and new sizes. If the new size is larger than the old size, the added memory
+/// will not be initialized.
+///
+/// # Safety Requirements
+///
+/// The following safety requirements must be met by the caller:
+/// - `p` must be null or point to a currently-allocated block returned by `allocate` (either
+///  directly or via malloc, calloc or realloc).
+/// - The caller must ensure that the memory block pointed by `p` is not accessed after it has been
+///   deallocated.
+///
+/// # Arguments
+///
+/// * `p` - A pointer to the memory block to be reallocated.
+/// * `size` - The new size of the memory block, in bytes.
+///
+/// # Returns
+///
+/// A pointer to the reallocated memory block of `size` bytes, the content of the new object is the
+/// same as that of the old object prior to deallocation, or null if `size` is 0 or the reallocation
+/// failed.
+#[no_mangle]
+unsafe extern "C" fn realloc(p: *mut c_void, size: usize) -> *mut c_void {
+    let Some(size) = NonZeroUsize::new(size) else {
+        // SAFETY: `p` is either null or points to a currently-allocated block returned by
+        // `allocate`. Both cases are handled by `free`.
+        unsafe {
+            free(p);
+        }
+        return ptr::null_mut();
+    };
+    let Some(p) = NonNull::new(p) else {
+        // SAFETY: `size` is non-zero.
+        return unsafe { malloc(size.get()) };
+    };
+    // SAFETY: `p` is non-null and was allocated by `allocate`, which prepends a correctly aligned
+    // usize.
+    let old_size = unsafe { *get_memory_block_start(p) };
+    let old_size = NonZeroUsize::new(old_size).unwrap();
+    if size <= old_size {
+        return p.as_ptr();
+    }
+    // SAFETY: `size` is non-zero.
+    let new_ptr = unsafe { malloc(size.get()) };
+    if new_ptr.is_null() {
+        return ptr::null_mut();
+    }
+    // Copy the old content into the new object before freeing the old object.
+    // SAFETY: `new_ptr` is non-null and was allocated by `malloc`.
+    unsafe {
+        ptr::copy_nonoverlapping(p.as_ptr(), new_ptr, old_size.get());
+    }
+    // SAFETY: `p` should point to a currently-allocated block returned by `allocate`.
+    unsafe {
+        free(p.as_ptr());
+    }
+    new_ptr
+}
+
 #[no_mangle]
 unsafe extern "C" fn __memset_chk(
     dest: *mut c_void,
@@ -116,13 +177,26 @@ unsafe extern "C" fn free(ptr: *mut c_void) {
     // SAFETY: ptr is non-null and was allocated by allocate, which prepends a correctly aligned
     // usize.
     let (ptr, size) = unsafe {
-        let ptr = ptr.cast::<usize>().as_ptr().offset(-1);
+        let ptr = get_memory_block_start(ptr);
         (ptr, *ptr)
     };
     let size = NonZeroUsize::new(size).unwrap();
     let layout = malloc_layout(size).unwrap();
     // SAFETY: If our precondition is satisfied, then this is a valid currently-allocated block.
     unsafe { HEAP_ALLOCATOR.dealloc(ptr as *mut u8, layout) }
+}
+
+/// Given a pointer returned by `allocate`, return the pointer pointing to the start of the memory
+/// block allocated by `allocate`.
+///
+/// # Safety Requirements
+///
+/// The caller must ensure that `ptr` was allocated by `allocate` (either directly or via malloc,
+/// calloc or realloc).
+unsafe fn get_memory_block_start(ptr: NonNull<c_void>) -> *mut usize {
+    // SAFETY: `ptr` is non-null and was allocated by `allocate`, which prepends a correctly
+    // aligned usize.
+    unsafe { ptr.cast::<usize>().as_ptr().offset(-1) }
 }
 
 /// Allocate a block of memory suitable to return from `malloc()` etc. Returns a valid pointer
@@ -152,7 +226,7 @@ fn allocate(size: usize, zeroed: bool) -> Option<NonNull<usize>> {
 
 fn malloc_layout(size: NonZeroUsize) -> Option<Layout> {
     // We want at least 8 byte alignment, and we need to be able to store a usize.
-    const ALIGN: usize = const_max_size(mem::size_of::<usize>(), mem::size_of::<u64>());
+    const ALIGN: usize = const_max_size(mem::align_of::<usize>(), mem::align_of::<u64>());
     Layout::from_size_align(size.get(), ALIGN).ok()
 }
 

@@ -15,11 +15,13 @@
 //! This module contains functions related to DICE.
 
 use alloc::vec::Vec;
+use bssl_avf::{Digester, PKey};
 use ciborium::value::Value;
 use core::cell::OnceCell;
 use core::result;
 use coset::{
-    self, iana, AsCborValue, CborSerializable, CoseError, CoseKey, CoseSign1, KeyOperation,
+    self, iana, Algorithm, AsCborValue, CborSerializable, CoseError, CoseKey, CoseSign1,
+    KeyOperation, KeyType,
 };
 use diced_open_dice::{DiceMode, HASH_SIZE};
 use log::error;
@@ -146,15 +148,56 @@ impl TryFrom<CoseKey> for PublicKey {
     }
 }
 
+impl PublicKey {
+    pub(crate) fn verify(&self, signature: &[u8], message: &[u8]) -> Result<()> {
+        let digester = self.digester()?;
+        let pkey = PKey::from_cose_public_key(&self.0)?;
+        Ok(pkey.verify(signature, message, digester).map_err(|e| {
+            error!("Failed to verify signature: {:?}", e);
+            e
+        })?)
+    }
+
+    /// Returns a digester that will be used to hash the message before verification.
+    fn digester(&self) -> Result<Option<Digester>> {
+        let Some(Algorithm::Assigned(alg)) = self.0.alg else {
+            error!("Invalid algorithm in COSE key {:?}", self.0.alg);
+            return Err(RequestProcessingError::InvalidDiceChain);
+        };
+        match &self.0.kty {
+            KeyType::Assigned(iana::KeyType::EC2) => match alg {
+                iana::Algorithm::ES256 | iana::Algorithm::ECDH_ES_HKDF_256 => {
+                    Ok(Some(Digester::sha256()))
+                }
+                iana::Algorithm::ES384 => Ok(Some(Digester::sha384())),
+                _ => {
+                    error!("Unsupported algorithm in EC2 key: {:?}", alg);
+                    Err(RequestProcessingError::InvalidDiceChain)
+                }
+            },
+            KeyType::Assigned(iana::KeyType::OKP) => match alg {
+                // EdDSA does not use pre-hashed inputs, thus no digester is needed.
+                iana::Algorithm::EdDSA => Ok(None),
+                _ => {
+                    error!("Unsupported algorithm in OKP key: {:?}", alg);
+                    Err(RequestProcessingError::InvalidDiceChain)
+                }
+            },
+            kty => {
+                error!("Unsupported key type: {:?}", kty);
+                Err(RequestProcessingError::InvalidDiceChain)
+            }
+        }
+    }
+}
+
 /// Represents a partially decoded `DiceChainEntryPayload`. The whole payload is defined in:
 ///
 /// hardware/interfaces/security/rkp/aidl/android/hardware/security/keymint/
 /// generateCertificateRequestV2.cddl
 #[derive(Debug, Clone)]
 pub(crate) struct DiceChainEntryPayload {
-    /// TODO(b/310931749): Verify the DICE chain entry using the subject public key.
-    #[allow(dead_code)]
-    subject_public_key: PublicKey,
+    pub(crate) subject_public_key: PublicKey,
     mode: DiceMode,
     /// TODO(b/271275206): Verify Microdroid kernel authority and code hashes.
     #[allow(dead_code)]
@@ -171,10 +214,13 @@ impl DiceChainEntryPayload {
     /// extracts payload from the value.
     fn validate_cose_signature_and_extract_payload(
         value: Value,
-        _authority_public_key: &PublicKey,
+        authority_public_key: &PublicKey,
     ) -> Result<Self> {
         let cose_sign1 = CoseSign1::from_cbor_value(value)?;
-        // TODO(b/310931749): Verify the DICE chain entry using `authority_public_key`.
+        let aad = &[]; // AAD is not used in DICE chain entry.
+        cose_sign1.verify_signature(aad, |signature, message| {
+            authority_public_key.verify(signature, message)
+        })?;
 
         let payload = cose_sign1.payload.ok_or_else(|| {
             error!("No payload found in the DICE chain entry");
