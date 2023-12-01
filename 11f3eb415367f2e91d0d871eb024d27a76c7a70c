@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34037da1_92f6e489",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-12-01T12:00:17Z",
+      "side": 1,
+      "message": "LGTM for unsafe Rust review.",
+      "revId": "11f3eb415367f2e91d0d871eb024d27a76c7a70c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4265829_6b28a1f1",
+        "filename": "libs/bssl/src/digest.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-12-01T12:00:17Z",
+      "side": 1,
+      "message": "I think it would be clearer to do `p.as_ref().unwrap()`.",
+      "range": {
+        "startLine": 52,
+        "startChar": 22,
+        "endLine": 52,
+        "endChar": 25
+      },
+      "revId": "11f3eb415367f2e91d0d871eb024d27a76c7a70c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
