@@ -69,6 +69,8 @@ pub enum DeviceAssignmentError {
     UnsupportedOverlayTarget,
     /// Internal error
     Internal,
+    /// Not an overlay node but a physical node.
+    NotAnOverlayNode,
     /// Unexpected error from libfdt
     UnexpectedFdtError(FdtError),
 }
@@ -102,6 +104,7 @@ impl fmt::Display for DeviceAssignmentError {
                 write!(f, "Unsupported overlay target. Only supports 'target-path = \"/\"'")
             }
             Self::Internal => write!(f, "Internal error"),
+            Self::NotAnOverlayNode => write!(f, "Not an overlay node"),
             Self::UnexpectedFdtError(e) => write!(f, "Unexpected Error from libfdt: {e}"),
         }
     }
@@ -154,6 +157,15 @@ impl VmDtbo {
             return Err(DeviceAssignmentError::UnsupportedOverlayTarget);
         }
 
+        let mut components = dtbo_node_path_bytes
+            .split(|char| *char == b'/')
+            .filter(|&component| !component.is_empty())
+            .skip(1);
+        let overlay_node_name = components.next();
+        if overlay_node_name != Some(b"__overlay__") {
+            return Err(DeviceAssignmentError::NotAnOverlayNode);
+        }
+
         let node = self.0.node(dtbo_node_path)?.ok_or(DeviceAssignmentError::InvalidSymbols)?;
 
         let fragment_node = node.supernode_at_depth(1)?;
@@ -164,14 +176,6 @@ impl VmDtbo {
             return Err(DeviceAssignmentError::UnsupportedOverlayTarget);
         }
 
-        let mut components = dtbo_node_path_bytes
-            .split(|char| *char == b'/')
-            .filter(|&component| !component.is_empty())
-            .skip(1);
-        let overlay_node_name = components.next();
-        if overlay_node_name != Some(b"__overlay__") {
-            return Err(DeviceAssignmentError::InvalidDtbo);
-        }
         let mut overlaid_path = Vec::with_capacity(dtbo_node_path_bytes.len());
         for component in components {
             overlaid_path.push(b'/');
@@ -419,12 +423,11 @@ impl DeviceAssignmentInfo {
             let symbol_prop_value = symbol_prop.value()?;
             let dtbo_node_path = CStr::from_bytes_with_nul(symbol_prop_value)
                 .or(Err(DeviceAssignmentError::InvalidSymbols))?;
-            let assigned_device =
-                AssignedDeviceInfo::parse(fdt, vm_dtbo, hypervisor, &pviommus, dtbo_node_path)?;
-            if let Some(assigned_device) = assigned_device {
-                assigned_devices.push(assigned_device);
-            } else {
-                filtered_dtbo_paths.push(dtbo_node_path.into());
+            match AssignedDeviceInfo::parse(fdt, vm_dtbo, hypervisor, &pviommus, dtbo_node_path) {
+                Ok(Some(assigned_device)) => assigned_devices.push(assigned_device),
+                Ok(None) => filtered_dtbo_paths.push(dtbo_node_path.into()),
+                Err(DeviceAssignmentError::NotAnOverlayNode) => continue,
+                Err(e) => return Err(e),
             }
         }
         if assigned_devices.is_empty() {
@@ -451,21 +454,15 @@ impl DeviceAssignmentInfo {
             node.nop()?;
         }
 
-        // Filters pvmfw-specific properties in assigned device node.
-        const FILTERED_VM_DTBO_PROP: [&CStr; 3] = [
-            cstr!("android,pvmfw,phy-reg"),
-            cstr!("android,pvmfw,phy-iommu"),
-            cstr!("android,pvmfw,phy-sid"),
-        ];
-        for assigned_device in &self.assigned_devices {
-            let mut node = vm_dtbo.node_mut(&assigned_device.dtbo_node_path).unwrap().unwrap();
-            for prop in FILTERED_VM_DTBO_PROP {
-                match node.nop_property(prop) {
-                    Err(FdtError::NotFound) => Ok(()), // allows not exists
-                    other => other,
-                }?;
-            }
-        }
+        // Clean up any references from physical from assignable devices
+        // so applying overlay doesn't complain about missing phandle references.
+        let physical_node = vm_dtbo
+            .node_mut(cstr!("/__local_fixups__/physical"))?
+            .ok_or(DeviceAssignmentError::Internal)?;
+        physical_node.nop()?;
+
+        // Note: Any node without __overlay__ will be ignored when apply_overlay,
+        // so OK not to filter here.
 
         Ok(())
     }
@@ -739,6 +736,10 @@ mod tests {
         }
         device_info.patch(platform_dt).unwrap();
 
+        let rng_node = platform_dt.node(cstr!("/backlight")).unwrap().unwrap();
+        let phandle = rng_node.getprop_u32(cstr!("phandle")).unwrap();
+        assert_ne!(None, phandle);
+
         // Note: Intentionally not using AssignedDeviceNode for matching all props.
         type FdtResult<T> = libfdt::Result<T>;
         let expected: Vec<(FdtResult<&CStr>, FdtResult<Vec<u8>>)> = vec![
@@ -746,10 +747,10 @@ mod tests {
             (Ok(cstr!("compatible")), Ok(Vec::from(*b"android,backlight\0"))),
             (Ok(cstr!("interrupts")), Ok(into_fdt_prop(vec![0x0, 0xF, 0x4]))),
             (Ok(cstr!("iommus")), Ok(Vec::new())),
+            (Ok(cstr!("phandle")), Ok(into_fdt_prop(vec![phandle.unwrap()]))),
             (Ok(cstr!("reg")), Ok(into_fdt_prop(vec![0x0, 0x9, 0x0, 0xFF]))),
         ];
 
-        let rng_node = platform_dt.node(cstr!("/backlight")).unwrap().unwrap();
         let mut properties: Vec<_> = rng_node
             .properties()
             .unwrap()
