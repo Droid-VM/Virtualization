@@ -23,6 +23,7 @@ use core::mem::{drop, size_of};
 use core::num::NonZeroUsize;
 use core::ops::Range;
 use core::slice;
+use hyp::DeviceAssigningHypervisor;
 use hyp::{get_mem_sharer, get_mmio_guard};
 use log::debug;
 use log::error;
@@ -88,6 +89,7 @@ impl<'a> MemorySlices<'a> {
         kernel: usize,
         kernel_size: usize,
         vm_dtbo: Option<&mut [u8]>,
+        hypervisor: &dyn DeviceAssigningHypervisor,
     ) -> Result<Self, RebootReason> {
         let fdt_size = NonZeroUsize::new(crosvm::FDT_MAX_SIZE).unwrap();
         // TODO - Only map the FDT as read-only, until we modify it right before jump_to_payload()
@@ -101,7 +103,7 @@ impl<'a> MemorySlices<'a> {
         // SAFETY: The tracker validated the range to be in main memory, mapped, and not overlap.
         let fdt = unsafe { slice::from_raw_parts_mut(range.start as *mut u8, range.len()) };
 
-        let info = fdt::sanitize_device_tree(fdt, vm_dtbo)?;
+        let info = fdt::sanitize_device_tree(fdt, vm_dtbo, hypervisor)?;
         let fdt = libfdt::Fdt::from_mut_slice(fdt).map_err(|e| {
             error!("Failed to load sanitized FDT: {e}");
             RebootReason::InvalidFdt
@@ -222,7 +224,11 @@ fn main_wrapper(
         Some(memory::appended_payload_range()),
     ));
 
-    let slices = MemorySlices::new(fdt, payload, payload_size, vm_dtbo)?;
+    let hypervisor = hyp::get_device_assigner().ok_or_else(|| {
+        error!("No hypervisor found");
+        RebootReason::InvalidConfig
+    })?;
+    let slices = MemorySlices::new(fdt, payload, payload_size, vm_dtbo, hypervisor)?;
 
     // This wrapper allows main() to be blissfully ignorant of platform details.
     let next_bcc = crate::main(slices.fdt, slices.kernel, slices.ramdisk, bcc_slice, debug_policy)?;

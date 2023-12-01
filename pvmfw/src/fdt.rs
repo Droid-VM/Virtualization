@@ -607,6 +607,7 @@ impl DeviceTreeInfo {
 pub fn sanitize_device_tree(
     fdt: &mut [u8],
     vm_dtbo: Option<&mut [u8]>,
+    hypervisor: &dyn DeviceAssigningHypervisor,
 ) -> Result<DeviceTreeInfo, RebootReason> {
     let fdt = Fdt::from_mut_slice(fdt).map_err(|e| {
         error!("Failed to load FDT: {e}");
@@ -621,7 +622,7 @@ pub fn sanitize_device_tree(
         None => None,
     };
 
-    let info = parse_device_tree(fdt, vm_dtbo.as_deref())?;
+    let info = parse_device_tree(fdt, vm_dtbo.as_deref(), hypervisor)?;
 
     fdt.copy_from_slice(pvmfw_fdt_template::RAW).map_err(|e| {
         error!("Failed to instantiate FDT from the template DT: {e}");
@@ -650,7 +651,11 @@ pub fn sanitize_device_tree(
     Ok(info)
 }
 
-fn parse_device_tree(fdt: &Fdt, vm_dtbo: Option<&VmDtbo>) -> Result<DeviceTreeInfo, RebootReason> {
+fn parse_device_tree(
+    fdt: &Fdt,
+    vm_dtbo: Option<&VmDtbo>,
+    hypervisor: &dyn DeviceAssigningHypervisor,
+) -> Result<DeviceTreeInfo, RebootReason> {
     let kernel_range = read_kernel_range_from(fdt).map_err(|e| {
         error!("Failed to read kernel range from DT: {e}");
         RebootReason::InvalidFdt
@@ -695,29 +700,10 @@ fn parse_device_tree(fdt: &Fdt, vm_dtbo: Option<&VmDtbo>) -> Result<DeviceTreeIn
     validate_swiotlb_info(&swiotlb_info, &memory_range)?;
 
     let device_assignment = match vm_dtbo {
-        Some(vm_dtbo) => {
-            // TODO(b/277993056): Pass real hypervisor
-            struct StubHypervisor {}
-            impl DeviceAssigningHypervisor for StubHypervisor {
-                fn get_phys_mmio_token(&self, _base_ipa: u64, _size: u64) -> hyp::Result<u64> {
-                    Ok(0_u64)
-                }
-
-                fn get_phys_iommu_token(
-                    &self,
-                    _pviommu_id: u64,
-                    _vsid: u64,
-                ) -> hyp::Result<(u64, u64)> {
-                    Ok((0_u64, 0_u64))
-                }
-            }
-            let hypervisor = StubHypervisor {};
-
-            DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor).map_err(|e| {
-                error!("Failed to parse device assignment from DT and VM DTBO: {e}");
-                RebootReason::InvalidFdt
-            })?
-        }
+        Some(vm_dtbo) => DeviceAssignmentInfo::parse(fdt, vm_dtbo, hypervisor).map_err(|e| {
+            error!("Failed to parse device assignment from DT and VM DTBO: {e}");
+            RebootReason::InvalidFdt
+        })?,
         None => None,
     };
 
