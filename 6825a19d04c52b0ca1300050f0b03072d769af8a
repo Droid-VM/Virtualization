@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d597c244_f5ba7eda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2064605
+      },
+      "writtenOn": "2023-12-01T16:03:46Z",
+      "side": 1,
+      "message": "LGTM for Unsafe Rust.",
+      "revId": "6825a19d04c52b0ca1300050f0b03072d769af8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59a543d8_ed8c58f9",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 2064605
+      },
+      "writtenOn": "2023-12-01T16:03:46Z",
+      "side": 1,
+      "message": "nit: prefer ptr::write here since the underlying buffer may not have been initialized.",
+      "range": {
+        "startLine": 234,
+        "startChar": 8,
+        "endLine": 234,
+        "endChar": 22
+      },
+      "revId": "6825a19d04c52b0ca1300050f0b03072d769af8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "278ff561_4dfb964b",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 2064605
+      },
+      "writtenOn": "2023-12-01T16:03:46Z",
+      "side": 1,
+      "message": "nit: consider an unwrap_or(c_int::MAX) or similar to avoid panicking in the case where the buffers are larger than c_int::MAX.",
+      "range": {
+        "startLine": 236,
+        "startChar": 17,
+        "endLine": 236,
+        "endChar": 36
+      },
+      "revId": "6825a19d04c52b0ca1300050f0b03072d769af8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab86deb8_7db1bf64",
+        "filename": "vmbase/src/heap.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 2064605
+      },
+      "writtenOn": "2023-12-01T16:03:46Z",
+      "side": 1,
+      "message": "This function should document what it guarantees about its input and return values (callers will expect that the returned pointer, if non-null, will have certain properties).",
+      "revId": "6825a19d04c52b0ca1300050f0b03072d769af8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3de53c0_808a8da5",
+        "filename": "vmbase/src/heap.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 2064605
+      },
+      "writtenOn": "2023-12-01T16:03:46Z",
+      "side": 1,
+      "message": "nit: or this function (realloc).",
+      "range": {
+        "startLine": 92,
+        "startChar": 21,
+        "endLine": 92,
+        "endChar": 37
+      },
+      "revId": "6825a19d04c52b0ca1300050f0b03072d769af8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "032263be_fbb631f9",
+        "filename": "vmbase/src/heap.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 2064605
+      },
+      "writtenOn": "2023-12-01T16:03:46Z",
+      "side": 1,
+      "message": "After offsetting here, the returned pointer may no longer be 8-byte aligned (for platforms with size_of::\u003cusize\u003e() \u003c 8).",
+      "range": {
+        "startLine": 191,
+        "startChar": 21,
+        "endLine": 191,
+        "endChar": 34
+      },
+      "revId": "6825a19d04c52b0ca1300050f0b03072d769af8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0484d211_fbe149b9",
+        "filename": "vmbase/src/heap.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 2064605
+      },
+      "writtenOn": "2023-12-01T16:03:46Z",
+      "side": 1,
+      "message": "nit: Should this be `align_of::\u003cusize\u003e`? (the alignment should be at least what is necessary to store a usize).",
+      "range": {
+        "startLine": 197,
+        "startChar": 45,
+        "endLine": 197,
+        "endChar": 52
+      },
+      "revId": "6825a19d04c52b0ca1300050f0b03072d769af8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
