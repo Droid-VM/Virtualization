@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6723bf6_61c5113e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-12-01T01:54:26Z",
+      "side": 1,
+      "message": "I hope we",
+      "revId": "5a7d4b3aac1ba42788223dd81e53703abdaf6c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea6a8e6a_756091b4",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-12-01T01:54:26Z",
+      "side": 1,
+      "message": "Can we implement these in VfioHandler? Then virtualizationservice will simply return `IBoundDevice[]` from VfioHandler, and cleanup will be done in VfioHandler\u0027s `drop`",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 0
+      },
+      "revId": "5a7d4b3aac1ba42788223dd81e53703abdaf6c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
