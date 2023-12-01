@@ -18,6 +18,7 @@ use core::ffi::c_char;
 use core::ffi::c_int;
 use core::ffi::c_void;
 use core::ffi::CStr;
+use core::ptr;
 use core::slice;
 use core::str;
 
@@ -203,6 +204,36 @@ extern "C" fn perror(s: *const c_char) {
     } else {
         eprintln!("{error}");
     }
+}
+
+/// # Safety requirements
+///
+/// The following must be satisfied for this function to be safe:
+/// - `format` must be a valid pointer to a NULL-terminated string.
+/// - `s` must be a valid pointer to a buffer of size `n` for write.
+#[no_mangle]
+unsafe extern "C" fn vsnprintf(
+    s: *mut c_char,
+    n: usize,
+    format: *const c_char,
+    _ap: *mut c_void,
+) -> c_int {
+    // SAFETY: `format` is a valid NULL-terminated string.
+    let format = unsafe { CStr::from_ptr(format) };
+    if n == 0 {
+        return 0;
+    }
+    let format = format.to_bytes();
+    // We don't bother with printf formatting for now as this function is only
+    // used to print some debug information.
+    let length = format.len();
+    let length = length.min(n - 1);
+    // SAFETY: `s` is a valid buffer of size `n` and `length <= n - 1`.
+    unsafe {
+        ptr::copy_nonoverlapping(format.as_ptr(), s, length);
+        *s.add(length) = b'\0';
+    }
+    (length + 1).try_into().unwrap()
 }
 
 fn cstr_error(n: c_int) -> &'static CStr {
