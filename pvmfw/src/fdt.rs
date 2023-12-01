@@ -628,6 +628,11 @@ pub fn sanitize_device_tree(
     })?;
 
     if let Some(device_assignment_info) = &info.device_assignment {
+        fdt.unpack().map_err(|e| {
+            error!("Failed to unpack DT for applying VM DTBO: {e}");
+            RebootReason::InvalidFdt
+        })?;
+
         let vm_dtbo = vm_dtbo.unwrap();
         device_assignment_info.filter(vm_dtbo).map_err(|e| {
             error!("Failed to filter VM DTBO: {e}");
@@ -642,6 +647,11 @@ pub fn sanitize_device_tree(
                 RebootReason::InvalidFdt
             })?;
         }
+
+        fdt.pack().map_err(|e| {
+            error!("Failed to unpack DT after applying VM DTBO: {e}");
+            RebootReason::InvalidFdt
+        })?;
     }
 
     patch_device_tree(fdt, &info)?;
