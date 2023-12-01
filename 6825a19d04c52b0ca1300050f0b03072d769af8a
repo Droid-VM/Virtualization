@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f1b574e5_2eede536",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-12-01T16:39:13Z",
+      "side": 1,
+      "message": "Have a look at the `man` page for this function, specifically the return value:\n```\nThe  functions  snprintf()  and vsnprintf() do not write more than size bytes\n(including the terminating null byte (\u0027\\0\u0027)).  If the output was truncated due\nto this limit, then the return value is the number of characters (excluding the\nterminating null byte) which would have been written to the final string if\nenough space had been available.  Thus, a return value of size or more means\nthat the output was truncated.  (See also below under NOTES.)\n```\n\nSome examples assuming `n \u003d\u003d 5`:\n```\n* write \"abc\"    \u003d\u003e  buf \u003d { \u0027a\u0027, \u0027b\u0027, \u0027c\u0027, \u0027\\0\u0027 },      ret \u003d 3\n* write \"abcd\"   \u003d\u003e  buf \u003d { \u0027a\u0027, \u0027b\u0027, \u0027c\u0027, \u0027d\u0027, \u0027\\0\u0027 }, ret \u003d 4\n* write \"abcde\"  \u003d\u003e  buf \u003d { \u0027a\u0027, \u0027b\u0027, \u0027c\u0027, \u0027d\u0027, \u0027\\0\u0027 }, ret \u003d 5 \n* write \"abcdef\" \u003d\u003e  buf \u003d { \u0027a\u0027, \u0027b\u0027, \u0027c\u0027, \u0027d\u0027, \u0027\\0\u0027 }, ret \u003d 6\n```\n\nAnd that should apply to `n \u003d\u003d 0` as well:\n```\n* write \"\"  \u003d\u003e buf \u003d {}, ret \u003d 0\n* write \"a\" \u003d\u003e buf \u003d {}, ret \u003d 1\n```",
+      "range": {
+        "startLine": 215,
+        "startChar": 21,
+        "endLine": 215,
+        "endChar": 30
+      },
+      "revId": "6825a19d04c52b0ca1300050f0b03072d769af8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59a543d8_ed8c58f9",
         "filename": "vmbase/src/bionic.rs",
         "patchSetId": 6
@@ -99,6 +122,52 @@
         "startChar": 21,
         "endLine": 92,
         "endChar": 37
+      },
+      "revId": "6825a19d04c52b0ca1300050f0b03072d769af8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00cb7b7f_92517c86",
+        "filename": "vmbase/src/heap.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-12-01T16:39:13Z",
+      "side": 1,
+      "message": "uber nit: Keep the happy path flowing without branches. Return NULL here if the allocation failed.",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 27
+      },
+      "revId": "6825a19d04c52b0ca1300050f0b03072d769af8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfacc23e_cce7ab3d",
+        "filename": "vmbase/src/heap.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-12-01T16:39:13Z",
+      "side": 1,
+      "message": "nit: extract into a helper and reuse",
+      "range": {
+        "startLine": 160,
+        "startChar": 4,
+        "endLine": 163,
+        "endChar": 6
       },
       "revId": "6825a19d04c52b0ca1300050f0b03072d769af8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
