@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bac8e132_aa508513",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-01T06:41:27Z",
+      "side": 1,
+      "message": "Questions about using real device assigning hypervisor (aosp/2854493):\n\n- Questions) Can we proceed booting when hypervisor is missing, if no device is assigned?\n  - If so, Should it be obtained in `entry.rs` and passed to `device_assignment.rs`? What about `device_assignment.rs` gets it by itself when necessary because hypervisor is singleton?",
+      "revId": "65707aa24bc641d18b8c75fe11e309b810339430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
