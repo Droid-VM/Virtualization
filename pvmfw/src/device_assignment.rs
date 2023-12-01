@@ -223,17 +223,41 @@ impl PvIommu {
             .getprop_u32(cstr!("#iommu-cells"))?
             .ok_or(DeviceAssignmentError::InvalidPvIommu)?;
         // Ensures <#iommu-cells> = 1. It means that `<iommus>` entry contains pair of
-        // (pvIOMMU ID, vSID)
+        // (pvIOMMU ID, SID)
         if iommu_cells != 1 {
             return Err(DeviceAssignmentError::InvalidPvIommu);
         }
         let id = node.getprop_u32(cstr!("id"))?.ok_or(DeviceAssignmentError::InvalidPvIommu)?;
         Ok(Self { id })
     }
+
+    fn parse_iommus_prop(
+        node: &FdtNode,
+        iommus: &BTreeMap<Phandle, PvIommu>,
+    ) -> Result<Vec<(Self, Sid)>> {
+        let mut device_iommus = vec![];
+        let Some(mut cells) = node.getprop_cells(cstr!("iommus"))? else {
+            return Ok(device_iommus);
+        };
+        while let Some(cell) = cells.next() {
+            // Parse IOMMU ID
+            let phandle = Phandle::try_from(cell).or(Err(DeviceAssignmentError::InvalidIommus))?;
+            let iommu = iommus.get(&phandle).ok_or(DeviceAssignmentError::InvalidIommus)?;
+
+            // Parse SID
+            let Some(cell) = cells.next() else {
+                return Err(DeviceAssignmentError::InvalidIommus);
+            };
+            let sid = Sid(cell);
+
+            device_iommus.push((*iommu, sid));
+        }
+        Ok(device_iommus)
+    }
 }
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
-struct Vsid(u32);
+struct Sid(u32);
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
 struct DeviceReg {
@@ -246,6 +270,15 @@ impl TryFrom<Reg<u64>> for DeviceReg {
 
     fn try_from(reg: Reg<u64>) -> Result<Self> {
         Ok(Self { addr: reg.addr, size: reg.size.ok_or(DeviceAssignmentError::InvalidReg)? })
+    }
+}
+
+impl DeviceReg {
+    fn parse(node: &FdtNode) -> Result<Vec<Self>> {
+        node.reg()?
+            .ok_or(DeviceAssignmentError::InvalidReg)?
+            .map(DeviceReg::try_from)
+            .collect::<Result<Vec<_>>>()
     }
 }
 
@@ -271,7 +304,7 @@ struct AssignedDeviceInfo {
     // <interrupts> property from the crosvm DT
     interrupts: Vec<u8>,
     // Parsed <iommus> property from the crosvm DT. Tuple of PvIommu and vSID.
-    iommus: Vec<(PvIommu, Vsid)>,
+    iommus: Vec<(PvIommu, Sid)>,
 }
 
 impl AssignedDeviceInfo {
@@ -279,18 +312,16 @@ impl AssignedDeviceInfo {
         node: &FdtNode,
         hypervisor: Option<&dyn DeviceAssigningHypervisor>,
     ) -> Result<Vec<DeviceReg>> {
-        let mut device_reg = vec![];
-        let regs_iter = node.reg()?.ok_or(DeviceAssignmentError::InvalidReg)?;
-        for reg in regs_iter {
-            let reg = DeviceReg::try_from(reg)?;
+        let device_reg = DeviceReg::parse(node)?;
+        // TODO(b/277993056): Valid the result back with physical reg
+        for reg in &device_reg {
             let hypervisor =
                 hypervisor.ok_or(DeviceAssignmentError::NoDeviceAssigningHypervisor)?;
-            // TODO(b/277993056): Valid the result back with physical reg
-            hypervisor.get_phys_mmio_token(reg.addr, reg.size).map_err(|e| {
+            if let Err(e) = hypervisor.get_phys_mmio_token(reg.addr, reg.size) {
                 let name = node.name().unwrap_or_default();
                 error!("Failed to validate device <reg>, error={e:?}, name={name:?}, reg={reg:?}");
-                DeviceAssignmentError::InvalidReg
-            })?;
+                return Err(DeviceAssignmentError::InvalidReg);
+            }
             device_reg.push(reg);
         }
         Ok(device_reg)
@@ -316,34 +347,17 @@ impl AssignedDeviceInfo {
         node: &FdtNode,
         pviommus: &BTreeMap<Phandle, PvIommu>,
         hypervisor: Option<&dyn DeviceAssigningHypervisor>,
-    ) -> Result<Vec<(PvIommu, Vsid)>> {
-        let mut iommus = vec![];
-        let Some(mut cells) = node.getprop_cells(cstr!("iommus"))? else {
-            return Ok(iommus);
-        };
-        while let Some(cell) = cells.next() {
-            // Parse pvIOMMU ID
-            let phandle = Phandle::try_from(cell).or(Err(DeviceAssignmentError::InvalidIommus))?;
-            let pviommu = pviommus.get(&phandle).ok_or(DeviceAssignmentError::InvalidIommus)?;
-
-            // Parse vSID
-            let Some(cell) = cells.next() else {
-                return Err(DeviceAssignmentError::InvalidIommus);
-            };
-            let vsid = Vsid(cell);
-
+    ) -> Result<Vec<(PvIommu, Sid)>> {
+        let iommus = Iommu::parse_iommus_prop(node, pviommus)?;
+        // TODO(b/277993056): Valid the result back with phys iommu id and sid..
+        for (pviommu, vsid) in &iommus {
             let hypervisor =
                 hypervisor.ok_or(DeviceAssignmentError::NoDeviceAssigningHypervisor)?;
-            // TODO(b/277993056): Valid the result back with phys iommu id and sid..
-            hypervisor
-                .get_phys_iommu_token(pviommu.id.into(), vsid.0.into())
-                .map_err(|e| {
-                    let name = node.name().unwrap_or_default();
-                    error!("Failed to validate device <iommus>, error={e:?}, name={name:?}, pviommu={pviommu:?}, vsid={:?}", vsid.0);
-                    DeviceAssignmentError::InvalidIommus
-                })?;
-
-            iommus.push((*pviommu, vsid));
+            if let Err(e) = hypervisor.get_phys_iommu_token(pviommu.id.into(), vsid.0.into()) {
+                let name = node.name().unwrap_or_default();
+                error!("Failed to validate device <iommus>, error={e:?}, name={name:?}, pviommu={pviommu:?}, vsid={vsid:?}");
+                return Err(DeviceAssignmentError::InvalidIommus);
+            }
         }
         Ok(iommus)
     }
@@ -399,7 +413,7 @@ impl DeviceAssignmentInfo {
             let Some(phandle) = compatible.get_phandle()? else {
                 continue; // Skips unreachable pvIOMMU node
             };
-            let pviommu = PvIommu::parse(&compatible)?;
+            let pviommu = Iommu::parse_iommu_node(&compatible)?;
             if pviommus.insert(phandle, pviommu).is_some() {
                 return Err(FdtError::BadPhandle.into());
             }
@@ -688,7 +702,7 @@ mod tests {
             dtbo_node_path: cstr!("/fragment@rng/__overlay__/rng").into(),
             reg: vec![[0x9, 0xFF].into()],
             interrupts: into_fdt_prop(vec![0x0, 0xF, 0x4]),
-            iommus: vec![(PvIommu { id: 0x4 }, Vsid(0xFF0))],
+            iommus: vec![(PvIommu { id: 0x4 }, Sid(0xFF0))],
         }];
 
         assert_eq!(device_info.assigned_devices, expected);
