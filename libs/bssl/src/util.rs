@@ -38,13 +38,15 @@ pub(crate) fn to_call_failed_error(api_name: ApiName) -> Error {
     Error::CallFailed(api_name, get_error_reason_code())
 }
 
-pub(crate) fn get_label_value_as_bytes(key: &CoseKey, label: Label) -> Result<&[u8]> {
+/// Returns the value of the given label in the given COSE key as bytes.
+pub fn get_label_value_as_bytes(key: &CoseKey, label: Label) -> Result<&[u8]> {
     Ok(get_label_value(key, label)?.as_bytes().ok_or_else(|| {
         error!("Value not a bstr.");
         Error::CoseKeyDecodingFailed
     })?)
 }
 
-pub(crate) fn get_label_value(key: &CoseKey, label: Label) -> Result<&Value> {
+/// Returns the value of the given label in the given COSE key.
+pub fn get_label_value(key: &CoseKey, label: Label) -> Result<&Value> {
     Ok(&key.params.iter().find(|(k, _)| k == &label).ok_or(Error::CoseKeyDecodingFailed)?.1)
 }
