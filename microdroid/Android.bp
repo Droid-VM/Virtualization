@@ -582,13 +582,21 @@ avb_add_hash_footer {
     ],
 }
 
+genrule {
+    name: "microdroid_gki-android14-6.1_kernel_signed_lz4",
+    srcs: [":microdroid_gki-android14-6.1_kernel_signed"],
+    out: ["microdroid_gki-android14-6.1_kernel"],
+    tools: ["lz4"],
+    cmd: "$(location lz4) -z $(in) > $(out)",
+}
+
 prebuilt_etc {
     name: "microdroid_gki-android14-6.1_kernel",
     src: ":empty_file",
     relative_install_path: "fs",
     arch: {
         arm64: {
-            src: ":microdroid_gki-android14-6.1_kernel_signed",
+            src: ":microdroid_gki-android14-6.1_kernel_signed_lz4",
         },
         x86_64: {
             src: ":microdroid_gki-android14-6.1_kernel_signed",
