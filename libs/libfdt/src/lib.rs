@@ -20,8 +20,8 @@
 mod iterators;
 
 pub use iterators::{
-    AddressRange, CellIterator, CompatibleIterator, MemRegIterator, PropertyIterator,
-    RangesIterator, Reg, RegIterator, SubnodeIterator,
+    AddressRange, CellIterator, CompatibleIterator, DescendantsIterator, MemRegIterator,
+    PropertyIterator, RangesIterator, Reg, RegIterator, SubnodeIterator,
 };
 
 use core::cmp::max;
@@ -484,6 +484,21 @@ impl<'a> FdtNode<'a> {
         let ret = unsafe { libfdt_bindgen::fdt_next_subnode(self.fdt.as_ptr(), self.offset) };
 
         Ok(fdt_err_or_option(ret)?.map(|offset| FdtNode { fdt: self.fdt, offset }))
+    }
+
+    /// Returns an iterator of descendants
+    pub fn descendants(&'a self) -> DescendantsIterator<'a> {
+        DescendantsIterator::new(self)
+    }
+
+    fn next_node(&self, depth: i32) -> Result<Option<(Self, i32)>> {
+        let mut next_depth: c_int = depth;
+        // SAFETY: Accesses (read-only) are constrained to the DT totalsize.
+        let ret = unsafe {
+            libfdt_bindgen::fdt_next_node(self.fdt.as_ptr(), self.offset, &mut next_depth)
+        };
+
+        Ok(fdt_err_or_option(ret)?.map(|offset| (FdtNode { fdt: self.fdt, offset }, next_depth)))
     }
 
     /// Returns an iterator of properties
