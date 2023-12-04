@@ -235,9 +235,14 @@ genrule {
 
 rust_library_rlib {
     name: "libpvmfw_embedded_key",
-    defaults: ["vmbase_rlib_defaults"],
     srcs: [":pvmfw_embedded_key_rs"],
     crate_name: "pvmfw_embedded_key",
+    prefer_rlib: true,
+    no_stdlibs: true,
+    stdlibs: [
+        "libcompiler_builtins.rust_sysroot",
+        "libcore.rust_sysroot",
+    ],
 }
 
 prebuilt_etc {
