@@ -7,17 +7,17 @@
         #size-cells = <0x00000001>;
         rng {
             compatible = "android,rng";
-            reg = <0x00000000 0x12f00000 0x00001000>;
+            reg = <0x00000000 0x12f00000 0x000000FF>;
             iommus = <0x00000001 0x00000003>;
             android,pvmfw,target = <0x00000002>;
         };
         light {
-            reg = <0x00000000 0x00f00000 0x00001000>, <0x00000000 0x00f10000 0x00001000>;
+            reg = <0x00000000 0x00f00000 0x00000100>, <0x00000000 0x00f10000 0x00000100>;
             iommus = <0x00000003 0x00000004 0x00000004 0x00000004>;
             android,pvmfw,target = <0x00000005>;
         };
         led {
-            reg = <0x00000000 0x12000000 0x00001000>;
+            reg = <0x00000000 0x12000000 0x00000009>;
             iommus = <0x00000001 0x00000003>;
             android,pvmfw,target = <0x00000006>;
         };
@@ -25,7 +25,7 @@
             #address-cells = <0x00000001>;
             #size-cells = <0x00000001>;
             backlight {
-                reg = <0x00000300 0x00000100>;
+                reg = <0x00000300 0x000000FF>;
                 android,pvmfw,target = <0x00000007>;
             };
         };
