@@ -59,6 +59,8 @@ pub enum DeviceAssignmentError {
     InvalidInterrupts,
     /// Invalid <iommus>
     InvalidIommus,
+    /// Invalid phys IOMMU node
+    InvalidPhysIommu,
     /// Invalid pvIOMMU node
     InvalidPvIommu,
     /// Too many pvIOMMU
@@ -67,6 +69,8 @@ pub enum DeviceAssignmentError {
     DuplicatedPvIommuIds,
     /// Unsupported overlay target syntax. Only supports <target-path> with full path.
     UnsupportedOverlayTarget,
+    /// Unsupported PhysIommu,
+    UnsupportedPhysIommu,
     /// Internal error
     Internal,
     /// Unexpected error from libfdt
@@ -90,6 +94,7 @@ impl fmt::Display for DeviceAssignmentError {
             Self::InvalidReg => write!(f, "Invalid <reg>"),
             Self::InvalidInterrupts => write!(f, "Invalid <interrupts>"),
             Self::InvalidIommus => write!(f, "Invalid <iommus>"),
+            Self::InvalidPhysIommu => write!(f, "Invalid phys IOMMU node"),
             Self::InvalidPvIommu => write!(f, "Invalid pvIOMMU node"),
             Self::TooManyPvIommu => write!(
                 f,
@@ -100,6 +105,9 @@ impl fmt::Display for DeviceAssignmentError {
             }
             Self::UnsupportedOverlayTarget => {
                 write!(f, "Unsupported overlay target. Only supports 'target-path = \"/\"'")
+            }
+            Self::UnsupportedPhysIommu => {
+                write!(f, "Unsupported Phys IOMMU. Currently only supports #iommu-cells = <1>")
             }
             Self::Internal => write!(f, "Internal error"),
             Self::UnexpectedFdtError(e) => write!(f, "Unexpected Error from libfdt: {e}"),
@@ -148,15 +156,17 @@ impl VmDtbo {
     // Contrary to fdt_overlay_target_offset(), this API enforces overlay target property
     // 'target-path = "/"', so the overlay doesn't modify and/or append platform DT's existing
     // node and/or properties. The enforcement is for compatibility reason.
-    fn locate_overlay_target_path(&self, dtbo_node_path: &CStr) -> Result<CString> {
+    fn locate_overlay_target_path(
+        &self,
+        dtbo_node_path: &CStr,
+        dtbo_node: &FdtNode,
+    ) -> Result<CString> {
         let dtbo_node_path_bytes = dtbo_node_path.to_bytes();
         if dtbo_node_path_bytes.first() != Some(&b'/') {
             return Err(DeviceAssignmentError::UnsupportedOverlayTarget);
         }
 
-        let node = self.0.node(dtbo_node_path)?.ok_or(DeviceAssignmentError::InvalidSymbols)?;
-
-        let fragment_node = node.supernode_at_depth(1)?;
+        let fragment_node = dtbo_node.supernode_at_depth(1)?;
         let target_path = fragment_node
             .getprop_str(cstr!("target-path"))?
             .ok_or(DeviceAssignmentError::InvalidDtbo)?;
@@ -215,7 +225,7 @@ impl PvIommu {
         let iommu_cells = node
             .getprop_u32(cstr!("#iommu-cells"))?
             .ok_or(DeviceAssignmentError::InvalidPvIommu)?;
-        // Ensures <#iommu-cells> = 1. It means that `<iommus>` entry contains pair of
+        // Ensures #iommu-cells = <1>. It means that `<iommus>` entry contains pair of
         // (pvIOMMU ID, vSID)
         if iommu_cells != 1 {
             return Err(DeviceAssignmentError::InvalidPvIommu);
@@ -227,6 +237,9 @@ impl PvIommu {
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
 struct Vsid(u32);
+
+#[derive(Debug, Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+struct Psid(u32);
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
 struct DeviceReg {
@@ -258,6 +271,71 @@ fn to_be_bytes(reg: &[DeviceReg]) -> Vec<u8> {
     reg_cells
 }
 
+#[derive(Debug, Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
+struct PhysIommu {
+    token: u64,
+}
+
+impl PhysIommu {
+    fn parse(node: &FdtNode) -> Result<Option<Self>> {
+        let Some(token) = node.getprop_u64(cstr!("android,pvmfw,token"))? else {
+            return Ok(None);
+        };
+        let Some(iommu_cells) = node.getprop_u32(cstr!("#iommu-cells"))? else {
+            return Err(DeviceAssignmentError::InvalidPhysIommu);
+        };
+        // Currently only supports #iommu-cells = <1>.
+        // In that case `<iommus>` entry contains pair of (pIOMMU phandle, pSID token)
+        if iommu_cells != 1 {
+            return Err(DeviceAssignmentError::UnsupportedPhysIommu);
+        }
+        Ok(Some(Self { token }))
+    }
+}
+
+#[derive(Debug)]
+struct PhysicalDeviceInfo {
+    target: Phandle,
+    reg: Vec<DeviceReg>,
+    iommus: Vec<(PhysIommu, Psid)>,
+}
+
+impl PhysicalDeviceInfo {
+    fn parse_iommus(
+        node: &FdtNode,
+        phys_iommus: &BTreeMap<Phandle, PhysIommu>,
+    ) -> Result<Vec<(PhysIommu, Psid)>> {
+        let mut iommus = vec![];
+        let Some(mut cells) = node.getprop_cells(cstr!("iommus"))? else {
+            return Ok(iommus);
+        };
+        while let Some(cell) = cells.next() {
+            // Parse pIOMMU ID
+            let phandle = Phandle::try_from(cell).or(Err(DeviceAssignmentError::InvalidIommus))?;
+            let iommu = phys_iommus.get(&phandle).ok_or(DeviceAssignmentError::InvalidIommus)?;
+
+            // Parse pSID
+            let Some(cell) = cells.next() else {
+                return Err(DeviceAssignmentError::InvalidIommus);
+            };
+            let psid = Psid(cell);
+
+            iommus.push((*iommu, psid));
+        }
+        Ok(iommus)
+    }
+
+    fn parse(node: &FdtNode, phys_iommus: &BTreeMap<Phandle, PhysIommu>) -> Result<Option<Self>> {
+        let Some(phandle) = node.getprop_u32(cstr!("android,pvmfw,target"))? else {
+            return Ok(None);
+        };
+        let target = Phandle::try_from(phandle)?;
+        let reg = parse_node_reg(node)?;
+        let iommus = Self::parse_iommus(node, phys_iommus)?;
+        Ok(Some(Self { target, reg, iommus }))
+    }
+}
+
 /// Assigned device information parsed from crosvm DT.
 /// Keeps everything in the owned data because underlying FDT will be reused for platform DT.
 #[derive(Debug, Eq, PartialEq)]
@@ -277,16 +355,25 @@ struct AssignedDeviceInfo {
 impl AssignedDeviceInfo {
     fn parse_reg(
         node: &FdtNode,
+        physical_device_reg: &[DeviceReg],
         hypervisor: &dyn DeviceAssigningHypervisor,
     ) -> Result<Vec<DeviceReg>> {
         let device_reg = parse_node_reg(node)?;
-        // TODO(b/277993056): Valid the result back with physical reg
         for reg in &device_reg {
-            hypervisor.get_phys_mmio_token(reg.addr, reg.size).map_err(|e| {
+            let addr = hypervisor.get_phys_mmio_token(reg.addr, reg.size).map_err(|e| {
                 let name = node.name();
                 error!("Failed to validate device <reg>, error={e:?}, name={name:?}, reg={reg:?}");
                 DeviceAssignmentError::InvalidReg
             })?;
+
+            let phys_reg = physical_device_reg
+                .iter()
+                .find(|phys_reg| phys_reg.addr == addr && phys_reg.size == reg.size);
+            if phys_reg.is_none() {
+                let name = node.name();
+                error!("Failed to validate device <reg>. No matching phys address for name={name:?}, reg={reg:?}");
+                return Err(DeviceAssignmentError::InvalidReg);
+            }
         }
         Ok(device_reg)
     }
@@ -309,9 +396,11 @@ impl AssignedDeviceInfo {
     // TODO(b/277993056): Also validate /__local_fixups__ to ensure that <iommus> has phandle.
     fn parse_iommus(
         node: &FdtNode,
+        physical_device_iommu: &[(PhysIommu, Psid)],
         pviommus: &BTreeMap<Phandle, PvIommu>,
         hypervisor: &dyn DeviceAssigningHypervisor,
     ) -> Result<Vec<(PvIommu, Vsid)>> {
+        // Step 1: Parse IOMMUs
         let mut iommus = vec![];
         let Some(mut cells) = node.getprop_cells(cstr!("iommus"))? else {
             return Ok(iommus);
@@ -327,16 +416,26 @@ impl AssignedDeviceInfo {
             };
             let vsid = Vsid(cell);
 
-            // TODO(b/277993056): Valid the result back with phys iommu id and sid..
-            hypervisor
-                .get_phys_iommu_token(pviommu.id.into(), vsid.0.into())
-                .map_err(|e| {
-                    let name = node.name().unwrap_or_default();
-                    error!("Failed to validate device <iommus>, error={e:?}, name={name:?}, pviommu={pviommu:?}, vsid={:?}", vsid.0);
-                    DeviceAssignmentError::InvalidIommus
-                })?;
-
             iommus.push((*pviommu, vsid));
+        }
+
+        // Step 2: Validate against phys'
+        for (pviommu, vsid) in &iommus {
+            let (id, sid) = hypervisor.get_phys_iommu_token(pviommu.id.into(), vsid.0.into())
+            .map_err(|e| {
+                let name = node.name().unwrap_or_default();
+                error!("Failed to validate device <iommus>, error={e:?}, name={name:?}, pviommu={pviommu:?}, vsid={vsid:?}");
+                DeviceAssignmentError::InvalidIommus
+            })?;
+
+            let phys_iommu = physical_device_iommu
+                .iter()
+                .find(|(phys_iommu, phys_sid)| (phys_iommu.token, phys_sid.0 as u64) == (id, sid));
+            if phys_iommu.is_none() {
+                let name = node.name().unwrap_or_default();
+                error!("Failed to validate device <iommus>. No matching phys iommu. name={name:?}, pviommu={pviommu:?}, vsid={vsid:?}");
+                return Err(DeviceAssignmentError::InvalidIommus);
+            }
         }
         Ok(iommus)
     }
@@ -345,16 +444,24 @@ impl AssignedDeviceInfo {
         fdt: &Fdt,
         vm_dtbo: &VmDtbo,
         dtbo_node_path: &CStr,
+        physical_devices: &BTreeMap<Phandle, PhysicalDeviceInfo>,
         pviommus: &BTreeMap<Phandle, PvIommu>,
         hypervisor: &dyn DeviceAssigningHypervisor,
     ) -> Result<Option<Self>> {
-        let node_path = vm_dtbo.locate_overlay_target_path(dtbo_node_path)?;
+        let dtbo_node =
+            vm_dtbo.as_ref().node(dtbo_node_path)?.ok_or(DeviceAssignmentError::InvalidSymbols)?;
+        let node_path = vm_dtbo.locate_overlay_target_path(dtbo_node_path, &dtbo_node)?;
+
+        // Note: Currently can only assign devices backed by physical devices.
+        let phandle = dtbo_node.get_phandle()?.ok_or(DeviceAssignmentError::InvalidDtbo)?;
+        let physical_device =
+            physical_devices.get(&phandle).ok_or(DeviceAssignmentError::InvalidDtbo)?;
 
         let Some(node) = fdt.node(&node_path)? else { return Ok(None) };
 
-        let reg = Self::parse_reg(&node, hypervisor)?;
+        let reg = Self::parse_reg(&node, &physical_device.reg, hypervisor)?;
         let interrupts = Self::parse_interrupts(&node)?;
-        let iommus = Self::parse_iommus(&node, pviommus, hypervisor)?;
+        let iommus = Self::parse_iommus(&node, &physical_device.iommus, pviommus, hypervisor)?;
         Ok(Some(Self { node_path, dtbo_node_path: dtbo_node_path.into(), reg, interrupts, iommus }))
     }
 
@@ -400,6 +507,41 @@ impl DeviceAssignmentInfo {
         Ok(pviommus)
     }
 
+    /// Parses Physical devices in VM DTBO
+    fn parse_physical_devices(vm_dtbo: &VmDtbo) -> Result<BTreeMap<Phandle, PhysicalDeviceInfo>> {
+        let vm_dtbo = vm_dtbo.as_ref();
+
+        // Step 1: build IOMMUs first
+        let Some(physical) = vm_dtbo.node(cstr!("/host"))? else {
+            return Ok(BTreeMap::new());
+        };
+        let mut phys_iommus = BTreeMap::<Phandle, PhysIommu>::new();
+        for (node, _) in physical.descendants() {
+            let Some(phandle) = node.get_phandle()? else {
+                continue; // Skips unreachable IOMMU node
+            };
+            let Some(iommu) = PhysIommu::parse(&node)? else {
+                continue; // Skip if not an PhysIommu.
+            };
+            if phys_iommus.insert(phandle, iommu).is_some() {
+                return Err(FdtError::BadPhandle.into());
+            }
+        }
+
+        // Step 2: Build physical device information
+        let mut physical_devices = BTreeMap::new();
+        for (node, _) in physical.descendants() {
+            let Some(info) = PhysicalDeviceInfo::parse(&node, &phys_iommus)? else {
+                continue;
+            };
+            if physical_devices.insert(info.target, info).is_some() {
+                return Err(DeviceAssignmentError::InvalidDtbo);
+            }
+        }
+
+        Ok(physical_devices)
+    }
+
     /// Parses fdt and vm_dtbo, and creates new DeviceAssignmentInfo
     // TODO(b/277993056): Parse __local_fixups__
     // TODO(b/277993056): Parse __fixups__
@@ -420,6 +562,8 @@ impl DeviceAssignmentInfo {
             return Err(DeviceAssignmentError::DuplicatedPvIommuIds);
         }
 
+        let physical_devices = Self::parse_physical_devices(vm_dtbo)?;
+
         let mut assigned_devices = vec![];
         let mut filtered_dtbo_paths = vec![];
         for symbol_prop in symbols_node.properties()? {
@@ -429,8 +573,14 @@ impl DeviceAssignmentInfo {
             if !is_overlayable_node(dtbo_node_path) {
                 continue;
             }
-            let assigned_device =
-                AssignedDeviceInfo::parse(fdt, vm_dtbo, dtbo_node_path, &pviommus, hypervisor)?;
+            let assigned_device = AssignedDeviceInfo::parse(
+                fdt,
+                vm_dtbo,
+                dtbo_node_path,
+                &physical_devices,
+                &pviommus,
+                hypervisor,
+            )?;
             if let Some(assigned_device) = assigned_device {
                 assigned_devices.push(assigned_device);
             } else {
@@ -935,7 +1085,7 @@ mod tests {
         let vm_dtbo = VmDtbo::from_mut_slice(&mut vm_dtbo_data).unwrap();
 
         let hypervisor = MockHypervisor {
-            mmio_tokens: [((0x9, 0xFF), 0x12F00000)].into(),
+            mmio_tokens: [((0x9, 0xFF), 0x300)].into(),
             iommu_tokens: [((0x4, 0xFF0), (0x12E40000, 0x3))].into(),
         };
         let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor);
