@@ -308,3 +308,17 @@ fn node_mut_as_node() {
     // Just check whether borrow checker doesn't complain this.
     memory.setprop_inplace(cstr!("device_type"), b"MEMORY\0").unwrap();
 }
+
+#[test]
+fn node_descendants() {
+    let mut data = fs::read(TEST_TREE_PHANDLE_PATH).unwrap();
+    let fdt = Fdt::from_mut_slice(&mut data).unwrap();
+
+    let node_z = fdt.node(cstr!("/node_z")).unwrap().unwrap();
+    let descendants: Vec<_> = node_z.descendants().map(|node| node.name().unwrap()).collect();
+
+    assert_eq!(
+        descendants,
+        vec![cstr!("node_za"), cstr!("node_zb"), cstr!("node_zz"), cstr!("node_zzz")]
+    );
+}
