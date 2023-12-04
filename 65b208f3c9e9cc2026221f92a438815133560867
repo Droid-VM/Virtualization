@@ -16,6 +16,98 @@
       "message": "Hi Alan, could you please take a look at this cl?",
       "revId": "65b208f3c9e9cc2026221f92a438815133560867",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28f85950_b7eda2c2",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-04T16:59:18Z",
+      "side": 1,
+      "message": "That\u0027s necessary but not sufficient; we also need to verify the code hash.\n\n(Also we know what the public key should be - it\u0027s in libpvmfw_embedded_key - we could just directly check against it, rather than extracting it from our DICE chain.)\n\nOf course if we verify the code hash, the authority hash check could be seen as redundant.",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 90
+      },
+      "revId": "65b208f3c9e9cc2026221f92a438815133560867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d665143_4b181ff8",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-04T16:59:18Z",
+      "side": 1,
+      "message": "That seems awfully specific.\nI\u0027d expect to have accessors that would return the entry for Microdroid kernel, Microdroid payload, etc.\nAnd then you might query an entry for its authority hash, or indeed check that it has the expected value. (Which is a good example of \"tell don\u0027t ask\", I guess.)\n\nNaming nit: check, rather than match?",
+      "range": {
+        "startLine": 94,
+        "startChar": 18,
+        "endLine": 94,
+        "endChar": 57
+      },
+      "revId": "65b208f3c9e9cc2026221f92a438815133560867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdb6a07d_a77874af",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-04T16:59:18Z",
+      "side": 1,
+      "message": "Perhaps, just to make sure we are looking at the right thing, we should check that we have the expected component name (vm_entry)?\nIf we see anything else we could log it, which would make diagnosis easier.",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 29
+      },
+      "revId": "65b208f3c9e9cc2026221f92a438815133560867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc6bbedf_da0427c4",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-04T16:59:18Z",
+      "side": 1,
+      "message": "I still really dislike the use of \"payloads\" here.\nCan we not make it nodes, entries, components, descriptors, or something?\n\n\"microdroid kernel payload\" is a great example; is this the payload of the microdroid kernel? No.",
+      "range": {
+        "startLine": 100,
+        "startChar": 12,
+        "endLine": 100,
+        "endChar": 37
+      },
+      "revId": "65b208f3c9e9cc2026221f92a438815133560867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
