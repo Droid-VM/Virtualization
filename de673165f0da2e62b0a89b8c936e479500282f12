@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0802543c_be856e37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-12-04T17:20:45Z",
+      "side": 1,
+      "message": "Moving the patch to aosp/2855618",
+      "revId": "de673165f0da2e62b0a89b8c936e479500282f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "faecf38b_99581067",
@@ -14,6 +31,30 @@
       "writtenOn": "2023-11-28T10:38:47Z",
       "side": 1,
       "message": "Why is the `Box\u003c \u003e` needed?",
+      "range": {
+        "startLine": 42,
+        "startChar": 18,
+        "endLine": 42,
+        "endChar": 21
+      },
+      "revId": "de673165f0da2e62b0a89b8c936e479500282f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb6e2e13_ec764540",
+        "filename": "secretkeeper/comm/src/data_types/mod.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-12-04T17:20:45Z",
+      "side": 1,
+      "message": "I thought it would be good to have this \u0026 secret in heap instead of array, but since it is a fixed size, I guess stack allocation is an equally good option",
+      "parentUuid": "faecf38b_99581067",
       "range": {
         "startLine": 42,
         "startChar": 18,
@@ -47,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ba5dc0b_2b67b71e",
+        "filename": "secretkeeper/comm/src/data_types/mod.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-12-04T17:20:45Z",
+      "side": 1,
+      "message": "Wow! I had to redo substantial code (with `assert` in tests which require debug) to test structures with no debug implemented.",
+      "parentUuid": "9667124c_cc25eb0c",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 43
+      },
+      "revId": "de673165f0da2e62b0a89b8c936e479500282f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "353e2c6b_f6877f8a",
@@ -70,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee90cf58_3796f5fa",
+        "filename": "secretkeeper/comm/src/data_types/mod.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-12-04T17:20:45Z",
+      "side": 1,
+      "message": "It it. Sorry I left the comment. Removed it!",
+      "parentUuid": "353e2c6b_f6877f8a",
+      "range": {
+        "startLine": 57,
+        "startChar": 47,
+        "endLine": 57,
+        "endChar": 76
+      },
+      "revId": "de673165f0da2e62b0a89b8c936e479500282f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a06ab88_6a7e345f",
@@ -83,6 +172,30 @@
       "writtenOn": "2023-11-28T10:38:47Z",
       "side": 1,
       "message": "Why just `PartialEq` and not `Eq`? (passim)",
+      "range": {
+        "startLine": 102,
+        "startChar": 20,
+        "endLine": 102,
+        "endChar": 29
+      },
+      "revId": "de673165f0da2e62b0a89b8c936e479500282f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfd212eb_6bdac62a",
+        "filename": "secretkeeper/comm/src/data_types/request_response_impl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-12-04T17:20:45Z",
+      "side": 1,
+      "message": "`Eq` is also derived for this struct (along with PartialEq).\nThere are other structs (defined in packet.rs) where I wasnt able to derive `Eq` because the inner `Value` doesnt derive it",
+      "parentUuid": "1a06ab88_6a7e345f",
       "range": {
         "startLine": 102,
         "startChar": 20,
@@ -128,6 +241,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17a5d841_de1fa1a2",
+        "filename": "secretkeeper/comm/src/data_types/request_response_impl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-12-04T17:20:45Z",
+      "side": 1,
+      "message": "Well I guess removing the accessors save us from unneccessary additional code too then. Removing..",
+      "parentUuid": "c4f8d9b4_62402c0f",
+      "revId": "de673165f0da2e62b0a89b8c936e479500282f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4434fab_0e734c39",
@@ -145,6 +276,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f3d9049_ac7d324d",
+        "filename": "secretkeeper/comm/src/data_types/request_response_impl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-12-04T17:20:45Z",
+      "side": 1,
+      "message": "The derive macro wouldn\u0027t automatically solve the problem. Response, for ex, contains the ERROR_OK as the first element of the cbor array, which is not part of struct. We will need to use a combination of manual trait impl \u0026 macro. Secretkeeper error enum would also need some custom serialization. \n\nAn enum based approach that can best utilize the macro approach will be drastic code refactoring (including cddl changed). \n\nHave a look at the current state of this file at aosp/2855618.",
+      "parentUuid": "a4434fab_0e734c39",
+      "revId": "de673165f0da2e62b0a89b8c936e479500282f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d51ef1e_2fb6d38f",
@@ -158,6 +307,24 @@
       "writtenOn": "2023-11-28T10:38:47Z",
       "side": 1,
       "message": "golf: how about something like:\n```rust\nmatch \u0026args[..] {\n  [id, secret, policy] \u003d\u003e {\n    let id \u003d Id::from_cbor_value(id).map_err(|_| Error::RequestMalformed)?;\n    let secret \u003d Secret::from_cbor_value(secret).map_err(|_| Error::RequestMalformed)?;\n    let sealing_policy \u003d policy.into_bytes()?;\n    Ok(Self{ id, secret, sealing_policy })\n  }\n  _ \u003d\u003e Err(Error::RequestMalformed),\n}\n```",
+      "revId": "de673165f0da2e62b0a89b8c936e479500282f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "336e31a0_67952e4c",
+        "filename": "secretkeeper/comm/src/data_types/request_response_impl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-12-04T17:20:45Z",
+      "side": 1,
+      "message": "`Value` does not implement copy so just having reference to args will not save us clone. I used iterator for similar-ish effect. PTAL",
+      "parentUuid": "0d51ef1e_2fb6d38f",
       "revId": "de673165f0da2e62b0a89b8c936e479500282f12",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
