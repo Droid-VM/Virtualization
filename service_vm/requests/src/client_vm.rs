@@ -19,12 +19,13 @@ use crate::cert;
 use crate::dice::{validate_client_vm_dice_chain_prefix_match, ClientVmDiceChain};
 use crate::keyblob::decrypt_private_key;
 use alloc::vec::Vec;
-use bssl_avf::{rand_bytes, sha256, EcKey, PKey};
+use bssl_avf::{rand_bytes, sha256, Digester, EcKey, PKey};
 use core::result;
 use coset::{CborSerializable, CoseSign};
 use der::{Decode, Encode};
 use diced_open_dice::DiceArtifacts;
 use log::error;
+use microdroid_kernel_hashes::{INITRD_DEBUG_HASH, INITRD_NORMAL_HASH, KERNEL_HASH};
 use service_vm_comm::{ClientVmAttestationParams, Csr, CsrPayload, RequestProcessingError};
 use x509_cert::{certificate::Certificate, name::Name};
 
@@ -53,6 +54,7 @@ pub(super) fn request_attestation(
     // DiceChainEntryPayloads.
     let client_vm_dice_chain =
         ClientVmDiceChain::validate_signatures_and_parse_dice_chain(client_vm_dice_chain)?;
+    validate_microdroid_kernel(&client_vm_dice_chain)?;
 
     // AAD is empty as defined in service_vm/comm/client_vm_csr.cddl.
     let aad = &[];
@@ -120,4 +122,43 @@ fn ecdsa_verify(key: &EcKey, signature: &[u8], message: &[u8]) -> bssl_avf::Resu
 fn ecdsa_sign(key: &EcKey, message: &[u8]) -> bssl_avf::Result<Vec<u8>> {
     let digest = sha256(message)?;
     key.ecdsa_sign(&digest)
+}
+
+/// Validates the code hash and authority hash of the Microdroid kernel in the Client VM DICE chain.
+fn validate_microdroid_kernel(dice_chain: &ClientVmDiceChain) -> Result<()> {
+    let kernel = dice_chain.microdroid_kernel();
+    if expected_kernel_authority_hash()? != kernel.authority_hash {
+        error!("The authority hash of the Microdroid kernel does not match the expected value");
+        return Err(RequestProcessingError::InvalidDiceChain);
+    }
+    if expected_kernel_code_hash_normal()? == kernel.code_hash {
+        return Ok(());
+    }
+    if expected_kernel_code_hash_debug()? == kernel.code_hash {
+        if dice_chain.all_entries_are_secure() {
+            error!("The Microdroid kernel has debug initrd but the DICE chain is secure");
+            return Err(RequestProcessingError::InvalidDiceChain);
+        }
+        return Ok(());
+    }
+    error!("The kernel code hash in the Client VM DICE chain does not match any expected values");
+    Err(RequestProcessingError::InvalidDiceChain)
+}
+
+fn expected_kernel_code_hash_normal() -> bssl_avf::Result<Vec<u8>> {
+    let mut code_hash = [0u8; 64];
+    code_hash[0..32].copy_from_slice(KERNEL_HASH);
+    code_hash[32..].copy_from_slice(INITRD_NORMAL_HASH);
+    Digester::sha512().digest(&code_hash)
+}
+
+fn expected_kernel_code_hash_debug() -> bssl_avf::Result<Vec<u8>> {
+    let mut code_hash = [0u8; 64];
+    code_hash[0..32].copy_from_slice(KERNEL_HASH);
+    code_hash[32..].copy_from_slice(INITRD_DEBUG_HASH);
+    Digester::sha512().digest(&code_hash)
+}
+
+fn expected_kernel_authority_hash() -> bssl_avf::Result<Vec<u8>> {
+    Digester::sha512().digest(pvmfw_embedded_key::PUBLIC_KEY)
 }
