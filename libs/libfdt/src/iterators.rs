@@ -323,6 +323,34 @@ impl<'a> Iterator for SubnodeIterator<'a> {
     }
 }
 
+/// Iterator over descendants
+#[derive(Debug)]
+pub struct DescendantsIterator<'a> {
+    node: Option<(FdtNode<'a>, usize)>,
+}
+
+impl<'a> DescendantsIterator<'a> {
+    pub(crate) fn new(node: &'a FdtNode) -> Self {
+        Self { node: Some((*node, 0)) }
+    }
+}
+
+impl<'a> Iterator for DescendantsIterator<'a> {
+    type Item = (FdtNode<'a>, usize);
+
+    fn next(&mut self) -> Option<Self::Item> {
+        let (node, depth) = self.node?;
+        let (next_node, next_depth) = node.next_node(depth).ok()??;
+        if next_depth > 0 {
+            self.node = Some((next_node, next_depth));
+            self.node
+        } else {
+            self.node = None;
+            None
+        }
+    }
+}
+
 /// Iterator over properties
 #[derive(Debug)]
 pub struct PropertyIterator<'a> {
