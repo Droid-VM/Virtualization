@@ -264,6 +264,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bbe8bf3_c28dec1e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-12-04T02:07:55Z",
+      "side": 1,
+      "message": "Found the root cause. `filter_out_dangerous_bootargs` in pvmfw removes `androidboot.microdroid.mount_vendor`, so that vendor partition is not mounted on protected non-debuggable VMs. \n\nHowever, since `androidboot.microdroid.mount_vendor` exists for temporary solution, I won\u0027t add it into allowed bootargs into there.",
+      "parentUuid": "6ff3c866_0db0d60d",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 65
+      },
+      "revId": "bca101692c8b4240335ce16bb8a5cf1af7881859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "102b4ad0_f1c55fe3",
