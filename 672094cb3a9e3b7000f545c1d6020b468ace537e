@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b042dbe_31aa0040",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-12-04T13:56:09Z",
+      "side": 1,
+      "message": "x25519 doesn\u0027t do sign/verify",
+      "range": {
+        "startLine": 7,
+        "startChar": 41,
+        "endLine": 7,
+        "endChar": 48
+      },
+      "revId": "672094cb3a9e3b7000f545c1d6020b468ace537e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c3803176_905f9f4d",
@@ -14,6 +37,46 @@
       "writtenOn": "2023-12-01T14:59:46Z",
       "side": 1,
       "message": "Hi David, could you please take a look at this cl?",
+      "revId": "672094cb3a9e3b7000f545c1d6020b468ace537e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dc19a31_37a6edff",
+        "filename": "libs/bssl/src/evp.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-12-04T13:56:09Z",
+      "side": 1,
+      "message": "should this say `EVP_MD_CTX` ?",
+      "range": {
+        "startLine": 151,
+        "startChar": 15,
+        "endLine": 151,
+        "endChar": 29
+      },
+      "revId": "672094cb3a9e3b7000f545c1d6020b468ace537e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e174cb43_092fc906",
+        "filename": "libs/bssl/src/evp.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-12-04T13:56:09Z",
+      "side": 1,
+      "message": "nit: it would be good to add something to the comment indicating the numbering space of the inner `i32` (is it a BoringSSL NID value?)",
       "revId": "672094cb3a9e3b7000f545c1d6020b468ace537e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
