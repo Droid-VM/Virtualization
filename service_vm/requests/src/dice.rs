@@ -124,7 +124,7 @@ impl ClientVmDiceChain {
         Ok(())
     }
 
-    fn microdroid_kernel(&self) -> &DiceChainEntryPayload {
+    pub(crate) fn microdroid_kernel(&self) -> &DiceChainEntryPayload {
         &self.payloads[self.payloads.len() - 2]
     }
 
@@ -209,8 +209,7 @@ pub(crate) struct DiceChainEntryPayload {
     /// TODO(b/271275206): Verify Microdroid kernel authority and code hashes.
     #[allow(dead_code)]
     code_hash: [u8; HASH_SIZE],
-    #[allow(dead_code)]
-    authority_hash: [u8; HASH_SIZE],
+    pub(crate) authority_hash: [u8; HASH_SIZE],
     config_descriptor: ConfigDescriptor,
 }
 

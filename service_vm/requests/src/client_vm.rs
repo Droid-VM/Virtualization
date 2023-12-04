@@ -19,7 +19,7 @@ use crate::cert;
 use crate::dice::{validate_client_vm_dice_chain_prefix_match, ClientVmDiceChain};
 use crate::keyblob::decrypt_private_key;
 use alloc::vec::Vec;
-use bssl_avf::{rand_bytes, sha256, EcKey, PKey};
+use bssl_avf::{rand_bytes, sha256, Digester, EcKey, PKey};
 use core::result;
 use coset::{CborSerializable, CoseSign};
 use der::{Decode, Encode};
@@ -53,6 +53,13 @@ pub(super) fn request_attestation(
     // DiceChainEntryPayloads.
     let client_vm_dice_chain =
         ClientVmDiceChain::validate_signatures_and_parse_dice_chain(client_vm_dice_chain)?;
+
+    // The service VM kernel and the Microdroid kernel should be signed by the same key.
+    let expected_authority_hash = Digester::sha512().digest(pvmfw_embedded_key::PUBLIC_KEY)?;
+    if expected_authority_hash != client_vm_dice_chain.microdroid_kernel().authority_hash {
+        error!("The authority hash of the Microdroid kernel does not match the expected value");
+        return Err(RequestProcessingError::InvalidDiceChain);
+    }
 
     // AAD is empty as defined in service_vm/comm/client_vm_csr.cddl.
     let aad = &[];

@@ -24,8 +24,10 @@ rust_defaults {
     visibility: [
         "//packages/modules/Virtualization/rialto:__subpackages__",
     ],
+    prefer_rlib: true,
     rustlibs: [
         "libcstr",
+        "libpvmfw_embedded_key",
     ],
 }
 

@@ -109,7 +109,7 @@ pub fn fake_client_vm_dice_artifacts() -> Result<OwnedDiceArtifacts> {
     let config_descriptor = retry_bcc_format_config_descriptor(&config_values)?;
     // The Microdroid kernel is signed with the same key as the one used for the service VM,
     // so the authority hash is the same.
-    let authority_hash = service_vm::AUTHORITY_HASH_SERVICE_VM;
+    let authority_hash = service_vm::authority_hash_service_vm()?;
     let input_values = InputValues::new(
         CODE_HASH_KERNEL,
         Config::Descriptor(config_descriptor.as_slice()),
