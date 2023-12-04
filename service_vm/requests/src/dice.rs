@@ -60,18 +60,14 @@ impl ClientVmDiceChain {
             CoseKey::from_cbor_value(client_vm_dice_chain.remove(0))?.try_into()?;
 
         let mut payloads = Vec::with_capacity(client_vm_dice_chain.len());
-        let mut previous_public_key = &root_public_key;
-        for (i, value) in client_vm_dice_chain.into_iter().enumerate() {
-            let payload = DiceChainEntryPayload::validate_cose_signature_and_extract_payload(
-                value,
-                previous_public_key,
-            )
-            .map_err(|e| {
-                error!("Failed to verify the DICE chain entry {}: {:?}", i, e);
-                e
-            })?;
+        let mut _previous_public_key = &root_public_key;
+        for (_i, value) in client_vm_dice_chain.into_iter().enumerate() {
+            let cose_sign1 = CoseSign1::from_cbor_value(value)?;
+            // TODO(b/310931749): Verify the DICE chain entry signature using
+            // `_previous_public_key`.
+            let payload: DiceChainEntryPayload = cose_sign1.try_into()?;
             payloads.push(payload);
-            previous_public_key = &payloads.last().unwrap().subject_public_key;
+            _previous_public_key = &payloads.last().unwrap().subject_public_key;
         }
         // After successfully calling `validate_client_vm_dice_chain_prefix_match`, we can be
         // certain that the client VM's DICE chain must contain at least three entries that
@@ -90,6 +86,28 @@ impl ClientVmDiceChain {
     pub(crate) fn all_entries_are_secure(&self) -> bool {
         self.payloads.iter().all(|p| p.mode == DiceMode::kDiceModeNormal)
     }
+
+    /// Matches the authority hash of the Microdroid kernel entry in the DICE chain against
+    /// the expected value.
+    ///
+    /// Returns `Ok(())` if the authority hash matches, otherwise returns an error.
+    pub(crate) fn match_microdroid_kernel_authority_hash(
+        &self,
+        expected_authority_hash: &[u8],
+    ) -> Result<()> {
+        // Payloads has at least three items and the second to last item should describe the
+        // Microdroid kernel.
+        let microdroid_kernel_payload = self.payloads.get(self.payloads.len() - 2).unwrap();
+        if expected_authority_hash == microdroid_kernel_payload.authority_hash {
+            Ok(())
+        } else {
+            error!(
+                "The authority hash of the Microdroid kernel entry in the DICE chain does not match \
+                 the expected value"
+            );
+            Err(RequestProcessingError::InvalidDiceChain)
+        }
+    }
 }
 
 /// Validates that the `client_vm_dice_chain` matches the `service_vm_dice_chain` up to the pvmfw
@@ -100,10 +118,8 @@ pub(crate) fn validate_client_vm_dice_chain_prefix_match(
     client_vm_dice_chain: &[u8],
     service_vm_dice_chain: &[u8],
 ) -> Result<Vec<Value>> {
-    let client_vm_dice_chain =
-        try_as_value_array(Value::from_slice(client_vm_dice_chain)?, "client_vm_dice_chain")?;
-    let service_vm_dice_chain =
-        try_as_value_array(Value::from_slice(service_vm_dice_chain)?, "service_vm_dice_chain")?;
+    let client_vm_dice_chain = parse_value_array(client_vm_dice_chain, "client_vm_dice_chain")?;
+    let service_vm_dice_chain = parse_value_array(service_vm_dice_chain, "service_vm_dice_chain")?;
     if service_vm_dice_chain.len() < 3 {
         // The service VM's DICE chain must contain the root key and at least two other entries
         // that describe:
@@ -159,23 +175,16 @@ pub(crate) struct DiceChainEntryPayload {
     /// TODO(b/271275206): Verify Microdroid kernel authority and code hashes.
     #[allow(dead_code)]
     code_hash: [u8; HASH_SIZE],
-    #[allow(dead_code)]
-    authority_hash: [u8; HASH_SIZE],
+    pub(crate) authority_hash: [u8; HASH_SIZE],
     /// TODO(b/313815907): Parse the config descriptor and read Apk/Apexes info in it.
     #[allow(dead_code)]
     config_descriptor: Vec<u8>,
 }
 
-impl DiceChainEntryPayload {
-    /// Validates the signature of the provided CBOR value with the provided public key and
-    /// extracts payload from the value.
-    fn validate_cose_signature_and_extract_payload(
-        value: Value,
-        _authority_public_key: &PublicKey,
-    ) -> Result<Self> {
-        let cose_sign1 = CoseSign1::from_cbor_value(value)?;
-        // TODO(b/310931749): Verify the DICE chain entry using `authority_public_key`.
+impl TryFrom<CoseSign1> for DiceChainEntryPayload {
+    type Error = RequestProcessingError;
 
+    fn try_from(cose_sign1: CoseSign1) -> Result<Self> {
         let payload = cose_sign1.payload.ok_or_else(|| {
             error!("No payload found in the DICE chain entry");
             RequestProcessingError::InvalidDiceChain
@@ -211,6 +220,10 @@ fn build_payload(entries: Vec<(Value, Value)>) -> Result<DiceChainEntryPayload> 
         }
     }
     builder.build()
+}
+
+pub(crate) fn parse_value_array(data: &[u8], context: &str) -> coset::Result<Vec<Value>> {
+    try_as_value_array(Value::from_slice(data)?, context)
 }
 
 fn try_as_value_array(v: Value, context: &str) -> coset::Result<Vec<Value>> {
