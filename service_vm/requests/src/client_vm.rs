@@ -16,12 +16,15 @@
 //! client VM.
 
 use crate::cert;
-use crate::dice::{validate_client_vm_dice_chain_prefix_match, ClientVmDiceChain};
+use crate::dice::{
+    parse_value_array, validate_client_vm_dice_chain_prefix_match, ClientVmDiceChain,
+    DiceChainEntryPayload,
+};
 use crate::keyblob::decrypt_private_key;
 use alloc::vec::Vec;
 use bssl_avf::{rand_bytes, sha256, EcKey, PKey};
 use core::result;
-use coset::{CborSerializable, CoseSign};
+use coset::{AsCborValue, CborSerializable, CoseSign, CoseSign1};
 use der::{Decode, Encode};
 use diced_open_dice::DiceArtifacts;
 use log::error;
@@ -53,6 +56,17 @@ pub(super) fn request_attestation(
     // DiceChainEntryPayloads.
     let client_vm_dice_chain =
         ClientVmDiceChain::validate_signatures_and_parse_dice_chain(client_vm_dice_chain)?;
+
+    // Extracts the last `DiceChainEntryPayload` in the Client VM DICE chain that describes
+    // the service VM, and validates the authority hash in the client VM DICE chain's
+    // Microdroid kernel entry.
+    let service_vm_dice_payload =
+        parse_value_array(service_vm_dice_chain, "service_vm_dice_chain")?.pop().unwrap();
+    let service_vm_dice_payload: DiceChainEntryPayload =
+        CoseSign1::from_cbor_value(service_vm_dice_payload)?.try_into()?;
+    // The service VM kernel and the Microdroid kernel should be signed by the same key.
+    client_vm_dice_chain
+        .match_microdroid_kernel_authority_hash(&service_vm_dice_payload.authority_hash)?;
 
     // AAD is empty as defined in service_vm/comm/client_vm_csr.cddl.
     let aad = &[];
