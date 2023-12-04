@@ -287,8 +287,8 @@ impl MicrodroidData {
 
 #[derive(Debug, Serialize, Deserialize, PartialEq, Eq)]
 pub struct ApkData {
-    pub root_hash: Box<RootHash>,
-    pub pubkey: Box<[u8]>,
+    pub root_hash: Box<[u8]>,
+    pub cert_hash: Box<[u8]>,
     pub package_name: String,
     pub version_code: u64,
 }
@@ -298,8 +298,6 @@ impl ApkData {
         self.root_hash.as_ref() == root_hash
     }
 }
-
-pub type RootHash = [u8];
 
 #[derive(Debug, Serialize, Deserialize, PartialEq, Eq)]
 pub struct ApexData {

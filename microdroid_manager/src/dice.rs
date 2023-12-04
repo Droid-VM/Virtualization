@@ -21,6 +21,7 @@ use coset::CborSerializable;
 use diced_open_dice::OwnedDiceArtifacts;
 use microdroid_metadata::PayloadMetadata;
 use openssl::sha::{sha512, Sha512};
+use std::borrow::Cow;
 use std::iter::once;
 
 /// Perform an open DICE derivation for the payload.
@@ -37,10 +38,10 @@ pub fn dice_derivation(
     let mut code_hash_ctx = Sha512::new();
     let mut authority_hash_ctx = Sha512::new();
     code_hash_ctx.update(instance_data.apk_data.root_hash.as_ref());
-    authority_hash_ctx.update(instance_data.apk_data.pubkey.as_ref());
+    authority_hash_ctx.update(instance_data.apk_data.cert_hash.as_ref());
     for extra_apk in &instance_data.extra_apks_data {
         code_hash_ctx.update(extra_apk.root_hash.as_ref());
-        authority_hash_ctx.update(extra_apk.pubkey.as_ref());
+        authority_hash_ctx.update(extra_apk.cert_hash.as_ref());
     }
     for apex in &instance_data.apex_data {
         code_hash_ctx.update(apex.root_digest.as_ref());
@@ -61,7 +62,7 @@ struct Subcomponent<'a> {
     name: String,
     version: u64,
     code_hash: &'a [u8],
-    authority_hash: Box<[u8]>,
+    authority_hash: Cow<'a, [u8]>,
 }
 
 impl<'a> Subcomponent<'a> {
@@ -79,9 +80,7 @@ impl<'a> Subcomponent<'a> {
             name: format!("apk:{}", apk.package_name),
             version: apk.version_code,
             code_hash: &apk.root_hash,
-            authority_hash:
-                // TODO(b/305925597): Hash the certificate not the pubkey
-                Box::new(sha512(&apk.pubkey)),
+            authority_hash: (&*apk.cert_hash).into(),
         }
     }
 
@@ -92,7 +91,7 @@ impl<'a> Subcomponent<'a> {
             name: format!("apex:{}", apex.manifest_name.as_ref().unwrap()),
             version: apex.manifest_version.unwrap() as u64,
             code_hash: &apex.root_digest,
-            authority_hash: Box::new(sha512(&apex.public_key)),
+            authority_hash: Cow::Owned(sha512(&apex.public_key).to_vec()),
         }
     }
 }
