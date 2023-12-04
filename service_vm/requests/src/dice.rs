@@ -126,7 +126,7 @@ impl ClientVmDiceChain {
         Ok(())
     }
 
-    fn microdroid_kernel(&self) -> &DiceChainEntryPayload {
+    pub(crate) fn microdroid_kernel(&self) -> &DiceChainEntryPayload {
         &self.payloads[self.payloads.len() - 2]
     }
 
@@ -147,15 +147,11 @@ impl ClientVmDiceChain {
 /// Validates that the `client_vm_dice_chain` matches the `service_vm_dice_chain` up to the pvmfw
 /// entry.
 ///
-/// Returns a CBOR value array of the client VM's DICE chain if the verification succeeds.
+/// Returns `Ok(())` if the verification succeeds.
 pub(crate) fn validate_client_vm_dice_chain_prefix_match(
-    client_vm_dice_chain: &[u8],
-    service_vm_dice_chain: &[u8],
-) -> Result<Vec<Value>> {
-    let client_vm_dice_chain =
-        value_to_array(Value::from_slice(client_vm_dice_chain)?, "client_vm_dice_chain")?;
-    let service_vm_dice_chain =
-        value_to_array(Value::from_slice(service_vm_dice_chain)?, "service_vm_dice_chain")?;
+    client_vm_dice_chain: &Vec<Value>,
+    service_vm_dice_chain: &Vec<Value>,
+) -> Result<()> {
     if service_vm_dice_chain.len() < 3 {
         // The service VM's DICE chain must contain the root key and at least two other entries
         // that describe:
@@ -180,7 +176,7 @@ pub(crate) fn validate_client_vm_dice_chain_prefix_match(
         );
         return Err(RequestProcessingError::InvalidDiceChain);
     }
-    Ok(client_vm_dice_chain)
+    Ok(())
 }
 
 #[derive(Debug, Clone)]
@@ -208,11 +204,8 @@ pub(crate) struct DiceChainEntryPayload {
     #[allow(dead_code)]
     subject_public_key: PublicKey,
     mode: DiceMode,
-    /// TODO(b/271275206): Verify Microdroid kernel authority and code hashes.
-    #[allow(dead_code)]
-    code_hash: [u8; HASH_SIZE],
-    #[allow(dead_code)]
-    authority_hash: [u8; HASH_SIZE],
+    pub(crate) code_hash: [u8; HASH_SIZE],
+    pub(crate) authority_hash: [u8; HASH_SIZE],
     config_descriptor: ConfigDescriptor,
 }
 
@@ -230,7 +223,11 @@ impl DiceChainEntryPayload {
             error!("No payload found in the DICE chain entry");
             RequestProcessingError::InvalidDiceChain
         })?;
-        let entries = value_to_map(Value::from_slice(&payload)?, "DiceChainEntryPayload")?;
+        Self::from_slice(&payload)
+    }
+
+    pub(crate) fn from_slice(data: &[u8]) -> Result<Self> {
+        let entries = value_to_map(Value::from_slice(data)?, "DiceChainEntryPayload")?;
         build_payload(entries)
     }
 }
