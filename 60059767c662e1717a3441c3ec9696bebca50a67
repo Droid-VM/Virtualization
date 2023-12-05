@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "808c609a_09589b4f",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-05T17:05:58Z",
+      "side": 1,
+      "message": "Remove these and make the ones you\u0027re introducing in `sanitize_device_tree` cover both the `if`-`let` and the call to `patch_device_tree`?",
+      "range": {
+        "startLine": 728,
+        "startChar": 0,
+        "endLine": 731,
+        "endChar": 8
+      },
+      "revId": "60059767c662e1717a3441c3ec9696bebca50a67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
