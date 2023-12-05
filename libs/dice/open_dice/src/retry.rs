@@ -33,9 +33,9 @@ use alloc::vec::Vec;
 #[derive(Debug)]
 pub struct OwnedDiceArtifacts {
     /// CDI Values.
-    cdi_values: CdiValues,
+    pub cdi_values: CdiValues,
     /// Boot Certificate Chain.
-    bcc: Vec<u8>,
+    pub bcc: Vec<u8>,
 }
 
 impl DiceArtifacts for OwnedDiceArtifacts {
