@@ -171,7 +171,7 @@ pub fn make_sample_bcc_and_cdis() -> Result<OwnedDiceArtifacts> {
 
     // Appends Android certificate to DICE chain.
     let config_values = DiceConfigValues {
-        component_name: Some(CStr::from_bytes_with_nul(b"Android\0").unwrap()),
+        component_name: Some(CStr::from_bytes_with_nul(b"vm_entry\0").unwrap()),
         component_version: Some(12),
         resettable: true,
         ..Default::default()
