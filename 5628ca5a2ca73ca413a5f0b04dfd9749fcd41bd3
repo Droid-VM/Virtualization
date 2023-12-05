@@ -49,6 +49,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6599c3bb_67a6cbde",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-05T11:29:13Z",
+      "side": 1,
+      "message": "Could you add a test to check that the two hashes are really serialized to `Value::Bytes` not `Value::Array` with `cbor!`? Sometimes the `\u0026[u8]` type is turned into `Value::Array` with the macro.\n\nIf we want to have `4 \u003d\u003e Value::Bytes(self.authority_hash)` here, the hash can take a vector type in the struct directly.",
+      "range": {
+        "startLine": 73,
+        "startChar": 11,
+        "endLine": 74,
+        "endChar": 35
+      },
+      "revId": "5628ca5a2ca73ca413a5f0b04dfd9749fcd41bd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f78804b_43c4e20e",
         "filename": "microdroid_manager/src/verify.rs",
         "patchSetId": 2
