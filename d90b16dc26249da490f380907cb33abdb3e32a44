@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0616e4e5_5ef02fe7",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-05T17:44:24Z",
+      "side": 1,
+      "message": "Isn\u0027t this `v.into_array().map_err(...)`?\n\n(And ditto for the others)",
+      "range": {
+        "startLine": 398,
+        "startChar": 0,
+        "endLine": 402,
+        "endChar": 5
+      },
+      "revId": "d90b16dc26249da490f380907cb33abdb3e32a44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
