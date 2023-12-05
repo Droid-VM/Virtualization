@@ -22,6 +22,30 @@
       },
       "revId": "3966cc739d183ccb24807432dd300e0bdaf16d5c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01fbfa98_48d242be",
+        "filename": "Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-05T11:26:48Z",
+      "side": 1,
+      "message": "I agree.\n\nLet me add bit more detail for you to feel better; I found that my previously theory that \u0027dtc + genrule didn\u0027t work because of current directory is source root\u0027 was wrong. I couldn\u0027t use overlay because `genrule` copies the `srcs` somewhere in `/out` and try to invoke `cmd` there. In other words, I need to explicitly specify all the includes to `srcs`.\n\nI agree that this is ugly, but was the simplest solution to also support intermediate `genrule_default` for common DT header. Let me keep this, especially because you already +2ed.",
+      "parentUuid": "0b11fd08_6028beab",
+      "range": {
+        "startLine": 64,
+        "startChar": 65,
+        "endLine": 64,
+        "endChar": 69
+      },
+      "revId": "3966cc739d183ccb24807432dd300e0bdaf16d5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
