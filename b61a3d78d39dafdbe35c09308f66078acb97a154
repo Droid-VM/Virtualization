@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7369006_6cd08621",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-05T16:53:48Z",
+      "side": 1,
+      "message": "Looking at the (undocumented) C code, I don\u0027t think it is safe to use the result of `fdt_next_node` when it returns a negative `depth` as `nextoffset` (its return value) then points to the next _tag_, not _node_. For the same reason, the function also seems to be broken for negative `depth` input values, so let\u0027s not count on those.\n\nIMO, this could be addressed by abstracting away the signedness of `depth` (the C `int*`) by taking a `usize` and returning `None` when the returned value is finally negative. I think it would make the API more \"Rusty\" and would probably be easier to wrap in an `Iterator`.",
+      "range": {
+        "startLine": 494,
+        "startChar": 24,
+        "endLine": 494,
+        "endChar": 34
+      },
+      "revId": "b61a3d78d39dafdbe35c09308f66078acb97a154",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
