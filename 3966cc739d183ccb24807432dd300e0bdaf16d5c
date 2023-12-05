@@ -46,6 +46,30 @@
       },
       "revId": "3966cc739d183ccb24807432dd300e0bdaf16d5c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44529008_a21ff923",
+        "filename": "Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-05T14:26:30Z",
+      "side": 1,
+      "message": "Yeah, I agree merging this is the right thing to do.\n\nMy concern with `[-1]` is not only that we arbitrarily (and non-intuitively, IMO) pick one of the `srcs` as _the_ DTS but also that we do so in a way that is different from how other modules do it as `rust_*` modules use `srcs[0]` as their top-level `.rs` but using `[0]` in this case would make the \"`default` cascade\" harder to use (as `.dtsi` come from the `default` and `.dts` from the module using them).\n\nI initially tried to find a Bash one-liner to filter `$(in)` to only keep the `*.dts` (no matter its index) but that turns out to be more complicated than I thought (if we want to properly handle paths with spaces). I wish I knew Go so that I could write a Soong module for DTs, making the blueprints clearer and the target more robust ... Oh well, I\u0027ll add this to my list!",
+      "parentUuid": "01fbfa98_48d242be",
+      "range": {
+        "startLine": 64,
+        "startChar": 65,
+        "endLine": 64,
+        "endChar": 69
+      },
+      "revId": "3966cc739d183ccb24807432dd300e0bdaf16d5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
