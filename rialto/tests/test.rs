@@ -23,13 +23,12 @@ use android_system_virtualizationservice::{
 };
 use anyhow::{bail, Context, Result};
 use bssl_avf::{sha256, EcKey, PKey};
-use ciborium::value::Value;
+use ciborium::{cbor, value::Value};
 use client_vm_csr::generate_attestation_key_and_csr;
 use coset::{CborSerializable, CoseMac0, CoseSign};
-use cstr::cstr;
 use diced_open_dice::{
-    retry_bcc_format_config_descriptor, retry_bcc_main_flow, Config, DiceArtifacts,
-    DiceConfigValues, DiceMode, InputValues, OwnedDiceArtifacts, HASH_SIZE, HIDDEN_SIZE,
+    retry_bcc_main_flow, Config, DiceArtifacts, DiceMode, InputValues, OwnedDiceArtifacts,
+    HASH_SIZE, HIDDEN_SIZE,
 };
 use log::info;
 use service_vm_comm::{
@@ -45,7 +44,7 @@ use std::path::PathBuf;
 use vmclient::VmInstance;
 use x509_parser::{
     certificate::X509Certificate,
-    der_parser::{der::parse_der, oid, oid::Oid},
+    der_parser::{ber::BerObject, der::parse_der, oid, oid::Oid},
     prelude::FromDer,
     x509::{AlgorithmIdentifier, SubjectPublicKeyInfo, X509Version},
 };
@@ -65,6 +64,22 @@ const AUTHORITY_HASH_MICRODROID: [u8; HASH_SIZE] = [
     0x2c, 0x0f, 0x4d, 0xbe, 0xcb, 0xf5, 0xf1, 0x4c, 0x1d, 0x1c, 0xb7, 0x44, 0xdf, 0xf8, 0x40, 0x90,
     0x09, 0x65, 0xab, 0x01, 0x34, 0x3e, 0xc2, 0xc4, 0xf7, 0xa2, 0x3a, 0x5c, 0x4e, 0x76, 0x4f, 0x42,
     0xa8, 0x6c, 0xc9, 0xf1, 0x7b, 0x12, 0x80, 0xa4, 0xef, 0xa2, 0x4d, 0x72, 0xa1, 0x21, 0xe2, 0x47,
+];
+const APK1_CODE_HASH: &[u8] = &[
+    0x41, 0x92, 0x0d, 0xd0, 0xf5, 0x60, 0xe3, 0x69, 0x26, 0x7f, 0xb8, 0xbc, 0x12, 0x3a, 0xd1, 0x95,
+    0x1d, 0xb8, 0x9a, 0x9c, 0x3a, 0x3f, 0x01, 0xbf, 0xa8, 0xd9, 0x6d, 0xe9, 0x90, 0x30, 0x1d, 0x0b,
+];
+const APK1_AUTHORITY_HASH: &[u8] = &[
+    0xe3, 0xd9, 0x1c, 0xf5, 0x6f, 0xee, 0x73, 0x40, 0x3d, 0x95, 0x59, 0x67, 0xea, 0x5d, 0x01, 0xfd,
+    0x25, 0x9d, 0x5c, 0x88, 0x94, 0x3a, 0xc6, 0xd7, 0xa9, 0xdc, 0x4c, 0x60, 0x81, 0xbe, 0x2b, 0x74,
+];
+const APEX1_CODE_HASH: &[u8] = &[
+    0x52, 0x93, 0x2b, 0xb0, 0x8d, 0xec, 0xdf, 0x54, 0x1f, 0x5c, 0x10, 0x9d, 0x17, 0xce, 0x7f, 0xac,
+    0xb0, 0x2b, 0xe2, 0x99, 0x05, 0x7d, 0xa3, 0x9b, 0xa6, 0x3e, 0xf9, 0x99, 0xa2, 0xea, 0xd4, 0xd9,
+];
+const APEX1_AUTHORITY_HASH: &[u8] = &[
+    0xd1, 0xfc, 0x3d, 0x5f, 0xa0, 0x5f, 0x02, 0xd0, 0x83, 0x9b, 0x0e, 0x32, 0xc2, 0x27, 0x09, 0x12,
+    0xcc, 0xfc, 0x42, 0xf6, 0x0d, 0xf4, 0x7d, 0xc8, 0x80, 0x1a, 0x64, 0x25, 0xa7, 0xfa, 0x4a, 0x37,
 ];
 
 #[test]
@@ -196,13 +211,7 @@ fn check_attestation_request(
 fn extend_dice_artifacts_with_microdroid_payload(
     dice_artifacts: &dyn DiceArtifacts,
 ) -> Result<OwnedDiceArtifacts> {
-    let config_values = DiceConfigValues {
-        component_name: Some(cstr!("Microdroid payload")),
-        component_version: Some(1),
-        resettable: true,
-        ..Default::default()
-    };
-    let config_descriptor = retry_bcc_format_config_descriptor(&config_values)?;
+    let config_descriptor = fake_microdroid_payload_config_descriptor()?;
     let input_values = InputValues::new(
         CODE_HASH_MICRODROID,
         Config::Descriptor(config_descriptor.as_slice()),
@@ -217,6 +226,54 @@ fn extend_dice_artifacts_with_microdroid_payload(
         &input_values,
     )
     .context("Failed to run BCC main flow for Microdroid")
+}
+
+fn fake_microdroid_payload_config_descriptor() -> Result<Vec<u8>> {
+    let mut map = Vec::new();
+    map.push((cbor!(-70002)?, cbor!("Microdroid payload")?));
+    map.push((cbor!(-71000)?, cbor!("/config_path")?));
+    map.push((cbor!(-71002)?, cbor!(fake_subcomponents()?)?));
+    Ok(Value::Map(map).to_vec()?)
+}
+
+fn fake_subcomponents() -> Result<Vec<Value>> {
+    Ok(vec![
+        cbor!({
+           1 => "Apk1",
+           2 => 1,
+           3 => Value::Bytes(APK1_CODE_HASH.to_vec()),
+           4 => Value::Bytes(APK1_AUTHORITY_HASH.to_vec()),
+        })?,
+        cbor!({
+           1 => "Apex1",
+           2 => 2,
+           3 => Value::Bytes(APEX1_CODE_HASH.to_vec()),
+           4 => Value::Bytes(APEX1_AUTHORITY_HASH.to_vec()),
+        })?,
+    ])
+}
+
+fn check_vm_components(vm_components: &[BerObject]) -> Result<()> {
+    assert_eq!(2, vm_components.len());
+    check_vm_component(&vm_components[0], "Apk1", 1, APK1_CODE_HASH, APK1_AUTHORITY_HASH)?;
+    check_vm_component(&vm_components[1], "Apex1", 2, APEX1_CODE_HASH, APEX1_AUTHORITY_HASH)?;
+    Ok(())
+}
+
+fn check_vm_component(
+    vm_component: &BerObject,
+    name: &str,
+    version: i64,
+    code_hash: &[u8],
+    authority_hash: &[u8],
+) -> Result<()> {
+    let vm_component = vm_component.as_sequence()?;
+    assert_eq!(4, vm_component.len());
+    assert_eq!(name, vm_component[0].as_str()?);
+    assert_eq!(version, vm_component[1].as_i64()?);
+    assert_eq!(code_hash, vm_component[2].as_slice()?);
+    assert_eq!(authority_hash, vm_component[3].as_slice()?);
+    Ok(())
 }
 
 fn check_certificate_for_client_vm(
@@ -262,13 +319,15 @@ fn check_certificate_for_client_vm(
     let (remaining, extension) = parse_der(extension.value)?;
     assert!(remaining.is_empty());
     let attestation_ext = extension.as_sequence()?;
-    assert_eq!(2, attestation_ext.len());
+    assert_eq!(3, attestation_ext.len());
     assert_eq!(csr_payload.challenge, attestation_ext[0].as_slice()?);
     let is_vm_secure = attestation_ext[1].as_bool()?;
     assert!(
         !is_vm_secure,
         "The VM shouldn't be secure as the last payload added in the test is in Debug mode"
     );
+    let vm_components = attestation_ext[2].as_sequence()?;
+    check_vm_components(vm_components)?;
 
     // Checks other fields on the certificate
     assert_eq!(X509Version::V3, cert.version());
