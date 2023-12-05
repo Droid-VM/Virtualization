@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f03aadb_a7d26091",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-05T16:53:00Z",
+      "side": 1,
+      "message": "IMO, this would be more straightforward by building on the [comment I had](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2792452/comment/9b6f4a79_87193154/) on aosp/2792452 and making `locate_overlay_target_path` return an `Option` i.e.\n```\nlet Some(node_path) \u003d vm_dtbo.locate_overlay_target_path(dtbo_node_path)? else {\n    continue;\n}; \nif let Some(node) \u003d fdt.node(\u0026node_path)? {\n    let info \u003d AssignedDeviceInfo::parse(node, node_path, dtbo_node_path, hyp)?;\n    assigned_devices.push(info);\n} else {\n    filtered_dtbo_paths.push(dtbo_node_path.into());\n}\n```\ninstead of introducing a new error whose only purpose is to be caught. Yes, we\u0027re passing `node` and `node_path` (ownership transfer!) so it\u0027s the responsibility of the caller to ensure that they match but the whole flow is more straightforward and easier to maintain and reason about.",
+      "range": {
+        "startLine": 427,
+        "startChar": 0,
+        "endLine": 430,
+        "endChar": 40
+      },
+      "revId": "15dbb1f0a4e482f861b49df54e9023debaeb12dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "139c30f4_89b65cce",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-05T16:53:00Z",
+      "side": 1,
+      "message": "Oh, that\u0027s annoying ... does \"complaining\" mean fail `fdt_apply_overlay` with an error? If so, could you please explicitly mention that in the comment? As we discussed offline, I\u0027ve tested my idea with `fdtoverlay` and that wasn\u0027t failing.\n\nBTW, instead of hardcoding a blacklist of nodes to prune from `__local_fixups__`, what about a more flexible implementation that NOPs any subnode that itself doesn\u0027t have the `__overlay__` subnode? You could leave this as a TODO in this CL, BTW.",
+      "range": {
+        "startLine": 458,
+        "startChar": 11,
+        "endLine": 458,
+        "endChar": 80
+      },
+      "revId": "15dbb1f0a4e482f861b49df54e9023debaeb12dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
