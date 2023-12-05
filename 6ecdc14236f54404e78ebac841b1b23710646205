@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d5ef5c3_c6cda306",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-05T16:52:46Z",
+      "side": 1,
+      "message": "I don\u0027t get why you can\u0027t pass the \"real\" hypervisor (if any) and am not too fond of merging a \"stub\" (intended for testing) into the production code as this might create builds of pvmfw with an exploitable vulnerability.\n\nAFAIU, you don\u0027t want to merge aosp/2854493 (which uses the actual hypervisor) until the crosvm changes are in, right? If so, why?\n\nNote that, even once those changes get merged, it won\u0027t tell you anything about the support of pKVM for these HVCs. In fact, as we\u0027ve implemented `as_device_assigner()` for `ProtectedKvmHypervisor` to always succeed, \"`NOT_SUPPORTED`\" failures will be raised in `DeviceAssignmentInfo::parse`, which will bubble them up, right?\n\nSo, instead of merging a stub hyp backend, the temporary change (if we want one) here could be to ignore any error from `parse`:\n```\nlet device_assignment \u003d match vm_dtbo {\n    Some(vm_dtbo) \u003d\u003e {\n        // ...\n        DeviceAssignmentInfo::parse(fdt, vm_dtbo, \u0026hypervisor).map_err(|e| {\n            error!(\"Failed to parse device assignment from DT and VM DTBO: {e}\");\n            warn!(\"Ignoring device assignment\");\n        }).unwarp_or(None)\n    }\n    None \u003d\u003e None,\n};\n```\nwhich can later be cleanly patched into\n```\n             error!(\"Failed to parse device assignment from DT and VM DTBO: {e}\");\n-            warn!(\"Ignoring device assignment\");\n-        }).unwarp_or(None)\n+        })?\n```\n\nThe main advantage of this CL is that it already adds code coverage through its tests.",
+      "range": {
+        "startLine": 699,
+        "startChar": 12,
+        "endLine": 701,
+        "endChar": 63
+      },
+      "revId": "6ecdc14236f54404e78ebac841b1b23710646205",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

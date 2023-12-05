@@ -262,6 +262,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a7722073_52ed668d",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-05T16:52:46Z",
+      "side": 1,
+      "message": "I see that you\u0027ve move existing parameters around in `parse_iommus` and `parse` so the above was probably not clear. My point was that, as you\u0027re extending\n```\nDeviceAssignmentInfo::parse(\u0026Fdt, \u0026VmDtbo)\n```\nby adding a new `hypervisor` parameter as the last parameter:\n```\nDeviceAssignmentInfo::parse(\u0026Fdt, \u0026VmDtbo, \u0026dyn DeviceAssigningHypervisor)\n```\nit might be clearer to be consistent and extend other existing methods in the same way.\n\nThat is, from\n```\nAssignedDeviceInfo {\n    parse(\u0026Fdt, \u0026VmDtbo, \u0026CStr, \u0026BTreeMap\u003c_, _\u003e)\n    parse_iommus(\u0026FdtNode, \u0026BTreeMap\u003c_, _\u003e)\n}\n```\nto\n```\nAssignedDeviceInfo {\n    parse(\u0026Fdt, \u0026VmDtbo, \u0026CStr, \u0026BTreeMap\u003c_, _\u003e, \u0026dyn DeviceAssigningHypervisor)\n    parse_iommus(\u0026FdtNode, \u0026BTreeMap\u003c_, _\u003e, \u0026dyn DeviceAssigningHypervisor)\n    parse_reg(\u0026FdtNode, \u0026dyn DeviceAssigningHypervisor)\n}\n```\nnot (as we currently have in PS13)\n```\nAssignedDeviceInfo {\n    parse(\u0026Fdt, \u0026VmDtbo, \u0026dyn DeviceAssigningHypervisor, \u0026BTreeMap\u003c_, _\u003e, \u0026CStr)\n    parse_iommus(\u0026dyn DeviceAssigningHypervisor, \u0026BTreeMap\u003c_, _\u003e, \u0026FdtNode)\n    parse_reg(\u0026dyn DeviceAssigningHypervisor, \u0026FdtNode)\n}\n```",
+      "parentUuid": "1136255b_32b8cd37",
+      "range": {
+        "startLine": 277,
+        "startChar": 50,
+        "endLine": 277,
+        "endChar": 51
+      },
+      "revId": "22c526614390c7db6a9ed141150b9970dce9275f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7149b92d_234c4901",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 5
@@ -344,6 +368,30 @@
       "side": 1,
       "message": "Kind of took the idea. Changed to use `HashMap` but didn\u0027t make them `Result` nor add extra helper methods.",
       "parentUuid": "1ffab791_85ff284e",
+      "range": {
+        "startLine": 498,
+        "startChar": 0,
+        "endLine": 501,
+        "endChar": 5
+      },
+      "revId": "22c526614390c7db6a9ed141150b9970dce9275f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b89666a2_a9d4760d",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-05T16:52:46Z",
+      "side": 1,
+      "message": "Sure; nit: use the names `MockHypervisor::{mmio,iommu}_tokens` (plural)?",
+      "parentUuid": "2b36f7f5_267a9253",
       "range": {
         "startLine": 498,
         "startChar": 0,
