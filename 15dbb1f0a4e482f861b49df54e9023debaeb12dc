@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5a61957e_93bb20e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-06T19:38:21Z",
+      "side": 1,
+      "message": "SGTM\n\nBTW, reading these CLs I was wondering: WDYT of naming `/physical` as `/host` instead? After all, that node is a curated subset of the host DT!",
+      "parentUuid": "3936d95a_183360d7",
+      "revId": "15dbb1f0a4e482f861b49df54e9023debaeb12dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f03aadb_a7d26091",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 5
@@ -102,6 +120,30 @@
       "side": 1,
       "message": "\u003e Oh, that\u0027s annoying ... does \"complaining\" mean fail fdt_apply_overlay with an error? If so, could you please explicitly mention that in the comment? As we discussed offline, I\u0027ve tested my idea with fdtoverlay and that wasn\u0027t failing.\n\nYes. Edited to be more explicit, and move the logic around the same.\n\nYou couldn\u0027t see the error because you didn\u0027t filter any node in VM DTBO. Problem happens if `__local_fixup__` says that a node in `/physical` points to a filtered node. `fdtoverlay` failed to validate all phandles because destination is gone.\n\n\n\u003e BTW, instead of hardcoding a blacklist of nodes to prune from __local_fixups__, what about a more flexible implementation that NOPs any subnode that itself doesn\u0027t have the __overlay__ subnode? You could leave this as a TODO in this CL, BTW.\n\nI can do, but I\u0027m unsure whether there\u0027s an actual usecase.\n\nI assumes that VM DTBO should only contain `/physical`, overlayable nodes, and special nodes (e.g. `__local_fixups__`, ..). And I changed other places based on the assumption. Can there be other cases?",
       "parentUuid": "139c30f4_89b65cce",
+      "range": {
+        "startLine": 458,
+        "startChar": 11,
+        "endLine": 458,
+        "endChar": 80
+      },
+      "revId": "15dbb1f0a4e482f861b49df54e9023debaeb12dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f224602_106c304b",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-06T19:38:21Z",
+      "side": 1,
+      "message": "\u003e You couldn\u0027t see the error because you didn\u0027t filter any node in VM DTBO.\n\nI see, thanks for clearing it up!\n\n\u003e And I changed other places based on the assumption. Can there be other cases?\n\nNot yet, but we might make this code robust against future updates. As we\u0027re removing things, there\u0027s no risk of \"leaking\" information anyway. But that\u0027s why I was saying that this can be kept as a TODO clean-up.",
+      "parentUuid": "3d8d8938_1951ac5b",
       "range": {
         "startLine": 458,
         "startChar": 11,
