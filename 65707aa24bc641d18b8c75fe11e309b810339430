@@ -103,6 +103,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b49eec15_e83ce022",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-06T19:37:59Z",
+      "side": 1,
+      "message": "\u003e `hyp::get_device_assigner().is_none()` means no hypervisor.\n\nNo, it means no `DeviceAssigningHypervisor` i.e. that the hypervisor doesn\u0027t support DA.\n\nFYI, at the point where pvmfw starts dealing with DA, it has already interacted with the hypervisor _a lot_ (for discovering which one it\u0027s running on (KVM/pKVM/Gunhya/GZ), sharing MMIO to access the virtual PCI bus, sharing memory for the VirtIO message passing) so all the code is written assuming that we have one. If pvmfw ([technically, vmbase](https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/vmbase/src/entry.rs;l\u003d28;drc\u003d20daaefa0b70a5dd195540a5da8860b50c2e795b)) fails to detect a hypervisor it\u0027s familiar with, [it bails out](https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/hyp/src/hypervisor.rs;l\u003d108;drc\u003dfb24bddbb17414f5ece58bd3560af57b87ee346d).\n\n\u003e assuming that no hypervisor is OK if unused in `pvmfw` (i.e. nothing is assigned)\n\nWe can\u0027t know that nothing has been assigned until the crosvm DT gets parsed by `DeviceAssignmentInfo::parse`, which should only be called if `get_device_assigner().is_some()` so my point was that if ABL passed us a VM DTBO (`vm_dtbo().is_some()`) but we detected that the hypervisor doesn\u0027t support DA (`get_device_assigner().is_none()`) then we shouldn\u0027t abort the boot as we might be booting a VM that doesn\u0027t have any assigned devices. So, instead, let\u0027s just log the inconsistency (for debug) and move on, skipping the rest of the DA code.\n\nBTW, note that aosp/2824757 makes `get_device_assigner()` **always** return `Some` because pKVM (unfortunately) doesn\u0027t provide a discovery mechanism for it. As a result, this code will always call `DeviceAssignmentInfo::parse` and pKVM/crosvm not supporting DA will only be detected at the point where the verification HVC is issued. This is why I was suggesting to temporarily ignore that function failing but, as you said in the other thread, that actually should never happen on ToT.\n\nSo, review comment: don\u0027t take the hypervisor by `Option` in `DeviceAssignmentInfo::parse`.",
+      "parentUuid": "2a56b3c2_63de4da7",
+      "revId": "65707aa24bc641d18b8c75fe11e309b810339430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3b9aa5b3_219126d3",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 10
@@ -185,6 +203,30 @@
       "side": 1,
       "message": "Done except for `flat_map` + `collect`. I\u0027m not certain whether compiler would optimize not to create intermediate `Vec` for `concat()`.",
       "parentUuid": "88a82fb3_3e975c65",
+      "range": {
+        "startLine": 238,
+        "startChar": 7,
+        "endLine": 238,
+        "endChar": 40
+      },
+      "revId": "65707aa24bc641d18b8c75fe11e309b810339430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ebee73e_08db9607",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-06T19:37:59Z",
+      "side": 1,
+      "message": "SGTM; I\u0027m also not convinced it\u0027s more readable.",
+      "parentUuid": "52c91026_0b4b2a4a",
       "range": {
         "startLine": 238,
         "startChar": 7,

@@ -310,6 +310,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66984ddc_b7019956",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-06T19:37:59Z",
+      "side": 1,
+      "message": "Oh, I didn\u0027t put enough thought into this so as to have guidelines to share!\n\nBasically, I was mostly asking for consistency because\n```\nSelf::parse_reg(\u0026node, hypervisor)?;\nSelf::parse_interrupts(\u0026node)?;\nSelf::parse_iommus(hypervisor, \u0026node, pviommus)?;\n```\nseemed to keep shuffling the arguments around from one function call to the next.\n\nBut I guess my personal rule of thumb is 1. name functions as \"actions\" so that 2. their parameters are the \"objects\" of those actions (e.g. `eat(apple)`) and 3. anything the function requires but isn\u0027t the \"main object\" (which is subjective) of the \"action\" comes after (`eat(apple, \u0026fork, \u0026knife)`). That\u0027s why it made sense to me that you were adding the `hypervisor` as the last parameter because you\u0027re 1. parsing, 2. iommus/reg/..., 3. using the hypervisor.",
+      "parentUuid": "d8ad4cd3_f066d44e",
+      "range": {
+        "startLine": 277,
+        "startChar": 50,
+        "endLine": 277,
+        "endChar": 51
+      },
+      "revId": "22c526614390c7db6a9ed141150b9970dce9275f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7149b92d_234c4901",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 5
