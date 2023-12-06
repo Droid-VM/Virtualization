@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69c0ea86_33677262",
+        "filename": "libs/libfdt/src/iterators.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-06T19:40:30Z",
+      "side": 1,
+      "message": "To keep the iterator consistent, it would make sense to always update it  from the `next_node` result, even if it\u0027s `None` (so that repeated calls on `.next()` are guaranteed to return `None`, no matter what). For example:\n```\nlet (node, depth) \u003d self.node?;\nself.node \u003d node.next_node(depth).ok().flatten().filter(|(_, depth)| depth \u003e 0);\n\nself.node\n```",
+      "range": {
+        "startLine": 343,
+        "startChar": 0,
+        "endLine": 350,
+        "endChar": 9
+      },
+      "revId": "2215533931833638e1fa5691b37d9805f4bb97f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
