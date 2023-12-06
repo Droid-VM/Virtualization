@@ -22,6 +22,30 @@
       },
       "revId": "ac30507a97f26a7d353f8bfb84a33544e12f5c9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99a87cf7_d8e49e5f",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-06T17:06:27Z",
+      "side": 1,
+      "message": "I\u0027m sorry but could you elaborate details?\n\nI thought that both physical IOMMUs in VM DTBO\u0027s `/physical` and pvIOMMUs from crosvm DT have the same format (`id` only), and devices that uses IOMMUs has format `\u003ciommu_phandle (physical|pv)_sid\u003e, ...`. I thought this way because new VM DTBO format is just another way to represent `android,pvmfw,phys-*`, and we used to described phys IOMMU with `android,pvmfw,phys-iommu \u003d \u003cid1\u003e, \u003cid2\u003e ,,` and `android,pvmfw,phys-sid \u003d \u003csid1\u003e, \u003csid2\u003e ...`.\n\nAm I misunderstanding?",
+      "parentUuid": "7df4bee6_9b13c0f3",
+      "range": {
+        "startLine": 202,
+        "startChar": 4,
+        "endLine": 202,
+        "endChar": 47
+      },
+      "revId": "ac30507a97f26a7d353f8bfb84a33544e12f5c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
