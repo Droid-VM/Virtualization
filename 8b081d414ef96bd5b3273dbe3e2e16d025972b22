@@ -16,6 +16,23 @@
       "message": "Hi Alan, PTAL",
       "revId": "8b081d414ef96bd5b3273dbe3e2e16d025972b22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7296a4d0_b776b57f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-06T14:10:13Z",
+      "side": 1,
+      "message": "It seems a little odd to spread these helper functions over two different modules; they should perhaps be moved into their own module?\nBut that needn\u0027t happen in this CL.",
+      "revId": "8b081d414ef96bd5b3273dbe3e2e16d025972b22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
