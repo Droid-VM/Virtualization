@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35a028e9_556f351b",
+        "filename": "service_vm/requests/src/cert.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-06T14:31:24Z",
+      "side": 1,
+      "message": "We should extract this ASN.1 schema into its own file at some point, as part of documenting it for relying parties.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 5
+      },
+      "revId": "bc861da952ad8187c1c64477257b4924ddc55e5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
