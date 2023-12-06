@@ -22,6 +22,30 @@
       },
       "revId": "6ecdc14236f54404e78ebac841b1b23710646205",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb2ff052_28144d18",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-06T17:02:27Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t get why you can\u0027t pass the \"real\" hypervisor (if any) and am not too fond of merging a \"stub\" (intended for testing) into the production code as this might create builds of pvmfw with an exploitable vulnerability.\n\nGood point. Done, but one question.\n\n\u003e AFAIU, you don\u0027t want to merge aosp/2854493 (which uses the actual hypervisor) until the crosvm changes are in, right? If so, why?\n\nI thought that hypervisor may not return actual phys without your crosvm change. Am I misunderstanding?\n\n\u003e So, instead of merging a stub hyp backend, the temporary change (if we want one) here could be to ignore any error from parse:\n\nWell, if you prefer not submitting mock hypervisor, let\u0027s just stop booting when validation fails. It shouldn\u0027t break anything because a) ToT doesn\u0027t assign device tree, and b) demo scenario assumes cherry-picking all necessary changes.",
+      "parentUuid": "2d5ef5c3_c6cda306",
+      "range": {
+        "startLine": 699,
+        "startChar": 12,
+        "endLine": 701,
+        "endChar": 63
+      },
+      "revId": "6ecdc14236f54404e78ebac841b1b23710646205",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

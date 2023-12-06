@@ -286,6 +286,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d8ad4cd3_f066d44e",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-06T17:02:27Z",
+      "side": 1,
+      "message": "Question) Just to double check, are you suggesting to sort parameters in historical order? It would helpful when reviewing changes, but not sure whether it\u0027s helpful when read code.\n\nMy current logic is putting bigger item first (e.g. `fdt` comes before `pviommus`). And Android API guideline says \u0027`Context` comes first, and remaining parameters are sorted by importance\u0027.\n\nJust tell me your preference again here. I\u0027ll follow your suggestion to comply with `pvmfw` wide coding convention.",
+      "parentUuid": "a7722073_52ed668d",
+      "range": {
+        "startLine": 277,
+        "startChar": 50,
+        "endLine": 277,
+        "endChar": 51
+      },
+      "revId": "22c526614390c7db6a9ed141150b9970dce9275f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7149b92d_234c4901",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 5
@@ -392,6 +416,30 @@
       "side": 1,
       "message": "Sure; nit: use the names `MockHypervisor::{mmio,iommu}_tokens` (plural)?",
       "parentUuid": "2b36f7f5_267a9253",
+      "range": {
+        "startLine": 498,
+        "startChar": 0,
+        "endLine": 501,
+        "endChar": 5
+      },
+      "revId": "22c526614390c7db6a9ed141150b9970dce9275f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b5694b8_da005478",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-06T17:02:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b89666a2_a9d4760d",
       "range": {
         "startLine": 498,
         "startChar": 0,

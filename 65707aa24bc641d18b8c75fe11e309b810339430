@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "323d4b35_967daace",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-06T17:02:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "faca9593_581fd934",
+      "range": {
+        "startLine": 7,
+        "startChar": 7,
+        "endLine": 7,
+        "endChar": 15
+      },
+      "revId": "65707aa24bc641d18b8c75fe11e309b810339430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "bac8e132_aa508513",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 10
@@ -59,6 +83,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a56b3c2_63de4da7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-06T17:02:27Z",
+      "side": 1,
+      "message": "I asked the question because `hyp::get_device_assigner().is_none()` means no hypervisor. I thought that no hypervisor can be considered as \u0027strange enough to stop protected VM boot\u0027 even when `pvmfw` don\u0027t use hypervisor. Could you confirm if my understanding is correct from the security perspective?\n\nI just updated the code to obtain hypervisor in `device_assignment.rs`, assuming that no hypervisor is OK if unused in `pvmfw` (i.e. nothing is assigned). Tell me if my understanding is wrong.",
+      "parentUuid": "23bd49d9_2febd8c1",
+      "revId": "65707aa24bc641d18b8c75fe11e309b810339430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b9aa5b3_219126d3",
@@ -82,6 +124,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73ea01ca_050ddc7b",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-06T17:02:27Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "3b9aa5b3_219126d3",
+      "range": {
+        "startLine": 222,
+        "startChar": 0,
+        "endLine": 222,
+        "endChar": 10
+      },
+      "revId": "65707aa24bc641d18b8c75fe11e309b810339430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88a82fb3_3e975c65",
@@ -95,6 +161,30 @@
       "writtenOn": "2023-12-05T16:52:46Z",
       "side": 1,
       "message": "This doesn\u0027t need to be an associated function of `DeviceReg` (could be stand-alone). Also, taking `\u0026[_]` instead of `\u0026Vec\u003c_\u003e` is more flexible:\n```\nfn into_fdt_prop_value(reg: \u0026[DeviceReg]) -\u003e Vec\u003cu8\u003e\n```\n\nFor the body, it might be clearer to `.collect()`:\n```\nreg.iter().flat_map(|DeviceReg { addr, size }| {\n    [addr.to_be_bytes(), size.to_be_bytes()].concat()\n}).collect()\n```\nbut up to you.",
+      "range": {
+        "startLine": 238,
+        "startChar": 7,
+        "endLine": 238,
+        "endChar": 40
+      },
+      "revId": "65707aa24bc641d18b8c75fe11e309b810339430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52c91026_0b4b2a4a",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-06T17:02:27Z",
+      "side": 1,
+      "message": "Done except for `flat_map` + `collect`. I\u0027m not certain whether compiler would optimize not to create intermediate `Vec` for `concat()`.",
+      "parentUuid": "88a82fb3_3e975c65",
       "range": {
         "startLine": 238,
         "startChar": 7,
