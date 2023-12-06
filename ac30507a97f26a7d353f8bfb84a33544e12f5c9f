@@ -46,6 +46,30 @@
       },
       "revId": "ac30507a97f26a7d353f8bfb84a33544e12f5c9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebb4f4a5_8b41e14f",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-06T19:39:42Z",
+      "side": 1,
+      "message": "\u003e I thought that both physical IOMMUs in VM DTBO\u0027s `/physical` and pvIOMMUs from crosvm DT have the same format (`id` only)\n\nNo, `\u003cid\u003e` only exists for pvIOMMUs; physical IOMMUs are platform devices and are identified by their MMIO address, in `\u003creg\u003e`.\n\n\u003e devices that uses IOMMUs has format `\u003ciommu_phandle (physical|pv)_sid\u003e, ...`\n\nCorrect.\n\n\u003e we used to described phys IOMMU with `android,pvmfw,phys-iommu \u003d \u003cid1\u003e, \u003cid2\u003e`\n\nNo, it was `\u003d \u003ctoken1\u003e, \u003ctoken2\u003e`!\n\nFor platform IOMMUs (the only kind we currently support), the MMIO addresses (`\u003creg\u003e`) _is_ the token, which is where my suggested change to the VM DTBO format shines: if `\u003ctoken\u003e` is now represented as a standard `\u003creg\u003e`, itself described by standard `#{address,size}-cells`, it can be parsed by libfdt from the VM DTBO transparently, for any size, and without needing extra code!\n\nSo my point in the first comment was: physical IOMMU \"tokens\" are `u64` while pvIOMMU IDs are `u32` so a unified `struct` does not work. Furthermore, in terms of OOP, I believe it makes more sense to keep 2 distinct types for code clarity and flexibility.",
+      "parentUuid": "99a87cf7_d8e49e5f",
+      "range": {
+        "startLine": 202,
+        "startChar": 4,
+        "endLine": 202,
+        "endChar": 47
+      },
+      "revId": "ac30507a97f26a7d353f8bfb84a33544e12f5c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
