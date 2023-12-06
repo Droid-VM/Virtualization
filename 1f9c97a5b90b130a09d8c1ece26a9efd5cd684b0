@@ -16,6 +16,98 @@
       "message": "Hi Alan, PTAL.",
       "revId": "1f9c97a5b90b130a09d8c1ece26a9efd5cd684b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b76dbe1d_907bd1c0",
+        "filename": "libs/dice/open_dice/src/retry.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-06T14:20:49Z",
+      "side": 1,
+      "message": "I\u0027m mildly against making these pub. Given we have the getters below it seems wrong to throw away encapsulation.\nImplement new() instead?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 21
+      },
+      "revId": "1f9c97a5b90b130a09d8c1ece26a9efd5cd684b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc5c152c_a7cfaab3",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-06T14:20:49Z",
+      "side": 1,
+      "message": "That can never happen - we don\u0027t want to expose the DICE chain in those circumstances. Using a fake DICE chain is probably the right thing here.",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 35
+      },
+      "revId": "1f9c97a5b90b130a09d8c1ece26a9efd5cd684b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "540888cb_7e606a9f",
+        "filename": "service_vm/fake_chain/src/client_vm.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-06T14:20:49Z",
+      "side": 1,
+      "message": "You don\u0027t need to copy all this - you could just have a function that takes 4 parameters and returns a Value that has the subcomponent in it.",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 0
+      },
+      "revId": "1f9c97a5b90b130a09d8c1ece26a9efd5cd684b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76b08561_c72e3f6b",
+        "filename": "service_vm/fake_chain/src/client_vm.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-06T14:20:49Z",
+      "side": 1,
+      "message": "nit: This should be prefixed \"apk:\" and the next one \"apex:\".",
+      "range": {
+        "startLine": 169,
+        "startChar": 19,
+        "endLine": 169,
+        "endChar": 39
+      },
+      "revId": "1f9c97a5b90b130a09d8c1ece26a9efd5cd684b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
