@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4b618ea_d17004fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-07T08:33:17Z",
+      "side": 1,
+      "message": "I\u0027m fine either way -- changed to `/host`.",
+      "parentUuid": "5a61957e_93bb20e0",
+      "revId": "15dbb1f0a4e482f861b49df54e9023debaeb12dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f03aadb_a7d26091",
@@ -144,6 +162,30 @@
       "side": 1,
       "message": "\u003e You couldn\u0027t see the error because you didn\u0027t filter any node in VM DTBO.\n\nI see, thanks for clearing it up!\n\n\u003e And I changed other places based on the assumption. Can there be other cases?\n\nNot yet, but we might make this code robust against future updates. As we\u0027re removing things, there\u0027s no risk of \"leaking\" information anyway. But that\u0027s why I was saying that this can be kept as a TODO clean-up.",
       "parentUuid": "3d8d8938_1951ac5b",
+      "range": {
+        "startLine": 458,
+        "startChar": 11,
+        "endLine": 458,
+        "endChar": 80
+      },
+      "revId": "15dbb1f0a4e482f861b49df54e9023debaeb12dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34126e52_fb1bd913",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-07T08:33:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f224602_106c304b",
       "range": {
         "startLine": 458,
         "startChar": 11,
