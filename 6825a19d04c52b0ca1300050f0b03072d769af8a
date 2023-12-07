@@ -382,6 +382,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b49641c9_6442eafb",
+        "filename": "vmbase/src/heap.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-07T10:20:58Z",
+      "side": 1,
+      "message": "After switching to a different BoringSSL API for ED25519 signature verification, the need for the realloc implementation has been eliminated. Consequently, this implementation has been removed in the latest PS.",
+      "parentUuid": "efb4c457_6d8cf855",
+      "range": {
+        "startLine": 191,
+        "startChar": 21,
+        "endLine": 191,
+        "endChar": 34
+      },
+      "revId": "6825a19d04c52b0ca1300050f0b03072d769af8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0484d211_fbe149b9",
