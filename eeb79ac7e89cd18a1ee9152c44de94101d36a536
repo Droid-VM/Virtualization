@@ -34,6 +34,24 @@
       "parentUuid": "656d220d_1c489af9",
       "revId": "eeb79ac7e89cd18a1ee9152c44de94101d36a536",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c68f266_c7e00a9f",
+        "filename": "pvmfw/testdata/test_pvmfw_devices_vm_dtbo.dts",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-07T15:58:56Z",
+      "side": 1,
+      "message": "Ack; thanks for the explanation.\n\n\u003e\u003e do we still need /plugin/ given that we already have all the DTBO-specific DT nodes in the DTS (from the first compilation), which could then be built like any regular DT?\n\u003e\n\u003e `fdt_apply_overlay()` checks whether DTBO has `/plugin/` because DT base has it\n\nWhat do you mean? `fdt_apply_overlay()` receives a DTB(O), not a DTS: does `/plugin/` translate to anything more than the `__overlay__` nodes, `__local_fixups__`, ...? If not, isn\u0027t your DTS without `/plugin/` already describing a valid DTBO?",
+      "parentUuid": "bddb7e06_8be7ce36",
+      "revId": "eeb79ac7e89cd18a1ee9152c44de94101d36a536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
