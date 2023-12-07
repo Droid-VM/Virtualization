@@ -157,6 +157,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0176cb9d_743b6063",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-07T12:00:03Z",
+      "side": 1,
+      "message": "\u003e Assignment of platform devices basically boils down to donating MMIO memory from the host to the guest and mapping guest memory into device memory so if the DT node doesn\u0027t have either it 1. requires no MMIO donation and 2. is incapable of DMA so doesn\u0027t so isn\u0027t relevant for device assignment and shouldn\u0027t be in the VM DTBO? Do you have an example?\n\nI\u0027m not talking about assigning a device. I\u0027m telling that VM DTBO can be used to inject an arbitrary DT node when booting VM.\n\nIn previous meeting, we talked about having `avb_key` in the VM DTBO. The key wouldn\u0027t be in the part of the VM DTBO as of now, but partners may want to place their own node in VM DTBO for the similar purpose. What do you think? If it\u0027s not realistic, then I\u0027ll drop `Option` that wraps devices",
+      "parentUuid": "54c706e0_85ac5339",
+      "revId": "65707aa24bc641d18b8c75fe11e309b810339430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3b9aa5b3_219126d3",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 10
