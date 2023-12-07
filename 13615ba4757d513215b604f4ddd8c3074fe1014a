@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "845662c3_b510ffc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-07T11:08:10Z",
+      "side": 1,
+      "message": "Nice catch!\n\nThis went undetected because the existing calls are\n\n1. `from_raw_range_mut(body, bcc_range)`\n2. `from_raw_range_mut(body, dp_range)`\n3. `from_raw_range_mut(body, vm_dtbo_range)`\n\nand\n\n- BCC is (typically) at the start of the `body` (`.len\u003d\u003d.end`) so the bug was WAI\n- DTs (DP and VM DTBO) contain a header with their own size (`.totalsize`) and our `libfdt` wrapper ensures that it doesn\u0027t access offsets beyond that!",
+      "revId": "13615ba4757d513215b604f4ddd8c3074fe1014a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
