@@ -56,6 +56,30 @@
       },
       "revId": "670f6ffcf4d75c15f6b0c67cfc9a1aee10154350",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6f98962_514cc075",
+        "filename": "libs/bssl/error/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-07T16:19:51Z",
+      "side": 1,
+      "message": "\u003e Any time you get a CoseError it must be to do with key decoding\n\nActually that is the case for now, but we can change this to something more generic.",
+      "parentUuid": "efb411b3_01fa0b92",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 1
+      },
+      "revId": "670f6ffcf4d75c15f6b0c67cfc9a1aee10154350",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
