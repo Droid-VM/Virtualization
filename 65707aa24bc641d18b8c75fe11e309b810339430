@@ -193,6 +193,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "616180de_d14b2ca6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-07T16:08:22Z",
+      "side": 1,
+      "message": "\u003e I\u0027m not talking about assigning a device. I\u0027m telling that VM DTBO can be used to inject an arbitrary DT node when booting VM.\n\nI see, a vendor-controlled runtime extension to `platform.dts`.\n\nIt might be useful at some point but until then, I would limit the ABI to the strict minimum as we\u0027ll have to maintain it and keep it stable. Is this use-case allowed by the current code?",
+      "parentUuid": "cf023f5e_9b63bca8",
+      "revId": "65707aa24bc641d18b8c75fe11e309b810339430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3b9aa5b3_219126d3",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 10
