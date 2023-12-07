@@ -70,6 +70,30 @@
       },
       "revId": "ac30507a97f26a7d353f8bfb84a33544e12f5c9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7445189a_6094ad04",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-07T08:29:14Z",
+      "side": 1,
+      "message": "Thank you for the correction. BTW, one follow-up question before uploading new patchset.\n\n\u003e  if \u003ctoken\u003e is now represented as a standard \u003creg\u003e, itself described by standard #{address,size}-cells, it can be parsed by libfdt from the VM DTBO transparently, for any size, and without needing extra code!\n\nI\u0027m sorry but I\u0027m bit confused here. Is `\u003ctoken\u003e` always `u64` (hence two cells) as you stated in your proposal and below? Or can it be changed to one cell if `#address-cells \u003d 1`?",
+      "parentUuid": "ebb4f4a5_8b41e14f",
+      "range": {
+        "startLine": 202,
+        "startChar": 4,
+        "endLine": 202,
+        "endChar": 47
+      },
+      "revId": "ac30507a97f26a7d353f8bfb84a33544e12f5c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
