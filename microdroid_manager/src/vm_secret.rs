@@ -14,17 +14,25 @@
 
 //! Class for encapsulating & managing represent VM secrets.
 
-use anyhow::Result;
+use anyhow::{anyhow, ensure, Result};
+use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::IVirtualMachineService;
+use android_hardware_security_secretkeeper::aidl::android::hardware::security::secretkeeper::ISecretkeeper::ISecretkeeper;
+use secretkeeper_comm::data_types::request::Request;
+use binder::{Strong};
+use coset::CborSerializable;
 use diced_open_dice::{DiceArtifacts, OwnedDiceArtifacts};
 use keystore2_crypto::ZVec;
 use openssl::hkdf::hkdf;
 use openssl::md::Md;
 use openssl::sha;
+use secretkeeper_comm::data_types::{Id, ID_SIZE, Secret, SECRET_SIZE};
+use secretkeeper_comm::data_types::response::Response;
+use secretkeeper_comm::data_types::packet::{ResponsePacket, ResponseType};
+use secretkeeper_comm::data_types::request_response_impl::{
+    StoreSecretRequest, GetSecretResponse, GetSecretRequest};
+use secretkeeper_comm::data_types::error::SecretkeeperError;
 
 const ENCRYPTEDSTORE_KEY_IDENTIFIER: &str = "encryptedstore_key";
-
-// Size of the secret stored in Secretkeeper.
-const SK_SECRET_SIZE: usize = 64;
 
 // Generated using hexdump -vn32 -e'14/1 "0x%02X, " 1 "\n"' /dev/urandom
 const SALT_ENCRYPTED_STORE: &[u8] = &[
@@ -34,6 +42,24 @@ const SALT_ENCRYPTED_STORE: &[u8] = &[
 const SALT_PAYLOAD_SERVICE: &[u8] = &[
     0x8B, 0x0F, 0xF0, 0xD3, 0xB1, 0x69, 0x2B, 0x95, 0x84, 0x2C, 0x9E, 0x3C, 0x99, 0x56, 0x7A, 0x22,
     0x55, 0xF8, 0x08, 0x23, 0x81, 0x5F, 0xF5, 0x16, 0x20, 0x3E, 0xBE, 0xBA, 0xB7, 0xA8, 0x43, 0x92,
+];
+
+// TODO(b/291213394): Remove this once policy is generated from dice_chain
+const HYPOTHETICAL_DICE_POLICY: [u8; 43] = [
+    0x83, 0x01, 0x81, 0x83, 0x01, 0x80, 0xA1, 0x01, 0x00, 0x82, 0x83, 0x01, 0x81, 0x01, 0x73, 0x74,
+    0x65, 0x73, 0x74, 0x69, 0x6E, 0x67, 0x5F, 0x64, 0x69, 0x63, 0x65, 0x5F, 0x70, 0x6F, 0x6C, 0x69,
+    0x63, 0x79, 0x83, 0x02, 0x82, 0x03, 0x18, 0x64, 0x19, 0xE9, 0x75,
+];
+// TODO(b/291213394): Differentiate the Id of nPVM based on 'salt'
+const ID_NP_VM: [u8; ID_SIZE] = [
+    0xF1, 0xB2, 0xED, 0x3B, 0xD1, 0xBD, 0xF0, 0x7D, 0xE1, 0xF0, 0x01, 0xFC, 0x61, 0x71, 0xD3, 0x42,
+    0xE5, 0x8A, 0xAF, 0x33, 0x6C, 0x11, 0xDC, 0xC8, 0x6F, 0xAE, 0x12, 0x5C, 0x26, 0x44, 0x6B, 0x86,
+    0xCC, 0x24, 0xFD, 0xBF, 0x91, 0x4A, 0x54, 0x84, 0xF9, 0x01, 0x59, 0x25, 0x70, 0x89, 0x38, 0x8D,
+    0x5E, 0xE6, 0x91, 0xDF, 0x68, 0x60, 0x69, 0x26, 0xBE, 0xFE, 0x79, 0x58, 0xF7, 0xEA, 0x81, 0x7D,
+];
+const SKP_SECRET_NP_VM: [u8; SECRET_SIZE] = [
+    0xA9, 0x89, 0x97, 0xFE, 0xAE, 0x97, 0x55, 0x4B, 0x32, 0x35, 0xF0, 0xE8, 0x93, 0xDA, 0xEA, 0x24,
+    0x06, 0xAC, 0x36, 0x8B, 0x3C, 0x95, 0x50, 0x16, 0x67, 0x71, 0x65, 0x26, 0xEB, 0xD0, 0xC3, 0x98,
 ];
 
 pub enum VmSecret {
@@ -54,15 +80,51 @@ pub enum VmSecret {
     V1 { dice: OwnedDiceArtifacts },
 }
 
+fn get_id() -> [u8; ID_SIZE] {
+    if super::is_strict_boot() {
+        todo!("Id for protected VM is not implemented");
+    } else {
+        ID_NP_VM
+    }
+}
+
 impl VmSecret {
-    pub fn new(dice_artifacts: OwnedDiceArtifacts) -> Result<VmSecret> {
-        if is_sk_supported() {
-            // TODO(b/291213394): Change this to real Sk protected secret.
-            let fake_skp_secret = ZVec::new(SK_SECRET_SIZE)?;
-            return Ok(Self::V2 { dice: dice_artifacts, skp_secret: fake_skp_secret });
+    pub fn new(
+        dice_artifacts: OwnedDiceArtifacts,
+        vm_service: &Strong<dyn IVirtualMachineService>,
+    ) -> Result<VmSecret> {
+        ensure!(dice_artifacts.bcc().is_some(), "Dice chain missing");
+        let sk_service = vm_service
+            .getSecretkeeper()
+            .map_err(|e| super::MicrodroidError::FailedToConnectToSecretkeeper(e.to_string()))?;
+        if is_sk_supported(sk_service.is_some()) {
+            // sk is supported but host claims not to. This is potential DOS, fail!
+            let sk_service = sk_service.expect("Cannot get connection to Secretkeeper");
+            let id = get_id();
+            let skp_secret: [u8; SECRET_SIZE];
+            if super::is_strict_boot() {
+                if super::is_new_instance() {
+                    skp_secret = rand::random();
+                    store_secret(sk_service.clone(), &id, &skp_secret, &dice_artifacts)?;
+                } else {
+                    // Subsequent run of the pVM -> get the secret stored in Secretkeeper.
+                    skp_secret = get_secret(sk_service.clone(), &id, &dice_artifacts)?;
+                }
+            } else {
+                // TODO(b/291213394): Non protected VM don't need to use Secretkeeper, remove this
+                // once we have sufficient testing on protected VM.
+                store_secret(sk_service.clone(), &id, &SKP_SECRET_NP_VM, &dice_artifacts)?;
+                skp_secret = get_secret(sk_service.clone(), &id, &dice_artifacts)?;
+            }
+            return Ok(Self::V2 {
+                dice: dice_artifacts,
+                skp_secret: ZVec::try_from(skp_secret.to_vec())?,
+            });
         }
+        //  Use V1 secrets if Secretkeeper is not available.
         Ok(Self::V1 { dice: dice_artifacts })
     }
+
     pub fn dice(&self) -> &OwnedDiceArtifacts {
         match self {
             Self::V2 { dice, .. } => dice,
@@ -94,13 +156,78 @@ impl VmSecret {
     }
 }
 
-// Does the hardware support Secretkeeper.
-fn is_sk_supported() -> bool {
-    if cfg!(llpvm_changes) {
-        return false;
+fn store_secret(
+    secretkeeper: binder::Strong<dyn ISecretkeeper>,
+    id: &[u8; ID_SIZE],
+    secret: &[u8; SECRET_SIZE],
+    _dice_chain: &OwnedDiceArtifacts,
+) -> Result<()> {
+    // TODO(b/291213394): Do an Authgraph key exchange & encrypt/decrypt messages.
+    let store_request = StoreSecretRequest {
+        id: Id(*id),
+        secret: Secret(*secret),
+        // TODO(b/291233371): Construct policy out of dice_chain.
+        sealing_policy: HYPOTHETICAL_DICE_POLICY.to_vec(),
     };
-    // TODO(b/292209416): This value should be extracted from device tree.
-    // Note: this does not affect the security of pVM. pvmfw & microdroid_manager continue to block
-    // upgraded images. Setting this true is equivalent to including constant salt in vm secrets.
-    true
+    log::info!("Secretkeeper operation: {:?}", store_request);
+
+    let store_request = store_request.serialize_to_packet().to_vec().map_err(anyhow_err)?;
+    let store_response =
+        secretkeeper.processSecretManagementRequest(&store_request).map_err(anyhow_err)?;
+    let store_response = ResponsePacket::from_slice(&store_response).map_err(anyhow_err)?;
+    let response_type = store_response.response_type().map_err(anyhow_err)?;
+    ensure!(
+        response_type == ResponseType::Success,
+        "Secretkeeper store failed with error: {:?}",
+        *SecretkeeperError::deserialize_from_packet(store_response).map_err(anyhow_err)?
+    );
+    Ok(())
+}
+
+fn get_secret(
+    secretkeeper: binder::Strong<dyn ISecretkeeper>,
+    id: &[u8; ID_SIZE],
+    _dice_chain: &OwnedDiceArtifacts,
+) -> Result<[u8; SECRET_SIZE]> {
+    let get_request = GetSecretRequest {
+        id: Id(*id),
+        // TODO(b/291233371): Construct policy out of dice_chain.
+        updated_sealing_policy: None,
+    };
+    log::info!("Secretkeeper operation: {:?}", get_request);
+
+    let get_request = get_request.serialize_to_packet().to_vec().map_err(anyhow_err)?;
+    let get_response =
+        secretkeeper.processSecretManagementRequest(&get_request).map_err(anyhow_err)?;
+    let get_response = ResponsePacket::from_slice(&get_response).map_err(anyhow_err)?;
+    let response_type = get_response.response_type().map_err(anyhow_err)?;
+    ensure!(
+        response_type == ResponseType::Success,
+        "Secretkeeper get failed with error: {:?}",
+        *SecretkeeperError::deserialize_from_packet(get_response).map_err(anyhow_err)?
+    );
+    let get_response = *GetSecretResponse::deserialize_from_packet(get_response).unwrap();
+    Ok(get_response.secret.0)
+}
+
+#[inline]
+fn anyhow_err<E: core::fmt::Debug>(err: E) -> anyhow::Error {
+    anyhow!("{:?}", err)
+}
+
+// Does the hardware support Secretkeeper. The param claimed_host_support is host's claim on
+// whether the device supports Secretkeeper & should be used with caution for protected VM.
+fn is_sk_supported(claimed_host_support: bool) -> bool {
+    if cfg!(llpvm_changes) {
+        if super::is_strict_boot() {
+            // TODO: For protected VM check for Secretkeeper authentication data in device tree.
+            false
+        } else {
+            // For non-protected VM, believe what host claims.
+            claimed_host_support
+        }
+    } else {
+        // LLPVM flag is disabled
+        false
+    }
 }

@@ -52,6 +52,10 @@ use android_system_virtualizationservice_internal::aidl::android::system::virtua
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::{
         BnVirtualMachineService, IVirtualMachineService,
 };
+use android_hardware_security_secretkeeper::aidl::android::hardware::security::secretkeeper::ISecretkeeper::{BnSecretkeeper, ISecretkeeper};
+use android_hardware_security_authgraph::aidl::android::hardware::security::authgraph::{
+    IAuthGraphKeyExchange::IAuthGraphKeyExchange,
+};
 use anyhow::{anyhow, bail, Context, Result};
 use apkverify::{HashAlgorithm, V4Signature};
 use avflog::LogResult;
@@ -101,6 +105,10 @@ const ANDROID_VM_INSTANCE_MAGIC: &str = "Android-VM-instance";
 const ANDROID_VM_INSTANCE_VERSION: u16 = 1;
 
 const MICRODROID_OS_NAME: &str = "microdroid";
+
+// TODO we need an const identifier for secretkeeper.
+const SECRETKEEPER_IDENTIFIER: &str =
+    "android.hardware.security.secretkeeper.ISecretkeeper/nonsecure";
 
 const UNFORMATTED_STORAGE_MAGIC: &str = "UNFORMATTED-STORAGE";
 
@@ -1370,6 +1378,20 @@ impl IVirtualMachineService for VirtualMachineService {
         }
     }
 
+    fn getSecretkeeper(&self) -> binder::Result<Option<Strong<dyn ISecretkeeper>>> {
+        let sk = match binder::get_interface(SECRETKEEPER_IDENTIFIER) {
+            Ok(sk) => {
+                Some(BnSecretkeeper::new_binder(SecretkeeperProxy(sk), BinderFeatures::default()))
+            }
+            Err(StatusCode::NAME_NOT_FOUND) => None,
+            Err(e) => {
+                error!("unexpected error while fetching connection to Secretkeeper {:?}", e);
+                return Err(e.into());
+            }
+        };
+        Ok(sk)
+    }
+
     fn requestAttestation(&self, csr: &[u8]) -> binder::Result<Vec<Certificate>> {
         GLOBAL_SERVICE.requestAttestation(csr, get_calling_uid() as i32)
     }
@@ -1552,5 +1574,19 @@ mod tests {
 
         tmp_dir.close()?;
         Ok(())
+    }
+}
+
+struct SecretkeeperProxy(Strong<dyn ISecretkeeper>);
+
+impl Interface for SecretkeeperProxy {}
+
+impl ISecretkeeper for SecretkeeperProxy {
+    fn processSecretManagementRequest(&self, req: &[u8]) -> binder::Result<Vec<u8>> {
+        // Pass the request to the channel, and read the response.
+        self.0.processSecretManagementRequest(req)
+    }
+    fn getAuthGraphKe(&self) -> binder::Result<binder::Strong<dyn IAuthGraphKeyExchange>> {
+        self.0.getAuthGraphKe()
     }
 }
