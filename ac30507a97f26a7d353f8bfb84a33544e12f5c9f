@@ -94,6 +94,30 @@
       },
       "revId": "ac30507a97f26a7d353f8bfb84a33544e12f5c9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "622495a0_ce75a414",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-07T10:35:57Z",
+      "side": 1,
+      "message": "The token is part of the HVC ABI so is always `u64` (it\u0027s the contents of one of the CPU registers) but the physical address might not; if `#address-cells \u003d 1`, libfdt will (in the background) read one cell and our wrapper will bit-extend it into a `u64`.",
+      "parentUuid": "7445189a_6094ad04",
+      "range": {
+        "startLine": 202,
+        "startChar": 4,
+        "endLine": 202,
+        "endChar": 47
+      },
+      "revId": "ac30507a97f26a7d353f8bfb84a33544e12f5c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
