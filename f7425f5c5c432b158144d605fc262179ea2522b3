@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26fc52e7_e72a2b83",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-07T03:39:12Z",
+      "side": 1,
+      "message": "\u0027Fix bug in getting pvmfw config entry\u0027\n\nit may return portion of next entry, so not simply removing trailing zeros.",
+      "range": {
+        "startLine": 7,
+        "startChar": 7,
+        "endLine": 7,
+        "endChar": 55
+      },
+      "revId": "f7425f5c5c432b158144d605fc262179ea2522b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
