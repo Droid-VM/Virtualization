@@ -55,6 +55,15 @@ impl fmt::Display for Error {
     }
 }
 
+/// Currently, only `no_std` environment needs to convert `coset::CoseError` to `Error`.
+#[cfg(not(feature = "std"))]
+impl From<coset::CoseError> for Error {
+    fn from(e: coset::CoseError) -> Self {
+        log::error!("Coset error: {e}");
+        Self::CoseKeyDecodingFailed
+    }
+}
+
 /// BoringSSL API names.
 #[allow(missing_docs)]
 #[allow(non_camel_case_types)]
