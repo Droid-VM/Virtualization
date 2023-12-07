@@ -16,6 +16,46 @@
       "message": "Hi Alan, PTAL.",
       "revId": "670f6ffcf4d75c15f6b0c67cfc9a1aee10154350",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d35b387_4d586f1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-07T16:08:59Z",
+      "side": 1,
+      "message": "Adding David + Shikha who might be interested in these functions and/or have opinions on them.",
+      "revId": "670f6ffcf4d75c15f6b0c67cfc9a1aee10154350",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efb411b3_01fa0b92",
+        "filename": "libs/bssl/error/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-07T16:08:59Z",
+      "side": 1,
+      "message": "This feels very wrong.\nThis library shouldn\u0027t care about which clients need this functionality.\n\nAnd it\u0027s saying \"Any time you get a CoseError it must be to do with key decoding\", which might be true now but isn\u0027t in general.\n\nWhere exactly do we want to do this conversion?",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 1
+      },
+      "revId": "670f6ffcf4d75c15f6b0c67cfc9a1aee10154350",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
