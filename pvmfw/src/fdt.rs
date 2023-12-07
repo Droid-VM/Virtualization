@@ -606,6 +606,7 @@ impl DeviceTreeInfo {
 pub fn sanitize_device_tree(
     fdt: &mut [u8],
     vm_dtbo: Option<&mut [u8]>,
+    vendor_public_key: Option<&mut [u8]>,
 ) -> Result<DeviceTreeInfo, RebootReason> {
     let fdt = Fdt::from_mut_slice(fdt).map_err(|e| {
         error!("Failed to load FDT: {e}");
@@ -621,6 +622,18 @@ pub fn sanitize_device_tree(
     };
 
     let info = parse_device_tree(fdt, vm_dtbo.as_deref())?;
+
+    if let Some(vendor_public_key_from_host) = &info.vendor_public_key {
+        if let Some(vendor_public_key_from_config_data) = vendor_public_key {
+            if vendor_public_key_from_config_data != vendor_public_key_from_host {
+                error!("Vendor public key from host is different from pvmfw config data");
+                return Err(RebootReason::InvalidFdt);
+            }
+        } else {
+            error!("Vendor public key doesn't exist in pvmfw config data");
+            return Err(RebootReason::InvalidFdt);
+        }
+    }
 
     fdt.copy_from_slice(pvmfw_fdt_template::RAW).map_err(|e| {
         error!("Failed to instantiate FDT from the template DT: {e}");

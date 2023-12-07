@@ -85,6 +85,7 @@ impl Header {
     const MAGIC: u32 = u32::from_ne_bytes(*b"pvmf");
     const VERSION_1_0: Version = Version { major: 1, minor: 0 };
     const VERSION_1_1: Version = Version { major: 1, minor: 1 };
+    const VERSION_1_2: Version = Version { major: 1, minor: 2 };
 
     pub fn total_size(&self) -> usize {
         self.total_size as usize
@@ -106,8 +107,9 @@ impl Header {
         let last_entry = match self.version {
             Self::VERSION_1_0 => Entry::DebugPolicy,
             Self::VERSION_1_1 => Entry::VmDtbo,
+            Self::VERSION_1_2 => Entry::VendorPublicKey,
             v @ Version { major: 1, .. } => {
-                const LATEST: Version = Header::VERSION_1_1;
+                const LATEST: Version = Header::VERSION_1_2;
                 warn!("Parsing unknown config data version {v} as version {LATEST}");
                 return Ok(Entry::COUNT);
             }
@@ -123,6 +125,7 @@ pub enum Entry {
     Bcc,
     DebugPolicy,
     VmDtbo,
+    VendorPublicKey,
     #[allow(non_camel_case_types)] // TODO: Use mem::variant_count once stable.
     _VARIANT_COUNT,
 }
@@ -233,7 +236,7 @@ impl<'a> Config<'a> {
         let limits = header.body_lowest_bound()?..total_size;
         let mut ranges: [Option<NonEmptyRange>; Entry::COUNT] = [None; Entry::COUNT];
         let mut last_end = 0;
-        for entry in [Entry::Bcc, Entry::DebugPolicy, Entry::VmDtbo] {
+        for entry in [Entry::Bcc, Entry::DebugPolicy, Entry::VmDtbo, Entry::VendorPublicKey] {
             let Some(header_entry) = header_entries.get(entry as usize) else { continue };
             let entry_offset = header_entry.offset.try_into().unwrap();
             let entry_size = header_entry.size.try_into().unwrap();
@@ -260,7 +263,9 @@ impl<'a> Config<'a> {
     }
 
     /// Get slice containing the platform BCC.
-    pub fn get_entries(&mut self) -> (&mut [u8], Option<&mut [u8]>, Option<&mut [u8]>) {
+    pub fn get_entries(
+        &mut self,
+    ) -> (&mut [u8], Option<&mut [u8]>, Option<&mut [u8]>, Option<&mut [u8]>) {
         // This assumes that the blobs are in-order w.r.t. the entries.
         let bcc_range = self.get_entry_range(Entry::Bcc);
         let dp_range = self.get_entry_range(Entry::DebugPolicy);
@@ -268,6 +273,10 @@ impl<'a> Config<'a> {
         // TODO(b/291191157): Provision device assignment with this.
         if let Some(vm_dtbo_range) = vm_dtbo_range {
             info!("Found VM DTBO at {:?}", vm_dtbo_range);
+        }
+        let vendor_public_key_range = self.get_entry_range(Entry::VendorPublicKey);
+        if let Some(vendor_public_key_range) = vendor_public_key_range {
+            info!("Found vendor public key at {:?}", vendor_public_key_range);
         }
 
         // SAFETY: When instantiate, ranges are validated to be in the body range without
@@ -278,6 +287,9 @@ impl<'a> Config<'a> {
                 Self::from_raw_range_mut(ptr, bcc_range.unwrap()),
                 dp_range.map(|dp_range| Self::from_raw_range_mut(ptr, dp_range)),
                 vm_dtbo_range.map(|vm_dtbo_range| Self::from_raw_range_mut(ptr, vm_dtbo_range)),
+                vendor_public_key_range.map(|vendor_public_key_range| {
+                    Self::from_raw_range_mut(ptr, vendor_public_key_range)
+                }),
             )
         }
     }
@@ -288,6 +300,6 @@ impl<'a> Config<'a> {
 
     unsafe fn from_raw_range_mut(ptr: usize, range: NonEmptyRange) -> &'a mut [u8] {
         // SAFETY: The caller must ensure that the range is valid from ptr.
-        unsafe { slice::from_raw_parts_mut((ptr + range.start) as *mut u8, range.end()) }
+        unsafe { slice::from_raw_parts_mut((ptr + range.start) as *mut u8, range.len()) }
     }
 }

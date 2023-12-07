@@ -88,6 +88,7 @@ impl<'a> MemorySlices<'a> {
         kernel: usize,
         kernel_size: usize,
         vm_dtbo: Option<&mut [u8]>,
+        vendor_public_key: Option<&mut [u8]>,
     ) -> Result<Self, RebootReason> {
         let fdt_size = NonZeroUsize::new(crosvm::FDT_MAX_SIZE).unwrap();
         // TODO - Only map the FDT as read-only, until we modify it right before jump_to_payload()
@@ -101,7 +102,7 @@ impl<'a> MemorySlices<'a> {
         // SAFETY: The tracker validated the range to be in main memory, mapped, and not overlap.
         let fdt = unsafe { slice::from_raw_parts_mut(range.start as *mut u8, range.len()) };
 
-        let info = fdt::sanitize_device_tree(fdt, vm_dtbo)?;
+        let info = fdt::sanitize_device_tree(fdt, vm_dtbo, vendor_public_key)?;
         let fdt = libfdt::Fdt::from_mut_slice(fdt).map_err(|e| {
             error!("Failed to load sanitized FDT: {e}");
             RebootReason::InvalidFdt
@@ -212,7 +213,7 @@ fn main_wrapper(
         RebootReason::InvalidConfig
     })?;
 
-    let (bcc_slice, debug_policy, vm_dtbo) = appended.get_entries();
+    let (bcc_slice, debug_policy, vm_dtbo, vendor_public_key) = appended.get_entries();
 
     // Up to this point, we were using the built-in static (from .rodata) page tables.
     MEMORY.lock().replace(MemoryTracker::new(
@@ -222,7 +223,7 @@ fn main_wrapper(
         Some(memory::appended_payload_range()),
     ));
 
-    let slices = MemorySlices::new(fdt, payload, payload_size, vm_dtbo)?;
+    let slices = MemorySlices::new(fdt, payload, payload_size, vm_dtbo, vendor_public_key)?;
 
     // This wrapper allows main() to be blissfully ignorant of platform details.
     let next_bcc = crate::main(slices.fdt, slices.kernel, slices.ramdisk, bcc_slice, debug_policy)?;
@@ -432,10 +433,12 @@ impl<'a> AppendedPayload<'a> {
         }
     }
 
-    fn get_entries(&mut self) -> (&mut [u8], Option<&mut [u8]>, Option<&mut [u8]>) {
+    fn get_entries(
+        &mut self,
+    ) -> (&mut [u8], Option<&mut [u8]>, Option<&mut [u8]>, Option<&mut [u8]>) {
         match self {
             Self::Config(ref mut cfg) => cfg.get_entries(),
-            Self::LegacyBcc(ref mut bcc) => (bcc, None, None),
+            Self::LegacyBcc(ref mut bcc) => (bcc, None, None, None),
         }
     }
 }
