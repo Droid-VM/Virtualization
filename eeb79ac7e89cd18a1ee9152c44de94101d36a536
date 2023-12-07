@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "656d220d_1c489af9",
+        "filename": "pvmfw/testdata/test_pvmfw_devices_vm_dtbo.dts",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-07T14:29:47Z",
+      "side": 1,
+      "message": "This looks like you\u0027ve compiled a DTBO and are committing the decompiled tree: OOC, why?\n\nIf that\u0027s the case, do we still need `/plugin/` given that we already have all the DTBO-specific DT nodes in the DTS (from the first compilation), which could then be built like any regular DT?\n\n\nnit: Could you `sed -i \u0027s/0x0\\+\\([0-9a-f]\\)/0x\\1/g\u0027` with a bit of manual touch-up to make these files a bit more human readable e.g.\n```\n#address-cells \u003d \u003c2\u003e;\n#size-cells \u003d \u003c1\u003e;\nreg \u003d \u003c0x0 0xf00000 0x1000\u003e, \u003c0x0 0xf10000 0x1000\u003e;\nphandle \u003d \u003c4\u003e;\n```\nand isn\u0027t it possible to use label references like\n```\nhost {\n    rng { android,pvmfw,target \u003d \u003c\u0026rng\u003e; };\n};\nfragment@rng {\n    __overlay__ {\n        rng: rng {\n            phandle \u003d \u003c2\u003e;\n```\n? I must admit the double-compilation is making it harder for me to reason about this.",
+      "revId": "eeb79ac7e89cd18a1ee9152c44de94101d36a536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
