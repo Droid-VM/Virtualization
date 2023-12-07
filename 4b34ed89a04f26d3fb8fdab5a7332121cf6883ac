@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "534d11de_13d4311c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-07T14:37:25Z",
+      "side": 1,
+      "message": "Thanks for the review",
+      "revId": "4b34ed89a04f26d3fb8fdab5a7332121cf6883ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ad08f7f_344db228",
@@ -31,6 +48,30 @@
       "writtenOn": "2023-12-07T11:22:27Z",
       "side": 1,
       "message": "I\u0027m guessing `rustfmt` is forcing you to change this? Can you please submit that as a parent CL? There\u0027s a lot of code in this CL that has nothing to do with `hex`",
+      "range": {
+        "startLine": 111,
+        "startChar": 12,
+        "endLine": 114,
+        "endChar": 62
+      },
+      "revId": "4b34ed89a04f26d3fb8fdab5a7332121cf6883ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6d0283c_c3b243cd",
+        "filename": "apkdmverity/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-07T14:37:25Z",
+      "side": 1,
+      "message": "Done \u003d\u003e https://r.android.com/2863107",
+      "parentUuid": "4ad08f7f_344db228",
       "range": {
         "startLine": 111,
         "startChar": 12,
