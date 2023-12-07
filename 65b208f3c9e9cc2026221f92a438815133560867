@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d94f8e1e_a713d4ac",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-07T16:01:48Z",
+      "side": 1,
+      "message": "I changed this check to match agains the pvmfw embedded key.\n\nwhy not just verify both the authority hash and code hash?",
+      "parentUuid": "28f85950_b7eda2c2",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 90
+      },
+      "revId": "65b208f3c9e9cc2026221f92a438815133560867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d665143_4b181ff8",
         "filename": "service_vm/requests/src/dice.rs",
         "patchSetId": 2
@@ -54,6 +78,30 @@
       "writtenOn": "2023-12-04T16:59:18Z",
       "side": 1,
       "message": "That seems awfully specific.\nI\u0027d expect to have accessors that would return the entry for Microdroid kernel, Microdroid payload, etc.\nAnd then you might query an entry for its authority hash, or indeed check that it has the expected value. (Which is a good example of \"tell don\u0027t ask\", I guess.)\n\nNaming nit: check, rather than match?",
+      "range": {
+        "startLine": 94,
+        "startChar": 18,
+        "endLine": 94,
+        "endChar": 57
+      },
+      "revId": "65b208f3c9e9cc2026221f92a438815133560867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "654e629c_827ac4fe",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-07T16:01:48Z",
+      "side": 1,
+      "message": "This code is removed.",
+      "parentUuid": "1d665143_4b181ff8",
       "range": {
         "startLine": 94,
         "startChar": 18,
@@ -124,6 +172,30 @@
       "writtenOn": "2023-12-04T16:59:18Z",
       "side": 1,
       "message": "I still really dislike the use of \"payloads\" here.\nCan we not make it nodes, entries, components, descriptors, or something?\n\n\"microdroid kernel payload\" is a great example; is this the payload of the microdroid kernel? No.",
+      "range": {
+        "startLine": 100,
+        "startChar": 12,
+        "endLine": 100,
+        "endChar": 37
+      },
+      "revId": "65b208f3c9e9cc2026221f92a438815133560867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e242ef8_d43799b3",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-07T16:01:48Z",
+      "side": 1,
+      "message": "This code is removed.",
+      "parentUuid": "bc6bbedf_da0427c4",
       "range": {
         "startLine": 100,
         "startChar": 12,
