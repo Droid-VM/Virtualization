@@ -229,6 +229,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "60f0ba92_3a504d87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-07T16:44:07Z",
+      "side": 1,
+      "message": "AFAIR, the agreement was that the vendor public key would be passed to pvmfw as an extra config data entry so as to decouple DA from guest vendor partitions.",
+      "parentUuid": "1df9ff53_544d914e",
+      "revId": "65707aa24bc641d18b8c75fe11e309b810339430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3b9aa5b3_219126d3",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 10
