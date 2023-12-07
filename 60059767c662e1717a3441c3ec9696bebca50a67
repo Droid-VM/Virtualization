@@ -22,6 +22,30 @@
       },
       "revId": "60059767c662e1717a3441c3ec9696bebca50a67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66192c93_77369347",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-07T01:51:46Z",
+      "side": 1,
+      "message": "Agreed that we\u0027d better to unpack / pack minimally.\n\nBTW, we\u0027d already called twice here -- `modify_for_next_stage()` also `unpack()`. Would you like to `unpack()` / `pack()` in one place?",
+      "parentUuid": "808c609a_09589b4f",
+      "range": {
+        "startLine": 728,
+        "startChar": 0,
+        "endLine": 731,
+        "endChar": 8
+      },
+      "revId": "60059767c662e1717a3441c3ec9696bebca50a67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
