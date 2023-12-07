@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c04632bb_c19e8c0c",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-07T16:15:49Z",
+      "side": 1,
+      "message": "\u003e why not just verify both the authority hash and code hash?\n\nBut this CL isn\u0027t doing that, and I think it should.\nI\u0027d like to see the complete solution, not half of it.\n\nIt\u0027s ok to verify both, it doesn\u0027t really hurt.",
+      "parentUuid": "d94f8e1e_a713d4ac",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 90
+      },
+      "revId": "65b208f3c9e9cc2026221f92a438815133560867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d665143_4b181ff8",
         "filename": "service_vm/requests/src/dice.rs",
         "patchSetId": 2

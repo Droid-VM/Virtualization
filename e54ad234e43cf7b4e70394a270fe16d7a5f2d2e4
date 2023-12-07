@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dc09c9e_f7e2fc0d",
+        "filename": "service_vm/fake_chain/src/client_vm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-07T16:15:49Z",
+      "side": 1,
+      "message": "You don\u0027t need service_vm twice - the function can just be authority_hash().",
+      "range": {
+        "startLine": 112,
+        "startChar": 25,
+        "endLine": 112,
+        "endChar": 62
+      },
+      "revId": "e54ad234e43cf7b4e70394a270fe16d7a5f2d2e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
