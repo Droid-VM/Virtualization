@@ -121,6 +121,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ab60981c_9c21c0c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-07T08:33:06Z",
+      "side": 1,
+      "message": "Got it. Thank you for letting me know about other hypervisors as well.\n\nChanged to continue booting when hypervisor is missing.\n\n\nFollow up questions)\n\n\u003e So, review comment: don\u0027t take the hypervisor by Option in `DeviceAssignmentInfo::parse`.\n\nWhat if a node in VM DTBO doesn\u0027t require physical `\u003creg\u003e` and `\u003ciommus\u003e` but assigned as if it\u0027s a device driver node? I assume that it can be allowed even when device assigning hypervisor doesn\u0027t exist.\n\nAlso, I need a way to inject `MockHypevisor` for testing -- that\u0027s why take hypervisor as platform",
+      "parentUuid": "b49eec15_e83ce022",
+      "revId": "65707aa24bc641d18b8c75fe11e309b810339430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3b9aa5b3_219126d3",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 10
