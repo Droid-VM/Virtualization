@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "340cf150_eaa157ac",
+        "filename": "microdroid_manager/src/vm_config.cddl",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-08T14:38:53Z",
+      "side": 1,
+      "message": "APK version codes used to be 32 bit, but they are now 64 bit. (Which in the APK manifest is achieved by adding a new XML attribute for the top 32 bits.)\nSee https://developer.android.com/reference/android/content/pm/PackageInfo#getLongVersionCode().\nActually, I should just include that link.",
+      "parentUuid": "0bb2cd16_51249406",
+      "revId": "d8edcc2bbf9650c77a0e2daa630223e96d3e5361",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1e60007_4b4018ae",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-12-07T14:22:09Z",
       "side": 1,
       "message": "Is this field optional?",
+      "range": {
+        "startLine": 53,
+        "startChar": 2,
+        "endLine": 53,
+        "endChar": 4
+      },
+      "revId": "d8edcc2bbf9650c77a0e2daa630223e96d3e5361",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d83125a_8472e7c2",
+        "filename": "microdroid_manager/src/vm_config.cddl",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-08T14:38:53Z",
+      "side": 1,
+      "message": "Well, this is the spec, so yes.\nBut we currently always include it.\nTBH I\u0027m in 2 minds over it - I\u0027m not sure how useful it will be to anyone.\nThe version number could be used if we want a deny list of known bad versions.",
+      "parentUuid": "c1e60007_4b4018ae",
       "range": {
         "startLine": 53,
         "startChar": 2,
