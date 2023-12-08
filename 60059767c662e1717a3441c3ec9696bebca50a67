@@ -118,6 +118,30 @@
       },
       "revId": "60059767c662e1717a3441c3ec9696bebca50a67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13ed8c5e_7906deba",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-08T09:48:54Z",
+      "side": 1,
+      "message": "Uh, I\u0027m sorry. I tried a bit but it wasn\u0027t straightforward than I thought. `sanitize_device_tree()` is called by `MemorySlices::new()` in `entry.rs`. `modify_for_next_stage()` is called by `main()` and it required extra information -- e.g. dice, kaslr, ...\n\nLet me keep this as-is for now. This can revisit this when we need to optimize unpack/pack.",
+      "parentUuid": "6a70ba34_612fa1ed",
+      "range": {
+        "startLine": 728,
+        "startChar": 0,
+        "endLine": 731,
+        "endChar": 8
+      },
+      "revId": "60059767c662e1717a3441c3ec9696bebca50a67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
