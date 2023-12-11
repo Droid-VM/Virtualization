@@ -51,6 +51,29 @@
       "parentUuid": "6807919c_06c84276",
       "revId": "1a4519aaa2c974a9aedbf7d0af81b92faede497b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e476a8bc_9e3a2e17",
+        "filename": "service_vm/fake_chain/Android.bp",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-12-11T07:02:30Z",
+      "side": 1,
+      "message": "This key is replaced during the release key signing. You will have to touch the signing script so that not only pvmfw but also all the files where this rlib is included are touched to replace the key.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 32
+      },
+      "revId": "1a4519aaa2c974a9aedbf7d0af81b92faede497b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
