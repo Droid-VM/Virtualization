@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15d59a46_3a7c2cbb",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-11T16:38:55Z",
+      "side": 1,
+      "message": "This code looks right, but it shouldn\u0027t be in this method. It\u0027s got nothing to do with the instance salt.",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 5
+      },
+      "revId": "6dd1c93bb85885e7eb7e24ad6e15240013fe122d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65514d30_ea20d458",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-11T16:38:55Z",
+      "side": 1,
+      "message": "Why do we skip the other checks - are they harmful, or just redundant?\n(Either way we should say in a comment.)",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 13
+      },
+      "revId": "6dd1c93bb85885e7eb7e24ad6e15240013fe122d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
