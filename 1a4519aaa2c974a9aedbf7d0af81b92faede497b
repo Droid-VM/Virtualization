@@ -74,6 +74,30 @@
       },
       "revId": "1a4519aaa2c974a9aedbf7d0af81b92faede497b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6d35e2d_846c9eeb",
+        "filename": "service_vm/fake_chain/Android.bp",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-11T08:06:42Z",
+      "side": 1,
+      "message": "Oh, that\u0027s a good point. Thank you for noticing this. I think the current signing script simply generates a new AVB footer and replaces the existing one with it. However, it appears to be quite complex to replace the key in the rlib and regenerate all the libraries that rely on it. To avoid all these hassles, we can an alternative approach by extracting the key from RKP VM\u0027s DICE chain and use that key as the expected key. Alan, what do you think?\n\n@alanstokes@google.com",
+      "parentUuid": "e476a8bc_9e3a2e17",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 32
+      },
+      "revId": "1a4519aaa2c974a9aedbf7d0af81b92faede497b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
