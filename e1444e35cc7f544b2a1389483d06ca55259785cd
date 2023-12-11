@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "326f158b_8b653277",
+        "filename": "service_vm/kernel/extract_microdroid_kernel_hashes.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-11T13:13:33Z",
+      "side": 1,
+      "message": "They remain unchanged after the re-signing process. In fact, these hashes are not associated with keys; instead, they are calculated by combining the salt and raw image using the designated hash algorithm for each partition. We can verify this by hashing the raw data, or by comparing the hashes of the unsigned `microdroid_initrd_debug_hashdesc.img` and the signed `microdroid_kernel` to be sure that this hash doesn\u0027t depend on the key. For example:\n```\n$ avbtool print_partition_digests --image microdroid_kernel \nboot: 1af977b807de369f1a826456b5ffba369c34e5e48ecb718d08afeef46ef72816\ninitrd_debug: e2fb5e670688e38b46eba436bd3622d623f3b16c745d5cd769da3177a3d1c636\ninitrd_normal: 6b0a337b75b4ef2f4bf0c6ee66f826781a1c844a443eb444d15430c3ac024a7a\n\n$ avbtool print_partition_digests --image microdroid_initrd_debug_hashdesc.img\ninitrd_debug: e2fb5e670688e38b46eba436bd3622d623f3b16c745d5cd769da3177a3d1c636\n\n$ avbtool info_image --image microdroid_initrd_debug_hashdesc.img \nMinimum libavb version:   1.0\nHeader Block:             256 bytes\nAuthentication Block:     0 bytes\nAuxiliary Block:          256 bytes\nAlgorithm:                NONE\nRollback Index:           0\nFlags:                    0\nRollback Index Location:  0\nRelease String:           \u0027avbtool 1.2.0\u0027\nDescriptors:\n    Hash descriptor:\n      Image Size:            1898376 bytes\n      Hash Algorithm:        sha256\n      Partition Name:        initrd_debug\n      Salt:                  8ab9dc9cb7e6456700ff6ef18c6b4c3acc24c5fa5381b829563f8d7a415d869a\n      Digest:                e2fb5e670688e38b46eba436bd3622d623f3b16c745d5cd769da3177a3d1c636\n      Flags:                 0\n```\n\nOtherwise, I think the vbmeta digest you you mentioned might be the hash of the vbmeta header and auxiliary block, which is then fed into the signing algorithm to generate the vbmeta signature.",
+      "parentUuid": "d9ed625c_581cc122",
+      "revId": "e1444e35cc7f544b2a1389483d06ca55259785cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0c7e831_2829a03f",
@@ -58,6 +76,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a18be6af_64727515",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-11T13:13:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0c7e831_2829a03f",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 73
+      },
+      "revId": "e1444e35cc7f544b2a1389483d06ca55259785cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a7bf59b_adce5951",
@@ -71,6 +113,30 @@
       "writtenOn": "2023-12-11T11:12:34Z",
       "side": 1,
       "message": "Either the name or comment - possibly both - should explain what \"validate\" means here.",
+      "range": {
+        "startLine": 136,
+        "startChar": 3,
+        "endLine": 136,
+        "endChar": 29
+      },
+      "revId": "e1444e35cc7f544b2a1389483d06ca55259785cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b48d399_979a1d95",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-11T13:13:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a7bf59b_adce5951",
       "range": {
         "startLine": 136,
         "startChar": 3,
@@ -128,6 +194,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad8c9962_094bdd40",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-11T13:13:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfd832a7_68564dd4",
+      "range": {
+        "startLine": 152,
+        "startChar": 26,
+        "endLine": 152,
+        "endChar": 37
+      },
+      "revId": "e1444e35cc7f544b2a1389483d06ca55259785cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f973550_e55daffd",
@@ -141,6 +231,30 @@
       "writtenOn": "2023-12-11T11:12:34Z",
       "side": 1,
       "message": "Should this be inside the impl for DCEP?",
+      "range": {
+        "startLine": 235,
+        "startChar": 3,
+        "endLine": 235,
+        "endChar": 16
+      },
+      "revId": "e1444e35cc7f544b2a1389483d06ca55259785cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "936567f3_56665063",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-11T13:13:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f973550_e55daffd",
       "range": {
         "startLine": 235,
         "startChar": 3,
