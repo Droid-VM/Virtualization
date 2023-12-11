@@ -141,6 +141,12 @@ pub fn get_or_generate_instance_salt(
             let decrypted = aead.open(&mut entry, payload).map_err(Error::FailedOpen)?;
 
             let body = EntryBody::read_from(decrypted).unwrap();
+            if dice_inputs.rkp_vm_marker {
+                // For RKP VM, the DICE chain is checked by the RKP server. We don't need to
+                // compare the DICE chain information with the one from the previous boot.
+                // This allows RKP VM to be updated together with the pvmfw.
+                return Ok((false, body.salt));
+            }
             if body.code_hash != dice_inputs.code_hash {
                 Err(Error::RecordedCodeHashMismatch)
             } else if body.auth_hash != dice_inputs.auth_hash {
