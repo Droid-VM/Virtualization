@@ -66,6 +66,8 @@ pub enum Error {
     VirtIOBlkCreationFailed(virtio_drivers::Error),
     /// An error happened during the interaction with BoringSSL.
     BoringSslFailed(bssl_avf::Error),
+    /// RKP VM version mismatch.
+    RkpVmVersionMismatch,
 }
 
 impl fmt::Display for Error {
@@ -100,6 +102,13 @@ impl fmt::Display for Error {
             }
             Self::BoringSslFailed(e) => {
                 write!(f, "An error happened during the interaction with BoringSSL: {e}")
+            }
+            Self::RkpVmVersionMismatch => {
+                write!(
+                    f,
+                    "The RKP VM version in the AVB footer doesn't match the one embedded \
+                     in pvmfw at build time"
+                )
             }
         }
     }
@@ -141,6 +150,16 @@ pub fn get_or_generate_instance_salt(
             let decrypted = aead.open(&mut entry, payload).map_err(Error::FailedOpen)?;
 
             let body = EntryBody::read_from(decrypted).unwrap();
+            if dice_inputs.rkp_vm_marker {
+                // For RKP VM, we only check that the version in the AVB footer of its kernel
+                // matches the one embedded in pvmfw at build time.
+                // This prevents the pvmfw from booting a rollbacked RKP VM.
+                if service_vm_version::VERSION == dice_inputs.security_version {
+                    return Ok((false, body.salt));
+                } else {
+                    return Err(Error::RkpVmVersionMismatch);
+                }
+            }
             if body.code_hash != dice_inputs.code_hash {
                 Err(Error::RecordedCodeHashMismatch)
             } else if body.auth_hash != dice_inputs.auth_hash {
