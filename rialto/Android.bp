@@ -63,6 +63,25 @@ filegroup {
     srcs: [":avb_testkey_rsa4096"],
 }
 
+SERVICE_VM_VERSION = 1
+
+genrule {
+    name: "service_vm_version_rs",
+    out: ["lib.rs"],
+    cmd: "(" +
+        "    echo '#![no_std]';" +
+        "    echo '#![allow(missing_docs)]';" +
+        "    echo 'pub const VERSION: u64 = 1;'" +
+        ") > $(out)",
+}
+
+rust_library_rlib {
+    name: "libservice_vm_version",
+    crate_name: "service_vm_version",
+    defaults: ["vmbase_rlib_defaults"],
+    srcs: [":service_vm_version_rs"],
+}
+
 avb_add_hash_footer {
     name: "rialto_signed",
     src: ":empty_file",
@@ -70,6 +89,7 @@ avb_add_hash_footer {
     partition_name: "boot",
     private_key: ":rialto_sign_key",
     salt: rialto_salt,
+    rollback_index: SERVICE_VM_VERSION,
     props: [
         {
             name: "com.android.virt.cap",
