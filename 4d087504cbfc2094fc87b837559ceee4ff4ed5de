@@ -106,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2f36534_53ac5958",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-11T16:06:07Z",
+      "side": 1,
+      "message": "Regarding the init, actually BoringSSL team is going to internalize it in the C code anyway, and once their change lands, we don\u0027t need to call init at all. I added a TODO here to keep this on our radar.",
+      "parentUuid": "4239c1ba_d8dba1ec",
+      "range": {
+        "startLine": 195,
+        "startChar": 4,
+        "endLine": 195,
+        "endChar": 10
+      },
+      "revId": "4d087504cbfc2094fc87b837559ceee4ff4ed5de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55894b2f_5438fcdf",
@@ -167,6 +191,30 @@
       "side": 1,
       "message": "\u003e Also the bssl team does recommend to use the two `*_randnonce` APIs.\n\nI\u0027m out of my realm here but I vaguely remember discussions about avoiding `_randnonce` and generating the nonce ourselves (to pass it to the non-`randnonce` functions): could you confirm that you actually meant \"does\" (not \"does not\") in the above and/or if you think there would be value in doing so?\n\nLeaving this comment thread resolved as it\u0027s out-of-scope for this CL.",
       "parentUuid": "af44d5a4_ddcae001",
+      "range": {
+        "startLine": 110,
+        "startChar": 24,
+        "endLine": 110,
+        "endChar": 25
+      },
+      "revId": "4d087504cbfc2094fc87b837559ceee4ff4ed5de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d95e5703_5d1acd4a",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-11T16:06:07Z",
+      "side": 1,
+      "message": "Oh I meant the bssl team does not recommend to use the two `*_randnonce` APIs as they were only added for the FIPS compliance.\n\nAs currently we don\u0027t have any additional features to add here, I don\u0027t think it\u0027s worth the effort to switch to non-`*_randnonce` APIs. Since the current code has already been released, supporting a non-`*_randnonce` API would require managing two versions of decryption code simultaneously, which could complicate the code here for nothing.",
+      "parentUuid": "f9389e49_aa34cc82",
       "range": {
         "startLine": 110,
         "startChar": 24,
