@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1fe97c7_4efd09e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-11T14:15:07Z",
+      "side": 1,
+      "message": "Hi Alan, PTAL.",
+      "revId": "e7f66e5902101df922960b5c3a3aec724dddfad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b548a54_11bedf4e",
+        "filename": "rialto/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-11T14:15:07Z",
+      "side": 1,
+      "message": "I wanted to directly include `SERVICE_VM_VERSION` here, but it requires a string instead of an integer. Please let me know if you have any suggestions on how we can work around this issue.",
+      "range": {
+        "startLine": 74,
+        "startChar": 44,
+        "endLine": 74,
+        "endChar": 45
+      },
+      "revId": "e7f66e5902101df922960b5c3a3aec724dddfad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
