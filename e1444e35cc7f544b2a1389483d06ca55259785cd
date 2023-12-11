@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d9ed625c_581cc122",
+        "filename": "service_vm/kernel/extract_microdroid_kernel_hashes.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-12-11T11:51:08Z",
+      "side": 1,
+      "message": "Can you check if this doesn\u0027t change after the kernel, initrd images are re-signed? In my understanding, the digest is not the hash of the actual partition image, but the hash of the vbmeta descriptor for the partition, which changes upon resigning.\n\nThose images are resigned here [1].\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/apex/sign_virt_apex.py;drc\u003d0276f61a19731e87474399da7c6c1df83f90d89d;l\u003d486",
+      "revId": "e1444e35cc7f544b2a1389483d06ca55259785cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f0c7e831_2829a03f",
         "filename": "service_vm/requests/src/client_vm.rs",
         "patchSetId": 7
@@ -77,6 +94,30 @@
       "writtenOn": "2023-12-11T11:12:34Z",
       "side": 1,
       "message": "\u0026[Value] would seem more idiomatic.",
+      "range": {
+        "startLine": 152,
+        "startChar": 26,
+        "endLine": 152,
+        "endChar": 37
+      },
+      "revId": "e1444e35cc7f544b2a1389483d06ca55259785cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfd832a7_68564dd4",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-12-11T11:51:08Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "0294e005_0e6903c8",
       "range": {
         "startLine": 152,
         "startChar": 26,
