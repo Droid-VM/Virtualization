@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5affb461_ed42aa91",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-12T08:59:09Z",
+      "side": 1,
+      "message": "I moved this to main.rs.",
+      "parentUuid": "15d59a46_3a7c2cbb",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 5
+      },
+      "revId": "6dd1c93bb85885e7eb7e24ad6e15240013fe122d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65514d30_ea20d458",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-12-11T16:38:55Z",
       "side": 1,
       "message": "Why do we skip the other checks - are they harmful, or just redundant?\n(Either way we should say in a comment.)",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 13
+      },
+      "revId": "6dd1c93bb85885e7eb7e24ad6e15240013fe122d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a919da6e_f4fbbda3",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-12T08:59:09Z",
+      "side": 1,
+      "message": "These checks currently hinder the RKP VM from updating, so it is necessary to remove them. Otherwise, the RKP VM\u0027s DICE chain validation will primarily be validated by the RKP server. Additionally, these checks are likely to be eliminated as part of Sk\u0027s work in Microdroid (http://b/291306122#comment5)",
+      "parentUuid": "65514d30_ea20d458",
       "range": {
         "startLine": 159,
         "startChar": 0,
