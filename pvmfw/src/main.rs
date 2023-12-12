@@ -36,7 +36,7 @@ mod memory;
 use crate::bcc::Bcc;
 use crate::dice::PartialInputs;
 use crate::entry::RebootReason;
-use crate::fdt::modify_for_next_stage;
+use crate::fdt::{modify_for_next_stage, FdtConfig};
 use crate::helpers::GUEST_PAGE_SIZE;
 use crate::instance::get_or_generate_instance_salt;
 use alloc::borrow::Cow;
@@ -64,6 +64,7 @@ fn main(
     ramdisk: Option<&[u8]>,
     current_bcc_handover: &[u8],
     mut debug_policy: Option<&[u8]>,
+    secretkeeper_public_key: Option<&[u8]>,
 ) -> Result<Range<usize>, RebootReason> {
     info!("pVM firmware");
     debug!("FDT: {:?}", fdt.as_ptr());
@@ -183,17 +184,16 @@ fn main(
         error!("Failed to generated guest KASLR seed: {e}");
         RebootReason::InternalError
     })?);
-    let strict_boot = true;
-    modify_for_next_stage(
-        fdt,
-        next_bcc,
+    let config = FdtConfig {
+        bcc: next_bcc,
         new_instance,
-        strict_boot,
+        strict_boot: true,
         debug_policy,
+        secretkeeper_public_key,
         debuggable,
         kaslr_seed,
-    )
-    .map_err(|e| {
+    };
+    modify_for_next_stage(fdt, config).map_err(|e| {
         error!("Failed to configure device tree: {e}");
         RebootReason::InternalError
     })?;
