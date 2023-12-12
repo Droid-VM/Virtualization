@@ -93,6 +93,30 @@
       },
       "revId": "6dd1c93bb85885e7eb7e24ad6e15240013fe122d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa428f46_9743ae6e",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-12T10:32:37Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s true that the DICE chain is checked by the RKP server, other than that it\u0027s well-formed and has the RKP VM markers in the right place. It doesn\u0027t have the information to know if we\u0027re running the right RKP VM, it has to assume that pvmfw checks that.\nIn any case the issue is what RKP VMs we allow to run, to limit who has access to the CDIs.\nSo I think the argument is that the VB meta must be signed by the key we trust, must have the RKP VM flag in it, and must have the expected version -\u003e this must be the correct RKP VM, and we don\u0027t need the normal instance image checks.\n\n(Sk will remove some of these checks, but only on systems where Sk is present.)",
+      "parentUuid": "a919da6e_f4fbbda3",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 13
+      },
+      "revId": "6dd1c93bb85885e7eb7e24ad6e15240013fe122d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
