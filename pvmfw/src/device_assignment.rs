@@ -28,7 +28,7 @@ use core::ffi::CStr;
 use core::iter::Iterator;
 use core::mem;
 use hyp::DeviceAssigningHypervisor;
-use libfdt::{Fdt, FdtError, FdtNode, Phandle, Reg};
+use libfdt::{Fdt, FdtError, FdtNode, FdtNodeMut, Phandle, Reg};
 use log::error;
 
 // TODO(b/308694211): Use cstr! from vmbase instead.
@@ -208,6 +208,72 @@ impl<'a> DtPathTokens<'a> {
     }
 }
 
+#[derive(Debug, Eq, PartialEq)]
+enum DeviceTreeChildrenMask {
+    Partial(Vec<DeviceTreeMask>),
+    All,
+}
+
+#[derive(Eq, PartialEq)]
+struct DeviceTreeMask {
+    name_bytes: Vec<u8>,
+    children: DeviceTreeChildrenMask,
+}
+
+impl fmt::Debug for DeviceTreeMask {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let name_bytes = [self.name_bytes.as_slice(), b"\0"].concat();
+
+        f.debug_struct("DeviceTreeMask")
+            .field("name", &CStr::from_bytes_with_nul(&name_bytes).unwrap())
+            .field("children", &self.children)
+            .finish()
+    }
+}
+
+impl DeviceTreeMask {
+    fn new() -> Self {
+        Self { name_bytes: b"/".to_vec(), children: DeviceTreeChildrenMask::Partial(Vec::new()) }
+    }
+
+    fn mask_internal(&mut self, path: &DtPathTokens, leaf_mask: DeviceTreeChildrenMask) -> bool {
+        let mut iter = self;
+        let mut newly_masked = false;
+        'next_token: for path_token in &path.tokens {
+            let DeviceTreeChildrenMask::Partial(ref mut children) = &mut iter.children else {
+                return false;
+            };
+
+            // Note: Can't use iterator for 'get or insert'. (a.k.a. polonius Rust)
+            #[allow(clippy::needless_range_loop)]
+            for i in 0..children.len() {
+                if children[i].name_bytes.as_slice() == *path_token {
+                    iter = &mut children[i];
+                    newly_masked = false;
+                    continue 'next_token;
+                }
+            }
+            let child = Self {
+                name_bytes: path_token.to_vec(),
+                children: DeviceTreeChildrenMask::Partial(Vec::new()),
+            };
+            children.push(child);
+            newly_masked = true;
+            iter = children.last_mut().unwrap()
+        }
+        iter.children = leaf_mask;
+        newly_masked
+    }
+
+    fn mask(&mut self, path: &DtPathTokens) -> bool {
+        self.mask_internal(path, DeviceTreeChildrenMask::Partial(Vec::new()))
+    }
+
+    fn mask_all(&mut self, path: &DtPathTokens) {
+        self.mask_internal(path, DeviceTreeChildrenMask::All);
+    }
+}
+
 /// Represents VM DTBO
 #[repr(transparent)]
 pub struct VmDtbo(Fdt);
@@ -345,6 +411,112 @@ impl VmDtbo {
         }
         Ok(Some(node))
     }
+
+    fn collect_overlayable_nodes_with_phandle(&self) -> Result<BTreeMap<Phandle, DtPathTokens>> {
+        let mut paths = BTreeMap::new();
+        let mut path: DtPathTokens = Default::default();
+        let root = self.as_ref().root();
+        for (node, depth) in root.descendants() {
+            path.tokens.truncate(depth - 1);
+            path.tokens.push(node.name()?.to_bytes());
+            if path.tokens.len() != depth {
+                return Err(DeviceAssignmentError::Internal);
+            }
+            if !path.is_overlayable_node() {
+                continue;
+            }
+            if let Some(phandle) = node.get_phandle()? {
+                paths.insert(phandle, path.clone());
+            }
+        }
+        Ok(paths)
+    }
+
+    fn collect_phandle_references_from_overlayable_nodes(
+        &self,
+    ) -> Result<BTreeMap<DtPathTokens, Vec<Phandle>>> {
+        const CELL_SIZE: usize = 4; // size of u32
+
+        let vm_dtbo = self.as_ref();
+
+        let mut phandle_map = BTreeMap::new();
+        let Some(local_fixups) = vm_dtbo.node(cstr!("/__local_fixups__"))? else {
+            return Ok(phandle_map);
+        };
+
+        let mut path: DtPathTokens = Default::default();
+        for (fixup_node, depth) in local_fixups.descendants() {
+            let node_name = fixup_node.name()?;
+            path.tokens.truncate(depth - 1);
+            path.tokens.push(node_name.to_bytes());
+            if path.tokens.len() != depth {
+                return Err(DeviceAssignmentError::Internal);
+            }
+            if !path.is_overlayable_node() {
+                continue;
+            }
+
+            let mut phandles = vec![];
+            for fixup_prop in fixup_node.properties()? {
+                let fixup_prop_values = fixup_prop.value()?;
+                if fixup_prop_values.is_empty() || fixup_prop_values.len() % CELL_SIZE != 0 {
+                    return Err(DeviceAssignmentError::InvalidDtbo);
+                }
+                let target_node = self.node(&path)?.ok_or(DeviceAssignmentError::InvalidDtbo)?;
+                let node_cells: Vec<_> = target_node
+                    .getprop_cells(fixup_prop.name()?)?
+                    .ok_or(DeviceAssignmentError::InvalidDtbo)?
+                    .collect();
+
+                for fixup_prop_cell in fixup_prop_values.chunks(CELL_SIZE) {
+                    let phandle_offset: usize = u32::from_be_bytes(
+                        fixup_prop_cell.try_into().or(Err(DeviceAssignmentError::InvalidDtbo))?,
+                    )
+                    .try_into()
+                    .or(Err(DeviceAssignmentError::InvalidDtbo))?;
+                    if phandle_offset % CELL_SIZE != 0
+                        || phandle_offset > node_cells.len() * CELL_SIZE
+                    {
+                        return Err(DeviceAssignmentError::InvalidDtbo);
+                    }
+                    let phandle = Phandle::try_from(node_cells[phandle_offset / CELL_SIZE])?;
+                    phandles.push(phandle);
+                }
+            }
+            if !phandles.is_empty() {
+                phandle_map.insert(path.clone(), phandles);
+            }
+        }
+
+        Ok(phandle_map)
+    }
+
+    fn build_mask(&self, assigned_devices: Vec<DtPathTokens>) -> Result<DeviceTreeMask> {
+        if assigned_devices.is_empty() {
+            return Err(DeviceAssignmentError::Internal);
+        }
+
+        let dependencies = self.collect_phandle_references_from_overlayable_nodes()?;
+        let paths = self.collect_overlayable_nodes_with_phandle()?;
+
+        let mut mask = DeviceTreeMask::new();
+        let mut stack = assigned_devices;
+        while let Some(path) = stack.pop() {
+            if !mask.mask(&path) {
+                // Already masked
+                continue;
+            }
+            let Some(dst_phandles) = dependencies.get(&path) else {
+                continue;
+            };
+            for dst_phandle in dst_phandles {
+                let dst_path = paths.get(dst_phandle).ok_or(DeviceAssignmentError::Internal)?;
+                stack.push(dst_path.clone());
+            }
+        }
+
+        Ok(mask)
+    }
 }
 
 fn filter_dangling_symbols(fdt: &mut Fdt) -> Result<()> {
@@ -377,6 +549,37 @@ impl AsMut<Fdt> for VmDtbo {
     fn as_mut(&mut self) -> &mut Fdt {
         &mut self.0
     }
+}
+
+fn filter_with_mask(anchor: FdtNodeMut, mask: &DeviceTreeMask) -> Result<()> {
+    let mut stack = vec![mask];
+    let mut iter = anchor.next_node(0)?;
+    while let Some((node, depth)) = iter {
+        stack.truncate(depth);
+        let parent_mask = stack.last().unwrap();
+        let DeviceTreeChildrenMask::Partial(parent_mask_children) = &parent_mask.children else {
+            // Shouldn't happen. We only step-in if parent has DeviceTreeChildrenMask::Partial.
+            return Err(DeviceAssignmentError::Internal);
+        };
+
+        let name = node.as_node().name()?.to_bytes();
+        let mask = parent_mask_children.iter().find(|child_mask| child_mask.name_bytes == name);
+        if let Some(masked) = mask {
+            if let DeviceTreeChildrenMask::Partial(_) = &masked.children {
+                // This node is partially masked. Stepping-in.
+                stack.push(masked);
+                iter = node.next_node(depth)?;
+            } else {
+                // This node is fully masked. Stepping-out.
+                iter = node.next_node_skip_subnodes(depth)?;
+            }
+        } else {
+            // This node isn't masked.
+            iter = node.delete_and_next_node(depth)?;
+        }
+    }
+
+    Ok(())
 }
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Ord, PartialOrd)]
@@ -666,11 +869,11 @@ impl AssignedDeviceInfo {
     }
 }
 
-#[derive(Debug, Default, Eq, PartialEq)]
+#[derive(Debug, Eq, PartialEq)]
 pub struct DeviceAssignmentInfo {
     pviommus: BTreeSet<PvIommu>,
     assigned_devices: Vec<AssignedDeviceInfo>,
-    filtered_dtbo_paths: Vec<CString>,
+    vm_dtbo_mask: DeviceTreeMask,
 }
 
 impl DeviceAssignmentInfo {
@@ -728,7 +931,7 @@ impl DeviceAssignmentInfo {
         let physical_devices = vm_dtbo.parse_physical_devices()?;
 
         let mut assigned_devices = vec![];
-        let mut filtered_dtbo_paths = vec![];
+        let mut assigned_device_paths = vec![];
         for symbol_prop in symbols_node.properties()? {
             let symbol_prop_value = symbol_prop.value()?;
             let dtbo_node_path = CStr::from_bytes_with_nul(symbol_prop_value)
@@ -747,8 +950,7 @@ impl DeviceAssignmentInfo {
             )?;
             if let Some(assigned_device) = assigned_device {
                 assigned_devices.push(assigned_device);
-            } else {
-                filtered_dtbo_paths.push(dtbo_node_path.to_cstring());
+                assigned_device_paths.push(dtbo_node_path);
             }
         }
         if assigned_devices.is_empty() {
@@ -757,31 +959,29 @@ impl DeviceAssignmentInfo {
 
         Self::validate_pviommu_topology(&assigned_devices)?;
 
-        // Clean up any nodes that wouldn't be overlaid but may contain reference to filtered nodes.
-        // Otherwise, `fdt_apply_overlay()` would fail because of missing phandle reference.
-        // TODO(b/277993056): Also filter other unused nodes/props in __local_fixups__
-        filtered_dtbo_paths.push(CString::new("/__local_fixups__/host").unwrap());
+        let mut vm_dtbo_mask = vm_dtbo.build_mask(assigned_device_paths)?;
+        vm_dtbo_mask.mask_all(&DtPathTokens::new(cstr!("/__local_fixups__"))?);
+        vm_dtbo_mask.mask_all(&DtPathTokens::new(cstr!("/__symbols__"))?);
 
         // Note: Any node without __overlay__ will be ignored by fdt_apply_overlay,
         // so doesn't need to be filtered.
 
-        Ok(Some(Self { pviommus: unique_pviommus, assigned_devices, filtered_dtbo_paths }))
+        Ok(Some(Self { pviommus: unique_pviommus, assigned_devices, vm_dtbo_mask }))
     }
 
     /// Filters VM DTBO to only contain necessary information for booting pVM
-    /// In detail, this will remove followings by setting nop node / nop property.
-    ///   - Removes unassigned devices
-    // TODO(b/277993056): remove unused dependencies in VM DTBO.
-    // TODO(b/277993056): remove supernodes' properties.
-    // TODO(b/277993056): remove unused alises.
     pub fn filter(&self, vm_dtbo: &mut VmDtbo) -> Result<()> {
         let vm_dtbo = vm_dtbo.as_mut();
 
-        // Filters unused node in assigned devices
-        for filtered_dtbo_path in &self.filtered_dtbo_paths {
-            let node = vm_dtbo.node_mut(filtered_dtbo_path).unwrap().unwrap();
-            node.nop()?;
+        // Filter unused references in /__local_fixups__
+        if let Some(local_fixups) = vm_dtbo.node_mut(cstr!("/__local_fixups__"))? {
+            filter_with_mask(local_fixups, &self.vm_dtbo_mask)?;
         }
+
+        // Filter unused nodes in rest of tree
+        // /__fixups__ node will be implicitly removed to prevent modifying platform DT
+        let root = vm_dtbo.root_mut();
+        filter_with_mask(root, &self.vm_dtbo_mask)?;
 
         filter_dangling_symbols(vm_dtbo)
     }
@@ -825,13 +1025,17 @@ impl DeviceAssignmentInfo {
 mod tests {
     use super::*;
     use alloc::collections::{BTreeMap, BTreeSet};
+    use dts::Dts;
     use std::fs;
+    use std::path::Path;
 
     const VM_DTBO_FILE_PATH: &str = "test_pvmfw_devices_vm_dtbo.dtbo";
     const VM_DTBO_WITHOUT_SYMBOLS_FILE_PATH: &str =
         "test_pvmfw_devices_vm_dtbo_without_symbols.dtbo";
     const VM_DTBO_WITH_DUPLICATED_IOMMUS_FILE_PATH: &str =
         "test_pvmfw_devices_vm_dtbo_with_duplicated_iommus.dtbo";
+    const VM_DTBO_WITH_DEPENDENCIES_FILE_PATH: &str =
+        "test_pvmfw_devices_vm_dtbo_with_dependencies.dtbo";
     const FDT_WITHOUT_IOMMUS_FILE_PATH: &str = "test_pvmfw_devices_without_iommus.dtb";
     const FDT_WITHOUT_DEVICE_FILE_PATH: &str = "test_pvmfw_devices_without_device.dtb";
     const FDT_FILE_PATH: &str = "test_pvmfw_devices_with_rng.dtb";
@@ -843,6 +1047,16 @@ mod tests {
         "test_pvmfw_devices_with_duplicated_pviommus.dtb";
     const FDT_WITH_MULTIPLE_REG_IOMMU_FILE_PATH: &str =
         "test_pvmfw_devices_with_multiple_reg_iommus.dtb";
+    const FDT_WITH_DEPENDENCY_FILE_PATH: &str = "test_pvmfw_devices_with_dependency.dtb";
+    const FDT_WITH_MULTIPLE_DEPENDENCIES_FILE_PATH: &str =
+        "test_pvmfw_devices_with_multiple_dependencies.dtb";
+    const FDT_WITH_DEPENDENCY_LOOP_FILE_PATH: &str = "test_pvmfw_devices_with_dependency_loop.dtb";
+
+    const EXPECTED_FDT_WITH_DEPENDENCY_FILE_PATH: &str = "expected_dt_with_dependency.dtb";
+    const EXPECTED_FDT_WITH_MULTIPLE_DEPENDENCIES_FILE_PATH: &str =
+        "expected_dt_with_multiple_dependencies.dtb";
+    const EXPECTED_FDT_WITH_DEPENDENCY_LOOP_FILE_PATH: &str =
+        "expected_dt_with_dependency_loop.dtb";
 
     #[derive(Debug, Default)]
     struct MockHypervisor {
@@ -1382,5 +1596,98 @@ mod tests {
         let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor);
 
         assert_eq!(device_info, Err(DeviceAssignmentError::InvalidIommus));
+    }
+
+    #[test]
+    fn device_info_dependency() {
+        let mut fdt_data = fs::read(FDT_WITH_DEPENDENCY_FILE_PATH).unwrap();
+        let mut vm_dtbo_data = fs::read(VM_DTBO_WITH_DEPENDENCIES_FILE_PATH).unwrap();
+        let fdt = Fdt::from_mut_slice(&mut fdt_data).unwrap();
+        let vm_dtbo = VmDtbo::from_mut_slice(&mut vm_dtbo_data).unwrap();
+        let mut platform_dt_data = pvmfw_fdt_template::RAW.to_vec();
+        platform_dt_data.resize(pvmfw_fdt_template::RAW.len() * 2, 0);
+        let platform_dt = Fdt::from_mut_slice(&mut platform_dt_data).unwrap();
+        platform_dt.unpack().unwrap();
+
+        let hypervisor = MockHypervisor {
+            mmio_tokens: [((0xFF000, 0x1), 0xF000)].into(),
+            iommu_tokens: Default::default(),
+        };
+
+        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor).unwrap().unwrap();
+        device_info.filter(vm_dtbo).unwrap();
+
+        // SAFETY: Damaged VM DTBO wouldn't be used after this unsafe block.
+        unsafe {
+            platform_dt.apply_overlay(vm_dtbo.as_mut()).unwrap();
+        }
+        device_info.patch(platform_dt).unwrap();
+
+        let expected = Dts::from_dtb(Path::new(EXPECTED_FDT_WITH_DEPENDENCY_FILE_PATH)).unwrap();
+        let platform_dt = Dts::from_fdt(platform_dt).unwrap();
+
+        assert_eq!(expected, platform_dt);
+    }
+
+    #[test]
+    fn device_info_multiple_dependencies() {
+        let mut fdt_data = fs::read(FDT_WITH_MULTIPLE_DEPENDENCIES_FILE_PATH).unwrap();
+        let mut vm_dtbo_data = fs::read(VM_DTBO_WITH_DEPENDENCIES_FILE_PATH).unwrap();
+        let fdt = Fdt::from_mut_slice(&mut fdt_data).unwrap();
+        let vm_dtbo = VmDtbo::from_mut_slice(&mut vm_dtbo_data).unwrap();
+        let mut platform_dt_data = pvmfw_fdt_template::RAW.to_vec();
+        platform_dt_data.resize(pvmfw_fdt_template::RAW.len() * 2, 0);
+        let platform_dt = Fdt::from_mut_slice(&mut platform_dt_data).unwrap();
+        platform_dt.unpack().unwrap();
+
+        let hypervisor = MockHypervisor {
+            mmio_tokens: [((0xFF000, 0x1), 0xF000), ((0xFF100, 0x1), 0xF100)].into(),
+            iommu_tokens: Default::default(),
+        };
+        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor).unwrap().unwrap();
+        device_info.filter(vm_dtbo).unwrap();
+
+        // SAFETY: Damaged VM DTBO wouldn't be used after this unsafe block.
+        unsafe {
+            platform_dt.apply_overlay(vm_dtbo.as_mut()).unwrap();
+        }
+        device_info.patch(platform_dt).unwrap();
+
+        let expected =
+            Dts::from_dtb(Path::new(EXPECTED_FDT_WITH_MULTIPLE_DEPENDENCIES_FILE_PATH)).unwrap();
+        let platform_dt = Dts::from_fdt(platform_dt).unwrap();
+
+        assert_eq!(expected, platform_dt);
+    }
+
+    #[test]
+    fn device_info_dependency_loop() {
+        let mut fdt_data = fs::read(FDT_WITH_DEPENDENCY_LOOP_FILE_PATH).unwrap();
+        let mut vm_dtbo_data = fs::read(VM_DTBO_WITH_DEPENDENCIES_FILE_PATH).unwrap();
+        let fdt = Fdt::from_mut_slice(&mut fdt_data).unwrap();
+        let vm_dtbo = VmDtbo::from_mut_slice(&mut vm_dtbo_data).unwrap();
+        let mut platform_dt_data = pvmfw_fdt_template::RAW.to_vec();
+        platform_dt_data.resize(pvmfw_fdt_template::RAW.len() * 2, 0);
+        let platform_dt = Fdt::from_mut_slice(&mut platform_dt_data).unwrap();
+        platform_dt.unpack().unwrap();
+
+        let hypervisor = MockHypervisor {
+            mmio_tokens: [((0xFF200, 0x1), 0xF200)].into(),
+            iommu_tokens: Default::default(),
+        };
+        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor).unwrap().unwrap();
+        device_info.filter(vm_dtbo).unwrap();
+
+        // SAFETY: Damaged VM DTBO wouldn't be used after this unsafe block.
+        unsafe {
+            platform_dt.apply_overlay(vm_dtbo.as_mut()).unwrap();
+        }
+        device_info.patch(platform_dt).unwrap();
+
+        let expected =
+            Dts::from_dtb(Path::new(EXPECTED_FDT_WITH_DEPENDENCY_LOOP_FILE_PATH)).unwrap();
+        let platform_dt = Dts::from_fdt(platform_dt).unwrap();
+
+        assert_eq!(expected, platform_dt);
     }
 }
