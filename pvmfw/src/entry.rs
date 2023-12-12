@@ -224,6 +224,9 @@ fn main_wrapper(
 
     let slices = MemorySlices::new(fdt, payload, payload_size, config_entries.vm_dtbo)?;
 
+    let secretkeeper_public_key =
+        if cfg!(llpvm_changes) { config_entries.secretkeeper_public_key } else { None };
+
     // This wrapper allows main() to be blissfully ignorant of platform details.
     let next_bcc = crate::main(
         slices.fdt,
@@ -231,6 +234,7 @@ fn main_wrapper(
         slices.ramdisk,
         config_entries.bcc,
         config_entries.debug_policy,
+        secretkeeper_public_key,
     )?;
 
     // Writable-dirty regions will be flushed when MemoryTracker is dropped.
