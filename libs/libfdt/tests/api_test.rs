@@ -377,7 +377,7 @@ fn node_mut_delete_and_next_subnode() {
     let mut data = fs::read(TEST_TREE_PHANDLE_PATH).unwrap();
     let fdt = Fdt::from_mut_slice(&mut data).unwrap();
 
-    let mut root = fdt.root_mut().unwrap();
+    let root = fdt.root_mut().unwrap();
     let mut subnode_iter = root.first_subnode().unwrap();
 
     while let Some(subnode) = subnode_iter {
@@ -399,3 +399,93 @@ fn node_mut_delete_and_next_subnode() {
 
     assert_eq!(expected_names, subnode_names);
 }
+
+#[test]
+fn node_next_and_delete_descendant() {
+    let mut data = fs::read(TEST_TREE_PHANDLE_PATH).unwrap();
+    let fdt = Fdt::from_mut_slice(&mut data).unwrap();
+
+    let mut iter = Some(fdt.root().unwrap());
+    let mut depth = 0;
+    while let Some(node) = iter {
+        if node.name() == Ok(cstr!("node_z")) {
+            iter = node.delete_and_next_descendant(depth).unwrap();
+        } else {
+            iter = node.next_descendant(depth).unwrap();
+        }
+    }
+
+    let root = fdt.root().unwrap();
+    let expected_names = vec![
+        Ok(cstr!("node_a")),
+        Ok(cstr!("node_b")),
+        Ok(cstr!("node_c")),
+        Ok(cstr!("__symbols__")),
+    ];
+    let subnode_names: Vec<_> = root.subnodes().unwrap().map(|node| node.name()).collect();
+
+    assert_eq!(expected_names, subnode_names);
+}
+
+/*
+#[test]
+fn fdt_root_borrow_checker() {
+    let mut data = fs::read(TEST_TREE_PHANDLE_PATH).unwrap();
+    let fdt = Fdt::from_mut_slice(&mut data).unwrap();
+
+    let name = { fdt.root().unwrap().name() };
+    assert_eq!(name, Ok(cstr!("")));
+
+    let name = {
+        let root = fdt.root_mut().unwrap();
+        root.as_node().name()
+    };
+
+    assert_eq!(name, Ok(cstr!("")));
+}
+
+*/
+
+/*
+#[test]
+fn node_mut_next_subnode_lifetime() {
+    let mut data = fs::read(TEST_TREE_PHANDLE_PATH).unwrap();
+    let fdt = Fdt::from_mut_slice(&mut data).unwrap();
+
+    let mut root = fdt.root_mut().unwrap();
+    let (first, next) = {
+        let mut first = root.first_subnode().unwrap().unwrap();
+        let next = first.next_subnode().unwrap().unwrap();
+
+        (first, next)
+    };
+
+    assert_eq!(Ok(cstr!("node_a")), first.as_node().name());
+    assert_eq!(Ok(cstr!("node_b")), next.as_node().name());
+}
+
+#[test]
+fn subnodes() {
+    let mut data = fs::read(TEST_TREE_PHANDLE_PATH).unwrap();
+    let fdt = Fdt::from_mut_slice(&mut data).unwrap();
+
+    let root = fdt.root_mut().unwrap();
+    let mut stack = vec![root];
+    let mut visited: Vec<CString> = Vec::new();
+    while let Some(mut node) = stack.pop() {
+        let mut iter = node.first_subnode().unwrap();
+        while let Some(mut subnode) = iter {
+            visited.push(subnode.as_node().name().unwrap().into());
+            if subnode.as_node().name() == Ok(cstr!("node_z")) {
+                iter = subnode.delete_and_next_subnode().unwrap();
+            } else {
+                stack.push(subnode);
+                iter = subnode.next_subnode().unwrap();
+            }
+        }
+    }
+
+    println!("{visited:?}");
+    panic!();
+}
+*/
