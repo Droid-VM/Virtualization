@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaa46530_cc0d1881",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-12-12T10:39:41Z",
+      "side": 1,
+      "message": "Wouldn\u0027t this be the wrong type of key (ECDH not ECDSA)?",
+      "range": {
+        "startLine": 211,
+        "startChar": 45,
+        "endLine": 211,
+        "endChar": 78
+      },
+      "revId": "42a756a188948d6f28d87e3405c9d18b7e6e6de2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed6ed70e_139a377a",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-12-12T10:39:41Z",
+      "side": 1,
+      "message": "super-nit: printing the inner error won\u0027t add much here (and below), as `TryFromSliceError` has no content.",
+      "range": {
+        "startLine": 235,
+        "startChar": 59,
+        "endLine": 235,
+        "endChar": 69
+      },
+      "revId": "42a756a188948d6f28d87e3405c9d18b7e6e6de2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
