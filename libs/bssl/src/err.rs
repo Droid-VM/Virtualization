@@ -15,26 +15,72 @@
 //! Wrappers of the error handling functions in BoringSSL err.h.
 
 use bssl_avf_error::{CipherError, EcError, EcdsaError, GlobalError, ReasonCode};
-use bssl_ffi::{self, ERR_get_error, ERR_GET_LIB_RUST, ERR_GET_REASON_RUST};
+use bssl_ffi::{
+    self, ERR_get_error_line, ERR_lib_error_string, ERR_reason_error_string, ERR_GET_LIB_RUST,
+    ERR_GET_REASON_RUST,
+};
+use core::ffi::{c_char, CStr};
+use core::ptr;
+use log::error;
 
 const NO_ERROR_REASON_CODE: i32 = 0;
 
 /// Returns the reason code for the least recent error and removes that
 /// error from the error queue.
 pub(crate) fn get_error_reason_code() -> ReasonCode {
-    let packed_error = get_packed_error();
+    let mut file = ptr::null();
+    let mut line = 0;
+    // SAFETY: This function only reads the error queue and writes to the given
+    // pointers. It doesn't retain any references to the pointers.
+    let packed_error = unsafe { ERR_get_error_line(&mut file, &mut line) };
+    // SAFETY: Any non-null result is expected to point to a global const C string.
+    let file = unsafe { as_static_cstr(file) };
+    error!(
+        "BoringSSL error: {}:{}: lib = {}, reason = {}",
+        file.map(|s| s.to_string_lossy()).unwrap_or_else(|| "<unknown file>".into()),
+        line,
+        lib_error_string(packed_error)
+            .map(|s| s.to_string_lossy())
+            .unwrap_or_else(|| "<unknown library>".into()),
+        reason_error_string(packed_error)
+            .map(|s| s.to_string_lossy())
+            .unwrap_or_else(|| "<unknown reason>".into()),
+    );
+
     let reason = get_reason(packed_error);
     let lib = get_lib(packed_error);
     map_to_reason_code(reason, lib)
 }
 
-/// Returns the packed error code for the least recent error and removes that
-/// error from the error queue.
+fn lib_error_string(packed_error: u32) -> Option<&'static CStr> {
+    // SAFETY: This function only reads the given error code and returns a
+    // pointer to a static string.
+    let p = unsafe { ERR_lib_error_string(packed_error) };
+    // SAFETY: Any non-null result is expected to point to a global const C string.
+    unsafe { as_static_cstr(p) }
+}
+
+fn reason_error_string(packed_error: u32) -> Option<&'static CStr> {
+    // SAFETY: This function only reads the given error code and returns a
+    // pointer to a static string.
+    let p = unsafe { ERR_reason_error_string(packed_error) };
+    // SAFETY: Any non-null result is expected to point to a global const C string.
+    unsafe { as_static_cstr(p) }
+}
+
+/// Casts a C string pointer to a static non-mutable reference.
 ///
-/// Returns 0 if there are no errors in the queue.
-fn get_packed_error() -> u32 {
-    // SAFETY: This function only reads the error queue.
-    unsafe { ERR_get_error() }
+/// # Safety
+///
+/// The caller needs to ensure that the pointer is null or points to a valid C string that is
+/// valid for the entire lifetime of the program.
+unsafe fn as_static_cstr(p: *const c_char) -> Option<&'static CStr> {
+    if p.is_null() {
+        None
+    } else {
+        // Safety: Safe given the requirements of this function.
+        Some(unsafe { CStr::from_ptr(p) })
+    }
 }
 
 fn get_reason(packed_error: u32) -> i32 {
