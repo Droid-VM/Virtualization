@@ -63,6 +63,30 @@
       },
       "revId": "e7f66e5902101df922960b5c3a3aec724dddfad6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b39bd37e_23c5ca91",
+        "filename": "rialto/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-12-12T23:59:42Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s feasible, unless you make this genrule as a new module type and accept SERVICE_VM_VERSION as a property. Then inside of the module, you could convert the integer into string, but that sounds like too much for this use case.",
+      "parentUuid": "cb8e5f44_404c1054",
+      "range": {
+        "startLine": 74,
+        "startChar": 44,
+        "endLine": 74,
+        "endChar": 45
+      },
+      "revId": "e7f66e5902101df922960b5c3a3aec724dddfad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
