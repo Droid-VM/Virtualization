@@ -74,15 +74,18 @@ rust_test {
     srcs: ["src/device_assignment.rs"],
     defaults: ["libpvmfw.test.defaults"],
     rustlibs: [
+        "libdts",
         "libhyp",
         "liblibfdt",
         "liblog_rust",
         "libpvmfw_fdt_template",
     ],
     data: [
+        ":expected_dt_with_dependency",
         ":test_pvmfw_devices_vm_dtbo",
         ":test_pvmfw_devices_vm_dtbo_without_symbols",
         ":test_pvmfw_devices_vm_dtbo_with_duplicated_iommus",
+        ":test_pvmfw_devices_vm_dtbo_with_dependencies",
         ":test_pvmfw_devices_with_rng",
         ":test_pvmfw_devices_with_multiple_devices_iommus",
         ":test_pvmfw_devices_with_iommu_sharing",
@@ -91,7 +94,14 @@ rust_test {
         ":test_pvmfw_devices_without_iommus",
         ":test_pvmfw_devices_with_duplicated_pviommus",
         ":test_pvmfw_devices_with_multiple_reg_iommus",
+        ":test_pvmfw_devices_with_dependency",
+        ":test_pvmfw_devices_with_dependency_loop",
+        ":test_pvmfw_devices_with_multiple_dependencies",
+        ":expected_dt_with_multiple_dependencies",
+        ":expected_dt_with_dependency_loop",
     ],
+    data_bins: ["dtc_static"],
+    compile_multilib: "first",
     // To use libpvmfw_fdt_template for testing
     enabled: false,
     target: {
@@ -133,6 +143,13 @@ genrule {
     defaults: ["dts_to_dtb"],
     srcs: ["testdata/test_pvmfw_devices_vm_dtbo_with_duplicated_iommus.dts"],
     out: ["test_pvmfw_devices_vm_dtbo_with_duplicated_iommus.dtbo"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_vm_dtbo_with_dependencies",
+    defaults: ["dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_vm_dtbo_with_dependencies.dts"],
+    out: ["test_pvmfw_devices_vm_dtbo_with_dependencies.dtbo"],
 }
 
 genrule_defaults {
@@ -195,6 +212,55 @@ genrule {
     defaults: ["test_device_assignment_dts_to_dtb"],
     srcs: ["testdata/test_pvmfw_devices_with_multiple_reg_iommus.dts"],
     out: ["test_pvmfw_devices_with_multiple_reg_iommus.dtb"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_with_dependency",
+    defaults: ["test_device_assignment_dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_with_dependency.dts"],
+    out: ["test_pvmfw_devices_with_dependency.dtb"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_with_multiple_dependencies",
+    defaults: ["test_device_assignment_dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_with_multiple_dependencies.dts"],
+    out: ["test_pvmfw_devices_with_multiple_dependencies.dtb"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_with_dependency_loop",
+    defaults: ["test_device_assignment_dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_with_dependency_loop.dts"],
+    out: ["test_pvmfw_devices_with_dependency_loop.dtb"],
+}
+
+genrule_defaults {
+    name: "test_device_assignment_expectd_dts_to_dtb",
+    srcs: [":pvmfw_platform.dts.preprocessed.renamed"],
+    tools: ["dtc"],
+    cmd: "FILES=($(in)) && $(location dtc) -@ -i $$(dirname $${FILES[0]}) -I dts -O dtb $${FILES[-1]} -o $(out)",
+}
+
+genrule {
+    name: "expected_dt_with_dependency",
+    defaults: ["test_device_assignment_expectd_dts_to_dtb"],
+    srcs: ["testdata/expected_dt_with_dependency.dts"],
+    out: ["expected_dt_with_dependency.dtb"],
+}
+
+genrule {
+    name: "expected_dt_with_multiple_dependencies",
+    defaults: ["test_device_assignment_expectd_dts_to_dtb"],
+    srcs: ["testdata/expected_dt_with_multiple_dependencies.dts"],
+    out: ["expected_dt_with_multiple_dependencies.dtb"],
+}
+
+genrule {
+    name: "expected_dt_with_dependency_loop",
+    defaults: ["test_device_assignment_expectd_dts_to_dtb"],
+    srcs: ["testdata/expected_dt_with_dependency_loop.dts"],
+    out: ["expected_dt_with_dependency_loop.dtb"],
 }
 
 cc_binary {
@@ -304,6 +370,16 @@ cc_object {
         "-P",
         "-xassembler-with-cpp", // allow C preprocessor directives
     ],
+    visibility: ["//visibility:private"],
+}
+
+// We need to rename cc_object result into *.dts because genrule doesn't accept
+// cc_object as an input
+cc_genrule {
+    name: "pvmfw_platform.dts.preprocessed.renamed",
+    srcs: [":pvmfw_platform.dts.preprocessed"],
+    out: ["pvmfw_platform.dts.preprocessed.renamed.dts"],
+    cmd: "cp $(in) $(out)",
     visibility: ["//visibility:private"],
 }
 
