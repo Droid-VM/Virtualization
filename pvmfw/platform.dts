@@ -706,6 +706,13 @@
 		timeout-sec = <8>;
 	};
 
+	cpufreq {
+		compatible = "virtual,android-v-only-cpufreq";
+		reg = <0x0 0x1040000 PLACEHOLDER2>;
+	};
+
+	// Keep pvIOMMUs at the last for making test happy.
+	// By doing so, phandles of pviommus can be
 	pviommu_0: pviommu0 {
 		compatible = "pkvm,pviommu";
 		id = <PLACEHOLDER>;
@@ -766,8 +773,5 @@
 		#iommu-cells = <1>;
 	};
 
-	cpufreq {
-		compatible = "virtual,android-v-only-cpufreq";
-		reg = <0x0 0x1040000 PLACEHOLDER2>;
-	};
+	// Do not add new node below
 };
