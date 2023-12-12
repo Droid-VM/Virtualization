@@ -83,6 +83,7 @@ rust_test {
         ":test_pvmfw_devices_vm_dtbo",
         ":test_pvmfw_devices_vm_dtbo_without_symbols",
         ":test_pvmfw_devices_vm_dtbo_with_duplicated_iommus",
+        ":test_pvmfw_devices_vm_dtbo_with_dependencies",
         ":test_pvmfw_devices_with_rng",
         ":test_pvmfw_devices_with_multiple_devices_iommus",
         ":test_pvmfw_devices_with_iommu_sharing",
@@ -91,6 +92,9 @@ rust_test {
         ":test_pvmfw_devices_without_iommus",
         ":test_pvmfw_devices_with_duplicated_pviommus",
         ":test_pvmfw_devices_with_multiple_reg_iommus",
+        ":test_pvmfw_devices_with_dependency",
+        ":test_pvmfw_devices_with_dependency_loop",
+        ":test_pvmfw_devices_with_multiple_dependencies",
     ],
     // To use libpvmfw_fdt_template for testing
     enabled: false,
@@ -132,6 +136,13 @@ genrule {
     defaults: ["dts_to_dtb"],
     srcs: ["testdata/test_pvmfw_devices_vm_dtbo_with_duplicated_iommus.dts"],
     out: ["test_pvmfw_devices_vm_dtbo_with_duplicated_iommus.dtbo"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_vm_dtbo_with_dependencies",
+    defaults: ["dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_vm_dtbo_with_dependencies.dts"],
+    out: ["test_pvmfw_devices_vm_dtbo_with_dependencies.dtbo"],
 }
 
 genrule_defaults {
@@ -194,6 +205,27 @@ genrule {
     defaults: ["test_device_assignment_dts_to_dtb"],
     srcs: ["testdata/test_pvmfw_devices_with_multiple_reg_iommus.dts"],
     out: ["test_pvmfw_devices_with_multiple_reg_iommus.dtb"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_with_dependency",
+    defaults: ["test_device_assignment_dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_with_dependency.dts"],
+    out: ["test_pvmfw_devices_with_dependency.dtb"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_with_multiple_dependencies",
+    defaults: ["test_device_assignment_dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_with_multiple_dependencies.dts"],
+    out: ["test_pvmfw_devices_with_multiple_dependencies.dtb"],
+}
+
+genrule {
+    name: "test_pvmfw_devices_with_dependency_loop",
+    defaults: ["test_device_assignment_dts_to_dtb"],
+    srcs: ["testdata/test_pvmfw_devices_with_dependency_loop.dts"],
+    out: ["test_pvmfw_devices_with_dependency_loop.dtb"],
 }
 
 cc_binary {
