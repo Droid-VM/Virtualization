@@ -786,7 +786,7 @@ impl<'a> FdtNodeMut<'a> {
     }
 
     /// Returns the next subnode that shares the same parent with this
-    pub fn next_subnode(self) -> Result<Option<Self>> {
+    pub fn next_subnode(&'a mut self) -> Result<Option<Self>> {
         // SAFETY: Accesses (read-only) are constrained to the DT totalsize.
         let ret = unsafe { libfdt_bindgen::fdt_next_subnode(self.fdt.as_ptr(), self.offset) };
 
