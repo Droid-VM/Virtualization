@@ -813,17 +813,19 @@ fn patch_device_tree(fdt: &mut Fdt, info: &DeviceTreeInfo) -> Result<(), RebootR
     Ok(())
 }
 
+pub struct FdtConfig<'a> {
+    pub kaslr_seed: u64,
+    pub bcc: &'a [u8],
+    pub new_instance: bool,
+    pub strict_boot: bool,
+    pub debuggable: bool,
+    pub debug_policy: Option<&'a [u8]>,
+    pub secretkeeper_public_key: Option<&'a [u8]>,
+}
+
 /// Modifies the input DT according to the fields of the configuration.
-pub fn modify_for_next_stage(
-    fdt: &mut Fdt,
-    bcc: &[u8],
-    new_instance: bool,
-    strict_boot: bool,
-    debug_policy: Option<&mut [u8]>,
-    debuggable: bool,
-    kaslr_seed: u64,
-) -> libfdt::Result<()> {
-    if let Some(debug_policy) = debug_policy {
+pub fn modify_for_next_stage(fdt: &mut Fdt, config: FdtConfig) -> libfdt::Result<()> {
+    if let Some(debug_policy) = config.debug_policy {
         let backup = Vec::from(fdt.as_slice());
         fdt.unpack()?;
         let backup_fdt = Fdt::from_slice(backup.as_slice()).unwrap();
@@ -838,14 +840,20 @@ pub fn modify_for_next_stage(
         fdt.unpack()?;
     }
 
-    patch_dice_node(fdt, bcc.as_ptr() as usize, bcc.len())?;
+    patch_dice_node(fdt, config.bcc.as_ptr() as usize, config.bcc.len())?;
 
     if let Some(mut chosen) = fdt.chosen_mut()? {
-        empty_or_delete_prop(&mut chosen, cstr!("avf,strict-boot"), strict_boot)?;
-        empty_or_delete_prop(&mut chosen, cstr!("avf,new-instance"), new_instance)?;
-        chosen.setprop_inplace(cstr!("kaslr-seed"), &kaslr_seed.to_be_bytes())?;
+        empty_or_delete_prop(&mut chosen, cstr!("avf,strict-boot"), config.strict_boot)?;
+        empty_or_delete_prop(&mut chosen, cstr!("avf,new-instance"), config.new_instance)?;
+        chosen.setprop_inplace(cstr!("kaslr-seed"), &config.kaslr_seed.to_be_bytes())?;
+        if let Some(secretkeeper_public_key) = config.secretkeeper_public_key {
+            chosen.setprop(cstr!("avf,secretkeeper-key"), secretkeeper_public_key)?;
+        } else {
+            empty_or_delete_prop(&mut chosen, cstr!("avf,secretkeeper-key"), false)?;
+        }
     };
-    if !debuggable {
+
+    if !config.debuggable {
         if let Some(bootargs) = read_bootargs_from(fdt)? {
             filter_out_dangerous_bootargs(fdt, &bootargs)?;
         }
