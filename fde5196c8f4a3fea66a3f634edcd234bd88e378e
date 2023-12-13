@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3da5f150_e13a4f17",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-13T16:35:18Z",
+      "side": 1,
+      "message": "Is this line needed?",
+      "range": {
+        "startLine": 192,
+        "startChar": 8,
+        "endLine": 192,
+        "endChar": 16
+      },
+      "revId": "fde5196c8f4a3fea66a3f634edcd234bd88e378e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8900165_45344943",
+        "filename": "pvmfw/testdata/test_pvmfw_devices_vm_dtbo.dts",
+        "patchSetId": 13
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-13T16:35:18Z",
+      "side": 1,
+      "message": "Before we set this in stone, have you considered other (possibly clearer) names? I\u0027m not too happy about `target` but can\u0027t find one that\u0027s perfectly clear ... Maybe `virtual`, `overlay`, `assigned`, or something else? WDYT?",
+      "range": {
+        "startLine": 11,
+        "startChar": 26,
+        "endLine": 11,
+        "endChar": 32
+      },
+      "revId": "fde5196c8f4a3fea66a3f634edcd234bd88e378e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8f73b98_c0397100",
+        "filename": "pvmfw/testdata/test_pvmfw_devices_vm_dtbo.dts",
+        "patchSetId": 13
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-13T16:35:18Z",
+      "side": 1,
+      "message": "nit: PCI buses are discoverable through the hardware itself so device are typically not enumerated through the DT. Would you mind using another name (\"`bus0`\" or something) to avoid any confusion?",
+      "range": {
+        "startLine": 23,
+        "startChar": 8,
+        "endLine": 23,
+        "endChar": 11
+      },
+      "revId": "fde5196c8f4a3fea66a3f634edcd234bd88e378e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59543d69_2717c38b",
+        "filename": "pvmfw/testdata/test_pvmfw_devices_vm_dtbo.dts",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-13T16:35:18Z",
+      "side": 1,
+      "message": "I think this property should be named `android,pvmfw,token`.",
+      "range": {
+        "startLine": 34,
+        "startChar": 12,
+        "endLine": 34,
+        "endChar": 19
+      },
+      "revId": "fde5196c8f4a3fea66a3f634edcd234bd88e378e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "396d7343_fc41dcbd",
+        "filename": "pvmfw/testdata/test_pvmfw_devices_vm_dtbo.dts",
+        "patchSetId": 13
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-13T16:35:18Z",
+      "side": 1,
+      "message": "Would you mind double checking that this is what the fragment looks like when targeting a subnode? I don\u0027t see how this (supposed to target `/pci/backlight` in the crosvm DT) is different from a fragment targeting `/backlight`?",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 6
+      },
+      "revId": "fde5196c8f4a3fea66a3f634edcd234bd88e378e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
