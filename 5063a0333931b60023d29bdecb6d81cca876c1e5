@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dba289c_4a298e75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2064605
+      },
+      "writtenOn": "2023-12-13T18:28:45Z",
+      "side": 1,
+      "message": "LGTM for unsafe Rust",
+      "revId": "5063a0333931b60023d29bdecb6d81cca876c1e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f9363b6_63a79ec8",
+        "filename": "libs/bssl/src/err.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2064605
+      },
+      "writtenOn": "2023-12-13T18:28:45Z",
+      "side": 1,
+      "message": "non-unsafe Rust comment: I have a hard time imagining callers that would actually want the \"least recent error\" contract. I\u0027d imagine most would want the *most* recent error. Perhaps this function should loop, popping and logging errors and returning the final one?",
+      "revId": "5063a0333931b60023d29bdecb6d81cca876c1e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98c6f0e9_87df72ee",
+        "filename": "libs/bssl/src/err.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 2064605
+      },
+      "writtenOn": "2023-12-13T18:28:45Z",
+      "side": 1,
+      "message": "non-unsafe Rust nit: consider renaming to indicate that this logs the error details and pops the code off of a queue, rather than simply fetching the most recent error code or similar.",
+      "range": {
+        "startLine": 30,
+        "startChar": 14,
+        "endLine": 30,
+        "endChar": 35
+      },
+      "revId": "5063a0333931b60023d29bdecb6d81cca876c1e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "201c875a_25b1f6dd",
+        "filename": "libs/bssl/src/err.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 2064605
+      },
+      "writtenOn": "2023-12-13T18:28:45Z",
+      "side": 1,
+      "message": "non-unsafe-Rust comment: this function seems to be written assuming that it is only ever invoked when there has been an error. Notably, it will issue an `error!` log whether or not an error has been returned. Consider short-circuiting in the non-error case and/or adding documentation that this should only be invoked once it is already known that an error has been triggered.",
+      "revId": "5063a0333931b60023d29bdecb6d81cca876c1e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
