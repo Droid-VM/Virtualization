@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2da025ed_91ff6e99",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-13T16:34:35Z",
+      "side": 1,
+      "message": "nit: private members don\u0027t need to be documented and \"`PhysIommu::token`\"\nalready contains all the information in this comment so it can be removed, IMO.",
+      "range": {
+        "startLine": 298,
+        "startChar": 4,
+        "endLine": 298,
+        "endChar": 33
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e3b1eca_48a7c18a",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-13T16:34:35Z",
+      "side": 1,
+      "message": "Same as the other functions in previous CLs, this should probably not be an associated function. In particular, this one is even more confusing by being in `PhysIommu` as\n```\nPhysIommu::is_iommu_node(pviommu_node) \u003d\u003d true\n```\ndespite what might be expected from the names.\n\nAlso (uber-nit), rename to `node_is_iommu`, which IMO reads better in `if`?",
+      "range": {
+        "startLine": 305,
+        "startChar": 7,
+        "endLine": 305,
+        "endChar": 20
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edbfff79_7e969234",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-13T16:34:35Z",
+      "side": 1,
+      "message": "Could you clarify in the comment that this constraint on the physical topology is arbitrary and enforced to simplify the rest of the code (as it covers all our current use-cases)? Physical IOMMUs with other cell counts could (and should, the day they\u0027re needed) be supported by AVF.",
+      "range": {
+        "startLine": 315,
+        "startChar": 11,
+        "endLine": 315,
+        "endChar": 27
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5a438b0_1a10c6c8",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-13T16:34:35Z",
+      "side": 1,
+      "message": "nit: Do you want to name this `PhysicalDeviceInfo`, for symmetry? Also, why not\nintroduce `::parse(\u0026node, \u0026phys_iommus)` for encapsulation?",
+      "range": {
+        "startLine": 325,
+        "startChar": 7,
+        "endLine": 325,
+        "endChar": 21
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f38f5cc_345c1262",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-13T16:34:35Z",
+      "side": 1,
+      "message": "Take `\u0026[DeviceReg]` and pass `\u0026physical_device.reg`?\n\n(Same for `::parse_iommus()` with `\u0026physical_device.iommus`)",
+      "range": {
+        "startLine": 349,
+        "startChar": 26,
+        "endLine": 349,
+        "endChar": 40
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "107b2d58_29153320",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-13T16:34:35Z",
+      "side": 1,
+      "message": "This doesn\u0027t catch partial assignment (PA region without corresponding VA region), duplicate mappings (multiple VA region mapping to same PA region), nor detects duplicate PA regions (as we assume they\u0027re unique).\n\nWDYT of addressing all the above by building a local `BTreeMap\u003cusize, usize\u003e` of PA-to-size and calling `.remove()` at each iteration?\n\nNote that `parse_iommus` has the same issue. However, as multiple SIDs can map to the same IOMMU we need to use a slightly different data structure; either\n```\nBTreeMap\u003cPhysIommu, BTreeSet\u003cSid\u003e\u003e\n```\nor\n```\nBtreeSet\u003c(PhysIommu, Sid)\u003e\n```\n\n(TBF, a case could be made to also use a `BTreeSet` here)",
+      "range": {
+        "startLine": 355,
+        "startChar": 28,
+        "endLine": 365,
+        "endChar": 17
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f8dc257_3e13a81e",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-13T16:34:35Z",
+      "side": 1,
+      "message": "Log the error, if any (identical to [this comment](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2849456/comment/cec51170_a7a5287c/) in aosp/2849456)",
+      "range": {
+        "startLine": 410,
+        "startChar": 47,
+        "endLine": 410,
+        "endChar": 64
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "335e61c8_3ba569d1",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-13T16:34:35Z",
+      "side": 1,
+      "message": "Flatten with `.map_err()?` (identical to [this comment](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2857206/comment/2caa3581_fc0b3e8a/) in aosp/2857206)",
+      "range": {
+        "startLine": 415,
+        "startChar": 16,
+        "endLine": 415,
+        "endChar": 27
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f745e44a_bd9703fc",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-13T16:34:35Z",
+      "side": 1,
+      "message": "Is this really an error? Why not return `Ok(BTreeMap::empty())` i.e. \"no physical devices\"?",
+      "range": {
+        "startLine": 497,
+        "startChar": 53,
+        "endLine": 497,
+        "endChar": 95
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
