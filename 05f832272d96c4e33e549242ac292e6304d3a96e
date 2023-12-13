@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f69f4ef_59929a5a",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-13T16:32:11Z",
+      "side": 1,
+      "message": "TODO: [squash](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2857206/comment/afc76c38_f5c59daf/)",
+      "range": {
+        "startLine": 266,
+        "startChar": 8,
+        "endLine": 266,
+        "endChar": 36
+      },
+      "revId": "05f832272d96c4e33e549242ac292e6304d3a96e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cec51170_a7a5287c",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-13T16:32:11Z",
+      "side": 1,
+      "message": "Maybe log `node.name()` as-is so that, if there\u0027s an error, we also get it logged (and otherwise there\u0027s a \"`Ok`\" in the debug log, which is fine)?",
+      "range": {
+        "startLine": 272,
+        "startChar": 39,
+        "endLine": 272,
+        "endChar": 56
+      },
+      "revId": "05f832272d96c4e33e549242ac292e6304d3a96e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc0fb949_6dee7ae0",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-13T16:32:11Z",
+      "side": 1,
+      "message": "Naive question: I\u0027ve we\u0027ve already verified the `\u003creg\u003e` entry at this point, why store the `DeviceReg` instead of the raw bytes, as we had previously?",
+      "range": {
+        "startLine": 276,
+        "startChar": 22,
+        "endLine": 276,
+        "endChar": 33
+      },
+      "revId": "05f832272d96c4e33e549242ac292e6304d3a96e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "994265cb_066a3048",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-13T16:32:11Z",
+      "side": 1,
+      "message": "nit: `..Default::default()` (same a few times, below)",
+      "range": {
+        "startLine": 643,
+        "startChar": 12,
+        "endLine": 643,
+        "endChar": 42
+      },
+      "revId": "05f832272d96c4e33e549242ac292e6304d3a96e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
