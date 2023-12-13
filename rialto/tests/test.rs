@@ -39,7 +39,6 @@ use std::fs;
 use std::fs::File;
 use std::io;
 use std::panic;
-use std::path::PathBuf;
 use vmclient::VmInstance;
 use x509_parser::{
     certificate::X509Certificate,
@@ -49,7 +48,6 @@ use x509_parser::{
 };
 
 const UNSIGNED_RIALTO_PATH: &str = "/data/local/tmp/rialto_test/arm64/rialto_unsigned.bin";
-const INSTANCE_IMG_PATH: &str = "/data/local/tmp/rialto_test/arm64/instance.img";
 const TEST_CERT_CHAIN_PATH: &str = "testdata/rkp_cert_chain.der";
 
 #[test]
@@ -284,15 +282,15 @@ fn start_service_vm(vm_type: VmType) -> Result<ServiceVm> {
     }));
     // We need to start the thread pool for Binder to work properly, especially link_to_death.
     ProcessState::start_thread_pool();
-    ServiceVm::start_vm(vm_instance(vm_type)?, vm_type)
-}
-
-fn vm_instance(vm_type: VmType) -> Result<VmInstance> {
     match vm_type {
         VmType::ProtectedVm => {
-            service_vm_manager::protected_vm_instance(PathBuf::from(INSTANCE_IMG_PATH))
+            let recover_existing_instance_image = false;
+            ServiceVm::start(recover_existing_instance_image)
         }
-        VmType::NonProtectedVm => nonprotected_vm_instance(),
+        VmType::NonProtectedVm => {
+            let vm_instance = nonprotected_vm_instance()?;
+            ServiceVm::start_vm(vm_instance, VmType::NonProtectedVm)
+        }
     }
 }
 
