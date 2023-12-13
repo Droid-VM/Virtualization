@@ -117,6 +117,30 @@
       },
       "revId": "6dd1c93bb85885e7eb7e24ad6e15240013fe122d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b081236_d73727ad",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-13T09:13:03Z",
+      "side": 1,
+      "message": "Thank you. I updated the comment. Could you take another look?\n\n\u003e must have the RKP VM flag in it...\n\nThe RKP VM flag is only relevant for RKP server. For pvmfw, a VM is considered as RKP VM only when it has the RKP VM flag, so it\u0027s unnecessary to check that RKP VM has the RKP VM flag.",
+      "parentUuid": "fa428f46_9743ae6e",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 13
+      },
+      "revId": "6dd1c93bb85885e7eb7e24ad6e15240013fe122d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
