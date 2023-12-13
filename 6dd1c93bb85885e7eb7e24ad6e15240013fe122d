@@ -141,6 +141,30 @@
       },
       "revId": "6dd1c93bb85885e7eb7e24ad6e15240013fe122d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b8a8d7b_0fae5464",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-13T11:11:14Z",
+      "side": 1,
+      "message": "I was saying that \"the VB meta [...] must have the RKP VM flag in it\" - the property that indicates that this image is the RKP VM image.\nWhich of course is one of the checks we do in order to dice_inputs.rkp_vm_marker to be true here, but it is an important one.",
+      "parentUuid": "8b081236_d73727ad",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 13
+      },
+      "revId": "6dd1c93bb85885e7eb7e24ad6e15240013fe122d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

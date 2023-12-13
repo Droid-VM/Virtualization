@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04aa2150_fd258dbd",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-13T11:11:14Z",
+      "side": 1,
+      "message": "Nit: rolled back (or, if you prefer, downgraded).",
+      "range": {
+        "startLine": 121,
+        "startChar": 54,
+        "endLine": 121,
+        "endChar": 64
+      },
+      "revId": "a512e87375675cbd9e4f599a29eba0b0f941817c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "190c44db_55b7e9c8",
+        "filename": "rialto/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-13T11:11:14Z",
+      "side": 1,
+      "message": "Can we define an additional SERVICE_VM_VERSION_STRING constant and use that below?\nMight make it less likely to change one without the other.",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 69
+      },
+      "revId": "a512e87375675cbd9e4f599a29eba0b0f941817c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
