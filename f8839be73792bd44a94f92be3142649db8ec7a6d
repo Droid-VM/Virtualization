@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6100c551_b47c2db2",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-13T16:30:40Z",
+      "side": 1,
+      "message": "One of the big strengths of Rust is how strongly typed it is; could we keep\n`Vsid` and `Sid` as distinct types (even if both are actually `u32`) to prevent us from inadvertently swapping them? If this makes the code too complicated, we can drop it but I\u0027m thinking that `parse_iommus\u003cT,S\u003e where S: From\u003cu32\u003e` might make it work?",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 16
+      },
+      "revId": "f8839be73792bd44a94f92be3142649db8ec7a6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67bc5059_c249c81a",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-13T16:30:40Z",
+      "side": 1,
+      "message": "Given that this function is private, I don\u0027t believe there\u0027s a need for `Iommu`: just support any `T: Copy` that comes through the `BTreeMap` and return that, no?\n\nnit: as a slightly higher-level abstraction and by symmetry with my other suggestion, WDYT of calling this `parse_node_iommus`?",
+      "range": {
+        "startLine": 240,
+        "startChar": 7,
+        "endLine": 240,
+        "endChar": 12
+      },
+      "revId": "f8839be73792bd44a94f92be3142649db8ec7a6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95b5abf8_b8a48655",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-13T16:30:40Z",
+      "side": 1,
+      "message": "I\u0027m surprised this works: `let Some(cell)` defines a `cell` variable within\nthe scope of the `if` so isn\u0027t this `cell` from the `while`? If I\u0027m not wrong, how was this not caught by one of the tests?\n\nAnyhow, please prefer `?` over `else`-`return` where possible i.e.\n```\nlet cell \u003d cells.next().ok_or(DeviceAssignmentError::InvalidIommus)?;\n\niommus_prop.push((*iommu, Sid(cell)));\n```",
+      "range": {
+        "startLine": 254,
+        "startChar": 38,
+        "endLine": 254,
+        "endChar": 42
+      },
+      "revId": "f8839be73792bd44a94f92be3142649db8ec7a6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "156318c0_cbd1b975",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-13T16:30:40Z",
+      "side": 1,
+      "message": "Like `to_be_bytes()` in aosp/2849456, there\u0027s no reason for this to be an associated function. In particular, it\u0027s unconventional for what looks like a constructor to `-\u003e Vec\u003cSelf\u003e`. Would you mind turning this into a stand-alone function? You could name it \"`parse_node_reg`\", to distringuish it from `::parse_reg`.",
+      "range": {
+        "startLine": 274,
+        "startChar": 4,
+        "endLine": 274,
+        "endChar": 50
+      },
+      "revId": "f8839be73792bd44a94f92be3142649db8ec7a6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afc76c38_f5c59daf",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-13T16:30:40Z",
+      "side": 1,
+      "message": "nit: would you mind squashing the `parse_reg()` changes into aosp/2849456 (which\nwe can then merge) as, IMO, the point of this CL is extending IOMMU support from vSID to SID through shared code but the same isn\u0027t true for `\u003creg\u003e` (as there\u0027s only one format) so all `reg`-related changes can happen at once before aosp/2857205.",
+      "range": {
+        "startLine": 312,
+        "startChar": 8,
+        "endLine": 314,
+        "endChar": 32
+      },
+      "revId": "f8839be73792bd44a94f92be3142649db8ec7a6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2caa3581_fc0b3e8a",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-13T16:30:40Z",
+      "side": 1,
+      "message": "Please keep `.map_err()?`, for consistency with the rest of the codebase but also as you\u0027ll need to capture the `Ok(_)` result for the actual verification in aosp/2857208, anyway.",
+      "range": {
+        "startLine": 315,
+        "startChar": 12,
+        "endLine": 315,
+        "endChar": 28
+      },
+      "revId": "f8839be73792bd44a94f92be3142649db8ec7a6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
