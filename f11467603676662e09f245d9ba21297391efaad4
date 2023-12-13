@@ -16,6 +16,121 @@
       "message": "I need to rebase the patch to include encryption/decryption.",
       "revId": "f11467603676662e09f245d9ba21297391efaad4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c6d9ce4_1bed8650",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-13T13:53:04Z",
+      "side": 1,
+      "message": "If we\u0027re going to do this, we should propagate it to https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/virtualizationmanager/src/crosvm.rs;drc\u003d2dfefd154cb30ffacd6153ac6376348bc54ca076;l\u003d667 and thence all the way to the Java API.\n(Which will be slightly messy.)\nCreate a bug for that, maybe?\n\nAlternatively, we could merge this with the previous one, and lightly rename. (The client doesn\u0027t really care that much.)\n\nI think I rather prefer that. We\u0027re not technically connecting to a new service, we\u0027re just making a call on the existing service that returns a new interface.\n\nAnd a client should handle this failure the same way (see https://docs.google.com/document/d/1XVUeo1KuLoeFWQjFhnBtXDf9s70N-5sfzn6rL-T4ITw/edit?tab\u003dt.0#bookmark\u003did.3qohfd9glnnd).",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 13
+      },
+      "revId": "f11467603676662e09f245d9ba21297391efaad4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8319960a_93b8767e",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-13T13:53:04Z",
+      "side": 1,
+      "message": "If we need zeroizing here, we also need it on skp_secret above.",
+      "range": {
+        "startLine": 121,
+        "startChar": 28,
+        "endLine": 121,
+        "endChar": 32
+      },
+      "revId": "f11467603676662e09f245d9ba21297391efaad4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee22b88f_0b520130",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-13T13:53:04Z",
+      "side": 1,
+      "message": "Should this say something like \"We need to figure out the correct name for Sk\"?\n\n--------------\n\nPlease fix this ERROR reported by Common Typos: Common typo found: \"an const\" -- should it be \"a const\"?\n\nAnalyzer Description: Linter for catching common typos motivated by go/todo-fail and go/lol-codesearch. Shared with google3 common typos library go/common-typos.\nOwner: ayeaye-team@google.com\n\nCommon typo found: \"an const\" -- should it be \"a const\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 109,
+        "startChar": 16,
+        "endLine": 109,
+        "endChar": 24
+      },
+      "revId": "f11467603676662e09f245d9ba21297391efaad4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fee9e5c_83a2f8e1",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 1590,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-13T13:53:04Z",
+      "side": 1,
+      "message": "Does that work? It looks like you\u0027re returning a kernel binder handle over RPC binder.\nI\u0027d expect you\u0027d have to return an AuthGraphProx wrapping the kernel binder.",
+      "range": {
+        "startLine": 1590,
+        "startChar": 8,
+        "endLine": 1590,
+        "endChar": 31
+      },
+      "revId": "f11467603676662e09f245d9ba21297391efaad4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a27f95a4_687c53a4",
+        "filename": "virtualizationservice/aidl/android/system/virtualmachineservice/IVirtualMachineService.aidl",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-13T13:53:04Z",
+      "side": 1,
+      "message": "connection?\n(The fact it\u0027s a proxy is an implementation details.)",
+      "range": {
+        "startLine": 60,
+        "startChar": 15,
+        "endLine": 60,
+        "endChar": 20
+      },
+      "revId": "f11467603676662e09f245d9ba21297391efaad4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
