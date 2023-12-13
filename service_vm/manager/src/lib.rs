@@ -97,11 +97,21 @@ impl ServiceVm {
     /// At any given time,  only one service should be running. If a service VM is
     /// already running, this function will start the service VM once the running one
     /// shuts down.
-    pub fn start() -> Result<Self> {
+    ///
+    /// # Arguments
+    /// * `allow_instance_image_recovery` - If true, when opening the existing instance image fails,
+    ///  a new instance image will be created. Otherwise, the function will return an error.
+    pub fn start(allow_instance_image_recovery: bool) -> Result<Self> {
         let mut is_running_guard = SERVICE_VM_STATE.wait_until_no_service_vm_running()?;
 
+        let virtmgr = vmclient::VirtualizationService::new().context("Failed to spawn VirtMgr")?;
+        let service = virtmgr.connect().context("Failed to connect to VirtMgr")?;
+        info!("Connected to VirtMgr for service VM");
+
         let instance_img_path = Path::new(VIRT_DATA_DIR).join(INSTANCE_IMG_NAME);
-        let vm = protected_vm_instance(instance_img_path)?;
+        let instance_img_fd =
+            instance_img(service.as_ref(), instance_img_path, allow_instance_image_recovery)?;
+        let vm = protected_vm_instance(service.as_ref(), instance_img_fd)?;
 
         let vm = Self::start_vm(vm, VmType::ProtectedVm)?;
         *is_running_guard = true;
@@ -179,15 +189,13 @@ impl Drop for ServiceVm {
 }
 
 /// Returns a `VmInstance` of a protected VM with the instance image from the given path.
-pub fn protected_vm_instance(instance_img_path: PathBuf) -> Result<VmInstance> {
-    let virtmgr = vmclient::VirtualizationService::new().context("Failed to spawn VirtMgr")?;
-    let service = virtmgr.connect().context("Failed to connect to VirtMgr")?;
-    info!("Connected to VirtMgr for service VM");
-
-    let instance_img = instance_img(service.as_ref(), instance_img_path)?;
+fn protected_vm_instance(
+    service: &dyn IVirtualizationService,
+    instance_img_fd: ParcelFileDescriptor,
+) -> Result<VmInstance> {
     let writable_partitions = vec![Partition {
         label: "vm-instance".to_owned(),
-        image: Some(instance_img),
+        image: Some(instance_img_fd),
         writable: true,
     }];
     let rialto = File::open(RIALTO_PATH).context("Failed to open Rialto kernel binary")?;
@@ -206,7 +214,7 @@ pub fn protected_vm_instance(instance_img_path: PathBuf) -> Result<VmInstance> {
     let console_in = None;
     let log = Some(android_log_fd()?);
     let callback = None;
-    VmInstance::create(service.as_ref(), &config, console_out, console_in, log, callback)
+    VmInstance::create(service, &config, console_out, console_in, log, callback)
         .context("Failed to create service VM")
 }
 
@@ -214,14 +222,23 @@ pub fn protected_vm_instance(instance_img_path: PathBuf) -> Result<VmInstance> {
 fn instance_img(
     service: &dyn IVirtualizationService,
     instance_img_path: PathBuf,
+    allow_instance_image_recovery: bool,
 ) -> Result<ParcelFileDescriptor> {
     if instance_img_path.exists() {
-        // TODO(b/298174584): Try to recover if the service VM is triggered by rkpd.
-        return Ok(OpenOptions::new()
+        match OpenOptions::new()
             .read(true)
             .write(true)
-            .open(instance_img_path)
-            .map(ParcelFileDescriptor::new)?);
+            .open(instance_img_path.clone())
+            .map(ParcelFileDescriptor::new)
+        {
+            Ok(fd) => return Ok(fd),
+            Err(e) => {
+                warn!("Failed to open instance image: {e:?}");
+                if !allow_instance_image_recovery {
+                    return Err(e.into());
+                }
+            }
+        }
     }
     let instance_img = OpenOptions::new()
         .create(true)

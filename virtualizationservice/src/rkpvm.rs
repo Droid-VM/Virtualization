@@ -28,7 +28,11 @@ pub(crate) fn request_attestation(
     remotely_provisioned_key_blob: Vec<u8>,
     remotely_provisioned_cert: Vec<u8>,
 ) -> Result<Vec<u8>> {
-    let mut vm = ServiceVm::start()?;
+    // When requesting attestation, we don't allow the RKP VM to create a new instance image
+    // as this request needs to decrypt the CSR with the CDI derived from the data stored in
+    // the instance image.
+    let allow_instance_image_recovery = false;
+    let mut vm = ServiceVm::start(allow_instance_image_recovery)?;
 
     let params =
         ClientVmAttestationParams { csr, remotely_provisioned_key_blob, remotely_provisioned_cert };
@@ -40,7 +44,11 @@ pub(crate) fn request_attestation(
 }
 
 pub(crate) fn generate_ecdsa_p256_key_pair() -> Result<Response> {
-    let mut vm = ServiceVm::start()?;
+    // When generating a new key pair, we can allow the RKP VM to create a new instance image
+    // as this request doesn't require any validation with the CDI derived from the data
+    // stored in the instance image.
+    let allow_instance_image_recovery = true;
+    let mut vm = ServiceVm::start(allow_instance_image_recovery)?;
     let request = Request::GenerateEcdsaP256KeyPair;
     vm.process_request(request).context("Failed to process request")
 }
@@ -49,12 +57,16 @@ pub(crate) fn generate_certificate_request(
     keys_to_sign: &[MacedPublicKey],
     challenge: &[u8],
 ) -> Result<Response> {
+    // When generating a certificate request, we don't allow the RKP VM to create a new instance
+    // image as this request validates the MAC of the public keys with the CDI derived from the
+    // data stored in the instance image.
+    let allow_instance_image_recovery = false;
+    let mut vm = ServiceVm::start(allow_instance_image_recovery)?;
+
     let params = GenerateCertificateRequestParams {
         keys_to_sign: keys_to_sign.iter().map(|v| v.macedKey.to_vec()).collect(),
         challenge: challenge.to_vec(),
     };
     let request = Request::GenerateCertificateRequest(params);
-
-    let mut vm = ServiceVm::start()?;
     vm.process_request(request).context("Failed to process request")
 }
