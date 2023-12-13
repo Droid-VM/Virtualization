@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8e5e37a0_f0e15d83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-12-13T12:56:20Z",
+      "side": 1,
+      "message": "See `is_sk_supported` method. I\u0027m wondering if we should add a flag check in `getSecretkeeper` in aidl.rs to return None if the flag is off",
+      "parentUuid": "493bfc39_3db63171",
+      "revId": "f56c433beaa203bbdc7acb516d29934d016b2da2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "46a4391e_89636aa5",
         "filename": "microdroid_manager/src/vm_secret.rs",
         "patchSetId": 6
