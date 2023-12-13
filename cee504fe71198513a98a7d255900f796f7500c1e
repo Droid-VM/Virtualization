@@ -22,6 +22,30 @@
       },
       "revId": "cee504fe71198513a98a7d255900f796f7500c1e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38825f81_745435af",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2023-12-13T19:01:09Z",
+      "side": 1,
+      "message": "All good!\n\nThis isn\u0027t different from before, but I took a closer look and you don\u0027t need unsafe at all!\n\nhttps://play.rust-lang.org/?version\u003dstable\u0026mode\u003ddebug\u0026edition\u003d2021\u0026gist\u003d449d85d47a6bd1e17d46bf1674a9b7b5\n\nis an example of doing this entirely safely.",
+      "parentUuid": "1db28da3_9430db83",
+      "range": {
+        "startLine": 283,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 35
+      },
+      "revId": "cee504fe71198513a98a7d255900f796f7500c1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
