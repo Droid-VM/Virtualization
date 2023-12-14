@@ -46,6 +46,29 @@
       },
       "revId": "cee504fe71198513a98a7d255900f796f7500c1e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2a6f72d_944be956",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 849,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-12-14T06:32:13Z",
+      "side": 1,
+      "message": "There was a discussion in device assignment weekly meeting 2 days ago, and there was an idea introducing a new entry containing DTBO, and pvmfw simply overlays VM DT.\n\nIntroducing `secretkeeper_public_key` with raw byte format as a new pvmfw config entry looks colliding with the idea above. Could you eleborate more? @jaewan@google.com",
+      "range": {
+        "startLine": 849,
+        "startChar": 54,
+        "endLine": 849,
+        "endChar": 77
+      },
+      "revId": "cee504fe71198513a98a7d255900f796f7500c1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
