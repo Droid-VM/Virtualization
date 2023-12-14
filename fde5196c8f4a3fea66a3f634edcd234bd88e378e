@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ec30101_8b240049",
+        "filename": "pvmfw/testdata/test_pvmfw_devices_vm_dtbo.dts",
+        "patchSetId": 13
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-14T11:06:08Z",
+      "side": 1,
+      "message": "\u003e The node is also used for unprotected VM where pvmfw isn\u0027t involved.\n\nHow? I thought pvIOMMUs were only supported by pKVM for pVMs? What is parsing the VM DTBO\u0027s `/host`, other than `pvmfw`?\n\n\u003e `device` seems better fit compared to `target`, `virtual`, `overlay`, `assigned`, ...\n\nWhat about `props`, `extra-props`, `properties`, ...? `/host/dev` is already a device but only has the standard and HVC-verifiable device properties (`\u003creg\u003e`, `\u003ciommus\u003e`) while the node this phandle points to holds all the other properties.",
+      "parentUuid": "8a522ede_7675655f",
+      "range": {
+        "startLine": 11,
+        "startChar": 26,
+        "endLine": 11,
+        "endChar": 32
+      },
+      "revId": "fde5196c8f4a3fea66a3f634edcd234bd88e378e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c8f73b98_c0397100",
         "filename": "pvmfw/testdata/test_pvmfw_devices_vm_dtbo.dts",
         "patchSetId": 13
@@ -191,6 +215,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8fe29165_760c0d76",
+        "filename": "pvmfw/testdata/test_pvmfw_devices_vm_dtbo.dts",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-14T11:06:08Z",
+      "side": 1,
+      "message": "\u003e Could you double check if you\u0027re suggesting to `phandle` or `token`?\n\nSorry, I misclicked!\n\n\u003e Plus, what about `android,avf` instead? `pvmfw` seems pVM specific.\n\n`pvmfw` is the only one that will verify the token but you\u0027re right that the guest (for whatever reason) might want to also read it. Taking your comment one step further, there\u0027s nothing `avf` or even `android`-specific about this pKVM-defined token. Therefore, the name of the property should be defined by Linux, which won\u0027t be set in stone until the pvIOMMU driver gets upstreamed ... I guess, for now, `android,avf` makes sense as what we come up with here isn\u0027t guaranteed to be approved by upstream and we\u0027d have to support 2 bindings anyway.",
+      "parentUuid": "bd35f58b_d44a74a3",
+      "range": {
+        "startLine": 34,
+        "startChar": 12,
+        "endLine": 34,
+        "endChar": 19
+      },
+      "revId": "fde5196c8f4a3fea66a3f634edcd234bd88e378e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "396d7343_fc41dcbd",
         "filename": "pvmfw/testdata/test_pvmfw_devices_vm_dtbo.dts",
         "patchSetId": 13
@@ -226,6 +274,30 @@
       "side": 1,
       "message": "The mismatch is intended, although there\u0027s no strong reason. Do you have a specific concern here?\n\nIf you want to match hierachy between host and overlayable nodes, then we can do as following:\n\n```\n    fragment@backlight {\n        target-path \u003d \"/\";\n        __overlay__ {\n            bus0 {\n                backlight {\n                    compatible \u003d \"android,backlight\";\n                    android,backlight,ignore-gctrl-reset;\n                    phandle \u003d \u003c0x7\u003e;\n                };\n            };\n        };\n    };\n```",
       "parentUuid": "396d7343_fc41dcbd",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 6
+      },
+      "revId": "fde5196c8f4a3fea66a3f634edcd234bd88e378e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "783973dc_56569934",
+        "filename": "pvmfw/testdata/test_pvmfw_devices_vm_dtbo.dts",
+        "patchSetId": 13
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-14T11:06:08Z",
+      "side": 1,
+      "message": "Isn\u0027t your example what we expect a real VM DTBO supporting a `bus0`-like hierarchy to look like? If so, why not follow the format in this test DTBO? What do we gain from this inconsistency?",
+      "parentUuid": "619a658b_667fef37",
       "range": {
         "startLine": 77,
         "startChar": 0,
