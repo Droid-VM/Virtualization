@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3126fed4_73f4f6ed",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-14T11:32:07Z",
+      "side": 1,
+      "message": "Yes, vSIDs have a single format (`u32`) while SIDs are hardware-defined and can be quite different from a single `u32`. Also, they\u0027re in different \"namespaces\" so things like comparing them don\u0027t make sense; hence my suggestion of keeping distinct types.\n\nI guess, from the perspective of pvmfw, we\u0027re not really manipulating the hardware SIDs but some tokenized version, in which case, we\u0027re limited (with the current API) to the single CPU register returned by the HVC i.e. the \"token\" SID is a `u64`. pvmfw does not need to (and shouldn\u0027t) be aware of the actual tokenization algorithm, only than it produces a physIOMMU-unique token per mapping.\n\nWe\u0027re currently storing that value as a single DT cell (i.e. `u32`) in `/host` but at some point, might need to double that (`iommu-cells\u003d2`?) to match the HVC. When/if that happens, vSIDs will remain `u32`, which is only possible with distinct types.",
+      "parentUuid": "7410bbe3_d60f48fe",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 16
+      },
+      "revId": "f8839be73792bd44a94f92be3142649db8ec7a6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "67bc5059_c249c81a",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 11
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "\u003e I\u0027m surprised this works: let Some(cell) defines a cell variable within\nthe scope of the if so isn\u0027t this cell from the while\n\nThe code simply redefine `cell` to `cells.next()`, so shouldn\u0027t be an issue.\n\nSee: https://play.rust-lang.org/?version\u003dstable\u0026mode\u003ddebug\u0026edition\u003d2021\u0026gist\u003d37d1d4325b55a84a965b381f45fe3bae\n\nAnyway, changed to use `ok_or()`",
       "parentUuid": "95b5abf8_b8a48655",
+      "range": {
+        "startLine": 254,
+        "startChar": 38,
+        "endLine": 254,
+        "endChar": 42
+      },
+      "revId": "f8839be73792bd44a94f92be3142649db8ec7a6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36e63a4b_8a3fbba9",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-14T11:32:07Z",
+      "side": 1,
+      "message": "Yes, you\u0027re right. When reading the code, I registered the `let`-`Some`-`else` as an `if`-`let` (hence talking about `if` in my comment). Anyway, `ok_or` is better.",
+      "parentUuid": "56aa7a41_6e346c28",
       "range": {
         "startLine": 254,
         "startChar": 38,
