@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14245353_11a8c782",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-12-14T16:42:03Z",
+      "side": 1,
+      "message": "Changed to Zeroizing::new(). Keeping it ZVec throughout would require ZVec::from(array)(infact we might as well implement ZArray ourselves)",
+      "parentUuid": "4f25a0f1_480ddd9d",
+      "range": {
+        "startLine": 125,
+        "startChar": 11,
+        "endLine": 125,
+        "endChar": 29
+      },
+      "revId": "544f6fc8134a0f0ad2605272249dacae68735b25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d547a892_6e5372f5",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d54b67d_7c729e3b",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-12-14T16:42:03Z",
+      "side": 1,
+      "message": "Keeping it a TODO in this patch",
+      "parentUuid": "d547a892_6e5372f5",
+      "range": {
+        "startLine": 201,
+        "startChar": 8,
+        "endLine": 201,
+        "endChar": 65
+      },
+      "revId": "544f6fc8134a0f0ad2605272249dacae68735b25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "441fe03d_621079aa",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-12-14T11:25:25Z",
       "side": 1,
       "message": "No longer used?",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 42
+      },
+      "revId": "544f6fc8134a0f0ad2605272249dacae68735b25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd0282a7_330f2076",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationcommon/ErrorCode.aidl",
+        "patchSetId": 11
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-12-14T16:42:03Z",
+      "side": 1,
+      "message": "Deletion is an art for sure:p Done. Thanks",
+      "parentUuid": "441fe03d_621079aa",
       "range": {
         "startLine": 43,
         "startChar": 0,
