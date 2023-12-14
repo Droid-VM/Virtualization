@@ -664,8 +664,8 @@ fn death_reason(result: &Result<ExitStatus, io::Error>, mut failure_reason: &str
             "PVM_FIRMWARE_INSTANCE_IMAGE_CHANGED" => {
                 return DeathReason::PVM_FIRMWARE_INSTANCE_IMAGE_CHANGED
             }
-            "MICRODROID_FAILED_TO_CONNECT_TO_VIRTUALIZATION_SERVICE" => {
-                return DeathReason::MICRODROID_FAILED_TO_CONNECT_TO_VIRTUALIZATION_SERVICE
+            "MICRODROID_FAILED_TO_CONNECT_TO_A_DEPENDENCY" => {
+                return DeathReason::MICRODROID_FAILED_TO_CONNECT_TO_A_DEPENDENCY
             }
             "MICRODROID_PAYLOAD_HAS_CHANGED" => return DeathReason::MICRODROID_PAYLOAD_HAS_CHANGED,
             "MICRODROID_PAYLOAD_VERIFICATION_FAILED" => {

@@ -226,10 +226,7 @@ fn is_sk_supported(
         } else {
             // For non-protected VM, believe what host claims.
             host.getSecretkeeper()
-                // TODO rename this error!
-                .map_err(|e| {
-                    super::MicrodroidError::FailedToConnectToVirtualizationService(e.to_string())
-                })?
+                .map_err(|e| super::MicrodroidError::FailedToConnectToADependency(e.to_string()))?
         }
     } else {
         // LLPVM flag is disabled

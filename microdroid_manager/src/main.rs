@@ -85,8 +85,8 @@ const ENCRYPTEDSTORE_KEYSIZE: usize = 32;
 
 #[derive(thiserror::Error, Debug)]
 enum MicrodroidError {
-    #[error("Cannot connect to virtualization service: {0}")]
-    FailedToConnectToVirtualizationService(String),
+    #[error("Cannot connect to a dependency: {0}")]
+    FailedToConnectToADependency(String),
     #[error("Payload has changed: {0}")]
     PayloadChanged(String),
     #[error("Payload verification has failed: {0}")]
@@ -106,7 +106,7 @@ fn translate_error(err: &Error) -> (ErrorCode, String) {
                 (ErrorCode::PAYLOAD_INVALID_CONFIG, msg.to_string())
             }
             // Connection failure won't be reported to VS; return the default value
-            MicrodroidError::FailedToConnectToVirtualizationService(msg) => {
+            MicrodroidError::FailedToConnectToADependency(msg) => {
                 (ErrorCode::UNKNOWN, msg.to_string())
             }
         }
@@ -118,8 +118,8 @@ fn translate_error(err: &Error) -> (ErrorCode, String) {
 fn write_death_reason_to_serial(err: &Error) -> Result<()> {
     let death_reason = if let Some(e) = err.downcast_ref::<MicrodroidError>() {
         Borrowed(match e {
-            MicrodroidError::FailedToConnectToVirtualizationService(_) => {
-                "MICRODROID_FAILED_TO_CONNECT_TO_VIRTUALIZATION_SERVICE"
+            MicrodroidError::FailedToConnectToADependency(_) => {
+                "MICRODROID_FAILED_TO_CONNECT_TO_DEPENDENCY"
             }
             MicrodroidError::PayloadChanged(_) => "MICRODROID_PAYLOAD_HAS_CHANGED",
             MicrodroidError::PayloadVerificationFailed(_) => {
@@ -187,7 +187,7 @@ fn try_main() -> Result<()> {
 
     let service = get_vms_rpc_binder()
         .context("cannot connect to VirtualMachineService")
-        .map_err(|e| MicrodroidError::FailedToConnectToVirtualizationService(e.to_string()))?;
+        .map_err(|e| MicrodroidError::FailedToConnectToADependency(e.to_string()))?;
 
     match try_run_payload(&service, vm_payload_service_fd) {
         Ok(code) => {

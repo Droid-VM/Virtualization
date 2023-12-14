@@ -41,7 +41,7 @@ package android.system.virtualmachine {
     field public static final int STOP_REASON_HANGUP = 16; // 0x10
     field public static final int STOP_REASON_INFRASTRUCTURE_ERROR = 0; // 0x0
     field public static final int STOP_REASON_KILLED = 1; // 0x1
-    field public static final int STOP_REASON_MICRODROID_FAILED_TO_CONNECT_TO_VIRTUALIZATION_SERVICE = 11; // 0xb
+    field public static final int STOP_REASON_MICRODROID_FAILED_TO_CONNECT_TO_A_DEPENDENCY = 11; // 0xb
     field public static final int STOP_REASON_MICRODROID_INVALID_PAYLOAD_CONFIG = 14; // 0xe
     field public static final int STOP_REASON_MICRODROID_PAYLOAD_HAS_CHANGED = 12; // 0xc
     field public static final int STOP_REASON_MICRODROID_PAYLOAD_VERIFICATION_FAILED = 13; // 0xd

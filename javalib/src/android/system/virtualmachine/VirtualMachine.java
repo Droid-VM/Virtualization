@@ -27,7 +27,7 @@ import static android.system.virtualmachine.VirtualMachineCallback.STOP_REASON_C
 import static android.system.virtualmachine.VirtualMachineCallback.STOP_REASON_HANGUP;
 import static android.system.virtualmachine.VirtualMachineCallback.STOP_REASON_INFRASTRUCTURE_ERROR;
 import static android.system.virtualmachine.VirtualMachineCallback.STOP_REASON_KILLED;
-import static android.system.virtualmachine.VirtualMachineCallback.STOP_REASON_MICRODROID_FAILED_TO_CONNECT_TO_VIRTUALIZATION_SERVICE;
+import static android.system.virtualmachine.VirtualMachineCallback.STOP_REASON_MICRODROID_FAILED_TO_CONNECT_TO_A_DEPENDENCY;
 import static android.system.virtualmachine.VirtualMachineCallback.STOP_REASON_MICRODROID_INVALID_PAYLOAD_CONFIG;
 import static android.system.virtualmachine.VirtualMachineCallback.STOP_REASON_MICRODROID_PAYLOAD_HAS_CHANGED;
 import static android.system.virtualmachine.VirtualMachineCallback.STOP_REASON_MICRODROID_PAYLOAD_VERIFICATION_FAILED;
@@ -1408,8 +1408,8 @@ public class VirtualMachine implements AutoCloseable {
                     return STOP_REASON_PVM_FIRMWARE_PUBLIC_KEY_MISMATCH;
                 case DeathReason.PVM_FIRMWARE_INSTANCE_IMAGE_CHANGED:
                     return STOP_REASON_PVM_FIRMWARE_INSTANCE_IMAGE_CHANGED;
-                case DeathReason.MICRODROID_FAILED_TO_CONNECT_TO_VIRTUALIZATION_SERVICE:
-                    return STOP_REASON_MICRODROID_FAILED_TO_CONNECT_TO_VIRTUALIZATION_SERVICE;
+                case DeathReason.MICRODROID_FAILED_TO_CONNECT_TO_A_DEPENDENCY:
+                    return STOP_REASON_MICRODROID_FAILED_TO_CONNECT_TO_A_DEPENDENCY;
                 case DeathReason.MICRODROID_PAYLOAD_HAS_CHANGED:
                     return STOP_REASON_MICRODROID_PAYLOAD_HAS_CHANGED;
                 case DeathReason.MICRODROID_PAYLOAD_VERIFICATION_FAILED:

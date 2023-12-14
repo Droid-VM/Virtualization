@@ -87,8 +87,8 @@ pub fn forward_vm_exited_atom(atom: &AtomVmExited) {
         DeathReason::PVM_FIRMWARE_INSTANCE_IMAGE_CHANGED => {
             vm_exited::DeathReason::PvmFirmwareInstanceImageChanged
         }
-        DeathReason::MICRODROID_FAILED_TO_CONNECT_TO_VIRTUALIZATION_SERVICE => {
-            vm_exited::DeathReason::MicrodroidFailedToConnectToVirtualizationService
+        DeathReason::MICRODROID_FAILED_TO_CONNECT_TO_A_DEPENDENCY => {
+            vm_exited::DeathReason::MicrodroidFailedToConnectToADependency
         }
         DeathReason::MICRODROID_PAYLOAD_HAS_CHANGED => {
             vm_exited::DeathReason::MicrodroidPayloadHasChanged

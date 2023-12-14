@@ -39,8 +39,8 @@ enum DeathReason {
     /** The pVM firmware failed to verify the VM because the instance image changed. */
     PVM_FIRMWARE_INSTANCE_IMAGE_CHANGED = 8,
     // 9 & 10 intentionally removed.
-    /** The microdroid failed to connect to VirtualizationService's RPC server. */
-    MICRODROID_FAILED_TO_CONNECT_TO_VIRTUALIZATION_SERVICE = 11,
+    /** The microdroid failed to connect to a dependency. */
+    MICRODROID_FAILED_TO_CONNECT_TO_A_DEPENDENCY = 11,
     /** The payload for microdroid is changed. */
     MICRODROID_PAYLOAD_HAS_CHANGED = 12,
     /** The microdroid failed to verify given payload APK. */
