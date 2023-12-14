@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f25a0f1_480ddd9d",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-14T11:25:25Z",
+      "side": 1,
+      "message": "That\u0027s potentially too late - e.g. if the ZVEc::try_from fails it won\u0027t happen.\n\nI think the right thing is\n```\nlet mut secret \u003d Zeroizing::new([0u8; SECRET_SIZE]);\n```\n\nabove.\n\nAlternatively, can\u0027t secret just be ZVec right from the start? It supports DerefMut.\n\n\nMind you, there\u0027s lots of other secret usage here that isn\u0027t zerozied - e.g. in store. We should maybe do another pass and decide what\u0027s actually worth doing here.",
+      "range": {
+        "startLine": 125,
+        "startChar": 11,
+        "endLine": 125,
+        "endChar": 29
+      },
+      "revId": "544f6fc8134a0f0ad2605272249dacae68735b25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d547a892_6e5372f5",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-14T11:25:25Z",
+      "side": 1,
+      "message": "This would be really cool.",
+      "range": {
+        "startLine": 201,
+        "startChar": 8,
+        "endLine": 201,
+        "endChar": 65
+      },
+      "revId": "544f6fc8134a0f0ad2605272249dacae68735b25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "441fe03d_621079aa",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationcommon/ErrorCode.aidl",
+        "patchSetId": 11
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-14T11:25:25Z",
+      "side": 1,
+      "message": "No longer used?",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 42
+      },
+      "revId": "544f6fc8134a0f0ad2605272249dacae68735b25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
