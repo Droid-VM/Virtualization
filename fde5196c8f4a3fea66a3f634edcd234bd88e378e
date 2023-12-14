@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a357c0f6_ab90287e",
+        "filename": "pvmfw/testdata/test_pvmfw_devices_vm_dtbo.dts",
+        "patchSetId": 13
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-14T16:53:19Z",
+      "side": 1,
+      "message": "\u003e \u003e The node is also used for unprotected VM where pvmfw isn\u0027t involved.\n\u003e How? I thought pvIOMMUs were only supported by pKVM for pVMs? What is parsing the VM DTBO\u0027s /host, other than pvmfw?\n\nI thought that crosvm/kvm read the property for assigning device node to unprotected VM. Am I misunderstanding, and does unprotected VM access host device directly with physical address/IOMMUs?\n\n\u003e \u003e device seems better fit compared to target, virtual, overlay, assigned, ...\n\n\u003e What about props, extra-props, properties, ...? /host/dev is already a device but only has the standard and HVC-verifiable device properties (\u003creg\u003e, \u003ciommus\u003e) while the node this phandle points to holds all the other properties.\n\nI\u0027m sorry but I don\u0027t have a good idea. Honestly, I can\u0027t even tell what\u0027s better and/or worse. Would you discuss with other people in UK about the naming? Otherwise I\u0027ll just use `android,pvmfw,target` for now because nobody complaint about your initial naming `target`. We can change the naming later if it becomes problem.",
+      "parentUuid": "7ec30101_8b240049",
+      "range": {
+        "startLine": 11,
+        "startChar": 26,
+        "endLine": 11,
+        "endChar": 32
+      },
+      "revId": "fde5196c8f4a3fea66a3f634edcd234bd88e378e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c8f73b98_c0397100",
         "filename": "pvmfw/testdata/test_pvmfw_devices_vm_dtbo.dts",
         "patchSetId": 13
@@ -298,6 +322,30 @@
       "side": 1,
       "message": "Isn\u0027t your example what we expect a real VM DTBO supporting a `bus0`-like hierarchy to look like? If so, why not follow the format in this test DTBO? What do we gain from this inconsistency?",
       "parentUuid": "619a658b_667fef37",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 6
+      },
+      "revId": "fde5196c8f4a3fea66a3f634edcd234bd88e378e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3c57d61_07d3480a",
+        "filename": "pvmfw/testdata/test_pvmfw_devices_vm_dtbo.dts",
+        "patchSetId": 13
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-14T16:53:19Z",
+      "side": 1,
+      "message": "\u003e Isn\u0027t your example what we expect a real VM DTBO supporting a bus0-like hierarchy to look like? If so, why not follow the format in this test DTBO? What do we gain from this inconsistency?\n\nI\u0027m sorry but I don\u0027t understand your intention here. Are you asking to understand the motivation or suggesting to match the hierarchy?\n\nI added the case to to validate that host and pvmfw node aren\u0027t matched with path but done via `android,pvmfw,target`.\n\nIf you\u0027re suggesting to match the hierarchy, then I would add more nodes here. Would it work for you?",
+      "parentUuid": "783973dc_56569934",
       "range": {
         "startLine": 77,
         "startChar": 0,
