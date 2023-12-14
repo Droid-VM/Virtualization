@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7410bbe3_d60f48fe",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-14T08:23:32Z",
+      "side": 1,
+      "message": "Is `Vsid` and `Sid` different? I thought that `Sid` can be applied to both `vSID` and `pSID`. Correct me if I\u0027m wrong.",
+      "parentUuid": "6100c551_b47c2db2",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 16
+      },
+      "revId": "f8839be73792bd44a94f92be3142649db8ec7a6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "67bc5059_c249c81a",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 11
@@ -37,6 +61,30 @@
       "writtenOn": "2023-12-13T16:30:40Z",
       "side": 1,
       "message": "Given that this function is private, I don\u0027t believe there\u0027s a need for `Iommu`: just support any `T: Copy` that comes through the `BTreeMap` and return that, no?\n\nnit: as a slightly higher-level abstraction and by symmetry with my other suggestion, WDYT of calling this `parse_node_iommus`?",
+      "range": {
+        "startLine": 240,
+        "startChar": 7,
+        "endLine": 240,
+        "endChar": 12
+      },
+      "revId": "f8839be73792bd44a94f92be3142649db8ec7a6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3c520c8_1b14ca6e",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-14T08:23:32Z",
+      "side": 1,
+      "message": "\u003e Given that this function is private, I don\u0027t believe there\u0027s a need for Iommu: just support any T: Copy that comes through the `BTreeMap` and return that, no?\n\nLet me keep this, so compiler can catch any misuse.\n\n\u003e nit: as a slightly higher-level abstraction and by symmetry with my other suggestion, WDYT of calling this parse_node_iommus?\n\nDone",
+      "parentUuid": "67bc5059_c249c81a",
       "range": {
         "startLine": 240,
         "startChar": 7,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56aa7a41_6e346c28",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-14T08:23:32Z",
+      "side": 1,
+      "message": "\u003e I\u0027m surprised this works: let Some(cell) defines a cell variable within\nthe scope of the if so isn\u0027t this cell from the while\n\nThe code simply redefine `cell` to `cells.next()`, so shouldn\u0027t be an issue.\n\nSee: https://play.rust-lang.org/?version\u003dstable\u0026mode\u003ddebug\u0026edition\u003d2021\u0026gist\u003d37d1d4325b55a84a965b381f45fe3bae\n\nAnyway, changed to use `ok_or()`",
+      "parentUuid": "95b5abf8_b8a48655",
+      "range": {
+        "startLine": 254,
+        "startChar": 38,
+        "endLine": 254,
+        "endChar": 42
+      },
+      "revId": "f8839be73792bd44a94f92be3142649db8ec7a6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "156318c0_cbd1b975",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-12-13T16:30:40Z",
       "side": 1,
       "message": "Like `to_be_bytes()` in aosp/2849456, there\u0027s no reason for this to be an associated function. In particular, it\u0027s unconventional for what looks like a constructor to `-\u003e Vec\u003cSelf\u003e`. Would you mind turning this into a stand-alone function? You could name it \"`parse_node_reg`\", to distringuish it from `::parse_reg`.",
+      "range": {
+        "startLine": 274,
+        "startChar": 4,
+        "endLine": 274,
+        "endChar": 50
+      },
+      "revId": "f8839be73792bd44a94f92be3142649db8ec7a6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb658fb6_389e52ae",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-14T08:23:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "156318c0_cbd1b975",
       "range": {
         "startLine": 274,
         "startChar": 4,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a375df4_e6867610",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-14T08:23:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "afc76c38_f5c59daf",
+      "range": {
+        "startLine": 312,
+        "startChar": 8,
+        "endLine": 314,
+        "endChar": 32
+      },
+      "revId": "f8839be73792bd44a94f92be3142649db8ec7a6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2caa3581_fc0b3e8a",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-12-13T16:30:40Z",
       "side": 1,
       "message": "Please keep `.map_err()?`, for consistency with the rest of the codebase but also as you\u0027ll need to capture the `Ok(_)` result for the actual verification in aosp/2857208, anyway.",
+      "range": {
+        "startLine": 315,
+        "startChar": 12,
+        "endLine": 315,
+        "endChar": 28
+      },
+      "revId": "f8839be73792bd44a94f92be3142649db8ec7a6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c2d7ff3_66a53434",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-14T08:23:32Z",
+      "side": 1,
+      "message": "Applied `.map_err()?` to aosp/2857205",
+      "parentUuid": "2caa3581_fc0b3e8a",
       "range": {
         "startLine": 315,
         "startChar": 12,
