@@ -35,6 +35,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efde747f_eec69e1e",
+        "filename": "libs/bssl/src/err.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-14T10:06:52Z",
+      "side": 1,
+      "message": "Thanks for the suggestion, I adjusted this code accordingly. Could you please take another look?",
+      "parentUuid": "6f9363b6_63a79ec8",
+      "revId": "5063a0333931b60023d29bdecb6d81cca876c1e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c06c466_852020a8",
+        "filename": "libs/bssl/src/err.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-14T10:06:52Z",
+      "side": 1,
+      "message": "I copied this doc from the BoringSSL doc, actually I understood it as the last error",
+      "parentUuid": "6f9363b6_63a79ec8",
+      "revId": "5063a0333931b60023d29bdecb6d81cca876c1e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98c6f0e9_87df72ee",
@@ -58,6 +94,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fca25903_48cf807a",
+        "filename": "libs/bssl/src/err.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-14T10:06:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98c6f0e9_87df72ee",
+      "range": {
+        "startLine": 30,
+        "startChar": 14,
+        "endLine": 30,
+        "endChar": 35
+      },
+      "revId": "5063a0333931b60023d29bdecb6d81cca876c1e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "201c875a_25b1f6dd",
@@ -71,6 +131,24 @@
       "writtenOn": "2023-12-13T18:28:45Z",
       "side": 1,
       "message": "non-unsafe-Rust comment: this function seems to be written assuming that it is only ever invoked when there has been an error. Notably, it will issue an `error!` log whether or not an error has been returned. Consider short-circuiting in the non-error case and/or adding documentation that this should only be invoked once it is already known that an error has been triggered.",
+      "revId": "5063a0333931b60023d29bdecb6d81cca876c1e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c24e2cb2_bf481698",
+        "filename": "libs/bssl/src/err.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-14T10:06:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "201c875a_25b1f6dd",
       "revId": "5063a0333931b60023d29bdecb6d81cca876c1e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
