@@ -333,6 +333,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dc0df718_c71f88dc",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-15T15:01:56Z",
+      "side": 1,
+      "message": "Yes, that\u0027s forbidden because the guest will have some hard-coded expectations about the order. Actually, if it doesn\u0027t, it\u0027s because of [`\u003creg-names\u003e`](https://elixir.bootlin.com/linux/latest/source/Documentation/devicetree/bindings/resource-names.txt) which makes things even more complicated to validate ... For now, we could at least forbid (in the guidelines) the use of that binding in VM DTBOs.",
+      "parentUuid": "ab73ed50_7c01670b",
+      "range": {
+        "startLine": 355,
+        "startChar": 28,
+        "endLine": 365,
+        "endChar": 17
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8f8dc257_3e13a81e",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 7
