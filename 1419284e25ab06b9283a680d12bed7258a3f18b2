@@ -285,6 +285,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e0e12512_18c8379e",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-15T14:37:32Z",
+      "side": 1,
+      "message": "Your implementation is still vulnerable to a malicious host. After thinking more about this, I believe that the look-up by PA doesn\u0027t work[*]. Instead, we should use a simpler implementation such as\n```\nfor (reg, phys_reg) in device_reg.zip(physical_device.reg) {\n    if (reg.size !\u003d phys_reg.size) {\n        return Err(...);\n    }\n    let addr \u003d hypervisor.get_phys_mmio_token(reg.addr, reg.size)?;\n    if (addr !\u003d phys_addr) {\n        return Err(...);\n    }\n}\n```\nThe order of `\u003ciommus\u003e` doesn\u0027t matter to the kernel so a look-up based implementation _could_ make sense for pvIOMMUs.\n\n\u003e If so, can I handle such cases in separate CL? I would also check whether PA regions overlaps.\n\nDetecting malformed VM DTBOs in a follow-up CL would be fine.\n\n---\n\n[*] without the `.remove()` I mention above, it allows attacks such as missing mappings or multiple virtual regions of a same size being mapped to the same physical region. Even with the `.remove()`, it allows regions to be re-ordered (e.g. `reg \u003d \u003cX S\u003e, \u003cY T\u003e` in `/host` and `\u003cB T\u003e, \u003cA S\u003e` in guest where `pa(A)\u003dX` and `pa(B)\u003dY`).",
+      "parentUuid": "a6a721a1_9cba80a3",
+      "range": {
+        "startLine": 355,
+        "startChar": 28,
+        "endLine": 365,
+        "endChar": 17
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8f8dc257_3e13a81e",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 7

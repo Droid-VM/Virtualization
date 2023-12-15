@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecd4c887_b0c45b86",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-15T14:37:32Z",
+      "side": 1,
+      "message": "I can see how it would make sense to name \"virtual\" and \"physical\" SIDs like we do for other things but the term \"pSID\" isn\u0027t common at all and usually (e.g. in the hypervisor/kernel source) \"SID\" is assumed to be physical. Therefore, I would recommend naming this `Sid` instead of `Psid`.\n\nAlso, do you want to wrap a `u32` or a `u64` (token)? IMO, it makes more sense to adhere to the HVC ABI (where it\u0027s `u64`) than to an arbitrary representation in the DT (where it\u0027s a cell i.e. `u32`) although it shouldn\u0027t matter today.\n\n(aosp/2857206 (now abandoned) has some context around this: [comments](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2857206/comment/6100c551_b47c2db2/))",
+      "range": {
+        "startLine": 242,
+        "startChar": 7,
+        "endLine": 242,
+        "endChar": 11
+      },
+      "revId": "1bcfb394eb4b8544596afc412f3d6ac243572981",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c8c2075_5ef35a23",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-15T14:37:32Z",
+      "side": 1,
+      "message": "nit: In this case, I wouldn\u0027t mind a less-flat but more concise structure like\n```\nfor (node, _) in physical.descendants() {\n    if let Some(phandle) \u003d node.get_phandle()? {\n        if let Some(iommu) \u003d PhysIommu::parse(\u0026node)? {\n            if phys_iommus.insert(phandle, iommu).is_some() {\n                return Err(...);\n            }\n        }\n    }\n}\n```\n(same below)",
+      "range": {
+        "startLine": 519,
+        "startChar": 0,
+        "endLine": 529,
+        "endChar": 9
+      },
+      "revId": "1bcfb394eb4b8544596afc412f3d6ac243572981",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

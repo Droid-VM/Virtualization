@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b914336_9f05f5fe",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-15T14:37:32Z",
+      "side": 1,
+      "message": "The fact that there\u0027s a need for these comments probably shows that these should be distinct functions. WDYT of dedicating `::parse_{reg,iommus}()` to parsing and introducing\n```\nimpl AssignedDeviceInfo {\n    fn validate(\n        regs: \u0026[DeviceReg],\n        iommus: \u0026[(PvIommu, Vsid)],\n        phys_dev: \u0026PhysicalDeviceInfo,\n        hypervisor: \u0026dyn DeviceAssigningHypervisor,\n    ) -\u003e Result\u003c_\u003e;\n}\n```\nor (my preference)\n```\nimpl AssignedDeviceInfo {\n    fn is_properly_mapping(\n        \u0026self,\n        phys_dev: \u0026PhysicalDeviceInfo,\n        hypervisor: \u0026dyn DeviceAssigningHypervisor,\n    ) -\u003e Result\u003cbool\u003e;\n}\n```\nallowing the constructor to\n```\nlet reg \u003d Self::parse_reg(\u0026node)?;\nlet interrupts \u003d Self::parse_interrupts(\u0026node)?;\nlet iommus \u003d Self::parse_iommus(\u0026node, pviommus)?;\n\nlet assigned_device \u003d Self { ... };\n\nif assigned_device.is_properly_mapping(physical_device, hypervisor)? {\n    Ok(assigned_device)\n} else {\n    Err(...)\n}\n```",
+      "range": {
+        "startLine": 422,
+        "startChar": 8,
+        "endLine": 422,
+        "endChar": 41
+      },
+      "revId": "f28b9e1c849391ca18365df41755be6ce1609797",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5c4a56c_3a621894",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-15T14:37:32Z",
+      "side": 1,
+      "message": "Should we do this before we try to locate the physical device?",
+      "range": {
+        "startLine": 460,
+        "startChar": 8,
+        "endLine": 460,
+        "endChar": 72
+      },
+      "revId": "f28b9e1c849391ca18365df41755be6ce1609797",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
