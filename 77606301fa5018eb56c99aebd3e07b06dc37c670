@@ -22,6 +22,30 @@
       },
       "revId": "77606301fa5018eb56c99aebd3e07b06dc37c670",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "549998c6_5812a94b",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-15T13:16:59Z",
+      "side": 1,
+      "message": "Can be, but I thought that `descendants()` is more flexible. Device attached to platform devices mostly children of the root, but I\u0027m not certain it\u0027s a hard requirement. Is there a security concern? Otherwise let me keep this.",
+      "parentUuid": "71117b6f_77cbe4a5",
+      "range": {
+        "startLine": 464,
+        "startChar": 29,
+        "endLine": 464,
+        "endChar": 40
+      },
+      "revId": "77606301fa5018eb56c99aebd3e07b06dc37c670",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

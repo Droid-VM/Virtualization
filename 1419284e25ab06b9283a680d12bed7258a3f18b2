@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "badcc288_7b495c17",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-15T13:16:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2da025ed_91ff6e99",
+      "range": {
+        "startLine": 298,
+        "startChar": 4,
+        "endLine": 298,
+        "endChar": 33
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e3b1eca_48a7c18a",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-12-13T16:34:35Z",
       "side": 1,
       "message": "Same as the other functions in previous CLs, this should probably not be an associated function. In particular, this one is even more confusing by being in `PhysIommu` as\n```\nPhysIommu::is_iommu_node(pviommu_node) \u003d\u003d true\n```\ndespite what might be expected from the names.\n\nAlso (uber-nit), rename to `node_is_iommu`, which IMO reads better in `if`?",
+      "range": {
+        "startLine": 305,
+        "startChar": 7,
+        "endLine": 305,
+        "endChar": 20
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c1fa158_8ae19b7a",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-15T13:16:59Z",
+      "side": 1,
+      "message": "Done for disassociation.\n\nKeeping the name as-is, because method name starts with verb and getter is an exception.",
+      "parentUuid": "2e3b1eca_48a7c18a",
       "range": {
         "startLine": 305,
         "startChar": 7,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba096e9b_fd3a5b21",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-15T13:16:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edbfff79_7e969234",
+      "range": {
+        "startLine": 315,
+        "startChar": 11,
+        "endLine": 315,
+        "endChar": 27
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5a438b0_1a10c6c8",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5690ab7d_77f39fde",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-15T13:16:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5a438b0_1a10c6c8",
+      "range": {
+        "startLine": 325,
+        "startChar": 7,
+        "endLine": 325,
+        "endChar": 21
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f38f5cc_345c1262",
@@ -106,6 +202,30 @@
       "writtenOn": "2023-12-13T16:34:35Z",
       "side": 1,
       "message": "Take `\u0026[DeviceReg]` and pass `\u0026physical_device.reg`?\n\n(Same for `::parse_iommus()` with `\u0026physical_device.iommus`)",
+      "range": {
+        "startLine": 349,
+        "startChar": 26,
+        "endLine": 349,
+        "endChar": 40
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7ad0708_059e8bec",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-15T13:16:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f38f5cc_345c1262",
       "range": {
         "startLine": 349,
         "startChar": 26,
@@ -141,6 +261,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a6a721a1_9cba80a3",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-15T13:16:59Z",
+      "side": 1,
+      "message": "\u003e duplicate mappings (multiple VA region mapping to same PA region), nor detects duplicate PA regions (as we assume they\u0027re unique).\n\nThis seems like that VM DTBO itself has problem, and it can be detected without crsovm DT. Am I correct?\n\nIf so, can I handle such cases in separate CL? I would also check whether PA regions overlaps.",
+      "parentUuid": "107b2d58_29153320",
+      "range": {
+        "startLine": 355,
+        "startChar": 28,
+        "endLine": 365,
+        "endChar": 17
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8f8dc257_3e13a81e",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 7
@@ -152,6 +296,30 @@
       "writtenOn": "2023-12-13T16:34:35Z",
       "side": 1,
       "message": "Log the error, if any (identical to [this comment](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2849456/comment/cec51170_a7a5287c/) in aosp/2849456)",
+      "range": {
+        "startLine": 410,
+        "startChar": 47,
+        "endLine": 410,
+        "endChar": 64
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86431dfd_2483c9a1",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-15T13:16:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f8dc257_3e13a81e",
       "range": {
         "startLine": 410,
         "startChar": 47,
@@ -185,6 +353,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e53fd9b_bb930bdf",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-15T13:16:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "335e61c8_3ba569d1",
+      "range": {
+        "startLine": 415,
+        "startChar": 16,
+        "endLine": 415,
+        "endChar": 27
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f745e44a_bd9703fc",
@@ -198,6 +390,30 @@
       "writtenOn": "2023-12-13T16:34:35Z",
       "side": 1,
       "message": "Is this really an error? Why not return `Ok(BTreeMap::empty())` i.e. \"no physical devices\"?",
+      "range": {
+        "startLine": 497,
+        "startChar": 53,
+        "endLine": 497,
+        "endChar": 95
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26ce34c4_a4f92e82",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-15T13:16:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f745e44a_bd9703fc",
       "range": {
         "startLine": 497,
         "startChar": 53,
