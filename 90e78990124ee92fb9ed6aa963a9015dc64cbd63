@@ -22,6 +22,30 @@
       },
       "revId": "90e78990124ee92fb9ed6aa963a9015dc64cbd63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5b08ee3_032fcd58",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2023-12-15T19:30:44Z",
+      "side": 1,
+      "message": "This is my bad in the sample code, I missed the second update to offset.\n\n```\noffset \u003d range.start;\nlet (chunk, rest) \u003d body.split_at_mut(range.len());\nbody \u003d rest;\noffset +\u003d range.len();\n```\n\nWe did get a panic rather than a secret alias though 😊",
+      "parentUuid": "d2eeb153_3d226623",
+      "range": {
+        "startLine": 283,
+        "startChar": 0,
+        "endLine": 283,
+        "endChar": 61
+      },
+      "revId": "90e78990124ee92fb9ed6aa963a9015dc64cbd63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
