@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2eeb153_3d226623",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-15T18:04:47Z",
+      "side": 1,
+      "message": "This is panicking - e.g.\n```\n12-15 17:23:31.870  root 11195 11234 I rialto  : service_vm_manager: panicked at packages/modules/Virtualization/pvmfw/src/config.rs:283:37:\n12-15 17:23:31.872  root 11195 11234 I rialto  : service_vm_manager: range start index 1064 out of range for slice of length 462\n```\n\nThis will be easier to diagnose if I can get access to my test device again.",
+      "range": {
+        "startLine": 283,
+        "startChar": 0,
+        "endLine": 283,
+        "endChar": 61
+      },
+      "revId": "90e78990124ee92fb9ed6aa963a9015dc64cbd63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
