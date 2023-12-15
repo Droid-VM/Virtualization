@@ -357,6 +357,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "48d7534a_0ba23af0",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-15T15:06:37Z",
+      "side": 1,
+      "message": "For `\u003creg-names\u003e`, the property would come from the overlay part of the VM DTBO so crosvm should never use it and if vendors still want to, the will need to assume that the `\u003creg\u003e` order from crosvm (i.e. the VFIO order) matches the host order, which should match the `/host` order. So there doesn\u0027t seem to be a need for pvmfw to be `\u003creg-names\u003e`-aware.",
+      "parentUuid": "dc0df718_c71f88dc",
+      "range": {
+        "startLine": 355,
+        "startChar": 28,
+        "endLine": 365,
+        "endChar": 17
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8f8dc257_3e13a81e",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 7
