@@ -74,6 +74,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "01718e55_9313f524",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-16T02:10:06Z",
+      "side": 1,
+      "message": "Thank you for the info. Then let me just revert this change and repeat parsing iommu props.",
+      "parentUuid": "3126fed4_73f4f6ed",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 16
+      },
+      "revId": "f8839be73792bd44a94f92be3142649db8ec7a6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "979c1830_b35835b4",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-16T02:10:06Z",
+      "side": 1,
+      "message": "Thank you for the info.\n\nIf they\u0027re distinct, then grouping doesn\u0027t seem to make sense. Let me just drop this CL.",
+      "parentUuid": "3126fed4_73f4f6ed",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 16
+      },
+      "revId": "f8839be73792bd44a94f92be3142649db8ec7a6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "67bc5059_c249c81a",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 11
