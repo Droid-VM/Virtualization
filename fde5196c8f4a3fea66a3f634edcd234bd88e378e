@@ -167,6 +167,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3898f6fa_712b974a",
+        "filename": "pvmfw/testdata/test_pvmfw_devices_vm_dtbo.dts",
+        "patchSetId": 13
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-16T02:20:41Z",
+      "side": 1,
+      "message": "Ack.\nLet me revert to `android,pvmfw,target` to make progress. We have some time until ABI release, so let\u0027s find better name by then. If nothing beats `android,pvmfw,target` then I would say \u0027it\u0027s quite ok\u0027.",
+      "parentUuid": "b71ded60_ac888df8",
+      "range": {
+        "startLine": 11,
+        "startChar": 26,
+        "endLine": 11,
+        "endChar": 32
+      },
+      "revId": "fde5196c8f4a3fea66a3f634edcd234bd88e378e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8f73b98_c0397100",
@@ -275,6 +299,30 @@
       "side": 1,
       "message": "\u003e Could you double check if you\u0027re suggesting to `phandle` or `token`?\n\nSorry, I misclicked!\n\n\u003e Plus, what about `android,avf` instead? `pvmfw` seems pVM specific.\n\n`pvmfw` is the only one that will verify the token but you\u0027re right that the guest (for whatever reason) might want to also read it. Taking your comment one step further, there\u0027s nothing `avf` or even `android`-specific about this pKVM-defined token. Therefore, the name of the property should be defined by Linux, which won\u0027t be set in stone until the pvIOMMU driver gets upstreamed ... I guess, for now, `android,avf` makes sense as what we come up with here isn\u0027t guaranteed to be approved by upstream and we\u0027d have to support 2 bindings anyway.",
       "parentUuid": "bd35f58b_d44a74a3",
+      "range": {
+        "startLine": 34,
+        "startChar": 12,
+        "endLine": 34,
+        "endChar": 19
+      },
+      "revId": "fde5196c8f4a3fea66a3f634edcd234bd88e378e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b4df661_b93f9ce5",
+        "filename": "pvmfw/testdata/test_pvmfw_devices_vm_dtbo.dts",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-16T02:20:41Z",
+      "side": 1,
+      "message": "Thank you for the answer. Let me change to `android,pvmfw,token`.",
+      "parentUuid": "8fe29165_760c0d76",
       "range": {
         "startLine": 34,
         "startChar": 12,
@@ -394,6 +442,30 @@
       "side": 1,
       "message": "\u003e Are you asking to understand the motivation or suggesting to match the hierarchy?\n\nI\u0027m suggesting to match the structure of `/host` in the overlay node, as the crosvm DT will also have the device nodes under a bus node.",
       "parentUuid": "d3c57d61_07d3480a",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 6
+      },
+      "revId": "fde5196c8f4a3fea66a3f634edcd234bd88e378e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1daee4fb_c4d070de",
+        "filename": "pvmfw/testdata/test_pvmfw_devices_vm_dtbo.dts",
+        "patchSetId": 13
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-16T02:20:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9f2fcc2_8da147dd",
       "range": {
         "startLine": 77,
         "startChar": 0,
