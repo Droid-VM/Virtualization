@@ -22,6 +22,30 @@
       },
       "revId": "192e99caee77ddeb1df67bb56f9f0562261fb7d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb4f24ba_1d95c39c",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-12-18T05:48:04Z",
+      "side": 1,
+      "message": "Root digest value extracted by hashtree descriptor is a hex-encoded value.\nhttps://source.corp.google.com/h/android/platform/superproject/main/+/main:system/core/fs_mgr/libfs_avb/avb_util.cpp;l\u003d173;drc\u003dd4035b6eb1192f71af7adae47bf17d22c7356fa1\n\nAnd not the strong opinion, but small reasons to choose sending encoded value:\n- If we encode the value in first stage init, we would need to extract the size of root digest as well.\n- In the perspective of debuggability, it\u0027s better to compare encoded root digest value.",
+      "parentUuid": "33223ece_0b623cb8",
+      "range": {
+        "startLine": 391,
+        "startChar": 0,
+        "endLine": 391,
+        "endChar": 86
+      },
+      "revId": "192e99caee77ddeb1df67bb56f9f0562261fb7d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
