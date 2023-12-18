@@ -21,18 +21,18 @@ use core::mem::MaybeUninit;
 use core::num::NonZeroU32;
 use core::ptr;
 
-use bssl_ffi::CRYPTO_library_init;
-use bssl_ffi::ERR_get_error_line;
-use bssl_ffi::ERR_lib_error_string;
-use bssl_ffi::ERR_reason_error_string;
-use bssl_ffi::EVP_AEAD_CTX_aead;
-use bssl_ffi::EVP_AEAD_CTX_init;
-use bssl_ffi::EVP_AEAD_CTX_open;
-use bssl_ffi::EVP_AEAD_CTX_seal;
-use bssl_ffi::EVP_AEAD_max_overhead;
-use bssl_ffi::EVP_aead_aes_256_gcm_randnonce;
-use bssl_ffi::EVP_AEAD;
-use bssl_ffi::EVP_AEAD_CTX;
+use bssl_sys::CRYPTO_library_init;
+use bssl_sys::ERR_get_error_line;
+use bssl_sys::ERR_lib_error_string;
+use bssl_sys::ERR_reason_error_string;
+use bssl_sys::EVP_AEAD_CTX_aead;
+use bssl_sys::EVP_AEAD_CTX_init;
+use bssl_sys::EVP_AEAD_CTX_open;
+use bssl_sys::EVP_AEAD_CTX_seal;
+use bssl_sys::EVP_AEAD_max_overhead;
+use bssl_sys::EVP_aead_aes_256_gcm_randnonce;
+use bssl_sys::EVP_AEAD;
+use bssl_sys::EVP_AEAD_CTX;
 use cstr::cstr;
 
 #[derive(Debug)]
