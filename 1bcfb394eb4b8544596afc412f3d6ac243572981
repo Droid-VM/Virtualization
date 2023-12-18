@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2909e58_5637d60f",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-18T08:11:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecd4c887_b0c45b86",
+      "range": {
+        "startLine": 242,
+        "startChar": 7,
+        "endLine": 242,
+        "endChar": 11
+      },
+      "revId": "1bcfb394eb4b8544596afc412f3d6ac243572981",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c8c2075_5ef35a23",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-12-15T14:37:32Z",
       "side": 1,
       "message": "nit: In this case, I wouldn\u0027t mind a less-flat but more concise structure like\n```\nfor (node, _) in physical.descendants() {\n    if let Some(phandle) \u003d node.get_phandle()? {\n        if let Some(iommu) \u003d PhysIommu::parse(\u0026node)? {\n            if phys_iommus.insert(phandle, iommu).is_some() {\n                return Err(...);\n            }\n        }\n    }\n}\n```\n(same below)",
+      "range": {
+        "startLine": 519,
+        "startChar": 0,
+        "endLine": 529,
+        "endChar": 9
+      },
+      "revId": "1bcfb394eb4b8544596afc412f3d6ac243572981",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bee3d0b2_42b7622e",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-18T08:11:35Z",
+      "side": 1,
+      "message": "Ack, but let me keep this style.",
+      "parentUuid": "7c8c2075_5ef35a23",
       "range": {
         "startLine": 519,
         "startChar": 0,

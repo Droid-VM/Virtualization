@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b89cc8e2_aff4d3b9",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-18T08:11:35Z",
+      "side": 1,
+      "message": "Done for splitting, but didn\u0027t introduce non-static function for validation.\n\nI couldn\u0027t find a good reason to instantiate invalid `AssignedDeviceInfo`, so let\u0027s disallow `AssignedDeviceInfo` with invalid information.",
+      "parentUuid": "6b914336_9f05f5fe",
+      "range": {
+        "startLine": 422,
+        "startChar": 8,
+        "endLine": 422,
+        "endChar": 41
+      },
+      "revId": "f28b9e1c849391ca18365df41755be6ce1609797",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5c4a56c_3a621894",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-12-15T14:37:32Z",
       "side": 1,
       "message": "Should we do this before we try to locate the physical device?",
+      "range": {
+        "startLine": 460,
+        "startChar": 8,
+        "endLine": 460,
+        "endChar": 72
+      },
+      "revId": "f28b9e1c849391ca18365df41755be6ce1609797",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e85f0e4_7a6d7cc7",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-18T08:11:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5c4a56c_3a621894",
       "range": {
         "startLine": 460,
         "startChar": 8,

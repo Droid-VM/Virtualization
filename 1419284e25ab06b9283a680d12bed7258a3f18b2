@@ -403,6 +403,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f3fdb97_e76b69a9",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-18T08:11:35Z",
+      "side": 1,
+      "message": "Done.\n\nI have follow-up questions:\n\n- Question) Can multiple devices share the same `\u003creg\u003e` in `/host`? Overlapping looks bad, but not sure whether there can be an exact match `\u003creg\u003e`.\n- Question) Should `pvmfw` validate all VM DTBO\u0027s `/host` `\u003creg\u003e`, including unassigned one? I think yes, but just to double check.\n- Question) Can I assume that hypervisor is always correct? I\u0027m asking this to know whether I can skip `\u003creg\u003e`/`\u003ciommus\u003e` overlapping check for the input DT. If VM DTBO\u0027s `/host` doesn\u0027t have overlapping `\u003creg\u003e` nor conflicting `\u003ciommus\u003e`, then overlaps in input DT would fails in `validate_reg()` / `validate_iommus()`. No explicit check is needed for input DT if so.",
+      "parentUuid": "66a16e37_365e1abb",
+      "range": {
+        "startLine": 355,
+        "startChar": 28,
+        "endLine": 365,
+        "endChar": 17
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f8dc257_3e13a81e",
