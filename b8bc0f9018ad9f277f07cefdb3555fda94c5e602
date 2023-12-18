@@ -1,6 +1,46 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c55ef26f_c9635c77",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-12-18T12:34:01Z",
+      "side": 1,
+      "message": "This is a lot of `unsafe` code just for getting better diagnostics on errors -- is it really needed?",
+      "revId": "b8bc0f9018ad9f277f07cefdb3555fda94c5e602",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3438afdd_ed88008e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-12-18T12:34:01Z",
+      "side": 1,
+      "message": "\"one\"",
+      "range": {
+        "startLine": 11,
+        "startChar": 50,
+        "endLine": 11,
+        "endChar": 53
+      },
+      "revId": "b8bc0f9018ad9f277f07cefdb3555fda94c5e602",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9c8444be_830c29c2",
@@ -14,6 +54,23 @@
       "writtenOn": "2023-12-15T08:48:27Z",
       "side": 1,
       "message": "Hi David, could you take a look at this cl?",
+      "revId": "b8bc0f9018ad9f277f07cefdb3555fda94c5e602",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4804d15_199622e8",
+        "filename": "libs/bssl/src/err.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2023-12-18T12:34:01Z",
+      "side": 1,
+      "message": "Looking at the BoringSSL implementation, this could end up [returning the result of `strerror`](https://cs.android.com/android/platform/superproject/main/+/main:external/boringssl/src/crypto/err/err.c;l\u003d492;q\u003dstrerror), which worries me slightly -- `strerror` results are allowed to change under your feet.\n\nThe [man page](https://man7.org/linux/man-pages/man3/strerror.3.html) indicates that it should only change if there\u0027s another call to `strerror` (or `strerror_l`) in between getting the pointer and using it, so it\u0027s *probably* OK.\n\nBut maybe do the `.to_string_lossy()` in here so the reference doesn\u0027t hang around?",
       "revId": "b8bc0f9018ad9f277f07cefdb3555fda94c5e602",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
