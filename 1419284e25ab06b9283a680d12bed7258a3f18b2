@@ -429,6 +429,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1b0815c8_f0bf2b1c",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-18T11:28:36Z",
+      "side": 1,
+      "message": "First, regarding this PS, note that `AssignedDeviceInfo::validate_iommus` is still vulnerable to duplicates (not sure the hypervisor ABI gurantees it will prevent the host from programming such a topology even if it should) until you `physical_device_iommu.remove(phys_iommu)` so I recommend (as I did previously) to use a local set to track physIOMMUs.\n\n\u003e Can multiple devices share the same `\u003creg\u003e` in `/host`?\n\nNope, I\u0027ve never seen a DT doing this.\n\n\u003e Should `pvmfw` validate all VM DTBO\u0027s `/host` `\u003creg\u003e`, including unassigned one?\n\nIMO, yes, it should ensure that the physical topologies it needs to use are sane (i.e. physical IOMMU topology doesn\u0027t have duplicates, or missing tokens, ... and that the physical regs don\u0027t overlap). This is, in part, done naturally as pvmfw needs to understand the physical topology for the HVC-based validation, anyway.\n\n\u003e Can I assume that hypervisor is always correct?\n\nYes, trust we shall have in the almighty.\n\n\u003e I\u0027m asking this to know whether I can skip `\u003creg\u003e`/`\u003ciommus\u003e` overlapping check for the input DT.\n\nThat\u0027s correct but only covers the assigned MMIO.\n\nYou just made me realize: we probably need a way to ensure that the virtual `\u003creg\u003e` of the assigned devices don\u0027t overlap with the fully virtual ones (say the virtual PCIe bus) otherwise a malicious host could \"assign\" a physical page of MMIO where the platform DT contains a virtual device, making the guest use it with unknown effects (can be in a follow-up CL but, if doing so, please mention it in the commit message and leave a TODO).\n\nFYI, see b/316862665 which is slightly related.",
+      "parentUuid": "7f3fdb97_e76b69a9",
+      "range": {
+        "startLine": 355,
+        "startChar": 28,
+        "endLine": 365,
+        "endChar": 17
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8f8dc257_3e13a81e",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 7

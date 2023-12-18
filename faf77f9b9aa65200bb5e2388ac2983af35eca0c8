@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f029363e_0b89f709",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-18T11:28:36Z",
+      "side": 1,
+      "message": "nit (I recently learned about this pattern matching):\n```\nlet chunks \u003d cells.chunks_exact(2);\n\nwhile let Some([phandle, sid]) \u003d chunks.next() {\n    let phandle \u003d Phandle::try_from(phandle).or(...)?;\n    let iommu \u003d phys_iommus.get(\u0026phandle).ok_or(...)?;\n    \n    iommus.push((*iommu, Sid::from(sid)));\n}\n\nif !chunks.remainder().is_empty() {\n    return Err(...);\n}\n```\nNote that you could also make use of `Phandle as From\u003cu32\u003e`:\n```\nlet iommu \u003d Phandle::from(phandle).and_then(|p| phys_iommus.get(\u0026p)).ok_or(...)?;\n```\n\n(same in `AssignedDeviceInfo::parse_iommus()`)",
+      "range": {
+        "startLine": 363,
+        "startChar": 8,
+        "endLine": 363,
+        "endChar": 43
+      },
+      "revId": "faf77f9b9aa65200bb5e2388ac2983af35eca0c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be15658a_cdf5dd86",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-18T11:28:36Z",
+      "side": 1,
+      "message": "typo and unfinished sentence(?)",
+      "range": {
+        "startLine": 415,
+        "startChar": 11,
+        "endLine": 415,
+        "endChar": 65
+      },
+      "revId": "faf77f9b9aa65200bb5e2388ac2983af35eca0c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dbf0b5d_76944c63",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-18T11:28:36Z",
+      "side": 1,
+      "message": "This check is pointless as that is guaranteed by the hypervisor on HVC success; this is why I had suggested checking for size mismatch before `.get_phys_mmio_token()`. However, optimizing for the error case was perhaps unnecessary. So remove this one, for clarity?",
+      "range": {
+        "startLine": 421,
+        "startChar": 37,
+        "endLine": 421,
+        "endChar": 65
+      },
+      "revId": "faf77f9b9aa65200bb5e2388ac2983af35eca0c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

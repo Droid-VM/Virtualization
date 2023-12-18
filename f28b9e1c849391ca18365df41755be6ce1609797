@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44b60b6d_c5e50cb7",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-18T11:28:36Z",
+      "side": 1,
+      "message": "\u003e so let\u0027s disallow `AssignedDeviceInfo` with invalid information.\n\nYes, that\u0027s exactly what you\u0027d be doing with the `if`-`Ok`-`else`-`Err` in the above!\n\nAnyway, the current PS also LGTM.",
+      "parentUuid": "b89cc8e2_aff4d3b9",
+      "range": {
+        "startLine": 422,
+        "startChar": 8,
+        "endLine": 422,
+        "endChar": 41
+      },
+      "revId": "f28b9e1c849391ca18365df41755be6ce1609797",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5c4a56c_3a621894",
