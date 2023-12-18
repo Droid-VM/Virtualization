@@ -164,6 +164,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         if (!updateBootconfigs) {
             command.add("--do_not_update_bootconfigs");
         }
+        command.add("--do_not_validate_avb_version");
         keyOverrides.forEach(
                 (filename, keyFile) ->
                         command.add("--key_override " + filename + "=" + keyFile.getPath()));
