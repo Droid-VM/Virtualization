@@ -22,6 +22,30 @@
       },
       "revId": "dc1f22fd8796ca90cba1519feb3d3d5f62c81729",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0198951d_3d0eea3b",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-12-18T18:17:58Z",
+      "side": 1,
+      "message": "Ideally, we would want to rebind the original driver if virtualizationmanager crashes. I have updated this to be more robust. `VfioHandler` now returns an `IBoundDevice[]`, which is dropped after the VM exits, or in case the binder client exits. The original driver is re-bound in `drop`.",
+      "parentUuid": "269d11c5_07b1203a",
+      "range": {
+        "startLine": 414,
+        "startChar": 0,
+        "endLine": 414,
+        "endChar": 53
+      },
+      "revId": "dc1f22fd8796ca90cba1519feb3d3d5f62c81729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

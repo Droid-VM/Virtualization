@@ -57,6 +57,30 @@
       },
       "revId": "5a7d4b3aac1ba42788223dd81e53703abdaf6c7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6c52a4f_7e4d413d",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-12-18T18:17:58Z",
+      "side": 1,
+      "message": "As proposed, I have moved this implementation to VfioHandler, with virtualizationservice now returning `IBoundDevice[]` from VfioHandler.",
+      "parentUuid": "ea6a8e6a_756091b4",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 0
+      },
+      "revId": "5a7d4b3aac1ba42788223dd81e53703abdaf6c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
