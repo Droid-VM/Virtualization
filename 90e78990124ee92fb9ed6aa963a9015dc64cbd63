@@ -46,6 +46,30 @@
       },
       "revId": "90e78990124ee92fb9ed6aa963a9015dc64cbd63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7934f4cb_846a7cb4",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-18T11:26:51Z",
+      "side": 1,
+      "message": "Yeah, thanks, once I looked at the code knowing there was a problem I spotted it pretty quickly.\n\n\u003e We did get a panic\n\nAnd it told me the exact failure! So much better than silently doing the wrong thing.",
+      "parentUuid": "b5b08ee3_032fcd58",
+      "range": {
+        "startLine": 283,
+        "startChar": 0,
+        "endLine": 283,
+        "endChar": 61
+      },
+      "revId": "90e78990124ee92fb9ed6aa963a9015dc64cbd63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
