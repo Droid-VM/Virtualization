@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33223ece_0b623cb8",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-18T05:33:18Z",
+      "side": 1,
+      "message": "why do you need encoding? FDT library doesn\u0027t require prop values to be nul-terminated. Would it be stored somewhere else?",
+      "range": {
+        "startLine": 391,
+        "startChar": 0,
+        "endLine": 391,
+        "endChar": 86
+      },
+      "revId": "192e99caee77ddeb1df67bb56f9f0562261fb7d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
