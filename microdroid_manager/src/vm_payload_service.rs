@@ -23,7 +23,7 @@ use anyhow::{anyhow, Context, Result};
 use avflog::LogResult;
 use binder::{Interface, BinderFeatures, ExceptionCode, Strong, IntoBinderResult, Status};
 use client_vm_csr::{generate_attestation_key_and_csr, ClientVmAttestationData};
-use diced_open_dice::DiceArtifacts;
+// use diced_open_dice::DiceArtifacts;
 use log::info;
 use rpcbinder::RpcServer;
 use crate::vm_secret::VmSecret;
