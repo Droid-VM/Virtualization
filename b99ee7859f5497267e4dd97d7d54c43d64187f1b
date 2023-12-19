@@ -34,6 +34,29 @@
       "parentUuid": "5919da1f_f90fca21",
       "revId": "b99ee7859f5497267e4dd97d7d54c43d64187f1b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23038193_442c1bae",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-12-19T11:13:47Z",
+      "side": 1,
+      "message": "We never pass \"\" though, so a simple null check would work?\n\n(isNullOrEmpty always seems like a code smell to me; one representation of null is enough - arguably one too many.)",
+      "range": {
+        "startLine": 332,
+        "startChar": 28,
+        "endLine": 332,
+        "endChar": 41
+      },
+      "revId": "b99ee7859f5497267e4dd97d7d54c43d64187f1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
