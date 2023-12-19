@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96016e3b_f6ca13b1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2023-12-19T23:10:59Z",
+      "side": 1,
+      "message": "I was reading this and wondering if there could be performance overhead (since the server implementation doesn\u0027t check the feature flag).  But it seems fine because `parse_selinux_xattr` would always receive an empty byte buffer and return None.",
+      "range": {
+        "startLine": 9,
+        "startChar": 13,
+        "endLine": 9,
+        "endChar": 40
+      },
+      "revId": "060755e5314ae753069001ff659c9dfc44fcecde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
