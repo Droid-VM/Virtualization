@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf53da5f_ede6fbc2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-19T08:52:28Z",
+      "side": 1,
+      "message": "The message provided here can be useful for debugging, particularly when we haven\u0027t mapped all the errors to a readable enum. Moreover, since certain errors are returned multiple times in the code, it would be helpful to have precise information about where the failure occurs.",
+      "parentUuid": "c55ef26f_c9635c77",
+      "revId": "b8bc0f9018ad9f277f07cefdb3555fda94c5e602",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3438afdd_ed88008e",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
@@ -31,6 +49,30 @@
       "writtenOn": "2023-12-18T12:34:01Z",
       "side": 1,
       "message": "\"one\"",
+      "range": {
+        "startLine": 11,
+        "startChar": 50,
+        "endLine": 11,
+        "endChar": 53
+      },
+      "revId": "b8bc0f9018ad9f277f07cefdb3555fda94c5e602",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52fb9547_0380979d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-19T08:52:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3438afdd_ed88008e",
       "range": {
         "startLine": 11,
         "startChar": 50,
@@ -71,6 +113,24 @@
       "writtenOn": "2023-12-18T12:34:01Z",
       "side": 1,
       "message": "Looking at the BoringSSL implementation, this could end up [returning the result of `strerror`](https://cs.android.com/android/platform/superproject/main/+/main:external/boringssl/src/crypto/err/err.c;l\u003d492;q\u003dstrerror), which worries me slightly -- `strerror` results are allowed to change under your feet.\n\nThe [man page](https://man7.org/linux/man-pages/man3/strerror.3.html) indicates that it should only change if there\u0027s another call to `strerror` (or `strerror_l`) in between getting the pointer and using it, so it\u0027s *probably* OK.\n\nBut maybe do the `.to_string_lossy()` in here so the reference doesn\u0027t hang around?",
+      "revId": "b8bc0f9018ad9f277f07cefdb3555fda94c5e602",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c7f2716_156cf214",
+        "filename": "libs/bssl/src/err.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-12-19T08:52:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4804d15_199622e8",
       "revId": "b8bc0f9018ad9f277f07cefdb3555fda94c5e602",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
