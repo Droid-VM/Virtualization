@@ -25,6 +25,7 @@ import static com.google.common.truth.Truth.assertWithMessage;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeFalse;
 import static org.junit.Assume.assumeTrue;
 
@@ -50,6 +51,8 @@ import com.android.tradefed.util.FileUtil;
 import com.android.tradefed.util.RunUtil;
 import com.android.tradefed.util.xml.AbstractXmlParser;
 import com.android.virt.PayloadMetadata;
+
+import com.google.common.base.Strings;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -102,13 +105,23 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         }
     }
 
-    @Parameterized.Parameters(name = "protectedVm={0}")
+    @Parameterized.Parameters(name = "protectedVm={0},gki={1}")
     public static Collection<Object[]> params() {
-        return List.of(new Object[] {true}, new Object[] {false});
+        List<Object[]> ret = new ArrayList<>();
+        ret.add(new Object[] {true /* protectedVm */, null /* use microdroid kernel */});
+        ret.add(new Object[] {false /* protectedVm */, null /* use microdroid kernel */});
+        for (String gki : SUPPORTED_GKI_VERSIONS) {
+            ret.add(new Object[] {true /* protectedVm */, gki});
+            ret.add(new Object[] {false /* protectedVm */, gki});
+        }
+        return ret;
     }
 
     @Parameterized.Parameter(0)
     public boolean mProtectedVm;
+
+    @Parameterized.Parameter(1)
+    public String mGki;
 
     @Rule public TestLogData mTestLogs = new TestLogData();
     @Rule public TestName mTestName = new TestName();
@@ -316,7 +329,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         //   - its idsig
 
         // Load etc/microdroid.json
-        File microdroidConfigFile = new File(virtApexEtcDir, "microdroid.json");
+        String os = Strings.isNullOrEmpty(mGki) ? "microdroid" : "microdroid_gki-" + mGki;
+        File microdroidConfigFile = new File(virtApexEtcDir, os + ".json");
         JSONObject config = new JSONObject(FileUtil.readStringFromFile(microdroidConfigFile));
 
         // Replace paths so that the config uses re-signed images from TEST_ROOT
@@ -332,7 +346,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         }
 
         // Add partitions to the second disk
-        final String initrdPath = TEST_ROOT + "etc/microdroid_initrd_debuggable.img";
+        final String initrdPath = TEST_ROOT + "etc/" + os + "_initrd_debuggable.img";
         config.put("initrd", initrdPath);
         // Add instance image as a partition in disks[1]
         disks.put(
@@ -400,6 +414,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         .memoryMib(minMemorySize())
                         .cpuTopology("match_host")
                         .protectedVm(true)
+                        .gki(mGki)
                         .build(getAndroidDevice());
 
         // Assert
@@ -526,6 +541,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         .memoryMib(minMemorySize())
                         .cpuTopology("match_host")
                         .protectedVm(protectedVm)
+                        .gki(mGki)
                         .build(getAndroidDevice());
         mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
         mMicrodroidDevice.enableAdbRoot();
@@ -680,6 +696,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         .memoryMib(minMemorySize())
                         .cpuTopology("match_host")
                         .protectedVm(mProtectedVm)
+                        .gki(mGki)
                         .build(device);
         microdroid.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
         device.shutdownMicrodroid(microdroid);
@@ -808,24 +825,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         .debugLevel("full")
                         .memoryMib(minMemorySize())
                         .cpuTopology("match_host")
-                        .protectedVm(mProtectedVm));
-    }
-
-    @Test
-    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-1-2", "9.17/C/1-3"})
-    public void testMicrodroidBootsWithGki() throws Exception {
-        List<String> supportedVersions = getSupportedGKIVersions();
-        assumeFalse("no available gki", supportedVersions.isEmpty());
-        for (String ver : supportedVersions) {
-            final String configPath = "assets/vm_config.json"; // path inside the APK
-            testMicrodroidBootsWithBuilder(
-                    MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
-                            .debugLevel("full")
-                            .memoryMib(minMemorySize())
-                            .cpuTopology("match_host")
-                            .protectedVm(mProtectedVm)
-                            .gki(ver));
-        }
+                        .protectedVm(mProtectedVm)
+                        .gki(mGki));
     }
 
     @Test
@@ -837,6 +838,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         .memoryMib(minMemorySize())
                         .cpuTopology("match_host")
                         .protectedVm(mProtectedVm)
+                        .gki(mGki)
                         .build(getAndroidDevice());
         mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
         mMicrodroidDevice.enableAdbRoot();
@@ -992,9 +994,19 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         .cpuTopology("match_host")
                         .protectedVm(true)
                         .addAssignableDevice(devices.get(0))
+                        .gki(mGki)
                         .build(getAndroidDevice());
 
         mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
+    }
+
+    @Test
+    public void testGkiVersions() throws Exception {
+        for (String gki : getSupportedGKIVersions()) {
+            assertTrue(
+                    "Unknown gki " + gki + ". Supported gkis: " + SUPPORTED_GKI_VERSIONS,
+                    SUPPORTED_GKI_VERSIONS.contains(gki));
+        }
     }
 
     @Before
@@ -1011,6 +1023,12 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         assumeTrue(
                 "Microdroid is not supported for specific VM protection type",
                 getAndroidDevice().supportsMicrodroid(mProtectedVm));
+
+        if (!Strings.isNullOrEmpty(mGki)) {
+            assumeTrue(
+                    "GKI version " + mGki + " is not supported on this device",
+                    getSupportedGKIVersions().contains(mGki));
+        }
     }
 
     @After
