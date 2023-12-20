@@ -15,8 +15,7 @@
 //! Implementation of the AIDL interface of the VirtualizationService.
 
 use crate::{get_calling_pid, get_calling_uid};
-use crate::atom::{
-    write_vm_booted_stats, write_vm_creation_stats};
+use crate::atom::{write_vm_booted_stats, write_vm_creation_stats};
 use crate::composite::make_composite_image;
 use crate::crosvm::{CrosvmConfig, DiskFile, PayloadState, VmContext, VmInstance, VmState};
 use crate::debug_config::DebugConfig;
@@ -73,7 +72,7 @@ use glob::glob;
 use lazy_static::lazy_static;
 use libfdt::Fdt;
 use log::{debug, error, info, warn};
-use microdroid_payload_config::{OsConfig, Task, TaskType, VmPayloadConfig};
+use microdroid_payload_config::{ApkConfig, OsConfig, Task, TaskType, VmPayloadConfig};
 use nix::unistd::pipe;
 use rpcbinder::RpcServer;
 use rustutils::system_properties;
@@ -777,12 +776,28 @@ fn load_app_config(
         None
     };
 
-    let vm_payload_config = match &config.payload {
+    let vm_payload_config;
+    let extra_apk_files: Vec<_>;
+    match &config.payload {
         Payload::ConfigPath(config_path) => {
-            load_vm_payload_config_from_file(&apk_file, config_path.as_str())
-                .with_context(|| format!("Couldn't read config from {}", config_path))?
+            vm_payload_config =
+                load_vm_payload_config_from_file(&apk_file, config_path.as_str())
+                    .with_context(|| format!("Couldn't read config from {}", config_path))?;
+            extra_apk_files = vm_payload_config
+                .extra_apks
+                .iter()
+                .enumerate()
+                .map(|(i, apk)| {
+                    File::open(PathBuf::from(&apk.path))
+                        .with_context(|| format!("Failed to open extra apk #{i} {}", apk.path))
+                })
+                .collect::<Result<_>>()?;
         }
-        Payload::PayloadConfig(payload_config) => create_vm_payload_config(payload_config)?,
+        Payload::PayloadConfig(payload_config) => {
+            vm_payload_config = create_vm_payload_config(payload_config)?;
+            extra_apk_files =
+                payload_config.extraApks.iter().map(clone_file).collect::<binder::Result<_>>()?;
+        }
     };
 
     // For now, the only supported OS is Microdroid and Microdroid GKI
@@ -830,6 +845,7 @@ fn load_app_config(
         temporary_directory,
         apk_file,
         idsig_file,
+        extra_apk_files,
         &vm_payload_config,
         &mut vm_config,
     )?;
@@ -857,11 +873,17 @@ fn create_vm_payload_config(
 
     let task = Task { type_: TaskType::MicrodroidLauncher, command: payload_binary_name.clone() };
     let name = payload_config.osName.clone();
+
+    // The VM only cares about how many there are, these names are actually ignored.
+    let extra_apk_count = payload_config.extraApks.len();
+    let extra_apks =
+        (0..extra_apk_count).map(|i| ApkConfig { path: format!("extra-apk-{i}") }).collect();
+
     Ok(VmPayloadConfig {
         os: OsConfig { name },
         task: Some(task),
         apexes: vec![],
-        extra_apks: vec![],
+        extra_apks,
         prefer_staged: false,
         export_tombstones: None,
         enable_authfs: false,

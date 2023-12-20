@@ -175,6 +175,11 @@ pub struct RunAppConfig {
     #[arg(alias = "payload_path")]
     payload_binary_name: Option<String>,
 
+    /// Paths to extra apk files.
+    #[arg(long = "extra-apk")]
+    #[clap(conflicts_with = "config_path")]
+    extra_apks: Vec<PathBuf>,
+
     /// Paths to extra idsig files.
     #[arg(long = "extra-idsig")]
     extra_idsigs: Vec<PathBuf>,
