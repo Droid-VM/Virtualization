@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8b0f795_276b6a5a",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-20T07:12:32Z",
+      "side": 1,
+      "message": "Let me keep this pattern, because of extra overhead to use chunks.\n\n`chunks_*()` is only supported by slice and `getprop_cells()` returns iterator. For using chunks, I should either `getprop_cells()?.collect().chunks_exact()` or use `getprop().chunks_exact(4 /* u8 -\u003e u32 */).map(|x| to_be_bytes()).chunks_exact(2).`",
+      "parentUuid": "f029363e_0b89f709",
+      "range": {
+        "startLine": 363,
+        "startChar": 8,
+        "endLine": 363,
+        "endChar": 43
+      },
+      "revId": "faf77f9b9aa65200bb5e2388ac2983af35eca0c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be15658a_cdf5dd86",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1123f52b_b5eb9d04",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-20T07:12:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be15658a_cdf5dd86",
+      "range": {
+        "startLine": 415,
+        "startChar": 11,
+        "endLine": 415,
+        "endChar": 65
+      },
+      "revId": "faf77f9b9aa65200bb5e2388ac2983af35eca0c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2dbf0b5d_76944c63",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-12-18T11:28:36Z",
       "side": 1,
       "message": "This check is pointless as that is guaranteed by the hypervisor on HVC success; this is why I had suggested checking for size mismatch before `.get_phys_mmio_token()`. However, optimizing for the error case was perhaps unnecessary. So remove this one, for clarity?",
+      "range": {
+        "startLine": 421,
+        "startChar": 37,
+        "endLine": 421,
+        "endChar": 65
+      },
+      "revId": "faf77f9b9aa65200bb5e2388ac2983af35eca0c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e623b810_a7f4862b",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-20T07:12:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2dbf0b5d_76944c63",
       "range": {
         "startLine": 421,
         "startChar": 37,
