@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f8a8d32_af95169a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-12-20T01:41:05Z",
+      "side": 1,
+      "message": "I think we need to add test APIs (or system APIs?) to do that. I was going to do that as a separate change.",
+      "parentUuid": "2f192beb_342b46bd",
+      "revId": "b99ee7859f5497267e4dd97d7d54c43d64187f1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23038193_442c1bae",
@@ -49,6 +67,30 @@
       "writtenOn": "2023-12-19T11:13:47Z",
       "side": 1,
       "message": "We never pass \"\" though, so a simple null check would work?\n\n(isNullOrEmpty always seems like a code smell to me; one representation of null is enough - arguably one too many.)",
+      "range": {
+        "startLine": 332,
+        "startChar": 28,
+        "endLine": 332,
+        "endChar": 41
+      },
+      "revId": "b99ee7859f5497267e4dd97d7d54c43d64187f1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d31519e3_1d39caf8",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-12-20T01:41:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23038193_442c1bae",
       "range": {
         "startLine": 332,
         "startChar": 28,
