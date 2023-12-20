@@ -477,6 +477,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed34af3f_0e554fa6",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-20T12:40:52Z",
+      "side": 1,
+      "message": "This is tricky business!\n\nI\u0027ll summarize my points on the latest PS in this thread instead of individual comments:\n\n- `validate_all_regs()` does NOT work: it compares PAs (`/host`) and IPAs (crosvm DT). My point above was that the assigned devices must not clash (in IPA space) with with the expected virtual devices and memory regions (from the platform DT, in part in `DeviceTreeInfo` and in part hard-coded in `fdt.rs`) e.g. `\u003cmemory\u003e`, the virtual PCI bus, the virtual UART, vGIC, ... As I said above, feel free to validate this topology in a follow-up CL.\n- distinct (pvIOMMU, vSID) pairs mapped (by the hypervisor) to the same (IOMMU, SID) would still pass `validate_iommus()` so I think we still want the `.remove()` I suggest above. Note that `validate_assigned_devices_iommus()` only deals with the virtual topology, not the virt-to-phys mapping, so although necessary, doesn\u0027t help with this particular issue.",
+      "parentUuid": "5211967a_1dad5693",
+      "range": {
+        "startLine": 355,
+        "startChar": 28,
+        "endLine": 365,
+        "endChar": 17
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8f8dc257_3e13a81e",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 7
