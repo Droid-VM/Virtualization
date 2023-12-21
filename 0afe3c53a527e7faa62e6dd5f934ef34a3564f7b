@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66871a35_5cb12c0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-12-21T14:11:11Z",
+      "side": 1,
+      "message": "LGTM for unsafe Rust.",
+      "revId": "0afe3c53a527e7faa62e6dd5f934ef34a3564f7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "817797c0_6ae72c2e",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-12-21T14:11:11Z",
+      "side": 1,
+      "message": "Why are these tests commented out? They should probably either be deleted, uncommented, or marked as `#[ignore]`.",
+      "revId": "0afe3c53a527e7faa62e6dd5f934ef34a3564f7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
