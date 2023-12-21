@@ -525,6 +525,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4de12a91_e6aa8cea",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-12-21T09:31:47Z",
+      "side": 1,
+      "message": "\u003e `validate_all_regs()` -\u003e removed and added TODO in `fdt.rs`\n\nAck; although it would make more sense to do the check in `device_assignment.rs` e.g. by calling `device_assignment_info.filter(vm_dtbo, \u0026info)` (which the currently hardcoded virtual device locations also present in the struct). Anyway, this is out-of-scope for this CL and might be what you already have in mind.\n\n\u003e `validate_iommus()` -\u003e applied.\n\nThanks but I don\u0027t get why you\u0027re bothering with a vector instead of the `BTreeSet` I recommend above which would make your code shorter and simpler to reason about (and theoretically asymptotically more performant but that\u0027s secondary) e.g.\n```\nlet mut phys_iommus: BTreeSet\u003c(_, _)\u003e \u003d physical_device_iommu.iter().map(\n    |(PhysIommu { token }, Sid(sid))| (*token, *sid)\n).collect();\n\nfor (PvIommu { id }, Vsid(vsid)) in iommus {\n    let (token, sid) \u003d hypervisor.get_phys_iommu_token(id.into(), vsid).map_err(...)?;\n\n    if !phys_iommus.remove(\u0026(token, sid)) {\n        error!(...);\n        return Err(...);\n    }\n}\n```\n(also note the use of pattern matching for `struct` in `.map` and `for`)\n\nI\u0027ll give +2 assuming this will be addresses and/or there\u0027s a good reason for not doing so that I\u0027ve missed; please let me know otherwise!\n\n(BTW \u0026 FYI, the code in this patchset could have been flatter by using [`.position()`](https://doc.rust-lang.org/core/slice/struct.Iter.html#method.position)!)",
+      "parentUuid": "e098cf00_56131865",
+      "range": {
+        "startLine": 355,
+        "startChar": 28,
+        "endLine": 365,
+        "endChar": 17
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8f8dc257_3e13a81e",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 7
