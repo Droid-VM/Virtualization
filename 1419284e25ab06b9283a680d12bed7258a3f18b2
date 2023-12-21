@@ -547,6 +547,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53dbefa7_d28d4642",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-21T13:58:52Z",
+      "side": 1,
+      "message": "Thank you for the review. My small replies\n\nRe: validation in `device_assignment.rs`: I prefer do so in `fdt.rs` for two reasons)\n  - `device_assignment` doesn\u0027t need to be patched at the end of the device.\n  - `device_assignment` doesn\u0027t need to be patched at the end of the \n  \nRe: `Vec` vs `BTreeSet`: I often pick `Vec` if the data size is highly likely less than 5, which I believe that overhead of `BTreeSet` makes it slower than `Vec`.\n\nRe: `position`: Good to know. Taken.",
+      "parentUuid": "4de12a91_e6aa8cea",
+      "range": {
+        "startLine": 355,
+        "startChar": 28,
+        "endLine": 365,
+        "endChar": 17
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f8dc257_3e13a81e",
