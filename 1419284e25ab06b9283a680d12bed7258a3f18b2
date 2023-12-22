@@ -571,6 +571,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5948e97b_f1c34f41",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-22T00:38:36Z",
+      "side": 1,
+      "message": "I prefer do so in fdt.rs for two reasons)\n\n- device_assignment doesn\u0027t need to be patched at the end of the device.\n- device_assignment doesn\u0027t need to be patched at the end of the",
+      "parentUuid": "53dbefa7_d28d4642",
+      "range": {
+        "startLine": 355,
+        "startChar": 28,
+        "endLine": 365,
+        "endChar": 17
+      },
+      "revId": "1419284e25ab06b9283a680d12bed7258a3f18b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f8dc257_3e13a81e",
