@@ -22,6 +22,30 @@
       },
       "revId": "811e2852f0272ade70acb875c48fd4e344f1ea19",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "779f379d_b8c84054",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 2144,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-12-22T03:46:01Z",
+      "side": 1,
+      "message": "For Cuttlefish, I verified CF doesn\u0027t use DT like normal Android, so I could exclude it. However for HWASAN, I\u0027m still seeking about how I should treat it. Thanks!",
+      "parentUuid": "ecbc31f9_b8ad6d29",
+      "range": {
+        "startLine": 2144,
+        "startChar": 87,
+        "endLine": 2144,
+        "endChar": 95
+      },
+      "revId": "811e2852f0272ade70acb875c48fd4e344f1ea19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
