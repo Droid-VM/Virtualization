@@ -46,6 +46,30 @@
       },
       "revId": "811e2852f0272ade70acb875c48fd4e344f1ea19",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89154df4_3b606c8b",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 2144,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2023-12-22T08:11:22Z",
+      "side": 1,
+      "message": "\u003e Does HWASAN build have separated system regarding DT or fstab\n\nI\u0027m not sure. But I didn\u0027t observe HWASAN-specific failures related to fstab.",
+      "parentUuid": "779f379d_b8c84054",
+      "range": {
+        "startLine": 2144,
+        "startChar": 87,
+        "endLine": 2144,
+        "endChar": 95
+      },
+      "revId": "811e2852f0272ade70acb875c48fd4e344f1ea19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
