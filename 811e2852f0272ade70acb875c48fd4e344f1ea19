@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecbc31f9_b8ad6d29",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 2144,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-12-22T03:43:53Z",
+      "side": 1,
+      "message": "This change is following change of aosp/2877814, appending avb_hashtree_digest into fstab file. And I found a related presubmit test case doesn\u0027t work with HWASAN build, but haven\u0027t found the exact cause for the failure yet. Does HWASAN build have separated system regarding DT or fstab, so that it\u0027s not working as same as normal Android? @bowgotsai@google.com",
+      "range": {
+        "startLine": 2144,
+        "startChar": 87,
+        "endLine": 2144,
+        "endChar": 95
+      },
+      "revId": "811e2852f0272ade70acb875c48fd4e344f1ea19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
