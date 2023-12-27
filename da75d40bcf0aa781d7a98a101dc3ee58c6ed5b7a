@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c511d204_df66840b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-12-27T06:01:00Z",
+      "side": 1,
+      "message": "Changed with the new title.\n\n`Enable verifying vendor partition (Reland with additional edits)`",
+      "parentUuid": "685e8920_1d6885fd",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 44
+      },
+      "revId": "da75d40bcf0aa781d7a98a101dc3ee58c6ed5b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0b469f1_b01f64e1",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-12-27T05:11:27Z",
       "side": 1,
       "message": "minor suggestion, feel free to ignore) I just recognized that CF doesn\u0027t need DT for booting, hence relevant feature is disabled.\n\nHowever, what about adding the feature back for AVF testing? It might be a helpful if we can test more of unprotected VM in CF. If you agree, then we can file an issue and leave TODO here.",
+      "range": {
+        "startLine": 2180,
+        "startChar": 0,
+        "endLine": 2183,
+        "endChar": 0
+      },
+      "revId": "da75d40bcf0aa781d7a98a101dc3ee58c6ed5b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1407974a_ab3a2174",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2183,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-12-27T06:01:00Z",
+      "side": 1,
+      "message": "Though I just skimmed the deprecated feature regarding DT in CF, reviving the feature may collide with CF\u0027s own fstab feature. In such case, it\u0027s deeply related to partition scheme, I think the task would be huge.\n\nOn the other hand, I don\u0027t think keeping support of this test on CF is not effective, because of nested virtualization. In CI, it\u0027s nested with triple stack; GCE, CF, Microdroid.",
+      "parentUuid": "b0b469f1_b01f64e1",
       "range": {
         "startLine": 2180,
         "startChar": 0,
