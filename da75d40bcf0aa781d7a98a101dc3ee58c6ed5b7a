@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "685e8920_1d6885fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-27T05:11:27Z",
+      "side": 1,
+      "message": "This isn\u0027t a simple revert, because you\u0027d changed fstab to fix issue in the previous change. You\u0027d better drop \u0027revert\u0027.\n\nnit; \u0027Verify vendor partition\u0027 or \u0027Enable vendor partition verification\u0027 look more natural.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 44
+      },
+      "revId": "da75d40bcf0aa781d7a98a101dc3ee58c6ed5b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0b469f1_b01f64e1",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2183,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-12-27T05:11:27Z",
+      "side": 1,
+      "message": "minor suggestion, feel free to ignore) I just recognized that CF doesn\u0027t need DT for booting, hence relevant feature is disabled.\n\nHowever, what about adding the feature back for AVF testing? It might be a helpful if we can test more of unprotected VM in CF. If you agree, then we can file an issue and leave TODO here.",
+      "range": {
+        "startLine": 2180,
+        "startChar": 0,
+        "endLine": 2183,
+        "endChar": 0
+      },
+      "revId": "da75d40bcf0aa781d7a98a101dc3ee58c6ed5b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
