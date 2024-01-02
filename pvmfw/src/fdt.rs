@@ -200,27 +200,36 @@ fn patch_num_cpus(fdt: &mut Fdt, num_cpus: usize) -> libfdt::Result<()> {
     Ok(())
 }
 
-fn read_vendor_hashtree_descriptor_root_digest_from(fdt: &Fdt) -> libfdt::Result<Option<Vec<u8>>> {
+/// Read candidate properties' names from DT which could be overlaid
+fn parse_vm_base_dtbo(fdt: &Fdt) -> libfdt::Result<Vec<CString>> {
+    let mut property_names = Vec::new();
     if let Some(avf_node) = fdt.node(cstr!("/avf"))? {
-        if let Some(vendor_hashtree_descriptor_root_digest) =
-            avf_node.getprop(cstr!("vendor_hashtree_descriptor_root_digest"))?
-        {
-            return Ok(Some(vendor_hashtree_descriptor_root_digest.to_vec()));
+        for property in avf_node.properties()? {
+            let name = property.name()?;
+            property_names.push(CString::new(name.to_bytes()).map_err(|_| FdtError::BadValue)?);
         }
     }
-    Ok(None)
+    Ok(property_names)
 }
 
-fn patch_vendor_hashtree_descriptor_root_digest(
-    fdt: &mut Fdt,
-    vendor_hashtree_descriptor_root_digest: &[u8],
+/// Overlay VM base DTBO into VM DT based on the list of prop_names.
+/// Property exists in vm_base_dtbo but not in prop_names: Skipped
+/// Property exists in prop_names but not in vm_base_dtbo: Skipped
+/// Property exists both in prop_names and vm_base_dtbo: Overlaid in VM DT
+fn apply_vm_base_dtbo(
+    vm_dt: &mut Fdt,
+    vm_base_dtbo: &Fdt,
+    prop_names: &[CString],
 ) -> libfdt::Result<()> {
-    let mut root_node = fdt.root_mut()?;
-    let mut avf_node = root_node.add_subnode(cstr!("/avf"))?;
-    avf_node.setprop(
-        cstr!("vendor_hashtree_descriptor_root_digest"),
-        vendor_hashtree_descriptor_root_digest,
-    )?;
+    let mut root_vm_dt = vm_dt.root_mut()?;
+    let mut avf_vm_dt = root_vm_dt.add_subnode(cstr!("avf"))?;
+    let avf_vm_base_dtbo =
+        vm_base_dtbo.node(cstr!("/fragment@0/__overlay__/avf"))?.ok_or(FdtError::NotFound)?;
+    for prop_name in prop_names {
+        if let Some(prop_value) = avf_vm_base_dtbo.getprop(prop_name)? {
+            avf_vm_dt.setprop(prop_name, prop_value)?;
+        }
+    }
     Ok(())
 }
 
@@ -616,7 +625,7 @@ pub struct DeviceTreeInfo {
     serial_info: SerialInfo,
     pub swiotlb_info: SwiotlbInfo,
     device_assignment: Option<DeviceAssignmentInfo>,
-    vendor_hashtree_descriptor_root_digest: Option<Vec<u8>>,
+    vm_base_dtbo_prop_names: Vec<CString>,
 }
 
 impl DeviceTreeInfo {
@@ -630,6 +639,7 @@ impl DeviceTreeInfo {
 pub fn sanitize_device_tree(
     fdt: &mut [u8],
     vm_dtbo: Option<&mut [u8]>,
+    vm_base_dtbo: Option<&mut [u8]>,
 ) -> Result<DeviceTreeInfo, RebootReason> {
     let fdt = Fdt::from_mut_slice(fdt).map_err(|e| {
         error!("Failed to load FDT: {e}");
@@ -671,6 +681,18 @@ pub fn sanitize_device_tree(
                 RebootReason::InvalidFdt
             })?;
         }
+    }
+
+    if let Some(vm_base_dtbo) = vm_base_dtbo {
+        let vm_base_dtbo = Fdt::from_mut_slice(vm_base_dtbo).map_err(|e| {
+            error!("Failed to load VM base DTBO: {e}");
+            RebootReason::InvalidFdt
+        })?;
+
+        apply_vm_base_dtbo(fdt, vm_base_dtbo, &info.vm_base_dtbo_prop_names).map_err(|e| {
+            error!("Failed to apply VM base DTBO: {e}");
+            RebootReason::InvalidFdt
+        })?;
     }
 
     patch_device_tree(fdt, &info)?;
@@ -746,19 +768,10 @@ fn parse_device_tree(fdt: &Fdt, vm_dtbo: Option<&VmDtbo>) -> Result<DeviceTreeIn
         None => None,
     };
 
-    // TODO(b/285854379) : A temporary solution lives. This is for enabling
-    // microdroid vendor partition for non-protected VM as well. When passing
-    // DT path containing vendor_hashtree_descriptor_root_digest via fstab, init
-    // stage will check if vendor_hashtree_descriptor_root_digest exists in the
-    // init stage, regardless the protection. Adding this temporary solution
-    // will prevent fatal in init stage for protected VM. However, this data is
-    // not trustable without validating root digest of vendor hashtree
-    // descriptor comes from ABL.
-    let vendor_hashtree_descriptor_root_digest =
-        read_vendor_hashtree_descriptor_root_digest_from(fdt).map_err(|e| {
-            error!("Failed to read vendor_hashtree_descriptor_root_digest from DT: {e}");
-            RebootReason::InvalidFdt
-        })?;
+    let vm_base_dtbo_prop_names = parse_vm_base_dtbo(fdt).map_err(|e| {
+        error!("Failed to read names of properties under /avf from DT: {e}");
+        RebootReason::InvalidFdt
+    })?;
 
     Ok(DeviceTreeInfo {
         kernel_range,
@@ -770,7 +783,7 @@ fn parse_device_tree(fdt: &Fdt, vm_dtbo: Option<&VmDtbo>) -> Result<DeviceTreeIn
         serial_info,
         swiotlb_info,
         device_assignment,
-        vendor_hashtree_descriptor_root_digest,
+        vm_base_dtbo_prop_names,
     })
 }
 
@@ -820,15 +833,6 @@ fn patch_device_tree(fdt: &mut Fdt, info: &DeviceTreeInfo) -> Result<(), RebootR
         // then VM DTBO's underlying slice is allocated.
         device_assignment.patch(fdt).map_err(|e| {
             error!("Failed to patch device assignment info to DT: {e}");
-            RebootReason::InvalidFdt
-        })?;
-    }
-    if let Some(vendor_hashtree_descriptor_root_digest) =
-        &info.vendor_hashtree_descriptor_root_digest
-    {
-        patch_vendor_hashtree_descriptor_root_digest(fdt, vendor_hashtree_descriptor_root_digest)
-            .map_err(|e| {
-            error!("Failed to patch vendor_hashtree_descriptor_root_digest to DT: {e}");
             RebootReason::InvalidFdt
         })?;
     }
