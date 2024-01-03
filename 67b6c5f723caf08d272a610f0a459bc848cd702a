@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c58fefe7_9dd7f03c",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 935,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-01-03T13:25:59Z",
+      "side": 1,
+      "message": "All new APIs should be annotated with @FlaggedApi annotation",
+      "range": {
+        "startLine": 935,
+        "startChar": 7,
+        "endLine": 935,
+        "endChar": 50
+      },
+      "revId": "67b6c5f723caf08d272a610f0a459bc848cd702a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cb567a7_63e9a133",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-01-03T13:25:59Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 328,
+        "startChar": 4,
+        "endLine": 328,
+        "endChar": 77
+      },
+      "revId": "67b6c5f723caf08d272a610f0a459bc848cd702a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71b71493_261bcdfd",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-01-03T13:25:59Z",
+      "side": 1,
+      "message": "Is there a reason for this to be lazy static? It should be pretty efficient to just call get_supported_os_names() inside getSupportedOSList, no?",
+      "range": {
+        "startLine": 130,
+        "startChar": 4,
+        "endLine": 131,
+        "endChar": 84
+      },
+      "revId": "67b6c5f723caf08d272a610f0a459bc848cd702a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1c35a43_60285c3d",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-01-03T13:25:59Z",
+      "side": 1,
+      "message": "This seems to be unused now?",
+      "range": {
+        "startLine": 132,
+        "startChar": 15,
+        "endLine": 132,
+        "endChar": 45
+      },
+      "revId": "67b6c5f723caf08d272a610f0a459bc848cd702a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee8f19f3_d9b4d42f",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-01-03T13:25:59Z",
+      "side": 1,
+      "message": "Can we add unit tests for this functions? In case of get_supported_os_names I guess you will need to extract the glob pattern into function argument to make it testable...",
+      "range": {
+        "startLine": 739,
+        "startChar": 0,
+        "endLine": 758,
+        "endChar": 1
+      },
+      "revId": "67b6c5f723caf08d272a610f0a459bc848cd702a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
