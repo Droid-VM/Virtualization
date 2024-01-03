@@ -31,8 +31,8 @@ import static com.google.common.truth.TruthJUnit.assume;
 
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assume.assumeTrue;
 import static org.junit.Assume.assumeFalse;
+import static org.junit.Assume.assumeTrue;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
@@ -96,7 +96,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.OptionalLong;
 import java.util.UUID;
@@ -118,17 +120,28 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
     private static final String KERNEL_VERSION = SystemProperties.get("ro.kernel.version");
 
-    @Parameterized.Parameters(name = "protectedVm={0}")
-    public static Object[] protectedVmConfigs() {
-        return new Object[] { false, true };
+    @Parameterized.Parameters(name = "protectedVm={0},gki={1}")
+    public static Collection<Object[]> params() {
+        List<Object[]> ret = new ArrayList<>();
+        ret.add(new Object[] {true /* protectedVm */, null /* use microdroid kernel */});
+        ret.add(new Object[] {false /* protectedVm */, null /* use microdroid kernel */});
+        for (String gki : SUPPORTED_GKI_VERSIONS) {
+            ret.add(new Object[] {true /* protectedVm */, gki});
+            ret.add(new Object[] {false /* protectedVm */, gki});
+        }
+        return ret;
     }
 
-    @Parameterized.Parameter public boolean mProtectedVm;
+    @Parameterized.Parameter(0)
+    public boolean mProtectedVm;
+
+    @Parameterized.Parameter(1)
+    public String mGki;
 
     @Before
     public void setup() {
         grantPermission(VirtualMachine.MANAGE_VIRTUAL_MACHINE_PERMISSION);
-        prepareTestSetup(mProtectedVm);
+        prepareTestSetup(mProtectedVm, mGki);
         // USE_CUSTOM_VIRTUAL_MACHINE permission has protection level signature|development, meaning
         // that it will be automatically granted when test apk is installed. We have some tests
         // checking the behavior when caller doesn't have this permission (e.g.
@@ -146,7 +159,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
     private static final long ONE_MEBI = 1024 * 1024;
 
-    private static final long MIN_MEM_ARM64 = 150 * ONE_MEBI;
+    private static final long MIN_MEM_ARM64 = 160 * ONE_MEBI;
     private static final long MIN_MEM_X86_64 = 196 * ONE_MEBI;
     private static final String EXAMPLE_STRING = "Literally any string!! :)";
 
@@ -787,7 +800,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
         VirtualMachineConfig config =
                 newVmConfigBuilder()
-                        .setPayloadConfigPath("assets/vm_config.json")
+                        .setPayloadConfigPath("assets/" + os() + "/vm_config.json")
                         .setMemoryBytes(minMemoryRequired())
                         .build();
 
@@ -909,7 +922,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         grantPermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
         VirtualMachineConfig config =
                 newVmConfigBuilder()
-                        .setPayloadConfigPath("assets/vm_config_extra_apk.json")
+                        .setPayloadConfigPath("assets/" + os() + "/vm_config_extra_apk.json")
                         .setMemoryBytes(minMemoryRequired())
                         .setDebugLevel(DEBUG_LEVEL_FULL)
                         .build();
@@ -1054,7 +1067,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         grantPermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
         VirtualMachineConfig normalConfig =
                 newVmConfigBuilder()
-                        .setPayloadConfigPath("assets/vm_config.json")
+                        .setPayloadConfigPath("assets/" + os() + "/vm_config.json")
                         .setDebugLevel(DEBUG_LEVEL_FULL)
                         .build();
         forceCreateNewVirtualMachine("test_vm_a", normalConfig);
@@ -1081,7 +1094,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         grantPermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
         VirtualMachineConfig normalConfig =
                 newVmConfigBuilder()
-                        .setPayloadConfigPath("assets/vm_config.json")
+                        .setPayloadConfigPath("assets/" + os() + "/vm_config.json")
                         .setDebugLevel(DEBUG_LEVEL_FULL)
                         .build();
         forceCreateNewVirtualMachine("test_vm", normalConfig);
@@ -1105,7 +1118,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         grantPermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
         VirtualMachineConfig normalConfig =
                 newVmConfigBuilder()
-                        .setPayloadConfigPath("assets/vm_config.json")
+                        .setPayloadConfigPath("assets/" + os() + "/vm_config.json")
                         .setDebugLevel(DEBUG_LEVEL_FULL)
                         .build();
         VirtualMachine vm = forceCreateNewVirtualMachine("bcc_vm", normalConfig);
@@ -1264,7 +1277,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         grantPermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
         VirtualMachineConfig normalConfig =
                 newVmConfigBuilder()
-                        .setPayloadConfigPath("assets/vm_config_no_task.json")
+                        .setPayloadConfigPath("assets/" + os() + "/vm_config_no_task.json")
                         .setDebugLevel(DEBUG_LEVEL_FULL)
                         .build();
         forceCreateNewVirtualMachine("test_vm_invalid_config", normalConfig);
@@ -1284,8 +1297,8 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
         BootResult bootResult = tryBootVm(TAG, "test_vm_invalid_binary_path");
         assertThat(bootResult.payloadStarted).isFalse();
-        assertThat(bootResult.deathReason).isEqualTo(
-                VirtualMachineCallback.STOP_REASON_MICRODROID_UNKNOWN_RUNTIME_ERROR);
+        assertThat(bootResult.deathReason)
+                .isEqualTo(VirtualMachineCallback.STOP_REASON_MICRODROID_UNKNOWN_RUNTIME_ERROR);
     }
 
     // Checks whether microdroid_launcher started but payload failed. reason must be recorded in the
@@ -1361,7 +1374,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         grantPermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
         VirtualMachineConfig config =
                 newVmConfigBuilder()
-                        .setPayloadConfigPath("assets/vm_config.json")
+                        .setPayloadConfigPath("assets/" + os() + "/vm_config.json")
                         .setDebugLevel(DEBUG_LEVEL_FULL)
                         .build();
         String vmNameOrig = "test_vm_orig";
@@ -1759,6 +1772,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     @Test
     public void testConsoleInputSupported() throws Exception {
         assumeSupportedDevice();
+        assumeTrue("Not supported on GKI kernels", mGki == null);
 
         VirtualMachineConfig config =
                 newVmConfigBuilder()
