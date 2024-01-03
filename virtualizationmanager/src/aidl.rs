@@ -69,6 +69,7 @@ use binder::{
     IntoBinderResult,
 };
 use disk::QcowFile;
+use glob::glob;
 use lazy_static::lazy_static;
 use libfdt::Fdt;
 use log::{debug, error, info, warn};
@@ -126,6 +127,8 @@ lazy_static! {
     pub static ref GLOBAL_SERVICE: Strong<dyn IVirtualizationServiceInternal> =
         wait_for_interface(BINDER_SERVICE_IDENTIFIER)
             .expect("Could not connect to VirtualizationServiceInternal");
+    static ref SUPPORTED_OS_NAMES: HashSet<String> =
+        get_supported_os_names().expect("Failed to get list of supported os names");
     static ref MICRODROID_GKI_OS_NAME_PATTERN: Regex =
         Regex::new(r"^microdroid_gki-android\d+-\d+\.\d+$").expect("Failed to construct Regex");
 }
@@ -287,6 +290,11 @@ impl IVirtualizationService for VirtualizationService {
     fn getAssignableDevices(&self) -> binder::Result<Vec<AssignableDevice>> {
         // Delegate to the global service, including checking the permission.
         GLOBAL_SERVICE.getAssignableDevices()
+    }
+
+    /// Get a list of supported OSes.
+    fn getSupportedOSList(&self) -> binder::Result<Vec<String>> {
+        Ok(Vec::from_iter(SUPPORTED_OS_NAMES.iter().cloned()))
     }
 
     /// Returns whether given feature is enabled
@@ -728,14 +736,29 @@ fn append_kernel_param(param: &str, vm_config: &mut VirtualMachineRawConfig) {
     }
 }
 
-fn is_valid_os(os_name: &str) -> bool {
-    if os_name == MICRODROID_OS_NAME {
-        true
-    } else if cfg!(vendor_modules) && MICRODROID_GKI_OS_NAME_PATTERN.is_match(os_name) {
-        PathBuf::from(format!("/apex/com.android.virt/etc/{}.json", os_name)).exists()
-    } else {
-        false
+fn extract_os_name_from_config_path(config: &Path) -> Option<String> {
+    let name = config.file_name()?;
+    let name_str = name.to_str()?;
+    name_str.strip_suffix(".json").map(|x| x.to_owned())
+}
+
+fn get_supported_os_names() -> Result<HashSet<String>> {
+    if !cfg!(vendor_modules) {
+        let mut ret = HashSet::new();
+        ret.insert(MICRODROID_OS_NAME.to_owned());
+        return Ok(ret);
     }
+
+    let configs =
+        glob("/apex/com.android.virt/etc/microdroid*.json")?.collect::<Result<Vec<_>, _>>()?;
+    let os_names =
+        configs.iter().filter_map(|x| extract_os_name_from_config_path(x)).collect::<HashSet<_>>();
+
+    Ok(os_names)
+}
+
+fn is_valid_os(os_name: &str) -> bool {
+    SUPPORTED_OS_NAMES.contains(os_name)
 }
 
 fn load_app_config(
