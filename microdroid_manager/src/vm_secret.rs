@@ -105,8 +105,7 @@ impl VmSecret {
             let explicit_bcc = explicit_dice
                 .dice_chain_in_explicit_key_format()
                 .ok_or(anyhow!("Missing explicit dice chain, this is unusual"))?;
-            let _policy = sealing_policy(explicit_bcc).map_err(anyhow_err)?;
-
+            let policy = sealing_policy(explicit_bcc).map_err(anyhow_err)?;
             // Start a new session with Secretkeeper!
             let mut session = SkSession::new(sk_service, &explicit_dice).map_err(anyhow_err)?;
             let id = get_id();
@@ -114,13 +113,7 @@ impl VmSecret {
             if super::is_strict_boot() {
                 if super::is_new_instance() {
                     *skp_secret = rand::random();
-                    store_secret(
-                        &mut session,
-                        id,
-                        skp_secret.clone(),
-                        // TODO: Use _policy instead!
-                        HYPOTHETICAL_DICE_POLICY.to_vec(),
-                    )?;
+                    store_secret(&mut session, id, skp_secret.clone(), policy)?;
                 } else {
                     // Subsequent run of the pVM -> get the secret stored in Secretkeeper.
                     *skp_secret = get_secret(&mut session, id, None)?;
@@ -128,13 +121,7 @@ impl VmSecret {
             } else {
                 // TODO(b/291213394): Non protected VM don't need to use Secretkeeper, remove this
                 // once we have sufficient testing on protected VM.
-                store_secret(
-                    &mut session,
-                    id,
-                    SKP_SECRET_NP_VM.into(),
-                    // TODO: Use the _policy above.
-                    HYPOTHETICAL_DICE_POLICY.to_vec(),
-                )?;
+                store_secret(&mut session, id, SKP_SECRET_NP_VM.into(), policy)?;
                 *skp_secret = get_secret(&mut session, id, None)?;
             }
             return Ok(Self::V2 {
