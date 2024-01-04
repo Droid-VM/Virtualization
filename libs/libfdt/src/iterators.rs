@@ -330,7 +330,7 @@ pub struct DescendantsIterator<'a> {
 }
 
 impl<'a> DescendantsIterator<'a> {
-    pub(crate) fn new(node: &'a FdtNode) -> Self {
+    pub(crate) fn new<'b>(node: &'b FdtNode<'a>) -> DescendantsIterator<'a> {
         Self { node: Some((*node, 0)) }
     }
 }
