@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1689cbd3_3ee7e55a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-01-04T14:59:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0f83afa_44d7fea0",
+      "range": {
+        "startLine": 7,
+        "startChar": 5,
+        "endLine": 7,
+        "endChar": 14
+      },
+      "revId": "8f9865b40066dff8caf67849be354f481b7fa3b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e480977f_de7e70f5",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-01-04T14:07:01Z",
       "side": 1,
       "message": "typo",
+      "range": {
+        "startLine": 10,
+        "startChar": 44,
+        "endLine": 10,
+        "endChar": 51
+      },
+      "revId": "8f9865b40066dff8caf67849be354f481b7fa3b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b13b0f8_894bd24b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-01-04T14:59:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e480977f_de7e70f5",
       "range": {
         "startLine": 10,
         "startChar": 44,
@@ -64,6 +112,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5985a7a8_db9c03e8",
+        "filename": "libs/dice/open_dice/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-01-04T14:59:18Z",
+      "side": 1,
+      "message": "No this is only required for client library.",
+      "parentUuid": "c2edd9aa_95f2d855",
+      "revId": "8f9865b40066dff8caf67849be354f481b7fa3b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1c154a8_e1458988",
@@ -77,6 +143,24 @@
       "writtenOn": "2024-01-04T14:07:01Z",
       "side": 1,
       "message": "What your plan for including this in the Trusty build?",
+      "revId": "8f9865b40066dff8caf67849be354f481b7fa3b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9e3485a_55898955",
+        "filename": "libs/dice/open_dice/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-01-04T14:59:18Z",
+      "side": 1,
+      "message": "This is only required in the client library. Let me restrict the visibility to `/system/secretkeeper/client:__subpackages__` \u0026 hence wont require support from trusty build.",
+      "parentUuid": "c1c154a8_e1458988",
       "revId": "8f9865b40066dff8caf67849be354f481b7fa3b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
