@@ -993,8 +993,6 @@ pub fn sanitize_device_tree(
 
     patch_device_tree(fdt, &info)?;
 
-    // TODO(b/317201360): Ensure no overlapping in <reg> among devices
-
     fdt.pack().map_err(|e| {
         error!("Failed to unpack DT after patching: {e}");
         RebootReason::InvalidFdt
@@ -1207,6 +1205,8 @@ pub fn modify_for_next_stage(
 
     fdt.pack()?;
 
+    validate_regs(fdt)?;
+
     Ok(())
 }
 
@@ -1309,4 +1309,47 @@ fn filter_out_dangerous_bootargs(fdt: &mut Fdt, bootargs: &CStr) -> libfdt::Resu
 
     let mut node = fdt.chosen_mut()?.ok_or(FdtError::NotFound)?;
     node.setprop(cstr!("bootargs"), new_bootargs.as_slice())
+}
+
+fn validate_regs(fdt: &Fdt) -> libfdt::Result<()> {
+    // PCI has both <ranges> and <reg>, so parse <ranges> here.
+    let pci_node =
+        fdt.compatible_nodes(cstr!("pci-host-cam-generic"))?.next().ok_or(FdtError::NotFound)?;
+    let mut reg_ranges: Vec<_> = pci_node
+        .ranges::<(u32, u64), u64, u64>()?
+        .ok_or(FdtError::NotFound)?
+        .map(|range| range.parent_addr..range.parent_addr + range.size)
+        .collect();
+
+    for (node, _) in fdt.root().descendants() {
+        let device_type = node.getprop_str(cstr!("device_type"))?;
+        // Note: Can't use match here, because cstr!() isn't expand to a pattern.
+        if device_type == Some(cstr!("cpu")) {
+            // cpu doesn't have size but validated earlier
+            continue;
+        } else if device_type == Some(cstr!("memory")) {
+            // pass-through
+        } else if let Some(device_type) = device_type {
+            warn!("Unknown device_type {device_type:?}");
+        }
+
+        let Some(reg_iter) = node.reg()? else {
+            continue;
+        };
+        for reg in reg_iter {
+            if reg.size.is_none() {
+                let name = node.name()?;
+                warn!("node {name:?} has reg without size. Skipping validation check");
+                continue;
+            }
+            let range = reg.addr..reg.addr + reg.size.unwrap();
+            if let Some(other) = reg_ranges.iter().find(|other| range.overlaps(other)) {
+                let name = node.name()?;
+                error!("Overlapping <reg> in node {name:?}, reg={reg:?}, other={other:?}");
+                return Err(FdtError::BadValue);
+            }
+            reg_ranges.push(range);
+        }
+    }
+    Ok(())
 }
