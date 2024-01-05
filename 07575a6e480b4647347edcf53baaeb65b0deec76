@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a9558e7_d13b971f",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-05T12:08:06Z",
+      "side": 1,
+      "message": "nit: Is `anyhow` needed here? Can we just use `.context(\"Failed to convert to ExplicitAndOwnedDiceArtifacts\")` here to reach the same result?",
+      "range": {
+        "startLine": 110,
+        "startChar": 20,
+        "endLine": 110,
+        "endChar": 79
+      },
+      "revId": "07575a6e480b4647347edcf53baaeb65b0deec76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "847bdf13_0f0f26e4",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-05T12:08:06Z",
+      "side": 1,
+      "message": "I don\u0027t think this getter is really needed here.",
+      "range": {
+        "startLine": 113,
+        "startChar": 50,
+        "endLine": 113,
+        "endChar": 52
+      },
+      "revId": "07575a6e480b4647347edcf53baaeb65b0deec76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96dc0a8f_71a69b4d",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-05T12:08:06Z",
+      "side": 1,
+      "message": "nit: Perhaps call this `dice_artifacts_with_explicit_key` to distinguish it with the DICE artifacts with legacy chain in V1?",
+      "range": {
+        "startLine": 83,
+        "startChar": 9,
+        "endLine": 83,
+        "endChar": 13
+      },
+      "revId": "4d9cd993a866bd287287f7ee6e1f2056d3580118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b24d742a_ca24eaac",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-05T12:08:06Z",
+      "side": 1,
+      "message": "What this value should be eventually?",
+      "range": {
+        "startLine": 133,
+        "startChar": 63,
+        "endLine": 133,
+        "endChar": 67
+      },
+      "revId": "4d9cd993a866bd287287f7ee6e1f2056d3580118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4bb7cc4_079c2ee2",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-05T12:08:06Z",
+      "side": 1,
+      "message": "This code is correct, but it can be somewhat confusing. We have many modules also named `dice` that essentially encompass DICE-related operations. The term `dice` here could refer to old DICE artifacts, DICE artifacts with an explicit key, or something else. Could we at least rename the `dice` in V2 to enhance clarity?",
+      "range": {
+        "startLine": 156,
+        "startChar": 4,
+        "endLine": 161,
+        "endChar": 5
+      },
+      "revId": "4d9cd993a866bd287287f7ee6e1f2056d3580118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cfb127f_8cbcddfe",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-05T12:08:06Z",
+      "side": 1,
+      "message": "nit: drop one space",
+      "range": {
+        "startLine": 196,
+        "startChar": 20,
+        "endLine": 196,
+        "endChar": 21
+      },
+      "revId": "4d9cd993a866bd287287f7ee6e1f2056d3580118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
