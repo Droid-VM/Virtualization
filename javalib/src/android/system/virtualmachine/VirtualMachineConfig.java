@@ -614,7 +614,7 @@ public final class VirtualMachineConfig {
         private boolean mVmOutputCaptured = false;
         private boolean mVmConsoleInputSupported = false;
         @Nullable private File mVendorDiskImage;
-        private String mOs = "microdroid";
+        private String mOs;
 
         /**
          * Creates a builder for the given context.
@@ -654,14 +654,22 @@ public final class VirtualMachineConfig {
                 throw new IllegalStateException("apkPath or packageName must be specified");
             }
 
+            String os = "microdroid";
             if (mPayloadBinaryName == null) {
                 if (mPayloadConfigPath == null) {
                     throw new IllegalStateException("setPayloadBinaryName must be called");
+                }
+                if (mOs != null) {
+                    throw new IllegalStateException(
+                            "setPayloadConfigPath and setOs may not both be called");
                 }
             } else {
                 if (mPayloadConfigPath != null) {
                     throw new IllegalStateException(
                             "setPayloadBinaryName and setPayloadConfigPath may not both be called");
+                }
+                if (mOs != null) {
+                    os = mOs;
                 }
             }
 
@@ -690,7 +698,7 @@ public final class VirtualMachineConfig {
                     mVmOutputCaptured,
                     mVmConsoleInputSupported,
                     mVendorDiskImage,
-                    mOs);
+                    os);
         }
 
         /**
