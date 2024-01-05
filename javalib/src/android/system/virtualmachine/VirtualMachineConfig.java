@@ -285,7 +285,10 @@ public final class VirtualMachineConfig {
             builder.setVendorDiskImage(new File(vendorDiskImagePath));
         }
 
-        builder.setOs(b.getString(KEY_OS));
+        String os = b.getString(KEY_OS);
+        if (os != null) {
+            builder.setOs(os);
+        }
 
         return builder.build();
     }
@@ -614,7 +617,7 @@ public final class VirtualMachineConfig {
         private boolean mVmOutputCaptured = false;
         private boolean mVmConsoleInputSupported = false;
         @Nullable private File mVendorDiskImage;
-        private String mOs = "microdroid";
+        private String mOs;
 
         /**
          * Creates a builder for the given context.
@@ -654,14 +657,24 @@ public final class VirtualMachineConfig {
                 throw new IllegalStateException("apkPath or packageName must be specified");
             }
 
+            String os = null;
             if (mPayloadBinaryName == null) {
                 if (mPayloadConfigPath == null) {
                     throw new IllegalStateException("setPayloadBinaryName must be called");
+                }
+                if (mOs != null) {
+                    throw new IllegalStateException(
+                            "setPayloadConfigPath and setOs may not both be called");
                 }
             } else {
                 if (mPayloadConfigPath != null) {
                     throw new IllegalStateException(
                             "setPayloadBinaryName and setPayloadConfigPath may not both be called");
+                }
+                if (mOs != null) {
+                    os = mOs;
+                } else {
+                    os = "microdroid";
                 }
             }
 
@@ -690,7 +703,7 @@ public final class VirtualMachineConfig {
                     mVmOutputCaptured,
                     mVmConsoleInputSupported,
                     mVendorDiskImage,
-                    mOs);
+                    os);
         }
 
         /**
