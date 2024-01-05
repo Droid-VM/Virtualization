@@ -16,6 +16,29 @@
       "message": "Hi David, PTAL.",
       "revId": "5fb76c5656371bb4b7a86be93092ddc4fc51fe43",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05489501_665775ec",
+        "filename": "libs/cborutil/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-01-05T14:07:19Z",
+      "side": 1,
+      "message": "Do you need to use the `coset::CborSerializable` trait for this?  I\u0027d have guessed that the `deserialize()` function above would already work (with `T \u003d Value`).",
+      "range": {
+        "startLine": 48,
+        "startChar": 19,
+        "endLine": 48,
+        "endChar": 42
+      },
+      "revId": "5fb76c5656371bb4b7a86be93092ddc4fc51fe43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
