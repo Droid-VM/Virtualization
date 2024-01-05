@@ -33,6 +33,24 @@
       "message": "The integer type casting here is a bit confusing to me. In one direction, you panic, and in the other, you return `None`. Is this the correct behavior when the integer doesn\u0027t fit?",
       "revId": "26b91fbdeb77deb0f39bd2e34a72898aea142474",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d3f0047_c17875c9",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-01-05T11:48:25Z",
+      "side": 1,
+      "message": "Changed not to return error for L815, because the depth can be specified from input.\n\nRegarding returning `None`, `fdt_next_node()` stops to find next node if `depth` becomes negative in the middle. In that case, returned value is positive (i.e. no error code) but isn\u0027t a valid offset. So `Ok(None)` is returned to say \u0027no more descendant\u0027.",
+      "parentUuid": "866a4185_22c8e7d1",
+      "revId": "26b91fbdeb77deb0f39bd2e34a72898aea142474",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
