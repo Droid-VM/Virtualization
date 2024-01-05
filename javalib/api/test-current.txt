@@ -7,7 +7,7 @@ package android.system.virtualmachine {
   }
 
   public final class VirtualMachineConfig {
-    method @NonNull public String getOs();
+    method @Nullable public String getOs();
     method @Nullable public String getPayloadConfigPath();
     method public boolean isVmConsoleInputSupported();
   }
