@@ -34,6 +34,42 @@
       "parentUuid": "1e1f73d0_19e05555",
       "revId": "9a2184ccb3d82f9d56a364316138ce067a6da3f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c458cc7_5e821207",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-05T13:31:22Z",
+      "side": 1,
+      "message": "Can we move the sealing_policy building function to this class in this case? It\u0027s easier to check or revert it if there\u0027s something wrong later.\n\nIt\u0027s a bit confusing that the parent cl just built a value and never used it.",
+      "parentUuid": "5626e73f_ead6498e",
+      "revId": "9a2184ccb3d82f9d56a364316138ce067a6da3f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0148ce9_17f28a9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-05T13:31:22Z",
+      "side": 1,
+      "message": "Can we move the content of the cl aosp/2890290 into this one instead?",
+      "parentUuid": "5626e73f_ead6498e",
+      "revId": "9a2184ccb3d82f9d56a364316138ce067a6da3f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
