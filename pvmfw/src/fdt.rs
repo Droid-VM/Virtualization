@@ -36,6 +36,7 @@ use libfdt::Fdt;
 use libfdt::FdtError;
 use libfdt::FdtNode;
 use libfdt::FdtNodeMut;
+use libfdt::Reg;
 use log::debug;
 use log::error;
 use log::info;
@@ -675,8 +676,6 @@ pub fn sanitize_device_tree(
 
     patch_device_tree(fdt, &info)?;
 
-    // TODO(b/317201360): Ensure no overlapping in <reg> among devices
-
     fdt.pack().map_err(|e| {
         error!("Failed to unpack DT after patching: {e}");
         RebootReason::InvalidFdt
@@ -876,6 +875,8 @@ pub fn modify_for_next_stage(
 
     fdt.pack()?;
 
+    validate_reg_overlaps(fdt)?;
+
     Ok(())
 }
 
@@ -978,4 +979,45 @@ fn filter_out_dangerous_bootargs(fdt: &mut Fdt, bootargs: &CStr) -> libfdt::Resu
 
     let mut node = fdt.chosen_mut()?.ok_or(FdtError::NotFound)?;
     node.setprop(cstr!("bootargs"), new_bootargs.as_slice())
+}
+
+fn is_reg_overlap(a: &Reg<u64>, b: &Reg<u64>) -> bool {
+    let (a_start, a_end) = (a.addr, a.addr + a.size.unwrap_or(1));
+    let (b_start, b_end) = (b.addr, b.addr + b.size.unwrap_or(1));
+    a_start < b_end && b_start < a_end
+}
+
+fn validate_reg_overlaps(fdt: &Fdt) -> libfdt::Result<()> {
+    let mut regs = Vec::new();
+
+    let memory_range = read_and_validate_memory_range(fdt).unwrap();
+
+    for (node, _) in fdt.root().unwrap().descendants() {
+        if let Some(reg_iter) = node.reg()? {
+            for reg in reg_iter {
+                let device_type = node.getprop_str(cstr!("device_type"))?;
+                if device_type.is_none() {
+                    let reg_start = reg.addr as usize;
+                    let reg_end = (reg.addr + reg.size.unwrap_or(1)) as usize;
+                    if memory_range.start > reg_start || memory_range.end > reg_end {
+                        let name = node.name()?;
+                        error!("Out of bound <reg> in node={name:?}, reg={reg:?}, memory={memory_range:?}");
+                        return Err(FdtError::BadValue);
+                    }
+                } else if device_type == Some(cstr!("memory")) {
+                    continue;
+                } else if device_type != Some(cstr!("cpu")) && reg.size.is_none() {
+                    warn!("Unexpected <reg> without size, name={:?}", node.name()?);
+                }
+
+                if let Some(other) = regs.iter().find(|other| is_reg_overlap(&reg, other)) {
+                    let name = node.name()?;
+                    error!("Overlapping <reg> in node {name:?}, reg={reg:?}, other={other:?}");
+                    return Err(FdtError::BadValue);
+                }
+                regs.push(reg);
+            }
+        }
+    }
+    Ok(())
 }
