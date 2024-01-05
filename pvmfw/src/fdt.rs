@@ -37,6 +37,7 @@ use libfdt::Fdt;
 use libfdt::FdtError;
 use libfdt::FdtNode;
 use libfdt::FdtNodeMut;
+use libfdt::Reg;
 use log::debug;
 use log::error;
 use log::info;
@@ -709,8 +710,6 @@ pub fn sanitize_device_tree(
 
     patch_device_tree(fdt, &info)?;
 
-    // TODO(b/317201360): Ensure no overlapping in <reg> among devices
-
     fdt.pack().map_err(|e| {
         error!("Failed to unpack DT after patching: {e}");
         RebootReason::InvalidFdt
@@ -892,6 +891,8 @@ pub fn modify_for_next_stage(
 
     fdt.pack()?;
 
+    validate_regs(fdt)?;
+
     Ok(())
 }
 
@@ -994,4 +995,44 @@ fn filter_out_dangerous_bootargs(fdt: &mut Fdt, bootargs: &CStr) -> libfdt::Resu
 
     let mut node = fdt.chosen_mut()?.ok_or(FdtError::NotFound)?;
     node.setprop(cstr!("bootargs"), new_bootargs.as_slice())
+}
+
+fn is_reg_overlap(a: &Reg<u64>, b: &Reg<u64>) -> bool {
+    let (a_start, a_end) = (a.addr, a.addr + a.size.unwrap_or(1));
+    let (b_start, b_end) = (b.addr, b.addr + b.size.unwrap_or(1));
+    a_start < b_end && b_start < a_end
+}
+
+fn validate_regs(fdt: &Fdt) -> libfdt::Result<()> {
+    let mut regs = Vec::new();
+    let pci_info = read_pci_info_from(fdt)?;
+    for range in pci_info.ranges.iter() {
+        let reg_in_memory = Reg::<u64> { addr: range.parent_addr, size: Some(range.size) };
+        regs.push(reg_in_memory);
+    }
+
+    for (node, _) in fdt.root().unwrap().descendants() {
+        let device_type = node.getprop_str(cstr!("device_type"))?;
+        // Note: Can't use match here, because cstr!() isn't expand to a pattern.
+        if device_type == Some(cstr!("cpu")) || device_type == Some(cstr!("pci")) {
+            // cpu is validated earlier, and pci is handled above.
+            continue;
+        } else if device_type == Some(cstr!("memory")) {
+            // pass-through
+        } else if let Some(device_type) = device_type {
+            warn!("Unknown device_type {device_type:?}");
+        }
+
+        if let Some(reg_iter) = node.reg()? {
+            for reg in reg_iter {
+                if let Some(other) = regs.iter().find(|other| is_reg_overlap(&reg, other)) {
+                    let name = node.name()?;
+                    error!("Overlapping <reg> in node {name:?}, reg={reg:?}, other={other:?}");
+                    return Err(FdtError::BadValue);
+                }
+                regs.push(reg);
+            }
+        }
+    }
+    Ok(())
 }
