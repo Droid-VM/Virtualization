@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "278a8a11_f5ea3cdc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-05T14:44:49Z",
+      "side": 1,
+      "message": "Thanks for the review!",
+      "revId": "5fb76c5656371bb4b7a86be93092ddc4fc51fe43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05489501_665775ec",
@@ -31,6 +48,30 @@
       "writtenOn": "2024-01-05T14:07:19Z",
       "side": 1,
       "message": "Do you need to use the `coset::CborSerializable` trait for this?  I\u0027d have guessed that the `deserialize()` function above would already work (with `T \u003d Value`).",
+      "range": {
+        "startLine": 48,
+        "startChar": 19,
+        "endLine": 48,
+        "endChar": 42
+      },
+      "revId": "5fb76c5656371bb4b7a86be93092ddc4fc51fe43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ee860ac_fffef4eb",
+        "filename": "libs/cborutil/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-05T14:44:49Z",
+      "side": 1,
+      "message": "That is indeed a valid consideration. However, in fact, I have plans to incorporate `serde` as a feature in the future. Therefore, it would be better to avoid introducing a dependency between the CBOR functionality and serde.",
+      "parentUuid": "05489501_665775ec",
       "range": {
         "startLine": 48,
         "startChar": 19,
