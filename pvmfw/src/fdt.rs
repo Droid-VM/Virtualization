@@ -993,8 +993,6 @@ pub fn sanitize_device_tree(
 
     patch_device_tree(fdt, &info)?;
 
-    // TODO(b/317201360): Ensure no overlapping in <reg> among devices
-
     fdt.pack().map_err(|e| {
         error!("Failed to unpack DT after patching: {e}");
         RebootReason::InvalidFdt
@@ -1207,6 +1205,8 @@ pub fn modify_for_next_stage(
 
     fdt.pack()?;
 
+    validate_regs(fdt)?;
+
     Ok(())
 }
 
@@ -1309,4 +1309,63 @@ fn filter_out_dangerous_bootargs(fdt: &mut Fdt, bootargs: &CStr) -> libfdt::Resu
 
     let mut node = fdt.chosen_mut()?.ok_or(FdtError::NotFound)?;
     node.setprop(cstr!("bootargs"), new_bootargs.as_slice())
+}
+
+fn validate_regs(fdt: &Fdt) -> libfdt::Result<()> {
+    let mut reg_ranges = Vec::new();
+
+    for (node, _) in fdt.root().descendants() {
+        let node_name = node.name()?;
+
+        let device_type = node.getprop_str(cstr!("device_type"))?;
+        // Note: Can't use match here, because cstr!() isn't expand to a pattern.
+        if device_type == Some(cstr!("cpu")) {
+            // cpu doesn't have size but validated earlier
+            continue;
+        } else if device_type == Some(cstr!("memory")) || device_type == Some(cstr!("pci")) {
+            // pass-through
+        } else if let Some(device_type) = device_type {
+            warn!("Unknown device_type {device_type:?}");
+        }
+
+        if let Some(range_prop) = node.getprop(cstr!("ranges"))? {
+            if node.getprop_str(cstr!("compatible"))? == Some(cstr!("pci-host-cam-generic")) {
+                // <ranges> is expected for `/pci`.`
+                if let Some(ranges) = node.ranges::<(u32, u64), u64, u64>()? {
+                    for iter in ranges {
+                        let range = iter.parent_addr..iter.parent_addr + iter.size;
+                        if reg_ranges.iter().any(|other| range.overlaps(other)) {
+                            error!("Overlapping <ranges> in node {node_name:?}, range={iter:?}");
+                            return Err(FdtError::BadValue);
+                        }
+                        reg_ranges.push(range);
+                    }
+                }
+            } else {
+                // /reserved-memory also has an empty <range>,
+                // but we don't expect <ranges> in any other place.
+                if !range_prop.is_empty() || node_name != cstr!("reserved-memory") {
+                    error!("Unexpected <ranges> in node {node_name:?}");
+                    return Err(FdtError::BadValue);
+                }
+            }
+        }
+
+        if let Some(regs) = node.reg()? {
+            for reg in regs {
+                let Some(reg_size) = reg.size else {
+                    warn!("node {node_name:?} has <reg> without size. Skipping validation check");
+                    continue;
+                };
+                let range = reg.addr..reg.addr + reg_size;
+                if reg_ranges.iter().any(|other| range.overlaps(other)) {
+                    error!("Overlapping <reg> in node {node_name:?}, reg={reg:?}");
+                    return Err(FdtError::BadValue);
+                }
+                reg_ranges.push(range);
+            }
+        }
+    }
+
+    Ok(())
 }
