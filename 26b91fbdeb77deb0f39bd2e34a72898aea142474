@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bb124e7_f4468829",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-01-05T09:27:30Z",
+      "side": 1,
+      "message": "Unsafe review: There\u0027s a lot of context here that I don\u0027t have, but it is not obviously wrong, so LGTM.",
+      "revId": "26b91fbdeb77deb0f39bd2e34a72898aea142474",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "866a4185_22c8e7d1",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-01-05T09:27:30Z",
+      "side": 1,
+      "message": "The integer type casting here is a bit confusing to me. In one direction, you panic, and in the other, you return `None`. Is this the correct behavior when the integer doesn\u0027t fit?",
+      "revId": "26b91fbdeb77deb0f39bd2e34a72898aea142474",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
