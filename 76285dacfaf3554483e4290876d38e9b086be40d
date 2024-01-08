@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "917940ef_66a9b47f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-08T18:39:55Z",
+      "side": 1,
+      "message": "Good catch.\n\nFYI, the way I reason about this is that, as all these nodes are part of the same DT, they must share the lifetime of the `Fdt` instance _i.e._ `\u0027a`. The lifetime of the references to those nodes (\"`\u0026\u0027_`\") is irrelevant.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 17
+      },
+      "revId": "76285dacfaf3554483e4290876d38e9b086be40d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70f9c208_c12c2afb",
+        "filename": "libs/libfdt/src/iterators.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-08T18:39:55Z",
+      "side": 1,
+      "message": "I\u0027m not super familiar with specifying lifetimes but isn\u0027t this equivalent to\n```\nfn new(node: \u0026FdtNode\u003c\u0027a\u003e) -\u003e Self\n```\n? If not, how do they differ?",
+      "range": {
+        "startLine": 333,
+        "startChar": 15,
+        "endLine": 333,
+        "endChar": 75
+      },
+      "revId": "76285dacfaf3554483e4290876d38e9b086be40d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7492d98_d815105b",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-08T18:39:55Z",
+      "side": 1,
+      "message": "BTW, testing the \"lifetime-ness\" of an API is an interesting idea but will be awkward because \"negative\" tests won\u0027t compile and \"positive\" tests don\u0027t need to run (as they successfully compiled, which was the scope of the test). This is basically another instance of wanting compile-time API testing (recall aosp/2827431, which was at least panicking, this is even lower-level).",
+      "range": {
+        "startLine": 438,
+        "startChar": 0,
+        "endLine": 439,
+        "endChar": 7
+      },
+      "revId": "76285dacfaf3554483e4290876d38e9b086be40d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92e9cd0d_879b136d",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-08T18:39:55Z",
+      "side": 1,
+      "message": "From a Rust perspective, you don\u0027t need `{`-`}` as the temporary value `fdt.root().unwrap()` in\n```\nlet name \u003d fdt.root().unwrap().name();\nassert_eq!(Ok(cstr!(\"\")), name);\n```\nwould also go out of scope before the assertion.\n\nHowever, this style can be used to make clear the intent of the test.\n\nTherefore, would you mind adding a comment (e.g. at the end) of each seemingly unnecessary block to document what the purpose was e.g.\n```\nlet name \u003d {\n    let root \u003d fdt.root().unwrap();\n    root.name()\n    // root goes out of scope\n};\nassert_eq!(Ok(cstr!(\"\")), name);\n```\nthis would also act similarly to a `SAFETY` comment, where we have to convince ourselves of the necessity of the block (e.g. the `{`-`}` on line 445 achieve nothing and can be removed).",
+      "range": {
+        "startLine": 445,
+        "startChar": 19,
+        "endLine": 445,
+        "endChar": 42
+      },
+      "revId": "76285dacfaf3554483e4290876d38e9b086be40d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
