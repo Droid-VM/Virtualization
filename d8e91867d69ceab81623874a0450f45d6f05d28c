@@ -20,6 +20,144 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39d15c29_4f1c0c0d",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-08T15:07:10Z",
+      "side": 1,
+      "message": "Please can you update the various VMConfig tests to include this field?\nvmConfigGetAndSetTests, vmConfigBuilderValidationTests, compatibleConfigTests",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 29
+      },
+      "revId": "d8e91867d69ceab81623874a0450f45d6f05d28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c2dbaeb_d925e340",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-08T15:07:10Z",
+      "side": 1,
+      "message": "This won\u0027t work if you\u0027re deserializing an older VM config - you need to handle null.",
+      "range": {
+        "startLine": 287,
+        "startChar": 0,
+        "endLine": 288,
+        "endChar": 43
+      },
+      "revId": "d8e91867d69ceab81623874a0450f45d6f05d28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3449c43f_38b429c5",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-08T15:07:10Z",
+      "side": 1,
+      "message": "Make this a (private) constant?",
+      "range": {
+        "startLine": 617,
+        "startChar": 28,
+        "endLine": 617,
+        "endChar": 41
+      },
+      "revId": "d8e91867d69ceab81623874a0450f45d6f05d28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e733e91_8f753182",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-08T15:07:10Z",
+      "side": 1,
+      "message": "@NonNull",
+      "range": {
+        "startLine": 328,
+        "startChar": 0,
+        "endLine": 329,
+        "endChar": 52
+      },
+      "revId": "d8e91867d69ceab81623874a0450f45d6f05d28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3acf48c_f91eb03a",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-08T15:07:10Z",
+      "side": 1,
+      "message": "Something like `config.with_extension(\"\").to_str()`? It seems weird to mix string munging with path munging.",
+      "range": {
+        "startLine": 741,
+        "startChar": 0,
+        "endLine": 743,
+        "endChar": 56
+      },
+      "revId": "d8e91867d69ceab81623874a0450f45d6f05d28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2cae248_3b3bd556",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-08T15:07:10Z",
+      "side": 1,
+      "message": "Maybe `iter::once(MICRODROID_OS_NAME.to_owned()).collect()`?",
+      "range": {
+        "startLine": 756,
+        "startChar": 0,
+        "endLine": 758,
+        "endChar": 23
+      },
+      "revId": "d8e91867d69ceab81623874a0450f45d6f05d28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "679afb12_b01210c1",
         "filename": "virtualizationmanager/src/aidl.rs",
         "patchSetId": 2
