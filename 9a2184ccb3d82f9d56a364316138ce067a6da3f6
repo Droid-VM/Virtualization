@@ -88,6 +88,24 @@
       "parentUuid": "c0148ce9_17f28a9b",
       "revId": "9a2184ccb3d82f9d56a364316138ce067a6da3f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1b648e7_332ffe47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-01-08T16:13:44Z",
+      "side": 1,
+      "message": "I think it might be okay to leave a placeholder on the principle of incremental building. sealing_policy() is the only framework code that uses the structures introduced in topic:\"explicit_chain_support\" written to support ExplcitKeyFormat. If we remove it from there, we\u0027d not have any framework client using the changes.",
+      "parentUuid": "891fc8f5_20bebdd8",
+      "revId": "9a2184ccb3d82f9d56a364316138ce067a6da3f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
