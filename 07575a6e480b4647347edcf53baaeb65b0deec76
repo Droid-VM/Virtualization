@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ee5f67c_58448aff",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-01-08T16:12:19Z",
+      "side": 1,
+      "message": "The Error in libsecretkeeper_client didn\u0027t implement error:Error, but there is no reason why that is so. Let me send a patch your way",
+      "parentUuid": "0a9558e7_d13b971f",
+      "range": {
+        "startLine": 110,
+        "startChar": 20,
+        "endLine": 110,
+        "endChar": 79
+      },
+      "revId": "07575a6e480b4647347edcf53baaeb65b0deec76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "847bdf13_0f0f26e4",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-01-05T12:08:06Z",
       "side": 1,
       "message": "I don\u0027t think this getter is really needed here.",
+      "range": {
+        "startLine": 113,
+        "startChar": 50,
+        "endLine": 113,
+        "endChar": 52
+      },
+      "revId": "07575a6e480b4647347edcf53baaeb65b0deec76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed3df397_c8ea5b33",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-01-08T16:12:19Z",
+      "side": 1,
+      "message": "Without getter, it would be very weak encapsulation",
+      "parentUuid": "847bdf13_0f0f26e4",
       "range": {
         "startLine": 113,
         "startChar": 50,

@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "64ffe53e_259d8298",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-01-08T16:12:19Z",
+      "side": 1,
+      "message": "Lets call them dice_artifacts. This does not differentiate the artifacts of V1 from V2, which is okay. Once they are there, all that really matters is that the type implements DiceArtifacts..",
+      "parentUuid": "96dc0a8f_71a69b4d",
+      "range": {
+        "startLine": 83,
+        "startChar": 9,
+        "endLine": 83,
+        "endChar": 13
+      },
+      "revId": "4d9cd993a866bd287287f7ee6e1f2056d3580118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b24d742a_ca24eaac",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-01-05T12:08:06Z",
       "side": 1,
       "message": "What this value should be eventually?",
+      "range": {
+        "startLine": 133,
+        "startChar": 63,
+        "endLine": 133,
+        "endChar": 67
+      },
+      "revId": "4d9cd993a866bd287287f7ee6e1f2056d3580118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e287d8b5_48743ec5",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-01-08T16:12:19Z",
+      "side": 1,
+      "message": "Instead of `None`, it would be `Some(_policy)`. This would lead to `sealing_policy` of the secret to be updated at the `get()` operation.",
+      "parentUuid": "b24d742a_ca24eaac",
       "range": {
         "startLine": 133,
         "startChar": 63,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bc90ef9_ff6d515a",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-01-08T16:12:19Z",
+      "side": 1,
+      "message": "`dice` is indeed an overloaded term \u0026 added confusion with the method being called the same. Let me rename the members to dice_artifacts.",
+      "parentUuid": "e4bb7cc4_079c2ee2",
+      "range": {
+        "startLine": 156,
+        "startChar": 4,
+        "endLine": 161,
+        "endChar": 5
+      },
+      "revId": "4d9cd993a866bd287287f7ee6e1f2056d3580118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2cfb127f_8cbcddfe",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-01-05T12:08:06Z",
       "side": 1,
       "message": "nit: drop one space",
+      "range": {
+        "startLine": 196,
+        "startChar": 20,
+        "endLine": 196,
+        "endChar": 21
+      },
+      "revId": "4d9cd993a866bd287287f7ee6e1f2056d3580118",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86c45bed_dc998e89",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-01-08T16:12:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2cfb127f_8cbcddfe",
       "range": {
         "startLine": 196,
         "startChar": 20,
