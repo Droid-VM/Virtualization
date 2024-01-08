@@ -22,6 +22,30 @@
       },
       "revId": "02a9b41e3deffd902464d40dc5068ecc8b789ccc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1039031_de9de3bf",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-08T15:20:08Z",
+      "side": 1,
+      "message": "That check should be in Builder#build - all the consistency checks are centralised there, since it\u0027s on all the paths that create a config. And indeed it is - see line 665.\n\nIt even has a test!",
+      "parentUuid": "0693022a_16032227",
+      "range": {
+        "startLine": 288,
+        "startChar": 6,
+        "endLine": 291,
+        "endChar": 9
+      },
+      "revId": "02a9b41e3deffd902464d40dc5068ecc8b789ccc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
