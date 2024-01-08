@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "355fedc0_f4fcfdce",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-01-08T10:13:43Z",
+      "side": 1,
+      "message": "Hm, this shouldn\u0027t be an issue, since we override the console in the bootconfig (or in the kernel cmdline). Anyway, I think it is ok  to look into console test separately from landing this patch",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 8
+      },
+      "revId": "636e127a4d182ccb3115f97ed72e3e3f8dcdd017",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07eb8142_f8937270",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-01-08T10:13:43Z",
+      "side": 1,
+      "message": "Do you need to guard this on `gki !\u003d null`? Looks like we can just always query for the list of the supported OSes, and skip the test if mOs is not in that list.",
+      "range": {
+        "startLine": 170,
+        "startChar": 8,
+        "endLine": 170,
+        "endChar": 26
+      },
+      "revId": "636e127a4d182ccb3115f97ed72e3e3f8dcdd017",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45df141f_adc7aa44",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-01-08T10:13:43Z",
+      "side": 1,
+      "message": "This will significantly increase the run time of avf-presubmit. Is it possible to restrict presubmit runs to only microdroid (and maybe one latest GKI)? When running post-submit tests / CTS suite we should run MicrodroidTests for all possible combinations",
+      "range": {
+        "startLine": 124,
+        "startChar": 4,
+        "endLine": 124,
+        "endChar": 49
+      },
+      "revId": "636e127a4d182ccb3115f97ed72e3e3f8dcdd017",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6211aec3_2637f65e",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1760,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-01-08T10:13:43Z",
+      "side": 1,
+      "message": "Please file a bug to investigate this further. As I mentioned above, I think we should be able to run this test on GKI kernels as well",
+      "range": {
+        "startLine": 1760,
+        "startChar": 7,
+        "endLine": 1760,
+        "endChar": 65
+      },
+      "revId": "636e127a4d182ccb3115f97ed72e3e3f8dcdd017",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
