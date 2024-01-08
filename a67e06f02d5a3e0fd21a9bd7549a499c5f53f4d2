@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5d75867_45a4f7fb",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 827,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-08T18:40:16Z",
+      "side": 1,
+      "message": "Name this \"`next_node`\", following the existing `FdtNode::next_node()`? It\u0027d be very confusing for a call to `node.next_descendant(depth)` to return a sibling of `node` or of one of its ancestors, IMO.",
+      "range": {
+        "startLine": 827,
+        "startChar": 11,
+        "endLine": 827,
+        "endChar": 26
+      },
+      "revId": "a67e06f02d5a3e0fd21a9bd7549a499c5f53f4d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
