@@ -16,6 +16,116 @@
       "message": "Please take a look at this.\n\nI\u0027m not certain whether I need to care about other properties (e.g. `\u003cranges\u003e`), so only considered `\u003creg\u003e` here.",
       "revId": "46ce1b33ed76187662055f134ea8aa4d56369f66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa130fd4_c6227dc5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-08T18:38:54Z",
+      "side": 1,
+      "message": "Yes, IIRC, both `\u003creg\u003e` and `\u003cranges\u003e` in `/pci` describe CPU address regions and must therefore contribute to the \"set\" this function is tracking. Note that, unlike `\u003creg\u003e`, `\u003cranges\u003e` is even less robustly defined so we\u0027ll also have to parse it on a per-`device_type` basis.",
+      "parentUuid": "a6ee0869_d3dcdec9",
+      "revId": "46ce1b33ed76187662055f134ea8aa4d56369f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49107115_14172a12",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-08T18:38:54Z",
+      "side": 1,
+      "message": "Ah, doing the check by parsing the final result (instead of validating every region) is a good idea!",
+      "range": {
+        "startLine": 878,
+        "startChar": 4,
+        "endLine": 878,
+        "endChar": 32
+      },
+      "revId": "46ce1b33ed76187662055f134ea8aa4d56369f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10dda14a_35c65a98",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-08T18:38:54Z",
+      "side": 1,
+      "message": "I\u0027ve seen memory regions described with _only_ a size (swiotlb), where it meant that the kernel should allocate it, but the opposite doesn\u0027t make sense to me; how should the kernel know how many pages to map...?\n\nAnyway, assuming that this is a valid use-case, your function doesn\u0027t detect duplicates between size-less `Reg` i.e.\n```\nlet reg \u003d Reg { addr, size: None };\nis_reg_overlap(reg, reg)\n```\nresults in\n```\naddr \u003c addr \u0026\u0026 addr \u003c addr\n```\nwhich is `false` (but shouldn\u0027t) as a result of the function dealing with semi-open intervals (as `[X;X[` is empty and therefore can\u0027t overlap with anything, not even itself).",
+      "range": {
+        "startLine": 985,
+        "startChar": 52,
+        "endLine": 985,
+        "endChar": 69
+      },
+      "revId": "46ce1b33ed76187662055f134ea8aa4d56369f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29c128c6_eb7c0a19",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 992,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-08T18:38:54Z",
+      "side": 1,
+      "message": "nit: `node`",
+      "range": {
+        "startLine": 992,
+        "startChar": 9,
+        "endLine": 992,
+        "endChar": 19
+      },
+      "revId": "46ce1b33ed76187662055f134ea8aa4d56369f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7f45d5e_97807c7d",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 993,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-08T18:38:54Z",
+      "side": 1,
+      "message": "This doesn\u0027t really work because it conflates all the `\u003creg\u003e` into the same address space, which is wrong if there exist multiple \"buses\" in the DT. In our case, `platform.dts` uses `\u003creg\u003e` for CPUs, which aren\u0027t actual physical addresses; filtering by `device_type` might be enough for us, right now.",
+      "range": {
+        "startLine": 993,
+        "startChar": 0,
+        "endLine": 993,
+        "endChar": 51
+      },
+      "revId": "46ce1b33ed76187662055f134ea8aa4d56369f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
