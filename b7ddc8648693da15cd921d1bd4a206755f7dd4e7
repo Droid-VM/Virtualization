@@ -69,6 +69,29 @@
       "parentUuid": "db8dc6ff_8f3f513e",
       "revId": "b7ddc8648693da15cd921d1bd4a206755f7dd4e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45a1c1d7_cd07cb4f",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-01-09T09:37:46Z",
+      "side": 1,
+      "message": "I don\u0027t see how \u0026 where are you using the rialto image.\nFor ex, see method `SignVirtApex`:\n`resign_kernel(\u0027kernel\u0027, \u0027initrd_normal.img\u0027, \u0027initrd_debuggable.img\u0027)`\nresigns Microdroid kernel on how it is resigned.\n\nYou don\u0027t seem to be using `rialto` at all or is this WIP change?",
+      "range": {
+        "startLine": 447,
+        "startChar": 0,
+        "endLine": 447,
+        "endChar": 23
+      },
+      "revId": "b7ddc8648693da15cd921d1bd4a206755f7dd4e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
