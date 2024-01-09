@@ -16,6 +16,23 @@
       "message": "Hi David, could you take another look?",
       "revId": "1860c5b14efea853be10686be55a431e53a85901",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83d03c1e_7acb98ba",
+        "filename": "libs/bssl/src/err.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-01-09T09:57:55Z",
+      "side": 1,
+      "message": "Might be worth having a common `cstr_to_string(p: *const c_char, default: \u0026str) -\u003e String` to use instead of, or as a wrapper around, `as_static_cstr` ?",
+      "revId": "1860c5b14efea853be10686be55a431e53a85901",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
