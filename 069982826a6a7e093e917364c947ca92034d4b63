@@ -34,6 +34,24 @@
       "parentUuid": "109478a4_5be0f8a1",
       "revId": "069982826a6a7e093e917364c947ca92034d4b63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9444f3a2_9e175e9b",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-09T13:51:13Z",
+      "side": 1,
+      "message": "How can it be null? Even if we allow Builder#mOs to be null - which we don\u0027t in this CL - the built config can never have null.\n\nAnd I think that\u0027s an important property of the API.",
+      "parentUuid": "ee95a5af_cc9673b6",
+      "revId": "069982826a6a7e093e917364c947ca92034d4b63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
