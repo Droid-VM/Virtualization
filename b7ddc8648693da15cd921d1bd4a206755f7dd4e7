@@ -51,6 +51,24 @@
       "parentUuid": "db8dc6ff_8f3f513e",
       "revId": "b7ddc8648693da15cd921d1bd4a206755f7dd4e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c863b1d_68878dcf",
+        "filename": "apex/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-09T09:14:39Z",
+      "side": 1,
+      "message": "This is necessary because the current approach of resigning Rialto in arm64 while avoiding x86_64 relies primarily on the existence of Rialto image file. With this change, Rialto will only be built for arm64, whereas previously it was included in all targets.",
+      "parentUuid": "db8dc6ff_8f3f513e",
+      "revId": "b7ddc8648693da15cd921d1bd4a206755f7dd4e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
