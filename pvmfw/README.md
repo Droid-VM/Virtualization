@@ -141,7 +141,11 @@ The configuration data is described using the following [header]:
 +-------------------------------+
 |           [Entry 2]           | <-- Entry 2 is present since version 1.1
 |  offset = (THIRD - HEAD)      |
-|  size = (THIRD_END - SECOND)  |
+|  size = (THIRD_END - THIRD)   |
++-------------------------------+
+|           [Entry 3]           | <-- Entry 3 is present since version 1.2
+|  offset = (FOURTH - HEAD)     |
+|  size = (FOURTH_END - FOURTH) |
 +-------------------------------+
 |              ...              |
 +-------------------------------+
@@ -149,16 +153,20 @@ The configuration data is described using the following [header]:
 +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
 | (Padding to 8-byte alignment) |
 +===============================+ <-- FIRST
-|        {First blob: BCC}      |
+|       {First blob: BCC}       |
 +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+ <-- FIRST_END
 | (Padding to 8-byte alignment) |
 +===============================+ <-- SECOND
-|        {Second blob: DP}      |
+|       {Second blob: DP}       |
 +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+ <-- SECOND_END
 | (Padding to 8-byte alignment) |
 +===============================+ <-- THIRD
-|        {Third blob: VM DTBO}  |
+|     {Third blob: VM DTBO}     |
 +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+ <-- THIRD_END
+| (Padding to 8-byte alignment) |
++===============================+ <-- FOURTH
+|  {Fourth blob: VM base DTBO}  |
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+ <-- FOURTH_END
 | (Padding to 8-byte alignment) |
 +===============================+
 |              ...              |
@@ -185,10 +193,17 @@ blos it refers to. In version 1.0, it describes two blobs:
 - entry 1 may point to a [DTBO] to be applied to the pVM device tree. See
   [debug policy][debug_policy] for an example.
 
-In version 1.1, new blob is added.
+In version 1.1, third blob is added.
 
 - entry 2 may point to a [DTBO] that describes VM DTBO for device assignment.
   pvmfw will provision assigned devices with the VM DTBO.
+
+In version 1.2, fourth blob is added.
+
+- entry 3 may point to a [DTBO] that describes VM base DTBO. With the VM base
+  DTBO, pvmfw will provision additional information from where configuration
+  data comes. For example, hashtree descriptor root digest of Microdroid
+  vendor partition and Secretkeeper public key are included in VM base DTBO.
 
 [header]: src/config.rs
 [DTBO]: https://android.googlesource.com/platform/external/dtc/+/refs/heads/main/Documentation/dt-object-internal.txt
