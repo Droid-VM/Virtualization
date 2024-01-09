@@ -46,6 +46,30 @@
       },
       "revId": "39a32570781e8bc36179c137628e0abdc5332bb1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "309ad6b2_5d3b47d3",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-09T15:34:50Z",
+      "side": 1,
+      "message": "Mm, actually this is a good point. The salt is not an issue for the validation itself but can be a problem for remote attestation since we also validate the hashes in RKP VM. I filed a bug for this problem \u003d\u003e http://b/319235308",
+      "parentUuid": "8aae6aba_07db07e8",
+      "range": {
+        "startLine": 518,
+        "startChar": 14,
+        "endLine": 518,
+        "endChar": 27
+      },
+      "revId": "39a32570781e8bc36179c137628e0abdc5332bb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
