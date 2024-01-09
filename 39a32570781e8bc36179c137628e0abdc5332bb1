@@ -22,6 +22,30 @@
       },
       "revId": "39a32570781e8bc36179c137628e0abdc5332bb1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aae6aba_07db07e8",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-09T10:38:02Z",
+      "side": 1,
+      "message": "The salt is not an issue for validation. It\u0027s just the value prepended to the original image before computing the image hash. It doesn\u0027t change anything with or without it. BTW, the initrds also have salts[1] before resigning, are they added back somewhere during the resigning?\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/microdroid/Android.bp;l\u003d450;drc\u003d5a4077d52af504badab5afa0275f46b79bea36b6",
+      "parentUuid": "589024bc_fdf44373",
+      "range": {
+        "startLine": 518,
+        "startChar": 14,
+        "endLine": 518,
+        "endChar": 27
+      },
+      "revId": "39a32570781e8bc36179c137628e0abdc5332bb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
