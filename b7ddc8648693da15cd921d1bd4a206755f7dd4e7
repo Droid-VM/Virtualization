@@ -33,6 +33,24 @@
       "message": "Not sure why this file needs to be changed.",
       "revId": "b7ddc8648693da15cd921d1bd4a206755f7dd4e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8641a328_bd975b75",
+        "filename": "apex/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-01-09T09:14:16Z",
+      "side": 1,
+      "message": "Before changing this file, `etc/rialto.bin` exists as empty file in x86_64. After the patches, the file disappears, so we can check the existence in `sign_virt_apex` with `os.path.exists` simply.",
+      "parentUuid": "db8dc6ff_8f3f513e",
+      "revId": "b7ddc8648693da15cd921d1bd4a206755f7dd4e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
