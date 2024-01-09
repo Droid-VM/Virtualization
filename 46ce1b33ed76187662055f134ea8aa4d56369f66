@@ -108,6 +108,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e5a4cc04_8d8d2563",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-09T13:27:38Z",
+      "side": 1,
+      "message": "I think a `None` `size` is there to support CPUs but, overall, ignoring sounds fine but we might want to `warn!` if we see one that isn\u0027t `device_type\u003dcpu`; WDYT?",
+      "parentUuid": "49824e44_5eb13dd9",
+      "range": {
+        "startLine": 985,
+        "startChar": 52,
+        "endLine": 985,
+        "endChar": 69
+      },
+      "revId": "46ce1b33ed76187662055f134ea8aa4d56369f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "29c128c6_eb7c0a19",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 3
@@ -166,6 +190,30 @@
       "side": 1,
       "message": "To confirm my understanding:\n\nAre you suggesting to ignore any node with `device_type`?\n\nOr should I group nodes with `device_type` and compare within the group?",
       "parentUuid": "e7f45d5e_97807c7d",
+      "range": {
+        "startLine": 993,
+        "startChar": 0,
+        "endLine": 993,
+        "endChar": 51
+      },
+      "revId": "46ce1b33ed76187662055f134ea8aa4d56369f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85af94e8_d7782233",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 993,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-09T13:27:38Z",
+      "side": 1,
+      "message": "\u003e Are you suggesting to ignore any node with device_type?\n\nNo no! I meant that you can detect CPUs by parsing `\u003cdevice_type\u003e` in the loop: if it\u0027s a CPU, you treat it in a special way, otherwise you ignore the property.\n\nI guess that ignoring those nodes would be fine as another part of the code is already validating their `\u003creg\u003e` and they can\u0027t clash with assigned devices.\n\n\u003e Or should I group nodes with `device_type` and compare within the group?\n\nThat would be too simple 😄\n\nFrom `platform.dts` alone: devices with `device_type` may be in their own \"`\u003creg\u003e` space\" (\"`cpu`\"), be \"normal\" by occupying `\u003creg\u003e` ranges on the main bus (`\"memory\"`) but also more than just `\u003creg\u003e` (`\"pci\"` has `\u003cranges\u003e`) so `\u003cdevice_type\u003e` doesn\u0027t define a \"bus\", unfortunately.",
+      "parentUuid": "36065b28_19a263a3",
       "range": {
         "startLine": 993,
         "startChar": 0,
