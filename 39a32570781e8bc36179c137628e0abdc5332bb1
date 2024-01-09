@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "589024bc_fdf44373",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-01-09T10:19:14Z",
+      "side": 1,
+      "message": "Comparing with https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/rialto/Android.bp;l\u003d88-109, I dont see `AddHashFooter` adding `--salt` as an argument which the Build rule does.\n\nIs it useful to add it to rialto img? If not added, will it cause size mismatches?",
+      "range": {
+        "startLine": 518,
+        "startChar": 14,
+        "endLine": 518,
+        "endChar": 27
+      },
+      "revId": "39a32570781e8bc36179c137628e0abdc5332bb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
