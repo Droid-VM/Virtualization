@@ -45,6 +45,30 @@
       },
       "revId": "f2bcd1605d77fff0c29ff89d8939c46662982cdd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ee7b205_8a7b7c42",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-01-09T01:21:50Z",
+      "side": 1,
+      "message": "GKI takes more memory than microdroid kernel. Without this a few tests will fail.",
+      "parentUuid": "1777b6c9_24132a1c",
+      "range": {
+        "startLine": 93,
+        "startChar": 45,
+        "endLine": 93,
+        "endChar": 48
+      },
+      "revId": "f2bcd1605d77fff0c29ff89d8939c46662982cdd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
