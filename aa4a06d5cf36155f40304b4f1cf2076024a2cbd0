@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64859d74_66658a74",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-09T16:55:32Z",
+      "side": 1,
+      "message": "Nit: Which ones? An atest incantation is welcome, or just \"Presubmits\"",
+      "range": {
+        "startLine": 21,
+        "startChar": 6,
+        "endLine": 21,
+        "endChar": 22
+      },
+      "revId": "aa4a06d5cf36155f40304b4f1cf2076024a2cbd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ea9456b_3284ca97",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-09T16:55:32Z",
+      "side": 1,
+      "message": "Why \"KEY_\"? Alternatively, why not KEY_AUTHORITY_HASH etc?\nElsewhere we just call this MODE.",
+      "range": {
+        "startLine": 41,
+        "startChar": 6,
+        "endLine": 41,
+        "endChar": 14
+      },
+      "revId": "aa4a06d5cf36155f40304b4f1cf2076024a2cbd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "381314e0_6c5af911",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-09T16:55:32Z",
+      "side": 1,
+      "message": "We\u0027re trying to deprecate the term BCC, so we shouldn\u0027t introduce new usages.\n\nexplicit_key_chain, explicit_dice, or something?",
+      "range": {
+        "startLine": 110,
+        "startChar": 25,
+        "endLine": 110,
+        "endChar": 28
+      },
+      "revId": "aa4a06d5cf36155f40304b4f1cf2076024a2cbd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f63f793c_164574db",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-09T16:55:32Z",
+      "side": 1,
+      "message": "Why can\u0027t we do that now?",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 58
+      },
+      "revId": "aa4a06d5cf36155f40304b4f1cf2076024a2cbd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50054eab_521a26dc",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-09T16:55:32Z",
+      "side": 1,
+      "message": "Boot image?\nNot sure this is saying exactly what it should.",
+      "range": {
+        "startLine": 190,
+        "startChar": 76,
+        "endLine": 191,
+        "endChar": 32
+      },
+      "revId": "aa4a06d5cf36155f40304b4f1cf2076024a2cbd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "827b026b_0e72fdf4",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-09T16:55:32Z",
+      "side": 1,
+      "message": "`enum Something { Optional, Required }` ?\n\nRaw booleans have many downsides.",
+      "range": {
+        "startLine": 203,
+        "startChar": 12,
+        "endLine": 203,
+        "endChar": 32
+      },
+      "revId": "aa4a06d5cf36155f40304b4f1cf2076024a2cbd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
