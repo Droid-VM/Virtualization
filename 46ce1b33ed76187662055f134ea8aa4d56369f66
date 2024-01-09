@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49824e44_5eb13dd9",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-01-09T12:29:58Z",
+      "side": 1,
+      "message": "\u003e I\u0027ve seen memory regions described with only a size (swiotlb), where it meant that the kernel should allocate it, but the opposite doesn\u0027t make sense to me; how should the kernel know how many pages to map...?\n\nGood to know. Would be be better to ignore if `size` is `None`?\n\nOtherwise I\u0027ll update my CL to compare size-less `\u003creg\u003e`.",
+      "parentUuid": "10dda14a_35c65a98",
+      "range": {
+        "startLine": 985,
+        "startChar": 52,
+        "endLine": 985,
+        "endChar": 69
+      },
+      "revId": "46ce1b33ed76187662055f134ea8aa4d56369f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "29c128c6_eb7c0a19",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 3
@@ -118,6 +142,30 @@
       "writtenOn": "2024-01-08T18:38:54Z",
       "side": 1,
       "message": "This doesn\u0027t really work because it conflates all the `\u003creg\u003e` into the same address space, which is wrong if there exist multiple \"buses\" in the DT. In our case, `platform.dts` uses `\u003creg\u003e` for CPUs, which aren\u0027t actual physical addresses; filtering by `device_type` might be enough for us, right now.",
+      "range": {
+        "startLine": 993,
+        "startChar": 0,
+        "endLine": 993,
+        "endChar": 51
+      },
+      "revId": "46ce1b33ed76187662055f134ea8aa4d56369f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36065b28_19a263a3",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 993,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-01-09T12:29:58Z",
+      "side": 1,
+      "message": "To confirm my understanding:\n\nAre you suggesting to ignore any node with `device_type`?\n\nOr should I group nodes with `device_type` and compare within the group?",
+      "parentUuid": "e7f45d5e_97807c7d",
       "range": {
         "startLine": 993,
         "startChar": 0,
