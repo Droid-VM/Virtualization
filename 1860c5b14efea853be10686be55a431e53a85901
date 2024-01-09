@@ -33,6 +33,24 @@
       "message": "Might be worth having a common `cstr_to_string(p: *const c_char, default: \u0026str) -\u003e String` to use instead of, or as a wrapper around, `as_static_cstr` ?",
       "revId": "1860c5b14efea853be10686be55a431e53a85901",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c7007aa_1c07736e",
+        "filename": "libs/bssl/src/err.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-09T11:41:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83d03c1e_7acb98ba",
+      "revId": "1860c5b14efea853be10686be55a431e53a85901",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
