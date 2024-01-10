@@ -1,0 +1,9 @@
+package: "com.android.system.virtualmachine.flags"
+flag {
+  name: "enable_vendor_modules"
+  namespace: "avf"
+  description: "maps to AVF_RELEASE_ENABLE_VENDOR_MODULES"
+  bug: "<none>"
+  is_fixed_read_only: true
+}
+

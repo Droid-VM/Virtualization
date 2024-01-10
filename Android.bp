@@ -63,3 +63,19 @@ genrule_defaults {
     tools: ["dtc"],
     cmd: "FILES=($(in)) && $(location dtc) -I dts -O dtb $${FILES[-1]} -o $(out)",
 }
+
+aconfig_declarations {
+    name: "com.android.system.virtualmachine.flags",
+    package: "com.android.system.virtualmachine.flags",
+    srcs: ["com.android.system.virtualmachine.flags.aconfig"],
+}
+
+java_aconfig_library {
+    name: "com.android.system.virtualmachine.flags_java",
+    aconfig_declarations: "com.android.system.virtualmachine.flags",
+}
+
+cc_aconfig_library {
+    name: "com.android.system.virtualmachine.flags_cc",
+    aconfig_declarations: "com.android.system.virtualmachine.flags",
+}
