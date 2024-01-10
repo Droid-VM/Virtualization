@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5fe80965_fd82d7b7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-10T13:32:37Z",
+      "side": 1,
+      "message": "\"The Test stanza should be used to explain how you\u0027re testing your changes.\"\nThe convention is to list what tests you ran here, for the benefit of anyone looking back at this CL.",
+      "parentUuid": "f82127cb_3bb95b52",
+      "range": {
+        "startLine": 21,
+        "startChar": 6,
+        "endLine": 21,
+        "endChar": 22
+      },
+      "revId": "aa4a06d5cf36155f40304b4f1cf2076024a2cbd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ea9456b_3284ca97",
         "filename": "microdroid_manager/src/vm_secret.rs",
         "patchSetId": 10
@@ -273,6 +297,30 @@
       "side": 1,
       "message": "It was introduced in a different patch, but yeah I agree it is not ideal. Let me do this in a separate patch.",
       "parentUuid": "827b026b_0e72fdf4",
+      "range": {
+        "startLine": 203,
+        "startChar": 12,
+        "endLine": 203,
+        "endChar": 32
+      },
+      "revId": "aa4a06d5cf36155f40304b4f1cf2076024a2cbd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3373c05d_da42657b",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-10T13:32:37Z",
+      "side": 1,
+      "message": "Ack. In the meantime, can you add the /* Optional */ in the other 2 places?",
+      "parentUuid": "fdce2db1_3bbf078f",
       "range": {
         "startLine": 203,
         "startChar": 12,
