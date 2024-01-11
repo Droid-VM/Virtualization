@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09bc4bc3_160b46cc",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2024-01-11T14:25:48Z",
+      "side": 1,
+      "message": "Looking back at this, you might want to consider keeping track of all the hashes that have been processed so far and fail with an error message if they repeat, or something along those lines.\n\nThis algorithm would fail eg. if the old hashes of `initrd_normal` and `initrd_debug` were the same. Depending on whether the new ones are the same, it would either fail saying that replacing didn\u0027t change content, or fail at runtime because the hashes don\u0027t match.",
+      "range": {
+        "startLine": 582,
+        "startChar": 0,
+        "endLine": 582,
+        "endChar": 85
+      },
+      "revId": "1aacfabce4ad0520a75677c7ba253d6d61bf476d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
