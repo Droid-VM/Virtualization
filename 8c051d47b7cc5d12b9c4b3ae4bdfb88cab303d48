@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1541e73_66da7cca",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-11T13:13:12Z",
+      "side": 1,
+      "message": "Right. I did some refactoring and forgot to return the content here. I also added a check for the final footer to avoid this problem in the future.",
+      "parentUuid": "bf3dbedc_65e23650",
+      "range": {
+        "startLine": 571,
+        "startChar": 8,
+        "endLine": 571,
+        "endChar": 26
+      },
+      "revId": "8c051d47b7cc5d12b9c4b3ae4bdfb88cab303d48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "40d09ca0_f6f98a91",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-01-11T12:31:45Z",
       "side": 1,
       "message": "Did you mean to remove this?",
+      "range": {
+        "startLine": 576,
+        "startChar": 0,
+        "endLine": 576,
+        "endChar": 46
+      },
+      "revId": "8c051d47b7cc5d12b9c4b3ae4bdfb88cab303d48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06e278b1_35492b29",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-11T13:13:12Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "40d09ca0_f6f98a91",
       "range": {
         "startLine": 576,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fcdb624_08056a1f",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-11T13:13:12Z",
+      "side": 1,
+      "message": "I inlined this function after refactoring the return type of `find_hash_descriptor...`.",
+      "parentUuid": "2b7900c8_c9d6f3f1",
+      "range": {
+        "startLine": 586,
+        "startChar": 0,
+        "endLine": 586,
+        "endChar": 51
+      },
+      "revId": "8c051d47b7cc5d12b9c4b3ae4bdfb88cab303d48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "193cc291_8e7180f1",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-01-11T12:31:45Z",
       "side": 1,
       "message": "This is just\n```\nnew_content \u003d content.replace(search_bytes, replace_bytes)\nassert content !\u003d new_content\n```",
+      "range": {
+        "startLine": 591,
+        "startChar": 4,
+        "endLine": 598,
+        "endChar": 70
+      },
+      "revId": "8c051d47b7cc5d12b9c4b3ae4bdfb88cab303d48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57b4ac1f_78e483c4",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-11T13:13:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "193cc291_8e7180f1",
       "range": {
         "startLine": 591,
         "startChar": 4,
