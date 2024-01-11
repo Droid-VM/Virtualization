@@ -16,6 +16,29 @@
       "message": "Gentle ping - we\u0027re starting to get question about how this will work.\n\nAre the semantics here now well-defined? Can we document them here?",
       "revId": "ce48ace16715860816fda9a563098c75abed4149",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02fa478b_289eedb2",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-11T17:15:10Z",
+      "side": 1,
+      "message": "```suggestion\n\n- entry 3 if present contains the VM base [DTBO]. This defines\n  properties that may be included in the device tree passed to a\n  protected VM, typically under the \"/avf\" node. pvmfw validates that\n  if any of these properties is included in the VM\u0027s device tree, the\n  property value exactly matches what is in the VM base DTBO.\n\n  The bootloader should ensure that the same properties, with the same\n  values, are added under the \"/avf/reference\" node in the host\n  Android device tree.\n\n  This provides a mechanism to allow configuration information to be\n  securely passed to the VM via the host. pvmfw does not interpret the\n  content of the DTBO, nor does it apply it to the VM\u0027s device tree,\n  it just ensures that if matching properties are present in the\n  VM device tree they contain the correct values.\n\n\u003c!--\n  TODO(b/319192461): Attach link explaining about Microdroid vendor partition\n  TODO(b/291232226): Attach link explaining about Secretkeeper\n--\u003e\n```",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 76
+      },
+      "revId": "ce48ace16715860816fda9a563098c75abed4149",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
