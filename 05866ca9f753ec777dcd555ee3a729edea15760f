@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8712c8f_882a750d",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-11T09:41:45Z",
+      "side": 1,
+      "message": "This looks a bit brittle. `microdroid_kernel` has 3 hash descriptors, with 0 we assume that we always want to use the salt in the first hash descriptor as the salt to generate the footer. But this problem should be mitigated with a test after resigning the kernel.",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 62
+      },
+      "revId": "05866ca9f753ec777dcd555ee3a729edea15760f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3389dc4b_01fb2b4f",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-11T09:41:45Z",
+      "side": 1,
+      "message": "Since the salt is especially important for kernel resign, can we add the following checks here for the 3 hash descriptors of the kernel footer?\n\n- kernel\u0027s salt/digest stay the same before/after.\n- initrd_debug|normal salt stay the same.",
+      "revId": "05866ca9f753ec777dcd555ee3a729edea15760f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
