@@ -208,15 +208,14 @@ def AvbInfo(args, image_path):
     return info, descriptors
 
 
-# Look up a list of (key, value) with a key. Returns the list of value(s) with the matching key.
-# The order of those values is maintained.
-def LookUp(pairs, key):
+def find_value_by_key(pairs, key):
+    """Find the value of the key in the pairs."""
     return [v for (k, v) in pairs if k == key]
 
 # Extract properties from the descriptors of original vbmeta image,
 # append to command as parameter.
 def AppendPropArgument(cmd, descriptors):
-    for prop in LookUp(descriptors, 'Prop'):
+    for prop in find_value_by_key(descriptors, 'Prop'):
         cmd.append('--prop')
         result = re.match(r"(.+) -> '(.+)'", prop)
         cmd.append(result.group(1) + ":" + result.group(2))
@@ -225,6 +224,7 @@ def AppendPropArgument(cmd, descriptors):
 def check_no_size_change_on_resigned_image(image_path, original_image_info, resigned_image_info):
     assert original_image_info is not None, f'no avbinfo on original image: {image_path}'
     assert resigned_image_info is not None, f'no avbinfo on resigned image: {image_path}'
+    assert_different_value(original_image_info, resigned_image_info, "Public key (sha1)", image_path)
     assert_same_value(original_image_info, resigned_image_info, "Header Block", image_path)
     assert_same_value(original_image_info, resigned_image_info, "Authentication Block", image_path)
     assert_same_value(original_image_info, resigned_image_info, "Auxiliary Block", image_path)
@@ -234,7 +234,7 @@ def AddHashFooter(args, key, image_path, additional_descriptors=None):
         key = args.key_overrides[os.path.basename(image_path)]
     info, descriptors = AvbInfo(args, image_path)
     if info:
-        descriptor = LookUp(descriptors, 'Hash descriptor')[0]
+        descriptor = find_value_by_key(descriptors, 'Hash descriptor')[0]
         image_size = ReadBytesSize(info['Image size'])
         algorithm = info['Algorithm']
         partition_name = descriptor['Partition Name']
@@ -266,7 +266,7 @@ def AddHashTreeFooter(args, key, image_path):
         key = args.key_overrides[os.path.basename(image_path)]
     info, descriptors = AvbInfo(args, image_path)
     if info:
-        descriptor = LookUp(descriptors, 'Hashtree descriptor')[0]
+        descriptor = find_value_by_key(descriptors, 'Hashtree descriptor')[0]
         image_size = ReadBytesSize(info['Image size'])
         algorithm = info['Algorithm']
         partition_name = descriptor['Partition Name']
@@ -556,6 +556,13 @@ def resign_rialto(args, key, rialto_path):
     # Verify the new AVB footer.
     updated_info, updated_descriptors = AvbInfo(args, rialto_path)
     assert_same_value(original_info, updated_info, "Original image size", "rialto")
+    assert_same_value(original_info, updated_info, "Rollback Index", "rialto")
+    original_prop = find_value_by_key(original_descriptors, "Prop")
+    updated_prop = find_value_by_key(updated_descriptors, "Prop")
+    assert len(updated_prop) == 1, f"Only one Prop is expected in rialto. Updated Prop: {updated_prop}"
+    assert original_prop == updated_prop, "Prop should not change for rialto." \
+          f"Original Prop: {original_prop}, Updated Prop: {updated_prop}"
+    # Verify the hash descriptor of rialto.
     original_descriptor = find_hash_descriptor_by_partition_name(original_descriptors, 'boot')
     updated_descriptor = find_hash_descriptor_by_partition_name(updated_descriptors, 'boot')
     # Since salt is not updated, the change of digest reflects the change of content of rialto
