@@ -27,6 +27,7 @@ sign_virt_apex uses external tools which are assumed to be available via PATH.
 - lpmake, lpunpack, simg2img, img2simg, initrd_bootconfig
 """
 import argparse
+import binascii
 import builtins
 import hashlib
 import os
@@ -508,12 +509,13 @@ def SignVirtApex(args):
         initrd_d_f = Async(GenVbmetaImage, args, initrd_debug_file,
                            initrd_debug_hashdesc, "initrd_debug",
                            wait=[vbmeta_bc_f] if vbmeta_bc_f is not None else [])
-        Async(AddHashFooter, args, key, kernel_file, partition_name="boot",
+        return Async(AddHashFooter, args, key, kernel_file, partition_name="boot",
               additional_descriptors=[
                   initrd_normal_hashdesc, initrd_debug_hashdesc],
               wait=[initrd_n_f, initrd_d_f])
 
-    resign_kernel('kernel', 'initrd_normal.img', 'initrd_debuggable.img')
+    _, original_kernel_descriptors = AvbInfo(args, files['kernel'])
+    resign_kernel_task = resign_kernel('kernel', 'initrd_normal.img', 'initrd_debuggable.img')
 
     for ver in gki_versions:
         if f'gki-{ver}_kernel' in files:
@@ -524,8 +526,53 @@ def SignVirtApex(args):
 
     # Re-sign rialto if it exists. Rialto only exists in arm64 environment.
     if os.path.exists(files['rialto']):
-        Async(AddHashFooter, args, key, files['rialto'], partition_name='boot')
+        replace_initrd_hashes_task = Async(
+            replace_initrd_hashes_in_rialto, original_kernel_descriptors, args,
+            files, wait=[resign_kernel_task])
+        Async(AddHashFooter, args, key, files['rialto'], partition_name='boot',
+            wait=[replace_initrd_hashes_task])
 
+def replace_initrd_hashes_in_rialto(original_descriptors, args, files):
+    partition_names = ['initrd_normal', 'initrd_debug']
+    _, updated_descriptors = AvbInfo(args, files['kernel'])
+
+    with open(files['rialto'], "rb") as file:
+        content = file.read()
+
+    for partition_name in partition_names:
+        original_hash = find_hash_descriptor_by_partition_name(
+            original_descriptors, partition_name)['Digest']
+        updated_hash = find_hash_descriptor_by_partition_name(
+            updated_descriptors, partition_name)['Digest']
+        replace_byte_array(content, original_hash, updated_hash)
+
+    with open(files['rialto'], "wb") as file:
+        file.write(content)
+
+    print("Byte array replaced successfully.")
+
+def find_hash_descriptor_by_partition_name(descriptors, partition_name):
+    for descriptor_type, descriptor in descriptors:
+        if descriptor_type == 'Hash descriptor' and descriptor['Partition Name'] == partition_name:
+            return descriptor
+    assert False, f'Failed to find hash descriptor for partition {partition_name}'
+
+def replace_byte_array(content, search_bytes, replace_bytes):
+    """Replace the search_bytes with replace_bytes in the content."""
+    assert len(search_bytes) == len(replace_bytes), \
+        "Length of search_bytes and replace_bytes must be the same."
+
+    search_bytes = binascii.unhexlify(search_bytes)
+    replace_bytes = binascii.unhexlify(replace_bytes)
+
+    # Find the index of the search_bytes in the content
+    index = content.find(search_bytes)
+    assert index != -1, "Search bytes not found in the file."
+
+    while index != -1:
+        # Replace the search_bytes with replace_bytes
+        content = content[:index] + replace_bytes + content[index + len(search_bytes):]
+        index = content.find(search_bytes, index + len(replace_bytes))
 
 def VerifyVirtApex(args):
     key = args.key
