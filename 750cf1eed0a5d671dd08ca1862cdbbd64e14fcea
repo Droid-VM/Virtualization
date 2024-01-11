@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bc387d4_6083e6ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-01-11T15:49:20Z",
+      "side": 1,
+      "message": "Added check whether assigned devices are in memory node.\n\nAVF assigns devices with VFIO-platform, so I assumed that assigned devices should be in the memory range. But correct me if I\u0027m wrong.",
+      "revId": "750cf1eed0a5d671dd08ca1862cdbbd64e14fcea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
