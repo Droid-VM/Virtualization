@@ -16,6 +16,52 @@
       "message": "Hi Jiyong,\n\nCould you please take a look?",
       "revId": "3be1a0ad348ce7f4d79b48eccecbb721b2ffd707",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30c2d991_e7742c71",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2024-01-11T11:48:56Z",
+      "side": 1,
+      "message": "Assert the property you actually want - that the size of the byte arrays is the same, not the size of the strings. From documentation it sounds like the `unhexlify` semantics should guarantee that `(len(str1) \u003d\u003d len(str2)) \u003d\u003d\u003e (len(unhexlify(str1)) \u003d\u003d len(unhexlify(str2))` but you never know...",
+      "range": {
+        "startLine": 586,
+        "startChar": 0,
+        "endLine": 586,
+        "endChar": 53
+      },
+      "revId": "3be1a0ad348ce7f4d79b48eccecbb721b2ffd707",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c9125bc_76683b81",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2024-01-11T11:48:56Z",
+      "side": 1,
+      "message": "I think you can assign to a slice in Python?\n```\ncontent[index:index+len(search_bytes)] \u003d replace_bytes\n```",
+      "range": {
+        "startLine": 598,
+        "startChar": 0,
+        "endLine": 598,
+        "endChar": 87
+      },
+      "revId": "3be1a0ad348ce7f4d79b48eccecbb721b2ffd707",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
