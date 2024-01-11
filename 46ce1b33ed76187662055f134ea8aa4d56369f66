@@ -294,6 +294,30 @@
       },
       "revId": "46ce1b33ed76187662055f134ea8aa4d56369f66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ec373f9_cedfc01d",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 993,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-11T16:06:29Z",
+      "side": 1,
+      "message": "\u003e Could you be more specific about \u0027ignoring those nodes\u0027 part?\n\nI meant that, for each node:\n```\nif let Some(device_type) \u003d node.getprop_str(cstr!(\"device_type\"))? {\n    match device_type {\n        cstr!(\"cpu\") \u003d\u003e continue,\n        cstr!(\"pci\") \u003d\u003e { /* track \u003cranges\u003e */ },\n        cstr!(\"memory\") \u003d\u003e {},\n        unexpected \u003d\u003e warn!(...),\n    }\n}\n// validate \u003creg\u003e\n```\n\n\u003e Yes. The solution is very naive. But [...] What do you think?\n\nI think that the solution of grouping devices based on their `device_type` does not work as it would result in `/memory` or `/pci` being in their own \"groups\" even though everything shares the same address space (on the \"platform bus\"). It could help with `device_type\u003d\"cpu\"` but the check I show above achieves that in a more robust way.",
+      "parentUuid": "530a168c_eda7766f",
+      "range": {
+        "startLine": 993,
+        "startChar": 0,
+        "endLine": 993,
+        "endChar": 51
+      },
+      "revId": "46ce1b33ed76187662055f134ea8aa4d56369f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
