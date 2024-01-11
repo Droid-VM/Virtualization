@@ -27,6 +27,7 @@ sign_virt_apex uses external tools which are assumed to be available via PATH.
 - lpmake, lpunpack, simg2img, img2simg, initrd_bootconfig
 """
 import argparse
+import binascii
 import builtins
 import hashlib
 import os
@@ -527,12 +528,12 @@ def SignVirtApex(args):
         initrd_d_f = Async(GenVbmetaImage, args, initrd_debug_file,
                            initrd_debug_hashdesc, "initrd_debug",
                            wait=[vbmeta_bc_f] if vbmeta_bc_f is not None else [])
-        Async(AddHashFooter, args, key, kernel_file,
-              additional_descriptors=[
-                  initrd_normal_hashdesc, initrd_debug_hashdesc],
+        return Async(AddHashFooter, args, key, kernel_file,
+              additional_descriptors=[initrd_normal_hashdesc, initrd_debug_hashdesc],
               wait=[initrd_n_f, initrd_d_f])
 
-    resign_kernel('kernel', 'initrd_normal.img', 'initrd_debuggable.img')
+    _, original_kernel_descriptors = AvbInfo(args, files['kernel'])
+    resign_kernel_task = resign_kernel('kernel', 'initrd_normal.img', 'initrd_debuggable.img')
 
     for ver in gki_versions:
         if f'gki-{ver}_kernel' in files:
@@ -543,8 +544,69 @@ def SignVirtApex(args):
 
     # Re-sign rialto if it exists. Rialto only exists in arm64 environment.
     if os.path.exists(files['rialto']):
-        Async(AddHashFooter, args, key, files['rialto'])
+        update_kernel_hashes_task = Async(
+            update_kernel_hashes_in_rialto, original_kernel_descriptors, args,
+            files, wait=[resign_kernel_task])
+        Async(resign_rialto, args, key, files['rialto'], wait=[update_kernel_hashes_task])
 
+def resign_rialto(args, key, rialto_path):
+    original_info, original_descriptors = AvbInfo(args, rialto_path)
+    AddHashFooter(args, key, rialto_path)
+
+    # Verify the new AVB footer.
+    updated_info, updated_descriptors = AvbInfo(args, rialto_path)
+    assert original_info["Original image size"] == updated_info["Original image size"], \
+        "Rialto image size should not change."
+    original_descriptor = find_hash_descriptor_by_partition_name(original_descriptors, 'boot')
+    updated_descriptor = find_hash_descriptor_by_partition_name(updated_descriptors, 'boot')
+    # Since salt is not updated, the change of digest reflects the change of content of rialto
+    # kernel.
+    assert original_descriptor["Salt"] == updated_descriptor["Salt"], \
+        "Salt of rialto should not change."
+    assert original_descriptor['Digest'] != updated_descriptor['Digest'], \
+        "Digest of rialto should be updated."
+
+def update_kernel_hashes_in_rialto(original_descriptors, args, files):
+    _, updated_descriptors = AvbInfo(args, files['kernel'])
+
+    original_kernel_digest = find_partition_digest(original_descriptors, 'boot')
+    updated_kernel_digest = find_partition_digest(updated_descriptors, 'boot')
+    assert original_kernel_digest == updated_kernel_digest, \
+        "Kernel digest should not change."
+
+    with open(files['rialto'], "rb") as file:
+        content = file.read()
+
+    partition_names = ['initrd_normal', 'initrd_debug']
+    for partition_name in partition_names:
+        original_digest = find_partition_digest(original_descriptors, partition_name)
+        updated_digest = find_partition_digest(updated_descriptors, partition_name)
+        assert len(original_digest) == len(updated_digest), \
+            f"Length of original_digest and updated_digest must be the same for {partition_name}"
+        assert original_digest != updated_digest, \
+            f"Digest of {partition_name} should be updated."
+
+        new_content = content.replace(original_digest, updated_digest)
+        assert len(new_content) == len(content), \
+            "Length of new_content and content must be the same."
+        assert new_content != content, \
+            f"original_digest not found in the partition {partition_name}."
+        content = new_content
+
+    with open(files['rialto'], "wb") as file:
+        file.write(content)
+
+def find_partition_digest(descriptors, partition_name):
+    """Find the digest of the partition in the descriptors. Returns the digest as bytes."""
+    digest = find_hash_descriptor_by_partition_name(descriptors, partition_name)['Digest']
+    return binascii.unhexlify(digest)
+
+def find_hash_descriptor_by_partition_name(descriptors, partition_name):
+    """Find the hash descriptor of the partition in the descriptors."""
+    for descriptor_type, descriptor in descriptors:
+        if descriptor_type == 'Hash descriptor' and descriptor['Partition Name'] == partition_name:
+            return descriptor
+    assert False, f'Failed to find hash descriptor for partition {partition_name}'
 
 def VerifyVirtApex(args):
     key = args.key
