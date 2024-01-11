@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fe14c57_5b5f4c93",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2024-01-11T16:57:54Z",
+      "side": 1,
+      "message": "Defo works but how feels a bit disconnected from the loop itself - we duplicate the work, which is not very maintainable, may diverge, etc. How about:\n\n * build a dictionary of each `old_hash -\u003e new_hash` pair\n * check that `len(union(dict.keys(), dict.values())) \u003d\u003d len(dict.keys()) * len(dict.values())`\n * `for old_hash, new_hash in dict:`\n   * check hashes and replace\n * profit",
+      "range": {
+        "startLine": 590,
+        "startChar": 0,
+        "endLine": 590,
+        "endChar": 79
+      },
+      "revId": "8ac707dc38ed36d741e95e82beecf476d44bf347",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
