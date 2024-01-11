@@ -39,6 +39,24 @@
       "message": "Since the salt is especially important for kernel resign, can we add the following checks here for the 3 hash descriptors of the kernel footer?\n\n- kernel\u0027s salt/digest stay the same before/after.\n- initrd_debug|normal salt stay the same.",
       "revId": "05866ca9f753ec777dcd555ee3a729edea15760f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26507464_ffb9df86",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-11T10:37:59Z",
+      "side": 1,
+      "message": "Mm, it looks like it\u0027s convenient to do these checks in the subsequent cl when I need to replace the bytes \u003d\u003e https://r.android.com/2905948.",
+      "parentUuid": "3389dc4b_01fb2b4f",
+      "revId": "05866ca9f753ec777dcd555ee3a729edea15760f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
