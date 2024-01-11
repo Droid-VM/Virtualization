@@ -46,6 +46,30 @@
       },
       "revId": "1aacfabce4ad0520a75677c7ba253d6d61bf476d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61f610fe_8b565b9e",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2024-01-11T16:04:32Z",
+      "side": 1,
+      "message": "Eh, no. I\u0027m saying this algorithm can behave weirdly if some of the files (old or new) are the same. Replacing hashes for one file will affect hashes of the other file. I don\u0027t think this should happen in practice but would be nice if the script detected it because the result can be wrong.",
+      "parentUuid": "09037cd5_b8a138bb",
+      "range": {
+        "startLine": 582,
+        "startChar": 0,
+        "endLine": 582,
+        "endChar": 85
+      },
+      "revId": "1aacfabce4ad0520a75677c7ba253d6d61bf476d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
