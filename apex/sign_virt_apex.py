@@ -27,6 +27,7 @@ sign_virt_apex uses external tools which are assumed to be available via PATH.
 - lpmake, lpunpack, simg2img, img2simg, initrd_bootconfig
 """
 import argparse
+import binascii
 import builtins
 import hashlib
 import os
@@ -504,6 +505,12 @@ def SignVirtApex(args):
                   initrd_normal_hashdesc, initrd_debug_hashdesc],
               wait=[initrd_n_f, initrd_d_f])
 
+    _, original_kernel_descriptors = AvbInfo(args, files['kernel'])
+    original_initrd_normal_hash = find_hash_descriptor_by_partition_name(
+            original_kernel_descriptors, 'initrd_normal')['Digest']
+    original_initrd_debug_hash = find_hash_descriptor_by_partition_name(
+            original_kernel_descriptors, 'initrd_debug')['Digest']
+
     resign_kernel('kernel', 'initrd_normal.img', 'initrd_debuggable.img')
 
     for ver in gki_versions:
@@ -515,8 +522,40 @@ def SignVirtApex(args):
 
     # Re-sign rialto if it exists. Rialto only exists in arm64 environment.
     if os.path.exists(files['rialto']):
+        _, updated_kernel_descriptors = AvbInfo(args, files['kernel'])
+        updated_initrd_normal_hash = find_hash_descriptor_by_partition_name(
+            updated_kernel_descriptors, 'initrd_normal')['Digest']
+        updated_initrd_debug_hash = find_hash_descriptor_by_partition_name(
+            updated_kernel_descriptors, 'initrd_debug')['Digest']
+        replace_byte_array(files['rialto'], original_initrd_normal_hash, updated_initrd_normal_hash)
+        replace_byte_array(files['rialto'], original_initrd_debug_hash, updated_initrd_debug_hash)
         Async(AddHashFooter, args, key, files['rialto'], partition_name='boot')
 
+def find_hash_descriptor_by_partition_name(descriptors, partition_name):
+    for descriptor_type, descriptor in descriptors:
+        if descriptor_type == 'Hash descriptor' and descriptor['Partition Name'] == partition_name:
+            return descriptor
+    return None
+
+def replace_byte_array(file_path, search_bytes, replace_bytes):
+    """Replace the search_bytes with replace_bytes in the file_path."""
+    with open(file_path, "rb") as file:
+        content = file.read()
+    assert len(search_bytes) == len(replace_bytes), \
+        "Length of search_bytes and replace_bytes must be the same."
+    search_bytes = binascii.unhexlify(search_bytes)
+    replace_bytes = binascii.unhexlify(replace_bytes)
+    # Find the index of the search_bytes in the content
+    index = content.find(search_bytes)
+    assert index != -1, "Search bytes not found in the file."
+
+    # Replace the search_bytes with replace_bytes
+    content = content[:index] + replace_bytes + content[index + len(search_bytes):]
+
+    with open(file_path, "wb") as file:
+        file.write(content)
+
+    print("Byte array replaced successfully.")
 
 def VerifyVirtApex(args):
     key = args.key
