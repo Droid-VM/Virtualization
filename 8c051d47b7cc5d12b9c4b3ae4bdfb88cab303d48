@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf3dbedc_65e23650",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2024-01-11T12:31:45Z",
+      "side": 1,
+      "message": "I\u0027m confused - `content` is type `bytes` but that\u0027s immutable, isn\u0027t it? So how come you don\u0027t need the function to return the new value?",
+      "range": {
+        "startLine": 571,
+        "startChar": 8,
+        "endLine": 571,
+        "endChar": 26
+      },
+      "revId": "8c051d47b7cc5d12b9c4b3ae4bdfb88cab303d48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40d09ca0_f6f98a91",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2024-01-11T12:31:45Z",
+      "side": 1,
+      "message": "Did you mean to remove this?",
+      "range": {
+        "startLine": 576,
+        "startChar": 0,
+        "endLine": 576,
+        "endChar": 46
+      },
+      "revId": "8c051d47b7cc5d12b9c4b3ae4bdfb88cab303d48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b7900c8_c9d6f3f1",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2024-01-11T12:31:45Z",
+      "side": 1,
+      "message": "nit: I would expect this function to take 3 arguments of the same type, not `bytes, string, string`. Especially when the arguments are called `*_bytes`. You could just move the `unhexlify` to the `return` statement in `find_hash_descriptor_by_partition_name`",
+      "range": {
+        "startLine": 586,
+        "startChar": 0,
+        "endLine": 586,
+        "endChar": 51
+      },
+      "revId": "8c051d47b7cc5d12b9c4b3ae4bdfb88cab303d48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "193cc291_8e7180f1",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2024-01-11T12:31:45Z",
+      "side": 1,
+      "message": "This is just\n```\nnew_content \u003d content.replace(search_bytes, replace_bytes)\nassert content !\u003d new_content\n```",
+      "range": {
+        "startLine": 591,
+        "startChar": 4,
+        "endLine": 598,
+        "endChar": 70
+      },
+      "revId": "8c051d47b7cc5d12b9c4b3ae4bdfb88cab303d48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
