@@ -228,13 +228,16 @@ def check_no_size_change_on_resigned_image(image_path, original_image_info, resi
     assert original_image_info['Authentication Block'] == resigned_image_info['Authentication Block'], f'authentication block size mismatch: {image_path}'
     assert original_image_info['Auxiliary Block'] == resigned_image_info['Auxiliary Block'], f'auxiliary block size mismatch: {image_path}'
 
-def AddHashFooter(args, key, image_path, partition_name, additional_descriptors=None):
+def AddHashFooter(args, key, image_path, additional_descriptors=None):
     if os.path.basename(image_path) in args.key_overrides:
         key = args.key_overrides[os.path.basename(image_path)]
     info, descriptors = AvbInfo(args, image_path)
     if info:
+        descriptor = LookUp(descriptors, 'Hash descriptor')[0]
         image_size = ReadBytesSize(info['Image size'])
         algorithm = info['Algorithm']
+        partition_name = descriptor['Partition Name']
+        salt = descriptor['Salt']
         partition_size = str(image_size)
 
         cmd = ['avbtool', 'add_hash_footer',
@@ -242,6 +245,7 @@ def AddHashFooter(args, key, image_path, partition_name, additional_descriptors=
                '--algorithm', algorithm,
                '--partition_name', partition_name,
                '--partition_size', partition_size,
+               '--salt', salt,
                '--image', image_path]
         AppendPropArgument(cmd, descriptors)
         if args.signing_args:
@@ -266,6 +270,7 @@ def AddHashTreeFooter(args, key, image_path):
         algorithm = info['Algorithm']
         partition_name = descriptor['Partition Name']
         hash_algorithm = descriptor['Hash Algorithm']
+        salt = descriptor['Salt']
         partition_size = str(image_size)
         cmd = ['avbtool', 'add_hashtree_footer',
                '--key', key,
@@ -274,6 +279,7 @@ def AddHashTreeFooter(args, key, image_path):
                '--partition_size', partition_size,
                '--do_not_generate_fec',
                '--hash_algorithm', hash_algorithm,
+               '--salt', salt,
                '--image', image_path]
         AppendPropArgument(cmd, descriptors)
         if args.signing_args:
@@ -521,7 +527,7 @@ def SignVirtApex(args):
         initrd_d_f = Async(GenVbmetaImage, args, initrd_debug_file,
                            initrd_debug_hashdesc, "initrd_debug",
                            wait=[vbmeta_bc_f] if vbmeta_bc_f is not None else [])
-        Async(AddHashFooter, args, key, kernel_file, partition_name="boot",
+        Async(AddHashFooter, args, key, kernel_file,
               additional_descriptors=[
                   initrd_normal_hashdesc, initrd_debug_hashdesc],
               wait=[initrd_n_f, initrd_d_f])
@@ -537,7 +543,7 @@ def SignVirtApex(args):
 
     # Re-sign rialto if it exists. Rialto only exists in arm64 environment.
     if os.path.exists(files['rialto']):
-        Async(AddHashFooter, args, key, files['rialto'], partition_name='boot')
+        Async(AddHashFooter, args, key, files['rialto'])
 
 
 def VerifyVirtApex(args):
