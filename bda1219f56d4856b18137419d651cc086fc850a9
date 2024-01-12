@@ -117,6 +117,30 @@
       },
       "revId": "bda1219f56d4856b18137419d651cc086fc850a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "444167f9_a8e2c1cb",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-01-12T14:57:01Z",
+      "side": 1,
+      "message": "Yeah\nbut the following also works?\n\n```\nlet vm_secret \u003d  if let Some(sk_service) \u003d is_sk_supported(vm_service){ \n  Self::V2...\n} else {Self::V1};\n\nOk(vm_secret)\n```",
+      "parentUuid": "761a76f1_2ee9aff8",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 39
+      },
+      "revId": "bda1219f56d4856b18137419d651cc086fc850a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
