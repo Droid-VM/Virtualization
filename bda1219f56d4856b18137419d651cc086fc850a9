@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb3bee33_5b6b13b3",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-01-12T14:22:51Z",
+      "side": 1,
+      "message": "I need to find a way to get the id for protected VM. I\u0027ve added that in TODO thanks",
+      "parentUuid": "7e9e431d_1963eeb0",
+      "range": {
+        "startLine": 287,
+        "startChar": 7,
+        "endLine": 287,
+        "endChar": 11
+      },
+      "revId": "bda1219f56d4856b18137419d651cc086fc850a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7cbe728d_3fdb4ace",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-01-12T14:07:45Z",
       "side": 1,
       "message": "Late comment: This looks like a good case for `if let ... else `",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 39
+      },
+      "revId": "bda1219f56d4856b18137419d651cc086fc850a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5651077_2b30dce7",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-01-12T14:22:51Z",
+      "side": 1,
+      "message": "Done. Its a bit too long `if` block tbh. Hopefully I\u0027ll refactor this soon",
+      "parentUuid": "7cbe728d_3fdb4ace",
       "range": {
         "startLine": 86,
         "startChar": 0,
