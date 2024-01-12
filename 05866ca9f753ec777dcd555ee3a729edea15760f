@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f6f90948_edc63716",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-01-12T06:08:32Z",
+      "side": 1,
+      "message": "I think I misunderstood this function. I assumed that there\u0027s only on hash descriptor in the original image, but it wasn\u0027t. (e.g. microdroid_kernel)\n\nThen,\n- I agree with I shouldn\u0027t assume the extracted descriptor as \"zero\".\n- We need a check between hash descriptors in original images \u0026 `additional_descriptors` passed as a parameter; To check additional descriptors are valid \u0026 finding the hash descriptor lives in original image only.",
+      "parentUuid": "d8712c8f_882a750d",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 62
+      },
+      "revId": "05866ca9f753ec777dcd555ee3a729edea15760f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c08b51b_9ac7ceed",
         "filename": "apex/sign_virt_apex.py",
         "patchSetId": 1
@@ -54,6 +78,30 @@
       "writtenOn": "2024-01-11T10:46:37Z",
       "side": 1,
       "message": "BTW, the initrd also has a salt and it\u0027s not addressed. Can we also add the original salt in this function in a separate cl?",
+      "range": {
+        "startLine": 524,
+        "startChar": 27,
+        "endLine": 524,
+        "endChar": 41
+      },
+      "revId": "05866ca9f753ec777dcd555ee3a729edea15760f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7c75620_74eb2408",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-01-12T06:08:32Z",
+      "side": 1,
+      "message": "A dumb question: For the initrd_normal \u0026 initrd_debug, how can I extract the salt? It seems it doesn\u0027t live in the image, but in another image; like relationship between `microdroid_kernel` and `microdroid_initrd_normal`. Should I proceed as my thought?",
+      "parentUuid": "2c08b51b_9ac7ceed",
       "range": {
         "startLine": 524,
         "startChar": 27,
