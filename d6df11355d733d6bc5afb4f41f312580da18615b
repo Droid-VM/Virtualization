@@ -22,6 +22,30 @@
       },
       "revId": "d6df11355d733d6bc5afb4f41f312580da18615b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61f0a5fe_4a415c6c",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-01-12T09:17:36Z",
+      "side": 1,
+      "message": "The role of \"HKDF-extract\" is to concentrate the possibly dispersed entropy of the input keying material into a short, but cryptographically strong, pseudorandom key. Given the input `instance_data.salt` is randomly generated, we possibly don\u0027t need the `HKDF-extract` step. \n\nBut as you recommended, may not be worth touching crypto intricacies of hkdf \u0026 so, changing this to `hkdf()`",
+      "parentUuid": "564d00b0_16441d83",
+      "range": {
+        "startLine": 290,
+        "startChar": 4,
+        "endLine": 290,
+        "endChar": 15
+      },
+      "revId": "d6df11355d733d6bc5afb4f41f312580da18615b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
