@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5843ad0f_d96cc28a",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-01-12T05:46:48Z",
+      "side": 1,
+      "message": "Thanks! I haven\u0027t known resigning rialto is dependent on resigning kernel image :)",
+      "range": {
+        "startLine": 536,
+        "startChar": 0,
+        "endLine": 536,
+        "endChar": 94
+      },
+      "revId": "8ac707dc38ed36d741e95e82beecf476d44bf347",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0fe14c57_5b5f4c93",
@@ -19,6 +42,52 @@
         "startChar": 0,
         "endLine": 590,
         "endChar": 79
+      },
+      "revId": "8ac707dc38ed36d741e95e82beecf476d44bf347",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cc28041_f52e2968",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-01-12T05:46:48Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Common Typos: Common typo found: \"desciptors\" -- should it be \"descriptors\"?\n\nAnalyzer Description: Linter for catching common typos motivated by go/todo-fail and go/lol-codesearch. Shared with google3 common typos library go/common-typos.\nOwner: ayeaye-team@google.com\n\nCommon typo found: \"desciptors\" -- should it be \"descriptors\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 594,
+        "startChar": 81,
+        "endLine": 594,
+        "endChar": 91
+      },
+      "revId": "8ac707dc38ed36d741e95e82beecf476d44bf347",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c15bfaa3_b4408c13",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-01-12T05:46:48Z",
+      "side": 1,
+      "message": "Do we need assertion? I think the check digests should be distingueshed is detected above when using set.\n\nOr how about using `set` here to compare all digest are distinguished? And removing the comparison using set above.",
+      "range": {
+        "startLine": 602,
+        "startChar": 0,
+        "endLine": 602,
+        "endChar": 96
       },
       "revId": "8ac707dc38ed36d741e95e82beecf476d44bf347",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
