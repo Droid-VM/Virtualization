@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f7758c9_e74afe7f",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 1010,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-12T15:23:39Z",
+      "side": 1,
+      "message": "Why don\u0027t we extract the addr/size value from `Reg` instead of needing to `.unwrap_or()` in `is_reg_overlap()`, which then forces us to do further hacky things such as this?\n\nFor example:\n```\nfor range in pci_info.ranges.iter() {\n    regs.push((range.parent_addr, range.size));\n}\n```\nthen\n```\nfor Reg { addr, size } in reg_iter {\n    let Some(size) \u003d size else {\n         warn!(\"...\");\n         continue;\n    }\n    let reg \u003d (addr, size);\n    if let Some(other) \u003d regs.iter().find(...) { return ... }\n    regs.push(reg);\n}\n```\nwith\n```\nfn overlap(a: (usize, usize), b: (usize, usize)) -\u003e bool\n```",
+      "range": {
+        "startLine": 1010,
+        "startChar": 72,
+        "endLine": 1010,
+        "endChar": 76
+      },
+      "revId": "7b817c2d177b52e9efc3318984c3f36ac838e36f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "412ceb49_31137790",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-12T15:23:39Z",
+      "side": 1,
+      "message": "Trying a `match` in Rust 1.76 with `c\"..\"` (which counts as a pattern) doesn\u0027t work either because `CStr` doesn\u0027t implement `PartialEq` 😞",
+      "range": {
+        "startLine": 1016,
+        "startChar": 17,
+        "endLine": 1016,
+        "endChar": 81
+      },
+      "revId": "7b817c2d177b52e9efc3318984c3f36ac838e36f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27db4629_cfa5323a",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 1017,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-12T15:23:39Z",
+      "side": 1,
+      "message": "As I mention in my other comment, I believe that the PCI node has MMIO ranges in both `\u003cranges\u003e` and `\u003creg\u003e`; is that not the case?",
+      "range": {
+        "startLine": 1017,
+        "startChar": 48,
+        "endLine": 1017,
+        "endChar": 81
+      },
+      "revId": "7b817c2d177b52e9efc3318984c3f36ac838e36f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
