@@ -46,6 +46,30 @@
       },
       "revId": "afd66dede221605d4412662548dfb95bc5f6fd77",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8bace30_a4f4ffa3",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-12T10:38:40Z",
+      "side": 1,
+      "message": "Thanks, Alan.\n\nTo give a bit more context, my concern with using `/avf` in both host and guest is that we\u0027re limiting the usefulness of the VM Base DTBO to that DT node only but we might not want to prevent ourselves from supporting use-cases where properties outside of this node need to be passed from ABL. By using a \"namespace\" in the host DT, we can do so without actually affecting the host kernel e.g. vendors want to set `/chosen/vendor,prop`, the corresponding host DT entry would be at `/avf/\u003c...\u003e/chosen/vendor,prop`, with no risk of clashing with the actual host `/chosen`. This is making the interface a bit more generic than we currently need but that\u0027s probably a good thing for an ABI that will remain stable.\n\nFor the format itself, I couldn\u0027t see why we needed to use a DTBO as it is not applied by pvmfw and is never even passed to host userspace? Wouldn\u0027t a DT be simpler to generate and parse?\n\nFor the name, given how pvmfw uses the base DTBO, I was thinking of perhaps giving it more descriptive name than \"base\" such as \"reference\" or \"validate\" (Alan also proposed \"trusted properties\" and \"configuration\") to make its purpose clearer to vendors at first sight; WDYT?",
+      "parentUuid": "48da9220_2af0ef65",
+      "range": {
+        "startLine": 210,
+        "startChar": 31,
+        "endLine": 210,
+        "endChar": 45
+      },
+      "revId": "afd66dede221605d4412662548dfb95bc5f6fd77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
