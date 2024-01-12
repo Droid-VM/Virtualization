@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36c36016_5af02608",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-12T09:41:25Z",
+      "side": 1,
+      "message": "Mm, I still need to keep the descriptor in the loop to check the initrd salt and also the partition name for logging in case something went wrong.\n\nWhat about doing this collision check at the end of the loop? Otherwise, with the following check, if a key repeats during the dictionary generation, it could go unnoticed.\n\n`len(union(dict.keys(), dict.values())) \u003d\u003d len(dict.keys()) * len(dict.values())`.",
+      "parentUuid": "0fe14c57_5b5f4c93",
+      "range": {
+        "startLine": 590,
+        "startChar": 0,
+        "endLine": 590,
+        "endChar": 79
+      },
+      "revId": "8ac707dc38ed36d741e95e82beecf476d44bf347",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9cc28041_f52e2968",
@@ -70,6 +94,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4134e919_0cded7b1",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-12T09:41:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cc28041_f52e2968",
+      "range": {
+        "startLine": 594,
+        "startChar": 81,
+        "endLine": 594,
+        "endChar": 91
+      },
+      "revId": "8ac707dc38ed36d741e95e82beecf476d44bf347",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c15bfaa3_b4408c13",
@@ -83,6 +131,30 @@
       "writtenOn": "2024-01-12T05:46:48Z",
       "side": 1,
       "message": "Do we need assertion? I think the check digests should be distingueshed is detected above when using set.\n\nOr how about using `set` here to compare all digest are distinguished? And removing the comparison using set above.",
+      "range": {
+        "startLine": 602,
+        "startChar": 0,
+        "endLine": 602,
+        "endChar": 96
+      },
+      "revId": "8ac707dc38ed36d741e95e82beecf476d44bf347",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce693316_aabb564b",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-12T09:41:25Z",
+      "side": 1,
+      "message": "You are right. I don\u0027t need this diff check here, but it\u0027s still better to add the same salt check as in line 601 later, to be sure that the initrd hash diff is caused by different contents rather than different salts.",
+      "parentUuid": "c15bfaa3_b4408c13",
       "range": {
         "startLine": 602,
         "startChar": 0,
