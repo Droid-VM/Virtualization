@@ -22,6 +22,30 @@
       },
       "revId": "40fb3af437e1c5114e2d39e5731513a40787cdfa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66d35aef_5cf5aa89",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-12T11:04:41Z",
+      "side": 1,
+      "message": "That\u0027s a good idea. Done.\n\nThank you for the suggestion! I renamed the function and added more checks here. Just to be sure that resigning doesn\u0027t do anything strange. Anyway, if there\u0027s any problem it\u0027s better to break here than at runtime later. Could you please take another look? :)",
+      "parentUuid": "69a20168_ec675af2",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 227,
+        "endChar": 89
+      },
+      "revId": "40fb3af437e1c5114e2d39e5731513a40787cdfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
