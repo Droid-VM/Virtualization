@@ -93,6 +93,30 @@
       },
       "revId": "bda1219f56d4856b18137419d651cc086fc850a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "761a76f1_2ee9aff8",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-12T14:38:50Z",
+      "side": 1,
+      "message": "Sorry, I meant:\n```\nlet Some(sk_service) \u003d is_sk_supported(vm_service)? else {\n    //  Use V1 secrets if Secretkeeper is not supported.\n    return Self::V1 { dice_artifacts };\n}\n// rest of code without the indent\n```",
+      "parentUuid": "c5651077_2b30dce7",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 39
+      },
+      "revId": "bda1219f56d4856b18137419d651cc086fc850a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
