@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f5ce9f48_f7422cf0",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-12T13:13:11Z",
+      "side": 1,
+      "message": "\u003e We need a check between hash descriptors in original images \u0026 additional_descriptors passed as a parameter; To check additional descriptors are valid \u0026 finding the hash descriptor lives in original image only.\n\nIt\u0027s helpful to add a check here to ensure that the `additional_descriptors` should already exist in the original descriptors, but I\u0027m not sure whether this is easy to do as `additional_descriptors` can be of any type. I feel that it can be easier if we add such check after the resigning that all the hash/hash tree descriptor remain unchanged except the \"Digest\".",
+      "parentUuid": "f6f90948_edc63716",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 62
+      },
+      "revId": "05866ca9f753ec777dcd555ee3a729edea15760f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c08b51b_9ac7ceed",
         "filename": "apex/sign_virt_apex.py",
         "patchSetId": 1
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "A dumb question: For the initrd_normal \u0026 initrd_debug, how can I extract the salt? It seems it doesn\u0027t live in the image, but in another image; like relationship between `microdroid_kernel` and `microdroid_initrd_normal`. Should I proceed as my thought?",
       "parentUuid": "2c08b51b_9ac7ceed",
+      "range": {
+        "startLine": 524,
+        "startChar": 27,
+        "endLine": 524,
+        "endChar": 41
+      },
+      "revId": "05866ca9f753ec777dcd555ee3a729edea15760f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77630045_25020e01",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-12T13:13:11Z",
+      "side": 1,
+      "message": "Correct. The `microdroid_kernel` consists of three hash descriptors, where the 0-th descriptor describes the kernel itself, and the 1st and 2nd descriptors should describe the initrds. Therefore, when you are resigning the initrd, you can utilize the `find_hash_descriptor_by_partition` function to retrieve all the necessary information from the initrd partition, including the salt.\n\nOnce this is completed, we can add a hash descriptor check to the `check_resigned_image_avb_info` function. This check will ensure that all the hash descriptors, except for the \"Digest\" fields, remain unchanged. Whether the \"Digest\" changes or not depends on the caller\u0027s policy, whereas all the other hashing parameters should definitely remain unchanged. wdyt?",
+      "parentUuid": "e7c75620_74eb2408",
       "range": {
         "startLine": 524,
         "startChar": 27,
