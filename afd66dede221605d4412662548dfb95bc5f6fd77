@@ -94,6 +94,30 @@
       },
       "revId": "afd66dede221605d4412662548dfb95bc5f6fd77",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5769610c_10f82936",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-01-15T05:41:17Z",
+      "side": 1,
+      "message": "\u003e \u003e To give a bit more context, my concern with using /avf in both host and guest is that we\u0027re limiting the usefulness of the VM Base DTBO to that DT node only but we might not want to prevent ourselves from supporting use-cases where properties outside of this node need to be passed from ABL.\n\n\u003e AFAIK, we limit the use-cases of VM base DTBO into /avf now, but it shouldn\u0027t be limited, so there\u0027s a TODO comment.\nhttps://source.corp.google.com/h/android/platform/superproject/main/+/main:packages/modules/Virtualization/pvmfw/src/fdt.rs;l\u003d229\n\nI\u0027m sorry but I\u0027m confused here.\n\nDear Pierre, do you expect VM base DTBO to be applied outside of the `/avf` in VM DT? \\\nI thought that we wouldn\u0027t allow altering any node/props in platform DT. But you also said \u0027vendors want to set /chosen/vendor,prop\u0027 below. \\\n\nWhat\u0027s more correct among below?\n\n - Option 1: VM base DTBO can only be overlaid to `/avf`\n - Option 2: VM base DTBO can be overlaid to any place including `/avf`. But shouldn\u0027t modify any node/prop in platform DT.\n - Option 3: VM base DTBO can be overlaid to any place including `/avf`. platform DT can also be modified.\n\nSeungjae and I considered about Option 1 although we may add more subnodes/descendants there, although ToT is only handling `/avf` and its properties.\n\n\n\u003e \u003e By using a \"namespace\" in the host DT, we can do so without actually affecting the host kernel e.g. vendors want to set /chosen/vendor,prop, the corresponding host DT entry would be at /avf/\u003c...\u003e/chosen/vendor,prop, with no risk of clashing with the actual host /chosen. This is making the interface a bit more generic than we currently need but that\u0027s probably a good thing for an ABI that will remain stable.\n\n\u003e I\u0027m fine with the new path, but I want any determined path is agreed, since interim solution needs a hard-coded path. And, it\u0027s blocking other features like vendor and secretkeeper. Though I\u0027m not aware of secretkeeper\u0027s current progress but for vendor, it\u0027s a critical path to rush landing vendor in Android V.\n\nI expect that `/avf` node will be applied to the VM DT as-is, so `/avf` is already a namespace. Could you explain me more about your concern?\n\nIf you\u0027re thinking about debug policy which use `/avf/host` and `/avf/guest`, then we may invent `/avf/\u003c...\u003e` as you mentioned hear. \\\nname is TBD, but let\u0027s follow the naming discussion below.\n\n\u003e \u003e For the format itself, I couldn\u0027t see why we needed to use a DTBO as it is not applied by pvmfw and is never even passed to host userspace? Wouldn\u0027t a DT be simpler to generate and parse?\n\n\u003e As I said above, when we adopt DT overlay beyond `/avf`, we may need to use DTBO format again while pvmfw dealing it with. Could we guarantee we don\u0027t need any additional features in DTBO, such as `__symbols__` and `__fixups__`?\n\n+1 to DTBO. This CL is early proposal for Seungjae to make progress, and I\u0027m working on overlaying VM Base DTBO to patched platform DT after filtered.\n\n\n\u003e \u003e For the name, given how pvmfw uses the base DTBO, I was thinking of perhaps giving it more descriptive name than \"base\" such as \"reference\" or \"validate\" (Alan also proposed \"trusted properties\" and \"configuration\") to make its purpose clearer to vendors at first sight; WDYT?\n\n\u003e I don\u0027t have any strong opinion about naming. I\u0027ll follow other\u0027s opinion.\n\nI\u0027ll delegate may vote to English people for naming, except for the \u0027trusted properties\u0027. We may add subnode later :).",
+      "parentUuid": "52159068_08b7a931",
+      "range": {
+        "startLine": 210,
+        "startChar": 31,
+        "endLine": 210,
+        "endChar": 45
+      },
+      "revId": "afd66dede221605d4412662548dfb95bc5f6fd77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
