@@ -166,6 +166,30 @@
       },
       "revId": "afd66dede221605d4412662548dfb95bc5f6fd77",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdd9cad4_4dcb06ba",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-15T10:24:10Z",
+      "side": 1,
+      "message": "\u003e I believe that this is already well defined (but probably not yet documented): it will be found by the guest OS in the DT at path /avf/\u003cproperty-name\u003e.\n\nYes - that side is straightforward (ish). But we need to specify what ABL (or equivalent) needs to do in order to set the value of that property. Which AIUI means setting something in the VM base DTBO, so the details here matter.\n\nI\u0027ll spec the property name \u0026 format, but I need to point to the VM DTBO documentation for how it is transported.",
+      "parentUuid": "11d32b2b_5878dbd9",
+      "range": {
+        "startLine": 210,
+        "startChar": 31,
+        "endLine": 210,
+        "endChar": 45
+      },
+      "revId": "afd66dede221605d4412662548dfb95bc5f6fd77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
