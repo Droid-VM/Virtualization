@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "baaabb6b_a21c05a1",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-15T09:04:25Z",
+      "side": 1,
+      "message": "I checked this too. But not all the resigned footer has this field. `check_no_size_change_on_resigned_image` is also invoked by `MakeVbmetaImage` where the result footer doesn\u0027t have this field.\n\n```\n      File \"sign_virt_apex.py\", line 417, in MakeVbmetaImage\n      File \"sign_virt_apex.py\", line 228, in check_no_size_change_on_resigned_image\n      File \"sign_virt_apex.py\", line 581, in assert_same_value\n    KeyError: \u0027Original image size\u0027\n```",
+      "parentUuid": "d18f29e7_627efc99",
+      "range": {
+        "startLine": 558,
+        "startChar": 0,
+        "endLine": 558,
+        "endChar": 83
+      },
+      "revId": "40339725e390b6ff55b3bc4eafcd53633ea04350",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "032be59f_df400a6a",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-01-15T07:31:31Z",
       "side": 1,
       "message": "initrd ?",
+      "range": {
+        "startLine": 577,
+        "startChar": 11,
+        "endLine": 577,
+        "endChar": 17
+      },
+      "revId": "40339725e390b6ff55b3bc4eafcd53633ea04350",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fa31916_5cee3532",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-15T09:04:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "032be59f_df400a6a",
       "range": {
         "startLine": 577,
         "startChar": 11,
