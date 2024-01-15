@@ -142,6 +142,30 @@
       },
       "revId": "afd66dede221605d4412662548dfb95bc5f6fd77",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11d32b2b_5878dbd9",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-15T10:18:00Z",
+      "side": 1,
+      "message": "\u003e do you expect VM base DTBO to be applied outside of the `/avf` in VM DT?\n\nAt this point, I don\u0027t think that we\u0027re in a position where we can be 100% sure that a use-case for vendor-provided DT entries outside of `/avf` won\u0027t exist so designing an ABI preventing it (for very little gains in technical simplification) might make it unnecessarily hard for us to support potential future use-cases.\n\n\u003e `/avf` is already a namespace. Could you explain me more about your concern?\n\nWhat if it is a Linux-standard property or, in general, an entry that isn\u0027t defined by us and therefore can\u0027t be placed under `/avf`?\n\nTo be clear, note that my concern isn\u0027t about the guest path but only about the host path.\n\nBTW, do we have a design for how host userspace detects and handles vendor-provided properties? I suppose that dumping the whole host `/avf` node in the guest doesn\u0027t really work due to DP (and potential future flags), right? So that would also require a \"namespaced\" path that VS (virtmgr?) can parse.\n\n\u003e Could we guarantee we don\u0027t need any additional features in DTBO, such as `__symbols__` and `__fixups__`?\n\nWhat would they be used for, in\n\n\u003e _pvmfw does not interpret the content of the DTBO, nor does it apply it to\n\u003e the VM\u0027s device tree, it just ensures that if matching properties are present\n\u003e in the VM device tree they contain the correct values._\n\n?\n\n\u003e +1 to DTBO\n\nAck.\n\n\u003e It\u0027s fairly urgent that we can specify precisely how the secretkeeper public key is to be transferred to a pVM\n\nI believe that this is already well defined (but probably not yet documented): it will be found by the guest OS in the DT at path `/avf/\u003cproperty-name\u003e`.",
+      "parentUuid": "5769610c_10f82936",
+      "range": {
+        "startLine": 210,
+        "startChar": 31,
+        "endLine": 210,
+        "endChar": 45
+      },
+      "revId": "afd66dede221605d4412662548dfb95bc5f6fd77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
