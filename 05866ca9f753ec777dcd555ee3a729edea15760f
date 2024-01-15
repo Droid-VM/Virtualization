@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e9d0c141_3c72c7fb",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-01-15T05:53:14Z",
+      "side": 1,
+      "message": "\u003e I feel that it can be easier if we add such check after the resigning that all the hash/hash tree descriptor remain unchanged except the \"Digest\".\n\nI agree with this. If we check AvbInfo between original and resigned image, nothing else matters. And I think doing this way would make code cleaner in here(aosp/2906579)?",
+      "parentUuid": "f5ce9f48_f7422cf0",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 62
+      },
+      "revId": "05866ca9f753ec777dcd555ee3a729edea15760f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c08b51b_9ac7ceed",
         "filename": "apex/sign_virt_apex.py",
         "patchSetId": 1
@@ -150,6 +174,30 @@
       "side": 1,
       "message": "Correct. The `microdroid_kernel` consists of three hash descriptors, where the 0-th descriptor describes the kernel itself, and the 1st and 2nd descriptors should describe the initrds. Therefore, when you are resigning the initrd, you can utilize the `find_hash_descriptor_by_partition` function to retrieve all the necessary information from the initrd partition, including the salt.\n\nOnce this is completed, we can add a hash descriptor check to the `check_resigned_image_avb_info` function. This check will ensure that all the hash descriptors, except for the \"Digest\" fields, remain unchanged. Whether the \"Digest\" changes or not depends on the caller\u0027s policy, whereas all the other hashing parameters should definitely remain unchanged. wdyt?",
       "parentUuid": "e7c75620_74eb2408",
+      "range": {
+        "startLine": 524,
+        "startChar": 27,
+        "endLine": 524,
+        "endChar": 41
+      },
+      "revId": "05866ca9f753ec777dcd555ee3a729edea15760f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b1e4f0e_dd79e938",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-01-15T05:53:14Z",
+      "side": 1,
+      "message": "Sounds good. BTW, I put the updates in same change, you may need to resolve merge conflict in aosp/2906579. For the further changes, can I return the corresponding bug to you?",
+      "parentUuid": "77630045_25020e01",
       "range": {
         "startLine": 524,
         "startChar": 27,
