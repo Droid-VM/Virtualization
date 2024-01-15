@@ -70,6 +70,30 @@
       },
       "revId": "afd66dede221605d4412662548dfb95bc5f6fd77",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52159068_08b7a931",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-01-15T01:11:56Z",
+      "side": 1,
+      "message": "\u003e To give a bit more context, my concern with using /avf in both host and guest is that we\u0027re limiting the usefulness of the VM Base DTBO to that DT node only but we might not want to prevent ourselves from supporting use-cases where properties outside of this node need to be passed from ABL.\n\nAFAIK, we limit the use-cases of VM base DTBO into `/avf` now, but it shouldn\u0027t be limited, so there\u0027s a TODO comment.\nhttps://source.corp.google.com/h/android/platform/superproject/main/+/main:packages/modules/Virtualization/pvmfw/src/fdt.rs;l\u003d229\n\n\n\u003e By using a \"namespace\" in the host DT, we can do so without actually affecting the host kernel e.g. vendors want to set /chosen/vendor,prop, the corresponding host DT entry would be at /avf/\u003c...\u003e/chosen/vendor,prop, with no risk of clashing with the actual host /chosen. This is making the interface a bit more generic than we currently need but that\u0027s probably a good thing for an ABI that will remain stable.\n\nI\u0027m fine with the new path, but I want any determined path is agreed, since interim solution needs a hard-coded path. And, it\u0027s blocking other features like vendor and secretkeeper. Though I\u0027m not aware of secretkeeper\u0027s current progress but for vendor, it\u0027s a critical path to rush landing vendor in Android V.\n\n\u003e For the format itself, I couldn\u0027t see why we needed to use a DTBO as it is not applied by pvmfw and is never even passed to host userspace? Wouldn\u0027t a DT be simpler to generate and parse?\n\nAs I said above, when we adopt DT overlay beyond `/avf`, we may need to use DTBO format again while pvmfw dealing it with. Could we guarantee we don\u0027t need any additional features in DTBO, such as `__symbols__` and `__fixups__`?\n\n\u003e For the name, given how pvmfw uses the base DTBO, I was thinking of perhaps giving it more descriptive name than \"base\" such as \"reference\" or \"validate\" (Alan also proposed \"trusted properties\" and \"configuration\") to make its purpose clearer to vendors at first sight; WDYT?\n\nI don\u0027t have any strong opinion about naming. I\u0027ll follow other\u0027s opinion.",
+      "parentUuid": "c8bace30_a4f4ffa3",
+      "range": {
+        "startLine": 210,
+        "startChar": 31,
+        "endLine": 210,
+        "endChar": 45
+      },
+      "revId": "afd66dede221605d4412662548dfb95bc5f6fd77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
