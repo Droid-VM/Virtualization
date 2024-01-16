@@ -238,6 +238,30 @@
       },
       "revId": "afd66dede221605d4412662548dfb95bc5f6fd77",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cf27116_d2a94e60",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-16T12:18:40Z",
+      "side": 1,
+      "message": "\u003e The design seems fair to me as well, could I just proceed?\n\nYes, please!\n\n\u003e What is \"platform DT\"?\n\nSomething that we shouldn\u0027t be mentioning in the docs :^)\n\nIt\u0027s a pre-compiled DT ([`platform.dts`](https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/pvmfw/platform.dts)) used by pvmfw as a base when rebuilding the guest DT from scratch.",
+      "parentUuid": "0a5bed5a_8ca0b665",
+      "range": {
+        "startLine": 210,
+        "startChar": 31,
+        "endLine": 210,
+        "endChar": 45
+      },
+      "revId": "afd66dede221605d4412662548dfb95bc5f6fd77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
