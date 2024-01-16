@@ -190,6 +190,30 @@
       },
       "revId": "afd66dede221605d4412662548dfb95bc5f6fd77",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf21fb0d_d0b0d7f0",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-01-16T02:04:26Z",
+      "side": 1,
+      "message": "Hello all,\nI\u0027ve heard there was a long chat thread \u0026 meeting in the last night. Sorry not to join, I wasn\u0027t aware of such conversation executed.\n\nBTW, I heard from Jaewan that there was a concrete conclusion regarding the design of VM base DTBO like below, and all agreed. The design seems fair to me as well, could I just proceed?\n\n- VM Base DTBO will be renamed to VM reference DT.\n- ABL will provide VM references DT to both host DT and pvmfw.\n  - To host DT: /avf/reference. This will map to the guest\u0027s DT root.\n  - To pvmfw: Written as DT in the VM reference DT entry.\n- ABL will provide vendor hashkey and SK pub keys under /avf/reference/avf/..., so the guest can access those values from /avf/...\n- VM reference DT can be used to add extra nodes/props other than AVF usages, so giving more freedom to vendors. But it shouldn\u0027t modify any props/nodes in platform DT.",
+      "parentUuid": "fdd9cad4_4dcb06ba",
+      "range": {
+        "startLine": 210,
+        "startChar": 31,
+        "endLine": 210,
+        "endChar": 45
+      },
+      "revId": "afd66dede221605d4412662548dfb95bc5f6fd77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
