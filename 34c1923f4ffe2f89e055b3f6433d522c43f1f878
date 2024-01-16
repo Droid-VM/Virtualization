@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afbe8349_ea874f59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-16T08:32:32Z",
+      "side": 1,
+      "message": "Thanks for the review!",
+      "revId": "34c1923f4ffe2f89e055b3f6433d522c43f1f878",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f662b230_646ca312",
@@ -24,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2e82bcf_3bbdabc1",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-16T08:32:32Z",
+      "side": 1,
+      "message": "As the digest is the outcome of the hash function rather than its parameters, it should be the responsibility of the callers to verify the digests. It\u0027s difficult to check it here since we don\u0027t know it should be change or not.\n\nFor example, in the case of `initrd`/`rialto`, the digests should change, whereas for `microdrod_kernel`, they should remain the same. Although I haven\u0027t included these checks in this function, I did verify the digests before and after resigning rialto. For other cases, we need to assess them individually to determine if which kind of digest check should be added.",
+      "parentUuid": "f662b230_646ca312",
+      "range": {
+        "startLine": 253,
+        "startChar": 0,
+        "endLine": 253,
+        "endChar": 93
+      },
+      "revId": "34c1923f4ffe2f89e055b3f6433d522c43f1f878",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e954ea8_69d1cfef",
@@ -37,6 +78,30 @@
       "writtenOn": "2024-01-16T00:59:06Z",
       "side": 1,
       "message": "Can\u0027t we use the function `check_resigned_image_avb_info` above for checking rialto?\nIIUC, assertions below are replacable. Also, it could reduce hard-coded values in assertions.\n\n\n- `len(updated_descriptors)`\n- `len(updated_prop)`\n- `updated_info[\"Rollback Index\"]`\n- `len(updated_hash_descriptors)`\n- `assert_different_value(original_descriptor, updated_descriptor, \"Digest\", rialto_hash_descriptor\")`",
+      "range": {
+        "startLine": 606,
+        "startChar": 0,
+        "endLine": 625,
+        "endChar": 0
+      },
+      "revId": "34c1923f4ffe2f89e055b3f6433d522c43f1f878",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79d3a24d_e3500542",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-16T08:32:32Z",
+      "side": 1,
+      "message": "Since the rialto footer is added with `AddHashFooter`, `check_resigned_image_avb_info` is indeed invoked, but that\u0027s different with the checks here.\n\n`check_resigned_image_avb_info` mostly asserts that updated_value \u003d\u003d original_value, but it doesn\u0027t compare the content to a specific value. For example,\n\n\u003e len(updated_descriptors) / len(updated_prop) / len(updated_hash_descriptors)\n\nIf somehow the number of original prop or descriptors is 0 or 3, `check_resigned_image_avb_info` will also pass, but for rialto I want to be sure that there are 2 descriptors with 1 hash and 1 prop.\n\n\u003e updated_info[\"Rollback Index\"] !\u003d \"0\"\n\n`check_resigned_image_avb_info` doesn\u0027t check that rollback index is not 0. Both original and updated can be 0 \n\n\u003e assert_different_value(original_descriptor, updated_descriptor, \"Digest\"..\n\nThe digest is ignored in `check_resigned_image_avb_info` because it depends on callers\u0027 policy.",
+      "parentUuid": "7e954ea8_69d1cfef",
       "range": {
         "startLine": 606,
         "startChar": 0,
