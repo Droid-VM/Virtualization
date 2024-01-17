@@ -15,18 +15,27 @@
 //! Main executable of Service VM client for manual testing.
 
 use anyhow::{anyhow, ensure, Result};
+use avflog::LogResult;
+use com_android_virt_vm_attestation_testservice::{
+    aidl::com::android::virt::vm_attestation::testservice::IAttestationService::{
+        BnAttestationService, IAttestationService, PORT,
+    },
+    binder::{self, unstable_api::AsNative, BinderFeatures, Interface, IntoBinderResult, Strong},
+};
 use log::{error, info};
 use std::{
     ffi::{c_void, CStr},
     panic,
     ptr::{self, NonNull},
     result,
+    sync::{Arc, Mutex},
 };
 use vm_payload_bindgen::{
-    attestation_status_t, AVmAttestationResult, AVmAttestationResult_free,
+    attestation_status_t, AIBinder, AVmAttestationResult, AVmAttestationResult_free,
     AVmAttestationResult_getCertificateAt, AVmAttestationResult_getCertificateCount,
     AVmAttestationResult_getPrivateKey, AVmAttestationResult_resultToString,
-    AVmAttestationResult_sign, AVmPayload_requestAttestation,
+    AVmAttestationResult_sign, AVmPayload_notifyPayloadReady,
+    AVmPayload_requestAttestationForTesting, AVmPayload_runVsockRpcServer,
 };
 
 /// Entry point of the Service VM client.
@@ -36,7 +45,7 @@ pub extern "C" fn AVmPayload_main() {
     android_logger::init_once(
         android_logger::Config::default()
             .with_tag("service_vm_client")
-            .with_max_level(log::LevelFilter::Debug),
+            .with_min_level(log::Level::Debug),
     );
     // Redirect panic messages to logcat.
     panic::set_hook(Box::new(|panic_info| {
@@ -51,42 +60,66 @@ pub extern "C" fn AVmPayload_main() {
 fn try_main() -> Result<()> {
     info!("Welcome to Service VM Client!");
 
-    let too_big_challenge = &[0u8; 66];
-    let res = AttestationResult::request_attestation(too_big_challenge);
-    ensure!(res.is_err());
-    let status = res.unwrap_err();
-    ensure!(
-        status == attestation_status_t::ATTESTATION_ERROR_INVALID_CHALLENGE,
-        "Unexpected status: {:?}",
-        status
-    );
-    info!("Status: {:?}", status_to_cstr(status));
+    let mut service = AttestationService::new_binder().as_binder();
+    let service = service.as_native_mut() as *mut AIBinder;
+    let param = ptr::null_mut();
+    // SAFETY: We hold a strong pointer, so the raw pointer remains valid. The bindgen AIBinder
+    // is the same type as `sys::AIBinder`. It is safe for `on_ready` to be invoked at any time,
+    // with any parameter.
+    unsafe { AVmPayload_runVsockRpcServer(service, PORT.try_into()?, Some(on_ready), param) };
+}
 
-    // The data below is only a placeholder generated randomly with urandom
-    let challenge = &[
-        0x6c, 0xad, 0x52, 0x50, 0x15, 0xe7, 0xf4, 0x1d, 0xa5, 0x60, 0x7e, 0xd2, 0x7d, 0xf1, 0x51,
-        0x67, 0xc3, 0x3e, 0x73, 0x9b, 0x30, 0xbd, 0x04, 0x20, 0x2e, 0xde, 0x3b, 0x1d, 0xc8, 0x07,
-        0x11, 0x7b,
-    ];
-    let res = AttestationResult::request_attestation(challenge)
-        .map_err(|e| anyhow!("Unexpected status: {:?}", status_to_cstr(e)))?;
+extern "C" fn on_ready(_param: *mut c_void) {
+    // SAFETY: It is safe to call `AVmPayload_notifyPayloadReady` at any time.
+    unsafe { AVmPayload_notifyPayloadReady() };
+}
 
-    let cert_chain = res.certificate_chain()?;
-    info!("Attestation result certificateChain = {:?}", cert_chain);
+struct AttestationService {
+    res: Arc<Mutex<Option<AttestationResult>>>,
+}
 
-    let private_key = res.private_key()?;
-    info!("Attestation result privateKey = {:?}", private_key);
+impl Interface for AttestationService {}
 
-    let message = b"Hello from Service VM client";
-    info!("Signing message: {:?}", message);
-    let signature = res.sign(message)?;
-    info!("Signature: {:?}", signature);
+impl AttestationService {
+    fn new_binder() -> Strong<dyn IAttestationService> {
+        let res = Arc::new(Mutex::new(None));
+        BnAttestationService::new_binder(AttestationService { res }, BinderFeatures::default())
+    }
+}
 
-    Ok(())
+impl IAttestationService for AttestationService {
+    fn requestAttestationForTesting(&self) -> binder::Result<()> {
+        // The data below is only a placeholder generated randomly with urandom
+        let challenge = &[
+            0x6c, 0xad, 0x52, 0x50, 0x15, 0xe7, 0xf4, 0x1d, 0xa5, 0x60, 0x7e, 0xd2, 0x7d, 0xf1,
+            0x51, 0x67, 0xc3, 0x3e, 0x73, 0x9b, 0x30, 0xbd, 0x04, 0x20, 0x2e, 0xde, 0x3b, 0x1d,
+            0xc8, 0x07, 0x11, 0x7b,
+        ];
+        let res = AttestationResult::request_attestation(challenge)
+            .map_err(|e| anyhow!("Unexpected status: {:?}", status_to_cstr(e)))
+            .with_log()
+            .or_service_specific_exception(-1)?;
+        *self.res.lock().unwrap() = Some(res);
+        Ok(())
+    }
+
+    fn validateAttestationResult(&self) -> binder::Result<()> {
+        self.res
+            .lock()
+            .unwrap()
+            .as_ref()
+            .unwrap()
+            .validate()
+            .with_log()
+            .or_service_specific_exception(-1)
+    }
 }
 
 #[derive(Debug)]
 struct AttestationResult(NonNull<AVmAttestationResult>);
+
+// Safety: `AttestationResult` is not `Send` because it contains a raw pointer to a C struct.
+unsafe impl Send for AttestationResult {}
 
 impl AttestationResult {
     fn request_attestation(challenge: &[u8]) -> result::Result<Self, attestation_status_t> {
@@ -94,7 +127,7 @@ impl AttestationResult {
         // SAFETY: It is safe as we only read the challenge within its bounds and the
         // function does not retain any reference to it.
         let status = unsafe {
-            AVmPayload_requestAttestation(
+            AVmPayload_requestAttestationForTesting(
                 challenge.as_ptr() as *const c_void,
                 challenge.len(),
                 &mut res,
@@ -124,6 +157,20 @@ impl AttestationResult {
 
     fn sign(&self, message: &[u8]) -> Result<Box<[u8]>> {
         sign_with_attested_key(self.as_ref(), message)
+    }
+
+    fn validate(&self) -> Result<()> {
+        let cert_chain = self.certificate_chain()?;
+        info!("Attestation result certificateChain = {:?}", cert_chain);
+
+        let private_key = self.private_key()?;
+        info!("Attestation result privateKey = {:?}", private_key);
+
+        let message = b"Hello from Service VM client";
+        info!("Signing message: {:?}", message);
+        let signature = self.sign(message)?;
+        info!("Signature: {:?}", signature);
+        Ok(())
     }
 }
 
@@ -215,7 +262,8 @@ fn sign_with_attested_key(res: &AVmAttestationResult, message: &[u8]) -> Result<
             signature.len(),
         )
     };
-    ensure!(size == signature.len());
+    ensure!(size <= signature.len());
+    signature.truncate(size);
     Ok(signature.into_boxed_slice())
 }
 
@@ -224,6 +272,6 @@ fn status_to_cstr(status: attestation_status_t) -> &'static CStr {
     // static string.
     let message = unsafe { AVmAttestationResult_resultToString(status) };
     // SAFETY: The pointer returned by `AVmAttestationResult_resultToString` is guaranteed to
-    // point to a valid C String.
+    // point to a valid C String that lives forever.
     unsafe { CStr::from_ptr(message) }
 }
