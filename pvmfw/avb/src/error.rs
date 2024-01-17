@@ -15,7 +15,7 @@
 //! This module contains the error thrown by the payload verification API
 //! and other errors used in the library.
 
-use avb::{IoError, SlotVerifyError};
+use avb::{DescriptorError, IoError, SlotVerifyError};
 use core::fmt;
 
 /// Wrapper around `SlotVerifyError` to add custom pvmfw errors.
@@ -34,6 +34,13 @@ impl From<SlotVerifyError<'_>> for PvmfwVerifyError {
     fn from(error: SlotVerifyError) -> Self {
         // We don't use verification data on failure, drop it to get a `'static` lifetime.
         Self::AvbError(error.without_verify_data())
+    }
+}
+
+impl From<DescriptorError> for PvmfwVerifyError {
+    fn from(_: DescriptorError) -> Self {
+        // We don't care about the specific `DescriptorError`, just use the generic `Io` error.
+        Self::InvalidDescriptors(IoError::Io)
     }
 }
 
