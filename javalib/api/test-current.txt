@@ -4,6 +4,7 @@ package android.system.virtualmachine {
   public class VirtualMachine implements java.lang.AutoCloseable {
     method @NonNull @WorkerThread public java.io.OutputStream getConsoleInput() throws android.system.virtualmachine.VirtualMachineException;
     method @NonNull public java.io.File getRootDir();
+    method public void provisionKeyPairForTesting();
   }
 
   public final class VirtualMachineConfig {

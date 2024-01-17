@@ -1181,6 +1181,22 @@ public class VirtualMachine implements AutoCloseable {
     }
 
     /**
+     * Provisions a key pair for the VM attestation testing, a fake certificate will be associated
+     * to the fake key pair when the VM requests attestation in testing mode.
+     *
+     * @hide
+     */
+    @TestApi
+    public void provisionKeyPairForTesting() {
+        IVirtualizationService service = mVirtualizationService.getBinder();
+        try {
+            service.provisionKeyPairForTesting();
+        } catch (RemoteException e) {
+            throw e.rethrowAsRuntimeException();
+        }
+    }
+
+    /**
      * Captures the current state of the VM in a {@link VirtualMachineDescriptor} instance. The VM
      * needs to be stopped to avoid inconsistency in its state representation.
      *

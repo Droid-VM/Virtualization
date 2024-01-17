@@ -22,4 +22,5 @@ pub use api::{
     AVmAttestationResult_resultToString, AVmAttestationResult_sign,
     AVmPayload_getDiceAttestationCdi, AVmPayload_getDiceAttestationChain,
     AVmPayload_getVmInstanceSecret, AVmPayload_notifyPayloadReady, AVmPayload_requestAttestation,
+    AVmPayload_requestAttestationForTesting,
 };
