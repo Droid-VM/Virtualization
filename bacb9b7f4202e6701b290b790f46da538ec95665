@@ -16,6 +16,69 @@
       "message": "Rename LGTM, but I\u0027ll leave the others to review the details of apply_vm_reference_dt()",
       "revId": "bacb9b7f4202e6701b290b790f46da538ec95665",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8479e111_944fd9a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-17T11:58:08Z",
+      "side": 1,
+      "message": "Overall, I believe that we could shrink `vm_reference_dt` to `vm_ref_dt`[*], in particular for temporary variables to avoid having names that are 20+ characters long? But I don\u0027t feel strongly about it so feel free to just resolve this comment if you disagree.\n\n\n[*]: or even \"`ref_dt`\" because what does \"VM\" even mean, here, when _everything_ in pvmfw is already running in a VM.",
+      "revId": "bacb9b7f4202e6701b290b790f46da538ec95665",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2712a76_6044498e",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-17T11:58:08Z",
+      "side": 1,
+      "message": "this is a `FdtNode` so call it `avf_vm_reference_dt_node` or simply `avf_node`?",
+      "range": {
+        "startLine": 230,
+        "startChar": 8,
+        "endLine": 230,
+        "endChar": 27
+      },
+      "revId": "bacb9b7f4202e6701b290b790f46da538ec95665",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50fa198b_d3fdf67e",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-17T11:58:08Z",
+      "side": 1,
+      "message": "`ref_value`?",
+      "range": {
+        "startLine": 232,
+        "startChar": 20,
+        "endLine": 232,
+        "endChar": 44
+      },
+      "revId": "bacb9b7f4202e6701b290b790f46da538ec95665",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
