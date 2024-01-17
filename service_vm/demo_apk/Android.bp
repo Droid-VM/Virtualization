@@ -2,37 +2,26 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
-android_test {
-    name: "AttestationClientTestApp",
-    test_suites: [
-        "general-tests",
-    ],
-    srcs: ["src/java/**/*.java"],
-    static_libs: [
-        "MicrodroidDeviceTestHelper",
-        "androidx.test.runner",
-        "androidx.test.ext.junit",
-        "com.android.virt.service_vm.testservice-java",
-        "truth",
-    ],
+android_app {
+    name: "ServiceVmClientTestApp",
+    installable: true,
     jni_libs: ["libservice_vm_client"],
     jni_uses_platform_apis: true,
     use_embedded_native_libs: true,
-    sdk_version: "test_current",
+    sdk_version: "system_current",
     compile_multilib: "first",
+    apex_available: ["com.android.virt"],
 }
 
 rust_defaults {
     name: "service_vm_client_defaults",
     crate_name: "service_vm_client",
     defaults: ["avf_build_flags_rust"],
-    srcs: ["src/native/main.rs"],
+    srcs: ["src/main.rs"],
     prefer_rlib: true,
     rustlibs: [
-        "com.android.virt.service_vm.testservice-rust",
         "libandroid_logger",
         "libanyhow",
-        "libavflog",
         "liblog_rust",
         "libvm_payload_bindgen",
     ],
