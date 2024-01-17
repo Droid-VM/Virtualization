@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bd74b009_0753ba0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-17T12:00:41Z",
+      "side": 1,
+      "message": "Yes, you\u0027re right: \"`apply_`\" should probably be renamed \"`validate_`\" given that nothing is being \"applied\", as documented in aosp/2902087.",
+      "parentUuid": "587b169c_39abf79b",
+      "revId": "bacb9b7f4202e6701b290b790f46da538ec95665",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d2712a76_6044498e",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 1
