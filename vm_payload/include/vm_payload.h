@@ -211,7 +211,11 @@ size_t AVmAttestationResult_getPrivateKey(const struct AVmAttestationResult* _No
  * If `size` is smaller than the total size of the signature, the signature will be
  * truncated to this `size`.
  *
- * \return The total size of the signature.
+ * \return The total size of the signature if data is not null, otherwise the maximum size
+ * of the signature.
+ * We note that a DER-encoded ECDSA signature can have varying sizes even with the same
+ * EC Key and message, due to the encoding of the random values r and s that are part of the
+ * signature.
  *
  * [RFC 6979]: https://datatracker.ietf.org/doc/html/rfc6979
  */
