@@ -26,7 +26,8 @@ use vm_payload_bindgen::{
     attestation_status_t, AVmAttestationResult, AVmAttestationResult_free,
     AVmAttestationResult_getCertificateAt, AVmAttestationResult_getCertificateCount,
     AVmAttestationResult_getPrivateKey, AVmAttestationResult_resultToString,
-    AVmAttestationResult_sign, AVmPayload_requestAttestation,
+    AVmAttestationResult_sign, AVmPayload_notifyPayloadReady, AVmPayload_provisionKeyForTesting,
+    AVmPayload_requestAttestationForTesting,
 };
 
 /// Entry point of the Service VM client.
@@ -50,6 +51,9 @@ pub extern "C" fn AVmPayload_main() {
 
 fn try_main() -> Result<()> {
     info!("Welcome to Service VM Client!");
+
+    // SAFETY: This function only stores a key in the virtualization service.
+    unsafe { AVmPayload_provisionKeyForTesting() };
 
     let too_big_challenge = &[0u8; 66];
     let res = AttestationResult::request_attestation(too_big_challenge);
@@ -82,6 +86,9 @@ fn try_main() -> Result<()> {
     let signature = res.sign(message)?;
     info!("Signature: {:?}", signature);
 
+    // SAFETY: This function only notifies the virtualization service that the payload is ready.
+    unsafe { AVmPayload_notifyPayloadReady() };
+
     Ok(())
 }
 
@@ -94,7 +101,7 @@ impl AttestationResult {
         // SAFETY: It is safe as we only read the challenge within its bounds and the
         // function does not retain any reference to it.
         let status = unsafe {
-            AVmPayload_requestAttestation(
+            AVmPayload_requestAttestationForTesting(
                 challenge.as_ptr() as *const c_void,
                 challenge.len(),
                 &mut res,
@@ -191,18 +198,10 @@ fn get_private_key(res: &AVmAttestationResult) -> Result<Box<[u8]>> {
 }
 
 fn sign_with_attested_key(res: &AVmAttestationResult, message: &[u8]) -> Result<Box<[u8]>> {
-    // SAFETY: The result is returned by `AVmPayload_requestAttestation` and should be valid
-    // before getting freed.
-    let size = unsafe {
-        AVmAttestationResult_sign(
-            res,
-            message.as_ptr() as *const c_void,
-            message.len(),
-            ptr::null_mut(),
-            0,
-        )
-    };
-    let mut signature = vec![0u8; size];
+    // No need to call `AVmAttestationResult_sign` with a null pointer to get the size, because
+    // the DER encoding of an ECDSA signature can have different lengths for different signatures,
+    // even when using the same EC keys and message.
+    let mut signature = vec![0u8; 128];
     // SAFETY: The result is returned by `AVmPayload_requestAttestation` and should be valid
     // before getting freed. This function only writes within the bounds of `signature`.
     // And `signature` cannot overlap `res` because we just allocated it.
@@ -215,7 +214,8 @@ fn sign_with_attested_key(res: &AVmAttestationResult, message: &[u8]) -> Result<
             signature.len(),
         )
     };
-    ensure!(size == signature.len());
+    ensure!(size <= signature.len());
+    signature.truncate(size);
     Ok(signature.into_boxed_slice())
 }
 

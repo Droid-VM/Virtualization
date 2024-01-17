@@ -107,9 +107,16 @@ interface IVmPayloadService {
      * serving as proof of the freshness of the result.
      *
      * @param challenge the maximum supported challenge size is 64 bytes.
+     * @param testMode whether the attestation is only for testing purposes.
      *
      * @return An {@link AttestationResult} parcelable containing an attested key pair and its
      *         certification chain.
      */
-    AttestationResult requestAttestation(in byte[] challenge);
+    AttestationResult requestAttestation(in byte[] challenge, in boolean testMode);
+
+    /**
+     * Provisions a key for testing purposes. The provisioned key will be stored in the
+     * virtualizationservice and will be used in |requestAttestation| when |testMode| is true.
+     */
+    void provisionKeyForTesting();
 }
