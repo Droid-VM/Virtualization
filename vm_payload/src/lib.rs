@@ -284,6 +284,66 @@ pub unsafe extern "C" fn AVmPayload_requestAttestation(
     challenge_size: usize,
     res: &mut *mut AttestationResult,
 ) -> attestation_status_t {
+    // SAFETY: The caller guarantees that `challenge` is valid for reads and `res` is valid
+    // for writes.
+    unsafe {
+        request_attestation(
+            challenge,
+            challenge_size,
+            false, // test_mode
+            res,
+        )
+    }
+}
+
+/// Requests the remote attestation of the client VM for testing.
+///
+/// # Safety
+///
+/// Behavior is undefined if any of the following conditions are violated:
+///
+/// * `challenge` must be [valid] for reads of `challenge_size` bytes.
+/// * `res` must be [valid] to write the attestation result.
+/// * The region of memory beginning at `challenge` with `challenge_size` bytes must not
+///  overlap with the region of memory `res` points to.
+///
+/// [valid]: ptr#safety
+#[no_mangle]
+pub unsafe extern "C" fn AVmPayload_requestAttestationForTesting(
+    challenge: *const u8,
+    challenge_size: usize,
+    res: &mut *mut AttestationResult,
+) -> attestation_status_t {
+    // SAFETY: The caller guarantees that `challenge` is valid for reads and `res` is valid
+    // for writes.
+    unsafe {
+        request_attestation(
+            challenge,
+            challenge_size,
+            true, // test_mode
+            res,
+        )
+    }
+}
+
+/// Requests the remote attestation of the client VM.
+///
+/// # Safety
+///
+/// Behavior is undefined if any of the following conditions are violated:
+///
+/// * `challenge` must be [valid] for reads of `challenge_size` bytes.
+/// * `res` must be [valid] to write the attestation result.
+/// * The region of memory beginning at `challenge` with `challenge_size` bytes must not
+///  overlap with the region of memory `res` points to.
+///
+/// [valid]: ptr#safety
+unsafe fn request_attestation(
+    challenge: *const u8,
+    challenge_size: usize,
+    test_mode: bool,
+    res: &mut *mut AttestationResult,
+) -> attestation_status_t {
     initialize_logging();
     const MAX_CHALLENGE_SIZE: usize = 64;
     if challenge_size > MAX_CHALLENGE_SIZE {
@@ -297,7 +357,7 @@ pub unsafe extern "C" fn AVmPayload_requestAttestation(
         unsafe { std::slice::from_raw_parts(challenge, challenge_size) }
     };
     let service = unwrap_or_abort(get_vm_payload_service());
-    match service.requestAttestation(challenge) {
+    match service.requestAttestation(challenge, test_mode) {
         Ok(attestation_res) => {
             *res = Box::into_raw(Box::new(attestation_res));
             attestation_status_t::ATTESTATION_OK
