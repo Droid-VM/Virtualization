@@ -314,6 +314,10 @@ impl IVirtualizationService for VirtualizationService {
             }
         }
     }
+
+    fn provisionKeyPairForTesting(&self) -> binder::Result<()> {
+        GLOBAL_SERVICE.provisionKeyPairForTesting()
+    }
 }
 
 impl VirtualizationService {
@@ -1391,8 +1395,8 @@ impl IVirtualMachineService for VirtualMachineService {
         Ok(sk.map(|s| BnSecretkeeper::new_binder(SecretkeeperProxy(s), BinderFeatures::default())))
     }
 
-    fn requestAttestation(&self, csr: &[u8]) -> binder::Result<Vec<Certificate>> {
-        GLOBAL_SERVICE.requestAttestation(csr, get_calling_uid() as i32)
+    fn requestAttestation(&self, csr: &[u8], test_mode: bool) -> binder::Result<Vec<Certificate>> {
+        GLOBAL_SERVICE.requestAttestation(csr, get_calling_uid() as i32, test_mode)
     }
 }
 

@@ -73,4 +73,10 @@ interface IVirtualizationService {
 
     /** Returns whether given feature is enabled. */
     boolean isFeatureEnabled(in String feature);
+
+    /**
+     * Provisions a key pair for the VM attestation testing, a fake certificate will be
+     * associated to the fake key pair when the VM requests attestation in testing mode.
+     */
+    void provisionKeyPairForTesting();
 }

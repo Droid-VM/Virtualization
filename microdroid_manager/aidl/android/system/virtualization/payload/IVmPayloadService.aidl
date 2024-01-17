@@ -107,9 +107,10 @@ interface IVmPayloadService {
      * serving as proof of the freshness of the result.
      *
      * @param challenge the maximum supported challenge size is 64 bytes.
+     * @param testMode whether the attestation is only for testing purposes.
      *
      * @return An {@link AttestationResult} parcelable containing an attested key pair and its
      *         certification chain.
      */
-    AttestationResult requestAttestation(in byte[] challenge);
+    AttestationResult requestAttestation(in byte[] challenge, in boolean testMode);
 }
