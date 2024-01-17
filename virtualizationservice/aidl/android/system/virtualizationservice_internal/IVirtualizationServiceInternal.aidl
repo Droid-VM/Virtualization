@@ -61,10 +61,17 @@ interface IVirtualizationServiceInternal {
      *                     attested is owned by this app.
      *                     The uniqueness of the UID ensures that no two VMs owned by different apps
      *                     are able to correlate keys.
+     * @param testMode Whether the request is for testing purposes.
      * @return A sequence of DER-encoded X.509 certificates that make up the attestation
      *         key's certificate chain. The attestation key is provided in the CSR.
      */
-    Certificate[] requestAttestation(in byte[] csr, int requesterUid);
+    Certificate[] requestAttestation(in byte[] csr, int requesterUid, in boolean testMode);
+
+    /**
+     * Provisions a key for testing purposes. The provisioned key will be stored in the
+     * virtualizationservice and will be used in |requestAttestation| when |testMode| is true.
+     */
+    void provisionKeyForTesting();
 
     /**
      * Get a list of assignable devices.
