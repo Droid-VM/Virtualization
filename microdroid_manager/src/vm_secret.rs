@@ -20,7 +20,7 @@ use android_hardware_security_secretkeeper::aidl::android::hardware::security::s
 use secretkeeper_comm::data_types::request::Request;
 use binder::{Strong};
 use coset::CborSerializable;
-use dice_policy::{ConstraintSpec, ConstraintType, DicePolicy, MissingAction};
+use dice_policy_builder::{ConstraintSpec, ConstraintType, policy_on_dice_chain, MissingAction};
 use diced_open_dice::{DiceArtifacts, OwnedDiceArtifacts};
 use keystore2_crypto::ZVec;
 use openssl::hkdf::hkdf;
