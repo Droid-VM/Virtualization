@@ -452,6 +452,17 @@ fn node_name_lifetime() {
 
 #[test]
 #[ignore] // Borrow checker test. Compilation success is sufficient.
+fn node_mut_add_subnodes_lifetime() {
+    let mut data = fs::read(TEST_TREE_PHANDLE_PATH).unwrap();
+    let fdt = Fdt::from_mut_slice(&mut data).unwrap();
+
+    let mut root = fdt.root_mut().unwrap();
+    root.add_subnode(cstr!("a")).unwrap();
+    root.add_subnode(cstr!("b")).unwrap();
+}
+
+#[test]
+#[ignore] // Borrow checker test. Compilation success is sufficient.
 fn node_subnode_lifetime() {
     let data = fs::read(TEST_TREE_PHANDLE_PATH).unwrap();
     let fdt = Fdt::from_slice(&data).unwrap();
