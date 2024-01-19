@@ -1,0 +1,22 @@
+/dts-v1/;
+
+/ {
+    avf {
+        reference {
+            vendor_hashtree_descriptor_root_digest = "this_is_test";
+            vendor_image_key = "this_is_not_real";
+
+            oem {
+                stub = <0x354>;
+            };
+
+            vendor {
+                empty;
+
+                vendor_extra_node {
+                    flag = <0x210>;
+                };
+            };
+        };
+    };
+};

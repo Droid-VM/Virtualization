@@ -1,0 +1,24 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+java_test_host {
+    name: "FsFdtTestCases",
+    srcs: ["src/**/*"],
+    data: [
+        "data/**/*",
+        ":fsfdt",
+    ],
+    libs: [
+        "androidx.annotation_annotation",
+        "tradefed",
+        "compatibility-tradefed",
+    ],
+    static_libs: [
+        "compatibility-host-util",
+        "cts-host-utils",
+    ],
+    required: ["dtdiff"],
+    per_testcase_directory: true,
+    test_suites: ["general-tests"],
+}
