@@ -1,0 +1,38 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+java_test_host {
+    name: "FsFdtTestCases",
+    srcs: ["src/**/*"],
+    data: [
+        "data/fs/**/*",
+        ":fsfdt",
+        ":testdata_fsfdt_expected_fdt",
+    ],
+    libs: [
+        "androidx.annotation_annotation",
+        "tradefed",
+        "compatibility-tradefed",
+    ],
+    static_libs: [
+        "compatibility-host-util",
+        "cts-host-utils",
+    ],
+    required: ["dtdiff"],
+    per_testcase_directory: true,
+    test_suites: ["general-tests"],
+}
+
+genrule {
+    name: "testdata_fsfdt_expected_fdt",
+    tools: ["dtc"],
+    // Note: genrule only understands file,
+    //       and should explicitly be specified to give labels for $(location)
+    srcs: [
+        "data/fs/**/*",
+        "data/stub",
+    ],
+    out: ["expected.dtb"],
+    cmd: "$(location dtc) -I fs -O dtb $$(dirname $(location data/stub))/fs -o $(out)",
+}
