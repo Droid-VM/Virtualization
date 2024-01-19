@@ -81,4 +81,7 @@ interface IVirtualizationServiceInternal {
 
     /** Returns a read-only file descriptor of the VM DTBO file. */
     ParcelFileDescriptor getDtboFile();
+
+    /** Returns a read-only file descriptor of the VM reference DT file. */
+    @nullable ParcelFileDescriptor getReferenceDtFile();
 }

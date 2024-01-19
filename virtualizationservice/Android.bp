@@ -34,6 +34,7 @@ rust_defaults {
         "libhypervisor_props",
         "liblazy_static",
         "liblibc",
+        "liblibfdt",
         "liblog_rust",
         "libnix",
         "libopenssl",
@@ -69,6 +70,8 @@ rust_test {
     test_suites: ["general-tests"],
     data: [
         ":test_rkp_cert_chain",
+        ":test_vm_reference_dt",
+        ":test_vm_reference_dt_base",
     ],
 }
 
@@ -81,4 +84,21 @@ rust_test {
 filegroup {
     name: "test_rkp_cert_chain",
     srcs: ["testdata/rkp_cert_chain.der"],
+}
+
+genrule {
+    name: "test_vm_reference_dt",
+    defaults: ["dts_to_dtb"],
+    srcs: [
+        "testdata/test_vm_reference_dt_base.dts",
+        "testdata/test_vm_reference_dt.dts",
+    ],
+    out: ["test_vm_reference_dt.dtb"],
+}
+
+genrule {
+    name: "test_vm_reference_dt_base",
+    defaults: ["dts_to_dtb"],
+    srcs: ["testdata/test_vm_reference_dt_base.dts"],
+    out: ["test_vm_reference_dt_base.dtb"],
 }

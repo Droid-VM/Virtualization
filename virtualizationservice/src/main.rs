@@ -64,7 +64,7 @@ fn main() {
 
     ProcessState::start_thread_pool();
 
-    let service = VirtualizationServiceInternal::init();
+    let service = VirtualizationServiceInternal::init().expect("Failed to init service");
     let service = BnVirtualizationServiceInternal::new_binder(service, BinderFeatures::default());
     register_lazy_service(BINDER_SERVICE_IDENTIFIER, service.as_binder()).unwrap();
     info!("Registered Binder service {}.", BINDER_SERVICE_IDENTIFIER);

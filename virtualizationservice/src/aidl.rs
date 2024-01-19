@@ -46,6 +46,7 @@ use rustutils::system_properties;
 use serde::Deserialize;
 use std::collections::{HashMap, HashSet};
 use std::fs::{self, create_dir, remove_dir_all, remove_file, set_permissions, File, Permissions};
+use std::ffi::CString;
 use std::io::{Read, Write};
 use std::os::unix::fs::PermissionsExt;
 use std::os::unix::raw::{pid_t, uid_t};
@@ -55,6 +56,19 @@ use tombstoned_client::{DebuggerdDumpType, TombstonedConnection};
 use vsock::{VsockListener, VsockStream};
 use nix::unistd::{chown, Uid};
 use openssl::x509::X509;
+use libfdt::Fdt;
+
+// TODO(b/308694211): Use cstr! from vmbase instead.
+macro_rules! cstr {
+    ($str:literal) => {{
+        const S: &str = concat!($str, "\0");
+        const C: &::core::ffi::CStr = match ::core::ffi::CStr::from_bytes_with_nul(S.as_bytes()) {
+            Ok(v) => v,
+            Err(_) => panic!("string contains interior NUL"),
+        };
+        C
+    }};
+}
 
 /// The unique ID of a VM used (together with a port number) for vsock communication.
 pub type Cid = u32;
@@ -73,6 +87,8 @@ const SYSPROP_LAST_CID: &str = "virtualizationservice.state.last_cid";
 
 const CHUNK_RECV_MAX_LEN: usize = 1024;
 
+const VM_REFERENCE_DT_MAX_SIZE: usize = 1024;
+
 lazy_static! {
     static ref VFIO_SERVICE: Strong<dyn IVfioHandler> =
         wait_for_interface(<BpVfioHandler as IVfioHandler>::get_descriptor())
@@ -87,12 +103,23 @@ fn is_valid_guest_cid(cid: Cid) -> bool {
 /// singleton servers, like tombstone receiver.
 #[derive(Debug, Default)]
 pub struct VirtualizationServiceInternal {
+    /// Cached read-only FD of VM reference DT file.
+    reference_dt_file: Option<File>,
+
     state: Arc<Mutex<GlobalState>>,
 }
 
 impl VirtualizationServiceInternal {
-    pub fn init() -> VirtualizationServiceInternal {
-        let service = VirtualizationServiceInternal::default();
+    pub fn init() -> Result<VirtualizationServiceInternal> {
+        let path = get_or_create_common_dir()?.join("reference.dtb");
+        if path.exists() {
+            // All temporary files are deleted when the service is started.
+            // If the file exists, the file is likely corrupted.
+            remove_file(&path).context("Failed to clone cached VM reference DT file descriptor")?;
+        }
+
+        let reference_dt_file = create_reference_dt_file(Path::new("/sys/firmware/fdt"), &path)?;
+        let service = Self { reference_dt_file, ..Default::default() };
 
         std::thread::spawn(|| {
             if let Err(e) = handle_stream_connection_tombstoned() {
@@ -100,7 +127,7 @@ impl VirtualizationServiceInternal {
             }
         });
 
-        service
+        Ok(service)
     }
 }
 
@@ -255,6 +282,17 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
         let state = &mut *self.state.lock().unwrap();
         let file = state.get_dtbo_file().or_service_specific_exception(-1)?;
         Ok(ParcelFileDescriptor::new(file))
+    }
+
+    fn getReferenceDtFile(&self) -> binder::Result<Option<ParcelFileDescriptor>> {
+        check_use_custom_virtual_machine()?;
+
+        if let Some(file) = &self.reference_dt_file {
+            let fd = file.try_clone().or_service_specific_exception(-1)?;
+            Ok(Some(ParcelFileDescriptor::new(fd)))
+        } else {
+            Ok(None)
+        }
     }
 }
 
@@ -487,6 +525,78 @@ fn get_or_create_common_dir() -> Result<PathBuf> {
     Ok(path)
 }
 
+fn create_reference_dt_file(fdt_path: &Path, reference_dt_path: &Path) -> Result<Option<File>> {
+    // VTS checks /sys/firmware/fdt, but CF doesn't have this.
+    let src_data = match fs::read(fdt_path) {
+        Ok(data) => data,
+        Err(e) if e.kind() == std::io::ErrorKind::NotFound => {
+            warn!("{fdt_path:?} doesn't exist");
+            println!("{fdt_path:?} doesn't exist");
+            return Ok(None);
+        }
+        e => e.context("Failed to read {fdt_path:?}")?,
+    };
+
+    let src_fdt =
+        Fdt::from_slice(&src_data).map_err(|e| anyhow!("Failed to parse host DT file, {e:?}"))?;
+
+    let Some(src_node) = src_fdt
+        .node(cstr!("/avf/reference"))
+        .map_err(|e| anyhow!("Failed to read host DT, {e:?}"))?
+    else {
+        warn!("Failed to find VM reference DT node from host DT");
+        println!("Failed to find VM reference DT node from host DT");
+        return Ok(None);
+    };
+
+    let mut dst_data = vec![0_u8; VM_REFERENCE_DT_MAX_SIZE];
+    let dst_fdt = Fdt::create_empty_tree(dst_data.as_mut_slice())
+        .map_err(|e| anyhow!("Failed to create VM reference DT, {e:?}"))?;
+
+    let mut stack = vec![(CString::from(cstr!("/")), src_node)];
+
+    while let Some((dst_path, src_node)) = stack.pop() {
+        let mut dst_node = dst_fdt
+            .node_mut(&dst_path)
+            .map_err(|e| anyhow!("Failed to write VM reference DT, {e:?}"))?
+            .ok_or_else(|| anyhow!("Internal error when writing VM reference DT"))?;
+
+        let subnodes = src_node.subnodes().map_err(|e| anyhow!("Failed to read host DT, {e:?}"))?;
+        for src_subnode in subnodes {
+            let subnode_name =
+                src_subnode.name().map_err(|e| anyhow!("Failed to read host DT, {e:?}"))?;
+            dst_node
+                .add_subnode(subnode_name)
+                .map_err(|e| anyhow!("Failed to copy node from host DT, {e:?}"))?;
+
+            // Note: keep path of new nodes instead because of borrow checker.
+            let new_path = CString::from_vec_with_nul(
+                [dst_path.to_bytes(), b"/", subnode_name.to_bytes(), b"\0"].concat(),
+            )?;
+            stack.push((new_path, src_subnode));
+        }
+
+        let properties = src_node
+            .properties()
+            .map_err(|e| anyhow!("Failed to get host DT properties, {e:?}"))?;
+        for prop in properties {
+            let name = prop
+                .name()
+                .map_err(|e| anyhow!("Failed to get property name from host DT, {e:?}"))?;
+            let value = prop
+                .value()
+                .map_err(|e| anyhow!("Failed to get property value from host DT, {e:?}"))?;
+            dst_node.setprop(name, value).map_err(|e| anyhow!("Failed to copy property, {e:?}"))?;
+        }
+    }
+
+    fs::write(reference_dt_path, dst_fdt.as_slice())
+        .context("Failed to create VM referencet DT file")?;
+
+    // Open read-only. No reason to write.
+    Ok(Some(File::open(reference_dt_path).context("Failed to open VM reference DT file")?))
+}
+
 /// Implementation of the AIDL `IGlobalVmContext` interface.
 #[derive(Debug, Default)]
 struct GlobalVmContext {
@@ -595,9 +705,12 @@ fn check_use_custom_virtual_machine() -> binder::Result<()> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::ffi::CStr;
     use std::fs;
 
     const TEST_RKP_CERT_CHAIN_PATH: &str = "testdata/rkp_cert_chain.der";
+    const TEST_VM_REFERENCE_DT_PATH: &str = "test_vm_reference_dt.dtb";
+    const TEST_VM_REFERENCE_DT_BASE_PATH: &str = "test_vm_reference_dt_base.dtb";
 
     #[test]
     fn splitting_x509_certificate_chain_succeeds() -> Result<()> {
@@ -609,6 +722,78 @@ mod tests {
             let x509_cert = X509::from_der(&cert.encodedCertificate)?;
             assert_eq!(x509_cert.to_der()?.len(), cert.encodedCertificate.len());
         }
+        Ok(())
+    }
+
+    fn into_vec(numb: u32) -> Vec<u8> {
+        numb.to_be_bytes().to_vec()
+    }
+
+    #[test]
+    fn test_create_reference_dt_file() -> Result<()> {
+        const TEST_FILE_NAME: &str = "test.dtb";
+        let fdt_file = create_reference_dt_file(
+            Path::new(TEST_VM_REFERENCE_DT_PATH),
+            Path::new(TEST_FILE_NAME),
+        )?;
+        assert!(fdt_file.is_some());
+
+        let mut fdt_data = Vec::new();
+        fdt_file.unwrap().read_to_end(&mut fdt_data)?;
+
+        let fdt_data_from_path = fs::read(TEST_FILE_NAME)?;
+        assert_eq!(fdt_data, fdt_data_from_path);
+
+        let fdt = Fdt::from_slice(&fdt_data)
+            .map_err(|e| anyhow!("Failed to create a valid FDT, {e:?}"))?;
+
+        let root = fdt.root().unwrap();
+        let mut fdt_all_nodes: Vec<_> = root.descendants().collect();
+        fdt_all_nodes.insert(0, (root, 0));
+
+        let expected: Vec<(usize, &CStr, HashMap<&CStr, Vec<u8>>)> = vec![
+            (
+                0,
+                cstr!(""),
+                HashMap::from([
+                    (
+                        cstr!("vendor_hashtree_descriptor_root_digest"),
+                        Vec::from(*b"this_is_test\0"),
+                    ),
+                    (cstr!("vendor_image_key"), Vec::from(*b"this_is_not_real\0")),
+                ]),
+            ),
+            (1, cstr!("vendor"), HashMap::from([(cstr!("extra_prop"), into_vec(0xF_u32))])),
+            (2, cstr!("vendor_extra_node"), HashMap::from([(cstr!("flag"), into_vec(0x9_u32))])),
+            (1, cstr!("oem"), HashMap::from([(cstr!("stub"), into_vec(0x1_u32))])),
+        ];
+
+        assert_eq!(expected.len(), fdt_all_nodes.len());
+
+        for ((expected_depth, expected_name, expected_props), (node, depth)) in
+            expected.into_iter().zip(fdt_all_nodes)
+        {
+            println!("iterating {:?}", node.name());
+            assert_eq!((expected_depth, Ok(expected_name)), (depth, node.name()));
+
+            let props = HashMap::from_iter(
+                node.properties()
+                    .unwrap()
+                    .map(|prop| (prop.name().unwrap(), prop.value().unwrap().to_vec())),
+            );
+            assert_eq!(expected_props, props);
+        }
+
+        Ok(())
+    }
+
+    #[test]
+    fn test_create_reference_dt_from_empty_reference() -> Result<()> {
+        let fdt_file = create_reference_dt_file(
+            Path::new(TEST_VM_REFERENCE_DT_BASE_PATH),
+            Path::new("test.dtb"),
+        )?;
+        assert!(fdt_file.is_none());
         Ok(())
     }
 }

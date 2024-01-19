@@ -1,0 +1,30 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+	interrupt-parent = <0x01>;
+	compatible = "android,test";
+	#address-cells = <0x02>;
+	#size-cells = <0x02>;
+
+	chosen {
+		bootargs = "panic=-1crashkernel=31M";
+	};
+
+	memory {
+		device_type = "memory";
+		reg = <0x00 0x80000000 0x00 0x10000000>;
+	};
+
+	cpus {
+		#address-cells = <0x01>;
+		#size-cells = <0x00>;
+
+		cpu@0 {
+			device_type = "cpu";
+			compatible = "arm,arm-v8";
+			enable-method = "psci";
+			reg = <0x00>;
+		};
+	};
+};
