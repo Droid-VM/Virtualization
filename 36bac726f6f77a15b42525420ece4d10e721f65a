@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2166c85c_381e2c21",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1078119
+      },
+      "writtenOn": "2024-01-23T23:06:29Z",
+      "side": 1,
+      "message": "This `filter_map()` pattern could potentially be replaced by a helper in libavb_rs:\n\n```\nlet mut iter \u003d filter_descriptors::\u003cPropertyDescriptor\u003e(descriptors);\n```\n\nthe catch is that the implementation of such a helper was surprisingly complicated just for a 4-line replacement (https://r.android.com/2925251). I\u0027m still on the fence whether it\u0027s worth it or not.",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 7
+      },
+      "revId": "36bac726f6f77a15b42525420ece4d10e721f65a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
