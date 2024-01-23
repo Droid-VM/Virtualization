@@ -286,6 +286,13 @@ pub(crate) unsafe trait Libfdt {
 
         CStr::from_bytes_until_nul(bytes).map_err(|_| FdtError::Internal)
     }
+
+    /// Safe wrapper around `fdt_open_into()` (C function).
+    fn open_into(&self, dest: &mut [u8]) -> Result<()> {
+        let fdt = self.as_fdt_slice().as_ptr().cast();
+
+        open_into(fdt, dest)
+    }
 }
 
 /// Wrapper for the read-write libfdt.h functions.
@@ -423,6 +430,41 @@ pub(crate) unsafe trait LibfdtMut {
 
         fdt_err_expect_zero(ret)
     }
+
+    /// Safe and aliasing-compatible wrapper around `fdt_open_into()` (C function).
+    ///
+    /// The C API allows both input (`const void*`) and output (`void *`) to point to the same
+    /// memory region but the borrow checker would reject an API such as
+    ///
+    ///     self.open_into(&mut self.buffer)
+    ///
+    /// so this wrapper is provided to implement such a common aliasing case.
+    fn open_into_self(&mut self) -> Result<()> {
+        let fdt = self.as_fdt_slice_mut();
+
+        open_into(fdt.as_ptr().cast(), fdt)
+    }
+
+    /// Safe wrapper around `fdt_pack()` (C function).
+    fn pack(&mut self) -> Result<()> {
+        let fdt = self.as_fdt_slice_mut().as_mut_ptr().cast();
+        // SAFETY: "Closes" the DT in-place by updating its header and relocating its structs.
+        let ret = unsafe { libfdt_bindgen::fdt_pack(fdt) };
+
+        fdt_err_expect_zero(ret)
+    }
+
+    /// Safe wrapper around `fdt_overlay_apply()` (C function).
+    fn overlay_apply(&mut self, overlay: &mut Self) -> Result<()> {
+        let fdt = self.as_fdt_slice_mut().as_mut_ptr().cast();
+        let overlay = overlay.as_fdt_slice_mut().as_mut_ptr().cast();
+        // SAFETY: Both pointers are valid because they come from references, and fdt_overlay_apply
+        // doesn't keep them after it returns. It may corrupt their contents if there is an error,
+        // but that's our caller's responsibility.
+        let ret = unsafe { libfdt_bindgen::fdt_overlay_apply(fdt, overlay) };
+
+        fdt_err_expect_zero(ret)
+    }
 }
 
 pub(crate) fn get_slice_at_ptr(s: &[u8], p: *const u8, len: usize) -> Option<&[u8]> {
@@ -447,6 +489,18 @@ fn get_slice_ptr_offset(s: &[u8], p: *const u8) -> Option<usize> {
         (unsafe { p.offset_from(s.as_ptr()) }) as usize
         // TODO(stable_feature(ptr_sub_ptr)): p.sub_ptr()
     })
+}
+
+fn open_into(fdt: *const (), dest: &mut [u8]) -> Result<()> {
+    let fdt = fdt.cast();
+    let len = dest.len().try_into().map_err(|_| FdtError::Internal)?;
+    let dest = dest.as_mut_ptr().cast();
+    // SAFETY: "Opens" the DT into the mutable slice by copying and updating its header and
+    // internal structures to make use of the whole self.fdt slice but performs no accesses
+    // outside of it and leaves the DT in a state that will be detected by other functions.
+    let ret = unsafe { libfdt_bindgen::fdt_open_into(fdt, dest, len) };
+
+    fdt_err_expect_zero(ret)
 }
 
 // TODO(stable_feature(pointer_is_aligned)): p.is_aligned()
