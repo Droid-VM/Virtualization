@@ -59,6 +59,7 @@ rust_test {
         ":fdt_test_tree_empty_memory_range_dtb",
         ":fdt_test_tree_no_memory_node_dtb",
         ":fdt_test_tree_phandle_dtb",
+        ":fdt_node_name_match_dtb",
     ],
     prefer_rlib: true,
     rustlibs: [
@@ -112,4 +113,11 @@ genrule {
     defaults: ["dts_to_dtb"],
     srcs: ["tests/data/test_tree_phandle.dts"],
     out: ["data/test_tree_phandle.dtb"],
+}
+
+genrule {
+    name: "fdt_node_name_match_dtb",
+    defaults: ["dts_to_dtb"],
+    srcs: ["tests/data/test_node_name_match.dts"],
+    out: ["data/test_node_name_match.dtb"],
 }
