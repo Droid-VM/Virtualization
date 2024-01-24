@@ -1,0 +1,19 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+    #address-cells = <1>;
+    #size-size = <0>;
+
+    mbox@1 {
+        reg = <1>;
+        val = <1>;
+    };
+    mbox {
+        val = <0>;
+    };
+    mbox@2 {
+        reg = <2>;
+        val = <2>;
+    };
+};

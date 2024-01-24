@@ -29,6 +29,7 @@ const TEST_TREE_WITH_MULTIPLE_MEMORY_RANGES_PATH: &str =
 const TEST_TREE_WITH_EMPTY_MEMORY_RANGE_PATH: &str = "data/test_tree_empty_memory_range.dtb";
 const TEST_TREE_WITH_NO_MEMORY_NODE_PATH: &str = "data/test_tree_no_memory_node.dtb";
 const TEST_TREE_PHANDLE_PATH: &str = "data/test_tree_phandle.dtb";
+const TEST_NODE_NAME_MATCH_PATH: &str = "data/test_node_name_match.dtb";
 
 #[test]
 fn retrieving_memory_from_fdt_with_one_memory_range_succeeds() {
@@ -401,6 +402,14 @@ fn node_mut_delete_and_next_subnode() {
 }
 
 #[test]
+fn node() {
+    let data = fs::read(TEST_NODE_NAME_MATCH_PATH).unwrap();
+    let fdt = Fdt::from_slice(&data).unwrap();
+
+    let node = fdt.node(cstr!("/mbox/val")).unwrap().unwrap();
+    assert_eq!(Ok(Some(0_u32)), node.getprop_u32(cstr!("val")));
+}
+
 fn node_mut_delete_and_next_node() {
     let mut data = fs::read(TEST_TREE_PHANDLE_PATH).unwrap();
     let fdt = Fdt::from_mut_slice(&mut data).unwrap();
