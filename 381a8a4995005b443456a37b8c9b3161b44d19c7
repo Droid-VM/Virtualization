@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b39ebb82_cccbeab7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-24T17:48:59Z",
+      "side": 1,
+      "message": "Note that there\u0027s a third option: use `dtc` to dump `/sys/firmware/device-tree` as a DTB (\"`-I fs -O dtb`\", IIRC), which can then be parsed by our `libfdt` wrappers. A bit convoluted but would involve less code than writing (and having to test, maintain, ...) `fs_to_fdt`.\n\nYou might want to check if we can even call directly into the DTC code doing the \"DT dumping\" so that we don\u0027t need to manage a separate binary?\n\n(assuming DTC and libfdt have the same license but I vaguely remember they might not, so that should also be checked)",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 13
+      },
+      "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ee75fa3_41fecc32",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-24T17:48:59Z",
+      "side": 1,
+      "message": "I suspect that might be a security issue because the file might contain information that the kernel doesn\u0027t want userspace to know.\n\nTo check this theory, would you mind comparing the KASLR seed (at DT path `/chosen/kaslr-seed`, IIRC) between `/sys/firmware/device-tree` (which always contains the masked value `0`, IIRC) and /sys/firmware/fdt` (which I suspect would contain the actual value)?",
+      "range": {
+        "startLine": 16,
+        "startChar": 60,
+        "endLine": 17,
+        "endChar": 17
+      },
+      "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
