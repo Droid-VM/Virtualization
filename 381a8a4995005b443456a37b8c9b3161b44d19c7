@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f83fd60_b802dc7a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-01-25T01:47:33Z",
+      "side": 1,
+      "message": "Uh, I didn\u0027t even recognized that `dtc` has such functionality..\n\nI\u0027ll try whether I can make `libdtc` and then wrap it with Rust. That may be helpful. I\u0027ll keep this version if it doesn\u0027t work.",
+      "parentUuid": "b39ebb82_cccbeab7",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 13
+      },
+      "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5ee75fa3_41fecc32",
         "filename": "/COMMIT_MSG",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2024-01-24T17:48:59Z",
       "side": 1,
       "message": "I suspect that might be a security issue because the file might contain information that the kernel doesn\u0027t want userspace to know.\n\nTo check this theory, would you mind comparing the KASLR seed (at DT path `/chosen/kaslr-seed`, IIRC) between `/sys/firmware/device-tree` (which always contains the masked value `0`, IIRC) and /sys/firmware/fdt` (which I suspect would contain the actual value)?",
+      "range": {
+        "startLine": 16,
+        "startChar": 60,
+        "endLine": 17,
+        "endChar": 17
+      },
+      "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e07b92ee_236cceb3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-01-25T01:47:33Z",
+      "side": 1,
+      "message": "Checked with `/chosen/kaslr-seed` from both fs and FDT blob, but they were all zeros.\n\nBut I\u0027m pretty sure that host kernel wouldn\u0027t aware of our interest `/avf/reference` and leave it untouched. I already got confirmation that we only use public keys, so OK to share.",
+      "parentUuid": "5ee75fa3_41fecc32",
       "range": {
         "startLine": 16,
         "startChar": 60,
