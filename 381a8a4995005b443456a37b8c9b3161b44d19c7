@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2990cb75_2f4a6fde",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-25T21:04:31Z",
+      "side": 1,
+      "message": "Thanks!\n\nPlease keep me in the loop as I\u0027m curious what the reason for this would be!",
+      "parentUuid": "6ac2388e_64688b92",
+      "range": {
+        "startLine": 12,
+        "startChar": 63,
+        "endLine": 13,
+        "endChar": 40
+      },
+      "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b39ebb82_cccbeab7",
@@ -215,6 +239,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2ee553f_f490a244",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-25T21:04:31Z",
+      "side": 1,
+      "message": "Thanks, Seungjae for the pointers!\n\nI don\u0027t like the idea of reinventing the wheel but I like even less the idea of embedding some random binary in our APEX, as you said, so I fully agree with your conclusion.\n\n(BTW, calling `exit` instead of returning an error is top-notch API design ... given that `die` is a macro, I was thinking of injecting our own (e.g. by hijacking the `#include`) but if we\u0027re getting to that level of Frankenstein code, we might as well have a clean rewrite, which will be less likely to be painful to maintain as we\u0027re also avoiding having to handle the Bionic integration!)",
+      "parentUuid": "71e26dbe_57c17e37",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 13
+      },
+      "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ee75fa3_41fecc32",
@@ -287,6 +335,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "77349320_2a11a609",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-25T21:04:31Z",
+      "side": 1,
+      "message": "IMO, this would be much easier to read by making use of `char`:\n```\nfn is_ascii_alphanumeric_or_in(c: char, chars: \u0026str) -\u003e bool {\n    c.is_ascii_alphanumeric() || chars.contains(c)\n}\n\nfn is_valid_dt_node_name(name: \u0026[u8]) -\u003e bool {\n    name.iter().all(|c| is_ascii_alphanumeric_or_in((*c).into(), \",._+-@\"))\n}\n\nfn is_valid_dt_prop_name(name: \u0026[u8]) -\u003e bool {\n    name.iter().all(|c| is_ascii_alphanumeric_or_in((*c).into(), \",._+-#?\"))\n}\n```\n\nHowever, I\u0027m not convinced of the need for this: the DT is trusted (because we trust our kernel and our kernel trusts its bootloader) so what is this extra complexity helping with? Prevent UB in the libfdt calls?\n\nIf you do believe that this validation is helpful, then it should be implemented properly as you\u0027re missing some rules (quoting from the DTSpec):\n\n\u003e The `node-name` component [...] shall be 1 to 31 characters in length [...]\n\n\u003e The `node-name` shall start with a lower or uppercase character [...]\n\nand the `@`, if present, must be unique and can\u0027t be at the end\n\n\u003e Each node [...] is named [...] `node-name@unit-address`\n\nFurthermore (more complicated to check than just parsing the string)\n\n\u003e The `unit-address` must match the first address specified in the `reg` property\nof the node. If the node has no `reg` property, the `@unit-address` must be omitted\n\nand (even harder to validate)\n\n\u003e The binding for a particular bus may specify additional, more specific\nrequirements for the format of [...] the `unit-address`.\n\n\u003e The `node-name` [...] should describe the general class of device.\n\n(last one\u0027s a joke)\n\nSame for properties:\n\n\u003e Property names are strings of 1 to 31 characters [...]\n\n\u003e Nonstandard property names should specify a unique string prefix [...]\n\nAnd what about validating the _values_ of the properties?\n\nSo instead of having some half-baked validation, I\u0027d recommend we trust the kernel and just take the tree format for granted i.e. remove these checks; WDYT?",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 1
+      },
+      "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bb861cef_504abae5",
         "filename": "virtualizationmanager/fsfdt/src/lib.rs",
         "patchSetId": 4
@@ -303,6 +374,29 @@
         "startChar": 0,
         "endLine": 47,
         "endChar": 91
+      },
+      "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9c4e9f8_f85498e0",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-25T21:04:31Z",
+      "side": 1,
+      "message": "nit: `fs_root`?",
+      "range": {
+        "startLine": 48,
+        "startChar": 17,
+        "endLine": 48,
+        "endChar": 25
       },
       "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -333,6 +427,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef1f35a0_ee132ce9",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-25T21:04:31Z",
+      "side": 1,
+      "message": "Doesn\u0027t this stack have the invariant that it will always contain entries of the form\n```\n(Path(\"/path/to/device-tree/a/b/c\"), CString(\"/a/b/c\"))\n```\n?\n\nIf I\u0027m not mistaken, it would be simpler for your code to only deal with `Path`s and only create `CString`s when calling into `libfdt`. The `stack` would only contain simple `Path` entries instead of pairs i.e.\n```\nwhile let Some(path) \u003d stack.pop() {\n```\nand you\u0027d get the DT path from the FS path:\n```\n    let fdt_path \u003d path.strip_prefix(\u0026fs_root)...?;\n    let fdt_path \u003d CString::new(fdt_path.as_os_str().as_bytes())...?;\n    let mut node \u003d fdt.node_mut(\u0026fdt_path)...?;\n```\nwhile the entries are (obv) at the FS path:\n```\n    let entries \u003d fs::read_dir(\u0026path)...?;\n```\nthen, you can use the path as-is when parsing the entries:\n```\n        if entry_type.is_dir() {\n            // Validate entry.name() here, if you believe that\u0027s necessary.\n            stack.push(entry.path());\n        } else if entry_type.is_file() {\n            let name \u003d CString::new(entry.name().as_bytes())...?;\n            // Validate name here, if you believe that\u0027s necessary.\n            let value \u003d fs::read(\u0026entry.path())?;\n            node.setprop(\u0026name, \u0026value)...?;\n        } else { ... }\n```\n\n(same comment for your test)",
+      "range": {
+        "startLine": 53,
+        "startChar": 12,
+        "endLine": 53,
+        "endChar": 17
+      },
+      "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9d7ecb04_5dfe533b",
         "filename": "virtualizationmanager/fsfdt/src/lib.rs",
         "patchSetId": 4
@@ -349,6 +466,76 @@
         "startChar": 0,
         "endLine": 104,
         "endChar": 49
+      },
+      "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e888cc1_2c55f77f",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-25T21:04:31Z",
+      "side": 1,
+      "message": "+1 but the only way for this to work would be to take a `\u0026mut Fdt` parameter (i.e. create the DT in the caller), AFAICT?",
+      "parentUuid": "9d7ecb04_5dfe533b",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 49
+      },
+      "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d0dfbe5_fd51df5d",
+        "filename": "virtualizationmanager/fsfdt/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-25T21:04:31Z",
+      "side": 1,
+      "message": "IMO, CLI users shouldn\u0027t have to deal with these kinds of implementation details. Just use a large buffer (say 2MiB) and be done with it?",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 24
+      },
+      "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8f8156c_8e499d8c",
+        "filename": "virtualizationmanager/fsfdt/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-25T21:04:31Z",
+      "side": 1,
+      "message": "OOC, is this better than\n```\nfsfdt::fs_to_fdt(...).unwrap()\n```\n?",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 5
       },
       "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
