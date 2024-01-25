@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "df069fe3_c78bfcf8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-01-25T15:35:53Z",
+      "side": 1,
+      "message": "Note that (from the [kernel docs](https://www.kernel.org/doc/Documentation/ABI/testing/sysfs-firmware-ofw)):\n\u003e Userspace must not use the `/sys/firmware/devicetree/base` path directly, but instead should follow `/proc/device-tree` symlink. It is possible that the absolute path will change in the future, but the symlink is the stable ABI.",
+      "parentUuid": "c255717d_fd5742c1",
+      "range": {
+        "startLine": 12,
+        "startChar": 63,
+        "endLine": 13,
+        "endChar": 40
+      },
+      "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b39ebb82_cccbeab7",
         "filename": "/COMMIT_MSG",
         "patchSetId": 4
