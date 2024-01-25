@@ -260,6 +260,98 @@
       },
       "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "739580b0_fc264d79",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-25T17:55:57Z",
+      "side": 1,
+      "message": "prop",
+      "range": {
+        "startLine": 43,
+        "startChar": 41,
+        "endLine": 43,
+        "endChar": 45
+      },
+      "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb861cef_504abae5",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-25T17:55:57Z",
+      "side": 1,
+      "message": "I think this could do with a more explanatory comment.\nA link to the kernel docs would be a good start.\nThat FS is immutable, so the second part is fine, but I guess we should make it clear that pointing this at some other bit of the filesystem is a bad idea",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 91
+      },
+      "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f4705e6_87332aea",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-25T17:55:57Z",
+      "side": 1,
+      "message": "Explain what this is for? Or at least mention \"traversal\" somewhere.",
+      "range": {
+        "startLine": 53,
+        "startChar": 12,
+        "endLine": 53,
+        "endChar": 17
+      },
+      "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d7ecb04_5dfe533b",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-25T17:55:57Z",
+      "side": 1,
+      "message": "Nit: I\u0027d expect this function to return `fdt`, and then the caller to write to a file if that\u0027s what\u0027s desired.",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 49
+      },
+      "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
