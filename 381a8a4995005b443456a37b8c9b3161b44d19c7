@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ac2388e_64688b92",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-01-25T16:13:39Z",
+      "side": 1,
+      "message": "I\u0027ll file an issue and handle after some check -- Jiyong once told me to use `/sys/firwmare` and not `/proc/devicetree`. The doc is from ofw, but there might be Android magic.",
+      "parentUuid": "d061ce88_c4984342",
+      "range": {
+        "startLine": 12,
+        "startChar": 63,
+        "endLine": 13,
+        "endChar": 40
+      },
+      "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b39ebb82_cccbeab7",
@@ -133,6 +157,30 @@
       "side": 1,
       "message": "FYI, looks like `dt_from_fs` and `dt_to_blob` exists in `dtc.h`, which matches with `-I fs` and `-O dtb` respectively.",
       "parentUuid": "5f83fd60_b802dc7a",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 13
+      },
+      "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3420ab42_354da702",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-01-25T16:13:39Z",
+      "side": 1,
+      "message": "Let me keep this implementation after some investigations.\n\n- Didn\u0027t create `libdtc`. `dtc.c` dies (i.e. `exit(1)` by calling `die()` internally) when something goes wrong, but we probably don\u0027t want it.\n- Didn\u0027t use `dtc` binary directly. I didn\u0027t want to put extra binary in apex.\n\nSo let me keep my handwritten CL. PTAL, and tell me if you prefer `dtc` binary approach.",
+      "parentUuid": "8a164f0e_ec094d2a",
       "range": {
         "startLine": 16,
         "startChar": 0,
