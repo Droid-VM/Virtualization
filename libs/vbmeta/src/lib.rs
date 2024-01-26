@@ -15,20 +15,17 @@
 //! A library to verify and parse VBMeta images.
 
 mod descriptor;
+mod ops;
 
-use avb_bindgen::{
-    avb_footer_validate_and_byteswap, avb_vbmeta_image_header_to_host_byte_order,
-    avb_vbmeta_image_verify, AvbAlgorithmType, AvbFooter, AvbVBMetaImageHeader,
-    AvbVBMetaVerifyResult,
+use crate::ops::Ops;
+use avb::{
+    slot_verify, Descriptor, DescriptorError, HashtreeErrorMode, SlotVerifyData, SlotVerifyError,
+    SlotVerifyFlags,
 };
 use std::fs::File;
-use std::io::{self, Read, Seek, SeekFrom};
-use std::mem::{size_of, transmute, MaybeUninit};
+use std::io::{self, Read, Seek};
 use std::path::Path;
-use std::ptr::null_mut;
 use thiserror::Error;
-
-pub use crate::descriptor::{Descriptor, Descriptors};
 
 /// Errors from parsing a VBMeta image.
 #[derive(Debug, Error)]
@@ -62,12 +59,46 @@ pub enum VbMetaImageVerificationError {
     /// The VBMeta image signature did not validate.
     #[error("Signature mismatch")]
     SignatureMismatch,
+    /// Couldn't find a VBMeta image in the provided data.
+    #[error("Failed to locate VBMeta image")]
+    MissingVbMetaImage,
+}
+
+/// The libavb errors don't map exactly to our library errors; it may be worth considering
+/// just returning libavb errors directly instead.
+impl<'a> From<SlotVerifyError<'a>> for VbMetaImageVerificationError {
+    fn from(error: SlotVerifyError<'a>) -> Self {
+        match error {
+            SlotVerifyError::InvalidArgument => {
+                VbMetaImageParseError::Io(io::Error::from(io::ErrorKind::InvalidInput)).into()
+            }
+            // TODO: the rest of these, and make IO error conversion easier.
+
+            //     SlotVerifyError::InvalidMetadata => VbMetaImageParseError::InvalidHeader.into(),
+            //     SlotVerifyError::Io => VbMetaImageParseError::Io.into(),
+            // Oom,
+            // PublicKeyRejected,
+            // RollbackIndex,
+            // UnsupportedVersion,
+            // Verification(Option<SlotVerifyData<'a>>),
+            // Internal,
+            _ => Self::HashMismatch,
+        }
+    }
+}
+
+// TODO: consider returning `DescriptorError` directly.
+impl From<DescriptorError> for VbMetaImageParseError {
+    fn from(_: DescriptorError) -> Self {
+        // We don't care about the fine-grained descriptor error.
+        Self::InvalidDescriptor
+    }
 }
 
 /// A VBMeta Image.
 pub struct VbMetaImage {
-    header: AvbVBMetaImageHeader,
-    data: Box<[u8]>,
+    verify_data: SlotVerifyData<'static>,
+    public_key: Vec<u8>,
 }
 
 impl VbMetaImage {
@@ -80,117 +111,87 @@ impl VbMetaImage {
 
     /// Load and verify a VBMeta image from a region within a reader.
     pub fn verify_reader_region<R: Read + Seek>(
-        mut image: R,
+        image: R,
         offset: u64,
         size: u64,
     ) -> Result<Self, VbMetaImageVerificationError> {
-        // Check for a footer in the image or assume it's an entire VBMeta image.
-        image.seek(SeekFrom::Start(offset + size)).map_err(VbMetaImageParseError::Io)?;
-        let (vbmeta_offset, vbmeta_size) = match read_avb_footer(&mut image) {
-            Ok(footer) => {
-                if footer.vbmeta_offset > size || footer.vbmeta_size > size - footer.vbmeta_offset {
-                    return Err(VbMetaImageParseError::InvalidFooter.into());
-                }
-                (footer.vbmeta_offset, footer.vbmeta_size)
-            }
-            Err(VbMetaImageParseError::InvalidFooter) => (0, size),
-            Err(e) => {
-                return Err(e.into());
-            }
-        };
-        image.seek(SeekFrom::Start(offset + vbmeta_offset)).map_err(VbMetaImageParseError::Io)?;
-        // Verify the image before examining it to check the size.
-        let mut data = vec![0u8; vbmeta_size as usize];
-        image.read_exact(&mut data).map_err(VbMetaImageParseError::Io)?;
-        verify_vbmeta_image(&data)?;
-        // SAFETY: the image has been verified so we know there is a valid header at the start.
-        let header = unsafe {
-            let mut header = MaybeUninit::uninit();
-            let src = data.as_ptr() as *const _ as *const AvbVBMetaImageHeader;
-            avb_vbmeta_image_header_to_host_byte_order(src, header.as_mut_ptr());
-            header.assume_init()
-        };
-        // Calculate the true size of the verified image data.
-        let vbmeta_size = (size_of::<AvbVBMetaImageHeader>() as u64)
-            + header.authentication_data_block_size
-            + header.auxiliary_data_block_size;
-        data.truncate(vbmeta_size as usize);
-        Ok(Self { header, data: data.into_boxed_slice() })
+        // Use libavb `slot_verify()` to read and verify the vbmeta blob in `image`. We don't
+        // have any actual partitions to validate but we can pass an empty partition list to
+        // just process the vbmeta data.
+        let mut ops = Ops { image, offset, size, public_key: Default::default() };
+        let verify_data = slot_verify(
+            &mut ops,
+            &[],  // requested_partitions
+            None, // ab_suffix
+            SlotVerifyFlags::AVB_SLOT_VERIFY_FLAGS_NONE,
+            HashtreeErrorMode::AVB_HASHTREE_ERROR_MODE_EIO,
+        )?;
+
+        // This library expects exactly one vbmeta blob in `image`.
+        if verify_data.vbmeta_data().len() != 1 {
+            return Err(VbMetaImageVerificationError::MissingVbMetaImage);
+        }
+
+        Ok(Self { verify_data, public_key: ops.public_key })
     }
 
     /// Get the public key that verified the VBMeta image. If the image was not signed, there
     /// is no such public key.
     pub fn public_key(&self) -> Option<&[u8]> {
-        if self.header.algorithm_type == AvbAlgorithmType::AVB_ALGORITHM_TYPE_NONE as u32 {
+        if self.public_key.is_empty() {
             return None;
         }
-        let begin = size_of::<AvbVBMetaImageHeader>()
-            + self.header.authentication_data_block_size as usize
-            + self.header.public_key_offset as usize;
-        let end = begin + self.header.public_key_size as usize;
-        Some(&self.data[begin..end])
-    }
-
-    /// Get the hash of the verified data in the VBMeta image from the authentication block. If the
-    /// image was not signed, there might not be a hash and, if there is, it's not known to be
-    /// correct.
-    pub fn hash(&self) -> Option<&[u8]> {
-        if self.header.algorithm_type == AvbAlgorithmType::AVB_ALGORITHM_TYPE_NONE as u32 {
-            return None;
-        }
-        let begin = size_of::<AvbVBMetaImageHeader>() + self.header.hash_offset as usize;
-        let end = begin + self.header.hash_size as usize;
-        Some(&self.data[begin..end])
+        Some(&self.public_key)
     }
 
     /// Get the descriptors of the VBMeta image.
-    pub fn descriptors(&self) -> Result<Descriptors<'_>, VbMetaImageParseError> {
-        Descriptors::from_image(&self.data)
+    pub fn descriptors(&self) -> Result<Vec<Descriptor>, VbMetaImageParseError> {
+        Ok(self.verify_data.vbmeta_data()[0].descriptors()?)
     }
 
     /// Get the raw VBMeta image.
     pub fn data(&self) -> &[u8] {
-        &self.data
+        self.verify_data.vbmeta_data()[0].data()
     }
 }
 
-/// Verify the data as a VBMeta image, translating errors that arise.
-fn verify_vbmeta_image(data: &[u8]) -> Result<(), VbMetaImageVerificationError> {
-    // SAFETY: the function only reads from the provided data and the NULL pointers disable the
-    // output arguments.
-    let res = unsafe { avb_vbmeta_image_verify(data.as_ptr(), data.len(), null_mut(), null_mut()) };
-    match res {
-        AvbVBMetaVerifyResult::AVB_VBMETA_VERIFY_RESULT_OK
-        | AvbVBMetaVerifyResult::AVB_VBMETA_VERIFY_RESULT_OK_NOT_SIGNED => Ok(()),
-        AvbVBMetaVerifyResult::AVB_VBMETA_VERIFY_RESULT_INVALID_VBMETA_HEADER => {
-            Err(VbMetaImageParseError::InvalidHeader.into())
-        }
-        AvbVBMetaVerifyResult::AVB_VBMETA_VERIFY_RESULT_UNSUPPORTED_VERSION => {
-            Err(VbMetaImageParseError::UnsupportedVersion.into())
-        }
-        AvbVBMetaVerifyResult::AVB_VBMETA_VERIFY_RESULT_HASH_MISMATCH => {
-            Err(VbMetaImageVerificationError::HashMismatch)
-        }
-        AvbVBMetaVerifyResult::AVB_VBMETA_VERIFY_RESULT_SIGNATURE_MISMATCH => {
-            Err(VbMetaImageVerificationError::SignatureMismatch)
-        }
-    }
-}
+// /// Verify the data as a VBMeta image, translating errors that arise.
+// fn verify_vbmeta_image(data: &[u8]) -> Result<(), VbMetaImageVerificationError> {
+//     // SAFETY: the function only reads from the provided data and the NULL pointers disable the
+//     // output arguments.
+//     let res = unsafe { avb_vbmeta_image_verify(data.as_ptr(), data.len(), null_mut(), null_mut())
+// };     match res {
+//         AvbVBMetaVerifyResult::AVB_VBMETA_VERIFY_RESULT_OK
+//         | AvbVBMetaVerifyResult::AVB_VBMETA_VERIFY_RESULT_OK_NOT_SIGNED => Ok(()),
+//         AvbVBMetaVerifyResult::AVB_VBMETA_VERIFY_RESULT_INVALID_VBMETA_HEADER => {
+//             Err(VbMetaImageParseError::InvalidHeader.into())
+//         }
+//         AvbVBMetaVerifyResult::AVB_VBMETA_VERIFY_RESULT_UNSUPPORTED_VERSION => {
+//             Err(VbMetaImageParseError::UnsupportedVersion.into())
+//         }
+//         AvbVBMetaVerifyResult::AVB_VBMETA_VERIFY_RESULT_HASH_MISMATCH => {
+//             Err(VbMetaImageVerificationError::HashMismatch)
+//         }
+//         AvbVBMetaVerifyResult::AVB_VBMETA_VERIFY_RESULT_SIGNATURE_MISMATCH => {
+//             Err(VbMetaImageVerificationError::SignatureMismatch)
+//         }
+//     }
+// }
 
-/// Read the AVB footer, if present, given a reader that's positioned at the end of the image.
-fn read_avb_footer<R: Read + Seek>(image: &mut R) -> Result<AvbFooter, VbMetaImageParseError> {
-    image.seek(SeekFrom::Current(-(size_of::<AvbFooter>() as i64)))?;
-    let mut raw_footer = [0u8; size_of::<AvbFooter>()];
-    image.read_exact(&mut raw_footer)?;
-    // SAFETY: the slice is the same size as the struct which only contains simple data types.
-    let mut footer = unsafe { transmute::<[u8; size_of::<AvbFooter>()], AvbFooter>(raw_footer) };
-    // SAFETY: the function updates the struct in-place.
-    if unsafe { avb_footer_validate_and_byteswap(&footer, &mut footer) } {
-        Ok(footer)
-    } else {
-        Err(VbMetaImageParseError::InvalidFooter)
-    }
-}
+// /// Read the AVB footer, if present, given a reader that's positioned at the end of the image.
+// fn read_avb_footer<R: Read + Seek>(image: &mut R) -> Result<AvbFooter, VbMetaImageParseError> {
+//     image.seek(SeekFrom::Current(-(size_of::<AvbFooter>() as i64)))?;
+//     let mut raw_footer = [0u8; size_of::<AvbFooter>()];
+//     image.read_exact(&mut raw_footer)?;
+//     // SAFETY: the slice is the same size as the struct which only contains simple data types.
+//     let mut footer = unsafe { transmute::<[u8; size_of::<AvbFooter>()], AvbFooter>(raw_footer) };
+//     // SAFETY: the function updates the struct in-place.
+//     if unsafe { avb_footer_validate_and_byteswap(&footer, &mut footer) } {
+//         Ok(footer)
+//     } else {
+//         Err(VbMetaImageParseError::InvalidFooter)
+//     }
+// }
 
 #[cfg(test)]
 mod tests {
