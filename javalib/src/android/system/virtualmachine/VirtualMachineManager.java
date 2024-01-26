@@ -110,7 +110,12 @@ public class VirtualMachineManager {
     @Retention(RetentionPolicy.SOURCE)
     @StringDef(
             prefix = "FEATURE_",
-            value = {FEATURE_DICE_CHANGES, FEATURE_MULTI_TENANT, FEATURE_VENDOR_MODULES})
+            value = {
+                FEATURE_DICE_CHANGES,
+                FEATURE_MULTI_TENANT,
+                FEATURE_VENDOR_MODULES,
+                FEATURE_VIRT_CPUFREQ
+            })
     public @interface Features {}
 
     /**
@@ -136,6 +141,14 @@ public class VirtualMachineManager {
     @TestApi
     public static final String FEATURE_VENDOR_MODULES =
             IVirtualizationService.FEATURE_VENDOR_MODULES;
+
+    /**
+     * Feature to allow virtual cpufreq in Microdroid.
+     *
+     * @hide
+     */
+    @TestApi
+    public static final String FEATURE_VIRT_CPUFREQ = IVirtualizationService.FEATURE_VIRT_CPUFREQ;
 
     /**
      * Returns a set of flags indicating what this implementation of virtualization is capable of.
