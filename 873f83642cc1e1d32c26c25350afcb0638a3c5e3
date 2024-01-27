@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5f79ec1_2e5953bb",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-01-27T01:27:23Z",
+      "side": 1,
+      "message": "I don\u0027t expect there to be a CTS test for this particular functionality as it\u0027s mostly an optimization for performance. I removed the Test related API stubs.",
+      "parentUuid": "be6b04db_eb38b81c",
+      "range": {
+        "startLine": 151,
+        "startChar": 3,
+        "endLine": 151,
+        "endChar": 98
+      },
+      "revId": "873f83642cc1e1d32c26c25350afcb0638a3c5e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "edcd69cf_31f46ec0",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-01-26T11:03:19Z",
       "side": 1,
       "message": "We can delete this TODO now",
+      "range": {
+        "startLine": 813,
+        "startChar": 11,
+        "endLine": 813,
+        "endChar": 28
+      },
+      "revId": "873f83642cc1e1d32c26c25350afcb0638a3c5e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea58aa55_1acacca1",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-01-27T01:27:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edcd69cf_31f46ec0",
       "range": {
         "startLine": 813,
         "startChar": 11,
