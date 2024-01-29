@@ -406,6 +406,22 @@ fn node_mut_delete_and_next_node() {
     let mut data = fs::read(TEST_TREE_PHANDLE_PATH).unwrap();
     let fdt = Fdt::from_mut_slice(&mut data).unwrap();
 
+    let deleted_path_and_expected_next_nodes = vec![
+        ((cstr!("/node_a"), 1), (cstr!("node_b"), 1)),
+        ((cstr!("/node_z/node_zz"), 2), (cstr!("__symbols__"), 1)),
+    ];
+
+    for ((path, path_depth), (name, depth)) in deleted_path_and_expected_next_nodes {
+        let node = fdt.node_mut(path).unwrap().unwrap();
+        let (next_node, next_depth) = node.delete_and_next_node(path_depth).unwrap().unwrap();
+        assert_eq!(
+            (next_node.as_node().name(), next_depth),
+            (Ok(name), depth),
+            "Deleted node: {}",
+            path.to_str().unwrap(),
+        );
+    }
+
     let expected_nodes = vec![
         (Ok(cstr!("node_b")), 1),
         (Ok(cstr!("node_c")), 1),
@@ -414,22 +430,6 @@ fn node_mut_delete_and_next_node() {
         (Ok(cstr!("node_zb")), 2),
         (Ok(cstr!("__symbols__")), 1),
     ];
-
-    let mut expected_nodes_iter = expected_nodes.iter();
-    let mut iter = fdt.root_mut().unwrap().next_node(0).unwrap();
-    while let Some((node, depth)) = iter {
-        let node_name = node.as_node().name();
-        if node_name == Ok(cstr!("node_a")) || node_name == Ok(cstr!("node_zz")) {
-            iter = node.delete_and_next_node(depth).unwrap();
-        } else {
-            // Note: Checking name here is easier than collecting names and assert_eq!(),
-            //       because we can't keep name references while iterating with FdtNodeMut.
-            let expected_node = expected_nodes_iter.next();
-            assert_eq!(expected_node, Some(&(node_name, depth)));
-            iter = node.next_node(depth).unwrap();
-        }
-    }
-    assert_eq!(None, expected_nodes_iter.next());
 
     let root = fdt.root().unwrap();
     let all_descendants: Vec<_> =

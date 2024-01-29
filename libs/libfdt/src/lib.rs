@@ -834,13 +834,6 @@ impl<'a> FdtNodeMut<'a> {
         Ok(fdt_err_or_option(ret)?.map(|offset| (offset, next_depth)))
     }
 
-    /// Returns the next node
-    pub fn next_node(self, depth: usize) -> Result<Option<(Self, usize)>> {
-        Ok(self
-            .next_node_offset(depth)?
-            .map(|(offset, next_depth)| (FdtNodeMut { fdt: self.fdt, offset }, next_depth)))
-    }
-
     /// Deletes this and returns the next node
     pub fn delete_and_next_node(mut self, depth: usize) -> Result<Option<(Self, usize)>> {
         // Skip all would-be-removed descendants.
