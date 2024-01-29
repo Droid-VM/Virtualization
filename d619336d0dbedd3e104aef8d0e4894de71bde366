@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a580a17_1e63e48c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-01-29T19:38:00Z",
+      "side": 1,
+      "message": "I reworked test validation and here\u0027s details about it.\n\nNew patchset tests my code with `dtc` and `dtdiff` to reinvent wheels less.\n\nHowever, `dtdiff` is only available on host (because it requires `bash`) and `libfdt` is only available on device (because of `libzerocopy`, ..). So I build `FDT` on device and compare it by pulling it. Rust host test wasn\u0027t a good fit because Rust not yet supports communicating between host and device at this moment.",
+      "revId": "d619336d0dbedd3e104aef8d0e4894de71bde366",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
