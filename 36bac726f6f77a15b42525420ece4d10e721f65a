@@ -1,6 +1,69 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "188f338c_3b7eb824",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-29T09:26:32Z",
+      "side": 1,
+      "message": "Thank you for the refactoring! Mostly LGTM % comments",
+      "revId": "36bac726f6f77a15b42525420ece4d10e721f65a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7182fb4f_ea882b39",
+        "filename": "pvmfw/avb/src/error.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-29T09:26:32Z",
+      "side": 1,
+      "message": "This looks like the `DescriptorError` is silenced here, and it can be inconvenient for debugging. Can we either add a log here to print the `DescriptorError` or add another error something like `DescriptorParsingError` wrapping the `DescriptorError`?",
+      "range": {
+        "startLine": 42,
+        "startChar": 8,
+        "endLine": 43,
+        "endChar": 45
+      },
+      "revId": "36bac726f6f77a15b42525420ece4d10e721f65a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "765b41b3_ac9051fa",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-29T09:26:32Z",
+      "side": 1,
+      "message": "It\u0027s fine to change this to `\u0026\u0027a [u8]` here to avoid copy.",
+      "range": {
+        "startLine": 39,
+        "startChar": 23,
+        "endLine": 39,
+        "endChar": 29
+      },
+      "revId": "36bac726f6f77a15b42525420ece4d10e721f65a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2166c85c_381e2c21",
@@ -19,6 +82,53 @@
         "startChar": 0,
         "endLine": 151,
         "endChar": 7
+      },
+      "revId": "36bac726f6f77a15b42525420ece4d10e721f65a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19c679cd_ee1888b6",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-29T09:26:32Z",
+      "side": 1,
+      "message": "I don\u0027t feel it\u0027s really worth the effort. The implementation seems to be pretty complex to \"simplify\" just four lines of code here. I think we can just use the `filter_map` here.",
+      "parentUuid": "2166c85c_381e2c21",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 7
+      },
+      "revId": "36bac726f6f77a15b42525420ece4d10e721f65a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "349cf484_9233e295",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-01-29T09:26:32Z",
+      "side": 1,
+      "message": "Can we avoid the copy of the digest here? As this code runs in a bare-metal environment with limited resources. We would like to avoid any unnecessary copys.",
+      "range": {
+        "startLine": 274,
+        "startChar": 27,
+        "endLine": 274,
+        "endChar": 38
       },
       "revId": "36bac726f6f77a15b42525420ece4d10e721f65a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
