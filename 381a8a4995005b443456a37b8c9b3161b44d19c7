@@ -666,6 +666,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c479c69d_8c03d245",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-30T16:44:26Z",
+      "side": 1,
+      "message": "Bytes !\u003d UTF8. You can get bytes out of an OsStr too (well, on Unix: https://doc.rust-lang.org/std/os/unix/ffi/trait.OsStrExt.html#tymethod.as_bytes).\nGoing via \u0026str will fail for invalid UTF8 (even though they are valid file names), which OsStr avoids.",
+      "parentUuid": "594cda7f_7b93fe84",
+      "range": {
+        "startLine": 53,
+        "startChar": 12,
+        "endLine": 53,
+        "endChar": 17
+      },
+      "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9d7ecb04_5dfe533b",
         "filename": "virtualizationmanager/fsfdt/src/lib.rs",
         "patchSetId": 4
@@ -797,6 +821,30 @@
       "side": 1,
       "message": "Changed interface a bit by adding a new trait and implement for `Fdt`.\n\nPTAL.",
       "parentUuid": "ae6828f7_6e4ab734",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 49
+      },
+      "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b459333_717cff59",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-30T16:44:26Z",
+      "side": 1,
+      "message": "That\u0027s very neat.",
+      "parentUuid": "7ed7a411_9d93e669",
       "range": {
         "startLine": 103,
         "startChar": 0,

@@ -148,6 +148,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e0af46b_a9f012eb",
+        "filename": "virtualizationmanager/TEST_MAPPING",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-30T16:44:26Z",
+      "side": 1,
+      "message": "Presubmit is better for anything lightweight.\nFinding out there\u0027s a problem after submitting \u0026 reverting is much worse than knowing in advance.",
+      "parentUuid": "3c5ce3c8_c40eb574",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 5
+      },
+      "revId": "c20a1ac1d3c82035bd58312c019171886d656a17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80174432_df753e35",
@@ -373,6 +397,30 @@
       "side": 1,
       "message": "We can\u0027t.\n\n\u0027Anyhow works with any error type that has an impl of `std::error::Error`\u0027 [1], but `FdtError` isn\u0027t. `libfdt` is supported on `nostd` environment so, we need handwritten conversion.\n\nAlternatively, I can `impl std::error::Error for FdtError` here, but I wasn\u0027t motivated much.\n\n[1]: https://docs.rs/anyhow/latest/anyhow/index.html",
       "parentUuid": "50cb7c49_9ce21712",
+      "range": {
+        "startLine": 47,
+        "startChar": 10,
+        "endLine": 47,
+        "endChar": 68
+      },
+      "revId": "c20a1ac1d3c82035bd58312c019171886d656a17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2ac7a2a_fa7b26f5",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-30T16:44:26Z",
+      "side": 1,
+      "message": "Ahhhh, I see. I\u0027m used to it working on almost everything.\n\n\u003e impl std::error::Error for FdtError\n\nI don\u0027t think you can, since you don\u0027t own either. NM.",
+      "parentUuid": "381115b5_fb55b833",
       "range": {
         "startLine": 47,
         "startChar": 10,
