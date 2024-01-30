@@ -16,6 +16,231 @@
       "message": "Dear all,\n\nThis CL adds too much complex for test, and I found that I need similar stuff for other codes. If you don\u0027t mind, can I remove test code in this CL and add test later? This blocks others work, and I\u0027d like to spend couple of more days for having fancy test. Thoughts?",
       "revId": "c20a1ac1d3c82035bd58312c019171886d656a17",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0a560e1_570fd537",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-30T10:44:04Z",
+      "side": 1,
+      "message": "Fine by me.",
+      "parentUuid": "e362f5b5_a966878d",
+      "revId": "c20a1ac1d3c82035bd58312c019171886d656a17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b95c844d_c27584dd",
+        "filename": "virtualizationmanager/TEST_MAPPING",
+        "patchSetId": 6
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-30T10:44:04Z",
+      "side": 1,
+      "message": "Can you send a CL for this?",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 66
+      },
+      "revId": "c20a1ac1d3c82035bd58312c019171886d656a17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "425a0b85_11fdbcd7",
+        "filename": "virtualizationmanager/TEST_MAPPING",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-30T10:44:04Z",
+      "side": 1,
+      "message": "Is the plan to move these to presubmit once they have a history?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 5
+      },
+      "revId": "c20a1ac1d3c82035bd58312c019171886d656a17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80174432_df753e35",
+        "filename": "virtualizationmanager/fsfdt/Android.bp",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-30T10:44:04Z",
+      "side": 1,
+      "message": "Why have a defaults if you only use it once?\nWith a little refactoring you could use this for the common parts of the binary and library.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 1
+      },
+      "revId": "c20a1ac1d3c82035bd58312c019171886d656a17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6d27a97_433807cd",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-30T10:44:04Z",
+      "side": 1,
+      "message": "travels -\u003e traverse, I think.",
+      "range": {
+        "startLine": 35,
+        "startChar": 23,
+        "endLine": 35,
+        "endChar": 30
+      },
+      "revId": "c20a1ac1d3c82035bd58312c019171886d656a17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3475a915_49455766",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-30T10:44:04Z",
+      "side": 1,
+      "message": "Traversing?\nStill seems a little unclear though. \"Path does not have expected prefix\" ?",
+      "range": {
+        "startLine": 39,
+        "startChar": 77,
+        "endLine": 39,
+        "endChar": 86
+      },
+      "revId": "c20a1ac1d3c82035bd58312c019171886d656a17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c254baf_cc5de7fd",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-30T10:44:04Z",
+      "side": 1,
+      "message": "This will panic (in 2 places) if fs_path is sufficiently wrong. Do we want that?",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 22
+      },
+      "revId": "c20a1ac1d3c82035bd58312c019171886d656a17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50cb7c49_9ce21712",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-30T10:44:04Z",
+      "side": 1,
+      "message": ".context(\"...\") (which automatically includes e)",
+      "range": {
+        "startLine": 47,
+        "startChar": 10,
+        "endLine": 47,
+        "endChar": 68
+      },
+      "revId": "c20a1ac1d3c82035bd58312c019171886d656a17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83569105_d3dc02a4",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-30T10:44:04Z",
+      "side": 1,
+      "message": "context() again, and below",
+      "range": {
+        "startLine": 68,
+        "startChar": 25,
+        "endLine": 68,
+        "endChar": 32
+      },
+      "revId": "c20a1ac1d3c82035bd58312c019171886d656a17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73043a5e_01fd2ebc",
+        "filename": "virtualizationmanager/fsfdt/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-30T10:44:04Z",
+      "side": 1,
+      "message": "No?",
+      "range": {
+        "startLine": 15,
+        "startChar": 42,
+        "endLine": 15,
+        "endChar": 58
+      },
+      "revId": "c20a1ac1d3c82035bd58312c019171886d656a17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -618,6 +618,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "889c803c_d23f6e80",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-30T10:44:04Z",
+      "side": 1,
+      "message": "PathBuf is a thin wrapper round OsString (https://doc.rust-lang.org/std/path/index.html); they\u0027re strings that aren\u0027t required to be UTF8.\nAIUI Path* provide OS-independent functions to manipulate the underlying OS-dependent path.\nUsing OsStr instead of \u0026str avoids needlessly rejecting paths that are not valid utf8.",
+      "parentUuid": "b3f7d2c7_a85077ce",
+      "range": {
+        "startLine": 53,
+        "startChar": 12,
+        "endLine": 53,
+        "endChar": 17
+      },
+      "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9d7ecb04_5dfe533b",
         "filename": "virtualizationmanager/fsfdt/src/lib.rs",
         "patchSetId": 4
