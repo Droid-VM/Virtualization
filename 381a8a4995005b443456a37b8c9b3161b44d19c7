@@ -640,6 +640,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "594cda7f_7b93fe84",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-01-30T16:21:05Z",
+      "side": 1,
+      "message": "\u0027Using OsStr instead of \u0026str avoids needlessly rejecting paths that are not valid utf8\u0027 --\u003e I need bytes because of `CStr*`. So let me just stick to `to_str()` -\u003e `as_bytes()` convertions.",
+      "parentUuid": "889c803c_d23f6e80",
+      "range": {
+        "startLine": 53,
+        "startChar": 12,
+        "endLine": 53,
+        "endChar": 17
+      },
+      "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d7ecb04_5dfe533b",
