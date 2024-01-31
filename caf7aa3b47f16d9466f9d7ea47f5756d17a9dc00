@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa87c5fc_371d0313",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-31T16:47:34Z",
+      "side": 1,
+      "message": "Yes indeed. Done.\n(I refactored a bit, because it was getting excessively complex)",
+      "parentUuid": "d67488b5_1edc68b8",
+      "range": {
+        "startLine": 366,
+        "startChar": 12,
+        "endLine": 366,
+        "endChar": 52
+      },
+      "revId": "caf7aa3b47f16d9466f9d7ea47f5756d17a9dc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ddcf70aa_f8ad86e0",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-01-31T11:22:46Z",
       "side": 1,
       "message": "Per our discussion offline. You might also want to add a feature flag check here.",
+      "range": {
+        "startLine": 1301,
+        "startChar": 3,
+        "endLine": 1301,
+        "endChar": 24
+      },
+      "revId": "caf7aa3b47f16d9466f9d7ea47f5756d17a9dc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88e42d8f_5eca433d",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1301,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-31T16:47:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddcf70aa_f8ad86e0",
       "range": {
         "startLine": 1301,
         "startChar": 3,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9798d5a_c7043ab1",
+        "filename": "virtualizationmanager/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-31T16:47:34Z",
+      "side": 1,
+      "message": "Actually, yes.\nWhen I added extra_apk_count to the metadata proto I was expecting the build to fail, since nothing set it. But it didn\u0027t, because of the ..default.\nThe change here is to make sure it does fail if we add more fields, since this code almost certainly needs to be changed in that case.\n(I don\u0027t like mentioning special_fields explicitly, but I couldn\u0027t see any other way to achieve that goal.)",
+      "parentUuid": "f3e86e8a_d6374edf",
+      "range": {
+        "startLine": 198,
+        "startChar": 12,
+        "endLine": 198,
+        "endChar": 26
+      },
+      "revId": "caf7aa3b47f16d9466f9d7ea47f5756d17a9dc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a7b9a43_6919b441",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-01-31T11:22:46Z",
       "side": 1,
       "message": "Should this be guarded by `#[cfg(multi_tenant)]`? For reference you can check how --gki and --devices are handled in the MicrodroidConfig.",
+      "range": {
+        "startLine": 178,
+        "startChar": 3,
+        "endLine": 181,
+        "endChar": 29
+      },
+      "revId": "caf7aa3b47f16d9466f9d7ea47f5756d17a9dc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9dd29d2_7e123013",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-31T16:47:34Z",
+      "side": 1,
+      "message": "Ah, thanks. Done.",
+      "parentUuid": "1a7b9a43_6919b441",
       "range": {
         "startLine": 178,
         "startChar": 3,
