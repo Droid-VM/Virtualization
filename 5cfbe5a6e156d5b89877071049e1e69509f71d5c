@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dc7ad99_0eb431ab",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-01-31T14:24:58Z",
+      "side": 1,
+      "message": "This change is not guarded by the flag, which means that it be released to UDC QPRs. Will it be a no-op on previous platform releases? What if corresponding ABL change will also be release in a UDC QPR?",
+      "range": {
+        "startLine": 395,
+        "startChar": 12,
+        "endLine": 396,
+        "endChar": 48
+      },
+      "revId": "5cfbe5a6e156d5b89877071049e1e69509f71d5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
