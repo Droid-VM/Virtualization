@@ -46,6 +46,30 @@
       },
       "revId": "c8de95b0127ca66cd84fb9a4ce682cf1937145b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9336e3d1_86271be1",
+        "filename": "virtualizationmanager/src/reference_dt.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-01-31T07:22:02Z",
+      "side": 1,
+      "message": "+1, to check if subnode and property is parsed well.\n\nOn the other hand, I think I\u0027ve heard there would be a following change for validating `from_fs`. Personally, I\u0027m fine to resolve this in the following change.",
+      "parentUuid": "295e12ef_dd78a2c9",
+      "range": {
+        "startLine": 57,
+        "startChar": 7,
+        "endLine": 57,
+        "endChar": 45
+      },
+      "revId": "c8de95b0127ca66cd84fb9a4ce682cf1937145b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
