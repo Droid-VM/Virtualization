@@ -688,6 +688,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e9a5681_52da0dee",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-01-31T04:02:31Z",
+      "side": 1,
+      "message": "Done. Conversion via `to_str()` is harmless but not necessary here. Simplified as you recommended.",
+      "parentUuid": "c479c69d_8c03d245",
+      "range": {
+        "startLine": 53,
+        "startChar": 12,
+        "endLine": 53,
+        "endChar": 17
+      },
+      "revId": "381a8a4995005b443456a37b8c9b3161b44d19c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d7ecb04_5dfe533b",
