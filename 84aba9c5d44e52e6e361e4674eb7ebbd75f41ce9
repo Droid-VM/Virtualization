@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4e1fd6f_79340fe2",
+        "filename": "microdroid/payload/metadata.proto",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-31T17:45:06Z",
+      "side": 1,
+      "message": "We can\u0027t trust the host paths anyway. All we have is some virtio disk partitions that claim to be the extra APKs.\nPackage name \u0026 cert we read from the APK file, as the source of truth.",
+      "parentUuid": "782cee9c_d921158e",
+      "range": {
+        "startLine": 78,
+        "startChar": 1,
+        "endLine": 80,
+        "endChar": 29
+      },
+      "revId": "84aba9c5d44e52e6e361e4674eb7ebbd75f41ce9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1bf68cb7_c362aae9",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-01-31T17:36:16Z",
       "side": 1,
       "message": "Will this be useful for `run-microdroid` command? If so, then consider putting it into `MicrodroidConfig` (it is shared between `run-app and run-microdroid` commands)",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 182,
+        "endChar": 29
+      },
+      "revId": "84aba9c5d44e52e6e361e4674eb7ebbd75f41ce9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc8e228b_619c17d8",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-01-31T17:45:06Z",
+      "side": 1,
+      "message": "I don\u0027t think so? run-microdroid runs an idle task IIRC, would there be any benefit in mounting more APKs next to it?",
+      "parentUuid": "1bf68cb7_c362aae9",
       "range": {
         "startLine": 177,
         "startChar": 0,
