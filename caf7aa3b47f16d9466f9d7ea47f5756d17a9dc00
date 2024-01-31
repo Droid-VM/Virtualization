@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d67488b5_1edc68b8",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-01-31T11:22:46Z",
+      "side": 1,
+      "message": "Per our offline discussion. We should probably guard this custom virtual machine permission check",
+      "range": {
+        "startLine": 366,
+        "startChar": 12,
+        "endLine": 366,
+        "endChar": 52
+      },
+      "revId": "caf7aa3b47f16d9466f9d7ea47f5756d17a9dc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddcf70aa_f8ad86e0",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1301,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-01-31T11:22:46Z",
+      "side": 1,
+      "message": "Per our discussion offline. You might also want to add a feature flag check here.",
+      "range": {
+        "startLine": 1301,
+        "startChar": 3,
+        "endLine": 1301,
+        "endChar": 24
+      },
+      "revId": "caf7aa3b47f16d9466f9d7ea47f5756d17a9dc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f3e86e8a_d6374edf",
         "filename": "virtualizationmanager/src/payload.rs",
         "patchSetId": 1
@@ -19,6 +65,29 @@
         "startChar": 12,
         "endLine": 198,
         "endChar": 26
+      },
+      "revId": "caf7aa3b47f16d9466f9d7ea47f5756d17a9dc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a7b9a43_6919b441",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-01-31T11:22:46Z",
+      "side": 1,
+      "message": "Should this be guarded by `#[cfg(multi_tenant)]`? For reference you can check how --gki and --devices are handled in the MicrodroidConfig.",
+      "range": {
+        "startLine": 178,
+        "startChar": 3,
+        "endLine": 181,
+        "endChar": 29
       },
       "revId": "caf7aa3b47f16d9466f9d7ea47f5756d17a9dc00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
