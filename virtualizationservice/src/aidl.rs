@@ -55,6 +55,7 @@ use tombstoned_client::{DebuggerdDumpType, TombstonedConnection};
 use vsock::{VsockListener, VsockStream};
 use nix::unistd::{chown, Uid};
 use openssl::x509::X509;
+use zerocopy::AsBytes;
 
 /// The unique ID of a VM used (together with a port number) for vsock communication.
 pub type Cid = u32;
@@ -255,6 +256,36 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
         let state = &mut *self.state.lock().unwrap();
         let file = state.get_dtbo_file().or_service_specific_exception(-1)?;
         Ok(ParcelFileDescriptor::new(file))
+    }
+
+    fn proxySchedSetAttr(&self) -> binder::Result<ParcelFileDescriptor> {
+        let (mut server_socket, client_socket) = std::os::unix::net::UnixStream::pair()
+            .context("failed to create UnixStream pair")
+            .or_service_specific_exception(-1)?;
+        std::thread::spawn(move || loop {
+            let mut tid = 0u32;
+            match server_socket.read_exact(tid.as_bytes_mut()) {
+                Ok(()) => {}
+                Err(e) => {
+                    if e.kind() != std::io::ErrorKind::UnexpectedEof {
+                        error!("proxySchedSetAttr: failed to read from socket: {e:#}");
+                    }
+                    return;
+                }
+            }
+            let mut sched_util_min = 0u32;
+            match server_socket.read_exact(sched_util_min.as_bytes_mut()) {
+                Ok(()) => {}
+                Err(e) => {
+                    if e.kind() != std::io::ErrorKind::UnexpectedEof {
+                        error!("proxySchedSetAttr: failed to read from socket: {e:#}");
+                    }
+                    return;
+                }
+            }
+            error!("===== got tid={tid} sched_util_min={sched_util_min}");
+        });
+        Ok(ParcelFileDescriptor::new(client_socket))
     }
 }
 
