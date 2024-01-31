@@ -16,6 +16,24 @@
       "message": "The build failure log only includes build tool error, and Java code wasn\u0027t even compiled.\n\nCould you check whether if this revert fixes the issue?",
       "revId": "e85af6f3ecbefa642cbc22b154952b0b86e8e7b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73ad5784_acaa08b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2010568
+      },
+      "writtenOn": "2024-01-31T04:43:47Z",
+      "side": 1,
+      "message": "Hi jaewan,\nI am just investigating the build error and trying to find the culprit CL.\nThis revert CL is used to find if it causing the build error. Until we are 100% sure, none of the revert CL will be submitted.\nThanks",
+      "parentUuid": "9cfaca5a_216d93b1",
+      "revId": "e85af6f3ecbefa642cbc22b154952b0b86e8e7b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
