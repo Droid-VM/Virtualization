@@ -22,6 +22,30 @@
       },
       "revId": "5cfbe5a6e156d5b89877071049e1e69509f71d5c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1aba7495_da4584cd",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-01T04:27:53Z",
+      "side": 1,
+      "message": "It would be no-op because ABL wouldn\u0027t provide relevant device tree (`/proc/device-tree/avf/reference`) and we do no-op here. The relevant check is below (`warn!(\"VM reference DT doesn\u0027t exist\")`)\n\nAnd the ABL change wouldn\u0027t be backported in UDC.\n\nTell me if you prefer explicit flag. I\u0027ll add one.",
+      "parentUuid": "5dc7ad99_0eb431ab",
+      "range": {
+        "startLine": 395,
+        "startChar": 12,
+        "endLine": 396,
+        "endChar": 48
+      },
+      "revId": "5cfbe5a6e156d5b89877071049e1e69509f71d5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
