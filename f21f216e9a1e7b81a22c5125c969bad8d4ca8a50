@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84b9c147_e429faaf",
+        "filename": "virtualizationmanager/src/reference_dt.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-01T06:16:39Z",
+      "side": 1,
+      "message": "Looks like this test fails in the presubmit due to `AlreadyExists`. How about using tempdir or tempfile?\n\nhttps://source.corp.google.com/h/android/platform/superproject/main/+/main:packages/modules/Virtualization/virtualizationmanager/src/aidl.rs;l\u003d1498-1500",
+      "range": {
+        "startLine": 77,
+        "startChar": 8,
+        "endLine": 77,
+        "endChar": 42
+      },
+      "revId": "f21f216e9a1e7b81a22c5125c969bad8d4ca8a50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
