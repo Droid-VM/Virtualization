@@ -49,7 +49,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.zip.ZipFile;
 
@@ -67,7 +69,7 @@ public final class VirtualMachineConfig {
     private static String[] EMPTY_STRING_ARRAY = {};
 
     // These define the schema of the config file persisted on disk.
-    private static final int VERSION = 7;
+    private static final int VERSION = 8;
     private static final String KEY_VERSION = "version";
     private static final String KEY_PACKAGENAME = "packageName";
     private static final String KEY_APKPATH = "apkPath";
@@ -82,6 +84,8 @@ public final class VirtualMachineConfig {
     private static final String KEY_VM_CONSOLE_INPUT_SUPPORTED = "vmConsoleInputSupported";
     private static final String KEY_VENDOR_DISK_IMAGE_PATH = "vendorDiskImagePath";
     private static final String KEY_OS = "os";
+    private static final String KEY_EXTRA_APK_PACKAGE_NAMES = "extraApkPackageNames";
+    private static final String KEY_EXTRA_APK_SPLIT_NAMES = "extraApkSplitNames";
 
     /** @hide */
     @Retention(RetentionPolicy.SOURCE)
@@ -134,11 +138,23 @@ public final class VirtualMachineConfig {
      */
     @SystemApi public static final int CPU_TOPOLOGY_MATCH_HOST = 1;
 
+    static class ExtraApk {
+        final String packageName;
+        @Nullable final String splitName;
+
+        ExtraApk(String packageName, @Nullable String splitName) {
+            this.packageName = requireNonNull(packageName, "packageName must not be null");
+            this.splitName = splitName;
+        }
+    }
+
     /** Name of a package whose primary APK contains the VM payload. */
     @Nullable private final String mPackageName;
 
     /** Absolute path to the APK file containing the VM payload. */
     @Nullable private final String mApkPath;
+
+    final List<ExtraApk> mExtraApks;
 
     @DebugLevel private final int mDebugLevel;
 
@@ -181,6 +197,7 @@ public final class VirtualMachineConfig {
     private VirtualMachineConfig(
             @Nullable String packageName,
             @Nullable String apkPath,
+            List<ExtraApk> extraApks,
             @Nullable String payloadConfigPath,
             @Nullable String payloadBinaryName,
             @DebugLevel int debugLevel,
@@ -195,6 +212,7 @@ public final class VirtualMachineConfig {
         // This is only called from Builder.build(); the builder handles parameter validation.
         mPackageName = packageName;
         mApkPath = apkPath;
+        mExtraApks = extraApks;
         mPayloadConfigPath = payloadConfigPath;
         mPayloadBinaryName = payloadBinaryName;
         mDebugLevel = debugLevel;
@@ -292,6 +310,24 @@ public final class VirtualMachineConfig {
             builder.setOs(os);
         }
 
+        String[] extraApkPackageNames = b.getStringArray(KEY_EXTRA_APK_PACKAGE_NAMES);
+        String[] extraApkSplitNames = b.getStringArray(KEY_EXTRA_APK_SPLIT_NAMES);
+        if (extraApkPackageNames != null && extraApkSplitNames != null) {
+            int count = extraApkPackageNames.length;
+            if (extraApkSplitNames.length != count) {
+                throw new IllegalArgumentException("Invalid extra APK data");
+            }
+            for (int i = 0; i < count; i++) {
+                String extraPackageName = extraApkPackageNames[i];
+                String extraSplitName = extraApkSplitNames[i];
+                if (!extraSplitName.isEmpty()) {
+                    builder.addExtraApk(extraPackageName);
+                } else {
+                    builder.addExtraApk(extraPackageName, extraSplitName);
+                }
+            }
+        }
+
         return builder.build();
     }
 
@@ -331,6 +367,19 @@ public final class VirtualMachineConfig {
             b.putString(KEY_VENDOR_DISK_IMAGE_PATH, mVendorDiskImage.getAbsolutePath());
         }
         b.putString(KEY_OS, mOs);
+        if (!mExtraApks.isEmpty()) {
+            int count = mExtraApks.size();
+            String[] extraApkPackageNames = new String[count];
+            String[] extraApkSplitNames = new String[count];
+            for (int i = 0; i < count; i++) {
+                extraApkPackageNames[i] = mExtraApks.get(i).packageName;
+                // Null in a string array isn't acceptable to the XML serializer.
+                String splitName = mExtraApks.get(i).splitName;
+                extraApkSplitNames[i] = splitName == null ? "" : splitName;
+            }
+            b.putStringArray(KEY_EXTRA_APK_PACKAGE_NAMES, extraApkPackageNames);
+            b.putStringArray(KEY_EXTRA_APK_SPLIT_NAMES, extraApkSplitNames);
+        }
         b.writeToStream(output);
     }
 
@@ -563,6 +612,8 @@ public final class VirtualMachineConfig {
         return vsConfig;
     }
 
+
+
     private String findPayloadApk(PackageManager packageManager) throws VirtualMachineException {
         ApplicationInfo appInfo;
         try {
@@ -623,6 +674,9 @@ public final class VirtualMachineConfig {
 
         @Nullable private final String mPackageName;
         @Nullable private String mApkPath;
+
+        private final List<ExtraApk> mExtraApks = new ArrayList<>();
+
         @Nullable private String mPayloadConfigPath;
         @Nullable private String mPayloadBinaryName;
         @DebugLevel private int mDebugLevel = DEBUG_LEVEL_NONE;
@@ -710,6 +764,7 @@ public final class VirtualMachineConfig {
             return new VirtualMachineConfig(
                     packageName,
                     apkPath,
+                    mExtraApks,
                     mPayloadConfigPath,
                     mPayloadBinaryName,
                     mDebugLevel,
@@ -738,6 +793,35 @@ public final class VirtualMachineConfig {
                 throw new IllegalArgumentException("APK path must be an absolute path");
             }
             mApkPath = apkPath;
+            return this;
+        }
+
+        /**
+         * TODO
+         *
+         * @hide
+         */
+        @TestApi
+        @FlaggedApi("RELEASE_AVF_ENABLE_MULTI_TENANT_MICRODROID_VM")
+        @NonNull
+        public Builder addExtraApk(@NonNull String packageName) {
+            // check package exists? Or do at run() time
+            mExtraApks.add(new ExtraApk(packageName, null));
+            return this;
+        }
+
+        /**
+         * TODO
+         *
+         * @hide
+         */
+        @TestApi
+        @FlaggedApi("RELEASE_AVF_ENABLE_MULTI_TENANT_MICRODROID_VM")
+        @NonNull
+        public Builder addExtraApk(@NonNull String packageName, @NonNull String splitName) {
+            mExtraApks.add(
+                    new ExtraApk(
+                            packageName, requireNonNull(splitName, "splitName must not be null")));
             return this;
         }
 

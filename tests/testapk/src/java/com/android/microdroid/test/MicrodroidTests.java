@@ -931,7 +931,33 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                         vm,
                         (ts, tr) -> {
                             tr.mExtraApkTestProp =
-                                    ts.readProperty("debug.microdroid.test.extra_apk");
+                                    ts.readProperty(
+                                            "debug.microdroid.test.extra_apk_build_manifest");
+                        });
+        assertThat(testResults.mExtraApkTestProp).isEqualTo("PASS");
+    }
+
+    @Test
+    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
+    public void extraApkInVmConfig() throws Exception {
+        assumeSupportedDevice();
+
+        grantPermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
+        VirtualMachineConfig config =
+                newVmConfigBuilderWithPayloadBinary("MicrodroidTestNativeLib.so")
+                        .setMemoryBytes(minMemoryRequired())
+                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .addExtraApk(VM_SHARE_APP_PACKAGE_NAME)
+                        .build();
+        VirtualMachine vm = forceCreateNewVirtualMachine("test_vm_extra_apk", config);
+
+        TestResults testResults =
+                runVmTestService(
+                        TAG,
+                        vm,
+                        (ts, tr) -> {
+                            tr.mExtraApkTestProp =
+                                    ts.readProperty("debug.microdroid.test.extra_apk_vm_share");
                         });
         assertThat(testResults.mExtraApkTestProp).isEqualTo("PASS");
     }
