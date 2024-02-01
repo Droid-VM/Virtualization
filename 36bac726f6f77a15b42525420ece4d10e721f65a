@@ -204,6 +204,30 @@
       },
       "revId": "36bac726f6f77a15b42525420ece4d10e721f65a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30138f28_1aa81250",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1078119
+      },
+      "writtenOn": "2024-02-01T01:36:12Z",
+      "side": 1,
+      "message": "For reference, I think I got it working to split the `Ops` lifetime apart from the preloaded data lifetime: https://r.android.com/2942445.\n\nIt\u0027s more involved than I had hoped and I still need to test it out with pvmfw to make sure it works in practice, but I *think* this will solve a lot of the lifetime awkwardness by separating the `Ops` lifetime from the returned `SlotVerifyData` lifetime.",
+      "parentUuid": "d20af477_8bafcfcd",
+      "range": {
+        "startLine": 274,
+        "startChar": 27,
+        "endLine": 274,
+        "endChar": 38
+      },
+      "revId": "36bac726f6f77a15b42525420ece4d10e721f65a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
