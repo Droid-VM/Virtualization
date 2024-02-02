@@ -786,7 +786,7 @@ impl<'a> FdtNodeMut<'a> {
     }
 
     /// Returns the first subnode of this
-    pub fn first_subnode(&'a mut self) -> Result<Option<Self>> {
+    pub fn first_subnode(self) -> Result<Option<Self>> {
         // SAFETY: Accesses (read-only) are constrained to the DT totalsize.
         let ret = unsafe { libfdt_bindgen::fdt_first_subnode(self.fdt.as_ptr(), self.offset) };
 
