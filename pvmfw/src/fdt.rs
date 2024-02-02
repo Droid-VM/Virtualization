@@ -625,6 +625,89 @@ fn patch_timer(fdt: &mut Fdt, num_cpus: usize) -> libfdt::Result<()> {
     node.setprop_inplace(cstr!("interrupts"), value.as_slice())
 }
 
+fn patch_vcpufreq(fdt: &mut Fdt, num_cpus: usize) -> libfdt::Result<()> {
+    const VCPUFREQ_BASE_ADDR: u64 = 0x1040000;
+    const VCPUFREQ_SIZE: u64 = 0x8;
+
+    let addr = VCPUFREQ_BASE_ADDR;
+    let size: u64 = num_cpus as u64 * VCPUFREQ_SIZE;
+
+    let mut node = fdt
+        .root_mut()?
+        .next_compatible(cstr!("virtual,android-v-only-cpufreq"))?
+        .ok_or(FdtError::NotFound)?;
+    node.setprop_addrrange_inplace(cstr!("reg"), addr, size)?;
+    Ok(())
+}
+
+fn read_opp_info_from(fdt: &Fdt, num_cpus: usize) -> libfdt::Result<BTreeMap<usize, Vec<u64>>> {
+    let mut opps = BTreeMap::new();
+
+    for i in 0..num_cpus {
+        let mut table = Vec::new();
+        for node in fdt.compatible_nodes(cstr!("operating-points-v2"))? {
+            for sub_node in node.subnodes()? {
+                let opp_hz = cstr!("opp-hz");
+                let prop = sub_node.getprop_u64(opp_hz)?.unwrap();
+                table.push(prop);
+            }
+        }
+        opps.insert(i, table.clone());
+    }
+    Ok(opps)
+}
+
+fn patch_subnode_table(subnode: FdtNodeMut, opp_entries: &[u64]) -> libfdt::Result<()> {
+    let mut next_subnode = subnode.next_subnode()?;
+
+    for entry in opp_entries.iter() {
+        next_subnode = if let Some(mut cur_subnode) = next_subnode {
+            cur_subnode.setprop_inplace(cstr!("opp-hz"), &entry.to_be_bytes())?;
+            cur_subnode.next_subnode()?
+        } else {
+            return Err(FdtError::NoSpace);
+        };
+    }
+
+    while let Some(current) = next_subnode {
+        next_subnode = current.delete_and_next_subnode()?;
+    }
+    Ok(())
+}
+
+fn patch_opptables(fdt: &mut Fdt, opptable_info: &BTreeMap<usize, Vec<u64>>) -> libfdt::Result<()> {
+    let opp_compat = cstr!("operating-points-v2");
+
+    for (key, value) in opptable_info.iter() {
+        let mut next = fdt.root_mut()?.next_compatible(opp_compat)?;
+        for _ in 0..*key as i32 {
+            next = if let Some(current) = next {
+                current.next_compatible(opp_compat)?
+            } else {
+                return Err(FdtError::NoSpace);
+            };
+        }
+        if let Some(node) = next {
+            patch_subnode_table(node, value)?;
+        };
+    }
+
+    let mut next = fdt.root_mut()?.next_compatible(opp_compat)?;
+    let (last_key, _) = opptable_info.last_key_value().unwrap();
+    for _ in 0..*last_key as i32 {
+        next = if let Some(current) = next {
+            current.next_compatible(opp_compat)?
+        } else {
+            return Err(FdtError::NoSpace);
+        };
+    }
+    while let Some(current) = next {
+        next = current.delete_and_next_compatible(opp_compat)?;
+    }
+
+    Ok(())
+}
+
 #[derive(Debug)]
 pub struct DeviceTreeInfo {
     pub kernel_range: Option<Range<usize>>,
@@ -637,6 +720,7 @@ pub struct DeviceTreeInfo {
     pub swiotlb_info: SwiotlbInfo,
     device_assignment: Option<DeviceAssignmentInfo>,
     vm_ref_dt_props_info: BTreeMap<CString, Vec<u8>>,
+    opptable_info: BTreeMap<usize, Vec<u64>>,
 }
 
 impl DeviceTreeInfo {
@@ -784,6 +868,11 @@ fn parse_device_tree(fdt: &Fdt, vm_dtbo: Option<&VmDtbo>) -> Result<DeviceTreeIn
         RebootReason::InvalidFdt
     })?;
 
+    let opptable_info = read_opp_info_from(fdt, num_cpus).map_err(|e| {
+        error!("Failed to read opp table info from DT: {e}");
+        RebootReason::InvalidFdt
+    })?;
+
     Ok(DeviceTreeInfo {
         kernel_range,
         initrd_range,
@@ -795,6 +884,7 @@ fn parse_device_tree(fdt: &Fdt, vm_dtbo: Option<&VmDtbo>) -> Result<DeviceTreeIn
         swiotlb_info,
         device_assignment,
         vm_ref_dt_props_info,
+        opptable_info,
     })
 }
 
@@ -847,7 +937,14 @@ fn patch_device_tree(fdt: &mut Fdt, info: &DeviceTreeInfo) -> Result<(), RebootR
             RebootReason::InvalidFdt
         })?;
     }
-
+    patch_vcpufreq(fdt, info.num_cpus).map_err(|e| {
+        error!("Failed to patch vcpufreq info to DT: {e}");
+        RebootReason::InvalidFdt
+    })?;
+    patch_opptables(fdt, &info.opptable_info).map_err(|e| {
+        error!("Failed to patch opptable_info to DT: {e}");
+        RebootReason::InvalidFdt
+    })?;
     Ok(())
 }
 
