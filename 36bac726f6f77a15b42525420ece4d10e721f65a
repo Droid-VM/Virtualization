@@ -228,6 +228,30 @@
       },
       "revId": "36bac726f6f77a15b42525420ece4d10e721f65a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82f569d5_62cbad83",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1078119
+      },
+      "writtenOn": "2024-02-02T20:32:47Z",
+      "side": 1,
+      "message": "Ok, spent a bit more time playing around with it, and I think keeping the copy here is the best solution.\n\nThe reason is that the digests are part of the vbmeta blob which is loaded into heap memory by libavb and now owned by `kernel_verify_result`. So if we want to just return a reference here rather than an array copy, we also have to take ownership of the underlying data so it doesn\u0027t go out of scope, which essentially means hanging onto the entire `kernel_verify_result` ourselves - much larger than just making a copy of the digest.\n\nSplitting lifetimes in the above CL does still make using `Ops` a little simpler though, for example in line 283 below we would no longer need to create a new `Ops` object for the second verification since `kernel_verify_result` wouldn\u0027t borrow the first `ops` anymore.",
+      "parentUuid": "30138f28_1aa81250",
+      "range": {
+        "startLine": 274,
+        "startChar": 27,
+        "endLine": 274,
+        "endChar": 38
+      },
+      "revId": "36bac726f6f77a15b42525420ece4d10e721f65a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
