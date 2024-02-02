@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be097c61_6d561825",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-02T14:23:04Z",
+      "side": 1,
+      "message": "Thanks!\nNit: I don\u0027t think the new system server Java code should go under javalib, that\u0027s for API things which this isn\u0027t.",
+      "revId": "603605a0a3ce3fa3557dab95d452bd89274902b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "20098006_6474037b",
         "filename": "apex/Android.bp",
         "patchSetId": 1
@@ -31,6 +48,30 @@
       "writtenOn": "2024-02-02T13:29:43Z",
       "side": 1,
       "message": "NIT: There is `release_avf_enable_dice_changes` which is relevant too",
+      "range": {
+        "startLine": 43,
+        "startChar": 43,
+        "endLine": 43,
+        "endChar": 44
+      },
+      "revId": "603605a0a3ce3fa3557dab95d452bd89274902b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6188261b_1c0f8dcf",
+        "filename": "apex/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-02T14:23:04Z",
+      "side": 1,
+      "message": "I don\u0027t think that affects anything here? It must be enabled anywhere that either release_avf_enable_remote_attestation or release_avf_enable_llpvm_changes is anyway.",
+      "parentUuid": "20098006_6474037b",
       "range": {
         "startLine": 43,
         "startChar": 43,
