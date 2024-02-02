@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "42db90e7_1fa2dbae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-02T15:11:59Z",
+      "side": 1,
+      "message": "Oh, fine! Although we may have embedded the path to javalib/README.md in a few places.",
+      "parentUuid": "17a420c8_dd894455",
+      "revId": "603605a0a3ce3fa3557dab95d452bd89274902b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "20098006_6474037b",
         "filename": "apex/Android.bp",
         "patchSetId": 1
@@ -114,6 +132,30 @@
       "side": 1,
       "message": "Should we enforce this dependency at build time?",
       "parentUuid": "6188261b_1c0f8dcf",
+      "range": {
+        "startLine": 43,
+        "startChar": 43,
+        "endLine": 43,
+        "endChar": 44
+      },
+      "revId": "603605a0a3ce3fa3557dab95d452bd89274902b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1b8d79b_dabfc5cb",
+        "filename": "apex/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-02T15:11:59Z",
+      "side": 1,
+      "message": "I doubt we\u0027ll get it wrong, but if that\u0027s easy to do it certainly wouldn\u0027t hurt.",
+      "parentUuid": "4c126b2f_d2d3c0e8",
       "range": {
         "startLine": 43,
         "startChar": 43,
