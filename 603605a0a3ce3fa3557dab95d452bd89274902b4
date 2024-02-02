@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "17a420c8_dd894455",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-02-02T15:07:49Z",
+      "side": 1,
+      "message": "I was planning to rename javalib/ into java, and move the API bits under java/framework. This will align with the pattern used in other modules (both updatable \u0026 non-updatable). WDYT?",
+      "parentUuid": "be097c61_6d561825",
+      "revId": "603605a0a3ce3fa3557dab95d452bd89274902b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "20098006_6474037b",
         "filename": "apex/Android.bp",
         "patchSetId": 1
@@ -72,6 +90,30 @@
       "side": 1,
       "message": "I don\u0027t think that affects anything here? It must be enabled anywhere that either release_avf_enable_remote_attestation or release_avf_enable_llpvm_changes is anyway.",
       "parentUuid": "20098006_6474037b",
+      "range": {
+        "startLine": 43,
+        "startChar": 43,
+        "endLine": 43,
+        "endChar": 44
+      },
+      "revId": "603605a0a3ce3fa3557dab95d452bd89274902b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c126b2f_d2d3c0e8",
+        "filename": "apex/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-02-02T15:07:49Z",
+      "side": 1,
+      "message": "Should we enforce this dependency at build time?",
+      "parentUuid": "6188261b_1c0f8dcf",
       "range": {
         "startLine": 43,
         "startChar": 43,
