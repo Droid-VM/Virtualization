@@ -49,7 +49,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.Collections;
 import java.util.Objects;
 import java.util.zip.ZipFile;
 
@@ -520,7 +519,6 @@ public final class VirtualMachineConfig {
             VirtualMachinePayloadConfig payloadConfig = new VirtualMachinePayloadConfig();
             payloadConfig.payloadBinaryName = mPayloadBinaryName;
             payloadConfig.osName = mOs;
-            payloadConfig.extraApks = Collections.emptyList();
             vsConfig.payload =
                     VirtualMachineAppConfig.Payload.payloadConfig(payloadConfig);
         } else {
