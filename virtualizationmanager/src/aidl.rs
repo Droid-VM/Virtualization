@@ -68,9 +68,11 @@ use binder::{
     Status, StatusCode, Strong,
     IntoBinderResult,
 };
+use cstr::cstr;
 use disk::QcowFile;
 use glob::glob;
 use lazy_static::lazy_static;
+use libfdt::Fdt;
 use log::{debug, error, info, warn};
 use microdroid_payload_config::{ApkConfig, OsConfig, Task, TaskType, VmPayloadConfig};
 use nix::unistd::pipe;
@@ -79,6 +81,7 @@ use rustutils::system_properties;
 use semver::VersionReq;
 use std::collections::HashSet;
 use std::convert::TryInto;
+use std::fs;
 use std::ffi::CStr;
 use std::fs::{canonicalize, read_dir, remove_file, File, OpenOptions};
 use std::io::{BufRead, BufReader, Error, ErrorKind, Seek, SeekFrom, Write};
@@ -117,6 +120,9 @@ const UNFORMATTED_STORAGE_MAGIC: &str = "UNFORMATTED-STORAGE";
 
 /// crosvm requires all partitions to be a multiple of 4KiB.
 const PARTITION_GRANULARITY_BYTES: u64 = 4096;
+
+// AVF Nonsecure DTBO, at present, only contains 64 bytes' of Id
+const AVF_NONSECURE_DT_MAX_SIZE: usize = 500;
 
 lazy_static! {
     pub static ref GLOBAL_SERVICE: Strong<dyn IVirtualizationServiceInternal> =
@@ -226,6 +232,11 @@ impl IVirtualizationService for VirtualizationService {
         );
         write_vm_creation_stats(config, is_protected, &ret);
         ret
+    }
+
+    /// Allocate a new Id to the VM
+    fn allocateVmId(&self) -> binder::Result<[u8; 64]> {
+        GLOBAL_SERVICE.allocateVmId()
     }
 
     /// Initialise an empty partition image of the given size to be used as a writable partition.
@@ -383,6 +394,17 @@ impl VirtualizationService {
             warn!("VM reference DT doesn't exist");
         }
 
+        let avf_nonsecure_dtbo = if cfg!(llpvm_changes) {
+            let id = hex::encode(extract_id(config));
+            let avf_dtbo_path = temporary_directory.join("avf_nonsecure.dtbo");
+            Some(
+                avf_nonsecure_dtbo_prop(&avf_dtbo_path, cstr!("id"), id.as_bytes())
+                    .or_service_specific_exception(-1)?,
+            )
+        } else {
+            None
+        };
+
         let debug_level = match config {
             VirtualMachineConfig::AppConfig(config) => config.debugLevel,
             _ => DebugLevel::NONE,
@@ -532,6 +554,7 @@ impl VirtualizationService {
             vfio_devices,
             dtbo,
             reference_dt,
+            avf_nonsecure_dtbo,
         };
         let instance = Arc::new(
             VmInstance::new(
@@ -577,6 +600,30 @@ fn is_custom_config(config: &VirtualMachineConfig) -> bool {
             }
         }
     }
+}
+
+// Create a device tree overlay for node path /avf/nonsecure,
+// The node contains property(name/value) set by Android.
+fn avf_nonsecure_dtbo_prop(fdt_path: &Path, name: &CStr, value: &[u8]) -> Result<File> {
+    let mut data = vec![0_u8; AVF_NONSECURE_DT_MAX_SIZE];
+    let fdt = Fdt::create_empty_tree(&mut data)
+        .map_err(|e| anyhow!("Failed to create an empty DT, {e:?}"))?;
+    let mut root = fdt.root_mut().map_err(anyhow_err)?;
+    let mut fragment_node = root.add_subnode(cstr!("fragment@0")).map_err(anyhow_err)?;
+    fragment_node.setprop(cstr!("target-path"), b"/\0").map_err(anyhow_err)?;
+    let mut node = fragment_node.add_subnode(cstr!("__overlay__")).map_err(anyhow_err)?;
+    let mut node = node.add_subnode(cstr!("avf")).map_err(anyhow_err)?;
+    let mut node = node.add_subnode(cstr!("nonsecure")).map_err(anyhow_err)?;
+    node.setprop(name, value).map_err(anyhow_err)?;
+    fdt.pack().map_err(|e| anyhow!("Failed to pack VM reference DT, {e:?}"))?;
+
+    fs::write(fdt_path, fdt.as_slice())?;
+    Ok(File::open(fdt_path)?)
+}
+
+#[inline]
+fn anyhow_err<E: core::fmt::Debug>(err: E) -> anyhow::Error {
+    anyhow!("{:?}", err)
 }
 
 fn write_zero_filler(zero_filler_path: &Path) -> Result<()> {
@@ -1205,6 +1252,13 @@ fn extract_gdb_port(config: &VirtualMachineConfig) -> Option<NonZeroU16> {
         VirtualMachineConfig::AppConfig(config) => {
             NonZeroU16::new(config.customConfig.as_ref().map(|c| c.gdbPort).unwrap_or(0) as u16)
         }
+    }
+}
+
+fn extract_id(config: &VirtualMachineConfig) -> [u8; 64] {
+    match config {
+        VirtualMachineConfig::RawConfig(config) => config.id,
+        VirtualMachineConfig::AppConfig(config) => config.id,
     }
 }
 
