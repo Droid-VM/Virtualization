@@ -73,6 +73,7 @@ import com.google.common.truth.BooleanSubject;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.function.ThrowingRunnable;
@@ -2132,6 +2133,9 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                 .contains("android.permission.USE_CUSTOM_VIRTUAL_MACHINE permission");
     }
 
+    // TODO(b/323503597): After using VM reference DT, we cannot able to test without validated
+    // vendor image.
+    @Ignore
     @Test
     public void bootsWithVendorPartition() throws Exception {
         assumeSupportedDevice();
@@ -2173,6 +2177,9 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThat(testResults.mMountFlags & expectedFlags).isEqualTo(expectedFlags);
     }
 
+    // TODO(b/323503597): After using VM reference DT, we cannot able to test without validated
+    // vendor image.
+    @Ignore
     @Test
     public void creationFailsWithUnsignedVendorPartition() throws Exception {
         assumeSupportedDevice();
