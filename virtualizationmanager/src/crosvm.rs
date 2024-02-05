@@ -119,6 +119,7 @@ pub struct CrosvmConfig {
     pub vfio_devices: Vec<VfioDevice>,
     pub dtbo: Option<File>,
     pub reference_dt: Option<File>,
+    pub avf_nonsecure_dtbo: Option<File>,
 }
 
 /// A disk image to pass to crosvm for a VM.
@@ -900,6 +901,12 @@ fn run_vm(
         command
             .arg("--device-tree-overlay")
             .arg(add_preserved_fd(&mut preserved_fds, reference_dt));
+    }
+
+    if let Some(avf_nonsecure_dtbo) = &config.avf_nonsecure_dtbo {
+        command
+            .arg("--device-tree-overlay")
+            .arg(add_preserved_fd(&mut preserved_fds, avf_nonsecure_dtbo));
     }
 
     append_platform_devices(&mut command, &mut preserved_fds, &config)?;
