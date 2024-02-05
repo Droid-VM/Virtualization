@@ -41,6 +41,7 @@ use log::debug;
 use log::error;
 use log::info;
 use log::warn;
+use static_assertions::const_assert;
 use tinyvec::ArrayVec;
 use vmbase::fdt::SwiotlbInfo;
 use vmbase::layout::{crosvm::MEM_START, MAX_VIRT_ADDR};
@@ -179,7 +180,7 @@ fn read_num_cpus_from(fdt: &Fdt) -> libfdt::Result<usize> {
 
 /// Validate number of CPUs
 fn validate_num_cpus(num_cpus: usize) -> Result<(), FdtValidationError> {
-    if num_cpus == 0 || DeviceTreeInfo::gic_patched_size(num_cpus).is_none() {
+    if num_cpus == 0 || num_cpus > DeviceTreeInfo::MAX_CPUS {
         Err(FdtValidationError::InvalidCpuCount(num_cpus))
     } else {
         Ok(())
@@ -582,7 +583,8 @@ fn patch_gic(fdt: &mut Fdt, num_cpus: usize) -> libfdt::Result<()> {
     let mut range1 = ranges.next().ok_or(FdtError::NotFound)?;
 
     let addr = range0.addr;
-    // `validate_num_cpus()` checked that this wouldn't panic
+    // `validate_num_cpus()` checked that num_cpus <= DeviceTreeInfo::MAX_CPUS
+    const_assert!(DeviceTreeInfo::gic_patched_size(DeviceTreeInfo::MAX_CPUS).is_some());
     let size = u64::try_from(DeviceTreeInfo::gic_patched_size(num_cpus).unwrap()).unwrap();
 
     // range1 is just below range0
@@ -637,7 +639,9 @@ pub struct DeviceTreeInfo {
 }
 
 impl DeviceTreeInfo {
-    fn gic_patched_size(num_cpus: usize) -> Option<usize> {
+    const MAX_CPUS: usize = 16;
+
+    const fn gic_patched_size(num_cpus: usize) -> Option<usize> {
         const GIC_REDIST_SIZE_PER_CPU: usize = 32 * SIZE_4KB;
 
         GIC_REDIST_SIZE_PER_CPU.checked_mul(num_cpus)
