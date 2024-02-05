@@ -44,7 +44,6 @@ use std::thread::{self, JoinHandle};
 use android_system_virtualizationcommon::aidl::android::system::virtualizationcommon::DeathReason::DeathReason;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
     MemoryTrimLevel::MemoryTrimLevel,
-    VirtualMachineAppConfig::DebugLevel::DebugLevel
 };
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IGlobalVmContext::IGlobalVmContext;
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IBoundDevice::IBoundDevice;
@@ -793,10 +792,7 @@ fn run_vm(
     } else if config.ramdump.is_some() {
         command.arg("--params").arg(format!("crashkernel={RAMDUMP_RESERVED_MIB}M"));
     }
-    if config.debug_config.debug_level == DebugLevel::NONE
-        && config.debug_config.should_prepare_console_output()
-    {
-        // bootconfig.normal will be used, but we need log.
+    if config.debug_config.should_prepare_console_output() {
         command.arg("--params").arg("printk.devkmsg=on");
         command.arg("--params").arg("console=hvc0");
     }

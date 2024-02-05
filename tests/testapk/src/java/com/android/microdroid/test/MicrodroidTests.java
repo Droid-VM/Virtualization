@@ -1746,7 +1746,6 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     @Test
     public void testConsoleInputSupported() throws Exception {
         assumeSupportedDevice();
-        assumeTrue("Not supported on GKI kernels", mGki == null);
 
         VirtualMachineConfig config =
                 newVmConfigBuilderWithPayloadBinary("MicrodroidTestNativeLib.so")
