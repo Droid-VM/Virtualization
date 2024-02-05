@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39d48970_851dbd71",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-05T01:27:57Z",
+      "side": 1,
+      "message": "Please add bit more explanation here.",
+      "range": {
+        "startLine": 9,
+        "startChar": 65,
+        "endLine": 10,
+        "endChar": 3
+      },
+      "revId": "884f983bb17a9c9e6220ca316851950175dcbc7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c326856e_07daf2c7",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2136,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-05T01:27:57Z",
+      "side": 1,
+      "message": "This TODO misread that there\u0027s no way to test this after VM reference DT -- someone may ask why don\u0027t we remove this?\n\nInstead, create a new bug with an action item to re-enable the test. Here\u0027s an example:\n\n\u0027TODO(new_bug): Enable this test when we can inject vendor hashkey for test purpose.\u0027\n\nReferences:\n  - https://docs.google.com/document/d/1QivJI_03TcfRAyMGWkTNHEdiQh8h_F-rYGup9soSeLA/preview?tab\u003dt.0#bookmark\u003did.37co741lwlhc\n  - go/tott-todo\n  -",
+      "range": {
+        "startLine": 2135,
+        "startChar": 7,
+        "endLine": 2136,
+        "endChar": 20
+      },
+      "revId": "884f983bb17a9c9e6220ca316851950175dcbc7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
