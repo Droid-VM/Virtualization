@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f1c5b53_1722c20b",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 1
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-05T15:52:53Z",
+      "side": 1,
+      "message": "FYI, a `PLACEHOLDER` is one FDT cell i.e. a `u32` so this should probably be `PLACEHOLDER4` if you want it to store an address-size pair (`u64` * 2).",
+      "range": {
+        "startLine": 695,
+        "startChar": 9,
+        "endLine": 695,
+        "endChar": 21
+      },
+      "revId": "da5c13622209e1069394ebf12c434b3cef304ea4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49d4f07a_0f31ca40",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-05T15:52:53Z",
+      "side": 1,
+      "message": "You\u0027ve hit the most awkward aspect of the libfdt wrapper:\n```\nerror[E0505]: cannot move out of `cur` because it is borrowed\n   --\u003e packages/modules/Virtualization/pvmfw/src/fdt.rs:679:13\n    |\n664 |         next \u003d if let Some(mut cur) \u003d next {\n    |                            ------- binding `cur` declared here\n665 |             let mut next_subnode \u003d cur.first_subnode()?;\n    |                                    --- borrow of `cur` occurs here\n...\n679 |             cur.next_compatible(opp_compat)?\n    |             ^^^\n    |             |\n    |             move out of `cur` occurs here\n    |             borrow later used here\n\nerror: aborting due to 2 previous errors\n```\nwhich is hard to express in safe Rust because any (mutable) node has the potential to modify the DT as a whole (e.g. by causing a shift during insertions) or other nodes (e.g. NOP-ing a node also NOP-es its subnodes). As a result, our API uses the borrow-checker to prevent multiple simultaneous `FdtNodeMut` existing at the same time.\n\nThis means that the very common pattern:\n```\nfor mut node in ...:\n    for mut subnode in node:\n        # modify subnode\n```\ncan\u0027t work (because `node` and `subnode` exist at the same time).",
+      "range": {
+        "startLine": 665,
+        "startChar": 12,
+        "endLine": 665,
+        "endChar": 56
+      },
+      "revId": "da5c13622209e1069394ebf12c434b3cef304ea4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

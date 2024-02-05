@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "758d3e33_0214b98a",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-05T15:52:53Z",
+      "side": 1,
+      "message": "Does crosvm give us the guarantee that the \"OPP topology\" is 1-to-1 between tables and vCPUs?\n\n\nFor example, with real hardware (or vCPU-to-CPU pinning), a DT could describe multiple clusters where all CPUs within a cluster share the same properties (including OPPs) e.g.\n```\ncpus {\n    cpu@0 { operating-points-v2 \u003d \u003c\u0026opp_table_little\u003e; };\n    cpu@1 { operating-points-v2 \u003d \u003c\u0026opp_table_little\u003e; };\n    cpu@2 { operating-points-v2 \u003d \u003c\u0026opp_table_mid\u003e; };\n    cpu@3 { operating-points-v2 \u003d \u003c\u0026opp_table_mid\u003e; };\n    cpu@4 { operating-points-v2 \u003d \u003c\u0026opp_table_big\u003e; };\n    cpu@5 { operating-points-v2 \u003d \u003c\u0026opp_table_big\u003e; };\n\n    opp_table_little: opp-table-little { ... };\n    opp_table_mid: opp-table-mid { ... };\n    opp_table_big: opp-table-big { ... };\n}\n```\nbut the code in this CL seems to assume that such a topology wouldn\u0027t be received, is this correct?\n\nOOC, how does vCPU cpufreq handle vCPU thread migration between physical CPUs?",
+      "range": {
+        "startLine": 60,
+        "startChar": 3,
+        "endLine": 60,
+        "endChar": 39
+      },
+      "revId": "5306457eca6defbbadab16c726424d6ac4a7918a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28b3aa06_18c984b2",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-05T15:52:53Z",
+      "side": 1,
+      "message": "A high-level comment for this (still WIP) CL is that these features are probably optional (as in, pvmfw shouldn\u0027t abort the pVM boot process if these new nodes aren\u0027t passed by crosvm), right? If so, the flow will have to be reworked appropriately.\n\nGiven that `opp_tableX` nodes are probably only located either by `\u003ccompatible\u003e` or by phandle (from `cpu@X`\u0027s `\u003coperation-points-v2\u003e`), do you think we could make them subnodes of `/cpufreq`, allowing a trivial one-shot \"`cpufreq_node.nop()`\" if cpufreq isn\u0027t in use?\n\nAlternatively, they could be subnodes of the `cpu@X` nodes:\n```\ncpu@X {\n    // ...\n    operating-points-v2 \u003d \u003c\u0026opp_tableX\u003e;\n    opp_tableX: opp-table-X {\n        compatible \u003d \"operating-points-v2\";\n        opp1 { ... };\n    }\n}\n```\nso that removing a CPU node removes its OPP table \"for free\".\n\nIn any case, I\u0027ve pushed aosp/2950909, which you could extend to store the per-vCPU OPPs in the `CpuInfo` structs.",
+      "range": {
+        "startLine": 169,
+        "startChar": 25,
+        "endLine": 169,
+        "endChar": 26
+      },
+      "revId": "5306457eca6defbbadab16c726424d6ac4a7918a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "959c4753_081ddca2",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-05T15:52:53Z",
+      "side": 1,
+      "message": "I\u0027m not familiar with this syntax but AFAIU, it tells DTC about the bit layout of the property, right?\n\nGiven that this DTS is defining a placeholder, the bit layout (at compile-time) of the property shouldn\u0027t matter as all bits are `1` so a `\u003cPLACEHOLDER2\u003e` (giving you 64 bits) should be enough for your use-case.\n\nOr am I missing something e.g. DTC adding Linux-specific metadata to the DTB describing the layout of the field? If that\u0027s the case, the metadata probably also has to be patched.",
+      "range": {
+        "startLine": 172,
+        "startChar": 17,
+        "endLine": 172,
+        "endChar": 26
+      },
+      "revId": "5306457eca6defbbadab16c726424d6ac4a7918a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e7344a0_61fe119b",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-05T15:52:53Z",
+      "side": 1,
+      "message": "This address is constant, as part of the [crosvm virtual memory layout](https://crosvm.dev/book/appendix/memory_layout.html#common-layout), so you can hardcode it in the `.dts` directly and validate it (without storing it) in a `read_` function.\n\nI suppose the same applies to the size?",
+      "range": {
+        "startLine": 629,
+        "startChar": 36,
+        "endLine": 629,
+        "endChar": 45
+      },
+      "revId": "5306457eca6defbbadab16c726424d6ac4a7918a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b7c148c_2e90e728",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-05T15:52:53Z",
+      "side": 1,
+      "message": "This function is reading the input DT (which is untrusted) so panicking here doesn\u0027t seem appropriate. Instead, you could\n```\nlet prop \u003d subnode.getprop_u64(cstr!(\"opp-hz\"))?.ok_or(FdtError::NotFound)?;\n```",
+      "range": {
+        "startLine": 651,
+        "startChar": 57,
+        "endLine": 651,
+        "endChar": 65
+      },
+      "revId": "5306457eca6defbbadab16c726424d6ac4a7918a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea9139a8_c6a3f59b",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-05T15:52:53Z",
+      "side": 1,
+      "message": "I\u0027m confused by this: isn\u0027t `subnode` (\"`node`\" in the caller) the `opp-table-X` node while this function deals with the `oppX` nodes (i.e. its subnodes)?\n\nIf so, shouldn\u0027t this be `.first_subnode()`?",
+      "range": {
+        "startLine": 661,
+        "startChar": 35,
+        "endLine": 661,
+        "endChar": 47
+      },
+      "revId": "5306457eca6defbbadab16c726424d6ac4a7918a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77b66122_ce49bae1",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-05T15:52:53Z",
+      "side": 1,
+      "message": "nit: these flows are typically flattened with `let Some(...) \u003d ... else { ... };` but here (as you simply `return Err(...)`), you could make that even short with `Option::ok_or`:\n```\nlet subnode \u003d next_subnode.ok_or(FdtError::...)?;\nsubnode.setprop_inplace(...)?;\nnext_subnode \u003d subnode.next_subnode()?;\n```\n\nIn this particular case, it would be preferred to detect that we received more data than expected in `read_*` (see aosp/2950907 or aosp/2950909 for using `ArrayVec`) over failing to `patch_*`, which would allow you to `.unwrap()` here.",
+      "range": {
+        "startLine": 667,
+        "startChar": 8,
+        "endLine": 667,
+        "endChar": 16
+      },
+      "revId": "5306457eca6defbbadab16c726424d6ac4a7918a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cffbc884_f82aff3c",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-05T15:52:53Z",
+      "side": 1,
+      "message": "I don\u0027t think you want to ignore `next.is_none()`, here?\n\nThe above \"skip n mutable compatible nodes\" could be a function, re-used below (when locating the unnecessary nodes). Obviously, the O(n^2) traversal is horrible but it works and keeps the borrow checker happy. We can clean that up later.",
+      "range": {
+        "startLine": 692,
+        "startChar": 9,
+        "endLine": 692,
+        "endChar": 10
+      },
+      "revId": "5306457eca6defbbadab16c726424d6ac4a7918a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
