@@ -68,6 +68,24 @@
       "message": "Following tests are failing because output doesn\u0027t contain expected string `init: [libfs_avb] Failed to verify vbmeta digest`\n  - `com.android.microdroid.test.MicrodroidHostTests#testBootFailsWhenVbMetaDigestDoesNotMatchBootconfig[protectedVm\u003dfalse,gki\u003dandroid14-6.1]`\n  - `com.android.microdroid.test.MicrodroidHostTests#testBootFailsWhenVbMetaDigestDoesNotMatchBootconfig[protectedVm\u003dfalse,gki\u003dnull]`\n\n\nCould you double check if this CL doesn\u0027t introduce any regression?",
       "revId": "f6732c5df67c3e829457b3c6295b5f6c97972878",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0c6d3bb_7fee0b60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-02-06T01:22:36Z",
+      "side": 1,
+      "message": "I think it\u0027s aosp/2949526.",
+      "parentUuid": "535307eb_54ce9238",
+      "revId": "f6732c5df67c3e829457b3c6295b5f6c97972878",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
