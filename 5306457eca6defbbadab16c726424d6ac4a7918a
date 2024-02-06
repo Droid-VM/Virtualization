@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9f2da40_47a224cb",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-06T04:38:57Z",
+      "side": 1,
+      "message": "The current implementation in crosvm guarantees a 1:1 mapping with vCPU-to-pCPU pinning and vCPU thread migration is not supported in the \"--host-cpu-topology\" configuration. It\u0027s done intentionally this way to let the guest scheduler make task placement decisions. While it\u0027s true that the same cpus can share a frequency domain in the cluster, this is currently not supported and has different implications on the virt cpufreq device backend and the host scheduler. Being individually scalable has its advantages, like communicating to the host about the requirements of a single vCPU thread as opposed to scaling the entire cluster(or a collection vCPU threads in this case), which would allow the host to make better task placement decisions. So I\u0027m okay with this more restrictive assumption until/if we decide to introduce clustering support(note that even if you don\u0027t point to the same exact opptable, cpufreq still has ways to allow different cpus to share the freq domain if they share a common freq plan).",
+      "parentUuid": "758d3e33_0214b98a",
+      "range": {
+        "startLine": 60,
+        "startChar": 3,
+        "endLine": 60,
+        "endChar": 39
+      },
+      "revId": "5306457eca6defbbadab16c726424d6ac4a7918a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28b3aa06_18c984b2",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "edb1aaae_32dd6682",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-06T04:38:57Z",
+      "side": 1,
+      "message": "Right, these properties are optional and should not prevent boot. I think putting it inside of the cpu nodes makes a lot of sense, at least from a patching DT point of view. But how \"true to life\" do these nodes have to be? I.E. I don\u0027t think you\u0027d want to include opp entries inside of CPU nodes purely for readability reasons. But since crosvm is the one generating these nodes, it doesn\u0027t really matter how readable it is.\n\nActually is your comment applying to the DT being fed in or the DT that\u0027s being patched/generated. Does the layout of the DT between being fed in have to match the generated layout?",
+      "parentUuid": "28b3aa06_18c984b2",
+      "range": {
+        "startLine": 169,
+        "startChar": 25,
+        "endLine": 169,
+        "endChar": 26
+      },
+      "revId": "5306457eca6defbbadab16c726424d6ac4a7918a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "959c4753_081ddca2",
         "filename": "pvmfw/platform.dts",
         "patchSetId": 2
@@ -60,6 +108,30 @@
       "writtenOn": "2024-02-05T15:52:53Z",
       "side": 1,
       "message": "I\u0027m not familiar with this syntax but AFAIU, it tells DTC about the bit layout of the property, right?\n\nGiven that this DTS is defining a placeholder, the bit layout (at compile-time) of the property shouldn\u0027t matter as all bits are `1` so a `\u003cPLACEHOLDER2\u003e` (giving you 64 bits) should be enough for your use-case.\n\nOr am I missing something e.g. DTC adding Linux-specific metadata to the DTB describing the layout of the field? If that\u0027s the case, the metadata probably also has to be patched.",
+      "range": {
+        "startLine": 172,
+        "startChar": 17,
+        "endLine": 172,
+        "endChar": 26
+      },
+      "revId": "5306457eca6defbbadab16c726424d6ac4a7918a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f157959_12c30c18",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-06T04:38:57Z",
+      "side": 1,
+      "message": "No, I think what you\u0027ve suggested works fine(tested on device.).",
+      "parentUuid": "959c4753_081ddca2",
       "range": {
         "startLine": 172,
         "startChar": 17,
@@ -95,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "04023be0_82f3ba42",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-06T04:38:57Z",
+      "side": 1,
+      "message": "So the size of the region will vary depending on the number of vcpus, but I guess it\u0027s about validating the addr/sizes rather than patching it.",
+      "parentUuid": "4e7344a0_61fe119b",
+      "range": {
+        "startLine": 629,
+        "startChar": 36,
+        "endLine": 629,
+        "endChar": 45
+      },
+      "revId": "5306457eca6defbbadab16c726424d6ac4a7918a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9b7c148c_2e90e728",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 2
@@ -106,6 +202,30 @@
       "writtenOn": "2024-02-05T15:52:53Z",
       "side": 1,
       "message": "This function is reading the input DT (which is untrusted) so panicking here doesn\u0027t seem appropriate. Instead, you could\n```\nlet prop \u003d subnode.getprop_u64(cstr!(\"opp-hz\"))?.ok_or(FdtError::NotFound)?;\n```",
+      "range": {
+        "startLine": 651,
+        "startChar": 57,
+        "endLine": 651,
+        "endChar": 65
+      },
+      "revId": "5306457eca6defbbadab16c726424d6ac4a7918a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb6cd31d_5756c60c",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-06T04:38:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b7c148c_2e90e728",
       "range": {
         "startLine": 651,
         "startChar": 57,
@@ -141,6 +261,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d8c6bb1e_0c25c6f1",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-06T04:38:57Z",
+      "side": 1,
+      "message": "This was a bug. The borrower wasn\u0027t very happy with first_subnode borrowing the reference, do you think we can just change the first_subnode() to just consume the node? As it stands it\u0027s not exactly \"borrowing\" it if it needs to hold on the mutable reference to the Fdt while being not very useful. Also the fcn parent under FdtNodeMut isn\u0027t public and doesn\u0027t return a FdtNodeMut anyhow.\n\n```\nError[E0597]: `node` does not live long enough\n   --\u003e packages/modules/Virtualization/pvmfw/src/fdt.rs:661:28\n    |\n660 | fn patch_subnode_table(mut node: FdtNodeMut, opp_entries: \u0026[u64]) -\u003e libfdt::Result\u003c()\u003e {\n    |                        --------\n    |                        |\n    |                        binding `node` declared here\n    |                        has type `libfdt::FdtNodeMut\u003c\u00271\u003e`\n661 |     let mut next_subnode \u003d node.first_subnode()?;\n    |                            ^^^^----------------\n    |                            |\n    |                            borrowed value does not live long enough\n    |                            argument requires that `node` is borrowed for `\u00271`\n...\n676 | }\n```",
+      "parentUuid": "ea9139a8_c6a3f59b",
+      "range": {
+        "startLine": 661,
+        "startChar": 35,
+        "endLine": 661,
+        "endChar": 47
+      },
+      "revId": "5306457eca6defbbadab16c726424d6ac4a7918a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "77b66122_ce49bae1",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 2
@@ -164,6 +308,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1d6009f8_1e09c1d9",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-06T04:38:57Z",
+      "side": 1,
+      "message": "Partially fixed, still need to update the 2nd part.",
+      "parentUuid": "77b66122_ce49bae1",
+      "range": {
+        "startLine": 667,
+        "startChar": 8,
+        "endLine": 667,
+        "endChar": 16
+      },
+      "revId": "5306457eca6defbbadab16c726424d6ac4a7918a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cffbc884_f82aff3c",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 2
@@ -175,6 +343,30 @@
       "writtenOn": "2024-02-05T15:52:53Z",
       "side": 1,
       "message": "I don\u0027t think you want to ignore `next.is_none()`, here?\n\nThe above \"skip n mutable compatible nodes\" could be a function, re-used below (when locating the unnecessary nodes). Obviously, the O(n^2) traversal is horrible but it works and keeps the borrow checker happy. We can clean that up later.",
+      "range": {
+        "startLine": 692,
+        "startChar": 9,
+        "endLine": 692,
+        "endChar": 10
+      },
+      "revId": "5306457eca6defbbadab16c726424d6ac4a7918a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac620107_138802d9",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-06T04:38:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cffbc884_f82aff3c",
       "range": {
         "startLine": 692,
         "startChar": 9,
