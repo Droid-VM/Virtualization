@@ -16,6 +16,92 @@
       "message": "Hi Alan, could you please take a look?",
       "revId": "abcdd23ad3953663518628b0b52ca4ff33c21326",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "754588d4_3dcc3625",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-06T11:50:23Z",
+      "side": 1,
+      "message": "Some quick initial thoughts, I need to look in more detail",
+      "revId": "abcdd23ad3953663518628b0b52ca4ff33c21326",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "157e7849_9d3dffab",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 1189,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-06T11:50:23Z",
+      "side": 1,
+      "message": "Needs @FlaggedApi, and there should be a flag check somewhere.\n\nDoes this affect all virtual machines? That seems potentially problematic.\nHow does it get undone?",
+      "range": {
+        "startLine": 1188,
+        "startChar": 7,
+        "endLine": 1189,
+        "endChar": 12
+      },
+      "revId": "abcdd23ad3953663518628b0b52ca4ff33c21326",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46da1932_376c2a4c",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-06T11:50:23Z",
+      "side": 1,
+      "message": "Shouldn\u0027t there be a feature flag check on both of these?",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 327,
+        "endChar": 1
+      },
+      "revId": "abcdd23ad3953663518628b0b52ca4ff33c21326",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ba8aaba_081a9d8f",
+        "filename": "vm_payload/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-06T11:50:23Z",
+      "side": 1,
+      "message": "We should just delete this and rename api.rs to lib.rs. It\u0027s not adding any value, and just makes changes harder.\n(If we ever need multiple modules here then we can make the necessary changes.)",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 2
+      },
+      "revId": "abcdd23ad3953663518628b0b52ca4ff33c21326",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
