@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e0bb33c_e4e16274",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-06T05:35:05Z",
+      "side": 1,
+      "message": "I\u0027m sorry but it seems that I missed relevant discussion thread. Could you share me about creating an extra DT?\n\nIMHO, we can send the same option via VM reference DT dtbo. `virtmgr` generates it anyway, so we can append extra data there.\n\nEven we separate DT here, `crosvm` will merge all DT together so neither `pvmfw` nor `microdroid` can\u0027t distinguish whether it was specified via VM reference DT nor an extra DT. If you feel bad about having extra data to reference DT, then you can just rename `reference_dt.*` to `extra_dt.*` (or something similar)",
+      "range": {
+        "startLine": 7,
+        "startChar": 27,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "13f7c6c90cfd2105d28eeb0fa56d5a3d4b8afbbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "82ebb44d_dfb971c9",
