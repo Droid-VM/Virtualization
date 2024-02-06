@@ -45,6 +45,54 @@
       },
       "revId": "faa4f47f7855eaae3297e8b749c01c777e8ba0f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d2ba80e_b6ddf8d9",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-06T12:05:08Z",
+      "side": 1,
+      "message": "Yes, otherwise the compiler complains.\n\nAFAIU, there\u0027s no fundamental API difference between taking `self` or `mut self` as the functions takes ownership of it in either cases. The difference matters to the compiler w.r.t. the body of the function itself, which is an implementation detail, from an interface perspective.",
+      "parentUuid": "7206a8a2_ba400e70",
+      "range": {
+        "startLine": 918,
+        "startChar": 25,
+        "endLine": 918,
+        "endChar": 28
+      },
+      "revId": "faa4f47f7855eaae3297e8b749c01c777e8ba0f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bac61c83_77591360",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-06T12:05:08Z",
+      "side": 1,
+      "message": "Ack, will do!",
+      "parentUuid": "1f2ec3ad_32f6daa8",
+      "range": {
+        "startLine": 918,
+        "startChar": 7,
+        "endLine": 918,
+        "endChar": 24
+      },
+      "revId": "faa4f47f7855eaae3297e8b749c01c777e8ba0f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
