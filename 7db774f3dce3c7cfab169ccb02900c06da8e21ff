@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab9d5c7e_84d503f3",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-02-06T17:49:17Z",
+      "side": 1,
+      "message": "Here are using `vmConfig.getExtraApks`, but later you are using `mExtraApks`. Is it intentional?",
+      "range": {
+        "startLine": 817,
+        "startChar": 21,
+        "endLine": 817,
+        "endChar": 44
+      },
+      "revId": "7db774f3dce3c7cfab169ccb02900c06da8e21ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "182e6111_d9ea2467",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-02-06T17:49:17Z",
+      "side": 1,
+      "message": "Should we also some negative tests? (e.g. split doesn\u0027t exist, package doesn\u0027t exist, etc.)",
+      "range": {
+        "startLine": 544,
+        "startChar": 16,
+        "endLine": 544,
+        "endChar": 46
+      },
+      "revId": "7db774f3dce3c7cfab169ccb02900c06da8e21ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
