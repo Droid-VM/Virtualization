@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "468041a8_1b058c4c",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-06T03:51:20Z",
+      "side": 1,
+      "message": "Could you check whether `warn!()` is printed?\n\n`take()` seems to drop remaining elements after given size. [1]\n\n[1]: https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.take",
+      "range": {
+        "startLine": 494,
+        "startChar": 38,
+        "endLine": 494,
+        "endChar": 42
+      },
+      "revId": "e4b3ffe3fab55b3ceecbd14070ffe165273888cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
