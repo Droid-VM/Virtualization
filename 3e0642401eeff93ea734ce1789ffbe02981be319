@@ -16,6 +16,24 @@
       "message": "The `res` argument is a mutable reference, which implies the second and third safety requirement here. You do not need to explicitly mention them.\n\n(But this is already the case before your change.)",
       "revId": "3e0642401eeff93ea734ce1789ffbe02981be319",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09058d32_3c8a792c",
+        "filename": "vm_payload/src/lib.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-02-06T15:49:59Z",
+      "side": 1,
+      "message": "Thank you for the suggestion. I removed the second and third requirements.",
+      "parentUuid": "428724a5_95a66316",
+      "revId": "3e0642401eeff93ea734ce1789ffbe02981be319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
