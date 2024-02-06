@@ -39,6 +39,46 @@
       "message": "Hi! Can I get an initial review for DT overlay based solution to ferry `Id` to VM.\n\nI have tested this in non-protected mode (which additional patches to actually allocate an `Id`). This is for a quick review/pass of the approach.",
       "revId": "13f7c6c90cfd2105d28eeb0fa56d5a3d4b8afbbe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72a43df2_055d835e",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-06T06:51:45Z",
+      "side": 1,
+      "message": "Nobody is calling this in this change. Who will use this?",
+      "revId": "13f7c6c90cfd2105d28eeb0fa56d5a3d4b8afbbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c5183a3_2a13a5e9",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-06T06:51:45Z",
+      "side": 1,
+      "message": "I wish we don\u0027t apply this only to this place. If you think this is a good abstraction, consider making a change globally under AVF.",
+      "range": {
+        "startLine": 625,
+        "startChar": 0,
+        "endLine": 628,
+        "endChar": 0
+      },
+      "revId": "13f7c6c90cfd2105d28eeb0fa56d5a3d4b8afbbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
