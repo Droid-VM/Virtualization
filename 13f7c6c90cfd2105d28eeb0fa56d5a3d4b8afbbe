@@ -100,6 +100,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c204f18c_20dbd7eb",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-06T12:30:59Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7149e74b_50416777",
+      "revId": "13f7c6c90cfd2105d28eeb0fa56d5a3d4b8afbbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c5183a3_2a13a5e9",
@@ -137,6 +155,30 @@
       "side": 1,
       "message": "Do you have suggestions on which library would be good for that?",
       "parentUuid": "9c5183a3_2a13a5e9",
+      "range": {
+        "startLine": 625,
+        "startChar": 0,
+        "endLine": 628,
+        "endChar": 0
+      },
+      "revId": "13f7c6c90cfd2105d28eeb0fa56d5a3d4b8afbbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc07f95b_f6857c17",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-06T12:30:59Z",
+      "side": 1,
+      "message": "Perhaps https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/avflog/ . You may want to rename it to avferror or similar because it\u0027s not just about logging.",
+      "parentUuid": "69f3ce8e_9bf0be92",
       "range": {
         "startLine": 625,
         "startChar": 0,
