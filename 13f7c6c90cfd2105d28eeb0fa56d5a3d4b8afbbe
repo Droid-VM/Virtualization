@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "399277f4_eacdc3de",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-06T20:32:09Z",
+      "side": 1,
+      "message": "As discussed on chat \u0026 irl with some folks, Lets include the properties to /avfnonsecure/.\n\n\n\nAdditionally, I have merged the 2 DT overlays (previously reference_dt \u0026 the nonsecure one). PTAL",
+      "parentUuid": "ad07dab9_0db1bda1",
+      "range": {
+        "startLine": 7,
+        "startChar": 27,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "13f7c6c90cfd2105d28eeb0fa56d5a3d4b8afbbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "82ebb44d_dfb971c9",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "Perhaps https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/avflog/ . You may want to rename it to avferror or similar because it\u0027s not just about logging.",
       "parentUuid": "69f3ce8e_9bf0be92",
+      "range": {
+        "startLine": 625,
+        "startChar": 0,
+        "endLine": 628,
+        "endChar": 0
+      },
+      "revId": "13f7c6c90cfd2105d28eeb0fa56d5a3d4b8afbbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bcf01d4_0a869e19",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-06T20:32:09Z",
+      "side": 1,
+      "message": "Removed it for now. Thanks!",
+      "parentUuid": "bc07f95b_f6857c17",
       "range": {
         "startLine": 625,
         "startChar": 0,
