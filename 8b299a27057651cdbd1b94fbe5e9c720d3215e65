@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4d20f80_e5734f9f",
+        "filename": "libs/libfdt/src/libfdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-02-06T13:38:57Z",
+      "side": 1,
+      "message": "This seems like a description of what the call does, not why it is safe.",
+      "revId": "8b299a27057651cdbd1b94fbe5e9c720d3215e65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39150c84_9b1b39d4",
+        "filename": "libs/libfdt/src/libfdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-02-06T13:38:57Z",
+      "side": 1,
+      "message": "If the caller doesn\u0027t handle the error case properly, is there undefined behaviour? If so then `overlay_apply` should be unsafe.",
+      "revId": "8b299a27057651cdbd1b94fbe5e9c720d3215e65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "184ed373_01f442b2",
+        "filename": "libs/libfdt/src/libfdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-02-06T13:38:57Z",
+      "side": 1,
+      "message": "Why not u8, like other pointers to an FDT buffer?",
+      "range": {
+        "startLine": 494,
+        "startChar": 25,
+        "endLine": 494,
+        "endChar": 27
+      },
+      "revId": "8b299a27057651cdbd1b94fbe5e9c720d3215e65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bbbc390_1600d804",
+        "filename": "libs/libfdt/src/libfdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-02-06T13:38:57Z",
+      "side": 1,
+      "message": "What do you mean by \u0027detected\u0027 here?",
+      "range": {
+        "startLine": 500,
+        "startChar": 63,
+        "endLine": 500,
+        "endChar": 71
+      },
+      "revId": "8b299a27057651cdbd1b94fbe5e9c720d3215e65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
