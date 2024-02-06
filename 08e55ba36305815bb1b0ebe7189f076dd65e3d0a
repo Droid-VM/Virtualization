@@ -16,6 +16,121 @@
       "message": "Done refactoring \u0026 merging the 2 DTBO into 1",
       "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0aa31176_772aca6d",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-06T23:46:03Z",
+      "side": 1,
+      "message": "I wish this isn\u0027t encoded in this enum value. Can this be something like `WithProp(node, name, value)`?",
+      "range": {
+        "startLine": 33,
+        "startChar": 30,
+        "endLine": 33,
+        "endChar": 43
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb26dd56_ac286aa1",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-06T23:46:03Z",
+      "side": 1,
+      "message": "Bits from FromPath are also nonsecure. Everything in host is nonsecure.",
+      "range": {
+        "startLine": 35,
+        "startChar": 3,
+        "endLine": 35,
+        "endChar": 13
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9637fb0f_df30d2dd",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-06T23:46:03Z",
+      "side": 1,
+      "message": "This can be a slice, right?",
+      "range": {
+        "startLine": 41,
+        "startChar": 14,
+        "endLine": 41,
+        "endChar": 26
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b304958_52a7f525",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-06T23:46:03Z",
+      "side": 1,
+      "message": "This description and the function signature look misleading. The description says it returns a device tree, but the function name suggests it creates an overlay... out of overlay\"s\".",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 27
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bff3f4d6_29bf4f9c",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-06T23:46:03Z",
+      "side": 1,
+      "message": "Not sure why this has to be an error. We just don\u0027t modify the given overlay.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 5
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
