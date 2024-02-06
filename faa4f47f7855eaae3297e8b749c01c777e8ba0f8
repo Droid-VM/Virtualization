@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7206a8a2_ba400e70",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-06T11:58:26Z",
+      "side": 1,
+      "message": "Q: `delete_and_next_compatible()` has `self` but `delete_and_return()` has `mut self`. Is it intended?",
+      "range": {
+        "startLine": 918,
+        "startChar": 25,
+        "endLine": 918,
+        "endChar": 28
+      },
+      "revId": "faa4f47f7855eaae3297e8b749c01c777e8ba0f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f2ec3ad_32f6daa8",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-06T11:58:26Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem to match with other namings.\n\nFor example, `delete_and_next_compatible` tells \u0027delete (self) and (return) next compatible\u0027 but `delete_and_return` says \u0027delete (self) and return (next)\u0027. Could you rename to `delete_and_next()`?",
+      "range": {
+        "startLine": 918,
+        "startChar": 7,
+        "endLine": 918,
+        "endChar": 24
+      },
+      "revId": "faa4f47f7855eaae3297e8b749c01c777e8ba0f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
