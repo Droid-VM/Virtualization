@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d4db7db_e8716bb0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-06T04:00:39Z",
+      "side": 1,
+      "message": "You changed the behavior in immediate next CL. Could you merge two to remove confusion?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 0
+      },
+      "revId": "588871bfbc63fbfbe5f66f4230644ef9587f1046",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c645331_0ace24b8",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-06T04:00:39Z",
+      "side": 1,
+      "message": "`DeviceTreeInfo:gic_patched_size(num_cpus)` is called immediately below. Why do we need to call it in a row with `MAX_CPUS`?",
+      "range": {
+        "startLine": 587,
+        "startChar": 0,
+        "endLine": 587,
+        "endChar": 88
+      },
+      "revId": "588871bfbc63fbfbe5f66f4230644ef9587f1046",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
