@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "952886be_e8a8585a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-06T03:49:25Z",
+      "side": 1,
+      "message": "nit; Title doesn\u0027t match with the change in the `patch_memory_range()`. Recommends to split CLs next time, but not necessary in this CL.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 62
+      },
+      "revId": "0edc4d617e5e45ac7378a5b981f8e0988b4d3a4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63c8fe90_684c975f",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-06T03:49:25Z",
+      "side": 1,
+      "message": "Just out of my curiousity, why `MEM_START` is `usize` instead of `u64`? `u64` looks more natural because because it\u0027s an address.",
+      "range": {
+        "startLine": 168,
+        "startChar": 29,
+        "endLine": 168,
+        "endChar": 38
+      },
+      "revId": "0edc4d617e5e45ac7378a5b981f8e0988b4d3a4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
