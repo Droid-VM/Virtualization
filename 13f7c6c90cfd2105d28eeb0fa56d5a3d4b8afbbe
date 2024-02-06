@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad07dab9_0db1bda1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-06T08:28:27Z",
+      "side": 1,
+      "message": "I agree the extra DTs will be merged (along with other overlays) by crosvm into single DT.\n\nSo the reason I ended up creating a separate dtbo image was cleaner interface, reference dtbo overlay gets created conditional to host dt being present or not, avfnonsecure only has a feature flag condition \u0026 does not depend on host dtbo.\n\n\n\u003e we can send the same option via VM reference DT dtbo. virtmgr generates it anyway\n\nI agree with a part of it, the semantics of reference DT (which is also at /avf/ node in pVM) is slightly different.\n\nIIUC, it is expected to be used as reference while picking avf/ related properties from DT passed from ABL while The property in avfnonsecure node are not present in the DT forwarded by ABL to pvmfw \u0026 are strictly host addition \u0026 the consumers of this node(pvmfw \u0026 udroid) must be aware of this.\n\nI added the \"nonsecure\" in the name to make this distinction explicit.\n\nThis patch at present adds nonsecure DT at /avf/ which makes it indistinguishable from the reference tree available at /avf/. From the top of my head:\n1) Either we should add the reference tree at /avf/reference/ \u0026 have the avf nonsecure dtbo at /avf/nonsecure/ \n2) Have the avfnonsecure DT at /avfnonsecure/ and keep the reference tree /avf (no change)\n\n\nWdyt?",
+      "parentUuid": "3e0bb33c_e4e16274",
+      "range": {
+        "startLine": 7,
+        "startChar": 27,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "13f7c6c90cfd2105d28eeb0fa56d5a3d4b8afbbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "82ebb44d_dfb971c9",
@@ -60,6 +84,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7149e74b_50416777",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-06T08:28:27Z",
+      "side": 1,
+      "message": "Sorry this path is WIP. I wanted to get early feedback on DTBO overlay",
+      "parentUuid": "72a43df2_055d835e",
+      "revId": "13f7c6c90cfd2105d28eeb0fa56d5a3d4b8afbbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9c5183a3_2a13a5e9",
         "filename": "virtualizationmanager/src/aidl.rs",
         "patchSetId": 2
@@ -71,6 +113,30 @@
       "writtenOn": "2024-02-06T06:51:45Z",
       "side": 1,
       "message": "I wish we don\u0027t apply this only to this place. If you think this is a good abstraction, consider making a change globally under AVF.",
+      "range": {
+        "startLine": 625,
+        "startChar": 0,
+        "endLine": 628,
+        "endChar": 0
+      },
+      "revId": "13f7c6c90cfd2105d28eeb0fa56d5a3d4b8afbbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69f3ce8e_9bf0be92",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-06T08:28:27Z",
+      "side": 1,
+      "message": "Do you have suggestions on which library would be good for that?",
+      "parentUuid": "9c5183a3_2a13a5e9",
       "range": {
         "startLine": 625,
         "startChar": 0,
