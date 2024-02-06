@@ -22,6 +22,30 @@
       },
       "revId": "ce0b36db1e5d974c99fcda1e93f491adcfc9a726",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f02bbc48_282da662",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-06T11:57:55Z",
+      "side": 1,
+      "message": "Simpler ranges when indexing and stronger distinction between the copied and zeroed parts (which are then guaranteed not to overlap, even if we mess up the index calculation).",
+      "parentUuid": "07ec5055_88586469",
+      "range": {
+        "startLine": 1006,
+        "startChar": 0,
+        "endLine": 1020,
+        "endChar": 0
+      },
+      "revId": "ce0b36db1e5d974c99fcda1e93f491adcfc9a726",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
