@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dc2a5a31_05086d8e",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 1189,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-02-06T14:17:47Z",
+      "side": 1,
+      "message": "\u003e Needs @FlaggedApi, and there should be a flag check somewhere.\n\nAdded. The flag check is in virtualizationservice/src/aidl.rs\n\n\u003e Does this affect all virtual machines? That seems potentially problematic.\nHow does it get undone?\n\nI moved this API to VirtualMachineManager since it affects all VMs. Once a key is provisioned, any VM can access the key. Can this be problematic?\n\nI didn\u0027t add any API to undo it just to keep this functionality simple.",
+      "parentUuid": "157e7849_9d3dffab",
+      "range": {
+        "startLine": 1188,
+        "startChar": 7,
+        "endLine": 1189,
+        "endChar": 12
+      },
+      "revId": "abcdd23ad3953663518628b0b52ca4ff33c21326",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "46da1932_376c2a4c",
         "filename": "vm_payload/src/api.rs",
         "patchSetId": 6
@@ -71,6 +95,30 @@
       "writtenOn": "2024-02-06T11:50:23Z",
       "side": 1,
       "message": "Shouldn\u0027t there be a feature flag check on both of these?",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 327,
+        "endChar": 1
+      },
+      "revId": "abcdd23ad3953663518628b0b52ca4ff33c21326",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08155e1a_59a6184f",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-02-06T14:17:47Z",
+      "side": 1,
+      "message": "The feature flag for both calls is at a lower level in virtualizationservice [1].\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/virtualizationservice/src/aidl.rs;l\u003d178;drc\u003d0c69426d5da2596d5d7a264116db9e4729da0385",
+      "parentUuid": "46da1932_376c2a4c",
       "range": {
         "startLine": 316,
         "startChar": 0,
@@ -94,6 +142,30 @@
       "writtenOn": "2024-02-06T11:50:23Z",
       "side": 1,
       "message": "We should just delete this and rename api.rs to lib.rs. It\u0027s not adding any value, and just makes changes harder.\n(If we ever need multiple modules here then we can make the necessary changes.)",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 2
+      },
+      "revId": "abcdd23ad3953663518628b0b52ca4ff33c21326",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7da315ae_9e1c627f",
+        "filename": "vm_payload/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-02-06T14:17:47Z",
+      "side": 1,
+      "message": "Done. https://r.android.com/2953088",
+      "parentUuid": "1ba8aaba_081a9d8f",
       "range": {
         "startLine": 17,
         "startChar": 0,
