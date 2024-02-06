@@ -16,6 +16,24 @@
       "message": "Interestingly, `c_char` seems to be different being AArch64 (`u8`) and x86_64 (`i8`):\n```\nlet bytes \u003d get_slice_from_ptr(self.as_fdt_slice(), ptr).ok_or(FdtError::Internal)?;\n            ------------------                      ^^^ expected `*const u8`, found `*const i8`\n```",
       "revId": "f0008cd4d6f666993dbffe1877c908f828f71ed0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3b5cc81_c54721d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-06T12:29:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc85548b_c9b1e945",
+      "revId": "f0008cd4d6f666993dbffe1877c908f828f71ed0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
