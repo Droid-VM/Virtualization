@@ -16,6 +16,92 @@
       "message": "Hi Alan, Seth, PTAL.",
       "revId": "5ce8e77fc4116de5a3e4aeb3d9bc6ea02f3cba10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fccdad48_4861b05d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-07T12:29:11Z",
+      "side": 1,
+      "message": "y",
+      "revId": "5ce8e77fc4116de5a3e4aeb3d9bc6ea02f3cba10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6527f02f_641e170c",
+        "filename": "service_vm/requests/src/rkp.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-07T12:29:11Z",
+      "side": 1,
+      "message": "Seth suggested \"avf\" for this.\n\n(If hwtrust doesn\u0027t like it, can we change it? Will the server accept it?)",
+      "range": {
+        "startLine": 115,
+        "startChar": 19,
+        "endLine": 115,
+        "endChar": 24
+      },
+      "revId": "5ce8e77fc4116de5a3e4aeb3d9bc6ea02f3cba10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68a52782_1ed5c5d3",
+        "filename": "service_vm/requests/src/rkp.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-07T12:29:11Z",
+      "side": 1,
+      "message": "And this.\nCan we delete the TODO? Do we have any way to get a meaningful value here?",
+      "range": {
+        "startLine": 117,
+        "startChar": 27,
+        "endLine": 117,
+        "endChar": 35
+      },
+      "revId": "5ce8e77fc4116de5a3e4aeb3d9bc6ea02f3cba10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0726287d_1a33aa6f",
+        "filename": "service_vm/requests/src/rkp.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-07T12:29:11Z",
+      "side": 1,
+      "message": "We shouldn\u0027t send tee.\n\ncl/604488900 means the server now ignores security level for avf certs, so can we set this to \"avf\"?",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 30
+      },
+      "revId": "5ce8e77fc4116de5a3e4aeb3d9bc6ea02f3cba10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
