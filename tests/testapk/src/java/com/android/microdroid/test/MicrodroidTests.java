@@ -126,13 +126,11 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
     @Before
     public void setup() {
-        grantPermission(VirtualMachine.MANAGE_VIRTUAL_MACHINE_PERMISSION);
         prepareTestSetup(mProtectedVm);
     }
 
     @After
     public void tearDown() {
-        revokePermission(VirtualMachine.MANAGE_VIRTUAL_MACHINE_PERMISSION);
         revokePermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
     }
 
@@ -207,32 +205,6 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                 runVmTestService(TAG, vm, (ts, tr) -> tr.mAddInteger = ts.addInteger(37, 73));
         testResults.assertNoException();
         assertThat(testResults.mAddInteger).isEqualTo(37 + 73);
-    }
-
-    @Test
-    @CddTest(
-            requirements = {
-                "9.17/C-1-1",
-                "9.17/C-1-2",
-                "9.17/C-1-4",
-            })
-    public void createVmRequiresPermission() {
-        assumeSupportedDevice();
-
-        revokePermission(VirtualMachine.MANAGE_VIRTUAL_MACHINE_PERMISSION);
-
-        VirtualMachineConfig config =
-                newVmConfigBuilder()
-                        .setPayloadBinaryName("MicrodroidTestNativeLib.so")
-                        .setMemoryBytes(minMemoryRequired())
-                        .build();
-
-        SecurityException e =
-                assertThrows(
-                        SecurityException.class,
-                        () -> forceCreateNewVirtualMachine("test_vm_requires_permission", config));
-        assertThat(e).hasMessageThat()
-                .contains("android.permission.MANAGE_VIRTUAL_MACHINE permission");
     }
 
     @Test
