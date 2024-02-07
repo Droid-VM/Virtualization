@@ -22,6 +22,30 @@
       },
       "revId": "e4b3ffe3fab55b3ceecbd14070ffe165273888cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8caa544c_bf62e125",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-07T14:31:05Z",
+      "side": 1,
+      "message": "Yes, the `Take` won\u0027t contain the remaining elements.\n\nHowever, the original iterator will; see [this playground](https://play.rust-lang.org/?version\u003dstable\u0026mode\u003ddebug\u0026edition\u003d2021\u0026gist\u003d38d108512699400f0a262e6e698fabe0).",
+      "parentUuid": "468041a8_1b058c4c",
+      "range": {
+        "startLine": 494,
+        "startChar": 38,
+        "endLine": 494,
+        "endChar": 42
+      },
+      "revId": "e4b3ffe3fab55b3ceecbd14070ffe165273888cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
