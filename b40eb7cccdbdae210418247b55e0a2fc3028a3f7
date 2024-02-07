@@ -66,6 +66,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "218eb48b_0dd125d9",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-07T14:15:47Z",
+      "side": 1,
+      "message": "There\u0027s a subtle flaw here.\nWhen service goes out of scope, Java is allowed to GC it. Which will cause virt manager to exit, and that in turn allows VirtualizationService to exit, losing the provisioned key.\nCould we move this method to VirtualMachine, which holds a VirtualizationService reference to prevent that?",
+      "range": {
+        "startLine": 387,
+        "startChar": 12,
+        "endLine": 387,
+        "endChar": 80
+      },
+      "revId": "b40eb7cccdbdae210418247b55e0a2fc3028a3f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59af8105_fafaaa3a",
         "filename": "service_vm/demo_apk/Android.bp",
         "patchSetId": 13
