@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7edb5427_a2d0ea7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-07T15:15:00Z",
+      "side": 1,
+      "message": "lt",
+      "revId": "bf90c6a5264e9d64963bd0803800bf55d4b42db2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "134732e0_a117a224",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-07T15:15:00Z",
+      "side": 1,
+      "message": "This doesn\u0027t look right; you might want to introduce `CpuInfo::MAX_OPPS\u003d16`.",
+      "range": {
+        "startLine": 178,
+        "startChar": 57,
+        "endLine": 178,
+        "endChar": 65
+      },
+      "revId": "bf90c6a5264e9d64963bd0803800bf55d4b42db2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3aa72792_6862b457",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-07T15:15:00Z",
+      "side": 1,
+      "message": "I believe this is flawed because it makes implicit assumptions about the node order within the input DT.\n\nWhy wouldn\u0027t pvmfw follow what the kernel does i.e.\n```\nfor cpu in cpu_nodes.by_ref().take(cpus.capacity()) {\n    let opp_phandle \u003d cpu_node.getprop_u32(cstr!(\"operating-points-v2\"))?;\n    let opptable_info \u003d if let Some(phandle) \u003d opp_phandle {\n        let phandle \u003d phandle.try_into()?;\n        let node \u003d fdt.node_with_phandle(phandle)?.ok_or(FdtError::...)?;        \n        Some(read_opp_info_from(node)?)\n    } else {\n        None\n    };\n\n    let info \u003d CpuInfo { opptable_info };\n```\n(the encapsulation could be reworked but you get the idea about the DT parsing)\n\nNote that this isn\u0027t necessary for `patch_` (as the platform DT is compiled along with this code so implicit assumptions about its layout are fine) but would have avoided the off-by-one bug it currently has.",
+      "range": {
+        "startLine": 185,
+        "startChar": 4,
+        "endLine": 185,
+        "endChar": 81
+      },
+      "revId": "bf90c6a5264e9d64963bd0803800bf55d4b42db2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c89a564_84f8bf7e",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-07T15:15:00Z",
+      "side": 1,
+      "message": "nit: `patch_opptable`?",
+      "range": {
+        "startLine": 221,
+        "startChar": 3,
+        "endLine": 221,
+        "endChar": 18
+      },
+      "revId": "bf90c6a5264e9d64963bd0803800bf55d4b42db2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "414c77a9_0e28340d",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-07T15:15:00Z",
+      "side": 1,
+      "message": "Don\u0027t you have an off-by-one bug because of L246 as\n\n- `(n \u003d\u003d 0)` --\u003e `node.ok_or(...)?.next_compatible(compat)?`\n- `(n \u003d\u003d 1)` --\u003e `node.ok_...?.next_...?.ok_...?.next_...?`\n- ...\n\nand as you call this function with the first compatible node of the tree?\n\nAFAICT, `cpu@X` then gets the OPPs of `cpu@(X-1)`, right?\n\nI\u0027d recommend implementing this function as\n```\nfn get_nth_compatible\u003c\u0027a\u003e(fdt: \u0026\u0027a mut Fdt, n: usize, compat: \u0026CStr) -\u003e Result\u003c\u003cOption\u003cFdtNodeMut\u003c\u0027a\u003e\u003e\u003e {\n    let mut node \u003d fdt.root_mut()?.next_compatible(compat)?;\n    for _ in 0..n {\n        node \u003d node.ok_or(FdtError::NoSpace)?.next_compatible(compat)?;\n    }\n    Ok(node)\n}\n```\n\nNote these other differences:\n\n1. The lifetime of `compat` (`\u0026CStr`) isn\u0027t tied to the lifetime of the `Fdt` (`\u0027a`);\n1. `n` is a `usize` instead of `i32`, similar to `Iterator::take()`.\n\nFinally, would you mind adding\n```\n// TODO(ptosi): Rework FdtNodeMut and replace this function.\n```\n?",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 253,
+        "endChar": 5
+      },
+      "revId": "bf90c6a5264e9d64963bd0803800bf55d4b42db2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcc35979_3762cd2e",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-07T15:15:00Z",
+      "side": 1,
+      "message": "nit: `for (idx, cpu) in cpus[.iter()].enumerate()`?\n\n`cpus.len()` can be used below.",
+      "range": {
+        "startLine": 259,
+        "startChar": 0,
+        "endLine": 260,
+        "endChar": 21
+      },
+      "revId": "bf90c6a5264e9d64963bd0803800bf55d4b42db2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fb63a68_ba8efba2",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-07T15:15:00Z",
+      "side": 1,
+      "message": "This node should be `NOP`-ed if it wasn\u0027t present in the input DT.",
+      "range": {
+        "startLine": 706,
+        "startChar": 0,
+        "endLine": 706,
+        "endChar": 62
+      },
+      "revId": "bf90c6a5264e9d64963bd0803800bf55d4b42db2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bda85796_6fc0f02b",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-07T15:15:00Z",
+      "side": 1,
+      "message": "Would you mind calling this before `device_assignment.patch`?\n\nCalling it right after `patch_cpus` would make sense, IMO.",
+      "range": {
+        "startLine": 934,
+        "startChar": 0,
+        "endLine": 937,
+        "endChar": 8
+      },
+      "revId": "bf90c6a5264e9d64963bd0803800bf55d4b42db2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

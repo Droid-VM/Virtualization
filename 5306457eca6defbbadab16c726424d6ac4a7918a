@@ -287,6 +287,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b4786447_2ce3b41a",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-07T15:15:00Z",
+      "side": 1,
+      "message": "Correct and yes, please, to detect unexpected values received from the host and if you feel like further validation makes sense (e.g. only have OPPs if a cpufreq was passed, check that all CPUs have OPPs, check that OPPs are in ascending order or whatever you wouldn\u0027t want a malicious host to be able to pass to the guest).",
+      "parentUuid": "37319eb9_81dbc05b",
+      "range": {
+        "startLine": 629,
+        "startChar": 36,
+        "endLine": 629,
+        "endChar": 45
+      },
+      "revId": "5306457eca6defbbadab16c726424d6ac4a7918a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9b7c148c_2e90e728",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 2
