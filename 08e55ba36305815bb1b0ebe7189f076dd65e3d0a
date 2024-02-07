@@ -20,6 +20,98 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a483f80_12d700b8",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-07T02:16:11Z",
+      "side": 1,
+      "message": "Is this ID for other features as well, beyond Secretkeeper? Current naming looks it\u0027s not for Secretkeeper only. If it was your intent, I\u0027m fine to ignore this comment :)",
+      "range": {
+        "startLine": 394,
+        "startChar": 56,
+        "endLine": 394,
+        "endChar": 58
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "315003f1_1158a300",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-07T02:16:11Z",
+      "side": 1,
+      "message": "What about just using `device_tree_overlay` as variable name?",
+      "range": {
+        "startLine": 397,
+        "startChar": 12,
+        "endLine": 397,
+        "endChar": 22
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "795e8dde_f6c7696b",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-07T02:16:11Z",
+      "side": 1,
+      "message": "If we don\u0027t support multiple paths, how about the structure like below?\n\n```\npub struct Overlay {\n  pub base_path: Path,\n  pub additional_properties: Vec\u003cProperty\u003e,\n\n}\n\npub struct Property {\n  pub name: CString,\n  pub value: Vec[u8],\n}\n```",
+      "range": {
+        "startLine": 30,
+        "startChar": 16,
+        "endLine": 30,
+        "endChar": 23
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17507bda_77729524",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-07T02:16:11Z",
+      "side": 1,
+      "message": "I think we cannot say this as DTBO. Because, we read nodes \u0026 properties from the path, and construct DTBO with `create_overlay`.",
+      "range": {
+        "startLine": 31,
+        "startChar": 20,
+        "endLine": 31,
+        "endChar": 24
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0aa31176_772aca6d",
         "filename": "virtualizationmanager/src/dt_overlay.rs",
         "patchSetId": 5
@@ -54,6 +146,30 @@
       "writtenOn": "2024-02-06T23:46:03Z",
       "side": 1,
       "message": "Bits from FromPath are also nonsecure. Everything in host is nonsecure.",
+      "range": {
+        "startLine": 35,
+        "startChar": 3,
+        "endLine": 35,
+        "endChar": 13
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ba621f7_44b22518",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-07T02:16:11Z",
+      "side": 1,
+      "message": "What about `AdditionalProp`, since your intent seems to distinguish properties from the path(host DT come from ABL) and props(sk id)?",
+      "parentUuid": "eb26dd56_ac286aa1",
       "range": {
         "startLine": 35,
         "startChar": 3,
@@ -127,6 +243,52 @@
         "startLine": 43,
         "startChar": 0,
         "endLine": 45,
+        "endChar": 5
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97f0027b_5bfe7775",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-07T02:16:11Z",
+      "side": 1,
+      "message": "nit: add?",
+      "range": {
+        "startLine": 64,
+        "startChar": 44,
+        "endLine": 64,
+        "endChar": 47
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39784f4d_dcc1f58d",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-07T02:16:11Z",
+      "side": 1,
+      "message": "Would we use `FromPath` multiple times? I\u0027ve thought reading `/avf/reference` from host DT would be the only use case. I think we don\u0027t need iteration, with an assumption your intent is to provide applying multiple `FromPath`.",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 76,
         "endChar": 5
       },
       "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
