@@ -263,6 +263,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37319eb9_81dbc05b",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-07T05:07:56Z",
+      "side": 1,
+      "message": "So we\u0027ll still need a patch_vcpufreq right? The ask here is to just add another validate vcpufreq node?",
+      "parentUuid": "1f207480_8b21f5c5",
+      "range": {
+        "startLine": 629,
+        "startChar": 36,
+        "endLine": 629,
+        "endChar": 45
+      },
+      "revId": "5306457eca6defbbadab16c726424d6ac4a7918a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9b7c148c_2e90e728",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 2
@@ -379,6 +403,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1056bda0_bfde2a63",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-07T05:07:56Z",
+      "side": 1,
+      "message": "Refactored this under the patch_cpus",
+      "parentUuid": "bd7320e3_0c9b941a",
+      "range": {
+        "startLine": 661,
+        "startChar": 35,
+        "endLine": 661,
+        "endChar": 47
+      },
+      "revId": "5306457eca6defbbadab16c726424d6ac4a7918a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77b66122_ce49bae1",
@@ -416,6 +464,30 @@
       "side": 1,
       "message": "Partially fixed, still need to update the 2nd part.",
       "parentUuid": "77b66122_ce49bae1",
+      "range": {
+        "startLine": 667,
+        "startChar": 8,
+        "endLine": 667,
+        "endChar": 16
+      },
+      "revId": "5306457eca6defbbadab16c726424d6ac4a7918a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a0abcb0_8fcc2bc8",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-07T05:07:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d6009f8_1e09c1d9",
       "range": {
         "startLine": 667,
         "startChar": 8,
@@ -487,6 +559,30 @@
       "side": 1,
       "message": "nit:\n```\nlet node \u003d next.ok_or(FdtError::NoSpace)?;\npatch_subnode_table(node, value)?;\n```",
       "parentUuid": "ac620107_138802d9",
+      "range": {
+        "startLine": 692,
+        "startChar": 9,
+        "endLine": 692,
+        "endChar": 10
+      },
+      "revId": "5306457eca6defbbadab16c726424d6ac4a7918a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53bac5a0_a35b4cd0",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-07T05:07:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7f752ce_f6f047a1",
       "range": {
         "startLine": 692,
         "startChar": 9,
