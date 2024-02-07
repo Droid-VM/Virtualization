@@ -126,13 +126,23 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
     @Before
     public void setup() {
+<<<<<<< HEAD   (51acee Don't test unspecified behavior)
         grantPermission(VirtualMachine.MANAGE_VIRTUAL_MACHINE_PERMISSION);
         prepareTestSetup(mProtectedVm);
+=======
+        prepareTestSetup(mProtectedVm, mGki);
+        // USE_CUSTOM_VIRTUAL_MACHINE permission has protection level signature|development, meaning
+        // that it will be automatically granted when test apk is installed. We have some tests
+        // checking the behavior when caller doesn't have this permission (e.g.
+        // createVmWithConfigRequiresPermission). Proactively revoke the permission so that such
+        // tests can pass when ran by itself, e.g.:
+        // atest com.android.microdroid.test.MicrodroidTests#createVmWithConfigRequiresPermission
+        revokePermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
+>>>>>>> CHANGE (c7010e Temporarily remove Microdroid tests related to MANAGE_VIRTUA)
     }
 
     @After
     public void tearDown() {
-        revokePermission(VirtualMachine.MANAGE_VIRTUAL_MACHINE_PERMISSION);
         revokePermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
     }
 
@@ -208,6 +218,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         testResults.assertNoException();
         assertThat(testResults.mAddInteger).isEqualTo(37 + 73);
     }
+<<<<<<< HEAD   (51acee Don't test unspecified behavior)
 
     @Test
     @CddTest(
@@ -235,6 +246,8 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                 .contains("android.permission.MANAGE_VIRTUAL_MACHINE permission");
     }
 
+=======
+>>>>>>> CHANGE (c7010e Temporarily remove Microdroid tests related to MANAGE_VIRTUA)
     @Test
     @CddTest(requirements = {"9.17/C-1-1"})
     public void autoCloseVm() throws Exception {
@@ -1116,7 +1129,10 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThrows(Exception.class, () -> launchVmAndGetCdis("test_vm"));
     }
 
+<<<<<<< HEAD   (51acee Don't test unspecified behavior)
 
+=======
+>>>>>>> CHANGE (c7010e Temporarily remove Microdroid tests related to MANAGE_VIRTUA)
     private static final UUID MICRODROID_PARTITION_UUID =
             UUID.fromString("cf9afe9a-0662-11ec-a329-c32663a09d75");
     private static final UUID PVM_FW_PARTITION_UUID =
