@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6079b3cf_3e673275",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-07T14:32:35Z",
+      "side": 1,
+      "message": "David is using this in aosp/2944351, these CLs are to make his work easier.",
+      "parentUuid": "f3cec7a6_d849f82f",
+      "range": {
+        "startLine": 9,
+        "startChar": 21,
+        "endLine": 9,
+        "endChar": 60
+      },
+      "revId": "c49096a68a356935e290ce18756f4e5c403f86ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3db05950_9b961988",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-06T04:01:29Z",
       "side": 1,
       "message": "Could you check whether this is working?\n\nIIUC `take()` correctly, `take()` will only keep and discard remaining, so this would never happen.\n\nsee: https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.take",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 0
+      },
+      "revId": "c49096a68a356935e290ce18756f4e5c403f86ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25fde750_1d0c8169",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-07T14:32:35Z",
+      "side": 1,
+      "message": "Resolved as similar to [this thread](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2950907/comment/468041a8_1b058c4c/).",
+      "parentUuid": "3db05950_9b961988",
       "range": {
         "startLine": 187,
         "startChar": 0,
