@@ -22,6 +22,30 @@
       },
       "revId": "9bf085ab1793d700d1893dbb08c3770e83d1753f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f109e51_9c15ed84",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-07T18:58:41Z",
+      "side": 1,
+      "message": "DRY-ing the FFI (some calls were duplicated between `FdtNode` and `FdtNodeMut` or between different methods), removing the need to play tricks around the borrow checker because we\u0027re constrained by the high-level API (e.g. `getprop_internal()`), addressing numerous unsafe behaviors, and allowing said high-level API to be reworked without having to deal with hundreds of LoCs interleaved with (duplicated) FFI is, on its own, a good justification for this series, IMO.\n\nI\u0027m planning to rework the API for mutable accesses to the `Fdt` because `FdtNodeMut` in its current format is too constraining and forces us to write counter-intuitive, suboptimal, and confusing code (e.g. in aosp/2944351 or aosp/2879975).\n\n`FdtOwned` is an example of something else that could implement the traits but I agree that we might not implement it that way. That wouldn\u0027t undermine the value of the above.",
+      "parentUuid": "7da4aad0_a60833db",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 0
+      },
+      "revId": "9bf085ab1793d700d1893dbb08c3770e83d1753f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
