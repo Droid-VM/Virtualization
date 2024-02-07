@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13b6deb5_5b75f0a7",
+        "filename": "service_vm/requests/src/rkp.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-02-07T16:21:06Z",
+      "side": 1,
+      "message": "It seems that the server accepts it. I changed it to \"avf\" and adjust the hwtrust code.",
+      "parentUuid": "6527f02f_641e170c",
+      "range": {
+        "startLine": 115,
+        "startChar": 19,
+        "endLine": 115,
+        "endChar": 24
+      },
+      "revId": "5ce8e77fc4116de5a3e4aeb3d9bc6ea02f3cba10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68a52782_1ed5c5d3",
@@ -81,6 +105,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08b29ea0_9d00c706",
+        "filename": "service_vm/requests/src/rkp.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-02-07T16:21:06Z",
+      "side": 1,
+      "message": "I set it as \"avf\" according to http://b/301592917#comment10.\n\nAlternatively, if we want to retrieve this state, we would need to access some system properties like `ro.boot.flash.locked`. However, this is not straightforward since the library[1] currently lacks support for \"nostd\". As this field is not yet needed, we can simply leave it as \"avf\" for the time being.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:system/librustutils/system_properties.rs",
+      "parentUuid": "68a52782_1ed5c5d3",
+      "range": {
+        "startLine": 117,
+        "startChar": 27,
+        "endLine": 117,
+        "endChar": 35
+      },
+      "revId": "5ce8e77fc4116de5a3e4aeb3d9bc6ea02f3cba10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0726287d_1a33aa6f",
@@ -94,6 +142,30 @@
       "writtenOn": "2024-02-07T12:29:11Z",
       "side": 1,
       "message": "We shouldn\u0027t send tee.\n\ncl/604488900 means the server now ignores security level for avf certs, so can we set this to \"avf\"?",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 30
+      },
+      "revId": "5ce8e77fc4116de5a3e4aeb3d9bc6ea02f3cba10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92e66a45_bcbf9cfc",
+        "filename": "service_vm/requests/src/rkp.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-02-07T16:21:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0726287d_1a33aa6f",
       "range": {
         "startLine": 122,
         "startChar": 0,
