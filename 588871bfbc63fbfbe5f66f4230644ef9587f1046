@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a4fe3dc_5fd5c3bc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-07T15:22:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4efa9a91_73bb4751",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 56
+      },
+      "revId": "588871bfbc63fbfbe5f66f4230644ef9587f1046",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d4db7db_e8716bb0",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8c49250f_3dbc9ff1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-07T15:22:45Z",
+      "side": 1,
+      "message": "I see how this could be confusing, I originally created 2 CLs for the respective diffs to be easier to review. Instead, I\u0027ve squashed the code of both into aosp/2950909 and will be abandoning this CL.",
+      "parentUuid": "7d4db7db_e8716bb0",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 0
+      },
+      "revId": "588871bfbc63fbfbe5f66f4230644ef9587f1046",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c645331_0ace24b8",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 1
@@ -60,6 +108,30 @@
       "writtenOn": "2024-02-06T04:00:39Z",
       "side": 1,
       "message": "`DeviceTreeInfo:gic_patched_size(num_cpus)` is called immediately below. Why do we need to call it in a row with `MAX_CPUS`?",
+      "range": {
+        "startLine": 587,
+        "startChar": 0,
+        "endLine": 587,
+        "endChar": 88
+      },
+      "revId": "588871bfbc63fbfbe5f66f4230644ef9587f1046",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c9bb7e0_27c6fd9d",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-07T15:22:45Z",
+      "side": 1,
+      "message": "The original author was very specific about guaranteeing that the call on the host-provided `num_cpus` doesn\u0027t panic, I suppose. As we prove statically that it doesn\u0027t with `MAX_CPUS` and as `num_cpus \u003c\u003d MAX_CPUS`, then the `.unwrap()` can\u0027t panic.",
+      "parentUuid": "2c645331_0ace24b8",
       "range": {
         "startLine": 587,
         "startChar": 0,
