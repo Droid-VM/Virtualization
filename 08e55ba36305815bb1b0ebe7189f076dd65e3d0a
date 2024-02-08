@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b235997b_045e3d55",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-08T21:00:47Z",
+      "side": 1,
+      "message": "Could we give this property a more descriptive name such as `vm-id` or `vm-instance-id`?\n\nKeep in mind that this is an ABI we\u0027re defining and, unlike local variables, once the name is used, it can\u0027t be repurposed.",
+      "parentUuid": "12174636_5a60c0ab",
+      "range": {
+        "startLine": 394,
+        "startChar": 56,
+        "endLine": 394,
+        "endChar": 58
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "315003f1_1158a300",
         "filename": "virtualizationmanager/src/aidl.rs",
         "patchSetId": 5
@@ -314,6 +338,30 @@
       "side": 1,
       "message": "From pVM\u0027s perspective, the rest of the DT (input via `FromPath`) goes though heavy sanitization (by pvmfw which intercepts and uses the reference dt from ABL for that). So pVM\u0027s can consider it secure. The properties in /avfnonsecure however are added by host \u0026 there is not much validation for them (discussed in b/324046698).\n\nWe would like to ensure that the guest reading these properties are aware of them being \u0027nonsecure\u0027 by making it explicit in the DT path",
       "parentUuid": "2ba621f7_44b22518",
+      "range": {
+        "startLine": 35,
+        "startChar": 3,
+        "endLine": 35,
+        "endChar": 13
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "504f2f23_4698063a",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-08T21:00:47Z",
+      "side": 1,
+      "message": "Could we avoid the term \"secure\", which is already pretty overloaded in the Arm ecosystem, and instead use \"trusted\" (which more clearly describes the distinction) or \"protected\" (given its meaning the context of AVF), at least in the guest DT path (I\u0027m aware that this thread is about the enum variants)?\n\nFrom a guest perspective, nothing from the host may be trusted, as Jiyong mentions, but thanks to pvmfw, the guest can currently trust everything from the DT. However, this CL partially breaks that assumption as the guest will now have to distrust a subset of the DT.",
+      "parentUuid": "fd016069_763b5949",
       "range": {
         "startLine": 35,
         "startChar": 3,

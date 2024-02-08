@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d8842f7_b67bdacb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-08T21:00:47Z",
+      "side": 1,
+      "message": "For the sake of clarity and namespacing (w.r.t. the rest of the DT), could this node also be under `/avf`[*]? By definition, I don\u0027t think we should worry about \"secure\" (non-non-secure) properties overwriting these because they are trusted.\n\n[*] Sorry I didn\u0027t mention this when we were discussing it offline but as we were talking, I was visualizing the spoken words \"AVF non-secure\" as `/avf/non-secure`, not `/avfnonsecure`!",
+      "range": {
+        "startLine": 9,
+        "startChar": 32,
+        "endLine": 9,
+        "endChar": 45
+      },
+      "revId": "657338d2c3112bc847979eccc128e7f6ef0854ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6a16b68_743ae50d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-08T21:00:47Z",
+      "side": 1,
+      "message": "(I\u0027ll let others review the implementation itself and have mostly focused on the DT ABI)",
+      "revId": "657338d2c3112bc847979eccc128e7f6ef0854ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5c77135_a10c491d",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-08T21:00:47Z",
+      "side": 1,
+      "message": "Using `assert_eq` will print out (`derive(Debug)`) the mismatched values on error (easier to investigate).",
+      "range": {
+        "startLine": 108,
+        "startChar": 8,
+        "endLine": 108,
+        "endChar": 14
+      },
+      "revId": "657338d2c3112bc847979eccc128e7f6ef0854ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
