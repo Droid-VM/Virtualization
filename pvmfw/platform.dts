@@ -57,7 +57,32 @@
 			compatible = "arm,arm-v8";
 			enable-method = "psci";
 			reg = <0>;
+#ifdef RELEASE_AVF_ENABLE_VIRT_CPUFREQ
+			operating-points-v2 = <&opp_table0>;
+			opp_table0: opp-table-0 {
+				compatible = "operating-points-v2";
+
+				opp1 { opp-hz = <PLACEHOLDER2>; };
+				opp2 { opp-hz = <PLACEHOLDER2>; };
+				opp3 { opp-hz = <PLACEHOLDER2>; };
+				opp4 { opp-hz = <PLACEHOLDER2>; };
+				opp5 { opp-hz = <PLACEHOLDER2>; };
+				opp6 { opp-hz = <PLACEHOLDER2>; };
+				opp7 { opp-hz = <PLACEHOLDER2>; };
+				opp8 { opp-hz = <PLACEHOLDER2>; };
+				opp9 { opp-hz = <PLACEHOLDER2>; };
+				opp10 { opp-hz = <PLACEHOLDER2>; };
+				opp11 { opp-hz = <PLACEHOLDER2>; };
+				opp12 { opp-hz = <PLACEHOLDER2>; };
+				opp13 { opp-hz = <PLACEHOLDER2>; };
+				opp14 { opp-hz = <PLACEHOLDER2>; };
+				opp15 { opp-hz = <PLACEHOLDER2>; };
+				opp16 { opp-hz = <PLACEHOLDER2>; };
+			};
 		};
+#else
+		};
+#endif
 		cpu@1 {
 			device_type = "cpu";
 			compatible = "arm,arm-v8";

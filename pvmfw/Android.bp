@@ -291,9 +291,21 @@ genrule {
     visibility: ["//visibility:private"],
 }
 
+soong_config_module_type {
+    name: "avf_flag_aware_cc_object",
+    module_type: "cc_object",
+    config_namespace: "ANDROID",
+    bool_variables: [
+        "release_avf_enable_virt_cpufreq",
+    ],
+    properties: [
+        "cflags",
+    ],
+}
+
 // Then run the macro processor to replace symbols like GIC_SPI into actual
 // numbers defined in the ARM DT binding headers
-cc_object {
+avf_flag_aware_cc_object {
     name: "pvmfw_platform.dts.preprocessed",
     header_libs: ["arm_dt_bindings_headers"],
     host_supported: true,
@@ -304,6 +316,11 @@ cc_object {
         "-xassembler-with-cpp", // allow C preprocessor directives
     ],
     visibility: ["//visibility:private"],
+    soong_config_variables: {
+        release_avf_enable_virt_cpufreq: {
+            cflags: ["-DRELEASE_AVF_ENABLE_VIRT_CPUFREQ=1"],
+        },
+    },
 }
 
 // Compile the preprocessed dts into binary and create a rust library source
