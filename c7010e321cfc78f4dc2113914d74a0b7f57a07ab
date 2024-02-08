@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1e9976f_4a5b0395",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-08T16:16:15Z",
+      "side": 1,
+      "message": "Nikita points out another problem here: the permission \u003c-\u003e gid mapping isn\u0027t flagged (and I suspect can\u0027t be).\nWhich means that it will end up in 24Q2, and that has to run MicrodroidTests from android14-tests-dev for CTS purposes, so we will need to make a similar change over there.",
+      "revId": "c7010e321cfc78f4dc2113914d74a0b7f57a07ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
