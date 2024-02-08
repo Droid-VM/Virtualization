@@ -199,7 +199,10 @@ genrule {
 
 cc_binary {
     name: "pvmfw",
-    defaults: ["vmbase_elf_defaults"],
+    defaults: [
+        "avf_build_flags_cc",
+        "vmbase_elf_defaults",
+    ],
     srcs: [
         "idmap.S",
     ],
@@ -295,6 +298,7 @@ genrule {
 // numbers defined in the ARM DT binding headers
 cc_object {
     name: "pvmfw_platform.dts.preprocessed",
+    defaults: ["avf_build_flags_cc"],
     header_libs: ["arm_dt_bindings_headers"],
     host_supported: true,
     srcs: [":pvmfw_platform.dts.renamed"],

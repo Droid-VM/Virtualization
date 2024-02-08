@@ -31,7 +31,10 @@ rust_ffi_static {
 cc_binary {
     name: "rialto_elf",
     stem: "rialto",
-    defaults: ["vmbase_elf_defaults"],
+    defaults: [
+        "avf_build_flags_cc",
+        "vmbase_elf_defaults",
+    ],
     srcs: [
         "idmap.S",
     ],
