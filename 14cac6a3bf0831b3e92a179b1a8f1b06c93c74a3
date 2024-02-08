@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d06c8a93_95871dcf",
+        "filename": "libs/libfdt/src/libfdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-08T15:35:09Z",
+      "side": 1,
+      "message": "question) would you also create an wrapper for `c_int`? IIUC, `c_int` is FFI type while other returns here are Rust types. (e.g. `usize`, `Phandle`)",
+      "range": {
+        "startLine": 163,
+        "startChar": 57,
+        "endLine": 163,
+        "endChar": 62
+      },
+      "revId": "14cac6a3bf0831b3e92a179b1a8f1b06c93c74a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
