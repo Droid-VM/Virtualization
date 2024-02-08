@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a40492c_1416937e",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-08T15:53:32Z",
+      "side": 1,
+      "message": "This CL changes behavior -- previously `trimprop()` returns error if the prop doesn\u0027t exist, but `setprop_placeholder()` creates a new prop.\n\nPlease add a new test if you want to revisit here. Otherwise abandon this.",
+      "range": {
+        "startLine": 531,
+        "startChar": 17,
+        "endLine": 531,
+        "endChar": 36
+      },
+      "revId": "82e62e8bef124a1d0b5ccc7053142183fcd9fcaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
