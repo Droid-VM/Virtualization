@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ea080f2_cbbfda46",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-08T11:08:34Z",
+      "side": 1,
+      "message": "Yes, I\u0027d expect this function to return _something_ (instead of `()`).\n\nIMO, this would be a good use for a ZST:\n```\nstruct VcpufreqInfo {}\n\nstruct DeviceTreeInfo {\n    // ...\n    vcpufreq: Option\u003cVcpufreqInfo\u003e,\n}\n```\n\nWhere the option is used during patching (to address the other open comment):\n```\nlet node \u003d fdt.node_mut(\"/vcpufreq\")?.unwrap(); \nif vcpufreq.is_some() {\n    node.setprop_addrrange_inplace(cstr!(\"reg\"), addr, size)\n} else {\n    node.nop()\n}\n```\n\nYou could even parse the address and size into that struct, to avoid duplicating the logic that `size \u003d n_cpus * 8` and make the APIs and flow clearer (at the expense of a few bytes of stack) with the following functions (note the different error types):\n\n- `read_vcpufreq[_info](\u0026Fdt) -\u003e libfdt::Result\u003cVcpufreqInfo\u003e`\n- `validate_vcpufreq(\u0026VcpufreqInfo, num_cpus: usize) -\u003e Result\u003c(), FdtValidationError\u003e` (you\u0027d introduce `FdtValidationError::InvalidVcpufreq{Addr,Size}`)\n- `patch_vcpufreq(\u0026mut Fdt, \u0026Option\u003cVcpufreq\u003e) -\u003e libfdt::Result\u003c()\u003e` doing\n\nThen, all the `.map_err(|e| { error!(...); RebootReason::...})` are centralized in their caller, `parse_device_tree`.",
+      "range": {
+        "startLine": 232,
+        "startChar": 51,
+        "endLine": 233,
+        "endChar": 55
+      },
+      "revId": "af2f39ca51ddf8b806952b66879599ea8101f416",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bd71034_578b2087",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-08T11:08:34Z",
+      "side": 1,
+      "message": "Is it not an error for `size \u003c max_reg_size`? I was expecting (naively?) the check on size to be `reg.size \u003d\u003d cpus.len() * VCPUFREQ_SIZE` (i.e. the size we\u0027re patching into the platform DT).",
+      "range": {
+        "startLine": 259,
+        "startChar": 4,
+        "endLine": 259,
+        "endChar": 27
+      },
+      "revId": "af2f39ca51ddf8b806952b66879599ea8101f416",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
