@@ -46,6 +46,30 @@
       },
       "revId": "b8749f7fa6faf470f15f53f3e12d7b5d298e5ef0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cb119b7_7c0c8809",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-08T15:12:43Z",
+      "side": 1,
+      "message": "IMO, if the errors don\u0027t pollute `stdout`, it might make sense to not pass `-qq`.\n\nEven better, could we log `stderr`, if non empty?",
+      "parentUuid": "f8323a1a_261339e0",
+      "range": {
+        "startLine": 115,
+        "startChar": 19,
+        "endLine": 115,
+        "endChar": 24
+      },
+      "revId": "b8749f7fa6faf470f15f53f3e12d7b5d298e5ef0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
