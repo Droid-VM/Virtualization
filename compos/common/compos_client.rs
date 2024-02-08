@@ -74,6 +74,7 @@ impl ComposClient {
     /// Start a new CompOS VM instance using the specified instance image file and parameters.
     pub fn start(
         service: &dyn IVirtualizationService,
+        id: [u8; 64],
         instance_image: File,
         idsig: &Path,
         idsig_manifest_apk: &Path,
@@ -121,6 +122,7 @@ impl ComposClient {
 
         let config = VirtualMachineConfig::AppConfig(VirtualMachineAppConfig {
             name: parameters.name.clone(),
+            id,
             apk: Some(apk_fd),
             idsig: Some(idsig_fd),
             instanceImage: Some(instance_fd),

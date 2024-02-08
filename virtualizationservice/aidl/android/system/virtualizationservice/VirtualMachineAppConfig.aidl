@@ -23,6 +23,9 @@ parcelable VirtualMachineAppConfig {
     /** Name of VM */
     String name;
 
+    /** Id of VM */
+    byte[64] id;
+
     /** Main APK */
     ParcelFileDescriptor apk;
 

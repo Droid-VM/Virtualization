@@ -55,6 +55,7 @@ use tombstoned_client::{DebuggerdDumpType, TombstonedConnection};
 use vsock::{VsockListener, VsockStream};
 use nix::unistd::{chown, Uid};
 use openssl::x509::X509;
+use rand::Fill;
 
 /// The unique ID of a VM used (together with a port number) for vsock communication.
 pub type Cid = u32;
@@ -68,6 +69,8 @@ pub const TEMPORARY_DIRECTORY: &str = "/data/misc/virtualizationservice";
 /// are reserved for the host or other usage.
 const GUEST_CID_MIN: Cid = 2048;
 const GUEST_CID_MAX: Cid = 65535;
+// Size of Id of a VM
+const ID_SIZE: usize = 64;
 
 const SYSPROP_LAST_CID: &str = "virtualizationservice.state.last_cid";
 
@@ -255,6 +258,16 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
         let state = &mut *self.state.lock().unwrap();
         let file = state.get_dtbo_file().or_service_specific_exception(-1)?;
         Ok(ParcelFileDescriptor::new(file))
+    }
+
+    // TODO(b/294177871) Persist this Id, along with other info about client app.
+    fn allocateVmId(&self) -> binder::Result<[u8; ID_SIZE]> {
+        let mut id = [0u8; ID_SIZE];
+        id.try_fill(&mut rand::thread_rng())
+            .context("Failed to allocate Id")
+            .or_service_specific_exception(-1)?;
+        info!("Allocated Vm Id {:?}", id);
+        Ok(id)
     }
 }
 
