@@ -70,6 +70,30 @@
       },
       "revId": "b8749f7fa6faf470f15f53f3e12d7b5d298e5ef0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ab42661_52e2c2fe",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-08T16:44:05Z",
+      "side": 1,
+      "message": "Done for removing `-qq`.\n\nDidn\u0027t add log for `stderr` because I can\u0027t imagine the use case of it at this moment. I only want to verifying whether this behaves the same as `dtc`, and not checking DT source integrity. Let me do so when necessary.",
+      "parentUuid": "3cb119b7_7c0c8809",
+      "range": {
+        "startLine": 115,
+        "startChar": 19,
+        "endLine": 115,
+        "endChar": 24
+      },
+      "revId": "b8749f7fa6faf470f15f53f3e12d7b5d298e5ef0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
