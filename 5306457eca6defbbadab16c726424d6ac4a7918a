@@ -143,6 +143,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "336b0c31_fec0256a",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-08T01:45:38Z",
+      "side": 1,
+      "message": "I\u0027ve submitted a patch on crosvm to generate the opptable nodes inside of the cpu nodes and validated that it still populates things properly for the drivers to enumerate. I refactored the opp read/patch functions to be under the existing cpu read/patch.",
+      "parentUuid": "6eaa6a9a_5d3a2d9c",
+      "range": {
+        "startLine": 169,
+        "startChar": 25,
+        "endLine": 169,
+        "endChar": 26
+      },
+      "revId": "5306457eca6defbbadab16c726424d6ac4a7918a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "959c4753_081ddca2",
@@ -299,6 +323,30 @@
       "side": 1,
       "message": "Correct and yes, please, to detect unexpected values received from the host and if you feel like further validation makes sense (e.g. only have OPPs if a cpufreq was passed, check that all CPUs have OPPs, check that OPPs are in ascending order or whatever you wouldn\u0027t want a malicious host to be able to pass to the guest).",
       "parentUuid": "37319eb9_81dbc05b",
+      "range": {
+        "startLine": 629,
+        "startChar": 36,
+        "endLine": 629,
+        "endChar": 45
+      },
+      "revId": "5306457eca6defbbadab16c726424d6ac4a7918a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4cc367c_f08f21ec",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-08T01:45:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4786447_2ce3b41a",
       "range": {
         "startLine": 629,
         "startChar": 36,

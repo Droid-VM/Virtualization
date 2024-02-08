@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d8cdf21_2a07d344",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-08T01:45:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "134732e0_a117a224",
+      "range": {
+        "startLine": 178,
+        "startChar": 57,
+        "endLine": 178,
+        "endChar": 65
+      },
+      "revId": "bf90c6a5264e9d64963bd0803800bf55d4b42db2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3aa72792_6862b457",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-02-07T15:15:00Z",
       "side": 1,
       "message": "I believe this is flawed because it makes implicit assumptions about the node order within the input DT.\n\nWhy wouldn\u0027t pvmfw follow what the kernel does i.e.\n```\nfor cpu in cpu_nodes.by_ref().take(cpus.capacity()) {\n    let opp_phandle \u003d cpu_node.getprop_u32(cstr!(\"operating-points-v2\"))?;\n    let opptable_info \u003d if let Some(phandle) \u003d opp_phandle {\n        let phandle \u003d phandle.try_into()?;\n        let node \u003d fdt.node_with_phandle(phandle)?.ok_or(FdtError::...)?;        \n        Some(read_opp_info_from(node)?)\n    } else {\n        None\n    };\n\n    let info \u003d CpuInfo { opptable_info };\n```\n(the encapsulation could be reworked but you get the idea about the DT parsing)\n\nNote that this isn\u0027t necessary for `patch_` (as the platform DT is compiled along with this code so implicit assumptions about its layout are fine) but would have avoided the off-by-one bug it currently has.",
+      "range": {
+        "startLine": 185,
+        "startChar": 4,
+        "endLine": 185,
+        "endChar": 81
+      },
+      "revId": "bf90c6a5264e9d64963bd0803800bf55d4b42db2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4902db72_e3453d4b",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-08T01:45:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3aa72792_6862b457",
       "range": {
         "startLine": 185,
         "startChar": 4,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6791f546_a2f4468d",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-08T01:45:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c89a564_84f8bf7e",
+      "range": {
+        "startLine": 221,
+        "startChar": 3,
+        "endLine": 221,
+        "endChar": 18
+      },
+      "revId": "bf90c6a5264e9d64963bd0803800bf55d4b42db2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "414c77a9_0e28340d",
@@ -110,6 +182,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1baacbd_1d6c7437",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-08T01:45:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "414c77a9_0e28340d",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 253,
+        "endChar": 5
+      },
+      "revId": "bf90c6a5264e9d64963bd0803800bf55d4b42db2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fcc35979_3762cd2e",
@@ -123,6 +219,30 @@
       "writtenOn": "2024-02-07T15:15:00Z",
       "side": 1,
       "message": "nit: `for (idx, cpu) in cpus[.iter()].enumerate()`?\n\n`cpus.len()` can be used below.",
+      "range": {
+        "startLine": 259,
+        "startChar": 0,
+        "endLine": 260,
+        "endChar": 21
+      },
+      "revId": "bf90c6a5264e9d64963bd0803800bf55d4b42db2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be25e4d0_19933674",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-08T01:45:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcc35979_3762cd2e",
       "range": {
         "startLine": 259,
         "startChar": 0,
@@ -169,6 +289,30 @@
       "writtenOn": "2024-02-07T15:15:00Z",
       "side": 1,
       "message": "Would you mind calling this before `device_assignment.patch`?\n\nCalling it right after `patch_cpus` would make sense, IMO.",
+      "range": {
+        "startLine": 934,
+        "startChar": 0,
+        "endLine": 937,
+        "endChar": 8
+      },
+      "revId": "bf90c6a5264e9d64963bd0803800bf55d4b42db2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "783eccf4_19e58f51",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-08T01:45:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bda85796_6fc0f02b",
       "range": {
         "startLine": 934,
         "startChar": 0,
