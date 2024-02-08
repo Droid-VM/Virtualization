@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12174636_5a60c0ab",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-08T13:12:06Z",
+      "side": 1,
+      "message": "\u003e Is this ID for other features as well\n\nNot at the moment. But we would like to converge this \u0026 another instance salt later (as part of instance image refactoring) and hence keeping it generalized.\n\n(See https://docs.google.com/document/d/1_V7mrPIIiwVdOvytol0imJJrBwePshwxTNW1BP06vqU/edit?resourcekey\u003d0-GXz8OaNRJI9R0H8eX1Fdqg\u0026tab\u003dt.0#bookmark\u003did.6eigzrupjzey)",
+      "parentUuid": "1a483f80_12d700b8",
+      "range": {
+        "startLine": 394,
+        "startChar": 56,
+        "endLine": 394,
+        "endChar": 58
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "315003f1_1158a300",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-02-07T02:16:11Z",
       "side": 1,
       "message": "What about just using `device_tree_overlay` as variable name?",
+      "range": {
+        "startLine": 397,
+        "startChar": 12,
+        "endLine": 397,
+        "endChar": 22
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d56bd52_83a5a3a8",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-08T13:12:06Z",
+      "side": 1,
+      "message": "SG",
+      "parentUuid": "315003f1_1158a300",
       "range": {
         "startLine": 397,
         "startChar": 12,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "183edca8_0df922f0",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-08T13:12:06Z",
+      "side": 1,
+      "message": "It is possible that:\n\n1) `VM_REFERENCE_DT_ON_HOST_PATH` does not exist on host DT (if u-droid vendor partition in not supported) \u0026\u0026 LLPVM in enabled, the `device_tree_overlay` will only contain Nonsecure properties then.\n\n2) It is possible LLPVM feature is not enabled, `VM_REFERENCE_DT_ON_HOST_PATH` exists, in which case `device_tree_overlay` will only contain a copy of  reference DT.\n\n3) Neither to exist, in which case no overlay should be added!\n\nSuch combinations justify the need for `Overlay` to be enum . I get that `Overlay` is a bad name for the enum, let me change that to `DtAddition`.",
+      "parentUuid": "795e8dde_f6c7696b",
+      "range": {
+        "startLine": 30,
+        "startChar": 16,
+        "endLine": 30,
+        "endChar": 23
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17507bda_77729524",
@@ -110,6 +182,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ebd605a_70ff7d3f",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-08T13:12:06Z",
+      "side": 1,
+      "message": "SG. Changed it a bit. Thanks",
+      "parentUuid": "17507bda_77729524",
+      "range": {
+        "startLine": 31,
+        "startChar": 20,
+        "endLine": 31,
+        "endChar": 24
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0aa31176_772aca6d",
@@ -123,6 +219,30 @@
       "writtenOn": "2024-02-06T23:46:03Z",
       "side": 1,
       "message": "I wish this isn\u0027t encoded in this enum value. Can this be something like `WithProp(node, name, value)`?",
+      "range": {
+        "startLine": 33,
+        "startChar": 30,
+        "endLine": 33,
+        "endChar": 43
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b6994a3_99a22697",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-08T13:12:06Z",
+      "side": 1,
+      "message": "In cases where `VM_REFERENCE_DT_ON_HOST_PATH` is not present, the final device tree overlay will only contain the nonsecure nodes, so it might be tricky to get WithProp to accept a device tree node.\n\nWe can change it to `WithProp(path, name, value)`, but this generalization would allow adding properties at arbitrary paths. I think it might be more robust restricting additional properties to nonsecure node only?",
+      "parentUuid": "0aa31176_772aca6d",
       "range": {
         "startLine": 33,
         "startChar": 30,
@@ -180,6 +300,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd016069_763b5949",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-08T13:12:06Z",
+      "side": 1,
+      "message": "From pVM\u0027s perspective, the rest of the DT (input via `FromPath`) goes though heavy sanitization (by pvmfw which intercepts and uses the reference dt from ABL for that). So pVM\u0027s can consider it secure. The properties in /avfnonsecure however are added by host \u0026 there is not much validation for them (discussed in b/324046698).\n\nWe would like to ensure that the guest reading these properties are aware of them being \u0027nonsecure\u0027 by making it explicit in the DT path",
+      "parentUuid": "2ba621f7_44b22518",
+      "range": {
+        "startLine": 35,
+        "startChar": 3,
+        "endLine": 35,
+        "endChar": 13
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9637fb0f_df30d2dd",
@@ -226,6 +370,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f35e29c_4f42e21c",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-08T13:12:06Z",
+      "side": 1,
+      "message": "Yep. I wasn\u0027t sure about the semantics of iterating \u0026 partitioning it. But works with slice too. Thanks",
+      "parentUuid": "9637fb0f_df30d2dd",
+      "range": {
+        "startLine": 41,
+        "startChar": 14,
+        "endLine": 41,
+        "endChar": 26
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c966f4e8_1e0b73f8",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-08T13:12:06Z",
+      "side": 1,
+      "message": "I changed it a bit, PTAL?",
+      "parentUuid": "8b304958_52a7f525",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 27
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bff3f4d6_29bf4f9c",
@@ -239,6 +431,30 @@
       "writtenOn": "2024-02-06T23:46:03Z",
       "side": 1,
       "message": "Not sure why this has to be an error. We just don\u0027t modify the given overlay.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 5
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "177e1af7_fdbd7430",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-08T13:12:06Z",
+      "side": 1,
+      "message": "There is no \u0027given overlay\u0027, this method actually creates a DT. In cases of no DtAddition, I was hoping this module would throw error instead of creating a DTBO with no entry in `__overlay__/`.\n\nSo callers must check that there are non-zero additions.",
+      "parentUuid": "bff3f4d6_29bf4f9c",
       "range": {
         "startLine": 43,
         "startChar": 0,
@@ -272,6 +488,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a50d3b31_18b7e8fa",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-08T13:12:06Z",
+      "side": 1,
+      "message": "Ouch, can understand why that didnt show up as spell error :p\n\nThanks!",
+      "parentUuid": "97f0027b_5bfe7775",
+      "range": {
+        "startLine": 64,
+        "startChar": 44,
+        "endLine": 64,
+        "endChar": 47
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39784f4d_dcc1f58d",
@@ -285,6 +525,30 @@
       "writtenOn": "2024-02-07T02:16:11Z",
       "side": 1,
       "message": "Would we use `FromPath` multiple times? I\u0027ve thought reading `/avf/reference` from host DT would be the only use case. I think we don\u0027t need iteration, with an assumption your intent is to provide applying multiple `FromPath`.",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 5
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17220431_f7120f69",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-08T13:12:06Z",
+      "side": 1,
+      "message": "I would say we shouldn\u0027t make that assumption in this method. As mentioned in the reply to the other comment, it is possible for `path_overlays` to be empty",
+      "parentUuid": "39784f4d_dcc1f58d",
       "range": {
         "startLine": 72,
         "startChar": 0,
