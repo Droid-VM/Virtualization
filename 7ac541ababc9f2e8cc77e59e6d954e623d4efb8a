@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "254a51a5_f6ebd247",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-08T16:07:30Z",
+      "side": 1,
+      "message": "Should we keep both `get_from_ptr()` and `get_slice_at_ptr()`? Seems like that we\u0027d better to remove one.",
+      "range": {
+        "startLine": 907,
+        "startChar": 7,
+        "endLine": 907,
+        "endChar": 19
+      },
+      "revId": "7ac541ababc9f2e8cc77e59e6d954e623d4efb8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
