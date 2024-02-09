@@ -615,6 +615,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         final String apkPath = getPathForPackage(PACKAGE_NAME);
         final String idsigPath = TEST_ROOT + "idsig";
         final String instanceImgPath = TEST_ROOT + "instance.img";
+        final String instanceIdPath = TEST_ROOT + "instance_id";
         List<String> cmd =
                 new ArrayList<>(
                         Arrays.asList(
@@ -624,7 +625,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                                 debuggable ? "full" : "none",
                                 apkPath,
                                 idsigPath,
-                                instanceImgPath));
+                                instanceImgPath,
+                                instanceIdPath));
         if (protectedVm) {
             cmd.add("--protected");
         }
@@ -885,7 +887,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         final String apkPath = getPathForPackage(PACKAGE_NAME);
         final String idSigPath = TEST_ROOT + "idsig";
         android.run(VIRT_APEX + "bin/vm", "create-idsig", apkPath, idSigPath);
-
+        // Create the file to store id
+        final String instanceIdPath = TEST_ROOT + "instance_id";
         // Create the instance image for the VM
         final String instanceImgPath = TEST_ROOT + "instance.img";
         android.run(
@@ -903,7 +906,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                                 "./MicrodroidTestNativeLib.so",
                                 apkPath,
                                 idSigPath,
-                                instanceImgPath)
+                                instanceImgPath,
+                                instanceIdPath)
                         .getStderr()
                         .trim();
 
