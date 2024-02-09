@@ -120,6 +120,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "401cd3c5_b49fda30",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-09T20:16:37Z",
+      "side": 1,
+      "message": "+@jaewan@google.com, who might provide valuable insights given his recent DT work.\n\n---\n\n\u003e The rationale for creating a separate node for host-controlled properties is not security but ABI.\n\nAgreed.\n\nHowever, introducing a new node conflicts with another (arguably unwritten) ABI design principle that all AVF-related entries (which some would say is already an abuse of the DT) would be grouped in this single `/avf` node.\n\nYes, we already messed up with the `/chosen/avf,...` props but these are good reminders that such ABIs are \"forever\".\n\n\u003e In theory, reference tree  could have a node [...] causing unnecessary conflicts\n\nThat\u0027s correct but `/avf-untrusted` doesn\u0027t prevent that, as Alan said.\n\nWith the \"single DTBO\" implementation, host userspace will detect those conflicts before spawning the guest, hopefully failing its boot. In turn, this should be detected by our CTS, with the appropriate coverage, flagging any such improper integration done by vendors.\n\nFYI, the VM DTBO (for device assignment) also allows vendors to insert (trusted) entries at arbitrary paths into the guest DT.\n\n\u003e the hack/solution to similar problem in ABL - it adds the relevant data only in `/avf/reference/avf` to avoid conflicting with other device nodes\n\nThe fact that a VM reference DT can be used to patch any part of the guest DT isn\u0027t a \"problem\", it\u0027s a design choice which might save us down the line, if necessary to support some use-cases. Jaewan wrote aosp/2919550 following this ABI.\n\nOTOH, gpar/787918 only implemented a subset of the ABI, not due to some concern about conflicting nodes, but because of short deadlines + not having use-cases requiring the \"full\" ABI: that\u0027s why I called it a \"hack\". Anyhow, a vendor-specific implementation detail should in no way define or be used as the reference for an Android ABI.\n\nSo I don\u0027t see any pros for defining `/avf-untrusted` over `/avf/untrusted` and would recommend we use the latter, for clarity and namespacing.",
+      "parentUuid": "372d6074_03e003b7",
+      "range": {
+        "startLine": 9,
+        "startChar": 32,
+        "endLine": 9,
+        "endChar": 45
+      },
+      "revId": "657338d2c3112bc847979eccc128e7f6ef0854ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e6a16b68_743ae50d",
