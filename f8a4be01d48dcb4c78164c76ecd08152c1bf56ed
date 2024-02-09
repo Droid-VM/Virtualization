@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23aba0b7_af8d2956",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-09T16:52:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39e93aac_71fa342f",
+      "range": {
+        "startLine": 381,
+        "startChar": 31,
+        "endLine": 381,
+        "endChar": 37
+      },
+      "revId": "f8a4be01d48dcb4c78164c76ecd08152c1bf56ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8e99320_d5926033",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-09T14:08:32Z",
       "side": 1,
       "message": "Nit: Move inside the if",
+      "range": {
+        "startLine": 392,
+        "startChar": 0,
+        "endLine": 392,
+        "endChar": 85
+      },
+      "revId": "f8a4be01d48dcb4c78164c76ecd08152c1bf56ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57f6f9f3_af8423f5",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-09T16:52:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8e99320_d5926033",
       "range": {
         "startLine": 392,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34ba5525_c08f92ca",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-09T16:52:40Z",
+      "side": 1,
+      "message": "Done, but does it matter? We\u0027re not reallocating and all, so we don\u0027t need vec, but is array really any better?",
+      "parentUuid": "d3aa3253_526dae44",
+      "range": {
+        "startLine": 399,
+        "startChar": 27,
+        "endLine": 399,
+        "endChar": 61
+      },
+      "revId": "f8a4be01d48dcb4c78164c76ecd08152c1bf56ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14dc2e03_697c28be",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-02-09T14:08:32Z",
       "side": 1,
       "message": "As Pierre-Clément suggested, I think we want avf/untrusted",
+      "range": {
+        "startLine": 24,
+        "startChar": 57,
+        "endLine": 24,
+        "endChar": 70
+      },
+      "revId": "f8a4be01d48dcb4c78164c76ecd08152c1bf56ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf855be0_a79961e1",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-09T16:52:40Z",
+      "side": 1,
+      "message": "Lets discuss this in the other comment, I explained the reasoning there",
+      "parentUuid": "14dc2e03_697c28be",
       "range": {
         "startLine": 24,
         "startChar": 57,
@@ -139,6 +235,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b4ad338_cac41b4f",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-09T16:52:40Z",
+      "side": 1,
+      "message": "Lets keep it `AvfUntrustedProp` to match the node name",
+      "parentUuid": "e3c84830_d18aaf83",
+      "range": {
+        "startLine": 36,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 20
+      },
+      "revId": "f8a4be01d48dcb4c78164c76ecd08152c1bf56ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb1e3b0f_24ca734d",
@@ -152,6 +272,30 @@
       "writtenOn": "2024-02-09T14:08:32Z",
       "side": 1,
       "message": "Nit: You could avoid this with a single loop below",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 91
+      },
+      "revId": "f8a4be01d48dcb4c78164c76ecd08152c1bf56ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa5f8b98_bf716eb7",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-09T16:52:40Z",
+      "side": 1,
+      "message": "This one is tricky.\n\nBoth `Fdt::root_mut` \u0026 `FsFdt::append(..)` takes mutable reference to self which is not allowed unless one is no more used (the current way).\n\nWithout partitioning, we may need to call `FsFdt::append(..)` before `node.add_subnode` \u0026 the latter uses the borrowed reference from `root_mut`.\n\nAlso, on a different point, I am not sure why we were using a wrapper library around libfdt here, given we are not confined to baremetal environment. Perhaps we should be using the underlying rust crate.",
+      "parentUuid": "eb1e3b0f_24ca734d",
       "range": {
         "startLine": 48,
         "startChar": 0,
@@ -185,6 +329,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c69bd66_3feb8194",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-09T16:52:40Z",
+      "side": 1,
+      "message": "Added in function doc.",
+      "parentUuid": "036a3785_bf420d9a",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 0
+      },
+      "revId": "f8a4be01d48dcb4c78164c76ecd08152c1bf56ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "468d1eec_2a12cded",
@@ -208,6 +376,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e7a37e9_326c49db",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-09T16:52:40Z",
+      "side": 1,
+      "message": "I tried writing a test but it requires selinux permission of various sysfs paths to shell \u0026 I\u0027m not sure its the right thing to do?\n\nEither way, can we create a bug for this? The scope of this patch was refactoring the Path based addition \u0026 we already use this vendor_hashtree, so there might already be u-droid tests.\n\n```\n    #[test]\n    fn path_addition() {\n        let mut buffer \u003d vec![0_u8; 10_000];\n        const MANDATORY_PATH_DT: \u0026str \u003d \"/proc/device-tree/chosen\";\n        let fdt \u003d create_device_tree_overlay(\n            \u0026mut buffer,\n            \u0026[\n                DtAddition::FromPath(Path::new(MANDATORY_PATH_DT)),\n                DtAddition::AvfUntrustedProp(cstr!(\"XOXO\"), b\"0X0X\"),\n            ],\n        )\n        .unwrap();\n        let chosen \u003d fdt\n            .node(cstr!(\"/fragment@0/__overlay__\"))\n            .unwrap()\n            .expect(\"chosen node doesn\u0027t exist\");\n            \n        let bootargs \u003d chosen.getprop_str(cstr!(\"bootargs\"))\n            .unwrap();\n        assert!(bootargs.is_some(), \"bootargs missing\");\n    }\n```",
+      "parentUuid": "468d1eec_2a12cded",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 11
+      },
+      "revId": "f8a4be01d48dcb4c78164c76ecd08152c1bf56ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c62794b7_96ba74b5",
@@ -221,6 +413,30 @@
       "writtenOn": "2024-02-09T14:08:32Z",
       "side": 1,
       "message": "untrusted",
+      "range": {
+        "startLine": 94,
+        "startChar": 7,
+        "endLine": 94,
+        "endChar": 16
+      },
+      "revId": "f8a4be01d48dcb4c78164c76ecd08152c1bf56ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "115971eb_3a535ed2",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-09T16:52:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c62794b7_96ba74b5",
       "range": {
         "startLine": 94,
         "startChar": 7,
