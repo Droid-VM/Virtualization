@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "77999a07_b7bb7018",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-02-09T08:18:49Z",
+      "side": 1,
+      "message": "Right. It doesn\u0027t have code. It\u0027s only a VM payload to demonstrate the attestation.\n\nClosed this comment as I moved the demo app addition cl to another cl \u003d\u003e https://r.android.com/2956170",
+      "parentUuid": "ac7b948c_38bdde4c",
+      "range": {
+        "startLine": 21,
+        "startChar": 46,
+        "endLine": 22,
+        "endChar": 58
+      },
+      "revId": "b40eb7cccdbdae210418247b55e0a2fc3028a3f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "05cb71c9_ed48cb6a",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 13
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6232a25_9bd5709d",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-02-09T08:18:49Z",
+      "side": 1,
+      "message": "Done. Right. I cloned the key at the usage initially but I thought you would like to drop the key after the first usage.",
+      "parentUuid": "60d9de47_e3b25bbb",
+      "range": {
+        "startLine": 378,
+        "startChar": 10,
+        "endLine": 378,
+        "endChar": 56
+      },
+      "revId": "b40eb7cccdbdae210418247b55e0a2fc3028a3f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "218eb48b_0dd125d9",
@@ -77,6 +125,30 @@
       "writtenOn": "2024-02-07T14:15:47Z",
       "side": 1,
       "message": "There\u0027s a subtle flaw here.\nWhen service goes out of scope, Java is allowed to GC it. Which will cause virt manager to exit, and that in turn allows VirtualizationService to exit, losing the provisioned key.\nCould we move this method to VirtualMachine, which holds a VirtualizationService reference to prevent that?",
+      "range": {
+        "startLine": 387,
+        "startChar": 12,
+        "endLine": 387,
+        "endChar": 80
+      },
+      "revId": "b40eb7cccdbdae210418247b55e0a2fc3028a3f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bf40b17_1f693a5a",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-02-09T08:18:49Z",
+      "side": 1,
+      "message": "Done. I moved this method back to VirtualMachine.",
+      "parentUuid": "218eb48b_0dd125d9",
       "range": {
         "startLine": 387,
         "startChar": 12,
@@ -110,6 +182,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf730433_32fbb400",
+        "filename": "service_vm/demo_apk/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-02-09T08:18:49Z",
+      "side": 1,
+      "message": "Discussed offline. I moved the demo app addition to another cl \u003d\u003e https://r.android.com/2956170",
+      "parentUuid": "59af8105_fafaaa3a",
+      "range": {
+        "startLine": 6,
+        "startChar": 11,
+        "endLine": 6,
+        "endChar": 35
+      },
+      "revId": "b40eb7cccdbdae210418247b55e0a2fc3028a3f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3391e17e_36562fb0",
@@ -123,6 +219,30 @@
       "writtenOn": "2024-02-07T14:13:12Z",
       "side": 1,
       "message": "demo_apk (consistency always helps)",
+      "range": {
+        "startLine": 16,
+        "startChar": 43,
+        "endLine": 16,
+        "endChar": 49
+      },
+      "revId": "b40eb7cccdbdae210418247b55e0a2fc3028a3f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09b5ef05_3b16ba06",
+        "filename": "service_vm/demo_apk/AndroidManifest.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-02-09T08:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3391e17e_36562fb0",
       "range": {
         "startLine": 16,
         "startChar": 43,
@@ -156,6 +276,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5d9a110_a1afbaa9",
+        "filename": "service_vm/test_apk/AndroidManifest.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-02-09T08:18:49Z",
+      "side": 1,
+      "message": "Discussed offline: I think we need 2. The test_apk mocked the RKPD and is useful to test our code without the real key provisioning. The demo_apk that interacts with the RKPD is useful for manual testing and can serve as a practical example for the attestation APIs. I\u0027ll add the demo apk in a separate cl.",
+      "parentUuid": "3368a3e7_997a93fb",
+      "range": {
+        "startLine": 21,
+        "startChar": 6,
+        "endLine": 21,
+        "endChar": 21
+      },
+      "revId": "b40eb7cccdbdae210418247b55e0a2fc3028a3f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd0a7d0d_a941ba33",
@@ -169,6 +313,30 @@
       "writtenOn": "2024-02-07T14:13:12Z",
       "side": 1,
       "message": "Is this a CTS? We should probably add @CddTest the same as we\u0027ve done for MicrodroidTests.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 66
+      },
+      "revId": "b40eb7cccdbdae210418247b55e0a2fc3028a3f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "022ebea8_64d5e933",
+        "filename": "service_vm/test_apk/src/java/com/android/virt/service_vm/client/VmAttestationTests.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-02-09T08:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd0a7d0d_a941ba33",
       "range": {
         "startLine": 52,
         "startChar": 0,
@@ -202,6 +370,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc7e5434_9af0e75d",
+        "filename": "service_vm/test_apk/src/java/com/android/virt/service_vm/client/VmAttestationTests.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-02-09T08:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb5a4ccb_44bb6b92",
+      "range": {
+        "startLine": 61,
+        "startChar": 18,
+        "endLine": 61,
+        "endChar": 65
+      },
+      "revId": "b40eb7cccdbdae210418247b55e0a2fc3028a3f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa8ed7c7_a6e34a6a",
@@ -215,6 +407,30 @@
       "writtenOn": "2024-02-07T14:13:12Z",
       "side": 1,
       "message": "I think this should be a lot earlier. (Otherwise, if an exception is thrown, the only info you will get will be that line 92 fails - when line 93 would be much more useful.)",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 56
+      },
+      "revId": "b40eb7cccdbdae210418247b55e0a2fc3028a3f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f9132c3_fb51390c",
+        "filename": "service_vm/test_apk/src/java/com/android/virt/service_vm/client/VmAttestationTests.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-02-09T08:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa8ed7c7_a6e34a6a",
       "range": {
         "startLine": 82,
         "startChar": 0,
@@ -250,6 +466,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "65f8f7a7_6ad8436d",
+        "filename": "service_vm/test_apk/src/native/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-02-09T08:18:49Z",
+      "side": 1,
+      "message": "You are correct. The VM environment has some limitations when it comes to crypto. Therefore, the main purpose of this \"validation\" is to use the attestation result and verify that the keys are prepared and ready for use. What do you suggest to add here?",
+      "parentUuid": "7e0fe240_e855fe42",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 14
+      },
+      "revId": "b40eb7cccdbdae210418247b55e0a2fc3028a3f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c0ad01c_91df8dea",
         "filename": "service_vm/test_apk/src/native/main.rs",
         "patchSetId": 13
@@ -261,6 +501,30 @@
       "writtenOn": "2024-02-07T14:13:12Z",
       "side": 1,
       "message": "If the API is unusable as designed, we should fix it.\n\n(Can we simply return a buffer size that is guaranteed to always be big enough? The required buffer size doesn\u0027t need to be the actual returned size.)",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 243,
+        "endChar": 52
+      },
+      "revId": "b40eb7cccdbdae210418247b55e0a2fc3028a3f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05b25e18_235ad55c",
+        "filename": "service_vm/test_apk/src/native/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-02-09T08:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c0ad01c_91df8dea",
       "range": {
         "startLine": 241,
         "startChar": 0,
@@ -294,6 +558,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4432639_23cdafe1",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-02-09T08:18:49Z",
+      "side": 1,
+      "message": "I added a snapshot of its content here.",
+      "parentUuid": "2425dee1_a263173d",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 9
+      },
+      "revId": "b40eb7cccdbdae210418247b55e0a2fc3028a3f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42100e23_6d640cec",
@@ -307,6 +595,30 @@
       "writtenOn": "2024-02-07T14:13:12Z",
       "side": 1,
       "message": "This worries me; we have global state, which means if we run multiple tests in parallel things will go wrong.\n\nCan we say that test attestations are allowed as long as the provisioning has been called?\n\n(Although if VS stops, the provisioning will cease to have effect.)",
+      "range": {
+        "startLine": 263,
+        "startChar": 16,
+        "endLine": 263,
+        "endChar": 27
+      },
+      "revId": "b40eb7cccdbdae210418247b55e0a2fc3028a3f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c6c1d5b_0c93dd55",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-02-09T08:18:49Z",
+      "side": 1,
+      "message": "I changed this to clone. That should be fine when multiple tests are called on the same time.",
+      "parentUuid": "42100e23_6d640cec",
       "range": {
         "startLine": 263,
         "startChar": 16,
