@@ -444,6 +444,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2af6411_be36add7",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-09T12:28:26Z",
+      "side": 1,
+      "message": "I\u0027d vote for \"untrusted\".\n\n(E.g. we use that in sepolicy to refer to 3P apps - untrusted_app.)\n\nAnd the bikeshed should be blue.",
+      "parentUuid": "855a922a_703f8468",
+      "range": {
+        "startLine": 35,
+        "startChar": 3,
+        "endLine": 35,
+        "endChar": 13
+      },
+      "revId": "08e55ba36305815bb1b0ebe7189f076dd65e3d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9637fb0f_df30d2dd",
