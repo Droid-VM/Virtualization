@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2f6ebe53_9f148f4b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-09T12:05:07Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t think we should worry about \"secure\" (non-non-secure) properties\n\nThe rationale for creating a separate node for host-controlled properties is not security but ABI.\n\nIn theory, reference tree (in uncompromised host as well) could have a node /avf/nonsecure* causing unnecessary conflicts (unless we explicitly mention in ABI, not to add that in refDT, which I would insist we don\u0027t).\n\n\n*changing name now, see reply at the other comment.",
+      "parentUuid": "4d8842f7_b67bdacb",
+      "range": {
+        "startLine": 9,
+        "startChar": 32,
+        "endLine": 9,
+        "endChar": 45
+      },
+      "revId": "657338d2c3112bc847979eccc128e7f6ef0854ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e6a16b68_743ae50d",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
@@ -54,6 +78,30 @@
       "writtenOn": "2024-02-08T21:00:47Z",
       "side": 1,
       "message": "Using `assert_eq` will print out (`derive(Debug)`) the mismatched values on error (easier to investigate).",
+      "range": {
+        "startLine": 108,
+        "startChar": 8,
+        "endLine": 108,
+        "endChar": 14
+      },
+      "revId": "657338d2c3112bc847979eccc128e7f6ef0854ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ef35e8f_dc6b93aa",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-09T12:05:07Z",
+      "side": 1,
+      "message": "Done. Thanks!",
+      "parentUuid": "b5c77135_a10c491d",
       "range": {
         "startLine": 108,
         "startChar": 8,
