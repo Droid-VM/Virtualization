@@ -142,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09f9e5b4_7e39c9c9",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-09T17:12:21Z",
+      "side": 1,
+      "message": "Saves an allocation. (Array is on the stack, vec is on the heap.)\nBut it\u0027s pretty minor.",
+      "parentUuid": "34ba5525_c08f92ca",
+      "range": {
+        "startLine": 399,
+        "startChar": 27,
+        "endLine": 399,
+        "endChar": 61
+      },
+      "revId": "f8a4be01d48dcb4c78164c76ecd08152c1bf56ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14dc2e03_697c28be",
@@ -202,6 +226,30 @@
       "writtenOn": "2024-02-09T14:08:32Z",
       "side": 1,
       "message": "/avf/untrusted",
+      "range": {
+        "startLine": 34,
+        "startChar": 30,
+        "endLine": 34,
+        "endChar": 44
+      },
+      "revId": "f8a4be01d48dcb4c78164c76ecd08152c1bf56ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a175ec13_81cf1880",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-09T17:12:21Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a47380c0_e8ac1db7",
       "range": {
         "startLine": 34,
         "startChar": 30,
@@ -306,6 +354,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f45fe9bf_ce525c25",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-09T17:12:21Z",
+      "side": 1,
+      "message": "\u003e This one is tricky.\n\nAck, fair enough.\n\n\u003e Perhaps we should be using the underlying rust crate.\n\nI have no position on this.",
+      "parentUuid": "aa5f8b98_bf716eb7",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 91
+      },
+      "revId": "f8a4be01d48dcb4c78164c76ecd08152c1bf56ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "036a3785_bf420d9a",
@@ -390,6 +462,30 @@
       "side": 1,
       "message": "I tried writing a test but it requires selinux permission of various sysfs paths to shell \u0026 I\u0027m not sure its the right thing to do?\n\nEither way, can we create a bug for this? The scope of this patch was refactoring the Path based addition \u0026 we already use this vendor_hashtree, so there might already be u-droid tests.\n\n```\n    #[test]\n    fn path_addition() {\n        let mut buffer \u003d vec![0_u8; 10_000];\n        const MANDATORY_PATH_DT: \u0026str \u003d \"/proc/device-tree/chosen\";\n        let fdt \u003d create_device_tree_overlay(\n            \u0026mut buffer,\n            \u0026[\n                DtAddition::FromPath(Path::new(MANDATORY_PATH_DT)),\n                DtAddition::AvfUntrustedProp(cstr!(\"XOXO\"), b\"0X0X\"),\n            ],\n        )\n        .unwrap();\n        let chosen \u003d fdt\n            .node(cstr!(\"/fragment@0/__overlay__\"))\n            .unwrap()\n            .expect(\"chosen node doesn\u0027t exist\");\n            \n        let bootargs \u003d chosen.getprop_str(cstr!(\"bootargs\"))\n            .unwrap();\n        assert!(bootargs.is_some(), \"bootargs missing\");\n    }\n```",
       "parentUuid": "468d1eec_2a12cded",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 11
+      },
+      "revId": "f8a4be01d48dcb4c78164c76ecd08152c1bf56ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62c4d7eb_93f8fe1c",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-09T17:12:21Z",
+      "side": 1,
+      "message": "Yeah, fair enough.",
+      "parentUuid": "9e7a37e9_326c49db",
       "range": {
         "startLine": 83,
         "startChar": 0,
