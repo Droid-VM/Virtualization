@@ -230,6 +230,11 @@ impl IVirtualizationService for VirtualizationService {
         ret
     }
 
+    /// Allocate a new instance_id to the VM
+    fn allocateInstanceId(&self) -> binder::Result<[u8; 64]> {
+        GLOBAL_SERVICE.allocateInstanceId()
+    }
+
     /// Initialise an empty partition image of the given size to be used as a writable partition.
     fn initializeWritablePartition(
         &self,
