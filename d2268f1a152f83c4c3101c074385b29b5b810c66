@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "388f4491_99609146",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-02-09T09:07:34Z",
+      "side": 1,
+      "message": "Unsafe Rust still LGTM.",
+      "revId": "d2268f1a152f83c4c3101c074385b29b5b810c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fc78f29_10273fc6",
+        "filename": "vm_payload/src/lib.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-02-09T09:07:34Z",
+      "side": 1,
+      "message": "Nit: It\u0027s not very well known, but you can also write `usize::min`, which I find easier to read.",
+      "revId": "d2268f1a152f83c4c3101c074385b29b5b810c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
