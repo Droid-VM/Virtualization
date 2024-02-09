@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "372d6074_03e003b7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-09T17:59:12Z",
+      "side": 1,
+      "message": "\u003e /avf/reference/avf-nonsecure? Or do we block that somewhere?\n\n@ptosi@google.com, I think we discussed the hack/solution to similar problem in ABL - it adds the relevant data only in `/avf/reference/avf` to avoid conflicting with other device nodes (like platform nodes perhaps?).\n\nAdding `/avf-untrusted/` is building up on the similar logic.\n\nLet us know what you think? Thanks",
+      "parentUuid": "f029f915_c4efedd4",
+      "range": {
+        "startLine": 9,
+        "startChar": 32,
+        "endLine": 9,
+        "endChar": 45
+      },
+      "revId": "657338d2c3112bc847979eccc128e7f6ef0854ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e6a16b68_743ae50d",
