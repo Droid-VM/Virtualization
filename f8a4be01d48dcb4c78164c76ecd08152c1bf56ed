@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39e93aac_71fa342f",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-09T14:08:32Z",
+      "side": 1,
+      "message": "Vec::with_capacity(2) ?",
+      "range": {
+        "startLine": 381,
+        "startChar": 31,
+        "endLine": 381,
+        "endChar": 37
+      },
+      "revId": "f8a4be01d48dcb4c78164c76ecd08152c1bf56ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8e99320_d5926033",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-09T14:08:32Z",
+      "side": 1,
+      "message": "Nit: Move inside the if",
+      "range": {
+        "startLine": 392,
+        "startChar": 0,
+        "endLine": 392,
+        "endChar": 85
+      },
+      "revId": "f8a4be01d48dcb4c78164c76ecd08152c1bf56ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3aa3253_526dae44",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-09T14:08:32Z",
+      "side": 1,
+      "message": "This can be an array rather than a vec, I think",
+      "range": {
+        "startLine": 399,
+        "startChar": 27,
+        "endLine": 399,
+        "endChar": 61
+      },
+      "revId": "f8a4be01d48dcb4c78164c76ecd08152c1bf56ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14dc2e03_697c28be",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-09T14:08:32Z",
+      "side": 1,
+      "message": "As Pierre-Clément suggested, I think we want avf/untrusted",
+      "range": {
+        "startLine": 24,
+        "startChar": 57,
+        "endLine": 24,
+        "endChar": 70
+      },
+      "revId": "f8a4be01d48dcb4c78164c76ecd08152c1bf56ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a47380c0_e8ac1db7",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-09T14:08:32Z",
+      "side": 1,
+      "message": "/avf/untrusted",
+      "range": {
+        "startLine": 34,
+        "startChar": 30,
+        "endLine": 34,
+        "endChar": 44
+      },
+      "revId": "f8a4be01d48dcb4c78164c76ecd08152c1bf56ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3c84830_d18aaf83",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-09T14:08:32Z",
+      "side": 1,
+      "message": "Maybe just UntrustedProp?",
+      "range": {
+        "startLine": 36,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 20
+      },
+      "revId": "f8a4be01d48dcb4c78164c76ecd08152c1bf56ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb1e3b0f_24ca734d",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-09T14:08:32Z",
+      "side": 1,
+      "message": "Nit: You could avoid this with a single loop below",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 91
+      },
+      "revId": "f8a4be01d48dcb4c78164c76ecd08152c1bf56ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "036a3785_bf420d9a",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-09T14:08:32Z",
+      "side": 1,
+      "message": "It might be helpful to sketch out what this looks like in a comment?",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 0
+      },
+      "revId": "f8a4be01d48dcb4c78164c76ecd08152c1bf56ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "468d1eec_2a12cded",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-09T14:08:32Z",
+      "side": 1,
+      "message": "Test a path as well?",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 11
+      },
+      "revId": "f8a4be01d48dcb4c78164c76ecd08152c1bf56ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c62794b7_96ba74b5",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-09T14:08:32Z",
+      "side": 1,
+      "message": "untrusted",
+      "range": {
+        "startLine": 94,
+        "startChar": 7,
+        "endLine": 94,
+        "endChar": 16
+      },
+      "revId": "f8a4be01d48dcb4c78164c76ecd08152c1bf56ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
