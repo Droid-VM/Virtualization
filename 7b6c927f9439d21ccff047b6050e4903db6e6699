@@ -16,6 +16,115 @@
       "message": "Thanks for the review!",
       "revId": "7b6c927f9439d21ccff047b6050e4903db6e6699",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9174a464_681580d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-09T10:59:18Z",
+      "side": 1,
+      "message": "@ioffe@google.com Can you look at the API changes (inside \u0026 outside the VM - all test API)?",
+      "revId": "7b6c927f9439d21ccff047b6050e4903db6e6699",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c51b6f54_5bc49b58",
+        "filename": "TEST_MAPPING",
+        "patchSetId": 16
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-09T10:59:18Z",
+      "side": 1,
+      "message": "Don\u0027t forget this bit",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 66
+      },
+      "revId": "7b6c927f9439d21ccff047b6050e4903db6e6699",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4703230_8188b96b",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-09T10:59:18Z",
+      "side": 1,
+      "message": "I think those semantics are a little weird.\n\nHow about: The size of the signature, or the size needed if the supplied buffer is too small.",
+      "range": {
+        "startLine": 214,
+        "startChar": 11,
+        "endLine": 215,
+        "endChar": 20
+      },
+      "revId": "7b6c927f9439d21ccff047b6050e4903db6e6699",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07839f93_4f42bc66",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-09T10:59:18Z",
+      "side": 1,
+      "message": "I wouldn\u0027t put that here, rather in lib.rs below. (The caller shouldn\u0027t have to worry about the details, they just need to provide a big enough buffer.)",
+      "range": {
+        "startLine": 216,
+        "startChar": 0,
+        "endLine": 218,
+        "endChar": 13
+      },
+      "revId": "7b6c927f9439d21ccff047b6050e4903db6e6699",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49077dd0_15c37899",
+        "filename": "vm_payload/src/lib.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-09T10:59:18Z",
+      "side": 1,
+      "message": "You need to return the maximum size here, don\u0027t you? The caller can legitimately pass a buffer that is not zero sized but happens to be too small, and we need to tell them what size they should supply.",
+      "range": {
+        "startLine": 478,
+        "startChar": 4,
+        "endLine": 478,
+        "endChar": 19
+      },
+      "revId": "7b6c927f9439d21ccff047b6050e4903db6e6699",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

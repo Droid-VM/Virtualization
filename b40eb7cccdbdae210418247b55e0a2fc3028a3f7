@@ -490,6 +490,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "08c24fda_8fb34015",
+        "filename": "service_vm/test_apk/src/native/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-09T10:59:18Z",
+      "side": 1,
+      "message": "Can we not call it validate?\n\nLog, exercise?\n\nAlternatively: Return the cert, message \u0026 signature to the Java side and validate the crypto over there? (That could be a follow-up CL.)",
+      "parentUuid": "65f8f7a7_6ad8436d",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 14
+      },
+      "revId": "b40eb7cccdbdae210418247b55e0a2fc3028a3f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c0ad01c_91df8dea",
         "filename": "service_vm/test_apk/src/native/main.rs",
         "patchSetId": 13
@@ -619,6 +643,30 @@
       "side": 1,
       "message": "I changed this to clone. That should be fine when multiple tests are called on the same time.",
       "parentUuid": "42100e23_6d640cec",
+      "range": {
+        "startLine": 263,
+        "startChar": 16,
+        "endLine": 263,
+        "endChar": 27
+      },
+      "revId": "b40eb7cccdbdae210418247b55e0a2fc3028a3f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6884345f_2cedc73e",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-09T10:59:18Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8c6c1d5b_0c93dd55",
       "range": {
         "startLine": 263,
         "startChar": 16,
