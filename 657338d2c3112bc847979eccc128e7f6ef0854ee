@@ -144,6 +144,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3ad85e0_80bb7a9e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-09T21:59:13Z",
+      "side": 1,
+      "message": "Hang on, just checking if we are concerned about the same `ABI` - it is the guest OS\u0027 (which are part of Android system) expectation about device tree (which, while maybe be set by crosvm(/system), is heavily influenced by vendor related partitions such as ABL/pvmfw).\n\nThe expectation is also strongly around trustworthiness of the nodes. (How u-droid blindly trusts value in /chosen/avf,strict-boot is a good example).\n\nIn the current model, it looks like everything within the device tree received by the guest is trusted. (How it is done is implementation detail, reference dt, pvmfw sanitization and what not).\n\nSo, the change in the ABI introduced due to ABI will be roughly from:\n`Trust whole DT` -\u003e `Trust whole DT except /avf-untrusted or /avf/untrusted`. I\u0027m cool with either change as far as this this is concerned.\n\nWe\u0027re also concerned about the (the weaker) ABI boundary between pvmfw/ABL/crosvm (afterall, we ship the reference impl of pvmfw \u0026 that hopefully should be adopted as is). This, I believe doesn\u0027t require any change, pvmfw will do a very lightwt. validation of the node /avf/untrusted (b/324046698) [This will become more relevant if we make use of `Id` \u0026 other nodes in `/avf/nonsecure` in pvmfw].\n\nLets circle back on this after Korea is back from holidays.",
+      "parentUuid": "401cd3c5_b49fda30",
+      "range": {
+        "startLine": 9,
+        "startChar": 32,
+        "endLine": 9,
+        "endChar": 45
+      },
+      "revId": "657338d2c3112bc847979eccc128e7f6ef0854ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e6a16b68_743ae50d",
