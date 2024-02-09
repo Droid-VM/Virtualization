@@ -40,6 +40,7 @@ import java.io.IOException;
 public final class VirtualMachineDescriptor implements Parcelable, AutoCloseable {
     private volatile boolean mClosed = false;
     @NonNull private final ParcelFileDescriptor mConfigFd;
+    @NonNull private final ParcelFileDescriptor mInstanceIdFd;
     @NonNull private final ParcelFileDescriptor mInstanceImgFd;
     // File descriptor of the image backing the encrypted storage - Will be null if encrypted
     // storage is not enabled. */
@@ -54,6 +55,7 @@ public final class VirtualMachineDescriptor implements Parcelable, AutoCloseable
     public void writeToParcel(@NonNull Parcel out, int flags) {
         checkNotClosed();
         out.writeParcelable(mConfigFd, flags);
+        out.writeParcelable(mInstanceIdFd, flags);
         out.writeParcelable(mInstanceImgFd, flags);
         out.writeParcelable(mEncryptedStoreFd, flags);
     }
@@ -80,6 +82,15 @@ public final class VirtualMachineDescriptor implements Parcelable, AutoCloseable
     }
 
     /**
+     * @return File descriptor of the file containing instance_id of the VM.
+     */
+    @NonNull
+    ParcelFileDescriptor getInstanceIdFd() {
+        checkNotClosed();
+        return mInstanceIdFd;
+    }
+
+    /**
      * @return File descriptor of the instance.img of the VM.
      */
     @NonNull
@@ -100,15 +111,18 @@ public final class VirtualMachineDescriptor implements Parcelable, AutoCloseable
 
     VirtualMachineDescriptor(
             @NonNull ParcelFileDescriptor configFd,
+            @NonNull ParcelFileDescriptor instanceIdFd,
             @NonNull ParcelFileDescriptor instanceImgFd,
             @Nullable ParcelFileDescriptor encryptedStoreFd) {
         mConfigFd = requireNonNull(configFd);
+        mInstanceIdFd = requireNonNull(instanceIdFd);
         mInstanceImgFd = requireNonNull(instanceImgFd);
         mEncryptedStoreFd = encryptedStoreFd;
     }
 
     private VirtualMachineDescriptor(Parcel in) {
         mConfigFd = requireNonNull(readParcelFileDescriptor(in));
+        mInstanceIdFd = requireNonNull(readParcelFileDescriptor(in));
         mInstanceImgFd = requireNonNull(readParcelFileDescriptor(in));
         mEncryptedStoreFd = readParcelFileDescriptor(in);
     }
@@ -127,6 +141,7 @@ public final class VirtualMachineDescriptor implements Parcelable, AutoCloseable
         mClosed = true;
         // Let the compiler do the work: close everything, throw if any of them fail, skipping null.
         try (mConfigFd;
+                mInstanceIdFd;
                 mInstanceImgFd;
                 mEncryptedStoreFd) {
         } catch (IOException ignored) {

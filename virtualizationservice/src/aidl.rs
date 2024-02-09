@@ -41,6 +41,9 @@ use binder::{self, wait_for_interface, BinderFeatures, ExceptionCode, Interface,
 use lazy_static::lazy_static;
 use libc::VMADDR_CID_HOST;
 use log::{error, info, warn};
+use packagemanager_aidl::aidl::android::content::pm::{
+    IPackageManagerNative::IPackageManagerNative,
+};
 use rkpd_client::get_rkpd_attestation_key;
 use rustutils::system_properties;
 use serde::Deserialize;
@@ -55,6 +58,7 @@ use tombstoned_client::{DebuggerdDumpType, TombstonedConnection};
 use vsock::{VsockListener, VsockStream};
 use nix::unistd::{chown, Uid};
 use openssl::x509::X509;
+use rand::Fill;
 
 /// The unique ID of a VM used (together with a port number) for vsock communication.
 pub type Cid = u32;
@@ -68,10 +72,14 @@ pub const TEMPORARY_DIRECTORY: &str = "/data/misc/virtualizationservice";
 /// are reserved for the host or other usage.
 const GUEST_CID_MIN: Cid = 2048;
 const GUEST_CID_MAX: Cid = 65535;
+// Size of instance_id of VM
+const INSTANCE_ID_SIZE: usize = 64;
 
 const SYSPROP_LAST_CID: &str = "virtualizationservice.state.last_cid";
 
 const CHUNK_RECV_MAX_LEN: usize = 1024;
+
+const PACKAGE_MANAGER_NATIVE_SERVICE: &str = "package_native";
 
 lazy_static! {
     static ref VFIO_SERVICE: Strong<dyn IVfioHandler> =
@@ -256,6 +264,40 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
         let file = state.get_dtbo_file().or_service_specific_exception(-1)?;
         Ok(ParcelFileDescriptor::new(file))
     }
+
+    // TODO(b/294177871) Persist this Id, along with other info about client app.
+    fn allocateInstanceId(&self) -> binder::Result<[u8; INSTANCE_ID_SIZE]> {
+        let mut id = [0u8; INSTANCE_ID_SIZE];
+        id.try_fill(&mut rand::thread_rng())
+            .context("Failed to allocate instance_id")
+            .or_service_specific_exception(-1)?;
+        let uid = get_calling_uid();
+        let package = if uid != 0 {
+            get_package_name(uid)
+                .context("Failed to get package name for uid")
+                .or_service_specific_exception(-1)?
+        } else {
+            // PackageManager may not be available during early boot - Ex. when Compos verification
+            // is done. Let it be "UNKNOWN" & rely on explicit deletion by the root services for
+            // cleanup.
+            "UNKNOWN".to_string()
+        };
+        info!(
+            "Allocated instance_id: {:?}, for user: {:?}, package: {}",
+            hex::encode(id),
+            uid,
+            package
+        );
+        Ok(id)
+    }
+}
+
+fn get_package_name(uid: u32) -> Result<String> {
+    let pm = wait_for_interface::<dyn IPackageManagerNative>(PACKAGE_MANAGER_NATIVE_SERVICE)
+        .context("Failed to get package manager native service.")?;
+    let mut package = pm.getNamesForUids(&[uid.try_into()?]).context("getNamesForUids failed")?;
+    ensure!(package.len() == 1, "Unexpected response from PackageManager");
+    Ok(package.pop().unwrap())
 }
 
 // KEEP IN SYNC WITH assignable_devices.xsd
