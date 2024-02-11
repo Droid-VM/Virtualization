@@ -809,10 +809,20 @@ fn run_vm(
         command.arg("--cpus").arg(cpus.to_string());
     }
 
+    // Keep track of what file descriptors should be mapped to the crosvm process.
+    let mut preserved_fds = config.indirect_files.iter().map(|file| file.as_raw_fd()).collect();
+
     if config.host_cpu_topology {
         if cfg!(virt_cpufreq) {
             command.arg("--host-cpu-topology");
             command.arg("--virt-cpufreq");
+
+            let client_socket = crate::aidl::GLOBAL_SERVICE
+                .proxySchedSetAttr()
+                .expect("Failed to get proxySchedSetAttr FD");
+            command
+                .arg("--virt-cpufreq-socket")
+                .arg(add_preserved_fd(&mut preserved_fds, &client_socket));
         } else if let Some(cpus) = get_num_cpus() {
             command.arg("--cpus").arg(cpus.to_string());
         } else {
@@ -827,9 +837,6 @@ fn run_vm(
     if let Some(gdb_port) = config.gdb_port {
         command.arg("--gdb").arg(gdb_port.to_string());
     }
-
-    // Keep track of what file descriptors should be mapped to the crosvm process.
-    let mut preserved_fds = config.indirect_files.iter().map(|file| file.as_raw_fd()).collect();
 
     // Setup the serial devices.
     // 1. uart device: used as the output device by bootloaders and as early console by linux
