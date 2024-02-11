@@ -81,4 +81,12 @@ interface IVirtualizationServiceInternal {
 
     /** Returns a read-only file descriptor of the VM DTBO file. */
     ParcelFileDescriptor getDtboFile();
+
+    /**
+     * Returns a UDS. A single u64 containing util_min in the upper 32bits and tid in the lower 32
+     * bits in native endianness written to the socket, which are used for sched_setattr calls.
+     *
+     * The SELinux policy only allows this to succeed for virtmgr callers.
+     */
+    ParcelFileDescriptor proxySchedSetAttr();
 }

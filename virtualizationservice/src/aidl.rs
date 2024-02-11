@@ -55,9 +55,11 @@ use tombstoned_client::{DebuggerdDumpType, TombstonedConnection};
 use vsock::{VsockListener, VsockStream};
 use nix::unistd::{chown, Uid};
 use openssl::x509::X509;
+use zerocopy::AsBytes;
 
 /// The unique ID of a VM used (together with a port number) for vsock communication.
 pub type Cid = u32;
+pub type Pid = libc::pid_t;
 
 pub const BINDER_SERVICE_IDENTIFIER: &str = "android.system.virtualizationservice";
 
@@ -73,6 +75,13 @@ const SYSPROP_LAST_CID: &str = "virtualizationservice.state.last_cid";
 
 const CHUNK_RECV_MAX_LEN: usize = 1024;
 
+const SCHED_FLAG_RESET_ON_FORK: u64 = 0x1;
+const SCHED_FLAG_KEEP_POLICY: u64 = 0x08;
+const SCHED_FLAG_KEEP_PARAMS: u64 = 0x10;
+const SCHED_FLAG_UTIL_CLAMP_MIN: u64 = 0x20;
+
+const SCHED_FLAG_KEEP_ALL: u64 = SCHED_FLAG_KEEP_POLICY | SCHED_FLAG_KEEP_PARAMS;
+
 lazy_static! {
     static ref VFIO_SERVICE: Strong<dyn IVfioHandler> =
         wait_for_interface(<BpVfioHandler as IVfioHandler>::get_descriptor())
@@ -81,6 +90,59 @@ lazy_static! {
 
 fn is_valid_guest_cid(cid: Cid) -> bool {
     (GUEST_CID_MIN..=GUEST_CID_MAX).contains(&cid)
+}
+
+//This is required since libc::sched_attr lacks sched_util* members
+#[repr(C)]
+pub struct sched_attr {
+    pub size: u32,
+
+    pub sched_policy: u32,
+    pub sched_flags: u64,
+    pub sched_nice: i32,
+
+    pub sched_priority: u32,
+
+    pub sched_runtime: u64,
+    pub sched_deadline: u64,
+    pub sched_period: u64,
+
+    pub sched_util_min: u32,
+    pub sched_util_max: u32,
+}
+
+impl Default for sched_attr {
+    fn default() -> Self {
+        Self {
+            size: std::mem::size_of::<sched_attr>() as u32,
+            sched_policy: 0,
+            sched_flags: 0,
+            sched_nice: 0,
+            sched_priority: 0,
+            sched_runtime: 0,
+            sched_deadline: 0,
+            sched_period: 0,
+            sched_util_min: 0,
+            sched_util_max: 0,
+        }
+    }
+}
+
+pub fn sched_setattr(pid: Pid, attr: &mut sched_attr, flags: u32) -> Result<()> {
+    // SAFETY: borrowing sched_attr;
+    let ret = unsafe {
+        libc::syscall(
+            libc::SYS_sched_setattr,
+            pid as usize,
+            attr as *mut sched_attr as usize,
+            flags as usize,
+        )
+    };
+
+    if ret < 0 {
+        return Err(std::io::Error::last_os_error().into());
+    }
+    Ok(())
 }
 
 /// Singleton service for allocating globally-unique VM resources, such as the CID, and running
@@ -255,6 +317,36 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
         let state = &mut *self.state.lock().unwrap();
         let file = state.get_dtbo_file().or_service_specific_exception(-1)?;
         Ok(ParcelFileDescriptor::new(file))
+    }
+
+    fn proxySchedSetAttr(&self) -> binder::Result<ParcelFileDescriptor> {
+        let (mut server_socket, client_socket) = std::os::unix::net::UnixStream::pair()
+            .context("failed to create UnixStream pair")
+            .or_service_specific_exception(-1)?;
+        std::thread::spawn(move || loop {
+            let mut msg = 0u64;
+            match server_socket.read_exact(msg.as_bytes_mut()) {
+                Ok(()) => {}
+                Err(e) => {
+                    if e.kind() != std::io::ErrorKind::UnexpectedEof {
+                        error!("proxySchedSetAttr: failed to read from socket: {e:#}");
+                    }
+                    return;
+                }
+            }
+            let mut attrs = sched_attr {
+                sched_flags: SCHED_FLAG_KEEP_ALL
+                    | SCHED_FLAG_UTIL_CLAMP_MIN
+                    | SCHED_FLAG_RESET_ON_FORK,
+                sched_util_min: (msg >> 32) as u32,
+                ..Default::default()
+            };
+            let tid = msg & 0xFFFFFFFF;
+            if let Err(e) = sched_setattr(tid as i32, &mut attrs, 0) {
+                error!("Error setting util value: {}", e);
+            }
+        });
+        Ok(ParcelFileDescriptor::new(client_socket))
     }
 }
 
