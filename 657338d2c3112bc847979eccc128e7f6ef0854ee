@@ -168,6 +168,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fbc8677_5dd0cbd6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-12T13:22:37Z",
+      "side": 1,
+      "message": "I think we agree but, to summarize: we\u0027ll introduce the `/avf/untrusted` guest DT node as\n\n1. All AVF bits-and-pieces are grouped under the single `/avf` node\n2. Any host-provided flag with a value that cannot be verified by pvmfw and which is specific to AVF (i.e. doesn\u0027t concern the virtual platform itself) goes under `/avf/untrusted`. This path acts as a hint/reminder for guest userspace that these values need to be treated with care and properly sanitized (e.g. no assumptions about value lengths).\n\nand the Id will be the first property we pass through that node, correct?\n\nFeel free to resolve if this matches your understanding.",
+      "parentUuid": "a3ad85e0_80bb7a9e",
+      "range": {
+        "startLine": 9,
+        "startChar": 32,
+        "endLine": 9,
+        "endChar": 45
+      },
+      "revId": "657338d2c3112bc847979eccc128e7f6ef0854ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e6a16b68_743ae50d",
