@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e26329e_061e35b8",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice_internal/IVirtualizationServiceInternal.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-12T10:14:58Z",
+      "side": 1,
+      "message": "Looks like you expect a pair of u16, or a single u32 containing tid in the bottom 16 bits and util_min in the top 16.\n(In native endianness)",
+      "range": {
+        "startLine": 86,
+        "startChar": 22,
+        "endLine": 86,
+        "endChar": 37
+      },
+      "revId": "b2eca2be85f35a75cf0a1b19374c0e26aa8b9a16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a562a118_707b0994",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-12T10:14:58Z",
+      "side": 1,
+      "message": "Compiler says no",
+      "range": {
+        "startLine": 331,
+        "startChar": 16,
+        "endLine": 331,
+        "endChar": 35
+      },
+      "revId": "b2eca2be85f35a75cf0a1b19374c0e26aa8b9a16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "785a0b4d_f43d4880",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-12T10:14:58Z",
+      "side": 1,
+      "message": "I\u0027d prefer\n```\nlet sched_attr \u003d {\n  sched_flags: \u003cflags\u003e,\n  sched_util_min: \u003cmin\u003e,\n  ..default::Default()\n};\n```",
+      "range": {
+        "startLine": 329,
+        "startChar": 0,
+        "endLine": 332,
+        "endChar": 65
+      },
+      "revId": "b2eca2be85f35a75cf0a1b19374c0e26aa8b9a16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
