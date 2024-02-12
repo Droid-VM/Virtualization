@@ -150,8 +150,15 @@ public abstract class MicrodroidDeviceTestBase {
     public VirtualMachine forceCreateNewVirtualMachine(String name, VirtualMachineConfig config)
             throws VirtualMachineException {
         final VirtualMachineManager vmm = getVirtualMachineManager();
-        VirtualMachine existingVm = vmm.get(name);
-        if (existingVm != null) {
+        boolean delete_existing;
+        try {
+            delete_existing = vmm.get(name) != null;
+        } catch (VirtualMachineException e) {
+            // VM exists, i.e. there are some files for it, but they could not be successfully
+            // loaded.
+            delete_existing = true;
+        }
+        if (delete_existing) {
             vmm.delete(name);
         }
         return vmm.create(name, config);
