@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27f4776b_e750442f",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-12T07:15:07Z",
+      "side": 1,
+      "message": "why does this have to be exposed to outside of dt_overlay.rs? (i.e. can the buffer be made there?)",
+      "range": {
+        "startLine": 400,
+        "startChar": 34,
+        "endLine": 400,
+        "endChar": 56
+      },
+      "revId": "8b9067e77d0574b93208558d39e8493fd7465308",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da3b16a7_f865b5e7",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-12T07:15:07Z",
+      "side": 1,
+      "message": "Again, why does this have to be done here, not dt_overlay.rs?",
+      "range": {
+        "startLine": 404,
+        "startChar": 0,
+        "endLine": 404,
+        "endChar": 22
+      },
+      "revId": "8b9067e77d0574b93208558d39e8493fd7465308",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
