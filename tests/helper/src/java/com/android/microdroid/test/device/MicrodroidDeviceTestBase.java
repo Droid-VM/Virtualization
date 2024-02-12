@@ -408,6 +408,7 @@ public abstract class MicrodroidDeviceTestBase {
         }
     }
 
+
     public BootResult tryBootVm(String logTag, String vmName)
             throws VirtualMachineException, InterruptedException {
         VirtualMachine vm = getVirtualMachineManager().get(vmName);
