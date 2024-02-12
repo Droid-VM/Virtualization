@@ -22,6 +22,30 @@
       },
       "revId": "06d84e9c6d1a93e8941d07b173311547a3c86674",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dda1180_48ea61f6",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-12T14:08:58Z",
+      "side": 1,
+      "message": "I don\u0027t like the idea of automatically deleting data owned by the app.\n\nDelete VM \u0026 try again is basically how you should handle most problems with a VM, at least initially. (See go/vm-lifecycle-management, especially the Retry Strategy section.)\n\nWe do mention this failure possibility in the docs; I could add a sentence saying this probably means you need to delete \u0026 recreate?",
+      "parentUuid": "279a9c50_c11e2bee",
+      "range": {
+        "startLine": 157,
+        "startChar": 11,
+        "endLine": 158,
+        "endChar": 22
+      },
+      "revId": "06d84e9c6d1a93e8941d07b173311547a3c86674",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
