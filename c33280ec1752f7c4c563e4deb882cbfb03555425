@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc57a397_be5e382e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-12T17:57:14Z",
+      "side": 1,
+      "message": "If it might break something, yes. And there seems definite risk of that - there\u0027s a lot of complexity here.",
+      "parentUuid": "5cfd4eae_d883a864",
+      "revId": "c33280ec1752f7c4c563e4deb882cbfb03555425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f5660257_aa085128",
         "filename": "compos/composd/src/instance_starter.rs",
         "patchSetId": 5
@@ -130,6 +148,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03ce7480_a0a9fe16",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-12T17:57:14Z",
+      "side": 1,
+      "message": "I\u0027d rather we renamed it, or introduced a new method for the config population. There\u0027s too much code in this method already.",
+      "parentUuid": "0390ad94_54f9bdb9",
+      "range": {
+        "startLine": 857,
+        "startChar": 0,
+        "endLine": 869,
+        "endChar": 52
+      },
+      "revId": "c33280ec1752f7c4c563e4deb882cbfb03555425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9a43d36_f79aee54",
@@ -167,6 +209,30 @@
       "side": 1,
       "message": "Oh that is a good point. VirtMgr also uses PackageMgr to get list of staged apexes. Aren\u0027t those required for Compos verification or the staged apexes are already installed?\nI\u0027ve added \"UNKNOWN\" for such cases.",
       "parentUuid": "f9a43d36_f79aee54",
+      "range": {
+        "startLine": 289,
+        "startChar": 13,
+        "endLine": 289,
+        "endChar": 31
+      },
+      "revId": "c33280ec1752f7c4c563e4deb882cbfb03555425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9689b09b_39820bb9",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-12T17:57:14Z",
+      "side": 1,
+      "message": "We only use that in the pre-reboot CompOS VM - and we had to be really careful with that.",
+      "parentUuid": "01d73437_99993c86",
       "range": {
         "startLine": 289,
         "startChar": 13,
