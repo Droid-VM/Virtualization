@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff612ed5_0f4d094f",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-12T11:20:53Z",
+      "side": 1,
+      "message": "Yes, that will be tricky for reason mentioned by Alan. If the buffer is allocated inside `create_device_tree_overlay`, it will go out of scope when the method returns. I tried other ways such as keeping the buffer in a struct \u0026 keeping its object around, but I think the current way is the simplest..",
+      "parentUuid": "3667732b_ccc295b1",
+      "range": {
+        "startLine": 400,
+        "startChar": 34,
+        "endLine": 400,
+        "endChar": 56
+      },
+      "revId": "8b9067e77d0574b93208558d39e8493fd7465308",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da3b16a7_f865b5e7",
@@ -61,6 +85,30 @@
       "writtenOn": "2024-02-12T07:15:07Z",
       "side": 1,
       "message": "Again, why does this have to be done here, not dt_overlay.rs?",
+      "range": {
+        "startLine": 404,
+        "startChar": 0,
+        "endLine": 404,
+        "endChar": 22
+      },
+      "revId": "8b9067e77d0574b93208558d39e8493fd7465308",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02cb0230_d03e6b89",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-12T11:20:53Z",
+      "side": 1,
+      "message": "Yeah, that can be done. Thanks!",
+      "parentUuid": "da3b16a7_f865b5e7",
       "range": {
         "startLine": 404,
         "startChar": 0,
