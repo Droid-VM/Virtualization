@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5cfd4eae_d883a864",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-12T17:37:12Z",
+      "side": 1,
+      "message": "I was intending on introducing instance_id everywhere \u0026 only adding it to the DT if llpvm is disabled.\n\nIs introducing an `instance_id` file which is not used \u0026 feature remain disabled considered harmful?",
+      "parentUuid": "8e03f12f_375ec3f1",
+      "revId": "c33280ec1752f7c4c563e4deb882cbfb03555425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f5660257_aa085128",
         "filename": "compos/composd/src/instance_starter.rs",
         "patchSetId": 5
@@ -31,6 +49,30 @@
       "writtenOn": "2024-02-12T15:01:59Z",
       "side": 1,
       "message": "We should plug in a delete notification to VS here at some point.",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 94
+      },
+      "revId": "c33280ec1752f7c4c563e4deb882cbfb03555425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c93468b_2b31b601",
+        "filename": "compos/composd/src/instance_starter.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-12T17:37:12Z",
+      "side": 1,
+      "message": "Ack. Added a TODO to be done in scope of GC bug. Thanks",
+      "parentUuid": "f5660257_aa085128",
       "range": {
         "startLine": 105,
         "startChar": 0,
@@ -54,6 +96,30 @@
       "writtenOn": "2024-02-12T15:01:59Z",
       "side": 1,
       "message": "Why have we moved this?",
+      "range": {
+        "startLine": 857,
+        "startChar": 0,
+        "endLine": 869,
+        "endChar": 52
+      },
+      "revId": "c33280ec1752f7c4c563e4deb882cbfb03555425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0390ad94_54f9bdb9",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-12T17:37:12Z",
+      "side": 1,
+      "message": "It did not feel right changing `appConfig` in `createIdSigs()`. The latter seems to be only for creating the IdSigs files \u0026 leaving the appConfig population there seems like an unnecessary side effect which (according to me) made code less readable.",
+      "parentUuid": "0e2ba353_d9eca94d",
       "range": {
         "startLine": 857,
         "startChar": 0,
@@ -89,6 +155,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "01d73437_99993c86",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-12T17:37:12Z",
+      "side": 1,
+      "message": "Oh that is a good point. VirtMgr also uses PackageMgr to get list of staged apexes. Aren\u0027t those required for Compos verification or the staged apexes are already installed?\nI\u0027ve added \"UNKNOWN\" for such cases.",
+      "parentUuid": "f9a43d36_f79aee54",
+      "range": {
+        "startLine": 289,
+        "startChar": 13,
+        "endLine": 289,
+        "endChar": 31
+      },
+      "revId": "c33280ec1752f7c4c563e4deb882cbfb03555425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bcc65d01_1056b3c8",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 5
@@ -100,6 +190,30 @@
       "writtenOn": "2024-02-12T14:55:07Z",
       "side": 1,
       "message": "getNamesForUids can do some weird things: https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:frameworks/base/services/core/java/com/android/server/pm/ComputerEngine.java;drc\u003dc3296a0c1a1e72b672aa4fbf516de4f342df42b2;l\u003d4414\nIt could return an empty string if it doesn\u0027t recognise the UID.\nIt could return \"shared:\" plus a shared user name (which need not be a package name) if the UID is shared by multiple packages. (Which is deprecated, but still a thing.)\nI\u0027m not entirely sure what will happen if the UID is in different user to user 0.\n\nAnd we should probably special case uid 0, or perhaps any non-app UID.\n\n\nTBH I\u0027m not sure we should be looking at package names at all.\n\nAlthough I know @ioffe@google.com made a good case for doing so.",
+      "range": {
+        "startLine": 291,
+        "startChar": 0,
+        "endLine": 291,
+        "endChar": 96
+      },
+      "revId": "c33280ec1752f7c4c563e4deb882cbfb03555425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7779e21_e34c03d7",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-12T17:37:12Z",
+      "side": 1,
+      "message": "Ack, looking at it...",
+      "parentUuid": "bcc65d01_1056b3c8",
       "range": {
         "startLine": 291,
         "startChar": 0,
