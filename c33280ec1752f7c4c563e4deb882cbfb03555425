@@ -1,6 +1,69 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e03f12f_375ec3f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-12T15:01:59Z",
+      "side": 1,
+      "message": "We need to flag the changes here - Java side definitely, and probably elsewhere.",
+      "revId": "c33280ec1752f7c4c563e4deb882cbfb03555425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5660257_aa085128",
+        "filename": "compos/composd/src/instance_starter.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-12T15:01:59Z",
+      "side": 1,
+      "message": "We should plug in a delete notification to VS here at some point.",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 94
+      },
+      "revId": "c33280ec1752f7c4c563e4deb882cbfb03555425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e2ba353_d9eca94d",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-12T15:01:59Z",
+      "side": 1,
+      "message": "Why have we moved this?",
+      "range": {
+        "startLine": 857,
+        "startChar": 0,
+        "endLine": 869,
+        "endChar": 52
+      },
+      "revId": "c33280ec1752f7c4c563e4deb882cbfb03555425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9a43d36_f79aee54",
