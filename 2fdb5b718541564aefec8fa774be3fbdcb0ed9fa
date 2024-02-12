@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8e53584_da2172cc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-12T17:32:11Z",
+      "side": 1,
+      "message": "\"While I\u0027m working near this code, let me also refactor it\" (Phrase stolen from a patch by Alan :p)",
+      "parentUuid": "09e2b611_c39c7ee8",
+      "range": {
+        "startLine": 10,
+        "startChar": 20,
+        "endLine": 10,
+        "endChar": 36
+      },
+      "revId": "2fdb5b718541564aefec8fa774be3fbdcb0ed9fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "40e6cdbf_6c25f676",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-12T16:20:08Z",
       "side": 1,
       "message": "To confirm, does this \u0027in the VM\u0027?",
+      "range": {
+        "startLine": 17,
+        "startChar": 6,
+        "endLine": 17,
+        "endChar": 56
+      },
+      "revId": "2fdb5b718541564aefec8fa774be3fbdcb0ed9fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4b1bbbb_dd1e98a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-12T17:32:11Z",
+      "side": 1,
+      "message": "Yes, non-protected VM actually. Changed the wording to reflect that. Thanks",
+      "parentUuid": "40e6cdbf_6c25f676",
       "range": {
         "startLine": 17,
         "startChar": 6,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90c603c7_6423701f",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-12T17:32:11Z",
+      "side": 1,
+      "message": "Not yet, but it will covered in scope of b/324046698",
+      "parentUuid": "6a97232a_07750632",
+      "range": {
+        "startLine": 36,
+        "startChar": 26,
+        "endLine": 36,
+        "endChar": 44
+      },
+      "revId": "2fdb5b718541564aefec8fa774be3fbdcb0ed9fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7796ea5_f8ea5084",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-02-12T16:20:08Z",
       "side": 1,
       "message": "suggestion) can we just change this to take a pair of `AvfUntrustedProp()`?\n\nNew signature allows to add any number of `DtAddition::FromPath` while we don\u0027t have any use case nor plan for it. I\u0027d like to make this simple.",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 32
+      },
+      "revId": "2fdb5b718541564aefec8fa774be3fbdcb0ed9fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bbbe6a4_ac44ad85",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-12T17:32:11Z",
+      "side": 1,
+      "message": "I think you mean that the function must take a pair of `DtAddition`?\n\nWe need to support atleast 0 or 1 path, we cannot assume that path `proc/device-tree/avf/reference` will definitely be present in host. I\u0027m inclined on keeping this as is, but plz feel free to reopen this comment if you feel strongly about it.",
+      "parentUuid": "b7796ea5_f8ea5084",
       "range": {
         "startLine": 57,
         "startChar": 0,
