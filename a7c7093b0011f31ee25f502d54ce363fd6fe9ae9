@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f142020c_c3a74f66",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-12T14:55:44Z",
+      "side": 1,
+      "message": "minor suggestion, you can just ack and do nothing or handle in another CL)\n\nCan we add `FdtNodeMut::subnode(self, name: ..) -\u003e Self` to solve this?",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "a7c7093b0011f31ee25f502d54ce363fd6fe9ae9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0232544_6d0f0da9",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-12T14:55:44Z",
+      "side": 1,
+      "message": "Q: why not `-\u003e FdtNode`?",
+      "range": {
+        "startLine": 688,
+        "startChar": 26,
+        "endLine": 688,
+        "endChar": 41
+      },
+      "revId": "a7c7093b0011f31ee25f502d54ce363fd6fe9ae9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98fa3d22_44ad295e",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-12T14:55:44Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 735,
+        "startChar": 0,
+        "endLine": 735,
+        "endChar": 62
+      },
+      "revId": "a7c7093b0011f31ee25f502d54ce363fd6fe9ae9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
