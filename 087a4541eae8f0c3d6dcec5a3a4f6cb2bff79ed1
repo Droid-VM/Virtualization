@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "556fe7fb_6948f2ed",
+        "filename": "libs/libfdt/src/result.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-12T14:24:09Z",
+      "side": 1,
+      "message": "nit question: can we just cast cast `res.0` to `u32` for making `match` simpler?",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 21
+      },
+      "revId": "087a4541eae8f0c3d6dcec5a3a4f6cb2bff79ed1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
