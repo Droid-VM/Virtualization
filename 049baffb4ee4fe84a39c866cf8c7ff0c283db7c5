@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ada05926_b503b91c",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-13T23:46:59Z",
+      "side": 1,
+      "message": "fsfdt change wouldn\u0027t be necessary if all of following happens.\n  - Only take \u0027loading from path\u0027 up to 1.\n  - loading from path comes before untrusted props appending.\n\nMy suggestion wouldn\u0027t work if we need to load from multiple path or `/proc/device-tree/avf/reference/untrusted/` exists, but it wouldn\u0027t happen.\n\nSo, again, let\u0027s not allow to add multiple dt_additions. Just change this signature to `create_device_tree_overlay(buffer: \u0026mut [u8], base_fs_dir: \u0026Path, untrusted_props: \u0026[(\u0026Cstr, \u0026[u8])])` (ommiting lifetime)",
+      "range": {
+        "startLine": 56,
+        "startChar": 14,
+        "endLine": 56,
+        "endChar": 40
+      },
+      "revId": "049baffb4ee4fe84a39c866cf8c7ff0c283db7c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
