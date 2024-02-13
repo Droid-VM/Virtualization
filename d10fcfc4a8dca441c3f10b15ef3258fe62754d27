@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccf800fa_d3b9b982",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-13T11:12:44Z",
+      "side": 1,
+      "message": "You might want to make it clear it\u0027s ABL that provides the VM DTBO (to both pvmfw and host).\n\nAlso, this section should probably start by briefly explaining _why_ the VM DTBO exists in the first place i.e. that its main use (at least, on the host) is to allow passing extra properties of assignable platform devices to the guest (which can\u0027t be discovered from the HW) while keeping the VMM device-agnostic. This then makes it clear why we mandate nodes having labels.",
+      "range": {
+        "startLine": 10,
+        "startChar": 28,
+        "endLine": 10,
+        "endChar": 34
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9496dcb3_151df8f8",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-13T11:12:44Z",
+      "side": 1,
+      "message": "I don\u0027t believe that\u0027s true; DTC will generate the `/fragment@X/__overlay__` nodes when compiling an overlay (`/plugin/`).\n\nTo illustrate my point, can\u0027t your example below be written as\n```dts\n/dts-v1/;\n/plugin/\n\n/ {\n    host {\n        // ...\n    };\n};\n\n\u0026{/} { // This only generates one fragment@X; why have 3?\n    rng: rng {\n        compatible \u003d \"android,rng\";\n        android,rng,ignore-gctrl-reset;\n    };\n\n    light: light {\n        compatible \u003d \"android,light\";\n        version \u003d \u003c0x1 0x2\u003e;\n    };\n\n    bus0 {\n        led: led {\n            compatible \u003d \"android,led\";\n            prop \u003d \u003c0x555\u003e;\n        };\n    };\n};\n```\n?\n\nIMO, it would make sense to limit this documentation to DTS examples, as readers are much more likely to be familiar with those than with the nitty-gritty details of DTBOs. Or do you have an example of something we do that actually requires manually generating DTBO internals in DTS?\n\nFor example, below you introduce a requirement in terms of being \"defined under the `/__symbols__`\", which would be more easily understood if expressed as \"having a label\" (with `-@`). Or the whole \"overlayable node\" definition feels pointlessly low-level.\n\nAlso, having small DTS snippets illustrating each requirement would make it easier to follow, IMO.",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 79
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9fbc139_448dddaf",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-13T11:12:44Z",
+      "side": 1,
+      "message": "In terms of narration, I\u0027d personally start with explaining the VM DTBO\u0027s `\u0026{/}`, its use by the VMM, and it\u0027s availability through `dtbo.img` (i.e. the whole host side) before then explaining its `/host`, validation by pvmfw, and the config data i.e. split the explanation between functional then security aspects.\n\nAlso, why not introduce the high-level XML first (giving you a chance to explain VFIO and us only supporting platform devices) before diving into the low-level details with the VM DTBO?",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 4
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0172d16b_371c1a93",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-13T11:12:44Z",
+      "side": 1,
+      "message": "This should definitely be mentioned when the corresponding requirement is introduced (ideally, with a DTS snippet of pre-compiled (has labels) and post-decompile (has `__symbols__`)).",
+      "range": {
+        "startLine": 184,
+        "startChar": 0,
+        "endLine": 184,
+        "endChar": 79
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf68dfd7_9bec28a4",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-13T11:12:44Z",
+      "side": 1,
+      "message": "This link is broken:\n\n```suggestion\n- entry 2 may point to a [DTBO] that describes VM DA DTBO for [device assignment][device_assignment].\n```",
+      "range": {
+        "startLine": 198,
+        "startChar": 62,
+        "endLine": 198,
+        "endChar": 100
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
