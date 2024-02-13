@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b041c4eb_7dfd3d03",
+        "filename": "libs/libfdt/src/ctypes.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-13T15:07:03Z",
+      "side": 1,
+      "message": "WDYT of `safe_types.rs` because these intend to be the opposite of \"raw\"?",
+      "parentUuid": "37005101_9620b56a",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 65
+      },
+      "revId": "bfb33e1ff1984f1fb3425401ba4bdf8ed352ac74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ab99a4d2_84c70295",
         "filename": "libs/libfdt/src/ctypes.rs",
         "patchSetId": 5
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-12T14:43:08Z",
       "side": 1,
       "message": "Q: When would it necessary? I can only think of the root node case, but is there any other use cases as well? Personally I want to remove it to remove potential mistake if there\u0027s not much use cases.",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 0
+      },
+      "revId": "bfb33e1ff1984f1fb3425401ba4bdf8ed352ac74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c011fdb4_77a07676",
+        "filename": "libs/libfdt/src/ctypes.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-13T15:07:03Z",
+      "side": 1,
+      "message": "Even then, `fdt_path_offset(fdt, \"/\")` would still go through `TryFrom\u003cFdtRawResult\u003e for Option\u003cNodeOffset\u003e` in the `fdt_path_offset()` wrapper.\n\nI believe this trait is only used by `try_from()` below so I can merge the 2.",
+      "parentUuid": "ab99a4d2_84c70295",
       "range": {
         "startLine": 76,
         "startChar": 0,
