@@ -187,6 +187,30 @@
       },
       "revId": "2fdb5b718541564aefec8fa774be3fbdcb0ed9fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dbb0b09_57b7acb8",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-13T13:23:59Z",
+      "side": 1,
+      "message": "It doesn\u0027t look like a good encapsulation.\n\n - If `Path` can be either 0 or 1, then please take `Option\u003cPath\u003e` as a param.\n - Currently code skeleton looks strange. Caller (`aidl.rs`) reads Path constant here (`dt_overlay.rs`) to decide whether the path should be part of the dt_additions. Who owns and decides whether to pick the path? If `aidls.rs` has the responsibility, path constants should be in the outside. If `dt_overlay.rs` has the responsibility, it shouldn\u0027t take `Path` but use its own constants. Personally I prefer later so later attempt to inject test-purpose VM reference DT can be encapsulated in a single file.",
+      "parentUuid": "5bbbe6a4_ac44ad85",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 32
+      },
+      "revId": "2fdb5b718541564aefec8fa774be3fbdcb0ed9fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
