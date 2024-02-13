@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "948cc6a4_365fd157",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-13T13:07:21Z",
+      "side": 1,
+      "message": "```suggestion\nThis document explains how to setup and launch VM with device assignments.\n```",
+      "range": {
+        "startLine": 6,
+        "startChar": 5,
+        "endLine": 6,
+        "endChar": 28
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ccf800fa_d3b9b982",
         "filename": "docs/device_assignment.md",
         "patchSetId": 1
@@ -19,6 +42,98 @@
         "startChar": 28,
         "endLine": 10,
         "endChar": 34
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b8b6e41_0ed4b8de",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-13T13:07:21Z",
+      "side": 1,
+      "message": "This simply is VM DTBO, right?\n```suggestion\nFor device assignment, your device should provide a VM DTBO.\n```",
+      "range": {
+        "startLine": 10,
+        "startChar": 52,
+        "endLine": 10,
+        "endChar": 77
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bec7f576_26795e57",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-13T13:07:21Z",
+      "side": 1,
+      "message": "```suggestion\nVM DTBO is a device tree overlay which describe all assignable devices. Information\n```",
+      "range": {
+        "startLine": 12,
+        "startChar": 50,
+        "endLine": 13,
+        "endChar": 41
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5e534c2_ca5c0afd",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-13T13:07:21Z",
+      "side": 1,
+      "message": "use current tense when possible.\n```suggestion\nWhen a VM boots, assigned device nodes and their dependencies are applied\n```",
+      "range": {
+        "startLine": 16,
+        "startChar": 62,
+        "endLine": 16,
+        "endChar": 70
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f454445_7ce55bf9",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-13T13:07:21Z",
+      "side": 1,
+      "message": "Not sure what the intent of this sentence is. Devices don\u0027t read DT.",
+      "range": {
+        "startLine": 17,
+        "startChar": 25,
+        "endLine": 18,
+        "endChar": 20
       },
       "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -88,6 +203,144 @@
         "startChar": 0,
         "endLine": 184,
         "endChar": 79
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7ed564c_ca609d4b",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-13T13:07:21Z",
+      "side": 1,
+      "message": "Is this a title?",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 209,
+        "endChar": 33
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34623dec_f48789e6",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-13T13:07:21Z",
+      "side": 1,
+      "message": "I don\u0027t think this is true. This gives an abstracted name for the device.",
+      "range": {
+        "startLine": 225,
+        "startChar": 25,
+        "endLine": 226,
+        "endChar": 24
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10b05401_125320cf",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-13T13:07:21Z",
+      "side": 1,
+      "message": "Make this a title?",
+      "range": {
+        "startLine": 231,
+        "startChar": 0,
+        "endLine": 231,
+        "endChar": 34
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a10c9867_09f94de0",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-13T13:07:21Z",
+      "side": 1,
+      "message": "You didn\u0027t explain what this index is. Consider adding a link to the DTBO partition doc.",
+      "range": {
+        "startLine": 237,
+        "startChar": 41,
+        "endLine": 237,
+        "endChar": 46
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdf00f32_24c8e4c8",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-13T13:07:21Z",
+      "side": 1,
+      "message": "again, current tense.\n```suggestion\nAVF reads the index, reads VM DA DTBO, and passes it to the crosvm when booting\n```",
+      "range": {
+        "startLine": 240,
+        "startChar": 4,
+        "endLine": 240,
+        "endChar": 13
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14faeee7_a451ec8e",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-13T13:07:21Z",
+      "side": 1,
+      "message": "please respect line width",
+      "range": {
+        "startLine": 253,
+        "startChar": 96,
+        "endLine": 255,
+        "endChar": 0
       },
       "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
