@@ -22,6 +22,30 @@
       },
       "revId": "087a4541eae8f0c3d6dcec5a3a4f6cb2bff79ed1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a14e8da_b25a93ea",
+        "filename": "libs/libfdt/src/result.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-13T14:53:40Z",
+      "side": 1,
+      "message": "You mean `u32::try_from(-res.0).unwrap()` iff `res.0 \u003c 0`, right?\n\nI\u0027m a bit wary of these kinds of conversions (note that `c_int` isn\u0027t _always_ `i32` so the conversion might fail because the value doesn\u0027t fit in 32-bits) and guaranteeing that it is sound to assume the correctness of the transitive property we\u0027re testing (i.e. testing `-x as u32` instead of `x`).\n\nHowever, I agree that the match isn\u0027t great to read but given that it\u0027s the whole body of the function and is fairly straightforward (although verbose), I\u0027d be inclined to keep it this way (as I _know_ it doesn\u0027t contain conversion bugs) unless you really feel otherwise?\n\nI could also define\n```\nconst FDT_ERR_X: c_int \u003d -(libfdt_bindgen::FDT_ERR_X as c_int);\n```\nto get rid of the `x if x \u003d\u003d` in the `match`, if you think it\u0027s more readable?",
+      "parentUuid": "556fe7fb_6948f2ed",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 21
+      },
+      "revId": "087a4541eae8f0c3d6dcec5a3a4f6cb2bff79ed1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
