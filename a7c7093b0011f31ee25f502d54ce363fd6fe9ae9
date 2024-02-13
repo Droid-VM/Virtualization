@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76ef8fb1_f31402b9",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-13T15:07:59Z",
+      "side": 1,
+      "message": "See commit message but that would break current clients of the library so was planning to rework it in a dedicated follow-up (easy to revert separately), if that\u0027s fine with you?",
+      "parentUuid": "f0232544_6d0f0da9",
+      "range": {
+        "startLine": 688,
+        "startChar": 26,
+        "endLine": 688,
+        "endChar": 41
+      },
+      "revId": "a7c7093b0011f31ee25f502d54ce363fd6fe9ae9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "98fa3d22_44ad295e",
         "filename": "libs/libfdt/src/lib.rs",
         "patchSetId": 5
@@ -60,6 +84,30 @@
       "writtenOn": "2024-02-12T14:55:44Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 735,
+        "startChar": 0,
+        "endLine": 735,
+        "endChar": 62
+      },
+      "revId": "a7c7093b0011f31ee25f502d54ce363fd6fe9ae9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6c3c85b_d6ff0447",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-13T15:07:59Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "98fa3d22_44ad295e",
       "range": {
         "startLine": 735,
         "startChar": 0,
