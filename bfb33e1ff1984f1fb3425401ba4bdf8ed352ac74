@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "868e955b_e1baf014",
+        "filename": "libs/libfdt/src/ctypes.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-13T15:45:10Z",
+      "side": 1,
+      "message": "That sounds even better.",
+      "parentUuid": "b041c4eb_7dfd3d03",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 65
+      },
+      "revId": "bfb33e1ff1984f1fb3425401ba4bdf8ed352ac74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ab99a4d2_84c70295",
         "filename": "libs/libfdt/src/ctypes.rs",
         "patchSetId": 5
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Even then, `fdt_path_offset(fdt, \"/\")` would still go through `TryFrom\u003cFdtRawResult\u003e for Option\u003cNodeOffset\u003e` in the `fdt_path_offset()` wrapper.\n\nI believe this trait is only used by `try_from()` below so I can merge the 2.",
       "parentUuid": "ab99a4d2_84c70295",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 0
+      },
+      "revId": "bfb33e1ff1984f1fb3425401ba4bdf8ed352ac74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a32c36fa_1b55c758",
+        "filename": "libs/libfdt/src/ctypes.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-13T15:45:10Z",
+      "side": 1,
+      "message": "Ok either way if you\u0027re fine.",
+      "parentUuid": "c011fdb4_77a07676",
       "range": {
         "startLine": 76,
         "startChar": 0,
