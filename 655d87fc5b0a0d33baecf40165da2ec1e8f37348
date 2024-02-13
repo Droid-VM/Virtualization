@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81f9841e_4e9111a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-13T03:53:44Z",
+      "side": 1,
+      "message": "FYI in `aosp_husky_pkvm_experimental-trunk_staging-userdebug` with latest `git_main`:\n\n```\n$ vm_shell start-microdroid --auto-connect\nfound path /apex/com.android.virt/app/EmptyPayloadApp@MAIN/EmptyPayloadApp.apk\ncreating work dir /data/local/tmp/microdroid/TYfanmsVIbkc8Nt6M\napk.idsig path: /data/local/tmp/microdroid/TYfanmsVIbkc8Nt6M/apk.idsig\ninstance.img path: /data/local/tmp/microdroid/TYfanmsVIbkc8Nt6M/instance.img\nError: Failed to create VM\n\nCaused by:\n    Status(-8, EX_SERVICE_SPECIFIC): \u0027-1: Failed to create DT overlay, Failed to add node, Exists\u0027\nNo VM is available\n/usr/local/google/home/seungjaeyoo/Workspace/git_main_1/out/host/linux-x86/bin/vm_shell: line 1: kill: (814102) - No such process\n```",
+      "revId": "655d87fc5b0a0d33baecf40165da2ec1e8f37348",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
