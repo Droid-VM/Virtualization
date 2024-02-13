@@ -141,6 +141,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c3a242f1_7c08e845",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2024-02-13T14:25:43Z",
+      "side": 1,
+      "message": "It seems like this confuses the overlay sources and compiled overlay binaries (which is what a DTBO is).",
+      "range": {
+        "startLine": 27,
+        "startChar": 6,
+        "endLine": 27,
+        "endChar": 56
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9496dcb3_151df8f8",
         "filename": "docs/device_assignment.md",
         "patchSetId": 1
@@ -180,6 +203,52 @@
         "startChar": 0,
         "endLine": 33,
         "endChar": 4
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e6e244d_6683efa8",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2024-02-13T14:25:43Z",
+      "side": 1,
+      "message": "While `__symbols__` can be defined in the source (dts) files, simply setting a node label of an assignable device node would make `dtc -@` create a `__symbols__` node with the label and the associated path.",
+      "range": {
+        "startLine": 63,
+        "startChar": 63,
+        "endLine": 64,
+        "endChar": 37
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19397751_d03185a1",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2024-02-13T14:25:43Z",
+      "side": 1,
+      "message": "\"dependencies\"?",
+      "range": {
+        "startLine": 86,
+        "startChar": 32,
+        "endLine": 86,
+        "endChar": 42
       },
       "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
