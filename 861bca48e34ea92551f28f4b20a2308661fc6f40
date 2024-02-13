@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07e6a148_46229aa1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-02-13T14:39:14Z",
+      "side": 1,
+      "message": "We should make sure that we run our tests on secondary user (and ideally work profile)",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 4
+      },
+      "revId": "861bca48e34ea92551f28f4b20a2308661fc6f40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63c1fc94_93c31b9e",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-02-13T14:39:14Z",
+      "side": 1,
+      "message": "Usually we actually do things the other way around. The caller provides the package name, and the server (in this case virtservice) checks that caller uid actually owns the provided package name.",
+      "range": {
+        "startLine": 276,
+        "startChar": 12,
+        "endLine": 276,
+        "endChar": 28
+      },
+      "revId": "861bca48e34ea92551f28f4b20a2308661fc6f40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
