@@ -53,10 +53,11 @@ impl<'a> FsFdt<'a> for Fdt {
             )
             .context("Internal error. Path is not a valid Fdt path")?;
 
+            // What if relative path is not present?
             let mut node = self
                 .node_mut(&fdt_path)
                 .map_err(|e| anyhow!("Failed to write FDT, {e:?}"))?
-                .ok_or_else(|| anyhow!("Failed to find {fdt_node_path:?} in FDT"))?;
+                .ok_or_else(|| anyhow!("Failed to find {fdt_path:?} in FDT"))?;
 
             let mut subnode_names = vec![];
             let entries =
@@ -90,9 +91,20 @@ impl<'a> FsFdt<'a> for Fdt {
             // FDT library may omit address in node name when comparing their name, so sort to add
             // node without address first.
             subnode_names.sort();
-            let subnode_names_c_str: Vec<_> = subnode_names.iter().map(|x| x.as_c_str()).collect();
-            node.add_subnodes(&subnode_names_c_str)
-                .map_err(|e| anyhow!("Failed to add node, {e:?}"))?;
+            let subnode_names: Vec<_> = subnode_names
+                .iter()
+                .filter_map(|name| {
+                    let name = name.as_c_str();
+                    let is_present_res = node.as_node().subnode(name);
+                    match is_present_res {
+                        Ok(Some(_)) => None,
+                        Ok(None) => Some(Ok(name)),
+                        Err(e) => Some(Err(e)),
+                    }
+                })
+                .collect::<Result<_, _>>()
+                .map_err(|e| anyhow!("Failed to filter subnodes, {e:?}"))?;
+            node.add_subnodes(&subnode_names).map_err(|e| anyhow!("Failed to add node, {e:?}"))?;
         }
 
         Ok(())
@@ -149,5 +161,8 @@ mod test {
         let actual = dts_from_dtb(file.path());
 
         assert_eq!(&expected, &actual);
+        // Again append fdt from TEST_FS_FDT_ROOT_PATH at root & ensure it succeeds when some
+        // subnode are already present.
+        fdt.append(&CString::new("").unwrap(), fs_path).unwrap();
     }
 }
