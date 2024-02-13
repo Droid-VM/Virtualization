@@ -211,6 +211,30 @@
       },
       "revId": "2fdb5b718541564aefec8fa774be3fbdcb0ed9fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bfa27f1_6670a2a1",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-13T13:46:22Z",
+      "side": 1,
+      "message": "Ack. Let me move the `VM_REFERENCE_DT_ON_HOST_PATH` out of this module so that it can be agnostic to Paths from host DT (in revert^2)",
+      "parentUuid": "6dbb0b09_57b7acb8",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 32
+      },
+      "revId": "2fdb5b718541564aefec8fa774be3fbdcb0ed9fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
