@@ -46,6 +46,30 @@
       },
       "revId": "b4b3039daf9d7711bc94949a8900e595eff310ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffe65b8e_7ec72938",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-13T06:17:47Z",
+      "side": 1,
+      "message": "```\n02-13 15:06:01.160  5349  5349 W com.android.microdroid.test: type\u003d1400 audit(0.0:24): avc:  denied  { search } for  comm\u003d54696D652D6C696D69746564207465 name\u003d\"microdroid\" dev\u003d\"dm-11\" ino\u003d436 scontext\u003du:r:untrusted_app_32:s0:c137,c256,c512,c768 tcontext\u003du:object_r:vendor_microdroid_file:s0 tclass\u003ddir permissive\u003d0 app\u003dcom.android.microdroid.test\n```\n\nAnd it still requires to read microdroid vendor image by `untrusted_app`.",
+      "parentUuid": "d8580ba4_b2bcc5a6",
+      "range": {
+        "startLine": 291,
+        "startChar": 0,
+        "endLine": 291,
+        "endChar": 92
+      },
+      "revId": "b4b3039daf9d7711bc94949a8900e595eff310ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
