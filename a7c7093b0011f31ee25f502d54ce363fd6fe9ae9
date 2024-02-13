@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbf408ea_16b02fa2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-13T15:12:16Z",
+      "side": 1,
+      "message": "Yes, I was planning to rework the `FdtNodeMut` stuff separately.\n\nNote that David is changing the signature of `first_subnode` in aosp/2944351 so it will then be possible to implement what you suggest (with `-\u003e Option\u003cSelf\u003e`, of course).",
+      "parentUuid": "f142020c_c3a74f66",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "a7c7093b0011f31ee25f502d54ce363fd6fe9ae9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0232544_6d0f0da9",
