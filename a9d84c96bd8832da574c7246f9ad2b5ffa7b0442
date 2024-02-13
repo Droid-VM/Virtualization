@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b712fa66_7a9f5cc5",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-13T10:04:05Z",
+      "side": 1,
+      "message": "I suspect that sched_attr is never mutated, and so this could be a const pointer.\nBut the references seem divided over that.\nAnd it seems to do no harm like this.",
+      "range": {
+        "startLine": 137,
+        "startChar": 12,
+        "endLine": 137,
+        "endChar": 44
+      },
+      "revId": "a9d84c96bd8832da574c7246f9ad2b5ffa7b0442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
