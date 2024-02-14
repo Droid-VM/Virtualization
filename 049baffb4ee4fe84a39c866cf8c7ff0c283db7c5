@@ -182,6 +182,30 @@
       },
       "revId": "049baffb4ee4fe84a39c866cf8c7ff0c283db7c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4447bf5_f74fa63d",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-14T21:22:38Z",
+      "side": 1,
+      "message": "\u003e create_device_tree_overlay(buffer: \u0026mut [u8], fs_dir: \u0026[\u0026Path], untrusted_props: \u0026[..])\n\nSorry, I\u0027m not convinced this a neater api, it still allows multiple paths. \n\nPros: No need of additional enum `DtAddition`\nCons: A bit confusing api. Collecting the input to `create_device_tree_overlay` would not be neat. At the moment we have much mechanism at caller (aidl.rs) where we collect all inputs in a vec `dt_additions`.\n\n\nI really considered \u0026 changed the aidl.rs to use your function signature, however I don\u0027t prefer it. I think we should design the api based on simplicity for callers. Also, I don\u0027t see any problem in keeping the enum. Newtype is a common pattern in Rust. However, let me know if you strongly feel for this, we can do it in a follow up patch.",
+      "parentUuid": "b5de870c_f09ee298",
+      "range": {
+        "startLine": 56,
+        "startChar": 14,
+        "endLine": 56,
+        "endChar": 40
+      },
+      "revId": "049baffb4ee4fe84a39c866cf8c7ff0c283db7c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
