@@ -232,6 +232,11 @@ impl IVirtualizationService for VirtualizationService {
         ret
     }
 
+    /// Allocate a new instance_id to the VM
+    fn allocateInstanceId(&self) -> binder::Result<[u8; 64]> {
+        GLOBAL_SERVICE.allocateInstanceId()
+    }
+
     /// Initialise an empty partition image of the given size to be used as a writable partition.
     fn initializeWritablePartition(
         &self,
@@ -1224,6 +1229,13 @@ fn check_gdb_allowed(config: &VirtualMachineConfig) -> binder::Result<()> {
                 Ok(())
             }
         }
+    }
+}
+
+fn extract_instance_id(config: &VirtualMachineConfig) -> [u8; 64] {
+    match config {
+        VirtualMachineConfig::RawConfig(config) => config.instanceId,
+        VirtualMachineConfig::AppConfig(config) => config.instanceId,
     }
 }
 
