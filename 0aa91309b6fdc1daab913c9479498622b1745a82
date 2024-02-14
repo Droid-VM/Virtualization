@@ -67,6 +67,52 @@
       "message": "Hi Alan, PTAL. It\u0027s most a renaming according to http://b/325093658",
       "revId": "0aa91309b6fdc1daab913c9479498622b1745a82",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac56b1cb_fa863877",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-14T13:39:53Z",
+      "side": 1,
+      "message": "You don\u0027t need this line.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 16
+      },
+      "revId": "0aa91309b6fdc1daab913c9479498622b1745a82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d979485_6e994f3a",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-14T13:39:53Z",
+      "side": 1,
+      "message": "Nor this one. The typedef alone is enough to declare both the type name and the struct tag.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 28
+      },
+      "revId": "0aa91309b6fdc1daab913c9479498622b1745a82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
