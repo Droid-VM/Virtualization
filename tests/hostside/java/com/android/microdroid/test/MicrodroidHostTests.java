@@ -47,9 +47,11 @@ import com.android.tradefed.device.ITestDevice;
 import com.android.tradefed.device.TestDevice;
 import com.android.tradefed.testtype.DeviceJUnit4ClassRunner.TestMetrics;
 import com.android.tradefed.util.CommandResult;
+import com.android.tradefed.util.CommandStatus;
 import com.android.tradefed.util.FileUtil;
 import com.android.tradefed.util.RunUtil;
 import com.android.tradefed.util.xml.AbstractXmlParser;
+import com.android.tradefed.log.LogUtil.CLog;
 import com.android.virt.PayloadMetadata;
 
 import org.json.JSONArray;
@@ -985,23 +987,77 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     public void testDeviceAssignment() throws Exception {
-        assumeProtectedVm();
         assumeVfioPlatformSupported();
 
         List<String> devices = getAssignableDevices();
         assumeFalse("no assignable devices", devices.isEmpty());
 
+        String vmFdtPath = "/sys/firmware/fdt";
+
+        File testDir = FileUtil.createTempDir("device_assignment_test");
+        File baseFdtFile = new File(testDir, "base_fdt.dtb");
+        File fdtFile = new File(testDir, "fdt.dtb");
+        File dtdiff = findTestFile("dtdiff");
+
+        // Generates baseline DT
+        launchWithDeviceAssignment(/* device= */ null);
+        assertThat(mMicrodroidDevice.pullFile(vmFdtPath, baseFdtFile)).isTrue();
+        getAndroidDevice().shutdownMicrodroid(mMicrodroidDevice);
+
+        CommandResult yyy = RunUtil.getDefault().runTimedCmd(500, "which", "dtc");
+        CLog.e("jaewan which dtc", yyy.toString());
+
+        CommandResult xxx = RunUtil.getDefault().runTimedCmd(500, "dtc", "--help");
+        CLog.e("jaewan dtc --help", xxx.toString());
+
+        // Try assign devices one by one
+        for (String device : devices) {
+            assertThat(device).isNotNull();
+            launchWithDeviceAssignment(device);
+            assertThat(mMicrodroidDevice.pullFile(vmFdtPath, fdtFile)).isTrue();
+            getAndroidDevice().shutdownMicrodroid(mMicrodroidDevice);
+
+            CommandResult z1 =
+                    RunUtil.getDefault().runTimedCmd(500, "ls", "-al", baseFdtFile.getPath());
+            CommandResult z2 =
+                    RunUtil.getDefault().runTimedCmd(500, "ls", "-al", fdtFile.getPath());
+            CLog.e("jaewan ls baseFdt -- ", z1.toString());
+            CLog.e("jaewan ls fdt -- ", z2.toString());
+
+            CommandResult result =
+                    RunUtil.getDefault()
+                            .runTimedCmd(
+                                    500,
+                                    dtdiff.getAbsolutePath(),
+                                    baseFdtFile.getPath(),
+                                    fdtFile.getPath());
+
+            // Check whether there's VM DT has any modification.
+            assertWithMessage("VM's device tree hasn't changed when assigning " + device)
+                    .that(result.getStatus())
+                    .isNotEqualTo(CommandStatus.SUCCESS);
+            assertWithMessage("Failed to run dtdiff " + device).that(result.getStderr()).isEmpty();
+        }
+
+        mMicrodroidDevice = null;
+    }
+
+    private void launchWithDeviceAssignment(String device) throws Exception {
         final String configPath = "assets/" + mOs + "/vm_config.json";
-        mMicrodroidDevice =
+
+        MicrodroidBuilder builder =
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
                         .debugLevel("full")
                         .memoryMib(minMemorySize())
                         .cpuTopology("match_host")
-                        .protectedVm(true)
-                        .addAssignableDevice(devices.get(0))
-                        .build(getAndroidDevice());
+                        .protectedVm(mProtectedVm);
+        if (device != null) {
+            builder.addAssignableDevice(device);
+        }
+        mMicrodroidDevice = builder.build(getAndroidDevice());
 
-        mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
+        assertThat(mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT)).isTrue();
+        assertThat(mMicrodroidDevice.enableAdbRoot()).isTrue();
     }
 
     @Test
