@@ -24,6 +24,47 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2632491_b10f9f4f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-14T03:58:14Z",
+      "side": 1,
+      "message": "Yes. You can see the diff between latest PS \u0026 PS1 (when revert was created)",
+      "parentUuid": "cbd23c2a_51a9ef4d",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 33
+      },
+      "revId": "049baffb4ee4fe84a39c866cf8c7ff0c283db7c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e7915a5_31d985d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-14T03:58:14Z",
+      "side": 1,
+      "message": "Hi Jaewan,\n\nIn discussion https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2950433/comment/b7796ea5_f8ea5084/, I promised to move `VM_REFERENCE_DT_ON_HOST_PATH` out of this module. Let me do that in a follow up patch to keep REVERT^2 exact same of original patch?",
+      "revId": "049baffb4ee4fe84a39c866cf8c7ff0c283db7c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ada05926_b503b91c",
@@ -37,6 +78,30 @@
       "writtenOn": "2024-02-13T23:46:59Z",
       "side": 1,
       "message": "fsfdt change wouldn\u0027t be necessary if all of following happens.\n  - Only take \u0027loading from path\u0027 up to 1.\n  - loading from path comes before untrusted props appending.\n\nMy suggestion wouldn\u0027t work if we need to load from multiple path or `/proc/device-tree/avf/reference/untrusted/` exists, but it wouldn\u0027t happen.\n\nSo, again, let\u0027s not allow to add multiple dt_additions. Just change this signature to `create_device_tree_overlay(buffer: \u0026mut [u8], base_fs_dir: \u0026Path, untrusted_props: \u0026[(\u0026Cstr, \u0026[u8])])` (ommiting lifetime)",
+      "range": {
+        "startLine": 56,
+        "startChar": 14,
+        "endLine": 56,
+        "endChar": 40
+      },
+      "revId": "049baffb4ee4fe84a39c866cf8c7ff0c283db7c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "964ca342_ee9ab686",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-14T03:58:14Z",
+      "side": 1,
+      "message": "\u003e fsfdt change wouldn\u0027t be necessary if all of following happens \n\nfsfdt change is for fixing the bug. I believe `append()` should be able to cope with existing subnode in the target DT.\n \n\n\u003e loading from path comes before untrusted props appending\n\nThat maybe tricky. It does sound like a hack to avoid hitting the bug. What flow will create the `/avf/` subnode in target tree?\n1) If `append()` adds it (because Path was present \u0026 was called before adding untrusted props), then we will not explicitly call `add_subnode(AVF_NODE_NAME)` [line 80].\n2) If the path is not present, then we will need to keep this around.\n\nwhich only adds complexity to this method to avoid a bug.\n\n\n\u003e create_device_tree_overlay(buffer: \u0026mut [u8], base_fs_dir: \u0026Path, untrusted_props: \u0026[(\u0026Cstr, \u0026[u8])])\n\nBut path `base_fs_dir` may not be present if reference DT is not preset on host DT. Even if we change it to `create_device_tree_overlay(buffer: \u0026mut [u8], base_fs_dir: \u0026Option\u003cPath\u003e, untrusted_props: \u0026[(\u0026Cstr, \u0026[u8])])`, I dont see the advantage of it over (what I think) is a cleared encapsulation of `DtAddition`",
+      "parentUuid": "ada05926_b503b91c",
       "range": {
         "startLine": 56,
         "startChar": 14,
