@@ -1284,6 +1284,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5579e326_68d39dac",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T18:04:39Z",
+      "side": 1,
+      "message": "The code isn\u0027t in GKI so someone checking out Android V, even with a GKI kernel (with pKVM) won\u0027t have support for DA in the host/hyp and won\u0027t be able to follow these instructions.\n\nAFAIK, we plan to release a dedicated ACK branch with DA but, until then, the best we can do here is mention that \"a host kernel supporting device assignment is required\" without more details :/",
+      "parentUuid": "50e18ccf_0fb5ed3c",
+      "range": {
+        "startLine": 242,
+        "startChar": 50,
+        "endLine": 243,
+        "endChar": 11
+      },
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6f7c96a7_9c08531c",
         "filename": "docs/device_assignment.md",
         "patchSetId": 2
