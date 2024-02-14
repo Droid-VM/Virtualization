@@ -200,4 +200,34 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
                 .map(os -> os.replaceFirst("^microdroid_gki-", ""))
                 .collect(Collectors.toList());
     }
+
+    /**
+     * Call dtdiff.
+     *
+     * <p>To use this, add following dependencies to java_test_host.
+     *
+     * <pre>
+     *   data_native_bins: ["dtdiff", "dtc"]
+     *   jni_libs: ["libfdt"]
+     * </pre>
+     *
+     * <p>
+     *
+     * @param fdt1 any of fs FDT, DTS, or DTB
+     * @param fdt2 any of fs FDT, DTS, or DTB
+     * @return CommandResult
+     */
+    public CommandResult dtdiff(String fdt1, String fdt2) throws Exception {
+        File dtdiff = findTestFile("dtdiff");
+
+        RunUtil runner = new RunUtil();
+        // Setup environment for dtdiff to execute dtc
+        String separator = System.getProperty("path.separator");
+        String path = dtdiff.getParent() + separator + System.getenv("PATH");
+        runner.setEnvVariable("PATH", path);
+
+        CommandResult result = runner.runTimedCmd(500, dtdiff.getAbsolutePath(), fdt1, fdt2);
+        assertWithMessage("Failed to run dtdiff" + result).that(result.getStderr()).isEmpty();
+        return result;
+    }
 }
