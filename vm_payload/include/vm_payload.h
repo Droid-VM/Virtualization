@@ -25,20 +25,19 @@
 
 __BEGIN_DECLS
 
-struct AIBinder;
 typedef struct AIBinder AIBinder;
 
 /**
  * Introduced in API 35.
  * Remote attestation result if the attestation succeeds.
  */
-struct AVmAttestationResult;
+typedef struct AVmAttestationResult AVmAttestationResult;
 
 /**
  * Introduced in API 35.
  * Remote attestation status types returned from remote attestation functions.
  */
-typedef enum attestation_status_t : int32_t {
+typedef enum AVmAttestationStatus : int32_t {
     /** The remote attestation completes successfully. */
     ATTESTATION_OK = 0,
 
@@ -50,7 +49,7 @@ typedef enum attestation_status_t : int32_t {
 
     /** Remote attestation is not supported in the current environment. */
     ATTESTATION_ERROR_UNSUPPORTED = -10003,
-} attestation_status_t;
+} AVmAttestationStatus;
 
 /**
  * Notifies the host that the payload is ready.
@@ -151,7 +150,7 @@ const char* _Nullable AVmPayload_getEncryptedStoragePath(void);
  *
  * \return ATTESTATION_OK upon successful attestation.
  */
-attestation_status_t AVmPayload_requestAttestation(
+AVmAttestationStatus AVmPayload_requestAttestation(
         const void* _Nonnull challenge, size_t challenge_size,
         struct AVmAttestationResult* _Nullable* _Nonnull result) __INTRODUCED_IN(__ANDROID_API_V__);
 
@@ -162,7 +161,7 @@ attestation_status_t AVmPayload_requestAttestation(
  * \return a constant string value representing the status code. The string should not
  * be deleted or freed by the application and remains valid for the lifetime of the VM.
  */
-const char* _Nonnull AVmAttestationResult_resultToString(attestation_status_t status)
+const char* _Nonnull AVmAttestationStatus_toString(AVmAttestationStatus status)
         __INTRODUCED_IN(__ANDROID_API_V__);
 
 /**
