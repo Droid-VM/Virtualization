@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad336cfc_1210f2c9",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T15:38:49Z",
+      "side": 1,
+      "message": "This looks simpler for me.\n\n```\nlet subnode_names_c_str \u003d vec![];\nfor subnode_name in subnode_names {\n  let name \u003d name.as_cstr();\n  if node.as_node().subnode(name)?.map_err(..).is_none() {\n    subnode_names_c_str.insert(name);\n  }\n}\n```",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 0
+      },
+      "revId": "c802313335cad476447e4c34d60c3235cdf081bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96eacd7b_5a8c2ccf",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T15:38:49Z",
+      "side": 1,
+      "message": "fix build.",
+      "range": {
+        "startLine": 166,
+        "startChar": 12,
+        "endLine": 166,
+        "endChar": 18
+      },
+      "revId": "c802313335cad476447e4c34d60c3235cdf081bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
