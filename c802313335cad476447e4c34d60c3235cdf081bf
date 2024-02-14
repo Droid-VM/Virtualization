@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "116d0846_af920038",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-14T21:19:17Z",
+      "side": 1,
+      "message": "What is the problem with iterators? The filter_map offers relatively straightforward way of handling this. We\u0027ve been using iterators all over /packages/Virtualizaion \u0026 personally, I\u0027m quite impressed with filtering \u0026 mapping possibilities with iter \u0026 have been trying to use them as much as possible.\n\nThe current way also lets us shadow variable `subnode_names`, increasing readability (I realize that is at the cost of somehwat twisted way of throwing error from subnode()) \n\n\n\u003e for loop and ?-ing on the first error\n\n\nThe current code also throws errors at the first failed operation. (This is possible because Result implements FromIterator)\nSee : https://doc.rust-lang.org/rust-by-example/error/iter_result.html#fail-the-entire-operation-with-collect",
+      "parentUuid": "494a7cc5_8388f8ab",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 0
+      },
+      "revId": "c802313335cad476447e4c34d60c3235cdf081bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96eacd7b_5a8c2ccf",
@@ -84,6 +108,54 @@
       "writtenOn": "2024-02-14T15:50:57Z",
       "side": 1,
       "message": "This doesn\u0027t look like a valid DT path? The root is at path `\"/\"`.\n\n(Also, nit: use `cstr!` instead of `\u0026CString::new().unwrap()`)",
+      "range": {
+        "startLine": 166,
+        "startChar": 19,
+        "endLine": 166,
+        "endChar": 45
+      },
+      "revId": "c802313335cad476447e4c34d60c3235cdf081bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2b8914b_48f987d7",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-14T21:19:17Z",
+      "side": 1,
+      "message": "Fixed. Thanks!",
+      "parentUuid": "96eacd7b_5a8c2ccf",
+      "range": {
+        "startLine": 166,
+        "startChar": 12,
+        "endLine": 166,
+        "endChar": 18
+      },
+      "revId": "c802313335cad476447e4c34d60c3235cdf081bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ed43405_5d44be94",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-14T21:19:17Z",
+      "side": 1,
+      "message": "Oops added `/`\n\ncstr! requires using another rustlib, while `CString::new()` usage is the current pattern in this lib, hence respecting that. Thanks",
+      "parentUuid": "51fe88ca_6dfbb4bc",
       "range": {
         "startLine": 166,
         "startChar": 19,
