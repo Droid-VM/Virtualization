@@ -166,6 +166,9 @@ pub struct RunAppConfig {
     /// Path to the instance image. Created if not exists.
     instance: PathBuf,
 
+    /// Path to file containing instance_id
+    instance_id: PathBuf,
+
     /// Path to VM config JSON within APK (e.g. assets/vm_config.json)
     #[arg(long)]
     config_path: Option<String>,
