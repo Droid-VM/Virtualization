@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a0410b7_883e7101",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T06:40:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "948cc6a4_365fd157",
+      "range": {
+        "startLine": 6,
+        "startChar": 5,
+        "endLine": 6,
+        "endChar": 28
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ccf800fa_d3b9b982",
@@ -70,6 +94,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be714f7e_808cc2b5",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T06:40:12Z",
+      "side": 1,
+      "message": "Renaed `VM device assignment DTBO` and `VM DA DTBO` to `VM DTBO`, other than this place.",
+      "parentUuid": "5b8b6e41_0ed4b8de",
+      "range": {
+        "startLine": 10,
+        "startChar": 52,
+        "endLine": 10,
+        "endChar": 77
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6ae4422_9fb036ee",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T06:40:12Z",
+      "side": 1,
+      "message": "\u003e You might want to make it clear it\u0027s ABL that provides the VM DTBO (to both pvmfw and host).\n\nI wrote this in this section. and `## Boot with VM DTBO`.\n\n\n\u003e Also, this section should probably start by briefly explaining why the VM DTBO exists in the first place i.e. that its main use (at least, on the host) is to allow passing extra properties of assignable platform devices to the guest (which can\u0027t be discovered from the HW) while keeping the VMM device-agnostic. This then makes it clear why we mandate nodes having labels.\n\nDone.",
+      "parentUuid": "ccf800fa_d3b9b982",
+      "range": {
+        "startLine": 10,
+        "startChar": 28,
+        "endLine": 10,
+        "endChar": 34
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bec7f576_26795e57",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-02-13T13:07:21Z",
       "side": 1,
       "message": "```suggestion\nVM DTBO is a device tree overlay which describe all assignable devices. Information\n```",
+      "range": {
+        "startLine": 12,
+        "startChar": 50,
+        "endLine": 13,
+        "endChar": 41
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a57b8a6d_64e448a1",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T06:40:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bec7f576_26795e57",
       "range": {
         "startLine": 12,
         "startChar": 50,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d152571e_29165bfe",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T06:40:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5e534c2_ca5c0afd",
+      "range": {
+        "startLine": 16,
+        "startChar": 62,
+        "endLine": 16,
+        "endChar": 70
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f454445_7ce55bf9",
@@ -129,6 +249,30 @@
       "writtenOn": "2024-02-13T13:07:21Z",
       "side": 1,
       "message": "Not sure what the intent of this sentence is. Devices don\u0027t read DT.",
+      "range": {
+        "startLine": 17,
+        "startChar": 25,
+        "endLine": 18,
+        "endChar": 20
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ab4a44b_ef3985a8",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T06:40:12Z",
+      "side": 1,
+      "message": "Just removed.",
+      "parentUuid": "4f454445_7ce55bf9",
       "range": {
         "startLine": 17,
         "startChar": 25,
@@ -162,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6aedf1e0_d12b5ebd",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T06:40:12Z",
+      "side": 1,
+      "message": "Good point. Changed here and titles as well.",
+      "parentUuid": "c3a242f1_7c08e845",
+      "range": {
+        "startLine": 27,
+        "startChar": 6,
+        "endLine": 27,
+        "endChar": 56
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9496dcb3_151df8f8",
@@ -175,6 +343,30 @@
       "writtenOn": "2024-02-13T11:12:44Z",
       "side": 1,
       "message": "I don\u0027t believe that\u0027s true; DTC will generate the `/fragment@X/__overlay__` nodes when compiling an overlay (`/plugin/`).\n\nTo illustrate my point, can\u0027t your example below be written as\n```dts\n/dts-v1/;\n/plugin/\n\n/ {\n    host {\n        // ...\n    };\n};\n\n\u0026{/} { // This only generates one fragment@X; why have 3?\n    rng: rng {\n        compatible \u003d \"android,rng\";\n        android,rng,ignore-gctrl-reset;\n    };\n\n    light: light {\n        compatible \u003d \"android,light\";\n        version \u003d \u003c0x1 0x2\u003e;\n    };\n\n    bus0 {\n        led: led {\n            compatible \u003d \"android,led\";\n            prop \u003d \u003c0x555\u003e;\n        };\n    };\n};\n```\n?\n\nIMO, it would make sense to limit this documentation to DTS examples, as readers are much more likely to be familiar with those than with the nitty-gritty details of DTBOs. Or do you have an example of something we do that actually requires manually generating DTBO internals in DTS?\n\nFor example, below you introduce a requirement in terms of being \"defined under the `/__symbols__`\", which would be more easily understood if expressed as \"having a label\" (with `-@`). Or the whole \"overlayable node\" definition feels pointlessly low-level.\n\nAlso, having small DTS snippets illustrating each requirement would make it easier to follow, IMO.",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 79
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f551875_d85cb437",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T06:40:12Z",
+      "side": 1,
+      "message": "You\u0027re right. I simply didn\u0027t know that we can mix formats. Simplified bit.\n\nnit; separating `fragment@..` is perhaps Pixel style, but I agree that we don\u0027t need to explain such details.",
+      "parentUuid": "9496dcb3_151df8f8",
       "range": {
         "startLine": 27,
         "startChar": 0,
@@ -208,6 +400,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "162aaded_fc990741",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T06:40:12Z",
+      "side": 1,
+      "message": "Rearraged VM DTBO\u0027s `\u0026{/}`, but kept XML in the same place. `XML` contains `dtbo_label`, and it should match with the VM DT.",
+      "parentUuid": "c9fbc139_448dddaf",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 4
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e6e244d_6683efa8",
@@ -221,6 +437,30 @@
       "writtenOn": "2024-02-13T14:25:43Z",
       "side": 1,
       "message": "While `__symbols__` can be defined in the source (dts) files, simply setting a node label of an assignable device node would make `dtc -@` create a `__symbols__` node with the label and the associated path.",
+      "range": {
+        "startLine": 63,
+        "startChar": 63,
+        "endLine": 64,
+        "endChar": 37
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e2e5270_ffe12db9",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T06:40:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e6e244d_6683efa8",
       "range": {
         "startLine": 63,
         "startChar": 63,
@@ -254,6 +494,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "583333c5_4ffa6633",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T06:40:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19397751_d03185a1",
+      "range": {
+        "startLine": 86,
+        "startChar": 32,
+        "endLine": 86,
+        "endChar": 42
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0172d16b_371c1a93",
@@ -277,6 +541,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f646f41_b3680c9c",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T06:40:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0172d16b_371c1a93",
+      "range": {
+        "startLine": 184,
+        "startChar": 0,
+        "endLine": 184,
+        "endChar": 79
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7ed564c_ca609d4b",
@@ -290,6 +578,30 @@
       "writtenOn": "2024-02-13T13:07:21Z",
       "side": 1,
       "message": "Is this a title?",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 209,
+        "endChar": 33
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab70fa71_d7e9cba0",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T06:40:12Z",
+      "side": 1,
+      "message": "Changed to title.",
+      "parentUuid": "a7ed564c_ca609d4b",
       "range": {
         "startLine": 209,
         "startChar": 0,
@@ -325,6 +637,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e167ab3d_b75399b7",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T06:40:12Z",
+      "side": 1,
+      "message": "IIUC, The abstract name is currently has no meaningful usage outside of the dump (hence debugging only). For example, vfio_handler only takes `sysfs_path` and `dtbo_label`.\n\nCCing @inseob@google.com for confirmation.",
+      "parentUuid": "34623dec_f48789e6",
+      "range": {
+        "startLine": 225,
+        "startChar": 25,
+        "endLine": 226,
+        "endChar": 24
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "10b05401_125320cf",
         "filename": "docs/device_assignment.md",
         "patchSetId": 1
@@ -336,6 +672,30 @@
       "writtenOn": "2024-02-13T13:07:21Z",
       "side": 1,
       "message": "Make this a title?",
+      "range": {
+        "startLine": 231,
+        "startChar": 0,
+        "endLine": 231,
+        "endChar": 34
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e05195bb_14411fa9",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T06:40:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10b05401_125320cf",
       "range": {
         "startLine": 231,
         "startChar": 0,
@@ -369,6 +729,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eedfa21_e7b3e81b",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T06:40:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a10c9867_09f94de0",
+      "range": {
+        "startLine": 237,
+        "startChar": 41,
+        "endLine": 237,
+        "endChar": 46
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fdf00f32_24c8e4c8",
@@ -382,6 +766,30 @@
       "writtenOn": "2024-02-13T13:07:21Z",
       "side": 1,
       "message": "again, current tense.\n```suggestion\nAVF reads the index, reads VM DA DTBO, and passes it to the crosvm when booting\n```",
+      "range": {
+        "startLine": 240,
+        "startChar": 4,
+        "endLine": 240,
+        "endChar": 13
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7199afe_2e75e0eb",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T06:40:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdf00f32_24c8e4c8",
       "range": {
         "startLine": 240,
         "startChar": 4,
@@ -415,6 +823,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "731b89e0_e7634bca",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T06:40:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14faeee7_a451ec8e",
+      "range": {
+        "startLine": 253,
+        "startChar": 96,
+        "endLine": 255,
+        "endChar": 0
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf68dfd7_9bec28a4",
@@ -428,6 +860,30 @@
       "writtenOn": "2024-02-13T11:12:44Z",
       "side": 1,
       "message": "This link is broken:\n\n```suggestion\n- entry 2 may point to a [DTBO] that describes VM DA DTBO for [device assignment][device_assignment].\n```",
+      "range": {
+        "startLine": 198,
+        "startChar": 62,
+        "endLine": 198,
+        "endChar": 100
+      },
+      "revId": "d10fcfc4a8dca441c3f10b15ef3258fe62754d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f66363a2_400d32c0",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T06:40:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf68dfd7_9bec28a4",
       "range": {
         "startLine": 198,
         "startChar": 62,
