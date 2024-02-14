@@ -134,6 +134,30 @@
       },
       "revId": "049baffb4ee4fe84a39c866cf8c7ff0c283db7c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87dc35d4_96ac5066",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-14T13:36:50Z",
+      "side": 1,
+      "message": "\u003e Our liblibfdt\u0027s add_subnode() returns error for existing node, so following the pattern shouldn\u0027t be considered as a bug.\n\n\nFWICT, `append()` method, for ex, calls `fdt_setprop`, which overwrites the property if already present. So, status quo, it doesnt really throw error in case of all kind of existing node/props, so letting it skip subnode addition seemed like converging on the pattern. \n\n`append()` doesn\u0027t sound like a bad option, but happy to change it to `overlay_onto` if you prefer that.\n\n\n\u003e using plain for loop would be much more cleaner than filter_map()\n\nI tried that before, rustc complains understandably because there is an immutable reference usage (`node.as_node().subnode(name)`) while an existing mutable reference is already borrowed (`node.add_subnodes()`). Let me add a comment to make it clearer.\n\nLets discuss fsfdt at the other patch.",
+      "parentUuid": "a5d0f7e8_3780f675",
+      "range": {
+        "startLine": 56,
+        "startChar": 14,
+        "endLine": 56,
+        "endChar": 40
+      },
+      "revId": "049baffb4ee4fe84a39c866cf8c7ff0c283db7c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
