@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6aa810c_665be98a",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-14T18:31:04Z",
+      "side": 1,
+      "message": "Would it be better if we keep constant bytes (`salt_rkp_vm` which is orthogonal to the salt) to be added incase `rkp_vm_marker` is set and not add it in cases of non RKPVM OSes?\n\nThe rationale for the suggestion is that while pvmfw should be differentiating secrets of the new/higher privileged OS but it shouldn\u0027t be affecting the Hidden Inputs of u-droid, which (as per spec) should be stable across updates.\nIf possible, we\u0027d like to avoid the pattern of changing secrets* of older DICE paths when DICE chains are forked as a result of new features (or new OSes with different capabilities are introduced).\n\n[Side Q: Is the marker set false in the config descriptor for `vm_entry` node in u-droid DICE chain]\n\n*Even though devices cannot really use there stable Sealing CDIs without Secretkeeper.\n\n\nSorry the recommendation in b/323523191 wasn\u0027t clear on this bit, I meant it in spirit of changing secrets, but didn\u0027t suggest exact mechanism",
+      "range": {
+        "startLine": 85,
+        "startChar": 13,
+        "endLine": 85,
+        "endChar": 39
+      },
+      "revId": "928cb2044c74258fcadbcaa8096729453dd01035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
