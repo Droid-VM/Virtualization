@@ -158,6 +158,30 @@
       },
       "revId": "049baffb4ee4fe84a39c866cf8c7ff0c283db7c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5de870c_f09ee298",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T15:26:13Z",
+      "side": 1,
+      "message": "\u003e it doesnt really throw error in case of all kind of existing node/props\n\nThis is not true. No FDT API allows overwriting of existing node while OK for props. Exception is `fdt_overlay_apply()` but its name \u0027overlay\u0027 may imply so.\n\nAnyway, I\u0027m OK if you prefer `overlay_onto`.\n\nBut still, could you drop `DtAddition`?",
+      "parentUuid": "87dc35d4_96ac5066",
+      "range": {
+        "startLine": 56,
+        "startChar": 14,
+        "endLine": 56,
+        "endChar": 40
+      },
+      "revId": "049baffb4ee4fe84a39c866cf8c7ff0c283db7c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
