@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a35e363_99a99fc9",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T14:47:06Z",
+      "side": 1,
+      "message": "I agree that \"device\" is not only overloaded but also confusing here (as it isn\u0027t the SoC or any part of the hardware that\u0027s providing the VM DTBO) but what term do you suggest we use in this case? \"Android implementation\"? \"AVF-compatible integration\"? \"Device assignment capable codebase\"?",
+      "parentUuid": "9559e0c5_36164319",
+      "range": {
+        "startLine": 10,
+        "startChar": 28,
+        "endLine": 10,
+        "endChar": 34
+      },
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "12496d6d_88bb033d",
         "filename": "docs/device_assignment.md",
         "patchSetId": 2
@@ -72,6 +96,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e69a2c03_24c26daa",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T14:47:06Z",
+      "side": 1,
+      "message": "the VMM selectively applies the DTBO based from a set of provided symbols, describing the assigned devices.",
+      "range": {
+        "startLine": 22,
+        "startChar": 17,
+        "endLine": 23,
+        "endChar": 16
+      },
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c75abe74_1670c3ef",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T14:47:06Z",
+      "side": 1,
+      "message": "Empty section?",
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2856b6d3_eab53ff0",
         "filename": "docs/device_assignment.md",
         "patchSetId": 2
@@ -111,6 +175,489 @@
         "startChar": 0,
         "endLine": 31,
         "endChar": 6
+      },
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d95b99a_72a33c18",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T14:47:06Z",
+      "side": 1,
+      "message": "How is that relevant to this part of the document (i.e. the VM DTBO format)? I agree that mentioning VFIO in this doc is useful but, as I suggested in a previous comment, I\u0027d recommend doing that in the introduction (or a \"higher-level\" part of the doc), where you mention how the VMM uses the VM DTBO and where those labels come from (i.e. the VFIO devices).\n\nIf you meant that device assignment only supports platform devices, i.e. DT nodes at `/` where `\u003creg\u003e` refers to the CPU bus, then write that explicitly here. Doing so, wouldn\u0027t make it unnecessary to introduce VFIO (\u0026 `vfio-platform` specifically`) earlier.",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 52
+      },
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6251cb2d_76e26a1f",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T14:47:06Z",
+      "side": 1,
+      "message": "WDYM? I\u0027m reading this as\n\n\u003e Labels should point to [...] ignored\n\n?",
+      "range": {
+        "startLine": 48,
+        "startChar": 75,
+        "endLine": 49,
+        "endChar": 9
+      },
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d22636b_b13d6df4",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T14:47:06Z",
+      "side": 1,
+      "message": "\"In the compiled device tree\" or \"In the DTB\" as `/__symbols__` is almost never generated by hand from DTS.",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 50,
+        "endChar": 10
+      },
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d7e263d_12ec8820",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T14:47:06Z",
+      "side": 1,
+      "message": "\"for verification of assigned devices\"?\n\nAs it is _not_ used for actually assigning devices (as you write in the other half of the sentence).",
+      "range": {
+        "startLine": 58,
+        "startChar": 60,
+        "endLine": 59,
+        "endChar": 7
+      },
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81f8114d_9e4f0fa9",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T14:47:06Z",
+      "side": 1,
+      "message": "\"Its\"\n\nBut you could fold this whole sentence into the previous one:\n\n\"An IOMMU token is a hypervisor-specific `\u003cu64\u003e` which uniquely identifies a physical IOMMU.\"",
+      "range": {
+        "startLine": 65,
+        "startChar": 58,
+        "endLine": 65,
+        "endChar": 62
+      },
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc4e431d_9bc9ab61",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T14:47:06Z",
+      "side": 1,
+      "message": "Maybe express this as what it actually means in IOMMU topology (i.e. \"must be multi-master IOMMUs\") before expressing it in DT syntax?\n\nFeel free to link to https://www.kernel.org/doc/Documentation/devicetree/bindings/iommu/iommu.txt",
+      "range": {
+        "startLine": 69,
+        "startChar": 23,
+        "endLine": 69,
+        "endChar": 48
+      },
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56893fa7_f8c8c556",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T14:47:06Z",
+      "side": 1,
+      "message": "Isn\u0027t it the opposite i.e. that the `\u003c...,target\u003e` _is_ what crosvm added?",
+      "range": {
+        "startLine": 74,
+        "startChar": 4,
+        "endLine": 74,
+        "endChar": 31
+      },
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae371059_0dd44a0a",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T14:47:06Z",
+      "side": 1,
+      "message": "nit: \"regions\"",
+      "range": {
+        "startLine": 76,
+        "startChar": 4,
+        "endLine": 76,
+        "endChar": 13
+      },
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73acd7ad_bdf7275e",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T14:47:06Z",
+      "side": 1,
+      "message": "nit: \"a `prop-encoded-array`\"",
+      "range": {
+        "startLine": 78,
+        "startChar": 16,
+        "endLine": 78,
+        "endChar": 34
+      },
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18f895ef_0809f81d",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T14:47:06Z",
+      "side": 1,
+      "message": "to be very clear: \"sharing the same IOMMU-SID pair between multiple devices isn\u0027t\"",
+      "range": {
+        "startLine": 80,
+        "startChar": 77,
+        "endLine": 81,
+        "endChar": 14
+      },
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32321bf9_5914dd0c",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T14:47:06Z",
+      "side": 1,
+      "message": "Is this true? Don\u0027t we allow \"external\" (dangling) references to labels of the crosvm-generated DT (platform DT) e.g. if a device needs to point to the vGIC (or a virtual power domain)?",
+      "range": {
+        "startLine": 84,
+        "startChar": 53,
+        "endLine": 85,
+        "endChar": 22
+      },
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1989f92b_31efb513",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T14:47:06Z",
+      "side": 1,
+      "message": "IMO, this would be very obscure to someone who isn\u0027t already familiar with the VM DTBO. For example, nothing explains what \"assigning a device node\" even means and \"dependencies\" aren\u0027t really defined either (only that \"phandle references can be in the VM DTBO\").\n\nIt might be clearer to define the assigned subset of the DTBO through an algorithm e.g. 1. start with a set of labels (VMM gets it from CLI  \u0026 pvmfw from `__symbols__` of input DT) then 2. \"assign\" (i.e. don\u0027t mask) all nodes they point to and 3. recurse based on phandles \u0026 parents.",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 54
+      },
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c691aa87_272a61fe",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T14:47:06Z",
+      "side": 1,
+      "message": "I might be missing the logic behind the doc structure but why not merge these 2 sections into a single one?",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 14
+      },
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf60dbec_150ef401",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T14:47:06Z",
+      "side": 1,
+      "message": "Technically, it\u0027s unbinding from the host device driver and binding to the host VFIO driver.",
+      "range": {
+        "startLine": 195,
+        "startChar": 55,
+        "endLine": 196,
+        "endChar": 10
+      },
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6d78dea_df4f94d5",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T14:47:06Z",
+      "side": 1,
+      "message": "\"... to the device, used to bind to the VFIO driver.\"",
+      "range": {
+        "startLine": 213,
+        "startChar": 29,
+        "endLine": 213,
+        "endChar": 73
+      },
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aae30bd_3134da6f",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T14:47:06Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the `\u003cdtbo_label\u003e` also be unique?",
+      "range": {
+        "startLine": 213,
+        "startChar": 75,
+        "endLine": 214,
+        "endChar": 20
+      },
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cacf156f_88cfe775",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T14:47:06Z",
+      "side": 1,
+      "message": "Instead of having a separate section for a single sentence, merge this in the first paragraph of the previous one: \"The information should be provided in an XML file at `/vendor/...`\"?",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 216,
+        "endChar": 38
+      },
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0a4faff_f71b47a6",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T14:47:06Z",
+      "side": 1,
+      "message": "To be pedantic, crosvm _is_ AVF.\n\nIMO, this whole section could be summarized in a single sentence:\n\n\"AVF reads the VM DTBO from the [`dtbo.img` partition][link_to_source_com] at the index provided by ABL through the Android system property `ro.boot.hypervisor.vm_dtbo_idx`.\"",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 79
+      },
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aff46134_71ee2cdf",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T14:47:06Z",
+      "side": 1,
+      "message": "Is the \"-\" necessary?",
+      "range": {
+        "startLine": 242,
+        "startChar": 35,
+        "endLine": 242,
+        "endChar": 44
+      },
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "218f79ba_a35a0100",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T14:47:06Z",
+      "side": 1,
+      "message": "Should we mention that this requires a special kernel to temper the expectations of the reader?",
+      "range": {
+        "startLine": 242,
+        "startChar": 50,
+        "endLine": 243,
+        "endChar": 11
+      },
+      "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f7c96a7_9c08531c",
+        "filename": "docs/device_assignment.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T14:47:06Z",
+      "side": 1,
+      "message": "If this requires ADB root (not sure?), please mention it.",
+      "range": {
+        "startLine": 248,
+        "startChar": 17,
+        "endLine": 248,
+        "endChar": 18
       },
       "revId": "8e7069a28451c14618c145caa89537ccf2a3f94c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
