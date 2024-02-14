@@ -110,6 +110,30 @@
       },
       "revId": "049baffb4ee4fe84a39c866cf8c7ff0c283db7c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5d0f7e8_3780f675",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T06:13:56Z",
+      "side": 1,
+      "message": "\u003e \u003e fsfdt change wouldn\u0027t be necessary if all of following happens\n\n\u003e fsfdt change is for fixing the bug. I believe append() should be able to cope with existing subnode in the target DT.\n\nIt\u0027s not a bug. Our `liblibfdt`\u0027s `add_subnode()` returns error for existing node, so following the pattern shouldn\u0027t be considered as a bug. (note: even `HashSet::insert` returns `false` and dropping parameter for inserting existing value) However, we own every code around here, so we can change the behavior if you want to.\n\nIf you prefer to change `fsfdt` behavior, then please rename `append()` to `overlay_onto()`  (or something similar) and simplify codes around `filter_map()` code. IMHO, using plain for loop would be much more cleaner than `filter_map()`.\n\n\n\u003e \u003e loading from path comes before untrusted props appending\n\n\u003e That maybe tricky. It does sound like a hack to avoid hitting the bug. What flow will create the /avf/ subnode in target tree?\n1) If append() adds it (because Path was present \u0026 was called before adding untrusted props), then we will not explicitly call add_subnode(AVF_NODE_NAME) [line 80].\n2) If the path is not present, then we will need to keep this around.\n\n\u003e which only adds complexity to this method to avoid a bug.\n\nIt\u0027s not a bug in neither place. We anyway need \u0027adds a node if not exists, and doesn\u0027t return error for existing node\u0027 in either `fsfdt` nor here. Why don\u0027t do the similar here? Why modification in `fsfdt` is fixing bug and why following code here is hack?\n\n```\n    if !additional_properties.is_empty() {\n        let mut node \u003d match node.subnode(AVF_NODE_NAME) {\n           Ok(Some(node)) \u003d\u003e node,\n           Ok(None) \u003d\u003e node.add_subnode(AVF_NODE_NAME).map_err(...)?,\n           Err(e) \u003d\u003e return ...;\n        }\n        let mut node \u003d node\n            .add_subnode(UNTRUSTED_NODE_NAME)\n            .map_err(|e| anyhow!(\"Failed to add /avf/untrusted node: {e:?}\"))?;\n        for prop in additional_properties {\n            if let DtAddition::AvfUntrustedProp(name, value) \u003d prop {\n                node.setprop(name, value).map_err(|e| anyhow!(\"Failed to set property: {e:?}\"))?;\n            }\n        }\n    }\n```\n\nNote that we\u0027re doing similar in ABL.\n\n\u003e \u003e create_device_tree_overlay(buffer: \u0026mut [u8], base_fs_dir: \u0026Path, untrusted_props: [(\u0026Cstr, \u0026[u8])])\n\n\u003e But path base_fs_dir may not be present if reference DT is not preset on host DT. Even if we change it to create_device_tree_overlay(buffer: \u0026mut [u8], base_fs_dir: \u0026Option\u003cPath\u003e, untrusted_props: \u0026[(\u0026Cstr, \u0026[u8])]), I dont see the advantage of it over (what I think) is a cleared encapsulation of DtAddition\n\nAgree that `Option\u003c\u0026Path\u003e` makes more sense. Sorry I forgot here.\n\nI\u0027m proposing this for the simpler code. We\u0027re only interested in adding 0 or 1 path and 0 or more untrusted props, but this code allows to send any number of paths. Would we need to support add multiple path here? If not, why we\u0027re adding code that allows mistake?\n\nIf we need to add multiple `Path`, I would still vote for `create_device_tree_overlay(buffer: \u0026mut [u8], fs_dir: \u0026[\u0026Path], untrusted_props: \u0026[..])`.\n\nIn addition, I don\u0027t understand why `FromPath` and `AvfUntrustedProp` should be group together. `FromPath` represents complete DT and `AvfUntrustedProp` represents a single prop only. And the parameter is immediately separated and destructuring. We\u0027re adding 10+ lines of code because of it, understanding parameters requires to read `DtAddition` documentation.",
+      "parentUuid": "964ca342_ee9ab686",
+      "range": {
+        "startLine": 56,
+        "startChar": 14,
+        "endLine": 56,
+        "endChar": 40
+      },
+      "revId": "049baffb4ee4fe84a39c866cf8c7ff0c283db7c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
