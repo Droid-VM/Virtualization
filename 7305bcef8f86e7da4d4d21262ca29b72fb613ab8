@@ -22,6 +22,30 @@
       },
       "revId": "7305bcef8f86e7da4d4d21262ca29b72fb613ab8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09a7d4e4_0488a94e",
+        "filename": "tests/hostside/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T15:53:00Z",
+      "side": 1,
+      "message": "Moved to `data_native_bins`. Seems like that `required` only build this on host, and `data_native_bins` includes the binary to test.\n\nAlso changed code to run `dtdiff` in the test.",
+      "parentUuid": "1ab8867b_640312a5",
+      "range": {
+        "startLine": 42,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 12
+      },
+      "revId": "7305bcef8f86e7da4d4d21262ca29b72fb613ab8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

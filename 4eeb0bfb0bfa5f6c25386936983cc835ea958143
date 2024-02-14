@@ -22,6 +22,30 @@
       },
       "revId": "4eeb0bfb0bfa5f6c25386936983cc835ea958143",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d66500fb_9d2d48d9",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-14T15:53:00Z",
+      "side": 0,
+      "message": "Yes. `launchWithDeviceAssignment()` uses `mProtectedVm` so test runs for both pVM and non-pVM",
+      "parentUuid": "5b06554e_9e1d458a",
+      "range": {
+        "startLine": 988,
+        "startChar": 0,
+        "endLine": 988,
+        "endChar": 28
+      },
+      "revId": "4eeb0bfb0bfa5f6c25386936983cc835ea958143",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
