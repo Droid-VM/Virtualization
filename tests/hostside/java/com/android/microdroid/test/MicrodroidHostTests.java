@@ -47,6 +47,7 @@ import com.android.tradefed.device.ITestDevice;
 import com.android.tradefed.device.TestDevice;
 import com.android.tradefed.testtype.DeviceJUnit4ClassRunner.TestMetrics;
 import com.android.tradefed.util.CommandResult;
+import com.android.tradefed.util.CommandStatus;
 import com.android.tradefed.util.FileUtil;
 import com.android.tradefed.util.RunUtil;
 import com.android.tradefed.util.xml.AbstractXmlParser;
@@ -985,23 +986,55 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     public void testDeviceAssignment() throws Exception {
-        assumeProtectedVm();
+        String vmFdtPath = "/sys/firmware/fdt";
+        String baseFdtPath = "base_fdt.dtb";
+        String fdtPath = "fdt.dtb";
+
         assumeVfioPlatformSupported();
 
         List<String> devices = getAssignableDevices();
         assumeFalse("no assignable devices", devices.isEmpty());
 
+        // Generates baseline DT
+        launchWithDeviceAssignment(/* device= */ null);
+        assertThat(mMicrodroidDevice.pullFile(vmFdtPath, new File(baseFdtPath))).isTrue();
+        getAndroidDevice().shutdownMicrodroid(mMicrodroidDevice);
+
+        // Try assign devices one by one
+        for (String device : devices) {
+            assertThat(device).isNotNull();
+            launchWithDeviceAssignment(device);
+            assertThat(mMicrodroidDevice.pullFile(vmFdtPath, new File(fdtPath))).isTrue();
+            getAndroidDevice().shutdownMicrodroid(mMicrodroidDevice);
+
+            CommandResult result =
+                    RunUtil.getDefault().runTimedCmd(500, "dtdiff", baseFdtPath, fdtPath);
+
+            // Check whether there's VM DT has any modification.
+            assertWithMessage("VM's device tree hasn't changed when assigning " + device)
+                    .that(result.getStatus())
+                    .isNotEqualTo(CommandStatus.SUCCESS);
+        }
+
+        mMicrodroidDevice = null;
+    }
+
+    private void launchWithDeviceAssignment(String device) throws Exception {
         final String configPath = "assets/" + mOs + "/vm_config.json";
-        mMicrodroidDevice =
+
+        MicrodroidBuilder builder =
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
                         .debugLevel("full")
                         .memoryMib(minMemorySize())
                         .cpuTopology("match_host")
-                        .protectedVm(true)
-                        .addAssignableDevice(devices.get(0))
-                        .build(getAndroidDevice());
+                        .protectedVm(mProtectedVm);
+        if (device != null) {
+            builder.addAssignableDevice(device);
+        }
+        mMicrodroidDevice = builder.build(getAndroidDevice());
 
-        mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
+        assertThat(mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT)).isTrue();
+        assertThat(mMicrodroidDevice.enableAdbRoot()).isTrue();
     }
 
     @Test
