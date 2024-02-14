@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8da518a5_5178e569",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-14T05:54:55Z",
+      "side": 1,
+      "message": "Yeah, I was considering doing this but I was trying to avoid bother passing the vcpufreq data down to the patching side since the node is so trivial and should always be derived from num_cpus, but this is fine to me and could be useful going forward if the node changes.",
+      "parentUuid": "9ea080f2_cbbfda46",
+      "range": {
+        "startLine": 232,
+        "startChar": 51,
+        "endLine": 233,
+        "endChar": 55
+      },
+      "revId": "af2f39ca51ddf8b806952b66879599ea8101f416",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7bd71034_578b2087",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-08T11:08:34Z",
       "side": 1,
       "message": "Is it not an error for `size \u003c max_reg_size`? I was expecting (naively?) the check on size to be `reg.size \u003d\u003d cpus.len() * VCPUFREQ_SIZE` (i.e. the size we\u0027re patching into the platform DT).",
+      "range": {
+        "startLine": 259,
+        "startChar": 4,
+        "endLine": 259,
+        "endChar": 27
+      },
+      "revId": "af2f39ca51ddf8b806952b66879599ea8101f416",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69bd1368_08effb1b",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-14T05:54:55Z",
+      "side": 1,
+      "message": "While the check isn\u0027t wrong, I don\u0027t think it\u0027s required. reg.size \u003d\u003d cpus.len() * VCPUFREQ_SIZE is the only check we need for size as that\u0027s the only acceptable size given a cpu count.",
+      "parentUuid": "7bd71034_578b2087",
       "range": {
         "startLine": 259,
         "startChar": 4,
