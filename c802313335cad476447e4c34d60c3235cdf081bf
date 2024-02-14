@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "494a7cc5_8388f8ab",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T15:50:57Z",
+      "side": 1,
+      "message": "+1 to using a `for` loop and `?`-ing on the first error.",
+      "parentUuid": "ad336cfc_1210f2c9",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 0
+      },
+      "revId": "c802313335cad476447e4c34d60c3235cdf081bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96eacd7b_5a8c2ccf",
         "filename": "virtualizationmanager/fsfdt/src/lib.rs",
         "patchSetId": 3
@@ -42,6 +66,29 @@
         "startChar": 12,
         "endLine": 166,
         "endChar": 18
+      },
+      "revId": "c802313335cad476447e4c34d60c3235cdf081bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51fe88ca_6dfbb4bc",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-14T15:50:57Z",
+      "side": 1,
+      "message": "This doesn\u0027t look like a valid DT path? The root is at path `\"/\"`.\n\n(Also, nit: use `cstr!` instead of `\u0026CString::new().unwrap()`)",
+      "range": {
+        "startLine": 166,
+        "startChar": 19,
+        "endLine": 166,
+        "endChar": 45
       },
       "revId": "c802313335cad476447e4c34d60c3235cdf081bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
