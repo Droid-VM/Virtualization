@@ -245,6 +245,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0da606ca_a526a61f",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-15T05:45:15Z",
+      "side": 1,
+      "message": "TZ HAL wants \u0027VM starts in early boot stage\u0027, so we\u0027d better to handle when PackageManager isn\u0027t ready.",
+      "parentUuid": "9689b09b_39820bb9",
+      "range": {
+        "startLine": 289,
+        "startChar": 13,
+        "endLine": 289,
+        "endChar": 31
+      },
+      "revId": "c33280ec1752f7c4c563e4deb882cbfb03555425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bcc65d01_1056b3c8",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 5

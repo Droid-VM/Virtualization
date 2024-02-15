@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be22b899_a86f305a",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-15T05:45:15Z",
+      "side": 1,
+      "message": "Just out of my curiosity: Is it mandatory flag with this CL?\n\nIf so, we may want to fix other places such as:\n  - tools/tradefederation/core/src/com/android/tradefed/device/TestDevice.java\n  - packages/modules/Virtualization/tests/pvmfw/java/com/android/pvmfw/test/DebugPolicyHostTests.java\n  - README.md\n  - ...",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 0
+      },
+      "revId": "b6829ff1fc0df47a1eb3fc42cfde9a2f5b806dbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
