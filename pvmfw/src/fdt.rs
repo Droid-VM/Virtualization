@@ -51,8 +51,11 @@ use vmbase::util::RangeExt as _;
 use zerocopy::AsBytes as _;
 
 /// An enumeration of errors that can occur during the FDT validation.
+#[allow(clippy::enum_variant_names)]
 #[derive(Clone, Debug)]
 pub enum FdtValidationError {
+    /// Invalid Cpu Capacity
+    InvalidCpuCapacity(u32),
     /// Invalid CPU count.
     InvalidCpuCount(usize),
     /// Invalid VCpufreq Range.
@@ -66,6 +69,7 @@ impl fmt::Display for FdtValidationError {
             Self::InvalidVcpufreq(addr, size) => {
                 write!(f, "Invalid vcpufreq region: ({addr:#x}, {size:#x})")
             }
+            Self::InvalidCpuCapacity(capacity) => write!(f, "Invalid CPU capacity: {capacity}"),
         }
     }
 }
@@ -178,10 +182,10 @@ fn patch_memory_range(fdt: &mut Fdt, memory_range: &Range<usize>) -> libfdt::Res
         .setprop_inplace(cstr!("reg"), [addr.to_be(), size.to_be()].as_bytes())
 }
 
-//TODO: Need to add info for cpu capacity
 #[derive(Debug, Default)]
 struct CpuInfo {
     opptable_info: Option<ArrayVec<[u64; CpuInfo::MAX_OPPTABLES]>>,
+    cpu_capacity: Option<u32>,
 }
 
 impl CpuInfo {
@@ -204,6 +208,7 @@ fn read_cpu_info_from(fdt: &Fdt) -> libfdt::Result<ArrayVec<[CpuInfo; DeviceTree
     let mut cpus = ArrayVec::new();
     let mut cpu_nodes = fdt.compatible_nodes(cstr!("arm,arm-v8"))?;
     for cpu in cpu_nodes.by_ref().take(cpus.capacity()) {
+        let cpu_capacity = cpu.getprop_u32(cstr!("capacity-dmips-mhz"))?;
         let opp_phandle = cpu.getprop_u32(cstr!("operating-points-v2"))?;
         let opptable_info = if let Some(phandle) = opp_phandle {
             let phandle = phandle.try_into()?;
@@ -212,7 +217,7 @@ fn read_cpu_info_from(fdt: &Fdt) -> libfdt::Result<ArrayVec<[CpuInfo; DeviceTree
         } else {
             None
         };
-        let info = CpuInfo { opptable_info };
+        let info = CpuInfo { opptable_info, cpu_capacity };
         cpus.push(info);
     }
     if cpu_nodes.next().is_some() {
@@ -225,6 +230,14 @@ fn read_cpu_info_from(fdt: &Fdt) -> libfdt::Result<ArrayVec<[CpuInfo; DeviceTree
 fn validate_cpu_info(cpus: &[CpuInfo]) -> Result<(), FdtValidationError> {
     if cpus.is_empty() {
         return Err(FdtValidationError::InvalidCpuCount(0));
+    }
+
+    for cpu in cpus.iter() {
+        if let Some(cpu_capacity) = cpu.cpu_capacity {
+            if cpu_capacity > 1024 || cpu_capacity == 0 {
+                return Err(FdtValidationError::InvalidCpuCapacity(cpu_capacity));
+            }
+        }
     }
 
     Ok(())
@@ -307,7 +320,10 @@ fn get_nth_compatible<'a>(
 fn patch_cpus(fdt: &mut Fdt, cpus: &[CpuInfo]) -> libfdt::Result<()> {
     const COMPAT: &CStr = cstr!("arm,arm-v8");
     for (idx, cpu) in cpus.iter().enumerate() {
-        let cur = get_nth_compatible(fdt, idx, COMPAT)?.ok_or(FdtError::NoSpace)?;
+        let mut cur = get_nth_compatible(fdt, idx, COMPAT)?.ok_or(FdtError::NoSpace)?;
+        if let Some(cpu_capacity) = cpu.cpu_capacity {
+            cur.setprop_inplace(cstr!("capacity-dmips-mhz"), &cpu_capacity.to_be_bytes())?;
+        }
         patch_opptable(cur, cpu.opptable_info)?;
     }
     let mut next = get_nth_compatible(fdt, cpus.len(), COMPAT)?;
