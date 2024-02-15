@@ -44,7 +44,7 @@ fn parse_reference_dt_internal(dir_path: &Path, fdt_path: &Path) -> Result<Optio
 
     let fdt = Fdt::create_empty_tree(&mut data)
         .map_err(|e| anyhow!("Failed to create an empty DT, {e:?}"))?;
-    let mut root = fdt.root_mut().map_err(|e| anyhow!("Failed to find the DT root, {e:?}"))?;
+    let root = fdt.root_mut().map_err(|e| anyhow!("Failed to find the DT root, {e:?}"))?;
     let mut fragment = root
         .add_subnode(cstr!("fragment@0"))
         .map_err(|e| anyhow!("Failed to create the fragment@0, {e:?}"))?;
