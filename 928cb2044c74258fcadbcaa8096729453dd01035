@@ -22,6 +22,30 @@
       },
       "revId": "928cb2044c74258fcadbcaa8096729453dd01035",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c17fa86_7e0bb546",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-15T11:38:25Z",
+      "side": 1,
+      "message": "We discussed offline:\n- We need to make sure an attacker can\u0027t spoof the RKP VM hidden input, which means we have to move away from the normal hidden input being entirely controlled by the host.\n- We shouldn\u0027t change existing sealing CDIs, but there seems to be no alternative. Once we have this change, where the hidden input is a hash of something we control plus other data, it should be possible to make it different if we need to for new types of VMs without having to change it for existing VMs again.",
+      "parentUuid": "f6aa810c_665be98a",
+      "range": {
+        "startLine": 85,
+        "startChar": 13,
+        "endLine": 85,
+        "endChar": 39
+      },
+      "revId": "928cb2044c74258fcadbcaa8096729453dd01035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
