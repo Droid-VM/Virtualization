@@ -70,6 +70,30 @@
       },
       "revId": "928cb2044c74258fcadbcaa8096729453dd01035",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b036fd8_16b615a6",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-15T12:17:20Z",
+      "side": 1,
+      "message": "We\u0027re not even limited to 64 bytes! The input to the hash can be as small or large as we want.\nBut there\u0027s probably no need to make it much larger.",
+      "parentUuid": "227fd203_7c63c222",
+      "range": {
+        "startLine": 85,
+        "startChar": 13,
+        "endLine": 85,
+        "endChar": 39
+      },
+      "revId": "928cb2044c74258fcadbcaa8096729453dd01035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
