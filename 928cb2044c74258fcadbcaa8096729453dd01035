@@ -46,6 +46,30 @@
       },
       "revId": "928cb2044c74258fcadbcaa8096729453dd01035",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "227fd203_7c63c222",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-15T11:46:44Z",
+      "side": 1,
+      "message": "Ack, we met on this.\n\n\u003e where the hidden input is a hash of something we control plus other data\n\nThe input we control, even though is a bool currently, can be expanded to 64 bytes by hashing it with other differentiators in the future, where the other data will be constant for already present configurations such as rkpvm \u0026 u-droid",
+      "parentUuid": "5c17fa86_7e0bb546",
+      "range": {
+        "startLine": 85,
+        "startChar": 13,
+        "endLine": 85,
+        "endChar": 39
+      },
+      "revId": "928cb2044c74258fcadbcaa8096729453dd01035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
