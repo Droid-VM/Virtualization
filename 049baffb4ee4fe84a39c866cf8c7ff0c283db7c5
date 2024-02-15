@@ -230,6 +230,30 @@
       },
       "revId": "049baffb4ee4fe84a39c866cf8c7ff0c283db7c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d6fa9fe_5e17c147",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-15T14:16:45Z",
+      "side": 1,
+      "message": "Let me change the patch given you strong recommendation to avoid `DtAddition`, it is not a publicly exported out of the library.\n\n\n\u003e Could you clarify when do we need multiple Paths\n\nI wanted it to be extendible to include dtbo in the future, but that will be \nheavier refactoring anyway, so maybe we should not let that be an influence. Path as Option SGTM.",
+      "parentUuid": "bcd3169e_597d3816",
+      "range": {
+        "startLine": 56,
+        "startChar": 14,
+        "endLine": 56,
+        "endChar": 40
+      },
+      "revId": "049baffb4ee4fe84a39c866cf8c7ff0c283db7c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
