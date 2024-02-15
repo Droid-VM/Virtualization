@@ -94,6 +94,30 @@
       },
       "revId": "928cb2044c74258fcadbcaa8096729453dd01035",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a340ed4e_925d9938",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-02-15T13:07:55Z",
+      "side": 1,
+      "message": "\u003e But there\u0027s probably no need to make it much larger.\n\n+1. You can use hkdf instead of hash to make it larger if it\u0027s needed in any case.",
+      "parentUuid": "4b036fd8_16b615a6",
+      "range": {
+        "startLine": 85,
+        "startChar": 13,
+        "endLine": 85,
+        "endChar": 39
+      },
+      "revId": "928cb2044c74258fcadbcaa8096729453dd01035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
