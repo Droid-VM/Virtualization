@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "573987f1_25dab2a5",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-15T04:49:31Z",
+      "side": 1,
+      "message": "There\u0027s no guideline for choosing for-loop vs iterator, so ppl can choose whatever they appropriate. (i.e. you can use iterator if you like)\n\nI only suggested because ...\n  - less lines of code\n  - error handling is done where error happens.",
+      "parentUuid": "116d0846_af920038",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 0
+      },
+      "revId": "c802313335cad476447e4c34d60c3235cdf081bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96eacd7b_5a8c2ccf",
@@ -156,6 +180,30 @@
       "side": 1,
       "message": "Oops added `/`\n\ncstr! requires using another rustlib, while `CString::new()` usage is the current pattern in this lib, hence respecting that. Thanks",
       "parentUuid": "51fe88ca_6dfbb4bc",
+      "range": {
+        "startLine": 166,
+        "startChar": 19,
+        "endLine": 166,
+        "endChar": 45
+      },
+      "revId": "c802313335cad476447e4c34d60c3235cdf081bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e64e7c57_3675d326",
+        "filename": "virtualizationmanager/fsfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-15T04:49:31Z",
+      "side": 1,
+      "message": "Well, agree that `cstr!()` is better, but definitely outside of this CL scope.",
+      "parentUuid": "4ed43405_5d44be94",
       "range": {
         "startLine": 166,
         "startChar": 19,
