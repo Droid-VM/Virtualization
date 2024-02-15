@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "865e2abf_744fcc1d",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-15T13:36:57Z",
+      "side": 1,
+      "message": "The documentation ([cpu-capacity.txt](https://www.kernel.org/doc/Documentation/devicetree/bindings/arm/cpu-capacity.txt)) says that\n\n\u003e if it is specified for a cpu node, it has to be specified for every other cpu\n\u003e nodes, or the system will fall back to the default capacity value for every CPU\n\nso I assume that the guest kernel is able to cope with some of these missing and that we therefore don\u0027t have to validate this in pvmfw.",
+      "range": {
+        "startLine": 236,
+        "startChar": 8,
+        "endLine": 236,
+        "endChar": 54
+      },
+      "revId": "060f1ed760e3ebc01331ca48a021d99add46cc61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4db7026_9767a2fe",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-15T13:36:57Z",
+      "side": 1,
+      "message": "Feel free to ack but 1. where\u0027s this value coming from and 2. is there a point in validating these values, given that AFAIU they\u0027re simply being passed back to the host?",
+      "range": {
+        "startLine": 237,
+        "startChar": 30,
+        "endLine": 237,
+        "endChar": 34
+      },
+      "revId": "060f1ed760e3ebc01331ca48a021d99add46cc61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
