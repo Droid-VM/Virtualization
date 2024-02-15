@@ -54,12 +54,18 @@ use zerocopy::AsBytes as _;
 pub enum FdtValidationError {
     /// Invalid CPU count.
     InvalidCpuCount(usize),
+    /// Forbidden /avf/untrusted property.
+    ForbiddenUntrustedProp(&'static CStr),
 }
 
 impl fmt::Display for FdtValidationError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             Self::InvalidCpuCount(num_cpus) => write!(f, "Invalid CPU count: {num_cpus}"),
+            Self::ForbiddenUntrustedProp(name) => {
+                let name = name.to_str().unwrap();
+                write!(f, "Forbidden /avf/untrusted property '{name}'")
+            }
         }
     }
 }
@@ -210,6 +216,22 @@ fn patch_cpus(fdt: &mut Fdt, cpus: &[CpuInfo]) -> libfdt::Result<()> {
     Ok(())
 }
 
+fn parse_untrusted_props(fdt: &Fdt) -> libfdt::Result<BTreeMap<CString, Vec<u8>>> {
+    let mut props = BTreeMap::new();
+    if let Some(node) = fdt.node(cstr!("/avf/untrusted"))? {
+        for property in node.properties()? {
+            let name = property.name()?;
+            let value = property.value()?;
+            props.insert(
+                CString::new(name.to_bytes()).map_err(|_| FdtError::BadValue)?,
+                value.to_vec(),
+            );
+        }
+    }
+
+    Ok(props)
+}
+
 /// Read candidate properties' names from DT which could be overlaid
 fn parse_vm_ref_dt(fdt: &Fdt) -> libfdt::Result<BTreeMap<CString, Vec<u8>>> {
     let mut property_map = BTreeMap::new();
@@ -226,6 +248,19 @@ fn parse_vm_ref_dt(fdt: &Fdt) -> libfdt::Result<BTreeMap<CString, Vec<u8>>> {
     Ok(property_map)
 }
 
+fn validate_untrusted_props(props: &BTreeMap<CString, Vec<u8>>) -> Result<(), FdtValidationError> {
+    const FORBIDDEN_PROPS: &[&CStr] =
+        &[cstr!("compatible"), cstr!("linux,phandle"), cstr!("phandle")];
+
+    for name in FORBIDDEN_PROPS {
+        if props.contains_key(*name) {
+            return Err(FdtValidationError::ForbiddenUntrustedProp(name));
+        }
+    }
+
+    Ok(())
+}
+
 /// Overlay VM reference DT into VM DT based on the props_info. Property is overlaid in vm_dt only
 /// when it exists both in vm_ref_dt and props_info. If the values mismatch, it returns error.
 fn validate_vm_ref_dt(
@@ -233,7 +268,7 @@ fn validate_vm_ref_dt(
     vm_ref_dt: &Fdt,
     props_info: &BTreeMap<CString, Vec<u8>>,
 ) -> libfdt::Result<()> {
-    let mut root_vm_dt = vm_dt.root_mut()?;
+    let root_vm_dt = vm_dt.root_mut()?;
     let mut avf_vm_dt = root_vm_dt.add_subnode(cstr!("avf"))?;
     // TODO(b/318431677): Validate nodes beyond /avf.
     let avf_node = vm_ref_dt.node(cstr!("/avf"))?.ok_or(FdtError::NotFound)?;
@@ -627,6 +662,23 @@ fn patch_timer(fdt: &mut Fdt, num_cpus: usize) -> libfdt::Result<()> {
     node.setprop_inplace(cstr!("interrupts"), value.as_bytes())
 }
 
+fn patch_untrusted_props(fdt: &mut Fdt, props: &BTreeMap<CString, Vec<u8>>) -> libfdt::Result<()> {
+    let avf_node = if let Some(node) = fdt.node_mut(cstr!("/avf"))? {
+        node
+    } else {
+        fdt.root_mut()?.add_subnode(cstr!("avf"))?
+    };
+
+    // The node shouldn't already be present; if it is, return the error.
+    let mut node = avf_node.add_subnode(cstr!("untrusted"))?;
+
+    for (name, value) in props {
+        node.setprop(name, value)?;
+    }
+
+    Ok(())
+}
+
 #[derive(Debug)]
 pub struct DeviceTreeInfo {
     pub kernel_range: Option<Range<usize>>,
@@ -638,6 +690,7 @@ pub struct DeviceTreeInfo {
     serial_info: SerialInfo,
     pub swiotlb_info: SwiotlbInfo,
     device_assignment: Option<DeviceAssignmentInfo>,
+    untrusted_props: BTreeMap<CString, Vec<u8>>,
     vm_ref_dt_props_info: BTreeMap<CString, Vec<u8>>,
 }
 
@@ -785,6 +838,15 @@ fn parse_device_tree(fdt: &Fdt, vm_dtbo: Option<&VmDtbo>) -> Result<DeviceTreeIn
         None => None,
     };
 
+    let untrusted_props = parse_untrusted_props(fdt).map_err(|e| {
+        error!("Failed to read untrusted properties: {e}");
+        RebootReason::InvalidFdt
+    })?;
+    validate_untrusted_props(&untrusted_props).map_err(|e| {
+        error!("Failed to validate untrusted properties: {e}");
+        RebootReason::InvalidFdt
+    })?;
+
     let vm_ref_dt_props_info = parse_vm_ref_dt(fdt).map_err(|e| {
         error!("Failed to read names of properties under /avf from DT: {e}");
         RebootReason::InvalidFdt
@@ -800,6 +862,7 @@ fn parse_device_tree(fdt: &Fdt, vm_dtbo: Option<&VmDtbo>) -> Result<DeviceTreeIn
         serial_info,
         swiotlb_info,
         device_assignment,
+        untrusted_props,
         vm_ref_dt_props_info,
     })
 }
@@ -853,6 +916,10 @@ fn patch_device_tree(fdt: &mut Fdt, info: &DeviceTreeInfo) -> Result<(), RebootR
             RebootReason::InvalidFdt
         })?;
     }
+    patch_untrusted_props(fdt, &info.untrusted_props).map_err(|e| {
+        error!("Failed to patch untrusted properties: {e}");
+        RebootReason::InvalidFdt
+    })?;
 
     Ok(())
 }
