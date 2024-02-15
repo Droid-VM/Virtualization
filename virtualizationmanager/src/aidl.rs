@@ -38,6 +38,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
     IVirtualizationService::FEATURE_MULTI_TENANT,
     IVirtualizationService::FEATURE_VENDOR_MODULES,
     IVirtualizationService::FEATURE_DICE_CHANGES,
+    IVirtualizationService::FEATURE_LLPVM_CHANGES,
     MemoryTrimLevel::MemoryTrimLevel,
     Partition::Partition,
     PartitionType::PartitionType,
@@ -312,6 +313,7 @@ impl IVirtualizationService for VirtualizationService {
             FEATURE_DICE_CHANGES => Ok(cfg!(dice_changes)),
             FEATURE_MULTI_TENANT => Ok(cfg!(multi_tenant)),
             FEATURE_VENDOR_MODULES => Ok(cfg!(vendor_modules)),
+            FEATURE_LLPVM_CHANGES => Ok(cfg!(llpvm_changes)),
             _ => {
                 warn!("unknown feature {feature}");
                 Ok(false)

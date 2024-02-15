@@ -116,7 +116,12 @@ public class VirtualMachineManager {
     @Retention(RetentionPolicy.SOURCE)
     @StringDef(
             prefix = "FEATURE_",
-            value = {FEATURE_DICE_CHANGES, FEATURE_MULTI_TENANT, FEATURE_VENDOR_MODULES})
+            value = {
+                FEATURE_DICE_CHANGES,
+                FEATURE_MULTI_TENANT,
+                FEATURE_VENDOR_MODULES,
+                FEATURE_LLPVM_CHANGES
+            })
     public @interface Features {}
 
     /**
@@ -143,6 +148,13 @@ public class VirtualMachineManager {
     @TestApi
     public static final String FEATURE_VENDOR_MODULES =
             IVirtualizationService.FEATURE_VENDOR_MODULES;
+    /**
+     * Feature to enable Secretkeeper protected secrets in Microdroid based pVMs.
+     *
+     * @hide
+     */
+    @TestApi
+    public static final String FEATURE_LLPVM_CHANGES = IVirtualizationService.FEATURE_LLPVM_CHANGES;
 
     /**
      * Returns a set of flags indicating what this implementation of virtualization is capable of.

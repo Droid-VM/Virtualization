@@ -25,6 +25,7 @@ package android.system.virtualmachine {
     method @FlaggedApi("RELEASE_AVF_ENABLE_VENDOR_MODULES") @NonNull public java.util.List<java.lang.String> getSupportedOSList() throws android.system.virtualmachine.VirtualMachineException;
     method @RequiresPermission(android.system.virtualmachine.VirtualMachine.MANAGE_VIRTUAL_MACHINE_PERMISSION) public boolean isFeatureEnabled(String) throws android.system.virtualmachine.VirtualMachineException;
     field public static final String FEATURE_DICE_CHANGES = "com.android.kvm.DICE_CHANGES";
+    field public static final String FEATURE_LLPVM_CHANGES = "com.android.kvm.LLPVM_CHANGES";
     field public static final String FEATURE_MULTI_TENANT = "com.android.kvm.MULTI_TENANT";
     field public static final String FEATURE_VENDOR_MODULES = "com.android.kvm.VENDOR_MODULES";
   }
