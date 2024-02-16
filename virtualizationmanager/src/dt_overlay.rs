@@ -57,7 +57,7 @@ pub(crate) fn create_device_tree_overlay<'a>(
 
     let fdt =
         Fdt::create_empty_tree(buffer).map_err(|e| anyhow!("Failed to create empty Fdt: {e:?}"))?;
-    let root = fdt.root_mut().map_err(|e| anyhow!("Failed to get root: {e:?}"))?;
+    let root = fdt.root_mut();
     let mut node =
         root.add_subnode(cstr!("fragment@0")).map_err(|e| anyhow!("Failed to fragment: {e:?}"))?;
     node.setprop(cstr!("target-path"), b"/\0")
