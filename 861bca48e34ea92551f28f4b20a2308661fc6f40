@@ -146,6 +146,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4bf1b002_f8363287",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-16T17:55:43Z",
+      "side": 1,
+      "message": "It also does nothing except log it - do we even need it here?\nNo, this is fine, now we\u0027ve removed the Package Manager bits.\nWhen we start doing housekeeping (which this relates to) and keeping track of app \u0026 user ids, we will need those tests.",
+      "parentUuid": "3b3c2845_c5e55e8a",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 4
+      },
+      "revId": "861bca48e34ea92551f28f4b20a2308661fc6f40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "63c1fc94_93c31b9e",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 7
