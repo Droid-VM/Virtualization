@@ -22,6 +22,30 @@
       },
       "revId": "a46005a680422dfd3218ecd603926c4b9b244523",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "836deb31_fd876550",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-16T14:38:27Z",
+      "side": 1,
+      "message": "This tool is called from many host tests. In order to correctly flag this, I\u0027m allowing this `instance_id` to be an Option.\n\nThe accessor `instance_id(\u0026self)` will throw error is cfg!(llpvm_changes) is set \u0026 instance_id is not input.",
+      "parentUuid": "5d6b74f6_770699cc",
+      "range": {
+        "startLine": 170,
+        "startChar": 4,
+        "endLine": 170,
+        "endChar": 15
+      },
+      "revId": "a46005a680422dfd3218ecd603926c4b9b244523",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
