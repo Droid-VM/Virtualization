@@ -70,6 +70,30 @@
       },
       "revId": "a46005a680422dfd3218ecd603926c4b9b244523",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c743025_3600c7cd",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-16T16:15:56Z",
+      "side": 1,
+      "message": "\u003e We usually hide the argument from the cli until the feature is enabled\n\nThat makes sense, but for the purpose of automated testing, how would the host know if the feature is enabled \u0026 accordingly set flag (ex MicrodroidHostTests)?",
+      "parentUuid": "d19b3f93_6deecff8",
+      "range": {
+        "startLine": 170,
+        "startChar": 4,
+        "endLine": 170,
+        "endChar": 15
+      },
+      "revId": "a46005a680422dfd3218ecd603926c4b9b244523",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
