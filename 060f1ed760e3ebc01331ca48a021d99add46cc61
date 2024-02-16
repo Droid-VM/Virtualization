@@ -45,6 +45,30 @@
       },
       "revId": "060f1ed760e3ebc01331ca48a021d99add46cc61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37a619d2_0d3bdbf4",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-16T06:19:37Z",
+      "side": 1,
+      "message": "I doubled checked the code in the kernel, there is no restriction on the values as they\u0027re purely relative. They do all scaled to 0-\u003e1024 due to 1024 being the SCHED_CAPACITY_SCALE, so most people will use between those values. I ended up just removing it.",
+      "parentUuid": "d4db7026_9767a2fe",
+      "range": {
+        "startLine": 237,
+        "startChar": 30,
+        "endLine": 237,
+        "endChar": 34
+      },
+      "revId": "060f1ed760e3ebc01331ca48a021d99add46cc61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
