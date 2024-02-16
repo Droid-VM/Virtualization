@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6c4df87_5fbee407",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-16T13:52:37Z",
+      "side": 1,
+      "message": "From pvmfw\u0027s PoV, the DT is passed to the guest kernel; what it then does with it (e.g. expose it to userspace, if it even has one) is out-of-scope. For example, Rialto will receive this node but doesn\u0027t even have a userspace.",
+      "parentUuid": "1968f8ef_f103205e",
+      "range": {
+        "startLine": 9,
+        "startChar": 62,
+        "endLine": 10,
+        "endChar": 7
+      },
+      "revId": "78cfa2d942180a12b4acdecb48dc545b51fb63fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b3ccbe0_1130d927",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b4f98f7c_e6a527c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-16T13:52:37Z",
+      "side": 1,
+      "message": "\u003e At one point we discussed throwing errors in such situations. Should we do that? \n\nYou\u0027re right, but instead of an error (which would abort the boot), I\u0027ll print out a warning (and of course, ignore said subnodes).\n\n\u003e That may require walking the full DT\n\nNo need to, we can simply check `.first_subnode()?.is_none()`.",
+      "parentUuid": "6b3ccbe0_1130d927",
+      "range": {
+        "startLine": 11,
+        "startChar": 42,
+        "endLine": 11,
+        "endChar": 60
+      },
+      "revId": "78cfa2d942180a12b4acdecb48dc545b51fb63fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef587541_fe7d7d98",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 1
@@ -60,6 +108,30 @@
       "writtenOn": "2024-02-16T12:26:26Z",
       "side": 1,
       "message": "Super NIT: Double negatives are generally discouraged. How about just ForbiddenProp (and we can reuse that error in other places then).",
+      "range": {
+        "startLine": 61,
+        "startChar": 4,
+        "endLine": 61,
+        "endChar": 26
+      },
+      "revId": "78cfa2d942180a12b4acdecb48dc545b51fb63fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43150717_36771be0",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-16T13:52:37Z",
+      "side": 1,
+      "message": "Agreed about avoiding double negatives but this isn\u0027t one: `UntrustedProp` is what we\u0027re validating (similar to `Vcpufreq` above) while `Forbidden` is the issue with it.\n\nFurthermore, I\u0027d rather avoid making the variants of this enum more generic as I\u0027m planning at some point to rework these functions to fully take advantage of the exact opposite: add one error variant per validation criteria per \"device tree component\" so that all the extra `error!` logging can be unified into a single one and we don\u0027t keep overusing (abusing?) `RebootReason`.",
+      "parentUuid": "ef587541_fe7d7d98",
       "range": {
         "startLine": 61,
         "startChar": 4,
@@ -118,6 +190,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d4c0451a_4b5fc1fe",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-16T13:52:37Z",
+      "side": 1,
+      "message": "Isn\u0027t this exactly what L773 already does?\n\nNote that L780 will break if `/avf/untrusted` already exists but that is intentional. We can always patch it if needed but I like to think we won\u0027t.",
+      "parentUuid": "93bad9e3_28fa6b1b",
+      "range": {
+        "startLine": 776,
+        "startChar": 24,
+        "endLine": 776,
+        "endChar": 35
+      },
+      "revId": "78cfa2d942180a12b4acdecb48dc545b51fb63fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9498363f_3702dbe5",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 1
@@ -129,6 +225,30 @@
       "writtenOn": "2024-02-16T12:26:26Z",
       "side": 1,
       "message": "Question: Other property types such as bool \u0026 string can also be handled, right?",
+      "range": {
+        "startLine": 815,
+        "startChar": 39,
+        "endLine": 815,
+        "endChar": 46
+      },
+      "revId": "78cfa2d942180a12b4acdecb48dc545b51fb63fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f2367dc_b5a978be",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-16T13:52:37Z",
+      "side": 1,
+      "message": "Correct, from a low-level DTB parsing perspective, all property values are `\u0026[u8]`.\n\nInterestingly (and FYI), even though the DTSpec defines property types at the DTS level, no type information gets encoded into the DTB.",
+      "parentUuid": "9498363f_3702dbe5",
       "range": {
         "startLine": 815,
         "startChar": 39,
