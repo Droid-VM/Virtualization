@@ -301,7 +301,7 @@ public class DebugPolicyHostTests extends MicrodroidHostTestCaseBase {
 
     // Try to launch protected non-debuggable VM for a while and quit.
     // Non-debuggable VM might not enable adb, so there's no ITestDevice instance of it.
-    private CommandResult tryLaunchProtectedNonDebuggableVm() throws DeviceNotAvailableException {
+    private CommandResult tryLaunchProtectedNonDebuggableVm() throws Exception {
         // Can't use MicrodroidBuilder because it expects adb connection
         // but non-debuggable VM may not enable adb.
         CommandRunner runner = new CommandRunner(mAndroidDevice);
@@ -314,7 +314,7 @@ public class DebugPolicyHostTests extends MicrodroidHostTestCaseBase {
         String command =
                 String.join(
                         " ",
-                        "/apex/com.android.virt/bin/vm",
+                        VIRT_APEX,
                         "run-app",
                         "--log",
                         MICRODROID_LOG_PATH,
@@ -322,8 +322,12 @@ public class DebugPolicyHostTests extends MicrodroidHostTestCaseBase {
                         getPathForPackage(PACKAGE_NAME),
                         TEST_ROOT + "idsig",
                         TEST_ROOT + "instance.img",
+                        TEST_ROOT + "instance_id",
                         "--config-path",
                         MICRODROID_CONFIG_PATH);
+        if (isFeatureEnabled("com.android.kvm.LLPVM_CHANGES")) {
+            command = String.join(command, "--instance-id-file", TEST_ROOT + "instance_id");
+        }
         return mAndroidDevice.executeShellV2Command(
                 command, CONSOLE_OUTPUT_WAIT_MS, TimeUnit.MILLISECONDS, /* retryAttempts= */ 0);
     }
