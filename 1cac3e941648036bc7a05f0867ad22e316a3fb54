@@ -82,6 +82,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cb934c1_85c3dfc7",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-16T14:28:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82691a82_ca25d7d1",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 0
+      },
+      "revId": "1cac3e941648036bc7a05f0867ad22e316a3fb54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d8b9d88_8f92d0df",
@@ -119,6 +143,30 @@
       "side": 1,
       "message": "Much better and makes a lot of sense as `CString` can skip the validation (therefore no `Err` handling needed).",
       "parentUuid": "7d8b9d88_8f92d0df",
+      "range": {
+        "startLine": 436,
+        "startChar": 16,
+        "endLine": 436,
+        "endChar": 79
+      },
+      "revId": "1cac3e941648036bc7a05f0867ad22e316a3fb54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec7fba89_519d30cf",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-16T14:28:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "490639f1_bbfd4efa",
       "range": {
         "startLine": 436,
         "startChar": 16,
