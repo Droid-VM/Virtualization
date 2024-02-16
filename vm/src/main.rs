@@ -22,7 +22,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
     CpuTopology::CpuTopology, IVirtualizationService::IVirtualizationService,
     PartitionType::PartitionType, VirtualMachineAppConfig::DebugLevel::DebugLevel,
 };
-use anyhow::{Context, Error};
+use anyhow::{anyhow, Context, Error};
 use binder::{ProcessState, Strong};
 use clap::{Args, Parser};
 use create_idsig::command_create_idsig;
@@ -166,6 +166,9 @@ pub struct RunAppConfig {
     /// Path to the instance image. Created if not exists.
     instance: PathBuf,
 
+    /// Path to file containing instance_id. Should not be None of llpvm feature is enabled.
+    instance_id: Option<PathBuf>,
+
     /// Path to VM config JSON within APK (e.g. assets/vm_config.json)
     #[arg(long)]
     config_path: Option<String>,
@@ -195,6 +198,14 @@ impl RunAppConfig {
     #[cfg(not(multi_tenant))]
     fn extra_apks(&self) -> &[PathBuf] {
         &[]
+    }
+
+    fn instance_id(&self) -> Result<PathBuf, Error> {
+        if cfg!(llpvm_changes) {
+            self.instance_id.clone().ok_or(anyhow!("instance_id is missing"))
+        } else {
+            Err(anyhow!("LLPVM feature is disabled"))
+        }
     }
 }
 
