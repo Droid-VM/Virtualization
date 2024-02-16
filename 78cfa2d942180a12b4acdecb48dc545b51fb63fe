@@ -166,6 +166,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2d9a0a4_605462aa",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-16T14:32:23Z",
+      "side": 1,
+      "message": "Well there is a never ending debate on how specific should errors be.\n\nA school of thought is that if the receiver shouldn\u0027t about differentiating 2 errors in terms of handling them, then is simply logging it (for debugging) \u0026 minimizing the class of errors enough? In case you further propagate errors to java api, it becomes really tricky because we need to deal with clients on different API levels (something I don\u0027t fully understand tbh)! \n\nOne of thee client went through the complexity of error handling from AVF - https://docs.google.com/document/d/1XVUeo1KuLoeFWQjFhnBtXDf9s70N-5sfzn6rL-T4ITw/edit?exids\u003d71471474%2C71471470\u0026tab\u003dt.0#bookmark\u003did.3qohfd9glnnd\n\nBut perhaps your proposal if about unifying the logging, so ignore all this.",
+      "parentUuid": "43150717_36771be0",
+      "range": {
+        "startLine": 61,
+        "startChar": 4,
+        "endLine": 61,
+        "endChar": 26
+      },
+      "revId": "78cfa2d942180a12b4acdecb48dc545b51fb63fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "885dda98_20fbf807",
@@ -274,6 +298,30 @@
       "side": 1,
       "message": "L876 already does so.",
       "parentUuid": "93bad9e3_28fa6b1b",
+      "range": {
+        "startLine": 776,
+        "startChar": 24,
+        "endLine": 776,
+        "endChar": 35
+      },
+      "revId": "78cfa2d942180a12b4acdecb48dc545b51fb63fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cd4217d_08ba6d7a",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-16T14:32:23Z",
+      "side": 1,
+      "message": "My bad. Looks like method `fdt_err_or_option` used in `as_node()` does the magic",
+      "parentUuid": "e71b5ef2_d00dc9eb",
       "range": {
         "startLine": 776,
         "startChar": 24,
