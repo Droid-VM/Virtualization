@@ -46,6 +46,30 @@
       },
       "revId": "a46005a680422dfd3218ecd603926c4b9b244523",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d19b3f93_6deecff8",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-02-16T15:51:09Z",
+      "side": 1,
+      "message": "We usually hide the argument from the cli until the feature is enabled. This reduces confusion for developers, who see the arg, try to use it, and get an error \"not implemented\" as a response.\n\nPlease follow the approach of other flag-guarded arguments (e.g. extra_apks) and use `[cfg(llpvm_changes)]`",
+      "parentUuid": "836deb31_fd876550",
+      "range": {
+        "startLine": 170,
+        "startChar": 4,
+        "endLine": 170,
+        "endChar": 15
+      },
+      "revId": "a46005a680422dfd3218ecd603926c4b9b244523",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
