@@ -87,6 +87,30 @@
       },
       "revId": "087a4541eae8f0c3d6dcec5a3a4f6cb2bff79ed1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d112ee86_191eb044",
+        "filename": "libs/libfdt/src/result.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-16T14:55:41Z",
+      "side": 1,
+      "message": "\u003e can we modifying FFI bindgen behavior to change type of `FDT_ERR_*`?\n\nYeah, that\u0027s the first thing I looked into but `--default-macro-constant-type` sets the type for _all_ the macros in the bindgen, AFAICT. However, we\u0027d want some as `c_int` (here, as the errors are intended to be used as `-FDT_ERR_*`) and some as `c_uint` (e.g. `FDT_MAX_PHANDLE`) so didn\u0027t seem appropriate either.",
+      "parentUuid": "9aa61d16_9ca6788e",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 21
+      },
+      "revId": "087a4541eae8f0c3d6dcec5a3a4f6cb2bff79ed1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
