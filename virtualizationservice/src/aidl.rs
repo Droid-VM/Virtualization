@@ -55,6 +55,7 @@ use tombstoned_client::{DebuggerdDumpType, TombstonedConnection};
 use vsock::{VsockListener, VsockStream};
 use nix::unistd::{chown, Uid};
 use openssl::x509::X509;
+use rand::Fill;
 
 /// The unique ID of a VM used (together with a port number) for vsock communication.
 pub type Cid = u32;
@@ -255,6 +256,17 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
         let state = &mut *self.state.lock().unwrap();
         let file = state.get_dtbo_file().or_service_specific_exception(-1)?;
         Ok(ParcelFileDescriptor::new(file))
+    }
+
+    // TODO(b/294177871) Persist this Id, along with client uuid.
+    fn allocateInstanceId(&self) -> binder::Result<[u8; 64]> {
+        let mut id = [0u8; 64];
+        id.try_fill(&mut rand::thread_rng())
+            .context("Failed to allocate instance_id")
+            .or_service_specific_exception(-1)?;
+        let uid = get_calling_uid();
+        info!("Allocated a VM's instance_id: {:?}, for user: {:?}", hex::encode(id), uid);
+        Ok(id)
     }
 }
 
