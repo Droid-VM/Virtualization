@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1fb676eb_1a0188a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-16T14:19:37Z",
+      "side": 1,
+      "message": "To be honest, I\u0027d recommend you to test non-primary user (userid\u003d0) case as a separated item -- there are tens of variations for multi user cases, so focusing on the most important case may makes sense. (especially when you want to add tests)\n\nReferences:\n  - http://go/android-multiuser-overview#terminology\n  - (may be outdated) https://docs.google.com/presentation/d/1hvXPogB8g9Mmxe8mHL7r6WTbTc07QFCSnI0c--Rbp0s/edit#slide\u003did.p",
+      "parentUuid": "94ea3771_b82d513d",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 4
+      },
+      "revId": "861bca48e34ea92551f28f4b20a2308661fc6f40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "63c1fc94_93c31b9e",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 7
