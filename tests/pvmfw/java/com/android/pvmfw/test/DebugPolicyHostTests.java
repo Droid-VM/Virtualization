@@ -322,6 +322,7 @@ public class DebugPolicyHostTests extends MicrodroidHostTestCaseBase {
                         getPathForPackage(PACKAGE_NAME),
                         TEST_ROOT + "idsig",
                         TEST_ROOT + "instance.img",
+                        TEST_ROOT + "instance_id",
                         "--config-path",
                         MICRODROID_CONFIG_PATH);
         return mAndroidDevice.executeShellV2Command(
