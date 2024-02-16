@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70a86b3d_d7d18302",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-16T13:56:01Z",
+      "side": 1,
+      "message": "Done. Most of the flagging logic is in VirtualMachine.java (where `mInstanceIdPath` is allowed to be null conditional to feature flag). \nCompos has similar-ish arrangement",
+      "parentUuid": "cc57a397_be5e382e",
+      "revId": "c33280ec1752f7c4c563e4deb882cbfb03555425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5660257_aa085128",
@@ -267,6 +285,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbb67b9b_c8b31bc7",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-16T13:56:01Z",
+      "side": 1,
+      "message": "Ack. Offline me \u0026 Alan met on:\n\nNot keeping the package in VM\u0027s database \u0026 hence not requiring package manager. The role of database is in context of Secretkeeper housekeeping \u0026 client app will stay on the same uuid when deleteVm java api is triggered or when System Services receive a broadcast of uninstallation.",
+      "parentUuid": "0da606ca_a526a61f",
+      "range": {
+        "startLine": 289,
+        "startChar": 13,
+        "endLine": 289,
+        "endChar": 31
+      },
+      "revId": "c33280ec1752f7c4c563e4deb882cbfb03555425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bcc65d01_1056b3c8",
@@ -304,6 +346,30 @@
       "side": 1,
       "message": "Ack, looking at it...",
       "parentUuid": "bcc65d01_1056b3c8",
+      "range": {
+        "startLine": 291,
+        "startChar": 0,
+        "endLine": 291,
+        "endChar": 96
+      },
+      "revId": "c33280ec1752f7c4c563e4deb882cbfb03555425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "433d54b1_596a0c02",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-16T13:56:01Z",
+      "side": 1,
+      "message": "Lets not record package as explained in other comment. Thanks",
+      "parentUuid": "d7779e21_e34c03d7",
       "range": {
         "startLine": 291,
         "startChar": 0,

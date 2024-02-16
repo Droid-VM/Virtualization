@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94ea3771_b82d513d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-16T13:56:01Z",
+      "side": 1,
+      "message": "Ack. I\u0027ll address this in a bit. Leaving it unresolved",
+      "parentUuid": "73105278_b2ed03ef",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 4
+      },
+      "revId": "861bca48e34ea92551f28f4b20a2308661fc6f40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "63c1fc94_93c31b9e",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 7
@@ -61,6 +85,30 @@
       "writtenOn": "2024-02-13T14:39:14Z",
       "side": 1,
       "message": "Usually we actually do things the other way around. The caller provides the package name, and the server (in this case virtservice) checks that caller uid actually owns the provided package name.",
+      "range": {
+        "startLine": 276,
+        "startChar": 12,
+        "endLine": 276,
+        "endChar": 28
+      },
+      "revId": "861bca48e34ea92551f28f4b20a2308661fc6f40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "359764e0_cde00cd3",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-16T13:56:01Z",
+      "side": 1,
+      "message": "This is no more applicable. Thanks",
+      "parentUuid": "63c1fc94_93c31b9e",
       "range": {
         "startLine": 276,
         "startChar": 12,
