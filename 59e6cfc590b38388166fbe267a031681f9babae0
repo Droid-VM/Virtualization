@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75187a72_800c4f01",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-16T18:35:31Z",
+      "side": 1,
+      "message": "Nope, apparently it works without it. Thanks",
+      "parentUuid": "b34bc4fa_15729f63",
+      "range": {
+        "startLine": 435,
+        "startChar": 7,
+        "endLine": 435,
+        "endChar": 59
+      },
+      "revId": "59e6cfc590b38388166fbe267a031681f9babae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61b5f3e6_b835e4c4",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-16T17:09:41Z",
       "side": 1,
       "message": "I think this shouldn\u0027t be needed either",
+      "range": {
+        "startLine": 504,
+        "startChar": 20,
+        "endLine": 504,
+        "endChar": 55
+      },
+      "revId": "59e6cfc590b38388166fbe267a031681f9babae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6843f1d8_a6e36c47",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-16T18:35:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61b5f3e6_b835e4c4",
       "range": {
         "startLine": 504,
         "startChar": 20,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1369b9ac_29e0a37f",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-16T18:35:31Z",
+      "side": 1,
+      "message": "Done thanks!",
+      "parentUuid": "97e6865d_c659c20a",
+      "range": {
+        "startLine": 506,
+        "startChar": 19,
+        "endLine": 507,
+        "endChar": 37
+      },
+      "revId": "59e6cfc590b38388166fbe267a031681f9babae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b444810_2e654ab7",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-02-16T17:09:41Z",
       "side": 1,
       "message": "This would look less odd inside the if below",
+      "range": {
+        "startLine": 407,
+        "startChar": 8,
+        "endLine": 407,
+        "endChar": 24
+      },
+      "revId": "59e6cfc590b38388166fbe267a031681f9babae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eca5cefe_928d6b96",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-16T18:35:31Z",
+      "side": 1,
+      "message": "That wouldn\u0027t work because the Vec `untrusted_props` contain the reference to it, so the lifetime of instance_id will need to be longer.\n\nI\u0027m slightly surprised that unintialized instance_id is allowed by rustc (incase the `llpvm_changes` is disabled). Normally it would complain of `type annotations needed` or `unused variable`",
+      "parentUuid": "9b444810_2e654ab7",
       "range": {
         "startLine": 407,
         "startChar": 8,
