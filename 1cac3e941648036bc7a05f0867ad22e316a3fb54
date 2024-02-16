@@ -16,6 +16,69 @@
       "message": "I tested this patch with\n\n```\nvm_shell start-microdroid --auto-connect -- --protected --debug full\n\ncat /proc/device-tree/avf/untrusted/instance-id\n```\n\nI can confirm it allows the untrusted prop. However I haven\u0027t tested in with ref DT",
       "revId": "1cac3e941648036bc7a05f0867ad22e316a3fb54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76eb9322_e4dae213",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-16T13:58:01Z",
+      "side": 1,
+      "message": "I only have style comment, so you can submit when you addressed all the Shikha\u0027s comments.",
+      "revId": "1cac3e941648036bc7a05f0867ad22e316a3fb54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1deaa2a6_f8e92bba",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-16T13:58:01Z",
+      "side": 1,
+      "message": "Can we do this?\n\n```suggestion\nwrite!(f, \"Forbidden /avf/untrusted property {name:?}\")\n```",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 0
+      },
+      "revId": "1cac3e941648036bc7a05f0867ad22e316a3fb54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d8b9d88_8f92d0df",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-16T13:58:01Z",
+      "side": 1,
+      "message": "`CString::from(name)` ?",
+      "range": {
+        "startLine": 436,
+        "startChar": 16,
+        "endLine": 436,
+        "endChar": 79
+      },
+      "revId": "1cac3e941648036bc7a05f0867ad22e316a3fb54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
