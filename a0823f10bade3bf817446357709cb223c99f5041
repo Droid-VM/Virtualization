@@ -16,6 +16,23 @@
       "message": "Some minor fixes on the following patch, with those its been tested end to end. A rather nasty set of properties to patch",
       "revId": "a0823f10bade3bf817446357709cb223c99f5041",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "788b0943_3016adac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-16T10:41:55Z",
+      "side": 1,
+      "message": "The failing test in `avf_presubmit_tests` is most certainly not related so I\u0027ve filed b/325567583 to track it and will submit this CL as-is.\n\n(Voting +2 on my own CL to pass the Code-Review and Code-Owners requirements)",
+      "revId": "a0823f10bade3bf817446357709cb223c99f5041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
