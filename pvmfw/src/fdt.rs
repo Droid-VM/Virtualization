@@ -223,7 +223,7 @@ fn validate_vm_ref_dt(
     vm_ref_dt: &Fdt,
     props_info: &BTreeMap<CString, Vec<u8>>,
 ) -> libfdt::Result<()> {
-    let mut root_vm_dt = vm_dt.root_mut()?;
+    let mut root_vm_dt = vm_dt.root_mut();
     let mut avf_vm_dt = root_vm_dt.add_subnode(cstr!("avf"))?;
     // TODO(b/318431677): Validate nodes beyond /avf.
     let avf_node = vm_ref_dt.node(cstr!("/avf"))?.ok_or(FdtError::NotFound)?;
@@ -458,10 +458,8 @@ fn validate_pci_irq_map(irq_map: &PciIrqMap, idx: usize) -> Result<(), RebootRea
 }
 
 fn patch_pci_info(fdt: &mut Fdt, pci_info: &PciInfo) -> libfdt::Result<()> {
-    let mut node = fdt
-        .root_mut()?
-        .next_compatible(cstr!("pci-host-cam-generic"))?
-        .ok_or(FdtError::NotFound)?;
+    let mut node =
+        fdt.root_mut().next_compatible(cstr!("pci-host-cam-generic"))?.ok_or(FdtError::NotFound)?;
 
     let irq_masks_size = pci_info.irq_masks.len() * size_of::<PciIrqMask>();
     node.trimprop(cstr!("interrupt-map-mask"), irq_masks_size)?;
@@ -496,7 +494,7 @@ fn read_serial_info_from(fdt: &Fdt) -> libfdt::Result<SerialInfo> {
 /// Patch the DT by deleting the ns16550a compatible nodes whose address are unknown
 fn patch_serial_info(fdt: &mut Fdt, serial_info: &SerialInfo) -> libfdt::Result<()> {
     let name = cstr!("ns16550a");
-    let mut next = fdt.root_mut()?.next_compatible(name);
+    let mut next = fdt.root_mut().next_compatible(name);
     while let Some(current) = next? {
         let reg =
             current.as_node().reg()?.ok_or(FdtError::NotFound)?.next().ok_or(FdtError::NotFound)?;
@@ -544,7 +542,7 @@ fn validate_swiotlb_info(
 
 fn patch_swiotlb_info(fdt: &mut Fdt, swiotlb_info: &SwiotlbInfo) -> libfdt::Result<()> {
     let mut node =
-        fdt.root_mut()?.next_compatible(cstr!("restricted-dma-pool"))?.ok_or(FdtError::NotFound)?;
+        fdt.root_mut().next_compatible(cstr!("restricted-dma-pool"))?.ok_or(FdtError::NotFound)?;
 
     if let Some(range) = swiotlb_info.fixed_range() {
         node.setprop_addrrange_inplace(
@@ -582,7 +580,7 @@ fn patch_gic(fdt: &mut Fdt, num_cpus: usize) -> libfdt::Result<()> {
     let value = [addr0, size0.unwrap(), addr1, size1.unwrap()];
 
     let mut node =
-        fdt.root_mut()?.next_compatible(cstr!("arm,gic-v3"))?.ok_or(FdtError::NotFound)?;
+        fdt.root_mut().next_compatible(cstr!("arm,gic-v3"))?.ok_or(FdtError::NotFound)?;
     node.setprop_inplace(cstr!("reg"), flatten(&value))
 }
 
@@ -612,7 +610,7 @@ fn patch_timer(fdt: &mut Fdt, num_cpus: usize) -> libfdt::Result<()> {
     };
 
     let mut node =
-        fdt.root_mut()?.next_compatible(cstr!("arm,armv8-timer"))?.ok_or(FdtError::NotFound)?;
+        fdt.root_mut().next_compatible(cstr!("arm,armv8-timer"))?.ok_or(FdtError::NotFound)?;
     node.setprop_inplace(cstr!("interrupts"), value.as_slice())
 }
 
