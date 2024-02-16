@@ -142,6 +142,30 @@
       },
       "revId": "a46005a680422dfd3218ecd603926c4b9b244523",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0742e48f_fc6f599a",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-16T17:59:11Z",
+      "side": 1,
+      "message": "\u003e So, the host will need to interpret the result of this command \u0026 accordingly set flag in vm run-app?\n\nYes. The command can just succeed or fail, or we can interpret its output.\n\n\u003e And how will Host know what string to compose with check-feature-enabled?\n\nWell, we know what we\u0027ve called all the features.\n\n\u003e And I think, check-feature-enabled must not be feature flagged because it will be executed irrespective of other flags (such as llpvm) being enabled.\n\nYes.\n\n\u003e I do like this idea, it is generalized, however we are introducing additional unflagged check-feature-enabled command to support this\n\nGiven the vm command is only used for tests the risk seems low.\n\n\u003e I would like to avoid it unless we need other feature flag knowledge in Host\n\nWe need it here.\n\nAnd I\u0027m slightly surprised we haven\u0027t needed it before.",
+      "parentUuid": "41824c56_1a5ace7a",
+      "range": {
+        "startLine": 170,
+        "startChar": 4,
+        "endLine": 170,
+        "endChar": 15
+      },
+      "revId": "a46005a680422dfd3218ecd603926c4b9b244523",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
