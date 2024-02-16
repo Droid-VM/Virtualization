@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fafa3083_61c97b5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-16T12:26:26Z",
+      "side": 1,
+      "message": "I tested this patch with\n\n```\nvm_shell start-microdroid --auto-connect -- --protected --debug full\n\ncat /proc/device-tree/avf/untrusted/instance-id\n```\n\nI can confirm it allows the untrusted prop. However I haven\u0027t tested in with ref DT",
+      "revId": "1cac3e941648036bc7a05f0867ad22e316a3fb54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
