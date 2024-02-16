@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b34bc4fa_15729f63",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-16T17:09:41Z",
+      "side": 1,
+      "message": "Do you need this? importInstanceIdFrom will create it if it doesn\u0027t exist.\nAnd without that, you don\u0027t need the IOException handling",
+      "range": {
+        "startLine": 435,
+        "startChar": 7,
+        "endLine": 435,
+        "endChar": 59
+      },
+      "revId": "59e6cfc590b38388166fbe267a031681f9babae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61b5f3e6_b835e4c4",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-16T17:09:41Z",
+      "side": 1,
+      "message": "I think this shouldn\u0027t be needed either",
+      "range": {
+        "startLine": 504,
+        "startChar": 20,
+        "endLine": 504,
+        "endChar": 55
+      },
+      "revId": "59e6cfc590b38388166fbe267a031681f9babae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97e6865d_c659c20a",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-16T17:09:41Z",
+      "side": 1,
+      "message": "You never close this - which leaks an fd, and possibly masks failure.\nTry with resources?",
+      "range": {
+        "startLine": 506,
+        "startChar": 19,
+        "endLine": 507,
+        "endChar": 37
+      },
+      "revId": "59e6cfc590b38388166fbe267a031681f9babae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b444810_2e654ab7",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-16T17:09:41Z",
+      "side": 1,
+      "message": "This would look less odd inside the if below",
+      "range": {
+        "startLine": 407,
+        "startChar": 8,
+        "endLine": 407,
+        "endChar": 24
+      },
+      "revId": "59e6cfc590b38388166fbe267a031681f9babae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

@@ -94,6 +94,30 @@
       },
       "revId": "a46005a680422dfd3218ecd603926c4b9b244523",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92d2615c_c2ce7b36",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-16T17:09:41Z",
+      "side": 1,
+      "message": "How about we add \"vm --check-feature-enabled \u003cfoo\u003e\", which calls IVirtualizationService#isFeatureEnabled ? \nIt can return non-zero if not.\n\n(This is easier in MicrodroidTests)",
+      "parentUuid": "0c743025_3600c7cd",
+      "range": {
+        "startLine": 170,
+        "startChar": 4,
+        "endLine": 170,
+        "endChar": 15
+      },
+      "revId": "a46005a680422dfd3218ecd603926c4b9b244523",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
