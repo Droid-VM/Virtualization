@@ -107,6 +107,7 @@ adb shell /apex/com.android.virt/bin/vm run-app \
 PATH_TO_YOUR_APP \
 $TEST_ROOT/MyApp.apk.idsig \
 $TEST_ROOT/instance.img \
+$TEST_ROOT/instance_id \
 --payload-binary-name MyMicrodroidPayload.so
 ```
 
