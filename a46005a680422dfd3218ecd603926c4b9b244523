@@ -166,6 +166,54 @@
       },
       "revId": "a46005a680422dfd3218ecd603926c4b9b244523",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8d8f6cb_7c7b1604",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-16T18:41:38Z",
+      "side": 1,
+      "message": "Ack. I\u0027ll hack something up. I\u0027m slightly concerned about host test having to rely on output/error of `check-feature-enabled`. But most of the tests use TestDevice class from tradefed, so we can get that to encapsulate this.",
+      "parentUuid": "0742e48f_fc6f599a",
+      "range": {
+        "startLine": 170,
+        "startChar": 4,
+        "endLine": 170,
+        "endChar": 15
+      },
+      "revId": "a46005a680422dfd3218ecd603926c4b9b244523",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23951929_d70ee2a0",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-16T18:41:38Z",
+      "side": 1,
+      "message": "Ack, I\u0027ll hack something up",
+      "parentUuid": "0742e48f_fc6f599a",
+      "range": {
+        "startLine": 170,
+        "startChar": 4,
+        "endLine": 170,
+        "endChar": 15
+      },
+      "revId": "a46005a680422dfd3218ecd603926c4b9b244523",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
