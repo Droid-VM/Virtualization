@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d0cc7f1_c68b711e",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-16T07:29:42Z",
+      "side": 0,
+      "message": "OOC, was the bug here that `core` was a clone, leaving the original array unmodified by the `.insert`?",
+      "range": {
+        "startLine": 278,
+        "startChar": 20,
+        "endLine": 278,
+        "endChar": 24
+      },
+      "revId": "a0823f10bade3bf817446357709cb223c99f5041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
