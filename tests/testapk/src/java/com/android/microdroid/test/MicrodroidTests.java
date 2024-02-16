@@ -142,13 +142,10 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     @Before
     public void setup() {
         prepareTestSetup(mProtectedVm, mGki);
-        // USE_CUSTOM_VIRTUAL_MACHINE permission has protection level signature|development, meaning
-        // that it will be automatically granted when test apk is installed. We have some tests
-        // checking the behavior when caller doesn't have this permission (e.g.
-        // createVmWithConfigRequiresPermission). Proactively revoke the permission so that such
-        // tests can pass when ran by itself, e.g.:
-        // atest com.android.microdroid.test.MicrodroidTests#createVmWithConfigRequiresPermission
-        revokePermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
+        if (mGki != null) {
+            // Using a non-default VM always needs the custom permission.
+            grantPermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
+        }
     }
 
     @After
@@ -778,6 +775,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     })
     public void createVmWithConfigRequiresPermission() throws Exception {
         assumeSupportedDevice();
+        revokePermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
 
         VirtualMachineConfig config =
                 newVmConfigBuilderWithPayloadConfig("assets/" + os() + "/vm_config.json")
@@ -2136,6 +2134,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assumeFalse(
                 "boot with vendor partition is failing in HWASAN enabled Microdroid.", isHwasan());
         assumeFeatureEnabled(VirtualMachineManager.FEATURE_VENDOR_MODULES);
+        revokePermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
 
         File vendorDiskImage =
                 new File("/data/local/tmp/cts/microdroid/test_microdroid_vendor_image.img");
