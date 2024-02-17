@@ -20,7 +20,11 @@ mod run;
 
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
     CpuTopology::CpuTopology, IVirtualizationService::IVirtualizationService,
-    PartitionType::PartitionType, VirtualMachineAppConfig::DebugLevel::DebugLevel,
+    IVirtualizationService::FEATURE_DICE_CHANGES, IVirtualizationService::FEATURE_LLPVM_CHANGES,
+    IVirtualizationService::FEATURE_MULTI_TENANT,
+    IVirtualizationService::FEATURE_REMOTE_ATTESTATION,
+    IVirtualizationService::FEATURE_VENDOR_MODULES, PartitionType::PartitionType,
+    VirtualMachineAppConfig::DebugLevel::DebugLevel,
 };
 use anyhow::{Context, Error};
 use binder::{ProcessState, Strong};
@@ -232,6 +236,8 @@ pub struct RunCustomVmConfig {
 
 #[derive(Parser)]
 enum Opt {
+    /// Check if the feature is enabled on device.
+    CheckFeatureEnabled { feature: String },
     /// Run a virtual machine with a config in APK
     RunApp {
         #[command(flatten)]
@@ -304,6 +310,28 @@ fn get_service() -> Result<Strong<dyn IVirtualizationService>, Error> {
     virtmgr.connect().context("Failed to connect to VirtualizationService")
 }
 
+fn command_check_feature_enabled(feature: &str) -> Result<(), Error> {
+    println!(
+        "Feature {feature} is {}",
+        if is_feature_enabled(feature)? { "enabled" } else { "disabled" }
+    );
+    Ok(())
+}
+
+fn is_feature_enabled(feature: &str) -> Result<bool, Error> {
+    match feature {
+        FEATURE_DICE_CHANGES => Ok(cfg!(dice_changes)),
+        FEATURE_LLPVM_CHANGES => Ok(cfg!(llpvm_changes)),
+        FEATURE_MULTI_TENANT => Ok(cfg!(multi_tenant)),
+        FEATURE_REMOTE_ATTESTATION => Ok(cfg!(remote_attestation)),
+        FEATURE_VENDOR_MODULES => Ok(cfg!(vendor_modules)),
+        _ => {
+            println!("unknown feature {feature}");
+            Ok(false)
+        }
+    }
+}
+
 fn main() -> Result<(), Error> {
     env_logger::init();
     let opt = Opt::parse();
@@ -312,6 +340,7 @@ fn main() -> Result<(), Error> {
     ProcessState::start_thread_pool();
 
     match opt {
+        Opt::CheckFeatureEnabled { feature } => command_check_feature_enabled(&feature),
         Opt::RunApp { config } => command_run_app(config),
         Opt::RunMicrodroid { config } => command_run_microdroid(config),
         Opt::Run { config } => command_run(config),
