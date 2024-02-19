@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4725af47_34434e46",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 2164,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-19T14:13:27Z",
+      "side": 1,
+      "message": "We already have a revoke in teardown(), so we probably shouldn\u0027t need it here?\n\nSee also my proposed changes in aosp/2967464.",
+      "parentUuid": "58f9c69d_61e09b97",
+      "range": {
+        "startLine": 2164,
+        "startChar": 0,
+        "endLine": 2164,
+        "endChar": 78
+      },
+      "revId": "5a62ce729ed6dd2a4aff5b2788ebef8bab3d4114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "806d04f3_27f2a54c",
         "filename": "virtualizationmanager/src/aidl.rs",
         "patchSetId": 6
@@ -130,6 +154,76 @@
         "startChar": 19,
         "endLine": 406,
         "endChar": 127
+      },
+      "revId": "5a62ce729ed6dd2a4aff5b2788ebef8bab3d4114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "133a6824_a7b64dd5",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-19T14:13:27Z",
+      "side": 1,
+      "message": "What\u0027s the purpose of the warning?\n\nIf we do want a warning, it should be on\n- It\u0027s a pVM\n- A vendor hashtree is in the config\n- And it doesn\u0027t match the one in the DT.\n\nBut pvmfw will do that check and complain anyway, so do we need anything here?\n\nPerhaps instead log (as info) the specified digest \u0026 the host DT digest?",
+      "parentUuid": "806d04f3_27f2a54c",
+      "range": {
+        "startLine": 406,
+        "startChar": 19,
+        "endLine": 406,
+        "endChar": 127
+      },
+      "revId": "5a62ce729ed6dd2a4aff5b2788ebef8bab3d4114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5af3048_c7ba6112",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-19T14:13:27Z",
+      "side": 1,
+      "message": "I think this code might be a little clearer if we used different names for different nodes.\n(root, overlay, untrusted, ... ?)",
+      "range": {
+        "startLine": 72,
+        "startChar": 8,
+        "endLine": 72,
+        "endChar": 12
+      },
+      "revId": "5a62ce729ed6dd2a4aff5b2788ebef8bab3d4114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e624ba8f_eeb9a751",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-19T14:13:27Z",
+      "side": 1,
+      "message": "What does this actually do? (The example above doesn\u0027t seem to show it.)",
+      "range": {
+        "startLine": 85,
+        "startChar": 1,
+        "endLine": 85,
+        "endChar": 66
       },
       "revId": "5a62ce729ed6dd2a4aff5b2788ebef8bab3d4114",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
