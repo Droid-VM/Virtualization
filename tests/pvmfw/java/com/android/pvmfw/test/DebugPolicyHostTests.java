@@ -325,7 +325,7 @@ public class DebugPolicyHostTests extends MicrodroidHostTestCaseBase {
                         "--config-path",
                         MICRODROID_CONFIG_PATH);
         if (isFeatureEnabled("com.android.kvm.LLPVM_CHANGES")) {
-            command = String.join(command, "--instance-id-file", TEST_ROOT + "instance_id");
+            command = String.join(" ", command, "--instance-id-file", TEST_ROOT + "instance_id");
         }
         return mAndroidDevice.executeShellV2Command(
                 command, CONSOLE_OUTPUT_WAIT_MS, TimeUnit.MILLISECONDS, /* retryAttempts= */ 0);
