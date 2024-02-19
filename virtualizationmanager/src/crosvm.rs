@@ -119,6 +119,7 @@ pub struct CrosvmConfig {
     pub vfio_devices: Vec<VfioDevice>,
     pub dtbo: Option<File>,
     pub device_tree_overlay: Option<File>,
+    pub android_fstab: File,
 }
 
 /// A disk image to pass to crosvm for a VM.
@@ -850,6 +851,8 @@ fn run_vm(
     let failure_serial_path = add_preserved_fd(&mut preserved_fds, &failure_pipe_write);
     let ramdump_arg = format_serial_out_arg(&mut preserved_fds, &config.ramdump);
 
+    let android_fstab = add_preserved_fd(&mut preserved_fds, &config.android_fstab);
+    command.arg(format!("--android-fstab={}", &android_fstab));
     // Warning: Adding more serial devices requires you to shift the PCI device ID of the boot
     // disks in bootconfig.x86_64. This is because x86 crosvm puts serial devices and the block
     // devices in the same PCI bus and serial devices comes before the block devices. Arm crosvm

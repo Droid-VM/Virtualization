@@ -418,6 +418,12 @@ impl VirtualizationService {
             None
         };
 
+        let android_fstab = temporary_directory.join("android_fstab");
+        let android_fstab = File::create(android_fstab)
+            .context("Failed to create Android fstab file")
+            .with_log()
+            .or_service_specific_exception(-1)?;
+
         let state = &mut *self.state.lock().unwrap();
         let console_out_fd =
             clone_or_prepare_logger_fd(&debug_config, console_out_fd, format!("Console({})", cid))?;
@@ -548,6 +554,7 @@ impl VirtualizationService {
             console_in_fd,
             log_fd,
             ramdump,
+            android_fstab,
             indirect_files,
             platform_version: parse_platform_version_req(&config.platformVersion)?,
             detect_hangup: is_app_config,
