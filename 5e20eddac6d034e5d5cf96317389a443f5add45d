@@ -3,6 +3,121 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c00a158_2ad4071c",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2184,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-19T05:12:29Z",
+      "side": 1,
+      "message": "bootsNonPvm_withCustomVendorImage_success()",
+      "range": {
+        "startLine": 2184,
+        "startChar": 16,
+        "endLine": 2184,
+        "endChar": 66
+      },
+      "revId": "5e20eddac6d034e5d5cf96317389a443f5add45d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abfacbee_816275b6",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2208,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-19T05:12:29Z",
+      "side": 1,
+      "message": "bootsPvm_withCustomVendorImage_fails()",
+      "range": {
+        "startLine": 2208,
+        "startChar": 16,
+        "endLine": 2208,
+        "endChar": 67
+      },
+      "revId": "5e20eddac6d034e5d5cf96317389a443f5add45d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "976943fe_cf0d4320",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2223,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-19T05:12:29Z",
+      "side": 1,
+      "message": "bootsVm_withUnsignedCustomVendorImage_fails()",
+      "range": {
+        "startLine": 2223,
+        "startChar": 16,
+        "endLine": 2223,
+        "endChar": 56
+      },
+      "revId": "5e20eddac6d034e5d5cf96317389a443f5add45d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5332880_66b1bf37",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2233,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-19T05:12:29Z",
+      "side": 1,
+      "message": "above test `bootFailsWithIncorrectlySignedVendorPartitionForPvm()` also checks `payloadStarted` and `deathReason` (L2218-L2219), but it\u0027s missing here.\n\nIs it intended here?",
+      "range": {
+        "startLine": 2233,
+        "startChar": 0,
+        "endLine": 2233,
+        "endChar": 76
+      },
+      "revId": "5e20eddac6d034e5d5cf96317389a443f5add45d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f574aab_2b248967",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-19T05:12:29Z",
+      "side": 1,
+      "message": "I don\u0027t understand what does your comment want to say. Perhaps add log?\n\n```suggestion\n        let trusted_props \u003d if let Some(ref vendor_hashtree_digest) \u003d vendor_hashtree_digest {\n            warn!(\"VM with custom vendor hashtree digest. Validation in pvmfw would fail\");\n            vec![(\n                cstr!(\"vendor_hashtree_descriptor_root_digest\"),\n                vendor_hashtree_digest.as_slice(),\n            )]\n        } else {\n            vec![]\n        };\n```\n\nI\u0027m not 100% confident about the message because it may misread. You can amend as you want.",
+      "range": {
+        "startLine": 405,
+        "startChar": 0,
+        "endLine": 414,
+        "endChar": 0
+      },
+      "revId": "5e20eddac6d034e5d5cf96317389a443f5add45d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4c31d08e_84768e6b",
         "filename": "virtualizationmanager/src/dt_overlay.rs",
         "patchSetId": 2
