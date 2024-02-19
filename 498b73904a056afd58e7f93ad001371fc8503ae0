@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88586190_8ce60cfa",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-19T13:42:57Z",
+      "side": 1,
+      "message": "The logic is borrowed from `isFeatureEnabled` method in VS. Lets keep them consistent, We do print `unknown feature`",
+      "parentUuid": "09f8b276_24535f64",
+      "range": {
+        "startLine": 330,
+        "startChar": 7,
+        "endLine": 330,
+        "endChar": 21
+      },
+      "revId": "498b73904a056afd58e7f93ad001371fc8503ae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "066a5a6e_797bd66b",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-19T12:04:05Z",
       "side": 1,
       "message": "Rather than duplicating the logic here, maybe we should just ask VS?\n@ioffe@google.com",
+      "range": {
+        "startLine": 322,
+        "startChar": 0,
+        "endLine": 332,
+        "endChar": 5
+      },
+      "revId": "498b73904a056afd58e7f93ad001371fc8503ae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f115a83_3ad9a202",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-19T13:42:57Z",
+      "side": 1,
+      "message": "SG, that will reduce code duplication. We will no longer be printing `unknown feature` in case string is not recognized \u0026 return \"disabled\", but I think that is a small side-effect hit at the reducing of duplication.",
+      "parentUuid": "066a5a6e_797bd66b",
       "range": {
         "startLine": 322,
         "startChar": 0,
