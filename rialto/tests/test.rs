@@ -34,7 +34,7 @@ use service_vm_comm::{
 use service_vm_fake_chain::client_vm::{
     fake_client_vm_dice_artifacts, fake_sub_components, SubComponent,
 };
-use service_vm_manager::ServiceVm;
+use service_vm_manager::{ServiceVm, RIALTO_PATH};
 use std::fs;
 use std::fs::File;
 use std::panic;
@@ -48,7 +48,6 @@ use x509_cert::{
     spki::{AlgorithmIdentifier, ObjectIdentifier, SubjectPublicKeyInfo},
 };
 
-const UNSIGNED_RIALTO_PATH: &str = "/data/local/tmp/rialto_test/arm64/rialto_unsigned.bin";
 const INSTANCE_IMG_PATH: &str = "/data/local/tmp/rialto_test/arm64/instance.img";
 const TEST_CERT_CHAIN_PATH: &str = "testdata/rkp_cert_chain.der";
 
@@ -305,7 +304,7 @@ fn vm_instance(vm_type: VmType) -> Result<VmInstance> {
 }
 
 fn nonprotected_vm_instance() -> Result<VmInstance> {
-    let rialto = File::open(UNSIGNED_RIALTO_PATH).context("Failed to open Rialto kernel binary")?;
+    let rialto = File::open(RIALTO_PATH).context("Failed to open Rialto kernel binary")?;
     // Do not use `#allocateInstanceId` to generate the instance ID because the method
     // also adds an instance ID to the database it manages.
     // This is not necessary for this test.
