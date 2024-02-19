@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b1d69ca_44996def",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-19T07:11:00Z",
+      "side": 1,
+      "message": "LGTM, but please also get review from Nikita.",
+      "revId": "5a62ce729ed6dd2a4aff5b2788ebef8bab3d4114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e6acc77_4fe7f81d",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 2133,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-19T07:11:00Z",
+      "side": 1,
+      "message": "Question) Is it still valid? We\u0027re injecting vendor hashtree digest, so non-pVM can be work with CF.",
+      "range": {
+        "startLine": 2131,
+        "startChar": 0,
+        "endLine": 2133,
+        "endChar": 0
+      },
+      "revId": "5a62ce729ed6dd2a4aff5b2788ebef8bab3d4114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11976789_3b2d84c1",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 2164,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-19T07:11:00Z",
+      "side": 1,
+      "message": "Question + minor suggestion) Can we move this into `buildVmConfigWithVendor`, and explicitly revote permission for `configuringVendorDiskImageRequiresCustomPermission` afterward?",
+      "range": {
+        "startLine": 2164,
+        "startChar": 0,
+        "endLine": 2164,
+        "endChar": 78
+      },
+      "revId": "5a62ce729ed6dd2a4aff5b2788ebef8bab3d4114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "806d04f3_27f2a54c",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-19T07:11:00Z",
+      "side": 1,
+      "message": "This log explains pvmfw behavior, but developer wouldn\u0027t guess why it\u0027s printing from nowhere.\n\nDear @alanstokes@google.com and @ioffe@google.com, \\\ncould you recommend a good log message that pVM boot may potentially be fail?",
+      "range": {
+        "startLine": 406,
+        "startChar": 19,
+        "endLine": 406,
+        "endChar": 127
+      },
+      "revId": "5a62ce729ed6dd2a4aff5b2788ebef8bab3d4114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
