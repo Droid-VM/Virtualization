@@ -91,4 +91,11 @@ interface IVirtualizationServiceInternal {
 
     /** Returns a read-only file descriptor of the VM DTBO file. */
     ParcelFileDescriptor getDtboFile();
+
+    /**
+     * Notification that the secret associated with a VM should be removed.
+     *
+     * @param secretId The ID for the VM/secret.
+     */
+    void vmSecretRemoved(in byte[] secretId);
 }

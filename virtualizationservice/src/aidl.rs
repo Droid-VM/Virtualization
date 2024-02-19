@@ -17,7 +17,11 @@
 use crate::atom::{forward_vm_booted_atom, forward_vm_creation_atom, forward_vm_exited_atom};
 use crate::remote_provisioning;
 use crate::rkpvm::{generate_ecdsa_p256_key_pair, request_attestation};
+use crate::vmdb::{VmId, VmIdDb};
 use crate::{get_calling_pid, get_calling_uid, REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME};
+use android_hardware_security_secretkeeper::aidl::android::hardware::security::secretkeeper::{
+    ISecretkeeper::ISecretkeeper, SecretId::SecretId,
+};
 use android_os_permissions_aidl::aidl::android::os::IPermissionController;
 use android_system_virtualizationcommon::aidl::android::system::virtualizationcommon;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice;
@@ -69,8 +73,17 @@ pub type Cid = u32;
 
 pub const BINDER_SERVICE_IDENTIFIER: &str = "android.system.virtualizationservice";
 
+/// Interface name for the Secretkeeper HAL.
+const SECRETKEEPER_SERVICE: &str = "android.hardware.security.secretkeeper.ISecretkeeper";
+
+/// Secretkeeper instances to look for.
+const SECRETKEEPER_INSTANCES: [&str; 2] = ["default", "nonsecure"];
+
 /// Directory in which to write disk image files used while running VMs.
 pub const TEMPORARY_DIRECTORY: &str = "/data/misc/virtualizationservice";
+
+/// Directory in which to write persistent state.
+pub const PERSISTENT_DIRECTORY: &str = "/data/misc/apexdata/com.android.virt";
 
 /// The first CID to assign to a guest VM managed by the VirtualizationService. CIDs lower than this
 /// are reserved for the host or other usage.
@@ -78,6 +91,11 @@ const GUEST_CID_MIN: Cid = 2048;
 const GUEST_CID_MAX: Cid = 65535;
 
 const SYSPROP_LAST_CID: &str = "virtualizationservice.state.last_cid";
+
+/// Maximum number of VM IDs to delete at once.  Needs to be smaller than both the maximum
+/// number of SQLite parameters (999) and also small enough that an ISecretkeeper::deleteIds
+/// parcel fits within max AIDL message size.
+const DELETE_MAX_BATCH_SIZE: usize = 100;
 
 const CHUNK_RECV_MAX_LEN: usize = 1024;
 
@@ -159,14 +177,14 @@ fn is_valid_guest_cid(cid: Cid) -> bool {
 
 /// Singleton service for allocating globally-unique VM resources, such as the CID, and running
 /// singleton servers, like tombstone receiver.
-#[derive(Debug, Default)]
 pub struct VirtualizationServiceInternal {
     state: Arc<Mutex<GlobalState>>,
 }
 
 impl VirtualizationServiceInternal {
     pub fn init() -> VirtualizationServiceInternal {
-        let service = VirtualizationServiceInternal::default();
+        let service =
+            VirtualizationServiceInternal { state: Arc::new(Mutex::new(GlobalState::new())) };
 
         std::thread::spawn(|| {
             if let Err(e) = handle_stream_connection_tombstoned() {
@@ -378,6 +396,46 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
         let file = state.get_dtbo_file().or_service_specific_exception(-1)?;
         Ok(ParcelFileDescriptor::new(file))
     }
+
+    fn vmSecretRemoved(&self, secret_id: &[u8]) -> binder::Result<()> {
+        let state = &mut *self.state.lock().unwrap();
+        if let Some(sk_state) = &mut state.sk_state {
+            info!("vmSecretRemoved(): delete secret");
+            let vm_id = secret_id.try_into().or_service_specific_exception(-1)?;
+            sk_state.delete_ids(&[vm_id]);
+        } else {
+            info!("ignoring vmSecretRemoved() as no ISecretkeeper");
+        }
+        Ok(())
+    }
+}
+
+// TODO: connect this to new AIDL interface definition
+// impl IVirtualizationServiceMaintenance for VirtualizationServiceInternal {
+#[allow(dead_code)]
+#[allow(non_snake_case)]
+impl VirtualizationServiceInternal {
+    fn packageRemoved(&self, package_name: &str) -> binder::Result<()> {
+        let state = &mut *self.state.lock().unwrap();
+        if let Some(sk_state) = &mut state.sk_state {
+            info!("packageRemoved({package_name}) might trigger deletion of secrets");
+            sk_state.delete_ids_for_package(package_name).or_service_specific_exception(-1)?;
+        } else {
+            info!("ignoring packageRemoved({package_name}) as no ISecretkeeper");
+        }
+        Ok(())
+    }
+
+    fn userRemoved(&self, user_id: i32) -> binder::Result<()> {
+        let state = &mut *self.state.lock().unwrap();
+        if let Some(sk_state) = &mut state.sk_state {
+            info!("userRemoved({user_id}) might trigger deletion of secrets");
+            sk_state.delete_ids_for_user(user_id).or_service_specific_exception(-1)?;
+        } else {
+            info!("ignoring userRemoved({user_id}) as no ISecretkeeper");
+        }
+        Ok(())
+    }
 }
 
 // KEEP IN SYNC WITH assignable_devices.xsd
@@ -460,19 +518,120 @@ impl GlobalVmInstance {
     }
 }
 
+/// State related to VM secrets.
+struct VmSecretsState {
+    sk: binder::Strong<dyn ISecretkeeper>,
+    /// Database of VM IDs,
+    vm_id_db: VmIdDb,
+    batch_size: usize,
+}
+
+impl VmSecretsState {
+    fn new() -> Option<Self> {
+        let sk = match Self::find_sk() {
+            Some(sk) => sk,
+            None => {
+                warn!("failed to find a Secretkeeper instance; skipping secret management");
+                return None;
+            }
+        };
+        let (vm_id_db, created) = match VmIdDb::new(PERSISTENT_DIRECTORY) {
+            Ok(v) => v,
+            Err(e) => {
+                error!("skipping secret management, failed to connect to database: {e:?}");
+                return None;
+            }
+        };
+        if created {
+            // If the database did not previously exist, then this appears to be the first run of
+            // `virtualizationservice` since device setup or factory reset.  In case of the latter,
+            // delete any secrets that may be left over from before reset, thus ensuring that the
+            // local database state matches that of the TA (i.e. empty).
+            warn!("no existing VM ID DB; clearing any previous secrets to match fresh DB");
+            if let Err(e) = sk.deleteAll() {
+                error!("failed to delete previous secrets: {e:?}");
+            }
+        } else {
+            info!("re-using existing VM ID DB");
+        }
+        Some(Self { sk, vm_id_db, batch_size: DELETE_MAX_BATCH_SIZE })
+    }
+
+    fn find_sk() -> Option<binder::Strong<dyn ISecretkeeper>> {
+        for instance in &SECRETKEEPER_INSTANCES {
+            let name = format!("{SECRETKEEPER_SERVICE}/{instance}");
+            if let Ok(true) = binder::is_declared(&name) {
+                match binder::get_interface(&name) {
+                    Ok(sk) => return Some(sk),
+                    Err(e) => error!("failed to connect to {name}: {e:?}"),
+                }
+            } else {
+                info!("instance {name} not declared");
+            }
+        }
+        None
+    }
+
+    /// Delete the VM IDs associated with Android user ID `user_id`.
+    fn delete_ids_for_user(&mut self, user_id: i32) -> Result<()> {
+        let vm_ids = self.vm_id_db.vm_ids_for_user(user_id)?;
+        info!("userRemoved({user_id}) triggers deletion of {} secrets", vm_ids.len());
+        self.delete_ids(&vm_ids);
+        Ok(())
+    }
+
+    /// Delete the VM IDs associated with `package_name`.
+    fn delete_ids_for_package(&mut self, package_name: &str) -> Result<()> {
+        let vm_ids = self.vm_id_db.vm_ids_for_package(package_name)?;
+        info!("packageRemoved({package_name}) triggers deletion of {} secrets", vm_ids.len());
+        self.delete_ids(&vm_ids);
+        Ok(())
+    }
+
+    /// Delete the provided VM IDs from both Secretkeeper and the database.
+    fn delete_ids(&mut self, mut vm_ids: &[VmId]) {
+        while !vm_ids.is_empty() {
+            let len = std::cmp::min(vm_ids.len(), self.batch_size);
+            let batch = &vm_ids[..len];
+            self.delete_ids_batch(batch);
+            vm_ids = &vm_ids[len..];
+        }
+    }
+
+    /// Delete a batch of VM IDs from both Secretkeeper and the database. The batch is assumed
+    /// to be smaller than both:
+    /// - the corresponding limit for number of database parameters
+    /// - the corresponding limit for maximum size of a single AIDL message for `ISecretkeeper`.
+    fn delete_ids_batch(&mut self, vm_ids: &[VmId]) {
+        if let Err(e) = self.vm_id_db.delete_vm_ids(vm_ids) {
+            error!("failed to remove secret IDs from database: {e:?}");
+        }
+        let secret_ids: Vec<SecretId> = vm_ids.iter().map(|id| SecretId { id: *id }).collect();
+        if let Err(e) = self.sk.deleteIds(&secret_ids) {
+            error!("failed to delete all secrets from Secretkeeper: {e:?}");
+        }
+    }
+}
+
 /// The mutable state of the VirtualizationServiceInternal. There should only be one instance
 /// of this struct.
-#[derive(Debug, Default)]
 struct GlobalState {
     /// VM contexts currently allocated to running VMs. A CID is never recycled as long
     /// as there is a strong reference held by a GlobalVmContext.
     held_contexts: HashMap<Cid, Weak<GlobalVmInstance>>,
 
     /// Cached read-only FD of VM DTBO file. Also serves as a lock for creating the file.
-    dtbo_file: Mutex<Option<File>>,
+    dtbo_file: Option<File>,
+
+    /// State relating to secrets held by (optional) Secretkeeper instance on behalf of VMs.
+    sk_state: Option<VmSecretsState>,
 }
 
 impl GlobalState {
+    fn new() -> Self {
+        Self { held_contexts: HashMap::new(), dtbo_file: None, sk_state: VmSecretsState::new() }
+    }
+
     /// Get the next available CID, or an error if we have run out. The last CID used is stored in
     /// a system property so that restart of virtualizationservice doesn't reuse CID while the host
     /// Android is up.
@@ -541,9 +700,7 @@ impl GlobalState {
     }
 
     fn get_dtbo_file(&mut self) -> Result<File> {
-        let mut file = self.dtbo_file.lock().unwrap();
-
-        let fd = if let Some(ref_fd) = &*file {
+        let fd = if let Some(ref_fd) = &self.dtbo_file {
             ref_fd.try_clone()?
         } else {
             let path = get_or_create_common_dir()?.join("vm.dtbo");
@@ -562,7 +719,7 @@ impl GlobalState {
             let read_fd = File::open(&path).context("Failed to open VM DTBO file")?;
             let read_fd_clone =
                 read_fd.try_clone().context("Failed to clone VM DTBO file descriptor")?;
-            *file = Some(read_fd);
+            self.dtbo_file = Some(read_fd);
             read_fd_clone
         };
 
@@ -717,6 +874,12 @@ fn check_use_custom_virtual_machine() -> binder::Result<()> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use android_hardware_security_authgraph::aidl::android::hardware::security::authgraph::{
+        IAuthGraphKeyExchange::IAuthGraphKeyExchange,
+    };
+    use android_hardware_security_secretkeeper::aidl::android::hardware::security::secretkeeper::{
+        ISecretkeeper::BnSecretkeeper
+    };
     use std::fs;
 
     const TEST_RKP_CERT_CHAIN_PATH: &str = "testdata/rkp_cert_chain.der";
@@ -732,5 +895,105 @@ mod tests {
             assert_eq!(x509_cert.to_der()?.len(), cert.encodedCertificate.len());
         }
         Ok(())
+    }
+
+    #[derive(Default)]
+    struct FakeSk {
+        history: Arc<Mutex<Vec<SkOp>>>,
+    }
+
+    #[derive(Clone, PartialEq, Eq, Debug)]
+    enum SkOp {
+        Management,
+        DeleteIds(Vec<VmId>),
+        DeleteAll,
+    }
+
+    impl ISecretkeeper for FakeSk {
+        fn processSecretManagementRequest(&self, _req: &[u8]) -> binder::Result<Vec<u8>> {
+            self.history.lock().unwrap().push(SkOp::Management);
+            Ok(vec![])
+        }
+
+        fn getAuthGraphKe(&self) -> binder::Result<binder::Strong<dyn IAuthGraphKeyExchange>> {
+            unimplemented!()
+        }
+
+        fn deleteIds(&self, ids: &[SecretId]) -> binder::Result<()> {
+            self.history.lock().unwrap().push(SkOp::DeleteIds(ids.iter().map(|s| s.id).collect()));
+            Ok(())
+        }
+
+        fn deleteAll(&self) -> binder::Result<()> {
+            self.history.lock().unwrap().push(SkOp::DeleteAll);
+            Ok(())
+        }
+    }
+    impl binder::Interface for FakeSk {}
+
+    fn new_test_sk_state(history: Arc<Mutex<Vec<SkOp>>>, batch_size: usize) -> VmSecretsState {
+        let vm_id_db = crate::vmdb::new_test_db();
+        let sk = FakeSk { history };
+        let sk = BnSecretkeeper::new_binder(sk, binder::BinderFeatures::default());
+        VmSecretsState { sk, vm_id_db, batch_size }
+    }
+
+    const VM_ID1: VmId = [1u8; 64];
+    const VM_ID2: VmId = [2u8; 64];
+    const VM_ID3: VmId = [3u8; 64];
+    const VM_ID4: VmId = [4u8; 64];
+    const VM_ID5: VmId = [5u8; 64];
+
+    #[test]
+    fn test_sk_state_batching() {
+        let history = Arc::new(Mutex::new(Vec::new()));
+        let mut sk_state = new_test_sk_state(history.clone(), 2);
+        sk_state.delete_ids(&[VM_ID1, VM_ID2, VM_ID3, VM_ID4, VM_ID5]);
+        let got = (*history.lock().unwrap()).clone();
+        assert_eq!(
+            got,
+            vec![
+                SkOp::DeleteIds(vec![VM_ID1, VM_ID2]),
+                SkOp::DeleteIds(vec![VM_ID3, VM_ID4]),
+                SkOp::DeleteIds(vec![VM_ID5]),
+            ]
+        );
+    }
+
+    #[test]
+    fn test_sk_state_no_batching() {
+        let history = Arc::new(Mutex::new(Vec::new()));
+        let mut sk_state = new_test_sk_state(history.clone(), 6);
+        sk_state.delete_ids(&[VM_ID1, VM_ID2, VM_ID3, VM_ID4, VM_ID5]);
+        let got = (*history.lock().unwrap()).clone();
+        assert_eq!(got, vec![SkOp::DeleteIds(vec![VM_ID1, VM_ID2, VM_ID3, VM_ID4, VM_ID5])]);
+    }
+
+    #[test]
+    fn test_sk_state() {
+        let history = Arc::new(Mutex::new(Vec::new()));
+        let mut sk_state = new_test_sk_state(history.clone(), 2);
+
+        sk_state.vm_id_db.add_vm_id(&VM_ID1, 10000, "pkgA").unwrap();
+        sk_state.vm_id_db.add_vm_id(&VM_ID2, 10000, "pkgA").unwrap();
+        sk_state.vm_id_db.add_vm_id(&VM_ID3, 20000, "pkgB").unwrap();
+        sk_state.vm_id_db.add_vm_id(&VM_ID4, 30000, "pkgA").unwrap();
+        sk_state.vm_id_db.add_vm_id(&VM_ID5, 30000, "pkgC").unwrap();
+        assert_eq!((*history.lock().unwrap()).clone(), vec![]);
+
+        sk_state.delete_ids_for_package("pkgB").unwrap();
+        assert_eq!((*history.lock().unwrap()).clone(), vec![SkOp::DeleteIds(vec![VM_ID3])]);
+
+        sk_state.delete_ids_for_user(30000).unwrap();
+        assert_eq!(
+            (*history.lock().unwrap()).clone(),
+            vec![SkOp::DeleteIds(vec![VM_ID3]), SkOp::DeleteIds(vec![VM_ID4, VM_ID5]),]
+        );
+
+        assert_eq!(vec![VM_ID1, VM_ID2], sk_state.vm_id_db.vm_ids_for_user(10000).unwrap());
+        assert_eq!(vec![VM_ID1, VM_ID2], sk_state.vm_id_db.vm_ids_for_package("pkgA").unwrap());
+        let empty: Vec<VmId> = Vec::new();
+        assert_eq!(empty, sk_state.vm_id_db.vm_ids_for_package("pkgB").unwrap());
+        assert_eq!(empty, sk_state.vm_id_db.vm_ids_for_user(30000).unwrap());
     }
 }
