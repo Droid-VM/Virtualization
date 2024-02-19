@@ -91,4 +91,19 @@ interface IVirtualizationServiceInternal {
 
     /** Returns a read-only file descriptor of the VM DTBO file. */
     ParcelFileDescriptor getDtboFile();
+
+    /**
+     * Notification that a package has been permanently removed, to allow related global state to
+     * be removed.
+     *
+     * @param packageName Name of the package being removed.
+     */
+    oneway void packageRemoved(in String packageName);
+
+    /**
+     * Notification that a user has been removed, to allow related global state to be removed.
+     *
+     * @param userId The Android user ID of the user (i.e. not the UID).
+     */
+    oneway void userRemoved(int userId);
 }
