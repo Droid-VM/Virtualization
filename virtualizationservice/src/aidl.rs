@@ -18,12 +18,16 @@ use crate::{get_calling_pid, get_calling_uid, REMOTELY_PROVISIONED_COMPONENT_SER
 use crate::atom::{forward_vm_booted_atom, forward_vm_creation_atom, forward_vm_exited_atom};
 use crate::rkpvm::{request_attestation, generate_ecdsa_p256_key_pair};
 use crate::remote_provisioning;
+use crate::vmdb::VmIdDb;
 use android_os_permissions_aidl::aidl::android::os::IPermissionController;
 use android_system_virtualizationcommon::aidl::android::system::virtualizationcommon::Certificate::Certificate;
 use android_system_virtualizationservice::{
     aidl::android::system::virtualizationservice::AssignableDevice::AssignableDevice,
     aidl::android::system::virtualizationservice::VirtualMachineDebugInfo::VirtualMachineDebugInfo,
     binder::ParcelFileDescriptor,
+};
+use android_hardware_security_secretkeeper::aidl::android::hardware::security::secretkeeper::{
+    ISecretkeeper::ISecretkeeper, SecretId::SecretId
 };
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::{
     AtomVmBooted::AtomVmBooted,
@@ -62,6 +66,9 @@ use openssl::x509::X509;
 pub type Cid = u32;
 
 pub const BINDER_SERVICE_IDENTIFIER: &str = "android.system.virtualizationservice";
+
+pub const SECRETKEEPER_SERVICE: &str =
+    "android.hardware.security.secretkeeper.ISecretkeeper/default";
 
 /// Directory in which to write disk image files used while running VMs.
 pub const TEMPORARY_DIRECTORY: &str = "/data/misc/virtualizationservice";
@@ -153,14 +160,14 @@ fn is_valid_guest_cid(cid: Cid) -> bool {
 
 /// Singleton service for allocating globally-unique VM resources, such as the CID, and running
 /// singleton servers, like tombstone receiver.
-#[derive(Debug, Default)]
 pub struct VirtualizationServiceInternal {
     state: Arc<Mutex<GlobalState>>,
 }
 
 impl VirtualizationServiceInternal {
     pub fn init() -> VirtualizationServiceInternal {
-        let service = VirtualizationServiceInternal::default();
+        let service =
+            VirtualizationServiceInternal { state: Arc::new(Mutex::new(GlobalState::new())) };
 
         std::thread::spawn(|| {
             if let Err(e) = handle_stream_connection_tombstoned() {
@@ -372,6 +379,42 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
         let file = state.get_dtbo_file().or_service_specific_exception(-1)?;
         Ok(ParcelFileDescriptor::new(file))
     }
+
+    fn packageRemoved(&self, package_name: &str) -> binder::Result<()> {
+        let state = &mut *self.state.lock().unwrap();
+        if let Some(sk_state) = &mut state.sk_state {
+            let vm_ids = sk_state
+                .vm_id_db
+                .vm_ids_for_package(package_name)
+                .or_service_specific_exception(-1)?;
+            let vm_ids: Vec<SecretId> = vm_ids.into_iter().map(|id| SecretId { id }).collect();
+            info!("packageRemoved({package_name}) triggers deletion of {} secrets", vm_ids.len());
+            // TODO: batching?
+            if let Err(e) = sk_state.sk.deleteIds(&vm_ids) {
+                error!("failed to delete all secrets associated with {package_name}: {e:?}");
+            }
+        } else {
+            info!("ignoring packageRemoved({package_name}) as no ISecretkeeper");
+        }
+        Ok(())
+    }
+
+    fn userRemoved(&self, user_id: i32) -> binder::Result<()> {
+        let state = &mut *self.state.lock().unwrap();
+        if let Some(sk_state) = &mut state.sk_state {
+            let vm_ids =
+                sk_state.vm_id_db.vm_ids_for_user(user_id).or_service_specific_exception(-1)?;
+            let vm_ids: Vec<SecretId> = vm_ids.into_iter().map(|id| SecretId { id }).collect();
+            info!("userRemoved({user_id}) triggers deletion of {} secrets", vm_ids.len());
+            // TODO: batching?
+            if let Err(e) = sk_state.sk.deleteIds(&vm_ids) {
+                error!("failed to delete all secrets associated with user {user_id}: {e:?}");
+            }
+        } else {
+            info!("ignoring userRemoved({user_id}) as no ISecretkeeper");
+        }
+        Ok(())
+    }
 }
 
 // KEEP IN SYNC WITH assignable_devices.xsd
@@ -454,19 +497,65 @@ impl GlobalVmInstance {
     }
 }
 
+/// State related to VM secrets.
+struct VmSecretsState {
+    sk: binder::Strong<dyn ISecretkeeper>,
+    /// Database of VM IDs,
+    vm_id_db: VmIdDb,
+}
+
+impl VmSecretsState {
+    fn new() -> Option<Self> {
+        let sk: binder::Strong<dyn ISecretkeeper> =
+            match binder::get_interface(SECRETKEEPER_SERVICE) {
+                Ok(sk) => sk,
+                Err(e) => {
+                    warn!("skipping secret management, failed to connect to ISecretkeeper: {e:?}");
+                    return None;
+                }
+            };
+
+        // TODO : need to put db somewhere persistent
+        let (vm_id_db, created) = match VmIdDb::new(TEMPORARY_DIRECTORY) {
+            Ok(v) => v,
+            Err(e) => {
+                error!("skipping secret management, failed to connect to database: {e:?}");
+                return None;
+            }
+        };
+        if created {
+            // If the database did not previously exist, then this appears to be the first run of
+            // `virtualizationservice` since device setup or factory reset.  In case of the latter,
+            // delete any secrets that may be left over from before reset, thus ensuring that the
+            // local database state matches that of the TA (i.e. empty).
+            warn!("no existing VM ID DB; clearing any previous secrets");
+            if let Err(e) = sk.deleteAll() {
+                error!("failed to delete previous secrets: {e:?}");
+            }
+        }
+        Some(Self { sk, vm_id_db })
+    }
+}
+
 /// The mutable state of the VirtualizationServiceInternal. There should only be one instance
 /// of this struct.
-#[derive(Debug, Default)]
 struct GlobalState {
     /// VM contexts currently allocated to running VMs. A CID is never recycled as long
     /// as there is a strong reference held by a GlobalVmContext.
     held_contexts: HashMap<Cid, Weak<GlobalVmInstance>>,
 
     /// Cached read-only FD of VM DTBO file. Also serves as a lock for creating the file.
-    dtbo_file: Mutex<Option<File>>,
+    dtbo_file: Option<File>,
+
+    /// State relating to secrets held by (optional) Secretkeeper instance on behalf of VMs.
+    sk_state: Option<VmSecretsState>,
 }
 
 impl GlobalState {
+    fn new() -> Self {
+        Self { held_contexts: HashMap::new(), dtbo_file: None, sk_state: VmSecretsState::new() }
+    }
+
     /// Get the next available CID, or an error if we have run out. The last CID used is stored in
     /// a system property so that restart of virtualizationservice doesn't reuse CID while the host
     /// Android is up.
@@ -535,9 +624,7 @@ impl GlobalState {
     }
 
     fn get_dtbo_file(&mut self) -> Result<File> {
-        let mut file = self.dtbo_file.lock().unwrap();
-
-        let fd = if let Some(ref_fd) = &*file {
+        let fd = if let Some(ref_fd) = &self.dtbo_file {
             ref_fd.try_clone()?
         } else {
             let path = get_or_create_common_dir()?.join("vm.dtbo");
@@ -556,7 +643,7 @@ impl GlobalState {
             let read_fd = File::open(&path).context("Failed to open VM DTBO file")?;
             let read_fd_clone =
                 read_fd.try_clone().context("Failed to clone VM DTBO file descriptor")?;
-            *file = Some(read_fd);
+            self.dtbo_file = Some(read_fd);
             read_fd_clone
         };
 
