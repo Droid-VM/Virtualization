@@ -2126,8 +2126,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         }
     }
 
-    @Test
-    public void configuringVendorDiskImageRequiresCustomPermission() throws Exception {
+    private VirtualMachineConfig buildVmConfigWithVendor(File vendorDiskImage) throws Exception {
         assumeSupportedDevice();
         assumeFalse(
                 "Cuttlefish doesn't support device tree under /proc/device-tree", isCuttlefish());
@@ -2136,18 +2135,22 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assumeFalse(
                 "boot with vendor partition is failing in HWASAN enabled Microdroid.", isHwasan());
         assumeFeatureEnabled(VirtualMachineManager.FEATURE_VENDOR_MODULES);
-
-        File vendorDiskImage =
-                new File("/data/local/tmp/cts/microdroid/test_microdroid_vendor_image.img");
         VirtualMachineConfig config =
                 newVmConfigBuilderWithPayloadBinary("MicrodroidTestNativeLib.so")
                         .setVendorDiskImage(vendorDiskImage)
                         .setDebugLevel(DEBUG_LEVEL_FULL)
                         .build();
+        return config;
+    }
+
+    @Test
+    public void configuringVendorDiskImageRequiresCustomPermission() throws Exception {
+        File vendorDiskImage =
+                new File("/data/local/tmp/cts/microdroid/test_microdroid_vendor_image.img");
+        VirtualMachineConfig config = buildVmConfigWithVendor(vendorDiskImage);
 
         VirtualMachine vm =
                 forceCreateNewVirtualMachine("test_vendor_image_req_custom_permission", config);
-
         SecurityException e =
                 assertThrows(
                         SecurityException.class, () -> runVmTestService(TAG, vm, (ts, tr) -> {}));
@@ -2158,27 +2161,13 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
     @Test
     public void bootsWithVendorPartition() throws Exception {
-        assumeSupportedDevice();
-        assumeFalse(
-                "Cuttlefish doesn't support device tree under /proc/device-tree", isCuttlefish());
-        // TODO(b/317567210): Boots fails with vendor partition in HWASAN enabled microdroid
-        // after introducing verification based on DT and fstab in microdroid vendor partition.
-        assumeFalse(
-                "Boot with vendor partition is failing in HWASAN enabled Microdroid.", isHwasan());
-        assumeFeatureEnabled(VirtualMachineManager.FEATURE_VENDOR_MODULES);
-
         grantPermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
 
         File vendorDiskImage = new File("/vendor/etc/avf/microdroid/microdroid_vendor.img");
         assumeTrue("Microdroid vendor image doesn't exist, skip", vendorDiskImage.exists());
-        VirtualMachineConfig config =
-                newVmConfigBuilderWithPayloadBinary("MicrodroidTestNativeLib.so")
-                        .setVendorDiskImage(vendorDiskImage)
-                        .setDebugLevel(DEBUG_LEVEL_FULL)
-                        .build();
+        VirtualMachineConfig config = buildVmConfigWithVendor(vendorDiskImage);
 
         VirtualMachine vm = forceCreateNewVirtualMachine("test_boot_with_vendor", config);
-
         TestResults testResults =
                 runVmTestService(
                         TAG,
@@ -2186,37 +2175,62 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                         (ts, tr) -> {
                             tr.mMountFlags = ts.getMountFlags("/vendor");
                         });
-
         assertThat(testResults.mException).isNull();
         int expectedFlags = MS_NOATIME | MS_RDONLY;
         assertThat(testResults.mMountFlags & expectedFlags).isEqualTo(expectedFlags);
     }
 
     @Test
-    public void creationFailsWithUnsignedVendorPartition() throws Exception {
-        assumeSupportedDevice();
-        assumeFalse(
-                "Cuttlefish doesn't support device tree under /proc/device-tree", isCuttlefish());
-        // TODO(b/317567210): Boots fails with vendor partition in HWASAN enabled microdroid
-        // after introducing verification based on DT and fstab in microdroid vendor partition.
-        assumeFalse(
-                "boot with vendor partition is failing in HWASAN enabled Microdroid.", isHwasan());
-        assumeFeatureEnabled(VirtualMachineManager.FEATURE_VENDOR_MODULES);
-
+    public void bootsWithIncorrectlySignedVendorPartitionForNonPvm() throws Exception {
+        assumeNonProtectedVM();
         grantPermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
 
-        File unsignedVendorDiskImage =
-                new File(
-                        "/data/local/tmp/cts/microdroid/test_microdroid_vendor_image_unsigned.img");
-        VirtualMachineConfig config =
-                newVmConfigBuilderWithPayloadBinary("MicrodroidTestNativeLib.so")
-                        .setVendorDiskImage(unsignedVendorDiskImage)
-                        .setDebugLevel(DEBUG_LEVEL_FULL)
-                        .build();
+        File vendorDiskImage =
+                new File("/data/local/tmp/cts/microdroid/test_microdroid_vendor_image.img");
+        VirtualMachineConfig config = buildVmConfigWithVendor(vendorDiskImage);
 
-        BootResult bootResult = tryBootVmWithConfig(config, "test_boot_with_unsigned_vendor");
+        VirtualMachine vm =
+                forceCreateNewVirtualMachine(
+                        "test_boot_with_incorrectly_signed_vendor_non_pvm", config);
+        TestResults testResults =
+                runVmTestService(
+                        TAG,
+                        vm,
+                        (ts, tr) -> {
+                            tr.mMountFlags = ts.getMountFlags("/vendor");
+                        });
+        assertThat(testResults.mException).isNull();
+        int expectedFlags = MS_NOATIME | MS_RDONLY;
+        assertThat(testResults.mMountFlags & expectedFlags).isEqualTo(expectedFlags);
+    }
+
+    @Test
+    public void bootFailsWithIncorrectlySignedVendorPartitionForPvm() throws Exception {
+        assumeProtectedVM();
+        grantPermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
+
+        File vendorDiskImage =
+                new File("/data/local/tmp/cts/microdroid/test_microdroid_vendor_image.img");
+        VirtualMachineConfig config = buildVmConfigWithVendor(vendorDiskImage);
+
+        BootResult bootResult =
+                tryBootVmWithConfig(config, "test_boot_with_incorrectly_signed_vendor_pvm");
         assertThat(bootResult.payloadStarted).isFalse();
         assertThat(bootResult.deathReason).isEqualTo(VirtualMachineCallback.STOP_REASON_REBOOT);
+    }
+
+    @Test
+    public void creationFailsWithUnsignedVendorPartition() throws Exception {
+        grantPermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
+
+        File vendorDiskImage =
+                new File(
+                        "/data/local/tmp/cts/microdroid/test_microdroid_vendor_image_unsigned.img");
+        VirtualMachineConfig config = buildVmConfigWithVendor(vendorDiskImage);
+
+        VirtualMachine vm = forceCreateNewVirtualMachine("test_boot_with_unsigned_vendor", config);
+        assertThrowsVmExceptionContaining(
+                () -> vm.run(), "Failed to extract vendor hashtree digest");
     }
 
     @Test
