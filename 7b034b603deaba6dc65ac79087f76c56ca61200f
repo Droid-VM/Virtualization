@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1147a2da_af7cc7cb",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-19T09:14:26Z",
+      "side": 1,
+      "message": "Uber-nit: .toString() will be called implicitly\n```suggestion\n                            \"found no crosvm_guest smap entry in crosvm process: \" + sb);\n```",
+      "range": {
+        "startLine": 438,
+        "startChar": 87,
+        "endLine": 438,
+        "endChar": 98
+      },
+      "revId": "7b034b603deaba6dc65ac79087f76c56ca61200f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e61c145a_6e06aa9e",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-19T09:14:26Z",
+      "side": 1,
+      "message": "`{e:?}`\n\n(The debug form of an exception often has extra context, at last when anyhow is involved.)",
+      "range": {
+        "startLine": 455,
+        "startChar": 68,
+        "endLine": 455,
+        "endChar": 71
+      },
+      "revId": "7b034b603deaba6dc65ac79087f76c56ca61200f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
