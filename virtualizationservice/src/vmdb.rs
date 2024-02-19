@@ -1,0 +1,238 @@
+// Copyright 2024, The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+//! Database of VM IDs.
+
+use anyhow::{Context, Result};
+use log::{debug, info};
+use rusqlite::{params, params_from_iter, Connection, OpenFlags, Rows};
+use std::path::PathBuf;
+
+/// Subdirectory to hold the database.
+const DB_DIR: &str = "vmdb";
+
+/// Name of the file that holds the database.
+const DB_FILENAME: &str = "vmids.sqlite";
+
+/// Maximum number of host parameters in a single SQL statement.
+/// (Default value of `SQLITE_LIMIT_VARIABLE_NUMBER` for <= 3.32.0)
+const MAX_VARIABLES: usize = 999;
+
+/// Identifier for a VM and its corresponding secret.
+pub type VmId = [u8; 64];
+
+/// Representation of an on-disk database of VM IDs.
+pub struct VmIdDb {
+    conn: Connection,
+}
+
+impl VmIdDb {
+    /// Connect to the VM ID database file held in the given directory, creating it if necessary.
+    /// The second return value indicates whether a new database file was created.
+    ///
+    /// This function assumes no other threads/processes are attempting to connect concurrently.
+    pub fn new(db_dir: &str) -> Result<(Self, bool)> {
+        let mut db_path = PathBuf::from(db_dir);
+        db_path.push(DB_DIR);
+        if !db_path.exists() {
+            std::fs::create_dir(&db_path).context("failed to create {db_path:?}")?;
+            info!("created persistent db dir {db_path:?}");
+        }
+
+        db_path.push(DB_FILENAME);
+        let (flags, created) = if db_path.exists() {
+            debug!("connecting to existing database {db_path:?}");
+            (
+                OpenFlags::SQLITE_OPEN_READ_WRITE
+                    | OpenFlags::SQLITE_OPEN_URI
+                    | OpenFlags::SQLITE_OPEN_NO_MUTEX,
+                false,
+            )
+        } else {
+            info!("creating fresh database {db_path:?}");
+            (
+                OpenFlags::SQLITE_OPEN_READ_WRITE
+                    | OpenFlags::SQLITE_OPEN_CREATE
+                    | OpenFlags::SQLITE_OPEN_URI
+                    | OpenFlags::SQLITE_OPEN_NO_MUTEX,
+                true,
+            )
+        };
+        let mut result = Self {
+            conn: Connection::open_with_flags(db_path, flags)
+                .context(format!("failed to open/create DB with {flags:?}"))?,
+        };
+
+        if created {
+            result.init_tables().context("failed to create tables")?;
+        }
+        Ok((result, created))
+    }
+
+    /// Create the database table and indices.
+    fn init_tables(&mut self) -> Result<()> {
+        self.conn
+            .execute(
+                "CREATE TABLE IF NOT EXISTS main.vmids (
+                     vm_id BLOB PRIMARY KEY,
+                     user_id INTEGER,
+                     package_name TEXT NOT NULL
+                 ) WITHOUT ROWID;",
+                (),
+            )
+            .context("failed to create table")?;
+        self.conn
+            .execute("CREATE INDEX IF NOT EXISTS main.vmids_pkg_index ON vmids(package_name);", [])
+            .context("Failed to create pkg index")?;
+        self.conn
+            .execute("CREATE INDEX IF NOT EXISTS main.vmids_user_index ON vmids(user_id);", [])
+            .context("Failed to create user index")?;
+        Ok(())
+    }
+
+    /// Add the given VM ID into the database.
+    pub fn add_vm_id(&mut self, vm_id: &VmId, user_id: i32, package_name: &str) -> Result<()> {
+        let _rows = self
+            .conn
+            .execute(
+                "REPLACE INTO main.vmids (vm_id, user_id, package_name) VALUES (?1, ?2, ?3);",
+                params![vm_id, &user_id, package_name],
+            )
+            .context("failed to add VM ID")?;
+        Ok(())
+    }
+
+    /// Remove the given VM IDs from the database.  The collection of IDs is assumed to be smaller
+    /// than the maximum number of SQLite parameters.
+    pub fn delete_vm_ids(&mut self, vm_ids: &[VmId]) -> Result<()> {
+        assert!(vm_ids.len() < MAX_VARIABLES);
+        let mut vars = "?,".repeat(vm_ids.len());
+        vars.pop(); // remove trailing comma
+        let sql = format!("DELETE FROM main.vmids WHERE vm_id IN ({});", vars);
+        let mut stmt = self.conn.prepare(&sql).context("failed to prepare DELETE stmt")?;
+        let _rows = stmt.execute(params_from_iter(vm_ids)).context("failed to delete VM IDs")?;
+        Ok(())
+    }
+
+    /// Return the VM IDs associated with Android user ID `user_id`.
+    pub fn vm_ids_for_user(&mut self, user_id: i32) -> Result<Vec<VmId>> {
+        let mut stmt = self
+            .conn
+            .prepare("SELECT vm_id FROM main.vmids WHERE user_id = ?;")
+            .context("failed to prepare SELECT stmt")?;
+        let rows = stmt.query(params![user_id]).context("query failed")?;
+        Self::vm_ids_from_rows(rows)
+    }
+
+    /// Return the VM IDs associated with `package_name`.
+    pub fn vm_ids_for_package(&mut self, package_name: &str) -> Result<Vec<VmId>> {
+        let mut stmt = self
+            .conn
+            .prepare("SELECT vm_id FROM main.vmids WHERE package_name = ?;")
+            .context("failed to prepare SELECT stmt")?;
+        let rows = stmt.query(params![package_name]).context("query failed")?;
+        Self::vm_ids_from_rows(rows)
+    }
+
+    /// Retrieve a collection of VM IDs from database rows.
+    fn vm_ids_from_rows(mut rows: Rows) -> Result<Vec<VmId>> {
+        let mut vm_ids: Vec<VmId> = Vec::new();
+        while let Some(row) = rows.next().context("failed row unpack")? {
+            match row.get(0) {
+                Ok(vm_id) => vm_ids.push(vm_id),
+                Err(e) => log::error!("failed to parse row: {e:?}"),
+            }
+        }
+
+        Ok(vm_ids)
+    }
+}
+
+#[cfg(test)]
+pub fn new_test_db() -> VmIdDb {
+    let mut db = VmIdDb { conn: Connection::open_in_memory().unwrap() };
+    db.init_tables().unwrap();
+    db
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    const VM_ID1: VmId = [1u8; 64];
+    const VM_ID2: VmId = [2u8; 64];
+    const VM_ID3: VmId = [3u8; 64];
+    const VM_ID4: VmId = [4u8; 64];
+    const VM_ID5: VmId = [5u8; 64];
+
+    #[test]
+    fn test_add_remove() {
+        let mut db = new_test_db();
+        db.add_vm_id(&VM_ID1, 10000, "pkgA").unwrap();
+        db.add_vm_id(&VM_ID2, 10000, "pkgA").unwrap();
+        db.add_vm_id(&VM_ID3, 10000, "pkgA").unwrap();
+        db.add_vm_id(&VM_ID4, 20000, "pkgB").unwrap();
+        db.add_vm_id(&VM_ID5, 30000, "pkgC").unwrap();
+        let empty: Vec<VmId> = Vec::new();
+
+        assert_eq!(vec![VM_ID1, VM_ID2, VM_ID3], db.vm_ids_for_user(10000).unwrap());
+        assert_eq!(vec![VM_ID1, VM_ID2, VM_ID3], db.vm_ids_for_package("pkgA").unwrap());
+        assert_eq!(vec![VM_ID4], db.vm_ids_for_package("pkgB").unwrap());
+        assert_eq!(vec![VM_ID5], db.vm_ids_for_user(30000).unwrap());
+        assert_eq!(empty, db.vm_ids_for_user(40000).unwrap());
+        assert_eq!(empty, db.vm_ids_for_package("notpkg").unwrap());
+
+        db.delete_vm_ids(&[VM_ID2, VM_ID3]).unwrap();
+
+        assert_eq!(vec![VM_ID1], db.vm_ids_for_user(10000).unwrap());
+        assert_eq!(vec![VM_ID1], db.vm_ids_for_package("pkgA").unwrap());
+
+        // OK to delete things that don't exist.
+        db.delete_vm_ids(&[VM_ID2, VM_ID3]).unwrap();
+
+        assert_eq!(vec![VM_ID1], db.vm_ids_for_user(10000).unwrap());
+        assert_eq!(vec![VM_ID1], db.vm_ids_for_package("pkgA").unwrap());
+
+        db.add_vm_id(&VM_ID2, 10000, "pkgA").unwrap();
+        db.add_vm_id(&VM_ID3, 10000, "pkgA").unwrap();
+
+        assert_eq!(vec![VM_ID1, VM_ID2, VM_ID3], db.vm_ids_for_user(10000).unwrap());
+        assert_eq!(vec![VM_ID1, VM_ID2, VM_ID3], db.vm_ids_for_package("pkgA").unwrap());
+        assert_eq!(vec![VM_ID4], db.vm_ids_for_package("pkgB").unwrap());
+        assert_eq!(vec![VM_ID5], db.vm_ids_for_user(30000).unwrap());
+        assert_eq!(empty, db.vm_ids_for_user(40000).unwrap());
+        assert_eq!(empty, db.vm_ids_for_package("notpkg").unwrap());
+    }
+
+    #[test]
+    fn test_invalid_vm_id() {
+        let mut db = new_test_db();
+        db.add_vm_id(&VM_ID3, 10000, "pkgA").unwrap();
+        db.add_vm_id(&VM_ID2, 10000, "pkgA").unwrap();
+        db.add_vm_id(&VM_ID1, 10000, "pkgA").unwrap();
+
+        // Note that results are returned in `vm_id` order, because the table is `WITHOUT ROWID`.
+        assert_eq!(vec![VM_ID1, VM_ID2, VM_ID3], db.vm_ids_for_user(10000).unwrap());
+
+        // Manually insert a row with a VM ID that's the wrong size.
+        db.conn
+            .execute(
+                "REPLACE INTO main.vmids (vm_id, user_id, package_name) VALUES (?1, ?2, ?3);",
+                params![&[99u8; 60], &10000, "pkgA"],
+            )
+            .unwrap();
+
+        // Invalid row is skipped and remainder returned.
+        assert_eq!(vec![VM_ID1, VM_ID2, VM_ID3], db.vm_ids_for_user(10000).unwrap());
+    }
+}
