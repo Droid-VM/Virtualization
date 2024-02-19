@@ -91,4 +91,11 @@ interface IVirtualizationServiceInternal {
 
     /** Returns a read-only file descriptor of the VM DTBO file. */
     ParcelFileDescriptor getDtboFile();
+
+    /**
+     * Notification that state associated with a VM should be removed.
+     *
+     * @param instanceId The ID for the VM.
+     */
+    void removeVmInstance(in byte[64] instanceId);
 }
