@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "86dbb4a5_7f83fb16",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 2133,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-19T07:32:18Z",
+      "side": 1,
+      "message": "Yes, the assumption is valid. The assumption is caused by guest DT, not only by host DT. I\u0027m not sure the detailed reason why you mentioned in non-pVM, but verification for non-pVM is executed like below.\n\n- Virtmgr extract vendor hashtree digest.\n- Virtmgr onstruct DTBO based on extracted value.\n- VIrtmgr passes DTBO to crosvm.\n- Crosvm uses DTBO to construct guest VM DT.\n- In first-stage init, guest VM searches vendor hashtree digest in its DT to enable dm-verity.\n\nCurrently I think it\u0027s due to lack of fstab \u0026 devicetree support on CF, but I\u0027m not 100% confident on it. Would I file a bug and make this as an TODO item?",
+      "parentUuid": "7e6acc77_4fe7f81d",
+      "range": {
+        "startLine": 2131,
+        "startChar": 0,
+        "endLine": 2133,
+        "endChar": 0
+      },
+      "revId": "5a62ce729ed6dd2a4aff5b2788ebef8bab3d4114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11976789_3b2d84c1",
         "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
         "patchSetId": 6
@@ -54,6 +78,30 @@
       "writtenOn": "2024-02-19T07:11:00Z",
       "side": 1,
       "message": "Question + minor suggestion) Can we move this into `buildVmConfigWithVendor`, and explicitly revote permission for `configuringVendorDiskImageRequiresCustomPermission` afterward?",
+      "range": {
+        "startLine": 2164,
+        "startChar": 0,
+        "endLine": 2164,
+        "endChar": 78
+      },
+      "revId": "5a62ce729ed6dd2a4aff5b2788ebef8bab3d4114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58f9c69d_61e09b97",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 2164,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-19T07:32:18Z",
+      "side": 1,
+      "message": "Sure, I also hesitated about whether doing it or not.",
+      "parentUuid": "11976789_3b2d84c1",
       "range": {
         "startLine": 2164,
         "startChar": 0,
