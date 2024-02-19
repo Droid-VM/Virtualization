@@ -145,7 +145,6 @@ rust_test {
         "libx509_cert_nostd",
     ],
     data: [
-        ":rialto_unsigned",
         ":test_rkp_cert_chain",
     ],
     test_suites: ["general-tests"],

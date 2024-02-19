@@ -39,7 +39,8 @@ use vmclient::{DeathReason, VmInstance};
 use vsock::{VsockListener, VsockStream, VMADDR_CID_HOST};
 
 const VIRT_DATA_DIR: &str = "/data/misc/apexdata/com.android.virt";
-const RIALTO_PATH: &str = "/apex/com.android.virt/etc/rialto.bin";
+/// The path to the Rialto kernel binary.
+pub const RIALTO_PATH: &str = "/apex/com.android.virt/etc/rialto.bin";
 const INSTANCE_IMG_NAME: &str = "service_vm_instance.img";
 const INSTANCE_IMG_SIZE_BYTES: i64 = 1 << 20; // 1MB
 const MEMORY_MB: i32 = 300;
