@@ -278,6 +278,52 @@
       },
       "revId": "93ea208f4847ec3ca8b394e72a0bac1cfd370d26",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acc2bbed_31390365",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-20T14:27:07Z",
+      "side": 1,
+      "message": "Can we please document that `trusted_props` is a testing only feature and that pVM firmware will discard any malicious modification made using this?",
+      "range": {
+        "startLine": 34,
+        "startChar": 7,
+        "endLine": 35,
+        "endChar": 12
+      },
+      "revId": "93ea208f4847ec3ca8b394e72a0bac1cfd370d26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec1e0f35_ee2d2f10",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-20T14:27:07Z",
+      "side": 1,
+      "message": "FYI: This will indeed fail if LLPVM_FEAURE \u0026 reference DT is disabled, but I guess reference DT is the pre-requistite to this patch anyway?",
+      "range": {
+        "startLine": 95,
+        "startChar": 23,
+        "endLine": 95,
+        "endChar": 66
+      },
+      "revId": "93ea208f4847ec3ca8b394e72a0bac1cfd370d26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
