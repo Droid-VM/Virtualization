@@ -253,4 +253,12 @@ mod tests {
         assert_eq!(empty, sk_state.vm_id_db.vm_ids_for_app(USER2, APP_B).unwrap());
         assert_eq!(empty, sk_state.vm_id_db.vm_ids_for_user(USER3).unwrap());
     }
+
+    fn performReconciliation(
+        &self,
+        _callback: &Strong<dyn IVirtualizationReconciliationCallback>,
+    ) -> binder::Result<()> {
+        Err(anyhow!("performReconciliation not supported"))
+            .or_binder_exception(ExceptionCode::UNSUPPORTED_OPERATION)
+    }
 }
