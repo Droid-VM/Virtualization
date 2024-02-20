@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8f6a8682_263e8f45",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 2130,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-02-20T07:31:53Z",
+      "side": 1,
+      "message": "I think this code is a bit hard to understand. In order to understand what false in `buildVmConfigWithVendor(vendorDiskImage, false)` means, reader will need to look at the implementation of the `buildVmConfigWithVendor` function. And in general, I find test cases and test helper methods with if conditions harder to read :)\n\nHaving said so, I don\u0027t have a strong opinion. Feel free to leave it as is, if everyone else is ok with the approach.",
+      "parentUuid": "88fbde81_f70044ab",
+      "range": {
+        "startLine": 2130,
+        "startChar": 34,
+        "endLine": 2130,
+        "endChar": 61
+      },
+      "revId": "93ea208f4847ec3ca8b394e72a0bac1cfd370d26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "65ea907d_206aa618",
         "filename": "virtualizationmanager/src/aidl.rs",
         "patchSetId": 9
