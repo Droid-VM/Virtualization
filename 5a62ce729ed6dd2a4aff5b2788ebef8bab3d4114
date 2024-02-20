@@ -115,6 +115,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b6d7ef7f_3fa7575c",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 2133,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-20T03:34:57Z",
+      "side": 1,
+      "message": "BTW, I left a TODO comment. Please close this comment if my explanation is sufficient. Thanks :)",
+      "parentUuid": "b3019dbc_147cf465",
+      "range": {
+        "startLine": 2131,
+        "startChar": 0,
+        "endLine": 2133,
+        "endChar": 0
+      },
+      "revId": "5a62ce729ed6dd2a4aff5b2788ebef8bab3d4114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11976789_3b2d84c1",
         "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
         "patchSetId": 6
@@ -198,6 +222,30 @@
       "side": 1,
       "message": "I proposed to grant the permission in common API for loading vendor image (`builtVmConfigWithVendor`), and revoke the permission immediately if we need test for \u0027no permission\u0027.",
       "parentUuid": "4725af47_34434e46",
+      "range": {
+        "startLine": 2164,
+        "startChar": 0,
+        "endLine": 2164,
+        "endChar": 78
+      },
+      "revId": "5a62ce729ed6dd2a4aff5b2788ebef8bab3d4114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdde9d9f_ebadc151",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 2164,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-20T03:34:57Z",
+      "side": 1,
+      "message": "Done:\n\nI refactored granting or revoking permission to be occurred in `buildVmConfigWithVendor`. And for `configuringVendorDiskImageRequiresCustomPermission`, I put revoking permission once more if `setup` function already revokes the permission, for the visibility.\n\nI think now my code makes everyone happy! Please let me know it\u0027s not good to you.",
+      "parentUuid": "cef183e9_9a56f951",
       "range": {
         "startLine": 2164,
         "startChar": 0,
@@ -292,6 +340,30 @@
       "writtenOn": "2024-02-19T14:13:27Z",
       "side": 1,
       "message": "I think this code might be a little clearer if we used different names for different nodes.\n(root, overlay, untrusted, ... ?)",
+      "range": {
+        "startLine": 72,
+        "startChar": 8,
+        "endLine": 72,
+        "endChar": 12
+      },
+      "revId": "5a62ce729ed6dd2a4aff5b2788ebef8bab3d4114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcb9c214_2e977b19",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-20T03:34:57Z",
+      "side": 1,
+      "message": "I agree with your suggestion. Done.",
+      "parentUuid": "e5af3048_c7ba6112",
       "range": {
         "startLine": 72,
         "startChar": 8,
