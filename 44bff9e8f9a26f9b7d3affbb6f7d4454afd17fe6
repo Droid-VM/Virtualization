@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e144fa76_c80814a3",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-20T10:18:52Z",
+      "side": 1,
+      "message": "We\u0027ve pretty consistently rethrown these as runtime exception - based in part on go/android-api-guidelines#framework-rethrow-remoteexception. It would be very unexpected for the process on the other end (virtmgr) to die, which I think is the only thing that can cause this?",
+      "parentUuid": "363d31b2_e26aa132",
+      "range": {
+        "startLine": 393,
+        "startChar": 20,
+        "endLine": 393,
+        "endChar": 45
+      },
+      "revId": "44bff9e8f9a26f9b7d3affbb6f7d4454afd17fe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f4af3cbc_18597ed7",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 21
