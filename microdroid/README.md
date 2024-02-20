@@ -149,6 +149,22 @@ adb shell /apex/com.android.virt/bin/vm run-microdroid \
 --vendor $VENDOR_IMAGE
 ```
 
+### Building vendor image
+
+To create the vendor image for Microdroid working in non-pVM in advance, follow
+how vendor image for testing purpose is made in
+[tests/vendor_images/Android.bp][test vendor image]. And set the path of vendor
+image for Microdroid on host device's filesystem to
+`/vendor/etc/avf/microdroid/microdroid_vendor.img`. This would make vendor image
+to be protected from malicious modification with sepolicy type
+`vendor_microdroid_file`.
+
+To make the vendor image for Microdroid working in pVM as well, please read
+[verification process of vendor image][verify vendor image].
+
+[test vendor image]: https://android.googlesource.com/platform/packages/modules/Virtualization/+/main/tests/vendor_images/Android.bp
+[verify vendor image]: ./README.md#verification-of-vendor-image
+
 ### Verification of vendor image
 
 Since vendor image of Microdroid is not part of `com.android.virt` APEX, the
@@ -168,8 +184,7 @@ digest by reading [fstab.microdroid].
 
 For non-pVM, virtualizationmanager creates [DTBO] containing vendor hashtree
 digest, and passes to the VM via crosvm option. The vendor hashtree digest is
-obtained by virtualizationmanager from the host Android DT under
-`/avf/reference/`, which may be populated by the [bootloader].
+obtained by virtualizationmanager with extracting from microdroid vendor image.
 
 For pVM, VM reference DT included in [pvmfw config data] is additionally used
 for validating vendor hashtree digest. [Bootloader][bootloader] should append
