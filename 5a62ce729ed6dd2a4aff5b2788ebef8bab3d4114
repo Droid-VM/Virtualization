@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b3019dbc_147cf465",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 2133,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-20T02:27:10Z",
+      "side": 1,
+      "message": "\u003e In first-stage init, guest VM searches vendor hashtree digest in its DT to enable dm-verity.\n\nHere\u0027s the exact answer. First fstab.microdroid leaves information where to read hashtree digest in init stage of VM. https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/microdroid/fstab.microdroid;l\u003d5\n\nBased on fstab.microdroid, first-stage init tries to read hashtree digest written as `/proc/device-tree/avf/vendor_hashtree_descriptor_root_digest`.\n\nBut in Cuttlefish, we don\u0027t have directory `/proc/device-tree`. So we cannot read hashtree digest from there. I haven\u0027t investigated about this in detail, but there\u0027s no `/proc/device-tree` in host \u0026 guest both.\n\nBTW, there\u0027s already a bug mentioning about this issue: b/325094712.",
+      "parentUuid": "107622fb_00668810",
+      "range": {
+        "startLine": 2131,
+        "startChar": 0,
+        "endLine": 2133,
+        "endChar": 0
+      },
+      "revId": "5a62ce729ed6dd2a4aff5b2788ebef8bab3d4114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11976789_3b2d84c1",
         "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
         "patchSetId": 6
