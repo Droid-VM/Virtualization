@@ -115,6 +115,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "179baf22_7470109f",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 2130,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-20T12:14:09Z",
+      "side": 1,
+      "message": "I always dislike boolean parameters like this, since they are mysterious at the call site. One solution might be to add\n```\nenum CustomPermission { Granted, Revoked }\n```\n\nBut I\u0027m ok with either doing that or pushing it back out to the callers.",
+      "parentUuid": "2525461d_ab26ca91",
+      "range": {
+        "startLine": 2130,
+        "startChar": 34,
+        "endLine": 2130,
+        "endChar": 61
+      },
+      "revId": "93ea208f4847ec3ca8b394e72a0bac1cfd370d26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "65ea907d_206aa618",
         "filename": "virtualizationmanager/src/aidl.rs",
         "patchSetId": 9
@@ -174,6 +198,30 @@
       "side": 1,
       "message": "Yes, it does: https://doc.rust-lang.org/stable/reference/tokens.html#string-literals",
       "parentUuid": "ea30f140_fa4069cd",
+      "range": {
+        "startLine": 406,
+        "startChar": 19,
+        "endLine": 406,
+        "endChar": 133
+      },
+      "revId": "93ea208f4847ec3ca8b394e72a0bac1cfd370d26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12f5f93a_e1a5beb6",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-20T12:14:09Z",
+      "side": 1,
+      "message": "How about something like:\n\"Passing vendor hashtree digest to pvmfw. This will be rejected if it doesn\u0027t match the trusted digest in the pvmfw config, causing the VM to fail to start.\"\nBut we should only say that if we are trying to start a protected VM.",
+      "parentUuid": "e2d87c31_03e8134a",
       "range": {
         "startLine": 406,
         "startChar": 19,
