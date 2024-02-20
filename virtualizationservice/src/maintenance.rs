@@ -18,6 +18,7 @@ use binder::{BinderFeatures, ExceptionCode, Interface, IntoBinderResult, Strong}
 use virtualizationmaintenance::IVirtualizationMaintenance::{
     BnVirtualizationMaintenance, IVirtualizationMaintenance,
 };
+use virtualizationmaintenance::IVirtualizationReconciliationCallback::IVirtualizationReconciliationCallback;
 
 pub(crate) fn new_binder() -> Strong<dyn IVirtualizationMaintenance> {
     BnVirtualizationMaintenance::new_binder(
@@ -39,6 +40,14 @@ impl IVirtualizationMaintenance for VirtualizationMaintenanceService {
 
     fn userRemoved(&self, _user_id: i32) -> binder::Result<()> {
         Err(anyhow!("userRemoved not supported"))
+            .or_binder_exception(ExceptionCode::UNSUPPORTED_OPERATION)
+    }
+
+    fn performReconciliation(
+        &self,
+        _callback: &Strong<dyn IVirtualizationReconciliationCallback>,
+    ) -> binder::Result<()> {
+        Err(anyhow!("performReconciliation not supported"))
             .or_binder_exception(ExceptionCode::UNSUPPORTED_OPERATION)
     }
 }
