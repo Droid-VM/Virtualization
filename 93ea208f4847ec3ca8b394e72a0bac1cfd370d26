@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc0a64ff_f452dce6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-02-20T07:09:54Z",
+      "side": 1,
+      "message": "Please also get a +2 from Alan :)",
+      "revId": "93ea208f4847ec3ca8b394e72a0bac1cfd370d26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7c5a49e_8163145c",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 2130,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-02-20T07:09:54Z",
+      "side": 1,
+      "message": "This argument feels a bit awkward here. I think that configuringVendorDiskImageRequiresCustomPermission can manually revoke the permission, there is no need for having the logic here. Likewise, the positive test cases for microdroid vendor partition feature can explicitly grant the USE_CUSTOM_VIRTUAL_MACHINE permission. This way test cases will be easier to read.",
+      "range": {
+        "startLine": 2130,
+        "startChar": 34,
+        "endLine": 2130,
+        "endChar": 61
+      },
+      "revId": "93ea208f4847ec3ca8b394e72a0bac1cfd370d26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65ea907d_206aa618",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-02-20T07:09:54Z",
+      "side": 1,
+      "message": "Line too long",
+      "range": {
+        "startLine": 406,
+        "startChar": 19,
+        "endLine": 406,
+        "endChar": 133
+      },
+      "revId": "93ea208f4847ec3ca8b394e72a0bac1cfd370d26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
