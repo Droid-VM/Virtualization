@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04dbe49a_4ec182f1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-02-20T07:32:38Z",
+      "side": 1,
+      "message": "What will happen with an existing VM after OTA that introduces llpvm feature? What exact error will the caller receive? Is it going to be VirtualMachineException (i think we should throw this) or will it be a RuntimeException (i think we shouldn\u0027t throw this)?\n\nIf possible, we should add a unit test (ideally end-to-end test, but this is probably quite tricky) that simulates such scenario.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 4
+      },
+      "revId": "44bff9e8f9a26f9b7d3affbb6f7d4454afd17fe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "363d31b2_e26aa132",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-02-20T07:32:38Z",
+      "side": 1,
+      "message": "This will crash the app process. Should we instead treat RemoteException as \"llpm feature is disabled\"?",
+      "range": {
+        "startLine": 393,
+        "startChar": 20,
+        "endLine": 393,
+        "endChar": 45
+      },
+      "revId": "44bff9e8f9a26f9b7d3affbb6f7d4454afd17fe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4af3cbc_18597ed7",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-02-20T07:32:38Z",
+      "side": 1,
+      "message": "Why not a VirtualMachineException?",
+      "range": {
+        "startLine": 507,
+        "startChar": 28,
+        "endLine": 507,
+        "endChar": 53
+      },
+      "revId": "44bff9e8f9a26f9b7d3affbb6f7d4454afd17fe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
