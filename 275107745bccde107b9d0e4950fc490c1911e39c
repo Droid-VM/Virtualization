@@ -22,6 +22,30 @@
       },
       "revId": "275107745bccde107b9d0e4950fc490c1911e39c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c79c1a3_73cad8ca",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-20T12:14:47Z",
+      "side": 0,
+      "message": "Good point. I put it back, but with a slightly different rationale.\nTests that need the permission to be granted to revoked should do so explicitly; but by default we should run without it.",
+      "parentUuid": "3575d9a5_25b5f4f2",
+      "range": {
+        "startLine": 145,
+        "startChar": 8,
+        "endLine": 151,
+        "endChar": 79
+      },
+      "revId": "275107745bccde107b9d0e4950fc490c1911e39c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
