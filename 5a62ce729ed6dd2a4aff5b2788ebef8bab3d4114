@@ -329,6 +329,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cd9c4c9c_ab95112a",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-20T03:51:03Z",
+      "side": 1,
+      "message": "\u003e But pvmfw will do that check and complain anyway, so do we need anything here?\n\n\u003e Since pvmfw doesn\u0027t understand contents in VM reference DT, I proposed to log here for explaining what may go wrong and/or how to address it. WDYT?\n\nI think it\u0027s better to have log as `info` level.\n\nFirst, I agree with @jaewan@google.com\u0027s opinion that we need the log for debug purpose. This will provide the root cause directly for debuggers.\n\nHowever, debuggers would find the log with changing the log level though we set this log as `info` level. And `warn` level may make the logs more verbose.\n\nWould you agree with this suggestion? @jaewan@google.com @alanstokes@google.com",
+      "parentUuid": "05cdfdfd_e7d90bc8",
+      "range": {
+        "startLine": 406,
+        "startChar": 19,
+        "endLine": 406,
+        "endChar": 127
+      },
+      "revId": "5a62ce729ed6dd2a4aff5b2788ebef8bab3d4114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e5af3048_c7ba6112",
         "filename": "virtualizationmanager/src/dt_overlay.rs",
         "patchSetId": 6
