@@ -24,6 +24,7 @@ use android_hardware_security_secretkeeper::aidl::android::hardware::security::s
 };
 use android_os_permissions_aidl::aidl::android::os::IPermissionController;
 use android_system_virtualizationcommon::aidl::android::system::virtualizationcommon;
+use android_system_virtualizationmaintenance::aidl::android::system::virtualizationmaintenance;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice;
 use android_system_virtualizationservice_internal as android_vs_internal;
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice;
@@ -52,6 +53,7 @@ use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex, Weak};
 use tombstoned_client::{DebuggerdDumpType, TombstonedConnection};
 use virtualizationcommon::Certificate::Certificate;
+use virtualizationmaintenance::IVirtualizationMaintenance::IVirtualizationMaintenance;
 use virtualizationservice::{
     AssignableDevice::AssignableDevice, VirtualMachineDebugInfo::VirtualMachineDebugInfo,
 };
@@ -71,13 +73,9 @@ use vsock::{VsockListener, VsockStream};
 /// The unique ID of a VM used (together with a port number) for vsock communication.
 pub type Cid = u32;
 
-pub const BINDER_SERVICE_IDENTIFIER: &str = "android.system.virtualizationservice";
-
 /// Interface name for the Secretkeeper HAL.
-const SECRETKEEPER_SERVICE: &str = "android.hardware.security.secretkeeper.ISecretkeeper";
-
-/// Secretkeeper instances to look for.
-const SECRETKEEPER_INSTANCES: [&str; 2] = ["default", "nonsecure"];
+// TODO: this should be /default
+const SECRETKEEPER_SERVICE: &str = "android.hardware.security.secretkeeper.ISecretkeeper/nonsecure";
 
 /// Directory in which to write disk image files used while running VMs.
 pub const TEMPORARY_DIRECTORY: &str = "/data/misc/virtualizationservice";
@@ -177,6 +175,7 @@ fn is_valid_guest_cid(cid: Cid) -> bool {
 
 /// Singleton service for allocating globally-unique VM resources, such as the CID, and running
 /// singleton servers, like tombstone receiver.
+#[derive(Clone)]
 pub struct VirtualizationServiceInternal {
     state: Arc<Mutex<GlobalState>>,
 }
@@ -410,11 +409,7 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
     }
 }
 
-// TODO: connect this to new AIDL interface definition
-// impl IVirtualizationServiceMaintenance for VirtualizationServiceInternal {
-#[allow(dead_code)]
-#[allow(non_snake_case)]
-impl VirtualizationServiceInternal {
+impl IVirtualizationMaintenance for VirtualizationServiceInternal {
     fn packageRemoved(&self, package_name: &str) -> binder::Result<()> {
         let state = &mut *self.state.lock().unwrap();
         if let Some(sk_state) = &mut state.sk_state {
@@ -558,18 +553,18 @@ impl VmSecretsState {
     }
 
     fn find_sk() -> Option<binder::Strong<dyn ISecretkeeper>> {
-        for instance in &SECRETKEEPER_INSTANCES {
-            let name = format!("{SECRETKEEPER_SERVICE}/{instance}");
-            if let Ok(true) = binder::is_declared(&name) {
-                match binder::get_interface(&name) {
-                    Ok(sk) => return Some(sk),
-                    Err(e) => error!("failed to connect to {name}: {e:?}"),
+        if let Ok(true) = binder::is_declared(SECRETKEEPER_SERVICE) {
+            match binder::get_interface(SECRETKEEPER_SERVICE) {
+                Ok(sk) => Some(sk),
+                Err(e) => {
+                    error!("failed to connect to {SECRETKEEPER_SERVICE}: {e:?}");
+                    None
                 }
-            } else {
-                info!("instance {name} not declared");
             }
+        } else {
+            info!("instance {SECRETKEEPER_SERVICE} not declared");
+            None
         }
-        None
     }
 
     /// Delete the VM IDs associated with Android user ID `user_id`.
