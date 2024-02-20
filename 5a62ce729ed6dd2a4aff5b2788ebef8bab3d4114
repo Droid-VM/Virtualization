@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "107622fb_00668810",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 2133,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-20T01:31:40Z",
+      "side": 1,
+      "message": "As you mentioned above, for botting non-pVM, content of the host DT isn\u0027t necessary for booting vendor partition. virtmgr will fill necessary vendor hashtree digest.\n\nCould you explain me bit more detail about \u0027assumption is caused by guest DT\u0027? What\u0027s special for running microdroid with vendor partition?",
+      "parentUuid": "86dbb4a5_7f83fb16",
+      "range": {
+        "startLine": 2131,
+        "startChar": 0,
+        "endLine": 2133,
+        "endChar": 0
+      },
+      "revId": "5a62ce729ed6dd2a4aff5b2788ebef8bab3d4114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11976789_3b2d84c1",
         "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
         "patchSetId": 6
@@ -138,6 +162,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cef183e9_9a56f951",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 2164,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-20T01:31:40Z",
+      "side": 1,
+      "message": "I proposed to grant the permission in common API for loading vendor image (`builtVmConfigWithVendor`), and revoke the permission immediately if we need test for \u0027no permission\u0027.",
+      "parentUuid": "4725af47_34434e46",
+      "range": {
+        "startLine": 2164,
+        "startChar": 0,
+        "endLine": 2164,
+        "endChar": 78
+      },
+      "revId": "5a62ce729ed6dd2a4aff5b2788ebef8bab3d4114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "806d04f3_27f2a54c",
         "filename": "virtualizationmanager/src/aidl.rs",
         "patchSetId": 6
@@ -185,6 +233,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "05cdfdfd_e7d90bc8",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-20T01:31:40Z",
+      "side": 1,
+      "message": "pvmfw will only say \u0027reference DT property doesn\u0027t match as expected, prop_name\u003dXX, expected\u003dYY, actual\u003dZZ\u0027, so developer wouldn\u0027t know why such mismatch happens.\n\nSince pvmfw doesn\u0027t understand contents in VM reference DT, I proposed to log here for explaining what may go wrong and/or how to address it. WDYT?",
+      "parentUuid": "133a6824_a7b64dd5",
+      "range": {
+        "startLine": 406,
+        "startChar": 19,
+        "endLine": 406,
+        "endChar": 127
+      },
+      "revId": "5a62ce729ed6dd2a4aff5b2788ebef8bab3d4114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e5af3048_c7ba6112",
         "filename": "virtualizationmanager/src/dt_overlay.rs",
         "patchSetId": 6
@@ -219,6 +291,30 @@
       "writtenOn": "2024-02-19T14:13:27Z",
       "side": 1,
       "message": "What does this actually do? (The example above doesn\u0027t seem to show it.)",
+      "range": {
+        "startLine": 85,
+        "startChar": 1,
+        "endLine": 85,
+        "endChar": 66
+      },
+      "revId": "5a62ce729ed6dd2a4aff5b2788ebef8bab3d4114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13193219_deafe8a6",
+        "filename": "virtualizationmanager/src/dt_overlay.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-20T01:31:40Z",
+      "side": 1,
+      "message": "read VM reference DT from host DT and overlay onto the overlay DT.",
+      "parentUuid": "e624ba8f_eeb9a751",
       "range": {
         "startLine": 85,
         "startChar": 1,
