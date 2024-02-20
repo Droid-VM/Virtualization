@@ -20,12 +20,14 @@ mod remote_provisioning;
 mod rkpvm;
 pub mod vmdb;
 
-use crate::aidl::{
-    remove_temporary_dir, BINDER_SERVICE_IDENTIFIER, TEMPORARY_DIRECTORY,
-    VirtualizationServiceInternal
-};
+use crate::aidl::{remove_temporary_dir, TEMPORARY_DIRECTORY, VirtualizationServiceInternal};
 use android_logger::{Config, FilterBuilder};
-use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IVirtualizationServiceInternal::BnVirtualizationServiceInternal;
+use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::{
+    IVirtualizationServiceInternal::BnVirtualizationServiceInternal,
+};
+use android_system_virtualizationmaintenance::aidl::android::system::virtualizationmaintenance::{
+    IVirtualizationMaintenance::BnVirtualizationMaintenance,
+};
 use anyhow::Error;
 use binder::{register_lazy_service, BinderFeatures, ProcessState, ThreadState};
 use log::{info, LevelFilter};
@@ -36,6 +38,11 @@ use std::path::Path;
 const LOG_TAG: &str = "VirtualizationService";
 pub(crate) const REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME: &str =
     "android.hardware.security.keymint.IRemotelyProvisionedComponent/avf";
+
+/// Name under which the internal service is registered with service manager.
+pub const INTERNAL_SERVICE_NAME: &str = "android.system.virtualizationservice";
+/// Name under which the maintenance service is registered with service manager.
+pub const MAINTENANCE_SERVICE_NAME: &str = "android.system.virtualizationmaintenance";
 
 fn get_calling_pid() -> pid_t {
     ThreadState::get_calling_pid()
@@ -66,23 +73,29 @@ fn main() {
     ProcessState::start_thread_pool();
 
     let service = VirtualizationServiceInternal::init();
-    let service = BnVirtualizationServiceInternal::new_binder(service, BinderFeatures::default());
-    register_lazy_service(BINDER_SERVICE_IDENTIFIER, service.as_binder()).unwrap();
-    info!("Registered Binder service {}.", BINDER_SERVICE_IDENTIFIER);
+    let internal_service =
+        BnVirtualizationServiceInternal::new_binder(service.clone(), BinderFeatures::default());
+    register(INTERNAL_SERVICE_NAME, internal_service);
 
     if cfg!(remote_attestation) {
         // The IRemotelyProvisionedComponent service is only supposed to be triggered by rkpd for
         // RKP VM attestation.
         let remote_provisioning_service = remote_provisioning::new_binder();
-        register_lazy_service(
-            REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME,
-            remote_provisioning_service.as_binder(),
-        )
-        .unwrap();
-        info!("Registered Binder service {}.", REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME);
+        register(REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME, remote_provisioning_service)
+    }
+
+    if cfg!(llpvm_changes) {
+        let maintenance_service =
+            BnVirtualizationMaintenance::new_binder(service.clone(), BinderFeatures::default());
+        register(MAINTENANCE_SERVICE_NAME, maintenance_service);
     }
 
     ProcessState::join_thread_pool();
+}
+
+fn register<T: binder::FromIBinder + ?Sized>(name: &str, service: binder::Strong<T>) {
+    register_lazy_service(name, service.as_binder()).unwrap();
+    info!("Registered Binder service {name}.");
 }
 
 /// Remove any files under `TEMPORARY_DIRECTORY`.
