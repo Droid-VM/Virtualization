@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "88fbde81_f70044ab",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 2130,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-20T07:22:52Z",
+      "side": 1,
+      "message": "It sounds like opposite from the other comment. \n\nhttps://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2966918/comment/11976789_3b2d84c1/\n\nHmm, would it be better to rollback with calling `grantPermission` \u0026 `revokePermission` directly from test methods, not using `buildVmConfigWithVendor`? No strong opinion from me about 2 suggestions.\n\nHowever, I don\u0027t want to do removing `isPermissionGranted` parameter only with keeping `grantPermission` in `buildVmConfigWithVendor`. It can give lots of confusion \u0026 make tests strange.",
+      "parentUuid": "b7c5a49e_8163145c",
+      "range": {
+        "startLine": 2130,
+        "startChar": 34,
+        "endLine": 2130,
+        "endChar": 61
+      },
+      "revId": "93ea208f4847ec3ca8b394e72a0bac1cfd370d26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "65ea907d_206aa618",
         "filename": "virtualizationmanager/src/aidl.rs",
         "patchSetId": 9
