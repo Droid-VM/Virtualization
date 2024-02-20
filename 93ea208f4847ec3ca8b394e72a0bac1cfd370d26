@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2525461d_ab26ca91",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 2130,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-20T07:39:02Z",
+      "side": 1,
+      "message": "I think they would say opposite opinion of yours if there is. @jaewan@google.com @alanstokes@google.com\nI\u0027ll wait their response until tonight, and continue to work tomorrow then.\n\nAnd again, since I hesitated between 2 approach from the initial patchset so I have no strong opinion here.",
+      "parentUuid": "8f6a8682_263e8f45",
+      "range": {
+        "startLine": 2130,
+        "startChar": 34,
+        "endLine": 2130,
+        "endChar": 61
+      },
+      "revId": "93ea208f4847ec3ca8b394e72a0bac1cfd370d26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "65ea907d_206aa618",
         "filename": "virtualizationmanager/src/aidl.rs",
         "patchSetId": 9
@@ -102,6 +126,30 @@
       "writtenOn": "2024-02-20T07:09:54Z",
       "side": 1,
       "message": "Line too long",
+      "range": {
+        "startLine": 406,
+        "startChar": 19,
+        "endLine": 406,
+        "endChar": 133
+      },
+      "revId": "93ea208f4847ec3ca8b394e72a0bac1cfd370d26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea30f140_fa4069cd",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-20T07:39:02Z",
+      "side": 1,
+      "message": "I can make the sentence shorter like below, but I\u0027m not sure it makes everyone happy, since I think shorter one gives less information via the log. HDYT? @jaewan@google.com\n\n```\nPvmfw will validate if it\u0027s same with expected when it exists in config data.\n```\n\nOr, does rust grammar allow to put a single string with multiple lines of code? I might have forgotten how to...",
+      "parentUuid": "65ea907d_206aa618",
       "range": {
         "startLine": 406,
         "startChar": 19,
