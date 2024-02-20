@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "514897e1_0fd8006b",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-02-20T18:13:30Z",
+      "side": 1,
+      "message": "I think it will be easier to keep this returning the concrete type rather than a binder reference, so that the concrete type can implement both services.",
+      "revId": "fc9986198cc4ebe1e027b3f923a1adf645626952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cafb95be_5bb396e3",
+        "filename": "virtualizationservice/src/maintenance.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-02-20T18:13:30Z",
+      "side": 1,
+      "message": "super-nit: I think empty structs without braces are more common.",
+      "revId": "fc9986198cc4ebe1e027b3f923a1adf645626952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "075aaa19_bfb5f811",
+        "filename": "virtualizationservice/src/maintenance.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-02-20T18:13:30Z",
+      "side": 1,
+      "message": "We can put this here for now, but I think we\u0027re going to need a common data structure (say `VirtualizationServiceInternal`) that implements both `IVirtualizationServiceInternal` and `IVirtualizationMaintenance` -- at which point this code might be better in `aidl.rs`.",
+      "revId": "fc9986198cc4ebe1e027b3f923a1adf645626952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13c76d99_aacdef1d",
+        "filename": "virtualizationservice/src/maintenance.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-02-20T18:13:30Z",
+      "side": 1,
+      "message": "super-nit/personal preference: I\u0027d normally put this one line higher and without the `!`",
+      "revId": "fc9986198cc4ebe1e027b3f923a1adf645626952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
