@@ -21,7 +21,22 @@ interface IAttestationService {
     const int PORT = 5679;
 
     /**
-     * Requests attestation for testing.
+     * Signs a message with the last remotely attested key.
+     *
+     * @param message the message to sign.
+     * @return the DER-encoded ECDSA signature of the message.
+     */
+    byte[] signWithAttestationKey(in byte[] message);
+
+    /**
+     * Requests attestation with {@link AVmPayload_requestAttestation} API.
+     *
+     * @return the attestation certificate chain when attestation is successful.
+     */
+    byte[] requestAttestation();
+
+    /**
+     * Requests attestation for testing with {@link AVmPayload_requestAttestationForTesting} API.
      *
      * A fake key pair should be provisioned with the call to
      * {@link VirtualMachine#enableTestAttestation()} before calling this method.
