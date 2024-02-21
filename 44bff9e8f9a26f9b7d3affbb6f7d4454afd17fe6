@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "470e5e2b_08e235ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-21T14:30:03Z",
+      "side": 1,
+      "message": "Exiting VMs are loaded using `VirtualMachine load(@NonNull Context context, @NonNull String name)` which will throw `VirtualMachineException(\"instance_id file missing\")`. \n\n\u003e ideally end-to-end test\n\nYep I think it will be good to have a test loading a VM from directory without instance_id  file \u0026 verify that it the  thrown error is the expected one. Let me create a bug for that. But lets not block this patch for it. Thanks",
+      "parentUuid": "04dbe49a_4ec182f1",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 4
+      },
+      "revId": "44bff9e8f9a26f9b7d3affbb6f7d4454afd17fe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "363d31b2_e26aa132",
@@ -71,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59cabee1_85e0237e",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-21T14:30:03Z",
+      "side": 1,
+      "message": "IIUC, `RemoteException` will be thrown if getBinder() returns error. isFeatureEnabled() returning False \u003d\u003e mInstanceIdPath \u003d null \u0026 no exception will be thrown.",
+      "parentUuid": "e144fa76_c80814a3",
+      "range": {
+        "startLine": 393,
+        "startChar": 20,
+        "endLine": 393,
+        "endChar": 45
+      },
+      "revId": "44bff9e8f9a26f9b7d3affbb6f7d4454afd17fe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4af3cbc_18597ed7",
@@ -84,6 +132,30 @@
       "writtenOn": "2024-02-20T07:32:38Z",
       "side": 1,
       "message": "Why not a VirtualMachineException?",
+      "range": {
+        "startLine": 507,
+        "startChar": 28,
+        "endLine": 507,
+        "endChar": 53
+      },
+      "revId": "44bff9e8f9a26f9b7d3affbb6f7d4454afd17fe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eac3ffba_8cf3d16c",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-21T14:30:03Z",
+      "side": 1,
+      "message": "See Alan\u0027s reply on other comment. Rethrowing RemoteException as runtime exception seems to be the paatern in the rest of the Virtualization Javalib",
+      "parentUuid": "f4af3cbc_18597ed7",
       "range": {
         "startLine": 507,
         "startChar": 28,
