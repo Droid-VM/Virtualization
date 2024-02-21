@@ -485,6 +485,13 @@ impl<'a> FdtNodeMut<'a> {
         Ok(next.map(|(offset, depth)| (Self { fdt: self.fdt, offset }, depth)))
     }
 
+    /// Returns the next node skipping subnodes.
+    pub fn next_node_skip_subnodes(self, depth: usize) -> Result<Option<(Self, usize)>> {
+        let next = self.fdt.next_node_skip_subnodes(self.offset, depth)?;
+
+        Ok(next.map(|(offset, depth)| (Self { fdt: self.fdt, offset }, depth)))
+    }
+
     /// Deletes this and returns the next node
     pub fn delete_and_next_node(self, depth: usize) -> Result<Option<(Self, usize)>> {
         let next_node = self.fdt.next_node_skip_subnodes(self.offset, depth)?;
