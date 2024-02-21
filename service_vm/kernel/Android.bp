@@ -7,10 +7,21 @@ python_binary_host {
     srcs: ["extract_microdroid_kernel_hashes.py"],
 }
 
-genrule {
+// HACK: use cc_genrule for arch-specific properties
+cc_genrule {
     name: "microdroid_kernel_hashes_rs",
-    srcs: [":microdroid_kernel"],
+    srcs: [":empty_file"],
     out: ["lib.rs"],
+    arch: {
+        arm64: {
+            srcs: [":microdroid_kernel_signed"], // before lz4 compression
+            exclude_srcs: [":empty_file"],
+        },
+        x86_64: {
+            srcs: [":microdroid_kernel_signed"], // before lz4 compression
+            exclude_srcs: [":empty_file"],
+        },
+    },
     tools: [
         "extract_microdroid_kernel_hashes",
         "avbtool",
