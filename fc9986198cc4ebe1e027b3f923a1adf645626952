@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "31091f32_d3c02422",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-21T14:33:15Z",
+      "side": 1,
+      "message": "I was thinking that the two service impls could share some state?\nSo that ideally the maintenance bits of the internal service would end up in maintenance.rs.\n\nBut we can change it when we get there?",
+      "parentUuid": "514897e1_0fd8006b",
+      "revId": "fc9986198cc4ebe1e027b3f923a1adf645626952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cafb95be_5bb396e3",
         "filename": "virtualizationservice/src/maintenance.rs",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2024-02-20T18:13:30Z",
       "side": 1,
       "message": "super-nit: I think empty structs without braces are more common.",
+      "revId": "fc9986198cc4ebe1e027b3f923a1adf645626952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f1fd043_34c0ae66",
+        "filename": "virtualizationservice/src/maintenance.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-21T14:33:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cafb95be_5bb396e3",
       "revId": "fc9986198cc4ebe1e027b3f923a1adf645626952",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -65,6 +101,24 @@
       "writtenOn": "2024-02-20T18:13:30Z",
       "side": 1,
       "message": "super-nit/personal preference: I\u0027d normally put this one line higher and without the `!`",
+      "revId": "fc9986198cc4ebe1e027b3f923a1adf645626952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ba75237_dad7d71d",
+        "filename": "virtualizationservice/src/maintenance.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-21T14:33:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13c76d99_aacdef1d",
       "revId": "fc9986198cc4ebe1e027b3f923a1adf645626952",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
