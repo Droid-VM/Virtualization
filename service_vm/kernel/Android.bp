@@ -11,7 +11,7 @@ genrule {
     name: "microdroid_kernel_hashes_rs",
     srcs: [
         ":microdroid_kernel",
-        ":microdroid_gki-android14-6.1_kernel",
+        ":microdroid_gki-android14-6.1_kernel_signed",
     ],
     out: ["lib.rs"],
     tools: [
@@ -20,7 +20,7 @@ genrule {
     ],
     cmd: "$(location extract_microdroid_kernel_hashes) --avbtool $(location avbtool) " +
         "--kernel $(location :microdroid_kernel) " +
-        "$(location :microdroid_gki-android14-6.1_kernel) " +
+        "$(location :microdroid_gki-android14-6.1_kernel_signed) " +
         "> $(out)",
 }
 
