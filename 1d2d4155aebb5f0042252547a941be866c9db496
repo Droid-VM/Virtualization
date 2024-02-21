@@ -16,6 +16,24 @@
       "message": "Just to check: is `srcs` guaranteed to be in the order they\u0027re mentioned?",
       "revId": "1d2d4155aebb5f0042252547a941be866c9db496",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2402b50_2f8e45cc",
+        "filename": "apex/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-21T17:38:35Z",
+      "side": 1,
+      "message": "There isn\u0027t a definitive spec for this stuff, so nothing is guaranteed.\nBut they are in fact in that order, and the example given for `soong_config_module_type` specifies exactly what the output is for a complex case and it is in the order they appear in the rule, which is encouraging..\nI\u0027m reasonably sure they won\u0027t change it arbitrarily.",
+      "parentUuid": "ef91a1fc_0fa1ecb0",
+      "revId": "1d2d4155aebb5f0042252547a941be866c9db496",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
