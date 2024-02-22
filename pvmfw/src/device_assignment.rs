@@ -733,6 +733,24 @@ impl DeviceAssignmentInfo {
             compatible = filtered_pviommu.delete_and_next_compatible(Self::PVIOMMU_COMPATIBLE)?;
         }
 
+        // Removes any dangling reference from __symbols__
+        if let Some(symbols) = fdt.symbols()? {
+            let mut removed = vec![];
+            for prop in symbols.properties()? {
+                let path = CStr::from_bytes_with_nul(prop.value()?)
+                    .map_err(|_| DeviceAssignmentError::Internal)?;
+                if fdt.node(path)?.is_none() {
+                    let name = prop.name()?;
+                    removed.push(CString::from(name));
+                }
+            }
+
+            let mut symbols = fdt.symbols_mut()?.unwrap();
+            for name in removed {
+                symbols.nop_property(&name)?;
+            }
+        }
+
         Ok(pviommu_phandles)
     }
 
@@ -1017,6 +1035,40 @@ mod tests {
         });
 
         assert_eq!(properties, expected);
+    }
+
+    #[test]
+    fn device_info_patch_no_pviommus() {
+        let mut fdt_data = fs::read(FDT_WITHOUT_IOMMUS_FILE_PATH).unwrap();
+        let mut vm_dtbo_data = fs::read(VM_DTBO_FILE_PATH).unwrap();
+        let mut data = vec![0_u8; fdt_data.len() + vm_dtbo_data.len()];
+        let fdt = Fdt::from_mut_slice(&mut fdt_data).unwrap();
+        let vm_dtbo = VmDtbo::from_mut_slice(&mut vm_dtbo_data).unwrap();
+        let platform_dt = Fdt::create_empty_tree(data.as_mut_slice()).unwrap();
+
+        let hypervisor = MockHypervisor {
+            mmio_tokens: [((0x9, 0xFF), 0x300)].into(),
+            iommu_tokens: BTreeMap::new(),
+        };
+        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor).unwrap().unwrap();
+        device_info.filter(vm_dtbo).unwrap();
+
+        // SAFETY: Damaged VM DTBO wouldn't be used after this unsafe block.
+        unsafe {
+            platform_dt.apply_overlay(vm_dtbo.as_mut()).unwrap();
+        }
+        device_info.patch(platform_dt).unwrap();
+
+        let root = platform_dt.root().unwrap();
+        let compatible = root.next_compatible(cstr!("pkvm,pviommu")).unwrap();
+        assert_eq!(None, compatible);
+
+        if let Some(symbols) = platform_dt.symbols().unwrap() {
+            for prop in symbols.properties().unwrap() {
+                let path = CStr::from_bytes_with_nul(prop.value().unwrap()).unwrap();
+                assert_ne!(None, platform_dt.node(path).unwrap());
+            }
+        }
     }
 
     #[test]
