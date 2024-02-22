@@ -73,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8dead5f6_74e331bd",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-22T12:15:33Z",
+      "side": 1,
+      "message": "better",
+      "parentUuid": "e71e6f9d_600fe315",
+      "range": {
+        "startLine": 816,
+        "startChar": 16,
+        "endLine": 816,
+        "endChar": 52
+      },
+      "revId": "7a7bbbd7d9523c4bae4ba49730339be443053e20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "03752ba4_c2cc8f14",
         "filename": "virtualizationmanager/src/crosvm.rs",
         "patchSetId": 1
@@ -107,6 +131,30 @@
       "writtenOn": "2024-02-22T11:59:56Z",
       "side": 1,
       "message": "I\u0027m not convinced we should panic on bad input.\n\nYou might want the Rust magic that transforms an iterator of Result into a Result\u003cVec\u003e, something like this:\n```\nlet owned: Vec\u003cCString\u003e \u003d\n            profiles.iter().map(|s| CString::new(s.clone())?).collect::\u003cResult\u003c_, _\u003e().or_binder_exception(ExceptionCode::EX_ILLEGAL_ARGUMENT);\n```",
+      "range": {
+        "startLine": 398,
+        "startChar": 60,
+        "endLine": 398,
+        "endChar": 66
+      },
+      "revId": "7a7bbbd7d9523c4bae4ba49730339be443053e20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72eb27a7_9ec0d5b6",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-22T12:15:33Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "d97894e4_2342829b",
       "range": {
         "startLine": 398,
         "startChar": 60,
