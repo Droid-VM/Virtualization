@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ea32852_042ae5d5",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-22T16:34:38Z",
+      "side": 1,
+      "message": "Why is this done in `patch_pviommus`? Move it to `patch` (or a dedicated function e.g. `{trim,cleanup,filter_dangling}_symbols`)?\n\nAnd, for good measure, should it be called after all the `device.patch()`?",
+      "range": {
+        "startLine": 736,
+        "startChar": 8,
+        "endLine": 736,
+        "endChar": 58
+      },
+      "revId": "7d8e94ec0c45fb0e76fd74b5456abc45d7f9cd16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
