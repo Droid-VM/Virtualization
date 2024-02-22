@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bae5781_9583931c",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-22T05:54:36Z",
+      "side": 1,
+      "message": "Is this profile guaranteed to allow all CPUs? (i.e. compatible with host-cpu-topology?)",
+      "range": {
+        "startLine": 813,
+        "startChar": 29,
+        "endLine": 813,
+        "endChar": 46
+      },
+      "revId": "7a7bbbd7d9523c4bae4ba49730339be443053e20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14465615_8d0c40ac",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-22T05:54:36Z",
+      "side": 1,
+      "message": "This causes a crash. You can replace this with `?` so that error is returned and then eventually printed.",
+      "range": {
+        "startLine": 816,
+        "startChar": 16,
+        "endLine": 816,
+        "endChar": 52
+      },
+      "revId": "7a7bbbd7d9523c4bae4ba49730339be443053e20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03752ba4_c2cc8f14",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-22T05:54:36Z",
+      "side": 1,
+      "message": "Or can we relax the restriction in crosvm that --host-cpu-topology works with a smaller subset of cpus?",
+      "range": {
+        "startLine": 817,
+        "startChar": 12,
+        "endLine": 817,
+        "endChar": 47
+      },
+      "revId": "7a7bbbd7d9523c4bae4ba49730339be443053e20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
