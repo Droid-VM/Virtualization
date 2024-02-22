@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "752fdbc0_67897992",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-22T16:34:20Z",
+      "side": 1,
+      "message": "I keep getting confused by this `depth` in the functions using `fdt_next_node()` ... what does it mean here?\n\nAs a library client, I would expect\n```\nnode.next_node_skip_subnodes()?;\n```\nto return the node following `node` in the tree that isn\u0027t a descendant of it; why is the parameter needed?",
+      "range": {
+        "startLine": 489,
+        "startChar": 41,
+        "endLine": 489,
+        "endChar": 52
+      },
+      "revId": "9235b657483aa299e072001fa19f1b255c68dc92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
