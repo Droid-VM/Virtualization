@@ -13,9 +13,15 @@ rust_defaults {
     target: {
         android64: {
             compile_multilib: "64",
+            shared_libs: [
+                "libprocessgroup",
+            ],
             enabled: true,
         },
         linux_bionic_arm64: {
+            shared_libs: [
+                "libprocessgroup",
+            ],
             enabled: true,
         },
     },

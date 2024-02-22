@@ -91,4 +91,9 @@ interface IVirtualizationServiceInternal {
 
     /** Returns a read-only file descriptor of the VM DTBO file. */
     ParcelFileDescriptor getDtboFile();
+
+    /**
+     * Allows callers to set task profiles for better performance.
+     */
+    void setTaskProfiles(in String[] profiles);
 }

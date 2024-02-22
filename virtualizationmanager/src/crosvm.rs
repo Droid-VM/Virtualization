@@ -810,6 +810,10 @@ fn run_vm(
 
     if config.host_cpu_topology {
         if cfg!(virt_cpufreq) {
+            let profiles = ["CPUSET_SP_TOP_APP".to_string()];
+            crate::aidl::GLOBAL_SERVICE
+                .setTaskProfiles(&profiles)
+                .expect("Failed to setperfprofile");
             command.arg("--host-cpu-topology");
             cfg_if::cfg_if! {
                 if #[cfg(any(target_arch = "aarch64"))] {

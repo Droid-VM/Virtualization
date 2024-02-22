@@ -81,6 +81,18 @@ const SYSPROP_LAST_CID: &str = "virtualizationservice.state.last_cid";
 
 const CHUNK_RECV_MAX_LEN: usize = 1024;
 
+use std::ffi::CString;
+
+#[link(name = "processgroup")]
+extern "C" {
+    fn android_set_process_profiles(
+        uid: libc::uid_t,
+        pid: libc::pid_t,
+        num_profiles: libc::size_t,
+        profiles: *const *const libc::c_char,
+    ) -> bool;
+}
+
 /// The fake certificate is used for testing only when a client VM requests attestation in test
 /// mode, it is a single certificate extracted on an unregistered device for testing.
 /// Here is the snapshot of the certificate:
@@ -377,6 +389,22 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
         let state = &mut *self.state.lock().unwrap();
         let file = state.get_dtbo_file().or_service_specific_exception(-1)?;
         Ok(ParcelFileDescriptor::new(file))
+    }
+
+    fn setTaskProfiles(&self, profiles: &[String]) -> binder::Result<()> {
+        let pid = get_calling_pid();
+        let uid = get_calling_uid();
+        let owned: Vec<CString> =
+            profiles.iter().map(|s| CString::new(s.clone()).unwrap()).collect();
+        let ptrs: Vec<*const libc::c_char> = owned.iter().map(|s| s.as_ptr()).collect();
+        // SAFETY: the ownership of the array of string is not passed. The function copies it
+        // internally.
+        if unsafe { android_set_process_profiles(uid, pid, ptrs.len(), ptrs.as_ptr()) } {
+            Ok(())
+        } else {
+            Err(anyhow!("failed to set task profiles"))
+        }
+        .or_binder_exception(ExceptionCode::ILLEGAL_STATE)
     }
 }
 
