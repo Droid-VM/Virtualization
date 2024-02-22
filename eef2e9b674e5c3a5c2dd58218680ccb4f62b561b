@@ -16,6 +16,29 @@
       "message": "Hi, thanks for your reviews!",
       "revId": "eef2e9b674e5c3a5c2dd58218680ccb4f62b561b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f987aaa4_6c1f6c59",
+        "filename": "service_vm/kernel/extract_microdroid_kernel_hashes.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-22T16:02:03Z",
+      "side": 1,
+      "message": "Could these be `[u8; HASH_SIZE]` (no reference)?",
+      "range": {
+        "startLine": 34,
+        "startChar": 27,
+        "endLine": 34,
+        "endChar": 40
+      },
+      "revId": "eef2e9b674e5c3a5c2dd58218680ccb4f62b561b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
