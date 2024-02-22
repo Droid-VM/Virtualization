@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1585c18a_b3fae4c9",
+        "filename": "tests/libs/libdts/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-22T11:28:43Z",
+      "side": 1,
+      "message": "In terms of OOP design, I wish we had a `Dtc` struct that provided a Rust wrapper to the CLI tool (similar to `Command` or what\u0027s typically seen in [Rust build scripts](https://doc.rust-lang.org/cargo/reference/build-script-examples.html)) instead of wrapping some abstract \"DTS\" concept.\n\nA rough example of what I mean would be:\n```\nDtc::new(\"./dtc_static\")\n    .input_format(Dtc::Formats::Fs)\n    .output_format(Dtc::Formats::Dts)\n    .sorted()\n    .forced()\n    .compile(path);\n```\n\nIt would also decouple the `dtc` binary from the `rlib`, allowing the code to be re-used with other DTC builds (e.g. host?) and, as the `rlib` client would be passing the DTC path in their Rust calls, they would be less likely to \"forget\" the `data_bins` you mention in the `README`.\n\nAnyway, there\u0027s nothing prohibitively wrong with `Dts` so I won\u0027t block this CL on this comment but would appreciate it being addressed as a follow-up clean-up (feel free to create a ticket and either of us could pick it up once we get some time).",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 16
+      },
+      "revId": "905d153a57daf7ee53ce775866a9795aeca7c7c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc4c7d04_8b41f602",
+        "filename": "tests/libs/libdts/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-22T11:28:43Z",
+      "side": 1,
+      "message": "Why not use `stdin` to `dtc` instead of the back-and-forth to disk (and all the opportunities for things breaking this brings)? That would also remove the dependency on `tempfile`.",
+      "range": {
+        "startLine": 58,
+        "startChar": 23,
+        "endLine": 58,
+        "endChar": 36
+      },
+      "revId": "905d153a57daf7ee53ce775866a9795aeca7c7c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
