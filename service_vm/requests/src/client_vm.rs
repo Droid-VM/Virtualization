@@ -29,7 +29,7 @@ use coset::{AsCborValue, CborSerializable, CoseSign, CoseSign1};
 use der::{Decode, Encode};
 use diced_open_dice::{DiceArtifacts, HASH_SIZE};
 use log::{error, info};
-use microdroid_kernel_hashes::{INITRD_DEBUG_HASH, INITRD_NORMAL_HASH, KERNEL_HASH};
+use microdroid_kernel_hashes::{INITRD_DEBUG_HASHES, INITRD_NORMAL_HASHES, KERNEL_HASHES};
 use service_vm_comm::{ClientVmAttestationParams, Csr, CsrPayload, RequestProcessingError};
 use x509_cert::{certificate::Certificate, name::Name};
 
@@ -159,10 +159,10 @@ fn validate_kernel_authority_hash(
 /// embedded during the build time.
 fn validate_kernel_code_hash(dice_chain: &ClientVmDiceChain) -> Result<()> {
     let kernel = dice_chain.microdroid_kernel();
-    if expected_kernel_code_hash_normal()? == kernel.code_hash {
+    if expected_kernel_code_hashes(INITRD_NORMAL_HASHES)?.iter().any(|x| x == &kernel.code_hash) {
         return Ok(());
     }
-    if expected_kernel_code_hash_debug()? == kernel.code_hash {
+    if expected_kernel_code_hashes(INITRD_DEBUG_HASHES)?.iter().any(|x| x == &kernel.code_hash) {
         if dice_chain.all_entries_are_secure() {
             error!("The Microdroid kernel has debug initrd but the DICE chain is secure");
             return Err(RequestProcessingError::InvalidDiceChain);
@@ -173,18 +173,19 @@ fn validate_kernel_code_hash(dice_chain: &ClientVmDiceChain) -> Result<()> {
     Err(RequestProcessingError::InvalidDiceChain)
 }
 
-fn expected_kernel_code_hash_normal() -> bssl_avf::Result<Vec<u8>> {
-    let mut code_hash = [0u8; 64];
-    code_hash[0..32].copy_from_slice(KERNEL_HASH);
-    code_hash[32..].copy_from_slice(INITRD_NORMAL_HASH);
-    Digester::sha512().digest(&code_hash)
-}
-
-fn expected_kernel_code_hash_debug() -> bssl_avf::Result<Vec<u8>> {
-    let mut code_hash = [0u8; 64];
-    code_hash[0..32].copy_from_slice(KERNEL_HASH);
-    code_hash[32..].copy_from_slice(INITRD_DEBUG_HASH);
-    Digester::sha512().digest(&code_hash)
+fn expected_kernel_code_hashes(initrd_hashes: &[&[u8]]) -> Result<Vec<Vec<u8>>> {
+    if KERNEL_HASHES.len() != initrd_hashes.len() {
+        error!("The number of embedded kernel hashes does not match the number of initrd hashes");
+        return Err(RequestProcessingError::InternalError);
+    }
+    let mut code_hashes = Vec::new();
+    for (kernel_hash, initrd_hash) in KERNEL_HASHES.iter().zip(initrd_hashes.iter()) {
+        let mut code_hash = [0u8; 64];
+        code_hash[0..32].copy_from_slice(kernel_hash);
+        code_hash[32..].copy_from_slice(initrd_hash);
+        code_hashes.push(Digester::sha512().digest(&code_hash)?);
+    }
+    Ok(code_hashes)
 }
 
 fn expected_kernel_authority_hash(service_vm_entry: &Value) -> Result<[u8; HASH_SIZE]> {
