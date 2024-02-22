@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "343f25ee_78842cb5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-02-22T16:17:02Z",
+      "side": 1,
+      "message": "I really wish we at least had unit tests for this patch, because the logic in this patch is non-trivial, but won\u0027t block the review on it...",
+      "parentUuid": "9f5cb80b_98af2ede",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 4
+      },
+      "revId": "44bff9e8f9a26f9b7d3affbb6f7d4454afd17fe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "363d31b2_e26aa132",
@@ -133,6 +157,30 @@
       "side": 1,
       "message": "IIUC, `RemoteException` will be thrown if getBinder() returns error. isFeatureEnabled() returning False \u003d\u003e mInstanceIdPath \u003d null \u0026 no exception will be thrown.",
       "parentUuid": "e144fa76_c80814a3",
+      "range": {
+        "startLine": 393,
+        "startChar": 20,
+        "endLine": 393,
+        "endChar": 45
+      },
+      "revId": "44bff9e8f9a26f9b7d3affbb6f7d4454afd17fe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36b7aaba_f241de99",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-02-22T16:17:02Z",
+      "side": 1,
+      "message": "Oh, those guidelines are actually for binder calls into system_server.\n\nIn case virtmngr/virtservice dies and remote exception is thrown, I think app should make a decision on how to proceed. We should probably look into whether we should throw a runtime exception again, but not as part of this patch",
+      "parentUuid": "59cabee1_85e0237e",
       "range": {
         "startLine": 393,
         "startChar": 20,
