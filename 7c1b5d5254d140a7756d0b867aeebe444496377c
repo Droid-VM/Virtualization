@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ef85fa8_ba00508c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-23T23:48:50Z",
+      "side": 1,
+      "message": "Ross Y. has verbally okayed this patch and aosp/2966004 if it\u0027s squashed into a single patch.",
+      "revId": "7c1b5d5254d140a7756d0b867aeebe444496377c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "addc8833_5e74eb87",
+        "filename": "TEST_MAPPING",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-23T23:48:50Z",
+      "side": 1,
+      "message": "I assume I need to add this for the tests to start running in presubmit?",
+      "revId": "7c1b5d5254d140a7756d0b867aeebe444496377c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc3c885a_e52aa6e1",
+        "filename": "tests/testapk_no_perm/src/java/com/android/microdroid/test/MicrodroidTestAppNoPerm.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-02-23T23:48:50Z",
+      "side": 1,
+      "message": "I think this function signature diverged from 24Q2, I\u0027ll have to use the old signature when I cherry-pick this.",
+      "revId": "7c1b5d5254d140a7756d0b867aeebe444496377c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
