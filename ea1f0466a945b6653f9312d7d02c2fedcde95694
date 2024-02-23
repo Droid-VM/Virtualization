@@ -16,6 +16,29 @@
       "message": "Fine as a placeholder for now",
       "revId": "ea1f0466a945b6653f9312d7d02c2fedcde95694",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "240d5b28_a3eb347b",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationmaintenance/IVirtualizationMaintenance.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-23T12:22:02Z",
+      "side": 1,
+      "message": "We need something like\n\n`void vmRemoved(byte[64] instance_id)` as well to be called with vmVirtualMachineManager::delete()?",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 22,
+        "endChar": 32
+      },
+      "revId": "ea1f0466a945b6653f9312d7d02c2fedcde95694",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
