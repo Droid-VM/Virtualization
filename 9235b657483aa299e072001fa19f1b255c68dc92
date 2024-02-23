@@ -22,6 +22,30 @@
       },
       "revId": "9235b657483aa299e072001fa19f1b255c68dc92",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bb5429f_8acb572a",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-23T15:53:25Z",
+      "side": 1,
+      "message": "depth prevents to get out of the initial node when calling `next_*`.\n\nFor example, let say we want to navigate this.\n\n```dts\n/ {\n  parent {\n    start {\n      boy { };\n      girl {\n        dolls { };      \n      }\n    };\n  };\n  uncle { };\n};\n```\n\nIf we start calling `next_*` from `start`, we wouldn\u0027t want to navigate `uncle` while iterating. `fdt_next_node()` stops navigation when `depth` becomes negative.",
+      "parentUuid": "752fdbc0_67897992",
+      "range": {
+        "startLine": 489,
+        "startChar": 41,
+        "endLine": 489,
+        "endChar": 52
+      },
+      "revId": "9235b657483aa299e072001fa19f1b255c68dc92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
