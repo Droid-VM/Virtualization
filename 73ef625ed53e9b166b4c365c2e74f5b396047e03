@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d57d2721_625cca45",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-02-23T02:01:42Z",
+      "side": 1,
+      "message": "IIUC, it seems there\u0027s only one `rialto` file, and `rialto` has information about multiple kernels(e.g. `kernel`, `gki-X-kernel`, `gki-Y-kernel`). Then, could we just open \u0026 read \u0026 write of rialto file just once?",
+      "range": {
+        "startLine": 657,
+        "startChar": 4,
+        "endLine": 657,
+        "endChar": 45
+      },
+      "revId": "73ef625ed53e9b166b4c365c2e74f5b396047e03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
