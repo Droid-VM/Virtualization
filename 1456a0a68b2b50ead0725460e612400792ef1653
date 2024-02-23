@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8a9f5f3_00cd13dd",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice_internal/IVirtualizationServiceInternal.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-23T13:29:15Z",
+      "side": 1,
+      "message": "Can we call this `void removeVmInstance(byte[64] intanceId)` in parallel to https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2956200/24/virtualizationservice/aidl/android/system/virtualizationservice_internal/IVirtualizationServiceInternal.aidl#98 ?\n\n\nThe callers of this api are aware of instance-id, VirtualizationService is aware of VMs instance-id being used as secretId in Secretkeeper transaction but the callers need not be aware of that.",
+      "range": {
+        "startLine": 100,
+        "startChar": 9,
+        "endLine": 100,
+        "endChar": 24
+      },
+      "revId": "1456a0a68b2b50ead0725460e612400792ef1653",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
