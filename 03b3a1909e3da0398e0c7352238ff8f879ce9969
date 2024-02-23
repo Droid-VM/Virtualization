@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc22458c_6ba7d39e",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-23T16:37:52Z",
+      "side": 1,
+      "message": "Push this, and the 2 path constants, down into vm_secret? They\u0027re no used here.",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 149,
+        "endChar": 55
+      },
+      "revId": "03b3a1909e3da0398e0c7352238ff8f879ce9969",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec333773_24d645ab",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-23T16:37:52Z",
+      "side": 1,
+      "message": "Do you need that?",
+      "range": {
+        "startLine": 155,
+        "startChar": 27,
+        "endLine": 155,
+        "endChar": 35
+      },
+      "revId": "03b3a1909e3da0398e0c7352238ff8f879ce9969",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6da379c_849bec12",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-23T16:37:52Z",
+      "side": 1,
+      "message": "format!(\"Failed to get Secretkeeper: {e:?}\")\nContext is good, and a lot of exception details is only in the debug version",
+      "range": {
+        "startLine": 280,
+        "startChar": 79,
+        "endLine": 280,
+        "endChar": 92
+      },
+      "revId": "03b3a1909e3da0398e0c7352238ff8f879ce9969",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
