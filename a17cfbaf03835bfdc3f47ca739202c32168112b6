@@ -63,6 +63,30 @@
       },
       "revId": "a17cfbaf03835bfdc3f47ca739202c32168112b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2092d0d_4f88205c",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-23T18:12:28Z",
+      "side": 1,
+      "message": "\u003e The secrets will change in Q2 anyway won\u0027t they?\n\nI don\u0027t think so about Payload\u0027s Sealing CDIs? But that said the guest OS\u0027s (Microdroid) code hashes must be changing at Q2, so pvmfw would fail with `RecordedCodeHashMismatch` anyway. So I guess we\u0027re alright?\n\nI think we need some forward looking tests. Take a VM instance from older build \u0026 run it on newer ones.",
+      "parentUuid": "f10fec61_351eb9d9",
+      "range": {
+        "startLine": 76,
+        "startChar": 17,
+        "endLine": 76,
+        "endChar": 36
+      },
+      "revId": "a17cfbaf03835bfdc3f47ca739202c32168112b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
