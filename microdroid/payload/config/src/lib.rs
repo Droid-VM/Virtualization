@@ -17,9 +17,10 @@
 use serde::{Deserialize, Serialize};
 
 /// VM payload config
-#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]
 pub struct VmPayloadConfig {
-    /// OS config. Default: "microdroid"
+    /// OS config.
+    /// Deprecated: don't use. Error if not "" or "microdroid".
     #[serde(default)]
     pub os: OsConfig,
 
@@ -58,7 +59,7 @@ pub struct OsConfig {
 
 impl Default for OsConfig {
     fn default() -> Self {
-        Self { name: "microdroid".to_owned() }
+        Self { name: "".to_owned() }
     }
 }
 

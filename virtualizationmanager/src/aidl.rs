@@ -70,7 +70,7 @@ use disk::QcowFile;
 use glob::glob;
 use lazy_static::lazy_static;
 use log::{debug, error, info, warn};
-use microdroid_payload_config::{ApkConfig, OsConfig, Task, TaskType, VmPayloadConfig};
+use microdroid_payload_config::{ApkConfig, Task, TaskType, VmPayloadConfig};
 use nix::unistd::pipe;
 use rpcbinder::RpcServer;
 use rustutils::system_properties;
@@ -612,13 +612,10 @@ fn is_custom_config(config: &VirtualMachineConfig) -> bool {
                 // - specifying a config file;
                 // - specifying extra APKs;
                 // - specifying an OS other than Microdroid.
-                match &config.payload {
+                (match &config.payload {
                     Payload::ConfigPath(_) => true,
-                    Payload::PayloadConfig(payload_config) => {
-                        !payload_config.extraApks.is_empty()
-                            || payload_config.osName != MICRODROID_OS_NAME
-                    }
-                }
+                    Payload::PayloadConfig(payload_config) => !payload_config.extraApks.is_empty(),
+                }) || config.osName != MICRODROID_OS_NAME
             }
         }
     }
@@ -803,8 +800,13 @@ fn load_app_config(
         }
     };
 
+    let payload_config_os = vm_payload_config.os.name.as_str();
+    if !payload_config_os.is_empty() && payload_config_os != "microdroid" {
+        bail!("'os' in payload config is deprecated");
+    }
+
     // For now, the only supported OS is Microdroid and Microdroid GKI
-    let os_name = vm_payload_config.os.name.as_str();
+    let os_name = config.osName.as_str();
     if !is_valid_os(os_name) {
         bail!("Unknown OS \"{}\"", os_name);
     }
@@ -874,7 +876,6 @@ fn create_vm_payload_config(
     }
 
     let task = Task { type_: TaskType::MicrodroidLauncher, command: payload_binary_name.clone() };
-    let name = payload_config.osName.clone();
 
     // The VM only cares about how many there are, these names are actually ignored.
     let extra_apk_count = payload_config.extraApks.len();
@@ -882,13 +883,13 @@ fn create_vm_payload_config(
         (0..extra_apk_count).map(|i| ApkConfig { path: format!("extra-apk-{i}") }).collect();
 
     Ok(VmPayloadConfig {
-        os: OsConfig { name },
         task: Some(task),
         apexes: vec![],
         extra_apks,
         prefer_staged: false,
         export_tombstones: None,
         enable_authfs: false,
+        ..Default::default()
     })
 }
 

@@ -130,6 +130,7 @@ impl ComposClient {
             memoryMib: parameters.memory_mib.unwrap_or(0), // 0 means use the default
             cpuTopology: cpu_topology,
             customConfig: Some(CustomConfig { ..Default::default() }),
+            ..Default::default()
         });
 
         // Let logs go to logcat.
