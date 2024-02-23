@@ -39,6 +39,30 @@
       },
       "revId": "ea1f0466a945b6653f9312d7d02c2fedcde95694",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d0e388a_b356afdd",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationmaintenance/IVirtualizationMaintenance.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-23T12:34:01Z",
+      "side": 1,
+      "message": "Not on this interface (which is System Server -\u003e VS).\nThat gets added to IVirtualizationServiceInternal, which is Virt Mgr -\u003e VS.\nSee aosp/2968702.",
+      "parentUuid": "240d5b28_a3eb347b",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 22,
+        "endChar": 32
+      },
+      "revId": "ea1f0466a945b6653f9312d7d02c2fedcde95694",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
