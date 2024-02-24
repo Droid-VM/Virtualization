@@ -14,12 +14,14 @@
 
 use crate::dice_driver::DiceDriver;
 use crate::instance::{ApexData, ApkData};
-use crate::{is_debuggable, MicrodroidData};
+use crate::{is_debuggable, is_strict_boot, MicrodroidData};
 use anyhow::{bail, Context, Result};
 use ciborium::{cbor, Value};
 use coset::CborSerializable;
-use diced_open_dice::OwnedDiceArtifacts;
+use diced_open_dice::{Hidden, OwnedDiceArtifacts, HIDDEN_SIZE};
 use microdroid_metadata::PayloadMetadata;
+use openssl::hkdf::hkdf;
+use openssl::md::Md;
 use openssl::sha::{sha512, Sha512};
 use std::iter::once;
 
@@ -53,8 +55,38 @@ pub fn dice_derivation(
     let debuggable = is_debuggable()?;
 
     // Send the details to diced
-    let hidden = instance_data.salt.clone().try_into().unwrap();
+    let hidden = if cfg!(llpvm_changes) {
+        microdroid_hidden_input()?
+    } else {
+        instance_data.salt.clone().try_into().unwrap()
+    };
     dice.derive(code_hash, &config_descriptor, authority_hash, debuggable, hidden)
+}
+
+// Get the "Hidden input" for DICE derivation.
+// This provides differentiation of secrets for difference VM instances with same payload.
+// differentiator for non-protected VM running exact same payload.
+fn microdroid_hidden_input() -> Result<Hidden> {
+    // For protected VM: this is all 0s, pvmfw ensures differentiation is added early in secrets.
+    // For non-protected VM: this is derived from instance_id of the VM instance.
+    let mut hidden_input = [0u8; HIDDEN_SIZE];
+    if !is_strict_boot() {
+        if let Some(id) = super::get_instance_id()? {
+            hkdf(
+                &mut hidden_input,
+                Md::sha256(),
+                &id,
+                /* salt */ b"",
+                /* info */ b"VM_INSTANCE_ID",
+            )
+            .context("hkdf failed")?;
+        } else {
+            log::warn!(
+                "Instance Id missing, this may lead to 2 non protected VMs having same secrets"
+            );
+        }
+    }
+    Ok(hidden_input)
 }
 
 struct Subcomponent {
