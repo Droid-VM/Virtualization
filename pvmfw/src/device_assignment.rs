@@ -167,8 +167,7 @@ impl VmDtbo {
     //           rng { ... };      // Actual device node is here. If overlaid, path would be "/rng"
     //         };
     //       };
-    //       __symbols__ {         // List of assignable devices
-    //         // Each property describes an assigned device device information.
+    //       __symbols__ {         // Contains list of assignable devices
     //         // property name is the device label, and property value is the path in the VM DTBO.
     //         rng = "/fragment@rng/__overlay__/rng";
     //       };
@@ -583,8 +582,10 @@ impl AssignedDeviceInfo {
 
         // Note: Currently can only assign devices backed by physical devices.
         let phandle = dtbo_node.get_phandle()?.ok_or(DeviceAssignmentError::InvalidDtbo)?;
-        let physical_device =
-            physical_devices.get(&phandle).ok_or(DeviceAssignmentError::InvalidDtbo)?;
+        let Some(physical_device) = physical_devices.get(&phandle) else {
+            // labeled DT node may not be backed by physical device but just a dependency.
+            return Ok(None);
+        };
 
         let reg = parse_node_reg(&node)?;
         Self::validate_reg(&reg, &physical_device.reg, hypervisor)?;
@@ -921,7 +922,7 @@ mod tests {
 
         let expected = [AssignedDeviceInfo {
             node_path: CString::new("/bus0/backlight").unwrap(),
-            dtbo_node_path: cstr!("/fragment@backlight/__overlay__/bus0/backlight").into(),
+            dtbo_node_path: cstr!("/fragment@0/__overlay__/bus0/backlight").into(),
             reg: vec![[0x9, 0xFF].into()],
             interrupts: into_fdt_prop(vec![0x0, 0xF, 0x4]),
             iommus: vec![],
@@ -945,7 +946,7 @@ mod tests {
 
         let expected = [AssignedDeviceInfo {
             node_path: CString::new("/rng").unwrap(),
-            dtbo_node_path: cstr!("/fragment@rng/__overlay__/rng").into(),
+            dtbo_node_path: cstr!("/fragment@0/__overlay__/rng").into(),
             reg: vec![[0x9, 0xFF].into()],
             interrupts: into_fdt_prop(vec![0x0, 0xF, 0x4]),
             iommus: vec![(PvIommu { id: 0x4 }, Vsid(0xFF0))],
@@ -972,23 +973,22 @@ mod tests {
 
         let symbols = vm_dtbo.symbols().unwrap().unwrap();
 
-        let rng = vm_dtbo.node(cstr!("/fragment@rng/__overlay__/rng")).unwrap();
+        let rng = vm_dtbo.node(cstr!("/fragment@0/__overlay__/rng")).unwrap();
         assert_ne!(rng, None);
         let rng_symbol = symbols.getprop_str(cstr!("rng")).unwrap();
-        assert_eq!(Some(cstr!("/fragment@rng/__overlay__/rng")), rng_symbol);
+        assert_eq!(Some(cstr!("/fragment@0/__overlay__/rng")), rng_symbol);
 
-        let light = vm_dtbo.node(cstr!("/fragment@rng/__overlay__/light")).unwrap();
+        let light = vm_dtbo.node(cstr!("/fragment@0/__overlay__/light")).unwrap();
         assert_eq!(light, None);
         let light_symbol = symbols.getprop_str(cstr!("light")).unwrap();
         assert_eq!(None, light_symbol);
 
-        let led = vm_dtbo.node(cstr!("/fragment@led/__overlay__/led")).unwrap();
+        let led = vm_dtbo.node(cstr!("/fragment@0/__overlay__/led")).unwrap();
         assert_eq!(led, None);
         let led_symbol = symbols.getprop_str(cstr!("led")).unwrap();
         assert_eq!(None, led_symbol);
 
-        let backlight =
-            vm_dtbo.node(cstr!("/fragment@backlight/__overlay__/bus0/backlight")).unwrap();
+        let backlight = vm_dtbo.node(cstr!("/fragment@0/__overlay__/bus0/backlight")).unwrap();
         assert_eq!(backlight, None);
         let backlight_symbol = symbols.getprop_str(cstr!("backlight")).unwrap();
         assert_eq!(None, backlight_symbol);
