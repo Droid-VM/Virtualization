@@ -87,6 +87,7 @@ import java.util.stream.Collectors;
 @UseParametersRunnerFactory(DeviceJUnit4ClassRunnerWithParameters.RunnerFactory.class)
 public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     private static final String APK_NAME = "MicrodroidTestApp.apk";
+    private static final String APK_UPDATED_NAME = "MicrodroidTestAppUpdated.apk";
     private static final String PACKAGE_NAME = "com.android.microdroid.test";
     private static final String SHELL_PACKAGE_NAME = "com.android.shell";
     private static final String VIRT_APEX = "/apex/com.android.virt/";
@@ -405,6 +406,50 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         PipedInputStream pis = new PipedInputStream();
         Process process = RunUtil.getDefault().runCmdInBackground(args, new PipedOutputStream(pis));
         return new VmInfo(process);
+    }
+
+    @Test
+    @CddTest(requirements = {"9.17/C-2-1", "9.17/C-2-2", "9.17/C-2-6"})
+    public void UpgradedDowngradedPackageHandling() throws Exception {
+        // Run only if Secretkeeper default instance is present
+        final String configPath = "assets/" + mOs + "/vm_config.json"; // path inside the APK
+        ITestDevice microdroidRun1 =
+                MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(minMemorySize())
+                        .cpuTopology("match_host")
+                        .protectedVm(mProtectedVm)
+                        .build(getAndroidDevice());
+        microdroidRun1.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
+        getAndroidDevice().shutdownMicrodroid(microdroidRun1);
+
+        // Install the updated version of app
+        getDevice().uninstallPackage(PACKAGE_NAME);
+        getDevice().installPackage(findTestFile(APK_UPDATED_NAME), /* reinstall */ true);
+
+        ITestDevice microdroidRun2 =
+                MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(minMemorySize())
+                        .cpuTopology("match_host")
+                        .protectedVm(mProtectedVm)
+                        .build_from_old_instance(getAndroidDevice());
+        microdroidRun2.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
+        getAndroidDevice().shutdownMicrodroid(microdroidRun2);
+
+        // Re-install the older version & re-run. This should fail.
+        getDevice().uninstallPackage(PACKAGE_NAME);
+        getDevice().installPackage(findTestFile(APK_NAME), /* reinstall */ true);
+
+        ITestDevice microdroidRun3 =
+                MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(minMemorySize())
+                        .cpuTopology("match_host")
+                        .protectedVm(mProtectedVm)
+                        .build_from_old_instance(getAndroidDevice());
+        microdroidRun3.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
+        getAndroidDevice().shutdownMicrodroid(microdroidRun3);
     }
 
     @Test
