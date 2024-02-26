@@ -16,6 +16,98 @@
       "message": "WIP for fixing build and rebasing",
       "revId": "a55bed077cdd3f8e93ed10ab3a334055103204cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a4ae41d_0c4de14d",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-26T14:04:45Z",
+      "side": 1,
+      "message": "Can\u0027t you turn this into 2 loops: first one to locate the \"first absent child\" and second one to recursively create a `DeviceTreeChildrenMask::Partial(vec![token])` pushed into the previous node\u0027s `children`? In any case, this could use some encapsulation (e.g. a constructor, and \"and child\" and \"find child\" methods).",
+      "range": {
+        "startLine": 247,
+        "startChar": 0,
+        "endLine": 249,
+        "endChar": 40
+      },
+      "revId": "a55bed077cdd3f8e93ed10ab3a334055103204cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e39d472b_03c3e424",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-26T14:04:45Z",
+      "side": 1,
+      "message": "How would this ever be `true`? (same below)",
+      "range": {
+        "startLine": 424,
+        "startChar": 15,
+        "endLine": 424,
+        "endChar": 42
+      },
+      "revId": "a55bed077cdd3f8e93ed10ab3a334055103204cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3e9168a_86e25495",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-26T14:04:45Z",
+      "side": 1,
+      "message": "Would you mind reworking this loop by introducing a function `as_u32_prop_array` that `zerocopy::transmute`s the `u8` (cropped to a size that\u0027s a multiple of 4) and using it for both the array of offsets and the property containing the phandle? This would remove the need for the superfluous copy to the heap (just to read the values) and better encapsulation around the low-level checks and error handling.\n\nFurthermore, `path` doesn\u0027t (and shouldn\u0027t) change between iterations of the outer loop so don\u0027t parse the whole tree on each iteration:\n```\nlet target_node \u003d self.node(\u0026path)?.ok_or(...)?;\nfor fixup_prop in fixup_node.properties()? {\n    let target_prop \u003d target_node.getprop(fixup_prop.name()?)?.ok_or(...)?;\n    let offsets \u003d as_u32_prop_array(fixup_prop.value()?);\n    let target_cells \u003d as_u32_prop_array(target_prop);\n    for offset in offsets {\n        let offset \u003d usize::try_from(offset).unwrap();\n        if offset % size_of::\u003cu32\u003e() !\u003d 0 {\n            return Err(...);\n        };\n        let offset \u003d offset / size_of::\u003cu32\u003e();\n        let phandle \u003d target_cells.get(offset).ok_or(...)?\n        phandles.push(u32::from_be(phandle).try_into()?);\n    }\n    // ...\n}\n```",
+      "range": {
+        "startLine": 462,
+        "startChar": 0,
+        "endLine": 486,
+        "endChar": 17
+      },
+      "revId": "a55bed077cdd3f8e93ed10ab3a334055103204cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "503030ae_32b67297",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-26T14:04:45Z",
+      "side": 1,
+      "message": "Would you mind using the terms \"kept\", \"dropped\", and \"filter\" because it is quite confusing to understand if \"masked\" nodes are kept in the final DT or not (given that we drop nodes by \"masking\" them with NOPs but this \"masks\" those are that not \"masked\" by the NOPs i.e. kept)?",
+      "range": {
+        "startLine": 507,
+        "startChar": 3,
+        "endLine": 508,
+        "endChar": 33
+      },
+      "revId": "a55bed077cdd3f8e93ed10ab3a334055103204cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

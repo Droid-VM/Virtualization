@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8068ade9_49a95245",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 983,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-26T14:04:45Z",
+      "side": 1,
+      "message": "What if an assigned node needs to refer to a virtual device from the platform DT (e.g. `\u0026intc`), wouldn\u0027t `__fixups__` contain an entry that we need to keep for libfdt to properly resolve the phandle across the DTs when applying the DTBO?",
+      "range": {
+        "startLine": 983,
+        "startChar": 11,
+        "endLine": 983,
+        "endChar": 87
+      },
+      "revId": "04f9e846cae85ddc336bb68aefbfc9d4c975551c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
