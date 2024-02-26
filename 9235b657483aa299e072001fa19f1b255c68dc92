@@ -46,6 +46,30 @@
       },
       "revId": "9235b657483aa299e072001fa19f1b255c68dc92",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d95726da_0bf122f3",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-26T12:56:25Z",
+      "side": 1,
+      "message": "I see (and finally fully get it): `depth` defines a subtree of the DT where the root is the `n`-th parent of the current node (where `n` is `depth`), which the iterator can\u0027t leave.\n\nWould you mind adding documentation to `next_node` explaining this parameter in-depth (pun intended) and referring to that function in the docstrings of the other ones taking/returning `depth` (incl. `next_node_skip_subnodes`)? Because this is far from obvious, IMO. Thanks!",
+      "parentUuid": "0bb5429f_8acb572a",
+      "range": {
+        "startLine": 489,
+        "startChar": 41,
+        "endLine": 489,
+        "endChar": 52
+      },
+      "revId": "9235b657483aa299e072001fa19f1b255c68dc92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
