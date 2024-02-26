@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8db24d60_238ea438",
+        "filename": "java/service/src/com/android/system/virtualmachine/VirtualizationSystemService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-02-26T13:17:24Z",
+      "side": 1,
+      "message": "Can we use BackgroundThread? https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/java/com/android/internal/os/BackgroundThread.java",
+      "range": {
+        "startLine": 59,
+        "startChar": 5,
+        "endLine": 61,
+        "endChar": 45
+      },
+      "revId": "9f04c7309f4c578a5ed88ddb9d885203166e984b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c887910e_8ab5d141",
+        "filename": "java/service/src/com/android/system/virtualmachine/VirtualizationSystemService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-02-26T13:17:24Z",
+      "side": 1,
+      "message": "Should we hold the reference of this receiver somewhere?",
+      "range": {
+        "startLine": 63,
+        "startChar": 7,
+        "endLine": 63,
+        "endChar": 23
+      },
+      "revId": "9f04c7309f4c578a5ed88ddb9d885203166e984b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
