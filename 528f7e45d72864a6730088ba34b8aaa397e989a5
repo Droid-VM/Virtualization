@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f09cb21_1182b632",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-26T13:13:44Z",
+      "side": 1,
+      "message": "I\u0027ll +2 the clean-up to finally use `/plugin/` but would you mind moving this change to pvmfw into its own CL and explain (in the commit message) why it\u0027s necessary?\n\nIMO, we should try as much as possible to detect mistakes in vendor-provided inputs (in particular if there\u0027s no runtime cost). AFAICT, this would ignore a malformed VM DTBO where the node at `dtbo_node_path` isn\u0027t \"backed\" by a node in `/host`, right?",
+      "range": {
+        "startLine": 585,
+        "startChar": 0,
+        "endLine": 588,
+        "endChar": 10
+      },
+      "revId": "528f7e45d72864a6730088ba34b8aaa397e989a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
