@@ -147,6 +147,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e0eae66c_56faaa47",
+        "filename": "tests/testapk_no_perm/AndroidTest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-02-26T13:09:07Z",
+      "side": 1,
+      "message": "The no permissions tests shouldn\u0027t need it, right?",
+      "range": {
+        "startLine": 24,
+        "startChar": 3,
+        "endLine": 27,
+        "endChar": 22
+      },
+      "revId": "7c1b5d5254d140a7756d0b867aeebe444496377c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "435007cb_0dc33a8f",
         "filename": "tests/testapk_no_perm/AndroidTest.xml",
         "patchSetId": 1
@@ -176,6 +199,52 @@
       "side": 1,
       "message": "See e.g. aosp/2966531 where I added another Java test file next to the existing one.\nBut here you need a different app, because you want different permissions.\nSo I think it requires a new AndroidTest.xml.",
       "parentUuid": "435007cb_0dc33a8f",
+      "revId": "7c1b5d5254d140a7756d0b867aeebe444496377c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c584b4a_e92bd0de",
+        "filename": "tests/testapk_no_perm/AndroidTest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-02-26T13:09:07Z",
+      "side": 1,
+      "message": "Do we need this?",
+      "range": {
+        "startLine": 31,
+        "startChar": 1,
+        "endLine": 32,
+        "endChar": 53
+      },
+      "revId": "7c1b5d5254d140a7756d0b867aeebe444496377c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c42881b_ff59a950",
+        "filename": "tests/testapk_no_perm/src/java/com/android/microdroid/test/MicrodroidTestAppNoPerm.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-02-26T13:09:07Z",
+      "side": 1,
+      "message": "Do we need this? The test asserts that permission is enforced, we don\u0027t really care how much RAM we need for the VM :)",
+      "range": {
+        "startLine": 42,
+        "startChar": 4,
+        "endLine": 53,
+        "endChar": 5
+      },
       "revId": "7c1b5d5254d140a7756d0b867aeebe444496377c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
