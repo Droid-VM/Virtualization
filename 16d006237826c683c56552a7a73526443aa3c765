@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6366b396_2ea93340",
+        "filename": "virtualizationservice/src/maintenance.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-26T17:51:38Z",
+      "side": 1,
+      "message": "Should we then delete the DB, to try to retry?",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 67
+      },
+      "revId": "16d006237826c683c56552a7a73526443aa3c765",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b2c22c2_6e89b6f8",
+        "filename": "virtualizationservice/src/maintenance.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-26T17:51:38Z",
+      "side": 1,
+      "message": "Should we do these in the other order?\nAlternatively, should we do the second part even if the first part fails?",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 9
+      },
+      "revId": "16d006237826c683c56552a7a73526443aa3c765",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
