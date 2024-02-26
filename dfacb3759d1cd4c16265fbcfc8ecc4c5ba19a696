@@ -22,6 +22,30 @@
       },
       "revId": "dfacb3759d1cd4c16265fbcfc8ecc4c5ba19a696",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd890d8c_92da9c3e",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-26T14:32:52Z",
+      "side": 1,
+      "message": "They are simply ignored and wouldn\u0027t be applied.\n\nIn detail, L683 skips non-overlayable node, and apply_overlay would ignore any node outside of the `__overlay__`.",
+      "parentUuid": "6157aa5c_e1a8456a",
+      "range": {
+        "startLine": 732,
+        "startChar": 8,
+        "endLine": 732,
+        "endChar": 31
+      },
+      "revId": "dfacb3759d1cd4c16265fbcfc8ecc4c5ba19a696",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
