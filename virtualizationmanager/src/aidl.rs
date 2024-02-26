@@ -406,7 +406,14 @@ impl VirtualizationService {
         let instance_id;
         let untrusted_props = if cfg!(llpvm_changes) {
             instance_id = extract_instance_id(config);
-            vec![(cstr!("instance-id"), &instance_id[..])]
+            log::warn!("llpvm: instance-id {:?}", instance_id);
+            vec![
+                (cstr!("instance-id"), &instance_id[..]),
+                (
+                    cstr!("secretkeeper_supported"),
+                    if is_secretkeeper_supported() { b"Yes" } else { b"No" },
+                ),
+            ]
         } else {
             vec![]
         };
@@ -1464,7 +1471,7 @@ impl IVirtualMachineService for VirtualMachineService {
     }
 
     fn getSecretkeeper(&self) -> binder::Result<Option<Strong<dyn ISecretkeeper>>> {
-        let sk = if is_secretkeeper_present() {
+        let sk = if is_secretkeeper_supported() {
             Some(binder::wait_for_interface(SECRETKEEPER_IDENTIFIER)?)
         } else {
             None
@@ -1477,7 +1484,7 @@ impl IVirtualMachineService for VirtualMachineService {
     }
 }
 
-fn is_secretkeeper_present() -> bool {
+fn is_secretkeeper_supported() -> bool {
     binder::is_declared(SECRETKEEPER_IDENTIFIER)
         .expect("Could not check for declared Secretkeeper interface")
 }
