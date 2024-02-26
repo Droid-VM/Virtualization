@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8aa8528_e0bc7037",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-02-26T13:37:19Z",
+      "side": 1,
+      "message": "Hi @inseob@google.com, it looks like in your cl https://r.android.com/2969774, the compressed kernel will be first decompressed \u003d\u003e resign \u003d\u003e compressed again immediately.\n\nWhile for the rialto resigning, I need to read the avb footer of both original kernel and resigned kernel and then update their hashes in rialto binary before resigning it. Do you think this can be in conflict with your change?",
+      "range": {
+        "startLine": 682,
+        "startChar": 0,
+        "endLine": 682,
+        "endChar": 62
+      },
+      "revId": "2d061a2a3c02102973210f2ab473fee84d635f5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
