@@ -46,6 +46,30 @@
       },
       "revId": "dfacb3759d1cd4c16265fbcfc8ecc4c5ba19a696",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b19fcc5_c7af972c",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-26T14:34:25Z",
+      "side": 1,
+      "message": "Doesn\u0027t `apply_overlay` carry over the symbols i.e. populates the resulting `__symbols__` node from the `__symbols__` nodes of its inputs?",
+      "parentUuid": "fd890d8c_92da9c3e",
+      "range": {
+        "startLine": 732,
+        "startChar": 8,
+        "endLine": 732,
+        "endChar": 31
+      },
+      "revId": "dfacb3759d1cd4c16265fbcfc8ecc4c5ba19a696",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
