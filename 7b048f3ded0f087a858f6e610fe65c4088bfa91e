@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd525fda_e8fd2448",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-26T13:29:19Z",
+      "side": 1,
+      "message": "Instead of having to re-test all invariants from `::new` in `::new_with_tokens` (e.g. `b\u0027/\u0027` or `token.is_empty`, currently missing), introduce `dtbo_node_path.to_overlaid_path()` which does the slice cropping and `is_overlayable_node` check internally?",
+      "range": {
+        "startLine": 267,
+        "startChar": 42,
+        "endLine": 267,
+        "endChar": 57
+      },
+      "revId": "7b048f3ded0f087a858f6e610fe65c4088bfa91e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "282d07d8_5d227bbd",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-26T13:29:19Z",
+      "side": 1,
+      "message": "nit: `if let Some(_) \u003d _ {} else {return}` or `let Some(_) \u003d _ else {return}`",
+      "range": {
+        "startLine": 343,
+        "startChar": 0,
+        "endLine": 346,
+        "endChar": 14
+      },
+      "revId": "7b048f3ded0f087a858f6e610fe65c4088bfa91e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "073d8938_801c1490",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-26T13:29:19Z",
+      "side": 1,
+      "message": "It doesn\u0027t feel like an improvement that we\u0027re now allocating memory on the heap and tokenizing the whole string into a vector just to check that the string matches the format\n```\n/[...]*/__overlay__/.*\n```\nbut I guess it isn\u0027t a big deal.",
+      "range": {
+        "startLine": 716,
+        "startChar": 0,
+        "endLine": 719,
+        "endChar": 13
+      },
+      "revId": "7b048f3ded0f087a858f6e610fe65c4088bfa91e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e84d7203_3e1c930b",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-26T13:29:19Z",
+      "side": 1,
+      "message": "Out-of-scope for this CL but do you think this filtering could be reworked to deal with sets of `NodeOffset`, now that this information is (to some extent) available?",
+      "range": {
+        "startLine": 731,
+        "startChar": 16,
+        "endLine": 731,
+        "endChar": 35
+      },
+      "revId": "7b048f3ded0f087a858f6e610fe65c4088bfa91e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

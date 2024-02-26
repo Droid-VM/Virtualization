@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31497ecd_e40211f0",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-26T13:29:19Z",
+      "side": 1,
+      "message": "nit: `self.tokens.get(1) \u003d\u003d Some(b\"__overlay__\")`?",
+      "range": {
+        "startLine": 207,
+        "startChar": 9,
+        "endLine": 207,
+        "endChar": 66
+      },
+      "revId": "5e49366e8ce5089070fd2ff78e62baf82956ccb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed2d2f5d_d385b379",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-26T13:29:19Z",
+      "side": 1,
+      "message": "IMO, this could be added to `liblibfdt` (taking the `\u0026[\u0026[u8]]`), probably as both `FdtNode::subnode_XXX()` and `Fdt::node_XXX()` (i.e. `fdt.root().subnode_XXX()`); WDYT?\n\nRegarding bike-shedding, I don\u0027t have a strong recommendation but `[sub]node_at_tokenized_path` or `[sub]node_recursive` seem good candidates.",
+      "range": {
+        "startLine": 339,
+        "startChar": 4,
+        "endLine": 339,
+        "endChar": 66
+      },
+      "revId": "5e49366e8ce5089070fd2ff78e62baf82956ccb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
