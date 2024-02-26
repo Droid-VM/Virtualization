@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6157aa5c_e1a8456a",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-26T13:02:39Z",
+      "side": 1,
+      "message": "How are DTBO symbols pointing outside of `__overlay__` nodes handled?\n\nDo they end up in the final DT when it gets applied?",
+      "range": {
+        "startLine": 732,
+        "startChar": 8,
+        "endLine": 732,
+        "endChar": 31
+      },
+      "revId": "dfacb3759d1cd4c16265fbcfc8ecc4c5ba19a696",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
