@@ -16,6 +16,29 @@
       "message": "I\u0027ll refine changes before submitting. In the meantime... WDYT about the approach here?",
       "revId": "2640100df4bd5202f29b39c0bd0d8c3edda5ae42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61abc477_a07521f7",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 865,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-26T14:52:32Z",
+      "side": 1,
+      "message": "Wouldn\u0027t `fs::canonicalize` be better?\nE.g. what if it\u0027s a symlink to a symlink?",
+      "range": {
+        "startLine": 865,
+        "startChar": 19,
+        "endLine": 865,
+        "endChar": 28
+      },
+      "revId": "2640100df4bd5202f29b39c0bd0d8c3edda5ae42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
