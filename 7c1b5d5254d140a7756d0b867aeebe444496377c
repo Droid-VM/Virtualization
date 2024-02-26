@@ -37,6 +37,116 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c5130af6_cba20efe",
+        "filename": "TEST_MAPPING",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-26T09:48:18Z",
+      "side": 1,
+      "message": "I think so, if you want to run on real devices.\nIt\u0027s definitely needed to keep our test infrastructure happy, anyway.",
+      "parentUuid": "addc8833_5e74eb87",
+      "revId": "7c1b5d5254d140a7756d0b867aeebe444496377c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50c6ec3f_2e3df70a",
+        "filename": "tests/testapk_no_perm/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-26T09:48:18Z",
+      "side": 1,
+      "message": "Also \"cts\"",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 24
+      },
+      "revId": "7c1b5d5254d140a7756d0b867aeebe444496377c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eaf977d6_9da0e8d3",
+        "filename": "tests/testapk_no_perm/AndroidManifest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-26T09:48:18Z",
+      "side": 1,
+      "message": "2024, since this is a new file.",
+      "range": {
+        "startLine": 2,
+        "startChar": 19,
+        "endLine": 2,
+        "endChar": 23
+      },
+      "revId": "7c1b5d5254d140a7756d0b867aeebe444496377c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3873279d_4e8e4076",
+        "filename": "tests/testapk_no_perm/AndroidTest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-26T09:48:18Z",
+      "side": 1,
+      "message": "Also 2024",
+      "range": {
+        "startLine": 2,
+        "startChar": 19,
+        "endLine": 2,
+        "endChar": 23
+      },
+      "revId": "7c1b5d5254d140a7756d0b867aeebe444496377c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd05d57b_9ecb9e32",
+        "filename": "tests/testapk_no_perm/AndroidTest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-26T09:48:18Z",
+      "side": 1,
+      "message": "Needs\n```\n    \u003coption name\u003d\"test-suite-tag\" value\u003d\"cts\" /\u003e\n```",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 70
+      },
+      "revId": "7c1b5d5254d140a7756d0b867aeebe444496377c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "435007cb_0dc33a8f",
         "filename": "tests/testapk_no_perm/AndroidTest.xml",
         "patchSetId": 1
@@ -48,6 +158,24 @@
       "writtenOn": "2024-02-23T23:53:40Z",
       "side": 1,
       "message": "Can this be rolled into another test and ran using the the exist MicrodroidTestApp, to avoid bloating the test list?",
+      "revId": "7c1b5d5254d140a7756d0b867aeebe444496377c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6f9a954_13b53a6d",
+        "filename": "tests/testapk_no_perm/AndroidTest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-26T09:48:18Z",
+      "side": 1,
+      "message": "See e.g. aosp/2966531 where I added another Java test file next to the existing one.\nBut here you need a different app, because you want different permissions.\nSo I think it requires a new AndroidTest.xml.",
+      "parentUuid": "435007cb_0dc33a8f",
       "revId": "7c1b5d5254d140a7756d0b867aeebe444496377c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
