@@ -63,6 +63,30 @@
       },
       "revId": "2640100df4bd5202f29b39c0bd0d8c3edda5ae42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "253161c4_ff6a273b",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 865,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-02-27T13:14:43Z",
+      "side": 1,
+      "message": "I reverted this from canonicalize to read_link.\n\n* `/proc/self/fd/{}` is guaranteed to be a symbolic link to the actual file. `man 5 proc` says\n\n       /proc/pid/fd/\n              This is a subdirectory containing one entry for each file\n              which the process has open, named by its file descriptor,\n              and which is a symbolic link to the actual file.  Thus, 0\n              is standard input, 1 standard output, 2 standard error,\n              and so on.\n              \n* `canonicalize` sometimes fails due to lack of permission, because canoncalize tries to read links again and again until it actually meets a real file. So it\u0027ll fail if we don\u0027t have lnk_file permission for that file. That\u0027s not the case for `read_link` which only reads once.\n\nPTAL and resolve if this makes sense.",
+      "parentUuid": "1bc9432d_1d8c30a9",
+      "range": {
+        "startLine": 865,
+        "startChar": 19,
+        "endLine": 865,
+        "endChar": 28
+      },
+      "revId": "2640100df4bd5202f29b39c0bd0d8c3edda5ae42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
