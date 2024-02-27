@@ -22,6 +22,30 @@
       },
       "revId": "2d061a2a3c02102973210f2ab473fee84d635f5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e20daac1_2c4fc1b8",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-02-27T01:25:48Z",
+      "side": 1,
+      "message": "No, I think it should be fine. We\u0027ll always read avb footer from decompressed images, as that\u0027s exactly what the VM sees. On my change, `AvbInfo` decompresses a given image before reading it.",
+      "parentUuid": "b8aa8528_e0bc7037",
+      "range": {
+        "startLine": 682,
+        "startChar": 0,
+        "endLine": 682,
+        "endChar": 62
+      },
+      "revId": "2d061a2a3c02102973210f2ab473fee84d635f5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
