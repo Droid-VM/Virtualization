@@ -23,17 +23,42 @@ import com.android.microdroid.test.device.MicrodroidDeviceTestBase;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assume.assumeTrue;
 
+import org.junit.Before;
+import org.junit.runners.Parameterized;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 /**
  * Test that the android.permission.MANAGE_VIRTUAL_MACHINE is enforced and that an app cannot launch
  * a VM without said permission.
  */
 @RunWith(JUnit4.class)
 public class MicrodroidTestAppNoPerm extends MicrodroidDeviceTestBase {
+
+    @Parameterized.Parameters(name = "protectedVm={0}")
+    public static Collection<Object[]> params() {
+        List<Object[]> ret = new ArrayList<>();
+        ret.add(new Object[] {true /* protectedVm */, null /* use microdroid kernel */});
+        ret.add(new Object[] {false /* protectedVm */, null /* use microdroid kernel */});
+        return ret;
+    }
+
+    @Parameterized.Parameter(0)
+    public boolean mProtectedVm;
+
+    public String mGki;
+
+    @Before
+    public void setup() {
+        prepareTestSetup(mProtectedVm, mGki);
+    }
+
     @Test
     @CddTest(
             requirements = {
@@ -43,6 +68,7 @@ public class MicrodroidTestAppNoPerm extends MicrodroidDeviceTestBase {
             })
     public void createVmRequiresPermission() {
         assumeSupportedDevice();
+        assumeTrue("Not supported on GKI kernels", mGki == null);
 
         VirtualMachineConfig config =
                 newVmConfigBuilderWithPayloadBinary("MicrodroidTestNativeLib.so").build();
