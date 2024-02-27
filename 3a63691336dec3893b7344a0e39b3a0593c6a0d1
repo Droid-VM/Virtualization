@@ -50,6 +50,24 @@
       "message": "We actually need to disable this test on `tm-qpr-dev` and `udc-qpr-dev`, not `main`. So far, avf_postsubmit_tests doesn\u0027t run on `next`, so `main` is fine. I think there is a value to keep this test running on `main`, to catch issues like b/326557850 caused by aosp/2973832. I know this test is flaky, but improving it is on my radar. Right now, I suggest keeping it.",
       "revId": "3a63691336dec3893b7344a0e39b3a0593c6a0d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e3fd354_973d9bac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-27T13:18:54Z",
+      "side": 1,
+      "message": "Oops, didn\u0027t see this message. Thanks for the comment. I will revive this here and remove it only from the mentioned branches.",
+      "parentUuid": "64743c53_280f3cc3",
+      "revId": "3a63691336dec3893b7344a0e39b3a0593c6a0d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
