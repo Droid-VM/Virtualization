@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b0608fa8_23d88f06",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 1010,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-27T12:38:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f7758c9_e74afe7f",
+      "range": {
+        "startLine": 1010,
+        "startChar": 72,
+        "endLine": 1010,
+        "endChar": 76
+      },
+      "revId": "7b817c2d177b52e9efc3318984c3f36ac838e36f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "412ceb49_31137790",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 5
@@ -60,6 +84,30 @@
       "writtenOn": "2024-01-12T15:23:39Z",
       "side": 1,
       "message": "As I mention in my other comment, I believe that the PCI node has MMIO ranges in both `\u003cranges\u003e` and `\u003creg\u003e`; is that not the case?",
+      "range": {
+        "startLine": 1017,
+        "startChar": 48,
+        "endLine": 1017,
+        "endChar": 81
+      },
+      "revId": "7b817c2d177b52e9efc3318984c3f36ac838e36f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5eec0bf_55c6c4d5",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 1017,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-27T12:38:01Z",
+      "side": 1,
+      "message": "Changed to handle it.",
+      "parentUuid": "27db4629_cfa5323a",
       "range": {
         "startLine": 1017,
         "startChar": 48,
