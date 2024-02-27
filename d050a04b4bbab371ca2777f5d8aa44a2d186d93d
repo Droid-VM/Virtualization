@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ecb85b78_93c4f2e7",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-27T11:14:53Z",
+      "side": 1,
+      "message": "\u003e why not use it directly\n\nInstance-Id will be used as is in context of Secretkeeper operation, hence I wanted to not use it directly for hidden inputs.\n\n\u003e Why an HKDF rather than just a sha512\n\nThat was simply a result of me copying code from somewhere else. They\u0027re both good here. Let me change it to sha512 to be coherent with the rest of this module",
+      "parentUuid": "7b6fe052_68703714",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 37
+      },
+      "revId": "d050a04b4bbab371ca2777f5d8aa44a2d186d93d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "67d9af3b_6f9e3758",
         "filename": "microdroid_manager/src/dice.rs",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-27T10:58:37Z",
       "side": 1,
       "message": "Shouldn\u0027t this be fatal?",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 14
+      },
+      "revId": "d050a04b4bbab371ca2777f5d8aa44a2d186d93d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b389fd68_3e0489ae",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-27T11:14:53Z",
+      "side": 1,
+      "message": "Thats actually a side effect of a bug in CF: See https://b.corp.google.com/issues/325094712#comment14. I\u0027ll add it as a comment\n to clarify.\n \n \n Note that this only affects non-protected VM. (pVMs use 0s as the hidden input during DICE for payload) \u0026 it might be okay to not fail \u0026 just drop  not differentiation if host (maliciously) drops instance-id from DT of non-protected VM?",
+      "parentUuid": "67d9af3b_6f9e3758",
       "range": {
         "startLine": 84,
         "startChar": 0,
