@@ -118,6 +118,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
     @Rule public Timeout globalTimeout = Timeout.seconds(300);
 
+<<<<<<< HEAD   (d1b78f Merge "Disallow vendor and odm files for a VM" into main)
     @Parameterized.Parameters(name = "protectedVm={0},gki={1}")
     public static Collection<Object[]> params() {
         List<Object[]> ret = new ArrayList<>();
@@ -129,6 +130,11 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
             ret.add(new Object[] {false /* protectedVm */, gki});
         }
         return ret;
+=======
+    @Parameterized.Parameters(name = "protectedVm={0}")
+    public static Object[] protectedVmConfigs() {
+        return new Object[] { false, true };
+>>>>>>> BRANCH (6f380a Move createVmRequiresPermission test into a separate APK)
     }
 
     @Parameterized.Parameter(0)
@@ -139,6 +145,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
     @Before
     public void setup() {
+<<<<<<< HEAD   (d1b78f Merge "Disallow vendor and odm files for a VM" into main)
         prepareTestSetup(mProtectedVm, mGki);
         if (mGki != null) {
             // Using a non-default VM always needs the custom permission.
@@ -151,6 +158,9 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
             // Tests that rely on the state of the permission should explicitly grant or revoke it.
             revokePermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
         }
+=======
+        prepareTestSetup(mProtectedVm);
+>>>>>>> BRANCH (6f380a Move createVmRequiresPermission test into a separate APK)
     }
 
     @After
@@ -228,6 +238,10 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         testResults.assertNoException();
         assertThat(testResults.mAddInteger).isEqualTo(37 + 73);
     }
+<<<<<<< HEAD   (d1b78f Merge "Disallow vendor and odm files for a VM" into main)
+=======
+
+>>>>>>> BRANCH (6f380a Move createVmRequiresPermission test into a separate APK)
     @Test
     @CddTest(requirements = {"9.17/C-1-1"})
     public void autoCloseVm() throws Exception {
@@ -2325,5 +2339,8 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         }
         return 0;
     }
+<<<<<<< HEAD   (d1b78f Merge "Disallow vendor and odm files for a VM" into main)
 
+=======
+>>>>>>> BRANCH (6f380a Move createVmRequiresPermission test into a separate APK)
 }

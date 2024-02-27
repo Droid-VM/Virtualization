@@ -24,6 +24,7 @@ import com.android.microdroid.test.device.MicrodroidDeviceTestBase;
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
 
+<<<<<<< HEAD   (d1b78f Merge "Disallow vendor and odm files for a VM" into main)
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -46,6 +47,46 @@ public class MicrodroidTestAppNoPerm extends MicrodroidDeviceTestBase {
 
         VirtualMachineConfig config =
                 newVmConfigBuilderWithPayloadBinary("MicrodroidTestNativeLib.so").build();
+=======
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runners.Parameterized;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+/**
+ * Test that the android.permission.MANAGE_VIRTUAL_MACHINE is enforced and that an app cannot launch
+ * a VM without said permission.
+ */
+@RunWith(JUnit4.class)
+public class MicrodroidTestAppNoPerm extends MicrodroidDeviceTestBase {
+    @Parameterized.Parameters(name = "protectedVm={0}")
+    public static Object[] protectedVmConfigs() {
+        return new Object[] { false, true };
+    }
+
+    @Parameterized.Parameter public boolean mProtectedVm;
+
+    @Before
+    public void setup() {
+        prepareTestSetup(mProtectedVm);
+    }
+
+    @Test
+    @CddTest(
+            requirements = {
+                "9.17/C-1-1",
+                "9.17/C-1-2",
+                "9.17/C-1-4",
+            })
+    public void createVmRequiresPermission() {
+        assumeSupportedDevice();
+
+        VirtualMachineConfig config =
+                newVmConfigBuilder()
+                .setPayloadBinaryName("MicrodroidTestNativeLib.so")
+                .build();
+>>>>>>> BRANCH (6f380a Move createVmRequiresPermission test into a separate APK)
 
         SecurityException e =
                 assertThrows(
