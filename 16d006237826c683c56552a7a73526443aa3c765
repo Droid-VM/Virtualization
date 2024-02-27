@@ -93,6 +93,30 @@
       },
       "revId": "16d006237826c683c56552a7a73526443aa3c765",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f515557a_0c9f2fb4",
+        "filename": "virtualizationservice/src/maintenance.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-27T10:41:27Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t think the order matters, because we\u0027re not exiting on failure\n\nAh, I completely misread this.\n\n\u003e I think we should still remove the IDs from the secure environment even if there\u0027s a problem with the (userspace) database,\n\nI agree.",
+      "parentUuid": "a5760401_27c2140c",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 9
+      },
+      "revId": "16d006237826c683c56552a7a73526443aa3c765",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
