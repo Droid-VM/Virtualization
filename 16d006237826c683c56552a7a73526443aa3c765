@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b373837_b31bdf49",
+        "filename": "virtualizationservice/src/maintenance.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-02-27T09:31:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6366b396_2ea93340",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 67
+      },
+      "revId": "16d006237826c683c56552a7a73526443aa3c765",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b2c22c2_6e89b6f8",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-26T17:51:38Z",
       "side": 1,
       "message": "Should we do these in the other order?\nAlternatively, should we do the second part even if the first part fails?",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 9
+      },
+      "revId": "16d006237826c683c56552a7a73526443aa3c765",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5760401_27c2140c",
+        "filename": "virtualizationservice/src/maintenance.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-02-27T09:31:32Z",
+      "side": 1,
+      "message": "I don\u0027t think the order matters, because we\u0027re not exiting on failure, but I\u0027ve reversed it anyway as removing from the TA is more important.\n\nI *think* we should still remove the IDs from the secure environment even if there\u0027s a problem with the (userspace) database, but I don\u0027t have enough of a sense of possible failure modes to feel strongly about it.",
+      "parentUuid": "2b2c22c2_6e89b6f8",
       "range": {
         "startLine": 127,
         "startChar": 0,
