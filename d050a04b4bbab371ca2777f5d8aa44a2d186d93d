@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d98d6d12_00485f68",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-27T17:52:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecb85b78_93c4f2e7",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 37
+      },
+      "revId": "d050a04b4bbab371ca2777f5d8aa44a2d186d93d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67d9af3b_6f9e3758",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Thats actually a side effect of a bug in CF: See https://b.corp.google.com/issues/325094712#comment14. I\u0027ll add it as a comment\n to clarify.\n \n \n Note that this only affects non-protected VM. (pVMs use 0s as the hidden input during DICE for payload) \u0026 it might be okay to not fail \u0026 just drop  not differentiation if host (maliciously) drops instance-id from DT of non-protected VM?",
       "parentUuid": "67d9af3b_6f9e3758",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 14
+      },
+      "revId": "d050a04b4bbab371ca2777f5d8aa44a2d186d93d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abcb3c89_0ac87d19",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-27T17:52:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b389fd68_3e0489ae",
       "range": {
         "startLine": 84,
         "startChar": 0,
