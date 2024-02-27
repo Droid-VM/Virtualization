@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43affa30_b345b07d",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 1322,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-02-27T12:43:01Z",
+      "side": 1,
+      "message": "I just realized myself that we don\u0027t need to handle PCI as special case, but parse `\u003crange\u003e` like `\u003creg\u003e` is more generic. Let me work on it.",
+      "range": {
+        "startLine": 1314,
+        "startChar": 22,
+        "endLine": 1322,
+        "endChar": 19
+      },
+      "revId": "2f635dc18ea58adb1b1dad0e8f99b42a2f4d074c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
