@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b6fe052_68703714",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-27T10:58:37Z",
+      "side": 1,
+      "message": "Isn\u0027t instance_id the right size already - why not use it directly?\nWhy an HKDF rather than just a sha512, which we\u0027re already using elsewhere in this file?",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 37
+      },
+      "revId": "d050a04b4bbab371ca2777f5d8aa44a2d186d93d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67d9af3b_6f9e3758",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-02-27T10:58:37Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be fatal?",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 14
+      },
+      "revId": "d050a04b4bbab371ca2777f5d8aa44a2d186d93d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
