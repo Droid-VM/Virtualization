@@ -16,12 +16,10 @@
 
 package android.system.virtualizationmaintenance;
 
-import android.system.virtualizationmaintenance.IVirtualizationReconciliationCallback;
+interface IVirtualizationReconciliationCallback {
+    boolean isStopRequested();
 
-interface IVirtualizationMaintenance {
-    void appRemoved(int userId, int appId);
+    boolean[] doUsersExist(in int[] userIds);
 
-    void userRemoved(int userId);
-
-    void performReconciliation(IVirtualizationReconciliationCallback callback);
+    boolean[] doAppsExist(int userId, in int[] appIds);
 }
