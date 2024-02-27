@@ -16,6 +16,29 @@
       "message": "Hi Ryan, could you please do the NDK-API review for this cl? Thanks!",
       "revId": "60208a0a5c44f207e0d672c5d6d2f7f060915514",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f68e65c_f95e4ecd",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2024-02-27T20:31:34Z",
+      "side": 1,
+      "message": "`struct AVmAttestationResult` can just be `AVmAttestationResult` without the struct keyword, here and elsewhere.",
+      "range": {
+        "startLine": 155,
+        "startChar": 8,
+        "endLine": 155,
+        "endChar": 14
+      },
+      "revId": "60208a0a5c44f207e0d672c5d6d2f7f060915514",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
