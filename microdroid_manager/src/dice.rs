@@ -12,12 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::dice_driver::DiceDriver;
 use crate::instance::{ApexData, ApkData};
 use crate::{is_debuggable, is_strict_boot, MicrodroidData};
 use anyhow::{bail, Context, Result};
 use ciborium::{cbor, Value};
 use coset::CborSerializable;
+use dice_driver::DiceDriver;
 use diced_open_dice::{Hidden, OwnedDiceArtifacts, HIDDEN_SIZE};
 use microdroid_metadata::PayloadMetadata;
 use openssl::sha::{sha512, Sha512};
