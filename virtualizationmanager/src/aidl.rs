@@ -1468,13 +1468,9 @@ impl IVirtualMachineService for VirtualMachineService {
         }
     }
 
-    fn getSecretkeeper(&self) -> binder::Result<Option<Strong<dyn ISecretkeeper>>> {
-        let sk = if is_secretkeeper_supported() {
-            Some(binder::wait_for_interface(SECRETKEEPER_IDENTIFIER)?)
-        } else {
-            None
-        };
-        Ok(sk.map(|s| BnSecretkeeper::new_binder(SecretkeeperProxy(s), BinderFeatures::default())))
+    fn getSecretkeeper(&self) -> binder::Result<Strong<dyn ISecretkeeper>> {
+        let sk = binder::wait_for_interface(SECRETKEEPER_IDENTIFIER)?;
+        Ok(BnSecretkeeper::new_binder(SecretkeeperProxy(sk), BinderFeatures::default()))
     }
 
     fn requestAttestation(&self, csr: &[u8], test_mode: bool) -> binder::Result<Vec<Certificate>> {
