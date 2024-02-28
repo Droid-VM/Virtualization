@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8c665327_4212b2cd",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-28T21:08:50Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t think changing the name of this property was intentional\n\nNo, it was not.\n\nIt seems the recommended way is using a dash. I\u0027ll change defer_rbp -\u003e `defer-rollback-protection`.\n\n\u003e no test caught the error\nWe do have CDI \u0026 related tests that would fail if the property is not found. They\u0027re not triggered yet.",
+      "parentUuid": "a09078b5_7039b2b2",
+      "range": {
+        "startLine": 410,
+        "startChar": 41,
+        "endLine": 410,
+        "endChar": 52
+      },
+      "revId": "bad3a55a0671576d8f998bde920c1243a2a462f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e31a996c_9b89cdcc",
         "filename": "virtualizationmanager/src/aidl.rs",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-28T20:56:57Z",
       "side": 1,
       "message": "Spell this out as it would probably be cryptic to someone parsing the DT e.g. `deferred-rollback-protection`.",
+      "range": {
+        "startLine": 414,
+        "startChar": 45,
+        "endLine": 414,
+        "endChar": 54
+      },
+      "revId": "bad3a55a0671576d8f998bde920c1243a2a462f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbe2984d_504a2803",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-28T21:08:50Z",
+      "side": 1,
+      "message": "Shouldn\u0027t it be defer-rollback-protection or can-defer-rollback-protection\n\nto express intent that rp can be dropped in guest.",
+      "parentUuid": "e31a996c_9b89cdcc",
       "range": {
         "startLine": 414,
         "startChar": 45,
