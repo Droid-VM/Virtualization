@@ -73,6 +73,7 @@ const DEBUG_MICRODROID_NO_VERIFIED_BOOT: &str =
     "/proc/device-tree/virtualization/guest/debug-microdroid,no-verified-boot";
 const SECRETKEEPER_KEY: &str = "/proc/device-tree/avf/secretkeeper_public_key";
 const INSTANCE_ID_PATH: &str = "/proc/device-tree/avf/untrusted/instance-id";
+const DEFER_ROLLBACK_PROTECTION: &str = "/proc/device-tree/avf/untrusted/defer-rollback-protection";
 
 const ENCRYPTEDSTORE_BIN: &str = "/system/bin/encryptedstore";
 const ZIPFUSE_BIN: &str = "/system/bin/zipfuse";
@@ -160,6 +161,10 @@ fn get_instance_id() -> Result<Option<[u8; ID_SIZE]>> {
         None
     };
     Ok(instance_id)
+}
+
+fn should_defer_rollback_protection() -> bool {
+    Path::new(DEFER_ROLLBACK_PROTECTION).exists()
 }
 
 fn main() -> Result<()> {
@@ -299,10 +304,9 @@ fn try_run_payload(
     let metadata = load_metadata().context("Failed to load payload metadata")?;
     let dice = DiceDriver::new(Path::new("/dev/open-dice0")).context("Failed to load DICE")?;
 
-    // TODO(b/291306122): Checking with host about Secretkeeper support multiple times introduces
-    // a whole range of security vulnerability since host can give different answers. Guest should
-    // check only once and the same answer should be known to pVM Firmware and Microdroid.
-    let instance_data = if let Some(_sk) = vm_secret::is_sk_supported(service)? {
+    // Microdroid skips checking payload against instance img iff the device supports secretkeeper
+    // and will use VmSecret::V2 which are protected against rollback of boot images & packages.
+    let instance_data = if should_defer_rollback_protection() {
         verify_payload(&metadata, None)?
     } else {
         verify_payload_with_instance_img(&metadata, &dice)?
