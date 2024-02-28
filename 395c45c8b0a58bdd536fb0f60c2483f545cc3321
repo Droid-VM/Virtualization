@@ -34,6 +34,24 @@
       "parentUuid": "bef1b8d9_ce699239",
       "revId": "395c45c8b0a58bdd536fb0f60c2483f545cc3321",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c46d4fa5_93aae513",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-28T11:21:32Z",
+      "side": 1,
+      "message": "Yes, we will remove the instance.img if Sk is not supported.\n\nBut as of this patch, pvmfw continues to use instance img for code hash checking. (This patch only make the Microdroid\u0027s partition in instance image obsolte).\n\nWe can only remove it once pvmfw also doesn\u0027t require it. That will be soon but not yet.",
+      "parentUuid": "2f1bf380_7fd70c67",
+      "revId": "395c45c8b0a58bdd536fb0f60c2483f545cc3321",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
