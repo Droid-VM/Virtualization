@@ -1512,11 +1512,11 @@ impl IVirtualMachineService for VirtualMachineService {
         }
     }
 
-    fn getSecretkeeper(&self) -> binder::Result<Option<Strong<dyn ISecretkeeper>>> {
+    fn getSecretkeeper(&self) -> binder::Result<Strong<dyn ISecretkeeper>> {
         // TODO(b/327526008): Session establishment wth secretkeeper is failing.
         // Re-enable this when fixed.
         let _sk_supported = is_secretkeeper_supported();
-        Ok(None)
+        Err(StatusCode::NAME_NOT_FOUND)
     }
 
     fn requestAttestation(&self, csr: &[u8], test_mode: bool) -> binder::Result<Vec<Certificate>> {
