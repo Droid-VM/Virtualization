@@ -1512,11 +1512,12 @@ impl IVirtualMachineService for VirtualMachineService {
         }
     }
 
-    fn getSecretkeeper(&self) -> binder::Result<Option<Strong<dyn ISecretkeeper>>> {
-        // TODO(b/327526008): Session establishment wth secretkeeper is failing.
-        // Re-enable this when fixed.
-        let _sk_supported = is_secretkeeper_supported();
-        Ok(None)
+    fn getSecretkeeper(&self) -> binder::Result<Strong<dyn ISecretkeeper>> {
+        if !is_secretkeeper_supported() {
+            return Err(StatusCode::NAME_NOT_FOUND)?;
+        }
+        let sk = binder::wait_for_interface(SECRETKEEPER_IDENTIFIER)?;
+        Ok(BnSecretkeeper::new_binder(SecretkeeperProxy(sk), BinderFeatures::default()))
     }
 
     fn requestAttestation(&self, csr: &[u8], test_mode: bool) -> binder::Result<Vec<Certificate>> {
@@ -1525,8 +1526,11 @@ impl IVirtualMachineService for VirtualMachineService {
 }
 
 fn is_secretkeeper_supported() -> bool {
-    binder::is_declared(SECRETKEEPER_IDENTIFIER)
-        .expect("Could not check for declared Secretkeeper interface")
+    // TODO(b/327526008): Session establishment wth secretkeeper is failing.
+    // Re-enable this when fixed.
+    let _sk_supported = binder::is_declared(SECRETKEEPER_IDENTIFIER)
+        .expect("Could not check for declared Secretkeeper interface");
+    false
 }
 
 impl VirtualMachineService {
