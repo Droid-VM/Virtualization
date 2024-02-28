@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a09078b5_7039b2b2",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-28T20:56:57Z",
+      "side": 1,
+      "message": "I don\u0027t think changing the name of this property was intentional?\n\nIf it was and no test caught the error (somehow?), please follow the [kernel coding style](https://docs.kernel.org/devicetree/bindings/dts-coding-style.html) and keep the original name.",
+      "range": {
+        "startLine": 410,
+        "startChar": 41,
+        "endLine": 410,
+        "endChar": 52
+      },
+      "revId": "bad3a55a0671576d8f998bde920c1243a2a462f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e31a996c_9b89cdcc",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-28T20:56:57Z",
+      "side": 1,
+      "message": "Spell this out as it would probably be cryptic to someone parsing the DT e.g. `deferred-rollback-protection`.",
+      "range": {
+        "startLine": 414,
+        "startChar": 45,
+        "endLine": 414,
+        "endChar": 54
+      },
+      "revId": "bad3a55a0671576d8f998bde920c1243a2a462f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
