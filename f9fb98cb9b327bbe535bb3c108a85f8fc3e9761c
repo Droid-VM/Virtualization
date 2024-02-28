@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4086b30_296636fc",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-28T16:25:12Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "0c4bcade_c195466c",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 66
+      },
+      "revId": "f9fb98cb9b327bbe535bb3c108a85f8fc3e9761c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b432e515_5ae20fdf",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-28T13:46:13Z",
       "side": 1,
       "message": "Should we do the same trick as I did in pvmfw here, to make sure a hidden input can\u0027t be spoofed?\n\nHash(0 + salt) or Hash(1 + ID)\n\n(Or different string prefixes)",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 23
+      },
+      "revId": "f9fb98cb9b327bbe535bb3c108a85f8fc3e9761c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0e3b1fe_65775b4e",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-28T16:25:12Z",
+      "side": 1,
+      "message": "You\u0027re right about the concern of spoofing as is addressed in the commit message of other patch - aosp/2975858 (here quoted)\n```\nSecurity: This opens up the Sealing CDIs of a pVM to Payload with lower\nsecurity version. But all CDIs will be reset once pvmfw starts including\nInstance-Id in the hidden inputs, so this is a safe change.\n\n```\n\nWe absolutely want it in pvmfw (and should include an additional one when we remove code hashes from pvmfw). However, adding it here in Microdroid does not provide any additional security properties to PVM",
+      "parentUuid": "b432e515_5ae20fdf",
       "range": {
         "startLine": 72,
         "startChar": 0,
