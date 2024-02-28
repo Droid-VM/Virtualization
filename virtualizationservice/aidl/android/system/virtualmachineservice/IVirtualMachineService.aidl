@@ -59,8 +59,7 @@ interface IVirtualMachineService {
 
     /**
      * Request connection to Secretkeeper. This is used by pVM to store Anti-Rollback protected
-     * secrets. Note that the return value is nullable to reflect that Secretkeeper HAL may not be
-     * present.
+     * secrets.
      */
-    @nullable ISecretkeeper getSecretkeeper();
+    ISecretkeeper getSecretkeeper();
 }
