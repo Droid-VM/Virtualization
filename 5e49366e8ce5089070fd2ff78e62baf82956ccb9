@@ -93,6 +93,30 @@
       },
       "revId": "5e49366e8ce5089070fd2ff78e62baf82956ccb9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9d92a63_dd90f85c",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-29T19:05:32Z",
+      "side": 1,
+      "message": "\u003e Let me keep it here.\n\nAck.\n\n\u003e I want to do so without extra allocations.\n\nThat\u0027s laudable but this patch-stack already does so much allocation and copying of strings that I wonder how much we\u0027re really saving, here.",
+      "parentUuid": "36bd34e7_d35c28a1",
+      "range": {
+        "startLine": 339,
+        "startChar": 4,
+        "endLine": 339,
+        "endChar": 66
+      },
+      "revId": "5e49366e8ce5089070fd2ff78e62baf82956ccb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

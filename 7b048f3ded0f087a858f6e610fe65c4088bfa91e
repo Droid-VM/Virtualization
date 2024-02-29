@@ -187,6 +187,30 @@
       },
       "revId": "7b048f3ded0f087a858f6e610fe65c4088bfa91e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "567e02ea_3caac9d6",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-29T19:05:32Z",
+      "side": 1,
+      "message": "To be clear, I\u0027m not suggesting blocking these CLs but only some way to simplify this code (e.g. all the string parsing) in a potential future clean-up.",
+      "parentUuid": "59850996_0618bd0f",
+      "range": {
+        "startLine": 731,
+        "startChar": 16,
+        "endLine": 731,
+        "endChar": 35
+      },
+      "revId": "7b048f3ded0f087a858f6e610fe65c4088bfa91e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
