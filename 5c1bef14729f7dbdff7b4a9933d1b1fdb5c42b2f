@@ -16,6 +16,23 @@
       "message": "Since this patch didn\u0027t actually flow into udc-dev, reverting this won\u0027t actually fix the breakage, we should pick up ag/26402502",
       "revId": "5c1bef14729f7dbdff7b4a9933d1b1fdb5c42b2f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5fee7fa_35a8e94a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-02-29T00:50:10Z",
+      "side": 1,
+      "message": "This seems wrong. The error was on udc-qpr-dev, but this revert is on main.",
+      "revId": "5c1bef14729f7dbdff7b4a9933d1b1fdb5c42b2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
