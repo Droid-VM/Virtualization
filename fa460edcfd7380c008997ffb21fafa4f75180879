@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ec3ad12_315338ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-29T18:53:44Z",
+      "side": 1,
+      "message": "+2 assuming that the variable renaming (open comment thread) is dropped.",
+      "revId": "fa460edcfd7380c008997ffb21fafa4f75180879",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d80f7218_1de22361",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-02-29T18:53:44Z",
+      "side": 1,
+      "message": "Why are you changing the name of this variable? Nothing in the function body relies on the fact it is \"labeled\" (in the DTBO) and nothing in the interface mandates it to be labeled (i.e. any valid `CStr` can be passed) so I\u0027d recommend keeping this variable the way it was.",
+      "range": {
+        "startLine": 571,
+        "startChar": 8,
+        "endLine": 571,
+        "endChar": 16
+      },
+      "revId": "fa460edcfd7380c008997ffb21fafa4f75180879",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
