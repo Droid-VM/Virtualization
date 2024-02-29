@@ -46,6 +46,30 @@
       },
       "revId": "8707f0f27a56dd60411b2889c1f4ce54527d9eaf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91a2169b_c156dfe1",
+        "filename": "virtualizationservice/aidl/android/system/virtualmachineservice/IVirtualMachineService.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-29T16:37:41Z",
+      "side": 0,
+      "message": "\u003e Do you delete this case because you call this method only when the existence of secretkeeper is guaranteed\n\nYes.  The method will ideally not be called at all if Sk is missing. The presence is checked from DT. I will add a comment.\n\n\u003e it would be better to fail hard rather than wait forever\n\nYes, it should fail. The method fails after 5sec timeout. I can change the implementation of `getSecretkeeper()` to check if the service is declared and fail with a service specific error early. [Although I quite likes just failing with STATUS_NAME_NOT_FOUND returned by wait_for_interface]\n\nhttps://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:frameworks/native/libs/binder/include/binder/IServiceManager.h;l\u003d58-69?q\u003dwaitForService\u0026ss\u003dh%2Fgoogleplex-android%2Fplatform%2Fsuperproject%2Fmain%2F%2B%2Frefs%2Fheads%2Fmain:frameworks%2Fnative%2Flibs%2Fbinder%2F",
+      "parentUuid": "a529cb45_b60d56c6",
+      "range": {
+        "startLine": 62,
+        "startChar": 71,
+        "endLine": 63,
+        "endChar": 15
+      },
+      "revId": "8707f0f27a56dd60411b2889c1f4ce54527d9eaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2da280ad_f7d92fa3",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-29T16:37:41Z",
+      "side": 1,
+      "message": "VirtMgr only sets this property if `llpvm_changes` is enabled. So this must return false when the flag is disabled.\n\nOn a slightly different note, this can potentially hide away issues with guest DT. Is the property missing or the whole DT missing. But that should be okay I guess because we have bigger problems if guest DT is not supported on devices?",
+      "parentUuid": "fa928dd2_a9653e1d",
+      "range": {
+        "startLine": 167,
+        "startChar": 4,
+        "endLine": 167,
+        "endChar": 49
+      },
+      "revId": "d9bd4fcc2f0b66aa6aca83fcabbeb97f7925fa61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "295a97be_746450fa",
@@ -60,6 +84,30 @@
       "writtenOn": "2024-02-29T16:24:31Z",
       "side": 1,
       "message": "provide protection ?",
+      "range": {
+        "startLine": 308,
+        "startChar": 38,
+        "endLine": 308,
+        "endChar": 52
+      },
+      "revId": "d9bd4fcc2f0b66aa6aca83fcabbeb97f7925fa61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8e91dda_b163d665",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-02-29T16:37:41Z",
+      "side": 1,
+      "message": "Well the secrets are protected, the mechanism(Sk) provide protection to secrets.",
+      "parentUuid": "295a97be_746450fa",
       "range": {
         "startLine": 308,
         "startChar": 38,
