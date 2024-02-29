@@ -19,15 +19,23 @@ package com.android.microdroid.test;
 import android.system.virtualmachine.VirtualMachineConfig;
 
 import com.android.compatibility.common.util.CddTest;
+import com.android.compatibility.common.util.ApiTest;
 import com.android.microdroid.test.device.MicrodroidDeviceTestBase;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
 
 import org.junit.Before;
+<<<<<<< HEAD   (deddba Merge "[vm_payload] Adjust NDK API struct and function names)
 import org.junit.runners.Parameterized;
+=======
+>>>>>>> BRANCH (384086 Use Paramatized class for MicrodroidTestAppNoPerm)
 import org.junit.Test;
 import org.junit.runner.RunWith;
+<<<<<<< HEAD   (deddba Merge "[vm_payload] Adjust NDK API struct and function names)
+=======
+import org.junit.runners.Parameterized;
+>>>>>>> BRANCH (384086 Use Paramatized class for MicrodroidTestAppNoPerm)
 
 /**
  * Test that the android.permission.MANAGE_VIRTUAL_MACHINE is enforced and that an app cannot launch
@@ -55,6 +63,7 @@ public class MicrodroidTestAppNoPerm extends MicrodroidDeviceTestBase {
                 "9.17/C-1-2",
                 "9.17/C-1-4",
             })
+    @ApiTest(apis = {"android.system.virtualmachine.VirtualMachineManager#RequiresPermission"})
     public void createVmRequiresPermission() {
         assumeSupportedDevice();
 
