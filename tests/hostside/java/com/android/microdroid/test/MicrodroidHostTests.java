@@ -87,9 +87,13 @@ import java.util.stream.Collectors;
 @UseParametersRunnerFactory(DeviceJUnit4ClassRunnerWithParameters.RunnerFactory.class)
 public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     private static final String APK_NAME = "MicrodroidTestApp.apk";
+    private static final String APK_UPDATED_NAME = "MicrodroidTestAppUpdated.apk";
     private static final String PACKAGE_NAME = "com.android.microdroid.test";
     private static final String SHELL_PACKAGE_NAME = "com.android.shell";
     private static final String VIRT_APEX = "/apex/com.android.virt/";
+    private static final String IDSIG_PATH = TEST_ROOT + "idsig";
+    private static final String INSTANCE_IMG = TEST_ROOT + "instance.img";
+    private static final String INSTANCE_ID_FILE = TEST_ROOT + "instance_id";
 
     private static final int MIN_MEM_ARM64 = 170;
     private static final int MIN_MEM_X86_64 = 196;
@@ -405,6 +409,169 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         PipedInputStream pis = new PipedInputStream();
         Process process = RunUtil.getDefault().runCmdInBackground(args, new PipedOutputStream(pis));
         return new VmInfo(process);
+    }
+
+    @Test
+    @CddTest
+    public void UpgradedPackageIsAcceptedWithSk() throws Exception {
+        // Upgraded VMs are only supported if Secretkeeper is supported.
+        assumeSecretkeeperSupported();
+        CommandRunner android = new CommandRunner(getDevice());
+        android.run("rm", "-rf", TEST_ROOT + "*");
+        android.run("mkdir", "-p", TEST_ROOT + "*");
+        ITestDevice microdroidRun1 = null, microdroidRun2 = null;
+
+        getDevice().uninstallPackage(PACKAGE_NAME);
+        getDevice().installPackage(findTestFile(APK_NAME), true);
+        try {
+            microdroidRun1 =
+                    buildMicrodroidDevice(mProtectedVm, INSTANCE_ID_FILE, INSTANCE_IMG, true);
+            assertThat(microdroidRun1.waitForBootComplete(BOOT_COMPLETE_TIMEOUT)).isTrue();
+        } finally {
+            if (microdroidRun1 != null) {
+                getAndroidDevice().shutdownMicrodroid(microdroidRun1);
+            }
+        }
+
+        getDevice().uninstallPackage(PACKAGE_NAME);
+        cleanUpVirtualizationTestSetup(getDevice());
+        // Install the updated version of app (versionCode 6)
+        getDevice().installPackage(findTestFile(APK_UPDATED_NAME), true);
+        try {
+            microdroidRun2 =
+                    buildMicrodroidDevice(mProtectedVm, INSTANCE_ID_FILE, INSTANCE_IMG, true);
+            assertThat(microdroidRun2.waitForBootComplete(BOOT_COMPLETE_TIMEOUT)).isTrue();
+        } finally {
+            if (microdroidRun2 != null) {
+                getAndroidDevice().shutdownMicrodroid(microdroidRun2);
+            }
+        }
+    }
+
+    @Test
+    @CddTest
+    public void DowngradedPackageIsRejected() throws Exception {
+        assumeSecretkeeperSupported();
+        assumeProtectedVm(); // Rollback protection is provided only for protected VM.
+
+        CommandRunner android = new CommandRunner(getDevice());
+        android.run("rm", "-rf", TEST_ROOT + "*");
+        android.run("mkdir", "-p", TEST_ROOT + "*");
+        ITestDevice microdroidRun1 = null, microdroidRun2 = null;
+
+        // Install the upgraded version (v6)
+        getDevice().uninstallPackage(PACKAGE_NAME);
+        getDevice().installPackage(findTestFile(APK_UPDATED_NAME), true);
+
+        try {
+            microdroidRun1 =
+                    buildMicrodroidDevice(mProtectedVm, INSTANCE_ID_FILE, INSTANCE_IMG, true);
+            assertThat(microdroidRun1.waitForBootComplete(BOOT_COMPLETE_TIMEOUT)).isTrue();
+        } finally {
+            if (microdroidRun1 != null) {
+                getAndroidDevice().shutdownMicrodroid(microdroidRun1);
+            }
+        }
+
+        getDevice().uninstallPackage(PACKAGE_NAME);
+        cleanUpVirtualizationTestSetup(getDevice());
+        // Install the older version (v5)
+        getDevice().installPackage(findTestFile(APK_NAME), /* reinstall */ true);
+        String testStartTime = android.runWithTimeout(1000, "date", "'+%Y-%m-%d %H:%M:%S.%N'");
+        try {
+            microdroidRun2 =
+                    buildMicrodroidDevice(mProtectedVm, INSTANCE_ID_FILE, INSTANCE_IMG, false);
+
+        } finally {
+            if (microdroidRun2 != null) {
+                getAndroidDevice().shutdownMicrodroid(microdroidRun2);
+            }
+        }
+        assertTrue(
+                "Missing DicePolicyError in logcat",
+                failedWthDicePolicyErrorFromHostLogcat(testStartTime));
+        getDevice().uninstallPackage(PACKAGE_NAME);
+    }
+
+    @Test
+    @CddTest
+    public void DowngradedPackageIsAcceptedNonProtected() throws Exception {
+        assumeSecretkeeperSupported();
+        assumeNonProtectedVm();
+
+        CommandRunner android = new CommandRunner(getDevice());
+        android.run("rm", "-rf", TEST_ROOT + "*");
+        android.run("mkdir", "-p", TEST_ROOT + "*");
+        ITestDevice microdroidRun1 = null, microdroidRun2 = null;
+
+        // Install the upgraded version (v6)
+        getDevice().uninstallPackage(PACKAGE_NAME);
+        getDevice().installPackage(findTestFile(APK_UPDATED_NAME), /* reinstall */ true);
+
+        try {
+            microdroidRun1 =
+                    buildMicrodroidDevice(mProtectedVm, INSTANCE_ID_FILE, INSTANCE_IMG, true);
+            assertThat(microdroidRun1.waitForBootComplete(BOOT_COMPLETE_TIMEOUT)).isTrue();
+        } finally {
+            if (microdroidRun1 != null) {
+                getAndroidDevice().shutdownMicrodroid(microdroidRun1);
+            }
+        }
+
+        getDevice().uninstallPackage(PACKAGE_NAME);
+        cleanUpVirtualizationTestSetup(getDevice());
+        getDevice().installPackage(findTestFile(APK_NAME), /* reinstall */ true);
+
+        try {
+            // Install the older version (v5)
+            microdroidRun2 =
+                    buildMicrodroidDevice(
+                            mProtectedVm,
+                            INSTANCE_ID_FILE,
+                            INSTANCE_IMG, /* getAdbConnection */
+                            true);
+            assertThat(microdroidRun2.waitForBootComplete(BOOT_COMPLETE_TIMEOUT)).isTrue();
+        } finally {
+            if (microdroidRun2 != null) {
+                getAndroidDevice().shutdownMicrodroid(microdroidRun2);
+            }
+        }
+    }
+
+    private ITestDevice buildMicrodroidDevice(
+            boolean protectedVm,
+            String instanceIdPath,
+            String instanceImgPath,
+            boolean getAdbConnection)
+            throws DeviceNotAvailableException {
+        final String configPath = "assets/" + mOs + "/vm_config.json";
+        return MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                .debugLevel("full")
+                .memoryMib(minMemorySize())
+                .cpuTopology("match_host")
+                .protectedVm(protectedVm)
+                .instanceIdFile(instanceIdPath)
+                .instanceImgFile(instanceImgPath)
+                .build(getAndroidDevice(), getAdbConnection);
+    }
+
+    private boolean failedWthDicePolicyErrorFromHostLogcat(String testStartTime) throws Exception {
+        String dicePolicyErrorRegex = "Secretkeeper get failed with error: DicePolicyError";
+        String result =
+                tryRunOnHost(
+                        "timeout",
+                        "3s",
+                        "adb",
+                        "-s",
+                        getDevice().getSerialNumber(),
+                        "logcat",
+                        "-m",
+                        "1",
+                        "-e",
+                        dicePolicyErrorRegex,
+                        "-T",
+                        testStartTime);
+        return !result.trim().isEmpty();
     }
 
     @Test
@@ -1168,6 +1335,21 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                 "Test skipped because VFIO platform is not supported.",
                 device.doesFileExist("/dev/vfio/vfio")
                         && device.doesFileExist("/sys/bus/platform/drivers/vfio-platform"));
+    }
+
+    private void assumeSecretkeeperSupported() throws DeviceNotAvailableException {
+        CommandRunner android = new CommandRunner(getDevice());
+        String result =
+                android.run(
+                        "service check",
+                        "android.hardware.security.secretkeeper.ISecretkeeper/default");
+        boolean is_sk_supported =
+                result.equals(
+                        "Service android.hardware.security.secretkeeper.ISecretkeeper/default:"
+                                + " found");
+        assumeTrue(
+                "This test is only for devices with ISecretkeeper/default implemented",
+                is_sk_supported);
     }
 
     private TestDevice getAndroidDevice() {
