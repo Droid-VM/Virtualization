@@ -40,10 +40,12 @@ use crate::helpers::GUEST_PAGE_SIZE;
 use crate::instance::get_or_generate_instance_salt;
 use alloc::borrow::Cow;
 use alloc::boxed::Box;
+use bssl_avf::Digester;
 use core::ops::Range;
-use diced_open_dice::{bcc_handover_parse, DiceArtifacts};
+use cstr::cstr;
+use diced_open_dice::{bcc_handover_parse, DiceArtifacts, Hidden};
 use fdtpci::{PciError, PciInfo};
-use libfdt::Fdt;
+use libfdt::{Fdt, FdtNode};
 use log::{debug, error, info, trace, warn};
 use pvmfw_avb::verify_payload;
 use pvmfw_avb::Capability;
@@ -150,12 +152,25 @@ fn main(
         error!("Failed to compute partial DICE inputs: {e:?}");
         RebootReason::InternalError
     })?;
-    let (new_instance, salt) = get_or_generate_instance_salt(&mut pci_root, &dice_inputs, cdi_seal)
-        .map_err(|e| {
+
+    let (new_instance, salt) = if cfg!(llpvm_changes) && should_defer_rollback_protection(fdt)? {
+        (false, salt_from_instance_id(fdt)?)
+    } else if cfg!(llpvm_changes) {
+        // TODO: Think harder if we want to preserve new_instance flag incase
+        // llpvm_chages == true && secretkeeper is not supported.
+        let (new_instance, _) =
+            get_or_generate_instance_salt(&mut pci_root, &dice_inputs, cdi_seal).map_err(|e| {
+                error!("Failed to get instance.img salt: {e}");
+                RebootReason::InternalError
+            })?;
+        (new_instance, salt_from_instance_id(fdt)?)
+    } else {
+        get_or_generate_instance_salt(&mut pci_root, &dice_inputs, cdi_seal).map_err(|e| {
             error!("Failed to get instance.img salt: {e}");
             RebootReason::InternalError
-        })?;
-    trace!("Got salt from instance.img: {salt:x?}");
+        })?
+    };
+    trace!("Got salt for instance: {salt:x?}");
 
     let new_bcc_handover = if cfg!(dice_changes) {
         Cow::Borrowed(current_bcc_handover)
@@ -205,6 +220,58 @@ fn main(
     };
 
     Ok(bcc_range)
+}
+
+// Get the "Hidden input" for DICE derivation.
+// This provides differentiation of secrets for different VM instances with same payloads.
+fn salt_from_instance_id(fdt: &Fdt) -> Result<Hidden, RebootReason> {
+    let id = instance_id(fdt)?;
+    let salt = Digester::sha512()
+        .digest(id)
+        .map_err(|e| {
+            error!("Failed to get digest of instance-id: {e}");
+            RebootReason::InternalError
+        })?
+        .try_into()
+        .map_err(|_| RebootReason::InternalError)?;
+    Ok(salt)
+}
+
+fn instance_id(fdt: &Fdt) -> Result<&[u8], RebootReason> {
+    let node = avf_untrusted_node(fdt)?;
+    let id = node.getprop(cstr!("instance-id")).map_err(|e| {
+        error!("Failed to get instance-id in DT: {e}");
+        RebootReason::InvalidFdt
+    })?;
+    let Some(id) = id else {
+        error!("Missing instance-id");
+        return Err(RebootReason::InvalidFdt);
+    };
+    Ok(id)
+}
+
+fn should_defer_rollback_protection(fdt: &Fdt) -> Result<bool, RebootReason> {
+    let node = avf_untrusted_node(fdt)?;
+    let defer_rbp = node
+        .getprop(cstr!("defer-rollback-protection"))
+        .map_err(|e| {
+            error!("Failed to get defer-rollback-protection property in DT: {e}");
+            RebootReason::InvalidFdt
+        })?
+        .is_some();
+    Ok(defer_rbp)
+}
+
+fn avf_untrusted_node(fdt: &Fdt) -> Result<FdtNode, RebootReason> {
+    let node = fdt.node(cstr!("/avf/untrusted")).map_err(|e| {
+        error!("Failed to get /avf/untrusted node: {e}");
+        RebootReason::InvalidFdt
+    })?;
+    let Some(node) = node else {
+        error!("/avf/untrusted node in missing in DT");
+        return Err(RebootReason::InvalidFdt);
+    };
+    Ok(node)
 }
 
 /// Logs the given PCI error and returns the appropriate `RebootReason`.
