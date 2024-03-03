@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bd9407d_f275b25a",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-03T18:44:07Z",
+      "side": 1,
+      "message": "@alanstokes@google.com, @jiyong@google.com @jaewan@google.com\n\nIt seems checking an error from logcat is very flaky. I could use recommendation on what are the alternative method of testing that Microdroid is failing to boot (`Failed to create VM secrets with Secretkeeper get failed with error: DicePolicyError`) from host tests",
+      "range": {
+        "startLine": 557,
+        "startChar": 20,
+        "endLine": 557,
+        "endChar": 58
+      },
+      "revId": "582939056ea0cb73cb108f7abc77bb9769c4f20a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
