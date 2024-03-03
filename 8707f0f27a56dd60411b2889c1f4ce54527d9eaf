@@ -70,6 +70,30 @@
       },
       "revId": "8707f0f27a56dd60411b2889c1f4ce54527d9eaf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "230044db_9570c992",
+        "filename": "virtualizationservice/aidl/android/system/virtualmachineservice/IVirtualMachineService.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-03T18:02:07Z",
+      "side": 0,
+      "message": "Changed `getSecretkeeper` to check if Sk is declared \u0026 return `StatusCode::NAME_NOT_FOUND` if not found.\nAlso, clarified the behaviour in comment.",
+      "parentUuid": "91a2169b_c156dfe1",
+      "range": {
+        "startLine": 62,
+        "startChar": 71,
+        "endLine": 63,
+        "endChar": 15
+      },
+      "revId": "8707f0f27a56dd60411b2889c1f4ce54527d9eaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
