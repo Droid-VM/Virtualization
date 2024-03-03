@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da57f9e7_fc627f7c",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-03-03T12:33:35Z",
+      "side": 1,
+      "message": "not sure if it\u0027s fine to call `setMaxPerformanceTaskProfile` in the constructor. Is it guaranteed that we can use `InstrumentationRegistry.getInstrumentation`?\n\nIf it\u0027s fine, then LGTM. If it\u0027s not, how abuot moving this to `prepareTestSetup()`?",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 39
+      },
+      "revId": "7c8e32a0704b2e7957950c985a6edbc041e286b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
