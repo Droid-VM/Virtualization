@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a93e857c_8f16a38e",
+        "filename": "java/service/src/com/android/system/virtualmachine/SecretkeeperJobService.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-04T14:02:45Z",
+      "side": 1,
+      "message": "Oops.",
+      "parentUuid": "88751e4d_cfb3e124",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 35
+      },
+      "revId": "15b68ac4032353871c3ea3dea27b4885966a6f82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10679e2b_bfc52d7a",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e9a3102_1394edc6",
+        "filename": "java/service/src/com/android/system/virtualmachine/SecretkeeperJobService.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-04T14:02:45Z",
+      "side": 1,
+      "message": "No, we have our own namespace (previous line), so only need to be unique within that.\n\n(See https://googleplex-android-review.git.corp.google.com/c/platform/frameworks/base/+/25327386/41..44/services/core/java/com/android/server/selinux/SelinuxAuditLogsService.java#b78)",
+      "parentUuid": "10679e2b_bfc52d7a",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 40
+      },
+      "revId": "15b68ac4032353871c3ea3dea27b4885966a6f82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "291ee051_9144fced",
@@ -77,6 +125,30 @@
       "writtenOn": "2024-02-29T18:09:49Z",
       "side": 1,
       "message": "Why do we need a separate thread? Does the onStartJob get executed on a main thread? If so, can we re-use the BackgroundThread instead of creating a new one?",
+      "range": {
+        "startLine": 78,
+        "startChar": 6,
+        "endLine": 78,
+        "endChar": 39
+      },
+      "revId": "15b68ac4032353871c3ea3dea27b4885966a6f82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d240a497_310ad6a0",
+        "filename": "java/service/src/com/android/system/virtualmachine/SecretkeeperJobService.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-04T14:02:45Z",
+      "side": 1,
+      "message": "Yeah, onStartJob is called on the main thread. It\u0027s expected that it will return and the real work will happen on a separate thread - that\u0027s what the \"return true\" significes.\n\nThe operation here can run for a while, I don\u0027t want to block the background thread for an extended time (there are checks to make sure that doesn\u0027t happen.)\n\nI\u0027d use a thread pool if one is available, but starting \u0026 stopping a thread seemed reasonable. It\u0027s what I\u0027ve done in other jobs.",
+      "parentUuid": "291ee051_9144fced",
       "range": {
         "startLine": 78,
         "startChar": 6,
