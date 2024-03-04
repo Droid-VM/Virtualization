@@ -116,4 +116,12 @@ interface IVmPayloadService {
      *         certification chain.
      */
     AttestationResult requestAttestation(in byte[] challenge, in boolean testMode);
+
+    /**
+    * Checks whether the VM instance is new (i.e, this is the first run of an instance).
+    *
+    * @return returns true on the first boot of the instance & false on subsequent boot.
+    */
+    boolean isNewInstance();
+
 }

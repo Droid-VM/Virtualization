@@ -513,6 +513,7 @@ public abstract class MicrodroidDeviceTestBase {
         public int mFileMode;
         public int mMountFlags;
         public String mConsoleInput;
+        public boolean mIsNewInstance;
 
         public void assertNoException() {
             if (mException != null) {
