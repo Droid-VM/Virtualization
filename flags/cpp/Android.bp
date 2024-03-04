@@ -1,0 +1,10 @@
+cc_library {
+    name: "libavf_cc_flags",
+    defaults: ["avf_flag_aware_cc_defaults"],
+    header_libs: ["libavf_cc_flags_headers"],
+    apex_available: [
+        "//apex_available:platform",
+    ],
+    export_include_dirs: ["include"],
+    local_include_dirs: ["include"],
+}
