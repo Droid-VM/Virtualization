@@ -255,6 +255,11 @@ public class VmShareServiceImpl extends Service {
         }
 
         @Override
+        public boolean isNewInstance() {
+            throw new UnsupportedOperationException("Not supported");
+        }
+
+        @Override
         public void quit() throws RemoteException {
             throw new UnsupportedOperationException("Not supported");
         }

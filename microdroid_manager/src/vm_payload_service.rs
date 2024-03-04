@@ -97,6 +97,10 @@ impl IVmPayloadService for VmPayloadService {
             certificateChain: cert_chain,
         })
     }
+
+    fn isNewInstance(&self) -> binder::Result<bool> {
+        Ok(crate::is_new_instance())
+    }
 }
 
 impl Interface for VmPayloadService {}

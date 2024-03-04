@@ -568,3 +568,14 @@ pub extern "C" fn AVmPayload_getEncryptedStoragePath() -> *const c_char {
         ptr::null()
     }
 }
+
+/// Checks whether the VM instance is new (i.e, this is the first run of an instance),
+/// indicative of secrets being new.
+#[no_mangle]
+pub extern "C" fn AVmPayload_isNewInstance() -> bool {
+    unwrap_or_abort(try_is_new_instance())
+}
+
+fn try_is_new_instance() -> Result<bool> {
+    get_vm_payload_service()?.isNewInstance().context("Cannot determine if the instance is new")
+}
