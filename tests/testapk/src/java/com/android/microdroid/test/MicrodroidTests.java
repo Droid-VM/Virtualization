@@ -2265,6 +2265,39 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThat(testResults.mMountFlags & expectedFlags).isEqualTo(expectedFlags);
     }
 
+    @Test
+    @CddTest
+    public void isNewInstanceTest() throws Exception {
+        assumeSupportedDevice();
+
+        VirtualMachineConfig config =
+                newVmConfigBuilderWithPayloadBinary("MicrodroidTestNativeLib.so")
+                        .setMemoryBytes(minMemoryRequired())
+                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .build();
+        VirtualMachine vm = forceCreateNewVirtualMachine("test_vm_a", config);
+        TestResults testResults =
+                runVmTestService(
+                        TAG,
+                        vm,
+                        (ts, tr) -> {
+                            tr.mIsNewInstance = ts.isNewInstance();
+                        });
+        testResults.assertNoException();
+        assertThat(testResults.mIsNewInstance).isTrue();
+
+        // Re-run the same VM & ensure isNewInstance returns false.
+        testResults =
+                runVmTestService(
+                        TAG,
+                        vm,
+                        (ts, tr) -> {
+                            tr.mIsNewInstance = ts.isNewInstance();
+                        });
+        testResults.assertNoException();
+        assertThat(testResults.mIsNewInstance).isFalse();
+    }
+
     private static class VmShareServiceConnection implements ServiceConnection {
 
         private final CountDownLatch mLatch = new CountDownLatch(1);

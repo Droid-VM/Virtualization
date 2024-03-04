@@ -102,6 +102,11 @@ __attribute__((noreturn)) void AVmPayload_runVsockRpcServer(
  * byte sequences and do not need to be kept secret; typically they are
  * hardcoded in the calling code.
  *
+ * The secret is linked to the instance & will be created for a new instance.
+ * Callers should check `AVmPayload_isNewInstance()` to meaningfully use the key.
+ * For ex, decryption of any data is meaningless with the returned secret if
+ * `AVmPayload_isNewInstance` returns true.
+ *
  * \param identifier identifier of the secret to return.
  * \param identifier_size size of the secret identifier.
  * \param secret pointer to size bytes where the secret is written.
@@ -259,5 +264,13 @@ size_t AVmAttestationResult_getCertificateCount(const AVmAttestationResult* _Non
 size_t AVmAttestationResult_getCertificateAt(const AVmAttestationResult* _Nonnull result,
                                              size_t index, void* _Nullable data, size_t size)
         __INTRODUCED_IN(__ANDROID_API_V__);
+
+/**
+ * Checks whether the VM instance is new (i.e, this is the first run of an instance).
+ *
+ * \return The result is true on the first boot of the instance (when secrets are created) and false
+ * on subsequent boot.
+ */
+bool AVmPayload_isNewInstance() __INTRODUCED_IN(__ANDROID_API_V__);
 
 __END_DECLS
