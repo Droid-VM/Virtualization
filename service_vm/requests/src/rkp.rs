@@ -107,16 +107,18 @@ pub(super) fn generate_certificate_request(
 /// Generates the device info required by the RKP server as a temporary placeholder.
 /// More details in b/301592917.
 fn device_info() -> Value {
-    cbor!({"brand" => "aosp-avf",
-    "manufacturer" => "aosp-avf",
-    "product" => "avf",
-    "model" => "avf",
-    "device" => "avf",
-    "vbmeta_digest" => Value::Bytes(vec![0u8; 0]),
-    "system_patch_level" => 202402,
-    "boot_patch_level" => 20240202,
-    "vendor_patch_level" => 20240202,
-    "fused" => 1})
+    cbor!({
+        "boot_patch_level" => 20240202,
+        "brand" => "aosp-avf",
+        "device" => "avf",
+        "fused" => 1,
+        "manufacturer" => "aosp-avf",
+        "model" => "avf",
+        "product" => "avf",
+        "system_patch_level" => 202402,
+        "vbmeta_digest" => Value::Bytes(vec![0u8; 0]),
+        "vendor_patch_level" => 20240202,
+    })
     .unwrap()
 }
 
