@@ -22,6 +22,30 @@
       },
       "revId": "582939056ea0cb73cb108f7abc77bb9769c4f20a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58acc0c9_609646b8",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-05T07:45:30Z",
+      "side": 1,
+      "message": "I\u0027m sorry but I don\u0027t understand this comment.\n\nAre you saying that you\u0027ll rewrite this test code not to rely on the logcat?\n\nWhat do you mean \u0027the recommended alternative method for Microdroid booting test?\u0027 (maybe relies on VM callback to check whether it boots or not?)\n\nIf flakiness matter but you want to use logcat, try increase timeout.\n\nIf you have another solution, then please use it instead.",
+      "parentUuid": "4bd9407d_f275b25a",
+      "range": {
+        "startLine": 557,
+        "startChar": 20,
+        "endLine": 557,
+        "endChar": 58
+      },
+      "revId": "582939056ea0cb73cb108f7abc77bb9769c4f20a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
