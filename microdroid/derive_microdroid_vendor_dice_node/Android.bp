@@ -1,0 +1,32 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_defaults {
+    name: "derive_microdroid_vendor_dice_node_defaults",
+    crate_name: "derive_microdroid_vendor_dice_node",
+    defaults: ["avf_build_flags_rust"],
+    srcs: ["src/main.rs"],
+    rustlibs: [
+        "libanyhow",
+        "libclap",
+    ],
+    bootstrap: true,
+    prefer_rlib: true,
+    host_supported: true,
+}
+
+rust_binary {
+    name: "derive_microdroid_vendor_dice_node",
+    defaults: ["derive_microdroid_vendor_dice_node_defaults"],
+    apex_available: [
+        "com.android.virt",
+    ],
+    stem: "derive_microdroid_vendor_dice_node",
+}
+
+rust_test {
+    name: "derive_microdroid_vendor_dice_node_test",
+    defaults: ["derive_microdroid_vendor_dice_node_defaults"],
+    test_suites: ["general-tests"],
+}
