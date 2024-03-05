@@ -107,16 +107,18 @@ pub(super) fn generate_certificate_request(
 /// Generates the device info required by the RKP server as a temporary placeholder.
 /// More details in b/301592917.
 fn device_info() -> Value {
-    cbor!({"brand" => "aosp-avf",
-    "manufacturer" => "aosp-avf",
-    "product" => "avf",
-    "model" => "avf",
-    "device" => "avf",
-    "vbmeta_digest" => Value::Bytes(vec![0u8; 0]),
-    "system_patch_level" => 202402,
-    "boot_patch_level" => 20240202,
-    "vendor_patch_level" => 20240202,
-    "fused" => 1})
+    cbor!({
+        "boot_patch_level" => 20240202,
+        "brand" => "aosp-avf",
+        "device" => "avf",
+        "fused" => 1,
+        "manufacturer" => "aosp-avf",
+        "model" => "avf",
+        "product" => "avf",
+        "system_patch_level" => 202402,
+        "vbmeta_digest" => Value::Bytes(vec![0u8; 0]),
+        "vendor_patch_level" => 20240202,
+    })
     .unwrap()
 }
 
@@ -152,4 +154,21 @@ fn sign_message(message: &[u8], private_key: &PrivateKey) -> Result<Vec<u8>> {
             RequestProcessingError::InternalError
         })?
         .to_vec())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// The keys of device info map should be in canonical order as per RFC7049.
+    #[test]
+    fn device_info_is_in_canonical_order() {
+        let device_info = device_info();
+        let device_info_map = device_info.as_map().unwrap();
+        let device_info_keys: Vec<&str> =
+            device_info_map.iter().map(|k| k.0.as_text().unwrap()).collect();
+        let mut sorted_keys = device_info_keys.clone();
+        sorted_keys.sort();
+        assert_eq!(device_info_keys, sorted_keys);
+    }
 }
