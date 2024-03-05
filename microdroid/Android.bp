@@ -295,7 +295,20 @@ flag_aware_microdroid_super_partition {
     },
 }
 
-android_filesystem {
+soong_config_module_type {
+    name: "flag_aware_microdroid_filesystem",
+    module_type: "android_filesystem",
+    config_namespace: "ANDROID",
+    bool_variables: [
+        "release_avf_enable_dice_changes",
+    ],
+    properties: [
+        "deps",
+        "symlinks",
+    ],
+}
+
+flag_aware_microdroid_filesystem {
     name: "microdroid_ramdisk",
     deps: [
         "init_first_stage.microdroid",
@@ -313,7 +326,7 @@ android_filesystem {
     type: "compressed_cpio",
 }
 
-android_filesystem {
+flag_aware_microdroid_filesystem {
     name: "microdroid_fstab_ramdisk",
     deps: [
         "microdroid_fstab",
@@ -330,6 +343,19 @@ android_filesystem {
             name: "lib",
         },
     ],
+    soong_config_variables: {
+        release_avf_enable_dice_changes: {
+            deps: [
+                "derive_microdroid_vendor_dice_node",
+            ],
+            symlinks: [
+                {
+                    target: "bin/derive_microdroid_vendor_dice_node",
+                    name: "first_stage_ramdisk/derive_microdroid_vendor_dice_node",
+                },
+            ],
+        },
+    },
 }
 
 genrule {
