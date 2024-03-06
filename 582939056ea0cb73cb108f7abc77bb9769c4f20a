@@ -46,6 +46,30 @@
       },
       "revId": "582939056ea0cb73cb108f7abc77bb9769c4f20a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1aed8cc8_27646123",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-06T08:56:06Z",
+      "side": 1,
+      "message": "Given that you\u0027re looking for an advice, can we add report DICE error with IVirtualMachineCallback? If it\u0027s possible, then it would be a reliable way for getting DICE error.\n\nIf it\u0027s not possible, consider followings:\n  - Option 1) Do not rely on logcat, but only check whether it boots or not. Incomplete check, but test result would be more reliable.\n  - Option 2) Add `@FlakyTest` with sufficient tolerance, and increase timeout.\n\nIf you want to be super-neat, then you can pick both options by adding two tests -- one with `@FlakyTest` and one without logcat check. But up to you.",
+      "parentUuid": "58acc0c9_609646b8",
+      "range": {
+        "startLine": 557,
+        "startChar": 20,
+        "endLine": 557,
+        "endChar": 58
+      },
+      "revId": "582939056ea0cb73cb108f7abc77bb9769c4f20a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
