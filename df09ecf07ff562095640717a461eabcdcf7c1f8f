@@ -16,6 +16,29 @@
       "message": "Could you please take another look?",
       "revId": "df09ecf07ff562095640717a461eabcdcf7c1f8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8815b3d5_82de4db0",
+        "filename": "service_vm/requests/src/rkp.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-03-07T10:40:54Z",
+      "side": 1,
+      "message": "Is this supposed to be canonical order as per RFC7049, or a core deterministic encoding as per RFC8949 ?  \n\nI think your data is the latter but your comment says the former, but I might be wrong :-)",
+      "range": {
+        "startLine": 163,
+        "startChar": 49,
+        "endLine": 163,
+        "endChar": 79
+      },
+      "revId": "df09ecf07ff562095640717a461eabcdcf7c1f8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
