@@ -70,6 +70,30 @@
       },
       "revId": "582939056ea0cb73cb108f7abc77bb9769c4f20a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e80c1948_135c29a3",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-07T17:53:49Z",
+      "side": 1,
+      "message": "\u003e  can we add report DICE error with IVirtualMachineCallback?\n\nSadly we\u0027re too late for API changes.\n\n\u003e Do not rely on logcat, but only check whether it boots or not.\n\nYeah, that\u0027s what we\u0027ve done elsewhere. Given you have an extremely similar test where we check it does boot (the upgrade case), we can assume any failure here is due to the downgrade.\n\nAnd we shouldn\u0027t be over-precise - we need it to fail, but we don\u0027t need a specific log message. Implementations might be slightly different - including a future version of ours.",
+      "parentUuid": "1aed8cc8_27646123",
+      "range": {
+        "startLine": 557,
+        "startChar": 20,
+        "endLine": 557,
+        "endChar": 58
+      },
+      "revId": "582939056ea0cb73cb108f7abc77bb9769c4f20a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

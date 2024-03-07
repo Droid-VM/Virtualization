@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4eccab72_bc9ea5d9",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-07T17:53:49Z",
+      "side": 1,
+      "message": "Do we need that?\nIt feels like it might cause all sorts of unexpected side-effects.\nMaybe do in a separate CL?",
+      "range": {
+        "startLine": 49,
+        "startChar": 68,
+        "endLine": 49,
+        "endChar": 78
+      },
+      "revId": "bc7bf78f8d3f8833e1029384d339ed0a65f44c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b56f5d34_eb44866b",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-07T17:53:49Z",
+      "side": 1,
+      "message": "Sk -\u003e Secretkeeper\n\n(There\u0027s never much need to make test names short, since they only get mentioned once in the code.)",
+      "range": {
+        "startLine": 415,
+        "startChar": 16,
+        "endLine": 415,
+        "endChar": 47
+      },
+      "revId": "bc7bf78f8d3f8833e1029384d339ed0a65f44c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "663c4e6a_cd564ffd",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-07T17:53:49Z",
+      "side": 1,
+      "message": "No \"*\" for mkdir\n\nMore importantly: Why are we deleting everything here? Why only for this test?\nShould this be in setup / teardown?\n\nIn fact, it already happens in prepareVirtualizationTestSetup.",
+      "range": {
+        "startLine": 420,
+        "startChar": 44,
+        "endLine": 420,
+        "endChar": 50
+      },
+      "revId": "bc7bf78f8d3f8833e1029384d339ed0a65f44c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e529da7_907e71aa",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-07T17:53:49Z",
+      "side": 1,
+      "message": "I think the usual style requires one declaration per variable.",
+      "range": {
+        "startLine": 421,
+        "startChar": 7,
+        "endLine": 421,
+        "endChar": 65
+      },
+      "revId": "bc7bf78f8d3f8833e1029384d339ed0a65f44c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80990ca2_f65b0c92",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 1348,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-07T17:53:49Z",
+      "side": 1,
+      "message": "This seems over-rigid; if the format changes at all we\u0027ll just stop running the tests.\nMaybe check that the output does not contain \"not found\"? Then the worst that can happen if things change is we get a test breakage, which we will investigate.\n\n(A right-side failure, rather than a wrong-side failure, in railway parlance.)",
+      "range": {
+        "startLine": 1346,
+        "startChar": 0,
+        "endLine": 1348,
+        "endChar": 44
+      },
+      "revId": "bc7bf78f8d3f8833e1029384d339ed0a65f44c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcfe386f_360c3c81",
+        "filename": "tests/testapk/Android.bp",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-07T17:53:49Z",
+      "side": 1,
+      "message": "Name police: This should be \"Defaults\", to match everything else.\n\nSo we need something else to differentiate this from MicrodroidTestAppsDefaults.\n\nMicrodroidTestApkDefaults?\nMicrodroidMainTestAppDefaults?\nMicrodroidVersionsTestAppDefaults?",
+      "range": {
+        "startLine": 35,
+        "startChar": 11,
+        "endLine": 35,
+        "endChar": 41
+      },
+      "revId": "bc7bf78f8d3f8833e1029384d339ed0a65f44c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
