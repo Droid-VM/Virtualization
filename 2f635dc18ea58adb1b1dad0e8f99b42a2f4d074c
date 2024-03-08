@@ -46,6 +46,30 @@
       },
       "revId": "2f635dc18ea58adb1b1dad0e8f99b42a2f4d074c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4621907c_a6a78bc5",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 1322,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-08T14:17:12Z",
+      "side": 1,
+      "message": "Please forget my words above. Handling `\u003crange\u003e` of `pci` as special case is the right way -- I misunderstood what `\u003crange\u003e` is.",
+      "parentUuid": "2bc9b97d_f01c9d5d",
+      "range": {
+        "startLine": 1314,
+        "startChar": 22,
+        "endLine": 1322,
+        "endChar": 19
+      },
+      "revId": "2f635dc18ea58adb1b1dad0e8f99b42a2f4d074c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
