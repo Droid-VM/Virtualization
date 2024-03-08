@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4266bbdf_3df6b368",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-08T14:44:01Z",
+      "side": 1,
+      "message": "When VM fails to boot the console \u0026 log files miss logs pushed just before failing to VM. Maybe we need to flush logs during VM shutdown. (But there isn\u0027t a VM shutdown method if the VM fails to boot only)",
+      "range": {
+        "startLine": 797,
+        "startChar": 90,
+        "endLine": 797,
+        "endChar": 98
+      },
+      "revId": "f4dce0a70ccecfd5fe19ee98e9d7a8af38ec650c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
