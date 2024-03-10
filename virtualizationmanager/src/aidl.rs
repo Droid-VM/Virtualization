@@ -49,7 +49,7 @@ use android_system_virtualizationservice_internal::aidl::android::system::virtua
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::{
         BnVirtualMachineService, IVirtualMachineService,
 };
-use android_hardware_security_secretkeeper::aidl::android::hardware::security::secretkeeper::ISecretkeeper::ISecretkeeper;
+use android_hardware_security_secretkeeper::aidl::android::hardware::security::secretkeeper::ISecretkeeper::{BnSecretkeeper, ISecretkeeper};
 use android_hardware_security_secretkeeper::aidl::android::hardware::security::secretkeeper::SecretId::SecretId;
 use android_hardware_security_authgraph::aidl::android::hardware::security::authgraph::{
     Arc::Arc as AuthgraphArc, IAuthGraphKeyExchange::IAuthGraphKeyExchange,
@@ -1526,11 +1526,8 @@ impl IVirtualMachineService for VirtualMachineService {
 }
 
 fn is_secretkeeper_supported() -> bool {
-    // TODO(b/327526008): Session establishment wth secretkeeper is failing.
-    // Re-enable this when fixed.
-    let _sk_supported = binder::is_declared(SECRETKEEPER_IDENTIFIER)
-        .expect("Could not check for declared Secretkeeper interface");
-    false
+    binder::is_declared(SECRETKEEPER_IDENTIFIER)
+        .expect("Could not check for declared Secretkeeper interface")
 }
 
 impl VirtualMachineService {
