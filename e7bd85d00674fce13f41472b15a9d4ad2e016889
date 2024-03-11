@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b27d32d_6a29567f",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-11T12:26:00Z",
+      "side": 1,
+      "message": "This MM change must be tied to the pvmfw change (i.e. `llpvm_changes`) and inclusion of the `SecretkeeperProtection` capability in its kernel image. Otherwise, this CL will re-introduce b/217376291 for some configurations.",
+      "range": {
+        "startLine": 113,
+        "startChar": 12,
+        "endLine": 113,
+        "endChar": 20
+      },
+      "revId": "e7bd85d00674fce13f41472b15a9d4ad2e016889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe92c534_3919e47c",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-11T12:26:00Z",
+      "side": 1,
+      "message": "nit, DRY `cfg!(llpvm_changes)` and `salt_from_instance_id`:\n```\nif cfg!(llpvm_changes) {\n    let salt \u003d salt_from_instance_id(fdt)?;\n    \n    if should_defer_...(fdt)? \u0026\u0026 verified_boot_data.has_capability(...) {\n        // ...\n        (false, salt)\n    } else {\n        // ...\n        (new_instance, salt)\n    }\n} else {\n    get_or_generate_instance_salt(...)?\n}\n```",
+      "range": {
+        "startLine": 144,
+        "startChar": 31,
+        "endLine": 144,
+        "endChar": 53
+      },
+      "revId": "e7bd85d00674fce13f41472b15a9d4ad2e016889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52b4162b_db9d8fcf",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-11T12:26:00Z",
+      "side": 1,
+      "message": "`\"Deferring rollback protection\"` as pvmfw\u0027s RBP deferring isn\u0027t Sk-specific.",
+      "range": {
+        "startLine": 148,
+        "startChar": 14,
+        "endLine": 148,
+        "endChar": 62
+      },
+      "revId": "e7bd85d00674fce13f41472b15a9d4ad2e016889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "807aa495_87b1780c",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-11T12:26:00Z",
+      "side": 1,
+      "message": "OOC, why?\n\nWould you mind mentioning that in the comment (as the code already shows that `\u003d\u003d0` isn\u0027t valid)?",
+      "range": {
+        "startLine": 149,
+        "startChar": 11,
+        "endLine": 149,
+        "endChar": 86
+      },
+      "revId": "e7bd85d00674fce13f41472b15a9d4ad2e016889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1660cc8d_8a6914c5",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-11T12:26:00Z",
+      "side": 1,
+      "message": "So what\u0027s the policy for flipping that build flag?\n\nAFAICT, given that\n```\nSealing_CDI \u003d KDF(H(Auth + Mode + Hidden))\n```\nthen, the host would now be (indirectly) in control of the CDI of non-`SecretkeeperProtection`-capable guests, right?\n\nWe previously mandated that the instance.img was encrypted (by pvmfw), to guarantee the confidentiality and integrity of the salt (`Hidden`); I don\u0027t get how `llpvm_changes` changes this requirement for those \"legacy\" use-cases?",
+      "range": {
+        "startLine": 157,
+        "startChar": 11,
+        "endLine": 157,
+        "endChar": 65
+      },
+      "revId": "e7bd85d00674fce13f41472b15a9d4ad2e016889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23be7129_d1d49f53",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-11T12:26:00Z",
+      "side": 1,
+      "message": "Note that this will generate a salt (`SMCCC_TRNG` calls) to be stored in the instance.img, which is then never read; would you mind splitting up `get_or_generate_instance_salt` so that this path can simply read/write an entry with no (or zeroed) salt?",
+      "range": {
+        "startLine": 158,
+        "startChar": 8,
+        "endLine": 159,
+        "endChar": 42
+      },
+      "revId": "e7bd85d00674fce13f41472b15a9d4ad2e016889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53deb6a5_259ab1e5",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-11T12:26:00Z",
+      "side": 1,
+      "message": "Won\u0027t this make pvmfw panic for non-Sk use-cases, when `llpvm_changes` is enabled?\n\nWhy not return `Result\u003cOption\u003c...\u003e, ...\u003e` and let the caller decide if they want to abort or not?\n\nFor example, I would expect\n```\nlet fdt \u003d Fdt::create_empty_tree(bytes)?;\nshould_defer_rollback_protection(fdt)\n```\nto return `Ok(false)`, not fail (`Err`).\n\nEmbedding policies like this deep down the callstack increases the risk of logic bugs, IMO.\n\n`None` could be bubbled up back to `main`, which would decide how to handle it, and these FDT-parsing functions (`avf_untrusted_node`, `instance_id`, or even `should_defer_rollback_protection`) could return `libfdt::Result`.",
+      "range": {
+        "startLine": 269,
+        "startChar": 8,
+        "endLine": 269,
+        "endChar": 45
+      },
+      "revId": "e7bd85d00674fce13f41472b15a9d4ad2e016889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
