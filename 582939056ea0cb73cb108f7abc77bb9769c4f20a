@@ -94,6 +94,30 @@
       },
       "revId": "582939056ea0cb73cb108f7abc77bb9769c4f20a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be46b029_6b08e796",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-11T01:09:17Z",
+      "side": 1,
+      "message": "\u003e \u003e can we add report DICE error with IVirtualMachineCallback?\n\n\u003e Sadly we\u0027re too late for API changes.\n\nI meant, can we report DICE error as `IVirtualMachineCallback::onError()` but with `ErrorCode::UNKNOWN` and message `DICE error`? It\u0027s anyway better than logcat but it may not be possible because the failure happens in early boot stage..\n\n\n\u003e And we shouldn\u0027t be over-precise\n\nAgreed, especially when trying over-precise is inaccurate.",
+      "parentUuid": "e80c1948_135c29a3",
+      "range": {
+        "startLine": 557,
+        "startChar": 20,
+        "endLine": 557,
+        "endChar": 58
+      },
+      "revId": "582939056ea0cb73cb108f7abc77bb9769c4f20a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
