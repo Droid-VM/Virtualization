@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1457e53_fe8520da",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 1330,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-11T14:41:08Z",
+      "side": 1,
+      "message": "Ooops. Done",
+      "parentUuid": "3079f6c5_6f1f264a",
+      "range": {
+        "startLine": 1330,
+        "startChar": 39,
+        "endLine": 1330,
+        "endChar": 52
+      },
+      "revId": "59b9513afc389f1716d4cbe367f0dd23d5829049",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30356b39_959d129d",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-08T19:31:02Z",
       "side": 1,
       "message": "So should we `return Err` instead of just `warn!`? Note that, by ignoring this `\u003cranges\u003e` and not adding it to `reg_ranges`, we\u0027re probably permitting an overlap.",
+      "range": {
+        "startLine": 1345,
+        "startChar": 19,
+        "endLine": 1345,
+        "endChar": 67
+      },
+      "revId": "59b9513afc389f1716d4cbe367f0dd23d5829049",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebea988d_41300e0e",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-11T14:41:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30356b39_959d129d",
       "range": {
         "startLine": 1345,
         "startChar": 19,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8aab2d3_9ca05c7b",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 1355,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-11T14:41:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a494990d_4c2cc79a",
+      "range": {
+        "startLine": 1355,
+        "startChar": 16,
+        "endLine": 1355,
+        "endChar": 39
+      },
+      "revId": "59b9513afc389f1716d4cbe367f0dd23d5829049",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6fe60d8c_6ac3db69",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-03-08T19:31:02Z",
       "side": 1,
       "message": "nit: should we just do this once at the top of the `for (node, _)` loop?",
+      "range": {
+        "startLine": 1362,
+        "startChar": 20,
+        "endLine": 1362,
+        "endChar": 44
+      },
+      "revId": "59b9513afc389f1716d4cbe367f0dd23d5829049",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bcc00bc_0f616efd",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 1362,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-11T14:41:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6fe60d8c_6ac3db69",
       "range": {
         "startLine": 1362,
         "startChar": 20,
