@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6e1651c_850c60df",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-11T14:56:46Z",
+      "side": 1,
+      "message": "Although the symptoms of the bug this fixes are seen in the logs of that ticket, I don\u0027t think this CL is actually addressing it. To avoid increasing the noise there, let\u0027s not list it in this CL?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 14
+      },
+      "revId": "22baecbd344c38f9e673320c06e88351c6c0f98b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaac1d06_56112399",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 818,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-11T14:56:46Z",
+      "side": 1,
+      "message": "This isn\u0027t related to the `struct` so make it a stand-alone function (e.g. `patch_template_fdt`) and add a docstring (given `pub`).",
+      "range": {
+        "startLine": 818,
+        "startChar": 11,
+        "endLine": 818,
+        "endChar": 16
+      },
+      "revId": "22baecbd344c38f9e673320c06e88351c6c0f98b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f6c4abe_0216e7e3",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1398,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-11T14:56:46Z",
+      "side": 1,
+      "message": "Do you actually need to `.resize()` and `.unpack()`?",
+      "range": {
+        "startLine": 1396,
+        "startChar": 0,
+        "endLine": 1398,
+        "endChar": 38
+      },
+      "revId": "22baecbd344c38f9e673320c06e88351c6c0f98b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67987f7b_994562bf",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1403,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-11T14:56:46Z",
+      "side": 1,
+      "message": "Would you mind `assert`-ing that there was a `\"pkvm,pviommu\"`-compatible node in the tree before calling the function under test?\n\nAlso, thanks for adding a test; I wish we could do so on `patch_device_tree` itself :( Didn\u0027t we have a bug to track that effort (of making more of pvmfw unit-test-able)?",
+      "range": {
+        "startLine": 1403,
+        "startChar": 8,
+        "endLine": 1403,
+        "endChar": 41
+      },
+      "revId": "22baecbd344c38f9e673320c06e88351c6c0f98b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
