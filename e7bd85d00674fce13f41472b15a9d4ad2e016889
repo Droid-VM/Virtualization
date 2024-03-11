@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46285a51_98c29cf5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-11T15:20:34Z",
+      "side": 1,
+      "message": "Ive left some comments unresolved as I\u0027m working on some reequired reverts before I can merge this back",
+      "revId": "e7bd85d00674fce13f41472b15a9d4ad2e016889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b27d32d_6a29567f",
@@ -14,6 +31,30 @@
       "writtenOn": "2024-03-11T12:26:00Z",
       "side": 1,
       "message": "This MM change must be tied to the pvmfw change (i.e. `llpvm_changes`) and inclusion of the `SecretkeeperProtection` capability in its kernel image. Otherwise, this CL will re-introduce b/217376291 for some configurations.",
+      "range": {
+        "startLine": 113,
+        "startChar": 12,
+        "endLine": 113,
+        "endChar": 20
+      },
+      "revId": "e7bd85d00674fce13f41472b15a9d4ad2e016889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18e8db10_0266e2bb",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-11T15:20:34Z",
+      "side": 1,
+      "message": "The capability  `SecretkeeperProtection capability` is compiled conditional to `llpvm_changes`, see [1].\n\nAlso, the change is conditional on `should_defer_rollback_protection` [See L94] which ties it to pvmfw changes as well. I believe we have all configurations covered from attacks described in b/217376291, please let me know if you find a corner case that is not covered.\n\n[1] https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/microdroid/Android.bp;l\u003d507-517?q\u003d%22secretkeeper_protection%22",
+      "parentUuid": "2b27d32d_6a29567f",
       "range": {
         "startLine": 113,
         "startChar": 12,
@@ -70,6 +111,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7399c55_bd78e878",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-11T15:20:34Z",
+      "side": 1,
+      "message": "The only possibility of these changing on the next boot is if host is compromised or an update from Sk not supported to Sk supported OS happen.\n\nDowngrading from Secretkeeper to Non secretkeeper case will lead to secret mechanism changing from V2 -\u003e V1 (ie Sealing CDIs will be used to derive secrets \u0026 instance.img will be required). We differentiate the sealing secrets of V2 \u0026 V1 to avoid possibility of this leading to leaking secrets.\n\n\nUpgrading from Secretkeeper to Non secretkeeper case would  let the boot succeed but the final secrets would be a mix of Sealing CDIs and randomly generate secrets (that are stored in Sk). This will essentially be equivalent to get_new_secrets.",
+      "parentUuid": "d173a156_615615ba",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 80
+      },
+      "revId": "e7bd85d00674fce13f41472b15a9d4ad2e016889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52b4162b_db9d8fcf",
@@ -83,6 +148,30 @@
       "writtenOn": "2024-03-11T12:26:00Z",
       "side": 1,
       "message": "`\"Deferring rollback protection\"` as pvmfw\u0027s RBP deferring isn\u0027t Sk-specific.",
+      "range": {
+        "startLine": 148,
+        "startChar": 14,
+        "endLine": 148,
+        "endChar": 62
+      },
+      "revId": "e7bd85d00674fce13f41472b15a9d4ad2e016889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a38c6962_a76f700f",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-11T15:20:34Z",
+      "side": 1,
+      "message": "We agreed on changing the name of capability to be more Sk agnostic, but I cant think of a better name of such capability other than `SecretkeeperProtection`. Suggestion?",
+      "parentUuid": "52b4162b_db9d8fcf",
       "range": {
         "startLine": 148,
         "startChar": 14,
@@ -118,6 +207,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "82fc1407_6d5dfd77",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-11T15:20:34Z",
+      "side": 1,
+      "message": "rollback_index defaults to `0` when not specified in build rules. We wanted devs to be more explicit about the rollback_index to ensure this has been thought through. I\u0027ll add a comment",
+      "parentUuid": "807aa495_87b1780c",
+      "range": {
+        "startLine": 149,
+        "startChar": 11,
+        "endLine": 149,
+        "endChar": 86
+      },
+      "revId": "e7bd85d00674fce13f41472b15a9d4ad2e016889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1660cc8d_8a6914c5",
         "filename": "pvmfw/src/main.rs",
         "patchSetId": 5
@@ -141,6 +254,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a1397dcb_c9537a67",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-11T15:20:34Z",
+      "side": 1,
+      "message": "\u003e what\u0027s the policy for flipping that build flag\n\nThe llpvm_changes is tied to Android 24Q3 release\n\n\n\u003e the host would now be (indirectly) in control of the CDI of non-SecretkeeperProtection-capable guests, right?\n\nAs we discussed, we need to mix the `defer_rbp` into hidden inputs, that is a blocker ofcourse. I\u0027ll add a TODO.\n\n\n\u003e We previously mandated that the instance.img was encrypted (by pvmfw), to guarantee the confidentiality and integrity of the salt (Hidden)\n\n\nThe encryption of salt added nothing to the security, the malicious host can use the target VM\u0027s encrypted salt. It was really the combination of authenticated encryption of the code hashes \u0026 /chosen/avf,new-instance that prevented leaking the security.",
+      "parentUuid": "1660cc8d_8a6914c5",
+      "range": {
+        "startLine": 157,
+        "startChar": 11,
+        "endLine": 157,
+        "endChar": 65
+      },
+      "revId": "e7bd85d00674fce13f41472b15a9d4ad2e016889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23be7129_d1d49f53",
         "filename": "pvmfw/src/main.rs",
         "patchSetId": 5
@@ -152,6 +289,30 @@
       "writtenOn": "2024-03-11T12:26:00Z",
       "side": 1,
       "message": "Note that this will generate a salt (`SMCCC_TRNG` calls) to be stored in the instance.img, which is then never read; would you mind splitting up `get_or_generate_instance_salt` so that this path can simply read/write an entry with no (or zeroed) salt?",
+      "range": {
+        "startLine": 158,
+        "startChar": 8,
+        "endLine": 159,
+        "endChar": 42
+      },
+      "revId": "e7bd85d00674fce13f41472b15a9d4ad2e016889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b99e48be_d00753f9",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-11T15:20:34Z",
+      "side": 1,
+      "message": "Yeah this method could use a bit of refactoring. Keeping this comment unresolved till I get to it.",
+      "parentUuid": "23be7129_d1d49f53",
       "range": {
         "startLine": 158,
         "startChar": 8,
@@ -269,6 +430,30 @@
       "side": 1,
       "message": "\u003e [1] seems to ensure that /avf/untrusted exists when llpvm_changes is on.\n\nThanks for the pointer.\n\nAFAICT, this CL would break the basic `crosvm run --protected`, right? IMO, we shouldn\u0027t assume that pVMs are only spawned through `virtmgr`, unless absolutely necessary (not the case here).\n\n\u003e Pierre-Clement, when do you think SK can be off while llpvm_changes is on?\n\nMy point was that pvmfw shouldn\u0027t abort the boot if `/avf/untrusted` is missing, unless it needs it. And it doesn\u0027t need it if the guest doesn\u0027t have `Capability::SecretkeeperProtection`.",
       "parentUuid": "f57f0353_f3fe7797",
+      "range": {
+        "startLine": 269,
+        "startChar": 8,
+        "endLine": 269,
+        "endChar": 45
+      },
+      "revId": "e7bd85d00674fce13f41472b15a9d4ad2e016889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4530527_7f9808cc",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-11T15:20:34Z",
+      "side": 1,
+      "message": "\u003e Won\u0027t this make pvmfw panic for non-Sk use-cases \u0026 And it doesn\u0027t need it if the guest doesn\u0027t have Capability::SecretkeeperProtection\n\n\nThe untrusted node is mandatory to start any pVM. It has the `instance_id` which is mandatory for all OSes (including rialto) \u0026 replaces the salt in instance.img. This is irrespective of `Capability::SecretkeeperProtection`. \n\nThere is nothing pvmfw can do in absence of id other than aborting the boot (The behaviour should be similar to TRNG failures).\n\nTo clarify potential confusion here:\n1) Secretkeeper is optional (devices may/maynot ship it)\n2) Instance-id change is mandatory with 24Q3, so llpvm_changes \u003d\u003e /untrusted node will be present. This replaces our dependency on salt in instance.img\n3) If Secretkeeper is not supported in 24Q3 releases, instance.img will be needed for code hashes \u0026 all, but the salt field will be obsolete.\n\n\n\u003e AFAICT, this CL would break the basic crosvm run --protected, right\n\nThe additional `--device-tree-overlay` will be needed to make it work. What was the lagacy crosvm behavior if an virtio-blk device with Instance.img MAGIC_HEADER was not provided?\n\n\nI dont think there is a better solution to removing the apparent fragility between virtmg/pvmfw/Microdroid MM. This project touches multiple components \u0026 this is expected. (combined with trust released \u0026 build time flagging, which is considerably dropped code readability).\n\n\nIf you\u0027re concern is bummbling appropriate errors, I can change instance_id() to return `FdtError::NotFound` but the caller will endup mapping it to a reboot reason \u0026 I think `InvalidFdt` is the most appropriate one, so I dont see the immediate benefit.",
+      "parentUuid": "af772f1b_910037c7",
       "range": {
         "startLine": 269,
         "startChar": 8,
