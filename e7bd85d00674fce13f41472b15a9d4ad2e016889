@@ -49,6 +49,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d173a156_615615ba",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-11T13:59:00Z",
+      "side": 1,
+      "message": "What if these two conditions change in the next boot of the same VM? (ex: perhaps due to host being compromised)",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 80
+      },
+      "revId": "e7bd85d00674fce13f41472b15a9d4ad2e016889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52b4162b_db9d8fcf",
         "filename": "pvmfw/src/main.rs",
         "patchSetId": 5
@@ -141,6 +164,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a2bfafd1_1490e360",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-11T13:59:00Z",
+      "side": 1,
+      "message": "style:\n\n```\nid.ok_or_else(|| {\n    error!(...);\n    RebootReason::InvalidFdt\n}\n```",
+      "range": {
+        "startLine": 243,
+        "startChar": 0,
+        "endLine": 247,
+        "endChar": 10
+      },
+      "revId": "e7bd85d00674fce13f41472b15a9d4ad2e016889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "927dc549_2c01d940",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-11T13:59:00Z",
+      "side": 1,
+      "message": "style: same as above",
+      "range": {
+        "startLine": 267,
+        "startChar": 0,
+        "endLine": 267,
+        "endChar": 32
+      },
+      "revId": "e7bd85d00674fce13f41472b15a9d4ad2e016889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "53deb6a5_259ab1e5",
         "filename": "pvmfw/src/main.rs",
         "patchSetId": 5
@@ -152,6 +221,30 @@
       "writtenOn": "2024-03-11T12:26:00Z",
       "side": 1,
       "message": "Won\u0027t this make pvmfw panic for non-Sk use-cases, when `llpvm_changes` is enabled?\n\nWhy not return `Result\u003cOption\u003c...\u003e, ...\u003e` and let the caller decide if they want to abort or not?\n\nFor example, I would expect\n```\nlet fdt \u003d Fdt::create_empty_tree(bytes)?;\nshould_defer_rollback_protection(fdt)\n```\nto return `Ok(false)`, not fail (`Err`).\n\nEmbedding policies like this deep down the callstack increases the risk of logic bugs, IMO.\n\n`None` could be bubbled up back to `main`, which would decide how to handle it, and these FDT-parsing functions (`avf_untrusted_node`, `instance_id`, or even `should_defer_rollback_protection`) could return `libfdt::Result`.",
+      "range": {
+        "startLine": 269,
+        "startChar": 8,
+        "endLine": 269,
+        "endChar": 45
+      },
+      "revId": "e7bd85d00674fce13f41472b15a9d4ad2e016889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f57f0353_f3fe7797",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-11T13:59:00Z",
+      "side": 1,
+      "message": "[1] seems to ensure that /avf/untrusted exists when llpvm_changes is on. Pierre-Clement, when do you think SK can be off while llpvm_changes is on? If you think dependency on [1] is fragile (ex: that code fragment can be deleted anytime), I admit that though.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/virtualizationmanager/src/aidl.rs;drc\u003dc78d8091d5ebd631f5e94cff8ee21833bfa9866d;l\u003d409",
+      "parentUuid": "53deb6a5_259ab1e5",
       "range": {
         "startLine": 269,
         "startChar": 8,
