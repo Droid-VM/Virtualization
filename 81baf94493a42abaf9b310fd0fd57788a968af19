@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e845539f_5b9ba509",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1400,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-11T17:24:58Z",
+      "side": 1,
+      "message": "Note that `Err(_)` would pass this check; maybe\n```\nassert_ne!(None, compatible.unwrap())\n```\n?",
+      "range": {
+        "startLine": 1400,
+        "startChar": 8,
+        "endLine": 1400,
+        "endChar": 41
+      },
+      "revId": "81baf94493a42abaf9b310fd0fd57788a968af19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
