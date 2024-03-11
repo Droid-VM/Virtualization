@@ -253,6 +253,30 @@
       },
       "revId": "e7bd85d00674fce13f41472b15a9d4ad2e016889",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af772f1b_910037c7",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-11T14:41:18Z",
+      "side": 1,
+      "message": "\u003e [1] seems to ensure that /avf/untrusted exists when llpvm_changes is on.\n\nThanks for the pointer.\n\nAFAICT, this CL would break the basic `crosvm run --protected`, right? IMO, we shouldn\u0027t assume that pVMs are only spawned through `virtmgr`, unless absolutely necessary (not the case here).\n\n\u003e Pierre-Clement, when do you think SK can be off while llpvm_changes is on?\n\nMy point was that pvmfw shouldn\u0027t abort the boot if `/avf/untrusted` is missing, unless it needs it. And it doesn\u0027t need it if the guest doesn\u0027t have `Capability::SecretkeeperProtection`.",
+      "parentUuid": "f57f0353_f3fe7797",
+      "range": {
+        "startLine": 269,
+        "startChar": 8,
+        "endLine": 269,
+        "endChar": 45
+      },
+      "revId": "e7bd85d00674fce13f41472b15a9d4ad2e016889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
