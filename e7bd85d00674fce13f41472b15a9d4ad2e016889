@@ -137,6 +137,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fcbeab48_af55fc7d",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-11T15:42:35Z",
+      "side": 1,
+      "message": "instance.img is needed also for the upgrading from sk to non-sk case, right?",
+      "parentUuid": "c7399c55_bd78e878",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 80
+      },
+      "revId": "e7bd85d00674fce13f41472b15a9d4ad2e016889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52b4162b_db9d8fcf",
         "filename": "pvmfw/src/main.rs",
         "patchSetId": 5
