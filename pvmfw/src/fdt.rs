@@ -1158,6 +1158,11 @@ fn patch_device_tree(fdt: &mut Fdt, info: &DeviceTreeInfo) -> Result<(), RebootR
             error!("Failed to patch device assignment info to DT: {e}");
             RebootReason::InvalidFdt
         })?;
+    } else {
+        DeviceAssignmentInfo::clean(fdt).map_err(|e| {
+            error!("Failed to clean pre-polulated DT nodes for device assignment: {e}");
+            RebootReason::InvalidFdt
+        })?;
     }
     patch_untrusted_props(fdt, &info.untrusted_props).map_err(|e| {
         error!("Failed to patch untrusted properties: {e}");

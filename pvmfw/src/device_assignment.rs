@@ -814,6 +814,17 @@ impl DeviceAssignmentInfo {
         // Removes any dangling references in __symbols__ (e.g. removed pvIOMMUs)
         filter_dangling_symbols(fdt)
     }
+
+    pub fn clean(fdt: &mut Fdt) -> Result<()> {
+        let mut compatible = fdt.root_mut().next_compatible(Self::PVIOMMU_COMPATIBLE)?;
+        // Filters pre-populated
+        while let Some(filtered_pviommu) = compatible {
+            compatible = filtered_pviommu.delete_and_next_compatible(Self::PVIOMMU_COMPATIBLE)?;
+        }
+
+        // Removes any dangling references in __symbols__ (e.g. removed pvIOMMUs)
+        filter_dangling_symbols(fdt)
+    }
 }
 
 #[cfg(test)]
@@ -1377,5 +1388,18 @@ mod tests {
         let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor);
 
         assert_eq!(device_info, Err(DeviceAssignmentError::InvalidIommus));
+    }
+
+    #[test]
+    fn device_info_clean() {
+        let mut platform_dt_data = pvmfw_fdt_template::RAW.to_vec();
+        platform_dt_data.resize(pvmfw_fdt_template::RAW.len() * 2, 0);
+        let platform_dt = Fdt::from_mut_slice(&mut platform_dt_data).unwrap();
+        platform_dt.unpack().unwrap();
+
+        DeviceAssignmentInfo::clean(platform_dt).unwrap();
+
+        let compatible = platform_dt.root().next_compatible(cstr!("pkvm,pviommu"));
+        assert_eq!(Ok(None), compatible);
     }
 }
