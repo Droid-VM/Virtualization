@@ -84,8 +84,10 @@ impl VbMetaImage {
         offset: u64,
         size: u64,
     ) -> Result<Self, VbMetaImageVerificationError> {
+        eprintln!("[ioffe] verify_reader_region start");
         // Check for a footer in the image or assume it's an entire VBMeta image.
         image.seek(SeekFrom::Start(offset + size)).map_err(VbMetaImageParseError::Io)?;
+        eprintln!("[ioffe] seek ok");
         let (vbmeta_offset, vbmeta_size) = match read_avb_footer(&mut image) {
             Ok(footer) => {
                 if footer.vbmeta_offset > size || footer.vbmeta_size > size - footer.vbmeta_offset {
@@ -99,9 +101,11 @@ impl VbMetaImage {
             }
         };
         image.seek(SeekFrom::Start(offset + vbmeta_offset)).map_err(VbMetaImageParseError::Io)?;
+        eprintln!("[ioffe] another seek ok");
         // Verify the image before examining it to check the size.
         let mut data = vec![0u8; vbmeta_size as usize];
         image.read_exact(&mut data).map_err(VbMetaImageParseError::Io)?;
+        eprintln!("[ioffe] before verify_vbmeta_image");
         verify_vbmeta_image(&data)?;
         // SAFETY: the image has been verified so we know there is a valid header at the start.
         let header = unsafe {
@@ -179,13 +183,17 @@ fn verify_vbmeta_image(data: &[u8]) -> Result<(), VbMetaImageVerificationError> 
 
 /// Read the AVB footer, if present, given a reader that's positioned at the end of the image.
 fn read_avb_footer<R: Read + Seek>(image: &mut R) -> Result<AvbFooter, VbMetaImageParseError> {
+    eprintln!("[ioffe] read_avb_footer footer size : {:?}", (size_of::<AvbFooter>() as i64));
     image.seek(SeekFrom::Current(-(size_of::<AvbFooter>() as i64)))?;
+    eprintln!("[ioffe] read_avb_footer seek ok");
     let mut raw_footer = [0u8; size_of::<AvbFooter>()];
     image.read_exact(&mut raw_footer)?;
+    eprintln!("[ioffe] read_exact ok");
     // SAFETY: the slice is the same size as the struct which only contains simple data types.
     let mut footer = unsafe { transmute::<[u8; size_of::<AvbFooter>()], AvbFooter>(raw_footer) };
     // SAFETY: the function updates the struct in-place.
     if unsafe { avb_footer_validate_and_byteswap(&footer, &mut footer) } {
+        eprintln!("[ioffe] it's ok");
         Ok(footer)
     } else {
         Err(VbMetaImageParseError::InvalidFooter)

@@ -42,6 +42,10 @@ on init
     # Allow the payload access to the console (default is 0600)
     chmod 0666 /dev/console
 
+    # We might have a dice chain stored there.
+    # Fix up permissions to make sure microdroid_manager can read it.
+    restorecon /microdroid_resources/dice_chain.raw
+
     # Microdroid_manager starts apkdmverity/zipfuse/apexd
     start microdroid_manager
 
