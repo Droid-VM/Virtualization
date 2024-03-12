@@ -91,6 +91,53 @@
       },
       "revId": "fff3afd53d2cc07fd473638acab70dc45ccc9684",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3633518b_1dfd9f7d",
+        "filename": "tests/pvmfw/java/com/android/pvmfw/test/PvmfwTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-12T17:01:13Z",
+      "side": 1,
+      "message": "I think reference DT will only be present if either there is a Microdroid vendor partition or there is a Secretkeeper TA.",
+      "parentUuid": "ff5292b2_45ba24db",
+      "range": {
+        "startLine": 34,
+        "startChar": 48,
+        "endLine": 34,
+        "endChar": 52
+      },
+      "revId": "fff3afd53d2cc07fd473638acab70dc45ccc9684",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "161bd469_8e460050",
+        "filename": "tests/pvmfw/java/com/android/pvmfw/test/PvmfwTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-12T17:01:13Z",
+      "side": 1,
+      "message": "Prefer to use `assertThrows` - e.g. https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java;drc\u003dab993a40dc10532946c158599d2ab2dd34a18949;l\u003d278",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 9
+      },
+      "revId": "fff3afd53d2cc07fd473638acab70dc45ccc9684",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
