@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0c7be83b_81f9db80",
+        "filename": "libs/devicemapper/src/crypt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-03-12T18:45:30Z",
+      "side": 1,
+      "message": "Right, this module does implement the policy that HCTR2 is the default, though.  See `DmCryptTargetBuilder::default()`.  Maybe that would be a better place to document the rationale?",
+      "parentUuid": "1678b80b_c40950b7",
+      "range": {
+        "startLine": 36,
+        "startChar": 34,
+        "endLine": 36,
+        "endChar": 60
+      },
+      "revId": "4de6681d5f278851ac0609c00a6af1fd39093c2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a46de51e_7e0bc7dd",
         "filename": "libs/devicemapper/src/crypt.rs",
         "patchSetId": 1
