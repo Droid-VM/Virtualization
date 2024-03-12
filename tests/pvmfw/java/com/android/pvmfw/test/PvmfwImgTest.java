@@ -35,19 +35,25 @@ import java.util.List;
 @RunWith(DeviceJUnit4ClassRunner.class)
 public class PvmfwImgTest extends CustomPvmfwHostTestCaseBase {
     @Test
-    public void testConfigVersion1_0_boots() throws Exception {
-        Pvmfw pvmfw = new Pvmfw.Builder(getPvmfwBinFile(), getBccFile()).setVersion(1, 0).build();
-        pvmfw.serialize(getCustomPvmfwFile());
+    public void testCustomPvmfw_withoutReferenceDt_doesNotBoot() throws Exception {
+        List<int[]> legacy_versions_without_reference_dt =
+                Arrays.asList(new int[] {1, 0}, new int[] {1, 1});
 
-        launchProtectedVmAndWaitForBootCompleted(BOOT_COMPLETE_TIMEOUT_MS);
-    }
+        Pvmfw.Builder builder = new Pvmfw.Builder(getPvmfwBinFile(), getBccFile());
 
-    @Test
-    public void testConfigVersion1_1_boots() throws Exception {
-        Pvmfw pvmfw = new Pvmfw.Builder(getPvmfwBinFile(), getBccFile()).setVersion(1, 1).build();
-        pvmfw.serialize(getCustomPvmfwFile());
+        for (int[] pair : legacy_versions_without_reference_dt) {
+            int major = pair[0];
+            int minor = pair[1];
+            String version = "v" + major + "." + minor;
 
-        launchProtectedVmAndWaitForBootCompleted(BOOT_COMPLETE_TIMEOUT_MS);
+            Pvmfw pvmfw = builder.setVersion(major, minor).build();
+            pvmfw.serialize(getCustomPvmfwFile());
+
+            assertThrows(
+                    "pvmfw shouldn't boot with older version " + version,
+                    DeviceRuntimeException.class,
+                    () -> launchProtectedVmAndWaitForBootCompleted(BOOT_FAILURE_WAIT_TIME_MS));
+        }
     }
 
     @Test
@@ -65,7 +71,9 @@ public class PvmfwImgTest extends CustomPvmfwHostTestCaseBase {
                         new int[] {0xFFFF, 1},
                         new int[] {0xFFFF, 0xFFFF});
 
-        Pvmfw.Builder builder = new Pvmfw.Builder(getPvmfwBinFile(), getBccFile());
+        Pvmfw.Builder builder =
+                new Pvmfw.Builder(getPvmfwBinFile(), getBccFile())
+                        .setVmReferenceDt(getVmReferenceDtFile());
 
         for (int[] pair : invalid_versions) {
             int major = pair[0];
