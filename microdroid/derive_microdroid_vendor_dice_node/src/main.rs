@@ -14,9 +14,19 @@
 
 //! Derives microdroid vendor dice node.
 
-use anyhow::Error;
+use anyhow::{bail, Context, Error};
+use ciborium::{cbor, Value};
 use clap::Parser;
-use std::path::PathBuf;
+use coset::CborSerializable;
+use dice_driver::DiceDriver;
+use diced_open_dice::{OwnedDiceArtifacts, HIDDEN_SIZE};
+use dm::util::blkgetsize64;
+use openssl::sha::Sha512;
+use std::fs::{read_link, File};
+use std::path::{Path, PathBuf};
+use vbmeta::VbMetaImage;
+
+const AVF_STRICT_BOOT: &str = "/proc/device-tree/chosen/avf,strict-boot";
 
 #[derive(Parser)]
 struct Args {
@@ -31,8 +41,71 @@ struct Args {
     output: PathBuf,
 }
 
-fn main() -> Result<(), Error> {
+// TODO(ioffe): move to a library to reuse same code here, in microdroid_manager and in
+// first_stage_init.
+fn is_strict_boot() -> bool {
+    Path::new(AVF_STRICT_BOOT).exists()
+}
+
+// TODO(ioffe): also include the rollback index.
+fn build_descriptor() -> Result<Vec<u8>, Error> {
+    let mut map = Vec::new();
+    map.push((cbor!(-70002)?, cbor!("Microdroid vendor")?));
+    Ok(Value::Map(map).to_vec()?)
+}
+
+fn find_root_digest(vbmeta: &VbMetaImage) -> Result<Option<Vec<u8>>, Error> {
+    for descriptor in vbmeta.descriptors()?.iter() {
+        if let vbmeta::Descriptor::Hashtree(_) = descriptor {
+            let root_digest = hex::encode(descriptor.to_hashtree()?.root_digest());
+            return Ok(Some(root_digest.as_bytes().to_vec()));
+        }
+    }
+    Ok(None)
+}
+
+fn dice_derivation(dice: DiceDriver, vbmeta: &VbMetaImage) -> Result<OwnedDiceArtifacts, Error> {
+    let mut code_hash = Sha512::new();
+    let mut authority_hash = Sha512::new();
+    if let Some(pubkey) = vbmeta.public_key() {
+        authority_hash.update(pubkey);
+    } else {
+        bail!("no public key");
+    }
+    if let Some(root_digest) = find_root_digest(vbmeta)? {
+        code_hash.update(root_digest.as_ref());
+    } else {
+        bail!("no hashtree");
+    }
+    let desc = build_descriptor()?;
+    // TODO(ioffe): we also need to pass is_debuggable here
+    // TODO(ioffe): what to do with hidden?
+    let hidden = [0; HIDDEN_SIZE];
+    dice.derive(code_hash.finish(), &desc, authority_hash.finish(), false, hidden)
+}
+
+fn extract_vbmeta(block_dev: &Path) -> Result<VbMetaImage, Error> {
+    let size = blkgetsize64(block_dev).context("blkgetsize64  failed")?;
+    let file = File::open(block_dev).context("open failed")?;
+    let vbmeta = VbMetaImage::verify_reader_region(file, 0, size)?;
+    Ok(vbmeta)
+}
+
+fn try_main() -> Result<(), Error> {
     let args = Args::parse();
-    eprintln!("{:?} {:?} {:?}", args.dice_driver, args.microdroid_vendor_disk_image, args.output);
+    let dice =
+        DiceDriver::new(&args.dice_driver, is_strict_boot()).context("Failed to load DICE")?;
+    let path = read_link(args.microdroid_vendor_disk_image).context("failed to read symlink")?;
+    let vbmeta = extract_vbmeta(&path).context("failed to extract vbmeta")?;
+    let dice_artifacts = dice_derivation(dice, &vbmeta).context("failed to derive dice chain")?;
+    let file = File::create(&args.output).context("failed to create output")?;
+    serde_cbor::to_writer(file, &dice_artifacts).context("failed to write dice artifacts")?;
     Ok(())
+}
+
+fn main() {
+    if let Err(e) = try_main() {
+        eprintln!("failed with {:?}", e);
+        std::process::exit(1);
+    }
 }
