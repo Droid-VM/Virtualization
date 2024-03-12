@@ -194,6 +194,7 @@ public class DebugPolicyHostTests extends CustomPvmfwHostTestCaseBase {
         Pvmfw pvmfw =
                 new Pvmfw.Builder(getPvmfwBinFile(), getBccFile())
                         .setDebugPolicyOverlay(mCustomDebugPolicyFileOnHost)
+                        .setVmReferenceDt(getVmReferenceDtFile())
                         .build();
         pvmfw.serialize(getCustomPvmfwFile());
     }
