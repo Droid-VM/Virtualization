@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1faf46b_cae28db7",
+        "filename": "libs/devicemapper/src/crypt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-12T20:12:30Z",
+      "side": 1,
+      "message": "That default is at all places overwritten using `cipher()` method of the builder. That said, I\u0027ve mentioned the rationale of why HCTR2 is is beneficial is case other more dedicated integrity primitives are not available. I also added a README @ /encryptedstore/. PTAL",
+      "parentUuid": "0c7be83b_81f9db80",
+      "range": {
+        "startLine": 36,
+        "startChar": 34,
+        "endLine": 36,
+        "endChar": 60
+      },
+      "revId": "4de6681d5f278851ac0609c00a6af1fd39093c2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a46de51e_7e0bc7dd",
@@ -109,6 +133,30 @@
       "side": 1,
       "message": "There is some (very limited) documentation in https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/java/framework/README.md;l\u003d338-340?q\u003d%22java%2Fframework%2FREADME.md%22\n\nBut I think we can use a README at /encryptedstore/. Let me do that",
       "parentUuid": "a46de51e_7e0bc7dd",
+      "range": {
+        "startLine": 38,
+        "startChar": 19,
+        "endLine": 38,
+        "endChar": 75
+      },
+      "revId": "4de6681d5f278851ac0609c00a6af1fd39093c2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6786dab_cfc9f013",
+        "filename": "libs/devicemapper/src/crypt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-12T20:12:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "086bce80_fd61edbb",
       "range": {
         "startLine": 38,
         "startChar": 19,
