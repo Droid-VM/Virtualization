@@ -65,6 +65,7 @@ impl DiceDriver<'_> {
 
     /// Creates a new dice driver from the given driver_path.
     pub fn new(driver_path: &Path, is_strict_boot: bool) -> Result<Self> {
+        log::info!("Creating DiceDriver backed by {:?} driver", driver_path);
         if driver_path.exists() {
             log::info!("Using DICE values from driver");
         } else if is_strict_boot {
@@ -107,6 +108,7 @@ impl DiceDriver<'_> {
 
     /// Create a new dice driver that reads dice_artifacts from the given file.
     pub fn from_file(file_path: &Path) -> Result<Self> {
+        log::info!("Creating DiceDriver backed by {:?} file", file_path);
         let file =
             fs::File::open(file_path).map_err(|error| Error::new(error).context("open file"))?;
         let dice_artifacts = serde_cbor::from_reader(file)
@@ -149,11 +151,18 @@ impl DiceDriver<'_> {
             &input_values,
         )
         .context("DICE derive from driver")?;
-        if let Self::Real { driver_path, .. } = &self {
-            // Writing to the device wipes the artifacts. The string is ignored by the driver but
-            // included for documentation.
-            fs::write(driver_path, "wipe")
-                .map_err(|err| Error::new(err).context("Wiping driver"))?;
+        match &self {
+            Self::Real { driver_path, .. } => {
+                // Writing to the device wipes the artifacts. The string is ignored by the driver
+                // but included for documentation.
+                fs::write(driver_path, "wipe")
+                    .map_err(|err| Error::new(err).context("Wiping driver"))?;
+            }
+            Self::FromFile { file_path, .. } => {
+                fs::remove_file(file_path)
+                    .map_err(|err| Error::new(err).context("Deleting file"))?;
+            }
+            Self::Fake { .. } => (),
         }
         Ok(next_dice_artifacts)
     }

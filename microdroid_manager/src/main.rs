@@ -85,6 +85,8 @@ const FAILURE_SERIAL_DEVICE: &str = "/dev/ttyS1";
 const ENCRYPTEDSTORE_BACKING_DEVICE: &str = "/dev/block/by-name/encryptedstore";
 const ENCRYPTEDSTORE_KEYSIZE: usize = 32;
 
+const DICE_CHAIN_FILE: &str = "/microdroid_resources/dice_chain.raw";
+
 #[derive(thiserror::Error, Debug)]
 enum MicrodroidError {
     #[error("Cannot connect to virtualization service: {0}")]
@@ -240,8 +242,13 @@ fn try_run_payload(
     vm_payload_service_fd: OwnedFd,
 ) -> Result<i32> {
     let metadata = load_metadata().context("Failed to load payload metadata")?;
-    let dice = DiceDriver::new(Path::new("/dev/open-dice0"), is_strict_boot())
-        .context("Failed to load DICE")?;
+    let dice = if Path::new(DICE_CHAIN_FILE).exists() {
+        DiceDriver::from_file(Path::new(DICE_CHAIN_FILE))
+            .context("Failed to load DICE from file")?
+    } else {
+        DiceDriver::new(Path::new("/dev/open-dice0"), is_strict_boot())
+            .context("Failed to load DICE from driver")?
+    };
 
     let mut instance = InstanceDisk::new().context("Failed to load instance.img")?;
     let saved_data =
