@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb033cf4_25fe031a",
+        "filename": "tests/pvmfw/helper/java/com/android/pvmfw/test/host/Pvmfw.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-12T16:54:43Z",
+      "side": 1,
+      "message": "NIT/Here and below: How about doing exact comparison, it is easier to read? (for ex. there cant be any version b/w 1.2 \u0026 1.1, the following else if can be exact match)\n```suggestion\n                || version \u003d\u003d 1.2)) {\n```",
+      "range": {
+        "startLine": 61,
+        "startChar": 20,
+        "endLine": 61,
+        "endChar": 84
+      },
+      "revId": "3cf4615bfef34b94f00c014fec3f5995983aa785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

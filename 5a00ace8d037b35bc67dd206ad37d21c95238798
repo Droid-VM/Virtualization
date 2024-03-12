@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76b6dac2_955d1372",
+        "filename": "tests/pvmfw/AndroidTest.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-12T16:54:43Z",
+      "side": 1,
+      "message": "What if reference DT is not present (as will be the case on devices not supporting Secretkeeper \u0026 u-droid vendor modules)? Will this command fail?\n\n\nShould we allow `vmReferenceDtFile` to be nullable",
+      "range": {
+        "startLine": 42,
+        "startChar": 64,
+        "endLine": 42,
+        "endChar": 114
+      },
+      "revId": "5a00ace8d037b35bc67dd206ad37d21c95238798",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fdce88c_e17e1d6d",
+        "filename": "tests/pvmfw/helper/java/com/android/pvmfw/test/host/Pvmfw.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-12T16:54:43Z",
+      "side": 1,
+      "message": "Can we replace BCC -\u003e DICE_CHAIN (here \u0026 elsewhere). Platsec has been trying really hard to kill the word BCC\n```suggestion\n    private static final int PVMFW_ENTRY_DICE_CHAIN \u003d 0;\n```",
+      "range": {
+        "startLine": 40,
+        "startChar": 29,
+        "endLine": 40,
+        "endChar": 45
+      },
+      "revId": "5a00ace8d037b35bc67dd206ad37d21c95238798",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
