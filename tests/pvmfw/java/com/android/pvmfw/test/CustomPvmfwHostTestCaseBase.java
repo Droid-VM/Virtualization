@@ -26,9 +26,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.microdroid.test.host.MicrodroidHostTestCaseBase;
+import com.android.microdroid.test.host.CommandRunner;
 import com.android.tradefed.device.DeviceNotAvailableException;
 import com.android.tradefed.device.ITestDevice;
 import com.android.tradefed.device.TestDevice;
+import com.android.tradefed.invoker.TestInformation;
+import com.android.tradefed.testtype.junit4.AfterClassWithInfo;
+import com.android.tradefed.testtype.junit4.BeforeClassWithInfo;
+import com.android.tradefed.util.CommandResult;
+import com.android.tradefed.util.CommandStatus;
 import com.android.tradefed.util.FileUtil;
 
 import org.junit.After;
@@ -50,6 +56,9 @@ public class CustomPvmfwHostTestCaseBase extends MicrodroidHostTestCaseBase {
     @NonNull
     public static final String MICRODROID_CONFIG_PATH = "assets/microdroid/vm_config_apex.json";
 
+    @NonNull
+    public static final String VM_REFERENCE_DT_PATH = "/data/local/tmp/pvmfw/reference_dt.dtb";
+
     @NonNull public static final String MICRODROID_LOG_PATH = TEST_ROOT + "log.txt";
     public static final int BOOT_COMPLETE_TIMEOUT_MS = 30000; // 30 seconds
     public static final int BOOT_FAILURE_WAIT_TIME_MS = 10000; // 10 seconds
@@ -60,13 +69,53 @@ public class CustomPvmfwHostTestCaseBase extends MicrodroidHostTestCaseBase {
     @NonNull public static final String CUSTOM_PVMFW_IMG_PATH = TEST_ROOT + PVMFW_FILE_NAME;
     @NonNull public static final String CUSTOM_PVMFW_IMG_PATH_PROP = "hypervisor.pvmfw.path";
 
-    @Nullable private static File mPvmfwBinFileOnHost;
-    @Nullable private static File mBccFileOnHost;
+    @NonNull private static final String DUMPSYS = "dumpsys";
+
+    @NonNull
+    private static final String DUMPSYS_MISSING_SERVICE_MSG_PREFIX = "Can't find service: ";
+
+    @NonNull
+    private static final String SECRET_KEEPER_AIDL =
+            "android.hardware.security.secretkeeper.ISecretkeeper/default";
+
+    @Nullable private static File sPvmfwBinFileOnHost;
+    @Nullable private static File sBccFileOnHost;
+    @Nullable private static File sVmReferenceDtFile;
+    @Nullable private static boolean sSecretKeeperSupported;
 
     @Nullable private TestDevice mAndroidDevice;
     @Nullable private ITestDevice mMicrodroidDevice;
 
     @Nullable public File mCustomPvmfwFileOnHost;
+
+    @BeforeClassWithInfo
+    public static void setupClass(TestInformation testInfo) throws Exception {
+        // tradefed copies the test artifacts under /tmp when running tests,
+        // so we should *find* the artifacts with the file name.
+        sPvmfwBinFileOnHost = testInfo.getDependencyFile(PVMFW_FILE_NAME, /* targetFirst= */ false);
+        sBccFileOnHost = testInfo.getDependencyFile(BCC_FILE_NAME, /* targetFirst= */ false);
+
+        ITestDevice androidDevice = Objects.requireNonNull(testInfo.getDevice());
+        // This is prepared by AndroidTest.xml
+        sVmReferenceDtFile = androidDevice.pullFile(VM_REFERENCE_DT_PATH);
+
+        CommandRunner runner = new CommandRunner(androidDevice);
+        CommandResult result = runner.runForResult(DUMPSYS, SECRET_KEEPER_AIDL);
+
+        // dumpsys prints 'Can't find service: ~' to stderr if secret keeper HAL is missing,
+        // but it doesn't return any error code for it.
+        // Read stderr to know whether secret keeper is supported, and stop test for any other case.
+        assumeTrue(
+                "Failed to run " + DUMPSYS,
+                result.getStatus() == CommandStatus.SUCCESS && result.getExitCode() == 0);
+        if (result.getStderr() != null && !result.getStderr().trim().isEmpty()) {
+            assumeTrue(
+                    "Unexpected stderr from " + DUMPSYS + ", stderr=" + result.getStderr(),
+                    result.getStderr().trim().startsWith(DUMPSYS_MISSING_SERVICE_MSG_PREFIX));
+        } else {
+            sSecretKeeperSupported = true;
+        }
+    }
 
     @Before
     public void setUp() throws Exception {
@@ -77,13 +126,6 @@ public class CustomPvmfwHostTestCaseBase extends MicrodroidHostTestCaseBase {
         assumeTrue(
                 "Skip if protected VMs are not supported",
                 mAndroidDevice.supportsMicrodroid(/* protectedVm= */ true));
-
-        // tradefed copies the test artifacts under /tmp when running tests,
-        // so we should *find* the artifacts with the file name.
-        mPvmfwBinFileOnHost =
-                getTestInformation().getDependencyFile(PVMFW_FILE_NAME, /* targetFirst= */ false);
-        mBccFileOnHost =
-                getTestInformation().getDependencyFile(BCC_FILE_NAME, /* targetFirst= */ false);
 
         // Prepare for system properties for custom pvmfw.img.
         // File will be prepared later in individual test and then pushed to device
@@ -116,14 +158,27 @@ public class CustomPvmfwHostTestCaseBase extends MicrodroidHostTestCaseBase {
         cleanUpVirtualizationTestSetup(mAndroidDevice);
     }
 
+    @AfterClassWithInfo
+    public static void shutdownClass(TestInformation testInfo) throws Exception {
+        FileUtil.deleteFile(sVmReferenceDtFile);
+    }
+
     /** Returns pvmfw.bin file on host for building custom pvmfw with */
-    public File getPvmfwBinFile() {
-        return mPvmfwBinFileOnHost;
+    @NonNull
+    public static File getPvmfwBinFile() {
+        return sPvmfwBinFileOnHost;
     }
 
     /** Returns BCC file on host for building custom pvmfw with */
-    public File getBccFile() {
-        return mBccFileOnHost;
+    @NonNull
+    public static File getBccFile() {
+        return sBccFileOnHost;
+    }
+
+    /** Returns VM reference DT, generated from DUT, on host for building custom pvmfw with. */
+    @Nullable
+    public static File getVmReferenceDtFile() {
+        return sVmReferenceDtFile;
     }
 
     /**
@@ -135,6 +190,16 @@ public class CustomPvmfwHostTestCaseBase extends MicrodroidHostTestCaseBase {
      */
     public File getCustomPvmfwFile() {
         return mCustomPvmfwFileOnHost;
+    }
+
+    /**
+     * Returns whether a secretkeeper is supported.
+     *
+     * <p>If {@code true}, then VM reference DT must exist. (i.e. {@link #getVmReferenceDtFile} must
+     * exist {@code null}).
+     */
+    public boolean isSecretKeeperSupported() {
+        return sSecretKeeperSupported;
     }
 
     /**
