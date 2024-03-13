@@ -71,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3301fcef_a6c75a3b",
+        "filename": "tests/pvmfw/java/com/android/pvmfw/test/CustomPvmfwHostTestCaseBase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-13T17:00:55Z",
+      "side": 1,
+      "message": "Getting VM DTBO from the host is possible but bit tricky, and I couldn\u0027t find a good test scenario yet. I\u0027ll do so if we have a good test scenario with it.",
+      "parentUuid": "cdbd3a54_1c0dabee",
+      "range": {
+        "startLine": 147,
+        "startChar": 23,
+        "endLine": 147,
+        "endChar": 43
+      },
+      "revId": "fff3afd53d2cc07fd473638acab70dc45ccc9684",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24e9f09b_68764ca2",
@@ -84,6 +108,30 @@
       "writtenOn": "2024-03-12T16:54:43Z",
       "side": 1,
       "message": "Are pvmfw shipping with Android V (backward) compatible with configs 1.0/1.1.  If so, should we keep the tests:\n`testConfigVersion1_0_boots` \u0026 `testConfigVersion1_1_boots`",
+      "range": {
+        "startLine": 38,
+        "startChar": 16,
+        "endLine": 38,
+        "endChar": 62
+      },
+      "revId": "fff3afd53d2cc07fd473638acab70dc45ccc9684",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc294ecf_75bccda3",
+        "filename": "tests/pvmfw/java/com/android/pvmfw/test/PvmfwImgTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-13T17:00:55Z",
+      "side": 1,
+      "message": "Replaced it with another test, because earlier config is unsupported if SK is enabled.",
+      "parentUuid": "24e9f09b_68764ca2",
       "range": {
         "startLine": 38,
         "startChar": 16,
@@ -165,6 +213,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62accdae_64aae2e0",
+        "filename": "tests/pvmfw/java/com/android/pvmfw/test/PvmfwTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-13T17:00:55Z",
+      "side": 1,
+      "message": "Decided to use `dumpsys`.",
+      "parentUuid": "5b38b01d_74f52b55",
+      "range": {
+        "startLine": 34,
+        "startChar": 48,
+        "endLine": 34,
+        "endChar": 52
+      },
+      "revId": "fff3afd53d2cc07fd473638acab70dc45ccc9684",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "161bd469_8e460050",
@@ -178,6 +250,30 @@
       "writtenOn": "2024-03-12T17:01:13Z",
       "side": 1,
       "message": "Prefer to use `assertThrows` - e.g. https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java;drc\u003dab993a40dc10532946c158599d2ab2dd34a18949;l\u003d278",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 9
+      },
+      "revId": "fff3afd53d2cc07fd473638acab70dc45ccc9684",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1581511_8274d713",
+        "filename": "tests/pvmfw/java/com/android/pvmfw/test/PvmfwTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-13T17:00:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "161bd469_8e460050",
       "range": {
         "startLine": 35,
         "startChar": 0,
