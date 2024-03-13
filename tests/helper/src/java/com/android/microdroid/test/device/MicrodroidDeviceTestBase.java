@@ -27,6 +27,7 @@ import android.app.Instrumentation;
 import android.app.UiAutomation;
 import android.content.Context;
 import android.os.ParcelFileDescriptor;
+import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.system.Os;
 import android.system.virtualmachine.VirtualMachine;
@@ -203,6 +204,14 @@ public abstract class MicrodroidDeviceTestBase {
         assume().withMessage("Skip on 5.4 kernel. b/218303240")
                 .that(KERNEL_VERSION)
                 .isNotEqualTo("5.4");
+    }
+
+    protected void assumeNoSecretkeeperSupport() {
+        // TODO: Implement this method correctly
+        boolean isSupported =
+                ServiceManager.isDeclared(
+                        "android.hardware.security.secretkeeper.ISecretkeeper/default");
+        assume().withMessage("Secretkeeper not supported").that(isSupported).isFalse();
     }
 
     public abstract static class VmEventListener implements VirtualMachineCallback {
