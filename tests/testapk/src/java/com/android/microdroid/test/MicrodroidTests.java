@@ -1014,9 +1014,13 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         // the result with the below "different debug level" test.
         File vmInstance = getVmFile("test_vm", "instance.img");
         File vmInstanceBackup = File.createTempFile("instance", ".img");
+        File vmId = getVmFile("test_vm", "instance_id");
+        File vmIdBackup = File.createTempFile("instance_id", "backup");
         Files.copy(vmInstance.toPath(), vmInstanceBackup.toPath(), REPLACE_EXISTING);
+        Files.copy(vmId.toPath(), vmIdBackup.toPath(), REPLACE_EXISTING);
         forceCreateNewVirtualMachine("test_vm", normalConfig);
         Files.copy(vmInstanceBackup.toPath(), vmInstance.toPath(), REPLACE_EXISTING);
+        Files.copy(vmIdBackup.toPath(), vmId.toPath(), REPLACE_EXISTING);
         assertThat(tryBootVm(TAG, "test_vm").payloadStarted).isTrue();
 
         // Launch the same VM with a different debug level. The Java API prohibits this
@@ -1026,6 +1030,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         VirtualMachineConfig debugConfig = builder.setDebugLevel(toLevel).build();
         forceCreateNewVirtualMachine("test_vm", debugConfig);
         Files.copy(vmInstanceBackup.toPath(), vmInstance.toPath(), REPLACE_EXISTING);
+        Files.copy(vmIdBackup.toPath(), vmId.toPath(), REPLACE_EXISTING);
         assertThat(tryBootVm(TAG, "test_vm").payloadStarted).isFalse();
     }
 
@@ -1245,6 +1250,8 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
             "9.17/C-2-7"
     })
     public void bootFailsWhenMicrodroidDataIsCompromised() throws Exception {
+        // This tests the instance.img behavior which is deprecated if device supports Secretkeeper
+        assumeNoUpdatableVmSupport();
         assertThatBootFailsAfterCompromisingPartition(MICRODROID_PARTITION_UUID);
     }
 
@@ -1254,6 +1261,8 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
             "9.17/C-2-7"
     })
     public void bootFailsWhenPvmFwDataIsCompromised() throws Exception {
+        // This tests the instance.img behavior which is deprecated if device supports Secretkeeper
+        assumeNoUpdatableVmSupport();
         if (mProtectedVm) {
             assertThatBootFailsAfterCompromisingPartition(PVM_FW_PARTITION_UUID);
         } else {
