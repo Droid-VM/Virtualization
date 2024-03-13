@@ -205,6 +205,12 @@ public abstract class MicrodroidDeviceTestBase {
                 .isNotEqualTo("5.4");
     }
 
+    protected void assumeNoSecretkeeperSupport() {
+        assume().withMessage("Secretkeeper not supported")
+                .that(getVirtualMachineManager().isSecretkeeperSupported())
+                .isFalse();
+    }
+
     public abstract static class VmEventListener implements VirtualMachineCallback {
         private ExecutorService mExecutorService = Executors.newSingleThreadExecutor();
         private OptionalLong mVcpuStartedNanoTime = OptionalLong.empty();
