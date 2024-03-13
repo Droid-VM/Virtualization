@@ -45,6 +45,30 @@
       },
       "revId": "5a00ace8d037b35bc67dd206ad37d21c95238798",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c750dafb_4f610dfa",
+        "filename": "tests/pvmfw/helper/java/com/android/pvmfw/test/host/Pvmfw.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-13T02:09:17Z",
+      "side": 1,
+      "message": "+CC: @ptosi@google.com\n\nThe term is from pvmfw/README.md and I\u0027m don\u0027t know whether BCC can be mindlessly replaced with dice chain.\n\nFiled b/329336627 for follow-up. I\u0027ll keep this here as-is (because this CL doesn\u0027t chain naming in this file) and write another CL for it if necessary.",
+      "parentUuid": "0fdce88c_e17e1d6d",
+      "range": {
+        "startLine": 40,
+        "startChar": 29,
+        "endLine": 40,
+        "endChar": 45
+      },
+      "revId": "5a00ace8d037b35bc67dd206ad37d21c95238798",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
