@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24e5babd_748a3652",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-03-13T15:25:53Z",
+      "side": 1,
+      "message": "Yep, there is b/309090563. Added a TODO in the avf_cc_flags.h.",
+      "parentUuid": "59928327_a18ecd98",
+      "range": {
+        "startLine": 9,
+        "startChar": 40,
+        "endLine": 10,
+        "endChar": 25
+      },
+      "revId": "e4180e6a602db533883c47f322a8aff45497bea6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fca299f2_ebff6efb",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-13T06:05:12Z",
       "side": 1,
       "message": "nit: Putting this under android::virtualization (or similar) namespace and dropping Avf from the name?",
+      "range": {
+        "startLine": 17,
+        "startChar": 14,
+        "endLine": 17,
+        "endChar": 17
+      },
+      "revId": "e4180e6a602db533883c47f322a8aff45497bea6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ef1a926_491d2e72",
+        "filename": "flags/cpp/include/android/avf_cc_flags.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-03-13T15:25:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fca299f2_ebff6efb",
       "range": {
         "startLine": 17,
         "startChar": 14,
