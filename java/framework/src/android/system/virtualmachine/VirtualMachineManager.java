@@ -393,4 +393,24 @@ public class VirtualMachineManager {
             }
         }
     }
+
+    /**
+     * Returns {@code true} if Updatable VM feature is supported by AVF. Updatable VM allow secrets
+     * and data to be accessible even after updates of boot images and apks. For more info see
+     * packages/modules/Virtualization/docs/updatable_vm.md
+     *
+     * @hide
+     */
+    @TestApi
+    @FlaggedApi(Flags.FLAG_AVF_V_TEST_APIS)
+    public boolean isUpdatableVmSupported() throws VirtualMachineException {
+        synchronized (sCreateLock) {
+            VirtualizationService service = VirtualizationService.getInstance();
+            try {
+                return service.getBinder().isUpdatableVmSupported();
+            } catch (RemoteException e) {
+                throw e.rethrowAsRuntimeException();
+            }
+        }
+    }
 }

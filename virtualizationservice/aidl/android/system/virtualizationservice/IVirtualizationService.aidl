@@ -86,4 +86,11 @@ interface IVirtualizationService {
      * associated to the fake key pair when the VM requests attestation in testing mode.
      */
     void enableTestAttestation();
+
+    /**
+     * Check if Updatable VM feature is supported by AVF. Updatable VM allows secrets and data of
+     * a VM instance to be accessible even after updates of boot images and apks.
+     * For more info see packages/modules/Virtualization/docs/updatable_vm.md
+     */
+    boolean isUpdatableVmSupported();
 }
