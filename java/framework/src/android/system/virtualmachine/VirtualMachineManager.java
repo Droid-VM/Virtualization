@@ -31,6 +31,7 @@ import android.annotation.WorkerThread;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.sysprop.HypervisorProperties;
 import android.system.virtualizationservice.IVirtualizationService;
 import android.util.ArrayMap;
@@ -392,5 +393,19 @@ public class VirtualMachineManager {
                 throw e.rethrowAsRuntimeException();
             }
         }
+    }
+
+    /**
+     * Returns {@code true} if Secretkeeper HAL is supported on the device. In particular it looks
+     * for the `default` instance of `ISecretkeeper`.
+     *
+     * @hide
+     */
+    @TestApi
+    @FlaggedApi(Flags.FLAG_AVF_V_TEST_APIS)
+    public boolean isSecretkeeperSupported() {
+        // TODO: Implement this method correctly
+        return ServiceManager.isDeclared(
+                "android.hardware.security.secretkeeper.ISecretkeeper/default");
     }
 }
