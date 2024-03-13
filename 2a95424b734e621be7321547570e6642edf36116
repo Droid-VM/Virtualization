@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca495692_4b585d0f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-13T21:26:58Z",
+      "side": 1,
+      "message": "On Pixel 8 (non AOSP build) Secretkeeper is present, but due to aosp/2996140, pVMs are not really using Secretkeeper.\n\nWe need to this test this patch on Secretkeeper capable device (Pixel 8 with internal build) \u0026 with virt apex compiled with aosp/2997056 (so that Microdroid actually uses the public key).\n\n\n\nI cherrypicked your patches \u0026 I can still the error \n\n```\n03-13 20:32:36.704 21359 21383 I virtmgr : Caused by:\n03-13 20:32:36.704 21359 21383 I virtmgr :     0: Failed to get secretkeeper identity\n03-13 20:32:36.704 21359 21383 I virtmgr :     1: No such file or directory (os error 2)\u0027\n03-13 20:32:36.704 21359 21383 E virtmgr : virtualizationmanager::crosvm: Failure info: Failed to create VM secrets\n03-13 20:32:36.704 21359 21383 E virtmgr : \n03-13 20:32:36.704 21359 21383 E virtmgr : Caused by:\n03-13 20:32:36.704 21359 21383 E virtmgr :     0: Failed to get secretkeeper identity\n03-13 20:32:36.704 21359 21383 E virtmgr :     1: No such file or directory (os error 2)\n03-13 20:32:36.704 21359 21383 I virtmgr : virtualizationmanager::atom: Writing VmExited atom into statsd.\n```\n\nI will attach the logs for you on the bug, I haven\u0027t deepdived on why the file is still not present (even with these patches). [I did the test in a bit of hurry, will look more tomorrow]",
+      "range": {
+        "startLine": 10,
+        "startChar": 6,
+        "endLine": 10,
+        "endChar": 36
+      },
+      "revId": "2a95424b734e621be7321547570e6642edf36116",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46dcf5fc_a05c1a65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-13T21:26:58Z",
+      "side": 1,
+      "message": "Sorry, I couldnt get to this today. We should test this on husky with cherrypick of aosp/2997056.\n\nI was",
+      "revId": "2a95424b734e621be7321547570e6642edf36116",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
