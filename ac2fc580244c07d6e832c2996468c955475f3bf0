@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84480341_73b3ed28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-14T08:01:23Z",
+      "side": 1,
+      "message": "Build fails when compiling dts. Please check",
+      "revId": "ac2fc580244c07d6e832c2996468c955475f3bf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5dafb79_26416f1f",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-14T08:01:23Z",
+      "side": 1,
+      "message": "nit; prefer bug number to LDAP.",
+      "range": {
+        "startLine": 540,
+        "startChar": 16,
+        "endLine": 540,
+        "endChar": 21
+      },
+      "revId": "ac2fc580244c07d6e832c2996468c955475f3bf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "333621f0_d0f0fa68",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-14T08:01:23Z",
+      "side": 1,
+      "message": "question: should we repeat the overlap check with the returned addr? (I know that it\u0027s too late already, but...)",
+      "range": {
+        "startLine": 548,
+        "startChar": 16,
+        "endLine": 548,
+        "endChar": 20
+      },
+      "revId": "ac2fc580244c07d6e832c2996468c955475f3bf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
