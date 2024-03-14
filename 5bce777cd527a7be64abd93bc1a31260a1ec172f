@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9188c41e_b15b0e6b",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-14T10:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b6f2cac_c8464cd6",
+      "range": {
+        "startLine": 192,
+        "startChar": 43,
+        "endLine": 192,
+        "endChar": 51
+      },
+      "revId": "5bce777cd527a7be64abd93bc1a31260a1ec172f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d05929f_e08d2da6",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-03-14T00:52:24Z",
       "side": 1,
       "message": "Question: Can we keep this?",
+      "range": {
+        "startLine": 233,
+        "startChar": 22,
+        "endLine": 233,
+        "endChar": 44
+      },
+      "revId": "5bce777cd527a7be64abd93bc1a31260a1ec172f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10a3ee07_88e9720d",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-14T10:13:03Z",
+      "side": 1,
+      "message": "Well spotted, thanks.",
+      "parentUuid": "0d05929f_e08d2da6",
       "range": {
         "startLine": 233,
         "startChar": 22,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "510fd0b5_c024742d",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-14T10:13:03Z",
+      "side": 1,
+      "message": "Thanks.",
+      "parentUuid": "bc85c027_516bf9bf",
+      "range": {
+        "startLine": 249,
+        "startChar": 10,
+        "endLine": 249,
+        "endChar": 13
+      },
+      "revId": "5bce777cd527a7be64abd93bc1a31260a1ec172f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a306a12_0477e0f3",
@@ -110,6 +182,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1492c05_6a6538a3",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-14T10:13:03Z",
+      "side": 1,
+      "message": "It isn\u0027t user-visible and matches the code it points to (i.e. `swbcc.c`) so I\u0027d say it\u0027s no harm.",
+      "parentUuid": "2a306a12_0477e0f3",
+      "range": {
+        "startLine": 293,
+        "startChar": 1,
+        "endLine": 293,
+        "endChar": 11
+      },
+      "revId": "5bce777cd527a7be64abd93bc1a31260a1ec172f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a029b9e2_b8356962",
@@ -123,6 +219,30 @@
       "writtenOn": "2024-03-14T00:52:24Z",
       "side": 1,
       "message": "can we keep this binary name?",
+      "range": {
+        "startLine": 467,
+        "startChar": 6,
+        "endLine": 467,
+        "endChar": 13
+      },
+      "revId": "5bce777cd527a7be64abd93bc1a31260a1ec172f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b007149c_1a1a86a1",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-14T10:13:03Z",
+      "side": 1,
+      "message": "Renaming it would then require updating the tests and I\u0027m not sure where the ramifications of that end. I\u0027m convinced that the reader won\u0027t get horribly confused by the name of this binary.\n\nFurthermore, I remember that we were planning to write a tool that generates DICE chains dynamically from human-readable inputs (for tests) so that we could get rid of this binary. IMO, the effort would be better spent on that and any time spent renaming the file before it\u0027s removed would be wasted.",
+      "parentUuid": "a029b9e2_b8356962",
       "range": {
         "startLine": 467,
         "startChar": 6,
