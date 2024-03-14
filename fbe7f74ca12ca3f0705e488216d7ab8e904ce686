@@ -16,6 +16,24 @@
       "message": "I\u0027m fine if you have style preference,\n\nbut is `/plugin/` harmful?",
       "revId": "fbe7f74ca12ca3f0705e488216d7ab8e904ce686",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f121f477_20f63062",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-14T10:27:06Z",
+      "side": 1,
+      "message": "It\u0027s not a \"style preference\", it\u0027s objectively incorrect (and confusing) to mark a DTS as a DTBO if its intended to be compiled into a regular DTB.\n\nBut no, it isn\u0027t harmful beyond generating a superfluous `__local_fixups__`, AFAICT.",
+      "parentUuid": "80b6691c_00b6b9e5",
+      "revId": "fbe7f74ca12ca3f0705e488216d7ab8e904ce686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
