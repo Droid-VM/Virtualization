@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0df17e1_3c6e1c2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-14T15:39:15Z",
+      "side": 1,
+      "message": "I reviewed these in the wrong order, so a lot of my comments on the next CL should really apply to this one. But it doesn\u0027t matter where you address them.",
+      "revId": "cc8f3aacb9a158604c9fc0fd61811d98f3c07565",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb92b553_e8a6acf1",
+        "filename": "tests/pvmfw/java/com/android/pvmfw/test/CustomPvmfwHostTestCaseBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-14T15:39:15Z",
+      "side": 1,
+      "message": "private - you have a getter for it.",
+      "range": {
+        "startLine": 69,
+        "startChar": 14,
+        "endLine": 69,
+        "endChar": 20
+      },
+      "revId": "cc8f3aacb9a158604c9fc0fd61811d98f3c07565",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09136ac0_3b7901f5",
+        "filename": "tests/pvmfw/java/com/android/pvmfw/test/CustomPvmfwHostTestCaseBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-14T15:39:15Z",
+      "side": 1,
+      "message": "Nit: Avoid nullable, pass `Collections.emptyMap()` instead.",
+      "range": {
+        "startLine": 155,
+        "startChar": 7,
+        "endLine": 155,
+        "endChar": 31
+      },
+      "revId": "cc8f3aacb9a158604c9fc0fd61811d98f3c07565",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31503fcb_ea02a570",
+        "filename": "tests/pvmfw/java/com/android/pvmfw/test/DebugPolicyHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-14T15:39:15Z",
+      "side": 1,
+      "message": "`Collections.singletonMap` ?",
+      "range": {
+        "startLine": 219,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 83
+      },
+      "revId": "cc8f3aacb9a158604c9fc0fd61811d98f3c07565",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
