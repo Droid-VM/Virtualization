@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "557117c4_4846bafe",
+        "filename": "tests/pvmfw/helper/java/com/android/pvmfw/test/host/Pvmfw.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-14T12:45:42Z",
+      "side": 1,
+      "message": "Nit: makeVersion\n(Everything in Java seems to be named get, but this isn\u0027t a getter in any sense.)",
+      "range": {
+        "startLine": 51,
+        "startChar": 22,
+        "endLine": 51,
+        "endChar": 32
+      },
+      "revId": "d9c87d94b1aeccda15c8064b676044cf91aee0df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c304991a_b25fb23d",
+        "filename": "tests/pvmfw/helper/java/com/android/pvmfw/test/host/Pvmfw.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-14T12:45:42Z",
+      "side": 1,
+      "message": "Possibly check that this takes us to where entryOffsets is pointing?",
+      "range": {
+        "startLine": 123,
+        "startChar": 10,
+        "endLine": 123,
+        "endChar": 38
+      },
+      "revId": "d9c87d94b1aeccda15c8064b676044cf91aee0df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13985a74_c064bc57",
+        "filename": "tests/pvmfw/helper/java/com/android/pvmfw/test/host/Pvmfw.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-14T12:45:42Z",
+      "side": 1,
+      "message": "`in.transferTo(out);`",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 13
+      },
+      "revId": "d9c87d94b1aeccda15c8064b676044cf91aee0df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72b785fd_d6c23811",
+        "filename": "tests/pvmfw/helper/java/com/android/pvmfw/test/host/Pvmfw.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-14T12:45:42Z",
+      "side": 1,
+      "message": "Should these setters automatically bump the version?",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 203,
+        "endChar": 9
+      },
+      "revId": "d9c87d94b1aeccda15c8064b676044cf91aee0df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93bc86f6_8cd5522c",
+        "filename": "tests/pvmfw/java/com/android/pvmfw/test/CustomPvmfwHostTestCaseBase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-14T12:45:42Z",
+      "side": 1,
+      "message": "MicrodroidHostTestCaseBase exposes `findTestFile()` which I suggest you use instead - I just fixed a bug in it where it would sometimes find the wrong file.",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 93
+      },
+      "revId": "d9c87d94b1aeccda15c8064b676044cf91aee0df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2e6d558_5095d35f",
+        "filename": "tests/pvmfw/java/com/android/pvmfw/test/CustomPvmfwHostTestCaseBase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-14T12:45:42Z",
+      "side": 1,
+      "message": "This doesn\u0027t add much - the next line will NPE anyway if it is null.\n(requireNonNull is useful when you are storing something and will only dereference it much later, in another method)",
+      "range": {
+        "startLine": 98,
+        "startChar": 36,
+        "endLine": 98,
+        "endChar": 58
+      },
+      "revId": "d9c87d94b1aeccda15c8064b676044cf91aee0df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89354625_d638707c",
+        "filename": "tests/pvmfw/java/com/android/pvmfw/test/CustomPvmfwHostTestCaseBase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-14T12:45:42Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be an assert rather than an assume?\nNo Sk is fine, but unable to determine Sk is not.",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 90
+      },
+      "revId": "d9c87d94b1aeccda15c8064b676044cf91aee0df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "822b278e_46fa6ddc",
+        "filename": "tests/pvmfw/java/com/android/pvmfw/test/DebugPolicyHostTests.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-14T12:45:42Z",
+      "side": 1,
+      "message": "Don\u0027t you need to set the version here too?",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 61
+      },
+      "revId": "d9c87d94b1aeccda15c8064b676044cf91aee0df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff2674a4_090cd5df",
+        "filename": "tests/pvmfw/tools/PvmfwTool.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-14T12:45:42Z",
+      "side": 1,
+      "message": "This needs changing",
+      "range": {
+        "startLine": 36,
+        "startChar": 6,
+        "endLine": 36,
+        "endChar": 50
+      },
+      "revId": "d9c87d94b1aeccda15c8064b676044cf91aee0df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
