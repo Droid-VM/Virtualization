@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77f1b7b4_101e7637",
+        "filename": "libs/dice/driver/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-14T17:55:16Z",
+      "side": 1,
+      "message": "Nit: `\"Creating DiceDriver backed by {driver_path:?} driver\"`",
+      "range": {
+        "startLine": 68,
+        "startChar": 19,
+        "endLine": 68,
+        "endChar": 75
+      },
+      "revId": "10ec159b8c424341b9239d7491e7993b8fa39337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fdf5905_9bc58544",
+        "filename": "libs/dice/driver/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-14T17:55:16Z",
+      "side": 1,
+      "message": "Same",
+      "range": {
+        "startLine": 111,
+        "startChar": 49,
+        "endLine": 111,
+        "endChar": 54
+      },
+      "revId": "10ec159b8c424341b9239d7491e7993b8fa39337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c3df945_a527d02e",
+        "filename": "microdroid/derive_microdroid_vendor_dice_node/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-14T17:55:16Z",
+      "side": 1,
+      "message": "There\u0027s nothing fundamentally wrong with this, but you could perhaps use open-dice to help with it?\n\nSee bcc_format_config_descriptor in packages/modules/Virtualization/libs/dice/open_dice/src/bcc.rs (or retry_bcc_format_config_descriptor to get you a Vec\u003c\u003e).\n\n\nIt avoids repeating the magic -70002 yet again.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 33
+      },
+      "revId": "10ec159b8c424341b9239d7491e7993b8fa39337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "280f3f32_f8e50333",
+        "filename": "microdroid/derive_microdroid_vendor_dice_node/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-14T17:55:16Z",
+      "side": 1,
+      "message": "Do we?",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 59
+      },
+      "revId": "10ec159b8c424341b9239d7491e7993b8fa39337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "778ccd4b_84c5efce",
+        "filename": "microdroid/derive_microdroid_vendor_dice_node/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-14T17:55:16Z",
+      "side": 1,
+      "message": "I think this is fine. We don\u0027t need anything here.",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 43
+      },
+      "revId": "10ec159b8c424341b9239d7491e7993b8fa39337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
