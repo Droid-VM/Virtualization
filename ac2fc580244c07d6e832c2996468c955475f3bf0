@@ -79,6 +79,30 @@
       },
       "revId": "ac2fc580244c07d6e832c2996468c955475f3bf0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d907ea68_33a6552f",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-14T10:18:42Z",
+      "side": 1,
+      "message": "The returned address is a physical address, right? And as it comes from the hyp, we can trust that it\u0027s actual physical MMIO (which, by definition, can\u0027t be \"regular\" memory, where pvmfw lives). What are you concerned about it clashing with?",
+      "parentUuid": "333621f0_d0f0fa68",
+      "range": {
+        "startLine": 548,
+        "startChar": 16,
+        "endLine": 548,
+        "endChar": 20
+      },
+      "revId": "ac2fc580244c07d6e832c2996468c955475f3bf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
