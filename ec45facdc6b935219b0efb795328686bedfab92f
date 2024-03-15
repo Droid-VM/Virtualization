@@ -158,6 +158,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d351a606_19eecc1a",
+        "filename": "service_vm/test_apk/src/java/com/android/virt/rkpd/vm_attestation/testapp/RkpdVmAttestationTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-15T16:50:43Z",
+      "side": 1,
+      "message": "AVF is supported on CF, but not protected VMs - and they\u0027re the only ones that VM attestation supports.\n\nBut yeah, it would be better to be specific.\n\nAnd actually we could just assume VirtualMachineManager#getCapabilities() includes protected VMs, with a message to that effect - since protected support is not required everywhere.",
+      "parentUuid": "0086821f_64f2d6f2",
+      "range": {
+        "startLine": 110,
+        "startChar": 34,
+        "endLine": 110,
+        "endChar": 51
+      },
+      "revId": "ec45facdc6b935219b0efb795328686bedfab92f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d7ed4eaf_9fd0a581",
         "filename": "service_vm/test_apk/src/native/main.rs",
         "patchSetId": 8
