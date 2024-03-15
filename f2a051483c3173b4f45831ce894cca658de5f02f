@@ -16,6 +16,52 @@
       "message": "Changed to WIP because pVM boots without reference DT... I prefer not submit a CL with known breakage.",
       "revId": "f2a051483c3173b4f45831ce894cca658de5f02f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a43bf3f0_2972c85c",
+        "filename": "tests/pvmfw/helper/java/com/android/pvmfw/test/host/Pvmfw.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-15T16:27:39Z",
+      "side": 1,
+      "message": "This comment doesn\u0027t add much?",
+      "range": {
+        "startLine": 53,
+        "startChar": 2,
+        "endLine": 53,
+        "endChar": 28
+      },
+      "revId": "f2a051483c3173b4f45831ce894cca658de5f02f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdda9c11_231730ff",
+        "filename": "tests/pvmfw/java/com/android/pvmfw/test/CustomPvmfwHostTestCaseBase.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-15T16:27:39Z",
+      "side": 1,
+      "message": "s for static, m for non-static\n\nDid you intend to make these non-static?",
+      "range": {
+        "startLine": 78,
+        "startChar": 22,
+        "endLine": 78,
+        "endChar": 36
+      },
+      "revId": "f2a051483c3173b4f45831ce894cca658de5f02f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
