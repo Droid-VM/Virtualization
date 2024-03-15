@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7363de16_1776ec90",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-15T12:37:32Z",
+      "side": 1,
+      "message": "Thanks for the info. We should add this regardless for the sake of consistency.",
+      "parentUuid": "237fa8f1_03cbe9c7",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 113
+      },
+      "revId": "3415ee137a84adfe1e2ec46f0aa574967e5dea67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "745b1717_7a606293",
         "filename": "java/framework/Android.bp",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-15T12:30:27Z",
       "side": 1,
       "message": "This already covers this change, I believe.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 33
+      },
+      "revId": "3415ee137a84adfe1e2ec46f0aa574967e5dea67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "156f4852_507244d0",
+        "filename": "java/framework/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1937565
+      },
+      "writtenOn": "2024-03-15T12:37:32Z",
+      "side": 1,
+      "message": "The libs part allows the code to link against the auto-generated read-flag-value lib. The aconfig_declarations block is used by soong to pass the right set of flags to metalava, which will use the flags to include or exclude the symbols from docs and SDK artifacts.\n\nIf you link against auto-generated aconfig foo-java, you also need to add foo to your aconfig_declarations. Soong will soon be able to detect if you don\u0027t and error out. This CL fixes the issue before Soong enables its check.\n\n(As to why you need to say essentially the same thing twice in your Android.bp file... I don\u0027t know, someone from the soong team can answer that.)",
+      "parentUuid": "745b1717_7a606293",
       "range": {
         "startLine": 15,
         "startChar": 0,
