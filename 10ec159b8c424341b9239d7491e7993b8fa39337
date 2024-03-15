@@ -72,6 +72,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0de2055c_6e5a5b0c",
+        "filename": "microdroid/derive_microdroid_vendor_dice_node/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-15T08:54:45Z",
+      "side": 1,
+      "message": "Is this crate used in this cl?",
+      "range": {
+        "startLine": 13,
+        "startChar": 9,
+        "endLine": 13,
+        "endChar": 20
+      },
+      "revId": "10ec159b8c424341b9239d7491e7993b8fa39337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a293051_a613a002",
+        "filename": "microdroid/derive_microdroid_vendor_dice_node/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-15T08:54:45Z",
+      "side": 1,
+      "message": "nit: import `anyhow::Result` to simplify all the `Result\u003cT, Error\u003e` to `Result\u003cT\u003e`?",
+      "range": {
+        "startLine": 51,
+        "startChar": 25,
+        "endLine": 51,
+        "endChar": 47
+      },
+      "revId": "10ec159b8c424341b9239d7491e7993b8fa39337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6c3df945_a527d02e",
         "filename": "microdroid/derive_microdroid_vendor_dice_node/src/main.rs",
         "patchSetId": 3
@@ -88,6 +134,52 @@
         "startChar": 0,
         "endLine": 54,
         "endChar": 33
+      },
+      "revId": "10ec159b8c424341b9239d7491e7993b8fa39337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33d45ee1_fac316bb",
+        "filename": "microdroid/derive_microdroid_vendor_dice_node/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-15T08:54:45Z",
+      "side": 1,
+      "message": "Why do we always need `hex::encode` for vendor Vbmeta (here and [2]) instead of directly retrieving the root_digest from the HashtreeDescriptor like for apex[1] previously?\n\nFurthermore, since this extraction code already repeats 3 times, could we add a helper method like `first_hashtree_descriptor_root_digest()` to the `VbMetaImage` library to avoid repetition?\n\n[1] find_root_digest in apexutil https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/apexutil/src/lib.rs;l\u003d110;drc\u003da5fc4d4acab1ed16e62a30371019a596abc50c5a\n[2] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/virtualizationmanager/src/aidl.rs;l\u003d660;drc\u003dc78d8091d5ebd631f5e94cff8ee21833bfa9866d",
+      "range": {
+        "startLine": 60,
+        "startChar": 30,
+        "endLine": 60,
+        "endChar": 41
+      },
+      "revId": "10ec159b8c424341b9239d7491e7993b8fa39337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "335ea543_0de125b7",
+        "filename": "microdroid/derive_microdroid_vendor_dice_node/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-15T08:54:45Z",
+      "side": 1,
+      "message": "We can just use the hash function in open_dice here (`diced_open_dice::hash`) as the boringssl team actually discourages the usage of `rust-openssl`.",
+      "range": {
+        "startLine": 68,
+        "startChar": 24,
+        "endLine": 68,
+        "endChar": 30
       },
       "revId": "10ec159b8c424341b9239d7491e7993b8fa39337",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -134,6 +226,53 @@
         "startChar": 0,
         "endLine": 82,
         "endChar": 43
+      },
+      "revId": "10ec159b8c424341b9239d7491e7993b8fa39337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5261a208_94e58776",
+        "filename": "microdroid/derive_microdroid_vendor_dice_node/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-15T08:54:45Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "778ccd4b_84c5efce",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 43
+      },
+      "revId": "10ec159b8c424341b9239d7491e7993b8fa39337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60815b10_fc7bb848",
+        "filename": "microdroid/derive_microdroid_vendor_dice_node/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-15T08:54:45Z",
+      "side": 1,
+      "message": "nit: Create a variable for the boolean to improve readability?",
+      "range": {
+        "startLine": 84,
+        "startChar": 68,
+        "endLine": 84,
+        "endChar": 73
       },
       "revId": "10ec159b8c424341b9239d7491e7993b8fa39337",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
