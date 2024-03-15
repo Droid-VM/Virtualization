@@ -32,7 +32,7 @@ use std::fs::{File, OpenOptions};
 use std::io::{self, BufRead, BufReader, BufWriter, Write};
 use std::os::unix::io::FromRawFd;
 use std::path::{Path, PathBuf};
-use std::sync::{Condvar, Mutex, MutexGuard};
+use std::sync::{Condvar, Mutex};
 use std::thread;
 use std::time::Duration;
 use vmclient::{DeathReason, VmInstance};
@@ -48,39 +48,62 @@ const READ_TIMEOUT: Duration = Duration::from_secs(10);
 const WRITE_TIMEOUT: Duration = Duration::from_secs(10);
 
 lazy_static! {
-    static ref SERVICE_VM_STATE: State = State::default();
+    static ref NEW_REQUEST_STATE: NewRequestState = NewRequestState::default();
+    static ref SERVICE_VM: Mutex<Option<ServiceVm>> = Mutex::new(None);
 }
 
-/// The running state of the Service VM.
+/// The state of the new request to process in the service VM.
 #[derive(Debug, Default)]
-struct State {
-    is_running: Mutex<bool>,
-    stopped: Condvar,
+struct NewRequestState {
+    num_new_request: Mutex<usize>,
+    condvar: Condvar,
 }
 
-impl State {
-    fn wait_until_no_service_vm_running(&self) -> Result<MutexGuard<'_, bool>> {
-        // The real timeout can be longer than 10 seconds since the time to acquire
-        // is_running mutex is not counted in the 10 seconds.
-        let (guard, wait_result) = self
-            .stopped
+impl NewRequestState {
+    fn no_new_request_within_timeout(&self) -> bool {
+        let (_guard, wait_result) = self
+            .condvar
             .wait_timeout_while(
-                self.is_running.lock().unwrap(),
-                Duration::from_secs(10),
-                |&mut is_running| is_running,
+                self.num_new_request.lock().unwrap(),
+                Duration::from_secs(2),
+                |&mut x| x == 0,
             )
             .unwrap();
-        ensure!(
-            !wait_result.timed_out(),
-            "Timed out while waiting for the running service VM to stop."
-        );
-        Ok(guard)
+        wait_result.timed_out()
     }
 
-    fn notify_service_vm_shutdown(&self) {
-        let mut is_running_guard = self.is_running.lock().unwrap();
-        *is_running_guard = false;
-        self.stopped.notify_one();
+    fn increment_num_new_request(&self) {
+        let mut num_new_request = self.num_new_request.lock().unwrap();
+        *num_new_request += 1;
+        self.condvar.notify_all();
+    }
+
+    fn decrement_num_new_request(&self) {
+        let mut num_new_request = self.num_new_request.lock().unwrap();
+        *num_new_request -= 1;
+        self.condvar.notify_all();
+    }
+}
+
+/// Processes the request in the service VM.
+pub fn process_request(request: Request) -> Result<Response> {
+    NEW_REQUEST_STATE.increment_num_new_request();
+    let mut service_vm = SERVICE_VM.lock().unwrap();
+    NEW_REQUEST_STATE.decrement_num_new_request();
+    if service_vm.is_none() {
+        *service_vm = Some(ServiceVm::start()?);
+    }
+    let vm = service_vm.as_mut().unwrap();
+    let response = vm.process_request(request)?;
+    thread::spawn(stop_service_vm_if_idle);
+    Ok(response)
+}
+
+fn stop_service_vm_if_idle() {
+    let mut service_vm = SERVICE_VM.lock().unwrap();
+    if NEW_REQUEST_STATE.no_new_request_within_timeout() {
+        log::info!("Service VM is idle, shutting it down.");
+        *service_vm = None;
     }
 }
 
@@ -98,13 +121,10 @@ impl ServiceVm {
     /// already running, this function will start the service VM once the running one
     /// shuts down.
     pub fn start() -> Result<Self> {
-        let mut is_running_guard = SERVICE_VM_STATE.wait_until_no_service_vm_running()?;
-
         let instance_img_path = Path::new(VIRT_DATA_DIR).join(INSTANCE_IMG_NAME);
         let vm = protected_vm_instance(instance_img_path)?;
 
         let vm = Self::start_vm(vm, VmType::ProtectedVm)?;
-        *is_running_guard = true;
         Ok(vm)
     }
 
@@ -174,7 +194,6 @@ impl Drop for ServiceVm {
             Ok(reason) => info!("Exit the service VM successfully: {reason:?}"),
             Err(e) => warn!("Service VM shutdown request failed '{e:?}', killing it."),
         }
-        SERVICE_VM_STATE.notify_service_vm_shutdown();
     }
 }
 
