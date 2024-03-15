@@ -49,6 +49,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a17704b1_77c67611",
+        "filename": "libs/dice/driver/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-15T08:16:04Z",
+      "side": 1,
+      "message": "how secure is this? if this is just unlink, then the deletion is not guaranteed. do you want to write zeros as well?",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 78
+      },
+      "revId": "10ec159b8c424341b9239d7491e7993b8fa39337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6c3df945_a527d02e",
         "filename": "microdroid/derive_microdroid_vendor_dice_node/src/main.rs",
         "patchSetId": 3
