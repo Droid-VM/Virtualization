@@ -69,6 +69,30 @@
       },
       "revId": "ec56306ff82481b9b2dec6d24a7efd4a916d9093",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ad15421_c9eea60c",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-15T16:31:30Z",
+      "side": 1,
+      "message": "Mapping the uid to (userid, appid) only makes sense for app UIDs.\n\nSo e.g. on daily maintenance, no app is going to be listed as existing for such a uid. But we shouldn\u0027t delete its secrets.\n\n\u003e how does one recognize a non-app UID?\n\nhttps://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:frameworks/base/core/java/android/os/UserHandle.java;drc\u003d9e4b2c126da5c08da547cc7cb0c8a838da54d868;l\u003d254",
+      "parentUuid": "84dafc59_e3c235a8",
+      "range": {
+        "startLine": 394,
+        "startChar": 0,
+        "endLine": 394,
+        "endChar": 89
+      },
+      "revId": "ec56306ff82481b9b2dec6d24a7efd4a916d9093",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
