@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efce0a35_d90efe0f",
+        "filename": "service_vm/test_apk/aidl/com/android/virt/vm_attestation/testservice/IAttestationService.aidl",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-15T10:54:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75783ffb_8ac97bd4",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 43
+      },
+      "revId": "b7b058ac927f7ff370e59a8a2d2d3d283fee9a1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5ca896b_875ca27f",
@@ -71,6 +95,30 @@
       "writtenOn": "2024-03-14T16:43:17Z",
       "side": 1,
       "message": "Don\u0027t we want it as separate certs?",
+      "range": {
+        "startLine": 172,
+        "startChar": 35,
+        "endLine": 172,
+        "endChar": 50
+      },
+      "revId": "b7b058ac927f7ff370e59a8a2d2d3d283fee9a1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd94877f_f068df49",
+        "filename": "service_vm/test_apk/src/native/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-15T10:54:17Z",
+      "side": 1,
+      "message": "It\u0027s more convenient with one byte array here as there\u0027s an existing util method[1] in rkpd that parses and validates the certificate chain directly.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/RemoteKeyProvisioning/app/src/com/android/rkpdapp/utils/X509Utils.java;l\u003d57;drc\u003de26a12477bf00b6d70c55fb56ef3906b6238aeef",
+      "parentUuid": "b5ca896b_875ca27f",
       "range": {
         "startLine": 172,
         "startChar": 35,
