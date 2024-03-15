@@ -32,7 +32,7 @@ use std::fs::{File, OpenOptions};
 use std::io::{self, BufRead, BufReader, BufWriter, Write};
 use std::os::unix::io::FromRawFd;
 use std::path::{Path, PathBuf};
-use std::sync::{Condvar, Mutex, MutexGuard};
+use std::sync::{Condvar, Mutex};
 use std::thread;
 use std::time::Duration;
 use vmclient::{DeathReason, VmInstance};
@@ -48,39 +48,64 @@ const READ_TIMEOUT: Duration = Duration::from_secs(10);
 const WRITE_TIMEOUT: Duration = Duration::from_secs(10);
 
 lazy_static! {
-    static ref SERVICE_VM_STATE: State = State::default();
+    static ref NEW_REQUEST_NUM: AtomicCounter = AtomicCounter::default();
+    static ref SERVICE_VM: Mutex<Option<ServiceVm>> = Mutex::new(None);
 }
 
-/// The running state of the Service VM.
+/// Atomic counter with a condition variable that is used to wait for the counter
+/// to become positive within a timeout.
 #[derive(Debug, Default)]
-struct State {
-    is_running: Mutex<bool>,
-    stopped: Condvar,
+struct AtomicCounter {
+    num: Mutex<usize>,
+    condvar: Condvar,
 }
 
-impl State {
-    fn wait_until_no_service_vm_running(&self) -> Result<MutexGuard<'_, bool>> {
-        // The real timeout can be longer than 10 seconds since the time to acquire
-        // is_running mutex is not counted in the 10 seconds.
-        let (guard, wait_result) = self
-            .stopped
-            .wait_timeout_while(
-                self.is_running.lock().unwrap(),
-                Duration::from_secs(10),
-                |&mut is_running| is_running,
-            )
+impl AtomicCounter {
+    /// Checks if the counter becomes positive within the given timeout.
+    fn is_positive_within_timeout(&self, timeout: Duration) -> bool {
+        let (guard, _wait_request) = self
+            .condvar
+            .wait_timeout_while(self.num.lock().unwrap(), timeout, |&mut x| x == 0)
             .unwrap();
-        ensure!(
-            !wait_result.timed_out(),
-            "Timed out while waiting for the running service VM to stop."
-        );
-        Ok(guard)
+        *guard > 0
     }
 
-    fn notify_service_vm_shutdown(&self) {
-        let mut is_running_guard = self.is_running.lock().unwrap();
-        *is_running_guard = false;
-        self.stopped.notify_one();
+    fn increment(&self) {
+        let mut num = self.num.lock().unwrap();
+        *num = num.checked_add(1).unwrap();
+        self.condvar.notify_all();
+    }
+
+    fn decrement(&self) {
+        let mut num = self.num.lock().unwrap();
+        *num = num.checked_sub(1).unwrap();
+        self.condvar.notify_all();
+    }
+}
+
+/// Processes the request in the service VM.
+pub fn process_request(request: Request) -> Result<Response> {
+    NEW_REQUEST_NUM.increment();
+    let result = process_request_in_service_vm(request);
+    NEW_REQUEST_NUM.decrement();
+    thread::spawn(stop_service_vm_if_idle);
+    result
+}
+
+fn process_request_in_service_vm(request: Request) -> Result<Response> {
+    let mut service_vm = SERVICE_VM.lock().unwrap();
+    if service_vm.is_none() {
+        *service_vm = Some(ServiceVm::start()?);
+    }
+    service_vm.as_mut().unwrap().process_request(request)
+}
+
+fn stop_service_vm_if_idle() {
+    if NEW_REQUEST_NUM.is_positive_within_timeout(Duration::from_secs(2)) {
+        info!("Service VM has pending requests, keeping it running.");
+    } else {
+        info!("Service VM is idle, shutting it down.");
+        *SERVICE_VM.lock().unwrap() = None;
     }
 }
 
@@ -98,13 +123,10 @@ impl ServiceVm {
     /// already running, this function will start the service VM once the running one
     /// shuts down.
     pub fn start() -> Result<Self> {
-        let mut is_running_guard = SERVICE_VM_STATE.wait_until_no_service_vm_running()?;
-
         let instance_img_path = Path::new(VIRT_DATA_DIR).join(INSTANCE_IMG_NAME);
         let vm = protected_vm_instance(instance_img_path)?;
 
         let vm = Self::start_vm(vm, VmType::ProtectedVm)?;
-        *is_running_guard = true;
         Ok(vm)
     }
 
@@ -174,7 +196,6 @@ impl Drop for ServiceVm {
             Ok(reason) => info!("Exit the service VM successfully: {reason:?}"),
             Err(e) => warn!("Service VM shutdown request failed '{e:?}', killing it."),
         }
-        SERVICE_VM_STATE.notify_service_vm_shutdown();
     }
 }
 
