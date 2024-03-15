@@ -78,6 +78,9 @@ public class VmAttestationTests extends MicrodroidDeviceTestBase {
         VirtualMachine vm = forceCreateNewVirtualMachine("attestation_client", config);
 
         vm.enableTestAttestation();
+        // Pause to let the Service VM shut down and restart, to be sure that the key blob
+        // encrypted by the first Service VM session can be decrypted by the second.
+        Thread.sleep(1000);
         CompletableFuture<Exception> exception = new CompletableFuture<>();
         CompletableFuture<Boolean> payloadReady = new CompletableFuture<>();
         VmEventListener listener =
