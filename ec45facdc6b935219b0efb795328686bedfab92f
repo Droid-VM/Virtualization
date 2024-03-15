@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ae469b0_1eca435a",
+        "filename": "service_vm/test_apk/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-15T16:20:15Z",
+      "side": 1,
+      "message": "Comment that this is defined over in packages/modules/RemoteKeyProvisioning?",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 27
+      },
+      "revId": "ec45facdc6b935219b0efb795328686bedfab92f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1b6625b_0d41c70c",
+        "filename": "service_vm/test_apk/AndroidTest.rkpd.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-15T16:20:15Z",
+      "side": 1,
+      "message": "Does this work with the name \"AndroidTest.rkpd.xml\"? I\u0027ve never been quite clear how the infrastructure finds these files.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 38
+      },
+      "revId": "ec45facdc6b935219b0efb795328686bedfab92f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3c9390f_0989c4c2",
+        "filename": "service_vm/test_apk/AndroidTest.rkpd.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-15T16:20:15Z",
+      "side": 1,
+      "message": "This is the default, you can omit it",
+      "range": {
+        "startLine": 24,
+        "startChar": 6,
+        "endLine": 24,
+        "endChar": 51
+      },
+      "revId": "ec45facdc6b935219b0efb795328686bedfab92f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7ed4eaf_9fd0a581",
+        "filename": "service_vm/test_apk/src/native/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-15T16:20:15Z",
+      "side": 1,
+      "message": "Should we send in a real random challenge from the Java side?\n\nAnd/or, can we verify the resulting cert contains the challenge?",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 2
+      },
+      "revId": "ec45facdc6b935219b0efb795328686bedfab92f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
