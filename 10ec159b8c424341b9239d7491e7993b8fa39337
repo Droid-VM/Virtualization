@@ -72,6 +72,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f714f072_9adafc44",
+        "filename": "libs/dice/driver/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-15T09:07:16Z",
+      "side": 1,
+      "message": "The file is on tmpfs, and there\u0027s no other link to it at this stage.\nEven if we write zeros, there\u0027s no real guarantee it isn\u0027t in kernel memory somewhere, I think?",
+      "parentUuid": "a17704b1_77c67611",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 78
+      },
+      "revId": "10ec159b8c424341b9239d7491e7993b8fa39337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0de2055c_6e5a5b0c",
         "filename": "microdroid/derive_microdroid_vendor_dice_node/Android.bp",
         "patchSetId": 3
