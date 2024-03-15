@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb4a3397_a674c9a2",
+        "filename": "tests/pvmfw/helper/java/com/android/pvmfw/test/host/Pvmfw.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-15T15:56:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "557117c4_4846bafe",
+      "range": {
+        "startLine": 51,
+        "startChar": 22,
+        "endLine": 51,
+        "endChar": 32
+      },
+      "revId": "d9c87d94b1aeccda15c8064b676044cf91aee0df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c304991a_b25fb23d",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-14T12:45:42Z",
       "side": 1,
       "message": "Possibly check that this takes us to where entryOffsets is pointing?",
+      "range": {
+        "startLine": 123,
+        "startChar": 10,
+        "endLine": 123,
+        "endChar": 38
+      },
+      "revId": "d9c87d94b1aeccda15c8064b676044cf91aee0df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5d7c519_d30c1e84",
+        "filename": "tests/pvmfw/helper/java/com/android/pvmfw/test/host/Pvmfw.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-15T15:56:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c304991a_b25fb23d",
       "range": {
         "startLine": 123,
         "startChar": 10,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afd87a77_64cd112e",
+        "filename": "tests/pvmfw/helper/java/com/android/pvmfw/test/host/Pvmfw.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-15T15:56:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13985a74_c064bc57",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 13
+      },
+      "revId": "d9c87d94b1aeccda15c8064b676044cf91aee0df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72b785fd_d6c23811",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-03-14T12:45:42Z",
       "side": 1,
       "message": "Should these setters automatically bump the version?",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 203,
+        "endChar": 9
+      },
+      "revId": "d9c87d94b1aeccda15c8064b676044cf91aee0df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fefe1f8_32861241",
+        "filename": "tests/pvmfw/helper/java/com/android/pvmfw/test/host/Pvmfw.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-15T15:56:39Z",
+      "side": 1,
+      "message": "Let me keep this behavior because:\n  - In case that `pvmfw` has more version in the future, then we can\u0027t decide which version to pick.\n  - it allows `null`, so bump up also mean bump down. It may",
+      "parentUuid": "72b785fd_d6c23811",
       "range": {
         "startLine": 187,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69b53c07_bdd848d8",
+        "filename": "tests/pvmfw/java/com/android/pvmfw/test/CustomPvmfwHostTestCaseBase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-15T15:56:39Z",
+      "side": 1,
+      "message": "Good to know. Done.\n\nActually I used `TestInformation.getDependencyFile` to only instantiate test artifact only once with static setup (`@BeforeClassWithInfo`), but seems like that I\u0027d rather pick reliable approach.",
+      "parentUuid": "93bc86f6_8cd5522c",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 93
+      },
+      "revId": "d9c87d94b1aeccda15c8064b676044cf91aee0df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2e6d558_5095d35f",
@@ -129,6 +249,30 @@
       "writtenOn": "2024-03-14T12:45:42Z",
       "side": 1,
       "message": "This doesn\u0027t add much - the next line will NPE anyway if it is null.\n(requireNonNull is useful when you are storing something and will only dereference it much later, in another method)",
+      "range": {
+        "startLine": 98,
+        "startChar": 36,
+        "endLine": 98,
+        "endChar": 58
+      },
+      "revId": "d9c87d94b1aeccda15c8064b676044cf91aee0df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c9f5d48_d31723b7",
+        "filename": "tests/pvmfw/java/com/android/pvmfw/test/CustomPvmfwHostTestCaseBase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-15T15:56:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2e6d558_5095d35f",
       "range": {
         "startLine": 98,
         "startChar": 36,
@@ -162,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f3b635b_ac918093",
+        "filename": "tests/pvmfw/java/com/android/pvmfw/test/CustomPvmfwHostTestCaseBase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-15T15:56:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89354625_d638707c",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 90
+      },
+      "revId": "d9c87d94b1aeccda15c8064b676044cf91aee0df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "822b278e_46fa6ddc",
@@ -185,6 +353,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56fca46f_c7621851",
+        "filename": "tests/pvmfw/java/com/android/pvmfw/test/DebugPolicyHostTests.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-15T15:56:39Z",
+      "side": 1,
+      "message": "`Pvmfw.Builder` has default version (ToT). Let me keep this to use default version, so we can always test this against the latest version.",
+      "parentUuid": "822b278e_46fa6ddc",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 61
+      },
+      "revId": "d9c87d94b1aeccda15c8064b676044cf91aee0df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff2674a4_090cd5df",
@@ -198,6 +390,30 @@
       "writtenOn": "2024-03-14T12:45:42Z",
       "side": 1,
       "message": "This needs changing",
+      "range": {
+        "startLine": 36,
+        "startChar": 6,
+        "endLine": 36,
+        "endChar": 50
+      },
+      "revId": "d9c87d94b1aeccda15c8064b676044cf91aee0df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "997bd055_53aeb86b",
+        "filename": "tests/pvmfw/tools/PvmfwTool.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-15T15:56:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff2674a4_090cd5df",
       "range": {
         "startLine": 36,
         "startChar": 6,

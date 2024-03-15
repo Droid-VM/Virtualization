@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9d1ddb1_b8f04aa4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-15T15:56:39Z",
+      "side": 1,
+      "message": "I cherry-picked your revert to re-enable SK, but the test is failing:\n\nDo I have to cherry-pick all your CLs?\n\n```\n[8/11] com.android.pvmfw.test.PvmfwImgTest#testPvmfw_beforeVmReferenceDt_whenSecretKeeperExists: FAILED (11.833s)\n\nSTACKTRACE:\njava.lang.AssertionError: pvmfw shouldn\u0027t boot without VM reference DT, version\u003dv1.0: expected com.android.tradefed.device.DeviceRuntimeException to be thrown, but nothing was thrown\n```",
+      "parentUuid": "57ac6251_29640069",
+      "range": {
+        "startLine": 10,
+        "startChar": 6,
+        "endLine": 10,
+        "endChar": 36
+      },
+      "revId": "2a95424b734e621be7321547570e6642edf36116",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "46dcf5fc_a05c1a65",
