@@ -46,6 +46,122 @@
       },
       "revId": "83384f0c37c45b70ec76d7f62d00eb890c072fbf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85a1983c_cbd43b76",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-18T18:00:38Z",
+      "side": 1,
+      "message": "Ah, that\u0027s right. We should limit the number of secrets any given (user, app) can create. Thanks.",
+      "parentUuid": "389c5a39_2eabc1ec",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 41
+      },
+      "revId": "83384f0c37c45b70ec76d7f62d00eb890c072fbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89ab827b_c053e2f2",
+        "filename": "virtualizationservice/src/maintenance/vmdb.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-18T18:00:38Z",
+      "side": 1,
+      "message": "If we can\u0027t remove it, there\u0027s a distinct possibility of infinite recursion here.",
+      "range": {
+        "startLine": 101,
+        "startChar": 24,
+        "endLine": 101,
+        "endChar": 63
+      },
+      "revId": "83384f0c37c45b70ec76d7f62d00eb890c072fbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6e9d626_99f6f558",
+        "filename": "virtualizationservice/src/maintenance/vmdb.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-18T18:00:38Z",
+      "side": 1,
+      "message": "it\u0027s",
+      "range": {
+        "startLine": 112,
+        "startChar": 50,
+        "endLine": 112,
+        "endChar": 53
+      },
+      "revId": "83384f0c37c45b70ec76d7f62d00eb890c072fbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f84d142_411d42da",
+        "filename": "virtualizationservice/src/maintenance/vmdb.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-18T18:00:38Z",
+      "side": 1,
+      "message": "Honestly I have no idea what this does, and I suspect I\u0027m happier that way.\nDid we have a schema version before now? If it isn\u0027t present, should we treat that as version 0 rather than an error?",
+      "range": {
+        "startLine": 139,
+        "startChar": 23,
+        "endLine": 139,
+        "endChar": 71
+      },
+      "revId": "83384f0c37c45b70ec76d7f62d00eb890c072fbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fac7ac1f_b0ff3670",
+        "filename": "virtualizationservice/src/maintenance/vmdb.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-18T18:00:38Z",
+      "side": 1,
+      "message": "Do we need a default value?\nAnd, don\u0027t we need to update the version here?",
+      "range": {
+        "startLine": 181,
+        "startChar": 8,
+        "endLine": 181,
+        "endChar": 78
+      },
+      "revId": "83384f0c37c45b70ec76d7f62d00eb890c072fbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
