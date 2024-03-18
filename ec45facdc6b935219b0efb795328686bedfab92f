@@ -112,6 +112,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b69aefb_944f6198",
+        "filename": "service_vm/test_apk/AndroidTest.rkpd.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-18T12:16:46Z",
+      "side": 1,
+      "message": "Well, now I know how it works!",
+      "parentUuid": "be03e4fe_4e77d452",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 38
+      },
+      "revId": "ec45facdc6b935219b0efb795328686bedfab92f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3c9390f_0989c4c2",
@@ -196,6 +220,30 @@
       "side": 1,
       "message": "I don\u0027t think we have that variation for VM attestation like rkpd. I\u0027ll just remove this part.",
       "parentUuid": "36fc2100_f1a29785",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 13
+      },
+      "revId": "ec45facdc6b935219b0efb795328686bedfab92f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31a9f307_a40d0f5e",
+        "filename": "service_vm/test_apk/AndroidTest.rkpd.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-18T12:16:46Z",
+      "side": 1,
+      "message": "\u003e But I think follow-up work is needed on internal main to ensure full coverage.\n\nYeah, I agree. I think.",
+      "parentUuid": "75ac9cb3_60e4321d",
       "range": {
         "startLine": 33,
         "startChar": 0,
@@ -338,6 +386,30 @@
       "side": 1,
       "message": "\u003e And actually we could just assume VirtualMachineManager#getCapabilities() includes protected VMs ...\n\nActually `VirtualMachineManager#getCapabilities()` is assumed in `prepareTestSetup`[1] below.\n\nSo this assume is redundant, let me just remove it.",
       "parentUuid": "a7d41817_23713668",
+      "range": {
+        "startLine": 110,
+        "startChar": 34,
+        "endLine": 110,
+        "endChar": 51
+      },
+      "revId": "ec45facdc6b935219b0efb795328686bedfab92f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fc78bab_ef25a311",
+        "filename": "service_vm/test_apk/src/java/com/android/virt/rkpd/vm_attestation/testapp/RkpdVmAttestationTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-18T12:16:46Z",
+      "side": 1,
+      "message": "I think you should move prepareTestSetup() up here with these other assumes, before you start to mungs the rkpddatabase.",
+      "parentUuid": "cbad5f9c_25d2f407",
       "range": {
         "startLine": 110,
         "startChar": 34,
