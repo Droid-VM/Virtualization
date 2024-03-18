@@ -16,6 +16,75 @@
       "message": "Hi Alan, PTAL",
       "revId": "9ede5e44589f4439b2394cb2e1205a5d3be7543f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "108ebb33_4e6339e4",
+        "filename": "service_vm/test_apk/src/java/com/android/virt/rkpd/vm_attestation/testapp/RkpdVmAttestationTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-18T14:23:07Z",
+      "side": 1,
+      "message": "`assertThat(seq).hasSize(3)` will give a much better error message.\n\nAnd I\u0027d have a look at the other things in Truth\u0027s IterableSubject.\n\nAlso: some comment explaining all the various magic numbers here might help.\nPerhaps include some of the expected schema?",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 44
+      },
+      "revId": "9ede5e44589f4439b2394cb2e1205a5d3be7543f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02c4ff69_d407a7b4",
+        "filename": "service_vm/test_apk/src/java/com/android/virt/rkpd/vm_attestation/testapp/RkpdVmAttestationTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-18T14:23:07Z",
+      "side": 1,
+      "message": "Nit: Current doesn\u0027t seem quite right.\nTest APK, payload APK?",
+      "range": {
+        "startLine": 240,
+        "startChar": 40,
+        "endLine": 240,
+        "endChar": 47
+      },
+      "revId": "9ede5e44589f4439b2394cb2e1205a5d3be7543f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dffa7c7_dd2e671d",
+        "filename": "service_vm/test_apk/src/java/com/android/virt/rkpd/vm_attestation/testapp/RkpdVmAttestationTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-18T14:23:07Z",
+      "side": 1,
+      "message": "This could do with a message",
+      "range": {
+        "startLine": 247,
+        "startChar": 16,
+        "endLine": 247,
+        "endChar": 44
+      },
+      "revId": "9ede5e44589f4439b2394cb2e1205a5d3be7543f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
