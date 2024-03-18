@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d288f9f1_939b2c65",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-18T17:42:36Z",
+      "side": 1,
+      "message": "+CC: @qwandor@google.com as well for Rust advise.\n\n\nI loved the idea but I couldn\u0027t make it work after spending couple of days.\n\n\nHere\u0027s my trial (doesn\u0027t compile).\n\n```\n    fn mask_internal(\u0026mut self, path: \u0026DtPathTokens, leaf_mask: DeviceTreeChildrenMask) -\u003e bool {\n        let mut path_token_iter \u003d path.tokens.iter().peekable();\n        let mut mask_iter \u003d self;\n\n        \u0027next_token: while let Some(path_token) \u003d path_token_iter.peek() {\n            let DeviceTreeChildrenMask::Partial(ref mut children) \u003d \u0026mut mask_iter.children else {\n                // DeviceTreeChildrenMask::All. Everything is masked already.\n                return false;\n            };\n\n            for i in 0..children.len() {\n                if children[i].name_bytes.as_slice() \u003d\u003d **path_token {\n                    mask_iter \u003d \u0026mut children[i];\n                    path_token_iter.next();\n                    continue \u0027next_token;\n                }\n            }\n            break;\n        }\n\n        while let Some(path_token) \u003d path_token_iter.peek() {\n            let DeviceTreeChildrenMask::Partial(ref mut children) \u003d \u0026mut mask_iter.children else {\n                panic!(\"Should not happen\");\n            };\n\n            let child \u003d Self {\n                name_bytes: path_token.to_vec(),\n                children: DeviceTreeChildrenMask::Partial(Vec::new()),\n            };\n            children.push(child);\n            mask_iter \u003d children.last_mut().unwrap();\n\n            path_token_iter.next();\n        }\n\n        if leaf_mask \u003d\u003d DeviceTreeChildrenMask::All \u0026\u0026 mask_iter.children !\u003d leaf_mask {\n            mask_iter.children \u003d leaf_mask;\n            true\n        } else {\n            false\n        }\n    }\n\n```\n\nI don\u0027t know why, but Rust complaints that `mask_iter` is borrowed multiple times. (line number isn\u0027t accurate)\n\n```\nerror[E0499]: cannot borrow `mask_iter.children` as mutable more than once at a time\n   --\u003e packages/modules/Virtualization/pvmfw/src/device_assignment.rs:268:69\n    |\n252 |             let DeviceTreeChildrenMask::Partial(ref mut children) \u003d \u0026mut mask_iter.children else {\n    |                                                                     ----------------------- first mutable borrow occurs here\n...\n268 |             let DeviceTreeChildrenMask::Partial(ref mut children) \u003d \u0026mut mask_iter.children else {\n    |                                                                     ^^^^^^^^^^^^^^^^^^^^^^^\n    |                                                                     |\n    |                                                                     second mutable borrow occurs here\n    |                                                                     first borrow later used here\n\nerror[E0502]: cannot borrow `mask_iter.children` as immutable because it is also borrowed as mutable\n   --\u003e packages/modules/Virtualization/pvmfw/src/device_assignment.rs:282:56\n    |\n252 |             let DeviceTreeChildrenMask::Partial(ref mut children) \u003d \u0026mut mask_iter.children else {\n    |                                                                     ----------------------- mutable borrow occurs here\n...\n282 |         if leaf_mask \u003d\u003d DeviceTreeChildrenMask::All \u0026\u0026 mask_iter.children !\u003d leaf_mask {\n    |                                                        ^^^^^^^^^^^^^^^^^^\n    |                                                        |\n    |                                                        immutable borrow occurs here\n    |                                                        mutable borrow later used here\n\nerror[E0506]: cannot assign to `mask_iter.children` because it is borrowed\n   --\u003e packages/modules/Virtualization/pvmfw/src/device_assignment.rs:283:13\n    |\n252 |             let DeviceTreeChildrenMask::Partial(ref mut children) \u003d \u0026mut mask_iter.children else {\n    |                                                                     ----------------------- `mask_iter.children` is borrowed here\n...\n283 |             mask_iter.children \u003d leaf_mask;\n    |             ^^^^^^^^^^^^^^^^^^\n    |             |\n    |             `mask_iter.children` is assigned to here but it was already borrowed\n    |             borrow later used here\n```\n\n\nDo you have any suggestion here? Otherwise I\u0027ll just keep current snippet because there\u0027s not much performance issue here.",
+      "parentUuid": "3a4ae41d_0c4de14d",
+      "range": {
+        "startLine": 247,
+        "startChar": 0,
+        "endLine": 249,
+        "endChar": 40
+      },
+      "revId": "a55bed077cdd3f8e93ed10ab3a334055103204cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e39d472b_03c3e424",
         "filename": "pvmfw/src/device_assignment.rs",
         "patchSetId": 14
@@ -54,6 +78,30 @@
       "writtenOn": "2024-02-26T14:04:45Z",
       "side": 1,
       "message": "How would this ever be `true`? (same below)",
+      "range": {
+        "startLine": 424,
+        "startChar": 15,
+        "endLine": 424,
+        "endChar": 42
+      },
+      "revId": "a55bed077cdd3f8e93ed10ab3a334055103204cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b797763_84ea01ef",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-18T17:42:36Z",
+      "side": 1,
+      "message": "Removed. I added it for assertion check but only confuses reader..",
+      "parentUuid": "e39d472b_03c3e424",
       "range": {
         "startLine": 424,
         "startChar": 15,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40d5f0e4_aafa7521",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-18T17:42:36Z",
+      "side": 1,
+      "message": "Decided no-go for `zerocopy::transmute`, which requires `Sized`. (talked with Pierre about this)\n\nHowever, kind of took the idea (i.e. want no allocation for reading value) and modified the code a bit.",
+      "parentUuid": "c3e9168a_86e25495",
+      "range": {
+        "startLine": 462,
+        "startChar": 0,
+        "endLine": 486,
+        "endChar": 17
+      },
+      "revId": "a55bed077cdd3f8e93ed10ab3a334055103204cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "503030ae_32b67297",
@@ -100,6 +172,30 @@
       "writtenOn": "2024-02-26T14:04:45Z",
       "side": 1,
       "message": "Would you mind using the terms \"kept\", \"dropped\", and \"filter\" because it is quite confusing to understand if \"masked\" nodes are kept in the final DT or not (given that we drop nodes by \"masking\" them with NOPs but this \"masks\" those are that not \"masked\" by the NOPs i.e. kept)?",
+      "range": {
+        "startLine": 507,
+        "startChar": 3,
+        "endLine": 508,
+        "endChar": 33
+      },
+      "revId": "a55bed077cdd3f8e93ed10ab3a334055103204cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1373eedf_7fb28bc9",
+        "filename": "pvmfw/src/device_assignment.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-18T17:42:36Z",
+      "side": 1,
+      "message": "Simply removed this line.\n\nYou\u0027re complaint is legitimate. \u0027mask\u0027 itself is neutral term and it can be used for both filter-out and filter-in. So let me just drop the sentence here.\n\nI\u0027ll choose other words when the intention to use the mask is clear.",
+      "parentUuid": "503030ae_32b67297",
       "range": {
         "startLine": 507,
         "startChar": 3,
