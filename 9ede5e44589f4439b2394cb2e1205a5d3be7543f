@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "31776ba0_dd31fe49",
+        "filename": "service_vm/test_apk/src/java/com/android/virt/rkpd/vm_attestation/testapp/RkpdVmAttestationTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-19T09:08:21Z",
+      "side": 1,
+      "message": "I checked Truth but don\u0027t see which other methods can be used here. We need exact match for the first two elements, but a \"contain something like\" match for the third element. It seems that it would be more straight forward with the current structure.\n\nAlso added a comment for the expected extension format.",
+      "parentUuid": "108ebb33_4e6339e4",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 44
+      },
+      "revId": "9ede5e44589f4439b2394cb2e1205a5d3be7543f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "02c4ff69_d407a7b4",
         "filename": "service_vm/test_apk/src/java/com/android/virt/rkpd/vm_attestation/testapp/RkpdVmAttestationTest.java",
         "patchSetId": 3
@@ -54,6 +78,30 @@
       "writtenOn": "2024-03-18T14:23:07Z",
       "side": 1,
       "message": "Nit: Current doesn\u0027t seem quite right.\nTest APK, payload APK?",
+      "range": {
+        "startLine": 240,
+        "startChar": 40,
+        "endLine": 240,
+        "endChar": 47
+      },
+      "revId": "9ede5e44589f4439b2394cb2e1205a5d3be7543f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0bab436_c6f196a4",
+        "filename": "service_vm/test_apk/src/java/com/android/virt/rkpd/vm_attestation/testapp/RkpdVmAttestationTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-19T09:08:21Z",
+      "side": 1,
+      "message": "changed to Payload APK",
+      "parentUuid": "02c4ff69_d407a7b4",
       "range": {
         "startLine": 240,
         "startChar": 40,
@@ -77,6 +125,30 @@
       "writtenOn": "2024-03-18T14:23:07Z",
       "side": 1,
       "message": "This could do with a message",
+      "range": {
+        "startLine": 247,
+        "startChar": 16,
+        "endLine": 247,
+        "endChar": 44
+      },
+      "revId": "9ede5e44589f4439b2394cb2e1205a5d3be7543f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3c4f542_97520f4d",
+        "filename": "service_vm/test_apk/src/java/com/android/virt/rkpd/vm_attestation/testapp/RkpdVmAttestationTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-19T09:08:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1dffa7c7_dd2e671d",
       "range": {
         "startLine": 247,
         "startChar": 16,
