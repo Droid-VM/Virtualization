@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b64fb3b4_cfe66207",
+        "filename": "service_vm/manager/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-19T16:05:21Z",
+      "side": 1,
+      "message": "Should we be:\n1) using the `IVirtualizationServiceInternal::allocateInstanceId or IVirtualizationService::allocateInstanceId` AND\n2) Persiting it in instance_id file alongside instance.img like the apps \u0026 compos[1]?\n\n[1] https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/compos/composd/src/instance_starter.rs;l\u003d183-190?q\u003dallocateInstanceId%20file:%5C.rs\n\nthis `InstanceId` is not constant across all devices. Moreover, global VS can maintain this in central database.",
+      "range": {
+        "startLine": 50,
+        "startChar": 6,
+        "endLine": 50,
+        "endChar": 28
+      },
+      "revId": "536f1b4f5f63f7519febb7638a310c9ace631f96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
