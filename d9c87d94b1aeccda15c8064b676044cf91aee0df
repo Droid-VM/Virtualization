@@ -213,6 +213,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07306b2a_49fba74b",
+        "filename": "tests/pvmfw/helper/java/com/android/pvmfw/test/host/Pvmfw.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-19T14:29:06Z",
+      "side": 1,
+      "message": "\u003e I was thinking if you call setFoo, where foo requires version x, then we set the version to max(x, whatever it was before).\n\nWell, I just wanted to minimize job of individual methods and also gives more flexibility. Since we have `setVersion()`, I would be surprised if version can be changed by other APIs.\n\n\u003e Do you really want set(null) to be valid?\n\nWell, `set(null)` can help to reuse builder for other purpose.\n\n\u003e Not a big deal, tbf.\n\nSo, let me ack for this.",
+      "parentUuid": "705813f6_e8f33821",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 203,
+        "endChar": 9
+      },
+      "revId": "d9c87d94b1aeccda15c8064b676044cf91aee0df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93bc86f6_8cd5522c",
