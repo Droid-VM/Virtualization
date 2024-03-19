@@ -445,10 +445,16 @@ impl IVirtualizationMaintenance for VirtualizationServiceInternal {
 
     fn performReconciliation(
         &self,
-        _callback: &Strong<dyn IVirtualizationReconciliationCallback>,
+        callback: &Strong<dyn IVirtualizationReconciliationCallback>,
     ) -> binder::Result<()> {
-        Err(anyhow!("performReconciliation not supported"))
-            .or_binder_exception(ExceptionCode::UNSUPPORTED_OPERATION)
+        let state = &mut *self.state.lock().unwrap();
+        if let Some(sk_state) = &mut state.sk_state {
+            info!("reformReconciliation()");
+            sk_state.reconcile(callback).or_service_specific_exception(-1)?;
+        } else {
+            info!("ignoring performReconciliationd()");
+        }
+        Ok(())
     }
 }
 
