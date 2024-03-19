@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b237271_c68bb7b4",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-19T16:44:38Z",
+      "side": 1,
+      "message": "So if someone tries to start a VM while we\u0027re doing this, it will block for potentially a while?\nMaybe we should apply a timeout - not here, but on the other locks?",
+      "range": {
+        "startLine": 450,
+        "startChar": 8,
+        "endLine": 450,
+        "endChar": 53
+      },
+      "revId": "dfa29118df71ff9d4e7d30d6ac56909c945cf304",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c1ea00b_4adfe1a0",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-19T16:44:38Z",
+      "side": 1,
+      "message": "perform?",
+      "range": {
+        "startLine": 452,
+        "startChar": 19,
+        "endLine": 452,
+        "endChar": 25
+      },
+      "revId": "dfa29118df71ff9d4e7d30d6ac56909c945cf304",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6241d254_78d8a3ad",
+        "filename": "virtualizationservice/src/maintenance.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-19T16:44:38Z",
+      "side": 1,
+      "message": "Nit: line too long",
+      "range": {
+        "startLine": 205,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 107
+      },
+      "revId": "dfa29118df71ff9d4e7d30d6ac56909c945cf304",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "668064ca_cc440789",
+        "filename": "virtualizationservice/src/maintenance.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-19T16:44:38Z",
+      "side": 1,
+      "message": "These long use declarations break rustfmt\u0027s import reformatting, which I suspect is why this line is mis-indented.\n\nIt\u0027s a hack, but I\u0027ve been replacing with e.g.\n```\nuse virtualizationmaintenance::IVirtualizationReconciliationCallback;\nuse IVirtualizationReconciliationCallback::BnVirtualizationReconciliationCallback;\n```\n\n(Or even adding a short alias if needed.)",
+      "range": {
+        "startLine": 232,
+        "startChar": 0,
+        "endLine": 232,
+        "endChar": 109
+      },
+      "revId": "dfa29118df71ff9d4e7d30d6ac56909c945cf304",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
