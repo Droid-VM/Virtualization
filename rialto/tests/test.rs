@@ -34,12 +34,13 @@ use service_vm_comm::{
 use service_vm_fake_chain::client_vm::{
     fake_client_vm_dice_artifacts, fake_sub_components, SubComponent,
 };
-use service_vm_manager::ServiceVm;
+use service_vm_manager::{get_or_allocate_instance_id, ServiceVm};
 use std::fs;
 use std::fs::File;
 use std::panic;
 use std::path::PathBuf;
 use std::str::FromStr;
+use tempfile::TempDir;
 use vmclient::VmInstance;
 use x509_cert::{
     certificate::{Certificate, Version},
@@ -306,18 +307,26 @@ fn vm_instance(vm_type: VmType) -> Result<VmInstance> {
 
 fn nonprotected_vm_instance() -> Result<VmInstance> {
     let rialto = File::open(UNSIGNED_RIALTO_PATH).context("Failed to open Rialto kernel binary")?;
+    let virtmgr = vmclient::VirtualizationService::new().context("Failed to spawn VirtMgr")?;
+    let service = virtmgr.connect().context("Failed to connect to VirtMgr")?;
+
+    // Allocate a temporary directory for the instance ID file.
+    let test_dir = TempDir::new()?;
+    let test_instance_id_file = test_dir.path().join("test_instance_id");
+    let instance_id = get_or_allocate_instance_id(service.as_ref(), test_instance_id_file)?;
+
     let config = VirtualMachineConfig::RawConfig(VirtualMachineRawConfig {
         name: String::from("Non protected rialto"),
         bootloader: Some(ParcelFileDescriptor::new(rialto)),
         protectedVm: false,
         memoryMib: 300,
+        instanceId: instance_id,
         platformVersion: "~1.0".to_string(),
         ..Default::default()
     });
     let console = Some(service_vm_manager::android_log_fd()?);
     let log = Some(service_vm_manager::android_log_fd()?);
-    let virtmgr = vmclient::VirtualizationService::new().context("Failed to spawn VirtMgr")?;
-    let service = virtmgr.connect().context("Failed to connect to VirtMgr")?;
+
     info!("Connected to VirtMgr for service VM");
     VmInstance::create(service.as_ref(), &config, console, /* consoleIn */ None, log, None)
         .context("Failed to create VM")
