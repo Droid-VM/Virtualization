@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c82532f_3b9711e6",
+        "filename": "service_vm/manager/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-19T17:22:23Z",
+      "side": 1,
+      "message": "Naming nit: PENDING_REQUESTS",
+      "range": {
+        "startLine": 51,
+        "startChar": 15,
+        "endLine": 51,
+        "endChar": 30
+      },
+      "revId": "67c5ec390bd57618c9fe7323be3fa5e302e545f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d110f54f_135ea64c",
+        "filename": "service_vm/manager/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-19T17:22:23Z",
+      "side": 1,
+      "message": "I find it useful for a condvar to be named for the condition it signifies - it makes the wait and notify calls more obvious.\nSo this one would be, say, num_changed.",
+      "range": {
+        "startLine": 60,
+        "startChar": 4,
+        "endLine": 60,
+        "endChar": 11
+      },
+      "revId": "67c5ec390bd57618c9fe7323be3fa5e302e545f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55ffadb7_5031b668",
+        "filename": "service_vm/manager/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-19T17:22:23Z",
+      "side": 1,
+      "message": "_wait_result ?",
+      "range": {
+        "startLine": 66,
+        "startChar": 20,
+        "endLine": 66,
+        "endChar": 33
+      },
+      "revId": "67c5ec390bd57618c9fe7323be3fa5e302e545f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
