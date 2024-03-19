@@ -165,7 +165,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
             File virtApexDir,
             File signingKey,
             Map<String, File> keyOverrides,
-            boolean updateBootconfigs) {
+            boolean updateBootconfigs,
+            int osRollbackIndexOverride) {
         File signVirtApex = findTestFile("sign_virt_apex");
 
         RunUtil runUtil = new RunUtil();
@@ -283,7 +284,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
             File key,
             Map<String, File> keyOverrides,
             boolean isProtected,
-            boolean updateBootconfigs)
+            boolean updateBootconfigs,
+            int osRollbackIndexOverride)
             throws Exception {
         CommandRunner android = new CommandRunner(getDevice());
 
@@ -299,7 +301,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                 .that(getDevice().pullDir(VIRT_APEX + "etc", virtApexEtcDir))
                 .isTrue();
 
-        resignVirtApex(virtApexDir, key, keyOverrides, updateBootconfigs);
+        resignVirtApex(virtApexDir, key, keyOverrides, updateBootconfigs, osRollbackIndexOverride);
 
         // Push back re-signed virt APEX contents and updated microdroid.json
         getDevice().pushDir(virtApexDir, TEST_ROOT);
@@ -311,6 +313,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
         // Create the instance image for the VM
         final String instanceImgPath = TEST_ROOT + "instance.img";
+        // final String instanceImgPath = TEST_ROOT + "instance.img";
         android.run(
                 VIRT_APEX + "bin/vm",
                 "create-partition",
@@ -448,7 +451,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         key,
                         /* keyOverrides= */ Map.of(),
                         /* isProtected= */ true,
-                        /* updateBootconfigs= */ true);
+                        /* updateBootconfigs= */ true,
+                        /* osRollbackIndexOverride= */ -1);
 
         // Assert
         vmInfo.mProcess.waitFor(5L, TimeUnit.SECONDS);
@@ -469,7 +473,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         Map<String, File> keyOverrides = Map.of();
         VmInfo vmInfo =
                 runMicrodroidWithResignedImages(
-                        key, keyOverrides, /* isProtected= */ false, /* updateBootconfigs= */ true);
+                        key, keyOverrides, /* isProtected= */ false, /* updateBootconfigs= */ true, /* osRollbackIndexOverride= */ -1);
         assertThatEventually(
                 100000,
                 () ->
@@ -490,12 +494,32 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         // To be able to stop it, it should be a daemon.
         VmInfo vmInfo =
                 runMicrodroidWithResignedImages(
-                        key, Map.of(), /* isProtected= */ false, /* updateBootconfigs= */ false);
+                        key, Map.of(), /* isProtected= */ false, /* updateBootconfigs= */ false, /* osRollbackIndexOverride= */ -1);
         // Wait so that init can print errors to console (time in cuttlefish >> in real device)
         assertThatEventually(
                 100000,
                 () -> getDevice().pullFileContents(CONSOLE_PATH),
                 containsString("init: [libfs_avb] Failed to verify vbmeta digest"));
+        vmInfo.mProcess.destroy();
+    }
+
+    @Test
+    @CddTest(requirements = {"9.17/C-2-2", "9.17/C-2-6"})
+    public void testBootSucceedsWithUpgradedOS()
+            throws Exception {
+        assumeNonProtectedVm();
+        File key = findTestFile("test.com.android.virt.pem");
+        Map<String, File> keyOverrides = Map.of();
+        VmInfo vmInfo =
+                runMicrodroidWithResignedImages(
+                        key, keyOverrides, /* isProtected= */ false, /* updateBootconfigs= */ true, /* osRollbackIndexOverride= */ 500);
+        assertThatEventually(
+                100000,
+                () ->
+                        getDevice().pullFileContents(CONSOLE_PATH)
+                                + getDevice().pullFileContents(LOG_PATH),
+                containsString("boot completed, time to run payload"));
+
         vmInfo.mProcess.destroy();
     }
 

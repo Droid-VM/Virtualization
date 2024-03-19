@@ -110,6 +110,8 @@ def ParseArgs(argv):
         help='This will NOT update the vbmeta related bootconfigs while signing the apex.\
             Used for testing only!!')
     parser.add_argument('--do_not_validate_avb_version', action='store_true', help='Do not validate the avb_version when updating vbmeta bootconfig. Only use in tests!')
+    parser.add_argument('--os_rollback_index_override',
+        help='Optional feature to override the rollback_index of OS. Only use in tests!')
     args = parser.parse_args(argv)
     # preprocess --key_override into a map
     args.key_overrides = {}
@@ -313,7 +315,10 @@ def AddHashFooter(args, key, image_path, additional_images=()):
         cmd.extend(shlex.split(args.signing_args))
     for additional_image in additional_images:
         cmd.extend(['--include_descriptors_from_image', additional_image])
-    cmd.extend(['--rollback_index', info['Rollback Index']])
+    if args.os_rollback_index_override:
+        cmd.extend('--rollback_index', os_rollback_index_override)
+    else:
+        cmd.extend(['--rollback_index', info['Rollback Index']])
 
     RunCommand(args, cmd)
     check_resigned_image_avb_info(image_path, info, descriptors, args)
