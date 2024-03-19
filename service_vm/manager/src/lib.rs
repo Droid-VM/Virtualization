@@ -46,7 +46,13 @@ const MEMORY_MB: i32 = 300;
 const WRITE_BUFFER_CAPACITY: usize = 512;
 const READ_TIMEOUT: Duration = Duration::from_secs(10);
 const WRITE_TIMEOUT: Duration = Duration::from_secs(10);
-
+/// The ID is generated with urandom.
+const SERVICE_VM_INSTANCE_ID: [u8; 64] = [
+    0x3f, 0xb9, 0x63, 0xfc, 0xdf, 0x98, 0x34, 0x34, 0x76, 0x0f, 0x30, 0x54, 0xbe, 0xe8, 0x27, 0xfa,
+    0x06, 0x21, 0x1f, 0xa8, 0x7d, 0x0c, 0x0e, 0xbb, 0xaa, 0x52, 0xaf, 0x78, 0x44, 0x8b, 0x83, 0x72,
+    0x09, 0x9c, 0x15, 0xad, 0xb5, 0x16, 0x1a, 0x7c, 0xe1, 0xc2, 0xc1, 0x57, 0xd8, 0xdc, 0x06, 0x0d,
+    0x1a, 0x78, 0x97, 0x3a, 0x6d, 0xa7, 0x54, 0xe1, 0xb6, 0x85, 0x7b, 0x80, 0xcf, 0xc1, 0xaf, 0x4d,
+];
 lazy_static! {
     static ref SERVICE_VM_STATE: State = State::default();
 }
@@ -190,11 +196,19 @@ pub fn protected_vm_instance(instance_img_path: PathBuf) -> Result<VmInstance> {
         image: Some(instance_img),
         writable: true,
     }];
+    // Instance image is deprecated with the introduction of instance ID under the flag
+    // `llpvm_changes`.
+    let disks = if cfg!(llpvm_changes) {
+        vec![]
+    } else {
+        vec![DiskImage { image: None, partitions: writable_partitions, writable: true }]
+    };
     let rialto = File::open(RIALTO_PATH).context("Failed to open Rialto kernel binary")?;
     let config = VirtualMachineConfig::RawConfig(VirtualMachineRawConfig {
         name: String::from("Service VM"),
         bootloader: Some(ParcelFileDescriptor::new(rialto)),
-        disks: vec![DiskImage { image: None, partitions: writable_partitions, writable: true }],
+        disks,
+        instanceId: SERVICE_VM_INSTANCE_ID,
         protectedVm: true,
         memoryMib: MEMORY_MB,
         cpuTopology: CpuTopology::ONE_CPU,
