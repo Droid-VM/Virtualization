@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8e8b0abf_f532d068",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-03-20T13:37:13Z",
+      "side": 1,
+      "message": "Yes, this will potentially block.  But a) there shouldn\u0027t be that many VMs and b) reconciliation should generally happen when the device is quiescent, so do we need to cope with this now?",
+      "parentUuid": "6b237271_c68bb7b4",
+      "range": {
+        "startLine": 450,
+        "startChar": 8,
+        "endLine": 450,
+        "endChar": 53
+      },
+      "revId": "dfa29118df71ff9d4e7d30d6ac56909c945cf304",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c1ea00b_4adfe1a0",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-19T16:44:38Z",
       "side": 1,
       "message": "perform?",
+      "range": {
+        "startLine": 452,
+        "startChar": 19,
+        "endLine": 452,
+        "endChar": 25
+      },
+      "revId": "dfa29118df71ff9d4e7d30d6ac56909c945cf304",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5938a02d_6ee42a09",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-03-20T13:37:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c1ea00b_4adfe1a0",
       "range": {
         "startLine": 452,
         "startChar": 19,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c8d73b6_99f27cbe",
+        "filename": "virtualizationservice/src/maintenance.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-03-20T13:37:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6241d254_78d8a3ad",
+      "range": {
+        "startLine": 205,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 107
+      },
+      "revId": "dfa29118df71ff9d4e7d30d6ac56909c945cf304",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "668064ca_cc440789",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-03-19T16:44:38Z",
       "side": 1,
       "message": "These long use declarations break rustfmt\u0027s import reformatting, which I suspect is why this line is mis-indented.\n\nIt\u0027s a hack, but I\u0027ve been replacing with e.g.\n```\nuse virtualizationmaintenance::IVirtualizationReconciliationCallback;\nuse IVirtualizationReconciliationCallback::BnVirtualizationReconciliationCallback;\n```\n\n(Or even adding a short alias if needed.)",
+      "range": {
+        "startLine": 232,
+        "startChar": 0,
+        "endLine": 232,
+        "endChar": 109
+      },
+      "revId": "dfa29118df71ff9d4e7d30d6ac56909c945cf304",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "012441f0_6dd7a28c",
+        "filename": "virtualizationservice/src/maintenance.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-03-20T13:37:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "668064ca_cc440789",
       "range": {
         "startLine": 232,
         "startChar": 0,
