@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2246adfe_ab7ec979",
+        "filename": "service_vm/manager/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1933736
+      },
+      "writtenOn": "2024-03-20T20:12:59Z",
+      "side": 1,
+      "message": "|\n227 |         .create(true)\n    |          ^^^^^^^^^^^^- help: add: `.truncate(true)`\n    |\n    \u003d help: if you intend to overwrite an existing file entirely, call `.truncate(true)`\n    \u003d help: if you instead know that you may want to keep some parts of the old file, call `.truncate(false)`\n    \u003d help: alternatively, use `.append(true)` to append to the file instead of overwriting it\n    \u003d help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#suspicious_open_options\n    \u003d note: `-D clippy::suspicious-open-options` implied by `-D warnings`\n    \u003d help: to override `-D warnings` add `#[allow(clippy::suspicious_open_options)]`\n\nerror: aborting due to 1 previous error\n\n01:22:40 ninja failed with: exit status 1",
+      "revId": "5e427fbcd14c7d16f34f88f8bc264ef46d85b5a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "061d1eda_7449de3d",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1933736
+      },
+      "writtenOn": "2024-03-20T20:12:59Z",
+      "side": 1,
+      "message": "error: field `0` is never read\n  --\u003e packages/modules/Virtualization/vm/src/main.rs:37:15\n   |\n37 | struct Idsigs(Vec\u003cPathBuf\u003e);\n   |        ------ ^^^^^^^^^^^^\n   |        |\n   |        field in this struct\n   |\n   \u003d note: `Idsigs` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis\n   \u003d note: `-D dead-code` implied by `-D warnings`\n   \u003d help: to override `-D warnings` add `#[allow(dead_code)]`\nhelp: consider changing the field to be of unit type to suppress this warning while preserving the field numbering, or remove the field\n   |\n37 | struct Idsigs(());",
+      "revId": "5e427fbcd14c7d16f34f88f8bc264ef46d85b5a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac9d80fb_74501f82",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1933736
+      },
+      "writtenOn": "2024-03-20T20:12:59Z",
+      "side": 1,
+      "message": "error: written amount is not handled\n   --\u003e packages/modules/Virtualization/zipfuse/src/main.rs:354:17\n    |\n354 |                 w.write(\u0026buf[start..end])?\n    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^\n    |\n    \u003d help: use `Write::write_all` instead, or handle partial writes\n    \u003d help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#unused_io_amount\n    \u003d note: `#[deny(clippy::unused_io_amount)]` on by default\n\nerror: aborting due to 1 previous error\n\n\nWould like fix here instead of allowing the lint error",
+      "range": {
+        "startLine": 353,
+        "startChar": 16,
+        "endLine": 353,
+        "endChar": 42
+      },
+      "revId": "5e427fbcd14c7d16f34f88f8bc264ef46d85b5a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
