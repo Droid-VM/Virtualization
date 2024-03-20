@@ -51,6 +51,24 @@
       "parentUuid": "563c26b7_466c2b0c",
       "revId": "f6e02277721b455ab85b08be0b5817124b43d0f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45d4bdef_eb93ef99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-03-20T12:42:04Z",
+      "side": 1,
+      "message": "I _thought_ that the [`or_fun_call` lint](https://rust-lang.github.io/rust-clippy/rust-1.76.0/#/or_fun_call) would warn about function calls in `.ok_or()` because the function call happens whether it\u0027s needed or not, but it doesn\u0027t seem to here, so no matter.",
+      "parentUuid": "874c72d0_71bbfc76",
+      "revId": "f6e02277721b455ab85b08be0b5817124b43d0f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
