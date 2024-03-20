@@ -218,7 +218,9 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         // pVM remote attestation is only supported on protected VMs.
         assumeProtectedVM();
         assumeFeatureEnabled(VirtualMachineManager.FEATURE_REMOTE_ATTESTATION);
-        // TODO(b/329652894): Assume that pVM remote attestation feature is supported on the device.
+        assume().withMessage("Test needs Remote Attestation support")
+                .that(getVirtualMachineManager().isRemoteAttestationSupported())
+                .isTrue();
         VirtualMachineConfig config =
                 newVmConfigBuilderWithPayloadBinary(VM_ATTESTATION_PAYLOAD_PATH)
                         .setProtectedVm(mProtectedVm)
