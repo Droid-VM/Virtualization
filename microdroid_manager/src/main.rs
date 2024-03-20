@@ -617,6 +617,7 @@ fn load_config(payload_metadata: PayloadMetadata) -> Result<VmPayloadConfig> {
                 prefer_staged: false,
                 export_tombstones: None,
                 enable_authfs: false,
+                huge_pages: false,
             })
         }
         _ => bail!("Failed to match config against a config type."),
