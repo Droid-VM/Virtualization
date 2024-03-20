@@ -785,7 +785,8 @@ fn run_vm(
         .arg("run")
         .arg("--disable-sandbox")
         .arg("--cid")
-        .arg(config.cid.to_string());
+        .arg(config.cid.to_string())
+        .arg("--hugepages");
 
     if system_properties::read_bool("hypervisor.memory_reclaim.supported", false)? {
         command.arg("--balloon-page-reporting");
