@@ -69,6 +69,24 @@
       "parentUuid": "874c72d0_71bbfc76",
       "revId": "f6e02277721b455ab85b08be0b5817124b43d0f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40edf75b_d9a80689",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-20T13:51:33Z",
+      "side": 1,
+      "message": "Euh, from the test[1] it does look like the clippy lint should be triggered in this case. I also tried to set `clippy_lint: android` in Android.bp, that doesn\u0027t trigger any warning either. @qwandor@google.com, do you have any idea why clippy lint doesn\u0027t fire for the original `ok_or` calls?\n\n[1] https://github.com/rust-lang/rust-clippy/blob/master/tests/ui/or_fun_call.rs#L101",
+      "parentUuid": "45d4bdef_eb93ef99",
+      "revId": "f6e02277721b455ab85b08be0b5817124b43d0f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
