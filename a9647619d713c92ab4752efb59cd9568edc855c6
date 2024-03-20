@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a088ddc7_49cfa6db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-20T17:14:23Z",
+      "side": 1,
+      "message": "How does crosvm handle `MADV_HUGEPAGE` not being supported by the kernel when `--hugepages`?\n\nIf it aborts the boot, this would break AVF on kernels that don\u0027t have it.\n\nGiven that:\n\n\u003e `MADV_HUGEPAGE` [is] available only if the kernel was configured with `CONFIG_TRANSPARENT_HUGEPAGE`\n\nwe\u0027d then have to detect that support from here, right?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 72
+      },
+      "revId": "a9647619d713c92ab4752efb59cd9568edc855c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b351d015_dfeab7bc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-20T17:14:23Z",
+      "side": 1,
+      "message": "nit: `MADV_HUGEPAGE` :^)",
+      "range": {
+        "startLine": 13,
+        "startChar": 43,
+        "endLine": 13,
+        "endChar": 57
+      },
+      "revId": "a9647619d713c92ab4752efb59cd9568edc855c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14f89111_96524632",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-20T17:14:23Z",
+      "side": 1,
+      "message": "Would you mind explain how/when this CL will have an effect on Android?\n\nBTW, is this comment also true for x86_64 (Cuttlefish)?",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 66
+      },
+      "revId": "a9647619d713c92ab4752efb59cd9568edc855c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c220aea_079e5a39",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-20T17:14:23Z",
+      "side": 1,
+      "message": "Given that this is host userspace, do we have a config flag for this feature?\n\nFor example, see `cfg!(virt_cpufreq)` (L842).",
+      "range": {
+        "startLine": 789,
+        "startChar": 8,
+        "endLine": 789,
+        "endChar": 27
+      },
+      "revId": "a9647619d713c92ab4752efb59cd9568edc855c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
