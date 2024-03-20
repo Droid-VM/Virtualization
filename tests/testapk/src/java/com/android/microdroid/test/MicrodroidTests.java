@@ -35,6 +35,7 @@ import static org.junit.Assume.assumeFalse;
 import static org.junit.Assume.assumeTrue;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+import static java.util.stream.Collectors.toList;
 
 import android.app.Instrumentation;
 import android.app.UiAutomation;
@@ -1009,23 +1010,32 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         VirtualMachineConfig normalConfig = builder.build();
         assertThat(tryBootVmWithConfig(normalConfig, "test_vm").payloadStarted).isTrue();
 
-        // Try to run the VM again with the previous instance.img
+        // Try to run the VM again with the previous instance
         // We need to make sure that no changes on config don't invalidate the identity, to compare
         // the result with the below "different debug level" test.
-        File vmInstance = getVmFile("test_vm", "instance.img");
-        File vmInstanceBackup = File.createTempFile("instance", ".img");
-        Files.copy(vmInstance.toPath(), vmInstanceBackup.toPath(), REPLACE_EXISTING);
+        Path vmInstance = getVmDirectory("test_vm");
+        Path vmInstanceBackup = Files.createTempDirectory("test_vm");
+        for (Path f : Files.list(vmInstance).collect(toList())) {
+            Path backup = Files.createFile(vmInstanceBackup.resolve(f.getFileName()));
+            Files.copy(f, backup, REPLACE_EXISTING);
+        }
+
         forceCreateNewVirtualMachine("test_vm", normalConfig);
-        Files.copy(vmInstanceBackup.toPath(), vmInstance.toPath(), REPLACE_EXISTING);
+        for (Path f : Files.list(vmInstanceBackup).collect(toList())) {
+            Files.copy(f, vmInstance.resolve(f.getFileName()), REPLACE_EXISTING);
+        }
+
         assertThat(tryBootVm(TAG, "test_vm").payloadStarted).isTrue();
 
         // Launch the same VM with a different debug level. The Java API prohibits this
         // (thankfully).
         // For testing, we do that by creating a new VM with debug level, and copy the old instance
-        // image to the new VM instance image.
+        // to the new VM instance.
         VirtualMachineConfig debugConfig = builder.setDebugLevel(toLevel).build();
         forceCreateNewVirtualMachine("test_vm", debugConfig);
-        Files.copy(vmInstanceBackup.toPath(), vmInstance.toPath(), REPLACE_EXISTING);
+        for (Path f : Files.list(vmInstanceBackup).collect(toList())) {
+            Files.copy(f, vmInstance.resolve(f.getFileName()), REPLACE_EXISTING);
+        }
         assertThat(tryBootVm(TAG, "test_vm").payloadStarted).isFalse();
     }
 
@@ -2309,6 +2319,12 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         Context context = getContext();
         Path filePath = Paths.get(context.getDataDir().getPath(), "vm", vmName, fileName);
         return filePath.toFile();
+    }
+
+    private Path getVmDirectory(String vmName) {
+        Context context = getContext();
+        Path filePath = Paths.get(context.getDataDir().getPath(), "vm", vmName);
+        return filePath;
     }
 
     private void assertThrowsVmException(ThrowingRunnable runnable) {
