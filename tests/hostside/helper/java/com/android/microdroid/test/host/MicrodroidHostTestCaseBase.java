@@ -54,6 +54,8 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
     private static final String MICRODROID_SERIAL = "localhost:" + TEST_VM_ADB_PORT;
     private static final String INSTANCE_IMG = "instance.img";
     protected static final String VIRT_APEX = "/apex/com.android.virt/";
+    protected static final String SECRETKEEPER_AIDL =
+            "android.hardware.security.secretkeeper.ISecretkeeper/default";
 
     private static final long MICRODROID_ADB_CONNECT_TIMEOUT_MINUTES = 5;
     protected static final long MICRODROID_COMMAND_TIMEOUT_MILLIS = 30000;
@@ -206,6 +208,14 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
         CommandRunner android = new CommandRunner(getDevice());
         String result = android.run(VIRT_APEX + "bin/vm", "check-feature-enabled", feature);
         return result.contains("enabled");
+    }
+
+    public boolean isUpdatableVmSupported() throws DeviceNotAvailableException {
+        // Updatable VMs are possible iff device supports Secretkeeper.
+        CommandRunner android = new CommandRunner(getDevice());
+        String result = android.run("service check", SECRETKEEPER_AIDL);
+        boolean is_sk_supported = !result.contains("not found");
+        return is_sk_supported;
     }
 
     public List<String> getAssignableDevices() throws Exception {
