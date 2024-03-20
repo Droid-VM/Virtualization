@@ -53,6 +53,10 @@ pub struct CommonConfig {
     /// Run VM in protected mode.
     #[arg(short, long)]
     protected: bool,
+
+    /// Pass hugepages to Crosvm
+    #[arg(short, long)]
+    hugepages: bool,
 }
 
 #[derive(Args, Default)]

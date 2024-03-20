@@ -70,6 +70,13 @@ parcelable VirtualMachineRawConfig {
      */
     int gdbPort = 0;
 
+    /**
+     *  Ask the kernel for transparent huge-pages (THP). This is only a hint and
+     *  the kernel will allocate THP-backed memory only if globally enabled by
+     *  the system and if any can be found.
+     */
+    boolean hugePages = false;
+
     /** List of SysFS nodes of devices to be assigned */
     String[] devices;
 

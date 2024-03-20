@@ -49,6 +49,10 @@ pub struct VmPayloadConfig {
     /// files with integrity checking, but not confidentiality.
     #[serde(default)]
     pub enable_authfs: bool,
+
+    /// Whether to hint the kernel for using transparent huge-pages (THP)
+    #[serde(default)]
+    pub hugepages: bool,
 }
 
 /// OS config
