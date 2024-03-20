@@ -19,7 +19,6 @@
 //! The filesystem has to be mounted read only.
 
 mod inode;
-
 use anyhow::{Context as AnyhowContext, Result};
 use clap::{builder::ValueParser, Arg, ArgAction, Command};
 use fuse::filesystem::*;
@@ -319,7 +318,7 @@ impl fuse::filesystem::FileSystem for ZipFuse {
             Err(ebadf())
         }
     }
-
+    #[allow(clippy::unused_io_amount)]
     fn read<W: io::Write + ZeroCopyWriter>(
         &self,
         _ctx: Context,
