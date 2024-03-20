@@ -122,4 +122,11 @@ parcelable VirtualMachineAppConfig {
 
     /** Configuration parameters guarded by android.permission.USE_CUSTOM_VIRTUAL_MACHINE */
     @nullable CustomConfig customConfig;
+
+    /**
+     *  Ask the kernel for transparent huge-pages (THP). This is only a hint and
+     *  the kernel will allocate THP-backed memory only if globally enabled by
+     *  the system and if any can be found.
+     */
+    boolean hugePages = false;
 }
