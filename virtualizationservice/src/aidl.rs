@@ -346,6 +346,10 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
         Ok(certificate_chain)
     }
 
+    fn isRemoteAttestationSupported(&self) -> binder::Result<bool> {
+        remotely_provisioned_component_service_exists()
+    }
+
     fn getAssignableDevices(&self) -> binder::Result<Vec<AssignableDevice>> {
         check_use_custom_virtual_machine()?;
 
@@ -752,8 +756,12 @@ fn handle_tombstone(stream: &mut VsockStream) -> Result<()> {
     Ok(())
 }
 
+fn remotely_provisioned_component_service_exists() -> binder::Result<bool> {
+    Ok(binder::is_declared(REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME)?)
+}
+
 fn check_remotely_provisioned_component_service_exists() -> binder::Result<()> {
-    if binder::is_declared(REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME)? {
+    if remotely_provisioned_component_service_exists()? {
         Ok(())
     } else {
         Err(Status::new_exception_str(
