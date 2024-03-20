@@ -32,9 +32,8 @@ java_defaults {
     compile_multilib: "both",
 }
 
-android_test {
-    name: "MicrodroidTestApp",
-    defaults: ["MicrodroidTestAppsDefaults"],
+java_defaults {
+    name: "MicrodroidTestAppDefaultConfig",
     srcs: ["src/java/**/*.java"],
     static_libs: [
         "MicrodroidDeviceTestHelper",
@@ -61,6 +60,24 @@ android_test {
         ":test_microdroid_vendor_image",
         ":test_microdroid_vendor_image_unsigned",
     ],
+}
+
+android_test {
+    name: "MicrodroidTestApp",
+    defaults: [
+        "MicrodroidTestAppDefaultConfig",
+        "MicrodroidTestAppsDefaults",
+    ],
+    manifest: "AndroidManifestV5.xml",
+}
+
+android_test {
+    name: "MicrodroidTestAppUpdated",
+    defaults: [
+        "MicrodroidTestAppDefaultConfig",
+        "MicrodroidTestAppsDefaults",
+    ],
+    manifest: "AndroidManifestV6.xml",
 }
 
 // Defaults shared between MicrodroidTestNativeLib and MicrodroidPayloadInOtherAppNativeLib shared
