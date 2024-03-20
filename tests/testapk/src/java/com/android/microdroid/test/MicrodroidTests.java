@@ -67,6 +67,14 @@ import com.android.microdroid.test.vmshare.IVmShareTestService;
 import com.android.microdroid.testservice.IAppCallback;
 import com.android.microdroid.testservice.ITestService;
 import com.android.microdroid.testservice.IVmCallback;
+import com.android.virt.vm_attestation.testservice.IAttestationService;
+import com.android.virt.vm_attestation.testservice.IAttestationService.AttestationStatus;
+import com.android.virt.vm_attestation.testservice.IAttestationService.SigningResult;
+
+import co.nstant.in.cbor.CborDecoder;
+import co.nstant.in.cbor.model.Array;
+import co.nstant.in.cbor.model.DataItem;
+import co.nstant.in.cbor.model.MajorType;
 
 import com.google.common.base.Strings;
 import com.google.common.truth.BooleanSubject;
@@ -106,11 +114,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
-
-import co.nstant.in.cbor.CborDecoder;
-import co.nstant.in.cbor.model.Array;
-import co.nstant.in.cbor.model.DataItem;
-import co.nstant.in.cbor.model.MajorType;
 
 @RunWith(Parameterized.class)
 public class MicrodroidTests extends MicrodroidDeviceTestBase {
@@ -163,6 +166,8 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     private static final long MIN_MEM_ARM64 = 170 * ONE_MEBI;
     private static final long MIN_MEM_X86_64 = 196 * ONE_MEBI;
     private static final String EXAMPLE_STRING = "Literally any string!! :)";
+    private static final String VM_ATTESTATION_PAYLOAD_PATH = "libvm_attestation_test_payload.so";
+    private static final String VM_ATTESTATION_MESSAGE = "Hello RKP from AVF!";
 
     private static final String VM_SHARE_APP_PACKAGE_NAME = "com.android.microdroid.vmshare_app";
 
@@ -198,6 +203,59 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
     @Test
     @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
+    public void testRequestAttestation() throws Exception {
+        // pVM remote attestation is only supported on protected VMs.
+        assumeProtectedVM();
+        assumeFeatureEnabled(VirtualMachineManager.FEATURE_REMOTE_ATTESTATION);
+        VirtualMachineConfig config =
+                newVmConfigBuilderWithPayloadBinary(VM_ATTESTATION_PAYLOAD_PATH)
+                        .setProtectedVm(mProtectedVm)
+                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .build();
+        VirtualMachine vm =
+                forceCreateNewVirtualMachine("cts_attestation_with_rkpd_client", config);
+        byte[] challenge = new byte[32];
+        Arrays.fill(challenge, (byte) 0xac);
+
+        // Act.
+        CompletableFuture<Exception> exception = new CompletableFuture<>();
+        CompletableFuture<Boolean> payloadReady = new CompletableFuture<>();
+        CompletableFuture<SigningResult> signingResultFuture = new CompletableFuture<>();
+        VmEventListener listener =
+                new VmEventListener() {
+                    @Override
+                    public void onPayloadReady(VirtualMachine vm) {
+                        payloadReady.complete(true);
+                        try {
+                            IAttestationService service =
+                                    IAttestationService.Stub.asInterface(
+                                            vm.connectToVsockServer(IAttestationService.PORT));
+                            signingResultFuture.complete(
+                                    service.signWithAttestationKey(
+                                            challenge, VM_ATTESTATION_MESSAGE.getBytes()));
+                        } catch (Exception e) {
+                            exception.complete(e);
+                        } finally {
+                            forceStop(vm);
+                        }
+                    }
+                };
+        listener.runToFinish(TAG, vm);
+
+        // Assert.
+        assertThat(payloadReady.getNow(false)).isTrue();
+        assertThat(exception.getNow(null)).isNull();
+        SigningResult signingResult = signingResultFuture.getNow(null);
+        assertThat(signingResult).isNotNull();
+        assertThat(signingResult.status)
+                .isNotEqualTo(AttestationStatus.ATTESTATION_ERROR_INVALID_CHALLENGE);
+        // TODO(b/329652894): Asserts that when remote attestation is not supported,
+        // signingResult.status == AttestationStatus.NOT_SUPPORTED, otherwise
+        // signingResult.status != AttestationStatus.NOT_SUPPORTED
+    }
+
+    @Test
+    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
     public void createAndConnectToVm() throws Exception {
         createAndConnectToVmHelper(CPU_TOPOLOGY_ONE_CPU);
     }
@@ -228,6 +286,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         testResults.assertNoException();
         assertThat(testResults.mAddInteger).isEqualTo(37 + 73);
     }
+
     @Test
     @CddTest(requirements = {"9.17/C-1-1"})
     public void autoCloseVm() throws Exception {
@@ -644,7 +703,6 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         VirtualMachineConfig.Builder otherOsBuilder =
                 newBaselineBuilder().setOs("microdroid_gki-android14-6.1");
         assertConfigCompatible(microdroidOsConfig, otherOsBuilder).isFalse();
-
     }
 
     private VirtualMachineConfig.Builder newBaselineBuilder() {
@@ -777,11 +835,12 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
-    @CddTest(requirements = {
-            "9.17/C-1-1",
-            "9.17/C-1-2",
-            "9.17/C-1-4",
-    })
+    @CddTest(
+            requirements = {
+                "9.17/C-1-1",
+                "9.17/C-1-2",
+                "9.17/C-1-4",
+            })
     public void createVmWithConfigRequiresPermission() throws Exception {
         assumeSupportedDevice();
         revokePermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
@@ -797,14 +856,16 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         SecurityException e =
                 assertThrows(
                         SecurityException.class, () -> runVmTestService(TAG, vm, (ts, tr) -> {}));
-        assertThat(e).hasMessageThat()
+        assertThat(e)
+                .hasMessageThat()
                 .contains("android.permission.USE_CUSTOM_VIRTUAL_MACHINE permission");
     }
 
     @Test
-    @CddTest(requirements = {
-            "9.17/C-1-1",
-    })
+    @CddTest(
+            requirements = {
+                "9.17/C-1-1",
+            })
     public void deleteVm() throws Exception {
         assumeSupportedDevice();
 
@@ -861,9 +922,10 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
-    @CddTest(requirements = {
-            "9.17/C-1-1",
-    })
+    @CddTest(
+            requirements = {
+                "9.17/C-1-1",
+            })
     public void validApkPathIsAccepted() throws Exception {
         assumeSupportedDevice();
 
@@ -896,10 +958,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
-    @CddTest(requirements = {
-            "9.17/C-1-1",
-            "9.17/C-2-1"
-    })
+    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
     public void extraApk() throws Exception {
         assumeSupportedDevice();
 
@@ -951,7 +1010,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
     @Test
     public void bootFailsWhenLowMem() throws Exception {
-        for (int memMib : new int[]{ 10, 20, 40 }) {
+        for (int memMib : new int[] {10, 20, 40}) {
             VirtualMachineConfig lowMemConfig =
                     newVmConfigBuilderWithPayloadBinary("MicrodroidTestNativeLib.so")
                             .setMemoryBytes(memMib)
@@ -968,8 +1027,9 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                             onPayloadReadyExecuted.complete(true);
                             super.onPayloadReady(vm);
                         }
+
                         @Override
-                        public void onStopped(VirtualMachine vm,  int reason) {
+                        public void onStopped(VirtualMachine vm, int reason) {
                             onStoppedExecuted.complete(true);
                             super.onStopped(vm, reason);
                         }
@@ -1064,10 +1124,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
-    @CddTest(requirements = {
-            "9.17/C-1-1",
-            "9.17/C-2-7"
-    })
+    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-7"})
     public void instancesOfSameVmHaveDifferentCdis() throws Exception {
         assumeSupportedDevice();
         // TODO(b/325094712): VMs on CF with same payload have the same secret. This is because
@@ -1093,10 +1150,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
-    @CddTest(requirements = {
-            "9.17/C-1-1",
-            "9.17/C-2-7"
-    })
+    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-7"})
     public void sameInstanceKeepsSameCdis() throws Exception {
         assumeSupportedDevice();
         assume().withMessage("Skip on CF. Too Slow. b/257270529").that(isCuttlefish()).isFalse();
@@ -1159,10 +1213,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
-    @CddTest(requirements = {
-            "9.17/C-1-1",
-            "9.17/C-1-2"
-    })
+    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-1-2"})
     public void accessToCdisIsRestricted() throws Exception {
         assumeSupportedDevice();
 
@@ -1219,8 +1270,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
     private void assertThatPartitionIsMissing(UUID partitionUuid) throws Exception {
         RandomAccessFile instanceFile = prepareInstanceImage("test_vm_integrity");
-        assertThat(findPartitionDataOffset(instanceFile, partitionUuid).isPresent())
-                .isFalse();
+        assertThat(findPartitionDataOffset(instanceFile, partitionUuid).isPresent()).isFalse();
     }
 
     // Flips a bit of given partition, and then see if boot fails.
@@ -1240,19 +1290,13 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
-    @CddTest(requirements = {
-            "9.17/C-1-1",
-            "9.17/C-2-7"
-    })
+    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-7"})
     public void bootFailsWhenMicrodroidDataIsCompromised() throws Exception {
         assertThatBootFailsAfterCompromisingPartition(MICRODROID_PARTITION_UUID);
     }
 
     @Test
-    @CddTest(requirements = {
-            "9.17/C-1-1",
-            "9.17/C-2-7"
-    })
+    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-7"})
     public void bootFailsWhenPvmFwDataIsCompromised() throws Exception {
         if (mProtectedVm) {
             assertThatBootFailsAfterCompromisingPartition(PVM_FW_PARTITION_UUID);
@@ -1272,8 +1316,8 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
         BootResult bootResult = tryBootVmWithConfig(config, "test_vm_invalid_config");
         assertThat(bootResult.payloadStarted).isFalse();
-        assertThat(bootResult.deathReason).isEqualTo(
-                VirtualMachineCallback.STOP_REASON_MICRODROID_INVALID_PAYLOAD_CONFIG);
+        assertThat(bootResult.deathReason)
+                .isEqualTo(VirtualMachineCallback.STOP_REASON_MICRODROID_INVALID_PAYLOAD_CONFIG);
     }
 
     @Test
@@ -2333,5 +2377,4 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         }
         return 0;
     }
-
 }
