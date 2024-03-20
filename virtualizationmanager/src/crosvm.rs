@@ -415,7 +415,7 @@ impl VmInstance {
     /// the VM to prevent indefinite hangup and update the payload_state accordingly.
     fn monitor_payload_hangup(&self, child: Arc<SharedChild>) {
         debug!("Starting to monitor hangup for Microdroid({})", child.id());
-        let (_, result) = self
+        let (_unused, result) = self
             .payload_state_updated
             .wait_timeout_while(self.payload_state.lock().unwrap(), *BOOT_HANGUP_TIMEOUT, |s| {
                 *s < PayloadState::Started
