@@ -34,7 +34,7 @@ use std::num::NonZeroU16;
 use std::path::{Path, PathBuf};
 
 #[derive(Debug)]
-struct Idsigs(Vec<PathBuf>);
+struct Idsigs(());
 
 #[derive(Args, Default)]
 /// Collection of flags that are at VM level and therefore applicable to all subcommands
