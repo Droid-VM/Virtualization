@@ -313,6 +313,16 @@ impl IVirtualizationService for VirtualizationService {
     fn enableTestAttestation(&self) -> binder::Result<()> {
         GLOBAL_SERVICE.enableTestAttestation()
     }
+
+    fn isRemoteAttestationSupported(&self) -> binder::Result<bool> {
+        remotely_provisioned_component_service_exists()
+    }
+}
+
+fn remotely_provisioned_component_service_exists() -> binder::Result<bool> {
+    const REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME: &str =
+        "android.hardware.security.keymint.IRemotelyProvisionedComponent/avf";
+    binder::is_declared(REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME)
 }
 
 impl VirtualizationService {
