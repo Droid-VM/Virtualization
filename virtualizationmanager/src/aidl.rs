@@ -596,6 +596,7 @@ impl VirtualizationService {
             vfio_devices,
             dtbo,
             device_tree_overlay,
+            huge_pages: config.hugePages,
         };
         let instance = Arc::new(
             VmInstance::new(
@@ -861,6 +862,8 @@ fn load_app_config(
     vm_config.name = config.name.clone();
     vm_config.protectedVm = config.protectedVm;
     vm_config.cpuTopology = config.cpuTopology;
+
+    vm_config.hugePages = vm_payload_config.huge_pages;
 
     // Microdroid takes additional init ramdisk & (optionally) storage image
     add_microdroid_system_images(config, instance_file, storage_image, os_name, &mut vm_config)?;

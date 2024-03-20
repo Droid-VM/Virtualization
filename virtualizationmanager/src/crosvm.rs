@@ -118,6 +118,7 @@ pub struct CrosvmConfig {
     pub vfio_devices: Vec<VfioDevice>,
     pub dtbo: Option<File>,
     pub device_tree_overlay: Option<File>,
+    pub huge_pages: bool,
 }
 
 /// A disk image to pass to crosvm for a VM.
@@ -926,6 +927,10 @@ fn run_vm(
 
     if let Some(dt_overlay) = &config.device_tree_overlay {
         command.arg("--device-tree-overlay").arg(add_preserved_fd(&mut preserved_fds, dt_overlay));
+    }
+
+    if config.huge_pages {
+        command.arg("--hugepages");
     }
 
     append_platform_devices(&mut command, &mut preserved_fds, &config)?;
