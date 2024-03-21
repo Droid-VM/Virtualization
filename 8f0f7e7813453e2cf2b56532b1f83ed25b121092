@@ -179,6 +179,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e06ceb3d_deba8bfb",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-21T14:31:47Z",
+      "side": 1,
+      "message": "\u003e If a salt has been recorded, shouldn\u0027t we always use it in this \"legacy\" mode?\n\nI dont follow, the salt field is obsolete when `llpvm_changes` is `false`  \u0026 can be anything (in this particular implementation, it will be exactly equal to salt_from_instance_id()). Is this the leagcy mode you are referring to?\n\n\n\u003e In particular as we\u0027re telling the guest that new_instance\u003dfalse?\n\nThe new-instance is unrelated to salt. It is used to ensure host can\u0027t inject empty Microdroid partition into instance.img while keeping the valid non-empty pvmfw partition, fooling Microdroid into booting different payloads \u0026 leaking secrets. [When the expectation is do-not-defer-rbp]\n\n\n\u003e llpvm_changes flags covers both implementing Sk, and switching to use instance ID\n\nYes, that is true. To elaborate on this:\n\nllpvm_changes \u003d true \u003d\u003e salt is obsolte, but Secretkeeper may or may not be present.\n\nSecretkeeper present \u0026\u0026 llpvm_changes is false \u003d\u003e Hopefully should never happen, possibly untested path\n\nSecretkeeper absent \u0026\u0026 llpvm_changes is false \u003d\u003e Pre Q3 Android, insatance.img is used with salt, code hashes \u0026 everything",
+      "parentUuid": "2a133d9e_70a413d5",
+      "range": {
+        "startLine": 167,
+        "startChar": 20,
+        "endLine": 167,
+        "endChar": 47
+      },
+      "revId": "8f0f7e7813453e2cf2b56532b1f83ed25b121092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2b7e0426_c278533f",
         "filename": "pvmfw/src/main.rs",
         "patchSetId": 6
