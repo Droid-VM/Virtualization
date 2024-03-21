@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a509b3d3_6077b8da",
+        "filename": "service_vm/manager/src/lib.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-21T15:54:41Z",
+      "side": 1,
+      "message": "Done. Increased this to 5 seconds. It should be fine since this is only for tests.",
+      "parentUuid": "f8159a6e_e8b09cca",
+      "range": {
+        "startLine": 116,
+        "startChar": 68,
+        "endLine": 116,
+        "endChar": 69
+      },
+      "revId": "6d399072ddbfbb37616924e1e018c6291c4a50f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6beeb44d_a59da8f6",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-21T15:34:20Z",
       "side": 1,
       "message": "That comment could do with rewording, since this method isn\u0027t actually doing any of those things.",
+      "range": {
+        "startLine": 269,
+        "startChar": 0,
+        "endLine": 270,
+        "endChar": 84
+      },
+      "revId": "6d399072ddbfbb37616924e1e018c6291c4a50f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b93dcdc0_1be45819",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-21T15:54:41Z",
+      "side": 1,
+      "message": "Done. I rephrased this.",
+      "parentUuid": "6beeb44d_a59da8f6",
       "range": {
         "startLine": 269,
         "startChar": 0,
