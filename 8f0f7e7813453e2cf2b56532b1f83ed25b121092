@@ -108,6 +108,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b7f3d7c_94f8ebee",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-21T11:42:45Z",
+      "side": 1,
+      "message": "\u003e ```\n\u003e salt \u003d if (llpvm_changes) {salt_from_instance_id(fdt)?} else {entry.salt}\n\u003e ```\n\nIf a salt has been recorded, shouldn\u0027t we always use it in this \"legacy\" mode?\n\nIn particular as we\u0027re telling the guest that `new_instance\u003dfalse`?\n\nOtherwise, this would act as a backdoor for the host to inject its own salt, right?",
+      "parentUuid": "b842b495_7dbd3422",
+      "range": {
+        "startLine": 167,
+        "startChar": 20,
+        "endLine": 167,
+        "endChar": 47
+      },
+      "revId": "8f0f7e7813453e2cf2b56532b1f83ed25b121092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "141c7b49_65e4e201",
         "filename": "pvmfw/src/main.rs",
         "patchSetId": 6
@@ -143,6 +167,30 @@
       "side": 1,
       "message": "Yep, I\u0027ll add a \\",
       "parentUuid": "141c7b49_65e4e201",
+      "range": {
+        "startLine": 256,
+        "startChar": 0,
+        "endLine": 257,
+        "endChar": 47
+      },
+      "revId": "8f0f7e7813453e2cf2b56532b1f83ed25b121092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "000f1611_0b0e4f4c",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-03-21T11:42:45Z",
+      "side": 1,
+      "message": "Or\n```\nerror!(\"Dice measurements do not match recorded entry: {e}\");\nerror!(\"This may be the result of an update.\");\n```\nso that the logs also have the multi-line but don\u0027t miss `\"[ERROR]\"`?",
+      "parentUuid": "cbfdc4d4_cbb8db40",
       "range": {
         "startLine": 256,
         "startChar": 0,
