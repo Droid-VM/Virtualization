@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00cdab6a_19572a4c",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-21T11:23:40Z",
+      "side": 1,
+      "message": "Restore diffs in vm_secrets.rs. They got lost somehow in rebases.",
+      "revId": "8f0f7e7813453e2cf2b56532b1f83ed25b121092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5cabce42_4a7c295c",
         "filename": "pvmfw/src/main.rs",
         "patchSetId": 6
@@ -43,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "355200d5_9755a690",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-21T11:23:40Z",
+      "side": 1,
+      "message": "This actually should be\n\n```\nsalt \u003d if (llpvm_changes) {salt_from_instance_id(fdt)?} else {entry.salt}\n```\nughh, this patch shouldve failed many encryptedstorage tests on branches that do not have llpvm_changes enabled, but we don\u0027t have presubmits running on those. Thanks for catching this. I\u0027ll fix it.",
+      "parentUuid": "5cabce42_4a7c295c",
+      "range": {
+        "startLine": 167,
+        "startChar": 20,
+        "endLine": 167,
+        "endChar": 47
+      },
+      "revId": "8f0f7e7813453e2cf2b56532b1f83ed25b121092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "141c7b49_65e4e201",
         "filename": "pvmfw/src/main.rs",
         "patchSetId": 6
@@ -54,6 +95,30 @@
       "writtenOn": "2024-03-21T11:15:03Z",
       "side": 1,
       "message": "Unintentional multi-line string?",
+      "range": {
+        "startLine": 256,
+        "startChar": 0,
+        "endLine": 257,
+        "endChar": 47
+      },
+      "revId": "8f0f7e7813453e2cf2b56532b1f83ed25b121092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbfdc4d4_cbb8db40",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-21T11:23:40Z",
+      "side": 1,
+      "message": "Yep, I\u0027ll add a \\",
+      "parentUuid": "141c7b49_65e4e201",
       "range": {
         "startLine": 256,
         "startChar": 0,
