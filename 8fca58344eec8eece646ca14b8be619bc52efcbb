@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee78c8a1_74fd2b88",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-21T15:46:48Z",
+      "side": 1,
+      "message": "This requires the API added in the next cl (aosp/3007619). As that cl requires several different reviews, I prefer to keep it small and focused to facilitate the review.",
+      "parentUuid": "dd13d5c3_0a9554ca",
+      "range": {
+        "startLine": 221,
+        "startChar": 5,
+        "endLine": 221,
+        "endChar": 100
+      },
+      "revId": "8fca58344eec8eece646ca14b8be619bc52efcbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfb9230d_ebb418b4",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-21T15:25:06Z",
       "side": 1,
       "message": "Can we also assert that the result should not be UNSUPPORTED?",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 247,
+        "endChar": 53
+      },
+      "revId": "8fca58344eec8eece646ca14b8be619bc52efcbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94a9a35b_e4d6c84d",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-21T15:46:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfb9230d_ebb418b4",
       "range": {
         "startLine": 244,
         "startChar": 0,
