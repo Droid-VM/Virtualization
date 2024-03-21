@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b88508d_605c3374",
+        "filename": "service_vm/manager/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-21T12:47:14Z",
+      "side": 1,
+      "message": "This option is fine since we only reach here when the file doesn\u0027t exist.",
+      "parentUuid": "2246adfe_ab7ec979",
+      "revId": "5e427fbcd14c7d16f34f88f8bc264ef46d85b5a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "061d1eda_7449de3d",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "It looks like `IdSigs` is entirely unused, can you just remove it?",
       "parentUuid": "061d1eda_7449de3d",
+      "revId": "5e427fbcd14c7d16f34f88f8bc264ef46d85b5a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cb45047_cb9318c0",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-21T12:47:14Z",
+      "side": 1,
+      "message": "Good idea. Removed in https://r.android.com/3009155",
+      "parentUuid": "5f063895_e630d86e",
       "revId": "5e427fbcd14c7d16f34f88f8bc264ef46d85b5a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
