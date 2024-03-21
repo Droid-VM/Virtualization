@@ -218,15 +218,32 @@ impl IVirtualizationService for VirtualizationService {
         log_fd: Option<&ParcelFileDescriptor>,
     ) -> binder::Result<Strong<dyn IVirtualMachine>> {
         let mut is_protected = false;
-        let ret = self.create_vm_internal(
-            config,
-            console_out_fd,
-            console_in_fd,
-            log_fd,
-            &mut is_protected,
-        );
-        write_vm_creation_stats(config, is_protected, &ret);
-        ret
+        if let VirtualMachineConfig::RawConfigFromPath(raw_config_from_path) = config {
+            let vm_config_file = File::open(&raw_config_from_path.rawConfigPath)
+                .or_service_specific_exception(-1)?;
+            let vm_config = VmConfig::load(&vm_config_file).or_service_specific_exception(-1)?;
+            let raw_config = vm_config.to_parcelable().or_service_specific_exception(-1)?;
+            let config = VirtualMachineConfig::RawConfig(raw_config);
+            let ret = self.create_vm_internal(
+                &config,
+                console_out_fd,
+                console_in_fd,
+                log_fd,
+                &mut is_protected,
+            );
+            write_vm_creation_stats(&config, is_protected, &ret);
+            ret
+        } else {
+            let ret = self.create_vm_internal(
+                config,
+                console_out_fd,
+                console_in_fd,
+                log_fd,
+                &mut is_protected,
+            );
+            write_vm_creation_stats(config, is_protected, &ret);
+            ret
+        }
     }
 
     /// Allocate a new instance_id to the VM
@@ -466,6 +483,9 @@ impl VirtualizationService {
                     })?;
                 (true, BorrowedOrOwned::Owned(config))
             }
+            VirtualMachineConfig::RawConfigFromPath(_) => {
+                panic!("RawConfigFromPath must be already converted to RawConfig here")
+            }
         };
         let config = config.as_ref();
         *is_protected = config.protectedVm;
@@ -630,6 +650,9 @@ fn is_custom_config(config: &VirtualMachineConfig) -> bool {
                     }
                 }
             }
+        }
+        VirtualMachineConfig::RawConfigFromPath(_) => {
+            panic!("RawConfigFromPath must be already converted to RawConfig here")
         }
     }
 }
@@ -1289,6 +1312,9 @@ fn is_protected(config: &VirtualMachineConfig) -> bool {
     match config {
         VirtualMachineConfig::RawConfig(config) => config.protectedVm,
         VirtualMachineConfig::AppConfig(config) => config.protectedVm,
+        VirtualMachineConfig::RawConfigFromPath(_) => {
+            panic!("RawConfigFromPath must be already converted to RawConfig here")
+        }
     }
 }
 
@@ -1308,6 +1334,9 @@ fn check_gdb_allowed(config: &VirtualMachineConfig) -> binder::Result<()> {
                 Ok(())
             }
         }
+        VirtualMachineConfig::RawConfigFromPath(_) => {
+            panic!("RawConfigFromPath must be already converted to RawConfig here")
+        }
     }
 }
 
@@ -1315,6 +1344,9 @@ fn extract_instance_id(config: &VirtualMachineConfig) -> [u8; 64] {
     match config {
         VirtualMachineConfig::RawConfig(config) => config.instanceId,
         VirtualMachineConfig::AppConfig(config) => config.instanceId,
+        VirtualMachineConfig::RawConfigFromPath(_) => {
+            panic!("RawConfigFromPath must be already converted to RawConfig here")
+        }
     }
 }
 
@@ -1323,6 +1355,9 @@ fn extract_gdb_port(config: &VirtualMachineConfig) -> Option<NonZeroU16> {
         VirtualMachineConfig::RawConfig(config) => NonZeroU16::new(config.gdbPort as u16),
         VirtualMachineConfig::AppConfig(config) => {
             NonZeroU16::new(config.customConfig.as_ref().map(|c| c.gdbPort).unwrap_or(0) as u16)
+        }
+        VirtualMachineConfig::RawConfigFromPath(_) => {
+            panic!("RawConfigFromPath must be already converted to RawConfig here")
         }
     }
 }

@@ -38,6 +38,7 @@ import android.os.PersistableBundle;
 import android.sysprop.HypervisorProperties;
 import android.system.virtualizationservice.VirtualMachineAppConfig;
 import android.system.virtualizationservice.VirtualMachinePayloadConfig;
+import android.system.virtualizationservice.VirtualMachineRawConfigFromPath;
 import android.util.Log;
 
 import com.android.system.virtualmachine.flags.Flags;
@@ -77,6 +78,7 @@ public final class VirtualMachineConfig {
     private static final String KEY_PACKAGENAME = "packageName";
     private static final String KEY_APKPATH = "apkPath";
     private static final String KEY_PAYLOADCONFIGPATH = "payloadConfigPath";
+    private static final String KEY_RAWCONFIGPATH = "rawConfigPath";
     private static final String KEY_PAYLOADBINARYNAME = "payloadBinaryPath";
     private static final String KEY_DEBUGLEVEL = "debugLevel";
     private static final String KEY_PROTECTED_VM = "protectedVm";
@@ -172,6 +174,9 @@ public final class VirtualMachineConfig {
     /** Name of the payload binary file within the APK that will be executed within the VM. */
     @Nullable private final String mPayloadBinaryName;
 
+    /** Path within the raw config file to launch the VM. */
+    @Nullable private final String mRawConfigPath;
+
     /** The size of storage in bytes. 0 indicates that encryptedStorage is not required */
     private final long mEncryptedStorageBytes;
 
@@ -192,6 +197,7 @@ public final class VirtualMachineConfig {
             List<String> extraApks,
             @Nullable String payloadConfigPath,
             @Nullable String payloadBinaryName,
+            @Nullable String rawConfigPath,
             @DebugLevel int debugLevel,
             boolean protectedVm,
             long memoryBytes,
@@ -211,6 +217,7 @@ public final class VirtualMachineConfig {
                                 Arrays.asList(extraApks.toArray(new String[0])));
         mPayloadConfigPath = payloadConfigPath;
         mPayloadBinaryName = payloadBinaryName;
+        mRawConfigPath = rawConfigPath;
         mDebugLevel = debugLevel;
         mProtectedVm = protectedVm;
         mMemoryBytes = memoryBytes;
@@ -272,10 +279,15 @@ public final class VirtualMachineConfig {
         }
 
         String payloadConfigPath = b.getString(KEY_PAYLOADCONFIGPATH);
-        if (payloadConfigPath == null) {
-            builder.setPayloadBinaryName(b.getString(KEY_PAYLOADBINARYNAME));
-        } else {
+        String payloadBinary = b.getString(KEY_PAYLOADBINARYNAME);
+        String rawConfigPath = b.getString(KEY_RAWCONFIGPATH);
+
+        if (payloadBinary != null) {
+            builder.setPayloadBinaryName(payloadBinary);
+        } else if (payloadConfigPath != null) {
             builder.setPayloadConfigPath(payloadConfigPath);
+        } else if (rawConfigPath != null) {
+            builder.setRawConfigPath(rawConfigPath);
         }
 
         @DebugLevel int debugLevel = b.getInt(KEY_DEBUGLEVEL);
@@ -337,6 +349,7 @@ public final class VirtualMachineConfig {
         }
         b.putString(KEY_PAYLOADCONFIGPATH, mPayloadConfigPath);
         b.putString(KEY_PAYLOADBINARYNAME, mPayloadBinaryName);
+        b.putString(KEY_RAWCONFIGPATH, mRawConfigPath);
         b.putInt(KEY_DEBUGLEVEL, mDebugLevel);
         b.putBoolean(KEY_PROTECTED_VM, mProtectedVm);
         b.putInt(KEY_CPU_TOPOLOGY, mCpuTopology);
@@ -394,6 +407,17 @@ public final class VirtualMachineConfig {
     @Nullable
     public String getPayloadConfigPath() {
         return mPayloadConfigPath;
+    }
+
+    /**
+     * Returns the path within the APK to the payload config file that defines software aspects of
+     * the VM.
+     *
+     * @hide
+     */
+    @Nullable
+    public String getRawConfigPath() {
+        return mRawConfigPath;
     }
 
     /**
@@ -538,6 +562,12 @@ public final class VirtualMachineConfig {
                 && Objects.equals(this.mExtraApks, other.mExtraApks);
     }
 
+    VirtualMachineRawConfigFromPath toVsRawConfigFromPath() {
+        VirtualMachineRawConfigFromPath config = new VirtualMachineRawConfigFromPath();
+        config.rawConfigPath = mRawConfigPath;
+        return config;
+    }
+
     /**
      * Converts this config object into the parcelable type used when creating a VM via the
      * virtualization service. Notice that the files are not passed as paths, but as file
@@ -664,6 +694,7 @@ public final class VirtualMachineConfig {
         @Nullable private String mApkPath;
         private final List<String> mExtraApks = new ArrayList<>();
         @Nullable private String mPayloadConfigPath;
+        @Nullable private String mRawConfigPath;
         @Nullable private String mPayloadBinaryName;
         @DebugLevel private int mDebugLevel = DEBUG_LEVEL_NONE;
         private boolean mProtectedVm;
@@ -715,31 +746,38 @@ public final class VirtualMachineConfig {
             }
 
             String os = null;
-            if (mPayloadBinaryName == null) {
-                if (mPayloadConfigPath == null) {
-                    throw new IllegalStateException("setPayloadBinaryName must be called");
-                }
-                if (mOs != null) {
-                    throw new IllegalStateException(
-                            "setPayloadConfigPath and setOs may not both be called");
-                }
-                if (!mExtraApks.isEmpty()) {
-                    throw new IllegalStateException(
-                            "setPayloadConfigPath and addExtraApk may not both be called");
+            if (mRawConfigPath != null) {
+                if (mPayloadBinaryName != null || mPayloadConfigPath != null) {
+                    throw new IllegalStateException("rawConfig and payload may not both be called");
                 }
             } else {
-                if (mPayloadConfigPath != null) {
-                    throw new IllegalStateException(
-                            "setPayloadBinaryName and setPayloadConfigPath may not both be called");
-                }
-                if (mOs != null) {
-                    os = mOs;
+                if (mPayloadBinaryName == null) {
+                    if (mPayloadConfigPath == null) {
+                        throw new IllegalStateException("setPayloadBinaryName must be called");
+                    }
+                    if (mOs != null) {
+                        throw new IllegalStateException(
+                                "setPayloadConfigPath and setOs may not both be called");
+                    }
+                    if (!mExtraApks.isEmpty()) {
+                        throw new IllegalStateException(
+                                "setPayloadConfigPath and addExtraApk may not both be called");
+                    }
                 } else {
-                    os = DEFAULT_OS;
+                    if (mPayloadConfigPath != null) {
+                        throw new IllegalStateException(
+                                "setPayloadBinaryName and setPayloadConfigPath may not both be"
+                                        + " called");
+                    }
+                    if (mOs != null) {
+                        os = mOs;
+                    } else {
+                        os = DEFAULT_OS;
+                    }
                 }
             }
 
-            if (!mProtectedVmSet) {
+            if (!mProtectedVmSet && mRawConfigPath == null) {
                 throw new IllegalStateException("setProtectedVm must be called explicitly");
             }
 
@@ -757,6 +795,7 @@ public final class VirtualMachineConfig {
                     mExtraApks,
                     mPayloadConfigPath,
                     mPayloadBinaryName,
+                    mRawConfigPath,
                     mDebugLevel,
                     mProtectedVm,
                     mMemoryBytes,
@@ -814,6 +853,19 @@ public final class VirtualMachineConfig {
         public Builder setPayloadConfigPath(@NonNull String payloadConfigPath) {
             mPayloadConfigPath =
                     requireNonNull(payloadConfigPath, "payloadConfigPath must not be null");
+            return this;
+        }
+
+        /**
+         * Sets the path within the raw config file to launch the VM. The file is a JSON file; see
+         * packages/modules/Virtualization/libs/vmconfig/src/lib.rs for the format.
+         *
+         * @hide
+         */
+        @RequiresPermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION)
+        @NonNull
+        public Builder setRawConfigPath(@NonNull String rawConfigPath) {
+            mRawConfigPath = requireNonNull(rawConfigPath, "rawConfigPath must not be null");
             return this;
         }
 
