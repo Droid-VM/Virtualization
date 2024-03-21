@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8017ac1_57e22ef9",
+        "filename": "service_vm/manager/src/lib.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-21T10:19:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7722e51_8d543c34",
+      "range": {
+        "startLine": 82,
+        "startChar": 5,
+        "endLine": 82,
+        "endChar": 38
+      },
+      "revId": "395182708269f445a78ee34ce3677c9fec12af30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd170550_4df8029d",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-03-20T10:07:29Z",
       "side": 1,
       "message": "This looks pretty weird. And using exactly 1s here and in the production code suggests this may be racy.\n\nCan we more specifically wait for it to have actually exited?\n\n\n\u003d\u003d\u003d\u003d\nPlease fix this WARNING reported by Check Contents: Do not use \"Thread.sleep()\". Please see go/avoid-thread-sleep for more details.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nDo not use \"Thread.sleep()\". Please see go/avoid-thread-sleep for more details.",
+      "range": {
+        "startLine": 83,
+        "startChar": 8,
+        "endLine": 83,
+        "endChar": 20
+      },
+      "revId": "395182708269f445a78ee34ce3677c9fec12af30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fd49a8b_0b50b8fe",
+        "filename": "service_vm/test_apk/src/java/com/android/virt/vm_attestation/testapp/VmAttestationTests.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-21T10:19:23Z",
+      "side": 1,
+      "message": "I changed this to a wait and invoked the method directly in `enableTestAttestation()`, so no change is needed for this test.",
+      "parentUuid": "fd170550_4df8029d",
       "range": {
         "startLine": 83,
         "startChar": 8,
