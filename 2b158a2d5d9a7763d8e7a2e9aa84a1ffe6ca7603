@@ -16,6 +16,29 @@
       "message": "Hi Michael! This patch adds a @TestApi isUpdatableVmSupported() to VirtualMachineManager.java \u0026 hence require API review. PTAL",
       "revId": "2b158a2d5d9a7763d8e7a2e9aa84a1ffe6ca7603",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d116d0f5_a0c75e4b",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-03-21T14:45:11Z",
+      "side": 1,
+      "message": "Should this protected by manage virtual machine permission?",
+      "range": {
+        "startLine": 406,
+        "startChar": 0,
+        "endLine": 406,
+        "endChar": 76
+      },
+      "revId": "2b158a2d5d9a7763d8e7a2e9aa84a1ffe6ca7603",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
