@@ -94,6 +94,30 @@
       },
       "revId": "130bd904a58694f8f1108c79ddee950aa9f5ad15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed005317_eabf9507",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-21T17:56:14Z",
+      "side": 1,
+      "message": "So you prefer to add another IPC round trip rather than changing sepolicy?\nTBF this is only for tests, so it\u0027s not exactly performance critical.",
+      "parentUuid": "4340b535_38d1360e",
+      "range": {
+        "startLine": 319,
+        "startChar": 7,
+        "endLine": 319,
+        "endChar": 53
+      },
+      "revId": "130bd904a58694f8f1108c79ddee950aa9f5ad15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
