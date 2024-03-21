@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0fc6f26c_fcce2da7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-21T15:51:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18cd8d6d_6e1db8ed",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 0
+      },
+      "revId": "8f0f7e7813453e2cf2b56532b1f83ed25b121092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "630f51ce_c6f7279a",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
@@ -54,6 +78,24 @@
       "writtenOn": "2024-03-21T11:23:40Z",
       "side": 1,
       "message": "Restore diffs in vm_secrets.rs. They got lost somehow in rebases.",
+      "revId": "8f0f7e7813453e2cf2b56532b1f83ed25b121092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77dbd8c0_e2cc99db",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-21T15:51:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00cdab6a_19572a4c",
       "revId": "8f0f7e7813453e2cf2b56532b1f83ed25b121092",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -201,6 +243,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "beb137e7_4c3c7e79",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-21T15:51:21Z",
+      "side": 1,
+      "message": "I believe this is resolved?",
+      "parentUuid": "e06ceb3d_deba8bfb",
+      "range": {
+        "startLine": 167,
+        "startChar": 20,
+        "endLine": 167,
+        "endChar": 47
+      },
+      "revId": "8f0f7e7813453e2cf2b56532b1f83ed25b121092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b7e0426_c278533f",
@@ -214,6 +280,30 @@
       "writtenOn": "2024-03-21T13:17:34Z",
       "side": 1,
       "message": "Given the comment above, can we invert the sense of the if, and have an early return Ok(())?",
+      "range": {
+        "startLine": 253,
+        "startChar": 3,
+        "endLine": 253,
+        "endChar": 9
+      },
+      "revId": "8f0f7e7813453e2cf2b56532b1f83ed25b121092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfbe9760_ba90d669",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-21T15:51:21Z",
+      "side": 1,
+      "message": "SG. Done",
+      "parentUuid": "2b7e0426_c278533f",
       "range": {
         "startLine": 253,
         "startChar": 3,
@@ -319,6 +409,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a159e7b_6222d073",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-21T15:51:21Z",
+      "side": 1,
+      "message": "Lets do single log line then. Thanks",
+      "parentUuid": "a463f5a9_4df025ac",
+      "range": {
+        "startLine": 256,
+        "startChar": 0,
+        "endLine": 257,
+        "endChar": 47
+      },
+      "revId": "8f0f7e7813453e2cf2b56532b1f83ed25b121092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c08e029c_67ecc587",
@@ -342,6 +456,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c92b9787_f1a71cf9",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-21T15:51:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c08e029c_67ecc587",
+      "range": {
+        "startLine": 280,
+        "startChar": 31,
+        "endLine": 280,
+        "endChar": 33
+      },
+      "revId": "8f0f7e7813453e2cf2b56532b1f83ed25b121092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cc34b33_33692150",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-21T15:51:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c08e029c_67ecc587",
+      "range": {
+        "startLine": 280,
+        "startChar": 31,
+        "endLine": 280,
+        "endChar": 33
+      },
+      "revId": "8f0f7e7813453e2cf2b56532b1f83ed25b121092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aff21467_03d841f9",
@@ -355,6 +517,30 @@
       "writtenOn": "2024-03-21T13:17:34Z",
       "side": 1,
       "message": "I would be mildly happier if we put some short constant prefix in front of the ID.",
+      "range": {
+        "startLine": 285,
+        "startChar": 0,
+        "endLine": 285,
+        "endChar": 19
+      },
+      "revId": "8f0f7e7813453e2cf2b56532b1f83ed25b121092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8736914_ad23a0eb",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-21T15:51:21Z",
+      "side": 1,
+      "message": "Yeah `id` is heavily overloaded term. Lets call it `instance_id`. Thanks.",
+      "parentUuid": "aff21467_03d841f9",
       "range": {
         "startLine": 285,
         "startChar": 0,
