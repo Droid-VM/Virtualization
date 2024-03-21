@@ -28,6 +28,8 @@ import static android.system.virtualmachine.VirtualMachineManager.CAPABILITY_PRO
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 import static com.google.common.truth.TruthJUnit.assume;
+import com.android.virt.vm_attestation.testservice.IAttestationService.AttestationStatus;
+import com.android.virt.vm_attestation.testservice.IAttestationService.SigningResult;
 
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
@@ -115,6 +117,8 @@ import co.nstant.in.cbor.model.MajorType;
 @RunWith(Parameterized.class)
 public class MicrodroidTests extends MicrodroidDeviceTestBase {
     private static final String TAG = "MicrodroidTests";
+    private static final String VM_ATTESTATION_PAYLOAD_PATH = "libvm_attestation_test_payload.so";
+    private static final String VM_ATTESTATION_MESSAGE = "Hello RKP from AVF!";
 
     @Rule public Timeout globalTimeout = Timeout.seconds(300);
 
@@ -206,6 +210,41 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
     public void createAndConnectToVm_HostCpuTopology() throws Exception {
         createAndConnectToVmHelper(CPU_TOPOLOGY_MATCH_HOST);
+    }
+
+    @Test
+    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
+    public void vmAttestationWhenDeviceSupportsTheFeature() throws Exception {
+        // pVM remote attestation is only supported on protected VMs.
+        assumeProtectedVM();
+        assumeFeatureEnabled(VirtualMachineManager.FEATURE_REMOTE_ATTESTATION);
+        // TODO(b/329652894): Assume that pVM remote attestation feature is supported on the device.
+        VirtualMachineConfig config =
+                newVmConfigBuilderWithPayloadBinary(VM_ATTESTATION_PAYLOAD_PATH)
+                        .setProtectedVm(mProtectedVm)
+                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .build();
+        VirtualMachine vm =
+                forceCreateNewVirtualMachine("cts_attestation_with_rkpd_supported", config);
+
+        // Check with an invalid challenge.
+        byte[] invalidChallenge = new byte[65];
+        Arrays.fill(invalidChallenge, (byte) 0xbb);
+        SigningResult signingResultInvalidChallenge =
+                runVmAttestationService(
+                        TAG, vm, invalidChallenge, VM_ATTESTATION_MESSAGE.getBytes());
+        assertThat(signingResultInvalidChallenge.status)
+                .isEqualTo(AttestationStatus.ATTESTATION_ERROR_INVALID_CHALLENGE);
+
+        // Check with a valid challenge.
+        byte[] challenge = new byte[32];
+        Arrays.fill(challenge, (byte) 0xac);
+        SigningResult signingResult =
+                runVmAttestationService(TAG, vm, challenge, VM_ATTESTATION_MESSAGE.getBytes());
+        assertThat(signingResult.status)
+                .isNotEqualTo(AttestationStatus.ATTESTATION_ERROR_INVALID_CHALLENGE);
+        // TODO(b/330662600): Check the certificate chain and the signature after refactoring the
+        // x509 util method in RkpdVmAttestationTest.
     }
 
     @Test
