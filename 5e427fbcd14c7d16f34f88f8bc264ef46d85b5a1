@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f063895_e630d86e",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-03-21T11:59:57Z",
+      "side": 1,
+      "message": "It looks like `IdSigs` is entirely unused, can you just remove it?",
+      "parentUuid": "061d1eda_7449de3d",
+      "revId": "5e427fbcd14c7d16f34f88f8bc264ef46d85b5a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ac9d80fb_74501f82",
         "filename": "zipfuse/src/main.rs",
         "patchSetId": 2
@@ -48,6 +66,30 @@
       "writtenOn": "2024-03-20T20:12:59Z",
       "side": 1,
       "message": "error: written amount is not handled\n   --\u003e packages/modules/Virtualization/zipfuse/src/main.rs:354:17\n    |\n354 |                 w.write(\u0026buf[start..end])?\n    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^\n    |\n    \u003d help: use `Write::write_all` instead, or handle partial writes\n    \u003d help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#unused_io_amount\n    \u003d note: `#[deny(clippy::unused_io_amount)]` on by default\n\nerror: aborting due to 1 previous error\n\n\nWould like fix here instead of allowing the lint error",
+      "range": {
+        "startLine": 353,
+        "startChar": 16,
+        "endLine": 353,
+        "endChar": 42
+      },
+      "revId": "5e427fbcd14c7d16f34f88f8bc264ef46d85b5a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9079187f_2b824845",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-03-21T11:59:57Z",
+      "side": 1,
+      "message": "Yeah, I suspect that this should be `write_all`.",
+      "parentUuid": "ac9d80fb_74501f82",
       "range": {
         "startLine": 353,
         "startChar": 16,
