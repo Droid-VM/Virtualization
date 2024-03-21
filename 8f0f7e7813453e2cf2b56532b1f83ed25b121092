@@ -549,6 +549,30 @@
       },
       "revId": "8f0f7e7813453e2cf2b56532b1f83ed25b121092",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8ff1ec4_c5838970",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-21T15:56:50Z",
+      "side": 1,
+      "message": "That\u0027s fine, but sorry that isn\u0027t what I meant.\n\nI would rather we did `sha512(\"InstanceId:\" + instance_id)`.\nJust in case we ever derive anything else from it.",
+      "parentUuid": "a8736914_ad23a0eb",
+      "range": {
+        "startLine": 285,
+        "startChar": 0,
+        "endLine": 285,
+        "endChar": 19
+      },
+      "revId": "8f0f7e7813453e2cf2b56532b1f83ed25b121092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
