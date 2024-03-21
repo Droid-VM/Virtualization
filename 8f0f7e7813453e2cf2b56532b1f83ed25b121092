@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "18cd8d6d_6e1db8ed",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-21T13:17:34Z",
+      "side": 1,
+      "message": "Nit: Avoid blank lines here, there\u0027s some weird syntax rules about finding these \"Something:\" stanzas.",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 0
+      },
+      "revId": "8f0f7e7813453e2cf2b56532b1f83ed25b121092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "630f51ce_c6f7279a",
@@ -132,6 +155,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2a133d9e_70a413d5",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-21T13:17:34Z",
+      "side": 1,
+      "message": "I\u0027ll let Shikha answer this, but the llpvm_changes flags covers both implementing Sk, and switching to use instance ID; AIUI the latter takes effect even in the absence of Sk.",
+      "parentUuid": "2b7f3d7c_94f8ebee",
+      "range": {
+        "startLine": 167,
+        "startChar": 20,
+        "endLine": 167,
+        "endChar": 47
+      },
+      "revId": "8f0f7e7813453e2cf2b56532b1f83ed25b121092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b7e0426_c278533f",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-21T13:17:34Z",
+      "side": 1,
+      "message": "Given the comment above, can we invert the sense of the if, and have an early return Ok(())?",
+      "range": {
+        "startLine": 253,
+        "startChar": 3,
+        "endLine": 253,
+        "endChar": 9
+      },
+      "revId": "8f0f7e7813453e2cf2b56532b1f83ed25b121092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "141c7b49_65e4e201",
         "filename": "pvmfw/src/main.rs",
         "patchSetId": 6
@@ -196,6 +266,76 @@
         "startChar": 0,
         "endLine": 257,
         "endChar": 47
+      },
+      "revId": "8f0f7e7813453e2cf2b56532b1f83ed25b121092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a463f5a9_4df025ac",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-21T13:17:34Z",
+      "side": 1,
+      "message": "You can also just write a string with embedded \\n and logcat does the right thing (2 separate logs lines).\nBut this could also be a single long line.",
+      "parentUuid": "000f1611_0b0e4f4c",
+      "range": {
+        "startLine": 256,
+        "startChar": 0,
+        "endLine": 257,
+        "endChar": 47
+      },
+      "revId": "8f0f7e7813453e2cf2b56532b1f83ed25b121092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c08e029c_67ecc587",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-21T13:17:34Z",
+      "side": 1,
+      "message": "of",
+      "range": {
+        "startLine": 280,
+        "startChar": 31,
+        "endLine": 280,
+        "endChar": 33
+      },
+      "revId": "8f0f7e7813453e2cf2b56532b1f83ed25b121092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aff21467_03d841f9",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-21T13:17:34Z",
+      "side": 1,
+      "message": "I would be mildly happier if we put some short constant prefix in front of the ID.",
+      "range": {
+        "startLine": 285,
+        "startChar": 0,
+        "endLine": 285,
+        "endChar": 19
       },
       "revId": "8f0f7e7813453e2cf2b56532b1f83ed25b121092",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
