@@ -22,6 +22,30 @@
       },
       "revId": "130bd904a58694f8f1108c79ddee950aa9f5ad15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e072039_c81dc91e",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-21T16:02:00Z",
+      "side": 1,
+      "message": "virtmgr doesn\u0027t have the SELinux permission to access the Hal.\n\n```\n03-21 10:04:29.485  1000   479   479 I auditd  : avc:  denied  { find } for pid\u003d3776 uid\u003d10112 name\u003dandroid.hardware.security.keymint.IRemotelyProvisionedComponent/avf scontext\u003du:r:virtualizationmanager:s0:c112,c256,c512,c768 tcontext\u003du:object_r:hal_remotelyprovisionedcomponent_avf_service:s0 tclass\u003dservice_manager permissive\u003d0\n03-21 10:04:29.485 10112  3776  3779 W ServiceManagerCppClient: Failed to get isDeclared for android.hardware.security.keymint.IRemotelyProvisionedComponent/avf: Status(-1, EX_SECURITY): \u0027SELinux denied.\u0027\n03-21 10:04:29.516  1000   479   479 E SELinux : avc:  denied  { find } for pid\u003d3776 uid\u003d10112 name\u003dandroid.hardware.security.keymint.IRemotelyProvisionedComponent/avf scontext\u003du:r:virtualizationmanager:s0:c112,c256,c512,c768 tcontext\u003du:object_r:hal_remotelyprovisionedcomponent_avf_service:s0 tclass\u003dservice_manager permissive\u003d0\n03-21 10:04:29.490 10112  3756  3773 E TestRunner: assumption failed: vmAttestationWhenDeviceSupportsRemoteAttestation[protectedVm\u003dtrue,gki\u003dnull](com.android.microdroid.test.MicrodroidTests)\n```",
+      "parentUuid": "e372ea91_6fe9acdb",
+      "range": {
+        "startLine": 319,
+        "startChar": 7,
+        "endLine": 319,
+        "endChar": 53
+      },
+      "revId": "130bd904a58694f8f1108c79ddee950aa9f5ad15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

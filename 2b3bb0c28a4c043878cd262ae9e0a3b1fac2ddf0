@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdc8eaf2_e971b4ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-21T16:02:00Z",
+      "side": 1,
+      "message": "That cl is still undergoing modifications. It\u0027s easier to rebase to resolve the merge conflict only once, rather than rebasing it now.",
+      "parentUuid": "6df98dc4_acb8aba6",
+      "revId": "2b3bb0c28a4c043878cd262ae9e0a3b1fac2ddf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ba8ee70_5a3f2234",
@@ -67,6 +85,30 @@
       "writtenOn": "2024-03-21T15:22:00Z",
       "side": 1,
       "message": "Test needs Remote Attestation support",
+      "range": {
+        "startLine": 221,
+        "startChar": 30,
+        "endLine": 221,
+        "endChar": 84
+      },
+      "revId": "2b3bb0c28a4c043878cd262ae9e0a3b1fac2ddf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a5d15d9_ea362873",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-21T16:02:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ba8ee70_5a3f2234",
       "range": {
         "startLine": 221,
         "startChar": 30,
