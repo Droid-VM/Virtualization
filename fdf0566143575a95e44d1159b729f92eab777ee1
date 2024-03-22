@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1701c59_6ed6ce67",
+        "filename": "libs/vmconfig/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-22T05:42:42Z",
+      "side": 1,
+      "message": "```\nlet cpu_topology \u003d match self.cpu_topology.as_deref() {\n    None \u003d\u003e\n    Some(\"one_cpu\") \u003d\u003e\n    Some(\"...\") \u003d\u003e\n    _ \u003d\u003e\n};\n```",
+      "range": {
+        "startLine": 102,
+        "startChar": 8,
+        "endLine": 110,
+        "endChar": 10
+      },
+      "revId": "fdf0566143575a95e44d1159b729f92eab777ee1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
