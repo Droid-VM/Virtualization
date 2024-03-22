@@ -42,6 +42,8 @@ cc_binary {
         "image.ld",
         ":vmbase_sections",
     ],
+    // Use --lto-O0 to reduce binary size.
+    lto_O0: true,
 }
 
 raw_binary {
