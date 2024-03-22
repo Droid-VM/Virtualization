@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dbd47a3f_9d30e3cb",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-22T17:22:11Z",
+      "side": 1,
+      "message": "What are the side-effects? I am also changing the test root of tradefed /data/local/tmp/virt/tradefed in aosp/2983613",
+      "parentUuid": "4eccab72_bc9ea5d9",
+      "range": {
+        "startLine": 49,
+        "startChar": 68,
+        "endLine": 49,
+        "endChar": 78
+      },
+      "revId": "bc7bf78f8d3f8833e1029384d339ed0a65f44c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b56f5d34_eb44866b",
         "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
         "patchSetId": 6
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-07T17:53:49Z",
       "side": 1,
       "message": "Sk -\u003e Secretkeeper\n\n(There\u0027s never much need to make test names short, since they only get mentioned once in the code.)",
+      "range": {
+        "startLine": 415,
+        "startChar": 16,
+        "endLine": 415,
+        "endChar": 47
+      },
+      "revId": "bc7bf78f8d3f8833e1029384d339ed0a65f44c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd1ebefd_931aa520",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-22T17:22:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b56f5d34_eb44866b",
       "range": {
         "startLine": 415,
         "startChar": 16,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca71f15e_3d7a0cfe",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-22T17:22:11Z",
+      "side": 1,
+      "message": "I\u0027ve removed this now, its wasnt needed. We do need to call `cleanUpVirtualizationTestSetup` before re-installing a different version.",
+      "parentUuid": "663c4e6a_cd564ffd",
+      "range": {
+        "startLine": 420,
+        "startChar": 44,
+        "endLine": 420,
+        "endChar": 50
+      },
+      "revId": "bc7bf78f8d3f8833e1029384d339ed0a65f44c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e529da7_907e71aa",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-03-07T17:53:49Z",
       "side": 1,
       "message": "I think the usual style requires one declaration per variable.",
+      "range": {
+        "startLine": 421,
+        "startChar": 7,
+        "endLine": 421,
+        "endChar": 65
+      },
+      "revId": "bc7bf78f8d3f8833e1029384d339ed0a65f44c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26f77706_16235d4e",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-22T17:22:11Z",
+      "side": 1,
+      "message": "I refactored the patch a bit. This is not applicable anymore.",
+      "parentUuid": "2e529da7_907e71aa",
       "range": {
         "startLine": 421,
         "startChar": 7,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2d46ee9_df8a1851",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 1348,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-22T17:22:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80990ca2_f65b0c92",
+      "range": {
+        "startLine": 1346,
+        "startChar": 0,
+        "endLine": 1348,
+        "endChar": 44
+      },
+      "revId": "bc7bf78f8d3f8833e1029384d339ed0a65f44c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dcfe386f_360c3c81",
@@ -129,6 +249,30 @@
       "writtenOn": "2024-03-07T17:53:49Z",
       "side": 1,
       "message": "Name police: This should be \"Defaults\", to match everything else.\n\nSo we need something else to differentiate this from MicrodroidTestAppsDefaults.\n\nMicrodroidTestApkDefaults?\nMicrodroidMainTestAppDefaults?\nMicrodroidVersionsTestAppDefaults?",
+      "range": {
+        "startLine": 35,
+        "startChar": 11,
+        "endLine": 35,
+        "endChar": 41
+      },
+      "revId": "bc7bf78f8d3f8833e1029384d339ed0a65f44c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15e74d5e_9b6fe2b3",
+        "filename": "tests/testapk/Android.bp",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-22T17:22:11Z",
+      "side": 1,
+      "message": "`MicrodroidVersionsTestAppDefaults` SG. Thanks",
+      "parentUuid": "dcfe386f_360c3c81",
       "range": {
         "startLine": 35,
         "startChar": 11,

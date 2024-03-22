@@ -118,6 +118,30 @@
       },
       "revId": "582939056ea0cb73cb108f7abc77bb9769c4f20a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35120843_30885437",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-22T17:22:11Z",
+      "side": 1,
+      "message": "I agree to point about unnecessary over-precision. I\u0027ve changed boot failure test to check for Exception instead of logcat. PTAL. Thanks",
+      "parentUuid": "be46b029_6b08e796",
+      "range": {
+        "startLine": 557,
+        "startChar": 20,
+        "endLine": 557,
+        "endChar": 58
+      },
+      "revId": "582939056ea0cb73cb108f7abc77bb9769c4f20a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
