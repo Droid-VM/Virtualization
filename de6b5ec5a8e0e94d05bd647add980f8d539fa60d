@@ -353,6 +353,30 @@
       },
       "revId": "de6b5ec5a8e0e94d05bd647add980f8d539fa60d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e2c9fec_e03eb361",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineConfig.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-03-22T16:18:42Z",
+      "side": 1,
+      "message": "Let framework parse json file, and then pass RawConfig to rust impl. We discussed about using RawConfig from the app, not framework, but json file would be more convenient for the testing/experiments..",
+      "parentUuid": "53eb0193_8d725745",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 38
+      },
+      "revId": "de6b5ec5a8e0e94d05bd647add980f8d539fa60d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
