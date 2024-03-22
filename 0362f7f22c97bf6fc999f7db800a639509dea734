@@ -33,6 +33,29 @@
       "message": "Thanks for the review!\n\n@ioffe@google.com, could you help with the API-Review in this cl?",
       "revId": "0362f7f22c97bf6fc999f7db800a639509dea734",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0da8495c_54d3a8b3",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-03-22T12:51:09Z",
+      "side": 1,
+      "message": "permission check? the API is annotated as @RequiresPermission, but atm there are no permission checks done for it",
+      "range": {
+        "startLine": 358,
+        "startChar": 0,
+        "endLine": 358,
+        "endChar": 68
+      },
+      "revId": "0362f7f22c97bf6fc999f7db800a639509dea734",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
