@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0842cf10_dc80c149",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-22T06:29:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "add2589c_5d9cd1b5",
+      "range": {
+        "startLine": 863,
+        "startChar": 0,
+        "endLine": 908,
+        "endChar": 17
+      },
+      "revId": "de6b5ec5a8e0e94d05bd647add980f8d539fa60d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e48d0dd_8cdc0753",
@@ -273,6 +297,30 @@
       "side": 1,
       "message": "But it expects FDs instead of file path, it means we need more code to handle files in java frameworks(which is already included in `packages/modules/Virtualization/libs/vmconfig/src/lib.rs`)",
       "parentUuid": "e1281a54_21665225",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 38
+      },
+      "revId": "de6b5ec5a8e0e94d05bd647add980f8d539fa60d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "768e5d36_18954e7b",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineConfig.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-22T06:29:34Z",
+      "side": 1,
+      "message": "the framework can open the file, and then put the FD in this parcel, right?",
+      "parentUuid": "e744fb2a_be169525",
       "range": {
         "startLine": 28,
         "startChar": 0,
