@@ -80,6 +80,30 @@
       },
       "revId": "0362f7f22c97bf6fc999f7db800a639509dea734",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fffbe51_f49a87c1",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-03-22T12:56:34Z",
+      "side": 1,
+      "message": "Wait, so VirtualizationService.java doesn\u0027t actually connect to virtservice, but instead connects to virtmngr? This is confusing :) We should probably rename it (not in this patch though).",
+      "parentUuid": "84bf10c6_8e8f5ff6",
+      "range": {
+        "startLine": 358,
+        "startChar": 0,
+        "endLine": 358,
+        "endChar": 68
+      },
+      "revId": "0362f7f22c97bf6fc999f7db800a639509dea734",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
