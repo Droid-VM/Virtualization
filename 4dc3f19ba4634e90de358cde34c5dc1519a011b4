@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "29a9b099_c00e2a9a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-22T16:15:45Z",
+      "side": 1,
+      "message": "Discussed offline. Only this fix might not allow the LTO changes to reland as more AVF tests[1] unrelated to rialto seem to get impact when LTO is enabled by default. I think we need an ABTD run (e.g. [2]) with the fix + relands to be sure that it\u0027s safe to reland the subsequent LTO cls.\n\n[1] http://b/issues/330811070/dupes\n[2] http://android-build/abtd/run/L43400030002694169/",
+      "parentUuid": "7d2c336b_9141f8e4",
+      "range": {
+        "startLine": 10,
+        "startChar": 8,
+        "endLine": 10,
+        "endChar": 16
+      },
+      "revId": "4dc3f19ba4634e90de358cde34c5dc1519a011b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0b73500f_84f1f717",
         "filename": "rialto/Android.bp",
         "patchSetId": 1
