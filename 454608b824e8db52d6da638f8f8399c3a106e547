@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2eba5d15_09bcd44f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-22T15:15:37Z",
+      "side": 1,
+      "message": "And also removes the dependency on rkpdapp/utils/X509Utils.java. (That threw me a bit - you\u0027re not just moving the code from A to B, you\u0027re also inlining a chunk of C into it.)\n\nWhich I guess is ok, although I\u0027m never that happy with code duplication.\n\nAnd we don\u0027t actually remove any dependencies in any .bp files. So maybe we should just keep the dependency?",
+      "range": {
+        "startLine": 9,
+        "startChar": 40,
+        "endLine": 12,
+        "endChar": 0
+      },
+      "revId": "454608b824e8db52d6da638f8f8399c3a106e547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a41f51e5_88b7ab7a",
@@ -14,6 +37,29 @@
       "writtenOn": "2024-03-22T14:47:02Z",
       "side": 1,
       "message": "Hi Alan, PTAL",
+      "revId": "454608b824e8db52d6da638f8f8399c3a106e547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2f2cb5a_c07e478d",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-22T15:15:37Z",
+      "side": 1,
+      "message": "I think this should be an if rather than an assume.\n- We\u0027ve already run the test.\n- The error message is going to look like the test failed.",
+      "range": {
+        "startLine": 283,
+        "startChar": 0,
+        "endLine": 285,
+        "endChar": 61
+      },
       "revId": "454608b824e8db52d6da638f8f8399c3a106e547",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
