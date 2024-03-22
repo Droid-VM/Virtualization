@@ -118,6 +118,30 @@
       },
       "revId": "130bd904a58694f8f1108c79ddee950aa9f5ad15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62921b53_d943175a",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-22T08:24:34Z",
+      "side": 1,
+      "message": "Frankly, I would rather introduce a slight delay in tests than relax the sepolicy in the release solely for testing purposes.\n\nOn the other hand, virtualizationservice can access the Hal naturally as it already serves the service[1], I\u0027d prefer not to add an exception for virtmgr to allow it to access the Hal as well.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:system/sepolicy/private/virtualizationservice.te;l\u003d29;drc\u003dd2bc72b7ebc4c45fe5634ac96f78dc30823954bc",
+      "parentUuid": "ed005317_eabf9507",
+      "range": {
+        "startLine": 319,
+        "startChar": 7,
+        "endLine": 319,
+        "endChar": 53
+      },
+      "revId": "130bd904a58694f8f1108c79ddee950aa9f5ad15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
