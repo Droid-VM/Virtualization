@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b998a599_73d16e25",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-22T17:54:31Z",
+      "side": 1,
+      "message": "\u003e If you need the TF change, do you also need this one\n\nWell not really, just that TF also does things like rm -rf TEST_ROOT, those methods are called from MicrodroidHostTests, which also operate on the same test directory. They should be separated. But I agree, lets do it in a separate patch.",
+      "parentUuid": "fdf350d9_49b2c342",
+      "range": {
+        "startLine": 49,
+        "startChar": 68,
+        "endLine": 49,
+        "endChar": 78
+      },
+      "revId": "bc7bf78f8d3f8833e1029384d339ed0a65f44c69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b56f5d34_eb44866b",

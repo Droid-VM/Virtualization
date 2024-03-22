@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4038ecf8_74d162a3",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-22T17:54:31Z",
+      "side": 1,
+      "message": "There is a state associated with these files which ties 1st `ensureMicrodroidBootsSuccessfully` to second. The files written by first function call are used on the second function call. So inline with that, I think it is good to have the method take the 2 params.\n\nIt just happens that `prepareVirtualizationTestSetup` before tests removes  INSTANCE_ID_FILE, INSTANCE_IMG \u0026 they are recreated on st method call \u0026 re-used on second method.\n\nI think the ideal way to deal with this would be:\n\n```\ninstance_file \u003d FileUtil.createTempFile(..);\ninstance_id \u003d FileUtil.createTempFile(..);\nensureMicrodroidBootsSuccessfully(instance_file, instance_file)\nupgrade package\nensureMicrodroidBootsSuccessfully(instance_file, instance_file)\n```\n\nBut the current setup achieves that.",
+      "parentUuid": "1541b1cf_1c293099",
+      "range": {
+        "startLine": 454,
+        "startChar": 33,
+        "endLine": 454,
+        "endChar": 78
+      },
+      "revId": "ca75f39d39c01efc8ccbd633daf33b1ee5e858b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "299677ed_b4825bd5",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-22T17:34:10Z",
       "side": 1,
       "message": "Just use mProtectedVm here?",
+      "range": {
+        "startLine": 465,
+        "startChar": 41,
+        "endLine": 465,
+        "endChar": 52
+      },
+      "revId": "ca75f39d39c01efc8ccbd633daf33b1ee5e858b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ef751c1_d6c99109",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-22T17:54:31Z",
+      "side": 1,
+      "message": "Yeah that sounds good. Thanks",
+      "parentUuid": "299677ed_b4825bd5",
       "range": {
         "startLine": 465,
         "startChar": 41,
