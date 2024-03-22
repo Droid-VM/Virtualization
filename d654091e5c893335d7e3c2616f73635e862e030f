@@ -22,6 +22,30 @@
       },
       "revId": "d654091e5c893335d7e3c2616f73635e862e030f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eff43b25_c10e83f0",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-03-22T05:50:05Z",
+      "side": 1,
+      "message": "iiuc, if we want to specify a device for earlycon in the guest kernel cmd, we need to know address(such as uart8250,0x21c0500?) it might be possible, but complicated.",
+      "parentUuid": "1092d913_0650bf1a",
+      "range": {
+        "startLine": 886,
+        "startChar": 59,
+        "endLine": 886,
+        "endChar": 67
+      },
+      "revId": "d654091e5c893335d7e3c2616f73635e862e030f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
