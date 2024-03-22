@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f398701_fd528fd2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-22T16:29:31Z",
+      "side": 1,
+      "message": "\u003e We should keep which dependency?\n\nThe old code relies on com.android.rkpdapp.utils.X509Utils / RkpdAppTestUtil.\n\nThe new library doesn\u0027t, because you copied a chunk of that code instead, but we still have that dependency in AvfRkpdVmAttestationTestApp.\n\nSo why duplicate the code instead of depending on it?",
+      "parentUuid": "bc506536_4ec6c772",
+      "range": {
+        "startLine": 9,
+        "startChar": 40,
+        "endLine": 12,
+        "endChar": 0
+      },
+      "revId": "454608b824e8db52d6da638f8f8399c3a106e547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a41f51e5_88b7ab7a",
