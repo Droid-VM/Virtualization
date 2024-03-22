@@ -329,6 +329,30 @@
       },
       "revId": "de6b5ec5a8e0e94d05bd647add980f8d539fa60d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53eb0193_8d725745",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineConfig.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-03-22T06:39:53Z",
+      "side": 1,
+      "message": "Right, but there might be duplicated(vmconfig/src/lib.rs) logic to parse json, and then create RawConfig(and open files) in the framework side. Actually, I\u0027m okay with either.",
+      "parentUuid": "768e5d36_18954e7b",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 38
+      },
+      "revId": "de6b5ec5a8e0e94d05bd647add980f8d539fa60d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
