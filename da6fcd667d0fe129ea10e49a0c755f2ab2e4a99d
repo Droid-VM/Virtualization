@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c667278e_e0d5e37f",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-22T15:54:37Z",
+      "side": 1,
+      "message": "You\u0027re not actually checking the permission - you need a call to       `check_manage_access()` here.",
+      "range": {
+        "startLine": 326,
+        "startChar": 0,
+        "endLine": 326,
+        "endChar": 39
+      },
+      "revId": "da6fcd667d0fe129ea10e49a0c755f2ab2e4a99d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
