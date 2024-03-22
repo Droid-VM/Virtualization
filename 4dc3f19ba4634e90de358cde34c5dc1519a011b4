@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f76390e_e2f6265b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-22T11:51:04Z",
+      "side": 1,
+      "message": "Could you add the rialto size here with and without LTO?",
+      "range": {
+        "startLine": 10,
+        "startChar": 8,
+        "endLine": 10,
+        "endChar": 16
+      },
+      "revId": "4dc3f19ba4634e90de358cde34c5dc1519a011b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b73500f_84f1f717",
+        "filename": "rialto/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-22T11:51:04Z",
+      "side": 1,
+      "message": "Does `--lto-O0` reduce the current binary size? I thought optimization increased the binary size or we would like to disable the optimization as rialto is sensitive to the binary size. Could you reword it a bit is my understanding is correct? Perhaps something like:\n\n\"Avoid LTO since it tends to increases the binary size. Rialto is sensitive to binary size change.\"",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 42
+      },
+      "revId": "4dc3f19ba4634e90de358cde34c5dc1519a011b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
