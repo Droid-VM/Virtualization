@@ -126,6 +126,9 @@ pub fn write_vm_creation_stats(
             config.memoryMib,
             String::new(),
         ),
+        VirtualMachineConfig::RawConfigFromPath(_) => {
+            panic!("RawConfigFromPath must be already converted to RawConfig here")
+        }
     };
 
     let num_cpus: i32 = match cpu_topology {
