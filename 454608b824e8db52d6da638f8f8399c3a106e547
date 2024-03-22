@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "664ca0b1_c4d2624e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-22T16:34:10Z",
+      "side": 1,
+      "message": "Because MicrodroidTests also needs to depend on the new library. If the new lib depends on rkpdapp, then there\u0027s again lots of complexity due to the rkpd package name change in the internal branch, and we also need to enable microdroid tests conditionally according to the rkpd names...",
+      "parentUuid": "3f398701_fd528fd2",
+      "range": {
+        "startLine": 9,
+        "startChar": 40,
+        "endLine": 12,
+        "endChar": 0
+      },
+      "revId": "454608b824e8db52d6da638f8f8399c3a106e547",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a41f51e5_88b7ab7a",
