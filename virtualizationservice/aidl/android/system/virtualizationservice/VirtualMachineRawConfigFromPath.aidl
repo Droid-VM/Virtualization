@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The Android Open Source Project
+ * Copyright 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,18 +15,8 @@
  */
 package android.system.virtualizationservice;
 
-import android.system.virtualizationservice.VirtualMachineAppConfig;
-import android.system.virtualizationservice.VirtualMachineRawConfig;
-import android.system.virtualizationservice.VirtualMachineRawConfigFromPath;
-
-/** Configuration for running a VM */
-union VirtualMachineConfig {
-    /** Configuration for a VM to run an app */
-    VirtualMachineAppConfig appConfig;
-
-    /** Configuration for a VM with low-level configuration */
-    VirtualMachineRawConfig rawConfig;
-
+/** File for VirtualMachineRawConfig */
+parcelable VirtualMachineRawConfigFromPath {
     /** File for VirtualMachineRawConfig */
-    VirtualMachineRawConfigFromPath rawConfigFromPath;
+    @utf8InCpp String rawConfigPath;
 }
