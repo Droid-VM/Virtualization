@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0423b61b_f88192d6",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-22T04:26:33Z",
+      "side": 1,
+      "message": "Let\u0027s avoid changes like this. I suggest we make a no-op refactoring change first and then make this change. The refactoring will be moving this part info a function which creates VirtualMachineConfig parcel out of VirtualMachineAppConfig",
+      "range": {
+        "startLine": 863,
+        "startChar": 0,
+        "endLine": 908,
+        "endChar": 17
+      },
+      "revId": "de6b5ec5a8e0e94d05bd647add980f8d539fa60d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e48d0dd_8cdc0753",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-22T04:26:33Z",
+      "side": 1,
+      "message": "the nesting is too deep, I think.",
+      "range": {
+        "startLine": 763,
+        "startChar": 0,
+        "endLine": 783,
+        "endChar": 13
+      },
+      "revId": "de6b5ec5a8e0e94d05bd647add980f8d539fa60d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84fda242_a1612d07",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-22T04:26:33Z",
+      "side": 1,
+      "message": "Why?",
+      "range": {
+        "startLine": 785,
+        "startChar": 33,
+        "endLine": 785,
+        "endChar": 58
+      },
+      "revId": "de6b5ec5a8e0e94d05bd647add980f8d539fa60d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b957333_d1173006",
+        "filename": "libs/vmconfig/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-22T04:26:33Z",
+      "side": 1,
+      "message": "please make cpu_topology as a separate change",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 37
+      },
+      "revId": "de6b5ec5a8e0e94d05bd647add980f8d539fa60d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c158ff4_50b0fa58",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-22T04:26:33Z",
+      "side": 1,
+      "message": "This part is exactly the same as below (except config v.s. \u0026config) . Can you dedup?",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 65
+      },
+      "revId": "de6b5ec5a8e0e94d05bd647add980f8d539fa60d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1281a54_21665225",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineConfig.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-22T04:26:33Z",
+      "side": 1,
+      "message": "You should use this for custom VMs.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 38
+      },
+      "revId": "de6b5ec5a8e0e94d05bd647add980f8d539fa60d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
