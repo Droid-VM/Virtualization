@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "add2589c_5d9cd1b5",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-03-22T05:55:18Z",
+      "side": 1,
+      "message": "I extracted the logic into two methods, `toVirtualMachineConfigForRaw` is for raw config path, `toVirtualMachineConfigForApp` is for app and toVirtualMachineConfigForApp is identical to the current logic for app.\n\nIs it okay?",
+      "parentUuid": "0423b61b_f88192d6",
+      "range": {
+        "startLine": 863,
+        "startChar": 0,
+        "endLine": 908,
+        "endChar": 17
+      },
+      "revId": "de6b5ec5a8e0e94d05bd647add980f8d539fa60d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e48d0dd_8cdc0753",
         "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-22T04:26:33Z",
       "side": 1,
       "message": "the nesting is too deep, I think.",
+      "range": {
+        "startLine": 763,
+        "startChar": 0,
+        "endLine": 783,
+        "endChar": 13
+      },
+      "revId": "de6b5ec5a8e0e94d05bd647add980f8d539fa60d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aca798a8_54a3ff0a",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-03-22T05:55:18Z",
+      "side": 1,
+      "message": "flattened it.",
+      "parentUuid": "6e48d0dd_8cdc0753",
       "range": {
         "startLine": 763,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b02a38ba_ca62d87f",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-03-22T05:55:18Z",
+      "side": 1,
+      "message": "because protected_vm field is already included in raw config, so we don\u0027t need to set it again(and it is ignored)",
+      "parentUuid": "84fda242_a1612d07",
+      "range": {
+        "startLine": 785,
+        "startChar": 33,
+        "endLine": 785,
+        "endChar": 58
+      },
+      "revId": "de6b5ec5a8e0e94d05bd647add980f8d539fa60d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b957333_d1173006",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-03-22T04:26:33Z",
       "side": 1,
       "message": "please make cpu_topology as a separate change",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 37
+      },
+      "revId": "de6b5ec5a8e0e94d05bd647add980f8d539fa60d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0e533ab_c189203c",
+        "filename": "libs/vmconfig/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-03-22T05:55:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b957333_d1173006",
       "range": {
         "startLine": 58,
         "startChar": 0,
@@ -129,6 +225,30 @@
       "writtenOn": "2024-03-22T04:26:33Z",
       "side": 1,
       "message": "You should use this for custom VMs.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 38
+      },
+      "revId": "de6b5ec5a8e0e94d05bd647add980f8d539fa60d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e744fb2a_be169525",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineConfig.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-03-22T05:55:18Z",
+      "side": 1,
+      "message": "But it expects FDs instead of file path, it means we need more code to handle files in java frameworks(which is already included in `packages/modules/Virtualization/libs/vmconfig/src/lib.rs`)",
+      "parentUuid": "e1281a54_21665225",
       "range": {
         "startLine": 28,
         "startChar": 0,
