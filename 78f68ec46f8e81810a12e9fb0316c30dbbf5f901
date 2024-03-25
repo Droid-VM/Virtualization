@@ -51,6 +51,24 @@
       "parentUuid": "65064301_91316300",
       "revId": "78f68ec46f8e81810a12e9fb0316c30dbbf5f901",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53514620_27a80ff9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-03-25T19:41:53Z",
+      "side": 1,
+      "message": "Dynamically granting permissions will cause activity manager to kill the test(due to the new gid association with the MANAGE_VIRTUAL_MACHINE permission), so that\u0027s not recommended. Hmm, the point of the test is such that we can test without permissions. I think the issue now is that:\n\n- Test App lacks MANAGE_VIRTUAL_MACHINE which means it lacks SYS_NICE in its permitted set.\n- Lack of SYS_NICE in app\u0027s permitted set results in failing to launch virtmgr(due to the new SYS_NICE in the VFS set for virtmgr). The test works without this change, because virtmgr failing to launch a VM was the intended behavior of this test.\n\nUgh, we _might_ be able to work around this by statically giving the app permission in the AndroidTest.xml(as opposed to granting it during setup), and just revoking it before the test. IIRC, activity manager won\u0027t kill it during revoke, but will kill it during the grant.",
+      "parentUuid": "c7f6b972_80d72fec",
+      "revId": "78f68ec46f8e81810a12e9fb0316c30dbbf5f901",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
