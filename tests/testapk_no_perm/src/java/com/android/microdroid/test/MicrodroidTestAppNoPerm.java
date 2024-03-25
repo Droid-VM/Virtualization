@@ -17,6 +17,7 @@
 package com.android.microdroid.test;
 
 import android.system.virtualmachine.VirtualMachineConfig;
+import android.system.virtualmachine.VirtualMachineException;
 
 import com.android.compatibility.common.util.CddTest;
 import com.android.microdroid.test.device.MicrodroidDeviceTestBase;
@@ -61,9 +62,9 @@ public class MicrodroidTestAppNoPerm extends MicrodroidDeviceTestBase {
         VirtualMachineConfig config =
                 newVmConfigBuilderWithPayloadBinary("MicrodroidTestNativeLib.so").build();
 
-        SecurityException e =
+        VirtualMachineException e =
                 assertThrows(
-                        SecurityException.class,
+                        VirtualMachineException.class,
                         () -> forceCreateNewVirtualMachine("test_vm_requires_permission", config));
         assertThat(e)
                 .hasMessageThat()

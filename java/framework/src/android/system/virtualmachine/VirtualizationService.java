@@ -51,6 +51,11 @@ class VirtualizationService {
     private native boolean nativeIsOk(int clientFd);
 
     /*
+     * Retrive boolean value whether RELEASE_AVF_ENABLE_VENDOR_MODULES build flag is enabled or not.
+     */
+    static native boolean nativeIsVendorModulesFlagEnabled();
+
+    /*
      * Spawns a new virtmgr subprocess that will host a VirtualizationService
      * AIDL service.
      */
@@ -63,7 +68,9 @@ class VirtualizationService {
 
         IBinder binder = nativeConnect(mClientFd.getFd());
         if (binder == null) {
-            throw new VirtualMachineException("Could not connect to Virtualization Manager");
+            throw new VirtualMachineException(
+                    "Could not connect to Virtualization Manager. Probably the app has no"
+                            + " android.permission.MANAGE_VIRTUAL_MACHINE permission");
         }
         mBinder = IVirtualizationService.Stub.asInterface(binder);
     }
