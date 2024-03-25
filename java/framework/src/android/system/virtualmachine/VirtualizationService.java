@@ -63,7 +63,9 @@ class VirtualizationService {
 
         IBinder binder = nativeConnect(mClientFd.getFd());
         if (binder == null) {
-            throw new VirtualMachineException("Could not connect to Virtualization Manager");
+            throw new VirtualMachineException(
+                    "Could not connect to Virtualization Manager. Probably the app has no"
+                            + " android.permission.MANAGE_VIRTUAL_MACHINE permission");
         }
         mBinder = IVirtualizationService.Stub.asInterface(binder);
     }

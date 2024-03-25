@@ -38,10 +38,18 @@ import android.util.ArrayMap;
 import com.android.internal.annotations.GuardedBy;
 import com.android.system.virtualmachine.flags.Flags;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
-import java.util.Arrays;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -356,6 +364,30 @@ public class VirtualMachineManager {
         return null;
     }
 
+    private static final String SYSTEM_BUILD_FLAGS_PATH = "/system/etc/build_flags.json";
+    private static final String FLAG_VENDOR_MODULES_NAME = "RELEASE_AVF_ENABLE_VENDOR_MODULES";
+
+    private boolean isVendorModuleEnabled() throws VirtualMachineException {
+        try {
+            String content = new String(Files.readAllBytes(Paths.get(SYSTEM_BUILD_FLAGS_PATH)));
+            JSONObject jsonObject = new JSONObject(content);
+            JSONArray flags = jsonObject.getJSONArray("flags");
+            for (int idx = 0; idx < flags.length(); idx++) {
+                JSONObject flag = flags.getJSONObject(idx);
+                if (flag.getString("name").equals(FLAG_VENDOR_MODULES_NAME)) {
+                    return flag.getBoolean("value");
+                }
+            }
+        } catch (IOException e) {
+            throw new VirtualMachineException("failed to read system build flags json file", e);
+        } catch (JSONException e) {
+            throw new VirtualMachineException("failed to extract flag value from json object", e);
+        }
+        return false;
+    }
+
+    private static final String JSON_SUFFIX = ".json";
+
     /**
      * Returns a list of supported OS names.
      *
@@ -365,14 +397,23 @@ public class VirtualMachineManager {
     @FlaggedApi(Flags.FLAG_AVF_V_TEST_APIS)
     @NonNull
     public List<String> getSupportedOSList() throws VirtualMachineException {
-        synchronized (sCreateLock) {
-            VirtualizationService service = VirtualizationService.getInstance();
-            try {
-                return Arrays.asList(service.getBinder().getSupportedOSList());
-            } catch (RemoteException e) {
-                throw e.rethrowAsRuntimeException();
+        List<String> supportedOsList = new ArrayList<>();
+        if (isVendorModuleEnabled()) {
+            File directory = new File("/apex/com.android.virt/etc");
+            File[] files = directory.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    String fileName = file.getName();
+                    if (fileName.endsWith(JSON_SUFFIX)) {
+                        supportedOsList.add(
+                                fileName.substring(0, fileName.length() - JSON_SUFFIX.length()));
+                    }
+                }
             }
+        } else {
+            supportedOsList.add("microdroid");
         }
+        return supportedOsList;
     }
 
     /**
