@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "306720f1_ed62a8e0",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-25T05:04:54Z",
+      "side": 1,
+      "message": "Could you change this to check return code as well? If `service check` fails to run, then it would also be considered as `is_sk_supported`.",
+      "range": {
+        "startLine": 216,
+        "startChar": 8,
+        "endLine": 217,
+        "endChar": 64
+      },
+      "revId": "b8de2c0a582909ece060694a3ad94851a9dd6bc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
