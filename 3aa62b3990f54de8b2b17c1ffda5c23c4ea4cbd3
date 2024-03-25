@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04a51397_08f8a42e",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice_internal/IVirtualizationServiceInternal.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-25T14:26:41Z",
+      "side": 1,
+      "message": "May not be worth adding a comment, but instanceId is someone locked down (It is in the data directory of app), so the fact that caller had the instanceId is a sufficient indication of previous owner\u0027s intention.",
+      "range": {
+        "startLine": 113,
+        "startChar": 86,
+        "endLine": 113,
+        "endChar": 99
+      },
+      "revId": "3aa62b3990f54de8b2b17c1ffda5c23c4ea4cbd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
