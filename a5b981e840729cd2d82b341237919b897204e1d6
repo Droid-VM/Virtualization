@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8488308_7cd27bcd",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-03-25T08:38:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03e50e83_d84a51e8",
+      "range": {
+        "startLine": 311,
+        "startChar": 15,
+        "endLine": 311,
+        "endChar": 28
+      },
+      "revId": "a5b981e840729cd2d82b341237919b897204e1d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eaf80bbd_5155783f",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bfd1475_f7adf404",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-03-25T08:38:55Z",
+      "side": 1,
+      "message": "it looks like we cannot use Files.readString which was introduced in java 11 in framework code, but changed it to use readAllBytes instead.",
+      "parentUuid": "eaf80bbd_5155783f",
+      "range": {
+        "startLine": 595,
+        "startChar": 0,
+        "endLine": 596,
+        "endChar": 69
+      },
+      "revId": "a5b981e840729cd2d82b341237919b897204e1d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e876c35_a1bd8aff",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-03-25T08:02:48Z",
       "side": 1,
       "message": "use the correct method names",
+      "range": {
+        "startLine": 859,
+        "startChar": 29,
+        "endLine": 859,
+        "endChar": 54
+      },
+      "revId": "a5b981e840729cd2d82b341237919b897204e1d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd907eb5_4008cb42",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-03-25T08:38:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e876c35_a1bd8aff",
       "range": {
         "startLine": 859,
         "startChar": 29,
@@ -95,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "57b9abe8_40d06ee5",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 875,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-03-25T08:38:55Z",
+      "side": 1,
+      "message": "this logic is to ensure if a user sets protected_vm explicitly. do we want it for the raw config as well?",
+      "parentUuid": "41d4f5c7_0519d218",
+      "range": {
+        "startLine": 875,
+        "startChar": 12,
+        "endLine": 875,
+        "endChar": 53
+      },
+      "revId": "a5b981e840729cd2d82b341237919b897204e1d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec53bee8_2113f7dd",
         "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
         "patchSetId": 8
@@ -106,6 +202,24 @@
       "writtenOn": "2024-03-25T08:02:48Z",
       "side": 1,
       "message": "Add a TODO that this (private) API shall be removed. The new APIs will be like\n\n```\nbuilder\n    .setLinuxKernelConfig(new LinuxKernelConfig()\n        .setKernelPath(...)\n        .setInitRamdiskPath(...)\n        .setKernelCommandLine(...))\n    .setDiskConfig(new DiskConfig()\n        .addDisk(...)\n        .addDisk(...))\n```",
+      "revId": "a5b981e840729cd2d82b341237919b897204e1d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a636aedc_02ec2043",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 963,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-03-25T08:38:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec53bee8_2113f7dd",
       "revId": "a5b981e840729cd2d82b341237919b897204e1d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
