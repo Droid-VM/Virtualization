@@ -134,6 +134,30 @@
       },
       "revId": "5e427fbcd14c7d16f34f88f8bc264ef46d85b5a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e885d7c_207e6fa0",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1933736
+      },
+      "writtenOn": "2024-03-25T21:20:11Z",
+      "side": 1,
+      "message": "Great, what change do you suggest?\n\nJust FYI, I got these errors when trying different things.\n\nerror[E0308]: `?` operator has incompatible types\n   --\u003e packages/modules/Virtualization/zipfuse/src/main.rs:354:17\n    |\n354 |                 w.write_all(\u0026buf[start..end])?\n    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `usize`, found `()`\n    |\n    \u003d note: `?` operator cannot convert from `()` to `usize`\n\nerror: aborting due to 1 previous error\n\n\n\nerror[E0308]: mismatched types\n   --\u003e packages/modules/Virtualization/zipfuse/src/main.rs:354:17\n    |\n354 |                 w.write_all(\u0026buf[start..end])\n    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `usize`, found `Result\u003c(), Error\u003e`\n    |\n    \u003d note: expected type `usize`\n               found enum `std::result::Result\u003c(), std::io::Error\u003e",
+      "parentUuid": "9079187f_2b824845",
+      "range": {
+        "startLine": 353,
+        "startChar": 16,
+        "endLine": 353,
+        "endChar": 42
+      },
+      "revId": "5e427fbcd14c7d16f34f88f8bc264ef46d85b5a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
