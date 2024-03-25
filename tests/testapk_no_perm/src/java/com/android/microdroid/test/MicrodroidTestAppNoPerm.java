@@ -16,6 +16,7 @@
 
 package com.android.microdroid.test;
 
+import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineConfig;
 
 import com.android.compatibility.common.util.CddTest;
@@ -46,6 +47,7 @@ public class MicrodroidTestAppNoPerm extends MicrodroidDeviceTestBase {
     @Before
     public void setup() {
         prepareTestSetup(mProtectedVm, null);
+        revokePermission(VirtualMachine.MANAGE_VIRTUAL_MACHINE_PERMISSION);
     }
 
     @Test
