@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83f6b06e_5e25a83e",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-25T18:37:03Z",
+      "side": 1,
+      "message": "`android.run()` checks that the command succeeds \u0026 returns appropriate string, but I agree, its more robust to check the Command indeed succeeds here in the test, instead of matching against possibly failure string. Done. Thanks!",
+      "parentUuid": "306720f1_ed62a8e0",
+      "range": {
+        "startLine": 216,
+        "startChar": 8,
+        "endLine": 217,
+        "endChar": 64
+      },
+      "revId": "b8de2c0a582909ece060694a3ad94851a9dd6bc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba57353e_1ab16622",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-25T05:10:29Z",
       "side": 1,
       "message": "Pure question) How do we know whether two apps are essentially the same? This seems like that we\u0027re keeping the package name in the persist storage and doesn\u0027t clean it even when the app is uninstalled. Am I correct?\n\nThen what happens if \u0027a foreign app with the same package name + higher version\u0027 is installed before the intended update?",
+      "range": {
+        "startLine": 440,
+        "startChar": 0,
+        "endLine": 442,
+        "endChar": 0
+      },
+      "revId": "b8de2c0a582909ece060694a3ad94851a9dd6bc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1922c904_a447c808",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-25T18:37:03Z",
+      "side": 1,
+      "message": "I\u0027m not sure if I understand your question.\n\n1) If it is about how `MicrodroidTestApp` \u0026 `MicrodroidTestAppUpdated` are essentially same.\n\nThat is possible because they have same package name \u0026 same signer (Key used to sign them), use same dependencies etc.\n\nI think in Android, the hash of certificate is also considered?\n\n\n2) If it is about how Microdroid knows if the package is same or updated.\n\nIt is due to Secretkeeper/DICE policies. Relevant information about the apk is extracted by Microdroid Manger (using libapkmanifest [a]). MM then constructs that DICE policies allowing access to secrets only if the apk versions have gone up \u0026 Authority is the same(ie, same signer of the apk). The DICE policies are stored in a persistent storage (Secretkeeper)\n\n[a] https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/apkmanifest/\n[b] https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/microdroid_manager/src/vm_secret.rs;l\u003d161-175?q\u003dvm_secret\n\n\n\u003e  if \u0027a foreign app with the same package name + higher version\u0027 is installed before the intended update?\n\nIf the foreign app is signed with a different policy, then DICE policy checks will fail \u0026 VM will fail to boot.\n\nPlease let me know if that doesnt answer your question.",
+      "parentUuid": "ba57353e_1ab16622",
       "range": {
         "startLine": 440,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9728898e_789caa76",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-25T18:37:03Z",
+      "side": 1,
+      "message": "There is no harm in setting it to `true` \u0026 re-installation makes it more robust to missing uninstallation.\n\n\nI\u0027ve changed the argument to `/* reinstall\u003d */ true` in line with the style. Boolean params can be very confusing. \nThanks!",
+      "parentUuid": "223f4c31_79470596",
+      "range": {
+        "startLine": 443,
+        "startChar": 58,
+        "endLine": 443,
+        "endChar": 79
+      },
+      "revId": "b8de2c0a582909ece060694a3ad94851a9dd6bc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33a78630_c434bfde",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-03-25T05:10:29Z",
       "side": 1,
       "message": "Question: why do we need `adb root`?",
+      "range": {
+        "startLine": 468,
+        "startChar": 0,
+        "endLine": 468,
+        "endChar": 60
+      },
+      "revId": "b8de2c0a582909ece060694a3ad94851a9dd6bc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d066dfa_43ad66ba",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-25T18:37:03Z",
+      "side": 1,
+      "message": "I wanted to ensure some command succeeds in Microdroid shell to ensure it indeed boots. That command is `adb root`.",
+      "parentUuid": "33a78630_c434bfde",
       "range": {
         "startLine": 468,
         "startChar": 0,
