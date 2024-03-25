@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b74b18ef_615fd6fb",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-25T08:02:48Z",
+      "side": 0,
+      "message": "This condition is lost. Previously, if config path was null, we set payload binary name regardless of whether it\u0027s null or not.",
+      "range": {
+        "startLine": 293,
+        "startChar": 0,
+        "endLine": 293,
+        "endChar": 40
+      },
+      "revId": "721f4bec15b153c428f294a1cac0c232bdd28663",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
