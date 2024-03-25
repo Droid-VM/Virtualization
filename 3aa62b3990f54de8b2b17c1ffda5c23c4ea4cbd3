@@ -22,6 +22,30 @@
       },
       "revId": "3aa62b3990f54de8b2b17c1ffda5c23c4ea4cbd3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a6a14a5_2f7f9346",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice_internal/IVirtualizationServiceInternal.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-03-25T15:46:59Z",
+      "side": 1,
+      "message": "Hmm, isn\u0027t the instance ID semi-public, e.g. available from logcat (line 415 of `aidl.rs`) ?",
+      "parentUuid": "04a51397_08f8a42e",
+      "range": {
+        "startLine": 113,
+        "startChar": 86,
+        "endLine": 113,
+        "endChar": 99
+      },
+      "revId": "3aa62b3990f54de8b2b17c1ffda5c23c4ea4cbd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
