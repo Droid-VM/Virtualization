@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ff5109c7_fb8a46be",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-25T15:28:17Z",
+      "side": 1,
+      "message": "\u003e cached state that differentiate the first run from the subsequent runs\n\nIf you are testing the state preservation between 2 subsequent runs of a non-protected VM, then shouldn\u0027t we be actually persisting the instance-id to ensure non-protected VM follow the same code path as protected VM?\n\nOTOH, if you\u0027re non preserving states between 2 runs of test vms, how about allocating random 64 bytes\u0027? I think it would be good to avoid default 0s for instanceId.\n\nAlso, will you add a check in virtmgr to ensure that instanceId is non-0s?",
+      "parentUuid": "9c9614c6_989df97f",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 316,
+        "endChar": 92
+      },
+      "revId": "de057a6c6b2149dfa886cf1313f7752566bf18c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8b594080_bb797ed5",
         "filename": "rialto/tests/test.rs",
         "patchSetId": 4
@@ -119,6 +143,30 @@
       "side": 1,
       "message": "`removeVmInstance` is not available in `VirtualizationService` and it looks like it\u0027s not called anywhere yet. I can work on this part after you finishing the removal part of instance id. I don\u0027t want to add something that has conflict with your future plan.\n\nBtw, do you mind renaming the method to something more specific such as `removeVmInstanceId()`? since here I just created a `VmInstance`, it looks weird that I call `removeVmInstance` immediately after it, and it doesn\u0027t actually remove the `vm_instance`...\n\nIs instance_id useful for non-protected VM?",
       "parentUuid": "8b594080_bb797ed5",
+      "range": {
+        "startLine": 331,
+        "startChar": 4,
+        "endLine": 331,
+        "endChar": 22
+      },
+      "revId": "de057a6c6b2149dfa886cf1313f7752566bf18c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7df7da0_b709f346",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-25T15:28:17Z",
+      "side": 1,
+      "message": "\u003e removeVmInstance is not available in VirtualizationService and it looks like it\u0027s not called anywhere yet.\n\nits available in `IVirtualizationServiceInternal`.\n\n\u003e I can work on this part after you finishing the removal part of instance id\n\nI\u0027ll probably work on removeVmInstance first \u0026 instance.img removal last. But yeah, SG. Would you add a TODO(b/xx) so that we rememeber where all to trigger `removeVmInstance` from?\n\n\n\u003e renaming the method to something more specific such as removeVmInstanceId()?\n\nThe purpose of that method is really to remove all global state related to the instance. In case of service_vm, this maybe just instance_id, but in case of Microdroid based VM, it will include deleting Secretkeeper based secrets, so I think the name of the method is just fine.\n\n\u003e and it doesn\u0027t actually remove the vm_instance\n\n`removeVmInstance` should be triggered when the instance is no longer needed \u0026 should be obsolete. fn `nonprotected_vm_instance` seems to be using temporary file for instance.img too indicating the instance really becomes obsolete immediately after the file goes out of scope i.e, when the method ends.",
+      "parentUuid": "044a99f3_370bcd2f",
       "range": {
         "startLine": 331,
         "startChar": 4,
@@ -225,6 +273,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "98e85a48_7cdc5ec6",
+        "filename": "service_vm/manager/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-25T15:28:17Z",
+      "side": 1,
+      "message": "\u003e why not just take the instanceId file descriptor in the config like instance image\n\nI think passing around 64 bytes of data instead of fd is a more robust api. Converting the instanceId into parcels early ensure it is the right size etc.\n\n\nFrom what I gather, the reason instance.img  is passed around as fd is because it is formatted by VS \u0026 backs a virtio-blk device which is written on my VM. instance-id is a read-only data in the VM\u0027s device tree as far as VM is concerned.\n\n\u003e With the current config format, people are not always aware that #allocateInstanceId is required for the id creation\n\n\u003e you can also ensure that allocateInstanceId is always called for the instance ID creation.\n\nEven then there is nothing preventing a client to write 64 bytes into instanceId file \u0026 use that VM run. We should check for default allocation of VM instance is prevented by checking instanceId as suggested in other comment.",
+      "parentUuid": "65f2e956_5c1d6093",
+      "range": {
+        "startLine": 248,
+        "startChar": 4,
+        "endLine": 248,
+        "endChar": 30
+      },
+      "revId": "de057a6c6b2149dfa886cf1313f7752566bf18c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "64148174_76faf373",
         "filename": "service_vm/manager/src/lib.rs",
         "patchSetId": 4
@@ -260,6 +332,30 @@
       "side": 1,
       "message": "\u003e can we add a log::warn!() on else arm of the logic, specifying the new instance_id is being created. \n\nYou already have a logging when a new instance_id is created. When this log appears in the stack of service VM log, we\u0027ll know that it\u0027s the first instance.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/virtualizationservice/src/aidl.rs;l\u003d415;drc\u003d20cb84bffb91d2825445e70a017470224f3b62c8",
       "parentUuid": "64148174_76faf373",
+      "range": {
+        "startLine": 251,
+        "startChar": 7,
+        "endLine": 251,
+        "endChar": 34
+      },
+      "revId": "de057a6c6b2149dfa886cf1313f7752566bf18c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbff505d_32b1e417",
+        "filename": "service_vm/manager/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-25T15:28:17Z",
+      "side": 1,
+      "message": "But that is a logging at different depth. There is also a log emitted from within the VM (https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/microdroid_manager/src/vm_secret.rs;l\u003d116?q\u003dvm_secret.rs).\n\nLooking at bugreport, we wouldn\u0027t be able to conclude that RKPVM is being reset from the mentioned log line, I think it might be good to indicate RKPVM/service_vm is being reset here by emitting a log here?",
+      "parentUuid": "dd9fe1a7_6d9880bb",
       "range": {
         "startLine": 251,
         "startChar": 7,
