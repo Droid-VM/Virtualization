@@ -16,6 +16,121 @@
       "message": "Hi Shikha, PTAL.",
       "revId": "de057a6c6b2149dfa886cf1313f7752566bf18c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "713f2edf_1efd4fa4",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-25T11:59:50Z",
+      "side": 1,
+      "message": "It looks like this test/method is creating new instance_id each time, writing it into a temp file which goes out of scope rather soon. Is persisting the file of any use in this case? [Non protected service vm]",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 316,
+        "endChar": 92
+      },
+      "revId": "de057a6c6b2149dfa886cf1313f7752566bf18c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b594080_bb797ed5",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-25T11:59:50Z",
+      "side": 1,
+      "message": "Each allocation of `instance_id` creates an entry in VS\u0027 database, once the instance-id is obsolete, it should be removed from the db.\n\nCan you trigger `removeVmInstance`[1] when this instance is no more needed? [This might be tricky though, because that will be the decision of a caller]. If this is only used for testing, maybe we can call `removeVmInstance` after `VmInstance::create` ?\n\n\nWhat is the use case of non-protected service_vm? Does it not require persistence (as in hinted by instance.img being a temp file)?\n\n\n[1] https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/virtualizationservice/aidl/android/system/virtualizationservice_internal/IVirtualizationServiceInternal.aidl;l\u003d110?q\u003dremoveVmInstance\u0026sq\u003drepo:googleplex-android%2Fplatform%2Fsuperproject%2Fmain%20b:main",
+      "range": {
+        "startLine": 331,
+        "startChar": 4,
+        "endLine": 331,
+        "endChar": 22
+      },
+      "revId": "de057a6c6b2149dfa886cf1313f7752566bf18c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be0556f5_d6f1da76",
+        "filename": "service_vm/manager/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-25T11:59:50Z",
+      "side": 1,
+      "message": "What is the deletion/reset path of Service VM? Can/should the client (rkpd?) reset the vm\u0027s state (delete VM/ reboot a VM). If so how?\n\nThe context is, we should delete the the instance-id just allocated to VM using using `removeVmInstance()` once the VM is obsolete.\n\nIf factory reset is the only way service vm becomes obsolete, then we\u0027re covered by the fact the VS\u0027 db also gets deleted on FR, but if there are other ways of resetting the service vm, we should cover those.",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 22
+      },
+      "revId": "de057a6c6b2149dfa886cf1313f7752566bf18c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "454c9948_e2ddd25c",
+        "filename": "service_vm/manager/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-25T11:59:50Z",
+      "side": 1,
+      "message": "How about we move this method to libvmclient, so that other users of the library such as /vm/src/run.rs can also use it directly? Also if we can get `instance_starter.rs` to use this, we will be able to cut on fragmentation.",
+      "range": {
+        "startLine": 248,
+        "startChar": 4,
+        "endLine": 248,
+        "endChar": 30
+      },
+      "revId": "de057a6c6b2149dfa886cf1313f7752566bf18c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64148174_76faf373",
+        "filename": "service_vm/manager/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-25T11:59:50Z",
+      "side": 1,
+      "message": "Suggestion: `get_or_create` like methods are failure prone \u0026 hide the diagnostic information at times. Do you have any other signal to indicate that a new VM Id should be allocated (perhaps new VM created or something?). Otherwise if presence or absence or the file is the only indicator of a new VM being created, can we add a `log::warn!()` on else arm of the logic, specifying the new instance_id is being created. This is because it essentially resets the VM, the key blobs can no longer be decrypted.",
+      "range": {
+        "startLine": 251,
+        "startChar": 7,
+        "endLine": 251,
+        "endChar": 34
+      },
+      "revId": "de057a6c6b2149dfa886cf1313f7752566bf18c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
