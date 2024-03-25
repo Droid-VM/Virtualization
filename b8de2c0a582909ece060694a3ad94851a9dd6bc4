@@ -22,6 +22,75 @@
       },
       "revId": "b8de2c0a582909ece060694a3ad94851a9dd6bc4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba57353e_1ab16622",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-25T05:10:29Z",
+      "side": 1,
+      "message": "Pure question) How do we know whether two apps are essentially the same? This seems like that we\u0027re keeping the package name in the persist storage and doesn\u0027t clean it even when the app is uninstalled. Am I correct?\n\nThen what happens if \u0027a foreign app with the same package name + higher version\u0027 is installed before the intended update?",
+      "range": {
+        "startLine": 440,
+        "startChar": 0,
+        "endLine": 442,
+        "endChar": 0
+      },
+      "revId": "b8de2c0a582909ece060694a3ad94851a9dd6bc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "223f4c31_79470596",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-25T05:10:29Z",
+      "side": 1,
+      "message": "Question: Do we need `reinstall\u003dtrue`? We\u0027d uninstalled the app at L440.\n\nPlus, style is inconsistent within this CL. Either use `true` (with no comment) or `/* reinstall\u003d */ true`.",
+      "range": {
+        "startLine": 443,
+        "startChar": 58,
+        "endLine": 443,
+        "endChar": 79
+      },
+      "revId": "b8de2c0a582909ece060694a3ad94851a9dd6bc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33a78630_c434bfde",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-25T05:10:29Z",
+      "side": 1,
+      "message": "Question: why do we need `adb root`?",
+      "range": {
+        "startLine": 468,
+        "startChar": 0,
+        "endLine": 468,
+        "endChar": 60
+      },
+      "revId": "b8de2c0a582909ece060694a3ad94851a9dd6bc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
