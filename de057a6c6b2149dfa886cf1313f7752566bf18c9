@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c05f949c_a12a0837",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-25T13:38:15Z",
+      "side": 1,
+      "message": "Let\u0027s just focus on the protected Service VM in this cl.",
+      "revId": "de057a6c6b2149dfa886cf1313f7752566bf18c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "713f2edf_1efd4fa4",
@@ -31,6 +48,30 @@
       "writtenOn": "2024-03-25T11:59:50Z",
       "side": 1,
       "message": "It looks like this test/method is creating new instance_id each time, writing it into a temp file which goes out of scope rather soon. Is persisting the file of any use in this case? [Non protected service vm]",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 316,
+        "endChar": 92
+      },
+      "revId": "de057a6c6b2149dfa886cf1313f7752566bf18c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c9614c6_989df97f",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-25T13:38:15Z",
+      "side": 1,
+      "message": "I prefer not to persist file for testing. It\u0027s much easier to debug the test when the tests don\u0027t have such kind of cached state that differentiate the first run from the subsequent runs.",
+      "parentUuid": "713f2edf_1efd4fa4",
       "range": {
         "startLine": 316,
         "startChar": 0,
@@ -66,6 +107,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "044a99f3_370bcd2f",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-25T13:38:15Z",
+      "side": 1,
+      "message": "`removeVmInstance` is not available in `VirtualizationService` and it looks like it\u0027s not called anywhere yet. I can work on this part after you finishing the removal part of instance id. I don\u0027t want to add something that has conflict with your future plan.\n\nBtw, do you mind renaming the method to something more specific such as `removeVmInstanceId()`? since here I just created a `VmInstance`, it looks weird that I call `removeVmInstance` immediately after it, and it doesn\u0027t actually remove the `vm_instance`...\n\nIs instance_id useful for non-protected VM?",
+      "parentUuid": "8b594080_bb797ed5",
+      "range": {
+        "startLine": 331,
+        "startChar": 4,
+        "endLine": 331,
+        "endChar": 22
+      },
+      "revId": "de057a6c6b2149dfa886cf1313f7752566bf18c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be0556f5_d6f1da76",
         "filename": "service_vm/manager/src/lib.rs",
         "patchSetId": 4
@@ -77,6 +142,30 @@
       "writtenOn": "2024-03-25T11:59:50Z",
       "side": 1,
       "message": "What is the deletion/reset path of Service VM? Can/should the client (rkpd?) reset the vm\u0027s state (delete VM/ reboot a VM). If so how?\n\nThe context is, we should delete the the instance-id just allocated to VM using using `removeVmInstance()` once the VM is obsolete.\n\nIf factory reset is the only way service vm becomes obsolete, then we\u0027re covered by the fact the VS\u0027 db also gets deleted on FR, but if there are other ways of resetting the service vm, we should cover those.",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 22
+      },
+      "revId": "de057a6c6b2149dfa886cf1313f7752566bf18c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66429a53_dc5f2430",
+        "filename": "service_vm/manager/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-25T13:38:15Z",
+      "side": 1,
+      "message": "The Service VM is a singleton instance, only factory reset will reset it. Since factory reset deletes the VS database and the instance_id here, we don\u0027t need to do anything else.",
+      "parentUuid": "be0556f5_d6f1da76",
       "range": {
         "startLine": 126,
         "startChar": 0,
@@ -112,6 +201,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "65f2e956_5c1d6093",
+        "filename": "service_vm/manager/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-25T13:38:15Z",
+      "side": 1,
+      "message": "About this, why not just take the instanceId file descriptor in the config like instance image? Then you can internalize all the `if exist { read } else { allocate }` logic all somewhere instead of letting each caller repeats similar code?\n\nIf it\u0027s handled internally, you can also ensure that `allocateInstanceId` is always called for the instance ID creation. With the current config format, people are not always aware that `#allocateInstanceId` is required for the id creation.",
+      "parentUuid": "454c9948_e2ddd25c",
+      "range": {
+        "startLine": 248,
+        "startChar": 4,
+        "endLine": 248,
+        "endChar": 30
+      },
+      "revId": "de057a6c6b2149dfa886cf1313f7752566bf18c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "64148174_76faf373",
         "filename": "service_vm/manager/src/lib.rs",
         "patchSetId": 4
@@ -123,6 +236,30 @@
       "writtenOn": "2024-03-25T11:59:50Z",
       "side": 1,
       "message": "Suggestion: `get_or_create` like methods are failure prone \u0026 hide the diagnostic information at times. Do you have any other signal to indicate that a new VM Id should be allocated (perhaps new VM created or something?). Otherwise if presence or absence or the file is the only indicator of a new VM being created, can we add a `log::warn!()` on else arm of the logic, specifying the new instance_id is being created. This is because it essentially resets the VM, the key blobs can no longer be decrypted.",
+      "range": {
+        "startLine": 251,
+        "startChar": 7,
+        "endLine": 251,
+        "endChar": 34
+      },
+      "revId": "de057a6c6b2149dfa886cf1313f7752566bf18c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd9fe1a7_6d9880bb",
+        "filename": "service_vm/manager/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-25T13:38:15Z",
+      "side": 1,
+      "message": "\u003e can we add a log::warn!() on else arm of the logic, specifying the new instance_id is being created. \n\nYou already have a logging when a new instance_id is created. When this log appears in the stack of service VM log, we\u0027ll know that it\u0027s the first instance.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/virtualizationservice/src/aidl.rs;l\u003d415;drc\u003d20cb84bffb91d2825445e70a017470224f3b62c8",
+      "parentUuid": "64148174_76faf373",
       "range": {
         "startLine": 251,
         "startChar": 7,
