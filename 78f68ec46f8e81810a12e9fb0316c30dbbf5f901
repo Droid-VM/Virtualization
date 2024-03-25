@@ -16,6 +16,23 @@
       "message": "I was faced at a mystery point with presubmit check, started to failed while executing `getSupportedOSList` in `MicrodroidTestAppNoPerm`. Experimentally I found that API works when the app have `MANAGE_VIRTUAL_MACHINE`, but still don\u0027t know the reason why it needs. Switching GID between `2000` and `3013` changed nothing, so seems capability affected it. Does someone know how it happened? (Add @inseob@google.com as cc, the owner of this API.) \n\nOn the other hand, I could make the test available by granting permission in `setup` phase of test class, and revoking right before starting each test in `MicrodroidTestAppNoPerm`.",
       "revId": "78f68ec46f8e81810a12e9fb0316c30dbbf5f901",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65064301_91316300",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-25T13:32:41Z",
+      "side": 1,
+      "message": "I vaguely remember we tried this and it caused problems. Not sure if the test failure is indicating that or is just random.",
+      "revId": "78f68ec46f8e81810a12e9fb0316c30dbbf5f901",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
