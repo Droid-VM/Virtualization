@@ -158,6 +158,30 @@
       },
       "revId": "5e427fbcd14c7d16f34f88f8bc264ef46d85b5a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bfed256_c8f0d6dc",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-03-26T12:14:58Z",
+      "side": 1,
+      "message": "It looks like @jiyong@google.com wrote this, so perhaps he can comment about what was intended. But I\u0027m pretty sure just dropping some of the buffer because the writer isn\u0027t ready is not correct.",
+      "parentUuid": "1e885d7c_207e6fa0",
+      "range": {
+        "startLine": 353,
+        "startChar": 16,
+        "endLine": 353,
+        "endChar": 42
+      },
+      "revId": "5e427fbcd14c7d16f34f88f8bc264ef46d85b5a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
