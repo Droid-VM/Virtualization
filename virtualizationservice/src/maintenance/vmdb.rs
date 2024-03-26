@@ -29,6 +29,9 @@ const DB_FILENAME: &str = "vmids.sqlite";
 /// (Default value of `SQLITE_LIMIT_VARIABLE_NUMBER` for <= 3.32.0)
 const MAX_VARIABLES: usize = 999;
 
+/// Maximum number of VM IDs that a single app can have.
+const MAX_VM_IDS_PER_APP: usize = 400;
+
 /// Return the current time as milliseconds since epoch.
 fn db_now() -> u64 {
     let now = std::time::SystemTime::now()
@@ -216,6 +219,12 @@ impl VmIdDb {
 
     /// Add the given VM ID into the database.
     pub fn add_vm_id(&mut self, vm_id: &VmId, user_id: i32, app_id: i32) -> Result<()> {
+        let count =
+            self.count_vm_ids_for_app(user_id, app_id).context("failed to determine VM count")?;
+        if count >= MAX_VM_IDS_PER_APP {
+            error!("Failing add_vm_id(user_id={user_id}, app_id=={app_id} as app already has {count} VM IDs");
+            return Err(anyhow!("too many existing VM IDs"));
+        }
         let now = db_now();
         let _rows = self
             .conn
@@ -270,6 +279,15 @@ impl VmIdDb {
         }
 
         Ok(vm_ids)
+    }
+
+    /// Determine the number of VM IDs associated with `(user_id, app_id)`.
+    fn count_vm_ids_for_app(&mut self, user_id: i32, app_id: i32) -> Result<usize> {
+        let mut stmt = self
+            .conn
+            .prepare("SELECT COUNT(vm_id) FROM main.vmids WHERE user_id = ? AND app_id = ?;")
+            .context("failed to prepare SELECT stmt")?;
+        stmt.query_row(params![user_id, app_id], |row| row.get(0)).context("query failed")
     }
 
     /// Return all of the `(user_id, app_id)` pairs present in the database.
@@ -457,31 +475,39 @@ mod tests {
 
         assert_eq!(vec![VM_ID1, VM_ID2, VM_ID3], db.vm_ids_for_user(USER1).unwrap());
         assert_eq!(vec![VM_ID1, VM_ID2, VM_ID3], db.vm_ids_for_app(USER1, APP_A).unwrap());
+        assert_eq!(3, db.count_vm_ids_for_app(USER1, APP_A).unwrap());
         assert_eq!(vec![VM_ID4], db.vm_ids_for_app(USER2, APP_B).unwrap());
+        assert_eq!(1, db.count_vm_ids_for_app(USER2, APP_B).unwrap());
         assert_eq!(vec![VM_ID5], db.vm_ids_for_user(USER3).unwrap());
         assert_eq!(empty, db.vm_ids_for_user(USER_UNKNOWN).unwrap());
         assert_eq!(empty, db.vm_ids_for_app(USER1, APP_UNKNOWN).unwrap());
+        assert_eq!(0, db.count_vm_ids_for_app(USER1, APP_UNKNOWN).unwrap());
 
         db.delete_vm_ids(&[VM_ID2, VM_ID3]).unwrap();
 
         assert_eq!(vec![VM_ID1], db.vm_ids_for_user(USER1).unwrap());
         assert_eq!(vec![VM_ID1], db.vm_ids_for_app(USER1, APP_A).unwrap());
+        assert_eq!(1, db.count_vm_ids_for_app(USER1, APP_A).unwrap());
 
         // OK to delete things that don't exist.
         db.delete_vm_ids(&[VM_ID2, VM_ID3]).unwrap();
 
         assert_eq!(vec![VM_ID1], db.vm_ids_for_user(USER1).unwrap());
         assert_eq!(vec![VM_ID1], db.vm_ids_for_app(USER1, APP_A).unwrap());
+        assert_eq!(1, db.count_vm_ids_for_app(USER1, APP_A).unwrap());
 
         db.add_vm_id(&VM_ID2, USER1, APP_A).unwrap();
         db.add_vm_id(&VM_ID3, USER1, APP_A).unwrap();
 
         assert_eq!(vec![VM_ID1, VM_ID2, VM_ID3], db.vm_ids_for_user(USER1).unwrap());
         assert_eq!(vec![VM_ID1, VM_ID2, VM_ID3], db.vm_ids_for_app(USER1, APP_A).unwrap());
+        assert_eq!(3, db.count_vm_ids_for_app(USER1, APP_A).unwrap());
         assert_eq!(vec![VM_ID4], db.vm_ids_for_app(USER2, APP_B).unwrap());
+        assert_eq!(1, db.count_vm_ids_for_app(USER2, APP_B).unwrap());
         assert_eq!(vec![VM_ID5], db.vm_ids_for_user(USER3).unwrap());
         assert_eq!(empty, db.vm_ids_for_user(USER_UNKNOWN).unwrap());
         assert_eq!(empty, db.vm_ids_for_app(USER1, APP_UNKNOWN).unwrap());
+        assert_eq!(0, db.count_vm_ids_for_app(USER1, APP_UNKNOWN).unwrap());
 
         assert_eq!(
             vec![(USER1, APP_A), (USER2, APP_B), (USER3, APP_C)],
@@ -512,5 +538,17 @@ mod tests {
         // Invalid row is skipped and remainder returned.
         assert_eq!(vec![VM_ID1, VM_ID2, VM_ID3], db.vm_ids_for_user(USER1).unwrap());
         show_contents(&db);
+    }
+
+    #[test]
+    fn test_too_many_vms() {
+        let mut db = new_test_db();
+        for idx in 0..MAX_VM_IDS_PER_APP {
+            let mut vm_id = [0u8; 64];
+            vm_id[0..8].copy_from_slice(&(idx as u64).to_be_bytes());
+            db.add_vm_id(&vm_id, USER1, APP_A).unwrap();
+        }
+        let result = db.add_vm_id(&VM_ID1, USER1, APP_A);
+        assert!(result.is_err());
     }
 }
