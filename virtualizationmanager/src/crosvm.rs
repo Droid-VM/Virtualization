@@ -120,6 +120,7 @@ pub struct CrosvmConfig {
     pub dtbo: Option<File>,
     pub device_tree_overlay: Option<File>,
     pub display_config: Option<DisplayConfig>,
+    pub input_device_options: Vec<InputDeviceOption>,
 }
 
 #[derive(Debug)]
@@ -152,6 +153,14 @@ fn try_into_non_zero_u32(value: i32) -> Result<NonZeroU32> {
 pub struct DiskFile {
     pub image: File,
     pub writable: bool,
+}
+
+/// virtio-input device configuration from `external/crosvm/src/crosvm/config.rs`
+#[derive(Debug)]
+#[allow(dead_code)]
+pub enum InputDeviceOption {
+    EvDev(File),
+    SingleTouch { file: File, width: Option<u32>, height: Option<u32>, name: Option<String> },
 }
 
 type VfioDevice = Strong<dyn IBoundDevice>;
@@ -963,6 +972,21 @@ fn run_vm(
         .arg(format!("--android-display-service={}", config.name));
     }
 
+    for input_device_option in config.input_device_options.iter() {
+        command.arg("--input");
+        command.arg(match input_device_option {
+            InputDeviceOption::EvDev(file) => {
+                format!("evdev[path={}]", add_preserved_fd(&mut preserved_fds, file))
+            }
+            InputDeviceOption::SingleTouch { file, width, height, name } => format!(
+                "single-touch[path={}{}{}{}]",
+                add_preserved_fd(&mut preserved_fds, file),
+                width.map_or("".into(), |w| format!(",width={}", w)),
+                height.map_or("".into(), |h| format!(",height={}", h)),
+                name.as_ref().map_or("".into(), |n| format!(",name={}", n))
+            ),
+        });
+    }
     append_platform_devices(&mut command, &mut preserved_fds, &config)?;
 
     debug!("Preserving FDs {:?}", preserved_fds);
