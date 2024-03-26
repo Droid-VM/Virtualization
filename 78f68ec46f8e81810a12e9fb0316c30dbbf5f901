@@ -87,6 +87,42 @@
       "parentUuid": "53514620_27a80ff9",
       "revId": "78f68ec46f8e81810a12e9fb0316c30dbbf5f901",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f789b1e_2322bbae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-03-26T01:39:36Z",
+      "side": 1,
+      "message": "That\u0027s interesting. When I tested locally, error wasn\u0027t thrown when running `MicrodroidTestApp`, unlike `MicrodroidTestAppNoPerm`. And it seems like the root cause is slightly different. Error in my machine contains `Could not connect to Virtualization Manager`, but the bug Jiyong mentioned doesn\u0027t.",
+      "parentUuid": "5b97dbd5_ee2e71ba",
+      "revId": "78f68ec46f8e81810a12e9fb0316c30dbbf5f901",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae802c04_16b219eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-03-26T01:39:36Z",
+      "side": 1,
+      "message": "\u003e Actually an app without MANAGE_VIRTUAL_MACHINE permission shouldn\u0027t need getSupportedOSList no?\n\n`getSupportedOSList` itself doesn\u0027t need `MANAGE_VIRTUAL_MACHINE` permission, but tries to connect with virtmgr. With borrowing David\u0027s comment below:\n\n\u003e Test App lacks MANAGE_VIRTUAL_MACHINE which means it lacks SYS_NICE in its permitted set.\n\nThis seems to be related to this issue. OOC, could we grant SYS_NICE to test app directly then..?\n\n\u003e Ugh, we might be able to work around this by statically giving the app permission in the AndroidTest.xml(as opposed to granting it during setup), and just revoking it before the test. IIRC, activity manager won\u0027t kill it during revoke, but will kill it during the grant.\n\nYeah, I exactly thought about this. Granting the permission in `AndroidTest.xml`, and revoking while running test class.",
+      "parentUuid": "5966f3dd_389d02c0",
+      "revId": "78f68ec46f8e81810a12e9fb0316c30dbbf5f901",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
