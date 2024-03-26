@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3fbe22cc_760753b4",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-26T11:13:54Z",
+      "side": 1,
+      "message": "We\u0027re trying to run `service check android.hardware.security.secretkeeper.ISecretkeeper/default` directly, but your comment makes me think if we should check if `vm check-feature-enabled com.android.kvm.LLPVM_CHANGES` as well.\n\nPerhaps not, because android.hardware.security.secretkeeper.ISecretkeeper/default is conditionally enabled based on llpvm_changes as well?",
+      "parentUuid": "bfe5c15b_fbb0f7f0",
+      "range": {
+        "startLine": 216,
+        "startChar": 8,
+        "endLine": 217,
+        "endChar": 64
+      },
+      "revId": "b8de2c0a582909ece060694a3ad94851a9dd6bc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ba57353e_1ab16622",
         "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
         "patchSetId": 14
