@@ -16,6 +16,24 @@
       "message": "Question: Is this still necessary? I remeber that Alan had fixed the bug in `findFile()`",
       "revId": "f8ca219e58cd58cdbaad88582ca24ab263ecf02b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47168df3_11bad36e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-03-26T11:25:02Z",
+      "side": 1,
+      "message": "I don\u0027t think this has much to do with bug fix in `findFile()`. This is needed because aosp/2983613 changes the TestDir of tradefed to /data/local/tmp/virt/tradefed/.\n\nbootfiles added using `addBootFile()` are copied to TEST_ROOT of tradefed.\n\nAlthough I\u0027m not fully aware of the complecity of boot images. It seems, the system properties are set by MicrodroidHostTests to TEST_ROOT \u0026 bootfiles are copied to TEST_ROOT of tradefed. What if the thee test directory is different (what I actually need). I could use a review on design. Thanks",
+      "parentUuid": "e01d4080_56ebadea",
+      "revId": "f8ca219e58cd58cdbaad88582ca24ab263ecf02b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
