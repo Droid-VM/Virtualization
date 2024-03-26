@@ -69,6 +69,24 @@
       "parentUuid": "c7f6b972_80d72fec",
       "revId": "78f68ec46f8e81810a12e9fb0316c30dbbf5f901",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5966f3dd_389d02c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-03-26T00:06:05Z",
+      "side": 1,
+      "message": "\u003e Experimentally I found that API works when the app have `MANAGE_VIRTUAL_MACHINE`, but still don\u0027t know the reason why it needs.\n\nActually an app without `MANAGE_VIRTUAL_MACHINE` permission shouldn\u0027t need `getSupportedOSList` no?",
+      "parentUuid": "53514620_27a80ff9",
+      "revId": "78f68ec46f8e81810a12e9fb0316c30dbbf5f901",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
