@@ -70,6 +70,30 @@
       },
       "revId": "1af6c135a8fcb2c6c659f15f250c9a64564716e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d6ac0d5_9c1c76e6",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-26T13:02:43Z",
+      "side": 1,
+      "message": "\u003e Well, constants aren\u0027t there to be inherited here.\n\nIf private works then yes we should have that, always go for the tightest visibility. I assumed these were used in descendant classes.\n\n\u003e  it\u0027s basically for public APIs\n\nYeah, it makes a lot more sense in that context.\n\n\u003e framework engineers follows the rule because Lint enforces it.\n\nInteresting; I hadn\u0027t come across that, but I\u0027ve done basically no framework work for a few years now. But sounds like the lint rule might be over-eager.\n\nI would very much be against enforcing the rule everywhere.",
+      "parentUuid": "5e32a300_7e57b3ae",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 13
+      },
+      "revId": "1af6c135a8fcb2c6c659f15f250c9a64564716e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
