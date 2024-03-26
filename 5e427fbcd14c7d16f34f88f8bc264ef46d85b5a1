@@ -182,6 +182,30 @@
       },
       "revId": "5e427fbcd14c7d16f34f88f8bc264ef46d85b5a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c80ea205_91f6a82d",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-26T12:55:03Z",
+      "side": 1,
+      "message": "Not sure why this is recognized as an unused_io_amount. The return value of the `write` call is used to construct the return value of the containing `read` function.\n\n`write_all` is not the intention here.",
+      "parentUuid": "0bfed256_c8f0d6dc",
+      "range": {
+        "startLine": 353,
+        "startChar": 16,
+        "endLine": 353,
+        "endChar": 42
+      },
+      "revId": "5e427fbcd14c7d16f34f88f8bc264ef46d85b5a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
