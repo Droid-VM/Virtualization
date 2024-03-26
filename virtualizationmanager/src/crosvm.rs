@@ -118,6 +118,7 @@ pub struct CrosvmConfig {
     pub vfio_devices: Vec<VfioDevice>,
     pub dtbo: Option<File>,
     pub device_tree_overlay: Option<File>,
+    pub input_device_options: Vec<InputDeviceOption>,
 }
 
 /// A disk image to pass to crosvm for a VM.
@@ -125,6 +126,21 @@ pub struct CrosvmConfig {
 pub struct DiskFile {
     pub image: File,
     pub writable: bool,
+}
+
+/// virtio-input device configuration from `external/crosvm/src/crosvm/config.rs`
+#[derive(Debug)]
+// Some of them isn't implemented yet.
+#[allow(dead_code)]
+pub enum InputDeviceOption {
+    Evdev { file: File },
+    Keyboard { file: File },
+    Mouse { file: File },
+    MultiTouch { file: File, width: Option<u32>, height: Option<u32>, name: Option<String> },
+    Rotary { file: File },
+    SingleTouch { file: File, width: Option<u32>, height: Option<u32>, name: Option<String> },
+    Switches { file: File },
+    Trackpad { file: File, width: Option<u32>, height: Option<u32>, name: Option<String> },
 }
 
 type VfioDevice = Strong<dyn IBoundDevice>;
@@ -928,6 +944,25 @@ fn run_vm(
         command.arg("--device-tree-overlay").arg(add_preserved_fd(&mut preserved_fds, dt_overlay));
     }
 
+    for input_device_option in config.input_device_options.iter() {
+        command.arg("--input");
+        command.arg(match input_device_option {
+            InputDeviceOption::Evdev { file } => {
+                format!("evdev[path={}]", add_preserved_fd(&mut preserved_fds, file))
+            }
+            InputDeviceOption::Keyboard { file } => {
+                format!("keyboard[path={}]", add_preserved_fd(&mut preserved_fds, file))
+            }
+            InputDeviceOption::SingleTouch { file, width, height, name } => format!(
+                "single-touch[path={}{}{}{}]",
+                add_preserved_fd(&mut preserved_fds, file),
+                if let Some(w) = width { format!(",width={}", w) } else { "".into() },
+                if let Some(h) = height { format!(",height={}", h) } else { "".into() },
+                if let Some(n) = name { format!(",name={}", n) } else { "".into() }
+            ),
+            _ => todo!(),
+        });
+    }
     append_platform_devices(&mut command, &mut preserved_fds, &config)?;
 
     debug!("Preserving FDs {:?}", preserved_fds);

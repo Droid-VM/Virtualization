@@ -40,6 +40,7 @@ import android.os.PersistableBundle;
 import android.sysprop.HypervisorProperties;
 import android.system.virtualizationservice.DiskImage;
 import android.system.virtualizationservice.Partition;
+import android.system.virtualizationservice.InputDevice;
 import android.system.virtualizationservice.VirtualMachineAppConfig;
 import android.system.virtualizationservice.VirtualMachinePayloadConfig;
 import android.system.virtualizationservice.VirtualMachineRawConfig;
@@ -671,6 +672,7 @@ public final class VirtualMachineConfig {
             } else {
                 config.devices = new String[0];
             }
+            config.inputDevices = new InputDevice[0];
 
         } catch (JSONException | IOException e) {
             throw new IllegalStateException("malformed input", e);

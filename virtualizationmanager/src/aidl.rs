@@ -17,7 +17,7 @@
 use crate::{get_calling_pid, get_calling_uid};
 use crate::atom::{write_vm_booted_stats, write_vm_creation_stats};
 use crate::composite::make_composite_image;
-use crate::crosvm::{CrosvmConfig, DiskFile, PayloadState, VmContext, VmInstance, VmState};
+use crate::crosvm::{CrosvmConfig, DiskFile, InputDeviceOption, PayloadState, VmContext, VmInstance, VmState};
 use crate::debug_config::DebugConfig;
 use crate::dt_overlay::{create_device_tree_overlay, VM_DT_OVERLAY_MAX_SIZE, VM_DT_OVERLAY_PATH};
 use crate::payload::{add_microdroid_payload_images, add_microdroid_system_images, add_microdroid_vendor_image};
@@ -32,6 +32,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
     AssignableDevice::AssignableDevice,
     CpuTopology::CpuTopology,
     DiskImage::DiskImage,
+    InputDevice::InputDevice,
     IVirtualMachine::{BnVirtualMachine, IVirtualMachine},
     IVirtualMachineCallback::IVirtualMachineCallback,
     IVirtualizationService::IVirtualizationService,
@@ -571,6 +572,13 @@ impl VirtualizationService {
             (vec![], None)
         };
 
+        let input_device_options = config
+            .inputDevices
+            .iter()
+            .map(to_input_device_option_from)
+            .collect::<Result<Vec<InputDeviceOption>, _>>()
+            .or_binder_exception(ExceptionCode::ILLEGAL_ARGUMENT)?;
+
         // Actually start the VM.
         let crosvm_config = CrosvmConfig {
             cid,
@@ -596,6 +604,7 @@ impl VirtualizationService {
             vfio_devices,
             dtbo,
             device_tree_overlay,
+            input_device_options,
         };
         let instance = Arc::new(
             VmInstance::new(
@@ -701,6 +710,26 @@ fn round_up(input: u64, granularity: u64) -> u64 {
     (result / granularity) * granularity
 }
 
+fn to_input_device_option_from(input_device: &InputDevice) -> Result<InputDeviceOption> {
+    Ok(match input_device {
+        InputDevice::Keyboard(keyboard) => {
+            InputDeviceOption::Keyboard { file: clone_file(keyboard.pfd.as_ref().unwrap())? }
+        }
+        InputDevice::SingleTouch(single_touch) => InputDeviceOption::SingleTouch {
+            file: clone_file(single_touch.pfd.as_ref().unwrap())?,
+            height: Some(u32::try_from(single_touch.height)?),
+            width: Some(u32::try_from(single_touch.width)?),
+            name: if !single_touch.name.is_empty() {
+                Some(single_touch.name.clone())
+            } else {
+                None
+            },
+        },
+        InputDevice::Evdev(evdev) => {
+            InputDeviceOption::Evdev { file: clone_file(evdev.pfd.as_ref().unwrap())? }
+        }
+    })
+}
 /// Given the configuration for a disk image, assembles the `DiskFile` to pass to crosvm.
 ///
 /// This may involve assembling a composite disk from a set of partition images.
