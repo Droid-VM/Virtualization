@@ -22,6 +22,30 @@
       },
       "revId": "1af6c135a8fcb2c6c659f15f250c9a64564716e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "411936bf_31773583",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-26T10:33:42Z",
+      "side": 1,
+      "message": "Citation needed. I can\u0027t find anything like that in the Google Java Style guide or https://source.android.com/docs/setup/contribute/code-style.\n\nprotected is appropriate for things designed to be used as base classes, which this is. And I think that\u0027s supported by EJ: See \"Design and document for inheritance or else prohibit it\" go/ej3e-19.\n\n(Ideally all the methods here designed for subclass usage should be protected abstract or protected final, but that\u0027s a different argument.)",
+      "parentUuid": "dfca74c8_46338e5a",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 13
+      },
+      "revId": "1af6c135a8fcb2c6c659f15f250c9a64564716e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
