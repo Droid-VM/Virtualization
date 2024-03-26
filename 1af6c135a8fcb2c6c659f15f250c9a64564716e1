@@ -46,6 +46,30 @@
       },
       "revId": "1af6c135a8fcb2c6c659f15f250c9a64564716e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e32a300_7e57b3ae",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-03-26T11:27:04Z",
+      "side": 1,
+      "message": "Well, constants aren\u0027t there to be inherited here.\n\nHere\u0027s the Android guideline: https://g3doc.corp.google.com/company/teams/android-api-council/guidelines/index.md?cl\u003dhead#avoid-protected. Although it\u0027s basically for public APIs, but framework engineers follows the rule because Lint enforces it.\n\nAnyway, there\u0027s already lots of protected here, so you don\u0027t need to change. Local rule overrides everything :)",
+      "parentUuid": "411936bf_31773583",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 13
+      },
+      "revId": "1af6c135a8fcb2c6c659f15f250c9a64564716e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
