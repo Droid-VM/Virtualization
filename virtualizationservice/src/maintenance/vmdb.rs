@@ -29,6 +29,9 @@ const DB_FILENAME: &str = "vmids.sqlite";
 /// (Default value of `SQLITE_LIMIT_VARIABLE_NUMBER` for <= 3.32.0)
 const MAX_VARIABLES: usize = 999;
 
+/// Maximum number of VM IDs that a single app can have.
+const MAX_VM_IDS_PER_APP: usize = 400;
+
 /// Return the current time as milliseconds since epoch.
 fn db_now() -> u64 {
     let now = std::time::SystemTime::now()
@@ -216,6 +219,19 @@ impl VmIdDb {
 
     /// Add the given VM ID into the database.
     pub fn add_vm_id(&mut self, vm_id: &VmId, user_id: i32, app_id: i32) -> Result<()> {
+        // To prevent unbounded growth of VM IDs (and the associated state) for an app, limit the
+        // number of VM IDs per app.
+        let count =
+            self.count_vm_ids_for_app(user_id, app_id).context("failed to determine VM count")?;
+        if count >= MAX_VM_IDS_PER_APP {
+            // The owner has too many VM IDs, so delete the oldest IDs so that the new VM ID
+            // creation can progress/succeed.
+            let purge = count - MAX_VM_IDS_PER_APP;
+            error!("Deleting {purge} of {count} VM IDs for user_id={user_id}, app_id={app_id}");
+            if let Err(e) = self.remove_oldest_vm_ids_for_app(user_id, app_id, purge) {
+                error!("Delete {purge} VM IDs failed, user_id={user_id}, app_id={app_id}: {e:?}");
+            }
+        }
         let now = db_now();
         let _rows = self
             .conn
@@ -270,6 +286,37 @@ impl VmIdDb {
         }
 
         Ok(vm_ids)
+    }
+
+    /// Determine the number of VM IDs associated with `(user_id, app_id)`.
+    fn count_vm_ids_for_app(&mut self, user_id: i32, app_id: i32) -> Result<usize> {
+        let mut stmt = self
+            .conn
+            .prepare("SELECT COUNT(vm_id) FROM main.vmids WHERE user_id = ? AND app_id = ?;")
+            .context("failed to prepare SELECT stmt")?;
+        stmt.query_row(params![user_id, app_id], |row| row.get(0)).context("query failed")
+    }
+
+    /// Remove the `count` oldest VM IDs associated with `(user_id, app_id)`.
+    fn remove_oldest_vm_ids_for_app(
+        &mut self,
+        user_id: i32,
+        app_id: i32,
+        count: usize,
+    ) -> Result<()> {
+        // SQLite considers NULL columns to be smaller than values, so rows left over from a v0
+        // database will be listed first.
+        let vm_ids = {
+            let mut stmt = self
+            .conn
+            .prepare(
+                "SELECT vm_id FROM main.vmids WHERE user_id = ? AND app_id = ? ORDER BY created LIMIT ?;",
+            )
+            .context("failed to prepare SELECT stmt")?;
+            let rows = stmt.query(params![user_id, app_id, count]).context("query failed")?;
+            Self::vm_ids_from_rows(rows)?
+        };
+        self.delete_vm_ids(&vm_ids)
     }
 
     /// Return all of the `(user_id, app_id)` pairs present in the database.
@@ -344,6 +391,19 @@ mod tests {
     fn show_contents(db: &VmIdDb) {
         let mut stmt = db.conn.prepare("SELECT * FROM main.vmids;").unwrap();
         let mut rows = stmt.query(()).unwrap();
+        println!("DB contents:");
+        while let Some(row) = rows.next().unwrap() {
+            println!("  {row:?}");
+        }
+    }
+
+    fn show_contents_for_app(db: &VmIdDb, user_id: i32, app_id: i32, count: usize) {
+        let mut stmt = db
+            .conn
+            .prepare("SELECT vm_id, created FROM main.vmids WHERE user_id = ? AND app_id = ? ORDER BY created LIMIT ?;")
+            .unwrap();
+        let mut rows = stmt.query(params![user_id, app_id, count]).unwrap();
+        println!("First (by created) {count} rows for app_id={app_id}");
         while let Some(row) = rows.next().unwrap() {
             println!("  {row:?}");
         }
@@ -457,31 +517,39 @@ mod tests {
 
         assert_eq!(vec![VM_ID1, VM_ID2, VM_ID3], db.vm_ids_for_user(USER1).unwrap());
         assert_eq!(vec![VM_ID1, VM_ID2, VM_ID3], db.vm_ids_for_app(USER1, APP_A).unwrap());
+        assert_eq!(3, db.count_vm_ids_for_app(USER1, APP_A).unwrap());
         assert_eq!(vec![VM_ID4], db.vm_ids_for_app(USER2, APP_B).unwrap());
+        assert_eq!(1, db.count_vm_ids_for_app(USER2, APP_B).unwrap());
         assert_eq!(vec![VM_ID5], db.vm_ids_for_user(USER3).unwrap());
         assert_eq!(empty, db.vm_ids_for_user(USER_UNKNOWN).unwrap());
         assert_eq!(empty, db.vm_ids_for_app(USER1, APP_UNKNOWN).unwrap());
+        assert_eq!(0, db.count_vm_ids_for_app(USER1, APP_UNKNOWN).unwrap());
 
         db.delete_vm_ids(&[VM_ID2, VM_ID3]).unwrap();
 
         assert_eq!(vec![VM_ID1], db.vm_ids_for_user(USER1).unwrap());
         assert_eq!(vec![VM_ID1], db.vm_ids_for_app(USER1, APP_A).unwrap());
+        assert_eq!(1, db.count_vm_ids_for_app(USER1, APP_A).unwrap());
 
         // OK to delete things that don't exist.
         db.delete_vm_ids(&[VM_ID2, VM_ID3]).unwrap();
 
         assert_eq!(vec![VM_ID1], db.vm_ids_for_user(USER1).unwrap());
         assert_eq!(vec![VM_ID1], db.vm_ids_for_app(USER1, APP_A).unwrap());
+        assert_eq!(1, db.count_vm_ids_for_app(USER1, APP_A).unwrap());
 
         db.add_vm_id(&VM_ID2, USER1, APP_A).unwrap();
         db.add_vm_id(&VM_ID3, USER1, APP_A).unwrap();
 
         assert_eq!(vec![VM_ID1, VM_ID2, VM_ID3], db.vm_ids_for_user(USER1).unwrap());
         assert_eq!(vec![VM_ID1, VM_ID2, VM_ID3], db.vm_ids_for_app(USER1, APP_A).unwrap());
+        assert_eq!(3, db.count_vm_ids_for_app(USER1, APP_A).unwrap());
         assert_eq!(vec![VM_ID4], db.vm_ids_for_app(USER2, APP_B).unwrap());
+        assert_eq!(1, db.count_vm_ids_for_app(USER2, APP_B).unwrap());
         assert_eq!(vec![VM_ID5], db.vm_ids_for_user(USER3).unwrap());
         assert_eq!(empty, db.vm_ids_for_user(USER_UNKNOWN).unwrap());
         assert_eq!(empty, db.vm_ids_for_app(USER1, APP_UNKNOWN).unwrap());
+        assert_eq!(0, db.count_vm_ids_for_app(USER1, APP_UNKNOWN).unwrap());
 
         assert_eq!(
             vec![(USER1, APP_A), (USER2, APP_B), (USER3, APP_C)],
@@ -512,5 +580,59 @@ mod tests {
         // Invalid row is skipped and remainder returned.
         assert_eq!(vec![VM_ID1, VM_ID2, VM_ID3], db.vm_ids_for_user(USER1).unwrap());
         show_contents(&db);
+    }
+
+    #[test]
+    fn test_too_many_vms() {
+        let mut db = new_test_db();
+        for idx in 0..MAX_VM_IDS_PER_APP {
+            let mut vm_id = [0u8; 64];
+            vm_id[0..8].copy_from_slice(&(idx as u64).to_be_bytes());
+            db.add_vm_id(&vm_id, USER1, APP_A).unwrap();
+            assert_eq!(idx + 1, db.count_vm_ids_for_app(USER1, APP_A).unwrap());
+        }
+        assert_eq!(MAX_VM_IDS_PER_APP, db.count_vm_ids_for_app(USER1, APP_A).unwrap());
+
+        for idx in 0..10 {
+            let mut vm_id = [0u8; 64];
+            vm_id[0..8].copy_from_slice(&(idx as u64).to_be_bytes());
+            db.add_vm_id(&vm_id, USER1, APP_A).unwrap();
+            assert_eq!(MAX_VM_IDS_PER_APP, db.count_vm_ids_for_app(USER1, APP_A).unwrap());
+        }
+        assert_eq!(MAX_VM_IDS_PER_APP, db.count_vm_ids_for_app(USER1, APP_A).unwrap());
+    }
+
+    #[test]
+    fn test_remove_oldest_with_upgrade() {
+        let mut db = new_test_db_version(0);
+        let version = db.schema_version().unwrap();
+        assert_eq!(0, version);
+
+        // Manually insert rows before upgrade.
+        const V0_COUNT: usize = 5;
+        for idx in 0..V0_COUNT {
+            let mut vm_id = [0u8; 64];
+            vm_id[0..8].copy_from_slice(&(idx as u64).to_be_bytes());
+            db.conn
+                .execute(
+                    "REPLACE INTO main.vmids (vm_id, user_id, app_id) VALUES (?1, ?2, ?3);",
+                    params![&vm_id, &USER1, APP_A],
+                )
+                .unwrap();
+        }
+
+        // Now move to v1.
+        db.upgrade_tables_v0_v1().unwrap();
+        let version = db.schema_version().unwrap();
+        assert_eq!(1, version);
+
+        for idx in V0_COUNT..MAX_VM_IDS_PER_APP {
+            let mut vm_id = [0u8; 64];
+            vm_id[0..8].copy_from_slice(&(idx as u64).to_be_bytes());
+            db.add_vm_id(&vm_id, USER1, APP_A).unwrap();
+        }
+        show_contents_for_app(&db, USER1, APP_A, 10);
+        db.remove_oldest_vm_ids_for_app(USER1, APP_A, 10).unwrap();
+        show_contents_for_app(&db, USER1, APP_A, 10);
     }
 }
