@@ -1,0 +1,123 @@
+From 6456b9afd66700bd8d223f1fe545206fc8a2dd06 Mon Sep 17 00:00:00 2001
+From: Shikha Panwar <shikhapanwar@google.com>
+Date: Thu, 28 Mar 2024 14:43:52 +0000
+Subject: [PATCH 2/2] Notify VS of an instance being removed
+
+VS maintains a global database of VM instances. It needs to be notified
+for each of the VM instance being deleted.
+
+Test: atest MicrodroidTests#vmmGetAndCreate & watch for logs
+Bug: 294177871
+Change-Id: I21e4f6ae466cacfb594bd084efdc0e72ddb50a8b
+---
+ .../system/virtualmachine/VirtualMachine.java | 32 ++++++++++++++++---
+ .../virtualmachine/VirtualMachineManager.java |  2 +-
+ virtualizationmanager/src/aidl.rs             |  5 +++
+ .../IVirtualizationService.aidl               |  7 ++++
+ 4 files changed, 41 insertions(+), 5 deletions(-)
+
+diff --git a/java/framework/src/android/system/virtualmachine/VirtualMachine.java b/java/framework/src/android/system/virtualmachine/VirtualMachine.java
+index d166a4d58..9fce52127 100644
+--- a/java/framework/src/android/system/virtualmachine/VirtualMachine.java
++++ b/java/framework/src/android/system/virtualmachine/VirtualMachine.java
+@@ -593,22 +593,46 @@ public class VirtualMachine implements AutoCloseable {
+     void delete(Context context, String name) throws VirtualMachineException {
+         synchronized (mLock) {
+             checkStopped();
++            vmInstanceCleanup(context, name);
+             // Once we explicitly delete a VM it must remain permanently in the deleted state;
+             // if a new VM is created with the same name (and files) that's unrelated.
+             mWasDeleted = true;
+         }
+-        // TODO(b/294177871): Request deletion of VM secrets.
+-        deleteVmDirectory(context, name);
+     }
+ 
+-    static void deleteVmDirectory(Context context, String name) throws VirtualMachineException {
++    // Delete the full VM directory and notify VirtualizationService to remove this
++    // VM instance for housekeeping.
++    @GuardedBy("VirtualMachineManager.sCreateLock")
++    static void vmInstanceCleanup(Context context, String name) throws VirtualMachineException {
++        File vmDir = getVmDir(context, name);
++        removeVmInstance(vmDir, VirtualizationService.getInstance());
+         try {
+-            deleteRecursively(getVmDir(context, name));
++            deleteRecursively(vmDir);
+         } catch (IOException e) {
+             throw new VirtualMachineException(e);
+         }
+     }
+ 
++    private static void removeVmInstance(File vmDirectory, @NonNull VirtualizationService service)
++            throws VirtualMachineException {
++        File instanceIdFile = new File(vmDirectory, INSTANCE_ID_FILE);
++        byte[] instanceId = readInstanceID(instanceIdFile);
++        try {
++            service.getBinder().removeVmInstance(instanceId);
++        } catch (RemoteException e) {
++            throw e.rethrowAsRuntimeException();
++        }
++    }
++
++    private static byte[] readInstanceID(File instanceIdFile) throws VirtualMachineException {
++        try {
++            byte[] instanceId = Files.readAllBytes(instanceIdFile.toPath());
++            return instanceId;
++        } catch (IOException e) {
++            throw new VirtualMachineException("failed to read instance id", e);
++        }
++    }
++
+     @GuardedBy("VirtualMachineManager.sCreateLock")
+     @NonNull
+     private static File createVmDir(@NonNull Context context, @NonNull String name)
+diff --git a/java/framework/src/android/system/virtualmachine/VirtualMachineManager.java b/java/framework/src/android/system/virtualmachine/VirtualMachineManager.java
+index 091d317d2..421b079a6 100644
+--- a/java/framework/src/android/system/virtualmachine/VirtualMachineManager.java
++++ b/java/framework/src/android/system/virtualmachine/VirtualMachineManager.java
+@@ -334,7 +334,7 @@ public class VirtualMachineManager {
+         synchronized (sCreateLock) {
+             VirtualMachine vm = getVmByName(name);
+             if (vm == null) {
+-                VirtualMachine.deleteVmDirectory(mContext, name);
++                VirtualMachine.vmInstanceCleanup(mContext, name);
+             } else {
+                 vm.delete(mContext, name);
+             }
+diff --git a/virtualizationmanager/src/aidl.rs b/virtualizationmanager/src/aidl.rs
+index f7128615a..9a98bbd32 100644
+--- a/virtualizationmanager/src/aidl.rs
++++ b/virtualizationmanager/src/aidl.rs
+@@ -329,6 +329,11 @@ impl IVirtualizationService for VirtualizationService {
+         Ok(is_secretkeeper_supported())
+     }
+ 
++    fn removeVmInstance(&self, instance_id: &[u8; 64]) -> binder::Result<()> {
++        check_manage_access()?;
++        GLOBAL_SERVICE.removeVmInstance(instance_id)
++    }
++
+     fn claimVmInstance(&self, instance_id: &[u8; 64]) -> binder::Result<()> {
+         check_manage_access()?;
+         GLOBAL_SERVICE.claimVmInstance(instance_id)
+diff --git a/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualizationService.aidl b/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualizationService.aidl
+index ab821a949..f8b50872c 100644
+--- a/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualizationService.aidl
++++ b/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualizationService.aidl
+@@ -99,6 +99,13 @@ interface IVirtualizationService {
+      */
+     boolean isUpdatableVmSupported();
+ 
++    /**
++     * Notification that state associated with a VM should be removed.
++     *
++     * @param instanceId The ID for the VM.
++     */
++    void removeVmInstance(in byte[64] instanceId);
++
+     /**
+      * Notification that ownership of a VM has been claimed by the caller.  Note that no permission
+      * checks (with respect to the previous owner) are performed.
+-- 
+2.44.0.478.gd926399ef9-goog
+
