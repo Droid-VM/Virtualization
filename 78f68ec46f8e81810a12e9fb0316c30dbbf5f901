@@ -213,6 +213,24 @@
       "parentUuid": "e0b33f03_93845139",
       "revId": "78f68ec46f8e81810a12e9fb0316c30dbbf5f901",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "023d1c39_57c019aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-03-27T02:07:59Z",
+      "side": 1,
+      "message": "\u003e The only mechanism for doing that which we managed to find is associating the GID with the permission and then having Zygote recognise that GID. \n\nAnd how GID and permission is associated? I tried to find relationship between permission(`MANAGE_VIRTUAL_MACHINE`) and GID [3013](https://source.corp.google.com/h/android/platform/superproject/main/+/main:system/core/libcutils/include/private/android_filesystem_config.h;l\u003d173), but couldn\u0027t.",
+      "parentUuid": "abe181b8_f4d5645b",
+      "revId": "78f68ec46f8e81810a12e9fb0316c30dbbf5f901",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
