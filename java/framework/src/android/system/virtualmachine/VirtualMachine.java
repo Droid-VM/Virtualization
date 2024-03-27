@@ -598,6 +598,22 @@ public class VirtualMachine implements AutoCloseable {
         }
     }
 
+    // Claim the instance (best-effort). This notifies the global VS about the ownership of this
+    // instance_id for housekeeping purpose.
+    void tryClaimingInstance() {
+        if (mInstanceIdPath != null) {
+            IVirtualizationService service = mVirtualizationService.getBinder();
+            try {
+                byte[] instanceId = Files.readAllBytes(mInstanceIdPath.toPath());
+                service.claimVmInstance(instanceId);
+            } catch (Exception e) {
+                // There is nothing much caller can do if claiming an instance fails.
+                // Log the error & return.
+                Log.w(TAG, "Failed to claim instance: ", e);
+            }
+        }
+    }
+
     @GuardedBy("VirtualMachineManager.sCreateLock")
     @NonNull
     private static File createVmDir(@NonNull Context context, @NonNull String name)
