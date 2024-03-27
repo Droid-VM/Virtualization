@@ -433,6 +433,15 @@ public class VirtualMachine implements AutoCloseable {
                 config.serialize(vm.mConfigFilePath);
                 if (vm.mInstanceIdPath != null) {
                     vm.importInstanceIdFrom(vmDescriptor.getInstanceIdFd());
+                    // Notify global VS about the ownership of this instance-id for housekeeping
+                    // purposes.
+                    IVirtualizationService service = vm.mVirtualizationService.getBinder();
+                    try {
+                        byte[] instanceId = Files.readAllBytes(vm.mInstanceIdPath.toPath());
+                        service.claimVmInstance(instanceId);
+                    } catch (IOException e) {
+                        throw new VirtualMachineException("failed to read instance_id", e);
+                    }
                 }
 
                 try {
@@ -461,6 +470,8 @@ public class VirtualMachine implements AutoCloseable {
                 e.addSuppressed(innerException);
             }
             throw e;
+        } catch (RemoteException e) {
+            throw e.rethrowAsRuntimeException();
         }
     }
 
