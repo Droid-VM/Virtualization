@@ -35,6 +35,7 @@ rust_test_host {
         ":avb_testkey_rsa2048",
         ":avb_testkey_rsa4096",
         ":avb_testkey_rsa8192",
+        ":test_microdroid_vendor_image",
     ],
     required: ["avbtool"],
     test_suites: ["general-tests"],
