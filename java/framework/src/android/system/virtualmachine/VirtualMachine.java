@@ -434,7 +434,6 @@ public class VirtualMachine implements AutoCloseable {
                 if (vm.mInstanceIdPath != null) {
                     vm.importInstanceIdFrom(vmDescriptor.getInstanceIdFd());
                 }
-
                 try {
                     vm.mInstanceFilePath.createNewFile();
                 } catch (IOException e) {
@@ -595,6 +594,22 @@ public class VirtualMachine implements AutoCloseable {
             deleteRecursively(getVmDir(context, name));
         } catch (IOException e) {
             throw new VirtualMachineException(e);
+        }
+    }
+
+    // (Try to) Claim the instance. This notifies the global VS about the ownership of this
+    // instance_id for housekeeping purposes.
+    void tryClaimingInstance() {
+        if (mInstanceIdPath != null) {
+            IVirtualizationService service = mVirtualizationService.getBinder();
+            try {
+                byte[] instanceId = Files.readAllBytes(mInstanceIdPath.toPath());
+                service.claimVmInstance(instanceId);
+            } catch (Exception e) {
+                    // There is nothing much caller can do if claiming an instance fails.
+                    // Log the error & return.
+                    Log.w(TAG, "Failed to claim instance: ", e);
+            }
         }
     }
 
