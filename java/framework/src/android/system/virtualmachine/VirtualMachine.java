@@ -582,19 +582,52 @@ public class VirtualMachine implements AutoCloseable {
     void delete(Context context, String name) throws VirtualMachineException {
         synchronized (mLock) {
             checkStopped();
+            vmInstanceCleanup(context, name);
             // Once we explicitly delete a VM it must remain permanently in the deleted state;
             // if a new VM is created with the same name (and files) that's unrelated.
             mWasDeleted = true;
         }
-        // TODO(b/294177871): Request deletion of VM secrets.
-        deleteVmDirectory(context, name);
     }
 
-    static void deleteVmDirectory(Context context, String name) throws VirtualMachineException {
+    // Delete the full VM directory and notify VirtualizationService to remove this
+    // VM instance for housekeeping.
+    @GuardedBy("VirtualMachineManager.sCreateLock")
+    static void vmInstanceCleanup(Context context, String name) throws VirtualMachineException {
+        File vmDir = getVmDir(context, name);
+        removeVmInstance(vmDir, VirtualizationService.getInstance());
         try {
-            deleteRecursively(getVmDir(context, name));
+            deleteRecursively(vmDir);
         } catch (IOException e) {
             throw new VirtualMachineException(e);
+        }
+    }
+
+    private static void removeVmInstance(File vmDirectory, @NonNull VirtualizationService service)
+            throws VirtualMachineException {
+        File instanceIdFile = new File(vmDirectory, INSTANCE_ID_FILE);
+        try {
+            byte[] instanceId = Files.readAllBytes(instanceIdFile.toPath());
+            service.getBinder().removeVmInstance(instanceId);
+        } catch (RemoteException e) {
+            throw e.rethrowAsRuntimeException();
+        } catch (IOException e) {
+            throw new VirtualMachineException("failed to read instance id", e);
+        }
+    }
+
+    // Claim the instance (best-effort). This notifies the global VS about the ownership of this
+    // instance_id for housekeeping purpose.
+    void tryClaimingInstance() {
+        if (mInstanceIdPath != null) {
+            IVirtualizationService service = mVirtualizationService.getBinder();
+            try {
+                byte[] instanceId = Files.readAllBytes(mInstanceIdPath.toPath());
+                service.claimVmInstance(instanceId);
+            } catch (Exception e) {
+                // There is nothing much caller can do if claiming an instance fails.
+                // Log the error & return.
+                Log.w(TAG, "Failed to claim instance: ", e);
+            }
         }
     }
 
