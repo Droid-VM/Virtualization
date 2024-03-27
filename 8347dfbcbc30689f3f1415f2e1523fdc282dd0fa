@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b9c86f1_d04fb2a5",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-27T13:38:00Z",
+      "side": 1,
+      "message": "do you plan to add APIs for these later? Can you submit all changes together? (plus test as well?) I don\u0027t feel comfortable submitting untested/dead code.",
+      "range": {
+        "startLine": 650,
+        "startChar": 30,
+        "endLine": 650,
+        "endChar": 49
+      },
+      "revId": "8347dfbcbc30689f3f1415f2e1523fdc282dd0fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "216b37c6_2d7758f2",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-27T13:38:00Z",
+      "side": 1,
+      "message": "unwrap should be avoided because it can panic the program. You should ensure that this never panic, or gracefully return an error.",
+      "range": {
+        "startLine": 716,
+        "startChar": 80,
+        "endLine": 716,
+        "endChar": 89
+      },
+      "revId": "8347dfbcbc30689f3f1415f2e1523fdc282dd0fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5abf41d_19446be2",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-27T13:38:00Z",
+      "side": 1,
+      "message": "`EvDev(File)`",
+      "range": {
+        "startLine": 136,
+        "startChar": 4,
+        "endLine": 136,
+        "endChar": 24
+      },
+      "revId": "8347dfbcbc30689f3f1415f2e1523fdc282dd0fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04dc998a_17fac342",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-27T13:38:00Z",
+      "side": 1,
+      "message": "Not all of these seem to be used.",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 91
+      },
+      "revId": "8347dfbcbc30689f3f1415f2e1523fdc282dd0fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4246abb_35074c2b",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-27T13:38:00Z",
+      "side": 1,
+      "message": "`w.map_or(\"\", |w| format!(\",width\u003d{}\", w)` ?",
+      "range": {
+        "startLine": 959,
+        "startChar": 16,
+        "endLine": 959,
+        "endChar": 86
+      },
+      "revId": "8347dfbcbc30689f3f1415f2e1523fdc282dd0fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29b9653e_6d66a12f",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/InputDevice.aidl",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-27T13:38:00Z",
+      "side": 1,
+      "message": "How do these two differ? Please document.",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 5
+      },
+      "revId": "8347dfbcbc30689f3f1415f2e1523fdc282dd0fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
