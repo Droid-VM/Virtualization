@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e144fd2_b6db3205",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-27T13:48:47Z",
+      "side": 1,
+      "message": "Thinking about this some more.\n\nWhat we\u0027re trying to test is what happens if an app without the permission tries to start a VM.\n\nAnd actually the answer is, it crashes horribly rather than returning a permission failure.\n\nWe can rework the test, as here, to avoid that crash. But a 3P app would see the same crash.\n\nSo I wonder if we should instead make sure that we map the exec failure to a better error, making it clear to the caller what the problem is? And just directly return a permission denied / security exception?\n\n@davidai@google.com @ioffe@google.com fyi",
+      "revId": "d658c51732e3691f0a5c5b29562044cf40751dff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca0696d4_0cf67ff3",
+        "filename": "tests/testapk_no_perm/src/java/com/android/microdroid/test/MicrodroidTestAppNoPerm.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-27T13:48:47Z",
+      "side": 1,
+      "message": "Can we have a comment?",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 75
+      },
+      "revId": "d658c51732e3691f0a5c5b29562044cf40751dff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

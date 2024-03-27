@@ -231,6 +231,24 @@
       "parentUuid": "abe181b8_f4d5645b",
       "revId": "78f68ec46f8e81810a12e9fb0316c30dbbf5f901",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c4b4d3a_ce28b1d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-27T13:48:47Z",
+      "side": 1,
+      "message": "\u003e how GID and permission is associated\n\nAID_VIRTUALMACHINE is 3013 (https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:system/core/libcutils/include/private/android_filesystem_config.h;drc\u003d851c9c825fc417ad7df865da262b9249e4ca9649;l\u003d173)\n\nAnd MANAGE_VIRTUAL_MACHINE permissions is mapped to that gid by name here:\nhttps://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:frameworks/base/data/etc/platform.xml;drc\u003d45d878da8118d7ea0bd43e8cb753cb60a7eb8be2;l\u003d127\n\n(Yes, that is pretty obscure.)",
+      "parentUuid": "023d1c39_57c019aa",
+      "revId": "78f68ec46f8e81810a12e9fb0316c30dbbf5f901",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
