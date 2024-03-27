@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3106a97c_11381695",
+        "filename": "virtualizationservice/src/maintenance/vmdb.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-03-27T11:17:09Z",
+      "side": 1,
+      "message": "We considered just deleting the oldest in this situation.\nBut that seems a little unfriendly.\nIf the app has just deleted the VM files (which it shouldn\u0027t do), there\u0027s no easy way to recover from this?",
+      "range": {
+        "startLine": 222,
+        "startChar": 0,
+        "endLine": 227,
+        "endChar": 9
+      },
+      "revId": "f64da29cc1466866589b4a5642257d339b673843",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
