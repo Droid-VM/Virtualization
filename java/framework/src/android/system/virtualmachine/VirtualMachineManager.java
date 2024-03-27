@@ -284,11 +284,13 @@ public class VirtualMachineManager {
     public VirtualMachine importFromDescriptor(
             @NonNull String name, @NonNull VirtualMachineDescriptor vmDescriptor)
             throws VirtualMachineException {
+        VirtualMachine vm = null;
         synchronized (sCreateLock) {
-            VirtualMachine vm = VirtualMachine.fromDescriptor(mContext, name, vmDescriptor);
+            vm = VirtualMachine.fromDescriptor(mContext, name, vmDescriptor);
             mVmsByName.put(name, new WeakReference<>(vm));
-            return vm;
         }
+        vm.claimInstance();
+        return vm;
     }
 
     /**

@@ -598,6 +598,23 @@ public class VirtualMachine implements AutoCloseable {
         }
     }
 
+    // Claim the instance. This notifies the global VS about the ownership of this
+    // instance_id for housekeeping purpose.
+    void claimInstance() throws VirtualMachineException {
+        if (mInstanceIdPath != null) {
+            IVirtualizationService service = mVirtualizationService.getBinder();
+            try {
+                byte[] instanceId = Files.readAllBytes(mInstanceIdPath.toPath());
+                service.claimVmInstance(instanceId);
+            } 
+            catch (IOException e) {
+                throw new VirtualMachineException("failed to read instance_id", e);
+            } catch (RemoteException e) {
+                throw e.rethrowAsRuntimeException();
+            }
+        }
+    }
+
     @GuardedBy("VirtualMachineManager.sCreateLock")
     @NonNull
     private static File createVmDir(@NonNull Context context, @NonNull String name)
