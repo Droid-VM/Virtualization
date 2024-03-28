@@ -336,7 +336,7 @@ public class VirtualMachineManager {
         synchronized (sCreateLock) {
             VirtualMachine vm = getVmByName(name);
             if (vm == null) {
-                VirtualMachine.deleteVmDirectory(mContext, name);
+                VirtualMachine.vmInstanceCleanup(mContext, name);
             } else {
                 vm.delete(mContext, name);
             }
