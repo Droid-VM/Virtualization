@@ -104,6 +104,11 @@ impl IAttestationService for AttestationService {
         log(self.res.lock().unwrap().as_ref().unwrap());
         Ok(())
     }
+
+    fn add(&self, a: i32, b: i32) -> binder::Result<i32> {
+        info!("aaaaa AttestationService.add({}, {})", a, b);
+        Ok(a + b)
+    }
 }
 
 fn log(res: &AttestationResult) {
