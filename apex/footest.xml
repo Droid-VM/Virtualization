@@ -1,0 +1,8 @@
+<manifest version="1.0" type="framework">
+    <hal format="aidl">
+        <name>com.android.virt.vm_attestation.testservice</name>
+        <version>2</version>
+        <fqname>IAttestationService/default</fqname>
+        <accessor>android.os.IAccessor/vm_foo_default</accessor>
+    </hal>
+</manifest>

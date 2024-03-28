@@ -36,7 +36,10 @@ rust_bindgen {
         "--default-enum-style rust",
         "--allowlist-type=AVmAttestationStatus",
     ],
-    visibility: [":__subpackages__"],
+    // visibility: [":__subpackages__"],
+    apex_available: [
+        "com.android.virt",
+    ],
 }
 
 // Rust wrappers round the C API for Rust clients.
@@ -47,13 +50,16 @@ rust_bindgen {
     crate_name: "vm_payload_bindgen",
     defaults: ["avf_build_flags_rust"],
     source_stem: "bindings",
-    apex_available: ["com.android.compos"],
     bindgen_flags: [
         "--default-enum-style rust",
     ],
     visibility: [
         "//packages/modules/Virtualization/compos",
         "//packages/modules/Virtualization/service_vm:__subpackages__",
+    ],
+    apex_available: [
+        "com.android.virt",
+        "com.android.compos",
     ],
     shared_libs: [
         "libvm_payload#current",
