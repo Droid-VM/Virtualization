@@ -149,6 +149,7 @@ avf_flag_aware_apex_defaults {
     binaries: [
         "fd_server",
         "vm",
+        "libvm_attestation_test_payload",
     ],
     prebuilts: [
         "features_com.android.virt.xml",
@@ -207,6 +208,7 @@ avf_flag_aware_apex_defaults {
         avf_remote_attestation_enabled: {
             vintf_fragments: [
                 "virtualizationservice.xml",
+                "footest.xml",
             ],
         },
     },

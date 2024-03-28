@@ -12,6 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+service vm_foo_service /apex/com.android.virt/vm run-app
+  --vm_services com.android.virt.vm_attestation.testservice.IAttestationService/default,5679
+  --payload-binary-name /apex/com.android.virt/libvm_attestation_test_payload.so
+  interface aidl com.android.virt.vm_attestation.testservice.IAttestationService/default
+
 service virtualizationservice /apex/com.android.virt/bin/virtualizationservice
     class main
     user system
