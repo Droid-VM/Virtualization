@@ -422,13 +422,14 @@ fn main() -> Result<(), Error> {
         }
         Opt::Run { config } => (config.common.vm_services.clone(), command_run(config).unwrap()),
     };
-
+    log::info!("aaaaa: {:?}", vm_services);
     if !vm_services.is_empty() {
         // TODO: Handle multiple VM
         let accessor = Accessor::new(vm, &vm_services[0].service_name, vm_services[0].port);
         let accessor_binder = BnAccessor::new_binder(accessor, BinderFeatures::default());
 
         // TODO: Handle error?
+        log::info!("Registering accessor service: {}", vm_services[0].service_name);
         binder::register_lazy_service(&vm_services[0].service_name, accessor_binder.as_binder())
             .unwrap();
 
