@@ -438,7 +438,6 @@ fn main() -> Result<(), Error> {
         }
         Opt::Run { config } => (config.common.vm_services.clone(), command_run(config).unwrap()),
     };
-
     if !vm_services.is_empty() {
         let vm = Arc::new(Mutex::new(vm));
         for service in vm_services {
@@ -451,6 +450,7 @@ fn main() -> Result<(), Error> {
                         service.service_name
                     )
                 })?;
+            info!("service {} is registered as lazy service", service.service_name);
         }
 
         ProcessState::join_thread_pool();
