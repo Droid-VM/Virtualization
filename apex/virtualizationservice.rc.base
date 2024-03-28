@@ -12,6 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
+# port: 5679 for protected, 5680 for unprotected
+# interface aidl android.os.IAccessor/vm_foo_default
+# interface aidl com.android.virt.vm_attestation.testservice.IAttestationService/default
+
+service vm_foo_service /apex/com.android.virt/bin/vm run-microdroid --vm-services android.os.IAccessor/vm_foo_default,5680 --payload-binary-name libvm_attestation_test_payload.so
+    interface aidl android.os.IAccessor/vm_foo_default
+
 service virtualizationservice /apex/com.android.virt/bin/virtualizationservice
     class main
     user system
