@@ -249,6 +249,24 @@
       "parentUuid": "023d1c39_57c019aa",
       "revId": "78f68ec46f8e81810a12e9fb0316c30dbbf5f901",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "960475af_b3dd0097",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-03-28T04:19:45Z",
+      "side": 1,
+      "message": "\u003e What about the current approach I selected in patchset 3?\n\nBased on the other comment,\n\n\u003e What we\u0027re trying to test is what happens if an app without the permission tries to start a VM.\n\nI think we shouldn\u0027t do the test with giving permission via `AndroidTest.xml`, and revoking in test class.",
+      "parentUuid": "0c4b4d3a_ce28b1d2",
+      "revId": "78f68ec46f8e81810a12e9fb0316c30dbbf5f901",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

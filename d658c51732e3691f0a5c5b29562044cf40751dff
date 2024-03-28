@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e649378c_8c2dd9ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-03-28T04:19:45Z",
+      "side": 1,
+      "message": "\u003e Maybe we could check the gid directly, before spawning virtmgr?\n\nWould you mean GID for the test app(`MicrodroidTestAppNoPerm`)? I think it depends on having definition or not in `AndroidTest.xml`.\n\nOn the other hand, do we have any reason to use java APIs in AVF w/o `MANAGE_VIRTUAL_MACHINE` permission? Or, I think we may need to define a new permission granting `SYS_NICE` only, which leads to use java APIs in AVF..?",
+      "parentUuid": "6f681d24_0ce35c09",
+      "revId": "d658c51732e3691f0a5c5b29562044cf40751dff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ca0696d4_0cf67ff3",
         "filename": "tests/testapk_no_perm/src/java/com/android/microdroid/test/MicrodroidTestAppNoPerm.java",
         "patchSetId": 3
