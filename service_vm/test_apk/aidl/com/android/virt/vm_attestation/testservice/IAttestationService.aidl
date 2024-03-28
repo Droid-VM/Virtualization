@@ -84,4 +84,9 @@ interface IAttestationService {
      * {@link #requestAttestationForTesting}.
      */
     void validateAttestationResult();
+
+    /**
+     * Performs the basic addition for testing.
+     */
+    int add(int a, int b);
 }

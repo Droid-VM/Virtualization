@@ -46,9 +46,8 @@ rust_defaults {
 rust_ffi {
     name: "libvm_attestation_test_payload",
     defaults: ["vm_attestation_test_payload_defaults"],
-    visibility: [
-        ":__subpackages__",
-        "//packages/modules/Virtualization/tests/testapk",
+    apex_available: [
+        "com.android.virt",
     ],
 }
 
