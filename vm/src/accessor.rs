@@ -17,7 +17,7 @@
 //! TODO: Allows to customize VMs for launching. (e.g. port, ...)
 
 use android_os_accessor::aidl::android::os::IAccessor::IAccessor;
-use binder::{self, Interface, LazyServiceGuard, ParcelFileDescriptor};
+use binder::{self, Interface, ParcelFileDescriptor};
 use log::info;
 use std::sync::{Arc, Mutex};
 use std::time::Duration;
@@ -30,13 +30,11 @@ pub struct Accessor {
     vm: Arc<Mutex<VmInstance>>,
     name: String,
     port: i32,
-    /// Keeps our service process running as long as this VM context exists.
-    _lazy_service_guard: LazyServiceGuard,
 }
 
 impl Accessor {
     pub fn new(vm: Arc<Mutex<VmInstance>>, name: String, port: i32) -> Self {
-        Self { vm, name, port, _lazy_service_guard: Default::default() }
+        Self { vm, name, port }
     }
 }
 
@@ -50,5 +48,11 @@ impl IAccessor for Accessor {
         info!("{} is ready. Connecting to service via port {}", self.name, self.port);
 
         vm.vm.connectVsock(self.port)
+    }
+}
+
+impl Drop for Accessor {
+    fn drop(&mut self) {
+        info!("aaa Dropping Accessor for {}", self.name);
     }
 }
