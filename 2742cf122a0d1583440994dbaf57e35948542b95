@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd94d4d3_5c2b1a6f",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-28T08:18:12Z",
+      "side": 1,
+      "message": "This comment appears to be misleading, could you drop it? because the rollback_index is always defined in the AVB footer[1]. If you don\u0027t set it explicitly, it defaults to 0[1]. Therefore, it feels inaccurate to describe this scenario as having an undefined rollback index, as it is equivalent to explicitly passing `--rollback_index 0` to define the rollback index.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:external/avb/avbtool.py;l\u003d4234;drc\u003df759fc4c18b53485f2dccd0057ed1593be753eca",
+      "range": {
+        "startLine": 151,
+        "startChar": 58,
+        "endLine": 151,
+        "endChar": 93
+      },
+      "revId": "2742cf122a0d1583440994dbaf57e35948542b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9c6f202_d002edad",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-28T08:18:12Z",
+      "side": 1,
+      "message": "Could you add another test to check the default index is 0 if it\u0027s not specified explicitly?",
+      "range": {
+        "startLine": 297,
+        "startChar": 8,
+        "endLine": 297,
+        "endChar": 47
+      },
+      "revId": "2742cf122a0d1583440994dbaf57e35948542b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
