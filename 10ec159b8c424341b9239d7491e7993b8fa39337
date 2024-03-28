@@ -380,6 +380,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0ba1b40f_5a62cdb9",
+        "filename": "microdroid/derive_microdroid_vendor_dice_node/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-28T08:35:52Z",
+      "side": 1,
+      "message": "SG. Could you add a TODO here to keep it on our radar? btw, the whole descriptor part in libvbmeta could actually get refactored away by reusing the avb rust wrapper [1].\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:external/avb/rust/src/descriptor/hashtree.rs;drc\u003d0f877b908e456067bdb937582f98503bfc61033f",
+      "parentUuid": "439424a9_ad3bafa6",
+      "range": {
+        "startLine": 60,
+        "startChar": 30,
+        "endLine": 60,
+        "endChar": 41
+      },
+      "revId": "10ec159b8c424341b9239d7491e7993b8fa39337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "335ea543_0de125b7",
         "filename": "microdroid/derive_microdroid_vendor_dice_node/src/main.rs",
         "patchSetId": 3

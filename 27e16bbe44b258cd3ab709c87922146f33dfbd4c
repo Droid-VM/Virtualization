@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54c44a5d_d633b023",
+        "filename": "microdroid/derive_microdroid_vendor_dice_node/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-28T08:35:52Z",
+      "side": 1,
+      "message": "Is this still needed after dropping the low-level cbor code when building the config descriptor?",
+      "range": {
+        "startLine": 12,
+        "startChar": 9,
+        "endLine": 12,
+        "endChar": 20
+      },
+      "revId": "27e16bbe44b258cd3ab709c87922146f33dfbd4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73283ed3_679c8609",
+        "filename": "microdroid/derive_microdroid_vendor_dice_node/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-28T08:35:52Z",
+      "side": 1,
+      "message": "Could you add a comment here to describe when this dice node is always debuggable?",
+      "range": {
+        "startLine": 31,
+        "startChar": 6,
+        "endLine": 31,
+        "endChar": 19
+      },
+      "revId": "27e16bbe44b258cd3ab709c87922146f33dfbd4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
