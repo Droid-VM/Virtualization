@@ -193,6 +193,7 @@ avf_flag_aware_apex_defaults {
         release_avf_enable_remote_attestation: {
             vintf_fragments: [
                 "virtualizationservice.xml",
+                "footest.xml",
             ],
         },
     },
