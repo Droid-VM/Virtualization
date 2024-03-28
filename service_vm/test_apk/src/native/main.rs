@@ -122,6 +122,10 @@ impl IAttestationService for AttestationService {
         // TODO(b/191073073): Returns the attestation result to the host for validation.
         self.res.lock().unwrap().as_ref().unwrap().log().or_service_specific_exception(-1)
     }
+
+    fn add(&self, a: i32, b: i32) -> binder::Result<i32> {
+        Ok(a + b)
+    }
 }
 
 fn to_attestation_status(status: AVmAttestationStatus) -> AttestationStatus {
