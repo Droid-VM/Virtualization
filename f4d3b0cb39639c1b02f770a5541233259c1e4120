@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51a0ab13_fac395a7",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-03-28T14:32:06Z",
+      "side": 1,
+      "message": "Is this needed? Can\u0027t we just path `\"test_microdroid_vendor_image.img\"`? Other tests [1] don\u0027t need current_dir\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/pvmfw/avb/tests/utils.rs;l\u003d68;drc\u003d84707e436a1737a27e2f174a7caab6c190aeb04b",
+      "range": {
+        "startLine": 294,
+        "startChar": 11,
+        "endLine": 295,
+        "endChar": 32
+      },
+      "revId": "f4d3b0cb39639c1b02f770a5541233259c1e4120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
