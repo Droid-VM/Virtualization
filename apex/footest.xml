@@ -1,0 +1,14 @@
+<manifest version="1.0" type="framework">
+    <hal format="aidl">
+        <name>com.android.virt.vm_attestation.testservice</name>
+        <version>2</version>
+        <fqname>IAttestationService/default</fqname>
+        <transport ip="1.2.3.4" port="1234">inet</transport>
+        <use-accessor>
+            <value>vm_testservice_default</value>
+            <socket-domain>AF_VSOCK</socket-domain>
+            <port>5432</port>
+            <vm-payload-name>foo_payload</vm-payload-name>
+        </use-accessor>
+    </hal>
+</manifest>
