@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d44c745f_2dd6a761",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-03-29T02:44:02Z",
+      "side": 1,
+      "message": "Seems the amount of the task is getting bigger. Initially I thought it\u0027s just seeking file system though, `getSupportedOsList` needs to check if the feature `vendor_module` is enabled, and it requires to communicate with `virtmgr`.\n\nAlternative option is letting Java API can know whether a feature is enabled by itself, not communicating with `virtmgr`.\n\nHowever then, why should other APIs in `VirtualMachineManager` like `isFeatureEnabled` require `MANAGE_VIRTUAL_MACHINE`, but `getSupportedOsList ` doesn\u0027t? IIUC, I think those APIs should have same permission level, couldn\u0027t we change it? @inseob@google.com  @jiyong@google.com",
+      "parentUuid": "03c12e65_8dea2b1e",
+      "revId": "d658c51732e3691f0a5c5b29562044cf40751dff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ca0696d4_0cf67ff3",
         "filename": "tests/testapk_no_perm/src/java/com/android/microdroid/test/MicrodroidTestAppNoPerm.java",
         "patchSetId": 3
