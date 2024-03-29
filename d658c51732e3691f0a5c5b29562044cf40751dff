@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e71a8237_139342ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-03-29T08:29:23Z",
+      "side": 1,
+      "message": "The point is that `getSupportedOsList` doesn\u0027t need to be implemented inside of virtmgr. \n\n\u003e  why should other APIs in VirtualMachineManager like isFeatureEnabled require MANAGE_VIRTUAL_MACHINE\n\nI think APIs like `isSomethingEnabled` don\u0027t have to enforce the permission. Simply querying the capability doesn\u0027t have to be protected, IMO. @alanstokes@google.com do you agree?",
+      "parentUuid": "d44c745f_2dd6a761",
+      "revId": "d658c51732e3691f0a5c5b29562044cf40751dff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ca0696d4_0cf67ff3",
         "filename": "tests/testapk_no_perm/src/java/com/android/microdroid/test/MicrodroidTestAppNoPerm.java",
         "patchSetId": 3
