@@ -66,6 +66,7 @@ rust_ffi_static {
     edition: "2021",
     host_supported: false,
     rustlibs: [
+        "libanyhow",
         "libcrosvm_android_display_service-rust",
         "libnativewindow_rs",
     ],

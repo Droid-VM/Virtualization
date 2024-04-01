@@ -14,66 +14,178 @@
 
 //! Crate implementing crosvm GPU display for Android
 
-/// doc
+use crate::binder::binder_impl::Binder;
+use libcrosvm_android_display_service::aidl::android::crosvm::ICrosvmAndroidDisplayService::BnCrosvmAndroidDisplayService;
+use libcrosvm_android_display_service::aidl::android::crosvm::ICrosvmAndroidDisplayService::ICrosvmAndroidDisplayService;
+use libcrosvm_android_display_service::binder::Strong;
+use libcrosvm_android_display_service::binder;
+use nativewindow::Surface;
+use std::slice;
+use std::sync::Condvar;
+use std::sync::Mutex;
+use std::ffi::c_char;
+use std::ffi::CString;
+
+/// Pointer to a function for printing an error message
 #[repr(C)]
-#[derive(Debug, Copy, Clone)]
-pub struct android_display_context {
-    _bindgen_opaque_blob: [u32; 1usize],
+pub struct ErrorCallback(extern fn(msg: *const c_char));
+
+impl ErrorCallback {
+    fn print(&self, msg: &str) {
+        self.0(CString::new(msg).unwrap().as_c_str().as_ptr());
+    }
 }
 
-/// doc
-#[allow(non_camel_case_types)]
-pub type android_display_error_callback_type =
-    ::std::option::Option<unsafe extern "C" fn(message: *const ::std::os::raw::c_char)>;
-
-/// doc
+/// Creates a context for the android display backend. A binder service is registered to the
+/// service manager using the given name.
+/// # Safety
+/// `service_name` should be a non-null pointer to a utf-8 encoded string
+/// `service_name_len` should be the length of the string
+/// The returned context is created in the heap. The caller should not attempt to delete the
+/// object by itself. When the context is no longer used, it should be deleted via
+/// destroy_android_display_context.
 #[no_mangle]
-pub extern "C" fn create_android_display_context(
-    _service_name: *const ::std::os::raw::c_char,
-    _service_name_len: ::std::os::raw::c_ulong,
-    _error_callback: android_display_error_callback_type,
-) -> *mut android_display_context {
-    unimplemented!();
+pub unsafe extern "C" fn create_android_display_context(
+    service_name: *const ::std::os::raw::c_char,
+    service_name_len: ::std::os::raw::c_ulong,
+    error_callback:  ErrorCallback,
+) -> *mut AndroidDisplayContext {
+    let name = String::from_utf8_lossy(
+        // SAFETY: service_name is of length service_name_len
+        unsafe {
+            slice::from_raw_parts(service_name, service_name_len.try_into().unwrap())
+        });
+    AndroidDisplayContext::new(&name).map_or_else(
+        |e| { error_callback.print(&e.get_description()); std::ptr::null_mut() },
+        |c| Box::leak(Box::new(c)))
 }
 
-/// doc
+/// Destroys the given context object
+/// # Safety
+/// `ctx` should be a non-null pointer obtained from create_android_display_context
 #[no_mangle]
-pub extern "C" fn destroy_android_display_context(
-    _error_callback: android_display_error_callback_type,
-    _self_: *mut *mut android_display_context,
+pub unsafe extern "C" fn destroy_android_display_context(
+    _error_callback: ErrorCallback,
+    ctx: *mut AndroidDisplayContext,
 ) {
-    unimplemented!();
+    // SAFETY: ctx is returned from create_android_display_context
+    let _ = unsafe {
+        Box::from_raw(ctx)
+    };
 }
 
-/// doc
+/// Creates a window
+/// # Safety
+/// `ctx should be a non-null pointer obtained from create_android_display_context
 #[no_mangle]
-pub extern "C" fn get_android_display_width(
-    _error_callback: android_display_error_callback_type,
-    _self_: *mut android_display_context,
-) -> u32 {
-    unimplemented!();
-}
+pub unsafe extern "C" fn create_android_display_surface(
+    ctx: *mut AndroidDisplayContext,
+) -> 
 
-/// doc
+/// Gets the width of the Android-side display.
+/// # Safety
+/// `ctx` should be a non-null pointer obtained from create_android_display_context
 #[no_mangle]
-pub extern "C" fn get_android_display_height(
-    _error_callback: android_display_error_callback_type,
-    _self_: *mut android_display_context,
+pub unsafe extern "C" fn get_android_display_width(
+    _error_callback: ErrorCallback,
+    ctx: *mut AndroidDisplayContext,
 ) -> u32 {
+    // SAFETY: ctx is returned from create_android_display_context
+    let context = unsafe {
+        Box::from_raw(ctx)
+    };
+    let surface = context.get_surface();
+    Box::leak(context); // the pointer is still owned by the caller
+    surface.width().unwrap()
+}
+
+/// Gets the height of the Android-side display.
+/// # Safety
+/// `ctx` should be a non-null pointer obtained from create_android_display_context
+#[no_mangle]
+pub unsafe extern "C" fn get_android_display_height(
+    _error_callback: ErrorCallback,
+    ctx: *mut AndroidDisplayContext,
+) -> u32 {
+    // SAFETY: ctx is returned from create_android_display_context
+    let context = unsafe {
+        Box::from_raw(ctx)
+    };
+    let surface = context.get_surface();
+    Box::leak(context); // the pointer is still owned by the caller
+    surface.height().unwrap()
+}
+
+/// Gets the pointer to the buffer
+/// # Safety
+/// `ctx` should be a non-null pointer obtained from create_android_display_context
+#[no_mangle]
+pub unsafe extern "C" fn get_android_display_buffer(
+    _ctx: *mut AndroidDisplayContext,
+) -> *mut u8 {
     unimplemented!();
 }
 
 /// doc
+/// # Safety
+/// `ctx` should be a non-null pointer obtained from create_android_display_context
 #[no_mangle]
 pub extern "C" fn blit_android_display(
-    _error_callback: android_display_error_callback_type,
-    _self_: *mut android_display_context,
-    _width: u32,
-    _height: u32,
-    _bytes: *mut u8,
-    _size: usize,
+    _error_callback: ErrorCallback,
+    _self_: *mut AndroidDisplayContext,
 ) {
     unimplemented!();
 }
 
+#[derive(Default)]
+struct AndroidDisplayService {
+    surface: Mutex<Option<Surface>>,
+    surface_set: Condvar,
+}
 
+impl binder::Interface for AndroidDisplayService {}
+
+impl ICrosvmAndroidDisplayService for AndroidDisplayService {
+    fn setSurface(&self, surface: &mut Surface) -> binder::Result<()> {
+        let mut s = self.surface.lock().unwrap();
+        *s = Some(surface.clone());
+        self.surface_set.notify_one();
+        Ok(())
+    }
+
+    fn removeSurface(&self) -> binder::Result<()> {
+        let mut s = self.surface.lock().unwrap();
+        *s = None;
+        self.surface_set.notify_one();
+        Ok(())
+    }
+}
+
+/// doc
+pub struct AndroidDisplayContext {
+    service: Strong<dyn ICrosvmAndroidDisplayService>,
+    width: u32,
+    height: u32,
+}
+
+impl AndroidDisplayContext {
+    fn new(name: &str, width: u32, height: u32) -> binder::Result<Self> {
+        let service = BnCrosvmAndroidDisplayService::new_binder(
+            AndroidDisplayService::default(),
+            binder::BinderFeatures::default(),
+        );
+        binder::add_service(name, service.as_binder())?;
+        binder::ProcessState::start_thread_pool();
+        Ok(Self{service, width, height})
+    }
+
+    // Wait until Surface is set and return a copy of it.
+    fn get_surface(&self) -> Surface {
+        let binder: Binder<BnCrosvmAndroidDisplayService> = self.service.as_binder().try_into().unwrap();
+        let service = binder.downcast_binder::<AndroidDisplayService>().unwrap();
+        let surface = service.surface_set.wait_while(
+            service.surface.lock().unwrap(),
+            |surface| surface.is_some()).unwrap();
+        surface.as_ref().unwrap().clone()
+    }
+}
