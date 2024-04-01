@@ -16,7 +16,12 @@ aidl_interface {
             enabled: false,
         },
         rust: {
-            enabled: false,
+            enabled: true,
+            additional_rustlibs: ["libnativewindow_rs"],
+            apex_available: [
+                "//apex_available:platform",
+                "com.android.virt",
+            ],
         },
         ndk: {
             enabled: true,
@@ -47,6 +52,22 @@ cc_library_static {
     shared_libs: [
         "libbinder_ndk",
         "libnativewindow",
+    ],
+    apex_available: [
+        "//apex_available:platform",
+        "com.android.virt",
+    ],
+}
+
+rust_ffi_static {
+    name: "libandroid_display_backend",
+    crate_name: "android_display_backend",
+    srcs: ["src/lib.rs"],
+    edition: "2021",
+    host_supported: false,
+    rustlibs: [
+        "libcrosvm_android_display_service-rust",
+        "libnativewindow_rs",
     ],
     apex_available: [
         "//apex_available:platform",
