@@ -624,6 +624,41 @@ fn check_if_all_cpus_allowed() -> Result<bool> {
     Ok(false)
 }
 
+fn get_cpu_info(cpu_id: usize, property: &str) -> Result<u32> {
+    let path = format!("/sys/devices/system/cpu/cpu{cpu_id}/{property}");
+    std::fs::read_to_string(path)?
+        .trim()
+        .parse()
+        .map_err(|e| anyhow!("Failed to get cpu property {e:?}"))
+}
+
+fn get_cpu_capacity(cpu_id: usize) -> Result<u32> {
+    get_cpu_info(cpu_id, "cpu_capacity")
+}
+
+// Default to 0th Cpu if we can't determine max capacity.
+fn find_largest_cpu() -> Result<usize> {
+    let mut cpu_idx: usize = 0;
+    let mut max_capacity: u32 = 0;
+
+    if let Some(cpus) = get_num_cpus() {
+        let cpu_capacities = (0..cpus).map(get_cpu_capacity).collect::<Vec<_>>();
+
+        for (idx, res) in cpu_capacities.iter().enumerate() {
+            match res {
+                Ok(capacity) => {
+                    if capacity > &max_capacity {
+                        max_capacity = *capacity;
+                        cpu_idx = idx;
+                    }
+                }
+                Err(e) => info!("Unable to get capacity for cpu{}, {e:?}", cpu_idx),
+            }
+        }
+    }
+    Ok(cpu_idx)
+}
+
 // Get guest time from /proc/[crosvm pid]/stat
 fn get_guest_time(pid: u32) -> Result<i64> {
     let file = read_to_string(format!("/proc/{}/stat", pid))?;
@@ -843,6 +878,7 @@ fn run_vm(
             cfg_if::cfg_if! {
                 if #[cfg(any(target_arch = "aarch64"))] {
                     command.arg("--virt-cpufreq");
+                    command.arg("--cpus").arg(format!("boot-cpu={}", find_largest_cpu()?));
                 }
             }
         } else if let Some(cpus) = get_num_cpus() {
