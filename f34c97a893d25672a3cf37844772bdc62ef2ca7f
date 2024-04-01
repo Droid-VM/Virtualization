@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b30bdfa_915c47ef",
+        "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-04-01T20:43:32Z",
+      "side": 1,
+      "message": "you need to hold the lock the whole time you are using the `aidl::android::view::Surface*`, otherwise a `setSurface` or `removeSurface` call might concurrently free the object",
+      "range": {
+        "startLine": 67,
+        "startChar": 8,
+        "endLine": 67,
+        "endChar": 30
+      },
+      "revId": "f34c97a893d25672a3cf37844772bdc62ef2ca7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
