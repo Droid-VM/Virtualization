@@ -116,4 +116,7 @@ interface IVirtualizationServiceInternal {
      * @param instanceId The ID for the VM.
      */
     void claimVmInstance(in byte[64] instanceId);
+
+    void setDisplayService(IBinder ibinder);
+    @nullable IBinder getDisplayService();
 }

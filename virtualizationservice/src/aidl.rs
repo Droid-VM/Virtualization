@@ -190,6 +190,25 @@ impl VirtualizationServiceInternal {
 impl Interface for VirtualizationServiceInternal {}
 
 impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
+    fn setDisplayService(
+        &self,
+        ibinder: &binder::SpIBinder,
+    ) -> std::result::Result<(), binder::Status> {
+        check_manage_access()?;
+        check_use_custom_virtual_machine()?;
+        let state = &mut *self.state.lock().unwrap();
+        state.display_service = Some(ibinder.clone());
+        Ok(())
+    }
+
+    fn getDisplayService(
+        &self,
+    ) -> std::result::Result<std::option::Option<binder::SpIBinder>, binder::Status> {
+        check_manage_access()?;
+        check_use_custom_virtual_machine()?;
+        let state = &mut *self.state.lock().unwrap();
+        Ok((state.display_service).as_ref().cloned())
+    }
     fn removeMemlockRlimit(&self) -> binder::Result<()> {
         let pid = get_calling_pid();
         let lim = libc::rlimit { rlim_cur: libc::RLIM_INFINITY, rlim_max: libc::RLIM_INFINITY };
@@ -588,6 +607,8 @@ struct GlobalState {
 
     /// State relating to secrets held by (optional) Secretkeeper instance on behalf of VMs.
     sk_state: Option<maintenance::State>,
+
+    display_service: Option<binder::SpIBinder>,
 }
 
 impl GlobalState {
@@ -596,6 +617,7 @@ impl GlobalState {
             held_contexts: HashMap::new(),
             dtbo_file: Mutex::new(None),
             sk_state: maintenance::State::new(),
+            display_service: None,
         }
     }
 
