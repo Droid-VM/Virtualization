@@ -88,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9584106b_c5333107",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-04-02T18:16:22Z",
+      "side": 1,
+      "message": "\u003e This isn\u0027t needed; it\u0027s checked (indirectly) in create_vm_internal.\n\nHow? I don\u0027t see check_manage_access() being called by the latter\n\n\u003e Also doesn\u0027t seem to be related to this CL.\n\nThat is true. Just wanted to fix permission issue in this patch as I saw it",
+      "parentUuid": "520ddac0_f1434cc9",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 31
+      },
+      "revId": "9a57cede122cd1658a5cd1790ee670826e8d7719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf6c11fe_74858383",
@@ -101,6 +125,30 @@
       "writtenOn": "2024-04-02T16:27:35Z",
       "side": 1,
       "message": "Oh, yes, that seems like a good thing. \n(Can we add to the commit message?)",
+      "range": {
+        "startLine": 235,
+        "startChar": 6,
+        "endLine": 235,
+        "endChar": 31
+      },
+      "revId": "9a57cede122cd1658a5cd1790ee670826e8d7719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0661af29_c8221102",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-04-02T18:16:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf6c11fe_74858383",
       "range": {
         "startLine": 235,
         "startChar": 6,
