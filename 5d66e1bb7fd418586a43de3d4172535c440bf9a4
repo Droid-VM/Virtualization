@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46eb1750_d8d8a37c",
+        "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-04-02T13:54:40Z",
+      "side": 1,
+      "message": "surface-\u003erelease() causes an exception in the caller(but behavior is okay if it is caught) because surface is inout param. can we make surface\u0027s type `inout @nullable Surface` instead of `inout Surface`?",
+      "range": {
+        "startLine": 46,
+        "startChar": 34,
+        "endLine": 49,
+        "endChar": 88
+      },
+      "revId": "5d66e1bb7fd418586a43de3d4172535c440bf9a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
