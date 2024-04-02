@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b2589b5_85120931",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-02T15:14:03Z",
+      "side": 1,
+      "message": "\u003e I think APIs like isSomethingEnabled don\u0027t have to enforce the permission. Simply querying the capability doesn\u0027t have to be protected, IMO. \n\nWell, there is some precedent: VirtualMachineManager#getCapabilities doesn\u0027t require any permission.\n\nHowever, isRemoteAttestationSupported() and isUpdatableVmSupported() do require the permission, and that\u0027s part of the API definition, and we\u0027re no longer allowed to change it.\n\nOTOH getSupportedOSList() is not documented to require the permission, and again we can\u0027t change that. So it must not. So implementing it in the client code is fine, if we can make that work.\n\nBut I also think we need to change things so trying to start a VM when you don\u0027t have the permission (and hence the gid) fails more cleanly. That could probably be a separate bug.",
+      "parentUuid": "e71a8237_139342ff",
+      "revId": "d658c51732e3691f0a5c5b29562044cf40751dff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ca0696d4_0cf67ff3",
         "filename": "tests/testapk_no_perm/src/java/com/android/microdroid/test/MicrodroidTestAppNoPerm.java",
         "patchSetId": 3
