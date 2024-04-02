@@ -22,6 +22,30 @@
       },
       "revId": "f34c97a893d25672a3cf37844772bdc62ef2ca7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1768a2b_4bb8dceb",
+        "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-02T02:16:37Z",
+      "side": 1,
+      "message": "Yeah, I found that while trying to convert this into Rust, where this is cloned when returning. Will fix that there. \n\nIn practice, this is okay for now because setSurface is called only once, and removeSurface is not called :).",
+      "parentUuid": "2b30bdfa_915c47ef",
+      "range": {
+        "startLine": 67,
+        "startChar": 8,
+        "endLine": 67,
+        "endChar": 30
+      },
+      "revId": "f34c97a893d25672a3cf37844772bdc62ef2ca7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
