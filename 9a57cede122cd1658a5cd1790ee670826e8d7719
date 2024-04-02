@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f98401b8_cec06220",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-04-02T16:44:43Z",
+      "side": 1,
+      "message": "\u003e This should probably be extracted to a (non-static) method on VirtualMachine.\n\n\nWouldn\u0027t that require an additional api \u0026 be in scope of api changes then?\n\nAlso, currently the claiming of VM instance is hidden in a way. Instance-id (or instance.img) are under the hood implementation details.\n\nSo if we extract out this into `VirtualMachine::claimInstance()`, it increases 1 step in claiming the VM. What if the user does `fromDescriptor` but not claimInstance().  It is seems the only sensible place to call `VirtualMachine::claimInstance` is after constructing VM from a descriptor \u0026 the current code achieves it?",
+      "parentUuid": "1d95b485_4581c361",
+      "range": {
+        "startLine": 436,
+        "startChar": 0,
+        "endLine": 444,
+        "endChar": 21
+      },
+      "revId": "9a57cede122cd1658a5cd1790ee670826e8d7719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "520ddac0_f1434cc9",
         "filename": "virtualizationmanager/src/aidl.rs",
         "patchSetId": 6
