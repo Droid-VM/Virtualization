@@ -16,6 +16,75 @@
       "message": "I\u0027ve also added `check_manage_access()?` to some more methods of the api. PTAL",
       "revId": "9a57cede122cd1658a5cd1790ee670826e8d7719",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d95b485_4581c361",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-02T16:27:35Z",
+      "side": 1,
+      "message": "This should probably be extracted to a (non-static) method on VirtualMachine.\nAnd I wonder if you should call it from VMM#importFromDescriptor, outside the create lock, rather than here?",
+      "range": {
+        "startLine": 436,
+        "startChar": 0,
+        "endLine": 444,
+        "endChar": 21
+      },
+      "revId": "9a57cede122cd1658a5cd1790ee670826e8d7719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "520ddac0_f1434cc9",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-02T16:27:35Z",
+      "side": 1,
+      "message": "This isn\u0027t needed; it\u0027s checked (indirectly) in create_vm_internal.\n\nAlso doesn\u0027t seem to be related to this CL.",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 31
+      },
+      "revId": "9a57cede122cd1658a5cd1790ee670826e8d7719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf6c11fe_74858383",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-02T16:27:35Z",
+      "side": 1,
+      "message": "Oh, yes, that seems like a good thing. \n(Can we add to the commit message?)",
+      "range": {
+        "startLine": 235,
+        "startChar": 6,
+        "endLine": 235,
+        "endChar": 31
+      },
+      "revId": "9a57cede122cd1658a5cd1790ee670826e8d7719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
