@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39009c6d_b120f617",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice_internal/IVirtualizationServiceInternal.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-02T11:49:13Z",
+      "side": 1,
+      "message": "These will go away with binder RPC, not moved to somewhere.",
+      "range": {
+        "startLine": 120,
+        "startChar": 26,
+        "endLine": 120,
+        "endChar": 95
+      },
+      "revId": "c12cb1a975e0cd4ccf9cf0afbe5970d35def6023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e830db3_f57d85ef",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-02T11:49:13Z",
+      "side": 1,
+      "message": "you may use condvar so that you can block getDisplayService until the service is actually set...\n\nbut since this will go away with rpc binder I don\u0027t think it\u0027s highly needed.",
+      "range": {
+        "startLine": 611,
+        "startChar": 0,
+        "endLine": 611,
+        "endChar": 47
+      },
+      "revId": "c12cb1a975e0cd4ccf9cf0afbe5970d35def6023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
