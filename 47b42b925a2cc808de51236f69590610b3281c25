@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f4573f0_29e2e696",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-02T01:33:58Z",
+      "side": 1,
+      "message": "This can be simplified as follows:\n\n```\nlet max_cpu_id \u003d cpu_capacities.iter().enumerate()\n    .max_by(|(_,x), (_,y)| x.cmp(y))\n    .map(|(i, _)| i).unwrap());\n```",
+      "range": {
+        "startLine": 647,
+        "startChar": 0,
+        "endLine": 657,
+        "endChar": 9
+      },
+      "revId": "47b42b925a2cc808de51236f69590610b3281c25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
