@@ -116,4 +116,8 @@ interface IVirtualizationServiceInternal {
      * @param instanceId The ID for the VM.
      */
     void claimVmInstance(in byte[64] instanceId);
+
+    // TODO(b/330257000): Move these functions to a new service which is running on top of UDS.
+    void setDisplayService(IBinder ibinder);
+    @nullable IBinder getDisplayService();
 }
