@@ -19,12 +19,15 @@ package com.android.virtualization.vmlauncher;
 import static android.system.virtualmachine.VirtualMachineConfig.CPU_TOPOLOGY_MATCH_HOST;
 
 import android.app.Activity;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.crosvm.ICrosvmAndroidDisplayService;
+import android.system.virtualizationservice.DisplayConfig;
 import android.system.virtualizationservice_internal.IVirtualizationServiceInternal;
 import android.system.virtualmachine.VirtualMachineCustomImageConfig;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineCallback;
@@ -36,6 +39,7 @@ import android.view.SurfaceView;
 import android.view.WindowManager;
 import android.view.WindowInsets;
 import android.view.WindowInsetsController;
+import android.view.WindowMetrics;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -106,6 +110,16 @@ public class MainActivity extends Activity {
             }
 
             configBuilder.setMemoryBytes(8L * 1024 * 1024 * 1024 /* 8 GB */);
+            WindowMetrics windowMetrics = getWindowManager().getCurrentWindowMetrics();
+            Rect windowSize = windowMetrics.getBounds();
+            int dpi = (int) (DisplayMetrics.DENSITY_DEFAULT * windowMetrics.getDensity());
+            DisplayConfig displayConfig = new DisplayConfig();
+            displayConfig.width = windowSize.right;
+            displayConfig.height = windowSize.bottom;
+            displayConfig.horizontalDpi = dpi;
+            displayConfig.verticalDpi = dpi;
+            displayConfig.refreshRate = 60;
+            customImageConfigBuilder.setDisplayConfig(displayConfig);
             configBuilder.setCustomImageConfig(customImageConfigBuilder.build());
 
         } catch (JSONException | IOException e) {

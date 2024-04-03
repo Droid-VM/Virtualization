@@ -118,6 +118,16 @@ pub struct CrosvmConfig {
     pub vfio_devices: Vec<VfioDevice>,
     pub dtbo: Option<File>,
     pub device_tree_overlay: Option<File>,
+    pub display_config: Option<DisplayConfig>,
+}
+
+#[derive(Debug)]
+pub struct DisplayConfig {
+    pub width: NonZeroU32,
+    pub height: NonZeroU32,
+    pub horizontal_dpi: NonZeroU32,
+    pub vertical_dpi: NonZeroU32,
+    pub refresh_rate: NonZeroU32,
 }
 
 /// A disk image to pass to crosvm for a VM.
@@ -926,6 +936,13 @@ fn run_vm(
 
     if let Some(dt_overlay) = &config.device_tree_overlay {
         command.arg("--device-tree-overlay").arg(add_preserved_fd(&mut preserved_fds, dt_overlay));
+    }
+    if let Some(display_config) = &config.display_config {
+        command.arg("--gpu")
+        // TODO(b/331708504): support backend config as well
+        .arg("backend=virglrenderer,context-types=virgl2,egl=true,surfaceless=true,glx=false,gles=true")
+        .arg(format!("--gpu-display=mode=windowed[{},{}],dpi=[{},{}],refresh-rate={}", display_config.width, display_config.height, display_config.horizontal_dpi, display_config.vertical_dpi, display_config.refresh_rate))
+        .arg(format!("--android-display-service={}", config.name));
     }
 
     append_platform_devices(&mut command, &mut preserved_fds, &config)?;

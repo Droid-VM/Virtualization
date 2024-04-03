@@ -20,6 +20,8 @@ import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.os.PersistableBundle;
 
+import android.system.virtualizationservice.DisplayConfig;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,12 +34,14 @@ public class VirtualMachineCustomImageConfig {
     private static final String KEY_PARAMS = "params";
     private static final String KEY_DISK_WRITABLES = "disk_writables";
     private static final String KEY_DISK_IMAGES = "disk_images";
+    private static final String KEY_DISPLAY_CONFIG = "display_config";
     @Nullable private final String name;
     @NonNull private final String kernelPath;
     @Nullable private final String initrdPath;
     @Nullable private final String bootloaderPath;
     @Nullable private final String[] params;
     @Nullable private final Disk[] disks;
+    @Nullable private final DisplayConfig displayConfig;
 
     @Nullable
     public Disk[] getDisks() {
@@ -76,13 +80,15 @@ public class VirtualMachineCustomImageConfig {
             String initrdPath,
             String bootloaderPath,
             String[] params,
-            Disk[] disks) {
+            Disk[] disks,
+            DisplayConfig displayConfig) {
         this.name = name;
         this.kernelPath = kernelPath;
         this.initrdPath = initrdPath;
         this.bootloaderPath = bootloaderPath;
         this.params = params;
         this.disks = disks;
+        this.displayConfig = displayConfig;
     }
 
     static VirtualMachineCustomImageConfig from(PersistableBundle customImageConfigBundle) {
@@ -107,6 +113,16 @@ public class VirtualMachineCustomImageConfig {
                 }
             }
         }
+        int[] displayConfigRaw = customImageConfigBundle.getIntArray(KEY_DISPLAY_CONFIG);
+        if (displayConfigRaw != null && displayConfigRaw.length == 5) {
+            DisplayConfig displayConfig = new DisplayConfig();
+            displayConfig.width = displayConfigRaw[0];
+            displayConfig.height = displayConfigRaw[1];
+            displayConfig.horizontalDpi = displayConfigRaw[2];
+            displayConfig.verticalDpi = displayConfigRaw[3];
+            displayConfig.refreshRate = displayConfigRaw[4];
+            builder.setDisplayConfig(displayConfig);
+        }
         return builder.build();
     }
 
@@ -128,7 +144,23 @@ public class VirtualMachineCustomImageConfig {
             pb.putBooleanArray(KEY_DISK_WRITABLES, writables);
             pb.putStringArray(KEY_DISK_IMAGES, images);
         }
+        if (displayConfig != null) {
+            pb.putIntArray(
+                    KEY_DISPLAY_CONFIG,
+                    new int[] {
+                        displayConfig.width,
+                        displayConfig.height,
+                        displayConfig.horizontalDpi,
+                        displayConfig.verticalDpi,
+                        displayConfig.refreshRate,
+                    });
+        }
         return pb;
+    }
+
+    @Nullable
+    public DisplayConfig getDisplayConfig() {
+        return displayConfig;
     }
 
     /** @hide */
@@ -170,6 +202,7 @@ public class VirtualMachineCustomImageConfig {
         private String bootloaderPath;
         private List<String> params = new ArrayList<>();
         private List<Disk> disks = new ArrayList<>();
+        private DisplayConfig displayConfig;
 
         /** @hide */
         public Builder() {}
@@ -211,6 +244,12 @@ public class VirtualMachineCustomImageConfig {
         }
 
         /** @hide */
+        public Builder setDisplayConfig(DisplayConfig displayConfig) {
+            this.displayConfig = displayConfig;
+            return this;
+        }
+
+        /** @hide */
         public VirtualMachineCustomImageConfig build() {
             return new VirtualMachineCustomImageConfig(
                     this.name,
@@ -218,7 +257,8 @@ public class VirtualMachineCustomImageConfig {
                     this.initrdPath,
                     this.bootloaderPath,
                     this.params.toArray(new String[0]),
-                    this.disks.toArray(new Disk[0]));
+                    this.disks.toArray(new Disk[0]),
+                    displayConfig);
         }
     }
 }

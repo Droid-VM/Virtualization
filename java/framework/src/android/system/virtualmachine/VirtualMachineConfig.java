@@ -640,7 +640,7 @@ public final class VirtualMachineConfig {
                             config.disks[i].writable ? MODE_READ_WRITE : MODE_READ_ONLY);
             config.disks[i].partitions = new Partition[0];
         }
-
+        config.displayConfig = customImageConfig.getDisplayConfig();
         config.protectedVm = this.mProtectedVm;
         config.memoryMib = bytesToMebiBytes(mMemoryBytes);
         config.cpuTopology = (byte) this.mCpuTopology;
