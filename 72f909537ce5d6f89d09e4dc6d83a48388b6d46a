@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b28d6c47_b7b03ce5",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-03T10:38:37Z",
+      "side": 1,
+      "message": "This seems to be too much just to read the boolean value. Plus, this is done everytime this function is called. That\u0027s not required.\n\nYou can add a native method to https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/flags/cpp/include/android/avf_cc_flags.h\n\nand call it from here via a JNI function you will add in packages/modules/Virtualization/java/jni/android_system_virtualmachine_VirtualizationService.cpp",
+      "range": {
+        "startLine": 372,
+        "startChar": 0,
+        "endLine": 380,
+        "endChar": 13
+      },
+      "revId": "72f909537ce5d6f89d09e4dc6d83a48388b6d46a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29587bbc_7c96cf10",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-03T10:38:37Z",
+      "side": 1,
+      "message": "Not sure we want to display different error messages here. I suggest\n\n```\n} catch (IOException | JSONException e) {\n    throw new VirtualMachineException(\"Error while reading /system/...\", e);\n}\n```",
+      "range": {
+        "startLine": 381,
+        "startChar": 0,
+        "endLine": 385,
+        "endChar": 9
+      },
+      "revId": "72f909537ce5d6f89d09e4dc6d83a48388b6d46a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bcad4bc_1669eeb8",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-03T10:38:37Z",
+      "side": 1,
+      "message": "You don\u0027t have to do this every time this function is called.\n\nYou can make supportedOsList a static variable and construct it only when this function is called first time. Second time the function is called, you can simply return the saved list. You may want to have a boolean variable to check if this is the first time or not. Also, you need to make the function re-entrant.",
+      "range": {
+        "startLine": 402,
+        "startChar": 0,
+        "endLine": 411,
+        "endChar": 17
+      },
+      "revId": "72f909537ce5d6f89d09e4dc6d83a48388b6d46a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
