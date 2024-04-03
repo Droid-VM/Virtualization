@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b1cb3de6_a80df486",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-04-03T12:05:04Z",
+      "side": 1,
+      "message": "I didnt know `VirtualMachineManager` uses the same class. Lets do that then",
+      "parentUuid": "43740747_1948a326",
+      "range": {
+        "startLine": 436,
+        "startChar": 0,
+        "endLine": 444,
+        "endChar": 21
+      },
+      "revId": "9a57cede122cd1658a5cd1790ee670826e8d7719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "520ddac0_f1434cc9",
         "filename": "virtualizationmanager/src/aidl.rs",
         "patchSetId": 6
@@ -150,6 +174,30 @@
       "side": 1,
       "message": "\u003e I don\u0027t see check_manage_access() being called by the latter\n\nhttps://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/virtualizationmanager/src/aidl.rs;drc\u003d81d13d397ffacda4ef9f80f32e573149499321fc;l\u003d377\n\ncreate_vm_context calls allocateGlobalVmContext which does the check. Admittedly that\u0027s slightly convoluted, but it is there.",
       "parentUuid": "9584106b_c5333107",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 31
+      },
+      "revId": "9a57cede122cd1658a5cd1790ee670826e8d7719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af8f40c9_17a9ab83",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-04-03T12:05:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9015f111_522685e7",
       "range": {
         "startLine": 220,
         "startChar": 0,
