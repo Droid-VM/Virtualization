@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "43740747_1948a326",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-03T08:54:42Z",
+      "side": 1,
+      "message": "Only public methods are part of the API; we\u0027re free to add private (or in this case probably package protected) methods, and only we can call them.\n\nI\u0027m not suggesting we change the visible API at all; just some light refactoring. \n\nThis looks like a method on a VM - all those `vm.` accesses gives it away (\"feature envy\"). And if we do extract it, it then becomes easy to move outside the lock, which seems like a win. (The lock is there to protect the consistency of which VMs exist, in the file system and in the in-memory map. Claiming an instance ID doesn\u0027t affect either.)",
+      "parentUuid": "f98401b8_cec06220",
+      "range": {
+        "startLine": 436,
+        "startChar": 0,
+        "endLine": 444,
+        "endChar": 21
+      },
+      "revId": "9a57cede122cd1658a5cd1790ee670826e8d7719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "520ddac0_f1434cc9",
         "filename": "virtualizationmanager/src/aidl.rs",
         "patchSetId": 6
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "\u003e This isn\u0027t needed; it\u0027s checked (indirectly) in create_vm_internal.\n\nHow? I don\u0027t see check_manage_access() being called by the latter\n\n\u003e Also doesn\u0027t seem to be related to this CL.\n\nThat is true. Just wanted to fix permission issue in this patch as I saw it",
       "parentUuid": "520ddac0_f1434cc9",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 31
+      },
+      "revId": "9a57cede122cd1658a5cd1790ee670826e8d7719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9015f111_522685e7",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-03T08:54:42Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t see check_manage_access() being called by the latter\n\nhttps://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/virtualizationmanager/src/aidl.rs;drc\u003d81d13d397ffacda4ef9f80f32e573149499321fc;l\u003d377\n\ncreate_vm_context calls allocateGlobalVmContext which does the check. Admittedly that\u0027s slightly convoluted, but it is there.",
+      "parentUuid": "9584106b_c5333107",
       "range": {
         "startLine": 220,
         "startChar": 0,
