@@ -17,7 +17,7 @@
 use crate::{get_calling_pid, get_calling_uid};
 use crate::atom::{write_vm_booted_stats, write_vm_creation_stats};
 use crate::composite::make_composite_image;
-use crate::crosvm::{CrosvmConfig, DiskFile, PayloadState, VmContext, VmInstance, VmState};
+use crate::crosvm::{CrosvmConfig, DiskFile, DisplayConfig, PayloadState, VmContext, VmInstance, VmState};
 use crate::debug_config::DebugConfig;
 use crate::dt_overlay::{create_device_tree_overlay, VM_DT_OVERLAY_MAX_SIZE, VM_DT_OVERLAY_PATH};
 use crate::payload::{add_microdroid_payload_images, add_microdroid_system_images, add_microdroid_vendor_image};
@@ -571,6 +571,25 @@ impl VirtualizationService {
             (vec![], None)
         };
 
+        let display_config = config
+            .displayConfig
+            .as_ref()
+            .map(|raw_config| {
+                let width = convert_i32_to_nonzero_u32(raw_config.width)?;
+                let height = convert_i32_to_nonzero_u32(raw_config.height)?;
+                let horizontal_dpi = convert_i32_to_nonzero_u32(raw_config.horizontalDpi)?;
+                let vertical_dpi = convert_i32_to_nonzero_u32(raw_config.verticalDpi)?;
+                let refresh_rate = convert_i32_to_nonzero_u32(raw_config.refreshRate)?;
+                Ok::<DisplayConfig, Status>(DisplayConfig {
+                    width,
+                    height,
+                    horizontal_dpi,
+                    vertical_dpi,
+                    refresh_rate,
+                })
+            })
+            .transpose()?;
+
         // Actually start the VM.
         let crosvm_config = CrosvmConfig {
             cid,
@@ -596,6 +615,7 @@ impl VirtualizationService {
             vfio_devices,
             dtbo,
             device_tree_overlay,
+            display_config,
         };
         let instance = Arc::new(
             VmInstance::new(
@@ -611,6 +631,17 @@ impl VirtualizationService {
         );
         state.add_vm(Arc::downgrade(&instance));
         Ok(VirtualMachine::create(instance))
+    }
+}
+
+fn convert_i32_to_nonzero_u32(value: i32) -> ::binder::Result<NonZeroU32> {
+    if value < 0 {
+        Err("value should be greater than 0").or_binder_exception(ExceptionCode::ILLEGAL_ARGUMENT)
+    } else {
+        let u32_value = value as u32;
+        NonZeroU32::new(u32_value)
+            .ok_or("value should be greater than 0")
+            .or_binder_exception(ExceptionCode::ILLEGAL_ARGUMENT)
     }
 }
 
