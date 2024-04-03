@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c6a196f_7df02657",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-03T16:00:14Z",
+      "side": 1,
+      "message": "this looks odd. once a thread has a reference to VirtualizationServiceInternal object, it doesn\u0027t copy or move this condvar (and the state as well). \n\nI think the service object itself should be behind an arc.",
+      "range": {
+        "startLine": 180,
+        "startChar": 33,
+        "endLine": 180,
+        "endChar": 41
+      },
+      "revId": "7d62718f369eb4ca15c3f02242dd815fd4ea13b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd83ad00_7f30a3b5",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-03T16:00:14Z",
+      "side": 1,
+      "message": "indefinite blocking inside a binder call should be prohibited... but since we will remove this anyway with rpc binder, I am fine with this for now.",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 213,
+        "endChar": 92
+      },
+      "revId": "7d62718f369eb4ca15c3f02242dd815fd4ea13b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
