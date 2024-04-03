@@ -16,6 +16,24 @@
       "message": "Does this result in the mutex guard being dropped later than line 431 rather than immediately? If so, will that result in a deadlock in the timeout case?",
       "revId": "57f53c84ec91fac25d9931d8e64c595136eb541f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9607fb7a_bc994a89",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1933736
+      },
+      "writtenOn": "2024-04-03T22:57:38Z",
+      "side": 1,
+      "message": "Would you prefer if we explicitly drop the variable (as in the latest patch) or allow the clippy lint?",
+      "parentUuid": "4d8a1d56_8feff8ba",
+      "revId": "57f53c84ec91fac25d9931d8e64c595136eb541f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
