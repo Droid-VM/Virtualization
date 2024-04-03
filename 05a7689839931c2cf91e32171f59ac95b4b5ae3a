@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2283354a_f87e3c6d",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-03T11:25:07Z",
+      "side": 1,
+      "message": "I think you need to attempt to delete the instance ID here too. \n(And delete the files even if that fails.)\n\nIt might have been allocated  on line 512 above.\n\nThat also applies to the similar code in fromDescriptor (line 468) - unless you follow my suggestion of only taking ownership once everything else has succeeded.\n\n(What do we do if taking ownership fails though?)",
+      "range": {
+        "startLine": 555,
+        "startChar": 0,
+        "endLine": 558,
+        "endChar": 50
+      },
+      "revId": "05a7689839931c2cf91e32171f59ac95b4b5ae3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd3bc74c_e117f660",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-03T11:25:07Z",
+      "side": 1,
+      "message": "I\u0027m not convinced this should be here.\nIt should come after setting mWasDeleted, because for correctness we mustn\u0027t skip that even if something throws.\nAnd it should be outside the VM\u0027s mLock (but inside sCreateLock).",
+      "range": {
+        "startLine": 596,
+        "startChar": 7,
+        "endLine": 596,
+        "endChar": 45
+      },
+      "revId": "05a7689839931c2cf91e32171f59ac95b4b5ae3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0342bdb_b5a98ebb",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-03T11:25:07Z",
+      "side": 1,
+      "message": "Should this be flagged?",
+      "range": {
+        "startLine": 620,
+        "startChar": 0,
+        "endLine": 621,
+        "endChar": 61
+      },
+      "revId": "05a7689839931c2cf91e32171f59ac95b4b5ae3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e78952a7_9a6ccd51",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-03T11:25:07Z",
+      "side": 1,
+      "message": "I don\u0027t think we should report this as an error; if we can\u0027t remove the ID, we just can\u0027t.\n\nThe contract for delete() is that it throws if \"if the virtual machine does not exist, is not stopped, or cannot be deleted.\" \n\nThere\u0027s nothing much the app can do to recover if delete fails, so it pretty much never should.",
+      "range": {
+        "startLine": 622,
+        "startChar": 2,
+        "endLine": 626,
+        "endChar": 9
+      },
+      "revId": "05a7689839931c2cf91e32171f59ac95b4b5ae3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
