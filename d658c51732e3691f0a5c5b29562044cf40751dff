@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "440a79a2_72ee76cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-04-03T01:18:25Z",
+      "side": 1,
+      "message": "\u003e However, isRemoteAttestationSupported() and isUpdatableVmSupported() do require the permission, and that\u0027s part of the API definition, and we\u0027re no longer allowed to change it.\n\nThanks, now I got the key. Though the situation `isFeatureEnabled` requires the permission but not for `getSupportedOsList` seems weird, we cannot change anything since they\u0027re defined as API specification.\n\nThen what I should do from now looks quite straightforward. In Java code, I should implement checking whether `vendor_module` feature is enabled or not w/o relying on `virtmgr`.",
+      "parentUuid": "3b2589b5_85120931",
+      "revId": "d658c51732e3691f0a5c5b29562044cf40751dff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ca0696d4_0cf67ff3",
         "filename": "tests/testapk_no_perm/src/java/com/android/microdroid/test/MicrodroidTestAppNoPerm.java",
         "patchSetId": 3
