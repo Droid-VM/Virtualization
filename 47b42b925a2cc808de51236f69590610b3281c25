@@ -22,6 +22,30 @@
       },
       "revId": "47b42b925a2cc808de51236f69590610b3281c25",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ac4ee47_9b22265c",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-04-03T23:08:12Z",
+      "side": 1,
+      "message": "Maybe my rust-fu is bad, but I found that I had to use flat_map in order to get the x.cmp(y) statement to work, since Ord doesn\u0027t know how to compare Ok/Err from Result\u003c\u003e. I guess we\u0027d have to use some custom compare fcn in that case? Using flat_map looks like it works but just ignores the Errs in that case.",
+      "parentUuid": "2f4573f0_29e2e696",
+      "range": {
+        "startLine": 647,
+        "startChar": 0,
+        "endLine": 657,
+        "endChar": 9
+      },
+      "revId": "47b42b925a2cc808de51236f69590610b3281c25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
