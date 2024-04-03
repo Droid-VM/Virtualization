@@ -20,6 +20,8 @@ import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.os.PersistableBundle;
 
+import android.system.virtualizationservice.DisplayConfig;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,12 +34,20 @@ public class VirtualMachineCustomImageConfig {
     private static final String KEY_PARAMS = "params";
     private static final String KEY_DISK_WRITABLES = "disk_writables";
     private static final String KEY_DISK_IMAGES = "disk_images";
+    private static final String KEY_DISPLAY_CONFIG = "display_config";
+    private static final String KEY_DISPLAY_CONFIG_WIDTH = "display_config_width";
+    private static final String KEY_DISPLAY_CONFIG_HEIGHT = "display_config_width";
+    private static final String KEY_DISPLAY_CONFIG_HORIZONTAL_DPI = "display_config_horizontal_dpi";
+    private static final String KEY_DISPLAY_CONFIG_VERTICAL_DPI = "display_config_vertical_dpi";
+    private static final String KEY_DISPLAY_CONFIG_REFRESH_RATE = "display_config_refresh_rate";
+
     @Nullable private final String name;
     @NonNull private final String kernelPath;
     @Nullable private final String initrdPath;
     @Nullable private final String bootloaderPath;
     @Nullable private final String[] params;
     @Nullable private final Disk[] disks;
+    @Nullable private final DisplayConfig displayConfig;
 
     @Nullable
     public Disk[] getDisks() {
@@ -76,13 +86,15 @@ public class VirtualMachineCustomImageConfig {
             String initrdPath,
             String bootloaderPath,
             String[] params,
-            Disk[] disks) {
+            Disk[] disks,
+            DisplayConfig displayConfig) {
         this.name = name;
         this.kernelPath = kernelPath;
         this.initrdPath = initrdPath;
         this.bootloaderPath = bootloaderPath;
         this.params = params;
         this.disks = disks;
+        this.displayConfig = displayConfig;
     }
 
     static VirtualMachineCustomImageConfig from(PersistableBundle customImageConfigBundle) {
@@ -107,7 +119,37 @@ public class VirtualMachineCustomImageConfig {
                 }
             }
         }
+        PersistableBundle displayConfigPb =
+                customImageConfigBundle.getPersistableBundle(KEY_DISPLAY_CONFIG);
+        builder.setDisplayConfig(createDisplayConfigFrom(displayConfigPb));
+
         return builder.build();
+    }
+
+    private static DisplayConfig createDisplayConfigFrom(PersistableBundle pb) {
+        if (pb == null) {
+            return null;
+        }
+        DisplayConfig displayConfig = new DisplayConfig();
+        displayConfig.width = pb.getInt(KEY_DISPLAY_CONFIG_WIDTH);
+        displayConfig.height = pb.getInt(KEY_DISPLAY_CONFIG_HEIGHT);
+        displayConfig.horizontalDpi = pb.getInt(KEY_DISPLAY_CONFIG_HORIZONTAL_DPI);
+        displayConfig.verticalDpi = pb.getInt(KEY_DISPLAY_CONFIG_VERTICAL_DPI);
+        displayConfig.refreshRate = pb.getInt(KEY_DISPLAY_CONFIG_REFRESH_RATE);
+        return displayConfig;
+    }
+
+    private static PersistableBundle displayConfigToPersistableBundle(DisplayConfig displayConfig) {
+        if (displayConfig == null) {
+            return null;
+        }
+        PersistableBundle pb = new PersistableBundle();
+        pb.putInt(KEY_DISPLAY_CONFIG_WIDTH, displayConfig.width);
+        pb.putInt(KEY_DISPLAY_CONFIG_HEIGHT, displayConfig.height);
+        pb.putInt(KEY_DISPLAY_CONFIG_HORIZONTAL_DPI, displayConfig.horizontalDpi);
+        pb.putInt(KEY_DISPLAY_CONFIG_VERTICAL_DPI, displayConfig.verticalDpi);
+        pb.putInt(KEY_DISPLAY_CONFIG_REFRESH_RATE, displayConfig.refreshRate);
+        return pb;
     }
 
     PersistableBundle toPersistableBundle() {
@@ -128,7 +170,14 @@ public class VirtualMachineCustomImageConfig {
             pb.putBooleanArray(KEY_DISK_WRITABLES, writables);
             pb.putStringArray(KEY_DISK_IMAGES, images);
         }
+        pb.putPersistableBundle(
+                KEY_DISPLAY_CONFIG, displayConfigToPersistableBundle(displayConfig));
         return pb;
+    }
+
+    @Nullable
+    public DisplayConfig getDisplayConfig() {
+        return displayConfig;
     }
 
     /** @hide */
@@ -170,6 +219,7 @@ public class VirtualMachineCustomImageConfig {
         private String bootloaderPath;
         private List<String> params = new ArrayList<>();
         private List<Disk> disks = new ArrayList<>();
+        private DisplayConfig displayConfig;
 
         /** @hide */
         public Builder() {}
@@ -211,6 +261,12 @@ public class VirtualMachineCustomImageConfig {
         }
 
         /** @hide */
+        public Builder setDisplayConfig(DisplayConfig displayConfig) {
+            this.displayConfig = displayConfig;
+            return this;
+        }
+
+        /** @hide */
         public VirtualMachineCustomImageConfig build() {
             return new VirtualMachineCustomImageConfig(
                     this.name,
@@ -218,7 +274,8 @@ public class VirtualMachineCustomImageConfig {
                     this.initrdPath,
                     this.bootloaderPath,
                     this.params.toArray(new String[0]),
-                    this.disks.toArray(new Disk[0]));
+                    this.disks.toArray(new Disk[0]),
+                    displayConfig);
         }
     }
 }
