@@ -22,6 +22,30 @@
       },
       "revId": "5d66e1bb7fd418586a43de3d4172535c440bf9a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99afa891_6b24b817",
+        "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-03T15:32:12Z",
+      "side": 1,
+      "message": "I don\u0027t understand why it has to be `inout`, not just `in`. @natsu@google.com, can you answer this?",
+      "parentUuid": "46eb1750_d8d8a37c",
+      "range": {
+        "startLine": 46,
+        "startChar": 34,
+        "endLine": 49,
+        "endChar": 88
+      },
+      "revId": "5d66e1bb7fd418586a43de3d4172535c440bf9a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
