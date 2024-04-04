@@ -46,6 +46,30 @@
       },
       "revId": "47b42b925a2cc808de51236f69590610b3281c25",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf170eb6_7879b3be",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-04T00:49:30Z",
+      "side": 1,
+      "message": "I didn\u0027t need flat_map.\n\nhttps://play.rust-lang.org/?version\u003dstable\u0026mode\u003ddebug\u0026edition\u003d2021\u0026gist\u003de72b8fb512308aaa43ac64b001d30932",
+      "parentUuid": "4ac4ee47_9b22265c",
+      "range": {
+        "startLine": 647,
+        "startChar": 0,
+        "endLine": 657,
+        "endChar": 9
+      },
+      "revId": "47b42b925a2cc808de51236f69590610b3281c25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
