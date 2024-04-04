@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "42d1cc76_d0c5d4e0",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-04T14:06:44Z",
+      "side": 1,
+      "message": "We really don\u0027t have to clone VirtualizationServiceInternal; it\u0027s a singleton by design. It we are doing it, it\u0027s wrong.\n\nAnyway, it\u0027s not your job to fix that.",
+      "parentUuid": "791df3a8_9c0f875e",
+      "range": {
+        "startLine": 180,
+        "startChar": 33,
+        "endLine": 180,
+        "endChar": 41
+      },
+      "revId": "7d62718f369eb4ca15c3f02242dd815fd4ea13b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fd83ad00_7f30a3b5",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 5
