@@ -69,6 +69,7 @@ rust_ffi_static {
         "libanyhow",
         "libcrosvm_android_display_service-rust",
         "libnativewindow_rs",
+        "libnativewindow_bindgen",
     ],
     apex_available: [
         "//apex_available:platform",

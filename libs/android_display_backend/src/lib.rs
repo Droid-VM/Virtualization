@@ -14,27 +14,27 @@
 
 //! Crate implementing crosvm GPU display for Android
 
+extern crate nativewindow_bindgen as ffi;
+
+use ffi::ANativeWindow;
+use ffi::ANativeWindow_acquire;
+use ffi::ANativeWindow_setBuffersGeometry;
+use ffi::ANativeWindow_lock;
+use ffi::ANativeWindow_unlockAndPost;
+use ffi::ANativeWindow_Buffer;
+use ffi::AHardwareBuffer_Format::*;
+
+use std::ffi::c_char;
+use std::ffi::CStr;
 use crate::binder::binder_impl::Binder;
 use libcrosvm_android_display_service::aidl::android::crosvm::ICrosvmAndroidDisplayService::BnCrosvmAndroidDisplayService;
 use libcrosvm_android_display_service::aidl::android::crosvm::ICrosvmAndroidDisplayService::ICrosvmAndroidDisplayService;
 use libcrosvm_android_display_service::binder::Strong;
 use libcrosvm_android_display_service::binder;
 use nativewindow::Surface;
-use std::slice;
 use std::sync::Condvar;
 use std::sync::Mutex;
-use std::ffi::c_char;
-use std::ffi::CString;
 
-/// Pointer to a function for printing an error message
-#[repr(C)]
-pub struct ErrorCallback(extern fn(msg: *const c_char));
-
-impl ErrorCallback {
-    fn print(&self, msg: &str) {
-        self.0(CString::new(msg).unwrap().as_c_str().as_ptr());
-    }
-}
 
 /// Creates a context for the android display backend. A binder service is registered to the
 /// service manager using the given name.
@@ -46,18 +46,15 @@ impl ErrorCallback {
 /// destroy_android_display_context.
 #[no_mangle]
 pub unsafe extern "C" fn create_android_display_context(
-    service_name: *const ::std::os::raw::c_char,
-    service_name_len: ::std::os::raw::c_ulong,
-    error_callback:  ErrorCallback,
+    service_name: *const c_char,
 ) -> *mut AndroidDisplayContext {
     let name = String::from_utf8_lossy(
         // SAFETY: service_name is of length service_name_len
         unsafe {
-            slice::from_raw_parts(service_name, service_name_len.try_into().unwrap())
-        });
-    AndroidDisplayContext::new(&name).map_or_else(
-        |e| { error_callback.print(&e.get_description()); std::ptr::null_mut() },
-        |c| Box::leak(Box::new(c)))
+            CStr::from_ptr(service_name)
+        }.to_bytes()
+    );
+    Box::leak(Box::new(AndroidDisplayContext::new(&name).unwrap()))
 }
 
 /// Destroys the given context object
@@ -65,7 +62,6 @@ pub unsafe extern "C" fn create_android_display_context(
 /// `ctx` should be a non-null pointer obtained from create_android_display_context
 #[no_mangle]
 pub unsafe extern "C" fn destroy_android_display_context(
-    _error_callback: ErrorCallback,
     ctx: *mut AndroidDisplayContext,
 ) {
     // SAFETY: ctx is returned from create_android_display_context
@@ -78,67 +74,65 @@ pub unsafe extern "C" fn destroy_android_display_context(
 /// # Safety
 /// `ctx should be a non-null pointer obtained from create_android_display_context
 #[no_mangle]
-pub unsafe extern "C" fn create_android_display_surface(
+pub unsafe extern "C" fn create_android_surface(
     ctx: *mut AndroidDisplayContext,
-) -> 
-
-/// Gets the width of the Android-side display.
-/// # Safety
-/// `ctx` should be a non-null pointer obtained from create_android_display_context
-#[no_mangle]
-pub unsafe extern "C" fn get_android_display_width(
-    _error_callback: ErrorCallback,
-    ctx: *mut AndroidDisplayContext,
-) -> u32 {
-    // SAFETY: ctx is returned from create_android_display_context
-    let context = unsafe {
-        Box::from_raw(ctx)
-    };
-    let surface = context.get_surface();
-    Box::leak(context); // the pointer is still owned by the caller
-    surface.width().unwrap()
-}
-
-/// Gets the height of the Android-side display.
-/// # Safety
-/// `ctx` should be a non-null pointer obtained from create_android_display_context
-#[no_mangle]
-pub unsafe extern "C" fn get_android_display_height(
-    _error_callback: ErrorCallback,
-    ctx: *mut AndroidDisplayContext,
-) -> u32 {
-    // SAFETY: ctx is returned from create_android_display_context
-    let context = unsafe {
-        Box::from_raw(ctx)
-    };
-    let surface = context.get_surface();
-    Box::leak(context); // the pointer is still owned by the caller
-    surface.height().unwrap()
+    width: u32,
+    height: u32,
+) -> *mut ANativeWindow {
+    // SAFETY: aaa
+    let ctx = unsafe { ctx.as_ref() }.unwrap();
+    let surface = ctx.get_surface();
+    let ret = surface.0.as_ptr();
+    // SAFETY: bbb
+    unsafe {
+        ANativeWindow_acquire(ret);
+        ANativeWindow_setBuffersGeometry(
+            ret,
+            width.try_into().unwrap(),
+            height.try_into().unwrap(),
+            AHARDWAREBUFFER_FORMAT_R8G8B8A8_UNORM.try_into().unwrap());
+    }
+    ret
 }
 
 /// Gets the pointer to the buffer
 /// # Safety
 /// `ctx` should be a non-null pointer obtained from create_android_display_context
 #[no_mangle]
-pub unsafe extern "C" fn get_android_display_buffer(
-    _ctx: *mut AndroidDisplayContext,
+pub unsafe extern "C" fn get_android_surface_buffer(
+    surface: *mut ANativeWindow,
 ) -> *mut u8 {
-    unimplemented!();
+    let mut buffer = ANativeWindow_Buffer{
+        width: 0,
+        height: 0,
+        stride: 0,
+        format: 0,
+        bits: std::ptr::null_mut(),
+        reserved: [0; 6usize],
+    };
+    // SAFETY: ccc 
+    unsafe {
+        ANativeWindow_lock(surface, &mut buffer as *mut ANativeWindow_Buffer, std::ptr::null_mut())
+    };
+    buffer.bits as *mut u8
 }
 
 /// doc
 /// # Safety
 /// `ctx` should be a non-null pointer obtained from create_android_display_context
 #[no_mangle]
-pub extern "C" fn blit_android_display(
-    _error_callback: ErrorCallback,
-    _self_: *mut AndroidDisplayContext,
+pub unsafe extern "C" fn post_android_surface_buffer(
+    surface: *mut ANativeWindow,
 ) {
-    unimplemented!();
+    // SAFETY: aaa
+    unsafe {
+        ANativeWindow_unlockAndPost(surface)
+    };
 }
 
 #[derive(Default)]
 struct AndroidDisplayService {
+    // TODO: support at least two surfaces: one for regular scanout and the other for cursor
     surface: Mutex<Option<Surface>>,
     surface_set: Condvar,
 }
@@ -164,19 +158,19 @@ impl ICrosvmAndroidDisplayService for AndroidDisplayService {
 /// doc
 pub struct AndroidDisplayContext {
     service: Strong<dyn ICrosvmAndroidDisplayService>,
-    width: u32,
-    height: u32,
 }
 
 impl AndroidDisplayContext {
-    fn new(name: &str, width: u32, height: u32) -> binder::Result<Self> {
+    fn new(name: &str) -> binder::Result<Self> {
         let service = BnCrosvmAndroidDisplayService::new_binder(
             AndroidDisplayService::default(),
             binder::BinderFeatures::default(),
         );
+        // TODO: switch to binder_rpc. Then name shall be the path of the UDS that the service
+        // should listen to.
         binder::add_service(name, service.as_binder())?;
         binder::ProcessState::start_thread_pool();
-        Ok(Self{service, width, height})
+        Ok(Self{service})
     }
 
     // Wait until Surface is set and return a copy of it.
