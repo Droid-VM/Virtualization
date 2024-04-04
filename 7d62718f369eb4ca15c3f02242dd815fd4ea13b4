@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "791df3a8_9c0f875e",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-04-04T13:55:50Z",
+      "side": 1,
+      "message": "I use Arc just because VirtualizationServiceInternal is clone-able, but Condvar is not clone-able.(maybe similar reason why state is Arc as well?)",
+      "parentUuid": "0c6a196f_7df02657",
+      "range": {
+        "startLine": 180,
+        "startChar": 33,
+        "endLine": 180,
+        "endChar": 41
+      },
+      "revId": "7d62718f369eb4ca15c3f02242dd815fd4ea13b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fd83ad00_7f30a3b5",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 5
