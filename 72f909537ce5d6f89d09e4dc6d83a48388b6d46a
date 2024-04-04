@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c31c54f_1340a168",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-04-04T02:24:57Z",
+      "side": 1,
+      "message": "Thanks! That\u0027s what I wanted to find. Your suggestion is better than this code, parsing the JSON file during runtime. Fixed.",
+      "parentUuid": "b28d6c47_b7b03ce5",
+      "range": {
+        "startLine": 372,
+        "startChar": 0,
+        "endLine": 380,
+        "endChar": 13
+      },
+      "revId": "72f909537ce5d6f89d09e4dc6d83a48388b6d46a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29587bbc_7c96cf10",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-04-03T10:38:37Z",
       "side": 1,
       "message": "Not sure we want to display different error messages here. I suggest\n\n```\n} catch (IOException | JSONException e) {\n    throw new VirtualMachineException(\"Error while reading /system/...\", e);\n}\n```",
+      "range": {
+        "startLine": 381,
+        "startChar": 0,
+        "endLine": 385,
+        "endChar": 9
+      },
+      "revId": "72f909537ce5d6f89d09e4dc6d83a48388b6d46a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da5ba248_0df9a87b",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-04-04T02:24:57Z",
+      "side": 1,
+      "message": "Resolving this, since it\u0027s outdated.",
+      "parentUuid": "29587bbc_7c96cf10",
       "range": {
         "startLine": 381,
         "startChar": 0,
