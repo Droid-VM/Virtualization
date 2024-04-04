@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9752ece8_fb64e387",
+        "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-04-04T14:11:10Z",
+      "side": 1,
+      "message": "nits: should we reset surface after release?\n\n```suggestion\n            mSurface \u003d std::make_unique\u003caidl::android::view::Surface\u003e(surface-\u003evalue().release());\n            surface-\u003ereset();\n```",
+      "range": {
+        "startLine": 53,
+        "startChar": 12,
+        "endLine": 53,
+        "endChar": 98
+      },
+      "revId": "091b0eb96f2db9b1c8853e9d2ef2128a24a36882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
