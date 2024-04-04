@@ -70,6 +70,30 @@
       },
       "revId": "47b42b925a2cc808de51236f69590610b3281c25",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "860650dc_85b8d5f9",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-04-04T23:45:52Z",
+      "side": 1,
+      "message": "This is what I see without flat_map.\n\n```\nerror[E0599]: the method `cmp` exists for reference `\u0026\u0026Result\u003cu32, Error\u003e`, but its trait bounds were not satisfied\n   --\u003e packages/modules/Virtualization/virtualizationmanager/src/crosvm.rs:649:40\n    |\n649 |             .max_by(|(_, x), (_, y)| x.cmp(y))\n    |                                        ^^^ method cannot be called on `\u0026\u0026Result\u003cu32, Error\u003e` due to unsatisfied trait bounds\n   --\u003e ./external/rust/crates/anyhow/src/lib.rs:383:1\n    |\n    \u003d note: doesn\u0027t satisfy `anyhow::Error: std::cmp::Ord`\n   --\u003e ./prebuilts/rust/linux-x86/1.75.0/src/stdlibs/library/core/src/result.rs:502:1\n    |\n    \u003d note: doesn\u0027t satisfy `_: Iterator`\n    |\n    \u003d note: doesn\u0027t satisfy `_: Ord`\n    |\n    \u003d note: the following trait bounds were not satisfied:\n            `std::result::Result\u003cu32, anyhow::Error\u003e: std::cmp::Ord`\n            which is required by `\u0026std::result::Result\u003cu32, anyhow::Error\u003e: std::cmp::Ord`\n            `\u0026std::result::Result\u003cu32, anyhow::Error\u003e: std::cmp::Ord`\n            which is required by `\u0026\u0026std::result::Result\u003cu32, anyhow::Error\u003e: std::cmp::Ord`\n            `\u0026\u0026std::result::Result\u003cu32, anyhow::Error\u003e: std::iter::Iterator`\n            which is required by `\u0026mut \u0026\u0026std::result::Result\u003cu32, anyhow::Error\u003e: std::iter::Iterator`\n            `anyhow::Error: std::cmp::Ord`\n            which is required by `std::result::Result\u003cu32, anyhow::Error\u003e: std::cmp::Ord`\n            `\u0026std::result::Result\u003cu32, anyhow::Error\u003e: std::iter::Iterator`\n            which is required by `\u0026mut \u0026std::result::Result\u003cu32, anyhow::Error\u003e: std::iter::Iterator`\n            `std::result::Result\u003cu32, anyhow::Error\u003e: std::iter::Iterator`\n            which is required by `\u0026mut std::result::Result\u003cu32, anyhow::Error\u003e: std::iter::Iterator`\n\nerror: aborting due to previous error\n```\n\nThe example you shared is using Options, I tried Results\u003ci32, i32\u003e which works, but I think it\u0027s because the error returns anyhow, and that\u0027s not handled: https://play.rust-lang.org/?version\u003dstable\u0026mode\u003ddebug\u0026edition\u003d2021\u0026gist\u003d56c00e33850a2ab2b6c053b37a812914\n\nI changed the get_cpu_info to just return u32 and handle the error within the function to print an error and default to 0.",
+      "parentUuid": "cf170eb6_7879b3be",
+      "range": {
+        "startLine": 647,
+        "startChar": 0,
+        "endLine": 657,
+        "endChar": 9
+      },
+      "revId": "47b42b925a2cc808de51236f69590610b3281c25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
