@@ -94,6 +94,30 @@
       },
       "revId": "5d66e1bb7fd418586a43de3d4172535c440bf9a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06717189_1f8f672a",
+        "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-04T13:48:51Z",
+      "side": 1,
+      "message": "No. in doesn\u0027t work. With `in`, the argument becomes `const Suface\u0026`. The problem then is `Surface` for some unknown reason doesn\u0027t copying. So we can\u0027t store the surface in the service.\n\nWe CAN copy it by accessing the internal ANativeWindow*, call ANativeWindow_acquire, then finally construct a new surface out of the copied ANativeWindow*.\n\nSo, I think inout @nullable is the right choice here.",
+      "parentUuid": "ac75bd4b_dacc4ce2",
+      "range": {
+        "startLine": 46,
+        "startChar": 34,
+        "endLine": 49,
+        "endChar": 88
+      },
+      "revId": "5d66e1bb7fd418586a43de3d4172535c440bf9a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
