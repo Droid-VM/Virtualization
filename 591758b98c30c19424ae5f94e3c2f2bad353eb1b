@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d5fc50a_4d0f504e",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-04T13:13:22Z",
+      "side": 1,
+      "message": "Nit: remove the initializer.",
+      "range": {
+        "startLine": 287,
+        "startChar": 25,
+        "endLine": 287,
+        "endChar": 32
+      },
+      "revId": "591758b98c30c19424ae5f94e3c2f2bad353eb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b84cc1b_dd8298c9",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-04T13:13:22Z",
+      "side": 1,
+      "message": "If this throws, you need to delete the VM files. Which actually means it should probably be back inside the lock.",
+      "range": {
+        "startLine": 292,
+        "startChar": 1,
+        "endLine": 292,
+        "endChar": 27
+      },
+      "revId": "591758b98c30c19424ae5f94e3c2f2bad353eb1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
