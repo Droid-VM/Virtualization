@@ -16,6 +16,52 @@
       "message": "PTAL, this is now quite different from the version that got +2...",
       "revId": "7ec6cd723baaa590641de8f38ffbd29ea2017f3b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0f2c1f4_e180c733",
+        "filename": "virtualizationservice/src/maintenance/vmdb.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-04T14:44:37Z",
+      "side": 1,
+      "message": "Should we include the rationale for deleting rather than just rejecting the request?\n(I.e. to ensure recoverability)",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 13
+      },
+      "revId": "7ec6cd723baaa590641de8f38ffbd29ea2017f3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bc753e8_60ddd8b3",
+        "filename": "virtualizationservice/src/maintenance/vmdb.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-04T14:44:37Z",
+      "side": 1,
+      "message": "Could this just be a DELETE statement, rather than indirecting via the IDs?",
+      "range": {
+        "startLine": 309,
+        "startChar": 17,
+        "endLine": 309,
+        "endChar": 23
+      },
+      "revId": "7ec6cd723baaa590641de8f38ffbd29ea2017f3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
