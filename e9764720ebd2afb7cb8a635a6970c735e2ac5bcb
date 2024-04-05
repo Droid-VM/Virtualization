@@ -1,5 +1,57 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a6d0bce_72451b95",
+        "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-04-05T13:28:02Z",
+      "side": 1,
+      "message": "Here we allocate memory for our `ctx`...",
+      "revId": "e9764720ebd2afb7cb8a635a6970c735e2ac5bcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06fd3256_5365a181",
+        "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-04-05T13:28:02Z",
+      "side": 1,
+      "message": "...and we leak it on this path...",
+      "revId": "e9764720ebd2afb7cb8a635a6970c735e2ac5bcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11e633ef_9843e50c",
+        "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-04-05T13:28:02Z",
+      "side": 1,
+      "message": "...and this path.",
+      "revId": "e9764720ebd2afb7cb8a635a6970c735e2ac5bcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
