@@ -120,6 +120,7 @@ public class MainActivity extends Activity {
             displayConfig.verticalDpi = dpi;
             displayConfig.refreshRate = 60;
             customImageConfigBuilder.setDisplayConfig(displayConfig);
+            customImageConfigBuilder.useTouch(true);
             configBuilder.setCustomImageConfig(customImageConfigBuilder.build());
 
         } catch (JSONException | IOException e) {
@@ -210,6 +211,13 @@ public class MainActivity extends Activity {
         }
 
         SurfaceView surfaceView = findViewById(R.id.surface_view);
+        surfaceView.setOnTouchListener(
+                (v, event) -> {
+                    if (mVirtualMachine == null) {
+                        return false;
+                    }
+                    return mVirtualMachine.sendSingleTouchEvent(event);
+                });
         surfaceView
                 .getHolder()
                 .addCallback(
