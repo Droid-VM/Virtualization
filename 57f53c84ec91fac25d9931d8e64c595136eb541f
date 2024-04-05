@@ -70,6 +70,24 @@
       "parentUuid": "446bd5a5_9bd6f632",
       "revId": "57f53c84ec91fac25d9931d8e64c595136eb541f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a72d3e2_2a2e7938",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1933736
+      },
+      "writtenOn": "2024-04-05T18:56:07Z",
+      "side": 1,
+      "message": "The latest patch just disables the error warning. \n\nThanks for tagging the right person to weigh in on the right long-term solution. We opened an issue https://b.corp.google.com/issues/333094895 for jiyong to create a change so we can enable the lint again.",
+      "parentUuid": "5011633b_1527bdfe",
+      "revId": "57f53c84ec91fac25d9931d8e64c595136eb541f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
