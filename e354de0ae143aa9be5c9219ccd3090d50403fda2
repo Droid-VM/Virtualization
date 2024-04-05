@@ -22,6 +22,30 @@
       },
       "revId": "e354de0ae143aa9be5c9219ccd3090d50403fda2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2a52dc7_3beba0c6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-04-05T17:39:49Z",
+      "side": 1,
+      "message": "FWIW, this is just the original commit message from the cherry picked CL https://r.android.com/2163080\n\nIf tradefed is somehow intercepting the `adb root` command to the microdroid VM, that sounds like a bug and maybe we could fix it. Seems like the tests that root microdroid are gone at ToT though.",
+      "parentUuid": "5cd23884_44e2aaa6",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 14
+      },
+      "revId": "e354de0ae143aa9be5c9219ccd3090d50403fda2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
