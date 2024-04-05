@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fa7be65_5df08bb5",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-04-05T12:38:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "042f1d87_c2fd123a",
+      "range": {
+        "startLine": 116,
+        "startChar": 60,
+        "endLine": 116,
+        "endChar": 68
+      },
+      "revId": "b3675b3abee5b8f761f0f260976d8ed8d5d9874c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f279828e_e65c2f7b",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-04-05T11:20:02Z",
       "side": 1,
       "message": "The conversion between DisplayConfig and persistable bundle should better be encapsulated inside of DisplayConfig.",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 60
+      },
+      "revId": "b3675b3abee5b8f761f0f260976d8ed8d5d9874c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7407ff9_ba5dc5be",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-04-05T12:38:58Z",
+      "side": 1,
+      "message": "because DisplayConfig is an aidl-defined parcelable, I added util functions in this class instead.",
+      "parentUuid": "f279828e_e65c2f7b",
       "range": {
         "startLine": 118,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed333859_d3c419cf",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-04-05T12:38:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "003451e4_450ab9ee",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 23
+      },
+      "revId": "b3675b3abee5b8f761f0f260976d8ed8d5d9874c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f85610f3_d39ae531",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-04-05T11:20:02Z",
       "side": 1,
       "message": "These are impl details of DisplayConfig. Add a `new` method which constructs DisplayConfig from the parcelable.",
+      "range": {
+        "startLine": 578,
+        "startChar": 0,
+        "endLine": 582,
+        "endChar": 87
+      },
+      "revId": "b3675b3abee5b8f761f0f260976d8ed8d5d9874c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06edc70b_21c2838a",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-04-05T12:38:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f85610f3_d39ae531",
       "range": {
         "startLine": 578,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9a8a9f7_46cdca67",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-04-05T12:38:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "877a6af5_f1a0d56b",
+      "range": {
+        "startLine": 638,
+        "startChar": 0,
+        "endLine": 641,
+        "endChar": 37
+      },
+      "revId": "b3675b3abee5b8f761f0f260976d8ed8d5d9874c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e11b4fa8_4257aabb",
@@ -129,6 +249,30 @@
       "writtenOn": "2024-04-05T11:20:02Z",
       "side": 1,
       "message": "Make these optional? We don\u0027t always want to configure these.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 20
+      },
+      "revId": "b3675b3abee5b8f761f0f260976d8ed8d5d9874c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2612d6b_4b706c6e",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/DisplayConfig.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-04-05T12:38:58Z",
+      "side": 1,
+      "message": "added default value for them.",
+      "parentUuid": "e11b4fa8_4257aabb",
       "range": {
         "startLine": 21,
         "startChar": 0,
