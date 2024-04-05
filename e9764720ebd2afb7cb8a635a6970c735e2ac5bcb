@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "790d307b_a042b66b",
+        "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-05T13:33:36Z",
+      "side": 1,
+      "message": "Thanks for reviewing this, Greg. \n\nThis change focuses on bringing what was done for the initial demo. Nothing is using this library yet.\n\nWe are in the process of re-writing this into rust where such pointer issues are all addressed by the help of compiler.",
+      "parentUuid": "0a6d0bce_72451b95",
+      "revId": "e9764720ebd2afb7cb8a635a6970c735e2ac5bcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06fd3256_5365a181",
         "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
         "patchSetId": 9
