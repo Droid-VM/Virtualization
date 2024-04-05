@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cb1e283_26aefb3c",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-05T11:19:31Z",
+      "side": 1,
+      "message": "I would keep this as Exception - if a RuntimeException occurs here we should still return the original exception.",
+      "range": {
+        "startLine": 460,
+        "startChar": 21,
+        "endLine": 460,
+        "endChar": 32
+      },
+      "revId": "bc8f27831e715122d78010e07bb77b4f9736210d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
