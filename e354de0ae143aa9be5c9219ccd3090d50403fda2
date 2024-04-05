@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cd23884_44e2aaa6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-05T09:13:00Z",
+      "side": 1,
+      "message": "That happens sometimes in CTS. \n\nBecause real CTS can\u0027t do root because it has to run on user builds, tradefed has a mode where it ignores root commands, and CTS on userdebug runs in that mode.\n\nThis is quite annoying.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 14
+      },
+      "revId": "e354de0ae143aa9be5c9219ccd3090d50403fda2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
