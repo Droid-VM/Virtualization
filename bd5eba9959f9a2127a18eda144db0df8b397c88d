@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2af0ca57_616b7fe6",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-04-05T10:41:06Z",
+      "side": 1,
+      "message": "\u003e If importing an instance fails, the instance ID is then owned by neither app\n\nI think this is not ideal either. Ideally if this fails the app should be able to retry (app1) VirtualMachine#toDescriptor -\u003e (app2) importFromDescriptor.\n\n\nI can create a follow up patch to fix this.",
+      "parentUuid": "21ede924_fef8b620",
+      "range": {
+        "startLine": 434,
+        "startChar": 0,
+        "endLine": 437,
+        "endChar": 17
+      },
+      "revId": "bd5eba9959f9a2127a18eda144db0df8b397c88d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cce7bd70_9c8bdd7a",
