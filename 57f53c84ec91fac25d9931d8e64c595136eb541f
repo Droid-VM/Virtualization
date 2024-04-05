@@ -52,6 +52,24 @@
       "parentUuid": "9607fb7a_bc994a89",
       "revId": "57f53c84ec91fac25d9931d8e64c595136eb541f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5011633b_1527bdfe",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-04-05T17:11:08Z",
+      "side": 1,
+      "message": "(responding b/c pinged)\n\nAndrew understands why the lint was made: the Rust language is unclear. You might assume the mutex is dropped at the end of the scope, as it would be if it were an ordinary variable instead of \u0027_\u0027. It\u0027s good to see such a lint is added.\n\nI see Jiyong wrote this code - he may want to drop the mutex on L436 instead of immediately. I\u0027m not familiar with this code itself, so he\u0027ll have to make the call or someone else familiar with this exact path.\n\nSince this is a no-op, if there is a rush, please file a bug in the virtualization component so there is a follow-up, and I\u0027m happy to approve.",
+      "parentUuid": "446bd5a5_9bd6f632",
+      "revId": "57f53c84ec91fac25d9931d8e64c595136eb541f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
