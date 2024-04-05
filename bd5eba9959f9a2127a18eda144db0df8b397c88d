@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21ede924_fef8b620",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-05T10:25:18Z",
+      "side": 1,
+      "message": "\u003e I have change deleteRecursively(vmDir) -\u003e vmInstanceCleanup(context, name) that notifies the Vs to remove the instance incase of failures.\n\nThat means if importing an instance fails, the instance ID is then owned by neither app (we claim it then delete it). Shouldn\u0027t it remain with the original app?",
+      "parentUuid": "46f3bbae_935c385c",
+      "range": {
+        "startLine": 434,
+        "startChar": 0,
+        "endLine": 437,
+        "endChar": 17
+      },
+      "revId": "bd5eba9959f9a2127a18eda144db0df8b397c88d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cce7bd70_9c8bdd7a",
         "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 13
