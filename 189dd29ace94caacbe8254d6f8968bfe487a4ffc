@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0a7923d_892a98e0",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-04-05T15:37:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "faa9d5ff_3a45411c",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 5
+      },
+      "revId": "189dd29ace94caacbe8254d6f8968bfe487a4ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f924cabc_50e6f34f",
@@ -87,6 +111,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d275d92_4b9352d4",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-04-05T15:37:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea8739d7_b525851c",
+      "range": {
+        "startLine": 135,
+        "startChar": 23,
+        "endLine": 135,
+        "endChar": 46
+      },
+      "revId": "189dd29ace94caacbe8254d6f8968bfe487a4ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d436edca_18d18856",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-04-05T15:37:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f924cabc_50e6f34f",
+      "range": {
+        "startLine": 135,
+        "startChar": 59,
+        "endLine": 135,
+        "endChar": 65
+      },
+      "revId": "189dd29ace94caacbe8254d6f8968bfe487a4ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c411574b_6fb886d1",
@@ -100,6 +172,30 @@
       "writtenOn": "2024-04-05T13:06:37Z",
       "side": 1,
       "message": "this doesn\u0027t have to be a member of DisplayConfig.. and the name is too long.",
+      "range": {
+        "startLine": 150,
+        "startChar": 4,
+        "endLine": 150,
+        "endChar": 69
+      },
+      "revId": "189dd29ace94caacbe8254d6f8968bfe487a4ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2881b0c_b3c809f7",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-04-05T15:37:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c411574b_6fb886d1",
       "range": {
         "startLine": 150,
         "startChar": 4,
@@ -127,6 +223,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e820fe7f_246097ed",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/DisplayConfig.aidl",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-04-05T15:37:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "128a9762_8969edae",
+      "revId": "189dd29ace94caacbe8254d6f8968bfe487a4ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a85c7d47_ec374c59",
@@ -140,6 +254,30 @@
       "writtenOn": "2024-04-05T13:06:37Z",
       "side": 1,
       "message": "The java class should support chaining.\n\n```\nDisplayConfig dc \u003d new DisplayConfig.Builder()\n   .setWidth(...)\n   .setHeight(...)\n   .build();\n```",
+      "range": {
+        "startLine": 117,
+        "startChar": 1,
+        "endLine": 121,
+        "endChar": 44
+      },
+      "revId": "189dd29ace94caacbe8254d6f8968bfe487a4ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "730d664c_f97c6374",
+        "filename": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-04-05T15:37:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a85c7d47_ec374c59",
       "range": {
         "startLine": 117,
         "startChar": 1,
