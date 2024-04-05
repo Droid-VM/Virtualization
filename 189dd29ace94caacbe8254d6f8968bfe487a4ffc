@@ -16,6 +16,138 @@
       "message": "Thanks!",
       "revId": "189dd29ace94caacbe8254d6f8968bfe487a4ffc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faa9d5ff_3a45411c",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-05T13:06:37Z",
+      "side": 1,
+      "message": "Basicaly, move this inside of DisplayConfig (java class, not parcelable)",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 5
+      },
+      "revId": "189dd29ace94caacbe8254d6f8968bfe487a4ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f924cabc_50e6f34f",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-05T13:06:37Z",
+      "side": 1,
+      "message": "Then you can get rid of this Option.",
+      "range": {
+        "startLine": 135,
+        "startChar": 59,
+        "endLine": 135,
+        "endChar": 65
+      },
+      "revId": "189dd29ace94caacbe8254d6f8968bfe487a4ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea8739d7_b525851c",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-05T13:06:37Z",
+      "side": 1,
+      "message": "This should be from the display config parcelable, not the entire raw config.",
+      "range": {
+        "startLine": 135,
+        "startChar": 23,
+        "endLine": 135,
+        "endChar": 46
+      },
+      "revId": "189dd29ace94caacbe8254d6f8968bfe487a4ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c411574b_6fb886d1",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-05T13:06:37Z",
+      "side": 1,
+      "message": "this doesn\u0027t have to be a member of DisplayConfig.. and the name is too long.",
+      "range": {
+        "startLine": 150,
+        "startChar": 4,
+        "endLine": 150,
+        "endChar": 69
+      },
+      "revId": "189dd29ace94caacbe8254d6f8968bfe487a4ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "128a9762_8969edae",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/DisplayConfig.aidl",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-05T13:06:37Z",
+      "side": 1,
+      "message": "We should NOT use this parcelable as the public API. We need a separate Java class.",
+      "revId": "189dd29ace94caacbe8254d6f8968bfe487a4ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a85c7d47_ec374c59",
+        "filename": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-05T13:06:37Z",
+      "side": 1,
+      "message": "The java class should support chaining.\n\n```\nDisplayConfig dc \u003d new DisplayConfig.Builder()\n   .setWidth(...)\n   .setHeight(...)\n   .build();\n```",
+      "range": {
+        "startLine": 117,
+        "startChar": 1,
+        "endLine": 121,
+        "endChar": 44
+      },
+      "revId": "189dd29ace94caacbe8254d6f8968bfe487a4ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

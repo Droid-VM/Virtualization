@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8727791e_53a110ac",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-05T13:06:37Z",
+      "side": 1,
+      "message": "No. This isn\u0027t what I expected.\n\n```\npublic class DisplayConfig {\n   int width;\n   int height;\n   ...\n   \n   PersistableBundle toPersistableBundle() {\n       PersistableBundle b \u003d new PersistableBundle();\n       b.putInt(..., width);\n       b.putInt(..., height);\n       ...\n       return b;\n   }\n   \n   static DisplayConfig from(PersistableBundle b) {\n       DisplayConfig dc \u003d new DisplayConfig();\n       dc.width \u003d b.getInt(...);\n       dc.height \u003d b.getInt(...);\n       return dc;\n   }\n}\n\npublic VirtualMachineCustomImageConfig {\n    static VirtualMachineCustomImageConfig from(PersistableBundle b) {\n        ...\n        builder.setDisplayConfig(DisplayConfig.from(b.getPersistableBundle(...));\n    }\n}",
+      "parentUuid": "f7407ff9_ba5dc5be",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 60
+      },
+      "revId": "b3675b3abee5b8f761f0f260976d8ed8d5d9874c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "003451e4_450ab9ee",
