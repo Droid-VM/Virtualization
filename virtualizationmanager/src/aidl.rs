@@ -421,6 +421,14 @@ impl VirtualizationService {
         let mut untrusted_props = Vec::with_capacity(2);
         if cfg!(llpvm_changes) {
             instance_id = extract_instance_id(config);
+            if instance_id == [0u8; 64] {
+                // instance-id is expected to be non-zero bytes to prevent unintentional default
+                // initialization.
+                return Err(anyhow!("Expected instance-id to be non zero bytes"))
+                    .with_log()
+                    .or_service_specific_exception(-1);
+            }
+
             untrusted_props.push((cstr!("instance-id"), &instance_id[..]));
             if is_secretkeeper_supported() {
                 // Let guest know that it can defer rollback protection to Secretkeeper by setting
