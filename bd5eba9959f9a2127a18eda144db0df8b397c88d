@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f7f3c1b_2e32199a",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-05T09:42:39Z",
+      "side": 1,
+      "message": "Maybe this should be the last step rather than the first, to minimize the chance of us calling claimInstance and then subsequently failing?",
+      "range": {
+        "startLine": 434,
+        "startChar": 0,
+        "endLine": 437,
+        "endChar": 17
+      },
+      "revId": "bd5eba9959f9a2127a18eda144db0df8b397c88d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cce7bd70_9c8bdd7a",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-05T09:42:39Z",
+      "side": 1,
+      "message": "Does this need to be conditional on the instance image FD being present?",
+      "range": {
+        "startLine": 439,
+        "startChar": 0,
+        "endLine": 444,
+        "endChar": 71
+      },
+      "revId": "bd5eba9959f9a2127a18eda144db0df8b397c88d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
