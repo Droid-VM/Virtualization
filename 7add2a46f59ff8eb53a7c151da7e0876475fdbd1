@@ -16,6 +16,24 @@
       "message": "This leaks the memory allocated for `ctx`.",
       "revId": "7add2a46f59ff8eb53a7c151da7e0876475fdbd1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b735502_b7cfc8ec",
+        "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-05T13:35:13Z",
+      "side": 1,
+      "message": "right. will be automatically fixed in the rust impl.",
+      "parentUuid": "1ed5633c_a093c845",
+      "revId": "7add2a46f59ff8eb53a7c151da7e0876475fdbd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
