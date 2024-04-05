@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "498a698f_7c9c0308",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-04-05T01:47:08Z",
+      "side": 1,
+      "message": "aosp/3027484 is the following CL which actually uses it.",
+      "parentUuid": "4b9c86f1_d04fb2a5",
+      "range": {
+        "startLine": 650,
+        "startChar": 30,
+        "endLine": 650,
+        "endChar": 49
+      },
+      "revId": "8347dfbcbc30689f3f1415f2e1523fdc282dd0fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "216b37c6_2d7758f2",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-27T13:38:00Z",
       "side": 1,
       "message": "unwrap should be avoided because it can panic the program. You should ensure that this never panic, or gracefully return an error.",
+      "range": {
+        "startLine": 716,
+        "startChar": 80,
+        "endLine": 716,
+        "endChar": 89
+      },
+      "revId": "8347dfbcbc30689f3f1415f2e1523fdc282dd0fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "595646a0_1d774680",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-04-05T01:47:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "216b37c6_2d7758f2",
       "range": {
         "startLine": 716,
         "startChar": 80,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61fd7c2f_9c369b97",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-04-05T01:47:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5abf41d_19446be2",
+      "range": {
+        "startLine": 136,
+        "startChar": 4,
+        "endLine": 136,
+        "endChar": 24
+      },
+      "revId": "8347dfbcbc30689f3f1415f2e1523fdc282dd0fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04dc998a_17fac342",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-03-27T13:38:00Z",
       "side": 1,
       "message": "Not all of these seem to be used.",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 91
+      },
+      "revId": "8347dfbcbc30689f3f1415f2e1523fdc282dd0fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04bc586e_8843a452",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-04-05T01:47:08Z",
+      "side": 1,
+      "message": "removed unused device types.",
+      "parentUuid": "04dc998a_17fac342",
       "range": {
         "startLine": 137,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96ff7293_7599b22b",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-04-05T01:47:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4246abb_35074c2b",
+      "range": {
+        "startLine": 959,
+        "startChar": 16,
+        "endLine": 959,
+        "endChar": 86
+      },
+      "revId": "8347dfbcbc30689f3f1415f2e1523fdc282dd0fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29b9653e_6d66a12f",
@@ -129,6 +249,30 @@
       "writtenOn": "2024-03-27T13:38:00Z",
       "side": 1,
       "message": "How do these two differ? Please document.",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 5
+      },
+      "revId": "8347dfbcbc30689f3f1415f2e1523fdc282dd0fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ea87755_73ced7e5",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/InputDevice.aidl",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-04-05T01:47:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29b9653e_6d66a12f",
       "range": {
         "startLine": 23,
         "startChar": 0,
