@@ -75,7 +75,7 @@ pub static mut ERRNO: c_int = 0;
 unsafe extern "C" fn __errno() -> *mut c_int {
     // SAFETY: C functions which call this are only called from the main thread, not from exception
     // handlers.
-    unsafe { &mut ERRNO as *mut _ }
+    unsafe { addr_of_mut!(ERRNO) as *mut _ }
 }
 
 fn set_errno(value: c_int) {
