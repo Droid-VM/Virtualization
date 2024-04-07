@@ -106,6 +106,24 @@
       "parentUuid": "4a72d3e2_2a2e7938",
       "revId": "57f53c84ec91fac25d9931d8e64c595136eb541f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6be2efc6_db9aff6d",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-07T04:14:42Z",
+      "side": 1,
+      "message": "It can be dropped immediately as we are not interested in reading `payload_state`, but just want to know if we have waited long enough.",
+      "parentUuid": "be45b2ef_feaa4b65",
+      "revId": "57f53c84ec91fac25d9931d8e64c595136eb541f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
