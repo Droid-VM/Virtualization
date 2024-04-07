@@ -23,7 +23,7 @@ import android.view.Surface;
  * display.
  */
 interface ICrosvmAndroidDisplayService {
-    void setSurface(inout Surface surface);
+    void setSurface(in Surface surface);
 
     void removeSurface();
 }
