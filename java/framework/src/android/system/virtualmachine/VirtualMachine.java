@@ -429,7 +429,9 @@ public class VirtualMachine implements AutoCloseable {
             VirtualMachine vm;
             try (vmDescriptor) {
                 VirtualMachineConfig config = VirtualMachineConfig.from(vmDescriptor.getConfigFd());
-                vm = new VirtualMachine(context, name, config, VirtualizationService.getInstance());
+                vm =
+                        new VirtualMachine(
+                                context, name, config, VirtualizationService.getInstance(context));
                 config.serialize(vm.mConfigFilePath);
                 if (vm.mInstanceIdPath != null) {
                     vm.importInstanceIdFrom(vmDescriptor.getInstanceIdFd());
@@ -479,7 +481,8 @@ public class VirtualMachine implements AutoCloseable {
 
         try {
             VirtualMachine vm =
-                    new VirtualMachine(context, name, config, VirtualizationService.getInstance());
+                    new VirtualMachine(
+                            context, name, config, VirtualizationService.getInstance(context));
             config.serialize(vm.mConfigFilePath);
             try {
                 vm.mInstanceFilePath.createNewFile();
@@ -565,7 +568,8 @@ public class VirtualMachine implements AutoCloseable {
         File configFilePath = new File(thisVmDir, CONFIG_FILE);
         VirtualMachineConfig config = VirtualMachineConfig.from(configFilePath);
         VirtualMachine vm =
-                new VirtualMachine(context, name, config, VirtualizationService.getInstance());
+                new VirtualMachine(
+                        context, name, config, VirtualizationService.getInstance(context));
 
         if (vm.mInstanceIdPath != null && !vm.mInstanceIdPath.exists()) {
             throw new VirtualMachineException("instance_id file missing");
@@ -595,7 +599,7 @@ public class VirtualMachine implements AutoCloseable {
     @GuardedBy("VirtualMachineManager.sCreateLock")
     static void vmInstanceCleanup(Context context, String name) throws VirtualMachineException {
         File vmDir = getVmDir(context, name);
-        notifyInstanceRemoval(vmDir, VirtualizationService.getInstance());
+        notifyInstanceRemoval(vmDir, VirtualizationService.getInstance(context));
         try {
             deleteRecursively(vmDir);
         } catch (IOException e) {

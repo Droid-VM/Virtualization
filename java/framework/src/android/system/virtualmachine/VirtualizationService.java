@@ -17,6 +17,8 @@
 package android.system.virtualmachine;
 
 import android.annotation.NonNull;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
 import android.system.virtualizationservice.IVirtualizationService;
@@ -51,10 +53,22 @@ class VirtualizationService {
     private native boolean nativeIsOk(int clientFd);
 
     /*
+     * Retrieve boolean value whether RELEASE_AVF_ENABLE_VENDOR_MODULES build flag is enabled or
+     * not.
+     */
+    static native boolean nativeIsVendorModulesFlagEnabled();
+
+    /*
      * Spawns a new virtmgr subprocess that will host a VirtualizationService
      * AIDL service.
      */
-    private VirtualizationService() throws VirtualMachineException {
+    private VirtualizationService(Context context) throws VirtualMachineException {
+        if (context.checkSelfPermission(VirtualMachine.MANAGE_VIRTUAL_MACHINE_PERMISSION)
+                != PackageManager.PERMISSION_GRANTED) {
+            throw new SecurityException(
+                    "Does not have android.permission.MANAGE_VIRTUAL_MACHINE permission");
+        }
+
         int clientFd = nativeSpawn();
         if (clientFd < 0) {
             throw new VirtualMachineException("Could not spawn Virtualization Manager");
@@ -88,10 +102,10 @@ class VirtualizationService {
      */
     @GuardedBy("VirtualMachineManager.sCreateLock")
     @NonNull
-    static VirtualizationService getInstance() throws VirtualMachineException {
+    static VirtualizationService getInstance(Context context) throws VirtualMachineException {
         VirtualizationService service = (sInstance == null) ? null : sInstance.get();
         if (service == null || !service.isOk()) {
-            service = new VirtualizationService();
+            service = new VirtualizationService(context);
             sInstance = new WeakReference<>(service);
         }
         return service;
