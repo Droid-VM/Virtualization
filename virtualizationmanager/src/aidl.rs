@@ -1147,6 +1147,14 @@ impl IVirtualMachine for VirtualMachine {
             .or_service_specific_exception(-1)?;
         Ok(vsock_stream_to_pfd(stream))
     }
+
+    fn setSurface(&self, surface: Option<&nativewindow::Surface>) -> binder::Result<()> {
+        self.instance
+            .set_surface(surface)
+            .with_context(|| format!("Error setting VM surface with CID {}", self.instance.cid))
+            .with_log()
+            .or_service_specific_exception(-1)
+    }
 }
 
 impl Drop for VirtualMachine {

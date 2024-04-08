@@ -240,8 +240,7 @@ public class MainActivity extends Activity {
                                         "ICrosvmAndroidDisplayService.setSurface("
                                                 + holder.getSurface()
                                                 + ")");
-                                runWithDisplayService(
-                                        (service) -> service.setSurface(holder.getSurface()));
+                                mVirtualMachine.setSurface(holder.getSurface());
                             }
 
                             @Override
@@ -253,7 +252,7 @@ public class MainActivity extends Activity {
                             @Override
                             public void surfaceDestroyed(SurfaceHolder holder) {
                                 Log.d(TAG, "ICrosvmAndroidDisplayService.removeSurface()");
-                                runWithDisplayService((service) -> service.removeSurface());
+                                mVirtualMachine.setSurface(null);
                             }
                         });
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -268,23 +267,6 @@ public class MainActivity extends Activity {
     @FunctionalInterface
     public interface RemoteExceptionCheckedFunction<T> {
         void apply(T t) throws RemoteException;
-    }
-
-    private void runWithDisplayService(
-            RemoteExceptionCheckedFunction<ICrosvmAndroidDisplayService> func) {
-        IVirtualizationServiceInternal vs =
-                IVirtualizationServiceInternal.Stub.asInterface(
-                        ServiceManager.waitForService("android.system.virtualizationservice"));
-        try {
-            Log.d(TAG, "wait for the display service");
-            ICrosvmAndroidDisplayService service =
-                    ICrosvmAndroidDisplayService.Stub.asInterface(vs.waitDisplayService());
-            assert service != null;
-            func.apply(service);
-            Log.d(TAG, "job done");
-        } catch (Exception e) {
-            Log.d(TAG, "error", e);
-        }
     }
 
     /** Reads data from an input stream and posts it to the output data */

@@ -18,6 +18,7 @@ package android.system.virtualizationservice;
 import android.system.virtualizationservice.IVirtualMachineCallback;
 import android.system.virtualizationservice.MemoryTrimLevel;
 import android.system.virtualizationservice.VirtualMachineState;
+import android.view.Surface;
 
 interface IVirtualMachine {
     /** Get the CID allocated to the VM. */
@@ -47,4 +48,6 @@ interface IVirtualMachine {
 
     /** Open a vsock connection to the CID of the VM on the given port. */
     ParcelFileDescriptor connectVsock(int port);
+
+    void setSurface(in @nullable Surface surface);
 }

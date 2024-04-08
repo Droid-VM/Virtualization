@@ -1093,6 +1093,34 @@ public class VirtualMachine implements AutoCloseable {
     }
 
     /**
+     * Sets Surface to draw VM's display on.
+     *
+     * @hide
+    */
+    public void setSurface(Surface surface) throws VirtualMachineException {
+        synchronized (mLock) {
+            if (mVirtualMachine == null) {
+                throw new VirtualMachineException("VM is not running");
+            }
+            try {
+                mVirtualMachine.setSurface(surface);
+            } catch (RemoteException e) {
+                throw e.rethrowAsRuntimeException();
+            } catch (ServiceSpecificException e) {
+                throw new VirtualMachineException(e);
+            }
+        }
+    }
+
+    private boolean hasDisplay() {
+        if (mConfig == null) return false;
+        VirtualMachineCustomConfig customConfig = config.getCustomImageConfig();
+        if (customConfig == null) return false;
+        VirtualMachineCustomConfig.DisplayConfig dispConfig = customConfig.getDisplayConfig();
+        return dispConfig != null;
+    }
+
+    /**
      * Stops this virtual machine. Stopping a virtual machine is like pulling the plug on a real
      * computer; the machine halts immediately. Software running on the virtual machine is not
      * notified of the event. Writes to {@linkplain

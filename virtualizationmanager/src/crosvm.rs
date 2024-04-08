@@ -36,6 +36,8 @@ use std::mem;
 use std::num::{NonZeroU16, NonZeroU32};
 use std::os::unix::io::{AsRawFd, RawFd, FromRawFd};
 use std::os::unix::process::ExitStatusExt;
+use std::os::unix::net::UnixStream;
+use std::os::fd::AsFd;
 use std::path::{Path, PathBuf};
 use std::process::{Command, ExitStatus};
 use std::sync::{Arc, Condvar, Mutex};
@@ -51,8 +53,11 @@ use android_system_virtualizationservice_internal::aidl::android::system::virtua
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IBoundDevice::IBoundDevice;
 use binder::Strong;
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::IVirtualMachineService;
+use libcrosvm_android_display_service::aidl::android::crosvm::ICrosvmAndroidDisplayService::ICrosvmAndroidDisplayService;
 use tombstoned_client::{TombstonedConnection, DebuggerdDumpType};
 use rpcbinder::RpcServer;
+use rpcbinder::RpcSession;
+use rpcbinder::FileDescriptorTransportMode;
 
 /// external/crosvm
 use base::AsRawDescriptor;
@@ -132,13 +137,13 @@ pub struct DisplayConfig {
 }
 
 impl DisplayConfig {
-    pub fn new(raw_config: &DisplayConfigParcelable) -> Result<DisplayConfig> {
+    pub fn new(raw_config: &DisplayConfigParcelable) -> Result<Self, > {
         let width = try_into_non_zero_u32(raw_config.width)?;
         let height = try_into_non_zero_u32(raw_config.height)?;
         let horizontal_dpi = try_into_non_zero_u32(raw_config.horizontalDpi)?;
         let vertical_dpi = try_into_non_zero_u32(raw_config.verticalDpi)?;
         let refresh_rate = try_into_non_zero_u32(raw_config.refreshRate)?;
-        Ok(DisplayConfig { width, height, horizontal_dpi, vertical_dpi, refresh_rate })
+        Ok(Self { width, height, horizontal_dpi, vertical_dpi, refresh_rate })
     }
 }
 
@@ -223,7 +228,11 @@ impl VmState {
 
             // If this fails and returns an error, `self` will be left in the `Failed` state.
             let child =
-                Arc::new(run_vm(config, &instance.crosvm_control_socket_path, failure_pipe_write)?);
+                Arc::new(run_vm(
+                        config,
+                        &instance.crosvm_control_socket_path,
+                        instance.display_socket_path.as_deref(),
+                        failure_pipe_write)?);
 
             let instance_monitor_status = instance.clone();
             let child_monitor_status = child.clone();
@@ -282,6 +291,8 @@ pub struct VmInstance {
     pub cid: Cid,
     /// Path to crosvm control socket
     crosvm_control_socket_path: PathBuf,
+    /// Path to UDS giving access to the android display backend
+    display_socket_path: Option<PathBuf>,
     /// The name of the VM.
     pub name: String,
     /// Whether the VM is a protected VM.
@@ -335,11 +346,16 @@ impl VmInstance {
             .ok()
             .flatten()
             .map_or_else(|| format!("{}", requester_uid), |u| u.name);
+
+        let display_socket_path = config.display_config.as_ref().map(|_| {
+            temporary_directory.join("crosvm.disp.sock")
+        });
         let instance = VmInstance {
             vm_state: Mutex::new(VmState::NotStarted { config: Box::new(config) }),
             vm_context,
             cid,
             crosvm_control_socket_path: temporary_directory.join("crosvm.sock"),
+            display_socket_path,
             name,
             protected,
             temporary_directory,
@@ -585,6 +601,23 @@ impl VmInstance {
         Ok(())
     }
 
+    pub fn set_surface(&self, surface: Option<&nativewindow::Surface>) -> Result<(), Error> {
+        let path = self.display_socket_path.as_ref().ok_or_else(
+            || anyhow!("Cannot set surface to a display-less VM"))?;
+        let sock = UnixStream::connect(path)?;
+        let session = RpcSession::new();
+        session.set_file_descriptor_transport_mode(FileDescriptorTransportMode::Unix);
+        let disp_service: Strong<dyn ICrosvmAndroidDisplayService> =
+            session
+                .setup_unix_domain_bootstrap_client(sock.as_fd())
+                .map_err(|_| io::Error::from(io::ErrorKind::ConnectionRefused))?;
+        Ok(if let Some(surface) = surface {
+            disp_service.setSurface(surface)
+        } else {
+            disp_service.removeSurface()
+        }?)
+    }
+
     /// Checks if ramdump has been created. If so, send it to tombstoned.
     fn handle_ramdump(&self) -> Result<(), Error> {
         let ramdump_path = self.temporary_directory.join("ramdump");
@@ -798,6 +831,7 @@ fn append_platform_devices(
 fn run_vm(
     config: CrosvmConfig,
     crosvm_control_socket_path: &Path,
+    display_socket_path: Option<&Path>,
     failure_pipe_write: File,
 ) -> Result<SharedChild, Error> {
     validate_config(&config)?;
@@ -959,8 +993,16 @@ fn run_vm(
         command.arg("--gpu")
         // TODO(b/331708504): support backend config as well
         .arg("backend=virglrenderer,context-types=virgl2,egl=true,surfaceless=true,glx=false,gles=true")
-        .arg(format!("--gpu-display=mode=windowed[{},{}],dpi=[{},{}],refresh-rate={}", display_config.width, display_config.height, display_config.horizontal_dpi, display_config.vertical_dpi, display_config.refresh_rate))
-        .arg(format!("--android-display-service={}", config.name));
+        .arg(format!("--gpu-display=mode=windowed[{},{}],dpi=[{},{}],refresh-rate={}", display_config.width, display_config.height, display_config.horizontal_dpi, display_config.vertical_dpi, display_config.refresh_rate));
+
+        // When display_config is set, display_socket_path also exists.
+        let path = display_socket_path.unwrap();
+        // Bind is required just to create the socket file.
+        let sock = UnixSeqpacketListener::bind(path)
+            .context(format!("failed to create {:?}", path))?;
+        command
+            .arg("--android-display-service=")
+            .arg(add_preserved_fd(&mut preserved_fds, &sock.as_raw_descriptor()));
     }
 
     append_platform_devices(&mut command, &mut preserved_fds, &config)?;
