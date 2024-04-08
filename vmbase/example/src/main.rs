@@ -138,10 +138,10 @@ fn check_data() {
 
     // SAFETY: Nowhere else in the program accesses this static mutable variable, so there is no
     // chance of concurrent access.
-    let zeroed_data = unsafe { &mut ZEROED_DATA };
+    let zeroed_data = unsafe { addr_of_mut!(ZEROED_DATA) };
     // SAFETY: Nowhere else in the program accesses this static mutable variable, so there is no
     // chance of concurrent access.
-    let mutable_data = unsafe { &mut MUTABLE_DATA };
+    let mutable_data = unsafe { addr_of_mut!(MUTABLE_DATA) };
 
     for element in zeroed_data.iter() {
         assert_eq!(*element, 0);
