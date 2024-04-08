@@ -60,6 +60,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Binder;
 import android.os.IBinder;
+import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.ServiceSpecificException;
@@ -1104,7 +1105,12 @@ public class VirtualMachine implements AutoCloseable {
                 throw new VirtualMachineException("VM is not running");
             }
             try {
-                mVirtualMachine.setSurface(surface);
+                Parcel p = Parcel.obtain(mVirtualMachine.asBinder());
+                Log.d(TAG, "parcel is rpc? " + p.isForRpc());
+                surface.writeToParcel(p, 0);
+                Surface s2 = new Surface();
+                s2.readFromParcel(p);
+                mVirtualMachine.setSurface(s2);
             } catch (RemoteException e) {
                 throw e.rethrowAsRuntimeException();
             } catch (ServiceSpecificException e) {

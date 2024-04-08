@@ -240,7 +240,12 @@ public class MainActivity extends Activity {
                                         "ICrosvmAndroidDisplayService.setSurface("
                                                 + holder.getSurface()
                                                 + ")");
-                                mVirtualMachine.setSurface(holder.getSurface());
+                                try {
+                                    Thread.sleep(3000);
+                                    mVirtualMachine.setSurface(holder.getSurface());
+                                } catch (Exception  e) {
+                                    Log.e(TAG, "failed to set surface: " + e);
+                                }
                             }
 
                             @Override
@@ -252,7 +257,11 @@ public class MainActivity extends Activity {
                             @Override
                             public void surfaceDestroyed(SurfaceHolder holder) {
                                 Log.d(TAG, "ICrosvmAndroidDisplayService.removeSurface()");
-                                mVirtualMachine.setSurface(null);
+                                try {
+                                    mVirtualMachine.setSurface(null);
+                                } catch (VirtualMachineException e) {
+                                    Log.e(TAG, "failed to reset surface: " + e);
+                                }
                             }
                         });
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);

@@ -31,6 +31,7 @@ use libcrosvm_android_display_service::aidl::android::crosvm::ICrosvmAndroidDisp
 use libcrosvm_android_display_service::binder::Strong;
 use libcrosvm_android_display_service::binder;
 use rpcbinder::RpcServer;
+use rpcbinder::FileDescriptorTransportMode;
 use std::ffi::CStr;
 use std::ffi::c_char;
 use std::os::unix::net::UnixListener;
@@ -184,7 +185,8 @@ impl AndroidDisplayContext {
         );
 
         let (conn, _) = UnixListener::bind(uds_path)?.accept()?;
-        let server = RpcServer::new_bound_socket(service.as_binder(), conn.into())?;
+        let server = RpcServer::new_unix_domain_bootstrap(service.as_binder(), conn.into())?;
+        server.set_supported_file_descriptor_transport_modes(&[FileDescriptorTransportMode::Unix]);
         std::thread::spawn(move|| server.join());
 
         Ok(Self{service})

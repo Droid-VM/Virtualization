@@ -604,9 +604,12 @@ impl VmInstance {
     pub fn set_surface(&self, surface: Option<&nativewindow::Surface>) -> Result<(), Error> {
         let path = self.display_socket_path.as_ref().ok_or_else(
             || anyhow!("Cannot set surface to a display-less VM"))?;
-        let sock = UnixStream::connect(path)?;
+        let sock = UnixStream::connect(path)
+            .context(format!("failed to connect to {:?}", path))?;
         let session = RpcSession::new();
         session.set_file_descriptor_transport_mode(FileDescriptorTransportMode::Unix);
+        session.set_max_incoming_threads(1);
+        session.set_max_outgoing_connections(1);
         let disp_service: Strong<dyn ICrosvmAndroidDisplayService> =
             session
                 .setup_unix_domain_bootstrap_client(sock.as_fd())
@@ -995,15 +998,25 @@ fn run_vm(
         .arg("backend=virglrenderer,context-types=virgl2,egl=true,surfaceless=true,glx=false,gles=true")
         .arg(format!("--gpu-display=mode=windowed[{},{}],dpi=[{},{}],refresh-rate={}", display_config.width, display_config.height, display_config.horizontal_dpi, display_config.vertical_dpi, display_config.refresh_rate));
 
-        // When display_config is set, display_socket_path also exists.
-        let path = display_socket_path.unwrap();
-        // Bind is required just to create the socket file.
-        let sock = UnixSeqpacketListener::bind(path)
-            .context(format!("failed to create {:?}", path))?;
-        command
-            .arg("--android-display-service=")
-            .arg(add_preserved_fd(&mut preserved_fds, &sock.as_raw_descriptor()));
     }
+
+    // Keep this socket opened until we spawn crosvm
+    //let _display_sock = if let Some(path) = display_socket_path {
+    //    let sock = UnixSeqpacketListener::bind(path)
+    //        .context(format!("failed to create {:?}", path))?;
+    //    command
+    //        .arg("--android-display-service")
+    //        .arg(add_preserved_fd(&mut preserved_fds, &sock.as_raw_descriptor()));
+    //    Some(sock)
+    //} else {
+    //    None
+    //};
+    if let Some(path) = display_socket_path {
+        command
+            .arg("--android-display-service")
+            .arg(path);
+    }
+
 
     append_platform_devices(&mut command, &mut preserved_fds, &config)?;
 
@@ -1053,6 +1066,8 @@ fn print_crosvm_args(command: &Command) {
                     let path = &caps[0];
                     if let Ok(realpath) = std::fs::canonicalize(path) {
                         format!("{} ({})", path, realpath.to_string_lossy())
+                    } else if let Ok(Some(sock_path)) = get_socket_path(Path::new(path)) {
+                        format!("{} ({})", path, sock_path.to_string_lossy())
                     } else {
                         path.to_owned()
                     }
@@ -1061,6 +1076,33 @@ fn print_crosvm_args(command: &Command) {
             })
             .collect::<Vec<_>>()
     );
+}
+
+fn get_socket_path(path: &Path) -> Result<Option<PathBuf>> {
+    use std::os::unix::fs::FileTypeExt;
+    use std::os::android::fs::MetadataExt;
+    use std::io::BufRead;
+
+    let metadata = std::fs::metadata(path)?;
+    if !metadata.file_type().is_socket() {
+        return Ok(None)
+    }
+    let inode = metadata.st_ino().to_string();
+
+    // Find a line with the matching inode and return the path
+    let net_unix = File::open("/proc/net/unix")?;
+    let lines = std::io::BufReader::new(net_unix).lines();
+    for line in lines.map_while(Result::ok) {
+        // Format is as below
+        //                                                      inode path
+        // 0000000000000000: 00000003 00000000 00000000 0005 03 57030
+        // 0000000000000000: 00000003 00000000 00000000 0005 03 57030 /dev/socket/chre
+        let mut iter = line.split(' ').skip(6);
+        if matches!(iter.next(), Some(i) if i == inode) {
+            return Ok(iter.next().map(|p| Path::new(p).to_path_buf()));
+        }
+    }
+    Ok(None)
 }
 
 /// Adds the file descriptor for `file` to `preserved_fds`, and returns a string of the form
