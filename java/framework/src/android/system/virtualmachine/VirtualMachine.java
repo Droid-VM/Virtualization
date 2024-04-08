@@ -75,6 +75,7 @@ import android.system.virtualizationservice.VirtualMachineRawConfig;
 import android.system.virtualizationservice.VirtualMachineState;
 import android.util.JsonReader;
 import android.util.Log;
+import android.view.Surface;
 
 import com.android.internal.annotations.GuardedBy;
 import com.android.system.virtualmachine.flags.Flags;
@@ -1110,14 +1111,6 @@ public class VirtualMachine implements AutoCloseable {
                 throw new VirtualMachineException(e);
             }
         }
-    }
-
-    private boolean hasDisplay() {
-        if (mConfig == null) return false;
-        VirtualMachineCustomConfig customConfig = config.getCustomImageConfig();
-        if (customConfig == null) return false;
-        VirtualMachineCustomConfig.DisplayConfig dispConfig = customConfig.getDisplayConfig();
-        return dispConfig != null;
     }
 
     /**
