@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b822774_157915f6",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualizationService.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-08T08:34:46Z",
+      "side": 1,
+      "message": "This slightly worries me:\n- sInstance is cached independently of context, but this computation is context dependent.\n- The context here might not refer to the calling app (it is legitimate to start a VM with payload in a different APK, and one way to do that is to pass the other app\u0027s context).\n\nI think a solution is to use `context.checkPermission(name, pid, uid)`, where the current pid \u0026 uid are retrieved from Android.os.Process. That answer seems to be less context dependent and definitely refers to the calling process. (It\u0027s also closer to what we would do over in virtmgr.)\n\nBTW we have the permission name available as a constant - VirtualMachine.MANAGE_VIRTUAL_MACHINE_PERMISSION.",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 57
+      },
+      "revId": "3231b08ec3803bc443b5cdaa3168d2fe341f728c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
