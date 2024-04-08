@@ -22,6 +22,30 @@
       },
       "revId": "3231b08ec3803bc443b5cdaa3168d2fe341f728c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ce98d92_eb62c055",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualizationService.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-04-08T13:14:00Z",
+      "side": 1,
+      "message": "This code runs in the app process. The permission check should be done on the server side (in this case virtmngr or virtualizationservice?)",
+      "parentUuid": "4b822774_157915f6",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 57
+      },
+      "revId": "3231b08ec3803bc443b5cdaa3168d2fe341f728c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
