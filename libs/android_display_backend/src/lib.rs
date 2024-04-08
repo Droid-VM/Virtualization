@@ -15,6 +15,7 @@
 //! Crate implementing crosvm GPU display for Android
 
 use anyhow::Result;
+use anyhow::Context;
 use nativewindow::Surface;
 extern crate nativewindow_bindgen;
 use nativewindow_bindgen::ANativeWindow;
@@ -25,16 +26,14 @@ use nativewindow_bindgen::ANativeWindow_unlockAndPost;
 use nativewindow_bindgen::ANativeWindow_Buffer;
 use nativewindow_bindgen::AHardwareBuffer_Format::*;
 
+use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IVirtualizationServiceInternal::IVirtualizationServiceInternal;
 use crate::binder::binder_impl::Binder;
 use libcrosvm_android_display_service::aidl::android::crosvm::ICrosvmAndroidDisplayService::BnCrosvmAndroidDisplayService;
 use libcrosvm_android_display_service::aidl::android::crosvm::ICrosvmAndroidDisplayService::ICrosvmAndroidDisplayService;
 use libcrosvm_android_display_service::binder::Strong;
 use libcrosvm_android_display_service::binder;
-use rpcbinder::RpcServer;
-use rpcbinder::FileDescriptorTransportMode;
 use std::ffi::CStr;
 use std::ffi::c_char;
-use std::os::unix::net::UnixListener;
 use std::path::Path;
 use std::sync::Condvar;
 use std::sync::Mutex;
@@ -178,16 +177,18 @@ pub struct AndroidDisplayContext {
 }
 
 impl AndroidDisplayContext {
-    fn new(uds_path: &Path) -> Result<Self> {
+    fn new(_uds_path: &Path) -> Result<Self> {
+        let vs = binder::wait_for_interface::<dyn IVirtualizationServiceInternal>("android.system.virtualizationservice")
+            .context("Could not connect to VirtualizationServiceInternal")?;
+
         let service = BnCrosvmAndroidDisplayService::new_binder(
             AndroidDisplayService::default(),
             binder::BinderFeatures::default(),
         );
 
-        let (conn, _) = UnixListener::bind(uds_path)?.accept()?;
-        let server = RpcServer::new_unix_domain_bootstrap(service.as_binder(), conn.into())?;
-        server.set_supported_file_descriptor_transport_modes(&[FileDescriptorTransportMode::Unix]);
-        std::thread::spawn(move|| server.join());
+        vs.setDisplayService(&service.as_binder())
+            .context("Could not set display service")?;
+        std::thread::spawn(binder::ProcessState::join_thread_pool);
 
         Ok(Self{service})
     }

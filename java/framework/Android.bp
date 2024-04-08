@@ -12,6 +12,8 @@ java_sdk_library {
     srcs: ["src/**/*.java"],
     static_libs: [
         "android.system.virtualizationservice-java",
+        "android.system.virtualizationservice_internal-java",
+        "libcrosvm_android_display_service-java",
         "avf_aconfig_flags_java",
         // For android.sysprop.HypervisorProperties
         "PlatformProperties",
@@ -24,6 +26,10 @@ java_sdk_library {
         "android.system.virtualizationservice",
         // android.sysprop.*, renamed by jarjar
         "com.android.system.virtualmachine.sysprop",
+        // TODO(jiyong) Remove this by moving setSurface to the native side
+        "android.system.virtualizationservice_internal",
+        "android.system.virtualizationcommon",
+        "android.crosvm",
     ],
     errorprone: {
         enabled: true,

@@ -226,6 +226,7 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
             .cloned()
             .expect("Display service cannot be None in this context"))
     }
+
     fn removeMemlockRlimit(&self) -> binder::Result<()> {
         let pid = get_calling_pid();
         let lim = libc::rlimit { rlim_cur: libc::RLIM_INFINITY, rlim_max: libc::RLIM_INFINITY };

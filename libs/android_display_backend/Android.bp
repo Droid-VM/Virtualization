@@ -11,6 +11,10 @@ aidl_interface {
     backend: {
         java: {
             enabled: true,
+            apex_available: [
+                "//apex_available:platform",
+                "com.android.virt",
+            ],
         },
         cpp: {
             enabled: false,
@@ -67,10 +71,10 @@ rust_ffi_static {
     host_supported: false,
     rustlibs: [
         "libanyhow",
+        "android.system.virtualizationservice_internal-rust",
         "libcrosvm_android_display_service-rust",
         "libnativewindow_rs",
         "libnativewindow_bindgen",
-        "librpcbinder_rs",
     ],
     apex_available: [
         "//apex_available:platform",

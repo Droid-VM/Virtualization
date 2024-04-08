@@ -58,7 +58,9 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.crosvm.ICrosvmAndroidDisplayService;
 import android.os.Binder;
+import android.os.ServiceManager;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
@@ -74,6 +76,7 @@ import android.system.virtualizationservice.PartitionType;
 import android.system.virtualizationservice.VirtualMachineAppConfig;
 import android.system.virtualizationservice.VirtualMachineRawConfig;
 import android.system.virtualizationservice.VirtualMachineState;
+import android.system.virtualizationservice_internal.IVirtualizationServiceInternal;
 import android.util.JsonReader;
 import android.util.Log;
 import android.view.Surface;
@@ -1105,12 +1108,16 @@ public class VirtualMachine implements AutoCloseable {
                 throw new VirtualMachineException("VM is not running");
             }
             try {
-                Parcel p = Parcel.obtain(mVirtualMachine.asBinder());
-                Log.d(TAG, "parcel is rpc? " + p.isForRpc());
-                surface.writeToParcel(p, 0);
-                Surface s2 = new Surface();
-                s2.readFromParcel(p);
-                mVirtualMachine.setSurface(s2);
+                IVirtualizationServiceInternal vs =
+                IVirtualizationServiceInternal.Stub.asInterface(
+                        ServiceManager.getService("android.system.virtualizationservice"));
+                ICrosvmAndroidDisplayService service =
+                        ICrosvmAndroidDisplayService.Stub.asInterface(vs.waitDisplayService());
+                if (surface == null) {
+                    service.removeSurface();
+                } else {
+                    service.setSurface(surface);
+                }
             } catch (RemoteException e) {
                 throw e.rethrowAsRuntimeException();
             } catch (ServiceSpecificException e) {
