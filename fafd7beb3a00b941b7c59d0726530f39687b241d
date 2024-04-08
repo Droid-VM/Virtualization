@@ -104,6 +104,30 @@
       },
       "revId": "fafd7beb3a00b941b7c59d0726530f39687b241d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60879603_86e894a4",
+        "filename": "tests/testapk_no_perm/src/java/com/android/microdroid/test/MicrodroidTestAppNoPerm.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-04-08T01:50:38Z",
+      "side": 1,
+      "message": "Backed to the `SecurityException`, and added logic checking permission before connecting with virtmgr.",
+      "parentUuid": "ed96836a_13fb1360",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 99
+      },
+      "revId": "fafd7beb3a00b941b7c59d0726530f39687b241d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
