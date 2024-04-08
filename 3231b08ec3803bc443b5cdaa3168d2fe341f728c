@@ -46,6 +46,30 @@
       },
       "revId": "3231b08ec3803bc443b5cdaa3168d2fe341f728c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aaab6b9_7bc63a1b",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualizationService.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-08T13:19:56Z",
+      "side": 1,
+      "message": "It is done there. But, it\u0027s also done here, so that we give the right error message. Because without the permission, running virtmgr will fail.\n\n@seungjaeyoo@google.com Can we have a comment to that effect? (Putting permission checks on the client side is a common security blunder, so we should make it clear this is intentional.)",
+      "parentUuid": "4ce98d92_eb62c055",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 57
+      },
+      "revId": "3231b08ec3803bc443b5cdaa3168d2fe341f728c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
