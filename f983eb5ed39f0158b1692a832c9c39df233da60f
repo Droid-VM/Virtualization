@@ -16,6 +16,24 @@
       "message": "This CL is introducing build failures, which are \"addressed\" by commenting out in aosp/3032955 the broken code; would you mind explaining what issue introduced by v1.77.1 is being fixed here, so that we can address it properly?",
       "revId": "f983eb5ed39f0158b1692a832c9c39df233da60f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6650f6a_ec6aca8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1933736
+      },
+      "writtenOn": "2024-04-09T21:29:02Z",
+      "side": 1,
+      "message": "Hi there, I added the clippy lint error to the commit message. You can also find in the following build log  ithttps://android-build.corp.google.com/artifact/submitted/11688682/stage7-raven/latest/view/logs%2Fbuild_error.log and https://android-build.corp.google.com/artifact/pending/P72962816/aosp_arm64-trunk_staging-userdebug/latest/view/logs%2Fbuild_error.log. Let me know what fix you advise.",
+      "parentUuid": "4403b7e1_bb79c4cb",
+      "revId": "f983eb5ed39f0158b1692a832c9c39df233da60f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
