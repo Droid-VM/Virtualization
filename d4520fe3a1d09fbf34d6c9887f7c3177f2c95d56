@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eeee40c_7fd620aa",
+        "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-04-09T22:07:53Z",
+      "side": 1,
+      "message": "FWIW, it looks like none of the callers ever use the formatting feature, they just pass constants",
+      "revId": "d4520fe3a1d09fbf34d6c9887f7c3177f2c95d56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a271729_614e1ad5",
+        "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-04-09T22:07:53Z",
+      "side": 1,
+      "message": "unused arg? consider keeping the size arg if you intend to use it later",
+      "range": {
+        "startLine": 123,
+        "startChar": 8,
+        "endLine": 123,
+        "endChar": 19
+      },
+      "revId": "d4520fe3a1d09fbf34d6c9887f7c3177f2c95d56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d23f502_f6e6aaf5",
+        "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-04-09T22:07:53Z",
+      "side": 1,
+      "message": "should we return `nullptr` or an error code in this case?",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 5
+      },
+      "revId": "d4520fe3a1d09fbf34d6c9887f7c3177f2c95d56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ace11bf_743122ca",
+        "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-04-09T22:07:53Z",
+      "side": 1,
+      "message": "because the window lives as long as the context for now?",
+      "revId": "d4520fe3a1d09fbf34d6c9887f7c3177f2c95d56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18fb834e_5fe2073e",
+        "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-04-09T22:07:53Z",
+      "side": 1,
+      "message": "can we make this an opaque",
+      "range": {
+        "startLine": 151,
+        "startChar": 43,
+        "endLine": 151,
+        "endChar": 75
+      },
+      "revId": "d4520fe3a1d09fbf34d6c9887f7c3177f2c95d56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
