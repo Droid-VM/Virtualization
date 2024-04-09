@@ -99,6 +99,24 @@
       "parentUuid": "1d3d9ab2_c055c901",
       "revId": "f8559dff32566f317e0868a37b0c924dfce70f7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "009659a5_75101fa4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-04-09T14:22:27Z",
+      "side": 1,
+      "message": "Hey, Sorry had to fix stuff on the kernel side. But I\u0027m finally back with some numbers:\n\nOn a Pixel6, it seems to save ~2s out of the 30s of a test-compile run.\n\n\nI also ran some microdroidbenchmarks and it seems to be improved by 100 to 200ms.\n\n(notice it could even be better, I\u0027ve been running with a guest which doesn\u0027t use the new guest HVC ranges)",
+      "parentUuid": "25fb39fa_ed2a93bf",
+      "revId": "f8559dff32566f317e0868a37b0c924dfce70f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
