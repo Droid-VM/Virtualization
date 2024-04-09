@@ -94,6 +94,30 @@
       },
       "revId": "3231b08ec3803bc443b5cdaa3168d2fe341f728c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd4dc9f3_7f2f3f7a",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualizationService.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-04-09T04:20:17Z",
+      "side": 1,
+      "message": "\u003e I think a solution is to use context.checkPermission(name, pid, uid)\n\nI think I found better one `checkSelfPermission`, which doesn\u0027t need to care about `pid` and `uid`. I think it\u0027s fixed, but please reopen if I missed something.",
+      "parentUuid": "3c05855c_56a30926",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 57
+      },
+      "revId": "3231b08ec3803bc443b5cdaa3168d2fe341f728c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
