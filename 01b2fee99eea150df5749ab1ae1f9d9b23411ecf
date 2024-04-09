@@ -46,6 +46,30 @@
       },
       "revId": "01b2fee99eea150df5749ab1ae1f9d9b23411ecf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0be8fbb_826b1eec",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualizationService.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-04-09T11:13:03Z",
+      "side": 1,
+      "message": "Because MicrodroidTestAppNoPerm doesn\u0027t use permission MANAGE_VIRTUAL_MACHINE unlike MicrodroidTestApp.",
+      "parentUuid": "27b2778a_e037d554",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 9
+      },
+      "revId": "01b2fee99eea150df5749ab1ae1f9d9b23411ecf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
