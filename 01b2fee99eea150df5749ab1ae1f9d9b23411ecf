@@ -94,6 +94,30 @@
       },
       "revId": "01b2fee99eea150df5749ab1ae1f9d9b23411ecf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edff91ed_de546c4e",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualizationService.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-09T14:26:41Z",
+      "side": 1,
+      "message": "\u003e About removing this explicit block for permission check \u0026 letting nativeSpawn or nativeConnect itself throws SecurityException error instead, what about deferring this task into following change?\n\nI have a slight preference for fixing it now, but if it\u0027s blocking other things then a followup CL would be fine.\n\n\u003e Because MicrodroidTestAppNoPerm doesn\u0027t use permission MANAGE_VIRTUAL_MACHINE unlike MicrodroidTestApp.\n\nAh, of course. This is all so complicated :-(",
+      "parentUuid": "5ab2e129_2932d7e7",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 9
+      },
+      "revId": "01b2fee99eea150df5749ab1ae1f9d9b23411ecf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
