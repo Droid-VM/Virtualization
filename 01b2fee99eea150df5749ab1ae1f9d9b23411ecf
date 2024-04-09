@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3bce59f_ae88a5c3",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualizationService.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-04-09T09:18:57Z",
+      "side": 1,
+      "message": "@alanstokes@google.com  @ioffe@google.com  About removing this explicit block for permission check \u0026 letting `nativeSpawn` or `nativeConnect` itself throws `SecurityException` error instead, what about deferring this task into following change?\n\nSince this change was for fixing error while getting RSS, though doing permission check explicitly might be little weird. Please say no if explicit check shouldn\u0027t be as an interim solution as well.\n\nBTW, thought again about leaving `RequiresPermission` to `getSupportedOsList`, it wouldn\u0027t be okay because test cannot run `prepareTestSetup`, which calls `getSupportedOsList` inside.",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 9
+      },
+      "revId": "01b2fee99eea150df5749ab1ae1f9d9b23411ecf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
