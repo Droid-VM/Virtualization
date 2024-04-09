@@ -58,6 +58,9 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.net.TetheringManager;
+import android.net.TetheringManager.StartTetheringCallback;
+import android.net.TetheringManager.TetheringRequest;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
@@ -475,6 +478,30 @@ public class VirtualMachine implements AutoCloseable {
             @NonNull Context context, @NonNull String name, @NonNull VirtualMachineConfig config)
             throws VirtualMachineException {
         File vmDir = createVmDir(context, name);
+
+        final TetheringRequest tr =
+                new TetheringRequest.Builder(TetheringManager.TETHERING_VIRTUAL_MACHINE)
+                        .setExemptFromEntitlementCheck(true)
+                        .setConnectivityScope(TetheringManager.CONNECTIVITY_SCOPE_GLOBAL)
+                        .build();
+        final TetheringManager tm = context.getSystemService(TetheringManager.class);
+
+        StartTetheringCallback startTetheringCallback =
+                new StartTetheringCallback() {
+                    @Override
+                    public void onTetheringStarted() {
+                        Log.w(TAG, "VM tethering started");
+                    }
+
+                    @Override
+                    public void onTetheringFailed(int resultCode) {
+                        Log.w(
+                                TAG,
+                                "VM tethering failed. Result Code: "
+                                        + Integer.toString(resultCode));
+                    }
+                };
+        tm.startTethering(tr, c -> c.run() /* executor */, startTetheringCallback);
 
         try {
             VirtualMachine vm =

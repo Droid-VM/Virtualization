@@ -17,6 +17,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.android.virtualmachine.res">
 
+  <uses-permission android:name="android.permission.TETHER_PRIVILEGED" />
+  <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
   <!-- @SystemApi Allows an application to create and run a Virtual Machine
        using the Virtualization Framework APIs
        (android.system.virtualmachine.*).
