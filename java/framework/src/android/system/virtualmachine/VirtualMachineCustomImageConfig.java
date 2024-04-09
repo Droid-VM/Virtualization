@@ -35,6 +35,7 @@ public class VirtualMachineCustomImageConfig {
     private static final String KEY_DISK_IMAGES = "disk_images";
     private static final String KEY_DISPLAY_CONFIG = "display_config";
     private static final String KEY_TOUCH = "touch";
+    private static final String KEY_EXTERNAL_HID = "external_hid";
 
     @Nullable private final String name;
     @NonNull private final String kernelPath;
@@ -44,6 +45,7 @@ public class VirtualMachineCustomImageConfig {
     @Nullable private final Disk[] disks;
     @Nullable private final DisplayConfig displayConfig;
     private final boolean touch;
+    private final boolean externalHid;
 
     @Nullable
     public Disk[] getDisks() {
@@ -79,6 +81,10 @@ public class VirtualMachineCustomImageConfig {
         return touch;
     }
 
+    public boolean useExternalHid() {
+        return externalHid;
+    }
+
     /** @hide */
     public VirtualMachineCustomImageConfig(
             String name,
@@ -88,7 +94,8 @@ public class VirtualMachineCustomImageConfig {
             String[] params,
             Disk[] disks,
             DisplayConfig displayConfig,
-            boolean touch) {
+            boolean touch,
+            boolean externalHid) {
         this.name = name;
         this.kernelPath = kernelPath;
         this.initrdPath = initrdPath;
@@ -97,6 +104,7 @@ public class VirtualMachineCustomImageConfig {
         this.disks = disks;
         this.displayConfig = displayConfig;
         this.touch = touch;
+        this.externalHid = externalHid;
     }
 
     static VirtualMachineCustomImageConfig from(PersistableBundle customImageConfigBundle) {
@@ -125,6 +133,7 @@ public class VirtualMachineCustomImageConfig {
                 customImageConfigBundle.getPersistableBundle(KEY_DISPLAY_CONFIG);
         builder.setDisplayConfig(DisplayConfig.from(displayConfigPb));
         builder.useTouch(customImageConfigBundle.getBoolean(KEY_TOUCH));
+        builder.useExternalHid(customImageConfigBundle.getBoolean(KEY_EXTERNAL_HID));
         return builder.build();
     }
 
@@ -154,6 +163,7 @@ public class VirtualMachineCustomImageConfig {
                         .map(dc -> dc.toPersistableBundle())
                         .orElse(null));
         pb.putBoolean(KEY_TOUCH, touch);
+        pb.putBoolean(KEY_EXTERNAL_HID, externalHid);
         return pb;
     }
 
@@ -203,6 +213,7 @@ public class VirtualMachineCustomImageConfig {
         private List<Disk> disks = new ArrayList<>();
         private DisplayConfig displayConfig;
         private boolean touch;
+        private boolean externalHid;
 
         /** @hide */
         public Builder() {}
@@ -256,6 +267,12 @@ public class VirtualMachineCustomImageConfig {
         }
 
         /** @hide */
+        public Builder useExternalHid(boolean externalHid) {
+            this.externalHid = externalHid;
+            return this;
+        }
+
+        /** @hide */
         public VirtualMachineCustomImageConfig build() {
             return new VirtualMachineCustomImageConfig(
                     this.name,
@@ -265,7 +282,8 @@ public class VirtualMachineCustomImageConfig {
                     this.params.toArray(new String[0]),
                     this.disks.toArray(new Disk[0]),
                     displayConfig,
-                    touch);
+                    touch,
+                    externalHid);
         }
     }
 

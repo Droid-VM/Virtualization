@@ -104,7 +104,9 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
@@ -854,6 +856,21 @@ public class VirtualMachine implements AutoCloseable {
         }
     }
 
+    private record EvDevIdentifier(int deviceBus, int vendorId, int productId, String name) {}
+
+    private EvDevIdentifier evDevId(android.view.InputDevice device) {
+        return new EvDevIdentifier(
+                device.getDeviceBus(),
+                device.getVendorId(),
+                device.getProductId(),
+                device.getName());
+    }
+
+    private EvDevIdentifier evDevId(int fd) {
+        int[] id = getInputIdFromDev(fd);
+        return new EvDevIdentifier(id[0], id[1], id[2], getNameFromDev(fd));
+    }
+
     private android.system.virtualizationservice.VirtualMachineConfig
             createVirtualMachineConfigForRawFrom(VirtualMachineConfig vmConfig)
                     throws IllegalStateException, IOException {
@@ -872,6 +889,37 @@ public class VirtualMachine implements AutoCloseable {
             t.pfd = pfds[1];
             inputDevices.add(InputDevice.singleTouch(t));
         }
+        // Get all input devices
+        if (vmConfig.getCustomImageConfig() != null
+                && vmConfig.getCustomImageConfig().useExternalHid()
+                && rawConfig.displayConfig != null) {
+            int[] deviceIds = android.view.InputDevice.getDeviceIds();
+            Map<EvDevIdentifier, File> map = new HashMap<>();
+            for (File f : new File("/dev/input").listFiles()) {
+                ParcelFileDescriptor pfd = ParcelFileDescriptor.open(f, MODE_READ_WRITE);
+                map.put(evDevId(pfd.getFd()), f);
+                pfd.close();
+            }
+            for (int deviceId : deviceIds) {
+                android.view.InputDevice device = android.view.InputDevice.getDevice(deviceId);
+                if (!device.isExternal()) {
+                    continue;
+                }
+                File f = map.get(evDevId(device));
+                if (f == null) {
+                    continue;
+                }
+                try {
+                    InputDevice.EvDev evdev = new InputDevice.EvDev();
+                    evdev.pfd = ParcelFileDescriptor.open(f, MODE_READ_WRITE);
+                    inputDevices.add(InputDevice.evDev(evdev));
+                    Log.d(TAG, "attach " + evDevId(device));
+                } catch (IOException e) {
+                    Log.d(TAG, "cannot attach " + evDevId(device));
+                }
+            }
+        }
+
         rawConfig.inputDevices = inputDevices.toArray(new InputDevice[0]);
 
         return android.system.virtualizationservice.VirtualMachineConfig.rawConfig(rawConfig);
@@ -1292,6 +1340,11 @@ public class VirtualMachine implements AutoCloseable {
 
     @Nullable
     private static native IBinder nativeConnectToVsockServer(IBinder vmBinder, int port);
+
+    @Nullable
+    private static native int[] getInputIdFromDev(int fd);
+
+    private static native String getNameFromDev(int fd);
 
     /**
      * Connect to a VM's binder service via vsock and return the root IBinder object. Guest VMs are

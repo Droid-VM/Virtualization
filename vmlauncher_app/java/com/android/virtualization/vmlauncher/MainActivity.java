@@ -127,6 +127,7 @@ public class MainActivity extends Activity {
 
             customImageConfigBuilder.setDisplayConfig(displayConfigBuilder.build());
             customImageConfigBuilder.useTouch(true);
+            customImageConfigBuilder.useExternalHid(true);
 
             configBuilder.setCustomImageConfig(customImageConfigBuilder.build());            
 
