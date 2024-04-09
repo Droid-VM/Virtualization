@@ -20,7 +20,9 @@
 #include <android/binder_auto_utils.h>
 #include <android/binder_ibinder_jni.h>
 #include <jni.h>
+#include <linux/input.h>
 #include <log/log.h>
+#include <sys/ioctl.h>
 
 #include <binder_rpc_unstable.hpp>
 #include <tuple>
@@ -64,4 +66,38 @@ Java_android_system_virtualmachine_VirtualMachine_nativeConnectToVsockServer(
     ARpcSession_setMaxIncomingThreads(session.get(), 1);
     auto client = ARpcSession_setupPreconnectedClient(session.get(), requestFunc, &args);
     return AIBinder_toJavaBinder(env, client);
+}
+
+extern "C" JNIEXPORT jintArray JNICALL
+Java_android_system_virtualmachine_VirtualMachine_getInputIdFromDev(JNIEnv *env,
+                                                                    [[maybe_unused]] jclass clazz,
+                                                                    jint fd) {
+    struct input_id id;
+
+    if (ioctl(fd, EVIOCGID, &id) < 0) {
+        return nullptr;
+    }
+
+    jintArray result = env->NewIntArray(3);
+    jint *data = env->GetIntArrayElements(result, nullptr);
+
+    data[0] = id.bustype;
+    data[1] = id.vendor;
+    data[2] = id.product;
+
+    env->ReleaseIntArrayElements(result, data, 0);
+
+    return result;
+}
+
+extern "C" JNIEXPORT jstring JNICALL
+Java_android_system_virtualmachine_VirtualMachine_getNameFromDev(JNIEnv *env,
+                                                                 [[maybe_unused]] jclass clazz,
+                                                                 jint fd) {
+    char name[256] = {0};
+    if (ioctl(fd, EVIOCGNAME(sizeof(name)), name) < 0) {
+        return nullptr;
+    }
+
+    return env->NewStringUTF(name);
 }
