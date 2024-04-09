@@ -118,6 +118,30 @@
       },
       "revId": "01b2fee99eea150df5749ab1ae1f9d9b23411ecf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40f0e498_82a28b9c",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualizationService.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-09T14:34:43Z",
+      "side": 1,
+      "message": "Looking at native_spawn, I can see why it doesn\u0027t notice the exec failure: https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/java/jni/android_system_virtualmachine_VirtualizationService.cpp;drc\u003d37a795c1e948a7bcb04093f869f3b116b28b6dbf;l\u003d51\n\nWe throw away the new PID, and don\u0027t check it\u0027s health. We assume it is running when it closes its end of the pipe - but if it dies that will happen automatically.\n\nWe can\u0027t get the return code of the exec (if there even is one), but we should be able to check if the PID is running and if not how it failed via waitpid(..., WNOHANG).\n\n\nHow about we:\n- Remove the explicit permission check\n- Change the throw when nativeConnect fails to SecurityException.\n- Improve the precision by changing nativeSpawn in a future CL?\n\n@ioffe@google.com fyi.",
+      "parentUuid": "edff91ed_de546c4e",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 9
+      },
+      "revId": "01b2fee99eea150df5749ab1ae1f9d9b23411ecf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
