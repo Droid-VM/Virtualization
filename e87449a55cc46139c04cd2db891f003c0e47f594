@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0d3ce5c0_9df11af2",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-04-10T12:48:43Z",
+      "side": 1,
+      "message": "Should we have 1 cddl for VM\u0027s?",
+      "parentUuid": "fb86cfda_df6311da",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 32
+      },
+      "revId": "e87449a55cc46139c04cd2db891f003c0e47f594",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f11b53b9_ee70337a",
         "filename": "microdroid_manager/src/vm_secret.rs",
         "patchSetId": 1
@@ -109,6 +133,30 @@
       "side": 1,
       "message": "We need a way to find the nodes we care about though. By name (searching back from the end)?\n\nWe definitely shouldn\u0027t use a reserved identifier here - this is not part of standard open DICE.\n\nAnd using a non-reserved one means the semantics are specific to some node - somebody else could use the same identifier for a different purpose in a different node. They\u0027re certainly used in some of the early DICE nodes.",
       "parentUuid": "bcde1800_f743d95a",
+      "range": {
+        "startLine": 198,
+        "startChar": 12,
+        "endLine": 198,
+        "endChar": 27
+      },
+      "revId": "e87449a55cc46139c04cd2db891f003c0e47f594",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb1b73f3_42306cd6",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-04-10T12:48:43Z",
+      "side": 1,
+      "message": "\u003e And using a non-reserved one means the semantics are specific to some node - somebody else could use the same identifier for a different purpose in a different node\n\nAck, makes sense. I\u0027ll change `CertIndex::FromEnd` to `CertIndex::ByName`\n\n\nComponent name is also optional though, but I think we can mandate it for pVMs\u0027 trailing certificated (built by firmware \u0026 OS)?",
+      "parentUuid": "a69ec6f8_9bd9b951",
       "range": {
         "startLine": 198,
         "startChar": 12,
