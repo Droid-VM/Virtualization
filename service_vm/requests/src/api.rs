@@ -21,9 +21,12 @@ use diced_open_dice::DiceArtifacts;
 use service_vm_comm::{Request, Response};
 
 /// Processes a request and returns the corresponding response.
-/// This function serves as the entry point for the request processing
-/// module.
-pub fn process_request(request: Request, dice_artifacts: &dyn DiceArtifacts) -> Response {
+/// This function serves as the entry point for the request processing module.
+pub fn process_request(
+    request: Request,
+    dice_artifacts: &dyn DiceArtifacts,
+    vendor_hashtree_root_digest: Option<&[u8]>,
+) -> Response {
     match request {
         Request::Reverse(v) => Response::Reverse(reverse(v)),
         Request::GenerateEcdsaP256KeyPair => rkp::generate_ecdsa_p256_key_pair(dice_artifacts)
@@ -32,8 +35,10 @@ pub fn process_request(request: Request, dice_artifacts: &dyn DiceArtifacts) -> 
             rkp::generate_certificate_request(p, dice_artifacts)
                 .map_or_else(Response::Err, Response::GenerateCertificateRequest)
         }
-        Request::RequestClientVmAttestation(p) => client_vm::request_attestation(p, dice_artifacts)
-            .map_or_else(Response::Err, Response::RequestClientVmAttestation),
+        Request::RequestClientVmAttestation(p) => {
+            client_vm::request_attestation(p, dice_artifacts, vendor_hashtree_root_digest)
+                .map_or_else(Response::Err, Response::RequestClientVmAttestation)
+        }
     }
 }
 
