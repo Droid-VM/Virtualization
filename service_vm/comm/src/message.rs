@@ -158,6 +158,12 @@ pub enum RequestProcessingError {
 
     /// The DICE chain from the client VM is invalid.
     InvalidDiceChain,
+
+    /// Cannot find the vendor hash tree root digest in the device tree.
+    NoVendorHashTreeRootDigestInDT,
+
+    /// The vendor module loaded by the client VM is invalid.
+    InvalidVendorModule,
 }
 
 impl fmt::Display for RequestProcessingError {
@@ -185,6 +191,12 @@ impl fmt::Display for RequestProcessingError {
             }
             Self::InvalidDiceChain => {
                 write!(f, "The DICE chain from the client VM is invalid")
+            }
+            Self::NoVendorHashTreeRootDigestInDT => {
+                write!(f, "Cannot find the vendor hash tree root digest in the device tree")
+            }
+            Self::InvalidVendorModule => {
+                write!(f, "The vendor module loaded by the client VM is invalid")
             }
         }
     }
