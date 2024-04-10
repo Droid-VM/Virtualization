@@ -228,7 +228,7 @@ fn value_from_bytes(mut bytes: &[u8]) -> Result<Value> {
 }
 
 /// Encodes a ciborium::Value into bytes.
-fn value_to_bytes(value: &Value) -> Result<Vec<u8>> {
+pub(crate) fn value_to_bytes(value: &Value) -> Result<Vec<u8>> {
     let mut bytes: Vec<u8> = Vec::new();
     ciborium::ser::into_writer(&value, &mut bytes).map_err(BccError::CborEncodeError)?;
     Ok(bytes)
