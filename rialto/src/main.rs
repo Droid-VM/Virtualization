@@ -26,7 +26,7 @@ extern crate alloc;
 
 use crate::communication::VsockStream;
 use crate::error::{Error, Result};
-use crate::fdt::read_dice_range_from;
+use crate::fdt::{read_dice_range_from, read_vendor_hashtree_root_digest};
 use alloc::boxed::Box;
 use bssl_sys::CRYPTO_library_init;
 use ciborium_io::Write;
@@ -174,11 +174,12 @@ unsafe fn try_main(fdt_addr: usize) -> Result<()> {
     debug!("PCI root: {pci_root:#x?}");
     let socket_device = find_socket_device::<HalImpl>(&mut pci_root)?;
     debug!("Found socket device: guest cid = {:?}", socket_device.guest_cid());
+    let vendor_hashtree_root_digest = read_vendor_hashtree_root_digest(fdt)?;
 
     let mut vsock_stream = VsockStream::new(socket_device, host_addr())?;
     while let ServiceVmRequest::Process(req) = vsock_stream.read_request()? {
         info!("Received request: {}", req.name());
-        let response = process_request(req, bcc_handover.as_ref());
+        let response = process_request(req, bcc_handover.as_ref(), vendor_hashtree_root_digest);
         info!("Sending response: {}", response.name());
         vsock_stream.write_response(&response)?;
         vsock_stream.flush()?;
