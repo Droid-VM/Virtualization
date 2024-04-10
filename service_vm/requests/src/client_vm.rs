@@ -55,11 +55,22 @@ pub(super) fn request_attestation(
         dice_artifacts.bcc().ok_or(RequestProcessingError::MissingDiceChain)?;
     let service_vm_dice_chain = parse_value_array(service_vm_dice_chain, "service_vm_dice_chain")?;
     let client_vm_dice_chain = parse_value_array(&csr.dice_cert_chain, "client_vm_dice_chain")?;
-    validate_client_vm_dice_chain_prefix_match(&client_vm_dice_chain, &service_vm_dice_chain)?;
+    let vendor_module_exists =
+        validate_client_vm_dice_chain_prefix_match(&client_vm_dice_chain, &service_vm_dice_chain)?;
     // Validates the signatures in the Client VM DICE chain and extracts the partially decoded
     // DiceChainEntryPayloads.
-    let client_vm_dice_chain =
-        ClientVmDiceChain::validate_signatures_and_parse_dice_chain(client_vm_dice_chain)?;
+    let client_vm_dice_chain = ClientVmDiceChain::validate_signatures_and_parse_dice_chain(
+        client_vm_dice_chain,
+        vendor_module_exists,
+    )?;
+    if vendor_module_exists {
+        // This assert should always pass when the logic in building the `ClientVmDiceChain` is
+        // correct.
+        assert!(client_vm_dice_chain.vendor_module().is_some());
+        // TODO(b/330678211): Check the code hash in the vendor module entry against the hash in DT
+    } else {
+        assert!(client_vm_dice_chain.vendor_module().is_none());
+    }
 
     // The last entry in the service VM DICE chain describes the service VM, which should
     // be signed with the same key as the kernel image.
