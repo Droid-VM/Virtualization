@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fb4e21e_e41d347b",
+        "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-10T05:51:51Z",
+      "side": 1,
+      "message": "This will be used when we switch to RPC binder. This will be the path to the UDS. I\u0027ve commented in the other CL why I switched back to null terminated string.",
+      "parentUuid": "0a271729_614e1ad5",
+      "range": {
+        "startLine": 123,
+        "startChar": 8,
+        "endLine": 123,
+        "endChar": 19
+      },
+      "revId": "d4520fe3a1d09fbf34d6c9887f7c3177f2c95d56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d23f502_f6e6aaf5",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0445363d_f8a77d15",
+        "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-10T05:51:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d23f502_f6e6aaf5",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 5
+      },
+      "revId": "d4520fe3a1d09fbf34d6c9887f7c3177f2c95d56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ace11bf_743122ca",
@@ -77,6 +125,24 @@
       "writtenOn": "2024-04-09T22:07:53Z",
       "side": 1,
       "message": "because the window lives as long as the context for now?",
+      "revId": "d4520fe3a1d09fbf34d6c9887f7c3177f2c95d56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e73c5278_61d2ddaa",
+        "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-10T05:51:51Z",
+      "side": 1,
+      "message": "Yes, ANativeWindow is a ref-counted object and Surface (the wrapper of ANativeWindow) calls ANativeWindow_acquire/release accordingly. So, not calling this is fine.\n\nThe reason I left this here is because I haven\u0027t fully figured out when the surface can be destroyed on the crosvm side. In my reading of the code, surface seems to never get destroyed while the VM is running, but I may miss something. ex: what will happen if the display size changes at runtime??\n\nIf surface can get destroyed early (while VM is running), I should better call ANativeWindow_acquire inside of create_android_surface and call ANativeWindow_release here.\n\nThat\u0027s something left for the future. I\u0027ve added a TODO comment.",
+      "parentUuid": "2ace11bf_743122ca",
       "revId": "d4520fe3a1d09fbf34d6c9887f7c3177f2c95d56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
