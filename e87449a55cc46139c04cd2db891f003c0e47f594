@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fb86cfda_df6311da",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-10T12:34:33Z",
+      "side": 1,
+      "message": "Well, some other CDDL, for vm_entry.",
+      "parentUuid": "ee479bfb_77dae106",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 32
+      },
+      "revId": "e87449a55cc46139c04cd2db891f003c0e47f594",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f11b53b9_ee70337a",
         "filename": "microdroid_manager/src/vm_secret.rs",
         "patchSetId": 1
@@ -61,6 +85,30 @@
       "side": 1,
       "message": "This is present in the \"vm_entry\" node, which will be 3rd from the end if we account for vendor partition node as well.\n\nWe could have changed this to\n```\n        ConstraintSpec::new(\n            ConstraintType::ExactMatch,\n            vec![CONFIG_DESC, INSTANCE_ID],\n            MissingAction::Fail,\n            CertIndex::FromEnd(2),\n        ),\n```\n\n`CertIndex::FromEnd` api was an optimization to ensure dice_policy_builder library does not need to lookup each entry, which is fine to use if we definitely know the entry location (for example payload will always be the last) but I\u0027m less inclined on using this for other nodes since DICE chains by design are extensible \u0026 we have seen atleast one recent project that changed to position of vm_enry DiceChainEntry from 2nd to 3rd from the end.",
       "parentUuid": "f11b53b9_ee70337a",
+      "range": {
+        "startLine": 198,
+        "startChar": 12,
+        "endLine": 198,
+        "endChar": 27
+      },
+      "revId": "e87449a55cc46139c04cd2db891f003c0e47f594",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a69ec6f8_9bd9b951",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-10T12:34:33Z",
+      "side": 1,
+      "message": "We need a way to find the nodes we care about though. By name (searching back from the end)?\n\nWe definitely shouldn\u0027t use a reserved identifier here - this is not part of standard open DICE.\n\nAnd using a non-reserved one means the semantics are specific to some node - somebody else could use the same identifier for a different purpose in a different node. They\u0027re certainly used in some of the early DICE nodes.",
+      "parentUuid": "bcde1800_f743d95a",
       "range": {
         "startLine": 198,
         "startChar": 12,
