@@ -143,8 +143,8 @@ fn main(
         RebootReason::InternalError
     })?;
 
-    let (new_instance, salt) = if cfg!(llpvm_changes)
-        && should_defer_rollback_protection(fdt)?
+    let instance_id = if cfg!(llpvm_changes) { Some(instance_id(fdt)?) } else { None };
+    let (new_instance, salt) = if should_defer_rollback_protection(fdt)?
         && verified_boot_data.has_capability(Capability::SecretkeeperProtection)
     {
         info!("Guest OS is capable of Secretkeeper protection, deferring rollback protection");
@@ -155,7 +155,7 @@ fn main(
             return Err(RebootReason::InvalidPayload);
         };
         // `new_instance` cannot be known to pvmfw
-        (false, salt_from_instance_id(fdt)?)
+        (false, salt_from_instance_id(instance_id.unwrap())?)
     } else {
         let (recorded_entry, mut instance_img, header_index) =
             get_recorded_entry(&mut pci_root, cdi_seal).map_err(|e| {
@@ -164,12 +164,16 @@ fn main(
             })?;
         let (new_instance, salt) = if let Some(entry) = recorded_entry {
             maybe_check_dice_measurements_match_entry(&dice_inputs, &entry)?;
-            let salt = if cfg!(llpvm_changes) { salt_from_instance_id(fdt)? } else { entry.salt };
+            let salt = if cfg!(llpvm_changes) {
+                salt_from_instance_id(instance_id.unwrap())?
+            } else {
+                entry.salt
+            };
             (false, salt)
         } else {
             // New instance!
             let salt = if cfg!(llpvm_changes) {
-                salt_from_instance_id(fdt)?
+                salt_from_instance_id(instance_id.unwrap())?
             } else {
                 rand::random_array().map_err(|e| {
                     error!("Failed to generated instance.img salt: {e}");
@@ -204,10 +208,12 @@ fn main(
         Cow::Owned(truncated_bcc_handover)
     };
 
-    dice_inputs.write_next_bcc(new_bcc_handover.as_ref(), &salt, next_bcc).map_err(|e| {
-        error!("Failed to derive next-stage DICE secrets: {e:?}");
-        RebootReason::SecretDerivationError
-    })?;
+    dice_inputs.write_next_bcc(new_bcc_handover.as_ref(), &salt, instance_id, next_bcc).map_err(
+        |e| {
+            error!("Failed to derive next-stage DICE secrets: {e:?}");
+            RebootReason::SecretDerivationError
+        },
+    )?;
     flush(next_bcc);
 
     let kaslr_seed = u64::from_ne_bytes(rand::random_array().map_err(|e| {
@@ -282,10 +288,9 @@ fn ensure_dice_measurements_match_entry(
 
 // Get the "salt" which is one of the input for DICE derivation.
 // This provides differentiation of secrets for different VM instances with same payloads.
-fn salt_from_instance_id(fdt: &Fdt) -> Result<Hidden, RebootReason> {
-    let id = instance_id(fdt)?;
+fn salt_from_instance_id(instance_id: &[u8]) -> Result<Hidden, RebootReason> {
     let salt = Digester::sha512()
-        .digest(&[&b"InstanceId:"[..], id].concat())
+        .digest(&[&b"InstanceId:"[..], instance_id].concat())
         .map_err(|e| {
             error!("Failed to get digest of instance-id: {e}");
             RebootReason::InternalError

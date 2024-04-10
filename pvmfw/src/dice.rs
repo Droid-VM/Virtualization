@@ -14,11 +14,14 @@
 
 //! Support for DICE derivation and BCC generation.
 
+use crate::alloc::string::ToString;
+use crate::bcc::value_to_bytes;
+use alloc::vec::Vec;
+use ciborium::cbor;
+use ciborium::Value;
 use core::mem::size_of;
-use cstr::cstr;
 use diced_open_dice::{
-    bcc_format_config_descriptor, bcc_handover_main_flow, hash, Config, DiceConfigValues, DiceMode,
-    Hash, InputValues, HIDDEN_SIZE,
+    bcc_handover_main_flow, hash, Config, DiceMode, Hash, InputValues, HIDDEN_SIZE,
 };
 use pvmfw_avb::{Capability, DebugLevel, Digest, VerifiedBootData};
 use zerocopy::AsBytes;
@@ -63,14 +66,16 @@ impl PartialInputs {
         self,
         current_bcc_handover: &[u8],
         salt: &[u8; HIDDEN_SIZE],
+        instance_id: Option<&[u8]>,
         next_bcc: &mut [u8],
     ) -> diced_open_dice::Result<()> {
-        let mut config_descriptor_buffer = [0; 128];
-        let config = self.generate_config_descriptor(&mut config_descriptor_buffer)?;
+        let config = self
+            .generate_config_descriptor(instance_id)
+            .map_err(|_| diced_open_dice::DiceError::InvalidInput)?;
 
         let dice_inputs = InputValues::new(
             self.code_hash,
-            Config::Descriptor(config),
+            Config::Descriptor(&config),
             self.auth_hash,
             self.mode,
             self.make_hidden(salt)?,
@@ -98,20 +103,25 @@ impl PartialInputs {
         hash(HiddenInput { rkp_vm_marker: self.rkp_vm_marker, salt: *salt }.as_bytes())
     }
 
-    fn generate_config_descriptor<'a>(
+    fn generate_config_descriptor(
         &self,
-        config_descriptor_buffer: &'a mut [u8],
-    ) -> diced_open_dice::Result<&'a [u8]> {
-        let config_values = DiceConfigValues {
-            component_name: Some(cstr!("vm_entry")),
-            security_version: if cfg!(dice_changes) { Some(self.security_version) } else { None },
-            rkp_vm_marker: self.rkp_vm_marker,
-            ..Default::default()
-        };
-        let config_descriptor_size =
-            bcc_format_config_descriptor(&config_values, config_descriptor_buffer)?;
-        let config = &config_descriptor_buffer[..config_descriptor_size];
-        Ok(config)
+        instance_id: Option<&[u8]>,
+    ) -> Result<Vec<u8>, ciborium::value::Error> {
+        let mut config = Vec::new();
+        config.push((cbor!(-70002)?, cbor!("vm_entry")?));
+        if cfg!(dice_changes) {
+            config.push((cbor!(-70005)?, cbor!(self.security_version)?));
+        }
+        if self.rkp_vm_marker {
+            config.push((cbor!(-70006)?, Value::Null))
+        }
+        if let Some(instance_id) = instance_id {
+            // TODO: Confirm this is not reserved
+            // ensure this is 64 bytes
+            config.push((cbor!(-70007)?, Value::from(instance_id)));
+        }
+        value_to_bytes(&Value::Map(config))
+            .map_err(|_| ciborium::value::Error::Custom("Error in serialization".to_string()))
     }
 }
 
@@ -220,11 +230,10 @@ mod tests {
     }
 
     fn decode_config_descriptor(inputs: &PartialInputs) -> HashMap<i64, Value> {
-        let mut buffer = [0; 128];
-        let config_descriptor = inputs.generate_config_descriptor(&mut buffer).unwrap();
+        let config_descriptor = inputs.generate_config_descriptor([0u8; 64]).unwrap();
 
         let cbor_map =
-            cbor_util::deserialize::<Value>(config_descriptor).unwrap().into_map().unwrap();
+            cbor_util::deserialize::<Value>(&config_descriptor).unwrap().into_map().unwrap();
 
         cbor_map
             .into_iter()
