@@ -42,6 +42,7 @@ const AUTHORITY_HASH: i64 = -4670549;
 const MODE: i64 = -4670551;
 const CONFIG_DESC: i64 = -4670548;
 const SECURITY_VERSION: i64 = -70005;
+const INSTANCE_ID: i64 = -70007;
 const SUBCOMPONENT_DESCRIPTORS: i64 = -71002;
 const SUBCOMPONENT_SECURITY_VERSION: i64 = 2;
 const SUBCOMPONENT_AUTHORITY_HASH: i64 = 4;
@@ -169,8 +170,11 @@ impl VmSecret {
 //    components may chose to prevent booting of rollback images for ex, ABL is expected to provide
 //    rollback protection of pvmfw. Such components may chose to not put SECURITY_VERSION in the
 //    corresponding DiceChainEntry.
-//  4. For each Subcomponent on the last DiceChainEntry (which corresponds to VM payload, See
-//     microdroid_manager/src/vm_config.cddl):
+// 4. ExactMatch on INSTANCE_ID (Optional): The secrets will be inaccessible to another instance. An
+//    adversary without access to the instance-id of target instance cannot access its secret. This
+//    is optional because instance-id is not expected to be part of all DiceChainEntry.
+// 5. For each Subcomponent on the last DiceChainEntry (which corresponds to VM payload, See
+//    microdroid_manager/src/vm_config.cddl):
 //       - GreaterOrEqual on SECURITY_VERSION (Required)
 //       - ExactMatch on AUTHORITY_HASH (Required).
 fn sealing_policy(dice: &[u8]) -> Result<Vec<u8>, String> {
@@ -185,6 +189,12 @@ fn sealing_policy(dice: &[u8]) -> Result<Vec<u8>, String> {
             ConstraintType::ExactMatch,
             vec![MODE],
             MissingAction::Fail,
+            CertIndex::All,
+        ),
+        ConstraintSpec::new(
+            ConstraintType::ExactMatch,
+            vec![CONFIG_DESC, INSTANCE_ID],
+            MissingAction::Ignore,
             CertIndex::All,
         ),
         ConstraintSpec::new(
