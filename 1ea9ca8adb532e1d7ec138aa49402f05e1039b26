@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9367dc9d_39d247fc",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-10T16:15:27Z",
+      "side": 1,
+      "message": "I wonder if all this logic should live in dice.rs - the code here doesn\u0027t care if vendor_module_exists.\n\nThe asserts here are just a self-check; do we need them?",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 5
+      },
+      "revId": "1ea9ca8adb532e1d7ec138aa49402f05e1039b26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca4a67c7_0c448169",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-10T16:15:27Z",
+      "side": 1,
+      "message": "Should we be similarly checking that the vendor module node has the expected contents?\n\nOr including the vendor image info in the attestation cert extension?",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 34
+      },
+      "revId": "1ea9ca8adb532e1d7ec138aa49402f05e1039b26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "355716c5_e1c3a655",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-10T16:15:27Z",
+      "side": 1,
+      "message": "Do we need this logging?",
+      "range": {
+        "startLine": 100,
+        "startChar": 5,
+        "endLine": 100,
+        "endChar": 64
+      },
+      "revId": "1ea9ca8adb532e1d7ec138aa49402f05e1039b26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93d5ca21_687b002f",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-10T16:15:27Z",
+      "side": 1,
+      "message": "It feels wrong to make transporting this bool the caller\u0027s problem.",
+      "range": {
+        "startLine": 193,
+        "startChar": 12,
+        "endLine": 193,
+        "endChar": 16
+      },
+      "revId": "1ea9ca8adb532e1d7ec138aa49402f05e1039b26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbaa713c_8fd9545f",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-10T16:15:27Z",
+      "side": 1,
+      "message": "I don\u0027t think this is a CTS - we\u0027re only exercising test APIs.",
+      "range": {
+        "startLine": 247,
+        "startChar": 0,
+        "endLine": 247,
+        "endChar": 57
+      },
+      "revId": "1ea9ca8adb532e1d7ec138aa49402f05e1039b26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
