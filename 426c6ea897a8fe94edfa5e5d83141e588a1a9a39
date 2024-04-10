@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee32a4d0_3b0d6695",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-04-10T07:14:11Z",
+      "side": 1,
+      "message": "Given that the original complaint from the compiler was about the lifetime of `ZEROED_DATA`, can\u0027t all issues listed in the commit message (which are currently breaking the build, hence PS-2) be avoided with\n```suggestion\n    let zeroed_data \u003d unsafe { \u0026mut *addr_of_mut!(ZEROED_DATA) };\n```\nwhich loses (well, redefines) the lifetime without changing the effective type of `zeroed_data`?",
+      "range": {
+        "startLine": 142,
+        "startChar": 31,
+        "endLine": 142,
+        "endChar": 42
+      },
+      "revId": "426c6ea897a8fe94edfa5e5d83141e588a1a9a39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
