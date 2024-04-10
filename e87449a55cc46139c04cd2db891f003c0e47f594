@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee479bfb_77dae106",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-10T11:54:18Z",
+      "side": 1,
+      "message": "That\u0027s in the reserved range for the Android Profile for DICE.\n\nYou need to use one of the -7100x values.\n\nAlso, you need to update:\n- The \"Proposal for VM DICE Chain Content\" doc\n- microdroid_manager/src/vm_config.cddl",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 32
+      },
+      "revId": "e87449a55cc46139c04cd2db891f003c0e47f594",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f11b53b9_ee70337a",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-10T11:54:18Z",
+      "side": 1,
+      "message": "This is in the payload node only, so shouldn\u0027t it be PAYLOAD_INDEX_FROM_END?",
+      "range": {
+        "startLine": 198,
+        "startChar": 12,
+        "endLine": 198,
+        "endChar": 27
+      },
+      "revId": "e87449a55cc46139c04cd2db891f003c0e47f594",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
