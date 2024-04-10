@@ -16,9 +16,7 @@
 //! client VM.
 
 use crate::cert;
-use crate::dice::{
-    validate_client_vm_dice_chain_prefix_match, ClientVmDiceChain, DiceChainEntryPayload,
-};
+use crate::dice::{ClientVmDiceChain, DiceChainEntryPayload};
 use crate::keyblob::decrypt_private_key;
 use alloc::vec::Vec;
 use bssl_avf::{rand_bytes, sha256, Digester, EcKey, PKey};
@@ -28,7 +26,7 @@ use core::result;
 use coset::{AsCborValue, CborSerializable, CoseSign, CoseSign1};
 use der::{Decode, Encode};
 use diced_open_dice::{DiceArtifacts, HASH_SIZE};
-use log::{error, info};
+use log::{debug, error, info};
 use microdroid_kernel_hashes::{HASH_SIZE as KERNEL_HASH_SIZE, OS_HASHES};
 use service_vm_comm::{ClientVmAttestationParams, Csr, CsrPayload, RequestProcessingError};
 use x509_cert::{certificate::Certificate, name::Name};
@@ -41,6 +39,7 @@ const ATTESTATION_KEY_SIGNATURE_INDEX: usize = 1;
 pub(super) fn request_attestation(
     params: ClientVmAttestationParams,
     dice_artifacts: &dyn DiceArtifacts,
+    vendor_hashtree_root_digest: Option<&[u8]>,
 ) -> Result<Vec<u8>> {
     let csr = Csr::from_cbor_slice(&params.csr)?;
     let cose_sign = CoseSign::from_slice(&csr.signed_csr_payload)?;
@@ -54,12 +53,43 @@ pub(super) fn request_attestation(
     let service_vm_dice_chain =
         dice_artifacts.bcc().ok_or(RequestProcessingError::MissingDiceChain)?;
     let service_vm_dice_chain = parse_value_array(service_vm_dice_chain, "service_vm_dice_chain")?;
+    if service_vm_dice_chain.len() < 3 {
+        // The service VM's DICE chain must contain the root key and at least two other entries
+        // that describe:
+        //   - pvmfw
+        //   - Service VM kernel
+        error!(
+            "The service VM DICE chain must contain at least three entries. Got '{}' entries",
+            service_vm_dice_chain.len()
+        );
+        return Err(RequestProcessingError::InternalError);
+    }
     let client_vm_dice_chain = parse_value_array(&csr.dice_cert_chain, "client_vm_dice_chain")?;
     validate_client_vm_dice_chain_prefix_match(&client_vm_dice_chain, &service_vm_dice_chain)?;
+    let vendor_module_exists =
+        vendor_module_exists(client_vm_dice_chain.len(), service_vm_dice_chain.len())?;
     // Validates the signatures in the Client VM DICE chain and extracts the partially decoded
     // DiceChainEntryPayloads.
-    let client_vm_dice_chain =
-        ClientVmDiceChain::validate_signatures_and_parse_dice_chain(client_vm_dice_chain)?;
+    let client_vm_dice_chain = ClientVmDiceChain::validate_signatures_and_parse_dice_chain(
+        client_vm_dice_chain,
+        vendor_module_exists,
+    )?;
+    if vendor_module_exists {
+        let Some(vendor_hashtree_root_digest_from_dt) = vendor_hashtree_root_digest else {
+            error!(
+                "The vendor module is present in the DICE chain, \
+            but the vendor_hashtree_root_digest is not provided in the DT"
+            );
+            return Err(RequestProcessingError::NoVendorHashTreeRootDigestInDT);
+        };
+        validate_vendor_module_code_hash(
+            // This unwrap is safe because the vendor module is present in the DICE chain.
+            client_vm_dice_chain.vendor_module().unwrap(),
+            vendor_hashtree_root_digest_from_dt,
+        )?;
+    } else {
+        assert!(client_vm_dice_chain.vendor_module().is_none());
+    }
 
     // The last entry in the service VM DICE chain describes the service VM, which should
     // be signed with the same key as the kernel image.
@@ -140,6 +170,21 @@ fn ecdsa_sign(key: &EcKey, message: &[u8]) -> bssl_avf::Result<Vec<u8>> {
     key.ecdsa_sign(&digest)
 }
 
+fn validate_vendor_module_code_hash(
+    vendor_module: &DiceChainEntryPayload,
+    vendor_hashtree_root_digest_from_dt: &[u8],
+) -> Result<()> {
+    if Digester::sha512().digest(vendor_hashtree_root_digest_from_dt)? == vendor_module.code_hash {
+        Ok(())
+    } else {
+        error!(
+            "The vendor module code hash in the Client VM DICE chain does \
+        not match the expected value from the DT"
+        );
+        Err(RequestProcessingError::InvalidVendorModule)
+    }
+}
+
 /// Validates that the authority hash of the Microdroid kernel in the Client VM DICE chain
 /// matches the authority hash of the service VM entry in the service VM DICE chain, because
 /// the Microdroid kernel is signed with the same key as the one used for the service VM.
@@ -197,4 +242,50 @@ fn expected_kernel_authority_hash(service_vm_entry: &Value) -> Result<[u8; HASH_
     })?;
     let service_vm = DiceChainEntryPayload::from_slice(&payload)?;
     Ok(service_vm.authority_hash)
+}
+
+fn validate_client_vm_dice_chain_prefix_match(
+    client_vm_dice_chain: &[Value],
+    service_vm_dice_chain: &[Value],
+) -> Result<()> {
+    // Ignores the last entry that describes service VM
+    let entries_up_to_pvmfw = &service_vm_dice_chain[0..(service_vm_dice_chain.len() - 1)];
+    if client_vm_dice_chain.get(0..entries_up_to_pvmfw.len()) == Some(entries_up_to_pvmfw) {
+        Ok(())
+    } else {
+        error!(
+            "The client VM's DICE chain does not match service VM's DICE chain up to \
+             the pvmfw entry"
+        );
+        Err(RequestProcessingError::InvalidDiceChain)
+    }
+}
+
+fn vendor_module_exists(
+    client_vm_dice_chain_len: usize,
+    service_vm_dice_chain_len: usize,
+) -> Result<bool> {
+    let entries_up_to_pvmfw_len = service_vm_dice_chain_len - 1;
+    // Client VM DICE chain = entries_up_to_pvmfw
+    //    + Vendor module entry (exists only when the vendor module is present)
+    //    + Microdroid kernel entry (added in pvmfw)
+    //    + Apk/Apexes entry (added in microdroid)
+    match client_vm_dice_chain_len.checked_sub(entries_up_to_pvmfw_len) {
+        Some(2) => {
+            debug!("The vendor module entry is not present in the client VM's DICE chain");
+            Ok(false)
+        }
+        Some(3) => {
+            info!("The vendor module entry is present in the client VM's DICE chain");
+            Ok(true)
+        }
+        _ => {
+            error!(
+                "The client VM's DICE chain must contain two or three extra entries. \
+            Service VM DICE chain: {} entries, client VM DICE chain: {} entries",
+                service_vm_dice_chain_len, client_vm_dice_chain_len
+            );
+            Err(RequestProcessingError::InvalidDiceChain)
+        }
+    }
 }

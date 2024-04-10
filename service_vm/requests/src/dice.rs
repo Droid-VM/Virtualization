@@ -31,7 +31,7 @@ use coset::{
     Label,
 };
 use diced_open_dice::{DiceMode, HASH_SIZE};
-use log::error;
+use log::{debug, error};
 use service_vm_comm::RequestProcessingError;
 
 type Result<T> = result::Result<T, RequestProcessingError>;
@@ -52,6 +52,7 @@ const SUB_COMPONENT_AUTHORITY_HASH: i64 = 4;
 
 const MICRODROID_KERNEL_COMPONENT_NAME: &str = "vm_entry";
 const MICRODROID_PAYLOAD_COMPONENT_NAME: &str = "Microdroid payload";
+const VENDOR_MODULE_COMPONENT_NAME: &str = "Microdroid vendor";
 
 /// Represents a partially decoded `DiceCertChain` from the client VM.
 /// The whole chain is defined as following:
@@ -63,6 +64,7 @@ const MICRODROID_PAYLOAD_COMPONENT_NAME: &str = "Microdroid payload";
 #[derive(Debug, Clone)]
 pub(crate) struct ClientVmDiceChain {
     payloads: Vec<DiceChainEntryPayload>,
+    vendor_module_offset: usize,
 }
 
 impl ClientVmDiceChain {
@@ -75,6 +77,7 @@ impl ClientVmDiceChain {
     /// Returns a partially decoded client VM's DICE chain if the verification succeeds.
     pub(crate) fn validate_signatures_and_parse_dice_chain(
         mut client_vm_dice_chain: Vec<Value>,
+        vendor_module_exists: bool,
     ) -> Result<Self> {
         let root_public_key =
             CoseKey::from_cbor_value(client_vm_dice_chain.remove(0))?.try_into()?;
@@ -93,17 +96,19 @@ impl ClientVmDiceChain {
             payloads.push(payload);
             previous_public_key = &payloads.last().unwrap().subject_public_key;
         }
+        let vendor_module_offset = if vendor_module_exists { 1 } else { 0 };
         // After successfully calling `validate_client_vm_dice_chain_prefix_match`, we can be
         // certain that the client VM's DICE chain must contain at least three entries that
         // describe:
         // - pvmfw
         // - Microdroid kernel
+        // - Vendor module (if exists)
         // - Apk/Apexes
         assert!(
-            payloads.len() >= 3,
+            payloads.len() >= 3 + vendor_module_offset,
             "The client VM DICE chain must contain at least three DiceChainEntryPayloads"
         );
-        let chain = Self { payloads };
+        let chain = Self { payloads, vendor_module_offset };
         chain.validate_microdroid_components_names()?;
         Ok(chain)
     }
@@ -112,26 +117,52 @@ impl ClientVmDiceChain {
         let microdroid_kernel_name = &self.microdroid_kernel().config_descriptor.component_name;
         if MICRODROID_KERNEL_COMPONENT_NAME != microdroid_kernel_name {
             error!(
-                "The second to last entry in the client VM DICE chain must describe the \
-                    Microdroid kernel. Got {}",
-                microdroid_kernel_name
+                "The microdroid kernel entry in the client VM DICE chain must describe the \
+                    Microdroid kernel. Got '{}'. All entries: {:?}",
+                microdroid_kernel_name,
+                self.all_entries_component_names()
             );
             return Err(RequestProcessingError::InvalidDiceChain);
         }
+
+        if let Some(vendor_module) = self.vendor_module() {
+            let vendor_module_name = &vendor_module.config_descriptor.component_name;
+            if VENDOR_MODULE_COMPONENT_NAME != vendor_module_name {
+                error!(
+                    "The vendor module entry in the client VM DICE chain must describe the \
+                        vendor module. Got '{}'. All entries: {:?}",
+                    vendor_module_name,
+                    self.all_entries_component_names()
+                );
+                return Err(RequestProcessingError::InvalidDiceChain);
+            }
+        }
+
         let microdroid_payload_name = &self.microdroid_payload().config_descriptor.component_name;
         if MICRODROID_PAYLOAD_COMPONENT_NAME != microdroid_payload_name {
             error!(
                 "The last entry in the client VM DICE chain must describe the Microdroid \
-                    payload. Got {}",
-                microdroid_payload_name
+                    payload. Got '{}'. All entries: {:?}",
+                microdroid_payload_name,
+                self.all_entries_component_names()
             );
             return Err(RequestProcessingError::InvalidDiceChain);
         }
+
+        debug!("All entries in the client VM DICE chain have correct component names");
         Ok(())
     }
 
     pub(crate) fn microdroid_kernel(&self) -> &DiceChainEntryPayload {
-        &self.payloads[self.payloads.len() - 2]
+        &self.payloads[self.payloads.len() - 2 - self.vendor_module_offset]
+    }
+
+    pub(crate) fn vendor_module(&self) -> Option<&DiceChainEntryPayload> {
+        if self.vendor_module_offset == 1 {
+            Some(&self.payloads[self.payloads.len() - 2])
+        } else {
+            None
+        }
     }
 
     pub(crate) fn microdroid_payload(&self) -> &DiceChainEntryPayload {
@@ -146,41 +177,10 @@ impl ClientVmDiceChain {
     pub(crate) fn all_entries_are_secure(&self) -> bool {
         self.payloads.iter().all(|p| p.mode == DiceMode::kDiceModeNormal)
     }
-}
 
-/// Validates that the `client_vm_dice_chain` matches the `service_vm_dice_chain` up to the pvmfw
-/// entry.
-///
-/// Returns `Ok(())` if the verification succeeds.
-pub(crate) fn validate_client_vm_dice_chain_prefix_match(
-    client_vm_dice_chain: &[Value],
-    service_vm_dice_chain: &[Value],
-) -> Result<()> {
-    if service_vm_dice_chain.len() < 3 {
-        // The service VM's DICE chain must contain the root key and at least two other entries
-        // that describe:
-        //   - pvmfw
-        //   - Service VM kernel
-        error!("The service VM DICE chain must contain at least three entries");
-        return Err(RequestProcessingError::InternalError);
+    fn all_entries_component_names(&self) -> Vec<&str> {
+        self.payloads.iter().map(|p| p.config_descriptor.component_name.as_str()).collect()
     }
-    // Ignores the last entry that describes service VM
-    let entries_up_to_pvmfw = &service_vm_dice_chain[0..(service_vm_dice_chain.len() - 1)];
-    if entries_up_to_pvmfw.len() + 2 != client_vm_dice_chain.len() {
-        // Client VM DICE chain = entries_up_to_pvmfw
-        //    + Microdroid kernel entry (added in pvmfw)
-        //    + Apk/Apexes entry (added in microdroid)
-        error!("The client VM's DICE chain must contain exactly two extra entries");
-        return Err(RequestProcessingError::InvalidDiceChain);
-    }
-    if entries_up_to_pvmfw != &client_vm_dice_chain[0..entries_up_to_pvmfw.len()] {
-        error!(
-            "The client VM's DICE chain does not match service VM's DICE chain up to \
-             the pvmfw entry"
-        );
-        return Err(RequestProcessingError::InvalidDiceChain);
-    }
-    Ok(())
 }
 
 #[derive(Debug, Clone)]
