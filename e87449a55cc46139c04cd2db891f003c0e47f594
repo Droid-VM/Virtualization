@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5896ac73_5b1e9ccc",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-10T12:50:51Z",
+      "side": 1,
+      "message": "Maybe? Not totally convinced. They\u0027re owned \u0026 consumed by different components.",
+      "parentUuid": "0d3ce5c0_9df11af2",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 32
+      },
+      "revId": "e87449a55cc46139c04cd2db891f003c0e47f594",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f11b53b9_ee70337a",
         "filename": "microdroid_manager/src/vm_secret.rs",
         "patchSetId": 1
@@ -157,6 +181,30 @@
       "side": 1,
       "message": "\u003e And using a non-reserved one means the semantics are specific to some node - somebody else could use the same identifier for a different purpose in a different node\n\nAck, makes sense. I\u0027ll change `CertIndex::FromEnd` to `CertIndex::ByName`\n\n\nComponent name is also optional though, but I think we can mandate it for pVMs\u0027 trailing certificated (built by firmware \u0026 OS)?",
       "parentUuid": "a69ec6f8_9bd9b951",
+      "range": {
+        "startLine": 198,
+        "startChar": 12,
+        "endLine": 198,
+        "endChar": 27
+      },
+      "revId": "e87449a55cc46139c04cd2db891f003c0e47f594",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38729f57_1351d2e1",
+        "filename": "microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-10T12:50:51Z",
+      "side": 1,
+      "message": "For the ones that we create I think we can rely on it.\n(And we search from the end to make sure we don\u0027t accidentally match on one we don\u0027t own.)",
+      "parentUuid": "bb1b73f3_42306cd6",
       "range": {
         "startLine": 198,
         "startChar": 12,
