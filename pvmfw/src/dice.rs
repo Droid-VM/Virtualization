@@ -14,8 +14,8 @@
 
 //! Support for DICE derivation and BCC generation.
 
-use crate::alloc::string::ToString;
 use crate::bcc::value_to_bytes;
+use alloc::string::ToString;
 use alloc::vec::Vec;
 use ciborium::cbor;
 use ciborium::Value;
@@ -67,6 +67,7 @@ impl PartialInputs {
         current_bcc_handover: &[u8],
         salt: &[u8; HIDDEN_SIZE],
         instance_id: Option<&[u8]>,
+        deferred_rollback_protection: bool,
         next_bcc: &mut [u8],
     ) -> diced_open_dice::Result<()> {
         let config = self
@@ -78,16 +79,23 @@ impl PartialInputs {
             Config::Descriptor(&config),
             self.auth_hash,
             self.mode,
-            self.make_hidden(salt)?,
+            self.make_hidden(salt, deferred_rollback_protection)?,
         );
         let _ = bcc_handover_main_flow(current_bcc_handover, &dice_inputs, next_bcc)?;
         Ok(())
     }
 
-    fn make_hidden(&self, salt: &[u8; HIDDEN_SIZE]) -> diced_open_dice::Result<[u8; HIDDEN_SIZE]> {
+    fn make_hidden(
+        &self,
+        salt: &[u8; HIDDEN_SIZE],
+        deferred_rollback_protection: bool,
+    ) -> diced_open_dice::Result<[u8; HIDDEN_SIZE]> {
         // We want to make sure we get a different sealing CDI for:
         // - VMs with different salt values
         // - An RKP VM and any other VM (regardless of salt)
+        // - depending on whether rollback protection has been deferred to payload. This ensures the
+        //   adversary cannot leak the secrets by setting using old images & setting
+        //   deferred_rollback_protection.
         // The hidden input for DICE affects the sealing CDI (but the values in the config
         // descriptor do not).
         // Since the hidden input has to be a fixed size, create it as a hash of the values we
@@ -97,10 +105,16 @@ impl PartialInputs {
         struct HiddenInput {
             rkp_vm_marker: bool,
             salt: [u8; HIDDEN_SIZE],
+            deferred_rollback_protection: bool,
         }
-        // TODO(b/291213394): Include `defer_rollback_protection` flag in the Hidden Input to
-        // differentiate the secrets in both cases.
-        hash(HiddenInput { rkp_vm_marker: self.rkp_vm_marker, salt: *salt }.as_bytes())
+        hash(
+            HiddenInput {
+                rkp_vm_marker: self.rkp_vm_marker,
+                salt: *salt,
+                deferred_rollback_protection,
+            }
+            .as_bytes(),
+        )
     }
 
     fn generate_config_descriptor(
