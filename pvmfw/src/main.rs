@@ -201,12 +201,18 @@ fn main(
         Cow::Owned(truncated_bcc_handover)
     };
 
-    dice_inputs.write_next_bcc(new_bcc_handover.as_ref(), &salt, instance_hash, next_bcc).map_err(
-        |e| {
+    dice_inputs
+        .write_next_bcc(
+            new_bcc_handover.as_ref(),
+            &salt,
+            instance_hash,
+            defer_rollback_protection,
+            next_bcc,
+        )
+        .map_err(|e| {
             error!("Failed to derive next-stage DICE secrets: {e:?}");
             RebootReason::SecretDerivationError
-        },
-    )?;
+        })?;
     flush(next_bcc);
 
     let kaslr_seed = u64::from_ne_bytes(rand::random_array().map_err(|e| {
