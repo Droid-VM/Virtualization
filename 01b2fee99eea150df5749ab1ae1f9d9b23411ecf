@@ -166,6 +166,30 @@
       },
       "revId": "01b2fee99eea150df5749ab1ae1f9d9b23411ecf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7348358a_b8a8626d",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualizationService.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-04-11T08:10:44Z",
+      "side": 1,
+      "message": "\u003e We can\u0027t get the return code of the exec (if there even is one), but we should be able to check if the PID is running and if not how it failed via waitpid(..., WNOHANG).\n\nBTW, I\u0027ve checked whether child process is exited or not with `waitpid` w/ `WNOHANG`, but the process still alives after virtmgr drop `ready_fd` \u0026 `waitFd` reads it in `nativeSpawn`.",
+      "parentUuid": "c4dfb2fb_78a009a7",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 9
+      },
+      "revId": "01b2fee99eea150df5749ab1ae1f9d9b23411ecf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
