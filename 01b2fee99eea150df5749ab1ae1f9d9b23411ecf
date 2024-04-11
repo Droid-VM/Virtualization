@@ -142,6 +142,30 @@
       },
       "revId": "01b2fee99eea150df5749ab1ae1f9d9b23411ecf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4dfb2fb_78a009a7",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualizationService.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-04-11T04:35:25Z",
+      "side": 1,
+      "message": "\u003e Remove the explicit permission check\n\u003e Change the throw when nativeConnect fails to SecurityException.\n\nAdded a new patchset for this one.\n\n\u003e Improve the precision by changing nativeSpawn in a future CL?\n\nI think I should do this from now on. Will make this on the following change.",
+      "parentUuid": "40f0e498_82a28b9c",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 9
+      },
+      "revId": "01b2fee99eea150df5749ab1ae1f9d9b23411ecf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
