@@ -286,6 +286,30 @@
       },
       "revId": "01b2fee99eea150df5749ab1ae1f9d9b23411ecf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3179521_c0f06e86",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualizationService.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-11T13:54:11Z",
+      "side": 1,
+      "message": "I see. Well, that does seem to simplify things.\n\nMaybe we need a base class above MicrodroidDeviceTestBase that has only the things we do want in MicrodroidTestAppNoPerm.",
+      "parentUuid": "13aa399a_0a7ac8b5",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 9
+      },
+      "revId": "01b2fee99eea150df5749ab1ae1f9d9b23411ecf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
