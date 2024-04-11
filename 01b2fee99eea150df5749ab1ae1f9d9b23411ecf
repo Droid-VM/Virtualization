@@ -214,6 +214,30 @@
       },
       "revId": "01b2fee99eea150df5749ab1ae1f9d9b23411ecf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c7950f8_dc297d3f",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualizationService.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-04-11T12:32:38Z",
+      "side": 1,
+      "message": "\u003e Because MicrodroidTestAppNoPerm doesn\u0027t use permission MANAGE_VIRTUAL_MACHINE unlike MicrodroidTestApp.\n\nDoes MicrodroidTestAppNoPerm need to inherit the MicrodroidDeviceTestBase in the first place?",
+      "parentUuid": "f62507c1_68f81464",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 9
+      },
+      "revId": "01b2fee99eea150df5749ab1ae1f9d9b23411ecf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
