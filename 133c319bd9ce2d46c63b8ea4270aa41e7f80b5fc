@@ -16,6 +16,24 @@
       "message": "This fix is good but it doesn\u0027t seem ideal to unset this variable whenever we create a RunUtil instance. Can\u0027t we fix TradeFed?",
       "revId": "133c319bd9ce2d46c63b8ea4270aa41e7f80b5fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fa7ce3d_b2810977",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-11T01:04:49Z",
+      "side": 1,
+      "message": "That\u0027s ideal, but it\u0027s not bad for us to have this here, for the case where tradefed is outdated or so.",
+      "parentUuid": "42db3403_d3823dd1",
+      "revId": "133c319bd9ce2d46c63b8ea4270aa41e7f80b5fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
