@@ -190,6 +190,30 @@
       },
       "revId": "01b2fee99eea150df5749ab1ae1f9d9b23411ecf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f62507c1_68f81464",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualizationService.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-11T09:11:12Z",
+      "side": 1,
+      "message": "Gah! Synchronisation is hard.\nMaybe rather than just closing the pipe to signal ready, we should send a single byte down it? That way we can distinguish close due to failure from close due to success.",
+      "parentUuid": "7348358a_b8a8626d",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 9
+      },
+      "revId": "01b2fee99eea150df5749ab1ae1f9d9b23411ecf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
