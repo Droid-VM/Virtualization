@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50134a78_bd9e20c9",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-11T16:47:39Z",
+      "side": 1,
+      "message": "Given how generic this is, we should probably pass fdt, and extract what we want from it in the relevant request.",
+      "range": {
+        "startLine": 182,
+        "startChar": 67,
+        "endLine": 182,
+        "endChar": 94
+      },
+      "revId": "0410b1128af934fdb8267d32637e0f977c37abd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5b74cb2_20c3e5be",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-11T16:47:39Z",
+      "side": 1,
+      "message": "This seems good, but slightly unrelated?",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 5
+      },
+      "revId": "0410b1128af934fdb8267d32637e0f977c37abd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cee6f49_085fd01e",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-11T16:47:39Z",
+      "side": 1,
+      "message": "We could make this more obvious by replacing `if vendor_module_exists` with `if let Some(vendor_module) \u003d client_vm_dice_chain.vendor_module()`.",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 58
+      },
+      "revId": "0410b1128af934fdb8267d32637e0f977c37abd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a0d2221_6fd7d146",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-11T16:47:39Z",
+      "side": 1,
+      "message": "This method is already really long, and it\u0027s getting longer.\nCould we extract some/all of this to a helper method?",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 5
+      },
+      "revId": "0410b1128af934fdb8267d32637e0f977c37abd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "499a831b_4805d316",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-11T16:47:39Z",
+      "side": 1,
+      "message": "What is it an offset from?",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 24
+      },
+      "revId": "0410b1128af934fdb8267d32637e0f977c37abd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f85b50c_52e200ff",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-11T16:47:39Z",
+      "side": 1,
+      "message": "Maybe we should just compute these in validate_... and store them in fields?",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 5
+      },
+      "revId": "0410b1128af934fdb8267d32637e0f977c37abd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

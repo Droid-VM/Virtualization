@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b395b31_ab184cd3",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-11T16:47:39Z",
+      "side": 1,
+      "message": "It\u0027s a lot easier for me to review a CL when it is complete.",
+      "parentUuid": "6189e221_ff8861db",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 34
+      },
+      "revId": "1ea9ca8adb532e1d7ec138aa49402f05e1039b26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "355716c5_e1c3a655",
@@ -226,6 +250,30 @@
       "side": 1,
       "message": "Actually this test does call into the real VM attestation API the same way as the CTS test `vmAttestationWhenRemoteAttestationIsSupported` below. The difference is that this test calls the API with vendor module.",
       "parentUuid": "fbaa713c_8fd9545f",
+      "range": {
+        "startLine": 247,
+        "startChar": 0,
+        "endLine": 247,
+        "endChar": 57
+      },
+      "revId": "1ea9ca8adb532e1d7ec138aa49402f05e1039b26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddafeab7_381ec74e",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-11T16:47:39Z",
+      "side": 1,
+      "message": "Ah, and buildVmConfigWithVendor has an assume for the vendor modules feature.",
+      "parentUuid": "8569cc85_b0d6c5af",
       "range": {
         "startLine": 247,
         "startChar": 0,
