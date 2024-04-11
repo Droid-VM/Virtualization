@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4a50b9e_4a21d716",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-11T09:37:52Z",
+      "side": 1,
+      "message": "these don\u0027t have to be Option because you set the default values in the aidl file.",
+      "range": {
+        "startLine": 163,
+        "startChar": 29,
+        "endLine": 163,
+        "endChar": 91
+      },
+      "revId": "0741448320d9eac34782118dd132d5ddeedddbf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a463ee19_16a609c1",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-11T09:37:52Z",
+      "side": 1,
+      "message": "please guard these two behind the build flag. perhaps not in this CL, but in the same series.",
+      "range": {
+        "startLine": 967,
+        "startChar": 0,
+        "endLine": 989,
+        "endChar": 5
+      },
+      "revId": "0741448320d9eac34782118dd132d5ddeedddbf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
