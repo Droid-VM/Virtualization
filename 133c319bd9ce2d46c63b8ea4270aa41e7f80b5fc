@@ -34,6 +34,24 @@
       "parentUuid": "42db3403_d3823dd1",
       "revId": "133c319bd9ce2d46c63b8ea4270aa41e7f80b5fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc28a6e4_c1e4c562",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2024-04-11T01:13:25Z",
+      "side": 1,
+      "message": "I do think it\u0027d be better to leave LD_LIBRARY_PATH unset in the first place. It\u0027s not generally correct in the Android/TradeFed context to set LD_LIBRARY_PATH to a particular build of libc++.so, and it breaks the better convention of using DT_RUNPATH to select an adjacent libc++.so.\n\n - http://b/332593805#comment9\n - http://b/332593805#comment10\n\nI think we would remove this line, http://google3/wireless/android/test_tools/tradefed_docker/tradefed/Dockerfile;l\u003d248;rcl\u003d609768634.",
+      "parentUuid": "42db3403_d3823dd1",
+      "revId": "133c319bd9ce2d46c63b8ea4270aa41e7f80b5fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
