@@ -17,22 +17,17 @@
     <option name="test-suite-tag" value="apct" />
     <option name="test-suite-tag" value="apct-instrumentation" />
 
-    <!-- Need to disable SELinux policy to allow com.android.rkpdapp to run a VM. -->
+    <!-- Need to disable SELinux policy to access the network status. Without it, we got
+      the following error:
+      avc:  denied  { open } for  comm="roidJUnitRunner" path="/dev/__properties__/u:object_r:remote_prov_prop:s0" dev="tmpfs" ino=325 scontext=u:r:untrusted_app:s0:c148,c256,c512,c768 tcontext=u:object_r:remote_prov_prop:s0 tclass=file permissive=1 app=com.android.virt.rkpd.vm_attestation.testapp
+    -->
     <target_preparer class="com.android.tradefed.targetprep.DisableSELinuxTargetPreparer"/>
 
     <target_preparer class="com.android.tradefed.targetprep.suite.SuiteApkInstaller">
         <option name="test-file-name" value="AvfRkpdVmAttestationTestApp.apk" />
-        <option name="test-file-name" value="avf-rkpdapp.apk" />
     </target_preparer>
 
     <test class="com.android.tradefed.testtype.AndroidJUnitTest" >
         <option name="package" value="com.android.virt.rkpd.vm_attestation.testapp" />
     </test>
-
-    <!-- Only run if RKPD mainline module is installed -->
-    <object type="module_controller"
-            class="com.android.tradefed.testtype.suite.module.MainlineTestModuleController">
-        <option name="enable" value="true" />
-        <option name="mainline-module-package-name" value="com.android.rkpd" />
-    </object>
 </configuration>
