@@ -262,6 +262,30 @@
       },
       "revId": "01b2fee99eea150df5749ab1ae1f9d9b23411ecf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13aa399a_0a7ac8b5",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualizationService.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-04-11T13:37:52Z",
+      "side": 1,
+      "message": "Currently we run MicrodroidTestAppNoPerm only on microdroid kernel. I think there is no need to run the no permission tests on all available kernels. The test doesn\u0027t execute any code in guest.",
+      "parentUuid": "96cb7405_f56ea1aa",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 9
+      },
+      "revId": "01b2fee99eea150df5749ab1ae1f9d9b23411ecf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
