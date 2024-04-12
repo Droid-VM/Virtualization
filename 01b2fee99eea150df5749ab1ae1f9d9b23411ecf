@@ -334,6 +334,30 @@
       },
       "revId": "01b2fee99eea150df5749ab1ae1f9d9b23411ecf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "505a2d3c_04af6731",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualizationService.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-04-12T00:44:29Z",
+      "side": 1,
+      "message": "\u003e Does MicrodroidTestAppNoPerm need to inherit the MicrodroidDeviceTestBase in the first place?\n\nAbout not inheriting `MicrodroidDeviceTestBase`, though we don\u0027t need code communicating with guest, inheritance seems a better choice to use same code logic like `forceCreateNewVirtualMachine`. \n\n\u003e Maybe we need a base class above MicrodroidDeviceTestBase that has only the things we do want in MicrodroidTestAppNoPerm.\n\nBut I have a slight negative opinion on here, since distinguishing `MicrodroidDeviceTestBase` into 2 base classes would make the code more complex than before. But I cannot think what could make better after introducing a new base class.",
+      "parentUuid": "b06839d9_1af01dc9",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 9
+      },
+      "revId": "01b2fee99eea150df5749ab1ae1f9d9b23411ecf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
