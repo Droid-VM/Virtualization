@@ -13,18 +13,44 @@
 // limitations under the License.
 
 //! Support for DICE derivation and BCC generation.
-use crate::alloc::string::ToString;
-use crate::bcc::value_to_bytes;
+#![allow(unused_variables, unused_imports, unused_mut)]
+
+extern crate alloc;
 
 use alloc::vec::Vec;
+use alloc::{fmt, format};
 use ciborium::cbor;
 use ciborium::Value;
 use core::mem::size_of;
 use diced_open_dice::{
     bcc_handover_main_flow, hash, Config, DiceMode, Hash, InputValues, HIDDEN_SIZE,
 };
+use log::error;
 use pvmfw_avb::{Capability, DebugLevel, Digest, VerifiedBootData};
 use zerocopy::AsBytes;
+
+#[derive(Debug)]
+pub enum Error {
+    /// Errors in CBOR operations
+    CiboriumError(ciborium::value::Error),
+    /// Error in DICE operations
+    DiceError(diced_open_dice::DiceError),
+}
+
+impl From<ciborium::value::Error> for Error {
+    fn from(e: ciborium::value::Error) -> Self {
+        Self::CiboriumError(e)
+    }
+}
+
+impl From<diced_open_dice::DiceError> for Error {
+    fn from(e: diced_open_dice::DiceError) -> Self {
+        Self::DiceError(e)
+    }
+}
+
+/// DICE in pvmfw result type.
+pub type Result<T> = core::result::Result<T, Error>;
 
 fn to_dice_mode(debug_level: DebugLevel) -> DiceMode {
     match debug_level {
@@ -33,15 +59,16 @@ fn to_dice_mode(debug_level: DebugLevel) -> DiceMode {
     }
 }
 
-fn to_dice_hash(verified_boot_data: &VerifiedBootData) -> diced_open_dice::Result<Hash> {
+fn to_dice_hash(verified_boot_data: &VerifiedBootData) -> Result<Hash> {
     let mut digests = [0u8; size_of::<Digest>() * 2];
     digests[..size_of::<Digest>()].copy_from_slice(&verified_boot_data.kernel_digest);
     if let Some(initrd_digest) = verified_boot_data.initrd_digest {
         digests[size_of::<Digest>()..].copy_from_slice(&initrd_digest);
     }
-    hash(&digests)
+    Ok(hash(&digests)?)
 }
 
+#[derive(Clone)]
 pub struct PartialInputs {
     pub code_hash: Hash,
     pub auth_hash: Hash,
@@ -51,7 +78,7 @@ pub struct PartialInputs {
 }
 
 impl PartialInputs {
-    pub fn new(data: &VerifiedBootData) -> diced_open_dice::Result<Self> {
+    pub fn new(data: &VerifiedBootData) -> Result<Self> {
         let code_hash = to_dice_hash(data)?;
         let auth_hash = hash(data.public_key)?;
         let mode = to_dice_mode(data.debug_level);
@@ -69,11 +96,8 @@ impl PartialInputs {
         instance_id: Option<&[u8]>,
         deferred_rollback_protection: bool,
         next_bcc: &mut [u8],
-    ) -> diced_open_dice::Result<()> {
-        let config = self
-            .generate_config_descriptor(instance_id)
-            .map_err(|_| diced_open_dice::DiceError::InvalidInput)?;
-
+    ) -> Result<()> {
+        let config = self.generate_config_descriptor(instance_id)?;
         let dice_inputs = InputValues::new(
             self.code_hash,
             Config::Descriptor(&config),
@@ -89,7 +113,7 @@ impl PartialInputs {
         &self,
         salt: &[u8; HIDDEN_SIZE],
         deferred_rollback_protection: bool,
-    ) -> diced_open_dice::Result<[u8; HIDDEN_SIZE]> {
+    ) -> Result<[u8; HIDDEN_SIZE]> {
         // We want to make sure we get a different sealing CDI for:
         // - VMs with different salt values
         // - An RKP VM and any other VM (regardless of salt)
@@ -107,20 +131,18 @@ impl PartialInputs {
             salt: [u8; HIDDEN_SIZE],
             deferred_rollback_protection: bool,
         }
-        hash(
+        Ok(hash(
             HiddenInput {
                 rkp_vm_marker: self.rkp_vm_marker,
                 salt: *salt,
                 deferred_rollback_protection,
             }
             .as_bytes(),
-        )
+        )?)
     }
 
-    fn generate_config_descriptor(
-        &self,
-        instance_id: Option<&[u8]>,
-    ) -> Result<Vec<u8>, ciborium::value::Error> {
+    #[allow(unused_variables)]
+    fn generate_config_descriptor(&self, instance_id: Option<&[u8]>) -> Result<Vec<u8>> {
         let mut config = Vec::new();
         config.push((cbor!(-70002)?, cbor!("vm_entry")?));
         if cfg!(dice_changes) {
@@ -134,8 +156,10 @@ impl PartialInputs {
             // ensure this is 64 bytes
             config.push((cbor!(-70007)?, Value::from(instance_id)));
         }
-        value_to_bytes(&Value::Map(config))
-            .map_err(|_| ciborium::value::Error::Custom("Error in serialization".to_string()))
+        let config = Value::Map(config);
+        Ok(cbor_util::serialize(&config).map_err(|e| {
+            ciborium::value::Error::Custom(format!("Error in serialization: {e:?}"))
+        })?)
     }
 }
 
@@ -164,11 +188,22 @@ unsafe extern "C" fn DiceClearMemory(
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use crate::PartialInputs;
+    use cbor_util::serialize;
+    use ciborium::cbor;
     use ciborium::Value;
+    use core::mem::size_of;
+    use diced_open_dice::DiceArtifacts;
+    use diced_open_dice::DiceMode;
+    use diced_open_dice::HIDDEN_SIZE;
+    use pvmfw_avb::Capability;
+    use pvmfw_avb::DebugLevel;
+    use pvmfw_avb::Digest;
+    use pvmfw_avb::VerifiedBootData;
     use std::collections::HashMap;
     use std::vec;
 
+    // Move these to super crate
     const COMPONENT_NAME_KEY: i64 = -70002;
     const COMPONENT_VERSION_KEY: i64 = -70003;
     const RESETTABLE_KEY: i64 = -70004;
@@ -244,7 +279,7 @@ mod tests {
     }
 
     fn decode_config_descriptor(inputs: &PartialInputs) -> HashMap<i64, Value> {
-        let config_descriptor = inputs.generate_config_descriptor([0u8; 64]).unwrap();
+        let config_descriptor = inputs.generate_config_descriptor(Some(&[0u8; 64])).unwrap();
 
         let cbor_map =
             cbor_util::deserialize::<Value>(&config_descriptor).unwrap().into_map().unwrap();
@@ -253,5 +288,72 @@ mod tests {
             .into_iter()
             .map(|(k, v)| ((k.into_integer().unwrap().try_into().unwrap()), v))
             .collect()
+    }
+
+    #[test]
+    fn changing_deferred_rpb_changes_secrets() {
+        let vb_data = VerifiedBootData { debug_level: DebugLevel::Full, ..BASE_VB_DATA };
+        let inputs = PartialInputs::new(&vb_data).unwrap();
+        let mut buffer_without_defer = [0; 4096];
+        let mut buffer_with_defer = [0; 4096];
+        let mut buffer_without_defer_retry = [0; 4096];
+
+        let sample_dice_input: &[u8] = &[
+            0xa3, // CDI attest
+            0x01, 0x58, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // CDI seal
+            0x02, 0x58, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // DICE chain
+            0x03, 0x82, 0xa6, 0x01, 0x02, 0x03, 0x27, 0x04, 0x02, 0x20, 0x01, 0x21, 0x40, 0x22,
+            0x40, 0x84, 0x40, 0xa0, 0x40, 0x40,
+            // 8-bytes of trailing data that aren't part of the DICE chain.
+            0x84, 0x41, 0x55, 0xa0, 0x42, 0x11, 0x22, 0x40,
+        ];
+
+        inputs
+            .clone()
+            .write_next_bcc(
+                sample_dice_input,
+                &[0u8; HIDDEN_SIZE],
+                Some(&[0u8; 64]),
+                false,
+                &mut buffer_without_defer,
+            )
+            .unwrap();
+        let bcc_handover1 = diced_open_dice::bcc_handover_parse(&buffer_without_defer).unwrap();
+
+        inputs
+            .clone()
+            .write_next_bcc(
+                sample_dice_input,
+                &[0u8; HIDDEN_SIZE],
+                Some(&[0u8; 64]),
+                true,
+                &mut buffer_with_defer,
+            )
+            .unwrap();
+        let bcc_handover2 = diced_open_dice::bcc_handover_parse(&buffer_with_defer).unwrap();
+
+        inputs
+            .clone()
+            .write_next_bcc(
+                sample_dice_input,
+                &[0u8; HIDDEN_SIZE],
+                Some(&[0u8; 64]),
+                false,
+                &mut buffer_without_defer_retry,
+            )
+            .unwrap();
+        let bcc_handover3 =
+            diced_open_dice::bcc_handover_parse(&buffer_without_defer_retry).unwrap();
+
+        assert_ne!(bcc_handover1.cdi_seal(), bcc_handover2.cdi_seal());
+        assert_eq!(bcc_handover1.cdi_seal(), bcc_handover3.cdi_seal());
+        assert_eq!(
+            hex::encode(bcc_handover1.bcc().unwrap()),
+            hex::encode(bcc_handover2.bcc().unwrap())
+        );
     }
 }
