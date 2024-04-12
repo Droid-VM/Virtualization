@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2050af4_c2094eec",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-04-12T05:31:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f496510f_ee115dcc",
+      "range": {
+        "startLine": 891,
+        "startChar": 0,
+        "endLine": 897,
+        "endChar": 32
+      },
+      "revId": "4ef23314429d82f9e70b9ce847907dc49bbb94eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd3a7cbf_ea306385",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-04-12T00:51:23Z",
       "side": 1,
       "message": "Shouldn\u0027t these be just getX and getY because the Surface may be smaller than the physical display?",
+      "range": {
+        "startLine": 898,
+        "startChar": 0,
+        "endLine": 900,
+        "endChar": 38
+      },
+      "revId": "4ef23314429d82f9e70b9ce847907dc49bbb94eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00da5297_ec6f5063",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 900,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-04-12T05:31:47Z",
+      "side": 1,
+      "message": "yeah, that\u0027s right. fixed.",
+      "parentUuid": "dd3a7cbf_ea306385",
       "range": {
         "startLine": 898,
         "startChar": 0,
