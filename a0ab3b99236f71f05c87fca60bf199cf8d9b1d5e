@@ -16,6 +16,29 @@
       "message": "@jiyong@google.com could you review this topic in prior to ask review to the owners?",
       "revId": "a0ab3b99236f71f05c87fca60bf199cf8d9b1d5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6494e8e_61071d42",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-12T10:09:54Z",
+      "side": 1,
+      "message": "Let\u0027s do this in a safer way. I don\u0027t think this is something that a Java app should be able to do.\n\nHere\u0027s my sketch.\n\n1. App uses `InputManager` APIs to get the `InputDevice`s for the external mouse and keyboard. Use `isExternal()` API.\n\n2. App asks `InputManager` to have exclusive access to the `InputDevice`s. This should require a privileged permission and should be granted only for external devices.\n\n3. If granted, InputManager returns FDs to the input devices.\n\n4. App passes those FDs to AVF when creating a VM.\n\n5. AVF passes that FDs to crosvm.\n\nI think this needs a small design doc to discuss with the team owning the input manager.",
+      "range": {
+        "startLine": 897,
+        "startChar": 0,
+        "endLine": 898,
+        "endChar": 89
+      },
+      "revId": "a0ab3b99236f71f05c87fca60bf199cf8d9b1d5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
