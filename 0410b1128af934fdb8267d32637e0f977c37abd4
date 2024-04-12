@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a379a24d_76da6c77",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-12T14:11:06Z",
+      "side": 1,
+      "message": "Yes, that\u0027s a good idea. Allows us to add more fields without modifying process_request.\n\nAlthough, perhaps name it \"RequestContext\"?",
+      "parentUuid": "bc864134_da4573c6",
+      "range": {
+        "startLine": 182,
+        "startChar": 67,
+        "endLine": 182,
+        "endChar": 94
+      },
+      "revId": "0410b1128af934fdb8267d32637e0f977c37abd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b5b74cb2_20c3e5be",
         "filename": "service_vm/requests/src/client_vm.rs",
         "patchSetId": 6
