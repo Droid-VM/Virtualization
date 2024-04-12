@@ -46,6 +46,30 @@
       },
       "revId": "3d0c5dfc63aeab90cae11e41471f05ab7784ce87",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fba7f64_a149ffd5",
+        "filename": "service_vm/test_apk/AndroidTest.rkpd.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-12T15:45:29Z",
+      "side": 1,
+      "message": "Ah, yes, need to set restore-proprties\u003dtrue\n\ne.g. https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/tests/BackgroundDexOptServiceIntegrationTests/AndroidTest.xml;drc\u003d3bc264d1a0fb82f54c989ca7724306e5c2d57f4c;l\u003d27\n\nSeems a good idea, to avoid breaking unrelated tests",
+      "parentUuid": "01758108_d32603ae",
+      "range": {
+        "startLine": 22,
+        "startChar": 22,
+        "endLine": 22,
+        "endChar": 33
+      },
+      "revId": "3d0c5dfc63aeab90cae11e41471f05ab7784ce87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
