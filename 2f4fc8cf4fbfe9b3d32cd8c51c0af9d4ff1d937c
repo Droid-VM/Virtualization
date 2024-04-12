@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "bc3fc480_dc3a0ab4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-04-12T11:13:04Z",
+      "side": 1,
+      "message": "It could be nice to use nix for the unsafe call, but I\u0027m also okay with this. Unsafe Rust LGTM.",
+      "revId": "2f4fc8cf4fbfe9b3d32cd8c51c0af9d4ff1d937c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0cd37474_1fdf9b48",
         "filename": "java/jni/android_system_virtualmachine_VirtualizationService.cpp",
         "patchSetId": 2
@@ -43,6 +60,23 @@
         "endLine": 79,
         "endChar": 18
       },
+      "revId": "2f4fc8cf4fbfe9b3d32cd8c51c0af9d4ff1d937c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "722e9af0_07ffd924",
+        "filename": "virtualizationmanager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-04-12T11:13:04Z",
+      "side": 1,
+      "message": "The unsafe block formats slightly nicer if you put the semicolon outside.",
       "revId": "2f4fc8cf4fbfe9b3d32cd8c51c0af9d4ff1d937c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
