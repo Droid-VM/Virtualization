@@ -30,7 +30,7 @@ use binder::{BinderFeatures, ProcessState};
 use lazy_static::lazy_static;
 use log::{info, LevelFilter};
 use rpcbinder::{FileDescriptorTransportMode, RpcServer};
-use std::os::unix::io::{FromRawFd, OwnedFd, RawFd};
+use std::os::unix::io::{AsRawFd, FromRawFd, OwnedFd, RawFd};
 use clap::Parser;
 use nix::fcntl::{fcntl, F_GETFD, F_SETFD, FdFlag};
 use nix::unistd::{Pid, Uid};
@@ -138,6 +138,10 @@ fn main() {
     info!("Started VirtualizationService RpcServer. Ready to accept connections");
 
     // Signal readiness to the caller by closing our end of the pipe.
+    // SAFETY: It just sends arbitrary single character from ready fd.
+    unsafe {
+        libc::write(ready_fd.as_raw_fd(), "o".as_ptr() as *const _, 1);
+    }
     drop(ready_fd);
 
     server.join();
