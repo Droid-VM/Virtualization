@@ -110,6 +110,30 @@
       },
       "revId": "3c340b3dfd2dff58a85cd07c2044bc52f8326b01",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "455feb87_a4c7f757",
+        "filename": "service_vm/test_apk/AndroidTest.rkpd.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-12T14:16:37Z",
+      "side": 1,
+      "message": "Yuck.\n\nCan you explicitly turn the permission off in the non-GKI case? It would be a problem if that didn\u0027t work, so good to test it.",
+      "parentUuid": "ecff869a_7cc0a444",
+      "range": {
+        "startLine": 22,
+        "startChar": 205,
+        "endLine": 22,
+        "endChar": 221
+      },
+      "revId": "3c340b3dfd2dff58a85cd07c2044bc52f8326b01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
