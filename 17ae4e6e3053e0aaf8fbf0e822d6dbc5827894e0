@@ -16,6 +16,23 @@
       "message": "Hi Alan, could you please take a look at the fix? \n\nHere\u0027s the ABTD run with the cl https://android-build.corp.google.com/builds/abtd/run/L15500030003196492",
       "revId": "17ae4e6e3053e0aaf8fbf0e822d6dbc5827894e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2c8209c_a838050a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-15T13:36:19Z",
+      "side": 1,
+      "message": "Actually I had the identical fix over in aosp/3041578.\n\nAnd that ran the test \u0026 passed in ABTD: https://android-build.corp.google.com/test_investigate/?invocationId\u003dI98800010266317397\u0026testResultId\u003dTR86129259405872908\u0026redirect\u003dhttp://fusion2/5b24d057-64f5-491f-ac5e-2b1f78fbff5c\n\nSo I think we\u0027re goot with this.",
+      "revId": "17ae4e6e3053e0aaf8fbf0e822d6dbc5827894e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
