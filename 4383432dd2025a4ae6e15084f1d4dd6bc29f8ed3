@@ -69,6 +69,30 @@
       },
       "revId": "4383432dd2025a4ae6e15084f1d4dd6bc29f8ed3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bc25d80_eb01353c",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-15T16:18:08Z",
+      "side": 1,
+      "message": "My concern was about catching possible future mistakes - for example if you changed this method to return `\u0027static Self` I think it would still compile.\n\nI was thinking something like\n\nlet data: \u0026\u0027a mut [u8] \u003d unsafe { ... }.into();\n\nAlthough I don\u0027t know if that actually works, and it is a fairly theoretical worry.",
+      "parentUuid": "e4334edb_cd65aec2",
+      "range": {
+        "startLine": 429,
+        "startChar": 15,
+        "endLine": 429,
+        "endChar": 24
+      },
+      "revId": "4383432dd2025a4ae6e15084f1d4dd6bc29f8ed3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
