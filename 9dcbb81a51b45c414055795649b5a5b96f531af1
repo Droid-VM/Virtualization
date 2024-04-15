@@ -73,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e61609d_8ff47184",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-15T12:59:58Z",
+      "side": 1,
+      "message": "\"If present, key changes on factory reset\" - I never understood it tbh.",
+      "parentUuid": "cc09432e_26627145",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 35
+      },
+      "revId": "9dcbb81a51b45c414055795649b5a5b96f531af1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ce9131d_782166af",
         "filename": "pvmfw/src/dice.rs",
         "patchSetId": 2
@@ -108,6 +132,30 @@
       "side": 1,
       "message": "As per vm_config.cddl, `-71003` is for Path to the payload config file.\n\nShould we be really encouraging a separate namespace for each node?\n\nThe DICE policy (builder) logic is built around each key having a give use in all entries (like security version, name etc). Having different nodes use same key for different version can be problematic in the future designs if we extend DICE chains and/or want to reuse fields like `instance_hash` in other DICEChainentries.\n\n(I\u0027m okay with `component_name` being use as a differentiator to find a DiceChainEntry, but further standardizing different map key usages for different entries may not scale.)",
       "parentUuid": "9ce9131d_782166af",
+      "range": {
+        "startLine": 33,
+        "startChar": 32,
+        "endLine": 33,
+        "endChar": 37
+      },
+      "revId": "9dcbb81a51b45c414055795649b5a5b96f531af1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06748fc6_b4a22684",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-15T12:59:58Z",
+      "side": 1,
+      "message": "\u003e As per vm_config.cddl, -71003 is for Path to the payload config file.\n\nOnly \"in the DICE node that describes the payload of a Microdroid virtual machine\".\n\n\u003e Should we be really encouraging a separate namespace for each node?\n\nThat\u0027s already the case. There\u0027s various uses of this range in the pre-pvmfw nodes. Any non-standard ID is inherently specific to a single use case.\n\n\u003e The DICE policy (builder) logic is built around each key having a give use in all \nentries (like security version, name etc). \n\nThat\u0027s fine for the reserved fields like those. If we want to match on non-reserved ones, it has to be node specific. And yeah, that does make it messier.\n\nOne alternative would be to use indexes back from the end, but we might have to figure out the desired index based on the shape of the original chain.\n\n\u003e and/or want to reuse fields like instance_hash in other DICEChainentries.\n\nIf we do, it should be standardized. But I\u0027m unconvinced that will happen.",
+      "parentUuid": "644ab6d4_5516d8a5",
       "range": {
         "startLine": 33,
         "startChar": 32,
