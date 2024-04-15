@@ -184,11 +184,17 @@ impl DebugConfig {
         }
 
         info!("Debug policy is disabled");
-        Self::new_with_debug_level(debug_level)
+        Self {
+            debug_level,
+            debug_policy_log: false,
+            debug_policy_ramdump: false,
+            debug_policy_adb: false,
+        }
     }
 
+    #[cfg(test)]
     /// Creates a new DebugConfig with debug level. Only use this for test purpose.
-    pub fn new_with_debug_level(debug_level: DebugLevel) -> Self {
+    pub(crate) fn new_with_debug_level(debug_level: DebugLevel) -> Self {
         Self {
             debug_level,
             debug_policy_log: false,
@@ -315,6 +321,20 @@ mod tests {
         assert!(!debug_config.debug_policy_log);
         assert!(!debug_config.debug_policy_ramdump);
         assert!(!debug_config.debug_policy_adb);
+
+        Ok(())
+    }
+
+    #[test]
+    fn test_new_with_debug_level() -> Result<()> {
+        assert_eq!(
+            DebugConfig::new_with_debug_level(DebugLevel::NONE).debug_level,
+            DebugLevel::NONE
+        );
+        assert_eq!(
+            DebugConfig::new_with_debug_level(DebugLevel::FULL).debug_level,
+            DebugLevel::FULL
+        );
 
         Ok(())
     }
