@@ -64,6 +64,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9905f647_40445d70",
+        "filename": "java/jni/android_system_virtualmachine_VirtualizationService.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-04-15T01:08:38Z",
+      "side": 1,
+      "message": "Since pipe FDs is not marked as O_NONBLOCK, read function would block until FD getting closed or receives any data.\n\nFrom man pipe(7): \nIf all file descriptors referring to the write end of a pipe have been closed, then an attempt to read(2) from the pipe will see end-of-file (read(2) will return 0).\n\nSo I think waitpid is already covered with receiving zero for the read function.",
+      "parentUuid": "6029d01b_f8c759c8",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 18
+      },
+      "revId": "2f4fc8cf4fbfe9b3d32cd8c51c0af9d4ff1d937c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "722e9af0_07ffd924",
@@ -94,6 +118,30 @@
       "writtenOn": "2024-04-12T09:56:08Z",
       "side": 1,
       "message": "The recently-updated nix crate exposes a safe write that understands owned FDs, maybe use that?\n\nhttps://docs.rs/nix/latest/nix/unistd/fn.write.html",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 5
+      },
+      "revId": "2f4fc8cf4fbfe9b3d32cd8c51c0af9d4ff1d937c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5a23389_684b147a",
+        "filename": "virtualizationmanager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-04-15T01:08:38Z",
+      "side": 1,
+      "message": "Sure, why not? If there\u0027s a safe function, I should definitely use that.",
+      "parentUuid": "fb992e1d_3226af01",
       "range": {
         "startLine": 142,
         "startChar": 0,
