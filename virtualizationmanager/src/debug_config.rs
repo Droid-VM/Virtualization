@@ -147,90 +147,99 @@ impl OwnedFdt {
     }
 }
 
+/// Debug configurations for debug policy.
+#[derive(Debug, Default)]
+pub struct DebugPolicyConfig {
+    log: bool,
+    ramdump: bool,
+    adb: bool,
+}
+
+impl DebugPolicyConfig {
+    fn from_overlay(path: &Path) -> Result<Self> {
+        let owned_fdt = OwnedFdt::from_overlay_onto_new_fdt(path)?;
+        let fdt = owned_fdt.as_fdt();
+
+        Ok(Self {
+            log: get_fdt_prop_bool(fdt, &DP_LOG_PATH)?,
+            ramdump: get_fdt_prop_bool(fdt, &DP_RAMDUMP_PATH)?,
+            adb: get_fdt_prop_bool(fdt, &DP_ADB_PATH)?,
+        })
+    }
+
+    fn from_host() -> Result<Self> {
+        Ok(Self {
+            log: get_debug_policy_bool(&DP_LOG_PATH.to_path())?,
+            ramdump: get_debug_policy_bool(&DP_RAMDUMP_PATH.to_path())?,
+            adb: get_debug_policy_bool(&DP_ADB_PATH.to_path())?,
+        })
+    }
+}
+
 /// Debug configurations for both debug level and debug policy
 #[derive(Debug)]
 pub struct DebugConfig {
     pub debug_level: DebugLevel,
-    debug_policy_log: bool,
-    debug_policy_ramdump: bool,
-    debug_policy_adb: bool,
+    debug_policy: DebugPolicyConfig,
 }
 
 impl DebugConfig {
     pub fn new(config: &VirtualMachineConfig) -> Self {
         let debug_level = get_debug_level(config);
 
-        match system_properties::read(CUSTOM_DEBUG_POLICY_OVERLAY_SYSPROP).unwrap_or_default() {
+        let dp_sysprop = system_properties::read(CUSTOM_DEBUG_POLICY_OVERLAY_SYSPROP);
+        let debug_policy = match dp_sysprop.unwrap_or_default() {
             Some(path) if !path.is_empty() => {
-                match Self::from_custom_debug_overlay_policy(debug_level, Path::new(&path)) {
+                match DebugPolicyConfig::from_overlay(Path::new(&path)) {
                     Ok(debug_config) => {
                         info!("Loaded custom debug policy overlay {path}: {debug_config:?}");
-                        return debug_config;
+                        Some(debug_config)
                     }
-                    Err(err) => warn!("Failed to load custom debug policy overlay {path}: {err:?}"),
-                };
-            }
-            _ => {
-                match Self::from_host(debug_level) {
-                    Ok(debug_config) => {
-                        info!("Loaded debug policy from host OS: {debug_config:?}");
-                        return debug_config;
+                    Err(err) => {
+                        warn!("Failed to load custom debug policy overlay {path}: {err:?}");
+                        None
                     }
-                    Err(err) => warn!("Failed to load debug policy from host OS: {err:?}"),
-                };
+                }
             }
+            _ => match DebugPolicyConfig::from_host() {
+                Ok(debug_config) => {
+                    info!("Loaded debug policy from host OS: {debug_config:?}");
+                    Some(debug_config)
+                }
+                Err(err) => {
+                    warn!("Failed to load debug policy from host OS: {err:?}");
+                    None
+                }
+            },
+        };
+        if debug_policy.is_none() {
+            info!("Debug policy is disabled");
         }
+        let debug_policy = debug_policy.unwrap_or_default();
 
-        info!("Debug policy is disabled");
-        Self::new_with_debug_level(debug_level)
+        Self { debug_level, debug_policy }
     }
 
     #[cfg(test)]
     /// Creates a new DebugConfig with debug level. Only use this for test purpose.
     pub(crate) fn new_with_debug_level(debug_level: DebugLevel) -> Self {
-        Self {
-            debug_level,
-            debug_policy_log: false,
-            debug_policy_ramdump: false,
-            debug_policy_adb: false,
-        }
+        Self { debug_level, ..Default::default() }
     }
 
     /// Get whether console output should be configred for VM to leave console and adb log.
     /// Caller should create pipe and prepare for receiving VM log with it.
     pub fn should_prepare_console_output(&self) -> bool {
-        self.debug_level != DebugLevel::NONE || self.debug_policy_log || self.debug_policy_adb
+        self.debug_level != DebugLevel::NONE || self.debug_policy.log || self.debug_policy.adb
     }
 
     /// Get whether debug apexes (MICRODROID_REQUIRED_APEXES_DEBUG) are required.
     pub fn should_include_debug_apexes(&self) -> bool {
-        self.debug_level != DebugLevel::NONE || self.debug_policy_adb
+        self.debug_level != DebugLevel::NONE || self.debug_policy.adb
     }
 
     /// Decision to support ramdump
     pub fn is_ramdump_needed(&self) -> bool {
-        self.debug_level != DebugLevel::NONE || self.debug_policy_ramdump
-    }
-
-    fn from_custom_debug_overlay_policy(debug_level: DebugLevel, path: &Path) -> Result<Self> {
-        let owned_fdt = OwnedFdt::from_overlay_onto_new_fdt(path)?;
-        let fdt = owned_fdt.as_fdt();
-
-        Ok(Self {
-            debug_level,
-            debug_policy_log: get_fdt_prop_bool(fdt, &DP_LOG_PATH)?,
-            debug_policy_ramdump: get_fdt_prop_bool(fdt, &DP_RAMDUMP_PATH)?,
-            debug_policy_adb: get_fdt_prop_bool(fdt, &DP_ADB_PATH)?,
-        })
-    }
-
-    fn from_host(debug_level: DebugLevel) -> Result<Self> {
-        Ok(Self {
-            debug_level,
-            debug_policy_log: get_debug_policy_bool(&DP_LOG_PATH.to_path())?,
-            debug_policy_ramdump: get_debug_policy_bool(&DP_RAMDUMP_PATH.to_path())?,
-            debug_policy_adb: get_debug_policy_bool(&DP_ADB_PATH.to_path())?,
-        })
+        self.debug_level != DebugLevel::NONE || self.debug_policy.ramdump
     }
 }
 
