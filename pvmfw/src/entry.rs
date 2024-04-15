@@ -412,28 +412,15 @@ enum AppendedPayload<'a> {
 
 impl<'a> AppendedPayload<'a> {
     fn new(data: &'a mut [u8]) -> Option<Self> {
-        // The borrow checker gets confused about the ownership of data (see inline comments) so we
-        // intentionally obfuscate it using these raw parts; see a similar issue (still not
-        // addressed in v1.77) in https://users.rust-lang.org/t/78467.
-        let data_len = data.len();
-        let data_ptr = data.as_mut_ptr();
-
-        // Config::new() borrows data as mutable ...
         match config::Config::new(data) {
-            // ... so this branch has a mutable reference to data, from the Ok(Config<'a>). But ...
             Ok(valid) => Some(Self::Config(valid)),
-            // ... if Config::new(data).is_err(), the Err holds no ref to data. However ...
             Err(config::Error::InvalidMagic) if cfg!(feature = "legacy") => {
-                // ... the borrow checker still complains about a second mutable ref without this.
-                // SAFETY: Raw parts are from a valid mut slice that is not accessed elsewhere.
-                let data = unsafe { core::slice::from_raw_parts_mut(data_ptr, data_len) };
-
                 const BCC_SIZE: usize = SIZE_4KB;
                 warn!("Assuming the appended data at {:?} to be a raw BCC", data.as_ptr());
                 Some(Self::LegacyBcc(&mut data[..BCC_SIZE]))
             }
             Err(e) => {
-                error!("Invalid configuration data at {data_ptr:?}: {e}");
+                error!("Invalid configuration data at {:?}: {e}", data.as_ptr());
                 None
             }
         }
