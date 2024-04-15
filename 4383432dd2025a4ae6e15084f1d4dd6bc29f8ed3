@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d06784b7_1314ee50",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-15T15:03:30Z",
+      "side": 1,
+      "message": "I wonder if you should immediately convert this to `\u0026mut \u0027a`, mostly to fix the lifetime correctly - otherwise this would silently convert to any lifetime, I think?",
+      "range": {
+        "startLine": 429,
+        "startChar": 15,
+        "endLine": 429,
+        "endChar": 24
+      },
+      "revId": "4383432dd2025a4ae6e15084f1d4dd6bc29f8ed3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
