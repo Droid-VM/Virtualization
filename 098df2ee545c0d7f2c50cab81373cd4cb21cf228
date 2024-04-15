@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39ad1f9c_b53c8693",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-15T16:00:07Z",
+      "side": 1,
+      "message": "Let\u0027s do that only inside of virtmanager and not touch the java side.",
+      "revId": "098df2ee545c0d7f2c50cab81373cd4cb21cf228",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "940148a2_a2dd54b1",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 982,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-15T16:00:07Z",
+      "side": 1,
+      "message": "Since this is a temporary fix, I think we can just hard code the tap device name here. Or it can be directly from a sysprop.",
+      "range": {
+        "startLine": 982,
+        "startChar": 60,
+        "endLine": 982,
+        "endChar": 68
+      },
+      "revId": "098df2ee545c0d7f2c50cab81373cd4cb21cf228",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
