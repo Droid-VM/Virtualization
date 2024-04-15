@@ -92,8 +92,15 @@ public class RkpdVmAttestationTest extends MicrodroidDeviceTestBase {
                 .that(getVirtualMachineManager().isRemoteAttestationSupported())
                 .isTrue();
 
-        if (mGki == null) {
-            // We don't need this permission to use the microdroid kernel.
+        if (mGki != null) {
+            // Using a non-default VM always needs the custom permission.
+            grantPermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
+        } else {
+            // USE_CUSTOM_VIRTUAL_MACHINE permission has protection level signature|development,
+            // meaning that it will be automatically granted when test apk is installed.
+            // But most callers shouldn't need this permission, so by default we run tests with it
+            // revoked.
+            // Tests that rely on the state of the permission should explicitly grant or revoke it.
             revokePermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
         }
         prepareTestSetup(true /* protectedVm */, mGki);
