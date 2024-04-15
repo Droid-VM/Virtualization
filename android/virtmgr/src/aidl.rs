@@ -535,6 +535,11 @@ impl VirtualizationService {
         let console_in_fd = console_in_fd.map(clone_file).transpose()?;
         let log_fd = clone_or_prepare_logger_fd(log_fd, format!("Log({})", cid))?;
         let dump_dt_fd = dump_dt_fd.map(clone_file).transpose()?;
+        let dump_dt_fd = if dump_dt_fd.is_none() && debug_config.dump_device_tree {
+            Some(prepare_dt_dump_file(&temporary_directory)?)
+        } else {
+            dump_dt_fd
+        };
 
         // Counter to generate unique IDs for temporary image files.
         let mut next_temporary_image_id = 0;
@@ -1667,6 +1672,16 @@ fn prepare_ramdump_file(temporary_directory: &Path) -> binder::Result<File> {
         .with_log()
         .or_service_specific_exception(-1)?;
     Ok(ramdump)
+}
+
+/// Create the empty device tree dump file
+fn prepare_dt_dump_file(temporary_directory: &Path) -> binder::Result<File> {
+    let path = temporary_directory.join("device_tree");
+    let file = File::create(path)
+        .context("Failed to prepare device tree dump file")
+        .with_log()
+        .or_service_specific_exception(-1)?;
+    Ok(file)
 }
 
 fn is_protected(config: &VirtualMachineConfig) -> bool {
