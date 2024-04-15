@@ -30,6 +30,7 @@ use vmconfig::get_debug_level;
 
 const CUSTOM_DEBUG_POLICY_OVERLAY_SYSPROP: &str =
     "hypervisor.virtualizationmanager.debug_policy.path";
+const DUMP_DT_SYSPROP: &str = "hypervisor.virtualizationmanager.dump_device_tree";
 const DEVICE_TREE_EMPTY_TREE_SIZE_BYTES: usize = 100; // rough estimation.
 
 struct DPPath {
@@ -180,6 +181,7 @@ impl DebugPolicyConfig {
 #[derive(Debug)]
 pub struct DebugConfig {
     pub debug_level: DebugLevel,
+    pub dump_device_tree: bool,
     debug_policy: DebugPolicyConfig,
 }
 
@@ -217,7 +219,15 @@ impl DebugConfig {
         }
         let debug_policy = debug_policy.unwrap_or_default();
 
-        Self { debug_level, debug_policy }
+        let dump_device_tree = match system_properties::read_bool(DUMP_DT_SYSPROP, false) {
+            Ok(value) => value,
+            Err(e) => {
+                warn!("Failed to read sysprop {DUMP_DT_SYSPROP}: {e}");
+                false
+            }
+        };
+
+        Self { debug_level, debug_policy, dump_device_tree }
     }
 
     #[cfg(test)]

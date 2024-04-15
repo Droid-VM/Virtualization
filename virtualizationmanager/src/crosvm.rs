@@ -119,6 +119,7 @@ pub struct CrosvmConfig {
     pub vfio_devices: Vec<VfioDevice>,
     pub dtbo: Option<File>,
     pub device_tree_overlay: Option<File>,
+    pub device_tree_dump: Option<File>,
     pub display_config: Option<DisplayConfig>,
     pub input_device_options: Vec<InputDeviceOption>,
 }
@@ -960,6 +961,10 @@ fn run_vm(
     command
         .arg("--socket")
         .arg(add_preserved_fd(&mut preserved_fds, &control_server_socket.as_raw_descriptor()));
+
+    if let Some(dt_dump) = &config.device_tree_dump {
+        command.arg("--dump-device-tree-blob").arg(add_preserved_fd(&mut preserved_fds, dt_dump));
+    }
 
     if let Some(dt_overlay) = &config.device_tree_overlay {
         command.arg("--device-tree-overlay").arg(add_preserved_fd(&mut preserved_fds, dt_overlay));
