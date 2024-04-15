@@ -22,6 +22,30 @@
       },
       "revId": "2de770dfc227654083dbf77698485a07b4650820",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e94685d4_f60e9c27",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-04-15T11:43:02Z",
+      "side": 1,
+      "message": "yeah, it works except key combinations which the system consumes like alt+tab, meta+n and so on. (https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java;l\u003d262;bpv\u003d1;bpt\u003d1?q\u003dintercept.*System%20f:%5C.java%20phone)",
+      "parentUuid": "310042d8_858af691",
+      "range": {
+        "startLine": 908,
+        "startChar": 0,
+        "endLine": 909,
+        "endChar": 57
+      },
+      "revId": "2de770dfc227654083dbf77698485a07b4650820",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
