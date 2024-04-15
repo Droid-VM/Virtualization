@@ -441,6 +441,9 @@ impl VirtualizationService {
             }
         }
 
+        // TODO: if (...) else { None }
+        let device_tree_dump = Some(prepare_dt_dump_file(&temporary_directory)?);
+
         let device_tree_overlay =
             if host_ref_dt.is_some() || !untrusted_props.is_empty() || !trusted_props.is_empty() {
                 let dt_output = temporary_directory.join(VM_DT_OVERLAY_PATH);
@@ -629,6 +632,7 @@ impl VirtualizationService {
             vfio_devices,
             dtbo,
             device_tree_overlay,
+            device_tree_dump,
             display_config,
             input_device_options,
         };
@@ -1341,6 +1345,16 @@ fn prepare_ramdump_file(temporary_directory: &Path) -> binder::Result<File> {
         .with_log()
         .or_service_specific_exception(-1)?;
     Ok(ramdump)
+}
+
+/// Create the empty device tree dump file
+fn prepare_dt_dump_file(temporary_directory: &Path) -> binder::Result<File> {
+    let path = temporary_directory.join("device_tree");
+    let file = File::create(path)
+        .context("Failed to prepare device tree dump file")
+        .with_log()
+        .or_service_specific_exception(-1)?;
+    Ok(file)
 }
 
 fn is_protected(config: &VirtualMachineConfig) -> bool {
