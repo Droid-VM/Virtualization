@@ -63,6 +63,7 @@ import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.ServiceSpecificException;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.system.virtualizationcommon.DeathReason;
 import android.system.virtualizationcommon.ErrorCode;
@@ -161,6 +162,7 @@ public class VirtualMachine implements AutoCloseable {
     public static final long MAX_VSOCK_PORT = (1L << 32) - 1;
 
     private ParcelFileDescriptor mTouchSock;
+    private ParcelFileDescriptor mKeySock;
 
     /**
      * Status of a virtual machine
@@ -861,15 +863,23 @@ public class VirtualMachine implements AutoCloseable {
         // Handle input devices here
         List<InputDevice> inputDevices = new ArrayList<>();
         if (vmConfig.getCustomImageConfig() != null
-                && vmConfig.getCustomImageConfig().useTouch()
                 && rawConfig.displayConfig != null) {
-            ParcelFileDescriptor[] pfds = ParcelFileDescriptor.createSocketPair();
-            mTouchSock = pfds[0];
-            InputDevice.SingleTouch t = new InputDevice.SingleTouch();
-            t.width = rawConfig.displayConfig.width;
-            t.height = rawConfig.displayConfig.height;
-            t.pfd = pfds[1];
-            inputDevices.add(InputDevice.singleTouch(t));
+            if (vmConfig.getCustomImageConfig().useTouch()) {
+                ParcelFileDescriptor[] pfds = ParcelFileDescriptor.createSocketPair();
+                mTouchSock = pfds[0];
+                InputDevice.SingleTouch t = new InputDevice.SingleTouch();
+                t.width = rawConfig.displayConfig.width;
+                t.height = rawConfig.displayConfig.height;
+                t.pfd = pfds[1];
+                inputDevices.add(InputDevice.singleTouch(t));
+            }
+            if (vmConfig.getCustomImageConfig().useKeyboard()) {
+                ParcelFileDescriptor[] pfds = ParcelFileDescriptor.createSocketPair();
+                mKeySock = pfds[0];
+                InputDevice.Keyboard k = new InputDevice.Keyboard();
+                k.pfd = pfds[1];
+                inputDevices.add(InputDevice.keyboard(k));
+            }
         }
         rawConfig.inputDevices = inputDevices.toArray(new InputDevice[0]);
 
@@ -880,6 +890,33 @@ public class VirtualMachine implements AutoCloseable {
         buffer.putShort(type);
         buffer.putShort(code);
         buffer.putInt(value);
+    }
+
+    /** @hide */
+    public boolean sendKeyEvent(KeyEvent event) {
+        if (mKeySock == null) {
+            Log.d(TAG, "mKeySock == null");
+            return false;
+        }
+        // from include/uapi/linux/input-event-codes.h in the kernel.
+        short EV_SYN = 0x00;
+        short EV_KEY = 0x01;
+        short SYN_REPORT = 0x00;
+        boolean down = event.getAction() != MotionEvent.ACTION_UP;
+        ByteBuffer byteBuffer = getByteBufferForInputEvent(2);
+
+        addInputEvent(byteBuffer, EV_KEY, (short) event.getScanCode(), down ? 1 : 0);
+        addInputEvent(byteBuffer, EV_SYN, SYN_REPORT, 0);
+        return writeByteBufferToSock(mKeySock, byteBuffer);
+    }
+
+    private static ByteBuffer getByteBufferForInputEvent(int eventCount) {
+        ByteBuffer byteBuffer =
+                ByteBuffer.allocate(
+                        8 * eventCount /* (type: u16 + code: u16 + value: i32) * eventCount */);
+        byteBuffer.clear();
+        byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
+        return byteBuffer;
     }
 
     /** @hide */
@@ -901,24 +938,22 @@ public class VirtualMachine implements AutoCloseable {
         int y = (int) event.getY();
         boolean down = event.getAction() != MotionEvent.ACTION_UP;
 
-        ByteBuffer byteBuffer =
-                ByteBuffer.allocate(32 /* (type: u16 + code: u16 + value: i32) * 4 */);
-        byteBuffer.clear();
-        byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
+        ByteBuffer byteBuffer = getByteBufferForInputEvent(4);
 
         addInputEvent(byteBuffer, EV_ABS, ABS_X, x);
         addInputEvent(byteBuffer, EV_ABS, ABS_Y, y);
         addInputEvent(byteBuffer, EV_KEY, BTN_TOUCH, down ? 1 : 0);
         addInputEvent(byteBuffer, EV_SYN, SYN_REPORT, 0);
 
+        return writeByteBufferToSock(mTouchSock, byteBuffer);
+    }
+
+    private boolean writeByteBufferToSock(ParcelFileDescriptor sock, ByteBuffer byteBuffer) {
         try {
             IoBridge.write(
-                    mTouchSock.getFileDescriptor(),
-                    byteBuffer.array(),
-                    0,
-                    byteBuffer.array().length);
+                    sock.getFileDescriptor(), byteBuffer.array(), 0, byteBuffer.array().length);
         } catch (IOException e) {
-            Log.d(TAG, "cannot send touch evt", e);
+            Log.d(TAG, "cannot send event", e);
             return false;
         }
         return true;
