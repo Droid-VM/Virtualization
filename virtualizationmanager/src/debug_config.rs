@@ -187,8 +187,9 @@ impl DebugConfig {
         Self::new_with_debug_level(debug_level)
     }
 
+    #[cfg(test)]
     /// Creates a new DebugConfig with debug level. Only use this for test purpose.
-    pub fn new_with_debug_level(debug_level: DebugLevel) -> Self {
+    pub(crate) fn new_with_debug_level(debug_level: DebugLevel) -> Self {
         Self {
             debug_level,
             debug_policy_log: false,
