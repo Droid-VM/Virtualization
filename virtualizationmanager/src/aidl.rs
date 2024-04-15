@@ -461,6 +461,12 @@ impl VirtualizationService {
 
         let debug_config = DebugConfig::new(config);
 
+        let device_tree_dump = if debug_config.dump_device_tree {
+            Some(prepare_dt_dump_file(&temporary_directory)?)
+        } else {
+            None
+        };
+
         let ramdump = if debug_config.is_ramdump_needed() {
             Some(prepare_ramdump_file(&temporary_directory)?)
         } else {
@@ -629,6 +635,7 @@ impl VirtualizationService {
             vfio_devices,
             dtbo,
             device_tree_overlay,
+            device_tree_dump,
             display_config,
             input_device_options,
         };
@@ -1341,6 +1348,16 @@ fn prepare_ramdump_file(temporary_directory: &Path) -> binder::Result<File> {
         .with_log()
         .or_service_specific_exception(-1)?;
     Ok(ramdump)
+}
+
+/// Create the empty device tree dump file
+fn prepare_dt_dump_file(temporary_directory: &Path) -> binder::Result<File> {
+    let path = temporary_directory.join("device_tree");
+    let file = File::create(path)
+        .context("Failed to prepare device tree dump file")
+        .with_log()
+        .or_service_specific_exception(-1)?;
+    Ok(file)
 }
 
 fn is_protected(config: &VirtualMachineConfig) -> bool {
