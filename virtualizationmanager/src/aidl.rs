@@ -631,6 +631,7 @@ impl VirtualizationService {
             device_tree_overlay,
             display_config,
             input_device_options,
+            tap_name: config.tapName.to_owned(),
         };
         let instance = Arc::new(
             VmInstance::new(

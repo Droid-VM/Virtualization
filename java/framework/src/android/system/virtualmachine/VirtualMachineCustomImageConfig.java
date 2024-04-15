@@ -36,6 +36,7 @@ public class VirtualMachineCustomImageConfig {
     private static final String KEY_DISPLAY_CONFIG = "display_config";
     private static final String KEY_TOUCH = "touch";
     private static final String KEY_KEYBOARD = "keyboard";
+    private static final String KEY_TAPNAME = "keyboard";
 
     @Nullable private final String name;
     @NonNull private final String kernelPath;
@@ -46,6 +47,8 @@ public class VirtualMachineCustomImageConfig {
     @Nullable private final DisplayConfig displayConfig;
     private final boolean touch;
     private final boolean keyboard;
+    // TODO(b/325929096): Might need a struct instead of just name
+    @Nullable private final String tapName;
 
     @Nullable
     public Disk[] getDisks() {
@@ -85,6 +88,11 @@ public class VirtualMachineCustomImageConfig {
         return keyboard;
     }
 
+    @Nullable
+    public String getTapName() {
+        return tapName;
+    }
+
     /** @hide */
     public VirtualMachineCustomImageConfig(
             String name,
@@ -95,7 +103,8 @@ public class VirtualMachineCustomImageConfig {
             Disk[] disks,
             DisplayConfig displayConfig,
             boolean touch,
-            boolean keyboard) {
+            boolean keyboard,
+            String tapName) {
         this.name = name;
         this.kernelPath = kernelPath;
         this.initrdPath = initrdPath;
@@ -105,6 +114,7 @@ public class VirtualMachineCustomImageConfig {
         this.displayConfig = displayConfig;
         this.touch = touch;
         this.keyboard = keyboard;
+        this.tapName = tapName;
     }
 
     static VirtualMachineCustomImageConfig from(PersistableBundle customImageConfigBundle) {
@@ -134,6 +144,7 @@ public class VirtualMachineCustomImageConfig {
         builder.setDisplayConfig(DisplayConfig.from(displayConfigPb));
         builder.useTouch(customImageConfigBundle.getBoolean(KEY_TOUCH));
         builder.useKeyboard(customImageConfigBundle.getBoolean(KEY_KEYBOARD));
+        builder.setTapName(customImageConfigBundle.getString(KEY_TAPNAME));
         return builder.build();
     }
 
@@ -164,6 +175,7 @@ public class VirtualMachineCustomImageConfig {
                         .orElse(null));
         pb.putBoolean(KEY_TOUCH, touch);
         pb.putBoolean(KEY_KEYBOARD, keyboard);
+        pb.putString(KEY_TAPNAME, tapName);
         return pb;
     }
 
@@ -214,6 +226,7 @@ public class VirtualMachineCustomImageConfig {
         private DisplayConfig displayConfig;
         private boolean touch;
         private boolean keyboard;
+        private String tapName;
 
         /** @hide */
         public Builder() {}
@@ -273,6 +286,12 @@ public class VirtualMachineCustomImageConfig {
         }
 
         /** @hide */
+        public Builder setTapName(String tapName) {
+            this.tapName = tapName;
+            return this;
+        }
+
+        /** @hide */
         public VirtualMachineCustomImageConfig build() {
             return new VirtualMachineCustomImageConfig(
                     this.name,
@@ -283,7 +302,8 @@ public class VirtualMachineCustomImageConfig {
                     this.disks.toArray(new Disk[0]),
                     displayConfig,
                     touch,
-                    keyboard);
+                    keyboard,
+                    tapName);
         }
     }
 

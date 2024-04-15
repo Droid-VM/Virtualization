@@ -77,4 +77,7 @@ parcelable VirtualMachineRawConfig {
 
     /** List of input devices to the VM */
     InputDevice[] inputDevices;
+
+    /** TAP device name for network. TODO(b/325929096): Might need a struct instead of just name */
+    @nullable String tapName;
 }

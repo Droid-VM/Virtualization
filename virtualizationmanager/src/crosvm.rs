@@ -121,6 +121,7 @@ pub struct CrosvmConfig {
     pub device_tree_overlay: Option<File>,
     pub display_config: Option<DisplayConfig>,
     pub input_device_options: Vec<InputDeviceOption>,
+    pub tap_name: Option<String>,
 }
 
 #[derive(Debug)]
@@ -973,6 +974,12 @@ fn run_vm(
             .arg("backend=virglrenderer,context-types=virgl2,egl=true,surfaceless=true,glx=false,gles=true")
             .arg(format!("--gpu-display=mode=windowed[{},{}],dpi=[{},{}],refresh-rate={}", display_config.width, display_config.height, display_config.horizontal_dpi, display_config.vertical_dpi, display_config.refresh_rate))
             .arg(format!("--android-display-service={}", config.name));
+        }
+    }
+
+    if cfg!(paravirtualized_devices) {
+        if let Some(tap_name) = &config.tap_name {
+            command.arg("--net").arg(format!("tap-name={}", tap_name));
         }
     }
 

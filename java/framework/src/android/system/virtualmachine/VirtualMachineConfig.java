@@ -645,6 +645,8 @@ public final class VirtualMachineConfig {
                 Optional.ofNullable(customImageConfig.getDisplayConfig())
                         .map(dc -> dc.toParcelable())
                         .orElse(null);
+
+        config.tapName = customImageConfig.getTapName();
         config.protectedVm = this.mProtectedVm;
         config.memoryMib = bytesToMebiBytes(mMemoryBytes);
         config.cpuTopology = (byte) this.mCpuTopology;

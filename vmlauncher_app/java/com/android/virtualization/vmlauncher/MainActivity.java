@@ -28,6 +28,7 @@ import android.system.virtualizationservice_internal.IVirtualizationServiceInter
 import android.system.virtualmachine.VirtualMachineCustomImageConfig;
 import android.system.virtualmachine.VirtualMachineCustomImageConfig.DisplayConfig;
 import android.util.DisplayMetrics;
+import android.os.SystemProperties;
 import android.util.Log;
 import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineCallback;
@@ -110,7 +111,9 @@ public class MainActivity extends Activity {
                     }
                 }
             }
-
+            if (SystemProperties.getBoolean("ro.crosvm.network.setup.done", false)) {
+                customImageConfigBuilder.setTapName("crosvm_tap");
+            }
             configBuilder.setMemoryBytes(8L * 1024 * 1024 * 1024 /* 8 GB */);
             WindowMetrics windowMetrics = getWindowManager().getCurrentWindowMetrics();
             Rect windowSize = windowMetrics.getBounds();
