@@ -121,6 +121,7 @@ pub struct CrosvmConfig {
     pub device_tree_overlay: Option<File>,
     pub display_config: Option<DisplayConfig>,
     pub input_device_options: Vec<InputDeviceOption>,
+    pub virtio_snd_backend: String,
 }
 
 #[derive(Debug)]
@@ -1009,6 +1010,10 @@ fn run_vm(
 
     debug!("Preserving FDs {:?}", preserved_fds);
     command.preserved_fds(preserved_fds);
+
+    if cfg!(paravirtualized_devices) {
+        command.arg("--virtio-snd").arg(format!("backend={}", config.virtio_snd_backend));
+    }
 
     print_crosvm_args(&command);
 
