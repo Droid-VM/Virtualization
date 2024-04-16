@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae32cab3_9740e48b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-04-16T12:09:20Z",
+      "side": 1,
+      "message": "I don\u0027t like this but I haven\u0027t been able to find a better solution.",
+      "revId": "ac6ba75452cf4ffcdd2eb7d79604beebff627cf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33c2d19c_e83d95d3",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-04-16T12:09:20Z",
+      "side": 1,
+      "message": "Can you use a raw slice (i.e. `*mut [u8]` or even `NonNull\u003c[u8]\u003e`) rather than splitting it into a separate pointer and length?",
+      "revId": "ac6ba75452cf4ffcdd2eb7d79604beebff627cf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
