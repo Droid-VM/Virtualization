@@ -604,6 +604,9 @@ impl VirtualizationService {
             vec![]
         };
 
+        let virtio_snd_backend =
+            if cfg!(paravirtualized_devices) { Some(String::from("aaudio")) } else { None };
+
         // Actually start the VM.
         let crosvm_config = CrosvmConfig {
             cid,
@@ -631,6 +634,7 @@ impl VirtualizationService {
             device_tree_overlay,
             display_config,
             input_device_options,
+            virtio_snd_backend,
         };
         let instance = Arc::new(
             VmInstance::new(
