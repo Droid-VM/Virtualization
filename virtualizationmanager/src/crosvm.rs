@@ -1010,6 +1010,8 @@ fn run_vm(
     debug!("Preserving FDs {:?}", preserved_fds);
     command.preserved_fds(preserved_fds);
 
+    command.arg("--virtio-snd").arg("backend=aaudio");
+
     print_crosvm_args(&command);
 
     let result = SharedChild::spawn(&mut command)?;
