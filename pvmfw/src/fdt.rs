@@ -192,7 +192,7 @@ struct CpuInfo {
 }
 
 impl CpuInfo {
-    const MAX_OPPTABLES: usize = 20;
+    const MAX_OPPTABLES: usize = 30;
 }
 
 fn read_opp_info_from(
