@@ -109,7 +109,7 @@ impl ComposClient {
             };
         let config_path = get_vm_config_path(has_system_ext, parameters.prefer_staged);
 
-        let debug_level = if parameters.debug_mode { DebugLevel::FULL } else { DebugLevel::NONE };
+        let debug_level = DebugLevel::FULL; //if parameters.debug_mode { DebugLevel::FULL } else { DebugLevel::NONE };
 
         let cpu_topology = match parameters.cpu_topology {
             VmCpuTopology::OneCpu => CpuTopology::ONE_CPU,
