@@ -245,7 +245,8 @@ fn read_cpu_map_from(fdt: &Fdt) -> libfdt::Result<Option<BTreeMap<Phandle, (usiz
             };
             let cpu = core.getprop_u32(cstr!("cpu"))?.ok_or(FdtError::NotFound)?;
             let prev = topology.insert(cpu.try_into()?, (n, m));
-            if prev.is_some() {
+            if let Some(p) = prev {
+                error!("cpu-map: prev = {p:?}, new = {:?}", topology.get(&cpu.try_into()?));
                 return Err(FdtError::BadValue);
             }
         }
@@ -260,6 +261,7 @@ fn read_cpu_info_from(
     let mut cpus = ArrayVec::new();
 
     let cpu_map = read_cpu_map_from(fdt)?;
+    info!("cpu-map: {cpu_map:?}");
     let mut topology: CpuTopology = Default::default();
 
     let mut cpu_nodes = fdt.compatible_nodes(cstr!("arm,arm-v8"))?;
@@ -278,9 +280,15 @@ fn read_cpu_info_from(
 
         if let Some(ref cpu_map) = cpu_map {
             let phandle = cpu.get_phandle()?.ok_or(FdtError::NotFound)?;
-            let (cluster, core_idx) = cpu_map.get(&phandle).ok_or(FdtError::BadValue)?;
+            let (cluster, core_idx) = cpu_map.get(&phandle).ok_or_else(|| {
+                error!("cpu_map.get({phandle:?}) failed");
+                FdtError::BadValue
+            })?;
+            let cluster_idx = cluster;
             let cluster = topology.clusters[*cluster].get_or_insert(Default::default());
-            if cluster.cores[*core_idx].is_some() {
+            if let Some(c) = cluster.cores[*core_idx] {
+                error!("dup (cluster={cluster_idx:?}, core={core_idx:?}): {c:?} <-> {idx:?}");
+                error!("topology: {topology:?}");
                 return Err(FdtError::BadValue);
             }
             cluster.cores[*core_idx] = Some(idx);
