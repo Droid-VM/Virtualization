@@ -168,6 +168,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb87a635_2d6be3bb",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-04-17T15:38:10Z",
+      "side": 1,
+      "message": "\u003e we might have to figure out the desired index based on the shape of the original chain\n\nI have implemented searched by name in DicePolicy, so because of that we do add the shape of chain in DICE policy building logic.\n\n\u003e If we do, it should be standardized. But..\n\nI think the problem of standardizing is hard due to \n1) ROM code is hard to change\n2) Vendors have already used some of the unspecified keys, so reserving something that is already unreserved is challenging.\n\nHow about we atleast standardize thing for images run in \"VM environment\". It appears that we atleast have to standardize name of all the images running in VM \u0026 in path of the Microdroid payload boot. Move relevant bits from vm.cddl, pvmfw/README into a common spec.\n\nI\u0027m generally not in favor of using the key in config descriptor for different purposes by pvmfw/Microdroid because that will require excessing over specification for each node.",
+      "parentUuid": "06748fc6_b4a22684",
+      "range": {
+        "startLine": 33,
+        "startChar": 32,
+        "endLine": 33,
+        "endChar": 37
+      },
+      "revId": "9dcbb81a51b45c414055795649b5a5b96f531af1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cbf97153_66d6f474",
         "filename": "pvmfw/src/main.rs",
         "patchSetId": 2
