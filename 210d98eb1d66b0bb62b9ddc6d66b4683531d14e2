@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a1ab9ed_e72c5878",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-17T16:51:34Z",
+      "side": 1,
+      "message": "Naming nit: Should the struct just be called DebugPolicy? (Given the comments, field name, etc?)\n\nOr, if not, should the field be policy_config / debug_policy_config?",
+      "range": {
+        "startLine": 185,
+        "startChar": 4,
+        "endLine": 185,
+        "endChar": 35
+      },
+      "revId": "210d98eb1d66b0bb62b9ddc6d66b4683531d14e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
