@@ -70,6 +70,30 @@
       },
       "revId": "b3fc9e7c7ed939eb977c6d9a83e4dda6cd2d4cd1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bcf84a4_f2cd65c7",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1362,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-17T16:55:13Z",
+      "side": 1,
+      "message": "Doesn\u0027t this have the same problem - raw -\u003e error instead of raw -\u003e ok?\n\nNone or Some(FULL) is ok, Some(NONE) is bad.",
+      "parentUuid": "94006726_647c418c",
+      "range": {
+        "startLine": 1359,
+        "startChar": 0,
+        "endLine": 1362,
+        "endChar": 5
+      },
+      "revId": "b3fc9e7c7ed939eb977c6d9a83e4dda6cd2d4cd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
