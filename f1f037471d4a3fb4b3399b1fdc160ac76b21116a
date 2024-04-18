@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b721eb14_9a2fb00d",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-04-18T15:25:16Z",
+      "side": 1,
+      "message": "Ack; I\u0027ll remove the \"double underscore\".",
+      "parentUuid": "366012aa_863a4fbf",
+      "range": {
+        "startLine": 11,
+        "startChar": 8,
+        "endLine": 11,
+        "endChar": 37
+      },
+      "revId": "f1f037471d4a3fb4b3399b1fdc160ac76b21116a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "70563609_2ac26610",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6b28bfc6_f176db9d",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-04-18T15:25:16Z",
+      "side": 1,
+      "message": "I\u0027ve considered introducing \"levels\" of macros like this:\n```\n#define PLACEHOLDER_OPP_TABLE_ENTRY(d, n) opp##d##n { opp-hz \u003d \u003cPLACEHOLDER2\u003e; };\n#define PLACEHOLDER_OPP_TABLE_ENTRIES(d) \\\n    PLACEHOLDER_OPP_TABLE_ENTRY(d, 0) \\\n    PLACEHOLDER_OPP_TABLE_ENTRY(d, 1) \\\n    PLACEHOLDER_OPP_TABLE_ENTRY(d, 2) \\\n    PLACEHOLDER_OPP_TABLE_ENTRY(d, 3) \\\n    PLACEHOLDER_OPP_TABLE_ENTRY(d, 4) \\\n    PLACEHOLDER_OPP_TABLE_ENTRY(d, 5) \\\n    PLACEHOLDER_OPP_TABLE_ENTRY(d, 6) \\\n    PLACEHOLDER_OPP_TABLE_ENTRY(d, 7) \\\n    PLACEHOLDER_OPP_TABLE_ENTRY(d, 8) \\\n    PLACEHOLDER_OPP_TABLE_ENTRY(d, 9)\n```\nthen\n```\n#define PLACEHOLDER_OPP_TABLE \\\n    PLACEHOLDER_OPP_TABLE_ENTRIES()  \\\n    PLACEHOLDER_OPP_TABLE_ENTRIES(1)\n```\nWould you prefer that?",
+      "parentUuid": "70563609_2ac26610",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 34
+      },
+      "revId": "f1f037471d4a3fb4b3399b1fdc160ac76b21116a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e3cd839_802e4c9c",
         "filename": "pvmfw/platform.dts",
         "patchSetId": 1
@@ -60,6 +108,24 @@
       "writtenOn": "2024-04-18T14:51:33Z",
       "side": 1,
       "message": "For hygiene:\n#undef __PLACEHOLDER_OPP_TABLE_ENTRY",
+      "revId": "f1f037471d4a3fb4b3399b1fdc160ac76b21116a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb3c2e68_b4f89be5",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-04-18T15:25:16Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the `#undef` be placed after the last use of `PLACEHOLDER_OPP_TABLE`?",
+      "parentUuid": "5e3cd839_802e4c9c",
       "revId": "f1f037471d4a3fb4b3399b1fdc160ac76b21116a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
