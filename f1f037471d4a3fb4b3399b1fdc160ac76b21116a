@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "366012aa_863a4fbf",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-18T14:51:33Z",
+      "side": 1,
+      "message": "Use of __ causes undefined behavior - e.g. https://stackoverflow.com/questions/228783/what-are-the-rules-about-using-an-underscore-in-a-c-identifier",
+      "range": {
+        "startLine": 11,
+        "startChar": 8,
+        "endLine": 11,
+        "endChar": 37
+      },
+      "revId": "f1f037471d4a3fb4b3399b1fdc160ac76b21116a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70563609_2ac26610",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-18T14:51:33Z",
+      "side": 1,
+      "message": "In an ideal world the preprocesor would do this in a loop.\nBut getting it to do that requires such obscure code that it\u0027s almost certainly not a good idea to try.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 34
+      },
+      "revId": "f1f037471d4a3fb4b3399b1fdc160ac76b21116a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e3cd839_802e4c9c",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-04-18T14:51:33Z",
+      "side": 1,
+      "message": "For hygiene:\n#undef __PLACEHOLDER_OPP_TABLE_ENTRY",
+      "revId": "f1f037471d4a3fb4b3399b1fdc160ac76b21116a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
