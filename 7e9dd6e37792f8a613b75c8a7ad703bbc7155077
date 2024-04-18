@@ -16,6 +16,98 @@
       "message": "@ioffe@google.com LGTY?",
       "revId": "7e9dd6e37792f8a613b75c8a7ad703bbc7155077",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9cd86f5_df9c54f8",
+        "filename": "service_vm/comm/src/message.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-04-18T18:20:48Z",
+      "side": 1,
+      "message": "nit: vendor partition? There might be multiple kernel modules in the microdroid-vendor.img, and we anyway don\u0027t verify them separately, we only verify the vendor partition itself.",
+      "range": {
+        "startLine": 166,
+        "startChar": 4,
+        "endLine": 166,
+        "endChar": 23
+      },
+      "revId": "7e9dd6e37792f8a613b75c8a7ad703bbc7155077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6f6b9f6_274e6fe8",
+        "filename": "service_vm/comm/src/message.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-04-18T18:20:48Z",
+      "side": 1,
+      "message": "nit: partition",
+      "range": {
+        "startLine": 199,
+        "startChar": 38,
+        "endLine": 199,
+        "endChar": 44
+      },
+      "revId": "7e9dd6e37792f8a613b75c8a7ad703bbc7155077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "305953e2_ed9485e4",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-04-18T18:20:48Z",
+      "side": 1,
+      "message": "nit: partition (and in the log statements below as well)",
+      "range": {
+        "startLine": 179,
+        "startChar": 19,
+        "endLine": 179,
+        "endChar": 25
+      },
+      "revId": "7e9dd6e37792f8a613b75c8a7ad703bbc7155077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33945db6_f3cb88ac",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-04-18T18:20:48Z",
+      "side": 1,
+      "message": "nit: partition (and same comment in the other places in this file)",
+      "range": {
+        "startLine": 54,
+        "startChar": 13,
+        "endLine": 54,
+        "endChar": 19
+      },
+      "revId": "7e9dd6e37792f8a613b75c8a7ad703bbc7155077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
