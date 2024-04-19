@@ -224,7 +224,7 @@ struct CpuTopology {
 }
 
 impl CpuTopology {
-    const MAX_CLUSTERS: usize = 3;
+    const MAX_CLUSTERS: usize = 5;
 }
 
 fn read_cpu_map_from(fdt: &Fdt) -> libfdt::Result<Option<BTreeMap<Phandle, (usize, usize)>>> {
