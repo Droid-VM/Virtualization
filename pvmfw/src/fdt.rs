@@ -232,6 +232,11 @@ fn read_cpu_map_from(fdt: &Fdt) -> libfdt::Result<Option<BTreeMap<Phandle, (usiz
         return Ok(None);
     };
 
+    const EXTRA_CLUSTER_NAME: str = format!("cluster{}", CpuTopology::MAX_CLUSTERS);
+    const EXTRA_CORE_NAME: str = format!("core{}", CpuTopology::MAX_CORES_PER_CLUSTER);
+    let extra_cluster_name = CString::new(EXTRA_CLUSTER_NAME).unwrap();
+    let extra_core_name = CString::new(EXTRA_CORE_NAME).unwrap();
+
     let mut topology = BTreeMap::new();
     for n in 0..CpuTopology::MAX_CLUSTERS {
         let name = CString::new(format!("cluster{n}")).unwrap();
@@ -249,6 +254,14 @@ fn read_cpu_map_from(fdt: &Fdt) -> libfdt::Result<Option<BTreeMap<Phandle, (usiz
                 return Err(FdtError::BadValue);
             }
         }
+
+        if let Some(extra) = cluster.subnode(&extra_core_name) {
+            warn!("Received unexpected '{EXTRA_CORE_NAME}' in cluster{n} of cpu-map");
+        }
+    }
+
+    if let Some(extra) = cpu_map.subnode(&extra_cluster_name) {
+        warn!("Received unexpected '{EXTRA_CLUSTER_NAME}' in cpu-map");
     }
 
     Ok(Some(topology))
