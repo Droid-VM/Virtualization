@@ -2451,6 +2451,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                 case "x86_64":
                     return MIN_MEM_X86_64;
                 case "arm64-v8a":
+                case "arm64-v8a-hwasan":
                     return MIN_MEM_ARM64;
             }
         }
