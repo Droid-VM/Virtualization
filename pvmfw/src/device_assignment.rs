@@ -28,9 +28,9 @@ use core::ffi::CStr;
 use core::iter::Iterator;
 use core::mem;
 use core::ops::Range;
-use hyp::DeviceAssigningHypervisor;
 use libfdt::{Fdt, FdtError, FdtNode, FdtNodeMut, Phandle, Reg};
 use log::error;
+use vmbase::hyp::DeviceAssigningHypervisor;
 use zerocopy::byteorder::big_endian::U32;
 use zerocopy::FromBytes as _;
 
