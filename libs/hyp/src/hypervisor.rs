@@ -14,15 +14,15 @@
 
 //! Wrappers around hypervisor back-ends.
 
-extern crate alloc;
-
 mod common;
 mod geniezone;
 mod gunyah;
 mod kvm;
 
-use crate::error::{Error, Result};
 use alloc::boxed::Box;
+
+use super::{Error, Result};
+
 use common::Hypervisor;
 pub use common::{
     DeviceAssigningHypervisor, MemSharingHypervisor, MmioGuardedHypervisor, MMIO_GUARD_GRANULE_SIZE,
