@@ -109,6 +109,14 @@ impl MemoryTracker {
         unsafe { page_table.activate() }
         debug!("... Success!");
 
+        let mmio_guard_granule = if let Some(mmio_guard) = get_mmio_guard() {
+            let granule = mmio_guard.granule().unwrap();
+            assert_eq!(MMIO_GUARD_GRANULE_SIZE, PAGE_SIZE);
+            granule
+        } else {
+            PAGE_SIZE
+        };
+
         Self {
             total,
             page_table,
@@ -116,7 +124,7 @@ impl MemoryTracker {
             mmio_regions: ArrayVec::new(),
             mmio_range,
             payload_range: payload_range.map(|r| r.start.0..r.end.0),
-            mmio_sharer: MmioSharer::new(),
+            mmio_sharer: MmioSharer::new(mmio_guard_granule),
         }
     }
 
@@ -389,9 +397,7 @@ struct MmioSharer {
 }
 
 impl MmioSharer {
-    fn new() -> Self {
-        assert_eq!(MMIO_GUARD_GRANULE_SIZE, PAGE_SIZE);
-        let granule = PAGE_SIZE;
+    fn new(granule: usize) -> Self {
         let frames = BTreeSet::new();
 
         Self { granule, frames }

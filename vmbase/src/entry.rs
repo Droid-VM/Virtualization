@@ -16,17 +16,26 @@
 
 use crate::{
     bionic, console, heap, hyp, logger,
+    memory::{page_4kb_of, SIZE_4KB},
     power::{reboot, shutdown},
     rand,
 };
 use core::mem::size_of;
+
+use static_assertions::const_assert_eq;
 
 fn try_console_init() -> Result<(), hyp::Error> {
     console::init();
 
     if let Some(mmio_guard) = hyp::get_mmio_guard() {
         mmio_guard.enroll()?;
-        mmio_guard.validate_granule()?;
+        // TODO(ptosi): Use MmioSharer::share() here, to properly track this MMIO_GUARD_MAP.
+        {
+            let granule = mmio_guard.granule()?;
+            assert!(granule == SIZE_4KB);
+        }
+        const_assert_eq!(page_4kb_of(console::BASE_ADDRESS), 0);
+
         mmio_guard.map(console::BASE_ADDRESS)?;
     }
 
