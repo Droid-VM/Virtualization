@@ -15,10 +15,8 @@
 //! Rust entry point.
 
 use crate::{
-    bionic, console, heap,
-    hyp::{self, MMIO_GUARD_GRANULE_SIZE},
-    logger,
-    memory::page_4kb_of,
+    bionic, console, heap, hyp, logger,
+    memory::{page_4kb_of, SIZE_16KB, SIZE_4KB},
     power::{reboot, shutdown},
     rand,
 };
@@ -36,8 +34,17 @@ fn try_console_init() -> Result<(), hyp::Error> {
         // Until then, ensure that the UART is in the "first" addressable page, which is the
         // assumption hardcoded in MmioSharer to detect collisions with other MMIO pages:
         const_assert_eq!(page_4kb_of(console::BASE_ADDRESS), 0);
-        // MmioSharer only supports MMIO_GUARD_GRANULE_SIZE so fail early here if needed.
-        assert_eq!(mmio_guard.granule()?, MMIO_GUARD_GRANULE_SIZE);
+        // The following call shares the UART but also anything present in [0; granule].
+        //
+        // For 4KiB, that's only the UARTs. For 16KiB, it also covers the RTC and watchdog but, as
+        // neither is used by vmbase clients (and as both are outside of the UART page), they
+        // will never have valid stage-1 mappings to those devices. As a result, this
+        // MMIO_GUARD_MAP isn't affected by the granule size in any visible way. Larger granule
+        // sizes will need to be checked separately, if needed.
+        assert!({
+            let granule = mmio_guard.granule()?;
+            granule == SIZE_4KB || granule == SIZE_16KB
+        });
         mmio_guard.map(console::BASE_ADDRESS)?;
     }
 

@@ -21,7 +21,7 @@ use super::util::{page_4kb_of, virt_to_phys};
 use crate::console;
 use crate::dsb;
 use crate::exceptions::HandleExceptionError;
-use crate::hyp::{self, get_mem_sharer, get_mmio_guard, MMIO_GUARD_GRANULE_SIZE};
+use crate::hyp::{self, get_mem_sharer, get_mmio_guard};
 use crate::util::page_4kb_of;
 use crate::util::unchecked_align_down;
 use crate::util::RangeExt as _;
@@ -43,7 +43,6 @@ use core::result;
 use log::{debug, error, trace};
 use once_cell::race::OnceBox;
 use spin::mutex::SpinMutex;
-use static_assertions::const_assert_eq;
 use tinyvec::ArrayVec;
 
 /// A global static variable representing the system memory tracker, protected by a spin mutex.
@@ -324,7 +323,10 @@ impl MemoryTracker {
         let page_range: VaRange = (page_start..page_start + PAGE_SIZE).into();
 
         self.map_lazy_mmio_as_valid(&page_range)?;
-        let shared = self.mmio_sharer.share(addr);
+        let shared = match self.mmio_sharer.share(addr) {
+            Err(MemoryTrackerError::DuplicateMmioShare(_)) => Ok(()),
+            res => res,
+        };
 
         // At this point, we already created the valid stage-1 MMU mapping and, if shared.is_err(),
         // the request to share the MMIO through the hypervisor's MMIO guard has failed.
@@ -405,8 +407,7 @@ struct MmioSharer {
 impl MmioSharer {
     fn new() -> Self {
         let granule = Self::get_granule();
-        assert_eq!(granule, MMIO_GUARD_GRANULE_SIZE);
-        const_assert_eq!(MMIO_GUARD_GRANULE_SIZE, PAGE_SIZE); // For good measure.
+        assert_eq!(granule % PAGE_SIZE, 0); // For good measure.
         let frames = BTreeSet::new();
 
         // Allows safely calling util::unchecked_align_down().
