@@ -402,7 +402,8 @@ struct MmioSharer {
 
 impl MmioSharer {
     fn new() -> Self {
-        let granule = MMIO_GUARD_GRANULE_SIZE;
+        let granule = Self::get_granule();
+        assert_eq!(granule, MMIO_GUARD_GRANULE_SIZE);
         const_assert_eq!(MMIO_GUARD_GRANULE_SIZE, PAGE_SIZE); // For good measure.
         let frames = BTreeSet::new();
 
@@ -410,6 +411,14 @@ impl MmioSharer {
         assert!(granule.is_power_of_two());
 
         Self { granule, frames }
+    }
+
+    fn get_granule() -> usize {
+        if let Some(mmio_guard) = get_mmio_guard() {
+            mmio_guard.granule().unwrap()
+        } else {
+            PAGE_SIZE
+        }
     }
 
     /// Share the MMIO region aligned to the granule size containing addr (not validated as MMIO).
