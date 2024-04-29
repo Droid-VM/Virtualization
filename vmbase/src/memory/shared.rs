@@ -21,12 +21,14 @@ use super::util::{page_4kb_of, virt_to_phys};
 use crate::dsb;
 use crate::exceptions::HandleExceptionError;
 use crate::hyp::{self, get_mem_sharer, get_mmio_guard, MMIO_GUARD_GRANULE_SIZE};
+use crate::util::unchecked_align_down;
 use crate::util::RangeExt as _;
 use aarch64_paging::paging::{
-    Attributes, Descriptor, MemoryRegion as VaRange, VirtualAddress, BITS_PER_LEVEL, PAGE_SIZE,
+    Attributes, Descriptor, MemoryRegion as VaRange, VirtualAddress, PAGE_SIZE,
 };
 use alloc::alloc::{alloc_zeroed, dealloc, handle_alloc_error};
 use alloc::boxed::Box;
+use alloc::collections::BTreeSet;
 use alloc::vec::Vec;
 use buddy_system_allocator::{FrameAllocator, LockedFrameAllocator};
 use core::alloc::Layout;
@@ -78,6 +80,7 @@ pub struct MemoryTracker {
     mmio_regions: ArrayVec<[MemoryRange; MemoryTracker::MMIO_CAPACITY]>,
     mmio_range: MemoryRange,
     payload_range: Option<MemoryRange>,
+    mmio_sharer: MmioSharer,
 }
 
 impl MemoryTracker {
@@ -114,6 +117,7 @@ impl MemoryTracker {
             mmio_regions: ArrayVec::new(),
             mmio_range,
             payload_range: payload_range.map(|r| r.start.0..r.end.0),
+            mmio_sharer: MmioSharer::new(),
         }
     }
 
@@ -251,13 +255,8 @@ impl MemoryTracker {
 
     /// Unshares any MMIO region previously shared with the MMIO guard.
     pub fn unshare_all_mmio(&mut self) -> Result<()> {
-        if get_mmio_guard().is_some() {
-            for range in &self.mmio_regions {
-                self.page_table
-                    .walk_range(&get_va_range(range), &mmio_guard_unmap_page)
-                    .map_err(|_| MemoryTrackerError::FailedToUnmap)?;
-            }
-        }
+        self.mmio_sharer.unshare_all();
+
         Ok(())
     }
 
@@ -320,13 +319,10 @@ impl MemoryTracker {
     /// table entry and MMIO guard mapping the block. Breaks apart a block entry if required.
     fn handle_mmio_fault(&mut self, addr: VirtualAddress) -> Result<()> {
         let page_start = VirtualAddress(page_4kb_of(addr.0));
-        assert_eq!(page_start.0 % MMIO_GUARD_GRANULE_SIZE, 0);
-        const_assert_eq!(MMIO_GUARD_GRANULE_SIZE, PAGE_SIZE);
         let page_range: VaRange = (page_start..page_start + PAGE_SIZE).into();
 
         self.map_lazy_mmio_as_valid(&page_range)?;
-        let mmio_guard = get_mmio_guard().unwrap();
-        let shared = mmio_guard.map(page_start.0);
+        let shared = self.mmio_sharer.share(addr);
 
         // At this point, we already created the valid stage-1 MMU mapping and, if shared.is_err(),
         // the request to share the MMIO through the hypervisor's MMIO guard has failed.
@@ -396,6 +392,60 @@ impl Drop for MemoryTracker {
         set_dbm_enabled(false);
         self.flush_dirty_pages().unwrap();
         self.unshare_all_memory();
+    }
+}
+
+struct MmioSharer {
+    granule: usize,
+    frames: BTreeSet<usize>,
+}
+
+impl MmioSharer {
+    fn new() -> Self {
+        let granule = MMIO_GUARD_GRANULE_SIZE;
+        const_assert_eq!(MMIO_GUARD_GRANULE_SIZE, PAGE_SIZE); // For good measure.
+        let frames = BTreeSet::new();
+
+        // Allows safely calling util::unchecked_align_down().
+        assert!(granule.is_power_of_two());
+
+        Self { granule, frames }
+    }
+
+    /// Share the MMIO region aligned to the granule size containing addr (not validated as MMIO).
+    fn share(&mut self, addr: VirtualAddress) -> Result<()> {
+        // This can't use virt_to_phys() since 0x0 is a valid MMIO address and we are ID-mapped.
+        let phys = addr.0;
+        let base = unchecked_align_down(phys, self.granule);
+
+        if self.frames.contains(&base) {
+            return Err(MemoryTrackerError::DuplicateMmioShare(base));
+        }
+
+        if let Some(mmio_guard) = get_mmio_guard() {
+            mmio_guard.map(base)?;
+        }
+
+        let inserted = self.frames.insert(base);
+        assert!(inserted);
+
+        Ok(())
+    }
+
+    fn unshare_all(&mut self) {
+        let Some(mmio_guard) = get_mmio_guard() else {
+            return self.frames.clear();
+        };
+
+        while let Some(base) = self.frames.pop_first() {
+            mmio_guard.unmap(base).unwrap();
+        }
+    }
+}
+
+impl Drop for MmioSharer {
+    fn drop(&mut self) {
+        self.unshare_all();
     }
 }
 
@@ -500,41 +550,6 @@ impl Drop for MemorySharer {
             unsafe { dealloc(base as *mut _, layout) };
         }
     }
-}
-
-/// MMIO guard unmaps page
-fn mmio_guard_unmap_page(
-    va_range: &VaRange,
-    desc: &Descriptor,
-    level: usize,
-) -> result::Result<(), ()> {
-    let flags = desc.flags().expect("Unsupported PTE flags set");
-    // This function will be called on an address range that corresponds to a device. Only if a
-    // page has been accessed (written to or read from), will it contain the VALID flag and be MMIO
-    // guard mapped. Therefore, we can skip unmapping invalid pages, they were never MMIO guard
-    // mapped anyway.
-    if flags.contains(Attributes::VALID) {
-        assert!(
-            flags.contains(MMIO_LAZY_MAP_FLAG),
-            "Attempting MMIO guard unmap for non-device pages"
-        );
-        const MMIO_GUARD_GRANULE_SHIFT: u32 = MMIO_GUARD_GRANULE_SIZE.ilog2() - PAGE_SIZE.ilog2();
-        const MMIO_GUARD_GRANULE_LEVEL: usize =
-            3 - (MMIO_GUARD_GRANULE_SHIFT as usize / BITS_PER_LEVEL);
-        assert_eq!(
-            level, MMIO_GUARD_GRANULE_LEVEL,
-            "Failed to break down block mapping before MMIO guard mapping"
-        );
-        let page_base = va_range.start().0;
-        assert_eq!(page_base % MMIO_GUARD_GRANULE_SIZE, 0);
-        // Since mmio_guard_map takes IPAs, if pvmfw moves non-ID address mapping, page_base
-        // should be converted to IPA. However, since 0x0 is a valid MMIO address, we don't use
-        // virt_to_phys here, and just pass page_base instead.
-        get_mmio_guard().unwrap().unmap(page_base).map_err(|e| {
-            error!("Error MMIO guard unmapping: {e}");
-        })?;
-    }
-    Ok(())
 }
 
 /// Handles a translation fault with the given fault address register (FAR).
