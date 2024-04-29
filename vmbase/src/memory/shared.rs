@@ -251,7 +251,7 @@ impl MemoryTracker {
     /// Unmaps all tracked MMIO regions from the MMIO guard.
     ///
     /// Note that they are not unmapped from the page table.
-    pub fn mmio_unmap_all(&mut self) -> Result<()> {
+    pub fn unshare_all_mmio(&mut self) -> Result<()> {
         if get_mmio_guard().is_some() {
             for range in &self.mmio_regions {
                 self.page_table
@@ -322,13 +322,25 @@ impl MemoryTracker {
     fn handle_mmio_fault(&mut self, addr: VirtualAddress) -> Result<()> {
         let page_start = VirtualAddress(page_4kb_of(addr.0));
         assert_eq!(page_start.0 % MMIO_GUARD_GRANULE_SIZE, 0);
-        let page_range: VaRange = (page_start..page_start + MMIO_GUARD_GRANULE_SIZE).into();
+        assert_eq!(MMIO_GUARD_GRANULE_SIZE, PAGE_SIZE);
+        let page_range: VaRange = (page_start..page_start + PAGE_SIZE).into();
+
+        self.map_lazy_mmio_as_valid(&page_range)?;
         let mmio_guard = get_mmio_guard().unwrap();
+        let shared = mmio_guard.map(page_start.0);
+
+        // If we fail to share the MMIO, The S1 mapping remains valid so panic.
+        shared.unwrap();
+
+        Ok(())
+    }
+
+    fn map_lazy_mmio_as_valid(&mut self, page_range: &VaRange) -> Result<()> {
         // This must be safe and free from break-before-make (BBM) violations, given that the
         // initial lazy mapping has the valid bit cleared, and each newly created valid descriptor
         // created inside the mapping has the same size and alignment.
         self.page_table
-            .modify_range(&page_range, &|_: &VaRange, desc: &mut Descriptor, _: usize| {
+            .modify_range(page_range, &|_: &VaRange, desc: &mut Descriptor, _: usize| {
                 let flags = desc.flags().expect("Unsupported PTE flags set");
                 if flags.contains(MMIO_LAZY_MAP_FLAG) && !flags.contains(Attributes::VALID) {
                     desc.modify_flags(Attributes::VALID, Attributes::empty());
@@ -337,8 +349,7 @@ impl MemoryTracker {
                     Err(())
                 }
             })
-            .map_err(|_| MemoryTrackerError::InvalidPte)?;
-        Ok(mmio_guard.map(page_start.0)?)
+            .map_err(|_| MemoryTrackerError::InvalidPte)
     }
 
     /// Flush all memory regions marked as writable-dirty.
