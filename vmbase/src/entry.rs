@@ -16,7 +16,7 @@
 
 use crate::{
     bionic, console, heap, hyp, logger,
-    memory::{page_4kb_of, SIZE_4KB},
+    memory::{page_4kb_of, SIZE_16KB, SIZE_4KB},
     power::{reboot, shutdown},
     rand,
 };
@@ -30,9 +30,14 @@ fn try_console_init() -> Result<(), hyp::Error> {
     if let Some(mmio_guard) = hyp::get_mmio_guard() {
         mmio_guard.enroll()?;
         // TODO(ptosi): Use MmioSharer::share() here, to properly track this MMIO_GUARD_MAP.
+
+        // The non-UART devices in the range [0; 0x4000[ (currently RTC and watchdog) are not used
+        // by vmbase clients so they shouldn't be mapped in their stage-1 when they use a 4KiB MMU
+        // granule with the UART mapped. As a result, the MMIO_GUARD granule shouldn't affect the
+        // following MMIO_GUARD_MAP call, as long as it's 4KiB or 16KiB.
         {
             let granule = mmio_guard.granule()?;
-            assert!(granule == SIZE_4KB);
+            assert!(granule == SIZE_4KB || granule == SIZE_16KB);
         }
         const_assert_eq!(page_4kb_of(console::BASE_ADDRESS), 0);
 
