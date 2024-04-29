@@ -24,9 +24,7 @@ use alloc::boxed::Box;
 use super::{Error, Result};
 
 use common::Hypervisor;
-pub use common::{
-    DeviceAssigningHypervisor, MemSharingHypervisor, MmioGuardedHypervisor, MMIO_GUARD_GRANULE_SIZE,
-};
+pub use common::{DeviceAssigningHypervisor, MemSharingHypervisor, MmioGuardedHypervisor};
 pub use geniezone::GeniezoneError;
 use geniezone::GeniezoneHypervisor;
 use gunyah::GunyahHypervisor;
