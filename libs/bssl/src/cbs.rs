@@ -35,7 +35,7 @@ impl<'a> Cbs<'a> {
         let mut cbs = MaybeUninit::uninit();
         // SAFETY: `CBS_init()` only sets `cbs` to point to `buffer`. It doesn't take ownership
         // of data.
-        unsafe { CBS_init(cbs.as_mut_ptr(), buffer.as_ptr(), buffer.len()) };
+        CBS_init(cbs.as_mut_ptr(), buffer.as_ptr(), buffer.len());
         // SAFETY: `cbs` has just been initialized by `CBS_init()`.
         let cbs = unsafe { cbs.assume_init() };
         Self { cbs, _buffer: PhantomData }
