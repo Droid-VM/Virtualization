@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d60b22d4_e3f3fef5",
+        "filename": "libs/android_audio_backend/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-30T19:39:02Z",
+      "side": 1,
+      "message": "is that true?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 43
+      },
+      "revId": "0a83025ad2b75e60eba61d25e81f53e00b5fd395",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65c47414_b6d627d3",
+        "filename": "libs/android_audio_backend/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-30T19:39:02Z",
+      "side": 1,
+      "message": "This looks against the convention. lib.rs?",
+      "range": {
+        "startLine": 11,
+        "startChar": 12,
+        "endLine": 11,
+        "endChar": 32
+      },
+      "revId": "0a83025ad2b75e60eba61d25e81f53e00b5fd395",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9357ebbb_cc995268",
+        "filename": "libs/android_audio_backend/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-30T19:39:02Z",
+      "side": 1,
+      "message": "why? we need to build for the main abi, right?",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 29
+      },
+      "revId": "0a83025ad2b75e60eba61d25e81f53e00b5fd395",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "143afa75_1a75ea84",
+        "filename": "libs/android_audio_backend/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-30T19:39:02Z",
+      "side": 1,
+      "message": "why use cxx? There\u0027s no C++ code here. libaaudio is an NDK library with C APIs.",
+      "range": {
+        "startLine": 58,
+        "startChar": 13,
+        "endLine": 58,
+        "endChar": 23
+      },
+      "revId": "0a83025ad2b75e60eba61d25e81f53e00b5fd395",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04840a37_6ad58a2c",
+        "filename": "libs/android_audio_backend/cxx_aaudio_backend.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-30T19:39:02Z",
+      "side": 1,
+      "message": "This global variable smells bad. I think aaudio_init should return AAudioStream* or a context object (which internally owns AAudioStream*), and other functions should accept the context object as the argument.",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1cf3d748_a6edd538",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/android_audio_backend/cxx_aaudio_backend.cpp",
+              "range": {
+                "startLine": 5,
+                "startChar": 0,
+                "endLine": 6,
+                "endChar": 0
+              },
+              "replacement": "AAudioStream *stream;\n"
+            },
+            {
+              "path": "libs/android_audio_backend/cxx_aaudio_backend.cpp",
+              "range": {
+                "startLine": 7,
+                "startChar": 0,
+                "endLine": 8,
+                "endChar": 0
+              },
+              "replacement": "AAudioStream *aaudio_init(size_t num_channel, uint32_t frame_rate) {\n"
+            },
+            {
+              "path": "libs/android_audio_backend/cxx_aaudio_backend.cpp",
+              "range": {
+                "startLine": 16,
+                "startChar": 0,
+                "endLine": 16,
+                "endChar": 0
+              },
+              "replacement": "    return stream;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0a83025ad2b75e60eba61d25e81f53e00b5fd395",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13cbb0c6_0f328e12",
+        "filename": "libs/android_audio_backend/cxx_aaudio_backend.hpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-04-30T19:39:02Z",
+      "side": 1,
+      "message": "Add license header to all source files",
+      "revId": "0a83025ad2b75e60eba61d25e81f53e00b5fd395",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
