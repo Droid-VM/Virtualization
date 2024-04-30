@@ -96,3 +96,13 @@ avf_microdroid_kernel_prebuilt {
         },
     },
 }
+
+filegroup {
+    name: "microdroid_14_61_kernel_prebuilt-arm64",
+    srcs: ["android14-6.1/arm64/kernel-6.1"],
+}
+
+filegroup {
+    name: "microdroid_14_61_kernel_prebuilt-x86_64",
+    srcs: ["android14-6.1/x86_64/kernel-6.1"],
+}

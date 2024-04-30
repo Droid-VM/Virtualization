@@ -34,7 +34,10 @@ android_test {
 cc_library_shared {
     name: "MicrodroidBenchmarkNativeLib",
     defaults: ["avf_build_flags_cc"],
-    srcs: ["src/native/*.cpp"],
+    srcs: [
+        "src/native/benchmarkbinary.cpp",
+        "src/native/io_vsock.cpp",
+    ],
     local_include_dirs: ["src/native/include"],
     static_libs: [
         "com.android.microdroid.testservice-ndk",
@@ -45,4 +48,42 @@ cc_library_shared {
         "liblog",
         "libvm_payload#current",
     ],
+}
+
+cc_binary {
+    name: "vsock_server",
+    defaults: ["avf_build_flags_cc"],
+    srcs: [
+        "src/native/io_vsock.cpp",
+        "src/native/vsock_server.cpp",
+    ],
+    local_include_dirs: ["src/native/include"],
+    static_libs: [
+        "libbase",
+        "liblog",
+    ],
+}
+
+cc_binary {
+    name: "vsock_client",
+    defaults: ["avf_build_flags_cc"],
+    srcs: [
+        "src/native/vsock_client.cpp",
+    ],
+    shared_libs: [
+        "libbase",
+        "liblog",
+    ],
+}
+
+java_genrule {
+    name: "vsock_server_as_jar",
+    out: ["vsock_server.jar"],
+    srcs: [
+        ":vsock_server",
+    ],
+    tools: ["soong_zip"],
+    cmd: "mkdir -p $(genDir)/bin" +
+        "&& cp $(in) $(genDir)/bin" +
+        "&& $(location soong_zip) -jar -o $(out) -C $(genDir) -D $(genDir)/bin",
 }

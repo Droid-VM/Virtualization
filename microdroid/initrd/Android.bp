@@ -188,6 +188,12 @@ prebuilt_etc {
 }
 
 prebuilt_etc {
+    name: "microdroid_14_61_initrd_debuggable",
+    src: ":microdroid_initrd_debuggable",
+    filename: "microdroid_14_61_initrd_debuggable.img",
+}
+
+prebuilt_etc {
     name: "microdroid_gki-android14-6.1-pkvm_experimental_initrd_debuggable",
     // We don't have ramdisk for architectures other than x86_64 & arm64
     src: ":empty_file",
@@ -215,6 +221,12 @@ prebuilt_etc {
         },
     },
     filename: "microdroid_initrd_normal.img",
+}
+
+prebuilt_etc {
+    name: "microdroid_14_61_initrd_normal",
+    src: ":microdroid_initrd_normal",
+    filename: "microdroid_14_61_initrd_normal.img",
 }
 
 prebuilt_etc {

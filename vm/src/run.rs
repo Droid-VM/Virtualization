@@ -141,7 +141,7 @@ pub fn command_run_app(config: RunAppConfig) -> Result<(), Error> {
     };
 
     let os_name = if let Some(ver) = config.microdroid.gki() {
-        format!("microdroid_gki-{ver}")
+        ver.to_string()
     } else {
         "microdroid".to_owned()
     };

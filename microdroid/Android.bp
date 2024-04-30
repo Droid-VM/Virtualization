@@ -437,6 +437,11 @@ prebuilt_etc {
 }
 
 prebuilt_etc {
+    name: "microdroid_14_61.json",
+    src: "microdroid_14_61.json",
+}
+
+prebuilt_etc {
     name: "microdroid_manifest",
     src: "microdroid_manifest.xml",
     filename: "manifest.xml",
@@ -491,6 +496,12 @@ avb_gen_vbmeta_image {
     src: ":microdroid_initrd_normal",
 }
 
+avb_gen_vbmeta_image {
+    name: "microdroid_14_61_initrd_normal_hashdesc",
+    defaults: ["microdroid_initrd_normal_defaults"],
+    src: ":microdroid_14_61_initrd_normal",
+}
+
 // python -c "import hashlib; print(hashlib.sha256(b'initrd_debug').hexdigest())"
 initrd_debug_salt = "8ab9dc9cb7e6456700ff6ef18c6b4c3acc24c5fa5381b829563f8d7a415d869a"
 
@@ -505,6 +516,12 @@ avb_gen_vbmeta_image {
     name: "microdroid_initrd_debug_hashdesc",
     defaults: ["microdroid_initrd_debug_defaults"],
     src: ":microdroid_initrd_debuggable",
+}
+
+avb_gen_vbmeta_image {
+    name: "microdroid_14_61_initrd_debug_hashdesc",
+    defaults: ["microdroid_initrd_debug_defaults"],
+    src: ":microdroid_14_61_initrd_debuggable",
 }
 
 soong_config_module_type {
@@ -577,6 +594,38 @@ prebuilt_etc {
         },
         x86_64: {
             src: ":microdroid_kernel_signed",
+        },
+    },
+}
+
+avb_add_hash_footer {
+    name: "microdroid_14_61_kernel_signed",
+    defaults: ["microdroid_kernel_signed_defaults"],
+    filename: "microdroid_14_61_kernel",
+    arch: {
+        arm64: {
+            src: ":microdroid_14_61_kernel_prebuilt-arm64",
+        },
+        x86_64: {
+            src: ":microdroid_14_61_kernel_prebuilt-x86_64",
+        },
+    },
+    include_descriptors_from_images: [
+        ":microdroid_14_61_initrd_normal_hashdesc",
+        ":microdroid_14_61_initrd_debug_hashdesc",
+    ],
+}
+
+prebuilt_etc {
+    name: "microdroid_14_61_kernel",
+    src: ":empty_file",
+    relative_install_path: "fs",
+    arch: {
+        arm64: {
+            src: ":microdroid_14_61_kernel_signed",
+        },
+        x86_64: {
+            src: ":microdroid_14_61_kernel_signed",
         },
     },
 }
