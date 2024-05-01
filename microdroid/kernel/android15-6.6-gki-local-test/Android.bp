@@ -1,0 +1,21 @@
+prebuilt_kernel_modules {
+    name: "microdroid_gki_kernel_modules-android15-6.6-arm64",
+    srcs: [
+        "arm64/*.ko",
+    ],
+    kernel_version: "6.6",
+    installable: false,
+}
+
+filegroup {
+    name: "microdroid_gki_kernel_prebuilts-android15-6.6-arm64",
+    srcs: ["arm64/kernel-6.6"],
+}
+
+android_filesystem {
+    name: "microdroid_gki_modules-android15-6.6-arm64",
+    deps: [
+        "microdroid_gki_kernel_modules-android15-6.6-arm64",
+    ],
+    type: "compressed_cpio",
+}
