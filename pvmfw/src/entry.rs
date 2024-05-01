@@ -253,6 +253,8 @@ fn main_wrapper(
         error!("Failed to unshare MMIO ranges: {e}");
         RebootReason::InternalError
     })?;
+
+    info!("[ioffe] all good");
     // Call unshare_all_memory here (instead of relying on the dtor) while UART is still mapped.
     MEMORY.lock().as_mut().unwrap().unshare_all_memory();
     if let Some(mmio_guard) = get_mmio_guard() {
@@ -261,10 +263,12 @@ fn main_wrapper(
             RebootReason::InternalError
         })?;
     }
+    info!("[ioffe] still all good");
 
     // Drop MemoryTracker and deactivate page table.
     drop(MEMORY.lock().take());
 
+    info!("[ioffe] go next");
     Ok((slices.kernel.as_ptr() as usize, next_bcc))
 }
 
