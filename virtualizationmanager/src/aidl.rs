@@ -909,6 +909,12 @@ fn load_app_config(
         vm_config.devices = custom_config.devices.clone();
     }
 
+    if cfg!(target_arch = "aarch64") {
+        info!("[ioffe] enable earlycon");
+        append_kernel_param("earlycon=uart8250,mmio,0x3f8", &mut vm_config);
+        append_kernel_param("keep_bootcon", &mut vm_config);
+    }
+
     if config.memoryMib > 0 {
         vm_config.memoryMib = config.memoryMib;
     }
