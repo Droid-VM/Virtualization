@@ -23,6 +23,7 @@ use core::mem::{drop, size_of};
 use core::num::NonZeroUsize;
 use core::ops::Range;
 use core::slice;
+#[allow(unused_imports)]
 use hyp::{get_mem_sharer, get_mmio_guard};
 use log::debug;
 use log::error;
@@ -30,6 +31,7 @@ use log::info;
 use log::warn;
 use log::LevelFilter;
 use vmbase::util::RangeExt as _;
+#[allow(unused_imports)]
 use vmbase::{
     configure_heap, console,
     layout::{self, crosvm},
@@ -253,14 +255,17 @@ fn main_wrapper(
         error!("Failed to unshare MMIO ranges: {e}");
         RebootReason::InternalError
     })?;
+
+    info!("[ioffe] all good");
     // Call unshare_all_memory here (instead of relying on the dtor) while UART is still mapped.
-    MEMORY.lock().as_mut().unwrap().unshare_all_memory();
+    /*MEMORY.lock().as_mut().unwrap().unshare_all_memory();
     if let Some(mmio_guard) = get_mmio_guard() {
         mmio_guard.unmap(console::BASE_ADDRESS).map_err(|e| {
             error!("Failed to unshare the UART: {e}");
             RebootReason::InternalError
         })?;
     }
+    */
 
     // Drop MemoryTracker and deactivate page table.
     drop(MEMORY.lock().take());

@@ -156,6 +156,10 @@ avf_flag_aware_apex_defaults {
         "microdroid.json",
         "microdroid_kernel",
         "com.android.virt.init.rc",
+        "microdroid_gki-android15-6.6_initrd_debuggable",
+        "microdroid_gki-android15-6.6_initrd_normal",
+        "microdroid_gki-android15-6.6_kernel",
+        "microdroid_gki-android15-6.6.json",
     ],
     host_required: [
         "vm_shell",
