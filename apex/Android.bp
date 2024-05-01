@@ -133,6 +133,10 @@ avf_flag_aware_apex_defaults {
             ],
             filesystems: microdroid_filesystem_images,
             prebuilts: [
+                "microdroid_gki-android15-6.6_initrd_debuggable",
+                "microdroid_gki-android15-6.6_initrd_normal",
+                "microdroid_gki-android15-6.6_kernel",
+                "microdroid_gki-android15-6.6.json",
                 "rialto_bin",
             ],
         },
