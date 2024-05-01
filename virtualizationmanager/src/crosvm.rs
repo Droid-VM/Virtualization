@@ -833,9 +833,10 @@ fn run_vm(
 
     if config.protected {
         match system_properties::read(SYSPROP_CUSTOM_PVMFW_PATH)? {
-            Some(pvmfw_path) if !pvmfw_path.is_empty() => {
-                command.arg("--protected-vm-with-firmware").arg(pvmfw_path)
-            }
+            Some(pvmfw_path) if !pvmfw_path.is_empty() => match pvmfw_path.as_str() {
+                "none" => command.arg("--protected-vm-without-firmware"),
+                _ => command.arg("--protected-vm-with-firmware").arg(pvmfw_path),
+            },
             _ => command.arg("--protected-vm"),
         };
 
