@@ -16,6 +16,139 @@
       "message": "Need the tradefederation change to be merged first (aosp/3069682)",
       "revId": "8a69159f53df4a71a5f15d39f4e00b0b65df564d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c207f74_9edc81b7",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1184,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-02T15:30:37Z",
+      "side": 1,
+      "message": "I\u0027d add an `assumeTrue(device.isAdbRoot())` after this.\nThere are contexts where enableAdbRoot is configured to silently do nothing, and we don\u0027t want the tests failing there.",
+      "range": {
+        "startLine": 1183,
+        "startChar": 0,
+        "endLine": 1184,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8826c4d8_26235072",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+              "range": {
+                "startLine": 1184,
+                "startChar": 0,
+                "endLine": 1184,
+                "endChar": 0
+              },
+              "replacement": "        assumeTrue(\"adb root is not enabled\", device.isAdbRoot());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8a69159f53df4a71a5f15d39f4e00b0b65df564d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c53bbf7_b4b74f33",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1199,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-02T15:30:37Z",
+      "side": 1,
+      "message": "Should you send `thpShmemStr` to it? We want it back the way it was before.",
+      "range": {
+        "startLine": 1199,
+        "startChar": 26,
+        "endLine": 1199,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "33a3d7b2_f720628d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+              "range": {
+                "startLine": 1199,
+                "startChar": 0,
+                "endLine": 1200,
+                "endChar": 0
+              },
+              "replacement": "        android.run(\"echo \" + thpShmemStr + \" \u003e\" + SHMEM_ENABLED_PATH);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8a69159f53df4a71a5f15d39f4e00b0b65df564d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cdf19a1_baa38e2f",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1201,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-02T15:30:37Z",
+      "side": 1,
+      "message": "Style nit: We always use braces.",
+      "range": {
+        "startLine": 1200,
+        "startChar": 0,
+        "endLine": 1201,
+        "endChar": 36
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3cc8ed5d_88d3623c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+              "range": {
+                "startLine": 1200,
+                "startChar": 0,
+                "endLine": 1201,
+                "endChar": 0
+              },
+              "replacement": "        if (disableRoot) {\n"
+            },
+            {
+              "path": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+              "range": {
+                "startLine": 1202,
+                "startChar": 0,
+                "endLine": 1202,
+                "endChar": 0
+              },
+              "replacement": "        }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8a69159f53df4a71a5f15d39f4e00b0b65df564d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
