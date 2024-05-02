@@ -16,6 +16,29 @@
       "message": "Hi Alan, PTAL.",
       "revId": "9fd94423c62948fa62c524d91ab564c2f797a305",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f770081e_212d6a97",
+        "filename": "service_vm/requests/src/rkp.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-02T13:13:42Z",
+      "side": 1,
+      "message": "These should maybe be `debug!`?\n\nDo we want them for all requests on all devices, or only when debugging?",
+      "range": {
+        "startLine": 81,
+        "startChar": 4,
+        "endLine": 81,
+        "endChar": 8
+      },
+      "revId": "9fd94423c62948fa62c524d91ab564c2f797a305",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
