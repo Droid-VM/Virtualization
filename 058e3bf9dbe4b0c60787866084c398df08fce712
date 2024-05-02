@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b631f3fe_61710376",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-02T15:07:00Z",
+      "side": 1,
+      "message": "Adding Nikita to take a look at the `vm` changes.",
+      "revId": "058e3bf9dbe4b0c60787866084c398df08fce712",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8d9eeda_cc61242d",
+        "filename": "microdroid/payload/config/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-02T15:07:00Z",
+      "side": 1,
+      "message": "Can we link to some transparent hugepages docs?\n(Also, maybe we should add this to a readme file somewhere, to help partners who might want to use it?)",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 73
+      },
+      "revId": "058e3bf9dbe4b0c60787866084c398df08fce712",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bbe8003_b6914a5d",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineRawConfig.aidl",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-02T15:07:00Z",
+      "side": 1,
+      "message": "Nit: You don\u0027t need the explicit false, the default default is false anyway.",
+      "range": {
+        "startLine": 78,
+        "startChar": 21,
+        "endLine": 78,
+        "endChar": 29
+      },
+      "revId": "058e3bf9dbe4b0c60787866084c398df08fce712",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc622457_c4771ecb",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-02T15:07:00Z",
+      "side": 1,
+      "message": "Could you expand the comment a bit, like the config file one?",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 32
+      },
+      "revId": "058e3bf9dbe4b0c60787866084c398df08fce712",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
