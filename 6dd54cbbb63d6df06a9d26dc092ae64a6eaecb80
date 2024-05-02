@@ -16,6 +16,24 @@
       "message": "I wanted to find a way to exercise the tracing in Android15, so I revived this test.\n\nJust need a small change to take into account the fact the events have moved into `events/hyp` \n\n```\ndiff --git a/tests/hostside/helper/java/com/android/microdroid/test/host/KvmHypTracer.java b/tests/hostside/helper/java/com/android/microdroid/test/host/KvmHypTracer.java\nindex 46d33f2cbdfe..0d8ee96a0313 100644\n--- a/tests/hostside/helper/java/com/android/microdroid/test/host/KvmHypTracer.java\n+++ b/tests/hostside/helper/java/com/android/microdroid/test/host/KvmHypTracer.java\n@@ -55,9 +55,13 @@ public final class KvmHypTracer {\n         mRunner.run(\"echo \" + val + \" \u003e \" + HYP_TRACING_ROOT + node);\n     }\n \n+    private static String eventDir(String event) {\n+        return \"events/hyp/\" + event + \"/\";\n+    }\n+\n     public static boolean isSupported(ITestDevice device) throws Exception {\n         for (String event: HYP_EVENTS) {\n-            if (!device.doesFileExist(HYP_TRACING_ROOT + \"events/\" + event + \"/enable\"))\n+            if (!device.doesFileExist(HYP_TRACING_ROOT + eventDir(event) + \"/enable\"))\n                 return false;\n         }\n         return true;\n@@ -77,10 +81,10 @@ public final class KvmHypTracer {\n         mTraces.clear();\n \n         setNode(\"tracing_on\", 0);\n-        mRunner.run(\"echo 0 | tee \" + HYP_TRACING_ROOT + \"events/*/enable\");\n+        mRunner.run(\"echo 0 | tee \" + HYP_TRACING_ROOT + \"events/*/*/enable\");\n         setNode(\"buffer_size_kb\", DEFAULT_BUF_SIZE_KB);\n         for (String event: HYP_EVENTS)\n-            setNode(\"events/\" + event + \"/enable\", 1);\n+            setNode(eventDir(event) + \"/enable\", 1);\n\n```\n\nAnd it all works fine!\n\nSmall notice, in Android14, big tracing buffer allocation might fail, due to the need of physically contiguous memory. hyp_alloc() solved this!\n\nI don\u0027t see any problem here. Any chance to get this merged?",
       "revId": "6dd54cbbb63d6df06a9d26dc092ae64a6eaecb80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6c38556_52e88231",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-05-02T11:57:53Z",
+      "side": 1,
+      "message": "LGTM, want to push an updated CL directly?",
+      "parentUuid": "4732780f_7b6d1ccf",
+      "revId": "6dd54cbbb63d6df06a9d26dc092ae64a6eaecb80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
