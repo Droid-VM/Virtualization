@@ -24,7 +24,10 @@ use crate::{
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
     CpuTopology::CpuTopology,
     IVirtualizationService::IVirtualizationService,
-    VirtualMachineAppConfig::{DebugLevel::DebugLevel, Payload::Payload, VirtualMachineAppConfig},
+    VirtualMachineAppConfig::{
+        CustomConfig::CustomConfig, DebugLevel::DebugLevel, Payload::Payload,
+        VirtualMachineAppConfig,
+    },
     VirtualMachineConfig::VirtualMachineConfig,
 };
 use anyhow::{anyhow, bail, Context, Result};
@@ -116,6 +119,8 @@ impl ComposClient {
             VmCpuTopology::MatchHost => CpuTopology::MATCH_HOST,
         };
 
+        let custom_config = Some(CustomConfig { updatable: false, ..Default::default() });
+
         let config = VirtualMachineConfig::AppConfig(VirtualMachineAppConfig {
             name: parameters.name.clone(),
             apk: Some(apk_fd),
@@ -128,6 +133,7 @@ impl ComposClient {
             protectedVm: protected_vm,
             memoryMib: parameters.memory_mib.unwrap_or(0), // 0 means use the default
             cpuTopology: cpu_topology,
+            customConfig: custom_config,
             ..Default::default()
         });
 
