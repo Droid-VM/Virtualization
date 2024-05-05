@@ -20,6 +20,115 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c4ae5182_5f3d9270",
+        "filename": "libs/android_audio_backend/Android.bp",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-05T02:36:40Z",
+      "side": 1,
+      "message": "I don\u0027t think it should be available to the platform",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 36
+      },
+      "revId": "36c52abfee9a4cf03a56b02680c53173cb1801ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a165e20_0c435529",
+        "filename": "libs/android_audio_backend/aaudio_streams.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-05T02:36:40Z",
+      "side": 1,
+      "message": "Why are these modeled as enums? Please refer to https://doc.rust-lang.org/nomicon/ffi.html#representing-opaque-structs for representing opaque C structs in rust.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 27
+      },
+      "revId": "36c52abfee9a4cf03a56b02680c53173cb1801ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4432aecd_e860ab48",
+        "filename": "libs/android_audio_backend/aaudio_streams.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-05T02:36:40Z",
+      "side": 1,
+      "message": "This name is very confusing with `AAudioStream`. I don\u0027t think you need the `Aaudio` prefix for the items in this module, because its name already is `aaudio_streams`.",
+      "range": {
+        "startLine": 65,
+        "startChar": 7,
+        "endLine": 65,
+        "endChar": 19
+      },
+      "revId": "36c52abfee9a4cf03a56b02680c53173cb1801ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57b12c25_1d09e327",
+        "filename": "libs/android_audio_backend/aaudio_streams.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-05T02:36:40Z",
+      "side": 1,
+      "message": "Not sure if using mutex is enough. The doc says they intentionally didn\u0027t use mutex because it anyway will cause glitches. The recommendation is to use these APIs in a single thread.",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 37
+      },
+      "revId": "36c52abfee9a4cf03a56b02680c53173cb1801ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b707392_d967433a",
+        "filename": "libs/android_audio_backend/aaudio_streams.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-05T02:36:40Z",
+      "side": 1,
+      "message": "Is it okay, or deserve a TODO comment?",
+      "revId": "36c52abfee9a4cf03a56b02680c53173cb1801ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d14f5f2e_159925a7",
         "filename": "libs/android_audio_backend/aaudio_streams.rs",
         "patchSetId": 6
@@ -36,6 +145,122 @@
         "startChar": 0,
         "endLine": 123,
         "endChar": 53
+      },
+      "revId": "36c52abfee9a4cf03a56b02680c53173cb1801ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "851626e5_7058b321",
+        "filename": "libs/android_audio_backend/aaudio_streams.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-05T02:36:40Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "d14f5f2e_159925a7",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 53
+      },
+      "revId": "36c52abfee9a4cf03a56b02680c53173cb1801ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a68b9572_b9cc665a",
+        "filename": "libs/android_audio_backend/aaudio_streams.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-05T02:36:40Z",
+      "side": 1,
+      "message": "You are passing a mutable reference to the slice. Consider wrapping the slice with RefCell and using borrow_mut to get a mutable reference to the slice.\n\n... and use borrow in the commit function above. Be sure to check the error condition.",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 99
+      },
+      "revId": "36c52abfee9a4cf03a56b02680c53173cb1801ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32a93f82_b3eae8d7",
+        "filename": "libs/android_audio_backend/aaudio_streams.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-05T02:36:40Z",
+      "side": 1,
+      "message": "According to https://developer.android.com/ndk/reference/group/audio#aaudiostream_release\n\n\u003e AAudioStream_close() should be called at some point after calling this function.",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 63
+      },
+      "revId": "36c52abfee9a4cf03a56b02680c53173cb1801ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb52bb18_7039d597",
+        "filename": "libs/android_audio_backend/aaudio_streams.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-05T02:36:40Z",
+      "side": 1,
+      "message": "What is the purpose of this struct?",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 193,
+        "endChar": 0
+      },
+      "revId": "36c52abfee9a4cf03a56b02680c53173cb1801ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5e7b404_1b522e3b",
+        "filename": "libs/android_audio_backend/aaudio_streams.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-05T02:36:40Z",
+      "side": 1,
+      "message": "Didn\u0027t `#[derive(Default)]` work?",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 0
       },
       "revId": "36c52abfee9a4cf03a56b02680c53173cb1801ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
