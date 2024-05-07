@@ -39,6 +39,30 @@
       },
       "revId": "f7ced3c0df057be4f024f594b15b77fd7e5963d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96ca7e8f_6f6c5928",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineAppConfig.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-07T14:45:35Z",
+      "side": 1,
+      "message": "I went with `want_`. I think needs/require aren\u0027t quite right - setting this true doesn\u0027t guarantee you will be updatable, but setting it false guarantees that you won\u0027t be.",
+      "parentUuid": "4192313a_30ba29d9",
+      "range": {
+        "startLine": 126,
+        "startChar": 16,
+        "endLine": 126,
+        "endChar": 25
+      },
+      "revId": "f7ced3c0df057be4f024f594b15b77fd7e5963d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
