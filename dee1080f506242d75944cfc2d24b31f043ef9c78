@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a717b62b_91639403",
+        "filename": "docs/custom_vm.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-05-07T09:14:50Z",
+      "side": 1,
+      "message": "I +2 to existing doc.\n\nWe need a whole CrOS image that contains Ash Chrome, so Simple Chrome isn\u0027t appropriate. However, Ash Chrome instruction assumes that the reader is already familiar with the CrOS, so I would prefer to write down the whole instructions.\n\nsee: https://www.chromium.org/chromium-os/developer-library/guides/development/simple-chrome-workflow/#building-ash-chrome-in-the-chroot",
+      "parentUuid": "7fe69d43_63f4cc5a",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 28
+      },
+      "revId": "dee1080f506242d75944cfc2d24b31f043ef9c78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b1284c31_4d2ba74c",
         "filename": "docs/custom_vm.md",
         "patchSetId": 1
