@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6d177af_aff300e0",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-05-08T14:02:53Z",
+      "side": 1,
+      "message": "Why not `unmap_mmio_guard_regions` to have the same name as the description ?",
+      "range": {
+        "startLine": 254,
+        "startChar": 11,
+        "endLine": 254,
+        "endChar": 27
+      },
+      "revId": "48ef6bf93631a4bd2bc8d5cc63882af3dc545158",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "783dd93b_a5e3e0ff",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-05-08T14:02:53Z",
+      "side": 1,
+      "message": "Where is the panic coming from ? Are we doing PSCI_MEM_PROTECT before ending up here ?",
+      "revId": "48ef6bf93631a4bd2bc8d5cc63882af3dc545158",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
