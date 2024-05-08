@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4be2972_5ebabd00",
+        "filename": "libs/bssl/src/cbs.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1031048
+      },
+      "writtenOn": "2024-05-08T22:03:34Z",
+      "side": 1,
+      "message": "This function is not actually safe by Rust standards. I mean, it takes a pointer and writes to it. Also there\u0027s a safety requirement that the buffer is a valid buffer.\n\nI think your handwritten Rust wrapper needs to be marked `unsafe`. Additionally, we don\u0027t actually want a handwritten Rust wrapper anyway. The aim is to ultimately use the automatic inlines.\n\n(Also, existing issue, but you cannot use `as_ptr()` with any C FFI. See https://boringssl.googlesource.com/boringssl/+/HEAD/API-CONVENTIONS.md#pointers-and-slices and https://davidben.net/2024/01/15/empty-slices.html)",
+      "revId": "df8c46234066d7213828da03abf8adb849e36af3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
