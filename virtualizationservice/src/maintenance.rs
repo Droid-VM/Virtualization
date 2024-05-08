@@ -86,7 +86,7 @@ impl State {
 
     fn find_sk() -> Option<binder::Strong<dyn ISecretkeeper>> {
         if let Ok(true) = binder::is_declared(SECRETKEEPER_SERVICE) {
-            match binder::get_interface(SECRETKEEPER_SERVICE) {
+            match binder::wait_for_interface(SECRETKEEPER_SERVICE) {
                 Ok(sk) => Some(sk),
                 Err(e) => {
                     error!("failed to connect to {SECRETKEEPER_SERVICE}: {e:?}");
