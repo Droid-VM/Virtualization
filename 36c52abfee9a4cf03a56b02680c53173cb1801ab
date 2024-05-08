@@ -160,6 +160,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0e0eadd3_68764d58",
+        "filename": "libs/android_audio_backend/aaudio_streams.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-08T13:26:25Z",
+      "side": 1,
+      "message": "I didn\u0027t look into the crosvm side of this. What you said sounds like a good sign, but I feel like it\u0027s a very fragile thing for us to depend on.\n\nNot sure the callback method you mentioned makes everything thread safe all at a sudden.\n\nI feel fine with not fixing this right now, but I think we may want to revisit this in the future. Feel free to resolve this.",
+      "parentUuid": "dc949ea0_537f9832",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 37
+      },
+      "revId": "36c52abfee9a4cf03a56b02680c53173cb1801ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7b707392_d967433a",
         "filename": "libs/android_audio_backend/aaudio_streams.rs",
         "patchSetId": 6
