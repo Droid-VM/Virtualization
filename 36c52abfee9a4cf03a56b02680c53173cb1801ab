@@ -112,6 +112,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e4fe260_63e4f693",
+        "filename": "libs/android_audio_backend/aaudio_streams.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-05-08T09:00:50Z",
+      "side": 1,
+      "message": "I traced the crosvm audio playback code start from this [function](https://cs.android.com/android/platform/superproject/main/+/main:external/crosvm/devices/src/virtio/snd/common_backend/async_funcs.rs;l\u003d347). I see every async function call ended with a await right after. Can we assume the AAudio would be called in single thread?\n\nIf we want to ensure the thread-safty for these async functions we are going to implement. AAudio provides a non-blocking [callback method](https://developer.android.com/ndk/guides/audio/aaudio/aaudio#high-priority-callback) that may solve this issue and additionally improves the performance(although the sound is kind of perfect currently). But it will become more complex as a producer/consumer problem...",
+      "parentUuid": "57b12c25_1d09e327",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 37
+      },
+      "revId": "36c52abfee9a4cf03a56b02680c53173cb1801ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7b707392_d967433a",
         "filename": "libs/android_audio_backend/aaudio_streams.rs",
         "patchSetId": 6
