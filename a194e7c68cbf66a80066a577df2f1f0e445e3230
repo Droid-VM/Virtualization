@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "bc6fa314_6b881afc",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-05-09T12:25:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ef2f8f28_ace69e2c",
+      "revId": "a194e7c68cbf66a80066a577df2f1f0e445e3230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "1ecb86bd_b2269a43",
         "filename": "libs/bssl/src/ec_key.rs",
         "patchSetId": 1
@@ -166,6 +184,30 @@
       "side": 1,
       "message": "Maybe - except this one is generic across different formats for different key types.",
       "parentUuid": "e31b3c35_e4fea38c",
+      "range": {
+        "startLine": 227,
+        "startChar": 21,
+        "endLine": 227,
+        "endChar": 30
+      },
+      "revId": "a194e7c68cbf66a80066a577df2f1f0e445e3230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "950dced7_fa80f469",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-05-09T12:25:47Z",
+      "side": 1,
+      "message": "Sure, but it can still be more specific (\"Signature format should be as per RFC 9053 section 2\" -- although to be fair section 2.2 is fairly silent on EdDSA signature formats, presumably because there\u0027s no variance in them)",
+      "parentUuid": "176a61ec_0292a3ac",
       "range": {
         "startLine": 227,
         "startChar": 21,
