@@ -54,6 +54,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2eb59e68_4f9a934c",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-05-09T12:40:33Z",
+      "side": 1,
+      "message": "Why do you need a reference to a pointer to the buffer, rather than just the pointer to the buffer?",
+      "revId": "a194e7c68cbf66a80066a577df2f1f0e445e3230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1ecb86bd_b2269a43",
@@ -85,6 +102,23 @@
       "side": 1,
       "message": "Yeah, I thought about that, and decided it was more grief than I needed. (We have some CBB support, but it\u0027s only for fixed size buffers.)",
       "parentUuid": "1ecb86bd_b2269a43",
+      "revId": "a194e7c68cbf66a80066a577df2f1f0e445e3230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "640efb51_538f4ad0",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-05-09T12:40:33Z",
+      "side": 1,
+      "message": "Maybe it would be worth adding an assertion that this `len` matches the earlier `len` which was used to allocate the buffer?",
       "revId": "a194e7c68cbf66a80066a577df2f1f0e445e3230",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
