@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39a929d0_ae0d6301",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1184,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-05-09T13:35:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c207f74_9edc81b7",
+      "range": {
+        "startLine": 1183,
+        "startChar": 0,
+        "endLine": 1184,
+        "endChar": 31
+      },
+      "revId": "8a69159f53df4a71a5f15d39f4e00b0b65df564d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c53bbf7_b4b74f33",
@@ -96,6 +120,30 @@
           ]
         }
       ],
+      "revId": "8a69159f53df4a71a5f15d39f4e00b0b65df564d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d623a6d_c831a733",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1199,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-05-09T13:35:37Z",
+      "side": 1,
+      "message": "This is yet another terrible machine interface for the kernel :).\n\nWhen you `cat` the file, you actually see all the supported values with the current one between brackets. So here the content of thpShmemStr is actually \"advise always [never]...\"\n\nBut this tst will only run when \"never\" is originally selected so unconditionally put it back to never here is alright.",
+      "parentUuid": "0c53bbf7_b4b74f33",
+      "range": {
+        "startLine": 1199,
+        "startChar": 26,
+        "endLine": 1199,
+        "endChar": 31
+      },
       "revId": "8a69159f53df4a71a5f15d39f4e00b0b65df564d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -147,6 +195,30 @@
           ]
         }
       ],
+      "revId": "8a69159f53df4a71a5f15d39f4e00b0b65df564d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e5bbe6b_26b47b47",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1201,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-05-09T13:35:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6cdf19a1_baa38e2f",
+      "range": {
+        "startLine": 1200,
+        "startChar": 0,
+        "endLine": 1201,
+        "endChar": 36
+      },
       "revId": "8a69159f53df4a71a5f15d39f4e00b0b65df564d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
