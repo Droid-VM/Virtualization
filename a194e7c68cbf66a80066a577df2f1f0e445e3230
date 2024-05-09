@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef2f8f28_ace69e2c",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-09T11:47:04Z",
+      "side": 1,
+      "message": "The main reason I did it this way is I want drop() to be called if load() fails for any reason, and this seemed like the easiest way to ensure that.",
+      "parentUuid": "e8c7e1ec_f26a8c25",
+      "revId": "a194e7c68cbf66a80066a577df2f1f0e445e3230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1ecb86bd_b2269a43",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-05-09T09:54:34Z",
       "side": 1,
       "message": "`i2d_ECDSA_SIG` is marked as deprecated, with `ECDSA_SIG_marshal` suggested as an alternative; presumably the need for `CBB` makes that pesky?",
+      "revId": "a194e7c68cbf66a80066a577df2f1f0e445e3230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24c187e3_d646d051",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-09T11:47:04Z",
+      "side": 1,
+      "message": "Yeah, I thought about that, and decided it was more grief than I needed. (We have some CBB support, but it\u0027s only for fixed size buffers.)",
+      "parentUuid": "1ecb86bd_b2269a43",
       "revId": "a194e7c68cbf66a80066a577df2f1f0e445e3230",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,47 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "052aa978_9cce5ac6",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-09T11:47:04Z",
+      "side": 1,
+      "message": "In our moment of triumph?\n\nSo, a follow-up CL needs to be able to produce NIST signatures (and add the DER-\u003eNIST) conversion. That will make testing this a lot easier.\n\nThe fact this fixes the existing test breakage on real devices is making me reasonably comfortable.",
+      "parentUuid": "fd5912d7_43c483d7",
+      "revId": "a194e7c68cbf66a80066a577df2f1f0e445e3230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d58feca_0f72dc5c",
+        "filename": "service_vm/requests/src/client_vm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-09T11:47:04Z",
+      "side": 1,
+      "message": "This is the one that I suspect should be NIST, but we need to change the signer to do that too. Coming in another CL.",
+      "range": {
+        "startLine": 123,
+        "startChar": 8,
+        "endLine": 123,
+        "endChar": 24
+      },
+      "revId": "a194e7c68cbf66a80066a577df2f1f0e445e3230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e31b3c35_e4fea38c",
@@ -65,6 +142,30 @@
       "writtenOn": "2024-05-09T09:54:34Z",
       "side": 1,
       "message": "We should probably find any API comment that includes the word \"signature\" and make sure it clearly indicates the expected format...",
+      "range": {
+        "startLine": 227,
+        "startChar": 21,
+        "endLine": 227,
+        "endChar": 30
+      },
+      "revId": "a194e7c68cbf66a80066a577df2f1f0e445e3230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "176a61ec_0292a3ac",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-09T11:47:04Z",
+      "side": 1,
+      "message": "Maybe - except this one is generic across different formats for different key types.",
+      "parentUuid": "e31b3c35_e4fea38c",
       "range": {
         "startLine": 227,
         "startChar": 21,
@@ -112,6 +213,30 @@
       "side": 1,
       "message": "Hmm, I\u0027d probably expect this to want an R|S signature, given that `PublicKey` is  just a `CoseKey` and so is most likely to be used to verify a `CoseSign[1]`. \n\nBut the main thing is to make sure it\u0027s clear/documented/tested.",
       "parentUuid": "a575c846_74b5920c",
+      "range": {
+        "startLine": 251,
+        "startChar": 30,
+        "endLine": 251,
+        "endChar": 47
+      },
+      "revId": "a194e7c68cbf66a80066a577df2f1f0e445e3230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f355774_d20caa09",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-09T11:47:04Z",
+      "side": 1,
+      "message": "I put my comment in the wrong place. Yes, this should definitely be NIST. This is in fact the fix to the bug.",
+      "parentUuid": "ad4883dc_a8afb2be",
       "range": {
         "startLine": 251,
         "startChar": 30,
