@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f94fdf7_d844de67",
+        "filename": "vmbase/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-09T15:07:36Z",
+      "side": 1,
+      "message": "Uber-nit: No blank line, let rustfmt order the imports",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "f36d488ad4d589bcf1ea4aed72c878f01a7fd383",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99423244_cf224e53",
+        "filename": "vmbase/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-09T15:07:36Z",
+      "side": 1,
+      "message": "Why the braces?",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 9
+      },
+      "revId": "f36d488ad4d589bcf1ea4aed72c878f01a7fd383",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0464760d_6b378f01",
+        "filename": "vmbase/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-09T15:07:36Z",
+      "side": 1,
+      "message": "Comment? It\u0027s no obvious to me why this should be true.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 64
+      },
+      "revId": "f36d488ad4d589bcf1ea4aed72c878f01a7fd383",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39f4d5a2_ca36cee7",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-09T15:07:36Z",
+      "side": 1,
+      "message": "Why is this MMIO_GUARD_GRANULE_SIZE not granule?",
+      "range": {
+        "startLine": 114,
+        "startChar": 1,
+        "endLine": 114,
+        "endChar": 59
+      },
+      "revId": "f36d488ad4d589bcf1ea4aed72c878f01a7fd383",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91ef02b5_7cb634ef",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-09T15:07:36Z",
+      "side": 1,
+      "message": "Should we check this is a non-zero power of 2?",
+      "range": {
+        "startLine": 410,
+        "startChar": 11,
+        "endLine": 410,
+        "endChar": 18
+      },
+      "revId": "f36d488ad4d589bcf1ea4aed72c878f01a7fd383",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
