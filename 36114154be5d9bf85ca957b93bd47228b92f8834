@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cda00b0b_02931d42",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-09T14:47:16Z",
+      "side": 1,
+      "message": "Apparently you can do this at compile time - given both sides are constants - via something like\n\n`const _: () \u003d assert_eq!(...);`\n\nOr it looks like we have the static_assertions crate available.",
+      "range": {
+        "startLine": 323,
+        "startChar": 0,
+        "endLine": 323,
+        "endChar": 55
+      },
+      "revId": "36114154be5d9bf85ca957b93bd47228b92f8834",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87a6f13f_795c2b73",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-09T14:47:16Z",
+      "side": 1,
+      "message": "Add a doc comment?",
+      "range": {
+        "startLine": 348,
+        "startChar": 4,
+        "endLine": 348,
+        "endChar": 6
+      },
+      "revId": "36114154be5d9bf85ca957b93bd47228b92f8834",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
