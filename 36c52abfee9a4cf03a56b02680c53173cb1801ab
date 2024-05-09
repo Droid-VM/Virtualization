@@ -182,6 +182,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe88993b_1a28fd70",
+        "filename": "libs/android_audio_backend/aaudio_streams.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-05-09T17:36:25Z",
+      "side": 1,
+      "message": "I have tried the callback method for a few days but still don\u0027t know how to properly get the audio data inside the callback function(I tried stuff like Arc\u003cMutex\u003cVecDeque\u003cVec\u003cu8\u003e\u003e\u003e\u003e....). I will use the original AAudioStream_write for now.",
+      "parentUuid": "0e0eadd3_68764d58",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 37
+      },
+      "revId": "36c52abfee9a4cf03a56b02680c53173cb1801ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b707392_d967433a",
