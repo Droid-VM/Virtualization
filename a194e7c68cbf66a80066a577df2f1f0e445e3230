@@ -1,6 +1,80 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8c7e1ec_f26a8c25",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-05-09T09:54:34Z",
+      "side": 1,
+      "message": "Is there ever a need for an uninitialized `EcSignature`?  Or can we combine `new()` and `load_from_nist(sig)` into `new_from_nist(sig)`?",
+      "revId": "a194e7c68cbf66a80066a577df2f1f0e445e3230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ecb86bd_b2269a43",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-05-09T09:54:34Z",
+      "side": 1,
+      "message": "`i2d_ECDSA_SIG` is marked as deprecated, with `ECDSA_SIG_marshal` suggested as an alternative; presumably the need for `CBB` makes that pesky?",
+      "revId": "a194e7c68cbf66a80066a577df2f1f0e445e3230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd5912d7_43c483d7",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-05-09T09:54:34Z",
+      "side": 1,
+      "message": "Unit tests?",
+      "revId": "a194e7c68cbf66a80066a577df2f1f0e445e3230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e31b3c35_e4fea38c",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-05-09T09:54:34Z",
+      "side": 1,
+      "message": "We should probably find any API comment that includes the word \"signature\" and make sure it clearly indicates the expected format...",
+      "range": {
+        "startLine": 227,
+        "startChar": 21,
+        "endLine": 227,
+        "endChar": 30
+      },
+      "revId": "a194e7c68cbf66a80066a577df2f1f0e445e3230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a575c846_74b5920c",
@@ -14,6 +88,30 @@
       "writtenOn": "2024-05-09T09:23:32Z",
       "side": 1,
       "message": "I think this should be DER too. But we are both signing and verifying, so at the moment we\u0027re consistent and it all works. I\u0027ll fix this in a later CL.",
+      "range": {
+        "startLine": 251,
+        "startChar": 30,
+        "endLine": 251,
+        "endChar": 47
+      },
+      "revId": "a194e7c68cbf66a80066a577df2f1f0e445e3230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad4883dc_a8afb2be",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-05-09T09:54:34Z",
+      "side": 1,
+      "message": "Hmm, I\u0027d probably expect this to want an R|S signature, given that `PublicKey` is  just a `CoseKey` and so is most likely to be used to verify a `CoseSign[1]`. \n\nBut the main thing is to make sure it\u0027s clear/documented/tested.",
+      "parentUuid": "a575c846_74b5920c",
       "range": {
         "startLine": 251,
         "startChar": 30,
