@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a575c846_74b5920c",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-09T09:23:32Z",
+      "side": 1,
+      "message": "I think this should be DER too. But we are both signing and verifying, so at the moment we\u0027re consistent and it all works. I\u0027ll fix this in a later CL.",
+      "range": {
+        "startLine": 251,
+        "startChar": 30,
+        "endLine": 251,
+        "endChar": 47
+      },
+      "revId": "a194e7c68cbf66a80066a577df2f1f0e445e3230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
