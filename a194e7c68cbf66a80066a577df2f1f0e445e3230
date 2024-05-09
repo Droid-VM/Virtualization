@@ -73,6 +73,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "58251eb6_f5f43623",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-09T13:04:42Z",
+      "side": 1,
+      "message": "That\u0027s what the function wants: https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:external/rust/crates/quiche/deps/boringssl/src/include/openssl/ecdsa.h;drc\u003df57cb85c46168700fd06cd83f90c2e9e6cc4df2a;l\u003d213\n\n`OPENSSL_EXPORT int i2d_ECDSA_SIG(const ECDSA_SIG *sig, uint8_t **outp);`\n\nIt allows supporting no buffer (return length only), caller-allocated buffer, and callee-allocated buffer (via non-null pointer to null).\n\nIt\u0027s pretty horrible, but there it is.",
+      "parentUuid": "2eb59e68_4f9a934c",
+      "revId": "a194e7c68cbf66a80066a577df2f1f0e445e3230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "1ecb86bd_b2269a43",
         "filename": "libs/bssl/src/ec_key.rs",
         "patchSetId": 1
@@ -119,6 +137,24 @@
       "writtenOn": "2024-05-09T12:40:33Z",
       "side": 1,
       "message": "Maybe it would be worth adding an assertion that this `len` matches the earlier `len` which was used to allocate the buffer?",
+      "revId": "a194e7c68cbf66a80066a577df2f1f0e445e3230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52f286c1_321a0898",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-09T13:04:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "640efb51_538f4ad0",
       "revId": "a194e7c68cbf66a80066a577df2f1f0e445e3230",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -242,6 +278,30 @@
       "side": 1,
       "message": "Sure, but it can still be more specific (\"Signature format should be as per RFC 9053 section 2\" -- although to be fair section 2.2 is fairly silent on EdDSA signature formats, presumably because there\u0027s no variance in them)",
       "parentUuid": "176a61ec_0292a3ac",
+      "range": {
+        "startLine": 227,
+        "startChar": 21,
+        "endLine": 227,
+        "endChar": 30
+      },
+      "revId": "a194e7c68cbf66a80066a577df2f1f0e445e3230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3742725f_e6d68b96",
+        "filename": "service_vm/requests/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-09T13:04:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "950dced7_fa80f469",
       "range": {
         "startLine": 227,
         "startChar": 21,
