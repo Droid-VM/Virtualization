@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd9434d0_cecb13ed",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-09T10:32:54Z",
+      "side": 1,
+      "message": "Reworked the docstring.",
+      "parentUuid": "54cfa04a_7d2084d6",
+      "range": {
+        "startLine": 254,
+        "startChar": 11,
+        "endLine": 254,
+        "endChar": 27
+      },
+      "revId": "48ef6bf93631a4bd2bc8d5cc63882af3dc545158",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "783dd93b_a5e3e0ff",
@@ -79,6 +103,24 @@
       "side": 1,
       "message": "\u003e Where is the panic coming from ?\n\n`shared` is the result (as in `core::result::Result`) of the HVC and `.unwrap()` will make Rust panic if it is not `Ok` (i.e. if the HVC hasn\u0027t return `0` in x0) because that then means that we have - somehow - failed to actually \"unshare\" the page. As `handle_mmio_fault` is running in fault-handling context and corresponding the PTE has already been updated at this point (i.e. stage-1 will allow valid accesses), what should we otherwise do?\n\nIf we undo the stage-1 mapping (which is annoying to get right, given BBM), the access we\u0027ve trapped will be replayed and will result in a stage-1 page fault (and possibly infinite loop, except if we unset the SW bit). OTOH, if we leave the page table as-is, the replayed access will result in a stage-2 fault and pvmfw mysteriously dying.\n\nInstead, panicking at this point seems to make the most sense?\n\nDo you want me to add more details to the comment above?\n\n\u003e Are we doing PSCI_MEM_PROTECT before ending up here ?\n\nIsn\u0027t `PSCI_MEM_PROTECT` only issued by the hypervisor; I\u0027m not how that affects this code?",
       "parentUuid": "783dd93b_a5e3e0ff",
+      "revId": "48ef6bf93631a4bd2bc8d5cc63882af3dc545158",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "319e5d1e_61c6daea",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-09T10:32:54Z",
+      "side": 1,
+      "message": "\u003e Do you want me to add more details to the comment above?\n\nDone.\n\n(keeping unresolved for the `PSCI_MEM_PROTECT` point, which I don\u0027t get)",
+      "parentUuid": "7b50fafc_02721d7a",
       "revId": "48ef6bf93631a4bd2bc8d5cc63882af3dc545158",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
