@@ -601,7 +601,7 @@ public final class VirtualMachineConfig {
         config.name = Optional.ofNullable(customImageConfig.getName()).orElse("");
         config.instanceId = new byte[64];
         config.kernel =
-                Optional.of(customImageConfig.getKernelPath())
+                Optional.ofNullable(customImageConfig.getKernelPath())
                         .map(
                                 (path) -> {
                                     try {
@@ -643,6 +643,10 @@ public final class VirtualMachineConfig {
 
         config.displayConfig =
                 Optional.ofNullable(customImageConfig.getDisplayConfig())
+                        .map(dc -> dc.toParcelable())
+                        .orElse(null);
+        config.gpuConfig =
+                Optional.ofNullable(customImageConfig.getGpuConfig())
                         .map(dc -> dc.toParcelable())
                         .orElse(null);
         config.protectedVm = this.mProtectedVm;

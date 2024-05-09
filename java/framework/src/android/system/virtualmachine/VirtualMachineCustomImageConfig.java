@@ -36,6 +36,7 @@ public class VirtualMachineCustomImageConfig {
     private static final String KEY_DISPLAY_CONFIG = "display_config";
     private static final String KEY_TOUCH = "touch";
     private static final String KEY_KEYBOARD = "keyboard";
+    private static final String KEY_GPU = "gpu";
 
     @Nullable private final String name;
     @NonNull private final String kernelPath;
@@ -46,6 +47,7 @@ public class VirtualMachineCustomImageConfig {
     @Nullable private final DisplayConfig displayConfig;
     private final boolean touch;
     private final boolean keyboard;
+    @Nullable private final GpuConfig gpuConfig;
 
     @Nullable
     public Disk[] getDisks() {
@@ -95,7 +97,8 @@ public class VirtualMachineCustomImageConfig {
             Disk[] disks,
             DisplayConfig displayConfig,
             boolean touch,
-            boolean keyboard) {
+            boolean keyboard,
+            GpuConfig gpuConfig) {
         this.name = name;
         this.kernelPath = kernelPath;
         this.initrdPath = initrdPath;
@@ -105,6 +108,7 @@ public class VirtualMachineCustomImageConfig {
         this.displayConfig = displayConfig;
         this.touch = touch;
         this.keyboard = keyboard;
+        this.gpuConfig = gpuConfig;
     }
 
     static VirtualMachineCustomImageConfig from(PersistableBundle customImageConfigBundle) {
@@ -172,6 +176,11 @@ public class VirtualMachineCustomImageConfig {
         return displayConfig;
     }
 
+    @Nullable
+    public GpuConfig getGpuConfig() {
+        return gpuConfig;
+    }
+
     /** @hide */
     public static final class Disk {
         private final boolean writable;
@@ -214,6 +223,7 @@ public class VirtualMachineCustomImageConfig {
         private DisplayConfig displayConfig;
         private boolean touch;
         private boolean keyboard;
+        private GpuConfig gpuConfig;
 
         /** @hide */
         public Builder() {}
@@ -261,6 +271,12 @@ public class VirtualMachineCustomImageConfig {
         }
 
         /** @hide */
+        public Builder setGpuConfig(GpuConfig gpuConfig) {
+            this.gpuConfig = gpuConfig;
+            return this;
+        }
+
+        /** @hide */
         public Builder useTouch(boolean touch) {
             this.touch = touch;
             return this;
@@ -283,7 +299,8 @@ public class VirtualMachineCustomImageConfig {
                     this.disks.toArray(new Disk[0]),
                     displayConfig,
                     touch,
-                    keyboard);
+                    keyboard,
+                    gpuConfig);
         }
     }
 
@@ -417,6 +434,205 @@ public class VirtualMachineCustomImageConfig {
                     throw new IllegalStateException("width and height must be specified");
                 }
                 return new DisplayConfig(width, height, horizontalDpi, verticalDpi, refreshRate);
+            }
+        }
+    }
+
+    /** @hide */
+    public static final class GpuConfig {
+        private static final String KEY_CONTEXT_TYPES = "context_types";
+        private static final String KEY_PCI_ADDRESS = "pci_address";
+        private static final String KEY_RENDERER_FEATURES = "renderer_features";
+        private static final String KEY_RENDERER_USE_EGL = "renderer_use_egl";
+        private static final String KEY_RENDERER_USE_GLES = "renderer_use_gles";
+        private static final String KEY_RENDERER_USE_GLX = "renderer_use_glx";
+        private static final String KEY_RENDERER_USE_SURFACELESS = "renderer_use_surfaceless";
+        private static final String KEY_RENDERER_USE_VULKAN = "renderer_use_vulkan";
+
+        private final String[] contextTypes;
+        private final String pciAddress;
+        private final String rendererFeatures;
+        private final boolean rendererUseEgl;
+        private final boolean rendererUseGles;
+        private final boolean rendererUseGlx;
+        private final boolean rendererUseSurfaceless;
+        private final boolean rendererUseVulkan;
+
+        private GpuConfig(
+                String[] contextTypes,
+                String pciAddress,
+                String rendererFeatures,
+                boolean rendererUseEgl,
+                boolean rendererUseGles,
+                boolean rendererUseGlx,
+                boolean rendererUseSurfaceless,
+                boolean rendererUseVulkan) {
+            this.contextTypes = contextTypes;
+            this.pciAddress = pciAddress;
+            this.rendererFeatures = rendererFeatures;
+            this.rendererUseEgl = rendererUseEgl;
+            this.rendererUseGles = rendererUseGles;
+            this.rendererUseGlx = rendererUseGlx;
+            this.rendererUseSurfaceless = rendererUseSurfaceless;
+            this.rendererUseVulkan = rendererUseVulkan;
+        }
+
+        /** @hide */
+        public String[] getContextTypes() {
+            return contextTypes;
+        }
+
+        /** @hide */
+        public String getPciAddress() {
+            return pciAddress;
+        }
+
+        /** @hide */
+        public String getRendererFeatures() {
+            return rendererFeatures;
+        }
+
+        /** @hide */
+        public boolean getRendererUseEgl() {
+            return rendererUseEgl;
+        }
+
+        /** @hide */
+        public boolean getRendererUseGles() {
+            return rendererUseGles;
+        }
+
+        /** @hide */
+        public boolean getRendererUseGlx() {
+            return rendererUseGlx;
+        }
+
+        /** @hide */
+        public boolean getRendererUseSurfaceless() {
+            return rendererUseSurfaceless;
+        }
+
+        /** @hide */
+        public boolean getRendererUseVulkan() {
+            return rendererUseVulkan;
+        }
+
+        android.system.virtualizationservice.GpuConfig toParcelable() {
+            android.system.virtualizationservice.GpuConfig parcelable =
+                    new android.system.virtualizationservice.GpuConfig();
+            parcelable.contextTypes = this.contextTypes;
+            parcelable.pciAddress = this.pciAddress;
+            parcelable.rendererFeatures = this.rendererFeatures;
+            parcelable.rendererUseEgl = this.rendererUseEgl;
+            parcelable.rendererUseGles = this.rendererUseGles;
+            parcelable.rendererUseGlx = this.rendererUseGlx;
+            parcelable.rendererUseSurfaceless = this.rendererUseSurfaceless;
+            parcelable.rendererUseVulkan = this.rendererUseVulkan;
+            return parcelable;
+        }
+
+        private static GpuConfig from(PersistableBundle pb) {
+            if (pb == null) {
+                return null;
+            }
+            Builder builder = new Builder();
+            builder.setContextTypes(pb.getStringArray(KEY_CONTEXT_TYPES));
+            builder.setPciAddress(pb.getString(KEY_PCI_ADDRESS));
+            builder.setRendererFeatures(pb.getString(KEY_RENDERER_FEATURES));
+            builder.setRendererUseEgl(pb.getBoolean(KEY_RENDERER_USE_EGL));
+            builder.setRendererUseGles(pb.getBoolean(KEY_RENDERER_USE_GLES));
+            builder.setRendererUseGlx(pb.getBoolean(KEY_RENDERER_USE_GLX));
+            builder.setRendererUseSurfaceless(pb.getBoolean(KEY_RENDERER_USE_SURFACELESS));
+            builder.setRendererUseVulkan(pb.getBoolean(KEY_RENDERER_USE_VULKAN));
+            return builder.build();
+        }
+
+        private PersistableBundle toPersistableBundle() {
+            PersistableBundle pb = new PersistableBundle();
+            pb.putStringArray(KEY_CONTEXT_TYPES, this.contextTypes);
+            pb.putString(KEY_PCI_ADDRESS, this.pciAddress);
+            pb.putString(KEY_RENDERER_FEATURES, this.rendererFeatures);
+            pb.putBoolean(KEY_RENDERER_USE_EGL, this.rendererUseEgl);
+            pb.putBoolean(KEY_RENDERER_USE_GLES, this.rendererUseGles);
+            pb.putBoolean(KEY_RENDERER_USE_GLX, this.rendererUseGlx);
+            pb.putBoolean(KEY_RENDERER_USE_SURFACELESS, this.rendererUseSurfaceless);
+            pb.putBoolean(KEY_RENDERER_USE_VULKAN, this.rendererUseVulkan);
+            return pb;
+        }
+
+        /** @hide */
+        public static class Builder {
+            private String[] contextTypes;
+            private String pciAddress;
+            private String rendererFeatures;
+            private boolean rendererUseEgl = false;
+            private boolean rendererUseGles = false;
+            private boolean rendererUseGlx = false;
+            private boolean rendererUseSurfaceless = false;
+            private boolean rendererUseVulkan = false;
+
+            /** @hide */
+            public Builder() {}
+
+            /** @hide */
+            public Builder setContextTypes(String[] contextTypes) {
+                this.contextTypes = contextTypes;
+                return this;
+            }
+
+            /** @hide */
+            public Builder setPciAddress(String pciAddress) {
+                this.pciAddress = pciAddress;
+                return this;
+            }
+
+            /** @hide */
+            public Builder setRendererFeatures(String rendererFeatures) {
+                this.rendererFeatures = rendererFeatures;
+                return this;
+            }
+
+            /** @hide */
+            public Builder setRendererUseEgl(Boolean rendererUseEgl) {
+                this.rendererUseEgl = rendererUseEgl;
+                return this;
+            }
+
+            /** @hide */
+            public Builder setRendererUseGles(Boolean rendererUseGles) {
+                this.rendererUseGles = rendererUseGles;
+                return this;
+            }
+
+            /** @hide */
+            public Builder setRendererUseGlx(Boolean rendererUseGlx) {
+                this.rendererUseGlx = rendererUseGlx;
+                return this;
+            }
+
+            /** @hide */
+            public Builder setRendererUseSurfaceless(Boolean rendererUseSurfaceless) {
+                this.rendererUseSurfaceless = rendererUseSurfaceless;
+                return this;
+            }
+
+            /** @hide */
+            public Builder setRendererUseVulkan(Boolean rendererUseVulkan) {
+                this.rendererUseVulkan = rendererUseVulkan;
+                return this;
+            }
+
+            /** @hide */
+            public GpuConfig build() {
+                return new GpuConfig(
+                        contextTypes,
+                        pciAddress,
+                        rendererFeatures,
+                        rendererUseEgl,
+                        rendererUseGles,
+                        rendererUseGlx,
+                        rendererUseSurfaceless,
+                        rendererUseVulkan);
             }
         }
     }

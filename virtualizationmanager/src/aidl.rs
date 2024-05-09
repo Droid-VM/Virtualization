@@ -17,7 +17,7 @@
 use crate::{get_calling_pid, get_calling_uid};
 use crate::atom::{write_vm_booted_stats, write_vm_creation_stats};
 use crate::composite::make_composite_image;
-use crate::crosvm::{CrosvmConfig, DiskFile, DisplayConfig, InputDeviceOption, PayloadState, VmContext, VmInstance, VmState};
+use crate::crosvm::{CrosvmConfig, DiskFile, DisplayConfig, GpuConfig, InputDeviceOption, PayloadState, VmContext, VmInstance, VmState};
 use crate::debug_config::DebugConfig;
 use crate::dt_overlay::{create_device_tree_overlay, VM_DT_OVERLAY_MAX_SIZE, VM_DT_OVERLAY_PATH};
 use crate::payload::{add_microdroid_payload_images, add_microdroid_system_images, add_microdroid_vendor_image};
@@ -594,6 +594,16 @@ impl VirtualizationService {
         } else {
             None
         };
+        let gpu_config = if cfg!(paravirtualized_devices) {
+            config
+                .gpuConfig
+                .as_ref()
+                .map(GpuConfig::new)
+                .transpose()
+                .or_binder_exception(ExceptionCode::ILLEGAL_ARGUMENT)?
+        } else {
+            None
+        };
 
         let input_device_options = if cfg!(paravirtualized_devices) {
             config
@@ -633,6 +643,7 @@ impl VirtualizationService {
             device_tree_overlay,
             display_config,
             input_device_options,
+            gpu_config,
         };
         let instance = Arc::new(
             VmInstance::new(
