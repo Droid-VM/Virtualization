@@ -1,0 +1,162 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f0e1795_6607edcd",
+        "filename": "docs/hugepages.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-10T15:29:55Z",
+      "side": 1,
+      "message": "Don\u0027t forget to add a link here from the top-level README",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 12
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "100d271b_1fd7041f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/hugepages.md",
+              "range": {
+                "startLine": 3,
+                "startChar": 0,
+                "endLine": 3,
+                "endChar": 0
+              },
+              "replacement": "go/android-kvm/hugepages\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d15bd3fb25734503a54beea24df4813cce39a3ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "224d5a82_fa527d52",
+        "filename": "docs/hugepages.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-10T15:29:55Z",
+      "side": 1,
+      "message": "Grammar nits",
+      "range": {
+        "startLine": 4,
+        "startChar": 56,
+        "endLine": 4,
+        "endChar": 64
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "276bf73e_fae74b15",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/hugepages.md",
+              "range": {
+                "startLine": 4,
+                "startChar": 0,
+                "endLine": 9,
+                "endChar": 0
+              },
+              "replacement": "Linux feature which allows the kernel to allocate, when possible, a huge-page\n(typically, 2MiB on a 4K system). This huge-page being the size of a block, the\nhypervisor can leverage this allocation to also use a block mapping in the\nstage-2 page tables, instead of 512 individual contiguous single page mappings.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d15bd3fb25734503a54beea24df4813cce39a3ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4642ad71_b85aa02c",
+        "filename": "docs/hugepages.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-10T15:29:55Z",
+      "side": 1,
+      "message": "Add a mention that this is disabled by default?",
+      "fixSuggestions": [
+        {
+          "fixId": "311d8c87_1d1e05ca",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/hugepages.md",
+              "range": {
+                "startLine": 14,
+                "startChar": 0,
+                "endLine": 14,
+                "endChar": 0
+              },
+              "replacement": "By default, THP is disabled.\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d15bd3fb25734503a54beea24df4813cce39a3ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4b05abe_adf4379f",
+        "filename": "docs/hugepages.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-10T15:29:55Z",
+      "side": 1,
+      "message": "`[admin guide](https://docs.kernel.org/admin-guide/mm/transhuge.htm)`\n\n\n(BTW: You can see a rendered preview at https://android.googlesource.com/platform/packages/modules/Virtualization/+/refs/changes/42/3008242/7/docs/hugepages.md)",
+      "range": {
+        "startLine": 37,
+        "startChar": 43,
+        "endLine": 38,
+        "endChar": 52
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ddee6da5_b641b5fe",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/hugepages.md",
+              "range": {
+                "startLine": 37,
+                "startChar": 0,
+                "endLine": 39,
+                "endChar": 0
+              },
+              "replacement": "More information can be found in the Linux\n[admin guide](https://docs.kernel.org/admin-guide/mm/transhuge.htm).\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d15bd3fb25734503a54beea24df4813cce39a3ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
