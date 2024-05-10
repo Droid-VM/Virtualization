@@ -42,8 +42,8 @@ import static android.system.virtualmachine.VirtualMachineCallback.STOP_REASON_V
 
 import static java.util.Objects.requireNonNull;
 
-import android.annotation.FlaggedApi;
 import android.annotation.CallbackExecutor;
+import android.annotation.FlaggedApi;
 import android.annotation.IntDef;
 import android.annotation.IntRange;
 import android.annotation.NonNull;
@@ -63,8 +63,6 @@ import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.ServiceSpecificException;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.system.virtualizationcommon.DeathReason;
 import android.system.virtualizationcommon.ErrorCode;
 import android.system.virtualizationservice.IVirtualMachine;
@@ -78,13 +76,17 @@ import android.system.virtualizationservice.VirtualMachineRawConfig;
 import android.system.virtualizationservice.VirtualMachineState;
 import android.util.JsonReader;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 
 import com.android.internal.annotations.GuardedBy;
 import com.android.system.virtualmachine.flags.Flags;
 
 import libcore.io.IoBridge;
+import libcore.io.IoUtils;
 
 import java.io.File;
+import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -97,17 +99,19 @@ import java.lang.annotation.RetentionPolicy;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.FileChannel;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.zip.ZipFile;
@@ -1810,5 +1814,56 @@ public class VirtualMachine implements AutoCloseable {
                     return STOP_REASON_UNKNOWN;
             }
         }
+    }
+
+    @FunctionalInterface
+    private static interface OpenptyCallback {
+        public void apply(FileDescriptor mfd, FileDescriptor sfd, byte[] name);
+    }
+
+    // Opens a pty and set the master end to raw mode and O_NONBLOCK.
+    private static native void nativeOpenpty(OpenptyCallback resultCallback) throws IOException;
+
+    /**
+     * Submit a worker thread to multiplex data between the virtual machine console and a host
+     * pseudo terminal (pty).
+     *
+     * <p>The caller is responsible for closing the returned @{code List<FileDescriptor>} after the
+     * virtual machine is terminated.
+     *
+     * @throws VirtualMachineException if the virtual machine console output is not {@linkplain
+     *     VirtualMachineConfig#isVmOutputCaptured captured}, or the host pseudo terminal could not
+     *     be created.
+     * @hide
+     */
+    public List<FileDescriptor> createConsoleDevice(ExecutorService executorService, File logFile)
+            throws VirtualMachineException {
+        FileInputStream consoleOutput = (FileInputStream) getConsoleOutput();
+        OutputStream consoleInput = OutputStream.nullOutputStream();
+        try {
+            consoleInput = getConsoleInput();
+        } catch (VirtualMachineException e) {
+            Log.d(TAG, "Serial console is readonly", e);
+        }
+        List<FileDescriptor> fd = new ArrayList<>(2);
+        try {
+            try {
+                nativeOpenpty(
+                        (FileDescriptor mfd, FileDescriptor sfd, byte[] ptsName) -> {
+                            fd.add(mfd);
+                            fd.add(sfd);
+                            String devPath = new String(ptsName, StandardCharsets.UTF_8);
+                            Log.d(TAG, "Serial console device: " + devPath);
+                        });
+            } catch (Exception e) {
+                fd.forEach(IoUtils::closeQuietly);
+                throw e;
+            }
+            executorService.submit(
+                    new ConsoleForwarder(consoleOutput, consoleInput, fd.get(0), logFile));
+        } catch (IOException e) {
+            throw new VirtualMachineException(e);
+        }
+        return fd;
     }
 }

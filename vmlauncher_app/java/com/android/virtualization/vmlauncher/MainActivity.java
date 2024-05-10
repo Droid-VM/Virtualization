@@ -19,43 +19,49 @@ package com.android.virtualization.vmlauncher;
 import static android.system.virtualmachine.VirtualMachineConfig.CPU_TOPOLOGY_MATCH_HOST;
 
 import android.app.Activity;
+import android.crosvm.ICrosvmAndroidDisplayService;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.crosvm.ICrosvmAndroidDisplayService;
 import android.system.virtualizationservice_internal.IVirtualizationServiceInternal;
-import android.system.virtualmachine.VirtualMachineCustomImageConfig;
-import android.system.virtualmachine.VirtualMachineCustomImageConfig.DisplayConfig;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineCallback;
 import android.system.virtualmachine.VirtualMachineConfig;
+import android.system.virtualmachine.VirtualMachineCustomImageConfig;
+import android.system.virtualmachine.VirtualMachineCustomImageConfig.DisplayConfig;
 import android.system.virtualmachine.VirtualMachineException;
 import android.system.virtualmachine.VirtualMachineManager;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.InputDevice;
+import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.WindowInsets;
 import android.view.WindowInsetsController;
+import android.view.WindowManager;
 import android.view.WindowMetrics;
+
+import libcore.io.IoUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileDescriptor;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -63,8 +69,9 @@ public class MainActivity extends Activity {
     private static final String TAG = "VmLauncherApp";
     private static final String VM_NAME = "my_custom_vm";
     private static final boolean DEBUG = true;
-    private final ExecutorService mExecutorService = Executors.newFixedThreadPool(4);
+    private ExecutorService mExecutorService;
     private VirtualMachine mVirtualMachine;
+    private List<FileDescriptor> mCloseFds;
 
     private VirtualMachineConfig createVirtualMachineConfig(String jsonPath) {
         VirtualMachineConfig.Builder configBuilder =
@@ -75,6 +82,7 @@ public class MainActivity extends Activity {
         if (DEBUG) {
             configBuilder.setDebugLevel(VirtualMachineConfig.DEBUG_LEVEL_FULL);
             configBuilder.setVmOutputCaptured(true);
+            configBuilder.setVmConsoleInputSupported(true);
         }
         VirtualMachineCustomImageConfig.Builder customImageConfigBuilder =
                 new VirtualMachineCustomImageConfig.Builder();
@@ -160,6 +168,8 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mExecutorService = Executors.newCachedThreadPool();
+        mCloseFds = new ArrayList<>();
         try {
             // To ensure that the previous display service is removed.
             IVirtualizationServiceInternal.Stub.asInterface(
@@ -237,9 +247,12 @@ public class MainActivity extends Activity {
             mVirtualMachine.run();
             mVirtualMachine.setCallback(Executors.newSingleThreadExecutor(), callback);
             if (DEBUG) {
-                InputStream console = mVirtualMachine.getConsoleOutput();
+                // TODO: Flag this
+                mCloseFds.addAll(
+                        mVirtualMachine.createConsoleDevice(
+                                mExecutorService,
+                                new File(getApplicationContext().getCacheDir(), "console.log")));
                 InputStream log = mVirtualMachine.getLogOutput();
-                mExecutorService.execute(new Reader("console", console));
                 mExecutorService.execute(new Reader("log", log));
             }
         } catch (VirtualMachineException e) {
@@ -302,6 +315,18 @@ public class MainActivity extends Activity {
         windowInsetsController.setSystemBarsBehavior(
                 WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
         windowInsetsController.hide(WindowInsets.Type.systemBars());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mExecutorService != null) {
+            mExecutorService.shutdownNow();
+        }
+        if (mCloseFds != null) {
+            mCloseFds.forEach(IoUtils::closeQuietly);
+        }
+        Log.d(TAG, "destroyed");
     }
 
     @Override
