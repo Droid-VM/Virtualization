@@ -1,0 +1,114 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d852475_abccae06",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-05-10T14:12:35Z",
+      "side": 1,
+      "message": "builder.setGpuConfig here?",
+      "fixSuggestions": [
+        {
+          "fixId": "6b759e48_bf68bacd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+              "range": {
+                "startLine": 141,
+                "startChar": 0,
+                "endLine": 141,
+                "endChar": 0
+              },
+              "replacement": "        builder.setGpuConfig(GpuConfig.from(customImageConfigBundle.getPersistableBundle(KEY_GPU)));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ce67c9511596cb92a1da2ce0245fc3b43959f430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8222cbc8_40801173",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-05-10T14:12:35Z",
+      "side": 1,
+      "message": "and put gpuConfig here",
+      "fixSuggestions": [
+        {
+          "fixId": "083a66a9_7441de65",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+              "range": {
+                "startLine": 171,
+                "startChar": 0,
+                "endLine": 171,
+                "endChar": 0
+              },
+              "replacement": "        pb.putPersistableBundle(KEY_GPU, gpuConfig.toPersistableBundle());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ce67c9511596cb92a1da2ce0245fc3b43959f430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3ad1dc6_b0e7b1ce",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-05-10T14:12:35Z",
+      "side": 1,
+      "message": "don\u0027t we need gpu mode here?",
+      "revId": "ce67c9511596cb92a1da2ce0245fc3b43959f430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33584a39_29db7999",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-05-10T14:12:35Z",
+      "side": 1,
+      "message": "it looks like some of them has default value in crosvm, should we respect it? https://chromium.googlesource.com/crosvm/crosvm/+/refs/heads/main/devices/src/virtio/gpu/parameters.rs#91",
+      "range": {
+        "startLine": 455,
+        "startChar": 0,
+        "endLine": 458,
+        "endChar": 53
+      },
+      "revId": "ce67c9511596cb92a1da2ce0245fc3b43959f430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
