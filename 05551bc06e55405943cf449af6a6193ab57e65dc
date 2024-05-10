@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5545294c_076c44ea",
+        "filename": "virtualizationservice/src/maintenance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-10T08:55:43Z",
+      "side": 1,
+      "message": "Could we hold off on this for a bit?\n\nAIUI get_interface will block for 5s if the service exists but isn\u0027t running (and can\u0027t run yet), while wait_for_interface will block forever.\n\nWe\u0027re currently relying on that because of b/331417880#comment34.\n\nSo I think this changes will actually cause a regression of the test in that bug. A proper fix for it is pretty high on my TODO list though. (The current 5s delay isn\u0027t really acceptable.)",
+      "range": {
+        "startLine": 89,
+        "startChar": 26,
+        "endLine": 89,
+        "endChar": 44
+      },
+      "revId": "05551bc06e55405943cf449af6a6193ab57e65dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
