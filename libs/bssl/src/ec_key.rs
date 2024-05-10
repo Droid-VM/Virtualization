@@ -23,9 +23,10 @@ use alloc::vec::Vec;
 use bssl_avf_error::{ApiName, Error, Result};
 use bssl_sys::{
     i2d_ECDSA_SIG, BN_bin2bn, BN_bn2bin_padded, BN_clear_free, BN_new, CBB_flush, CBB_len,
-    ECDSA_SIG_free, ECDSA_SIG_new, ECDSA_SIG_set0, ECDSA_sign, ECDSA_size, ECDSA_verify,
-    EC_GROUP_get_curve_name, EC_GROUP_new_by_curve_name, EC_KEY_check_key, EC_KEY_free,
-    EC_KEY_generate_key, EC_KEY_get0_group, EC_KEY_get0_public_key, EC_KEY_marshal_private_key,
+    ECDSA_SIG_free, ECDSA_SIG_from_bytes, ECDSA_SIG_get0_r, ECDSA_SIG_get0_s, ECDSA_SIG_new,
+    ECDSA_SIG_set0, ECDSA_sign, ECDSA_size, ECDSA_verify, EC_GROUP_get_curve_name,
+    EC_GROUP_new_by_curve_name, EC_KEY_check_key, EC_KEY_free, EC_KEY_generate_key,
+    EC_KEY_get0_group, EC_KEY_get0_public_key, EC_KEY_marshal_private_key,
     EC_KEY_new_by_curve_name, EC_KEY_parse_private_key, EC_KEY_set_public_key_affine_coordinates,
     EC_POINT_get_affine_coordinates, NID_X9_62_prime256v1, NID_secp384r1, BIGNUM, ECDSA_SIG,
     EC_GROUP, EC_KEY, EC_POINT,
@@ -170,14 +171,14 @@ impl EcKey {
     ///
     /// Returns Ok(()) if the verification succeeds, otherwise an error will be returned.
     pub fn ecdsa_verify_nist(&self, signature: &[u8], digest: &[u8]) -> Result<()> {
-        let signature = ec_cose_signature_to_der(signature)?;
+        let signature = ec_nist_signature_to_der(signature)?;
         self.ecdsa_verify_der(&signature, digest)
     }
 
     /// Signs the `digest` with the current `EcKey` using ECDSA.
     ///
     /// Returns the DER-encoded ECDSA signature.
-    pub fn ecdsa_sign(&self, digest: &[u8]) -> Result<Vec<u8>> {
+    pub fn ecdsa_sign_der(&self, digest: &[u8]) -> Result<Vec<u8>> {
         // The `type` argument should be 0 as required in the BoringSSL spec.
         const TYPE: i32 = 0;
 
@@ -202,6 +203,15 @@ impl EcKey {
             signature.truncate(signature_len as usize);
             Ok(signature)
         }
+    }
+
+    /// Signs the `digest` with the current `EcKey` using ECDSA.
+    ///
+    /// Returns the NIST-encoded ECDSA signature.
+    pub fn ecdsa_sign_nist(&self, digest: &[u8]) -> Result<Vec<u8>> {
+        let signature = self.ecdsa_sign_der(digest)?;
+        let coord_bytes = self.ec_group()?.affine_coordinate_size()?;
+        ec_der_signature_to_nist(&signature, coord_bytes)
     }
 
     /// Returns the maximum size of an ECDSA signature using the current `EcKey`.
@@ -335,11 +345,17 @@ impl EcKey {
     }
 }
 
-/// Convert a R | S format NIST signature to a DER-encoded form.
-fn ec_cose_signature_to_der(signature: &[u8]) -> Result<Vec<u8>> {
+/// Convert an R | S format NIST signature to a DER-encoded form.
+fn ec_nist_signature_to_der(signature: &[u8]) -> Result<Vec<u8>> {
     let mut ec_sig = EcSignature::new()?;
     ec_sig.load_from_nist(signature)?;
     ec_sig.to_der()
+}
+
+/// Convert a DER-encoded signature to NIST format (R | S).
+fn ec_der_signature_to_nist(signature: &[u8], coord_bytes: usize) -> Result<Vec<u8>> {
+    let ec_sig = EcSignature::new_from_der(signature)?;
+    ec_sig.to_nist(coord_bytes)
 }
 
 /// Wrapper for an `ECDSA_SIG` object representing an EC signature.
@@ -377,6 +393,44 @@ impl EcSignature {
         mem::forget(s);
 
         Ok(())
+    }
+
+    fn to_nist(&self, coord_bytes: usize) -> Result<Vec<u8>> {
+        let mut result = vec![0u8; coord_bytes.checked_mul(2).unwrap()];
+        let (r_bytes, s_bytes) = result.split_at_mut(coord_bytes);
+
+        // SAFETY: The ECDSA_SIG was properly allocated and not yet freed. Always returns a valid
+        // non-null, non-owning pointer.
+        let r = unsafe { ECDSA_SIG_get0_r(self.0.as_ptr()) };
+        check_int_result(
+            // SAFETY: The r pointer is known to be valid. Only writes within the destination
+            // slice.
+            unsafe { BN_bn2bin_padded(r_bytes.as_mut_ptr(), r_bytes.len(), r) },
+            ApiName::BN_bn2bin_padded,
+        )?;
+
+        // SAFETY: The ECDSA_SIG was properly allocated and not yet freed. Always returns a valid
+        // non-null, non-owning pointer.
+        let s = unsafe { ECDSA_SIG_get0_s(self.0.as_ptr()) };
+        check_int_result(
+            // SAFETY: The r pointer is known to be valid. Only writes within the destination
+            // slice.
+            unsafe { BN_bn2bin_padded(s_bytes.as_mut_ptr(), s_bytes.len(), s) },
+            ApiName::BN_bn2bin_padded,
+        )?;
+
+        Ok(result)
+    }
+
+    /// Populate the signature parameters from a DER encoding
+    fn new_from_der(signature: &[u8]) -> Result<Self> {
+        // SAFETY: Only reads within the bounds of the slice. Returns a pointer to a new ECDSA_SIG
+        // which we take ownership of, or null on error which we check.
+        let signature = unsafe { ECDSA_SIG_from_bytes(signature.as_ptr(), signature.len()) };
+
+        let signature = NonNull::new(signature)
+            .ok_or_else(|| to_call_failed_error(ApiName::ECDSA_SIG_from_bytes))?;
+        Ok(Self(signature))
     }
 
     /// Return the signature encoded as DER.
