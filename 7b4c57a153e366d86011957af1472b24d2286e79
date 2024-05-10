@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47a9aaee_319c1a2f",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-05-10T16:16:58Z",
+      "side": 1,
+      "message": "The terminology might be a bit off/confusing here (which I should have noticed in the previous CL).\n\nI don\u0027t think NIST specify an encoding format, just the algorithms and curves.  So I generally use \"NIST\" to refer to the non-Ed25519 curves, whose signatures can either be encoded as a DER structure (e.g. for X.509) or as raw R|S (e.g. for `CoseSign1`). \n\n(However, this distinction has been made less helpful by NIST.FIPS.186-4 getting overtaken by NIST.FIPS.186-5 in 2023/2024, because the latter now includes EdDSA.)",
+      "range": {
+        "startLine": 169,
+        "startChar": 21,
+        "endLine": 169,
+        "endChar": 33
+      },
+      "revId": "7b4c57a153e366d86011957af1472b24d2286e79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42073930_9febb800",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-05-10T16:16:58Z",
+      "side": 1,
+      "message": "If you\u0027re going to `unwrap()`, why not just `2*coord_bytes`?",
+      "range": {
+        "startLine": 399,
+        "startChar": 35,
+        "endLine": 399,
+        "endChar": 70
+      },
+      "revId": "7b4c57a153e366d86011957af1472b24d2286e79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8edfb079_80f52e8f",
+        "filename": "libs/bssl/tests/eckey_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-05-10T16:16:58Z",
+      "side": 1,
+      "message": "I think this is wrong in 2 different ways (`MESSAGE1` vs. `MESSAGE2`, `sign_nist` vs. `verify_der`), which it would be nice to separate into distinct failure test cases.",
+      "range": {
+        "startLine": 166,
+        "startChar": 21,
+        "endLine": 166,
+        "endChar": 37
+      },
+      "revId": "7b4c57a153e366d86011957af1472b24d2286e79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
