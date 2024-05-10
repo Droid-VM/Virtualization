@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db70161c_f899fb6a",
+        "filename": "docs/hugepages.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-10T16:01:11Z",
+      "side": 1,
+      "message": "Comma",
+      "range": {
+        "startLine": 4,
+        "startChar": 56,
+        "endLine": 4,
+        "endChar": 64
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9a4e6ad8_c2bddf4c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/hugepages.md",
+              "range": {
+                "startLine": 4,
+                "startChar": 0,
+                "endLine": 5,
+                "endChar": 0
+              },
+              "replacement": "Linux feature which allows the kernel to allocate, when possible, a huge-page\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f962fda0f5e066ca3aca223e7ec78a0918fab4cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
