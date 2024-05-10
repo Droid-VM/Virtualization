@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d6afe84_e7d7fc64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-10T06:33:48Z",
+      "side": 1,
+      "message": "https://cs.android.com/android/platform/superproject/main/+/main:device/google/cuttlefish/guest/hals/light/lights.rs;drc\u003d7570c7c6160e238d5513f57e0402040b4b961c9c;l\u003d62\n\nand\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:device/google/cuttlefish/host/commands/assemble_cvd/bootconfig_args.cpp;drc\u003db67e2bc92163a69d6e5655e1a6b39cee3be3fc72;l\u003d140\n\nIn other words, the cid of the Cuttlefish-on-glinux instance was written into the bootconfig and frozen there.\n\nI think the light HAL service could use `VMADDR_CID_LOCAL` (1).",
+      "revId": "f4dc743feffb4128f4f409466ff8f2b0e83cb80f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
