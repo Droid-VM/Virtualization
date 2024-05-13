@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e7e71f8_c886805a",
+        "filename": "vmbase/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-13T19:37:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f94fdf7_d844de67",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "f36d488ad4d589bcf1ea4aed72c878f01a7fd383",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99423244_cf224e53",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-05-09T15:07:36Z",
       "side": 1,
       "message": "Why the braces?",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 9
+      },
+      "revId": "f36d488ad4d589bcf1ea4aed72c878f01a7fd383",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bbfe19e_83188203",
+        "filename": "vmbase/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-13T19:37:28Z",
+      "side": 1,
+      "message": "To limit the scope of `granule`; I\u0027ve moved them inside `assert!` instead.",
+      "parentUuid": "99423244_cf224e53",
       "range": {
         "startLine": 33,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc58bc47_f1f9ee0e",
+        "filename": "vmbase/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-13T19:37:28Z",
+      "side": 1,
+      "message": "Because it was out of place and really only necessary for the extra assumptions to support 16KiB in aosp/3061852. Anyway, instead of moving this line there, I thought I would do better and harden this code a bit more with aosp/3084306, instead.",
+      "parentUuid": "0464760d_6b378f01",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 64
+      },
+      "revId": "f36d488ad4d589bcf1ea4aed72c878f01a7fd383",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39f4d5a2_ca36cee7",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddf2251b_edbd0ed0",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-13T19:37:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39f4d5a2_ca36cee7",
+      "range": {
+        "startLine": 114,
+        "startChar": 1,
+        "endLine": 114,
+        "endChar": 59
+      },
+      "revId": "f36d488ad4d589bcf1ea4aed72c878f01a7fd383",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91ef02b5_7cb634ef",
@@ -106,6 +202,30 @@
       "writtenOn": "2024-05-09T15:07:36Z",
       "side": 1,
       "message": "Should we check this is a non-zero power of 2?",
+      "range": {
+        "startLine": 410,
+        "startChar": 11,
+        "endLine": 410,
+        "endChar": 18
+      },
+      "revId": "f36d488ad4d589bcf1ea4aed72c878f01a7fd383",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb16de6c_c3fbd6fe",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-13T19:37:28Z",
+      "side": 1,
+      "message": "Done; we can now use `unchecked_align_down`",
+      "parentUuid": "91ef02b5_7cb634ef",
       "range": {
         "startLine": 410,
         "startChar": 11,
