@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df4c746f_b1de2034",
+        "filename": "vmbase/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-13T19:34:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb9d6dd2_ffebce38",
+      "range": {
+        "startLine": 34,
+        "startChar": 55,
+        "endLine": 34,
+        "endChar": 56
+      },
+      "revId": "bc5dbc075e4e2bde0e6562d49813382d53281b07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64e4af88_772c51f8",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-05-09T15:11:53Z",
       "side": 1,
       "message": "If we don\u0027t care about duplicates, why do we track them?",
+      "range": {
+        "startLine": 333,
+        "startChar": 12,
+        "endLine": 333,
+        "endChar": 69
+      },
+      "revId": "bc5dbc075e4e2bde0e6562d49813382d53281b07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93ed1864_5072d9e4",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-13T19:34:53Z",
+      "side": 1,
+      "message": "Agreed that this needs changing (will address in a future PS).\n\nIn a nutshell, the handler should create valid S1 mappings for the whole IPA region covered by the `MMIO_GUARD_MAP`, not just the (pvmfw) page which caused the fault. If it does that, duplicates remain errors and don\u0027t need to be ignored.",
+      "parentUuid": "64e4af88_772c51f8",
       "range": {
         "startLine": 333,
         "startChar": 12,
