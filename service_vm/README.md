@@ -16,7 +16,24 @@ across all reboots.
 [cdi]: https://android.googlesource.com/platform/external/open-dice/+/main/docs/specification.md#CDI-Values
 [pvmfw]: https://android.googlesource.com/platform/packages/modules/Virtualization/+/main/pvmfw/README.md
 
-## RKP VM (Remote Key Provisioning Virtual Machine)
+## Architecture
+
+[Rialto](../rialto) is used as the kernel for the Service VM. It shares some
+low-level setup, such as memory management and virtio devices parsing, with
+pvmfw. The common setup code is grouped in [vmbase/](../vmbase).
+
+## Functionality
+
+The main functionality of the Service VM is to process requests from the host
+and provide responses for each request. The requests and responses are
+serialized in CBOR format and transmitted over a virtio-vsock device.
+
+-   [./comm](./comm) contains the definitions for the requests and responses.
+-   [./requests](./requests) contains the library that processes the requests.
+-   [./manager](./manager) manages the Service VM session, ensuring that only
+    one Service VM is active at any given time.
+
+### RKP VM (Remote Key Provisioning Virtual Machine)
 
 Currently, the Service VM only supports VM remote attestation, and in that
 context we refer to it as the RKP VM. The RKP VM undergoes validation by the
