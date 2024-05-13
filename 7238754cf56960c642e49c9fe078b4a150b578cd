@@ -16,6 +16,23 @@
       "message": "I can\u0027t say I\u0027m that proud of this, but it does allow CompOS to run fine at boot time without breaking anything else AFAICT.",
       "revId": "7238754cf56960c642e49c9fe078b4a150b578cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59bd16fc_7ba64454",
+        "filename": "virtualizationservice/src/maintenance.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-05-13T16:29:19Z",
+      "side": 1,
+      "message": "super-nit/personal preference: seems odd to have a couple of helper functions in between the `struct` definitions and their corresponding method definitions.",
+      "revId": "7238754cf56960c642e49c9fe078b4a150b578cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
