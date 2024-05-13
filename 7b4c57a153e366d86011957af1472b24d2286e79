@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31715b7a_4f313f8d",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-13T10:56:24Z",
+      "side": 1,
+      "message": "Oops. I\u0027ve attempted to fix.",
+      "parentUuid": "47a9aaee_319c1a2f",
+      "range": {
+        "startLine": 169,
+        "startChar": 21,
+        "endLine": 169,
+        "endChar": 33
+      },
+      "revId": "7b4c57a153e366d86011957af1472b24d2286e79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42073930_9febb800",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25dcf3f6_b90ea68f",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-13T10:56:24Z",
+      "side": 1,
+      "message": "The style guide says not to assume that arithmetic is checked by default.",
+      "parentUuid": "42073930_9febb800",
+      "range": {
+        "startLine": 399,
+        "startChar": 35,
+        "endLine": 399,
+        "endChar": 70
+      },
+      "revId": "7b4c57a153e366d86011957af1472b24d2286e79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8edfb079_80f52e8f",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-05-10T16:16:58Z",
       "side": 1,
       "message": "I think this is wrong in 2 different ways (`MESSAGE1` vs. `MESSAGE2`, `sign_nist` vs. `verify_der`), which it would be nice to separate into distinct failure test cases.",
+      "range": {
+        "startLine": 166,
+        "startChar": 21,
+        "endLine": 166,
+        "endChar": 37
+      },
+      "revId": "7b4c57a153e366d86011957af1472b24d2286e79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aac4b95a_0748a991",
+        "filename": "libs/bssl/tests/eckey_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-13T10:56:24Z",
+      "side": 1,
+      "message": "That\u0027s just incompetence on my part - this was supposed to be verify_nist.\n\nI hadn\u0027t thought of deliberately mismatching format, but you\u0027re right that is an interesting test.",
+      "parentUuid": "8edfb079_80f52e8f",
       "range": {
         "startLine": 166,
         "startChar": 21,
