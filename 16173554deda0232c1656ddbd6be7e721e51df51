@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff795f16_3c48ec33",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-13T11:51:20Z",
+      "side": 1,
+      "message": "nit: Instead of adding suffixes like `_der` and `_cose` in multiple places, perhaps it\u0027s easier to add a `EcSignatureType` enum with both types?",
+      "range": {
+        "startLine": 211,
+        "startChar": 21,
+        "endLine": 211,
+        "endChar": 26
+      },
+      "revId": "16173554deda0232c1656ddbd6be7e721e51df51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d594f30a_024bfbcf",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-13T11:51:20Z",
+      "side": 1,
+      "message": "How about renaming this function to `new_from_cose(signature: \u0026[u8]) -\u003e Result\u003cSelf\u003e` so that it can have a similar structure as `new_from_der`?",
+      "range": {
+        "startLine": 376,
+        "startChar": 7,
+        "endLine": 376,
+        "endChar": 31
+      },
+      "revId": "16173554deda0232c1656ddbd6be7e721e51df51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99b3ed94_4546fa7a",
+        "filename": "libs/bssl/tests/eckey_test.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-13T11:51:20Z",
+      "side": 1,
+      "message": "cose",
+      "range": {
+        "startLine": 147,
+        "startChar": 9,
+        "endLine": 147,
+        "endChar": 13
+      },
+      "revId": "16173554deda0232c1656ddbd6be7e721e51df51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3acfb28_feaa200b",
+        "filename": "libs/bssl/tests/eckey_test.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-13T11:51:20Z",
+      "side": 1,
+      "message": "cose",
+      "range": {
+        "startLine": 159,
+        "startChar": 19,
+        "endLine": 159,
+        "endChar": 23
+      },
+      "revId": "16173554deda0232c1656ddbd6be7e721e51df51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
