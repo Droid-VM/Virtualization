@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61a7d52f_7f657329",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-13T12:51:41Z",
+      "side": 1,
+      "message": "It\u0027s not a bad idea, but we always know which one we want statically, and it would mean dragging in code for both versions when we don\u0027t always need them.",
+      "parentUuid": "ff795f16_3c48ec33",
+      "range": {
+        "startLine": 211,
+        "startChar": 21,
+        "endLine": 211,
+        "endChar": 26
+      },
+      "revId": "16173554deda0232c1656ddbd6be7e721e51df51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d594f30a_024bfbcf",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-05-13T11:51:20Z",
       "side": 1,
       "message": "How about renaming this function to `new_from_cose(signature: \u0026[u8]) -\u003e Result\u003cSelf\u003e` so that it can have a similar structure as `new_from_der`?",
+      "range": {
+        "startLine": 376,
+        "startChar": 7,
+        "endLine": 376,
+        "endChar": 31
+      },
+      "revId": "16173554deda0232c1656ddbd6be7e721e51df51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a72ee68_21b3e021",
+        "filename": "libs/bssl/src/ec_key.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-13T12:51:41Z",
+      "side": 1,
+      "message": "David suggested that too, on an earlier CL. But making it one function would make it more complicated to deal with freeing the ECDSA_SIG if load fails - with two functions that\u0027s handled for free by drop(). It\u0027s all the fault of the underlying API.",
+      "parentUuid": "d594f30a_024bfbcf",
       "range": {
         "startLine": 376,
         "startChar": 7,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8836bc61_41874924",
+        "filename": "libs/bssl/tests/eckey_test.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-13T12:51:41Z",
+      "side": 1,
+      "message": "Dammit, I tried not to miss any.\nDone.",
+      "parentUuid": "99b3ed94_4546fa7a",
+      "range": {
+        "startLine": 147,
+        "startChar": 9,
+        "endLine": 147,
+        "endChar": 13
+      },
+      "revId": "16173554deda0232c1656ddbd6be7e721e51df51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3acfb28_feaa200b",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-05-13T11:51:20Z",
       "side": 1,
       "message": "cose",
+      "range": {
+        "startLine": 159,
+        "startChar": 19,
+        "endLine": 159,
+        "endChar": 23
+      },
+      "revId": "16173554deda0232c1656ddbd6be7e721e51df51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d945e1f_16ac54d8",
+        "filename": "libs/bssl/tests/eckey_test.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-13T12:51:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3acfb28_feaa200b",
       "range": {
         "startLine": 159,
         "startChar": 19,
