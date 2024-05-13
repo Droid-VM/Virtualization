@@ -23,6 +23,7 @@ use crate::{
     rand,
 };
 use core::mem::size_of;
+use static_assertions::const_assert_eq;
 
 fn try_console_init() -> Result<(), hyp::Error> {
     console::init();
@@ -32,6 +33,9 @@ fn try_console_init() -> Result<(), hyp::Error> {
 
         // TODO(ptosi): Use MmioSharer::share() to properly track this MMIO_GUARD_MAP.
         //
+        // Until then, ensure that the UART is in the "first" addressable page, which is the
+        // assumption hardcoded in MmioSharer to detect collisions with other MMIO pages:
+        const_assert_eq!(page_4kb_of(console::BASE_ADDRESS), 0);
         // MmioSharer only supports MMIO_GUARD_GRANULE_SIZE so fail early here if needed.
         assert_eq!(mmio_guard.granule()?, MMIO_GUARD_GRANULE_SIZE);
         mmio_guard.map(console::BASE_ADDRESS)?;
