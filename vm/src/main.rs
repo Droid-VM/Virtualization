@@ -53,6 +53,10 @@ pub struct CommonConfig {
     /// Run VM in protected mode.
     #[arg(short, long)]
     protected: bool,
+
+    /// Run VM with network feature.
+    #[arg(short, long)]
+    network_supported: bool,
 }
 
 #[derive(Args, Default)]
