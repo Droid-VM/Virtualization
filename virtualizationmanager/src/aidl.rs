@@ -606,6 +606,18 @@ impl VirtualizationService {
             vec![]
         };
 
+        // Create TAP network interface if the VM supports network.
+        let _tap_fd = if cfg!(network) && config.networkSupported {
+            if *is_protected {
+                return Err(anyhow!("Network feature is not supported for pVM yet"))
+                    .with_log()
+                    .or_binder_exception(ExceptionCode::UNSUPPORTED_OPERATION)?;
+            }
+            Some(GLOBAL_SERVICE.createTapInterface(cid as i32)?)
+        } else {
+            None
+        };
+
         // Actually start the VM.
         let crosvm_config = CrosvmConfig {
             cid,
@@ -909,6 +921,7 @@ fn load_app_config(
         }
 
         vm_config.devices.clone_from(&custom_config.devices);
+        vm_config.networkSupported = custom_config.networkSupported;
     }
 
     if config.memoryMib > 0 {

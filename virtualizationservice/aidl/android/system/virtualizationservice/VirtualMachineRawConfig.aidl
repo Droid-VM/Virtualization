@@ -77,4 +77,7 @@ parcelable VirtualMachineRawConfig {
 
     /** List of input devices to the VM */
     InputDevice[] inputDevices;
+
+    /** Whether the VM should have network feature. */
+    boolean networkSupported;
 }
