@@ -22,6 +22,30 @@
       },
       "revId": "d467b336676f7990a740870b683ee191a53eec1a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8171da8_2eba0068",
+        "filename": "vmbase/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-14T10:22:28Z",
+      "side": 1,
+      "message": "Moved this `const_assert_eq` to aosp/3061852, where it is actually needed.",
+      "parentUuid": "9b5c03ae_51772a14",
+      "range": {
+        "startLine": 36,
+        "startChar": 80,
+        "endLine": 37,
+        "endChar": 45
+      },
+      "revId": "d467b336676f7990a740870b683ee191a53eec1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
