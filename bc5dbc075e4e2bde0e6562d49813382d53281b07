@@ -93,6 +93,30 @@
       },
       "revId": "bc5dbc075e4e2bde0e6562d49813382d53281b07",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b350bc3_328e1e2f",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-14T11:18:50Z",
+      "side": 1,
+      "message": "In aosp/3061850, `MmioSharer::share()` now returns the range that was shared, which `MemoryTracker::handle_mmio_fault()` uses to create the S1 mappings. This allows smoothly transitioning to larger granule size (this commit) and keeps the assumption that we receive one fault per granule (NOT per pvmfw PTE) so that duplicate MMIO_SHARE_MAP should never happen.",
+      "parentUuid": "93ed1864_5072d9e4",
+      "range": {
+        "startLine": 333,
+        "startChar": 12,
+        "endLine": 333,
+        "endChar": 69
+      },
+      "revId": "bc5dbc075e4e2bde0e6562d49813382d53281b07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
