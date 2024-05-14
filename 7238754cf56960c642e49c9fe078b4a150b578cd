@@ -33,6 +33,24 @@
       "message": "super-nit/personal preference: seems odd to have a couple of helper functions in between the `struct` definitions and their corresponding method definitions.",
       "revId": "7238754cf56960c642e49c9fe078b4a150b578cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd2a697b_6fbdede7",
+        "filename": "virtualizationservice/src/maintenance.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-14T09:22:21Z",
+      "side": 1,
+      "message": "Hmm. Given they\u0027re small I\u0027m not hugely worried. But not sure what a good order is tbh.\n\nEither of them could be in one of the Impl blocks, but that would also be weird.\n\nI moved them way down - in general I prefer a top down reading order, and these do pretty much what you expect.",
+      "parentUuid": "59bd16fc_7ba64454",
+      "revId": "7238754cf56960c642e49c9fe078b4a150b578cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
