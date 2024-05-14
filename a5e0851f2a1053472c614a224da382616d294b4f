@@ -69,6 +69,30 @@
       },
       "revId": "a5e0851f2a1053472c614a224da382616d294b4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35d6bf03_bde6f38f",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice_internal/IVmnic.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-05-14T06:05:15Z",
+      "side": 1,
+      "message": "Like `vfio_handler` before, I\u0027m supposing `virtmgr` calling that via `virtualizationservice`. Each one TAP interface is for one VM, and I thought CID is the best way to distinguish TAP interfaces between multiple VMs.",
+      "parentUuid": "a5625469_7bdce5db",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 53
+      },
+      "revId": "a5e0851f2a1053472c614a224da382616d294b4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
