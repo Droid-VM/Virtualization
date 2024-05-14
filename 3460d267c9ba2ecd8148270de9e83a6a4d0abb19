@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "501d6612_b7c60b8b",
+        "filename": "vmbase/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-14T11:36:29Z",
+      "side": 1,
+      "message": "Maybe TODO(b/1, b/2): Plan  ?",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 51
+      },
+      "revId": "3460d267c9ba2ecd8148270de9e83a6a4d0abb19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e98508eb_63bf4f01",
+        "filename": "vmbase/src/hyp/hypervisor/kvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-14T11:36:29Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be `feature \u003d \"compat_android_13\"`? You\u0027re specifying it as a feature not a cfg.\n\nSee e.g. https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/vmbase/src/memory/dbm.rs;drc\u003da8dc46f2651c4916b79cbe3653eb4713c18d4d24;l\u003d44.",
+      "range": {
+        "startLine": 120,
+        "startChar": 16,
+        "endLine": 120,
+        "endChar": 33
+      },
+      "revId": "3460d267c9ba2ecd8148270de9e83a6a4d0abb19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a220f9c_9e1f38e5",
+        "filename": "vmbase/src/hyp/hypervisor/kvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-14T11:36:29Z",
+      "side": 1,
+      "message": "a 132 -\u003e i32",
+      "range": {
+        "startLine": 122,
+        "startChar": 28,
+        "endLine": 122,
+        "endChar": 33
+      },
+      "revId": "3460d267c9ba2ecd8148270de9e83a6a4d0abb19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
