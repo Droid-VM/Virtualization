@@ -16,6 +16,98 @@
       "message": "Hi Alan, PTAL",
       "revId": "a7961a7f45b1ea4bbe424fe09ec7c9d7aef14be4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ede2319_8cc320a0",
+        "filename": "service_vm/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T15:08:48Z",
+      "side": 1,
+      "message": "Should this just say \"the VM secret\"? If it\u0027s in the instance image, it\u0027s not that secret?\n\nAlternatively, maybe the paragraph below explaining what the secret is should come before this?",
+      "range": {
+        "startLine": 8,
+        "startChar": 4,
+        "endLine": 8,
+        "endChar": 52
+      },
+      "revId": "a7961a7f45b1ea4bbe424fe09ec7c9d7aef14be4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "098cfef5_4bd37bbd",
+        "filename": "service_vm/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T15:08:48Z",
+      "side": 1,
+      "message": "Should we mention that it\u0027s owned/managed by VirtualizationService?\n(And possibly include a code pointer)",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 71
+      },
+      "revId": "a7961a7f45b1ea4bbe424fe09ec7c9d7aef14be4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cddcef69_eb8f88ad",
+        "filename": "service_vm/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T15:08:48Z",
+      "side": 1,
+      "message": "bare-metal kernel, maybe? If only to emphasize that it isn\u0027t some flavor of Linux or something.",
+      "range": {
+        "startLine": 21,
+        "startChar": 34,
+        "endLine": 21,
+        "endChar": 42
+      },
+      "revId": "a7961a7f45b1ea4bbe424fe09ec7c9d7aef14be4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77377a4d_077f98a2",
+        "filename": "service_vm/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T15:08:48Z",
+      "side": 1,
+      "message": "Nit: device",
+      "range": {
+        "startLine": 22,
+        "startChar": 54,
+        "endLine": 22,
+        "endChar": 61
+      },
+      "revId": "a7961a7f45b1ea4bbe424fe09ec7c9d7aef14be4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
