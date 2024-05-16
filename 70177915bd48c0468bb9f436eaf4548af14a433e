@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62211580_6cf703d8",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-05-16T08:33:57Z",
+      "side": 1,
+      "message": "Q: Should we pass the granule in the constructor ?",
+      "range": {
+        "startLine": 388,
+        "startChar": 7,
+        "endLine": 388,
+        "endChar": 10
+      },
+      "revId": "70177915bd48c0468bb9f436eaf4548af14a433e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f0b82cf_d566e2bf",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-05-16T08:33:57Z",
+      "side": 1,
+      "message": "Don\u0027t know if it matters in Rust but I would move this assert before the BTreeset object creation",
+      "range": {
+        "startLine": 394,
+        "startChar": 16,
+        "endLine": 394,
+        "endChar": 23
+      },
+      "revId": "70177915bd48c0468bb9f436eaf4548af14a433e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7f2553b_5249909a",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-05-16T08:33:57Z",
+      "side": 1,
+      "message": "Q: You already checked if the `base` is present in the frames on line 405, what are the other reasons why this method can fail ? (conetxt: I am looking at https://doc.rust-lang.org/std/collections/struct.BTreeSet.html#method.insert and I see no other failure reason).",
+      "range": {
+        "startLine": 414,
+        "startChar": 16,
+        "endLine": 414,
+        "endChar": 24
+      },
+      "revId": "70177915bd48c0468bb9f436eaf4548af14a433e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7118c1c9_cc75b8a3",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-05-16T08:33:57Z",
+      "side": 1,
+      "message": "In which case you don\u0027t have mmio guard set but you have the memory share frames ? Is it for non-protected case ? (maybe a comment can make it more clear)",
+      "range": {
+        "startLine": 421,
+        "startChar": 48,
+        "endLine": 421,
+        "endChar": 52
+      },
+      "revId": "70177915bd48c0468bb9f436eaf4548af14a433e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
