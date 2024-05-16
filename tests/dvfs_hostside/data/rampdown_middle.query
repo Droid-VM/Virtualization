@@ -1,0 +1,31 @@
+thread_time as (
+  SELECT ts,
+          cpu,
+          lead(ts) over (order by ts) - ts as duration,
+          lead(cpu) over (order by ts) as next_cpu
+  FROM sched_slice
+  LEFT JOIN thread using(utid)
+  WHERE name = "thread0-0" and (cpu = 4 or cpu = 5)
+),
+thread_start as (
+  SELECT ts + duration as start
+  FROM thread_time
+  WHERE (cpu = 4 and next_cpu = 5)
+  LIMIT 1
+),
+duration as (
+  SELECT value,
+          ts,
+          lead(ts) over (order by ts) - ts as duration,
+          (ts - start) as delta_t
+  FROM counter as c
+  INNER JOIN cpu_counter_track as t
+  ON c.track_id = t.id
+  CROSS JOIN thread_start as s
+  WHERE (t.name = 'cpuidle' or t.name = 'cpufreq') and cpu = 5 and ts >= s.start
+  ORDER BY ts
+)
+SELECT delta_t from duration
+CROSS JOIN constants as constant
+WHERE duration > 10000000 and value <= constant.fmin
+limit 1

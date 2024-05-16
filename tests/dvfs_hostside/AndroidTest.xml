@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2022 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<configuration description="DVFS Tests for Microdroid">
+    <target_preparer class="com.android.tradefed.targetprep.FastbootCommandPreparer">
+        <option name="command" value="oem pkvm enable" />
+    </target_preparer>
+    <target_preparer class="com.android.tradefed.targetprep.RootTargetPreparer">
+        <option name="force-root" value="true" />
+    </target_preparer>
+    <target_preparer class="com.android.tradefed.targetprep.suite.SuiteApkInstaller">
+        <option name="test-file-name" value="MicrodroidTestApp.apk" />
+    </target_preparer>
+    <target_preparer class="com.android.compatibility.common.tradefed.targetprep.FilePusher">
+        <option name="push-file" key="gs://tradefed_test_resources/teams/android-systems/DVFSTests/rt-app" value="/data/local/tmp/DVFSTests/rt-app"/>
+        <option name="push-file" key="gs://tradefed_test_resources/teams/android-systems/DVFSTests/trace_processor_shell" value="/data/local/tmp/DVFSTests/trace_processor_shell"/>
+        <option name="push-file" key="data" value="/data/local/tmp/DVFSTests/rtapp_configs" />
+        <option name="cleanup" value="true"/>
+    </target_preparer>
+    <target_preparer class="com.android.tradefed.targetprep.RunCommandTargetPreparer">
+        <option name="run-command" value="chmod 755 /data/local/tmp/DVFSTests/rt-app"/>
+        <option name="run-command" value="chmod 755 /data/local/tmp/DVFSTests/trace_processor_shell"/>
+    </target_preparer>
+    <target_preparer class="com.android.tradefed.targetprep.FolderSaver">
+        <option name="device-path" value="/data/local/tmp/DVFSTestLogs"/>
+    </target_preparer>
+    <target_preparer class="com.android.tradefed.targetprep.DeviceCleaner">
+        <option name="cleanup-action" value="REBOOT"/>
+    </target_preparer>
+
+    <test class="com.android.compatibility.common.tradefed.testtype.JarHostTest" >
+        <option name="jar" value="MicrodroidDVFSHostTestCases.jar" />
+    </test>
+</configuration>
