@@ -1,0 +1,38 @@
+{
+	/*
+	 * Upmigrate test case that targets FMAX @ Big Cluster
+	 */
+	"tasks" : {
+		"thread0" : {
+			"loop" : 1,
+			"phases" : {
+				"phase1" : {
+					"cpus" : [0],
+					"loop" : 300,
+					"run" : 500,
+					"sleep" : 9500
+				},
+				"phase2" : {
+					"cpus" : [1],
+					"loop" : 1,
+					"run" : 1
+				},
+				"phase3" : {
+					"loop" : 1,
+					"run" : 20000000
+				}
+			}
+		}
+	},
+	"global" : {
+		"duration" : 5,
+		"calibration" : 274,
+		"default_policy" : "SCHED_OTHER",
+		"pi_enabled" : false,
+		"lock_pages" : false,
+		"logdir" : "/data/local/tmp/",
+		"log_basename" : "rt-app1",
+		"ftrace" : "main,task,loop",
+		"gnuplot" : true
+	}
+}

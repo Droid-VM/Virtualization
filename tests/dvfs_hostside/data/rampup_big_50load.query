@@ -1,0 +1,116 @@
+thread_time as (
+  SELECT ts,
+          cpu,
+          lead(cpu) over (order by ts) as next_cpu
+  FROM sched_slice
+  LEFT JOIN thread using(utid)
+  WHERE name = "thread0-0" and (cpu = 6 or cpu = 7)
+),
+thread_start as (
+  SELECT ts as start
+  FROM thread_time
+  WHERE (cpu = 6 and next_cpu = 7)
+  LIMIT 1
+),
+-- get data for frequency oscillation between frequency range
+--
+--  frequency
+--  ^
+--  |               ____      ___    ___________   ____________________      f_1
+--  |               |  |      |  |   |         |   |                  |
+--  |               |  |______|  |___|         |___|                  |      f_2
+--  |          _____|                                                 |_______
+--  |      ___|
+--  |      |
+--  |  ____|
+--  |  |
+--  |
+--  |
+--  --------------------------------------------------------------------------------->    time
+--
+--                 [---]                                                      duration_1
+--                 [-------------]                                            duration_3
+--                 [-----------------]                                        duration_4
+--                 [---------------------------]                              duration_5
+--                 [-------------------------------]                          duration_6
+--                 [---------------------------------------------------]      duration_7
+--
+-- For test cases that do not go to FMax or FMin, the steady state frequency may oscillate between
+-- frequencies. If a segment of size x, which has x-1 frequency transitions in the segment, has both
+-- a long enough time period and a small enough delta in frequency within the time period, it is
+-- considered to be steady state. Segments can be of arbitrary length x, depending on the state and
+-- other background processes running at the time, so multiple values of x are checked in this query.
+--
+transition_points as (
+  SELECT ts - s.start as delta_t,
+          value as freq,
+          lead(ts) over (order by ts) - ts as duration_1,
+
+  -- Segment of length x, meaning there are x-1 frequency transitions in this segment.
+  -- Data includes frequency delta of max and min frequency in the segment and duration
+  -- of the segment along with minimum frequency in the segment.
+
+  -- segment of length 3
+  MAX(ts) over (order by ts rows between current row and 3 following) -
+  MIN(ts) over (order by ts rows between current row and 3 following) as duration_3,
+  MAX(value) over (order by ts rows between current row and 2 following) -
+  MIN(value) over (order by ts rows between current row and 2 following) as freq_delta_3,
+
+  -- segment of length 4
+  MAX(ts) over (order by ts rows between current row and 4 following) -
+  MIN(ts) over (order by ts rows between current row and 4 following) as duration_4,
+  MAX(value) over (order by ts rows between current row and 3 following) -
+  MIN(value) over (order by ts rows between current row and 3 following) as freq_delta_4,
+
+  -- segment of length 5
+  MAX(ts) over (order by ts rows between current row and 5 following) -
+  MIN(ts) over (order by ts rows between current row and 5 following) as duration_5,
+  MAX(value) over (order by ts rows between current row and 4 following) -
+  MIN(value) over (order by ts rows between current row and 4 following) as freq_delta_5,
+
+  -- segment of length 6
+  MAX(ts) over (order by ts rows between current row and 6 following) -
+  MIN(ts) over (order by ts rows between current row and 6 following) as duration_6,
+  MAX(value) over (order by ts rows between current row and 5 following) -
+  MIN(value) over (order by ts rows between current row and 5 following) as freq_delta_6,
+
+  -- segment of length 7
+  MAX(ts) over (order by ts rows between current row and 7 following) -
+  MIN(ts) over (order by ts rows between current row and 7 following) as duration_7,
+  MAX(value) over (order by ts rows between current row and 6 following) -
+  MIN(value) over (order by ts rows between current row and 6 following) as freq_delta_7,
+
+  -- segment of length 8
+  MAX(ts) over (order by ts rows between current row and 8 following) -
+  MIN(ts) over (order by ts rows between current row and 8 following) as duration_8,
+  MAX(value) over (order by ts rows between current row and 7 following) -
+  MIN(value) over (order by ts rows between current row and 7 following) as freq_delta_8,
+
+  -- segment of length 9
+  MAX(ts) over (order by ts rows between current row and 9 following) -
+  MIN(ts) over (order by ts rows between current row and 9 following) as duration_9,
+  MAX(value) over (order by ts rows between current row and 8 following) -
+  MIN(value) over (order by ts rows between current row and 8 following) as freq_delta_9
+
+  FROM counter as c
+  INNER JOIN cpu_counter_track as t
+  ON c.track_id = t.id
+  CROSS JOIN thread_start as s
+  WHERE (t.name = 'cpuidle' or t.name = 'cpufreq') and cpu = 7 and ts >= s.start
+  ORDER BY ts
+)
+
+-- filter transition_table with appropriate constraints for steady state
+SELECT delta_t
+FROM transition_points
+CROSS JOIN constants as constant
+-- frequency delta must be within set range, and duration must be greater than set minimum
+WHERE (freq_delta_3 < 304000 and duration_3 > 150000000) or
+       (freq_delta_4 < 304000 and duration_4 > 150000000) or
+       (freq_delta_5 < 304000 and duration_5 > 150000000) or
+       (freq_delta_6 < 304000 and duration_6 > 150000000) or
+       (freq_delta_7 < 304000 and duration_7 > 150000000) or
+       (freq_delta_8 < 304000 and duration_8 > 150000000) or
+       (freq_delta_9 < 304000 and duration_9 > 150000000) or
+       (duration_1 > 100000000)
+LIMIT 1

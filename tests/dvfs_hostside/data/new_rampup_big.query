@@ -1,0 +1,15 @@
+-- find the start of thread migration on big CPU
+  thread_start AS (
+    SELECT MIN(ts) as start
+    FROM sched_slice left
+    JOIN thread using(utid)
+    WHERE name = "thread0-1-0000"),
+-- on the same thread, get point where big CPU hits FMax
+  freq_target AS (
+    SELECT s.start, MIN(ts) as end
+    FROM counter as c inner
+    JOIN cpu_counter_track as t on c.track_id = t.id
+    CROSS JOIN thread_start as s
+    CROSS JOIN constants as constant
+    WHERE (t.name = 'cpuidle' or t.name = 'cpufreq') and cpu = 7 and ts >= s.start and value >= constant.fmax)
+select end - start as delta from freq_target

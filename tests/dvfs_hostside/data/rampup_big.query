@@ -1,0 +1,16 @@
+cd_range AS (
+  select MAX(ts) as cd_end
+  from sched_slice left join thread using(utid) where name = "thread0-0" and cpu=6),
+range AS (
+  select MIN(ts) as min_ts, MAX(ts)+dur as max_ts
+  from sched_slice left join thread using(utid) where name = "thread0-0" and cpu=7 and ts > (select cd_end from cd_range)),
+end AS (
+  select MIN(ts) as end from counter as c
+  inner join cpu_counter_track as t on c.track_id = t.id
+  CROSS JOIN constants as constant
+  where (t.name = 'cpuidle' or t.name = 'cpufreq') and ts between (select min_ts from range) and (select max_ts from range) and cpu = 7 and value >= constant.fmax),
+delta AS (
+  select r.min_ts as start, e.end as end
+  from range r cross join end e)
+
+select (end - start) from delta

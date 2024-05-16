@@ -1,0 +1,30 @@
+thread_time as (
+  SELECT ts,
+         cpu,
+         lead(cpu) over (order by ts) as next_cpu
+  FROM sched_slice
+  LEFT JOIN thread using(utid)
+  WHERE name = "thread0-0" and (cpu = 0 or cpu = 1)
+),
+-- take start time as first transition from CPU0 to CPU1
+thread_start as (
+  SELECT ts as start
+  FROM thread_time
+  WHERE (cpu = 0 and next_cpu = 1)
+  LIMIT 1
+),
+-- find first instance of FMax on any big CPU
+duration as (
+  SELECT value,
+          ts,
+          (ts - start) as delta_t
+  FROM counter as c
+  INNER JOIN cpu_counter_track as t
+  ON c.track_id = t.id
+  CROSS JOIN thread_start as s
+  CROSS JOIN constants as constant
+  WHERE (t.name = 'cpuidle' or t.name = 'cpufreq') and (ts > start) and (cpu = 6 or cpu = 7) and value >= constant.fmax
+  ORDER BY ts
+)
+SELECT delta_t from duration
+LIMIT 1
