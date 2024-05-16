@@ -1,0 +1,678 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17b08297_4f93c0bc",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "Nit: Doesn\u0027t need to be public",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 6
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "70f87bd1_70e27994",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+              "range": {
+                "startLine": 34,
+                "startChar": 0,
+                "endLine": 35,
+                "endChar": 0
+              },
+              "replacement": "class CpuDvfsTestHelper {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85376ef9_1e616b52",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "Also static?",
+      "range": {
+        "startLine": 53,
+        "startChar": 12,
+        "endLine": 53,
+        "endChar": 17
+      },
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fddd5fa9_852cd9c2",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "final",
+      "range": {
+        "startLine": 55,
+        "startChar": 32,
+        "endLine": 55,
+        "endChar": 42
+      },
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b58f3f5_ca408a44",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "final?",
+      "range": {
+        "startLine": 57,
+        "startChar": 24,
+        "endLine": 57,
+        "endChar": 31
+      },
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ec48427_075c5388",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "Just `\u003c\u003e`",
+      "range": {
+        "startLine": 60,
+        "startChar": 73,
+        "endLine": 60,
+        "endChar": 91
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c67a0c36_088e18c9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+              "range": {
+                "startLine": 60,
+                "startChar": 0,
+                "endLine": 61,
+                "endChar": 0
+              },
+              "replacement": "    public static final Map\u003cString, Integer\u003e sCapacityIdxMap \u003d new HashMap\u003c\u003e();\n"
+            },
+            {
+              "path": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+              "range": {
+                "startLine": 69,
+                "startChar": 0,
+                "endLine": 70,
+                "endChar": 0
+              },
+              "replacement": "    public static final Map\u003cString, String\u003e sClusterAffineMap \u003d new HashMap\u003c\u003e();\n"
+            },
+            {
+              "path": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+              "range": {
+                "startLine": 79,
+                "startChar": 0,
+                "endLine": 80,
+                "endChar": 0
+              },
+              "replacement": "    public static final Map\u003cString, String\u003e sCGroupInverseAffineMap \u003d new HashMap\u003c\u003e();\n"
+            },
+            {
+              "path": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+              "range": {
+                "startLine": 308,
+                "startChar": 0,
+                "endLine": 309,
+                "endChar": 0
+              },
+              "replacement": "        HashMap\u003cInteger, Integer\u003e cpuCapacity \u003d new HashMap\u003c\u003e();\n"
+            },
+            {
+              "path": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+              "range": {
+                "startLine": 394,
+                "startChar": 0,
+                "endLine": 395,
+                "endChar": 0
+              },
+              "replacement": "        ArrayList\u003cInteger\u003e sortedKeys \u003d new ArrayList\u003c\u003e(cpuCapacity.keySet());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "964e6e6d_2d5f23ab",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "Some comments here would be helpful - the list of services is particularly weird looking.",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 10
+      },
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f58a2613_ea925205",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "It\u0027s normal to static import this and the other things in Assert",
+      "range": {
+        "startLine": 111,
+        "startChar": 12,
+        "endLine": 111,
+        "endChar": 31
+      },
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0ea234e_bd04ebe1",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "Can we avoid the sleep somehow? They always tend to make a test flaky.",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 46
+      },
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db3a9940_96a96884",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "Unnecessary initializer. Why not declare at the point you initialize below?",
+      "range": {
+        "startLine": 191,
+        "startChar": 26,
+        "endLine": 191,
+        "endChar": 30
+      },
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8eef3ac_d7b38d9a",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "The name doesn\u0027t seem to match the signature.\n(Oh, and better to return Map rather than HashMap)",
+      "range": {
+        "startLine": 203,
+        "startChar": 36,
+        "endLine": 203,
+        "endChar": 49
+      },
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47507794_be6d1b46",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "getFoo shouldn\u0027t return void. s/get/save/ ?",
+      "range": {
+        "startLine": 231,
+        "startChar": 12,
+        "endLine": 231,
+        "endChar": 33
+      },
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba1312da_a57e0f6f",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "I can\u0027t grok this. \n\n(Nit: I\u0027m not convinced affine is a verb. Some people seem to use affinitize but I\u0027m not sure that\u0027s better. Is \"restrict\" reasonably accurate?)",
+      "range": {
+        "startLine": 265,
+        "startChar": 37,
+        "endLine": 265,
+        "endChar": 94
+      },
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01714f1d_a56aa062",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "A HashMap doesn\u0027t preserve insertion order though.",
+      "range": {
+        "startLine": 317,
+        "startChar": 11,
+        "endLine": 317,
+        "endChar": 74
+      },
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c72afc4e_cb83619d",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "Naming nit: I\u0027m not sure this really corresponds to what this does",
+      "range": {
+        "startLine": 343,
+        "startChar": 20,
+        "endLine": 343,
+        "endChar": 31
+      },
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbfe52e7_d4fd1f23",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "Declare at point of initialization whenever possible (throughout)",
+      "range": {
+        "startLine": 344,
+        "startChar": 0,
+        "endLine": 345,
+        "endChar": 55
+      },
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd6164cd_be98aeca",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "Weird formatting - does the formatter insist on that line break after \u003d ?",
+      "range": {
+        "startLine": 380,
+        "startChar": 0,
+        "endLine": 381,
+        "endChar": 46
+      },
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66ad710d_1ec5553c",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "Map",
+      "range": {
+        "startLine": 391,
+        "startChar": 40,
+        "endLine": 391,
+        "endChar": 47
+      },
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3488e728_bfd32972",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "What if the answer is more than 9?",
+      "range": {
+        "startLine": 435,
+        "startChar": 0,
+        "endLine": 435,
+        "endChar": 76
+      },
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cce66b4_e840d6d3",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "mean?",
+      "range": {
+        "startLine": 447,
+        "startChar": 20,
+        "endLine": 447,
+        "endChar": 27
+      },
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb5ef61a_9a276cd7",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "I don\u0027t think it does",
+      "range": {
+        "startLine": 448,
+        "startChar": 42,
+        "endLine": 448,
+        "endChar": 59
+      },
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58398878_efc0508e",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "1_000_000",
+      "range": {
+        "startLine": 480,
+        "startChar": 51,
+        "endLine": 480,
+        "endChar": 58
+      },
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75e9a9fa_e4e32e97",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "That feels like it should be a separate function. It\u0027s a surprise given the function name and description anyway.",
+      "range": {
+        "startLine": 479,
+        "startChar": 0,
+        "endLine": 480,
+        "endChar": 60
+      },
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5be6d892_ba01669b",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/CpuDvfsTestHelper.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "I don\u0027t understand this either - or at least I can\u0027t see how the code does this.",
+      "range": {
+        "startLine": 489,
+        "startChar": 6,
+        "endLine": 489,
+        "endChar": 91
+      },
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "139beeaf_2feb6511",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/MicrodroidDVFSHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "I suspect that assertion failures in a BeforeClass don\u0027t do anything good. You should probably just skip if you get null.",
+      "range": {
+        "startLine": 61,
+        "startChar": 8,
+        "endLine": 61,
+        "endChar": 21
+      },
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4928f9a1_b1501849",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/MicrodroidDVFSHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "Does ITestDevice#doAdbReboot work for you?\nIf you just want ADB root, you can use RootTargetPreparer for that.",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 75
+      },
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c44e318_c35b9706",
+        "filename": "tests/dvfs_hostside/java/com/android/microdroid/test/MicrodroidDVFSHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-16T14:45:58Z",
+      "side": 1,
+      "message": "Could these all be done as a single parameterized test?\n\n(This one is missing javadoc)",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 57
+      },
+      "revId": "cf53764153a4e9be0fb7042b4b837c5af54a4cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
