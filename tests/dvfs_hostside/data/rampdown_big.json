@@ -1,0 +1,39 @@
+{
+	/*
+	 * Test case that ramps down on CPU7
+	 */
+	"tasks" : {
+		"thread0" : {
+			"loop" : 1,
+			"cpus" : [6],
+			"phases" : {
+				"fmax" : {
+					"loop" : 1,
+					"run" : 200000
+				},
+				"rampdown" : {
+					"cpus" : [7],
+					"loop" : 300,
+					"run" : 500,
+					"sleep" : 4500
+				},
+				"wakeup_big" : {
+					"cpus" : [7],
+					"loop" : 1,
+					"run" : 200000
+				}
+			}
+		}
+	},
+	"global" : {
+		"duration" : 8,
+		"calibration" : 36,
+		"default_policy" : "SCHED_OTHER",
+		"pi_enabled" : false,
+		"lock_pages" : false,
+		"logdir" : "/data/local/tmp/",
+		"log_basename" : "rt-app1",
+		"ftrace" : "main,task,loop",
+		"gnuplot" : true
+	}
+}

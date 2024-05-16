@@ -1,0 +1,33 @@
+{
+	/*
+	 * Test case that ramps to FMAX of CPU0
+	 */
+	"tasks" : {
+		"thread0" : {
+			"cpus" : [0],
+			"phases" : {
+				"phase1" : {
+					"loop" : 300,
+					"run" : 500,
+					"sleep" : 9500
+				},
+				"phase2" : {
+					"cpus" : [1],
+					"loop" : 1,
+					"run" : 2000000
+				}
+			}
+		}
+	},
+	"global" : {
+		"duration" : 5,
+		"calibration" : "CPU0",
+		"default_policy" : "SCHED_OTHER",
+		"pi_enabled" : false,
+		"lock_pages" : false,
+		"logdir" : "/data/local/tmp/",
+		"log_basename" : "rt-app1",
+		"ftrace" : "main,task,loop",
+		"gnuplot" : true
+	}
+}

@@ -1,0 +1,34 @@
+{
+	/*
+	 * Test case that ramps on CPU5
+	 */
+	"tasks" : {
+		"thread0" : {
+			"loop" : 1,
+			"cpus" : [4],
+			"phases" : {
+				"fmax" : {
+					"loop" : 1,
+					"run" : 2000000
+				},
+				"rampdown" : {
+					"cpus" : [5],
+					"loop" : 300,
+					"run" : 500,
+					"sleep" : 4500
+				}
+			}
+		}
+	},
+	"global" : {
+		"duration" : 5,
+		"calibration" : 84,
+		"default_policy" : "SCHED_OTHER",
+		"pi_enabled" : false,
+		"lock_pages" : false,
+		"logdir" : "/data/local/tmp/",
+		"log_basename" : "rt-app1",
+		"ftrace" : "main,task,loop",
+		"gnuplot" : true
+	}
+}
