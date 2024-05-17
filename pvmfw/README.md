@@ -471,7 +471,12 @@ m pvmfw-tool pvmfw_bin
 PVMFW_BIN=${ANDROID_PRODUCT_OUT}/system/etc/pvmfw.bin
 DICE=${ANDROID_BUILD_TOP}/packages/modules/Virtualization/tests/pvmfw/assets/bcc.dat
 
-pvmfw-tool custom_pvmfw ${PVMFW_BIN} ${DICE}
+# Pull VM reference DT from device
+TEMP=$(mktemp -d)
+adb pull /proc/device-tree/avf/reference/ ${TEMP}
+dtc -f ${TEMP}/reference -o ${TEMP}/reference.dtb
+
+pvmfw-tool custom_pvmfw ${PVMFW_BIN} ${DICE} ${TEMP}/reference.dtb
 ```
 
 The result can then be pushed to the device. Pointing the system property
