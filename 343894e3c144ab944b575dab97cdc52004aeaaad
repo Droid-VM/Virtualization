@@ -22,6 +22,30 @@
       },
       "revId": "343894e3c144ab944b575dab97cdc52004aeaaad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e08a6478_d16aeb7b",
+        "filename": "vmlauncher_app/res/layout/activity_main.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-05-17T13:12:10Z",
+      "side": 1,
+      "message": "From my understanding about ViewGroup(https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/java/android/view/ViewGroup.java;l\u003d2805?q\u003dViewGroup), it tries to dispatch touch event in Z-order(below defined view goes up), but `surface_view` doesn\u0027t have onTouchListener, it tries the next candidate, background_touch_view.",
+      "parentUuid": "04a409cb_b7149114",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 6
+      },
+      "revId": "343894e3c144ab944b575dab97cdc52004aeaaad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
