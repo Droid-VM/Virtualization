@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e400b018_c4a6aae1",
+        "filename": "service_vm/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-17T07:14:41Z",
+      "side": 1,
+      "message": "I think this already outdated with the migration to instance ID. Without the context of instance image encryption, VM secret is more a notion in microdroid VM.\n\nI changed this to instance ID.",
+      "parentUuid": "4ede2319_8cc320a0",
+      "range": {
+        "startLine": 8,
+        "startChar": 4,
+        "endLine": 8,
+        "endChar": 52
+      },
+      "revId": "a7961a7f45b1ea4bbe424fe09ec7c9d7aef14be4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "098cfef5_4bd37bbd",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-05-16T15:08:48Z",
       "side": 1,
       "message": "Should we mention that it\u0027s owned/managed by VirtualizationService?\n(And possibly include a code pointer)",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 71
+      },
+      "revId": "a7961a7f45b1ea4bbe424fe09ec7c9d7aef14be4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42b76a45_1368461f",
+        "filename": "service_vm/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-17T07:14:41Z",
+      "side": 1,
+      "message": "You mean the process, not the service itself, right? The Service VM can also be used in the RKP HAL outside the IVirtualizationService.\n\nI added this to ./manager section below.",
+      "parentUuid": "098cfef5_4bd37bbd",
       "range": {
         "startLine": 7,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "024bbe0b_4fb52603",
+        "filename": "service_vm/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-17T07:14:41Z",
+      "side": 1,
+      "message": "Sure. Done",
+      "parentUuid": "cddcef69_eb8f88ad",
+      "range": {
+        "startLine": 21,
+        "startChar": 34,
+        "endLine": 21,
+        "endChar": 42
+      },
+      "revId": "a7961a7f45b1ea4bbe424fe09ec7c9d7aef14be4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77377a4d_077f98a2",
@@ -100,6 +172,30 @@
       "writtenOn": "2024-05-16T15:08:48Z",
       "side": 1,
       "message": "Nit: device",
+      "range": {
+        "startLine": 22,
+        "startChar": 54,
+        "endLine": 22,
+        "endChar": 61
+      },
+      "revId": "a7961a7f45b1ea4bbe424fe09ec7c9d7aef14be4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69769492_0cb59517",
+        "filename": "service_vm/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-17T07:14:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77377a4d_077f98a2",
       "range": {
         "startLine": 22,
         "startChar": 54,
