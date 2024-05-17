@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2eeedf0a_e1831b4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-17T17:54:03Z",
+      "side": 1,
+      "message": "BTW, could you add the tests we discussed in the mail to `remote_provisioning/` first to be sure that the relands make all the CI pass? :)\n\nAs this is not the only places we use the fake DICE chain, if this test cannot pass, other tests can also have problem.",
+      "revId": "c67aae4fcf8bca56aa8972957da86e8410ee84a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69e4d0ac_3324e5f8",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-17T17:54:03Z",
+      "side": 1,
+      "message": "Why do we only need to set this for non-protected VM?\n\nActually the non-protected VM uses a fake DICE chain in `libs/dice/sample_inputs`, is it possible to fix there directly?\n\nCan the test [1] pass without any adjustment?\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/dice/sample_inputs/tests/api_test.rs;l\u003d137;drc\u003d94a06358687288ba0762c568dd6087639cc7b15c",
+      "range": {
+        "startLine": 282,
+        "startChar": 18,
+        "endLine": 284,
+        "endChar": 5
+      },
+      "revId": "c67aae4fcf8bca56aa8972957da86e8410ee84a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
