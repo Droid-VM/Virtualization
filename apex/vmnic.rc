@@ -13,7 +13,7 @@
 # limitations under the License.
 
 service vmnic /apex/com.android.virt/bin/vmnic
-    user system
+    user root
     group system
     interface aidl android.system.virtualizationservice_internal.IVmnic
     disabled
