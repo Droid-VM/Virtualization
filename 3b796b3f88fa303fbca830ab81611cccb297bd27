@@ -68,6 +68,30 @@
       },
       "revId": "3b796b3f88fa303fbca830ab81611cccb297bd27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d69fc6a_2a24a320",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice_internal/IVirtualizationServiceInternal.aidl",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-05-20T08:57:34Z",
+      "side": 1,
+      "message": "UID is not proper one, to consider running multiple VMs from the same user. But PID(of virtmgr) sounds good. I thought that CID is the standard way to distinguish resources between VMs. I\u0027ll change the parameter as pid-based value.",
+      "parentUuid": "2559e9cc_6b991a84",
+      "range": {
+        "startLine": 130,
+        "startChar": 48,
+        "endLine": 130,
+        "endChar": 51
+      },
+      "revId": "3b796b3f88fa303fbca830ab81611cccb297bd27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
