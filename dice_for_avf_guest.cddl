@@ -1,25 +1,21 @@
-; Configuration Descriptor used in the DICE node that describes the payload of a Microdroid virtual
-; machine.
-;
-; See the Open DICE specification
-; https://pigweed.googlesource.com/open-dice/+/HEAD/docs/specification.md,
-; and the Android Profile for DICE
-; https://pigweed.googlesource.com/open-dice/+/HEAD/docs/android.md.
-;
-; CDDL for the normal Configuration Descriptor can be found at
+; DICE Specification for AVF guest
+
+; This specification is applicable to components running in AVF Guest environment;
+; (VM core components and payload). It extends the `ConfigurationDescriptor` specified at
 ; https://cs.android.com/android/platform/superproject/main/+/main:hardware/interfaces/security/rkp/aidl/android/hardware/security/keymint/generateCertificateRequestV2.cddl
 
-; The configuration descriptor node for a Microdroid VM, with extensions to describe the contents
-; of the VM payload.
-; The subcomponents describe the APKs and then the APEXes that are part of the VM. The main APK
-; is first, followed by any extra APKs in the order they are specified in the VM config.
-; The APEXes are listed in the order specified when the VM is created, which is normally alphabetic
-; order by name.
-VmConfigDescriptor = {
-    -70002 : "Microdroid payload",      ; Component name
-    (? -71000: tstr //                  ; Path to the payload config file
+; Note that some of key-value pairs may not be useful to each of the boot component and therefore
+; are optional. For e.g., SubcomponentDescriptor is only used in Microdroid payload, it may
+; not have immediate use for pVM firmware. Irrespective of that, we reserve the keys for those
+; purposes should the need arise in the future, prohibiting use of the keys for other purposes.
+
+ConfigDescriptor = {
+    ? -70002 : tstr,                      ; Component name
+    (? -71000: tstr //                    ; Path to the payload config file
     ? -71001: PayloadConfig),
-    ? -71002: [+ SubcomponentDescriptor],
+    ? -71002: [+ SubcomponentDescriptor], ; The order of these should be kept constant on each boot
+                                          ; of the VM instance
+    ? -71003: bstr .size 64               ; InstanceHash: Unique identifier of the VM instance
 }
 
 PayloadConfig = {
@@ -54,3 +50,9 @@ SubcomponentDescriptor = {
   3: bstr,                              ; Code hash
   4: bstr,                              ; Authority hash
 }
+
+; In addition to the specification above, different components of VM specify the value
+; corresponding to `Component name`.
+;
+; 1. "Microdroid Payload" - Payload run by Microdroid Manager.
+; 2. "vm_entry" - Guest 'OS'. This is the payload booted by pVM firmware. For e.g, Microdroid, Rialto.
