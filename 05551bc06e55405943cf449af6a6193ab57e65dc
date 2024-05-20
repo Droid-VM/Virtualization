@@ -46,6 +46,30 @@
       },
       "revId": "05551bc06e55405943cf449af6a6193ab57e65dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86521686_6c97ba5c",
+        "filename": "virtualizationservice/src/maintenance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-05-20T18:49:25Z",
+      "side": 1,
+      "message": "Looks like that is resolved now. I\u0027ve removed the maintenance.rs change from this CL since it seems like you switch it to `wait_for_interface` already, thanks!",
+      "parentUuid": "eedaeb50_95a78588",
+      "range": {
+        "startLine": 89,
+        "startChar": 26,
+        "endLine": 89,
+        "endChar": 44
+      },
+      "revId": "05551bc06e55405943cf449af6a6193ab57e65dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
