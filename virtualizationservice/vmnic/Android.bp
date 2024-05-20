@@ -8,12 +8,26 @@ rust_binary {
     defaults: ["avf_build_flags_rust"],
     edition: "2021",
     srcs: ["src/main.rs"],
+    // Only build on targets which crosvm builds on.
+    enabled: false,
+    target: {
+        android64: {
+            compile_multilib: "64",
+            enabled: true,
+        },
+        linux_bionic_arm64: {
+            enabled: true,
+        },
+    },
     prefer_rlib: true,
     rustlibs: [
         "android.system.virtualizationservice_internal-rust",
         "libandroid_logger",
         "libanyhow",
+        "libbase_rust",
         "libbinder_rs",
+        "libnet_sys",
+        "libnet_util",
         "liblog_rust",
     ],
     apex_available: ["com.android.virt"],
