@@ -14,10 +14,14 @@
 
 //! Implementation of the AIDL interface of Vmnic.
 
-use anyhow::anyhow;
+use anyhow::{anyhow, Context};
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IVmnic::IVmnic;
-use binder::{self, ExceptionCode, Interface, IntoBinderResult, ParcelFileDescriptor};
+use base::sys::linux::ioctl_with_val;
+use binder::{self, Interface, IntoBinderResult, ParcelFileDescriptor};
 use log::info;
+use net_sys::TUNSETPERSIST;
+use net_util::sys::linux::Tap;
+use net_util::TapTCommon;
 
 #[derive(Debug, Default)]
 pub struct Vmnic {}
@@ -33,9 +37,20 @@ impl Interface for Vmnic {}
 impl IVmnic for Vmnic {
     fn createTapInterface(&self, iface_name_suffix: &str) -> binder::Result<ParcelFileDescriptor> {
         let ifname = format!("avf_tap_{iface_name_suffix}");
-        info!("Creating TAP interface {}", ifname);
-
-        Err(anyhow!("Creating TAP network interface is not supported yet"))
-            .or_binder_exception(ExceptionCode::UNSUPPORTED_OPERATION)
+        let tap = Tap::new_with_name(ifname.as_bytes(), true, false)
+            .context("Failed to create TAP interface: {ifname}")
+            .or_service_specific_exception(-1)?;
+        // SAFETY: Executing ioctl modifies the state of kernel, not this process. Execution failure
+        // is checked below.
+        let ret = unsafe { ioctl_with_val(&tap, TUNSETPERSIST(), 1) };
+        if ret < 0 {
+            return Err(anyhow!("Failed to ioctl TUNSETPERSIST for the TAP interface: {ifname}"))
+                .or_service_specific_exception(-1)?;
+        }
+        tap.enable()
+            .context("Failed to enable TAP interface: {ifname}")
+            .or_service_specific_exception(-1)?;
+        info!("Created TAP interface: {}", ifname);
+        Ok(ParcelFileDescriptor::new(tap.tap_file))
     }
 }
