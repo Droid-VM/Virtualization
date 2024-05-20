@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "983001c9_01c2ceaf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-20T08:03:47Z",
+      "side": 1,
+      "message": "@ioffe@google.com, didn\u0027t you have a bug (about relaxing the check in `main` on `args`) which would also address this mismatch?",
+      "range": {
+        "startLine": 9,
+        "startChar": 5,
+        "endLine": 9,
+        "endChar": 14
+      },
+      "revId": "f49cdc0c839d75e1ca444c4693002f020256731b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "23ecd256_8e5ba77f",
@@ -14,6 +37,80 @@
       "writtenOn": "2024-05-20T00:58:28Z",
       "side": 1,
       "message": "Dear Nikita, could you try this and share me whether it works?",
+      "revId": "f49cdc0c839d75e1ca444c4693002f020256731b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d70d6a0b_bf699aa3",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-20T08:03:47Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be simpler to add a DTS, either inline here, or as a standalone file (with Android rules allowing the reader to `m` it and/or modify it)?\n\nDevelopment of pvmfw shouldn\u0027t require a device that was shipped with a reference DT, right?",
+      "range": {
+        "startLine": 475,
+        "startChar": 0,
+        "endLine": 477,
+        "endChar": 49
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "62055fe7_9f3d6431",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "pvmfw/README.md",
+              "range": {
+                "startLine": 474,
+                "startChar": 0,
+                "endLine": 478,
+                "endChar": 0
+              },
+              "replacement": "# Pull VM reference DT from device and convert to DTB\ndtc -f /proc/device-tree/avf/reference/ -o /tmp/reference.dtb\n"
+            },
+            {
+              "path": "pvmfw/README.md",
+              "range": {
+                "startLine": 479,
+                "startChar": 0,
+                "endLine": 480,
+                "endChar": 0
+              },
+              "replacement": "pvmfw-tool custom_pvmfw ${PVMFW_BIN} ${DICE} /tmp/reference.dtb\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f49cdc0c839d75e1ca444c4693002f020256731b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c97026d9_a5e6348a",
+        "filename": "tests/pvmfw/helper/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-20T08:03:47Z",
+      "side": 1,
+      "message": "Could you explain how this addresses b/341187900, which was a mismatch between the code logic and documentation?",
+      "range": {
+        "startLine": 8,
+        "startChar": 4,
+        "endLine": 8,
+        "endChar": 15
+      },
       "revId": "f49cdc0c839d75e1ca444c4693002f020256731b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
