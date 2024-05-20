@@ -22,6 +22,52 @@
       },
       "revId": "8564d6e89e66284827cd5120d2a8fa89a8fa6070",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca18f995_4f8cecad",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-05-20T05:44:26Z",
+      "side": 1,
+      "message": "`if cfg!(network)`?",
+      "range": {
+        "startLine": 504,
+        "startChar": 8,
+        "endLine": 504,
+        "endChar": 47
+      },
+      "revId": "8564d6e89e66284827cd5120d2a8fa89a8fa6070",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77393820_ee9b254d",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-05-20T05:44:26Z",
+      "side": 1,
+      "message": "`#[cfg(network)]`?",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 23
+      },
+      "revId": "8564d6e89e66284827cd5120d2a8fa89a8fa6070",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
