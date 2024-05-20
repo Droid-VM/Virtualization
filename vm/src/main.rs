@@ -60,6 +60,10 @@ pub struct CommonConfig {
     /// https://docs.kernel.org/admin-guide/mm/transhuge.html
     #[arg(short, long)]
     hugepages: bool,
+
+    /// Run VM with network feature.
+    #[arg(short, long)]
+    network_supported: bool,
 }
 
 #[derive(Args, Default)]

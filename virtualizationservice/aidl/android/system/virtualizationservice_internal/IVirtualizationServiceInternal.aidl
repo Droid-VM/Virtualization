@@ -121,4 +121,11 @@ interface IVirtualizationServiceInternal {
     void setDisplayService(IBinder ibinder);
     void clearDisplayService();
     IBinder waitDisplayService();
+
+    /**
+     * Create TAP network interface for a VM.
+     * @param CID of VM.
+     * @return file descriptor of the TAP network interface.
+     */
+    ParcelFileDescriptor createTapInterface(int cid);
 }
