@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dd48420_4c789c3f",
+        "filename": "apex/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-05-20T05:29:59Z",
+      "side": 1,
+      "message": "@inseob@google.com About adding `com.android.virt.vmnic.rc` file into here again, I found an error that service manager cannot find `vmnic`. After adding prebuilt here for storing `.rc` file under `/apex/com.android.virt/etc`, now service manager could read this `.rc` file and run `vmnic` for setting AIDL interface.",
+      "range": {
+        "startLine": 196,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 44
+      },
+      "revId": "8564d6e89e66284827cd5120d2a8fa89a8fa6070",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
