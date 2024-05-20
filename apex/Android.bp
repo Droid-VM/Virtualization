@@ -192,6 +192,9 @@ avf_flag_aware_apex_defaults {
             androidManifest: "AndroidManifest.xml",
         },
         release_avf_enable_network: {
+            prebuilts: [
+                "com.android.virt.vmnic.rc",
+            ],
             arch: {
                 arm64: {
                     binaries: ["vmnic"],
@@ -263,6 +266,13 @@ prebuilt_etc {
     name: "com.android.virt.vfio_handler.rc",
     src: "vfio_handler.rc",
     filename: "vfio_handler.rc",
+    installable: false,
+}
+
+prebuilt_etc {
+    name: "com.android.virt.vmnic.rc",
+    src: "vmnic.rc",
+    filename: "vmnic.rc",
     installable: false,
 }
 
