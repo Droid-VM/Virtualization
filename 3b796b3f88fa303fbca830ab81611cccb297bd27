@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e8e84ac_de45c219",
+        "filename": "apex/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-05-21T01:36:17Z",
+      "side": 1,
+      "message": "Done, but could you explain the difference between `installable` and `no_full_install` briefly? Because of that, I couldn\u0027t decide to change other modules easily.",
+      "parentUuid": "9a8f95b1_a9a8dae7",
+      "range": {
+        "startLine": 276,
+        "startChar": 0,
+        "endLine": 276,
+        "endChar": 23
+      },
+      "revId": "3b796b3f88fa303fbca830ab81611cccb297bd27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c0b7b27_42766e8b",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-05-20T08:03:07Z",
       "side": 1,
       "message": "Don\u0027t pass cid directly as a tap device name. Construct a string here and pass the string.",
+      "range": {
+        "startLine": 616,
+        "startChar": 51,
+        "endLine": 616,
+        "endChar": 61
+      },
+      "revId": "3b796b3f88fa303fbca830ab81611cccb297bd27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "052f9c83_0f974ff6",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-05-21T01:36:17Z",
+      "side": 1,
+      "message": "I changed to use PID with string.",
+      "parentUuid": "9c0b7b27_42766e8b",
       "range": {
         "startLine": 616,
         "startChar": 51,
@@ -84,6 +132,30 @@
       "side": 1,
       "message": "UID is not proper one, to consider running multiple VMs from the same user. But PID(of virtmgr) sounds good. I thought that CID is the standard way to distinguish resources between VMs. I\u0027ll change the parameter as pid-based value.",
       "parentUuid": "2559e9cc_6b991a84",
+      "range": {
+        "startLine": 130,
+        "startChar": 48,
+        "endLine": 130,
+        "endChar": 51
+      },
+      "revId": "3b796b3f88fa303fbca830ab81611cccb297bd27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a5281a1_5d991a60",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice_internal/IVirtualizationServiceInternal.aidl",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-05-21T01:36:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d69fc6a_2a24a320",
       "range": {
         "startLine": 130,
         "startChar": 48,
