@@ -22,6 +22,30 @@
       },
       "revId": "4cc1545c00dcff9a2bfcd71ba770149b555ee7cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1f4e9ba_6a1f1e87",
+        "filename": "vmbase/src/entry.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-21T10:53:58Z",
+      "side": 1,
+      "message": "Because `hyp` is a thin wrapper around the hypervisor ABI and `mmio_guard.map()` is a thin wrapper around the `MMIO_GUARD_MAP` HVC. OTOH, `MmioSharer` is slightly higher level and performs bookkeeping.\n\nSo the \"dependency\" can\u0027t really be inverted, in particular because the way we\u0027ve implemented polymorphism of the `hyp` back-end prevents it from holding any state, unfortunately...\n\nI\u0027m planning to address this `TODO` by instantiating the `MmioSharer` ASAP, instead.",
+      "parentUuid": "3fe077c1_7b26f8c7",
+      "range": {
+        "startLine": 32,
+        "startChar": 23,
+        "endLine": 32,
+        "endChar": 85
+      },
+      "revId": "4cc1545c00dcff9a2bfcd71ba770149b555ee7cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
