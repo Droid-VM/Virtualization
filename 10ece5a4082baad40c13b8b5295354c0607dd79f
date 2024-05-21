@@ -61,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1c73b95f_c18cb4fd",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-21T09:57:10Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t fully understand Pierre\u0027 design of `PartialInputs`\n\nFrom aosp/2430515, it made the `code_hash` and `auth_hash` available **before** accessing the instance.img so that they could be validated against the stored ones.\n\nThose first inputs were \"`Partial`\" as the salt (another DICE input) was then read from the instance.img; note your [review comment](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2430515/comment/32597ec3_f66462cf/) on aosp/2430515.\n\nHaving this 2-stage approach avoided the alternative of manipulating partially-initialized structs.\n\n\u003e `PartialInputs` should encompass all the fields that are present in the DICE certificate\n\n+1 if that is now possible; note that it wouldn\u0027t need to be \"`Partial`\" anymore.",
+      "parentUuid": "a38765ac_a19efc06",
+      "range": {
+        "startLine": 98,
+        "startChar": 8,
+        "endLine": 98,
+        "endChar": 36
+      },
+      "revId": "10ece5a4082baad40c13b8b5295354c0607dd79f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5fa08b48_f704adfd",
         "filename": "pvmfw/src/main.rs",
         "patchSetId": 3
