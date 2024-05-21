@@ -16,6 +16,75 @@
       "message": "Surprisingly I got Presubmit verified +2 without the avf tests running. Infact no test seem to scheduled on a real device.",
       "revId": "10ece5a4082baad40c13b8b5295354c0607dd79f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a38765ac_a19efc06",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-21T09:27:17Z",
+      "side": 1,
+      "message": "nit: tbh, I don\u0027t fully understand Pierre\u0027 design of `PartialInputs` here, but from the code itself, it looks like that the `PartialInputs` should encompass all the fields that are present in the DICE certificate. This function only takes the current bcc and hidden to deduce the next bcc.\n\nWith the current PS, it also doesn\u0027t look very consistent to have a part of the config in `PartialInputs`, and another part of it as a param of this function.\n\n@ptosi@google.com fyi",
+      "range": {
+        "startLine": 98,
+        "startChar": 8,
+        "endLine": 98,
+        "endChar": 36
+      },
+      "revId": "10ece5a4082baad40c13b8b5295354c0607dd79f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fa08b48_f704adfd",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-21T09:27:17Z",
+      "side": 1,
+      "message": "This function is a bit difficult to read. Basically it just computes the SHA512 hash of instance ID, whether to use it as any field in DICE should be the caller\u0027s choice, not this function itself. It\u0027s an anti-pattern to mix the function\u0027s capability and the caller\u0027s policy, could we rename this function to `instance_id_hash()`?",
+      "range": {
+        "startLine": 284,
+        "startChar": 3,
+        "endLine": 284,
+        "endChar": 24
+      },
+      "revId": "10ece5a4082baad40c13b8b5295354c0607dd79f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b298314_df45aa0a",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-21T09:27:17Z",
+      "side": 1,
+      "message": "`diced_open_dice::hash()` can be used here to avoid type conversion.",
+      "range": {
+        "startLine": 292,
+        "startChar": 8,
+        "endLine": 292,
+        "endChar": 19
+      },
+      "revId": "10ece5a4082baad40c13b8b5295354c0607dd79f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
