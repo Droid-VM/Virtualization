@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5afe2bb1_cec4bcac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-05-21T15:40:42Z",
+      "side": 1,
+      "message": "Yes, and I duped it with this b/340674528.",
+      "parentUuid": "983001c9_01c2ceaf",
+      "range": {
+        "startLine": 9,
+        "startChar": 5,
+        "endLine": 9,
+        "endChar": 14
+      },
+      "revId": "f49cdc0c839d75e1ca444c4693002f020256731b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "23ecd256_8e5ba77f",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -106,6 +130,30 @@
       "side": 1,
       "message": "I\u0027d go even stronger and say that we shouldn\u0027t make reference dt a required pvmfw-tool arg. Since reference dt is an optional feature, there can easily be devices that will have pvmfw, but won\u0027t have reference dt. We should support such use case.",
       "parentUuid": "d70d6a0b_bf699aa3",
+      "range": {
+        "startLine": 475,
+        "startChar": 0,
+        "endLine": 477,
+        "endChar": 49
+      },
+      "revId": "f49cdc0c839d75e1ca444c4693002f020256731b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "455d6d47_161f808c",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-05-21T15:40:42Z",
+      "side": 1,
+      "message": "Q: Reference DT has `secretkeeper_public_key`, which I believe that we\u0027d better to pass it for booting microdroid. What do you think? Are you talking about non-microdroid and/or simplify guideline?",
+      "parentUuid": "df79c8c2_6b7dc97d",
       "range": {
         "startLine": 475,
         "startChar": 0,
