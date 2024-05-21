@@ -168,6 +168,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ebd3924b_83e09078",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-21T16:44:18Z",
+      "side": 1,
+      "message": "\u003e Don\u0027t think that is possible because of severe tech debt ...\n\nBy encompassing all the fields that are *present* in the DICE certificate in PartialInput, I meant adding `instance_hash` as a field of `PartialInput` instead of passing it as a parameter here. So instead of calling:\n\n```\nlet dice_inputs \u003d PartialInputs::new(\u0026verified_boot_data).map_err(|e| {\n        error!(\"Failed to compute partial DICE inputs: {e:?}\");\n        RebootReason::InternalError\n    })?;\ndice_inputs.write_next_bcc(new_bcc_handover.as_ref(), \u0026salt, instance_hash, next_bcc)\n```\n\nWe can do\n\n```\nlet dice_inputs \u003d PartialInputs::new(\u0026verified_boot_data, instance_hash).map_err(|e| {\n        error!(\"Failed to compute partial DICE inputs: {e:?}\");\n        RebootReason::InternalError\n    })?;\ndice_inputs.write_next_bcc(new_bcc_handover.as_ref(), \u0026salt, next_bcc)\n```\n\nI don\u0027t see why this is related to tech debt. \"salt/hidden\" are not visible in DICE certificate.",
+      "parentUuid": "ff891a43_ce1fb7b0",
+      "range": {
+        "startLine": 98,
+        "startChar": 8,
+        "endLine": 98,
+        "endChar": 36
+      },
+      "revId": "10ece5a4082baad40c13b8b5295354c0607dd79f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f089c19a_f2085450",
         "filename": "pvmfw/src/dice.rs",
         "patchSetId": 3
