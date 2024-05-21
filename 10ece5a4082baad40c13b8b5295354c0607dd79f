@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0008a547_80d674af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-21T10:05:18Z",
+      "side": 1,
+      "message": "\u003e no test seem to scheduled on a real device\n\nIt looks like `avf_presubmit_tests` [passed on a real device](http://android-build/test_investigate/?invocationId\u003dI50900010278822228\u0026testResultId\u003dTR56029310374699779) for PS3?\n\nThey did get skipped on CF, but that\u0027s WoA.\n\nNot sure what the `avf_presubmit_coverage_test` is; LMK if you expected it to run.",
+      "parentUuid": "3b93a909_2c5e55e6",
+      "revId": "10ece5a4082baad40c13b8b5295354c0607dd79f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a38765ac_a19efc06",
         "filename": "pvmfw/src/dice.rs",
         "patchSetId": 3
