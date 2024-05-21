@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "36bf0117_f2698762",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-21T10:54:13Z",
+      "side": 1,
+      "message": "The granule is obtained from the MMIO guard and as `MmioSharer::share()` already calls `MMIO_GUARD_MAP` directly, I thought I would encapsulate all MMIO guard interactions in the `MmioSharer` object; see `MmioSharer::get_granule()` in aosp/3061851.\n\nLMK if you\u0027d rather have the caller of `MmioSharer::new()` perform the granule discovery on its own, instead.",
+      "parentUuid": "62211580_6cf703d8",
+      "range": {
+        "startLine": 388,
+        "startChar": 7,
+        "endLine": 388,
+        "endChar": 10
+      },
+      "revId": "70177915bd48c0468bb9f436eaf4548af14a433e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4f0b82cf_d566e2bf",
         "filename": "vmbase/src/memory/shared.rs",
         "patchSetId": 6
@@ -37,6 +61,30 @@
       "writtenOn": "2024-05-16T08:33:57Z",
       "side": 1,
       "message": "Don\u0027t know if it matters in Rust but I would move this assert before the BTreeset object creation",
+      "range": {
+        "startLine": 394,
+        "startChar": 16,
+        "endLine": 394,
+        "endChar": 23
+      },
+      "revId": "70177915bd48c0468bb9f436eaf4548af14a433e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d40c2d6_df5b5c28",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-21T10:54:13Z",
+      "side": 1,
+      "message": "OOC, what\u0027s the rationale?\n\nIsn\u0027t it more readable to have declarations followed by validation and business logic?",
+      "parentUuid": "4f0b82cf_d566e2bf",
       "range": {
         "startLine": 394,
         "startChar": 16,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3279fd7_8d4ba6bb",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-21T10:54:13Z",
+      "side": 1,
+      "message": "From the docs:\n\n\u003e Returns whether the value was newly inserted. That is:\n\u003e\n\u003e - If the set did not previously contain an equal value, true is returned.\n\u003e - If the set already contained an equal value, false is returned, and the entry is not updated.\n\nSo I\u0027m `assert`-ing that the frame was not already shared.\n\nAs you pointed out, this should already have been caught at L405 but, as `.insert()` is returning something, I might as well validate it instead of blindly discarding it.\n\nHowever, this is why L414 can panic instead of a more gentle\n```\nif !inserted { return Err(...); }\n```",
+      "parentUuid": "a7f2553b_5249909a",
+      "range": {
+        "startLine": 414,
+        "startChar": 16,
+        "endLine": 414,
+        "endChar": 24
+      },
+      "revId": "70177915bd48c0468bb9f436eaf4548af14a433e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7118c1c9_cc75b8a3",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-05-16T08:33:57Z",
       "side": 1,
       "message": "In which case you don\u0027t have mmio guard set but you have the memory share frames ? Is it for non-protected case ? (maybe a comment can make it more clear)",
+      "range": {
+        "startLine": 421,
+        "startChar": 48,
+        "endLine": 421,
+        "endChar": 52
+      },
+      "revId": "70177915bd48c0468bb9f436eaf4548af14a433e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9c0af15_b758e5c4",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-21T10:54:13Z",
+      "side": 1,
+      "message": "\u003e Is it for non-protected case ?\n\nYes (for pKVM) or hypervisors that don\u0027t need MMIO_GUARD.\n\n\u003e maybe a comment can make it more clear\n\nWill do.",
+      "parentUuid": "7118c1c9_cc75b8a3",
       "range": {
         "startLine": 421,
         "startChar": 48,
