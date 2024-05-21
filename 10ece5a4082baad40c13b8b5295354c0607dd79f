@@ -305,6 +305,30 @@
       },
       "revId": "10ece5a4082baad40c13b8b5295354c0607dd79f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "494bb5bb_86cee164",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-21T16:52:13Z",
+      "side": 1,
+      "message": "Why does it return a `diced_open_dice::Hidden` type instead of the `Vec\u003cu8\u003e` if it\u0027s totally unrelated? If you want to return `diced_open_dice::Hidden`, using `diced_open_dice::hash()` basically can help you avoid this type conversion and the error handling below, we could also avoid unnecessary usage of heap memory just to be frugal.",
+      "parentUuid": "2177d99b_d88fd5fe",
+      "range": {
+        "startLine": 292,
+        "startChar": 8,
+        "endLine": 292,
+        "endChar": 19
+      },
+      "revId": "10ece5a4082baad40c13b8b5295354c0607dd79f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
