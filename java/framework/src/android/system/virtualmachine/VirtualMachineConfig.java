@@ -38,6 +38,7 @@ import android.os.Build;
 import android.os.ParcelFileDescriptor;
 import android.os.PersistableBundle;
 import android.sysprop.HypervisorProperties;
+import android.system.virtualizationservice.ConsoleInputDevice;
 import android.system.virtualizationservice.DiskImage;
 import android.system.virtualizationservice.Partition;
 import android.system.virtualizationservice.VirtualMachineAppConfig;
@@ -90,6 +91,7 @@ public final class VirtualMachineConfig {
     private static final String KEY_PROTECTED_VM = "protectedVm";
     private static final String KEY_MEMORY_BYTES = "memoryBytes";
     private static final String KEY_CPU_TOPOLOGY = "cpuTopology";
+    private static final String KEY_CONSOLE_INPUT_DEVICE = "consoleInputDevice";
     private static final String KEY_ENCRYPTED_STORAGE_BYTES = "encryptedStorageBytes";
     private static final String KEY_VM_OUTPUT_CAPTURED = "vmOutputCaptured";
     private static final String KEY_VM_CONSOLE_INPUT_SUPPORTED = "vmConsoleInputSupported";
@@ -173,6 +175,9 @@ public final class VirtualMachineConfig {
     /** CPU topology configuration of the VM. */
     @CpuTopology private final int mCpuTopology;
 
+    /** The serial device for VM console input. */
+    private final int mConsoleInputDevice;
+
     /**
      * Path within the APK to the payload config file that defines software aspects of the VM.
      */
@@ -229,6 +234,7 @@ public final class VirtualMachineConfig {
             boolean protectedVm,
             long memoryBytes,
             @CpuTopology int cpuTopology,
+            int consoleInputDevice,
             long encryptedStorageBytes,
             boolean vmOutputCaptured,
             boolean vmConsoleInputSupported,
@@ -250,6 +256,7 @@ public final class VirtualMachineConfig {
         mProtectedVm = protectedVm;
         mMemoryBytes = memoryBytes;
         mCpuTopology = cpuTopology;
+        mConsoleInputDevice = consoleInputDevice;
         mEncryptedStorageBytes = encryptedStorageBytes;
         mVmOutputCaptured = vmOutputCaptured;
         mVmConsoleInputSupported = vmConsoleInputSupported;
@@ -330,6 +337,7 @@ public final class VirtualMachineConfig {
             builder.setMemoryBytes(memoryBytes);
         }
         builder.setCpuTopology(b.getInt(KEY_CPU_TOPOLOGY));
+        builder.setConsoleInputDevice(b.getInt(KEY_CONSOLE_INPUT_DEVICE));
         long encryptedStorageBytes = b.getLong(KEY_ENCRYPTED_STORAGE_BYTES);
         if (encryptedStorageBytes != 0) {
             builder.setEncryptedStorageBytes(encryptedStorageBytes);
@@ -382,6 +390,7 @@ public final class VirtualMachineConfig {
         b.putInt(KEY_DEBUGLEVEL, mDebugLevel);
         b.putBoolean(KEY_PROTECTED_VM, mProtectedVm);
         b.putInt(KEY_CPU_TOPOLOGY, mCpuTopology);
+        b.putInt(KEY_CONSOLE_INPUT_DEVICE, mConsoleInputDevice);
         if (mMemoryBytes > 0) {
             b.putLong(KEY_MEMORY_BYTES, mMemoryBytes);
         }
@@ -595,6 +604,7 @@ public final class VirtualMachineConfig {
                 && this.mVmOutputCaptured == other.mVmOutputCaptured
                 && this.mVmConsoleInputSupported == other.mVmConsoleInputSupported
                 && this.mConnectVmConsole == other.mConnectVmConsole
+                && this.mConsoleInputDevice == other.mConsoleInputDevice
                 && (this.mVendorDiskImage == null) == (other.mVendorDiskImage == null)
                 && Objects.equals(this.mPayloadConfigPath, other.mPayloadConfigPath)
                 && Objects.equals(this.mPayloadBinaryName, other.mPayloadBinaryName)
@@ -666,6 +676,7 @@ public final class VirtualMachineConfig {
         config.protectedVm = this.mProtectedVm;
         config.memoryMib = bytesToMebiBytes(mMemoryBytes);
         config.cpuTopology = (byte) this.mCpuTopology;
+        config.consoleInputDevice = mConsoleInputDevice;
         config.devices = EMPTY_STRING_ARRAY;
         config.platformVersion = "~1.0";
         return config;
@@ -804,6 +815,8 @@ public final class VirtualMachineConfig {
         private boolean mProtectedVmSet;
         private long mMemoryBytes;
         @CpuTopology private int mCpuTopology = CPU_TOPOLOGY_ONE_CPU;
+        private int mConsoleInputDevice =
+                android.system.virtualizationservice.ConsoleInputDevice.HVC0;
         private long mEncryptedStorageBytes;
         private boolean mVmOutputCaptured = false;
         private boolean mVmConsoleInputSupported = false;
@@ -897,6 +910,7 @@ public final class VirtualMachineConfig {
                     mProtectedVm,
                     mMemoryBytes,
                     mCpuTopology,
+                    mConsoleInputDevice,
                     mEncryptedStorageBytes,
                     mVmOutputCaptured,
                     mVmConsoleInputSupported,
@@ -1076,6 +1090,33 @@ public final class VirtualMachineConfig {
                 throw new IllegalArgumentException("Invalid cpuTopology: " + cpuTopology);
             }
             mCpuTopology = cpuTopology;
+            return this;
+        }
+
+        /**
+         * Sets the serial device for VM console input.
+         *
+         * @see android.system.virtualizationservice.ConsoleInputDevice
+         * @hide
+         */
+        public Builder setConsoleInputDevice(String consoleInputDevice) {
+            if ("hvc0".equals(consoleInputDevice)) {
+                mConsoleInputDevice = ConsoleInputDevice.HVC0;
+            } else if ("ttyS0".equals(consoleInputDevice)) {
+                mConsoleInputDevice = ConsoleInputDevice.TTYS0;
+            } else {
+                throw new IllegalArgumentException("Invalid serial device: " + consoleInputDevice);
+            }
+            return this;
+        }
+
+        private Builder setConsoleInputDevice(int consoleInputDevice) {
+            if (consoleInputDevice != ConsoleInputDevice.HVC0
+                    && consoleInputDevice != ConsoleInputDevice.TTYS1) {
+                throw new IllegalArgumentException(
+                        "Invalid serial device enum: " + consoleInputDevice);
+            }
+            mConsoleInputDevice = consoleInputDevice;
             return this;
         }
 

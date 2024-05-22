@@ -15,6 +15,7 @@
 //! Struct for VM configuration with JSON (de)serialization and AIDL parcelables
 
 use android_system_virtualizationservice::{
+    aidl::android::system::virtualizationservice::ConsoleInputDevice::ConsoleInputDevice,
     aidl::android::system::virtualizationservice::CpuTopology::CpuTopology,
     aidl::android::system::virtualizationservice::DiskImage::DiskImage as AidlDiskImage,
     aidl::android::system::virtualizationservice::Partition::Partition as AidlPartition,
@@ -65,6 +66,9 @@ pub struct VmConfig {
     /// SysFS paths of devices assigned to the VM.
     #[serde(default)]
     pub devices: Vec<PathBuf>,
+    /// The serial device for VM console input.
+    #[serde(default)]
+    pub console_input_device: Option<String>,
 }
 
 impl VmConfig {
@@ -107,6 +111,12 @@ impl VmConfig {
             Some("match_host") => CpuTopology::MATCH_HOST,
             Some(cpu_topology) => bail!("Invalid cpu topology {}", cpu_topology),
         };
+        let console_input_device = match self.console_input_device.as_deref() {
+            None => ConsoleInputDevice::HVC0,
+            Some("hvc0") => ConsoleInputDevice::HVC0,
+            Some("ttyS0") => ConsoleInputDevice::TTYS0,
+            Some(device) => bail!("Invalid console input device {}", device),
+        };
         Ok(VirtualMachineRawConfig {
             kernel: maybe_open_parcel_file(&self.kernel, false)?,
             initrd: maybe_open_parcel_file(&self.initrd, false)?,
@@ -124,6 +134,7 @@ impl VmConfig {
                     x.to_str().map(String::from).ok_or(anyhow!("Failed to convert {x:?} to String"))
                 })
                 .collect::<Result<_>>()?,
+            consoleInputDevice: console_input_device,
             ..Default::default()
         })
     }

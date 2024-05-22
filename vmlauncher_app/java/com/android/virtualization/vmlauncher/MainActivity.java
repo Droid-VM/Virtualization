@@ -123,6 +123,9 @@ public class MainActivity extends Activity {
                     }
                 }
             }
+            if (json.has("console_input_device")) {
+                configBuilder.setConsoleInputDevice(json.getString("console_input_device"));
+            }
 
             configBuilder.setMemoryBytes(8L * 1024 * 1024 * 1024 /* 8 GB */);
             WindowMetrics windowMetrics = getWindowManager().getCurrentWindowMetrics();
