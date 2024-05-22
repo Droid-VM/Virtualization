@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d21a3839_5536bd13",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-22T15:41:12Z",
+      "side": 1,
+      "message": "Typo",
+      "range": {
+        "startLine": 241,
+        "startChar": 51,
+        "endLine": 241,
+        "endChar": 62
+      },
+      "revId": "cd6d5b230d847e309f361c545677739b10eeb7ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1ae3373_4e1dbf51",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-22T15:41:12Z",
+      "side": 1,
+      "message": "Do you need the allocation here? Could you use the cstr! macro instead, and compare CStrs?",
+      "range": {
+        "startLine": 242,
+        "startChar": 29,
+        "endLine": 242,
+        "endChar": 71
+      },
+      "revId": "cd6d5b230d847e309f361c545677739b10eeb7ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5fa23e8_dfcca20b",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-22T15:41:12Z",
+      "side": 1,
+      "message": "\"unexpected\" seems a bit non-specific",
+      "range": {
+        "startLine": 264,
+        "startChar": 28,
+        "endLine": 264,
+        "endChar": 38
+      },
+      "revId": "cd6d5b230d847e309f361c545677739b10eeb7ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
