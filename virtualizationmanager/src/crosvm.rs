@@ -866,7 +866,8 @@ fn run_vm(
     {
         // bootconfig.normal will be used, but we need log.
         command.arg("--params").arg("printk.devkmsg=on");
-        command.arg("--params").arg("console=hvc0");
+        // Should ttyS0 vs. hvc0 be configurable?
+        command.arg("--params").arg("console=ttyS0");
     }
 
     if let Some(memory_mib) = config.memory_mib {
@@ -923,14 +924,11 @@ fn run_vm(
     // devices in the same PCI bus and serial devices comes before the block devices. Arm crosvm
     // doesn't have the issue.
     // /dev/ttyS0
-    command.arg(format!("--serial={},hardware=serial,num=1", &console_out_arg));
+    command.arg(format!("--serial={}{},hardware=serial,num=1", &console_out_arg, &console_in_arg));
     // /dev/ttyS1
     command.arg(format!("--serial=type=file,path={},hardware=serial,num=2", &failure_serial_path));
     // /dev/hvc0
-    command.arg(format!(
-        "--serial={}{},hardware=virtio-console,num=1",
-        &console_out_arg, &console_in_arg
-    ));
+    command.arg(format!("--serial={},hardware=virtio-console,num=1", &console_out_arg));
     // /dev/hvc1
     command.arg(format!("--serial={},hardware=virtio-console,num=2", &ramdump_arg));
     // /dev/hvc2
