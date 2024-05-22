@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "fb215291_0e41b82e",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-22T11:02:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b721eb14_9a2fb00d",
+      "range": {
+        "startLine": 11,
+        "startChar": 8,
+        "endLine": 11,
+        "endChar": 37
+      },
+      "revId": "f1f037471d4a3fb4b3399b1fdc160ac76b21116a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "70563609_2ac26610",
         "filename": "pvmfw/platform.dts",
         "patchSetId": 1
@@ -168,6 +192,24 @@
       "side": 1,
       "message": "Umm, maybe?",
       "parentUuid": "bb3c2e68_b4f89be5",
+      "revId": "f1f037471d4a3fb4b3399b1fdc160ac76b21116a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e82745bf_435a0265",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-22T11:02:56Z",
+      "side": 1,
+      "message": "Not done because `PLACEHOLDER_OPP_TABLE_ENTRY` must be available at least until the last use of `PLACEHOLDER_OPP_TABLE` and placing an `#undef` at that point seems to increase the probability of `PLACEHOLDER_OPP_TABLE` being used passed it (and silently preprocessed into an empty string). As the .dts isn\u0027t a header, there\u0027s also no risk of \"polluting\" files that might include it.\n\nResolving; please reopen if not satisfied.",
+      "parentUuid": "f933617a_4b89b729",
       "revId": "f1f037471d4a3fb4b3399b1fdc160ac76b21116a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
