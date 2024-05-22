@@ -40,6 +40,7 @@ pub use dice::{
     PublicKey, Signature, CDI_SIZE, HASH_SIZE, HIDDEN_SIZE, ID_SIZE, PRIVATE_KEY_SEED_SIZE,
 };
 pub use error::{DiceError, Result};
+pub use open_dice_cbor_bindgen::DICE_COSE_KEY_ALG_VALUE;
 pub use ops::{
     derive_cdi_leaf_priv, generate_certificate, hash, kdf, keypair_from_seed, sign, verify,
 };
