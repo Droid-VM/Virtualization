@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2408b8d_f430bbe4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-22T14:39:59Z",
+      "side": 1,
+      "message": "Hi David,\n\nCould you please review this cl? Based on a recent bug from MTK (b/341630707), it seems that not everyone uses Ed25519 for DICE all the time. So instead of assuming it\u0027s always Ed25519, it\u0027s better to read the cose key algorithm from the open-dice library.\n\nThanks!",
+      "revId": "e51079d97e4c297659bc99db7120243c0948977b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
