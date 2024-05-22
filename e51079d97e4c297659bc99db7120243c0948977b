@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7034159_0bfc8a7e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-05-22T15:37:40Z",
+      "side": 1,
+      "message": "\"instead of\"",
+      "revId": "e51079d97e4c297659bc99db7120243c0948977b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d2408b8d_f430bbe4",
@@ -14,6 +31,80 @@
       "writtenOn": "2024-05-22T14:39:59Z",
       "side": 1,
       "message": "Hi David,\n\nCould you please review this cl? Based on a recent bug from MTK (b/341630707), it seems that not everyone uses Ed25519 for DICE all the time. So instead of assuming it\u0027s always Ed25519, it\u0027s better to read the cose key algorithm from the open-dice library.\n\nThanks!",
+      "revId": "e51079d97e4c297659bc99db7120243c0948977b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88876b90_b631c0dd",
+        "filename": "libs/cborutil/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-05-22T15:37:40Z",
+      "side": 1,
+      "message": "nit/personal preference: could maybe use `iana::Algorithm::from_i64(cose_key_alg as i64)`",
+      "revId": "e51079d97e4c297659bc99db7120243c0948977b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbf5c600_e480668e",
+        "filename": "libs/dice/open_dice/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-05-22T15:37:40Z",
+      "side": 1,
+      "message": "It took me a while to figure out how this can be variable, so it\u0027s probably worth a comment explaining that (IIUC) the value depends on how the underlying C library is configured in the build.",
+      "revId": "e51079d97e4c297659bc99db7120243c0948977b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1c47e9d_e202fa20",
+        "filename": "service_vm/comm/src/client_vm_csr.cddl",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-05-22T15:37:40Z",
+      "side": 1,
+      "message": "comment no longer accurate",
+      "range": {
+        "startLine": 38,
+        "startChar": 47,
+        "endLine": 38,
+        "endChar": 54
+      },
+      "revId": "e51079d97e4c297659bc99db7120243c0948977b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49fa35e4_4a7de17c",
+        "filename": "service_vm/requests/src/rkp.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-05-22T15:37:40Z",
+      "side": 1,
+      "message": "Just to check: does this `sign` function emit signatures in the right format for COSE with ECDSA / NIST curves?",
       "revId": "e51079d97e4c297659bc99db7120243c0948977b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
