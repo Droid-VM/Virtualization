@@ -654,6 +654,7 @@ impl VirtualizationService {
             input_device_options,
             hugepages: config.hugePages,
             tap,
+            console_input_device: config.consoleInputDevice,
         };
         let instance = Arc::new(
             VmInstance::new(

@@ -43,6 +43,7 @@ use std::time::{Duration, SystemTime};
 use std::thread::{self, JoinHandle};
 use android_system_virtualizationcommon::aidl::android::system::virtualizationcommon::DeathReason::DeathReason;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
+    ConsoleInputDevice::ConsoleInputDevice,
     MemoryTrimLevel::MemoryTrimLevel,
     VirtualMachineAppConfig::DebugLevel::DebugLevel,
     DisplayConfig::DisplayConfig as DisplayConfigParcelable,
@@ -123,6 +124,7 @@ pub struct CrosvmConfig {
     pub input_device_options: Vec<InputDeviceOption>,
     pub hugepages: bool,
     pub tap: Option<File>,
+    pub console_input_device: ConsoleInputDevice,
 }
 
 #[derive(Debug)]
@@ -924,13 +926,18 @@ fn run_vm(
     // devices in the same PCI bus and serial devices comes before the block devices. Arm crosvm
     // doesn't have the issue.
     // /dev/ttyS0
-    command.arg(format!("--serial={},hardware=serial,num=1", &console_out_arg));
+    command.arg(format!(
+        "--serial={}{},hardware=serial,num=1",
+        &console_out_arg,
+        if config.console_input_device == ConsoleInputDevice::TTYS0 { &console_in_arg } else { "" }
+    ));
     // /dev/ttyS1
     command.arg(format!("--serial=type=file,path={},hardware=serial,num=2", &failure_serial_path));
     // /dev/hvc0
     command.arg(format!(
         "--serial={}{},hardware=virtio-console,num=1",
-        &console_out_arg, &console_in_arg
+        &console_out_arg,
+        if config.console_input_device == ConsoleInputDevice::HVC0 { &console_in_arg } else { "" }
     ));
     // /dev/hvc1
     command.arg(format!("--serial={},hardware=virtio-console,num=2", &ramdump_arg));
