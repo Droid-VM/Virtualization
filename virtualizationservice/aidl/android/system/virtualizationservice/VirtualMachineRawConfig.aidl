@@ -15,6 +15,7 @@
  */
 package android.system.virtualizationservice;
 
+import android.system.virtualizationservice.ConsoleInputDevice;
 import android.system.virtualizationservice.CpuTopology;
 import android.system.virtualizationservice.DiskImage;
 import android.system.virtualizationservice.DisplayConfig;
@@ -88,4 +89,7 @@ parcelable VirtualMachineRawConfig {
 
     /** Whether the VM should have network feature. */
     boolean networkSupported;
+
+    /** The serial device for VM console input. */
+    ConsoleInputDevice consoleInputDevice;
 }
