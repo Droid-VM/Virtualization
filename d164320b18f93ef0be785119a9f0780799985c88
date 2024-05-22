@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b0ed0b6_99edc7f9",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-05-22T11:41:31Z",
+      "side": 1,
+      "message": "Safety comments should explain why the unsafe block is okay — not why the unsafe block is unsafe. You can say e.g. \"all zeros is a valid value for the ifreq type\".",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 55
+      },
+      "revId": "d164320b18f93ef0be785119a9f0780799985c88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a63b37d_9c5cc29d",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-05-22T11:41:31Z",
+      "side": 1,
+      "message": "That you check the file descriptor later is unrelated to why this unsafe block is okay. You should probably write something along the lines of \"this is just a syscall, and it\u0027s always safe to call no matter what the arguments are\".",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 55
+      },
+      "revId": "d164320b18f93ef0be785119a9f0780799985c88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
