@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "52090466_4e5b76b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1594463
+      },
+      "writtenOn": "2024-05-22T16:24:54Z",
+      "side": 1,
+      "message": "Is there a reason you are duplicating code that already exists in TestNetworkManager? Why did you decide not to formalize TestNetworkManager into something like TunTapManager and keep this code in one place? (You could even rewrite the JNI parts in rust, though I am not sure that\u0027s worth it). Or do you specifically need a native API?",
+      "revId": "d164320b18f93ef0be785119a9f0780799985c88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4b0ed0b6_99edc7f9",
         "filename": "virtualizationservice/vmnic/src/aidl.rs",
         "patchSetId": 6
