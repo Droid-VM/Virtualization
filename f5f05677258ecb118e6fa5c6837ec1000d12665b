@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb94e4e3_8cb4d4ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-05-22T13:45:46Z",
+      "side": 1,
+      "message": "no worries. This is a large change and it\u0027s only natural that it attracts lots of comments.\nI\u0027m also used to this treatment, plus _many_ comments is better than _no_ comments IMO. (No comments \u003d\u003d TL;DR)",
+      "parentUuid": "0b8fb597_185c1d6e",
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc82afbf_51ad948f",
@@ -84,6 +102,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9b6615cf_fd04301a",
+        "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-05-22T13:45:46Z",
+      "side": 1,
+      "message": "I\u0027d prefer doing this here so we can fail early.\nIf I were to call `FileInputStream.getFD()` in `run()`, then it would be difficult to surface the IOException, as the exception would happen in another thread.\nThis thread dying or failing to call `mConsoleOutput.getFD()` also means the VM console out pipe would eventually build up and softlock the guest system... so I\u0027d want to detect / handle this before run() is called.",
+      "parentUuid": "da05f0a3_a6e96ede",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 44
+      },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d4da6a8_7ca0384b",
         "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
         "patchSetId": 1
@@ -124,6 +166,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b1881c66_0f7b87f0",
+        "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-05-22T13:45:46Z",
+      "side": 1,
+      "message": "sure. I did consider doing that at one point, but ended up not doing that because I  wanted to reuse the same byte buffer for each read (to hopefully gain some cache locality).\nIn order to make this method a method of Poll entry, I would either make the `PollEntry` non-static or stick each PollEntry an exclusive buffer.\nI don\u0027t like the former because it would \"taint\" the PollEntry abstraction by making it a non-pure structure (PollEntry relies on global state; PollEntry assumes exclusive hold of the mReadBuffer), so I\u0027ll take the latter choice. This means potentially worse cache locality, but probably not a big hit anyway given the size of the readbuffer is not large (4K).",
+      "parentUuid": "b0c57c25_e850dc20",
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c9ff12b7_baa08574",
         "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
         "patchSetId": 1
@@ -135,6 +195,30 @@
       "writtenOn": "2024-05-22T12:55:51Z",
       "side": 1,
       "message": "This could be a local variable in this method.",
+      "range": {
+        "startLine": 125,
+        "startChar": 37,
+        "endLine": 125,
+        "endChar": 48
+      },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "747d8282_37bded1e",
+        "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-05-22T13:45:46Z",
+      "side": 1,
+      "message": "I hope this to be at least an instance member variable. This way we don\u0027t need to reallocate/deallocate this often, thus keeping the cache warm.",
+      "parentUuid": "c9ff12b7_baa08574",
       "range": {
         "startLine": 125,
         "startChar": 37,
@@ -170,6 +254,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c592a97_0007a5b7",
+        "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-05-22T13:45:46Z",
+      "side": 1,
+      "message": "do you mean back to vmlauncher_app ?",
+      "parentUuid": "6ded0c13_93beedfd",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 128,
+        "endChar": 29
+      },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a0d447b_7eb57a43",
         "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
         "patchSetId": 1
@@ -181,6 +289,30 @@
       "writtenOn": "2024-05-22T12:55:51Z",
       "side": 1,
       "message": "Why? If the exception was a transient one, wouldn\u0027t it be better try again next time?",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 44
+      },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d10633ca_f87a8401",
+        "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-05-22T13:45:46Z",
+      "side": 1,
+      "message": "\u003e wouldn\u0027t it be better try again next time?\n\nyes? but how would I tell if it is a transient one? I think we only consider EINTR as transient, but I think JVM doesn\u0027t pass through EINTR, so is there any case when transient write error could happen?",
+      "parentUuid": "7a0d447b_7eb57a43",
       "range": {
         "startLine": 142,
         "startChar": 0,
@@ -239,6 +371,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f2404933_ca220ba4",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1820,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-05-22T13:45:46Z",
+      "side": 1,
+      "message": "The wrapped c-library method is called \"openpty\" with no caps, so I think keeping it as-is fits our naming convention?",
+      "parentUuid": "56d1d06c_cbcb8b4d",
+      "range": {
+        "startLine": 1820,
+        "startChar": 33,
+        "endLine": 1820,
+        "endChar": 36
+      },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "de2ef6e1_6135eefe",
         "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 1
@@ -273,6 +429,24 @@
         "endLine": 1821,
         "endChar": 77
       },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a078796_7017fb14",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1821,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-05-22T13:45:46Z",
+      "side": 1,
+      "message": "I consciously abbreviated those two words to _m_fd and _s_fd with the intention of avoiding the no-no word...\n\nI understand that this seems a bit cryptic, but I _really_ don\u0027t want that word to show up (I was already threatened by the linter when I mentioned \"man pages\" in other other file).",
+      "parentUuid": "de2ef6e1_6135eefe",
       "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
