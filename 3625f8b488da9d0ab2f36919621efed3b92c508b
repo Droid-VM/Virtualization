@@ -200,6 +200,24 @@
       "message": "Why don\u0027t you use an existing implementation in libnet_util?\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:external/crosvm/net_util/Android.bp;drc\u003dc223989d8457ecb2345a8d2831d8a1e599abcb0c;l\u003d16",
       "revId": "3625f8b488da9d0ab2f36919621efed3b92c508b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bd5e5e0_c940fd39",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-05-22T06:23:30Z",
+      "side": 1,
+      "message": "I haven\u0027t thought we already have a library in `external/crosvm` that could be used in our repository. I\u0027ll check.",
+      "parentUuid": "754d5421_72258936",
+      "revId": "3625f8b488da9d0ab2f36919621efed3b92c508b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
