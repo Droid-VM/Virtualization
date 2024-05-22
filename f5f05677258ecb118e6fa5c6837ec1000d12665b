@@ -1,0 +1,395 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b8fb597_185c1d6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T12:55:51Z",
+      "side": 1,
+      "message": "Sorry for leaving many comments. This nevertheless is awesome. Please don\u0027t be disappointed by my comments!",
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc82afbf_51ad948f",
+        "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T12:55:51Z",
+      "side": 1,
+      "message": "nit: InputStream",
+      "range": {
+        "startLine": 50,
+        "startChar": 18,
+        "endLine": 50,
+        "endChar": 33
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3f911eb2_3c7fb8fa",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
+              "range": {
+                "startLine": 50,
+                "startChar": 0,
+                "endLine": 51,
+                "endChar": 0
+              },
+              "replacement": "    private final InputStream mPtyInput;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da05f0a3_a6e96ede",
+        "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T12:55:51Z",
+      "side": 1,
+      "message": "Could these be done inside of the run method?",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 44
+      },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d4da6a8_7ca0384b",
+        "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T12:55:51Z",
+      "side": 1,
+      "message": "Can we not open this when mLogFile is null?",
+      "range": {
+        "startLine": 79,
+        "startChar": 82,
+        "endLine": 79,
+        "endChar": 90
+      },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0c57c25_e850dc20",
+        "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T12:55:51Z",
+      "side": 1,
+      "message": "I\u0027d make this a member of PollEntry.",
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9ff12b7_baa08574",
+        "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T12:55:51Z",
+      "side": 1,
+      "message": "This could be a local variable in this method.",
+      "range": {
+        "startLine": 125,
+        "startChar": 37,
+        "endLine": 125,
+        "endChar": 48
+      },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ded0c13_93beedfd",
+        "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T12:55:51Z",
+      "side": 1,
+      "message": "Can we propagate the error to the caller? I don\u0027t feel good because error and EOF (just below) are indistinguishable.",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 128,
+        "endChar": 29
+      },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a0d447b_7eb57a43",
+        "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T12:55:51Z",
+      "side": 1,
+      "message": "Why? If the exception was a transient one, wouldn\u0027t it be better try again next time?",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 44
+      },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23880a7f_8c657171",
+        "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T12:55:51Z",
+      "side": 1,
+      "message": "This can actually get from the in parameter,",
+      "range": {
+        "startLine": 162,
+        "startChar": 29,
+        "endLine": 162,
+        "endChar": 46
+      },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56d1d06c_cbcb8b4d",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1820,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T12:55:51Z",
+      "side": 1,
+      "message": "Pty",
+      "range": {
+        "startLine": 1820,
+        "startChar": 33,
+        "endLine": 1820,
+        "endChar": 36
+      },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de2ef6e1_6135eefe",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1821,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T12:55:51Z",
+      "side": 1,
+      "message": "ptyMaster and ptySlave, or just master and slave.",
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22c71771_37e6798b",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1821,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T12:55:51Z",
+      "side": 1,
+      "message": "Can this be String?",
+      "range": {
+        "startLine": 1821,
+        "startChar": 66,
+        "endLine": 1821,
+        "endChar": 77
+      },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3909e0a1_fd3b2673",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1825,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T12:55:51Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 1825,
+        "startChar": 41,
+        "endLine": 1825,
+        "endChar": 44
+      },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7c46361_59b3e848",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1832,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T12:55:51Z",
+      "side": 1,
+      "message": "Can we do better by tying the FDs to the virtual machine object? I think we really don\u0027t have to return the FDs to the client, but to keep it with the vm object.",
+      "range": {
+        "startLine": 1831,
+        "startChar": 10,
+        "endLine": 1832,
+        "endChar": 37
+      },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d504325_31a1011b",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1867,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T12:55:51Z",
+      "side": 1,
+      "message": "Perhaps we may want to return the pty name here. Client having to look into the logcat log doesn\u0027t sound nice, but by returning the name, the client can show the best way to connect to the terminal.",
+      "range": {
+        "startLine": 1867,
+        "startChar": 0,
+        "endLine": 1867,
+        "endChar": 18
+      },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ce815f2_ba9cb7c8",
+        "filename": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T12:55:51Z",
+      "side": 1,
+      "message": "This actually doesn\u0027t create console device to the VM. How about calling this method connectToConsole or similar.",
+      "range": {
+        "startLine": 252,
+        "startChar": 40,
+        "endLine": 252,
+        "endChar": 59
+      },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c31d1a83_4568192d",
+        "filename": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T12:55:51Z",
+      "side": 1,
+      "message": "See. The FDs are returned to client just to close them when the VM is down. This should better be done inside the framework.",
+      "range": {
+        "startLine": 327,
+        "startChar": 0,
+        "endLine": 327,
+        "endChar": 53
+      },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
