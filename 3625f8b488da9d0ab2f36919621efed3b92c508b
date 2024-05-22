@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f034bf74_cd218fe7",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T06:12:34Z",
+      "side": 1,
+      "message": "or make this \u0026CStr",
+      "range": {
+        "startLine": 37,
+        "startChar": 43,
+        "endLine": 37,
+        "endChar": 47
+      },
+      "revId": "3625f8b488da9d0ab2f36919621efed3b92c508b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf5ea957_aeabf521",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T06:12:34Z",
+      "side": 1,
+      "message": "Returning binder::Result here looks odd. You can return anyhow::Result here and wrap it with binder::Result outside of this function.",
+      "range": {
+        "startLine": 37,
+        "startChar": 52,
+        "endLine": 37,
+        "endChar": 66
+      },
+      "revId": "3625f8b488da9d0ab2f36919621efed3b92c508b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e0c3cee_9f978f9f",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T06:12:34Z",
+      "side": 1,
+      "message": "ifname is utf-8 encoded, which means it can have a null byte in the middle of the slice. you have to convert this to c-string and check for an error.",
+      "range": {
+        "startLine": 41,
+        "startChar": 49,
+        "endLine": 41,
+        "endChar": 66
+      },
+      "revId": "3625f8b488da9d0ab2f36919621efed3b92c508b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a993e7f_adf548cb",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T06:12:34Z",
+      "side": 1,
+      "message": "you may want to print the name of the iface here.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 80
+      },
+      "revId": "3625f8b488da9d0ab2f36919621efed3b92c508b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3f92f88_dfa23e70",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T06:12:34Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 84
+      },
+      "revId": "3625f8b488da9d0ab2f36919621efed3b92c508b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48979969_442e12b3",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T06:12:34Z",
+      "side": 1,
+      "message": "Returning binder::Result here looks odd. You can return anyhow::Result here and wrap it with binder::Result outside of this function.",
+      "range": {
+        "startLine": 58,
+        "startChar": 39,
+        "endLine": 58,
+        "endChar": 53
+      },
+      "revId": "3625f8b488da9d0ab2f36919621efed3b92c508b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8dc9682_6f6530a3",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T06:12:34Z",
+      "side": 1,
+      "message": "when do you close this?",
+      "range": {
+        "startLine": 60,
+        "startChar": 8,
+        "endLine": 60,
+        "endChar": 10
+      },
+      "revId": "3625f8b488da9d0ab2f36919621efed3b92c508b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02ceb6b1_8afd3e7f",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T06:12:34Z",
+      "side": 1,
+      "message": "utf8",
+      "range": {
+        "startLine": 68,
+        "startChar": 49,
+        "endLine": 68,
+        "endChar": 66
+      },
+      "revId": "3625f8b488da9d0ab2f36919621efed3b92c508b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "754d5421_72258936",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-22T06:12:34Z",
+      "side": 1,
+      "message": "Why don\u0027t you use an existing implementation in libnet_util?\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:external/crosvm/net_util/Android.bp;drc\u003dc223989d8457ecb2345a8d2831d8a1e599abcb0c;l\u003d16",
+      "revId": "3625f8b488da9d0ab2f36919621efed3b92c508b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
