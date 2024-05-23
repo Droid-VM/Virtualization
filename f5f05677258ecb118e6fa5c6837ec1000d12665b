@@ -421,6 +421,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2108e5ef_8c2f2956",
+        "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-23T07:10:11Z",
+      "side": 1,
+      "message": "Ok. I was thinking about things like EAGAIN, EIO, or ENOSPC.\n\nEBADF for sure is a good reason to not try again.",
+      "parentUuid": "6484a263_a1ce5f2e",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 44
+      },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23880a7f_8c657171",
         "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
         "patchSetId": 1
