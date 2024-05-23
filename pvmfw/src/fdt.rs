@@ -759,6 +759,69 @@ fn read_serial_info_from(fdt: &Fdt) -> libfdt::Result<SerialInfo> {
     Ok(SerialInfo { addrs })
 }
 
+#[derive(Default, Debug, PartialEq)]
+struct WdtInfo {
+    addr: u64,
+    size: u64,
+    irq: [u32; WdtInfo::IRQ_CELLS],
+}
+
+impl WdtInfo {
+    const IRQ_CELLS: usize = 3;
+    const IRQ_NR: u32 = 0xf;
+    const ADDR: u64 = 0x3000;
+    const SIZE: u64 = 0x1000;
+    const GIC_PPI: u32 = 1;
+    const IRQ_TYPE_EDGE_RISING: u32 = 1;
+    const GIC_FDT_IRQ_PPI_CPU_SHIFT: u32 = 8;
+    const GIC_FDT_IRQ_PPI_CPU_MASK: u32 = 0xff << Self::GIC_FDT_IRQ_PPI_CPU_SHIFT;
+
+    const fn get_expected(num_cpus: usize) -> Self {
+        Self {
+            addr: Self::ADDR,
+            size: Self::SIZE,
+            irq: [
+                Self::GIC_PPI,
+                Self::IRQ_NR,
+                (((1 << num_cpus) << Self::GIC_FDT_IRQ_PPI_CPU_SHIFT)
+                    & Self::GIC_FDT_IRQ_PPI_CPU_MASK)
+                    | Self::IRQ_TYPE_EDGE_RISING,
+            ],
+        }
+    }
+}
+
+fn read_wdt_info_from(fdt: &Fdt) -> libfdt::Result<WdtInfo> {
+    let mut node_iter = fdt.compatible_nodes(cstr!("qemu,vcpu-stall-detector"))?;
+    let node = node_iter.next().ok_or(FdtError::NotFound)?;
+    let mut ranges = node.reg()?.ok_or(FdtError::NotFound)?;
+
+    let reg = ranges.next().ok_or(FdtError::NotFound)?;
+    let size = reg.size.ok_or(FdtError::NotFound)?;
+    if ranges.next().is_some() {
+        warn!("Discarding extra vmwdt <reg> entries.");
+    }
+
+    let interrupts = node.getprop_cells(cstr!("interrupts"))?.ok_or(FdtError::NotFound)?;
+    let mut chunks = CellChunkIterator::<{ WdtInfo::IRQ_CELLS }>::new(interrupts);
+    let irq = chunks.next().ok_or(FdtError::NotFound)?;
+
+    if chunks.next().is_some() {
+        warn!("Discarding extra vmwdt <interrupts> entries.");
+    }
+
+    Ok(WdtInfo { addr: reg.addr, size, irq })
+}
+
+fn validate_wdt_info(wdt: &WdtInfo, num_cpus: usize) -> Result<(), RebootReason> {
+    if *wdt != WdtInfo::get_expected(num_cpus) {
+        error!("Invalid watchdog timer: {wdt:?}");
+        return Err(RebootReason::InvalidFdt);
+    }
+
+    Ok(())
+}
+
 /// Patch the DT by deleting the ns16550a compatible nodes whose address are unknown
 fn patch_serial_info(fdt: &mut Fdt, serial_info: &SerialInfo) -> libfdt::Result<()> {
     let name = cstr!("ns16550a");
@@ -1052,6 +1115,12 @@ fn parse_device_tree(fdt: &Fdt, vm_dtbo: Option<&VmDtbo>) -> Result<DeviceTreeIn
         RebootReason::InvalidFdt
     })?;
     validate_pci_info(&pci_info, &memory_range)?;
+
+    let wdt_info = read_wdt_info_from(fdt).map_err(|e| {
+        error!("Failed to read vCPU stall detector info from DT: {e}");
+        RebootReason::InvalidFdt
+    })?;
+    validate_wdt_info(&wdt_info, cpus.len())?;
 
     let serial_info = read_serial_info_from(fdt).map_err(|e| {
         error!("Failed to read serial info from DT: {e}");
