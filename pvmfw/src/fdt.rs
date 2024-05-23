@@ -759,6 +759,69 @@ fn read_serial_info_from(fdt: &Fdt) -> libfdt::Result<SerialInfo> {
     Ok(SerialInfo { addrs })
 }
 
+#[derive(Default, Debug)]
+struct WdtInfo {
+    addr: u64,
+    size: u64,
+    irq: [u32; WdtInfo::IRQ_CELLS],
+}
+
+impl WdtInfo {
+    const IRQ_CELLS: usize = 3;
+    const IRQ_NR: u32 = 0xf;
+    const ADDR: u64 = 0x3000;
+    const SIZE: u64 = 0x1000;
+    const GIC_PPI: u32 = 1;
+    const IRQ_TYPE_EDGE_RISING: u32 = 1;
+
+    const EXPECTED: Self = Self {
+        addr: Self::ADDR,
+        size: Self::SIZE,
+        irq: [Self::GIC_PPI, Self::IRQ_NR, Self::IRQ_TYPE_EDGE_RISING],
+    };
+}
+
+impl PartialEq for WdtInfo {
+    fn eq(&self, other: &Self) -> bool {
+        self.addr == other.addr && self.size == other.size && self.irq == other.irq
+    }
+}
+
+fn read_wdt_info_from(fdt: &Fdt) -> libfdt::Result<WdtInfo> {
+    let mut node_iter = fdt.compatible_nodes(cstr!("qemu,vcpu-stall-detector"))?;
+    let Some(node) = node_iter.next() else {
+        return Err(FdtError::NotFound);
+    };
+
+    let Some(mut ranges) = node.reg()? else {
+        return Err(FdtError::NotFound);
+    };
+
+    let reg = ranges.next().ok_or(FdtError::NotFound)?;
+    let size = reg.size.ok_or(FdtError::NotFound)?;
+    if ranges.next().is_some() {
+        warn!("vmwdt has more than 1 range nodes.");
+    }
+
+    let interrupts = node.getprop_cells(cstr!("interrupts"))?.ok_or(FdtError::NotFound)?;
+    let mut chunks = CellChunkIterator::<{ WdtInfo::IRQ_CELLS }>::new(interrupts);
+
+    if chunks.next().is_some() {
+        warn!("vmwdt has more than 1 interrupt nodes.");
+    }
+
+    Ok(WdtInfo { addr: reg.addr, size, irq: chunks.next().unwrap() })
+}
+
+fn validate_wdt_info(wdt: &WdtInfo) -> Result<(), RebootReason> {
+    if *wdt != WdtInfo::EXPECTED {
+        error!("Invalid watchdog timer: {wdt:?}");
+        return Err(RebootReason::InvalidFdt);
+    }
+
+    Ok(())
+}
+
 /// Patch the DT by deleting the ns16550a compatible nodes whose address are unknown
 fn patch_serial_info(fdt: &mut Fdt, serial_info: &SerialInfo) -> libfdt::Result<()> {
     let name = cstr!("ns16550a");
@@ -1052,6 +1115,12 @@ fn parse_device_tree(fdt: &Fdt, vm_dtbo: Option<&VmDtbo>) -> Result<DeviceTreeIn
         RebootReason::InvalidFdt
     })?;
     validate_pci_info(&pci_info, &memory_range)?;
+
+    let wdt_info = read_wdt_info_from(fdt).map_err(|e| {
+        error!("Failed to read vCPU stall detector info from DT: {e}");
+        RebootReason::InvalidFdt
+    })?;
+    validate_wdt_info(&wdt_info)?;
 
     let serial_info = read_serial_info_from(fdt).map_err(|e| {
         error!("Failed to read serial info from DT: {e}");
