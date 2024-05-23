@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72691dd3_d5e7fac1",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-05-23T11:51:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "460d4c56_42ce83e2",
+      "range": {
+        "startLine": 38,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 17
+      },
+      "revId": "10ece5a4082baad40c13b8b5295354c0607dd79f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a38765ac_a19efc06",
@@ -190,6 +214,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ab78886_bc5c8b1b",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-05-23T11:51:08Z",
+      "side": 1,
+      "message": "As was mentioned, PartialInputs was created to extract out artifacts required in instance module. Salt is not one of them, nor is `instance_hash`.\n\nThe scope of this patch does not include refactoring `PartialInputs` to `FullDiceChainInputs` \u0026 given that this is a NIT, let me resolve it for now.",
+      "parentUuid": "ebd3924b_83e09078",
+      "range": {
+        "startLine": 98,
+        "startChar": 8,
+        "endLine": 98,
+        "endChar": 36
+      },
+      "revId": "10ece5a4082baad40c13b8b5295354c0607dd79f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f089c19a_f2085450",
@@ -203,6 +251,30 @@
       "writtenOn": "2024-05-21T16:15:06Z",
       "side": 1,
       "message": "with_capacity(4) ?",
+      "range": {
+        "startLine": 136,
+        "startChar": 29,
+        "endLine": 136,
+        "endChar": 33
+      },
+      "revId": "10ece5a4082baad40c13b8b5295354c0607dd79f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afc14309_55beae85",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-05-23T11:51:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f089c19a_f2085450",
       "range": {
         "startLine": 136,
         "startChar": 29,
@@ -250,6 +322,30 @@
       "side": 1,
       "message": "Good idea. Keeping this unresolved till I do it",
       "parentUuid": "5fa08b48_f704adfd",
+      "range": {
+        "startLine": 284,
+        "startChar": 3,
+        "endLine": 284,
+        "endChar": 24
+      },
+      "revId": "10ece5a4082baad40c13b8b5295354c0607dd79f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b73eab60_06e98bc9",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-05-23T11:51:08Z",
+      "side": 1,
+      "message": "See other comment",
+      "parentUuid": "eb4844fc_8c4b526c",
       "range": {
         "startLine": 284,
         "startChar": 3,
@@ -321,6 +417,30 @@
       "side": 1,
       "message": "Why does it return a `diced_open_dice::Hidden` type instead of the `Vec\u003cu8\u003e` if it\u0027s totally unrelated? If you want to return `diced_open_dice::Hidden`, using `diced_open_dice::hash()` basically can help you avoid this type conversion and the error handling below, we could also avoid unnecessary usage of heap memory just to be frugal.",
       "parentUuid": "2177d99b_d88fd5fe",
+      "range": {
+        "startLine": 292,
+        "startChar": 8,
+        "endLine": 292,
+        "endChar": 19
+      },
+      "revId": "10ece5a4082baad40c13b8b5295354c0607dd79f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b95a379f_f9c6337a",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-05-23T11:51:08Z",
+      "side": 1,
+      "message": "But in the other comment, we discussed keeping this method functionality specific - i.e, changing it from `salt_from_instance_id` -\u003e `instance_id_hash`. We can either keep it functionality specific or mix in intent (that the function is used for `diced_open_dice::Hidden`), but not a mix.\n\n\nLet me just keep the status quo, with the rationale that this in NIT \u0026 also the diff is not in scope of the patch. Thanks.",
+      "parentUuid": "494bb5bb_86cee164",
       "range": {
         "startLine": 292,
         "startChar": 8,
