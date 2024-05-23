@@ -759,6 +759,52 @@ fn read_serial_info_from(fdt: &Fdt) -> libfdt::Result<SerialInfo> {
     Ok(SerialInfo { addrs })
 }
 
+#[derive(Default, Debug)]
+struct WdtInfo {
+    addr: u64,
+    size: u64,
+    irq: ArrayVec<[u32; WdtInfo::IRQ_CELLS]>,
+}
+
+impl WdtInfo {
+    const IRQ_CELLS: usize = 3;
+}
+
+fn read_wdt_info_from(fdt: &Fdt) -> libfdt::Result<WdtInfo> {
+    let mut node_iter = fdt.compatible_nodes(cstr!("qemu,vcpu-stall-detector"))?;
+    let Some(node) = node_iter.next() else {
+        return Err(FdtError::NotFound);
+    };
+
+    let Some(mut ranges) = node.reg()? else {
+        return Err(FdtError::NotFound);
+    };
+
+    let reg = ranges.next().ok_or(FdtError::NotFound)?;
+    let size = reg.size.ok_or(FdtError::NotFound)?;
+
+    let interrupts = node.getprop_cells(cstr!("interrupts"))?.ok_or(FdtError::NotFound)?;
+    let value : ArrayVec<[u32; WdtInfo::IRQ_CELLS]> =
+        interrupts.take(WdtInfo::IRQ_CELLS).collect();
+
+    Ok(WdtInfo {addr: reg.addr, size, irq: value})
+}
+
+fn validate_wdt_info(wdt: &WdtInfo) -> Result<(), RebootReason> {
+    const IRQ_NO: u32 = 0xf;
+    const EXPECTED: [u32; WdtInfo::IRQ_CELLS] = [1, IRQ_NO, 1];
+    if wdt.addr != 0x3000 && wdt.size != 0x1000 {
+        error!("Invalid wdt addr {:#?} size {:#?}", wdt.addr, wdt.size);
+        return Err(RebootReason::InvalidFdt);
+    }
+
+    if *wdt.irq != EXPECTED {
+        error!("Invalid wdt irq mask {:#?}", wdt.irq);
+        return Err(RebootReason::InvalidFdt);
+    }
+    Ok(())
+}
+
 /// Patch the DT by deleting the ns16550a compatible nodes whose address are unknown
 fn patch_serial_info(fdt: &mut Fdt, serial_info: &SerialInfo) -> libfdt::Result<()> {
     let name = cstr!("ns16550a");
@@ -1052,6 +1098,12 @@ fn parse_device_tree(fdt: &Fdt, vm_dtbo: Option<&VmDtbo>) -> Result<DeviceTreeIn
         RebootReason::InvalidFdt
     })?;
     validate_pci_info(&pci_info, &memory_range)?;
+
+    let wdt_info = read_wdt_info_from(fdt).map_err(|e| {
+            error!("Failed to read vCPU stall detector info from DT: {e}");
+                RebootReason::InvalidFdt
+        })?;
+    validate_wdt_info(&wdt_info)?;
 
     let serial_info = read_serial_info_from(fdt).map_err(|e| {
         error!("Failed to read serial info from DT: {e}");
