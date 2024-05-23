@@ -231,6 +231,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3f7e360c_27870779",
+        "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-23T05:49:32Z",
+      "side": 1,
+      "message": "I honestly don\u0027t think this buffer is so important that we should our best to keep in cache. This doesn\u0027t have to be this big either.",
+      "parentUuid": "747d8282_37bded1e",
+      "range": {
+        "startLine": 125,
+        "startChar": 37,
+        "endLine": 125,
+        "endChar": 48
+      },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6ded0c13_93beedfd",
         "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
         "patchSetId": 1
@@ -278,6 +302,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "35b1c1b0_e7dcffcb",
+        "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-23T05:49:32Z",
+      "side": 1,
+      "message": "yes",
+      "parentUuid": "7c592a97_0007a5b7",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 128,
+        "endChar": 29
+      },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a0d447b_7eb57a43",
         "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
         "patchSetId": 1
@@ -313,6 +361,30 @@
       "side": 1,
       "message": "\u003e wouldn\u0027t it be better try again next time?\n\nyes? but how would I tell if it is a transient one? I think we only consider EINTR as transient, but I think JVM doesn\u0027t pass through EINTR, so is there any case when transient write error could happen?",
       "parentUuid": "7a0d447b_7eb57a43",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 44
+      },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c1cf633_3b762aa0",
+        "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-23T05:49:32Z",
+      "side": 1,
+      "message": "I don\u0027t have a specific scenario, but giving up on any error just doesn\u0027t look good to me.",
+      "parentUuid": "d10633ca_f87a8401",
       "range": {
         "startLine": 142,
         "startChar": 0,
@@ -383,6 +455,30 @@
       "side": 1,
       "message": "The wrapped c-library method is called \"openpty\" with no caps, so I think keeping it as-is fits our naming convention?",
       "parentUuid": "56d1d06c_cbcb8b4d",
+      "range": {
+        "startLine": 1820,
+        "startChar": 33,
+        "endLine": 1820,
+        "endChar": 36
+      },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d3d5a30_ef35be45",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1820,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-23T05:49:32Z",
+      "side": 1,
+      "message": "If this wraps just openpty (like the ones in android.system.Os class) yes.\nBut this function here does much more than calling openpty.",
+      "parentUuid": "f2404933_ca220ba4",
       "range": {
         "startLine": 1820,
         "startChar": 33,
