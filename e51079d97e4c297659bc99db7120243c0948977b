@@ -203,6 +203,24 @@
       "parentUuid": "49fa35e4_4a7de17c",
       "revId": "e51079d97e4c297659bc99db7120243c0948977b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dbc878f_303aeb86",
+        "filename": "service_vm/requests/src/rkp.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-05-23T11:08:29Z",
+      "side": 1,
+      "message": "I was asking more about the signature formats for non-Ed25519 curves, i.e. the NIST curves (P-384, P-256 etc).  IIRC the format of a signature for Ed25519 / EdDSA is the same for both `COSE_Sign` signatures and for X.509 signatures, but for NIST curves the ECDSA signature formats are different (R|S for COSE, DER `SEQUENCE { r, s}` for X.509).",
+      "parentUuid": "740cd589_770902cf",
+      "revId": "e51079d97e4c297659bc99db7120243c0948977b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
