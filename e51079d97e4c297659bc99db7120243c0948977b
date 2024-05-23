@@ -221,6 +221,24 @@
       "parentUuid": "740cd589_770902cf",
       "revId": "e51079d97e4c297659bc99db7120243c0948977b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df829447_9afe6967",
+        "filename": "service_vm/requests/src/rkp.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-23T11:15:48Z",
+      "side": 1,
+      "message": "open-dice only supports P384 and Ed25519, both signatures conform to COSE. However, it\u0027s unclear how widely the P384 library is actually being used, http://cs/libopen_dice_android_p384 shows no relevant results.",
+      "parentUuid": "2dbc878f_303aeb86",
+      "revId": "e51079d97e4c297659bc99db7120243c0948977b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
