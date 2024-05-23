@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5119bdb5_328f48bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-05-23T00:21:45Z",
+      "side": 1,
+      "message": "First of all, we need a native API since the requester to get created TAP iface\u0027s FD is written in rust(virtualizationservice).\nSeparating impl and JNI functions in `com_android_server_TestNetworkService.cpp` and importing only impl functions would work I think, but using existing rust library mentioned in different comment here would be better. https://source.corp.google.com/h/android/platform/superproject/main/+/main:external/crosvm/net_util/src/sys/linux/tap.rs;l\u003d78",
+      "parentUuid": "52090466_4e5b76b9",
+      "revId": "d164320b18f93ef0be785119a9f0780799985c88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4b0ed0b6_99edc7f9",
         "filename": "virtualizationservice/vmnic/src/aidl.rs",
         "patchSetId": 6
