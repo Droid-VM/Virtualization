@@ -397,6 +397,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6484a263_a1ce5f2e",
+        "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-05-23T06:37:33Z",
+      "side": 1,
+      "message": "what I\u0027m more worried is that it might be dangerous to retry unless we know it\u0027s safe to do so (such as EINTR).\nFor example if we get a EBADF, then it might mean the underlying fd is closed/broken whatever. If we still keep retry writing to the FD, then we might be writing to a dangling file descriptor, or worse, be writing to other unrelated open file that happens to be allocated to the FD we are writing to.",
+      "parentUuid": "5c1cf633_3b762aa0",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 44
+      },
+      "revId": "f5f05677258ecb118e6fa5c6837ec1000d12665b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23880a7f_8c657171",
         "filename": "java/framework/src/android/system/virtualmachine/ConsoleForwarder.java",
         "patchSetId": 1
