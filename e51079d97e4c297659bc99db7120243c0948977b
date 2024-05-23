@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "29e35ccf_d7e4a11b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-23T10:55:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7034159_0bfc8a7e",
+      "revId": "e51079d97e4c297659bc99db7120243c0948977b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d2408b8d_f430bbe4",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -52,6 +70,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b5b4311_8b9be9cc",
+        "filename": "libs/cborutil/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-23T10:55:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88876b90_b631c0dd",
+      "revId": "e51079d97e4c297659bc99db7120243c0948977b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bbf5c600_e480668e",
@@ -65,6 +101,24 @@
       "writtenOn": "2024-05-22T15:37:40Z",
       "side": 1,
       "message": "It took me a while to figure out how this can be variable, so it\u0027s probably worth a comment explaining that (IIUC) the value depends on how the underlying C library is configured in the build.",
+      "revId": "e51079d97e4c297659bc99db7120243c0948977b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c07df601_ed3715a5",
+        "filename": "libs/dice/open_dice/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-23T10:55:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbf5c600_e480668e",
       "revId": "e51079d97e4c297659bc99db7120243c0948977b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -92,6 +146,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cec71216_8fdaf3d9",
+        "filename": "service_vm/comm/src/client_vm_csr.cddl",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-23T10:55:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1c47e9d_e202fa20",
+      "range": {
+        "startLine": 38,
+        "startChar": 47,
+        "endLine": 38,
+        "endChar": 54
+      },
+      "revId": "e51079d97e4c297659bc99db7120243c0948977b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49fa35e4_4a7de17c",
@@ -105,6 +183,24 @@
       "writtenOn": "2024-05-22T15:37:40Z",
       "side": 1,
       "message": "Just to check: does this `sign` function emit signatures in the right format for COSE with ECDSA / NIST curves?",
+      "revId": "e51079d97e4c297659bc99db7120243c0948977b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "740cd589_770902cf",
+        "filename": "service_vm/requests/src/rkp.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-23T10:55:08Z",
+      "side": 1,
+      "message": "Yes, this function returns a 64-byte array, which is the raw ED25519 signature output without pre-hashing the message. This conforms to the COSE requirement.",
+      "parentUuid": "49fa35e4_4a7de17c",
       "revId": "e51079d97e4c297659bc99db7120243c0948977b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
