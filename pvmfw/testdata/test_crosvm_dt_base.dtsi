@@ -1,3 +1,4 @@
+#include <dt-bindings/interrupt-controller/arm-gic.h>
 /dts-v1/;
 
 // This is generated manually by removing unassigned pvIOMMU nodes
@@ -141,6 +142,7 @@
 		reg = <0x00 0x3000 0x00 0x1000>;
 		clock-frequency = <0x0a>;
 		timeout-sec = <0x08>;
+		interrupts = <GIC_PPI 0xf IRQ_TYPE_EDGE_RISING>;
 	};
 
 	__symbols__ {
