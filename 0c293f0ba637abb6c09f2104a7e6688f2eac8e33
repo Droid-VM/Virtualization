@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76e3479d_d3c03b5c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-05-23T13:18:58Z",
+      "side": 1,
+      "message": "Can you also run tests on device that support remote attestation to verify that it still works correctly?",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 8
+      },
+      "revId": "0c293f0ba637abb6c09f2104a7e6688f2eac8e33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "48902d3a_b04efd3f",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -32,6 +55,23 @@
       "side": 1,
       "message": "I don\u0027t think the cl can impact system UI as it only disables a feature that is not yet in use on certain devices. I\u0027ll retrigger the CI to see if the problem persists.",
       "parentUuid": "48902d3a_b04efd3f",
+      "revId": "0c293f0ba637abb6c09f2104a7e6688f2eac8e33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cf74833_7d87c8ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-05-23T13:18:58Z",
+      "side": 1,
+      "message": "+2d, but you will need to update the documentation according to the comment in the aosp/3092139",
       "revId": "0c293f0ba637abb6c09f2104a7e6688f2eac8e33",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
