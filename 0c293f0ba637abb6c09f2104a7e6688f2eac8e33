@@ -16,6 +16,24 @@
       "message": "Hi Alice ,\n\nObserved this change(patch set 3) is causing systemui jank regression\n\nhttps://screenshot.googleplex.com/3Q2KAaJsiHnLw6G\n\nhttps://crystalball-presubmit.corp.google.com/dashboard/I75100010279502385?host\u003dandroid-review.googlesource.com\u0026change_number\u003d3093865\u0026patchset\u003d3\n\nPlease fix this regression before merging",
       "revId": "0c293f0ba637abb6c09f2104a7e6688f2eac8e33",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "388a03d4_b809d6ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-23T07:54:30Z",
+      "side": 1,
+      "message": "I don\u0027t think the cl can impact system UI as it only disables a feature that is not yet in use on certain devices. I\u0027ll retrigger the CI to see if the problem persists.",
+      "parentUuid": "48902d3a_b04efd3f",
+      "revId": "0c293f0ba637abb6c09f2104a7e6688f2eac8e33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
