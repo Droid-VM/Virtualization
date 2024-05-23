@@ -47,6 +47,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68d49df3_cb31cf8a",
+        "filename": "dice_for_avf_guest.cddl",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-05-23T14:20:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11ade4f4_4f0323a2",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 34
+      },
+      "revId": "8c0e56282135265b5ccda35ea4956eb8615100e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72c7f186_1f7398dc",
+        "filename": "dice_for_avf_guest.cddl",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-05-23T14:20:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9f2ad0f_4e090a4e",
+      "range": {
+        "startLine": 1,
+        "startChar": 25,
+        "endLine": 1,
+        "endChar": 34
+      },
+      "revId": "8c0e56282135265b5ccda35ea4956eb8615100e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1174a244_e65503c4",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-05-21T16:01:33Z",
       "side": 1,
       "message": "Not entirely sure I\u0027m happy with \"specification\".\nMaybe \"This CDDL describes the Configuration Descriptor used for components of a ...\"",
+      "range": {
+        "startLine": 3,
+        "startChar": 7,
+        "endLine": 3,
+        "endChar": 20
+      },
+      "revId": "8c0e56282135265b5ccda35ea4956eb8615100e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37073aa6_07eeeb24",
+        "filename": "dice_for_avf_guest.cddl",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-05-23T14:20:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1174a244_e65503c4",
       "range": {
         "startLine": 3,
         "startChar": 7,
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6290247f_fdf8344a",
+        "filename": "dice_for_avf_guest.cddl",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-05-23T14:20:06Z",
+      "side": 1,
+      "message": "Rephrased a bit.\n\nThe fields are mentioned in CDDL (-70002 etc). This cddl is a generic one for all components in guest VM \u0026 therefore extends to all components that may not exist at the moment, for e.g., bootloaders etc. Therefore I\u0027ve not mentioned specific nodes here.",
+      "parentUuid": "0cb5361b_2d489288",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 42
+      },
+      "revId": "8c0e56282135265b5ccda35ea4956eb8615100e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d12999fd_e395ad7d",
@@ -106,6 +202,30 @@
       "writtenOn": "2024-05-21T16:01:33Z",
       "side": 1,
       "message": "If we\u0027re going to do that, we should just reserve a whole range (say -71000...-71999). It\u0027s at least as likely that we\u0027ll add more as re-use existing ones.",
+      "range": {
+        "startLine": 9,
+        "startChar": 43,
+        "endLine": 10,
+        "endChar": 95
+      },
+      "revId": "8c0e56282135265b5ccda35ea4956eb8615100e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ecb191e_5a6221a0",
+        "filename": "dice_for_avf_guest.cddl",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-05-23T14:20:06Z",
+      "side": 1,
+      "message": "That\u0027s actually a good idea!!!!!!! Let\u0027s do that. Vendors can use a different range. PTAL.",
+      "parentUuid": "d12999fd_e395ad7d",
       "range": {
         "startLine": 9,
         "startChar": 43,
@@ -139,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c857aa8_0f8307fd",
+        "filename": "dice_for_avf_guest.cddl",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-05-23T14:20:06Z",
+      "side": 1,
+      "message": "No we don\u0027t. Lets make it non-optional. Thanks for spotting this.",
+      "parentUuid": "38780ec0_3533d62b",
+      "range": {
+        "startLine": 13,
+        "startChar": 4,
+        "endLine": 13,
+        "endChar": 6
+      },
+      "revId": "8c0e56282135265b5ccda35ea4956eb8615100e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "007f7792_f19ad378",
@@ -162,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dfbc33d_a3692edd",
+        "filename": "dice_for_avf_guest.cddl",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-05-23T14:20:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "007f7792_f19ad378",
+      "range": {
+        "startLine": 18,
+        "startChar": 43,
+        "endLine": 18,
+        "endChar": 56
+      },
+      "revId": "8c0e56282135265b5ccda35ea4956eb8615100e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "739d9063_05f0a443",
@@ -175,6 +343,30 @@
       "writtenOn": "2024-05-21T16:01:33Z",
       "side": 1,
       "message": "Can we enumerate all of them?\n\nI\u0027d move this whole section a lot higher up.\n\nAnd, should we not specify which nodes have which fields?",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 102
+      },
+      "revId": "8c0e56282135265b5ccda35ea4956eb8615100e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f4b891d_a7ff8728",
+        "filename": "dice_for_avf_guest.cddl",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-05-23T14:20:06Z",
+      "side": 1,
+      "message": "\u003e Can we enumerate all of them?\n\nThose 2 are the only ones?",
+      "parentUuid": "739d9063_05f0a443",
       "range": {
         "startLine": 54,
         "startChar": 0,
