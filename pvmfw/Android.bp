@@ -148,7 +148,7 @@ genrule {
 genrule {
     name: "test_pvmfw_devices_vm_dtbo_with_dependencies",
     tools: ["dtc"],
-    cmd: "$(location dtc) -@ -I dts -O dtb $(in) -o $(out)",
+    cmd: "$(location dtc) -@ -i $(genDir) -I dts -O dtb $(in) -o $(out)",
     srcs: ["testdata/test_pvmfw_devices_vm_dtbo_with_dependencies.dts"],
     out: ["test_pvmfw_devices_vm_dtbo_with_dependencies.dtbo"],
 }
