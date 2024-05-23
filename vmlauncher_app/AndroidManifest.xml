@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.USE_CUSTOM_VIRTUAL_MACHINE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-feature android:name="android.software.virtualization_framework" android:required="true" />
+
     <application
         android:label="VmLauncherApp"
         android:networkSecurityConfig="@xml/network_security_config">
@@ -17,9 +18,16 @@
                   android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".VmRunnerService"
+            android:label="VmRunnerService"
+            android:exported="false">
+        </service>
+
     </application>
 
 </manifest>
