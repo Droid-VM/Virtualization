@@ -21,7 +21,6 @@ use apkverify::{
 use apkzip::zip_sections;
 use byteorder::{LittleEndian, ReadBytesExt};
 use log::info;
-use openssl::x509::X509;
 use std::fmt::Write;
 use std::io::{Seek, SeekFrom};
 use std::{fs, matches, path::Path};
@@ -308,8 +307,11 @@ fn validate_apk_public_key<P: AsRef<Path>>(apk_path: P) {
 }
 
 fn public_key_der_from_cert(cert_der: &[u8]) -> Result<Vec<u8>> {
-    let cert = X509::from_der(cert_der)?;
-    Ok(cert.public_key()?.public_key_to_der()?)
+    let cert = match bssl_crypto::rsa::PublicKey::from_der_subject_public_key_info(verified_signed_data.first_certificate_der()?) {
+        Some(pk) => pk,
+        _ => return Err(std::fmt::Error.into())
+    };
+    Ok(cert.to_der_subject_public_key_info().into())
 }
 
 /// Validates that the following apk_digest are equal:
