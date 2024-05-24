@@ -16,6 +16,29 @@
       "message": "Note that we can\u0027t submit this until b/342520142 is fixed. But in the meantime PTAL.",
       "revId": "1957b906979723c0c9d3810cdc49f430e5f44686",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42b05734_55c66604",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-24T09:43:16Z",
+      "side": 1,
+      "message": "Should we add a check that at least one of these is non-null, to make any future failure more obvious?\n\nAs I recall we have 2 paths here because we used to log to one and now log to the other. Should we make it 3 paths, to make sure the revised test passes on older versions of the code?",
+      "range": {
+        "startLine": 874,
+        "startChar": 0,
+        "endLine": 876,
+        "endChar": 74
+      },
+      "revId": "1957b906979723c0c9d3810cdc49f430e5f44686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
