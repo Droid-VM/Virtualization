@@ -16,15 +16,11 @@
 
 //! Algorithms used for APK Signature Scheme.
 
-use anyhow::{ensure, Context, Result};
+use anyhow::{Context, Result};
 use byteorder::{LittleEndian, ReadBytesExt};
 use bytes::{Buf, Bytes};
 use num_derive::{FromPrimitive, ToPrimitive};
 use num_traits::{FromPrimitive, ToPrimitive};
-use openssl::hash::MessageDigest;
-use openssl::pkey::{self, PKey};
-use openssl::rsa::Padding;
-use openssl::sign::Verifier;
 use serde::{Deserialize, Serialize};
 use std::io::Read;
 
@@ -92,81 +88,12 @@ impl SignatureAlgorithmID {
         ToPrimitive::to_u32(self).expect("Unsupported algorithm for to_u32.")
     }
 
-    pub(crate) fn new_verifier<'a>(
-        &self,
-        public_key: &'a PKey<pkey::Public>,
-    ) -> Result<Verifier<'a>> {
-        ensure!(
-            !matches!(
-                self,
-                SignatureAlgorithmID::DsaWithSha256 | SignatureAlgorithmID::VerityDsaWithSha256
-            ),
-            "Algorithm '{:?}' is not supported in openssl to build this verifier (b/197052981).",
-            self
-        );
-        ensure!(public_key.id() == self.pkey_id(), "Public key has the wrong ID");
-        let mut verifier = Verifier::new(self.new_message_digest(), public_key)?;
-        if public_key.id() == pkey::Id::RSA {
-            verifier.set_rsa_padding(self.rsa_padding())?;
-        }
-        Ok(verifier)
-    }
-
-    /// Returns the message digest corresponding to the signature algorithm
-    /// according to the spec [Signature Algorithm IDs].
-    pub(crate) fn new_message_digest(&self) -> MessageDigest {
-        match self {
-            SignatureAlgorithmID::RsaPssWithSha256
-            | SignatureAlgorithmID::RsaPkcs1V15WithSha256
-            | SignatureAlgorithmID::EcdsaWithSha256
-            | SignatureAlgorithmID::DsaWithSha256
-            | SignatureAlgorithmID::VerityRsaPkcs1V15WithSha256
-            | SignatureAlgorithmID::VerityEcdsaWithSha256
-            | SignatureAlgorithmID::VerityDsaWithSha256 => MessageDigest::sha256(),
-            SignatureAlgorithmID::RsaPssWithSha512
-            | SignatureAlgorithmID::RsaPkcs1V15WithSha512
-            | SignatureAlgorithmID::EcdsaWithSha512 => MessageDigest::sha512(),
-        }
-    }
-
     /// DSA is not directly supported in openssl today. See b/197052981.
     pub(crate) fn is_supported(&self) -> bool {
         !matches!(
             self,
             SignatureAlgorithmID::DsaWithSha256 | SignatureAlgorithmID::VerityDsaWithSha256,
         )
-    }
-
-    fn pkey_id(&self) -> pkey::Id {
-        match self {
-            SignatureAlgorithmID::RsaPssWithSha256
-            | SignatureAlgorithmID::RsaPssWithSha512
-            | SignatureAlgorithmID::RsaPkcs1V15WithSha256
-            | SignatureAlgorithmID::RsaPkcs1V15WithSha512
-            | SignatureAlgorithmID::VerityRsaPkcs1V15WithSha256 => pkey::Id::RSA,
-            SignatureAlgorithmID::EcdsaWithSha256
-            | SignatureAlgorithmID::EcdsaWithSha512
-            | SignatureAlgorithmID::VerityEcdsaWithSha256 => pkey::Id::EC,
-            SignatureAlgorithmID::DsaWithSha256 | SignatureAlgorithmID::VerityDsaWithSha256 => {
-                pkey::Id::DSA
-            }
-        }
-    }
-
-    fn rsa_padding(&self) -> Padding {
-        match self {
-            SignatureAlgorithmID::RsaPssWithSha256 | SignatureAlgorithmID::RsaPssWithSha512 => {
-                Padding::PKCS1_PSS
-            }
-            SignatureAlgorithmID::RsaPkcs1V15WithSha256
-            | SignatureAlgorithmID::VerityRsaPkcs1V15WithSha256
-            | SignatureAlgorithmID::RsaPkcs1V15WithSha512 => Padding::PKCS1,
-            SignatureAlgorithmID::EcdsaWithSha256
-            | SignatureAlgorithmID::EcdsaWithSha512
-            | SignatureAlgorithmID::VerityEcdsaWithSha256
-            | SignatureAlgorithmID::DsaWithSha256
-            | SignatureAlgorithmID::VerityDsaWithSha256 => Padding::NONE,
-        }
     }
 
     pub(crate) fn content_digest_algorithm(&self) -> ContentDigestAlgorithm {

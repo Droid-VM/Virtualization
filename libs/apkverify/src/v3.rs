@@ -20,8 +20,6 @@
 
 use anyhow::{ensure, Context, Result};
 use bytes::Bytes;
-use openssl::pkey::{self, PKey};
-use openssl::x509::X509;
 use std::fs::File;
 use std::io::{Read, Seek};
 use std::ops::RangeInclusive;
@@ -41,7 +39,7 @@ pub(crate) struct Signer {
     min_sdk: u32,
     max_sdk: u32,
     signatures: LengthPrefixed<Vec<LengthPrefixed<Signature>>>,
-    public_key: PKey<pkey::Public>,
+    raw_public_key: Bytes,
 }
 
 /// Contains the signed data part of an APK v3 signature.
@@ -132,12 +130,16 @@ impl Signer {
 
     /// Verifies a signature over the signed data using the public key.
     fn verify_signature(&self, signature: &Signature) -> Result<()> {
-        let mut verifier = signature
-            .signature_algorithm_id
-            .context("Unsupported algorithm")?
-            .new_verifier(&self.public_key)?;
-        verifier.update(&self.signed_data)?;
-        ensure!(verifier.verify(&signature.signature)?, "Signature is invalid.");
+        // only RSA is supported for the verifier here
+        let public_key = match bssl_crypto::rsa::PublicKey::from_der_rsa_public_key(
+            self.raw_public_key.as_ref(),
+        ) {
+            Some(pk) => pk,
+            _ => return Err(std::fmt::Error.into()),
+        };
+        assert!(public_key
+            .verify_pkcs1::<bssl_crypto::digest::Sha256>(&self.signed_data, &signature.signature)
+            .is_ok());
         Ok(())
     }
 
@@ -192,9 +194,14 @@ impl Signer {
 
         // 7. Verify that public key of the first certificate of certificates is identical to public
         //    key.
-        let cert = X509::from_der(verified_signed_data.first_certificate_der()?)?;
+        let cert = match bssl_crypto::rsa::PublicKey::from_der_subject_public_key_info(
+            verified_signed_data.first_certificate_der()?,
+        ) {
+            Some(pk) => pk,
+            _ => return Err(std::fmt::Error.into()),
+        };
         ensure!(
-            cert.public_key()?.public_eq(&self.public_key),
+            cert.to_der_subject_public_key_info().as_ref() == self.raw_public_key,
             "Public key mismatch between certificate and signature record"
         );
 
@@ -237,7 +244,7 @@ impl ReadFromBytes for Signer {
             min_sdk: buf.read()?,
             max_sdk: buf.read()?,
             signatures: buf.read()?,
-            public_key: buf.read()?,
+            raw_public_key: buf.read()?,
         })
     }
 }
@@ -266,9 +273,12 @@ impl ReadFromBytes for Digest {
     }
 }
 
-impl ReadFromBytes for PKey<pkey::Public> {
+impl ReadFromBytes for bssl_crypto::rsa::PublicKey {
     fn read_from_bytes(buf: &mut Bytes) -> Result<Self> {
         let raw_public_key = buf.read::<LengthPrefixed<Bytes>>()?;
-        Ok(PKey::public_key_from_der(raw_public_key.as_ref())?)
+        match bssl_crypto::rsa::PublicKey::from_der_rsa_public_key(raw_public_key.as_ref()) {
+            Some(pk) => Ok(pk),
+            _ => Err(std::fmt::Error.into()),
+        }
     }
 }
