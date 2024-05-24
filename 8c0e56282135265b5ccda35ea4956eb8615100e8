@@ -215,6 +215,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "05ed1af8_585ed52c",
+        "filename": "dice_for_avf_guest.cddl",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-24T09:57:55Z",
+      "side": 1,
+      "message": "If we add new components (or define new fields) we\u0027ll need to change this spec.\n\nIt should describe what we currently do, which includes which fields are present on each node.",
+      "parentUuid": "6290247f_fdf8344a",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 42
+      },
+      "revId": "8c0e56282135265b5ccda35ea4956eb8615100e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d12999fd_e395ad7d",
         "filename": "dice_for_avf_guest.cddl",
         "patchSetId": 5
@@ -391,6 +415,30 @@
       "side": 1,
       "message": "\u003e Can we enumerate all of them?\n\nThose 2 are the only ones?",
       "parentUuid": "739d9063_05f0a443",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 102
+      },
+      "revId": "8c0e56282135265b5ccda35ea4956eb8615100e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fd72918_2739cc6c",
+        "filename": "dice_for_avf_guest.cddl",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-24T09:57:55Z",
+      "side": 1,
+      "message": "What about \"Microdroid vendor\"? See packages/modules/Virtualization/microdroid/derive_microdroid_vendor_dice_node/src/main.rs",
+      "parentUuid": "0f4b891d_a7ff8728",
       "range": {
         "startLine": 54,
         "startChar": 0,
