@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f74a7ca_98c23946",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-24T09:57:22Z",
+      "side": 1,
+      "message": "let\u0027s land this for now, but as we discussed, I don\u0027t like changing the view layout on every cursor move.\n\nA better approach would be \n\n* create a child surface for cursor \n* use surfacecontrol.transaction to set the position of the surface",
+      "revId": "3580481a77ede1db25042f3f7657c404876b7a8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
