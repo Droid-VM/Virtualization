@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34ecc923_691f7103",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 1
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-24T10:41:17Z",
+      "side": 1,
+      "message": "Missing `;`?",
+      "range": {
+        "startLine": 402,
+        "startChar": 48,
+        "endLine": 402,
+        "endChar": 49
+      },
+      "revId": "16123d82dd376fd9b72a4bda847ad5e9eff3d696",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "464ebb4a_1d48bc58",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1055,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-24T10:41:17Z",
+      "side": 1,
+      "message": "(I\u0027ll give +2 here to unblock you so feel free to address this in a follow-up)\n\nCould you also add some logic to detect unexpected properties in the WD e.g.\n```\nlet wdt_info \u003d read_wdt_info_from(fdt).map_err(|e| {\n    error!(\"Failed to read vCPU stall detector info from DT: {e}\");\n    RebootReason::InvalidFdt\n})?;\nvalidate_wdt_info(\u0026wdt_info)?;\n```\nwhere `wdt_info` would hold the MMIO region and IRQ line number?",
+      "revId": "16123d82dd376fd9b72a4bda847ad5e9eff3d696",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
