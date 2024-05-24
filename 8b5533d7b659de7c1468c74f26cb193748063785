@@ -46,6 +46,30 @@
       },
       "revId": "8b5533d7b659de7c1468c74f26cb193748063785",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65cecec2_57afca6c",
+        "filename": "pvmfw/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-24T11:22:43Z",
+      "side": 1,
+      "message": "But they need to be the same thing in order for the virt apex to work. We could change microdroid_sign_key to pvmfw_embedded_key then. There are three keys involved here (pvmfw_sign_key, pvmfw_embed_key, and microdroid_sign_key) for essentially two purposes, which could be simplified a bit.",
+      "parentUuid": "e466c162_0fbc79c4",
+      "range": {
+        "startLine": 323,
+        "startChar": 0,
+        "endLine": 323,
+        "endChar": 31
+      },
+      "revId": "8b5533d7b659de7c1468c74f26cb193748063785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
