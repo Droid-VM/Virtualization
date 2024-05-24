@@ -18,9 +18,9 @@
 
 use anyhow::{anyhow, ensure, Error, Result};
 use apkzip::{set_central_directory_offset, zip_sections};
+use bssl_crypto::digest::Algorithm;
 use byteorder::{LittleEndian, ReadBytesExt};
 use bytes::{Buf, BufMut, Bytes, BytesMut};
-use openssl::hash::{DigestBytes, Hasher, MessageDigest};
 use std::cmp::min;
 use std::io::{self, Cursor, ErrorKind, Read, Seek, SeekFrom, Take};
 
@@ -84,7 +84,6 @@ impl<R: Read + Seek> ApkSections<R> {
         &mut self,
         signature_algorithm_id: SignatureAlgorithmID,
     ) -> Result<Vec<u8>> {
-        let digester = Digester { message_digest: signature_algorithm_id.new_message_digest() };
         let mut digests_of_chunks = BytesMut::new();
         let mut chunk_count = 0u32;
         let mut chunk = vec![0u8; CHUNK_SIZE_BYTES as usize];
@@ -99,12 +98,18 @@ impl<R: Read + Seek> ApkSections<R> {
                 let slice = &mut chunk[..(chunk_size as usize)];
                 data.read_exact(slice)?;
                 digests_of_chunks.put_slice(
-                    digester.digest(slice, CHUNK_HEADER_MID, chunk_size as u32)?.as_ref(),
+                    digest_dispatch(
+                        slice,
+                        CHUNK_HEADER_MID,
+                        chunk_size as u32,
+                        signature_algorithm_id,
+                    )?
+                    .as_ref(),
                 );
                 chunk_count += 1;
             }
         }
-        Ok(digester.digest(&digests_of_chunks, CHUNK_HEADER_TOP, chunk_count)?.as_ref().into())
+        digest_dispatch(&digests_of_chunks, CHUNK_HEADER_TOP, chunk_count, signature_algorithm_id)
     }
 
     fn zip_entries(&mut self) -> Result<Take<Box<dyn Read + '_>>> {
@@ -148,18 +153,36 @@ fn scoped_read<'a, R: Read + Seek>(
     Ok(Read::take(Box::new(src), size))
 }
 
-struct Digester {
-    message_digest: MessageDigest,
+// v2/v3 digests are computed after prepending "header" byte and "size" info.
+fn digest<A: Algorithm>(data: &[u8], header: &[u8], size: u32) -> Result<Vec<u8>> {
+    let mut ctx = A::new();
+    ctx.update(header);
+    ctx.update(&size.to_le_bytes());
+    ctx.update(data);
+    Ok(ctx.digest())
 }
 
-impl Digester {
-    // v2/v3 digests are computed after prepending "header" byte and "size" info.
-    fn digest(&self, data: &[u8], header: &[u8], size: u32) -> Result<DigestBytes> {
-        let mut hasher = Hasher::new(self.message_digest)?;
-        hasher.update(header)?;
-        hasher.update(&size.to_le_bytes())?;
-        hasher.update(data)?;
-        Ok(hasher.finish()?)
+fn digest_dispatch(
+    data: &[u8],
+    header: &[u8],
+    size: u32,
+    signature_algorithm_id: SignatureAlgorithmID,
+) -> Result<Vec<u8>> {
+    match signature_algorithm_id {
+        SignatureAlgorithmID::RsaPssWithSha256
+        | SignatureAlgorithmID::RsaPkcs1V15WithSha256
+        | SignatureAlgorithmID::EcdsaWithSha256
+        | SignatureAlgorithmID::DsaWithSha256
+        | SignatureAlgorithmID::VerityRsaPkcs1V15WithSha256
+        | SignatureAlgorithmID::VerityEcdsaWithSha256
+        | SignatureAlgorithmID::VerityDsaWithSha256 => {
+            digest::<bssl_crypto::digest::Sha256>(data, header, size)
+        }
+        SignatureAlgorithmID::RsaPssWithSha512
+        | SignatureAlgorithmID::RsaPkcs1V15WithSha512
+        | SignatureAlgorithmID::EcdsaWithSha512 => {
+            digest::<bssl_crypto::digest::Sha512>(data, header, size)
+        }
     }
 }
 
