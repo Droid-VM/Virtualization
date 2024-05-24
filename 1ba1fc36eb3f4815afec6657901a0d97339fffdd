@@ -46,6 +46,30 @@
       },
       "revId": "1ba1fc36eb3f4815afec6657901a0d97339fffdd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4e4d64b_9f2bd39f",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-24T11:33:05Z",
+      "side": 1,
+      "message": "Frankly, I don\u0027t understand this either. It seems that this comment was included with Jooyung\u0027s change (https://r.android.com/1883532), which states:\n\n\u003e All other filesystem images are signed with the same key for\nconvenience even though it\u0027s not necessary.\n\nPerhaps @jooyung@google.com was referring to other microdroid images here? However, since the comment doesn\u0027t seem to provide any useful context today, it might be better to simply remove it.",
+      "parentUuid": "4bfb3589_ec11bad1",
+      "range": {
+        "startLine": 398,
+        "startChar": 0,
+        "endLine": 399,
+        "endChar": 31
+      },
+      "revId": "1ba1fc36eb3f4815afec6657901a0d97339fffdd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
