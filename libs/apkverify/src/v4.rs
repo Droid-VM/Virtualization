@@ -148,11 +148,11 @@ impl<R: Read + Seek> V4Signature<R> {
     /// (see: https://bugzilla.kernel.org/show_bug.cgi?id=200043), which will result in this
     /// function OOMing.
     pub fn create(
-        mut apk: &mut R,
+        apk: &mut R,
         current_sdk: u32,
         block_size: usize,
         salt: &[u8],
-        algorithm: HashAlgorithm,
+        _algorithm: HashAlgorithm,
     ) -> Result<V4Signature<Cursor<Vec<u8>>>> {
         // Determine the size of the apk
         let start = apk.stream_position()?;
@@ -160,10 +160,11 @@ impl<R: Read + Seek> V4Signature<R> {
         apk.seek(SeekFrom::Start(start))?;
 
         // Create hash tree (and root hash)
-        let algorithm = match algorithm {
-            HashAlgorithm::SHA256 => openssl::hash::MessageDigest::sha256(),
-        };
-        let hash_tree = HashTree::from(&mut apk, size, salt, block_size, algorithm)?;
+        // let AlgorithmType = match algorithm {
+        //     HashAlgorithm::SHA256 => bssl_crypto::digest::Sha256,
+        // };
+        let hash_tree =
+            HashTree::from::<R, bssl_crypto::digest::Sha256>(apk, size, salt, block_size)?;
 
         let mut ret = V4Signature {
             version: Version::default(),
