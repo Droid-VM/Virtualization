@@ -3,6 +3,70 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3c7b9a3c_dda64173",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-05-24T16:00:49Z",
+      "side": 1,
+      "message": "IIUC, more than one vm instances can run at the same time?",
+      "range": {
+        "startLine": 332,
+        "startChar": 56,
+        "endLine": 332,
+        "endChar": 79
+      },
+      "revId": "856b54903d5c6861da58f12db024a9a2abb0d438",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6997e908_fa67133e",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1185,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-05-24T16:00:49Z",
+      "side": 1,
+      "message": "nits: mName instead of hardcoded value?",
+      "range": {
+        "startLine": 1185,
+        "startChar": 36,
+        "endLine": 1185,
+        "endChar": 49
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e82ebd3e_49ebff0d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+              "range": {
+                "startLine": 1185,
+                "startChar": 0,
+                "endLine": 1186,
+                "endChar": 0
+              },
+              "replacement": "                                    mName,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "856b54903d5c6861da58f12db024a9a2abb0d438",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1c82743d_4f1c8dd5",
         "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 4
