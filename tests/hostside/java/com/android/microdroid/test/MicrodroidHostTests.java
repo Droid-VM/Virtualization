@@ -872,7 +872,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
         // Check that no denials have happened so far
         String logText =
-                getDevice().pullFileContents(CONSOLE_PATH) + getDevice().pullFileContents(LOG_PATH);
+                getDevice().pullFileContents(TRADEFED_CONSOLE_PATH)
+                        + getDevice().pullFileContents(TRADEFED_LOG_PATH);
         assertWithMessage("Unexpected denials during VM boot")
                 .that(logText)
                 .doesNotContainMatch("avc:\\s+denied");
