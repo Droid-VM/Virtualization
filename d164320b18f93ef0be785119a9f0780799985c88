@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c6f2889a_c35910ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-05-27T01:45:28Z",
+      "side": 1,
+      "message": "Revisiting here, I\u0027ve written again for creating TAP interface based on Rust library existing in `crosvm`, but heard a concern about API stabilization. So reusing libraries in crosvm is no longer valid. FYI, @jiyong@google.com (https://chromium-review.googlesource.com/c/crosvm/crosvm/+/5568990)\n\n\u003e Or do you specifically need a native API?\n\nAs I\u0027ve said before, I need a native API. So I need to distinguish logic between handling Java exception and others to reuse the code. But it requires quite amount of code changes, so I think it\u0027s better to rewrite whole JNI parts as rust if we decide to reuse it. But, I have no idea about whether it really worths. HDYT? @prohr@google.com",
+      "parentUuid": "5119bdb5_328f48bb",
+      "revId": "d164320b18f93ef0be785119a9f0780799985c88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4b0ed0b6_99edc7f9",
         "filename": "virtualizationservice/vmnic/src/aidl.rs",
         "patchSetId": 6
