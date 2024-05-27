@@ -428,6 +428,24 @@
       "parentUuid": "8bd5e5e0_c940fd39",
       "revId": "3625f8b488da9d0ab2f36919621efed3b92c508b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "169c83c0_0887946b",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-05-27T05:08:31Z",
+      "side": 1,
+      "message": "Heard concerns around using `libnet_util` by AVF due to API stabilization. After discussion, using `libnet_util` is no longer valid. \nhttps://chromium-review.googlesource.com/c/crosvm/crosvm/+/5568990",
+      "parentUuid": "e31c5eef_6322c109",
+      "revId": "3625f8b488da9d0ab2f36919621efed3b92c508b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
