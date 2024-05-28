@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c68c52a_ff4fae94",
+        "filename": "tests/pvmfw/tools/PvmfwTool.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-05-28T14:40:25Z",
+      "side": 1,
+      "message": "Oops. Done.",
+      "parentUuid": "7a06713e_80bebb26",
+      "range": {
+        "startLine": 36,
+        "startChar": 26,
+        "endLine": 36,
+        "endChar": 27
+      },
+      "revId": "4caed58bbf66b399556e2569993d9a466870c42d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b46904b1_dd5a8c96",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-05-28T12:36:46Z",
       "side": 1,
       "message": "It\u0027s a shame that we\u0027re tying which fields of the config data are present to the header version (as the fields are optional) but I suppose fixing this would require a rework of the builder?",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 13
+      },
+      "revId": "4caed58bbf66b399556e2569993d9a466870c42d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d598282b_4adcf728",
+        "filename": "tests/pvmfw/tools/PvmfwTool.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-05-28T14:40:25Z",
+      "side": 1,
+      "message": "The inconvenience is by design so `Pvmfw.Builder` can be used to build malformed `Pvmfw`. It\u0027s helpful to verify whether malformed pvmfw is rejected.\n\nWe can add helper methods or redesign builder (e.g. provide default version), but it may not be trivial to maintain.",
+      "parentUuid": "b46904b1_dd5a8c96",
       "range": {
         "startLine": 64,
         "startChar": 0,
