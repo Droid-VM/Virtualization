@@ -23,7 +23,8 @@ use lazy_static::lazy_static;
 use libc::{sysconf, _SC_CLK_TCK};
 use log::{debug, error, info};
 use semver::{Version, VersionReq};
-use nix::{fcntl::OFlag, unistd::pipe2, unistd::Uid, unistd::User};
+use nix::fcntl::{fcntl, FcntlArg, FdFlag, OFlag};
+use nix::unistd::{pipe2, Uid, User};
 use regex::{Captures, Regex};
 use rustutils::system_properties;
 use shared_child::SharedChild;
@@ -122,6 +123,7 @@ pub struct CrosvmConfig {
     pub display_config: Option<DisplayConfig>,
     pub input_device_options: Vec<InputDeviceOption>,
     pub hugepages: bool,
+    pub tap: Option<File>,
 }
 
 #[derive(Debug)]
@@ -979,11 +981,27 @@ fn run_vm(
     }
 
     if cfg!(paravirtualized_devices) {
-        // TODO(b/325929096): Need to set up network from the config
+        // TODO(b/340376951): Remove this after tap in CrosvmConfig is connected to tethering.
         if rustutils::system_properties::read_bool("ro.crosvm.network.setup.done", false)
             .unwrap_or(false)
         {
             command.arg("--net").arg("tap-name=crosvm_tap");
+        }
+    }
+
+    if cfg!(network) {
+        if let Some(tap) = &config.tap {
+            let cloned_tap_fd = fcntl(tap.as_raw_fd(), FcntlArg::F_DUPFD(3))
+                .context("Failed to duplicate file descriptor of TAP interface")?;
+            let flags = fcntl(cloned_tap_fd, FcntlArg::F_GETFD)
+                .context("Failed to get flags of TAP interface file descriptor")?;
+            let flags_without_cloexec = FdFlag::from_bits(flags & !FdFlag::FD_CLOEXEC.bits())
+                .ok_or(anyhow!(
+                    "Failed to execlude CLOEXEC flag of TAP interface file descriptor"
+                ))?;
+            fcntl(cloned_tap_fd, FcntlArg::F_SETFD(flags_without_cloexec))
+                .context("Failed to set flags of file descriptor of TAP interface")?;
+            command.arg("--net").arg(format!("tap-fd={}", cloned_tap_fd));
         }
     }
 

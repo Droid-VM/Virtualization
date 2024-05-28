@@ -17,7 +17,7 @@
 use anyhow::{anyhow, Context, Result};
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IVmnic::IVmnic;
 use binder::{self, Interface, IntoBinderResult, ParcelFileDescriptor};
-use libc::{close, c_char, c_int, c_short, ifreq, socket, AF_INET, IFF_NO_PI, IFF_TAP, IFF_UP, IFNAMSIZ, SOCK_DGRAM};
+use libc::{close, c_char, c_int, c_short, ifreq, socket, AF_INET, IFF_NO_PI, IFF_TAP, IFF_UP, IFF_VNET_HDR, IFNAMSIZ, SOCK_DGRAM};
 use log::info;
 use nix::{ioctl_write_int_bad, ioctl_write_ptr_bad};
 use nix::sys::ioctl::ioctl_num_type;
@@ -46,7 +46,7 @@ fn validate_ifname(ifname: &[c_char]) -> Result<()> {
 fn create_tap_interface(fd: RawFd, ifname: &[c_char]) -> Result<()> {
     // SAFETY: All-zero is a valid value for the ifreq type.
     let mut ifr: ifreq = unsafe { std::mem::zeroed() };
-    ifr.ifr_ifru.ifru_flags = (IFF_TAP | IFF_NO_PI) as c_short;
+    ifr.ifr_ifru.ifru_flags = (IFF_TAP | IFF_NO_PI | IFF_VNET_HDR) as c_short;
     ifr.ifr_name[..ifname.len()].copy_from_slice(ifname);
     // SAFETY: `ioctl` is copied into the kernel. It modifies the state in the kernel, not the
     // state of this process in any way.
