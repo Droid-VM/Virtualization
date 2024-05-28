@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea5c213f_04219759",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-05-28T17:23:24Z",
+      "side": 1,
+      "message": "FYI: you are already using nix, so you could use it to reduce the unsafe a bit\n\n```\nlet sockfd \u003d nix::sys::socket::socket(\n    AddressFamily::Inet,\n    SockType::Datagram,\n    SockFlag::empty(),\n    None).context(\"Failed to create socket\").or_service_specific_exception(-1)?\nlet result \u003d bring_up_interface(sockfd.as_raw_fd(), ifname_bytes);\nstd::mem::drop(sockfd);\n```",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 63
+      },
+      "revId": "db4868bad4fe746709fa2b4bf3caa6f0514d0126",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
