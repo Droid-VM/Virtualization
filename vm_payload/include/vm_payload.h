@@ -129,7 +129,7 @@ const char* _Nonnull AVmPayload_getApkContentsPath(void);
  *
  * \return the path to the encrypted storage directory, or NULL if no encrypted
  * storage was requested in the VM configuration. If non-null the returned
- * string should not be deleted or freed by the application and remains valid
+ * string should not be deleted or freed by the m application and remains valid
  * for the lifetime of the VM.
  */
 const char* _Nullable AVmPayload_getEncryptedStoragePath(void);
