@@ -21,7 +21,7 @@ use com_android_virt_vm_attestation_testservice::{
         AttestationStatus::AttestationStatus, BnAttestationService, IAttestationService,
         SigningResult::SigningResult, PORT,
     },
-    binder::{self, unstable_api::AsNative, BinderFeatures, Interface, IntoBinderResult, Strong},
+    binder::{self, BinderFeatures, Interface, IntoBinderResult, Strong},
 };
 use log::{error, info};
 use std::{
@@ -32,11 +32,10 @@ use std::{
     sync::{Arc, Mutex},
 };
 use vm_payload_bindgen::{
-    AIBinder, AVmAttestationResult, AVmAttestationResult_free,
-    AVmAttestationResult_getCertificateAt, AVmAttestationResult_getCertificateCount,
-    AVmAttestationResult_getPrivateKey, AVmAttestationResult_sign, AVmAttestationStatus,
-    AVmAttestationStatus_toString, AVmPayload_notifyPayloadReady, AVmPayload_requestAttestation,
-    AVmPayload_requestAttestationForTesting, AVmPayload_runVsockRpcServer,
+    AVmAttestationResult, AVmAttestationResult_free, AVmAttestationResult_getCertificateAt,
+    AVmAttestationResult_getCertificateCount, AVmAttestationResult_getPrivateKey,
+    AVmAttestationResult_sign, AVmAttestationStatus, AVmAttestationStatus_toString,
+    AVmPayload_requestAttestation, AVmPayload_requestAttestationForTesting,
 };
 
 /// Entry point of the Service VM client.
@@ -61,18 +60,7 @@ pub extern "C" fn AVmPayload_main() {
 fn try_main() -> Result<()> {
     info!("Welcome to Service VM Client!");
 
-    let mut service = AttestationService::new_binder().as_binder();
-    let service = service.as_native_mut() as *mut AIBinder;
-    let param = ptr::null_mut();
-    // SAFETY: We hold a strong pointer, so the raw pointer remains valid. The bindgen AIBinder
-    // is the same type as `sys::AIBinder`. It is safe for `on_ready` to be invoked at any time,
-    // with any parameter.
-    unsafe { AVmPayload_runVsockRpcServer(service, PORT.try_into()?, Some(on_ready), param) };
-}
-
-extern "C" fn on_ready(_param: *mut c_void) {
-    // SAFETY: It is safe to call `AVmPayload_notifyPayloadReady` at any time.
-    unsafe { AVmPayload_notifyPayloadReady() };
+    vm_payload::run_vsock_service(AttestationService::new_binder(), PORT.try_into()?)
 }
 
 struct AttestationService {
