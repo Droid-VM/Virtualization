@@ -239,6 +239,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0905b7b8_afa02dcb",
+        "filename": "dice_for_avf_guest.cddl",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-05-28T11:43:00Z",
+      "side": 1,
+      "message": "\u003e If we add new components (or define new fields) we\u0027ll need to change this spec.\n\n\nI agree to this point. I donno what is a good what is a good way to reference this doc form future implementations. \n\nI\u0027m not sure if we are on same page about specifically describing each field of the different boot stages (except component name). Lets chat offline",
+      "parentUuid": "05ed1af8_585ed52c",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 42
+      },
+      "revId": "8c0e56282135265b5ccda35ea4956eb8615100e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d12999fd_e395ad7d",
         "filename": "dice_for_avf_guest.cddl",
         "patchSetId": 5
@@ -439,6 +463,30 @@
       "side": 1,
       "message": "What about \"Microdroid vendor\"? See packages/modules/Virtualization/microdroid/derive_microdroid_vendor_dice_node/src/main.rs",
       "parentUuid": "0f4b891d_a7ff8728",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 102
+      },
+      "revId": "8c0e56282135265b5ccda35ea4956eb8615100e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4219692_15212e37",
+        "filename": "dice_for_avf_guest.cddl",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-05-28T11:43:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fd72918_2739cc6c",
       "range": {
         "startLine": 54,
         "startChar": 0,
