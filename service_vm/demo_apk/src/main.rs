@@ -29,10 +29,10 @@ use vm_payload_bindgen::{
     AVmPayload_requestAttestation,
 };
 
+vm_payload::main!(main);
+
 /// Entry point of the Service VM client.
-#[allow(non_snake_case)]
-#[no_mangle]
-pub extern "C" fn AVmPayload_main() {
+fn main() {
     android_logger::init_once(
         android_logger::Config::default()
             .with_tag("service_vm_client")

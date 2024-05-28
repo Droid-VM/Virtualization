@@ -60,6 +60,20 @@ rust_bindgen {
     ],
 }
 
+rust_library_rlib {
+    name: "libvm_payload_rs",
+    crate_name: "vm_payload",
+    defaults: ["avf_build_flags_rust"],
+    srcs: ["wrapper/lib.rs"],
+    rustlibs: [
+        "libbinder_rs",
+        "libstatic_assertions",
+        "libvm_payload_bindgen",
+    ],
+    apex_available: ["com.android.compos"],
+    visibility: ["//visibility:public"],
+}
+
 // Shared library for clients to link against.
 cc_library_shared {
     name: "libvm_payload",
