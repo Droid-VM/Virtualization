@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a06713e_80bebb26",
+        "filename": "tests/pvmfw/tools/PvmfwTool.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-28T12:36:46Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this still be `3` (out, pvmfw, BCC)?",
+      "range": {
+        "startLine": 36,
+        "startChar": 26,
+        "endLine": 36,
+        "endChar": 27
+      },
+      "revId": "4caed58bbf66b399556e2569993d9a466870c42d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b46904b1_dd5a8c96",
+        "filename": "tests/pvmfw/tools/PvmfwTool.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-28T12:36:46Z",
+      "side": 1,
+      "message": "It\u0027s a shame that we\u0027re tying which fields of the config data are present to the header version (as the fields are optional) but I suppose fixing this would require a rework of the builder?",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 13
+      },
+      "revId": "4caed58bbf66b399556e2569993d9a466870c42d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
