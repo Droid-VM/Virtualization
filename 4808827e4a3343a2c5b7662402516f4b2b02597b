@@ -16,6 +16,29 @@
       "message": "WIP on sepolicy patch.",
       "revId": "4808827e4a3343a2c5b7662402516f4b2b02597b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cf5a663_4d5c8da1",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1003,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-05-28T05:33:53Z",
+      "side": 1,
+      "message": "why don\u0027t you dup using F_DUPFD_CLOEXEC?",
+      "range": {
+        "startLine": 994,
+        "startChar": 0,
+        "endLine": 1003,
+        "endChar": 85
+      },
+      "revId": "4808827e4a3343a2c5b7662402516f4b2b02597b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
