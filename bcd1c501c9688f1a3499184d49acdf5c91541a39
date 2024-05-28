@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fc7a566_92ce7e4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-28T11:53:29Z",
+      "side": 1,
+      "message": "Hi, sorry for the late review. I was a bit busy recently.",
+      "revId": "bcd1c501c9688f1a3499184d49acdf5c91541a39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4461f500_fc01188a",
+        "filename": "dice_for_avf_guest.cddl",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-28T11:53:29Z",
+      "side": 1,
+      "message": "Can we make it clear that the vendor node is only present when a VM is loaded with vendor module?",
+      "range": {
+        "startLine": 24,
+        "startChar": 27,
+        "endLine": 24,
+        "endChar": 43
+      },
+      "revId": "bcd1c501c9688f1a3499184d49acdf5c91541a39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ccce444_775c319f",
+        "filename": "dice_for_avf_guest.cddl",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-28T11:53:29Z",
+      "side": 1,
+      "message": "nit: Could we put these three items in the order of their appearance in the DICE chain?\n\n- \"vm_entry\"\n- \"Microdroid vendor\"\n- \"Microdroid Payload\"",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 3
+      },
+      "revId": "bcd1c501c9688f1a3499184d49acdf5c91541a39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ec8c8a7_9d26111e",
+        "filename": "dice_for_avf_guest.cddl",
+        "patchSetId": 10
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-28T11:53:29Z",
+      "side": 1,
+      "message": "Can we make it clear that this field is only relevant to the \"Microdroid Payload\" DICE cert?",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 62
+      },
+      "revId": "bcd1c501c9688f1a3499184d49acdf5c91541a39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e0da8e6_b07570e5",
+        "filename": "dice_for_avf_guest.cddl",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-05-28T11:53:29Z",
+      "side": 1,
+      "message": "Is this field only present in \"vm_entry\"? Can we also doc it here?",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 95
+      },
+      "revId": "bcd1c501c9688f1a3499184d49acdf5c91541a39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
