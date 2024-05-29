@@ -134,3 +134,18 @@ aidl_interface {
         },
     },
 }
+
+aidl_interface {
+    name: "android.os.accessor",
+    srcs: ["android/os/*.aidl"],
+    unstable: true,
+    backend: {
+        rust: {
+            enabled: true,
+            apex_available: [
+                "com.android.virt",
+                "com.android.compos",
+            ],
+        },
+    },
+}
