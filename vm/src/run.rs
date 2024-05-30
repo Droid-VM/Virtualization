@@ -43,7 +43,7 @@ use vmconfig::{get_debug_level, open_parcel_file, VmConfig};
 use zip::ZipArchive;
 
 /// Run a VM from the given APK, idsig, and config.
-pub fn command_run_app(config: RunAppConfig) -> Result<(), Error> {
+pub fn command_run_app(config: RunAppConfig) -> Result<VmInstance, Error> {
     let service = get_service()?;
     let apk = File::open(&config.apk).context("Failed to open APK file")?;
 
@@ -213,7 +213,7 @@ fn create_work_dir() -> Result<PathBuf, Error> {
 }
 
 /// Run a VM with Microdroid
-pub fn command_run_microdroid(config: RunMicrodroidConfig) -> Result<(), Error> {
+pub fn command_run_microdroid(config: RunMicrodroidConfig) -> Result<VmInstance, Error> {
     let apk = find_empty_payload_apk_path()?;
     println!("found path {}", apk.display());
 
@@ -243,7 +243,7 @@ pub fn command_run_microdroid(config: RunMicrodroidConfig) -> Result<(), Error> 
 }
 
 /// Run a VM from the given configuration file.
-pub fn command_run(config: RunCustomVmConfig) -> Result<(), Error> {
+pub fn command_run(config: RunCustomVmConfig) -> Result<VmInstance, Error> {
     let config_file = File::open(&config.config).context("Failed to open config file")?;
     let mut vm_config =
         VmConfig::load(&config_file).context("Failed to parse config file")?.to_parcelable()?;
@@ -289,7 +289,7 @@ fn run(
     console_out_path: Option<&Path>,
     console_in_path: Option<&Path>,
     log_path: Option<&Path>,
-) -> Result<(), Error> {
+) -> Result<VmInstance, Error> {
     let console_out = if let Some(console_out_path) = console_out_path {
         Some(File::create(console_out_path).with_context(|| {
             format!("Failed to open console output file {:?}", console_out_path)
@@ -328,11 +328,7 @@ fn run(
         state_to_str(vm.state()?)
     );
 
-    // Wait until the VM or VirtualizationService dies. If we just returned immediately then the
-    // IVirtualMachine Binder object would be dropped and the VM would be killed.
-    let death_reason = vm.wait_for_death();
-    println!("VM ended: {:?}", death_reason);
-    Ok(())
+    Ok(vm)
 }
 
 fn parse_extra_apk_list(apk: &Path, config_path: &str) -> Result<Vec<PathBuf>, Error> {
