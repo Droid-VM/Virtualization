@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8b7b7af_705cd465",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954616
+      },
+      "writtenOn": "2024-05-30T21:01:24Z",
+      "side": 1,
+      "message": "Starting the review process for this CL: it removes the rust `openssl` uses in this module (tests are passing). But I\u0027m leaving it as WIP because it depends on a change to upstream boringssl which still might change (this: https://boringssl-review.googlesource.com/c/boringssl/+/68748)",
+      "revId": "ce0234ad75f79e1e9378a22c2ca0b5d64507296d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
