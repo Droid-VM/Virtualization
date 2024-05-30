@@ -81,6 +81,30 @@
       },
       "revId": "4808827e4a3343a2c5b7662402516f4b2b02597b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cc06a0a_3fa91acf",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1003,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-05-30T01:16:54Z",
+      "side": 1,
+      "message": "I applied your suggestion adding file descriptor of TAP interface into `preserved_fds`, and it works. Thanks!",
+      "parentUuid": "d1beb0c0_03861a87",
+      "range": {
+        "startLine": 994,
+        "startChar": 0,
+        "endLine": 1003,
+        "endChar": 85
+      },
+      "revId": "4808827e4a3343a2c5b7662402516f4b2b02597b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
