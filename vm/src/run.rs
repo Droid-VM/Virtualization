@@ -30,6 +30,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
 use anyhow::{anyhow, bail, Context, Error};
 use binder::ParcelFileDescriptor;
 use glob::glob;
+use log::{error, info};
 use microdroid_payload_config::VmPayloadConfig;
 use rand::{distributions::Alphanumeric, Rng};
 use std::fs;
@@ -43,7 +44,7 @@ use vmconfig::{get_debug_level, open_parcel_file, VmConfig};
 use zip::ZipArchive;
 
 /// Run a VM from the given APK, idsig, and config.
-pub fn command_run_app(config: RunAppConfig) -> Result<(), Error> {
+pub fn command_run_app(config: RunAppConfig) -> Result<VmInstance, Error> {
     let service = get_service()?;
     let apk = File::open(&config.apk).context("Failed to open APK file")?;
 
@@ -207,21 +208,24 @@ fn create_work_dir() -> Result<PathBuf, Error> {
     let s: String =
         rand::thread_rng().sample_iter(&Alphanumeric).take(17).map(char::from).collect();
     let work_dir = PathBuf::from("/data/local/tmp/microdroid").join(s);
-    println!("creating work dir {}", work_dir.display());
+    info!("creating work dir {}", work_dir.display());
     fs::create_dir_all(&work_dir).context("failed to mkdir")?;
     Ok(work_dir)
 }
 
 /// Run a VM with Microdroid
-pub fn command_run_microdroid(config: RunMicrodroidConfig) -> Result<(), Error> {
-    let apk = find_empty_payload_apk_path()?;
-    println!("found path {}", apk.display());
+pub fn command_run_microdroid(config: RunMicrodroidConfig) -> Result<VmInstance, Error> {
+    let apk = match config.apk {
+        Some(apk) => apk,
+        None => find_empty_payload_apk_path()?,
+    };
+    info!("found path {}", apk.display());
 
     let work_dir = config.work_dir.unwrap_or(create_work_dir()?);
     let idsig = work_dir.join("apk.idsig");
-    println!("apk.idsig path: {}", idsig.display());
+    info!("apk.idsig path: {}", idsig.display());
     let instance_img = work_dir.join("instance.img");
-    println!("instance.img path: {}", instance_img.display());
+    info!("instance.img path: {}", instance_img.display());
 
     let mut app_config = RunAppConfig {
         common: config.common,
@@ -230,20 +234,20 @@ pub fn command_run_microdroid(config: RunMicrodroidConfig) -> Result<(), Error> 
         apk,
         idsig,
         instance: instance_img,
-        payload_binary_name: Some("MicrodroidEmptyPayloadJniLib.so".to_owned()),
+        payload_binary_name: Some(config.payload_binary_name),
         ..Default::default()
     };
 
     if cfg!(llpvm_changes) {
         app_config.set_instance_id(work_dir.join("instance_id"))?;
-        println!("instance_id file path: {}", app_config.instance_id()?.display());
+        info!("instance_id file path: {}", app_config.instance_id()?.display());
     }
 
     command_run_app(app_config)
 }
 
 /// Run a VM from the given configuration file.
-pub fn command_run(config: RunCustomVmConfig) -> Result<(), Error> {
+pub fn command_run(config: RunCustomVmConfig) -> Result<VmInstance, Error> {
     let config_file = File::open(&config.config).context("Failed to open config file")?;
     let mut vm_config =
         VmConfig::load(&config_file).context("Failed to parse config file")?.to_parcelable()?;
@@ -289,7 +293,7 @@ fn run(
     console_out_path: Option<&Path>,
     console_in_path: Option<&Path>,
     log_path: Option<&Path>,
-) -> Result<(), Error> {
+) -> Result<VmInstance, Error> {
     let console_out = if let Some(console_out_path) = console_out_path {
         Some(File::create(console_out_path).with_context(|| {
             format!("Failed to open console output file {:?}", console_out_path)
@@ -320,7 +324,7 @@ fn run(
 
     let debug_level = get_debug_level(config).unwrap_or(DebugLevel::NONE);
 
-    println!(
+    info!(
         "Created {} from {} with CID {}, state is {}.",
         if debug_level == DebugLevel::FULL { "debuggable VM" } else { "VM" },
         payload_config,
@@ -328,11 +332,7 @@ fn run(
         state_to_str(vm.state()?)
     );
 
-    // Wait until the VM or VirtualizationService dies. If we just returned immediately then the
-    // IVirtualMachine Binder object would be dropped and the VM would be killed.
-    let death_reason = vm.wait_for_death();
-    println!("VM ended: {:?}", death_reason);
-    Ok(())
+    Ok(vm)
 }
 
 fn parse_extra_apk_list(apk: &Path, config_path: &str) -> Result<Vec<PathBuf>, Error> {
@@ -346,19 +346,19 @@ struct Callback {}
 
 impl vmclient::VmCallback for Callback {
     fn on_payload_started(&self, _cid: i32) {
-        eprintln!("payload started");
+        error!("payload started");
     }
 
     fn on_payload_ready(&self, _cid: i32) {
-        eprintln!("payload is ready");
+        error!("payload is ready");
     }
 
     fn on_payload_finished(&self, _cid: i32, exit_code: i32) {
-        eprintln!("payload finished with exit code {}", exit_code);
+        error!("payload finished with exit code {}", exit_code);
     }
 
     fn on_error(&self, _cid: i32, error_code: ErrorCode, message: &str) {
-        eprintln!("VM encountered an error: code={:?}, message={}", error_code, message);
+        error!("VM encountered an error: code={:?}, message={}", error_code, message);
     }
 }
 
