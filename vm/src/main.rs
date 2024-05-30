@@ -14,6 +14,7 @@
 
 //! Android VM control tool.
 
+mod accessor;
 mod create_idsig;
 mod create_partition;
 mod run;
@@ -24,7 +25,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
 };
 #[cfg(not(llpvm_changes))]
 use anyhow::anyhow;
-use anyhow::{Context, Error};
+use anyhow::{bail, Context, Error};
 use binder::{ProcessState, Strong};
 use clap::{Args, Parser};
 use create_idsig::command_create_idsig;
@@ -34,9 +35,24 @@ use serde::Serialize;
 use std::num::NonZeroU16;
 use std::path::{Path, PathBuf};
 
+/// Information of service in a VM.
+#[derive(Clone, Debug, Default)]
+pub struct VmService {
+    service_name: String,
+    port: u32,
+}
+
 #[derive(Args, Default)]
 /// Collection of flags that are at VM level and therefore applicable to all subcommands
 pub struct CommonConfig {
+    /// Run this VM via IAccessor for exposing binder of services running in the VM.
+    /// Pass pair of (service_name, service_port) per each service in the VM.
+    // TODO: Which one is better between two?
+    //       option 1) vm run_via_accessor --service=foo1,1234 --service=foo2,4321 -- run ...
+    //       option 2) vm run --service=foo1,1234 --service=foo2,4321 ...
+    #[arg(long, value_parser = parse_vm_service)]
+    vm_service: Vec<VmService>,
+
     /// Name of VM
     #[arg(long)]
     name: Option<String>,
@@ -276,8 +292,9 @@ pub struct RunCustomVmConfig {
     config: PathBuf,
 }
 
+// TODO: Refactor this to move into its library to prevent run.rs to depend on main.rs
 #[derive(Parser)]
-enum Opt {
+pub enum Opt {
     /// Check if the feature is enabled on device.
     CheckFeatureEnabled { feature: String },
     /// Run a virtual machine with a config in APK
@@ -320,6 +337,16 @@ enum Opt {
         /// Path to idsig of the APK
         path: PathBuf,
     },
+}
+
+fn parse_vm_service(s: &str) -> Result<VmService, String> {
+    let tokens: Vec<_> = s.split(',').collect();
+    if tokens.len() == 2 {
+        if let Ok(port) = tokens[1].parse() {
+            return Ok(VmService { service_name: tokens[0].to_string(), port });
+        }
+    }
+    Err(format!("Expected tuple of (service_name, port), but was {}", s))
 }
 
 fn parse_debug_level(s: &str) -> Result<DebugLevel, String> {
@@ -366,22 +393,48 @@ fn main() -> Result<(), Error> {
     // We need to start the thread pool for Binder to work properly, especially link_to_death.
     ProcessState::start_thread_pool();
 
-    match opt {
+    // TODO: Improve readability
+    let vm_services = match opt {
         Opt::CheckFeatureEnabled { feature } => {
             command_check_feature_enabled(&feature);
-            Ok(())
+            return Ok(());
         }
+        Opt::List => {
+            return command_list(get_service()?.as_ref());
+        }
+        Opt::Info => {
+            return command_info();
+        }
+        Opt::CreatePartition { path, size, partition_type } => {
+            return command_create_partition(get_service()?.as_ref(), &path, size, partition_type);
+        }
+        Opt::CreateIdsig { apk, path } => {
+            return command_create_idsig(get_service()?.as_ref(), &apk, &path);
+        }
+        Opt::RunApp { ref config } => config.common.vm_services,
+        Opt::RunMicrodroid { ref config } => config.common.vm_services,
+        Opt::Run { ref config } => config.common.vm_services,
+    };
+
+    let vm = match opt {
         Opt::RunApp { config } => command_run_app(config),
         Opt::RunMicrodroid { config } => command_run_microdroid(config),
         Opt::Run { config } => command_run(config),
-        Opt::List => command_list(get_service()?.as_ref()),
-        Opt::Info => command_info(),
-        Opt::CreatePartition { path, size, partition_type } => {
-            command_create_partition(get_service()?.as_ref(), &path, size, partition_type)
-        }
-        Opt::CreateIdsig { apk, path } => {
-            command_create_idsig(get_service()?.as_ref(), &apk, &path)
-        }
+        opt => bail!("Unhandled option {opt:?}"),
+    }?;
+
+    if !vm_services.is_empty() {
+        let _accessor = Accessor::new_with_lazy_services(vm, vm_services);
+
+        ProcessState::join_thread_pool();
+
+        bail!("Thread pool unexpectedly ended")
+    } else {
+        // Wait until the VM or VirtualizationService dies. If we just returned immediately then the
+        // IVirtualMachine Binder object would be dropped and the VM would be killed.
+        let death_reason = vm.wait_for_death();
+        println!("VM ended: {:?}", death_reason);
+        Ok(())
     }
 }
 
