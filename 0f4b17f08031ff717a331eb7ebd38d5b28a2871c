@@ -3,6 +3,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0d5aa65a_b2b22449",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-30T09:20:20Z",
+      "side": 1,
+      "message": "Don\u0027t forget to add unit tests for this in MicrodroidTests - see vmConfigGetAndSetTests(), vmConfigBuilderValidationTests() and compatibleConfigTests().",
+      "range": {
+        "startLine": 574,
+        "startChar": 19,
+        "endLine": 574,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b55db10c_1d7cebc4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
+              "range": {
+                "startLine": 574,
+                "startChar": 0,
+                "endLine": 574,
+                "endChar": 0
+              },
+              "replacement": "    @TestApi\n    @FlaggedApi(Flags.FLAG_AVF_V_TEST_APIS)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0f4b17f08031ff717a331eb7ebd38d5b28a2871c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "db442ac1_0e895eb6",
         "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
         "patchSetId": 2
