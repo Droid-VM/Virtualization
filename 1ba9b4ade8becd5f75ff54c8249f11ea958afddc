@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dba3ab4_f1250cf0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-30T12:43:21Z",
+      "side": 1,
+      "message": "FTR, aosp/2129063 fixed this exact issue for the U-Boot-based pvmfw on the `master` branch but it was missed by aosp/2456151 as it imported the DT from `android13-qpr`.\n\nThe other CLs modifying the DT in `android13-qpr..master` (i.e. missed by aosp/2456151) are\n\n1. aosp/2150417 (\"Increase arbitrary maximum number of PCI devices\")\n1. aosp/2231828 (\"Propagate linux,initrd-start/end properties\")\n1. aosp/2183599 (\"Add the vmwdt node for the vcpu_stall_detector\")\n\nbut they have since been respectively re-implemented by\n\n1. aosp/2655521 (\"Increase number of PCI devices to 10\")\n1. aosp/2499575 (\"Patch DT using information extracted from DT\")\n1. aosp/2485716 (\"Define the vcpu stall detector node in the pvmfw DT template\")\n\nso we should not be concerned about more issues arising from missed DT patches.",
+      "revId": "1ba9b4ade8becd5f75ff54c8249f11ea958afddc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
