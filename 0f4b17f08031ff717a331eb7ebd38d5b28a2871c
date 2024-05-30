@@ -44,6 +44,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a62243a0_f88a54b6",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-05-30T09:34:36Z",
+      "side": 1,
+      "message": "Sure, I should make tests in \"this\" change, to keep stability.\n\nBTW, I have a question around `FLAG_AVF_V_TEST_APIS`. Does it really depend on Android V timeline? Based on commit message in aosp/2965056, since it seems not.\n\nHowever to use `VmLauncherApp`, I think I need to set this as `@SystemApi`, not `@TestApi`. In this case, setting `FEATURE_NETWORK` is sufficient, right?",
+      "parentUuid": "0d5aa65a_b2b22449",
+      "range": {
+        "startLine": 574,
+        "startChar": 19,
+        "endLine": 574,
+        "endChar": 37
+      },
+      "revId": "0f4b17f08031ff717a331eb7ebd38d5b28a2871c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "db442ac1_0e895eb6",
         "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
         "patchSetId": 2
