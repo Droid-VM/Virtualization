@@ -11,6 +11,7 @@ rust_defaults {
     prefer_rlib: true,
     rustlibs: [
         "android.system.virtualizationservice-rust",
+        "android.os.accessor-rust",
         "libanyhow",
         "libavf_features",
         "libbinder_rs",
