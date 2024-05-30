@@ -14,29 +14,48 @@
 
 //! Android VM control tool.
 
+mod accessor;
 mod create_idsig;
 mod create_partition;
 mod run;
 
+use accessor::Accessor;
+use android_os_accessor::aidl::android::os::IAccessor::BnAccessor;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
     CpuTopology::CpuTopology, IVirtualizationService::IVirtualizationService,
     PartitionType::PartitionType, VirtualMachineAppConfig::DebugLevel::DebugLevel,
 };
-#[cfg(not(llpvm_changes))]
 use anyhow::anyhow;
 use anyhow::{Context, Error};
-use binder::{ProcessState, Strong};
+use binder::{BinderFeatures, ProcessState, Strong};
 use clap::{Args, Parser};
 use create_idsig::command_create_idsig;
 use create_partition::command_create_partition;
+use log::info;
 use run::{command_run, command_run_app, command_run_microdroid};
 use serde::Serialize;
 use std::num::NonZeroU16;
 use std::path::{Path, PathBuf};
+use std::sync::{Arc, Mutex};
+
+/// Information of service in a VM.
+#[derive(Clone, Debug, Default)]
+pub struct VmService {
+    service_name: String,
+    port: i32,
+}
 
 #[derive(Args, Default)]
 /// Collection of flags that are at VM level and therefore applicable to all subcommands
 pub struct CommonConfig {
+    /// Run this VM via IAccessor for exposing binder of services running in the VM.
+    /// Pass pair of (service_name, service_port) per each service in the VM.
+    // TODO: Which one is better between two?
+    //       option 1) vm run_via_accessor --service=foo1,1234 --service=foo2,4321 -- run ...
+    //       option 2) vm run --service=foo1,1234 --service=foo2,4321 ...
+    #[arg(long, value_parser = parse_vm_service)]
+    vm_services: Vec<VmService>,
+
     /// Name of VM
     #[arg(long)]
     name: Option<String>,
@@ -256,6 +275,14 @@ pub struct RunMicrodroidConfig {
     #[command(flatten)]
     microdroid: MicrodroidConfig,
 
+    /// Path of the apk
+    #[arg(long)]
+    apk: Option<PathBuf>,
+
+    /// Name of the payload executable file in the lib/<ABI> folder of an APK
+    #[arg(long, default_value = "MicrodroidEmptyPayloadJniLib.so")]
+    payload_binary_name: String,
+
     /// Path to the directory where VM-related files (e.g. instance.img, apk.idsig, etc.) will
     /// be stored. If not specified a random directory under /data/local/tmp/microdroid will be
     /// created and used.
@@ -276,6 +303,7 @@ pub struct RunCustomVmConfig {
     config: PathBuf,
 }
 
+// TODO: Refactor this to move into its library to prevent run.rs to depend on main.rs
 #[derive(Parser)]
 enum Opt {
     /// Check if the feature is enabled on device.
@@ -322,6 +350,16 @@ enum Opt {
     },
 }
 
+fn parse_vm_service(s: &str) -> Result<VmService, String> {
+    let tokens: Vec<_> = s.split(',').collect();
+    if tokens.len() == 2 {
+        if let Ok(port) = tokens[1].parse() {
+            return Ok(VmService { service_name: tokens[0].to_string(), port });
+        }
+    }
+    Err(format!("Expected tuple of (service_name, port), but was {}", s))
+}
+
 fn parse_debug_level(s: &str) -> Result<DebugLevel, String> {
     match s {
         "none" => Ok(DebugLevel::NONE),
@@ -353,42 +391,83 @@ fn get_service() -> Result<Strong<dyn IVirtualizationService>, Error> {
 }
 
 fn command_check_feature_enabled(feature: &str) {
-    println!(
+    info!(
         "Feature {feature} is {}",
         if avf_features::is_feature_enabled(feature) { "enabled" } else { "disabled" }
     );
 }
 
 fn main() -> Result<(), Error> {
-    env_logger::init();
+    //env_logger::init();
+    android_logger::init_once(
+        android_logger::Config::default()
+            .with_tag("sm_for_hal")
+            .with_max_level(log::LevelFilter::Debug),
+    );
+
     let opt = Opt::parse();
 
     // We need to start the thread pool for Binder to work properly, especially link_to_death.
     ProcessState::start_thread_pool();
 
-    match opt {
+    // TODO: Improve readability.
+    // TODO: Remove unnecessary clone
+    let (vm_services, vm) = match opt {
         Opt::CheckFeatureEnabled { feature } => {
             command_check_feature_enabled(&feature);
-            Ok(())
+            return Ok(());
         }
-        Opt::RunApp { config } => command_run_app(config),
-        Opt::RunMicrodroid { config } => command_run_microdroid(config),
-        Opt::Run { config } => command_run(config),
-        Opt::List => command_list(get_service()?.as_ref()),
-        Opt::Info => command_info(),
+        Opt::List => {
+            return command_list(get_service()?.as_ref());
+        }
+        Opt::Info => {
+            return command_info();
+        }
         Opt::CreatePartition { path, size, partition_type } => {
-            command_create_partition(get_service()?.as_ref(), &path, size, partition_type)
+            return command_create_partition(get_service()?.as_ref(), &path, size, partition_type);
         }
         Opt::CreateIdsig { apk, path } => {
-            command_create_idsig(get_service()?.as_ref(), &apk, &path)
+            return command_create_idsig(get_service()?.as_ref(), &apk, &path);
         }
+        Opt::RunApp { config } => {
+            (config.common.vm_services.clone(), command_run_app(config).unwrap())
+        }
+        Opt::RunMicrodroid { config } => {
+            (config.common.vm_services.clone(), command_run_microdroid(config).unwrap())
+        }
+        Opt::Run { config } => (config.common.vm_services.clone(), command_run(config).unwrap()),
+    };
+
+    if !vm_services.is_empty() {
+        let vm = Arc::new(Mutex::new(vm));
+        for service in vm_services {
+            let accessor = Accessor::new(vm.clone(), service.service_name.clone(), service.port);
+            let accessor_binder = BnAccessor::new_binder(accessor, BinderFeatures::default());
+            binder::register_lazy_service(&service.service_name, accessor_binder.as_binder())
+                .map_err(|e| {
+                    anyhow!(
+                        "Failed to register lazy service, service={}, err={e:?}",
+                        service.service_name
+                    )
+                })?;
+        }
+
+        ProcessState::join_thread_pool();
+
+        Err(anyhow!("Thread pool unexpectedly ended"))
+    } else {
+        // Wait until the VM or VirtualizationService dies. If we just returned immediately then the
+        // IVirtualMachine Binder object would be dropped and the VM would be killed.
+        let death_reason = vm.wait_for_death();
+        info!("VM ended: {:?}", death_reason);
+        Ok(())
     }
 }
 
 /// List the VMs currently running.
 fn command_list(service: &dyn IVirtualizationService) -> Result<(), Error> {
     let vms = service.debugListVms().context("Failed to get list of VMs")?;
-    println!("Running VMs: {:#?}", vms);
+    info!("Running VMs: {:#?}", vms);
     Ok(())
 }
 
@@ -397,34 +476,34 @@ fn command_info() -> Result<(), Error> {
     let non_protected_vm_supported = hypervisor_props::is_vm_supported()?;
     let protected_vm_supported = hypervisor_props::is_protected_vm_supported()?;
     match (non_protected_vm_supported, protected_vm_supported) {
-        (false, false) => println!("VMs are not supported."),
-        (false, true) => println!("Only protected VMs are supported."),
-        (true, false) => println!("Only non-protected VMs are supported."),
-        (true, true) => println!("Both protected and non-protected VMs are supported."),
+        (false, false) => info!("VMs are not supported."),
+        (false, true) => info!("Only protected VMs are supported."),
+        (true, false) => info!("Only non-protected VMs are supported."),
+        (true, true) => info!("Both protected and non-protected VMs are supported."),
     }
 
     if let Some(version) = hypervisor_props::version()? {
-        println!("Hypervisor version: {}", version);
+        info!("Hypervisor version: {}", version);
     } else {
-        println!("Hypervisor version not set.");
+        info!("Hypervisor version not set.");
     }
 
     if Path::new("/dev/kvm").exists() {
-        println!("/dev/kvm exists.");
+        info!("/dev/kvm exists.");
     } else {
-        println!("/dev/kvm does not exist.");
+        info!("/dev/kvm does not exist.");
     }
 
     if Path::new("/dev/vfio/vfio").exists() {
-        println!("/dev/vfio/vfio exists.");
+        info!("/dev/vfio/vfio exists.");
     } else {
-        println!("/dev/vfio/vfio does not exist.");
+        info!("/dev/vfio/vfio does not exist.");
     }
 
     if Path::new("/sys/bus/platform/drivers/vfio-platform").exists() {
-        println!("VFIO-platform is supported.");
+        info!("VFIO-platform is supported.");
     } else {
-        println!("VFIO-platform is not supported.");
+        info!("VFIO-platform is not supported.");
     }
 
     #[derive(Serialize)]
@@ -438,10 +517,10 @@ fn command_info() -> Result<(), Error> {
         .into_iter()
         .map(|device| AssignableDevice { node: device.node, dtbo_label: device.dtbo_label })
         .collect();
-    println!("Assignable devices: {}", serde_json::to_string(&devices)?);
+    info!("Assignable devices: {}", serde_json::to_string(&devices)?);
 
     let os_list = get_service()?.getSupportedOSList()?;
-    println!("Available OS list: {}", serde_json::to_string(&os_list)?);
+    info!("Available OS list: {}", serde_json::to_string(&os_list)?);
 
     Ok(())
 }
