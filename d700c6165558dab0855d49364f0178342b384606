@@ -1,0 +1,62 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7342df5b_1aba1121",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-30T09:24:49Z",
+      "side": 1,
+      "message": "I\u0027m not entirely sure I like the idea of pkvm-specific tests, although I don\u0027t have a better suggestion.",
+      "revId": "d700c6165558dab0855d49364f0178342b384606",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3572e3d5_cc12f6e9",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 833,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-30T09:24:49Z",
+      "side": 1,
+      "message": "Can you extract this as a `isPkvm()` method, probably in MicrodroidHostTestCaseBase ?",
+      "range": {
+        "startLine": 833,
+        "startChar": 12,
+        "endLine": 833,
+        "endChar": 93
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "fa8fbb20_a687e412",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+              "range": {
+                "startLine": 833,
+                "startChar": 0,
+                "endLine": 834,
+                "endChar": 0
+              },
+              "replacement": "        if (isPkvm()) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d700c6165558dab0855d49364f0178342b384606",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
