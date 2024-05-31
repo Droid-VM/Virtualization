@@ -307,11 +307,11 @@ fn validate_apk_public_key<P: AsRef<Path>>(apk_path: P) {
 }
 
 fn public_key_der_from_cert(cert_der: &[u8]) -> Result<Vec<u8>> {
-    let cert = match bssl_crypto::rsa::PublicKey::from_der_subject_public_key_info(verified_signed_data.first_certificate_der()?) {
+    let cert = match bssl_crypto::rsa::PublicKey::from_der_subject_public_key_info(cert_der) {
         Some(pk) => pk,
         _ => return Err(std::fmt::Error.into())
     };
-    Ok(cert.to_der_subject_public_key_info().into())
+    Ok(cert.to_der_subject_public_key_info().as_ref().into())
 }
 
 /// Validates that the following apk_digest are equal:
