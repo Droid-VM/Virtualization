@@ -22,6 +22,30 @@
       },
       "revId": "13a58e4e1b26033c5cc4ace5b4b247ae004bc91f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ced26f3c_634a1c70",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-05-31T08:53:02Z",
+      "side": 1,
+      "message": "I would argue that sometimes it is useful for debugging, particulary when a method (throwing Exception) is calling multiple functions that throw different error types, we can identify which method is the exception coming from",
+      "parentUuid": "bbf2fe02_5abbf3b7",
+      "range": {
+        "startLine": 285,
+        "startChar": 48,
+        "endLine": 285,
+        "endChar": 75
+      },
+      "revId": "13a58e4e1b26033c5cc4ace5b4b247ae004bc91f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
