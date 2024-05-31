@@ -20,7 +20,6 @@ use authfs_fsverity_metadata_bindgen::{
     FSVERITY_SIGNATURE_TYPE_NONE, FSVERITY_SIGNATURE_TYPE_PKCS7, FSVERITY_SIGNATURE_TYPE_RAW,
 };
 
-use openssl::sha::sha256;
 use std::cmp::min;
 use std::ffi::OsString;
 use std::fs::File;
@@ -29,6 +28,7 @@ use std::mem::{size_of, zeroed};
 use std::os::unix::fs::{FileExt, MetadataExt};
 use std::path::{Path, PathBuf};
 use std::slice::from_raw_parts_mut;
+use bssl_crypto::digest::Sha256;
 
 /// Offset of `descriptor` in `struct fsverity_metadatata_header`.
 const DESCRIPTOR_OFFSET: usize = 4;
@@ -96,7 +96,7 @@ pub fn parse_fsverity_metadata(mut metadata_file: File) -> io::Result<Box<FSVeri
 
         // Digest needs to be calculated with the raw value (without changing the endianness).
         let digest = match header.descriptor.hash_algorithm {
-            FSVERITY_HASH_ALG_SHA256 => Ok(sha256(
+            FSVERITY_HASH_ALG_SHA256 => Ok(Sha256::hash(
                 &back_buffer
                     [DESCRIPTOR_OFFSET..DESCRIPTOR_OFFSET + size_of::<fsverity_descriptor>()],
             )
