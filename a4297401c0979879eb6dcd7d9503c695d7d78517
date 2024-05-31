@@ -22,6 +22,30 @@
       },
       "revId": "a4297401c0979879eb6dcd7d9503c695d7d78517",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "424159c0_a73e7212",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-05-31T10:29:19Z",
+      "side": 1,
+      "message": "Alice\u0027s comment was around making it part of `PartialInput`, the primary consumer of which is instance image module, which is different.\n\nIIUC, yours is about encapsulating the hidden input to dice into a structure \u0026 passing it to `write_next_bcc`, which would imply:\n1. either having a wrapper around `write_next_bcc`\n2. or making `make_hidden` public\n3. or moving make_hidden into the caller\n\nThe 3rd would have been pragmatic, since that would mean dice.rs would have just be a pvmfw\u0027s dice module almost replicating the general dice system. But unfortunately, the current code structure does not allow that for ex. `rkp_vm_marker` is field of PartialInput \u0026 the method `write_next_bcc` is a method in `PartialInput`, neither of which make any sense to me.\n\nAnywho, thats for some later refactoring.",
+      "parentUuid": "ac26d49d_e022fea9",
+      "range": {
+        "startLine": 121,
+        "startChar": 8,
+        "endLine": 121,
+        "endChar": 36
+      },
+      "revId": "a4297401c0979879eb6dcd7d9503c695d7d78517",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
