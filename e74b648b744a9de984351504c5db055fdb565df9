@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cbb2685d_309bd7d7",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-05-31T06:12:05Z",
+      "side": 1,
+      "message": "Is there some convenient method to adapt an AIDL enum into java enum class?\n\nOr do I have to do it myself like `@CpuTopology`\n\nI kind of feel like what we do with `@CpuTopology` is anti-pattern, because we are just creating an intermediate representation, which is exactly the same as the underlying type `android.system.virtualizationservice.CpuTopology`. IMO It introduces a lot of boilderplate code, but adds little value (could\u0027ve just lived with using the AIDL enum `android.system.virtualizationservice.CpuTopology` directly).",
+      "parentUuid": "0646cc5e_5bd37cc4",
+      "range": {
+        "startLine": 179,
+        "startChar": 18,
+        "endLine": 179,
+        "endChar": 21
+      },
+      "revId": "e74b648b744a9de984351504c5db055fdb565df9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fc309607_b77a119c",
         "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
         "patchSetId": 5
@@ -37,6 +61,30 @@
       "writtenOn": "2024-05-31T04:13:31Z",
       "side": 1,
       "message": "Why can\u0027t we expose this directly to the callers?",
+      "range": {
+        "startLine": 1104,
+        "startChar": 38,
+        "endLine": 1104,
+        "endChar": 61
+      },
+      "revId": "e74b648b744a9de984351504c5db055fdb565df9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c86f9905_be6e8eed",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1104,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-05-31T06:12:05Z",
+      "side": 1,
+      "message": "you mean move the \"string -\u003e aidl enum\" mapping to the vmlauncher_app?\n\nyeah that makes sense as the APP already takes care of parsing the vm_config.json.",
+      "parentUuid": "fc309607_b77a119c",
       "range": {
         "startLine": 1104,
         "startChar": 38,
