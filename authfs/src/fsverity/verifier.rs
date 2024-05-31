@@ -20,7 +20,7 @@ use std::io;
 use super::common::{build_fsverity_digest, merkle_tree_height, FsverityError, SHA256_HASH_SIZE};
 use crate::common::{divide_roundup, CHUNK_SIZE};
 use crate::file::{ChunkBuffer, ReadByChunk};
-use openssl::sha::{sha256, Sha256};
+use bssl_crypto::digest::Algorithm;
 
 const ZEROS: [u8; CHUNK_SIZE as usize] = [0u8; CHUNK_SIZE as usize];
 
@@ -28,10 +28,10 @@ type HashBuffer = [u8; SHA256_HASH_SIZE];
 
 fn hash_with_padding(chunk: &[u8], pad_to: usize) -> HashBuffer {
     let padding_size = pad_to - chunk.len();
-    let mut ctx = Sha256::new();
+    let mut ctx = bssl_crypto::digest::Sha256::new();
     ctx.update(chunk);
     ctx.update(&ZEROS[..padding_size]);
-    ctx.finish()
+    bssl_crypto::digest::ArraySizedAlgorithm::digest(ctx)
 }
 
 fn verity_check<T: ReadByChunk>(
@@ -138,7 +138,7 @@ impl<F: ReadByChunk, M: ReadByChunk> VerifiedFileReader<F, M> {
                 return Err(FsverityError::InsufficientData(size));
             }
         }
-        let root_hash = sha256(&buf[..]);
+        let root_hash = bssl_crypto::digest::Sha256::hash(&buf[..]);
         if expected_digest == build_fsverity_digest(&root_hash, file_size) {
             // Once verified, use the root_hash for verification going forward.
             Ok(VerifiedFileReader { chunked_file, file_size, merkle_tree, root_hash })
