@@ -23,7 +23,6 @@ use core::fmt;
 use core::mem::size_of;
 use diced_open_dice::DiceMode;
 use diced_open_dice::Hash;
-use diced_open_dice::Hidden;
 use log::trace;
 use uuid::Uuid;
 use virtio_drivers::transport::{pci::bus::PciRoot, DeviceType, Transport};
@@ -264,12 +263,11 @@ impl EntryHeader {
 pub(crate) struct EntryBody {
     pub code_hash: Hash,
     pub auth_hash: Hash,
-    pub salt: Hidden,
     mode: u8,
 }
 
 impl EntryBody {
-    pub(crate) fn new(dice_inputs: &PartialInputs, salt: &Hidden) -> Self {
+    pub(crate) fn new(dice_inputs: &PartialInputs) -> Self {
         let mode = match dice_inputs.mode {
             DiceMode::kDiceModeNotInitialized => 0,
             DiceMode::kDiceModeNormal => 1,
@@ -277,12 +275,7 @@ impl EntryBody {
             DiceMode::kDiceModeMaintenance => 3,
         };
 
-        Self {
-            code_hash: dice_inputs.code_hash,
-            auth_hash: dice_inputs.auth_hash,
-            salt: *salt,
-            mode,
-        }
+        Self { code_hash: dice_inputs.code_hash, auth_hash: dice_inputs.auth_hash, mode }
     }
 
     pub(crate) fn mode(&self) -> DiceMode {
