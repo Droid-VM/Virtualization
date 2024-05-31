@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2f1e9cf_b2f97264",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-05-31T01:13:30Z",
+      "side": 1,
+      "message": "I think the purpose of keeping pkvm-specific tests should be for keeping obtaining minimal test coverage at least for its health. Since it can prevent unexpected breakage of collecting a part of fields like before, even in AOSP.\n\nSo I don\u0027t want the function `isPkvmHypervisor()` being widely used, either.",
+      "parentUuid": "7342df5b_1aba1121",
+      "revId": "d700c6165558dab0855d49364f0178342b384606",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3572e3d5_cc12f6e9",
