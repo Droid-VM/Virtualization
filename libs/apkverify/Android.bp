@@ -54,6 +54,7 @@ rust_test {
         "libbyteorder",
         "liblog_rust",
         "libzip",
+	"libbssl_crypto",
     ],
     data: ["tests/data/*"],
 }
