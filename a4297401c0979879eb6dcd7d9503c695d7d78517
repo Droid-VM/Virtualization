@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac26d49d_e022fea9",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-31T10:07:51Z",
+      "side": 1,
+      "message": "Similarly to Alice\u0027s comment on aosp/3036972, from an OOP design perspective, it might make sense for the caller (`main.rs`) to build the `HiddenInput` instance and pass it to `write_next_bcc` so that it is clear at the call site which parameters contribute to the DICE hidden input.\n\nHowever, this cleanup/refactor shouldn\u0027t block this CL, IMO, and can be addressed as a follow-up.",
+      "range": {
+        "startLine": 121,
+        "startChar": 8,
+        "endLine": 121,
+        "endChar": 36
+      },
+      "revId": "a4297401c0979879eb6dcd7d9503c695d7d78517",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
