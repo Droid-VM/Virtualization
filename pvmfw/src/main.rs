@@ -143,69 +143,59 @@ fn main(
         RebootReason::InternalError
     })?;
 
-    let instance_hash = if cfg!(llpvm_changes) { Some(salt_from_instance_id(fdt)?) } else { None };
     let defer_rollback_protection = should_defer_rollback_protection(fdt)?
         && verified_boot_data.has_capability(Capability::SecretkeeperProtection);
-    let (new_instance, salt) = if defer_rollback_protection {
-        info!("Guest OS is capable of Secretkeeper protection, deferring rollback protection");
+
+    if defer_rollback_protection {
+        info!("Guest OS is capable of Secretkeeper protection, deferring rollback protection")
+    };
+
+    // Is this the first run of the instance? This is only possible to know & arguably useful if
+    // instance.img based approach is used to prevent updates.
+    let mut new_instance = false;
+
+    // On devices that do not support rollback protection, payload needs to be checked
+    // against previous vm run to prevent code change.
+    // The RKP VM is an exception: It is allowed to run if it has passed the verified boot check
+    // and contains the expected version in its AVB footer.
+    // This is possible because of simultaneous update of the pvmfw and RKP VM.
+    // For instance, when both the pvmfw and RKP VM are updated, the code hash of the
+    // RKP VM will differ from the one stored in the instance image. In this case, the
+    // RKP VM is still allowed to run.
+    if defer_rollback_protection || dice_inputs.rkp_vm_marker {
         // rollback_index of the image is used as security_version and is expected to be > 0 to
         // discourage implicit allocation.
         if verified_boot_data.rollback_index == 0 {
             error!("Expected positive rollback_index, found 0");
             return Err(RebootReason::InvalidPayload);
         };
-        // `new_instance` cannot be known to pvmfw
-        (false, instance_hash.unwrap())
     } else {
         let (recorded_entry, mut instance_img, header_index) =
             get_recorded_entry(&mut pci_root, cdi_seal).map_err(|e| {
                 error!("Failed to get entry from instance.img: {e}");
                 RebootReason::InternalError
             })?;
-        let (new_instance, salt) = if let Some(entry) = recorded_entry {
-            maybe_check_dice_measurements_match_entry(&dice_inputs, &entry)?;
-            let salt = instance_hash.unwrap_or(entry.salt);
-            (false, salt)
+        if let Some(entry) = recorded_entry {
+            check_dice_measurements_match_entry(&dice_inputs, &entry)?;
         } else {
             // New instance!
-            let salt = instance_hash.map_or_else(rand::random_array, Ok).map_err(|e| {
-                error!("Failed to generated instance.img salt: {e}");
-                RebootReason::InternalError
-            })?;
-
-            let entry = EntryBody::new(&dice_inputs, &salt);
+            let entry = EntryBody::new(&dice_inputs);
             record_instance_entry(&entry, cdi_seal, &mut instance_img, header_index).map_err(
                 |e| {
                     error!("Failed to get recorded entry in instance.img: {e}");
                     RebootReason::InternalError
                 },
             )?;
-            (true, salt)
+            new_instance = true;
         };
-        (new_instance, salt)
-    };
-    trace!("Got salt for instance: {salt:x?}");
+    }
 
-    let new_bcc_handover = if cfg!(dice_changes) {
-        Cow::Borrowed(current_bcc_handover)
-    } else {
-        // It is possible that the DICE chain we were given is rooted in the UDS. We do not want to
-        // give such a chain to the payload, or even the associated CDIs. So remove the
-        // entire chain we were given and taint the CDIs. Note that the resulting CDIs are
-        // still deterministically derived from those we received, so will vary iff they do.
-        // TODO(b/280405545): Remove this post Android 14.
-        let truncated_bcc_handover = bcc::truncate(bcc_handover).map_err(|e| {
-            error!("{e}");
-            RebootReason::InternalError
-        })?;
-        Cow::Owned(truncated_bcc_handover)
-    };
+    let new_bcc_handover = Cow::Borrowed(current_bcc_handover);
 
     dice_inputs
         .write_next_bcc(
             new_bcc_handover.as_ref(),
-            &salt,
-            instance_hash,
+            instance_id_hash(fdt)?,
             defer_rollback_protection,
             next_bcc,
         )
@@ -244,21 +234,10 @@ fn main(
     Ok(bcc_range)
 }
 
-fn maybe_check_dice_measurements_match_entry(
+fn check_dice_measurements_match_entry(
     dice_inputs: &PartialInputs,
     entry: &EntryBody,
 ) -> Result<(), RebootReason> {
-    // The RKP VM is allowed to run if it has passed the verified boot check and
-    // contains the expected version in its AVB footer.
-    // The comparison below with the previous boot information is skipped to enable the
-    // simultaneous update of the pvmfw and RKP VM.
-    // For instance, when both the pvmfw and RKP VM are updated, the code hash of the
-    // RKP VM will differ from the one stored in the instance image. In this case, the
-    // RKP VM is still allowed to run.
-    // This ensures that the updated RKP VM will retain the same CDIs in the next stage.
-    if dice_inputs.rkp_vm_marker {
-        return Ok(());
-    }
     ensure_dice_measurements_match_entry(dice_inputs, entry).map_err(|e| {
         error!(
             "Dice measurements do not match recorded entry. \
@@ -285,11 +264,11 @@ fn ensure_dice_measurements_match_entry(
     }
 }
 
-// Get the "salt" which is one of the input for DICE derivation.
+// Get the hash of instance_id which is one of the input for DICE derivation.
 // This provides differentiation of secrets for different VM instances with same payloads.
-fn salt_from_instance_id(fdt: &Fdt) -> Result<Hidden, RebootReason> {
+fn instance_id_hash(fdt: &Fdt) -> Result<Hidden, RebootReason> {
     let id = instance_id(fdt)?;
-    let salt = Digester::sha512()
+    let hash = Digester::sha512()
         .digest(&[&b"InstanceId:"[..], id].concat())
         .map_err(|e| {
             error!("Failed to get digest of instance-id: {e}");
@@ -297,7 +276,7 @@ fn salt_from_instance_id(fdt: &Fdt) -> Result<Hidden, RebootReason> {
         })?
         .try_into()
         .map_err(|_| RebootReason::InternalError)?;
-    Ok(salt)
+    Ok(hash)
 }
 
 fn instance_id(fdt: &Fdt) -> Result<&[u8], RebootReason> {
