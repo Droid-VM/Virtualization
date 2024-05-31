@@ -46,6 +46,30 @@
       },
       "revId": "a4297401c0979879eb6dcd7d9503c695d7d78517",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76488464_15fc66e5",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-05-31T10:52:01Z",
+      "side": 1,
+      "message": "Yes option 3. was what I had in mind (kind of); more specifically, exposing the `struct` to the caller (i.e. getting rid of the `make_hidden` method and exposing a constructor instead) and taking a `HiddenInput` in `write_next_bcc`.",
+      "parentUuid": "424159c0_a73e7212",
+      "range": {
+        "startLine": 121,
+        "startChar": 8,
+        "endLine": 121,
+        "endChar": 36
+      },
+      "revId": "a4297401c0979879eb6dcd7d9503c695d7d78517",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
