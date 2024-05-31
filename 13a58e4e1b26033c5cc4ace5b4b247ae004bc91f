@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbf2fe02_5abbf3b7",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-05-31T08:42:39Z",
+      "side": 1,
+      "message": "Nit: In tests we generally just use \"throws Exception\"; nobody cares about the details since any exception just fails the test.",
+      "range": {
+        "startLine": 285,
+        "startChar": 48,
+        "endLine": 285,
+        "endChar": 75
+      },
+      "revId": "13a58e4e1b26033c5cc4ace5b4b247ae004bc91f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
