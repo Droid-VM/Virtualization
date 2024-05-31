@@ -16,6 +16,74 @@
       "message": "Starting the review process for this CL: it removes the rust openssl uses in this module (tests are passing). But I\u0027m leaving it as WIP because it depends on a change to upstream boringssl which still might change (this: https://boringssl-review.googlesource.com/c/boringssl/+/68748)",
       "revId": "a55dc7fdb6820047d625c88762d51df5ba4e92d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56ac1847_181294e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-05-31T19:50:35Z",
+      "side": 1,
+      "message": "Should be fine, probably worth switching `use` decls around to make sure that:\n1. Trait functions that take `\u0026self` are called through `.foo()` syntax unless there\u0027s a good reason not to\n2. `bssl_crypto` shouldn\u0027t be in the code all over the place, we should just import the relevant concepts.",
+      "revId": "a55dc7fdb6820047d625c88762d51df5ba4e92d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12e3ed71_9ffa9cae",
+        "filename": "authfs/src/fsverity/builder.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-05-31T19:50:35Z",
+      "side": 1,
+      "message": "Perhaps you should import `Sha256` and `ArraySizedAlgorithm` as well?",
+      "revId": "a55dc7fdb6820047d625c88762d51df5ba4e92d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42817514_34509ea3",
+        "filename": "authfs/src/fsverity/builder.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-05-31T19:50:35Z",
+      "side": 1,
+      "message": "This line would then be unchanged.",
+      "revId": "a55dc7fdb6820047d625c88762d51df5ba4e92d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1781df2c_04fad285",
+        "filename": "authfs/src/fsverity/builder.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-05-31T19:50:35Z",
+      "side": 1,
+      "message": "This can be `ctx.digest()` with the extra import",
+      "revId": "a55dc7fdb6820047d625c88762d51df5ba4e92d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
