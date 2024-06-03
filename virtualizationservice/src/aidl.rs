@@ -36,7 +36,6 @@ use lazy_static::lazy_static;
 use libc::VMADDR_CID_HOST;
 use log::{error, info, warn};
 use nix::unistd::{chown, Uid};
-use openssl::x509::X509;
 use rand::Fill;
 use rkpd_client::get_rkpd_attestation_key;
 use rustutils::{
@@ -73,6 +72,7 @@ use virtualizationservice_internal::{
 };
 use virtualmachineservice::IVirtualMachineService::VM_TOMBSTONES_SERVICE_PORT;
 use vsock::{VsockListener, VsockStream};
+use bssl_crypto::ecdsa::PublicKey;
 
 /// The unique ID of a VM used (together with a port number) for vsock communication.
 pub type Cid = u32;
@@ -587,8 +587,13 @@ fn get_assignable_devices() -> binder::Result<Devices> {
 fn split_x509_certificate_chain(mut cert_chain: &[u8]) -> Result<Vec<Certificate>> {
     let mut out = Vec::new();
     while !cert_chain.is_empty() {
-        let cert = X509::from_der(cert_chain)?;
-        let end = cert.to_der()?.len();
+        let cert = match PublicKey::<bssl_crypto::ec::P256>::from_der_subject_public_key_info(
+            cert_chain
+        ) {
+            Some(pk) => pk,
+            _ => return Err(std::fmt::Error.into()),
+        };
+        let end = cert.to_der_subject_public_key_info().as_ref().len();
         out.push(Certificate { encodedCertificate: cert_chain[..end].to_vec() });
         cert_chain = &cert_chain[end..];
     }
@@ -896,8 +901,11 @@ mod tests {
 
         assert_eq!(4, cert_chain.len());
         for cert in cert_chain {
-            let x509_cert = X509::from_der(&cert.encodedCertificate)?;
-            assert_eq!(x509_cert.to_der()?.len(), cert.encodedCertificate.len());
+            let x509_cert = PublicKey::<bssl_crypto::ec::P256>::from_der_subject_public_key_info(
+                &cert.encodedCertificate
+            ).unwrap();
+            assert_eq!(x509_cert.to_der_subject_public_key_info().as_ref().len(),
+                        cert.encodedCertificate.len());
         }
         Ok(())
     }
