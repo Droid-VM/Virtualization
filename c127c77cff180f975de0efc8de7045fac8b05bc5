@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c1b4a03f_73df4838",
+        "filename": "tests/testapk/AndroidManifestV5.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-03T09:48:36Z",
+      "side": 1,
+      "message": "We want to check that a VM can be updated from version 5 to version 6 while retaining access to its secret (that\u0027s the updatable VM feature), and that it can\u0027t be downgraded from version 6 to version 5.\n\nSee e.g. https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java?q\u003dsymbol%3A%5Cbcom.android.microdroid.test.MicrodroidHostTests.UpgradedPackageIsAcceptedWithSecretkeeper%5Cb%20case%3Ayes\n\nThe 2 manifests should be identical except for version. There\u0027s probably a neater way to achieve that with manifest merging.",
+      "parentUuid": "ba4dce72_25b15e82",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 66
+      },
+      "revId": "c127c77cff180f975de0efc8de7045fac8b05bc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b926174_06bfa137",
         "filename": "tests/testapk/AndroidManifestV6.xml",
         "patchSetId": 6
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "Tried to write a test, but blocked with the error below.\n\n`Permission android.permission.INTERNET requested by package com.android.microdroid.test is not a changeable permission type`",
       "parentUuid": "6b926174_06bfa137",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 66
+      },
+      "revId": "c127c77cff180f975de0efc8de7045fac8b05bc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f30785d_d1b7f5b7",
+        "filename": "tests/testapk/AndroidManifestV6.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-03T09:48:36Z",
+      "side": 1,
+      "message": "You might need a separate app without the permission.",
+      "parentUuid": "d79f0e9c_dedd71fe",
       "range": {
         "startLine": 21,
         "startChar": 0,
