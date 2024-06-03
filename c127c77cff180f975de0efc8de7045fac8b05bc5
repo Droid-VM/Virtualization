@@ -73,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba4dce72_25b15e82",
+        "filename": "tests/testapk/AndroidManifestV5.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-03T02:16:47Z",
+      "side": 1,
+      "message": "@shikhapanwar@google.com Could I know the purpose of separating `AndroidManifest.xml` for `MicrodroidTestApp`? I wonder how `AndroidManifestV5.xml` is being used nowadays.",
+      "parentUuid": "8622d0fd_cb07517c",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 66
+      },
+      "revId": "c127c77cff180f975de0efc8de7045fac8b05bc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b926174_06bfa137",
         "filename": "tests/testapk/AndroidManifestV6.xml",
         "patchSetId": 6
@@ -84,6 +108,30 @@
       "writtenOn": "2024-06-03T00:53:57Z",
       "side": 1,
       "message": "TODO: Make a test for INTERNET configuration, and change as explicitly granting this permission.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 66
+      },
+      "revId": "c127c77cff180f975de0efc8de7045fac8b05bc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d79f0e9c_dedd71fe",
+        "filename": "tests/testapk/AndroidManifestV6.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-03T02:16:47Z",
+      "side": 1,
+      "message": "Tried to write a test, but blocked with the error below.\n\n`Permission android.permission.INTERNET requested by package com.android.microdroid.test is not a changeable permission type`",
+      "parentUuid": "6b926174_06bfa137",
       "range": {
         "startLine": 21,
         "startChar": 0,
