@@ -10,3 +10,10 @@ flag {
   is_fixed_read_only: true
 }
 
+flag {
+  name: "avf_network"
+  namespace: "virtualization"
+  description: "Flag for enabling network features in AVF"
+  bug: "325929096"
+  is_fixed_read_only: true
+}
