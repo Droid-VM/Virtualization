@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd37953f_a73f2b65",
+        "filename": "java/framework/api/system-current.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-04T01:58:00Z",
+      "side": 1,
+      "message": "Acknowledged. I should introduce a new flag for this then.",
+      "parentUuid": "4071cb0f_58de7e18",
+      "range": {
+        "startLine": 67,
+        "startChar": 64,
+        "endLine": 67,
+        "endChar": 79
+      },
+      "revId": "c127c77cff180f975de0efc8de7045fac8b05bc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8622d0fd_cb07517c",
         "filename": "tests/testapk/AndroidManifestV5.xml",
         "patchSetId": 6
@@ -133,6 +157,30 @@
       "side": 1,
       "message": "We want to check that a VM can be updated from version 5 to version 6 while retaining access to its secret (that\u0027s the updatable VM feature), and that it can\u0027t be downgraded from version 6 to version 5.\n\nSee e.g. https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java?q\u003dsymbol%3A%5Cbcom.android.microdroid.test.MicrodroidHostTests.UpgradedPackageIsAcceptedWithSecretkeeper%5Cb%20case%3Ayes\n\nThe 2 manifests should be identical except for version. There\u0027s probably a neater way to achieve that with manifest merging.",
       "parentUuid": "ba4dce72_25b15e82",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 66
+      },
+      "revId": "c127c77cff180f975de0efc8de7045fac8b05bc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a3e1909_27774e63",
+        "filename": "tests/testapk/AndroidManifestV5.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-04T01:58:00Z",
+      "side": 1,
+      "message": "I understood the reason why we\u0027ve introduced 2 version. Thanks! I should edit both to keep the same contents inside, except the versionCode :)",
+      "parentUuid": "c1b4a03f_73df4838",
       "range": {
         "startLine": 21,
         "startChar": 0,
@@ -204,6 +252,30 @@
       "side": 1,
       "message": "You might need a separate app without the permission.",
       "parentUuid": "d79f0e9c_dedd71fe",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 66
+      },
+      "revId": "c127c77cff180f975de0efc8de7045fac8b05bc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfe4e742_ddf65c0d",
+        "filename": "tests/testapk/AndroidManifestV6.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-04T01:58:00Z",
+      "side": 1,
+      "message": "Marking this as unresolved again.",
+      "parentUuid": "4f30785d_d1b7f5b7",
       "range": {
         "startLine": 21,
         "startChar": 0,

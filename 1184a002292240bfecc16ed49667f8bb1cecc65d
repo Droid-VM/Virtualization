@@ -22,6 +22,30 @@
       },
       "revId": "1184a002292240bfecc16ed49667f8bb1cecc65d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62b8c11a_0532f247",
+        "filename": "java/framework/api/system-current.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-04T01:58:00Z",
+      "side": 1,
+      "message": "Nothing changed, and I remember the previous conclusion is making `isNetworkSupported` and `setNetworkSupported` as hidden API. Current setting is just for the initial draft to write a code with testing.\n\nBut to do so, we cannot use those APIs for constructing a test in `MicrodroidTests` without `@TestApi`.\nAnd I believe we would need to expose this as `@SystemApi` to use Java API in `VmLauncherApp`, which is running ferrochrome on top of our Java API nowadays.\n\nI also had a doubt about API expose and flagging while writing draft code, so I want to check again which one is proper. But, hidden API(neither `@SystemApi` nor `@TestApi`) is not a good choice, since we lose the chance to test.",
+      "parentUuid": "0da859ce_657d4dd6",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 118
+      },
+      "revId": "1184a002292240bfecc16ed49667f8bb1cecc65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
