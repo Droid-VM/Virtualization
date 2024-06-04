@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd647e9b_0f706923",
+        "filename": "vm/src/accessor.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-06-04T14:21:10Z",
+      "side": 1,
+      "message": "What about making `VmInstance` static so that its lifetime will be tied to the process executing this binary itself?",
+      "range": {
+        "startLine": 28,
+        "startChar": 4,
+        "endLine": 30,
+        "endChar": 31
+      },
+      "revId": "58ade7eb6956ccc8f0c75fcd4bfa30d5da2ee198",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
