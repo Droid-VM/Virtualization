@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0da9591a_fb0365ad",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-06-04T14:31:27Z",
+      "side": 1,
+      "message": "Don\u0027t we already have a build time flag for this feature (https://cs.android.com/android/platform/superproject/main/+/main:build/release/flag_declarations/RELEASE_AVF_ENABLE_NETWORK.textproto;l\u003d1;drc\u003d0158d04678a9b7bbb971214d77e299e9a1219043)? We should use instead of creating a separate aconfig flag (e.g. `@FlaggedApi(\"RELEASE_AVF_ENABLE_NETWORK\")`. Maintaining 2 different flags will become a problem.",
+      "range": {
+        "startLine": 593,
+        "startChar": 16,
+        "endLine": 593,
+        "endChar": 38
+      },
+      "revId": "008bd5cdb9162d86bce3790f91cb6f0dd17790bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b08845c5_0b28d7b6",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 1236,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-06-04T14:31:27Z",
+      "side": 1,
+      "message": "ditto on RELEASE_AVF_ENABLE_NETWORK",
+      "range": {
+        "startLine": 1236,
+        "startChar": 0,
+        "endLine": 1236,
+        "endChar": 43
+      },
+      "revId": "008bd5cdb9162d86bce3790f91cb6f0dd17790bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec1b72fe_c8002bae",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 1241,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-06-04T14:31:27Z",
+      "side": 1,
+      "message": "Who enforces this permission?",
+      "range": {
+        "startLine": 1240,
+        "startChar": 18,
+        "endLine": 1241,
+        "endChar": 18
+      },
+      "revId": "008bd5cdb9162d86bce3790f91cb6f0dd17790bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

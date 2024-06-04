@@ -46,6 +46,30 @@
       },
       "revId": "1184a002292240bfecc16ed49667f8bb1cecc65d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48b0ee23_168c3de5",
+        "filename": "java/framework/api/system-current.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-06-04T14:31:27Z",
+      "side": 1,
+      "message": "\u003e And I believe we would need to expose this as @SystemApi to use Java API in VmLauncherApp, which is running ferrochrome on top of our Java API nowadays.\n\nWhy? VmLauncherApp is part of the com.android.virt APEX, it can use the hidden APIs provided by the virt APEX.\n\nWe should only expose something as @SystemApi if we are sure that updatable components (mainline modules or 1p apps) need the functionality. It doesn\u0027t look to be the case here. Adding @TestApi is fine.",
+      "parentUuid": "62b8c11a_0532f247",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 118
+      },
+      "revId": "1184a002292240bfecc16ed49667f8bb1cecc65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
