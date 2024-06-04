@@ -22,6 +22,30 @@
       },
       "revId": "795e7409b004c36ddfa1cb0cd00c399017a6e442",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddba3651_07c5304b",
+        "filename": "virtualizationservice/src/maintenance.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-06-04T13:35:05Z",
+      "side": 1,
+      "message": "No, I think it\u0027s just an accidental copy-paste from the equivalent test in vmdb.rs (from aosp/3004067) which does do an overwrite.",
+      "parentUuid": "ae2a3846_b918d44a",
+      "range": {
+        "startLine": 416,
+        "startChar": 73,
+        "endLine": 416,
+        "endChar": 92
+      },
+      "revId": "795e7409b004c36ddfa1cb0cd00c399017a6e442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
