@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "27bfb127_c6e73a38",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-06-04T15:10:20Z",
+      "side": 1,
+      "message": "This skip should only take place behind the instance image migration to instance ID flag.\n\nThe logic of the code here is that we don\u0027t need to read instance image anymore when instance ID is in use. The DICE hidden will be derived from instance ID and RKP VM marker, the current read of instance.img is unnecessary.",
+      "parentUuid": "fcdd3922_ae2eca86",
+      "range": {
+        "startLine": 9,
+        "startChar": 57,
+        "endLine": 10,
+        "endChar": 11
+      },
+      "revId": "d5fccbf51354934267f26bb78507b66a96cc1bbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "457935f0_0022f4c9",
         "filename": "/COMMIT_MSG",
         "patchSetId": 6
@@ -178,6 +202,30 @@
       "writtenOn": "2024-06-04T14:24:22Z",
       "side": 1,
       "message": "So, basically, we skip the rollback protection performed using the instance.img if the guest either supports deferred RBP or has a hardcoded RBP in pvmfw.\n\nTo avoid duplicating the validation of `verified_boot_data.rollback_index` (which must already be non-zero for RKP VM, at this point) and to prefer self-documenting code over long comments, would you mind introducing another local flag:\n```\nlet rollback_protection_done \u003d dice_inputs.rkp_vm_marker;\n```\nallowing, here:\n```\nif defer_rollback_protection {\n    if verified_boot_data.rollback_index \u003d\u003d 0 { ... }\n} else if !rollback_protection_done {\n    let (recorded_entry, mut instance_img, header_index) \u003d ...;\n    ...\n}\n```\n?",
+      "range": {
+        "startLine": 165,
+        "startChar": 4,
+        "endLine": 165,
+        "endChar": 32
+      },
+      "revId": "d5fccbf51354934267f26bb78507b66a96cc1bbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "443ab56f_7c246b4a",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-06-04T15:10:20Z",
+      "side": 1,
+      "message": "+1 use a local flag like `rollback_protection_done`. You can set the flag to true after line 131 immediately after the RKP VM rollback index validation to make this more clear.\n\nI don\u0027t think this part of code should special-case RKP VM too much.",
+      "parentUuid": "e9855def_1a0583d1",
       "range": {
         "startLine": 165,
         "startChar": 4,
