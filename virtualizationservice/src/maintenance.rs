@@ -90,14 +90,15 @@ impl State {
         self.get_inner()?.delete_ids_for_app(user_id, app_id)
     }
 
-    /// Delete the provided VM IDs from both Secretkeeper and the database.
-    pub fn delete_ids(&mut self, vm_ids: &[VmId]) {
+    /// Delete the provided VM ID associated with `(user_id, app_id)` from both Secretkeeper and
+    /// the database.
+    pub fn delete_id(&mut self, vm_id: &VmId, user_id: u32, app_id: u32) {
         let Ok(inner) = self.get_inner() else {
             warn!("No Secretkeeper available, not deleting secrets");
             return;
         };
 
-        inner.delete_ids(vm_ids)
+        inner.delete_id_for_app(vm_id, user_id, app_id)
     }
 
     /// Perform reconciliation to allow for possibly missed notifications of user or app removal.
@@ -155,6 +156,14 @@ impl InnerState {
             self.delete_ids(&old_vm_ids);
         }
         self.vm_id_db.add_vm_id(vm_id, user_id, app_id)
+    }
+
+    fn delete_id_for_app(&mut self, vm_id: &VmId, user_id: u32, app_id: u32) {
+        if !self.vm_id_db.is_vm_id_for_app(vm_id, user_id, app_id).unwrap_or(false) {
+            info!("delete_id_for_app - no such id");
+            return;
+        }
+        self.delete_ids(&[*vm_id])
     }
 
     fn delete_ids_for_user(&mut self, user_id: i32) -> Result<()> {
