@@ -64,6 +64,7 @@ package android.system.virtualmachine {
     method @Nullable public String getPayloadBinaryName();
     method public boolean isCompatibleWith(@NonNull android.system.virtualmachine.VirtualMachineConfig);
     method public boolean isEncryptedStorageEnabled();
+    method @FlaggedApi("com.android.system.virtualmachine.flags.avf_network") public boolean isNetworkSupported();
     method public boolean isProtectedVm();
     method public boolean isVmOutputCaptured();
     field public static final int CPU_TOPOLOGY_MATCH_HOST = 1; // 0x1
@@ -80,6 +81,7 @@ package android.system.virtualmachine {
     method @NonNull public android.system.virtualmachine.VirtualMachineConfig.Builder setDebugLevel(int);
     method @NonNull public android.system.virtualmachine.VirtualMachineConfig.Builder setEncryptedStorageBytes(@IntRange(from=1) long);
     method @NonNull public android.system.virtualmachine.VirtualMachineConfig.Builder setMemoryBytes(@IntRange(from=1) long);
+    method @FlaggedApi("com.android.system.virtualmachine.flags.avf_network") @NonNull @RequiresPermission(allOf={android.system.virtualmachine.VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION, android.Manifest.permission.INTERNET}) public android.system.virtualmachine.VirtualMachineConfig.Builder setNetworkSupported(boolean);
     method @NonNull public android.system.virtualmachine.VirtualMachineConfig.Builder setPayloadBinaryName(@NonNull String);
     method @NonNull public android.system.virtualmachine.VirtualMachineConfig.Builder setProtectedVm(boolean);
     method @NonNull public android.system.virtualmachine.VirtualMachineConfig.Builder setVmOutputCaptured(boolean);

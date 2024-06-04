@@ -2289,6 +2289,58 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         }
     }
 
+    private VirtualMachineConfig buildVmConfigWithNetworkSupported() throws Exception {
+        return buildVmConfigWithNetworkSupported("MicrodroidTestNativeLib.so");
+    }
+
+    private VirtualMachineConfig buildVmConfigWithNetworkSupported(String binaryPath)
+            throws Exception {
+        assumeFeatureEnabled(VirtualMachineManager.FEATURE_NETWORK);
+        VirtualMachineConfig config =
+                newVmConfigBuilderWithPayloadBinary(binaryPath)
+                        .setNetworkSupported(true)
+                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .build();
+        grantPermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
+        return config;
+    }
+
+    @Test
+    public void configuringNetworkSupportedRequiresCustomPermission() throws Exception {
+        VirtualMachineConfig config = buildVmConfigWithNetworkSupported();
+        revokePermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
+
+        VirtualMachine vm =
+                forceCreateNewVirtualMachine(
+                        "test_network_supported_req_custom_permission", config);
+        SecurityException e =
+                assertThrows(
+                        SecurityException.class, () -> runVmTestService(TAG, vm, (ts, tr) -> {}));
+        assertThat(e)
+                .hasMessageThat()
+                .contains("android.permission.USE_CUSTOM_VIRTUAL_MACHINE permission");
+    }
+
+    @Test
+    public void bootsWithNetworkSupportedForNonPvm() throws Exception {
+        assumeNonProtectedVM();
+        VirtualMachineConfig config = buildVmConfigWithNetworkSupported();
+
+        VirtualMachine vm =
+                forceCreateNewVirtualMachine("test_boot_with_network_supported_non_pvm", config);
+        runVmTestService(TAG, vm, (ts, tr) -> {}).assertNoException();
+    }
+
+    @Test
+    public void creationFailsWithNetworkSupportedForPvm() throws Exception {
+        assumeProtectedVM();
+        VirtualMachineConfig config = buildVmConfigWithNetworkSupported();
+
+        VirtualMachine vm =
+                forceCreateNewVirtualMachine("test_boot_with_network_supported_pvm", config);
+        assertThrows(UnsupportedOperationException.class, () -> vm.run());
+    }
+
     private VirtualMachineConfig buildVmConfigWithVendor(File vendorDiskImage) throws Exception {
         return buildVmConfigWithVendor(vendorDiskImage, "MicrodroidTestNativeLib.so");
     }
