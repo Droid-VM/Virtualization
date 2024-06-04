@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c36cdc1b_70c09ffc",
+        "filename": "apex/virtualizationservice.rc.base",
+        "patchSetId": 11
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-06-04T16:27:19Z",
+      "side": 1,
+      "message": "This is obviously wrong, but none of following worked:\n  - `android.os.IAccessor/vm_foo_default`\n  - `com.android.virt.vm_attestation.testservice.IAttestationService/default`\n  \nRelevant logs:\n\n```\n06-05 01:23:44.729   490   490 W servicemanager: aaaaa A service is being accessed through an accessor: com.android.virt.vm_attestation.testservice.IAttestationService/default:android.os.IAccessor/vm_foo_default\n06-05 01:23:44.731   490   490 I servicemanager: Caller(pid\u003d3870,uid\u003d0,sid\u003du:r:su:s0) Since \u0027android.os.IAccessor/vm_foo_default\u0027 could not be found trying to start it as a lazy AIDL service. (if it\u0027s not configured to be a lazy service, it may be stuck starting or still starting).\n06-05 01:23:44.477  3870  3873 E ServiceManagerCppClient: Invalid accessor in Service#accessor\n06-05 01:23:44.478  3870  3873 W ServiceManagerCppClient: Failed to getService in waitForService for com.android.virt.vm_attestation.testservice.IAttestationService/default: Status(-4, EX_NULL_POINTER): \u0027\u0027\n06-05 01:23:44.478  3870  3873 W ServiceManagerCppClient: Got service, but may be racey because we could not wait efficiently for it. Threadpool has 0 guaranteed threads. Is the threadpool configured properly? See ProcessState::startThreadPool and ProcessState::setThreadPoolMaxThreadCount.\n```",
+      "range": {
+        "startLine": 19,
+        "startChar": 19,
+        "endLine": 19,
+        "endChar": 47
+      },
+      "revId": "27000e5e275ea825bf3532258cb95d85afafeea7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
