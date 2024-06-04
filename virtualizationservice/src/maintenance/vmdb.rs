@@ -272,6 +272,21 @@ impl VmIdDb {
         Ok(vm_ids)
     }
 
+    /// Determine whether the specified VM ID is associated with `(user_id, app_id)`. Returns false
+    /// if there is no such VM ID, or it exists but is not associated.
+    pub fn is_vm_id_for_app(&mut self, vm_id: &VmId, user_id: u32, app_id: u32) -> Result<bool> {
+        let mut stmt = self
+            .conn
+            .prepare(
+                "SELECT COUNT(*) FROM main.vmids \
+                        WHERE vm_id = ? AND user_id = ? AND app_id = ?;",
+            )
+            .context("failed to prepare SELECT stmt")?;
+        stmt.query_row(params![vm_id, user_id, app_id], |row| row.get(0))
+            .context("query failed")
+            .map(|n: usize| n != 0)
+    }
+
     /// Determine the number of VM IDs associated with `(user_id, app_id)`.
     pub fn count_vm_ids_for_app(&mut self, user_id: i32, app_id: i32) -> Result<usize> {
         let mut stmt = self
