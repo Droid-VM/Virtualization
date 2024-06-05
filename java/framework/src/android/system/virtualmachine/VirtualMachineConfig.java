@@ -722,6 +722,10 @@ public final class VirtualMachineConfig {
         config.devices = EMPTY_STRING_ARRAY;
         config.networkSupported = this.mNetworkSupported;
         config.platformVersion = "~1.0";
+        config.audioConfig =
+                Optional.ofNullable(customImageConfig.getAudioConfig())
+                        .map(ac -> ac.toParcelable())
+                        .orElse(null);
         return config;
     }
 
