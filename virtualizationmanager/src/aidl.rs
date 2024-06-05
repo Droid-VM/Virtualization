@@ -17,7 +17,7 @@
 use crate::{get_calling_pid, get_calling_uid, get_this_pid};
 use crate::atom::{write_vm_booted_stats, write_vm_creation_stats};
 use crate::composite::make_composite_image;
-use crate::crosvm::{CrosvmConfig, DiskFile, DisplayConfig, InputDeviceOption, PayloadState, VmContext, VmInstance, VmState};
+use crate::crosvm::{AudioConfig, CrosvmConfig, DiskFile, DisplayConfig, InputDeviceOption, PayloadState, VmContext, VmInstance, VmState};
 use crate::debug_config::DebugConfig;
 use crate::dt_overlay::{create_device_tree_overlay, VM_DT_OVERLAY_MAX_SIZE, VM_DT_OVERLAY_PATH};
 use crate::payload::{add_microdroid_payload_images, add_microdroid_system_images, add_microdroid_vendor_image};
@@ -624,8 +624,17 @@ impl VirtualizationService {
         } else {
             None
         };
-        let virtio_snd_backend =
-            if cfg!(paravirtualized_devices) { Some(String::from("aaudio")) } else { None };
+
+        let audio_config = if cfg!(paravirtualized_devices) {
+            config
+                .audioConfig
+                .as_ref()
+                .map(AudioConfig::new)
+                .transpose()
+                .or_binder_exception(ExceptionCode::ILLEGAL_ARGUMENT)?
+        } else {
+            None
+        };
 
         // Actually start the VM.
         let crosvm_config = CrosvmConfig {
@@ -656,8 +665,8 @@ impl VirtualizationService {
             input_device_options,
             hugepages: config.hugePages,
             tap,
-            virtio_snd_backend,
             console_input_device: config.consoleInputDevice.clone(),
+            audio_config,
         };
         let instance = Arc::new(
             VmInstance::new(
