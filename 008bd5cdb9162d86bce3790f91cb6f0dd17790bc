@@ -116,6 +116,30 @@
       },
       "revId": "008bd5cdb9162d86bce3790f91cb6f0dd17790bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54b19a98_1d7ea179",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 1241,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-05T05:30:59Z",
+      "side": 1,
+      "message": "In my own investigation, creating socket requires android.permission.INTERNET. vmnic is okay, since we granted net_admin to execute ioctl TUNSETIFF, but not for crosvm.\n\nhttps://source.corp.google.com/h/android/platform/superproject/main/+/main:packages/modules/Permission/tests/cts/permissionpolicy/res/raw/android_manifest.xml;l\u003d1969-1975\n\nBut anyway, I think we need to check `android.permission.INTERNET`. Should we check in virtmgr as well? I\u0027ll work that in advance.",
+      "parentUuid": "ec1b72fe_c8002bae",
+      "range": {
+        "startLine": 1240,
+        "startChar": 18,
+        "endLine": 1241,
+        "endChar": 18
+      },
+      "revId": "008bd5cdb9162d86bce3790f91cb6f0dd17790bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
