@@ -45,6 +45,7 @@ use android_system_virtualizationcommon::aidl::android::system::virtualizationco
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
     MemoryTrimLevel::MemoryTrimLevel,
     VirtualMachineAppConfig::DebugLevel::DebugLevel,
+    AudioDevice::AudioDevice as AudioDeviceParcelable,
     DisplayConfig::DisplayConfig as DisplayConfigParcelable,
 };
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IGlobalVmContext::IGlobalVmContext;
@@ -129,8 +130,19 @@ pub struct CrosvmConfig {
     pub input_device_options: Vec<InputDeviceOption>,
     pub hugepages: bool,
     pub tap: Option<File>,
-    pub virtio_snd_backend: Option<String>,
     pub console_input_device: Option<String>,
+    pub virtio_snd: Option<String>,
+}
+
+#[derive(Debug)]
+pub struct AudioDevice {
+    pub use_microphone: bool,
+}
+
+impl AudioDevice {
+    pub fn new(raw_audiodevice: &AudioDeviceParcelable) -> Result<AudioDevice> {
+        Ok(AudioDevice { use_microphone: raw_audiodevice.useMicrophone })
+    }
 }
 
 #[derive(Debug)]
@@ -1048,8 +1060,8 @@ fn run_vm(
     command.preserved_fds(preserved_fds);
 
     if cfg!(paravirtualized_devices) {
-        if let Some(virtio_snd_backend) = &config.virtio_snd_backend {
-            command.arg("--virtio-snd").arg(format!("backend={}", virtio_snd_backend));
+        if let Some(virtio_snd) = &config.virtio_snd {
+            command.arg("--virtio-snd").arg(virtio_snd);
         }
     }
 

@@ -15,6 +15,7 @@
  */
 package android.system.virtualizationservice;
 
+import android.system.virtualizationservice.AudioDevice;
 import android.system.virtualizationservice.CpuTopology;
 import android.system.virtualizationservice.DiskImage;
 import android.system.virtualizationservice.DisplayConfig;
@@ -91,4 +92,6 @@ parcelable VirtualMachineRawConfig {
 
     /** The serial device for VM console input. */
     @nullable @utf8InCpp String consoleInputDevice;
+
+    @nullable AudioDevice audioDevice;
 }

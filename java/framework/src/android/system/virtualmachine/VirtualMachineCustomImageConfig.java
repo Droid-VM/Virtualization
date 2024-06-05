@@ -36,6 +36,7 @@ public class VirtualMachineCustomImageConfig {
     private static final String KEY_TOUCH = "touch";
     private static final String KEY_KEYBOARD = "keyboard";
     private static final String KEY_MOUSE = "mouse";
+    private static final String KEY_AUDIO_DEVICE = "audio_device";
 
     @Nullable private final String name;
     @Nullable private final String kernelPath;
@@ -44,6 +45,7 @@ public class VirtualMachineCustomImageConfig {
     @Nullable private final String[] params;
     @Nullable private final Disk[] disks;
     @Nullable private final DisplayConfig displayConfig;
+    @Nullable private final AudioDevice audioDevice;
     private final boolean touch;
     private final boolean keyboard;
     private final boolean mouse;
@@ -101,7 +103,8 @@ public class VirtualMachineCustomImageConfig {
             DisplayConfig displayConfig,
             boolean touch,
             boolean keyboard,
-            boolean mouse) {
+            boolean mouse,
+            AudioDevice audioDevice) {
         this.name = name;
         this.kernelPath = kernelPath;
         this.initrdPath = initrdPath;
@@ -112,6 +115,7 @@ public class VirtualMachineCustomImageConfig {
         this.touch = touch;
         this.keyboard = keyboard;
         this.mouse = mouse;
+        this.audioDevice = audioDevice;
     }
 
     static VirtualMachineCustomImageConfig from(PersistableBundle customImageConfigBundle) {
@@ -142,6 +146,9 @@ public class VirtualMachineCustomImageConfig {
         builder.useTouch(customImageConfigBundle.getBoolean(KEY_TOUCH));
         builder.useKeyboard(customImageConfigBundle.getBoolean(KEY_KEYBOARD));
         builder.useMouse(customImageConfigBundle.getBoolean(KEY_MOUSE));
+        PersistableBundle audioDeicePb =
+                customImageConfigBundle.getPersistableBundle(KEY_AUDIO_DEVICE);
+        builder.setAudioDevice(AudioDevice.from(audioDeicePb));
         return builder.build();
     }
 
@@ -173,7 +180,15 @@ public class VirtualMachineCustomImageConfig {
         pb.putBoolean(KEY_TOUCH, touch);
         pb.putBoolean(KEY_KEYBOARD, keyboard);
         pb.putBoolean(KEY_MOUSE, mouse);
+        pb.putPersistableBundle(
+                KEY_AUDIO_DEVICE,
+                Optional.ofNullable(audioDevice).map(ad -> ad.toPersistableBundle()).orElse(null));
         return pb;
+    }
+
+    @Nullable
+    public AudioDevice getAudioDevice() {
+        return audioDevice;
     }
 
     @Nullable
@@ -220,6 +235,7 @@ public class VirtualMachineCustomImageConfig {
         private String bootloaderPath;
         private List<String> params = new ArrayList<>();
         private List<Disk> disks = new ArrayList<>();
+        private AudioDevice audioDevice;
         private DisplayConfig displayConfig;
         private boolean touch;
         private boolean keyboard;
@@ -289,6 +305,12 @@ public class VirtualMachineCustomImageConfig {
         }
 
         /** @hide */
+        public Builder setAudioDevice(AudioDevice audioDevice) {
+            this.audioDevice = audioDevice;
+            return this;
+        }
+
+        /** @hide */
         public VirtualMachineCustomImageConfig build() {
             return new VirtualMachineCustomImageConfig(
                     this.name,
@@ -300,7 +322,65 @@ public class VirtualMachineCustomImageConfig {
                     displayConfig,
                     touch,
                     keyboard,
-                    mouse);
+                    mouse,
+                    audioDevice);
+        }
+    }
+
+    /** @hide */
+    public static final class AudioDevice {
+        private static final String KEY_USE_MICROPHONE = "use_microphone";
+        private final boolean useMicrophone;
+
+        private AudioDevice(boolean useMicrophone) {
+            this.useMicrophone = useMicrophone;
+        }
+
+        /** @hide */
+        public boolean getUseMicrophone() {
+            return useMicrophone;
+        }
+
+        android.system.virtualizationservice.AudioDevice toParcelable() {
+            android.system.virtualizationservice.AudioDevice parcelable =
+                    new android.system.virtualizationservice.AudioDevice();
+            parcelable.useMicrophone = this.useMicrophone;
+
+            return parcelable;
+        }
+
+        private static AudioDevice from(PersistableBundle pb) {
+            if (pb == null) {
+                return null;
+            }
+            Builder builder = new Builder();
+            builder.setUseMicrophone(pb.getBoolean(KEY_USE_MICROPHONE));
+            return builder.build();
+        }
+
+        private PersistableBundle toPersistableBundle() {
+            PersistableBundle pb = new PersistableBundle();
+            pb.putBoolean(KEY_USE_MICROPHONE, this.useMicrophone);
+            return pb;
+        }
+
+        /** @hide */
+        public static class Builder {
+            private boolean useMicrophone = false;
+
+            /** @hide */
+            public Builder() {}
+
+            /** @hide */
+            public Builder setUseMicrophone(boolean useMicrophone) {
+                this.useMicrophone = useMicrophone;
+                return this;
+            }
+
+            /** @hide */
+            public AudioDevice build() {
+                return new AudioDevice(useMicrophone);
+            }
         }
     }
 

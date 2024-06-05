@@ -683,6 +683,10 @@ public final class VirtualMachineConfig {
         config.consoleInputDevice = mConsoleInputDevice;
         config.devices = EMPTY_STRING_ARRAY;
         config.platformVersion = "~1.0";
+        config.audioDevice =
+                Optional.ofNullable(customImageConfig.getAudioDevice())
+                        .map(ad -> ad.toParcelable())
+                        .orElse(null);
         return config;
     }
 

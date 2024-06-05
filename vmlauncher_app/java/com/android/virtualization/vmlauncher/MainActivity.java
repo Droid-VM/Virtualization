@@ -16,8 +16,10 @@
 
 package com.android.virtualization.vmlauncher;
 
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static android.system.virtualmachine.VirtualMachineConfig.CPU_TOPOLOGY_MATCH_HOST;
 
+import android.Manifest.permission;
 import android.app.Activity;
 import android.crosvm.ICrosvmAndroidDisplayService;
 import android.graphics.PixelFormat;
@@ -31,6 +33,7 @@ import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineCallback;
 import android.system.virtualmachine.VirtualMachineConfig;
 import android.system.virtualmachine.VirtualMachineCustomImageConfig;
+import android.system.virtualmachine.VirtualMachineCustomImageConfig.AudioDevice;
 import android.system.virtualmachine.VirtualMachineCustomImageConfig.DisplayConfig;
 import android.system.virtualmachine.VirtualMachineException;
 import android.system.virtualmachine.VirtualMachineManager;
@@ -74,6 +77,7 @@ public class MainActivity extends Activity {
     private ExecutorService mExecutorService;
     private VirtualMachine mVirtualMachine;
     private ParcelFileDescriptor mCursorStream;
+    private static final int RECORD_AUDIO_PERMISSION_REQUEST_CODE = 101;
 
     private VirtualMachineConfig createVirtualMachineConfig(String jsonPath) {
         VirtualMachineConfig.Builder configBuilder =
@@ -146,6 +150,9 @@ public class MainActivity extends Activity {
             customImageConfigBuilder.useKeyboard(true);
             customImageConfigBuilder.useMouse(true);
 
+            AudioDevice.Builder audioDeviceBuilder = new AudioDevice.Builder();
+            audioDeviceBuilder.setUseMicrophone(true);
+            customImageConfigBuilder.setAudioDevice(audioDeviceBuilder.build());
             configBuilder.setCustomImageConfig(customImageConfigBuilder.build());
 
         } catch (JSONException | IOException e) {
@@ -173,6 +180,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        checkAndRequestRecordAudioPermission();
         mExecutorService = Executors.newCachedThreadPool();
         try {
             // To ensure that the previous display service is removed.
@@ -446,6 +454,14 @@ public class MainActivity extends Activity {
             } catch (IOException e) {
                 Log.e(TAG, e.getMessage());
             }
+        }
+    }
+
+    private void checkAndRequestRecordAudioPermission() {
+        if (getApplicationContext().checkSelfPermission(permission.RECORD_AUDIO)
+                != PERMISSION_GRANTED) {
+            requestPermissions(
+                    new String[] {permission.RECORD_AUDIO}, RECORD_AUDIO_PERMISSION_REQUEST_CODE);
         }
     }
 
