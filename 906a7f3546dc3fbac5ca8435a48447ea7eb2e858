@@ -52,6 +52,24 @@
       "parentUuid": "b998d249_26dfddf6",
       "revId": "906a7f3546dc3fbac5ca8435a48447ea7eb2e858",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccf5a691_f8c1d87e",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-06-06T16:14:15Z",
+      "side": 1,
+      "message": "can we make this off by default even when the build flag is enabled? probably want to add a new option to the VM config, akin to what is done for display: https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineRawConfig.aidl;l\u003d84;drc\u003d8dd3255293547822eaff97657d2b312bcaa80f89",
+      "parentUuid": "7d68b6ac_d75fcc9f",
+      "revId": "906a7f3546dc3fbac5ca8435a48447ea7eb2e858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
