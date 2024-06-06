@@ -14,7 +14,6 @@
 
 //! Low-level compatibility layer between baremetal Rust and Bionic C functions.
 
-use crate::console;
 use crate::eprintln;
 use crate::rand::fill_with_entropy;
 use crate::read_sysreg;
@@ -27,6 +26,8 @@ use core::slice;
 use core::str;
 
 use cstr::cstr;
+use log::error;
+use log::info;
 
 const EOF: c_int = -1;
 const EIO: c_int = 5;
@@ -130,6 +131,15 @@ enum File {
     Stderr = 0x9d118200,
 }
 
+impl File {
+    fn write(&self, s: &str) {
+        match self {
+            Self::Stdout => info!("{s}"),
+            Self::Stderr => error!("{s}"),
+        }
+    }
+}
+
 impl TryFrom<usize> for File {
     type Error = &'static str;
 
@@ -152,8 +162,8 @@ extern "C" fn fputs(c_str: *const c_char, stream: usize) -> c_int {
     // SAFETY: Just like libc, we need to assume that `s` is a valid NULL-terminated string.
     let c_str = unsafe { CStr::from_ptr(c_str) };
 
-    if let (Ok(s), Ok(_)) = (c_str.to_str(), File::try_from(stream)) {
-        console::write_str(s);
+    if let (Ok(s), Ok(f)) = (c_str.to_str(), File::try_from(stream)) {
+        f.write(s);
         0
     } else {
         set_errno(EOF);
@@ -168,8 +178,8 @@ extern "C" fn fwrite(ptr: *const c_void, size: usize, nmemb: usize, stream: usiz
     // SAFETY: Just like libc, we need to assume that `ptr` is valid.
     let bytes = unsafe { slice::from_raw_parts(ptr as *const u8, length) };
 
-    if let (Ok(s), Ok(_)) = (str::from_utf8(bytes), File::try_from(stream)) {
-        console::write_str(s);
+    if let (Ok(s), Ok(f)) = (str::from_utf8(bytes), File::try_from(stream)) {
+        f.write(s);
         length
     } else {
         0
@@ -188,8 +198,7 @@ extern "C" fn perror(s: *const c_char) {
     } else {
         // SAFETY: Just like libc, we need to assume that `s` is a valid NULL-terminated string.
         let c_str = unsafe { CStr::from_ptr(s) };
-        // TODO(Rust 1.71): if c_str.is_empty() {
-        if c_str.to_bytes().is_empty() {
+        if c_str.is_empty() {
             None
         } else {
             Some(c_str.to_str().unwrap())
@@ -199,9 +208,9 @@ extern "C" fn perror(s: *const c_char) {
     let error = cstr_error(get_errno()).to_str().unwrap();
 
     if let Some(prefix) = prefix {
-        eprintln!("{prefix}: {error}");
+        error!("{prefix}: {error}");
     } else {
-        eprintln!("{error}");
+        error!("{error}");
     }
 }
 
