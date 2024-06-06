@@ -1,0 +1,137 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40076850_5b1fbc24",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-06T10:35:36Z",
+      "side": 1,
+      "message": "Please bump the version number when adding a new key.\n\n(We should probably have a comment saying that.)",
+      "range": {
+        "startLine": 83,
+        "startChar": 29,
+        "endLine": 83,
+        "endChar": 41
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4f9d9d1f_dbe88897",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
+              "range": {
+                "startLine": 83,
+                "startChar": 0,
+                "endLine": 83,
+                "endChar": 0
+              },
+              "replacement": "    // When adding a new key, please bump the version number.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5912e7dc_a7c2b18d",
+        "filename": "libs/avf_features/src/lib.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-06T10:35:36Z",
+      "side": 1,
+      "message": "Nothing exists to enable this config, right?\nYou\u0027ll need to follow Nikita\u0027s guide on creating \u0026 wiring this up to a build-time flag.",
+      "range": {
+        "startLine": 31,
+        "startChar": 26,
+        "endLine": 31,
+        "endChar": 41
+      },
+      "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08d01bdd_9c3cd89d",
+        "filename": "tests/testapi_no_internet_perm/AndroidManifest.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-06T10:35:36Z",
+      "side": 1,
+      "message": "Well, technically it requires \u003e 34?\n\n(We should consider updating all of these test apps. Which could reasonably be done separately from this CL.)",
+      "range": {
+        "startLine": 21,
+        "startChar": 37,
+        "endLine": 21,
+        "endChar": 39
+      },
+      "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "729e9d9e_2c20a398",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-06T10:35:36Z",
+      "side": 1,
+      "message": "This is in the \"Changes that must be incompatible, since they must change the VM identity.\" section.\n\nWhich I think is probably right, although it\u0027s not totally clear.\n\nBut if so that means we actually do need to feed this flag into the VM identity, and I don\u0027t think we are. (Here we are just testing the code that runs in the app context, but that is trivially bypassable - we need to make sure you can\u0027t boot a VM and get the same secret if you do so.)",
+      "range": {
+        "startLine": 696,
+        "startChar": 8,
+        "endLine": 696,
+        "endChar": 99
+      },
+      "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f01591b7_f8cf8222",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 2347,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-06T10:35:36Z",
+      "side": 1,
+      "message": "If we don\u0027t allow a protected VM to use network, shouldn\u0027t we report that when you call VirtualMachineConfig.Builder.build(), rather than wait until they try to start it? That would be a much friendlier experience.\n\nAlso: UnsupportedOperationException doesn\u0027t seem like the right exception, if we do throw it here. Where does it come from? I\u0027d expect it to be wrapped in a VirtualMachineException.",
+      "range": {
+        "startLine": 2338,
+        "startChar": 0,
+        "endLine": 2347,
+        "endChar": 5
+      },
+      "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
