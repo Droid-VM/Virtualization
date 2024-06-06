@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b9d7dc8_22457612",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-06-06T07:19:20Z",
+      "side": 1,
+      "message": "Thanks Alice for explanation of why instance.img is not necessary for RKP VM\n\n\u003e This skip should only take place behind the instance image migration to instance ID flag.\n\nThe instance ID flag is behind the `llpvm_changes`, which is enabled in sync with remote attestation flag. Because of that, we no more have to care about the situation where rkpvm have to read the salt out of instance.img",
+      "parentUuid": "27bfb127_c6e73a38",
+      "range": {
+        "startLine": 9,
+        "startChar": 57,
+        "endLine": 10,
+        "endChar": 11
+      },
+      "revId": "d5fccbf51354934267f26bb78507b66a96cc1bbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "457935f0_0022f4c9",
@@ -166,6 +190,47 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "967f791e_8b53e2e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-06-06T07:19:20Z",
+      "side": 1,
+      "message": "\u003e We shouldn\u0027t delete any flag-guarded code until V is actually released\n\n\nAck, although we haven\u0027t been very cautious of the flags lately.",
+      "parentUuid": "980326f1_eecffddd",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 45
+      },
+      "revId": "d5fccbf51354934267f26bb78507b66a96cc1bbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c67d92b_3addd4fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-06-06T07:19:20Z",
+      "side": 1,
+      "message": "Thank you all for your comments. Since we can\u0027t remove flags now, I\u0027m parking/abandoning this patch. Feel free to use it if the flags are to be removed at once from aosp.\n\nI\u0027ve created a separate patch for fixing the instance.img usage by pvmfw for rkpvm aosp/3116626",
+      "revId": "d5fccbf51354934267f26bb78507b66a96cc1bbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6197f8e_e483d2cc",
@@ -179,6 +244,30 @@
       "writtenOn": "2024-06-04T14:24:22Z",
       "side": 1,
       "message": "Maybe rename the variable to `{new,created}_instance_img_entry`, `updated_instance_img`, `guest_must_expect_new_instance_img` or something else that carries this information?",
+      "range": {
+        "startLine": 153,
+        "startChar": 46,
+        "endLine": 154,
+        "endChar": 62
+      },
+      "revId": "d5fccbf51354934267f26bb78507b66a96cc1bbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12352e4e_b8a4b0a8",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-06-06T07:19:20Z",
+      "side": 1,
+      "message": "That does help making the variable name self explanatory, but the reason we need this variable for is to set the DT property `avf,new-instance` which cannot be changed within the scope of this work (since that would be boot protocol change between pvmfw/payload).\n\nSo I\u0027d prefer the variable name to match the property name. Thanks",
+      "parentUuid": "a6197f8e_e483d2cc",
       "range": {
         "startLine": 153,
         "startChar": 46,
@@ -226,6 +315,30 @@
       "side": 1,
       "message": "+1 use a local flag like `rollback_protection_done`. You can set the flag to true after line 131 immediately after the RKP VM rollback index validation to make this more clear.\n\nI don\u0027t think this part of code should special-case RKP VM too much.",
       "parentUuid": "e9855def_1a0583d1",
+      "range": {
+        "startLine": 165,
+        "startChar": 4,
+        "endLine": 165,
+        "endChar": 32
+      },
+      "revId": "d5fccbf51354934267f26bb78507b66a96cc1bbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48072ca9_f4a3327e",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-06-06T07:19:20Z",
+      "side": 1,
+      "message": "I do understand the need for a slightly generic capability than `dice_inputs.rkp_vm_marker`, I think `rollback_protection_done` would be too generic and will need to set true even after instance.img based checks (becuse logically `rollback_protection_done` is done by then too) but in that case `rollback_protection_done` is not useful (no consumer), so why add a variable at all. Something like `version_check_done_against_hardcoded_value` would have been more suitable, but I dont think we really need that variable.\n\n\nInstead in a different patch, I will move the rkpvm version check below to this block. Ensuring all rollback protection is done in these these sections. \n```\nif defer_rollback_protection {\n    if verified_boot_data.rollback_index \u003d\u003d 0 { ... }\n} else if verified_boot_data.has_capability(Capability::RemoteAttest) {\n    // Check against hardcoded value\n} else {\n   // Fallback to instance.img based rollback protection\n}\n```\n\nWhile this special-cases `Capability::RemoteAttest` here, it reduces the specificity from the other section of main.rs. \n\nThanks for your suggestions.",
+      "parentUuid": "443ab56f_7c246b4a",
       "range": {
         "startLine": 165,
         "startChar": 4,
