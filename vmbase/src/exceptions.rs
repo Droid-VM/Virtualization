@@ -15,14 +15,13 @@
 //! Helper functions and structs for exception handlers.
 
 use crate::{
-    console, eprintln,
+    eprintln,
+    layout::UART_PAGE,
     memory::{page_4kb_of, MemoryTrackerError},
     read_sysreg,
 };
 use aarch64_paging::paging::VirtualAddress;
 use core::fmt;
-
-const UART_PAGE: usize = page_4kb_of(console::BASE_ADDRESS);
 
 /// Represents an error that can occur while handling an exception.
 #[derive(Debug)]
