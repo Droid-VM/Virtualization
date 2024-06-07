@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2304112d_93708354",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-06-07T14:36:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d309ecca_bf3e69d6",
+      "range": {
+        "startLine": 13,
+        "startChar": 5,
+        "endLine": 13,
+        "endChar": 13
+      },
+      "revId": "10e490dc4483397713f82c191b39c484cffce9e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97f17262_d6f2fc79",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d01a050_eaaeffeb",
+        "filename": "docs/vm_remote_attestation.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-06-07T14:36:21Z",
+      "side": 1,
+      "message": "Discussed offline",
+      "parentUuid": "97f17262_d6f2fc79",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 34
+      },
+      "revId": "10e490dc4483397713f82c191b39c484cffce9e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8cbd826e_5820dc0c",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-06-07T13:32:09Z",
       "side": 1,
       "message": "Do we translate this to an appropriate `AVmAttestationStatus` somewhere?",
+      "range": {
+        "startLine": 147,
+        "startChar": 27,
+        "endLine": 147,
+        "endChar": 48
+      },
+      "revId": "10e490dc4483397713f82c191b39c484cffce9e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2168768_ff822bde",
+        "filename": "virtualizationservice/src/remote_provisioning.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-06-07T14:36:21Z",
+      "side": 1,
+      "message": "This will be translated to the same error as when pVM is not supported [1]\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/vm_payload/include/vm_payload.h;l\u003d51;drc\u003d1715f373714803aa815936cb10a1dda43dd7d597",
+      "parentUuid": "8cbd826e_5820dc0c",
       "range": {
         "startLine": 147,
         "startChar": 27,
