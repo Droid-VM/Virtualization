@@ -117,7 +117,14 @@ requirements:
 - The DICE chain should have RKP VM markers that help identify RKP VM as required
   by the [remote provisioning HAL][rkp-hal-markers].
 
-The feature is enabled by default. To disable it, you can set
-`PRODUCT_AVF_REMOTE_ATTESTATION_DISABLED` to true in your Makefile.
+The feature is enabled by default. To disable it, you have two options:
+
+1. Set `PRODUCT_AVF_REMOTE_ATTESTATION_DISABLED` to `true` in your Makefile to
+disable the feature at build time.
+
+2. Include `hypervisor.vm.remote_attestation.supported=0` in the system properties
+to disable the feature at runtime.
+
+If you don't set any of these variables, VM remote attestation will be enabled by default.
 
 [rkp-hal-markers]: https://android.googlesource.com/platform/hardware/interfaces/+/main/security/rkp/README.md#hal
