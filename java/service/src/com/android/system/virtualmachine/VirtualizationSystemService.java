@@ -26,6 +26,7 @@ import android.os.IBinder;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.system.virtualizationmaintenance.IVirtualizationMaintenance;
+import android.system.virtualizationtethering.IVirtualizationTethering;
 import android.util.Log;
 
 import com.android.internal.os.BackgroundThread;
@@ -40,17 +41,21 @@ import com.android.server.SystemService;
  */
 public class VirtualizationSystemService extends SystemService {
     private static final String TAG = VirtualizationSystemService.class.getName();
-    private static final String SERVICE_NAME = "android.system.virtualizationmaintenance";
+    private static final String MAINTENANCE_SERVICE_NAME =
+            "android.system.virtualizationmaintenance";
+    private static final String TETHERING_SERVICE_NAME =
+            "android.system.virtualizationtethering.IVirtualizationTethering";
     private Handler mHandler;
+    private final VirtualizationTetheringBinderService mTetheringBinderService;
 
     public VirtualizationSystemService(Context context) {
         super(context);
+        mTetheringBinderService = new VirtualizationTetheringBinderService();
     }
 
     @Override
     public void onStart() {
-        // Nothing needed here - we don't expose any binder service. The binder service we use is
-        // exposed as a lazy service by the virtualizationservice native binary.
+        publishBinderService(TETHERING_SERVICE_NAME, mTetheringBinderService);
     }
 
     @Override
@@ -82,11 +87,11 @@ public class VirtualizationSystemService extends SystemService {
     }
 
     static IVirtualizationMaintenance connectToMaintenanceService() {
-        IBinder binder = ServiceManager.waitForService(SERVICE_NAME);
+        IBinder binder = ServiceManager.waitForService(MAINTENANCE_SERVICE_NAME);
         IVirtualizationMaintenance maintenance =
                 IVirtualizationMaintenance.Stub.asInterface(binder);
         if (maintenance == null) {
-            throw new IllegalStateException("Failed to connect to " + SERVICE_NAME);
+            throw new IllegalStateException("Failed to connect to " + MAINTENANCE_SERVICE_NAME);
         }
         return maintenance;
     }
@@ -134,6 +139,13 @@ public class VirtualizationSystemService extends SystemService {
             if (uid != -1) {
                 mHandler.post(() -> notifyAppRemoved(uid));
             }
+        }
+    }
+
+    private final class VirtualizationTetheringBinderService extends IVirtualizationTethering.Stub {
+        @Override
+        public void enableVirtualizationTethering(String ifname) {
+            Log.w(TAG, "enabling tethering for AVF is not supported yet: " + ifname);
         }
     }
 }
