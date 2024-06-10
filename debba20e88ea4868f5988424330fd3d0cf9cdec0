@@ -164,6 +164,30 @@
       },
       "revId": "debba20e88ea4868f5988424330fd3d0cf9cdec0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82a58095_2bdc7ec8",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-06-10T08:46:47Z",
+      "side": 1,
+      "message": "If `ifname_bytes` does not contain a nul then this will return `FromBytesUntilNulError`. That is sound, but is it the desired behaviour?",
+      "parentUuid": "4a3dec65_3f04c70c",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 61
+      },
+      "revId": "debba20e88ea4868f5988424330fd3d0cf9cdec0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
