@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8b4715f_a297124c",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-10T10:17:36Z",
+      "side": 1,
+      "message": "Uber-nit: `let Some(tap_file) \u003d \u0026config.tap` is maybe slightly neater?",
+      "range": {
+        "startLine": 238,
+        "startChar": 25,
+        "endLine": 238,
+        "endChar": 60
+      },
+      "revId": "f18abd7d5d9b71cad984e96a85aa339aaed71abb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d52e0498_9e3d47ff",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-10T10:17:36Z",
+      "side": 1,
+      "message": "`{e:?}`\n\n(Inside the braces because it\u0027s neater, debug because that gives better context)",
+      "range": {
+        "startLine": 463,
+        "startChar": 58,
+        "endLine": 463,
+        "endChar": 64
+      },
+      "revId": "f18abd7d5d9b71cad984e96a85aa339aaed71abb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d1d3b37_c1b118a9",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-10T10:17:36Z",
+      "side": 1,
+      "message": "I don\u0027t think this is right.\nThis one reads from kernel into ifr.",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 40
+      },
+      "revId": "f18abd7d5d9b71cad984e96a85aa339aaed71abb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dfb0fe2_1598424d",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-10T10:17:36Z",
+      "side": 1,
+      "message": "There\u0027s no variable called `ioctl` here?",
+      "range": {
+        "startLine": 78,
+        "startChar": 16,
+        "endLine": 78,
+        "endChar": 21
+      },
+      "revId": "f18abd7d5d9b71cad984e96a85aa339aaed71abb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
