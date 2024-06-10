@@ -63,4 +63,10 @@ interface IVirtualMachineService {
      * that Secretkeeper is supported from Linux device tree before calling this.
      */
     ISecretkeeper getSecretkeeper();
+
+    parcelable ServiceConnectionInfo {
+        int port;
+    }
+
+    ServiceConnectionInfo getServiceConnectionInfo(in String name);
 }

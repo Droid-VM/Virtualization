@@ -48,7 +48,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
 };
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IVirtualizationServiceInternal::IVirtualizationServiceInternal;
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::{
-        BnVirtualMachineService, IVirtualMachineService,
+        BnVirtualMachineService, IVirtualMachineService, ServiceConnectionInfo::ServiceConnectionInfo,
 };
 use android_hardware_security_secretkeeper::aidl::android::hardware::security::secretkeeper::ISecretkeeper::{BnSecretkeeper, ISecretkeeper};
 use android_hardware_security_secretkeeper::aidl::android::hardware::security::secretkeeper::SecretId::SecretId;
@@ -63,9 +63,10 @@ use apkverify::{HashAlgorithm, V4Signature};
 use avflog::LogResult;
 use binder::{
     self, wait_for_interface, BinderFeatures, ExceptionCode, Interface, ParcelFileDescriptor,
-    Status, StatusCode, Strong,
-    IntoBinderResult,
+    Status, StatusCode, Strong, IntoBinderResult,
 };
+// TODO I need to export this in some other way. This is for set_rpc_client
+use binder::binder_impl::IBinderInternal;
 use cstr::cstr;
 use glob::glob;
 use lazy_static::lazy_static;
@@ -77,19 +78,18 @@ use rustutils::system_properties;
 use semver::VersionReq;
 use std::collections::HashSet;
 use std::convert::TryInto;
-use std::fs;
 use std::ffi::CStr;
 use std::fs::{canonicalize, read_dir, remove_file, File, OpenOptions};
 use std::io::{BufRead, BufReader, Error, ErrorKind, Seek, SeekFrom, Write};
-use std::iter;
 use std::num::{NonZeroU16, NonZeroU32};
 use std::os::unix::io::{AsRawFd, FromRawFd, IntoRawFd};
 use std::os::unix::raw::pid_t;
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex, Weak};
+use std::{fs, iter};
 use vbmeta::VbMetaImage;
-use vmconfig::{VmConfig, get_debug_level};
-use vsock::VsockStream;
+use vmconfig::{get_debug_level, VmConfig};
+use vsock::{VsockListener, VsockStream, VMADDR_CID_HOST};
 use zip::ZipArchive;
 
 /// The unique ID of a VM used (together with a port number) for vsock communication.
@@ -1525,7 +1525,7 @@ impl<'a, T> AsRef<T> for BorrowedOrOwned<'a, T> {
 }
 
 /// Implementation of `IVirtualMachineService`, the entry point of the AIDL service.
-#[derive(Debug, Default)]
+#[derive(Debug, Default, Clone)]
 struct VirtualMachineService {
     state: Arc<Mutex<State>>,
     cid: Cid,
@@ -1603,6 +1603,51 @@ impl IVirtualMachineService for VirtualMachineService {
 
     fn requestAttestation(&self, csr: &[u8], test_mode: bool) -> binder::Result<Vec<Certificate>> {
         GLOBAL_SERVICE.requestAttestation(csr, get_calling_uid() as i32, test_mode)
+    }
+    fn getServiceConnectionInfo(&self, name: &str) -> binder::Result<ServiceConnectionInfo> {
+        // handing out non-static ports for services will be messy.
+        // we could start will an available pool and mark the used ports as "used", but how do we
+        // know when those ports are no longer used? Can we loop through all of them occasionally
+        // to check if anything is still listening?
+        // How does the client signal that it's done using the service?
+        // How do we tell the service to stop listening?
+        if name == "android.hardware.light.ILights/default" {
+            info!("virtmgr getServiceConnectionInfo getting lights");
+            let port = 2321;
+
+            // don't block this service while attempting to get a service for the client in the VM.
+            let mut local_svc = binder::check_service("android.hardware.light.ILights/default")
+                .context("Failed to get service from IVirtualMachineService")
+                .or_service_specific_exception(-1)?;
+
+            info!("Found service");
+
+            let listener = VsockListener::bind_with_cid_port(VMADDR_CID_HOST, port)
+                .context("Failed to connect")
+                .or_service_specific_exception(-1)?;
+
+            info!("Created vsock socket successfully on port {}", port);
+
+            // TODO I don't think borrowing the stream here is right, but that's what the compiler
+            // says TODO need to add a keep_alive binder. How does rust create a blank
+            // SpIBinder? Looks like it needs to be a BnFoo::as_binder()??
+
+            local_svc.set_rpc_client(
+                &listener,
+                BnVirtualMachineService::new_binder(self.clone(), BinderFeatures::default())
+                    .as_binder(),
+            )?;
+
+            info!("set_rpc_client success!");
+
+            // TODO does this cast throw an error?
+            Ok(ServiceConnectionInfo { port: port as i32 })
+        } else {
+            info!("asdf virtmgr getServiceConnectionInfo didn't match the name!");
+            Err(anyhow!("Can't connect to this session"))
+                .with_log()
+                .or_binder_exception(ExceptionCode::SECURITY)
+        }
     }
 }
 

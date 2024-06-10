@@ -20,7 +20,7 @@ use android_system_virtualization_payload::aidl::android::system::virtualization
 };
 use anyhow::{bail, ensure, Context, Result};
 use binder::{
-    unstable_api::{new_spibinder, AIBinder},
+    unstable_api::{new_spibinder, AIBinder, AsNative},
     Strong, ExceptionCode,
 };
 use lazy_static::lazy_static;
@@ -132,6 +132,27 @@ pub unsafe extern "C" fn AVmPayload_runVsockRpcServer(
 
     // SAFETY: try_run_vsock_server has the same requirements as this function
     unwrap_or_abort(unsafe { try_run_vsock_server(service, port, on_ready, param) })
+}
+
+/// # Safety
+///
+/// FIXME
+#[no_mangle]
+pub unsafe extern "C" fn AVmPayload_getIAccessor() -> *mut AIBinder {
+    initialize_logging();
+    let service = unwrap_or_abort(get_vm_payload_service());
+    match service.getIAccessor() {
+        Ok(accessor) => {
+            // Prevent AIBinder_decStrong from being called...
+            // This will leak without an explicit decStrong in C++
+            // ugly business here
+            std::mem::ManuallyDrop::new(accessor.as_binder()).as_native_mut().cast()
+        }
+        Err(e) => {
+            error!("Failed to get payload service: {e:?}");
+            ptr::null_mut()
+        }
+    }
 }
 
 /// # Safety: Same as `AVmPayload_runVsockRpcServer`.
