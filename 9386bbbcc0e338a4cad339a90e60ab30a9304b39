@@ -162,6 +162,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9bd3ea78_b7a6f6cb",
+        "filename": "tests/testapi_no_internet_perm/AndroidManifest.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-10T09:50:43Z",
+      "side": 1,
+      "message": "I think so. That should be a separate bug/CL though.",
+      "parentUuid": "368d53e3_fdb1fd62",
+      "range": {
+        "startLine": 21,
+        "startChar": 37,
+        "endLine": 21,
+        "endChar": 39
+      },
+      "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "729e9d9e_2c20a398",
         "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
         "patchSetId": 13
@@ -209,6 +233,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f248de4c_d37a59ac",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-10T09:50:43Z",
+      "side": 1,
+      "message": "\u003e For clarification, VirtualMachineConfig.isCompatibleWith is not only for just checking difference of VirtualMachineConfig, but also for keeping VM identity \n\nYeah. If we think changing some config value should change the identity, it should cause isCompatibleWith to return false (so the VM owner can tell), but we should also make sure it really does change the identity.\n\nHow exactly the identity is computed is changing - it used to be pure DICE, but we use Secretkeeper if possible. Either way we want a VM using network to have a different DICE chain; either explicitly visible, or encoded in the hidden input to one of the DICE nodes. Ideally in a backward compatible way, so existing no-network VMs retain their secrets over OS update.\n\nYou should talk to @shikhapanwar@google.com about this. (We should document it somewhere too.)",
+      "parentUuid": "eca28222_5186fc5d",
+      "range": {
+        "startLine": 696,
+        "startChar": 8,
+        "endLine": 696,
+        "endChar": 99
+      },
+      "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f01591b7_f8cf8222",
         "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
         "patchSetId": 13
@@ -244,6 +292,30 @@
       "side": 1,
       "message": "In our previous discussions, I understood supporting network for non-pVM is required for ferrochrome so urgent, but not for pVMs. So that\u0027s why I\u0027ve defined the exception as unsupported operation.\n\nI also considered reporting it from the Java side, but it\u0027ll need guards in 2 distinguished places. But I\u0027m still not sure if introducing more \u0027interim\u0027 guards for friendlier experience is good.\n\n\u003e Where does it come from?\n\nFrom `create_vm_internal` in virtmgr. I thought here\u0027s the right place to handle all requests.\nhttps://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/virtualizationmanager/src/aidl.rs;l\u003d609-626",
       "parentUuid": "f01591b7_f8cf8222",
+      "range": {
+        "startLine": 2338,
+        "startChar": 0,
+        "endLine": 2347,
+        "endChar": 5
+      },
+      "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb09d965_b63e7791",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 2347,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-10T09:50:43Z",
+      "side": 1,
+      "message": "We don\u0027t throw UnsupportedOperationException anywhere else, I think. We wrap almost everything in VirtualMachineException. And we don\u0027t seem to be documenting the restriction, nor the exception, anywhere.\n\nI would really prefer to check it in `VirtualMachineConfig.Builder.build()`; that\u0027s where we currently enforce all the other rules about incompatible sets of config options, and we can give a clear error message (and add a simple test). And if you do that, the throw from `create_vm_internal` becomes unreachable, so you don\u0027t have to do any work to handle it.",
+      "parentUuid": "6e2756c4_e8cfe7e3",
       "range": {
         "startLine": 2338,
         "startChar": 0,
