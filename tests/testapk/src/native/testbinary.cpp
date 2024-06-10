@@ -21,6 +21,7 @@
 #include <android-base/properties.h>
 #include <android-base/result.h>
 #include <android-base/scopeguard.h>
+#include <android/binder_manager.h>
 #include <android/log.h>
 #include <fcntl.h>
 #include <fstab/fstab.h>
@@ -390,6 +391,14 @@ extern "C" int AVmPayload_main() {
 
     __system_property_set("debug.microdroid.app.run", "true");
 
+    ndk::SpAIBinder binder(
+            AServiceManager_waitForService("android.hardware.lights.ILights/default"));
+
+    if (binder.get()) {
+        __android_log_write(ANDROID_LOG_ERROR, TAG, "somehow the binder is not null");
+    } else {
+        __android_log_write(ANDROID_LOG_ERROR, TAG, "as expected, the binder is null");
+    }
     if (auto res = start_test_service(); res.ok()) {
         return 0;
     } else {
