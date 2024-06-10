@@ -24,6 +24,7 @@ use android_system_virtualizationcommon::aidl::android::system::virtualizationco
 use android_system_virtualizationmaintenance::aidl::android::system::virtualizationmaintenance;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice;
 use android_system_virtualizationservice_internal as android_vs_internal;
+use android_system_virtualizationtethering::aidl::android::system::virtualizationtethering;
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice;
 use android_vs_internal::aidl::android::system::virtualizationservice_internal;
 use anyhow::{anyhow, ensure, Context, Result};
@@ -71,6 +72,9 @@ use virtualizationservice_internal::{
     IVfioHandler::{BpVfioHandler, IVfioHandler},
     IVirtualizationServiceInternal::IVirtualizationServiceInternal,
     IVmnic::{BpVmnic, IVmnic},
+};
+use virtualizationtethering::IVirtualizationTethering::{
+    BpVirtualizationTethering, IVirtualizationTethering,
 };
 use virtualmachineservice::IVirtualMachineService::VM_TOMBSTONES_SERVICE_PORT;
 use vsock::{VsockListener, VsockStream};
@@ -163,6 +167,10 @@ lazy_static! {
     static ref NETWORK_SERVICE: Strong<dyn IVmnic> =
         wait_for_interface(<BpVmnic as IVmnic>::get_descriptor())
             .expect("Could not connect to Vmnic");
+    static ref TETHERING_SERVICE: Strong<dyn IVirtualizationTethering> = wait_for_interface(
+        <BpVirtualizationTethering as IVirtualizationTethering>::get_descriptor()
+    )
+    .expect("Could not connect to VirtualizationTethering");
 }
 
 fn is_valid_guest_cid(cid: Cid) -> bool {
@@ -509,7 +517,13 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
             ))
             .with_log();
         }
-        NETWORK_SERVICE.createTapInterface(iface_name_suffix)
+        let tap_fd = NETWORK_SERVICE.createTapInterface(iface_name_suffix)?;
+
+        // TODO(340377643): Enabling tethering should be for bridge interface, not TAP interface.
+        let iface_name = format!("avf_tap_{iface_name_suffix}");
+        TETHERING_SERVICE.enableVirtualizationTethering(&iface_name)?;
+
+        Ok(tap_fd)
     }
 
     fn deleteTapInterface(&self, tap_fd: &ParcelFileDescriptor) -> binder::Result<()> {
