@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f0daba6_12bc21fb",
+        "filename": "libs/avf_features/src/lib.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-10T01:31:56Z",
+      "side": 1,
+      "message": "I\u0027ve already introduced this config to run `vmnic` while creating VM from `bin/vm`. \nhttps://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/Android.bp;l\u003d56-58\n\nAnd It\u0027s currently enabled for `trunk_staging` only.\nhttps://cs.android.com/android/platform/superproject/main/+/main:build/release/flag_values/trunk_staging/RELEASE_AVF_ENABLE_NETWORK.textproto",
+      "parentUuid": "5912e7dc_a7c2b18d",
+      "range": {
+        "startLine": 31,
+        "startChar": 26,
+        "endLine": 31,
+        "endChar": 41
+      },
+      "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "08d01bdd_9c3cd89d",
