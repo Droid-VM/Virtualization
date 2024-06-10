@@ -5,7 +5,10 @@ package {
 aidl_interface {
     name: "android.system.virtualization.payload",
     srcs: ["android/system/virtualization/payload/*.aidl"],
-    imports: ["android.system.virtualizationcommon"],
+    imports: [
+        "android.system.virtualizationcommon",
+        "android.os.accessor",
+    ],
     unstable: true,
     backend: {
         java: {

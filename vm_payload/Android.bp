@@ -80,7 +80,11 @@ rust_library_rlib {
 cc_library_shared {
     name: "libvm_payload",
     defaults: ["avf_build_flags_cc"],
+    srcs: [
+        "src/injector.cpp",
+    ],
     shared_libs: [
+        "android.os.accessor-ndk",
         "libbinder_ndk",
         "libbinder_rpc_unstable",
         "liblog",

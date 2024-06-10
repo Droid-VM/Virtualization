@@ -83,6 +83,8 @@ __attribute__((noreturn)) void AVmPayload_runVsockRpcServer(
         AIBinder* _Nonnull service, uint32_t port,
         void (*_Nullable on_ready)(void* _Nullable param), void* _Nullable param);
 
+AIBinder* _Nullable AVmPayload_getIAccessor(void);
+
 /**
  * Returns all or part of a 32-byte secret that is bound to this unique VM
  * instance and the supplied identifier. The secret can be used e.g. as an

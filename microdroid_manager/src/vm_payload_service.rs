@@ -19,14 +19,20 @@ use android_system_virtualization_payload::aidl::android::system::virtualization
     STATUS_FAILED_TO_PREPARE_CSR_AND_KEY
 };
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::IVirtualMachineService;
+use android_os_accessor::aidl::android::os::IAccessor::{IAccessor, BnAccessor};
 use anyhow::{anyhow, Context, Result};
 use avflog::LogResult;
-use binder::{Interface, BinderFeatures, ExceptionCode, Strong, IntoBinderResult, Status};
+use binder::{Interface, BinderFeatures, ExceptionCode, Strong, IntoBinderResult, Status, ParcelFileDescriptor};
 use client_vm_csr::{generate_attestation_key_and_csr, ClientVmAttestationData};
 use log::info;
-use rpcbinder::RpcServer;
+use rpcbinder::{FileDescriptorTransportMode, RpcServer};
 use crate::vm_secret::VmSecret;
 use std::os::unix::io::OwnedFd;
+use std::os::fd::{FromRawFd, IntoRawFd};
+use std::fs::File;
+use std::collections::HashMap;
+use std::sync::Mutex;
+use vsock::{VMADDR_CID_HOST, VsockStream};
 
 /// Implementation of `IVmPayloadService`.
 struct VmPayloadService {
@@ -34,6 +40,51 @@ struct VmPayloadService {
     virtual_machine_service: Strong<dyn IVirtualMachineService>,
     secret: VmSecret,
 }
+
+struct Accessor {
+    virtual_machine_service: Strong<dyn IVirtualMachineService>,
+    // The client is going to request multiple FDs for this service.
+    // One for the initial connection, and then another when we getRootObject.
+    // So we need to keep track of where that service is.
+    // FIXME how do we clean this up if the service goes away? Should we hold
+    // a connection to the service as well to linkToDeath?
+    connection_info: Mutex<HashMap<String, i32>>,
+}
+
+impl IAccessor for Accessor {
+    fn connectToRpcSession(&self) -> binder::Result<ParcelFileDescriptor> {
+        let name = "android.hardware.light.ILights/default";
+        let mut con_info = self.connection_info.lock().unwrap();
+        let port = match con_info.get(name) {
+            Some(&number) => {
+                info!("Already have connection info for this service");
+                number
+            }
+            None => {
+                // TODO IAccessor::connectToRpcSession doesn't have "name"?
+                // if that's the case, we need getIAccessor to take a name and keep the name: String
+                // in each Accesssor instance
+                let connection_info =
+                    self.virtual_machine_service.getServiceConnectionInfo(name)?;
+                info!("connectToRpcSession in microdroid_manager got connection info from virtmg");
+                con_info.insert(name.to_string(), connection_info.port);
+                connection_info.port
+            }
+        };
+
+        let fd = VsockStream::connect_with_cid_port(VMADDR_CID_HOST, port.try_into().unwrap())
+            .context("Failed to connect")
+            .or_service_specific_exception(-1)?;
+        info!("connectToRpcSession in microdroid_manager succesfully connected to port!");
+
+        // SAFETY: we own the FD and want to pass ownership to the ParcelFileDescriptor.
+        // FIXME make sure that's what this is actually doing...
+        let f = unsafe { File::from_raw_fd(fd.into_raw_fd()) };
+        Ok(ParcelFileDescriptor::new(f))
+    }
+}
+
+impl binder::Interface for Accessor {}
 
 impl IVmPayloadService for VmPayloadService {
     fn notifyPayloadReady(&self) -> binder::Result<()> {
@@ -97,6 +148,16 @@ impl IVmPayloadService for VmPayloadService {
             certificateChain: cert_chain,
         })
     }
+
+    fn getIAccessor(&self) -> binder::Result<Strong<dyn IAccessor>> {
+        Ok(BnAccessor::new_binder(
+            Accessor {
+                virtual_machine_service: self.virtual_machine_service.clone(),
+                connection_info: HashMap::new().into(),
+            },
+            BinderFeatures::default(),
+        ))
+    }
 }
 
 impl Interface for VmPayloadService {}
@@ -135,6 +196,8 @@ pub(crate) fn register_vm_payload_service(
     );
 
     let server = RpcServer::new_bound_socket(vm_payload_binder.as_binder(), vm_payload_service_fd)?;
+    server.set_supported_file_descriptor_transport_modes(&[FileDescriptorTransportMode::Unix]);
+
     info!("The RPC server '{}' is running.", VM_PAYLOAD_SERVICE_SOCKET_NAME);
 
     // Move server reference into a background thread and run it forever.

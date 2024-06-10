@@ -116,4 +116,6 @@ interface IVmPayloadService {
      *         certification chain.
      */
     AttestationResult requestAttestation(in byte[] challenge, in boolean testMode);
+
+    android.os.IAccessor getIAccessor();
 }
