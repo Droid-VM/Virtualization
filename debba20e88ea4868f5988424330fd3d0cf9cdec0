@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e282f933_fada3b9d",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-10T07:37:48Z",
+      "side": 1,
+      "message": "`0x800454d2` is out of range of `i32`, and the type `ioctl_num_type` is defined as `libc::c_int`.\nhttps://cs.android.com/android/platform/superproject/main/+/main:external/rust/crates/nix/src/sys/ioctl/linux.rs;l\u003d6",
+      "parentUuid": "dcc05eaa_8d56b05e",
+      "range": {
+        "startLine": 30,
+        "startChar": 44,
+        "endLine": 30,
+        "endChar": 56
+      },
+      "revId": "debba20e88ea4868f5988424330fd3d0cf9cdec0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1796b81f_6c97bfe6",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a653c91_fb8415a0",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-10T07:37:48Z",
+      "side": 1,
+      "message": "Thanks, I added description that the size of slice is fixed.",
+      "parentUuid": "1796b81f_6c97bfe6",
+      "range": {
+        "startLine": 132,
+        "startChar": 19,
+        "endLine": 132,
+        "endChar": 56
+      },
+      "revId": "debba20e88ea4868f5988424330fd3d0cf9cdec0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f793a69a_74822f16",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-06-10T05:06:39Z",
       "side": 1,
       "message": "Can this be simplified by using CStr::from_ptr? Why do we have to construct a slice of size IFNAMSIZ and then shrink?",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 61
+      },
+      "revId": "debba20e88ea4868f5988424330fd3d0cf9cdec0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fe7be63_a6b179a7",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-10T07:37:48Z",
+      "side": 1,
+      "message": "I\u0027ve read `CStr::from_ptr`, but I don\u0027t think so. We cannot ensure `ifr_name` is null-terminated. Right after `ifr_name`, there\u0027s an union type. In case of the string size is equal to IFNAMSIZ and first byte of union value is not zero, `CStr::from_ptr` will violate the buffer.\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:external/rust/crates/libc/src/unix/linux_like/android/mod.rs;l\u003d629-632\n\nPerhaps it\u0027s null-terminated, but I want to simplify when it\u0027s ensured.",
+      "parentUuid": "f793a69a_74822f16",
       "range": {
         "startLine": 133,
         "startChar": 0,
