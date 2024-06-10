@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7279ed24_f0cff77e",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-10T02:19:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40076850_5b1fbc24",
+      "range": {
+        "startLine": 83,
+        "startChar": 29,
+        "endLine": 83,
+        "endChar": 41
+      },
+      "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5912e7dc_a7c2b18d",
@@ -114,6 +138,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "368d53e3_fdb1fd62",
+        "filename": "tests/testapi_no_internet_perm/AndroidManifest.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-10T02:19:45Z",
+      "side": 1,
+      "message": "Bumped up to 34 for this app only in advance. But seems we need to bump up all apps to 34, and again to 35 when it\u0027s available?",
+      "parentUuid": "08d01bdd_9c3cd89d",
+      "range": {
+        "startLine": 21,
+        "startChar": 37,
+        "endLine": 21,
+        "endChar": 39
+      },
+      "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "729e9d9e_2c20a398",
         "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
         "patchSetId": 13
@@ -125,6 +173,30 @@
       "writtenOn": "2024-06-06T10:35:36Z",
       "side": 1,
       "message": "This is in the \"Changes that must be incompatible, since they must change the VM identity.\" section.\n\nWhich I think is probably right, although it\u0027s not totally clear.\n\nBut if so that means we actually do need to feed this flag into the VM identity, and I don\u0027t think we are. (Here we are just testing the code that runs in the app context, but that is trivially bypassable - we need to make sure you can\u0027t boot a VM and get the same secret if you do so.)",
+      "range": {
+        "startLine": 696,
+        "startChar": 8,
+        "endLine": 696,
+        "endChar": 99
+      },
+      "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eca28222_5186fc5d",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-10T02:19:45Z",
+      "side": 1,
+      "message": "For clarification, `VirtualMachineConfig.isCompatibleWith` is not only for just checking difference of `VirtualMachineConfig`, but also for keeping VM identity ensured with DICE derivation, so the secret mentioned here is about DICE?",
+      "parentUuid": "729e9d9e_2c20a398",
       "range": {
         "startLine": 696,
         "startChar": 8,
