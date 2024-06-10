@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcc05eaa_8d56b05e",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-06-10T05:06:39Z",
+      "side": 1,
+      "message": "why?",
+      "range": {
+        "startLine": 30,
+        "startChar": 44,
+        "endLine": 30,
+        "endChar": 56
+      },
+      "revId": "debba20e88ea4868f5988424330fd3d0cf9cdec0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1796b81f_6c97bfe6",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-06-10T05:06:39Z",
+      "side": 1,
+      "message": "It\u0027s not the c_char to u8 conversion which is unsafe. You should have said that  ifrn_name is an array of size IFNAMSIZ.",
+      "range": {
+        "startLine": 132,
+        "startChar": 19,
+        "endLine": 132,
+        "endChar": 56
+      },
+      "revId": "debba20e88ea4868f5988424330fd3d0cf9cdec0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f793a69a_74822f16",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-06-10T05:06:39Z",
+      "side": 1,
+      "message": "Can this be simplified by using CStr::from_ptr? Why do we have to construct a slice of size IFNAMSIZ and then shrink?",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 61
+      },
+      "revId": "debba20e88ea4868f5988424330fd3d0cf9cdec0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
