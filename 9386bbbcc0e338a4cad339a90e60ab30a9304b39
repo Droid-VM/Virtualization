@@ -156,6 +156,30 @@
       },
       "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e2756c4_e8cfe7e3",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 2347,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-10T01:54:58Z",
+      "side": 1,
+      "message": "In our previous discussions, I understood supporting network for non-pVM is required for ferrochrome so urgent, but not for pVMs. So that\u0027s why I\u0027ve defined the exception as unsupported operation.\n\nI also considered reporting it from the Java side, but it\u0027ll need guards in 2 distinguished places. But I\u0027m still not sure if introducing more \u0027interim\u0027 guards for friendlier experience is good.\n\n\u003e Where does it come from?\n\nFrom `create_vm_internal` in virtmgr. I thought here\u0027s the right place to handle all requests.\nhttps://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/virtualizationmanager/src/aidl.rs;l\u003d609-626",
+      "parentUuid": "f01591b7_f8cf8222",
+      "range": {
+        "startLine": 2338,
+        "startChar": 0,
+        "endLine": 2347,
+        "endChar": 5
+      },
+      "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
