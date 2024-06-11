@@ -210,6 +210,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a1eb8ba_addf35ff",
+        "filename": "tests/testapi_no_internet_perm/AndroidManifest.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-11T10:42:21Z",
+      "side": 1,
+      "message": "I think most of our test apps require the latest SDK (we use new functions without any version check - which is fine for tests that run only on the latest OS), so that should be the minSdkVersion.\ntargetSdkVersion should generally be the latest version you\u0027ve tested on, which for us is always the latest version.\nNot sure it makes a lot of difference in practice though.",
+      "parentUuid": "6c76fe75_931dd500",
+      "range": {
+        "startLine": 21,
+        "startChar": 37,
+        "endLine": 21,
+        "endChar": 39
+      },
+      "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "729e9d9e_2c20a398",
         "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
         "patchSetId": 13
