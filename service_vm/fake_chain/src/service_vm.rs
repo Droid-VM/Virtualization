@@ -165,7 +165,7 @@ pub fn fake_service_vm_dice_artifacts() -> Result<OwnedDiceArtifacts> {
         CODE_HASH_SERVICE_VM,
         Config::Descriptor(config_descriptor.as_slice()),
         AUTHORITY_HASH_SERVICE_VM,
-        DiceMode::kDiceModeDebug,
+        DiceMode::kDiceModeNormal,
         HIDDEN_SERVICE_VM,
     );
     retry_bcc_main_flow(&cdi_values.cdi_attest, &cdi_values.cdi_seal, &dice_chain, &input_values)
