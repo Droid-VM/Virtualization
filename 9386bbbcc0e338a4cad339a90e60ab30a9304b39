@@ -186,6 +186,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6c76fe75_931dd500",
+        "filename": "tests/testapi_no_internet_perm/AndroidManifest.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-11T01:32:40Z",
+      "side": 1,
+      "message": "I read around this document, and tried to understand about `minSdkVersion` and `targetSdkVersion`. After reading this, I think setting with newest version for the new app is fine, but not for the existing app. HDYT?\n\nhttps://developer.android.com/ndk/guides/sdk-versions",
+      "parentUuid": "9bd3ea78_b7a6f6cb",
+      "range": {
+        "startLine": 21,
+        "startChar": 37,
+        "endLine": 21,
+        "endChar": 39
+      },
+      "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "729e9d9e_2c20a398",
         "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
         "patchSetId": 13
