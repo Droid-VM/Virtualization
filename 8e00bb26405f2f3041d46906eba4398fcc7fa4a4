@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c60c53c_4fbad32f",
+        "filename": "java/service/src/com/android/system/virtualmachine/VirtualizationSystemService.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-11T05:15:45Z",
+      "side": 1,
+      "message": "I changed it to bring the service name from `IVirtualizationTethering.DESCRIPTOR`. Please let me know if it\u0027s not sufficient.",
+      "parentUuid": "5ff50704_dea99914",
+      "range": {
+        "startLine": 47,
+        "startChar": 52,
+        "endLine": 47,
+        "endChar": 76
+      },
+      "revId": "8e00bb26405f2f3041d46906eba4398fcc7fa4a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f98e9e8_138c9d83",
@@ -108,6 +132,30 @@
       "side": 1,
       "message": "Yes, please make this a static inner class. \u0027final\u0027 doesn\u0027t play a big role here. so you may want to omit it.",
       "parentUuid": "e922852f_ec5af18f",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 100
+      },
+      "revId": "8e00bb26405f2f3041d46906eba4398fcc7fa4a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fdd8307_8edf25f9",
+        "filename": "java/service/src/com/android/system/virtualmachine/VirtualizationSystemService.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-11T05:15:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d12f3aa4_538c9969",
       "range": {
         "startLine": 145,
         "startChar": 0,
