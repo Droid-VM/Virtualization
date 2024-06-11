@@ -21,6 +21,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.TetheringManager;
+import android.net.TetheringManager.StartTetheringCallback;
+import android.net.TetheringManager.TetheringRequest;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.ServiceManager;
@@ -140,10 +143,33 @@ public class VirtualizationSystemService extends SystemService {
         }
     }
 
-    private static final class TetheringService extends IVirtualizationTethering.Stub {
+    private final class TetheringService extends IVirtualizationTethering.Stub {
         @Override
         public void enableVirtualizationTethering() {
             Log.w(TAG, "enabling tethering for AVF is not supported yet");
+
+            final TetheringRequest tr =
+                    new TetheringRequest.Builder(TetheringManager.TETHERING_VIRTUAL_MACHINE)
+                            .setConnectivityScope(TetheringManager.CONNECTIVITY_SCOPE_GLOBAL)
+                            .build();
+            final TetheringManager tm = getContext().getSystemService(TetheringManager.class);
+
+            StartTetheringCallback startTetheringCallback =
+                    new StartTetheringCallback() {
+                        @Override
+                        public void onTetheringStarted() {
+                            Log.w(TAG, "VM tethering started");
+                        }
+
+                        @Override
+                        public void onTetheringFailed(int resultCode) {
+                            Log.w(
+                                    TAG,
+                                    "VM tethering failed. Result Code: "
+                                            + Integer.toString(resultCode));
+                        }
+                    };
+            tm.startTethering(tr, c -> c.run() /* executor */, startTetheringCallback);
         }
     }
 }

@@ -517,7 +517,7 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
         Ok(())
     }
 
-    fn createTapInterface(&self, iface_name_suffix: &str) -> binder::Result<ParcelFileDescriptor> {
+    fn createTapInterface(&self, _iface_name_suffix: &str) -> binder::Result<ParcelFileDescriptor> {
         check_internet_permission()?;
         check_use_custom_virtual_machine()?;
         if !cfg!(network) {
@@ -527,7 +527,9 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
             ))
             .with_log();
         }
-        let tap_fd = NETWORK_SERVICE.createTapInterface(iface_name_suffix)?;
+        // TODO(340377643): Use iface_name_suffix after introducing bridge interface, not fixed
+        // value.
+        let tap_fd = NETWORK_SERVICE.createTapInterface("fixed")?;
 
         // TODO(340377643): Enabling tethering should be for bridge interface, not TAP interface.
         TETHERING_SERVICE.enableVirtualizationTethering()?;
