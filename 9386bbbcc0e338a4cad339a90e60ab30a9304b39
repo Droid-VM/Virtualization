@@ -420,6 +420,30 @@
       },
       "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac85cd3e_b7306d23",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 2347,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-11T04:19:01Z",
+      "side": 1,
+      "message": "\u003e Sorry, I am not sure I am following this patch. If the only use case for networking is Ferrochrome, why do we expose this functionality to Microdroid?\n\nIn my understanding, Microdroid is a reference VM type in AVF. And network feature is the common feature for all type of VMs. That\u0027s why I put this into `VirtualMachineConfig`. However, I agree that there may be no future use cases around Microdroid with network feature. In this case, should I move this into `VirtualMachineCustomImageConfig`?\n\n\u003e I would really prefer to check it in VirtualMachineConfig.Builder.build()\n\nAcknowledged, I\u0027ll handle it from Java API side as well. But paused for a moment to get a clear answer of above question.",
+      "parentUuid": "7d4cfbf8_71f1134f",
+      "range": {
+        "startLine": 2338,
+        "startChar": 0,
+        "endLine": 2347,
+        "endChar": 5
+      },
+      "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
