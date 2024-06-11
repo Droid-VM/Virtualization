@@ -571,8 +571,9 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThat(minimal.isProtectedVm()).isEqualTo(isProtectedVm());
         assertThat(minimal.isEncryptedStorageEnabled()).isFalse();
         assertThat(minimal.getEncryptedStorageBytes()).isEqualTo(0);
-        assertThat(minimal.isVmOutputCaptured()).isEqualTo(false);
+        assertThat(minimal.isVmOutputCaptured()).isFalse();
         assertThat(minimal.getOs()).isEqualTo("microdroid");
+        assertThat(minimal.isNetworkSupported()).isFalse();
 
         // Maximal has everything that can be set to some non-default value. (And has different
         // values than minimal for the required fields.)
@@ -588,7 +589,8 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                         .setCpuTopology(CPU_TOPOLOGY_MATCH_HOST)
                         .setEncryptedStorageBytes(1_000_000)
                         .setVmOutputCaptured(true)
-                        .setOs("microdroid_gki-android14-6.1");
+                        .setOs("microdroid_gki-android14-6.1")
+                        .setNetworkSupported(true);
         VirtualMachineConfig maximal = maximalBuilder.build();
 
         assertThat(maximal.getApkPath()).isEqualTo("/apk/path");
@@ -603,8 +605,9 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThat(maximal.isProtectedVm()).isEqualTo(isProtectedVm());
         assertThat(maximal.isEncryptedStorageEnabled()).isTrue();
         assertThat(maximal.getEncryptedStorageBytes()).isEqualTo(1_000_000);
-        assertThat(maximal.isVmOutputCaptured()).isEqualTo(true);
+        assertThat(maximal.isVmOutputCaptured()).isTrue();
         assertThat(maximal.getOs()).isEqualTo("microdroid_gki-android14-6.1");
+        assertThat(maximal.isNetworkSupported()).isTrue();
 
         assertThat(minimal.isCompatibleWith(maximal)).isFalse();
         assertThat(minimal.isCompatibleWith(minimal)).isTrue();
@@ -690,6 +693,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
             assertConfigCompatible(baseline, newBaselineBuilder().setProtectedVm(!isProtectedVm()))
                     .isFalse();
         }
+        assertConfigCompatible(baseline, newBaselineBuilder().setNetworkSupported(true)).isFalse();
 
         // Changes that were incompatible but are currently compatible, but not guaranteed to be
         // so in the API spec.
@@ -2298,6 +2302,59 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         if (major == 5) {
             assertTrue(minor >= 15);
         }
+    }
+
+    private VirtualMachineConfig buildVmConfigWithNetworkSupported() throws Exception {
+        return buildVmConfigWithNetworkSupported("MicrodroidTestNativeLib.so");
+    }
+
+    private VirtualMachineConfig buildVmConfigWithNetworkSupported(String binaryPath)
+            throws Exception {
+        assumeSupportedDevice();
+        assumeFeatureEnabled(VirtualMachineManager.FEATURE_NETWORK);
+        VirtualMachineConfig config =
+                newVmConfigBuilderWithPayloadBinary(binaryPath)
+                        .setNetworkSupported(true)
+                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .build();
+        grantPermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
+        return config;
+    }
+
+    @Test
+    public void configuringNetworkSupportedRequiresCustomPermission() throws Exception {
+        VirtualMachineConfig config = buildVmConfigWithNetworkSupported();
+        revokePermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
+
+        VirtualMachine vm =
+                forceCreateNewVirtualMachine(
+                        "test_network_supported_req_custom_permission", config);
+        SecurityException e =
+                assertThrows(
+                        SecurityException.class, () -> runVmTestService(TAG, vm, (ts, tr) -> {}));
+        assertThat(e)
+                .hasMessageThat()
+                .contains("android.permission.USE_CUSTOM_VIRTUAL_MACHINE permission");
+    }
+
+    @Test
+    public void bootsWithNetworkSupportedForNonPvm() throws Exception {
+        assumeNonProtectedVM();
+        VirtualMachineConfig config = buildVmConfigWithNetworkSupported();
+
+        VirtualMachine vm =
+                forceCreateNewVirtualMachine("test_boot_with_network_supported_non_pvm", config);
+        runVmTestService(TAG, vm, (ts, tr) -> {}).assertNoException();
+    }
+
+    @Test
+    public void creationFailsWithNetworkSupportedForPvm() throws Exception {
+        assumeProtectedVM();
+        VirtualMachineConfig config = buildVmConfigWithNetworkSupported();
+
+        VirtualMachine vm =
+                forceCreateNewVirtualMachine("test_boot_with_network_supported_pvm", config);
+        assertThrows(UnsupportedOperationException.class, () -> vm.run());
     }
 
     private VirtualMachineConfig buildVmConfigWithVendor(File vendorDiskImage) throws Exception {
