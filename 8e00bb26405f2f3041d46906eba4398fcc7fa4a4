@@ -211,6 +211,30 @@
       },
       "revId": "8e00bb26405f2f3041d46906eba4398fcc7fa4a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f656fa32_30c0ec4c",
+        "filename": "java/service/src/com/android/system/virtualmachine/VirtualizationSystemService.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-11T05:28:14Z",
+      "side": 1,
+      "message": "Throwing an unsupported exception sounds good, but I don\u0027t want to lose test coverage for creating \u0026 deleting TAP interfaces because of constructing skeleton code, in case of stopping VM creation.\n\nWhat about throwing an error here, and handling error in `createTapInterface` of `IVirtualizationServiceInternal` instead? I prefer to proceed VM creation though `enableVirtualizationTethering` is not supported, in perspective of code health.",
+      "parentUuid": "d3acb785_3962f8af",
+      "range": {
+        "startLine": 148,
+        "startChar": 6,
+        "endLine": 148,
+        "endChar": 74
+      },
+      "revId": "8e00bb26405f2f3041d46906eba4398fcc7fa4a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
