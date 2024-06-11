@@ -40,5 +40,9 @@
   <permission android:name="android.permission.DEBUG_VIRTUAL_MACHINE"
       android:protectionLevel="signature" />
 
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.TETHER_PRIVILEGED" />
+  <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
   <application android:hasCode="false" />
 </manifest>
