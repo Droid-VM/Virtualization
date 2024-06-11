@@ -118,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61c20f4b_d2c85f27",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-11T04:55:48Z",
+      "side": 1,
+      "message": "Done, and explained why the variable `ifr` should be safe.",
+      "parentUuid": "9d1d3b37_c1b118a9",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 40
+      },
+      "revId": "f18abd7d5d9b71cad984e96a85aa339aaed71abb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9dfb0fe2_1598424d",
@@ -131,6 +155,30 @@
       "writtenOn": "2024-06-10T10:17:36Z",
       "side": 1,
       "message": "There\u0027s no variable called `ioctl` here?",
+      "range": {
+        "startLine": 78,
+        "startChar": 16,
+        "endLine": 78,
+        "endChar": 21
+      },
+      "revId": "f18abd7d5d9b71cad984e96a85aa339aaed71abb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "674bfe94_e7d887c4",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-11T04:55:48Z",
+      "side": 1,
+      "message": "Rephrased the SAFETY comment.",
+      "parentUuid": "9dfb0fe2_1598424d",
       "range": {
         "startLine": 78,
         "startChar": 16,

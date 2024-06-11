@@ -188,6 +188,30 @@
       },
       "revId": "debba20e88ea4868f5988424330fd3d0cf9cdec0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e67d106_6807ded9",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-11T04:55:48Z",
+      "side": 1,
+      "message": "I rewrote to use `CStr::from_ptr`, since it would be the clear way for our function.",
+      "parentUuid": "82a58095_2bdc7ec8",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 61
+      },
+      "revId": "debba20e88ea4868f5988424330fd3d0cf9cdec0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
