@@ -72,6 +72,7 @@ avf_flag_aware_apex_defaults {
     updatable: false,
     future_updatable: false,
     platform_apis: true,
+    payload_fs_type: "erofs",
 
     manifest: "manifest.json",
 
