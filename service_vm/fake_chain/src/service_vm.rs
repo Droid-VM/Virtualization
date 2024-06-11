@@ -123,7 +123,7 @@ pub(crate) fn fake_dice_artifacts_up_to_pvmfw() -> Result<(CdiValues, Vec<u8>)> 
         CODE_HASH_PVMFW,
         Config::Descriptor(config_descriptor.as_slice()),
         AUTHORITY_HASH_PVMFW,
-        DiceMode::kDiceModeDebug,
+        DiceMode::kDiceModeNormal,
         HIDDEN_PVMFW,
     );
     let (cdi_values, cert) = retry_dice_main_flow(&UDS, &UDS, &input_values).map_err(|e| {
@@ -165,7 +165,7 @@ pub fn fake_service_vm_dice_artifacts() -> Result<OwnedDiceArtifacts> {
         CODE_HASH_SERVICE_VM,
         Config::Descriptor(config_descriptor.as_slice()),
         AUTHORITY_HASH_SERVICE_VM,
-        DiceMode::kDiceModeDebug,
+        DiceMode::kDiceModeNormal,
         HIDDEN_SERVICE_VM,
     );
     retry_bcc_main_flow(&cdi_values.cdi_attest, &cdi_values.cdi_seal, &dice_chain, &input_values)
