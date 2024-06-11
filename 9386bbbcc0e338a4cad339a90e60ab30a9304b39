@@ -256,6 +256,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bf27210_357eb6a1",
+        "filename": "tests/testapi_no_internet_perm/AndroidManifest.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-11T11:50:03Z",
+      "side": 1,
+      "message": "I suspect it\u0027s harmless, because we shouldn\u0027t ever run new tests on old OS builds.\n\nBut it seems nicer to have it fail at install time rather than fail horribly at runtime, if we ever do manage it.",
+      "parentUuid": "489d4434_0de85d1d",
+      "range": {
+        "startLine": 21,
+        "startChar": 37,
+        "endLine": 21,
+        "endChar": 39
+      },
+      "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "729e9d9e_2c20a398",
