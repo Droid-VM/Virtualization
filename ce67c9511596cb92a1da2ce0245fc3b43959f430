@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c32c9a6e_b3d57d81",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1561731
+      },
+      "writtenOn": "2024-06-11T21:10:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d852475_abccae06",
+      "revId": "ce67c9511596cb92a1da2ce0245fc3b43959f430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8222cbc8_40801173",
@@ -71,6 +89,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f678236_ff12a071",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1561731
+      },
+      "writtenOn": "2024-06-11T21:10:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8222cbc8_40801173",
+      "revId": "ce67c9511596cb92a1da2ce0245fc3b43959f430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3ad1dc6_b0e7b1ce",
@@ -88,6 +124,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bea025db_e6011df7",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1561731
+      },
+      "writtenOn": "2024-06-11T21:10:13Z",
+      "side": 1,
+      "message": "Added. I believe that this is inferred from the context-types nowadays but having it for explicitness is nice.",
+      "parentUuid": "d3ad1dc6_b0e7b1ce",
+      "revId": "ce67c9511596cb92a1da2ce0245fc3b43959f430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33584a39_29db7999",
@@ -101,6 +155,30 @@
       "writtenOn": "2024-05-10T14:12:35Z",
       "side": 1,
       "message": "it looks like some of them has default value in crosvm, should we respect it? https://chromium.googlesource.com/crosvm/crosvm/+/refs/heads/main/devices/src/virtio/gpu/parameters.rs#91",
+      "range": {
+        "startLine": 455,
+        "startChar": 0,
+        "endLine": 458,
+        "endChar": 53
+      },
+      "revId": "ce67c9511596cb92a1da2ce0245fc3b43959f430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9f4c4b7_e47181ef",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1561731
+      },
+      "writtenOn": "2024-06-11T21:10:13Z",
+      "side": 1,
+      "message": "Updated the build defaults below.",
+      "parentUuid": "33584a39_29db7999",
       "range": {
         "startLine": 455,
         "startChar": 0,
