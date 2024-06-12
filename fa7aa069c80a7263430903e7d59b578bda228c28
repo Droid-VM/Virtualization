@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f24457f_60579702",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-06-12T10:00:10Z",
+      "side": 1,
+      "message": "Can we call this `AudioConfig` following `DisplayConfig` below? I don\u0027t hate AudioDevice, but I think consistency does matter.",
+      "range": {
+        "startLine": 331,
+        "startChar": 30,
+        "endLine": 331,
+        "endChar": 41
+      },
+      "revId": "fa7aa069c80a7263430903e7d59b578bda228c28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9622346e_69870d2b",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/AudioDevice.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-06-12T10:00:10Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 18,
+        "startChar": 11,
+        "endLine": 18,
+        "endChar": 22
+      },
+      "revId": "fa7aa069c80a7263430903e7d59b578bda228c28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c47ffb00_874ebb13",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineRawConfig.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-06-12T10:00:10Z",
+      "side": 1,
+      "message": "Ah.. we are already inconsistent!!!",
+      "range": {
+        "startLine": 22,
+        "startChar": 44,
+        "endLine": 22,
+        "endChar": 55
+      },
+      "revId": "fa7aa069c80a7263430903e7d59b578bda228c28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
