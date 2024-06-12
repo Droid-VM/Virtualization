@@ -14,11 +14,14 @@
  * limitations under the License.
  */
 
+#define ATRACE_TAG ATRACE_TAG_GRAPHICS
+
 #include <aidl/android/crosvm/BnCrosvmAndroidDisplayService.h>
 #include <aidl/android/system/virtualizationservice_internal/IVirtualizationServiceInternal.h>
 #include <android/binder_manager.h>
 #include <android/binder_process.h>
 #include <system/graphics.h> // for HAL_PIXEL_FORMAT_*
+#include <utils/Trace.h>
 
 #include <condition_variable>
 #include <memory>
@@ -30,12 +33,43 @@ using aidl::android::view::Surface;
 
 namespace {
 
+class ScopedTrace {
+public:
+    ScopedTrace(const char* fmt, ...) {
+        if (!ATRACE_ENABLED()) {
+            return;
+        }
+
+        const int BUFFER_SIZE = 256;
+        va_list ap;
+        char buf[BUFFER_SIZE];
+
+        va_start(ap, fmt);
+        vsnprintf(buf, BUFFER_SIZE, fmt, ap);
+        va_end(ap);
+
+        ATRACE_BEGIN(buf);
+    }
+
+    ~ScopedTrace() {
+        if (!ATRACE_ENABLED()) {
+            return;
+        }
+
+        ATRACE_END();
+    }
+};
+
+#define ATRACE_FORMAT(format, ...) ScopedTrace scoped_platform_trace(format, ##__VA_ARGS__);
+
 class SinkANativeWindow_Buffer {
 public:
     SinkANativeWindow_Buffer() = default;
     virtual ~SinkANativeWindow_Buffer() = default;
 
     bool configure(uint32_t width, uint32_t height, int format) {
+        ATRACE_FORMAT("Sink configure(w:%d h:%d format:%d)", width, height, format);
+
         if (format != HAL_PIXEL_FORMAT_BGRA_8888) {
             return false;
         }
@@ -68,6 +102,8 @@ public:
     virtual ~ANativeWindowWrapper() = default;
 
     void setSurface(Surface* surface) {
+        ATRACE_FORMAT("ANativeWindowWrapper::setSurface(surface:%p)", surface->get());
+
         {
             std::lock_guard lk(mSurfaceReadyMutex);
             mSurface = std::make_unique<Surface>(surface->release());
@@ -76,6 +112,8 @@ public:
     }
 
     void removeSurface() {
+        ATRACE_FORMAT("ANativeWindowWrapper::removeSurface()");
+
         {
             std::lock_guard lk(mSurfaceReadyMutex);
             if (mSurface) {
@@ -93,6 +131,8 @@ public:
     }
 
     int waitForSurfaceAndConfigure(uint32_t width, uint32_t height) {
+        ATRACE_FORMAT("ANativeWindowWrapper::waitForSurfaceAndConfigure(w:%d h:%d)", width, height);
+
         std::unique_lock lk(mSurfaceReadyMutex);
         mSurfaceReady.wait(lk, [this] { return mSurface != nullptr; });
 
@@ -114,6 +154,8 @@ public:
     }
 
     int lock(ANativeWindow_Buffer* out_buffer) {
+        ATRACE_FORMAT("ANativeWindowWrapper::lock()");
+
         std::unique_lock lk(mSurfaceReadyMutex);
 
         Surface* surface = mSurface.get();
@@ -133,6 +175,8 @@ public:
     }
 
     int unlockAndPost() {
+        ATRACE_FORMAT("ANativeWindowWrapper::unlockAndPost()");
+
         std::unique_lock lk(mSurfaceReadyMutex);
 
         Surface* surface = mSurface.get();
@@ -163,6 +207,8 @@ public:
     virtual ~DisplayService() = default;
 
     ndk::ScopedAStatus setSurface(Surface* surface, bool forCursor) override {
+        ATRACE_FORMAT("DisplayService::setSurface()");
+
         if (forCursor) {
             mCursor.setSurface(surface);
         } else {
@@ -172,6 +218,8 @@ public:
     }
 
     ndk::ScopedAStatus removeSurface(bool forCursor) override {
+        ATRACE_FORMAT("DisplayService::removeSurface()");
+
         if (forCursor) {
             mCursor.removeSurface();
         } else {
@@ -262,6 +310,8 @@ extern "C" void destroy_android_display_context(struct AndroidDisplayContext* ct
 extern "C" ANativeWindowWrapper* create_android_surface(struct AndroidDisplayContext* ctx,
                                                         uint32_t width, uint32_t height,
                                                         bool forCursor) {
+    ATRACE_FORMAT("create_android_surface(w:%p h:%p cursor:%d)", width, height, forCursor);
+
     if (ctx->disp_service == nullptr) {
         ctx->errorf("Display service was not created");
         return nullptr;
@@ -292,6 +342,8 @@ extern "C" void destroy_android_surface(struct AndroidDisplayContext*, ANativeWi
 extern "C" bool get_android_surface_buffer(struct AndroidDisplayContext* ctx,
                                            ANativeWindowWrapper* anwWrapper,
                                            ANativeWindow_Buffer* out_buffer) {
+    ATRACE_FORMAT("get_android_surface_buffer(anwWrapper:%p)", anwWrapper);
+
     if (out_buffer == nullptr) {
         ctx->errorf("out_buffer is null");
         return false;
@@ -327,6 +379,8 @@ extern "C" void set_android_surface_position(struct AndroidDisplayContext* ctx, 
 
 extern "C" void post_android_surface_buffer(struct AndroidDisplayContext* ctx,
                                             ANativeWindowWrapper* anwWrapper) {
+    ATRACE_FORMAT("post_android_surface_buffer(anwWrapper:%p)", anwWrapper);
+
     if (anwWrapper == nullptr) {
         ctx->errorf("Invalid ANativeWindowWrapper provided");
         return;
