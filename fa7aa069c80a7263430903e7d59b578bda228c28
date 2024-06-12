@@ -68,6 +68,30 @@
       },
       "revId": "fa7aa069c80a7263430903e7d59b578bda228c28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cc954fc_797f4689",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineRawConfig.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-06-12T10:41:14Z",
+      "side": 1,
+      "message": "I think InputDevice makes sense. It would be passed as an array. Array of InputConfig is weird.\nI originally chose AudioDevice because I thought AudioDevice\u003dnull is better than AudioConfig\u003dnull to imply no audio device and no \u0027virio-snd\u0027 in crosvm.\nBut regarding to consistency, I think we could use audioConfig and make it like\n{\n    boolean useSpeaker;\n    boolean useMicrophone;\n}\nDoes it make sense to you? Or maybe just nullable AudioConfig is okay? Because we already use DisplayConfig\u003dnull to imply no GPU display device. Kinds of consistency too.",
+      "parentUuid": "c47ffb00_874ebb13",
+      "range": {
+        "startLine": 22,
+        "startChar": 44,
+        "endLine": 22,
+        "endChar": 55
+      },
+      "revId": "fa7aa069c80a7263430903e7d59b578bda228c28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
