@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b31ee93d_edb3c55b",
+        "filename": "virtualizationservice/aidl/android/system/vmtethering/IVmTethering.aidl",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-06-12T23:54:14Z",
+      "side": 1,
+      "message": "nit: the method doesn\u0027t accept any network interface :)",
+      "range": {
+        "startLine": 21,
+        "startChar": 28,
+        "endLine": 21,
+        "endChar": 33
+      },
+      "revId": "31c940d425af9b47664b8c17bda4936d4ed8c92e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b99d390_edd8f57b",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-06-12T23:54:14Z",
+      "side": 1,
+      "message": "Out of curiosity, why do we need this code in this patch if the TODO comment suggests that createTapInterface is not the right place for enabling tethering?",
+      "range": {
+        "startLine": 529,
+        "startChar": 2,
+        "endLine": 537,
+        "endChar": 9
+      },
+      "revId": "31c940d425af9b47664b8c17bda4936d4ed8c92e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
