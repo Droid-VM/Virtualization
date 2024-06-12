@@ -540,6 +540,30 @@
       },
       "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cefb6a6_7fc39baf",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 2347,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-12T06:39:05Z",
+      "side": 1,
+      "message": "\u003e I would really prefer to check it in VirtualMachineConfig.Builder.build();\n\nDone, and added an assertion into `vmConfigBuilderValidationTests`. Please let me know if I should do some more.",
+      "parentUuid": "ac85cd3e_b7306d23",
+      "range": {
+        "startLine": 2338,
+        "startChar": 0,
+        "endLine": 2347,
+        "endChar": 5
+      },
+      "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
