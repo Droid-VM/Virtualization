@@ -71,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc238290_569511ea",
+        "filename": "vm_payload/wrapper/attestation.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-12T10:08:32Z",
+      "side": 1,
+      "message": "Definitely not.\n\nThe \u0026self comes from a const pointer in the C API, which is translated back to \u0026AttestationResult in the Rust implementation, so the type system should prevent us from achieving that even if we wanted to.",
+      "parentUuid": "290b80b0_f81a2fac",
+      "revId": "f78164cc39e00b9cce9730dce21d95cbe169181e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f9d009b_d5ad2bcd",
