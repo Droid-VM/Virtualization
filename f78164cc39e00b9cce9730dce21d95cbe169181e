@@ -89,6 +89,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ee3f067_392500a2",
+        "filename": "vm_payload/wrapper/attestation.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-12T14:08:42Z",
+      "side": 1,
+      "message": "We discussed offline - my concerns aren\u0027t valid, if we don\u0027t have interior mutation.\n\nSo I added Sync, with an attempt at a suitable comment.",
+      "parentUuid": "fc238290_569511ea",
+      "revId": "f78164cc39e00b9cce9730dce21d95cbe169181e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f9d009b_d5ad2bcd",
