@@ -51,6 +51,52 @@
       "parentUuid": "7c0fc0ef_b74c3ad1",
       "revId": "ee30a20098a902579f44fe339fe7091120c7aa97",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96f283a5_912d455d",
+        "filename": "java/AndroidManifest.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-06-12T09:48:43Z",
+      "side": 1,
+      "message": "Does any of our code run in the context of package `com.android.virtualmachine.res`? I guess not.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 70
+      },
+      "revId": "ee30a20098a902579f44fe339fe7091120c7aa97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28047d85_32531ca5",
+        "filename": "java/service/src/com/android/system/virtualmachine/VirtualizationSystemService.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-06-12T09:48:43Z",
+      "side": 1,
+      "message": "don\u0027t we need a reverse of this as well?",
+      "range": {
+        "startLine": 148,
+        "startChar": 20,
+        "endLine": 148,
+        "endChar": 37
+      },
+      "revId": "ee30a20098a902579f44fe339fe7091120c7aa97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
