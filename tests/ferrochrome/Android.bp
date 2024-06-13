@@ -4,10 +4,21 @@ package {
 
 sh_test_host {
     name: "ferrochrome-tests",
-    src: "ferrochrome.sh",
+    src: ":ferrochrome-tests-sh",
+    test_suites: ["general-tests"],
     test_options: {
         unit_test: false,
     },
     per_testcase_directory: true,
-    data: ["assets/vm_config.json"],
+    data: [
+        "assets/vm_config.json",
+    ],
+}
+
+// Workaround for passing --verbose parameter
+genrule {
+    name: "ferrochrome-tests-sh",
+    srcs: ["ferrochrome.sh"],
+    out: ["ferrochrome-tests.sh"],
+    cmd: "echo \"set -x\" > $(out); cat $(in) >> $(out)",
 }
