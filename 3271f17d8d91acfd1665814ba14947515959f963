@@ -46,6 +46,30 @@
       },
       "revId": "3271f17d8d91acfd1665814ba14947515959f963",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0756e85f_1de2e13d",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-13T09:07:15Z",
+      "side": 1,
+      "message": "If there\u0027s been 2 questions, sounds like a clarifying comment would help?\n\nWould it not be better to cast to `ioctl_num_type`? It may be `c_int` now, but that could change, and it isn\u0027t obviously correct to someone reading this code.",
+      "parentUuid": "01726b6c_c8f00df7",
+      "range": {
+        "startLine": 30,
+        "startChar": 48,
+        "endLine": 30,
+        "endChar": 56
+      },
+      "revId": "3271f17d8d91acfd1665814ba14947515959f963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
