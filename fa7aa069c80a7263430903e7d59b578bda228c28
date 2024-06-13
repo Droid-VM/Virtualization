@@ -92,6 +92,30 @@
       },
       "revId": "fa7aa069c80a7263430903e7d59b578bda228c28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e4c77de_056d7ba5",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineRawConfig.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-06-13T05:35:31Z",
+      "side": 1,
+      "message": "I like the suggestion (useSpeaker, useMicrodphone) better. (useSpeaker\u003dfalse, useMic\u003dfalse) would be the same as passing null audio config.",
+      "parentUuid": "2cc954fc_797f4689",
+      "range": {
+        "startLine": 22,
+        "startChar": 44,
+        "endLine": 22,
+        "endChar": 55
+      },
+      "revId": "fa7aa069c80a7263430903e7d59b578bda228c28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
