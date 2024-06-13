@@ -17,7 +17,7 @@
 ## Booting tests for ferrochrome
 ## Keep this file synced with docs/custom_vm.md
 
-set -e
+set -ex
 
 FECR_GS_URL="https://storage.googleapis.com/chromiumos-image-archive/ferrochrome-public"
 FECR_DEFAULT_VERSION="R127-15916.0.0"
@@ -42,7 +42,7 @@ print_usage() {
   echo ""
   echo "By default, this downloads ferrochrome image with version ${FECR_DEFAULT_VERSION},"
   echo "launches, and waits for boot completed."
-  echo "When done, removes downloaded image."
+  echo "When done, removes downloaded image on host while keeping pushed image on device."
   echo ""
   echo "Usage: ferrochrome.sh [options]"
   echo ""
@@ -94,6 +94,21 @@ done
 trap fecr_clean_up INT
 trap fecr_clean_up EXIT
 
+adb root > /dev/null
+
+pkg_name=""
+adb shell pm list packages | grep ${AOSP_PKG_NAME} > /dev/null
+if [[ "${?}" == "0" ]]; then
+  pkg_name=${AOSP_PKG_NAME}
+else
+  adb shell pm list packages | grep ${SIGNED_PKG_NAME} > /dev/null || exit 1
+  pkg_name=${SIGNED_PKG_NAME}
+fi
+
+adb shell pm enable ${pkg_name}/${AOSP_PKG_NAME}.MainActivity > /dev/null
+adb shell pm grant ${pkg_name} android.permission.USE_CUSTOM_VIRTUAL_MACHINE > /dev/null
+adb shell pm clear ${pkg_name} > /dev/null
+
 if [[ -z "${fecr_skip}" ]]; then
   if [[ -z "${fecr_dir}" ]]; then
     # Download fecr image archive, and extract necessary files
@@ -115,18 +130,6 @@ if [[ -z "${fecr_skip}" ]]; then
   adb push ${fecr_script_path}/assets/vm_config.json ${FECR_CONFIG_PATH}
 fi
 
-adb root > /dev/null
-adb shell pm list packages | grep ${AOSP_PKG_NAME} > /dev/null
-if [[ "${?}" == "0" ]]; then
-  pkg_name=${AOSP_PKG_NAME}
-else
-  pkg_name=${SIGNED_PKG_NAME}
-fi
-
-adb shell pm enable ${pkg_name}/${AOSP_PKG_NAME}.MainActivity > /dev/null
-adb shell pm grant ${pkg_name} android.permission.USE_CUSTOM_VIRTUAL_MACHINE > /dev/null
-adb shell pm clear ${pkg_name} > /dev/null
-
 echo "Starting ferrochrome"
 adb shell am start-activity ${pkg_name}/${AOSP_PKG_NAME}.MainActivity > /dev/null
 
@@ -138,5 +141,7 @@ while [[ $((EPOCHSECONDS - fecr_start_time)) -lt ${FECR_BOOT_TIMEOUT} ]]; do
   sleep 10
 done
 
-echo "Ferrochrome failed to boot"
+echo "Ferrochrome failed to boot. Dumping console log"
+adb shell cat ${log_path}
+
 exit 1
