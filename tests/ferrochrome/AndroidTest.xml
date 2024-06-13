@@ -23,10 +23,21 @@
         <option name="force-root" value="true"/>
     </target_preparer>
 
-    <!-- Check presence of vmlauncher here, because we can't skip tests in shell test -->
+    <!-- Check assumptions here, because we can't skip tests in shell test -->
     <target_preparer class="com.android.tradefed.targetprep.RunCommandTargetPreparer">
         <option name="throw-if-cmd-fail" value="true" />
+        <!-- Check if vmlauncher is available -->
         <option name="run-command" value="pm list packages | grep vmlauncher" />
+        <!-- Check if the device has enough space (7G) for ferrochrome image (~6.5G) -->
+        <option name="run-command" value="[[ $(df /data/local | tail -1 | awk '{print $4}') -gt 7340032 ]]" />
+    </target_preparer>
+
+    <!-- Explicitly clean up ferrochrome image when done.
+         It's too large (6.5G+), so this may break further tests. -->
+    <target_preparer class="com.android.tradefed.targetprep.RunCommandTargetPreparer">
+        <option name="throw-if-cmd-fail" value="false" />
+        <option name="run-command" value="mkdir /data/local/tmp/ferrochrome" />
+        <option name="teardown-command" value="rm -rf /data/local/tmp/ferrochrome" />
     </target_preparer>
 
     <test class="com.android.tradefed.testtype.binary.ExecutableHostTest" >
