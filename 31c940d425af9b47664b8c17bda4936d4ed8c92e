@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "951bc3d4_fb187ce5",
+        "filename": "virtualizationservice/aidl/android/system/vmtethering/IVmTethering.aidl",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-13T01:37:04Z",
+      "side": 1,
+      "message": "Yes, you\u0027re right! Thanks for finding..!",
+      "parentUuid": "b31ee93d_edb3c55b",
+      "range": {
+        "startLine": 21,
+        "startChar": 28,
+        "endLine": 21,
+        "endChar": 33
+      },
+      "revId": "31c940d425af9b47664b8c17bda4936d4ed8c92e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7b99d390_edd8f57b",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 8
@@ -37,6 +61,30 @@
       "writtenOn": "2024-06-12T23:54:14Z",
       "side": 1,
       "message": "Out of curiosity, why do we need this code in this patch if the TODO comment suggests that createTapInterface is not the right place for enabling tethering?",
+      "range": {
+        "startLine": 529,
+        "startChar": 2,
+        "endLine": 537,
+        "endChar": 9
+      },
+      "revId": "31c940d425af9b47664b8c17bda4936d4ed8c92e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f02f40dc_7c1c6846",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-13T01:37:04Z",
+      "side": 1,
+      "message": "It\u0027s for providing AVF\u0027s network feature rapidly towards ferrochrome.\n\nOriginally the workflow should be:\n1. Creating a TAP interface per VM.\n2. Creating a bridge interface shared by all VMs, and make a connection with TAP interfaces.\n3. Enable tethering with bridge interface.\n\nBut, we\u0027ve switched the workflow to reduce hacky things in Ferrochrome ASAP:\n1. Creating a TAP interface per VM.\n2. Enable tethering with TAP interface in advance for interim solution. (In this phase, we can supply internet connection to ferrochrome, it\u0027ll resolve your curiosity why I left TODO.)\n3. Creating a bridge interface shared by all VMs, and make a connection with TAP interfaces.\n4. Enable tethering with bridge interface, replaced from TAP interface.",
+      "parentUuid": "7b99d390_edd8f57b",
       "range": {
         "startLine": 529,
         "startChar": 2,
