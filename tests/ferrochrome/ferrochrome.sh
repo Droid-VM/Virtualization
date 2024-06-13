@@ -42,13 +42,14 @@ print_usage() {
   echo ""
   echo "By default, this downloads ferrochrome image with version ${FECR_DEFAULT_VERSION},"
   echo "launches, and waits for boot completed."
-  echo "When done, removes downloaded image."
+  echo "When done, removes downloaded image on host while keeping pushed image on device."
   echo ""
   echo "Usage: ferrochrome.sh [options]"
   echo ""
   echo "Options"
   echo "  --help or -h: This message"
-  echo "  --dir \${dir}: Use ferrochrome images at the dir instead of downloading"
+  echo "  --dir DIR: Use ferrochrome images at the dir instead of downloading"
+  echo "  --verbose: Verbose log message (set -x)"
   echo "  --skip: Skipping downloading and/or pushing images"
   echo "  --version \${version}: ferrochrome version to be downloaded"
   echo "  --keep: Keep downloaded ferrochrome image"
@@ -60,10 +61,14 @@ fecr_dir=""
 fecr_keep=""
 fecr_skip=""
 fecr_script_path=$(dirname ${0})
+fecr_verbose=""
 
 # Parse parameters
 while (( "${#}" )); do
   case "${1}" in
+    --verbose)
+      fecr_verbose="true"
+      ;;
     --version)
       shift
       fecr_version="${1}"
@@ -94,6 +99,29 @@ done
 trap fecr_clean_up INT
 trap fecr_clean_up EXIT
 
+if [[ -n "${fecr_verbose}" ]]; then
+  set -x
+fi
+
+# adb root fails with exit code 0, so need to check returned string
+if [[ "$(adb root)" == *"cannot"* ]]; then
+  echo "adb root failed"
+  exit 1
+fi
+
+pkg_name=""
+pkg_path=$(adb shell pm path ${AOSP_PKG_NAME} || true)
+if [[ -n "${pkg_path}" ]]; then
+  pkg_name=${AOSP_PKG_NAME}
+else
+  adb shell pm path ${SIGNED_PKG_NAME} > /dev/null
+  pkg_name=${SIGNED_PKG_NAME}
+fi
+
+adb shell pm enable ${pkg_name}/${AOSP_PKG_NAME}.MainActivity > /dev/null
+adb shell pm grant ${pkg_name} android.permission.USE_CUSTOM_VIRTUAL_MACHINE > /dev/null
+adb shell pm clear ${pkg_name} > /dev/null
+
 if [[ -z "${fecr_skip}" ]]; then
   if [[ -z "${fecr_dir}" ]]; then
     # Download fecr image archive, and extract necessary files
@@ -115,18 +143,6 @@ if [[ -z "${fecr_skip}" ]]; then
   adb push ${fecr_script_path}/assets/vm_config.json ${FECR_CONFIG_PATH}
 fi
 
-adb root > /dev/null
-adb shell pm list packages | grep ${AOSP_PKG_NAME} > /dev/null
-if [[ "${?}" == "0" ]]; then
-  pkg_name=${AOSP_PKG_NAME}
-else
-  pkg_name=${SIGNED_PKG_NAME}
-fi
-
-adb shell pm enable ${pkg_name}/${AOSP_PKG_NAME}.MainActivity > /dev/null
-adb shell pm grant ${pkg_name} android.permission.USE_CUSTOM_VIRTUAL_MACHINE > /dev/null
-adb shell pm clear ${pkg_name} > /dev/null
-
 echo "Starting ferrochrome"
 adb shell am start-activity ${pkg_name}/${AOSP_PKG_NAME}.MainActivity > /dev/null
 
@@ -138,5 +154,7 @@ while [[ $((EPOCHSECONDS - fecr_start_time)) -lt ${FECR_BOOT_TIMEOUT} ]]; do
   sleep 10
 done
 
-echo "Ferrochrome failed to boot"
+echo "Ferrochrome failed to boot. Dumping console log"
+adb shell cat ${log_path}
+
 exit 1
