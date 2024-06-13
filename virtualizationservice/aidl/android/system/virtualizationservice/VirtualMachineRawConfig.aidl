@@ -91,4 +91,7 @@ parcelable VirtualMachineRawConfig {
 
     /** The serial device for VM console input. */
     @nullable @utf8InCpp String consoleInputDevice;
+
+    /** Enable boost UClamp for more stable VM performance */
+    boolean boostUclamp;
 }
