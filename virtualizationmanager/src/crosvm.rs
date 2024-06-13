@@ -122,6 +122,7 @@ pub struct CrosvmConfig {
     pub display_config: Option<DisplayConfig>,
     pub input_device_options: Vec<InputDeviceOption>,
     pub hugepages: bool,
+    pub boost_uclamp: bool,
 }
 
 #[derive(Debug)]
@@ -824,6 +825,7 @@ fn run_vm(
         .arg("info,disk=warn")
         .arg("run")
         .arg("--disable-sandbox")
+        .arg("--boost-uclamp")
         .arg("--cid")
         .arg(config.cid.to_string());
 
@@ -1013,6 +1015,10 @@ fn run_vm(
 
     if config.hugepages {
         command.arg("--hugepages");
+    }
+
+    if config.boost_uclamp {
+        command.arg("--boost-uclamp");
     }
 
     append_platform_devices(&mut command, &mut preserved_fds, &config)?;

@@ -88,4 +88,7 @@ parcelable VirtualMachineRawConfig {
 
     /** Whether the VM should have network feature. */
     boolean networkSupported;
+
+    /** Enable boost UClamp for more stable VM performance */
+    boolean boostUclamp;
 }
