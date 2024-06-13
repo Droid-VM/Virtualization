@@ -684,6 +684,30 @@
       },
       "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da700f6d_60ee1be2",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 2347,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-06-13T13:16:51Z",
+      "side": 1,
+      "message": "Oh, right. For some reason I thought that pvmfw will validate that DT property.\n\nAfter thinking a bit more. I slightly prefer the option when for now we don\u0027t expose the networking feature to Microdroid VMs. Then I suspect you won\u0027t need any @TestApis as well.",
+      "parentUuid": "f1296bd1_cc3d09a4",
+      "range": {
+        "startLine": 2338,
+        "startChar": 0,
+        "endLine": 2347,
+        "endChar": 5
+      },
+      "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
