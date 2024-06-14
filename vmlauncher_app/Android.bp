@@ -25,4 +25,7 @@ android_app {
         optimize: true,
         shrink_resources: true,
     },
+    required: [
+        "FerrochromeApp",
+    ],
 }
