@@ -1,0 +1,31 @@
+From 8bc46aa1dd6e472e4d71b41616192cc59adb4b53 Mon Sep 17 00:00:00 2001
+From: Shikha Panwar <shikhapanwar@google.com>
+Date: Fri, 14 Jun 2024 06:12:37 +0000
+Subject: [PATCH 2/2] Instance_id: Log only the first 8 bytes
+
+instance-id of a VM is somewhat private to the app owning the VM, do not
+log it in full
+
+Test: Builds
+Bug: 331349693
+Change-Id: I2306efb95ecec13153e2e9a0c5c8600f21fa02c2
+---
+ virtualizationservice/src/aidl.rs | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/virtualizationservice/src/aidl.rs b/virtualizationservice/src/aidl.rs
+index 8fe41673..fecd1a55 100644
+--- a/virtualizationservice/src/aidl.rs
++++ b/virtualizationservice/src/aidl.rs
+@@ -452,7 +452,7 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
+             .context("Failed to allocate instance_id")
+             .or_service_specific_exception(-1)?;
+         let uid = get_calling_uid();
+-        info!("Allocated a VM's instance_id: {:?}, for uid: {:?}", hex::encode(id), uid);
++        info!("Allocated a VM's instance_id: {:?}..., for uid: {:?}", &hex::encode(id)[..8], uid);
+         let state = &mut *self.state.lock().unwrap();
+         if let Some(sk_state) = &mut state.sk_state {
+             let user_id = multiuser_get_user_id(uid);
+-- 
+2.45.2.627.g7a2c4fd464-goog
+
