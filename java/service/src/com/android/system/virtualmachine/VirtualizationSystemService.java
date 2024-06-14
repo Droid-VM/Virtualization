@@ -169,5 +169,11 @@ public class VirtualizationSystemService extends SystemService {
                     };
             tm.startTethering(tr, c -> c.run() /* executor */, startTetheringCallback);
         }
+
+        @Override
+        public void disableVmTethering() {
+            final TetheringManager tm = getContext().getSystemService(TetheringManager.class);
+            tm.stopTethering(TetheringManager.TETHERING_VIRTUAL);
+        }
     }
 }
