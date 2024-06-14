@@ -59,6 +59,7 @@ use rpcbinder::RpcServer;
 /// external/crosvm
 use base::AsRawDescriptor;
 use base::UnixSeqpacketListener;
+#[allow(unused_imports)]
 use vm_control::{BalloonControlCommand, VmRequest, VmResponse};
 
 const CROSVM_PATH: &str = "/apex/com.android.virt/bin/crosvm";
@@ -612,7 +613,8 @@ impl VmInstance {
 
     /// Responds to memory-trimming notifications by inflating the virtio
     /// balloon to reclaim guest memory.
-    pub fn trim_memory(&self, level: MemoryTrimLevel) -> Result<(), Error> {
+    pub fn trim_memory(&self, _level: MemoryTrimLevel) -> Result<(), Error> {
+        /*
         let request = VmRequest::BalloonCommand(BalloonControlCommand::Stats {});
         match vm_control::client::handle_request(&request, &self.crosvm_control_socket_path) {
             Ok(VmResponse::BalloonStats { stats, balloon_actual: _ }) => {
@@ -649,6 +651,7 @@ impl VmInstance {
             }
             e => bail!("Error requesting balloon stats: {:?}", e),
         }
+        */
         Ok(())
     }
 
