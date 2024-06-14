@@ -6,7 +6,6 @@ rust_defaults {
     name: "vm.defaults",
     crate_name: "vm",
     defaults: ["avf_build_flags_rust"],
-    srcs: ["src/main.rs"],
     edition: "2021",
     prefer_rlib: true,
     rustlibs: [
@@ -33,6 +32,7 @@ rust_defaults {
 rust_binary {
     name: "vm",
     defaults: ["vm.defaults"],
+    srcs: ["src/main.rs"],
     apex_available: [
         "com.android.virt",
     ],
@@ -41,6 +41,7 @@ rust_binary {
 rust_test {
     name: "vm.test",
     defaults: ["vm.defaults"],
+    srcs: ["src/main.rs"],
     test_suites: ["general-tests"],
     compile_multilib: "first",
 }
@@ -48,4 +49,28 @@ rust_test {
 sh_binary_host {
     name: "vm_shell",
     src: "vm_shell.sh",
+}
+
+rust_binary {
+    name: "foo_rs",
+    defaults: ["vm.defaults"],
+    srcs: ["src/foo.rs"],
+    rustlibs: [
+        "libvsock",
+    ],
+    apex_available: [
+        "com.android.virt",
+    ],
+}
+
+rust_binary {
+    name: "bar_rs",
+    defaults: ["vm.defaults"],
+    srcs: ["src/bar.rs"],
+    rustlibs: [
+        "libvsock",
+    ],
+    apex_available: [
+        "com.android.virt",
+    ],
 }
