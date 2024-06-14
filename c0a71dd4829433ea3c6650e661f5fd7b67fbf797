@@ -22,6 +22,30 @@
       },
       "revId": "c0a71dd4829433ea3c6650e661f5fd7b67fbf797",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "467d6c0d_05b78004",
+        "filename": "virtualizationservice/vmnic/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-14T07:55:54Z",
+      "side": 1,
+      "message": "It can\u0027t be dropped. As I said before,\n- 0x800454d2 throws an error since the value is out of range of ioctl_num_type(c_int).\n- 0x800454d2u32 throws an error because of type difference between u32 and ioctl_num_type(c_int).",
+      "parentUuid": "1daa4c44_358adbdc",
+      "range": {
+        "startLine": 30,
+        "startChar": 44,
+        "endLine": 30,
+        "endChar": 65
+      },
+      "revId": "c0a71dd4829433ea3c6650e661f5fd7b67fbf797",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
