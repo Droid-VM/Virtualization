@@ -708,6 +708,30 @@
       },
       "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44b76468_9b06be4d",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 2347,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-14T01:05:19Z",
+      "side": 1,
+      "message": "But not exposing network feature to Microdroid VMs would lose test coverage around network feature. And I think exposing as `@TestApi` is okay, since it\u0027s `trunk_staging` flagged, not entirely applied.\n\nSomeday I should design \u0026 implement around VM identity indeed, it should be exposed again as `@TestApi`, right?",
+      "parentUuid": "da700f6d_60ee1be2",
+      "range": {
+        "startLine": 2338,
+        "startChar": 0,
+        "endLine": 2347,
+        "endChar": 5
+      },
+      "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
