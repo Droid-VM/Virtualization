@@ -657,6 +657,34 @@ impl Rss {
     }
 }
 
+fn parse_sysfs_cpu_info(cpu_id: usize, property: &str) -> Result<u32> {
+    let path = format!("/sys/devices/system/cpu/cpu{cpu_id}/{property}");
+    std::fs::read_to_string(path)?
+        .trim()
+        .parse()
+        .map_err(|e| anyhow!("Failed to read cpu info, {e:?}"))
+}
+
+fn collect_for_each_cpu<F, T>(func: F) -> std::result::Result<Vec<T>, Error>
+where
+    F: Fn(usize) -> std::result::Result<T, Error>,
+{
+    (0..get_num_cpus().unwrap()).map(func).collect()
+}
+
+fn logical_core_capacity(cpu_id: usize) -> Result<u32> {
+    parse_sysfs_cpu_info(cpu_id, "cpu_capacity")
+}
+
+fn find_largest_cpu() -> Result<usize> {
+    let largest_cpu = collect_for_each_cpu(logical_core_capacity)?
+        .into_iter()
+        .enumerate()
+        .max_by(|cpu, capacity| cpu.1.cmp(&capacity.1))
+        .unwrap();
+    Ok(largest_cpu.0)
+}
+
 // Get Cpus_allowed mask
 fn check_if_all_cpus_allowed() -> Result<bool> {
     let file = read_to_string("/proc/self/status")?;
@@ -1056,6 +1084,10 @@ fn run_vm(
     }
 
     if config.boost_uclamp {
+        if !config.host_cpu_topology {
+            let largest_cpu = find_largest_cpu().unwrap();
+            command.arg("--cpu-affinity").arg(format!("0={}", largest_cpu));
+        }
         command.arg("--boost-uclamp");
     }
 
