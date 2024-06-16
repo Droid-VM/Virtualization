@@ -854,7 +854,7 @@ fn run_vm(
         let virtio_pci_device_count = 4 + config.disks.len();
         // crosvm virtio queue has 256 entries, so 2 MiB per device (2 pages per entry) should be
         // enough.
-        let swiotlb_size_mib = 2 * virtio_pci_device_count as u32;
+        let swiotlb_size_mib = 64; //2 * virtio_pci_device_count as u32;
         command.arg("--swiotlb").arg(swiotlb_size_mib.to_string());
 
         // Workaround to keep crash_dump from trying to read protected guest memory.
