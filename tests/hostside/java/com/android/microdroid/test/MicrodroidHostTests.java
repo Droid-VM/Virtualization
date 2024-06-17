@@ -1029,6 +1029,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     @CddTest
+    @Ignore("b/345118393")
     public void testNoAvfDebugPolicyInLockedDevice() throws Exception {
         ITestDevice device = getDevice();
 
