@@ -106,6 +106,24 @@
       "parentUuid": "36321522_3cc8cd86",
       "revId": "7241f94e94fd5f98b606d65e1d779e086963747a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a354f203_46228e4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-17T09:36:56Z",
+      "side": 1,
+      "message": "\u003e release_avf_enable_llpvm_changes is on everywhere in V and will hopefully soon be retired.\n\nGood to hear that! Then there\u0027s no worries on flag order.\n\n\u003e Generated source file? JNI? Asset/resource?\n\nAh, you reminded me about the previous solution that using JNI! Apologies on forgetting. It should be doable.\nhttps://source.corp.google.com/h/android/platform/superproject/main/+/main:packages/modules/Virtualization/java/jni/android_system_virtualmachine_VirtualizationService.cpp;l\u003d112-116\n\nOn the other hand, I prefer having a long-term solution not relying on JNI. IMO, it\u0027s hacky that every usage of build flag in Java requires to construct own JNI functions.",
+      "parentUuid": "62d9a1ff_1768b081",
+      "revId": "7241f94e94fd5f98b606d65e1d779e086963747a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
