@@ -70,6 +70,24 @@
       "parentUuid": "1f2a586d_40121c27",
       "revId": "7241f94e94fd5f98b606d65e1d779e086963747a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36321522_3cc8cd86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-17T09:09:01Z",
+      "side": 1,
+      "message": "One more thing we should consider is, enabling `VirtualizationSystemService` relies on `release_avf_enable_llpvm_changes`, but I\u0027m not sure proceeding `release_avf_enable_llpvm_changes` flag is faster than `release_avf_enable_network`.\n\n\u003e Yeah, the first option sounds the least worst. Your code could depend on a side effect (ex: the existence of a file like vmnic) of the build flag.\n\nI think it sounds good, though it seems little hacky.",
+      "parentUuid": "1f2a586d_40121c27",
+      "revId": "7241f94e94fd5f98b606d65e1d779e086963747a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
