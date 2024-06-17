@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38e5ff7a_8828cc0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-17T08:06:15Z",
+      "side": 1,
+      "message": "With my investigation, the root cause of this being reverted is lack of flag guarding for using `IVmTetheringService` in `VirtualizationSystemService`. That\u0027s my fault 😞\n\nThe problem is, I need to find the way delivering information into `VirtualizationSystemService` to decide publishing `IVmTethering` or not based on build flag. Currently on seeking, but haven\u0027t gotten satisfying idea yet.\n- Append an additional file into virt APEX, and let the library read it?\n- Let `IVmTethering` be independent from `VirtualizationSystemService`?",
+      "revId": "7241f94e94fd5f98b606d65e1d779e086963747a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
