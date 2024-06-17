@@ -22,6 +22,30 @@
       },
       "revId": "8508bacf355f6d66d863bb10417d93f7453a1a5c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "703b2ef6_3257b5eb",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 871,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-17T16:49:26Z",
+      "side": 1,
+      "message": "HOST if the connection comes from some other process running in host Android (loopback connections are allowed, and we can only restrict them in limited ways with SELinux).\nHYPERVISOR if the connection is from the hypervisor. Which AFAIK can\u0027t happen, which is why I\u0027m happy to reject it.",
+      "parentUuid": "25a91fdc_71697230",
+      "range": {
+        "startLine": 871,
+        "startChar": 35,
+        "endLine": 871,
+        "endChar": 74
+      },
+      "revId": "8508bacf355f6d66d863bb10417d93f7453a1a5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
