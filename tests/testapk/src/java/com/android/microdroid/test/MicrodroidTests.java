@@ -2515,6 +2515,28 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         }
     }
 
+    @Test
+    public void concurrentVms() throws Exception {
+        final int MIN_CONCURRENT_VMS = 8;
+        final int MEM_MIB = 100;
+
+        VirtualMachine[] vms = new VirtualMachine[MIN_CONCURRENT_VMS];
+        for (int i = 0; i < MIN_CONCURRENT_VMS; i++) {
+            VirtualMachineConfig config =
+                    newVmConfigBuilderWithPayloadBinary("MicrodroidIdleNativeLib.so")
+                            .setDebugLevel(DEBUG_LEVEL_NONE)
+                            .setMemoryBytes(MEM_MIB * ONE_MEBI)
+                            .build();
+
+            vms[i] = forceCreateNewVirtualMachine("test_concurrent_vms_" + i, config);
+            vms[i].run();
+        }
+
+        for (VirtualMachine vm : vms) {
+            assertThat(vm.getStatus()).isEqualTo(VirtualMachine.STATUS_RUNNING);
+        }
+    }
+
     private VirtualMachineDescriptor toParcelFromParcel(VirtualMachineDescriptor descriptor) {
         Parcel parcel = Parcel.obtain();
         descriptor.writeToParcel(parcel, 0);
