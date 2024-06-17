@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "503db388_083ea09b",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-06-17T09:00:52Z",
+      "side": 1,
+      "message": "nits: use* instead of get*?",
+      "range": {
+        "startLine": 364,
+        "startChar": 23,
+        "endLine": 364,
+        "endChar": 39
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9e374478_2a3ceb3d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+              "range": {
+                "startLine": 364,
+                "startChar": 0,
+                "endLine": 365,
+                "endChar": 0
+              },
+              "replacement": "        public boolean useMicrophone() {\n"
+            },
+            {
+              "path": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+              "range": {
+                "startLine": 369,
+                "startChar": 0,
+                "endLine": 370,
+                "endChar": 0
+              },
+              "replacement": "        public boolean useSpeaker() {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fd8eebbe9d3482de044efca19660594f3d9209d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
