@@ -81,6 +81,24 @@
       "parentUuid": "464ebb4a_1d48bc58",
       "revId": "16123d82dd376fd9b72a4bda847ad5e9eff3d696",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6141efd2_6de5dbbf",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1055,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-17T10:48:01Z",
+      "side": 1,
+      "message": "pvmfw silently modifying the DT (from the host perspective), leading to sub-optimal debugging experience if something then goes wrong in the guest (which uses the hard-coded properties from here).",
+      "parentUuid": "612b2ecc_37fa67f8",
+      "revId": "16123d82dd376fd9b72a4bda847ad5e9eff3d696",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
