@@ -103,6 +103,7 @@ public final class VirtualMachineConfig {
     private static final String KEY_EXTRA_APKS = "extraApks";
     private static final String KEY_NETWORK_SUPPORTED = "networkSupported";
     private static final String KEY_SHOULD_BOOST_UCLAMP = "shouldBoostUclamp";
+    private static final String KEY_HUGE_PAGES = "hugePages";
 
     /** @hide */
     @Retention(RetentionPolicy.SOURCE)
@@ -215,6 +216,8 @@ public final class VirtualMachineConfig {
 
     private final boolean mShouldBoostUclamp;
 
+    private final boolean mHugePages;
+
     @Retention(RetentionPolicy.SOURCE)
     @StringDef(
             prefix = "MICRODROID",
@@ -251,7 +254,8 @@ public final class VirtualMachineConfig {
             @Nullable File vendorDiskImage,
             @NonNull @OsName String os,
             boolean networkSupported,
-            boolean shouldBoostUclamp) {
+            boolean shouldBoostUclamp,
+            boolean hugePages) {
         // This is only called from Builder.build(); the builder handles parameter validation.
         mPackageName = packageName;
         mApkPath = apkPath;
@@ -276,6 +280,7 @@ public final class VirtualMachineConfig {
         mOs = os;
         mNetworkSupported = networkSupported;
         mShouldBoostUclamp = shouldBoostUclamp;
+        mHugePages = hugePages;
     }
 
     /** Loads a config from a file. */
@@ -379,6 +384,9 @@ public final class VirtualMachineConfig {
         builder.setNetworkSupported(b.getBoolean(KEY_NETWORK_SUPPORTED));
 
         builder.setShouldBoostUclamp(b.getBoolean(KEY_SHOULD_BOOST_UCLAMP));
+
+        builder.setHugePages(b.getBoolean(KEY_HUGE_PAGES));
+
         return builder.build();
     }
 
@@ -431,6 +439,7 @@ public final class VirtualMachineConfig {
         }
         b.putBoolean(KEY_NETWORK_SUPPORTED, mNetworkSupported);
         b.putBoolean(KEY_SHOULD_BOOST_UCLAMP, mShouldBoostUclamp);
+        b.putBoolean(KEY_HUGE_PAGES, mHugePages);
         b.writeToStream(output);
     }
 
@@ -793,6 +802,7 @@ public final class VirtualMachineConfig {
         }
 
         vsConfig.boostUclamp = mShouldBoostUclamp;
+        vsConfig.hugePages = mHugePages;
         return vsConfig;
     }
 
@@ -874,6 +884,7 @@ public final class VirtualMachineConfig {
         @NonNull @OsName private String mOs = DEFAULT_OS;
         private boolean mNetworkSupported;
         private boolean mShouldBoostUclamp = false;
+        private boolean mHugePages = false;
 
         /**
          * Creates a builder for the given context.
@@ -973,7 +984,8 @@ public final class VirtualMachineConfig {
                     mVendorDiskImage,
                     mOs,
                     mNetworkSupported,
-                    mShouldBoostUclamp);
+                    mShouldBoostUclamp,
+                    mHugePages);
         }
 
         /**
@@ -1299,6 +1311,12 @@ public final class VirtualMachineConfig {
         /** @hide */
         public Builder setShouldBoostUclamp(boolean shouldBoostUclamp) {
             mShouldBoostUclamp = shouldBoostUclamp;
+            return this;
+        }
+
+        /** @hide */
+        public Builder setHugePages(boolean hugePages) {
+            mHugePages = hugePages;
             return this;
         }
     }
