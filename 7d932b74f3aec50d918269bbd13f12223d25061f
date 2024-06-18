@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d0566ccc_2893601e",
+        "filename": "pvmfw/Android.bp",
+        "patchSetId": 6
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-18T15:34:47Z",
+      "side": 1,
+      "message": "I\u0027m worried that you\u0027ll now need something like this to get the CPP to handle whatever `/include/`s the .dtsi? Or is the `#include` needed before any `/include/` now?",
+      "range": {
+        "startLine": 363,
+        "startChar": 0,
+        "endLine": 387,
+        "endChar": 1
+      },
+      "revId": "7d932b74f3aec50d918269bbd13f12223d25061f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81f9ab5b_faf65fd6",
         "filename": "pvmfw/testdata/test_crosvm_dt_base.dtsi",
         "patchSetId": 6
