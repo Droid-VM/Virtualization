@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db5e346f_99830c9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-18T12:25:05Z",
+      "side": 1,
+      "message": "Also, I\u0027m not very familiar with the xTS setups but it\u0027s a shame that there exists a [`cts-on-gsi-exclude.xml`](https://cs.android.com/android/platform/superproject/main/+/main:cts/tools/cts-tradefed/res/config/cts-on-gsi-exclude.xml;l\u003d1;drc\u003dbe3e75c2894a02ff029a06c7132a73ae42d7e092) while VTS only has [`vts-exclude.xml`](https://cs.android.com/android/platform/superproject/main/+/main:test/vts/tools/vts-core-tradefed/res/config/vts-exclude.xml;drc\u003d777f5f868e3599be43a51eb348182975ef5c8163) but nothing for \"on-GSI\".",
+      "revId": "09ae09469d3caaab37322e708a2a04c12e4ec755",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13d9b7e3_f3b8fef5",
