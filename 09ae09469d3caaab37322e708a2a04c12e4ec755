@@ -40,6 +40,30 @@
       ],
       "revId": "09ae09469d3caaab37322e708a2a04c12e4ec755",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2b255f9_7082c213",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-18T12:22:00Z",
+      "side": 1,
+      "message": "I believe it\u0027s still needed - it\u0027s used in MicrodroidCapabilitiesTest where we require at least one of protected/nonprotected if you declare support for AVF, but only on recent vendor.\nThat needs to apply even if protected VMs aren\u0027t supported, and it doesn\u0027t call prepareTestSetup.",
+      "parentUuid": "13d9b7e3_f3b8fef5",
+      "range": {
+        "startLine": 217,
+        "startChar": 0,
+        "endLine": 222,
+        "endChar": 27
+      },
+      "revId": "09ae09469d3caaab37322e708a2a04c12e4ec755",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
