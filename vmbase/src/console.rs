@@ -21,48 +21,65 @@ use core::{
 };
 use spin::mutex::SpinMutex;
 
-static ADDRESS: SpinMutex<OnceCell<usize>> = SpinMutex::new(OnceCell::new());
-static CONSOLE: SpinMutex<Option<Uart>> = SpinMutex::new(None);
+// Arbitrary limit on the number of consoles that can be registered.
+//
+// Matches the UART count in crosvm.
+const MAX_CONSOLES: usize = 4;
 
-/// Initialises a new instance of the UART driver and returns it.
-fn create() -> Option<Uart> {
-    // SAFETY: ADDRESS is the base of the MMIO region for a UART and is mapped as device memory.
-    Some(unsafe { Uart::new(*ADDRESS.lock().get()?) })
+static CONSOLES: [SpinMutex<Option<Uart>>; MAX_CONSOLES] =
+    [SpinMutex::new(None), SpinMutex::new(None), SpinMutex::new(None), SpinMutex::new(None)];
+static ADDRESSES: [SpinMutex<OnceCell<usize>>; MAX_CONSOLES] = [
+    SpinMutex::new(OnceCell::new()),
+    SpinMutex::new(OnceCell::new()),
+    SpinMutex::new(OnceCell::new()),
+    SpinMutex::new(OnceCell::new()),
+];
+
+/// Index of the console used by default for logging.
+pub const DEFAULT_CONSOLE_INDEX: usize = 0;
+
+/// Index of the console used by default for emergency logging.
+pub const DEFAULT_EMERGENCY_CONSOLE_INDEX: usize = DEFAULT_CONSOLE_INDEX;
+
+/// Initialises a new instance of the n-th UART driver and returns it.
+fn create(n: usize) -> Option<Uart> {
+    // SAFETY: ADDRESSES are the bases of MMIO regions for UARTs and are mapped as device memory.
+    Some(unsafe { Uart::new(*ADDRESSES[n].lock().get()?) })
 }
 
-/// Initialises the global instance of the UART driver.
+/// Initialises the global instance(s) of the UART driver.
 ///
 /// This must be called before using the `print!` and `println!` macros.
 ///
 /// # Safety
 ///
-/// This must be called with the base of a UART, mapped as device memory and (if necessary) shared
-/// with the host as MMIO.
-pub unsafe fn init(base_address: usize) {
-    ADDRESS.lock().set(base_address).unwrap();
-
-    let uart = create().unwrap();
-
-    CONSOLE.lock().replace(uart);
+/// This must be called once with the bases of UARTs, mapped as device memory and (if necessary)
+/// shared with the host as MMIO, to which no other references must be held.
+pub unsafe fn init(base_addresses: &[usize]) {
+    for (i, base) in base_addresses.iter().enumerate() {
+        ADDRESSES[i].lock().set(*base).unwrap();
+        let uart = create(i).unwrap();
+        CONSOLES[i].lock().replace(uart);
+    }
 }
 
-/// Writes a formatted string followed by a newline to the console.
+/// Writes a formatted string followed by a newline to the n-th console.
 ///
-/// Panics if [`init`] was not called first.
-pub(crate) fn writeln(format_args: Arguments) {
-    let mut guard = CONSOLE.lock();
+/// Panics if the n-th console was not initialized by calling [`init`] first.
+pub(crate) fn writeln(n: usize, format_args: Arguments) {
+    let mut guard = CONSOLES[n].lock();
     let uart = guard.as_mut().unwrap();
 
     write(uart, format_args).unwrap();
     let _ = uart.write_str("\n");
 }
 
-/// Reinitializes the UART driver and writes a formatted string followed by a newline to it.
+/// Reinitializes the n-th UART driver and writes a formatted string followed by a newline to it.
 ///
 /// This is intended for use in situations where the UART may be in an unknown state or the global
 /// instance may be locked, such as in an exception handler or panic handler.
-pub fn ewriteln(format_args: Arguments) {
-    if let Some(mut uart) = create() {
+pub fn ewriteln(n: usize, format_args: Arguments) {
+    if let Some(mut uart) = create(n) {
         let _ = write(&mut uart, format_args);
         let _ = uart.write_str("\n");
     }
@@ -73,7 +90,9 @@ pub fn ewriteln(format_args: Arguments) {
 /// Panics if the console has not yet been initialized. May hang if used in an exception context;
 /// use `eprintln!` instead.
 macro_rules! println {
-    ($($arg:tt)*) => ($crate::console::writeln(format_args!($($arg)*)));
+    ($($arg:tt)*) => ({
+        $crate::console::writeln($crate::console::DEFAULT_CONSOLE_INDEX, format_args!($($arg)*))
+    })
 }
 
 pub(crate) use println; // Make it available in this crate.
@@ -84,5 +103,7 @@ pub(crate) use println; // Make it available in this crate.
 /// Never panics.
 #[macro_export]
 macro_rules! eprintln {
-    ($($arg:tt)*) => ($crate::console::ewriteln(format_args!($($arg)*)));
+    ($($arg:tt)*) => ({
+        $crate::console::ewriteln($crate::console::DEFAULT_EMERGENCY_CONSOLE_INDEX, format_args!($($arg)*))
+    })
 }
