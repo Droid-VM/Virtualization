@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b78e36b2_5d5c1f91",
+        "filename": "java/jni/com_android_system_virtualmachine_VirtualizationSystemService.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-06-18T08:07:16Z",
+      "side": 1,
+      "message": "Please don\u0027t do this. We already made a mistake of exposing trunk stable flags to java using jni once, we shouldn\u0027t repeat it again...",
+      "revId": "ee11a20f8ee8f85f8ca87ca752582a9eb9b3d5dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6ecf38a_1e054ef7",
+        "filename": "java/service/src/com/android/system/virtualmachine/VirtualizationSystemService.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-06-18T08:07:16Z",
+      "side": 1,
+      "message": "Can we use some other signal to figure out whether networking is enabled? Like a presence of vmnic binary?\n\nIf you really want to use the build time flag here, then we should have build system autogenerate the AvfBuildFlags.java class based on the value of the trunk stable build flags.\n\nOr as another alternative, you can go the same route the as VirtualizationSystemService:\n\n* Add new VirtualizationNetworkingSystemService class (we will need better name)\n* Conditionally add new apex-system-service entry to the AndroidManifest.xml of the com.android.virt APEX\n* Once the LLPVM flag can be retired (this will probably happen after V OTA), we can consolidate 2 different system services in one.",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 43
+      },
+      "revId": "ee11a20f8ee8f85f8ca87ca752582a9eb9b3d5dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3564b47_bb440fdf",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-06-18T08:07:16Z",
+      "side": 1,
+      "message": "Does this comment mean that enableVmTethering should be called in a different function? If so, please make it a bit clearer in the comment",
+      "range": {
+        "startLine": 533,
+        "startChar": 0,
+        "endLine": 533,
+        "endChar": 97
+      },
+      "revId": "ee11a20f8ee8f85f8ca87ca752582a9eb9b3d5dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
