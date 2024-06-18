@@ -756,6 +756,30 @@
       },
       "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f116efff_93bf3ad8",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 2347,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-18T08:38:29Z",
+      "side": 1,
+      "message": "\u003e \u003e And I think exposing as @TestApi is okay, since it\u0027s trunk_staging flagged, not entirely applied.\n\u003e \n\u003e I am not sure I understand what do you mean here. Can you please elaborate?\n\nMy thought is network feature is guarded with build flag, so it should be safe from any attack unless the build flag is released to public devices. But as you said, I\u0027m not saying VM identity is not needed for supporting network in Microdroid, until propagating the flag.\n\n\u003e We shouldn\u0027t postpone the implementation to later\n\nSo I understood the order of the task implementing VM identity should be in front of propagating the flag to the next stage. Correct me if I\u0027m wrong.\n@ioffe@google.com What about removing `mNetworkSupported` from `VirtualMachineConfig`, and adding `VirtualMachineCustomImageConfig` instead? Then I think we can expose this feature to Microdroid smoothly when we have a clear use cases for Microdroid \u0026 implementation about VM identity.\n\n\u003e Once there is a device that supports Ferrochrome we will get test coverage, won\u0027t we? \n\nAs far as I know, there\u0027s no automated test for Ferrochrome yet. In the future, there should exist, but not now.",
+      "parentUuid": "316e2e35_ef8ba353",
+      "range": {
+        "startLine": 2338,
+        "startChar": 0,
+        "endLine": 2347,
+        "endChar": 5
+      },
+      "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
