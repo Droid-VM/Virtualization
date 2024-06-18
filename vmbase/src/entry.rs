@@ -16,7 +16,7 @@
 
 use crate::{
     bionic, console, heap, hyp,
-    layout::{BASE_ADDRESS, UART_PAGE},
+    layout::{UART_ADDRESSES, UART_PAGE},
     logger,
     memory::{SIZE_16KB, SIZE_4KB},
     power::{reboot, shutdown},
@@ -48,7 +48,7 @@ fn try_console_init() -> Result<(), hyp::Error> {
     }
 
     // SAFETY: UART_PAGE is mapped at stage-1 (see entry.S) and was just MMIO-guarded.
-    unsafe { console::init(BASE_ADDRESS) };
+    unsafe { console::init(&UART_ADDRESSES) };
 
     Ok(())
 }

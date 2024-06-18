@@ -26,12 +26,15 @@ use static_assertions::const_assert_eq;
 /// First address that can't be translated by a level 1 TTBR0_EL1.
 pub const MAX_VIRT_ADDR: usize = 1 << 40;
 
-/// Base memory-mapped address of the primary UART device.
-pub const BASE_ADDRESS: usize = 0x3f8;
+/// Base memory-mapped addresses of the UART devices.
+pub const UART_ADDRESSES: [usize; 4] = [0x3f8, 0x2f8, 0x3e8, 0x2e8];
 
 /// Page containing all UART devices.
 pub const UART_PAGE: usize = 0;
-const_assert_eq!(UART_PAGE, page_4kb_of(BASE_ADDRESS));
+const_assert_eq!(UART_PAGE, page_4kb_of(UART_ADDRESSES[0]));
+const_assert_eq!(UART_PAGE, page_4kb_of(UART_ADDRESSES[1]));
+const_assert_eq!(UART_PAGE, page_4kb_of(UART_ADDRESSES[2]));
+const_assert_eq!(UART_PAGE, page_4kb_of(UART_ADDRESSES[3]));
 
 /// Get an address from a linker-defined symbol.
 #[macro_export]
