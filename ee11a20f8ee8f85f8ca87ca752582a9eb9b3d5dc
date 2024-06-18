@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "12a94500_1ba9a1da",
+        "filename": "java/jni/com_android_system_virtualmachine_VirtualizationSystemService.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-18T09:00:10Z",
+      "side": 1,
+      "message": "As I said below, I think we can avoid using JNI function by checking `vmnic` library.\n\nOn the other hand, I think there\u0027s no standard way to retrieve build flag information in Java code. Would you know anything about this, such as existing impl, plan or even it\u0027s intended?",
+      "parentUuid": "b78e36b2_5d5c1f91",
+      "revId": "ee11a20f8ee8f85f8ca87ca752582a9eb9b3d5dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6ecf38a_1e054ef7",
         "filename": "java/service/src/com/android/system/virtualmachine/VirtualizationSystemService.java",
         "patchSetId": 4
@@ -43,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6192cd18_aa18463e",
+        "filename": "java/service/src/com/android/system/virtualmachine/VirtualizationSystemService.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-18T09:00:10Z",
+      "side": 1,
+      "message": "\u003e Can we use some other signal to figure out whether networking is enabled? Like a presence of vmnic binary?\n\nSure, I\u0027ll try to use information \u0027presence of `vmnic` binary\u0027. That\u0027s the one we\u0027ve exactly talked about before.",
+      "parentUuid": "f6ecf38a_1e054ef7",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 43
+      },
+      "revId": "ee11a20f8ee8f85f8ca87ca752582a9eb9b3d5dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f3564b47_bb440fdf",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 4
@@ -54,6 +96,30 @@
       "writtenOn": "2024-06-18T08:07:16Z",
       "side": 1,
       "message": "Does this comment mean that enableVmTethering should be called in a different function? If so, please make it a bit clearer in the comment",
+      "range": {
+        "startLine": 533,
+        "startChar": 0,
+        "endLine": 533,
+        "endChar": 97
+      },
+      "revId": "ee11a20f8ee8f85f8ca87ca752582a9eb9b3d5dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eda12f43_f7b30162",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-18T09:00:10Z",
+      "side": 1,
+      "message": "No, it\u0027ll be called in the same function, but different order. The ideal way of it is, having a bridge iface shared for all VMs and enable tethering for bridge iface. Then each TAP iface provided per VM is connected to the bridge iface.\n\nBut, for faster progress on providing network for Ferrochrome, switched the order of impl task like enabling tethering for TAP iface first and defer impl of bridge iface.",
+      "parentUuid": "f3564b47_bb440fdf",
       "range": {
         "startLine": 533,
         "startChar": 0,
