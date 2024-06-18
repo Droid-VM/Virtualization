@@ -780,6 +780,30 @@
       },
       "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1f27644_ab7f5d2e",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 2347,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-06-18T08:45:17Z",
+      "side": 1,
+      "message": "Oh, I see. Yes, while the flag is only enabled in trunk_staging we are ok, and yes we shouldn\u0027t propagate the flag to other release configurations until the feature is fully implemented :)\n\n\u003eWhat about removing mNetworkSupported from VirtualMachineConfig, and adding\n\u003e VirtualMachineCustomImageConfig instead? \n\nThis would mean that networking feature won\u0027t be exposed to Microdroid, right? This sounds good to me",
+      "parentUuid": "f116efff_93bf3ad8",
+      "range": {
+        "startLine": 2338,
+        "startChar": 0,
+        "endLine": 2347,
+        "endChar": 5
+      },
+      "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
