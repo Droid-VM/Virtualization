@@ -16,7 +16,6 @@
 
 pub mod crosvm;
 
-use crate::console;
 use crate::linker::__stack_chk_guard;
 use crate::memory::{page_4kb_of, PAGE_SIZE};
 use aarch64_paging::paging::VirtualAddress;
@@ -27,9 +26,12 @@ use static_assertions::const_assert_eq;
 /// First address that can't be translated by a level 1 TTBR0_EL1.
 pub const MAX_VIRT_ADDR: usize = 1 << 40;
 
+/// Base memory-mapped address of the primary UART device.
+pub const UART_ADDRESS: usize = 0x3f8;
+
 /// Page containing all UART devices.
 pub const UART_PAGE: usize = 0;
-const_assert_eq!(UART_PAGE, page_4kb_of(console::BASE_ADDRESS));
+const_assert_eq!(UART_PAGE, page_4kb_of(UART_ADDRESS));
 
 /// Get an address from a linker-defined symbol.
 #[macro_export]
