@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bee30df_d14d51a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-18T15:27:22Z",
+      "side": 1,
+      "message": "BTW, don\u0027t you need this CL to be part of the same topic as the crosvm merge into AOSP bringing https://crrev.com/c/5053958, without which pvmfw would present an invalid IRQ to the guest (which the VMM doesn\u0027t support, yet)?",
+      "revId": "7d932b74f3aec50d918269bbd13f12223d25061f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81f9ab5b_faf65fd6",
+        "filename": "pvmfw/testdata/test_crosvm_dt_base.dtsi",
+        "patchSetId": 6
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-18T15:27:22Z",
+      "side": 1,
+      "message": "uber-nit: newline between CPP directives and DT source?",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 1
+      },
+      "revId": "7d932b74f3aec50d918269bbd13f12223d25061f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
