@@ -15,25 +15,34 @@
 //! Console driver for 8250 UART.
 
 use crate::uart::Uart;
-use core::fmt::{write, Arguments, Write};
+use core::{
+    cell::OnceCell,
+    fmt::{write, Arguments, Write},
+};
 use spin::mutex::SpinMutex;
 
-/// Base memory-mapped address of the primary UART device.
-pub const BASE_ADDRESS: usize = 0x3f8;
-
+static ADDRESS: SpinMutex<OnceCell<usize>> = SpinMutex::new(OnceCell::new());
 static CONSOLE: SpinMutex<Option<Uart>> = SpinMutex::new(None);
 
 /// Initialises a new instance of the UART driver and returns it.
-fn create() -> Uart {
-    // SAFETY: BASE_ADDRESS is the base of the MMIO region for a UART and is mapped as device
-    // memory.
-    unsafe { Uart::new(BASE_ADDRESS) }
+fn create() -> Option<Uart> {
+    // SAFETY: ADDRESS is the base of the MMIO region for a UART and is mapped as device memory.
+    Some(unsafe { Uart::new(*ADDRESS.lock().get()?) })
 }
 
-/// Initialises the global instance of the UART driver. This must be called before using
-/// the `print!` and `println!` macros.
-pub fn init() {
-    let uart = create();
+/// Initialises the global instance of the UART driver.
+///
+/// This must be called before using the `print!` and `println!` macros.
+///
+/// # Safety
+///
+/// This must be called with the base of a UART, mapped as device memory and (if necessary) shared
+/// with the host as MMIO.
+pub unsafe fn init(base_address: usize) {
+    ADDRESS.lock().set(base_address).unwrap();
+
+    let uart = create().unwrap();
+
     CONSOLE.lock().replace(uart);
 }
 
@@ -56,8 +65,9 @@ pub(crate) fn write_args(format_args: Arguments) {
 /// This is intended for use in situations where the UART may be in an unknown state or the global
 /// instance may be locked, such as in an exception handler or panic handler.
 pub fn emergency_write_str(s: &str) {
-    let mut uart = create();
-    let _ = uart.write_str(s);
+    if let Some(mut uart) = create() {
+        let _ = uart.write_str(s);
+    }
 }
 
 /// Reinitializes the UART driver and writes a formatted string to it.
@@ -65,8 +75,9 @@ pub fn emergency_write_str(s: &str) {
 /// This is intended for use in situations where the UART may be in an unknown state or the global
 /// instance may be locked, such as in an exception handler or panic handler.
 pub fn emergency_write_args(format_args: Arguments) {
-    let mut uart = create();
-    let _ = write(&mut uart, format_args);
+    if let Some(mut uart) = create() {
+        let _ = write(&mut uart, format_args);
+    }
 }
 
 /// Prints the given formatted string to the console, followed by a newline.

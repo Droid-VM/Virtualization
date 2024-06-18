@@ -16,7 +16,7 @@
 
 use crate::{
     bionic, console, heap, hyp,
-    layout::UART_PAGE,
+    layout::{BASE_ADDRESS, UART_PAGE},
     logger,
     memory::{SIZE_16KB, SIZE_4KB},
     power::{reboot, shutdown},
@@ -26,8 +26,6 @@ use core::mem::size_of;
 use static_assertions::const_assert_eq;
 
 fn try_console_init() -> Result<(), hyp::Error> {
-    console::init();
-
     if let Some(mmio_guard) = hyp::get_mmio_guard() {
         mmio_guard.enroll()?;
 
@@ -48,6 +46,9 @@ fn try_console_init() -> Result<(), hyp::Error> {
         const_assert_eq!(UART_PAGE, 0);
         mmio_guard.map(UART_PAGE)?;
     }
+
+    // SAFETY: UART_PAGE is mapped at stage-1 (see entry.S) and was just MMIO-guarded.
+    unsafe { console::init(BASE_ADDRESS) };
 
     Ok(())
 }
