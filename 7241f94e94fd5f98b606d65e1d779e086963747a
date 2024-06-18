@@ -142,6 +142,24 @@
       "parentUuid": "a354f203_46228e4b",
       "revId": "7241f94e94fd5f98b606d65e1d779e086963747a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07e6a3cc_6f0f2109",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-18T01:52:20Z",
+      "side": 1,
+      "message": "I wrote flag guarding code with JNI in advance, though knowing it\u0027s not good enough for long-term solution. Please let me know if my consideration below is acceptable or not.\n\nCompared pros and cons between JNI and appending additional file, but the critical one was accessing the path of given file(e.g. `vmnic`) by `VirtualizationSystemService`, since it may need to grant more sepolicy permission for reading virt APEX.",
+      "parentUuid": "bf8f3a34_33df81fe",
+      "revId": "7241f94e94fd5f98b606d65e1d779e086963747a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
