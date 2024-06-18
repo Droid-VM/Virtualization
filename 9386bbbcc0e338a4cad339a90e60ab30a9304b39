@@ -732,6 +732,30 @@
       },
       "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "316e2e35_ef8ba353",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 2347,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-06-18T07:56:39Z",
+      "side": 1,
+      "message": "\u003e But not exposing network feature to Microdroid VMs would lose test coverage around network feature\n\nOnce there is a device that supports Ferrochrome we will get test coverage, won\u0027t we? I am still unsure that exposing networking for Microdroid just for the sake of testing is the right approach. It adds new big attack surface that pVMs now should reason about.\n\n\u003e And I think exposing as @TestApi is okay, since it\u0027s trunk_staging flagged, not entirely applied.\n\nI am not sure I understand what do you mean here. Can you please elaborate?\n\n\u003e Someday I should design \u0026 implement around VM identity indeed, it should be exposed again as @TestApi, right?\n\nTo be honest, this should\u0027ve been part of the initial design doc that we would\u0027ve reviewed and commented on, and the implementation should\u0027ve happened only after the design was agreed on... Anyway, if we are adding networking support for Microdroid VMs, then it is important that networking contributes to the VM identity (otherwise, host can enable networking for a pVM without pVMs knowledge, and then use the network to exfiltrate secretes from it). We shouldn\u0027t postpone the implementation to later (which among others has a risk of us just forgetting about this task)",
+      "parentUuid": "44b76468_9b06be4d",
+      "range": {
+        "startLine": 2338,
+        "startChar": 0,
+        "endLine": 2347,
+        "endChar": 5
+      },
+      "revId": "9386bbbcc0e338a4cad339a90e60ab30a9304b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
