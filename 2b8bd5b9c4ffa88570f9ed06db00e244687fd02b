@@ -16,6 +16,121 @@
       "message": "In this patchset,\n\n1. kill the existing vm launcher app before onCreate in ferrochrome app\n2. add vmlauncher main activity\u0027s alias (which is disabled by default) for the testing because vmlauncher main activity is not visible in the launcher anymore.\n3. move the app to system_ext\n4. check the last downloaded image\u0027s version as well",
       "revId": "2b8bd5b9c4ffa88570f9ed06db00e244687fd02b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42b90b02_64682159",
+        "filename": "ferrochrome_app/Android.bp",
+        "patchSetId": 11
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-06-19T01:31:13Z",
+      "side": 1,
+      "message": "I think this should be product_specific.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 30
+      },
+      "revId": "2b8bd5b9c4ffa88570f9ed06db00e244687fd02b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0cb381d_e8a53122",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-06-19T01:31:13Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Prefer to use getSystemService(ActivityManager.class) instead to avoid the cast.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nPrefer to use getSystemService(ActivityManager.class) instead to avoid the cast.",
+      "range": {
+        "startLine": 52,
+        "startChar": 29,
+        "endLine": 52,
+        "endChar": 64
+      },
+      "revId": "2b8bd5b9c4ffa88570f9ed06db00e244687fd02b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f4afb0c_92c25c98",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-06-19T01:31:13Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by AndroidLint: [SdCardPath] Do not hardcode \"/sdcard/\"; use `Environment.getExternalStorageDirectory().getPath()` instead\n\nAnalyzer Description: Reports AndroidLint warnings.\nOwner: colefaust@google.com\n\n[SdCardPath] Do not hardcode \"/sdcard/\"; use `Environment.getExternalStorageDirectory().getPath()` instead\n\n                        if (Files.notExists(Path.of(\"/sdcard/chromiumos_test_image.bin\"))\n                                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\nYour code should not reference the `/sdcard` path directly; instead use `Environment.getExternalStorageDirectory().getPath()`.\n\nSimilarly, do not reference the `/data/data/` path directly; it can vary in multi-user scenarios. Instead, use `Context.getFilesDir().getPath()`.\n\nSuppression and local reproduction steps: go/ayeaye-android-lint\n\nThis warning was found on the git_main branch",
+      "range": {
+        "startLine": 57,
+        "startChar": 49,
+        "endLine": 57,
+        "endChar": 85
+      },
+      "revId": "2b8bd5b9c4ffa88570f9ed06db00e244687fd02b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "823de917_ee123a40",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-06-19T01:31:13Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by AndroidLint: [SdCardPath] Do not hardcode \"/sdcard/\"; use `Environment.getExternalStorageDirectory().getPath()` instead\n\nAnalyzer Description: Reports AndroidLint warnings.\nOwner: colefaust@google.com\n\n[SdCardPath] Do not hardcode \"/sdcard/\"; use `Environment.getExternalStorageDirectory().getPath()` instead\n\n                                || Files.notExists(Path.of(\"/sdcard/vmlinuz\"))\n                                                           ~~~~~~~~~~~~~~~~~\n\nYour code should not reference the `/sdcard` path directly; instead use `Environment.getExternalStorageDirectory().getPath()`.\n\nSimilarly, do not reference the `/data/data/` path directly; it can vary in multi-user scenarios. Instead, use `Context.getFilesDir().getPath()`.\n\nSuppression and local reproduction steps: go/ayeaye-android-lint\n\nThis warning was found on the git_main branch",
+      "range": {
+        "startLine": 58,
+        "startChar": 56,
+        "endLine": 58,
+        "endChar": 74
+      },
+      "revId": "2b8bd5b9c4ffa88570f9ed06db00e244687fd02b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b84f8e93_85e0f73e",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-06-19T01:31:13Z",
+      "side": 1,
+      "message": "Can this be a file in /data/local/tmp?",
+      "range": {
+        "startLine": 161,
+        "startChar": 42,
+        "endLine": 161,
+        "endChar": 73
+      },
+      "revId": "2b8bd5b9c4ffa88570f9ed06db00e244687fd02b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
