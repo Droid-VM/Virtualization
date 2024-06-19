@@ -1,5 +1,144 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27f60c9e_e7706fc0",
+        "filename": "ferrochrome_app/AndroidManifest.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-06-19T15:39:12Z",
+      "side": 1,
+      "message": "nit; we\u0027ll probably need fancy icon",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 36
+      },
+      "revId": "7cd7a596c1f2db1112a660457e2480e9007306d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4757ec9e_aabc4339",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-06-19T15:39:12Z",
+      "side": 1,
+      "message": "nit; drop (C)",
+      "range": {
+        "startLine": 2,
+        "startChar": 13,
+        "endLine": 2,
+        "endChar": 16
+      },
+      "revId": "7cd7a596c1f2db1112a660457e2480e9007306d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13809f44_3b18b340",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-06-19T15:39:12Z",
+      "side": 1,
+      "message": "Q: is it final solution? I wonder whether we can open file here and only send ParcelledFileDescriptor",
+      "range": {
+        "startLine": 84,
+        "startChar": 20,
+        "endLine": 84,
+        "endChar": 36
+      },
+      "revId": "7cd7a596c1f2db1112a660457e2480e9007306d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e5e36f1_b95327b2",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-06-19T15:39:12Z",
+      "side": 1,
+      "message": "You should find the vm launcher with action. Search with package / class name is discouraged.\nThe action would be kind of the public interface of VM Launcher\n\ne.g. https://cs.android.com/android/platform/superproject/main/+/main:packages/apps/Settings/AndroidManifest.xml;l\u003d284?q\u003d-f:Car%20f:Settings.*AndroidManifest.xml%20android.settings.WIRELESS_SETTINGS",
+      "range": {
+        "startLine": 108,
+        "startChar": 19,
+        "endLine": 108,
+        "endChar": 46
+      },
+      "revId": "7cd7a596c1f2db1112a660457e2480e9007306d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2da4b449_a125b555",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-06-19T15:39:12Z",
+      "side": 1,
+      "message": "we don\u0027t need full `image.zip`. see latest ferrochrome test script.",
+      "range": {
+        "startLine": 166,
+        "startChar": 28,
+        "endLine": 166,
+        "endChar": 37
+      },
+      "revId": "7cd7a596c1f2db1112a660457e2480e9007306d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75deaf8b_a07eca52",
+        "filename": "vmlauncher_app/AndroidManifest.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-06-19T15:39:12Z",
+      "side": 1,
+      "message": "QQ: why do we need this? We can simply hide from launcher by removing `android.intent.category.LAUNCHER`.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 0
+      },
+      "revId": "7cd7a596c1f2db1112a660457e2480e9007306d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
