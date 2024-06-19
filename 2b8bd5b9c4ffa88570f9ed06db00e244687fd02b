@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9471e233_a27f7e51",
+        "filename": "ferrochrome_app/Android.bp",
+        "patchSetId": 11
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-06-19T04:20:35Z",
+      "side": 1,
+      "message": "I initially thought about that, but it uses SystemProperties.set which is a hidden API..",
+      "parentUuid": "42b90b02_64682159",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 30
+      },
+      "revId": "2b8bd5b9c4ffa88570f9ed06db00e244687fd02b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0cb381d_e8a53122",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-06-19T01:31:13Z",
       "side": 1,
       "message": "Please fix this WARNING reported by Check Contents: Prefer to use getSystemService(ActivityManager.class) instead to avoid the cast.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nPrefer to use getSystemService(ActivityManager.class) instead to avoid the cast.",
+      "range": {
+        "startLine": 52,
+        "startChar": 29,
+        "endLine": 52,
+        "endChar": 64
+      },
+      "revId": "2b8bd5b9c4ffa88570f9ed06db00e244687fd02b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a0b5a2f_275519cf",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-06-19T04:20:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0cb381d_e8a53122",
       "range": {
         "startLine": 52,
         "startChar": 29,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee1b150d_66d45816",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-06-19T04:20:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f4afb0c_92c25c98",
+      "range": {
+        "startLine": 57,
+        "startChar": 49,
+        "endLine": 57,
+        "endChar": 85
+      },
+      "revId": "2b8bd5b9c4ffa88570f9ed06db00e244687fd02b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "823de917_ee123a40",
@@ -110,6 +182,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "858a2f07_9917c055",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-06-19T04:20:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "823de917_ee123a40",
+      "range": {
+        "startLine": 58,
+        "startChar": 56,
+        "endLine": 58,
+        "endChar": 74
+      },
+      "revId": "2b8bd5b9c4ffa88570f9ed06db00e244687fd02b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b84f8e93_85e0f73e",
@@ -123,6 +219,30 @@
       "writtenOn": "2024-06-19T01:31:13Z",
       "side": 1,
       "message": "Can this be a file in /data/local/tmp?",
+      "range": {
+        "startLine": 161,
+        "startChar": 42,
+        "endLine": 161,
+        "endChar": 73
+      },
+      "revId": "2b8bd5b9c4ffa88570f9ed06db00e244687fd02b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23dc8fde_5311bd89",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-06-19T04:20:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b84f8e93_85e0f73e",
       "range": {
         "startLine": 161,
         "startChar": 42,
