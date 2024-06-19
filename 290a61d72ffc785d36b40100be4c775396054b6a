@@ -1,0 +1,597 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d943c3da_c176b1af",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "nit:s/the//",
+      "range": {
+        "startLine": 14,
+        "startChar": 70,
+        "endLine": 14,
+        "endChar": 73
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33c0a742_1e5130d8",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "Nit: comma after VMM",
+      "range": {
+        "startLine": 17,
+        "startChar": 67,
+        "endLine": 17,
+        "endChar": 70
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dfafab6_9223435d",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "Xref to Virtualization/docs/device_assignment.md somewhere here?",
+      "range": {
+        "startLine": 43,
+        "startChar": 41,
+        "endLine": 44,
+        "endChar": 5
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f65a649b_d589392c",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "Too many commas. I think there should be one less, but I\u0027m not sure which one should go. What does \"which it had to configure\" refer to?\nOr maybe split into 2 sentences?",
+      "range": {
+        "startLine": 44,
+        "startChar": 5,
+        "endLine": 45,
+        "endChar": 12
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80ec96bf_69e76aa5",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "I think there should at least be a mention that these overlays also have to pass sanitisation.",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 49
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebc76927_14d996f7",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "The diagram shows ABL, and the VM DTBO, but there\u0027s been no mention of that in the text yet?\n\nMaybe move this to the end of the paragraph below?",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 3
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1ac222a_224e2135",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "one?",
+      "range": {
+        "startLine": 99,
+        "startChar": 76,
+        "endLine": 99,
+        "endChar": 79
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fe2b7a1_56416c9c",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "Nit: lose the parentheses.",
+      "range": {
+        "startLine": 108,
+        "startChar": 66,
+        "endLine": 108,
+        "endChar": 74
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f921dc6c_b1627974",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "`(_ABL_)`",
+      "range": {
+        "startLine": 110,
+        "startChar": 60,
+        "endLine": 111,
+        "endChar": 10
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af321c11_1649ccb9",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "It\u0027d be nice to have the occasional code link in this - at source file granularity, maybe?",
+      "range": {
+        "startLine": 111,
+        "startChar": 68,
+        "endLine": 113,
+        "endChar": 77
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95b42fcd_7d3a9047",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "these",
+      "range": {
+        "startLine": 131,
+        "startChar": 3,
+        "endLine": 131,
+        "endChar": 8
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f139509d_d7ec8790",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "s/unique/the same/ ?",
+      "range": {
+        "startLine": 139,
+        "startChar": 2,
+        "endLine": 139,
+        "endChar": 8
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae6682cb_44f73b2e",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "or correctness",
+      "range": {
+        "startLine": 152,
+        "startChar": 51,
+        "endLine": 152,
+        "endChar": 59
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e8cb3a1_29650f80",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "I think I\u0027d write \"etc.\" here. The trailing ellipsis looks slightly odd, somehow.",
+      "range": {
+        "startLine": 153,
+        "startChar": 60,
+        "endLine": 153,
+        "endChar": 63
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09462de7_110b7fc0",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "Delete? (Not needed, and \"reference\" makes me think of reference DT.",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 15
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39092de6_c9a2cb07",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "Uber-nit: Missing trailing .",
+      "range": {
+        "startLine": 168,
+        "startChar": 12,
+        "endLine": 168,
+        "endChar": 13
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10133fe6_b1c04e7a",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "This section, and the link to the boot protocol, feels like it could usefully be much earlier - just after Context, maybe?",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ca22e245_e4ffaa44",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/device_trees.md",
+              "range": {
+                "startLine": 172,
+                "startChar": 0,
+                "endLine": 173,
+                "endChar": 0
+              },
+              "replacement": "## DT for guests (Host-side)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f4bd8fa_be13fef3",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "guest\u0027s",
+      "range": {
+        "startLine": 176,
+        "startChar": 32,
+        "endLine": 176,
+        "endChar": 37
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81bc3f19_e9be4ebe",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "This may need updating for Secretkeeper.\n\n@shikhapanwar@google.com",
+      "range": {
+        "startLine": 188,
+        "startChar": 39,
+        "endLine": 189,
+        "endChar": 58
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3a8ed7e_c6ceef49",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "... for a protected VM ?",
+      "range": {
+        "startLine": 193,
+        "startChar": 38,
+        "endLine": 193,
+        "endChar": 48
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3df2eeae_90939fb5",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "Link to packages/modules/Virtualization/docs/updatable_vm.md#deferring-rollback-protection",
+      "range": {
+        "startLine": 196,
+        "startChar": 63,
+        "endLine": 196,
+        "endChar": 75
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfc7aabf_e5623932",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "Trailing .\n(Also, personally I\u0027d use \".\" not \";\" for the previous bullets.)",
+      "range": {
+        "startLine": 199,
+        "startChar": 72,
+        "endLine": 199,
+        "endChar": 75
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a673d28_2827c328",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "We should probably point this at https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/README.md instead. (Which contains a link to SAC)",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 58
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d0ad1e5_91559ceb",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "This isn\u0027t mentioned in \"AVF-specific properties and nodes\"; maybe it should be?\n(Ok, it isn\u0027t AVF specific, but AVF does use it in a specific way.)",
+      "range": {
+        "startLine": 395,
+        "startChar": 25,
+        "endLine": 395,
+        "endChar": 43
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a14ab23_c3b1f903",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T16:13:13Z",
+      "side": 1,
+      "message": "#avf_specific-properties-and-nodes",
+      "range": {
+        "startLine": 403,
+        "startChar": 9,
+        "endLine": 403,
+        "endChar": 32
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
