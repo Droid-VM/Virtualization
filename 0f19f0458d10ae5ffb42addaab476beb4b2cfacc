@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe22eb9b_c3b34125",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-06-19T16:41:45Z",
+      "side": 1,
+      "message": "An exception may happen because some critical state such as the stack is messed up in some way. In this case calling `emergency_write_str` directly, which will hopefully get inlined, seemed somewhat more likely to work than the extra complexity of the format machinery. I suggest at least using `emergency_write_str` once at the start of the exception handler, even if you want to use `eprintln!` after that to print more details, as it\u0027s more helpful for debugging to get at least some idea of what exception happened than a loop of exceptions causing exceptions without managing to log anything.",
+      "revId": "0f19f0458d10ae5ffb42addaab476beb4b2cfacc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "02566e0a_d0f0598a",
         "filename": "rialto/src/exceptions.rs",
         "patchSetId": 1
