@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90f24452_e48ead3f",
+        "filename": "pvmfw/testdata/test_crosvm_dt_base.dtsi",
+        "patchSetId": 7
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-19T13:43:01Z",
+      "side": 1,
+      "message": "```suggestion\n\t\tinterrupts \u003d \u003c0x01 0xf 0x01\u003e; // \u003cGIC_PPI 0xf IRQ_TYPE_EDGE_RISING\u003e\n```",
+      "range": {
+        "startLine": 144,
+        "startChar": 30,
+        "endLine": 144,
+        "endChar": 31
+      },
+      "revId": "9e77101a7b3cdfab37e92b0526132d31b58d8d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
