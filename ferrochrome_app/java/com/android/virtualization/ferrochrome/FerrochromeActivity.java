@@ -44,12 +44,15 @@ public class FerrochromeActivity extends Activity {
     ExecutorService executorService = Executors.newSingleThreadExecutor();
     private static final String TAG = "FerrochromeActivity";
     private static final String FERROCHROME_VERSION = "R127-15916.0.0";
+    private static final String VM_CONFIG_VERSION = "1";
     private static final String EXTERNAL_STORAGE_DIR =
             Environment.getExternalStorageDirectory().getPath() + File.separator;
     private static final Path IMAGE_PATH =
             Path.of(EXTERNAL_STORAGE_DIR + "chromiumos_test_image.bin");
     private static final Path IMAGE_VERSION_INFO =
             Path.of(EXTERNAL_STORAGE_DIR + "ferrochrome_image_version");
+    private static final Path VM_CONFIG_VERSION_INFO =
+            Path.of(EXTERNAL_STORAGE_DIR + "vm_config_version");
     private static final Path VM_CONFIG_PATH = Path.of(EXTERNAL_STORAGE_DIR + "vm_config.json");
 
     @Override
@@ -65,7 +68,7 @@ public class FerrochromeActivity extends Activity {
         executorService.execute(
                 () -> {
                     if (Files.notExists(IMAGE_PATH)
-                            || !FERROCHROME_VERSION.equals(getVersionInfo())) {
+                            || !FERROCHROME_VERSION.equals(getFerrochromeVersionInfo())) {
                         updateStatus("image doesn't exist");
                         updateStatus("download image");
                         if (download(FERROCHROME_VERSION)) {
@@ -77,8 +80,14 @@ public class FerrochromeActivity extends Activity {
                     } else {
                         updateStatus("there are already downloaded images");
                     }
-                    updateStatus("write down vm config");
-                    copyVmConfigJson();
+                    if (Files.notExists(VM_CONFIG_PATH) ||
+                            !VM_CONFIG_VERSION.equals(getVmConfigVersionInfo())) {
+                        updateStatus("write down vm config");
+                        copyVmConfigJson();
+                        updateVmConfigVersionInfo(VM_CONFIG_VERSION);
+                    } else {
+                        updateStatus("vm config is up to date");
+                    }
                     updateStatus("custom_vm_setup: copy files to /data/local/tmp");
                     SystemProperties.set("debug.custom_vm_setup.start", "true");
                     while (!SystemProperties.getBoolean("debug.custom_vm_setup.done", false)) {
@@ -136,7 +145,24 @@ public class FerrochromeActivity extends Activity {
         }
     }
 
-    private String getVersionInfo() {
+    private String getVmConfigVersionInfo() {
+        try {
+            return new String(Files.readAllBytes(VM_CONFIG_VERSION_INFO), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    private boolean updateVmConfigVersionInfo(String version) {
+        try {
+            Files.write(VM_CONFIG_VERSION_INFO, version.getBytes(StandardCharsets.UTF_8));
+        } catch (IOException e) {
+            Log.d(TAG, e.toString());
+        }
+        return true;
+    }
+
+    private String getFerrochromeVersionInfo() {
         try {
             return new String(Files.readAllBytes(IMAGE_VERSION_INFO), StandardCharsets.UTF_8);
         } catch (IOException e) {
@@ -144,7 +170,7 @@ public class FerrochromeActivity extends Activity {
         }
     }
 
-    private boolean updateVersionInfo(String version) {
+    private boolean updateFerrochromeVersionInfo(String version) {
         try {
             Files.write(IMAGE_VERSION_INFO, version.getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {
@@ -168,7 +194,7 @@ public class FerrochromeActivity extends Activity {
                 updateStatus("copy " + entry.getName() + " start");
                 Files.copy(zis, IMAGE_PATH, StandardCopyOption.REPLACE_EXISTING);
                 updateStatus("copy " + entry.getName() + " done");
-                updateVersionInfo(version);
+                updateFerrochromeVersionInfo(version);
                 break;
             }
         } catch (Exception e) {
