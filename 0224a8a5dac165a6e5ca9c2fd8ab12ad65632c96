@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a00bb743_bc64b061",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2024-06-19T17:45:34Z",
+      "side": 1,
+      "message": "I noticed the same issue you found due to not updating the vm_config.json, I did this before noticing you started copying it regardless.\n\nAnyways, all of that is really fragile, using a local db is probably easier at this point?",
+      "revId": "0224a8a5dac165a6e5ca9c2fd8ab12ad65632c96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
