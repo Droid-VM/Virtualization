@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af551bbb_aa6a35d7",
+        "filename": "java/jni/com_android_system_virtualmachine_VirtualizationSystemService.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-19T01:30:10Z",
+      "side": 1,
+      "message": "Marking as resolved, since another comment in this change follows same issue.",
+      "parentUuid": "12a94500_1ba9a1da",
+      "revId": "ee11a20f8ee8f85f8ca87ca752582a9eb9b3d5dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6ecf38a_1e054ef7",
@@ -83,6 +101,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59be280f_9c942495",
+        "filename": "java/service/src/com/android/system/virtualmachine/VirtualizationSystemService.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-19T01:30:10Z",
+      "side": 1,
+      "message": "Marking this as resolved for submission in advance. I\u0027ll mark this as unresolved again and work in parallel.",
+      "parentUuid": "6192cd18_aa18463e",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 43
+      },
+      "revId": "ee11a20f8ee8f85f8ca87ca752582a9eb9b3d5dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3564b47_bb440fdf",
@@ -120,6 +162,30 @@
       "side": 1,
       "message": "No, it\u0027ll be called in the same function, but different order. The ideal way of it is, having a bridge iface shared for all VMs and enable tethering for bridge iface. Then each TAP iface provided per VM is connected to the bridge iface.\n\nBut, for faster progress on providing network for Ferrochrome, switched the order of impl task like enabling tethering for TAP iface first and defer impl of bridge iface.",
       "parentUuid": "f3564b47_bb440fdf",
+      "range": {
+        "startLine": 533,
+        "startChar": 0,
+        "endLine": 533,
+        "endChar": 97
+      },
+      "revId": "ee11a20f8ee8f85f8ca87ca752582a9eb9b3d5dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8b1da10_7c970bce",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-06-19T01:30:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eda12f43_f7b30162",
       "range": {
         "startLine": 533,
         "startChar": 0,
