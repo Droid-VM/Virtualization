@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "277d888c_123e217a",
+        "filename": "vmbase/src/console.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T15:20:33Z",
+      "side": 1,
+      "message": "Maybe we should change this to avoid acquiring the spinlock twice?",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 41
+      },
+      "revId": "96924e7a235b031ff02b4f19e5c21707186556e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd7f7fb8_bb4bb4a1",
+        "filename": "vmbase/src/layout.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-19T15:20:33Z",
+      "side": 1,
+      "message": "[PRIMARY_]UART_BASE_ADDRESS ?\n\nWe no longer have console as context to make the name less ambiguous.",
+      "range": {
+        "startLine": 30,
+        "startChar": 10,
+        "endLine": 30,
+        "endChar": 22
+      },
+      "revId": "96924e7a235b031ff02b4f19e5c21707186556e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
