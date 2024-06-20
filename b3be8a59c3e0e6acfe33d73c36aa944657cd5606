@@ -118,6 +118,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aaeb0ce9_e883b44f",
+        "filename": "vmbase/src/console.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-06-20T12:42:47Z",
+      "side": 1,
+      "message": "Also, the MMIO ranges must not have any other references before or after this is called, and it must only be called once.",
+      "revId": "b3be8a59c3e0e6acfe33d73c36aa944657cd5606",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d654d075_b0f58803",
+        "filename": "vmbase/src/console.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-06-20T12:42:47Z",
+      "side": 1,
+      "message": "The intention of this, as the comment says, is that it wouldn\u0027t need to take any locks and hopefully work anyway. That\u0027s no longer true here as `create(n)` needs the lock on `ADDRESSES[n]`, which partly defeats the purpose. (Not entirely, as at least it doesn\u0027t need the lock on `CONSOLES[n]`, but still.)\n\nIt should also be `unsafe`, as it creates an alias to the same MMIO region as the instances in `CONSOLES`. (Not a new issue, this is probably my fault.)\n\nThere\u0027s a couple of directions we could consider instead.\n\n1. Replace the `SpinMutex` on `CONSOLES` with an implementation which uses a critical section to mask most exceptions while the lock is taken. This would make the regular `write_str` safe to use from some exception handlers. Synchronous exceptions are still a problem though, as they can\u0027t be masked.\n2. For synchronous exceptions, that probably means the Rust code has done something it shouldn\u0027t, so we could consider some minimal assembly implementation that doesn\u0027t use the stack, to be more robust against whatever corruption has happened.",
+      "revId": "b3be8a59c3e0e6acfe33d73c36aa944657cd5606",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "14212cfe_67be9274",
         "filename": "vmbase/src/console.rs",
         "patchSetId": 1
