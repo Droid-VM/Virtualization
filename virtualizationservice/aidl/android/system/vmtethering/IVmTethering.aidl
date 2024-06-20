@@ -19,8 +19,9 @@ package android.system.vmtethering;
 interface IVmTethering {
     /**
      * Start VM tethering to provide external network to VM.
+     * @param network interface name for enabling tethering.
      */
-    void enableVmTethering();
+    void enableVmTethering(String ifaceName);
 
     /**
      * Terminate VM tethering that providing external network to VM.
