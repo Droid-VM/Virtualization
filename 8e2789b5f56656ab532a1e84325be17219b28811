@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4b239ed_5e508a49",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-20T13:46:06Z",
+      "side": 1,
+      "message": "Is this required?",
+      "range": {
+        "startLine": 762,
+        "startChar": 9,
+        "endLine": 762,
+        "endChar": 16
+      },
+      "revId": "8e2789b5f56656ab532a1e84325be17219b28811",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f9d94b3_26cc46ee",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-20T13:46:06Z",
+      "side": 1,
+      "message": "nit: `.ok_or(FdtError::NotFound)?` (as you do below).",
+      "range": {
+        "startLine": 775,
+        "startChar": 0,
+        "endLine": 781,
+        "endChar": 6
+      },
+      "revId": "8e2789b5f56656ab532a1e84325be17219b28811",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5767f39_254d0876",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-20T13:46:06Z",
+      "side": 1,
+      "message": "Could you `warn!` if `ranges.next().is_some()` here (see other similar warnings in this file) and same for `interrupts` below?",
+      "revId": "8e2789b5f56656ab532a1e84325be17219b28811",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68780046_9fab4a6f",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-20T13:46:06Z",
+      "side": 1,
+      "message": "As interrupts are described by groups of 3 cells, I\u0027d recommend using `chunks().next()` (see other examples in this file for parsing IRQs). You might want to introduce\n```\ntype Irq \u003d [u32; 3];\n```\nwhich will be reused by other validation functions.",
+      "range": {
+        "startLine": 787,
+        "startChar": 64,
+        "endLine": 787,
+        "endChar": 68
+      },
+      "revId": "8e2789b5f56656ab532a1e84325be17219b28811",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c76f389_bfb60668",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-20T13:46:06Z",
+      "side": 1,
+      "message": "Would it work to\n```\nimpl WdtInfo {\n    const ADDR: usize \u003d 0x3000;\n    const size: usize \u003d 0x1000;\n}\n```\nand, here\n```\nconst EXPECTED: Self \u003d Self {\n    Self::ADDR,\n    Self::SIZE,\n    [GIC_PPI, Self::IRQ_NR, IRQ_TYPE_EDGE_RISING],\n};\n```\nwith (similar to L658)\n```\nconst GIC_PPI: u32 \u003d 1;\nconst IRQ_TYPE_EDGE_RISING: u32 \u003d 1;\n```\nso that\n```\nif self !\u003d Self::EXPECTED {\n    error!(\"Invalid watchdog timer: {self:?}\");\n    return Err(...);\n}\n```\n?",
+      "range": {
+        "startLine": 800,
+        "startChar": 19,
+        "endLine": 800,
+        "endChar": 27
+      },
+      "revId": "8e2789b5f56656ab532a1e84325be17219b28811",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
