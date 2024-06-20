@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9fbccce1_39a48132",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-20T16:45:08Z",
+      "side": 1,
+      "message": "Please see the updated commit message on this point. TL;DR the exception handler stack is very unlikely to get messed up and code complexity is hard to justify when relying on the compiler \"hopefully\" generating the asm we\u0027d like, IMO. In particular, I\u0027m curious if `emergency_write_str` still gets inlined after aosp/3136757.",
+      "parentUuid": "fe22eb9b_c3b34125",
+      "revId": "0f19f0458d10ae5ffb42addaab476beb4b2cfacc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "02566e0a_d0f0598a",
         "filename": "rialto/src/exceptions.rs",
         "patchSetId": 1
@@ -31,6 +49,30 @@
       "writtenOn": "2024-06-19T15:13:23Z",
       "side": 1,
       "message": "If we want to prefer the macro everywhere, should we add a comment to emergency_write_str saying that?\n\nAlso, we might want to update the example in documentation: https://googleplex-android.googlesource.com/platform/packages/modules/Virtualization/+/main/vmbase/README.md#exception-handlers",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 12
+      },
+      "revId": "0f19f0458d10ae5ffb42addaab476beb4b2cfacc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de51c7f5_f9bd1e28",
+        "filename": "rialto/src/exceptions.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-20T16:45:08Z",
+      "side": 1,
+      "message": "I\u0027ve updated the README.",
+      "parentUuid": "02566e0a_d0f0598a",
       "range": {
         "startLine": 51,
         "startChar": 4,
