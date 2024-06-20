@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cc162de_77e3c44c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-20T16:46:05Z",
+      "side": 1,
+      "message": "Bug is mentioned in the last commit but I\u0027ve also added it here.",
+      "parentUuid": "2c25bb61_ea8b0ee2",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 49
+      },
+      "revId": "b3be8a59c3e0e6acfe33d73c36aa944657cd5606",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc257f4d_f56f154a",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-06-19T15:31:30Z",
       "side": 1,
       "message": "Could you comment this, mentioning 4 is the crosvm default?\nAnd maybe make it clear this can be changed for different crosvm configs?",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 30
+      },
+      "revId": "b3be8a59c3e0e6acfe33d73c36aa944657cd5606",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcea2c22_75d11f2f",
+        "filename": "vmbase/src/console.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-20T16:46:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc257f4d_f56f154a",
       "range": {
         "startLine": 24,
         "startChar": 0,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7bf0b181_ea5be794",
+        "filename": "vmbase/src/console.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-20T16:46:05Z",
+      "side": 1,
+      "message": "\u003e Whenever I see a pair of arrays I want an array of pairs.\n\nHow would that work with locking, given that I want to access `ADDRESSES` (used to synchronize `eprintln!` with `init()`) without taking the lock on `CONSOLES` (used by `println!`)?\n\n\u003e you could use a const for the initializers\n\nI tried\n```\nconst CONSOLE_DEFAULT: SpinMutex\u003cOption\u003cUart\u003e\u003e \u003d SpinMutex::new(None);\n```\nbut get\n```\nerror: a `const` item should never be interior mutable\n```\nwith the suggestion\n```\nmake this a static item (maybe with lazy_static)\n```\ndid I misunderstand you?",
+      "parentUuid": "216dd24a_f9e92b79",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 2
+      },
+      "revId": "b3be8a59c3e0e6acfe33d73c36aa944657cd5606",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "31686373_74102dbc",
         "filename": "vmbase/src/console.rs",
         "patchSetId": 1
@@ -83,6 +155,30 @@
       "writtenOn": "2024-06-19T15:31:30Z",
       "side": 1,
       "message": "Needs updating",
+      "range": {
+        "startLine": 37,
+        "startChar": 15,
+        "endLine": 37,
+        "endChar": 22
+      },
+      "revId": "b3be8a59c3e0e6acfe33d73c36aa944657cd5606",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "977a0157_2ac4ccb6",
+        "filename": "vmbase/src/console.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-20T16:46:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31686373_74102dbc",
       "range": {
         "startLine": 37,
         "startChar": 15,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "153b7b3b_22213b22",
+        "filename": "vmbase/src/console.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-20T16:46:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81745082_7edc819c",
+      "range": {
+        "startLine": 41,
+        "startChar": 57,
+        "endLine": 41,
+        "endChar": 60
+      },
+      "revId": "b3be8a59c3e0e6acfe33d73c36aa944657cd5606",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aaeb0ce9_e883b44f",
@@ -133,6 +253,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aea63b2_08638ba4",
+        "filename": "vmbase/src/console.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-20T16:46:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aaeb0ce9_e883b44f",
+      "revId": "b3be8a59c3e0e6acfe33d73c36aa944657cd5606",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d654d075_b0f58803",
@@ -146,6 +284,24 @@
       "writtenOn": "2024-06-20T12:42:47Z",
       "side": 1,
       "message": "The intention of this, as the comment says, is that it wouldn\u0027t need to take any locks and hopefully work anyway. That\u0027s no longer true here as `create(n)` needs the lock on `ADDRESSES[n]`, which partly defeats the purpose. (Not entirely, as at least it doesn\u0027t need the lock on `CONSOLES[n]`, but still.)\n\nIt should also be `unsafe`, as it creates an alias to the same MMIO region as the instances in `CONSOLES`. (Not a new issue, this is probably my fault.)\n\nThere\u0027s a couple of directions we could consider instead.\n\n1. Replace the `SpinMutex` on `CONSOLES` with an implementation which uses a critical section to mask most exceptions while the lock is taken. This would make the regular `write_str` safe to use from some exception handlers. Synchronous exceptions are still a problem though, as they can\u0027t be masked.\n2. For synchronous exceptions, that probably means the Rust code has done something it shouldn\u0027t, so we could consider some minimal assembly implementation that doesn\u0027t use the stack, to be more robust against whatever corruption has happened.",
+      "revId": "b3be8a59c3e0e6acfe33d73c36aa944657cd5606",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5789f22_7ae98fc1",
+        "filename": "vmbase/src/console.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-20T16:46:05Z",
+      "side": 1,
+      "message": "I agree that it is a shame that the lock needs to be taken. The fundamental issue (addressed in aosp/3136757) was that `emergency_*()` could access the UART even when it wasn\u0027t mapped, which is avoided by ensuring that `ADDRESS`(`ES[n]`) has been set. The lock on it is necessary to synchronize with `init()` (otherwise, the compiler complains) but perhaps the `OnceCell` could somehow be used without it?\n\nAlternatively, `create` could `.try_lock` instead.",
+      "parentUuid": "d654d075_b0f58803",
       "revId": "b3be8a59c3e0e6acfe33d73c36aa944657cd5606",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -173,6 +329,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f385dc1_7f2ecba8",
+        "filename": "vmbase/src/console.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-20T16:46:05Z",
+      "side": 1,
+      "message": "Added a `pub` `const` so that users of the macro have access to it and it can be referred to by clients, if needed.",
+      "parentUuid": "14212cfe_67be9274",
+      "range": {
+        "startLine": 96,
+        "startChar": 38,
+        "endLine": 96,
+        "endChar": 39
+      },
+      "revId": "b3be8a59c3e0e6acfe33d73c36aa944657cd5606",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ccc13a43_6330f29f",
@@ -186,6 +366,30 @@
       "writtenOn": "2024-06-19T15:31:30Z",
       "side": 1,
       "message": "Xref crosvm spec?",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 53
+      },
+      "revId": "b3be8a59c3e0e6acfe33d73c36aa944657cd5606",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3e96489_f9f1b8c8",
+        "filename": "vmbase/src/layout.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-20T16:46:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccc13a43_6330f29f",
       "range": {
         "startLine": 29,
         "startChar": 0,
