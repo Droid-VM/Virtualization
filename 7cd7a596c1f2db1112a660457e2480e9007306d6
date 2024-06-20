@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "565b9176_381ee827",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-06-20T01:19:31Z",
+      "side": 1,
+      "message": "https://source.android.com/docs/setup/contribute/licenses#follow_license_and_copyright_best_practices it looks like it includes (C)?",
+      "parentUuid": "4757ec9e_aabc4339",
+      "range": {
+        "startLine": 2,
+        "startChar": 13,
+        "endLine": 2,
+        "endChar": 16
+      },
+      "revId": "7cd7a596c1f2db1112a660457e2480e9007306d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13809f44_3b18b340",
@@ -60,6 +84,30 @@
       "writtenOn": "2024-06-19T15:39:12Z",
       "side": 1,
       "message": "Q: is it final solution? I wonder whether we can open file here and only send ParcelledFileDescriptor",
+      "range": {
+        "startLine": 84,
+        "startChar": 20,
+        "endLine": 84,
+        "endChar": 36
+      },
+      "revId": "7cd7a596c1f2db1112a660457e2480e9007306d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "169541e9_3dec33b6",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-06-20T01:19:31Z",
+      "side": 1,
+      "message": "it will be handled by FD, but for now VM launcher is not ready",
+      "parentUuid": "13809f44_3b18b340",
       "range": {
         "startLine": 84,
         "startChar": 20,
@@ -95,6 +143,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "070a5c41_854c9220",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-06-20T01:19:31Z",
+      "side": 1,
+      "message": "yeah, will refactor it when we define an interface for VmLauncher(with FD which we mentioned above)",
+      "parentUuid": "7e5e36f1_b95327b2",
+      "range": {
+        "startLine": 108,
+        "startChar": 19,
+        "endLine": 108,
+        "endChar": 46
+      },
+      "revId": "7cd7a596c1f2db1112a660457e2480e9007306d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2da4b449_a125b555",
         "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
         "patchSetId": 13
@@ -118,6 +190,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f8f88cde_b984f765",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-06-20T01:19:31Z",
+      "side": 1,
+      "message": "thanks, will update it",
+      "parentUuid": "2da4b449_a125b555",
+      "range": {
+        "startLine": 166,
+        "startChar": 28,
+        "endLine": 166,
+        "endChar": 37
+      },
+      "revId": "7cd7a596c1f2db1112a660457e2480e9007306d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "75deaf8b_a07eca52",
         "filename": "vmlauncher_app/AndroidManifest.xml",
         "patchSetId": 13
@@ -129,6 +225,30 @@
       "writtenOn": "2024-06-19T15:39:12Z",
       "side": 1,
       "message": "QQ: why do we need this? We can simply hide from launcher by removing `android.intent.category.LAUNCHER`.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 0
+      },
+      "revId": "7cd7a596c1f2db1112a660457e2480e9007306d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0656b7cc_38ade899",
+        "filename": "vmlauncher_app/AndroidManifest.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-06-20T01:19:31Z",
+      "side": 1,
+      "message": "i want to hide the icon by default, and also want to give an option to enable it(with just one-time setup)",
+      "parentUuid": "75deaf8b_a07eca52",
       "range": {
         "startLine": 18,
         "startChar": 0,
