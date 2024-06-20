@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f978f83_f0c94696",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2547,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2024-06-20T16:18:17Z",
+      "side": 1,
+      "message": "Nit: Should be in a finally block?\nAlso, I\u0027d use close() which is like stop but never throws",
+      "range": {
+        "startLine": 2543,
+        "startChar": 0,
+        "endLine": 2547,
+        "endChar": 9
+      },
+      "revId": "c56a455bf61663d36ed24cfb429d22d6e120c3e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
