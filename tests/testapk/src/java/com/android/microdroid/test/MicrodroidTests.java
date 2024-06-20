@@ -2539,6 +2539,12 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         for (VirtualMachine vm : vms) {
             assertThat(vm.getStatus()).isEqualTo(VirtualMachine.STATUS_RUNNING);
         }
+
+        // Ensure that VMs are all stopped. Otherwise we may try to reuse some of these for
+        // another run of this test with different parameters.
+        for (VirtualMachine vm : vms) {
+            vm.stop();
+        }
     }
 
     private long getAvailableMemory() {
