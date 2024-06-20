@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b91db2d_684ac6aa",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-06-20T14:52:58Z",
+      "side": 1,
+      "message": "I used the same directive modifier as the other type definitions.",
+      "parentUuid": "f4b239ed_5e508a49",
+      "range": {
+        "startLine": 762,
+        "startChar": 9,
+        "endLine": 762,
+        "endChar": 16
+      },
+      "revId": "8e2789b5f56656ab532a1e84325be17219b28811",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f9d94b3_26cc46ee",
@@ -64,6 +88,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45b34607_00cccb85",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-06-20T14:52:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5767f39_254d0876",
+      "revId": "8e2789b5f56656ab532a1e84325be17219b28811",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c28f8a8_917fac2c",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-06-20T14:52:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5767f39_254d0876",
+      "revId": "8e2789b5f56656ab532a1e84325be17219b28811",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68780046_9fab4a6f",
@@ -87,6 +147,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f8e5c33_becde838",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-06-20T14:52:58Z",
+      "side": 1,
+      "message": "I will not introduce other type because it is out of this PR scope.",
+      "parentUuid": "68780046_9fab4a6f",
+      "range": {
+        "startLine": 787,
+        "startChar": 64,
+        "endLine": 787,
+        "endChar": 68
+      },
+      "revId": "8e2789b5f56656ab532a1e84325be17219b28811",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c76f389_bfb60668",
@@ -100,6 +184,30 @@
       "writtenOn": "2024-06-20T13:46:06Z",
       "side": 1,
       "message": "Would it work to\n```\nimpl WdtInfo {\n    const ADDR: usize \u003d 0x3000;\n    const size: usize \u003d 0x1000;\n}\n```\nand, here\n```\nconst EXPECTED: Self \u003d Self {\n    Self::ADDR,\n    Self::SIZE,\n    [GIC_PPI, Self::IRQ_NR, IRQ_TYPE_EDGE_RISING],\n};\n```\nwith (similar to L658)\n```\nconst GIC_PPI: u32 \u003d 1;\nconst IRQ_TYPE_EDGE_RISING: u32 \u003d 1;\n```\nso that\n```\nif self !\u003d Self::EXPECTED {\n    error!(\"Invalid watchdog timer: {self:?}\");\n    return Err(...);\n}\n```\n?",
+      "range": {
+        "startLine": 800,
+        "startChar": 19,
+        "endLine": 800,
+        "endChar": 27
+      },
+      "revId": "8e2789b5f56656ab532a1e84325be17219b28811",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "874bd439_aa04ca79",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-06-20T14:52:58Z",
+      "side": 1,
+      "message": "No other validator from this file follows this model - maybe this can be refactored at a later point like this.",
+      "parentUuid": "5c76f389_bfb60668",
       "range": {
         "startLine": 800,
         "startChar": 19,
