@@ -63,15 +63,17 @@ To run OSes with graphics support, follow the instruction below.
 As of today (April 2024), ChromiumOS is the only officially supported guest
 payload. We will be adding more OSes in the future.
 
-#### Download from build server
+#### Download ChromiumOS from build server
 
-Here's the link the comprehensive artifacts
-https://pantheon.corp.google.com/storage/browser/chromiumos-image-archive/ferrochrome-public
+Download
+https://storage.googleapis.com/chromiumos-image-archive/ferrochrome-public/R128-15926.0.0/chromiumos_test_image.tar.xz.
+The above will download ferrochrome test image with version `R128-15926.0.0`.
 
-Pick a build, download, and untar `chromiumos_test_image.tar.xz`. We'll boot with `chromiumos_test_image.bin` in it.
+You can download other version by replacing `R128-15926.0.0` with yours. To find the latest green version, check
+https://storage.googleapis.com/chromiumos-image-archive/ferrochrome-public/LATEST-main
 
-To find the latest green build, check following:
-https://pantheon.corp.google.com/storage/browser/_details/chromiumos-image-archive/ferrochrome-public/LATEST-main
+To navigate build server artifacts, [install gsutil](https://cloud.google.com/storage/docs/gsutil_install).
+`gs://chromiumos-image-archive/ferrochrome-public` is the top level directory for ferrochrome build.
 
 #### Build ChromiumOS for VM
 
