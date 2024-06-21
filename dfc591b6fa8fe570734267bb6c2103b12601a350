@@ -46,6 +46,30 @@
       },
       "revId": "dfc591b6fa8fe570734267bb6c2103b12601a350",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78b11a28_e264a727",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-21T09:07:50Z",
+      "side": 1,
+      "message": "I was asking to make the logged string more robust against code changes e.g. \n```suggestion\n        warn!(\"Discarding extra vmwdt \u003creg\u003e entries.\");\n```\nSorry if this wasn\u0027t clear.",
+      "parentUuid": "7a1ec24b_ed5712ef",
+      "range": {
+        "startLine": 786,
+        "startChar": 25,
+        "endLine": 786,
+        "endChar": 36
+      },
+      "revId": "dfc591b6fa8fe570734267bb6c2103b12601a350",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
