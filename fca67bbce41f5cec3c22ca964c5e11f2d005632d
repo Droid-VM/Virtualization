@@ -16,6 +16,63 @@
       "message": "I wrote relevant server config already, but testing it requires to submit this CL. Let me get review this first.",
       "revId": "fca67bbce41f5cec3c22ca964c5e11f2d005632d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4edc45dd_faab5fb9",
+        "filename": "tests/ferrochrome/AndroidTest.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-06-21T11:08:52Z",
+      "side": 1,
+      "message": "why? then deleting the file is not guaranteed.",
+      "range": {
+        "startLine": 34,
+        "startChar": 48,
+        "endLine": 34,
+        "endChar": 53
+      },
+      "revId": "fca67bbce41f5cec3c22ca964c5e11f2d005632d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f20073f6_7c7a511b",
+        "filename": "tests/ferrochrome/AndroidTest.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-06-21T11:08:52Z",
+      "side": 1,
+      "message": "We now have the Ferrochrome activity. Why can\u0027t we run it as a test?",
+      "revId": "fca67bbce41f5cec3c22ca964c5e11f2d005632d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ad34653_96e177d3",
+        "filename": "tests/ferrochrome/ferrochrome",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-06-21T11:08:52Z",
+      "side": 1,
+      "message": "Omitting the .sh suffix doesn\u0027t look right. This still is a shell script.",
+      "revId": "fca67bbce41f5cec3c22ca964c5e11f2d005632d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
