@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f5afbcd_a783133b",
+        "filename": "tests/ferrochrome/AndroidTest.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-06-22T15:23:05Z",
+      "side": 1,
+      "message": "Done.\n\nJust FYI, `throw-if-cmd-fail\u003dfalse` means continue executing commands when any of them returned error. So false is intended to proceed.",
+      "parentUuid": "4edc45dd_faab5fb9",
+      "range": {
+        "startLine": 34,
+        "startChar": 48,
+        "endLine": 34,
+        "endChar": 53
+      },
+      "revId": "fca67bbce41f5cec3c22ca964c5e11f2d005632d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f20073f6_7c7a511b",
@@ -107,6 +131,24 @@
       "writtenOn": "2024-06-21T11:08:52Z",
       "side": 1,
       "message": "Omitting the .sh suffix doesn\u0027t look right. This still is a shell script.",
+      "revId": "fca67bbce41f5cec3c22ca964c5e11f2d005632d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bf29995_7d60ad49",
+        "filename": "tests/ferrochrome/ferrochrome",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-06-22T15:23:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ad34653_96e177d3",
       "revId": "fca67bbce41f5cec3c22ca964c5e11f2d005632d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
