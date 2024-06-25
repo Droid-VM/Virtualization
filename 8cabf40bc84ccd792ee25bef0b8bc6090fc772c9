@@ -70,6 +70,30 @@
       },
       "revId": "8cabf40bc84ccd792ee25bef0b8bc6090fc772c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6575894a_7e88cb9b",
+        "filename": "service_vm/fake_chain/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1954750
+      },
+      "writtenOn": "2024-06-25T20:24:05Z",
+      "side": 1,
+      "message": "The Android 14 profile sets `allow_root_mode_debug\u003dtrue` but none of the other profiles do, so the tests will fail if the profile changes. In that case, do you think we can keep the full chain set to the normal mode?\n\n(re: pVM: Andrew helped me realize the root cert was debug because my bootloader was unlocked. Oops.)",
+      "parentUuid": "7f77b3f9_702ad8d9",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 34
+      },
+      "revId": "8cabf40bc84ccd792ee25bef0b8bc6090fc772c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
