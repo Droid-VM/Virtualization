@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1833b38f_b18d83b7",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-06-25T12:11:11Z",
+      "side": 1,
+      "message": "not blocking: I remember we discussed a while back that we needed to print the error one by one in the code instead of printing it here because the console wasn\u0027t set up initially. However, with the current cl, it seems that we could just catch the error (with context) during the execution and print it here rather than spreading the error printing all through the code.",
+      "range": {
+        "startLine": 73,
+        "startChar": 8,
+        "endLine": 73,
+        "endChar": 14
+      },
+      "revId": "00eead97bc7b6c409e06ee4451ffe04d314094b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55e8e012_a54eaa1a",
+        "filename": "vmbase/src/console.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-06-25T12:11:11Z",
+      "side": 1,
+      "message": "`s/./new_uart()` to make this more clear?",
+      "range": {
+        "startLine": 28,
+        "startChar": 3,
+        "endLine": 28,
+        "endChar": 9
+      },
+      "revId": "00eead97bc7b6c409e06ee4451ffe04d314094b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eff9a45c_ca37a54f",
+        "filename": "vmbase/src/console.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-06-25T12:11:11Z",
+      "side": 1,
+      "message": "nit: This comment can be moved on top of `ADDRESS` as a doc.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 96
+      },
+      "revId": "00eead97bc7b6c409e06ee4451ffe04d314094b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f39c2c46_c0b0c48a",
+        "filename": "vmbase/src/layout.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-06-25T12:11:11Z",
+      "side": 1,
+      "message": "nit: Should we call this `*_ADDR` such as `MMIO_UART_ADDR` to be consistent with other variables?",
+      "range": {
+        "startLine": 30,
+        "startChar": 10,
+        "endLine": 30,
+        "endChar": 22
+      },
+      "revId": "00eead97bc7b6c409e06ee4451ffe04d314094b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
