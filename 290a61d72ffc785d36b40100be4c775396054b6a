@@ -44,6 +44,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "93033347_24e95889",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-25T11:18:41Z",
+      "side": 1,
+      "message": "Yes, I meant to say that Linux typically uses the DTSpec on ARM; I\u0027ll rephrase as I agree that this phrasing could be confusing.",
+      "parentUuid": "94665ed1_c8bb0ad8",
+      "range": {
+        "startLine": 13,
+        "startChar": 37,
+        "endLine": 13,
+        "endChar": 42
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d943c3da_c176b1af",
         "filename": "docs/device_trees.md",
         "patchSetId": 1
@@ -338,6 +362,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "099efa7d_85e75944",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-25T11:18:41Z",
+      "side": 1,
+      "message": "Fix applied and I\u0027ll rework this more in the next PS.\n\nAlso, see this relevant [comment](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2379929/comment/f56fb8b7_299624b0/) on aosp/2379929.",
+      "parentUuid": "88e767f5_a16b4b21",
+      "range": {
+        "startLine": 134,
+        "startChar": 35,
+        "endLine": 134,
+        "endChar": 52
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f0943d72_8d222e09",
         "filename": "docs/device_trees.md",
         "patchSetId": 1
@@ -349,6 +397,30 @@
       "writtenOn": "2024-06-25T10:58:35Z",
       "side": 1,
       "message": "```suggestion\n- security-sensitive: the host should not be able to tamper with these values\n```\n\nQQ. In case of value mismatches between the reference DT and input DT from host, does pvmfw abort the VM?",
+      "range": {
+        "startLine": 137,
+        "startChar": 2,
+        "endLine": 137,
+        "endChar": 20
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5e90e74_83db9dfb",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-25T11:18:41Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "f0943d72_8d222e09",
       "range": {
         "startLine": 137,
         "startChar": 2,
@@ -447,6 +519,30 @@
         "startChar": 2,
         "endLine": 139,
         "endChar": 8
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56eed6f5_31bee031",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-25T11:18:41Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "a1ad4083_b513d743",
+      "range": {
+        "startLine": 139,
+        "startChar": 2,
+        "endLine": 139,
+        "endChar": 73
       },
       "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -808,6 +904,30 @@
       "writtenOn": "2024-06-25T10:58:35Z",
       "side": 1,
       "message": "`instance-id` is also used to generate an instance specific hash which is mixed in the DICE by pvmfw (and is critical for early differentiation of secrets of different VMs)\n```suggestion\n- the host-allocated `/avf/untrusted/instance-id` is used to assign a unique identifier to the VM instance \u0026 is used for differentiating VM secrets as well as by guest OS to index external storage such as Secretkeeper.\n```",
+      "range": {
+        "startLine": 199,
+        "startChar": 52,
+        "endLine": 199,
+        "endChar": 75
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0111893d_9e6b485d",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-25T11:18:41Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "3f1aa489_4e91cec3",
       "range": {
         "startLine": 199,
         "startChar": 52,
