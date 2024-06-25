@@ -22,6 +22,30 @@
       },
       "revId": "8cabf40bc84ccd792ee25bef0b8bc6090fc772c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccb86ed0_4736d699",
+        "filename": "service_vm/fake_chain/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1954750
+      },
+      "writtenOn": "2024-06-25T14:17:30Z",
+      "side": 1,
+      "message": "Thanks for catching, I\u0027ve amended the dice mode in `fake_dice_artifacts_up_to_pvmfw` as well so that the entire dice chain has a normal mode.\n\nThe mode check was passing anyways because it hit a special case exception: the root certificate was the one with the debug mode, and debug is allowed for root certs if the profile has `allow_root_mode_debug\u003dtrue`.\n\n(Btw, `--allow-any-mode` is the option that allows any mode)\n\nHowever, I decided to run `atest rialto_test` with `allow_root_mode_debug\u003dfalse` to check everything was good, and I saw that the `process_requests_in_protected_vm` test failed (but passed when `allow_root_mode_debug\u003dtrue`). \n\nIs it expected that a protected VM dice chain would have a debug mode root cert (or maybe this is test specific)?",
+      "parentUuid": "c270c244_10bb123d",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 34
+      },
+      "revId": "8cabf40bc84ccd792ee25bef0b8bc6090fc772c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
