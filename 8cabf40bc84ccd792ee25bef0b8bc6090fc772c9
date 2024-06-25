@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c270c244_10bb123d",
+        "filename": "service_vm/fake_chain/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-06-25T08:05:05Z",
+      "side": 1,
+      "message": "Does `--allow-any-mode` only require the leaf DICE node to be in normal mode? The chain is still insecure with other DICE nodes set to debug mode.",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 34
+      },
+      "revId": "8cabf40bc84ccd792ee25bef0b8bc6090fc772c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
