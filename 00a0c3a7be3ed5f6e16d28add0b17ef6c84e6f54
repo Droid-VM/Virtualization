@@ -16,6 +16,24 @@
       "message": "Nit: maybe there should be a variant of `println!` that takes the console index.",
       "revId": "00a0c3a7be3ed5f6e16d28add0b17ef6c84e6f54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c84faad_b0f6b1e5",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-25T09:36:32Z",
+      "side": 1,
+      "message": "Sure, I didn\u0027t want to introduce a macro that would only be used once but I can.\n\nRegarding bikeshedding, do you have suggestions for the name? When I was considering this, I wanted to align with the standard `writeln!` (instead of `println!`) as it already takes an argument. Would `console_writeln!` work for you?",
+      "parentUuid": "8b888d6c_bc906e31",
+      "revId": "00a0c3a7be3ed5f6e16d28add0b17ef6c84e6f54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
