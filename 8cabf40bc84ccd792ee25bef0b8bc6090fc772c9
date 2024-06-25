@@ -46,6 +46,30 @@
       },
       "revId": "8cabf40bc84ccd792ee25bef0b8bc6090fc772c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f77b3f9_702ad8d9",
+        "filename": "service_vm/fake_chain/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-06-25T14:52:05Z",
+      "side": 1,
+      "message": "\u003e the root certificate was the one with the debug mode, and debug is allowed for root certs if the profile has `allow_root_mode_debug\u003dtrue`.\n\nI see. In this case, could you just leave the root cert mode to be Debug in this file? This is a fake chain used for testing, I\u0027d prefer to keep one node in Debug actually if that\u0027s not in conflict with your change :)\n\nThe root cert of a pVM is controlled by SoC. It can be in debug mode. However, the pVM rialto uses a real DICE chain, it shouldn\u0027t be impacted by this cl as it only modifies the fake chain used in non-protected VM rialto.",
+      "parentUuid": "ccb86ed0_4736d699",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 34
+      },
+      "revId": "8cabf40bc84ccd792ee25bef0b8bc6090fc772c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
