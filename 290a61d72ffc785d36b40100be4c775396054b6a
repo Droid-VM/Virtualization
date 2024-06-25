@@ -3,6 +3,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94665ed1_c8bb0ad8",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-06-25T10:58:35Z",
+      "side": 1,
+      "message": "Linux is not the only kernel we target. Rialto must be also using the DT? Perhaps for finding DICE chain(?).. The concept of DT extends far beyond Linux?",
+      "range": {
+        "startLine": 13,
+        "startChar": 37,
+        "endLine": 13,
+        "endChar": 42
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "34a36a1e_1a2e503c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/device_trees.md",
+              "range": {
+                "startLine": 13,
+                "startChar": 0,
+                "endLine": 14,
+                "endChar": 0
+              },
+              "replacement": "used to describe the platform to the kernel. This includes so-called\n"
+            }
+          ]
+        }
+      ],
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d943c3da_c176b1af",
         "filename": "docs/device_trees.md",
         "patchSetId": 1
@@ -256,6 +297,93 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "88e767f5_a16b4b21",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-06-25T10:58:35Z",
+      "side": 1,
+      "message": "Instead of ABL, can we frame it as an input from a loader, which is in TCB of pvmfw - incase partners wish to re-use the reference pvmfw impl \u0026 device tree sanitization support?",
+      "range": {
+        "startLine": 134,
+        "startChar": 35,
+        "endLine": 134,
+        "endChar": 52
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "13a30e15_87fc9dc7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/device_trees.md",
+              "range": {
+                "startLine": 134,
+                "startChar": 0,
+                "endLine": 136,
+                "endChar": 0
+              },
+              "replacement": "an [input of pvmfw][pvmfw-config] (received from the loader) and used to\nvalidate DT entries which are:\n"
+            }
+          ]
+        }
+      ],
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0943d72_8d222e09",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-06-25T10:58:35Z",
+      "side": 1,
+      "message": "```suggestion\n- security-sensitive: the host should not be able to tamper with these values\n```\n\nQQ. In case of value mismatches between the reference DT and input DT from host, does pvmfw abort the VM?",
+      "range": {
+        "startLine": 137,
+        "startChar": 2,
+        "endLine": 137,
+        "endChar": 20
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2924014f_53f5dc3d",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-06-25T10:58:35Z",
+      "side": 1,
+      "message": "```suggestion\n- not confidential: it is part of the host DT\n```",
+      "range": {
+        "startLine": 138,
+        "startChar": 6,
+        "endLine": 138,
+        "endChar": 12
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f139509d_d7ec8790",
         "filename": "docs/device_trees.md",
         "patchSetId": 1
@@ -267,6 +395,53 @@
       "writtenOn": "2024-06-19T16:13:13Z",
       "side": 1,
       "message": "s/unique/the same/ ?",
+      "range": {
+        "startLine": 139,
+        "startChar": 2,
+        "endLine": 139,
+        "endChar": 8
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1ad4083_b513d743",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-06-25T10:58:35Z",
+      "side": 1,
+      "message": "```suggestion\n- Same across VMs: the property (if present) must be same across all instances\n```\n\n\nFrom pvmfw POV, it is not mandatory for each VM to have these in the input guest DT received from crosvm is it?",
+      "range": {
+        "startLine": 139,
+        "startChar": 2,
+        "endLine": 139,
+        "endChar": 73
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7016e25a_8ef65468",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-06-25T10:58:35Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "f139509d_d7ec8790",
       "range": {
         "startLine": 139,
         "startChar": 2,
@@ -341,6 +516,29 @@
         "startChar": 0,
         "endLine": 163,
         "endChar": 15
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79c8a718_fe816393",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-06-25T10:58:35Z",
+      "side": 1,
+      "message": "Super NIT: The extra \"the\" is odd. Sounds better without it.",
+      "range": {
+        "startLine": 167,
+        "startChar": 52,
+        "endLine": 167,
+        "endChar": 55
       },
       "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -458,6 +656,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06b9d7de_886459fb",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-06-25T10:58:35Z",
+      "side": 1,
+      "message": "pvmfw never generates any new secret. For VMs that require `instance.img` support, it generated random salt (on first boot) which gets mixed in the secret. Without instance.img, the firmware is incapable of finding if the boot in the `new-instance` at all.\n\nWe should update it here",
+      "parentUuid": "81bc3f19_e9be4ebe",
+      "range": {
+        "startLine": 188,
+        "startChar": 39,
+        "endLine": 189,
+        "endChar": 58
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f3a8ed7e_c6ceef49",
         "filename": "docs/device_trees.md",
         "patchSetId": 1
@@ -469,6 +691,30 @@
       "writtenOn": "2024-06-19T16:13:13Z",
       "side": 1,
       "message": "... for a protected VM ?",
+      "range": {
+        "startLine": 193,
+        "startChar": 38,
+        "endLine": 193,
+        "endChar": 48
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01cbdef2_07e69855",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-06-25T10:58:35Z",
+      "side": 1,
+      "message": "Q: What ensures non-protected VM does not have this field set? (or is it not ensured at all)",
+      "parentUuid": "f3a8ed7e_c6ceef49",
       "range": {
         "startLine": 193,
         "startChar": 38,
@@ -504,6 +750,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "78a760f3_c814aca2",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-06-25T10:58:35Z",
+      "side": 1,
+      "message": "https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/docs/updatable_vm.md;l\u003d68?q\u003ddocs%2Fupdatable_vm.md",
+      "parentUuid": "3df2eeae_90939fb5",
+      "range": {
+        "startLine": 196,
+        "startChar": 63,
+        "endLine": 196,
+        "endChar": 75
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bfc7aabf_e5623932",
         "filename": "docs/device_trees.md",
         "patchSetId": 1
@@ -518,6 +788,29 @@
       "range": {
         "startLine": 199,
         "startChar": 72,
+        "endLine": 199,
+        "endChar": 75
+      },
+      "revId": "290a61d72ffc785d36b40100be4c775396054b6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f1aa489_4e91cec3",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-06-25T10:58:35Z",
+      "side": 1,
+      "message": "`instance-id` is also used to generate an instance specific hash which is mixed in the DICE by pvmfw (and is critical for early differentiation of secrets of different VMs)\n```suggestion\n- the host-allocated `/avf/untrusted/instance-id` is used to assign a unique identifier to the VM instance \u0026 is used for differentiating VM secrets as well as by guest OS to index external storage such as Secretkeeper.\n```",
+      "range": {
+        "startLine": 199,
+        "startChar": 52,
         "endLine": 199,
         "endChar": 75
       },
