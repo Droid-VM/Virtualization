@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb717c89_60c1d8f8",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-26T09:41:00Z",
+      "side": 1,
+      "message": "nit: Although pretty, I don\u0027t think the curly braces are required (I\u0027m surprised `rustfmt` doesn\u0027t complain about them!)",
+      "range": {
+        "startLine": 796,
+        "startChar": 41,
+        "endLine": 796,
+        "endChar": 63
+      },
+      "revId": "f494b8ee3da224ba388d784fa529ba71423f2059",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb7fe687_2704d37a",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-26T09:41:00Z",
+      "side": 1,
+      "message": "Name this `irq` so that you can use it as a named field at L805.\n\nAlso, nit: `let irq \u003d chunks.next().ok_or(FdtError::NotFound)?`",
+      "range": {
+        "startLine": 797,
+        "startChar": 4,
+        "endLine": 799,
+        "endChar": 6
+      },
+      "revId": "f494b8ee3da224ba388d784fa529ba71423f2059",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e86013a_b086add9",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-26T09:41:00Z",
+      "side": 1,
+      "message": "nit: `entries`, `elements`, `items`, `cells`, ... but \"nodes\" has a special meaning in DTs",
+      "range": {
+        "startLine": 802,
+        "startChar": 51,
+        "endLine": 802,
+        "endChar": 56
+      },
+      "revId": "f494b8ee3da224ba388d784fa529ba71423f2059",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f45c689_33088035",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 809,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-26T09:41:00Z",
+      "side": 1,
+      "message": "nit: is this `*` needed?",
+      "range": {
+        "startLine": 809,
+        "startChar": 7,
+        "endLine": 809,
+        "endChar": 8
+      },
+      "revId": "f494b8ee3da224ba388d784fa529ba71423f2059",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
