@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "706af4de_435e5f5b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-06-26T11:56:34Z",
+      "side": 1,
+      "message": "Could you also check the test [1]? That test also uses hwtrust to check the fake DICE chain modified in the previous PS.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/service_vm/client_vm_csr/src/lib.rs;l\u003d184;drc\u003dff3811104599608ef606b6a530d718ef6f411c8e",
+      "range": {
+        "startLine": 16,
+        "startChar": 6,
+        "endLine": 16,
+        "endChar": 23
+      },
+      "revId": "aa79c1d43e7a6f23d20f3106aa5af5eddd94541d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eeb595b8_e25ca937",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-06-26T11:56:34Z",
+      "side": 1,
+      "message": "Perhaps do the following so we\u0027ll be sure that pVM has this value as false? And could you also add a comment here explain why non-protected VM needs this to be true?\n\n```suggestion\n    session.set_allow_any_mode(vm_type \u003d\u003d VmType::NonProtectedVm);\n```",
+      "range": {
+        "startLine": 282,
+        "startChar": 4,
+        "endLine": 284,
+        "endChar": 5
+      },
+      "revId": "aa79c1d43e7a6f23d20f3106aa5af5eddd94541d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
