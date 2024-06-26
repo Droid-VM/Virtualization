@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "539a4a2a_9e6468ab",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-06-26T10:10:43Z",
+      "side": 1,
+      "message": "The compiler recommends this:\n```\nhelp: if this generic argument was intended as a const parameter, surround it with braces\n```",
+      "parentUuid": "bb717c89_60c1d8f8",
+      "range": {
+        "startLine": 796,
+        "startChar": 41,
+        "endLine": 796,
+        "endChar": 63
+      },
+      "revId": "f494b8ee3da224ba388d784fa529ba71423f2059",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb7fe687_2704d37a",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-06-26T09:41:00Z",
       "side": 1,
       "message": "Name this `irq` so that you can use it as a named field at L805.\n\nAlso, nit: `let irq \u003d chunks.next().ok_or(FdtError::NotFound)?`",
+      "range": {
+        "startLine": 797,
+        "startChar": 4,
+        "endLine": 799,
+        "endChar": 6
+      },
+      "revId": "f494b8ee3da224ba388d784fa529ba71423f2059",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0be33dbb_12fedeae",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-06-26T10:10:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb7fe687_2704d37a",
       "range": {
         "startLine": 797,
         "startChar": 4,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9abfbcc1_1966a7a4",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-06-26T10:10:43Z",
+      "side": 1,
+      "message": "%s/nodes/entries/",
+      "parentUuid": "0e86013a_b086add9",
+      "range": {
+        "startLine": 802,
+        "startChar": 51,
+        "endLine": 802,
+        "endChar": 56
+      },
+      "revId": "f494b8ee3da224ba388d784fa529ba71423f2059",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f45c689_33088035",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-06-26T09:41:00Z",
       "side": 1,
       "message": "nit: is this `*` needed?",
+      "range": {
+        "startLine": 809,
+        "startChar": 7,
+        "endLine": 809,
+        "endChar": 8
+      },
+      "revId": "f494b8ee3da224ba388d784fa529ba71423f2059",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "974d734f_cbbb4ccd",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 809,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-06-26T10:10:43Z",
+      "side": 1,
+      "message": "Seems the compiler complaints about it if I don\u0027t have it.",
+      "parentUuid": "9f45c689_33088035",
       "range": {
         "startLine": 809,
         "startChar": 7,
