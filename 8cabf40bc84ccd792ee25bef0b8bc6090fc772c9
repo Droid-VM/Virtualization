@@ -94,6 +94,30 @@
       },
       "revId": "8cabf40bc84ccd792ee25bef0b8bc6090fc772c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9daf708d_370417bc",
+        "filename": "service_vm/fake_chain/src/service_vm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-06-26T09:52:23Z",
+      "side": 1,
+      "message": "\u003e do you think we can keep the full chain set to the normal mode?\n\nWhile the fake chain wouldn\u0027t be attested in any way, it still feels counterintuitive to have a fake chain in normal mode. Additionally, you might still need to modify the remote attestation tests in various places, as a normal mode chain would imply a secure VM in the VM attestation certificate extension.\nGiven this, it could be simpler to just add a `--allow-any-mode` flag to the `rialto_test`. Sorry for the back and forth.",
+      "parentUuid": "6575894a_7e88cb9b",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 34
+      },
+      "revId": "8cabf40bc84ccd792ee25bef0b8bc6090fc772c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
