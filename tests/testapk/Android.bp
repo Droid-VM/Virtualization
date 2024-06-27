@@ -25,6 +25,11 @@ java_defaults {
         "com.android.microdroid.test.vmshare_service-java",
         "com.android.virt.vm_attestation.testservice-java",
     ],
+    libs: [
+        "compatibility-tradefed",
+        "tradefed",
+        "compatibility-host-util",
+    ],
     certificate: ":MicrodroidTestAppCert",
     sdk_version: "test_current",
     jni_uses_platform_apis: true,
