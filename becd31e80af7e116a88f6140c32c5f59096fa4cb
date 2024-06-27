@@ -16,6 +16,87 @@
       "message": "please consider adding a link to this new doc in packages/modules/Virtualization/README.md",
       "revId": "becd31e80af7e116a88f6140c32c5f59096fa4cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d238a3f_ba08149b",
+        "filename": "docs/abl.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-27T09:08:38Z",
+      "side": 1,
+      "message": "Should the new requirements on ABL be documented here?",
+      "revId": "becd31e80af7e116a88f6140c32c5f59096fa4cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f417f7d9_c2add60d",
+        "filename": "docs/microdroid_vendor_modules.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-27T09:08:38Z",
+      "side": 1,
+      "message": "` \\` (same below)",
+      "range": {
+        "startLine": 82,
+        "startChar": 13,
+        "endLine": 82,
+        "endChar": 14
+      },
+      "revId": "becd31e80af7e116a88f6140c32c5f59096fa4cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44bdd169_5419bda3",
+        "filename": "docs/microdroid_vendor_modules.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-27T09:08:38Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem to be specific to vendor modules; why not put in the high-level Microdroid documentation?",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 3
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "615d7c22_b640b13a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/microdroid_vendor_modules.md",
+              "range": {
+                "startLine": 151,
+                "startChar": 0,
+                "endLine": 152,
+                "endChar": 0
+              },
+              "replacement": "## GKI as Microdroid guest kernel {#gki}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "becd31e80af7e116a88f6140c32c5f59096fa4cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
