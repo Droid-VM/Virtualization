@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7e411db_a4f53cb4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-06-27T16:46:10Z",
+      "side": 1,
+      "message": "LGTM modulo the open comments",
+      "revId": "c0f5577496fa9f0c84cf40687ea8e8a379d0d001",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87e77b99_41691d95",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-06-27T16:46:10Z",
+      "side": 1,
+      "message": "As discussed offline, can you add something along the lines of\n\n```\n\nNote that pvmfw only sanitizes the DT, it is not responsible for detecting missing entries. Guest should not rely on presence or absence for security critical usage.\n```",
+      "revId": "c0f5577496fa9f0c84cf40687ea8e8a379d0d001",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
