@@ -24,6 +24,7 @@ import android.system.virtualmachine.VirtualMachineManager;
 
 import com.android.compatibility.common.util.CddTest;
 import com.android.compatibility.common.util.VsrTest;
+import com.android.compatibility.common.util.FeatureUtil;
 import com.android.microdroid.test.device.MicrodroidDeviceTestBase;
 
 import org.junit.Test;
@@ -63,6 +64,9 @@ public class MicrodroidCapabilitiesTest extends MicrodroidDeviceTestBase {
     @Test
     @VsrTest(requirements = "VSR-7.1-001.005")
     public void avfIsRequired() {
+        assumeTrue("Test does not apply for automotive devices.",
+                !FeatureUtil.isAutomotive(getDevice())
+
         assume().withMessage("Requirement doesn't apply due to vendor API level")
                 .that(getVendorApiLevel())
                 .isAtLeast(202404);
