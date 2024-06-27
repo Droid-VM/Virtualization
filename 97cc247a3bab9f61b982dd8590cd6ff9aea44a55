@@ -1,0 +1,246 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "254d4994_823f922a",
+        "filename": "microdroid/bootconfig.common",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:25:25Z",
+      "side": 1,
+      "message": "(comment until this is removed, or is there a test that starts failing when this is enabled?)",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 30
+      },
+      "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11405518_eaf4ee1c",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:25:25Z",
+      "side": 1,
+      "message": "Also - this will need to return something more complicated? A list of accessors? We need each accessor to return a single interface so that we can isolate permissions for it (maybe not reflected in Alice\u0027s change yet)\n\nnit: getAccessor returns a concrete instance of IAccessor?",
+      "range": {
+        "startLine": 120,
+        "startChar": 28,
+        "endLine": 120,
+        "endChar": 29
+      },
+      "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04d154eb_137b584a",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:25:25Z",
+      "side": 1,
+      "message": "what happens if the name already exists?-",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 72
+      },
+      "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bf78681_1cce139b",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:25:25Z",
+      "side": 1,
+      "message": "needs dupe, doesn\u0027t have implicit dupe?",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 40
+      },
+      "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47d46d91_cb7516c9",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 1614,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:25:25Z",
+      "side": 1,
+      "message": "I guess this is what you would wrap around accessor?",
+      "range": {
+        "startLine": 1614,
+        "startChar": 0,
+        "endLine": 1614,
+        "endChar": 61
+      },
+      "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7c8d39b_a9453fbb",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 1616,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:25:25Z",
+      "side": 1,
+      "message": "https://www.man7.org/linux/man-pages/man7/vsock.7.html\n\n\u003e When a process wants to establish a connection, it calls\n       connect(2) with a given destination socket address.  The socket\n       is automatically bound to a free port if unbound.\n\n\nI think you may want to try multiple services to make sure the port can really be re-used. If possible we should ask the kernel to provide the port number and then pass that through the accessor?",
+      "range": {
+        "startLine": 1616,
+        "startChar": 0,
+        "endLine": 1616,
+        "endChar": 28
+      },
+      "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b19c0ca_dda10cf5",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 1621,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:25:25Z",
+      "side": 1,
+      "message": "(same elsewhere) we\u0027ll also want to avoid service-specific exceptions as they are defined by the interface (e.g. in ILights). So this would become ambiguous, consider: https://cs.android.com/search?q\u003df:aidl$%20error.*-1\u0026sq\u003d",
+      "range": {
+        "startLine": 1621,
+        "startChar": 0,
+        "endLine": 1621,
+        "endChar": 52
+      },
+      "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b27cf1b_c0e25c34",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:25:25Z",
+      "side": 1,
+      "message": "I think we probably want to have a higher level API here and the accessor use underneath this API inside this, so that we don\u0027t statically compile accessor into payloads, and we can update all usages of accessor by updating microdroid?\n\nor no?",
+      "range": {
+        "startLine": 86,
+        "startChar": 20,
+        "endLine": 86,
+        "endChar": 43
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "57caed64_f9ffb315",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "vm_payload/include/vm_payload.h",
+              "range": {
+                "startLine": 86,
+                "startChar": 0,
+                "endLine": 86,
+                "endChar": 0
+              },
+              "replacement": "/**\n * Returns the binder interface for the VM.\n *\n * \\return the binder interface for the VM. The returned binder interface should not be\n * deleted or freed by the application. The binder interface remains valid for the\n * lifetime of the VM.\n */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1eb50611_1047fa92",
+        "filename": "vm_payload/src/injector.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:25:25Z",
+      "side": 1,
+      "message": "license",
+      "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "638a4d68_3b370978",
+        "filename": "vm_payload/src/injector.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-06-27T22:25:25Z",
+      "side": 1,
+      "message": "nit: can you file a bug to get rid of this stuff? it\u0027s horrendous",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 22,
+        "endChar": 42
+      },
+      "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
