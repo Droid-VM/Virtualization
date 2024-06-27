@@ -30,6 +30,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import static org.junit.Assume.assumeTrue;
+
+
 /**
  * Test the device's AVF capabilities.
  *
@@ -39,6 +42,9 @@ import org.junit.runners.JUnit4;
  */
 @RunWith(JUnit4.class)
 public class MicrodroidCapabilitiesTest extends MicrodroidDeviceTestBase {
+
+    public static final String AUTOMOTIVE_FEATURE = "android.hardware.type.automotive";
+
     @Test
     @CddTest(requirements = "9.17/C-1-6")
     public void supportForProtectedOrNonProtectedVms() {
@@ -66,6 +72,10 @@ public class MicrodroidCapabilitiesTest extends MicrodroidDeviceTestBase {
         assume().withMessage("Requirement doesn't apply due to vendor API level")
                 .that(getVendorApiLevel())
                 .isAtLeast(202404);
+
+	assumeTrue("Test does not apply for automotive devices.",
+                   !getContext().getPackageManager().hasSystemFeature(AUTOMOTIVE_FEATURE));
+
         boolean avfSupported =
                 getContext().getPackageManager().hasSystemFeature(FEATURE_VIRTUALIZATION_FRAMEWORK);
         assertWithMessage("Device doesn't support AVF").that(avfSupported).isTrue();
