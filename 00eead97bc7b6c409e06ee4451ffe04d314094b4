@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd0d670d_b03d2ddf",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-28T19:02:15Z",
+      "side": 1,
+      "message": "I have heavily refactored the MMIO guard and UART bring up code since then so, now, when we enter pvmfw code (`Virtualization/pvmfw/src/...`), we _know_ that the UART(s) is (are) ready to be used. That was done to allow aosp/2751445, which is exactly what you describe. More detailed messages will still get printed to the \"default\" UART with `error!`/`warn!`/... to ease debugging, though.",
+      "parentUuid": "1833b38f_b18d83b7",
+      "range": {
+        "startLine": 73,
+        "startChar": 8,
+        "endLine": 73,
+        "endChar": 14
+      },
+      "revId": "00eead97bc7b6c409e06ee4451ffe04d314094b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55e8e012_a54eaa1a",
@@ -64,6 +88,48 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bce5a138_aafaafa3",
+        "filename": "vmbase/src/console.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-28T19:02:15Z",
+      "side": 1,
+      "message": "(obsolete)",
+      "parentUuid": "55e8e012_a54eaa1a",
+      "range": {
+        "startLine": 28,
+        "startChar": 3,
+        "endLine": 28,
+        "endChar": 9
+      },
+      "revId": "00eead97bc7b6c409e06ee4451ffe04d314094b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94d7be72_a5a6398b",
+        "filename": "vmbase/src/console.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-28T19:02:15Z",
+      "side": 1,
+      "message": "I\u0027ve inlined the call to `Uart::new` as one caller now takes does `ADDRESS.lock()` while the other `ADDRESS.try_lock()` anyway.",
+      "parentUuid": "620df10d_d0bf16fe",
+      "revId": "00eead97bc7b6c409e06ee4451ffe04d314094b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eff9a45c_ca37a54f",
@@ -87,6 +153,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85a56318_71363104",
+        "filename": "vmbase/src/console.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-28T19:02:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eff9a45c_ca37a54f",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 96
+      },
+      "revId": "00eead97bc7b6c409e06ee4451ffe04d314094b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f39c2c46_c0b0c48a",
@@ -100,6 +190,30 @@
       "writtenOn": "2024-06-25T12:11:11Z",
       "side": 1,
       "message": "nit: Should we call this `*_ADDR` such as `MMIO_UART_ADDR` to be consistent with other variables?",
+      "range": {
+        "startLine": 30,
+        "startChar": 10,
+        "endLine": 30,
+        "endChar": 22
+      },
+      "revId": "00eead97bc7b6c409e06ee4451ffe04d314094b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e263d26a_181453e9",
+        "filename": "vmbase/src/layout.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-28T19:02:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f39c2c46_c0b0c48a",
       "range": {
         "startLine": 30,
         "startChar": 10,
