@@ -101,3 +101,25 @@ pub(crate) fn virt_to_phys(vaddr: NonNull<u8>) -> usize {
 pub(crate) fn phys_to_virt(paddr: usize) -> NonNull<u8> {
     NonNull::new(paddr as _).unwrap()
 }
+
+/// Flushes data caches over the provided address range in open-dice.
+///
+/// # Safety
+///
+/// The provided address and size must be to an address range that is valid for read and write
+/// (typically on the stack, .bss, .data, or provided BCC) from a single allocation
+/// (e.g. stack array).
+#[no_mangle]
+#[cfg(not(test))]
+unsafe extern "C" fn DiceClearMemory(
+    _ctx: *mut core::ffi::c_void,
+    size: usize,
+    addr: *mut core::ffi::c_void,
+) {
+    use core::slice;
+
+    // SAFETY: We require our caller to provide a valid range within a single object. The open-dice
+    // always calls this on individual stack-allocated arrays which ensures that.
+    let region = unsafe { slice::from_raw_parts_mut(addr as *mut u8, size) };
+    flushed_zeroize(region)
+}
