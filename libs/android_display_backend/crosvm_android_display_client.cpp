@@ -51,6 +51,42 @@ public:
         return true;
     }
 
+    int copyInto(ANativeWindow_Buffer& dst) const {
+        const ANativeWindow_Buffer& src = mBuffer;
+        if (src.width != dst.width) {
+            return -1;
+        }
+        if (src.height != dst.height) {
+            return -1;
+        }
+        if (src.format != dst.format) {
+            return -1;
+        }
+        if (dst.format != HAL_PIXEL_FORMAT_BGRA_8888) {
+            return -1;
+        }
+        const int32_t bpp = 4;
+
+        const int32_t srcRowBytes = src.width * bpp;
+        const int32_t srcStrideBytes = src.stride * bpp;
+        const int32_t dstStrideBytes = dst.stride * bpp;
+
+        if (src.stride == dst.stride) {
+            std::memcpy(dst.bits, src.bits, src.height * srcStrideBytes);
+        } else {
+            const uint8_t* srcBits = reinterpret_cast<const uint8_t*>(src.bits);
+            uint8_t* dstBits = reinterpret_cast<uint8_t*>(dst.bits);
+
+            for (int32_t y = 0; y < src.height; y++) {
+                std::memcpy(dstBits, srcBits, srcRowBytes);
+
+                dstBits += dstStrideBytes;
+                srcBits += srcStrideBytes;
+            }
+        }
+        return 0;
+    }
+
     operator ANativeWindow_Buffer&() { return mBuffer; }
 
 private:
@@ -70,8 +106,11 @@ public:
     void setSurface(Surface* surface) {
         {
             std::lock_guard lk(mSurfaceMutex);
+
             mNativeSurface = std::make_unique<Surface>(surface->release());
             mNativeSurfaceNeedsConfiguring = true;
+
+            copyLatestFrameToNativeSurfaceLocked();
         }
 
         mNativeSurfaceReady.notify_one();
@@ -98,7 +137,9 @@ public:
                 .height = height,
         };
 
-        mSinkBuffer.configure(width, height, kFormat);
+        for (auto& buffer : mAlternatingBuffers) {
+            buffer.configure(width, height, kFormat);
+        }
     }
 
     void waitForNativeSurface() {
@@ -109,11 +150,32 @@ public:
     int lock(ANativeWindow_Buffer* out_buffer) {
         std::unique_lock lk(mSurfaceMutex);
 
+        *out_buffer = mAlternatingBuffers[mNextBufferIndex];
+
+        return 0;
+    }
+
+    int unlockAndPost() {
+        std::unique_lock lk(mSurfaceMutex);
+
+        mLatestPostedAlternatingBufferIndex = mNextBufferIndex;
+        mNextBufferIndex = (mNextBufferIndex + 1) % mAlternatingBuffers.size();
+
+        return copyLatestFrameToNativeSurfaceLocked();
+    }
+
+private:
+    int copyLatestFrameToNativeSurfaceLocked() {
+        if (!mLatestPostedAlternatingBufferIndex) {
+            // Guest has not produced a frame for this surface yet.
+            return 0;
+        }
+        const auto& latestPostedBuffer = mAlternatingBuffers[*mLatestPostedAlternatingBufferIndex];
+
         Surface* surface = mNativeSurface.get();
         if (surface == nullptr) {
             // Surface not currently available but not necessarily an error
             // if, for example, the VmLauncherApp is not in the foreground.
-            *out_buffer = mSinkBuffer;
             return 0;
         }
 
@@ -136,28 +198,17 @@ public:
             mNativeSurfaceNeedsConfiguring = false;
         }
 
-        return ANativeWindow_lock(anw, out_buffer, nullptr);
-    }
-
-    int unlockAndPost() {
-        std::unique_lock lk(mSurfaceMutex);
-
-        Surface* surface = mNativeSurface.get();
-        if (surface == nullptr) {
-            // Surface not currently available but not necessarily an error
-            // if, for example, the VmLauncherApp is not in the foreground.
-            return 0;
+        ANativeWindow_Buffer nativeSurfaceBuffer = {};
+        int ret = ANativeWindow_lock(anw, &nativeSurfaceBuffer, nullptr);
+        if (ret) {
+            return ret;
         }
 
-        ANativeWindow* anw = surface->get();
-        if (anw == nullptr) {
-            return -1;
-        }
+        latestPostedBuffer.copyInto(nativeSurfaceBuffer);
 
         return ANativeWindow_unlockAndPost(anw);
     }
 
-private:
     // Note: crosvm always uses BGRA8888 or BGRX8888. See devices/src/virtio/gpu/mod.rs in
     // crosvm where the SetScanoutBlob command is handled. Let's use BGRA not BGRX with a hope
     // that we will need alpha blending for the cursor surface.
@@ -168,7 +219,20 @@ private:
     std::condition_variable mNativeSurfaceReady;
     bool mNativeSurfaceNeedsConfiguring = true;
 
-    SinkANativeWindow_Buffer mSinkBuffer;
+    // The storage for the next and previous frames produced by the guest for this surface.
+    //
+    // These are separate from the buffers from `mNativeSurface` so that frames can still be
+    // produced when a native surface is not available (e.g. when the viewing app is not in
+    // foreground and the native surface has been destroyed).
+    //
+    // A next and previous buffer are needed so that a valid frame is always available even when a
+    // native surface arrives in between a `get_android_surface_buffer()` and a
+    // `post_android_surface_buffer()`.
+    std::array<SinkANativeWindow_Buffer, 2> mAlternatingBuffers;
+    // The index of the buffer in `mAlternatingBuffers` that should be used for the next frame.
+    std::size_t mNextBufferIndex = 0;
+    // The index of the buffer in `mAlternatingBuffers` that contains the most recent posted frame.
+    std::optional<std::size_t> mLatestPostedAlternatingBufferIndex;
 
     struct Rect {
         uint32_t width = 0;
