@@ -332,6 +332,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b7fcbfb_5fca4cdf",
+        "filename": "vmbase/src/console.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-28T19:02:29Z",
+      "side": 1,
+      "message": "\u003e Alternatively, create could `.try_lock` instead.\n\nI\u0027ve implemented this so that there\u0027s no risk of `eprintln!` getting blocked and deadlocking.",
+      "parentUuid": "d5789f22_7ae98fc1",
+      "revId": "b3be8a59c3e0e6acfe33d73c36aa944657cd5606",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "14212cfe_67be9274",
         "filename": "vmbase/src/console.rs",
         "patchSetId": 1
