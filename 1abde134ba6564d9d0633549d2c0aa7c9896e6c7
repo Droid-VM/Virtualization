@@ -69,6 +69,24 @@
       "parentUuid": "a8d2f4b5_75a74680",
       "revId": "1abde134ba6564d9d0633549d2c0aa7c9896e6c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3187245_fe503348",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-06-28T15:29:54Z",
+      "side": 1,
+      "message": "(min-level is supported from aosp/2383273) Is there an open bug for the unrecognized optional args @smoreland? I just verified it still behaves like that. We will need a list of expected optional args in manifest/matrix and look for anything else + add tests + fix any offenders. I think this is where we look for the specific args: https://cs.android.com/android/platform/superproject/main/+/main:system/libvintf/parse_xml.cpp;drc\u003d4895e1fd0bcbd16ee5c6283701dac17d563608d2;l\u003d834",
+      "parentUuid": "c963f910_a4844755",
+      "revId": "1abde134ba6564d9d0633549d2c0aa7c9896e6c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
