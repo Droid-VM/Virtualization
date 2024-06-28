@@ -16,6 +16,24 @@
       "message": "MAYBE: Grepping through the module I also came across `api_test.rs` which makes use of another mechanism than `offset_of` to compute the distance between ptrs (method: kernel_footer_with_vbmeta_offset_overwritten_fails_verification). Let\u0027s update this as well and remove the comment when done.",
       "revId": "a699751fbe4e83048b666ac728ef4c1a9ebd9269",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fadc9c64_fbdb02b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-06-28T15:03:15Z",
+      "side": 1,
+      "message": "Good catch, thanks!\n\nI\u0027ve pushed aosp/3153057 to clean up that code (in part thanks to `mem::offset_of`).",
+      "parentUuid": "c0cb8b43_0e598919",
+      "revId": "a699751fbe4e83048b666ac728ef4c1a9ebd9269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
