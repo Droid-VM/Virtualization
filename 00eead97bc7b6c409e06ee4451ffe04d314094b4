@@ -49,6 +49,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "620df10d_d0bf16fe",
+        "filename": "vmbase/src/console.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-06-28T14:53:23Z",
+      "side": 1,
+      "message": "Calling this multiple times will return multiple instances of `Uart` accessing the same registers, which is unsafe.",
+      "revId": "00eead97bc7b6c409e06ee4451ffe04d314094b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eff9a45c_ca37a54f",
         "filename": "vmbase/src/console.rs",
         "patchSetId": 4
