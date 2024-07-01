@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7391ff35_8106d0a6",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 21
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-07-01T16:08:01Z",
+      "side": 1,
+      "message": "It is absolutely necessary because otherwise, pvmfw would be modifying this field, from the VMM and guest perspectives.",
+      "parentUuid": "a1bf52b7_ef034bd1",
+      "range": {
+        "startLine": 414,
+        "startChar": 28,
+        "endLine": 414,
+        "endChar": 48
+      },
+      "revId": "5ad767acc0f789bd4c3c93dc29619d3578f26a45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1761fce8_ed5dc842",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 21
