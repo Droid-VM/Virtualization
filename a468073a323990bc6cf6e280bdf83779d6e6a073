@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "15cc948a_e619f081",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1561731
+      },
+      "writtenOn": "2024-07-01T23:19:05Z",
+      "side": 1,
+      "message": "The issue is that the guest may be \"stable\" when onPause/onStop are called and may not be producing new frames (maybe Chrome is paused while showing a fullscreen Youtube video, it may not be generating any new frames).\n\n\u003e a simpler approach might be sending out a harmless input event upon resuming\n\nI believe we considered this approach for CF as well but I think we decided that we did not know what input event to send that would be guaranteed to be harmless and not mess with the existing guest state.",
+      "parentUuid": "23850bca_3598e43a",
+      "range": {
+        "startLine": 7,
+        "startChar": 31,
+        "endLine": 11,
+        "endChar": 29
+      },
+      "revId": "a468073a323990bc6cf6e280bdf83779d6e6a073",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "31fda31e_a6f46deb",
         "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
         "patchSetId": 1
