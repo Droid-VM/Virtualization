@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b28c3dd_b13f5489",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 21
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-07-01T15:04:51Z",
+      "side": 1,
+      "message": "Based on your validation logic, don\u0027t you need to patch this property before passing it to the guest?",
+      "range": {
+        "startLine": 414,
+        "startChar": 28,
+        "endLine": 414,
+        "endChar": 48
+      },
+      "revId": "5ad767acc0f789bd4c3c93dc29619d3578f26a45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1761fce8_ed5dc842",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-07-01T15:04:51Z",
+      "side": 1,
+      "message": "So we have an upper limit of 15 (maybe 16) vCPUs?",
+      "range": {
+        "startLine": 777,
+        "startChar": 42,
+        "endLine": 777,
+        "endChar": 46
+      },
+      "revId": "5ad767acc0f789bd4c3c93dc29619d3578f26a45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8a27e52_fe516354",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-07-01T15:04:51Z",
+      "side": 1,
+      "message": "`num_cpus` is 1-based, did you mean `1 \u003c\u003c (num_cpus - 1)` so that a single-CPU system gets `0x1`?",
+      "range": {
+        "startLine": 786,
+        "startChar": 19,
+        "endLine": 786,
+        "endChar": 32
+      },
+      "revId": "5ad767acc0f789bd4c3c93dc29619d3578f26a45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
