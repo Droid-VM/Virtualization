@@ -122,6 +122,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9e224b63_1f1cad74",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 21
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-07-01T17:42:10Z",
+      "side": 1,
+      "message": "I thought that it only patches the PLACEHOLDER and not the entire thing, this API is confusing TBH.",
+      "parentUuid": "6546a0f8_b47449b0",
+      "range": {
+        "startLine": 414,
+        "startChar": 28,
+        "endLine": 414,
+        "endChar": 48
+      },
+      "revId": "5ad767acc0f789bd4c3c93dc29619d3578f26a45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1761fce8_ed5dc842",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 21
