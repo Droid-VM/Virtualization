@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6546a0f8_b47449b0",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 21
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-07-01T17:37:20Z",
+      "side": 1,
+      "message": "I don\u0027t think that your\n```\nnode.setprop_inplace(cstr!(\"interrupts\"), \u0026wdt_info.irq[2].to_be_bytes())?;\n```\ndoes what you want as it is replacing the 3-cell property with a single cell, right?\n\nInstead, you can follow what `patch_timer()` does for byte-swapping (L939) and modifying the property in-place (L947).",
+      "parentUuid": "73b052f4_4db7940d",
+      "range": {
+        "startLine": 414,
+        "startChar": 28,
+        "endLine": 414,
+        "endChar": 48
+      },
+      "revId": "5ad767acc0f789bd4c3c93dc29619d3578f26a45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1761fce8_ed5dc842",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 21
