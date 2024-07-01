@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23850bca_3598e43a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-01T01:42:52Z",
+      "side": 1,
+      "message": "To save the latest frame, we don\u0027t need to save \"every\" frame. Before Ferrochrome becomes invisible, onPause and onStop callbacks are triggered. I think we can capture the frame only at the moment, and use the captured frame later when it is resumed (onResume). \n\nOr, a simpler approach might be sending out a harmless input event upon resuming, so that the guest OS updates the screen.",
+      "range": {
+        "startLine": 7,
+        "startChar": 31,
+        "endLine": 11,
+        "endChar": 29
+      },
+      "revId": "a468073a323990bc6cf6e280bdf83779d6e6a073",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31fda31e_a6f46deb",
+        "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-01T01:42:52Z",
+      "side": 1,
+      "message": "nit: bool?",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 7
+      },
+      "revId": "a468073a323990bc6cf6e280bdf83779d6e6a073",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2afb84c_48fa6730",
+        "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-01T01:42:52Z",
+      "side": 1,
+      "message": "When can the strides differ?",
+      "range": {
+        "startLine": 76,
+        "startChar": 8,
+        "endLine": 76,
+        "endChar": 16
+      },
+      "revId": "a468073a323990bc6cf6e280bdf83779d6e6a073",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e19aa10d_2d58ee32",
+        "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-01T01:42:52Z",
+      "side": 1,
+      "message": "Calling ANativeWindow_lock under unlockAndPost??? That sounds wrong to me.",
+      "range": {
+        "startLine": 164,
+        "startChar": 15,
+        "endLine": 164,
+        "endChar": 51
+      },
+      "revId": "a468073a323990bc6cf6e280bdf83779d6e6a073",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b50665f_8d5b99eb",
+        "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-01T01:42:52Z",
+      "side": 1,
+      "message": "This means we add one another full-frame copy. I think this is against where we are heading for.",
+      "revId": "a468073a323990bc6cf6e280bdf83779d6e6a073",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
