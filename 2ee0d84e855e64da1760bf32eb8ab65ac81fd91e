@@ -34,6 +34,24 @@
       "parentUuid": "e9eb44e8_1f823bb9",
       "revId": "2ee0d84e855e64da1760bf32eb8ab65ac81fd91e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d554aba0_36829410",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-07-01T13:41:28Z",
+      "side": 1,
+      "message": "This still adds a newline after every call. Suppose someone writes C code like\n\n```c\nfputs(\"Hello \", 0);\nfputs(\"World.\\n\", 0);\n```\n\n(Or something equivalent, I\u0027m not sure what calls doing `fprintf` results in.) This would end up on two separate lines, when it was intended to be on one. Note that unlike `puts`, `fputs` is not supposed to add newlines.",
+      "parentUuid": "eed48c9c_3ce2bf1a",
+      "revId": "2ee0d84e855e64da1760bf32eb8ab65ac81fd91e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
