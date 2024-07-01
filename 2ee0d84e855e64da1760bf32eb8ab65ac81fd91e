@@ -52,6 +52,24 @@
       "parentUuid": "eed48c9c_3ce2bf1a",
       "revId": "2ee0d84e855e64da1760bf32eb8ab65ac81fd91e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fba452c_95041fa2",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-07-01T14:54:23Z",
+      "side": 1,
+      "message": "You\u0027re right, I went over this too quickly.\n\nTBH, I don\u0027t think C should be able to mess up the  Rust logs. For example, given\n\n```\nfn rust_fn() {\n    info!(\"GOOD\");\n    c_fn();\n    error!(\"BAD\");\n}\n```\nand\n```\nvoid c_fn(void)\n{\n    fputs(\"HELLO\", stdout);\n}\n```\ndo we really want the logs to look like\n```\n[INFO] GOOD\n[INFO] HELLO [ERROR] BAD\n```\npossibly confusing an automated log parser looking at prefixes only?\n\nWe _could_ buffer the `\"Hello \"` until a `\\n` has been encountered or until Rust prints something but this sounds like it would bring many corner cases (flushing if none of those happens, or in case of an error, or when the buffer is full, or with alternating writes to `stdout` and `stderr`, ...) for little benefit (just avoiding extra newlines?). WDYT?\n\nAs a simple workaround, WDYT of logging trailing \"`...`\" when `!s.ends_with(\u0027\\n\u0027)`?\n\nWith this approach, your example would log\n```\n[INFO] Hello ...\n[INFO] World.\n```\nand there are no corner cases I can think of (we could ignore `\"\"`).",
+      "parentUuid": "d554aba0_36829410",
+      "revId": "2ee0d84e855e64da1760bf32eb8ab65ac81fd91e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
