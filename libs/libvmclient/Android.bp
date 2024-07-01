@@ -20,6 +20,7 @@ rust_library {
         "libthiserror",
     ],
     apex_available: [
+        "//apex_available:anyapex",
         "com.android.compos",
         "com.android.virt",
     ],

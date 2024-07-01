@@ -29,6 +29,7 @@ aidl_interface {
         rust: {
             enabled: true,
             apex_available: [
+                "//apex_available:anyapex",
                 "com.android.virt",
                 "com.android.compos",
             ],
@@ -148,6 +149,7 @@ aidl_interface {
         rust: {
             enabled: true,
             apex_available: [
+                "//apex_available:anyapex",
                 "com.android.virt",
                 "com.android.compos",
             ],
