@@ -92,6 +92,30 @@
       },
       "revId": "5ad767acc0f789bd4c3c93dc29619d3578f26a45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "678c9459_43803dce",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-07-01T15:10:22Z",
+      "side": 1,
+      "message": "Actually, I suppose this represents a bitfield with 1 bit per (v)CPU?\n\nIf so, it should then be `(1 \u003c\u003c num_cpus) - 1`, similar to L928.",
+      "parentUuid": "c8a27e52_fe516354",
+      "range": {
+        "startLine": 786,
+        "startChar": 19,
+        "endLine": 786,
+        "endChar": 32
+      },
+      "revId": "5ad767acc0f789bd4c3c93dc29619d3578f26a45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
