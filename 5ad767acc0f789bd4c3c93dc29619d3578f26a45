@@ -143,6 +143,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b45e7e89_fd05ad9f",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-07-01T16:25:51Z",
+      "side": 1,
+      "message": "Okay, this isn\u0027t CL blocking so keeping resolved.\n\nHowever, I\u0027ve opened b/350498812 because we should be sure that 8+ vCPUs are supported and I don\u0027t see how this description (1 bit per vCPU masked by `0xff`) would ever work.",
+      "parentUuid": "22de0387_e06dd944",
+      "range": {
+        "startLine": 777,
+        "startChar": 42,
+        "endLine": 777,
+        "endChar": 46
+      },
+      "revId": "5ad767acc0f789bd4c3c93dc29619d3578f26a45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8a27e52_fe516354",
