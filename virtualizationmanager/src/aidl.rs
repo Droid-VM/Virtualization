@@ -624,8 +624,6 @@ impl VirtualizationService {
         } else {
             None
         };
-        let virtio_snd_backend =
-            if cfg!(paravirtualized_devices) { Some(String::from("aaudio")) } else { None };
 
         // Actually start the VM.
         let crosvm_config = CrosvmConfig {
@@ -656,7 +654,6 @@ impl VirtualizationService {
             input_device_options,
             hugepages: config.hugePages,
             tap,
-            virtio_snd_backend,
         };
         let instance = Arc::new(
             VmInstance::new(
