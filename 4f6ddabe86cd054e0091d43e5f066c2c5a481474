@@ -3,6 +3,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f09d41d7_bae0c1fc",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidCapabilitiesTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1504052
+      },
+      "writtenOn": "2024-07-02T08:39:03Z",
+      "side": 1,
+      "message": "Can you use the PackageManager field directly? Also, we just did something similar for Wear: aosp/3156516. You can also just add \"Auto\" in the `assumeVsrCompliant` check that was introduced in `MicrodroidDeviceTestBase` in that CL.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 87
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2978b0f3_e04155b1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidCapabilitiesTest.java",
+              "range": {
+                "startLine": 46,
+                "startChar": 0,
+                "endLine": 48,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidCapabilitiesTest.java",
+              "range": {
+                "startLine": 77,
+                "startChar": 0,
+                "endLine": 78,
+                "endChar": 0
+              },
+              "replacement": "                   !getContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_AUTOMOTIVE));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4f6ddabe86cd054e0091d43e5f066c2c5a481474",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4c4abf2e_b5242d32",
         "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidCapabilitiesTest.java",
         "patchSetId": 7
