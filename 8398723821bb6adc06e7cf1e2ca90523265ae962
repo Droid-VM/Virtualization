@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dfa2059_a296ba0d",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-07-02T01:34:24Z",
+      "side": 1,
+      "message": "Or `return \"kvm.art-protected\".equals(getDevice().getProperty(\"ro.boot.hypervisor.version\"));`",
+      "range": {
+        "startLine": 287,
+        "startChar": 0,
+        "endLine": 291,
+        "endChar": 54
+      },
+      "revId": "8398723821bb6adc06e7cf1e2ca90523265ae962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
