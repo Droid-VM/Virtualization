@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4be59c92_fcae3e90",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-02T06:56:48Z",
+      "side": 1,
+      "message": "It could be a meta key event like alt, shift, or fn, or a seldom-used event like numlock(twice). I know; not ideal, but good enough as a temporary fix.\n\nMore ideally, going out of the VM and then coming back should be seen as a resume-after-sleep, which I believe the OS will anyway draw a frame even without an input event.",
+      "parentUuid": "15cc948a_e619f081",
+      "range": {
+        "startLine": 7,
+        "startChar": 31,
+        "endLine": 11,
+        "endChar": 29
+      },
+      "revId": "a468073a323990bc6cf6e280bdf83779d6e6a073",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "31fda31e_a6f46deb",
         "filename": "libs/android_display_backend/crosvm_android_display_client.cpp",
         "patchSetId": 1
