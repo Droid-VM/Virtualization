@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af96342b_c01d434d",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 837,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-07-03T09:27:05Z",
+      "side": 1,
+      "message": "This is wrong because `*v` contains `PLACEHOLDER` (i.e. `0xffff_ffff`) as `fdt` points to the template DT. Therefore, the resulting cell in the guest DT (after `|\u003d` and `.to_be()`) will still contain `PLACEHOLDER`, instead of `cpu_mask | IRQ_TYPE_EDGE_RISING`.\n\nAlso,\n```\nfor v in value.iter_mut().skip(2) {\n     *v |\u003d ...\n```\nis the most convoluted way I\u0027ve ever seen to write\n```\nv[2] |\u003d ...\n```\n\nAnyway, you have introduced `WdtInfo::get_expected()` but are duplicating its logic here.\n\nInstead, I\u0027d recommend re-using it e.g. (untested)\n```\nlet mut interrupts \u003d WdtInfo::get_expected(num_cpus).irq;\nfor v in interrupts.iter_mut() {\n     *v \u003d v.to_be();\n}\nlet mut node \u003d /* ... */;\nnode.setprop_inplace(cstr!(\"interrupts\"), interrupts.as_bytes())?;\n```",
+      "range": {
+        "startLine": 837,
+        "startChar": 8,
+        "endLine": 837,
+        "endChar": 23
+      },
+      "revId": "cf807658ac8f84b96e2aee925f277b6adefad84e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
