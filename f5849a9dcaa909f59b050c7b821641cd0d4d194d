@@ -1,0 +1,127 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3252c75e_ccc77e81",
+        "filename": "docs/custom_vm.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-03T14:31:20Z",
+      "side": 1,
+      "message": "Drop this -- this has never been changed (and CrOS team manages it)",
+      "range": {
+        "startLine": 253,
+        "startChar": 0,
+        "endLine": 253,
+        "endChar": 13
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b7cc6fc1_0bd9a4c7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/custom_vm.md",
+              "range": {
+                "startLine": 253,
+                "startChar": 0,
+                "endLine": 254,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "f5849a9dcaa909f59b050c7b821641cd0d4d194d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba8a29ba_0a452b25",
+        "filename": "docs/custom_vm.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-03T14:31:20Z",
+      "side": 1,
+      "message": "This is the same between console in and ssh. Could you mention it explicitly?",
+      "range": {
+        "startLine": 253,
+        "startChar": 17,
+        "endLine": 253,
+        "endChar": 75
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a797394e_934378e6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/custom_vm.md",
+              "range": {
+                "startLine": 253,
+                "startChar": 0,
+                "endLine": 254,
+                "endChar": 0
+              },
+              "replacement": "As of today, the ID and the password is `root` and `test0000` respectively. This\nis the same between console in and ssh.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f5849a9dcaa909f59b050c7b821641cd0d4d194d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1013c164_3a3f435c",
+        "filename": "docs/custom_vm.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-03T14:31:20Z",
+      "side": 1,
+      "message": "Could you also comment that this wouldn\u0027t return?\n\nYou can put `\u0026` at the end, but then it\u0027s hard to quit `nc`...",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 257,
+        "endChar": 68
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "70e615f0_c895b297",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/custom_vm.md",
+              "range": {
+                "startLine": 257,
+                "startChar": 0,
+                "endLine": 258,
+                "endChar": 0
+              },
+              "replacement": "$ adb shell nc -s localhost -L -p 9222 nc ${CHROMIUMOS_IPV4_ADDR} 22 \u0026\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f5849a9dcaa909f59b050c7b821641cd0d4d194d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
