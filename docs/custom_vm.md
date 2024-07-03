@@ -232,18 +232,6 @@ $ adb shell pm clear com.android.virtualization.vmlauncher
 $ adb shell pm clear com.google.android.virtualization.vmlauncher
 ```
 
-### Inside guest OS (for ChromiumOS only)
-
-Go to the network setting and configure as below.
-
-* IP: 192.168.1.2 (other addresses in the 192.168.1.0/24 subnet also works)
-* netmask: 255.255.255.0
-* gateway: 192.168.1.1
-* DNS: 8.8.8.8 (or any DNS server you know)
-
-These settings are persistent; stored in chromiumos_test_image.bin. So you
-don’t have to repeat this next time.
-
 ### Debugging
 
 To open the serial console (interactive terminal):
@@ -253,16 +241,20 @@ $ adb shell -t /apex/com.android.virt/bin/vm console
 
 To see console logs only, check
 `/data/data/com.android.virtualization.vmlauncher/files/console.log`
-Or
+or
 `/data/data/com.google.android.virtualization.vmlauncher/files/console.log`
 
 ```shell
 $ adb shell su root tail +0 -F /data/data/com{,.google}.android.virtualization.vmlauncher/files/console.log
 ```
 
-For ChromiumOS, you can ssh-in. Use following commands after network setup.
+For ChromiumOS, you can ssh-in. Check your IP address of VM from ethernet
+network setting page of ChromiumOS VM and follow commands below. As of today,
+the ID and password is `root` and `test0000` respectively.
 
 ```shell
-$ adb kill-server ; adb start-server; adb forward tcp:9222 tcp:9222
+$ adb kill-server ; adb start-server
+$ adb shell nc -s localhost -L -p 9222 nc ${CHROMIUMOS_IPV4_ADDR} 22
+$ adb forward tcp:9222 tcp:9222
 $ ssh -oProxyCommand=none -o UserKnownHostsFile=/dev/null root@localhost -p 9222
 ```
