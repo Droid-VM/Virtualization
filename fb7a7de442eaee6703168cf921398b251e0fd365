@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ce0ce3e_418708e1",
+        "filename": "docs/custom_vm.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-07-03T04:42:02Z",
+      "side": 1,
+      "message": "how about condense these all into one line\n\n```\nadb shell \u0027su root tail +0 -F /data/user/$(am get-current-user)/com{,.google}.android.virtualization.vmlauncher/files/console.log\u0027\n```",
+      "range": {
+        "startLine": 255,
+        "startChar": 0,
+        "endLine": 263,
+        "endChar": 50
+      },
+      "revId": "fb7a7de442eaee6703168cf921398b251e0fd365",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
