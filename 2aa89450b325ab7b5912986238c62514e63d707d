@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d598890_2ec7621d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-07-04T11:00:01Z",
+      "side": 1,
+      "message": "We can do it for now, but I found a crosvm side API called [Stream control.set_volume](https://cs.android.com/android/platform/superproject/+/master:external/crosvm/common/audio_streams/src/audio_streams.rs;drc\u003d3b9d6cd83c7e20ea80b99ed9f592c08229af08ae;l\u003d367). But I think it has no function now(did not find any usage of this). Maybe implementing this is a possible solution to sync host and VM volume.",
+      "revId": "2aa89450b325ab7b5912986238c62514e63d707d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
