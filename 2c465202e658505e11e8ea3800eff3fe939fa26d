@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "428c42e0_329a0c73",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-05T03:48:11Z",
+      "side": 1,
+      "message": "Could you try following before `startActivity()` instead?\n`intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK)`\n\n`startActivityForResult()` would keep `FerrochromeActivity` alive while `VmLauncherApp` is running.",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 53
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "181992f6_bdfd93b9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "ferrochrome_app/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
+              "range": {
+                "startLine": 113,
+                "startChar": 0,
+                "endLine": 114,
+                "endChar": 0
+              },
+              "replacement": "                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);\n                    startActivity(intent);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2c465202e658505e11e8ea3800eff3fe939fa26d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
