@@ -50,6 +50,42 @@
       "message": "Plus, could you tell me if we\u0027re calling `VirtualMachine#close()`?",
       "revId": "23b6739340f3c899e45dc3d94e6b67d3639c4b71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9d5a124_cb3e0aec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-05T02:22:43Z",
+      "side": 1,
+      "message": "that can\u0027t happen. onRestart is not called while onStop is being executed (and vice versa). And the aidl call to virtmgr from activity is synchronous.",
+      "parentUuid": "6f4638f8_7887eafd",
+      "revId": "23b6739340f3c899e45dc3d94e6b67d3639c4b71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1403d931_da9c43a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-05T02:22:43Z",
+      "side": 1,
+      "message": "We don\u0027t call it explicitly, but VirtualMachine is auto-closed when the process exits.",
+      "parentUuid": "ea88f00c_0c6bbf1a",
+      "revId": "23b6739340f3c899e45dc3d94e6b67d3639c4b71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
