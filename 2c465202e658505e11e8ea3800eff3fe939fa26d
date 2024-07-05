@@ -40,6 +40,30 @@
       ],
       "revId": "2c465202e658505e11e8ea3800eff3fe939fa26d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2060530_fc38c259",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-05T03:57:33Z",
+      "side": 1,
+      "message": "I thought and tried this, but this is not what we want. Two issues:\n\n1. the task where the VM is running is seen as VmLauncherApp, not Ferrochrome app.\n\n2. you get two tasks in the overview ui. (ferrochrome and vmlauncher)",
+      "parentUuid": "428c42e0_329a0c73",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 53
+      },
+      "revId": "2c465202e658505e11e8ea3800eff3fe939fa26d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
