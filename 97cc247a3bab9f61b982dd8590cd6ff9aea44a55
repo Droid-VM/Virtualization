@@ -49,6 +49,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "09cdc5f1_ca800873",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-08T14:04:09Z",
+      "side": 1,
+      "message": "It seems that this implementation only works with IAccessor, without involving the ServiceManager, correct?\n\nOtherwise, since Trusty does not support the VmPayloadService, I\u0027m uncertain how much of the current design we could reuse for the latest plan [1] regarding VM -\u003e TZ service discovery. It would be nice if we could keep the reusable parts of the IAccessor separate from the microdroid manager, so that we can potentially use it directly in the Trusty VM later, if possible.\n\n[1] http://docs/document/d/1Ii5Or7ZNSR8Nn96KCh6jUxKk8oMxedPJw4p8PDV7D34?tab\u003dt.0",
+      "range": {
+        "startLine": 44,
+        "startChar": 7,
+        "endLine": 44,
+        "endChar": 15
+      },
+      "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04d154eb_137b584a",
         "filename": "microdroid_manager/src/vm_payload_service.rs",
         "patchSetId": 2
@@ -164,6 +187,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "34012203_1eabffb4",
+        "filename": "vm_payload/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-08T14:04:09Z",
+      "side": 1,
+      "message": "This library is only a wrapper of the rust implementation `libvm_payload_impl`, it has no code till now. Could we change the injector to rust and move it to `libvm_payload_impl`?",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 69,
+        "endChar": 5
+      },
+      "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0b27cf1b_c0e25c34",
         "filename": "vm_payload/include/vm_payload.h",
         "patchSetId": 2
@@ -195,6 +241,47 @@
                 "endChar": 0
               },
               "replacement": "/**\n * Returns the binder interface for the VM.\n *\n * \\return the binder interface for the VM. The returned binder interface should not be\n * deleted or freed by the application. The binder interface remains valid for the\n * lifetime of the VM.\n */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19074d7e_55056174",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-08T14:04:09Z",
+      "side": 1,
+      "message": "How is the payload expected to interact with the IAccessor? I thought that the payload didn\u0027t need to know about IAccessor based on the design, as libbinder was supposed to handle the interaction.",
+      "range": {
+        "startLine": 86,
+        "startChar": 20,
+        "endLine": 86,
+        "endChar": 43
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6fc054c0_381ce229",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "vm_payload/include/vm_payload.h",
+              "range": {
+                "startLine": 86,
+                "startChar": 0,
+                "endLine": 86,
+                "endChar": 0
+              },
+              "replacement": "/**\n * Returns the IAccessor binder object.\n *\n * The IAccessor is used to access the VM\u0027s I/O and other resources.\n *\n * \\return the IAccessor binder object.\n */\n"
             }
           ]
         }
