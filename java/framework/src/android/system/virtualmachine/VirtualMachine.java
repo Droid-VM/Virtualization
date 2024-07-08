@@ -17,6 +17,7 @@
 package android.system.virtualmachine;
 
 import static android.os.ParcelFileDescriptor.AutoCloseInputStream;
+import static android.os.ParcelFileDescriptor.AutoCloseOutputStream;
 import static android.os.ParcelFileDescriptor.MODE_READ_ONLY;
 import static android.os.ParcelFileDescriptor.MODE_READ_WRITE;
 import static android.system.virtualmachine.VirtualMachineCallback.ERROR_PAYLOAD_CHANGED;
@@ -53,6 +54,8 @@ import android.annotation.SuppressLint;
 import android.annotation.SystemApi;
 import android.annotation.TestApi;
 import android.annotation.WorkerThread;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.ComponentCallbacks2;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -226,6 +229,9 @@ public class VirtualMachine implements AutoCloseable {
     /** Name of the file backing the encrypted storage */
     private static final String ENCRYPTED_STORE_FILE = "storage.img";
 
+    /** Port of clipboard sharing server in VM */
+    private static final int CLIPBOARD_SHARING_SERVER_PORT = 3580;
+
     /** The package which owns this VM. */
     @NonNull private final String mPackageName;
 
@@ -331,6 +337,8 @@ public class VirtualMachine implements AutoCloseable {
     private final boolean mConnectVmConsole;
 
     private final Executor mConsoleExecutor = Executors.newSingleThreadExecutor();
+
+    private final ClipboardManager mClipboardManager;
 
     /** The configuration that is currently associated with this VM. */
     @GuardedBy("mLock")
@@ -450,6 +458,8 @@ public class VirtualMachine implements AutoCloseable {
         mVmOutputCaptured = config.isVmOutputCaptured();
         mVmConsoleInputSupported = config.isVmConsoleInputSupported();
         mConnectVmConsole = config.isConnectVmConsole();
+
+        mClipboardManager = context.getSystemService(ClipboardManager.class);
     }
 
     /**
@@ -1114,6 +1124,57 @@ public class VirtualMachine implements AutoCloseable {
             return false;
         }
         return true;
+    }
+
+    // TODO(349702313): Introduce READ_CLIPBOARD_FROM_VM as 0 for reading clipboard from
+    // VM.
+    // TODO(349702313): Introduce WRITE_CLIPBOARD_TYPE_EMPTY as 1 for receiving empty clipboard data
+    // from VM.
+    private static final byte WRITE_CLIPBOARD_TYPE_TEXT_PLAIN = 2;
+
+    /** @hide */
+    public boolean writeClipboardToVm() {
+        if (mClipboardManager == null) {
+            Log.d(TAG, "mClipboardManager is null");
+            return false;
+        }
+
+        if (!mClipboardManager.hasPrimaryClip()) {
+            Log.d(TAG, "host device has no clipboard data");
+            return true;
+        }
+        ClipData clip = mClipboardManager.getPrimaryClip();
+        String text = clip.getItemAt(0).getText().toString();
+
+        // Construct header for the clipboard data.
+        // Byte 0: Data type
+        // Byte 1-3: Padding alignment & Reserved for other use cases in the future
+        // Byte 4-7: Data size of the payload
+        ByteBuffer header = ByteBuffer.allocate(8);
+        header.clear();
+        header.order(ByteOrder.LITTLE_ENDIAN);
+        header.put(0, WRITE_CLIPBOARD_TYPE_TEXT_PLAIN);
+        header.putInt(4, text.getBytes().length + 1);
+
+        ParcelFileDescriptor pfd;
+        try {
+            // TODO(349702313): Consider when clipboard sharing server is started to run in VM.
+            pfd = connectVsock(CLIPBOARD_SHARING_SERVER_PORT);
+        } catch (VirtualMachineException e) {
+            Log.d(TAG, "cannot connect to the clipboard sharing server", e);
+            return false;
+        }
+        OutputStream stream = new AutoCloseOutputStream(pfd);
+        try {
+            stream.write(header.array());
+            stream.write(text.getBytes());
+            stream.flush();
+            Log.d(TAG, "successfully wrote clipboard data to the VM");
+            return true;
+        } catch (IOException e) {
+            Log.e(TAG, "failed to write clipboard data to the VM", e);
+            return false;
+        }
     }
 
     private android.system.virtualizationservice.VirtualMachineConfig
