@@ -458,6 +458,12 @@ public class MainActivity extends Activity {
             Log.d(TAG, "requestPointerCapture()");
             surfaceView.requestPointerCapture();
         }
+        if (mVirtualMachine != null) {
+            if (hasFocus) {
+                Log.d(TAG, "writing clipboard of host device into VM");
+                mVirtualMachine.writeClipboardToVm();
+            }
+        }
     }
 
     @FunctionalInterface
