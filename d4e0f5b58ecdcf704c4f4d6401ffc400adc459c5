@@ -140,6 +140,30 @@
       },
       "revId": "d4e0f5b58ecdcf704c4f4d6401ffc400adc459c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5520768f_a75e94fa",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-07-08T15:15:19Z",
+      "side": 1,
+      "message": "Actually, if I\u0027m not mistaken, the addresses this patchset uses will remain invalid until vmbase starts using `TTBR1` **and** enables 52-bit addresses through `TCR_EL1.T1SZ`, right? How likely is this to actually bitrot...?\n\nI\u0027ve updated the commit message and code comment to reflect this; please LMK what you think.",
+      "parentUuid": "60297b08_28bf954d",
+      "range": {
+        "startLine": 133,
+        "startChar": 19,
+        "endLine": 133,
+        "endChar": 83
+      },
+      "revId": "d4e0f5b58ecdcf704c4f4d6401ffc400adc459c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
