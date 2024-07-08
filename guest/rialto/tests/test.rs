@@ -14,6 +14,20 @@
 
 //! Integration test for Rialto.
 
+use client_vm_csr::generate_attestation_key_and_csr;
+use std::fs;
+use std::panic;
+use std::fs::File;
+use std::path::PathBuf;
+use std::str::FromStr;
+use service_vm_fake_chain::client_vm::{
+    fake_client_vm_dice_artifacts, fake_sub_components, SubComponent,
+};
+use vmclient::VmInstance;
+use log::{info, warn};
+use bssl_avf::{rand_bytes, sha256, EcKey, PKey};
+use hwtrust::{rkp, session::Session};
+use anyhow::{bail, Context, Result};
 use android_system_virtualizationservice::{
     aidl::android::system::virtualizationservice::{
         VirtualMachineConfig::VirtualMachineConfig,
@@ -21,32 +35,18 @@ use android_system_virtualizationservice::{
     },
     binder::{ParcelFileDescriptor, ProcessState},
 };
-use anyhow::{bail, Context, Result};
-use bssl_avf::{rand_bytes, sha256, EcKey, PKey};
-use client_vm_csr::generate_attestation_key_and_csr;
+use x509_cert::{
+    name::Name,
+    der::{self, asn1, Decode, Encode},
+    certificate::{Certificate, Version},
+    spki::{AlgorithmIdentifier, ObjectIdentifier, SubjectPublicKeyInfo},
+};
 use coset::{CborSerializable, CoseMac0, CoseSign};
-use hwtrust::{rkp, session::Session};
-use log::{info, warn};
 use service_vm_comm::{
     ClientVmAttestationParams, Csr, CsrPayload, EcdsaP256KeyPair, GenerateCertificateRequestParams,
     Request, RequestProcessingError, Response, VmType,
 };
-use service_vm_fake_chain::client_vm::{
-    fake_client_vm_dice_artifacts, fake_sub_components, SubComponent,
-};
 use service_vm_manager::{ServiceVm, VM_MEMORY_MB};
-use std::fs;
-use std::fs::File;
-use std::panic;
-use std::path::PathBuf;
-use std::str::FromStr;
-use vmclient::VmInstance;
-use x509_cert::{
-    certificate::{Certificate, Version},
-    der::{self, asn1, Decode, Encode},
-    name::Name,
-    spki::{AlgorithmIdentifier, ObjectIdentifier, SubjectPublicKeyInfo},
-};
 
 const UNSIGNED_RIALTO_PATH: &str = "/data/local/tmp/rialto_test/arm64/rialto_unsigned.bin";
 const INSTANCE_IMG_PATH: &str = "/data/local/tmp/rialto_test/arm64/instance.img";
@@ -288,7 +288,9 @@ fn check_certificate_for_client_vm(
 }
 
 fn check_csr(csr: Vec<u8>) -> Result<()> {
-    let _csr = rkp::Csr::from_cbor(&Session::default(), &csr[..]).context("Failed to parse CSR")?;
+    let mut session = Session::default();
+    session.set_allow_any_mode(true);
+    let _csr = rkp::Csr::from_cbor(&session, &csr[..]).context("Failed to parse CSR")?;
     Ok(())
 }
 
