@@ -1321,9 +1321,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
         grantPermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
         VirtualMachineConfig config =
-                newVmConfigBuilderWithPayloadConfig("assets/vm_config.json")
-                        .setDebugLevel(DEBUG_LEVEL_FULL)
-                        .build();
+                newVmConfigBuilderWithPayloadConfig("assets/vm_config.json").build();
         VirtualMachine vm = forceCreateNewVirtualMachine("bcc_vm_for_vsr", config);
         TestResults testResults =
                 runVmTestService(
@@ -1335,7 +1333,11 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         testResults.assertNoException();
         byte[] bccBytes = testResults.mBcc;
         assertThat(bccBytes).isNotNull();
-        assertThat(HwTrustJni.validateDiceChain(bccBytes)).isTrue();
+
+        String buildType = SystemProperties.get("ro.build.type", "");
+        boolean allowAnyMode = !buildType.isEmpty() && buildType != "user";
+
+        assertThat(HwTrustJni.validateDiceChain(bccBytes, allowAnyMode)).isTrue();
     }
 
     @Test
