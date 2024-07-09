@@ -41,6 +41,9 @@ interface ITestService {
     /* get the VM's boot certificate chain (BCC). */
     byte[] getBcc();
 
+    /* Validates the VM's DICE chain. */
+    void validateVmDiceChain();
+
     /* get the APK contents path. */
     String getApkContentsPath();
 

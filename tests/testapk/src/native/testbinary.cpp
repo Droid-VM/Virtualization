@@ -205,6 +205,10 @@ Result<void> start_test_service() {
             return ScopedAStatus::ok();
         }
 
+        ScopedAStatus validateVmDiceChain() override {
+            return ScopedAStatus::fromStatus(EX_UNSUPPORTED_OPERATION);
+        }
+
         ScopedAStatus getApkContentsPath(std::string* out) override {
             const char* path_c = AVmPayload_getApkContentsPath();
             if (path_c == nullptr) {
