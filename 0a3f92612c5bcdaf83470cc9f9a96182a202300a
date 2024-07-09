@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b346962b_79732d0d",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-07-09T10:46:41Z",
+      "side": 1,
+      "message": "if `AudioConfig::new` did not return a `Result\u003c\u003e` then this `.transpose().or_binder_exception()` can be omitted",
+      "range": {
+        "startLine": 587,
+        "startChar": 16,
+        "endLine": 588,
+        "endChar": 70
+      },
+      "revId": "0a3f92612c5bcdaf83470cc9f9a96182a202300a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59f81f3f_e12ca978",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-07-09T10:46:41Z",
+      "side": 1,
+      "message": "This method never fails, so why return a Result\u003c\u003e here, why not just `new(raw_config) -\u003e Self`?",
+      "range": {
+        "startLine": 148,
+        "startChar": 49,
+        "endLine": 148,
+        "endChar": 61
+      },
+      "revId": "0a3f92612c5bcdaf83470cc9f9a96182a202300a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dc2aaa02_17a66dce",
         "filename": "virtualizationmanager/src/crosvm.rs",
         "patchSetId": 7
