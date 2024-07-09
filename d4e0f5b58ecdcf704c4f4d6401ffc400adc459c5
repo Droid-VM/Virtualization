@@ -164,6 +164,30 @@
       },
       "revId": "d4e0f5b58ecdcf704c4f4d6401ffc400adc459c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ba20f56_3139174a",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-07-09T12:35:13Z",
+      "side": 1,
+      "message": "Yes, this is correct, unless someone touches `TTBR1` to enable 52-bit addressing this assumption true.",
+      "parentUuid": "5520768f_a75e94fa",
+      "range": {
+        "startLine": 133,
+        "startChar": 19,
+        "endLine": 133,
+        "endChar": 83
+      },
+      "revId": "d4e0f5b58ecdcf704c4f4d6401ffc400adc459c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
