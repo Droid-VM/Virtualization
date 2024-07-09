@@ -39,6 +39,7 @@ public class VirtualMachineCustomImageConfig {
     private static final String KEY_SWITCHES = "switches";
     private static final String KEY_NETWORK = "network";
     private static final String KEY_GPU = "gpu";
+    private static final String KEY_TRACKPAD = "trackpad";
 
     @Nullable private final String name;
     @Nullable private final String kernelPath;
@@ -53,6 +54,7 @@ public class VirtualMachineCustomImageConfig {
     private final boolean switches;
     private final boolean network;
     @Nullable private final GpuConfig gpuConfig;
+    private final boolean trackpad;
 
     @Nullable
     public Disk[] getDisks() {
@@ -100,6 +102,10 @@ public class VirtualMachineCustomImageConfig {
         return switches;
     }
 
+    public boolean useTrackpad() {
+        return mouse;
+    }
+
     public boolean useNetwork() {
         return network;
     }
@@ -118,7 +124,8 @@ public class VirtualMachineCustomImageConfig {
             boolean mouse,
             boolean switches,
             boolean network,
-            GpuConfig gpuConfig) {
+            GpuConfig gpuConfig,
+            boolean trackpad) {
         this.name = name;
         this.kernelPath = kernelPath;
         this.initrdPath = initrdPath;
@@ -132,6 +139,7 @@ public class VirtualMachineCustomImageConfig {
         this.switches = switches;
         this.network = network;
         this.gpuConfig = gpuConfig;
+        this.trackpad = trackpad;
     }
 
     static VirtualMachineCustomImageConfig from(PersistableBundle customImageConfigBundle) {
@@ -164,6 +172,7 @@ public class VirtualMachineCustomImageConfig {
         builder.useMouse(customImageConfigBundle.getBoolean(KEY_MOUSE));
         builder.useNetwork(customImageConfigBundle.getBoolean(KEY_NETWORK));
         builder.setGpuConfig(GpuConfig.from(customImageConfigBundle.getPersistableBundle(KEY_GPU)));
+        builder.useTrackpad(customImageConfigBundle.getBoolean(KEY_TRACKPAD));
         return builder.build();
     }
 
@@ -200,6 +209,7 @@ public class VirtualMachineCustomImageConfig {
         pb.putPersistableBundle(
                 KEY_GPU,
                 Optional.ofNullable(gpuConfig).map(gc -> gc.toPersistableBundle()).orElse(null));
+        pb.putBoolean(KEY_TRACKPAD, trackpad);
         return pb;
     }
 
@@ -259,6 +269,7 @@ public class VirtualMachineCustomImageConfig {
         private boolean switches;
         private boolean network;
         private GpuConfig gpuConfig;
+        private boolean trackpad;
 
         /** @hide */
         public Builder() {}
@@ -332,6 +343,11 @@ public class VirtualMachineCustomImageConfig {
         /** @hide */
         public Builder useSwitches(boolean switches) {
             this.switches = switches;
+        }
+
+        /** @hide */
+        public Builder useTrackpad(boolean trackpad) {
+            this.trackpad = trackpad;
             return this;
         }
 
@@ -356,7 +372,8 @@ public class VirtualMachineCustomImageConfig {
                     mouse,
                     switches,
                     network,
-                    gpuConfig);
+                    gpuConfig,
+                    trackpad);
         }
     }
 

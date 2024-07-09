@@ -189,6 +189,7 @@ public class MainActivity extends Activity {
             customImageConfigBuilder.useKeyboard(true);
             customImageConfigBuilder.useMouse(true);
             customImageConfigBuilder.useSwitches(true);
+            customImageConfigBuilder.useTrackpad(true);
             customImageConfigBuilder.useNetwork(true);
 
             configBuilder.setCustomImageConfig(customImageConfigBuilder.build());
@@ -323,6 +324,10 @@ public class MainActivity extends Activity {
                 (v, event) -> {
                     if (mVirtualMachine == null) {
                         return false;
+                    }
+                    int eventSource = event.getSource();
+                    if ((eventSource & InputDevice.SOURCE_CLASS_POSITION) != 0) {
+                        return mVirtualMachine.sendTrackpadEvent(event);
                     }
                     return mVirtualMachine.sendMouseEvent(event);
                 });
