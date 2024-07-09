@@ -16,6 +16,397 @@
       "message": "Switching unsafe reviewer as I\u0027m going on vacation.",
       "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49b21401_774db57d",
+        "filename": "demo_accessor/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-09T13:34:57Z",
+      "side": 1,
+      "message": "I think we need to expand the README for the objective in b/349578050. This will help us demonstrate to partners how to serve a HAL in a VM effectively. The concept of IAccessor can be introduced later.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 35
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0451f6e_980a74a3",
+        "filename": "demo_accessor/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-09T13:34:57Z",
+      "side": 1,
+      "message": "Add `com.android.virt.accessor_demo` here?",
+      "range": {
+        "startLine": 6,
+        "startChar": 14,
+        "endLine": 6,
+        "endChar": 15
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67ac0732_05e7624e",
+        "filename": "demo_accessor/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-09T13:34:57Z",
+      "side": 1,
+      "message": "Why not calling directly `adb install $ANDROID_PRODUCT_OUT/system_ext/com.android.virt.accessor_demo.apex` here?",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 93
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88585579_0c795f62",
+        "filename": "demo_accessor/accessor/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-09T13:34:57Z",
+      "side": 1,
+      "message": "`bail!` ?",
+      "range": {
+        "startLine": 57,
+        "startChar": 4,
+        "endLine": 57,
+        "endChar": 15
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b906c08b_e43addf9",
+        "filename": "demo_accessor/accessor/src/run.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-09T13:34:57Z",
+      "side": 1,
+      "message": "`bail!`? The android rust guide recommends to use `bail!` over `Err(anyhow!` actually [1].\n\n[1] http://docs/document/d/1HyXNRQImaYUVmeq1Z_Ez4vxXlCIQxDKaWo4-BZ75j9Y?tab\u003dt.0#heading\u003dh.bjrh3yw9ntpz",
+      "range": {
+        "startLine": 55,
+        "startChar": 15,
+        "endLine": 55,
+        "endChar": 25
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d973e1c8_3bd9d392",
+        "filename": "demo_accessor/accessor/src/run.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-09T13:34:57Z",
+      "side": 1,
+      "message": "Just use `..Default::default()` here to drop a few lines?",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 36
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "412bd682_10ef9f12",
+        "filename": "demo_accessor/accessor/src/run.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-09T13:34:57Z",
+      "side": 1,
+      "message": "Why not `info` ?",
+      "range": {
+        "startLine": 154,
+        "startChar": 8,
+        "endLine": 154,
+        "endChar": 13
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74b3acb8_e1caa414",
+        "filename": "demo_accessor/accessor/src/run.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-09T13:34:57Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 158,
+        "startChar": 8,
+        "endLine": 158,
+        "endChar": 13
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb4b0bad_aab4ecdb",
+        "filename": "demo_accessor/accessor_vm/AndroidManifest.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-09T13:34:57Z",
+      "side": 1,
+      "message": "Do we need these permissions?",
+      "range": {
+        "startLine": 17,
+        "startChar": 4,
+        "endLine": 19,
+        "endChar": 0
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcbd2d2a_f8a07a13",
+        "filename": "demo_accessor/accessor_vm/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-09T13:34:57Z",
+      "side": 1,
+      "message": "Do we need this? The struct name doesn\u0027t need to be snake case anyway.",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 24
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60487d4c_d8c8aad8",
+        "filename": "demo_accessor/apex/accessor_demo.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-09T13:34:57Z",
+      "side": 1,
+      "message": "Steven recommends to use the fully qualified name here to avoid name conflicts, something like: `android.os.IAccessor/IAccessorVmService/default`",
+      "range": {
+        "startLine": 22,
+        "startChar": 18,
+        "endLine": 22,
+        "endChar": 52
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dfaef89_ce4c3b70",
+        "filename": "demo_accessor/apex/accessor_demo.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-09T13:34:57Z",
+      "side": 1,
+      "message": "nit: add a newline at the end of the file?",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 11
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6074253_458e0ef1",
+        "filename": "demo_accessor/test/Android.bp",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-09T13:34:57Z",
+      "side": 1,
+      "message": "nit: Can we rename this to `vm_accessor_test`? I feel that `*TestApp` are usually for Java test Apk.",
+      "range": {
+        "startLine": 23,
+        "startChar": 23,
+        "endLine": 23,
+        "endChar": 30
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffd62d28_2d4e28db",
+        "filename": "demo_accessor/test/Android.bp",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-09T13:34:57Z",
+      "side": 1,
+      "message": "How does this configuration work for rust_test?",
+      "range": {
+        "startLine": 38,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 30
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5180196f_51652ce9",
+        "filename": "demo_accessor/test/AndroidTest.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-09T13:34:57Z",
+      "side": 1,
+      "message": "Why not installing the apex instead of pushing it to /system_ext?",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 134
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78c56a10_0ebd9614",
+        "filename": "demo_accessor/test/src/test.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-09T13:34:57Z",
+      "side": 1,
+      "message": "nit: s/./getting_service_twice_succeeds?",
+      "range": {
+        "startLine": 39,
+        "startChar": 3,
+        "endLine": 39,
+        "endChar": 36
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4490cbf4_6d368401",
+        "filename": "demo_accessor/test/src/test.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-09T13:34:57Z",
+      "side": 1,
+      "message": "Can we change this call to `check_interface` ? That API should also work.\n\nWe can also check that `binder::get_interface` also works",
+      "range": {
+        "startLine": 41,
+        "startChar": 19,
+        "endLine": 41,
+        "endChar": 30
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
