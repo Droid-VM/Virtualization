@@ -25,6 +25,7 @@ use com_android_microdroid_testservice::{
     binder::{BinderFeatures, ExceptionCode, Interface, Result as BinderResult, Status, Strong},
 };
 use cstr::cstr;
+use hwtrust::{dice, session::Session};
 use log::{error, info};
 use std::panic;
 use std::process::exit;
@@ -89,6 +90,21 @@ impl ITestService for TestService {
         let mut secret = vec![0u8; 32];
         vm_payload::get_vm_instance_secret(b"identifier", secret.as_mut_slice());
         Ok(secret)
+    }
+
+    fn validVmDiceChain(&self) -> BinderResult<()> {
+        let chain = vm_payload::restricted::get_dice_attestation_chain();
+        let session = Session::default();
+        match dice::Chain::from_cbor(&session, &chain) {
+            Ok(_) => Ok(()),
+            Err(e) => {
+                error!("{e}");
+                Err(Status::new_exception_str(
+                    ExceptionCode::ILLEGAL_STATE,
+                    Some("Invalid VM DICE chain"),
+                ))
+            }
+        }
     }
 
     // Everything below here is unimplemented. Implementations may be added as needed.

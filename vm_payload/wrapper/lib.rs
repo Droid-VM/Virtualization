@@ -22,6 +22,8 @@
 
 mod attestation;
 
+pub mod restricted;
+
 pub use attestation::{request_attestation, AttestationError, AttestationResult};
 use binder::unstable_api::AsNative;
 use binder::{FromIBinder, Strong};
@@ -33,16 +35,6 @@ use vm_payload_bindgen::{
     AIBinder, AVmPayload_getApkContentsPath, AVmPayload_getEncryptedStoragePath,
     AVmPayload_getVmInstanceSecret, AVmPayload_notifyPayloadReady, AVmPayload_runVsockRpcServer,
 };
-
-/// The functions declared here are restricted to VMs created with a config file;
-/// they will fail, or panic, if called in other VMs. The ability to create such VMs
-/// requires the android.permission.USE_CUSTOM_VIRTUAL_MACHINE permission, and is
-/// therefore not available to privileged or third party apps.
-///
-/// These functions can be used by tests, if the permission is granted via shell.
-pub mod restricted {
-    pub use crate::attestation::request_attestation_for_testing;
-}
 
 /// Marks the main function of the VM payload.
 ///

@@ -1308,6 +1308,34 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
+    @VsrTest(requirements = {"VSR-7.1-001.005"})
+    public void protectedVmHasValidDiceChain() throws Exception {
+        assumeSupportedDevice();
+        assumeProtectedVM();
+        assumeVsrCompliant();
+        assumeTrue("Vendor API must be at least 202404", getVendorApiLevel() >= 202404);
+
+        VirtualMachineConfig config =
+                newVmConfigBuilderWithPayloadBinary("libmicrodroid_testlib_rust.so")
+                        .setMemoryBytes(minMemoryRequired())
+                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .build();
+        VirtualMachine vm = forceCreateNewVirtualMachine("test_vm_for_dice", config);
+
+        final CompletableFuture<Boolean> validationCompleted = new CompletableFuture<>();
+        TestResults testResults =
+                runVmTestService(
+                        TAG,
+                        vm,
+                        (ts, _tr) -> {
+                            ts.validVmDiceChain();
+                            validationCompleted.complete(true);
+                        });
+        testResults.assertNoException();
+        assertThat(validationCompleted.getNow(false)).isTrue();
+    }
+
+    @Test
     @CddTest(requirements = {
             "9.17/C-1-1",
             "9.17/C-1-2"
