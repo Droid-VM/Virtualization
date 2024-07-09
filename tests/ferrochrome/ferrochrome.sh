@@ -27,6 +27,7 @@ FECR_CONSOLE_LOG_PATH="/data/data/\${pkg_name}/files/console.log"
 FECR_BOOT_COMPLETED_LOG="Have fun and send patches!"
 FECR_BOOT_TIMEOUT="300" # 5 minutes (300 seconds)
 ACTION_NAME="android.virtualization.VM_LAUNCHER"
+TRY_UNLOCK_MAX=5
 
 fecr_clean_up() {
   trap - INT
@@ -130,6 +131,35 @@ if [[ -z "${fecr_skip}" ]]; then
   adb shell mkdir -p ${FECR_DEVICE_DIR} > /dev/null || true
   adb push ${fecr_dir}/chromiumos_test_image.bin ${FECR_DEVICE_DIR}
   adb push ${fecr_script_path}/assets/vm_config.json ${FECR_CONFIG_PATH}
+fi
+
+echo "Ensure screen unlocked"
+
+try_unlock=0
+while [[ "${try_unlock}" -le "${TRY_UNLOCK_MAX}" ]]; do
+  screen_state=$(adb shell dumpsys nfc | sed -n 's/^mScreenState=\(.*\)$/\1/p')
+  case "${screen_state}" in
+    "ON_UNLOCKED")
+      break
+      ;;
+    "ON_LOCKED")
+      # This can unlock phone only unlock method is swipe (default after FDR)
+      # If not, user should do this manually
+      adb shell input keyevent KEYCODE_MENU
+      try_unlock=$((try_unlock+1))
+      ;;
+    "OFF_LOCKED"|"OFF_UNLOCKED")
+      adb shell input keyevent KEYCODE_WAKEUP
+      ;;
+    *)
+      echo "Unknown screen state. Proceeding to boot, but may fail"
+      ;;
+  esac
+  sleep 1
+done
+if [[ "${try_unlock}" -gt "${TRY_UNLOCK_MAX}" ]]; then
+  >&2 echo "Failed to unlock screen. Ferrochrome wouldn't boot"
+  exit 1
 fi
 
 echo "Starting ferrochrome"
