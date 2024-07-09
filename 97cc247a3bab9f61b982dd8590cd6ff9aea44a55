@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "df0c8e88_63dc7ab4",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-07-09T00:06:50Z",
+      "side": 1,
+      "message": "Yes, it should be `getAccessor`.\n\nYes, I think it should take a `String instance` so it\u0027s per instance.",
+      "parentUuid": "11405518_eaf4ee1c",
+      "range": {
+        "startLine": 120,
+        "startChar": 28,
+        "endLine": 120,
+        "endChar": 29
+      },
+      "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "09cdc5f1_ca800873",
         "filename": "microdroid_manager/src/vm_payload_service.rs",
         "patchSetId": 2
@@ -139,6 +163,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48dd66b4_4288a072",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 1614,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-07-09T00:06:50Z",
+      "side": 1,
+      "message": "The accessor impl is in microdroid_mgr in the VM because it\u0027s the one creating the socket FDs for payload client to connect to.",
+      "parentUuid": "47d46d91_cb7516c9",
+      "range": {
+        "startLine": 1614,
+        "startChar": 0,
+        "endLine": 1614,
+        "endChar": 61
+      },
+      "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7c8d39b_a9453fbb",
@@ -152,6 +200,30 @@
       "writtenOn": "2024-06-27T22:25:25Z",
       "side": 1,
       "message": "https://www.man7.org/linux/man-pages/man7/vsock.7.html\n\n\u003e When a process wants to establish a connection, it calls\n       connect(2) with a given destination socket address.  The socket\n       is automatically bound to a free port if unbound.\n\n\nI think you may want to try multiple services to make sure the port can really be re-used. If possible we should ask the kernel to provide the port number and then pass that through the accessor?",
+      "range": {
+        "startLine": 1616,
+        "startChar": 0,
+        "endLine": 1616,
+        "endChar": 28
+      },
+      "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b33498e4_d9c24d5f",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 1616,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-07-09T00:06:50Z",
+      "side": 1,
+      "message": "\u003e ask the kernel to provide the port number and then pass that through the accessor?\n\nYeah I think this makes the most sense for this case.",
+      "parentUuid": "e7c8d39b_a9453fbb",
       "range": {
         "startLine": 1616,
         "startChar": 0,
@@ -286,6 +358,30 @@
           ]
         }
       ],
+      "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "084abb35_e6f615fd",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-07-09T00:06:50Z",
+      "side": 1,
+      "message": "\u003e so that we don\u0027t statically compile accessor into payloads, and we can update all usages of accessor by updating microdroid?\n\nThis is the current case. `libvm_payload` is only used a shared library and not statically included in any payloads.\n\nThis function should be renamed since it\u0027s not actually available to the payload and is only needed in injector.cpp.\n\nThis particular API is only added to avoid needing get IVmPayloadService in C++ with the `-ndk` backend since it\u0027s already handled in rust with `get_vm_payload_service()` 😄\nMaybe there is a way in rust to do the equivalent of __attribute__((constructor)) so I can get rid of `injector.cpp` and remove the need for this C api.",
+      "parentUuid": "0b27cf1b_c0e25c34",
+      "range": {
+        "startLine": 86,
+        "startChar": 20,
+        "endLine": 86,
+        "endChar": 43
+      },
       "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
