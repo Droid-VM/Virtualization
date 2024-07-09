@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cb5b971_dd3df661",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1136,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-09T08:27:53Z",
+      "side": 1,
+      "message": "Can you move this method to the activity? I don\u0027t think this belongs to the VirtualMachine class because this is implementing a very custom protocol.",
+      "range": {
+        "startLine": 1136,
+        "startChar": 4,
+        "endLine": 1136,
+        "endChar": 41
+      },
+      "revId": "f19cdd80be7150f856d9654ba4427d1ec60275ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "549d04fa_45c3f253",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1137,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-09T08:27:53Z",
+      "side": 1,
+      "message": "can you create this lazily when this function is called? not all VMs (ex: microdroid or trusty) would need this.",
+      "range": {
+        "startLine": 1137,
+        "startChar": 8,
+        "endLine": 1137,
+        "endChar": 40
+      },
+      "revId": "f19cdd80be7150f856d9654ba4427d1ec60275ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
