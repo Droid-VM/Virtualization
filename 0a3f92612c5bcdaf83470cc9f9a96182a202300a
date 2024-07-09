@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc2aaa02_17a66dce",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 1182,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-07-09T10:37:23Z",
+      "side": 1,
+      "message": "use_speaker ?",
+      "range": {
+        "startLine": 1182,
+        "startChar": 32,
+        "endLine": 1182,
+        "endChar": 46
+      },
+      "revId": "0a3f92612c5bcdaf83470cc9f9a96182a202300a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "936f0c3d_1f549051",
+        "filename": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-07-09T10:37:23Z",
+      "side": 1,
+      "message": "QQ if the user does not grant record audio permission, what would happen? Would crosvm crash or just run with broken microphone?\n\nWould we need to wait for the user to grant permission first, and then create the VM after permission is granted?",
+      "revId": "0a3f92612c5bcdaf83470cc9f9a96182a202300a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
