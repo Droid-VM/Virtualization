@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20130b54_347f71ca",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-07-09T15:17:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b346962b_79732d0d",
+      "range": {
+        "startLine": 587,
+        "startChar": 16,
+        "endLine": 588,
+        "endChar": 70
+      },
+      "revId": "0a3f92612c5bcdaf83470cc9f9a96182a202300a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59f81f3f_e12ca978",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-07-09T10:46:41Z",
       "side": 1,
       "message": "This method never fails, so why return a Result\u003c\u003e here, why not just `new(raw_config) -\u003e Self`?",
+      "range": {
+        "startLine": 148,
+        "startChar": 49,
+        "endLine": 148,
+        "endChar": 61
+      },
+      "revId": "0a3f92612c5bcdaf83470cc9f9a96182a202300a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13359197_dd8396b4",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-07-09T15:17:22Z",
+      "side": 1,
+      "message": "Done, Thanks!",
+      "parentUuid": "59f81f3f_e12ca978",
       "range": {
         "startLine": 148,
         "startChar": 49,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c310e85a_e4df2181",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 1182,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-07-09T15:17:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc2aaa02_17a66dce",
+      "range": {
+        "startLine": 1182,
+        "startChar": 32,
+        "endLine": 1182,
+        "endChar": 46
+      },
+      "revId": "0a3f92612c5bcdaf83470cc9f9a96182a202300a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "936f0c3d_1f549051",
@@ -83,6 +155,24 @@
       "writtenOn": "2024-07-09T10:37:23Z",
       "side": 1,
       "message": "QQ if the user does not grant record audio permission, what would happen? Would crosvm crash or just run with broken microphone?\n\nWould we need to wait for the user to grant permission first, and then create the VM after permission is granted?",
+      "revId": "0a3f92612c5bcdaf83470cc9f9a96182a202300a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0d2db3f_183510b7",
+        "filename": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-07-09T15:17:22Z",
+      "side": 1,
+      "message": "It turns out to just run with broken microphone. So I think there is no need to wait for the permission.",
+      "parentUuid": "936f0c3d_1f549051",
       "revId": "0a3f92612c5bcdaf83470cc9f9a96182a202300a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
