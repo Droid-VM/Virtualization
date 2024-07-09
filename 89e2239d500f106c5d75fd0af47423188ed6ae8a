@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e645c348_7261d169",
+        "filename": "tests/ferrochrome/ferrochrome.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-07-09T05:08:26Z",
+      "side": 1,
+      "message": "Does it cause modifying the screen state as `ON_LOCKED`? In this loop, it seems `try_unlock` is incremented when the screen state is `ON_LOCKED`. If screen state won\u0027t be changed, we would be in infinite loop.",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 45
+      },
+      "revId": "89e2239d500f106c5d75fd0af47423188ed6ae8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
