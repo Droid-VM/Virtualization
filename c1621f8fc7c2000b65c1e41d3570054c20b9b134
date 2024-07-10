@@ -26,6 +26,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d4e8423d_6889083d",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-10T20:50:44Z",
+      "side": 1,
+      "message": "Question: should we also make this `p.imagePath \u003d\u003d null ? \"\" : p.imagePath`?\n\nIf so, what about do this in constructor for both `Disk` and `Partition`?",
+      "range": {
+        "startLine": 215,
+        "startChar": 40,
+        "endLine": 215,
+        "endChar": 51
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "534d5524_ae8c09e2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+              "range": {
+                "startLine": 215,
+                "startChar": 0,
+                "endLine": 216,
+                "endChar": 0
+              },
+              "replacement": "                    partitionImages.add(p.imagePath \u003d\u003d null ? \"\" : p.imagePath);\n"
+            },
+            {
+              "path": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+              "range": {
+                "startLine": 316,
+                "startChar": 0,
+                "endLine": 317,
+                "endChar": 0
+              },
+              "replacement": "            this.imagePath \u003d imagePath \u003d\u003d null ? \"\" : imagePath;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c1621f8fc7c2000b65c1e41d3570054c20b9b134",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b043ee99_d45fcb71",
         "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
         "patchSetId": 1
