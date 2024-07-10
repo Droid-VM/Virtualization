@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da968f69_00cdde76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-10T12:00:53Z",
+      "side": 1,
+      "message": "Hi,\n\nCould you please take another look at the cl?\n\nI have updated the test to perform the DICE chain validation in the host rather than in the VM payload, as we do not have access to the libcrypto within the payload.",
+      "revId": "68cb666ac41775d4e02ff98edba7e90060726915",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
