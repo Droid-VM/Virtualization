@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea4bc598_5ffee581",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-10T20:45:52Z",
+      "side": 1,
+      "message": "nit; creating `Disk#from()`, `Disk#toPersistableBundle()`, `Partition#from()`, `Partition#toPersitableBundle()` look more fit with other configs, but we can do so in another CL.",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 0
+      },
+      "revId": "c1621f8fc7c2000b65c1e41d3570054c20b9b134",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b043ee99_d45fcb71",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-10T20:45:52Z",
+      "side": 1,
+      "message": "minor suggestion, you can ignore) What about this to prevent double copy?\n\n```suggestion\n                String imagePath \u003d disks[i].imagePath;\n                images[i] \u003d imagePath \u003d\u003d null ? \"\" : imagePath;\n\n                int partition_count \u003d disk[i].getPartitions();\n                String[] partitionLabels \u003d new String[partition_cnt];\n                String[] partitionImages \u003d new String[partition_cnt];\n                boolean[] partitionWritables \u003d new boolean[partition_cnt];\n                for (int j \u003d 0; j \u003c partition_count; j++) {\n                    Partition p \u003d disk[i].getPartitions().get(j);\n                    partitionLabels[j] \u003d p.name;\n                    partitionImages[j] \u003d p.imagePath;\n                    partitionWritables[j] \u003d p.writable;\n                }\n                pb.putStringArray(KEY_PARTITION_LABELS + i, partitionLabels);\n                pb.putStringArray(KEY_PARTITION_IMAGES + i, partitionImages);\n                pb.putBooleanArray(KEY_PARTITION_WRITABLES + i, partitionWritables);\n            }\n```",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 0
+      },
+      "revId": "c1621f8fc7c2000b65c1e41d3570054c20b9b134",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "031d134d_77cba497",
+        "filename": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-10T20:45:52Z",
+      "side": 1,
+      "message": "`writable \u0026\u0026 partition.optBoolean(\"writable\", false)`?",
+      "range": {
+        "startLine": 145,
+        "startChar": 56,
+        "endLine": 145,
+        "endChar": 96
+      },
+      "revId": "c1621f8fc7c2000b65c1e41d3570054c20b9b134",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
