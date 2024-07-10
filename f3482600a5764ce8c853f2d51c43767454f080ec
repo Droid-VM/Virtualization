@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef5155b4_53cbf033",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-07-10T11:41:14Z",
+      "side": 0,
+      "message": "We still need to check protected mode is supported on the device before running a VM with mProtected set.",
+      "range": {
+        "startLine": 646,
+        "startChar": 8,
+        "endLine": 646,
+        "endChar": 34
+      },
+      "revId": "f3482600a5764ce8c853f2d51c43767454f080ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "510e5bf1_f177e481",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-07-10T11:41:14Z",
+      "side": 0,
+      "message": "Same as the other comment - we need to check that device is capable of the protected support. The TestDevice class does not do it.\n\nhttps://source.corp.google.com/piper///depot/google3/third_party/java_src/tradefederation_core/tools/tradefederation/core/src/com/android/tradefed/device/TestDevice.java;l\u003d3241?q\u003dMicrodroidBuilder",
+      "range": {
+        "startLine": 748,
+        "startChar": 8,
+        "endLine": 748,
+        "endChar": 34
+      },
+      "revId": "f3482600a5764ce8c853f2d51c43767454f080ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4886f4a3_5fbdf0e8",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 830,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-07-10T11:41:14Z",
+      "side": 0,
+      "message": "Ditto",
+      "range": {
+        "startLine": 830,
+        "startChar": 8,
+        "endLine": 830,
+        "endChar": 34
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d4b9c1b9_7daae36f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+              "range": {
+                "startLine": 830,
+                "startChar": 0,
+                "endLine": 831,
+                "endChar": 0
+              },
+              "replacement": "                    Long.toString(stat.getValue()));\n"
+            },
+            {
+              "path": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+              "range": {
+                "startLine": 840,
+                "startChar": 0,
+                "endLine": 841,
+                "endChar": 0
+              },
+              "replacement": "                        Long.toString(stat.getValue()));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f3482600a5764ce8c853f2d51c43767454f080ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

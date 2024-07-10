@@ -1,6 +1,46 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae903447_9a2bb13d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-07-10T11:41:14Z",
+      "side": 1,
+      "message": "Comments post merge - this patch adds tests that run protected VM on CF - which is not supported of cf86 targets.",
+      "revId": "10b466a524ce858b048360ac43b47fef305583c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa1cee1d_65079cc4",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-07-10T11:41:14Z",
+      "side": 1,
+      "message": "Maybe here you can add add assumeProtectedVm()",
+      "range": {
+        "startLine": 606,
+        "startChar": 0,
+        "endLine": 606,
+        "endChar": 12
+      },
+      "revId": "10b466a524ce858b048360ac43b47fef305583c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0292eeb3_a26e3b26",
