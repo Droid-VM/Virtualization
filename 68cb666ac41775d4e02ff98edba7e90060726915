@@ -39,6 +39,30 @@
       },
       "revId": "68cb666ac41775d4e02ff98edba7e90060726915",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e3c2cd9_22ac8ece",
+        "filename": "tests/testapk/src/native/hwtrust_jni.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-10T13:45:48Z",
+      "side": 1,
+      "message": "It parses the DICE chain, verifying all the fields conform to the DICE spec and validating the signatures. This function eventually calls into [Entry::verify_cbor_value()](https://cs.android.com/android/platform/superproject/main/+/main:tools/security/remote_provisioning/hwtrust/src/cbor/dice/entry.rs;l\u003d47;drc\u003ddd8a41940aea6ae52231c16e9fd5142e0dead6cb) to ensure that each Entry within the DICE chain is properly signed by the preceding subject\u0027s public key, confirming the validity of the DICE chain as a certificate chain.",
+      "parentUuid": "2bc32b1b_8ffcb606",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 64
+      },
+      "revId": "68cb666ac41775d4e02ff98edba7e90060726915",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
