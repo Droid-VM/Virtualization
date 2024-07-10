@@ -184,6 +184,7 @@ impl Partition {
             image: Some(open_parcel_file(&self.path, self.writable)?),
             writable: self.writable,
             label: self.label.to_owned(),
+            guid: None,
         })
     }
 }
