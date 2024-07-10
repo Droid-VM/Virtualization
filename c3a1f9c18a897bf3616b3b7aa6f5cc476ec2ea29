@@ -1,0 +1,137 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e056ee2f_3398a691",
+        "filename": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-10T04:34:33Z",
+      "side": 1,
+      "message": "nit: no need",
+      "range": {
+        "startLine": 475,
+        "startChar": 32,
+        "endLine": 475,
+        "endChar": 56
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d1daf02f_c4a04efc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+              "range": {
+                "startLine": 475,
+                "startChar": 0,
+                "endLine": 476,
+                "endChar": 0
+              },
+              "replacement": "            mClipboardManager \u003d getSystemService(ClipboardManager.class);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c3a1f9c18a897bf3616b3b7aa6f5cc476ec2ea29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e21cbe4e_b010d56c",
+        "filename": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-10T04:34:33Z",
+      "side": 1,
+      "message": "return mClipboardManager here",
+      "range": {
+        "startLine": 476,
+        "startChar": 8,
+        "endLine": 476,
+        "endChar": 9
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6ac72faf_85a07fe8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+              "range": {
+                "startLine": 476,
+                "startChar": 0,
+                "endLine": 476,
+                "endChar": 0
+              },
+              "replacement": "            return mClipboardManager;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c3a1f9c18a897bf3616b3b7aa6f5cc476ec2ea29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07bb1b7d_00240ffe",
+        "filename": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-10T04:34:33Z",
+      "side": 1,
+      "message": "use the returned one",
+      "range": {
+        "startLine": 507,
+        "startChar": 13,
+        "endLine": 507,
+        "endChar": 30
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "669167e6_cb4a1be3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+              "range": {
+                "startLine": 507,
+                "startChar": 0,
+                "endLine": 508,
+                "endChar": 0
+              },
+              "replacement": "        ClipData clip \u003d mClipboardManager.getPrimaryClip();\n        if (clip \u003d\u003d null) {\n"
+            },
+            {
+              "path": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+              "range": {
+                "startLine": 511,
+                "startChar": 0,
+                "endLine": 512,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "c3a1f9c18a897bf3616b3b7aa6f5cc476ec2ea29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
