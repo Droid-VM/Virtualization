@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffd80709_801fc12b",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-11T01:51:47Z",
+      "side": 1,
+      "message": "ack",
+      "parentUuid": "ea4bc598_5ffee581",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 0
+      },
+      "revId": "c1621f8fc7c2000b65c1e41d3570054c20b9b134",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4e8423d_6889083d",
@@ -71,6 +95,30 @@
           ]
         }
       ],
+      "revId": "c1621f8fc7c2000b65c1e41d3570054c20b9b134",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2612e9c1_b8bbc53c",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-11T01:51:47Z",
+      "side": 1,
+      "message": "no we don\u0027t because we always specify partition image path (if there is any partition).",
+      "parentUuid": "d4e8423d_6889083d",
+      "range": {
+        "startLine": 215,
+        "startChar": 40,
+        "endLine": 215,
+        "endChar": 51
+      },
       "revId": "c1621f8fc7c2000b65c1e41d3570054c20b9b134",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
