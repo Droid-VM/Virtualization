@@ -146,6 +146,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "face48ae_05b214c3",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-11T03:27:59Z",
+      "side": 1,
+      "message": "I will handle that in a follow-up CL.",
+      "parentUuid": "b043ee99_d45fcb71",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 0
+      },
+      "revId": "c1621f8fc7c2000b65c1e41d3570054c20b9b134",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "031d134d_77cba497",
@@ -159,6 +183,30 @@
       "writtenOn": "2024-07-10T20:45:52Z",
       "side": 1,
       "message": "`writable \u0026\u0026 partition.optBoolean(\"writable\", false)`?",
+      "range": {
+        "startLine": 145,
+        "startChar": 56,
+        "endLine": 145,
+        "endChar": 96
+      },
+      "revId": "c1621f8fc7c2000b65c1e41d3570054c20b9b134",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78d5a613_fdd2e4dc",
+        "filename": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-11T03:27:59Z",
+      "side": 1,
+      "message": "makes sense. will fix that in a follow-up change.",
+      "parentUuid": "031d134d_77cba497",
       "range": {
         "startLine": 145,
         "startChar": 56,
