@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f84b927c_61667b0b",
+        "filename": "TEST_MAPPING",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-11T04:51:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2760fbd_45d76896",
+      "range": {
+        "startLine": 67,
+        "startChar": 5,
+        "endLine": 68,
+        "endChar": 5
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49b21401_774db57d",
@@ -71,6 +95,30 @@
       "writtenOn": "2024-07-09T13:34:57Z",
       "side": 1,
       "message": "I think we need to expand the README for the objective in b/349578050. This will help us demonstrate to partners how to serve a HAL in a VM effectively. The concept of IAccessor can be introduced later.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 35
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75147533_ee262e7d",
+        "filename": "demo_accessor/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-11T04:51:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49b21401_774db57d",
       "range": {
         "startLine": 1,
         "startChar": 0,
@@ -104,6 +152,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd174760_7ac094ce",
+        "filename": "demo_accessor/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-11T04:51:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0451f6e_980a74a3",
+      "range": {
+        "startLine": 6,
+        "startChar": 14,
+        "endLine": 6,
+        "endChar": 15
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67ac0732_05e7624e",
@@ -117,6 +189,30 @@
       "writtenOn": "2024-07-09T13:34:57Z",
       "side": 1,
       "message": "Why not calling directly `adb install $ANDROID_PRODUCT_OUT/system_ext/com.android.virt.accessor_demo.apex` here?",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 93
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "864ae152_a818ead8",
+        "filename": "demo_accessor/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-11T04:51:53Z",
+      "side": 1,
+      "message": "Because you can\u0027t `adb install` an apex which hasn\u0027t been installed before.\n\nError:\n\n```\njaewan@jaewan:/usr/local/google/home/jaewan_secondary/internal-master/packages/modules/Virtualization$ adb install /usr/local/google/home/jaewan_secondary/internal-master/out/target/product/shiba/system_ext/apex/com.android.virt.accessor_demo.apex\nPerforming Streamed Install\nadb: failed to install /usr/local/google/home/jaewan_secondary/internal-master/out/target/product/shiba/system_ext/apex/com.android.virt.accessor_demo.apex: Error [-23] [INSTALL_FAILED_PACKAGE_CHANGED: Attempting to install new APEX package com.android.virt.accessor_demo]\n```\n\nIt\u0027s indirectly documented here already below.",
+      "parentUuid": "67ac0732_05e7624e",
       "range": {
         "startLine": 26,
         "startChar": 0,
@@ -150,6 +246,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c49f072_8ade7365",
+        "filename": "demo_accessor/accessor/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-11T04:51:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88585579_0c795f62",
+      "range": {
+        "startLine": 57,
+        "startChar": 4,
+        "endLine": 57,
+        "endChar": 15
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b906c08b_e43addf9",
@@ -163,6 +283,30 @@
       "writtenOn": "2024-07-09T13:34:57Z",
       "side": 1,
       "message": "`bail!`? The android rust guide recommends to use `bail!` over `Err(anyhow!` actually [1].\n\n[1] http://docs/document/d/1HyXNRQImaYUVmeq1Z_Ez4vxXlCIQxDKaWo4-BZ75j9Y?tab\u003dt.0#heading\u003dh.bjrh3yw9ntpz",
+      "range": {
+        "startLine": 55,
+        "startChar": 15,
+        "endLine": 55,
+        "endChar": 25
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9401d24_0e09c7a7",
+        "filename": "demo_accessor/accessor/src/run.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-11T04:51:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b906c08b_e43addf9",
       "range": {
         "startLine": 55,
         "startChar": 15,
@@ -196,6 +340,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d742dac4_64cc8abf",
+        "filename": "demo_accessor/accessor/src/run.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-11T04:51:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d973e1c8_3bd9d392",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 36
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "412bd682_10ef9f12",
@@ -209,6 +377,30 @@
       "writtenOn": "2024-07-09T13:34:57Z",
       "side": 1,
       "message": "Why not `info` ?",
+      "range": {
+        "startLine": 154,
+        "startChar": 8,
+        "endLine": 154,
+        "endChar": 13
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "021e0a76_6bf4cbc4",
+        "filename": "demo_accessor/accessor/src/run.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-11T04:51:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "412bd682_10ef9f12",
       "range": {
         "startLine": 154,
         "startChar": 8,
@@ -242,6 +434,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26c94fe7_6ebffbb0",
+        "filename": "demo_accessor/accessor/src/run.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-11T04:51:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74b3acb8_e1caa414",
+      "range": {
+        "startLine": 158,
+        "startChar": 8,
+        "endLine": 158,
+        "endChar": 13
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb4b0bad_aab4ecdb",
@@ -265,6 +481,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e10bc3b5_ea5f5447",
+        "filename": "demo_accessor/accessor_vm/AndroidManifest.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-11T04:51:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb4b0bad_aab4ecdb",
+      "range": {
+        "startLine": 17,
+        "startChar": 4,
+        "endLine": 19,
+        "endChar": 0
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bcbd2d2a_f8a07a13",
@@ -278,6 +518,30 @@
       "writtenOn": "2024-07-09T13:34:57Z",
       "side": 1,
       "message": "Do we need this? The struct name doesn\u0027t need to be snake case anyway.",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 24
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57efa9cc_2b8ac327",
+        "filename": "demo_accessor/accessor_vm/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-11T04:51:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bcbd2d2a_f8a07a13",
       "range": {
         "startLine": 65,
         "startChar": 0,
@@ -313,6 +577,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c87e4784_ef3907c4",
+        "filename": "demo_accessor/apex/accessor_demo.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-11T04:51:53Z",
+      "side": 1,
+      "message": "Works for me, but then what about just taking `\u003caccessor\u003etrue\u003c/accessor\u003e` and generate name by joining `android.os.IAccessor` and `fqname`?",
+      "parentUuid": "60487d4c_d8c8aad8",
+      "range": {
+        "startLine": 22,
+        "startChar": 18,
+        "endLine": 22,
+        "endChar": 52
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5dfaef89_ce4c3b70",
         "filename": "demo_accessor/apex/accessor_demo.xml",
         "patchSetId": 6
@@ -324,6 +612,30 @@
       "writtenOn": "2024-07-09T13:34:57Z",
       "side": 1,
       "message": "nit: add a newline at the end of the file?",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 11
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92b33ef1_24e5280a",
+        "filename": "demo_accessor/apex/accessor_demo.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-11T04:51:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5dfaef89_ce4c3b70",
       "range": {
         "startLine": 24,
         "startChar": 10,
@@ -357,6 +669,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c2e2d15_cd92b090",
+        "filename": "demo_accessor/test/Android.bp",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-11T04:51:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6074253_458e0ef1",
+      "range": {
+        "startLine": 23,
+        "startChar": 23,
+        "endLine": 23,
+        "endChar": 30
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ffd62d28_2d4e28db",
@@ -370,6 +706,30 @@
       "writtenOn": "2024-07-09T13:34:57Z",
       "side": 1,
       "message": "How does this configuration work for rust_test?",
+      "range": {
+        "startLine": 38,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 30
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc1c3208_6102af2b",
+        "filename": "demo_accessor/test/Android.bp",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-11T04:51:53Z",
+      "side": 1,
+      "message": "It works the same with cc targets -- sometimes soong complains to prepare both `arm` and `arm64`, and this fixes to prepare only one.",
+      "parentUuid": "ffd62d28_2d4e28db",
       "range": {
         "startLine": 38,
         "startChar": 4,
@@ -403,6 +763,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f770d7d2_5d4ed86c",
+        "filename": "demo_accessor/test/AndroidTest.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-11T04:51:53Z",
+      "side": 1,
+      "message": "You can\u0027t install an apex if it hasn\u0027t been installed.",
+      "parentUuid": "5180196f_51652ce9",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 134
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78c56a10_0ebd9614",
@@ -426,6 +810,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a13053f_dc5755fc",
+        "filename": "demo_accessor/test/src/test.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-11T04:51:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78c56a10_0ebd9614",
+      "range": {
+        "startLine": 39,
+        "startChar": 3,
+        "endLine": 39,
+        "endChar": 36
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4490cbf4_6d368401",
@@ -439,6 +847,30 @@
       "writtenOn": "2024-07-09T13:34:57Z",
       "side": 1,
       "message": "Can we change this call to `check_interface` ? That API should also work.\n\nWe can also check that `binder::get_interface` also works",
+      "range": {
+        "startLine": 41,
+        "startChar": 19,
+        "endLine": 41,
+        "endChar": 30
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee36c7b8_7c9b2e01",
+        "filename": "demo_accessor/test/src/test.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-11T04:51:53Z",
+      "side": 1,
+      "message": "Tried to all get_interface, and got `NAME_NOT_FOUND`.\n\nsee: go/paste/6089480559919104\n\nCould you take a look at the crash above?",
+      "parentUuid": "4490cbf4_6d368401",
       "range": {
         "startLine": 41,
         "startChar": 19,
