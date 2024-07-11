@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efbe8b48_225ec771",
+        "filename": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-07-11T04:28:07Z",
+      "side": 1,
+      "message": "I think you should use try-with-resources here, otherwise the stream might be left open longer than expected.\n\n_AutoClose_OutputStream only auto closes the wrapped pfd, but the stream itself is not \"auto closed\", you still need to close it yourself. You can use try-with-resource to \"auto close\" the AutoCloseOutputStream, and AutoCloseOutputStream would clean up the pfd when it gets closed.",
+      "range": {
+        "startLine": 523,
+        "startChar": 8,
+        "endLine": 524,
+        "endChar": 13
+      },
+      "revId": "3a8a85a3695183e4de7eac73bbe7addf98ab7841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
