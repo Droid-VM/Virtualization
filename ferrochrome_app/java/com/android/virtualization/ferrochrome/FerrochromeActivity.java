@@ -18,9 +18,12 @@ package com.android.virtualization.ferrochrome;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemProperties;
@@ -48,15 +51,18 @@ public class FerrochromeActivity extends Activity {
     ExecutorService executorService = Executors.newSingleThreadExecutor();
     private static final String TAG = "FerrochromeActivity";
     private static final String ACTION_VM_LAUNCHER = "android.virtualization.VM_LAUNCHER";
-    private static final String FERROCHROME_VERSION = "R128-15926.0.0";
     private static final String EXTERNAL_STORAGE_DIR =
             Environment.getExternalStorageDirectory().getPath() + File.separator;
-    private static final Path IMAGE_PATH =
-            Path.of(EXTERNAL_STORAGE_DIR + "chromiumos_test_image.bin");
     private static final Path IMAGE_VERSION_INFO =
             Path.of(EXTERNAL_STORAGE_DIR + "ferrochrome_image_version");
     private static final Path VM_CONFIG_PATH = Path.of(EXTERNAL_STORAGE_DIR + "vm_config.json");
     private static final int REQUEST_CODE_VMLAUNCHER = 1;
+    private static final Path IMAGE_PATH =
+            Path.of(EXTERNAL_STORAGE_DIR + "chromiumos_test_image.bin");
+
+    private String mImageVersion;
+    private String mImageTarXzUri;
+    private String mImageFileName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,15 +84,24 @@ public class FerrochromeActivity extends Activity {
         ActivityManager am = getSystemService(ActivityManager.class);
         am.killBackgroundProcesses(resolveInfos.get(0).activityInfo.packageName);
 
+        Resources res = getResources();
+        mImageVersion = res.getString(R.string.config_ferrochrome_image_version);
+        mImageTarXzUri = res.getString(R.string.config_ferrochrome_image_tar_xz_uri);
+        mImageFileName = res.getString(R.string.config_ferrochrome_image_file_name);
+
+        Log.d(TAG, "Image version: " + mImageVersion);
+        Log.d(TAG, "Image .tar.gz: " + mImageTarXzUri);
+        Log.d(TAG, "Image filename: " + mImageFileName);
+
+        String imageFileName = res.getString(R.string.config_ferrochrome_image_file_name);
+        Path imagePath = Path.of(EXTERNAL_STORAGE_DIR + imageFileName);
+
         executorService.execute(
                 () -> {
-                    if (Files.notExists(IMAGE_PATH)
-                            || !FERROCHROME_VERSION.equals(getVersionInfo())) {
+                    if (Files.notExists(imagePath) || isVersionChanged()) {
                         updateStatus("Starting first-time setup.");
-                        updateStatus(
-                                "Downloading Ferrochrome image. This can take about 5 to 10"
-                                        + " minutes, depending on your network speed.");
-                        if (download(FERROCHROME_VERSION)) {
+                        updateStatus("Preparing Ferrochrome image..");
+                        if (prepareImage()) {
                             updateStatus("Done.");
                         } else {
                             updateStatus(
@@ -138,40 +153,93 @@ public class FerrochromeActivity extends Activity {
         }
     }
 
-    private String getVersionInfo() {
+    private boolean isVersionChanged() {
+        String installedVersion;
         try {
-            return new String(Files.readAllBytes(IMAGE_VERSION_INFO), StandardCharsets.UTF_8);
+            installedVersion =
+                    new String(Files.readAllBytes(IMAGE_VERSION_INFO), StandardCharsets.UTF_8);
         } catch (IOException e) {
-            return null;
+            return true;
         }
+        Log.d(TAG, "Version info, old=" + installedVersion + ", new=" + mImageVersion);
+        return !mImageVersion.equals(installedVersion);
     }
 
-    private boolean updateVersionInfo(String version) {
+    private boolean updateVersionInfo() {
         try {
-            Files.write(IMAGE_VERSION_INFO, version.getBytes(StandardCharsets.UTF_8));
+            Files.write(IMAGE_VERSION_INFO, mImageVersion.getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {
             Log.d(TAG, e.toString());
         }
         return true;
     }
 
-    private boolean download(String version) {
-        String urlString =
-                "https://storage.googleapis.com/chromiumos-image-archive/ferrochrome-public/"
-                        + version
-                        + "/chromiumos_test_image.tar.xz";
-        try (InputStream is = (new URL(urlString)).openStream();
-                XZCompressorInputStream xz = new XZCompressorInputStream(is);
+    private boolean prepareImage() {
+        Uri uri = Uri.parse(mImageTarXzUri);
+
+        switch (uri.getScheme()) {
+            case "http":
+            case "https":
+                try (InputStream is = (new URL(mImageTarXzUri)).openStream()) {
+                    copyImage(is);
+                } catch (Exception e) {
+                    updateStatus(e.toString());
+                    return false;
+                }
+                break;
+            case ContentResolver.SCHEME_ANDROID_RESOURCE:
+            case ContentResolver.SCHEME_CONTENT:
+            case ContentResolver.SCHEME_FILE:
+                ContentResolver resolver = getContentResolver();
+                try (InputStream is = resolver.openInputStream(uri)) {
+                    copyImage(is);
+                } catch (Exception e) {
+                    updateStatus(e.toString());
+                    return false;
+                }
+                break;
+            case "assets":
+                String packageName = uri.getAuthority();
+                Resources res = null;
+                try {
+                    res = getPackageManager().getResourcesForApplication(packageName);
+                } catch (Exception e) {
+                    Log.e(TAG, "Failed to get application resource", e);
+                } finally {
+                    if (res == null) {
+                        updateStatus(
+                                "Failed to access package containing Ferrochrome image, "
+                                        + "package="
+                                        + packageName);
+                        return false;
+                    }
+                }
+                try (InputStream is = res.getAssets().open(uri.getPath())) {
+                    copyImage(is);
+                } catch (Exception e) {
+                    updateStatus(e.toString());
+                    return false;
+                }
+                break;
+            default:
+                updateStatus("Unsupported URI of image.tar.xz, uri=" + mImageTarXzUri);
+                return false;
+        }
+        return true;
+    }
+
+    private boolean copyImage(InputStream is) {
+        try (XZCompressorInputStream xz = new XZCompressorInputStream(is);
                 TarArchiveInputStream tar = new TarArchiveInputStream(xz)) {
             TarArchiveEntry entry;
             while ((entry = tar.getNextTarEntry()) != null) {
-                if (!entry.getName().contains("chromiumos_test_image.bin")) {
+                if (!entry.getName().contains(mImageFileName)) {
                     continue;
                 }
                 updateStatus("copy " + entry.getName() + " start");
                 Files.copy(tar, IMAGE_PATH, StandardCopyOption.REPLACE_EXISTING);
                 updateStatus("copy " + entry.getName() + " done");
-                updateVersionInfo(version);
+                updateVersionInfo();
                 break;
             }
         } catch (Exception e) {

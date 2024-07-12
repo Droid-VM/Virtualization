@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2024 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+    <!-- Ferrochrome image version. Used to compare with installed version. -->
+    <string name="config_ferrochrome_image_version" translatable="false">R128-15926.0.0</string>
+    <!-- Ferrochrome image tar.xz URI. It can be either remote file (http, https), local file/resources, -->
+    <!-- or an asset with format assets://{package_name}/{path_to_the_image.bin.tar.xz} -->
+    <string name="config_ferrochrome_image_tar_xz_uri" translatable="false">https://storage.googleapis.com/chromiumos-image-archive/ferrochrome-public/R128-15926.0.0/chromiumos_test_image.tar.xz"</string>
+    <!-- Ferrochrome file name to be extracted from the image.tar.gz -->
+    <string name="config_ferrochrome_image_file_name" translatable="false">chromiumos_test_image.bin</string>
+</resources>
