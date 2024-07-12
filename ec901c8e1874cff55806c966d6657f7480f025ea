@@ -22,6 +22,30 @@
       },
       "revId": "ec901c8e1874cff55806c966d6657f7480f025ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d94fb9cf_09e4f351",
+        "filename": "vm_payload/src/injector.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-07-12T15:48:06Z",
+      "side": 1,
+      "message": "Yes, it could be a rust function that is called manually in the VM payload process, but I think in-general we don\u0027t want to have to make the payload process call something special when it\u0027s in the VM.\n\nThis C++ code makes it so no one has to explicitly call the method - they get it just by linking to the library.",
+      "parentUuid": "7699341d_879aa488",
+      "range": {
+        "startLine": 35,
+        "startChar": 12,
+        "endLine": 35,
+        "endChar": 51
+      },
+      "revId": "ec901c8e1874cff55806c966d6657f7480f025ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
