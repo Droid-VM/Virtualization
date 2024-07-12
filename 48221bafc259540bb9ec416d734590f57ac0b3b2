@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a8108b5_c2021532",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-12T14:36:01Z",
+      "side": 1,
+      "message": "Rest of the changes LGTM. The client-facing API part seems to be missing though. If you want to handle it as a separate CL, that works for me. Let me know.",
+      "revId": "48221bafc259540bb9ec416d734590f57ac0b3b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fa96a83_64abed01",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-12T14:36:01Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we make it possible for clients to implement this part? i.e. I thought we would add a callback method to `VirtualMachineCallback` and call it when low on memory. \n\nIn addition, we need to expose setMemoryBalloon (or similar) to the clients.",
+      "range": {
+        "startLine": 272,
+        "startChar": 0,
+        "endLine": 306,
+        "endChar": 13
+      },
+      "revId": "48221bafc259540bb9ec416d734590f57ac0b3b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
