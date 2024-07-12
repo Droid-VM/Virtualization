@@ -25,6 +25,7 @@ import android.Manifest.permission;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Intent;
 import android.crosvm.ICrosvmAndroidDisplayService;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
@@ -257,8 +258,34 @@ public class MainActivity extends Activity {
     }
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        // TODO: Validate URL schema
+        // TODO: Check intent action
+        String text = intent.getStringExtra(Intent.EXTRA_TEXT);
+        if (text != null) {
+            mExecutorService.execute(
+                    () -> {
+                        ParcelFileDescriptor pfd = connectClipboardSharingServer();
+                        if (pfd == null) {
+                            Log.d(TAG, "file descriptor of ClipboardSharingServer is null");
+                            return;
+                        }
+                        try (OutputStream stream = new AutoCloseOutputStream(pfd)) {
+                            stream.write(
+                                    constructClipboardHeader(OPEN_URL, text.getBytes().length));
+                            stream.write(text.getBytes());
+                            Log.d(TAG, "successfully sent URL to the VM");
+                        } catch (IOException e) {
+                            Log.e(TAG, "failed to send URL to the VM", e);
+                        }
+                    });
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // TODO: Check intent action
         checkAndRequestRecordAudioPermission();
         mExecutorService = Executors.newCachedThreadPool();
         try {
@@ -501,6 +528,7 @@ public class MainActivity extends Activity {
     private static final byte READ_CLIPBOARD_FROM_VM = 0;
     private static final byte WRITE_CLIPBOARD_TYPE_EMPTY = 1;
     private static final byte WRITE_CLIPBOARD_TYPE_TEXT_PLAIN = 2;
+    private static final byte OPEN_URL = 3;
 
     private ClipboardManager getClipboardManager() {
         if (mClipboardManager == null) {
