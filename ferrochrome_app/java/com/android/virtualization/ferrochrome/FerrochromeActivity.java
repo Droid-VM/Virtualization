@@ -65,7 +65,7 @@ public class FerrochromeActivity extends Activity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         // Find VM Launcher
-        Intent intent = new Intent(ACTION_VM_LAUNCHER);
+        Intent intent = new Intent(ACTION_VM_LAUNCHER).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PackageManager pm = getPackageManager();
         List<ResolveInfo> resolveInfos =
                 pm.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
