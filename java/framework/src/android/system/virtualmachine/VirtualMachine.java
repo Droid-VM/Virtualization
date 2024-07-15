@@ -441,7 +441,6 @@ public class VirtualMachine implements AutoCloseable {
         mInstanceFilePath = new File(thisVmDir, INSTANCE_IMAGE_FILE);
         mIdsigFilePath = new File(thisVmDir, IDSIG_FILE);
         mExtraApks = setupExtraApks(context, config, thisVmDir);
-        mMemoryManagementCallbacks = new MemoryManagementCallbacks();
         mContext = context;
         mEncryptedStoreFilePath =
                 (config.isEncryptedStorageEnabled())
@@ -451,6 +450,14 @@ public class VirtualMachine implements AutoCloseable {
         mVmOutputCaptured = config.isVmOutputCaptured();
         mVmConsoleInputSupported = config.isVmConsoleInputSupported();
         mConnectVmConsole = config.isConnectVmConsole();
+
+        VirtualMachineCustomImageConfig customImageConfig;
+        customImageConfig = config.getCustomImageConfig();
+        if (customImageConfig == null || customImageConfig.useAutoMemoryBalloon()) {
+            mMemoryManagementCallbacks = new MemoryManagementCallbacks();
+        } else {
+            mMemoryManagementCallbacks = null;
+        }
     }
 
     /**
@@ -820,7 +827,9 @@ public class VirtualMachine implements AutoCloseable {
      */
     @GuardedBy("mLock")
     private void dropVm() {
-        mContext.unregisterComponentCallbacks(mMemoryManagementCallbacks);
+        if (mMemoryManagementCallbacks != null) {
+            mContext.unregisterComponentCallbacks(mMemoryManagementCallbacks);
+        }
         mVirtualMachine = null;
     }
 
@@ -1166,6 +1175,50 @@ public class VirtualMachine implements AutoCloseable {
                         new InputEvent(EV_SYN, SYN_REPORT, 0)));
     }
 
+    /** @hide */
+    public long getMemoryBalloon() {
+        long bytes = 0;
+
+        synchronized (mLock) {
+            VirtualMachineCustomImageConfig customImageConfig;
+            customImageConfig = mConfig.getCustomImageConfig();
+            if (customImageConfig == null || customImageConfig.useAutoMemoryBalloon()) {
+                Log.d(TAG, "Auto balloon enabled in getMemoryBalloon");
+                return bytes;
+            }
+
+            try {
+                if (mVirtualMachine != null) {
+                    bytes = mVirtualMachine.getMemoryBalloon();
+                }
+            } catch (RemoteException e) {
+                Log.d(TAG, "Cannot getMemoryBalloon", e);
+            }
+        }
+
+        return bytes;
+    }
+
+    /** @hide */
+    public void getMemoryBalloon(long bytes) {
+        synchronized (mLock) {
+            VirtualMachineCustomImageConfig customImageConfig;
+            customImageConfig = mConfig.getCustomImageConfig();
+            if (customImageConfig == null || customImageConfig.useAutoMemoryBalloon()) {
+                Log.d(TAG, "Auto balloon enabled in setMemoryBalloon");
+                return;
+            }
+
+            try {
+                if (mVirtualMachine != null) {
+                    mVirtualMachine.setMemoryBalloon(bytes);
+                }
+            } catch (RemoteException e) {
+                Log.d(TAG, "Cannot setMemoryBalloon", e);
+            }
+        }
+    }
+
     private boolean writeEventsToSock(ParcelFileDescriptor sock, List<InputEvent> evtList) {
         ByteBuffer byteBuffer =
                 ByteBuffer.allocate(8 /* (type: u16 + code: u16 + value: i32) */ * evtList.size());
@@ -1317,7 +1370,9 @@ public class VirtualMachine implements AutoCloseable {
                 mVirtualMachine =
                         service.createVm(vmConfigParcel, consoleOutFd, consoleInFd, mLogWriter);
                 mVirtualMachine.registerCallback(new CallbackTranslator(service));
-                mContext.registerComponentCallbacks(mMemoryManagementCallbacks);
+                if (mMemoryManagementCallbacks != null) {
+                    mContext.registerComponentCallbacks(mMemoryManagementCallbacks);
+                }
                 if (mConnectVmConsole) {
                     mVirtualMachine.setHostConsoleName(getHostConsoleName());
                 }
