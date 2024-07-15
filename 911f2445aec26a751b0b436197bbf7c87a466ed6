@@ -16,6 +16,41 @@
       "message": "I think we should submit this only after we updated the ferrochrome image version  right?\n\nex. https://android.googlesource.com/platform/packages/modules/Virtualization/+/002873d08dc3806b60e616a42c4ce2d11af1d326",
       "revId": "911f2445aec26a751b0b436197bbf7c87a466ed6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89bb0543_e4aac9fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-15T11:29:56Z",
+      "side": 1,
+      "message": "Prevent accidental submit before CrOS image is updated.",
+      "revId": "911f2445aec26a751b0b436197bbf7c87a466ed6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e09d420a_660bce3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-15T11:29:56Z",
+      "side": 1,
+      "message": "Uh, you\u0027re right. But could you wait for couple of days? Jiyong is working on booting CrOS with composite disk instead of using single image.bin. I\u0027ll let you know when it\u0027s available.",
+      "parentUuid": "938da4f4_c5c0736b",
+      "revId": "911f2445aec26a751b0b436197bbf7c87a466ed6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
