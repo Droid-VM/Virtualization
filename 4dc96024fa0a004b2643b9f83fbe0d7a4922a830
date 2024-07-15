@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ff3e1244_d9be4e83",
+        "filename": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-15T06:11:29Z",
+      "side": 1,
+      "message": "If we are going to use like this, we could just create a thread to run cursor handler and stop the thread explicitly. We don\u0027t have to executor service for that.",
+      "range": {
+        "startLine": 418,
+        "startChar": 36,
+        "endLine": 418,
+        "endChar": 62
+      },
+      "revId": "4dc96024fa0a004b2643b9f83fbe0d7a4922a830",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa38cc38_785e5fe9",
         "filename": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
         "patchSetId": 1
