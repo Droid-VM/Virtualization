@@ -16,6 +16,24 @@
       "message": "can we do that in the CI which build ferrochrome image?(not sure about that because this script uses sudo)",
       "revId": "ac7fc67349dd5b16ebc59d6c945cf5ed3bf74ef7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e52abf6_88fac773",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-15T05:50:26Z",
+      "side": 1,
+      "message": "root permission wouldn\u0027t be an issue -- CrOS always build on root.\n..but I\u0027m not sure whether we can built-in this logic to the CrOS CI server.\n\nClank team also have a script to push build artifact to playstore and submit to Android\u0027s internal git repo, so this looks OK for me.",
+      "parentUuid": "c237a6a9_608fc4d8",
+      "revId": "ac7fc67349dd5b16ebc59d6c945cf5ed3bf74ef7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
