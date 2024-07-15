@@ -260,7 +260,7 @@ public class DebugPolicyHostTests extends CustomPvmfwHostTestCaseBase {
         return getDevice()
                 .executeShellV2Command(
                         command,
-                        CONSOLE_OUTPUT_WAIT_MS,
+                        BOOT_COMPLETE_TIMEOUT_MS,
                         TimeUnit.MILLISECONDS,
                         /* retryAttempts= */ 0);
     }
