@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "000c452f_9185ae7b",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-16T13:59:25Z",
+      "side": 1,
+      "message": "minor question, you can just ack and submit: This is AOSP but go link is exclusively for Googlers. Could you just confirm that this is the temporal solution?\n\nPlus, what\u0027s the long term plan for AOSP version of ferrochrome app? Here\u0027s my ideas off the top of my head.\n  - Option 1: Users should prepare assets by themselves. Will add `README.md` with details.\n  - Option 2: AOSP ferrochrome app will automatically downloads, prepares partitions, and launches. --\u003e not sure whether it\u0027s doable..\n  - Option 3: Remove AOSP version completely -- `tests/ferrochrome/ferrochrome.sh` is enough for AVF verification and local development.\n\nI would vote for Option 3, because AOSP version of ferrochrome app have limited usages. But I\u0027d like to hear your opinion.",
+      "range": {
+        "startLine": 105,
+        "startChar": 63,
+        "endLine": 105,
+        "endChar": 81
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "adaa2b2d_12ec8648",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "ferrochrome_app/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
+              "range": {
+                "startLine": 105,
+                "startChar": 0,
+                "endLine": 106,
+                "endChar": 0
+              },
+              "replacement": "                updateStatus(\"ChromeOS image not found. Please go/try-ferrochrome-aosp\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b41470bd46e7f6ea8047a039db31c2f3e0e8600e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
