@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a834445_d3beebec",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1479,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2024-07-16T07:49:49Z",
+      "side": 1,
+      "message": "active looping doesn\u0027t seem the best idea?\nI\u0027d use an Handler and you\u0027d need to send messages to it to be offloaded to a background thread\nafaik the handler works like a FIFO so it\u0027d have the same properties of the queue\n\n\n```\nmHandlerThread \u003d new HandlerThread(\"ferrochrome input handler\");\nmHandlerThread.start();\n\nmBackgroundHandler \u003d new Handler(mHandlerThread.getLooper()) {\n    @Override\n    public void handleMessage(Message msg) {\n        switch (msg.what) {\n            case EVENT_TOUCH: { sendMultiTouchEventInternal(msg.obj) }\n            case EVENT_TOUCHPAD: {...}\n        }\n}\n\n```\n\nand for example in sendMouseEvent\n```\nMessage.obtain(mBackgroundHandler, EVENT_TOUCH, event).sendToTarget();\n```\n\nfeel free to move forward with this, just wanted to point out an alternative :)",
+      "range": {
+        "startLine": 1479,
+        "startChar": 0,
+        "endLine": 1479,
+        "endChar": 42
+      },
+      "revId": "0d56ba8e76225736cb322fd3be203d593c195aea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
