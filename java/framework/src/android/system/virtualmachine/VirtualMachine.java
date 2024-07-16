@@ -78,6 +78,7 @@ import android.system.virtualizationservice.VirtualMachineRawConfig;
 import android.system.virtualizationservice.VirtualMachineState;
 import android.util.JsonReader;
 import android.util.Log;
+import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
@@ -113,8 +114,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.zip.ZipFile;
@@ -174,6 +178,15 @@ public class VirtualMachine implements AutoCloseable {
     private ParcelFileDescriptor mMouseSock;
     private ParcelFileDescriptor mSwitchesSock;
     private ParcelFileDescriptor mTrackpadSock;
+
+    private enum InputEventType {
+        TOUCH,
+        MOUSE,
+        TRACKPAD
+    }
+
+    private BlockingQueue<Pair<InputEventType, MotionEvent>> mInputEventQueue =
+            new LinkedBlockingQueue<>();
 
     /**
      * Status of a virtual machine
@@ -332,6 +345,8 @@ public class VirtualMachine implements AutoCloseable {
     private final boolean mConnectVmConsole;
 
     private final Executor mConsoleExecutor = Executors.newSingleThreadExecutor();
+
+    private final ExecutorService mInputEventExecutor = Executors.newSingleThreadExecutor();
 
     /** The configuration that is currently associated with this VM. */
     @GuardedBy("mLock")
@@ -898,8 +913,7 @@ public class VirtualMachine implements AutoCloseable {
 
         // Handle input devices here
         List<InputDevice> inputDevices = new ArrayList<>();
-        if (vmConfig.getCustomImageConfig() != null
-                && rawConfig.displayConfig != null) {
+        if (vmConfig.getCustomImageConfig() != null && rawConfig.displayConfig != null) {
             if (vmConfig.getCustomImageConfig().useTouch()) {
                 ParcelFileDescriptor[] pfds = ParcelFileDescriptor.createSocketPair();
                 mTouchSock = pfds[0];
@@ -974,6 +988,17 @@ public class VirtualMachine implements AutoCloseable {
 
     /** @hide */
     public boolean sendMouseEvent(MotionEvent event) {
+        try {
+            mInputEventQueue.add(Pair.create(InputEventType.MOUSE, event));
+            return true;
+        } catch (Exception e) {
+            Log.e(TAG, e.toString());
+            return false;
+        }
+    }
+
+    /** @hide */
+    private boolean sendMouseEventInternal(MotionEvent event) {
         if (mMouseSock == null) {
             Log.d(TAG, "mMouseSock == null");
             return false;
@@ -1062,6 +1087,17 @@ public class VirtualMachine implements AutoCloseable {
 
     /** @hide */
     public boolean sendMultiTouchEvent(MotionEvent event) {
+        try {
+            mInputEventQueue.add(Pair.create(InputEventType.TOUCH, event));
+            return true;
+        } catch (Exception e) {
+            Log.e(TAG, e.toString());
+            return false;
+        }
+    }
+
+    /** @hide */
+    private boolean sendMultiTouchEventInternal(MotionEvent event) {
         if (mTouchSock == null) {
             Log.d(TAG, "mTouchSock == null");
             return false;
@@ -1148,6 +1184,17 @@ public class VirtualMachine implements AutoCloseable {
 
     /** @hide */
     public boolean sendTrackpadEvent(MotionEvent event) {
+        try {
+            mInputEventQueue.add(Pair.create(InputEventType.TRACKPAD, event));
+            return true;
+        } catch (Exception e) {
+            Log.e(TAG, e.toString());
+            return false;
+        }
+    }
+
+    /** @hide */
+    private boolean sendTrackpadEventInternal(MotionEvent event) {
         if (mTrackpadSock == null) {
             Log.d(TAG, "mTrackpadSock == null");
             return false;
@@ -1427,7 +1474,28 @@ public class VirtualMachine implements AutoCloseable {
                 } else if (mVmOutputCaptured) {
                     consoleOutFd = mConsoleOutWriter;
                 }
-
+                mInputEventExecutor.execute(
+                        () -> {
+                            while (true) {
+                                try {
+                                    Pair<InputEventType, MotionEvent> event =
+                                            mInputEventQueue.take();
+                                    switch (event.first) {
+                                        case TOUCH:
+                                            sendMultiTouchEventInternal(event.second);
+                                            break;
+                                        case TRACKPAD:
+                                            sendTrackpadEventInternal(event.second);
+                                            break;
+                                        case MOUSE:
+                                            sendMouseEventInternal(event.second);
+                                            break;
+                                    }
+                                } catch (Exception e) {
+                                    Log.e(TAG, e.toString());
+                                }
+                            }
+                        });
                 ParcelFileDescriptor consoleInFd = null;
                 if (mConnectVmConsole) {
                     consoleInFd = mPtyFd;
@@ -1687,6 +1755,7 @@ public class VirtualMachine implements AutoCloseable {
             try {
                 mVirtualMachine.stop();
                 dropVm();
+                mInputEventExecutor.shutdownNow();
             } catch (RemoteException e) {
                 throw e.rethrowAsRuntimeException();
             } catch (ServiceSpecificException e) {
