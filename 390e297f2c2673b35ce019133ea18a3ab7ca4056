@@ -601,6 +601,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "392c3f84_bfbe60b7",
+        "filename": "demo_accessor/apex/accessor_demo.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-16T15:04:00Z",
+      "side": 1,
+      "message": "I also thought about that option, but maybe it\u0027s more clear for users to define the name explicitly here?",
+      "parentUuid": "c87e4784_ef3907c4",
+      "range": {
+        "startLine": 22,
+        "startChar": 18,
+        "endLine": 22,
+        "endChar": 52
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5dfaef89_ce4c3b70",
         "filename": "demo_accessor/apex/accessor_demo.xml",
         "patchSetId": 6
@@ -895,6 +919,30 @@
       "side": 1,
       "message": "Typo: \u0027Tried to all get_interface, and got NAME_NOT_FOUND\u0027\n-\u003e \u0027Tried to test all, and got `NAME_NOT_FOUND` when calling `get_interface()`.",
       "parentUuid": "ee36c7b8_7c9b2e01",
+      "range": {
+        "startLine": 41,
+        "startChar": 19,
+        "endLine": 41,
+        "endChar": 30
+      },
+      "revId": "390e297f2c2673b35ce019133ea18a3ab7ca4056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bd32a55_d886414f",
+        "filename": "demo_accessor/test/src/test.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-16T15:04:00Z",
+      "side": 1,
+      "message": "That\u0027s WAI. Because the APIs `check_interface` or `get_interface` only retrieve an already running service, they will not start the service lazily as `wait_for_service`.\n\nFrom [1]:\n\n\u003e /// Retrieve an existing service for a particular interface. Returns\n/// `Err(StatusCode::NAME_NOT_FOUND)` immediately if the service is not available.\n\nWhat you did here is great, we call get_service after wait_for_service, so we are sure that get_service can return a valid service. Otherwise, if we call get_service first, the test becomes fragile as it can crash easily when the tests run in parallel.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:frameworks/native/libs/binder/rust/src/service.rs;l\u003d184;drc\u003d68f34bf241ec316ff92a3195aa3fa67faa1b1b1b",
+      "parentUuid": "4ff81c5c_998cb7d6",
       "range": {
         "startLine": 41,
         "startChar": 19,

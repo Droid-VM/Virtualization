@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6047b69_2e463b18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-16T15:04:00Z",
+      "side": 1,
+      "message": "Hi Steven, could you also take a look?",
+      "revId": "bc76bafa0ace775bba9d32785f486e8cf7418511",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59c2e4e4_186a9402",
+        "filename": "demo_accessor/accessor/src/accessor.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-16T15:04:00Z",
+      "side": 1,
+      "message": "Could you please add the bug http://b/353492849 here for Devin to find it easiy when he wants to move this to libbinder?",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 19
+      },
+      "revId": "bc76bafa0ace775bba9d32785f486e8cf7418511",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21398a8f_ebe81815",
+        "filename": "demo_accessor/apex/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-16T15:04:00Z",
+      "side": 1,
+      "message": "nit: This can be installed with `vintf_fragments` in apex directly.",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 0
+      },
+      "revId": "bc76bafa0ace775bba9d32785f486e8cf7418511",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4f45798_74a8e7c1",
+        "filename": "demo_accessor/test/AndroidTest.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-16T15:04:00Z",
+      "side": 1,
+      "message": "Could you add the bug id http://b/346763236 here?",
+      "range": {
+        "startLine": 45,
+        "startChar": 7,
+        "endLine": 45,
+        "endChar": 24
+      },
+      "revId": "bc76bafa0ace775bba9d32785f486e8cf7418511",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
