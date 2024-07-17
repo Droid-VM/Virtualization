@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5934437f_0efa0dd2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2024-07-17T10:30:11Z",
+      "side": 1,
+      "message": "Oh I didn\u0027t notice the use of BlockingQueue, nevermind then, will reword accordingly",
+      "parentUuid": "8cf0173d_5af94349",
+      "range": {
+        "startLine": 11,
+        "startChar": 12,
+        "endLine": 11,
+        "endChar": 40
+      },
+      "revId": "26126dbf0dbd7a70920ddb9377e165710e09b280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac80c27a_c24bdc40",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93995621_2199c732",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2024-07-17T10:30:11Z",
+      "side": 1,
+      "message": "Indeed, didn\u0027t notice the blocking part of take so I assumed it was _trying_ to extract the value and catch when there was no value...\ndone",
+      "parentUuid": "ac80c27a_c24bdc40",
+      "range": {
+        "startLine": 12,
+        "startChar": 20,
+        "endLine": 12,
+        "endChar": 31
+      },
+      "revId": "26126dbf0dbd7a70920ddb9377e165710e09b280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33e51f6e_2df55b37",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-07-17T10:19:54Z",
       "side": 1,
       "message": "this is not 100% correct. `sendToTarget` can fail or cause a runtime exception in certain cases.",
+      "range": {
+        "startLine": 17,
+        "startChar": 31,
+        "endLine": 17,
+        "endChar": 57
+      },
+      "revId": "26126dbf0dbd7a70920ddb9377e165710e09b280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5adc05dd_63738bdb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2024-07-17T10:30:11Z",
+      "side": 1,
+      "message": "uh that\u0027s news to me, reading the documentation didn\u0027t mention that, it should be problematic only if the looper isn\u0027t running or the queue is full (that\u0027d be another issue on its own)",
+      "parentUuid": "33e51f6e_2df55b37",
       "range": {
         "startLine": 17,
         "startChar": 31,
