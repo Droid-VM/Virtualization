@@ -1,6 +1,75 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cf0173d_5af94349",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-17T10:19:54Z",
+      "side": 1,
+      "message": "I don\u0027t understand this part. The `take` function is blocking. There will be no busy-loop waiting.",
+      "range": {
+        "startLine": 11,
+        "startChar": 12,
+        "endLine": 11,
+        "endChar": 40
+      },
+      "revId": "26126dbf0dbd7a70920ddb9377e165710e09b280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac80c27a_c24bdc40",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-17T10:19:54Z",
+      "side": 1,
+      "message": "In practice there won\u0027t be an exception because the queue was created with the capacity of int_max.",
+      "range": {
+        "startLine": 12,
+        "startChar": 20,
+        "endLine": 12,
+        "endChar": 31
+      },
+      "revId": "26126dbf0dbd7a70920ddb9377e165710e09b280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33e51f6e_2df55b37",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-17T10:19:54Z",
+      "side": 1,
+      "message": "this is not 100% correct. `sendToTarget` can fail or cause a runtime exception in certain cases.",
+      "range": {
+        "startLine": 17,
+        "startChar": 31,
+        "endLine": 17,
+        "endChar": 57
+      },
+      "revId": "26126dbf0dbd7a70920ddb9377e165710e09b280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6af7366b_b1163194",
@@ -14,6 +83,23 @@
       "writtenOn": "2024-07-17T09:27:33Z",
       "side": 1,
       "message": "not sure what you need to test, but this works",
+      "revId": "26126dbf0dbd7a70920ddb9377e165710e09b280",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ec3e843_219391a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-17T10:19:54Z",
+      "side": 1,
+      "message": "+2 as this is more typical way of passing messages across threads in Android, but this essentially is the same as the previous way.",
       "revId": "26126dbf0dbd7a70920ddb9377e165710e09b280",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
