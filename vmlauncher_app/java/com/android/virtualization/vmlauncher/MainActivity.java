@@ -352,7 +352,8 @@ public class MainActivity extends Activity {
                     if (mVirtualMachine == null) {
                         return false;
                     }
-                    return mVirtualMachine.sendMultiTouchEvent(event);
+                    mVirtualMachine.sendMultiTouchEvent(event);
+                    return true;
                 });
         surfaceView.requestUnbufferedDispatch(InputDevice.SOURCE_ANY);
         surfaceView.setOnCapturedPointerListener(
@@ -362,9 +363,11 @@ public class MainActivity extends Activity {
                     }
                     int eventSource = event.getSource();
                     if ((eventSource & InputDevice.SOURCE_CLASS_POSITION) != 0) {
-                        return mVirtualMachine.sendTrackpadEvent(event);
+                        mVirtualMachine.sendTrackpadEvent(event);
+                        return true;
                     }
-                    return mVirtualMachine.sendMouseEvent(event);
+                    mVirtualMachine.sendMouseEvent(event);
+                    return true;
                 });
         surfaceView
                 .getHolder()
