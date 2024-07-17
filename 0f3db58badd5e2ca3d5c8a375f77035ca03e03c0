@@ -16,6 +16,86 @@
       "message": "Now that I think about it that\u0027s even more wrong than before.",
       "revId": "0f3db58badd5e2ca3d5c8a375f77035ca03e03c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f1bd9fe_7bfaaaa6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2024-07-17T11:17:34Z",
+      "side": 1,
+      "message": "Might be easier to keep the current executor as queuing events isn\u0027t tied to the liveness of the thread...",
+      "revId": "0f3db58badd5e2ca3d5c8a375f77035ca03e03c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a54ad4e_e8d13ddb",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1787,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2024-07-17T11:17:34Z",
+      "side": 1,
+      "message": "this might not be enough since messages can still be sent to the handler.\nI think stop() can be called before we stop accepting events from the UI, so the try/catch play might still be needed as the thread looper will be dead and sendTarget will then throw.\nI\u0027m not entirely aware of the lifecycle of the VM class so this specific case might not be possible.",
+      "range": {
+        "startLine": 1787,
+        "startChar": 0,
+        "endLine": 1787,
+        "endChar": 39
+      },
+      "revId": "0f3db58badd5e2ca3d5c8a375f77035ca03e03c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ecd53cf_7be94e16",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1848,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2024-07-17T11:17:34Z",
+      "side": 1,
+      "message": "fyi the thread/executor handling is also missing from here",
+      "revId": "0f3db58badd5e2ca3d5c8a375f77035ca03e03c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b27c3e7_c68e5ae3",
+        "filename": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2024-07-17T11:17:34Z",
+      "side": 1,
+      "message": "since there\u0027s no feedback mechanism if the event was actually sent to the sock we\u0027re actually losing messages if they aren\u0027t captured by the VM (with or without this change)",
+      "range": {
+        "startLine": 355,
+        "startChar": 0,
+        "endLine": 355,
+        "endChar": 63
+      },
+      "revId": "0f3db58badd5e2ca3d5c8a375f77035ca03e03c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
