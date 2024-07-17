@@ -509,6 +509,7 @@ public class MainActivity extends Activity {
 
     private boolean writeClipboardToVm() {
         ClipboardManager clipboardManager = getClipboardManager();
+
         if (!clipboardManager.hasPrimaryClip()) {
             Log.d(TAG, "host device has no clipboard data");
             return true;
@@ -518,12 +519,14 @@ public class MainActivity extends Activity {
         ByteBuffer header =
                 constructClipboardHeader(
                         WRITE_CLIPBOARD_TYPE_TEXT_PLAIN, text.getBytes().length + 1);
+
         ParcelFileDescriptor pfd = connectClipboardSharingServer();
         if (pfd == null) {
             Log.d(TAG, "file descriptor of ClipboardSharingServer is null");
             return false;
         }
-        try (OutputStream stream = new AutoCloseOutputStream(pfd)) {
+        OutputStream stream = new AutoCloseOutputStream(pfd);
+        try {
             stream.write(header.array());
             stream.write(text.getBytes());
             stream.flush();
@@ -537,12 +540,14 @@ public class MainActivity extends Activity {
 
     private boolean readClipboardFromVm() {
         ByteBuffer request = constructClipboardHeader(READ_CLIPBOARD_FROM_VM, 0);
+
         ParcelFileDescriptor pfd = connectClipboardSharingServer();
         if (pfd == null) {
             Log.d(TAG, "file descriptor of ClipboardSharingServer is null");
             return false;
         }
-        try (OutputStream output = new AutoCloseOutputStream(pfd)) {
+        OutputStream output = new AutoCloseOutputStream(pfd);
+        try {
             output.write(request.array());
             output.flush();
             Log.d(TAG, "successfully send request to the VM for reading clipboard");
@@ -551,7 +556,8 @@ public class MainActivity extends Activity {
             return false;
         }
 
-        try (InputStream input = new AutoCloseInputStream(pfd)) {
+        InputStream input = new AutoCloseInputStream(pfd);
+        try {
             ByteBuffer header = ByteBuffer.wrap(input.readNBytes(8));
             header.order(ByteOrder.LITTLE_ENDIAN);
             switch (header.get(0)) {
