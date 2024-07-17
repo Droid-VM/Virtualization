@@ -87,6 +87,24 @@
       "parentUuid": "c76907f6_43adca8a",
       "revId": "4f55b6a1a7cdb2bbb076600d41671dd16bd71e39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5db8e41_5813e62d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-07-17T11:36:09Z",
+      "side": 1,
+      "message": "It\u0027s because KILL_ALL_BACKGROUND_PROCESSES is privileged permission, while MANAGE_EXTERNAL_STORAGE isn\u0027t. Thanks Luca!",
+      "parentUuid": "6df5b198_e48ba838",
+      "revId": "4f55b6a1a7cdb2bbb076600d41671dd16bd71e39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
