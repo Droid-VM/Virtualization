@@ -59,7 +59,10 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Binder;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.IBinder;
+import android.os.Message;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.ServiceSpecificException;
@@ -113,11 +116,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.zip.ZipFile;
@@ -178,14 +178,12 @@ public class VirtualMachine implements AutoCloseable {
     private ParcelFileDescriptor mSwitchesSock;
     private ParcelFileDescriptor mTrackpadSock;
 
-    private enum InputEventType {
-        TOUCH,
-        MOUSE,
-        TRACKPAD
-    }
+    private static final int MSG_MOUSE_EVENT = 0;
+    private static final int MSG_MULTI_TOUCH_EVENT = 1;
+    private static final int MSG_TRACKPAD_EVENT = 2;
 
-    private BlockingQueue<Pair<InputEventType, MotionEvent>> mInputEventQueue =
-            new LinkedBlockingQueue<>();
+    private HandlerThread mEventHandlerThread;
+    private Handler mEventHandler;
 
     /**
      * Status of a virtual machine
@@ -345,8 +343,6 @@ public class VirtualMachine implements AutoCloseable {
     private final boolean mConnectVmConsole;
 
     private final Executor mConsoleExecutor = Executors.newSingleThreadExecutor();
-
-    private ExecutorService mInputEventExecutor;
 
     /** The configuration that is currently associated with this VM. */
     @GuardedBy("mLock")
@@ -997,13 +993,8 @@ public class VirtualMachine implements AutoCloseable {
 
     /** @hide */
     public boolean sendMouseEvent(MotionEvent event) {
-        try {
-            mInputEventQueue.add(Pair.create(InputEventType.MOUSE, event));
-            return true;
-        } catch (Exception e) {
-            Log.e(TAG, e.toString());
-            return false;
-        }
+        Message msg = Message.obtain(mEventHandler, MSG_MOUSE_EVENT, event);
+        return msg.getTarget().sendMessage(msg);
     }
 
     /** @hide */
@@ -1096,13 +1087,8 @@ public class VirtualMachine implements AutoCloseable {
 
     /** @hide */
     public boolean sendMultiTouchEvent(MotionEvent event) {
-        try {
-            mInputEventQueue.add(Pair.create(InputEventType.TOUCH, event));
-            return true;
-        } catch (Exception e) {
-            Log.e(TAG, e.toString());
-            return false;
-        }
+        Message msg = Message.obtain(mEventHandler, MSG_MULTI_TOUCH_EVENT, event);
+        return msg.getTarget().sendMessage(msg);
     }
 
     /** @hide */
@@ -1193,13 +1179,8 @@ public class VirtualMachine implements AutoCloseable {
 
     /** @hide */
     public boolean sendTrackpadEvent(MotionEvent event) {
-        try {
-            mInputEventQueue.add(Pair.create(InputEventType.TRACKPAD, event));
-            return true;
-        } catch (Exception e) {
-            Log.e(TAG, e.toString());
-            return false;
-        }
+        Message msg = Message.obtain(mEventHandler, MSG_TRACKPAD_EVENT, event);
+        return msg.getTarget().sendMessage(msg);
     }
 
     /** @hide */
@@ -1523,29 +1504,27 @@ public class VirtualMachine implements AutoCloseable {
                 } else if (mVmOutputCaptured) {
                     consoleOutFd = mConsoleOutWriter;
                 }
-                mInputEventExecutor = Executors.newSingleThreadExecutor();
-                mInputEventExecutor.execute(
-                        () -> {
-                            while (true) {
-                                try {
-                                    Pair<InputEventType, MotionEvent> event =
-                                            mInputEventQueue.take();
-                                    switch (event.first) {
-                                        case TOUCH:
-                                            sendMultiTouchEventInternal(event.second);
-                                            break;
-                                        case TRACKPAD:
-                                            sendTrackpadEventInternal(event.second);
-                                            break;
-                                        case MOUSE:
-                                            sendMouseEventInternal(event.second);
-                                            break;
-                                    }
-                                } catch (Exception e) {
-                                    Log.e(TAG, e.toString());
-                                }
-                            }
-                        });
+                mEventHandlerThread = new HandlerThread("ferrochrome input handler");
+                mEventHandlerThread.start();
+
+                mEventHandler = new Handler(mEventHandlerThread.getLooper()) {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        switch (msg.what) {
+                            case MSG_MOUSE_EVENT:
+                                sendMouseEventInternal((MotionEvent)msg.obj);
+                                break;
+                            case MSG_MULTI_TOUCH_EVENT:
+                                sendMultiTouchEventInternal((MotionEvent)msg.obj);
+                                break;
+                            case MSG_TRACKPAD_EVENT:
+                                sendTrackpadEventInternal((MotionEvent)msg.obj);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                };
                 ParcelFileDescriptor consoleInFd = null;
                 if (mConnectVmConsole) {
                     consoleInFd = mPtyFd;
@@ -1807,8 +1786,9 @@ public class VirtualMachine implements AutoCloseable {
             try {
                 mVirtualMachine.stop();
                 dropVm();
-                if (mInputEventExecutor != null) {
-                    mInputEventExecutor.shutdownNow();
+                if (mEventHandlerThread != null) {
+                    mEventHandlerThread.quit();
+                    mEventHandlerThread = null;
                 }
             } catch (RemoteException e) {
                 throw e.rethrowAsRuntimeException();
