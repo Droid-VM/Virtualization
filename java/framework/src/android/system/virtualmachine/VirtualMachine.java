@@ -1784,12 +1784,12 @@ public class VirtualMachine implements AutoCloseable {
                 throw new VirtualMachineException("VM is not running");
             }
             try {
-                mVirtualMachine.stop();
-                dropVm();
                 if (mEventHandlerThread != null) {
                     mEventHandlerThread.quit();
                     mEventHandlerThread = null;
                 }
+                mVirtualMachine.stop();
+                dropVm();
             } catch (RemoteException e) {
                 throw e.rethrowAsRuntimeException();
             } catch (ServiceSpecificException e) {
@@ -1848,6 +1848,10 @@ public class VirtualMachine implements AutoCloseable {
             }
             try {
                 if (stateToStatus(mVirtualMachine.getState()) == STATUS_RUNNING) {
+                    if (mEventHandlerThread != null) {
+                        mEventHandlerThread.quit();
+                        mEventHandlerThread = null;
+                    }
                     mVirtualMachine.stop();
                     dropVm();
                 }
