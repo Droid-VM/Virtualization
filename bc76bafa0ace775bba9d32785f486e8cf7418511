@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d070e1d_bfbfce64",
+        "filename": "demo_accessor/accessor/src/accessor.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-18T16:48:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59c2e4e4_186a9402",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 19
+      },
+      "revId": "bc76bafa0ace775bba9d32785f486e8cf7418511",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21398a8f_ebe81815",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98dcfa33_07a7a01f",
+        "filename": "demo_accessor/apex/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-18T16:48:54Z",
+      "side": 1,
+      "message": "I prefer this.\n\n`vintf_fragments` only indicates that `when system packages apex, include provided vintf fragment as well\u0027.\n\nBut demo isn\u0027t packaged together with system, so options are either\n  Option 1) use `vintf_fragments`, but don\u0027t forget to manually push `init.rc` together with demo application\n  Option 2) Use `prebuilt_etc` in build rule, so init-rc can natively included in the apex. APEX\u0027s `vintf` is also loaded, so no extra step is needed afterward.\n  \nI picked option 2). Just FYI, `init.rc` also have the similar property and also behaves similarily.\n\nI asked Jooyung, and it seems like that this is preferred if you want to put everything in the APEX.",
+      "parentUuid": "21398a8f_ebe81815",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 0
+      },
+      "revId": "bc76bafa0ace775bba9d32785f486e8cf7418511",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4f45798_74a8e7c1",
@@ -77,6 +125,30 @@
       "writtenOn": "2024-07-16T15:04:00Z",
       "side": 1,
       "message": "Could you add the bug id http://b/346763236 here?",
+      "range": {
+        "startLine": 45,
+        "startChar": 7,
+        "endLine": 45,
+        "endChar": 24
+      },
+      "revId": "bc76bafa0ace775bba9d32785f486e8cf7418511",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3037385_d0a66cec",
+        "filename": "demo_accessor/test/AndroidTest.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-18T16:48:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4f45798_74a8e7c1",
       "range": {
         "startLine": 45,
         "startChar": 7,
