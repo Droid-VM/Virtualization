@@ -102,6 +102,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e814d94a_8b8a0924",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 996,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-18T11:04:42Z",
+      "side": 1,
+      "message": "This is not ideal because even if the messages were successfully sent to the handler, the handler may have failed to send them to the VM over UDC. the vm might be dead for example, or the UDC connection may be broken.\n\nsince we can\u0027t use return value of this method for the failure of handler sending the events to the VM, we should use a callback.\n\nif we use callback to report the result of sending events to VM, we should use it universally - even for the failures made here. otherwise, users have to distinguish these two types of failures.",
+      "parentUuid": "227f3ad0_33b7cd8d",
+      "range": {
+        "startLine": 996,
+        "startChar": 62,
+        "endLine": 996,
+        "endChar": 77
+      },
+      "revId": "0f3db58badd5e2ca3d5c8a375f77035ca03e03c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1378a718_6393e352",
         "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 4
