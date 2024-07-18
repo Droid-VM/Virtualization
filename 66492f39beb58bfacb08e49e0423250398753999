@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd1a7bf3_fa898c21",
+        "filename": "demo_accessor/accessor/src/main.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-07-18T22:03:54Z",
+      "side": 1,
+      "message": "How difficult does it seem to make this process generic, to be reused with different services?\n\nWhat kind of data does it need? Do we have a bug to reduce the amount of code needed to get an accessor for a different service?",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 77
+      },
+      "revId": "66492f39beb58bfacb08e49e0423250398753999",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "614d4a03_552284b6",
+        "filename": "demo_accessor/accessor/src/run.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-07-18T22:03:54Z",
+      "side": 1,
+      "message": "2024",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "66492f39beb58bfacb08e49e0423250398753999",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e913cc3a_1ff7e3ff",
+        "filename": "demo_accessor/aidl/com/android/virt/accessor_demo/vm_service/IAccessorVmService.aidl",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-07-18T22:03:54Z",
+      "side": 1,
+      "message": "Add a TODO to add more methods? `int callMe(IVmClientCallback cb)` would be interesting.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 26
+      },
+      "revId": "66492f39beb58bfacb08e49e0423250398753999",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
