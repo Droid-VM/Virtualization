@@ -28,6 +28,7 @@ import android.content.ClipboardManager;
 import android.crosvm.ICrosvmAndroidDisplayService;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
+import android.hardware.input.InputManager;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
@@ -77,7 +78,7 @@ import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements InputManager.InputDeviceListener {
     private static final String TAG = "VmLauncherApp";
     private static final String VM_NAME = "my_custom_vm";
     private static final boolean DEBUG = true;
@@ -254,6 +255,54 @@ public class MainActivity extends Activity {
             return false;
         }
         return !isVolumeKey(keyCode) && mVirtualMachine.sendKeyEvent(event);
+    }
+
+    private void registerInputDeviceListener() {
+        InputManager inputManager = getSystemService(InputManager.class);
+        if (inputManager == null) {
+            return;
+        }
+        inputManager.registerInputDeviceListener(this, null);
+    }
+
+    private void unregisterInputDeviceListener() {
+        InputManager inputManager = getSystemService(InputManager.class);
+        if (inputManager == null) {
+            return;
+        }
+        inputManager.unregisterInputDeviceListener(this);
+    }
+
+    private void setTabletModeConditionally() {
+        if (mVirtualMachine == null) {
+            Log.d(TAG, "mVirtualMachine == null");
+            return;
+        }
+        for (int id : InputDevice.getDeviceIds()) {
+            InputDevice d = InputDevice.getDevice(id);
+            if (!d.isVirtual() && d.isEnabled() && d.isFullKeyboard()) {
+                Log.d(TAG, "the device has a physical keyboard, turn off tablet mode");
+                mVirtualMachine.sendTabletModeEvent(false);
+                return;
+            }
+        }
+        mVirtualMachine.sendTabletModeEvent(true);
+        Log.d(TAG, "the device doesn't have a physical keyboard, turn on tablet mode");
+    }
+
+    @Override
+    public void onInputDeviceAdded(int deviceId) {
+        setTabletModeConditionally();
+    }
+
+    @Override
+    public void onInputDeviceRemoved(int deviceId) {
+        setTabletModeConditionally();
+    }
+
+    @Override
+    public void onInputDeviceChanged(int deviceId) {
+        setTabletModeConditionally();
     }
 
     @Override
@@ -460,6 +509,13 @@ public class MainActivity extends Activity {
         windowInsetsController.setSystemBarsBehavior(
                 WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
         windowInsetsController.hide(WindowInsets.Type.systemBars());
+        registerInputDeviceListener();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setTabletModeConditionally();
     }
 
     @Override
@@ -494,6 +550,7 @@ public class MainActivity extends Activity {
         if (mExecutorService != null) {
             mExecutorService.shutdownNow();
         }
+        unregisterInputDeviceListener();
         Log.d(TAG, "destroyed");
     }
 
