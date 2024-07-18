@@ -37,6 +37,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bfb667dc_1fc6e3df",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 996,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-18T10:34:17Z",
+      "side": 1,
+      "message": "Here as well. @jeongik@google.com\n\nsendToTarget returns vold. So we need to do\n```\nMessage m \u003d Message.obtain(...);\nboolean sent \u003d m.getTarget().sendMessage(m);\nif (!send) {\n   // call back to user\n}\n```",
+      "range": {
+        "startLine": 996,
+        "startChar": 62,
+        "endLine": 996,
+        "endChar": 77
+      },
+      "revId": "0f3db58badd5e2ca3d5c8a375f77035ca03e03c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1378a718_6393e352",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1518,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-18T10:34:17Z",
+      "side": 1,
+      "message": "@jeongik@google.com we may want to check the return value of these calls, and send a call back to the user if a failure is detected.",
+      "range": {
+        "startLine": 1512,
+        "startChar": 0,
+        "endLine": 1518,
+        "endChar": 80
+      },
+      "revId": "0f3db58badd5e2ca3d5c8a375f77035ca03e03c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0a54ad4e_e8d13ddb",
         "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 4
@@ -48,6 +94,30 @@
       "writtenOn": "2024-07-17T11:17:34Z",
       "side": 1,
       "message": "this might not be enough since messages can still be sent to the handler.\nI think stop() can be called before we stop accepting events from the UI, so the try/catch play might still be needed as the thread looper will be dead and sendTarget will then throw.\nI\u0027m not entirely aware of the lifecycle of the VM class so this specific case might not be possible.",
+      "range": {
+        "startLine": 1787,
+        "startChar": 0,
+        "endLine": 1787,
+        "endChar": 39
+      },
+      "revId": "0f3db58badd5e2ca3d5c8a375f77035ca03e03c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e306201_0ae57541",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1787,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-18T10:34:17Z",
+      "side": 1,
+      "message": "sending a message to a dead thread doesn\u0027t cause an exception. It just returns false (with an error log) [1], which is unfortunately ignored by `sendToTarget` [2].\n\nSo, I think this is fine. `send*Event` methods above anyway don\u0027t guarantee the delivery of the events to the VM, or let the client know that the delivery was successful or not. It\u0027s something to be fixed later.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/java/android/os/MessageQueue.java;drc\u003d8351712ca1fb7342d27f45727de8dc8d8939c4d3;l\u003d607\n\n[2] https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/java/android/os/Message.java;drc\u003d883887f68f6216285acb07a74975425125644dae;l\u003d471",
+      "parentUuid": "0a54ad4e_e8d13ddb",
       "range": {
         "startLine": 1787,
         "startChar": 0,
