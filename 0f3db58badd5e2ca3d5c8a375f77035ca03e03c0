@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "227f3ad0_33b7cd8d",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 996,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2024-07-18T10:44:29Z",
+      "side": 1,
+      "message": "Done\nSimply returning the result of sendMessage should be enough here as that\u0027ll allow the touch listener to process it.",
+      "parentUuid": "bfb667dc_1fc6e3df",
+      "range": {
+        "startLine": 996,
+        "startChar": 62,
+        "endLine": 996,
+        "endChar": 77
+      },
+      "revId": "0f3db58badd5e2ca3d5c8a375f77035ca03e03c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1378a718_6393e352",
@@ -118,6 +142,30 @@
       "side": 1,
       "message": "sending a message to a dead thread doesn\u0027t cause an exception. It just returns false (with an error log) [1], which is unfortunately ignored by `sendToTarget` [2].\n\nSo, I think this is fine. `send*Event` methods above anyway don\u0027t guarantee the delivery of the events to the VM, or let the client know that the delivery was successful or not. It\u0027s something to be fixed later.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/java/android/os/MessageQueue.java;drc\u003d8351712ca1fb7342d27f45727de8dc8d8939c4d3;l\u003d607\n\n[2] https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/java/android/os/Message.java;drc\u003d883887f68f6216285acb07a74975425125644dae;l\u003d471",
       "parentUuid": "0a54ad4e_e8d13ddb",
+      "range": {
+        "startLine": 1787,
+        "startChar": 0,
+        "endLine": 1787,
+        "endChar": 39
+      },
+      "revId": "0f3db58badd5e2ca3d5c8a375f77035ca03e03c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7b1625a_d590feab",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1787,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2024-07-18T10:44:29Z",
+      "side": 1,
+      "message": "ack, it\u0027s indeed just logging the exception here [0]\n\n[0] https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/java/android/os/MessageQueue.java;l\u003d603;drc\u003d8351712ca1fb7342d27f45727de8dc8d8939c4d3",
+      "parentUuid": "9e306201_0ae57541",
       "range": {
         "startLine": 1787,
         "startChar": 0,
