@@ -16,6 +16,57 @@
       "message": ".close seems to be used only in some microdroid tests, but this seems to be missing even with no real users",
       "revId": "2885660fe8866df59a0039b088095d1eb442f7c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49862110_882f36c8",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1856,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-18T11:06:43Z",
+      "side": 1,
+      "message": "we may want to do this before we stop the vm (L1851).",
+      "range": {
+        "startLine": 1853,
+        "startChar": 0,
+        "endLine": 1856,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9d2d8793_782265b3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+              "range": {
+                "startLine": 1851,
+                "startChar": 0,
+                "endLine": 1851,
+                "endChar": 0
+              },
+              "replacement": "                if (mEventHandlerThread !\u003d null) {\n                    mEventHandlerThread.quit();\n                    mEventHandlerThread \u003d null;\n                }\n"
+            },
+            {
+              "path": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+              "range": {
+                "startLine": 1853,
+                "startChar": 0,
+                "endLine": 1857,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "2885660fe8866df59a0039b088095d1eb442f7c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
