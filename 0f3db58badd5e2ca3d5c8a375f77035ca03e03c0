@@ -174,6 +174,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8bddab0_03b1821c",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 996,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2024-07-18T11:16:02Z",
+      "side": 1,
+      "message": "The simplest solution for now would be to add a method to check if the event is supported by the VM and to only send them in such cases, as right now the send*Internal methods also discard some events because they are simply not supported.\n\nWould that be enough for now? vsock failures shouldn\u0027t be that common?",
+      "parentUuid": "b57dc8b8_7238d7e2",
+      "range": {
+        "startLine": 996,
+        "startChar": 62,
+        "endLine": 996,
+        "endChar": 77
+      },
+      "revId": "0f3db58badd5e2ca3d5c8a375f77035ca03e03c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1378a718_6393e352",
         "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 4
