@@ -29,7 +29,6 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -55,11 +54,18 @@ public class FerrochromeActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (!isTaskRoot()) {
+            // In case we launched this activity multiple times, only start one instance of this
+            // activity by only starting this as the root activity in task.
+            finish();
+            Log.w(TAG, "Not starting because not task root");
+            return;
+        }
         setContentView(R.layout.activity_ferrochrome);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         // Find VM Launcher
-        Intent intent = new Intent(ACTION_VM_LAUNCHER);
+        Intent intent = new Intent(ACTION_VM_LAUNCHER).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PackageManager pm = getPackageManager();
         List<ResolveInfo> resolveInfos =
                 pm.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
