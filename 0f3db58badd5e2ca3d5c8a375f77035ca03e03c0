@@ -293,6 +293,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc688aea_3bbc07f6",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1518,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-07-18T12:08:19Z",
+      "side": 1,
+      "message": "I see, if so, using handler or background thread might be up to the client like VmLauncher. how about moving handler or background thread logic to VmLauncher, and letting VirtualMachine have just send* method?",
+      "parentUuid": "7ec73ac6_a0dfac8b",
+      "range": {
+        "startLine": 1512,
+        "startChar": 0,
+        "endLine": 1518,
+        "endChar": 80
+      },
+      "revId": "0f3db58badd5e2ca3d5c8a375f77035ca03e03c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0a54ad4e_e8d13ddb",
         "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 4
