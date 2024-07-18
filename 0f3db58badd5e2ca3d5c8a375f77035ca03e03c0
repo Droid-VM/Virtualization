@@ -269,6 +269,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ec73ac6_a0dfac8b",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1518,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-18T12:01:19Z",
+      "side": 1,
+      "message": "The `VirtualMachine` class is part of the AVF APIs. It currently is used only by VmLauncher, but in the future it may be used by more clients.\n\nWhat\u0027s done in VmLauncher shouldn\u0027t make a difference here.",
+      "parentUuid": "532079f7_0f7e5ff5",
+      "range": {
+        "startLine": 1512,
+        "startChar": 0,
+        "endLine": 1518,
+        "endChar": 80
+      },
+      "revId": "0f3db58badd5e2ca3d5c8a375f77035ca03e03c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0a54ad4e_e8d13ddb",
         "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 4
