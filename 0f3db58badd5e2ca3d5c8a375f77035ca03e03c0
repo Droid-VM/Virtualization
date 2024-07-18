@@ -126,6 +126,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b57dc8b8_7238d7e2",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 996,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2024-07-18T11:07:27Z",
+      "side": 1,
+      "message": "I don\u0027t think a callback will be enough in most cases as those events are coming from different views, so the app itself would need to then dispatch them to the original view...\n\nThe failure to send the message to the handler should be covered now, vsock is harder for this reason",
+      "parentUuid": "e814d94a_8b8a0924",
+      "range": {
+        "startLine": 996,
+        "startChar": 62,
+        "endLine": 996,
+        "endChar": 77
+      },
+      "revId": "0f3db58badd5e2ca3d5c8a375f77035ca03e03c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1378a718_6393e352",
         "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 4
