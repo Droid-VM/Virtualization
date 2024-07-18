@@ -144,7 +144,22 @@ echo "Ensure screen unlocked"
 
 try_unlock=0
 while [[ "${try_unlock}" -le "${TRY_UNLOCK_MAX}" ]]; do
-  screen_state=$(adb shell dumpsys nfc | sed -n 's/^mScreenState=\(.*\)$/\1/p')
+  screen_state=$(adb shell dumpsys power | sed -n 's/^mWakefulness=\(.*\)$/\1/p')
+  case "${screen_state}" in
+    "Awake"|"Dreaming")
+      break
+      ;;
+    "Asleep"|"Dozing")
+      adb shell input keyevent KEYCODE_WAKEUP
+      ;;
+    *)
+      echo "Unknown screen state. Continue to boot, but may fail"
+      break
+      ;;
+  esac
+
+
+  screen_state=$(adb shell dumpsys power | grep -e 'mWakefulness=Awake\|mWakefulness=Dreaming')
   case "${screen_state}" in
     "ON_UNLOCKED")
       break
@@ -155,10 +170,6 @@ while [[ "${try_unlock}" -le "${TRY_UNLOCK_MAX}" ]]; do
       ;;
     "OFF_LOCKED"|"OFF_UNLOCKED")
       adb shell input keyevent KEYCODE_WAKEUP
-      ;;
-    *)
-      echo "Unknown screen state. Continue to boot, but may fail"
-      break
       ;;
   esac
   sleep 1
