@@ -221,6 +221,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "532079f7_0f7e5ff5",
+        "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1518,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-07-18T11:53:00Z",
+      "side": 1,
+      "message": "I think leaving log message for the error case might be sufficient. we already sent true for OnTouchListener or OnCapturedPointerListener, so there is nothing to do even though send*Internal fails..",
+      "parentUuid": "1378a718_6393e352",
+      "range": {
+        "startLine": 1512,
+        "startChar": 0,
+        "endLine": 1518,
+        "endChar": 80
+      },
+      "revId": "0f3db58badd5e2ca3d5c8a375f77035ca03e03c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0a54ad4e_e8d13ddb",
         "filename": "java/framework/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 4
