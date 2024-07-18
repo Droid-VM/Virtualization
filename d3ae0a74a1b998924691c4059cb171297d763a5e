@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab5f0d3d_17583749",
+        "filename": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-18T08:59:13Z",
+      "side": 1,
+      "message": "log an error or just remove the check so that null error exception can be thrown",
+      "range": {
+        "startLine": 262,
+        "startChar": 0,
+        "endLine": 264,
+        "endChar": 9
+      },
+      "revId": "d3ae0a74a1b998924691c4059cb171297d763a5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f25ae247_1daaf165",
+        "filename": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-18T08:59:13Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 270,
+        "startChar": 0,
+        "endLine": 272,
+        "endChar": 9
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6bb7a998_d9079399",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+              "range": {
+                "startLine": 262,
+                "startChar": 0,
+                "endLine": 265,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+              "range": {
+                "startLine": 270,
+                "startChar": 0,
+                "endLine": 273,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "d3ae0a74a1b998924691c4059cb171297d763a5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
