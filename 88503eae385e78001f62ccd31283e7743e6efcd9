@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "59f64a7e_7b51284c",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/OpenUrlActivity.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-07-19T07:23:50Z",
+      "side": 1,
+      "message": "I think finish() just tells the framework to remove activity from its task, and the current callback (onCreate) is still executed normally until it\u0027s done.\n\nThis way we can bounce the \"open URL\" intent to the VmLauncherApp activity and destroy OpenUrlActivity at the same time.",
+      "parentUuid": "287775c2_97059e58",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 17
+      },
+      "revId": "88503eae385e78001f62ccd31283e7743e6efcd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9053a980_991d08da",
         "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/OpenUrlActivity.java",
         "patchSetId": 6
@@ -66,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5d3560d3_91abf724",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/OpenUrlActivity.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-07-19T07:23:50Z",
+      "side": 1,
+      "message": "Do you mean intent-filter?\n\n\"share\" intents use MIME type (extra bundle) to discriminate the shared data type.\nSpecifying the data scheme in the intent-filter won\u0027t help because scheme only limits the intent\u0027s \"data\" type.",
+      "parentUuid": "9053a980_991d08da",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 9
+      },
+      "revId": "88503eae385e78001f62ccd31283e7743e6efcd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "194ecbb4_dc25bec9",
         "filename": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
         "patchSetId": 6
@@ -77,6 +125,30 @@
       "writtenOn": "2024-07-19T04:23:44Z",
       "side": 1,
       "message": "What if we run `VmLauncherApp` without `FerrochromeApp`? Shouldn\u0027t `VmLauncherApp` be able to run regardless `FerrochromeApp`?",
+      "range": {
+        "startLine": 269,
+        "startChar": 0,
+        "endLine": 270,
+        "endChar": 21
+      },
+      "revId": "88503eae385e78001f62ccd31283e7743e6efcd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1ec2c27_7689dcf7",
+        "filename": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-07-19T07:23:50Z",
+      "side": 1,
+      "message": "The MAIN intent action is explicitly removed in this change https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3175320\n\nso I thought we only intend `VmLauncherApp` to be launched with the android.virtualization.VM_LAUNCHER action. All apps (FerrochromeApp or not) is supposed to launch VmLauncherApp via the action android.virtualization.VM_LAUNCHER  @jiyong@google.com could you confirm?",
+      "parentUuid": "194ecbb4_dc25bec9",
       "range": {
         "startLine": 269,
         "startChar": 0,
