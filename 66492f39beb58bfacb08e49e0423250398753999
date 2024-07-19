@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09bb1051_b5802d29",
+        "filename": "demo_accessor/accessor/src/main.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-19T02:20:59Z",
+      "side": 1,
+      "message": "First of all, thank you for the suggestion. Let me answer here with details.\n\n-----\nSimple answer: Reusing isn\u0027t difficult, although I expected to write lots of codes for whole IAccessor implementation.\n\n-----\nLonger answer: I couldn\u0027t find a good way to make this process generic.\n\nFor implementing accessor, we need three parts:\n  - Part 1: Start lazy service (`main.rs`)\n  - Part 2: Start VM (`run.rs`)\n  - Part 3: Start implement Iaccessor (`accessor.rs`)\n\nRe: part 1: We doesn\u0027t provide to simplify logic here.\nRe: part 2: There are 100+ lines, but they only exists to build parameter of `VmInstance::create()`. I\u0027m skeptical whether we can make it more simpler.\nRe: part 3: The lines of code are similar with the part 1. We\u0027ll need library when we support LLNDK, but there\u0027s no concrete plan yet.\n\nJust FYI, b/346674270 is the open bug for adding IAccessor library.\n\n-----\nSuper longer answer:\n\nAlice and I asked to AVF team about having a generic binary for this (e.g. `accessor_launcher`, early prototype does similarly with this) but Jiyong and Nikita didn\u0027t like the idea but wanted to add library instead.\n\nHere are feedbacks from the AVF meeting (I may omit few things):\n  - If we would add generic binary, it shouldn\u0027t be in `vm` tool, which already provides easy CLI for launching VM. The tool is designed for development only, so shouldn\u0027t be used for real product.\n  - If we add a binary, then the paramter/output are effectively public APIs. Why do we add binary while IAccessor can easily be used for all existing use cases (\u003d WV and keymint, which are all system VM)?\n  \nI couldn\u0027t have a good answer there, so started with simplier approach that uses IAccessor directly.\n\nHope this answers your questions.",
+      "parentUuid": "fd1a7bf3_fa898c21",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 77
+      },
+      "revId": "66492f39beb58bfacb08e49e0423250398753999",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "614d4a03_552284b6",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0c1e1f4_28df390f",
+        "filename": "demo_accessor/accessor/src/run.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-19T02:20:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "614d4a03_552284b6",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "66492f39beb58bfacb08e49e0423250398753999",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e913cc3a_1ff7e3ff",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-07-18T22:03:54Z",
       "side": 1,
       "message": "Add a TODO to add more methods? `int callMe(IVmClientCallback cb)` would be interesting.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 26
+      },
+      "revId": "66492f39beb58bfacb08e49e0423250398753999",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4e66c2e_d113273c",
+        "filename": "demo_accessor/aidl/com/android/virt/accessor_demo/vm_service/IAccessorVmService.aidl",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-19T02:20:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e913cc3a_1ff7e3ff",
       "range": {
         "startLine": 21,
         "startChar": 0,
