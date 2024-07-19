@@ -180,6 +180,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "81a28eca_7242e7eb",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/OpenUrlActivity.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-07-19T08:44:27Z",
+      "side": 1,
+      "message": "that won\u0027t do what you want, because share intent encodes the shared text in the _extra bundle_ (`get*Extra()`). The \u003cdata\u003e attribute of intent-filter only applies to the intent data (`getData()`).\n\n\u003e We don\u0027t want Ferrochrome activity to show up in the share sheet if the data being shared is not a URL.\n\nI don\u0027t how to accomplish this. AFAIK android just doesn\u0027t support this type of operation?\n\nYou can either\n1. press on a link, and the link is opened by some APP that support ACTION_VIEW (but this does not support generic URLs, only approved domains) https://developer.android.com/training/app-links#web-links\n\n  \u003e Starting in Android 12 (API level 31), a generic web intent resolves to an activity in your app only if your app is approved for the specific domain contained in that web intent. If your app isn\u0027t approved for the domain, the web intent resolves to the user\u0027s default browser app instead.\n\n2. long press a link, then you can select \"open link in default browser\" in menu\n3. long press a link, then select \"share\" in menu. and then you can share the link _as text_ to any APP that accept ACTION_SEND intents",
+      "parentUuid": "dc0bf422_da3a3c96",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 9
+      },
+      "revId": "88503eae385e78001f62ccd31283e7743e6efcd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "194ecbb4_dc25bec9",
         "filename": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
         "patchSetId": 6
