@@ -22,6 +22,30 @@
       },
       "revId": "db618dbe73ac87dd79b15e3e61723dde628a6498",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40bfddcd_7dbb5e25",
+        "filename": "tests/ferrochrome/ferrochrome.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-19T01:50:18Z",
+      "side": 1,
+      "message": "I\u0027m sorry but I\u0027m not sure what does \u0027this for test\u0027 mean. Could you explain bit more detail?\n\nIf you\u0027re asking composite disk vs single image file, then single image file would be sufficient for booting test + local developement. I can switch to generate composite disk if we want to test with more realistic scenario, but that can be handled in next CL.\n\nIf you\u0027re asking test image vs base image, base image is sufficient for booting test. We need to switch back to test image when we add more tests, but then we\u0027ll need extra logic to reliably download CrOS image (e.g. generate an nightly-throttled build that bundle CrOS image?)",
+      "parentUuid": "5761e719_284cd85d",
+      "range": {
+        "startLine": 26,
+        "startChar": 20,
+        "endLine": 26,
+        "endChar": 39
+      },
+      "revId": "db618dbe73ac87dd79b15e3e61723dde628a6498",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
