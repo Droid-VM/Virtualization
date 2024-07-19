@@ -3,6 +3,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dab116da_cd0f8400",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/OpenUrlActivity.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-07-19T04:23:44Z",
+      "side": 1,
+      "message": "OOC: Could I know the reason for having OpenUrlActivity in `FerrochromeApp`, not `VmLauncherApp`? If `VmLauncherApp` could receive URL information via intent, I prefer to be there.",
+      "revId": "88503eae385e78001f62ccd31283e7743e6efcd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "287775c2_97059e58",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/OpenUrlActivity.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-07-19T04:23:44Z",
+      "side": 1,
+      "message": "Could the remaining part of this function be reachable? AFAIK this cause the termination of the activity.",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 17
+      },
+      "revId": "88503eae385e78001f62ccd31283e7743e6efcd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9053a980_991d08da",
         "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/OpenUrlActivity.java",
         "patchSetId": 6
@@ -19,6 +59,29 @@
         "startChar": 0,
         "endLine": 50,
         "endChar": 9
+      },
+      "revId": "88503eae385e78001f62ccd31283e7743e6efcd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "194ecbb4_dc25bec9",
+        "filename": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-07-19T04:23:44Z",
+      "side": 1,
+      "message": "What if we run `VmLauncherApp` without `FerrochromeApp`? Shouldn\u0027t `VmLauncherApp` be able to run regardless `FerrochromeApp`?",
+      "range": {
+        "startLine": 269,
+        "startChar": 0,
+        "endLine": 270,
+        "endChar": 21
       },
       "revId": "88503eae385e78001f62ccd31283e7743e6efcd9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
