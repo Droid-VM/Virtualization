@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcb51846_9ef00174",
+        "filename": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-07-19T03:09:00Z",
+      "side": 0,
+      "message": "No need to call .flush() because \n1. stream is unbuffered.\n2. Even if the stream is buffered, we are going to .close() the stream right away, so no need to manual flush().",
+      "revId": "88ec0cb333a1de6fb821a8c094d8cb9cacbad38f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
