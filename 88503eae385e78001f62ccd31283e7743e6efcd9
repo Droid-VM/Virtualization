@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0842b151_dda442b3",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/OpenUrlActivity.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-07-19T07:37:15Z",
+      "side": 1,
+      "message": "There are multiple reasons:\n\n1. [design choice] We want to make FerrochromeApp the only entry point shown to the user (b/348303697#comment21). VmLauncherApp on the other hand should be a hidden implementation detail. It would be confusing to the user if they had to launch _Ferrochrome_App, but share URL to the _VmLauncher_App.\n2. [technical reason] Activity launching is determined by taskAffinity. Since FerrochromeActivity and OpenUrlActivity had the same taskAffinity, they get launched into the same task, which is what we want. If OpenUrlActivity is in VmLauncherApp, then its affinity would become \"vmlauncher_app\", thus be launched into a separate task that does not contain the FerrochromeApp. b/348303697#comment31",
+      "parentUuid": "dab116da_cd0f8400",
+      "revId": "88503eae385e78001f62ccd31283e7743e6efcd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "287775c2_97059e58",
         "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/OpenUrlActivity.java",
         "patchSetId": 6
