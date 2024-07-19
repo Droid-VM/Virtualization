@@ -1,0 +1,292 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1082d30_d16dfe84",
+        "filename": "demo_accessor/README.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-19T16:28:37Z",
+      "side": 1,
+      "message": "why do we need a remount for this, not possible to install it without remount?\n\nI would also hope we have a single command line to install an apex (e.g. `adb install ....apex`) - without all these steps. This one may be special because of remount, but can you make sure installing a VM is as easy as possible? We shouldn\u0027t need a guide like this for every VM (40 lines of docs). We should be able to have a single command documented once to run any VM.",
+      "range": {
+        "startLine": 29,
+        "startChar": 3,
+        "endLine": 29,
+        "endChar": 14
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6e82b70f_3c44cebd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "demo_accessor/README.md",
+              "range": {
+                "startLine": 29,
+                "startChar": 0,
+                "endLine": 33,
+                "endChar": 0
+              },
+              "replacement": "adb install --apex --force-non-staged $ANDROID_PRODUCT_OUT/system_ext/com.android.virt.accessor_demo.apex\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bd34b6141c0d5b44bdceec34a462b340bb10fe55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a36fafc_e656afa5",
+        "filename": "demo_accessor/accessor/src/accessor.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-19T16:28:37Z",
+      "side": 1,
+      "message": "we\u0027ll want this to be indefinite a la go/disgracefully-explode for VMs. We should not put a time limit on it at all by default",
+      "range": {
+        "startLine": 46,
+        "startChar": 33,
+        "endLine": 46,
+        "endChar": 56
+      },
+      "revId": "bd34b6141c0d5b44bdceec34a462b340bb10fe55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09a228e7_a2166321",
+        "filename": "demo_accessor/accessor/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-19T16:28:37Z",
+      "side": 1,
+      "message": "so yeah - we\u0027ll want a bug to get rid of coordination required here",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 23
+      },
+      "revId": "bd34b6141c0d5b44bdceec34a462b340bb10fe55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c599bfac_3f2700c0",
+        "filename": "demo_accessor/accessor/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-19T16:28:37Z",
+      "side": 1,
+      "message": "we\u0027ll want to add an API to get this name as well - can we have a child bug for this as well or Devin take it later?",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 77
+      },
+      "revId": "bd34b6141c0d5b44bdceec34a462b340bb10fe55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0cb1d09_f6dd541e",
+        "filename": "demo_accessor/accessor/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-19T16:28:37Z",
+      "side": 1,
+      "message": "This and the below line will actually cause 3 threads to be needed. Just \u0027join_thread_pool\u0027 below should be necessary for linkToDeath to work (unless it\u0027s called during L49). Did you get an error when you didn\u0027t have this? We can also change threading to be very specific later, but we\u0027ll want as few threads as possible to start off with, so that we\u0027re always sure this will work with only one thread. Otherwise, it\u0027ll be hard to optimize later.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 38
+      },
+      "revId": "bd34b6141c0d5b44bdceec34a462b340bb10fe55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4331b462_5f01216e",
+        "filename": "demo_accessor/accessor/src/run.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-19T16:28:37Z",
+      "side": 1,
+      "message": "This is 175 lines to start a VM. How do we get it to 1 line in native code? Is it pending an LL-NDK API for this? Do we have a bug for this?\n\nIs there any information here that can\u0027t be read from the payload or a manifest?",
+      "revId": "bd34b6141c0d5b44bdceec34a462b340bb10fe55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c45ff07_84ffdd80",
+        "filename": "demo_accessor/accessor_vm/assets/config.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-19T16:28:37Z",
+      "side": 1,
+      "message": "if this is not default true, can we make it default true?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 29
+      },
+      "revId": "bd34b6141c0d5b44bdceec34a462b340bb10fe55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "688f29fb_b8993151",
+        "filename": "demo_accessor/accessor_vm/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-19T16:28:37Z",
+      "side": 1,
+      "message": "may not need to change this now, but we\u0027ll want to change it to be dynamic later - I think Devin is doing this?",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 23
+      },
+      "revId": "bd34b6141c0d5b44bdceec34a462b340bb10fe55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0a5fff9_e787e6fa",
+        "filename": "demo_accessor/accessor_vm/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-19T16:28:37Z",
+      "side": 1,
+      "message": "is this required for ever Rust program? Can you file a bug to make sure it\u0027s the default, like libc/crash_dump have for C++ programs?",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 8
+      },
+      "revId": "bd34b6141c0d5b44bdceec34a462b340bb10fe55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed4bb4c0_a8b2db74",
+        "filename": "demo_accessor/accessor_vm/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-19T16:28:37Z",
+      "side": 1,
+      "message": "why not make PORT u32 to avoid conversion - also given that it\u0027s a constant I would recommend using \u0027into\u0027 so you get an immediate crash with stack in cases like this, instead of an error returned from main",
+      "range": {
+        "startLine": 52,
+        "startChar": 74,
+        "endLine": 52,
+        "endChar": 90
+      },
+      "revId": "bd34b6141c0d5b44bdceec34a462b340bb10fe55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fe4c391_bd5119c0",
+        "filename": "demo_accessor/accessor_vm/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-19T16:28:37Z",
+      "side": 1,
+      "message": "is this an example? I would expect accessor to only been written once, but this is just to have a version that can/will work until it\u0027s integrated into libbinder?",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 5
+      },
+      "revId": "bd34b6141c0d5b44bdceec34a462b340bb10fe55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a92da4f1_41c483a1",
+        "filename": "demo_accessor/apex/accessor_demo.init.rc",
+        "patchSetId": 12
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-19T16:28:37Z",
+      "side": 1,
+      "message": "we should add a child bug as well for host_init_verifier to check this as well",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 52
+      },
+      "revId": "bd34b6141c0d5b44bdceec34a462b340bb10fe55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
