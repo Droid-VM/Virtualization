@@ -85,6 +85,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9edb1d64_3c6436ee",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/OpenUrlActivity.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-19T07:56:57Z",
+      "side": 1,
+      "message": "Yi-Yo\u0027s right. The rest of onCreate is guaranteed to run.",
+      "parentUuid": "59f64a7e_7b51284c",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 17
+      },
+      "revId": "88503eae385e78001f62ccd31283e7743e6efcd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9053a980_991d08da",
         "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/OpenUrlActivity.java",
         "patchSetId": 6
@@ -120,6 +144,30 @@
       "side": 1,
       "message": "Do you mean intent-filter?\n\n\"share\" intents use MIME type (extra bundle) to discriminate the shared data type.\nSpecifying the data scheme in the intent-filter won\u0027t help because scheme only limits the intent\u0027s \"data\" type.",
       "parentUuid": "9053a980_991d08da",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 9
+      },
+      "revId": "88503eae385e78001f62ccd31283e7743e6efcd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc0bf422_da3a3c96",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/OpenUrlActivity.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-19T07:56:57Z",
+      "side": 1,
+      "message": "yes. the \u003cdata\u003e tag inside the \u003cintent-filter\u003e tag.  https://developer.android.com/guide/topics/manifest/data-element#scheme\n\nWe don\u0027t want Ferrochrome activity to show up in the share sheet if the data being shared is not a URL.",
+      "parentUuid": "5d3560d3_91abf724",
       "range": {
         "startLine": 46,
         "startChar": 0,
