@@ -46,6 +46,30 @@
       },
       "revId": "509c203ec3a4dcbbbf3589571cbcc6a51b2e14a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08dda9a8_792fae59",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-07-22T14:55:54Z",
+      "side": 1,
+      "message": "The kernels (arguably the most important thing getting executed in the guest) are here. I\u0027ll +2 but this makes me wonder if we want to introduce another \"root directory\", `/prebuilts`, to hold them.",
+      "parentUuid": "e4c05fc1_53641b87",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "509c203ec3a4dcbbbf3589571cbcc6a51b2e14a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
