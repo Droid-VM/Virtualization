@@ -16,6 +16,24 @@
       "message": "I wonder if `libvmbase/example/` should eventually be moved under `/tests`, WDYT?",
       "revId": "9b0eac20b51fa01064e7905916ecca5d0a78b3d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fe33ed1_e4a34138",
+        "filename": "libs/libvmbase/example/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-22T14:18:10Z",
+      "side": 1,
+      "message": "The test is not registered to TEST_MAPPING. And the modules are \u0027enabled: false`. I guess they are leftover.",
+      "parentUuid": "234e2aee_5a681993",
+      "revId": "9b0eac20b51fa01064e7905916ecca5d0a78b3d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
