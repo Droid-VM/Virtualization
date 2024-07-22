@@ -55,12 +55,12 @@ Copy the built kernel image to the Android source tree directly, and build the v
 
 For ARM64,
 ```bash
-cp out/dist/Image <android_checkout>/packages/modules/Virtualization/microdroid/kernel/arm64/kernel-6.1
+cp out/dist/Image <android_checkout>/packages/modules/Virtualization/guest/kernel/arm64/kernel-6.1
 ```
 
 For x86\_64,
 ```bash
-cp out/dist/bzImage <android_checkout>/packages/modules/Virtualization/microdroid/kernel/x86_64/kernel-6.1
+cp out/dist/bzImage <android_checkout>/packages/modules/Virtualization/guest/kernel/x86_64/kernel-6.1
 ```
 
 ### For official updates
