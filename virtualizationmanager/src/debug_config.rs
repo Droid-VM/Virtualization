@@ -15,7 +15,7 @@
 //! Functions for AVF debug policy and debug level
 
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
-    VirtualMachineAppConfig::DebugLevel::DebugLevel, VirtualMachineConfig::VirtualMachineConfig,
+    DebugLevel::DebugLevel, VirtualMachineConfig::VirtualMachineConfig,
 };
 use anyhow::{anyhow, Context, Error, Result};
 use lazy_static::lazy_static;

@@ -19,8 +19,8 @@ mod create_partition;
 mod run;
 
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
-    CpuTopology::CpuTopology, IVirtualizationService::IVirtualizationService,
-    PartitionType::PartitionType, VirtualMachineAppConfig::DebugLevel::DebugLevel,
+    CpuTopology::CpuTopology, DebugLevel::DebugLevel,
+    IVirtualizationService::IVirtualizationService, PartitionType::PartitionType,
 };
 #[cfg(not(llpvm_changes))]
 use anyhow::anyhow;

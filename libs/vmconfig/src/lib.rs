@@ -16,9 +16,9 @@
 
 use android_system_virtualizationservice::{
     aidl::android::system::virtualizationservice::CpuTopology::CpuTopology,
+    aidl::android::system::virtualizationservice::DebugLevel::DebugLevel,
     aidl::android::system::virtualizationservice::DiskImage::DiskImage as AidlDiskImage,
     aidl::android::system::virtualizationservice::Partition::Partition as AidlPartition,
-    aidl::android::system::virtualizationservice::VirtualMachineAppConfig::DebugLevel::DebugLevel,
     aidl::android::system::virtualizationservice::VirtualMachineConfig::VirtualMachineConfig,
     aidl::android::system::virtualizationservice::VirtualMachineRawConfig::VirtualMachineRawConfig,
     binder::ParcelFileDescriptor,
@@ -135,9 +135,10 @@ impl VmConfig {
 
 /// Returns the debug level of the VM from its configuration.
 pub fn get_debug_level(config: &VirtualMachineConfig) -> Option<DebugLevel> {
+    log::info!("get_debug_level: config = {config:?}");
     match config {
         VirtualMachineConfig::AppConfig(config) => Some(config.debugLevel),
-        VirtualMachineConfig::RawConfig(_) => None,
+        VirtualMachineConfig::RawConfig(config) => Some(config.debugLevel),
     }
 }
 

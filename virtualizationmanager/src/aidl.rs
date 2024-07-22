@@ -31,6 +31,7 @@ use android_system_virtualizationcommon::aidl::android::system::virtualizationco
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
     AssignableDevice::AssignableDevice,
     CpuTopology::CpuTopology,
+    DebugLevel::DebugLevel,
     DiskImage::DiskImage,
     InputDevice::InputDevice,
     IVirtualMachine::{BnVirtualMachine, IVirtualMachine},
@@ -38,7 +39,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
     IVirtualizationService::IVirtualizationService,
     Partition::Partition,
     PartitionType::PartitionType,
-    VirtualMachineAppConfig::{DebugLevel::DebugLevel, Payload::Payload, VirtualMachineAppConfig},
+    VirtualMachineAppConfig::{Payload::Payload, VirtualMachineAppConfig},
     VirtualMachineConfig::VirtualMachineConfig,
     VirtualMachineDebugInfo::VirtualMachineDebugInfo,
     VirtualMachinePayloadConfig::VirtualMachinePayloadConfig,
