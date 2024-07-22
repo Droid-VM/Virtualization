@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fe85563_0a441ae5",
+        "filename": "demo_accessor/README.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-22T07:26:40Z",
+      "side": 1,
+      "message": "We can\u0027t install a new APEX with `adb install`. I don\u0027t know whether it\u0027s intended behavior or not, though.\n\nI packaged everything in an APEX because that seems to be the realistic scenario to bundle everything in a single file (host code + VM code + IAccessor + VINTF + init.rc + ...).\n\nJust FYI, here\u0027s the error that I\u0027d got.\n\n```\n$ adb install --apex --force-non-staged /usr/local/google/home/jaewan_secondary/internal-master/out/target/product/tangorpro/system_ext/apex/com.android.virt.accessor_demo.apex\nPerforming Streamed Install\nadb: failed to install /usr/local/google/home/jaewan_secondary/internal-master/out/target/product/tangorpro/system_ext/apex/com.android.virt.accessor_demo.apex: Failure [INSTALL_FAILED_PACKAGE_CHANGED: Attempting to install new APEX package com.android.virt.accessor_demo]\n```",
+      "parentUuid": "f1082d30_d16dfe84",
+      "range": {
+        "startLine": 29,
+        "startChar": 3,
+        "endLine": 29,
+        "endChar": 14
+      },
+      "revId": "bd34b6141c0d5b44bdceec34a462b340bb10fe55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a36fafc_e656afa5",
@@ -55,6 +79,30 @@
       "writtenOn": "2024-07-19T16:28:37Z",
       "side": 1,
       "message": "we\u0027ll want this to be indefinite a la go/disgracefully-explode for VMs. We should not put a time limit on it at all by default",
+      "range": {
+        "startLine": 46,
+        "startChar": 33,
+        "endLine": 46,
+        "endChar": 56
+      },
+      "revId": "bd34b6141c0d5b44bdceec34a462b340bb10fe55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d2f811e_1a9f281e",
+        "filename": "demo_accessor/accessor/src/accessor.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-22T07:26:40Z",
+      "side": 1,
+      "message": "Let me keep this as-is for now, because the library only supports timed waits.\n\nI can apply your suggestion in next CL, but I have two questions before that:\n  - Question 1) It discussed outside of NextGen team but inside the Android? If we prefer infinite loop, should we add `wait()` and remove `wait_until_ready()`?\n  - Question 2) What if the `VM boots after 10 sec` is as bad as `no started at all`? I know that watchdog will take care of hangs on main thread, but I wonder whether we have something similar for other threads.",
+      "parentUuid": "7a36fafc_e656afa5",
       "range": {
         "startLine": 46,
         "startChar": 33,
@@ -88,6 +136,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2f2d8dc_7ecaa30d",
+        "filename": "demo_accessor/accessor/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-22T07:26:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "09a228e7_a2166321",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 23
+      },
+      "revId": "bd34b6141c0d5b44bdceec34a462b340bb10fe55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c599bfac_3f2700c0",
@@ -101,6 +173,30 @@
       "writtenOn": "2024-07-19T16:28:37Z",
       "side": 1,
       "message": "we\u0027ll want to add an API to get this name as well - can we have a child bug for this as well or Devin take it later?",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 77
+      },
+      "revId": "bd34b6141c0d5b44bdceec34a462b340bb10fe55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e462b951_e874ae79",
+        "filename": "demo_accessor/accessor/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-22T07:26:40Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "c599bfac_3f2700c0",
       "range": {
         "startLine": 32,
         "startChar": 0,
@@ -134,6 +230,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffb89acc_8b177331",
+        "filename": "demo_accessor/accessor/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-22T07:26:40Z",
+      "side": 1,
+      "message": "Removed, as you prefer minimal threads.",
+      "parentUuid": "c0cb1d09_f6dd541e",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 38
+      },
+      "revId": "bd34b6141c0d5b44bdceec34a462b340bb10fe55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4331b462_5f01216e",
@@ -151,6 +271,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3919af72_1df4710e",
+        "filename": "demo_accessor/accessor/src/run.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-22T07:26:40Z",
+      "side": 1,
+      "message": "I afraid not (also checked with AVF folks). This would be the simplest code already.\n\nThe code looks large, but it\u0027s just building parameters for launching VM and setup a simplest VM.\n\nJust FYI, we have `Virtualization/demo_native`, and it also have similar lines of code.",
+      "parentUuid": "4331b462_5f01216e",
+      "revId": "bd34b6141c0d5b44bdceec34a462b340bb10fe55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c45ff07_84ffdd80",
@@ -164,6 +302,30 @@
       "writtenOn": "2024-07-19T16:28:37Z",
       "side": 1,
       "message": "if this is not default true, can we make it default true?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 29
+      },
+      "revId": "bd34b6141c0d5b44bdceec34a462b340bb10fe55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2969aca_d434f5bb",
+        "filename": "demo_accessor/accessor_vm/assets/config.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-22T07:26:40Z",
+      "side": 1,
+      "message": "Ack.\n\nFiled b/354529854 for further tracking.",
+      "parentUuid": "6c45ff07_84ffdd80",
       "range": {
         "startLine": 9,
         "startChar": 0,
@@ -199,6 +361,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3d974e6f_71f2422e",
+        "filename": "demo_accessor/accessor_vm/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-22T07:26:40Z",
+      "side": 1,
+      "message": "+CC: @devinmoore@google.com for visibility.\n\nBTW, what does \u0027dynamic\u0027 mean here? Are you saying that it should be changed whenever VM launches?",
+      "parentUuid": "688f29fb_b8993151",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 23
+      },
+      "revId": "bd34b6141c0d5b44bdceec34a462b340bb10fe55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0a5fff9_e787e6fa",
         "filename": "demo_accessor/accessor_vm/src/main.rs",
         "patchSetId": 12
@@ -210,6 +396,30 @@
       "writtenOn": "2024-07-19T16:28:37Z",
       "side": 1,
       "message": "is this required for ever Rust program? Can you file a bug to make sure it\u0027s the default, like libc/crash_dump have for C++ programs?",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 8
+      },
+      "revId": "bd34b6141c0d5b44bdceec34a462b340bb10fe55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "928346ed_73703a50",
+        "filename": "demo_accessor/accessor_vm/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-22T07:26:40Z",
+      "side": 1,
+      "message": "Removed.\n\nAsked to Rust chatroom and it doesn\u0027t look necessary at all.",
+      "parentUuid": "e0a5fff9_e787e6fa",
       "range": {
         "startLine": 39,
         "startChar": 0,
@@ -243,6 +453,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccc0f50e_223ddac7",
+        "filename": "demo_accessor/accessor_vm/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-22T07:26:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed4bb4c0_a8b2db74",
+      "range": {
+        "startLine": 52,
+        "startChar": 74,
+        "endLine": 52,
+        "endChar": 90
+      },
+      "revId": "bd34b6141c0d5b44bdceec34a462b340bb10fe55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8fe4c391_bd5119c0",
@@ -266,6 +500,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0e8a56a_45be30bd",
+        "filename": "demo_accessor/accessor_vm/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-22T07:26:40Z",
+      "side": 1,
+      "message": "This is not directly related with `IAccessor`.\n\n`IAccessor` would be a part of the `libbinder`, while `IAccessorVmService` is just a simple service whose access can be granted via `IAccessor`. Here\u0027s an simple flow\n\n```\nservice manager \u003c------IAccessor-----\u003e Service\n   in host                             in VM\n```\n\n`IAccessorVmService` is just a demo of \u0027Service in a VM\u0027. Hope this answers your questions.",
+      "parentUuid": "8fe4c391_bd5119c0",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 5
+      },
+      "revId": "bd34b6141c0d5b44bdceec34a462b340bb10fe55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a92da4f1_41c483a1",
@@ -279,6 +537,30 @@
       "writtenOn": "2024-07-19T16:28:37Z",
       "side": 1,
       "message": "we should add a child bug as well for host_init_verifier to check this as well",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 52
+      },
+      "revId": "bd34b6141c0d5b44bdceec34a462b340bb10fe55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51090af5_47793fcf",
+        "filename": "demo_accessor/apex/accessor_demo.init.rc",
+        "patchSetId": 12
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-22T07:26:40Z",
+      "side": 1,
+      "message": "Filed b/354607791",
+      "parentUuid": "a92da4f1_41c483a1",
       "range": {
         "startLine": 19,
         "startChar": 0,
