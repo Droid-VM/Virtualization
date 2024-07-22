@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b083bbe_c85c0c61",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/OpenUrlActivity.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-07-22T03:19:25Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0842b151_dda442b3",
+      "revId": "88503eae385e78001f62ccd31283e7743e6efcd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "287775c2_97059e58",
@@ -97,6 +115,30 @@
       "side": 1,
       "message": "Yi-Yo\u0027s right. The rest of onCreate is guaranteed to run.",
       "parentUuid": "59f64a7e_7b51284c",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 17
+      },
+      "revId": "88503eae385e78001f62ccd31283e7743e6efcd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42729216_780dc5fd",
+        "filename": "ferrochrome_app/java/com/android/virtualization/ferrochrome/OpenUrlActivity.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-07-22T03:19:25Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9edb1d64_3c6436ee",
       "range": {
         "startLine": 34,
         "startChar": 8,
@@ -287,6 +329,30 @@
       "side": 1,
       "message": "The MAIN intent action is explicitly removed in this change https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3175320\n\nso I thought we only intend `VmLauncherApp` to be launched with the android.virtualization.VM_LAUNCHER action. All apps (FerrochromeApp or not) is supposed to launch VmLauncherApp via the action android.virtualization.VM_LAUNCHER  @jiyong@google.com could you confirm?",
       "parentUuid": "194ecbb4_dc25bec9",
+      "range": {
+        "startLine": 269,
+        "startChar": 0,
+        "endLine": 270,
+        "endChar": 21
+      },
+      "revId": "88503eae385e78001f62ccd31283e7743e6efcd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d08505c8_3b3de3e2",
+        "filename": "vmlauncher_app/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-07-22T03:19:25Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c1ec2c27_7689dcf7",
       "range": {
         "startLine": 269,
         "startChar": 0,
