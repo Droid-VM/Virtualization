@@ -69,6 +69,30 @@
       },
       "revId": "09cc74b428bdedbf8f6f0e91f524c27d3df59c82",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50b0051a_8af2fc76",
+        "filename": "tests/vm_attestation/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-07-22T15:04:11Z",
+      "side": 1,
+      "message": "Not sure so ack-ing but my rationale was that test and non-test apps, if stand-alone, could benefit from being collocated e.g. for code re-use and following similar patterns. I have very little experience with these Java test apps, though.",
+      "parentUuid": "6a7562f2_0777317a",
+      "range": {
+        "startLine": 25,
+        "startChar": 11,
+        "endLine": 25,
+        "endChar": 31
+      },
+      "revId": "09cc74b428bdedbf8f6f0e91f524c27d3df59c82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
