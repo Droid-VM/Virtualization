@@ -15,9 +15,10 @@
 //! Command to run a VM.
 
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
+    DebugLevel::DebugLevel,
     IVirtualizationService::IVirtualizationService,
     PartitionType::PartitionType,
-    VirtualMachineAppConfig::{DebugLevel::DebugLevel, Payload::Payload, VirtualMachineAppConfig},
+    VirtualMachineAppConfig::{Payload::Payload, VirtualMachineAppConfig},
     VirtualMachineConfig::VirtualMachineConfig,
     VirtualMachinePayloadConfig::VirtualMachinePayloadConfig,
 };

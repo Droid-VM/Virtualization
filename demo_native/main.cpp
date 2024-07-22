@@ -205,7 +205,7 @@ Result<VirtualMachineAppConfig> create_vm_config(
     app_config.instanceImage = std::move(instance);
     app_config.payload = std::move(payload);
     if (debuggable) {
-        app_config.debugLevel = VirtualMachineAppConfig::DebugLevel::FULL;
+        app_config.debugLevel = VirtualMachineConfig::DebugLevel::FULL;
     }
     app_config.protectedVm = protected_vm;
     app_config.memoryMib = memory_mib;

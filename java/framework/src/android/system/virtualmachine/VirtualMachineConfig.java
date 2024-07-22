@@ -763,10 +763,10 @@ public final class VirtualMachineConfig {
         vsConfig.osName = mOs;
         switch (mDebugLevel) {
             case DEBUG_LEVEL_FULL:
-                vsConfig.debugLevel = VirtualMachineAppConfig.DebugLevel.FULL;
+                vsConfig.debugLevel = android.system.virtualizationservice.DebugLevel.FULL;
                 break;
             default:
-                vsConfig.debugLevel = VirtualMachineAppConfig.DebugLevel.NONE;
+                vsConfig.debugLevel = android.system.virtualizationservice.DebugLevel.NONE;
                 break;
         }
         vsConfig.protectedVm = mProtectedVm;

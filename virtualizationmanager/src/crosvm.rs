@@ -44,7 +44,7 @@ use std::time::{Duration, SystemTime};
 use std::thread::{self, JoinHandle};
 use android_system_virtualizationcommon::aidl::android::system::virtualizationcommon::DeathReason::DeathReason;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
-    VirtualMachineAppConfig::DebugLevel::DebugLevel,
+    DebugLevel::DebugLevel,
     AudioConfig::AudioConfig as AudioConfigParcelable,
     DisplayConfig::DisplayConfig as DisplayConfigParcelable,
     GpuConfig::GpuConfig as GpuConfigParcelable,

@@ -17,11 +17,11 @@
 use crate::create_partition::command_create_partition;
 use crate::{get_service, RunAppConfig, RunCustomVmConfig, RunMicrodroidConfig};
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
+    DebugLevel::DebugLevel,
     IVirtualizationService::IVirtualizationService,
     PartitionType::PartitionType,
     VirtualMachineAppConfig::{
-        CustomConfig::CustomConfig, DebugLevel::DebugLevel, Payload::Payload,
-        VirtualMachineAppConfig,
+        CustomConfig::CustomConfig, Payload::Payload, VirtualMachineAppConfig,
     },
     VirtualMachineConfig::VirtualMachineConfig,
     VirtualMachinePayloadConfig::VirtualMachinePayloadConfig,

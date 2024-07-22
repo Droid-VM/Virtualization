@@ -16,6 +16,7 @@
 package android.system.virtualizationservice;
 
 import android.system.virtualizationservice.CpuTopology;
+import android.system.virtualizationservice.DebugLevel;
 import android.system.virtualizationservice.VirtualMachinePayloadConfig;
 
 /** Configuration for running an App in a VM */
@@ -70,16 +71,6 @@ parcelable VirtualMachineAppConfig {
      * android.permission.USE_CUSTOM_VIRTUAL_MACHINE
      */
     @utf8InCpp String osName = "microdroid";
-
-    enum DebugLevel {
-        /** Not debuggable at all */
-        NONE,
-        /**
-         * Fully debuggable. All logs are shown, kernel messages are shown, and adb shell is
-         * supported
-         */
-        FULL,
-    }
 
     /** Debug level of the VM */
     DebugLevel debugLevel = DebugLevel.NONE;

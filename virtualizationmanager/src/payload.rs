@@ -16,9 +16,9 @@
 
 use crate::debug_config::DebugConfig;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
+    DebugLevel::DebugLevel,
     DiskImage::DiskImage,
     Partition::Partition,
-    VirtualMachineAppConfig::DebugLevel::DebugLevel,
     VirtualMachineAppConfig::{Payload::Payload, VirtualMachineAppConfig},
     VirtualMachineRawConfig::VirtualMachineRawConfig,
 };
