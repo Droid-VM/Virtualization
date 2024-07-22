@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f165c6f5_f2aa4b10",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-07-22T09:28:32Z",
+      "side": 1,
+      "message": "See my other comment. AFAIU this bootstrap_virtmngr doesn\u0027t really do any bootstrapping, this is more like an utility to start VMs before /data is mounted. How about we call it early_virtmngr, or before_data_virtmngr?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 21
+      },
+      "revId": "9870ea582d2bf9460dd75869b73f1e7fc351f2ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2c7b553_2a478f15",
+        "filename": "Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-07-22T09:28:32Z",
+      "side": 1,
+      "message": "This looks to be unused?",
+      "range": {
+        "startLine": 72,
+        "startChar": 7,
+        "endLine": 74,
+        "endChar": 10
+      },
+      "revId": "9870ea582d2bf9460dd75869b73f1e7fc351f2ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d5fab99_d3be7f9d",
+        "filename": "virtualizationmanager/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-07-22T09:28:32Z",
+      "side": 1,
+      "message": "You are not really bootstraping anything here. Should we call it early_virtmngr, or something along those lines?",
+      "range": {
+        "startLine": 94,
+        "startChar": 12,
+        "endLine": 94,
+        "endChar": 21
+      },
+      "revId": "9870ea582d2bf9460dd75869b73f1e7fc351f2ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
