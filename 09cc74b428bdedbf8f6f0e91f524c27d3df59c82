@@ -93,6 +93,30 @@
       },
       "revId": "09cc74b428bdedbf8f6f0e91f524c27d3df59c82",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c087a0cc_104b42f7",
+        "filename": "tests/vm_attestation/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-22T15:08:07Z",
+      "side": 1,
+      "message": "That\u0027s a fair point, but here\u0027s my argument: the test apps are technically not a part of AVF. They represent external users, and therefore I think they deserve a different treatment. There indeed are apps that are part of AVF (vmlauncher, etc), but they are not tests.",
+      "parentUuid": "50b0051a_8af2fc76",
+      "range": {
+        "startLine": 25,
+        "startChar": 11,
+        "endLine": 25,
+        "endChar": 31
+      },
+      "revId": "09cc74b428bdedbf8f6f0e91f524c27d3df59c82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
