@@ -11,6 +11,7 @@ rust_library {
     rustlibs: [
         "android.system.virtualizationservice-rust",
         "libanyhow",
+        "liblog_rust",
         "libsemver",
         "libserde",
         "libserde_json",

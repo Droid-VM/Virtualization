@@ -17,6 +17,7 @@ package android.system.virtualizationservice;
 
 import android.system.virtualizationservice.AudioConfig;
 import android.system.virtualizationservice.CpuTopology;
+import android.system.virtualizationservice.DebugLevel;
 import android.system.virtualizationservice.DiskImage;
 import android.system.virtualizationservice.DisplayConfig;
 import android.system.virtualizationservice.GpuConfig;
@@ -100,4 +101,7 @@ parcelable VirtualMachineRawConfig {
     @nullable GpuConfig gpuConfig;
 
     @nullable AudioConfig audioConfig;
+
+    /** Debug level of the VM */
+    DebugLevel debugLevel = DebugLevel.NONE;
 }

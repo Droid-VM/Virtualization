@@ -23,10 +23,10 @@ use crate::{
 };
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
     CpuTopology::CpuTopology,
+    DebugLevel::DebugLevel,
     IVirtualizationService::IVirtualizationService,
     VirtualMachineAppConfig::{
-        CustomConfig::CustomConfig, DebugLevel::DebugLevel, Payload::Payload,
-        VirtualMachineAppConfig,
+        CustomConfig::CustomConfig, Payload::Payload, VirtualMachineAppConfig,
     },
     VirtualMachineConfig::VirtualMachineConfig,
 };
