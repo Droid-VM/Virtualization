@@ -21,6 +21,7 @@ use crate::{
     },
     memory::{SIZE_16KB, SIZE_4KB},
 };
+use percore::ExceptionLock;
 use smccc::{
     psci::{system_off, system_reset},
     Hvc,
@@ -33,7 +34,7 @@ use static_assertions::const_assert_eq;
 // Matches the UART count in crosvm.
 const MAX_CONSOLES: usize = 4;
 
-static CONSOLES: [Once<SpinMutex<Uart>>; MAX_CONSOLES] =
+static CONSOLES: [Once<ExceptionLock<SpinMutex<Uart>>>; MAX_CONSOLES] =
     [Once::new(), Once::new(), Once::new(), Once::new()];
 static ADDRESSES: [Once<usize>; MAX_CONSOLES] =
     [Once::new(), Once::new(), Once::new(), Once::new()];
@@ -60,9 +61,13 @@ pub unsafe fn init_all_uart(base_addresses: &[usize]) {
 
         // Initialize the console driver, for normal console accesses.
         assert!(!CONSOLES[i].is_completed(), "console::init() called more than once");
-        // SAFETY: The caller promised that base_address is the base of a mapped UART with no
-        // aliases.
-        CONSOLES[i].call_once(|| SpinMutex::new(unsafe { Uart::new(base_address) }));
+        CONSOLES[i].call_once(|| {
+            ExceptionLock::new(SpinMutex::new(
+                // SAFETY: The caller promised that base_address is the base of a mapped UART with
+                // no aliases.
+                unsafe { Uart::new(base_address) },
+            ))
+        });
     }
 }
 
@@ -105,7 +110,7 @@ pub fn init_console() {
 /// Return platform uart with specific index
 ///
 /// Returns `None` if console was not initialized by calling [`init`] first.
-pub fn uart(id: usize) -> Option<&'static SpinMutex<Uart>> {
+pub fn uart(id: usize) -> Option<&'static ExceptionLock<SpinMutex<Uart>>> {
     CONSOLES[id].get()
 }
 

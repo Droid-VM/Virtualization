@@ -87,8 +87,9 @@ extern "C" fn sync_exception_current() {
 }
 ```
 
-The `println!` macro shouldn't be used in exception handlers, because it relies on a global instance
-of the UART driver which might be locked when the exception happens, which would result in deadlock.
+The `println!` macro shouldn't be used in the synchronous exception handler, because synchronous
+exceptions can't be masked so the global instance of the UART driver might be locked when the
+exception happens, which would result in deadlock.
 
 See [example/src/exceptions.rs](examples/src/exceptions.rs) for a complete example.
 
