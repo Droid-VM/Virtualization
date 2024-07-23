@@ -18,16 +18,20 @@ use crate::arch::platform::{self, emergency_uart, DEFAULT_EMERGENCY_CONSOLE_INDE
 use crate::power::reboot;
 use core::fmt::{self, write, Arguments, Write};
 use core::panic::PanicInfo;
+use percore::exception_free;
 
 /// Writes a formatted string followed by a newline to the n-th console.
 ///
-/// Returns an error if the n-th console was not initialized by calling [`init`] first.
+/// Returns an error if the n-th console was not initialized by calling [`init`] first. May deadlock
+/// if used in a synchronous exception handler.
 pub fn writeln(n: usize, format_args: Arguments) -> fmt::Result {
-    let uart = &mut *platform::uart(n).ok_or(fmt::Error)?.lock();
+    exception_free(|token| {
+        let uart = &mut *platform::uart(n).ok_or(fmt::Error)?.borrow(token).lock();
 
-    write(uart, format_args)?;
-    uart.write_str("\n")?;
-    Ok(())
+        write(uart, format_args)?;
+        uart.write_str("\n")?;
+        Ok(())
+    })
 }
 
 /// Prints the given formatted string to the n-th console, followed by a newline.
@@ -43,7 +47,8 @@ macro_rules! console_writeln {
 
 /// Prints the given formatted string to the console, followed by a newline.
 ///
-/// Panics if the console has not yet been initialized. May hang if used in an exception context.
+/// Panics if the console has not yet been initialized. May deadlock if used in a synchronous
+/// exception handler.
 macro_rules! println {
     ($($arg:tt)*) => ({
         $crate::console_writeln!($crate::arch::platform::DEFAULT_CONSOLE_INDEX, $($arg)*).unwrap()
