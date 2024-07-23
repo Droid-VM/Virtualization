@@ -15,12 +15,11 @@
 //! Exception handlers.
 
 use vmbase::{
-    eprintln,
     exceptions::{ArmException, Esr, HandleExceptionError},
     logger,
     memory::{handle_permission_fault, handle_translation_fault},
     power::reboot,
-    read_sysreg,
+    println, read_sysreg,
 };
 
 fn handle_exception(exception: &ArmException) -> Result<(), HandleExceptionError> {
@@ -48,48 +47,48 @@ extern "C" fn sync_exception_current(elr: u64, _spsr: u64) {
 
 #[no_mangle]
 extern "C" fn irq_current(_elr: u64, _spsr: u64) {
-    eprintln!("irq_current");
+    println!("irq_current");
     reboot();
 }
 
 #[no_mangle]
 extern "C" fn fiq_current(_elr: u64, _spsr: u64) {
-    eprintln!("fiq_current");
+    println!("fiq_current");
     reboot();
 }
 
 #[no_mangle]
 extern "C" fn serr_current(_elr: u64, _spsr: u64) {
     let esr = read_sysreg!("esr_el1");
-    eprintln!("serr_current");
-    eprintln!("esr={esr:#08x}");
+    println!("serr_current");
+    println!("esr={esr:#08x}");
     reboot();
 }
 
 #[no_mangle]
 extern "C" fn sync_lower(_elr: u64, _spsr: u64) {
     let esr = read_sysreg!("esr_el1");
-    eprintln!("sync_lower");
-    eprintln!("esr={esr:#08x}");
+    println!("sync_lower");
+    println!("esr={esr:#08x}");
     reboot();
 }
 
 #[no_mangle]
 extern "C" fn irq_lower(_elr: u64, _spsr: u64) {
-    eprintln!("irq_lower");
+    println!("irq_lower");
     reboot();
 }
 
 #[no_mangle]
 extern "C" fn fiq_lower(_elr: u64, _spsr: u64) {
-    eprintln!("fiq_lower");
+    println!("fiq_lower");
     reboot();
 }
 
 #[no_mangle]
 extern "C" fn serr_lower(_elr: u64, _spsr: u64) {
     let esr = read_sysreg!("esr_el1");
-    eprintln!("serr_lower");
-    eprintln!("esr={esr:#08x}");
+    println!("serr_lower");
+    println!("esr={esr:#08x}");
     reboot();
 }
