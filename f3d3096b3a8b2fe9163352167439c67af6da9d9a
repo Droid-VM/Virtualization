@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a95f670_098c950e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-23T02:12:41Z",
+      "side": 1,
+      "message": "LGTM for me, but please wait others review",
+      "revId": "f3d3096b3a8b2fe9163352167439c67af6da9d9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03bc5f01_1bded7e8",
+        "filename": "apex/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-23T02:12:41Z",
+      "side": 1,
+      "message": "Not necessary immediately, but let\u0027s enable only with 64bit targets, as we do for `virtmgr`.\n\n```suggestion\n            arch: {\n                arm64: {\n                    binaries: [\"early_virtmgr\"],\n                },\n                x86_64: {\n                    binaries: [\"early_virtmgr\"],\n                },\n            },\n```",
+      "range": {
+        "startLine": 216,
+        "startChar": 0,
+        "endLine": 218,
+        "endChar": 14
+      },
+      "revId": "f3d3096b3a8b2fe9163352167439c67af6da9d9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
