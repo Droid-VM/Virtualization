@@ -15,7 +15,6 @@
 //! Exception handlers.
 
 use vmbase::{
-    eprintln,
     exceptions::{handle_permission_fault, handle_translation_fault},
     exceptions::{ArmException, Esr, HandleExceptionError},
     logger,
@@ -36,6 +35,7 @@ fn handle_exception(exception: &ArmException) -> Result<(), HandleExceptionError
 
 #[no_mangle]
 extern "C" fn sync_exception_current(elr: u64, _spsr: u64) {
+    // The synchronous exception handler must not panic, as doing so could deadlock.
     // Disable logging in exception handler to prevent unsafe writes to UART.
     let _guard = logger::suppress();
 
@@ -47,52 +47,39 @@ extern "C" fn sync_exception_current(elr: u64, _spsr: u64) {
 }
 
 #[no_mangle]
-extern "C" fn irq_current() {
-    eprintln!("irq_current");
-    reboot();
+extern "C" fn irq_current(_elr: u64, _spsr: u64) {
+    panic!("irq_current");
 }
 
 #[no_mangle]
-extern "C" fn fiq_current() {
-    eprintln!("fiq_current");
-    reboot();
+extern "C" fn fiq_current(_elr: u64, _spsr: u64) {
+    panic!("fiq_current");
 }
 
 #[no_mangle]
-extern "C" fn serr_current() {
-    eprintln!("serr_current");
-    print_esr();
-    reboot();
-}
-
-#[no_mangle]
-extern "C" fn sync_lower() {
-    eprintln!("sync_lower");
-    print_esr();
-    reboot();
-}
-
-#[no_mangle]
-extern "C" fn irq_lower() {
-    eprintln!("irq_lower");
-    reboot();
-}
-
-#[no_mangle]
-extern "C" fn fiq_lower() {
-    eprintln!("fiq_lower");
-    reboot();
-}
-
-#[no_mangle]
-extern "C" fn serr_lower() {
-    eprintln!("serr_lower");
-    print_esr();
-    reboot();
-}
-
-#[inline]
-fn print_esr() {
+extern "C" fn serr_current(_elr: u64, _spsr: u64) {
     let esr = read_sysreg!("esr_el1");
-    eprintln!("esr={:#08x}", esr);
+    panic!("serr_current, esr={esr:#08x}");
+}
+
+#[no_mangle]
+extern "C" fn sync_lower(_elr: u64, _spsr: u64) {
+    let esr = read_sysreg!("esr_el1");
+    panic!("sync_lower, esr={esr:#08x}");
+}
+
+#[no_mangle]
+extern "C" fn irq_lower(_elr: u64, _spsr: u64) {
+    panic!("irq_lower");
+}
+
+#[no_mangle]
+extern "C" fn fiq_lower(_elr: u64, _spsr: u64) {
+    panic!("fiq_lower");
+}
+
+#[no_mangle]
+extern "C" fn serr_lower(_elr: u64, _spsr: u64) {
+    let esr = read_sysreg!("esr_el1");
+    panic!("serr_lower, esr={esr:#08x}");
 }

@@ -20,7 +20,7 @@ use vmbase::{
     },
     logger,
     power::reboot,
-    println, read_sysreg,
+    read_sysreg,
 };
 
 fn handle_exception(exception: &ArmException) -> Result<(), HandleExceptionError> {
@@ -36,6 +36,7 @@ fn handle_exception(exception: &ArmException) -> Result<(), HandleExceptionError
 
 #[no_mangle]
 extern "C" fn sync_exception_current(elr: u64, _spsr: u64) {
+    // The synchronous exception handler must not panic, as doing so could deadlock.
     // Disable logging in exception handler to prevent unsafe writes to UART.
     let _guard = logger::suppress();
 
@@ -48,48 +49,38 @@ extern "C" fn sync_exception_current(elr: u64, _spsr: u64) {
 
 #[no_mangle]
 extern "C" fn irq_current(_elr: u64, _spsr: u64) {
-    println!("irq_current");
-    reboot();
+    panic!("irq_current");
 }
 
 #[no_mangle]
 extern "C" fn fiq_current(_elr: u64, _spsr: u64) {
-    println!("fiq_current");
-    reboot();
+    panic!("fiq_current");
 }
 
 #[no_mangle]
 extern "C" fn serr_current(_elr: u64, _spsr: u64) {
     let esr = read_sysreg!("esr_el1");
-    println!("serr_current");
-    println!("esr={esr:#08x}");
-    reboot();
+    panic!("serr_current, esr={esr:#08x}");
 }
 
 #[no_mangle]
 extern "C" fn sync_lower(_elr: u64, _spsr: u64) {
     let esr = read_sysreg!("esr_el1");
-    println!("sync_lower");
-    println!("esr={esr:#08x}");
-    reboot();
+    panic!("sync_lower, esr={esr:#08x}");
 }
 
 #[no_mangle]
 extern "C" fn irq_lower(_elr: u64, _spsr: u64) {
-    println!("irq_lower");
-    reboot();
+    panic!("irq_lower");
 }
 
 #[no_mangle]
 extern "C" fn fiq_lower(_elr: u64, _spsr: u64) {
-    println!("fiq_lower");
-    reboot();
+    panic!("fiq_lower");
 }
 
 #[no_mangle]
 extern "C" fn serr_lower(_elr: u64, _spsr: u64) {
     let esr = read_sysreg!("esr_el1");
-    println!("serr_lower");
-    println!("esr={esr:#08x}");
-    reboot();
+    panic!("serr_lower, esr={esr:#08x}");
 }
