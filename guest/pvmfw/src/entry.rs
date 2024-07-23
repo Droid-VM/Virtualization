@@ -87,7 +87,7 @@ pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, _arg3: u64
         Ok((entry, bcc)) => jump_to_payload(fdt_address, entry.try_into().unwrap(), bcc),
         Err(e) => {
             const REBOOT_REASON_CONSOLE: usize = 1;
-            console_writeln!(REBOOT_REASON_CONSOLE, "{}", e.as_avf_reboot_string());
+            console_writeln!(REBOOT_REASON_CONSOLE, "{}", e.as_avf_reboot_string()).unwrap();
             reboot()
         }
     }

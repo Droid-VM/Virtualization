@@ -14,8 +14,10 @@
 
 //! Console driver for 8250 UART.
 
+use crate::power::reboot;
 use crate::uart::Uart;
-use core::fmt::{write, Arguments, Write};
+use core::fmt::{self, write, Arguments, Write};
+use core::panic::PanicInfo;
 use percore::{exception_free, ExceptionLock};
 use spin::{mutex::SpinMutex, Once};
 
@@ -63,13 +65,14 @@ pub unsafe fn init(base_addresses: &[usize]) {
 /// Writes a formatted string followed by a newline to the n-th console.
 ///
 /// Panics if the n-th console was not initialized by calling [`init`] first.
-pub fn writeln(n: usize, format_args: Arguments) {
+pub fn writeln(n: usize, format_args: Arguments) -> fmt::Result {
     exception_free(|token| {
         let uart = &mut *CONSOLES[n].get().unwrap().borrow(token).lock();
 
-        write(uart, format_args).unwrap();
-        let _ = uart.write_str("\n");
-    });
+        write(uart, format_args)?;
+        uart.write_str("\n")?;
+        Ok(())
+    })
 }
 
 /// Reinitializes the n-th UART driver and writes a formatted string followed by a newline to it.
@@ -88,8 +91,8 @@ pub fn ewriteln(n: usize, format_args: Arguments) {
 
 /// Prints the given formatted string to the n-th console, followed by a newline.
 ///
-/// Panics if the console has not yet been initialized. May deadlock if used in a synchronous
-/// exception handler; use `eprintln!` instead.
+/// Returns an error if the console has not yet been initialized. May deadlock if used in a
+/// synchronous exception handler; use `eprintln!` instead.
 #[macro_export]
 macro_rules! console_writeln {
     ($n:expr, $($arg:tt)*) => ({
@@ -104,7 +107,7 @@ macro_rules! console_writeln {
 #[macro_export]
 macro_rules! println {
     ($($arg:tt)*) => ({
-        $crate::console_writeln!($crate::console::DEFAULT_CONSOLE_INDEX, $($arg)*)
+        $crate::console_writeln!($crate::console::DEFAULT_CONSOLE_INDEX, $($arg)*).unwrap()
     })
 }
 
@@ -119,4 +122,11 @@ macro_rules! eprintln {
     ($($arg:tt)*) => ({
         $crate::console::ewriteln($crate::console::DEFAULT_EMERGENCY_CONSOLE_INDEX, format_args!($($arg)*))
     })
+}
+
+#[panic_handler]
+fn panic(info: &PanicInfo) -> ! {
+    // Ignore errors, to avoid a panic loop.
+    let _ = console_writeln!(DEFAULT_CONSOLE_INDEX, "{}", info);
+    reboot()
 }
