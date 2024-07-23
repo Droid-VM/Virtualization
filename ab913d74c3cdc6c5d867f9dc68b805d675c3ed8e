@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "240d34ba_bec4e2ff",
+        "filename": "android/VmLauncherApp/AndroidManifest.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-23T12:01:59Z",
+      "side": 1,
+      "message": "minor question: Isn\u0027t preinstalled sufficient here?\n\nIIUC, signature is for \u0027signed with the same application\u0027, and vmlauncher s signed with `com.{google.}android.virt`, which is preinstalled.",
+      "range": {
+        "startLine": 12,
+        "startChar": 33,
+        "endLine": 12,
+        "endChar": 55
+      },
+      "revId": "ab913d74c3cdc6c5d867f9dc68b805d675c3ed8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
