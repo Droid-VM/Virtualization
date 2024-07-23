@@ -16,6 +16,7 @@
 
 use crate::uart::Uart;
 use core::fmt::{write, Arguments, Write};
+use percore::{exception_free, ExceptionLock};
 use spin::{mutex::SpinMutex, Once};
 
 // Arbitrary limit on the number of consoles that can be registered.
@@ -23,7 +24,7 @@ use spin::{mutex::SpinMutex, Once};
 // Matches the UART count in crosvm.
 const MAX_CONSOLES: usize = 4;
 
-static CONSOLES: [Once<SpinMutex<Uart>>; MAX_CONSOLES] =
+static CONSOLES: [Once<ExceptionLock<SpinMutex<Uart>>>; MAX_CONSOLES] =
     [Once::new(), Once::new(), Once::new(), Once::new()];
 static ADDRESSES: [Once<usize>; MAX_CONSOLES] =
     [Once::new(), Once::new(), Once::new(), Once::new()];
@@ -49,9 +50,13 @@ pub unsafe fn init(base_addresses: &[usize]) {
 
         // Initialize the console driver, for normal console accesses.
         assert!(!CONSOLES[i].is_completed(), "console::init() called more than once");
-        // SAFETY: The caller promised that base_address is the base of a mapped UART with no
-        // aliases.
-        CONSOLES[i].call_once(|| SpinMutex::new(unsafe { Uart::new(base_address) }));
+        CONSOLES[i].call_once(|| {
+            ExceptionLock::new(SpinMutex::new(
+                // SAFETY: The caller promised that base_address is the base of a mapped UART with
+                // no aliases.
+                unsafe { Uart::new(base_address) },
+            ))
+        });
     }
 }
 
@@ -59,10 +64,12 @@ pub unsafe fn init(base_addresses: &[usize]) {
 ///
 /// Panics if the n-th console was not initialized by calling [`init`] first.
 pub fn writeln(n: usize, format_args: Arguments) {
-    let uart = &mut *CONSOLES[n].get().unwrap().lock();
+    exception_free(|token| {
+        let uart = &mut *CONSOLES[n].get().unwrap().borrow(token).lock();
 
-    write(uart, format_args).unwrap();
-    let _ = uart.write_str("\n");
+        write(uart, format_args).unwrap();
+        let _ = uart.write_str("\n");
+    });
 }
 
 /// Reinitializes the n-th UART driver and writes a formatted string followed by a newline to it.
@@ -81,8 +88,8 @@ pub fn ewriteln(n: usize, format_args: Arguments) {
 
 /// Prints the given formatted string to the n-th console, followed by a newline.
 ///
-/// Panics if the console has not yet been initialized. May hang if used in an exception context;
-/// use `eprintln!` instead.
+/// Panics if the console has not yet been initialized. May deadlock if used in a synchronous
+/// exception handler; use `eprintln!` instead.
 #[macro_export]
 macro_rules! console_writeln {
     ($n:expr, $($arg:tt)*) => ({
@@ -90,15 +97,14 @@ macro_rules! console_writeln {
     })
 }
 
-pub(crate) use console_writeln;
-
 /// Prints the given formatted string to the console, followed by a newline.
 ///
-/// Panics if the console has not yet been initialized. May hang if used in an exception context;
-/// use `eprintln!` instead.
+/// Panics if the console has not yet been initialized. May deadlock if used in a synchronous
+/// exception handler; use `eprintln!` instead.
+#[macro_export]
 macro_rules! println {
     ($($arg:tt)*) => ({
-        $crate::console::console_writeln!($crate::console::DEFAULT_CONSOLE_INDEX, $($arg)*)
+        $crate::console_writeln!($crate::console::DEFAULT_CONSOLE_INDEX, $($arg)*)
     })
 }
 
