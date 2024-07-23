@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c57310e_7250c089",
+        "filename": "tests/testapk/src/native/testbinary.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-23T22:13:30Z",
+      "side": 1,
+      "message": "should we exit(1) in this case, for harder errors?",
+      "range": {
+        "startLine": 407,
+        "startChar": 24,
+        "endLine": 408,
+        "endChar": 25
+      },
+      "revId": "8e821423ca789bc3223c73f4d066aa8305b71250",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "073802b5_fda2c82a",
+        "filename": "virtualizationservice/aidl/android/system/virtualmachineservice/IVirtualMachineService.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-07-23T22:13:30Z",
+      "side": 1,
+      "message": "probably will want to make this a union\n\nwe may also want to put the type in a common location, so it can be used by AAOS as well, though consider following that up later\n\nany thought to use byte[] sockaddr? you can use the C type if you want",
+      "range": {
+        "startLine": 68,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 14
+      },
+      "revId": "8e821423ca789bc3223c73f4d066aa8305b71250",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
