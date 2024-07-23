@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cffa7d25_995e58e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-07-23T19:28:38Z",
+      "side": 1,
+      "message": "Rust unsafe review: +1 (but you are already a reviewer 😊)",
+      "revId": "fef80688483b5cd0e370f4b3f6180f79440f51a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09e5cdc2_eb4fa044",
+        "filename": "libs/libvmbase/src/console.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-07-23T19:28:38Z",
+      "side": 1,
+      "message": "nit: `SAFETY: ` (this seems like a safety comment, no?)",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 44,
+        "endChar": 5
+      },
+      "revId": "fef80688483b5cd0e370f4b3f6180f79440f51a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
