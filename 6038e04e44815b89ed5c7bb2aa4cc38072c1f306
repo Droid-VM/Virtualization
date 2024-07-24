@@ -16,6 +16,24 @@
       "message": "It doesn\u0027t look like everything under demo_accessor runs in Android.\n\nFor example, accessor_vm runs in guest.\n\nThe aidl is shared between android and guest, which should then be moved to libs.\n\n----------\n\nOr perhaps the entire directory should go to tests/vm_accessor",
       "revId": "6038e04e44815b89ed5c7bb2aa4cc38072c1f306",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4c22d4e_94cac696",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-24T07:12:17Z",
+      "side": 1,
+      "message": "Question: Having this under `tests/..` make sense? It\u0027s also served as a demo application for accessor, so I wonder having it under `tests/..` make sense. (or keep existing location?)",
+      "parentUuid": "9c722e36_5a48e46d",
+      "revId": "6038e04e44815b89ed5c7bb2aa4cc38072c1f306",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
