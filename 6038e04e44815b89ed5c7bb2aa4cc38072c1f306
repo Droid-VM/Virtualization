@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c722e36_5a48e46d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-24T06:22:31Z",
+      "side": 1,
+      "message": "It doesn\u0027t look like everything under demo_accessor runs in Android.\n\nFor example, accessor_vm runs in guest.\n\nThe aidl is shared between android and guest, which should then be moved to libs.\n\n----------\n\nOr perhaps the entire directory should go to tests/vm_accessor",
+      "revId": "6038e04e44815b89ed5c7bb2aa4cc38072c1f306",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
