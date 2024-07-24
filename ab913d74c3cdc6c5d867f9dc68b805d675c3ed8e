@@ -22,6 +22,30 @@
       },
       "revId": "ab913d74c3cdc6c5d867f9dc68b805d675c3ed8e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88fe9fea_f3039b8b",
+        "filename": "android/VmLauncherApp/AndroidManifest.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-07-24T05:38:23Z",
+      "side": 1,
+      "message": "VmlauncherApp defines this permission and is protected by this permission.\nFerrochromeApp is preinstalled so it can use this permission. Since FerrochromeApp had this permission, it can use vmlauncherApp.\n\nAlso I think `preinstalled` can not be on it\u0027s own, because \u0027preinstalled\u0027 is a flag. A protectionLevel must have one _base type_ plus zero or more _flags_",
+      "parentUuid": "240d34ba_bec4e2ff",
+      "range": {
+        "startLine": 12,
+        "startChar": 33,
+        "endLine": 12,
+        "endChar": 55
+      },
+      "revId": "ab913d74c3cdc6c5d867f9dc68b805d675c3ed8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
