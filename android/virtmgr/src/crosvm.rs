@@ -83,6 +83,7 @@ const RAMDUMP_RESERVED_MIB: u32 = 17;
 const MILLIS_PER_SEC: i64 = 1000;
 
 const SYSPROP_CUSTOM_PVMFW_PATH: &str = "hypervisor.pvmfw.path";
+const SYSPROP_PRODUCT_DEVICE: &str = "ro.product.device";
 
 /// Serial device for VM console input.
 /// Hypervisor (virtio-console)
@@ -925,7 +926,16 @@ fn run_vm(
             Some(pvmfw_path) if !pvmfw_path.is_empty() => {
                 command.arg("--protected-vm-with-firmware").arg(pvmfw_path)
             }
-            _ => command.arg("--protected-vm"),
+            _ => {
+                let device = system_properties::read(SYSPROP_PRODUCT_DEVICE)?;
+                match device.as_deref() {
+                    Some("vsoc_x86_64") => {
+                        // Pretend that pVMs are supported on Cuttlefish (b/353716897).
+                        &mut command
+                    }
+                    _ => command.arg("--protected-vm"),
+                }
+            }
         };
 
         // 3 virtio-console devices + vsock = 4.
