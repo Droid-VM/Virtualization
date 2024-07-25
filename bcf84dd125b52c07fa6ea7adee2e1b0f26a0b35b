@@ -22,6 +22,30 @@
       },
       "revId": "bcf84dd125b52c07fa6ea7adee2e1b0f26a0b35b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44c1b91c_58b0d6e0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1251186
+      },
+      "writtenOn": "2024-07-25T15:55:13Z",
+      "side": 1,
+      "message": "thanks for the pointer! after much experimentation I got console output working, but haven\u0027t gotten input working yet. Do we expect console input to work?\n\nTo get console output working, I had to create a pty on the host, and pass the file to VmInstance::create, then it worked as expected. What is the incantation for console input?",
+      "parentUuid": "c85e38e7_4b1df5ae",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 32
+      },
+      "revId": "bcf84dd125b52c07fa6ea7adee2e1b0f26a0b35b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
