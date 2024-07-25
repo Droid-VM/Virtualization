@@ -70,6 +70,30 @@
       },
       "revId": "bcf84dd125b52c07fa6ea7adee2e1b0f26a0b35b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5b8bac7_8cb4bf06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1251186
+      },
+      "writtenOn": "2024-07-25T23:33:51Z",
+      "side": 1,
+      "message": "Can you explain a bit more? If I run my raw os images directly on crosvm with these args, I get both output and input working:\n\n```\nadb shell \"/apex/com.android.virt/bin/crosvm --extended-status run --disable-sandbox --mem 256 --host-cpu-topology --virt-cpufreq --serial type\u003dstdout,stdin,hardware\u003dvirtio-console,num\u003d1 --initrd \u003cinitrd\u003e \u003ckernel\u003e\n```\n\nBut when using AVF only output works. The main difference is that AVF is type\u003dfile for the serial configuration:\n```\n--serial\u003dtype\u003dfile,path\u003d/proc/self/fd/29 (/dev/ptmx),input\u003d/proc/self/fd/30 (/dev/pts/0),hardware\u003dvirtio-console,num\u003d1\n```\n\nwhich leads me to believe that something on the host-side is not properly configuring the pipes.",
+      "parentUuid": "aaf25a53_1840e35d",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 32
+      },
+      "revId": "bcf84dd125b52c07fa6ea7adee2e1b0f26a0b35b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
