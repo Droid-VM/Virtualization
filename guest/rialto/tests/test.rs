@@ -26,7 +26,7 @@ use bssl_avf::{rand_bytes, sha256, EcKey, PKey};
 use client_vm_csr::generate_attestation_key_and_csr;
 use coset::{CborSerializable, CoseMac0, CoseSign};
 use hwtrust::{rkp, session::Session};
-use log::{info, warn};
+use log::info;
 use service_vm_comm::{
     ClientVmAttestationParams, Csr, CsrPayload, EcdsaP256KeyPair, GenerateCertificateRequestParams,
     Request, RequestProcessingError, Response, VmType,
@@ -61,7 +61,7 @@ fn process_requests_in_protected_vm() -> Result<()> {
         // verify the chain due to the missing entries in the chain.
         check_processing_requests(VmType::ProtectedVm)
     } else {
-        warn!("pVMs are not supported on device, skipping test");
+        log::warn!("pVMs are not supported on device, skipping test");
         Ok(())
     }
 }
