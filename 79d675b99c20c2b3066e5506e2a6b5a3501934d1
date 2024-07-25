@@ -22,6 +22,30 @@
       },
       "revId": "79d675b99c20c2b3066e5506e2a6b5a3501934d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b407f38_500f5032",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-07-25T15:56:20Z",
+      "side": 1,
+      "message": "Thanks for this change! I also found out I could get the output if I run the tests manually with:\n\n```\n# one terminal\nadb shell ./apex/com.android.virt.accessor_demo/bin/accessor_demo \u003e demo.txt\n# second terminal\nadb shell ./data/nativetest64/vm_accessor_test/vm_accessor_test\n```",
+      "parentUuid": "887d2ee9_62feda5f",
+      "range": {
+        "startLine": 21,
+        "startChar": 26,
+        "endLine": 21,
+        "endChar": 39
+      },
+      "revId": "79d675b99c20c2b3066e5506e2a6b5a3501934d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
