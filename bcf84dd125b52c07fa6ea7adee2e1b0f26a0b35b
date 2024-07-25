@@ -46,6 +46,30 @@
       },
       "revId": "bcf84dd125b52c07fa6ea7adee2e1b0f26a0b35b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaf25a53_1840e35d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-07-25T16:03:55Z",
+      "side": 1,
+      "message": "You might need to set the console device of the vm, for example https://android.googlesource.com/platform/packages/modules/Virtualization/+/bcf84dd125b52c07fa6ea7adee2e1b0f26a0b35b/ferrochrome_app/vm_config.json.template#40\n\n\nThe vm should start a Getty service listening on the same device.\nBy default it is hvc0, it also supports being set to ttyS0.\nIf you need other device ports, we can just add them.",
+      "parentUuid": "44c1b91c_58b0d6e0",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 32
+      },
+      "revId": "bcf84dd125b52c07fa6ea7adee2e1b0f26a0b35b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
