@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b941905_79b44429",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-07-25T07:42:26Z",
+      "side": 1,
+      "message": "maybe we should use a Messenger to schedule these short lived worker threads?\nThis way we only need to spawn exactly one thread to handle all clipboard related comms, and we won\u0027t de-allocate re-allocate the threads.",
+      "revId": "eab78d130f02c7f3ef3060d15951b34ec771a00d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
