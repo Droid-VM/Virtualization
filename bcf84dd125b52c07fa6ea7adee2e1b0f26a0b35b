@@ -142,6 +142,30 @@
       },
       "revId": "bcf84dd125b52c07fa6ea7adee2e1b0f26a0b35b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7565e135_cdafc385",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1251186
+      },
+      "writtenOn": "2024-07-26T16:19:13Z",
+      "side": 1,
+      "message": "I had misread VirtualMachine.java, which I was using as an example, and had passed the `mPtsFd` as the console_input. I just fixed it so that I am passing `mPtyFd` to both the console_input and console_output, and that resulted in `ptmx` showing up for both input and output in this command line.\n\nThat hasn\u0027t fixed the problem yet, but I\u0027ll try Yi-Yo\u0027s other suggestions in another thread.\n\nOur guest does have a terminal that has input/output working when running directly on crosvm, therefore I think it\u0027s a misconfiguration in the AVF-side of things. I\u0027m likely holding it wrong somehow.",
+      "parentUuid": "33062cf6_8c1a6aad",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 32
+      },
+      "revId": "bcf84dd125b52c07fa6ea7adee2e1b0f26a0b35b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
