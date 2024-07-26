@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ac9b60a8_f728c34b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-26T12:10:32Z",
+      "side": 1,
+      "message": "\u003e could this information be deduced from the DICE chain?\n\nGiven that DICE isn\u0027t supported in non-protected VMs and isn\u0027t a VSR mandate, I\u0027d prefer to avoid the risk of reading an unknown memory region to determine if it contains a DICE chain or expected data. In production, rialto won\u0027t be launched in non-protected mode, so this check is primarily for testing purposes.",
+      "parentUuid": "74ce11c3_abcebe34",
+      "range": {
+        "startLine": 13,
+        "startChar": 33,
+        "endLine": 13,
+        "endChar": 54
+      },
+      "revId": "93beeb2df73893db7fb08c038c57863328558852",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3598bf5e_70368195",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b8ec0e0_cf6f8041",
+        "filename": "guest/rialto/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-26T12:10:32Z",
+      "side": 1,
+      "message": "Indeed. Thank you!",
+      "parentUuid": "1b8719f1_81003595",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 1
+      },
+      "revId": "93beeb2df73893db7fb08c038c57863328558852",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f0f9960_3d7f1d82",
@@ -77,6 +125,30 @@
       "writtenOn": "2024-07-26T11:29:24Z",
       "side": 1,
       "message": "Note that a malicious host could fake this by inserting the DT property in a non-p VM. Would that be an issue? If not, would you mind clarifying this in the commit message?",
+      "range": {
+        "startLine": 66,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 31
+      },
+      "revId": "93beeb2df73893db7fb08c038c57863328558852",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4913ca5_533e2272",
+        "filename": "guest/rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-07-26T12:10:32Z",
+      "side": 1,
+      "message": "It\u0027s not an issue as rialto only operates in protected mode in prod. I updated the commit message.",
+      "parentUuid": "7f0f9960_3d7f1d82",
       "range": {
         "startLine": 66,
         "startChar": 4,
