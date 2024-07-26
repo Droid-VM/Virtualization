@@ -256,23 +256,11 @@ next-stage secret, and a certificate chain, intended for pVM attestation. Note
 that it differs from the `AndroidDiceHandover` defined by the specification in
 that its `DiceCertChain` field is mandatory (while optional in the original).
 
-Devices that fully implement DICE should provide a certificate rooted at the
-Unique Device Secret (UDS) in a boot stage preceding the pvmfw loader (typically
-ABL), in such a way that it would receive a valid `AndroidDiceHandover`, that
-can be passed to [`DiceAndroidHandoverMainFlow`][DiceAndroidHandoverMainFlow] along with
-the inputs described below.
+From [VSR-15][vsr-15], devices must implement DICE support for protected VM,
+providing a DICE handover with the same root key as that provided to the primary
+KeyMint instance (VSR-7.1-001.005).
 
-Otherwise, as an intermediate step towards supporting DICE throughout the
-software stack of the device, incomplete implementations may root the DICE chain
-at the pvmfw loader, using an arbitrary constant as initial CDI. The pvmfw
-loader can easily do so by:
-
-1. Building an "empty" `AndroidDiceHandover` using CBOR operations only
-   containing constant CDIs ([example][Trusty-BCC])
-1. Passing the resulting `AndroidDiceHandover` to `DiceAndroidHandoverMainFlow`
-   as described above
-
-The recommended DICE inputs at this stage are:
+The recommended DICE inputs at the stage preceding pvmfw are:
 
 - **Code**: hash of the pvmfw image, hypervisor (`boot.img`), and other target
   code relevant to the secure execution of pvmfw (_e.g._ `vendor_boot.img`)
@@ -286,12 +274,38 @@ The recommended DICE inputs at this stage are:
   storage and changes during every factory reset) or similar that changes as
   part of the device lifecycle (_e.g._ reset)
 
-The resulting `AndroidDiceHandover` is then used by pvmfw in a similar way to
-derive another [DICE layer][Layering], passed to the guest through a
-`/reserved-memory` device tree node marked as
+The resulting [AndroidDiceHandover][AndroidDiceHandover] is then used by pvmfw
+in a similar way to derive another [DICE layer][Layering], passed to the guest
+through a `/reserved-memory` device tree node marked as
 [`compatible=”google,open-dice”`][dice-dt].
 
-All protected VMs must provide a valid DICE chain from [VSR-15][vsr-15].
+#### pVM DICE chain
+
+Unlike KeyMint, which only needs a vendor DICE chain, the pVM DICE
+chain combines the vendor's DICE chain with additional pVM DICE nodes
+describing the protected VM's environment.
+![][pvm-dice-chain-img]
+
+The full DICE chain, starting from `UDS_Pub`, is collected in the pVM and
+sent to the RKP server during [VM remote attestation][vm-attestation].
+
+#### Key derivation
+
+Key derivation is crucial for handover. Vendors must ensure pvmfw and the last
+vendor node derive a key pair from `CDI_Attest` identically to maintain a valid
+certificate chain. Pvmfw uses open-dice with this formula:
+
+```
+CDI_Attest_pub, CDI_Attest_priv = KDF_ASYM(KDF(CDI_Attest))
+```
+
+Where KDF = HKDF-SHA-512 (RFC 5869).
+
+Currently, KDF_ASYM = Ed25519, but EC p-384 and p-256 (RFC 6979) support is
+coming soon.
+
+Vendors must use a supported algorithm for the last DICE node to ensure
+compatibility and chain integrity.
 
 #### Testing
 
@@ -308,15 +322,15 @@ properties using the [hwtrust][hwtrust] library:
 
 [AVB]: https://source.android.com/docs/security/features/verifiedboot/boot-flow
 [AndroidDiceHandover]: https://pigweed.googlesource.com/open-dice/+/42ae7760023/src/android.c#212
-[DiceAndroidHandoverMainFlow]: https://pigweed.googlesource.com/open-dice/+/42ae7760023/src/android.c#221
 [CDDL]: https://datatracker.ietf.org/doc/rfc8610
 [dice-mode]: https://pigweed.googlesource.com/open-dice/+/refs/heads/main/docs/specification.md#Mode-Value-Details
 [dice-dt]: https://www.kernel.org/doc/Documentation/devicetree/bindings/reserved-memory/google%2Copen-dice.yaml
 [Layering]: https://pigweed.googlesource.com/open-dice/+/refs/heads/main/docs/specification.md#layering-details
-[Trusty-BCC]: https://android.googlesource.com/trusty/lib/+/1696be0a8f3a7103/lib/hwbcc/common/swbcc.c#554
 [vsr-15]: https://docs.partner.android.com/gms/policies/vsr/vsr-15
 [hwtrust]: https://cs.android.com/android/platform/superproject/main/+/main:tools/security/remote_provisioning/hwtrust/
 [android-open-dice]: https://android.googlesource.com/platform/external/open-dice/+/refs/heads/main/docs/android.md
+[vm-attestation]: ../../docs/vm_remote_attestation.md
+[pvm-dice-chain-img]: ../../docs/img/pvm-dice.png
 
 ### Platform Requirements
 
