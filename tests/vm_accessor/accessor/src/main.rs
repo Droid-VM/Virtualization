@@ -30,7 +30,7 @@ const PORT: i32 = 5678;
 
 // MUST match with VINTF and init.rc
 // TODO(b/354632613): Get this from VINTF
-const SERVICE_NAME: &str = "android.os.IAccessor/IAccessorVmService/default";
+const SERVICE_NAME: &str = "com.android.virt.accessor_demo.vm_service.IAccessorVmService/default";
 
 fn main() -> Result<(), Error> {
     android_logger::init_once(
