@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "74ce11c3_abcebe34",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-07-26T11:29:24Z",
+      "side": 1,
+      "message": "This isn\u0027t a blocker for this CL but, thinking beyond our current architecture and imagining we don\u0027t have a DT to parse, could this information be deduced from the DICE chain? My feeling is that it wouldn\u0027t be because Rialto doesn\u0027t know what a \"valid\" pvmfw looks like but maybe I\u0027m overlooking something?",
+      "range": {
+        "startLine": 13,
+        "startChar": 33,
+        "endLine": 13,
+        "endChar": 54
+      },
+      "revId": "93beeb2df73893db7fb08c038c57863328558852",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3598bf5e_70368195",
@@ -14,6 +37,29 @@
       "writtenOn": "2024-07-26T11:13:27Z",
       "side": 1,
       "message": "Hi, PTAL",
+      "revId": "93beeb2df73893db7fb08c038c57863328558852",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f0f9960_3d7f1d82",
+        "filename": "guest/rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-07-26T11:29:24Z",
+      "side": 1,
+      "message": "Note that a malicious host could fake this by inserting the DT property in a non-p VM. Would that be an issue? If not, would you mind clarifying this in the commit message?",
+      "range": {
+        "startLine": 66,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 31
+      },
       "revId": "93beeb2df73893db7fb08c038c57863328558852",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
