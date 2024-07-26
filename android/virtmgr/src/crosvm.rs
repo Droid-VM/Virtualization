@@ -1123,6 +1123,7 @@ fn run_vm(
     }
 
     if cfg!(paravirtualized_devices) {
+        command.arg("--simple-media");
         for input_device_option in config.input_device_options.iter() {
             command.arg("--input");
             command.arg(match input_device_option {
