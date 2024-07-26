@@ -43,6 +43,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1b8719f1_81003595",
+        "filename": "guest/rialto/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-07-26T11:35:20Z",
+      "side": 1,
+      "message": "You might not want to fail with `Err` on a missing `/chosen`:\n```suggestion\n    let strict_boot \u003d if let Some(node) \u003d fdt.chosen()? {\n        node.getprop(cstr!(\"avf,strict-boot\"))?\n    } else {\n        None\n    };\n\n    Ok(strict_boot.is_some())\n}\n```\n(not sure if there\u0027s a more concise way to express this)",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 1
+      },
+      "revId": "93beeb2df73893db7fb08c038c57863328558852",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f0f9960_3d7f1d82",
         "filename": "guest/rialto/src/main.rs",
         "patchSetId": 1
