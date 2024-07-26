@@ -28,7 +28,7 @@ android_test {
     platform_apis: true,
     use_embedded_native_libs: true,
     compile_multilib: "64",
-    required: ["perf-setup"],
+    required: ["perf-setup-sh"],
     host_required: ["MicrodroidTestPreparer"],
     data: [":test_microdroid_vendor_image"],
 }
