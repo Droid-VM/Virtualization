@@ -94,6 +94,30 @@
       },
       "revId": "bcf84dd125b52c07fa6ea7adee2e1b0f26a0b35b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "483f5649_97daac0d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-26T00:16:51Z",
+      "side": 1,
+      "message": "Yi-yo, their guest OS is not Linux. I don\u0027t know if they have a terminal service or not, but I think it\u0027s safe to assume they don\u0027t.\n\nActually, with b/263360203 (about 1 year ago), serial console in was supported. It got slightly changed with your recent change where the input is coming from a host-side pty device. I don\u0027t think that broke the existing case, but it\u0027s worth looking into it.\n\nAidan, can you try [1]?\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/docs/custom_vm.md;drc\u003d4b010bb04378d1b0792515d054dede440eaee26b;l\u003d230",
+      "parentUuid": "f5b8bac7_8cb4bf06",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 32
+      },
+      "revId": "bcf84dd125b52c07fa6ea7adee2e1b0f26a0b35b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
