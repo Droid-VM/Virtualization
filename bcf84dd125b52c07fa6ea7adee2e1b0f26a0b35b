@@ -118,6 +118,30 @@
       },
       "revId": "bcf84dd125b52c07fa6ea7adee2e1b0f26a0b35b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33062cf6_8c1a6aad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-07-26T02:46:12Z",
+      "side": 1,
+      "message": "but Aiden also said that they can use stdin/stdout if invoking crosvm command directly, so there must be a getty-like process in their guest OS, right?\n\nactually I think this might be some misconfiguration, the second command (the one that\u0027s not working) passed \"ptmx\" to the path\u003d option and pts to the input\u003d option. What it should have been is that both input\u003d and path\u003d are passed the ptmx device handle.",
+      "parentUuid": "483f5649_97daac0d",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 32
+      },
+      "revId": "bcf84dd125b52c07fa6ea7adee2e1b0f26a0b35b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
