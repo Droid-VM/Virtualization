@@ -34,6 +34,24 @@
       "parentUuid": "4b941905_79b44429",
       "revId": "eab78d130f02c7f3ef3060d15951b34ec771a00d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "142b05d8_1fd861c5",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-07-29T01:18:53Z",
+      "side": 1,
+      "message": "As I said in the chat, noting that those worker threads are not short-living. It may need to take seconds to finish their tasks. So it cannot be done with spawning only one thread.",
+      "parentUuid": "fc635be7_bf00b94e",
+      "revId": "eab78d130f02c7f3ef3060d15951b34ec771a00d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
