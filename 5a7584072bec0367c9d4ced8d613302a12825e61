@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e21b973_dc652c55",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-29T14:51:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d23fa63e_4f57be7a",
+      "range": {
+        "startLine": 16,
+        "startChar": 45,
+        "endLine": 16,
+        "endChar": 54
+      },
+      "revId": "5a7584072bec0367c9d4ced8d613302a12825e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8cc9b0e7_f8411cec",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "553e0393_02bff2ac",
+        "filename": "android/FerrochromeApp/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-29T14:51:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8cc9b0e7_f8411cec",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 28
+      },
+      "revId": "5a7584072bec0367c9d4ced8d613302a12825e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5453a417_23d9985a",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-07-29T14:24:01Z",
       "side": 1,
       "message": "I don\u0027t understand the need for the broadcast receiver. Why can\u0027t we start the downloader activity and let it return immediately if no download is required? Broadcast receivers are slow, and this looks unnecessary complexity. Starting the downloader activity won\u0027t cause any ui issue; it can draw a UI only when downloading is actually needed.",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 80
+      },
+      "revId": "5a7584072bec0367c9d4ced8d613302a12825e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d7a41a9_1d01ec41",
+        "filename": "android/FerrochromeApp/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-29T14:51:50Z",
+      "side": 1,
+      "message": "I tried that way, but I could see blinks due to the \u0027try launching downloader\u0027.",
+      "parentUuid": "5453a417_23d9985a",
       "range": {
         "startLine": 202,
         "startChar": 0,
