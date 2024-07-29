@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a29c4494_752ec7ac",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-07-29T02:25:59Z",
+      "side": 1,
+      "message": "I was opposite side for using looper, but having dedicated looper for clipboard things only sounds good to me. My concern for using looper is blocking other requests because of delay on clipboard sharing.\n\nI\u0027ll be going to work for setting 2 looper threads:\n- One for clipboard sharing.\n- The other for any other requests including open_url.",
+      "parentUuid": "26a0172c_128f487f",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 53
+      },
+      "revId": "6e108f4d3c1a3f64fdd64b5022298d3c68ad776e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8d3a9cf8_bae9e0f6",
