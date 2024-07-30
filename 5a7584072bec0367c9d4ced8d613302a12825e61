@@ -140,6 +140,30 @@
       },
       "revId": "5a7584072bec0367c9d4ced8d613302a12825e61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37f17e2d_ac231d06",
+        "filename": "android/FerrochromeApp/java/com/android/virtualization/ferrochrome/FerrochromeActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-07-30T04:44:25Z",
+      "side": 1,
+      "message": "Seems like that blinks happened only if FerrochromeDownloader is opend\u0026exit while FerrochromeApp start animation (when started from launcher!) is shown.\n\nLet me remove this logic, to minimize interfaces between two components. Let\u0027s clean up UX with UX experts.",
+      "parentUuid": "6d7a41a9_1d01ec41",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 80
+      },
+      "revId": "5a7584072bec0367c9d4ced8d613302a12825e61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
