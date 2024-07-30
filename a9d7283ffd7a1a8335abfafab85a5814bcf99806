@@ -1,0 +1,222 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f021698_0a08d9a1",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-30T12:30:14Z",
+      "side": 1,
+      "message": "Please note that VmLauncherApp should be agnostic to the guest payload. The guest payload (i.e. non-Ferrochrome OS) may not have the data sharing service in it, in which case this will fail.\n\nSo, not here, but in the future we may want to make it possible for the vm_config.json to have an option for this.",
+      "range": {
+        "startLine": 639,
+        "startChar": 59,
+        "endLine": 639,
+        "endChar": 99
+      },
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "600551a4_ee3f85fc",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-30T12:30:14Z",
+      "side": 1,
+      "message": "That is the point of sleeping here? Can we just try connectVsock again?",
+      "range": {
+        "startLine": 643,
+        "startChar": 16,
+        "endLine": 643,
+        "endChar": 53
+      },
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68948b3e_dec36aaa",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-30T12:30:14Z",
+      "side": 1,
+      "message": "If you want to add a context to the IOException, do `new IOException(\"messasge for context\", e);`",
+      "range": {
+        "startLine": 669,
+        "startChar": 0,
+        "endLine": 670,
+        "endChar": 24
+      },
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "455bb4b9_e0141596",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-30T12:30:14Z",
+      "side": 1,
+      "message": "same here, but why don\u0027t you return false here? (you return false just above)",
+      "range": {
+        "startLine": 692,
+        "startChar": 0,
+        "endLine": 693,
+        "endChar": 24
+      },
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbbb5875_54a6a3c2",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-30T12:30:14Z",
+      "side": 1,
+      "message": "You are already logging here.",
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fc3b954_6aaae6a8",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-30T12:30:14Z",
+      "side": 1,
+      "message": "why don\u0027t you check the return value of this?",
+      "range": {
+        "startLine": 762,
+        "startChar": 12,
+        "endLine": 762,
+        "endChar": 54
+      },
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7e3dfc4_d0be4547",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 766,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-30T12:30:14Z",
+      "side": 1,
+      "message": "consider logging the exceptions as well",
+      "range": {
+        "startLine": 764,
+        "startChar": 0,
+        "endLine": 766,
+        "endChar": 64
+      },
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f224f692_9de2aced",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-30T12:30:14Z",
+      "side": 1,
+      "message": "use named constants.",
+      "range": {
+        "startLine": 780,
+        "startChar": 37,
+        "endLine": 780,
+        "endChar": 38
+      },
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4c41d9e_72400f3f",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-30T12:30:14Z",
+      "side": 1,
+      "message": "this means you can never read the clipboard if writeClipboardToVm never succeeds. And you can never write to the clipboard if readClipboardFromVm never succeeds.",
+      "range": {
+        "startLine": 781,
+        "startChar": 36,
+        "endLine": 781,
+        "endChar": 42
+      },
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edd372d3_06907007",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-07-30T12:30:14Z",
+      "side": 1,
+      "message": "Why? It\u0027s almost always good to explicitly list the exceptions caught.",
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
