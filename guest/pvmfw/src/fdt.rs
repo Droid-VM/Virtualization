@@ -602,10 +602,6 @@ fn validate_pci_addr_range(
         error!("Invalid range type {:?} for bus address {:#x} in PCI node", range_type, bus_addr);
         return Err(RebootReason::InvalidFdt);
     }
-    if prefetchable {
-        error!("PCI bus address {:#x} in PCI node is prefetchable", bus_addr);
-        return Err(RebootReason::InvalidFdt);
-    }
     // Enforce ID bus-to-cpu mappings, as used by crosvm.
     if bus_addr != cpu_addr {
         error!("PCI bus address: {:#x} is different from CPU address: {:#x}", bus_addr, cpu_addr);
