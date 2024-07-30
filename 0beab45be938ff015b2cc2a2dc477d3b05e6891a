@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3261779f_ccbdc6fb",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1954750
+      },
+      "writtenOn": "2024-07-30T17:02:27Z",
+      "side": 1,
+      "message": "The patchset on top of the revert contains changes to set `allow_any_mode` when `ro.debuggable` is `true` in `check_csr` in `rialto/tests/test.rs`.\n\nIt also changes `VirtualMachineConfig` to `DEBUG_LEVEL_NONE` in the `protectedVmHasValidDiceChain` test in `MicrodroidTests.java`, which was causing the test to fail due to having a debug mode in the dice chain.",
+      "range": {
+        "startLine": 288,
+        "startChar": 0,
+        "endLine": 294,
+        "endChar": 0
+      },
+      "revId": "0beab45be938ff015b2cc2a2dc477d3b05e6891a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
