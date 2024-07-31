@@ -70,6 +70,24 @@
       "parentUuid": "d210dbac_dafadb1a",
       "revId": "43e0d7312be2e0bab90124419c1e1dd514787fbe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62ceac34_320b11d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-07-31T12:51:01Z",
+      "side": 1,
+      "message": "crosvm provides two PCI BAR ranges, both marked as 64-bit memory, one non-prefetchable at 0x2000000 and one prefetchable at 0x90800000.",
+      "parentUuid": "6de37bc2_75b48b4c",
+      "revId": "43e0d7312be2e0bab90124419c1e1dd514787fbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
