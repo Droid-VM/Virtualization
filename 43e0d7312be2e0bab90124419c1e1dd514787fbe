@@ -142,6 +142,24 @@
       "parentUuid": "02122043_46cbb258",
       "revId": "43e0d7312be2e0bab90124419c1e1dd514787fbe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e51ebe37_7e3fc690",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-07-31T13:20:45Z",
+      "side": 1,
+      "message": "I thought it was the other way around: 32-bit regions must be non-prefetchable, but 64-bit regions may be either prefetchable or not.\n\nIn any case, crosvm provides two regions, both marked as 64-bit, one which is prefetchable and one which is not. The VirtIO PCI devices I\u0027ve seen from crosvm all only have 32-bit non-prefetchable BARs, which seem to be allocated from the non-prefetchable 64-bit region. This seems like a crosvm bug, the region should probably be marked as 32-bit, and indeed it is all within 32-bit address space.\n\nFor comparison, QEMU provides a 32-bit region and a 64-bit region, but both are non-prefetchable. Some of the VirtIO PCI devices it provides do request prefetchable BARs. I assume its fine to allocate a prefetchable BAR from a non-prefetchable region but not vice-versa?",
+      "parentUuid": "02122043_46cbb258",
+      "revId": "43e0d7312be2e0bab90124419c1e1dd514787fbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
