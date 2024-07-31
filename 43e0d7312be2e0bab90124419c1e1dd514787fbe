@@ -16,6 +16,24 @@
       "message": "This causes tests to fail because `validate_pci_addr_range` expects all ranges to be non-prefetchable. Why is it checking that?",
       "revId": "43e0d7312be2e0bab90124419c1e1dd514787fbe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59057c81_4207f9cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2024-07-31T07:27:15Z",
+      "side": 1,
+      "message": "I suspect an abundance of caution on Jiyong\u0027s part when implementing DT validation, given he will (erroneously, due to this bug) not have observed any prefetchable regions, and thus deferred handling them. We\u0027d best hear from him about it.",
+      "parentUuid": "12c7a314_97a727fa",
+      "revId": "43e0d7312be2e0bab90124419c1e1dd514787fbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
