@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99b4b3d7_f4cf8ba0",
+        "filename": "guest/rialto/tests/test.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2024-07-31T04:07:08Z",
+      "side": 1,
+      "message": "If the comment is going to stay, it should explain why the fake DICE chain or debug builds are relevant.\n\n```suggestion\n    let non_protected_vm \u003d vm_type \u003d\u003d VmType::NonProtectedVm;\n    let debuggable \u003d system_properties::read_bool(\"ro.debuggable\", false).unwrap_or(false);\n    session.set_allow_any_mode(non_protected_vm || debuggable);\n```",
+      "range": {
+        "startLine": 288,
+        "startChar": 4,
+        "endLine": 293,
+        "endChar": 6
+      },
+      "revId": "14d2d3cb5d1b99de0966762e09b27e0f74078112",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
