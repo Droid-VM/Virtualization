@@ -178,6 +178,24 @@
       "parentUuid": "e51ebe37_7e3fc690",
       "revId": "43e0d7312be2e0bab90124419c1e1dd514787fbe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d90c3ea_51793783",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-07-31T14:28:34Z",
+      "side": 1,
+      "message": "As discussed offline, my first comment above was partially incorrect because `\u003cranges\u003e` actual;u includes those memory flags. As a result, the guest is already receiving what the VMM passed and there is no need for the `TODO`. Also, Andrew and I just went through the specification defining the flags and we concluded that they were not security sensitive. Therefore, pvmfw doesn\u0027t need to validate them.",
+      "parentUuid": "edf6f5ad_d6a2a317",
+      "revId": "43e0d7312be2e0bab90124419c1e1dd514787fbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
