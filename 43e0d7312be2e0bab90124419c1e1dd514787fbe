@@ -106,6 +106,24 @@
       "parentUuid": "62ceac34_320b11d5",
       "revId": "43e0d7312be2e0bab90124419c1e1dd514787fbe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02122043_46cbb258",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2024-07-31T13:13:21Z",
+      "side": 1,
+      "message": "I believe 64-bit BARs are always prefetchable. Put another way: non-prefetchable regions must be 32-bit, and this is a limitation of the PCI spec. And I note that we also check here that the memory type is `Memory64`.",
+      "parentUuid": "6de37bc2_75b48b4c",
+      "revId": "43e0d7312be2e0bab90124419c1e1dd514787fbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
