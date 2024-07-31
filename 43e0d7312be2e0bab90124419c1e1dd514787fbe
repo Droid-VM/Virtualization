@@ -160,6 +160,24 @@
       "parentUuid": "02122043_46cbb258",
       "revId": "43e0d7312be2e0bab90124419c1e1dd514787fbe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edf6f5ad_d6a2a317",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2024-07-31T13:33:37Z",
+      "side": 1,
+      "message": "\u003e I assume its fine to allocate a prefetchable BAR from a non-prefetchable region but not vice-versa?\n\nThat\u0027s my understanding. And makes sense.",
+      "parentUuid": "e51ebe37_7e3fc690",
+      "revId": "43e0d7312be2e0bab90124419c1e1dd514787fbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
