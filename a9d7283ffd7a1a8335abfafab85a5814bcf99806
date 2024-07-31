@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "510a5344_486ca25c",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-07-31T02:00:30Z",
+      "side": 1,
+      "message": "I see. Sounds good for having an option in `vm_config.json` around that.\n\nPLMK if I need to take an action here.",
+      "parentUuid": "1f021698_0a08d9a1",
+      "range": {
+        "startLine": 639,
+        "startChar": 59,
+        "endLine": 639,
+        "endChar": 99
+      },
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "600551a4_ee3f85fc",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "efb418d4_b80e4414",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-07-31T02:00:30Z",
+      "side": 1,
+      "message": "Without sleeping here, this function will try to connect vsock port verbosely in the initialization of VM boot. It can make too much verbose logs and resources busy.",
+      "parentUuid": "600551a4_ee3f85fc",
+      "range": {
+        "startLine": 643,
+        "startChar": 16,
+        "endLine": 643,
+        "endChar": 53
+      },
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68948b3e_dec36aaa",
         "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
         "patchSetId": 5
@@ -60,6 +108,30 @@
       "writtenOn": "2024-07-30T12:30:14Z",
       "side": 1,
       "message": "If you want to add a context to the IOException, do `new IOException(\"messasge for context\", e);`",
+      "range": {
+        "startLine": 669,
+        "startChar": 0,
+        "endLine": 670,
+        "endChar": 24
+      },
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf029140_d9f8911e",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-07-31T02:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68948b3e_dec36aaa",
       "range": {
         "startLine": 669,
         "startChar": 0,
@@ -95,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2cd5603c_96993683",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-07-31T02:00:30Z",
+      "side": 1,
+      "message": "For throwing error into the outer try-catch block with logging. Or, would it be better not to return false above, and throw error like here instead?",
+      "parentUuid": "455bb4b9_e0141596",
+      "range": {
+        "startLine": 692,
+        "startChar": 0,
+        "endLine": 693,
+        "endChar": 24
+      },
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cbbb5875_54a6a3c2",
         "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
         "patchSetId": 5
@@ -112,6 +208,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0704037c_4427efae",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-07-31T02:00:30Z",
+      "side": 1,
+      "message": "Can\u0027t get this. What\u0027s the purpose of this comment?",
+      "parentUuid": "cbbb5875_54a6a3c2",
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9fc3b954_6aaae6a8",
         "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
         "patchSetId": 5
@@ -123,6 +237,30 @@
       "writtenOn": "2024-07-30T12:30:14Z",
       "side": 1,
       "message": "why don\u0027t you check the return value of this?",
+      "range": {
+        "startLine": 762,
+        "startChar": 12,
+        "endLine": 762,
+        "endChar": 54
+      },
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f510a717_7e51ed6e",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-07-31T02:00:30Z",
+      "side": 1,
+      "message": "There\u0027s no usage of the return value, PLMK if you have an idea.\n\n- There\u0027s no definite order between `onWindowFocusChanged(false)` and `onStop()`. So it needs a mechanism for ensuring reading clipboard before VM suspend if possible. Noting that VM could be suspended before clipboard feature works properly, especially during setup wizard screen. OTOH, we cannot block VM suspend forever due to reading clipboard.\n- Sufficient log would be captured inside `readClipboardFromVm`.",
+      "parentUuid": "9fc3b954_6aaae6a8",
       "range": {
         "startLine": 762,
         "startChar": 12,
@@ -156,6 +294,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc224c93_ce7a7b38",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 766,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-07-31T02:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7e3dfc4_d0be4547",
+      "range": {
+        "startLine": 764,
+        "startChar": 0,
+        "endLine": 766,
+        "endChar": 64
+      },
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f224f692_9de2aced",
@@ -169,6 +331,30 @@
       "writtenOn": "2024-07-30T12:30:14Z",
       "side": 1,
       "message": "use named constants.",
+      "range": {
+        "startLine": 780,
+        "startChar": 37,
+        "endLine": 780,
+        "endChar": 38
+      },
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afa63fd8_0c7748ec",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-07-31T02:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f224f692_9de2aced",
       "range": {
         "startLine": 780,
         "startChar": 37,
@@ -204,6 +390,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "18e4aa85_4477985b",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-07-31T02:00:30Z",
+      "side": 1,
+      "message": "That\u0027s intended. Succeeding here means clipboard things worked well as intended, not actual clipboard contents are modified for the update. So returning false from `writeClipboardToVm` or `readClipboardFromVm` represents there was an error.\n\nIf there\u0027s an error from any side, vice versa wouldn\u0027t work.",
+      "parentUuid": "e4c41d9e_72400f3f",
+      "range": {
+        "startLine": 781,
+        "startChar": 36,
+        "endLine": 781,
+        "endChar": 42
+      },
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "edd372d3_06907007",
         "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
         "patchSetId": 5
@@ -215,6 +425,24 @@
       "writtenOn": "2024-07-30T12:30:14Z",
       "side": 1,
       "message": "Why? It\u0027s almost always good to explicitly list the exceptions caught.",
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7f632f8_60ae58cc",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-07-31T02:00:30Z",
+      "side": 1,
+      "message": "Do we really able to catch any uncaught error type beyond here(the end of the thread execution) with helpful debug log? Have no strong opinion if it does.",
+      "parentUuid": "edd372d3_06907007",
       "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
