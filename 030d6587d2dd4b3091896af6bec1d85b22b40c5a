@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff9b0611_29df3960",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/VmConfigJson.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-07-31T01:15:03Z",
+      "side": 1,
+      "message": "```\n            private boolean rendererUseEgl \u003d true;\n            private boolean rendererUseGles \u003d true;\n            private boolean rendererUseGlx \u003d false;\n            private boolean rendererUseSurfaceless \u003d true;\n            private boolean rendererUseVulkan \u003d false;\n```\n\npackages/modules/Virtualization/libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java\n\nThey have default values. I think we need to set the same default value..(because `toConfig()` always calls setter for them.",
+      "range": {
+        "startLine": 199,
+        "startChar": 0,
+        "endLine": 203,
+        "endChar": 44
+      },
+      "revId": "030d6587d2dd4b3091896af6bec1d85b22b40c5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
