@@ -52,6 +52,24 @@
       "parentUuid": "59057c81_4207f9cd",
       "revId": "43e0d7312be2e0bab90124419c1e1dd514787fbe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6de37bc2_75b48b4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-07-31T12:11:12Z",
+      "side": 1,
+      "message": "\u003e Why is it checking that?\n\nBecause we\u0027re about to overwrite the input DT with the template DT. As `patch_pci_info()` only resizes the IRQ properties and patches `\u003cranges\u003e`, we need to make sure that the guest will see the memory attributes (unmodified from the template) that the host generated.\n\nAre regions sometimes prefetchable and sometimes not? If not, then it might make sense for this patch to simply switch the polarity of the `if` instead of removing the check altogether?",
+      "parentUuid": "d210dbac_dafadb1a",
+      "revId": "43e0d7312be2e0bab90124419c1e1dd514787fbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
