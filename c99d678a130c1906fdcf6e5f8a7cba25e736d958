@@ -52,6 +52,24 @@
       "parentUuid": "b8ea37cf_c77f3239",
       "revId": "c99d678a130c1906fdcf6e5f8a7cba25e736d958",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3650801_18edd70d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-08-01T21:12:16Z",
+      "side": 1,
+      "message": "I don\u0027t believe any test uses USB AVF ast the moment. The default behavior of launching the VM is also preserved in this case, where USB is enabled. It\u0027s only disabled in the Microdroid case.\n\nI wouldn\u0027t say this is behavior that would be \"caught\", as it\u0027s a config passed to launch a VM (enable/disable USB), and not a bug. We could add tests to enable/disable and validate the existence/lack of USB? But then, we\u0027d look to validating the existence of all devices.",
+      "parentUuid": "9d2ba565_c83e4986",
+      "revId": "c99d678a130c1906fdcf6e5f8a7cba25e736d958",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
