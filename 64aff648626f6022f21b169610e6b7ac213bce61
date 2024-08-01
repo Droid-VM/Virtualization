@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78fceb81_2b2074ea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-08-01T08:15:57Z",
+      "side": 1,
+      "message": "MAYBE: Not related to this CL in particular but a prerequisite for testing: Is it worth adding how can we set the new property in vbmeta to false ?",
+      "revId": "64aff648626f6022f21b169610e6b7ac213bce61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "301d07de_41309e83",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-08-01T08:15:57Z",
+      "side": 1,
+      "message": "MAYBE: What will be the behavior for new pvmfw that interprets this property with old vbmeta layout that doesn\u0027t have `debugable_payload`? Will `debuggable_payload` be initialized as `False` because it is not found ? This seems like we can return an `Option\u003cbool\u003e` for debuggable_payload to be more explicit.",
+      "range": {
+        "startLine": 259,
+        "startChar": 19,
+        "endLine": 259,
+        "endChar": 37
+      },
+      "revId": "64aff648626f6022f21b169610e6b7ac213bce61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
