@@ -909,6 +909,7 @@ fn run_vm(
         .arg("info,disk=warn")
         .arg("run")
         .arg("--disable-sandbox")
+        .arg("--no-usb")
         .arg("--cid")
         .arg(config.cid.to_string());
 
