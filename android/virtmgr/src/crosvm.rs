@@ -135,6 +135,7 @@ pub struct CrosvmConfig {
     pub boost_uclamp: bool,
     pub gpu_config: Option<GpuConfig>,
     pub audio_config: Option<AudioConfig>,
+    pub usb: bool,
 }
 
 #[derive(Debug)]
@@ -919,6 +920,10 @@ fn run_vm(
     }
 
     let mut memory_mib = config.memory_mib;
+
+    if !config.usb {
+        command.arg("--no-usb");
+    }
 
     if config.protected {
         match system_properties::read(SYSPROP_CUSTOM_PVMFW_PATH)? {
