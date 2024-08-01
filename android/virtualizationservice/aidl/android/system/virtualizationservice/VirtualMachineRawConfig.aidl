@@ -100,4 +100,7 @@ parcelable VirtualMachineRawConfig {
     @nullable GpuConfig gpuConfig;
 
     @nullable AudioConfig audioConfig;
+
+    /** Whether the VM should have USB passthrough */
+    boolean usb;
 }

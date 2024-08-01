@@ -622,6 +622,7 @@ impl VirtualizationService {
             boost_uclamp: config.boostUclamp,
             gpu_config,
             audio_config,
+            usb: config.usb,
         };
         let instance = Arc::new(
             VmInstance::new(
