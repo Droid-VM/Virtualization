@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aaaac1fa_b11492b3",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-01T10:53:41Z",
+      "side": 1,
+      "message": "No, not here, but in a follow-up change.",
+      "parentUuid": "510a5344_486ca25c",
+      "range": {
+        "startLine": 639,
+        "startChar": 59,
+        "endLine": 639,
+        "endChar": 99
+      },
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "600551a4_ee3f85fc",
         "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
         "patchSetId": 5
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Without sleeping here, this function will try to connect vsock port verbosely in the initialization of VM boot. It can make too much verbose logs and resources busy.",
       "parentUuid": "600551a4_ee3f85fc",
+      "range": {
+        "startLine": 643,
+        "startChar": 16,
+        "endLine": 643,
+        "endChar": 53
+      },
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1872c7d4_6ac6e9a1",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-01T10:53:41Z",
+      "side": 1,
+      "message": "That depends on what the timeout is for connectVsock. What is the timeout value?",
+      "parentUuid": "efb418d4_b80e4414",
       "range": {
         "startLine": 643,
         "startChar": 16,
@@ -191,6 +239,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "48200d80_600e7fa5",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-01T10:53:41Z",
+      "side": 1,
+      "message": "either way works for me. I just want a consistency throughout the code.",
+      "parentUuid": "2cd5603c_96993683",
+      "range": {
+        "startLine": 692,
+        "startChar": 0,
+        "endLine": 693,
+        "endChar": 24
+      },
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cbbb5875_54a6a3c2",
         "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
         "patchSetId": 5
@@ -220,6 +292,24 @@
       "side": 1,
       "message": "Can\u0027t get this. What\u0027s the purpose of this comment?",
       "parentUuid": "cbbb5875_54a6a3c2",
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ee11a7b_4c0956a5",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-01T10:53:41Z",
+      "side": 1,
+      "message": "In PS5, at L692 you logged a message, and then throw an exception. That exception is caught here and then you are logging again.",
+      "parentUuid": "0704037c_4427efae",
       "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -261,6 +351,30 @@
       "side": 1,
       "message": "There\u0027s no usage of the return value, PLMK if you have an idea.\n\n- There\u0027s no definite order between `onWindowFocusChanged(false)` and `onStop()`. So it needs a mechanism for ensuring reading clipboard before VM suspend if possible. Noting that VM could be suspended before clipboard feature works properly, especially during setup wizard screen. OTOH, we cannot block VM suspend forever due to reading clipboard.\n- Sufficient log would be captured inside `readClipboardFromVm`.",
       "parentUuid": "9fc3b954_6aaae6a8",
+      "range": {
+        "startLine": 762,
+        "startChar": 12,
+        "endLine": 762,
+        "endChar": 54
+      },
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30a8b731_8629f2e9",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-01T10:53:41Z",
+      "side": 1,
+      "message": "readClipboardFromVm returns false upon a failure. By not checking it, you are ignoring the failure. \n\nI think the problem stems from the fact that you report a failure sometimes by returning false, and sometime by throwing an exception. Please be consistent.",
+      "parentUuid": "f510a717_7e51ed6e",
       "range": {
         "startLine": 762,
         "startChar": 12,
@@ -414,6 +528,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37ec7f13_0c881cb7",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-01T10:53:41Z",
+      "side": 1,
+      "message": "No. Failing to read from clipboard doesn\u0027t necessarily mean that you shouldn\u0027t be able to write to clipboard (and vice versa).\n\nIn general, you shouldn\u0027t have a loop that can possibly run forever in a message handler because that loop can prevent other messages from being handled.",
+      "parentUuid": "18e4aa85_4477985b",
+      "range": {
+        "startLine": 781,
+        "startChar": 36,
+        "endLine": 781,
+        "endChar": 42
+      },
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "edd372d3_06907007",
         "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
         "patchSetId": 5
@@ -443,6 +581,24 @@
       "side": 1,
       "message": "Do we really able to catch any uncaught error type beyond here(the end of the thread execution) with helpful debug log? Have no strong opinion if it does.",
       "parentUuid": "edd372d3_06907007",
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8733ee3f_3c75965a",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-01T10:53:41Z",
+      "side": 1,
+      "message": "Some exceptions may imply assertion failures which deserve a crash. Here, you catch *all* exceptions, log them, and pretend nothing has happened. We will never know what happened until we look into the log. That\u0027s not a healthy decision to make.",
+      "parentUuid": "f7f632f8_60ae58cc",
       "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
