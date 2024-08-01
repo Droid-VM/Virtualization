@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "174d12c7_a02b2822",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-01T10:40:01Z",
+      "side": 1,
+      "message": "This property isn\u0027t new (see my other reply) and we already have tests for it.",
+      "parentUuid": "78fceb81_2b2074ea",
+      "revId": "64aff648626f6022f21b169610e6b7ac213bce61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "301d07de_41309e83",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-08-01T08:15:57Z",
       "side": 1,
       "message": "MAYBE: What will be the behavior for new pvmfw that interprets this property with old vbmeta layout that doesn\u0027t have `debugable_payload`? Will `debuggable_payload` be initialized as `False` because it is not found ? This seems like we can return an `Option\u003cbool\u003e` for debuggable_payload to be more explicit.",
+      "range": {
+        "startLine": 259,
+        "startChar": 19,
+        "endLine": 259,
+        "endChar": 37
+      },
+      "revId": "64aff648626f6022f21b169610e6b7ac213bce61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6768fc63_fc0b84ac",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-01T10:40:01Z",
+      "side": 1,
+      "message": "Sorry if this wasn\u0027t clear but \"debuggability\" isn\u0027t a new feature (see `docs/debug/`) and has been supported since Android 14 (see b/256148034) so the `Option\u003cbool\u003e` you\u0027re suggested would never be `None`.\n\nFYI, payloads are non-debuggable by default and tagging one as debuggable requires the payload signer to add extra information i.e. the risk of inadvertently shipping a debuggable payload is very low (and will be reflected in its DICE chain anyway).",
+      "parentUuid": "301d07de_41309e83",
       "range": {
         "startLine": 259,
         "startChar": 19,
