@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "de474ac9_f819bf22",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineRawConfig.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-08-02T02:18:54Z",
+      "side": 1,
+      "message": "The idea of a list makes sense. Hot-plugging comes to mind though.\n\nWould VMs support hot-plugged devices? Mouse, keyboard, storage, etc.\n\nI thought of disabling USB if the list is empty after you suggested the list, but there\u0027s no guarantee that there won\u0027t be a USB device in the future as a VM is running, unless we specify that hot-plugging is not supported.\n\nMaybe having 2 separate variables would be viable, enable the controller and then the list of devices. WDYT?",
+      "parentUuid": "466ff138_c5eef9d7",
+      "range": {
+        "startLine": 105,
+        "startChar": 4,
+        "endLine": 105,
+        "endChar": 11
+      },
+      "revId": "fd111f1763848493db3e4b8c233f9e485ff474d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "af8cb8f2_3eb24bc2",
         "filename": "build/microdroid/microdroid.json",
         "patchSetId": 4
