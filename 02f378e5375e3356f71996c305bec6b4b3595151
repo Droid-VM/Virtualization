@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2ffd2db_5dd3d755",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/VmConfigJson.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-08-02T12:18:13Z",
+      "side": 1,
+      "message": "nits: can we use method reference?",
+      "range": {
+        "startLine": 141,
+        "startChar": 37,
+        "endLine": 141,
+        "endChar": 54
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "fa9fa85e_83c2b6db",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/VmConfigJson.java",
+              "range": {
+                "startLine": 141,
+                "startChar": 0,
+                "endLine": 142,
+                "endChar": 0
+              },
+              "replacement": "            Arrays.stream(disks).map(DiskJson::toConfig).forEach(builder::addDisk);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "02f378e5375e3356f71996c305bec6b4b3595151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
