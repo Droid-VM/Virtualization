@@ -616,6 +616,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fc8677d_9b768fef",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-08-02T08:43:02Z",
+      "side": 1,
+      "message": "Okay, removed the loop. Writing clipboard will perform as single-directional protocol, and reading clipboard will perform as bi-directional protocol with timeout.",
+      "parentUuid": "37ec7f13_0c881cb7",
+      "range": {
+        "startLine": 781,
+        "startChar": 36,
+        "endLine": 781,
+        "endChar": 42
+      },
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "edd372d3_06907007",
