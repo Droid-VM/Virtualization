@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d464251a_9fcd94f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-02T00:26:10Z",
+      "side": 1,
+      "message": "This CL is fine (not wrong), but is incomplete. I\u0027ve left some comments on places where further consideration/modification is needed.",
+      "revId": "fd111f1763848493db3e4b8c233f9e485ff474d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "466ff138_c5eef9d7",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineRawConfig.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-02T00:26:10Z",
+      "side": 1,
+      "message": "For now, I think a simple on/off switch is enough, but in the future I think this shall be more complicated. For example, we would enable the USB controller, but would like to pass only certain USB devices to the VM. Then this shall be a list of USB devices. Just FYI.",
+      "range": {
+        "startLine": 105,
+        "startChar": 4,
+        "endLine": 105,
+        "endChar": 11
+      },
+      "revId": "fd111f1763848493db3e4b8c233f9e485ff474d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af8cb8f2_3eb24bc2",
+        "filename": "build/microdroid/microdroid.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-02T00:26:10Z",
+      "side": 1,
+      "message": "This json file is parsed by [1]. You will need to add a new field to it and pass that field when constructing VirtualMachineRawConfig [2].\n\nA good way to verify everything works is by setting this to true, and seeing if Microdroid VM is \"with\" USB.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/vmconfig/src/lib.rs\n\n[2] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/vmconfig/src/lib.rs;drc\u003d3f9b50901061a97aad5563b3f0daa16721bd9956;l\u003d113",
+      "revId": "fd111f1763848493db3e4b8c233f9e485ff474d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b7ec6f6_d0d6fc74",
+        "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-02T00:26:10Z",
+      "side": 1,
+      "message": "The primary user of VirtualmachineCustomImageConfig is VmConfigJson[1] in the VmLauncherApp. VmConfigJson should call setUseUsb depending on the value of the new attribute `usb`.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/android/VmLauncherApp/java/com/android/virtualization/vmlauncher/VmConfigJson.java",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 30
+      },
+      "revId": "fd111f1763848493db3e4b8c233f9e485ff474d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
