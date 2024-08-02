@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "227b0e63_ba906467",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineRawConfig.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-02T02:26:26Z",
+      "side": 1,
+      "message": "That works. But if you really want to be future proof, I would suggest defining a struct. For the time being, there will be only one boolean field in it, but in the future we could add more to the struct.",
+      "parentUuid": "de474ac9_f819bf22",
+      "range": {
+        "startLine": 105,
+        "startChar": 4,
+        "endLine": 105,
+        "endChar": 11
+      },
+      "revId": "fd111f1763848493db3e4b8c233f9e485ff474d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "af8cb8f2_3eb24bc2",
         "filename": "build/microdroid/microdroid.json",
         "patchSetId": 4
