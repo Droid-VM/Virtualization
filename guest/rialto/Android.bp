@@ -120,6 +120,22 @@ prebuilt_etc {
     installable: false,
 }
 
+python_binary_host {
+    name: "append_arm64_header",
+    srcs: ["append_arm64_header.py"],
+}
+
+// The offset of the text section defined in idmap.S
+TEXT_OFFSET = "0"
+
+genrule {
+    name: "rialto_unsigned_arm64",
+    srcs: [":rialto_unsigned"],
+    out: ["rialto_unsigned_arm64.bin"],
+    tools: ["append_arm64_header"],
+    cmd: "$(location append_arm64_header) $(in) " + TEXT_OFFSET + " $(out) "
+}
+
 rust_test {
     name: "rialto_test",
     crate_name: "rialto_test",
@@ -145,7 +161,7 @@ rust_test {
         "libx509_cert_nostd",
     ],
     data: [
-        ":rialto_unsigned",
+        ":rialto_unsigned_arm64",
         ":test_rkp_cert_chain",
     ],
     test_suites: ["general-tests"],
