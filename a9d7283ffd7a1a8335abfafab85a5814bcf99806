@@ -143,6 +143,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eade17a_e95f3149",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-08-02T08:27:45Z",
+      "side": 1,
+      "message": "Removed retrying logic in connecting DataSharingService.",
+      "parentUuid": "1872c7d4_6ac6e9a1",
+      "range": {
+        "startLine": 643,
+        "startChar": 16,
+        "endLine": 643,
+        "endChar": 53
+      },
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68948b3e_dec36aaa",
@@ -261,6 +285,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59dd7dfd_3ab9c9b3",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-08-02T08:27:45Z",
+      "side": 1,
+      "message": "Made it consistent with propagating the error.",
+      "parentUuid": "48200d80_600e7fa5",
+      "range": {
+        "startLine": 692,
+        "startChar": 0,
+        "endLine": 693,
+        "endChar": 24
+      },
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cbbb5875_54a6a3c2",
@@ -310,6 +358,24 @@
       "side": 1,
       "message": "In PS5, at L692 you logged a message, and then throw an exception. That exception is caught here and then you are logging again.",
       "parentUuid": "0704037c_4427efae",
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4f1e132_21669535",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-08-02T08:27:45Z",
+      "side": 1,
+      "message": "With propagating the error, there\u0027s no dup\u0027d logging logic now.",
+      "parentUuid": "9ee11a7b_4c0956a5",
       "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -599,6 +665,24 @@
       "side": 1,
       "message": "Some exceptions may imply assertion failures which deserve a crash. Here, you catch *all* exceptions, log them, and pretend nothing has happened. We will never know what happened until we look into the log. That\u0027s not a healthy decision to make.",
       "parentUuid": "f7f632f8_60ae58cc",
+      "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dee18522_5f515bc4",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-08-02T08:27:45Z",
+      "side": 1,
+      "message": "Backed as before.",
+      "parentUuid": "8733ee3f_3c75965a",
       "revId": "a9d7283ffd7a1a8335abfafab85a5814bcf99806",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
