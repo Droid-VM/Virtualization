@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c1af118a_0063b9b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-05T14:57:32Z",
+      "side": 1,
+      "message": "I am sorry to say this, but I feel like the clipboard service routine needs a major refactoring. \n\nsome ideas:\n\n* keep the connection while VM is up\n* or let the vm to connect to the host\n* let the vm to send data to the host when copy is made",
+      "revId": "3228f16c1a1962dd43baf3b6607616ad1c4276ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d1c83df3_0c1c40d2",
         "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
         "patchSetId": 12
@@ -14,6 +31,121 @@
       "writtenOn": "2024-08-05T11:39:29Z",
       "side": 1,
       "message": "I don\u0027t think this does what you want\n\nFuture.get(timeout) \u003d\u003e This just waits for the Future to complete. The timeout is for the calling thread. _Calling thread_ waits at most |timeout| time for the future to complete. If timeout is exceeded, it just means the calling thread won\u0027t continue waiting, however the _awaited thread_ (the blocked thread / the thread that actually executes readClipboardFromVm()) would still continue to run.\n\nSame goes for `InterruptedException`. This means the calling thread is interrupted before the Futre.get() deadline is reached. It does _not_ mean the awaited thread is interrupted.\n\nSo what you want is to call Future.get() with timeout,\nIf `InterruptedException` or `TimeoutException` is caught, call Future.cancel() on the pending Future, so that the awaited thread is cancelled / interrupted. (Otherwise it would keep lingering in the background)\n\nThat being said the Future.cancel() still probably won\u0027t do what you want, because readClipboardFromVm() does not check the Thread.isInterrupted() state.",
+      "revId": "3228f16c1a1962dd43baf3b6607616ad1c4276ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ad29ff8_fbaa1e74",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-05T14:57:32Z",
+      "side": 1,
+      "message": "good point.",
+      "parentUuid": "d1c83df3_0c1c40d2",
+      "revId": "3228f16c1a1962dd43baf3b6607616ad1c4276ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96719350_e74ba86e",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-05T14:57:32Z",
+      "side": 1,
+      "message": "why are these handled differently?",
+      "range": {
+        "startLine": 580,
+        "startChar": 0,
+        "endLine": 584,
+        "endChar": 89
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ee7b6bc7_d75a5358",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+              "range": {
+                "startLine": 581,
+                "startChar": 0,
+                "endLine": 581,
+                "endChar": 0
+              },
+              "replacement": "                                    // Write clipboard to VM when the device is in foreground.\n"
+            },
+            {
+              "path": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+              "range": {
+                "startLine": 584,
+                "startChar": 0,
+                "endLine": 584,
+                "endChar": 0
+              },
+              "replacement": "                                    // Read clipboard from VM when the device is in background.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3228f16c1a1962dd43baf3b6607616ad1c4276ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccc464fb_57c6b89a",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-05T14:57:32Z",
+      "side": 1,
+      "message": "nit: these comments are not helpful. they just explain what the code below does, but not why. for example, \"why do we have to remove pending messages? in what condition the pending message can be?\" these questions should be answered if needed.",
+      "range": {
+        "startLine": 593,
+        "startChar": 0,
+        "endLine": 595,
+        "endChar": 74
+      },
+      "revId": "3228f16c1a1962dd43baf3b6607616ad1c4276ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0c80a6c_38b26637",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-05T14:57:32Z",
+      "side": 1,
+      "message": "this needs a comment as well. sending message to itself looks very odd.",
+      "range": {
+        "startLine": 601,
+        "startChar": 0,
+        "endLine": 601,
+        "endChar": 58
+      },
       "revId": "3228f16c1a1962dd43baf3b6607616ad1c4276ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
