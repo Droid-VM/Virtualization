@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1c83df3_0c1c40d2",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-08-05T11:39:29Z",
+      "side": 1,
+      "message": "I don\u0027t think this does what you want\n\nFuture.get(timeout) \u003d\u003e This just waits for the Future to complete. The timeout is for the calling thread. _Calling thread_ waits at most |timeout| time for the future to complete. If timeout is exceeded, it just means the calling thread won\u0027t continue waiting, however the _awaited thread_ (the blocked thread / the thread that actually executes readClipboardFromVm()) would still continue to run.\n\nSame goes for `InterruptedException`. This means the calling thread is interrupted before the Futre.get() deadline is reached. It does _not_ mean the awaited thread is interrupted.\n\nSo what you want is to call Future.get() with timeout,\nIf `InterruptedException` or `TimeoutException` is caught, call Future.cancel() on the pending Future, so that the awaited thread is cancelled / interrupted. (Otherwise it would keep lingering in the background)\n\nThat being said the Future.cancel() still probably won\u0027t do what you want, because readClipboardFromVm() does not check the Thread.isInterrupted() state.",
+      "revId": "3228f16c1a1962dd43baf3b6607616ad1c4276ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
