@@ -230,6 +230,10 @@ public abstract class MicrodroidDeviceTestBase {
         assume().withMessage("GSI with vendor API level < 202404 may not support AVF")
                 .that(isGsi && vendorApiLevel < 202404)
                 .isFalse();
+        int vmCapabilities = getVirtualMachineManager().getCapabilities() & VirtualMachineManager.CAPABILITY_PROTECTED_VM;
+        assume().withMessage("Device doesn't support AVF due to protected VMs not being supported and vendor API level<202404")
+                .that(vmCapabilities == 0 && vendorApiLevel < 202404)
+                .isFalse();
     }
 
     protected void assumeVsrCompliant() {
