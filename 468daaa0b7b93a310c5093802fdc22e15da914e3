@@ -16,6 +16,29 @@
       "message": "We might not need this CL anymore, but still upload it here for closure, and for future study.",
       "revId": "468daaa0b7b93a310c5093802fdc22e15da914e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9af1e2c4_bfe6186b",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-05T12:06:22Z",
+      "side": 1,
+      "message": "It would have been nicer if this method accepts a timeout (presumably using setsockopt and select), so that we can eliminate the sleep in the below.  but unfortunately the rust vsock crate doesn\u0027t seem to support timeout when connecting.\n\nOr implement the method by listening on a port instead.\n\nAnyway, that\u0027s outside the scope of this change.",
+      "range": {
+        "startLine": 755,
+        "startChar": 44,
+        "endLine": 755,
+        "endChar": 69
+      },
+      "revId": "468daaa0b7b93a310c5093802fdc22e15da914e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
