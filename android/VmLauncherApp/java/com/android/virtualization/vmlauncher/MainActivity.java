@@ -29,9 +29,12 @@ import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.hardware.input.InputManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.SystemClock;
 import android.system.virtualizationservice_internal.IVirtualizationServiceInternal;
 import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineCallback;
@@ -93,6 +96,8 @@ public class MainActivity extends Activity implements InputManager.InputDeviceLi
     private VirtualMachine mVirtualMachine;
     private CursorHandler mCursorHandler;
     private ClipboardManager mClipboardManager;
+    private HandlerThread mOpenUrlHandlerThread;
+    private Handler mOpenUrlHandler;
 
     private VirtualMachineConfig createVirtualMachineConfig(String jsonPath) {
         VirtualMachineConfig.Builder configBuilder =
@@ -328,12 +333,7 @@ public class MainActivity extends Activity implements InputManager.InputDeviceLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String action = getIntent().getAction();
-        if (!ACTION_VM_LAUNCHER.equals(action)) {
-            finish();
-            Log.e(TAG, "onCreate unsupported intent action: " + action);
-            return;
-        }
+        Log.d(TAG, "onCreate intent: " + getIntent());
         checkAndRequestRecordAudioPermission();
         mExecutorService = Executors.newCachedThreadPool();
         try {
@@ -546,6 +546,11 @@ public class MainActivity extends Activity implements InputManager.InputDeviceLi
                 WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
         windowInsetsController.hide(WindowInsets.Type.systemBars());
         registerInputDeviceListener();
+
+        mOpenUrlHandlerThread = new HandlerThread("OpenUrlHandlerThread");
+        mOpenUrlHandlerThread.start();
+        mOpenUrlHandler = new Handler(mOpenUrlHandlerThread.getLooper());
+        handleIntent(getIntent());
     }
 
     @Override
@@ -591,6 +596,10 @@ public class MainActivity extends Activity implements InputManager.InputDeviceLi
         super.onDestroy();
         if (mExecutorService != null) {
             mExecutorService.shutdownNow();
+        }
+        if (mOpenUrlHandlerThread != null) {
+            mOpenUrlHandlerThread.quit();
+            mOpenUrlHandlerThread.interrupt();
         }
         unregisterInputDeviceListener();
         Log.d(TAG, "destroyed");
@@ -721,27 +730,40 @@ public class MainActivity extends Activity implements InputManager.InputDeviceLi
 
     @Override
     protected void onNewIntent(Intent intent) {
-        String action = intent.getAction();
-        if (!ACTION_VM_OPEN_URL.equals(action)) {
-            Log.e(TAG, "onNewIntent unsupported intent action: " + action);
-            return;
+        Log.d(TAG, "onNewIntent intent: " + intent);
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
+        if (ACTION_VM_OPEN_URL.equals(intent.getAction())) {
+            String url = intent.getStringExtra(Intent.EXTRA_TEXT);
+            if (mOpenUrlHandler != null && url != null) {
+                mOpenUrlHandler.post(() -> sendOpenUrlToVm(url));
+            }
         }
-        Log.d(TAG, "onNewIntent intent action: " + action);
-        String text = intent.getStringExtra(Intent.EXTRA_TEXT);
-        if (text != null) {
-            mExecutorService.execute(
-                    () -> {
-                        byte[] data = text.getBytes();
-                        try (ParcelFileDescriptor pfd = connectDataSharingService();
-                                OutputStream stream =
-                                        new FileOutputStream(pfd.getFileDescriptor())) {
-                            stream.write(constructClipboardHeader(OPEN_URL, data.length));
-                            stream.write(data);
-                            Log.d(TAG, "Successfully sent URL to the VM");
-                        } catch (IOException | VirtualMachineException e) {
-                            Log.e(TAG, "Failed to send URL to the VM", e);
-                        }
-                    });
+    }
+
+    private void sendOpenUrlToVm(String url) {
+        final long RETRY_INTERVAL_MS = 1_000;
+        boolean should_log = true;
+        byte[] data = url.getBytes();
+        while (!Thread.currentThread().isInterrupted()) {
+            try (ParcelFileDescriptor pfd = connectDataSharingService();
+                    OutputStream stream = new FileOutputStream(pfd.getFileDescriptor())) {
+                stream.write(constructClipboardHeader(OPEN_URL, data.length));
+                stream.write(data);
+                Log.d(TAG, "Successfully sent URL to the VM");
+                break;
+            } catch (IOException e) {
+                Log.e(TAG, "Failed to send URL to the VM", e);
+                break;
+            } catch (VirtualMachineException e) {
+                if (should_log) {
+                    should_log = false;
+                    Log.d(TAG, "Still waiting for VM Data Sharing Service to start", e);
+                }
+            }
+            SystemClock.sleep(RETRY_INTERVAL_MS);
         }
     }
 
