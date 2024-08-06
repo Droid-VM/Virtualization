@@ -48,6 +48,17 @@ parcelable VirtualMachineRawConfig {
      */
     @nullable ParcelFileDescriptor bootloader;
 
+    /**
+     * Load the payload at 0x80000000 and the FDT immediately after the it,
+     * with 2 MiB alignment.
+     *
+     * By default, when using a bootloader, the FDT is at 0x80000000 and the
+     * payload is at 0x80200000.
+     *
+     * TODO: Make this an opt-out.
+     */
+    boolean loadFdtAfterPayload;
+
     /** Disk images to be made available to the VM. */
     DiskImage[] disks;
 
