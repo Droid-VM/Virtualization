@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "152e0c47_79472a47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-08-06T02:59:22Z",
+      "side": 1,
+      "message": "Why do you think the refactoring is required? Your idea above sounds same as my initial suggestion via DD that VM sending clips when it receives an event via Wayland Compositor.\n\nRefactoring may make our code more stable. But it should require huge effort for refactoring. Comparing to the amount of effort, I can\u0027t find what we can gain enough valuable.",
+      "parentUuid": "c1af118a_0063b9b6",
+      "revId": "3228f16c1a1962dd43baf3b6607616ad1c4276ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d1c83df3_0c1c40d2",
         "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
         "patchSetId": 12
