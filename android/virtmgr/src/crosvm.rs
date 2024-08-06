@@ -107,6 +107,7 @@ pub struct CrosvmConfig {
     pub cid: Cid,
     pub name: String,
     pub bootloader: Option<File>,
+    pub load_fdt_after_payload: bool,
     pub kernel: Option<File>,
     pub initrd: Option<File>,
     pub disks: Vec<DiskFile>,
@@ -961,6 +962,17 @@ fn run_vm(
     }
 
     command.arg("--mem").arg(memory_mib.to_string());
+
+    if config.load_fdt_after_payload {
+        command.arg("--fdt-position=after-payload");
+    } else {
+        // The following is the default crosvm behavior. Made explicit here for readability.
+        if config.kernel.is_some() {
+            command.arg("--fdt-position=end");
+        } else {
+            command.arg("--fdt-position=start");
+        }
+    }
 
     if let Some(cpus) = config.cpus {
         command.arg("--cpus").arg(cpus.to_string());

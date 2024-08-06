@@ -319,6 +319,7 @@ fn nonprotected_vm_instance() -> Result<VmInstance> {
     let config = VirtualMachineConfig::RawConfig(VirtualMachineRawConfig {
         name: String::from("Non protected rialto"),
         bootloader: Some(ParcelFileDescriptor::new(rialto)),
+        loadFdtAfterPayload: true,
         protectedVm: false,
         memoryMib: 300,
         platformVersion: "~1.0".to_string(),

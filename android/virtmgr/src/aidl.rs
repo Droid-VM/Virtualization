@@ -589,6 +589,7 @@ impl VirtualizationService {
             cid,
             name: config.name.clone(),
             bootloader: maybe_clone_file(&config.bootloader)?,
+            load_fdt_after_payload: config.loadFdtAfterPayload,
             kernel,
             initrd,
             disks,

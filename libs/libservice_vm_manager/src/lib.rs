@@ -228,6 +228,7 @@ pub fn protected_vm_instance(instance_img_path: PathBuf) -> Result<VmInstance> {
     let config = VirtualMachineConfig::RawConfig(VirtualMachineRawConfig {
         name: String::from("Service VM"),
         bootloader: Some(ParcelFileDescriptor::new(rialto)),
+        loadFdtAfterPayload: true,
         disks: vec![DiskImage { image: None, partitions: writable_partitions, writable: true }],
         instanceId: instance_id,
         protectedVm: true,
