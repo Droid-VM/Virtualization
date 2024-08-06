@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3e927a8_78a23a8b",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-08-06T07:07:57Z",
+      "side": 1,
+      "message": "do you have anything in mind? \nTBH I\u0027m not at all concerned about naming here, as this is just for debugging and logging purposes. We can change the name of this thread anytime in the future if the job of this thread changes.",
+      "parentUuid": "d5e3155b_e7091f7f",
+      "range": {
+        "startLine": 550,
+        "startChar": 51,
+        "endLine": 550,
+        "endChar": 71
+      },
+      "revId": "468daaa0b7b93a310c5093802fdc22e15da914e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8203f5b_e4d3bac1",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-08-06T03:57:11Z",
       "side": 1,
       "message": "nit: Would URL check be needed inside here? `onCreate` of `OpenUrlActivity` already checks in advance, but no checks in the functional level. Current code would be okay, but it can matter in the future if malformed URL is put as input parameter.\n\nJust a suggestion, ignoring this is fine.",
+      "range": {
+        "startLine": 750,
+        "startChar": 17,
+        "endLine": 750,
+        "endChar": 44
+      },
+      "revId": "468daaa0b7b93a310c5093802fdc22e15da914e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2325cf8_625d7a7e",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-08-06T07:07:57Z",
+      "side": 1,
+      "message": "I\u0027ve thought about this problem before.\nMy conclusion was that \"what URL scheme and format are supported\" is a question decided by the VM payload. In our case, this is something decided by the VM image (the CrOS OpenUrl API).\nThere is noway we can implement a one-size-fits-all check here in the VmLauncherApp that works well with all possible VM payload.\nThus I think the URL scheme should be checked in the user frontend (FerrochromeApp) or backend (VM guest system), not in the guest-agnostic VirtualMachine framework.",
+      "parentUuid": "f8203f5b_e4d3bac1",
       "range": {
         "startLine": 750,
         "startChar": 17,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be4fc876_329dfb40",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-08-06T07:07:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f3cb1ee_71476262",
+      "range": {
+        "startLine": 751,
+        "startChar": 19,
+        "endLine": 751,
+        "endChar": 37
+      },
+      "revId": "468daaa0b7b93a310c5093802fdc22e15da914e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9af1e2c4_bfe6186b",
@@ -100,6 +172,30 @@
       "writtenOn": "2024-08-05T12:06:22Z",
       "side": 1,
       "message": "It would have been nicer if this method accepts a timeout (presumably using setsockopt and select), so that we can eliminate the sleep in the below.  but unfortunately the rust vsock crate doesn\u0027t seem to support timeout when connecting.\n\nOr implement the method by listening on a port instead.\n\nAnyway, that\u0027s outside the scope of this change.",
+      "range": {
+        "startLine": 755,
+        "startChar": 44,
+        "endLine": 755,
+        "endChar": 69
+      },
+      "revId": "468daaa0b7b93a310c5093802fdc22e15da914e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61797275_02360d8b",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 1337669
+      },
+      "writtenOn": "2024-08-06T07:07:57Z",
+      "side": 1,
+      "message": "yeah another method to do this is to listen on a port here in the host, and the VM shall connect to the host port when it is ready to accept work",
+      "parentUuid": "9af1e2c4_bfe6186b",
       "range": {
         "startLine": 755,
         "startChar": 44,
