@@ -961,6 +961,8 @@ fn run_vm(
 
     command.arg("--mem").arg(memory_mib.to_string());
 
+    command.arg("--fdt-position=after-payload");
+
     if let Some(cpus) = config.cpus {
         command.arg("--cpus").arg(cpus.to_string());
     }
