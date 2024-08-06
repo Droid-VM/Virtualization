@@ -34,6 +34,24 @@
       "parentUuid": "0b0ba9de_8b8ef77f",
       "revId": "42586750992e4dd05fd95749860a59dc8a32018d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e2f5af3_84a07ba0",
+        "filename": "guest/rialto/append_arm64_header.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-08-06T06:15:17Z",
+      "side": 1,
+      "message": "\u003e IIUC, text_offset\u003d0 means you are trying to execute the header\n\nI tried different offsets actually, that\u0027s indeed not enough to make it work. Otherwise I\u0027m not sure you need to handle the 64 bytes, since after the header parsing [1], the reading curser in `kernel_image` should be placed in the end of the header. So the next reading [2] will only take the original image.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:external/crosvm/kernel_loader/src/arm64.rs;l\u003d95;drc\u003d7d2280f04e0d3321fa35a63a855de325777def6d\n[2] https://cs.android.com/android/platform/superproject/main/+/main:external/crosvm/kernel_loader/src/arm64.rs;l\u003d107;drc\u003d7d2280f04e0d3321fa35a63a855de325777def6d",
+      "parentUuid": "1dbdadb1_5168a425",
+      "revId": "42586750992e4dd05fd95749860a59dc8a32018d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
