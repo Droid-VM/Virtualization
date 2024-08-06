@@ -12,6 +12,7 @@ sh_test_host {
     per_testcase_directory: true,
     data: ["assets/vm_config.json"],
     data_bins: ["ferrochrome-precondition-checker.sh"],
+    java_data: ["FerrochromeTestType"],
 }
 
 // Workaround for enabling verbose logging only on CI
@@ -25,4 +26,14 @@ genrule {
 sh_binary_host {
     name: "ferrochrome-precondition-checker.sh",
     src: "ferrochrome-precondition-checker.sh",
+}
+
+java_test_helper_library {
+    name: "FerrochromeTestType",
+    srcs: ["java/com/android/ferrochrome/testtype/*.java"],
+    libs: ["tradefed"],
+    test_suites: ["general-tests"],
+    host_supported: true,
+    device_supported: false,
+    sdk_version: "test_current",
 }

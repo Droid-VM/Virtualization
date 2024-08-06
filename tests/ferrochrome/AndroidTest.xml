@@ -35,13 +35,15 @@
         <option name="run-command" value="mkdir /data/local/tmp" />
         <option name="teardown-command" value="pkill vmlauncher" />
         <option name="teardown-command" value="rm /data/local/tmp/chromiumos_base_image.bin" />
+        <option name="teardown-command" value="rm -rf /data/local/tmp/ferrochrome_screenshots" />
     </target_preparer>
 
-    <test class="com.android.tradefed.testtype.binary.ExecutableHostTest" >
+    <test class="com.android.ferrochrome.testtype.FerrochromeHostTest" >
         <option name="binary" value="ferrochrome-tests" />
         <option name="relative-path-execution" value="true" />
         <option name="runtime-hint" value="10m" />
         <option name="per-binary-timeout" value="20m" />
+        <option name="collect-dir" value="/data/local/tmp/ferrochrome_screenshots" />
     </test>
 </configuration>
 
