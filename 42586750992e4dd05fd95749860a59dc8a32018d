@@ -16,6 +16,24 @@
       "message": "the whole file is loaded into memory, including the header. IIUC, text_offset\u003d0 means you are trying to execute the header\n\ni tried adding some padding and setting the offset, but it wasn\u0027t enough to get it working\n\n```\n--- a/guest/rialto/append_arm64_header.py\n+++ b/guest/rialto/append_arm64_header.py\n@@ -42,7 +42,7 @@ def append_arm64_header(original_kernel_file, text_offset, new_filename):\n     header_data \u003d {\n         \"code0\": 0,\n         \"code1\": 0,\n-        \"text_offset\": 0,\n+        \"text_offset\": 0x1000,\n         \"image_size\": len(original_data),\n         \"flags\": 0,\n         \"res2\": 0,\n@@ -75,6 +75,8 @@ def append_arm64_header(original_kernel_file, text_offset, new_filename):\n     # Write the header and original data to the new file\n     with open(new_filename, \"wb\") as f:\n         f.write(header_bytes)\n+        for i in range(0, 0x1000 - 64):\n+          f.write((0).to_bytes(1))\n         f.write(original_data)\n\n if __name__ \u003d\u003d \"__main__\":\n```",
       "revId": "42586750992e4dd05fd95749860a59dc8a32018d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dbdadb1_5168a425",
+        "filename": "guest/rialto/append_arm64_header.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-08-06T04:31:03Z",
+      "side": 1,
+      "message": "oh, i had forgot about the idmap.S setup when i tried that. so, maybe pad to 2 mib of alignment here and then adjust the TEXT_ADDR to be `.ORIGIN_ADDR + (0 * .SZ_2M)`\n\nthat will waste a lot of space in the image file though. i wonder how linux kernel files handle this",
+      "parentUuid": "0b0ba9de_8b8ef77f",
+      "revId": "42586750992e4dd05fd95749860a59dc8a32018d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
