@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31d18fbe_a2fde27a",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-08-06T07:15:18Z",
+      "side": 1,
+      "message": "I think it would be fine unless future writer \u0026 reviewer doesn\u0027t reuse `OpenUrlHandlerThread`.",
+      "parentUuid": "d3e927a8_78a23a8b",
+      "range": {
+        "startLine": 550,
+        "startChar": 51,
+        "endLine": 550,
+        "endChar": 71
+      },
+      "revId": "468daaa0b7b93a310c5093802fdc22e15da914e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8203f5b_e4d3bac1",
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "I\u0027ve thought about this problem before.\nMy conclusion was that \"what URL scheme and format are supported\" is a question decided by the VM payload. In our case, this is something decided by the VM image (the CrOS OpenUrl API).\nThere is noway we can implement a one-size-fits-all check here in the VmLauncherApp that works well with all possible VM payload.\nThus I think the URL scheme should be checked in the user frontend (FerrochromeApp) or backend (VM guest system), not in the guest-agnostic VirtualMachine framework.",
       "parentUuid": "f8203f5b_e4d3bac1",
+      "range": {
+        "startLine": 750,
+        "startChar": 17,
+        "endLine": 750,
+        "endChar": 44
+      },
+      "revId": "468daaa0b7b93a310c5093802fdc22e15da914e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f218eb50_256b0ad1",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-08-06T07:15:18Z",
+      "side": 1,
+      "message": "Ah, makes sense. If check exists in the following data flow, no matters on the place of URL check in the host side.",
+      "parentUuid": "f2325cf8_625d7a7e",
       "range": {
         "startLine": 750,
         "startChar": 17,
