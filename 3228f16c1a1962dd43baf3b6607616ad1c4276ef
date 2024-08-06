@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "089f1768_8de81fe1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-08-06T04:58:57Z",
+      "side": 1,
+      "message": "We should drop using `wl-clipboard` then. That\u0027s workable in linux, but not in ChromiumOS. This is because `wl-clipboard` is supported based on `wlroots`, but Wayland of ChromiumOS is not based on `wlroots`. Let me show the message given from `wl-paste`:\n\n```\n$ XDG_RUNTIME_DIR\u003d/run/chrome wl-paste --watch \"echo Helloworld\"\nWatch mode requires a compositor that supports the wlroots data-control protocol\n```",
+      "parentUuid": "a3fdef0b_7d07dc87",
+      "revId": "3228f16c1a1962dd43baf3b6607616ad1c4276ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d1c83df3_0c1c40d2",
         "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
         "patchSetId": 12
