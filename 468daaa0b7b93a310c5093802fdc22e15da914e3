@@ -20,6 +20,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d5e3155b_e7091f7f",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-08-06T03:57:11Z",
+      "side": 1,
+      "message": "About naming, should this handler thread be only for opening URL? This thread is used for opening URL only for now, but I think other feature will use this one as well?",
+      "range": {
+        "startLine": 550,
+        "startChar": 51,
+        "endLine": 550,
+        "endChar": 71
+      },
+      "revId": "468daaa0b7b93a310c5093802fdc22e15da914e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8203f5b_e4d3bac1",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-08-06T03:57:11Z",
+      "side": 1,
+      "message": "nit: Would URL check be needed inside here? `onCreate` of `OpenUrlActivity` already checks in advance, but no checks in the functional level. Current code would be okay, but it can matter in the future if malformed URL is put as input parameter.\n\nJust a suggestion, ignoring this is fine.",
+      "range": {
+        "startLine": 750,
+        "startChar": 17,
+        "endLine": 750,
+        "endChar": 44
+      },
+      "revId": "468daaa0b7b93a310c5093802fdc22e15da914e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f3cb1ee_71476262",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-08-06T03:57:11Z",
+      "side": 1,
+      "message": "With time unit, like `RETRY_TIME_QUANTUM_MS`?",
+      "range": {
+        "startLine": 751,
+        "startChar": 19,
+        "endLine": 751,
+        "endChar": 37
+      },
+      "revId": "468daaa0b7b93a310c5093802fdc22e15da914e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9af1e2c4_bfe6186b",
         "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
         "patchSetId": 2
