@@ -106,6 +106,24 @@
       "parentUuid": "6c193c44_66d97070",
       "revId": "42586750992e4dd05fd95749860a59dc8a32018d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e1b46ff_56ae2320",
+        "filename": "guest/rialto/append_arm64_header.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-08-07T14:21:14Z",
+      "side": 1,
+      "message": "\u003e The following doesn\u0027t meet these requirements\n\nThese two fields are not used in crosvm:\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:external/crosvm/kernel_loader/src/arm64.rs;l\u003d37;drc\u003d7d2280f04e0d3321fa35a63a855de325777def6d",
+      "parentUuid": "6f605869_8e5093e9",
+      "revId": "42586750992e4dd05fd95749860a59dc8a32018d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
