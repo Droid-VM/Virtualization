@@ -46,6 +46,7 @@ public class VirtualMachineCustomImageConfig {
     private static final String KEY_AUDIO_CONFIG = "audio_config";
     private static final String KEY_TRACKPAD = "trackpad";
     private static final String KEY_AUTO_MEMORY_BALLOON = "auto_memory_balloon";
+    private static final String KEY_USB_CONTROLLER = "usb_controller";
 
     @Nullable private final String name;
     @Nullable private final String kernelPath;
@@ -63,6 +64,7 @@ public class VirtualMachineCustomImageConfig {
     @Nullable private final GpuConfig gpuConfig;
     private final boolean trackpad;
     private final boolean autoMemoryBalloon;
+    @Nullable private final UsbConfig usbConfig;
 
     @Nullable
     public Disk[] getDisks() {
@@ -139,7 +141,8 @@ public class VirtualMachineCustomImageConfig {
             GpuConfig gpuConfig,
             AudioConfig audioConfig,
             boolean trackpad,
-            boolean autoMemoryBalloon) {
+            boolean autoMemoryBalloon,
+            UsbConfig usbConfig) {
         this.name = name;
         this.kernelPath = kernelPath;
         this.initrdPath = initrdPath;
@@ -156,6 +159,7 @@ public class VirtualMachineCustomImageConfig {
         this.audioConfig = audioConfig;
         this.trackpad = trackpad;
         this.autoMemoryBalloon = autoMemoryBalloon;
+        this.usbConfig = usbConfig;
     }
 
     static VirtualMachineCustomImageConfig from(PersistableBundle customImageConfigBundle) {
@@ -208,6 +212,7 @@ public class VirtualMachineCustomImageConfig {
         builder.setAudioConfig(AudioConfig.from(audioConfigPb));
         builder.useTrackpad(customImageConfigBundle.getBoolean(KEY_TRACKPAD));
         builder.useAutoMemoryBalloon(customImageConfigBundle.getBoolean(KEY_AUTO_MEMORY_BALLOON));
+        builder.setUsbConfig(new UsbConfig(customImageConfigBundle.getBoolean(KEY_USB_CONTROLLER)));
         return builder.build();
     }
 
@@ -266,6 +271,9 @@ public class VirtualMachineCustomImageConfig {
                 Optional.ofNullable(audioConfig).map(ac -> ac.toPersistableBundle()).orElse(null));
         pb.putBoolean(KEY_TRACKPAD, trackpad);
         pb.putBoolean(KEY_AUTO_MEMORY_BALLOON, autoMemoryBalloon);
+        if (usbConfig != null) {
+            pb.putBoolean(KEY_USB_CONTROLLER, usbConfig.getUsbController());
+        }
         return pb;
     }
 
@@ -282,6 +290,11 @@ public class VirtualMachineCustomImageConfig {
     @Nullable
     public GpuConfig getGpuConfig() {
         return gpuConfig;
+    }
+
+    @Nullable
+    public UsbConfig getUsbConfig() {
+        return usbConfig;
     }
 
     /** @hide */
@@ -344,6 +357,19 @@ public class VirtualMachineCustomImageConfig {
     }
 
     /** @hide */
+    public static final class UsbConfig {
+        public final boolean controller;
+
+        public UsbConfig(boolean controller) {
+            this.controller = controller;
+        }
+
+        public boolean getUsbController() {
+            return this.controller;
+        }
+    }
+
+    /** @hide */
     public static final class Builder {
         private String name;
         private String kernelPath;
@@ -362,6 +388,7 @@ public class VirtualMachineCustomImageConfig {
         private boolean trackpad;
         // TODO(b/363985291): balloon breaks Linux VM behavior
         private boolean autoMemoryBalloon = false;
+        private UsbConfig usbConfig;
 
         /** @hide */
         public Builder() {}
@@ -463,6 +490,12 @@ public class VirtualMachineCustomImageConfig {
         }
 
         /** @hide */
+        public Builder setUsbConfig(UsbConfig usbConfig) {
+            this.usbConfig = usbConfig;
+            return this;
+        }
+
+        /** @hide */
         public VirtualMachineCustomImageConfig build() {
             return new VirtualMachineCustomImageConfig(
                     this.name,
@@ -480,7 +513,8 @@ public class VirtualMachineCustomImageConfig {
                     gpuConfig,
                     audioConfig,
                     trackpad,
-                    autoMemoryBalloon);
+                    autoMemoryBalloon,
+                    usbConfig);
         }
     }
 
