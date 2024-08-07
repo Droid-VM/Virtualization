@@ -40,6 +40,7 @@ import android.os.PersistableBundle;
 import android.sysprop.HypervisorProperties;
 import android.system.virtualizationservice.DiskImage;
 import android.system.virtualizationservice.Partition;
+import android.system.virtualizationservice.UsbConfig;
 import android.system.virtualizationservice.VirtualMachineAppConfig;
 import android.system.virtualizationservice.VirtualMachinePayloadConfig;
 import android.system.virtualizationservice.VirtualMachineRawConfig;
@@ -723,6 +724,15 @@ public final class VirtualMachineConfig {
         config.audioConfig =
                 Optional.ofNullable(customImageConfig.getAudioConfig())
                         .map(ac -> ac.toParcelable())
+                        .orElse(null);
+        config.usbConfig =
+                Optional.ofNullable(customImageConfig.getUsbConfig())
+                        .map(
+                                uc -> {
+                                    UsbConfig usbConfig = new UsbConfig();
+                                    usbConfig.controller = uc.getUsbController();
+                                    return usbConfig;
+                                })
                         .orElse(null);
         return config;
     }
