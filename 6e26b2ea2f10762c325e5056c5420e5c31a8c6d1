@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa1d01e4_d82440bf",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/DisplayProvider.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-08-07T12:53:13Z",
+      "side": 1,
+      "message": "need `break`?",
+      "range": {
+        "startLine": 117,
+        "startChar": 20,
+        "endLine": 119,
+        "endChar": 32
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1566141d_ccaf0d2a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/DisplayProvider.java",
+              "range": {
+                "startLine": 119,
+                "startChar": 0,
+                "endLine": 119,
+                "endChar": 0
+              },
+              "replacement": "                        break;\n"
+            },
+            {
+              "path": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/DisplayProvider.java",
+              "range": {
+                "startLine": 122,
+                "startChar": 0,
+                "endLine": 122,
+                "endChar": 0
+              },
+              "replacement": "                        break;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6e26b2ea2f10762c325e5056c5420e5c31a8c6d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
