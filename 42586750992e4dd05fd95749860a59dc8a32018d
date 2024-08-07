@@ -88,6 +88,24 @@
       "parentUuid": "f2a78c26_f8ae7e9d",
       "revId": "42586750992e4dd05fd95749860a59dc8a32018d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f605869_8e5093e9",
+        "filename": "guest/rialto/append_arm64_header.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-07T13:20:26Z",
+      "side": 1,
+      "message": "\u003e IIUC, text_offset\u003d0 means you are trying to execute the header\n\nThat should work (by design), with any well-formed kernel header.\n\nFrom [`Documentation/arm64/booting.txt`](https://www.kernel.org/doc/Documentation/arm64/booting.txt):\n```\nThe decompressed kernel image contains a 64-byte header as follows:\n\n  u32 code0;\t\t\t/* Executable code */\n  u32 code1;\t\t\t/* Executable code */\n  u64 text_offset;\t\t/* Image load offset, little endian */\n[...]\n- code0/code1 are responsible for branching to stext.\n```\nand see [`arch/arm64/kernel/head.S`](https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/arch/arm64/kernel/head.S#61) for the code itself.\n\nThe following doesn\u0027t meet these requirements:\n```\n        \"code0\": 0,\n        \"code1\": 0,\n```",
+      "parentUuid": "6c193c44_66d97070",
+      "revId": "42586750992e4dd05fd95749860a59dc8a32018d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
