@@ -48,6 +48,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
     AudioConfig::AudioConfig as AudioConfigParcelable,
     DisplayConfig::DisplayConfig as DisplayConfigParcelable,
     GpuConfig::GpuConfig as GpuConfigParcelable,
+    UsbConfig::UsbConfig as UsbConfigParcelable,
 };
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IGlobalVmContext::IGlobalVmContext;
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IBoundDevice::IBoundDevice;
@@ -135,6 +136,7 @@ pub struct CrosvmConfig {
     pub boost_uclamp: bool,
     pub gpu_config: Option<GpuConfig>,
     pub audio_config: Option<AudioConfig>,
+    pub usb_config: UsbConfig,
 }
 
 #[derive(Debug)]
@@ -146,6 +148,22 @@ pub struct AudioConfig {
 impl AudioConfig {
     pub fn new(raw_config: &AudioConfigParcelable) -> Self {
         AudioConfig { use_microphone: raw_config.useMicrophone, use_speaker: raw_config.useSpeaker }
+    }
+}
+
+#[derive(Debug)]
+pub struct UsbConfig {
+    pub controller: bool,
+    pub devices: Vec<File>,
+}
+
+impl UsbConfig {
+    pub fn new(raw_config: &UsbConfigParcelable) -> Result<UsbConfig> {
+        let mut devices = Vec::new();
+        raw_config.devices.iter().for_each(|parcel| {
+            devices.push(File::from(parcel.as_ref().try_clone().expect("failed to clone OwnedFD")))
+        });
+        Ok(UsbConfig { controller: raw_config.controller, devices })
     }
 }
 
@@ -916,6 +934,10 @@ fn run_vm(
         command.arg("--balloon-page-reporting");
     } else {
         command.arg("--no-balloon");
+    }
+
+    if !config.usb_config.controller {
+        command.arg("--no-usb");
     }
 
     let mut memory_mib = config.memory_mib;
