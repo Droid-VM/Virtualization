@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8000d5e2_fb5cb328",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/HwTrustJni.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1954750
+      },
+      "writtenOn": "2024-08-07T19:47:59Z",
+      "side": 1,
+      "message": "Thanks, done",
+      "parentUuid": "b4e663ee_8fe36173",
+      "range": {
+        "startLine": 27,
+        "startChar": 50,
+        "endLine": 27,
+        "endChar": 51
+      },
+      "revId": "821abda0d8c058b95f8458bedde986a96d4bfa8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "feb8c5b8_c9bc399b",
@@ -88,6 +112,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05b8ef91_00d918d6",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 1338,
+      "author": {
+        "id": 1954750
+      },
+      "writtenOn": "2024-08-07T19:47:59Z",
+      "side": 1,
+      "message": "I see what you mean.\nSince I also want to check whether `buildType.isEmpty()`, I re-named `boolean allowAnyMode` to `boolean nonUserBuild`, which should logically separate out the policy logic from the capability check.",
+      "parentUuid": "feb8c5b8_c9bc399b",
+      "range": {
+        "startLine": 1337,
+        "startChar": 8,
+        "endLine": 1338,
+        "endChar": 75
+      },
+      "revId": "821abda0d8c058b95f8458bedde986a96d4bfa8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1f60e23_a8ff4328",
@@ -101,6 +149,30 @@
       "writtenOn": "2024-08-07T15:46:05Z",
       "side": 1,
       "message": "Can we change this to `allow_any_mode \u003d\u003d true.into()`? I\u0027d prefer not to deal with the low-level encoding of this specific library if possible.",
+      "range": {
+        "startLine": 60,
+        "startChar": 31,
+        "endLine": 60,
+        "endChar": 50
+      },
+      "revId": "821abda0d8c058b95f8458bedde986a96d4bfa8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac5d2fe1_5bddb8bf",
+        "filename": "tests/testapk/src/native/hwtrust_jni.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1954750
+      },
+      "writtenOn": "2024-08-07T19:47:59Z",
+      "side": 1,
+      "message": "Thanks, done",
+      "parentUuid": "e1f60e23_a8ff4328",
       "range": {
         "startLine": 60,
         "startChar": 31,
