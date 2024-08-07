@@ -142,6 +142,24 @@
       "parentUuid": "6e1b46ff_56ae2320",
       "revId": "42586750992e4dd05fd95749860a59dc8a32018d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce11b7c4_563093e3",
+        "filename": "guest/rialto/append_arm64_header.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-08-07T16:26:01Z",
+      "side": 1,
+      "message": "Oh that is cool. I think as-is, this CL is shifting all the payload addresses around when it insert the header. Maybe if we could add the header with the help of the linker we could use that trick.\n\n\u003e Let\u0027s proceed with bios mode and the changes you suggested. That definitely looks simpler and quicker.\n\nSGTM",
+      "parentUuid": "408aa644_8fe27786",
+      "revId": "42586750992e4dd05fd95749860a59dc8a32018d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
