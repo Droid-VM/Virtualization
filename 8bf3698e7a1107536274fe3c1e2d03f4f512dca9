@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef3080ca_fb832139",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/Logger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-08-07T13:41:58Z",
+      "side": 1,
+      "message": "it\u0027s because Runnable.run(which returns void) doesn\u0027t have throws in its signature, while Callable.call(which return something) has that. and ExecutorService.submit can accepts both. so i think javac thinks Callable is a more proper shape...",
+      "range": {
+        "startLine": 61,
+        "startChar": 8,
+        "endLine": 62,
+        "endChar": 85
+      },
+      "revId": "8bf3698e7a1107536274fe3c1e2d03f4f512dca9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
