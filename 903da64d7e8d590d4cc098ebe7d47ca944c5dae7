@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81b3c38a_c4ea84c0",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-08-07T13:24:03Z",
+      "side": 1,
+      "message": "nits: ternary operator?",
+      "range": {
+        "startLine": 99,
+        "startChar": 28,
+        "endLine": 103,
+        "endChar": 29
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0b8f667c_f7bb3ab2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/MainActivity.java",
+              "range": {
+                "startLine": 99,
+                "startChar": 0,
+                "endLine": 104,
+                "endChar": 0
+              },
+              "replacement": "                            setResult(success ? RESULT_OK : RESULT_CANCELED);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "903da64d7e8d590d4cc098ebe7d47ca944c5dae7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18c93cc8_ecd63bca",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/Runner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-08-07T13:24:03Z",
+      "side": 1,
+      "message": "nits: it looks like ListenableFuture is recommended, but I think we might not want to bring guava only for that. so it\u0027s okay for me.",
+      "range": {
+        "startLine": 77,
+        "startChar": 4,
+        "endLine": 77,
+        "endChar": 21
+      },
+      "revId": "903da64d7e8d590d4cc098ebe7d47ca944c5dae7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
