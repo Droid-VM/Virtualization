@@ -18,6 +18,7 @@ use android_system_virtualizationservice::{
     aidl::android::system::virtualizationservice::CpuTopology::CpuTopology,
     aidl::android::system::virtualizationservice::DiskImage::DiskImage as AidlDiskImage,
     aidl::android::system::virtualizationservice::Partition::Partition as AidlPartition,
+    aidl::android::system::virtualizationservice::UsbConfig::UsbConfig as AidlUsbConfig,
     aidl::android::system::virtualizationservice::VirtualMachineAppConfig::DebugLevel::DebugLevel,
     aidl::android::system::virtualizationservice::VirtualMachineConfig::VirtualMachineConfig,
     aidl::android::system::virtualizationservice::VirtualMachineRawConfig::VirtualMachineRawConfig,
@@ -68,6 +69,8 @@ pub struct VmConfig {
     pub devices: Vec<PathBuf>,
     /// The serial device for VM console input.
     pub console_input_device: Option<String>,
+    /// The USB config of the VM.
+    pub usb_config: Option<UsbConfig>,
 }
 
 impl VmConfig {
@@ -110,6 +113,11 @@ impl VmConfig {
             Some("match_host") => CpuTopology::MATCH_HOST,
             Some(cpu_topology) => bail!("Invalid cpu topology {}", cpu_topology),
         };
+        let usb_config = if let Some(usb_config) = &self.usb_config {
+            usb_config.to_parcelable()?
+        } else {
+            AidlUsbConfig { controller: true, devices: Vec::new() }
+        };
         Ok(VirtualMachineRawConfig {
             kernel: maybe_open_parcel_file(&self.kernel, false)?,
             initrd: maybe_open_parcel_file(&self.initrd, false)?,
@@ -128,6 +136,7 @@ impl VmConfig {
                 })
                 .collect::<Result<_>>()?,
             consoleInputDevice: self.console_input_device.clone(),
+            usbConfig: Some(usb_config),
             ..Default::default()
         })
     }
@@ -189,6 +198,28 @@ impl Partition {
             writable: self.writable,
             label: self.label.to_owned(),
             guid: None,
+        })
+    }
+}
+
+/// USB controller and available USB devices                                    
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+pub struct UsbConfig {
+    /// Enable USB controller                                                   
+    pub controller: bool,
+    /// List of available USB devices                                           
+    pub devices: Vec<PathBuf>,
+}
+
+impl UsbConfig {
+    fn to_parcelable(&self) -> Result<AidlUsbConfig> {
+        Ok(AidlUsbConfig {
+            controller: self.controller,
+            devices: self
+                .devices
+                .iter()
+                .map(|device| open_parcel_file(device, true))
+                .collect::<Result<Vec<_>>>()?,
         })
     }
 }
