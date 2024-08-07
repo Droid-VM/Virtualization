@@ -22,6 +22,93 @@
       },
       "revId": "821abda0d8c058b95f8458bedde986a96d4bfa8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4e663ee_8fe36173",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/HwTrustJni.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-08-07T15:46:05Z",
+      "side": 1,
+      "message": "Need to add @param for the new parameter",
+      "range": {
+        "startLine": 27,
+        "startChar": 50,
+        "endLine": 27,
+        "endChar": 51
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f767ebdb_b14e458c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tests/testapk/src/java/com/android/microdroid/test/HwTrustJni.java",
+              "range": {
+                "startLine": 28,
+                "startChar": 0,
+                "endLine": 28,
+                "endChar": 0
+              },
+              "replacement": "     * @param allowAnyMode If true, allow any mode in the DICE chain.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "821abda0d8c058b95f8458bedde986a96d4bfa8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feb8c5b8_c9bc399b",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 1338,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-08-07T15:46:05Z",
+      "side": 1,
+      "message": "nit: It might improve readability if we separate the policy logic from the capability check. Specifically, this line currently determines whether it\u0027s a user build, but using that information to decide whether to allow any mode is more of a policy decision.\n\n```suggestion\n    boolean isUserBuild \u003d \"user\".equals(SystemProperties.get(\"ro.build.type\", \"\"));\n```",
+      "range": {
+        "startLine": 1337,
+        "startChar": 8,
+        "endLine": 1338,
+        "endChar": 75
+      },
+      "revId": "821abda0d8c058b95f8458bedde986a96d4bfa8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1f60e23_a8ff4328",
+        "filename": "tests/testapk/src/native/hwtrust_jni.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-08-07T15:46:05Z",
+      "side": 1,
+      "message": "Can we change this to `allow_any_mode \u003d\u003d true.into()`? I\u0027d prefer not to deal with the low-level encoding of this specific library if possible.",
+      "range": {
+        "startLine": 60,
+        "startChar": 31,
+        "endLine": 60,
+        "endChar": 50
+      },
+      "revId": "821abda0d8c058b95f8458bedde986a96d4bfa8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
