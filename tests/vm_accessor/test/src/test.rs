@@ -82,4 +82,12 @@ fn test_wait_and_check_interface() {
     assert_eq!(service2.add(11, 12).unwrap(), 23);
 }
 
+#[rdroidtest]
+fn test_vm_get_host_service() {
+    init();
+
+    let service = wait_for_interface();
+    service.tryGetHostStatsService().expect("VM payload failed to get host IStats service");
+}
+
 rdroidtest::test_main!();

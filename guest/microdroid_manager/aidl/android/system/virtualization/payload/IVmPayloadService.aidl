@@ -116,4 +116,13 @@ interface IVmPayloadService {
      *         certification chain.
      */
     AttestationResult requestAttestation(in byte[] challenge, in boolean testMode);
+
+    /**
+     * Get the Accessor binder from libbinder.
+     * The Accessor instance from libbinder is responsible for connecting to
+     * the VSOCK port of the service.
+     * Microdroid manager is the only process in the VM that has permissions to
+     * set up the connection, so it must the process that creates the Accessor.
+     */
+    IBinder getAccessorBinder(in String service);
 }
