@@ -82,4 +82,13 @@ fn test_wait_and_check_interface() {
     assert_eq!(service2.add(11, 12).unwrap(), 23);
 }
 
+#[rdroidtest]
+fn test_vm_get_host_service() {
+    init();
+
+    let service = wait_for_interface();
+    // look for no error
+    service.tryGetHostService("android.hardware.light.ILights/default").unwrap();
+}
+
 rdroidtest::test_main!();

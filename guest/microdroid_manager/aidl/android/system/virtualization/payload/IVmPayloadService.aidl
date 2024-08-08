@@ -116,4 +116,7 @@ interface IVmPayloadService {
      *         certification chain.
      */
     AttestationResult requestAttestation(in byte[] challenge, in boolean testMode);
+
+    // TODOasdf docs
+    IBinder getAccessorBinder(in String instance);
 }
