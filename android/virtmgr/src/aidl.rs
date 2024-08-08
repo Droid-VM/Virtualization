@@ -47,7 +47,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
 };
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IVirtualizationServiceInternal::IVirtualizationServiceInternal;
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::{
-        BnVirtualMachineService, IVirtualMachineService,
+        BnVirtualMachineService, IVirtualMachineService, ServiceConnectionInfo::ServiceConnectionInfo,
 };
 use android_hardware_security_secretkeeper::aidl::android::hardware::security::secretkeeper::ISecretkeeper::{BnSecretkeeper, ISecretkeeper};
 use android_hardware_security_secretkeeper::aidl::android::hardware::security::secretkeeper::SecretId::SecretId;
@@ -62,8 +62,7 @@ use apkverify::{HashAlgorithm, V4Signature};
 use avflog::LogResult;
 use binder::{
     self, wait_for_interface, BinderFeatures, ExceptionCode, Interface, ParcelFileDescriptor,
-    Status, StatusCode, Strong,
-    IntoBinderResult,
+    Status, StatusCode, Strong, IntoBinderResult,
 };
 use cstr::cstr;
 use glob::glob;
@@ -74,22 +73,23 @@ use nix::unistd::pipe;
 use rpcbinder::RpcServer;
 use rustutils::system_properties;
 use semver::VersionReq;
-use std::collections::HashSet;
+use std::collections::{HashSet, HashMap};
 use std::convert::TryInto;
-use std::fs;
 use std::ffi::CStr;
 use std::fs::{canonicalize, read_dir, remove_file, File, OpenOptions};
 use std::io::{BufRead, BufReader, Error, ErrorKind, Seek, SeekFrom, Write};
-use std::iter;
 use std::num::{NonZeroU16, NonZeroU32};
 use std::os::unix::io::{AsRawFd, FromRawFd, IntoRawFd};
 use std::os::unix::raw::pid_t;
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex, Weak};
+use std::{fs, iter};
 use vbmeta::VbMetaImage;
 use vmconfig::{VmConfig, get_debug_level};
 use vsock::VsockStream;
 use zip::ZipArchive;
+use android_hardware_light::aidl::android::hardware::light::{
+    HwLight::HwLight, HwLightState::HwLightState, ILights::ILights, ILights::BnLights };
 
 /// The unique ID of a VM used (together with a port number) for vsock communication.
 pub type Cid = u32;
@@ -1620,11 +1620,30 @@ impl<'a, T> AsRef<T> for BorrowedOrOwned<'a, T> {
     }
 }
 
+// TODO(b/198785815) create a rust/ndk delegator and use that instead of writing our own!
+struct LightDelegator {
+    delegate: Mutex<Strong<dyn ILights>>,
+}
+
+impl Interface for LightDelegator {}
+
+impl ILights for LightDelegator {
+    fn setLightState(&self, id: i32, state: &HwLightState) -> binder::Result<()> {
+        self.delegate.lock().unwrap().setLightState(id, state)
+    }
+
+    fn getLights(&self) -> binder::Result<Vec<HwLight>> {
+        self.delegate.lock().unwrap().getLights()
+    }
+}
+
 /// Implementation of `IVirtualMachineService`, the entry point of the AIDL service.
 #[derive(Debug, Default)]
 struct VirtualMachineService {
     state: Arc<Mutex<State>>,
     cid: Cid,
+    // Keep a map of instances to ports to know if we've already set up a proxy
+    proxied_services: Arc<Mutex<HashMap<String, u32>>>,
 }
 
 impl Interface for VirtualMachineService {}
@@ -1700,6 +1719,54 @@ impl IVirtualMachineService for VirtualMachineService {
     fn requestAttestation(&self, csr: &[u8], test_mode: bool) -> binder::Result<Vec<Certificate>> {
         GLOBAL_SERVICE.requestAttestation(csr, get_calling_uid() as i32, test_mode)
     }
+    fn getServiceConnectionInfo(&self, name: &str) -> binder::Result<ServiceConnectionInfo> {
+        // TODO How does the client signal that it's done using the service?
+        // TODO How do we tell the service to stop listening?
+        if name == "android.hardware.light.ILights/default" {
+            let port = 2321;
+            let cid = self.cid;
+
+            // If we've previously set up this service, we only need to return the connection info
+            {
+                // TODO Can we check the health of the local proxy service?
+                // TODO get and return the port number here for dynamic ports.
+                if self.proxied_services.lock().unwrap().contains_key(name) {
+                    info!(
+                        "Found an already created service for {name}. Returning connection info."
+                    );
+                    return Ok(ServiceConnectionInfo { port: port as i32 });
+                }
+            }
+
+            // don't block this service while attempting to get a service for the client in the VM.
+            let local_svc: Strong<dyn ILights> =
+                binder::check_interface("android.hardware.light.ILights/default")
+                    .context("Failed to get service from IVirtualMachineService")
+                    .or_service_specific_exception(-1)?;
+
+            // setup service wrapped by a delegator
+            let service = BnLights::new_binder(
+                LightDelegator { delegate: local_svc.into() },
+                BinderFeatures::default(),
+            );
+
+            match RpcServer::new_vsock(service.as_binder(), cid, port) {
+                Ok(vm_server) => {
+                    vm_server.set_max_threads(4);
+                    vm_server.start();
+                    self.proxied_services.lock().unwrap().insert(name.to_string(), port);
+                    info!("RpcServer proxy started for {name}.");
+                }
+                Err(err) => {
+                    warn!("Could not start RpcServer for {name} on port {}: {}", port, err);
+                }
+            }
+
+            Ok(ServiceConnectionInfo { port: port as i32 })
+        } else {
+            Err(anyhow!("Unknown service")).with_log().or_binder_exception(ExceptionCode::SECURITY)
+        }
+    }
 }
 
 fn is_secretkeeper_supported() -> bool {
@@ -1710,7 +1777,11 @@ fn is_secretkeeper_supported() -> bool {
 impl VirtualMachineService {
     fn new_binder(state: Arc<Mutex<State>>, cid: Cid) -> Strong<dyn IVirtualMachineService> {
         BnVirtualMachineService::new_binder(
-            VirtualMachineService { state, cid },
+            VirtualMachineService {
+                state,
+                cid,
+                proxied_services: Arc::new(Mutex::new(HashMap::new())),
+            },
             BinderFeatures::default(),
         )
     }
