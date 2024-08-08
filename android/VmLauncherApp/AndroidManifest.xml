@@ -12,7 +12,8 @@
         android:protectionLevel="signature|preinstalled"/>
 
     <application
-        android:label="VmLauncherApp">
+        android:label="VmLauncherApp"
+        android:usesCleartextTraffic="true">
         <activity android:name=".MainActivity"
                   android:screenOrientation="landscape"
                   android:configChanges="orientation|screenSize|keyboard|keyboardHidden|navigation|uiMode"
@@ -23,6 +24,17 @@
             <intent-filter>
                 <action android:name="android.virtualization.VM_LAUNCHER" />
                 <action android:name="android.virtualization.VM_OPEN_URL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+            <activity android:name=".HeadlessActivity"
+                  android:screenOrientation="landscape"
+                  android:configChanges="orientation|screenSize|keyboard|keyboardHidden|navigation|uiMode"
+                  android:theme="@style/MyTheme"
+                  android:resizeableActivity="false"
+                  android:exported="true">
+            <intent-filter>
+                <action android:name="android.virtualization.HEADLESS_VM_LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

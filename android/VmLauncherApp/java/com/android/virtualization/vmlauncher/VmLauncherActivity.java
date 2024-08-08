@@ -73,23 +73,32 @@ public class VmLauncherActivity extends Activity {
         return true;
     }
 
+    protected boolean wantSuspendInBackground() {
+        return true;
+    }
+
     @Override
     protected void onStop() {
         super.onStop();
-        try {
-            mVirtualMachine.suspend();
-        } catch (VirtualMachineException e) {
-            Log.e(TAG, "Failed to suspend VM" + e);
+        if (wantSuspendInBackground()) {
+            try {
+                mVirtualMachine.suspend();
+            } catch (VirtualMachineException e) {
+                Log.e(TAG, "Failed to suspend VM" + e);
+            }
         }
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        try {
-            mVirtualMachine.resume();
-        } catch (VirtualMachineException e) {
-            Log.e(TAG, "Failed to resume VM" + e);
+
+        if (wantSuspendInBackground()) {
+            try {
+                mVirtualMachine.resume();
+            } catch (VirtualMachineException e) {
+                Log.e(TAG, "Failed to resume VM" + e);
+            }
         }
     }
 
