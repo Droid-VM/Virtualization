@@ -14,6 +14,7 @@
 
 //! VM with the simplest service for IAccessor demo
 
+use android_hardware_light::aidl::android::hardware::light::{ILights::BpLights, ILights::ILights};
 use anyhow::Result;
 use com_android_virt_accessor_demo_vm_service::{
     aidl::com::android::virt::accessor_demo::vm_service::IAccessorVmService::{
@@ -60,5 +61,11 @@ impl AccessorVmService {
 impl IAccessorVmService for AccessorVmService {
     fn add(&self, a: i32, b: i32) -> binder::Result<i32> {
         Ok(a + b)
+    }
+    fn tryGetHostService(&self, _name: &str) -> binder::Result<()> {
+        let descriptor = <BpLights as ILights>::get_descriptor().to_owned() + "/default";
+        let lights: Strong<dyn ILights> = binder::wait_for_interface(&descriptor).unwrap();
+        lights.getLights().unwrap();
+        Ok(())
     }
 }
