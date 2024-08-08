@@ -39,6 +39,30 @@
       },
       "revId": "d6665d4c9b631063b65736149fe51d32cdc6f759",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "362bedb5_3cc5ed9f",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/UsbConfig.aidl",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-08-08T04:56:49Z",
+      "side": 1,
+      "message": "I think we\u0027d want to support it.\n\n`rather, i am not sure about devices field, because crosvm doesn\u0027t support adding usb devices in their \u0027staring\u0027 time`\n\nThat\u0027s definitely correct. The logic however could be to add the USB devices right after VM startup.\n\n```\ncrosvm run ...\ncrosvm usb attach ...\n```\n\nI didn\u0027t add any logic to attach the USB devices, only populate the fields of UsbConfig and propagate it all the way to `crosvm.rs`. It\u0027s definitely worth discussing how to handle the USB devices before adding the logic.",
+      "parentUuid": "7c6f7c15_ec158be7",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 35
+      },
+      "revId": "d6665d4c9b631063b65736149fe51d32cdc6f759",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
