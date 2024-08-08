@@ -84,6 +84,13 @@ __attribute__((noreturn)) void AVmPayload_runVsockRpcServer(
         void (*_Nullable on_ready)(void* _Nullable param), void* _Nullable param);
 
 /**
+ * Gets libbinder's accessor binder from the VmPayloadService to "inject" into
+ * this payload's instance of libbinder in lieu of a kernel binder service manager
+ * process.
+ */
+AIBinder* _Nullable AVmPayload_getAccessorBinder(const char* _Nonnull instance) __INTRODUCED_IN(36);
+
+/**
  * Returns all or part of a 32-byte secret that is bound to this unique VM
  * instance and the supplied identifier. The secret can be used e.g. as an
  * encryption key.
