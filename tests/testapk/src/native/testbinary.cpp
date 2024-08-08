@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include <aidl/android/hardware/light/ILights.h>
 #include <aidl/com/android/microdroid/testservice/BnTestService.h>
 #include <aidl/com/android/microdroid/testservice/BnVmCallback.h>
 #include <aidl/com/android/microdroid/testservice/IAppCallback.h>
@@ -21,6 +22,7 @@
 #include <android-base/properties.h>
 #include <android-base/result.h>
 #include <android-base/scopeguard.h>
+#include <android/binder_manager.h>
 #include <android/log.h>
 #include <fcntl.h>
 #include <fstab/fstab.h>
@@ -48,6 +50,8 @@ using android::fs_mgr::FstabEntry;
 using android::fs_mgr::GetEntryForMountPoint;
 using android::fs_mgr::ReadFstabFromFile;
 
+using aidl::android::hardware::light::HwLight;
+using aidl::android::hardware::light::ILights;
 using aidl::com::android::microdroid::testservice::BnTestService;
 using aidl::com::android::microdroid::testservice::BnVmCallback;
 using aidl::com::android::microdroid::testservice::IAppCallback;
@@ -390,6 +394,22 @@ extern "C" int AVmPayload_main() {
 
     __system_property_set("debug.microdroid.app.run", "true");
 
+    const std::string instance = std::string() + ILights::descriptor + "/default";
+    ndk::SpAIBinder binder(AServiceManager_waitForService(instance.c_str()));
+
+    if (binder.get()) {
+        std::shared_ptr<ILights> light_service = ILights::fromBinder(binder);
+        std::vector<HwLight> lights;
+        ScopedAStatus status = light_service->getLights(&lights);
+        if (status.isOk()) {
+            __android_log_write(ANDROID_LOG_ERROR, TAG, "Lights.getLights isOK");
+        } else {
+            __android_log_write(ANDROID_LOG_ERROR, TAG, "Failed to call Lights.getLights. Status:");
+            __android_log_write(ANDROID_LOG_ERROR, TAG, status.getMessage());
+        }
+    } else {
+        __android_log_write(ANDROID_LOG_ERROR, TAG, "The Lights binder is null");
+    }
     if (auto res = start_test_service(); res.ok()) {
         return 0;
     } else {
