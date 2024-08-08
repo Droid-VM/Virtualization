@@ -14,12 +14,18 @@
 
 //! VM with the simplest service for IAccessor demo
 
+use android_hardware_light::aidl::android::hardware::light::{ILights::BpLights, ILights::ILights};
 use anyhow::Result;
 use com_android_virt_accessor_demo_vm_service::{
     aidl::com::android::virt::accessor_demo::vm_service::IAccessorVmService::{
         BnAccessorVmService, IAccessorVmService,
     },
-    binder::{self, BinderFeatures, Interface, Strong},
+    binder::{self, BinderFeatures, Interface, Strong, StatusCode},
+};
+use com_android_virt_accessor_demo_host_service::{
+    aidl::com::android::virt::accessor_demo::host_service::IAccessorHostService::{
+        BpAccessorHostService, IAccessorHostService,
+    },
 };
 use log::{error, info};
 
@@ -60,5 +66,34 @@ impl AccessorVmService {
 impl IAccessorVmService for AccessorVmService {
     fn add(&self, a: i32, b: i32) -> binder::Result<i32> {
         Ok(a + b)
+    }
+
+    fn tryGetHostService(&self, _name: &str) -> binder::Result<()> {
+        // Get the proxied light service
+        let descriptor = <BpLights as ILights>::get_descriptor().to_owned() + "/default";
+        let lights: Strong<dyn ILights> = binder::wait_for_interface(&descriptor).unwrap();
+        lights.getLights().unwrap();
+        // Get the proxied example service
+        let example_descriptor = <BpAccessorHostService as IAccessorHostService>::get_descriptor()
+            .to_owned()
+            + "/default";
+        let example: Strong<dyn IAccessorHostService> =
+            binder::wait_for_interface(&example_descriptor).unwrap();
+        let mut res = example.add(1, 2).unwrap();
+        if res != 3 {
+            info!("Failed to make a call to the delegated example service");
+            return Err(StatusCode::BAD_VALUE.into());
+        }
+        // Get the direct RPC example service
+        let example_rpc_descriptor =
+            <BpAccessorHostService as IAccessorHostService>::get_descriptor().to_owned() + "/rpc";
+        let example_rpc: Strong<dyn IAccessorHostService> =
+            binder::wait_for_interface(&example_rpc_descriptor).unwrap();
+        res = example_rpc.add(1, 2).unwrap();
+        if res != 3 {
+            info!("Failed to make a call to the RPC example service");
+            return Err(StatusCode::BAD_VALUE.into());
+        }
+        Ok(())
     }
 }

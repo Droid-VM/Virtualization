@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package com.android.virt.accessor_demo.vm_service;
+package com.android.virt.accessor_demo.host_service;
 
 /** {@hide} */
 // TODO(b/349578050): Add more methods that take or return another binder.
-interface IAccessorVmService {
+interface IAccessorHostService {
     int add(int a, int b);
-    void tryGetHostService(String name);
 }

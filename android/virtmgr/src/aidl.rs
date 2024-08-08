@@ -48,7 +48,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IGlobalVmContext::IGlobalVmContext;
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IVirtualizationServiceInternal::IVirtualizationServiceInternal;
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::{
-        BnVirtualMachineService, IVirtualMachineService,
+        BnVirtualMachineService, IVirtualMachineService, ServiceConnectionInfo::ServiceConnectionInfo,
 };
 use android_hardware_security_secretkeeper::aidl::android::hardware::security::secretkeeper::ISecretkeeper::{BnSecretkeeper, ISecretkeeper};
 use android_hardware_security_secretkeeper::aidl::android::hardware::security::secretkeeper::SecretId::SecretId;
@@ -63,8 +63,7 @@ use apkverify::{HashAlgorithm, V4Signature};
 use avflog::LogResult;
 use binder::{
     self, wait_for_interface, BinderFeatures, ExceptionCode, Interface, ParcelFileDescriptor,
-    Status, StatusCode, Strong,
-    IntoBinderResult,
+    Status, StatusCode, Strong, IntoBinderResult,
 };
 use cstr::cstr;
 use glob::glob;
@@ -75,23 +74,29 @@ use rpcbinder::RpcServer;
 use rustutils::system_properties;
 use semver::VersionReq;
 use serde::Deserialize;
-use std::collections::HashSet;
+use std::collections::{HashSet, HashMap};
 use std::convert::TryInto;
-use std::fs;
 use std::ffi::CStr;
 use std::fs::{canonicalize, create_dir_all, read_dir, remove_dir_all, remove_file, File, OpenOptions};
 use std::io::{BufRead, BufReader, Error, ErrorKind, Seek, SeekFrom, Write};
-use std::iter;
 use std::num::{NonZeroU16, NonZeroU32};
 use std::ops::Range;
 use std::os::unix::io::{AsRawFd, FromRawFd, IntoRawFd};
 use std::os::unix::raw::pid_t;
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex, Weak, LazyLock};
+use std::{fs, iter};
 use vbmeta::VbMetaImage;
 use vmconfig::{VmConfig, get_debug_level};
 use vsock::VsockStream;
 use zip::ZipArchive;
+use android_hardware_light::aidl::android::hardware::light::{
+    HwLight::HwLight, HwLightState::HwLightState, ILights::ILights, ILights::BnLights, ILights::BpLights };
+use com_android_virt_accessor_demo_host_service::{
+    aidl::com::android::virt::accessor_demo::host_service::IAccessorHostService::{
+        BnAccessorHostService, BpAccessorHostService, IAccessorHostService,
+    },
+};
 
 /// The unique ID of a VM used (together with a port number) for vsock communication.
 pub type Cid = u32;
@@ -1766,11 +1771,42 @@ impl<'a, T> AsRef<T> for BorrowedOrOwned<'a, T> {
     }
 }
 
+// TODO(b/198785815) create a rust/ndk delegator and use that instead of writing our own!
+struct LightDelegator {
+    delegate: Mutex<Strong<dyn ILights>>,
+}
+
+impl Interface for LightDelegator {}
+
+impl ILights for LightDelegator {
+    fn setLightState(&self, id: i32, state: &HwLightState) -> binder::Result<()> {
+        self.delegate.lock().unwrap().setLightState(id, state)
+    }
+
+    fn getLights(&self) -> binder::Result<Vec<HwLight>> {
+        self.delegate.lock().unwrap().getLights()
+    }
+}
+
+struct AccessorHostExampleDelegator {
+    delegate: Mutex<Strong<dyn IAccessorHostService>>,
+}
+
+impl Interface for AccessorHostExampleDelegator {}
+
+impl IAccessorHostService for AccessorHostExampleDelegator {
+    fn add(&self, a: i32, b: i32) -> binder::Result<i32> {
+        self.delegate.lock().unwrap().add(a, b)
+    }
+}
+
 /// Implementation of `IVirtualMachineService`, the entry point of the AIDL service.
 #[derive(Debug, Default)]
 struct VirtualMachineService {
     state: Arc<Mutex<State>>,
     cid: Cid,
+    // Keep a map of instances to ports to know if we've already set up a proxy
+    proxied_services: Arc<Mutex<HashMap<String, u32>>>,
 }
 
 impl Interface for VirtualMachineService {}
@@ -1846,6 +1882,95 @@ impl IVirtualMachineService for VirtualMachineService {
     fn requestAttestation(&self, csr: &[u8], test_mode: bool) -> binder::Result<Vec<Certificate>> {
         GLOBAL_SERVICE.requestAttestation(csr, get_calling_uid() as i32, test_mode)
     }
+    fn getServiceConnectionInfo(&self, name: &str) -> binder::Result<ServiceConnectionInfo> {
+        // We currently only support host service as an example
+        let light_service_instance =
+            <BpLights as ILights>::get_descriptor().to_owned() + "/default";
+        let example_service_instance =
+            <BpAccessorHostService as IAccessorHostService>::get_descriptor().to_owned()
+                + "/default";
+        // We would ideally get this information from servicemanager, but there are no APIs
+        // available yet.
+        let example_rpc_service_instance =
+            <BpAccessorHostService as IAccessorHostService>::get_descriptor().to_owned() + "/rpc";
+        if name == light_service_instance {
+            let port = 2321;
+            let cid = self.cid;
+
+            // If we've previously set up this service, we only need to return the connection info
+            if self.proxied_services.lock().unwrap().contains_key(name) {
+                return Ok(ServiceConnectionInfo { port: port as i32 });
+            }
+
+            // don't block this service while attempting to get a service for the client in the VM.
+            let local_svc: Strong<dyn ILights> = binder::check_interface(name)
+                .context("Failed to get {name} from IVirtualMachineService")
+                .or_service_specific_exception(-1)?;
+
+            // Setup a delegator that wraps the service so we can proxy calls.
+            // This is needed because we can't use a kernel binder from
+            // another process for a new RpcServer.
+            let service = BnLights::new_binder(
+                LightDelegator { delegate: local_svc.into() },
+                BinderFeatures::default(),
+            );
+
+            match RpcServer::new_vsock(service.as_binder(), cid, port) {
+                Ok(vm_server) => {
+                    vm_server.set_max_threads(4);
+                    vm_server.start();
+                    self.proxied_services.lock().unwrap().insert(name.to_string(), port);
+                    info!("RpcServer proxy started for {name}.");
+                }
+                Err(err) => {
+                    warn!("Could not start RpcServer for {name} on port {}: {}", port, err);
+                }
+            }
+
+            Ok(ServiceConnectionInfo { port: port as i32 })
+        } else if name == example_service_instance {
+            let port = 2322;
+            let cid = self.cid;
+
+            // If we've previously set up this service, we only need to return the connection info
+            if self.proxied_services.lock().unwrap().contains_key(name) {
+                return Ok(ServiceConnectionInfo { port: port as i32 });
+            }
+
+            // don't block this service while attempting to get a service for the client in the VM.
+            let local_svc: Strong<dyn IAccessorHostService> = binder::check_interface(name)
+                .context("Failed to get {name} from IVirtualMachineService")
+                .or_service_specific_exception(-1)?;
+
+            // Setup a delegator that wraps the service so we can proxy calls.
+            // This is needed because we can't use a kernel binder from
+            // another process for a new RpcServer.
+            let service = BnAccessorHostService::new_binder(
+                AccessorHostExampleDelegator { delegate: local_svc.into() },
+                BinderFeatures::default(),
+            );
+
+            match RpcServer::new_vsock(service.as_binder(), cid, port) {
+                Ok(vm_server) => {
+                    vm_server.set_max_threads(4);
+                    vm_server.start();
+                    self.proxied_services.lock().unwrap().insert(name.to_string(), port);
+                    info!("RpcServer proxy started for {name}.");
+                }
+                Err(err) => {
+                    warn!("Could not start RpcServer for {name} on port {}: {}", port, err);
+                }
+            }
+
+            Ok(ServiceConnectionInfo { port: port as i32 })
+        } else if name == example_rpc_service_instance {
+            // This service is already listening on an RpcServer. We would ideally get the
+            // connection info from servicemanager, but those APIs don't exist yet.
+            Ok(ServiceConnectionInfo { port: 2323 })
+        } else {
+            Err(anyhow!("Unknown service")).with_log().or_binder_exception(ExceptionCode::SECURITY)
+        }
+    }
 }
 
 fn is_secretkeeper_supported() -> bool {
@@ -1856,7 +1981,11 @@ fn is_secretkeeper_supported() -> bool {
 impl VirtualMachineService {
     fn new_binder(state: Arc<Mutex<State>>, cid: Cid) -> Strong<dyn IVirtualMachineService> {
         BnVirtualMachineService::new_binder(
-            VirtualMachineService { state, cid },
+            VirtualMachineService {
+                state,
+                cid,
+                proxied_services: Arc::new(Mutex::new(HashMap::new())),
+            },
             BinderFeatures::default(),
         )
     }
