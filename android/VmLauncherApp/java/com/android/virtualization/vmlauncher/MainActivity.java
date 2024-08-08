@@ -19,14 +19,11 @@ package com.android.virtualization.vmlauncher;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 import android.Manifest.permission;
-import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
-import android.system.virtualmachine.VirtualMachine;
-import android.system.virtualmachine.VirtualMachineConfig;
 import android.system.virtualmachine.VirtualMachineException;
 import android.util.Log;
 import android.view.SurfaceView;
@@ -43,22 +40,15 @@ import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
-public class MainActivity extends Activity {
+public class MainActivity extends VmLauncherActivity {
     static final String TAG = "VmLauncherApp";
-    // TODO: this path should be from outside of this activity
-    private static final String VM_CONFIG_PATH = "/data/local/tmp/vm_config.json";
 
     private static final int RECORD_AUDIO_PERMISSION_REQUEST_CODE = 101;
 
     private static final String ACTION_VM_LAUNCHER = "android.virtualization.VM_LAUNCHER";
     private static final String ACTION_VM_OPEN_URL = "android.virtualization.VM_OPEN_URL";
 
-    private ExecutorService mExecutorService;
-    private VirtualMachine mVirtualMachine;
     private ClipboardManager mClipboardManager;
     private InputForwarder mInputForwarder;
     private DisplayProvider mDisplayProvider;
@@ -66,31 +56,6 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String action = getIntent().getAction();
-        if (!ACTION_VM_LAUNCHER.equals(action)) {
-            finish();
-            Log.e(TAG, "onCreate unsupported intent action: " + action);
-            return;
-        }
-        checkAndRequestRecordAudioPermission();
-        mExecutorService = Executors.newCachedThreadPool();
-
-        ConfigJson json = ConfigJson.from(VM_CONFIG_PATH);
-        VirtualMachineConfig config = json.toConfig(this);
-
-        Runner runner;
-        try {
-            runner = Runner.create(this, config);
-        } catch (VirtualMachineException e) {
-            throw new RuntimeException(e);
-        }
-        mVirtualMachine = runner.getVm();
-        runner.getExitStatus()
-                .thenAcceptAsync(
-                        success -> {
-                            setResult(success ? RESULT_OK : RESULT_CANCELED);
-                            finish();
-                        });
 
         // Setup UI
         setContentView(R.layout.activity_main);
@@ -102,9 +67,18 @@ public class MainActivity extends Activity {
         // Connect the views to the VM
         mInputForwarder = new InputForwarder(this, mVirtualMachine, touchView, mainView, mainView);
         mDisplayProvider = new DisplayProvider(mainView, cursorView);
+    }
 
-        Path logPath = getFileStreamPath(mVirtualMachine.getName() + ".log").toPath();
-        Logger.setup(mVirtualMachine, logPath, mExecutorService);
+    @Override
+    protected boolean setupBeforeVmCreate() {
+        String action = getIntent().getAction();
+        if (!ACTION_VM_LAUNCHER.equals(action)) {
+            finish();
+            Log.e(TAG, "onCreate unsupported intent action: " + action);
+            return false;
+        }
+        checkAndRequestRecordAudioPermission();
+        return true;
     }
 
     private void makeFullscreen() {
@@ -129,29 +103,8 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        try {
-            mVirtualMachine.suspend();
-        } catch (VirtualMachineException e) {
-            Log.e(TAG, "Failed to suspend VM" + e);
-        }
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        try {
-            mVirtualMachine.resume();
-        } catch (VirtualMachineException e) {
-            Log.e(TAG, "Failed to resume VM" + e);
-        }
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
-        mExecutorService.shutdownNow();
         mInputForwarder.cleanUp();
         Log.d(TAG, "destroyed");
     }
