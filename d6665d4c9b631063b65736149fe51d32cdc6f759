@@ -16,6 +16,29 @@
       "message": "WIP - need better solutions than expect.",
       "revId": "d6665d4c9b631063b65736149fe51d32cdc6f759",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c6f7c15_ec158be7",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/UsbConfig.aidl",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-08-08T01:21:47Z",
+      "side": 1,
+      "message": "sorry for the late response, having a bool variable to indicate if an usb controller is on or not instead of assuming that from the device list looks good because as jiyong mentioned there could be runtime attachment.\n\nrather, i am not sure about devices field, because crosvm doesn\u0027t support adding usb devices in their \u0027staring\u0027 time, instead it supports only runtime attachment. do we have a plan to support that?",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 35
+      },
+      "revId": "d6665d4c9b631063b65736149fe51d32cdc6f759",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
