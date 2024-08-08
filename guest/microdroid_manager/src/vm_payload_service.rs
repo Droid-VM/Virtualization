@@ -21,12 +21,14 @@ use android_system_virtualization_payload::aidl::android::system::virtualization
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::IVirtualMachineService;
 use anyhow::{anyhow, Context, Result};
 use avflog::LogResult;
-use binder::{Interface, BinderFeatures, ExceptionCode, Strong, IntoBinderResult, Status};
+use binder::{Accessor, SpIBinder, Interface, BinderFeatures, ExceptionCode, Strong, IntoBinderResult, Status, ConnectionInfo};
 use client_vm_csr::{generate_attestation_key_and_csr, ClientVmAttestationData};
+use libc::{AF_VSOCK, sa_family_t, sockaddr_vm};
 use log::info;
-use rpcbinder::RpcServer;
+use rpcbinder::{FileDescriptorTransportMode, RpcServer};
 use crate::vm_secret::VmSecret;
 use std::os::unix::io::OwnedFd;
+use vsock::VMADDR_CID_HOST;
 
 /// Implementation of `IVmPayloadService`.
 struct VmPayloadService {
@@ -97,6 +99,32 @@ impl IVmPayloadService for VmPayloadService {
             certificateChain: cert_chain,
         })
     }
+
+    fn getAccessorBinder(&self, instance: &str) -> binder::Result<SpIBinder> {
+        let vm_service = self.virtual_machine_service.clone();
+        // We don't call getServiceconnectionInfo right now because we wait until a client wants to
+        // get a hold of the service before starting it.
+        let get_connection_info = move |inst: &str| {
+            let connection_info = vm_service.getServiceConnectionInfo(inst).unwrap();
+            let addr = sockaddr_vm {
+                svm_family: AF_VSOCK as sa_family_t,
+                svm_reserved1: 0,
+                svm_port: connection_info.port.try_into().unwrap(),
+                svm_cid: VMADDR_CID_HOST,
+                svm_zero: [0u8; 4],
+            };
+            Some(ConnectionInfo::Vsock(addr))
+        };
+
+        let accessor = Accessor::new(instance, get_connection_info);
+
+        accessor.as_binder().ok_or_else(|| {
+            Status::new_exception_str(
+                ExceptionCode::NULL_POINTER,
+                Some("Failed to get a binder from Accessor::as_binder"),
+            )
+        })
+    }
 }
 
 impl Interface for VmPayloadService {}
@@ -135,6 +163,9 @@ pub(crate) fn register_vm_payload_service(
     );
 
     let server = RpcServer::new_bound_socket(vm_payload_binder.as_binder(), vm_payload_service_fd)?;
+    // Required for the FD being passed through libbinder's accessor binder
+    server.set_supported_file_descriptor_transport_modes(&[FileDescriptorTransportMode::Unix]);
+
     info!("The RPC server '{}' is running.", VM_PAYLOAD_SERVICE_SOCKET_NAME);
 
     // Move server reference into a background thread and run it forever.

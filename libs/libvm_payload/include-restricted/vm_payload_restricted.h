@@ -76,4 +76,16 @@ AVmAttestationStatus AVmPayload_requestAttestationForTesting(
         const void* _Nonnull challenge, size_t challenge_size,
         struct AVmAttestationResult* _Nullable* _Nonnull result) __INTRODUCED_IN(__ANDROID_API_V__);
 
+/**
+ * Gets libbinder's accessor binder from the VmPayloadService to "inject" into
+ * this payload's instance of libbinder in lieu of a kernel binder service manager
+ * process.
+ *
+ * \param instance name of the service that the Accessor is responsible for
+ * connecting to.
+ *
+ * \return AIBinder for the IAccessor object.
+ */
+AIBinder* _Nullable AVmPayload_getAccessorBinder(const char* _Nonnull instance) __INTRODUCED_IN(36);
+
 __END_DECLS
