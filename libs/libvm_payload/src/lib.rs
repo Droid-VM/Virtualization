@@ -20,11 +20,11 @@ use android_system_virtualization_payload::aidl::android::system::virtualization
 };
 use anyhow::{bail, ensure, Context, Result};
 use binder::{
-    unstable_api::{new_spibinder, AIBinder},
+    unstable_api::{new_spibinder, AIBinder, AsNative},
     Strong, ExceptionCode,
 };
 use log::{error, info, LevelFilter};
-use rpcbinder::{RpcServer, RpcSession};
+use rpcbinder::{FileDescriptorTransportMode, RpcServer, RpcSession};
 use openssl::{ec::EcKey, sha::sha256, ecdsa::EcdsaSig};
 use std::convert::Infallible;
 use std::ffi::{CString, CStr};
@@ -57,7 +57,10 @@ fn get_vm_payload_service() -> Result<Strong<dyn IVmPayloadService>> {
     if let Some(strong) = &*connection {
         Ok(strong.clone())
     } else {
-        let new_connection: Strong<dyn IVmPayloadService> = RpcSession::new()
+        let session = RpcSession::new();
+        // Required for libbinder's accessor binder to send connected FDs
+        session.set_file_descriptor_transport_mode(FileDescriptorTransportMode::Unix);
+        let new_connection: Strong<dyn IVmPayloadService> = session
             .setup_unix_domain_client(VM_PAYLOAD_SERVICE_SOCKET_NAME)
             .context(format!("Failed to connect to service: {}", VM_PAYLOAD_SERVICE_SOCKET_NAME))?;
         *connection = Some(new_connection.clone());
@@ -130,6 +133,42 @@ pub unsafe extern "C" fn AVmPayload_runVsockRpcServer(
 
     // SAFETY: try_run_vsock_server has the same requirements as this function
     unwrap_or_abort(unsafe { try_run_vsock_server(service, port, on_ready, param) })
+}
+
+/// # Safety
+///
+/// The caller of this function now owns the AIBinder object and
+/// is responsible for deleting or passing ownership.
+///
+/// This method is only needed because the C++ injector.cpp file needs the IAccessor
+/// and the vm_payload library already includes the generate rust library for IAccessor.
+/// We could get rid of this function if we are OK with including the -ndk version of the
+/// library as well.
+///
+/// The instance argument must be a non-null valid C string. It must not be modified for the
+/// duration of this function call.
+///
+/// We only need IAccessor in the C++ file because I don't know how to do the equivalent of
+/// __attribute((constructor)) in rust.
+#[no_mangle]
+pub unsafe extern "C" fn AVmPayload_getAccessorBinder(instance: *const c_char) -> *mut AIBinder {
+    initialize_logging();
+    let instance_cstr: &CStr;
+    // SAFETY: The instance string must be non-null valid C string.
+    unsafe { instance_cstr = CStr::from_ptr(instance) }
+    let service = unwrap_or_abort(get_vm_payload_service());
+    match service.getAccessorBinder(
+        instance_cstr.to_str().expect("instance argument is null or contains invalid UTF-8"),
+    ) {
+        Ok(accessor) => {
+            // Prevent AIBinder_decStrong from being called...
+            std::mem::ManuallyDrop::new(accessor).as_native_mut().cast()
+        }
+        Err(e) => {
+            error!("Failed to get the accessor binder from the VM payload service: {e:?}");
+            ptr::null_mut()
+        }
+    }
 }
 
 /// # Safety: Same as `AVmPayload_runVsockRpcServer`.
