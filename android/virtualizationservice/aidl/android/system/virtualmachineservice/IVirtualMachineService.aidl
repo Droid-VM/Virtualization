@@ -63,4 +63,21 @@ interface IVirtualMachineService {
      * that Secretkeeper is supported from Linux device tree before calling this.
      */
     ISecretkeeper getSecretkeeper();
+
+    /**
+     * VSOCK connection info for a host service
+     */
+    parcelable ServiceConnectionInfo {
+        int port;
+    }
+
+    /**
+     * Request VSOCK connection info for a specific host service.
+     */
+    ServiceConnectionInfo getServiceConnectionInfo(in String name);
+
+    /**
+     * Request the supported host VSOCK services.
+     */
+    String[] getSupportedHostServices();
 }

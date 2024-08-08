@@ -76,4 +76,13 @@ AVmAttestationStatus AVmPayload_requestAttestationForTesting(
         const void* _Nonnull challenge, size_t challenge_size,
         struct AVmAttestationResult* _Nullable* _Nonnull result) __INTRODUCED_IN(__ANDROID_API_V__);
 
+/**
+ * Enables payloads to get binder services from the host over vsock. This
+ * injects the required information from virtmgr into libbinder to allow
+ * payloads to get binder services through the usual IServiceManager APIs
+ * like `waitForDeclaredService()` in C++ or `binder::wait_for_interface` in
+ * Rust.
+ */
+void AVmPayload_injectHostRpcServices() __INTRODUCED_IN(36);
+
 __END_DECLS

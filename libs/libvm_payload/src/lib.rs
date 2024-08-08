@@ -21,10 +21,10 @@ use android_system_virtualization_payload::aidl::android::system::virtualization
 use anyhow::{bail, ensure, Context, Result};
 use binder::{
     unstable_api::{new_spibinder, AIBinder},
-    Strong, ExceptionCode,
+    Accessor, AccessorProvider, Strong, ExceptionCode,
 };
 use log::{error, info, LevelFilter};
-use rpcbinder::{RpcServer, RpcSession};
+use rpcbinder::{FileDescriptorTransportMode, RpcServer, RpcSession};
 use openssl::{ec::EcKey, sha::sha256, ecdsa::EcdsaSig};
 use std::convert::Infallible;
 use std::ffi::{CString, CStr};
@@ -50,6 +50,10 @@ static VM_ENCRYPTED_STORAGE_PATH_C: LazyLock<CString> =
 
 static ALREADY_NOTIFIED: AtomicBool = AtomicBool::new(false);
 
+/// Holds the accessor provider for injected RPC services. Deleting this object will
+/// unregister it with libbinder, removing access to host RPC services for the payload.
+static SERVICE_ACCESSOR_PROVIDER: Mutex<Option<AccessorProvider>> = Mutex::new(None);
+
 /// Return a connection to the payload service in Microdroid Manager. Uses the existing connection
 /// if there is one, otherwise attempts to create a new one.
 fn get_vm_payload_service() -> Result<Strong<dyn IVmPayloadService>> {
@@ -57,7 +61,10 @@ fn get_vm_payload_service() -> Result<Strong<dyn IVmPayloadService>> {
     if let Some(strong) = &*connection {
         Ok(strong.clone())
     } else {
-        let new_connection: Strong<dyn IVmPayloadService> = RpcSession::new()
+        let session = RpcSession::new();
+        // Required for libbinder's accessor binder to send connected FDs
+        session.set_file_descriptor_transport_mode(FileDescriptorTransportMode::Unix);
+        let new_connection: Strong<dyn IVmPayloadService> = session
             .setup_unix_domain_client(VM_PAYLOAD_SERVICE_SOCKET_NAME)
             .context(format!("Failed to connect to service: {}", VM_PAYLOAD_SERVICE_SOCKET_NAME))?;
         *connection = Some(new_connection.clone());
@@ -159,6 +166,38 @@ unsafe fn try_run_vsock_server(
         }
     } else {
         bail!("Failed to convert the given service from AIBinder to SpIBinder.");
+    }
+}
+
+/// Allow VM payloads to get host binder services over vsock using IServiceManager
+/// APIs.
+#[no_mangle]
+pub extern "C" fn AVmPayload_injectHostRpcServices() {
+    let service = unwrap_or_abort(get_vm_payload_service());
+    let services = match service.getSupportedServices() {
+        Ok(s) => s,
+        Err(e) => {
+            error!("Failed to get supported service names from the VM payload service: {e:?}");
+            return;
+        }
+    };
+
+    match AccessorProvider::new(&services, move |inst: &str| {
+        let payload_service = unwrap_or_abort(get_vm_payload_service());
+        match payload_service.getAccessorBinder(inst) {
+            Ok(binder) => Accessor::from_binder(inst, binder),
+            Err(e) => {
+                error!("Failed to get accessor binder from VM payload service: {e:?}");
+                None
+            }
+        }
+    }) {
+        Some(a) => {
+            *SERVICE_ACCESSOR_PROVIDER.lock().unwrap() = Some(a);
+        }
+        None => {
+            error!("Failed to create a new AccessorProvider");
+        }
     }
 }
 

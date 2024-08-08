@@ -3,5 +3,8 @@ ro.apex.updatable=true
 ro.adb.secure=0
 service.adb.listen_addrs=vsock:5555
 
+# don't wait for a kernel binder servicemanager
+servicemanager.installed=false
+
 # Payload metadata partition
 apexd.payload_metadata.path=/dev/block/by-name/payload-metadata
