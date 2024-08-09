@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b79201c9_0558da05",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-08-09T18:30:01Z",
+      "side": 1,
+      "message": "We should be able to get away with breaking people since we don\u0027t promise a stable VM platform yet. It isn\u0027t nice though.\n\nEventually we should add some kind of VM platform version that the user requests as part of spawning the VM. Maybe we can hold off on changing the default until we declare the first stable version.",
+      "parentUuid": "4f367a18_6708b960",
+      "range": {
+        "startLine": 14,
+        "startChar": 18,
+        "endLine": 15,
+        "endChar": 30
+      },
+      "revId": "7a5fc20e6d0c41c4f1de110c87b3064f2f476dab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3f530056_a58c97a9",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-08-09T12:15:02Z",
       "side": 1,
       "message": "AFAIU, the reason why Rialto is being booted in \"BIOS mode\" is that we didn\u0027t manage to make it pass the \"validation\" `crosvm` performs on kernels (e.g. parsing the Linux header), correct?\n\nIf that\u0027s the case and now that you\u0027ve introduced this new crosvm flag, why not simply modify `virtmgr` to spawn \"kernel mode\" (currently `crosvm run \u003ckernel\u003e`) with\n```\ncrosvm run --fdt-position\u003dend --bios \u003cVirtualMachineRawConfig::kernel\u003e\n```\n?\n\nAs a result, the Service VM could then boot Rialto as a \"kernel\" (from the AVF API) because we\u0027d effectively bypass the failing checks and there\u0027d be no need to make the AIDL more complicated nor to modify Rialto or any other component, AFAICT.",
+      "range": {
+        "startLine": 971,
+        "startChar": 12,
+        "endLine": 971,
+        "endChar": 46
+      },
+      "revId": "7a5fc20e6d0c41c4f1de110c87b3064f2f476dab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d4debc5_62847bfa",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 971,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-08-09T18:30:01Z",
+      "side": 1,
+      "message": "\u003e AFAIU, the reason why Rialto is being booted in \"BIOS mode\" is that we didn\u0027t manage to make it pass the \"validation\" crosvm performs on kernels (e.g. parsing the Linux header), correct?\n\nThe crosvm validation was OK. I think the executable itself was messed up (it would execute the header, which wasn\u0027t setup to be valid code, and also the rest of the program would be loaded at a 64kb offset from what is expected). I can take another shot at getting it to work.\n\nI think we\u0027ll want to make these BIOS changes eventually, but switching rialto to kernel mode does seem less controversial as a short term fix.\n\n\u003e If that\u0027s the case and now that you\u0027ve introduced this new crosvm flag, why not simply modify virtmgr to spawn \"kernel mode\" (currently crosvm run \u003ckernel\u003e) with\n\n`--kernel` images can either (1) have the aarch64 linux header at the start or (2) be an ELF file. Loading with `--bios` would definitely break the ELF files (we\u0027d try execute the ELF header. nothing would be loaded in the right spots). It would also break any images that have the text offset field in the aarch64 linux header set to non-zero values.\n\n\u003e no need to make the AIDL more complicated nor to modify Rialto or any other component, AFAICT\n\nThey\u0027d still need to be modified because the text section would move (from RAM offset 2 MiB to offset zero).",
+      "parentUuid": "c53754fa_1ac59242",
       "range": {
         "startLine": 971,
         "startChar": 12,
