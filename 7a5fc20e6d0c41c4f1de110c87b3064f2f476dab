@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f367a18_6708b960",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-09T12:15:02Z",
+      "side": 1,
+      "message": "As I\u0027ve mentioned multiple times before, I\u0027d rather see us move our users away from `--bios` (to \"kernel mode\", crosvm\u0027s default) than implement yet another guest image loading layout, which we\u0027ll have to support.\n\nIn particular, I don\u0027t believe you can make this new layout the default (for BIOS mode) because that\u0027d break existing users and we have no exhaustive way to \"fix all the users\" because they might not be in AOSP; or am I missing something?",
+      "range": {
+        "startLine": 14,
+        "startChar": 18,
+        "endLine": 15,
+        "endChar": 30
+      },
+      "revId": "7a5fc20e6d0c41c4f1de110c87b3064f2f476dab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f530056_a58c97a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-09T12:15:02Z",
+      "side": 1,
+      "message": "(Adding Jiyong as a reviewer, to keep me honest)",
+      "revId": "7a5fc20e6d0c41c4f1de110c87b3064f2f476dab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c53754fa_1ac59242",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 971,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-09T12:15:02Z",
+      "side": 1,
+      "message": "AFAIU, the reason why Rialto is being booted in \"BIOS mode\" is that we didn\u0027t manage to make it pass the \"validation\" `crosvm` performs on kernels (e.g. parsing the Linux header), correct?\n\nIf that\u0027s the case and now that you\u0027ve introduced this new crosvm flag, why not simply modify `virtmgr` to spawn \"kernel mode\" (currently `crosvm run \u003ckernel\u003e`) with\n```\ncrosvm run --fdt-position\u003dend --bios \u003cVirtualMachineRawConfig::kernel\u003e\n```\n?\n\nAs a result, the Service VM could then boot Rialto as a \"kernel\" (from the AVF API) because we\u0027d effectively bypass the failing checks and there\u0027d be no need to make the AIDL more complicated nor to modify Rialto or any other component, AFAICT.",
+      "range": {
+        "startLine": 971,
+        "startChar": 12,
+        "endLine": 971,
+        "endChar": 46
+      },
+      "revId": "7a5fc20e6d0c41c4f1de110c87b3064f2f476dab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
