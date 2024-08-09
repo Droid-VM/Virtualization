@@ -72,8 +72,23 @@
 .section .init.entry, "ax"
 .global entry
 entry:
+        // Put an aarch64 Linux kernel header at the start so that images can
+        // optionally be loaded in "kernel mode".
+        // https://www.kernel.org/doc/Documentation/arm64/booting.txt
+	b	0f		// code0
+	nop			// code1
+	.quad	0		// text_offset
+	.quad   1		// image_size (HACK: crosvm takes max of this and the file size, so any small non-zero value works)
+	.quad	0		// flags
+	.quad	0		// reserved
+	.quad	0		// reserved
+	.quad	0		// reserved
+	.word	0x644d5241	// magic
+	.long	0		// reserved
+
 	/* Load and apply the memory management configuration, ready to enable MMU and caches. */
 
+0:
 	adr x30, vector_table_panic
 	msr vbar_el1, x30
 
