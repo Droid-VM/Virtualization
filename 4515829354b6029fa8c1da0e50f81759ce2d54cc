@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c57872f_3887da0f",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-08-09T12:52:45Z",
+      "side": 1,
+      "message": "I\u0027m generally not in favor of quoting VSR requirements in engineering docs \u0026 READMEs.\n\n\nAdditionally I\u0027d avoid reference to Keymint from pVM or pvmfw reference docs - it has nothing much to do with pVM other than being another key provisioning method similar to rkpvm. (I understand it makes requirements easier to understand since DICE chains Keymint predates pVM, maybe we can put it somewhere else? pvmfw docs seem like an odd place?).",
+      "range": {
+        "startLine": 259,
+        "startChar": 0,
+        "endLine": 259,
+        "endChar": 22
+      },
+      "revId": "4515829354b6029fa8c1da0e50f81759ce2d54cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df5a98d9_3e0d69dd",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-08-09T12:52:45Z",
+      "side": 1,
+      "message": "Can we move this \u0026 other DICE details from this doc to a separate documentation \u0026 cross reference there?\n\nIt appears to be a lot of details for pvmfw README - things such as vendor + additional DICE nodes.",
+      "range": {
+        "startLine": 282,
+        "startChar": 0,
+        "endLine": 282,
+        "endChar": 19
+      },
+      "revId": "4515829354b6029fa8c1da0e50f81759ce2d54cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

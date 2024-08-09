@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9495d765_87aead86",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-08-09T12:52:45Z",
+      "side": 0,
+      "message": "I would suggest keeping this text changing the phrasing:\n\n```\nDevices must implement DICE and provide a certificate rooted at the\nUnique Device Secret (UDS) in a boot stage preceding the pvmfw loader (typically\nABL), in such a way that it would receive a valid `AndroidDiceHandover`, that\ncan be passed to [`DiceAndroidHandoverMainFlow`][DiceAndroidHandoverMainFlow] along with the inputs described below.\n```\n\n\u0026 drop the \"Otherwise ....\"",
+      "range": {
+        "startLine": 259,
+        "startChar": 0,
+        "endLine": 273,
+        "endChar": 21
+      },
+      "revId": "f8dcade684950c8589b4696c658e3689c69dce8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
