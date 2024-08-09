@@ -17,7 +17,11 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
+// To Enable AVF, in addition to include virtualization apex, you have
+// to also insert the following line in your device.mk:
+//  PRODUCT_PACKAGES += features_com.android.virt.xml
 prebuilt_etc {
+    vendor: true,
     name: "features_com.android.virt.xml",
     sub_dir: "permissions",
     src: "features_com.android.virt.xml",

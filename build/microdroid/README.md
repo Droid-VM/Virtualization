@@ -11,10 +11,15 @@ Any 64-bit target (either x86\_64 or arm64) is supported. 32-bit target is not
 supported.
 
 The only remaining requirement is that `com.android.virt` APEX has to be
-pre-installed. To do this, add the following line in your product makefile.
+pre-installed. To do this, add the following lines in your product makefile.
+The first line build the virtualization apex, and the second line makes the
+system feature be aware AVF is present (Please also reference:
+[Java API](../../libs/framework-virtualization/README.md#Detecting-AVF-Support)).
 
 ```make
 $(call inherit-product, packages/modules/Virtualization/build/apex/product_packages.mk)
+
+PRODUCT_PACKAGES += features_com.android.virt.xml
 ```
 
 Build the target product after adding the line, and flash it. This step needs
