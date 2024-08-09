@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "976b787c_68b77249",
+        "filename": "libs/libvmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-08-09T20:05:27Z",
+      "side": 1,
+      "message": "i think we ought to be able to reference the length of the `image` MEMORY region here somehow, but my assembly/linker skills came up short. do you have any suggestions?",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 32
+      },
+      "revId": "bccd79401cdaa62de165988df15e6b694afa7396",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
