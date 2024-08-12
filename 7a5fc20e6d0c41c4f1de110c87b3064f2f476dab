@@ -120,6 +120,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a54204cc_b98b3463",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-08-12T18:34:21Z",
+      "side": 1,
+      "message": "According to https://www.qemu.org/docs/master/system/arm/virt.html#hardware-configuration-information-for-bare-metal-programming, QEMU puts the device tree at the start of RAM for non-kernel guests. The start of RAM isn\u0027t the same location as in crosvm though (0x4000_0000 vs 0x8000_0000). It might load the BIOS binary into flash memory (not sure), which we don\u0027t have an equivalent to in crosvm.\n\nIn general, the qemu memory layout is going to differ from crosvm. I don\u0027t think it would be productive to try emulating it.",
+      "parentUuid": "19d3d68f_813cb00e",
+      "range": {
+        "startLine": 14,
+        "startChar": 18,
+        "endLine": 15,
+        "endChar": 30
+      },
+      "revId": "7a5fc20e6d0c41c4f1de110c87b3064f2f476dab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3f530056_a58c97a9",
@@ -198,6 +222,30 @@
       "side": 1,
       "message": "From a purely conceptual perspective, I am +1 on the idea of running rialto as a kernel. It is \"the\" payload we want to run, not a bios that bootstraps or augments the main OS.",
       "parentUuid": "0d4debc5_62847bfa",
+      "range": {
+        "startLine": 971,
+        "startChar": 12,
+        "endLine": 971,
+        "endChar": 46
+      },
+      "revId": "7a5fc20e6d0c41c4f1de110c87b3064f2f476dab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c816faee_846cd2ae",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 971,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-08-12T18:34:21Z",
+      "side": 1,
+      "message": "Attempting that at https://r.android.com/3212725\n\n(as mentioned above, I think we should still consider changing the BIOS memory layout long term)",
+      "parentUuid": "6d0a6b9f_eb3ff0be",
       "range": {
         "startLine": 971,
         "startChar": 12,
