@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47f04b62_26badc8a",
+        "filename": "libs/libvmbase/example/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-08-13T19:45:16Z",
+      "side": 1,
+      "message": "oh right, sgtm",
+      "parentUuid": "7387cad2_b50ce38f",
+      "revId": "c2b9b6531b00dff09ff03a0f68f4249b6648ac26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33e7ec06_c2dd41d8",
@@ -90,6 +108,30 @@
       "side": 1,
       "message": "It was because I was originally (in PS1) `b text_begin` but I don\u0027t need this anymore as I now `b entry`. I also agree with you that it\u0027s cleaner to move it back to the start of `.text`, anyway.\n\n\u003e so that it become non-executable\n\nSo I\u0027ve considered this but it might be too expensive in binary size as it would add a whole page so I decided to keep it in `.text` instead, which (as you say) will remain executable but if an attacker can ROP to one of our fields, it\u0027s already game over IMO; WDYT?",
       "parentUuid": "33e7ec06_c2dd41d8",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 17
+      },
+      "revId": "c2b9b6531b00dff09ff03a0f68f4249b6648ac26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1e86deb_3c4aa17c",
+        "filename": "libs/libvmbase/sections.ld",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-08-13T19:45:16Z",
+      "side": 1,
+      "message": "sgtm. i\u0027m not really concerned, was just curious",
+      "parentUuid": "28fe8dec_941cfc8b",
       "range": {
         "startLine": 39,
         "startChar": 0,
