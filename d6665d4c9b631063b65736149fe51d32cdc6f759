@@ -105,6 +105,30 @@
       },
       "revId": "d6665d4c9b631063b65736149fe51d32cdc6f759",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5916cd5_7e7364bc",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/UsbConfig.aidl",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-08-13T21:33:18Z",
+      "side": 1,
+      "message": "If we don\u0027t have an immediate need for USB devices, I think we should just turn it off with a one liner and not add all this code.\n\nIf we do need it soon, I suggest we design the API additions to support USB hotplug only.",
+      "parentUuid": "efa9ad59_8d102ad4",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 35
+      },
+      "revId": "d6665d4c9b631063b65736149fe51d32cdc6f759",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
