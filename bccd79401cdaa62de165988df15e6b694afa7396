@@ -69,6 +69,30 @@
       },
       "revId": "bccd79401cdaa62de165988df15e6b694afa7396",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2417005d_cf96e6bb",
+        "filename": "libs/libvmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-13T18:58:39Z",
+      "side": 1,
+      "message": "The main issue with this approach is that it adds the image header to all vmbase clients but it that should be opt-in, IMO.\n\nI had started typing a long answer describing how I\u0027d recommend doing it but it was harder than just writing the code so here\u0027s the way I was thinking of doing it: aosp/3217920 (note that `image_size` gets computed).\n\nIf you\u0027re happy with it (feel free to post review comments or even modify the CL itself), you could rebase this CL on top of that one.",
+      "parentUuid": "19e52d04_9066df23",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 32
+      },
+      "revId": "bccd79401cdaa62de165988df15e6b694afa7396",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
