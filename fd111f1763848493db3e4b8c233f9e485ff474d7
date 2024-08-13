@@ -89,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e605b3fc_d36d490c",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineRawConfig.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-08-13T17:23:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "227b0e63_ba906467",
+      "range": {
+        "startLine": 105,
+        "startChar": 4,
+        "endLine": 105,
+        "endChar": 11
+      },
+      "revId": "fd111f1763848493db3e4b8c233f9e485ff474d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af8cb8f2_3eb24bc2",
@@ -137,6 +161,30 @@
       "writtenOn": "2024-08-02T00:26:10Z",
       "side": 1,
       "message": "The primary user of VirtualmachineCustomImageConfig is VmConfigJson[1] in the VmLauncherApp. VmConfigJson should call setUseUsb depending on the value of the new attribute `usb`.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/android/VmLauncherApp/java/com/android/virtualization/vmlauncher/VmConfigJson.java",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 30
+      },
+      "revId": "fd111f1763848493db3e4b8c233f9e485ff474d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf30a1a6_e126b687",
+        "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-08-13T17:23:47Z",
+      "side": 1,
+      "message": "Done, thank you!",
+      "parentUuid": "7b7ec6f6_d0d6fc74",
       "range": {
         "startLine": 67,
         "startChar": 0,
