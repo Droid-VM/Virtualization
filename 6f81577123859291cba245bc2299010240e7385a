@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "156f0a59_3fdb484c",
+        "filename": "android/TerminalApp/AndroidManifest.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-08-13T15:22:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "867b33a4_0c76293b",
+      "range": {
+        "startLine": 3,
+        "startChar": 40,
+        "endLine": 3,
+        "endChar": 50
+      },
+      "revId": "6f81577123859291cba245bc2299010240e7385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b6f84ed_aa63777e",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9bd726a_f29b4d04",
+        "filename": "android/TerminalApp/java/com/android/virtualization/vmterminal/MainActivity.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-08-13T15:22:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b6f84ed_aa63777e",
+      "range": {
+        "startLine": 43,
+        "startChar": 36,
+        "endLine": 43,
+        "endChar": 48
+      },
+      "revId": "6f81577123859291cba245bc2299010240e7385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27a848c7_e4d982d5",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-08-13T12:34:58Z",
       "side": 1,
       "message": "nit: button_shell",
+      "range": {
+        "startLine": 56,
+        "startChar": 26,
+        "endLine": 56,
+        "endChar": 34
+      },
+      "revId": "6f81577123859291cba245bc2299010240e7385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "308c39d0_14a6a828",
+        "filename": "android/TerminalApp/java/com/android/virtualization/vmterminal/MainActivity.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-08-13T15:22:27Z",
+      "side": 1,
+      "message": "as you recommended in layout file, removed buttons.",
+      "parentUuid": "27a848c7_e4d982d5",
       "range": {
         "startLine": 56,
         "startChar": 26,
@@ -95,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39850b45_2e64ed55",
+        "filename": "android/TerminalApp/java/com/android/virtualization/vmterminal/MainActivity.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-08-13T15:22:27Z",
+      "side": 1,
+      "message": "I changed it to use ttyd(instead of webssh) with \u0027login\u0027 instead of \u0027ssh localhost\u0027 or \u0027/bin/bash\u0027. in that case, it asks a user to login certain account like root or a user account which is set up in initial steps.",
+      "parentUuid": "8b08d2e6_543e558a",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 98
+      },
+      "revId": "6f81577123859291cba245bc2299010240e7385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a3421101_e53ff79c",
         "filename": "android/TerminalApp/java/com/android/virtualization/vmterminal/MainActivity.java",
         "patchSetId": 4
@@ -106,6 +202,30 @@
       "writtenOn": "2024-08-13T12:34:58Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 63,
+        "startChar": 26,
+        "endLine": 63,
+        "endChar": 31
+      },
+      "revId": "6f81577123859291cba245bc2299010240e7385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb46f66f_10083cda",
+        "filename": "android/TerminalApp/java/com/android/virtualization/vmterminal/MainActivity.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-08-13T15:22:27Z",
+      "side": 1,
+      "message": "as you recommended in layout file, removed buttons.",
+      "parentUuid": "a3421101_e53ff79c",
       "range": {
         "startLine": 63,
         "startChar": 26,
@@ -129,6 +249,30 @@
       "writtenOn": "2024-08-13T12:34:58Z",
       "side": 1,
       "message": "Why is this needed? This activity is not start upon request from another activity.",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 17
+      },
+      "revId": "6f81577123859291cba245bc2299010240e7385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59cd059d_c91e691a",
+        "filename": "android/TerminalApp/java/com/android/virtualization/vmterminal/MainActivity.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-08-13T15:22:27Z",
+      "side": 1,
+      "message": "removed.",
+      "parentUuid": "ad7fa8d5_8267c539",
       "range": {
         "startLine": 97,
         "startChar": 0,
@@ -164,6 +308,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "19826809_414d5410",
+        "filename": "android/TerminalApp/java/com/android/virtualization/vmterminal/MainActivity.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-08-13T15:22:27Z",
+      "side": 1,
+      "message": "sometimes web server isn\u0027t ready at this moment.. we might do better when a guest agent exists.",
+      "parentUuid": "afb94007_28e97ba0",
+      "range": {
+        "startLine": 113,
+        "startChar": 21,
+        "endLine": 113,
+        "endChar": 28
+      },
+      "revId": "6f81577123859291cba245bc2299010240e7385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5438d3f5_1d17dfd6",
         "filename": "android/TerminalApp/res/layout/activity_headless.xml",
         "patchSetId": 4
@@ -175,6 +343,30 @@
       "writtenOn": "2024-08-13T12:34:58Z",
       "side": 1,
       "message": "Can we eliminate these?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 17
+      },
+      "revId": "6f81577123859291cba245bc2299010240e7385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bac9568_11a04927",
+        "filename": "android/TerminalApp/res/layout/activity_headless.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-08-13T15:22:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5438d3f5_1d17dfd6",
       "range": {
         "startLine": 9,
         "startChar": 0,
