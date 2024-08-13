@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7387cad2_b50ce38f",
+        "filename": "libs/libvmbase/example/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-13T19:32:51Z",
+      "side": 1,
+      "message": "I haven\u0027t tried but I don\u0027t think it\u0027ll work because I first need to teach `vmbase_example` to get the DT location from `x0` (and map it in its PTs). So I\u0027ll do that as a follow-up, if that\u0027s fine with you.",
+      "parentUuid": "6573232e_72f67fce",
+      "revId": "c2b9b6531b00dff09ff03a0f68f4249b6648ac26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33e7ec06_c2dd41d8",
@@ -60,6 +78,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "28fe8dec_941cfc8b",
+        "filename": "libs/libvmbase/sections.ld",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-13T19:32:51Z",
+      "side": 1,
+      "message": "It was because I was originally (in PS1) `b text_begin` but I don\u0027t need this anymore as I now `b entry`. I also agree with you that it\u0027s cleaner to move it back to the start of `.text`, anyway.\n\n\u003e so that it become non-executable\n\nSo I\u0027ve considered this but it might be too expensive in binary size as it would add a whole page so I decided to keep it in `.text` instead, which (as you say) will remain executable but if an attacker can ROP to one of our fields, it\u0027s already game over IMO; WDYT?",
+      "parentUuid": "33e7ec06_c2dd41d8",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 17
+      },
+      "revId": "c2b9b6531b00dff09ff03a0f68f4249b6648ac26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "478330b2_5cfd353b",
         "filename": "libs/libvmbase/src/entry.rs",
         "patchSetId": 1
@@ -71,6 +113,30 @@
       "writtenOn": "2024-08-13T19:07:36Z",
       "side": 1,
       "message": "should be a 32 bit value",
+      "range": {
+        "startLine": 159,
+        "startChar": 14,
+        "endLine": 159,
+        "endChar": 18
+      },
+      "revId": "c2b9b6531b00dff09ff03a0f68f4249b6648ac26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db02ac39_c672aa4b",
+        "filename": "libs/libvmbase/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-13T19:32:51Z",
+      "side": 1,
+      "message": "Thanks for catching this!",
+      "parentUuid": "478330b2_5cfd353b",
       "range": {
         "startLine": 159,
         "startChar": 14,
