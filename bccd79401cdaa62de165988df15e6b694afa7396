@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e4633717_8959c7b9",
+        "filename": "libs/libvmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-13T00:53:39Z",
+      "side": 1,
+      "message": "nit: formatting",
+      "range": {
+        "startLine": 78,
+        "startChar": 2,
+        "endLine": 78,
+        "endChar": 3
+      },
+      "revId": "bccd79401cdaa62de165988df15e6b694afa7396",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "976b787c_68b77249",
         "filename": "libs/libvmbase/entry.S",
         "patchSetId": 3
@@ -14,6 +37,30 @@
       "writtenOn": "2024-08-09T20:05:27Z",
       "side": 1,
       "message": "i think we ought to be able to reference the length of the `image` MEMORY region here somehow, but my assembly/linker skills came up short. do you have any suggestions?",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 32
+      },
+      "revId": "bccd79401cdaa62de165988df15e6b694afa7396",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19e52d04_9066df23",
+        "filename": "libs/libvmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-13T00:53:39Z",
+      "side": 1,
+      "message": "I\u0027ll leave that to Pierre-Clement. \n\nBy the way, can this be fixed up in a post-processing step?",
+      "parentUuid": "976b787c_68b77249",
       "range": {
         "startLine": 81,
         "startChar": 0,
