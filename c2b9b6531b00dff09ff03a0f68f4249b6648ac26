@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78cf7218_e33acd89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-08-13T19:07:36Z",
+      "side": 1,
+      "message": "thanks!",
+      "revId": "c2b9b6531b00dff09ff03a0f68f4249b6648ac26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6573232e_72f67fce",
+        "filename": "libs/libvmbase/example/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-08-13T19:07:36Z",
+      "side": 1,
+      "message": "maybe update `libs/libvmbase/example/tests/test.rs` to load the example as a kernel so there is test coverage for this. up to you",
+      "revId": "c2b9b6531b00dff09ff03a0f68f4249b6648ac26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33e7ec06_c2dd41d8",
+        "filename": "libs/libvmbase/sections.ld",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-08-13T19:07:36Z",
+      "side": 1,
+      "message": "did you put it outside the text range so that it become non-executable or something? since it is going to share a page with other text section data, i wonder if that is futile",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 17
+      },
+      "revId": "c2b9b6531b00dff09ff03a0f68f4249b6648ac26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "478330b2_5cfd353b",
+        "filename": "libs/libvmbase/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-08-13T19:07:36Z",
+      "side": 1,
+      "message": "should be a 32 bit value",
+      "range": {
+        "startLine": 159,
+        "startChar": 14,
+        "endLine": 159,
+        "endChar": 18
+      },
+      "revId": "c2b9b6531b00dff09ff03a0f68f4249b6648ac26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
