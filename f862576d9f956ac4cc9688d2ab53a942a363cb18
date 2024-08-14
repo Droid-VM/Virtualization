@@ -16,6 +16,24 @@
       "message": "I thought we wanted to keep unit tests close to what they test against.\n\nDoes this test cover a lot more than vmbase?",
       "revId": "f862576d9f956ac4cc9688d2ab53a942a363cb18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09960ae0_d22186b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-14T08:35:21Z",
+      "side": 1,
+      "message": "I guess it depends where we draw the line between unit tests and other tests.\n\nMy view was that Rust unit tests were those using the `#[cfg(test)]` \u0026 `#[test]` framework to perform function-level testing. The tests themselves are typically written in the same file as their test targets and get cleanly packaged by Soong\u0027s `rust_test` to be run in a userspace framework on the Android host or even the build host. A great example of this are Jaewan\u0027s tests in `guest/pvmfw/src/device_assignment.rs`.\n\nThe code I\u0027m moving here is stand-alone (almost framework-like) code that expects the tested code as prebuilt binary and runs it, from the Android host, by spawning a VM. In particular, the `#[test]` functions are NOT actually testing host code (but guest code) and their scope is considerably higher than function-level.\n\nNote that we currently don\u0027t have actual function-level tests for `vmbase`. If we did, I fully agree it should live under `libs/libvmbase`. OTOH, the code in this CL feels closer to E2E testing.",
+      "parentUuid": "e96b9e5c_641732d6",
+      "revId": "f862576d9f956ac4cc9688d2ab53a942a363cb18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
