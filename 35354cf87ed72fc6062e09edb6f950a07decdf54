@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75b74670_421c2a21",
+        "filename": "guest/rialto/idmap.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-14T07:56:21Z",
+      "side": 1,
+      "message": "In this case, unlike aosp/3205398, nothing seems to be enabling `loadFdtAfterPayload`? So the DT should be expected at the end of RAM, right? If that\u0027s the case, these 2 MiB are wasted and `.DATA_ADDR` could be moved \"up\" by 2MiB, reducing the minimum RAM size required. FYI, see the memory layout used in aosp/3218242. Of course, this could be addressed in a follow-up as we\u0027re giving Rialto 300 MiB of virtual RAM anyway.",
+      "range": {
+        "startLine": 64,
+        "startChar": 1,
+        "endLine": 64,
+        "endChar": 46
+      },
+      "revId": "35354cf87ed72fc6062e09edb6f950a07decdf54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
