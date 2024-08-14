@@ -34,6 +34,24 @@
       "parentUuid": "2a27c7e3_68f7ec74",
       "revId": "6dd99e3d47bdecacd0cb41e9331f9dccf0f02c41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfcc2dd9_b91dbf0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-14T19:25:41Z",
+      "side": 1,
+      "message": "\u003e is there a maintainer for rialto we can consult?\n\nThat kind of low-level code comes from vmbase and isn\u0027t Rialto specific.\n\nActually, most of it was originally part of pvmfw.\n\n\u003e the memory sharing stuff looks potentially dynamic\n\nOn pKVM, the \"memory sharing\" (as in `MEM_SHARE` HVCs), used to implement virtio, gets pages from the Rust global allocator before sharing them; see how `try_shared_alloc()` uses the `SHARED_POOL`. On Gunyah, it gets memory from a reserved region, which is NOT part of the \"main RAM\", AFAIU.\n\n\u003e FYI: virtmgr implicitly increases the RAM size to compensate for swiotlb now.\n\nGood to know, thanks for sharing. Note that vmbase ignores the swiotlb region (as described above) if it doesn\u0027t contain an explicit address range so I don\u0027t think this is relevant here.\n\n\u003e having more swiotlb space than the rest of the guest combined seems a little comical\n\nHeh, agreed!\n\n\u003e and by dynamic, i mean the way it sets up the dynamic page table.\n\nPages for PTs also get allocated by the global allocator. For example, see [`PageTable::new()`](https://cs.android.com/android/platform/superproject/main/+/main:external/rust/crates/aarch64-paging/src/paging.rs;l\u003d841;drc\u003de4f62b3828b0a580ee603b385f83f2066446f417). And there are many other users of the heap (global allocator) such as users of `alloc`.\n\nIn turn, the global allocator in vmbase implements the heap using a fixed-sized slice of its `.bss`; see `libs/libvmbase/src/heap.rs` and the `HEAP` variable Rialto and pvmfw define. As you know from the linker scripts, the `.bss` is part of the 2MiB scratch region.\n\nThere is nothing I am aware of in `vmbase` that would use memory outside of those 3x2 MiB regions.",
+      "parentUuid": "4417c9dc_52aaa377",
+      "revId": "6dd99e3d47bdecacd0cb41e9331f9dccf0f02c41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
