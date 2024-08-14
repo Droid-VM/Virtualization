@@ -22,6 +22,30 @@
       },
       "revId": "35354cf87ed72fc6062e09edb6f950a07decdf54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2def0ad_e43eb5e0",
+        "filename": "guest/rialto/idmap.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-08-14T18:47:45Z",
+      "side": 1,
+      "message": "Done.\n\nI suspect it doesn\u0027t matter much if there are gaps because of this is all supposed to be demand paged, but it will probably confuse people.\n\nI wanted to leave the gap there so it would be easier to switch to something like `loadFdtAfterPayload` later, but I\u0027m not going to worry about it for now.",
+      "parentUuid": "75b74670_421c2a21",
+      "range": {
+        "startLine": 64,
+        "startChar": 1,
+        "endLine": 64,
+        "endChar": 46
+      },
+      "revId": "35354cf87ed72fc6062e09edb6f950a07decdf54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
