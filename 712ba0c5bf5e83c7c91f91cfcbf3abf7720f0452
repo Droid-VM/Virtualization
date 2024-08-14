@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47a1158d_296ad9c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-14T00:58:33Z",
+      "side": 1,
+      "message": "Overall LGTM, but I didn\u0027t thoroughly read the rust source code. Matthew or others could be able to take a deeper look.",
+      "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10ef5f20_698a8716",
+        "filename": "microfuchsia/apex/microfuchsia.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-14T00:58:33Z",
+      "side": 1,
+      "message": "nit: microfuchsia\"d\" for consistency?",
+      "range": {
+        "startLine": 15,
+        "startChar": 8,
+        "endLine": 15,
+        "endChar": 20
+      },
+      "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e6f05ce_88d02ca8",
+        "filename": "microfuchsia/microfuchsiad/aidl/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-14T00:58:33Z",
+      "side": 1,
+      "message": "you may want do explicitly disable the backends that are on by default: java, ndk.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 14
+      },
+      "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9833d2d1_df538897",
+        "filename": "microfuchsia/microfuchsiad/src/instance_starter.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-14T00:58:33Z",
+      "side": 1,
+      "message": "Is there any reason you don\u0027t populate this from vm_config.json file?",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 44
+      },
+      "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
