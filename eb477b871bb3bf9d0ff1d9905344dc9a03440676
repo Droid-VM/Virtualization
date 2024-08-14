@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "37051806_f03bdb96",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-14T08:56:44Z",
+      "side": 1,
+      "message": "Yes, that\u0027s not obvious but `.activate()` first stores internally the value of the current TTBR and [`PageTable`\u0027s implementation of `drop()`](https://cs.android.com/android/platform/superproject/main/+/main:external/rust/crates/aarch64-paging/src/lib.rs;l\u003d493;drc\u003de4f62b3828b0a580ee603b385f83f2066446f417) calls its [`.deactivate()`](https://cs.android.com/android/platform/superproject/main/+/main:external/rust/crates/aarch64-paging/src/lib.rs;l\u003d240;drc\u003de4f62b3828b0a580ee603b385f83f2066446f417) which reverts the TTBR to the stored value.\n\nShould I clarify this in the commit message?",
+      "parentUuid": "5ba8e34e_0a088dd4",
+      "range": {
+        "startLine": 13,
+        "startChar": 25,
+        "endLine": 13,
+        "endChar": 37
+      },
+      "revId": "eb477b871bb3bf9d0ff1d9905344dc9a03440676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c8b83c2f_388b1927",
