@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a27c7e3_68f7ec74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-08-14T18:19:49Z",
+      "side": 1,
+      "message": "is there a maintainer for rialto we can consult? the memory sharing stuff looks potentially dynamic, not sure how much memory that can potentially use\n\nFYI: virtmgr implicitly increases the RAM size to compensate for swiotlb now. a minimum of 8 MiB extra IIUC. having more swiotlb space than the rest of the guest combined seems a little comical, but maybe not a big enough deal to worry about",
+      "revId": "6dd99e3d47bdecacd0cb41e9331f9dccf0f02c41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
