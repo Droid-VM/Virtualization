@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "483f3d60_cbfbb97a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-08-14T18:21:58Z",
+      "side": 1,
+      "message": "+1 for unsafe code, left general Rust comments inline b/c Jiyong implied he didn\u0027t review it.",
+      "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "10ef5f20_698a8716",
         "filename": "microfuchsia/apex/microfuchsia.rc",
         "patchSetId": 2
@@ -66,6 +83,97 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "89841804_f223a284",
+        "filename": "microfuchsia/microfuchsiad/src/instance_manager.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-08-14T18:21:58Z",
+      "side": 1,
+      "message": "This works, but:\n\n1. Generally prefer braces to express early drops if you can (you can\u0027t always, but this makes it more readable when it works)\n\n```\n{\n  let mut state \u003d self.state.lock().unwrap();\n  state.mark_starting()?;\n}\n```\n\n2. Because you only have one action guarded by this lock, you can do this much more easily as\n```\nself.state.lock().unwrap().mark_starting()?;\n```",
+      "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84069900_985c762d",
+        "filename": "microfuchsia/microfuchsiad/src/instance_manager.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-08-14T18:21:58Z",
+      "side": 1,
+      "message": "It might be cleaner if you make a function that gives you a `get_state` and returns `Starting`/`Started`/`Stopped` rather than inlining this into the three transition functions via boolean clauses.",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 98
+      },
+      "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30a32713_bca41c7a",
+        "filename": "microfuchsia/microfuchsiad/src/instance_starter.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-08-14T18:21:58Z",
+      "side": 1,
+      "message": "If fields are only intended to have their `Drop` semantics, it\u0027s conventional to document this by labelling them `_vm_instance` rather than using `#[allow(dead_code)]`. If you intend to access these fields in future CLs, you can ignore this.",
+      "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20da169a_7b51e905",
+        "filename": "microfuchsia/microfuchsiad/src/instance_starter.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-08-14T18:21:58Z",
+      "side": 1,
+      "message": "Why not just put the `MicroFuchsiaInstance` itself in an `Arc` and track that?",
+      "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44be098e_2ccc5e24",
+        "filename": "microfuchsia/microfuchsiad/src/instance_starter.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-08-14T18:21:58Z",
+      "side": 1,
+      "message": "Grmbl. Ideally this should be `impl IVirtualizationService`, because your function has no core constraints on it being a `\u0026dyn`, but someone already wrote this mistake at https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/libvmclient/src/lib.rs;l\u003d161?q\u003d%22struct%20VmInstance%22 so there\u0027s nothing for you to do here.",
+      "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9833d2d1_df538897",
         "filename": "microfuchsia/microfuchsiad/src/instance_starter.rs",
         "patchSetId": 2
@@ -83,6 +191,57 @@
         "endLine": 95,
         "endChar": 44
       },
+      "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8631a5f_fb7bed02",
+        "filename": "microfuchsia/microfuchsiad/src/instance_starter.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-08-14T18:21:58Z",
+      "side": 1,
+      "message": "As above, if you never intend to use this but you need drop semantics, `_follower`. If you intend to use this in a moment this is fine. If it can be closed immediately after `openpty`, consider that rather than delaying the close.",
+      "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb3b5d8c_97fa5074",
+        "filename": "microfuchsia/microfuchsiad/src/instance_starter.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-08-14T18:21:58Z",
+      "side": 1,
+      "message": "Consider promoting via `CStr`:\n```\nlet follower_name \u003d CStr::from_bytes_with_nul(follower_name).context(\"pty filename missing NUL\")?.to_str().context(\"pty filename invalid utf8\")?.to_string();\n```",
+      "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f1da8ea_c2bed2dc",
+        "filename": "microfuchsia/microfuchsiad/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-08-14T18:21:58Z",
+      "side": 1,
+      "message": "You shouldn\u0027t need this - the panic message is set as the abort message, so this should show up in the crashlog.",
       "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
