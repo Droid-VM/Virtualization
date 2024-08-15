@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "03e44269_045fcbde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1251186
+      },
+      "writtenOn": "2024-08-15T02:46:53Z",
+      "side": 1,
+      "message": "thank you so much!",
+      "parentUuid": "483f3d60_cbfbb97a",
+      "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "10ef5f20_698a8716",
         "filename": "microfuchsia/apex/microfuchsia.rc",
         "patchSetId": 2
@@ -48,6 +66,30 @@
       "writtenOn": "2024-08-14T00:58:33Z",
       "side": 1,
       "message": "nit: microfuchsia\"d\" for consistency?",
+      "range": {
+        "startLine": 15,
+        "startChar": 8,
+        "endLine": 15,
+        "endChar": 20
+      },
+      "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a78c4e86_86f1e40a",
+        "filename": "microfuchsia/apex/microfuchsia.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1251186
+      },
+      "writtenOn": "2024-08-15T02:46:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10ef5f20_698a8716",
       "range": {
         "startLine": 15,
         "startChar": 8,
@@ -81,6 +123,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb955053_c185fcb8",
+        "filename": "microfuchsia/microfuchsiad/aidl/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1251186
+      },
+      "writtenOn": "2024-08-15T02:46:53Z",
+      "side": 1,
+      "message": "ah great tip. thanks",
+      "parentUuid": "3e6f05ce_88d02ca8",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 14
+      },
+      "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89841804_f223a284",
@@ -94,6 +160,24 @@
       "writtenOn": "2024-08-14T18:21:58Z",
       "side": 1,
       "message": "This works, but:\n\n1. Generally prefer braces to express early drops if you can (you can\u0027t always, but this makes it more readable when it works)\n\n```\n{\n  let mut state \u003d self.state.lock().unwrap();\n  state.mark_starting()?;\n}\n```\n\n2. Because you only have one action guarded by this lock, you can do this much more easily as\n```\nself.state.lock().unwrap().mark_starting()?;\n```",
+      "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "608be3e4_0ff2d504",
+        "filename": "microfuchsia/microfuchsiad/src/instance_manager.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1251186
+      },
+      "writtenOn": "2024-08-15T02:46:53Z",
+      "side": 1,
+      "message": "Done\nbased on later comments, the logic got a bit more complicated therefore I didn\u0027t use advice #2.",
+      "parentUuid": "89841804_f223a284",
       "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -121,6 +205,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13a0fcc9_92e12407",
+        "filename": "microfuchsia/microfuchsiad/src/instance_manager.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1251186
+      },
+      "writtenOn": "2024-08-15T02:46:53Z",
+      "side": 1,
+      "message": "because the Starting state is actually very transient (only inside start_instance) I decided to clean this up quite a bit. This struct is gone.",
+      "parentUuid": "84069900_985c762d",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 98
+      },
+      "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30a32713_bca41c7a",
@@ -138,6 +246,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a6e4048_6598036a",
+        "filename": "microfuchsia/microfuchsiad/src/instance_starter.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1251186
+      },
+      "writtenOn": "2024-08-15T02:46:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30a32713_bca41c7a",
+      "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20da169a_7b51e905",
@@ -151,6 +277,24 @@
       "writtenOn": "2024-08-14T18:21:58Z",
       "side": 1,
       "message": "Why not just put the `MicroFuchsiaInstance` itself in an `Arc` and track that?",
+      "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86aefcf2_71718e98",
+        "filename": "microfuchsia/microfuchsiad/src/instance_starter.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1251186
+      },
+      "writtenOn": "2024-08-15T02:46:53Z",
+      "side": 1,
+      "message": "I have drastically refactored this after realizing I don\u0027t need the Arcs.",
+      "parentUuid": "20da169a_7b51e905",
       "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -195,6 +339,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "996b6213_e9484f7a",
+        "filename": "microfuchsia/microfuchsiad/src/instance_starter.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1251186
+      },
+      "writtenOn": "2024-08-15T02:46:53Z",
+      "side": 1,
+      "message": "I\u0027ve actually been considering removing vm_config.json entirely. I thought that I would use it... but I haven\u0027t been.... removed",
+      "parentUuid": "9833d2d1_df538897",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 44
+      },
+      "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8631a5f_fb7bed02",
@@ -208,6 +376,24 @@
       "writtenOn": "2024-08-14T18:21:58Z",
       "side": 1,
       "message": "As above, if you never intend to use this but you need drop semantics, `_follower`. If you intend to use this in a moment this is fine. If it can be closed immediately after `openpty`, consider that rather than delaying the close.",
+      "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0297d74a_02174d0c",
+        "filename": "microfuchsia/microfuchsiad/src/instance_starter.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1251186
+      },
+      "writtenOn": "2024-08-15T02:46:53Z",
+      "side": 1,
+      "message": "I just tested if I can avoid opening the follower file, and it works fine! removed.",
+      "parentUuid": "f8631a5f_fb7bed02",
       "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -229,6 +415,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30f9e504_61be17d9",
+        "filename": "microfuchsia/microfuchsiad/src/instance_starter.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1251186
+      },
+      "writtenOn": "2024-08-15T02:46:53Z",
+      "side": 1,
+      "message": "that\u0027s a super tip!\nI had to use `from_bytes_until_nul` because we don\u0027t know where the nul is.",
+      "parentUuid": "eb3b5d8c_97fa5074",
+      "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f1da8ea_c2bed2dc",
@@ -242,6 +446,24 @@
       "writtenOn": "2024-08-14T18:21:58Z",
       "side": 1,
       "message": "You shouldn\u0027t need this - the panic message is set as the abort message, so this should show up in the crashlog.",
+      "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86dc9e0e_dd138f4b",
+        "filename": "microfuchsia/microfuchsiad/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1251186
+      },
+      "writtenOn": "2024-08-15T02:46:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f1da8ea_c2bed2dc",
       "revId": "712ba0c5bf5e83c7c91f91cfcbf3abf7720f0452",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
