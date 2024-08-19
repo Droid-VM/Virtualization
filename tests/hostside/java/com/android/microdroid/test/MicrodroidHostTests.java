@@ -1035,6 +1035,10 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @Test
     @CddTest
     public void testNoAvfDebugPolicyInLockedDevice() throws Exception {
+        // neither cuttlefish nor goldfish supports device-tree
+        assumeFalse("Cuttlefish/Goldfish doesn't support device tree under /proc/device-tree",
+                isCuttlefish() || isGoldfish());
+
         ITestDevice device = getDevice();
 
         // Check device's locked state with ro.boot.verifiedbootstate. ro.boot.flash.locked

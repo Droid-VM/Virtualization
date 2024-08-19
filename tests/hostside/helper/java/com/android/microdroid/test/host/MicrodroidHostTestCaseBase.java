@@ -124,6 +124,10 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
         return DeviceProperties.create(getDevice()::getProperty).isCuttlefish();
     }
 
+    protected boolean isGoldfish() {
+        return DeviceProperties.create(getDevice()::getProperty).isGoldfish();
+    }
+
     protected boolean isHwasan() {
         return DeviceProperties.create(getDevice()::getProperty).isHwasan();
     }
