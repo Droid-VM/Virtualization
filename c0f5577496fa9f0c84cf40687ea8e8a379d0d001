@@ -33,6 +33,24 @@
       "message": "As discussed offline, can you add something along the lines of\n\n```\n\nNote that pvmfw only sanitizes the DT, it is not responsible for detecting missing entries. Guest should not rely on presence or absence for security critical usage.\n```",
       "revId": "c0f5577496fa9f0c84cf40687ea8e8a379d0d001",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8a5e0b2_1c206af4",
+        "filename": "docs/device_trees.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-19T12:16:44Z",
+      "side": 1,
+      "message": "\u003e `it is not responsible for detecting missing entries.`\n\nItt is, though, because it will abort the boot if fundamental parts of the platform (virtual devices, memory, cpus, ...) are not present. If you\u0027re referring to the optional entries validated through the ref DT, that\u0027s already mentioned in \"Extra Properties (Security-Sensitive)\".\n\n\u003e `Guest should not rely on presence or absence for security critical usage.`\n\nThey can (see `/chosen/avf,strict-boot`), as long as it is to add _more_ security. Fundamentally, I don\u0027t believe there is a way for a guest to validate that it is secure because a host could fake every and any way the guest would have to implement said validation.",
+      "parentUuid": "87e77b99_41691d95",
+      "revId": "c0f5577496fa9f0c84cf40687ea8e8a379d0d001",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
