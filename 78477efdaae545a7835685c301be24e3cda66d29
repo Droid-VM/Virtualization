@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3fcae59_eeb69d76",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/VmAgent.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-19T08:40:52Z",
+      "side": 1,
+      "message": "I actually wanted to not sleep the thread by using ScheduledExecutorService. But that can be done as a follow-up.",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 49
+      },
+      "revId": "78477efdaae545a7835685c301be24e3cda66d29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
