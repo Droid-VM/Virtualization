@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a11f732_413db77d",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/OpenUrlHandler.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-08-19T04:46:23Z",
+      "side": 1,
+      "message": "Perhaps `MainActivity.TAG`?",
+      "range": {
+        "startLine": 27,
+        "startChar": 38,
+        "endLine": 27,
+        "endChar": 74
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "cff908dd_2811ddbf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/OpenUrlHandler.java",
+              "range": {
+                "startLine": 27,
+                "startChar": 0,
+                "endLine": 28,
+                "endChar": 0
+              },
+              "replacement": "    private static final String TAG \u003d MainActivity.TAG;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2913c2e461ef2148649aaa013805f396d57dfb36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2be483fd_0d7d7ad2",
+        "filename": "android/VmLauncherApp/java/com/android/virtualization/vmlauncher/OpenUrlHandler.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-08-19T04:46:23Z",
+      "side": 1,
+      "message": "I think it\u0027s better to be in `VmAgent`, not in `OpenUrlHandler`. Besides, I found a TODO comment about this at there.",
+      "range": {
+        "startLine": 49,
+        "startChar": 31,
+        "endLine": 49,
+        "endChar": 53
+      },
+      "revId": "2913c2e461ef2148649aaa013805f396d57dfb36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
