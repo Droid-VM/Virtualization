@@ -16,6 +16,23 @@
       "message": "I think this is ready.",
       "revId": "69001a29b1d95162145e63bee6be1fe855469cc6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40e86db5_ca37e1f4",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1051,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-08-19T15:09:01Z",
+      "side": 1,
+      "message": "This is fine as a temporary approach, but we should implement `Into\u003cOwnedFd\u003e` for `UnixSeqpacketListener`.",
+      "revId": "69001a29b1d95162145e63bee6be1fe855469cc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
