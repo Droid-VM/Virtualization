@@ -16,6 +16,23 @@
       "message": "Is the property value of `ro.boot.verifiedbootstate` in Goldfish `green`? AFAIK, Cuttlefish is `orange` at least. If both are orange, why do we need to add more assumption?\n\n- Cuttlefish: https://source.corp.google.com/h/android/platform/superproject/main/+/main:device/google/cuttlefish/host/commands/assemble_cvd/boot_image_utils.cc;l\u003d429\n- Goldfish: https://source.corp.google.com/h/android/platform/superproject/main/+/main:device/generic/goldfish/tools/mk_verified_boot_params.sh;l\u003d111",
       "revId": "6b7a0635780541b111ee91337937b2929d93d14e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "246feec1_e60166e3",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1050,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-08-20T01:33:07Z",
+      "side": 1,
+      "message": "Right before I saw your comment in the bug. Regardless of DT support on specific device, I think validating existence of this path should be doable. So I prefer to make this working for Goldfish as well, not introducing new assumption instead. Correct me if I\u0027m wrong.",
+      "revId": "6b7a0635780541b111ee91337937b2929d93d14e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
