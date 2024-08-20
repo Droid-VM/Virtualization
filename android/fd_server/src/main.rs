@@ -29,9 +29,12 @@ use clap::Parser;
 use log::debug;
 use nix::sys::stat::{umask, Mode};
 use rpcbinder::RpcServer;
+use safe_ownedfd::take_fd_ownership;
 use std::collections::BTreeMap;
 use std::fs::File;
-use std::os::unix::io::{FromRawFd, OwnedFd};
+use std::os::fd::AsRawFd;
+use std::os::fd::RawFd;
+use std::os::unix::io::OwnedFd;
 
 use aidl::{FdConfig, FdService};
 use authfs_fsverity_metadata::parse_fsverity_metadata;
@@ -39,38 +42,19 @@ use authfs_fsverity_metadata::parse_fsverity_metadata;
 // TODO(b/259920193): support dynamic port for multiple fd_server instances
 const RPC_SERVICE_PORT: u32 = 3264;
 
-fn is_fd_valid(fd: i32) -> bool {
-    // SAFETY: a query-only syscall
-    let retval = unsafe { libc::fcntl(fd, libc::F_GETFD) };
-    retval >= 0
-}
-
-fn fd_to_owned<T: FromRawFd>(fd: i32) -> Result<T> {
-    if !is_fd_valid(fd) {
-        bail!("Bad FD: {}", fd);
-    }
-    // SAFETY: The caller is supposed to provide valid FDs to this process.
-    Ok(unsafe { T::from_raw_fd(fd) })
-}
-
-fn parse_arg_ro_fds(arg: &str) -> Result<(i32, FdConfig)> {
-    let result: Result<Vec<i32>, _> = arg.split(':').map(|x| x.parse::<i32>()).collect();
-    let fds = result?;
+fn parse_arg_ro_fds(arg: &str) -> Result<(RawFd, FdConfig)> {
+    let fds: Result<Vec<RawFd>, _> = arg.split(':').map(|s| s.parse::<RawFd>()).collect();
+    let fds: Result<Vec<OwnedFd>, _> = fds?.into_iter().map(take_fd_ownership).collect();
+    let fds = fds?;
     if fds.len() > 2 {
         bail!("Too many options: {}", arg);
     }
-    Ok((
-        fds[0],
-        FdConfig::Readonly {
-            file: fd_to_owned(fds[0])?,
-            // Alternative metadata source, if provided
-            alt_metadata: fds
-                .get(1)
-                .map(|fd| fd_to_owned(*fd))
-                .transpose()?
-                .and_then(|f| parse_fsverity_metadata(f).ok()),
-        },
-    ))
+
+    let mut iter = fds.into_iter();
+    let file: File = iter.next().unwrap().into();
+    // if provided
+    let alt_metadata = iter.next().and_then(|fd| parse_fsverity_metadata(fd.into()).ok());
+    Ok((file.as_raw_fd(), FdConfig::Readonly { file, alt_metadata }))
 }
 
 #[derive(Parser)]
@@ -82,19 +66,19 @@ struct Args {
 
     /// Read-writable FD of file
     #[clap(long)]
-    rw_fds: Vec<i32>,
+    rw_fds: Vec<RawFd>,
 
     /// Read-only FD of directory
     #[clap(long)]
-    ro_dirs: Vec<i32>,
+    ro_dirs: Vec<RawFd>,
 
     /// Read-writable FD of directory
     #[clap(long)]
-    rw_dirs: Vec<i32>,
+    rw_dirs: Vec<RawFd>,
 
     /// A pipe FD for signaling the other end once ready
     #[clap(long)]
-    ready_fd: Option<i32>,
+    ready_fd: Option<RawFd>,
 }
 
 /// Convert argument strings and integers to a form that is easier to use and handles ownership.
@@ -105,19 +89,21 @@ fn convert_args(args: Args) -> Result<(BTreeMap<i32, FdConfig>, Option<OwnedFd>)
         fd_pool.insert(fd, config);
     }
     for fd in args.rw_fds {
-        let file = fd_to_owned::<File>(fd)?;
+        let file: File = take_fd_ownership(fd)?.into();
         if file.metadata()?.len() > 0 {
             bail!("File is expected to be empty");
         }
-        fd_pool.insert(fd, FdConfig::ReadWrite(file));
+        fd_pool.insert(file.as_raw_fd(), FdConfig::ReadWrite(file));
     }
     for fd in args.ro_dirs {
-        fd_pool.insert(fd, FdConfig::InputDir(fd_to_owned(fd)?));
+        let fd = take_fd_ownership(fd)?;
+        fd_pool.insert(fd.as_raw_fd(), FdConfig::InputDir(fd));
     }
     for fd in args.rw_dirs {
-        fd_pool.insert(fd, FdConfig::OutputDir(fd_to_owned(fd)?));
+        let fd = take_fd_ownership(fd)?;
+        fd_pool.insert(fd.as_raw_fd(), FdConfig::OutputDir(fd));
     }
-    let ready_fd = args.ready_fd.map(fd_to_owned).transpose()?;
+    let ready_fd = args.ready_fd.map(take_fd_ownership).transpose()?;
     Ok((fd_pool, ready_fd))
 }
 
