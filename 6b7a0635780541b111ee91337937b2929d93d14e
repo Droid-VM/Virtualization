@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d80c74c8_c5f3b0d7",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1047,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-08-20T01:20:25Z",
+      "side": 1,
+      "message": "Is the property value of `ro.boot.verifiedbootstate` in Goldfish `green`? AFAIK, Cuttlefish is `orange` at least. If both are orange, why do we need to add more assumption?\n\n- Cuttlefish: https://source.corp.google.com/h/android/platform/superproject/main/+/main:device/google/cuttlefish/host/commands/assemble_cvd/boot_image_utils.cc;l\u003d429\n- Goldfish: https://source.corp.google.com/h/android/platform/superproject/main/+/main:device/generic/goldfish/tools/mk_verified_boot_params.sh;l\u003d111",
+      "revId": "6b7a0635780541b111ee91337937b2929d93d14e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
