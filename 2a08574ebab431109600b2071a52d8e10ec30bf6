@@ -22,6 +22,30 @@
       },
       "revId": "2a08574ebab431109600b2071a52d8e10ec30bf6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "245ea26e_a1483856",
+        "filename": "libs/libvmclient/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-20T09:31:49Z",
+      "side": 1,
+      "message": "I am guessing it didn\u0027t actually read or write on the fd. The error must have been just because the fd was opened in read/write mode and the fd is brought into the process.",
+      "parentUuid": "3e37a128_c4f41404",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 38
+      },
+      "revId": "2a08574ebab431109600b2071a52d8e10ec30bf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
