@@ -1435,7 +1435,10 @@ fn maybe_clone_file(file: &Option<ParcelFileDescriptor>) -> binder::Result<Optio
 
 /// Converts a `VsockStream` to a `ParcelFileDescriptor`.
 fn vsock_stream_to_pfd(stream: VsockStream) -> binder::Result<ParcelFileDescriptor> {
-    let owned_fd = take_fd_ownership(stream.into_raw_fd()).or_service_specific_exception(-1)?;
+    let owned_fd = take_fd_ownership(stream.into_raw_fd())
+        .context("Failed to take ownership of the vsock stream")
+        .with_log()
+        .or_service_specific_exception(-1)?;
     Ok(ParcelFileDescriptor::new(owned_fd))
 }
 
