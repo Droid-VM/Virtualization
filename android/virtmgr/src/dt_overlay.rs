@@ -90,11 +90,18 @@ pub(crate) fn create_device_tree_overlay<'a>(
         fdt.overlay_onto(cstr!("/fragment@0/__overlay__"), path)?;
     }
 
+    let mut avf = fdt
+        .node_mut(cstr!("/fragment@0/__overlay__/avf"))
+        .map_err(|e| anyhow!("Failed to search avf node: {e:?}"))?
+        .ok_or(anyhow!("Failed to get avf node"))?;
+
+    // Remove the `vendor_hashtree_descriptor_root_digest`.
+    // In the case it is actually requested, it will be re-added by virtue of being in
+    // `trusted_props`.
+    avf.delprop(cstr!("vendor_hashtree_descriptor_root_digest"))
+        .map_err(|e| anyhow!("Failed to remove vendor_hashtree_descriptor_root_digest: {e:?}"))?;
+
     if !trusted_props.is_empty() {
-        let mut avf = fdt
-            .node_mut(cstr!("/fragment@0/__overlay__/avf"))
-            .map_err(|e| anyhow!("Failed to search avf node: {e:?}"))?
-            .ok_or(anyhow!("Failed to get avf node"))?;
         for (name, value) in trusted_props {
             avf.setprop(name, value)
                 .map_err(|e| anyhow!("Failed to set trusted property: {e:?}"))?;
