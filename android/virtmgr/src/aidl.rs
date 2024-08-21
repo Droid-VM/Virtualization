@@ -872,6 +872,7 @@ fn assemble_disk_image(
     Ok(DiskFile { image, writable: disk.writable })
 }
 
+#[allow(dead_code)]
 fn append_kernel_param(param: &str, vm_config: &mut VirtualMachineRawConfig) {
     if let Some(ref mut params) = vm_config.params {
         params.push(' ');
@@ -983,7 +984,6 @@ fn load_app_config(
 
         if let Some(file) = custom_config.vendorImage.as_ref() {
             add_microdroid_vendor_image(clone_file(file)?, &mut vm_config);
-            append_kernel_param("androidboot.microdroid.mount_vendor=1", &mut vm_config)
         }
 
         vm_config.devices.clone_from(&custom_config.devices);
