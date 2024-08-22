@@ -17,7 +17,7 @@
 use anyhow::{anyhow, Result};
 use cstr::cstr;
 use fsfdt::FsFdt;
-use libfdt::Fdt;
+use libfdt::{Fdt, FdtError};
 use std::ffi::CStr;
 use std::path::Path;
 
@@ -25,6 +25,8 @@ pub(crate) const AVF_NODE_NAME: &CStr = cstr!("avf");
 pub(crate) const UNTRUSTED_NODE_NAME: &CStr = cstr!("untrusted");
 pub(crate) const VM_DT_OVERLAY_PATH: &str = "vm_dt_overlay.dtbo";
 pub(crate) const VM_DT_OVERLAY_MAX_SIZE: usize = 2000;
+
+const VENDOR_DIGEST: &CStr = cstr!("vendor_hashtree_descriptor_root_digest");
 
 /// Create a Device tree overlay containing the provided proc style device tree & properties!
 /// # Arguments
@@ -90,11 +92,22 @@ pub(crate) fn create_device_tree_overlay<'a>(
         fdt.overlay_onto(cstr!("/fragment@0/__overlay__"), path)?;
     }
 
+    let mut avf = fdt
+        .node_mut(cstr!("/fragment@0/__overlay__/avf"))
+        .map_err(|e| anyhow!("Failed to search avf node: {e:?}"))?
+        .ok_or(anyhow!("Failed to get avf node"))?;
+
+    // Remove the `vendor_hashtree_descriptor_root_digest`.
+    // In the case it is actually requested, it will be re-added by virtue of being in
+    // `trusted_props`.
+    if let Err(e) = avf.delprop(VENDOR_DIGEST) {
+        match e {
+            FdtError::NotFound => {}
+            _ => return Err(anyhow!("Unexpected error pre-removing {VENDOR_DIGEST:?}: {e:?}")),
+        }
+    };
+
     if !trusted_props.is_empty() {
-        let mut avf = fdt
-            .node_mut(cstr!("/fragment@0/__overlay__/avf"))
-            .map_err(|e| anyhow!("Failed to search avf node: {e:?}"))?
-            .ok_or(anyhow!("Failed to get avf node"))?;
         for (name, value) in trusted_props {
             avf.setprop(name, value)
                 .map_err(|e| anyhow!("Failed to set trusted property: {e:?}"))?;
@@ -153,5 +166,39 @@ mod tests {
             .unwrap()
             .expect("Prop not found!");
         assert_eq!(prop_value_dt, prop_val_input, "Unexpected property value");
+    }
+
+    #[test]
+    fn vendor_hashtree_descriptor_root_digest_removed_by_default() {
+        let mut buffer = vec![0_u8; VM_DT_OVERLAY_MAX_SIZE];
+        let prop_name = cstr!("XOXO");
+        let prop_val_input = b"OXOX";
+        let fdt =
+            create_device_tree_overlay(&mut buffer, None, &[], &[(prop_name, prop_val_input)])
+                .unwrap();
+
+        let avf = fdt
+            .node(cstr!("/fragment@0/__overlay__/avf"))
+            .unwrap()
+            .expect("/avf node doesn't exist");
+
+        assert!(avf.getprop(VENDOR_DIGEST).unwrap().is_none());
+    }
+
+    #[test]
+    fn vendor_hashtree_descriptor_root_digest_included_if_requested() {
+        let mut buffer = vec![0_u8; VM_DT_OVERLAY_MAX_SIZE];
+        let prop_name = cstr!("vendor_hashtree_descriptor_root_digest");
+        let prop_val_input = b"OXOX";
+        let fdt =
+            create_device_tree_overlay(&mut buffer, None, &[], &[(prop_name, prop_val_input)])
+                .unwrap();
+
+        let avf = fdt
+            .node(cstr!("/fragment@0/__overlay__/avf"))
+            .unwrap()
+            .expect("/avf node doesn't exist");
+
+        assert!(avf.getprop(VENDOR_DIGEST).unwrap().is_some());
     }
 }
