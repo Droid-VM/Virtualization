@@ -138,6 +138,11 @@ pub struct MicrodroidConfig {
     #[cfg(vendor_modules)]
     #[arg(long)]
     gki: Option<String>,
+
+    /// Whether to enable earlycon. Only supported for debuggable VMs.
+    #[cfg(debuggable_vms_improvements)]
+    #[arg(long)]
+    enable_earlycon: bool,
 }
 
 impl MicrodroidConfig {
@@ -169,6 +174,16 @@ impl MicrodroidConfig {
     #[cfg(not(device_assignment))]
     fn devices(&self) -> Vec<PathBuf> {
         Vec::new()
+    }
+
+    #[cfg(debuggable_vms_improvements)]
+    fn enable_earlycon(&self) -> bool {
+        self.enable_earlycon
+    }
+
+    #[cfg(not(debuggable_vms_improvements))]
+    fn debuggable_vms_improvements(&self) -> bool {
+        false
     }
 }
 
