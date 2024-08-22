@@ -41,7 +41,7 @@
     <option name="push-file" key="vm_accessor_test" value="/data/local/tmp/vm_accessor_test" />
   </target_preparer>
 
-  <!-- TODO(b/346763236): Remove this -->
+  <!-- If you want to run test with SELinux, cherry-pick http://android-review.googlesource.com/3252317 -->
   <target_preparer class="com.android.tradefed.targetprep.DisableSELinuxTargetPreparer" />
 
   <test class="com.android.tradefed.testtype.rust.RustBinaryTest" >
