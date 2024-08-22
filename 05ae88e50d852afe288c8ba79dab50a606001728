@@ -22,6 +22,30 @@
       },
       "revId": "05ae88e50d852afe288c8ba79dab50a606001728",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf9749e8_00942bba",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-08-22T17:51:42Z",
+      "side": 1,
+      "message": "I think it makes sense that it passes. In the test you are passing None as dt_path, while in the real scenario it `/proc/device-tree/avf/reference` will be passed.\n\nIf you want to closely simulate the real scenario in the unit test, then I suggest using libfsfdt (https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/android/virtmgr/fsfdt/) to create a fdt from some testdata like in this test (https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/android/virtmgr/fsfdt/src/lib.rs;l\u003d123;drc\u003d63b67d750d13bf957e385abbca2bfc2411474f00).\n\nHaving said that, I\u0027m not sure it is worth the effort...",
+      "parentUuid": "2ca81f58_1546eecd",
+      "range": {
+        "startLine": 176,
+        "startChar": 8,
+        "endLine": 178,
+        "endChar": 26
+      },
+      "revId": "05ae88e50d852afe288c8ba79dab50a606001728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
