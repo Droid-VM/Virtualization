@@ -989,6 +989,10 @@ fn load_app_config(
 
         vm_config.devices.clone_from(&custom_config.devices);
         vm_config.networkSupported = custom_config.networkSupported;
+
+        for param in custom_config.extraKernelCmdlineParams.iter() {
+            append_kernel_param(param, &mut vm_config);
+        }
     }
 
     if config.memoryMib > 0 {
