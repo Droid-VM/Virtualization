@@ -39,7 +39,8 @@ fn main() -> Result<(), Error> {
             .with_max_level(log::LevelFilter::Debug),
     );
 
-    let vm = run_vm()?;
+    // exit with ? quits silently.
+    let vm = run_vm().unwrap();
 
     // If you want to serve multiple services in a VM, then register Accessor impls multiple times.
     let accessor = Accessor::new(vm, PORT);

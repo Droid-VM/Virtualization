@@ -27,11 +27,14 @@ use glob::glob;
 use log::{error, info};
 use rand::{distributions::Alphanumeric, Rng};
 use std::fs::{self, File};
-use std::io::{self, BufRead, BufReader};
+use std::io::{self, BufRead, BufReader, ErrorKind};
 use std::path::PathBuf;
 use std::thread;
 use vmclient::{ErrorCode, VmInstance};
 use vmconfig::open_parcel_file;
+
+// Common place for apex specific data. Created automatically when installed.
+const DATA_PATH: &str = "/data/misc/apexdata/com.android.virt.accessor_demo";
 
 // These are private contract between IAccessor impl and VM service.
 const PAYLOAD_BINARY_NAME: &str = "libaccessor_vm_payload.so";
@@ -60,12 +63,25 @@ fn find_vm_apk_path() -> Result<PathBuf, Error> {
     }
 }
 
+/// Creates a new work dir whenever called, so VM can always be run from the scratch.
+/// You can reuse existing work dir.
 fn create_work_dir() -> Result<PathBuf, Error> {
+    let parent_dir = PathBuf::from(DATA_PATH).join("microdroid");
+    info!("Ensure {} exists", parent_dir.display());
+    if let Err(e) = fs::create_dir(parent_dir.clone()) {
+        if e.kind() != ErrorKind::AlreadyExists {
+            Err(e).context("failed to mkdir")?;
+        }
+    }
+
     let s: String =
         rand::thread_rng().sample_iter(&Alphanumeric).take(17).map(char::from).collect();
-    let work_dir = PathBuf::from("/data/local/tmp/microdroid").join(s);
+
+    let work_dir = parent_dir.join(s);
     info!("creating work dir {}", work_dir.display());
-    fs::create_dir_all(&work_dir).context("failed to mkdir")?;
+    // fs::create_dir_all() tries to access parents for checking existence,
+    // so it incurs more avc denials.
+    fs::create_dir(&work_dir).context("failed to mkdir")?;
     Ok(work_dir)
 }
 
