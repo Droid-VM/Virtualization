@@ -13,6 +13,7 @@ follows:
       launch VM and returns the Vsock connection of service in the VM.
   - AccessorVmApp: Sample app that conatins VM payload. Provides the actual
       implementation of service in a VM.
+  - SELinux change: Check https://android-review.googlesource.com/3252317
 
 ## Build
 
