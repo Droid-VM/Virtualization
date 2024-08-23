@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea76e850_b8ff0bda",
+        "filename": "libs/libsafe_ownedfd/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-23T09:25:30Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by RustFormatter: Please reformat the following line(s) to:\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nPlease reformat the following line(s) to:\n\n\n    //! Library for a safer conversion from `RawFd` to `OwnedFd`\n\n    use nix::libc;\n    use nix::unistd::close;\n    use std::os::fd::FromRawFd;",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 0
+      },
+      "revId": "066621e6f888e29c260f1abc6f7d96ccfd2fb89c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
