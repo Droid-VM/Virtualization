@@ -22,6 +22,30 @@
       },
       "revId": "066621e6f888e29c260f1abc6f7d96ccfd2fb89c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0b03618_96c4fb61",
+        "filename": "libs/libsafe_ownedfd/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-25T02:06:02Z",
+      "side": 1,
+      "message": "This suggested fix appears to be wrong. We are using `nix::fcntl::*`. The local repo hook didn\u0027t complain either.",
+      "parentUuid": "ea76e850_b8ff0bda",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 0
+      },
+      "revId": "066621e6f888e29c260f1abc6f7d96ccfd2fb89c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
