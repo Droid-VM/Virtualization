@@ -34,6 +34,7 @@ use std::os::unix::io::{AsFd, FromRawFd, OwnedFd, RawFd};
 use clap::Parser;
 use nix::fcntl::{fcntl, F_GETFD, F_SETFD, FdFlag};
 use nix::unistd::{write, Pid, Uid};
+use nix::unistd::setpgid;
 use std::os::unix::raw::{pid_t, uid_t};
 
 const LOG_TAG: &str = "virtmgr";
@@ -127,6 +128,10 @@ fn main() {
         .expect("Failed to take ownership of rpc_server_fd");
     let ready_fd = take_fd_ownership(args.ready_fd, &mut owned_fds)
         .expect("Failed to take ownership of ready_fd");
+
+    // Creates a new process group for virtmgr and its children. This is to make the client of
+    // virtmgr to be able to kill them all at the same time.
+    setpgid(Pid::this(), Pid::this()).expect("Failed to create a new process group");
 
     // Start thread pool for kernel Binder connection to VirtualizationServiceInternal.
     ProcessState::start_thread_pool();
