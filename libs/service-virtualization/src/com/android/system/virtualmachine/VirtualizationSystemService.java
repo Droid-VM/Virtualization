@@ -156,10 +156,11 @@ public class VirtualizationSystemService extends SystemService {
         private final TetheringManager tm = getContext().getSystemService(TetheringManager.class);
 
         @Override
-        public void enableVmTethering() {
+        public void enableVmTethering(String iface) {
             final TetheringRequest tr =
                     new TetheringRequest.Builder(TetheringManager.TETHERING_VIRTUAL)
                             .setConnectivityScope(TetheringManager.CONNECTIVITY_SCOPE_GLOBAL)
+                            .setInterfaceName(iface)
                             .build();
 
             StartTetheringCallback startTetheringCallback =
