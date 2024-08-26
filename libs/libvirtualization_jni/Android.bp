@@ -15,6 +15,7 @@ cc_library_shared {
         "libbinder_rpc_unstable",
         "liblog",
         "libnativehelper",
+        "libvmclient.ffi",
     ],
     static_libs: ["libavf_cc_flags"],
 }
