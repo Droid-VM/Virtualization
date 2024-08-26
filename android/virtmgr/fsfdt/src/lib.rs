@@ -16,6 +16,7 @@
 
 use anyhow::{anyhow, Context, Result};
 use libfdt::Fdt;
+use log::error;
 use std::ffi::{CStr, CString};
 use std::fs;
 use std::os::unix::ffi::OsStrExt;
@@ -44,6 +45,7 @@ impl<'a> FsFdt<'a> for Fdt {
         // Recursively traverse fs_path with DFS algorithm.
         let mut stack = vec![fs_path.to_path_buf()];
         while let Some(dir_path) = stack.pop() {
+            error!("overlaying path: {dir_path:?}");
             let relative_path = dir_path
                 .strip_prefix(fs_path)
                 .context("Internal error. Path does not have expected prefix")?
@@ -76,6 +78,7 @@ impl<'a> FsFdt<'a> for Fdt {
                     stack.push(entry.path());
                     subnode_names.push(name);
                 } else if entry_type.is_file() {
+                    error!("overlaying file: {entry:?}");
                     let value = fs::read(entry.path())?;
 
                     node.setprop(&name, &value)
