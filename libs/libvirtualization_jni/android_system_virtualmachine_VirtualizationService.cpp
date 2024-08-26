@@ -29,57 +29,19 @@
 
 using namespace android::base;
 
-static constexpr const char VIRTMGR_PATH[] = "/apex/com.android.virt/bin/virtmgr";
 static constexpr size_t VIRTMGR_THREADS = 2;
+
+void error_callback(char* msg, void* ctx) {
+    JNIEnv* env = reinterpret_cast<JNIEnv*>(ctx);
+    env->ThrowNew(env->FindClass("android/system/virtualmachine/VirtualMachineException"), msg);
+}
+
+extern "C" int get_virtualization_service(decltype(error_callback)*, void*);
 
 extern "C" JNIEXPORT jint JNICALL
 Java_android_system_virtualmachine_VirtualizationService_nativeSpawn(
         JNIEnv* env, [[maybe_unused]] jclass clazz) {
-    unique_fd serverFd, clientFd;
-    if (!Socketpair(SOCK_STREAM, &serverFd, &clientFd)) {
-        env->ThrowNew(env->FindClass("android/system/virtualmachine/VirtualMachineException"),
-                      ("Failed to create socketpair: " + std::string(strerror(errno))).c_str());
-        return -1;
-    }
-
-    unique_fd waitFd, readyFd;
-    if (!Pipe(&waitFd, &readyFd, 0)) {
-        env->ThrowNew(env->FindClass("android/system/virtualmachine/VirtualMachineException"),
-                      ("Failed to create pipe: " + std::string(strerror(errno))).c_str());
-        return -1;
-    }
-
-    if (fork() == 0) {
-        // Close client's FDs.
-        clientFd.reset();
-        waitFd.reset();
-
-        auto strServerFd = std::to_string(serverFd.get());
-        auto strReadyFd = std::to_string(readyFd.get());
-
-        execl(VIRTMGR_PATH, VIRTMGR_PATH, "--rpc-server-fd", strServerFd.c_str(), "--ready-fd",
-              strReadyFd.c_str(), NULL);
-    }
-
-    // Close virtmgr's FDs.
-    serverFd.reset();
-    readyFd.reset();
-
-    // Wait for the server to signal its readiness by closing its end of the pipe.
-    char buf;
-    int ret = read(waitFd.get(), &buf, sizeof(buf));
-    if (ret < 0) {
-        env->ThrowNew(env->FindClass("android/system/virtualmachine/VirtualMachineException"),
-                      "Failed to wait for VirtualizationService to be ready");
-        return -1;
-    } else if (ret < 1) {
-        env->ThrowNew(env->FindClass("java/lang/SecurityException"),
-                      "Virtmgr didn't send any data through pipe. Please consider checking if "
-                      "android.permission.MANAGE_VIRTUAL_MACHINE permission is granted");
-        return -1;
-    }
-
-    return clientFd.release();
+    return get_virtualization_service(&error_callback, env);
 }
 
 extern "C" JNIEXPORT jobject JNICALL
