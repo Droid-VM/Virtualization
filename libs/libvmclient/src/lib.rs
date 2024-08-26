@@ -43,7 +43,9 @@ use command_fds::CommandFdExt;
 use log::warn;
 use rpcbinder::{FileDescriptorTransportMode, RpcSession};
 use shared_child::SharedChild;
+use std::ffi::{c_char, CString};
 use std::io::{self, Read};
+use std::os::fd::RawFd;
 use std::process::Command;
 use std::{
     fmt::{self, Debug, Formatter},
@@ -72,6 +74,40 @@ fn posix_socketpair() -> Result<(OwnedFd, OwnedFd), io::Error> {
     // transport. Make it O_CLOEXEC to align with how Rust creates file
     // descriptors (expected by SharedChild).
     Ok(socketpair(AddressFamily::Unix, SockType::Stream, None, SockFlag::SOCK_CLOEXEC)?)
+}
+
+/// Error handling function for `get_virtualization_service`.
+///
+/// # Safety
+/// `message` shouldn't be used outside of the lifetime of the function. Management of `ctx` is
+/// entirely up to the function.
+pub type ErrorCallback = unsafe extern "C" fn(message: *const c_char, ctx: *const u8);
+
+/// Spawns a new instance of virtmgr and rerturns a file descriptor for the socket connection to
+/// the service. When error occurs, it is reported via the ErrorCallback function along with the
+/// error message and any context that is set by the client.
+///
+/// # Safety
+/// `cb` should be null or a valid function pointer of type `ErrorCallback`
+#[no_mangle]
+pub unsafe extern "C" fn get_virtualization_service(
+    cb: *const ErrorCallback,
+    ctx: *const u8,
+) -> RawFd {
+    match VirtualizationService::new() {
+        Ok(vs) => vs.client_fd.into_raw_fd(),
+        Err(e) => {
+            if !cb.is_null() {
+                // SAFETY: cb is not null and we asked client that it be a valid function pointer of
+                // type `ErrorCallback`.
+                let cb = unsafe { cb.as_ref().unwrap() };
+                let message = CString::new(format!("{:?}", e)).unwrap();
+                // SAFETY: `cb` doesn't use `message` outside of the lifetime of the function.
+                unsafe { cb(message.as_c_str().as_ptr(), ctx) };
+            }
+            -1
+        }
+    }
 }
 
 /// A running instance of virtmgr which is hosting a VirtualizationService
