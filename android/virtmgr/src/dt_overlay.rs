@@ -18,7 +18,7 @@ use anyhow::{anyhow, Result};
 use cstr::cstr;
 use fsfdt::FsFdt;
 use libfdt::{Fdt, FdtError};
-use std::ffi::CStr;
+use std::ffi::{CStr, CString};
 use std::path::Path;
 
 pub(crate) const AVF_NODE_NAME: &CStr = cstr!("avf");
@@ -97,12 +97,18 @@ pub(crate) fn create_device_tree_overlay<'a>(
         .map_err(|e| anyhow!("Failed to search avf node: {e:?}"))?
         .ok_or(anyhow!("Failed to get avf node"))?;
 
+    let avf_node = avf.as_node();
+    let props = avf_node.properties().map_err(|e| anyhow!("Could not get avf props: {e:?}"))?;
+    let keys: Vec<CString> = props.map(|p| p.name().unwrap().to_owned()).collect();
+
     // Remove the `vendor_hashtree_descriptor_root_digest`.
     // In the case it is actually requested, it will be re-added by virtue of being in
     // `trusted_props`.
     if let Err(e) = avf.delprop(VENDOR_DIGEST) {
         match e {
-            FdtError::NotFound => {}
+            FdtError::NotFound => {
+                return Err(anyhow!("Didn't find {VENDOR_DIGEST:?} prop. keys are: {keys:?}"))
+            }
             _ => return Err(anyhow!("Unexpected error pre-removing {VENDOR_DIGEST:?}: {e:?}")),
         }
     };
@@ -170,12 +176,10 @@ mod tests {
 
     #[test]
     fn vendor_hashtree_descriptor_root_digest_removed_by_default() {
+        let fs_path = Path::new("testdata/fs");
         let mut buffer = vec![0_u8; VM_DT_OVERLAY_MAX_SIZE];
-        let prop_name = cstr!("XOXO");
-        let prop_val_input = b"OXOX";
-        let fdt =
-            create_device_tree_overlay(&mut buffer, None, &[], &[(prop_name, prop_val_input)])
-                .unwrap();
+
+        let fdt = create_device_tree_overlay(&mut buffer, Some(fs_path), &[], &[]).unwrap();
 
         let avf = fdt
             .node(cstr!("/fragment@0/__overlay__/avf"))
