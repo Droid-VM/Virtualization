@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fa7fa0e_5c774ad7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-08-26T12:59:41Z",
+      "side": 1,
+      "message": "Hi Pierre-Clément,\n\nWe cannot simply add a new test to the `rialto_test` target as in this cl. `rialto_test` originally contained only two tests: one for the protected rialto and another for the non-protected rialto. Each of these tests uses a separate vsock port, allowing them to run concurrently without interrupting each other.\n\nWhen you add a new test for the non-protected rialto, we now have two non-protected tests that attempt to set up the same vsock port concurrently. As a result, when one test is running and the second test tries to set up the same port, we get the error `Address already in use (os error 98)`, as reported in b/360077974. This behavior is entirely expected. Could we revert this change and work out a different solution? This is not test flakiness, it just cannot work this way.",
+      "revId": "311de8e8295f6ed2131c3e385b96c165deda6922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
