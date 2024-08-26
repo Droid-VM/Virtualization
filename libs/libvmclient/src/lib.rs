@@ -41,9 +41,14 @@ use android_system_virtualizationservice::{
 };
 use command_fds::CommandFdExt;
 use log::warn;
+use nix::errno::Errno;
+use nix::libc::siginfo_t;
+use nix::sys::signal::{kill, killpg, sigaction, SaFlags, SigAction, SigHandler, SigSet, Signal};
+use nix::sys::wait::{waitid, Id, WaitPidFlag};
+use nix::unistd::{getpgid, Pid};
 use rpcbinder::{FileDescriptorTransportMode, RpcSession};
 use shared_child::SharedChild;
-use std::ffi::{c_char, CString};
+use std::ffi::{c_char, c_int, c_void, CString};
 use std::io::{self, Read};
 use std::os::fd::RawFd;
 use std::process::Command;
@@ -109,6 +114,71 @@ pub unsafe extern "C" fn get_virtualization_service(
     }
 }
 
+extern "C" fn handle_child_exit(_: c_int, info: *mut siginfo_t, _: *mut c_void) {
+    // Note on error handling. We can't propagate this error further up into the stack. We could
+    // have panic'ed but choose to simply log it as this essentially is just a clean-up and
+    // failure here shouldn't be considered a fatal event.
+    // SAFETY: this handler is registered for SIGCHLD with SA_SIGINFO as required by the handler.
+    let _ = unsafe {
+        handle_child_exit_inner(info).map_err(|e| println!("Failed to handle SIGCHLD: {:?}", e))
+    };
+}
+
+/// # Safety
+///
+/// The handler should be registered for SIGCHLD with SA_SIGINFO.
+unsafe fn handle_child_exit_inner(info: *mut siginfo_t) -> Result<(), io::Error> {
+    // SAFETY: `info` is a valid non-null pointer to signifo_t as we installed this signal handler
+    // with the SA_SIGINFO flag.
+    let info = unsafe { info.as_ref().unwrap() };
+
+    if Signal::try_from(info.si_signo) != Ok(Signal::SIGCHLD) {
+        return Err(io::Error::other(format!("Invalid signal number: {}", info.si_signo)));
+    }
+
+    // SAFETY: the siginfo_t struct is guaranteed to have a valid PID in the si_pid field as this
+    // signal handler is fired for SIGCHLD. See sigaction(2).
+    let pid = unsafe { info.si_pid() };
+    let pid = Pid::from_raw(pid);
+    let pgid = getpgid(Some(pid))?;
+
+    // Kill all processes in the process group of the child. Note that there's no race on PID here.
+    // We haven't reaped info.si_pid which means the pid is valid. By the way, do that only when
+    // current process (app process) doesn't belong to the process group, otherwise we will be
+    // killing ourselves.
+    let my_pgid = getpgid(None)?;
+    if my_pgid == pgid {
+        kill(pid, Signal::SIGKILL)?;
+        let _ = waitid(Id::Pid(pid), WaitPidFlag::WNOHANG | WaitPidFlag::WEXITED)?;
+        return Ok(());
+    }
+    killpg(pgid, Signal::SIGKILL)?;
+
+    // Reap them all by calling waitid on the group until there's nothing to be waited for.
+    loop {
+        match waitid(Id::PGid(pgid), WaitPidFlag::WNOHANG | WaitPidFlag::WEXITED) {
+            Err(Errno::ECHILD) => break,
+            Err(e) => return Err(e.into()),
+            _ => continue,
+        }
+    }
+
+    Ok(())
+}
+
+fn setup_sighandler() -> Result<(), io::Error> {
+    let sa = SigAction::new(
+        SigHandler::SigAction(handle_child_exit),
+        SaFlags::SA_SIGINFO,
+        SigSet::empty(),
+    );
+
+    // SAFETY: inside the handler above, we don't access anything global there. We don't examine
+    // the old signal handler.
+    unsafe { sigaction(Signal::SIGCHLD, &sa) }.map_err(io::Error::other)?;
+    Ok(())
+}
+
 /// A running instance of virtmgr which is hosting a VirtualizationService
 /// RpcBinder server.
 pub struct VirtualizationService {
@@ -121,6 +191,7 @@ impl VirtualizationService {
     /// Spawns a new instance of virtmgr, a child process that will host
     /// the VirtualizationService AIDL service.
     pub fn new() -> Result<VirtualizationService, io::Error> {
+        setup_sighandler()?;
         let (wait_fd, ready_fd) = posix_pipe()?;
         let (client_fd, server_fd) = posix_socketpair()?;
 
