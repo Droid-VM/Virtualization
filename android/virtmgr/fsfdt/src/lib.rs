@@ -16,6 +16,7 @@
 
 use anyhow::{anyhow, Context, Result};
 use libfdt::Fdt;
+use log::error;
 use std::ffi::{CStr, CString};
 use std::fs;
 use std::os::unix::ffi::OsStrExt;
@@ -80,6 +81,9 @@ impl<'a> FsFdt<'a> for Fdt {
 
                     node.setprop(&name, &value)
                         .map_err(|e| anyhow!("Failed to set FDT property, {e:?}"))?;
+                    error!(
+                        "overlayed from file: {entry:?}, fdt_path: {fdt_path:?}, name: {name:?}"
+                    );
                 } else {
                     return Err(anyhow!(
                         "Failed to handle {entry:?}. FDT only uses file or directory"

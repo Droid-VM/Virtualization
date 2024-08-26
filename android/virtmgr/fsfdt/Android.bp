@@ -26,6 +26,7 @@ rust_defaults {
     prefer_rlib: true,
     rustlibs: [
         "liblibfdt",
+        "liblog_rust",
         "libanyhow",
     ],
     apex_available: ["com.android.virt"],
@@ -36,10 +37,15 @@ rust_library_rlib {
     defaults: ["libfsfdt_default"],
 }
 
+filegroup {
+    name: "fsfdt_testdata",
+    srcs: ["testdata/**/*"],
+}
+
 rust_test {
     name: "libfsfdt_test",
     defaults: ["libfsfdt_default"],
-    data: ["testdata/**/*"],
+    data: [":fsfdt_testdata"],
     data_bins: ["dtc_static"],
     prefer_rlib: true,
     rustlibs: ["libdts"],
