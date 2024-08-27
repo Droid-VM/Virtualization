@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f279cd48_06a1e420",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-08-27T08:30:20Z",
+      "side": 1,
+      "message": "Hi Karuna,\n\nLGTM for the cl, the comment is not blocking. Maybe we can file a bug for Charisee and close the comment thread?",
+      "revId": "d62e466b63129a065d977d8a0ca8fde929731dbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75b95b12_56ad342d",
@@ -38,6 +55,30 @@
       "side": 1,
       "message": "I noticed this after upload actually; this was the RustFormatter check: https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3162759?checksPatchset\u003d13\u0026tab\u003dchecks.",
       "parentUuid": "75b95b12_56ad342d",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 50
+      },
+      "revId": "d62e466b63129a065d977d8a0ca8fde929731dbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e758b18_bfd18ac5",
+        "filename": "guest/rialto/tests/test.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-08-27T08:30:20Z",
+      "side": 1,
+      "message": "I see. Thanks for the link! \n\n@chiw@google.com why does the new rust formatting tool suggest changing the alphabetic import order to this new order?\n\nhttps://screenshot.googleplex.com/3jdT2uSDqUhXh3G",
+      "parentUuid": "c1022f13_24eae66f",
       "range": {
         "startLine": 16,
         "startChar": 0,
