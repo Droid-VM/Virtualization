@@ -19,6 +19,30 @@ import android.system.virtualizationservice.IVirtualMachineCallback;
 import android.system.virtualizationservice.VirtualMachineState;
 
 interface IVirtualMachine {
+    /**
+     * Service Specific Exceptions that methods may throw.
+     * All of the constants starting with ERROR_*.
+     */
+    /**
+     * Encountered an unexpected error. This is an implementation detail and the client
+     * can do nothing about it.
+     */
+    const int ERROR_UNEXPECTED = 0;
+    /**
+     * Some APIs require the VM or VM payload to be running. This error is returned
+     * when the VM isn't running.
+     */
+    const int ERROR_VM_NOT_RUNNING = 1;
+    /**
+     * Requested port number is denied. Ports below 1024 are all privileged ports
+     * and will not be used.
+     */
+    const int ERROR_PORT_NUMBER_DENIED = 2;
+    /**
+     * Failed to connect socket.
+     */
+    const int ERROR_FAILED_TO_CONNECT = 3;
+
     /** Get the CID allocated to the VM. */
     int getCid();
 
@@ -47,6 +71,19 @@ interface IVirtualMachine {
 
     /** Open a vsock connection to the CID of the VM on the given port. */
     ParcelFileDescriptor connectVsock(int port);
+
+    /**
+     * Create an Accessor in libbinder that will open a vsock connection
+     * to the CID of the VM on the given port.
+     *
+     * \param instance name of the service that the accessor is responsible for.
+     *        This is the same instance that we expect clients to use when trying
+     *        to get the service with the ServiceManager APIs.
+     *
+     * \return IBinder of the IAccessor on success, or throws a service specific exception
+     *         on error. See the ERROR_* values above.
+     */
+    IBinder createAccessorBinder(String instance, int port);
 
     /** Set the name of the peer end (ptsname) of the host console. */
     void setHostConsoleName(in @utf8InCpp String pathname);
