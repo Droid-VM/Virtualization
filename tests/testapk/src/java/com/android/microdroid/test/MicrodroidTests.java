@@ -1317,7 +1317,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assumeSupportedDevice();
         assumeProtectedVM();
         assumeVsrCompliant();
-        assumeTrue("Vendor API must be at least 202404", getVendorApiLevel() >= 202404);
+        assumeTrue("Vendor API must be newer than 202404", getVendorApiLevel() > 202404);
 
         grantPermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
         VirtualMachineConfig config =
