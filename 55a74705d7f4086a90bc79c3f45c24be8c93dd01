@@ -46,6 +46,30 @@
       },
       "revId": "55a74705d7f4086a90bc79c3f45c24be8c93dd01",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4517adc_7a04d67c",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1298,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-08-27T09:33:16Z",
+      "side": 1,
+      "message": "The most convenient way to thoroughly test all of these is to enable pVM remote attestation. The remote attestation tests will then check all these details. With the VM DICE chain, remote attestation can be enabled with minimal effort. This is likely why some partners question why we enforce the pVM DICE chain while dropping remote attestation in the VSR, the two should come together.",
+      "parentUuid": "07c41d35_cb0b16e5",
+      "range": {
+        "startLine": 1297,
+        "startChar": 16,
+        "endLine": 1298,
+        "endChar": 91
+      },
+      "revId": "55a74705d7f4086a90bc79c3f45c24be8c93dd01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
