@@ -48,6 +48,19 @@ interface IVirtualMachine {
     /** Open a vsock connection to the CID of the VM on the given port. */
     ParcelFileDescriptor connectVsock(int port);
 
+    /**
+     * Create an Accessor in libbinder that will open a vsock connection
+     * to the CID of the VM on the given port.
+     *
+     * \param instance name of the service that the accessor is responsible for.
+     *        This is the same instance that we expect clients to use when trying
+     *        to get the service with the ServiceManager APIs.
+     *
+     * \return IBinder of the IAccessor on success, or null if the virtualization service
+     *         doesn't know about the service with 'instance'`
+     */
+    IBinder createAccessorBinder(String instance, int port);
+
     /** Set the name of the peer end (ptsname) of the host console. */
     void setHostConsoleName(in @utf8InCpp String pathname);
 
