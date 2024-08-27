@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "160982aa_8ff4f7e1",
+        "filename": "libs/libvmclient/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-08-27T17:38:14Z",
+      "side": 1,
+      "message": "Grmbl. This *should* be `unsafe`, but `nix` has made a bad API decision, so it can\u0027t be.",
+      "revId": "153c34965fe298815f7004380b898c3d32edc07f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15546beb_fdaf25dd",
+        "filename": "libs/libvmclient/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-08-27T17:38:14Z",
+      "side": 1,
+      "message": "Nit: This isn\u0027t technically allowed to be a `fn`, it must be an `unsafe fn`, because it has preconditions.",
+      "revId": "153c34965fe298815f7004380b898c3d32edc07f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
