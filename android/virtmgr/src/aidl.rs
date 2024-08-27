@@ -62,9 +62,8 @@ use anyhow::{anyhow, bail, Context, Result};
 use apkverify::{HashAlgorithm, V4Signature};
 use avflog::LogResult;
 use binder::{
-    self, wait_for_interface, BinderFeatures, ExceptionCode, Interface, ParcelFileDescriptor,
-    Status, StatusCode, Strong,
-    IntoBinderResult,
+    self, wait_for_interface, Accessor, BinderFeatures, ConnectionInfo, ExceptionCode, Interface, ParcelFileDescriptor,
+    SpIBinder, Status, StatusCode, Strong, IntoBinderResult,
 };
 use cstr::cstr;
 use glob::glob;
@@ -90,7 +89,7 @@ use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex, Weak, LazyLock};
 use vbmeta::VbMetaImage;
 use vmconfig::{VmConfig, get_debug_level};
-use vsock::VsockStream;
+use vsock::{VsockAddr, VsockStream};
 use zip::ZipArchive;
 
 /// The unique ID of a VM used (together with a port number) for vsock communication.
@@ -1405,6 +1404,22 @@ impl IVirtualMachine for VirtualMachine {
             .context("Failed to connect")
             .or_service_specific_exception(-1)?;
         Ok(vsock_stream_to_pfd(stream))
+    }
+
+    fn getAccessorBinder(&self, name: &str, port: i32) -> binder::Result<SpIBinder> {
+        if !matches!(&*self.instance.vm_state.lock().unwrap(), VmState::Running { .. }) {
+            return Err(anyhow!("VM is not running")).or_service_specific_exception(-1);
+        }
+        let port = port as u32;
+        if port < 1024 {
+            return Err(anyhow!("Can't connect to privileged port {port}"))
+                .or_service_specific_exception(-1);
+        }
+        let cid = self.instance.cid;
+        let get_connection_info =
+            move |_instance: &str| Some(ConnectionInfo::Vsock(VsockAddr::new(cid, port)));
+        let accessor = Accessor::new(name, get_connection_info);
+        Ok(accessor.as_binder().expect("The newly created Accessor should always have a binder"))
     }
 
     fn setHostConsoleName(&self, ptsname: &str) -> binder::Result<()> {
