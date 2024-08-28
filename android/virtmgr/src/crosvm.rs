@@ -22,6 +22,7 @@ use binder::ParcelFileDescriptor;
 use command_fds::CommandFdExt;
 use lazy_static::lazy_static;
 use libc::{sysconf, _SC_CLK_TCK};
+use libc::{prctl, PR_SET_PDEATHSIG, SIGKILL};
 use log::{debug, error, info};
 use semver::{Version, VersionReq};
 use nix::{fcntl::OFlag, unistd::pipe2, unistd::Uid, unistd::User};
@@ -37,6 +38,7 @@ use std::mem;
 use std::num::{NonZeroU16, NonZeroU32};
 use std::os::unix::io::{AsRawFd, OwnedFd};
 use std::os::unix::process::ExitStatusExt;
+use std::os::unix::process::CommandExt;
 use std::path::{Path, PathBuf};
 use std::process::{Command, ExitStatus};
 use std::sync::{Arc, Condvar, Mutex};
@@ -1176,6 +1178,17 @@ fn run_vm(
     }
 
     print_crosvm_args(&command);
+
+    // Make sure to send SIGKILL to crosvm when this process crashes. Otherwise, crosvm will be
+    // orphaned and will keep running. (init wouldn't reap it).
+    // SAFETY: the closure does not make any modification to the memory that is visible to the
+    // parent. It doesn't open any additional file.
+    unsafe {
+        command.pre_exec(|| match prctl(PR_SET_PDEATHSIG, SIGKILL) {
+            0 => Ok(()),
+            _ => Err(io::Error::last_os_error()),
+        });
+    }
 
     let result = SharedChild::spawn(&mut command)?;
     debug!("Spawned crosvm({}).", result.id());
