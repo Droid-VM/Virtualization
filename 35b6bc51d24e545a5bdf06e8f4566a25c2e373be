@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f3aa86f_3377dc26",
+        "filename": "android/virtmgr/packages/modules/Virtualization/android/virtmgr/fsfdt/testdata/fs/avf/reference/vendor_hashtree_descriptor_root_digest",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-28T20:06:48Z",
+      "side": 1,
+      "message": "Note the path of this file relative to the DT root:\n```\n/avf/reference/vendor_hashtree_descriptor_root_digest\n```\nnot\n```\n/avf/vendor_hashtree_descriptor_root_digest\n```",
+      "revId": "35b6bc51d24e545a5bdf06e8f4566a25c2e373be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74434ff8_3108475b",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-28T20:06:48Z",
+      "side": 1,
+      "message": "Does appending `/reference` make your test pass?",
+      "range": {
+        "startLine": 96,
+        "startChar": 48,
+        "endLine": 96,
+        "endChar": 52
+      },
+      "revId": "35b6bc51d24e545a5bdf06e8f4566a25c2e373be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
