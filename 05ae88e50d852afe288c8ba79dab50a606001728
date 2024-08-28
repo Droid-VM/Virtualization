@@ -70,6 +70,30 @@
       },
       "revId": "05ae88e50d852afe288c8ba79dab50a606001728",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bcc235b_0d1a60a0",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-28T20:06:59Z",
+      "side": 1,
+      "message": "Nikita, aren\u0027t we planning to replace\n\n    // Read dt_path from host DT and overlay onto fdt.\n    if let Some(path) \u003d dt_path {\n        fdt.overlay_onto(cstr!(\"/fragment@0/__overlay__\"), path)?;\n    }\n\nwith logic that injects individual properties (and knows how to fetch them)?\n\nThat would remove any dependency on the \"environment\" (such as `/sys/firmware/devicetree`) from the function and would produce an API that\u0027s much easier to test with adequate coverage (which is what `libfsfdt` would enable with the current implementation).\n\nIMO (but please feel free to disagree), Matt\u0027s time might be better spent on this kind of refactor than on integrating more stuff on top of the current implementation.\n\nFor example, I\u0027m thinking we could define a\n```\nstruct DeviceTreeOverlayEntries {\n    vendor_hashtree_descriptor_root_digest: Option\u003c...\u003e,\n    secret_keeper_key: Option\u003c...\u003e,\n    instance_id: Option\u003c...\u003e,\n    ...\n}\n```\nand populate it in the caller (at first, possibly by reading `/sys/firmware/devicetree`); WDYT?",
+      "parentUuid": "a223b222_63327756",
+      "range": {
+        "startLine": 176,
+        "startChar": 8,
+        "endLine": 178,
+        "endChar": 26
+      },
+      "revId": "05ae88e50d852afe288c8ba79dab50a606001728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
