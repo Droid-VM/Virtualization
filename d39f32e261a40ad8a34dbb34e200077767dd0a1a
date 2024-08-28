@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "161bb9a1_1c4cd006",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-28T11:58:15Z",
+      "side": 1,
+      "message": "This doesn\u0027t work.\n\nWhen I `kill -9 \u003cvirtmgr\u003e`, `virtmgr` became a zombie process and its parent (`vm`) didn\u0027t reap it. `crosvm` kept running.\n\nDo you spot anything wrong?",
+      "revId": "d39f32e261a40ad8a34dbb34e200077767dd0a1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
