@@ -16,6 +16,29 @@
       "message": "Hi Pierre-Clément, PTAL",
       "revId": "e69d32a1d283bffd3d539d06ad11931c809bbe36",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eed42781_838bc8fd",
+        "filename": "libs/libvmbase/src/memory/util.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-28T11:18:00Z",
+      "side": 1,
+      "message": "FYI, the way this works is that the `open-dice` library gets built with this symbol unresolved, the assumption being that the final link stage would provide it. IMO, this kind of setup only makes sense if the `open-dice` client (e.g. `pvmfw`) implements the function. However, this CL proposes moving the symbol into yet another component (`libvmbase`), which doesn\u0027t even use `open-dice`.\n\nAt this point, I think that it might make more sense to have a small library that only provides the symbol, for a particular configuration (say `lib_open_dice_clear_memory_baremetal` or so) and explicitly link against it when linking the final client (`pvmfw`). That way, we also clean up the somewhat cyclic dependency (\"client needs library but library needs symbol from client\").",
+      "range": {
+        "startLine": 114,
+        "startChar": 21,
+        "endLine": 114,
+        "endChar": 36
+      },
+      "revId": "e69d32a1d283bffd3d539d06ad11931c809bbe36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
