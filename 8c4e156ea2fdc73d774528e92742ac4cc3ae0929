@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40da2df0_660fea41",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-28T17:18:29Z",
+      "side": 1,
+      "message": "In terms of API design, adding a new flag making the \"`full`\" debug mode even _fuller_ is confusing, IMO. Could this functionality be added under `--debug full`, without CLI change?",
+      "range": {
+        "startLine": 16,
+        "startChar": 36,
+        "endLine": 16,
+        "endChar": 66
+      },
+      "revId": "8c4e156ea2fdc73d774528e92742ac4cc3ae0929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd99202a_6837c93a",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineAppConfig.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-28T17:18:29Z",
+      "side": 1,
+      "message": "`ExtraKernelCmdlineParams`, for clarity?\n\nAlso, I suppose that `android.permission.USE_CUSTOM_VIRTUAL_MACHINE` is only used by tests/debug but not available in prod, right?",
+      "range": {
+        "startLine": 132,
+        "startChar": 17,
+        "endLine": 132,
+        "endChar": 36
+      },
+      "revId": "8c4e156ea2fdc73d774528e92742ac4cc3ae0929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44ffca7c_e89ba823",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-28T17:18:29Z",
+      "side": 1,
+      "message": "uber-nit: would you mind refactoring as\n```\nif cfg!(debuggable_vms_improvements) \u0026\u0026 debuggable_payload {\n    // Keep UART MMIO_GUARD-ed for debuggable payloads, to enable earlycon.\n} else {\n```\nwhich I personally find much easier to grasp on the first read.",
+      "range": {
+        "startLine": 279,
+        "startChar": 0,
+        "endLine": 280,
+        "endChar": 70
+      },
+      "revId": "8c4e156ea2fdc73d774528e92742ac4cc3ae0929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
