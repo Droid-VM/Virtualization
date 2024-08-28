@@ -34,6 +34,24 @@
       "parentUuid": "161bb9a1_1c4cd006",
       "revId": "d39f32e261a40ad8a34dbb34e200077767dd0a1a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbbc12fd_2f0d1418",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-28T18:05:06Z",
+      "side": 1,
+      "message": "I\u0027ve tested the `PR_SET_PDEATHSIG` bit in a stand-alone app (on my Linux machine):\n```\nfn main() {\n    let arg \u003d env::args().skip(1).next().unwrap_or(\"0\".to_string());\n    let mut command \u003d Command::new(\"sleep\");\n    if arg.parse::\u003cusize\u003e().unwrap() !\u003d 0 {\n        unsafe {\n            command.pre_exec(|| match prctl(PR_SET_PDEATHSIG, SIGKILL) {\n                0 \u003d\u003e Ok(()),\n                _ \u003d\u003e Err(io::Error::last_os_error()),\n            });\n        }\n    }\n    let _ \u003d command.arg(\"32\").output().unwrap();\n}\n```\nand it seems to be WAI for me i.e. `kill $(pidof test_prctl)` kills the `sleep` process when running `cargo run 1` but doesn\u0027t if running `cargo run`.\n\n\u003e `virtmgr` became a zombie process\n\nI guess that\u0027s the issue; can\u0027t receive a `PDEATHSIG` if there\u0027s no \"parent death\"!\n\nBut how is `virtmgr` managing to survive `SIGKILL`...?\n\nI\u0027ll cherry-pick this commit and investigate.",
+      "parentUuid": "cc76ccfd_7529e927",
+      "revId": "d39f32e261a40ad8a34dbb34e200077767dd0a1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
