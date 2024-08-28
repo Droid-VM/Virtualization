@@ -52,6 +52,29 @@
       "parentUuid": "cc76ccfd_7529e927",
       "revId": "d39f32e261a40ad8a34dbb34e200077767dd0a1a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "154e6dd3_7fe1ead0",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1185,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-08-28T20:21:19Z",
+      "side": 1,
+      "message": "These docs sound scary 😊\nhttps://doc.rust-lang.org/std/os/unix/process/trait.CommandExt.html#notes-and-safety\n\nI am going to go ahead and say unsafe rust review +1, but cc:mmaurer@google.com for viz, and this is well outside my comfort zone.",
+      "range": {
+        "startLine": 1184,
+        "startChar": 4,
+        "endLine": 1185,
+        "endChar": 51
+      },
+      "revId": "d39f32e261a40ad8a34dbb34e200077767dd0a1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
