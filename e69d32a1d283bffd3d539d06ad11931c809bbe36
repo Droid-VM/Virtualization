@@ -63,6 +63,30 @@
       },
       "revId": "e69d32a1d283bffd3d539d06ad11931c809bbe36",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acd48593_19d2d428",
+        "filename": "libs/libvmbase/src/memory/util.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-28T18:10:53Z",
+      "side": 1,
+      "message": "Sure, that code is self-contained though (a call to the external crate `zeroize` and a loop issuing `DC` instructions) it would be trivial to move that to the external library I\u0027m suggesting we introduce.\n\nI\u0027d rather duplicate a fundamental function like this between `lib_open_dice_clear_memory_baremetal` and `vmbase` (if it still needs it?) than `DiceClearMemory` between `pvmfw`, Rialto, and any other `vmbase` client using DICE; WDYT?",
+      "parentUuid": "b89b9c53_709035fd",
+      "range": {
+        "startLine": 114,
+        "startChar": 21,
+        "endLine": 114,
+        "endChar": 36
+      },
+      "revId": "e69d32a1d283bffd3d539d06ad11931c809bbe36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
