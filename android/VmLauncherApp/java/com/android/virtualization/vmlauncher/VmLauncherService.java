@@ -142,6 +142,11 @@ public class VmLauncherService extends Service {
     private void gatherIpAddrFromVm(Handler handler) {
         handler.postDelayed(
                 () -> {
+                    if (mVirtualMachine != null
+                            && mVirtualMachine.getStatus() != VirtualMachine.STATUS_RUNNING) {
+                        Log.d(TAG, "A virtual machine instance isn't running");
+                        return;
+                    }
                     int INTERNAL_VSOCK_SERVER_PORT = 1024;
                     try (ParcelFileDescriptor pfd =
                             mVirtualMachine.connectVsock(INTERNAL_VSOCK_SERVER_PORT)) {
