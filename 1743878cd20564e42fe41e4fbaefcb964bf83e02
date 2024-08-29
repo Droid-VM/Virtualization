@@ -16,6 +16,24 @@
       "message": "This function seems to have the same safety requirements as [`FromRawFd::from_raw_fd`](https://doc.rust-lang.org/stable/std/os/fd/trait.FromRawFd.html#tymethod.from_raw_fd), so it should similarly be unsafe. It takes ownership of the raw file descriptor by closing it, and so if the caller passed a file descriptor which it doesn\u0027t own (e.g. one obtained from `AsRawFd::as_raw_fd` which borrows a file descriptor rather than taking ownership of it), then this will result in a double close of the file descriptor, and/or subsequent accesses to it failing. This violates I/O safety.\n\nSee https://rust-lang.github.io/rfcs/3128-io-safety.html for background on I/O safety in Rust.\n\n(`nix::unistd::close` should also be unsafe for the same reason.)",
       "revId": "1743878cd20564e42fe41e4fbaefcb964bf83e02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b10bd2d0_a9aabe62",
+        "filename": "libs/libsafe_ownedfd/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-29T13:16:42Z",
+      "side": 1,
+      "message": "You are right. I am starting to think it\u0027s impossible to pursue I/O safety on the inherited file descriptors, which is the motivation here. Other than stdin/out/err which are guaranteed to be inherited, we can\u0027t tell whether a given file descriptor is inherited (and isn\u0027t owned by anyone yet) or newly opened (thus there already is owned by someone else) in this process.\n\nBy the way, what if we don\u0027t close the original raw_fd in this function? In other words, this function will essentially be fcntl with F_DUPFD_CLOEXEC. Then we may no longer call it \"taking ownership\" (thus new name deserves) but it at least wouldn\u0027t cause issues you mentioned, though it\u0027s still up to the programmer to close the original raw_fd.",
+      "parentUuid": "015b548c_888511a6",
+      "revId": "1743878cd20564e42fe41e4fbaefcb964bf83e02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
