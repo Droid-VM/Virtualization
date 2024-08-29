@@ -118,6 +118,30 @@
       },
       "revId": "05ae88e50d852afe288c8ba79dab50a606001728",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5621a699_e77b6eaa",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-29T11:56:59Z",
+      "side": 1,
+      "message": "\u003e That would be b/358078056, right?\n\nThe refactor I\u0027m suggesting would be a step towards that, yes.\n\nTo be clear, I wasn\u0027t suggesting we block this CL on the refactor and completely agree that this code can go in. My comment above was replying to your suggestion of adding tests using `libfsfdt`, which seems to require some groundwork first. So I was agreeing with your\n\n\u003e Having said that, I\u0027m not sure it is worth the effort...\n\nbecause if we\u0027re going to refactor `create_device_tree_overlay()` to remove the direct read to the sysfs, why bother integrating `libfsfdt` here?",
+      "parentUuid": "12c76779_b574e17d",
+      "range": {
+        "startLine": 176,
+        "startChar": 8,
+        "endLine": 178,
+        "endChar": 26
+      },
+      "revId": "05ae88e50d852afe288c8ba79dab50a606001728",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
