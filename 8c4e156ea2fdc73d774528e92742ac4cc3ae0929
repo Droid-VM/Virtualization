@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71d16d5d_e8faf67a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-08-29T10:49:15Z",
+      "side": 1,
+      "message": "Overall the policy in Android is to keep debuggable builds as close as possible to non-debuggable. I think when possible we should adhere to the same policy for VMs.\n\nAdditionally, in most cases we don\u0027t really care about earlycon, so it would just spam logs of debuggable VMs. If we find ourselves to always use --enable-earlycon flag, then we can either incorporate it into --debug full, or make it true by default.",
+      "parentUuid": "40da2df0_660fea41",
+      "range": {
+        "startLine": 16,
+        "startChar": 36,
+        "endLine": 16,
+        "endChar": 66
+      },
+      "revId": "8c4e156ea2fdc73d774528e92742ac4cc3ae0929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd99202a_6837c93a",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d5593d5_b98a50d1",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineAppConfig.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-08-29T10:49:15Z",
+      "side": 1,
+      "message": "Done.\n\nandroid.permission.USE_CUSTOM_VIRTUAL_MACHINE is signature|development permission, which means that it can be granted to an app through adb shell grant command (test/debug case), or if an app is signed with the same signature as com.android.virt APEX (VM owned by platform case).",
+      "parentUuid": "bd99202a_6837c93a",
+      "range": {
+        "startLine": 132,
+        "startChar": 17,
+        "endLine": 132,
+        "endChar": 36
+      },
+      "revId": "8c4e156ea2fdc73d774528e92742ac4cc3ae0929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44ffca7c_e89ba823",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-08-28T17:18:29Z",
       "side": 1,
       "message": "uber-nit: would you mind refactoring as\n```\nif cfg!(debuggable_vms_improvements) \u0026\u0026 debuggable_payload {\n    // Keep UART MMIO_GUARD-ed for debuggable payloads, to enable earlycon.\n} else {\n```\nwhich I personally find much easier to grasp on the first read.",
+      "range": {
+        "startLine": 279,
+        "startChar": 0,
+        "endLine": 280,
+        "endChar": 70
+      },
+      "revId": "8c4e156ea2fdc73d774528e92742ac4cc3ae0929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1debb588_17d84b64",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-08-29T10:49:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44ffca7c_e89ba823",
       "range": {
         "startLine": 279,
         "startChar": 0,
