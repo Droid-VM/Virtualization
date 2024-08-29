@@ -21,6 +21,7 @@ use nix::{
     sys::stat::mode_t, sys::stat::Mode, sys::statvfs::statvfs, sys::statvfs::Statvfs,
     unistd::unlinkat, unistd::UnlinkatFlags,
 };
+use safe_ownedfd::take_fd_ownership;
 use std::cmp::min;
 use std::collections::{btree_map, BTreeMap};
 use std::convert::TryInto;
@@ -408,9 +409,11 @@ fn new_errno_error(errno: Errno) -> Status {
 
 fn open_readonly_at(dir_fd: BorrowedFd, path: &Path) -> nix::Result<File> {
     let new_fd = openat(Some(dir_fd.as_raw_fd()), path, OFlag::O_RDONLY, Mode::empty())?;
-    // SAFETY: new_fd is just created successfully and not owned.
-    let new_file = unsafe { File::from_raw_fd(new_fd) };
-    Ok(new_file)
+    let new_fd = take_fd_ownership(new_fd).map_err(|e| match e {
+        safe_ownedfd::Error::Errno(e) => e,
+        _ => Errno::UnknownErrno,
+    })?;
+    Ok(File::from(new_fd))
 }
 
 fn validate_and_cast_offset(offset: i64) -> Result<u64, Status> {
