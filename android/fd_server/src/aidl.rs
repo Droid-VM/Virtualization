@@ -149,7 +149,7 @@ impl IVirtFdService for FdService {
                         new_errno_error(Errno::EIO)
                     })?
                 } else {
-                    fsverity::read_merkle_tree(file.as_raw_fd(), offset, &mut buf).map_err(|e| {
+                    fsverity::read_merkle_tree(file.as_fd(), offset, &mut buf).map_err(|e| {
                         error!("readFsverityMerkleTree: failed to retrieve merkle tree: {}", e);
                         new_errno_error(Errno::EIO)
                     })?
@@ -182,7 +182,7 @@ impl IVirtFdService for FdService {
                     }
                 } else {
                     let mut buf = vec![0; MAX_REQUESTING_DATA as usize];
-                    let s = fsverity::read_signature(file.as_raw_fd(), &mut buf).map_err(|e| {
+                    let s = fsverity::read_signature(file.as_fd(), &mut buf).map_err(|e| {
                         error!("readFsverityMerkleTree: failed to retrieve merkle tree: {}", e);
                         new_errno_error(Errno::EIO)
                     })?;
@@ -321,11 +321,11 @@ impl IVirtFdService for FdService {
 
         self.insert_new_fd(dir_fd, |config| match config {
             FdConfig::InputDir(_) => Err(new_errno_error(Errno::EACCES)),
-            FdConfig::OutputDir(_) => {
+            FdConfig::OutputDir(fd) => {
                 let mode = validate_file_mode(mode)?;
-                mkdirat(Some(dir_fd), basename, mode).map_err(new_errno_error)?;
+                mkdirat(Some(fd.as_raw_fd()), basename, mode).map_err(new_errno_error)?;
                 let new_dir_fd = openat(
-                    Some(dir_fd),
+                    Some(fd.as_raw_fd()),
                     basename,
                     OFlag::O_DIRECTORY | OFlag::O_RDONLY,
                     Mode::empty(),
@@ -344,8 +344,8 @@ impl IVirtFdService for FdService {
         validate_basename(basename)?;
 
         self.handle_fd(dir_fd, |config| match config {
-            FdConfig::OutputDir(_) => {
-                unlinkat(Some(dir_fd), basename, UnlinkatFlags::NoRemoveDir)
+            FdConfig::OutputDir(fd) => {
+                unlinkat(Some(fd.as_raw_fd()), basename, UnlinkatFlags::NoRemoveDir)
                     .map_err(new_errno_error)?;
                 Ok(())
             }
@@ -358,8 +358,8 @@ impl IVirtFdService for FdService {
         validate_basename(basename)?;
 
         self.handle_fd(dir_fd, |config| match config {
-            FdConfig::OutputDir(_) => {
-                unlinkat(Some(dir_fd), basename, UnlinkatFlags::RemoveDir)
+            FdConfig::OutputDir(fd) => {
+                unlinkat(Some(fd.as_raw_fd()), basename, UnlinkatFlags::RemoveDir)
                     .map_err(new_errno_error)?;
                 Ok(())
             }
@@ -369,11 +369,10 @@ impl IVirtFdService for FdService {
     }
 
     fn chmod(&self, fd: i32, mode: i32) -> BinderResult<()> {
+        let mode = validate_file_mode(mode)?;
         self.handle_fd(fd, |config| match config {
-            FdConfig::ReadWrite(_) | FdConfig::OutputDir(_) => {
-                let mode = validate_file_mode(mode)?;
-                fchmod(fd, mode).map_err(new_errno_error)
-            }
+            FdConfig::ReadWrite(file) => fchmod(file.as_raw_fd(), mode).map_err(new_errno_error),
+            FdConfig::OutputDir(fd) => fchmod(fd.as_raw_fd(), mode).map_err(new_errno_error),
             _ => Err(new_errno_error(Errno::EACCES)),
         })
     }
