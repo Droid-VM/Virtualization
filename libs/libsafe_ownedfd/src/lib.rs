@@ -14,13 +14,11 @@
 
 //! Library for a safer conversion from `RawFd` to `OwnedFd`
 
-use nix::fcntl::{fcntl, FdFlag, F_DUPFD, F_GETFD, F_SETFD};
+use nix::fcntl::{fcntl, F_DUPFD_CLOEXEC};
 use nix::libc;
-use nix::unistd::close;
 use std::os::fd::FromRawFd;
 use std::os::fd::OwnedFd;
 use std::os::fd::RawFd;
-use std::sync::Mutex;
 use thiserror::Error;
 
 /// Errors that can occur while taking an ownership of `RawFd`
@@ -39,26 +37,15 @@ pub enum Error {
     Errno(#[from] nix::errno::Errno),
 }
 
-static LOCK: Mutex<()> = Mutex::new(());
-
-/// Takes the ownership of `RawFd` and converts it to `OwnedFd`. It is important to know that
-/// `RawFd` is closed when this function successfully returns. The raw file descriptor of the
-/// returned `OwnedFd` is different from `RawFd`. The returned file descriptor is CLOEXEC set.
+/// Duplicates `RawFd` and converts the dup to `OwnedFd`. It is important to know that the raw file
+/// descriptor of the returned `OwnedFd` is different from `RawFd`. The returned file descriptor is
+/// CLOEXEC set.
 pub fn take_fd_ownership(raw_fd: RawFd) -> Result<OwnedFd, Error> {
-    fcntl(raw_fd, F_GETFD).map_err(|_| Error::Invalid(raw_fd))?;
-
     if [libc::STDIN_FILENO, libc::STDOUT_FILENO, libc::STDERR_FILENO].contains(&raw_fd) {
         return Err(Error::StdioNotAllowed);
     }
 
-    // sync is needed otherwise we can create multiple OwnedFds out of the same RawFd
-    let lock = LOCK.lock().unwrap();
-    let new_fd = fcntl(raw_fd, F_DUPFD(raw_fd))?;
-    close(raw_fd)?;
-    drop(lock);
-
-    // This is not essential, but let's follow the common practice in the Rust ecosystem
-    fcntl(new_fd, F_SETFD(FdFlag::FD_CLOEXEC)).map_err(Error::Errno)?;
+    let new_fd = fcntl(raw_fd, F_DUPFD_CLOEXEC(raw_fd))?;
 
     // SAFETY: In this function, we have checked that RawFd is actually an open file descriptor and
     // this is the first time to claim its ownership because we just created it by duping.
@@ -78,34 +65,6 @@ mod tests {
     fn good_fd() -> Result<()> {
         let raw_fd = tempfile()?.into_raw_fd();
         assert!(take_fd_ownership(raw_fd).is_ok());
-        Ok(())
-    }
-
-    #[test]
-    fn invalid_fd() -> Result<()> {
-        let raw_fd = 12345; // randomly chosen
-        assert_eq!(take_fd_ownership(raw_fd).unwrap_err(), Error::Invalid(raw_fd));
-        Ok(())
-    }
-
-    #[test]
-    fn original_fd_closed() -> Result<()> {
-        let raw_fd = tempfile()?.into_raw_fd();
-        let owned_fd = take_fd_ownership(raw_fd)?;
-        assert_ne!(raw_fd, owned_fd.as_raw_fd());
-        assert!(fcntl(raw_fd, F_GETFD).is_err());
-        Ok(())
-    }
-
-    #[test]
-    fn cannot_use_same_rawfd_multiple_times() -> Result<()> {
-        let raw_fd = tempfile()?.into_raw_fd();
-
-        let owned_fd = take_fd_ownership(raw_fd); // once
-        let owned_fd2 = take_fd_ownership(raw_fd); // twice
-
-        assert!(owned_fd.is_ok());
-        assert!(owned_fd2.is_err());
         Ok(())
     }
 
