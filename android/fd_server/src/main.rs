@@ -31,7 +31,7 @@ use nix::sys::stat::{umask, Mode};
 use rpcbinder::RpcServer;
 use std::collections::BTreeMap;
 use std::fs::File;
-use std::os::unix::io::{FromRawFd, OwnedFd};
+use std::os::unix::io::{FromRawFd, OwnedFd, RawFd};
 
 use aidl::{FdConfig, FdService};
 use authfs_fsverity_metadata::parse_fsverity_metadata;
@@ -39,13 +39,13 @@ use authfs_fsverity_metadata::parse_fsverity_metadata;
 // TODO(b/259920193): support dynamic port for multiple fd_server instances
 const RPC_SERVICE_PORT: u32 = 3264;
 
-fn is_fd_valid(fd: i32) -> bool {
+fn is_fd_valid(fd: RawFd) -> bool {
     // SAFETY: a query-only syscall
     let retval = unsafe { libc::fcntl(fd, libc::F_GETFD) };
     retval >= 0
 }
 
-fn fd_to_owned<T: FromRawFd>(fd: i32) -> Result<T> {
+fn fd_to_owned<T: FromRawFd>(fd: RawFd) -> Result<T> {
     if !is_fd_valid(fd) {
         bail!("Bad FD: {}", fd);
     }
@@ -53,8 +53,8 @@ fn fd_to_owned<T: FromRawFd>(fd: i32) -> Result<T> {
     Ok(unsafe { T::from_raw_fd(fd) })
 }
 
-fn parse_arg_ro_fds(arg: &str) -> Result<(i32, FdConfig)> {
-    let result: Result<Vec<i32>, _> = arg.split(':').map(|x| x.parse::<i32>()).collect();
+fn parse_arg_ro_fds(arg: &str) -> Result<(RawFd, FdConfig)> {
+    let result: Result<Vec<RawFd>, _> = arg.split(':').map(|x| x.parse::<RawFd>()).collect();
     let fds = result?;
     if fds.len() > 2 {
         bail!("Too many options: {}", arg);
@@ -82,23 +82,23 @@ struct Args {
 
     /// Read-writable FD of file
     #[clap(long)]
-    rw_fds: Vec<i32>,
+    rw_fds: Vec<RawFd>,
 
     /// Read-only FD of directory
     #[clap(long)]
-    ro_dirs: Vec<i32>,
+    ro_dirs: Vec<RawFd>,
 
     /// Read-writable FD of directory
     #[clap(long)]
-    rw_dirs: Vec<i32>,
+    rw_dirs: Vec<RawFd>,
 
     /// A pipe FD for signaling the other end once ready
     #[clap(long)]
-    ready_fd: Option<i32>,
+    ready_fd: Option<RawFd>,
 }
 
 /// Convert argument strings and integers to a form that is easier to use and handles ownership.
-fn convert_args(args: Args) -> Result<(BTreeMap<i32, FdConfig>, Option<OwnedFd>)> {
+fn convert_args(args: Args) -> Result<(BTreeMap<RawFd, FdConfig>, Option<OwnedFd>)> {
     let mut fd_pool = BTreeMap::new();
     for arg in args.ro_fds {
         let (fd, config) = parse_arg_ro_fds(&arg)?;

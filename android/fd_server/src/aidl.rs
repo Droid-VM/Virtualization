@@ -27,6 +27,7 @@ use std::collections::{btree_map, BTreeMap};
 use std::convert::TryInto;
 use std::fs::File;
 use std::io;
+use std::os::fd::RawFd;
 use std::os::unix::fs::FileExt;
 use std::os::unix::io::{AsFd, AsRawFd, BorrowedFd, OwnedFd};
 use std::path::{Component, Path, PathBuf, MAIN_SEPARATOR};
@@ -71,11 +72,11 @@ pub enum FdConfig {
 
 pub struct FdService {
     /// A pool of opened files and directories, which can be looked up by the FD number.
-    fd_pool: Arc<RwLock<BTreeMap<i32, FdConfig>>>,
+    fd_pool: Arc<RwLock<BTreeMap<RawFd, FdConfig>>>,
 }
 
 impl FdService {
-    pub fn new_binder(fd_pool: BTreeMap<i32, FdConfig>) -> Strong<dyn IVirtFdService> {
+    pub fn new_binder(fd_pool: BTreeMap<RawFd, FdConfig>) -> Strong<dyn IVirtFdService> {
         BnVirtFdService::new_binder(
             FdService { fd_pool: Arc::new(RwLock::new(fd_pool)) },
             BinderFeatures::default(),
@@ -84,7 +85,7 @@ impl FdService {
 
     /// Handles the requesting file `id` with `handle_fn` if it is in the FD pool. This function
     /// returns whatever `handle_fn` returns.
-    fn handle_fd<F, R>(&self, id: i32, handle_fn: F) -> BinderResult<R>
+    fn handle_fd<F, R>(&self, id: RawFd, handle_fn: F) -> BinderResult<R>
     where
         F: FnOnce(&FdConfig) -> BinderResult<R>,
     {
@@ -95,9 +96,9 @@ impl FdService {
 
     /// Inserts a new FD and corresponding `FdConfig` created by `create_fn` to the FD pool, then
     /// returns the new FD number.
-    fn insert_new_fd<F>(&self, fd: i32, create_fn: F) -> BinderResult<i32>
+    fn insert_new_fd<F>(&self, fd: RawFd, create_fn: F) -> BinderResult<RawFd>
     where
-        F: FnOnce(&mut FdConfig) -> BinderResult<(i32, FdConfig)>,
+        F: FnOnce(&mut FdConfig) -> BinderResult<(RawFd, FdConfig)>,
     {
         let mut fd_pool = self.fd_pool.write().unwrap();
         let fd_config = fd_pool.get_mut(&fd).ok_or_else(|| new_errno_error(Errno::EBADF))?;
@@ -120,7 +121,7 @@ impl FdService {
 impl Interface for FdService {}
 
 impl IVirtFdService for FdService {
-    fn readFile(&self, id: i32, offset: i64, size: i32) -> BinderResult<Vec<u8>> {
+    fn readFile(&self, id: RawFd, offset: i64, size: i32) -> BinderResult<Vec<u8>> {
         let size: usize = validate_and_cast_size(size)?;
         let offset: u64 = validate_and_cast_offset(offset)?;
 
@@ -135,7 +136,7 @@ impl IVirtFdService for FdService {
         })
     }
 
-    fn readFsverityMerkleTree(&self, id: i32, offset: i64, size: i32) -> BinderResult<Vec<u8>> {
+    fn readFsverityMerkleTree(&self, id: RawFd, offset: i64, size: i32) -> BinderResult<Vec<u8>> {
         let size: usize = validate_and_cast_size(size)?;
         let offset: u64 = validate_and_cast_offset(offset)?;
 
@@ -168,7 +169,7 @@ impl IVirtFdService for FdService {
         })
     }
 
-    fn readFsveritySignature(&self, id: i32) -> BinderResult<Vec<u8>> {
+    fn readFsveritySignature(&self, id: RawFd) -> BinderResult<Vec<u8>> {
         self.handle_fd(id, |config| match config {
             FdConfig::Readonly { file, alt_metadata, .. } => {
                 if let Some(metadata) = &alt_metadata {
@@ -199,7 +200,7 @@ impl IVirtFdService for FdService {
         })
     }
 
-    fn writeFile(&self, id: i32, buf: &[u8], offset: i64) -> BinderResult<i32> {
+    fn writeFile(&self, id: RawFd, buf: &[u8], offset: i64) -> BinderResult<i32> {
         self.handle_fd(id, |config| match config {
             FdConfig::Readonly { .. } => Err(StatusCode::INVALID_OPERATION.into()),
             FdConfig::ReadWrite(file) => {
@@ -217,7 +218,7 @@ impl IVirtFdService for FdService {
         })
     }
 
-    fn resize(&self, id: i32, size: i64) -> BinderResult<()> {
+    fn resize(&self, id: RawFd, size: i64) -> BinderResult<()> {
         self.handle_fd(id, |config| match config {
             FdConfig::Readonly { .. } => Err(StatusCode::INVALID_OPERATION.into()),
             FdConfig::ReadWrite(file) => {
@@ -233,7 +234,7 @@ impl IVirtFdService for FdService {
         })
     }
 
-    fn getFileSize(&self, id: i32) -> BinderResult<i64> {
+    fn getFileSize(&self, id: RawFd) -> BinderResult<i64> {
         self.handle_fd(id, |config| match config {
             FdConfig::Readonly { file, .. } => {
                 let size = file
@@ -258,7 +259,7 @@ impl IVirtFdService for FdService {
         })
     }
 
-    fn openFileInDirectory(&self, dir_fd: i32, file_path: &str) -> BinderResult<i32> {
+    fn openFileInDirectory(&self, dir_fd: RawFd, file_path: &str) -> BinderResult<i32> {
         let path_buf = PathBuf::from(file_path);
         // Checks if the path is a simple, related path.
         if path_buf.components().any(|c| !matches!(c, Component::Normal(_))) {
@@ -340,7 +341,7 @@ impl IVirtFdService for FdService {
         })
     }
 
-    fn deleteFile(&self, dir_fd: i32, basename: &str) -> BinderResult<()> {
+    fn deleteFile(&self, dir_fd: RawFd, basename: &str) -> BinderResult<()> {
         validate_basename(basename)?;
 
         self.handle_fd(dir_fd, |config| match config {
@@ -354,7 +355,7 @@ impl IVirtFdService for FdService {
         })
     }
 
-    fn deleteDirectory(&self, dir_fd: i32, basename: &str) -> BinderResult<()> {
+    fn deleteDirectory(&self, dir_fd: RawFd, basename: &str) -> BinderResult<()> {
         validate_basename(basename)?;
 
         self.handle_fd(dir_fd, |config| match config {
@@ -368,7 +369,7 @@ impl IVirtFdService for FdService {
         })
     }
 
-    fn chmod(&self, fd: i32, mode: i32) -> BinderResult<()> {
+    fn chmod(&self, fd: RawFd, mode: i32) -> BinderResult<()> {
         self.handle_fd(fd, |config| match config {
             FdConfig::ReadWrite(_) | FdConfig::OutputDir(_) => {
                 let mode = validate_file_mode(mode)?;
