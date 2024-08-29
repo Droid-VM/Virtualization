@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "015b548c_888511a6",
+        "filename": "libs/libsafe_ownedfd/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-08-29T11:39:30Z",
+      "side": 1,
+      "message": "This function seems to have the same safety requirements as [`FromRawFd::from_raw_fd`](https://doc.rust-lang.org/stable/std/os/fd/trait.FromRawFd.html#tymethod.from_raw_fd), so it should similarly be unsafe. It takes ownership of the raw file descriptor by closing it, and so if the caller passed a file descriptor which it doesn\u0027t own (e.g. one obtained from `AsRawFd::as_raw_fd` which borrows a file descriptor rather than taking ownership of it), then this will result in a double close of the file descriptor, and/or subsequent accesses to it failing. This violates I/O safety.\n\nSee https://rust-lang.github.io/rfcs/3128-io-safety.html for background on I/O safety in Rust.\n\n(`nix::unistd::close` should also be unsafe for the same reason.)",
+      "revId": "1743878cd20564e42fe41e4fbaefcb964bf83e02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
