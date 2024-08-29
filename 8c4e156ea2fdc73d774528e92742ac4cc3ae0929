@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01e570e0_89795769",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-29T13:46:25Z",
+      "side": 1,
+      "message": "Ack that we don\u0027t want `earlycon` to be enabled by default.\n\nThe `vm` CLI has already caused confusion in the past and I don\u0027t believe that adding yet another flag is improving its clarity. As you show in `Test:`, you felt the need to test `--enable-earlycon` with `--debug none` but ideally, it shouldn\u0027t even be possible to express that combo. The need for this assertion is another symptom\n\n    if config.debug.enable_earlycon() {\n        if config.debug.debug !\u003d DebugLevel::FULL {\n            bail!(\"earlycon is only supported for debuggable VMs\")\n        }\n\nIMO, extending `--debug` (e.g. comma separated list of \"features\") might have made more sense but anyway, I\u0027ll +2 as this isn\u0027t _super_ important and is likely not the best use of our time.",
+      "parentUuid": "71d16d5d_e8faf67a",
+      "range": {
+        "startLine": 16,
+        "startChar": 36,
+        "endLine": 16,
+        "endChar": 66
+      },
+      "revId": "8c4e156ea2fdc73d774528e92742ac4cc3ae0929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd99202a_6837c93a",
@@ -95,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0852d7f_b49e8dd7",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineAppConfig.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-29T13:46:25Z",
+      "side": 1,
+      "message": "Ack; thanks for the explanation.",
+      "parentUuid": "0d5593d5_b98a50d1",
+      "range": {
+        "startLine": 132,
+        "startChar": 17,
+        "endLine": 132,
+        "endChar": 36
+      },
+      "revId": "8c4e156ea2fdc73d774528e92742ac4cc3ae0929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44ffca7c_e89ba823",
@@ -132,6 +180,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "44ffca7c_e89ba823",
+      "range": {
+        "startLine": 279,
+        "startChar": 0,
+        "endLine": 280,
+        "endChar": 70
+      },
+      "revId": "8c4e156ea2fdc73d774528e92742ac4cc3ae0929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad84983e_be66ce3e",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-29T13:46:25Z",
+      "side": 1,
+      "message": "Not done?",
+      "parentUuid": "1debb588_17d84b64",
       "range": {
         "startLine": 279,
         "startChar": 0,
