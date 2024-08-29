@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97aa46d8_2de6d0ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-08-29T21:08:45Z",
+      "side": 1,
+      "message": "can we disable it by default? deferring to a separate CL is OK",
+      "revId": "f61aaf5c6d513295f882ad93362d50e67d1b4bbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3156fdac_decaa71f",
+        "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-08-29T21:08:45Z",
+      "side": 1,
+      "message": "i wonder if this should use `pb.putPersistableBundle` like the one above\n\nsimilarly for the `from` function above\n\n(i know nothing about how this works)",
+      "range": {
+        "startLine": 274,
+        "startChar": 0,
+        "endLine": 276,
+        "endChar": 9
+      },
+      "revId": "f61aaf5c6d513295f882ad93362d50e67d1b4bbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55442a16_fc9adaba",
+        "filename": "libs/vmconfig/src/lib.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-08-29T21:08:45Z",
+      "side": 1,
+      "message": "it seems like this default is duplicate in multiple spots. there is something similar in `android/virtmgr/src/aidl.rs` in this CL",
+      "range": {
+        "startLine": 119,
+        "startChar": 40,
+        "endLine": 119,
+        "endChar": 44
+      },
+      "revId": "f61aaf5c6d513295f882ad93362d50e67d1b4bbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
