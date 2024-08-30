@@ -87,6 +87,30 @@
       },
       "revId": "e69d32a1d283bffd3d539d06ad11931c809bbe36",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a053b5d_85a45e31",
+        "filename": "libs/libvmbase/src/memory/util.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-08-30T08:39:24Z",
+      "side": 1,
+      "message": "\u003e that code is self-contained though (a call to the external crate zeroize and a loop issuing DC instructions)\n\nI checked this code. There are lots of things to move actually\n\n- All the `flush*` functions in [libvmbase/src/memory/util.rs:l41-82](https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/libvmbase/src/memory/util.rs;l\u003d41;drc\u003d1a089a0c4aab619039b208a087f4f441e4fa1425) need to be duplicated between `vmbase` and `lib_open_dice_clear_memory_baremetal`. Several functions are still used in other places so we still need to keep them in vmbase.\n- Some macro and util functions like `read_sysreg!` also needs to duplicate.\n\nIt\u0027s much simpler to just add one line in rialto tbh. Since we only have two usages like this, we can refactor it when there\u0027s a third usage (https://en.wikipedia.org/wiki/Rule_of_three_(computer_programming))",
+      "parentUuid": "acd48593_19d2d428",
+      "range": {
+        "startLine": 114,
+        "startChar": 21,
+        "endLine": 114,
+        "endChar": 36
+      },
+      "revId": "e69d32a1d283bffd3d539d06ad11931c809bbe36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
