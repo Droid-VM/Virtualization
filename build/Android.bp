@@ -47,6 +47,9 @@ rust_defaults {
     }) + select(release_flag("RELEASE_AVF_SUPPORT_CUSTOM_VM_WITH_PARAVIRTUALIZED_DEVICES"), {
         true: ["paravirtualized_devices"],
         default: [],
+    }) + select(release_flag("RELEASE_AVF_ENABLE_TPU_ASSGINABLE_DEVICE"), {
+        true: ["tpu_assignable_device"],
+        default: [],
     }),
 }
 
