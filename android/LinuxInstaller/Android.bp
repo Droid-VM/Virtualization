@@ -1,0 +1,21 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+android_app {
+    name: "LinuxInstallerApp",
+    srcs: ["java/**/*.java"],
+    resource_dirs: ["res"],
+    asset_dirs: ["assets"],
+    manifest: "AndroidManifest.xml",
+    defaults: ["VmPayloadInstaller"],
+    overrides: ["LinuxInstallerAppStub"],
+}
+
+android_app {
+    name: "LinuxInstallerAppStub",
+    srcs: ["java/**/*.java"],
+    resource_dirs: ["res"],
+    manifest: "AndroidManifest_stub.xml",
+    defaults: ["VmPayloadInstaller"],
+}
