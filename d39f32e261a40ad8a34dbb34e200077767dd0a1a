@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "18533a6d_839750f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-30T14:50:16Z",
+      "side": 1,
+      "message": "Update; I reproduced your `Test:` and, in my case, `virtmgr` gets properly killed while `crosvm` gets re-parented to `init` (with no `SIGKILL` seemingly delivered).\n\nGiven that [`PR_SET_PDEATHSIG(2const)`](https://man7.org/linux/man-pages/man2/PR_SET_PDEATHSIG.2const.html) mentions some cases where the parent-death signal isn\u0027t carried over through the `exec` depending on the payload, I\u0027ve adapted my PoC above to compile for Android (instead of Linux) and use `/apex/.../crosvm` (instead of `sleep`). Running that on my device, I can still reproduce the expected behavior where `crosvm` gets `SIGKILL`-ed when its parent dies so I don\u0027t think the issue is coming from `crosvm` itself.\n\nIn the same way, I\u0027ve also ruled out the issue coming from `SharedChild`.",
+      "parentUuid": "10decf07_9f614b47",
+      "revId": "d39f32e261a40ad8a34dbb34e200077767dd0a1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "154e6dd3_7fe1ead0",
         "filename": "android/virtmgr/src/crosvm.rs",
         "patchSetId": 1
