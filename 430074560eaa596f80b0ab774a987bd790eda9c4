@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c08eb83e_eda32f95",
+        "filename": "android/LinuxInstaller/java/com/android/virtualization/linuxinstaller/MainActivity.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-30T07:29:11Z",
+      "side": 1,
+      "message": "Style. Let\u0027s avoid unnecessary indentations by returning early.\n\n```\nif (!hasLocalAssets()) {\n   updateStatus();\n   return;\n}\n// rest of the code\n```",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 31
+      },
+      "revId": "430074560eaa596f80b0ab774a987bd790eda9c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aededceb_28f1b05e",
+        "filename": "android/LinuxInstaller/java/com/android/virtualization/linuxinstaller/MainActivity.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-30T07:29:11Z",
+      "side": 1,
+      "message": "IOException",
+      "range": {
+        "startLine": 104,
+        "startChar": 46,
+        "endLine": 104,
+        "endChar": 55
+      },
+      "revId": "430074560eaa596f80b0ab774a987bd790eda9c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa34024d_0fcf99ff",
+        "filename": "android/LinuxInstaller/java/com/android/virtualization/linuxinstaller/MainActivity.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-30T07:29:11Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 131,
+        "startChar": 54,
+        "endLine": 131,
+        "endChar": 63
+      },
+      "revId": "430074560eaa596f80b0ab774a987bd790eda9c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba6e28f0_83322e40",
+        "filename": "android/LinuxInstaller/java/com/android/virtualization/linuxinstaller/MainActivity.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-30T07:29:11Z",
+      "side": 1,
+      "message": "we may want to wrap `e` with a new exception so that we can add some context to the original exception.",
+      "range": {
+        "startLine": 147,
+        "startChar": 16,
+        "endLine": 147,
+        "endChar": 24
+      },
+      "revId": "430074560eaa596f80b0ab774a987bd790eda9c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b634461a_ca7324a6",
+        "filename": "android/LinuxInstaller/java/com/android/virtualization/linuxinstaller/MainActivity.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-30T07:29:11Z",
+      "side": 1,
+      "message": "not necessary. Streams.readFully returns String",
+      "range": {
+        "startLine": 176,
+        "startChar": 15,
+        "endLine": 176,
+        "endChar": 25
+      },
+      "revId": "430074560eaa596f80b0ab774a987bd790eda9c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22566da5_8ffaa0a5",
+        "filename": "android/LinuxInstaller/java/com/android/virtualization/linuxinstaller/MainActivity.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-30T07:29:11Z",
+      "side": 1,
+      "message": "Do we even need to have this as a function? strip can be called at the call site.",
+      "range": {
+        "startLine": 175,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 5
+      },
+      "revId": "430074560eaa596f80b0ab774a987bd790eda9c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7e55bcf_0f053933",
+        "filename": "android/LinuxInstaller/linux_image_builder/setup.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-30T07:29:11Z",
+      "side": 1,
+      "message": "let\u0027s use `mktemp -d` and clean the directory before exiting this script.",
+      "range": {
+        "startLine": 6,
+        "startChar": 90,
+        "endLine": 6,
+        "endChar": 95
+      },
+      "revId": "430074560eaa596f80b0ab774a987bd790eda9c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
