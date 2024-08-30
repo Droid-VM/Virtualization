@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9adc69ff_9e289ad6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-08-30T04:32:18Z",
+      "side": 1,
+      "message": "The current default behavior is USB enabled. I believe VMs should have it enabled, unless explicitly requested otherwise.\n\nI\u0027m ok with discussing this and deferring as well to another CL, marking is Ack.",
+      "parentUuid": "97aa46d8_2de6d0ba",
+      "revId": "f61aaf5c6d513295f882ad93362d50e67d1b4bbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3156fdac_decaa71f",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-08-29T21:08:45Z",
       "side": 1,
       "message": "i wonder if this should use `pb.putPersistableBundle` like the one above\n\nsimilarly for the `from` function above\n\n(i know nothing about how this works)",
+      "range": {
+        "startLine": 274,
+        "startChar": 0,
+        "endLine": 276,
+        "endChar": 9
+      },
+      "revId": "f61aaf5c6d513295f882ad93362d50e67d1b4bbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "580f63e6_b57a7c21",
+        "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-08-30T04:32:18Z",
+      "side": 1,
+      "message": "Currently, that\u0027s feasible. I recall hitting errors when attempting to do that while trying to add `devices` and `PathBufs/Files`.\n\nI can definitely change it and add PersistableBundle, however I\u0027d rather discuss device attaching first. The refactor to use persistable bundle is simpler than the 1 to remove it and add devices, if we want to add a way to add devices on boot through a config.\n\nLet me know what you think/prefer, I don\u0027t have a strong feeling about it.",
+      "parentUuid": "3156fdac_decaa71f",
       "range": {
         "startLine": 274,
         "startChar": 0,
