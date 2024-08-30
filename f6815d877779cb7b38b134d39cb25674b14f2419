@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa00ed45_edcbdb87",
+        "filename": "android/FerrochromeApp/custom_vm_setup.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-30T05:37:23Z",
+      "side": 1,
+      "message": "you need to add space `[ -f $(dst_dir)state.img ]`",
+      "range": {
+        "startLine": 18,
+        "startChar": 6,
+        "endLine": 18,
+        "endChar": 28
+      },
+      "revId": "f6815d877779cb7b38b134d39cb25674b14f2419",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2d23801_0e7f1b46",
+        "filename": "android/LinuxInstaller/java/com/android/virtualization/linuxinstaller/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-30T05:37:23Z",
+      "side": 1,
+      "message": "Let\u0027s not do this.",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 77
+      },
+      "revId": "f6815d877779cb7b38b134d39cb25674b14f2419",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "799d2111_2a9b27ce",
+        "filename": "android/LinuxInstaller/java/com/android/virtualization/linuxinstaller/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-30T05:37:23Z",
+      "side": 1,
+      "message": "make this a method",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 21
+      },
+      "revId": "f6815d877779cb7b38b134d39cb25674b14f2419",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6cb3775_8e43f5cf",
+        "filename": "android/LinuxInstaller/java/com/android/virtualization/linuxinstaller/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-30T05:37:23Z",
+      "side": 1,
+      "message": "Log it.",
+      "range": {
+        "startLine": 93,
+        "startChar": 12,
+        "endLine": 93,
+        "endChar": 25
+      },
+      "revId": "f6815d877779cb7b38b134d39cb25674b14f2419",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf5ae613_70eb3952",
+        "filename": "android/LinuxInstaller/java/com/android/virtualization/linuxinstaller/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-30T05:37:23Z",
+      "side": 1,
+      "message": "Let\u0027s not report failure by return value, but by exception.",
+      "range": {
+        "startLine": 98,
+        "startChar": 12,
+        "endLine": 98,
+        "endChar": 19
+      },
+      "revId": "f6815d877779cb7b38b134d39cb25674b14f2419",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26bcd94a_f9271abe",
+        "filename": "android/LinuxInstaller/java/com/android/virtualization/linuxinstaller/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-30T05:37:23Z",
+      "side": 1,
+      "message": "same here",
+      "range": {
+        "startLine": 127,
+        "startChar": 12,
+        "endLine": 127,
+        "endChar": 19
+      },
+      "revId": "f6815d877779cb7b38b134d39cb25674b14f2419",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28a1f998_1f371f79",
+        "filename": "android/LinuxInstaller/java/com/android/virtualization/linuxinstaller/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-30T05:37:23Z",
+      "side": 1,
+      "message": "Let\u0027s not call this a version, which actually is a hash.",
+      "range": {
+        "startLine": 153,
+        "startChar": 41,
+        "endLine": 153,
+        "endChar": 53
+      },
+      "revId": "f6815d877779cb7b38b134d39cb25674b14f2419",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a916ac4_9d9da302",
+        "filename": "android/LinuxInstaller/java/com/android/virtualization/linuxinstaller/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-30T05:37:23Z",
+      "side": 1,
+      "message": "use https://cs.android.com/android/platform/superproject/main/+/main:libcore/luni/src/main/java/libcore/io/Streams.java;drc\u003dbacbadbc61a48e90cb5976040e7e0695bb75b69a;l\u003d181 instead?",
+      "range": {
+        "startLine": 174,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 5
+      },
+      "revId": "f6815d877779cb7b38b134d39cb25674b14f2419",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5d3676b_377b3312",
+        "filename": "android/LinuxInstaller/linux_image_builder/vm_config.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-30T05:37:23Z",
+      "side": 1,
+      "message": "This is too big I think",
+      "range": {
+        "startLine": 13,
+        "startChar": 18,
+        "endLine": 13,
+        "endChar": 22
+      },
+      "revId": "f6815d877779cb7b38b134d39cb25674b14f2419",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9b4df51_60217e12",
+        "filename": "android/LinuxInstaller/linux_image_builder/vm_config.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-08-30T05:37:23Z",
+      "side": 1,
+      "message": "no need",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 5
+      },
+      "revId": "f6815d877779cb7b38b134d39cb25674b14f2419",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
