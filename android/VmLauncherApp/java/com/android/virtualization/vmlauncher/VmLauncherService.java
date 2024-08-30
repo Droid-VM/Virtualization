@@ -76,11 +76,6 @@ public class VmLauncherService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if (mVirtualMachine != null
-                && mVirtualMachine.getStatus() == VirtualMachine.STATUS_RUNNING) {
-            Log.d(TAG, "there is already the running VM instance");
-            return START_NOT_STICKY;
-        }
         mExecutorService = Executors.newCachedThreadPool();
 
         ConfigJson json = ConfigJson.from(VM_CONFIG_PATH);
@@ -90,9 +85,7 @@ public class VmLauncherService extends Service {
         try {
             runner = Runner.create(this, config);
         } catch (VirtualMachineException e) {
-            Log.e(TAG, "cannot create runner", e);
-            stopSelf();
-            return START_NOT_STICKY;
+            throw new RuntimeException(e);
         }
         mVirtualMachine = runner.getVm();
         mResultReceiver =
@@ -124,18 +117,7 @@ public class VmLauncherService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mVirtualMachine != null
-                && mVirtualMachine.getStatus() == VirtualMachine.STATUS_RUNNING) {
-            try {
-                mVirtualMachine.stop();
-                stopForeground(STOP_FOREGROUND_REMOVE);
-            } catch (VirtualMachineException e) {
-                Log.e(TAG, "failed to stop a VM instance", e);
-            }
-            mExecutorService.shutdownNow();
-            mExecutorService = null;
-            mVirtualMachine = null;
-        }
+        mExecutorService.shutdownNow();
     }
 
     // TODO(b/359523803): Use AVF API to get ip addr when it exists
