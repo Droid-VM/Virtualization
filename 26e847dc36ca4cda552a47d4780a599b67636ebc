@@ -33,6 +33,144 @@
       "message": "Ping",
       "revId": "26e847dc36ca4cda552a47d4780a599b67636ebc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91486d4d_874708ef",
+        "filename": "libs/libvmclient/src/lib.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-30T14:11:15Z",
+      "side": 1,
+      "message": "For clarity and correctness, this should probably be\n```\ncode: c_int, ..., ctx: *const c_void\n```",
+      "range": {
+        "startLine": 84,
+        "startChar": 46,
+        "endLine": 84,
+        "endChar": 95
+      },
+      "revId": "26e847dc36ca4cda552a47d4780a599b67636ebc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9848bc02_4b28969e",
+        "filename": "libs/libvmclient/src/lib.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-30T14:11:15Z",
+      "side": 1,
+      "message": "Is it correct to assume that `NULL` (in C) and `Option::None` have the same binary representation? Should this be a raw pointer?",
+      "range": {
+        "startLine": 94,
+        "startChar": 8,
+        "endLine": 94,
+        "endChar": 29
+      },
+      "revId": "26e847dc36ca4cda552a47d4780a599b67636ebc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "976ada6e_2e91d8ee",
+        "filename": "libs/libvmclient/src/lib.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-30T14:11:15Z",
+      "side": 1,
+      "message": "OOC, since is Rust being called from C++ being called from Java, what do you expect to happen if we panic at this point?",
+      "range": {
+        "startLine": 102,
+        "startChar": 56,
+        "endLine": 102,
+        "endChar": 66
+      },
+      "revId": "26e847dc36ca4cda552a47d4780a599b67636ebc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c166a9e3_fb8c86cb",
+        "filename": "libs/libvmclient/src/lib.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-30T14:11:15Z",
+      "side": 1,
+      "message": "nit: `e.to_string()`",
+      "range": {
+        "startLine": 102,
+        "startChar": 39,
+        "endLine": 102,
+        "endChar": 55
+      },
+      "revId": "26e847dc36ca4cda552a47d4780a599b67636ebc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5df170e6_f3cd777b",
+        "filename": "libs/libvmclient/src/lib.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-30T14:11:15Z",
+      "side": 1,
+      "message": "I see; so the callback is needed to let Java access the error message from Rust\u0027s heap.",
+      "range": {
+        "startLine": 104,
+        "startChar": 18,
+        "endLine": 104,
+        "endChar": 89
+      },
+      "revId": "26e847dc36ca4cda552a47d4780a599b67636ebc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f7436c7_f944a876",
+        "filename": "libs/libvmclient/src/lib.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-08-30T14:11:15Z",
+      "side": 1,
+      "message": "Unrelated hunk? Would you mind explaining/mentioning this in the commit message, as it impacts existing users of `libvmclient` and might (in theory) cause regressions.",
+      "range": {
+        "startLine": 137,
+        "startChar": 50,
+        "endLine": 137,
+        "endChar": 52
+      },
+      "revId": "26e847dc36ca4cda552a47d4780a599b67636ebc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
