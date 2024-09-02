@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5258d9ec_58602e2b",
+        "filename": "tests/vm_accessor/accessor/src/accessor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-09-02T12:18:50Z",
+      "side": 1,
+      "message": "super-nit: Using `instance.into()` here can be more idiomatic for this conversion.",
+      "range": {
+        "startLine": 39,
+        "startChar": 44,
+        "endLine": 39,
+        "endChar": 55
+      },
+      "revId": "381cd8c518082f0c957147c91a54090ead48e1ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85a54abb_483e4a7f",
+        "filename": "tests/vm_accessor/accessor/src/accessor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-09-02T12:18:50Z",
+      "side": 1,
+      "message": "super-nit: `self.instance.into()` can also work here.",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 33
+      },
+      "revId": "381cd8c518082f0c957147c91a54090ead48e1ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
