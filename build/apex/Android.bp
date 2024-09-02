@@ -164,10 +164,6 @@ apex_defaults {
         true: "AndroidManifest.xml",
         default: unset,
     }),
-    vintf_fragments: select(soong_config_variable("ANDROID", "avf_remote_attestation_enabled"), {
-        "true": ["virtualizationservice.xml"],
-        default: unset,
-    }),
 }
 
 apex_defaults {
