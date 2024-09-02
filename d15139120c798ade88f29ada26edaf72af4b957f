@@ -33,6 +33,24 @@
       "message": "Nit: On the C side this is defined as `*mut c_void` instead of `*const c_void`. The mismatch could result in a CFI failure if CFI is turned on in this code.",
       "revId": "d15139120c798ade88f29ada26edaf72af4b957f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5eb8ed6e_64c82e4d",
+        "filename": "libs/libvmclient/src/lib.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-09-02T09:09:07Z",
+      "side": 1,
+      "message": "Thanks for pointing that out. Fixed.",
+      "parentUuid": "2ed7e23c_4fd90d84",
+      "revId": "d15139120c798ade88f29ada26edaf72af4b957f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
