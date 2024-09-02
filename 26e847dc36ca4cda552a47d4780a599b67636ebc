@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80c2cf9f_4846f116",
+        "filename": "libs/libvmclient/src/lib.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-09-02T08:37:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91486d4d_874708ef",
+      "range": {
+        "startLine": 84,
+        "startChar": 46,
+        "endLine": 84,
+        "endChar": 95
+      },
+      "revId": "26e847dc36ca4cda552a47d4780a599b67636ebc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9848bc02_4b28969e",
@@ -71,6 +95,30 @@
       "writtenOn": "2024-08-30T14:11:15Z",
       "side": 1,
       "message": "Is it correct to assume that `NULL` (in C) and `Option::None` have the same binary representation? Should this be a raw pointer?",
+      "range": {
+        "startLine": 94,
+        "startChar": 8,
+        "endLine": 94,
+        "endChar": 29
+      },
+      "revId": "26e847dc36ca4cda552a47d4780a599b67636ebc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fc27445_39dbbfa0",
+        "filename": "libs/libvmclient/src/lib.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-09-02T08:37:33Z",
+      "side": 1,
+      "message": "Yes, that\u0027s guaranteed. See https://doc.rust-lang.org/std/option/index.html#representation",
+      "parentUuid": "9848bc02_4b28969e",
       "range": {
         "startLine": 94,
         "startChar": 8,
@@ -129,6 +177,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5589c1f7_995d77a5",
+        "filename": "libs/libvmclient/src/lib.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-09-02T08:37:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c166a9e3_fb8c86cb",
+      "range": {
+        "startLine": 102,
+        "startChar": 39,
+        "endLine": 102,
+        "endChar": 55
+      },
+      "revId": "26e847dc36ca4cda552a47d4780a599b67636ebc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "5df170e6_f3cd777b",
         "filename": "libs/libvmclient/src/lib.rs",
         "patchSetId": 7
@@ -163,6 +235,30 @@
       "writtenOn": "2024-08-30T14:11:15Z",
       "side": 1,
       "message": "Unrelated hunk? Would you mind explaining/mentioning this in the commit message, as it impacts existing users of `libvmclient` and might (in theory) cause regressions.",
+      "range": {
+        "startLine": 137,
+        "startChar": 50,
+        "endLine": 137,
+        "endChar": 52
+      },
+      "revId": "26e847dc36ca4cda552a47d4780a599b67636ebc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b512f128_f8781193",
+        "filename": "libs/libvmclient/src/lib.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-09-02T08:37:33Z",
+      "side": 1,
+      "message": "This is to follow the behavior of the (deleted) jni code, where failing to read triggers an exception. I\u0027ve amended the comment and the commit message.",
+      "parentUuid": "0f7436c7_f944a876",
       "range": {
         "startLine": 137,
         "startChar": 50,
