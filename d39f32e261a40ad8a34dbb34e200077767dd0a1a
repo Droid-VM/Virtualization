@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23d3ee0a_5d1aa864",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-09-02T09:16:07Z",
+      "side": 1,
+      "message": "In the man page...\n\n\u003e It is also (since Linux 2.4.36 / 2.6.23) cleared when executing a set-user-ID or set-group-ID binary, or a binary that has associated capabilities\n\ncrosvm certainly has associated capabilities [1].\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/build/apex/canned_fs_config_sys_nice",
+      "parentUuid": "18533a6d_839750f7",
+      "revId": "d39f32e261a40ad8a34dbb34e200077767dd0a1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "154e6dd3_7fe1ead0",
         "filename": "android/virtmgr/src/crosvm.rs",
         "patchSetId": 1
