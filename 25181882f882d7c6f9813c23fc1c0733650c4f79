@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9495df5d_f546b77b",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-09-03T13:31:30Z",
+      "side": 1,
+      "message": "then we will have to guard every reference to GLOBAL_SERVICE as well. it will only make code dirty without clear benefit. \n\nFor example, \n\n```\n    fn removeVmInstance(\u0026self, instance_id: \u0026[u8; 64]) -\u003e binder::Result\u003c()\u003e {\n        check_manage_access()?;\n        if !cfg!(early) {\n            GLOBAL_SERVICE.removeVmInstance(instance_id)\n        } else {\n            Err(...)   // or should we return Ok(())?\n        }\n    }\n```\n\n, which will eventually crash the program anyway.",
+      "parentUuid": "2ac9cfdd_feff06e3",
+      "range": {
+        "startLine": 126,
+        "startChar": 8,
+        "endLine": 126,
+        "endChar": 81
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "03199ef7_f58efa13",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 3
@@ -42,6 +66,53 @@
         "startChar": 0,
         "endLine": 404,
         "endChar": 74
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c65ea25b_1d9766f5",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-09-03T13:31:30Z",
+      "side": 1,
+      "message": "it\u0027s to allocate the CID in different ranges depending on which partition the client is from. it\u0027s not for security.",
+      "parentUuid": "03199ef7_f58efa13",
+      "range": {
+        "startLine": 404,
+        "startChar": 0,
+        "endLine": 404,
+        "endChar": 74
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bcfd416_0c2035e8",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-09-03T13:31:30Z",
+      "side": 1,
+      "message": "is it okay to ignore the error?",
+      "range": {
+        "startLine": 429,
+        "startChar": 12,
+        "endLine": 429,
+        "endChar": 13
       },
       "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -95,6 +166,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7251754f_7107839c",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1895,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-09-03T13:31:30Z",
+      "side": 1,
+      "message": "it\u0027s us :) Given the simplicity of the schema, I think this is fine. We can consider auto-generating it when the schema becomes complex.",
+      "parentUuid": "3697b40c_d519b43e",
+      "range": {
+        "startLine": 1886,
+        "startChar": 0,
+        "endLine": 1895,
+        "endChar": 1
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64035689_4008f4ba",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1903,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-09-03T13:31:30Z",
+      "side": 1,
+      "message": "You can reuse `std::ops::Range`.",
+      "range": {
+        "startLine": 1903,
+        "startChar": 7,
+        "endLine": 1903,
+        "endChar": 15
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "386027be_81629c3e",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 3
@@ -111,6 +229,52 @@
         "startChar": 3,
         "endLine": 1919,
         "endChar": 16
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b6e59e1_56065616",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1942,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-09-03T13:31:30Z",
+      "side": 1,
+      "message": "You need to guaranteed that early_vm.name is unique in the vector.",
+      "range": {
+        "startLine": 1942,
+        "startChar": 8,
+        "endLine": 1942,
+        "endChar": 28
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa8c9d22_adfce825",
+        "filename": "android/virtmgr/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-09-03T13:31:30Z",
+      "side": 1,
+      "message": "prlimit doesn\u0027t use `lim` outside its lifetime.",
+      "range": {
+        "startLine": 111,
+        "startChar": 19,
+        "endLine": 111,
+        "endChar": 54
       },
       "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
