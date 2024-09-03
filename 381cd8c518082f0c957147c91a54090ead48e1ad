@@ -93,6 +93,30 @@
       },
       "revId": "381cd8c518082f0c957147c91a54090ead48e1ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b85c0f24_12457257",
+        "filename": "tests/vm_accessor/accessor/src/accessor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-09-03T17:12:59Z",
+      "side": 1,
+      "message": "Looks like this one needs the `.clone()`:\n```\nFAILED: out/soong/.intermediates/packages/modules/Virtualization/tests/vm_accessor/accessor/accessor_demo/android_arm64_armv8-a_apex10000/accessor_demo.clippy\n..._armv8-a_apex10000/accessor_demo.clippy.d.raw \u003e out/soong/.intermediates/packages/modules/Virtualization/tests/vm_accessor/accessor/accessor_demo/android_arm64_armv8-a_apex10000/accessor_demo.clippy.d\nerror[E0507]: cannot move out of `self.instance` which is behind a shared reference\n  --\u003e packages/modules/Virtualization/tests/vm_accessor/accessor/src/accessor.rs:54:12\n   |\n54 |         Ok(self.instance.into())\n   |            ^^^^^^^^^^^^^ ------ `self.instance` moved due to this method call\n   |            |\n   |            move occurs because `self.instance` has type `std::string::String`, which does not implement the `Copy` trait\n   |\nnote: `std::convert::Into::into` takes ownership of the receiver `self`, which moves `self.instance`\n  --\u003e ./prebuilts/rust/linux-x86/1.80.1/src/stdlibs/library/core/src/convert/mod.rs:450:13\nhelp: you can `clone` the value and consume it, but this might not be your desired behavior\n   |\n54 |         Ok(\u003cstd::string::String as Clone\u003e::clone(\u0026self.instance).into())\n   |            +++++++++++++++++++++++++++++++++++++++             +\nhelp: consider cloning the value if the performance cost is acceptable\n   |\n54 |         Ok(self.instance.clone().into())\n   |                         ++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0507`.\n```",
+      "parentUuid": "2b843923_7650cb6c",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 33
+      },
+      "revId": "381cd8c518082f0c957147c91a54090ead48e1ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
