@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b26c0a75_877d050c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-09-03T15:12:13Z",
+      "side": 1,
+      "message": "please move this to docs/early_vm.md",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 0
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2ac9cfdd_feff06e3",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 3
@@ -38,6 +61,30 @@
       "side": 1,
       "message": "then we will have to guard every reference to GLOBAL_SERVICE as well. it will only make code dirty without clear benefit. \n\nFor example, \n\n```\n    fn removeVmInstance(\u0026self, instance_id: \u0026[u8; 64]) -\u003e binder::Result\u003c()\u003e {\n        check_manage_access()?;\n        if !cfg!(early) {\n            GLOBAL_SERVICE.removeVmInstance(instance_id)\n        } else {\n            Err(...)   // or should we return Ok(())?\n        }\n    }\n```\n\n, which will eventually crash the program anyway.",
       "parentUuid": "2ac9cfdd_feff06e3",
+      "range": {
+        "startLine": 126,
+        "startChar": 8,
+        "endLine": 126,
+        "endChar": 81
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "004b18af_9cb848d5",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-09-03T15:12:13Z",
+      "side": 1,
+      "message": "+1 to jiyong. we already calls `wait_for_interface`, so I would feel less guilty about this dynamic check.",
+      "parentUuid": "9495df5d_f546b77b",
       "range": {
         "startLine": 126,
         "startChar": 8,
@@ -113,6 +160,29 @@
         "startChar": 12,
         "endLine": 429,
         "endChar": 13
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aa0004f_70a81d7e",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-09-03T15:12:13Z",
+      "side": 1,
+      "message": "creating directory outside of the `EarlyVmContext`, and deleting directory inside of `EarlyVmContext` looks wierd to me. What about `create_dir_all` inside of th EarlyVmContext?",
+      "range": {
+        "startLine": 430,
+        "startChar": 0,
+        "endLine": 435,
+        "endChar": 0
       },
       "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -236,6 +306,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "348556fe_f80f87a0",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1941,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-09-03T15:12:13Z",
+      "side": 1,
+      "message": "Q) Would we add CTS for this? You may omit this if CTS guarantees this (and no name nor CID duplication)",
+      "range": {
+        "startLine": 1938,
+        "startChar": 0,
+        "endLine": 1941,
+        "endChar": 0
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3b6e59e1_56065616",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 3
@@ -247,6 +340,30 @@
       "writtenOn": "2024-09-03T13:31:30Z",
       "side": 1,
       "message": "You need to guaranteed that early_vm.name is unique in the vector.",
+      "range": {
+        "startLine": 1942,
+        "startChar": 8,
+        "endLine": 1942,
+        "endChar": 28
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c3f5806_c6c6ae5f",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1942,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-09-03T15:12:13Z",
+      "side": 1,
+      "message": "should we ensure uniqueness across all partitions or just one?",
+      "parentUuid": "3b6e59e1_56065616",
       "range": {
         "startLine": 1942,
         "startChar": 8,
