@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ac9cfdd_feff06e3",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-09-03T12:19:40Z",
+      "side": 1,
+      "message": "This is dynamic check, right? Can we make static instead? E.g. can we guard the entire GLOBAL_SERVICE behind #cfg[(eary)]?",
+      "range": {
+        "startLine": 126,
+        "startChar": 8,
+        "endLine": 126,
+        "endChar": 81
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03199ef7_f58efa13",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-09-03T12:19:40Z",
+      "side": 1,
+      "message": "This feels a bit weird... Why do we need it? Is it to control the allow list of early vms? If so, can we achieve this via selinux permission?",
+      "range": {
+        "startLine": 404,
+        "startChar": 0,
+        "endLine": 404,
+        "endChar": 74
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5c8825e_abbc91d3",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1661,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-09-03T12:19:40Z",
+      "side": 1,
+      "message": "I suggest moving this into a separate function, e.g. check_config_allowed_for_early_vms. The reason is, check_config_feature is tied to trunk-stable flags, and we are going to remove a bunch of the checks from here once the corresponding release flags (RELEASE_AVF_ENABLE_DEVICE_ASSIGNMENT andRELEASE_AVF_ENABLE_VENDOR_MODULES are released as part of Android V)",
+      "range": {
+        "startLine": 1661,
+        "startChar": 28,
+        "endLine": 1661,
+        "endChar": 45
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3697b40c_d519b43e",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1895,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-09-03T12:19:40Z",
+      "side": 1,
+      "message": "Can we file a FR for the team maintaining xsd config to auto-generate rust code?",
+      "range": {
+        "startLine": 1886,
+        "startChar": 0,
+        "endLine": 1895,
+        "endChar": 1
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "386027be_81629c3e",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1919,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-09-03T12:19:40Z",
+      "side": 1,
+      "message": "Please add unit tests for this code",
+      "range": {
+        "startLine": 1919,
+        "startChar": 3,
+        "endLine": 1919,
+        "endChar": 16
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
