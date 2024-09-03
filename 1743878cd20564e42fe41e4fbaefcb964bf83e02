@@ -34,6 +34,24 @@
       "parentUuid": "015b548c_888511a6",
       "revId": "1743878cd20564e42fe41e4fbaefcb964bf83e02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d49bd267_67e77b6a",
+        "filename": "libs/libsafe_ownedfd/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-09-03T10:56:19Z",
+      "side": 1,
+      "message": "I guess you could call this something like `dup_from_raw` and do the `dup` without closing the original FD, yes. I think it would be sound for this function to be safe in that case, as you don\u0027t make any assumptions about the ownership of the file descriptor, and if it\u0027s not a valid FD then the `dup` will presumably just fail and return an error. The downside is it would be easier for the caller to forget to close the raw file descriptor.",
+      "parentUuid": "b10bd2d0_a9aabe62",
+      "revId": "1743878cd20564e42fe41e4fbaefcb964bf83e02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
