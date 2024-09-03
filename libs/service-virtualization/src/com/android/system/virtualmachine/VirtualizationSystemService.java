@@ -21,6 +21,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.LinkAddress;
 import android.net.TetheringManager;
 import android.net.TetheringManager.StartTetheringCallback;
 import android.net.TetheringManager.TetheringRequest;
@@ -157,9 +158,12 @@ public class VirtualizationSystemService extends SystemService {
 
         @Override
         public void enableVmTethering() {
+            final LinkAddress serverAddr = new LinkAddress("192.168.117.24/24"); // IP address shown in Android(avf_tap_fixed)
+            final LinkAddress clientAddr = new LinkAddress("192.168.117.202/24"); // IP address shown in ChromeOS
             final TetheringRequest tr =
                     new TetheringRequest.Builder(TetheringManager.TETHERING_VIRTUAL)
                             .setConnectivityScope(TetheringManager.CONNECTIVITY_SCOPE_GLOBAL)
+                            .setStaticIpv4Addresses(serverAddr, clientAddr)
                             .build();
 
             StartTetheringCallback startTetheringCallback =
