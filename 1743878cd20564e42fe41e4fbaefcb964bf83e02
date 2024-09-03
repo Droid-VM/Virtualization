@@ -52,6 +52,24 @@
       "parentUuid": "b10bd2d0_a9aabe62",
       "revId": "1743878cd20564e42fe41e4fbaefcb964bf83e02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c839e8ac_b01c2d79",
+        "filename": "libs/libsafe_ownedfd/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-09-03T13:50:43Z",
+      "side": 1,
+      "message": "Ok. I will take that path.\n\nre on downside: correct, but I see it as a separate issue. perhaps we could use crates like close_fds.",
+      "parentUuid": "d49bd267_67e77b6a",
+      "revId": "1743878cd20564e42fe41e4fbaefcb964bf83e02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
