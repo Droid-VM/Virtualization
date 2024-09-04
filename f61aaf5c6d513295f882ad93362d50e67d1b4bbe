@@ -152,6 +152,30 @@
       },
       "revId": "f61aaf5c6d513295f882ad93362d50e67d1b4bbe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "170d2b14_bfcb4ba2",
+        "filename": "libs/vmconfig/src/lib.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-04T01:24:17Z",
+      "side": 1,
+      "message": "i think this code should look like\n\n```\n        let usb_config \u003d if let Some(usb_config) \u003d \u0026self.usb_config {\n            Some(usb_config.to_parcelable()?)\n        } else {\n            None\n        };\n        Ok(VirtualMachineRawConfig {\n            ...\n            usbConfig: usb_config,\n            ..Default::default()\n        })\n```\n\nthen, virtmgr can decide what the default behavior is when the usb config is not specified\n\n\n(code golf: `let usb_config \u003d self.usb_config.map(|x| x.to_parcelable()).transpose()?;`)",
+      "parentUuid": "e957b6da_1565de0d",
+      "range": {
+        "startLine": 119,
+        "startChar": 40,
+        "endLine": 119,
+        "endChar": 44
+      },
+      "revId": "f61aaf5c6d513295f882ad93362d50e67d1b4bbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
