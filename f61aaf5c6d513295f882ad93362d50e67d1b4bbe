@@ -85,6 +85,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00146760_12f70ab9",
+        "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-04T00:31:34Z",
+      "side": 1,
+      "message": "It would be good to use a persistable bundle, because then you could easily add more options to USB in that bundle. If you add just the boolean, and we have more persistable options, then you would need another key for persistable things. So, just like adding the parcelable in the AIDL made it more extensible, this would be the equivalent thing to do here.",
+      "parentUuid": "580f63e6_b57a7c21",
+      "range": {
+        "startLine": 274,
+        "startChar": 0,
+        "endLine": 276,
+        "endChar": 9
+      },
+      "revId": "f61aaf5c6d513295f882ad93362d50e67d1b4bbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55442a16_fc9adaba",
         "filename": "libs/vmconfig/src/lib.rs",
         "patchSetId": 7
@@ -96,6 +120,30 @@
       "writtenOn": "2024-08-29T21:08:45Z",
       "side": 1,
       "message": "it seems like this default is duplicate in multiple spots. there is something similar in `android/virtmgr/src/aidl.rs` in this CL",
+      "range": {
+        "startLine": 119,
+        "startChar": 40,
+        "endLine": 119,
+        "endChar": 44
+      },
+      "revId": "f61aaf5c6d513295f882ad93362d50e67d1b4bbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e957b6da_1565de0d",
+        "filename": "libs/vmconfig/src/lib.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-04T00:31:34Z",
+      "side": 1,
+      "message": "open comment?",
+      "parentUuid": "55442a16_fc9adaba",
       "range": {
         "startLine": 119,
         "startChar": 40,
