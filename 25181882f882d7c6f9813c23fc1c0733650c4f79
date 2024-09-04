@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59ee38d7_1fd27ae3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-09-04T07:45:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b26c0a75_877d050c",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 0
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ac9cfdd_feff06e3",
@@ -95,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b2247f0_37382526",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-09-04T07:45:14Z",
+      "side": 1,
+      "message": "(... and because this is a lazy static, I don\u0027t think it\u0027s harmful)",
+      "parentUuid": "004b18af_9cb848d5",
+      "range": {
+        "startLine": 126,
+        "startChar": 8,
+        "endLine": 126,
+        "endChar": 81
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03199ef7_f58efa13",
@@ -142,6 +190,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6927587_c6b65648",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-09-04T07:45:14Z",
+      "side": 1,
+      "message": "yeah, SELinux can\u0027t enforce partitions. For example, `/vendor/bin/foo` could run a VM defined in `/system` without this check.",
+      "parentUuid": "c65ea25b_1d9766f5",
+      "range": {
+        "startLine": 404,
+        "startChar": 0,
+        "endLine": 404,
+        "endChar": 74
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3bcfd416_0c2035e8",
@@ -155,6 +227,30 @@
       "writtenOn": "2024-09-03T13:31:30Z",
       "side": 1,
       "message": "is it okay to ignore the error?",
+      "range": {
+        "startLine": 429,
+        "startChar": 12,
+        "endLine": 429,
+        "endChar": 13
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e7960e8_84ddff6e",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-09-04T07:45:14Z",
+      "side": 1,
+      "message": "I think so. `remove_dir_all` returns an error in case there is no such directory. If that\u0027s the case, we are good. If a real error happens (e.g. permission), then either `create_dir_all` or creating temporary files under the directory will fail.",
+      "parentUuid": "3bcfd416_0c2035e8",
       "range": {
         "startLine": 429,
         "startChar": 12,
@@ -188,6 +284,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96fb26ec_2774f5ab",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-09-04T07:45:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aa0004f_70a81d7e",
+      "range": {
+        "startLine": 430,
+        "startChar": 0,
+        "endLine": 435,
+        "endChar": 0
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5c8825e_abbc91d3",
@@ -201,6 +321,30 @@
       "writtenOn": "2024-09-03T12:19:40Z",
       "side": 1,
       "message": "I suggest moving this into a separate function, e.g. check_config_allowed_for_early_vms. The reason is, check_config_feature is tied to trunk-stable flags, and we are going to remove a bunch of the checks from here once the corresponding release flags (RELEASE_AVF_ENABLE_DEVICE_ASSIGNMENT andRELEASE_AVF_ENABLE_VENDOR_MODULES are released as part of Android V)",
+      "range": {
+        "startLine": 1661,
+        "startChar": 28,
+        "endLine": 1661,
+        "endChar": 45
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad726fbe_8c3f5b82",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1661,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-09-04T07:45:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5c8825e_abbc91d3",
       "range": {
         "startLine": 1661,
         "startChar": 28,
@@ -281,6 +425,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c15f0148_d8dfc370",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1903,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-09-04T07:45:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64035689_4008f4ba",
+      "range": {
+        "startLine": 1903,
+        "startChar": 7,
+        "endLine": 1903,
+        "endChar": 15
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "386027be_81629c3e",
@@ -304,6 +472,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a0db247_d9c22adf",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1919,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-09-04T07:45:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "386027be_81629c3e",
+      "range": {
+        "startLine": 1919,
+        "startChar": 3,
+        "endLine": 1919,
+        "endChar": 16
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "348556fe_f80f87a0",
@@ -317,6 +509,30 @@
       "writtenOn": "2024-09-03T15:12:13Z",
       "side": 1,
       "message": "Q) Would we add CTS for this? You may omit this if CTS guarantees this (and no name nor CID duplication)",
+      "range": {
+        "startLine": 1938,
+        "startChar": 0,
+        "endLine": 1941,
+        "endChar": 0
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b31cf35_5785e3e5",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1941,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-09-04T07:45:14Z",
+      "side": 1,
+      "message": "I\u0027m planning to add tests but I\u0027m not sure if it will be CTS or not. Let\u0027s discuss on b/354060773 as a follow-up task.",
+      "parentUuid": "348556fe_f80f87a0",
       "range": {
         "startLine": 1938,
         "startChar": 0,
@@ -398,6 +614,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb2d582a_974f86b2",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1942,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-09-04T07:45:14Z",
+      "side": 1,
+      "message": "yes, I also think that each partition is independent. done for the duplicated entries check.",
+      "parentUuid": "1acd868f_d305248d",
+      "range": {
+        "startLine": 1942,
+        "startChar": 8,
+        "endLine": 1942,
+        "endChar": 28
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa8c9d22_adfce825",
@@ -411,6 +651,30 @@
       "writtenOn": "2024-09-03T13:31:30Z",
       "side": 1,
       "message": "prlimit doesn\u0027t use `lim` outside its lifetime.",
+      "range": {
+        "startLine": 111,
+        "startChar": 19,
+        "endLine": 111,
+        "endChar": 54
+      },
+      "revId": "25181882f882d7c6f9813c23fc1c0733650c4f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eea7dd4_60e4ac1c",
+        "filename": "android/virtmgr/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-09-04T07:45:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa8c9d22_adfce825",
       "range": {
         "startLine": 111,
         "startChar": 19,
