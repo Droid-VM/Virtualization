@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9538d342_b198f59b",
+        "filename": "build/vm_attestation/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2024-09-04T06:59:08Z",
+      "side": 1,
+      "message": "iiuc, `avf_vm_attestation` is a dummy module to install the VINTF fragment(vm_attestation.xml). This isn\u0027t related to APEX.",
+      "parentUuid": "d62cdf7b_28f9b3eb",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 12
+      },
+      "revId": "c31fe9e2c415a57831c1202b00dca086c0577d47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "28240e10_647a91ee",
         "filename": "build/vm_attestation/vm_attestation.xml",
         "patchSetId": 2
