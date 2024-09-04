@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02f21eaa_70a04710",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-09-04T10:33:38Z",
+      "side": 1,
+      "message": "Hi Andrew, \n\nBefore I go further, it would be great if you can tell me if this is a sound approach or not.\n\nI actually don\u0027t like the dup_from_raw approach. When I followed that approach, I see that I am creating many fds unnecessarily. In addition, it breaks some places like authfs where rawfd \u003d\u003d ownedfd.as_raw_fd() is assumed (which IMO is a valid assumption).\n\nSo, I came up with this idea that we pre-create OwnedFds for inherited FDs by reading /proc/self/fd/* (of course that part has to be unsafe). Then conversion from RawFd to OwnedFd would be just giving the ownership of one of the pre-created OwnedFds.\n\nWDYT?",
+      "revId": "d1a97a8af7d7922dc26e784483766f77c4e62ebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
