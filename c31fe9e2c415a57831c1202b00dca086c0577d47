@@ -139,6 +139,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ea95cfe0_0b30b863",
+        "filename": "build/vm_attestation/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2024-09-04T07:26:11Z",
+      "side": 1,
+      "message": "\u003e  put it in vintf_fragment_modules property\n\nWill it work if we put the vintf_fragment module to PRODUCT_PACKAGES? I was thinking it would work. (It\u0027s added in aosp/3252903)",
+      "parentUuid": "0fbe4fc8_63903101",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 12
+      },
+      "revId": "c31fe9e2c415a57831c1202b00dca086c0577d47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "28240e10_647a91ee",
         "filename": "build/vm_attestation/vm_attestation.xml",
         "patchSetId": 2
