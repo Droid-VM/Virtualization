@@ -115,6 +115,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0fbe4fc8_63903101",
+        "filename": "build/vm_attestation/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1413436
+      },
+      "writtenOn": "2024-09-04T07:09:57Z",
+      "side": 1,
+      "message": "Oh in this case, you can use `vintf_fragment` module. You can define `vintf_fragment` module with `src: \"vm_attestation.xml\"`, and put it in `vintf_fragment_modules` property from the modules where requires this vintf_fragment file. Check [this code](https://cs.android.com/android/platform/superproject/main/+/main:external/minigbm/cros_gralloc/gralloc4/Android.bp;l\u003d92) as an example.",
+      "parentUuid": "210799c1_e0089a2d",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 12
+      },
+      "revId": "c31fe9e2c415a57831c1202b00dca086c0577d47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "28240e10_647a91ee",
         "filename": "build/vm_attestation/vm_attestation.xml",
         "patchSetId": 2
