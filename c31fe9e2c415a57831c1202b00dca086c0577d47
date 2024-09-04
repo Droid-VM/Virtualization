@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "210799c1_e0089a2d",
+        "filename": "build/vm_attestation/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-09-04T07:02:13Z",
+      "side": 1,
+      "message": "This is not related to Apex at all. It is simply a prebuilt VINTF manifest that vendors can choose to include in `/vendor` if they want to have this feature (e.g., https://r.android.com/3252903). The relative path for avf is not important; we can omit it if it\u0027s not supported.",
+      "parentUuid": "9538d342_b198f59b",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 12
+      },
+      "revId": "c31fe9e2c415a57831c1202b00dca086c0577d47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "28240e10_647a91ee",
         "filename": "build/vm_attestation/vm_attestation.xml",
         "patchSetId": 2
