@@ -1220,6 +1220,67 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         }
     }
 
+    @Test
+    public void microdroidDeviceTreeCompat() throws Exception {
+        final String configPath = "assets/vm_config.json";
+        getDevice().enableAdbRoot();
+        String enforce0 =
+                tryRunOnHost(
+                        "timeout",
+                        "3s",
+                        "adb",
+                        "-s",
+                        getDevice().getSerialNumber(),
+                        "setenforce",
+                        "0");
+        mMicrodroidDevice =
+                MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(minMemorySize())
+                        .cpuTopology("match_host")
+                        .protectedVm(mProtectedVm)
+                        .gki(mGki)
+                        .name("test_device_tree")
+                        .build(getAndroidDevice());
+
+        assertThat(mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT)).isTrue();
+        CommandRunner android = new CommandRunner(getDevice());
+        CommandResult pull_dt_dump =
+                RunUtil.getDefault()
+                        .runTimedCmd(
+                                3000,
+                                "adb",
+                                "-s",
+                                getDevice().getSerialNumber(),
+                                "pull",
+                                "/data/local/tmp/dt_dump.dtb",
+                                "dt_dump.dtb");
+        assertThat(pull_dt_dump.getStderr().trim().isEmpty()).isTrue();
+        File dtdifftool = findTestFile("dtdiff");
+        File goldenDt = findTestFile("dt_dump_golden.dtb");
+        CommandResult result_compare =
+                RunUtil.getDefault()
+                        .runTimedCmd(
+                                3000,
+                                dtdifftool.getAbsolutePath(),
+                                "dt_dump.dtb",
+                                goldenDt.getAbsolutePath());
+
+        assertThat(result_compare.getStderr().trim().isEmpty()).isTrue();
+        assertThat(result_compare.getStdout().trim().isEmpty()).isTrue();
+        String enforce1 =
+                tryRunOnHost(
+                        "timeout",
+                        "3s",
+                        "adb",
+                        "-s",
+                        getDevice().getSerialNumber(),
+                        "setenforce",
+                        "1");
+        getDevice().disableAdbRoot();
+        return;
+    }
+
     @Before
     public void setUp() throws Exception {
         assumeDeviceIsCapable(getDevice());
