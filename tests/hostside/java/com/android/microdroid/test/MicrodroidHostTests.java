@@ -1352,6 +1352,137 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         }
     }
 
+    @Test
+    @Parameters(method = "gkiVersions")
+    @TestCaseName("{method}_gki_{0}")
+    public void microdroidDeviceTreeCompat(String gki) throws Exception {
+        final String configPath = "assets/vm_config.json";
+        // Preconditions
+        assumeKernelSupported(gki);
+
+        // Start the VM with the dump DT option.
+        mMicrodroidDevice =
+                MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(minMemorySize())
+                        .cpuTopology("one_cpu")
+                        .protectedVm(false)
+                        .gki(sGkiVersions.get(gki))
+                        .name("test_device_tree")
+                        .dumpDt("/data/local/tmp/dump_dt.dtb")
+                        .build(getAndroidDevice());
+
+        assertThat(mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT)).isTrue();
+        File goldenDt = findTestFile("dt_dump_golden.dts");
+        testGoldenDeviceTree(goldenDt.getAbsolutePath());
+    }
+
+    @Test
+    @Parameters(method = "gkiVersions")
+    @TestCaseName("{method}_gki_{0}")
+    public void microdroidProtectedDeviceTreeCompat(String gki) throws Exception {
+        final String configPath = "assets/vm_config.json";
+        // Preconditions
+        assumeKernelSupported(gki);
+        assumeVmTypeSupported(true);
+
+        // Start the VM with the dump DT option.
+        mMicrodroidDevice =
+                MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(minMemorySize())
+                        .cpuTopology("one_cpu")
+                        .protectedVm(true)
+                        .gki(sGkiVersions.get(gki))
+                        .name("test_device_tree")
+                        .dumpDt("/data/local/tmp/dump_dt.dtb")
+                        .build(getAndroidDevice());
+
+        assertThat(mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT)).isTrue();
+        File goldenDt = findTestFile("dt_dump_protected_golden.dts");
+        testGoldenDeviceTree(goldenDt.getAbsolutePath());
+    }
+
+    private void testGoldenDeviceTree(String goldenDt) {
+        // Pull the device tree to host.
+        ITestDevice device = getDevice();
+        boolean disableRoot = !device.isAdbRoot();
+        device.enableAdbRoot();
+        assumeTrue("adb root is not enabled", device.isAdbRoot());
+        CommandResult pull_dt_dump =
+                RunUtil.getDefault()
+                        .runTimedCmd(
+                                3000,
+                                "adb",
+                                "-s",
+                                getDevice().getSerialNumber(),
+                                "pull",
+                                "-q",
+                                "/data/local/tmp/dump_dt.dtb",
+                                "dt_dump.dtb");
+        assertTrue(
+                "result pull stdout: " + pull_dt_dump.getStdout(),
+                pull_dt_dump.getStdout().trim().isEmpty());
+        assertTrue(
+                "result pull stderr: " + pull_dt_dump.getStderr(),
+                pull_dt_dump.getStderr().trim().isEmpty());
+
+        File dtc = findTestFile("dtc");
+        // Convert DT to text format.
+        CommandResult dtb_to_dts =
+                RunUtil.getDefault()
+                        .runTimedCmd(
+                                3000,
+                                dtc.getAbsolutePath(),
+                                "-I",
+                                "dtb",
+                                "-O",
+                                "dts",
+                                "-qqq",
+                                "-f",
+                                "-s",
+                                "-o",
+                                "dt_dump.dts",
+                                "dt_dump.dtb");
+        assertTrue(
+                "result convert stderr: " + dtb_to_dts.getStderr(),
+                dtb_to_dts.getStderr().trim().isEmpty());
+        assertTrue(
+                "result convert stdout: " + dtb_to_dts.getStdout(),
+                dtb_to_dts.getStdout().trim().isEmpty());
+
+        // Diff device's DT with the golden DT.
+        CommandResult result_compare =
+                RunUtil.getDefault()
+                        .runTimedCmd(
+                                3000,
+                                "diff",
+                                "-u",
+                                "-w",
+                                "-I",
+                                "kaslr-seed",
+                                "-I",
+                                "instance-id",
+                                "-I",
+                                "rng-seed",
+                                "-I",
+                                "linux,initrd-end",
+                                "-I",
+                                "secretkeeper_public_key",
+                                "dt_dump.dts",
+                                goldenDt);
+
+        assertTrue(
+                "result compare stderr: " + result_compare.getStderr(),
+                result_compare.getStderr().trim().isEmpty());
+        assertTrue(
+                "result compare stdout: " + result_compare.getStdout(),
+                result_compare.getStdout().trim().isEmpty());
+        if (disableRoot) {
+            device.disableAdbRoot();
+        }
+    }
+
     @Before
     public void setUp() throws Exception {
         assumeDeviceIsCapable(getDevice());
