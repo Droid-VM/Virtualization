@@ -254,6 +254,30 @@
       },
       "revId": "c31fe9e2c415a57831c1202b00dca086c0577d47",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b48cf94d_c6932fc4",
+        "filename": "build/vm_attestation/vm_attestation.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-09-05T10:47:22Z",
+      "side": 1,
+      "message": "\u003e can you fix the version problem when doing this? \n\nAddressed in https://r.android.com/q/topic:%22updatable-via-system%22\n\n\u003e We\u0027ll probably want a test as well to make sure it\u0027s set probably - very weird, but still\n\nSG. Added the test for the AVF RKP HAL \u003d\u003e https://r.android.com/3256778. I\u0027ll test this for Trusty VM related VINTF HALs when the feature will be there, filed a bug to track this b/364820126.",
+      "parentUuid": "ef6946c3_8c2b9a00",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 28
+      },
+      "revId": "c31fe9e2c415a57831c1202b00dca086c0577d47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
