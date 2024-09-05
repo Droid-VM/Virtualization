@@ -917,6 +917,15 @@ fn run_vm(
         command.arg("--no-usb");
     }
 
+    // TODO: DELETE ME ONCE PATH IS FIGURED OUT
+    command.arg("--dump-device-tree-blob").arg("/data/local/tmp/dt_dump.dtb");
+
+    cfg_if::cfg_if! {
+        if #[cfg(test)] {
+            command.arg("--dump-device-tree-blob").arg("/data/local/tmp/dt_dump.dtb");
+        }
+    }
+
     let mut memory_mib = config.memory_mib;
 
     if config.protected {
