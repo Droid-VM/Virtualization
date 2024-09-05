@@ -917,6 +917,12 @@ fn run_vm(
         command.arg("--no-usb");
     }
 
+    cfg_if::cfg_if! {
+        if #[cfg(any(target_build_variant = "userdebug", target_build_variant = "eng"))] {
+            command.arg("--dump-device-tree-blob").arg("/data/misc/virtualizationservice/dt_dump.dtb");
+        }
+    }
+
     let mut memory_mib = config.memory_mib;
 
     if config.protected {

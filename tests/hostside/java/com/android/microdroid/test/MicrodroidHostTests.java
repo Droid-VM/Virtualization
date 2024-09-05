@@ -1220,6 +1220,47 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         }
     }
 
+    @Test
+    public void microdroidDeviceTreeCompat() throws Exception {
+        final String configPath = "assets/vm_config.json";
+
+        mMicrodroidDevice =
+                MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(minMemorySize())
+                        .cpuTopology("match_host")
+                        .protectedVm(mProtectedVm)
+                        .gki(mGki)
+                        .name("test_device_tree")
+                        .build(getAndroidDevice());
+
+        assertThat(mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT)).isTrue();
+        assertThat(mMicrodroidDevice.enableAdbRoot()).isTrue();
+        CommandRunner android = new CommandRunner(getDevice());
+        String result_setenforce = tryRunOnHost("timeout", "3s", "adb", "-s", "setenforce", "0");
+        String result =
+                tryRunOnHost(
+                        "timeout",
+                        "3s",
+                        "adb",
+                        "-s",
+                        getDevice().getSerialNumber(),
+                        "pull",
+                        "/data/misc/virtualizationservice/dt_dump.dtb",
+                        "/tmp/dt_dump.dtb");
+        assertThat(result.trim().isEmpty());
+        String result_compare =
+                tryRunOnHost(
+                        "timeout",
+                        "3s",
+                        "dtdiff",
+                        "/tmp/dt_dump.dtb",
+                        "$ANDROID_BUILD_TOP/packages/modules/Virtualization/tests/hostside/java/com/android/microdroid/test/dt_dump_golden.dtb");
+
+        assertThat(result_compare.trim().isEmpty());
+        return;
+    }
+
     @Before
     public void setUp() throws Exception {
         assumeDeviceIsCapable(getDevice());
