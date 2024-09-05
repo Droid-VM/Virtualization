@@ -1220,6 +1220,75 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         }
     }
 
+    @Test
+    public void microdroidDeviceTreeCompat() throws Exception {
+        final String configPath = "assets/vm_config.json";
+        File dumpDtDir = FileUtil.createTempDir("dump_dt");
+
+        mMicrodroidDevice =
+                MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(minMemorySize())
+                        .cpuTopology("match_host")
+                        .protectedVm(mProtectedVm)
+                        .gki(mGki)
+                        .name("test_device_tree")
+                        .build(getAndroidDevice());
+
+        assertThat(mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT)).isTrue();
+        CommandRunner android = new CommandRunner(getDevice());
+        CommandResult pull_dt_dump =
+                RunUtil.getDefault()
+                        .runTimedCmd(
+                                3000,
+                                "adb",
+                                "-s",
+                                getDevice().getSerialNumber(),
+                                "pull",
+                                "/data/local/tmp/dt_dump.dtb",
+                                "dt_dump.dtb");
+        CommandResult dtb_to_dts =
+                RunUtil.getDefault()
+                        .runTimedCmd(
+                                3000,
+                                "dtc",
+                                "-I",
+                                "dtb",
+                                "-O",
+                                "dts",
+                                "-qqq",
+                                "-f",
+                                "-s",
+                                "-o",
+                                "dt_dump.dts",
+                                "dt_dump.dtb");
+        assertTrue(
+                "result compare stderr: " + dtb_to_dts.getStderr(),
+                dtb_to_dts.getStderr().trim().isEmpty());
+        File goldenDt = findTestFile("dt_dump_golden.dts");
+        CommandResult result_compare =
+                RunUtil.getDefault()
+                        .runTimedCmd(
+                                3000,
+                                "diff",
+                                "dt_dump.dts",
+                                goldenDt.getAbsolutePath(),
+                                "-I",
+                                "kaslr-seed",
+                                "-I",
+                                "instance-id",
+                                "-I",
+                                "rng-seed");
+
+        assertTrue(
+                "result compare stderr: " + result_compare.getStderr(),
+                result_compare.getStderr().trim().isEmpty());
+        assertTrue(
+                "result compare stdout: " + result_compare.getStdout(),
+                result_compare.getStdout().trim().isEmpty());
+        return;
+    }
+
     @Before
     public void setUp() throws Exception {
         assumeDeviceIsCapable(getDevice());
