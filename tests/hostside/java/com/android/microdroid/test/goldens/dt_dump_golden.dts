@@ -1,0 +1,743 @@
+/dts-v1/;
+
+/ {
+	#address-cells = <0x02>;
+	#size-cells = <0x02>;
+	compatible = "linux,dummy-virt";
+	interrupt-parent = <0x01>;
+	name = "reference";
+
+	U6_16550A@2e8 {
+		clock-frequency = <0x1c2000>;
+		compatible = "ns16550a";
+		interrupts = <0x00 0x02 0x01>;
+		reg = <0x00 0x2e8 0x00 0x08>;
+	};
+
+	U6_16550A@2f8 {
+		clock-frequency = <0x1c2000>;
+		compatible = "ns16550a";
+		interrupts = <0x00 0x02 0x01>;
+		reg = <0x00 0x2f8 0x00 0x08>;
+	};
+
+	U6_16550A@3e8 {
+		clock-frequency = <0x1c2000>;
+		compatible = "ns16550a";
+		interrupts = <0x00 0x00 0x01>;
+		reg = <0x00 0x3e8 0x00 0x08>;
+	};
+
+	U6_16550A@3f8 {
+		clock-frequency = <0x1c2000>;
+		compatible = "ns16550a";
+		interrupts = <0x00 0x00 0x01>;
+		reg = <0x00 0x3f8 0x00 0x08>;
+	};
+
+	__symbols__ {
+		intc = "/intc";
+	};
+
+	avf {
+		secretkeeper_public_key = [a4 01 01 03 27 20 06 21 58 20 40 5d a0 03 36 64 af ea fd a5 06 86 f4 76 08 58 46 27 b9 6c 03 98 48 2e b4 b1 0e 20 6f f5 81 87];
+
+		untrusted {
+			defer-rollback-protection;
+			instance-id = <0x7be39f33 0x4a07abd4 0x57afe07b 0x8104c9fc 0x7ed1c5e0 0x5e3fa369 0xff6f5114 0x80c71bbf 0xf9c70989 0x26b5b808 0xa525e5b8 0xe358f020 0xac615212 0x3df53d75 0xedecb26 0x4adead90>;
+		};
+	};
+
+	chosen {
+		bootargs = "panic=-1 crashkernel=17M";
+		kaslr-seed = <0xd44a8a1c 0xd80315f0>;
+		linux,initrd-end = <0x81200360>;
+		linux,initrd-start = <0x81000000>;
+		linux,pci-probe-only = <0x01>;
+		rng-seed = <0xf7832675 0x30369f9f 0x2c28c87d 0x93e49223 0x2f184855 0xcda42e65 0x1ca58715 0x8b7031a 0x6790e85 0x30427020 0x18e2b2b7 0x8aa5d6d9 0xfba332e 0xce81c6d1 0x8e3a3e4d 0xae7670c8 0xa26c3311 0x6c1ec330 0x3c8f83d6 0x18d5be7d 0xf1b79ff0 0x88b63378 0x67801903 0xa1133cac 0xe1bfe13f 0x6319ce0a 0x4f8d3e3b 0x810055ff 0xe4289ba7 0x5e71f09 0x31877d7d 0xd974ee49 0x6981123a 0xec0d5980 0xa131a590 0x88820b9f 0x4bd6685a 0x9043f95b 0x1a624155 0x7e281830 0xca114639 0x86f2ab12 0x61c68cab 0xec87292d 0x34b009bf 0x2589e04f 0x4a23b6c3 0x2465f31b 0x39bee54b 0x32f46fc1 0x881286dc 0x83f959b2 0x3f6a27cb 0x6f2e291e 0x381b319c 0x6a3acd88 0x58d04d8 0xa22ac8dd 0x7c43adaa 0x786a8c4c 0xa52b27c8 0x13373d4b 0xfc401c98 0x4715eff2>;
+		stdout-path = "/U6_16550A@3f8";
+	};
+
+	config {
+		kernel-address = <0x80000000>;
+		kernel-size = <0xc91000>;
+	};
+
+	cpufreq {
+		compatible = "virtual,android-v-only-cpufreq";
+		reg = <0x00 0x1040000 0x00 0x40>;
+	};
+
+	cpus {
+		#address-cells = <0x01>;
+		#size-cells = <0x00>;
+
+		cpu-map {
+
+			cluster0 {
+
+				core0 {
+					cpu = <0x100>;
+				};
+
+				core1 {
+					cpu = <0x101>;
+				};
+
+				core2 {
+					cpu = <0x102>;
+				};
+
+				core3 {
+					cpu = <0x103>;
+				};
+			};
+
+			cluster1 {
+
+				core0 {
+					cpu = <0x104>;
+				};
+
+				core1 {
+					cpu = <0x105>;
+				};
+			};
+
+			cluster2 {
+
+				core0 {
+					cpu = <0x106>;
+				};
+
+				core1 {
+					cpu = <0x107>;
+				};
+			};
+		};
+
+		cpu@0 {
+			capacity-dmips-mhz = <0xf9>;
+			compatible = "arm,armv8";
+			device_type = "cpu";
+			enable-method = "psci";
+			operating-points-v2 = <0x1000>;
+			phandle = <0x100>;
+			reg = <0x00>;
+
+			opp_table0 {
+				compatible = "operating-points-v2";
+				phandle = <0x1000>;
+
+				opp1098000000 {
+					opp-hz = <0x00 0x41722680>;
+				};
+
+				opp1197000000 {
+					opp-hz = <0x00 0x4758c540>;
+				};
+
+				opp1328000000 {
+					opp-hz = <0x00 0x4f27ac00>;
+				};
+
+				opp1401000000 {
+					opp-hz = <0x00 0x53819040>;
+				};
+
+				opp1598000000 {
+					opp-hz = <0x00 0x5f3f8b80>;
+				};
+
+				opp1704000000 {
+					opp-hz = <0x00 0x6590fa00>;
+				};
+
+				opp1803000000 {
+					opp-hz = <0x00 0x6b7798c0>;
+				};
+
+				opp300000000 {
+					opp-hz = <0x00 0x11e1a300>;
+				};
+
+				opp574000000 {
+					opp-hz = <0x00 0x22368b80>;
+				};
+
+				opp738000000 {
+					opp-hz = <0x00 0x2bfcfc80>;
+				};
+
+				opp930000000 {
+					opp-hz = <0x00 0x376eac80>;
+				};
+			};
+		};
+
+		cpu@1 {
+			capacity-dmips-mhz = <0xf9>;
+			compatible = "arm,armv8";
+			device_type = "cpu";
+			enable-method = "psci";
+			operating-points-v2 = <0x1001>;
+			phandle = <0x101>;
+			reg = <0x01>;
+
+			opp_table1 {
+				compatible = "operating-points-v2";
+				phandle = <0x1001>;
+
+				opp1098000000 {
+					opp-hz = <0x00 0x41722680>;
+				};
+
+				opp1197000000 {
+					opp-hz = <0x00 0x4758c540>;
+				};
+
+				opp1328000000 {
+					opp-hz = <0x00 0x4f27ac00>;
+				};
+
+				opp1401000000 {
+					opp-hz = <0x00 0x53819040>;
+				};
+
+				opp1598000000 {
+					opp-hz = <0x00 0x5f3f8b80>;
+				};
+
+				opp1704000000 {
+					opp-hz = <0x00 0x6590fa00>;
+				};
+
+				opp1803000000 {
+					opp-hz = <0x00 0x6b7798c0>;
+				};
+
+				opp300000000 {
+					opp-hz = <0x00 0x11e1a300>;
+				};
+
+				opp574000000 {
+					opp-hz = <0x00 0x22368b80>;
+				};
+
+				opp738000000 {
+					opp-hz = <0x00 0x2bfcfc80>;
+				};
+
+				opp930000000 {
+					opp-hz = <0x00 0x376eac80>;
+				};
+			};
+		};
+
+		cpu@2 {
+			capacity-dmips-mhz = <0xf9>;
+			compatible = "arm,armv8";
+			device_type = "cpu";
+			enable-method = "psci";
+			operating-points-v2 = <0x1002>;
+			phandle = <0x102>;
+			reg = <0x02>;
+
+			opp_table2 {
+				compatible = "operating-points-v2";
+				phandle = <0x1002>;
+
+				opp1098000000 {
+					opp-hz = <0x00 0x41722680>;
+				};
+
+				opp1197000000 {
+					opp-hz = <0x00 0x4758c540>;
+				};
+
+				opp1328000000 {
+					opp-hz = <0x00 0x4f27ac00>;
+				};
+
+				opp1401000000 {
+					opp-hz = <0x00 0x53819040>;
+				};
+
+				opp1598000000 {
+					opp-hz = <0x00 0x5f3f8b80>;
+				};
+
+				opp1704000000 {
+					opp-hz = <0x00 0x6590fa00>;
+				};
+
+				opp1803000000 {
+					opp-hz = <0x00 0x6b7798c0>;
+				};
+
+				opp300000000 {
+					opp-hz = <0x00 0x11e1a300>;
+				};
+
+				opp574000000 {
+					opp-hz = <0x00 0x22368b80>;
+				};
+
+				opp738000000 {
+					opp-hz = <0x00 0x2bfcfc80>;
+				};
+
+				opp930000000 {
+					opp-hz = <0x00 0x376eac80>;
+				};
+			};
+		};
+
+		cpu@3 {
+			capacity-dmips-mhz = <0xf9>;
+			compatible = "arm,armv8";
+			device_type = "cpu";
+			enable-method = "psci";
+			operating-points-v2 = <0x1003>;
+			phandle = <0x103>;
+			reg = <0x03>;
+
+			opp_table3 {
+				compatible = "operating-points-v2";
+				phandle = <0x1003>;
+
+				opp1098000000 {
+					opp-hz = <0x00 0x41722680>;
+				};
+
+				opp1197000000 {
+					opp-hz = <0x00 0x4758c540>;
+				};
+
+				opp1328000000 {
+					opp-hz = <0x00 0x4f27ac00>;
+				};
+
+				opp1401000000 {
+					opp-hz = <0x00 0x53819040>;
+				};
+
+				opp1598000000 {
+					opp-hz = <0x00 0x5f3f8b80>;
+				};
+
+				opp1704000000 {
+					opp-hz = <0x00 0x6590fa00>;
+				};
+
+				opp1803000000 {
+					opp-hz = <0x00 0x6b7798c0>;
+				};
+
+				opp300000000 {
+					opp-hz = <0x00 0x11e1a300>;
+				};
+
+				opp574000000 {
+					opp-hz = <0x00 0x22368b80>;
+				};
+
+				opp738000000 {
+					opp-hz = <0x00 0x2bfcfc80>;
+				};
+
+				opp930000000 {
+					opp-hz = <0x00 0x376eac80>;
+				};
+			};
+		};
+
+		cpu@4 {
+			capacity-dmips-mhz = <0x39e>;
+			compatible = "arm,armv8";
+			device_type = "cpu";
+			enable-method = "psci";
+			operating-points-v2 = <0x1004>;
+			phandle = <0x104>;
+			reg = <0x04>;
+
+			opp_table4 {
+				compatible = "operating-points-v2";
+				phandle = <0x1004>;
+
+				opp1024000000 {
+					opp-hz = <0x00 0x3d090000>;
+				};
+
+				opp1197000000 {
+					opp-hz = <0x00 0x4758c540>;
+				};
+
+				opp1328000000 {
+					opp-hz = <0x00 0x4f27ac00>;
+				};
+
+				opp1491000000 {
+					opp-hz = <0x00 0x58dedac0>;
+				};
+
+				opp1663000000 {
+					opp-hz = <0x00 0x631f5dc0>;
+				};
+
+				opp1836000000 {
+					opp-hz = <0x00 0x6d6f2300>;
+				};
+
+				opp1999000000 {
+					opp-hz = <0x00 0x772651c0>;
+				};
+
+				opp2130000000 {
+					opp-hz = <0x00 0x7ef53880>;
+				};
+
+				opp2253000000 {
+					opp-hz = <0x00 0x864a0d40>;
+				};
+
+				opp2348000000 {
+					opp-hz = <0x00 0x8bf3a300>;
+				};
+
+				opp400000000 {
+					opp-hz = <0x00 0x17d78400>;
+				};
+
+				opp553000000 {
+					opp-hz = <0x00 0x20f61c40>;
+				};
+
+				opp696000000 {
+					opp-hz = <0x00 0x297c1e00>;
+				};
+
+				opp799000000 {
+					opp-hz = <0x00 0x2f9fc5c0>;
+				};
+
+				opp910000000 {
+					opp-hz = <0x00 0x363d7f80>;
+				};
+			};
+		};
+
+		cpu@5 {
+			capacity-dmips-mhz = <0x39e>;
+			compatible = "arm,armv8";
+			device_type = "cpu";
+			enable-method = "psci";
+			operating-points-v2 = <0x1005>;
+			phandle = <0x105>;
+			reg = <0x05>;
+
+			opp_table5 {
+				compatible = "operating-points-v2";
+				phandle = <0x1005>;
+
+				opp1024000000 {
+					opp-hz = <0x00 0x3d090000>;
+				};
+
+				opp1197000000 {
+					opp-hz = <0x00 0x4758c540>;
+				};
+
+				opp1328000000 {
+					opp-hz = <0x00 0x4f27ac00>;
+				};
+
+				opp1491000000 {
+					opp-hz = <0x00 0x58dedac0>;
+				};
+
+				opp1663000000 {
+					opp-hz = <0x00 0x631f5dc0>;
+				};
+
+				opp1836000000 {
+					opp-hz = <0x00 0x6d6f2300>;
+				};
+
+				opp1999000000 {
+					opp-hz = <0x00 0x772651c0>;
+				};
+
+				opp2130000000 {
+					opp-hz = <0x00 0x7ef53880>;
+				};
+
+				opp2253000000 {
+					opp-hz = <0x00 0x864a0d40>;
+				};
+
+				opp2348000000 {
+					opp-hz = <0x00 0x8bf3a300>;
+				};
+
+				opp400000000 {
+					opp-hz = <0x00 0x17d78400>;
+				};
+
+				opp553000000 {
+					opp-hz = <0x00 0x20f61c40>;
+				};
+
+				opp696000000 {
+					opp-hz = <0x00 0x297c1e00>;
+				};
+
+				opp799000000 {
+					opp-hz = <0x00 0x2f9fc5c0>;
+				};
+
+				opp910000000 {
+					opp-hz = <0x00 0x363d7f80>;
+				};
+			};
+		};
+
+		cpu@6 {
+			capacity-dmips-mhz = <0x400>;
+			compatible = "arm,armv8";
+			device_type = "cpu";
+			enable-method = "psci";
+			operating-points-v2 = <0x1006>;
+			phandle = <0x106>;
+			reg = <0x06>;
+
+			opp_table6 {
+				compatible = "operating-points-v2";
+				phandle = <0x1006>;
+
+				opp1106000000 {
+					opp-hz = <0x00 0x41ec3880>;
+				};
+
+				opp1277000000 {
+					opp-hz = <0x00 0x4c1d7940>;
+				};
+
+				opp1426000000 {
+					opp-hz = <0x00 0x54ff0880>;
+				};
+
+				opp1582000000 {
+					opp-hz = <0x00 0x5e4b6780>;
+				};
+
+				opp1745000000 {
+					opp-hz = <0x00 0x68029640>;
+				};
+
+				opp1826000000 {
+					opp-hz = <0x00 0x6cd68c80>;
+				};
+
+				opp2048000000 {
+					opp-hz = <0x00 0x7a120000>;
+				};
+
+				opp2188000000 {
+					opp-hz = <0x00 0x826a3b00>;
+				};
+
+				opp2252000000 {
+					opp-hz = <0x00 0x863acb00>;
+				};
+
+				opp2401000000 {
+					opp-hz = <0x00 0x8f1c5a40>;
+				};
+
+				opp2507000000 {
+					opp-hz = <0x00 0x956dc8c0>;
+				};
+
+				opp2630000000 {
+					opp-hz = <0x00 0x9cc29d80>;
+				};
+
+				opp2704000000 {
+					opp-hz = <0x00 0xa12bc400>;
+				};
+
+				opp2802000000 {
+					opp-hz = <0x00 0xa7032080>;
+				};
+
+				opp2850000000 {
+					opp-hz = <0x00 0xa9df8c80>;
+				};
+
+				opp500000000 {
+					opp-hz = <0x00 0x1dcd6500>;
+				};
+
+				opp851000000 {
+					opp-hz = <0x00 0x32b93ac0>;
+				};
+
+				opp984000000 {
+					opp-hz = <0x00 0x3aa6a600>;
+				};
+			};
+		};
+
+		cpu@7 {
+			capacity-dmips-mhz = <0x400>;
+			compatible = "arm,armv8";
+			device_type = "cpu";
+			enable-method = "psci";
+			operating-points-v2 = <0x1007>;
+			phandle = <0x107>;
+			reg = <0x07>;
+
+			opp_table7 {
+				compatible = "operating-points-v2";
+				phandle = <0x1007>;
+
+				opp1106000000 {
+					opp-hz = <0x00 0x41ec3880>;
+				};
+
+				opp1277000000 {
+					opp-hz = <0x00 0x4c1d7940>;
+				};
+
+				opp1426000000 {
+					opp-hz = <0x00 0x54ff0880>;
+				};
+
+				opp1582000000 {
+					opp-hz = <0x00 0x5e4b6780>;
+				};
+
+				opp1745000000 {
+					opp-hz = <0x00 0x68029640>;
+				};
+
+				opp1826000000 {
+					opp-hz = <0x00 0x6cd68c80>;
+				};
+
+				opp2048000000 {
+					opp-hz = <0x00 0x7a120000>;
+				};
+
+				opp2188000000 {
+					opp-hz = <0x00 0x826a3b00>;
+				};
+
+				opp2252000000 {
+					opp-hz = <0x00 0x863acb00>;
+				};
+
+				opp2401000000 {
+					opp-hz = <0x00 0x8f1c5a40>;
+				};
+
+				opp2507000000 {
+					opp-hz = <0x00 0x956dc8c0>;
+				};
+
+				opp2630000000 {
+					opp-hz = <0x00 0x9cc29d80>;
+				};
+
+				opp2704000000 {
+					opp-hz = <0x00 0xa12bc400>;
+				};
+
+				opp2802000000 {
+					opp-hz = <0x00 0xa7032080>;
+				};
+
+				opp2850000000 {
+					opp-hz = <0x00 0xa9df8c80>;
+				};
+
+				opp500000000 {
+					opp-hz = <0x00 0x1dcd6500>;
+				};
+
+				opp851000000 {
+					opp-hz = <0x00 0x32b93ac0>;
+				};
+
+				opp984000000 {
+					opp-hz = <0x00 0x3aa6a600>;
+				};
+			};
+		};
+	};
+
+	intc {
+		#address-cells = <0x02>;
+		#interrupt-cells = <0x03>;
+		#size-cells = <0x02>;
+		compatible = "arm,gic-v3";
+		interrupt-controller;
+		phandle = <0x01>;
+		reg = <0x00 0x3fff0000 0x00 0x10000 0x00 0x3fef0000 0x00 0x100000>;
+	};
+
+	memory {
+		device_type = "memory";
+		reg = <0x00 0x80000000 0x00 0xaa00000>;
+	};
+
+	pci {
+		#address-cells = <0x03>;
+		#interrupt-cells = <0x01>;
+		#size-cells = <0x02>;
+		bus-range = <0x00 0x00>;
+		compatible = "pci-host-cam-generic";
+		device_type = "pci";
+		dma-coherent;
+		interrupt-map = <0x800 0x00 0x00 0x01 0x01 0x00 0x00 0x00 0x04 0x04 0x1000 0x00 0x00 0x01 0x01 0x00 0x00 0x00 0x05 0x04 0x1800 0x00 0x00 0x01 0x01 0x00 0x00 0x00 0x06 0x04 0x2000 0x00 0x00 0x01 0x01 0x00 0x00 0x00 0x07 0x04 0x2800 0x00 0x00 0x01 0x01 0x00 0x00 0x00 0x08 0x04 0x3000 0x00 0x00 0x01 0x01 0x00 0x00 0x00 0x09 0x04 0x3800 0x00 0x00 0x01 0x01 0x00 0x00 0x00 0x0a 0x04 0x4000 0x00 0x00 0x01 0x01 0x00 0x00 0x00 0x0b 0x04 0x4800 0x00 0x00 0x01 0x01 0x00 0x00 0x00 0x0c 0x04>;
+		interrupt-map-mask = <0xf800 0x00 0x00 0x07 0xf800 0x00 0x00 0x07 0xf800 0x00 0x00 0x07 0xf800 0x00 0x00 0x07 0xf800 0x00 0x00 0x07 0xf800 0x00 0x00 0x07 0xf800 0x00 0x00 0x07 0xf800 0x00 0x00 0x07 0xf800 0x00 0x00 0x07>;
+		ranges = <0x3000000 0x00 0x2000000 0x00 0x2000000 0x00 0x2000000 0x43000000 0x00 0x8b200000 0x00 0x8b200000 0xff 0x74e00000>;
+		reg = <0x00 0x10000 0x00 0x1000000>;
+	};
+
+	pclk@3M {
+		#clock-cells = <0x00>;
+		clock-frequency = <0x2fefd8>;
+		compatible = "fixed-clock";
+		phandle = <0x18>;
+	};
+
+	psci {
+		compatible = "arm,psci-1.0\0arm,psci-0.2";
+		method = "hvc";
+	};
+
+	rtc@2000 {
+		arm,primecell-periphid = <0x41030>;
+		clock-names = "apb_pclk";
+		clocks = <0x18>;
+		compatible = "arm,primecell";
+		interrupts = <0x00 0x01 0x04>;
+		reg = <0x00 0x2000 0x00 0x1000>;
+	};
+
+	timer {
+		always-on;
+		compatible = "arm,armv8-timer";
+		interrupts = <0x01 0x0d 0xff08 0x01 0x0e 0xff08 0x01 0x0b 0xff08 0x01 0x0a 0xff08>;
+	};
+
+	vmwdt@3000 {
+		clock-frequency = <0x02>;
+		compatible = "qemu,vcpu-stall-detector";
+		interrupts = <0x01 0x0f 0xff01>;
+		reg = <0x00 0x3000 0x00 0x1000>;
+		timeout-sec = <0x0a>;
+	};
+};
