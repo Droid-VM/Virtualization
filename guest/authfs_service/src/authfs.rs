@@ -89,12 +89,11 @@ impl AuthFs {
             &config.outputDirFdAnnotations,
             debuggable,
         )?;
-        wait_until_authfs_ready(&child, &mountpoint).map_err(|e| {
+        wait_until_authfs_ready(&child, &mountpoint).inspect_err(|_| {
             match child.wait() {
                 Ok(status) => debug!("Wait for authfs: {}", status),
                 Err(e) => warn!("Failed to wait for child: {}", e),
             }
-            e
         })?;
 
         let authfs = AuthFs { mountpoint, process: child };
