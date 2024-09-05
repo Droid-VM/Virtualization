@@ -1220,6 +1220,94 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         }
     }
 
+    @Test
+    public void microdroidDeviceTreeCompat() throws Exception {
+        final String configPath = "assets/vm_config.json";
+        getDevice().enableAdbRoot();
+        String enforce0 =
+                tryRunOnHost(
+                        "timeout",
+                        "3s",
+                        "adb",
+                        "-s",
+                        getDevice().getSerialNumber(),
+                        "shell",
+                        "setenforce",
+                        "0");
+        mMicrodroidDevice =
+                MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(minMemorySize())
+                        .cpuTopology("match_host")
+                        .protectedVm(mProtectedVm)
+                        .gki(mGki)
+                        .name("test_device_tree")
+                        .build(getAndroidDevice());
+
+        assertThat(mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT)).isTrue();
+        CommandRunner android = new CommandRunner(getDevice());
+        CommandResult pull_dt_dump =
+                RunUtil.getDefault()
+                        .runTimedCmd(
+                                3000,
+                                "adb",
+                                "-s",
+                                getDevice().getSerialNumber(),
+                                "pull",
+                                "/data/local/tmp/dt_dump.dtb",
+                                "dt_dump.dtb");
+        CommandResult dtb_to_dts =
+                RunUtil.getDefault()
+                        .runTimedCmd(
+                                3000,
+                                "dtc",
+                                "-I",
+                                "dtb",
+                                "-O",
+                                "dts",
+                                "-qqq",
+                                "-f",
+                                "-s",
+                                "-o",
+                                "-",
+                                "dt_dump.dtb",
+                                ">",
+                                "dt_dump.dts");
+        File goldenDt = findTestFile("dt_dump_golden.dts");
+        CommandResult result_compare =
+                RunUtil.getDefault()
+                        .runTimedCmd(
+                                3000,
+                                "diff",
+                                "dt_dump.dts",
+                                goldenDt.getAbsolutePath(),
+                                "-I",
+                                "kaslr-seed",
+                                "-I",
+                                "instance-id",
+                                "-I",
+                                "rng-seed");
+
+        assertTrue(
+                "result compare stderr: " + result_compare.getStderr(),
+                result_compare.getStderr().trim().isEmpty());
+        assertTrue(
+                "result compare stdout: " + result_compare.getStdout(),
+                result_compare.getStdout().trim().isEmpty());
+        String enforce1 =
+                tryRunOnHost(
+                        "timeout",
+                        "3s",
+                        "adb",
+                        "-s",
+                        getDevice().getSerialNumber(),
+                        "shell",
+                        "setenforce",
+                        "1");
+        getDevice().disableAdbRoot();
+        return;
+    }
+
     @Before
     public void setUp() throws Exception {
         assumeDeviceIsCapable(getDevice());
