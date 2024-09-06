@@ -16,9 +16,7 @@
 
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::Partition::Partition;
 use anyhow::{anyhow, Context, Error};
-use disk::{
-    create_composite_disk, create_disk_file, ImagePartitionType, PartitionInfo, MAX_NESTING_DEPTH,
-};
+use disk::{create_composite_disk, create_disk_file, ImagePartitionType, PartitionInfo};
 use std::fs::{File, OpenOptions};
 use std::os::unix::io::AsRawFd;
 use std::path::{Path, PathBuf};
@@ -126,12 +124,14 @@ fn fd_path_for_file(file: &File) -> PathBuf {
 fn get_partition_size(partition: &File, path: &Path) -> Result<u64, Error> {
     // TODO: Use `context` once disk::Error implements std::error::Error.
     // TODO: Add check for is_sparse_file
-    Ok(create_disk_file(
-        partition.try_clone()?,
-        /* is_sparse_file */ false,
-        MAX_NESTING_DEPTH,
-        path,
-    )
+    Ok(create_disk_file(disk::DiskFileParams {
+        raw_image: partition.try_clone()?,
+        image_path: path.to_owned(),
+        is_read_only: false,
+        is_sparse_file: false,
+        is_overlapped: false,
+        depth: 0,
+    })
     .map_err(|e| anyhow!("Failed to open partition image: {}", e))?
     .get_len()?)
 }
