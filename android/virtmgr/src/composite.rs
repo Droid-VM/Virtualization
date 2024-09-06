@@ -17,7 +17,7 @@
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::Partition::Partition;
 use anyhow::{anyhow, Context, Error};
 use disk::{
-    create_composite_disk, create_disk_file, ImagePartitionType, PartitionInfo, MAX_NESTING_DEPTH,
+    create_composite_disk, open_disk_file, DiskFileParams, ImagePartitionType, PartitionInfo,
 };
 use std::fs::{File, OpenOptions};
 use std::os::unix::io::AsRawFd;
@@ -98,7 +98,7 @@ fn convert_partitions(partitions: &[Partition]) -> Result<(Vec<PartitionInfo>, V
                 .context("Failed to clone partition image file descriptor")?
                 .into();
             let path = fd_path_for_file(&file);
-            let size = get_partition_size(&file, &path)?;
+            let size = get_partition_size(&path)?;
             files.push(file);
 
             Ok(PartitionInfo {
@@ -123,15 +123,17 @@ fn fd_path_for_file(file: &File) -> PathBuf {
 /// Find the size of the partition image in the given file by parsing the header.
 ///
 /// This will work for raw, QCOW2, composite and Android sparse images.
-fn get_partition_size(partition: &File, path: &Path) -> Result<u64, Error> {
+fn get_partition_size(path: &Path) -> Result<u64, Error> {
     // TODO: Use `context` once disk::Error implements std::error::Error.
     // TODO: Add check for is_sparse_file
-    Ok(create_disk_file(
-        partition.try_clone()?,
-        /* is_sparse_file */ false,
-        MAX_NESTING_DEPTH,
-        path,
-    )
+    Ok(open_disk_file(DiskFileParams {
+        path: path.to_owned(),
+        is_read_only: true,
+        is_sparse_file: false,
+        is_overlapped: false,
+        is_direct: false,
+        depth: 0,
+    })
     .map_err(|e| anyhow!("Failed to open partition image: {}", e))?
     .get_len()?)
 }
