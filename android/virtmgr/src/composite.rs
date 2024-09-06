@@ -15,9 +15,9 @@
 //! Functions for creating a composite disk image.
 
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::Partition::Partition;
-use anyhow::{anyhow, Context, Error};
+use anyhow::{Context, Error};
 use disk::{
-    create_composite_disk, create_disk_file, ImagePartitionType, PartitionInfo, MAX_NESTING_DEPTH,
+    create_composite_disk, open_disk_file, DiskFileParams, ImagePartitionType, PartitionInfo,
 };
 use std::fs::{File, OpenOptions};
 use std::os::unix::io::AsRawFd;
@@ -124,14 +124,29 @@ fn fd_path_for_file(file: &File) -> PathBuf {
 ///
 /// This will work for raw, QCOW2, composite and Android sparse images.
 fn get_partition_size(partition: &File, path: &Path) -> Result<u64, Error> {
-    // TODO: Use `context` once disk::Error implements std::error::Error.
-    // TODO: Add check for is_sparse_file
-    Ok(create_disk_file(
-        partition.try_clone()?,
-        /* is_sparse_file */ false,
-        MAX_NESTING_DEPTH,
-        path,
-    )
-    .map_err(|e| anyhow!("Failed to open partition image: {}", e))?
-    .get_len()?)
+    // HACK: Temporarily clear CLOEXEC flag during the `open_disk_file` call.
+    // crosvm expects `/proc/self/fd/...` paths to only come from the cmdline and requires CLOEXEC
+    // to be unset as a kind of validation.
+    let original_flags = nix::fcntl::FdFlag::from_bits_retain(
+        nix::fcntl::fcntl(partition.as_raw_fd(), nix::fcntl::F_GETFD)
+            .context("fcntl(..., F_GETFD) failed")?,
+    );
+    nix::fcntl::fcntl(partition.as_raw_fd(), nix::fcntl::F_SETFD(nix::fcntl::FdFlag::empty()))
+        .context("fcntl(..., F_SETFD, 0) failed")?;
+
+    let len = open_disk_file(DiskFileParams {
+        path: path.to_owned(),
+        is_read_only: true,
+        is_sparse_file: false,
+        is_overlapped: false,
+        is_direct: false,
+        depth: 0,
+    })
+    .context("Failed to open partition image")?
+    .get_len()?;
+
+    nix::fcntl::fcntl(partition.as_raw_fd(), nix::fcntl::F_SETFD(original_flags))
+        .context("fcntl(..., F_SETFD, ...) failed")?;
+
+    Ok(len)
 }
