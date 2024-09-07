@@ -57,7 +57,7 @@ use rpcbinder::RpcServer;
 
 /// external/crosvm
 use base::UnixSeqpacketListener;
-use vm_control::{BalloonControlCommand, VmRequest, VmResponse};
+use vm_control::{BalloonControlCommand, SnapshotCommand, VmRequest, VmResponse};
 
 const CROSVM_PATH: &str = "/apex/com.android.virt/bin/crosvm";
 
@@ -710,6 +710,39 @@ impl VmInstance {
         ) {
             Ok(VmResponse::Ok) => Ok(()),
             e => bail!("Failed to resume: {e:?}"),
+        }
+    }
+
+    /// Snapshot the VM
+    pub fn snapshot(&self, snapshot_path: String) -> Result<(), Error> {
+        let snapshot_request = SnapshotCommand::Take {
+            snapshot_path: snapshot_path.into(),
+            compress_memory: false,
+            encrypt: false,
+        };
+        // Suspend VM
+        if let Err(e) = vm_control::client::handle_request(
+            &VmRequest::SuspendVm,
+            &self.crosvm_control_socket_path,
+        ) {
+            bail!("Failed to suspend VM: {e:?}");
+        };
+
+        // Snapshot VM
+        if let Err(e) = vm_control::client::handle_request(
+            &VmRequest::Snapshot(snapshot_request),
+            &self.crosvm_control_socket_path,
+        ) {
+            bail!("Failed to snapshot: {e:?}");
+        };
+
+        // Resume VM
+        match vm_control::client::handle_request(
+            &VmRequest::ResumeVm,
+            &self.crosvm_control_socket_path,
+        ) {
+            Ok(VmResponse::Ok) => Ok(()),
+            e => bail!("Failed to resume VM: {e:?}"),
         }
     }
 }

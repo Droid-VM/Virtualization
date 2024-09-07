@@ -56,4 +56,7 @@ interface IVirtualMachine {
 
     /** Resumes the suspended VM. */
     void resume();
+
+    /** Snapshots the suspended VM */
+    void snapshot(in @utf8InCpp String snapshotpath);
 }
