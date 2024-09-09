@@ -136,6 +136,7 @@ pub struct CrosvmConfig {
     pub audio_config: Option<AudioConfig>,
     pub no_balloon: bool,
     pub usb_config: UsbConfig,
+    pub restore: Option<String>,
 }
 
 #[derive(Debug)]
@@ -921,6 +922,10 @@ fn run_vm(
         .arg("--disable-sandbox")
         .arg("--cid")
         .arg(config.cid.to_string());
+
+    if let Some(path) = &config.restore {
+        command.arg("--restore").arg(path);
+    }
 
     if system_properties::read_bool("hypervisor.memory_reclaim.supported", false)?
         && !config.no_balloon

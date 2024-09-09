@@ -735,6 +735,7 @@ public final class VirtualMachineConfig {
                                     return usbConfig;
                                 })
                         .orElse(null);
+        config.restore = customImageConfig.getRestore();
         return config;
     }
 

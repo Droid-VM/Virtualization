@@ -744,6 +744,7 @@ impl VirtualizationService {
             audio_config,
             no_balloon: config.noBalloon,
             usb_config,
+            restore: config.restore.clone(),
         };
         let instance = Arc::new(
             VmInstance::new(

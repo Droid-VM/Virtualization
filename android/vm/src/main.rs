@@ -72,6 +72,10 @@ pub struct CommonConfig {
     /// Boost uclamp to stablise results for benchmarks.
     #[arg(short, long)]
     boost_uclamp: bool,
+
+    /// Specifies restore path.
+    #[arg(long)]
+    restore: Option<String>,
 }
 
 impl CommonConfig {

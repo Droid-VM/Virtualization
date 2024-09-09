@@ -106,4 +106,7 @@ parcelable VirtualMachineRawConfig {
 
     /** Enable or disable USB passthrough support */
     @nullable UsbConfig usbConfig;
+
+    /** Path of a snapshot image that will be restored */
+    @nullable @utf8InCpp String restore;
 }

@@ -47,6 +47,7 @@ public class VirtualMachineCustomImageConfig {
     private static final String KEY_TRACKPAD = "trackpad";
     private static final String KEY_AUTO_MEMORY_BALLOON = "auto_memory_balloon";
     private static final String KEY_USB_CONFIG = "usb_config";
+    private static final String KEY_RESTORE = "restore";
 
     @Nullable private final String name;
     @Nullable private final String kernelPath;
@@ -65,6 +66,7 @@ public class VirtualMachineCustomImageConfig {
     private final boolean trackpad;
     private final boolean autoMemoryBalloon;
     @Nullable private final UsbConfig usbConfig;
+    @Nullable private final String restore;
 
     @Nullable
     public Disk[] getDisks() {
@@ -124,6 +126,11 @@ public class VirtualMachineCustomImageConfig {
         return network;
     }
 
+    @Nullable
+    public String getRestore() {
+        return restore;
+    }
+
     /** @hide */
     public VirtualMachineCustomImageConfig(
             String name,
@@ -142,7 +149,8 @@ public class VirtualMachineCustomImageConfig {
             AudioConfig audioConfig,
             boolean trackpad,
             boolean autoMemoryBalloon,
-            UsbConfig usbConfig) {
+            UsbConfig usbConfig,
+            String restore) {
         this.name = name;
         this.kernelPath = kernelPath;
         this.initrdPath = initrdPath;
@@ -160,6 +168,7 @@ public class VirtualMachineCustomImageConfig {
         this.trackpad = trackpad;
         this.autoMemoryBalloon = autoMemoryBalloon;
         this.usbConfig = usbConfig;
+        this.restore = restore;
     }
 
     static VirtualMachineCustomImageConfig from(PersistableBundle customImageConfigBundle) {
@@ -215,6 +224,7 @@ public class VirtualMachineCustomImageConfig {
         PersistableBundle usbConfigPb =
                 customImageConfigBundle.getPersistableBundle(KEY_USB_CONFIG);
         builder.setUsbConfig(UsbConfig.from(usbConfigPb));
+        builder.setRestore(customImageConfigBundle.getString(KEY_RESTORE));
         return builder.build();
     }
 
@@ -276,6 +286,7 @@ public class VirtualMachineCustomImageConfig {
         pb.putPersistableBundle(
                 KEY_USB_CONFIG,
                 Optional.ofNullable(usbConfig).map(uc -> uc.toPersistableBundle()).orElse(null));
+        pb.putString(KEY_RESTORE, this.restore);
         return pb;
     }
 
@@ -378,6 +389,7 @@ public class VirtualMachineCustomImageConfig {
         // TODO(b/363985291): balloon breaks Linux VM behavior
         private boolean autoMemoryBalloon = false;
         private UsbConfig usbConfig;
+        private String restore;
 
         /** @hide */
         public Builder() {}
@@ -485,6 +497,12 @@ public class VirtualMachineCustomImageConfig {
         }
 
         /** @hide */
+        public Builder setRestore(String restore) {
+            this.restore = restore;
+            return this;
+        }
+
+        /** @hide */
         public VirtualMachineCustomImageConfig build() {
             return new VirtualMachineCustomImageConfig(
                     this.name,
@@ -503,7 +521,8 @@ public class VirtualMachineCustomImageConfig {
                     audioConfig,
                     trackpad,
                     autoMemoryBalloon,
-                    usbConfig);
+                    usbConfig,
+                    this.restore);
         }
     }
 
