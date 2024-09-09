@@ -46,6 +46,7 @@ public class VirtualMachineCustomImageConfig {
     private static final String KEY_AUDIO_CONFIG = "audio_config";
     private static final String KEY_TRACKPAD = "trackpad";
     private static final String KEY_AUTO_MEMORY_BALLOON = "auto_memory_balloon";
+    private static final String KEY_RESTORE = "restore";
 
     @Nullable private final String name;
     @Nullable private final String kernelPath;
@@ -63,6 +64,7 @@ public class VirtualMachineCustomImageConfig {
     @Nullable private final GpuConfig gpuConfig;
     private final boolean trackpad;
     private final boolean autoMemoryBalloon;
+    @Nullable private final String restore;
 
     @Nullable
     public Disk[] getDisks() {
@@ -122,6 +124,11 @@ public class VirtualMachineCustomImageConfig {
         return network;
     }
 
+    @Nullable
+    public String getRestore() {
+        return restore;
+    }
+
     /** @hide */
     public VirtualMachineCustomImageConfig(
             String name,
@@ -139,7 +146,8 @@ public class VirtualMachineCustomImageConfig {
             GpuConfig gpuConfig,
             AudioConfig audioConfig,
             boolean trackpad,
-            boolean autoMemoryBalloon) {
+            boolean autoMemoryBalloon,
+            String restore) {
         this.name = name;
         this.kernelPath = kernelPath;
         this.initrdPath = initrdPath;
@@ -156,6 +164,7 @@ public class VirtualMachineCustomImageConfig {
         this.audioConfig = audioConfig;
         this.trackpad = trackpad;
         this.autoMemoryBalloon = autoMemoryBalloon;
+        this.restore = restore;
     }
 
     static VirtualMachineCustomImageConfig from(PersistableBundle customImageConfigBundle) {
@@ -208,6 +217,7 @@ public class VirtualMachineCustomImageConfig {
         builder.setAudioConfig(AudioConfig.from(audioConfigPb));
         builder.useTrackpad(customImageConfigBundle.getBoolean(KEY_TRACKPAD));
         builder.useAutoMemoryBalloon(customImageConfigBundle.getBoolean(KEY_AUTO_MEMORY_BALLOON));
+        builder.setRestore(customImageConfigBundle.getString(KEY_RESTORE));
         return builder.build();
     }
 
@@ -266,6 +276,7 @@ public class VirtualMachineCustomImageConfig {
                 Optional.ofNullable(audioConfig).map(ac -> ac.toPersistableBundle()).orElse(null));
         pb.putBoolean(KEY_TRACKPAD, trackpad);
         pb.putBoolean(KEY_AUTO_MEMORY_BALLOON, autoMemoryBalloon);
+        pb.putString(KEY_RESTORE, this.restore);
         return pb;
     }
 
@@ -362,6 +373,7 @@ public class VirtualMachineCustomImageConfig {
         private boolean trackpad;
         // TODO(b/363985291): balloon breaks Linux VM behavior
         private boolean autoMemoryBalloon = false;
+        private String restore;
 
         /** @hide */
         public Builder() {}
@@ -463,6 +475,12 @@ public class VirtualMachineCustomImageConfig {
         }
 
         /** @hide */
+        public Builder setRestore(String restore) {
+            this.restore = restore;
+            return this;
+        }
+
+        /** @hide */
         public VirtualMachineCustomImageConfig build() {
             return new VirtualMachineCustomImageConfig(
                     this.name,
@@ -480,7 +498,8 @@ public class VirtualMachineCustomImageConfig {
                     gpuConfig,
                     audioConfig,
                     trackpad,
-                    autoMemoryBalloon);
+                    autoMemoryBalloon,
+                    this.restore);
         }
     }
 

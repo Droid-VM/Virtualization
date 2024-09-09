@@ -68,6 +68,8 @@ pub struct VmConfig {
     pub devices: Vec<PathBuf>,
     /// The serial device for VM console input.
     pub console_input_device: Option<String>,
+    /// Path of image to restore
+    pub restore: Option<String>,
 }
 
 impl VmConfig {
@@ -128,6 +130,7 @@ impl VmConfig {
                 })
                 .collect::<Result<_>>()?,
             consoleInputDevice: self.console_input_device.clone(),
+            restore: self.restore.clone(),
             ..Default::default()
         })
     }

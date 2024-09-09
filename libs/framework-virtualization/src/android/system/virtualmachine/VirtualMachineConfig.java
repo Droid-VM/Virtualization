@@ -725,6 +725,7 @@ public final class VirtualMachineConfig {
                         .map(ac -> ac.toParcelable())
                         .orElse(null);
         config.noBalloon = !customImageConfig.useAutoMemoryBalloon();
+        config.restore = customImageConfig.getRestore();
         return config;
     }
 

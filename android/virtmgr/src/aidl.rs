@@ -623,6 +623,7 @@ impl VirtualizationService {
             gpu_config,
             audio_config,
             no_balloon: config.noBalloon,
+            restore: config.restore.clone(),
         };
         let instance = Arc::new(
             VmInstance::new(

@@ -102,4 +102,7 @@ parcelable VirtualMachineRawConfig {
     @nullable AudioConfig audioConfig;
 
     boolean noBalloon;
+
+    /** Path of a snapshot image that will be restored */
+    @nullable @utf8InCpp String restore;
 }

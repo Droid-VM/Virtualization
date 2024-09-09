@@ -145,4 +145,7 @@ parcelable VirtualMachineAppConfig {
 
     /** Enable boost UClamp for less variance during testing/benchmarking */
     boolean boostUclamp;
+
+    /** Snapshot image path to restore VM */
+    @nullable String restore;
 }

@@ -195,6 +195,7 @@ pub fn command_run_app(config: RunAppConfig) -> Result<(), Error> {
         osName: os_name,
         hugePages: config.common.hugepages,
         boostUclamp: config.common.boost_uclamp,
+        restore: config.common.restore.clone(),
     });
     run(
         service.as_ref(),
