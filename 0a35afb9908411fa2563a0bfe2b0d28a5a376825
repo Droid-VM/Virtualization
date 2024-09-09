@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e68e29d2_e5448e90",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-09T23:29:49Z",
+      "side": 1,
+      "message": "`VmRequest::Snapshot` automatically does suspend-resume, so you can delete the explicit suspend-resume calls",
+      "range": {
+        "startLine": 723,
+        "startChar": 0,
+        "endLine": 729,
+        "endChar": 10
+      },
+      "revId": "0a35afb9908411fa2563a0bfe2b0d28a5a376825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab972cce_01a69544",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-09T23:29:49Z",
+      "side": 1,
+      "message": "this is a bad pattern. looks like it is endemic here, but we shouldn\u0027t proliferate it more\n\nshould use `anyhow::Context`:\n\n```\nvm_control::client::handle_request(\n            \u0026VmRequest::Snapshot(snapshot_request),\n            \u0026self.crosvm_control_socket_path,\n        ).context(\"Failed to snapshot\")?;\n```",
+      "revId": "0a35afb9908411fa2563a0bfe2b0d28a5a376825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
