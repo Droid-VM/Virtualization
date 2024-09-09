@@ -58,7 +58,7 @@ use android_hardware_security_authgraph::aidl::android::hardware::security::auth
     Key::Key, PubKey::PubKey, SessionIdSignature::SessionIdSignature, SessionInfo::SessionInfo,
     SessionInitiationInfo::SessionInitiationInfo,
 };
-use anyhow::{anyhow, bail, Context, Result};
+use anyhow::{anyhow, bail, Context, Result, ensure};
 use apkverify::{HashAlgorithm, V4Signature};
 use avflog::LogResult;
 use binder::{
@@ -852,6 +852,7 @@ fn maybe_create_device_tree_overlay(
     let mut untrusted_props = Vec::with_capacity(2);
     if cfg!(llpvm_changes) {
         instance_id = extract_instance_id(config);
+        ensure!(instance_id != [0u8; 64], "Instance ID should be non-zero");
         untrusted_props.push((cstr!("instance-id"), &instance_id[..]));
         let want_updatable = extract_want_updatable(config);
         if want_updatable && is_secretkeeper_supported() {
