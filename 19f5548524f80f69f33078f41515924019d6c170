@@ -16,6 +16,69 @@
       "message": "Hi Seth, PTAL",
       "revId": "19f5548524f80f69f33078f41515924019d6c170",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "508ca8ac_a2ad0e0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2024-09-10T23:32:32Z",
+      "side": 1,
+      "message": "Please add the \"point of divergence\" to your diagram. That way we can show where the marker is added while also showing that TEE components load in parallel (so far as the chain is concerned) and that part of the chain doesn\u0027t have any such marker.",
+      "revId": "19f5548524f80f69f33078f41515924019d6c170",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9dc1d06_34ab24b3",
+        "filename": "docs/vm_remote_attestation.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2024-09-10T23:32:32Z",
+      "side": 1,
+      "message": "\"must use\" seems better",
+      "range": {
+        "startLine": 121,
+        "startChar": 17,
+        "endLine": 121,
+        "endChar": 28
+      },
+      "revId": "19f5548524f80f69f33078f41515924019d6c170",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0682c221_bca68bf5",
+        "filename": "docs/vm_remote_attestation.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2024-09-10T23:32:32Z",
+      "side": 1,
+      "message": "We should state when they must embed the marker. As stated, I think it\u0027s a bit too vague.\n\nHow about replacing \"from an early boot stage\" with \"starting at the point of divergence between loading TEE and non-TEE components\". (or similar)",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 24
+      },
+      "revId": "19f5548524f80f69f33078f41515924019d6c170",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
