@@ -118,8 +118,29 @@ it, you only need to provide a valid VM DICE chain satisfying the following
 requirements:
 
 - The DICE chain must have a UDS-rooted public key registered at the RKP factory.
-- The DICE chain should have RKP VM markers that help identify RKP VM as required
-  by the [remote provisioning HAL][rkp-hal-markers].
+- The DICE chain should have [RKP VM markers][rkpvm-marker] to help identify the
+RKP VM as required by the [remote provisioning HAL][rkp-hal].
+
+### RKP VM marker
+
+Vendors must embed an [RKP VM marker][rkpvm-marker] in their DICE certificates
+from an early boot stage continuously until the last DICE certificate
+preceding [pvmfw][pvmfw].
+
+Pvmfw will add an RKP VM marker when launching an RKP VM. The continuous
+presence of the RKP VM marker allows the RKP server to distinguish RKP VM DICE
+chains from other DICE chains. It also ensures that if an attacker launches a
+malicious guest OS or payload, their DICE chain will not be recognized as an
+RKP VM DICE chain because it lacks the RKP VM marker added by pvmfw.
+
+![][rkpvm-dice-chain]
+
+[pvmfw]: ../guest/pvmfw
+[rkpvm-dice-chain]: img/rkpvm-dice-chain.png
+[rkpvm-marker]: https://pigweed.googlesource.com/open-dice/+/HEAD/docs/android.md#configuration-descriptor
+[rkp-hal]: https://android.googlesource.com/platform/hardware/interfaces/+/main/security/rkp/README.md#hal
+
+## To Disable It
 
 The feature is enabled by default. To disable it, you have two options:
 
@@ -132,5 +153,3 @@ The feature is enabled by default. To disable it, you have two options:
 
 If you don't set any of these variables, VM remote attestation will be enabled
 by default.
-
-[rkp-hal-markers]: https://android.googlesource.com/platform/hardware/interfaces/+/main/security/rkp/README.md#hal
