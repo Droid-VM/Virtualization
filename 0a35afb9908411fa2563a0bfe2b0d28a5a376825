@@ -101,6 +101,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e5e411f_cd446789",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-10T18:27:09Z",
+      "side": 1,
+      "message": "(it turns out that you can\u0027t use `Context` here because the error type is `()`)",
+      "parentUuid": "e7d5c354_7d6cfcff",
+      "revId": "0a35afb9908411fa2563a0bfe2b0d28a5a376825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26c6d0f6_677e899b",
@@ -138,6 +156,30 @@
       "side": 1,
       "message": "If snapshot is called with a running VM, we want the VM to go back to the same running state.\n\nI removed this code as it\u0027s done within crosvm.",
       "parentUuid": "26c6d0f6_677e899b",
+      "range": {
+        "startLine": 739,
+        "startChar": 8,
+        "endLine": 739,
+        "endChar": 20
+      },
+      "revId": "0a35afb9908411fa2563a0bfe2b0d28a5a376825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd1f719d_46b43f35",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 739,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-10T18:27:09Z",
+      "side": 1,
+      "message": "Note that we actually have suspend/resume AIDL methods here. If those were used to suspend the VM, then you did a snapshot, the previous version of this CL would have incorrectly resumed the VM early.",
+      "parentUuid": "b34da00c_068ba0a0",
       "range": {
         "startLine": 739,
         "startChar": 8,
@@ -232,6 +274,30 @@
       "side": 1,
       "message": "I don\u0027t quite understand?\n\nSnapshot will create a new directory with the path provided to it. If the directory or a file already exists with the passed path, snapshot will fail.\n\nWould there be a benefit to passing an FD?",
       "parentUuid": "75655b9e_34684d11",
+      "range": {
+        "startLine": 61,
+        "startChar": 32,
+        "endLine": 61,
+        "endChar": 51
+      },
+      "revId": "0a35afb9908411fa2563a0bfe2b0d28a5a376825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0699bff_331235e5",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualMachine.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-10T18:27:09Z",
+      "side": 1,
+      "message": "I think the trouble is that the snapshot files will be owned (at the filesystem level) by virtmgr instead of the calling user. If done this way, then USER_A might call `snapshot(\"/foo\")` and then USER_B could call restore `restore(\"/foo\")` and it wouldn\u0027t run afoul of any permissions checks, which is a bad thing.\n\nThe crosvm snapshot is a whole directory worth of files, so using an FD. Might want to add crosvm support for outputting directly as an archive file. Maybe can snapshot to a tmp dir and then zip the results into the user provide FD as a workaround.",
+      "parentUuid": "ec01f9a4_08486a23",
       "range": {
         "startLine": 61,
         "startChar": 32,
