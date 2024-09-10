@@ -43,6 +43,93 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "efd7f76f_cb26bb5c",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-09-10T00:16:09Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "ab972cce_01a69544",
+      "revId": "0a35afb9908411fa2563a0bfe2b0d28a5a376825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26c6d0f6_677e899b",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 739,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-09-10T00:16:09Z",
+      "side": 1,
+      "message": "Why do we resume inside of function snapshot?",
+      "range": {
+        "startLine": 739,
+        "startChar": 8,
+        "endLine": 739,
+        "endChar": 20
+      },
+      "revId": "0a35afb9908411fa2563a0bfe2b0d28a5a376825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fe49c09_4ded29b9",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-09-10T00:16:09Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 745,
+        "startChar": 17,
+        "endLine": 745,
+        "endChar": 21
+      },
+      "revId": "0a35afb9908411fa2563a0bfe2b0d28a5a376825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75655b9e_34684d11",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualMachine.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-09-10T00:16:09Z",
+      "side": 1,
+      "message": "Can this be an FD? With path, virtmgr would own the \"all\" snapshot files for different VMs.",
+      "range": {
+        "startLine": 61,
+        "startChar": 32,
+        "endLine": 61,
+        "endChar": 51
+      },
+      "revId": "0a35afb9908411fa2563a0bfe2b0d28a5a376825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "75f3b36e_c9735a90",
         "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 2
