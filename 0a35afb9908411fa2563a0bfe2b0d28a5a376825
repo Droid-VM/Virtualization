@@ -310,6 +310,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2a02a707_e4e334a8",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualMachine.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-09-10T23:22:04Z",
+      "side": 1,
+      "message": "Yeah, as Frederick said. Snapshot as an archive sounds good as well. Or this FD could be a dir fd, which is suboptimal because crosvm still has to have the right to create files in it.\n\nI feel fine with handling this case in a follow-up change, if it is going to be big. Up to you.",
+      "parentUuid": "e0699bff_331235e5",
+      "range": {
+        "startLine": 61,
+        "startChar": 32,
+        "endLine": 61,
+        "endChar": 51
+      },
+      "revId": "0a35afb9908411fa2563a0bfe2b0d28a5a376825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "75f3b36e_c9735a90",
         "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 2
