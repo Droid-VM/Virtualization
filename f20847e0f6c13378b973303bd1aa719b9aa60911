@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d0ead59_d55b4d79",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-09-10T11:34:01Z",
+      "side": 1,
+      "message": "nit: WDYT of the flatter\n```\nmatch avf.delprop(vendor_digest) {\n    Ok(()) | Err(FdtError::NotFound) \u003d\u003e {}\n    Err(e) \u003d\u003e return Err(anyhow!(\"... {e:?}\")),\n}\n```\n?",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 21
+      },
+      "revId": "f20847e0f6c13378b973303bd1aa719b9aa60911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "682e680e_d9933120",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-09-10T11:34:01Z",
+      "side": 1,
+      "message": "Isn\u0027t this `if` superfluous, as the `for` will no-op if `trusted_props` is empty?",
+      "range": {
+        "startLine": 108,
+        "startChar": 8,
+        "endLine": 108,
+        "endChar": 38
+      },
+      "revId": "f20847e0f6c13378b973303bd1aa719b9aa60911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
