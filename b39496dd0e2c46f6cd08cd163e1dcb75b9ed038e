@@ -190,6 +190,30 @@
       },
       "revId": "b39496dd0e2c46f6cd08cd163e1dcb75b9ed038e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d94331a_5e4f4ed2",
+        "filename": "android/virtmgr/src/dt_overlay.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-09-10T15:44:45Z",
+      "side": 1,
+      "message": "\u003e Why not use RELEASE_AVF_ENABLE_VENDOR_MODULES\n\nThis flag is already released to public, we shouldn\u0027t add any new code behind that flag. In fact, I\u0027m going to clean up flags that we released as part of Android V pretty soon.\n\n\u003e Also, once that has happened, we don\u0027t want to risk \"unfixing\" non-debuggable pVMs using vendor images if at some point, we need to \"unflip\" DA (which is not unlikely), right?\n\nSorry, I don\u0027t understand this sentence :) What do you mean by unflipping the flag? Once the flag is released as part of one of the Android releases, there is no way to unflip it.\n\nIn case of this patch, it fixes the issue that only debuggable VMs are allowed to request microdroid vendor partition (this issue will block us from shipping TPU as assignable device), hence I suggested Matt to reuse the RELEASE_AVF_ENABLE_TPU_ASSGINABLE_DEVICE flag. I don\u0027t think that this change alone justifies adding a new flag, and at the same point I don\u0027t think that this change should go unflagged, since then it will be released in the next QPR, and for Android V we decided that we should only support microdroid vendor partition on debuggable VMs.",
+      "parentUuid": "4ded85cb_84976c31",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 6
+      },
+      "revId": "b39496dd0e2c46f6cd08cd163e1dcb75b9ed038e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
