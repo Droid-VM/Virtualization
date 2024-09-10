@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "010a05a0_b4c21b33",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-09-10T17:53:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e68e29d2_e5448e90",
+      "range": {
+        "startLine": 723,
+        "startChar": 0,
+        "endLine": 729,
+        "endChar": 10
+      },
+      "revId": "0a35afb9908411fa2563a0bfe2b0d28a5a376825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab972cce_01a69544",
@@ -59,6 +83,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7d5c354_7d6cfcff",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-09-10T17:53:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efd7f76f_cb26bb5c",
+      "revId": "0a35afb9908411fa2563a0bfe2b0d28a5a376825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26c6d0f6_677e899b",
@@ -72,6 +114,30 @@
       "writtenOn": "2024-09-10T00:16:09Z",
       "side": 1,
       "message": "Why do we resume inside of function snapshot?",
+      "range": {
+        "startLine": 739,
+        "startChar": 8,
+        "endLine": 739,
+        "endChar": 20
+      },
+      "revId": "0a35afb9908411fa2563a0bfe2b0d28a5a376825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b34da00c_068ba0a0",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 739,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-09-10T17:53:22Z",
+      "side": 1,
+      "message": "If snapshot is called with a running VM, we want the VM to go back to the same running state.\n\nI removed this code as it\u0027s done within crosvm.",
+      "parentUuid": "26c6d0f6_677e899b",
       "range": {
         "startLine": 739,
         "startChar": 8,
@@ -105,6 +171,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e182ffdd_539f1e6f",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-09-10T17:53:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9fe49c09_4ded29b9",
+      "range": {
+        "startLine": 745,
+        "startChar": 17,
+        "endLine": 745,
+        "endChar": 21
+      },
+      "revId": "0a35afb9908411fa2563a0bfe2b0d28a5a376825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75655b9e_34684d11",
@@ -118,6 +208,30 @@
       "writtenOn": "2024-09-10T00:16:09Z",
       "side": 1,
       "message": "Can this be an FD? With path, virtmgr would own the \"all\" snapshot files for different VMs.",
+      "range": {
+        "startLine": 61,
+        "startChar": 32,
+        "endLine": 61,
+        "endChar": 51
+      },
+      "revId": "0a35afb9908411fa2563a0bfe2b0d28a5a376825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec01f9a4_08486a23",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualMachine.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-09-10T17:53:22Z",
+      "side": 1,
+      "message": "I don\u0027t quite understand?\n\nSnapshot will create a new directory with the path provided to it. If the directory or a file already exists with the passed path, snapshot will fail.\n\nWould there be a benefit to passing an FD?",
+      "parentUuid": "75655b9e_34684d11",
       "range": {
         "startLine": 61,
         "startChar": 32,
