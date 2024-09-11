@@ -166,6 +166,30 @@
       },
       "revId": "254ffa405a5e80029b26bda1e84156cf004c6d65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2df447e4_63d35490",
+        "filename": "build/Android.bp",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-09-11T08:38:08Z",
+      "side": 1,
+      "message": "aosp/3261456. A quick search doesn\u0027t return any references to `TPU_ASSGINABLE` in `system/core` or `packages/modules/Virtualization`, but it might be worth double checking (or LMK if you know of existing references to that flag).  Feel free to just resolve this if its all good.",
+      "parentUuid": "47d21c9a_9f507b47",
+      "range": {
+        "startLine": 71,
+        "startChar": 16,
+        "endLine": 71,
+        "endChar": 37
+      },
+      "revId": "254ffa405a5e80029b26bda1e84156cf004c6d65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
