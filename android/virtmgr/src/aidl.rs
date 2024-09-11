@@ -19,7 +19,7 @@ use crate::atom::{write_vm_booted_stats, write_vm_creation_stats};
 use crate::composite::make_composite_image;
 use crate::crosvm::{AudioConfig, CrosvmConfig, DiskFile, DisplayConfig, GpuConfig, InputDeviceOption, PayloadState, UsbConfig, VmContext, VmInstance, VmState};
 use crate::debug_config::DebugConfig;
-use crate::dt_overlay::{create_device_tree_overlay, VM_DT_OVERLAY_MAX_SIZE, VM_DT_OVERLAY_PATH};
+use crate::dt_overlay::{create_device_tree_overlay, DeviceTreeOverlayEntries, VM_DT_OVERLAY_MAX_SIZE, VM_DT_OVERLAY_PATH};
 use crate::payload::{add_microdroid_payload_images, add_microdroid_system_images, add_microdroid_vendor_image};
 use crate::selinux::{getfilecon, SeContext};
 use android_os_permissions_aidl::aidl::android::os::IPermissionController;
@@ -868,7 +868,7 @@ fn maybe_create_device_tree_overlay(
         let dt_output = temporary_directory.join(VM_DT_OVERLAY_PATH);
         let mut data = [0_u8; VM_DT_OVERLAY_MAX_SIZE];
         let fdt =
-            create_device_tree_overlay(&mut data, host_ref_dt, &untrusted_props, &trusted_props)
+            create_device_tree_overlay(&mut data, DeviceTreeOverlayEntries::default(), &untrusted_props, &trusted_props)
                 .map_err(|e| anyhow!("Failed to create DT overlay, {e:?}"))
                 .or_service_specific_exception(-1)?;
         fs::write(&dt_output, fdt.as_slice()).or_service_specific_exception(-1)?;
