@@ -16,15 +16,29 @@
 
 use anyhow::{anyhow, Result};
 use cstr::cstr;
-use fsfdt::FsFdt;
 use libfdt::{Fdt, FdtError};
 use std::ffi::CStr;
-use std::path::Path;
 
 pub(crate) const AVF_NODE_NAME: &CStr = cstr!("avf");
 pub(crate) const UNTRUSTED_NODE_NAME: &CStr = cstr!("untrusted");
 pub(crate) const VM_DT_OVERLAY_PATH: &str = "vm_dt_overlay.dtbo";
 pub(crate) const VM_DT_OVERLAY_MAX_SIZE: usize = 2000;
+
+#[allow(dead_code)]
+#[derive(Default)]
+pub(crate) struct DeviceTreeOverlayEntries<'a> {
+    vendor_hashtree_descriptor_root_digest: Option<&'a [u8]>,
+    secret_keeper_key: Option<&'a [u8]>,
+    instance_id: Option<&'a [u8]>,
+}
+
+impl<'a> DeviceTreeOverlayEntries<'a> {
+    fn is_empty(&self) -> bool {
+        self.vendor_hashtree_descriptor_root_digest.is_none()
+            && self.secret_keeper_key.is_none()
+            && self.instance_id.is_none()
+    }
+}
 
 /// Create a Device tree overlay containing the provided proc style device tree & properties!
 /// # Arguments
@@ -51,11 +65,11 @@ pub(crate) const VM_DT_OVERLAY_MAX_SIZE: usize = 2000;
 /// ```
 pub(crate) fn create_device_tree_overlay<'a>(
     buffer: &'a mut [u8],
-    dt_path: Option<&'a Path>,
+    dt_overlay_entries: DeviceTreeOverlayEntries,
     untrusted_props: &[(&'a CStr, &'a [u8])],
     trusted_props: &[(&'a CStr, &'a [u8])],
 ) -> Result<&'a mut Fdt> {
-    if dt_path.is_none() && untrusted_props.is_empty() && trusted_props.is_empty() {
+    if dt_overlay_entries.is_empty() && untrusted_props.is_empty() && trusted_props.is_empty() {
         return Err(anyhow!("Expected at least one device tree addition"));
     }
 
@@ -86,9 +100,9 @@ pub(crate) fn create_device_tree_overlay<'a>(
     }
 
     // Read dt_path from host DT and overlay onto fdt.
-    if let Some(path) = dt_path {
-        fdt.overlay_onto(cstr!("/fragment@0/__overlay__"), path)?;
-    }
+    // if let Some(path) = dt_path {
+    //     fdt.overlay_onto(cstr!("/fragment@0/__overlay__"), path)?;
+    // }
 
     if cfg!(tpu_assignable_device) {
         let mut avf = fdt
