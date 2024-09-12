@@ -15,7 +15,10 @@
  */
 package com.android.microdroid.test.device;
 
+import static android.content.pm.PackageManager.FEATURE_AUTOMOTIVE;
+import static android.content.pm.PackageManager.FEATURE_LEANBACK;
 import static android.content.pm.PackageManager.FEATURE_VIRTUALIZATION_FRAMEWORK;
+import static android.content.pm.PackageManager.FEATURE_WATCH;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.TruthJUnit.assume;
@@ -68,8 +71,7 @@ public abstract class MicrodroidDeviceTestBase {
 
     protected static final String KERNEL_VERSION = SystemProperties.get("ro.kernel.version");
     protected static final Set<String> SUPPORTED_GKI_VERSIONS =
-            Collections.unmodifiableSet(
-                    new HashSet(Arrays.asList("android14-6.1-pkvm_experimental")));
+            Collections.unmodifiableSet(new HashSet(Arrays.asList("android15-6.6")));
 
     public static boolean isCuttlefish() {
         return getDeviceProperties().isCuttlefish();
@@ -222,6 +224,18 @@ public abstract class MicrodroidDeviceTestBase {
                 .isFalse();
     }
 
+<<<<<<< HEAD   (fb58d4 Merge cherrypicks of ['android-review.googlesource.com/31488)
+=======
+    protected void assumeVsrCompliant() {
+        boolean featureCheck = mCtx.getPackageManager().hasSystemFeature(FEATURE_WATCH) ||
+                               mCtx.getPackageManager().hasSystemFeature(FEATURE_AUTOMOTIVE) ||
+                               mCtx.getPackageManager().hasSystemFeature(FEATURE_LEANBACK);
+        assume().withMessage("This device is not VSR compliant")
+                .that(featureCheck)
+                .isFalse();
+    }
+
+>>>>>>> BRANCH (9c237b [vsr-test] Relax the pVM DICE chain verification test)
     protected boolean isGsi() {
         return new File("/system/system_ext/etc/init/init.gsi.rc").exists();
     }
@@ -556,6 +570,7 @@ public abstract class MicrodroidDeviceTestBase {
         public int mFileMode;
         public int mMountFlags;
         public String mConsoleInput;
+        public byte[] mInstanceSecret;
 
         public void assertNoException() {
             if (mException != null) {
