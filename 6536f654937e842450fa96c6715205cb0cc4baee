@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bbcf8f5_f280b126",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-12T18:26:15Z",
+      "side": 1,
+      "message": "No use case, I\u0027m just trying to get the latest crosvm changes to work. I iterated through a lot of failed ideas to keep using `disk::open_disk_file` from virtmgr before realizing that probably not all the image types actually need to be supported and so forking would be easiest.",
+      "parentUuid": "5c1b555f_a84f3782",
+      "range": {
+        "startLine": 9,
+        "startChar": 57,
+        "endLine": 10,
+        "endChar": 16
+      },
+      "revId": "6536f654937e842450fa96c6715205cb0cc4baee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67cc6a7f_d00a04df",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-09-12T03:46:38Z",
       "side": 1,
       "message": "Where\u0027s the source of truth for this? Do you mind adding a link to it?",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 13
+      },
+      "revId": "6536f654937e842450fa96c6715205cb0cc4baee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e77b9198_1a809aba",
+        "filename": "android/virtmgr/src/composite.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-12T18:26:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67cc6a7f_d00a04df",
       "range": {
         "startLine": 133,
         "startChar": 0,
