@@ -24,6 +24,7 @@ aidl_interface {
             apex_available: [
                 "com.android.virt",
                 "com.android.compos",
+                "//apex_available:platform",
             ],
         },
         rust: {
@@ -144,6 +145,7 @@ aidl_interface {
             apex_available: [
                 "com.android.virt",
                 "com.android.compos",
+                "//apex_available:platform",
             ],
         },
         rust: {
