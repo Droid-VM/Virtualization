@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6a2856a_56082ac2",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 921,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-16T20:09:27Z",
+      "side": 1,
+      "message": "if you can pass crosvm an FD, maybe we don\u0027t need the `setenforce 0`. virtmgr should have permissions to write to the filesystem somewhere",
+      "range": {
+        "startLine": 921,
+        "startChar": 47,
+        "endLine": 921,
+        "endChar": 76
+      },
+      "revId": "87a71333903cf96a8dfc18194847b948680d48e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcc4f3d8_881b9fa4",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 921,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-16T20:09:27Z",
+      "side": 1,
+      "message": "are you thinking of adding an option to the config to pass this through?",
+      "revId": "87a71333903cf96a8dfc18194847b948680d48e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64c6371c_31ed25b4",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 924,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-16T20:09:27Z",
+      "side": 1,
+      "message": "`cfg(test)` is only true for unit tests. the kind of test we are writing here uses the normal virtmgr binary, so this trick can\u0027t work",
+      "range": {
+        "startLine": 924,
+        "startChar": 8,
+        "endLine": 924,
+        "endChar": 25
+      },
+      "revId": "87a71333903cf96a8dfc18194847b948680d48e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8b64ea1_8f20e5af",
+        "filename": "tests/hostside/java/com/android/microdroid/test/goldens/dt_dump_golden.dtb",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-16T20:09:27Z",
+      "side": 1,
+      "message": "can you use the text format (i.e. \"dts\") for the checked in version",
+      "revId": "87a71333903cf96a8dfc18194847b948680d48e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
