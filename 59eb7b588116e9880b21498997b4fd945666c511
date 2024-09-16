@@ -22,6 +22,29 @@
       },
       "revId": "59eb7b588116e9880b21498997b4fd945666c511",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d0cbeef_1b28a45e",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1288,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-09-16T11:55:23Z",
+      "side": 1,
+      "message": "Please add a comment why we are using 127 here. I guess you can just copy the one from the commit message?",
+      "range": {
+        "startLine": 1288,
+        "startChar": 45,
+        "endLine": 1288,
+        "endChar": 48
+      },
+      "revId": "59eb7b588116e9880b21498997b4fd945666c511",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
