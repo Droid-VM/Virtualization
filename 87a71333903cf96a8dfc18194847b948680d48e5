@@ -64,6 +64,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb4ee9f1_6287e863",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 924,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-09-18T23:39:26Z",
+      "side": 1,
+      "message": "That\u0027s the reason behind the duplicate of the command (to get the test running). I\u0027ll add the option of dump-dt to config and remove any cfg_if checks here.",
+      "parentUuid": "64c6371c_31ed25b4",
+      "range": {
+        "startLine": 924,
+        "startChar": 8,
+        "endLine": 924,
+        "endChar": 25
+      },
+      "revId": "87a71333903cf96a8dfc18194847b948680d48e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8b64ea1_8f20e5af",
@@ -77,6 +101,24 @@
       "writtenOn": "2024-09-16T20:09:27Z",
       "side": 1,
       "message": "can you use the text format (i.e. \"dts\") for the checked in version",
+      "revId": "87a71333903cf96a8dfc18194847b948680d48e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0301fe6_523cd16a",
+        "filename": "tests/hostside/java/com/android/microdroid/test/goldens/dt_dump_golden.dtb",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-09-18T23:39:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8b64ea1_8f20e5af",
       "revId": "87a71333903cf96a8dfc18194847b948680d48e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
