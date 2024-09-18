@@ -136,6 +136,7 @@ pub struct CrosvmConfig {
     pub audio_config: Option<AudioConfig>,
     pub no_balloon: bool,
     pub usb_config: UsbConfig,
+    pub dump_dt: Option<String>,
 }
 
 #[derive(Debug)]
@@ -917,13 +918,8 @@ fn run_vm(
         command.arg("--no-usb");
     }
 
-    // TODO: DELETE ME ONCE PATH IS FIGURED OUT
-    command.arg("--dump-device-tree-blob").arg("/data/local/tmp/dt_dump.dtb");
-
-    cfg_if::cfg_if! {
-        if #[cfg(test)] {
-            command.arg("--dump-device-tree-blob").arg("/data/local/tmp/dt_dump.dtb");
-        }
+    if let Some(dump_dt) = config.dump_dt {
+        command.arg("--dump-device-tree-blob").arg(dump_dt);
     }
 
     let mut memory_mib = config.memory_mib;
