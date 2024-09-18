@@ -576,6 +576,7 @@ impl VirtualizationService {
 
         let kernel = maybe_clone_file(&config.kernel)?;
         let initrd = maybe_clone_file(&config.initrd)?;
+        let dump_dt = maybe_clone_file(&config.dumpDt)?;
 
         if config.protectedVm {
             // In a protected VM, we require custom kernels to come from a trusted source
@@ -744,6 +745,7 @@ impl VirtualizationService {
             audio_config,
             no_balloon: config.noBalloon,
             usb_config,
+            dump_dt,
         };
         let instance = Arc::new(
             VmInstance::new(

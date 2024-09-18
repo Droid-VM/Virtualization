@@ -103,6 +103,7 @@ public final class VirtualMachineConfig {
     private static final String KEY_EXTRA_APKS = "extraApks";
     private static final String KEY_SHOULD_BOOST_UCLAMP = "shouldBoostUclamp";
     private static final String KEY_SHOULD_USE_HUGEPAGES = "shouldUseHugepages";
+    private static final String KEY_DUMP_DT = "dumpDt";
 
     /** @hide */
     @Retention(RetentionPolicy.SOURCE)
@@ -209,6 +210,8 @@ public final class VirtualMachineConfig {
 
     private final boolean mShouldUseHugepages;
 
+    @Nullable private final String mDumpDt;
+
     @Retention(RetentionPolicy.SOURCE)
     @StringDef(
             prefix = "MICRODROID",
@@ -245,7 +248,8 @@ public final class VirtualMachineConfig {
             @Nullable File vendorDiskImage,
             @NonNull @OsName String os,
             boolean shouldBoostUclamp,
-            boolean shouldUseHugepages) {
+            boolean shouldUseHugepages,
+            @Nullable String dumpDt) {
         // This is only called from Builder.build(); the builder handles parameter validation.
         mPackageName = packageName;
         mApkPath = apkPath;
@@ -270,6 +274,7 @@ public final class VirtualMachineConfig {
         mOs = os;
         mShouldBoostUclamp = shouldBoostUclamp;
         mShouldUseHugepages = shouldUseHugepages;
+        mDumpDt = dumpDt;
     }
 
     /** Loads a config from a file. */
@@ -372,6 +377,7 @@ public final class VirtualMachineConfig {
 
         builder.setShouldBoostUclamp(b.getBoolean(KEY_SHOULD_BOOST_UCLAMP));
         builder.setShouldUseHugepages(b.getBoolean(KEY_SHOULD_USE_HUGEPAGES));
+        builder.setDumpDt(b.getString(KEY_DUMP_DT));
 
         return builder.build();
     }
@@ -425,6 +431,7 @@ public final class VirtualMachineConfig {
         }
         b.putBoolean(KEY_SHOULD_BOOST_UCLAMP, mShouldBoostUclamp);
         b.putBoolean(KEY_SHOULD_USE_HUGEPAGES, mShouldUseHugepages);
+        b.putString(KEY_DUMP_DT, mDumpDt);
         b.writeToStream(output);
     }
 
@@ -473,6 +480,16 @@ public final class VirtualMachineConfig {
     @Nullable
     public VirtualMachineCustomImageConfig getCustomImageConfig() {
         return mCustomImageConfig;
+    }
+
+    /**
+     * Returns the path to dump device tree blob of the VM.
+     *
+     * @hide
+     */
+    @Nullable
+    public String getDumpDt() {
+        return mDumpDt;
     }
 
     /**
@@ -884,6 +901,7 @@ public final class VirtualMachineConfig {
         @NonNull @OsName private String mOs = DEFAULT_OS;
         private boolean mShouldBoostUclamp = false;
         private boolean mShouldUseHugepages = false;
+        @Nullable private String mDumpDt;
 
         /**
          * Creates a builder for the given context.
@@ -979,7 +997,8 @@ public final class VirtualMachineConfig {
                     mVendorDiskImage,
                     mOs,
                     mShouldBoostUclamp,
-                    mShouldUseHugepages);
+                    mShouldUseHugepages,
+                    mDumpDt);
         }
 
         /**
@@ -1165,6 +1184,17 @@ public final class VirtualMachineConfig {
          */
         public Builder setConsoleInputDevice(@Nullable String consoleInputDevice) {
             mConsoleInputDevice = consoleInputDevice;
+            return this;
+        }
+
+        /**
+         * Sets the path where the device tree blob will be dumped to.
+         *
+         * @see android.system.virtualizationservice.DumpDt
+         * @hide
+         */
+        public Builder setDumpDt(String dumpDt) {
+            mDumpDt = dumpDt;
             return this;
         }
 

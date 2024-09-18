@@ -106,4 +106,7 @@ parcelable VirtualMachineRawConfig {
 
     /** Enable or disable USB passthrough support */
     @nullable UsbConfig usbConfig;
+
+    /** The location to dump the device tree blob */
+    @nullable ParcelFileDescriptor dumpDt;
 }

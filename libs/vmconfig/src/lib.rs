@@ -71,6 +71,8 @@ pub struct VmConfig {
     pub console_input_device: Option<String>,
     /// The USB config of the VM.
     pub usb_config: Option<UsbConfig>,
+    /// Path to dump the VM's device tree blob,
+    pub dump_dt: Option<PathBuf>,
 }
 
 impl VmConfig {
@@ -133,6 +135,7 @@ impl VmConfig {
                 .collect::<Result<_>>()?,
             consoleInputDevice: self.console_input_device.clone(),
             usbConfig: usb_config,
+            dumpDt: maybe_open_parcel_file(&self.dump_dt, true)?,
             ..Default::default()
         })
     }
