@@ -40,6 +40,23 @@
       ],
       "revId": "797f0e5e04faacacce1475da0e1a1b4cca7f1548",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64e8c2ee_dc956a82",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 1232,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-19T17:29:30Z",
+      "side": 1,
+      "message": "this is going to cause the number of vCPUs in the DT to vary depending on the host device. maybe start with just one or two vCPUs?",
+      "revId": "797f0e5e04faacacce1475da0e1a1b4cca7f1548",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
