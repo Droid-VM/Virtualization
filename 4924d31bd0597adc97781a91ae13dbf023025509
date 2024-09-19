@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3399ac2_c62dee28",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-19T17:35:16Z",
+      "side": 1,
+      "message": "maybe `dump_dt: config.dumpDt.clone()` and delete the variable",
+      "revId": "4924d31bd0597adc97781a91ae13dbf023025509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2a07ce2_b7758d44",
+        "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-19T17:35:16Z",
+      "side": 1,
+      "message": "camelCase",
+      "range": {
+        "startLine": 106,
+        "startChar": 47,
+        "endLine": 106,
+        "endChar": 54
+      },
+      "revId": "4924d31bd0597adc97781a91ae13dbf023025509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e71d06c8_5b40af0c",
+        "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1199,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-19T17:35:16Z",
+      "side": 1,
+      "message": "if we only set when non-null, isn\u0027t it impossible to unset?",
+      "range": {
+        "startLine": 1197,
+        "startChar": 0,
+        "endLine": 1199,
+        "endChar": 13
+      },
+      "revId": "4924d31bd0597adc97781a91ae13dbf023025509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2894c2b8_79e3101f",
+        "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-19T17:35:16Z",
+      "side": 1,
+      "message": "unused?",
+      "revId": "4924d31bd0597adc97781a91ae13dbf023025509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
