@@ -27,7 +27,6 @@ use binder::{wait_for_interface, ParcelFileDescriptor};
 use log::{info, warn};
 use microdroid_metadata::{ApexPayload, ApkPayload, Metadata, PayloadConfig, PayloadMetadata};
 use microdroid_payload_config::{ApexConfig, VmPayloadConfig};
-use once_cell::sync::OnceCell;
 use packagemanager_aidl::aidl::android::content::pm::{
     IPackageManagerNative::IPackageManagerNative, StagedApexInfo::StagedApexInfo,
 };
@@ -39,6 +38,7 @@ use std::ffi::OsStr;
 use std::fs::{metadata, File, OpenOptions};
 use std::path::{Path, PathBuf};
 use std::process::Command;
+use std::sync::OnceLock;
 use std::time::SystemTime;
 use vmconfig::open_parcel_file;
 
@@ -85,7 +85,7 @@ struct ApexInfo {
 impl ApexInfoList {
     /// Loads ApexInfoList
     fn load() -> Result<&'static ApexInfoList> {
-        static INSTANCE: OnceCell<ApexInfoList> = OnceCell::new();
+        static INSTANCE: OnceLock<ApexInfoList> = OnceLock::new();
         INSTANCE.get_or_try_init(|| {
             let apex_info_list = File::open(APEX_INFO_LIST_PATH)
                 .context(format!("Failed to open {}", APEX_INFO_LIST_PATH))?;
