@@ -69,31 +69,15 @@ copy_android_config() {
 	local dst=${config_space}
 
 	cp -R ${src}/* ${dst}
+	cp $(dirname $0)/image.yaml ${resources_dir}
 }
 
 run_fai() {
-	local cspace=${config_space}
 	local out=${built_image}
-	local classes=(
-		BASE
-		DEBIAN
-		NOCLOUD
-		ARM64
-		LINUX_VERSION_BASE+LINUX_VARIANT_CLOUD
-		${debian_version^^} # uppercase
-		AVF
-		BUILD_IMAGE
-		SYSTEM_BOOT
-	)
-	# join by comma
-	classes=$(IFS=","; echo "${classes[*]}")
-
-	fai-diskimage \
-		--verbose \
-		--size 2G \
-		--class ${classes} \
-		--cspace ${cspace} \
-		${out}
+	pushd ${debian_cloud_image} > /dev/null
+	sudo make image_bookworm_nocloud_arm64
+	popd > /dev/null
+	mv ${debian_cloud_image}/image_bookworm_nocloud_arm64.raw ${out}
 }
 
 clean_up() {
@@ -108,7 +92,7 @@ workdir=$(mktemp -d)
 debian_cloud_image=${workdir}/debian_cloud_image
 debian_version=bookworm
 config_space=${debian_cloud_image}/config_space/${debian_version}
-
+resources_dir=${debian_cloud_image}/src/debian_cloud_images/resources
 check_sudo
 parse_options $@
 install_prerequisites
