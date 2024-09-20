@@ -16,6 +16,69 @@
       "message": "It\u0027s the second option which I mentioned in b/363237196#comment19. please let me know if you have any concern about that",
       "revId": "c54a2f29c9a56573f2bf4698e6291b61b8a174c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b975d340_784e80f6",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-09-20T23:53:54Z",
+      "side": 1,
+      "message": "we can invoke `make -C \u003cdir\u003e \u003ctarget\u003e` instead",
+      "range": {
+        "startLine": 77,
+        "startChar": 1,
+        "endLine": 77,
+        "endChar": 40
+      },
+      "revId": "c54a2f29c9a56573f2bf4698e6291b61b8a174c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23527b3b_063415ba",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-09-20T23:53:54Z",
+      "side": 1,
+      "message": "no need. this entire script runs in root.",
+      "range": {
+        "startLine": 78,
+        "startChar": 1,
+        "endLine": 78,
+        "endChar": 5
+      },
+      "revId": "c54a2f29c9a56573f2bf4698e6291b61b8a174c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b3e487c_a6afd693",
+        "filename": "build/debian/image.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-09-20T23:53:54Z",
+      "side": 1,
+      "message": "Can we remove things we don\u0027t use, like azure, bullseye, etc?",
+      "revId": "c54a2f29c9a56573f2bf4698e6291b61b8a174c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
