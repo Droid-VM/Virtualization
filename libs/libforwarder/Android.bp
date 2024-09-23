@@ -1,0 +1,11 @@
+package {
+    default_applicable_licenses: ["libforwarder_license"],
+}
+
+license {
+    name: "libforwarder_license",
+    visibility: [":__subpackages__"],
+    license_kinds: [
+        "SPDX-license-identifier-BSD",
+    ],
+}
