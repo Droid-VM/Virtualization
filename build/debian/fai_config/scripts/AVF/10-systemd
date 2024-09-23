@@ -1,0 +1,6 @@
+#!/bin/bash
+
+chmod +x /usr/local/bin/ttyd
+chmod +x /usr/local/bin/vsock.py
+ln -s /etc/systemd/system/ttyd.service /etc/systemd/system/multi-user.target.wants/ttyd.service
+ln -s /etc/systemd/system/vsockip.service /etc/systemd/system/multi-user.target.wants/vsockip.service
