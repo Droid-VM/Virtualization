@@ -29,16 +29,29 @@ use clap::Parser;
 use log::debug;
 use nix::sys::stat::{umask, Mode};
 use rpcbinder::RpcServer;
-use rustutils::inherited_fd::take_fd_ownership;
 use std::collections::BTreeMap;
 use std::fs::File;
-use std::os::unix::io::OwnedFd;
+use std::os::unix::io::{FromRawFd, OwnedFd};
 
 use aidl::{FdConfig, FdService};
 use authfs_fsverity_metadata::parse_fsverity_metadata;
 
 // TODO(b/259920193): support dynamic port for multiple fd_server instances
 const RPC_SERVICE_PORT: u32 = 3264;
+
+fn is_fd_valid(fd: i32) -> bool {
+    // SAFETY: a query-only syscall
+    let retval = unsafe { libc::fcntl(fd, libc::F_GETFD) };
+    retval >= 0
+}
+
+fn fd_to_owned<T: FromRawFd>(fd: i32) -> Result<T> {
+    if !is_fd_valid(fd) {
+        bail!("Bad FD: {}", fd);
+    }
+    // SAFETY: The caller is supposed to provide valid FDs to this process.
+    Ok(unsafe { T::from_raw_fd(fd) })
+}
 
 fn parse_arg_ro_fds(arg: &str) -> Result<(i32, FdConfig)> {
     let result: Result<Vec<i32>, _> = arg.split(':').map(|x| x.parse::<i32>()).collect();
@@ -49,13 +62,13 @@ fn parse_arg_ro_fds(arg: &str) -> Result<(i32, FdConfig)> {
     Ok((
         fds[0],
         FdConfig::Readonly {
-            file: take_fd_ownership(fds[0])?.into(),
+            file: fd_to_owned(fds[0])?,
             // Alternative metadata source, if provided
             alt_metadata: fds
                 .get(1)
-                .map(|fd| take_fd_ownership(*fd))
+                .map(|fd| fd_to_owned(*fd))
                 .transpose()?
-                .and_then(|f| parse_fsverity_metadata(f.into()).ok()),
+                .and_then(|f| parse_fsverity_metadata(f).ok()),
         },
     ))
 }
@@ -92,26 +105,23 @@ fn convert_args(args: Args) -> Result<(BTreeMap<i32, FdConfig>, Option<OwnedFd>)
         fd_pool.insert(fd, config);
     }
     for fd in args.rw_fds {
-        let file: File = take_fd_ownership(fd)?.into();
+        let file = fd_to_owned::<File>(fd)?;
         if file.metadata()?.len() > 0 {
             bail!("File is expected to be empty");
         }
         fd_pool.insert(fd, FdConfig::ReadWrite(file));
     }
     for fd in args.ro_dirs {
-        fd_pool.insert(fd, FdConfig::InputDir(take_fd_ownership(fd)?));
+        fd_pool.insert(fd, FdConfig::InputDir(fd_to_owned(fd)?));
     }
     for fd in args.rw_dirs {
-        fd_pool.insert(fd, FdConfig::OutputDir(take_fd_ownership(fd)?));
+        fd_pool.insert(fd, FdConfig::OutputDir(fd_to_owned(fd)?));
     }
-    let ready_fd = args.ready_fd.map(take_fd_ownership).transpose()?;
+    let ready_fd = args.ready_fd.map(fd_to_owned).transpose()?;
     Ok((fd_pool, ready_fd))
 }
 
 fn main() -> Result<()> {
-    // SAFETY: nobody has taken ownership of the inherited FDs yet.
-    unsafe { rustutils::inherited_fd::init_once()? };
-
     android_logger::init_once(
         android_logger::Config::default()
             .with_tag("fd_server")
