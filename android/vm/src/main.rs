@@ -114,6 +114,10 @@ pub struct DebugConfig {
     #[cfg(debuggable_vms_improvements)]
     #[arg(long)]
     enable_earlycon: bool,
+
+    /// Path to file for VM dump device tree.
+    #[arg(long)]
+    dump_device_tree: Option<PathBuf>,
 }
 
 impl DebugConfig {
