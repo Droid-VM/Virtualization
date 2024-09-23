@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "126fc03a_73cca7e2",
+        "filename": "build/debian/fai_config/files/etc/systemd/system/ttyd.service/AVF",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-09-23T12:51:08Z",
+      "side": 1,
+      "message": "done. updated android/LinuxInstaller/linux_image_builder/ttyd.service as well(BTW, linux_image_builder will be removed)",
+      "parentUuid": "502416f3_d9f79c75",
+      "range": {
+        "startLine": 6,
+        "startChar": 33,
+        "endLine": 6,
+        "endChar": 38
+      },
+      "revId": "ce2fcaf71bcbdf6be659d661df7a7f545c6b2a04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a8ac46b_7d7c118c",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-09-23T12:21:08Z",
       "side": 1,
       "message": "Move this file to under AVF?",
+      "revId": "ce2fcaf71bcbdf6be659d661df7a7f545c6b2a04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b5fdee5_ae55e576",
+        "filename": "build/debian/fai_config/scripts/DEBIAN/99-systemd",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-09-23T12:51:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a8ac46b_7d7c118c",
       "revId": "ce2fcaf71bcbdf6be659d661df7a7f545c6b2a04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
