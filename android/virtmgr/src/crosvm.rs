@@ -136,6 +136,7 @@ pub struct CrosvmConfig {
     pub audio_config: Option<AudioConfig>,
     pub no_balloon: bool,
     pub usb_config: UsbConfig,
+    pub dump_dt_fd: Option<File>,
 }
 
 #[derive(Debug)]
@@ -990,6 +991,14 @@ fn run_vm(
 
     if let Some(gdb_port) = config.gdb_port {
         command.arg("--gdb").arg(gdb_port.to_string());
+    }
+
+    if let Some(dump_dt_fd) = &config.dump_dt_fd {
+        command.arg("--dump_device_tree_blob").arg(format!(
+            "/proc/{}/fd/{}",
+            std::process::id(),
+            dump_dt_fd.as_raw_fd()
+        ));
     }
 
     // Keep track of what file descriptors should be mapped to the crosvm process.
