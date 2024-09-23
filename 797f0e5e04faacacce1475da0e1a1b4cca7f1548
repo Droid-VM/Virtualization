@@ -44,6 +44,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3e69e5fe_21514a24",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 1226,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-09-23T20:44:36Z",
+      "side": 1,
+      "message": "Test currently still failing - DEAD OBJECT.",
+      "parentUuid": "99886ff6_59bb727f",
+      "range": {
+        "startLine": 1226,
+        "startChar": 7,
+        "endLine": 1226,
+        "endChar": 59
+      },
+      "revId": "797f0e5e04faacacce1475da0e1a1b4cca7f1548",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "64e8c2ee_dc956a82",
         "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
         "patchSetId": 10
@@ -55,6 +79,24 @@
       "writtenOn": "2024-09-19T17:29:30Z",
       "side": 1,
       "message": "this is going to cause the number of vCPUs in the DT to vary depending on the host device. maybe start with just one or two vCPUs?",
+      "revId": "797f0e5e04faacacce1475da0e1a1b4cca7f1548",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6356300_fda29c66",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 1232,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-09-23T20:44:36Z",
+      "side": 1,
+      "message": "Good point - options for CpuTopology seem to be `MATCH_HOST` or `ONE_CPU` currently. Opted for `ONE_CPU`. I\u0027ll look to add a separate test with 2 Cpus for validation, as it requires some extra changes.",
+      "parentUuid": "64e8c2ee_dc956a82",
       "revId": "797f0e5e04faacacce1475da0e1a1b4cca7f1548",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
