@@ -227,7 +227,7 @@ Result<std::shared_ptr<IVirtualMachine>> create_virtual_machine(
     ScopedFileDescriptor console_in_fd(fcntl(fileno(stdin), F_DUPFD_CLOEXEC));
     ScopedFileDescriptor log_fd(fcntl(fileno(stdout), F_DUPFD_CLOEXEC));
 
-    ScopedAStatus ret = service.createVm(config, console_out_fd, console_in_fd, log_fd, &vm);
+    ScopedAStatus ret = service.createVm(config, console_out_fd, console_in_fd, log_fd, null, &vm);
     if (!ret.isOk()) {
         return Error() << "Failed to create VM";
     }
