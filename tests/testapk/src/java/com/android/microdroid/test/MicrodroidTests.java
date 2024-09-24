@@ -2426,6 +2426,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
+    @VsrTest(requirements = "VSR-7.1-001.009")
     public void bootsWithVendorPartition() throws Exception {
         File vendorDiskImage = new File("/vendor/etc/avf/microdroid/microdroid_vendor.img");
         assumeTrue("Microdroid vendor image doesn't exist, skip", vendorDiskImage.exists());
@@ -2466,6 +2467,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
+    @VsrTest(requirements = "VSR-7.1-001.009")
     public void bootFailsWithCustomVendorPartitionForPvm() throws Exception {
         assumeProtectedVM();
         File vendorDiskImage =
