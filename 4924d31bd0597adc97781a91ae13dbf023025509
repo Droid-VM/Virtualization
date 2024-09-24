@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "575897ab_aea0f52c",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-09-24T20:29:55Z",
+      "side": 1,
+      "message": "Modified to pass a File instead.",
+      "parentUuid": "e3399ac2_c62dee28",
+      "revId": "4924d31bd0597adc97781a91ae13dbf023025509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2a07ce2_b7758d44",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-09-19T17:35:16Z",
       "side": 1,
       "message": "camelCase",
+      "range": {
+        "startLine": 106,
+        "startChar": 47,
+        "endLine": 106,
+        "endChar": 54
+      },
+      "revId": "4924d31bd0597adc97781a91ae13dbf023025509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f08af462_5c977be8",
+        "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-09-24T20:29:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2a07ce2_b7758d44",
       "range": {
         "startLine": 106,
         "startChar": 47,
@@ -64,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7223adf2_271d6d32",
+        "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1199,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-09-24T20:29:55Z",
+      "side": 1,
+      "message": "Correct, forgot to clean this due to an earlier error. Done",
+      "parentUuid": "e71d06c8_5b40af0c",
+      "range": {
+        "startLine": 1197,
+        "startChar": 0,
+        "endLine": 1199,
+        "endChar": 13
+      },
+      "revId": "4924d31bd0597adc97781a91ae13dbf023025509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2894c2b8_79e3101f",
@@ -77,6 +143,24 @@
       "writtenOn": "2024-09-19T17:35:16Z",
       "side": 1,
       "message": "unused?",
+      "revId": "4924d31bd0597adc97781a91ae13dbf023025509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e04622ea_547280fa",
+        "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-09-24T20:29:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2894c2b8_79e3101f",
       "revId": "4924d31bd0597adc97781a91ae13dbf023025509",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
