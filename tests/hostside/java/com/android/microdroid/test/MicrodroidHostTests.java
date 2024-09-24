@@ -476,7 +476,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
-    @CddTest(requirements = {"9.17/C-2-1", "9.17/C-2-2", "9.17/C-2-6"})
+    @CddTest(requirements = {"9.17/C-2-1", "9.17/C-2-2", "9.17/C-2-6", "9.17/C-SR-2"})
     @VsrTest(requirements = "VSR-7.1-001.010")
     public void protectedVmRunsPvmfw() throws Exception {
         // Arrange
