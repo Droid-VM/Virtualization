@@ -455,7 +455,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         final String configPath = "assets/vm_config.json";
         ITestDevice microdroid = null;
         int timeout = 30000; // 30 seconds
-        try {
+        try {protectedVmHasValidDiceChain
             microdroid =
                     MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
                             .debugLevel("full")

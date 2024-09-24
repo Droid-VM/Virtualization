@@ -1305,7 +1305,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
-    @VsrTest(requirements = {"VSR-7.1-001.004"})
+    @VsrTest(requirements = {"VSR-7.1-001.004", "VSR-7.1-001.010"})
     public void protectedVmHasValidDiceChain() throws Exception {
         // This test validates two things regarding the pVM DICE chain:
         // 1. The DICE chain is well-formed that all the entries conform to the DICE spec.
