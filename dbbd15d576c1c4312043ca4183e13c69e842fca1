@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76b1f34f_1584b5bb",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualizationService.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-25T00:30:07Z",
+      "side": 1,
+      "message": "revert",
+      "revId": "dbbd15d576c1c4312043ca4183e13c69e842fca1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05702ff6_841d0cfb",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualizationService.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-25T00:30:07Z",
+      "side": 1,
+      "message": "how about putting this in VirtualMachineConfig?\n\neither way, need some docs explaining what it does",
+      "revId": "dbbd15d576c1c4312043ca4183e13c69e842fca1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "108fa8c5_31aeaa41",
+        "filename": "android/vm/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-25T00:30:07Z",
+      "side": 1,
+      "message": "maybe \"Path to file to dump VM device tree\" and mention this is just for tests/debugging",
+      "range": {
+        "startLine": 118,
+        "startChar": 8,
+        "endLine": 118,
+        "endChar": 44
+      },
+      "revId": "dbbd15d576c1c4312043ca4183e13c69e842fca1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
