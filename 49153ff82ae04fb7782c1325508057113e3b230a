@@ -16,6 +16,69 @@
       "message": "should this be rebased on top of https://r.android.com/c/3273475?",
       "revId": "49153ff82ae04fb7782c1325508057113e3b230a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9f8a8bc_be6f8e14",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 1235,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-25T00:24:30Z",
+      "side": 1,
+      "message": "is this needed? if so, add a comment explaining why",
+      "range": {
+        "startLine": 1227,
+        "startChar": 0,
+        "endLine": 1235,
+        "endChar": 63
+      },
+      "revId": "49153ff82ae04fb7782c1325508057113e3b230a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcfb1795_e801bf9c",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 1236,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-25T00:24:30Z",
+      "side": 1,
+      "message": "maybe add some comments for readability, e.g.\n\n```\n// Start the VM with the dump DT option.\n...\n\n// Convert the DT to text format.\n...\n\n// Diff the DT with the golden file.\n...\n```",
+      "revId": "49153ff82ae04fb7782c1325508057113e3b230a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5263c92_ba70bd79",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 1278,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-09-25T00:24:30Z",
+      "side": 1,
+      "message": "i think this isn\u0027t a compare, it is converting the file format",
+      "range": {
+        "startLine": 1275,
+        "startChar": 17,
+        "endLine": 1278,
+        "endChar": 38
+      },
+      "revId": "49153ff82ae04fb7782c1325508057113e3b230a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
