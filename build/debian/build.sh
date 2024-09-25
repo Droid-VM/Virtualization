@@ -55,6 +55,7 @@ install_prerequisites() {
 		qemu-user-static
 
         sed -i s/losetup\ -f/losetup\ -P\ -f/g /usr/sbin/fai-diskimage
+        sed -i 's/wget \$/wget -t 0 \$/g' /usr/share/debootstrap/functions
 }
 
 download_debian_cloud_image() {
