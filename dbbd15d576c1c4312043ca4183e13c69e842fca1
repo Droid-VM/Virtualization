@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "398801dd_cd3c0408",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualizationService.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-09-25T16:51:56Z",
+      "side": 1,
+      "message": "Complete* I was adding a comment for dumpDtFd. Done.",
+      "parentUuid": "76b1f34f_1584b5bb",
+      "revId": "dbbd15d576c1c4312043ca4183e13c69e842fca1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05702ff6_841d0cfb",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a7887c8_d7b051e9",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualizationService.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-09-25T16:51:56Z",
+      "side": 1,
+      "message": "I think it makes more sense to keep it out of the config. It\u0027s a debug/test only flag.\n\nAnd done - updated the mistakenly left empty line above.",
+      "parentUuid": "05702ff6_841d0cfb",
+      "revId": "dbbd15d576c1c4312043ca4183e13c69e842fca1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "108fa8c5_31aeaa41",
@@ -48,6 +84,30 @@
       "writtenOn": "2024-09-25T00:30:07Z",
       "side": 1,
       "message": "maybe \"Path to file to dump VM device tree\" and mention this is just for tests/debugging",
+      "range": {
+        "startLine": 118,
+        "startChar": 8,
+        "endLine": 118,
+        "endChar": 44
+      },
+      "revId": "dbbd15d576c1c4312043ca4183e13c69e842fca1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "506c515c_e4016fc4",
+        "filename": "android/vm/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-09-25T16:51:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "108fa8c5_31aeaa41",
       "range": {
         "startLine": 118,
         "startChar": 8,
