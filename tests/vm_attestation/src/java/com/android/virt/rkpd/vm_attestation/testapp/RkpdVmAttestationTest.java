@@ -28,6 +28,7 @@ import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineConfig;
 import android.system.virtualmachine.VirtualMachineManager;
 
+import com.android.compatibility.common.util.VsrTest;
 import com.android.microdroid.test.device.MicrodroidDeviceTestBase;
 import com.android.virt.vm_attestation.testservice.IAttestationService.SigningResult;
 import com.android.virt.vm_attestation.util.X509Utils;
@@ -106,6 +107,7 @@ public class RkpdVmAttestationTest extends MicrodroidDeviceTestBase {
     }
 
     @Test
+    @VsrTest(requirements = {"VSR-7.1-001.011"})
     public void usingProvisionedKeyForVmAttestationSucceeds() throws Exception {
         // Arrange.
         VirtualMachineConfig config =
