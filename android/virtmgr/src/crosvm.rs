@@ -27,12 +27,14 @@ use nix::{fcntl::OFlag, unistd::pipe2, unistd::Uid, unistd::User};
 use regex::{Captures, Regex};
 use rustutils::system_properties;
 use shared_child::SharedChild;
+use walkdir::{DirEntry, WalkDir};
+use zip::write::FileOptions;
 use std::borrow::Cow;
 use std::cmp::max;
 use std::ffi::CString;
 use std::fmt;
 use std::fs::{read_to_string, File};
-use std::io::{self, Read};
+use std::io::{self, BufReader, BufWriter, Read, Write};
 use std::mem;
 use std::num::{NonZeroU16, NonZeroU32};
 use std::os::unix::io::{AsRawFd, OwnedFd};
@@ -50,6 +52,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
     DisplayConfig::DisplayConfig as DisplayConfigParcelable,
     GpuConfig::GpuConfig as GpuConfigParcelable,
     UsbConfig::UsbConfig as UsbConfigParcelable,
+    IVirtualMachine::SnapshotOptions::SnapshotOptions,
 };
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IGlobalVmContext::IGlobalVmContext;
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IBoundDevice::IBoundDevice;
@@ -739,6 +742,81 @@ impl VmInstance {
         }
         Ok(())
     }
+
+    /// Snapshot the VM
+    pub fn snapshot(
+        &self,
+        snapshot_path: &mut File,
+        options: &SnapshotOptions,
+    ) -> Result<(), Error> {
+        // Crosvm snapshot will be stored in a subdirectory called snapshot
+        let mut command = Command::new(CROSVM_PATH);
+        let mut snapshot_dir = self.temporary_directory.clone();
+        snapshot_dir.push("snapshot");
+
+        command.arg("snapshot");
+        command.arg("take");
+        command.arg(snapshot_dir.clone());
+        command.arg(self.crosvm_control_socket_path.clone());
+        if options.compressMemory {
+            command.arg("--compress_memory");
+        }
+
+        print_crosvm_args(&command);
+
+        // Snapshot VM
+        let result = command.output()?;
+        debug!("Snapshot crosvm result: ({:?}).", result.stdout);
+
+        // Copy snapshot
+        let walkdir = WalkDir::new(snapshot_dir.clone());
+        let it = walkdir.into_iter();
+        zip_dir(&mut it.filter_map(|e| e.ok()), &snapshot_dir.display().to_string(), snapshot_path)
+            .context("failed to zip snapshot")?;
+        // Delete temp snapshot directory after zipping
+        std::fs::remove_dir_all(snapshot_dir)?;
+
+        Ok(())
+    }
+}
+
+fn zip_dir(
+    it: &mut dyn Iterator<Item = DirEntry>,
+    prefix: &str,
+    snapshot_path: &mut File,
+) -> Result<(), Error> {
+    let mut zip = zip::ZipWriter::new(snapshot_path);
+    // Give read permissions only to owner
+    let options = FileOptions::default()
+        .unix_permissions(0o400)
+        .compression_method(zip::CompressionMethod::Stored);
+
+    let mut buffer = Vec::new();
+    for entry in it {
+        let path = entry.path();
+        let name = path.strip_prefix(Path::new(prefix)).context("Failed to strip path prefix")?;
+
+        // Write file or directory explicitly
+        if path.is_file() {
+            zip.start_file_from_path(name, options)?;
+            let f = File::open(path)?;
+            let size = f.metadata()?.len();
+            buffer.resize(size as usize, 0);
+            let mut br = BufReader::new(f);
+
+            // Read contents to buffer
+            br.read_to_end(&mut buffer)?;
+
+            // Create write stream with size of buffer, then write buffer
+            let mut stream = BufWriter::with_capacity(buffer.len(), &mut zip);
+            stream.write_all(&buffer)?;
+            buffer.clear();
+        } else if !name.as_os_str().is_empty() {
+            zip.add_directory_from_path(name, options)?;
+        }
+    }
+    zip.finish().context("failed to finish zipping")?;
+    Ok(())
 }
 
 impl Rss {

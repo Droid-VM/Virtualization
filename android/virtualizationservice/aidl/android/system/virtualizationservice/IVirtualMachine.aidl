@@ -76,4 +76,13 @@ interface IVirtualMachine {
 
     /** Resumes the suspended VM. */
     void resume();
+
+    parcelable SnapshotOptions {
+        boolean compressMemory;
+    }
+
+    /**
+     * Gets the snapshot service
+     */
+    void snapshot(in ParcelFileDescriptor snapshot_path, in SnapshotOptions options);
 }

@@ -1499,6 +1499,19 @@ impl IVirtualMachine::IVirtualMachine for VirtualMachine {
             .with_log()
             .or_service_specific_exception(-1)
     }
+
+    fn snapshot(
+        &self,
+        snapshot_path: &ParcelFileDescriptor,
+        options: &IVirtualMachine::SnapshotOptions::SnapshotOptions,
+    ) -> binder::Result<()> {
+        let mut snapshot_file = clone_file(snapshot_path)?;
+        self.instance
+            .snapshot(&mut snapshot_file, options)
+            .with_context(|| format!("Error snapshotting VM with CID {}", self.instance.cid))
+            .with_log()
+            .or_service_specific_exception(-1)
+    }
 }
 
 impl Drop for VirtualMachine {
