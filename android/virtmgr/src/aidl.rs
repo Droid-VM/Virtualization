@@ -1426,6 +1426,18 @@ impl IVirtualMachine for VirtualMachine {
             .with_log()
             .or_service_specific_exception(-1)
     }
+
+    fn snapshot(
+        &self,
+        snapshot_path: &ParcelFileDescriptor,
+        compress_memory: bool,
+    ) -> binder::Result<()> {
+        self.instance
+            .snapshot(snapshot_path, compress_memory)
+            .with_context(|| format!("Error snapshotting VM with CID {}", self.instance.cid))
+            .with_log()
+            .or_service_specific_exception(-1)
+    }
 }
 
 impl Drop for VirtualMachine {

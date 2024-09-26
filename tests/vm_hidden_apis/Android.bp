@@ -1,0 +1,30 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_test {
+    name: "vm_hidden_apis",
+    srcs: ["src/main.rs"],
+    prefer_rlib: true,
+    edition: "2021",
+    rustlibs: [
+        "android.system.virtualizationservice-rust",
+        "libandroid_logger",
+        "libanyhow",
+        "liblibc",
+        "liblog_rust",
+        "libnix",
+        "libvmclient",
+    ],
+    data: [
+        ":vmbase_example_kernel_bin",
+    ],
+    test_suites: ["general-tests"],
+    test_config: "AndroidTest.xml",
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+    },
+}

@@ -724,6 +724,36 @@ impl VmInstance {
             e => bail!("Failed to resume: {e:?}"),
         }
     }
+
+    /// Snapshot the VM
+    pub fn snapshot(
+        &self,
+        _snapshot_path: &ParcelFileDescriptor,
+        compress_memory: bool,
+    ) -> Result<(), Error> {
+        // Crosvm snapshot will be stored in a subdirectory called snapshot
+        let mut command = Command::new(CROSVM_PATH);
+        let mut snapshot_dir = self.temporary_directory.clone();
+        snapshot_dir.push("snapshot");
+
+        command.arg("snapshot");
+        command.arg("take");
+        command.arg(snapshot_dir);
+        command.arg(self.crosvm_control_socket_path.clone());
+        if compress_memory {
+            command.arg("--compress_memory");
+        }
+
+        print_crosvm_args(&command);
+
+        // Snapshot VM
+        let result = SharedChild::spawn(&mut command)?;
+        debug!("Spawned crosvm({}).", result.id());
+
+        // Wait for task to complete
+        // Copy snapshot
+        Ok(())
+    }
 }
 
 impl Rss {
