@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30dc2115_d81009a1",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-09-26T20:27:11Z",
+      "side": 1,
+      "message": "This currently fails.\n\nPrinted CID of both VM and passed CID -\u003e they match.\nPrinted the comparison `vm.cid \u003d\u003d cid`, result: `true`.\n\nYet, somehow the VM is not being returned from `get_vm`.\n\nDebugging currently.",
+      "range": {
+        "startLine": 349,
+        "startChar": 26,
+        "endLine": 349,
+        "endChar": 55
+      },
+      "revId": "b3bd50d1c4916cbc0e30cfa6cf4a91e5e9980996",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
