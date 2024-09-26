@@ -114,4 +114,12 @@ interface IVirtualizationService {
      * @param instanceId The ID for the VM.
      */
     void claimVmInstance(in byte[64] instanceId);
+
+    /**
+     * Snapshot the VM
+     *
+     * @param cid The ID for the VM.
+     * @param snapshotPath The path where the snapshot will be written to
+     */
+    void snapshotVmInstance(in int cid, in String snapshotPath);
 }

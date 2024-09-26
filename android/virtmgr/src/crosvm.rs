@@ -57,7 +57,7 @@ use tombstoned_client::{TombstonedConnection, DebuggerdDumpType};
 use rpcbinder::RpcServer;
 
 /// external/crosvm
-use vm_control::{BalloonControlCommand, VmRequest, VmResponse};
+use vm_control::{BalloonControlCommand, SnapshotCommand, VmRequest, VmResponse};
 
 const CROSVM_PATH: &str = "/apex/com.android.virt/bin/crosvm";
 
@@ -722,6 +722,23 @@ impl VmInstance {
         ) {
             Ok(VmResponse::Ok) => Ok(()),
             e => bail!("Failed to resume: {e:?}"),
+        }
+    }
+
+    /// Snapshot the VM
+    pub fn snapshot(&self, snapshot_path: &str) -> Result<(), Error> {
+        let snapshot_request = SnapshotCommand::Take {
+            snapshot_path: snapshot_path.into(),
+            compress_memory: false,
+            encrypt: false,
+        };
+        // Snapshot VM
+        match vm_control::client::handle_request(
+            &VmRequest::Snapshot(snapshot_request),
+            &self.crosvm_control_socket_path,
+        ) {
+            Ok(VmResponse::Ok) => Ok(()),
+            e => Err(anyhow!("Failed to snapshot: {:?}", e)),
         }
     }
 }
