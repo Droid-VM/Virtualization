@@ -1868,6 +1868,37 @@ public class VirtualMachine implements AutoCloseable {
     }
 
     /**
+     * Snapshots this virtual machine.
+     *
+     * <p>NOTE: The VM is suspended, snapshot and then resumed.
+     *
+     * @param snapshot_path Path pointing to the directory where the snapshot will be saved
+     * @param compress_memory Choose if memory will be compressed or not
+     * @param encrypt encrypt the memory'
+     * @throws VirtualMachineException Throws exception if the directory does not exist, or if the
+     *     snapshot fails.
+     * @hide
+     */
+    @SystemApi
+    @WorkerThread
+    @FlaggedApi(Flags.FLAG_AVF_V_TEST_APIS)
+    public void snapshot(@Nullable String snapshot_path, boolean compress_memory, boolean encrypt)
+            throws VirtualMachineException {
+        synchronized (mLock) {
+            if (mVirtualMachine == null) {
+                throw new VirtualMachineException("VM is not running");
+            }
+            try {
+                mVirtualMachine.snapshot(snapshot_path, compress_memory, encrypt);
+            } catch (RemoteException e) {
+                throw e.rethrowAsRuntimeException();
+            } catch (ServiceSpecificException e) {
+                throw new VirtualMachineException(e);
+            }
+        }
+    }
+
+    /**
      * Stops this virtual machine, if it is running.
      *
      * <p>NOTE: This method may block and should not be called on the main thread.

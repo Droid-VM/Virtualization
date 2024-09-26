@@ -56,4 +56,11 @@ interface IVirtualMachine {
 
     /** Resumes the suspended VM. */
     void resume();
+
+    /**
+     * Snapshots the VM.
+     * The snapshot path must be a directory owned by the caller.
+     */
+    void snapshot(
+            in @utf8InCpp String snapshot_path, boolean compress_memory, boolean encrypt);
 }

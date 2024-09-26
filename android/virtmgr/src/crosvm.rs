@@ -30,7 +30,7 @@ use shared_child::SharedChild;
 use std::borrow::Cow;
 use std::cmp::max;
 use std::fmt;
-use std::fs::{read_to_string, File};
+use std::fs::{exists, metadata, read_to_string, File};
 use std::io::{self, Read};
 use std::mem;
 use std::num::{NonZeroU16, NonZeroU32};
@@ -57,7 +57,7 @@ use tombstoned_client::{TombstonedConnection, DebuggerdDumpType};
 use rpcbinder::RpcServer;
 
 /// external/crosvm
-use vm_control::{BalloonControlCommand, VmRequest, VmResponse};
+use vm_control::{BalloonControlCommand, SnapshotCommand, VmRequest, VmResponse};
 
 const CROSVM_PATH: &str = "/apex/com.android.virt/bin/crosvm";
 
@@ -722,6 +722,39 @@ impl VmInstance {
         ) {
             Ok(VmResponse::Ok) => Ok(()),
             e => bail!("Failed to resume: {e:?}"),
+        }
+    }
+
+    /// Snapshot the VM
+    pub fn snapshot(
+        &self,
+        snapshot_path: &str,
+        compress_memory: bool,
+        encrypt: bool,
+    ) -> Result<(), Error> {
+        // We avoid creating the directory so that the caller has to create the directory
+        // beforehand, to ensure ownership
+        let snapshot_path_converted: &Path = Path::new(snapshot_path);
+        if !(exists(snapshot_path_converted)? && metadata(snapshot_path_converted)?.is_dir()) {
+            return Err(anyhow!(
+                "Passed path \"{snapshot_path}\" is not a directory, or directory might not exist"
+            ));
+        }
+        // Crosvm snapshot will be stored in a subdirectory called snapshot
+        let snapshot_path_appended = snapshot_path.to_owned() + "/snapshot";
+        let snapshot_request = SnapshotCommand::Take {
+            snapshot_path: snapshot_path_appended.into(),
+            compress_memory,
+            encrypt,
+        };
+        // Snapshot VM
+        match vm_control::client::handle_request(
+            &VmRequest::Snapshot(snapshot_request),
+            &self.crosvm_control_socket_path,
+        ) {
+            Ok(VmResponse::Ok) => Ok(()),
+            Ok(e) => Err(anyhow!("Failed to snapshot: {:?}", e)),
+            e => Err(anyhow!("Failed to snapshot: {:?}", e)),
         }
     }
 }

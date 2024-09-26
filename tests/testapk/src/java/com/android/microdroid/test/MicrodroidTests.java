@@ -467,6 +467,36 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
+    public void vmSnapshotTest() throws Exception {
+        assumeSupportedDevice();
+
+        // Create and run the VM
+        VirtualMachineConfig config =
+                newVmConfigBuilderWithPayloadBinary("MicrodroidTestNativeLib.so")
+                        .setMemoryBytes(minMemoryRequired())
+                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .setProtectedVm(false)
+                        .build();
+
+        VirtualMachine vm = forceCreateNewVirtualMachine("test_vm", config);
+        assertThat(vm.getStatus()).isEqualTo(STATUS_STOPPED);
+        vm.run();
+        assertThat(vm.getStatus()).isEqualTo(STATUS_RUNNING);
+
+        // Snapshot the VM
+
+        Path snapshotPath = Paths.get("/data/local/tmp/cts/microdroid/snapshot_microdroid/");
+        Files.createDirectories(snapshotPath);
+        // Snapshot path, compress memory, encrypt
+        vm.snapshot(snapshotPath.toString(), false, false);
+        // Cleanup
+        Files.delete(snapshotPath);
+        vm.stop();
+        getVirtualMachineManager().delete("test_vm");
+        assertThat(vm.getStatus()).isEqualTo(STATUS_DELETED);
+    }
+
+    @Test
     @CddTest(requirements = {"9.17/C-1-1"})
     public void connectVsock() throws Exception {
         assumeSupportedDevice();

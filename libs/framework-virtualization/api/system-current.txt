@@ -14,6 +14,7 @@ package android.system.virtualmachine {
     method @RequiresPermission(android.system.virtualmachine.VirtualMachine.MANAGE_VIRTUAL_MACHINE_PERMISSION) @WorkerThread public void run() throws android.system.virtualmachine.VirtualMachineException;
     method public void setCallback(@NonNull java.util.concurrent.Executor, @NonNull android.system.virtualmachine.VirtualMachineCallback);
     method @NonNull @WorkerThread public android.system.virtualmachine.VirtualMachineConfig setConfig(@NonNull android.system.virtualmachine.VirtualMachineConfig) throws android.system.virtualmachine.VirtualMachineException;
+    method @FlaggedApi("com.android.system.virtualmachine.flags.avf_v_test_apis") @WorkerThread public void snapshot(@Nullable String, boolean, boolean) throws android.system.virtualmachine.VirtualMachineException;
     method @WorkerThread public void stop() throws android.system.virtualmachine.VirtualMachineException;
     method @NonNull @WorkerThread public android.system.virtualmachine.VirtualMachineDescriptor toDescriptor() throws android.system.virtualmachine.VirtualMachineException;
     field public static final String MANAGE_VIRTUAL_MACHINE_PERMISSION = "android.permission.MANAGE_VIRTUAL_MACHINE";
