@@ -48,6 +48,90 @@ fn test_run_example_bios_vm() -> Result<(), Error> {
     run_test(None, Some(open_payload(VMBASE_EXAMPLE_BIOS_PATH)?))
 }
 
+/// Runs the vmbase_example VM as an unprotected VM via VirtualizationService and snapshots it.
+#[test]
+fn snapshot_test() -> Result<(), Error> {
+    let kernel = Some(open_payload(VMBASE_EXAMPLE_KERNEL_PATH)?);
+    android_logger::init_once(
+        android_logger::Config::default()
+            .with_tag("vmbase")
+            .with_max_level(log::LevelFilter::Debug),
+    );
+
+    // Redirect panic messages to logcat.
+    panic::set_hook(Box::new(|panic_info| {
+        log::error!("{}", panic_info);
+    }));
+
+    // We need to start the thread pool for Binder to work properly, especially link_to_death.
+    ProcessState::start_thread_pool();
+
+    let virtmgr =
+        vmclient::VirtualizationService::new().context("Failed to spawn VirtualizationService")?;
+    let service = virtmgr.connect().context("Failed to connect to VirtualizationService")?;
+
+    // Make file for test disk image.
+    let mut test_image = File::options()
+        .create(true)
+        .read(true)
+        .write(true)
+        .truncate(true)
+        .open(TEST_DISK_IMAGE_PATH)
+        .with_context(|| format!("Failed to open test disk image {}", TEST_DISK_IMAGE_PATH))?;
+    // Write 4 sectors worth of 4-byte numbers counting up.
+    for i in 0u32..512 {
+        test_image.write_all(&i.to_le_bytes())?;
+    }
+    let test_image = ParcelFileDescriptor::new(test_image);
+    let disk_image = DiskImage { image: Some(test_image), writable: false, partitions: vec![] };
+
+    // Make file for empty test disk image.
+    let empty_image = File::options()
+        .create(true)
+        .read(true)
+        .write(true)
+        .truncate(true)
+        .open(EMPTY_DISK_IMAGE_PATH)
+        .with_context(|| format!("Failed to open empty disk image {}", EMPTY_DISK_IMAGE_PATH))?;
+    let empty_image = ParcelFileDescriptor::new(empty_image);
+    let empty_disk_image =
+        DiskImage { image: Some(empty_image), writable: false, partitions: vec![] };
+
+    let config = VirtualMachineConfig::RawConfig(VirtualMachineRawConfig {
+        name: String::from("VmBaseTest"),
+        kernel,
+        initrd: None,
+        params: None,
+        bootloader: None,
+        disks: vec![disk_image, empty_disk_image],
+        protectedVm: false,
+        memoryMib: 300,
+        cpuTopology: CpuTopology::ONE_CPU,
+        platformVersion: "~1.0".to_string(),
+        gdbPort: 0, // no gdb
+        ..Default::default()
+    });
+    let vm =
+        VmInstance::create(service.as_ref(), &config, None, /* consoleIn */ None, None, None)
+            .context("Failed to create VM")?;
+    vm.start().context("Failed to start VM")?;
+    info!("Started example VM.");
+    std::fs::create_dir_all("/data/local/tmp/snapshot")?;
+    let snapdir = ParcelFileDescriptor::new(
+        File::open("/data/local/tmp/snapshot").context("failed to open snapshot dir")?,
+    );
+
+    vm.vm.snapshot(&snapdir, false).context("failed to snapshot")?;
+
+    std::fs::remove_dir_all("snapshot")?;
+    // Wait for VM to finish, and check that it shut down cleanly.
+    let death_reason = vm.wait_for_death();
+
+    assert_eq!(death_reason, DeathReason::Shutdown);
+
+    Ok(())
+}
+
 fn run_test(
     kernel: Option<ParcelFileDescriptor>,
     bootloader: Option<ParcelFileDescriptor>,

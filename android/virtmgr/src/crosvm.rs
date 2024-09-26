@@ -23,7 +23,7 @@ use command_fds::CommandFdExt;
 use libc::{sysconf, _SC_CLK_TCK};
 use log::{debug, error, info};
 use semver::{Version, VersionReq};
-use nix::{fcntl::OFlag, unistd::pipe2, unistd::Uid, unistd::User};
+use nix::{fcntl::OFlag, sys::stat::mkdirat, sys::stat::Mode, unistd::pipe2, unistd::Uid, unistd::User};
 use regex::{Captures, Regex};
 use rustutils::system_properties;
 use shared_child::SharedChild;
@@ -57,7 +57,7 @@ use tombstoned_client::{TombstonedConnection, DebuggerdDumpType};
 use rpcbinder::RpcServer;
 
 /// external/crosvm
-use vm_control::{BalloonControlCommand, VmRequest, VmResponse};
+use vm_control::{BalloonControlCommand, SnapshotCommand, VmRequest, VmResponse};
 
 const CROSVM_PATH: &str = "/apex/com.android.virt/bin/crosvm";
 
@@ -722,6 +722,33 @@ impl VmInstance {
         ) {
             Ok(VmResponse::Ok) => Ok(()),
             e => bail!("Failed to resume: {e:?}"),
+        }
+    }
+
+    /// Snapshot the VM
+    pub fn snapshot(
+        &self,
+        snapshot_path: &ParcelFileDescriptor,
+        compress_memory: bool,
+    ) -> Result<(), Error> {
+        // Crosvm snapshot will be stored in a subdirectory called snapshot
+        mkdirat(Some(snapshot_path.as_raw_fd()), "snapshot", Mode::S_IWGRP)
+            .context("failed to create snapshot dir")?;
+        let snapshot_path_appended =
+            format!("/proc/self/fd/{}/snapshot", snapshot_path.as_raw_fd());
+        let snapshot_request = SnapshotCommand::Take {
+            snapshot_path: snapshot_path_appended.into(),
+            compress_memory,
+            encrypt: false,
+        };
+        // Snapshot VM
+        match vm_control::client::handle_request(
+            &VmRequest::Snapshot(snapshot_request),
+            &self.crosvm_control_socket_path,
+        ) {
+            Ok(VmResponse::Ok) => Ok(()),
+            Ok(_) => Err(anyhow!("Failed to snapshot")),
+            e => Err(anyhow!("Failed to handle snapshot request: {:?}", e)),
         }
     }
 }
