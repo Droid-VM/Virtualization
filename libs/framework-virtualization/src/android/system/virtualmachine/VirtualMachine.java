@@ -1867,6 +1867,22 @@ public class VirtualMachine implements AutoCloseable {
         }
     }
 
+    /** @hide */
+    public void snapshot(String snapshot_path) throws VirtualMachineException {
+        synchronized (mLock) {
+            if (mVirtualMachine == null) {
+                throw new VirtualMachineException("VM is not running");
+            }
+            try {
+                mVirtualMachine.snapshot(snapshot_path);
+            } catch (RemoteException e) {
+                throw e.rethrowAsRuntimeException();
+            } catch (ServiceSpecificException e) {
+                throw new VirtualMachineException(e);
+            }
+        }
+    }
+
     /**
      * Stops this virtual machine, if it is running.
      *

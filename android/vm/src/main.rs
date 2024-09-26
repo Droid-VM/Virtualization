@@ -350,6 +350,13 @@ enum Opt {
         /// CID of the VM
         cid: Option<i32>,
     },
+    Snapshot {
+        /// CID of the VM
+        cid: i32,
+
+        /// Snapshot path
+        snapshot_path: PathBuf,
+    },
 }
 
 fn parse_debug_level(s: &str) -> Result<DebugLevel, String> {
@@ -413,6 +420,7 @@ fn main() -> Result<(), Error> {
             command_create_idsig(get_service()?.as_ref(), &apk, &path)
         }
         Opt::Console { cid } => command_console(cid),
+        Opt::Snapshot { cid, snapshot_path } => command_snapshot(cid, snapshot_path),
     }
 }
 
@@ -490,6 +498,14 @@ fn command_console(cid: Option<i32>) -> Result<(), Error> {
         .find_map(|vm_info| vm_info.hostConsoleName)
         .context("Failed to get VM with console")?;
     Err(Command::new("microcom").arg(host_console_name).exec().into())
+}
+
+fn command_snapshot(cid: i32, snapshot_path: PathBuf) -> Result<(), Error> {
+    std::fs::create_dir(&snapshot_path)
+        .context("failed to create snapshot directory to snapshot VM")?;
+    get_service()?
+        .snapshotVmInstance(cid, &(snapshot_path.display().to_string() + "/snapshot"))
+        .context("Failed to snapshot VM with CID: {cid}")
 }
 
 #[cfg(test)]

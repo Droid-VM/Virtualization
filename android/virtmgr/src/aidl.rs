@@ -344,6 +344,14 @@ impl IVirtualizationService for VirtualizationService {
         check_manage_access()?;
         GLOBAL_SERVICE.claimVmInstance(instance_id)
     }
+
+    fn snapshotVmInstance(&self, cid: i32, snapshot_path: &str) -> binder::Result<()> {
+        if let Some(vm) = self.state.get_vm(cid as u32) {
+            vm.snapshot(snapshot_path).or_service_specific_exception(-1)
+        } else {
+            Err(anyhow!("Failed to get VM with cid: {}", cid)).or_service_specific_exception(-1)?
+        }
+    }
 }
 
 /// Implementation of the AIDL `IGlobalVmContext` interface for early VMs.
@@ -1423,6 +1431,14 @@ impl IVirtualMachine for VirtualMachine {
         self.instance
             .resume()
             .with_context(|| format!("Error resuming VM with CID {}", self.instance.cid))
+            .with_log()
+            .or_service_specific_exception(-1)
+    }
+
+    fn snapshot(&self, snapshot_path: &str) -> binder::Result<()> {
+        self.instance
+            .snapshot(snapshot_path)
+            .with_context(|| format!("Error snapshotting VM with CID {}", self.instance.cid))
             .with_log()
             .or_service_specific_exception(-1)
     }
