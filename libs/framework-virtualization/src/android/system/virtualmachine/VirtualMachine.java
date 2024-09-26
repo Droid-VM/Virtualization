@@ -43,7 +43,6 @@ import static android.system.virtualmachine.VirtualMachineCallback.STOP_REASON_V
 import static java.util.Objects.requireNonNull;
 
 import android.annotation.CallbackExecutor;
-import android.annotation.FlaggedApi;
 import android.annotation.IntDef;
 import android.annotation.IntRange;
 import android.annotation.NonNull;
@@ -68,6 +67,7 @@ import android.system.OsConstants;
 import android.system.virtualizationcommon.DeathReason;
 import android.system.virtualizationcommon.ErrorCode;
 import android.system.virtualizationservice.IVirtualMachine;
+import android.system.virtualizationservice.IVirtualMachine.SnapshotOptions;
 import android.system.virtualizationservice.IVirtualMachineCallback;
 import android.system.virtualizationservice.IVirtualizationService;
 import android.system.virtualizationservice.InputDevice;
@@ -1859,6 +1859,34 @@ public class VirtualMachine implements AutoCloseable {
             }
             try {
                 mVirtualMachine.resume();
+            } catch (RemoteException e) {
+                throw e.rethrowAsRuntimeException();
+            } catch (ServiceSpecificException e) {
+                throw new VirtualMachineException(e);
+            }
+        }
+    }
+
+    /**
+     * Snapshots this virtual machine.
+     *
+     * <p>NOTE: The VM is suspended, snapshot and then resumed.
+     *
+     * @param snapshot_path Snapshot path where the snapshot will be saved
+     * @param options Snapshot options - ex: compress_memory
+     * @throws VirtualMachineException Throws exception if the directory does not exist, or if the
+     *     snapshot fails.
+     * @hide
+     */
+    @WorkerThread
+    public void snapshot(ParcelFileDescriptor snapshot_path, SnapshotOptions options)
+            throws VirtualMachineException {
+        synchronized (mLock) {
+            if (mVirtualMachine == null) {
+                throw new VirtualMachineException("VM is not running");
+            }
+            try {
+                mVirtualMachine.snapshot(snapshot_path, options);
             } catch (RemoteException e) {
                 throw e.rethrowAsRuntimeException();
             } catch (ServiceSpecificException e) {
