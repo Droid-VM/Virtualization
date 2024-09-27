@@ -116,4 +116,7 @@ parcelable VirtualMachineRawConfig {
 
     /** List of tee services this VM wants to access */
     String[] teeServices;
+
+    /** Path pointing to a snapshot image to restore a VM */
+    @nullable @utf8InCpp String snapshot;
 }

@@ -139,6 +139,7 @@ pub struct CrosvmConfig {
     pub balloon: bool,
     pub usb_config: UsbConfig,
     pub dump_dt_fd: Option<File>,
+    pub snapshot: Option<String>,
 }
 
 #[derive(Debug)]
@@ -1062,6 +1063,10 @@ fn run_vm(
 
     if !config.usb_config.controller {
         command.arg("--no-usb");
+    }
+
+    if let Some(snapshot) = config.snapshot {
+        command.arg("--restore").arg(snapshot);
     }
 
     let mut memory_mib = config.memory_mib;

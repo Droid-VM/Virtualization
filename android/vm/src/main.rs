@@ -77,6 +77,10 @@ pub struct CommonConfig {
     #[cfg(tee_services_allowlist)]
     #[arg(long)]
     tee_services: Vec<String>,
+
+    /// Snapshot path to restore VM
+    #[arg(long)]
+    snapshot: Option<String>,
 }
 
 impl CommonConfig {
