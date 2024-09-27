@@ -756,6 +756,7 @@ impl VirtualizationService {
             no_balloon: config.noBalloon,
             usb_config,
             dump_dt_fd,
+            snapshot: config.snapshot.clone(),
         };
         let instance = Arc::new(
             VmInstance::new(
@@ -1163,6 +1164,7 @@ fn load_app_config(
     vm_config.cpuTopology = config.cpuTopology;
     vm_config.hugePages = config.hugePages || vm_payload_config.hugepages;
     vm_config.boostUclamp = config.boostUclamp;
+    vm_config.snapshot = config.snapshot.clone();
 
     // Microdroid takes additional init ramdisk & (optionally) storage image
     add_microdroid_system_images(config, instance_file, storage_image, os_name, &mut vm_config)?;

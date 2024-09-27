@@ -195,6 +195,7 @@ pub fn command_run_app(config: RunAppConfig) -> Result<(), Error> {
         osName: os_name,
         hugePages: config.common.hugepages,
         boostUclamp: config.common.boost_uclamp,
+        snapshot: config.common.snapshot,
     });
     run(
         service.as_ref(),
@@ -278,6 +279,7 @@ pub fn command_run(config: RunCustomVmConfig) -> Result<(), Error> {
     vm_config.cpuTopology = config.common.cpu_topology;
     vm_config.hugePages = config.common.hugepages;
     vm_config.boostUclamp = config.common.boost_uclamp;
+    vm_config.snapshot = config.common.snapshot;
     run(
         get_service()?.as_ref(),
         &VirtualMachineConfig::RawConfig(vm_config),
