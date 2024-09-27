@@ -72,6 +72,10 @@ pub struct CommonConfig {
     /// Boost uclamp to stablise results for benchmarks.
     #[arg(short, long)]
     boost_uclamp: bool,
+
+    /// Snapshot path to restore VM
+    #[arg(long)]
+    snapshot: Option<String>,
 }
 
 impl CommonConfig {
