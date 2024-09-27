@@ -43,6 +43,7 @@ import androidx.annotation.CallSuper;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.platform.app.InstrumentationRegistry;
 
+import com.android.compatibility.common.util.CpuFeatures;
 import com.android.microdroid.test.common.DeviceProperties;
 import com.android.microdroid.test.common.MetricsProcessor;
 import com.android.microdroid.testservice.ITestService;
@@ -248,6 +249,14 @@ public abstract class MicrodroidDeviceTestBase {
         return SystemProperties.getInt("ro.board.api_level", 0);
     }
 
+    protected void assumeNativeCpu() {
+        assume().withMessage(
+                        "Virtualization not supported for emulated (natively bridged) "
+                                + "architectures")
+                .that(CpuFeatures.isNativeBridgedCpu())
+                .isFalse();
+    }
+
     protected void assumeSupportedDevice() {
         assume().withMessage("Skip on 5.4 kernel. b/218303240")
                 .that(KERNEL_VERSION)
@@ -260,6 +269,8 @@ public abstract class MicrodroidDeviceTestBase {
                                 + " b/341889915")
                 .that(isCuttlefishArm64() || isGoldfishArm64())
                 .isFalse();
+
+        assumeNativeCpu();
     }
 
     protected void assumeNoUpdatableVmSupport() throws VirtualMachineException {

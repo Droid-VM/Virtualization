@@ -49,6 +49,7 @@ java_defaults {
         "measure_io_as_jar",
     ],
     jni_libs: [
+        "libcts_jni",
         "MicrodroidTestNativeLib",
         "MicrodroidIdleNativeLib",
         "MicrodroidEmptyNativeLib",

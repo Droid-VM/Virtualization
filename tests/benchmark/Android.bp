@@ -17,6 +17,7 @@ android_test {
         "truth",
     ],
     jni_libs: [
+        "libcts_jni",
         "MicrodroidBenchmarkNativeLib",
         "MicrodroidIdleNativeLib",
         "MicrodroidTestNativeLib",

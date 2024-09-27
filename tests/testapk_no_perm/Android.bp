@@ -14,6 +14,7 @@ android_test {
         "compatibility-common-util-devicesidelib",
     ],
     jni_libs: [
+        "libcts_jni",
         "MicrodroidTestNativeLib",
     ],
     test_suites: [

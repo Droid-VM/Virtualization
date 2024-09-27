@@ -1418,6 +1418,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     @Test
     @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-7"})
     public void bootFailsWhenMicrodroidDataIsCompromised() throws Exception {
+        assumeNativeCpu();
         // If Updatable VM is supported => No instance.img required
         assumeNoUpdatableVmSupport();
         assertThatBootFailsAfterCompromisingPartition(MICRODROID_PARTITION_UUID);
@@ -1426,6 +1427,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     @Test
     @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-7"})
     public void bootFailsWhenPvmFwDataIsCompromised() throws Exception {
+        assumeNativeCpu();
         // If Updatable VM is supported => No instance.img required
         assumeNoUpdatableVmSupport();
         if (mProtectedVm) {
@@ -1521,6 +1523,8 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
     @Test
     public void bootFailsWhenBinaryIsMissingEntryFunction() throws Exception {
+        assumeNativeCpu();
+
         VirtualMachineConfig normalConfig =
                 newVmConfigBuilderWithPayloadBinary("MicrodroidEmptyNativeLib.so")
                         .setDebugLevel(DEBUG_LEVEL_FULL)
@@ -1533,6 +1537,8 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
     @Test
     public void bootFailsWhenBinaryTriesToLinkAgainstPrivateLibs() throws Exception {
+        assumeNativeCpu();
+
         VirtualMachineConfig normalConfig =
                 newVmConfigBuilderWithPayloadBinary("MicrodroidPrivateLinkingNativeLib.so")
                         .setDebugLevel(DEBUG_LEVEL_FULL)
@@ -1545,6 +1551,8 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
     @Test
     public void sameInstancesShareTheSameVmObject() throws Exception {
+        assumeNativeCpu();
+
         VirtualMachineConfig config =
                 newVmConfigBuilderWithPayloadBinary("MicrodroidTestNativeLib.so").build();
 
@@ -1603,6 +1611,8 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
     private TestResults importedVmIsEqualToTheOriginalVm(boolean encryptedStoreEnabled)
             throws Exception {
+        assumeNativeCpu();
+
         // Arrange
         VirtualMachineConfig.Builder builder =
                 newVmConfigBuilderWithPayloadBinary("MicrodroidTestNativeLib.so")
