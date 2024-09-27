@@ -33,5 +33,6 @@
         <option name="test-device-path" value="/data/local/tmp" />
         <option name="module-name" value="vm_hidden_apis" />
         <option name="test-timeout" value="5m" />
+        <option name="native-test-flag" value="--test-threads=1" />
     </test>
 </configuration>
