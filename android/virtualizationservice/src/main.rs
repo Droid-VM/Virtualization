@@ -111,7 +111,9 @@ fn register<T: binder::FromIBinder + ?Sized>(name: &str, service: binder::Strong
 /// Remove any files under `TEMPORARY_DIRECTORY`.
 fn clear_temporary_files() -> Result<(), Error> {
     for dir_entry in read_dir(TEMPORARY_DIRECTORY)? {
-        remove_temporary_dir(&dir_entry?.path())?
+        if let Err(e) = remove_temporary_dir(&dir_entry?.path()) {
+            error!("Error removing dir: {}", e);
+        }
     }
     Ok(())
 }

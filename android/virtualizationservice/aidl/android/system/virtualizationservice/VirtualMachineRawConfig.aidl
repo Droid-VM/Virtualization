@@ -126,4 +126,7 @@ parcelable VirtualMachineRawConfig {
      * VMs.
      */
     boolean enableHypervisorSpecificAuthMethod;
+
+    /** Path pointing to a snapshot image to restore a VM */
+    @nullable @utf8InCpp String snapshot;
 }

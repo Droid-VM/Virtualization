@@ -72,6 +72,8 @@ pub struct VmConfig {
     pub console_input_device: Option<String>,
     /// The USB config of the VM.
     pub usb_config: Option<UsbConfig>,
+    /// Snapshot path to restore a VM
+    pub snapshot: Option<String>,
 }
 
 impl VmConfig {
@@ -138,6 +140,7 @@ impl VmConfig {
             consoleInputDevice: self.console_input_device.clone(),
             usbConfig: usb_config,
             balloon: true,
+            snapshot: self.snapshot.clone(),
             ..Default::default()
         })
     }

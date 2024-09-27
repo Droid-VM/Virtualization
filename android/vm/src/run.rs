@@ -193,6 +193,7 @@ pub fn command_run_app(config: RunAppConfig) -> Result<(), Error> {
         osName: os_name.to_string(),
         hugePages: config.common.hugepages,
         boostUclamp: config.common.boost_uclamp,
+        snapshot: config.common.snapshot,
     });
     run(
         service.as_ref(),
@@ -277,6 +278,7 @@ pub fn command_run(config: RunCustomVmConfig) -> Result<(), Error> {
     vm_config.hugePages = config.common.hugepages;
     vm_config.boostUclamp = config.common.boost_uclamp;
     vm_config.teeServices = config.common.tee_services().to_vec();
+    vm_config.snapshot = config.common.snapshot;
     run(
         get_service()?.as_ref(),
         &VirtualMachineConfig::RawConfig(vm_config),

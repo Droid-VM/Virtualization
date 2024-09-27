@@ -142,6 +142,7 @@ pub struct CrosvmConfig {
     pub dump_dt_fd: Option<File>,
     pub enable_hypervisor_specific_auth_method: bool,
     pub instance_id: [u8; 64],
+    pub snapshot: Option<String>,
 }
 
 #[derive(Debug)]
@@ -322,6 +323,7 @@ impl VmState {
         if let VmState::NotStarted { config } = state {
             let config = *config;
             let detect_hangup = config.detect_hangup;
+            let restoring = config.snapshot.is_some();
             let (failure_pipe_read, failure_pipe_write) = create_pipe()?;
             let vfio_devices = config.vfio_devices.clone();
             let tap =
@@ -332,7 +334,9 @@ impl VmState {
             // If this fails and returns an error, `self` will be left in the `Failed` state.
             let child =
                 Arc::new(run_vm(config, &instance.crosvm_control_socket_path, failure_pipe_write)?);
-
+            if restoring {
+                instance.update_payload_state(PayloadState::Ready).unwrap();
+            }
             let instance_monitor_status = instance.clone();
             let child_monitor_status = child.clone();
             thread::spawn(move || {
@@ -1102,6 +1106,10 @@ fn run_vm(
 
     if !config.usb_config.controller {
         command.arg("--no-usb");
+    }
+
+    if let Some(snapshot) = config.snapshot {
+        command.arg("--restore").arg(snapshot);
     }
 
     let mut memory_mib = config.memory_mib;
