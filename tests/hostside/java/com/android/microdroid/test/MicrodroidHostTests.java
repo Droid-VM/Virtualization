@@ -437,9 +437,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @VsrTest(requirements = {"VSR-7.1-001.008"})
     public void UpgradedPackageIsAcceptedWithSecretkeeper() throws Exception {
         // Preconditions
-        assumeVmTypeSupported(true);
-        assumeUpdatableVmSupported();
-
+        assumeVmTypeSupported(true); // Non-protected VMs may not support upgrades
+        ensureUpdatableVmSupported();
         getDevice().uninstallPackage(PACKAGE_NAME);
         getDevice().installPackage(findTestFile(APK_NAME), /* reinstall= */ true);
         ensureProtectedMicrodroidBootsSuccessfully(INSTANCE_ID_FILE, INSTANCE_IMG);
@@ -1392,10 +1391,17 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         && device.doesFileExist("/sys/bus/platform/drivers/vfio-platform"));
     }
 
-    private void assumeUpdatableVmSupported() throws DeviceNotAvailableException {
-        assumeTrue(
-                "This test is only applicable if if Updatable VMs are supported",
-                isUpdatableVmSupported());
+    private void ensureUpdatableVmSupported() throws DeviceNotAvailableException {
+        long vendorApiLevel = getAndroidDevice().getIntProperty("ro.board.api_level", 0);
+        if (vendorApiLevel >= 202504) {
+            assertTrue(
+                    "Missing Updatable VM support, have you declared Secretkeeper interface?",
+                    isUpdatableVmSupported());
+        } else {
+            assumeTrue(
+                    "Vendor API lower than 202504 may not support Updatable VM",
+                    isUpdatableVmSupported());
+        }
     }
 
     private TestDevice getAndroidDevice() {
