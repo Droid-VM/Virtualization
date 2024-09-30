@@ -16,6 +16,29 @@
       "message": "Seems some of the test builds do not have Secretkeeper enabled. Enabling them to unblock this patch.",
       "revId": "6130564b70ea07d25bff6e4bb2cfaff94ce62164",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54609249_bf694ae8",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1291,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-09-30T12:43:59Z",
+      "side": 1,
+      "message": "This change will disable the test on all older Pixel devices with vendor API levels \u003c 202504 that already support updatable VMs. Is this intended?",
+      "range": {
+        "startLine": 1289,
+        "startChar": 8,
+        "endLine": 1291,
+        "endChar": 42
+      },
+      "revId": "6130564b70ea07d25bff6e4bb2cfaff94ce62164",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
