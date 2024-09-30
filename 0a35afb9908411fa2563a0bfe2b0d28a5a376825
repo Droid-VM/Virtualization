@@ -334,6 +334,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2ed59ccc_b6c68854",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualMachine.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-09-30T22:32:16Z",
+      "side": 1,
+      "message": "If we don\u0027t do an FD, could the snapshot path be kept as an implementation detail of virtualization manager?",
+      "parentUuid": "2a02a707_e4e334a8",
+      "range": {
+        "startLine": 61,
+        "startChar": 32,
+        "endLine": 61,
+        "endChar": 51
+      },
+      "revId": "0a35afb9908411fa2563a0bfe2b0d28a5a376825",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "75f3b36e_c9735a90",
         "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 2
