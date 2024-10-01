@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ec48e46_91d58944",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-01T18:07:09Z",
+      "side": 1,
+      "message": "That doesn\u0027t accurately reflect what you change does. For example,\n\n\u003e Add support for a new VM capability flag in the VBMeta property\n\u003e \"com.android.virt.cap\" representing guest kernel support for\n\u003e the UEFI boot process.\n\nwould have been more accurate.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 34
+      },
+      "revId": "62ceadc9f9ec39d4f405bf51dbd437ba99a7decd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03fdf558_f0851c4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-01T18:07:09Z",
+      "side": 1,
+      "message": "We usually try to have one \"action\" per line/paragraph so this would look like\n```\nAdd UEFI [...]\n\nAdd unit tests [...]\n```",
+      "range": {
+        "startLine": 9,
+        "startChar": 61,
+        "endLine": 10,
+        "endChar": 33
+      },
+      "revId": "62ceadc9f9ec39d4f405bf51dbd437ba99a7decd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8481a8b8_8e29839d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-01T18:07:09Z",
+      "side": 1,
+      "message": "`libpvmfw_avb`",
+      "range": {
+        "startLine": 12,
+        "startChar": 12,
+        "endLine": 12,
+        "endChar": 23
+      },
+      "revId": "62ceadc9f9ec39d4f405bf51dbd437ba99a7decd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c6e9bd1_b4132f9a",
+        "filename": "guest/pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-01T18:07:09Z",
+      "side": 1,
+      "message": "You might want to add a comment here, to explain what we\u0027re trying to cover with this `assert`.",
+      "range": {
+        "startLine": 436,
+        "startChar": 4,
+        "endLine": 436,
+        "endChar": 7
+      },
+      "revId": "62ceadc9f9ec39d4f405bf51dbd437ba99a7decd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
