@@ -482,7 +482,7 @@ flag_aware_avb_add_hash_footer_defaults {
             props: [
                 {
                     name: "com.android.virt.cap",
-                    value: "secretkeeper_protection",
+                    value: "secretkeeper_protection|uefi_support",
                 },
             ],
         },
