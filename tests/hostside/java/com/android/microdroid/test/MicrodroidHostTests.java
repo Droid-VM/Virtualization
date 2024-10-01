@@ -1050,6 +1050,25 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+    public void testMicrodroidBootsWithEFI() throws Exception {
+        final String configPath = "assets/vm_config.json"; // path inside the APK
+        final boolean protectedVm = true;
+        final String gki = "null"; /* use microdroid kernel */
+
+        // Preconditions
+        assumeKernelSupported(gki);
+        assumeVmTypeSupported(protectedVm);
+
+        testMicrodroidBootsWithBuilder(
+                MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(minMemorySize())
+                        .cpuTopology("match_host")
+                        .protectedVm(protectedVm)
+                        .name("test_microdroid_boots_with_efi"));
+    }
+
+    @Test
     @Parameters(method = "params")
     @TestCaseName("{method}_protectedVm_{0}_gki_{1}")
     public void testMicrodroidRamUsage(boolean protectedVm, String gki) throws Exception {

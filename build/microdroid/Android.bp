@@ -1,3 +1,5 @@
+MICRODROID_ROLLBACK_INDEX = 1
+
 package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
@@ -458,6 +460,14 @@ soong_config_module_type {
         "rollback_index",
         "props",
     ],
+    arch: {
+        arm64: {
+            src: ":microdroid_kernel_prebuilt-arm64",
+        },
+        x86_64: {
+            src: ":microdroid_kernel_prebuilt-x86_64",
+        },
+    },
 }
 
 flag_aware_avb_add_hash_footer_defaults {
@@ -469,16 +479,16 @@ flag_aware_avb_add_hash_footer_defaults {
     enabled: false,
     arch: {
         arm64: {
-            enabled: true,
+            src: ":microdroid_kernel_prebuilt-arm64",
         },
         x86_64: {
-            enabled: true,
+            src: ":microdroid_kernel_prebuilt-x86_64",
         },
     },
     // Below are properties that are conditionally set depending on value of build flags.
     soong_config_variables: {
         release_avf_enable_llpvm_changes: {
-            rollback_index: 1,
+            rollback_index: MICRODROID_ROLLBACK_INDEX,
             props: [
                 {
                     name: "com.android.virt.cap",
@@ -489,18 +499,48 @@ flag_aware_avb_add_hash_footer_defaults {
     },
 }
 
+flag_aware_avb_add_hash_footer_defaults {
+    name: "microdroid_kernel_signed_with_uefi_defaults",
+    props: [
+        {
+            name: "com.android.virt.cap",
+            value: "supports_uefi_boot",
+        },
+    ],
+    // Below are properties that are conditionally set depending on value of build flags.
+    soong_config_variables: {
+        release_avf_enable_llpvm_changes: {
+            props: [
+                {
+                    name: "com.android.virt.cap",
+                    value: "secretkeeper_protection|supports_uefi_boot",
+                },
+            ],
+        },
+    },
+}
+
+filegroup {
+    name: "microdroid_kernel_prebuilt",
+}
+
 avb_add_hash_footer {
     name: "microdroid_kernel_signed",
     defaults: ["microdroid_kernel_signed_defaults"],
     filename: "microdroid_kernel",
-    arch: {
-        arm64: {
-            src: ":microdroid_kernel_prebuilt-arm64",
-        },
-        x86_64: {
-            src: ":microdroid_kernel_prebuilt-x86_64",
-        },
-    },
+
+    include_descriptors_from_images: [
+        ":microdroid_initrd_normal_hashdesc",
+        ":microdroid_initrd_debug_hashdesc",
+    ],
+}
+
+avb_add_hash_footer {
+    name: "microdroid_kernel_signed_supports_uefi_boot",
+    defaults: [
+        "microdroid_kernel_signed_defaults",
+        "microdroid_kernel_signed_with_uefi_defaults",
+    ],
     include_descriptors_from_images: [
         ":microdroid_initrd_normal_hashdesc",
         ":microdroid_initrd_debug_hashdesc",
