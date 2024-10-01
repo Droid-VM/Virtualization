@@ -22,6 +22,30 @@
       },
       "revId": "d88c78ad737606facb5dca572f71d4a9657866c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de32c05b_c522be33",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1294,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-10-01T11:32:12Z",
+      "side": 1,
+      "message": "Interesting. The test was never supposed to run for non-protected VM, since we do not support upgrades of apks in non-protected Microdroid. It must\u0027ve just been failing assumption, which we removed in this patch.\n\nI\u0027ll add `assumeProtectedVm()` in the test.\n\nAdditionally, CF does not support protected VM and therefore need not support Secretkeeper to be VSR compliant.",
+      "parentUuid": "8f96e63a_4c473f7f",
+      "range": {
+        "startLine": 1294,
+        "startChar": 16,
+        "endLine": 1294,
+        "endChar": 42
+      },
+      "revId": "d88c78ad737606facb5dca572f71d4a9657866c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
