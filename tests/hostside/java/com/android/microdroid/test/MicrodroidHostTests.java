@@ -938,6 +938,20 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-1-2", "9.17/C-1-3"})
+    public void testMicrodroidBootsWithEFI() throws Exception {
+        final String configPath = "assets/vm_config.json"; // path inside the APK
+        testMicrodroidBootsWithBuilder(
+                MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(minMemorySize())
+                        .cpuTopology("match_host")
+                        .protectedVm(mProtectedVm)
+                        .name("test_microdroid_boots_with_efi")
+                        .gki(mGki));
+    }
+
+    @Test
     public void testMicrodroidRamUsage() throws Exception {
         final String configPath = "assets/vm_config.json";
         mMicrodroidDevice =
