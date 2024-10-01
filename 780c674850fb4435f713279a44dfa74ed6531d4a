@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99fb820b_7bf7cffd",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1289,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-10-01T11:39:09Z",
+      "side": 1,
+      "message": "I\u0027ve seen other tests use `com.android.compatibility.common.util.PropertyUtil.getVsrApiLevel`, which copes with more variants -- use here?",
+      "revId": "780c674850fb4435f713279a44dfa74ed6531d4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1efa37b_37e7d05e",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1295,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2024-10-01T11:39:09Z",
+      "side": 1,
+      "message": "nit: I think this would be easier to follow as:\n```\n// Updatable VM support is optional before VSR 202504\nif (vendorApiLevel \u003e\u003d 202504) {\n  assertTrue(isUpdatableVmSupported());\n} else {\n  assumeTrue(isUpdatableVmSupported());\n}\n```",
+      "revId": "780c674850fb4435f713279a44dfa74ed6531d4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
