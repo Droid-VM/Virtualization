@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f96e63a_4c473f7f",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1294,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-01T06:58:03Z",
+      "side": 1,
+      "message": "This assert breaks CI:\n\n```\navf_presubmit_tests\n[Test] v2/android-kvm-team/avf_presubmit_tests on aosp_cf_x86_64_phone-trunk_staging-userdebug on aosp-main \n\n Test\ncom.android.microdroid.test.MicrodroidHostTests.UpgradedPackageIsAcceptedWithSecretkeeper[protectedVm\u003dfalse,gki\u003dnull] is broken with this change applied. Without this change the test was 100% passing.\nError: the test failed: java.lang.AssertionError: Missing Updatable VM support, have you declared Secretkeeper interface?\n\njava.lang.AssertionError: Missing Updatable VM support, have you declared Secretkeeper interface?\n    at org.junit.Assert.fail(Assert.java:89)\n    at org.junit.Assert.assertTrue(Assert.java:42)\n...\n```",
+      "range": {
+        "startLine": 1294,
+        "startChar": 16,
+        "endLine": 1294,
+        "endChar": 42
+      },
+      "revId": "d88c78ad737606facb5dca572f71d4a9657866c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
