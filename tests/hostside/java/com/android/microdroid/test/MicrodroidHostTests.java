@@ -1032,7 +1032,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @Test
     @Parameters(method = "params")
     @TestCaseName("{method}_protectedVm_{0}_gki_{1}")
-    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-1-2", "9.17/C/1-3"})
+    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-1-2", "9.17/C-1-3"})
     public void testMicrodroidBoots(boolean protectedVm, String gki) throws Exception {
         // Preconditions
         assumeKernelSupported(gki);
@@ -1047,6 +1047,19 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         .protectedVm(protectedVm)
                         .name("test_microdroid_boots")
                         .gki(sGkiVersions.get(gki)));
+    }
+
+    @Test
+    public void testMicrodroidBootsWithEFI() throws Exception {
+        final String configPath = "assets/vm_config.json"; // path inside the APK
+        testMicrodroidBootsWithBuilder(
+                MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(minMemorySize())
+                        .cpuTopology("match_host")
+                        .protectedVm(true)
+                        .name("test_microdroid_boots_with_efi")
+                        .gki(mGki));
     }
 
     @Test

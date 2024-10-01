@@ -489,6 +489,32 @@ flag_aware_avb_add_hash_footer_defaults {
     },
 }
 
+flag_aware_avb_add_hash_footer_defaults {
+    name: "microdroid_kernel_signed_supports_uefi_boot",
+    src: ":empty_file",
+    partition_name: "boot",
+    private_key: ":microdroid_sign_key",
+    salt: bootloader_salt,
+    enabled: false,
+    arch: {
+        arm64: {
+            enabled: true,
+        },
+    },
+    // Below are properties that are conditionally set depending on value of build flags.
+    soong_config_variables: {
+        release_avf_enable_llpvm_changes: {
+            rollback_index: 1,
+            props: [
+                {
+                    name: "com.android.virt.cap",
+                    value: "supports_uefi_boot",
+                },
+            ],
+        },
+    },
+}
+
 avb_add_hash_footer {
     name: "microdroid_kernel_signed",
     defaults: ["microdroid_kernel_signed_defaults"],
