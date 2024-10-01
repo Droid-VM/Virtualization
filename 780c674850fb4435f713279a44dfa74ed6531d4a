@@ -33,6 +33,24 @@
       "message": "nit: I think this would be easier to follow as:\n```\n// Updatable VM support is optional before VSR 202504\nif (vendorApiLevel \u003e\u003d 202504) {\n  assertTrue(isUpdatableVmSupported());\n} else {\n  assumeTrue(isUpdatableVmSupported());\n}\n```",
       "revId": "780c674850fb4435f713279a44dfa74ed6531d4a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da3b6571_739df343",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1295,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-01T11:40:50Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "c1efa37b_37e7d05e",
+      "revId": "780c674850fb4435f713279a44dfa74ed6531d4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
