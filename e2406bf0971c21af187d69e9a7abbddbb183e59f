@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6be37de_23812c66",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-02T09:44:09Z",
+      "side": 1,
+      "message": "nits: indentation",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 15
+      },
+      "revId": "e2406bf0971c21af187d69e9a7abbddbb183e59f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2eb62735_34cfd139",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-02T09:44:09Z",
+      "side": 1,
+      "message": "nits: you can specify target-dir to $workdir for cargo build to avoid target files in src.",
+      "range": {
+        "startLine": 98,
+        "startChar": 2,
+        "endLine": 102,
+        "endChar": 13
+      },
+      "revId": "e2406bf0971c21af187d69e9a7abbddbb183e59f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
