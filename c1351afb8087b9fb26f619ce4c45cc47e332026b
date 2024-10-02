@@ -22,6 +22,30 @@
       },
       "revId": "c1351afb8087b9fb26f619ce4c45cc47e332026b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9453aed_54f10ff7",
+        "filename": "build/debian/forwarder_guest/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-10-02T09:15:39Z",
+      "side": 0,
+      "message": "Look at the code below. It only supports `stream` type. Then why we should keep other types?",
+      "parentUuid": "2d81a072_7d2cd741",
+      "range": {
+        "startLine": 126,
+        "startChar": 74,
+        "endLine": 127,
+        "endChar": 78
+      },
+      "revId": "c1351afb8087b9fb26f619ce4c45cc47e332026b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
