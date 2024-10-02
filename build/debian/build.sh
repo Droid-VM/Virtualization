@@ -33,6 +33,23 @@ parse_options() {
 	fi
 }
 
+install_rust() {
+    which rustup > /dev/null 2>&1 || {
+        apt install --no-install-recommends --assume-yes rustup
+        rustup default stable
+		rustup update
+    }
+    cargo install cross
+    if which cross > /dev/null 2>&1; then
+        CROSS_BIN=$(which cross)
+    elif [ -f "$HOME/.cargo/bin/cross" ]; then
+        CROSS_BIN=$HOME/.cargo/bin/cross
+    else
+        echo "Cannot find the binary 'cross' for cross compiling rust binaries"
+        exit 1
+    fi
+}
+
 install_prerequisites() {
 	apt update
 	DEBIAN_FRONTEND=noninteractive \
@@ -53,6 +70,8 @@ install_prerequisites() {
 		udev \
 		qemu-system-arm \
 		qemu-user-static
+
+	install_rust
 
         sed -i s/losetup\ -f/losetup\ -P\ -f/g /usr/sbin/fai-diskimage
         sed -i 's/wget \$/wget -t 0 \$/g' /usr/share/debootstrap/functions
@@ -86,6 +105,14 @@ copy_android_config() {
 	mkdir -p ${dst}/files/usr/local/bin/ttyd
 	wget ${url} -O ${dst}/files/usr/local/bin/ttyd/AVF
 	chmod 777 ${dst}/files/usr/local/bin/ttyd/AVF
+
+	pushd forwarder_guest
+		$CROSS_BIN build --target aarch64-unknown-linux-gnu
+		mkdir -p ${dst}/files/usr/local/bin/forwarder_guest
+		cp target/aarch64-unknown-linux-gnu/debug/forwarder_guest ${dst}/files/usr/local/bin/forwarder_guest/AVF
+		chmod 777 ${dst}/files/usr/local/bin/forwarder_guest/AVF
+		cargo clean
+	popd
 }
 
 run_fai() {
