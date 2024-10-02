@@ -20,19 +20,15 @@
 #include <linux/vm_sockets.h>  // Needs to come after sys/socket.h
 
 #include <memory>
+#include <unordered_map>
 
-#include <base/logging.h>
-#include <base/memory/ptr_util.h>
-#include <base/strings/stringprintf.h>
+#include <glog/logging.h>
+#include <linux/bpf.h>
 #include <bpf/libbpf.h>
 #include <bpf/libbpf_legacy.h>
-#include <chromeos/constants/vm_tools.h>
-#include <grpcpp/grpcpp.h>
-#include <vm_protos/proto_bindings/common.pb.h>
-#include <vm_protos/proto_bindings/tremplin.grpc.pb.h>
 
-#include "vm_tools/port_listener/bpf/generated/skeleton_listen_tracker.ebpf.h"
-#include "vm_tools/port_listener/common.h"
+#include "listen_tracker.skel.h"
+#include "common.h"
 
 typedef std::unordered_map<int, int> port_usage_map;
 
@@ -68,8 +64,8 @@ int HandleEvent(void* ctx, void* const data, size_t size) {
 
 typedef std::unique_ptr<struct ring_buffer, decltype(&ring_buffer__free)>
     ring_buffer_ptr;
-typedef std::unique_ptr<listen_tracker_ebpf,
-                        decltype(&listen_tracker_ebpf__destroy)>
+typedef std::unique_ptr<listen_tracker_bpf,
+                        decltype(&listen_tracker_bpf__destroy)>
     listen_tracker_ptr;
 
 // BPFProgram tracks the state and resources of the listen_tracker BPF program.
@@ -84,14 +80,14 @@ class BPFProgram {
   // Load loads the listen_tracker BPF program and prepares it for polling. On
   // error nullptr is returned.
   static std::unique_ptr<BPFProgram> Load() {
-    auto* skel = listen_tracker_ebpf__open();
+    auto* skel = listen_tracker_bpf__open();
     if (!skel) {
       PLOG(ERROR) << "Failed to open listen_tracker BPF skeleton";
       return nullptr;
     }
-    listen_tracker_ptr skeleton(skel, listen_tracker_ebpf__destroy);
+    listen_tracker_ptr skeleton(skel, listen_tracker_bpf__destroy);
 
-    int err = listen_tracker_ebpf__load(skeleton.get());
+    int err = listen_tracker_bpf__load(skeleton.get());
     if (err) {
       PLOG(ERROR) << "Failed to load listen_tracker BPF program";
       return nullptr;
@@ -106,13 +102,13 @@ class BPFProgram {
     }
     ring_buffer_ptr ringbuf(rb, ring_buffer__free);
 
-    err = listen_tracker_ebpf__attach(skeleton.get());
+    err = listen_tracker_bpf__attach(skeleton.get());
     if (err) {
       PLOG(ERROR) << "Failed to attach listen_tracker";
       return nullptr;
     }
 
-    return base::WrapUnique(new BPFProgram(std::move(skeleton),
+    return std::unique_ptr<BPFProgram>(new BPFProgram(std::move(skeleton),
                                            std::move(ringbuf), std::move(map)));
   }
 
@@ -149,7 +145,7 @@ class BPFProgram {
 }  // namespace port_listener
 
 int main(int argc, char** argv) {
-  logging::InitLogging(logging::LoggingSettings());
+  google::InitGoogleLogging(argv[0]);
   libbpf_set_strict_mode(LIBBPF_STRICT_ALL);
 
   // Load our BPF program.
@@ -159,14 +155,7 @@ int main(int argc, char** argv) {
     return EXIT_FAILURE;
   }
 
-  // Connect back to TremplinListener
-  vm_tools::tremplin::TremplinListener::Stub tremplin_listener(
-      grpc::CreateChannel(base::StringPrintf("vsock:%u:%u", VMADDR_CID_HOST,
-                                             vm_tools::kTremplinListenerPort),
-                          grpc::InsecureChannelCredentials()));
-
-  // main loop: poll for listen updates, when an update comes send an rpc to
-  // tremplin listener letting it know.
+  // main loop: poll for listen updates
   for (;;) {
     if (!program->Poll()) {
       LOG(ERROR) << "Failure while polling BPF program";
@@ -174,24 +163,12 @@ int main(int argc, char** argv) {
     }
     // port_usage will be updated with the latest usage data
 
-    vm_tools::tremplin::ListeningPortInfo_ContainerPortInfo cpi;
     for (auto it : program->port_usage()) {
       if (it.second <= 0) {
         continue;
       }
-      cpi.add_listening_tcp4_ports(it.first);
+      // TODO(b/340126051): Add listening TCP4 ports.
     }
-
-    vm_tools::tremplin::ListeningPortInfo lpi;
-    (*lpi.mutable_container_ports())["penguin"] = cpi;
-
-    grpc::ClientContext ctx;
-    vm_tools::tremplin::EmptyMessage empty;
-    grpc::Status status =
-        tremplin_listener.UpdateListeningPorts(&ctx, lpi, &empty);
-    if (!status.ok()) {
-      LOG(WARNING) << "Failed to notify tremplin of new listening ports: "
-                   << status.error_message();
-    }
+    // TODO(b/340126051): Notify port information to the guest agent.
   }
 }
