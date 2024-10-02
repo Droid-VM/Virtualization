@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "667fad91_e2f810ad",
+        "filename": "build/microdroid/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-02T11:15:39Z",
+      "side": 1,
+      "message": "Following our 1-1 today, the capability will only be set for a new `microdroid_kernel_signed` flavor we will add.\n\nAt first, that payload will only be used for development/testing and a new test we will introduced, similar to the existing [`MicrodroidHostTests::testMicrodroidBoots`](https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java;l\u003d1036;drc\u003dcb469d86e0b4843ed203dd030adb420487827f23) (e.g. \"`testMicrodroidBootsWithEFI`\").\n\nThen, we will start packaging the payload with EFI support into the APEX only if an Android build flag (to be introduced) is set, to have a controlled rollout of the feature.\n\nEventually, the flag will be enabled for all Android flavors and the transition to EFI support will be complete.",
+      "range": {
+        "startLine": 485,
+        "startChar": 20,
+        "endLine": 485,
+        "endChar": 66
+      },
+      "revId": "57e89262b7683d2d80ecbda7abf54a7a66ac3c06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
