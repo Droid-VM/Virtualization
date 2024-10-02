@@ -22,6 +22,30 @@
       },
       "revId": "57f34e3b7e0a5914849c258dabe2d5a272c475e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2322c680_f7a01f58",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2024-10-02T09:32:59Z",
+      "side": 1,
+      "message": "Our target is android emulator - it does support virtualisation, it also support running arm64 native apps on x86_64 system. But since microdroid does not support loading and running arm64 code on x86_64 device this is where it fails.",
+      "parentUuid": "16b9b936_bd855279",
+      "range": {
+        "startLine": 226,
+        "startChar": 22,
+        "endLine": 226,
+        "endChar": 97
+      },
+      "revId": "57f34e3b7e0a5914849c258dabe2d5a272c475e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
