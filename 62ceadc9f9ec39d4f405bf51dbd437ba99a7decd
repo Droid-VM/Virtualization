@@ -187,6 +187,30 @@
       },
       "revId": "62ceadc9f9ec39d4f405bf51dbd437ba99a7decd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91e3640b_984970cb",
+        "filename": "guest/pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-02T11:45:56Z",
+      "side": 1,
+      "message": "In general, you don\u0027t want comments to reflect exactly what the code does because if the code changes (e.g. we add a new `Capability` and `COUNT` is now `4`) either the comment itself must be updated with the code (resulting in larger diffs i.e. highrr risk of conflicts when rebasing/merging) or we forget about it and end up with a stale comment that doesn\u0027t match what the code does.\n\nOn the phrasing itself, the comment shouldn\u0027t repeat what the code already says; `assert_eq` clearly expresses that we are \"verifying something\" and `Capability::COUNT` that that _something_ is the number of know capabilities. Instead, the comment should tell us _why_ we\u0027re doing this.\n\nRegarding Rust, regular comments use `//` as `///` are reserved for [doc comments](https://doc.rust-lang.org/reference/comments.html#doc-comments).\n\nSo, all-in-all, a more generic yet informative comment could be\n```\n// Fail if this test doesn\u0027t actually cover all supported capabilities.\n```",
+      "parentUuid": "a75f439e_cc7c49f5",
+      "range": {
+        "startLine": 436,
+        "startChar": 4,
+        "endLine": 436,
+        "endChar": 7
+      },
+      "revId": "62ceadc9f9ec39d4f405bf51dbd437ba99a7decd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
