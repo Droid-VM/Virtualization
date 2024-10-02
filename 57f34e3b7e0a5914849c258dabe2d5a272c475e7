@@ -46,6 +46,30 @@
       },
       "revId": "57f34e3b7e0a5914849c258dabe2d5a272c475e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79bc7be7_9dd91e19",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-02T10:03:33Z",
+      "side": 1,
+      "message": "To be sure we\u0027re on the same page regarding \"virtualisation\", what I meant above (and what `FEATURE_VIRTUALIZATION_FRAMEWORK` means) is that Android userspace itself should be able to spawn VMs, which is different from the level of \"virtualisation\" involved in running a \"virtual Android target\", right?\n\nI am not familiar with the Android emulator but this doesn\u0027t sound like a Microdroid (guest image) issue and instead seems to be a fundamental limitation of the Android emulator i.e. the Android build target of your userspace.\n\nTo illustrate, if you have cross-architecture code execution (say userspace targets AArch64 but the emulator runs in x86_64 and, IIUC, code gets JIT-ed or similar), how do you expect the following\n```\nkvm \u003d open(\"/dev/kvm\");\nvm \u003d ioctl(kvm, KVM_CREATE_VM);\nvcpu \u003d ioctl(vm, KVM_CREATE_VCPU);\n\nioctl(vcpu, KVM_ARM_VCPU_INIT, ...); // x64_64 KVM has no idea how to handle this\n```\nto work across architectures? Even if the emulator\u0027s `/dev/kvm` gets passed through to the emulated userspace (which might be what you meant by \"Android emulator supports virtualization\"), there is no way the backing KVM (running x86_64) will be able to handle those ARM-specific `ioctl`s, right?\n\nHow is the Android target you\u0027re using defined? In particular, does the arm64 build have the knowledge that it is targeting the x86_64 emulator? If so, why should `FEATURE_VIRTUALIZATION_FRAMEWORK` even be set for it?",
+      "parentUuid": "2322c680_f7a01f58",
+      "range": {
+        "startLine": 226,
+        "startChar": 22,
+        "endLine": 226,
+        "endChar": 97
+      },
+      "revId": "57f34e3b7e0a5914849c258dabe2d5a272c475e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
