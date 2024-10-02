@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eff761d4_922fa67e",
+        "filename": "guest/pvmfw/avb/src/verify.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-02T12:29:20Z",
+      "side": 1,
+      "message": "As discussed offline, we might want to make this capability as \"atomic\" as possible and \"`UefiSupport`\" is much more generic than what we\u0027re actually planning to support in pvmfw. WDYT of `SupportsUefiBoot` (and `supports_uefi_boot`) so that we also reflect the fact that it doesn\u0027t _only_ boot through UEFI?",
+      "range": {
+        "startLine": 74,
+        "startChar": 4,
+        "endLine": 74,
+        "endChar": 15
+      },
+      "revId": "77e3c4ecb7114dbff020aff7394c5676b0ec1062",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
