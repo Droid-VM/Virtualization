@@ -22,6 +22,75 @@
       },
       "revId": "4eebad1b9fc5045640210967b1103ccb768b6f8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47a63181_4f294d69",
+        "filename": "build/microdroid/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-03T12:09:15Z",
+      "side": 1,
+      "message": "Note that `microdroid_kernel_signed_supports_uefi_boot` is not missing this property and ideally, we want the only diff between the 2 images to be `supports_uefi_boot`.\n\nIIUC the syntax, we should therefore set `props` this way:\n```\nprops: [\n    {\n            name: \"com.android.virt.cap\",\n            value: \"supports_uefi_boot\",\n    },\n],\nsoong_config_variables: {\n    release_avf_enable_llpvm_changes: {\n        props: [\n            {\n                name: \"com.android.virt.cap\",\n                value: \"secretkeeper_protection|supports_uefi_boot\",\n            },\n        ],\n    },\n},\n```\nSo that the `secretkeeper_protection` capability remains set when the `release_avf_enable_llpvm_changes` Android flag is enabled.\n\nSame for the `rollback_index` (which probably defaults to 0 otherwise).\n\nI _think_ you can [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) the \"`1`\" between the 2 images by defining a Soong variable\n```\nMICRODROID_ROLLBACK_INDEX \u003d 1\n```\nand using it in both targets:\n```\nrollback_index: MICRODROID_ROLLBACK_INDEX,\n```\nbut please let me know if that doesn\u0027t work.",
+      "range": {
+        "startLine": 485,
+        "startChar": 28,
+        "endLine": 485,
+        "endChar": 51
+      },
+      "revId": "4eebad1b9fc5045640210967b1103ccb768b6f8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f8d3569_5b57e025",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-03T12:09:15Z",
+      "side": 1,
+      "message": "let\u0027s make this a `debug!` (not printed by default) so that we don\u0027t add unnecessary logs to the \"production\" pvmfw.",
+      "range": {
+        "startLine": 134,
+        "startChar": 8,
+        "endLine": 134,
+        "endChar": 12
+      },
+      "revId": "4eebad1b9fc5045640210967b1103ccb768b6f8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7ac37cf_5ea8c019",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1062,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-03T12:09:15Z",
+      "side": 1,
+      "message": "As discussed offline, this probably doesn\u0027t build right now.",
+      "range": {
+        "startLine": 1062,
+        "startChar": 29,
+        "endLine": 1062,
+        "endChar": 33
+      },
+      "revId": "4eebad1b9fc5045640210967b1103ccb768b6f8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
