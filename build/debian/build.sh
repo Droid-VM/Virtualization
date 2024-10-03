@@ -37,6 +37,7 @@ install_prerequisites() {
 	apt update
 	DEBIAN_FRONTEND=noninteractive \
 	apt install --no-install-recommends --assume-yes \
+		btrfs-progs \
 		binfmt-support \
 		ca-certificates \
 		debsums \
