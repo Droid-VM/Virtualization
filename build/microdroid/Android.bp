@@ -495,11 +495,17 @@ flag_aware_avb_add_hash_footer_defaults {
     arch: {
         arm64: {
             enabled: true,
+            src: ":microdroid_kernel_prebuilt-arm64",
         },
         x86_64: {
             enabled: true,
+            src: ":microdroid_kernel_prebuilt-x86_64",
         },
     },
+    include_descriptors_from_images: [
+        ":microdroid_initrd_normal_hashdesc",
+        ":microdroid_initrd_debug_hashdesc",
+    ],
     // Below are properties that are conditionally set depending on value of build flags.
     soong_config_variables: {
         release_avf_enable_llpvm_changes: {
@@ -518,18 +524,6 @@ avb_add_hash_footer {
     name: "microdroid_kernel_signed",
     defaults: ["microdroid_kernel_signed_defaults"],
     filename: "microdroid_kernel",
-    arch: {
-        arm64: {
-            src: ":microdroid_kernel_prebuilt-arm64",
-        },
-        x86_64: {
-            src: ":microdroid_kernel_prebuilt-x86_64",
-        },
-    },
-    include_descriptors_from_images: [
-        ":microdroid_initrd_normal_hashdesc",
-        ":microdroid_initrd_debug_hashdesc",
-    ],
 }
 
 prebuilt_etc {
