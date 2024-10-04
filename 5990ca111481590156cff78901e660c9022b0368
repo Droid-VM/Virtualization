@@ -16,6 +16,24 @@
       "message": "Seems like this script file isn\u0027t recognized from the FAI.\n\n```\nCalling task_configure\nExecuting shell: DEBIAN/10-files\nDEBIAN/10-files      OK.\nExecuting shell: DEBIAN/11-misc\nDEBIAN/11-misc       OK.\nExecuting shell: SYSTEM_BOOT/20-enable-systemd-networkd\nSYSTEM_BOOT/20-enable-systemd-networkd OK.\nExecuting shell: SYSTEM_BOOT/20-enable-systemd-resolved\nSYSTEM_BOOT/20-enable-systemd-resolved OK.\nExecuting shell: SYSTEM_BOOT/20-grub\nSYSTEM_BOOT/20-grub  OK.\nExecuting shell: NOCLOUD/10-password\nNOCLOUD/10-password  OK.\nExecuting shell: AVF/10-systemd\nAVF/10-systemd       OK.\nExecuting shell: LAST/10-cleanup\nLAST/10-cleanup      OK.\nExecuting shell: LAST/40-info\nLAST/40-info         OK.\n```",
       "revId": "5990ca111481590156cff78901e660c9022b0368",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa439e88_0c1a4217",
+        "filename": "build/debian/fai_config/scripts/AVF/20-port_listener",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-04T07:55:40Z",
+      "side": 1,
+      "message": "it should be an executable to be recognized.",
+      "parentUuid": "42f4d7d4_9a4139de",
+      "revId": "5990ca111481590156cff78901e660c9022b0368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
