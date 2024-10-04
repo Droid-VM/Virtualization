@@ -51,6 +51,24 @@
       "parentUuid": "52c9efea_cce33e1e",
       "revId": "fb9edfc4cb6d1d2ba9a125d7453ce7c5976e7ef4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40f707e9_af59cfe1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-04T15:25:43Z",
+      "side": 1,
+      "message": "\u003e Why is this better than ..\n\nThis feature breaks two CTS tests, MicrodroidTestApp (device test) and MicrodroidHostTest (host test), which run in different environments. `CpuFeatures.isNativeBridgedCpu()` only works for the device test.\n\nOffloading this feature detection to TradeFed would be simpler because:\n\n- It avoids adding new library dependencies to the tests as PS2, thus easier for us to maintain. Outdated / misused libraries can cause lots of trouble, see b/366191911.\n- It provides a consistent approach across both tests.",
+      "parentUuid": "f53d26b2_fca08dac",
+      "revId": "fb9edfc4cb6d1d2ba9a125d7453ce7c5976e7ef4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
