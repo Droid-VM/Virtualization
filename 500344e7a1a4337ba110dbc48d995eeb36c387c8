@@ -33,6 +33,24 @@
       "message": "do you expect build.sh is running inside guest env? or host env?",
       "revId": "500344e7a1a4337ba110dbc48d995eeb36c387c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa766b71_c4951cd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-10-04T06:15:10Z",
+      "side": 1,
+      "message": "The answer relies on where `vmlinux.h` exists. I hope host builds everything, but I haven\u0027t found the way to retrieve `vmlinux.h` to build the binary. So I think it should be run inside guest env.\n\nOn the other hand, I think it\u0027s out of scope of this change. This change is for constructing initial shell script to build binary from the host in advance \u0026 doing massive lint fixes.",
+      "parentUuid": "c6b2fbfa_d357dc9f",
+      "revId": "500344e7a1a4337ba110dbc48d995eeb36c387c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
