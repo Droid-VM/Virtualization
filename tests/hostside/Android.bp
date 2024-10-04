@@ -26,6 +26,7 @@ java_test_host {
         ":microdroid_general_sepolicy.conf",
         ":test.com.android.virt.pem",
         ":test2.com.android.virt.pem",
+        ":microdroid_kernel_signed_supports_uefi_boot",
     ],
     data_native_bins: [
         "sepolicy-analyze",

@@ -36,6 +36,7 @@ import android.cts.statsdatom.lib.ConfigUtils;
 import android.cts.statsdatom.lib.ReportUtils;
 
 import com.android.compatibility.common.util.CddTest;
+import com.android.compatibility.common.util.PropertyUtil;
 import com.android.compatibility.common.util.VsrTest;
 import com.android.microdroid.test.common.ProcessUtil;
 import com.android.microdroid.test.host.CommandRunner;
@@ -111,8 +112,10 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         }
     }
 
-    // This map is needed because the parameterizer `DeviceParameterizedRunner` doesn't support "-"
-    // in test names. The key is the test name, while the value is the actual kernel version.
+    // This map is needed because the parameterizer `DeviceParameterizedRunner`
+    // doesn't support "-"
+    // in test names. The key is the test name, while the value is the actual kernel
+    // version.
     private static HashMap<String, String> sGkiVersions = new HashMap<>();
 
     private static void initGkiVersions() {
@@ -120,7 +123,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
             return;
         }
         sGkiVersions.put("null", null); /* use microdroid kernel */
-        // TODO(b/302465542): run only the latest GKI on presubmit to reduce running time
+        // TODO(b/302465542): run only the latest GKI on presubmit to reduce running
+        // time
         for (String gki : SUPPORTED_GKI_VERSIONS) {
             String key = gki.split("-")[0];
             assertThat(sGkiVersions.containsKey(key)).isFalse();
@@ -198,10 +202,14 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         if (!updateBootconfigs) {
             command.add("--do_not_update_bootconfigs");
         }
-        // In some cases we run a CTS binary that is built from a different branch that the /system
-        // image under test. In such cases we might end up in a situation when avb_version used in
-        // CTS binary and avb_version used to sign the com.android.virt APEX do not match.
-        // This is a weird configuration, but unfortunately it can happen, hence we pass here
+        // In some cases we run a CTS binary that is built from a different branch that
+        // the /system
+        // image under test. In such cases we might end up in a situation when
+        // avb_version used in
+        // CTS binary and avb_version used to sign the com.android.virt APEX do not
+        // match.
+        // This is a weird configuration, but unfortunately it can happen, hence we pass
+        // here
         // --do_not_validate_avb_version flag to make sure that CTS doesn't fail on it.
         command.add("--do_not_validate_avb_version");
         keyOverrides.forEach(
@@ -310,7 +318,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
         File virtApexDir = FileUtil.createTempDir("virt_apex");
 
-        // Pull the virt apex's etc/ directory (which contains images and microdroid.json)
+        // Pull the virt apex's etc/ directory (which contains images and
+        // microdroid.json)
         File virtApexEtcDir = new File(virtApexDir, "etc");
         // We need only etc/ directory for images
         assertWithMessage("Failed to mkdir " + virtApexEtcDir)
@@ -345,17 +354,19 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         // Load /apex/apex-info-list.xml to get paths to APEXes required for the VM.
         ActiveApexInfoList list = getActiveApexInfoList();
 
-        // Since Java APP can't start a VM with a custom image, here, we start a VM using `vm run`
-        // command with a VM Raw config which is equiv. to what virtualizationservice creates with
+        // Since Java APP can't start a VM with a custom image, here, we start a VM
+        // using `vm run`
+        // command with a VM Raw config which is equiv. to what virtualizationservice
+        // creates with
         // a VM App config.
         //
         // 1. use etc/microdroid.json as base
         // 2. add partitions: bootconfig, vbmeta, instance image
         // 3. add a payload image disk with
-        //   - payload-metadata
-        //   - apexes
-        //   - test apk
-        //   - its idsig
+        // - payload-metadata
+        // - apexes
+        // - test apk
+        // - its idsig
 
         // Load etc/microdroid.json
         final String os = (gki == null) ? "microdroid" : "microdroid_gki-" + gki;
@@ -364,6 +375,150 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
         // Replace paths so that the config uses re-signed images from TEST_ROOT
         config.put("kernel", config.getString("kernel").replace(VIRT_APEX, TEST_ROOT));
+        JSONArray disks = config.getJSONArray("disks");
+        for (int diskIndex = 0; diskIndex < disks.length(); diskIndex++) {
+            JSONObject disk = disks.getJSONObject(diskIndex);
+            JSONArray partitions = disk.getJSONArray("partitions");
+            for (int partIndex = 0; partIndex < partitions.length(); partIndex++) {
+                JSONObject part = partitions.getJSONObject(partIndex);
+                part.put("path", part.getString("path").replace(VIRT_APEX, TEST_ROOT));
+            }
+        }
+
+        // Add partitions to the second disk
+        final String initrdPath = TEST_ROOT + "etc/" + os + "_initrd_debuggable.img";
+        config.put("initrd", initrdPath);
+        // Add instance image as a partition in disks[1]
+        disks.put(
+                new JSONObject()
+                        .put("writable", true)
+                        .put(
+                                "partitions",
+                                new JSONArray().put(newPartition("vm-instance", instanceImgPath))));
+        // Add payload image disk with partitions:
+        // - payload-metadata
+        // - apexes: com.android.os.statsd, com.android.adbd, [sharedlib apex](optional)
+        // - apk and idsig
+        List<ActiveApexInfo> apexesForVm = new ArrayList<>();
+        apexesForVm.add(list.get("com.android.os.statsd"));
+        apexesForVm.add(list.get("com.android.adbd"));
+        apexesForVm.addAll(list.getSharedLibApexes());
+
+        final JSONArray partitions = new JSONArray();
+        partitions.put(newPartition("payload-metadata", payloadMetadataPath));
+        for (ActiveApexInfo apex : apexesForVm) {
+            partitions.put(newPartition(apex.name, apex.path));
+        }
+        partitions
+                .put(newPartition("microdroid-apk", apkPath))
+                .put(newPartition("microdroid-apk-idsig", idSigPath));
+        disks.put(new JSONObject().put("writable", false).put("partitions", partitions));
+
+        final File localPayloadMetadata = new File(virtApexDir, "payload-metadata.img");
+        createPayloadMetadata(apexesForVm, localPayloadMetadata);
+        getDevice().pushFile(localPayloadMetadata, payloadMetadataPath);
+
+        config.put("protected", isProtected);
+
+        // Write updated raw config
+        final String configPath = TEST_ROOT + "raw_config.json";
+        getDevice().pushString(config.toString(), configPath);
+
+        List<String> args =
+                Arrays.asList(
+                        "adb",
+                        "-s",
+                        getDevice().getSerialNumber(),
+                        "shell",
+                        VIRT_APEX + "bin/vm run",
+                        "--console " + CONSOLE_PATH,
+                        "--log " + LOG_PATH,
+                        configPath);
+        if (gki != null) {
+            args.add("--gki " + gki);
+        }
+
+        PipedInputStream pis = new PipedInputStream();
+        Process process = createRunUtil().runCmdInBackground(args, new PipedOutputStream(pis));
+        return new VmInfo(process);
+    }
+
+    private VmInfo runMicrodroidWithResignedImagesCustomKernel(
+            File key,
+            Map<String, File> keyOverrides,
+            boolean isProtected,
+            boolean updateBootconfigs,
+            String gki)
+            throws Exception {
+        CommandRunner android = new CommandRunner(getDevice());
+        gki = sGkiVersions.get(gki);
+
+        File virtApexDir = FileUtil.createTempDir("virt_apex");
+
+        // Pull the virt apex's etc/ directory (which contains images and
+        // microdroid.json)
+        File virtApexEtcDir = new File(virtApexDir, "etc");
+        // We need only etc/ directory for images
+        assertWithMessage("Failed to mkdir " + virtApexEtcDir)
+                .that(virtApexEtcDir.mkdirs())
+                .isTrue();
+        assertWithMessage("Failed to pull " + VIRT_APEX + "etc")
+                .that(getDevice().pullDir(VIRT_APEX + "etc", virtApexEtcDir))
+                .isTrue();
+
+        File virtApexEtcCustomKernelDir = new File(virtApexEtcDir, "fs/microdroid_kernel");
+        File moduleFile = findTestFile("microdroid_kernel_supports_uefi_boot");
+        FileUtil.copyFile(moduleFile, virtApexEtcCustomKernelDir);
+        resignVirtApex(virtApexDir, key, keyOverrides, updateBootconfigs);
+
+        // Push back re-signed virt APEX contents and updated microdroid.json
+        getDevice().pushDir(virtApexDir, TEST_ROOT);
+
+        // Create the idsig file for the APK
+        final String apkPath = getPathForPackage(PACKAGE_NAME);
+        final String idSigPath = TEST_ROOT + "idsig";
+        android.run(VIRT_APEX + "bin/vm", "create-idsig", apkPath, idSigPath);
+
+        // Create the instance image for the VM
+        final String instanceImgPath = TEST_ROOT + "instance.img";
+        android.run(
+                VIRT_APEX + "bin/vm",
+                "create-partition",
+                "--type instance",
+                instanceImgPath,
+                Integer.toString(10 * 1024 * 1024));
+
+        // payload-metadata is created on device
+        final String payloadMetadataPath = TEST_ROOT + "payload-metadata.img";
+
+        // Load /apex/apex-info-list.xml to get paths to APEXes required for the VM.
+        ActiveApexInfoList list = getActiveApexInfoList();
+
+        // Since Java APP can't start a VM with a custom image, here, we start a VM
+        // using `vm run`
+        // command with a VM Raw config which is equiv. to what virtualizationservice
+        // creates with
+        // a VM App config.
+        //
+        // 1. use etc/microdroid.json as base
+        // 2. add partitions: bootconfig, vbmeta, instance image
+        // 3. add a payload image disk with
+        // - payload-metadata
+        // - apexes
+        // - test apk
+        // - its idsig
+
+        // Load etc/microdroid.json
+        final String os = (gki == null) ? "microdroid" : "microdroid_gki-" + gki;
+        File microdroidConfigFile = new File(virtApexEtcDir, os + ".json");
+        JSONObject config = new JSONObject(FileUtil.readStringFromFile(microdroidConfigFile));
+
+        // assertThat(config.getString("kernel")).isEqualTo("");
+        // Replace paths so that the config uses re-signed images from TEST_ROOT
+        final String supportEFIKernelPath = TEST_ROOT + "etc/fs/microdroid_kernel";
+        config.put("kernel", supportEFIKernelPath);
+        // assertThat(config.getString("kernel")).isEqualTo("");
+
         JSONArray disks = config.getJSONArray("disks");
         for (int diskIndex = 0; diskIndex < disks.length(); diskIndex++) {
             JSONObject disk = disks.getJSONObject(diskIndex);
@@ -606,7 +761,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         /* isProtected= */ false,
                         /* updateBootconfigs= */ false,
                         gki);
-        // Wait so that init can print errors to console (time in cuttlefish >> in real device)
+        // Wait so that init can print errors to console (time in cuttlefish >> in real
+        // device)
         assertThatEventually(
                 100000,
                 () -> getDevice().pullFileContents(CONSOLE_PATH),
@@ -628,7 +784,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     private boolean isTombstoneReceivedFromHostLogcat(String testStartTime) throws Exception {
-        // Note this method relies on logcat values being printed by the receiver on host
+        // Note this method relies on logcat values being printed by the receiver on
+        // host
         // userspace crash log: virtualizationservice/src/aidl.rs
         // kernel ramdump log: virtualizationmanager/src/crosvm.rs
         String ramdumpRegex =
@@ -944,7 +1101,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         assertThat(atomVmExited.getVmIdentifier()).isEqualTo("test_telemetry_pushed_atoms");
         assertThat(atomVmExited.getDeathReason()).isEqualTo(AtomsProto.VmExited.DeathReason.KILLED);
         assertThat(atomVmExited.getExitSignal()).isEqualTo(9);
-        // In CPU & memory related fields, check whether positive values are collected or not.
+        // In CPU & memory related fields, check whether positive values are collected
+        // or not.
         if (isPkvmHypervisor()) {
             // Guest Time may not be updated on other hypervisors.
             // Checking only if the hypervisor is PKVM.
@@ -1046,6 +1204,33 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         .protectedVm(protectedVm)
                         .name("test_microdroid_boots")
                         .gki(sGkiVersions.get(gki)));
+    }
+
+    @Test
+    public void testMicrodroidBootsWithEFI() throws Exception {
+        final boolean protectedVm = true;
+        final String gki = "null"; /* use microdroid kernel */
+        // Preconditions
+        assumeKernelSupported(gki);
+        assumeVmTypeSupported(protectedVm);
+        File key = findTestFile("test.com.android.virt.pem");
+
+        // Act
+        VmInfo vmInfo =
+                runMicrodroidWithResignedImagesCustomKernel(
+                        key,
+                        /* keyOverrides= */ Map.of(),
+                        /* isProtected= */ protectedVm,
+                        /* updateBootconfigs= */ true,
+                        gki);
+
+        // Assert
+        vmInfo.mProcess.waitFor(5L, TimeUnit.SECONDS);
+        String consoleLog = getDevice().pullFileContents(CONSOLE_PATH);
+        assertWithMessage("pvmfw should have uefi support")
+                .that(consoleLog)
+                .contains("Guest kernel supports UEFI standard.");
+        vmInfo.mProcess.destroy();
     }
 
     @Test
@@ -1157,7 +1342,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     public void testNoAvfDebugPolicyInLockedDevice() throws Exception {
         ITestDevice device = getDevice();
 
-        // Check device's locked state with ro.boot.verifiedbootstate. ro.boot.flash.locked
+        // Check device's locked state with ro.boot.verifiedbootstate.
+        // ro.boot.flash.locked
         // may not be set if ro.oem_unlock_supported is false.
         String lockProp = device.getProperty("ro.boot.verifiedbootstate");
         assumeFalse("Unlocked devices may have AVF debug policy", lockProp.equals("orange"));
@@ -1392,7 +1578,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     private void ensureUpdatableVmSupported() throws DeviceNotAvailableException {
-        long vendorApiLevel = getAndroidDevice().getIntProperty("ro.board.api_level", 0);
+        long vendorApiLevel = PropertyUtil.getVsrApiLevel(getAndroidDevice());
         if (vendorApiLevel >= 202504) {
             assertTrue(
                     "Missing Updatable VM support, have you declared Secretkeeper interface?",
@@ -1410,9 +1596,12 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         return androidDevice;
     }
 
-    // The TradeFed Dockerfile sets LD_LIBRARY_PATH to a directory with an older libc++.so, which
-    // breaks binaries that are linked against a newer libc++.so. Binaries commonly use DT_RUNPATH
-    // to find an adjacent libc++.so (e.g. `$ORIGIN/../lib64`), but LD_LIBRARY_PATH overrides
+    // The TradeFed Dockerfile sets LD_LIBRARY_PATH to a directory with an older
+    // libc++.so, which
+    // breaks binaries that are linked against a newer libc++.so. Binaries commonly
+    // use DT_RUNPATH
+    // to find an adjacent libc++.so (e.g. `$ORIGIN/../lib64`), but LD_LIBRARY_PATH
+    // overrides
     // DT_RUNPATH, so clear LD_LIBRARY_PATH. See b/332593805 and b/333782216.
     private static RunUtil createRunUtil() {
         RunUtil runUtil = new RunUtil();
