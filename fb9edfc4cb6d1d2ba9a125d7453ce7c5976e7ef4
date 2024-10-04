@@ -33,6 +33,24 @@
       "message": "LGTM with the approach in PS3",
       "revId": "fb9edfc4cb6d1d2ba9a125d7453ce7c5976e7ef4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f53d26b2_fca08dac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-04T14:39:14Z",
+      "side": 1,
+      "message": "Why is this better than\n```\nassume().that(CpuFeatures.isNativeBridgedCpu()).isFalse()\n```\nin `assumeFeatureVirtualizationFramework()`, which our suites call in `prepareTestSetup()`?\n\nThe logic would definitely be easier to follow and doesn\u0027t seem much more invasive than PS3?",
+      "parentUuid": "52c9efea_cce33e1e",
+      "revId": "fb9edfc4cb6d1d2ba9a125d7453ce7c5976e7ef4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
