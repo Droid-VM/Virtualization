@@ -534,16 +534,22 @@ avb_add_hash_footer {
     filename: "microdroid_kernel_supports_uefi_boot",
 }
 
+// Flag-controlled rollout of UEFI Microdroid boot.
+MICRODROID_KERNEL_SIGNED = select(release_flag("RELEASE_AVF_SUPPORT_UEFI_BOOT"), {
+    true: ":microdroid_kernel_signed_supports_uefi_boot",
+    default: ":microdroid_kernel_signed",
+})
+
 prebuilt_etc {
     name: "microdroid_kernel",
     src: ":empty_file",
     relative_install_path: "fs",
     arch: {
         arm64: {
-            src: ":microdroid_kernel_signed",
+            src: MICRODROID_KERNEL_SIGNED,
         },
         x86_64: {
-            src: ":microdroid_kernel_signed",
+            src: MICRODROID_KERNEL_SIGNED,
         },
     },
 }
