@@ -66,6 +66,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7bb9a2b4_e6e880a2",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1411,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-04T08:53:12Z",
+      "side": 1,
+      "message": "Can we make it more rusty with something like\n\n```\nensure!(matches!(\u0026*self.instance.vm_state.lock().unwrap(), VmState::Running { .. }), \"VM is not running\")\n.or_service_specific_exception(-1)?;\n```\n\nIt\u0027s recommended to use `ensure` or `bail` instead of `Err(anyhow)` [1].\n\n[1] http://docs/document/d/1HyXNRQImaYUVmeq1Z_Ez4vxXlCIQxDKaWo4-BZ75j9Y?tab\u003dt.0#heading\u003dh.bjrh3yw9ntpz",
+      "range": {
+        "startLine": 1410,
+        "startChar": 8,
+        "endLine": 1411,
+        "endChar": 87
+      },
+      "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13a914af_2bab3fc5",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 10
@@ -82,6 +105,52 @@
         "startChar": 18,
         "endLine": 1414,
         "endChar": 22
+      },
+      "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7077d26a_8112069f",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1416,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-04T08:53:12Z",
+      "side": 1,
+      "message": "Also use `ensure` here?",
+      "range": {
+        "startLine": 1415,
+        "startChar": 12,
+        "endLine": 1416,
+        "endChar": 51
+      },
+      "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e25ba2e5_55357f85",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1422,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-04T08:53:12Z",
+      "side": 1,
+      "message": "Can we drop the expect here to forward the binder error in case `as_binder()` doesn\u0027t work?\n\n\n```suggestion\n    Accessor::new(\n    name,\n    move |_instance: \u0026str| Some(ConnectionInfo::Vsock(VsockAddr::new(self.instance.cid, port))),\n).as_binder()\n```",
+      "range": {
+        "startLine": 1418,
+        "startChar": 8,
+        "endLine": 1422,
+        "endChar": 97
       },
       "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -135,6 +204,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1e07c4bf_d71775bc",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualMachine.aidl",
+        "patchSetId": 10
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-04T08:53:12Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "0ce58996_0c3f4953",
+      "range": {
+        "startLine": 55,
+        "startChar": 37,
+        "endLine": 55,
+        "endChar": 41
+      },
+      "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "adec56ce_8bb99201",
         "filename": "tests/vm_accessor/accessor/src/main.rs",
         "patchSetId": 10
@@ -146,6 +239,30 @@
       "writtenOn": "2024-10-04T02:20:34Z",
       "side": 1,
       "message": "will this PORT be assigned dynamically? it\u0027s waiting on raising that API to the Rust layer?",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 23
+      },
+      "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0638c42e_db8ecb17",
+        "filename": "tests/vm_accessor/accessor/src/main.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-04T08:53:12Z",
+      "side": 1,
+      "message": "What don\u0027t have dynamic port assignment support in AVF yet.",
+      "parentUuid": "adec56ce_8bb99201",
       "range": {
         "startLine": 25,
         "startChar": 0,
