@@ -57,11 +57,9 @@ install_prerequisites() {
 		udev \
 
 
-	which cargo > /dev/null 2>&1 || {
-		apt install --no-install-recommends --assume-yes rustup
-		rustup default stable
-		rustup update
-	}
+	if [ ! -f $HOME/.cargo/bin/cargo ]; then
+		curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+	fi
 
         sed -i s/losetup\ -f/losetup\ -P\ -f/g /usr/sbin/fai-diskimage
         sed -i 's/wget \$/wget -t 0 \$/g' /usr/share/debootstrap/functions
@@ -97,7 +95,7 @@ copy_android_config() {
 	chmod 777 ${dst}/files/usr/local/bin/ttyd/AVF
 
 	pushd forwarder_guest > /dev/null
-		RUSTFLAGS="-C linker=aarch64-linux-gnu-gcc" cargo build \
+		RUSTFLAGS="-C linker=aarch64-linux-gnu-gcc" $HOME/.cargo/bin/cargo build \
 			--target aarch64-unknown-linux-gnu \
 			--target-dir ${workdir}/forwarder_guest
 		mkdir -p ${dst}/files/usr/local/bin/forwarder_guest
