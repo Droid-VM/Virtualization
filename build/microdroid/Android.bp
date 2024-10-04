@@ -460,6 +460,9 @@ soong_config_module_type {
     ],
 }
 
+// Used to DRY capabilities between variants of microdroid_kernel_signed.
+MICRODROID_KERNEL_CAP_LLPVM = "secretkeeper_protection"
+
 flag_aware_avb_add_hash_footer_defaults {
     name: "microdroid_kernel_signed_defaults",
     src: ":empty_file",
@@ -488,7 +491,7 @@ flag_aware_avb_add_hash_footer_defaults {
             props: [
                 {
                     name: "com.android.virt.cap",
-                    value: "secretkeeper_protection",
+                    value: MICRODROID_KERNEL_CAP_LLPVM,
                 },
             ],
         },
@@ -499,6 +502,36 @@ avb_add_hash_footer {
     name: "microdroid_kernel_signed",
     defaults: ["microdroid_kernel_signed_defaults"],
     filename: "microdroid_kernel",
+}
+
+flag_aware_avb_add_hash_footer_defaults {
+    name: "microdroid_kernel_signed_supports_uefi_defaults",
+    props: [
+        {
+            name: "com.android.virt.cap",
+            value: "supports_uefi_boot",
+        },
+    ],
+    // Below are properties that are conditionally set depending on value of build flags.
+    soong_config_variables: {
+        release_avf_enable_llpvm_changes: {
+            props: [
+                {
+                    name: "com.android.virt.cap",
+                    value: MICRODROID_KERNEL_CAP_LLPVM + "|supports_uefi_boot",
+                },
+            ],
+        },
+    },
+}
+
+avb_add_hash_footer {
+    name: "microdroid_kernel_signed_supports_uefi_boot",
+    defaults: [
+        "microdroid_kernel_signed_defaults",
+        "microdroid_kernel_signed_supports_uefi_defaults",
+    ],
+    filename: "microdroid_kernel_supports_uefi_boot",
 }
 
 prebuilt_etc {
