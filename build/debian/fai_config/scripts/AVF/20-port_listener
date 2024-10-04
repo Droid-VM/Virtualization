@@ -1,0 +1,7 @@
+#!/bin/bash
+
+chmod +x /etc/port_listener/build.sh
+pushd /usr/local/bin
+    /etc/port_listener/build.sh
+    rm -rf /etc/port_listener
+popd
