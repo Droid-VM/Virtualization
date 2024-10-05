@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e5b7bb7_5e57fd43",
+        "filename": "build/debian/build_in_container.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-10-05T01:31:55Z",
+      "side": 1,
+      "message": "Is `build.sh` supposed to run on anywhere? For instance, `forwarder_guest` logic relies on relative path of execution.",
+      "range": {
+        "startLine": 5,
+        "startChar": 163,
+        "endLine": 5,
+        "endChar": 171
+      },
+      "revId": "d8f4655820e7c80ca59d76b25cb50453aaa4b719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
