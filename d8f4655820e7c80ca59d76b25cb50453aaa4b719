@@ -22,6 +22,30 @@
       },
       "revId": "d8f4655820e7c80ca59d76b25cb50453aaa4b719",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cfd0960_bfc9a415",
+        "filename": "build/debian/build_in_container.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-05T03:00:32Z",
+      "side": 1,
+      "message": "https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/build/debian/build.sh;l\u003d103?q\u003ddebian%2Fbuild.sh\n\nit doesn\u0027t rely on pwd after the recent patch",
+      "parentUuid": "3e5b7bb7_5e57fd43",
+      "range": {
+        "startLine": 5,
+        "startChar": 163,
+        "endLine": 5,
+        "endChar": 171
+      },
+      "revId": "d8f4655820e7c80ca59d76b25cb50453aaa4b719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
