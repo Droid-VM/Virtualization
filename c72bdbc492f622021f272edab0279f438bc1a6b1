@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dec8ed8f_509d18de",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-10-07T20:19:33Z",
+      "side": 1,
+      "message": "Good idea - added. Quick note: encrypt only affects the memory currently, not the snapshot as a whole.",
+      "parentUuid": "ed557a0f_5dd1ddb0",
+      "range": {
+        "startLine": 732,
+        "startChar": 0,
+        "endLine": 733,
+        "endChar": 27
+      },
+      "revId": "c72bdbc492f622021f272edab0279f438bc1a6b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4e31ab6_662b824a",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-10-07T02:29:08Z",
       "side": 1,
       "message": "is this directory or file?",
+      "range": {
+        "startLine": 122,
+        "startChar": 31,
+        "endLine": 122,
+        "endChar": 35
+      },
+      "revId": "c72bdbc492f622021f272edab0279f438bc1a6b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7341697_18df704f",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualizationService.aidl",
+        "patchSetId": 5
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-10-07T20:19:33Z",
+      "side": 1,
+      "message": "This has to be a directory. I refactored the code to check a directory is being passed. I also avoided creating the directory in virtmgr, since we want the caller to have ownership of the directory. There still needs to be a check I think to ensure ownership of the directory, since the caller could always pass a directory\u0027s path for which they don\u0027t have ownership.",
+      "parentUuid": "f4e31ab6_662b824a",
       "range": {
         "startLine": 122,
         "startChar": 31,
