@@ -128,6 +128,12 @@ fn main(
         RebootReason::InternalError
     })?;
 
+    if verified_boot_data.has_capability(Capability::SupportsUefiBoot) {
+        info!("Guest kernel supports UEFI standard.");
+    } else {
+        debug!("Guest kernel does not support UEFI standard.");
+    }
+
     let instance_hash = if cfg!(llpvm_changes) { Some(salt_from_instance_id(fdt)?) } else { None };
     let defer_rollback_protection = should_defer_rollback_protection(fdt)?
         && verified_boot_data.has_capability(Capability::SecretkeeperProtection);
