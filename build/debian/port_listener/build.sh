@@ -14,15 +14,15 @@ install_prerequisites() {
     apt install --no-install-recommends --assume-yes \
         bpftool \
         clang \
+        g++-aarch64-linux-gnu \
         libbpf-dev \
-        libgoogle-glog-dev \
-        libstdc++-14-dev
+        libgoogle-glog-dev
 }
 
 build_port_listener() {
     cp $(dirname $0)/src/* ${workdir}
     out_dir=${PWD}
-    pushd ${workdir}
+    pushd ${workdir} > /dev/null
         bpftool btf dump file /sys/kernel/btf/vmlinux format c > vmlinux.h
         clang \
             -O2 \
@@ -35,12 +35,13 @@ build_port_listener() {
         clang++ \
             -O2 \
             -Wall \
+            -target aarch64-linux-gnu \
             -lbpf \
             -lglog \
             -o port_listener \
             main.cc
         cp port_listener ${out_dir}
-    popd
+    popd > /dev/null
 }
 
 clean_up() {
