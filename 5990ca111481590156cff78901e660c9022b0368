@@ -70,6 +70,24 @@
       "parentUuid": "7fbbebfe_0e9cad91",
       "revId": "5990ca111481590156cff78901e660c9022b0368",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "850292a5_ec5b8b6e",
+        "filename": "build/debian/fai_config/scripts/AVF/20-port_listener",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-10-07T08:17:18Z",
+      "side": 1,
+      "message": "Few update:\nI found the root cause was from the lack of libbpf or libgoogle-glog for aarch64 cross compilation. Unlike libstdc++, I haven\u0027t found any installable packages for performing cross compilation.\n\n```\nReading package lists...\nBuilding dependency tree...\nReading state information...\nbpftool is already the newest version (7.4.0+6.9.10-1rodete5).\nclang is already the newest version (1:16.0-58.1).\ng++-aarch64-linux-gnu is already the newest version (4:13.2.0-7).\nlibbpf-dev is already the newest version (1:1.3.0-2).\nlibgoogle-glog-dev is already the newest version (0.6.0-2.1).\nSummary:\n  Upgrading: 0, Installing: 0, Removing: 0, Not Upgrading: 0\n/usr/bin/aarch64-linux-gnu-ld: cannot find -lbpf: No such file or directory\n/usr/bin/aarch64-linux-gnu-ld: cannot find -lglog: No such file or directory\nclang: error: linker command failed with exit code 1 (use -v to see invocation)\nAVF/20-port_listener FAILED with exit code 1.\n```",
+      "parentUuid": "b31ad62e_3c695168",
+      "revId": "5990ca111481590156cff78901e660c9022b0368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
