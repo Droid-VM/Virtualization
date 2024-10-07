@@ -16,6 +16,29 @@
       "message": "Hi Seth, PTAL",
       "revId": "a4ad719ee92a55bbc5a16cb7d01109b104402206",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25b58a2d_e9330a8d",
+        "filename": "libs/libservice_vm_requests/src/rkp.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2024-10-07T16:18:39Z",
+      "side": 1,
+      "message": "I just realized we never implemented `\"rkp-vm\"` as a formal type on the backend.\n\nDoes this pass tests? I expect it to, but before submitting I wanted to be super sure you had verified 😊",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 40
+      },
+      "revId": "a4ad719ee92a55bbc5a16cb7d01109b104402206",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
