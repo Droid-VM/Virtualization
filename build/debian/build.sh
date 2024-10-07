@@ -108,6 +108,12 @@ copy_android_config() {
 		cp ${workdir}/forwarder_guest/aarch64-unknown-linux-gnu/debug/forwarder_guest ${dst}/files/usr/local/bin/forwarder_guest/AVF
 		chmod 777 ${dst}/files/usr/local/bin/forwarder_guest/AVF
 	popd > /dev/null
+
+	# Pasting files under port_listener into /etc/port_listener
+	for file in $(find port_listener -type f); do
+		mkdir -p ${dst}/files/etc/${file}
+		cp ${file} ${dst}/files/etc/${file}/AVF
+	done
 }
 
 run_fai() {
