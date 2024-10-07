@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fca376d7_867fb69f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-10-07T15:23:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d696c0fd_b395e4cf",
+      "range": {
+        "startLine": 16,
+        "startChar": 6,
+        "endLine": 16,
+        "endChar": 7
+      },
+      "revId": "4eebad1b9fc5045640210967b1103ccb768b6f8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "47a63181_4f294d69",
@@ -71,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d76d2e9_2e24fbff",
+        "filename": "build/microdroid/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-10-07T15:23:14Z",
+      "side": 1,
+      "message": "Understood. Done.",
+      "parentUuid": "47a63181_4f294d69",
+      "range": {
+        "startLine": 485,
+        "startChar": 28,
+        "endLine": 485,
+        "endChar": 51
+      },
+      "revId": "4eebad1b9fc5045640210967b1103ccb768b6f8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f8d3569_5b57e025",
@@ -84,6 +132,30 @@
       "writtenOn": "2024-10-03T12:09:15Z",
       "side": 1,
       "message": "let\u0027s make this a `debug!` (not printed by default) so that we don\u0027t add unnecessary logs to the \"production\" pvmfw.",
+      "range": {
+        "startLine": 134,
+        "startChar": 8,
+        "endLine": 134,
+        "endChar": 12
+      },
+      "revId": "4eebad1b9fc5045640210967b1103ccb768b6f8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82769670_d125e3fa",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-10-07T15:23:14Z",
+      "side": 1,
+      "message": "Shall both information (when it supports and when it doesn\u0027t support UEFI) be printed in debug mode? Or do we want the message \"Guest kernel supports UEFI standard.\" to be printed every time the standard is supported? Moved to another CL - aosp/3296752",
+      "parentUuid": "1f8d3569_5b57e025",
       "range": {
         "startLine": 134,
         "startChar": 8,
@@ -128,6 +200,30 @@
         "id": 1882526
       },
       "writtenOn": "2024-10-07T15:04:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7ac37cf_5ea8c019",
+      "range": {
+        "startLine": 1062,
+        "startChar": 29,
+        "endLine": 1062,
+        "endChar": 33
+      },
+      "revId": "4eebad1b9fc5045640210967b1103ccb768b6f8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ece1e75_08347ed6",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1062,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-10-07T15:23:14Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "b7ac37cf_5ea8c019",
