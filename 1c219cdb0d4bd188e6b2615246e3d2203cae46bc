@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98b21d13_01e63e0c",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 738,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-10-07T20:53:00Z",
+      "side": 1,
+      "message": "`exists` and `metadata` accept anything implementing `AsRef\u003cPath\u003e`, which includes `\u0026str`, so you should be able to pass `snapshot_path: \u0026str` directly",
+      "range": {
+        "startLine": 738,
+        "startChar": 13,
+        "endLine": 738,
+        "endChar": 83
+      },
+      "revId": "1c219cdb0d4bd188e6b2615246e3d2203cae46bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e90c8f0_2548eb55",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-10-07T20:53:00Z",
+      "side": 1,
+      "message": "this is awkward. maybe we should change crosvm to allow the snapshot path to exist if it is an empty directory\n\njust a thought, not too important",
+      "range": {
+        "startLine": 735,
+        "startChar": 0,
+        "endLine": 744,
+        "endChar": 76
+      },
+      "revId": "1c219cdb0d4bd188e6b2615246e3d2203cae46bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "192edff8_b469a1de",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-10-07T20:53:00Z",
+      "side": 1,
+      "message": "you can leave out the error formatting. `e` is always `()`",
+      "range": {
+        "startLine": 756,
+        "startChar": 52,
+        "endLine": 756,
+        "endChar": 62
+      },
+      "revId": "1c219cdb0d4bd188e6b2615246e3d2203cae46bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

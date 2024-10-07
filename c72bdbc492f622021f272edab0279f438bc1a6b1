@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "649bdce0_f27e750f",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-10-07T20:53:00Z",
+      "side": 1,
+      "message": "encrypt is only supported in the battlestar variant of crosvm. let\u0027s keep it out of the AVF API",
+      "parentUuid": "dec8ed8f_509d18de",
+      "range": {
+        "startLine": 732,
+        "startChar": 0,
+        "endLine": 733,
+        "endChar": 27
+      },
+      "revId": "c72bdbc492f622021f272edab0279f438bc1a6b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f4e31ab6_662b824a",
         "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualizationService.aidl",
         "patchSetId": 5
