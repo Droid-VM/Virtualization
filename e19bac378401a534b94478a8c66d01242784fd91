@@ -1,0 +1,75 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd5ca5c2_c8af055f",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-10-07T02:21:18Z",
+      "side": 0,
+      "message": "It seems like the metrics are not exported to crystalball due to this.",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 86
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "67c80ff0_ac75198a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+              "range": {
+                "startLine": 49,
+                "startChar": 0,
+                "endLine": 50,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+              "range": {
+                "startLine": 149,
+                "startChar": 0,
+                "endLine": 150,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+              "range": {
+                "startLine": 1085,
+                "startChar": 0,
+                "endLine": 1086,
+                "endChar": 0
+              },
+              "replacement": "            addTestMetric(\n"
+            },
+            {
+              "path": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+              "range": {
+                "startLine": 1095,
+                "startChar": 0,
+                "endLine": 1096,
+                "endChar": 0
+              },
+              "replacement": "                addTestMetric(\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e19bac378401a534b94478a8c66d01242784fd91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
