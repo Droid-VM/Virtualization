@@ -88,6 +88,24 @@
       "parentUuid": "b31ad62e_3c695168",
       "revId": "5990ca111481590156cff78901e660c9022b0368",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eec00334_201275c5",
+        "filename": "build/debian/fai_config/scripts/AVF/20-port_listener",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-07T08:36:58Z",
+      "side": 1,
+      "message": "I think we need to use `ROOTCMD` to ensure the command is running in the chroot\u0027ed env. (a few examples: https://github.com/search?q\u003drepo%3Aikicha%2Fdebian-cloud-images%20ROOTCMD\u0026type\u003dcode and explanation: https://github.com/faiproject/fai/blob/master/bin/fai#L90)",
+      "parentUuid": "850292a5_ec5b8b6e",
+      "revId": "5990ca111481590156cff78901e660c9022b0368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
