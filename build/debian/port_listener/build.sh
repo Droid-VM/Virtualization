@@ -9,20 +9,27 @@ check_sudo() {
 	fi
 }
 
+parse_options() {
+	if [ -n "$1" ]; then
+		out_dir=$1
+	else
+        out_dir=${PWD}
+    fi
+}
+
 install_prerequisites() {
     apt update
     apt install --no-install-recommends --assume-yes \
         bpftool \
         clang \
+        g++ \
         libbpf-dev \
-        libgoogle-glog-dev \
-        libstdc++-14-dev
+        libgoogle-glog-dev
 }
 
 build_port_listener() {
     cp $(dirname $0)/src/* ${workdir}
-    out_dir=${PWD}
-    pushd ${workdir}
+    pushd ${workdir} > /dev/null
         bpftool btf dump file /sys/kernel/btf/vmlinux format c > vmlinux.h
         clang \
             -O2 \
@@ -40,7 +47,7 @@ build_port_listener() {
             -o port_listener \
             main.cc
         cp port_listener ${out_dir}
-    popd
+    popd > /dev/null
 }
 
 clean_up() {
@@ -50,5 +57,6 @@ trap clean_up EXIT
 workdir=$(mktemp -d)
 
 check_sudo
+parse_options $@
 install_prerequisites
 build_port_listener
