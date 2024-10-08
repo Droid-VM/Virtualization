@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e3e1a0d_cad326d9",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 1362,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-10-08T17:55:31Z",
+      "side": 1,
+      "message": "The difference is I forgot to change this to `!startsWith(\"arm64\")`.\n\nDTs are only used on Arm64 AFAICT, however I like the idea of the function. Added `assumeArm64Supported` specifically for the architecture.",
+      "parentUuid": "531278e6_019f4df5",
+      "range": {
+        "startLine": 1362,
+        "startChar": 12,
+        "endLine": 1362,
+        "endChar": 36
+      },
+      "revId": "88f419557b8fba04d8d38cc5c8b0dc7424539f15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "afd8056f_137deb81",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-10-08T12:12:00Z",
       "side": 1,
       "message": "You might want to use a fixed value here and `assert` that it is at least `minMemorySize`, so that the DT\u0027s `\u003cmemory\u003e` node always contains the same value as the golden reference.\n\nSame for `microdroidProtectedDeviceTreeCompat()`",
+      "range": {
+        "startLine": 1373,
+        "startChar": 35,
+        "endLine": 1373,
+        "endChar": 50
+      },
+      "revId": "88f419557b8fba04d8d38cc5c8b0dc7424539f15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d25e7ba7_ae3e99e5",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 1373,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-10-08T17:55:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "afd8056f_137deb81",
       "range": {
         "startLine": 1373,
         "startChar": 35,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7624ab70_db72163b",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 1381,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-10-08T17:55:31Z",
+      "side": 1,
+      "message": "Went over the code again and saw the DT is created very early on in the creation of the VM, before boot. So yes, we don\u0027t need to wait for the VM to boot.\n\nDone",
+      "parentUuid": "6a831cbe_dd901548",
+      "range": {
+        "startLine": 1381,
+        "startChar": 8,
+        "endLine": 1381,
+        "endChar": 90
+      },
+      "revId": "88f419557b8fba04d8d38cc5c8b0dc7424539f15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c5e041f_7e72dc1e",
@@ -110,6 +182,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eea3f049_55993cc6",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 1443,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-10-08T17:55:31Z",
+      "side": 1,
+      "message": "Definitely possible, thanks! Done",
+      "parentUuid": "5c5e041f_7e72dc1e",
+      "range": {
+        "startLine": 1424,
+        "startChar": 1,
+        "endLine": 1443,
+        "endChar": 59
+      },
+      "revId": "88f419557b8fba04d8d38cc5c8b0dc7424539f15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5003da6a_bb5bd3a8",
@@ -123,6 +219,30 @@
       "writtenOn": "2024-10-08T12:12:00Z",
       "side": 1,
       "message": "Should this be right after the ADB pull, so that it isn\u0027t skipped if something goes wrong before we reach this point?",
+      "range": {
+        "startLine": 1499,
+        "startChar": 0,
+        "endLine": 1501,
+        "endChar": 9
+      },
+      "revId": "88f419557b8fba04d8d38cc5c8b0dc7424539f15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50f9ad04_36df1cbd",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 1501,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-10-08T17:55:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5003da6a_bb5bd3a8",
       "range": {
         "startLine": 1499,
         "startChar": 0,
