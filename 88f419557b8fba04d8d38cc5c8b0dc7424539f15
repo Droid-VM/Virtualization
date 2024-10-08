@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dbf83dc_9c282fd3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-10-08T20:30:22Z",
+      "side": 1,
+      "message": "Definitely, will happen in a separate CL. I was planning on doing this, as multiple DTs can exist.",
+      "parentUuid": "4480157c_a7eaefd4",
+      "revId": "88f419557b8fba04d8d38cc5c8b0dc7424539f15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "531278e6_019f4df5",
@@ -173,6 +191,30 @@
       "side": 1,
       "message": "That\u0027s not enough, it is going to be a race and cause flakes",
       "parentUuid": "7624ab70_db72163b",
+      "range": {
+        "startLine": 1381,
+        "startChar": 8,
+        "endLine": 1381,
+        "endChar": 90
+      },
+      "revId": "88f419557b8fba04d8d38cc5c8b0dc7424539f15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ed91bd6_55fecf09",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 1381,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-10-08T20:30:22Z",
+      "side": 1,
+      "message": "Re-added. There is benefit in waiting for boot complete for backcompat, as we want to ensure the VM boots.\n\nI want to add more tests later that get the DT from inside the VM as opposed to just using crosvm\u0027s DT dump, to cover any extra passed device trees. At that point, we will definitely need the VM to remain booted.",
+      "parentUuid": "081db9b6_cfb6b7bc",
       "range": {
         "startLine": 1381,
         "startChar": 8,
