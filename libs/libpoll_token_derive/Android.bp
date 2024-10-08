@@ -1,0 +1,15 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_proc_macro {
+    name: "libpoll_token_derive",
+    crate_name: "poll_token_derive",
+    edition: "2021",
+    srcs: ["src/lib.rs"],
+    rustlibs: [
+        "libproc_macro2",
+        "libquote",
+        "libsyn",
+    ],
+}
