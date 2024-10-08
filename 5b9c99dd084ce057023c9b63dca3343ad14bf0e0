@@ -63,6 +63,30 @@
       },
       "revId": "5b9c99dd084ce057023c9b63dca3343ad14bf0e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d389e5b7_76edd973",
+        "filename": "build/debian/port_listener/build.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-08T06:29:30Z",
+      "side": 1,
+      "message": "I see, but the script is supposed to run in guest env now, isn\u0027t it? But I think we can revisit this when we\u0027re building debian pkg instead of binary, though.",
+      "parentUuid": "fffb949e_52da910d",
+      "range": {
+        "startLine": 25,
+        "startChar": 8,
+        "endLine": 25,
+        "endChar": 13
+      },
+      "revId": "5b9c99dd084ce057023c9b63dca3343ad14bf0e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
