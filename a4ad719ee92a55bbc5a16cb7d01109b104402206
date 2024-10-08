@@ -111,6 +111,30 @@
       },
       "revId": "a4ad719ee92a55bbc5a16cb7d01109b104402206",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1837ce1b_f08f9fd1",
+        "filename": "libs/libservice_vm_requests/src/rkp.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-08T16:51:11Z",
+      "side": 1,
+      "message": "You are right. This test doesn\u0027t work. Could you add this certificate type to server backend?\n\n```\n10-08 18:47:32.249 10102  2970  3524 E RkpdServerInterface: Repeated failure count: 1\n10-08 18:47:32.249 radio  1150  1243 W libc    : Access denied finding property \"telephony.ril.silent_reset\"\n10-08 18:47:32.249 10102  2970  3524 E RkpdServerInterface: {\n10-08 18:47:32.249 10102  2970  3524 E RkpdServerInterface:   \"error\": {\n10-08 18:47:32.249 10102  2970  3524 E RkpdServerInterface:     \"code\": 400,\n10-08 18:47:32.249 10102  2970  3524 E RkpdServerInterface:     \"message\": \"Invalid request payload: unknown CertificateType \u0027rkp-vm\u0027 - should be either keymint or widevine\\nRequestId: d8599f2c-b947-4776-83ff-3831d669bfcd\",\n10-08 18:47:32.249 10102  2970  3524 E RkpdServerInterface:     \"status\": \"INVALID_ARGUMENT\"\n10-08 18:47:32.249 10102  2970  3524 E RkpdServerInterface:   }\n10-08 18:47:32.249 10102  2970  3524 E RkpdServerInterface: }\n10-08 18:47:32.260 10102  2970  3524 E RkpdRegistrationBinder: RKPD failed to provision keys\n```",
+      "parentUuid": "9d6465ce_5badc2c7",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 40
+      },
+      "revId": "a4ad719ee92a55bbc5a16cb7d01109b104402206",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
