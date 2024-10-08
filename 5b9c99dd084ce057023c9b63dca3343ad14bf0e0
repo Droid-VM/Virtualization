@@ -39,6 +39,30 @@
       },
       "revId": "5b9c99dd084ce057023c9b63dca3343ad14bf0e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fffb949e_52da910d",
+        "filename": "build/debian/port_listener/build.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-10-08T05:56:53Z",
+      "side": 1,
+      "message": "I tried to use it, but I faced at the error about installing it. However, installing with version number(`libstdc++-12-dev`) is tricky to build it in our local machine as well. Besides, I couldn\u0027t find `libstdc++` with `apt search`.\n\n```\n# Marking that g++ is already installed with the script.\nroot@localhost:~# apt list --installed | grep libstdc|\n++                                                   |\n                                                     |\nWARNING: apt does not have a stable CLI interface. Us|\ne with caution in scripts.                           |\n                                                     |\nlibstdc++-12-dev/now 12.2.0-14 arm64 [installed,local|\n]                                                    |\nlibstdc++6/now 12.2.0-14 arm64 [installed,local]     |\nroot@localhost:~# sudo apt install libstdc++         |\nReading package lists... Done                        |\nBuilding dependency tree... Done                     |\nReading state information... Done                    |\nE: Unable to locate package libstdc+                 |\n```",
+      "parentUuid": "330566b1_accc9e39",
+      "range": {
+        "startLine": 25,
+        "startChar": 8,
+        "endLine": 25,
+        "endChar": 13
+      },
+      "revId": "5b9c99dd084ce057023c9b63dca3343ad14bf0e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
