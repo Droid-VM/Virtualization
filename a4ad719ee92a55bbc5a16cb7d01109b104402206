@@ -63,6 +63,30 @@
       },
       "revId": "a4ad719ee92a55bbc5a16cb7d01109b104402206",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea23e3bc_2ff3a9c4",
+        "filename": "libs/libservice_vm_requests/src/rkp.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2024-10-08T16:31:26Z",
+      "side": 1,
+      "message": "Technically, our spec does allow for custom certificate types: _\"Custom certificate types may be used, but the provisioning server may reject the request for an unknown certificate type.\"_\n\nSo we shouldn\u0027t start locking down certificate type. I think there\u0027s an argument for locking the field down to a finite set of values, but doing that is a larger discussion than I think we should have in an AOSP CL comment thread 😊\n\npackages/modules/RemoteKeyProvisioning/app/tests/avf/src/com/android/avf/rkpdapp/e2etest/AvfIntegrationTest.java is the critical test here.\n\nAs long as this test passes after changing certificate type to \"rkp-vm\", then we should be good to go.",
+      "parentUuid": "735060ff_b81562de",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 40
+      },
+      "revId": "a4ad719ee92a55bbc5a16cb7d01109b104402206",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
