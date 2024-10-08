@@ -117,6 +117,30 @@
       },
       "revId": "c72bdbc492f622021f272edab0279f438bc1a6b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "077a6bb1_c6309d8b",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualizationService.aidl",
+        "patchSetId": 5
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-08T01:34:55Z",
+      "side": 1,
+      "message": "ok but then we will have to give crosvm permission to write files into the directory.",
+      "parentUuid": "c7341697_18df704f",
+      "range": {
+        "startLine": 122,
+        "startChar": 31,
+        "endLine": 122,
+        "endChar": 35
+      },
+      "revId": "c72bdbc492f622021f272edab0279f438bc1a6b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
