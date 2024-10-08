@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4480157c_a7eaefd4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-08T12:12:00Z",
+      "side": 1,
+      "message": "Out of scope for this CL but would it be possible to add another flavor of this test, which pulls the post-pvmfw DT (from Microdroid, Rialto, or a dedicated payload, whichever is easiest) and als compares it against a golden reference, to ensure that pvmfw itself isn\u0027t breaking something?\n\n(unresolved for visibility)",
+      "revId": "88f419557b8fba04d8d38cc5c8b0dc7424539f15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "531278e6_019f4df5",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 1362,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-08T12:12:00Z",
+      "side": 1,
+      "message": "What\u0027s the difference between this and `!abi.startsWith(\"arm64\")` below? If there\u0027s none and, in both cases, you\u0027re checking that DTs are used by the guest, it might be clearer to introduce `assumeDeviceTreeSupported()` along the other similar methods, at the bottom of this file?",
+      "range": {
+        "startLine": 1362,
+        "startChar": 12,
+        "endLine": 1362,
+        "endChar": 36
+      },
+      "revId": "88f419557b8fba04d8d38cc5c8b0dc7424539f15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afd8056f_137deb81",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 1373,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-08T12:12:00Z",
+      "side": 1,
+      "message": "You might want to use a fixed value here and `assert` that it is at least `minMemorySize`, so that the DT\u0027s `\u003cmemory\u003e` node always contains the same value as the golden reference.\n\nSame for `microdroidProtectedDeviceTreeCompat()`",
+      "range": {
+        "startLine": 1373,
+        "startChar": 35,
+        "endLine": 1373,
+        "endChar": 50
+      },
+      "revId": "88f419557b8fba04d8d38cc5c8b0dc7424539f15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a831cbe_dd901548",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 1381,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-08T12:12:00Z",
+      "side": 1,
+      "message": "Isn\u0027t this test only interested in the dumped DT? We probably don\u0027t even need to execute a single instruction of the guest so this `wait` doesn\u0027t seem necessary and the `assert` might even lead to false test failures. Is there a way to run `crosvm` and wait for the `dump_dt.dtb` to be generated instead?",
+      "range": {
+        "startLine": 1381,
+        "startChar": 8,
+        "endLine": 1381,
+        "endChar": 90
+      },
+      "revId": "88f419557b8fba04d8d38cc5c8b0dc7424539f15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c5e041f_7e72dc1e",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 1443,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-08T12:12:00Z",
+      "side": 1,
+      "message": "I am **very far** from being a Java or test expert but surely this must have already been implemented by the testing framework! Can\u0027t you `getAndroidDevice()` and then call [`pullFile()`](https://cs.android.com/android/platform/superproject/main/+/main:tools/tradefederation/core/src/com/android/tradefed/device/NativeDevice.java;l\u003d1488;drc\u003d2555be988ee284ebc39f28f1cc9a414435dca8fe) on it?",
+      "range": {
+        "startLine": 1424,
+        "startChar": 1,
+        "endLine": 1443,
+        "endChar": 59
+      },
+      "revId": "88f419557b8fba04d8d38cc5c8b0dc7424539f15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5003da6a_bb5bd3a8",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 32
+      },
+      "lineNbr": 1501,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-08T12:12:00Z",
+      "side": 1,
+      "message": "Should this be right after the ADB pull, so that it isn\u0027t skipped if something goes wrong before we reach this point?",
+      "range": {
+        "startLine": 1499,
+        "startChar": 0,
+        "endLine": 1501,
+        "endChar": 9
+      },
+      "revId": "88f419557b8fba04d8d38cc5c8b0dc7424539f15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
