@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca83befd_212741e1",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1409,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-09T00:04:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78d8b20d_d1f4f09f",
+      "range": {
+        "startLine": 1409,
+        "startChar": 7,
+        "endLine": 1409,
+        "endChar": 10
+      },
+      "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3aba81b7_d92e0238",
@@ -89,6 +113,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc30614f_55d897f7",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1411,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-09T00:04:57Z",
+      "side": 1,
+      "message": "Good to know! Unfortunately I couldn\u0027t figure out a way to get it to return the `binder::Result`. In the last part of that link it sounds like we might still need to anyhow to return a different error type?\n\n```\nIf returning an error type which does need to be lifted via anyhow!, feel free to continue to use direct return statements.\n```\nWith the suggested change I see:\n```\nerror[E0308]: mismatched types\n    --\u003e packages/modules/Virtualization/android/virtmgr/src/aidl.rs:1413:9\n     |\n1413 |         ensure!(matches!(\u0026*self.instance.vm_state.lock().unwrap(), VmState::Running { .. }), \"VM is not running\")\n     |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Status`, found `Error`\n     |\n     \u003d note: this error originates in the macro `$crate::__anyhow` which comes from the expansion of the macro `ensure` (in Nightly builds, run with -Z macro-backtrace for more info)\n\nerror[E0599]: no method named `or_service_specific_exception` found for unit type `()` in the current scope\n    --\u003e packages/modules/Virtualization/android/virtmgr/src/aidl.rs:1414:2\n     |\n1413 | /         ensure!(matches!(\u0026*self.instance.vm_state.lock().unwrap(), VmState::Running { .. }), \"VM is not running\")\n1414 | | .or_service_specific_exception(-1)?;\n     | | -^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ method not found in `()`\n     | |_|\n     |\n```\n\nDo you have any tips? I couldn\u0027t find any examples of ensure in a [binder function](https://source.corp.google.com/search?q\u003dbinder::status%20f:rs$%20%22ensure!%22\u0026sq\u003drepo:googleplex-android%2Fplatform%2Fsuperproject%2Fmain%20b:main%20-f:prebuilts).\n\nI need to read up more on that anyhow crate anyways! 😊\n\nThis pattern was copy/pasted from above in `connectVsock()`. There are a lot other instances of `return Err(anyhow...` in `modules/Virtualization`.",
+      "parentUuid": "7bb9a2b4_e6e880a2",
+      "range": {
+        "startLine": 1410,
+        "startChar": 8,
+        "endLine": 1411,
+        "endChar": 87
+      },
+      "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13a914af_2bab3fc5",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 10
@@ -100,6 +148,30 @@
       "writtenOn": "2024-10-04T02:20:34Z",
       "side": 1,
       "message": "magic?",
+      "range": {
+        "startLine": 1414,
+        "startChar": 18,
+        "endLine": 1414,
+        "endChar": 22
+      },
+      "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c453405a_2053a0be",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1414,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-09T00:04:57Z",
+      "side": 1,
+      "message": "Magic! I don\u0027t see any constants for it already so added one and using it here + in `connectVsock()`.",
+      "parentUuid": "13a914af_2bab3fc5",
       "range": {
         "startLine": 1414,
         "startChar": 18,
@@ -221,6 +293,54 @@
         "startChar": 37,
         "endLine": 55,
         "endChar": 41
+      },
+      "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c4a7c58_fcc7cdac",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualMachine.aidl",
+        "patchSetId": 10
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-09T00:04:57Z",
+      "side": 1,
+      "message": "Changed to `instance` and added more comments.",
+      "parentUuid": "1e07c4bf_d71775bc",
+      "range": {
+        "startLine": 55,
+        "startChar": 37,
+        "endLine": 55,
+        "endChar": 41
+      },
+      "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "976bccdf_094fe922",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualMachine.aidl",
+        "patchSetId": 10
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-09T00:04:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77b0f354_275e1480",
+      "range": {
+        "startLine": 55,
+        "startChar": 12,
+        "endLine": 55,
+        "endChar": 15
       },
       "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
