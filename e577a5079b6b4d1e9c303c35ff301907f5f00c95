@@ -395,6 +395,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cac69d2a_4a04650b",
+        "filename": "tests/vm_accessor/accessor/src/main.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-09T00:06:18Z",
+      "side": 1,
+      "message": "Then, can we have a bug for this?",
+      "parentUuid": "0638c42e_db8ecb17",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 23
+      },
+      "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e438edb_3273412e",
         "filename": "tests/vm_accessor/accessor/src/main.rs",
         "patchSetId": 10
@@ -406,6 +430,24 @@
       "writtenOn": "2024-10-04T02:20:34Z",
       "side": 1,
       "message": "can we make the entire implementation of this service generic, so you only have to write:\n\n    fn main() -\u003e Result\u003c(), Error\u003e { rpc_delegate(\"android.os.IAccessor/IAccessorVmService/default\"); }\n\nI\u0027m imagining an API similar to what we used in HIDL in the Treble days:\nhttps://cs.android.com/android/platform/superproject/main/+/main:system/libhidl/transport/include/hidl/LegacySupport.h\n\nWe could add a few options, but avoiding a bunch of copies for this same code. It could potentially even be rs_genrule_defaults or something in Android.bp where you can specify the service names in Android.bp. That way, we don\u0027t end up with a lot of copies of this (may take later)",
+      "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb4f59ef_6199710f",
+        "filename": "tests/vm_accessor/accessor/src/main.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-09T00:06:18Z",
+      "side": 1,
+      "message": "(not a part of this change oc)",
+      "parentUuid": "3e438edb_3273412e",
       "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
