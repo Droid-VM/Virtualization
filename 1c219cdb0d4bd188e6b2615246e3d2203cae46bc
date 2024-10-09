@@ -68,6 +68,52 @@
       },
       "revId": "1c219cdb0d4bd188e6b2615246e3d2203cae46bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9967ceb3_4ee750ee",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualMachine.aidl",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-09T00:13:19Z",
+      "side": 1,
+      "message": "Copying from meeting, to get this work in Android security model:\n\n`interface SnaphotWriter { ParcelFileDescriptor getFileFd(string relativePath); }`\n\n`void snapshot(SnaphotWriter writer, SnashotOptions options);`\n\nThough as Frederick said, it would be invasive to crosvm, this is kind of what is needed for Android\u0027s security model.",
+      "range": {
+        "startLine": 65,
+        "startChar": 11,
+        "endLine": 65,
+        "endChar": 46
+      },
+      "revId": "1c219cdb0d4bd188e6b2615246e3d2203cae46bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58d89465_236beba0",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualMachine.aidl",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-09T00:13:19Z",
+      "side": 1,
+      "message": "for ease of reading client server/code and ease of adding additional options, I recommend:\n\n```\nparcelable SnapshotOptions {\n    boolean compressMemory;\n    boolean encrypt;\n};\nvoid snapshot(..., SnapshotOptions);\n```\n\nAIDL style is to use camelCase, I recognize this isn\u0027t used here, so you don\u0027t have to worry about that!",
+      "range": {
+        "startLine": 64,
+        "startChar": 3,
+        "endLine": 66,
+        "endChar": 1
+      },
+      "revId": "1c219cdb0d4bd188e6b2615246e3d2203cae46bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
