@@ -141,6 +141,30 @@
       },
       "revId": "c72bdbc492f622021f272edab0279f438bc1a6b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f725b9b5_717bd4f6",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualizationService.aidl",
+        "patchSetId": 5
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-09T00:14:06Z",
+      "side": 1,
+      "message": "We can\u0027t do this unless we split crosvm into multiple different domains. Otherwise, clients could read each other\u0027s snapshots, which isn\u0027t allowed.",
+      "parentUuid": "077a6bb1_c6309d8b",
+      "range": {
+        "startLine": 122,
+        "startChar": 31,
+        "endLine": 122,
+        "endChar": 35
+      },
+      "revId": "c72bdbc492f622021f272edab0279f438bc1a6b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
