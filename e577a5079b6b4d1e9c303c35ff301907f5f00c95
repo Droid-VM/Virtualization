@@ -159,6 +159,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9ff0a9b_83ae15cd",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1411,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-09T17:43:14Z",
+      "side": 1,
+      "message": "Added some for these changes + http://b/372472178 to clean up the rest.",
+      "parentUuid": "3aba81b7_d92e0238",
+      "range": {
+        "startLine": 1411,
+        "startChar": 83,
+        "endLine": 1411,
+        "endChar": 85
+      },
+      "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17df9e28_1763daa0",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1411,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-09T17:43:14Z",
+      "side": 1,
+      "message": "\u003e We could use ensure!(...) directly in this case to provide an informative error message.\n\nI don\u0027t know what that means.\n\nThe examples are all in functions that return a `Result\u003cT\u003e` type that works with `ensure!`.\n\nI replaced the `anyhow!` here with creating the service specific exception directly with the error message.",
+      "parentUuid": "b8ae373d_4b7a3309",
+      "range": {
+        "startLine": 1410,
+        "startChar": 8,
+        "endLine": 1411,
+        "endChar": 87
+      },
+      "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13a914af_2bab3fc5",
@@ -229,6 +277,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6863c7ae_c8b5be5c",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1416,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-09T17:43:14Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7077d26a_8112069f",
+      "range": {
+        "startLine": 1415,
+        "startChar": 12,
+        "endLine": 1416,
+        "endChar": 51
+      },
+      "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e25ba2e5_55357f85",
@@ -242,6 +314,30 @@
       "writtenOn": "2024-10-04T08:53:12Z",
       "side": 1,
       "message": "Can we drop the expect here to forward the binder error in case `as_binder()` doesn\u0027t work?\n\n\n```suggestion\n    Accessor::new(\n    name,\n    move |_instance: \u0026str| Some(ConnectionInfo::Vsock(VsockAddr::new(self.instance.cid, port))),\n).as_binder()\n```",
+      "range": {
+        "startLine": 1418,
+        "startChar": 8,
+        "endLine": 1422,
+        "endChar": 97
+      },
+      "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43aaaccf_89307b58",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1422,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-09T17:43:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e25ba2e5_55357f85",
       "range": {
         "startLine": 1418,
         "startChar": 8,
@@ -496,6 +592,24 @@
       "side": 1,
       "message": "(not a part of this change oc)",
       "parentUuid": "3e438edb_3273412e",
+      "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5774fb9e_ed7b13d6",
+        "filename": "tests/vm_accessor/accessor/src/main.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-09T17:43:14Z",
+      "side": 1,
+      "message": "I don\u0027t see why not. It looks like it\u0027s all generic microdroid code with port(matches what the client expects) and accessor name(matches manifest file). Is there already a bug open for this?",
+      "parentUuid": "eb4f59ef_6199710f",
       "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
