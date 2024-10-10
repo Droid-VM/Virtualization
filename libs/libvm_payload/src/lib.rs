@@ -145,16 +145,13 @@ pub unsafe extern "C" fn AVmPayload_runVsockRpcServer(
 /// We could get rid of this function if we are OK with including the -ndk version of the
 /// library as well.
 ///
-/// The instance argument must be a non-null valid C string. It must not be modified for the
-/// duration of this function call.
-///
 /// We only need IAccessor in the C++ file because I don't know how to do the equivalent of
 /// __attribute((constructor)) in rust.
 #[no_mangle]
 pub unsafe extern "C" fn AVmPayload_getAccessorBinder(instance: *const c_char) -> *mut AIBinder {
     initialize_logging();
     let instance_cstr: &CStr;
-    // SAFETY: The instance string must be non-null valid C string.
+    // SAFETY: it's marked __Nonnull
     unsafe { instance_cstr = CStr::from_ptr(instance) }
     let service = unwrap_or_abort(get_vm_payload_service());
     match service.getAccessorBinder(
@@ -162,6 +159,7 @@ pub unsafe extern "C" fn AVmPayload_getAccessorBinder(instance: *const c_char) -
     ) {
         Ok(accessor) => {
             // Prevent AIBinder_decStrong from being called...
+            // This will leak without an explicit decStrong in C++
             std::mem::ManuallyDrop::new(accessor).as_native_mut().cast()
         }
         Err(e) => {
