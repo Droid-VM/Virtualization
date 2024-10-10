@@ -95,6 +95,13 @@ use android_frameworks_stats::aidl::android::frameworks::stats::{
     IStats::{BnStats, BpStats, IStats,},
     VendorAtom::VendorAtom,
 };
+use android_hardware_light::aidl::android::hardware::light::{
+    HwLight::HwLight, HwLightState::HwLightState, ILights::ILights, ILights::BnLights, ILights::BpLights };
+use com_android_virt_accessor_demo_host_service::{
+    aidl::com::android::virt::accessor_demo::host_service::IAccessorHostService::{
+        BnAccessorHostService, BpAccessorHostService, IAccessorHostService,
+    },
+};
 
 /// The unique ID of a VM used (together with a port number) for vsock communication.
 pub type Cid = u32;
@@ -1824,6 +1831,34 @@ impl IStats for StatsDelegator {
         self.delegate.lock().unwrap().reportVendorAtom(atom)
     }
 }
+struct LightDelegator {
+    delegate: Mutex<Strong<dyn ILights>>,
+}
+
+impl Interface for LightDelegator {}
+
+impl ILights for LightDelegator {
+    fn setLightState(&self, id: i32, state: &HwLightState) -> binder::Result<()> {
+        self.delegate.lock().unwrap().setLightState(id, state)
+    }
+
+    fn getLights(&self) -> binder::Result<Vec<HwLight>> {
+        self.delegate.lock().unwrap().getLights()
+    }
+}
+
+struct AccessorHostExampleDelegator {
+    delegate: Mutex<Strong<dyn IAccessorHostService>>,
+}
+
+impl Interface for AccessorHostExampleDelegator {}
+
+impl IAccessorHostService for AccessorHostExampleDelegator {
+    fn add(&self, a: i32, b: i32) -> binder::Result<i32> {
+        self.delegate.lock().unwrap().add(a, b)
+    }
+}
+
 /// Implementation of `IVirtualMachineService`, the entry point of the AIDL service.
 #[derive(Debug, Default)]
 struct VirtualMachineService {
@@ -1914,10 +1949,76 @@ impl IVirtualMachineService for VirtualMachineService {
 
         let cid = self.cid;
 
-        // We currently only support the stats service. It can be used as an example
-        // to support more host services with this proxy pattern.
+        // We currently only support host service as an example
+        let light_service_instance =
+            <BpLights as ILights>::get_descriptor().to_owned() + "/default";
+        let example_service_instance =
+            <BpAccessorHostService as IAccessorHostService>::get_descriptor().to_owned()
+                + "/default";
         let stats_service_instance = <BpStats as IStats>::get_descriptor().to_owned() + "/default";
-        if name == stats_service_instance {
+        // We would ideally get this information from servicemanager, but there are no APIs
+        // available yet.
+        let example_rpc_service_instance =
+            <BpAccessorHostService as IAccessorHostService>::get_descriptor().to_owned() + "/rpc";
+        if name == light_service_instance {
+            let port = 2321;
+
+            // don't block this service while attempting to get a service for the client in the VM.
+            let local_svc: Strong<dyn ILights> = binder::check_interface(name)
+                .context("Failed to get {name} from IVirtualMachineService")
+                .or_service_specific_exception(-1)?;
+
+            // Setup a delegator that wraps the service so we can proxy calls.
+            // This is needed because we can't use a kernel binder from
+            // another process for a new RpcServer.
+            let service = BnLights::new_binder(
+                LightDelegator { delegate: local_svc.into() },
+                BinderFeatures::default(),
+            );
+
+            match RpcServer::new_vsock(service.as_binder(), cid, port) {
+                Ok(vm_server) => {
+                    vm_server.set_max_threads(4);
+                    vm_server.start();
+                    self.proxied_services.lock().unwrap().insert(name.to_string(), port);
+                    info!("RpcServer proxy started for {name}.");
+                }
+                Err(err) => {
+                    warn!("Could not start RpcServer for {name} on port {}: {}", port, err);
+                }
+            }
+
+            Ok(ServiceConnectionInfo { port: port as i32 })
+        } else if name == example_service_instance {
+            let port = 2322;
+
+            // don't block this service while attempting to get a service for the client in the VM.
+            let local_svc: Strong<dyn IAccessorHostService> = binder::check_interface(name)
+                .context("Failed to get {name} from IVirtualMachineService")
+                .or_service_specific_exception(-1)?;
+
+            // Setup a delegator that wraps the service so we can proxy calls.
+            // This is needed because we can't use a kernel binder from
+            // another process for a new RpcServer.
+            let service = BnAccessorHostService::new_binder(
+                AccessorHostExampleDelegator { delegate: local_svc.into() },
+                BinderFeatures::default(),
+            );
+
+            match RpcServer::new_vsock(service.as_binder(), cid, port) {
+                Ok(vm_server) => {
+                    vm_server.set_max_threads(4);
+                    vm_server.start();
+                    self.proxied_services.lock().unwrap().insert(name.to_string(), port);
+                    info!("RpcServer proxy started for {name} on port {port} and cid {cid}.");
+                }
+                Err(err) => {
+                    warn!("Could not start RpcServer for {name} on port {}: {}", port, err);
+                }
+            }
+
+            Ok(ServiceConnectionInfo { port: port as i32 })
+        } else if name == stats_service_instance {
             let port = 2324;
 
             // don't block this service while attempting to get a service for the client in the VM.
@@ -1946,6 +2047,10 @@ impl IVirtualMachineService for VirtualMachineService {
             }
 
             Ok(ServiceConnectionInfo { port: port as i32 })
+        } else if name == example_rpc_service_instance {
+            // This service is already listening on an RpcServer. We would ideally get the
+            // connection info from servicemanager, but those APIs don't exist yet.
+            Ok(ServiceConnectionInfo { port: 2323 })
         } else {
             Err(anyhow!("Unknown service")).with_log().or_binder_exception(ExceptionCode::SECURITY)
         }
