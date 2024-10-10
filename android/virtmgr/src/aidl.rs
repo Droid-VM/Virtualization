@@ -96,6 +96,8 @@ use android_frameworks_stats::aidl::android::frameworks::stats::{
     IStats::{BnStats, BpStats, IStats,},
     VendorAtom::VendorAtom,
 };
+use android_hardware_light::aidl::android::hardware::light::{
+    HwLight::HwLight, HwLightState::HwLightState, ILights::ILights, ILights::BnLights, ILights::BpLights };
 
 /// The unique ID of a VM used (together with a port number) for vsock communication.
 pub type Cid = u32;
@@ -1854,6 +1856,22 @@ impl IStats for StatsDelegator {
         self.delegate.lock().unwrap().reportVendorAtom(atom)
     }
 }
+struct LightDelegator {
+    delegate: Mutex<Strong<dyn ILights>>,
+}
+
+impl Interface for LightDelegator {}
+
+impl ILights for LightDelegator {
+    fn setLightState(&self, id: i32, state: &HwLightState) -> binder::Result<()> {
+        self.delegate.lock().unwrap().setLightState(id, state)
+    }
+
+    fn getLights(&self) -> binder::Result<Vec<HwLight>> {
+        self.delegate.lock().unwrap().getLights()
+    }
+}
+
 /// Implementation of `IVirtualMachineService`, the entry point of the AIDL service.
 #[derive(Debug, Default)]
 struct VirtualMachineService {
@@ -1946,44 +1964,77 @@ impl IVirtualMachineService for VirtualMachineService {
 
         // We currently only support the stats service. It can be used as an example
         // to support more host services with this proxy pattern.
+        let light_service_instance =
+            <BpLights as ILights>::get_descriptor().to_owned() + "/default";
         let stats_service_instance = <BpStats as IStats>::get_descriptor().to_owned() + "/default";
-        if name != stats_service_instance {
-            return Err(anyhow!("Unknown service"))
-                .with_log()
-                .or_binder_exception(ExceptionCode::SECURITY);
-        }
-        const STATS_SERVICE_PORT: i32 = 2324;
 
-        // don't block this service while attempting to get a service for the client in the VM.
-        let local_svc: Strong<dyn IStats> = binder::check_interface(name)
-            .context("Failed to get {name} from IVirtualMachineService")
-            .or_service_specific_exception(-1)?;
+        if name == light_service_instance {
+            let port = 2321;
 
-        // Setup a delegator that wraps the service so we can proxy calls.
-        // This is needed because we can't use a kernel binder from
-        // another process for a new RpcServer.
-        let service = BnStats::new_binder(
-            StatsDelegator { delegate: local_svc.into() },
-            BinderFeatures::default(),
-        );
+            // don't block this service while attempting to get a service for the client in the VM.
+            let local_svc: Strong<dyn ILights> = binder::check_interface(name)
+                .context("Failed to get {name} from IVirtualMachineService")
+                .or_service_specific_exception(-1)?;
 
-        match RpcServer::new_vsock(service.as_binder(), cid, STATS_SERVICE_PORT.try_into().unwrap())
-        {
-            Ok(vm_server) => {
-                vm_server.set_max_threads(4);
-                vm_server.start();
-                self.proxied_services.lock().unwrap().insert(name.to_string(), STATS_SERVICE_PORT);
-                info!("RpcServer proxy started for {name}.");
+            // Setup a delegator that wraps the service so we can proxy calls.
+            // This is needed because we can't use a kernel binder from
+            // another process for a new RpcServer.
+            let service = BnLights::new_binder(
+                LightDelegator { delegate: local_svc.into() },
+                BinderFeatures::default(),
+            );
+
+            match RpcServer::new_vsock(service.as_binder(), cid, port) {
+                Ok(vm_server) => {
+                    vm_server.set_max_threads(4);
+                    vm_server.start();
+                    self.proxied_services
+                        .lock()
+                        .unwrap()
+                        .insert(name.to_string(), port.try_into().unwrap());
+                    info!("RpcServer proxy started for {name}.");
+                }
+                Err(err) => {
+                    warn!("Could not start RpcServer for {name} on port {}: {}", port, err);
+                }
             }
-            Err(err) => {
-                warn!(
-                    "Could not start RpcServer for {name} on port {}: {}",
-                    STATS_SERVICE_PORT, err
-                );
-            }
-        }
 
-        Ok(ServiceConnectionInfo { port: STATS_SERVICE_PORT })
+            Ok(ServiceConnectionInfo { port: port as i32 })
+        } else if name == stats_service_instance {
+            let port = 2324;
+
+            // don't block this service while attempting to get a service for the client in the VM.
+            let local_svc: Strong<dyn IStats> = binder::check_interface(name)
+                .context("Failed to get {name} from IVirtualMachineService")
+                .or_service_specific_exception(-1)?;
+
+            // Setup a delegator that wraps the service so we can proxy calls.
+            // This is needed because we can't use a kernel binder from
+            // another process for a new RpcServer.
+            let service = BnStats::new_binder(
+                StatsDelegator { delegate: local_svc.into() },
+                BinderFeatures::default(),
+            );
+
+            match RpcServer::new_vsock(service.as_binder(), cid, port) {
+                Ok(vm_server) => {
+                    vm_server.set_max_threads(4);
+                    vm_server.start();
+                    self.proxied_services
+                        .lock()
+                        .unwrap()
+                        .insert(name.to_string(), port.try_into().unwrap());
+                    info!("RpcServer proxy started for {name}.");
+                }
+                Err(err) => {
+                    warn!("Could not start RpcServer for {name} on port {}: {}", port, err);
+                }
+            }
+
+            Ok(ServiceConnectionInfo { port: port as i32 })
+        } else {
+            Err(anyhow!("Unknown service")).with_log().or_binder_exception(ExceptionCode::SECURITY)
+        }
     }
 }
 
