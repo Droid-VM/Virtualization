@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8276e20c_1e34d8b6",
+        "filename": "libs/libvmbase/src/uart.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-10-10T18:30:43Z",
+      "side": 1,
+      "message": "Just to be sure you understand this, `write_volatile` may end up not picking `strb` specifically, which may prevent crosvm from being able to handle the fault, see b/345658173\n\nIf you\u0027ve either worked around this it doesn\u0027t apply, this should be fine, but this is close enough to that situation that I want you to check and make sure you don\u0027t think it applies to you.",
+      "revId": "ff7a0b0edad6328f251df0b6da585beca6621887",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
