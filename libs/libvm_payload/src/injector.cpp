@@ -19,7 +19,7 @@
 
 #include <string>
 
-#define TAG "injector"
+#define TAG "injectornator"
 
 ABinderRpc_Accessor* accessorProvider(const char* instance, void*) {
     // Get the accessor from IVmPayloadService.
@@ -36,11 +36,16 @@ ABinderRpc_Accessor* accessorProvider(const char* instance, void*) {
 
 __attribute__((constructor)) void injectServices(void) {
     // TODO get this from microdroidmgr through a new AVmPayload API.
+    // TODO try to move this all to rust if we can call things after forking,
+    // and before calling into the payload hook.
     const char* kSupportedServices[] = {
+            "android.hardware.light.ILights/default",
+            "com.android.virt.accessor_demo.host_service.IAccessorHostService/default",
+            "com.android.virt.accessor_demo.host_service.IAccessorHostService/rpc",
             "android.frameworks.stats.IStats/default",
     };
     ABinderRpc_AccessorProvider* provider =
-            ABinderRpc_registerAccessorProvider(accessorProvider, kSupportedServices, 1, nullptr,
+            ABinderRpc_registerAccessorProvider(accessorProvider, kSupportedServices, 4, nullptr,
                                                 nullptr);
 
     if (provider) {

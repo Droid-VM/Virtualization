@@ -87,7 +87,7 @@ fn test_vm_get_host_service() {
     init();
 
     let service = wait_for_interface();
-    service.tryGetHostService("android.frameworks.stats.IStats/default").unwrap();
+    service.tryGetHostService("android.hardware.light.ILights/default").unwrap();
 }
 
 rdroidtest::test_main!();

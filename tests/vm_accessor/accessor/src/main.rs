@@ -14,11 +14,13 @@
 
 //! Android VM control tool.
 
+mod host_service;
 mod run;
 
 use anyhow::Error;
 use anyhow::{anyhow, bail};
 use binder::ProcessState;
+use host_service::register_host_service;
 use log::info;
 use run::run_vm;
 use std::time::Duration;
@@ -42,12 +44,15 @@ fn main() -> Result<(), Error> {
     let accessor = vm.vm.createAccessorBinder(SERVICE_NAME, PORT).unwrap();
 
     let accessor_delegator = binder::delegate_accessor(SERVICE_NAME, accessor).unwrap();
+    let cid = vm.vm.getCid()?;
 
     // If you want to serve multiple services in a VM, then register Accessor impls multiple times.
     binder::register_lazy_service(SERVICE_NAME, accessor_delegator).map_err(|e| {
         anyhow!("Failed to register lazy service, service={SERVICE_NAME}, err={e:?}",)
     })?;
     info!("service {SERVICE_NAME} is registered as lazy service");
+
+    register_host_service(cid)?;
 
     ProcessState::join_thread_pool();
 
