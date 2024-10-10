@@ -231,6 +231,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90795850_dc03f800",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1411,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-10T21:16:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "cbaacdc3_8d5995d6",
+      "range": {
+        "startLine": 1410,
+        "startChar": 8,
+        "endLine": 1411,
+        "endChar": 87
+      },
+      "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13a914af_2bab3fc5",
@@ -634,6 +658,24 @@
       "side": 1,
       "message": "I don\u0027t see why not. It looks like it\u0027s all generic microdroid code with port(matches what the client expects) and accessor name(matches manifest file). Is there already a bug open for this?",
       "parentUuid": "eb4f59ef_6199710f",
+      "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63dafef2_fe275e2f",
+        "filename": "tests/vm_accessor/accessor/src/main.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-10T21:16:23Z",
+      "side": 1,
+      "message": "b/372743360",
+      "parentUuid": "5774fb9e_ed7b13d6",
       "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
