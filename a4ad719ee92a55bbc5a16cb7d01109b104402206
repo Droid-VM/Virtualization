@@ -159,6 +159,30 @@
       },
       "revId": "a4ad719ee92a55bbc5a16cb7d01109b104402206",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2da518ea_84148d32",
+        "filename": "libs/libservice_vm_requests/src/rkp.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-10T07:36:37Z",
+      "side": 1,
+      "message": "Tried this morning and still got the same error.\n\n```\n10-10 09:32:17.810 10102  2968  3530 E RkpdServerInterface: Server connection failed for url: https://remoteprovisioning.googleapis.com/v1/:signCertificates?challenge\u003dAAABknVXu6UBILStY0kJMr1RcxhqAiCwXYD_Yjs%3D\u0026request_id\u003def04bce0-56ee-4134-b605-c48b6b590093, response code: 400\n```\nWill retry tomorrow till the server cls will be fully deployed.",
+      "parentUuid": "6ecc1cef_175b1248",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 40
+      },
+      "revId": "a4ad719ee92a55bbc5a16cb7d01109b104402206",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
