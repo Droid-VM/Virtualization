@@ -209,6 +209,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cbaacdc3_8d5995d6",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1411,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-10T08:55:51Z",
+      "side": 1,
+      "message": "`ensure!(..)` is equivalent to `if !cond return Err(anyhow!(..))`[1]. Sorry, I overlooked the fact that we\u0027re still within the original AIDL method. Typically, when the implementation becomes lengthy, we introduce a more Rust friendly method to avoid repetitive error conversions at the end of each line (See http://b/372472178#comment2). Since we are still in the original method, using `anyhow!(..)` is fine.\n\n[1] https://docs.rs/anyhow/latest/anyhow/macro.ensure.html",
+      "parentUuid": "17df9e28_1763daa0",
+      "range": {
+        "startLine": 1410,
+        "startChar": 8,
+        "endLine": 1411,
+        "endChar": 87
+      },
+      "revId": "e577a5079b6b4d1e9c303c35ff301907f5f00c95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13a914af_2bab3fc5",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 10

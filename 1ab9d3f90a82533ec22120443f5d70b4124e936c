@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8ce7aca_c0409758",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualMachine.aidl",
+        "patchSetId": 12
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-10T08:55:51Z",
+      "side": 1,
+      "message": "Thanks for filing the bug! btw could we add the error codes in a separate cl, after we reach a consensus on the overall error handling approach and the specific errors to include in the API? Since this file is primarily an internal class, adding error codes here won\u0027t have much impact until we establish a mechanism to map them into API-level errors for the clients.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 42
+      },
+      "revId": "1ab9d3f90a82533ec22120443f5d70b4124e936c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
