@@ -37,10 +37,11 @@ ABinderRpc_Accessor* accessorProvider(const char* instance, void*) {
 __attribute__((constructor)) void injectServices(void) {
     // TODO get this from microdroidmgr through a new AVmPayload API.
     const char* kSupportedServices[] = {
+            "android.hardware.light.ILights/default",
             "android.frameworks.stats.IStats/default",
     };
     ABinderRpc_AccessorProvider* provider =
-            ABinderRpc_registerAccessorProvider(accessorProvider, kSupportedServices, 1, nullptr,
+            ABinderRpc_registerAccessorProvider(accessorProvider, kSupportedServices, 2, nullptr,
                                                 nullptr);
 
     if (provider) {
