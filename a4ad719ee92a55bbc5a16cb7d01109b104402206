@@ -183,6 +183,30 @@
       },
       "revId": "a4ad719ee92a55bbc5a16cb7d01109b104402206",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "494125a2_b8d3144d",
+        "filename": "libs/libservice_vm_requests/src/rkp.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1833664
+      },
+      "writtenOn": "2024-10-10T15:04:13Z",
+      "side": 1,
+      "message": "It\u0027ll be 6pm UTC Friday before the fix rolls out to prod.\n\nThe fix should land in autopush soon (within a couple of hours).\n\nIf you want to try testing early tomorrow, you could try setting the system property `remote_provisioning.hostname` to `autopush-remoteprovisioning.sandbox.googleapis.com`.",
+      "parentUuid": "2da518ea_84148d32",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 40
+      },
+      "revId": "a4ad719ee92a55bbc5a16cb7d01109b104402206",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
