@@ -15,6 +15,7 @@
 //! Android VM control tool.
 
 mod accessor;
+mod host_service;
 mod run;
 
 use accessor::Accessor;
@@ -22,6 +23,7 @@ use android_os_accessor::aidl::android::os::IAccessor::BnAccessor;
 use anyhow::Error;
 use anyhow::{anyhow, bail};
 use binder::{BinderFeatures, ProcessState};
+use host_service::register_host_service;
 use log::info;
 use run::run_vm;
 
@@ -40,6 +42,7 @@ fn main() -> Result<(), Error> {
     );
 
     let vm = run_vm()?;
+    let cid = vm.vm.getCid()?;
 
     // If you want to serve multiple services in a VM, then register Accessor impls multiple times.
     let accessor = Accessor::new(vm, PORT, SERVICE_NAME);
@@ -48,6 +51,8 @@ fn main() -> Result<(), Error> {
         anyhow!("Failed to register lazy service, service={SERVICE_NAME}, err={e:?}",)
     })?;
     info!("service {SERVICE_NAME} is registered as lazy service");
+
+    register_host_service(cid)?;
 
     ProcessState::join_thread_pool();
 
