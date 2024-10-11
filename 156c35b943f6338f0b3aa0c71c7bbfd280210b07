@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47456fb7_c934952e",
+        "filename": "build/microdroid/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-10-11T16:10:02Z",
+      "side": 1,
+      "message": "In line#512, you are again adding this capability. This will fail verification in pvmfw perhaps.\n\nGiven you\u0027re not flagging this target I recommend keeping 509-514, just setting `value: MICRODROID_KERNEL_CAP_LLPVM + \"|supports_uefi_boot\",` \u0026 removing 516-525",
+      "range": {
+        "startLine": 512,
+        "startChar": 0,
+        "endLine": 512,
+        "endChar": 40
+      },
+      "revId": "156c35b943f6338f0b3aa0c71c7bbfd280210b07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
