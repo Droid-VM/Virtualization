@@ -63,6 +63,98 @@
       ],
       "revId": "f063c29f88cd951ff350bc15ee618882b0c2a8d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5be89ade_3dd6d999",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsDiskResizeActivity.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-11T04:22:27Z",
+      "side": 1,
+      "message": "make it string resource instead of hardcoded value.",
+      "range": {
+        "startLine": 53,
+        "startChar": 60,
+        "endLine": 53,
+        "endChar": 75
+      },
+      "revId": "f063c29f88cd951ff350bc15ee618882b0c2a8d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faa56975_179b9f21",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsItemAdapter.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-11T04:22:27Z",
+      "side": 1,
+      "message": "instead of assuming split status via dpWidth, how about using https://developer.android.com/reference/kotlin/androidx/window/embedding/SplitController#splitInfoList(android.app.Activity)?",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 9
+      },
+      "revId": "f063c29f88cd951ff350bc15ee618882b0c2a8d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b227fe7f_3d4f4e03",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsRecoveryActivity.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-11T04:22:27Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 29,
+        "startChar": 58,
+        "endLine": 29,
+        "endChar": 68
+      },
+      "revId": "f063c29f88cd951ff350bc15ee618882b0c2a8d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8b9ef05_ed1059a4",
+        "filename": "android/TerminalApp/res/xml/main_split_config.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-11T04:22:27Z",
+      "side": 1,
+      "message": "let\u0027s define them as resources",
+      "range": {
+        "startLine": 14,
+        "startChar": 31,
+        "endLine": 15,
+        "endChar": 33
+      },
+      "revId": "f063c29f88cd951ff350bc15ee618882b0c2a8d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
