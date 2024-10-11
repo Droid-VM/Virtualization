@@ -49,6 +49,7 @@ install_prerequisites() {
 		gcc-aarch64-linux-gnu \
 		libc6-dev-arm64-cross \
 		make \
+		protobuf-compiler \
 		python3 \
 		python3-libcloud \
 		python3-marshmallow \
@@ -108,6 +109,15 @@ copy_android_config() {
 		mkdir -p ${dst}/files/usr/local/bin/forwarder_guest
 		cp ${workdir}/forwarder_guest/aarch64-unknown-linux-gnu/debug/forwarder_guest ${dst}/files/usr/local/bin/forwarder_guest/AVF
 		chmod 777 ${dst}/files/usr/local/bin/forwarder_guest/AVF
+	popd > /dev/null
+
+	        pushd $(dirname $0)/ip_addr_reporter > /dev/null
+		RUSTFLAGS="-C linker=aarch64-linux-gnu-gcc" cargo build \
+			--target aarch64-unknown-linux-gnu \
+			--target-dir ${workdir}/ip_addr_reporter
+		mkdir -p ${dst}/files/usr/local/bin/ip_addr_reporter
+		cp ${workdir}/ip_addr_reporter/aarch64-unknown-linux-gnu/debug/ip_addr_reporter ${dst}/files/usr/local/bin/ip_addr_reporter/AVF
+		chmod 777 ${dst}/files/usr/local/bin/ip_addr_reporter/AVF
 	popd > /dev/null
 }
 
