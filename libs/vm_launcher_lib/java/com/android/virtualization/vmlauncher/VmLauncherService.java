@@ -24,13 +24,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-import android.os.Looper;
 import android.os.ParcelFileDescriptor;
 import android.os.ResultReceiver;
 import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineConfig;
 import android.system.virtualmachine.VirtualMachineException;
 import android.util.Log;
+
+import com.android.virtualization.vmlauncher.proto.DebianServiceGrpc;
+import com.android.virtualization.vmlauncher.proto.IpAddr;
+import com.android.virtualization.vmlauncher.proto.ReportVmIpAddrResponse;
+
+import io.grpc.InsecureServerCredentials;
+import io.grpc.Server;
+import io.grpc.okhttp.OkHttpServerBuilder;
+import io.grpc.stub.StreamObserver;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -54,6 +62,7 @@ public class VmLauncherService extends Service {
     private ExecutorService mExecutorService;
     private VirtualMachine mVirtualMachine;
     private ResultReceiver mResultReceiver;
+    private Server mServer;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -113,10 +122,13 @@ public class VmLauncherService extends Service {
         startForeground();
 
         mResultReceiver.send(RESULT_START, null);
-        if (config.getCustomImageConfig().useNetwork()) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            gatherIpAddrFromVm(handler);
-        }
+        // if (config.getCustomImageConfig().useNetwork()) {
+        //     Handler handler = new Handler(Looper.getMainLooper());
+        //     gatherIpAddrFromVm(handler);
+        // }
+
+        startDebianServer();
+
         return START_NOT_STICKY;
     }
 
@@ -134,11 +146,54 @@ public class VmLauncherService extends Service {
             mExecutorService = null;
             mVirtualMachine = null;
         }
+        stopDebianServer();
     }
 
     private boolean isVmRunning() {
         return mVirtualMachine != null
                 && mVirtualMachine.getStatus() == VirtualMachine.STATUS_RUNNING;
+    }
+
+    private class DebianServiceImpl extends DebianServiceGrpc.DebianServiceImplBase {
+        @Override
+        public void reportVmIpAddr(
+                IpAddr request, StreamObserver<ReportVmIpAddrResponse> responseObserver) {
+            Log.d(TAG, "reportVmIpAddr: " + request.toString());
+            Bundle b = new Bundle();
+            b.putString(KEY_VM_IP_ADDR, request.getAddr());
+            mResultReceiver.send(RESULT_IPADDR, b);
+            ReportVmIpAddrResponse reply =
+                    ReportVmIpAddrResponse.newBuilder().setSuccess(true).build();
+            responseObserver.onNext(reply);
+            responseObserver.onCompleted();
+        }
+    }
+
+    private void startDebianServer() {
+        new Thread(
+                        () -> {
+                            // TODO(b/372666638): gRPC for java doesn't support vsock for now.
+                            // In addition, let's consider using a dynamic port and SSL(and client
+                            // certificate)
+                            int port = 12000;
+                            try {
+                                mServer =
+                                        OkHttpServerBuilder.forPort(
+                                                        port, InsecureServerCredentials.create())
+                                                .addService(new DebianServiceImpl())
+                                                .build()
+                                                .start();
+                            } catch (IOException e) {
+                                Log.d(TAG, "grpc server error", e);
+                            }
+                        })
+                .start();
+    }
+
+    private void stopDebianServer() {
+        if (mServer != null) {
+            mServer.shutdown();
+        }
     }
 
     // TODO(b/359523803): Use AVF API to get ip addr when it exists
