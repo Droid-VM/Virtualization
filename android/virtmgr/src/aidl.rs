@@ -53,6 +53,7 @@ use android_system_virtualmachineservice::aidl::android::system::virtualmachines
 };
 use android_hardware_security_secretkeeper::aidl::android::hardware::security::secretkeeper::ISecretkeeper::{BnSecretkeeper, ISecretkeeper};
 use android_hardware_security_secretkeeper::aidl::android::hardware::security::secretkeeper::SecretId::SecretId;
+use android_hardware_security_secretkeeper::aidl::android::hardware::security::secretkeeper::PublicKey::PublicKey;
 use android_hardware_security_authgraph::aidl::android::hardware::security::authgraph::{
     Arc::Arc as AuthgraphArc, IAuthGraphKeyExchange::IAuthGraphKeyExchange,
     IAuthGraphKeyExchange::BnAuthGraphKeyExchange, Identity::Identity, KeInitResult::KeInitResult,
@@ -1963,6 +1964,10 @@ impl ISecretkeeper for SecretkeeperProxy {
 
     fn deleteAll(&self) -> binder::Result<()> {
         self.0.deleteAll()
+    }
+
+    fn getSecretKeeperIdentity(&self) -> binder::Result<PublicKey> {
+        self.0.getSecretKeeperIdentity()
     }
 }
 
