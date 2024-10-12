@@ -53,6 +53,7 @@ use android_system_virtualmachineservice::aidl::android::system::virtualmachines
 };
 use android_hardware_security_secretkeeper::aidl::android::hardware::security::secretkeeper::ISecretkeeper::{BnSecretkeeper, ISecretkeeper};
 use android_hardware_security_secretkeeper::aidl::android::hardware::security::secretkeeper::SecretId::SecretId;
+use android_hardware_security_secretkeeper::aidl::android::hardware::security::secretkeeper::PublicKey::PublicKey;
 use android_hardware_security_authgraph::aidl::android::hardware::security::authgraph::{
     Arc::Arc as AuthgraphArc, IAuthGraphKeyExchange::IAuthGraphKeyExchange,
     IAuthGraphKeyExchange::BnAuthGraphKeyExchange, Identity::Identity, KeInitResult::KeInitResult,
@@ -866,15 +867,20 @@ fn maybe_create_device_tree_overlay(
         .context("Failed to extract vendor hashtree digest")
         .or_service_specific_exception(-1)?;
 
-    let trusted_props = if let Some(ref vendor_hashtree_digest) = vendor_hashtree_digest {
+    let sk = get_secretkeeper()?;
+    let PublicKey { keyMaterial } = sk.getSecretkeeperIdentity()?;
+    let mut trusted_props = vec![(cstr!("secretkeeper_public_key"), keyMaterial.as_slice())];
+
+    if let Some(ref vendor_hashtree_digest) = vendor_hashtree_digest {
         info!(
             "Passing vendor hashtree digest to pvmfw. This will be rejected if it doesn't \
                 match the trusted digest in the pvmfw config, causing the VM to fail to start."
         );
-        vec![(cstr!("vendor_hashtree_descriptor_root_digest"), vendor_hashtree_digest.as_slice())]
-    } else {
-        vec![]
-    };
+        trusted_props.push((
+            cstr!("vendor_hashtree_descriptor_root_digest"),
+            vendor_hashtree_digest.as_slice(),
+        ))
+    }
 
     let instance_id;
     let mut untrusted_props = Vec::with_capacity(2);
@@ -1967,16 +1973,20 @@ impl IVirtualMachineService for VirtualMachineService {
     }
 
     fn getSecretkeeper(&self) -> binder::Result<Strong<dyn ISecretkeeper>> {
-        if !is_secretkeeper_supported() {
-            return Err(StatusCode::NAME_NOT_FOUND)?;
-        }
-        let sk = binder::wait_for_interface(SECRETKEEPER_IDENTIFIER)?;
+        let sk = get_secretkeeper()?;
         Ok(BnSecretkeeper::new_binder(SecretkeeperProxy(sk), BinderFeatures::default()))
     }
 
     fn requestAttestation(&self, csr: &[u8], test_mode: bool) -> binder::Result<Vec<Certificate>> {
         GLOBAL_SERVICE.requestAttestation(csr, get_calling_uid() as i32, test_mode)
     }
+}
+
+fn get_secretkeeper() -> binder::Result<Strong<dyn ISecretkeeper>> {
+    if !is_secretkeeper_supported() {
+        return Err(StatusCode::NAME_NOT_FOUND.into());
+    }
+    Ok(binder::wait_for_interface(SECRETKEEPER_IDENTIFIER)?)
 }
 
 fn is_secretkeeper_supported() -> bool {
@@ -2014,6 +2024,10 @@ impl ISecretkeeper for SecretkeeperProxy {
 
     fn deleteAll(&self) -> binder::Result<()> {
         self.0.deleteAll()
+    }
+
+    fn getSecretkeeperIdentity(&self) -> binder::Result<PublicKey> {
+        Err(ExceptionCode::UNSUPPORTED_OPERATION.into())
     }
 }
 
