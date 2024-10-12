@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbf0d364_14bd96aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-12T00:41:50Z",
+      "side": 1,
+      "message": "Looks great!",
+      "revId": "9d566d3733920443d5def09eed17f309dfb0e3b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea3530df_81cb97b1",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 1902,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-12T00:41:50Z",
+      "side": 1,
+      "message": "can we iterate on making this generic before merging it, or break some other things that are permanent without fixing stats here in the code itself? We\u0027ll also want it to be generic for permission purposes (we need to find the policy of which VMs can use which services)",
+      "revId": "9d566d3733920443d5def09eed17f309dfb0e3b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "623bb1f5_3fd873e4",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 1925,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-12T00:41:50Z",
+      "side": 1,
+      "message": "I\u0027m guessing this is the reason why we need the library? We may want to dynamically load the library and dlsym something to delegate in the accessor process if possible or similar?",
+      "range": {
+        "startLine": 1925,
+        "startChar": 0,
+        "endLine": 1925,
+        "endChar": 62
+      },
+      "revId": "9d566d3733920443d5def09eed17f309dfb0e3b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adea85dd_7524cf9f",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 1929,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-12T00:41:50Z",
+      "side": 1,
+      "message": "no worries about doing it in this CL, but any thoughts on migrating away from RpcServer unstable?",
+      "revId": "9d566d3733920443d5def09eed17f309dfb0e3b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
