@@ -78,8 +78,8 @@ use serde::Deserialize;
 use std::collections::HashSet;
 use std::convert::TryInto;
 use std::fs;
-use std::ffi::CStr;
-use std::fs::{canonicalize, create_dir_all, read_dir, remove_dir_all, remove_file, File, OpenOptions};
+use std::ffi::{CStr, CString};
+use std::fs::{canonicalize, create_dir_all, read, read_dir, remove_dir_all, remove_file, File, OpenOptions};
 use std::io::{BufRead, BufReader, Error, ErrorKind, Seek, SeekFrom, Write};
 use std::iter;
 use std::num::{NonZeroU16, NonZeroU32};
@@ -119,6 +119,9 @@ const UNFORMATTED_STORAGE_MAGIC: &str = "UNFORMATTED-STORAGE";
 const PARTITION_GRANULARITY_BYTES: u64 = 4096;
 
 const VM_REFERENCE_DT_ON_HOST_PATH: &str = "/proc/device-tree/avf/reference";
+
+const SECRETKEEPER_KEY_HOST_DT: &str =
+    "/proc/device-tree/avf/reference/avf/secretkeeper_public_key";
 
 pub static GLOBAL_SERVICE: LazyLock<Strong<dyn IVirtualizationServiceInternal>> =
     LazyLock::new(|| {
@@ -1883,6 +1886,19 @@ impl ISecretkeeper for SecretkeeperProxy {
 
     fn deleteAll(&self) -> binder::Result<()> {
         self.0.deleteAll()
+    }
+
+    fn getDefaultSecretKeeperIdentity(&self) -> binder::Result<Vec<u8>> {
+        let path = Path::new(SECRETKEEPER_KEY_HOST_DT);
+        match read(path) {
+            Ok(b) => Ok(b),
+            Err(e) => {
+                let msg = CString::new(e.to_string());
+                let msg = msg.unwrap();
+                let msg = msg.as_c_str();
+                Err(Status::new_exception(ExceptionCode::TRANSACTION_FAILED, Some(msg)))
+            }
+        }
     }
 }
 
