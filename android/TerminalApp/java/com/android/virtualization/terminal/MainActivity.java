@@ -37,14 +37,16 @@ import com.google.android.material.appbar.MaterialToolbar;
 public class MainActivity extends AppCompatActivity implements
         VmLauncherServices.VmLauncherServiceCallback {
     private static final String TAG = "VmTerminalApp";
+    private static final int REQUEST_CODE_INSTALLER = 0x33;
+
     private String mVmIpAddr;
     private WebView mWebView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Toast.makeText(this, R.string.vm_creation_message, Toast.LENGTH_SHORT).show();
-        VmLauncherServices.startVmLauncherService(this, this);
+
+        checkForUpdate();
 
         setContentView(R.layout.activity_headless);
 
@@ -125,5 +127,26 @@ public class MainActivity extends AppCompatActivity implements
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_INSTALLER) {
+            if (resultCode != RESULT_OK) {
+                Log.e(TAG, "Failed to start VM. Installer returned error.");
+                finish();
+            }
+            startVm();
+        }
+    }
+
+    private void checkForUpdate() {
+        Intent intent = new Intent(this, InstallerActivity.class);
+        startActivityForResult(intent, REQUEST_CODE_INSTALLER);
+    }
+
+    private void startVm() {
+        Toast.makeText(this, R.string.vm_creation_message, Toast.LENGTH_SHORT).show();
+        VmLauncherServices.startVmLauncherService(this, this);
     }
 }
