@@ -15,9 +15,9 @@
  */
 package com.android.virtualization.terminal;
 
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -30,14 +30,9 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.virtualization.vmlauncher.VmLauncherServices;
 
-import com.google.android.material.appbar.MaterialToolbar;
-
-public class MainActivity extends AppCompatActivity implements
-        VmLauncherServices.VmLauncherServiceCallback {
+public class MainActivity extends Activity implements VmLauncherServices.VmLauncherServiceCallback {
     private static final String TAG = "VmTerminalApp";
     private String mVmIpAddr;
     private WebView mWebView;
@@ -49,9 +44,6 @@ public class MainActivity extends AppCompatActivity implements
         VmLauncherServices.startVmLauncherService(this, this);
 
         setContentView(R.layout.activity_headless);
-
-        MaterialToolbar toolbar = (MaterialToolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         mWebView = (WebView) findViewById(R.id.webview);
         mWebView.getSettings().setDatabaseEnabled(true);
         mWebView.getSettings().setDomStorageEnabled(true);
@@ -109,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onMenuItemSelected(int featureId, MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.copy_ip_addr) {
             // TODO(b/340126051): remove this menu item when port forwarding is supported.
@@ -119,12 +111,7 @@ public class MainActivity extends AppCompatActivity implements
         } else if (id == R.id.stop_vm) {
             VmLauncherServices.stopVmLauncherService(this);
             return true;
-
-        } else if (id == R.id.menu_item_settings) {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            this.startActivity(intent);
-            return true;
         }
-        return super.onOptionsItemSelected(item);
+        return super.onMenuItemSelected(featureId, item);
     }
 }
