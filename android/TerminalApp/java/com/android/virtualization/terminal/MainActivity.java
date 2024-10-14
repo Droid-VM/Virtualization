@@ -57,6 +57,9 @@ public class MainActivity extends AppCompatActivity
     private static final String TAG = "VmTerminalApp";
     private static final String VM_ADDR = "192.168.0.2";
     private static final int TTYD_PORT = 7681;
+    private static final int REQUEST_CODE_INSTALLER = 0x33;
+
+    private String mVmIpAddr;
     private WebView mWebView;
     private AccessibilityManager mAccessibilityManager;
 
@@ -64,6 +67,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        checkForUpdate();
         try {
             // No resize for now.
             long newSizeInBytes = 0;
@@ -73,10 +77,6 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(this, "Error resizing disk: " + e.getMessage(), Toast.LENGTH_LONG)
                     .show();
         }
-
-        Toast.makeText(this, R.string.vm_creation_message, Toast.LENGTH_SHORT).show();
-        android.os.Trace.beginAsyncSection("executeTerminal", 0);
-        VmLauncherServices.startVmLauncherService(this, this);
 
         setContentView(R.layout.activity_headless);
 
@@ -317,5 +317,28 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onTouchExplorationStateChanged(boolean enabled) {
         connectToTerminalService();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d(TAG, "onActivityResult(), requestCode=" + requestCode + ", resultCode=" + resultCode);
+        if (requestCode == REQUEST_CODE_INSTALLER) {
+            if (resultCode != RESULT_OK) {
+                Log.e(TAG, "Failed to start VM. Installer returned error.");
+                finish();
+            }
+            startVm();
+        }
+    }
+
+    private void checkForUpdate() {
+        Intent intent = new Intent(this, InstallerActivity.class);
+        startActivityForResult(intent, REQUEST_CODE_INSTALLER);
+    }
+
+    private void startVm() {
+        Toast.makeText(this, R.string.vm_creation_message, Toast.LENGTH_SHORT).show();
+        android.os.Trace.beginAsyncSection("executeTerminal", 0);
+        VmLauncherServices.startVmLauncherService(this, this);
     }
 }
