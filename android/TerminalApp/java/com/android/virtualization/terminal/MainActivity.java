@@ -18,6 +18,7 @@ package com.android.virtualization.terminal;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -34,14 +35,16 @@ import com.android.virtualization.vmlauncher.VmLauncherServices;
 
 public class MainActivity extends Activity implements VmLauncherServices.VmLauncherServiceCallback {
     private static final String TAG = "VmTerminalApp";
+    private static final int REQUEST_CODE_INSTALLER = 0x33;
+
     private String mVmIpAddr;
     private WebView mWebView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Toast.makeText(this, R.string.vm_creation_message, Toast.LENGTH_SHORT).show();
-        VmLauncherServices.startVmLauncherService(this, this);
+
+        checkForUpdate();
 
         setContentView(R.layout.activity_headless);
         mWebView = (WebView) findViewById(R.id.webview);
@@ -113,5 +116,26 @@ public class MainActivity extends Activity implements VmLauncherServices.VmLaunc
             return true;
         }
         return super.onMenuItemSelected(featureId, item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_INSTALLER) {
+            if (resultCode != RESULT_OK) {
+                Log.e(TAG, "Failed to start VM. Installer returned error.");
+                finish();
+            }
+            startVm();
+        }
+    }
+
+    private void checkForUpdate() {
+        Intent intent = new Intent(this, InstallerActivity.class);
+        startActivityForResult(intent, REQUEST_CODE_INSTALLER);
+    }
+
+    private void startVm() {
+        Toast.makeText(this, R.string.vm_creation_message, Toast.LENGTH_SHORT).show();
+        VmLauncherServices.startVmLauncherService(this, this);
     }
 }
