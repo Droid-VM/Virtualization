@@ -73,6 +73,144 @@
       "message": "no worries about doing it in this CL, but any thoughts on migrating away from RpcServer unstable?",
       "revId": "9d566d3733920443d5def09eed17f309dfb0e3b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64ccfc9b_031289d7",
+        "filename": "guest/microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-14T13:23:20Z",
+      "side": 1,
+      "message": "super-nit: Maybe can use `ok_or_else` to condense this into one line?\n\n```suggestion\n        accessor\n    .as_binder()\n    .ok_or_else(|| anyhow!(\"Failed to get a binder from Accessor::as_binder\"))\n    .with_log()\n    .or_binder_exception(ExceptionCode::NULL_POINTER)\n```",
+      "range": {
+        "startLine": 116,
+        "startChar": 8,
+        "endLine": 121,
+        "endChar": 9
+      },
+      "revId": "9d566d3733920443d5def09eed17f309dfb0e3b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88134552_38afe07e",
+        "filename": "libs/libvm_payload/include/vm_payload.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-14T13:23:20Z",
+      "side": 1,
+      "message": "This file contains the NDK API for the VM payload, should we also add this to [1] and add `__INTRODUCED_IN` here?\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/libvm_payload/libvm_payload.map.txt;drc\u003db51c0284f4d2ef920f0546a704397612941308bf",
+      "range": {
+        "startLine": 91,
+        "startChar": 20,
+        "endLine": 91,
+        "endChar": 48
+      },
+      "revId": "9d566d3733920443d5def09eed17f309dfb0e3b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06bbcada_b2190543",
+        "filename": "libs/libvm_payload/src/lib.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-14T13:23:20Z",
+      "side": 1,
+      "message": "This unwrap doesn\u0027t always fail with null instance, it can fail with invalid UTF-8 data [1]\n\n[1] https://doc.rust-lang.org/std/ffi/struct.CStr.html#method.to_str",
+      "range": {
+        "startLine": 160,
+        "startChar": 67,
+        "endLine": 160,
+        "endChar": 92
+      },
+      "revId": "9d566d3733920443d5def09eed17f309dfb0e3b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8e54484_ce4bd99f",
+        "filename": "tests/vm_accessor/accessor/Android.bp",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-14T13:23:20Z",
+      "side": 1,
+      "message": "Is this change needed?",
+      "range": {
+        "startLine": 20,
+        "startChar": 9,
+        "endLine": 20,
+        "endChar": 24
+      },
+      "revId": "9d566d3733920443d5def09eed17f309dfb0e3b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acfc856a_b50ab351",
+        "filename": "tests/vm_accessor/accessor_vm/src/main.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-14T13:23:20Z",
+      "side": 1,
+      "message": "Should we just get this more specific since this service is only for testing?",
+      "range": {
+        "startLine": 69,
+        "startChar": 7,
+        "endLine": 69,
+        "endChar": 45
+      },
+      "revId": "9d566d3733920443d5def09eed17f309dfb0e3b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44687d3b_777267d9",
+        "filename": "tests/vm_accessor/aidl/com/android/virt/accessor_demo/vm_service/IAccessorVmService.aidl",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-14T13:23:20Z",
+      "side": 1,
+      "message": "Can we incorporate a check here to verify that the VM successfully establishes a connection with the host service?",
+      "range": {
+        "startLine": 23,
+        "startChar": 4,
+        "endLine": 23,
+        "endChar": 8
+      },
+      "revId": "9d566d3733920443d5def09eed17f309dfb0e3b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
