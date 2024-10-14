@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c896a929_c2a00d48",
+        "filename": "build/debian/DebianService/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-14T08:21:07Z",
+      "side": 1,
+      "message": "moved proto and bp files to libs/ because it is shared between android and guest side.",
+      "parentUuid": "dda25c31_368c08ba",
+      "revId": "15c47fff8edc3a2615b4a3cd0f1cae9e8e4f62dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cdb8508_ae07e705",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-10-14T07:07:30Z",
       "side": 1,
       "message": "This should go to guest/",
+      "revId": "15c47fff8edc3a2615b4a3cd0f1cae9e8e4f62dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c79fe72f_d07b4453",
+        "filename": "build/debian/ip_addr_reporter/build.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-14T08:21:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cdb8508_ae07e705",
       "revId": "15c47fff8edc3a2615b4a3cd0f1cae9e8e4f62dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -58,6 +94,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bcaeb96_fafa570a",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/VmLauncherService.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-14T08:21:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5741cb6_0ae0b8a3",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 193,
+        "endChar": 5
+      },
+      "revId": "15c47fff8edc3a2615b4a3cd0f1cae9e8e4f62dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e2ca827_1c44cc58",
@@ -71,6 +131,30 @@
       "writtenOn": "2024-10-14T07:07:30Z",
       "side": 1,
       "message": "Delete this",
+      "range": {
+        "startLine": 195,
+        "startChar": 0,
+        "endLine": 224,
+        "endChar": 5
+      },
+      "revId": "15c47fff8edc3a2615b4a3cd0f1cae9e8e4f62dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20c0928c_4508eaac",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/VmLauncherService.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-14T08:21:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e2ca827_1c44cc58",
       "range": {
         "startLine": 195,
         "startChar": 0,
