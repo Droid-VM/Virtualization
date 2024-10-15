@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37fc348b_d4123862",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-15T07:37:17Z",
+      "side": 1,
+      "message": "https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3307584",
+      "parentUuid": "76bffca0_23798af2",
+      "revId": "4ad218bfc7b1187230c21d7e6eeaf6a0a3e6d975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a36e334e_c7f38558",
@@ -49,6 +67,30 @@
       "writtenOn": "2024-10-15T07:23:32Z",
       "side": 1,
       "message": "Q: Is this called when talkback option is changed?",
+      "range": {
+        "startLine": 96,
+        "startChar": 16,
+        "endLine": 96,
+        "endChar": 33
+      },
+      "revId": "4ad218bfc7b1187230c21d7e6eeaf6a0a3e6d975",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c413ecaf_8d26bc9f",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-15T07:37:17Z",
+      "side": 1,
+      "message": "not in the first PS because i just thought a user mightn\u0027t change talkback option during using the terminal, but I added the listener in the second PS.",
+      "parentUuid": "a36e334e_c7f38558",
       "range": {
         "startLine": 96,
         "startChar": 16,
