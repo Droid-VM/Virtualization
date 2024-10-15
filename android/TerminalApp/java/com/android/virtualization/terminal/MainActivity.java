@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.accessibility.AccessibilityManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -91,10 +92,18 @@ public class MainActivity extends AppCompatActivity implements
         finish();
     }
 
+
     public void onIpAddrAvailable(String ipAddr) {
         mVmIpAddr = ipAddr;
         ((TextView) findViewById(R.id.ip_addr_textview)).setText(mVmIpAddr);
-        gotoURL("http://" + mVmIpAddr + ":7681");
+        boolean isTouchExplorationEnabled =
+                this.getSystemService(AccessibilityManager.class).isTouchExplorationEnabled();
+
+        gotoURL(
+                "http://"
+                        + mVmIpAddr
+                        + ":7681/"
+                        + (isTouchExplorationEnabled ? "?screenReaderMode=true" : ""));
     }
 
     @Override
