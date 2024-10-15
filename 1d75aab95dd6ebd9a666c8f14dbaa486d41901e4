@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b674644_87ff79f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-10-15T17:48:13Z",
+      "side": 1,
+      "message": "Since the resize is offline, we shouldn\u0027t starting VmLauncherService at all; but yes, if there is a need we can always move it. In any case, we will have to refactor this a bit when integrating it to UI.",
+      "parentUuid": "6a70f3fc_ca6948e0",
+      "revId": "1d75aab95dd6ebd9a666c8f14dbaa486d41901e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "180b0d6f_942536bd",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-10-15T06:19:59Z",
       "side": 1,
       "message": "nit: make it private",
+      "revId": "1d75aab95dd6ebd9a666c8f14dbaa486d41901e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b22d2f92_e16b41e2",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-10-15T17:48:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "180b0d6f_942536bd",
       "revId": "1d75aab95dd6ebd9a666c8f14dbaa486d41901e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
