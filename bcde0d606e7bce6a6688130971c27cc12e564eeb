@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5de4eee_6353f609",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-16T09:05:42Z",
+      "side": 1,
+      "message": "it reloads again and again until ttyd is ready after network is available inside VM. I am curious about its overhead and I am a litte bit worried if ttyd is broken it is a kind of infinite loop.\n\nI think we might replace `onIpAddrAvailable` with `onSystemdUnitReady(String service name)` and get callback for ttyd to be ready. But it isn\u0027t urgent unless the overhead is too large.",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 39
+      },
+      "revId": "bcde0d606e7bce6a6688130971c27cc12e564eeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
