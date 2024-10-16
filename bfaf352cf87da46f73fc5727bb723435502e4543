@@ -16,6 +16,24 @@
       "message": "instead of including both into images.tar.gz, how about setting up separate directory per an arch?",
       "revId": "bfaf352cf87da46f73fc5727bb723435502e4543",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdf26dd1_53f84b60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3549799
+      },
+      "writtenOn": "2024-10-16T21:18:04Z",
+      "side": 1,
+      "message": "this is my first time working directly with kokoro so im not 100% sure i went the right direction here - but these changes would also be reflected in the critique changes i sent. i imagine there would be some small period of breakage as we transition to the new folder structure?",
+      "parentUuid": "c1d81506_baca87fc",
+      "revId": "bfaf352cf87da46f73fc5727bb723435502e4543",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
