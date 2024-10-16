@@ -22,6 +22,30 @@
       },
       "revId": "bcde0d606e7bce6a6688130971c27cc12e564eeb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74469c4c_25fd62c5",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-16T09:09:02Z",
+      "side": 1,
+      "message": "one way is to enable networking around the same time as ttyd is ready.\n\nthere\u0027s no need to enable networking before ttyd is ready.",
+      "parentUuid": "e5de4eee_6353f609",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 39
+      },
+      "revId": "bcde0d606e7bce6a6688130971c27cc12e564eeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
