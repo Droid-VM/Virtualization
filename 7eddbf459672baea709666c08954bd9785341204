@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1694073d_04662eaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-16T11:27:14Z",
+      "side": 1,
+      "message": "Hi Seth, PTAL",
+      "revId": "7eddbf459672baea709666c08954bd9785341204",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49834957_769109a5",
+        "filename": "guest/rialto/tests/test.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-16T11:27:14Z",
+      "side": 1,
+      "message": "This update is needed because the `libhwtrust` update is causing the rialto_test compilation to crash, despite `libhwtrust` not being directly related to this code.\n\n```\nerror[E0283]: type annotations needed\n   --\u003e packages/modules/Virtualization/guest/rialto/tests/test.rs:209:46\n    |\n209 |     assert_eq!(expected_component.name, name.as_ref());\n    |                                              ^^^^^^\n    |\n    \u003d note: multiple `impl`s satisfying `x509_cert::der::asn1::Utf8StringRef\u003c\u0027_\u003e: std::convert::AsRef\u003c_\u003e` found in the `der` crate:\n            - impl\u003c\u0027a\u003e std::convert::AsRef\u003c[u8]\u003e for x509_cert::der::asn1::Utf8StringRef\u003c\u0027a\u003e;\n            - impl\u003c\u0027a\u003e std::convert::AsRef\u003cstr\u003e for x509_cert::der::asn1::Utf8StringRef\u003c\u0027a\u003e;\n```",
+      "range": {
+        "startLine": 212,
+        "startChar": 4,
+        "endLine": 213,
+        "endChar": 50
+      },
+      "revId": "7eddbf459672baea709666c08954bd9785341204",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
