@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26f8b7bc_b515cbff",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1438,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-17T18:19:32Z",
+      "side": 1,
+      "message": "Why? Converting the value to a reference with as_ref() and then immediately dereferencing with \\* is unnecessary and potentially problematic in this case.\n\nThis can be dangerous as the temporary value is dropped at the end of the statement, potentially leaving a dangling reference. Rust\u0027s ownership and borrowing rules are designed to prevent this, and bypassing them with \\* can introduce memory safety issues.",
+      "range": {
+        "startLine": 1438,
+        "startChar": 62,
+        "endLine": 1438,
+        "endChar": 97
+      },
+      "revId": "4c1d082b076ac1b0693e23bc0299e59feec06072",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
