@@ -21,8 +21,11 @@ package com.android.virtualization.vmlauncher.proto;
 option java_package = "com.android.virtualization.vmlauncher.proto";
 option java_multiple_files = true;
 
+import "google/protobuf/empty.proto";
+
 service DebianService {
   rpc ReportVmIpAddr (IpAddr) returns (ReportVmIpAddrResponse) {}
+  rpc StreamForwardingOrder (google.protobuf.Empty) returns (stream ForwardingOrderResponse) {}
 }
 
 message IpAddr {
@@ -30,5 +33,10 @@ message IpAddr {
 }
 
 message ReportVmIpAddrResponse {
-    bool success = 1;
+  bool success = 1;
+}
+
+message ForwardingOrderResponse {
+  int32 guest_tcp_port = 1;
+  int32 vsock_port = 2;
 }
