@@ -15,10 +15,15 @@
  */
 package com.android.virtualization.terminal;
 
+import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.http.SslError;
 import android.os.Bundle;
 import android.system.ErrnoException;
@@ -38,6 +43,7 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.android.virtualization.vmlauncher.VmLauncherServices;
 
@@ -72,6 +78,7 @@ public class MainActivity extends AppCompatActivity
     private PrivateKey mPrivateKey;
     private WebView mWebView;
     private AccessibilityManager mAccessibilityManager;
+    private static final int POST_NOTIFICATIONS_PERMISSION_REQUEST_CODE = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +94,14 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(this, "Error resizing disk: " + e.getMessage(), Toast.LENGTH_LONG)
                     .show();
         }
+
+        checkAndRequestPostNotificationsPermission();
+
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        NotificationChannel notificationChannel =
+                new NotificationChannel(TAG, TAG, NotificationManager.IMPORTANCE_LOW);
+        assert notificationManager != null;
+        notificationManager.createNotificationChannel(notificationChannel);
 
         setContentView(R.layout.activity_headless);
 
@@ -306,6 +321,15 @@ public class MainActivity extends AppCompatActivity
         return;
     }
 
+    private void checkAndRequestPostNotificationsPermission() {
+        if (getApplicationContext().checkSelfPermission(Manifest.permission.RECORD_AUDIO)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(
+                    new String[]{Manifest.permission.POST_NOTIFICATIONS},
+                    POST_NOTIFICATIONS_PERMISSION_REQUEST_CODE);
+        }
+    }
+
     @Override
     protected void onDestroy() {
         getSystemService(AccessibilityManager.class).removeTouchExplorationStateChangeListener(this);
@@ -389,7 +413,24 @@ public class MainActivity extends AppCompatActivity
 
     private void startVm() {
         Toast.makeText(this, R.string.vm_creation_message, Toast.LENGTH_SHORT).show();
+
+        // Mock PendingIntent for notification action to go back to the terminal app.
+        Intent settingsIntent = new Intent();
+        PendingIntent settingPendingIntent = PendingIntent.getActivity(this, 0, settingsIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        // Mock PendingIntent for notification action to settings page.
+        Intent terminalIntent = new Intent();
+        PendingIntent terminalPendingIntent = PendingIntent.getActivity(this, 0, terminalIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
         android.os.Trace.beginAsyncSection("executeTerminal", 0);
-        VmLauncherServices.startVmLauncherService(this, this);
+        VmLauncherServices.startVmLauncherService(this, this, R.drawable.ic_launcher_foreground,
+                getResources().getString(R.string.service_notification_title),
+                getResources().getString(R.string.service_notification_content),
+                getResources().getString(R.string.service_notification_quit_action),
+                getResources().getString(R.string.service_notification_settings),
+                settingPendingIntent,
+                terminalPendingIntent);
     }
 }

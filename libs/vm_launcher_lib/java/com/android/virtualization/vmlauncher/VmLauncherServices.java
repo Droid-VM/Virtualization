@@ -16,6 +16,7 @@
 
 package com.android.virtualization.vmlauncher;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -64,7 +65,11 @@ public class VmLauncherServices {
         context.stopService(i);
     }
 
-    public static void startVmLauncherService(Context context, VmLauncherServiceCallback callback) {
+    public static void startVmLauncherService(Context context, VmLauncherServiceCallback callback,
+            int icon, String notification_title, String notification_content,
+            String quitActionName, String customActionName,
+            PendingIntent customActionPendingIntent,
+            PendingIntent clientPendingIntent) {
         Intent i = buildVmLauncherServiceIntent(context);
         if (i == null) {
             return;
@@ -93,6 +98,13 @@ public class VmLauncherServices {
                     }
                 };
         i.putExtra(Intent.EXTRA_RESULT_RECEIVER, getResultReceiverForIntent(resultReceiver));
+        i.putExtra(VmLauncherService.EXTRA_ICON, icon);
+        i.putExtra(VmLauncherService.EXTRA_NOTIFICATION_TITLE, notification_title);
+        i.putExtra(VmLauncherService.EXTRA_NOTIFICATION_CONTENT, notification_content);
+        i.putExtra(VmLauncherService.EXTRA_QUIT_ACTION_NAME, quitActionName);
+        i.putExtra(VmLauncherService.EXTRA_CUSTOM_ACTION_NAME, customActionName);
+        i.putExtra(VmLauncherService.EXTRA_CUSTOM_ACTION_PENDING_INTENT, customActionPendingIntent);
+        i.putExtra(VmLauncherService.EXTRA_CLIENT_PENDING_INTENT, clientPendingIntent);
         context.startForegroundService(i);
     }
 
