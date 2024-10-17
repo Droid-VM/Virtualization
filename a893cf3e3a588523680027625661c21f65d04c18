@@ -16,6 +16,24 @@
       "message": "minor suggestion: instead of having build.sh per arch, how about having the common build.sh of which first argument is arch?",
       "revId": "a893cf3e3a588523680027625661c21f65d04c18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da08ab60_deb829f3",
+        "filename": "build/debian/kokoro/gcp_ubuntu_docker/aarch64/build.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3549799
+      },
+      "writtenOn": "2024-10-17T16:00:14Z",
+      "side": 1,
+      "message": "so, i think this is one area where im not entirely understanding kokoro (the codelab didnt seem to answer this question but maybe i missed it) - how exactly is the `build.sh` file called? in the infra cl, the job protos point to a build directory, and have files with matching names to e.g. `presubmit.cfg` here, but im not sure i understand what is actually invoking build.sh or what is making use of the cfg files here other than just by nature of having the same name/directory structure",
+      "parentUuid": "8c51d2cd_9f5ade22",
+      "revId": "a893cf3e3a588523680027625661c21f65d04c18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
