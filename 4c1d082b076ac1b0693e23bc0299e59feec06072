@@ -22,6 +22,30 @@
       },
       "revId": "4c1d082b076ac1b0693e23bc0299e59feec06072",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a195a62_de27e286",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1438,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-17T18:22:01Z",
+      "side": 1,
+      "message": "as_ref() returns a `\u0026sockaddr_vm` for use with FFI, not a `\u0026VsockAddr`. https://docs.rs/vsock/latest/vsock/struct.VsockAddr.html\n\nWe deference the reference it to copy the object into the ConnectionInfo::Vsock.",
+      "parentUuid": "26f8b7bc_b515cbff",
+      "range": {
+        "startLine": 1438,
+        "startChar": 62,
+        "endLine": 1438,
+        "endChar": 97
+      },
+      "revId": "4c1d082b076ac1b0693e23bc0299e59feec06072",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
