@@ -34,6 +34,24 @@
       "parentUuid": "8c51d2cd_9f5ade22",
       "revId": "a893cf3e3a588523680027625661c21f65d04c18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ec374e2_a9686960",
+        "filename": "build/debian/kokoro/gcp_ubuntu_docker/aarch64/build.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-17T16:09:12Z",
+      "side": 1,
+      "message": "I think there is `build_file:` field in *.cfg to indicate the bash script which is supposed to run. But it looks like the field should be a path, not command(https://source.corp.google.com/search?q\u003d%22build_file:%20%22%20f:%5C.cfg\u0026sq\u003drepo:googleplex-android%2Fplatform%2Fsuperproject%2Fmain%20b:main), so I think we cannot specify arch as argument.. I think it\u0027s okay for now until we find a better way to consolidate them..",
+      "parentUuid": "da08ab60_deb829f3",
+      "revId": "a893cf3e3a588523680027625661c21f65d04c18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
