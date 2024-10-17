@@ -36,6 +36,29 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcd673da_706be13a",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-17T07:22:55Z",
+      "side": 1,
+      "message": "build_rust_binary_and_copy?",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 28
+      },
+      "revId": "f063619a2ad3dab45356ec34da9150527092ed88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "da2e9e76_d60af604",
@@ -143,6 +166,30 @@
       "side": 1,
       "message": "Could you elaborate? Not `+x`, but `755` or `777`?",
       "parentUuid": "47ce99c7_669ee0be",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 35
+      },
+      "revId": "f063619a2ad3dab45356ec34da9150527092ed88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58c16f56_668f1b72",
+        "filename": "build/debian/fai_config/scripts/AVF/10-systemd",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-17T07:22:55Z",
+      "side": 1,
+      "message": "https://salsa.debian.org/cloud-team/debian-cloud-images/-/blob/master/config_space/bookworm/files/run/grub/grub-probe/file-modes?ref_type\u003dheads\n\nyou can set filemode by creating files/usr/local/bin/$1/file-modes so we don\u0027t need to do that in this script.",
+      "parentUuid": "b8a82a5b_9d9063b4",
       "range": {
         "startLine": 3,
         "startChar": 0,
