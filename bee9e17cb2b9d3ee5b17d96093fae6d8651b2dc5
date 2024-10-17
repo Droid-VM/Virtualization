@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2102cc0f_84fb5c07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-17T06:26:53Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "c716716a_6baa1b63",
+      "revId": "bee9e17cb2b9d3ee5b17d96093fae6d8651b2dc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a88c4016_a0775c28",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-10-14T23:58:47Z",
       "side": 1,
       "message": "because Terminal app is a part of com.android.virt, linux_vm_setup and its rc file should be included in an apex, instead of being installed in system partition via required.",
+      "range": {
+        "startLine": 21,
+        "startChar": 4,
+        "endLine": 21,
+        "endChar": 33
+      },
+      "revId": "bee9e17cb2b9d3ee5b17d96093fae6d8651b2dc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2d2b3f1_8e1231f3",
+        "filename": "android/TerminalApp/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-17T06:26:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a88c4016_a0775c28",
       "range": {
         "startLine": 21,
         "startChar": 4,
@@ -64,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "929d62cf_860d6b73",
+        "filename": "android/TerminalApp/AndroidManifest.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-17T06:26:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bcf5f7f1_7dcf5225",
+      "range": {
+        "startLine": 29,
+        "startChar": 18,
+        "endLine": 29,
+        "endChar": 41
+      },
+      "revId": "bee9e17cb2b9d3ee5b17d96093fae6d8651b2dc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e589cb29_177072cf",
@@ -77,6 +143,30 @@
       "writtenOn": "2024-10-14T23:58:47Z",
       "side": 1,
       "message": "i think it might be out of scope of this CL, but this logic would be handled in MainActivity, not InstallerActivity to prevent blink due to activity transition?",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 63
+      },
+      "revId": "bee9e17cb2b9d3ee5b17d96093fae6d8651b2dc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f206c6ba_25c2d9d4",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-17T06:26:53Z",
+      "side": 1,
+      "message": "I couldn\u0027t see blinks. Let me keep this code for now to make this CL simpler.\n\nIf we see blinks, then I\u0027ll handle it in another CL.",
+      "parentUuid": "e589cb29_177072cf",
       "range": {
         "startLine": 133,
         "startChar": 0,
