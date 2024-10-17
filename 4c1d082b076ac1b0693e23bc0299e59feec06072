@@ -46,6 +46,30 @@
       },
       "revId": "4c1d082b076ac1b0693e23bc0299e59feec06072",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c19ff97f_d5c9a6ad",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1438,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-17T18:26:29Z",
+      "side": 1,
+      "message": "We could change this to use `sockaddr_vm` directly like (like `vsock::VsockAddr` already does):\n\n```\n        let vsock_addr \u003d sockaddr_vm {\n            svm_family: AF_VSOCK as sa_family_t,\n            svm_reserved1: 0,\n            svm_port: port,\n            svm_cid: cid,\n            svm_zero: [0u8; 4],\n        };\n```\n\nBut I think this current patchset is the expected use case for `vsock::VsockAddr` with FFI. I see how it\u0027s not very readable though.",
+      "parentUuid": "5a195a62_de27e286",
+      "range": {
+        "startLine": 1438,
+        "startChar": 62,
+        "endLine": 1438,
+        "endChar": 97
+      },
+      "revId": "4c1d082b076ac1b0693e23bc0299e59feec06072",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
