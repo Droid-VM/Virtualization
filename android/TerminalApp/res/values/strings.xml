@@ -46,6 +46,10 @@
     <string name="settings_port_forwarding_title">Port Forwarding</string>
     <!-- Settings menu subtitle for 'port forwarding' [CHAR LIMIT=none] -->
     <string name="settings_port_forwarding_sub_title">Configure port forwarding</string>
+    <!-- Notification title for new port forwarding [CHAR LIMIT=none] -->
+    <string name="settings_port_forwarding_notification_title">Virtual machine is trying to open a new port</string>
+    <!-- Notification content for new port forwarding [CHAR LIMIT=none] -->
+    <string name="settings_port_forwarding_notification_content">Click to allow or deny</string>
 
     <!-- Settings menu title for recoverying image [CHAR LIMIT=none] -->
     <string name="settings_recovery_title">Recovery</string>
@@ -57,4 +61,13 @@
     <string name="settings_recovery_reset_sub_title">Remove all</string>
     <!-- Toast message for reset is completed [CHAR LIMIT=none] -->
     <string name="settings_recovery_reset_message">VM reset</string>
+
+    <!-- Notification action button for settings [CHAR LIMIT=none] -->
+    <string name="service_notification_settings">Settings</string>
+    <!-- Notification title for foreground service notification [CHAR LIMIT=none] -->
+    <string name="service_notification_title">Virtual machine is running</string>
+    <!-- Notification content for foreground service notification [CHAR LIMIT=none] -->
+    <string name="service_notification_content">Click to open the app.</string>
+    <!-- Notification action button for quiting the virtual machine [CHAR LIMIT=none] -->
+    <string name="service_notification_quit_action">Quit</string>
 </resources>

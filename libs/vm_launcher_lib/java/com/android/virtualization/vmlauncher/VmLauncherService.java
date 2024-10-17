@@ -19,8 +19,10 @@ package com.android.virtualization.vmlauncher;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.ResultReceiver;
@@ -39,6 +41,14 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class VmLauncherService extends Service implements DebianServiceImpl.DebianServiceCallback {
+    public static final String EXTRA_ICON = "EXTRA_ICON";
+    public static final String EXTRA_NOTIFICATION_TITLE = "EXTRA_NOTIFICATION_TITLE";
+    public static final String EXTRA_NOTIFICATION_CONTENT = "EXTRA_NOTIFICATION_CONTENT";
+    public static final String EXTRA_QUIT_ACTION_NAME = "EXTRA_QUIT_ACTION_NAME";
+    public static final String EXTRA_CUSTOM_ACTION_NAME = "EXTRA_CUSTOM_ACTION_NAME";
+    public static final String EXTRA_CLIENT_PENDING_INTENT = "EXTRA_CLIENT_PENDING_INTENT";
+    public static final String EXTRA_CUSTOM_ACTION_PENDING_INTENT =
+            "EXTRA_CUSTOM_ACTION_PENDING_INTENT";
     private static final String TAG = "VmLauncherService";
     // TODO: this path should be from outside of this service
     private static final String VM_CONFIG_PATH = "/data/local/tmp/vm_config.json";
@@ -59,17 +69,32 @@ public class VmLauncherService extends Service implements DebianServiceImpl.Debi
         return null;
     }
 
-    private void startForeground() {
+    private void startForeground(int icon, String notificationTitle, String notificationContent,
+            String quitActionName, String customActionName,
+            PendingIntent clientPendingIntent, PendingIntent customActionPendingIntent) {
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         NotificationChannel notificationChannel =
                 new NotificationChannel(TAG, TAG, NotificationManager.IMPORTANCE_LOW);
+        assert notificationManager != null;
         notificationManager.createNotificationChannel(notificationChannel);
+
+        // Icons of notification actions are used only in wearable devices. So here just uses
+        // blank icon for actions
+        byte[] data = new byte[1000];
+        Icon actionIcon = Icon.createWithData(data, 100, 200);
         startForeground(
                 this.hashCode(),
                 new Notification.Builder(this, TAG)
                         .setChannelId(TAG)
-                        .setSmallIcon(android.R.drawable.ic_dialog_info)
-                        .setContentText("A VM " + mVirtualMachine.getName() + " is running")
+                        .setSmallIcon(icon)
+                        .setContentTitle(notificationTitle)
+                        .setContentText(notificationContent)
+                        .setContentIntent(clientPendingIntent)
+                        .addAction(new Notification.Action.Builder(actionIcon, customActionName,
+                                customActionPendingIntent).build())
+                        .addAction(new Notification.Action.Builder(actionIcon,
+                                quitActionName,
+                                customActionPendingIntent).build())
                         .build());
     }
 
@@ -112,7 +137,18 @@ public class VmLauncherService extends Service implements DebianServiceImpl.Debi
         Path logPath = getFileStreamPath(mVirtualMachine.getName() + ".log").toPath();
         Logger.setup(mVirtualMachine, logPath, mExecutorService);
 
-        startForeground();
+        int icon = intent.getIntExtra(EXTRA_ICON, android.R.drawable.ic_dialog_info);
+        String notificationTitle = intent.getStringExtra(EXTRA_NOTIFICATION_TITLE);
+        String notificationContent = intent.getStringExtra(EXTRA_NOTIFICATION_CONTENT);
+        String quitActionName = intent.getStringExtra(EXTRA_QUIT_ACTION_NAME);
+        String customActionName = intent.getStringExtra(EXTRA_CUSTOM_ACTION_NAME);
+        PendingIntent clientPendingIntent = intent.getParcelableExtra(EXTRA_CLIENT_PENDING_INTENT,
+                PendingIntent.class);
+        PendingIntent customActionPendingIntent = intent.getParcelableExtra(
+                EXTRA_CUSTOM_ACTION_PENDING_INTENT, PendingIntent.class);
+
+        startForeground(icon, notificationTitle, notificationContent, quitActionName,
+                customActionName, clientPendingIntent, customActionPendingIntent);
 
         mResultReceiver.send(RESULT_START, null);
 
