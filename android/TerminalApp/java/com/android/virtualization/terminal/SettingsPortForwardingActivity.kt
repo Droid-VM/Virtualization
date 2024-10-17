@@ -15,12 +15,21 @@
  */
 package com.android.virtualization.terminal
 
+import android.Manifest
+import android.app.Notification
+import android.app.PendingIntent
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.drawable.Icon
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class SettingsPortForwardingActivity : AppCompatActivity() {
+    val TAG: String = "VmTerminalApp"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_port_forwarding)
@@ -37,5 +46,43 @@ class SettingsPortForwardingActivity : AppCompatActivity() {
         val recyclerView: RecyclerView = findViewById(R.id.settings_port_forwarding_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = settingsPortForwardingAdapter
+
+        // Show a mock notification of a port opening
+        // Mock PendingIntent for notification actions.
+        val terminalIntent = Intent()
+        val pendingIntent = PendingIntent.getActivity(
+            this, 0, terminalIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+        val notification =
+            Notification.Builder(this, TAG)
+                .setChannelId(TAG)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle(resources.getString(R.string.settings_port_forwarding_notification_title))
+                .setContentText(resources.getString(R.string.settings_port_forwarding_notification_content) + settingsPortForwardingItems[0].port.toString())
+                .addAction(
+                    Notification.Action.Builder(
+                        Icon.createWithResource(resources, R.drawable.ic_launcher_foreground),
+                        resources.getString(R.string.settings_port_forwarding_notification_accept),
+                        pendingIntent
+                    ).build()
+                )
+                .addAction(
+                    Notification.Action.Builder(
+                        Icon.createWithResource(resources, R.drawable.ic_launcher_foreground),
+                        resources.getString(R.string.settings_port_forwarding_notification_deny),
+                        pendingIntent
+                    ).build()
+                )
+                .build()
+
+        with(NotificationManagerCompat.from(this)) {
+            if (ActivityCompat.checkSelfPermission(
+                    this@SettingsPortForwardingActivity, Manifest.permission.POST_NOTIFICATIONS
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                notify(0, notification)
+            }
+        }
     }
 }
