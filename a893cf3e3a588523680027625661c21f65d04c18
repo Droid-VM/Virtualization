@@ -52,6 +52,24 @@
       "parentUuid": "da08ab60_deb829f3",
       "revId": "a893cf3e3a588523680027625661c21f65d04c18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2797c34_dc16d2b8",
+        "filename": "build/debian/kokoro/gcp_ubuntu_docker/aarch64/build.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3549799
+      },
+      "writtenOn": "2024-10-17T16:19:29Z",
+      "side": 1,
+      "message": "ah i see, presumably `build.sh` then is just the default value of that proto field (or the default implementation value)",
+      "parentUuid": "0ec374e2_a9686960",
+      "revId": "a893cf3e3a588523680027625661c21f65d04c18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
