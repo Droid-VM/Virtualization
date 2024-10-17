@@ -1434,8 +1434,8 @@ impl IVirtualMachine::IVirtualMachine for VirtualMachine {
             ));
         }
         let cid = self.instance.cid;
-        let get_connection_info =
-            move |_instance: &str| Some(ConnectionInfo::Vsock(VsockAddr::new(cid, port)));
+        let temp = *VsockAddr::new(cid, port).as_ref();
+        let get_connection_info = move |_instance: &str| Some(ConnectionInfo::Vsock(temp));
         let accessor = Accessor::new(name, get_connection_info);
         accessor
             .as_binder()
