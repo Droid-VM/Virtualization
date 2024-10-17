@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "fdb694fb_a9215c57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-10-17T07:10:37Z",
+      "side": 1,
+      "message": "Agree. That\u0027s just for code quality, so we can work in parallel after merging this change.",
+      "parentUuid": "8ee92c77_c95ddecb",
+      "revId": "f063619a2ad3dab45356ec34da9150527092ed88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "da2e9e76_d60af604",
         "filename": "build/debian/build.sh",
         "patchSetId": 2
@@ -66,6 +84,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c718ea5f_208bf203",
+        "filename": "build/debian/fai_config/scripts/AVF/10-systemd",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-10-17T07:10:37Z",
+      "side": 1,
+      "message": "Yes, but not in this change. I want to start development with using normal binary. Defining forwarder_guest_launcher as systemd unit can make me hard to implement next step.",
+      "parentUuid": "842a4e1e_c276ae64",
+      "range": {
+        "startLine": 4,
+        "startChar": 31,
+        "endLine": 4,
+        "endChar": 55
+      },
+      "revId": "f063619a2ad3dab45356ec34da9150527092ed88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "47ce99c7_669ee0be",
         "filename": "build/debian/fai_config/scripts/AVF/10-systemd",
         "patchSetId": 2
@@ -77,6 +119,30 @@
       "writtenOn": "2024-10-17T07:05:14Z",
       "side": 1,
       "message": "nits: we can do that by `filemode` file instead.",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 35
+      },
+      "revId": "f063619a2ad3dab45356ec34da9150527092ed88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8a82a5b_9d9063b4",
+        "filename": "build/debian/fai_config/scripts/AVF/10-systemd",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-10-17T07:10:37Z",
+      "side": 1,
+      "message": "Could you elaborate? Not `+x`, but `755` or `777`?",
+      "parentUuid": "47ce99c7_669ee0be",
       "range": {
         "startLine": 3,
         "startChar": 0,
