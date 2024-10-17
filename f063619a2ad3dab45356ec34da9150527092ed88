@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ee92c77_c95ddecb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-17T07:05:14Z",
+      "side": 1,
+      "message": "I think nits items can be addressed in a following CL, though..",
+      "revId": "f063619a2ad3dab45356ec34da9150527092ed88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da2e9e76_d60af604",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-17T07:05:14Z",
+      "side": 1,
+      "message": "nits: it doesn\u0027t need to 777 actually..",
+      "range": {
+        "startLine": 113,
+        "startChar": 7,
+        "endLine": 113,
+        "endChar": 10
+      },
+      "revId": "f063619a2ad3dab45356ec34da9150527092ed88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "842a4e1e_c276ae64",
+        "filename": "build/debian/fai_config/scripts/AVF/10-systemd",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-17T07:05:14Z",
+      "side": 1,
+      "message": "doesn\u0027t it need to be systemd unit?",
+      "range": {
+        "startLine": 4,
+        "startChar": 31,
+        "endLine": 4,
+        "endChar": 55
+      },
+      "revId": "f063619a2ad3dab45356ec34da9150527092ed88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47ce99c7_669ee0be",
+        "filename": "build/debian/fai_config/scripts/AVF/10-systemd",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-17T07:05:14Z",
+      "side": 1,
+      "message": "nits: we can do that by `filemode` file instead.",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 35
+      },
+      "revId": "f063619a2ad3dab45356ec34da9150527092ed88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
