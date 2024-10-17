@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6731bb1f_f839d562",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-17T06:52:40Z",
+      "side": 1,
+      "message": "@akailash@google.com, in debian, a user is basically included in `users` group of which gid is 100, i think we can just user 1000:100 instead of creating a group for account `droid`, WDYT?",
+      "revId": "f9d3bb85fe031a361fc357ce0e637a81f98ce24d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
