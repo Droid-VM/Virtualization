@@ -1,0 +1,257 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0482e61_2790268b",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1826,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-18T09:47:37Z",
+      "side": 1,
+      "message": "Why not storing directly `i32` here so we don\u0027t need to do any type conversion?",
+      "range": {
+        "startLine": 1826,
+        "startChar": 48,
+        "endLine": 1826,
+        "endChar": 51
+      },
+      "revId": "8e5f1acab52acd2bf9037c351bb0c9054fc11792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14521207_52de8338",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1905,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-18T09:47:37Z",
+      "side": 1,
+      "message": "nit: Change this to `p.try_into().unwrap()`? u32 to i32 conversion can overflow.",
+      "range": {
+        "startLine": 1905,
+        "startChar": 52,
+        "endLine": 1905,
+        "endChar": 61
+      },
+      "revId": "8e5f1acab52acd2bf9037c351bb0c9054fc11792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b367b606_9e132c79",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1913,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-18T09:47:37Z",
+      "side": 1,
+      "message": "nit: Can we check `if name !\u003d stats_service_instance` to return early to avoid this massive indentation?",
+      "range": {
+        "startLine": 1913,
+        "startChar": 8,
+        "endLine": 1913,
+        "endChar": 43
+      },
+      "revId": "8e5f1acab52acd2bf9037c351bb0c9054fc11792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e00695a8_95ba00d4",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1914,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-18T09:47:37Z",
+      "side": 1,
+      "message": "nit:Change this to a `const`? You can have const within the function like this[1]\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/libvm_payload/src/lib.rs;l\u003d340;drc\u003d9c03a3ad705e93cb4fc1d5aed9d7f7a57c06c850",
+      "range": {
+        "startLine": 1914,
+        "startChar": 0,
+        "endLine": 1914,
+        "endChar": 28
+      },
+      "revId": "8e5f1acab52acd2bf9037c351bb0c9054fc11792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9599b8ac_2373d34a",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1931,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-18T09:47:37Z",
+      "side": 1,
+      "message": "Why 4? Can we create a `const` for it just for clarity ? The `const` can stay in the same function.",
+      "range": {
+        "startLine": 1931,
+        "startChar": 46,
+        "endLine": 1931,
+        "endChar": 47
+      },
+      "revId": "8e5f1acab52acd2bf9037c351bb0c9054fc11792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3269afed_7f49d2e8",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1941,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-18T09:47:37Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 1941,
+        "startChar": 45,
+        "endLine": 1941,
+        "endChar": 56
+      },
+      "revId": "8e5f1acab52acd2bf9037c351bb0c9054fc11792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4bb9b32_8f15379c",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1959,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-18T09:47:37Z",
+      "side": 1,
+      "message": "super-nit: It\u0027s a bit long to write all this, can we use default here?\n```suggestion\n                ..Default::default()\n```",
+      "range": {
+        "startLine": 1959,
+        "startChar": 16,
+        "endLine": 1959,
+        "endChar": 71
+      },
+      "revId": "8e5f1acab52acd2bf9037c351bb0c9054fc11792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c83ca777_67545a71",
+        "filename": "guest/microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-18T09:47:37Z",
+      "side": 1,
+      "message": "Is this needed? Can\u0027t the compiler derive the type on its own?",
+      "range": {
+        "startLine": 106,
+        "startChar": 44,
+        "endLine": 106,
+        "endChar": 50
+      },
+      "revId": "8e5f1acab52acd2bf9037c351bb0c9054fc11792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b38d91a0_098b7ff2",
+        "filename": "guest/microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-18T09:47:37Z",
+      "side": 1,
+      "message": "super-nit: This line is a bit long, can we split this into two parts to make it more clear?\n\n```suggestion\n            let vsock_addr \u003d VsockAddr::new(VMADDR_CID_HOST, connection_info.port.try_into().unwrap()).as_ref().clone();\n            Some(ConnectionInfo::Vsock(vsock_addr))\n```\n\nOtherwise this type conversion seems to repeat in several places, can we just implement `From` in the module of `ConnectionInfo` as following\n\n```rust\nimpl From\u003csockaddr_vm\u003e for ConnectionInfo {\n  fn from(addr: sockaddr_vm) -\u003e Self {\n     Self::Vsock(add)\n  }\n}\n```\n\nThen here we can just have\n\n```suggestion\n            let vsock_addr \u003d VsockAddr::new(VMADDR_CID_HOST, connection_info.port.try_into().unwrap()).as_ref().clone();\n            Some(vsock_addr.into())\n```",
+      "range": {
+        "startLine": 108,
+        "startChar": 12,
+        "endLine": 110,
+        "endChar": 14
+      },
+      "revId": "8e5f1acab52acd2bf9037c351bb0c9054fc11792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5e70da2_3de27ea3",
+        "filename": "libs/libvm_payload/src/lib.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-18T09:47:37Z",
+      "side": 1,
+      "message": "nit: Why not combining this in one line?\n\n\n```suggestion\n    // SAFETY: The caller ensures that instance is a valid null\n    // terminated C string.\n    let instance_cstr \u003d unsafe { CStr::from_ptr(instance) };\n```",
+      "range": {
+        "startLine": 156,
+        "startChar": 4,
+        "endLine": 158,
+        "endChar": 55
+      },
+      "revId": "8e5f1acab52acd2bf9037c351bb0c9054fc11792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "499ffabf_20861b54",
+        "filename": "tests/vm_accessor/accessor_vm/src/main.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-18T09:47:37Z",
+      "side": 1,
+      "message": "nit: Condense this to one line?\n\n```suggestion\n        stats.reportVendorAtom(\u0026VendorAtom::default())\n```",
+      "range": {
+        "startLine": 75,
+        "startChar": 8,
+        "endLine": 77,
+        "endChar": 14
+      },
+      "revId": "8e5f1acab52acd2bf9037c351bb0c9054fc11792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

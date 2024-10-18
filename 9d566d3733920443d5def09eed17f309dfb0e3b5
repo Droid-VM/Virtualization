@@ -231,6 +231,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e52e9648_684090c4",
+        "filename": "libs/libvm_payload/include/vm_payload.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-18T09:47:37Z",
+      "side": 1,
+      "message": "Do we also need something like `__INTRODUCED_IN(__ANDROID_API_W__)` in this file as other APIs below (e.g., AVmPayload_requestAttestation)?",
+      "parentUuid": "563c9fdb_52222a0c",
+      "range": {
+        "startLine": 91,
+        "startChar": 20,
+        "endLine": 91,
+        "endChar": 48
+      },
+      "revId": "9d566d3733920443d5def09eed17f309dfb0e3b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06bbcada_b2190543",
         "filename": "libs/libvm_payload/src/lib.rs",
         "patchSetId": 9
@@ -266,6 +290,30 @@
       "side": 1,
       "message": "\u003e  it will return an error with details of where UTF-8 validation failed.\n\nWill we see that underlying error when it fails with this `expect(\"extra error...\")`?",
       "parentUuid": "06bbcada_b2190543",
+      "range": {
+        "startLine": 160,
+        "startChar": 67,
+        "endLine": 160,
+        "endChar": 92
+      },
+      "revId": "9d566d3733920443d5def09eed17f309dfb0e3b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fc787d8_3ce5f012",
+        "filename": "libs/libvm_payload/src/lib.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-18T09:47:37Z",
+      "side": 1,
+      "message": "The string in `expect` will be printed as context of the error, along with the error itself. With the previous message, it can be confusing if the error and the context are not coherent.",
+      "parentUuid": "fafc812e_7210fe04",
       "range": {
         "startLine": 160,
         "startChar": 67,
