@@ -70,6 +70,30 @@
       },
       "revId": "4c1d082b076ac1b0693e23bc0299e59feec06072",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef7e6338_2dc9cb8c",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1438,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-10-18T08:25:31Z",
+      "side": 1,
+      "message": "It feels a bit brittle here because it relies on the implicit behavior of temporaries in rust, which are dropped at the end of the expression. If we split the expression into two separate statements, as shown below, it won\u0027t work:\n\n```\nlet temp \u003d *VsockAddr::new(cid, port).as_ref();\nConnectionInfo::Vsock(temp)\n```\n\nWhat if we change it to `VsockAddr::new(cid, port).as_ref().clone()`? This approach achieves the same result and is also easier to read and maintain.",
+      "parentUuid": "c19ff97f_d5c9a6ad",
+      "range": {
+        "startLine": 1438,
+        "startChar": 62,
+        "endLine": 1438,
+        "endChar": 97
+      },
+      "revId": "4c1d082b076ac1b0693e23bc0299e59feec06072",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
