@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c190ddeb_c662a264",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 1902,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T00:23:16Z",
+      "side": 1,
+      "message": "We can do that. I can start working on the dlopen solution we were talking about yesterday.",
+      "parentUuid": "ea3530df_81cb97b1",
+      "revId": "9d566d3733920443d5def09eed17f309dfb0e3b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "623bb1f5_3fd873e4",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 9
@@ -48,6 +66,30 @@
       "writtenOn": "2024-10-12T00:41:50Z",
       "side": 1,
       "message": "I\u0027m guessing this is the reason why we need the library? We may want to dynamically load the library and dlsym something to delegate in the accessor process if possible or similar?",
+      "range": {
+        "startLine": 1925,
+        "startChar": 0,
+        "endLine": 1925,
+        "endChar": 62
+      },
+      "revId": "9d566d3733920443d5def09eed17f309dfb0e3b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a6b8540_9819f790",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 1925,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T00:23:16Z",
+      "side": 1,
+      "message": "Yes. We can do this dynamically.",
+      "parentUuid": "623bb1f5_3fd873e4",
       "range": {
         "startLine": 1925,
         "startChar": 0,
@@ -75,6 +117,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a039731_5341ead0",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 1929,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T00:23:16Z",
+      "side": 1,
+      "message": "Yeah, I want to completely get rid of the unstable libbinder calls. That is going to be a lot of follow up work.\n\nWe need some way to addService with something to provide libbinder connection info to set up the server.",
+      "parentUuid": "adea85dd_7524cf9f",
+      "revId": "9d566d3733920443d5def09eed17f309dfb0e3b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64ccfc9b_031289d7",
@@ -88,6 +148,30 @@
       "writtenOn": "2024-10-14T13:23:20Z",
       "side": 1,
       "message": "super-nit: Maybe can use `ok_or_else` to condense this into one line?\n\n```suggestion\n        accessor\n    .as_binder()\n    .ok_or_else(|| anyhow!(\"Failed to get a binder from Accessor::as_binder\"))\n    .with_log()\n    .or_binder_exception(ExceptionCode::NULL_POINTER)\n```",
+      "range": {
+        "startLine": 116,
+        "startChar": 8,
+        "endLine": 121,
+        "endChar": 9
+      },
+      "revId": "9d566d3733920443d5def09eed17f309dfb0e3b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b183da2_335f3b1a",
+        "filename": "guest/microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T00:23:16Z",
+      "side": 1,
+      "message": "perfect! Thanks.",
+      "parentUuid": "64ccfc9b_031289d7",
       "range": {
         "startLine": 116,
         "startChar": 8,
@@ -123,6 +207,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "563c9fdb_52222a0c",
+        "filename": "libs/libvm_payload/include/vm_payload.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T00:23:16Z",
+      "side": 1,
+      "message": "Added it to that file. I think this is right, PTAL!",
+      "parentUuid": "88134552_38afe07e",
+      "range": {
+        "startLine": 91,
+        "startChar": 20,
+        "endLine": 91,
+        "endChar": 48
+      },
+      "revId": "9d566d3733920443d5def09eed17f309dfb0e3b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06bbcada_b2190543",
         "filename": "libs/libvm_payload/src/lib.rs",
         "patchSetId": 9
@@ -134,6 +242,30 @@
       "writtenOn": "2024-10-14T13:23:20Z",
       "side": 1,
       "message": "This unwrap doesn\u0027t always fail with null instance, it can fail with invalid UTF-8 data [1]\n\n[1] https://doc.rust-lang.org/std/ffi/struct.CStr.html#method.to_str",
+      "range": {
+        "startLine": 160,
+        "startChar": 67,
+        "endLine": 160,
+        "endChar": 92
+      },
+      "revId": "9d566d3733920443d5def09eed17f309dfb0e3b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fafc812e_7210fe04",
+        "filename": "libs/libvm_payload/src/lib.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T00:23:16Z",
+      "side": 1,
+      "message": "\u003e  it will return an error with details of where UTF-8 validation failed.\n\nWill we see that underlying error when it fails with this `expect(\"extra error...\")`?",
+      "parentUuid": "06bbcada_b2190543",
       "range": {
         "startLine": 160,
         "startChar": 67,
@@ -167,6 +299,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e61c7a2_238fbb7d",
+        "filename": "tests/vm_accessor/accessor/Android.bp",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T00:23:16Z",
+      "side": 1,
+      "message": "No! Removed. (this was needed in the other CLs before I split off the CLs).",
+      "parentUuid": "f8e54484_ce4bd99f",
+      "range": {
+        "startLine": 20,
+        "startChar": 9,
+        "endLine": 20,
+        "endChar": 24
+      },
+      "revId": "9d566d3733920443d5def09eed17f309dfb0e3b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "acfc856a_b50ab351",
@@ -190,6 +346,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab111486_0f9ea379",
+        "filename": "tests/vm_accessor/accessor_vm/src/main.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T00:23:16Z",
+      "side": 1,
+      "message": "Changed it to tryGetHostStatsService",
+      "parentUuid": "acfc856a_b50ab351",
+      "range": {
+        "startLine": 69,
+        "startChar": 7,
+        "endLine": 69,
+        "endChar": 45
+      },
+      "revId": "9d566d3733920443d5def09eed17f309dfb0e3b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44687d3b_777267d9",
@@ -203,6 +383,30 @@
       "writtenOn": "2024-10-14T13:23:20Z",
       "side": 1,
       "message": "Can we incorporate a check here to verify that the VM successfully establishes a connection with the host service?",
+      "range": {
+        "startLine": 23,
+        "startChar": 4,
+        "endLine": 23,
+        "endChar": 8
+      },
+      "revId": "9d566d3733920443d5def09eed17f309dfb0e3b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e58740c_c08fbbb1",
+        "filename": "tests/vm_accessor/aidl/com/android/virt/accessor_demo/vm_service/IAccessorVmService.aidl",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T00:23:16Z",
+      "side": 1,
+      "message": "We don\u0027t need an extra custom return value here because all AIDL methods already have one built in.\n\nThe `expect()` calls on the `wait_for_interface` and `stats.reportVendorAtom()` will throw an error if we fail to establish the connection or if we fail to make a successful call to the service.",
+      "parentUuid": "44687d3b_777267d9",
       "range": {
         "startLine": 23,
         "startChar": 4,
