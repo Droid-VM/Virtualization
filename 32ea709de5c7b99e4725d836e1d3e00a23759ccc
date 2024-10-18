@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ae938e8_51496c8b",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-18T16:02:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdeddb2f_206a93a0",
+      "range": {
+        "startLine": 389,
+        "startChar": 0,
+        "endLine": 391,
+        "endChar": 9
+      },
+      "revId": "32ea709de5c7b99e4725d836e1d3e00a23759ccc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "377acbb8_8864abad",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-10-18T14:48:03Z",
       "side": 1,
       "message": "Again, PAYLOAD_DIR called as artifactDir.",
+      "revId": "32ea709de5c7b99e4725d836e1d3e00a23759ccc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d946597_35e74843",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-18T16:02:50Z",
+      "side": 1,
+      "message": "I did s/artifact/payload/\n\nIf I misunderstood, please let me know!",
+      "parentUuid": "377acbb8_8864abad",
       "revId": "32ea709de5c7b99e4725d836e1d3e00a23759ccc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -64,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d66893ed_b3247bca",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-18T16:02:50Z",
+      "side": 1,
+      "message": "added removal logic in L108 in PS#7",
+      "parentUuid": "438b3449_dd14d2e4",
+      "range": {
+        "startLine": 60,
+        "startChar": 13,
+        "endLine": 60,
+        "endChar": 25
+      },
+      "revId": "32ea709de5c7b99e4725d836e1d3e00a23759ccc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ccbb79c4_e9313620",
@@ -77,6 +143,30 @@
       "writtenOn": "2024-10-18T14:48:03Z",
       "side": 1,
       "message": "this is a confusing name; we are replacing DATA_DIR with PAYLOAD_DIR.",
+      "range": {
+        "startLine": 103,
+        "startChar": 22,
+        "endLine": 103,
+        "endChar": 30
+      },
+      "revId": "32ea709de5c7b99e4725d836e1d3e00a23759ccc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11d4012e_b349ef19",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-18T16:02:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccbb79c4_e9313620",
       "range": {
         "startLine": 103,
         "startChar": 22,
