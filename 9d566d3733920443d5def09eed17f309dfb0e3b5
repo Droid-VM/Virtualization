@@ -135,6 +135,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c74f704_fff9703e",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 1929,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-18T22:22:21Z",
+      "side": 1,
+      "message": "We do need to do this in order to have ownership of the threadpools at the libbinder layer and not here.",
+      "parentUuid": "3a039731_5341ead0",
+      "revId": "9d566d3733920443d5def09eed17f309dfb0e3b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64ccfc9b_031289d7",
