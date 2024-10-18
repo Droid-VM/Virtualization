@@ -39,6 +39,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.virtualization.vmlauncher.InstallUtils;
 import com.android.virtualization.vmlauncher.VmLauncherServices;
 
 import com.google.android.material.appbar.MaterialToolbar;
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        checkForUpdate();
+        installIfNecessary();
         try {
             // No resize for now.
             long newSizeInBytes = 0;
@@ -103,6 +104,8 @@ public class MainActivity extends AppCompatActivity
 
         connectToTerminalService();
         readClientCertificate();
+
+        startVm();
     }
 
     private URL getTerminalServiceUrl() {
@@ -382,12 +385,18 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void checkForUpdate() {
+    private void installIfNecessary() {
+        if (InstallUtils.isImageInstalled(this)) {
+            return;
+        }
         Intent intent = new Intent(this, InstallerActivity.class);
         startActivityForResult(intent, REQUEST_CODE_INSTALLER);
     }
 
     private void startVm() {
+        if (!InstallUtils.isImageInstalled(this)) {
+            return;
+        }
         android.os.Trace.beginAsyncSection("executeTerminal", 0);
         VmLauncherServices.startVmLauncherService(this, this);
     }
