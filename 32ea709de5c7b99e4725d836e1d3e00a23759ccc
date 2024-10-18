@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdeddb2f_206a93a0",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-18T14:48:03Z",
+      "side": 1,
+      "message": "no. then we can\u0027t update the image.\n\nwe should do the installation as long as the file exists in the sdcard directory.\n\nafter the installation is done, we need to delete it.",
+      "range": {
+        "startLine": 389,
+        "startChar": 0,
+        "endLine": 391,
+        "endChar": 9
+      },
+      "revId": "32ea709de5c7b99e4725d836e1d3e00a23759ccc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "377acbb8_8864abad",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-18T14:48:03Z",
+      "side": 1,
+      "message": "Again, PAYLOAD_DIR called as artifactDir.",
+      "revId": "32ea709de5c7b99e4725d836e1d3e00a23759ccc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "438b3449_dd14d2e4",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-18T14:48:03Z",
+      "side": 1,
+      "message": "We need to delete this file after the installation is done, othewise we will be installing the same file again.",
+      "range": {
+        "startLine": 60,
+        "startChar": 13,
+        "endLine": 60,
+        "endChar": 25
+      },
+      "revId": "32ea709de5c7b99e4725d836e1d3e00a23759ccc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccbb79c4_e9313620",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-18T14:48:03Z",
+      "side": 1,
+      "message": "this is a confusing name; we are replacing DATA_DIR with PAYLOAD_DIR.",
+      "range": {
+        "startLine": 103,
+        "startChar": 22,
+        "endLine": 103,
+        "endChar": 30
+      },
+      "revId": "32ea709de5c7b99e4725d836e1d3e00a23759ccc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
