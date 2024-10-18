@@ -34,6 +34,24 @@
       "parentUuid": "8276e20c_1e34d8b6",
       "revId": "ff7a0b0edad6328f251df0b6da585beca6621887",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e97821f8_ddcd0ec7",
+        "filename": "libs/libvmbase/src/uart.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-10-18T15:53:09Z",
+      "side": 1,
+      "message": "I don\u0027t think we can rely on the compiler generating an appropriate instruction until https://github.com/rust-lang/rust/issues/131894 is fixed. We should leave a comment here linking to the bug to make sure someone else doesn\u0027t attempt the same optimisation.",
+      "parentUuid": "2b0c4e62_d954da6c",
+      "revId": "ff7a0b0edad6328f251df0b6da585beca6621887",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
