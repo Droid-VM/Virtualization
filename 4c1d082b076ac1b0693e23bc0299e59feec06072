@@ -94,6 +94,30 @@
       },
       "revId": "4c1d082b076ac1b0693e23bc0299e59feec06072",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33fd76cd_1b7070ed",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1438,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T20:52:15Z",
+      "side": 1,
+      "message": "```\nlet temp \u003d *VsockAddr::new(cid, port).as_ref();\nConnectionInfo::Vsock(temp)\n```\nAs far as I can tell, that works fine. It builds and all the tests still pass (patch set 2). It\u0027s copying the value of the `sockaddr_vm` (like `memcpy`) to `temp` while new `VsockAddr` is still valid and using that `temp` variable to initialize the `ConnectionInfo::Vsock`.\n\n\u003e What if we change it to VsockAddr::new(cid, port).as_ref().clone()?\n\nThe build fails with:\n```\nusing `clone` on type `sockaddr_vm` which implements the `Copy` trait\n```\n\nI changed it to use `sockaddr_vm` directly since using `VsockAddr` like this isn\u0027t obvious.",
+      "parentUuid": "ef7e6338_2dc9cb8c",
+      "range": {
+        "startLine": 1438,
+        "startChar": 62,
+        "endLine": 1438,
+        "endChar": 97
+      },
+      "revId": "4c1d082b076ac1b0693e23bc0299e59feec06072",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
