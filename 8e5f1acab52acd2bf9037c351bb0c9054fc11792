@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1952fcb0_799f4460",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1826,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T23:57:46Z",
+      "side": 1,
+      "message": "It needs to be `u32` for the vsock APIs and `i32` for AIDL. Either way we have a type conversion, but I changed it to i32 here since we use it as `i32` more than `u32`.",
+      "parentUuid": "d0482e61_2790268b",
+      "range": {
+        "startLine": 1826,
+        "startChar": 48,
+        "endLine": 1826,
+        "endChar": 51
+      },
+      "revId": "8e5f1acab52acd2bf9037c351bb0c9054fc11792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14521207_52de8338",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-10-18T09:47:37Z",
       "side": 1,
       "message": "nit: Change this to `p.try_into().unwrap()`? u32 to i32 conversion can overflow.",
+      "range": {
+        "startLine": 1905,
+        "startChar": 52,
+        "endLine": 1905,
+        "endChar": 61
+      },
+      "revId": "8e5f1acab52acd2bf9037c351bb0c9054fc11792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "020e78c9_7909a19f",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1905,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T23:57:46Z",
+      "side": 1,
+      "message": "No longer needed now that we are storing i32. (but used this advice where we now have to cast from i32 to u32).",
+      "parentUuid": "14521207_52de8338",
       "range": {
         "startLine": 1905,
         "startChar": 52,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "877375cf_46ac14b1",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1913,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T23:57:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b367b606_9e132c79",
+      "range": {
+        "startLine": 1913,
+        "startChar": 8,
+        "endLine": 1913,
+        "endChar": 43
+      },
+      "revId": "8e5f1acab52acd2bf9037c351bb0c9054fc11792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e00695a8_95ba00d4",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-10-18T09:47:37Z",
       "side": 1,
       "message": "nit:Change this to a `const`? You can have const within the function like this[1]\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/libvm_payload/src/lib.rs;l\u003d340;drc\u003d9c03a3ad705e93cb4fc1d5aed9d7f7a57c06c850",
+      "range": {
+        "startLine": 1914,
+        "startChar": 0,
+        "endLine": 1914,
+        "endChar": 28
+      },
+      "revId": "8e5f1acab52acd2bf9037c351bb0c9054fc11792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85608891_37f56da5",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1914,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T23:57:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e00695a8_95ba00d4",
       "range": {
         "startLine": 1914,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68ee0991_167e6d0a",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1931,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T23:57:46Z",
+      "side": 1,
+      "message": "The default single thread is fine for this interface (no callbacks). Removed this call.",
+      "parentUuid": "9599b8ac_2373d34a",
+      "range": {
+        "startLine": 1931,
+        "startChar": 46,
+        "endLine": 1931,
+        "endChar": 47
+      },
+      "revId": "8e5f1acab52acd2bf9037c351bb0c9054fc11792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3269afed_7f49d2e8",
@@ -139,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bb3fb4b_6656ffc4",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1941,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T23:57:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3269afed_7f49d2e8",
+      "range": {
+        "startLine": 1941,
+        "startChar": 45,
+        "endLine": 1941,
+        "endChar": 56
+      },
+      "revId": "8e5f1acab52acd2bf9037c351bb0c9054fc11792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4bb9b32_8f15379c",
@@ -152,6 +296,30 @@
       "writtenOn": "2024-10-18T09:47:37Z",
       "side": 1,
       "message": "super-nit: It\u0027s a bit long to write all this, can we use default here?\n```suggestion\n                ..Default::default()\n```",
+      "range": {
+        "startLine": 1959,
+        "startChar": 16,
+        "endLine": 1959,
+        "endChar": 71
+      },
+      "revId": "8e5f1acab52acd2bf9037c351bb0c9054fc11792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a34be768_26cbfef1",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 1959,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T23:57:46Z",
+      "side": 1,
+      "message": "Your super-nits have been super nice Rust things so far so please keep them coming!",
+      "parentUuid": "f4bb9b32_8f15379c",
       "range": {
         "startLine": 1959,
         "startChar": 16,
@@ -187,6 +355,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7be23f7_5fea9a4c",
+        "filename": "guest/microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T23:57:46Z",
+      "side": 1,
+      "message": "It looks like it is needed, but the error message when I remove it isn\u0027t super clear to me. It says it\u0027s \"not general enough\":\n```\nerror: implementation of `std::ops::Fn` is not general enough\n   --\u003e packages/modules/Virtualization/guest/microdroid_manager/src/vm_payload_service.rs:119:24\n    |\n119 |         let accessor \u003d Accessor::new(instance, get_connection_info);\n    |                        ^^^^^^^^^^^^^ implementation of `std::ops::Fn` is not general enough\n    |\n    \u003d note: closure with signature `fn(\u0026\u00272 str) -\u003e std::option::Option\u003cbinder::ConnectionInfo\u003e` must implement `std::ops::Fn\u003c(\u0026\u00271 str,)\u003e`, for any lifetime `\u00271`...\n    \u003d note: ...but it actually implements `std::ops::Fn\u003c(\u0026\u00272 str,)\u003e`, for some specific lifetime `\u00272`\n```",
+      "parentUuid": "c83ca777_67545a71",
+      "range": {
+        "startLine": 106,
+        "startChar": 44,
+        "endLine": 106,
+        "endChar": 50
+      },
+      "revId": "8e5f1acab52acd2bf9037c351bb0c9054fc11792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b38d91a0_098b7ff2",
         "filename": "guest/microdroid_manager/src/vm_payload_service.rs",
         "patchSetId": 10
@@ -198,6 +390,30 @@
       "writtenOn": "2024-10-18T09:47:37Z",
       "side": 1,
       "message": "super-nit: This line is a bit long, can we split this into two parts to make it more clear?\n\n```suggestion\n            let vsock_addr \u003d VsockAddr::new(VMADDR_CID_HOST, connection_info.port.try_into().unwrap()).as_ref().clone();\n            Some(ConnectionInfo::Vsock(vsock_addr))\n```\n\nOtherwise this type conversion seems to repeat in several places, can we just implement `From` in the module of `ConnectionInfo` as following\n\n```rust\nimpl From\u003csockaddr_vm\u003e for ConnectionInfo {\n  fn from(addr: sockaddr_vm) -\u003e Self {\n     Self::Vsock(add)\n  }\n}\n```\n\nThen here we can just have\n\n```suggestion\n            let vsock_addr \u003d VsockAddr::new(VMADDR_CID_HOST, connection_info.port.try_into().unwrap()).as_ref().clone();\n            Some(vsock_addr.into())\n```",
+      "range": {
+        "startLine": 108,
+        "startChar": 12,
+        "endLine": 110,
+        "endChar": 14
+      },
+      "revId": "8e5f1acab52acd2bf9037c351bb0c9054fc11792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56a13988_b76a96c5",
+        "filename": "guest/microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T23:57:46Z",
+      "side": 1,
+      "message": "I split it into two, used `sockaddr_vm` instead of `VsockAddr` reference of it (like in https://r.android.com/c/platform/packages/modules/Virtualization/+/3311669-together) and created b/374385025 to make these types nicer to use.",
+      "parentUuid": "b38d91a0_098b7ff2",
       "range": {
         "startLine": 108,
         "startChar": 12,
@@ -231,6 +447,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae5a6981_2778f11a",
+        "filename": "libs/libvm_payload/src/lib.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T23:57:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5e70da2_3de27ea3",
+      "range": {
+        "startLine": 156,
+        "startChar": 4,
+        "endLine": 158,
+        "endChar": 55
+      },
+      "revId": "8e5f1acab52acd2bf9037c351bb0c9054fc11792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "499ffabf_20861b54",
@@ -244,6 +484,30 @@
       "writtenOn": "2024-10-18T09:47:37Z",
       "side": 1,
       "message": "nit: Condense this to one line?\n\n```suggestion\n        stats.reportVendorAtom(\u0026VendorAtom::default())\n```",
+      "range": {
+        "startLine": 75,
+        "startChar": 8,
+        "endLine": 77,
+        "endChar": 14
+      },
+      "revId": "8e5f1acab52acd2bf9037c351bb0c9054fc11792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94ac836a_05405709",
+        "filename": "tests/vm_accessor/accessor_vm/src/main.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-10-18T23:57:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "499ffabf_20861b54",
       "range": {
         "startLine": 75,
         "startChar": 8,
