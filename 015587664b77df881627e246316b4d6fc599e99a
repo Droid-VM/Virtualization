@@ -16,6 +16,75 @@
       "message": "Unsafe Rust Review: I wonder if this could be done cleaner, but LGTM.",
       "revId": "015587664b77df881627e246316b4d6fc599e99a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7460c558_2a236626",
+        "filename": "libs/libvmbase/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-18T10:05:03Z",
+      "side": 1,
+      "message": "What guarantees that these don\u0027t use the heap? Could you document that in a comment in this file?",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 9
+      },
+      "revId": "015587664b77df881627e246316b4d6fc599e99a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1713e42_8554412e",
+        "filename": "libs/libvmbase/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-18T10:05:03Z",
+      "side": 1,
+      "message": "Is this ever used? Remove?",
+      "range": {
+        "startLine": 69,
+        "startChar": 24,
+        "endLine": 69,
+        "endChar": 51
+      },
+      "revId": "015587664b77df881627e246316b4d6fc599e99a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5a94ffa_7ee61fbc",
+        "filename": "libs/libvmbase/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-18T10:05:03Z",
+      "side": 1,
+      "message": "OOC, why does this still need to be marked `unsafe`? As the function is declared `extern \"Rust\"`, I\u0027d expect `rustc` to \"trust\" it?",
+      "range": {
+        "startLine": 92,
+        "startChar": 4,
+        "endLine": 92,
+        "endChar": 52
+      },
+      "revId": "015587664b77df881627e246316b4d6fc599e99a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
