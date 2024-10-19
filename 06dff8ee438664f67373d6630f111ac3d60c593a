@@ -80,6 +80,30 @@
       },
       "revId": "06dff8ee438664f67373d6630f111ac3d60c593a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a49afda_12a81cb4",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/VmLauncherService.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-10-19T09:09:18Z",
+      "side": 1,
+      "message": "You have a good point.\n\nAt first I think VmLauncherService should ensure there is a quit action in the notification no matter who is the service user.\n\nBut I could pass Notification like you said for now to make it simple. WDYT?",
+      "parentUuid": "de6f1b09_8884f143",
+      "range": {
+        "startLine": 87,
+        "startChar": 16,
+        "endLine": 98,
+        "endChar": 34
+      },
+      "revId": "06dff8ee438664f67373d6630f111ac3d60c593a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
