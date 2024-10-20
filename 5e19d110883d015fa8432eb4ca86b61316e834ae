@@ -22,6 +22,70 @@
       },
       "revId": "5e19d110883d015fa8432eb4ca86b61316e834ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bf33ea6_5193c872",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-20T23:59:02Z",
+      "side": 1,
+      "message": "intent should point to somewhere",
+      "range": {
+        "startLine": 422,
+        "startChar": 0,
+        "endLine": 422,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5f9ce881_f8fec086",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+              "range": {
+                "startLine": 422,
+                "startChar": 0,
+                "endLine": 423,
+                "endChar": 0
+              },
+              "replacement": "        Intent intent \u003d new Intent(this, MainActivity.class);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5e19d110883d015fa8432eb4ca86b61316e834ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "320205a1_d9595448",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-20T23:59:02Z",
+      "side": 1,
+      "message": "setOngoing -- otherwise notification can be swiped out",
+      "range": {
+        "startLine": 432,
+        "startChar": 0,
+        "endLine": 434,
+        "endChar": 0
+      },
+      "revId": "5e19d110883d015fa8432eb4ca86b61316e834ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
