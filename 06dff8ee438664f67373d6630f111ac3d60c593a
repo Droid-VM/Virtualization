@@ -104,6 +104,30 @@
       },
       "revId": "06dff8ee438664f67373d6630f111ac3d60c593a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fa299c9_a02886af",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/VmLauncherService.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-20T09:22:39Z",
+      "side": 1,
+      "message": "I think it\u0027s caller activity(or app)\u0027s responsibility, so passing notification object looks good to me.\n\nor if we really want to ensure there is a quit action in notification, we can add a kind of assert check for pendingintent of actions in notification object, but TBH, i don\u0027t think we need that level of check at least for now.",
+      "parentUuid": "3a49afda_12a81cb4",
+      "range": {
+        "startLine": 87,
+        "startChar": 16,
+        "endLine": 98,
+        "endChar": 34
+      },
+      "revId": "06dff8ee438664f67373d6630f111ac3d60c593a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
