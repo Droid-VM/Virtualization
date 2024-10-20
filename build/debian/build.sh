@@ -79,7 +79,13 @@ install_prerequisites() {
 		)
 	else
 		packages+=(
-			qemu-system
+			qemu-
+		)
+	fi
+
+	if [[ "$arch" == "x86_64" ]]; then
+		packages+=(
+			libguestfs-tools
 		)
 	fi
 	DEBIAN_FRONTEND=noninteractive \
@@ -160,3 +166,15 @@ download_debian_cloud_image
 copy_android_config
 run_fai
 fdisk -l image.raw
+images=(image.raw)
+if [[ "$arch" == "x86_64" ]]; then
+	virt-get-kernel -a image.raw
+	mv vmlinuz* vmlinuz
+	mv initrd.img* initrd.img
+	images+=(
+		vmlinuz
+		initrd.img
+	)
+fi
+# --sparse option isn't supported in apache-commons-compress
+tar czv -f ${KOKORO_ARTIFACTS_DIR}/images.tar.gz ${images[@]} vm_config.json.${arch} --transform s/vm_config.json.${arch}/vm_config.json/
