@@ -29,6 +29,7 @@ use rustutils::system_properties;
 use shared_child::SharedChild;
 use std::borrow::Cow;
 use std::cmp::max;
+use std::ffi::CString;
 use std::fmt;
 use std::fs::{read_to_string, File};
 use std::io::{self, Read};
@@ -55,9 +56,6 @@ use binder::Strong;
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::IVirtualMachineService;
 use tombstoned_client::{TombstonedConnection, DebuggerdDumpType};
 use rpcbinder::RpcServer;
-
-/// external/crosvm
-use vm_control::{BalloonControlCommand, VmRequest, VmResponse};
 
 const CROSVM_PATH: &str = "/apex/com.android.virt/bin/crosvm";
 
@@ -367,6 +365,8 @@ pub struct VmInstance {
     pub cid: Cid,
     /// Path to crosvm control socket
     crosvm_control_socket_path: PathBuf,
+    /// Whether the VM has a virtio-balloon device.
+    no_balloon: bool,
     /// The name of the VM.
     pub name: String,
     /// Whether the VM is a protected VM.
@@ -417,6 +417,7 @@ impl VmInstance {
         let cid = config.cid;
         let name = config.name.clone();
         let protected = config.protected;
+        let no_balloon = config.no_balloon;
         let requester_uid_name = User::from_uid(Uid::from_raw(requester_uid))
             .ok()
             .flatten()
@@ -426,6 +427,7 @@ impl VmInstance {
             vm_context,
             cid,
             crosvm_control_socket_path: temporary_directory.join("crosvm.sock"),
+            no_balloon,
             name,
             protected,
             temporary_directory,
@@ -638,37 +640,41 @@ impl VmInstance {
         Ok(())
     }
 
-    /// Responds to memory-trimming notifications by inflating the virtio
-    /// balloon to reclaim guest memory.
+    /// Returns current virtio-balloon size.
     pub fn get_memory_balloon(&self) -> Result<u64, Error> {
-        let request = VmRequest::BalloonCommand(BalloonControlCommand::Stats {});
-        let result =
-            match vm_control::client::handle_request(&request, &self.crosvm_control_socket_path) {
-                Ok(VmResponse::BalloonStats { stats: _, balloon_actual }) => balloon_actual,
-                Ok(VmResponse::Err(e)) => {
-                    // ENOTSUP is returned when the balloon protocol is not initialized. This
-                    // can occur for numerous reasons: Guest is still booting, guest doesn't
-                    // support ballooning, host doesn't support ballooning. We don't log or
-                    // raise an error in this case: trim is just a hint and we can ignore it.
-                    if e.errno() != libc::ENOTSUP {
-                        bail!("Errno return when requesting balloon stats: {}", e.errno())
-                    }
-                    0
-                }
-                e => bail!("Error requesting balloon stats: {:?}", e),
-            };
-        Ok(result)
+        if self.no_balloon {
+            // crosvm_client_balloon_stats errors when there is no balloon device.
+            return Ok(0);
+        }
+
+        let socket_path_cstring =
+            CString::new(self.crosvm_control_socket_path.to_str().unwrap()).unwrap();
+        let mut balloon_actual = 0u64;
+        // SAFETY: Pointers are valid for the lifetime of the call. Null `stats` is valid.
+        let success = unsafe {
+            crosvm_control::crosvm_client_balloon_stats(
+                socket_path_cstring.as_ptr(),
+                /* stats= */ std::ptr::null_mut(),
+                &mut balloon_actual,
+            )
+        };
+        if !success {
+            bail!("Error requesting balloon stats");
+        }
+        Ok(balloon_actual)
     }
 
-    /// Responds to memory-trimming notifications by inflating the virtio
-    /// balloon to reclaim guest memory.
+    /// Inflates the virtio-balloon by `num_bytes` to reclaim guest memory. Called in response to
+    /// memory-trimming notifications.
     pub fn set_memory_balloon(&self, num_bytes: u64) -> Result<(), Error> {
-        let command = BalloonControlCommand::Adjust { num_bytes, wait_for_success: false };
-        if let Err(e) = vm_control::client::handle_request(
-            &VmRequest::BalloonCommand(command),
-            &self.crosvm_control_socket_path,
-        ) {
-            bail!("Error sending balloon adjustment: {:?}", e);
+        let socket_path_cstring =
+            CString::new(self.crosvm_control_socket_path.to_str().unwrap()).unwrap();
+        // SAFETY: Pointer is valid for the lifetime of the call.
+        let success = unsafe {
+            crosvm_control::crosvm_client_balloon_vms(socket_path_cstring.as_ptr(), num_bytes)
+        };
+        if !success {
+            bail!("Error sending balloon adjustment");
         }
         Ok(())
     }
@@ -704,26 +710,30 @@ impl VmInstance {
         Ok(())
     }
 
-    /// Suspends the VM
+    /// Suspends the VM's vCPUs.
     pub fn suspend(&self) -> Result<(), Error> {
-        match vm_control::client::handle_request(
-            &VmRequest::SuspendVcpus,
-            &self.crosvm_control_socket_path,
-        ) {
-            Ok(VmResponse::Ok) => Ok(()),
-            e => bail!("Failed to suspend VM: {e:?}"),
+        let socket_path_cstring =
+            CString::new(self.crosvm_control_socket_path.to_str().unwrap()).unwrap();
+        // SAFETY: Pointer is valid for the lifetime of the call.
+        let success =
+            unsafe { crosvm_control::crosvm_client_suspend_vm(socket_path_cstring.as_ptr()) };
+        if !success {
+            bail!("Failed to suspend VM");
         }
+        Ok(())
     }
 
-    /// Resumes the suspended VM
+    /// Resumes the VM's vCPUs.
     pub fn resume(&self) -> Result<(), Error> {
-        match vm_control::client::handle_request(
-            &VmRequest::ResumeVcpus,
-            &self.crosvm_control_socket_path,
-        ) {
-            Ok(VmResponse::Ok) => Ok(()),
-            e => bail!("Failed to resume: {e:?}"),
+        let socket_path_cstring =
+            CString::new(self.crosvm_control_socket_path.to_str().unwrap()).unwrap();
+        // SAFETY: Pointer is valid for the lifetime of the call.
+        let success =
+            unsafe { crosvm_control::crosvm_client_resume_vm(socket_path_cstring.as_ptr()) };
+        if !success {
+            bail!("Failed to resume VM");
         }
+        Ok(())
     }
 }
 
