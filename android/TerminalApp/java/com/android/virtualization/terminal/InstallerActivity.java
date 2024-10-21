@@ -103,15 +103,20 @@ public class InstallerActivity extends BaseActivity {
         finish();
     }
 
-    private void preventInstall() {
-        mWaitForWifiCheckbox.setEnabled(false);
-        mInstallButton.setEnabled(false);
-        mInstallButton.setText(getString(R.string.installer_install_button_disabled_text));
+    private void setInstallEnabled(boolean enable) {
+        mInstallButton.setEnabled(enable);
+        mWaitForWifiCheckbox.setEnabled(enable);
+
+        int resId =
+                enable
+                        ? R.string.installer_install_button_enabled_text
+                        : R.string.installer_install_button_disabled_text;
+        mInstallButton.setText(getString(resId));
     }
 
     @MainThread
     private void requestInstall() {
-        preventInstall();
+        setInstallEnabled(/* enable= */ false);
 
         if (mService != null) {
             try {
@@ -120,6 +125,7 @@ public class InstallerActivity extends BaseActivity {
                 handleCriticalError(e);
             }
         } else {
+            Log.d(TAG, "requestInstall() is called, but not yet connected");
             mInstallRequested = true;
         }
     }
@@ -138,7 +144,7 @@ public class InstallerActivity extends BaseActivity {
             if (mInstallRequested) {
                 requestInstall();
             } else if (mService.isInstalling()) {
-                preventInstall();
+                setInstallEnabled(false);
             }
         } catch (RemoteException e) {
             handleCriticalError(e);
@@ -148,6 +154,12 @@ public class InstallerActivity extends BaseActivity {
     @MainThread
     public void handleInstallerServiceDisconnected() {
         handleCriticalError(new Exception("InstallerService is destroyed while in use"));
+    }
+
+    @MainThread
+    private void handleError(String displayText) {
+        Toast.makeText(this, displayText, Toast.LENGTH_LONG).show();
+        setInstallEnabled(true);
     }
 
     private static class InstallProgressListener extends IInstallProgressListener.Stub {
@@ -167,6 +179,28 @@ public class InstallerActivity extends BaseActivity {
 
             // MainActivity will be resume and handle rest of progress.
             activity.finishWithResult(RESULT_OK);
+        }
+
+        @Override
+        public void onError(String displayText) {
+            InstallerActivity context = mActivity.get();
+            if (context == null) {
+                // Ignore incoming connection or disconnection after activity is destroyed.
+                return;
+            }
+
+            context.runOnUiThread(
+                    () -> {
+                        InstallerActivity activity = mActivity.get();
+                        if (activity == null) {
+                            // Ignore incoming connection or disconnection after activity is
+                            // destroyed.
+                            return;
+                        }
+
+                        // MainActivity will be resume and handle rest of progress.
+                        activity.handleError(displayText);
+                    });
         }
     }
 
