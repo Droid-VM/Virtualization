@@ -401,6 +401,7 @@ public class MainActivity extends BaseActivity
             return;
         }
         mStartOrInstallVmPending = false;
+
         startOrInstallVm();
     }
 
