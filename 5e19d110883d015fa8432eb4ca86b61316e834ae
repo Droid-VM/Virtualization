@@ -86,6 +86,144 @@
       },
       "revId": "5e19d110883d015fa8432eb4ca86b61316e834ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62b31816_7bec9a10",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-21T00:03:22Z",
+      "side": 1,
+      "message": "intent should point to somewhere",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6cd0c80f_929e003a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+              "range": {
+                "startLine": 52,
+                "startChar": 0,
+                "endLine": 53,
+                "endChar": 0
+              },
+              "replacement": "        val terminalIntent \u003d Intent(this, TerminalActivity::class.java)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5e19d110883d015fa8432eb4ca86b61316e834ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2e32626_9e678e17",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-21T00:03:22Z",
+      "side": 1,
+      "message": "never concatenate string, but use formatting\n\nsee my l10n CL for reference",
+      "range": {
+        "startLine": 62,
+        "startChar": 108,
+        "endLine": 62,
+        "endChar": 110
+      },
+      "revId": "5e19d110883d015fa8432eb4ca86b61316e834ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "166c49a0_a2ede3aa",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-21T00:03:22Z",
+      "side": 1,
+      "message": "do not mix both compat and normal API. it may cause unexpected behavior.\n\nPlus, we\u0027d better not use compat. It\u0027s for making app working on lower platform, and we\u0027ll only support ToT",
+      "range": {
+        "startLine": 79,
+        "startChar": 13,
+        "endLine": 79,
+        "endChar": 38
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "59a802da_8614ddb9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+              "range": {
+                "startLine": 26,
+                "startChar": 0,
+                "endLine": 28,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+              "range": {
+                "startLine": 79,
+                "startChar": 0,
+                "endLine": 86,
+                "endChar": 0
+              },
+              "replacement": "        if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) \u003d\u003d PackageManager.PERMISSION_GRANTED) {\n            getSystemService(NotificationManager::class.java).notify(0, notification)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5e19d110883d015fa8432eb4ca86b61316e834ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44d5154c_0271a880",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-21T00:03:22Z",
+      "side": 1,
+      "message": "what is this for?",
+      "range": {
+        "startLine": 55,
+        "startChar": 90,
+        "endLine": 55,
+        "endChar": 97
+      },
+      "revId": "5e19d110883d015fa8432eb4ca86b61316e834ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
