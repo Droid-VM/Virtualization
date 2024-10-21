@@ -15,18 +15,18 @@
  */
 package com.android.virtualization.terminal;
 
-import android.Manifest;
+import android.annotation.MainThread;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.content.ServiceConnection;
 import android.graphics.drawable.Icon;
 import android.net.http.SslError;
-import android.os.Build;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.system.ErrnoException;
 import android.system.Os;
 import android.util.Log;
@@ -43,9 +43,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.android.virtualization.vmlauncher.InstallUtils;
 import com.android.virtualization.vmlauncher.VmLauncherServices;
 
 import com.google.android.material.appbar.MaterialToolbar;
@@ -66,7 +63,7 @@ import java.security.PrivateKey;
 import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
         implements VmLauncherServices.VmLauncherServiceCallback,
                 AccessibilityManager.TouchExplorationStateChangeListener {
 
@@ -79,13 +76,16 @@ public class MainActivity extends AppCompatActivity
     private PrivateKey mPrivateKey;
     private WebView mWebView;
     private AccessibilityManager mAccessibilityManager;
-    private static final int POST_NOTIFICATIONS_PERMISSION_REQUEST_CODE = 101;
+
+    private IInstallerService mInstallerService;
+    private ServiceConnection mInstallerServiceConnection;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        boolean launchInstaller = installIfNecessary();
+        // TODO(b/374015561): Need to show an UX for 'checking for installation'
+
         try {
             // No resize for now.
             long newSizeInBytes = 0;
@@ -96,13 +96,13 @@ public class MainActivity extends AppCompatActivity
                     .show();
         }
 
-        checkAndRequestPostNotificationsPermission();
-
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         NotificationChannel notificationChannel =
                 new NotificationChannel(TAG, TAG, NotificationManager.IMPORTANCE_LOW);
         assert notificationManager != null;
-        notificationManager.createNotificationChannel(notificationChannel);
+        if (notificationManager.getNotificationChannel(TAG) != null) {
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
 
         setContentView(R.layout.activity_headless);
 
@@ -119,11 +119,12 @@ public class MainActivity extends AppCompatActivity
 
         connectToTerminalService();
         readClientCertificate();
+    }
 
-        // if installer is launched, it will be handled in onActivityResult
-        if (!launchInstaller) {
-            startVm();
-        }
+    @Override
+    public void onResume() {
+        super.onResume();
+        startOrInstallVm();
     }
 
     private URL getTerminalServiceUrl() {
@@ -327,19 +328,11 @@ public class MainActivity extends AppCompatActivity
         return;
     }
 
-    private void checkAndRequestPostNotificationsPermission() {
-        if (getApplicationContext().checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS)
-                != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(
-                    new String[]{Manifest.permission.POST_NOTIFICATIONS},
-                    POST_NOTIFICATIONS_PERMISSION_REQUEST_CODE);
-        }
-    }
-
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         getSystemService(AccessibilityManager.class).removeTouchExplorationStateChangeListener(this);
         VmLauncherServices.stopVmLauncherService(this);
+
         super.onDestroy();
     }
 
@@ -390,32 +383,48 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == REQUEST_CODE_INSTALLER) {
-            if (resultCode != RESULT_OK) {
-                Log.e(TAG, "Failed to start VM. Installer returned error.");
-                finish();
-            }
-            startVm();
-        }
+    public void handleCriticalError(Exception e) {
+        Toast.makeText(
+                        this,
+                        e.getMessage() + ". File a bugreport to go/ferrochrome-bug",
+                        Toast.LENGTH_LONG)
+                .show();
+        Log.e(TAG, "Internal error", e);
+        finish();
     }
 
-    private boolean installIfNecessary() {
-        // If payload from external storage exists(only for debuggable build) or there is no
-        // installed image, launch installer activity.
-        if ((Build.isDebuggable() && InstallUtils.payloadFromExternalStorageExists())
-                || !InstallUtils.isImageInstalled(this)) {
+    @MainThread
+    @Override
+    public void handleInstallerServiceConnected() {
+        startOrInstallVm();
+    }
+
+    @MainThread
+    @Override
+    public void handleInstallerServiceDisconnected() {
+        handleCriticalError(new Exception("InstallerService is destroyed while in use"));
+    }
+
+    private void startOrInstallVm() {
+        IInstallerService service = getInstallerService();
+
+        if (service == null) {
+            // Hasn't connected to the service yet.
+            // handleInstallerServiceConnected() will call this later.
+            return;
+        }
+
+        boolean isInstalled;
+        try {
+            isInstalled = service.isInstalled();
+        } catch (RemoteException e) {
+            handleCriticalError(e);
+            return;
+        }
+        if (!isInstalled) {
+            Log.i(TAG, "VM hasn't been installed. try installing");
             Intent intent = new Intent(this, InstallerActivity.class);
-            startActivityForResult(intent, REQUEST_CODE_INSTALLER);
-            return true;
-        }
-        return false;
-    }
-
-    private void startVm() {
-        if (!InstallUtils.isImageInstalled(this)) {
+            startActivity(intent);
             return;
         }
         // TODO: implement intent for setting, close and tap to the notification
