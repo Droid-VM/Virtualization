@@ -106,4 +106,7 @@ parcelable VirtualMachineRawConfig {
 
     /** Enable or disable USB passthrough support */
     @nullable UsbConfig usbConfig;
+
+    /** List of secure services this VM wants to access */
+    String[] secureServices;
 }

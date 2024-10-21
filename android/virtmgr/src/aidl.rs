@@ -1122,6 +1122,8 @@ fn load_app_config(
         for param in custom_config.extraKernelCmdlineParams.iter() {
             append_kernel_param(param, &mut vm_config);
         }
+
+        vm_config.secureServices.clone_from(&custom_config.secureServices);
     }
 
     if config.memoryMib > 0 {
@@ -1722,6 +1724,26 @@ fn check_no_extra_kernel_cmdline_params(config: &VirtualMachineConfig) -> binder
     Ok(())
 }
 
+fn check_no_secure_services(config: &VirtualMachineConfig) -> binder::Result<()> {
+    match config {
+        VirtualMachineConfig::RawConfig(config) => {
+            if !config.secureServices.is_empty() {
+                return Err(anyhow!("secure_services_allowlist feature is disabled"))
+                    .or_binder_exception(ExceptionCode::UNSUPPORTED_OPERATION);
+            }
+        }
+        VirtualMachineConfig::AppConfig(config) => {
+            if let Some(custom_config) = &config.customConfig {
+                if !custom_config.secureServices.is_empty() {
+                    return Err(anyhow!("secure_services_allowlist feature is disabled"))
+                        .or_binder_exception(ExceptionCode::UNSUPPORTED_OPERATION);
+                }
+            }
+        }
+    };
+    Ok(())
+}
+
 fn check_protected_vm_is_supported() -> binder::Result<()> {
     let is_pvm_supported =
         hypervisor_props::is_protected_vm_supported().or_service_specific_exception(-1)?;
@@ -1745,6 +1767,9 @@ fn check_config_features(config: &VirtualMachineConfig) -> binder::Result<()> {
     }
     if !cfg!(debuggable_vms_improvements) {
         check_no_extra_kernel_cmdline_params(config)?;
+    }
+    if !cfg!(secure_services_allowlist) {
+        check_no_secure_services(config)?;
     }
     Ok(())
 }
