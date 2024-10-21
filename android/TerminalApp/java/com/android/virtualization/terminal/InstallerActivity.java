@@ -16,56 +16,146 @@
 
 package com.android.virtualization.terminal;
 
-import android.app.Activity;
-import android.os.Build;
+import android.annotation.MainThread;
 import android.os.Bundle;
+import android.os.FileUtils;
+import android.os.RemoteException;
+import android.text.format.Formatter;
 import android.util.Log;
+import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.android.virtualization.vmlauncher.InstallUtils;
-
+import java.lang.ref.WeakReference;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
-public class InstallerActivity extends Activity {
+public class InstallerActivity extends BaseActivity {
     private static final String TAG = "LinuxInstaller";
 
-    ExecutorService executorService = Executors.newSingleThreadExecutor();
+    private static final long ESTIMATED_IMG_SIZE_BYTES = FileUtils.parseSize("350MB");
+
+    private ExecutorService mExecutorService;
+    private CheckBox mAllowMeteredCheckBox;
+    private TextView mInstallButton;
+
+    private InstallProgressListener mInstallProgressListener;
+    private boolean mInstallRequested;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setResult(RESULT_CANCELED);
+
+        mInstallProgressListener = new InstallProgressListener(this);
 
         setContentView(R.layout.activity_installer);
 
-        executorService.execute(this::installLinuxImage);
+        TextView desc = (TextView) findViewById(R.id.installer_desc);
+        desc.setText(
+                getString(
+                        R.string.installer_desc_text_format,
+                        Formatter.formatShortFileSize(this, ESTIMATED_IMG_SIZE_BYTES)));
+
+        mAllowMeteredCheckBox = (CheckBox) findViewById(R.id.installer_allow_metered_checkbox);
+        mInstallButton = (TextView) findViewById(R.id.installer_install_button);
+
+        mInstallButton.setOnClickListener(
+                (event) -> {
+                    requestInstall();
+                });
     }
 
-    private void installLinuxImage() {
-        Log.d(TAG, "installLinuxImage");
-        // Installing from sdcard is supported only in debuggable build.
-        if (Build.isDebuggable()) {
-            updateStatus("try /sdcard/linux/images.tar.gz");
-            if (InstallUtils.installImageFromExternalStorage(this)) {
-                Log.d(TAG, "success / sdcard");
-                updateStatus("image is installed from /sdcard/linux/images.tar.gz");
-                setResult(RESULT_OK);
-                finish();
-                return;
+    @Override
+    public void onDestroy() {
+        IInstallerService service = getInstallerService();
+        if (service != null) {
+            try {
+                service.unregisterProgressListener(mInstallProgressListener);
+            } catch (RemoteException e) {
+                // ignore any error while destroying.
             }
-            Log.d(TAG, "fail / sdcard");
-            updateStatus("There is no /sdcard/linux/images.tar.gz");
         }
-        setResult(RESULT_CANCELED, null);
+
+        super.onDestroy();
+    }
+
+    @Override
+    public void handleCriticalError(Exception e) {
+        Toast.makeText(
+                        this,
+                        e.getMessage() + ". File a bugreport to go/ferrochrome-bug",
+                        Toast.LENGTH_LONG)
+                .show();
+        Log.e(TAG, "Internal error", e);
         finish();
     }
 
-    private void updateStatus(String line) {
-        runOnUiThread(
-                () -> {
-                    TextView statusView = findViewById(R.id.status_txt_view);
-                    statusView.append(line + "\n");
-                });
+    private void preventInstall() {
+        mInstallButton.setEnabled(false);
+        mInstallButton.setText(getString(R.string.installer_install_button_disabled_text));
+    }
+
+    @MainThread
+    private void requestInstall() {
+        preventInstall();
+
+        IInstallerService service = getInstallerService();
+        if (service != null) {
+            try {
+                service.requestInstall();
+            } catch (RemoteException e) {
+                handleCriticalError(e);
+            }
+        } else {
+            mInstallRequested = true;
+        }
+    }
+
+    @MainThread
+    @Override
+    public void handleInstallerServiceConnected() {
+        IInstallerService service = getInstallerService();
+        try {
+            if (service.isInstalled()) {
+                // Finishing this activity will trigger MainActivity::onResume(),
+                // and VM will be started from there.
+                finish();
+            } else {
+                service.registerProgressListener(mInstallProgressListener);
+            }
+
+            if (mInstallRequested) {
+                requestInstall();
+            } else if (service.isInstalling()) {
+                preventInstall();
+            }
+        } catch (RemoteException e) {
+            handleCriticalError(e);
+        }
+    }
+
+    @MainThread
+    @Override
+    public void handleInstallerServiceDisconnected() {
+        handleCriticalError(new Exception("InstallerService is destroyed while in use"));
+    }
+
+    private static class InstallProgressListener extends IInstallProgressListener.Stub {
+        private final WeakReference<InstallerActivity> mActivity;
+
+        InstallProgressListener(InstallerActivity activity) {
+            mActivity = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void onCompleted() {
+            InstallerActivity activity = mActivity.get();
+            if (activity == null) {
+                // Ignore incoming connection or disconnection after activity is destroyed.
+                return;
+            }
+
+            // MainActivity will be resume and handle rest of progress.
+            activity.finish();
+        }
     }
 }
