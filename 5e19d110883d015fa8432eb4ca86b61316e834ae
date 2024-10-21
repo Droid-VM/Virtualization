@@ -67,6 +67,71 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f4525ef_252c8792",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-21T02:25:00Z",
+      "side": 1,
+      "message": "Add TODO if you have trouble with setting `setContentIntent`",
+      "parentUuid": "4bf33ea6_5193c872",
+      "range": {
+        "startLine": 422,
+        "startChar": 0,
+        "endLine": 422,
+        "endChar": 37
+      },
+      "revId": "5e19d110883d015fa8432eb4ca86b61316e834ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8992e531_474cd23b",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-21T02:25:00Z",
+      "side": 1,
+      "message": "Do you have a open bug for launch VM in service and launch notification there?\n\nActivity can be killed while in background, so showing notification requires foreground service.",
+      "range": {
+        "startLine": 427,
+        "startChar": 40,
+        "endLine": 427,
+        "endChar": 52
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6a2d2f00_bca25117",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+              "range": {
+                "startLine": 427,
+                "startChar": 0,
+                "endLine": 428,
+                "endChar": 0
+              },
+              "replacement": "        Notification notification \u003d new Notification.Builder(this, TAG) // NotificationChannel\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5e19d110883d015fa8432eb4ca86b61316e834ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "320205a1_d9595448",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
         "patchSetId": 7
