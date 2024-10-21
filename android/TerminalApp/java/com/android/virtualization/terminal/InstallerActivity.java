@@ -16,7 +16,13 @@
 
 package com.android.virtualization.terminal;
 
+import static android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET;
+import static android.net.NetworkCapabilities.NET_CAPABILITY_NOT_METERED;
+
 import android.annotation.MainThread;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.os.Bundle;
 import android.os.FileUtils;
 import android.os.RemoteException;
@@ -89,23 +95,52 @@ public class InstallerActivity extends BaseActivity {
         finish();
     }
 
-    private void preventInstall() {
-        mInstallButton.setEnabled(false);
-        mInstallButton.setText(getString(R.string.installer_install_button_disabled_text));
+    private void setInstallEnabled(boolean enable) {
+        mInstallButton.setEnabled(enable);
+        mAllowMeteredCheckBox.setEnabled(enable);
+
+        int resId =
+                enable
+                        ? R.string.installer_install_button_enabled_text
+                        : R.string.installer_install_button_disabled_text;
+        mInstallButton.setText(getString(resId));
+    }
+
+    private boolean checkNetworkCapabilities() {
+        ConnectivityManager manager = getSystemService(ConnectivityManager.class);
+
+        Network network = manager.getActiveNetwork();
+        if (network == null) {
+            return false;
+        }
+        NetworkCapabilities capability = manager.getNetworkCapabilities(network);
+        if (!capability.hasCapability(NET_CAPABILITY_INTERNET)) {
+            return false;
+        }
+        if (!mAllowMeteredCheckBox.isChecked()
+                && capability.hasCapability(NET_CAPABILITY_NOT_METERED)) {
+            return false;
+        }
+        return true;
     }
 
     @MainThread
     private void requestInstall() {
-        preventInstall();
+        setInstallEnabled(/* enable= */ false);
 
         IInstallerService service = getInstallerService();
         if (service != null) {
             try {
-                service.requestInstall();
+                if (checkNetworkCapabilities()) {
+                    service.requestInstall();
+                } else {
+                    handleError(getString(R.string.installer_error_network));
+                }
             } catch (RemoteException e) {
                 handleCriticalError(e);
             }
         } else {
+            Log.d(TAG, "requestInstall() is called, but not yet connected");
             mInstallRequested = true;
         }
     }
@@ -126,7 +161,7 @@ public class InstallerActivity extends BaseActivity {
             if (mInstallRequested) {
                 requestInstall();
             } else if (service.isInstalling()) {
-                preventInstall();
+                setInstallEnabled(false);
             }
         } catch (RemoteException e) {
             handleCriticalError(e);
@@ -137,6 +172,12 @@ public class InstallerActivity extends BaseActivity {
     @Override
     public void handleInstallerServiceDisconnected() {
         handleCriticalError(new Exception("InstallerService is destroyed while in use"));
+    }
+
+    @MainThread
+    private void handleError(String displayText) {
+        Toast.makeText(this, displayText, Toast.LENGTH_LONG).show();
+        setInstallEnabled(true);
     }
 
     private static class InstallProgressListener extends IInstallProgressListener.Stub {
@@ -156,6 +197,28 @@ public class InstallerActivity extends BaseActivity {
 
             // MainActivity will be resume and handle rest of progress.
             activity.finish();
+        }
+
+        @Override
+        public void onError(String displayText) {
+            InstallerActivity context = mActivity.get();
+            if (context == null) {
+                // Ignore incoming connection or disconnection after activity is destroyed.
+                return;
+            }
+
+            context.runOnUiThread(
+                    () -> {
+                        InstallerActivity activity = mActivity.get();
+                        if (activity == null) {
+                            // Ignore incoming connection or disconnection after activity is
+                            // destroyed.
+                            return;
+                        }
+
+                        // MainActivity will be resume and handle rest of progress.
+                        activity.handleError(displayText);
+                    });
         }
     }
 }

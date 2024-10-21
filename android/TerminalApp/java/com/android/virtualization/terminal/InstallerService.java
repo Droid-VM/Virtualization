@@ -21,7 +21,6 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ServiceInfo;
 import android.os.Build;
@@ -33,7 +32,18 @@ import androidx.annotation.Nullable;
 import com.android.internal.annotations.GuardedBy;
 import com.android.virtualization.vmlauncher.InstallUtils;
 
+import org.apache.commons.compress.archivers.ArchiveEntry;
+import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
+import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream;
+
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -44,6 +54,10 @@ public class InstallerService extends Service {
 
     private static final String NOTIFICATION_CHANNEL_ID = "installer";
     private static final int NOTIFICATION_ID = 1313; // any unique number among notifications
+
+    // TODO(b/369740847): Replace this URL with dl.google.com
+    private static final String IMAGE_URL =
+            "https://github.com/ikicha/debian_ci/releases/download/first/images.tar.gz";
 
     private final Object mLock = new Object();
 
@@ -121,25 +135,76 @@ public class InstallerService extends Service {
 
         mExecutorService.execute(
                 () -> {
-                    Log.d(TAG, "installLinuxImage");
+                    // TODO(b/374015561): Provide progress update
+                    boolean success = downloadFromSdcard() || downloadFromUrl();
 
-                    // Installing from sdcard is preferred, but only supported only in debuggable
-                    // build.
-                    if (Build.isDebuggable()) {
-                        Log.i(TAG, "trying to install /sdcard/linux/images.tar.gz");
-
-                        // TODO(b/374015561): Provide progress update
-                        if (InstallUtils.installImageFromExternalStorage(this)) {
-                            Log.i(TAG, "image is installed from /sdcard/linux/images.tar.gz");
-                        } else {
-                            // TODO(b/374015561): Notify error
-                            Log.i(TAG, "There is no /sdcard/linux/images.tar.gz");
-                        }
-                    }
                     stopForeground(STOP_FOREGROUND_REMOVE);
 
-                    notifyCompleted();
+                    if (success) {
+                        notifyCompleted();
+                    }
                 });
+    }
+
+    private boolean downloadFromSdcard() {
+        // Installing from sdcard is preferred, but only supported only in debuggable build.
+        if (Build.isDebuggable()) {
+            Log.i(TAG, "trying to install /sdcard/linux/images.tar.gz");
+
+            if (InstallUtils.installImageFromExternalStorage(this)) {
+                Log.i(TAG, "image is installed from /sdcard/linux/images.tar.gz");
+                return true;
+            }
+            Log.i(TAG, "There is no /sdcard/linux/images.tar.gz");
+        } else {
+            Log.i(TAG, "Non-debuggable build doesn't support installation from /sdcard/linux");
+        }
+        return false;
+    }
+
+    private boolean downloadFromUrl() {
+        Log.i(TAG, "trying to download from " + IMAGE_URL);
+
+        try (BufferedInputStream inputStream =
+                        new BufferedInputStream(new URL(IMAGE_URL).openStream());
+                TarArchiveInputStream tar =
+                        new TarArchiveInputStream(new GzipCompressorInputStream(inputStream))) {
+            ArchiveEntry entry;
+            Path baseDir = new File(getFilesDir(), InstallUtils.PAYLOAD_DIR).toPath();
+            Files.createDirectories(baseDir);
+            while ((entry = tar.getNextEntry()) != null) {
+                Path extractTo = baseDir.resolve(entry.getName());
+                if (entry.isDirectory()) {
+                    Files.createDirectories(extractTo);
+                } else {
+                    Files.copy(tar, extractTo, StandardCopyOption.REPLACE_EXISTING);
+                }
+            }
+        } catch (IOException e) {
+            Log.e(TAG, "Installation failed", e);
+            notifyError(getString(R.string.installer_error_unknown));
+            return false;
+        }
+
+        InstallUtils.resolvePathInVmConfig(this);
+        return true;
+    }
+
+    private void notifyError(String displayText) {
+        List<IInstallProgressListener> listeners;
+        synchronized (mLock) {
+            listeners = new ArrayList<>(mListeners);
+            // We wouldn't install multiple times.. for now
+            mListeners.clear();
+        }
+
+        for (IInstallProgressListener listener : listeners) {
+            try {
+                listener.onError(displayText);
+            } catch (Exception e) {
+                // ignore..
+            }
+        }
     }
 
     private void notifyCompleted() {
