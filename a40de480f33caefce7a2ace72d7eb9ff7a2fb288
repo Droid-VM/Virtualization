@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60311f63_930d8da5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-10-21T18:05:24Z",
+      "side": 1,
+      "message": "Unsafe Rust LGTM.",
+      "revId": "a40de480f33caefce7a2ace72d7eb9ff7a2fb288",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa7bfd39_662b56f7",
+        "filename": "libs/libvm_payload/src/lib.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-10-21T18:05:24Z",
+      "side": 1,
+      "message": "Technically only this paragraph is a safety requirement. Normally you would place the rest of the information here in a different section.",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 149,
+        "endChar": 35
+      },
+      "revId": "a40de480f33caefce7a2ace72d7eb9ff7a2fb288",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cc52ce8_ad1b9fa3",
+        "filename": "libs/libvm_payload/src/lib.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-10-21T18:05:24Z",
+      "side": 1,
+      "message": "This comment says that it detects null, but it does not.",
+      "revId": "a40de480f33caefce7a2ace72d7eb9ff7a2fb288",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
