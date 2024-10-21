@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4ab92718_c3637234",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-10-21T08:56:20Z",
+      "side": 1,
+      "message": "Yeah, I leave these intents blank because I have trouble with `setContentIntent` and `PendingIntent` for notification actions. Jiyong has already suggested a solution and I want to implement them in another change. Since I want to submit the UI first for a11y reviews.",
+      "parentUuid": "5f4525ef_252c8792",
+      "range": {
+        "startLine": 422,
+        "startChar": 0,
+        "endLine": 422,
+        "endChar": 37
+      },
+      "revId": "5e19d110883d015fa8432eb4ca86b61316e834ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8992e531_474cd23b",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
         "patchSetId": 7
@@ -178,6 +202,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53f44de8_4eed858a",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-10-21T08:56:20Z",
+      "side": 1,
+      "message": "Thanks Jeongik!\nI just moved the building of the notification object to MainActivity. It is still passed to the foreground service to be shown.",
+      "parentUuid": "8992e531_474cd23b",
+      "range": {
+        "startLine": 427,
+        "startChar": 40,
+        "endLine": 427,
+        "endChar": 52
+      },
+      "revId": "5e19d110883d015fa8432eb4ca86b61316e834ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "320205a1_d9595448",
@@ -191,6 +239,30 @@
       "writtenOn": "2024-10-20T23:59:02Z",
       "side": 1,
       "message": "setOngoing -- otherwise notification can be swiped out",
+      "range": {
+        "startLine": 432,
+        "startChar": 0,
+        "endLine": 434,
+        "endChar": 0
+      },
+      "revId": "5e19d110883d015fa8432eb4ca86b61316e834ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1ca6966_d99752a4",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-10-21T08:56:20Z",
+      "side": 1,
+      "message": "Thanks! But newer Android versions allow users to swipe all notifications with or without setOngoing. setOngoing only prevent notification swipe out on lock screen.\nI added it though.",
+      "parentUuid": "320205a1_d9595448",
       "range": {
         "startLine": 432,
         "startChar": 0,
@@ -265,6 +337,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d9b54ad_d6cbaeee",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-10-21T08:56:20Z",
+      "side": 1,
+      "message": "Thanks for it!",
+      "parentUuid": "d2e32626_9e678e17",
+      "range": {
+        "startLine": 62,
+        "startChar": 108,
+        "endLine": 62,
+        "endChar": 110
+      },
+      "revId": "5e19d110883d015fa8432eb4ca86b61316e834ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "166c49a0_a2ede3aa",
@@ -312,6 +408,30 @@
           ]
         }
       ],
+      "revId": "5e19d110883d015fa8432eb4ca86b61316e834ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9219c725_7aa1bc3c",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-10-21T08:56:20Z",
+      "side": 1,
+      "message": "Thanks for pointing this out. I didn\u0027t know that...\nLet me make Notifications non-compat.\nFor those ActivityCompats, let me try to get rid of them in another change.",
+      "parentUuid": "166c49a0_a2ede3aa",
+      "range": {
+        "startLine": 79,
+        "startChar": 13,
+        "endLine": 79,
+        "endChar": 38
+      },
       "revId": "5e19d110883d015fa8432eb4ca86b61316e834ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -405,6 +525,54 @@
         "startChar": 90,
         "endLine": 55,
         "endChar": 97
+      },
+      "revId": "5e19d110883d015fa8432eb4ca86b61316e834ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ac6cd59_db2ad16c",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-10-21T08:56:20Z",
+      "side": 1,
+      "message": "It\u0027s for the white space after the \u0027:\u0027\nSo it could be \"Port requested to be open: \" + port.toString()\nAnd you are right. I should use xliff.",
+      "parentUuid": "44d5154c_0271a880",
+      "range": {
+        "startLine": 55,
+        "startChar": 90,
+        "endLine": 55,
+        "endChar": 97
+      },
+      "revId": "5e19d110883d015fa8432eb4ca86b61316e834ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0448c59_0bbbaab6",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-10-21T08:56:20Z",
+      "side": 1,
+      "message": "Thank you two! I didn\u0027t know this before.",
+      "parentUuid": "f2898c1f_409ca703",
+      "range": {
+        "startLine": 55,
+        "startChar": 97,
+        "endLine": 55,
+        "endChar": 100
       },
       "revId": "5e19d110883d015fa8432eb4ca86b61316e834ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
