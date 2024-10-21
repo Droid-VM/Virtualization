@@ -130,6 +130,9 @@ parcelable VirtualMachineAppConfig {
 
         /** Additional parameters to pass to the VM's kernel cmdline. */
         String[] extraKernelCmdlineParams;
+
+        /** List of secure services this VM wants to access */
+        String[] secureServices;
     }
 
     /** Configuration parameters guarded by android.permission.USE_CUSTOM_VIRTUAL_MACHINE */
