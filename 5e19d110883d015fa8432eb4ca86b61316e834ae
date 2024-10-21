@@ -132,6 +132,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ce21f322_740d9907",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-21T02:53:31Z",
+      "side": 1,
+      "message": "Terminal app already launches VM via a foreground service(VmLauncherService). It included notification-related code, but didn\u0027t show due to lack of permission. I think this CL grants the permission, and lets MainActivity create Notification object for the service because of some action buttons.",
+      "parentUuid": "8992e531_474cd23b",
+      "range": {
+        "startLine": 427,
+        "startChar": 40,
+        "endLine": 427,
+        "endChar": 52
+      },
+      "revId": "5e19d110883d015fa8432eb4ca86b61316e834ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "320205a1_d9595448",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
         "patchSetId": 7
@@ -281,6 +305,53 @@
       "writtenOn": "2024-10-21T00:03:22Z",
       "side": 1,
       "message": "what is this for?",
+      "range": {
+        "startLine": 55,
+        "startChar": 90,
+        "endLine": 55,
+        "endChar": 97
+      },
+      "revId": "5e19d110883d015fa8432eb4ca86b61316e834ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2898c1f_409ca703",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-21T02:53:31Z",
+      "side": 1,
+      "message": "please add `\u003cxliff:g id\u003d\"PORT\"\u003e%d\u003c/xliff:g\u003e` for formatting as @jaewan mentioned.",
+      "range": {
+        "startLine": 55,
+        "startChar": 97,
+        "endLine": 55,
+        "endChar": 100
+      },
+      "revId": "5e19d110883d015fa8432eb4ca86b61316e834ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f0d642f_eef91b05",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-21T02:53:31Z",
+      "side": 1,
+      "message": "maybe nbsp",
+      "parentUuid": "44d5154c_0271a880",
       "range": {
         "startLine": 55,
         "startChar": 90,
