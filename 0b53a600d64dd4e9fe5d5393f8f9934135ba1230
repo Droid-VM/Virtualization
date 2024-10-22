@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55ec774c_5d44e24d",
+        "filename": "android/TerminalApp/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2024-10-22T15:29:50Z",
+      "side": 1,
+      "message": "If you\u0027re introducing Kotlin + Jetpack + Material usage, it\u0027s probably a good idea to also enable `optimize: true` in this block, to enable more aggressive bytecode optimizations and shrinking.",
+      "range": {
+        "startLine": 21,
+        "startChar": 8,
+        "endLine": 21,
+        "endChar": 28
+      },
+      "revId": "0b53a600d64dd4e9fe5d5393f8f9934135ba1230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
