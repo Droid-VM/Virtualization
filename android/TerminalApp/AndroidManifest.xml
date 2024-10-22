@@ -20,7 +20,7 @@
         android:usesCleartextTraffic="true"
         android:enabled="false">
         <activity android:name=".MainActivity"
-                  android:configChanges="orientation|screenSize|keyboard|keyboardHidden|navigation|uiMode|screenLayout|smallestScreenSize"
+                  android:configChanges="orientation|screenSize|keyboard|keyboardHidden|navigation|uiMode|screenLayout|smallestScreenSize|fontScale|fontWeightAdjustment"
                   android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
