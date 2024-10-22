@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6de901a0_63698019",
+        "filename": "guest/pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-22T15:19:29Z",
+      "side": 1,
+      "message": "This `size` is now redundant and doesn\u0027t reflect the failing HVC issued so remove?",
+      "range": {
+        "startLine": 114,
+        "startChar": 33,
+        "endLine": 114,
+        "endChar": 39
+      },
+      "revId": "ba43ec0ff8f8758dfb3c8db2dbc738a9ea7d72b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7feaa1f_63891906",
+        "filename": "guest/pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-22T15:19:29Z",
+      "side": 1,
+      "message": "\"`granule`\" and drop the `size` field altogether?\n\nAlthough as we\u0027re reworking this error, it might make sense to print the IPA, expected PA, and received PA instead? I don\u0027t think that\u0027d leak anything as it\u0027s configured by the VMM anyway.",
+      "range": {
+        "startLine": 118,
+        "startChar": 49,
+        "endLine": 118,
+        "endChar": 56
+      },
+      "revId": "ba43ec0ff8f8758dfb3c8db2dbc738a9ea7d72b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ccfa59c_6451d57c",
+        "filename": "guest/pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-22T15:19:29Z",
+      "side": 1,
+      "message": "Should we check that `reg.size % granule \u003d\u003d 0`?",
+      "range": {
+        "startLine": 769,
+        "startChar": 22,
+        "endLine": 769,
+        "endChar": 24
+      },
+      "revId": "ba43ec0ff8f8758dfb3c8db2dbc738a9ea7d72b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cd9a5c9_48023c9b",
+        "filename": "guest/pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-22T15:19:29Z",
+      "side": 1,
+      "message": "`the MMIO granule`",
+      "range": {
+        "startLine": 770,
+        "startChar": 69,
+        "endLine": 770,
+        "endChar": 93
+      },
+      "revId": "ba43ec0ff8f8758dfb3c8db2dbc738a9ea7d72b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7059ef63_56187ea6",
+        "filename": "guest/pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1178,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-22T15:19:29Z",
+      "side": 1,
+      "message": "Does `libpvmfw.device_assignment.test` still pass? Presubmit will tell us.\n\nI think you also have to change the tests using the `MockHypervisor` (and its `struct`).",
+      "range": {
+        "startLine": 1178,
+        "startChar": 82,
+        "endLine": 1178,
+        "endChar": 83
+      },
+      "revId": "ba43ec0ff8f8758dfb3c8db2dbc738a9ea7d72b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "060b6522_7cb11ace",
+        "filename": "libs/libvmbase/src/hyp/hypervisor/kvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-22T15:19:29Z",
+      "side": 1,
+      "message": "I don\u0027t think you need this; let me push a patch you can squash into this one that removes the need for this hunk.",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 5
+      },
+      "revId": "ba43ec0ff8f8758dfb3c8db2dbc738a9ea7d72b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
