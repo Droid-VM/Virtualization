@@ -744,11 +744,14 @@ impl AssignedDeviceInfo {
         device_reg: &[DeviceReg],
         physical_device_reg: &[DeviceReg],
         hypervisor: &dyn DeviceAssigningHypervisor,
+        mmio_granule: usize,
     ) -> Result<()> {
         let mut virt_regs = device_reg.iter();
         let mut phys_regs = physical_device_reg.iter();
         // TODO(b/308694211): Move this constant to vmbase::layout once vmbase is std-compatible.
         const PVMFW_RANGE: Range<u64> = 0x7fc0_0000..0x8000_0000;
+        let _soon_to_be_used = mmio_granule;
+
         // PV reg and physical reg should have 1:1 match in order.
         for (reg, phys_reg) in virt_regs.by_ref().zip(phys_regs.by_ref()) {
             if reg.overlaps(&PVMFW_RANGE) {
@@ -857,6 +860,7 @@ impl AssignedDeviceInfo {
         physical_devices: &BTreeMap<Phandle, PhysicalDeviceInfo>,
         pviommus: &BTreeMap<Phandle, PvIommu>,
         hypervisor: &dyn DeviceAssigningHypervisor,
+        mmio_granule: usize,
     ) -> Result<Option<Self>> {
         let dtbo_node =
             vm_dtbo.node(dtbo_node_path)?.ok_or(DeviceAssignmentError::InvalidSymbols)?;
@@ -873,7 +877,7 @@ impl AssignedDeviceInfo {
         };
 
         let reg = parse_node_reg(&node)?;
-        Self::validate_reg(&reg, &physical_device.reg, hypervisor)?;
+        Self::validate_reg(&reg, &physical_device.reg, hypervisor, mmio_granule)?;
 
         let interrupts = Self::parse_interrupts(&node)?;
 
@@ -945,8 +949,9 @@ impl DeviceAssignmentInfo {
         fdt: &Fdt,
         vm_dtbo: &VmDtbo,
         hypervisor: &dyn DeviceAssigningHypervisor,
+        mmio_granule: usize,
     ) -> Result<Option<Self>> {
-        Self::internal_parse(fdt, vm_dtbo, hypervisor)
+        Self::internal_parse(fdt, vm_dtbo, hypervisor, mmio_granule)
     }
 
     #[cfg(not(test))]
@@ -957,14 +962,16 @@ impl DeviceAssignmentInfo {
         fdt: &Fdt,
         vm_dtbo: &VmDtbo,
         hypervisor: &dyn DeviceAssigningHypervisor,
+        mmio_granule: usize,
     ) -> Result<Option<Self>> {
-        Self::internal_parse(fdt, vm_dtbo, hypervisor)
+        Self::internal_parse(fdt, vm_dtbo, hypervisor, mmio_granule)
     }
 
     fn internal_parse(
         fdt: &Fdt,
         vm_dtbo: &VmDtbo,
         hypervisor: &dyn DeviceAssigningHypervisor,
+        mmio_granule: usize,
     ) -> Result<Option<Self>> {
         let Some(symbols_node) = vm_dtbo.as_ref().symbols()? else {
             // /__symbols__ should contain all assignable devices.
@@ -997,6 +1004,7 @@ impl DeviceAssignmentInfo {
                 &physical_devices,
                 &pviommus,
                 hypervisor,
+                mmio_granule,
             )?;
             if let Some(assigned_device) = assigned_device {
                 assigned_devices.push(assigned_device);
@@ -1255,7 +1263,9 @@ mod tests {
         let vm_dtbo = VmDtbo::from_mut_slice(&mut vm_dtbo_data).unwrap();
 
         let hypervisor: MockHypervisor = Default::default();
-        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor).unwrap();
+        const MMIO_GRANULE: usize = 0x1000;
+        let device_info =
+            DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor, MMIO_GRANULE).unwrap();
         assert_eq!(device_info, None);
     }
 
@@ -1267,7 +1277,9 @@ mod tests {
         let vm_dtbo = VmDtbo::from_mut_slice(&mut vm_dtbo_data).unwrap();
 
         let hypervisor: MockHypervisor = Default::default();
-        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor).unwrap();
+        const MMIO_GRANULE: usize = 0x1000;
+        let device_info =
+            DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor, MMIO_GRANULE).unwrap();
         assert_eq!(device_info, None);
     }
 
@@ -1282,7 +1294,9 @@ mod tests {
             mmio_tokens: [((0x9, 0xFF), 0x300)].into(),
             iommu_tokens: BTreeMap::new(),
         };
-        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor).unwrap().unwrap();
+        const MMIO_GRANULE: usize = 0x1000;
+        let device_info =
+            DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor, MMIO_GRANULE).unwrap().unwrap();
 
         let expected = [AssignedDeviceInfo {
             node_path: CString::new("/bus0/backlight").unwrap(),
@@ -1305,7 +1319,9 @@ mod tests {
             mmio_tokens: [((0x9, 0xFF), 0x12F00000)].into(),
             iommu_tokens: [((0x4, 0xFF0), (0x12E40000, 0x3))].into(),
         };
-        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor).unwrap().unwrap();
+        const MMIO_GRANULE: usize = 0x1000;
+        let device_info =
+            DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor, MMIO_GRANULE).unwrap().unwrap();
 
         let expected = [AssignedDeviceInfo {
             node_path: CString::new("/rng").unwrap(),
@@ -1328,7 +1344,9 @@ mod tests {
             mmio_tokens: [((0x9, 0xFF), 0x12F00000)].into(),
             iommu_tokens: [((0x4, 0xFF0), (0x12E40000, 0x3))].into(),
         };
-        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor).unwrap().unwrap();
+        const MMIO_GRANULE: usize = 0x1000;
+        let device_info =
+            DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor, MMIO_GRANULE).unwrap().unwrap();
         device_info.filter(vm_dtbo).unwrap();
 
         let vm_dtbo = vm_dtbo.as_mut();
@@ -1369,7 +1387,9 @@ mod tests {
             mmio_tokens: [((0x9, 0xFF), 0x300)].into(),
             iommu_tokens: BTreeMap::new(),
         };
-        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor).unwrap().unwrap();
+        const MMIO_GRANULE: usize = 0x1000;
+        let device_info =
+            DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor, MMIO_GRANULE).unwrap().unwrap();
         device_info.filter(vm_dtbo).unwrap();
 
         // SAFETY: Damaged VM DTBO wouldn't be used after this unsafe block.
@@ -1420,7 +1440,9 @@ mod tests {
             mmio_tokens: [((0x9, 0xFF), 0x300)].into(),
             iommu_tokens: BTreeMap::new(),
         };
-        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor).unwrap().unwrap();
+        const MMIO_GRANULE: usize = 0x1000;
+        let device_info =
+            DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor, MMIO_GRANULE).unwrap().unwrap();
         device_info.filter(vm_dtbo).unwrap();
 
         // SAFETY: Damaged VM DTBO wouldn't be used after this unsafe block.
@@ -1455,7 +1477,9 @@ mod tests {
             mmio_tokens: [((0x9, 0xFF), 0x12F00000)].into(),
             iommu_tokens: [((0x4, 0xFF0), (0x12E40000, 0x3))].into(),
         };
-        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor).unwrap().unwrap();
+        const MMIO_GRANULE: usize = 0x1000;
+        let device_info =
+            DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor, MMIO_GRANULE).unwrap().unwrap();
         device_info.filter(vm_dtbo).unwrap();
 
         // SAFETY: Damaged VM DTBO wouldn't be used after this unsafe block.
@@ -1503,7 +1527,9 @@ mod tests {
             ]
             .into(),
         };
-        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor).unwrap().unwrap();
+        const MMIO_GRANULE: usize = 0x1000;
+        let device_info =
+            DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor, MMIO_GRANULE).unwrap().unwrap();
         device_info.filter(vm_dtbo).unwrap();
 
         // SAFETY: Damaged VM DTBO wouldn't be used after this unsafe block.
@@ -1550,7 +1576,9 @@ mod tests {
             mmio_tokens: [((0x9, 0xFF), 0x12F00000), ((0x1000, 0x9), 0x12000000)].into(),
             iommu_tokens: [((0x4, 0xFF0), (0x12E40000, 3)), ((0x4, 0xFF1), (0x12E40000, 9))].into(),
         };
-        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor).unwrap().unwrap();
+        const MMIO_GRANULE: usize = 0x1000;
+        let device_info =
+            DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor, MMIO_GRANULE).unwrap().unwrap();
         device_info.filter(vm_dtbo).unwrap();
 
         // SAFETY: Damaged VM DTBO wouldn't be used after this unsafe block.
@@ -1594,7 +1622,8 @@ mod tests {
             mmio_tokens: [((0x9, 0xFF), 0x300)].into(),
             iommu_tokens: [((0x4, 0xFF0), (0x12E40000, 0x3))].into(),
         };
-        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor);
+        const MMIO_GRANULE: usize = 0x1000;
+        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor, MMIO_GRANULE);
 
         assert_eq!(device_info, Err(DeviceAssignmentError::DuplicatedPvIommuIds));
     }
@@ -1610,7 +1639,8 @@ mod tests {
             mmio_tokens: BTreeMap::new(),
             iommu_tokens: [((0x4, 0xFF0), (0x12E40000, 0x3))].into(),
         };
-        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor);
+        const MMIO_GRANULE: usize = 0x1000;
+        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor, MMIO_GRANULE);
 
         assert_eq!(device_info, Err(DeviceAssignmentError::InvalidReg(0x9, 0xFF)));
     }
@@ -1626,7 +1656,8 @@ mod tests {
             mmio_tokens: [((0xF000, 0x1000), 0xF10000), ((0xF100, 0x1000), 0xF00000)].into(),
             iommu_tokens: [((0xFF0, 0xF0), (0x40000, 0x4)), ((0xFF1, 0xF1), (0x50000, 0x5))].into(),
         };
-        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor);
+        const MMIO_GRANULE: usize = 0x1000;
+        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor, MMIO_GRANULE);
 
         assert_eq!(device_info, Err(DeviceAssignmentError::InvalidPhysReg(0xF10000, 0x1000)));
     }
@@ -1642,7 +1673,8 @@ mod tests {
             mmio_tokens: [((0x9, 0xFF), 0x12F00000)].into(),
             iommu_tokens: BTreeMap::new(),
         };
-        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor);
+        const MMIO_GRANULE: usize = 0x1000;
+        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor, MMIO_GRANULE);
 
         assert_eq!(device_info, Err(DeviceAssignmentError::InvalidIommus));
     }
@@ -1658,7 +1690,8 @@ mod tests {
             mmio_tokens: [((0x10000, 0x1000), 0xF00000), ((0x20000, 0xFF), 0xF10000)].into(),
             iommu_tokens: [((0xFF, 0xF), (0x40000, 0x4))].into(),
         };
-        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor);
+        const MMIO_GRANULE: usize = 0x1000;
+        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor, MMIO_GRANULE);
 
         assert_eq!(device_info, Err(DeviceAssignmentError::DuplicatedPvIommuIds));
     }
@@ -1674,7 +1707,8 @@ mod tests {
             mmio_tokens: [((0x10000, 0x1000), 0xF00000), ((0x20000, 0xFF), 0xF10000)].into(),
             iommu_tokens: [((0xFF, 0xF), (0x40000, 0x4))].into(),
         };
-        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor);
+        const MMIO_GRANULE: usize = 0x1000;
+        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor, MMIO_GRANULE);
 
         assert_eq!(device_info, Err(DeviceAssignmentError::UnsupportedIommusDuplication));
     }
@@ -1690,7 +1724,8 @@ mod tests {
             mmio_tokens: [((0xF000, 0x1000), 0xF00000), ((0xF100, 0x1000), 0xF10000)].into(),
             iommu_tokens: [((0xFF0, 0xF0), (0x40000, 0x4)), ((0xFF1, 0xF1), (0x40000, 0x4))].into(),
         };
-        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor);
+        const MMIO_GRANULE: usize = 0x1000;
+        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor, MMIO_GRANULE);
 
         assert_eq!(device_info, Err(DeviceAssignmentError::InvalidIommus));
     }
@@ -1706,7 +1741,8 @@ mod tests {
             mmio_tokens: [((0x7fee0000, 0x1000), 0xF00000)].into(),
             iommu_tokens: [((0xFF, 0xF), (0x40000, 0x4))].into(),
         };
-        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor);
+        const MMIO_GRANULE: usize = 0x1000;
+        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor, MMIO_GRANULE);
 
         assert_eq!(device_info, Err(DeviceAssignmentError::InvalidReg(0x7fee0000, 0x1000)));
     }
@@ -1741,7 +1777,9 @@ mod tests {
             iommu_tokens: Default::default(),
         };
 
-        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor).unwrap().unwrap();
+        const MMIO_GRANULE: usize = 0x1000;
+        let device_info =
+            DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor, MMIO_GRANULE).unwrap().unwrap();
         device_info.filter(vm_dtbo).unwrap();
 
         // SAFETY: Damaged VM DTBO wouldn't be used after this unsafe block.
@@ -1771,7 +1809,9 @@ mod tests {
             mmio_tokens: [((0xFF000, 0x1), 0xF000), ((0xFF100, 0x1), 0xF100)].into(),
             iommu_tokens: Default::default(),
         };
-        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor).unwrap().unwrap();
+        const MMIO_GRANULE: usize = 0x1000;
+        let device_info =
+            DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor, MMIO_GRANULE).unwrap().unwrap();
         device_info.filter(vm_dtbo).unwrap();
 
         // SAFETY: Damaged VM DTBO wouldn't be used after this unsafe block.
@@ -1802,7 +1842,9 @@ mod tests {
             mmio_tokens: [((0xFF200, 0x1), 0xF200)].into(),
             iommu_tokens: Default::default(),
         };
-        let device_info = DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor).unwrap().unwrap();
+        const MMIO_GRANULE: usize = 0x1000;
+        let device_info =
+            DeviceAssignmentInfo::parse(fdt, vm_dtbo, &hypervisor, MMIO_GRANULE).unwrap().unwrap();
         device_info.filter(vm_dtbo).unwrap();
 
         // SAFETY: Damaged VM DTBO wouldn't be used after this unsafe block.

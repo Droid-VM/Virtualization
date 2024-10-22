@@ -1148,10 +1148,22 @@ fn parse_device_tree(fdt: &Fdt, vm_dtbo: Option<&VmDtbo>) -> Result<DeviceTreeIn
     let device_assignment = match vm_dtbo {
         Some(vm_dtbo) => {
             if let Some(hypervisor) = hyp::get_device_assigner() {
-                DeviceAssignmentInfo::parse(fdt, vm_dtbo, hypervisor).map_err(|e| {
-                    error!("Failed to parse device assignment from DT and VM DTBO: {e}");
-                    RebootReason::InvalidFdt
-                })?
+                let mmio_granule = hyp::get_mmio_guard()
+                    .ok_or_else(|| {
+                        error!("No MMIO guard found during device assignment validation");
+                        RebootReason::InternalError
+                    })?
+                    .granule()
+                    .map_err(|e| {
+                        error!("Failed to get MMIO granule for device assignment validation: {e}");
+                        RebootReason::InternalError
+                    })?;
+                DeviceAssignmentInfo::parse(fdt, vm_dtbo, hypervisor, mmio_granule).map_err(
+                    |e| {
+                        error!("Failed to parse device assignment from DT and VM DTBO: {e}");
+                        RebootReason::InvalidFdt
+                    },
+                )?
             } else {
                 warn!(
                     "Device assignment is ignored because device assigning hypervisor is missing"
