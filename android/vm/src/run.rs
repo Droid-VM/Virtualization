@@ -160,6 +160,7 @@ pub fn command_run_app(config: RunAppConfig) -> Result<(), Error> {
             })
             .collect::<Result<_, _>>()?,
         networkSupported: config.common.network_supported(),
+        secureServices: config.common.secure_services().to_vec(),
         ..Default::default()
     };
 
@@ -267,8 +268,8 @@ pub fn command_run(config: RunCustomVmConfig) -> Result<(), Error> {
     if let Some(mem) = config.common.mem {
         vm_config.memoryMib = mem as i32;
     }
-    if let Some(name) = config.common.name {
-        vm_config.name = name;
+    if let Some(ref name) = config.common.name {
+        vm_config.name = name.to_string();
     } else {
         vm_config.name = String::from("VmRun");
     }
@@ -278,6 +279,7 @@ pub fn command_run(config: RunCustomVmConfig) -> Result<(), Error> {
     vm_config.cpuTopology = config.common.cpu_topology;
     vm_config.hugePages = config.common.hugepages;
     vm_config.boostUclamp = config.common.boost_uclamp;
+    vm_config.secureServices = config.common.secure_services().to_vec();
     run(
         get_service()?.as_ref(),
         &VirtualMachineConfig::RawConfig(vm_config),

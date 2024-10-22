@@ -72,6 +72,11 @@ pub struct CommonConfig {
     /// Boost uclamp to stablise results for benchmarks.
     #[arg(short, long)]
     boost_uclamp: bool,
+
+    /// Secure services this VM wants to access.
+    #[cfg(secure_services_allowlist)]
+    #[arg(long)]
+    secure_services: Vec<String>,
 }
 
 impl CommonConfig {
@@ -81,6 +86,16 @@ impl CommonConfig {
                 self.network_supported
             } else {
                 false
+            }
+        }
+    }
+
+    fn secure_services(&self) -> &[String] {
+        cfg_if::cfg_if! {
+            if #[cfg(secure_services_allowlist)] {
+                &self.secure_services
+            } else {
+                &[]
             }
         }
     }
