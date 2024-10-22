@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d746566_2a4aece6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-22T08:19:51Z",
+      "side": 1,
+      "message": "Talked with jiyong offline and here\u0027s a brief summary of changes:\n  - Behavior: If app is in background, download will ongoing. If app is dismissed from recent task, then download should pause (or stop). \n  - Structure: MainActivity does not need to be interact with installer service. Use InstallUtils directly.",
+      "revId": "f9b584fff127ab941c58397456e481d605537fbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
