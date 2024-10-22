@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44c47fef_5826a802",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-10-22T08:23:48Z",
+      "side": 1,
+      "message": "Unsafe Rust LGTM.",
+      "revId": "e33fd085f53ed0da7b2908efb4dda3ac773d7bcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cc92a49_e9e713a6",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 658,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-10-22T08:23:48Z",
+      "side": 1,
+      "message": "This cast is redundant.\n```suggestion\n                \u0026mut balloon_actual,\n```",
+      "revId": "e33fd085f53ed0da7b2908efb4dda3ac773d7bcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
