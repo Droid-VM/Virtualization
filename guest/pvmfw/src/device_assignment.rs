@@ -749,20 +749,35 @@ impl AssignedDeviceInfo {
         let mut phys_regs = physical_device_reg.iter();
         // TODO(b/308694211): Move this constant to vmbase::layout once vmbase is std-compatible.
         const PVMFW_RANGE: Range<u64> = 0x7fc0_0000..0x8000_0000;
+        let granule: u64 = hypervisor
+            .granule()
+            .map_err(|e| {
+                error!("Can't get MMIO granule {e}");
+                DeviceAssignmentError::Internal
+            })?
+            .try_into()
+            .unwrap();
+
         // PV reg and physical reg should have 1:1 match in order.
         for (reg, phys_reg) in virt_regs.by_ref().zip(phys_regs.by_ref()) {
+            let mut off: u64 = 0;
+
             if reg.overlaps(&PVMFW_RANGE) {
                 return Err(DeviceAssignmentError::InvalidReg(reg.addr, reg.size));
             }
-            // If this call returns successfully, hyp has mapped the MMIO region at `reg`.
-            let addr = hypervisor.get_phys_mmio_token(reg.addr, reg.size).map_err(|e| {
-                error!("Hypervisor error while requesting MMIO token: {e}");
-                DeviceAssignmentError::InvalidReg(reg.addr, reg.size)
-            })?;
-            // Only check address because hypervisor guarantees size match when success.
-            if phys_reg.addr != addr {
-                error!("Assigned device {reg:x?} has unexpected physical address");
-                return Err(DeviceAssignmentError::InvalidPhysReg(addr, reg.size));
+
+            while off < reg.size {
+                // If this call returns successfully, hyp has mapped the MMIO region at `reg`.
+                let addr = hypervisor.get_phys_mmio_token(reg.addr + off).map_err(|e| {
+                    error!("Hypervisor error while requesting MMIO token: {e}");
+                    DeviceAssignmentError::InvalidReg(reg.addr, reg.size)
+                })?;
+                // Only check address because hypervisor guarantees size match when success.
+                if phys_reg.addr + off != addr {
+                    error!("Assigned device {reg:x?} has unexpected physical address");
+                    return Err(DeviceAssignmentError::InvalidPhysReg(addr, reg.size));
+                }
+                off += granule;
             }
         }
 
@@ -1109,7 +1124,7 @@ impl fmt::Display for MockHypervisorError {
 #[cfg(test)]
 trait DeviceAssigningHypervisor {
     /// Returns MMIO token.
-    fn get_phys_mmio_token(&self, base_ipa: u64, size: u64) -> MockHypervisorResult<u64>;
+    fn get_phys_mmio_token(&self, base_ipa: u64) -> MockHypervisorResult<u64>;
 
     /// Returns DMA token as a tuple of (phys_iommu_id, phys_sid).
     fn get_phys_iommu_token(&self, pviommu_id: u64, vsid: u64) -> MockHypervisorResult<(u64, u64)>;
@@ -1160,8 +1175,8 @@ mod tests {
     }
 
     impl DeviceAssigningHypervisor for MockHypervisor {
-        fn get_phys_mmio_token(&self, base_ipa: u64, size: u64) -> MockHypervisorResult<u64> {
-            let token = self.mmio_tokens.get(&(base_ipa, size));
+        fn get_phys_mmio_token(&self, base_ipa: u64) -> MockHypervisorResult<u64> {
+            let token = self.mmio_tokens.get(&(base_ipa));
 
             Ok(*token.ok_or(MockHypervisorError::FailedGetPhysMmioToken)?)
         }
