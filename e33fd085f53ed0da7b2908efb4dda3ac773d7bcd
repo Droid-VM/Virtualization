@@ -33,6 +33,24 @@
       "message": "This cast is redundant.\n```suggestion\n                \u0026mut balloon_actual,\n```",
       "revId": "e33fd085f53ed0da7b2908efb4dda3ac773d7bcd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e891201_e5efdde8",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 658,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-10-22T22:44:45Z",
+      "side": 1,
+      "message": "huh, TIL https://doc.rust-lang.org/std/primitive.pointer.html#1-coerce-a-reference-t-or-mutable-reference-mut-t\n\nDone",
+      "parentUuid": "2cc92a49_e9e713a6",
+      "revId": "e33fd085f53ed0da7b2908efb4dda3ac773d7bcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
