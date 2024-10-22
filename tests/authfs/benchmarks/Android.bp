@@ -19,7 +19,7 @@ java_test_host {
         "open_then_run",
     ],
     per_testcase_directory: true,
-    data: [
+    device_common_data: [
         ":authfs_test_files",
         ":MicrodroidTestApp",
     ],
@@ -44,7 +44,7 @@ java_genrule {
     name: "measure_io_as_jar",
     out: ["measure_io.jar"],
     srcs: [
-        ":measure_io",
+        //":measure_io",
     ],
     tools: ["soong_zip"],
     cmd: "mkdir -p $(genDir)/bin" +
