@@ -137,6 +137,30 @@
       },
       "revId": "ba43ec0ff8f8758dfb3c8db2dbc738a9ea7d72b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86cf521e_2bddc805",
+        "filename": "libs/libvmbase/src/hyp/hypervisor/kvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-22T15:48:27Z",
+      "side": 1,
+      "message": "aosp/3314797 is probably the cleanest way without deeper refactoring as `parse_device_tree()` is called before the `MmioSharer` is available. Note that it uses the `MMIO_GUARD` granule instead of the `MEM_SHARE` granule, which feels more appropriate for validating assigned MMIO.",
+      "parentUuid": "060b6522_7cb11ace",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 5
+      },
+      "revId": "ba43ec0ff8f8758dfb3c8db2dbc738a9ea7d72b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
