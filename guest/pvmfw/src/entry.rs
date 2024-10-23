@@ -14,17 +14,32 @@
 
 //! Low-level entry and exit points of pvmfw.
 
+#![allow(unused_imports)]
+#![allow(dead_code)]
+#![allow(unused_variables)]
+
 use crate::config;
 use crate::memory;
+use crate::uefi;
+use crate::uefi::SYSTEM_TABLE;
+use crate::uefi_deps;
+use crate::uefi_deps::AllocateType;
+use crate::uefi_deps::BootServices;
+use crate::uefi_deps::MemoryType;
+use crate::uefi_deps::SystemTable;
 use core::arch::asm;
 use core::mem::{drop, size_of};
 use core::ops::Range;
+use core::ptr::addr_of_mut;
 use core::slice;
 use hypervisor_backends::get_mmio_guard;
 use log::error;
 use log::info;
 use log::warn;
 use log::LevelFilter;
+use pvmfw_avb::verify_payload;
+use pvmfw_avb::Capability;
+use pvmfw_embedded_key::PUBLIC_KEY;
 use vmbase::util::RangeExt as _;
 use vmbase::{
     arch::aarch64::min_dcache_line_size,
@@ -81,7 +96,13 @@ pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, _arg3: u64
     // - can't access MMIO (except the console, already configured by vmbase)
 
     match main_wrapper(fdt_address as usize, payload_start as usize, payload_size as usize) {
-        Ok((entry, bcc)) => jump_to_payload(fdt_address, entry.try_into().unwrap(), bcc),
+        Ok((entry, bcc, use_uefi)) => {
+            if use_uefi {
+                jump_to_payload_with_efi_stub(fdt_address, entry.try_into().unwrap(), bcc)
+            } else {
+                jump_to_payload(fdt_address, entry.try_into().unwrap(), bcc);
+            }
+        }
         Err(e) => {
             const REBOOT_REASON_CONSOLE: usize = 1;
             console_writeln!(REBOOT_REASON_CONSOLE, "{}", e.as_avf_reboot_string());
@@ -100,7 +121,7 @@ fn main_wrapper(
     fdt: usize,
     payload: usize,
     payload_size: usize,
-) -> Result<(usize, Range<usize>), RebootReason> {
+) -> Result<(usize, Range<usize>, bool), RebootReason> {
     // Limitations in this function:
     // - only access MMIO once (and while) it has been mapped and configured
     // - only perform logging once the logger has been initialized
@@ -141,7 +162,7 @@ fn main_wrapper(
     )?;
 
     // This wrapper allows main() to be blissfully ignorant of platform details.
-    let (next_bcc, debuggable_payload) = crate::main(
+    let (next_bcc, debuggable_payload, use_uefi) = crate::main(
         slices.fdt,
         slices.kernel,
         slices.ramdisk,
@@ -174,7 +195,7 @@ fn main_wrapper(
     // Drop MemoryTracker and deactivate page table.
     drop(MEMORY.lock().take());
 
-    Ok((slices.kernel.as_ptr() as usize, next_bcc))
+    Ok((slices.kernel.as_ptr() as usize, next_bcc, use_uefi))
 }
 
 fn jump_to_payload(fdt_address: u64, payload_start: u64, bcc: Range<usize>) -> ! {
@@ -301,6 +322,32 @@ fn jump_to_payload(fdt_address: u64, payload_start: u64, bcc: Range<usize>) -> !
     };
 }
 
+fn jump_to_payload_with_efi_stub(fdt_address: u64, payload_start: u64, bcc: Range<usize>) -> ! {
+    let image_handle: usize = 0x19ef_781b;
+    // SAFETY: TODO.
+    let system_table: *mut SystemTable = unsafe { addr_of_mut!(SYSTEM_TABLE) };
+
+    // TODO(nikolinailic): clear the secrets before we enter the payload
+
+    // Don't zero all memory that could hold secrets and that can't be safely written to from Rust,
+    // as we want to have all structures passed to the EFI kernel still "alive". Jump to the payload
+    // at the given address, passing it the given image handle according to the UEFI spec.
+    //
+    // SAFETY: We're exiting pvmfw by passing the register values we need to a return asm!().
+    unsafe {
+        asm!(
+            "blr x30",
+            in("x0") image_handle,
+            in("x1") system_table,
+            in("x30") payload_start,
+        );
+    };
+    // Tell the compiler to reboot if payload returns.
+    const REBOOT_REASON_CONSOLE: usize = 1;
+    console_writeln!(REBOOT_REASON_CONSOLE, "{}", "PVM_FIRMWARE_EFI_STUB_RETURN_TO_PAYLOAD_FAILED");
+    reboot()
+}
+
 /// # Safety
 ///
 /// This must only be called once, since we are returning a mutable reference.
@@ -354,3 +401,53 @@ impl<'a> AppendedPayload<'a> {
         }
     }
 }
+
+// fn init_system_table() {
+//     let system_table_ptr: *mut uefi_deps::SystemTable;
+
+//     // SAFETY: We're matching static variable of system table with value provided by the client
+// in     // register x1.
+//     unsafe {
+//         asm!(
+//             "mov {0}, x1",
+//             out(reg) system_table_ptr,
+//             options(nomem, nostack, preserves_flags)
+//         )
+//     }
+
+//     if system_table_ptr.is_null() {
+//         panic!("System table is not initialized!");
+//     }
+
+//     // SYSTEM_TABLE.store(system_table_ptr, core::sync::atomic::Ordering::SeqCst);
+// }
+
+// fn init_boot_services() {
+//     // SAFETY: Access the system table safely after ensuring it's initialized.
+//     let system_table_ptr: *mut uefi_deps::SystemTable =
+//         SYSTEM_TABLE.load(core::sync::atomic::Ordering::SeqCst);
+
+//     if system_table_ptr.is_null() {
+//         panic!("System table is not initialized!");
+//     }
+
+//     // SAFETY: Access the system table, assuming it's valid.
+//     let system_table: &mut SystemTable = unsafe { &mut *system_table_ptr };
+
+//     // SAFETY: Modify the boot services in the system table.
+//     let boot_services: &mut BootServices = unsafe { &mut *system_table.boot_services };
+
+//     // Set the API function pointers to boot services in the boot services table.
+//     boot_services.allocate_pages = allocate_pages;
+// }
+
+// unsafe extern "efiapi" fn allocate_pages(
+//     _alloc_ty: u32,
+//     _mem_ty: MemoryType,
+//     _count: usize,
+//     _addr: *mut crate::uefi_deps::PhysicalAddress,
+// ) -> crate::uefi_deps::Status {
+//     log_boot_service_call("AllocatePages");
+
+//     crate::uefi_deps::Status::SUCCESS
+// }
