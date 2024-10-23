@@ -31,6 +31,8 @@ mod gpt;
 mod helpers;
 mod instance;
 mod memory;
+mod uefi;
+mod uefi_deps;
 
 use crate::bcc::Bcc;
 use crate::dice::PartialInputs;
@@ -67,7 +69,7 @@ fn main(
     ramdisk: Option<&[u8]>,
     current_bcc_handover: &[u8],
     mut debug_policy: Option<&[u8]>,
-) -> Result<(Range<usize>, bool), RebootReason> {
+) -> Result<(Range<usize>, bool, bool), RebootReason> {
     info!("pVM firmware");
     debug!("FDT: {:?}", fdt.as_ptr());
     debug!("Signed kernel: {:?} ({:#x} bytes)", signed_kernel.as_ptr(), signed_kernel.len());
@@ -128,8 +130,11 @@ fn main(
         RebootReason::InternalError
     })?;
 
+    // Indicates whether to use EFI stub for booting.
+    let mut use_uefi: bool = false;
     if verified_boot_data.has_capability(Capability::SupportsUefiBoot) {
         info!("Guest kernel supports UEFI standard.");
+        use_uefi = true;
     } else {
         debug!("Guest kernel does not support UEFI standard.");
     }
@@ -248,7 +253,7 @@ fn main(
         (r.start as usize)..(r.end as usize)
     };
 
-    Ok((bcc_range, debuggable))
+    Ok((bcc_range, debuggable, use_uefi))
 }
 
 fn check_dice_measurements_match_entry(
