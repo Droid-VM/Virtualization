@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4848a701_b671c30b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-10-23T23:41:25Z",
+      "side": 1,
+      "message": "These changes are because there is a module that depends on one of the avb module types, and the avb module types are `compile_multilib: \"first\"` by default. I think I didn\u0027t see this before because I was testing on a 64-bit only device.",
+      "revId": "2b94409adc74d01ff74561c7723ab1231346d7ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
