@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "239072be_31416837",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-23T11:43:52Z",
+      "side": 1,
+      "message": "I don\u0027t think you need to wrap every code fragments you add with the flag. Guarding only the entrypoint should be enough, I believe.",
+      "parentUuid": "136c481f_d3ef2493",
+      "range": {
+        "startLine": 617,
+        "startChar": 27,
+        "endLine": 617,
+        "endChar": 93
+      },
+      "revId": "60d20638dec511a08394aacca30832ed6fe92a7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebacb8d9_f2106675",
         "filename": "android/virtmgr/src/crosvm.rs",
         "patchSetId": 1
