@@ -40,6 +40,7 @@ import android.os.PersistableBundle;
 import android.sysprop.HypervisorProperties;
 import android.system.virtualizationservice.DiskImage;
 import android.system.virtualizationservice.Partition;
+import android.system.virtualizationservice.SharedPath;
 import android.system.virtualizationservice.UsbConfig;
 import android.system.virtualizationservice.VirtualMachineAppConfig;
 import android.system.virtualizationservice.VirtualMachinePayloadConfig;
@@ -710,6 +711,24 @@ public final class VirtualMachineConfig {
                 partitions.add(part);
             }
             config.disks[i].partitions = partitions.toArray(new Partition[0]);
+        }
+
+        config.sharedPaths =
+                new SharedPath
+                        [Optional.ofNullable(customImageConfig.getSharedPaths())
+                                .map(arr -> arr.length)
+                                .orElse(0)];
+        for (int i = 0; i < config.sharedPaths.length; i++) {
+            config.sharedPaths[i] = new SharedPath();
+            config.sharedPaths[i].sharedPath =
+                    customImageConfig.getSharedPaths()[i].getSharedPath();
+            config.sharedPaths[i].hostUid = customImageConfig.getSharedPaths()[i].getHostUid();
+            config.sharedPaths[i].hostGid = customImageConfig.getSharedPaths()[i].getHostGid();
+            config.sharedPaths[i].guestUid = customImageConfig.getSharedPaths()[i].getGuestUid();
+            config.sharedPaths[i].guestGid = customImageConfig.getSharedPaths()[i].getGuestGid();
+            config.sharedPaths[i].mask = customImageConfig.getSharedPaths()[i].getMask();
+            config.sharedPaths[i].tag = customImageConfig.getSharedPaths()[i].getTag();
+            config.sharedPaths[i].socket = customImageConfig.getSharedPaths()[i].getSocket();
         }
 
         config.displayConfig =
