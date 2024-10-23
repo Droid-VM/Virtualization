@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a72b31e5_9c5d2475",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-23T08:44:01Z",
+      "side": 1,
+      "message": "you may address my comments in a follow-up change.\n\nthanks!",
+      "revId": "60d20638dec511a08394aacca30832ed6fe92a7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "587164c8_48ca5bf0",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 1
@@ -19,6 +36,93 @@
         "startChar": 27,
         "endLine": 617,
         "endChar": 93
+      },
+      "revId": "60d20638dec511a08394aacca30832ed6fe92a7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa2a9012_90394615",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-23T08:44:01Z",
+      "side": 1,
+      "message": "this has nothing to do with paravirtualized devices, does it?",
+      "parentUuid": "587164c8_48ca5bf0",
+      "range": {
+        "startLine": 617,
+        "startChar": 27,
+        "endLine": 617,
+        "endChar": 93
+      },
+      "revId": "60d20638dec511a08394aacca30832ed6fe92a7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebacb8d9_f2106675",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-23T08:44:01Z",
+      "side": 1,
+      "message": "This check appears to be unnecessary because run-virtiofs iterates over the vector.",
+      "range": {
+        "startLine": 323,
+        "startChar": 0,
+        "endLine": 323,
+        "endChar": 48
+      },
+      "revId": "60d20638dec511a08394aacca30832ed6fe92a7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfd9a33b_45fa08c6",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 931,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-23T08:44:01Z",
+      "side": 1,
+      "message": "We\u0027d like to kill this when the VM is stopped.",
+      "revId": "60d20638dec511a08394aacca30832ed6fe92a7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2b27155_29b38e2c",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1241,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-23T08:44:01Z",
+      "side": 1,
+      "message": "no need",
+      "range": {
+        "startLine": 1241,
+        "startChar": 4,
+        "endLine": 1241,
+        "endChar": 40
       },
       "revId": "60d20638dec511a08394aacca30832ed6fe92a7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
