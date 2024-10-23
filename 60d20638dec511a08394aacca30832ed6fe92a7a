@@ -1,0 +1,91 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "587164c8_48ca5bf0",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-23T06:44:09Z",
+      "side": 1,
+      "message": "how about enabling it when paravirtualized_devices flag is on",
+      "range": {
+        "startLine": 617,
+        "startChar": 27,
+        "endLine": 617,
+        "endChar": 93
+      },
+      "revId": "60d20638dec511a08394aacca30832ed6fe92a7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89f799c0_f132c7dd",
+        "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-23T06:44:09Z",
+      "side": 1,
+      "message": "please include SharedPath here",
+      "range": {
+        "startLine": 229,
+        "startChar": 22,
+        "endLine": 229,
+        "endChar": 41
+      },
+      "revId": "60d20638dec511a08394aacca30832ed6fe92a7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0173041_6a638947",
+        "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-23T06:44:09Z",
+      "side": 1,
+      "message": "maybe we want `android.system.virtualizationservice.SharedPath toParcelable()` method to convert AIDL-defined SharedPath",
+      "range": {
+        "startLine": 311,
+        "startChar": 30,
+        "endLine": 311,
+        "endChar": 40
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "14c95288_2f365d26",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+              "range": {
+                "startLine": 379,
+                "startChar": 0,
+                "endLine": 379,
+                "endChar": 0
+              },
+              "replacement": "\n        android.system.virtualizationservice.SharedPath toParcelable() {\n            android.system.virtualizationservice.SharedPath parcelable \u003d\n                    new android.system.virtualizationservice.SharedPath();\n            parcelable.path \u003d this.path;\n            parcelable.hostUid \u003d this.hostUid;\n            parcelable.hostGid \u003d this.hostGid;\n            parcelable.guestUid \u003d this.guestUid;\n            parcelable.guestGid \u003d this.guestGid;\n            parcelable.mask \u003d this.mask;\n            parcelable.tag \u003d this.tag;\n            parcelable.socket \u003d this.socket;\n            return parcelable;\n        }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "60d20638dec511a08394aacca30832ed6fe92a7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
