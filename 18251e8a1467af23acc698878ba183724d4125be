@@ -64,6 +64,30 @@
       },
       "revId": "18251e8a1467af23acc698878ba183724d4125be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b805d647_a2c5d59d",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-23T02:17:29Z",
+      "side": 1,
+      "message": "Thank you for spotting this. I removed configChanges instead, so other UI elements can also refreshed. (I did opposite)",
+      "parentUuid": "2aa8faad_29ff75e2",
+      "range": {
+        "startLine": 132,
+        "startChar": 16,
+        "endLine": 132,
+        "endChar": 37
+      },
+      "revId": "18251e8a1467af23acc698878ba183724d4125be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
