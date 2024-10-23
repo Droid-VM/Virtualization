@@ -77,6 +77,8 @@ public class MainActivity extends AppCompatActivity
     private static final int TTYD_PORT = 7681;
     private static final int REQUEST_CODE_INSTALLER = 0x33;
     private static final int FONT_SIZE_DEFAULT = 12;
+    private static final int TEXT_CONTRAST_DEFAULT = 1;
+    private static final int TEXT_CONTRAST_HIGH = 7; // Minimum for WCAG AAA compliance
 
     private X509Certificate[] mCertificates;
     private PrivateKey mPrivateKey;
@@ -119,6 +121,8 @@ public class MainActivity extends AppCompatActivity
 
         mAccessibilityManager = getSystemService(AccessibilityManager.class);
         mAccessibilityManager.addTouchExplorationStateChangeListener(this);
+        // TODO(b/186567103): Add high contrast text listener when signature matches
+        //                    between AOSP and internal.
 
         connectToTerminalService();
         readClientCertificate();
@@ -140,7 +144,11 @@ public class MainActivity extends AppCompatActivity
                         + "&fontWeightBold="
                         + (FontStyle.FONT_WEIGHT_BOLD + config.fontWeightAdjustment)
                         + "&screenReaderMode="
-                        + mAccessibilityManager.isTouchExplorationEnabled();
+                        + mAccessibilityManager.isTouchExplorationEnabled()
+                        + "&minimumContrastRatio="
+                        + (mAccessibilityManager.isHighContrastTextEnabled()
+                                ? TEXT_CONTRAST_DEFAULT
+                                : TEXT_CONTRAST_HIGH);
 
         try {
             return new URL("https", VM_ADDR, TTYD_PORT, "/" + query);
@@ -349,7 +357,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onDestroy() {
-        getSystemService(AccessibilityManager.class).removeTouchExplorationStateChangeListener(this);
+        mAccessibilityManager.removeTouchExplorationStateChangeListener(this);
         VmLauncherServices.stopVmLauncherService(this);
         super.onDestroy();
     }
