@@ -22,6 +22,23 @@ use std::ops::Deref;
 use std::os::fd::AsRawFd;
 use std::os::raw::c_char;
 use std::ptr;
+use std::sync;
+
+static SELINUX_LOG_INIT: sync::Once = sync::Once::new();
+
+fn redirect_selinux_logs_to_logcat() {
+    let cb =
+        selinux_bindgen::selinux_callback { func_log: Some(selinux_bindgen::selinux_log_callback) };
+    // SAFETY: `selinux_set_callback` assigns the static lifetime function pointer
+    // `selinux_log_callback` to a static lifetime variable.
+    unsafe {
+        selinux_bindgen::selinux_set_callback(SELINUX_CB_LOG as i32, cb);
+    }
+}
+
+fn init_logger_once() {
+    SELINUX_LOG_INIT.call_once(redirect_selinux_logs_to_logcat)
+}
 
 // Partially copied from system/security/keystore2/selinux/src/lib.rs
 /// SeContext represents an SELinux context string. It can take ownership of a raw
@@ -101,6 +118,61 @@ impl SeContext {
     }
 }
 
+/// Takes ownership of context handle returned by `selinux_android_secure_service_context_handle`
+/// and closes it via `selabel_close` when dropped.
+struct SecureServiceSelinuxBackend {
+    handle: *mut selinux_bindgen::selabel_handle,
+}
+
+impl SecureServiceSelinuxBackend {
+    const SECURE_SERVICE_CTX: i32 = selinux_bindgen::SELABEL_CTX_ANDROID_SECURE_SERVICE as i32;
+
+    /// Creates a new instance representing selinux context handle returned from
+    /// `selinux_android_secure_service_context_handle`.
+    fn new() -> Result<Self> {
+        // SAFETY: handle is freed (via `selabel_close`) when the instance is dropped.
+        let handle = unsafe { selinux_bindgen::selinux_android_secure_service_context_handle() };
+        if handle.is_null() {
+            Err(anyhow!("selinux_android_secure_service_context_handle returned a NULL context"))
+        } else {
+            Ok(SecureServiceSelinuxBackend { handle })
+        }
+    }
+
+    fn lookup(&self, secure_service: &str) -> Result<SeContext> {
+        let mut con: *mut c_char = ptr::null_mut();
+        let c_key = CString::new(secure_service)
+            .with_context(|| format!("failed to convert \"{}\" to CString.", secure_service))?;
+        // SAFETY: the returned pointer `con` is wrapped into SeContext::Raw which is freed with
+        // `freecon` when it is dropped.
+        match unsafe {
+            selinux_bindgen::selabel_lookup(
+                self.handle,
+                &mut con,
+                c_key.as_ptr(),
+                Self::SECURE_SERVICE_CTX,
+            )
+        } {
+            0 => {
+                if !con.is_null() {
+                    Ok(SeContext::Raw(con))
+                } else {
+                    Err(anyhow!("selabel_lookup returned a NULL context"))
+                }
+            }
+            _ => Err(anyhow!(io::Error::last_os_error())).context("selabel_lookup failed"),
+        }
+    }
+}
+
+impl Drop for SecureServiceSelinuxBackend {
+    fn drop(&mut self) {
+        // SAFETY: the SecureServiceSelinuxBackend is created only with a pointer is set by
+        // libselinux and has to be freed with `selabel_close`.
+        unsafe { selinux_bindgen::selabel_close(self.handle) };
+    }
+}
+
 pub fn getfilecon<F: AsRawFd>(file: &F) -> Result<SeContext> {
     let fd = file.as_raw_fd();
     let mut con: *mut c_char = ptr::null_mut();
@@ -131,5 +203,20 @@ pub fn getprevcon() -> Result<SeContext> {
             }
         }
         _ => Err(anyhow!(io::Error::last_os_error())).context("getprevcon failed"),
+    }
+}
+
+pub fn check_secure_service_permission(
+    caller_ctx: &SeContext,
+    secure_services: &[str],
+) -> Result<()> {
+}
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_lookup() -> Result<()> {
+        let backend = SecureServiceSelinuxBackend::new()?;
     }
 }
