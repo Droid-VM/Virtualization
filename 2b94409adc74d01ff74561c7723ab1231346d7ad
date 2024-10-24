@@ -39,6 +39,30 @@
       },
       "revId": "2b94409adc74d01ff74561c7723ab1231346d7ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30d4b494_674b3f95",
+        "filename": "build/microdroid/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2024-10-24T00:13:24Z",
+      "side": 1,
+      "message": "`avbrs_test_vbmeta_cert` and other `cc_genrules` in this project depend on `avbrs_test_image_descriptor`. `avbrs_test_image_descriptor` is a `avb_gen_vbmeta_image`, which is a multilib-first-by-default module type. So since the genrules are multilib both by default, their 32 bit variant tries to depend on a module with only a 64 bit variant. Making everything multilib-first makes it so that there\u0027s only a 64 bit variant everywhere.\n\nThe errors look like:\n```\nerror: external/avb/rust/Android.bp:408:1: dependency \"avbrs_test_image_descriptor\" of \"avbrs_test_vbmeta_cert\" missing variant:\n  os:android,arch:x86_silvermont\navailable variants:\n  os:android,arch:x86_64_silvermont\n```",
+      "parentUuid": "e7237a7e_0e4b284d",
+      "range": {
+        "startLine": 600,
+        "startChar": 4,
+        "endLine": 600,
+        "endChar": 30
+      },
+      "revId": "2b94409adc74d01ff74561c7723ab1231346d7ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
