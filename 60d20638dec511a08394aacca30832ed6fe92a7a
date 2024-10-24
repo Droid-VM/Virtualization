@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "35c71b4e_2ab20611",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-10-24T04:52:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a72b31e5_9c5d2475",
+      "revId": "60d20638dec511a08394aacca30832ed6fe92a7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "587164c8_48ca5bf0",
@@ -160,6 +178,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "496c2a51_bf366fd4",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-10-24T04:52:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ebacb8d9_f2106675",
+      "range": {
+        "startLine": 323,
+        "startChar": 0,
+        "endLine": 323,
+        "endChar": 48
+      },
+      "revId": "60d20638dec511a08394aacca30832ed6fe92a7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfd9a33b_45fa08c6",
@@ -173,6 +215,24 @@
       "writtenOn": "2024-10-23T08:44:01Z",
       "side": 1,
       "message": "We\u0027d like to kill this when the VM is stopped.",
+      "revId": "60d20638dec511a08394aacca30832ed6fe92a7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c21facd1_06be2620",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 931,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-10-24T04:52:22Z",
+      "side": 1,
+      "message": "VM does get killed; I have verified this by closing the app.\n\nWhen app terminates, crosvm(VMM) will terminate the vhost-user socket end-point. That will trigger the crosvm (vhost-user-fs) daemon exit as the client side socket is closed.",
+      "parentUuid": "bfd9a33b_45fa08c6",
       "revId": "60d20638dec511a08394aacca30832ed6fe92a7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -200,6 +260,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "64bfb0f3_29da6746",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1241,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-10-24T04:52:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2b27155_29b38e2c",
+      "range": {
+        "startLine": 1241,
+        "startChar": 4,
+        "endLine": 1241,
+        "endChar": 40
+      },
+      "revId": "60d20638dec511a08394aacca30832ed6fe92a7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89f799c0_f132c7dd",
@@ -213,6 +297,30 @@
       "writtenOn": "2024-10-23T06:44:09Z",
       "side": 1,
       "message": "please include SharedPath here",
+      "range": {
+        "startLine": 229,
+        "startChar": 22,
+        "endLine": 229,
+        "endChar": 41
+      },
+      "revId": "60d20638dec511a08394aacca30832ed6fe92a7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d15fb6f9_eb10564c",
+        "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-10-24T04:52:22Z",
+      "side": 1,
+      "message": "I haven\u0027t done this as I can\u0027t test this path; I will follow up with a different CL; As discussed, i think this might not be supported for terminal app.",
+      "parentUuid": "89f799c0_f132c7dd",
       "range": {
         "startLine": 229,
         "startChar": 22,
@@ -260,6 +368,30 @@
           ]
         }
       ],
+      "revId": "60d20638dec511a08394aacca30832ed6fe92a7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54f5b6d8_04eab04d",
+        "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineCustomImageConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-10-24T04:52:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0173041_6a638947",
+      "range": {
+        "startLine": 311,
+        "startChar": 30,
+        "endLine": 311,
+        "endChar": 40
+      },
       "revId": "60d20638dec511a08394aacca30832ed6fe92a7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
