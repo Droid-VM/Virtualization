@@ -34,3 +34,9 @@ rust_test {
     prefer_rlib: true,
     rustlibs: ["libcstr"],
 }
+
+dirgroup {
+    name: "trusty_dirgroup_packages_modules_Virtualization_libs_cstr",
+    visibility: ["//trusty/vendor/google/aosp/scripts"],
+    dirs: ["."],
+}

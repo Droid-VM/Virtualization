@@ -116,3 +116,9 @@ filegroup {
     name: "vmbase_sections",
     srcs: ["sections.ld"],
 }
+
+dirgroup {
+    name: "trusty_dirgroup_packages_modules_Virtualization_libs_libvmbase",
+    visibility: ["//trusty/vendor/google/aosp/scripts"],
+    dirs: ["."],
+}
