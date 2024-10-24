@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 The Android Open Source Project
+ * Copyright (C) 2024 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.virtualization.terminal;
+package com.android.virtualization.linuxinstaller;
 
 import android.annotation.WorkerThread;
 import android.app.Activity;
@@ -34,11 +34,13 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class InstallerActivity extends Activity {
+public class MainActivity extends Activity {
     private static final String TAG = "LinuxInstaller";
+    private static final String ACTION_VM_TERMINAL = "android.virtualization.VM_TERMINAL";
 
     private static final Path DEST_DIR =
             Path.of(Environment.getExternalStorageDirectory().getPath(), "linux");
@@ -52,9 +54,7 @@ public class InstallerActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setResult(RESULT_CANCELED);
-
-        setContentView(R.layout.activity_installer);
+        setContentView(R.layout.activity_main);
 
         executorService.execute(this::installLinuxImage);
     }
@@ -62,7 +62,6 @@ public class InstallerActivity extends Activity {
     private void installLinuxImage() {
         if (!hasLocalAssets()) {
             updateStatus("No local assets");
-            setResult(RESULT_CANCELED, null);
             return;
         }
         try {
@@ -72,8 +71,6 @@ public class InstallerActivity extends Activity {
             return;
         }
         updateStatus("Done.");
-        setResult(RESULT_OK);
-        finish();
     }
 
     @WorkerThread
