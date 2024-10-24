@@ -16,6 +16,29 @@
       "message": "These changes are because there is a module that depends on one of the avb module types, and the avb module types are `compile_multilib: \"first\"` by default. I think I didn\u0027t see this before because I was testing on a 64-bit only device.",
       "revId": "2b94409adc74d01ff74561c7723ab1231346d7ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7237a7e_0e4b284d",
+        "filename": "build/microdroid/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1878380
+      },
+      "writtenOn": "2024-10-24T00:07:51Z",
+      "side": 1,
+      "message": "Is specifying `first` here necessary? cc_genrule have both variants by default, so I _think_ the rdep should be able to find the matching variant.\n\n(If there are errors without this, would you mind sharing a paste of the error message?)",
+      "range": {
+        "startLine": 600,
+        "startChar": 4,
+        "endLine": 600,
+        "endChar": 30
+      },
+      "revId": "2b94409adc74d01ff74561c7723ab1231346d7ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
