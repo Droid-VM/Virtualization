@@ -66,6 +66,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42f2840f_7665f9bd",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstallerActivity.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-25T12:40:56Z",
+      "side": 1,
+      "message": "Thanks for sharing, if so, in this perspective , we need to call setProgressListener(null) maybe in onDestory or somewhere? as well, though?(but InstallProgressListener doesn\u0027t hold resource for now)",
+      "parentUuid": "4a3e46cb_90a24efd",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 0
+      },
+      "revId": "b6bcab8c4d36bee578ad8564dd2496be255fe487",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ba60d10_fd771c53",
