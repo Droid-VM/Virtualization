@@ -22,6 +22,30 @@
       },
       "revId": "50c29ed648a96463e075b17c0616d8a553cf192d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "107206ca_7e68680d",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstallerActivity.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-25T04:28:36Z",
+      "side": 1,
+      "message": "Could you confirm that you expect similar feature with Play store?\n\nIf so, let me remove relevant code and handle it in another CL (left TODO for it in installer service)",
+      "parentUuid": "8166ec68_74f260d9",
+      "range": {
+        "startLine": 122,
+        "startChar": 19,
+        "endLine": 122,
+        "endChar": 24
+      },
+      "revId": "50c29ed648a96463e075b17c0616d8a553cf192d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
