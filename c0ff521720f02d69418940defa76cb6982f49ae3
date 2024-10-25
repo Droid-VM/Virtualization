@@ -16,6 +16,24 @@
       "message": "can we reuse InstallUtils.installImageFromExternalStorage() for downloading scenario as well? I think the only difference is the source of InputStream?",
       "revId": "c0ff521720f02d69418940defa76cb6982f49ae3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19f52de6_133b4408",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstallerService.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-25T12:24:33Z",
+      "side": 1,
+      "message": "It\u0027s intended behavior.\n\nI thought that `vm_launcher_lib` should only provide general features that any VM launching app can use. However, `downloadFromUrl()` would end up with having server side specific code (e.g. go/amdd-library expects to setup metadata on the server for pause/resume, checksum, partial update, and so on). What do you think? I\u0027m thinking of using it especially because its code is already at `/external/mobile-data-download`, so let me keep this code here.",
+      "parentUuid": "4aa988ca_86f07554",
+      "revId": "c0ff521720f02d69418940defa76cb6982f49ae3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
