@@ -1,0 +1,85 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a1d2e81_9aa02575",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualmachineservice/IVirtualMachineService.aidl",
+        "patchSetId": 13
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-25T19:58:12Z",
+      "side": 1,
+      "message": "hey - see email thread \"on the stability of IVirtualMachineService\"",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 67
+      },
+      "revId": "d4f577646f94041df2a18d19e47d7962e9ff2a33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3b5d83a_657d1533",
+        "filename": "libs/libvm_payload/include/vm_payload.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-25T19:58:12Z",
+      "side": 1,
+      "message": "also here - Nikita is saying we should not have an API here - let\u0027s resolve \"on the stability of IVirtualMachineService\n\"",
+      "revId": "d4f577646f94041df2a18d19e47d7962e9ff2a33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0248e757_f3f31f79",
+        "filename": "libs/libvm_payload/src/injector.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-25T19:58:12Z",
+      "side": 1,
+      "message": "Can we get it to where we can see the amount of work to see a single service. Please get rid of this bit as well - we should have one file on the host that lists all the available services for a VM.\n\n- we should have one place to list services for VMs for them to work (adding the library dependency is okay, but it should be very easy)\n- we should be able to specify in VM config which services which VMs can use (we can\u0027t give all VMs these services)\n- can you share example of sepolicy change required per service (or is it purely controlled here)?",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 6
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9c841fc3_2e9571e2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/libvm_payload/src/injector.cpp",
+              "range": {
+                "startLine": 38,
+                "startChar": 0,
+                "endLine": 39,
+                "endChar": 0
+              },
+              "replacement": "    // TODO(b/280421111) get this from microdroidmgr through a new AVmPayload API.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d4f577646f94041df2a18d19e47d7962e9ff2a33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
