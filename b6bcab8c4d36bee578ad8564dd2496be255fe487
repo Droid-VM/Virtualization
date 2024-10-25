@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e52d215f_42491f1f",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstallerActivity.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-25T07:23:18Z",
+      "side": 1,
+      "message": "if it has reference to activity, how about letting InstallerActivity implement IInstallProgressListener.Stub?",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "bb0e9d36_ff102048",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/InstallerActivity.java",
+              "range": {
+                "startLine": 156,
+                "startChar": 0,
+                "endLine": 157,
+                "endChar": 0
+              },
+              "replacement": "    private class InstallProgressListener extends IInstallProgressListener.Stub {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b6bcab8c4d36bee578ad8564dd2496be255fe487",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ba60d10_fd771c53",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstallerActivity.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-25T07:23:18Z",
+      "side": 1,
+      "message": "and maybe this one as well? if it is heavily bundled with the activty..",
+      "range": {
+        "startLine": 177,
+        "startChar": 30,
+        "endLine": 177,
+        "endChar": 87
+      },
+      "revId": "b6bcab8c4d36bee578ad8564dd2496be255fe487",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
