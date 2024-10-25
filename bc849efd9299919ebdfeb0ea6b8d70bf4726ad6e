@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6c630f5_395a486c",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-25T11:56:42Z",
+      "side": 1,
+      "message": "Q: would you like to make WebView invisible and show spinning wheel again?\n\nIf so, what about having an HTML with spinning wheel and show it here? It may simply the logic here.\n\nhttps://stackoverflow.com/questions/36284186/android-webview-custom-error-page",
+      "range": {
+        "startLine": 197,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 43
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "cee93a7e_3f4fe26f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+              "range": {
+                "startLine": 198,
+                "startChar": 0,
+                "endLine": 198,
+                "endChar": 0
+              },
+              "replacement": "                        view.setVisibility(View.INVISIBLE);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bc849efd9299919ebdfeb0ea6b8d70bf4726ad6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
