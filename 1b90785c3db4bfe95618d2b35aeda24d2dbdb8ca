@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c22def9a_08f72545",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-25T04:22:49Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Common Typos: Common typo found: \"Stroage\" -- should it be \"Storage\"?\n\nAnalyzer Description: Linter for catching common typos motivated by go/todo-fail and go/lol-codesearch. Shared with google3 common typos library go/common-typos.\nOwner: ayeaye-team@google.com\n\nCommon typo found: \"Stroage\" -- should it be \"Storage\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 66,
+        "startChar": 35,
+        "endLine": 66,
+        "endChar": 42
+      },
+      "revId": "1b90785c3db4bfe95618d2b35aeda24d2dbdb8ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d710d6e5_71d109bd",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-25T04:22:49Z",
+      "side": 1,
+      "message": "This doesn\u0027t return a file but a dir.",
+      "range": {
+        "startLine": 66,
+        "startChar": 42,
+        "endLine": 66,
+        "endChar": 46
+      },
+      "revId": "1b90785c3db4bfe95618d2b35aeda24d2dbdb8ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78260798_a1f20740",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-25T04:22:49Z",
+      "side": 1,
+      "message": "Perhaps as a followup: I wish we are consistent about the use of Path and File.",
+      "range": {
+        "startLine": 66,
+        "startChar": 19,
+        "endLine": 66,
+        "endChar": 23
+      },
+      "revId": "1b90785c3db4bfe95618d2b35aeda24d2dbdb8ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19ef2653_e8c35d45",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-25T04:22:49Z",
+      "side": 1,
+      "message": "why? you are not checking the timestamp.",
+      "range": {
+        "startLine": 152,
+        "startChar": 37,
+        "endLine": 152,
+        "endChar": 86
+      },
+      "revId": "1b90785c3db4bfe95618d2b35aeda24d2dbdb8ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
