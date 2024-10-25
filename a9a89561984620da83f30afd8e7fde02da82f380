@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ba0f03d_7db953c3",
+        "filename": "android/TerminalApp/aidl/com/android/virtualization/terminal/IInstallerService.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-25T04:28:34Z",
+      "side": 1,
+      "message": "We can, but we still need `{set|add}ProgressListener()` because `InstallerActivity` may be recreated while `InstallerService` installs. Let me keep this as-is.",
+      "parentUuid": "978afaa3_78b5c9d4",
+      "range": {
+        "startLine": 22,
+        "startChar": 23,
+        "endLine": 22,
+        "endChar": 25
+      },
+      "revId": "a9a89561984620da83f30afd8e7fde02da82f380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ae0f79d_13b06e71",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-10-22T07:42:02Z",
       "side": 1,
       "message": "This looks like we will support multiple listeners. Why?",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 74
+      },
+      "revId": "a9a89561984620da83f30afd8e7fde02da82f380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "615278f1_cbd373ae",
+        "filename": "android/TerminalApp/aidl/com/android/virtualization/terminal/IInstallerService.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-25T04:28:34Z",
+      "side": 1,
+      "message": "Changed to `setProgressListener()`",
+      "parentUuid": "0ae0f79d_13b06e71",
       "range": {
         "startLine": 23,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd30fcbb_24e08586",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstallerActivity.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-25T04:28:34Z",
+      "side": 1,
+      "message": "Removed code because signature is changed from add to set.\n\nJust FYI, `onDestroy()` can be called while the app is shown in the recents,",
+      "parentUuid": "59be476b_c70295f0",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 29
+      },
+      "revId": "a9a89561984620da83f30afd8e7fde02da82f380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de440270_1d420eea",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-10-22T07:42:02Z",
       "side": 1,
       "message": "This case means that the service can be running while the activity is destroyed. I don\u0027t think we want that.",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 128,
+        "endChar": 48
+      },
+      "revId": "a9a89561984620da83f30afd8e7fde02da82f380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ed0ed34_a0118e12",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstallerActivity.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-25T04:28:34Z",
+      "side": 1,
+      "message": "ditto. Activity destroyed is doesn\u0027t mean to the task remove.",
+      "parentUuid": "de440270_1d420eea",
       "range": {
         "startLine": 128,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b74b39b3_37a35e24",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstallerService.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-25T04:28:34Z",
+      "side": 1,
+      "message": "Ask we talked offline,\n- when activity is destroyed --\u003e keep service running, because it can be destroyed by memory pressure while in the background.\n- when task is removed --\u003e kill service by adding `android:stopWithTask\u003d\"true\"`.",
+      "parentUuid": "d5679baa_0dae3d51",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 54
+      },
+      "revId": "a9a89561984620da83f30afd8e7fde02da82f380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3a45ffc_b6950fa9",
@@ -129,6 +249,30 @@
       "writtenOn": "2024-10-22T07:42:02Z",
       "side": 1,
       "message": "by dropping this, you don\u0027t have to keep the reference to the service.",
+      "range": {
+        "startLine": 162,
+        "startChar": 12,
+        "endLine": 162,
+        "endChar": 18
+      },
+      "revId": "a9a89561984620da83f30afd8e7fde02da82f380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6faa6372_879d25bb",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstallerService.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-25T04:28:34Z",
+      "side": 1,
+      "message": "Let me keep it as-is. Having Context in binder impl is used to avoid `Context` leak when counterparty binder is destroyed.\n\nWithout static, this class would have hidden strong reference to the parent object, so `Context` can\u0027t be garbage collected if counterparty keeps the binder reference even after unbind.",
+      "parentUuid": "e3a45ffc_b6950fa9",
       "range": {
         "startLine": 162,
         "startChar": 12,
@@ -162,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b0618e4_392fd465",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-25T04:28:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36ffb433_91c56dec",
+      "range": {
+        "startLine": 66,
+        "startChar": 26,
+        "endLine": 66,
+        "endChar": 46
+      },
+      "revId": "a9a89561984620da83f30afd8e7fde02da82f380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "edfac5fe_5052d6a8",
@@ -185,6 +353,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6c5e8ec_54792ec5",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-25T04:28:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edfac5fe_5052d6a8",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 58
+      },
+      "revId": "a9a89561984620da83f30afd8e7fde02da82f380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "058a66ff_9fff6550",
@@ -198,6 +390,30 @@
       "writtenOn": "2024-10-22T07:42:02Z",
       "side": 1,
       "message": "This is an awkward design, I think. Why can\u0027t the check be done in this activity?\n\nWe can start the service only after it is found that the download \u0026 installation is needed.",
+      "range": {
+        "startLine": 411,
+        "startChar": 0,
+        "endLine": 413,
+        "endChar": 70
+      },
+      "revId": "a9a89561984620da83f30afd8e7fde02da82f380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e53541dc_bbf71acc",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-25T04:28:34Z",
+      "side": 1,
+      "message": "Done. Fixed `InstallUtils` for that.",
+      "parentUuid": "058a66ff_9fff6550",
       "range": {
         "startLine": 411,
         "startChar": 0,
