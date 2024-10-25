@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47bb6399_efc1bb1d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-25T06:35:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1de166d9_59f56ae6",
+      "range": {
+        "startLine": 7,
+        "startChar": 22,
+        "endLine": 7,
+        "endChar": 31
+      },
+      "revId": "c9d3f9361e3c0aa9922ae55244de32d515d3e2c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "799465c1_b92f6e3a",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-10-25T05:00:53Z",
       "side": 1,
       "message": "Can this be done inside of an Application class?",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 9
+      },
+      "revId": "c9d3f9361e3c0aa9922ae55244de32d515d3e2c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80431624_3437784c",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/BaseActivity.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-25T06:35:14Z",
+      "side": 1,
+      "message": "We can do by `Application#registerActivityLifecycleCallbacks()`, but I prefer this because overriding from `BaseActivity` looks more straightforward and overriding `Application` is less common.\n\nJust FYI, https://developer.android.com/reference/android/app/Application also says \u0027There is normally no need to subclass Application\u0027.",
+      "parentUuid": "799465c1_b92f6e3a",
       "range": {
         "startLine": 31,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecdfb51c_ebca7fba",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstallerActivity.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-25T06:35:14Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "fd2d3203_75b3791d",
+      "range": {
+        "startLine": 92,
+        "startChar": 8,
+        "endLine": 92,
+        "endChar": 23
+      },
+      "revId": "c9d3f9361e3c0aa9922ae55244de32d515d3e2c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf6207d3_cf956906",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-10-25T05:00:53Z",
       "side": 1,
       "message": "we don\u0027t reveal that this is a debian.",
+      "range": {
+        "startLine": 24,
+        "startChar": 54,
+        "endLine": 24,
+        "endChar": 60
+      },
+      "revId": "c9d3f9361e3c0aa9922ae55244de32d515d3e2c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49bf2532_9b29a2f7",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-25T06:35:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf6207d3_cf956906",
       "range": {
         "startLine": 24,
         "startChar": 54,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0844f5b6_48d5eebb",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-25T06:35:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c576402_6dc6e8ee",
+      "range": {
+        "startLine": 36,
+        "startChar": 57,
+        "endLine": 36,
+        "endChar": 62
+      },
+      "revId": "c9d3f9361e3c0aa9922ae55244de32d515d3e2c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "acdd9826_7475bd33",
@@ -129,6 +249,30 @@
       "writtenOn": "2024-10-25T05:00:53Z",
       "side": 1,
       "message": "Linux terminal",
+      "range": {
+        "startLine": 38,
+        "startChar": 45,
+        "endLine": 38,
+        "endChar": 53
+      },
+      "revId": "c9d3f9361e3c0aa9922ae55244de32d515d3e2c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7a2f4fc_f795a51f",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-25T06:35:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acdd9826_7475bd33",
       "range": {
         "startLine": 38,
         "startChar": 45,
