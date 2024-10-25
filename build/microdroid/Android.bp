@@ -377,6 +377,11 @@ prebuilt_etc {
 }
 
 prebuilt_etc {
+    name: "microdroid_16k.json",
+    src: "microdroid.json",
+}
+
+prebuilt_etc {
     name: "microdroid_manifest",
     src: "microdroid_manifest.xml",
     filename: "manifest.xml",
@@ -517,6 +522,32 @@ prebuilt_etc {
         },
         x86_64: {
             src: ":microdroid_kernel_signed",
+        },
+    },
+}
+
+avb_add_hash_footer {
+    name: "microdroid_kernel_16k_signed",
+    defaults: ["microdroid_kernel_signed_defaults"],
+    filename: "microdroid_kernel_16k",
+    arch: {
+        arm64: {
+            src: ":microdroid_kernel_prebuilt-arm64",
+        },
+    },
+    include_descriptors_from_images: [
+        ":microdroid_initrd_normal_hashdesc",
+        ":microdroid_initrd_debug_hashdesc",
+    ],
+}
+
+prebuilt_etc {
+    name: "microdroid_kernel_16k",
+    src: ":empty_file",
+    relative_install_path: "fs",
+    arch: {
+        arm64: {
+            src: ":microdroid_kernel_16k_signed",
         },
     },
 }
