@@ -63,7 +63,7 @@ public class InstallUtils {
         return Files.exists(getPayloadPath());
     }
 
-    private static File getInternalStorageFile(Context context) {
+    public static File getInternalStorageFile(Context context) {
         return new File(context.getFilesDir(), PAYLOAD_DIR);
     }
 
@@ -74,6 +74,7 @@ public class InstallUtils {
     public static boolean installImageFromExternalStorage(Context context) {
         if (!payloadFromExternalStorageExists()) {
             Log.d(TAG, "no artifact file from external storage");
+            return false;
         }
         Path payloadPath = getPayloadPath();
         try (BufferedInputStream inputStream =
@@ -133,7 +134,7 @@ public class InstallUtils {
         };
     }
 
-    private static boolean resolvePathInVmConfig(Context context) {
+    public static boolean resolvePathInVmConfig(Context context) {
         try {
             String replacedVmConfig =
                     String.join(
