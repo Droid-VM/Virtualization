@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfa7650e_fdb4bd10",
+        "filename": "guest/kernel/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-10-25T14:31:41Z",
+      "side": 1,
+      "message": "It will always be used. For example, we will use when switching to android16-6.12 microdroid kernel",
+      "parentUuid": "9aecca9b_4a3ae031",
+      "range": {
+        "startLine": 32,
+        "startChar": 31,
+        "endLine": 32,
+        "endChar": 68
+      },
+      "revId": "759ca932d98a43ad557e4ffd3154c073151e5d05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c80330d4_bc3d80a2",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43245f74_a7d20196",
+        "filename": "guest/kernel/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-10-25T14:31:41Z",
+      "side": 1,
+      "message": "Yes, it just empty array :) Changed below to empty array as well.",
+      "parentUuid": "c80330d4_bc3d80a2",
+      "range": {
+        "startLine": 34,
+        "startChar": 17,
+        "endLine": 34,
+        "endChar": 19
+      },
+      "revId": "759ca932d98a43ad557e4ffd3154c073151e5d05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91210a20_93f931f1",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-10-25T14:10:47Z",
       "side": 1,
       "message": "Why not now default to `\"android15-6.6/x86_64/kernel-6.6\"`, until a new flag value (if any) is introduced? (same question for the `arm64` build)",
+      "range": {
+        "startLine": 43,
+        "startChar": 18,
+        "endLine": 43,
+        "endChar": 20
+      },
+      "revId": "759ca932d98a43ad557e4ffd3154c073151e5d05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc016821_bd56b175",
+        "filename": "guest/kernel/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-10-25T14:31:41Z",
+      "side": 1,
+      "message": "We should have the flag set up in every release configuration. If there is a release configuration that doesn\u0027t specify it, then build should fail. I\u0027d prefer this approach so that we can flash out wrong release configurations.",
+      "parentUuid": "91210a20_93f931f1",
       "range": {
         "startLine": 43,
         "startChar": 18,
