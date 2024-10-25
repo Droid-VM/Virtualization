@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aecca9b_4a3ae031",
+        "filename": "guest/kernel/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-25T14:10:47Z",
+      "side": 1,
+      "message": "Is this flag still in use or should the whole infrastructure for it also be removed?",
+      "range": {
+        "startLine": 32,
+        "startChar": 31,
+        "endLine": 32,
+        "endChar": 68
+      },
+      "revId": "759ca932d98a43ad557e4ffd3154c073151e5d05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c80330d4_bc3d80a2",
+        "filename": "guest/kernel/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-25T14:10:47Z",
+      "side": 1,
+      "message": "Is this even a valid value? Below you used `\"\"`.",
+      "range": {
+        "startLine": 34,
+        "startChar": 17,
+        "endLine": 34,
+        "endChar": 19
+      },
+      "revId": "759ca932d98a43ad557e4ffd3154c073151e5d05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91210a20_93f931f1",
+        "filename": "guest/kernel/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-25T14:10:47Z",
+      "side": 1,
+      "message": "Why not now default to `\"android15-6.6/x86_64/kernel-6.6\"`, until a new flag value (if any) is introduced? (same question for the `arm64` build)",
+      "range": {
+        "startLine": 43,
+        "startChar": 18,
+        "endLine": 43,
+        "endChar": 20
+      },
+      "revId": "759ca932d98a43ad557e4ffd3154c073151e5d05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
