@@ -80,6 +80,30 @@
       ],
       "revId": "d4f577646f94041df2a18d19e47d7962e9ff2a33",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6dc6b5e_37d1a5e7",
+        "filename": "libs/libvm_payload/src/injector.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-10-25T20:00:07Z",
+      "side": 1,
+      "message": "Like - I have to grep every file here to see where stats is added. Could you have one CL which is the generic infra (e.g. getServiceConnectionInfo), and then one CL is how to add stats, so we can see what it takes to add a service? We\u0027ll need to get it down to 1 line (but 2 lines to add a service now is okay - one line in Android.bp dependency and one line in the source code)",
+      "parentUuid": "0248e757_f3f31f79",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 6
+      },
+      "revId": "d4f577646f94041df2a18d19e47d7962e9ff2a33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
