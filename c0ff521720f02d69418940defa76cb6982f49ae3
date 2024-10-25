@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4aa988ca_86f07554",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstallerService.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-25T07:30:39Z",
+      "side": 1,
+      "message": "can we reuse InstallUtils.installImageFromExternalStorage() for downloading scenario as well? I think the only difference is the source of InputStream?",
+      "revId": "c0ff521720f02d69418940defa76cb6982f49ae3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
