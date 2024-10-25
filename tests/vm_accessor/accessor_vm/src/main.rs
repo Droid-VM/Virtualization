@@ -18,6 +18,7 @@ use android_frameworks_stats::aidl::android::frameworks::stats::{
     IStats::{BpStats, IStats},
     VendorAtom::VendorAtom,
 };
+use android_hardware_light::aidl::android::hardware::light::ILights::{BpLights, ILights};
 use anyhow::Result;
 use com_android_virt_accessor_demo_vm_service::{
     aidl::com::android::virt::accessor_demo::vm_service::IAccessorVmService::{
@@ -67,6 +68,10 @@ impl IAccessorVmService for AccessorVmService {
     }
 
     fn tryGetHostStatsService(&self) -> binder::Result<()> {
+        // Get the proxied light service
+        let descriptor = <BpLights as ILights>::get_descriptor().to_owned() + "/default";
+        let lights: Strong<dyn ILights> = binder::wait_for_interface(&descriptor).unwrap();
+        lights.getLights().unwrap();
         // Get the IStats service
         let stats_service_descriptor =
             <BpStats as IStats>::get_descriptor().to_owned() + "/default";
