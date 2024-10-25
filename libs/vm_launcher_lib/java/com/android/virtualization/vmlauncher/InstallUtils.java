@@ -74,6 +74,7 @@ public class InstallUtils {
     public static boolean installImageFromExternalStorage(Context context) {
         if (!payloadFromExternalStorageExists()) {
             Log.d(TAG, "no artifact file from external storage");
+            return false;
         }
         Path payloadPath = getPayloadPath();
         try (BufferedInputStream inputStream =
@@ -134,7 +135,7 @@ public class InstallUtils {
         };
     }
 
-    private static boolean resolvePathInVmConfig(Context context) {
+    public static boolean resolvePathInVmConfig(Context context) {
         try {
             String replacedVmConfig =
                     String.join(
