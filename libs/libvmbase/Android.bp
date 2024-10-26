@@ -99,6 +99,8 @@ rust_library_rlib {
     features: [
         "compat_android_13",
         "cpu_feat_hafdbs",
+        "heap",
+        "panic_handler",
     ],
 }
 

@@ -24,6 +24,7 @@ pub mod console;
 mod entry;
 pub mod exceptions;
 pub mod fdt;
+#[cfg(feature = "heap")]
 pub mod heap;
 mod hvc;
 pub mod hyp;
@@ -37,11 +38,9 @@ pub mod uart;
 pub mod util;
 pub mod virtio;
 
-use core::panic::PanicInfo;
-use power::reboot;
-
+#[cfg(feature = "panic_handler")]
 #[panic_handler]
-fn panic(info: &PanicInfo) -> ! {
+fn panic(info: &core::panic::PanicInfo) -> ! {
     eprintln!("{}", info);
-    reboot()
+    power::reboot()
 }
