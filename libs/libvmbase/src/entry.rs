@@ -14,8 +14,10 @@
 
 //! Rust entry point.
 
+#[cfg(heap)]
+use crate::heap;
 use crate::{
-    bionic, console, heap, hyp,
+    bionic, console, hyp,
     layout::{UART_ADDRESSES, UART_PAGE_ADDR},
     logger,
     memory::{PAGE_SIZE, SIZE_16KB, SIZE_4KB},
@@ -56,6 +58,7 @@ fn try_console_init() -> Result<(), hyp::Error> {
 /// This is the entry point to the Rust code, called from the binary entry point in `entry.S`.
 #[no_mangle]
 extern "C" fn rust_entry(x0: u64, x1: u64, x2: u64, x3: u64) -> ! {
+    #[cfg(heap)]
     heap::init();
 
     if try_console_init().is_err() {
