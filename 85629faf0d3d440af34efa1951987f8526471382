@@ -1,0 +1,65 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e010167_bd16a74f",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsRecoveryActivity.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-27T12:39:43Z",
+      "side": 1,
+      "message": "This is main thread where UI needs update (~60fps) and should respond to the touch event, \\\nbut you\u0027re blocking it for potentially be time consuming operation.\n(I vaguely remember that there\u0027s an lint for complaining about I/O on main thread, but I forgot how to check it)\n\nYou\u0027d better to create an executor or a foreign handler to run this code, and restart the terminal afterward. you may also want to show extra UI here.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 40
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "810beb6a_7529414b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsRecoveryActivity.kt",
+              "range": {
+                "startLine": 21,
+                "startChar": 0,
+                "endLine": 22,
+                "endChar": 0
+              },
+              "replacement": "import com.android.virtualization.vmlauncher.InstallUtils.unInstall\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsRecoveryActivity.kt",
+              "range": {
+                "startLine": 23,
+                "startChar": 0,
+                "endLine": 23,
+                "endChar": 0
+              },
+              "replacement": "import kotlinx.coroutines.CoroutineScope\nimport kotlinx.coroutines.Dispatchers\nimport kotlinx.coroutines.launch\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsRecoveryActivity.kt",
+              "range": {
+                "startLine": 30,
+                "startChar": 0,
+                "endLine": 31,
+                "endChar": 0
+              },
+              "replacement": "            CoroutineScope(Dispatchers.IO).launch {\n                unInstall(this@SettingsRecoveryActivity)\n            }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "85629faf0d3d440af34efa1951987f8526471382",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
