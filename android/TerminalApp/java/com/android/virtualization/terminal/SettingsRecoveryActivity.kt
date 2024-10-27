@@ -15,9 +15,10 @@
  */
 package com.android.virtualization.terminal
 
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.android.virtualization.vmlauncher.InstallUtils
 import com.google.android.material.card.MaterialCardView
 
 class SettingsRecoveryActivity : AppCompatActivity() {
@@ -26,7 +27,14 @@ class SettingsRecoveryActivity : AppCompatActivity() {
         setContentView(R.layout.settings_recovery)
         val resetCard = findViewById<MaterialCardView>(R.id.settings_recovery_reset_card)
         resetCard.setOnClickListener {
-            Toast.makeText(this@SettingsRecoveryActivity, R.string.settings_recovery_reset_message, Toast.LENGTH_SHORT).show()
+            InstallUtils.unInstall(this)
+
+            // Restart terminal
+            val intent =
+                baseContext.packageManager.getLaunchIntentForPackage(baseContext.packageName)
+            intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            finish()
+            startActivity(intent)
         }
     }
 }
