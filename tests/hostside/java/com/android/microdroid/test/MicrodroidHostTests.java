@@ -424,8 +424,9 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         "--console " + CONSOLE_PATH,
                         "--log " + LOG_PATH,
                         configPath);
+        // TODO(ioffe): we should switch to os here
         if (gki != null) {
-            args.add("--gki " + gki);
+            args.add("--os " + "microdroid_gki-" + gki);
         }
 
         PipedInputStream pis = new PipedInputStream();
@@ -780,9 +781,10 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         if (protectedVm) {
             cmd.add("--protected");
         }
+        // TODO(ioffe): we should switch to os here
         if (gki != null) {
-            cmd.add("--gki");
-            cmd.add(gki);
+            cmd.add("--os");
+            cmd.add("microdroid_gki-" + gki);
         }
         Collections.addAll(cmd, additionalArgs);
 
