@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b958802f_26cde79e",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-28T02:01:18Z",
+      "side": 1,
+      "message": "I think this should be move to somewhere else because currently it is not called when installIfNecessary has invoked the installer activity.",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 9
+      },
+      "revId": "f9e329c9599752f298d179cc82721c420141f5e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06cd4540_86a5b1e3",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-28T02:01:18Z",
+      "side": 1,
+      "message": "please be specific about exceptions it can throw",
+      "range": {
+        "startLine": 461,
+        "startChar": 56,
+        "endLine": 461,
+        "endChar": 65
+      },
+      "revId": "f9e329c9599752f298d179cc82721c420141f5e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f707c9c_fed86c97",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-28T02:01:18Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 474,
+        "startChar": 60,
+        "endLine": 474,
+        "endChar": 69
+      },
+      "revId": "f9e329c9599752f298d179cc82721c420141f5e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d247e6bc_5c08c2ad",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-28T02:01:18Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 478,
+        "startChar": 48,
+        "endLine": 478,
+        "endChar": 57
+      },
+      "revId": "f9e329c9599752f298d179cc82721c420141f5e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d81808fa_79f88a5c",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsDiskResizeActivity.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-28T02:01:18Z",
+      "side": 1,
+      "message": "When we mix bytes and MBs, please consider add suffix to variable names to avoid any mistake. For example, `diskSize` could be renamed to `diskSizeMb`.",
+      "range": {
+        "startLine": 45,
+        "startChar": 12,
+        "endLine": 45,
+        "endChar": 20
+      },
+      "revId": "f9e329c9599752f298d179cc82721c420141f5e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f62d812d_ecb49eab",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsDiskResizeActivity.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-28T02:01:18Z",
+      "side": 1,
+      "message": "we could have shifted instead or make this conversion a function",
+      "range": {
+        "startLine": 47,
+        "startChar": 16,
+        "endLine": 47,
+        "endChar": 41
+      },
+      "revId": "f9e329c9599752f298d179cc82721c420141f5e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
