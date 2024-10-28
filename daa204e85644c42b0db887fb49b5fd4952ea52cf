@@ -16,6 +16,52 @@
       "message": "These patches are part 1 of 3 for the custom smcs filtering project (go/pkvm-pvm-allow-vendor-tz-services-access).\n\nI intended to merge them once all 3 parts are ready, but sending out for an early review to make sure that approach makes sense",
       "revId": "daa204e85644c42b0db887fb49b5fd4952ea52cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7501cf3_d39fa961",
+        "filename": "android/virtmgr/src/selinux.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-28T02:32:22Z",
+      "side": 1,
+      "message": "This feels a bit odd to me, but I see jeffv approved aosp/3314799",
+      "range": {
+        "startLine": 128,
+        "startChar": 45,
+        "endLine": 128,
+        "endChar": 72
+      },
+      "revId": "daa204e85644c42b0db887fb49b5fd4952ea52cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e67b70bd_114bd824",
+        "filename": "android/virtmgr/src/selinux.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-28T02:32:22Z",
+      "side": 1,
+      "message": "please",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 208,
+        "endChar": 26
+      },
+      "revId": "daa204e85644c42b0db887fb49b5fd4952ea52cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
