@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cc1859f_9da0c55e",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-10-28T06:35:57Z",
+      "side": 1,
+      "message": "Does startVm() get invoked during resize ? Since this is offline, we shouldn\u0027t be in this path isn\u0027t it ?",
+      "fixSuggestions": [
+        {
+          "fixId": "f91a5472_c962b408",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+              "range": {
+                "startLine": 423,
+                "startChar": 0,
+                "endLine": 425,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+              "range": {
+                "startLine": 450,
+                "startChar": 0,
+                "endLine": 450,
+                "endChar": 0
+              },
+              "replacement": "\n        resizeDiskIfNecessary();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "592b52a867da765935fb34ed5ae983c7321e6549",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
