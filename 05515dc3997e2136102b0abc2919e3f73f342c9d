@@ -1,5 +1,57 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c47fdd4d_80f32de9",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/ConfigJson.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-28T06:54:03Z",
+      "side": 1,
+      "message": "it should be context.getPackageName() instead. because TERMINAL_PACKAGE_ID can be different in in AOSP.",
+      "range": {
+        "startLine": 169,
+        "startChar": 53,
+        "endLine": 169,
+        "endChar": 72
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "658a2fa5_895accc6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/ConfigJson.java",
+              "range": {
+                "startLine": 160,
+                "startChar": 0,
+                "endLine": 163,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/ConfigJson.java",
+              "range": {
+                "startLine": 169,
+                "startChar": 0,
+                "endLine": 170,
+                "endChar": 0
+              },
+              "replacement": "                                .getPackageUidAsUser(context.getPackageName(), context.getUserId());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "05515dc3997e2136102b0abc2919e3f73f342c9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
