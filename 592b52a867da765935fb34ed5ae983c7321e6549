@@ -98,6 +98,24 @@
       "parentUuid": "33343765_7f3b7020",
       "revId": "592b52a867da765935fb34ed5ae983c7321e6549",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "035c7661_02d28a16",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-10-28T18:37:42Z",
+      "side": 1,
+      "message": "Sounds good. The only caveat with both the approaches is that if the app is killed when resize is in progress, then disk might get corrupted as the blocks would be in the process of moving blocks around. There is no way to restart the on-going `resize` operation if its interrupted. I think having some kind of a UI interface when resize in progress would be good (atleast some kind of a dialog box ?)\n\nI don\u0027t want to block this CL. We can follow up in next CL. Thanks for working on it.",
+      "parentUuid": "dd10d1bd_cde092b5",
+      "revId": "592b52a867da765935fb34ed5ae983c7321e6549",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
