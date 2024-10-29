@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7744caf2_fa7f34c3",
+        "filename": "libs/apkverify/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2024-10-29T00:09:15Z",
+      "side": 1,
+      "message": "This makes the module dependent on AVF-specific flags. It looks like libapkverity (and libapkzip) doesn\u0027t rely on those flags. I think we\u0027d better `defaults` to make sure these that two modules are not dependent on any flags. (We\u0027d better move these two to a different place...)",
+      "range": {
+        "startLine": 8,
+        "startChar": 15,
+        "endLine": 8,
+        "endChar": 37
+      },
+      "revId": "b8afe1183e853d70d3014d2fd4032faa952b1458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
