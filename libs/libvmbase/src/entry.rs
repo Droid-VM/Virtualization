@@ -14,10 +14,12 @@
 
 //! Rust entry point.
 
+#[cfg(bionic)]
+use crate::bionic;
 #[cfg(heap)]
 use crate::heap;
 use crate::{
-    bionic, console, hyp,
+    console, hyp,
     layout::{UART_ADDRESSES, UART_PAGE_ADDR},
     logger,
     memory::{PAGE_SIZE, SIZE_16KB, SIZE_4KB},
@@ -82,7 +84,10 @@ extern "C" fn rust_entry(x0: u64, x1: u64, x2: u64, x3: u64) -> ! {
         panic!("Failed to get stack canary entropy: {e}");
     }
 
-    bionic::__get_tls().stack_guard = u64::from_ne_bytes(stack_guard);
+    #[cfg(bionic)]
+    {
+        bionic::__get_tls().stack_guard = u64::from_ne_bytes(stack_guard);
+    }
 
     // Note: If rust_entry ever returned (which it shouldn't by being -> !), the compiler-injected
     // stack guard comparison would detect a mismatch and call __stack_chk_fail.
