@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b4b45d05_2f69308c",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsRecoveryActivity.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-10-29T08:45:06Z",
+      "side": 1,
+      "message": "I\u0027m new too. lol. I follows this [doc](https://developer.android.com/topic/libraries/architecture/coroutines) for the coroutine.\n\nAnd gemini suggest me to use `Dispatchers.IO` to optimize it for the IO event, compared to `Dispatchers.Default`\nI think the doc could be found [here](https://developer.android.com/kotlin/coroutines/coroutines-adv#main-safety)",
+      "parentUuid": "eb34560c_b797789e",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 55
+      },
+      "revId": "38971b158f7e76cf9ee92423714a376950620fc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15cb06d8_9016f13b",
         "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
         "patchSetId": 2
@@ -61,6 +85,30 @@
           ]
         }
       ],
+      "revId": "38971b158f7e76cf9ee92423714a376950620fc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e4e9478_ba33703e",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-10-29T08:45:06Z",
+      "side": 1,
+      "message": "I think `getInstallationCompletedPath(context)` is the marker file.\nOr do you mean other?",
+      "parentUuid": "15cb06d8_9016f13b",
+      "range": {
+        "startLine": 53,
+        "startChar": 21,
+        "endLine": 53,
+        "endChar": 49
+      },
       "revId": "38971b158f7e76cf9ee92423714a376950620fc4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
