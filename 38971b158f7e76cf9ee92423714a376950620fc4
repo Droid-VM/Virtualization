@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb34560c_b797789e",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsRecoveryActivity.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-29T08:29:01Z",
+      "side": 1,
+      "message": "LGTM but could you share me the API reference or library code for this?\n\nThis is very new and I\u0027m afraid that I may not review your CL correctly.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 55
+      },
+      "revId": "38971b158f7e76cf9ee92423714a376950620fc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15cb06d8_9016f13b",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-29T08:29:01Z",
+      "side": 1,
+      "message": "nit; can we delete marker first, to prevent partial uninstall?",
+      "range": {
+        "startLine": 53,
+        "startChar": 21,
+        "endLine": 53,
+        "endChar": 49
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "338813f1_b3d4ea46",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
+              "range": {
+                "startLine": 53,
+                "startChar": 0,
+                "endLine": 54,
+                "endChar": 0
+              },
+              "replacement": "        Files.deleteIfExists(getInstallationCompletedPath(context));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "38971b158f7e76cf9ee92423714a376950620fc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
