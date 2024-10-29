@@ -19,6 +19,7 @@
 extern crate alloc;
 
 pub mod arch;
+#[cfg(bionic)]
 pub mod bionic;
 pub mod console;
 mod entry;
