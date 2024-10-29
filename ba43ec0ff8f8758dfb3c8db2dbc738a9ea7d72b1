@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54155550_26a3fd12",
+        "filename": "guest/pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-29T12:12:52Z",
+      "side": 1,
+      "message": "Done in aosp/3324756",
+      "parentUuid": "6de901a0_63698019",
+      "range": {
+        "startLine": 114,
+        "startChar": 33,
+        "endLine": 114,
+        "endChar": 39
+      },
+      "revId": "ba43ec0ff8f8758dfb3c8db2dbc738a9ea7d72b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7feaa1f_63891906",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-10-22T15:19:29Z",
       "side": 1,
       "message": "\"`granule`\" and drop the `size` field altogether?\n\nAlthough as we\u0027re reworking this error, it might make sense to print the IPA, expected PA, and received PA instead? I don\u0027t think that\u0027d leak anything as it\u0027s configured by the VMM anyway.",
+      "range": {
+        "startLine": 118,
+        "startChar": 49,
+        "endLine": 118,
+        "endChar": 56
+      },
+      "revId": "ba43ec0ff8f8758dfb3c8db2dbc738a9ea7d72b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72175e90_112fb440",
+        "filename": "guest/pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-29T12:12:52Z",
+      "side": 1,
+      "message": "Done in aosp/3324756.",
+      "parentUuid": "b7feaa1f_63891906",
       "range": {
         "startLine": 118,
         "startChar": 49,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dca2d80c_56272277",
+        "filename": "guest/pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-29T12:12:52Z",
+      "side": 1,
+      "message": "Done in aosp/3314797",
+      "parentUuid": "8ccfa59c_6451d57c",
+      "range": {
+        "startLine": 769,
+        "startChar": 22,
+        "endLine": 769,
+        "endChar": 24
+      },
+      "revId": "ba43ec0ff8f8758dfb3c8db2dbc738a9ea7d72b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1cd9a5c9_48023c9b",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53f2de91_4a375908",
+        "filename": "guest/pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-29T12:12:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cd9a5c9_48023c9b",
+      "range": {
+        "startLine": 770,
+        "startChar": 69,
+        "endLine": 770,
+        "endChar": 93
+      },
+      "revId": "ba43ec0ff8f8758dfb3c8db2dbc738a9ea7d72b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7059ef63_56187ea6",
@@ -106,6 +202,30 @@
       "writtenOn": "2024-10-22T15:19:29Z",
       "side": 1,
       "message": "Does `libpvmfw.device_assignment.test` still pass? Presubmit will tell us.\n\nI think you also have to change the tests using the `MockHypervisor` (and its `struct`).",
+      "range": {
+        "startLine": 1178,
+        "startChar": 82,
+        "endLine": 1178,
+        "endChar": 83
+      },
+      "revId": "ba43ec0ff8f8758dfb3c8db2dbc738a9ea7d72b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9d89c93_ea9805c2",
+        "filename": "guest/pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1178,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-29T12:12:52Z",
+      "side": 1,
+      "message": "Done in aosp/3324758",
+      "parentUuid": "7059ef63_56187ea6",
       "range": {
         "startLine": 1178,
         "startChar": 82,
@@ -153,6 +273,30 @@
       "side": 1,
       "message": "aosp/3314797 is probably the cleanest way without deeper refactoring as `parse_device_tree()` is called before the `MmioSharer` is available. Note that it uses the `MMIO_GUARD` granule instead of the `MEM_SHARE` granule, which feels more appropriate for validating assigned MMIO.",
       "parentUuid": "060b6522_7cb11ace",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 5
+      },
+      "revId": "ba43ec0ff8f8758dfb3c8db2dbc738a9ea7d72b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e8feeb3_bf484b1f",
+        "filename": "libs/libvmbase/src/hyp/hypervisor/kvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-29T12:12:52Z",
+      "side": 1,
+      "message": "removed this method",
+      "parentUuid": "86cf521e_2bddc805",
       "range": {
         "startLine": 194,
         "startChar": 0,
