@@ -55,7 +55,9 @@ public class InstallerService extends Service {
 
     // TODO(b/369740847): Replace this URL with dl.google.com
     private static final String IMAGE_URL =
-            "https://github.com/ikicha/debian_ci/releases/download/first/images.tar.gz";
+            Arrays.stream(Build.SUPPORTED_ABIS).anyMatch("x86_64"::equals)
+                    ? "https://github.com/ikicha/debian_ci/releases/download/release_x86_64/images.tar.gz"
+                    : "https://github.com/ikicha/debian_ci/releases/download/release_aarch64/images.tar.gz";
 
     private final Object mLock = new Object();
 
