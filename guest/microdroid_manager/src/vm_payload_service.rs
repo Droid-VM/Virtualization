@@ -125,6 +125,11 @@ impl IVmPayloadService for VmPayloadService {
             )
         })
     }
+
+    fn getSupportedServices(&self) -> binder::Result<Vec<String>> {
+        // go one deeper... get this from virtmgr
+        Ok(vec!["android.frameworks.stats.IStats/default".to_string()])
+    }
 }
 
 impl Interface for VmPayloadService {}

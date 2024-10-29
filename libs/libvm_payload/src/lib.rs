@@ -165,6 +165,51 @@ pub unsafe extern "C" fn AVmPayload_getAccessorBinder(instance: *const c_char) -
     }
 }
 
+/// TODO docs
+/// # Safety
+///
+/// TODO docs
+#[no_mangle]
+pub unsafe extern "C" fn AVmPayload_getSupportedServiceNames(
+    services_buffer: *mut *const c_char,
+    buffer_size: usize,
+    string_allocator: Option<
+        unsafe extern "C" fn(size_bytes: usize, data: *mut c_void) -> *mut c_void,
+    >,
+    context: *mut c_void,
+) -> usize {
+    initialize_logging();
+    let service = unwrap_or_abort(get_vm_payload_service());
+    let services = match service.getSupportedServices() {
+        Ok(s) => s,
+        Err(e) => {
+            error!("Failed to get supported service names from the VM payload service: {e:?}");
+            return 0;
+        }
+    };
+    let required_buffer_size = services.len() * std::mem::size_of::<*const c_char>();
+    if required_buffer_size == 0 || services_buffer.is_null() || buffer_size < required_buffer_size
+    {
+        return required_buffer_size;
+    }
+    let Some(allocator) = string_allocator else {
+        error!("No string_allocator provided!");
+        return 0;
+    };
+    for (x, s) in services.iter().enumerate() {
+        let i: isize = x.try_into().unwrap();
+        *services_buffer.offset(i) = allocator(s.len(), context);
+        if *services_buffer.offset(i) == ptr::null_mut() {
+            error!("Failed to allocate memory for a string");
+            // return the size that we've allocated already
+            return required_buffer_size - x * std::mem::size_of::<*const c_char>();
+        }
+        **services_buffer.offset(i) = s.as_bytes();
+    }
+
+    required_buffer_size
+}
+
 /// # Safety: Same as `AVmPayload_runVsockRpcServer`.
 unsafe fn try_run_vsock_server(
     service: *mut AIBinder,

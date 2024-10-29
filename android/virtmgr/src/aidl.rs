@@ -68,7 +68,7 @@ use binder::{
 };
 use cstr::cstr;
 use glob::glob;
-use libc::{AF_VSOCK, sa_family_t, sockaddr_vm};
+use libc::{AF_VSOCK, sa_family_t, sockaddr_vm, VMADDR_PORT_ANY};
 use log::{debug, error, info, warn};
 use microdroid_payload_config::{ApkConfig, Task, TaskType, VmPayloadConfig};
 use nix::unistd::pipe;
@@ -1952,7 +1952,6 @@ impl IVirtualMachineService for VirtualMachineService {
                 .with_log()
                 .or_binder_exception(ExceptionCode::SECURITY);
         }
-        const STATS_SERVICE_PORT: i32 = 2324;
 
         // don't block this service while attempting to get a service for the client in the VM.
         let local_svc: Strong<dyn IStats> = binder::check_interface(name)
@@ -1967,23 +1966,7 @@ impl IVirtualMachineService for VirtualMachineService {
             BinderFeatures::default(),
         );
 
-        match RpcServer::new_vsock(service.as_binder(), cid, STATS_SERVICE_PORT.try_into().unwrap())
-        {
-            Ok(vm_server) => {
-                vm_server.set_max_threads(4);
-                vm_server.start();
-                self.proxied_services.lock().unwrap().insert(name.to_string(), STATS_SERVICE_PORT);
-                info!("RpcServer proxy started for {name}.");
-            }
-            Err(err) => {
-                warn!(
-                    "Could not start RpcServer for {name} on port {}: {}",
-                    STATS_SERVICE_PORT, err
-                );
-            }
-        }
-
-        Ok(ServiceConnectionInfo { port: STATS_SERVICE_PORT })
+        self.start_delegator_vsock_service(service.as_binder(), name, cid)
     }
 }
 
@@ -1998,6 +1981,32 @@ impl VirtualMachineService {
             VirtualMachineService { state, cid, proxied_services: Default::default() },
             BinderFeatures::default(),
         )
+    }
+
+    fn start_delegator_vsock_service(
+        &self,
+        binder: SpIBinder,
+        name: &str,
+        cid: Cid,
+    ) -> binder::Result<ServiceConnectionInfo> {
+        match RpcServer::new_vsock(binder, cid, VMADDR_PORT_ANY) {
+            Ok((vm_server, assigned_port)) => {
+                // TODO this is failing try_into is failing occasionally
+                // with 'value: TryFromIntError(())'
+                // ofcourse as soon as I add this log, it never happens again.
+                info!("asdf assigned_port is {assigned_port}");
+                let port: i32 = assigned_port.try_into().unwrap();
+                // two threads in case we need callbacks
+                vm_server.set_max_threads(2);
+                vm_server.start();
+                self.proxied_services.lock().unwrap().insert(name.to_string(), port);
+                info!("RpcServer proxy started for {name}.");
+                Ok(ServiceConnectionInfo { port })
+            }
+            Err(err) => Err(anyhow!("Could not start RpcServer for {name}: {}", err))
+                .with_log()
+                .or_binder_exception(ExceptionCode::SECURITY),
+        }
     }
 }
 

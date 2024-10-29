@@ -125,4 +125,9 @@ interface IVmPayloadService {
      * set up the connection, so it must the process that creates the Accessor.
      */
     IBinder getAccessorBinder(in String service);
+
+    /**
+     * TODO docs
+     */
+    String[] getSupportedServices();
 }

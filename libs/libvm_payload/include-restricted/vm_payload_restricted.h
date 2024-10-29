@@ -88,4 +88,22 @@ AVmAttestationStatus AVmPayload_requestAttestationForTesting(
  */
 AIBinder* _Nullable AVmPayload_getAccessorBinder(const char* _Nonnull instance) __INTRODUCED_IN(36);
 
+/**
+ * This is a user supplied allocator that allocates a buffer to fill in
+ * with a UTF-8 string.
+ * The caller that supplies this function is responsible for freeing the
+ * returned data.
+ *
+ * \param the required size in bytes for the allocated buffer
+ * \param context pointer if needed by the callback
+ *
+ * \return allocated buffer of sizeBytes for a UTF-8 string. Null if allocation failed.
+ */
+typedef char* _Nullable (*_Nonnull AVmPayload_stringAllocator)(size_t sizeBytes,
+                                                               void* _Nullable context);
+// TODO docs
+size_t AVmPayload_getSupportedServiceNames(char* _Nullable* _Nullable servicesBuffer,
+                                           size_t bufferSizeBytes, AVmPayload_stringAllocator,
+                                           void* _Nullable context) __INTRODUCED_IN(36);
+
 __END_DECLS

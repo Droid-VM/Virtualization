@@ -34,7 +34,27 @@ ABinderRpc_Accessor* accessorProvider(const char* instance, void*) {
     return ABinderRpc_Accessor_fromBinder(instance, accessor);
 }
 
+// allocate a buffer for a string
+static char* stringAllocator(size_t bufferSizeBytes, void*) {
+    return (char*)malloc(bufferSizeBytes);
+}
+
 __attribute__((constructor)) void injectServices(void) {
+    size_t requiredBufferSizeBytes =
+            AVmPayload_getSupportedServiceNames(nullptr, 0, &stringAllocator, nullptr);
+    if (requiredBufferSizeBytes < sizeof(char**)) {
+        __android_log_write(ANDROID_LOG_INFO, TAG, "No available RPC services");
+        return;
+    }
+    char** servicesBuffer = (char**)malloc(requiredBufferSizeBytes);
+
+    requiredBufferSizeBytes =
+            AVmPayload_getSupportedServiceNames(servicesBuffer, requiredBufferSizeBytes,
+                                                &stringAllocator, nullptr);
+    if (requiredBufferSizeBytes < sizeof(char**)) {
+        __android_log_write(ANDROID_LOG_INFO, TAG, "Failed to get supported service names");
+        return;
+    }
     // TODO get this from microdroidmgr through a new AVmPayload API.
     const char* kSupportedServices[] = {
             "android.frameworks.stats.IStats/default",
@@ -42,6 +62,11 @@ __attribute__((constructor)) void injectServices(void) {
     ABinderRpc_AccessorProvider* provider =
             ABinderRpc_registerAccessorProvider(accessorProvider, kSupportedServices, 1, nullptr,
                                                 nullptr);
+    /*
+    ABinderRpc_AccessorProvider* provider =
+            ABinderRpc_registerAccessorProvider(accessorProvider, servicesBuffer,
+    requiredBufferSizeBytes / sizeof(char**), nullptr, nullptr);
+                                                */
 
     if (provider) {
         __android_log_write(ANDROID_LOG_INFO, TAG, "Added host binder RPC services to VM payload!");
