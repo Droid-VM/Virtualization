@@ -756,6 +756,8 @@ impl VirtualizationService {
             no_balloon: config.noBalloon,
             usb_config,
             dump_dt_fd,
+            enable_android_media: config.enableAndroidMedia,
+            extra_crosvm_args: config.extraCrosvmArgs.clone(),
         };
         let instance = Arc::new(
             VmInstance::new(
