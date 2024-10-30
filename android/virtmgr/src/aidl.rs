@@ -1975,6 +1975,10 @@ impl IVirtualMachineService for VirtualMachineService {
 
         self.start_delegator_vsock_service(service.as_binder(), name, cid)
     }
+    fn getSupportedHostServices(&self) -> binder::Result<Vec<String>> {
+        let stats_service_instance = <BpStats as IStats>::get_descriptor().to_owned() + "/default";
+        Ok(vec![stats_service_instance])
+    }
 }
 
 fn is_secretkeeper_supported() -> bool {

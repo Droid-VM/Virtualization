@@ -125,4 +125,11 @@ interface IVmPayloadService {
      * set up the connection, so it must the process that creates the Accessor.
      */
     IBinder getAccessorBinder(in String service);
+
+    /**
+     * Get all of the supported binder services over sockets. These are used used
+     * in libvm_payload to provide the info to libbinder to enable the payloads to use
+     * ServiceManager APIs.
+     */
+    String[] getSupportedServices();
 }

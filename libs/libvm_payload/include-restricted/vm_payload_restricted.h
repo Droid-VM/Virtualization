@@ -89,4 +89,48 @@ AVmAttestationStatus AVmPayload_requestAttestationForTesting(
 AIBinder* _Nullable AVmPayload_getAccessorBinder(const char* const _Nonnull instance)
         __INTRODUCED_IN(36);
 
+/**
+ * This is a user supplied allocator that allocates a buffer to fill in
+ * with a UTF-8 string.
+ * The caller that supplies this function is responsible for freeing the
+ * returned data.
+ *
+ * \param the required size in bytes for the allocated buffer
+ * \param context pointer if needed by the callback
+ *
+ * \return allocated buffer of sizeBytes for a UTF-8 string. Null if allocation failed.
+ */
+typedef char* _Nullable (*_Nullable AVmPayload_stringAllocator)(size_t sizeBytes,
+                                                                void* _Nullable context);
+/**
+ * This is used to get the service names for all of the supported binder RPC
+ * services for payloads in this VM.
+ *
+ * libvm_payload is the only library that needs to use this API in order to
+ * supply this information to libbinder inside of the payload process.
+ *
+ * This function should be called twice.
+ *  - First with null args to get the required size of `servicesBuffer` in bytes to
+ *  fit all of the service names.
+ *  - Second with an allocated servicesBuffer with size of bufferSizeBytes.
+ *
+ * \param servicesBuffer pre-allocated array of `char*` to fill in with the
+ * service names
+ * \param bufferSizeBytes number of bytes that were allocated for servicesBuffer
+ * \param allocator a function that will allocate the given number of bytes and
+ * return a char* to the allocated memory.
+ * \param context any required context that the allocator callback requires.
+ *
+ * \return If `servicesBuffer` is null or bufferSizeBytes is 0, this will return
+ *         the required size of the `servicesBuffer` in bytes.
+ *         If `servicesBuffer` is non-null and bufferSizeBytes is >
+ *         `sizeof(char*)`, then this will return the number of bytes of
+ *         `servicesBuffer` that were filled in with allocated `char*` from the
+ *         provided AVmPayload_stringAllocator.
+ */
+size_t AVmPayload_getSupportedServiceNames(char* _Nullable* _Nullable const servicesBuffer,
+                                           size_t bufferSizeBytes,
+                                           AVmPayload_stringAllocator allocator,
+                                           void* _Nullable context) __INTRODUCED_IN(36);
+
 __END_DECLS

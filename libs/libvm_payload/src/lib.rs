@@ -23,7 +23,7 @@ use binder::{
     unstable_api::{new_spibinder, AIBinder, AsNative},
     Strong, ExceptionCode,
 };
-use log::{error, info, LevelFilter};
+use log::{error, info, LevelFilter, warn};
 use rpcbinder::{FileDescriptorTransportMode, RpcServer, RpcSession};
 use openssl::{ec::EcKey, sha::sha256, ecdsa::EcdsaSig};
 use std::convert::Infallible;
@@ -163,6 +163,61 @@ pub unsafe extern "C" fn AVmPayload_getAccessorBinder(instance: *const c_char) -
             ptr::null_mut()
         }
     }
+}
+
+/// # Safety
+///
+/// TODO docs
+#[no_mangle]
+pub unsafe extern "C" fn AVmPayload_getSupportedServiceNames(
+    services_buffer: *mut *mut c_char,
+    buffer_size: usize,
+    string_allocator: Option<
+        unsafe extern "C" fn(size_bytes: usize, data: *mut c_void) -> *mut c_void,
+    >,
+    context: *mut c_void,
+) -> usize {
+    initialize_logging();
+    let service = unwrap_or_abort(get_vm_payload_service());
+    let services = match service.getSupportedServices() {
+        Ok(s) => s,
+        Err(e) => {
+            error!("Failed to get supported service names from the VM payload service: {e:?}");
+            return 0;
+        }
+    };
+    let required_buffer_size = services.len() * std::mem::size_of::<*const c_char>();
+    if required_buffer_size == 0 || services_buffer.is_null() {
+        return required_buffer_size;
+    }
+    let mut used_bytes: usize = 0;
+    let Some(allocator) = string_allocator else {
+        error!("No string_allocator provided!");
+        return used_bytes;
+    };
+    for (x, s) in services.iter().enumerate() {
+        if used_bytes + std::mem::size_of::<*const c_char>() > buffer_size {
+            warn!("The provided buffer ({buffer_size} bytes) is not large enough to fit all service names ({required_buffer_size} bytes). So only a subset of names are being returned");
+            return used_bytes;
+        }
+        let i: isize = x.try_into().unwrap();
+        // # Safety: TODO docs
+        unsafe {
+            *services_buffer.offset(i) = allocator(s.len(), context) as *mut i8;
+            if (*services_buffer.offset(i)).is_null() {
+                error!("Failed to allocate memory for a string");
+                // return the size that we've allocated already
+                return used_bytes;
+            }
+            std::ptr::copy_nonoverlapping(
+                s.as_bytes().as_ptr() as *const i8,
+                *services_buffer.offset(i),
+                s.len(),
+            );
+            used_bytes += std::mem::size_of::<*const c_char>();
+        }
+    }
+    used_bytes
 }
 
 /// # Safety: Same as `AVmPayload_runVsockRpcServer`.

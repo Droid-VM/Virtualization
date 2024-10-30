@@ -125,6 +125,10 @@ impl IVmPayloadService for VmPayloadService {
             )
         })
     }
+
+    fn getSupportedServices(&self) -> binder::Result<Vec<String>> {
+        self.virtual_machine_service.getSupportedHostServices()
+    }
 }
 
 impl Interface for VmPayloadService {}

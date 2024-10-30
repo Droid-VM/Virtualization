@@ -75,4 +75,9 @@ interface IVirtualMachineService {
      * Request VSOCK connection info for a specific host service.
      */
     ServiceConnectionInfo getServiceConnectionInfo(in String name);
+
+    /**
+     * Request the supported host VSOCK services.
+     */
+    String[] getSupportedHostServices();
 }
