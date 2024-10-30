@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7037e52e_56f3c765",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-10-30T13:42:16Z",
+      "side": 1,
+      "message": "The original intention of `vmbase` was to make it easy to build small single-purpose VM payloads. As such it provides the basic scaffolding to get some bare metal Rust code running directly in a VM. If you\u0027re trying to use it from an OS kernel then that seems quite far from the original intention.\n\nI\u0027ll let Pierre make the call on this as I don\u0027t really maintain it anymore, but this looks like a questionable direction to me. If there are particular parts of vmbase that you want to reuse, then it might make more sense to break those out to separate stand-alone libraries.",
+      "revId": "b4f0fe335d1914437a7c3090f8770755c0cf6151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
