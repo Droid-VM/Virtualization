@@ -33,6 +33,24 @@
       "message": "can we make ttyd.service require this?",
       "revId": "0faa90332da85457fba45096ed57d364736fe508",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2db1c88e_cd4c64a0",
+        "filename": "build/debian/fai_config/files/etc/systemd/system/virtiofs.service/AVF",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-10-30T23:31:05Z",
+      "side": 1,
+      "message": "This only mounts emulated mount point. I haven\u0027t mounted the internal storage mounts. This specific mount shouldn\u0027t have any dependency on ttyd.service.\n\nOnce you have the \"internal storage\" ready to be mounted, we can either add it to this systemd service or create a new one which depends on ttyd.",
+      "parentUuid": "88a48c46_59c75f9f",
+      "revId": "0faa90332da85457fba45096ed57d364736fe508",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
