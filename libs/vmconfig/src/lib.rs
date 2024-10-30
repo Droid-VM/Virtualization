@@ -71,6 +71,15 @@ pub struct VmConfig {
     pub console_input_device: Option<String>,
     /// The USB config of the VM.
     pub usb_config: Option<UsbConfig>,
+    /// Whether the VM should have network feature.
+    #[serde(default)]
+    pub network_supported: bool,
+    /// Whether or not to enable the android virtio-media device.
+    #[serde(default)]
+    pub enable_android_media: bool,
+    /// Any extra arguments to crosvm
+    #[serde(default)]
+    pub extra_crosvm_args: Option<String>,
 }
 
 impl VmConfig {
@@ -133,6 +142,9 @@ impl VmConfig {
                 .collect::<Result<_>>()?,
             consoleInputDevice: self.console_input_device.clone(),
             usbConfig: usb_config,
+            networkSupported: self.network_supported,
+            enableAndroidMedia: self.enable_android_media,
+            extraCrosvmArgs: self.extra_crosvm_args.clone(),
             ..Default::default()
         })
     }
