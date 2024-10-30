@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f616b5a2_18f01f66",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsRecoveryActivity.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-30T01:38:00Z",
+      "side": 1,
+      "message": "I\u0027m not still certain what happens if the dialog nor activity is destroyed while uninstalling. could you explain me the behavior?\n\nPlus, do you know anyone for non-trivial kotlin review?",
+      "parentUuid": "b4b45d05_2f69308c",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 55
+      },
+      "revId": "38971b158f7e76cf9ee92423714a376950620fc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15cb06d8_9016f13b",
         "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
         "patchSetId": 2
@@ -103,6 +127,30 @@
       "side": 1,
       "message": "I think `getInstallationCompletedPath(context)` is the marker file.\nOr do you mean other?",
       "parentUuid": "15cb06d8_9016f13b",
+      "range": {
+        "startLine": 53,
+        "startChar": 21,
+        "endLine": 53,
+        "endChar": 49
+      },
+      "revId": "38971b158f7e76cf9ee92423714a376950620fc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5723b57b_ae625684",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-30T01:38:00Z",
+      "side": 1,
+      "message": "Uh, I thought that you\u0027re deleting whole files.",
+      "parentUuid": "8e4e9478_ba33703e",
       "range": {
         "startLine": 53,
         "startChar": 21,
