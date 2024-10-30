@@ -22,6 +22,30 @@
       },
       "revId": "4d965f76a40a93d721efe998271b571929accc76",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb93883d_c79cc463",
+        "filename": "libs/service-virtualization/src/com/android/system/virtualmachine/VirtualizationSystemService.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1950860
+      },
+      "writtenOn": "2024-10-30T09:17:43Z",
+      "side": 1,
+      "message": "Action must be checked for null.\nIf the action is null, executing \"switch (action)\"(#128) will result in NPE.",
+      "parentUuid": "32fd6b1c_738b9bdd",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 13
+      },
+      "revId": "4d965f76a40a93d721efe998271b571929accc76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
