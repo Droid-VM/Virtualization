@@ -111,6 +111,11 @@ parcelable VirtualMachineRawConfig {
     /** Enable or disable USB passthrough support */
     @nullable UsbConfig usbConfig;
 
+    /** Enable MediaCodec-backed android virtio-media device */
+    boolean enableAndroidMedia;
+
+    @nullable @utf8InCpp String extraCrosvmArgs;
+
     /** List of tee services this VM wants to access */
     String[] teeServices;
 }
