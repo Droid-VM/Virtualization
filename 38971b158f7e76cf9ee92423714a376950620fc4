@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2452279d_683065d1",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsRecoveryActivity.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-10-30T03:25:56Z",
+      "side": 1,
+      "message": "Oh, it actually will be stopped if the activity is destroyed.\nAppCompatActivity owns a LifeCycle. So when a AppCompatActivity is killed, the lifecycle launched coroutine is killed too.\n\nAnd we can run something when the lifecycle is destroyed with `finally` as the [doc](https://developer.android.com/topic/libraries/architecture/coroutines#suspend) shows. But I think this it\u0027s no need for this task? It\u0027s fine if the activity is killed before the maker file being deleted.\n\nI don\u0027t know any Kotlin experts. Or should I avoid using Kotlin? I may sometimes confuse others...\n\nI use Kotlin just because Java and Kotlin have the same familiarity to me. And Kotlin is more recommended.",
+      "parentUuid": "f616b5a2_18f01f66",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 55
+      },
+      "revId": "38971b158f7e76cf9ee92423714a376950620fc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "118d46a0_022048cf",
         "filename": "android/TerminalApp/res/values/strings.xml",
         "patchSetId": 2
