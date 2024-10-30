@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e6eaa54a_3854abb5",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsRecoveryActivity.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-30T14:54:37Z",
+      "side": 1,
+      "message": "Agreed that it\u0027s less danger. Let\u0027s add a comment to explain the current behavior for later reference. You can ack here and submit.\n\nOne question before submit: How did you destroy the Activity? If you dismissed from the Recents, then it\u0027s considered as task removed, which is stronger signal than onDestroy(). For example, if task is dismissed, InstallerService would be destroyed (I configured that way) as well activity\u0027s onDestroy() may not imply so. If you dismissed from the Recents, then I believe that killing Dispatcher.IO may be an intended behavior because holding process is killed.\n\nRe kotlin vs Java: You can pick whatever you want, but please make sure that you may spend extra time with kotlin simply because of no reviewer in our team. If you can find an active kotlin chatroom, you may be OK.\nJava is better at work in nextgen, because Android framework is written in Java first. You may end with with learning kotlin and Java for work purpose, especially because we may need to call @hide APIs which may not be available in kotlin.\nKotlin may be better for writing apps, but I can\u0027t comment on that because I haven\u0027t used kotlin much. AFAIK, kotlin is better for null safety and multi-thread aware, but null safety can be enforced by lint (e.g. checkerframework) and multithreading is hard to write properly regardless of the language choice.",
+      "parentUuid": "2452279d_683065d1",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 55
+      },
+      "revId": "38971b158f7e76cf9ee92423714a376950620fc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "118d46a0_022048cf",
         "filename": "android/TerminalApp/res/values/strings.xml",
         "patchSetId": 2
@@ -109,6 +133,30 @@
       "writtenOn": "2024-10-30T01:56:06Z",
       "side": 1,
       "message": "This says \u0027all data\u0027 but we\u0027re keeping actual data. Is it intended behavior?",
+      "range": {
+        "startLine": 93,
+        "startChar": 58,
+        "endLine": 93,
+        "endChar": 82
+      },
+      "revId": "38971b158f7e76cf9ee92423714a376950620fc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95967688_6d4b16f4",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-10-30T14:54:37Z",
+      "side": 1,
+      "message": "I\u0027m asking this because the app would still occupy large data. I\u0027d recommend to change the wording to the \u0027Data will be deleted\u0027, but you can check the exact behavior with the team.\n\nPersonally I don\u0027t understand why reset is needed while we can wipe data from Settings, though.",
+      "parentUuid": "118d46a0_022048cf",
       "range": {
         "startLine": 93,
         "startChar": 58,
