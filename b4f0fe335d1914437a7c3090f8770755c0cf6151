@@ -16,6 +16,24 @@
       "message": "The original intention of `vmbase` was to make it easy to build small single-purpose VM payloads. As such it provides the basic scaffolding to get some bare metal Rust code running directly in a VM. If you\u0027re trying to use it from an OS kernel then that seems quite far from the original intention.\n\nI\u0027ll let Pierre make the call on this as I don\u0027t really maintain it anymore, but this looks like a questionable direction to me. If there are particular parts of vmbase that you want to reuse, then it might make more sense to break those out to separate stand-alone libraries.",
       "revId": "b4f0fe335d1914437a7c3090f8770755c0cf6151",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a26663f5_98f1218f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-10-30T14:28:41Z",
+      "side": 1,
+      "message": "+1 to everything Andrew said.\n\nI suppose you\u0027re interested in the virtio drivers? If so, feel free to either directly depend on the `virtio-drivers` crate or carve out the bits you need into a stand-alone library.\n\nFYI, see resolved comments on go/trusty-binder-vsock.",
+      "parentUuid": "7037e52e_56f3c765",
+      "revId": "b4f0fe335d1914437a7c3090f8770755c0cf6151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
