@@ -120,7 +120,12 @@ public class VirtualizationSystemService extends SystemService {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            switch (intent.getAction()) {
+            final String action = intent.getAction();
+            if (action == null) {
+                return;
+            }
+
+            switch (action) {
                 case Intent.ACTION_USER_REMOVED:
                     onUserRemoved(intent);
                     break;
