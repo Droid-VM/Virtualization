@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "263a7dce_2a172c63",
+        "filename": "libs/service-virtualization/src/com/android/system/virtualmachine/VirtualizationSystemService.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-10-30T08:29:36Z",
+      "side": 1,
+      "message": "Instead of having the check above, how about replacing this with `intent`?",
+      "range": {
+        "startLine": 136,
+        "startChar": 64,
+        "endLine": 136,
+        "endChar": 70
+      },
+      "revId": "0830012443cf1d369d0863ea7b437846e9ba4363",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
