@@ -64,6 +64,7 @@ import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
+import java.util.Enumeration;
 
 public class MainActivity extends BaseActivity
         implements VmLauncherServices.VmLauncherServiceCallback,
@@ -107,8 +108,8 @@ public class MainActivity extends BaseActivity
         mAccessibilityManager = getSystemService(AccessibilityManager.class);
         mAccessibilityManager.addTouchExplorationStateChangeListener(this);
 
-        connectToTerminalService();
         readClientCertificate();
+        connectToTerminalService();
 
         // if installer is launched, it will be handled in onActivityResult
         if (!launchInstaller) {
@@ -146,15 +147,19 @@ public class MainActivity extends BaseActivity
                 getClass().getResourceAsStream("/assets/client.p12")) {
             KeyStore keyStore = KeyStore.getInstance("PKCS12");
             String password = "1234";
-            String alias = "1";
 
             keyStore.load(keystoreFileStream, password != null ? password.toCharArray() : null);
-            Key key = keyStore.getKey(alias, password.toCharArray());
-            if (key instanceof PrivateKey) {
-                mPrivateKey = (PrivateKey) key;
-                Certificate cert = keyStore.getCertificate(alias);
-                mCertificates = new X509Certificate[1];
-                mCertificates[0] = (X509Certificate) cert;
+            Enumeration<String> enumeration = keyStore.aliases();
+            while (enumeration.hasMoreElements()) {
+                String alias = enumeration.nextElement();
+                Key key = keyStore.getKey(alias, password.toCharArray());
+                if (key instanceof PrivateKey) {
+                    mPrivateKey = (PrivateKey) key;
+                    Certificate cert = keyStore.getCertificate(alias);
+                    mCertificates = new X509Certificate[1];
+                    mCertificates[0] = (X509Certificate) cert;
+                    return;
+                }
             }
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
