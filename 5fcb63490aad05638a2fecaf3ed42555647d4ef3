@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d486fbf3_43a076a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-10-31T02:59:15Z",
+      "side": 1,
+      "message": "Sure. Thanks - I will follow up with a refactor CL.",
+      "parentUuid": "ab8a629b_ef1bff22",
+      "revId": "5fcb63490aad05638a2fecaf3ed42555647d4ef3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74abdb98_e24bc705",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-10-30T22:49:35Z",
       "side": 1,
       "message": "We have https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/guest/microdroid_manager/src/ioutil.rs;drc\u003d7ec05d0d8cd07996a9a94baf6d21e4e3bb2b79ff;l\u003d35\n\nCan you make it a standalone library and use it instead?",
+      "revId": "5fcb63490aad05638a2fecaf3ed42555647d4ef3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e76de31_4be6cf91",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1275,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-10-31T02:59:15Z",
+      "side": 1,
+      "message": "Ah ok. Thanks for the pointer.\n\nI will refactor this out as a follow-up CL.",
+      "parentUuid": "74abdb98_e24bc705",
       "revId": "5fcb63490aad05638a2fecaf3ed42555647d4ef3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
