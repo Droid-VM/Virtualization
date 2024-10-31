@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "188829f2_e41383c5",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-31T00:19:30Z",
+      "side": 1,
+      "message": "we may want to declare it as string resource.(we can do it as a follow-up)",
+      "range": {
+        "startLine": 127,
+        "startChar": 53,
+        "endLine": 127,
+        "endChar": 78
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f57cfbd8_16807fce",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+              "range": {
+                "startLine": 127,
+                "startChar": 0,
+                "endLine": 128,
+                "endChar": 0
+              },
+              "replacement": "                                Toast.makeText(\n                                                this,\n                                                getString(R.string.storage_permission_set),\n                                                Toast.LENGTH_SHORT)\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+              "range": {
+                "startLine": 132,
+                "startChar": 0,
+                "endLine": 133,
+                "endChar": 0
+              },
+              "replacement": "                                                getString(R.string.storage_permission_not_set),\n"
+            }
+          ]
+        }
+      ],
+      "revId": "62bb18170ab2d4cb31acac41c98354b1bcaaff00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f59a0c02_f74e757c",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-31T00:19:30Z",
+      "side": 1,
+      "message": "out of curiosity, IIUC, the app can access to /sdcard only with MANAGE_EXTERNAL_STORAGE permission(for the sdcard installation path), which permission do we get more with this flow?",
+      "range": {
+        "startLine": 151,
+        "startChar": 44,
+        "endLine": 151,
+        "endChar": 89
+      },
+      "revId": "62bb18170ab2d4cb31acac41c98354b1bcaaff00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
