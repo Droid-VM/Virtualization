@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17d8abe7_a3d7683e",
+        "filename": "libs/libvm_payload/libvm_payload.map.txt",
+        "patchSetId": 15
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-10-31T11:21:07Z",
+      "side": 1,
+      "message": "Copying my comment from the email thread here.\n\nThe vm_payload.h is targeted towards payloads that can be updated outside of OTA (e.g. through an app update). Such payloads (similar to updatable apps) can\u0027t use platform\u0027s AIDL interfaces directly, since an OS upgrade can potentially break them because the platform aidl interfaces are by design not stable. I suggest moving the API to vm_payload_restricted.h, this way it will be only available to non-updatable payloads, which I think can benefit more from it.",
+      "range": {
+        "startLine": 18,
+        "startChar": 4,
+        "endLine": 18,
+        "endChar": 32
+      },
+      "revId": "5124388d0ec967238711e5f6b5d7071615f5dfe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
