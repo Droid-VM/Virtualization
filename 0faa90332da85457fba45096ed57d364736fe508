@@ -110,6 +110,30 @@
       },
       "revId": "0faa90332da85457fba45096ed57d364736fe508",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e93cd209_c1f36f0d",
+        "filename": "build/debian/vm_config.json.aarch64",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-10-31T06:40:57Z",
+      "side": 1,
+      "message": "what does APPDATA_DIR point to ?\n\n/data/data/ is a bind mount of /data/user/\u003cuid\u003e\n\nWe need to pass the path of the current active user - hence i chose /data/data/. My understanding is that /data/data will point to /data/user/\u003cuid\u003e of the current active user.",
+      "parentUuid": "44522c09_fb3ee219",
+      "range": {
+        "startLine": 15,
+        "startChar": 27,
+        "endLine": 15,
+        "endChar": 81
+      },
+      "revId": "0faa90332da85457fba45096ed57d364736fe508",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
