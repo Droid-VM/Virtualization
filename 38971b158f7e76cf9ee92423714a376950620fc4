@@ -122,6 +122,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e642fcca_9856c688",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsRecoveryActivity.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-10-31T05:28:14Z",
+      "side": 1,
+      "message": "Acknowledged, I added some comments.\n\nI think`finally` is like the onDestroy() of the coroutine. I\u0027m not sure if the `finally` will be called in the task removal. But I guess so? So in implementation, we should do some checks to prevent the incomplete coroutine mess up things.\n\nThanks you telling me about Kotlin and Java. I didn\u0027t know about the platform is Java first before... And you are right the Kotlin is recommended only in app development, I can see some platform apps with Kotlin implementation. But I will tend to use Java in the future. Although it may be easier to write apps with, it causes additional effort on collaboration and which is more important.",
+      "parentUuid": "e6eaa54a_3854abb5",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 55
+      },
+      "revId": "38971b158f7e76cf9ee92423714a376950620fc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "118d46a0_022048cf",
         "filename": "android/TerminalApp/res/values/strings.xml",
         "patchSetId": 2
@@ -157,6 +181,30 @@
       "side": 1,
       "message": "I\u0027m asking this because the app would still occupy large data. I\u0027d recommend to change the wording to the \u0027Data will be deleted\u0027, but you can check the exact behavior with the team.\n\nPersonally I don\u0027t understand why reset is needed while we can wipe data from Settings, though.",
       "parentUuid": "118d46a0_022048cf",
+      "range": {
+        "startLine": 93,
+        "startChar": 58,
+        "endLine": 93,
+        "endChar": 82
+      },
+      "revId": "38971b158f7e76cf9ee92423714a376950620fc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e8e2def_e7b9fd61",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-10-31T05:28:14Z",
+      "side": 1,
+      "message": "Thanks, changed the text.\n\nYeah, this feature is quite redundant. I just follow the UI design. But I think this page will have other options like backup \u0026 restore. the reset is just an option. I think that\u0027s why this reset is introduced.\n\nBTW I can\u0027t clear storage of terminal app from settings actually.",
+      "parentUuid": "95967688_6d4b16f4",
       "range": {
         "startLine": 93,
         "startChar": 58,
