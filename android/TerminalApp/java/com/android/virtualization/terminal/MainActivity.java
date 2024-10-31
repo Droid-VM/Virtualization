@@ -491,7 +491,8 @@ public class MainActivity extends BaseActivity
                         .setContentTitle(
                                 getResources().getString(R.string.service_notification_title))
                         .setContentText(
-                                getResources().getString(R.string.service_notification_content))
+                                getResources()
+                                        .getString(R.string.service_notification_content_dismiss))
                         .setContentIntent(pendingIntent)
                         .setOngoing(true)
                         .addAction(
