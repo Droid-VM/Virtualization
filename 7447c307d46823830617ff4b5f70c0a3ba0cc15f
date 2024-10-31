@@ -16,6 +16,24 @@
       "message": "do we want to open vsock port directly with cid in the app context? it looks like normally an app uses FD via VirtualMachine.connectVsock(port) instead of connecting the vsock port with cid directly. I was just curious if it is discouraged or just okay. @jiyong@google.com",
       "revId": "7447c307d46823830617ff4b5f70c0a3ba0cc15f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc12a35b_6d310128",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-10-31T01:15:57Z",
+      "side": 1,
+      "message": "Are you suggesting about not creating vsock socket in the app of the host, but doing it in the guest? That\u0027s on my mind but I prefer to keep current implementation in advance and do modification later.",
+      "parentUuid": "984a1c16_d34d92ee",
+      "revId": "7447c307d46823830617ff4b5f70c0a3ba0cc15f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
