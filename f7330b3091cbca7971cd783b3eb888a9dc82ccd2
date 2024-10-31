@@ -70,6 +70,30 @@
       },
       "revId": "f7330b3091cbca7971cd783b3eb888a9dc82ccd2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f66b738_111c9bce",
+        "filename": "build/debian/fai_config/files/etc/systemd/system/forwarder_guest_launcher.service/AVF",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-10-31T01:29:14Z",
+      "side": 1,
+      "message": "it was, we wanted to report ip addr after ttyd is running because notifying ip addr made the app connect to ttyd, so ttyd should be ready at that moment. but it isn\u0027t because we use static ip addr.(actually the service itself is obsolete now)",
+      "parentUuid": "91324329_e111d9b3",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 21
+      },
+      "revId": "f7330b3091cbca7971cd783b3eb888a9dc82ccd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
