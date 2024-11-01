@@ -16,6 +16,23 @@
       "message": "follow-up for https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3328193/comments/30bb251a_d23a9890",
       "revId": "9e2f53586b33c59bbb8af817a39fb5a9bae94259",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a78923d_019b12fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-01T02:26:58Z",
+      "side": 1,
+      "message": "Have we made any agreement here? What happens if notification is dismissed and we don\u0027t do anything here?\nMy assumption is that VM service would become background service and prone to be killed by OOM killer; is this what we want?\n\nFYI, Play revives the downloaded notification when its dismissed. Should we follow the pattern or is there a guidance from the notification team?",
+      "revId": "9e2f53586b33c59bbb8af817a39fb5a9bae94259",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
