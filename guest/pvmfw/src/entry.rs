@@ -17,21 +17,20 @@
 use crate::config;
 use crate::memory;
 use core::arch::asm;
-use core::mem::{drop, size_of};
+use core::mem::size_of;
 use core::ops::Range;
 use core::slice;
-use hypervisor_backends::get_mmio_guard;
 use log::error;
-use log::info;
 use log::warn;
 use log::LevelFilter;
 use vmbase::util::RangeExt as _;
 use vmbase::{
     arch::aarch64::min_dcache_line_size,
-    configure_heap, console_writeln,
-    layout::{self, crosvm, UART_PAGE_ADDR},
-    main,
-    memory::{MemoryTracker, MEMORY, SIZE_128KB, SIZE_4KB},
+    configure_heap, console_writeln, layout, main,
+    memory::{
+        deactivate_dynamic_page_tables, switch_to_dynamic_page_tables, unshare_all_memory,
+        unshare_all_mmio_except_uart, unshare_uart, SIZE_128KB, SIZE_4KB,
+    },
     power::reboot,
 };
 use zeroize::Zeroize;
@@ -125,12 +124,7 @@ fn main_wrapper(
     let config_entries = appended.get_entries();
 
     // Up to this point, we were using the built-in static (from .rodata) page tables.
-    MEMORY.lock().replace(MemoryTracker::new(
-        page_table,
-        crosvm::MEM_START..layout::MAX_VIRT_ADDR,
-        crosvm::MMIO_RANGE,
-        Some(memory::appended_payload_range()),
-    ));
+    switch_to_dynamic_page_tables(page_table, Some(memory::appended_payload_range()));
 
     let slices = memory::MemorySlices::new(
         fdt,
@@ -152,27 +146,23 @@ fn main_wrapper(
     // Writable-dirty regions will be flushed when MemoryTracker is dropped.
     config_entries.bcc.zeroize();
 
-    info!("Expecting a bug making MMIO_GUARD_UNMAP return NOT_SUPPORTED on success");
-    MEMORY.lock().as_mut().unwrap().unshare_all_mmio().map_err(|e| {
+    unshare_all_mmio_except_uart().map_err(|e| {
         error!("Failed to unshare MMIO ranges: {e}");
         RebootReason::InternalError
     })?;
     // Call unshare_all_memory here (instead of relying on the dtor) while UART is still mapped.
-    MEMORY.lock().as_mut().unwrap().unshare_all_memory();
+    unshare_all_memory();
 
-    if let Some(mmio_guard) = get_mmio_guard() {
-        if cfg!(debuggable_vms_improvements) && debuggable_payload {
-            // Keep UART MMIO_GUARD-ed for debuggable payloads, to enable earlycon.
-        } else {
-            mmio_guard.unmap(UART_PAGE_ADDR).map_err(|e| {
-                error!("Failed to unshare the UART: {e}");
-                RebootReason::InternalError
-            })?;
-        }
+    if cfg!(debuggable_vms_improvements) && debuggable_payload {
+        // Keep UART MMIO_GUARD-ed for debuggable payloads, to enable earlycon.
+    } else {
+        unshare_uart().map_err(|e| {
+            error!("Failed to unshare the UART: {e}");
+            RebootReason::InternalError
+        })?;
     }
 
-    // Drop MemoryTracker and deactivate page table.
-    drop(MEMORY.lock().take());
+    deactivate_dynamic_page_tables();
 
     Ok((slices.kernel.as_ptr() as usize, next_bcc))
 }
@@ -309,7 +299,7 @@ unsafe fn get_appended_data_slice() -> &'static mut [u8] {
     let range = memory::appended_payload_range();
     // SAFETY: This region is mapped and the linker script prevents it from overlapping with other
     // objects.
-    unsafe { slice::from_raw_parts_mut(range.start.0 as *mut u8, range.end - range.start) }
+    unsafe { slice::from_raw_parts_mut(range.start as *mut u8, range.end - range.start) }
 }
 
 enum AppendedPayload<'a> {
