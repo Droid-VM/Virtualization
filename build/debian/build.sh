@@ -82,6 +82,7 @@ install_prerequisites() {
 			gcc-aarch64-linux-gnu
 			libc6-dev-arm64-cross
 			qemu-system-arm
+			gdisk
 		)
 	else
 		packages+=(
@@ -185,18 +186,52 @@ download_debian_cloud_image
 copy_android_config
 run_fai
 fdisk -l image.raw
-images=(image.raw)
+images=()
+
+cp $(dirname $0)/vm_config.json.${arch} vm_config.json
+
+extract_partition() {
+	partition_name=$1
+	partition_num=$2
+	start=$3
+	end=$4
+	echo Extracting partition $partition_num root from $start to $end
+	count=$((end - start + 1))
+	dd if=image.raw of="$partition_name" bs=512 skip="$start" count="$count"
+
+	guid=$(sgdisk image.raw -i $partition_num | grep "Partition unique GUID" | cut -d ' ' -f 4)
+	sed -i 's/{'"$partition_name"'_guid}/'"$guid"'/g' vm_config.json
+	echo "Extracted partition $partition_num to $partition_name"
+}
+
+if [[ "$arch" == "aarch64" ]]; then
+        # 8305 stands for Linux ARM64 root (/)
+	root_part=$(sgdisk --print image.raw | awk '/8305/ {print $1, $2, $3}')
+        # EF00 stands for EFI System
+	efi_part=$(sgdisk --print image.raw | awk '/EF00/ {print $1, $2, $3}')
+	extract_partition root_part $root_part
+	# For kernel with newer e2fsck version, omit the orphan_file feature for android
+	tune2fs -O ^orphan_file root_part || true
+	e2fsck -f root_part
+	extract_partition efi_part $efi_part
+
+	images+=(
+		root_part
+		efi_part
+	)
+fi
+
 # TODO(b/365955006): remove these lines when uboot supports x86_64 EFI application
 if [[ "$arch" == "x86_64" ]]; then
 	virt-get-kernel -a image.raw
 	mv vmlinuz* vmlinuz
 	mv initrd.img* initrd.img
 	images+=(
+		image.raw
 		vmlinuz
 		initrd.img
 	)
 fi
 
-cp $(dirname $0)/vm_config.json.${arch} vm_config.json
 # --sparse option isn't supported in apache-commons-compress
 tar czv -f images.tar.gz ${images[@]} vm_config.json
