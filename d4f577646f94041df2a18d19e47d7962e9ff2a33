@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1d575370_469d0dae",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualmachineservice/IVirtualMachineService.aidl",
+        "patchSetId": 13
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-11-01T20:56:59Z",
+      "side": 1,
+      "message": "Yeah, so I\u0027m thinking maybe create a different interface like:\n\ninterface IServiceManagerProvider {}\n\nwith this stuff in it.\n\nThen we can use it with this (apparently) microdroid-specific interface. We could also inject that into Trusty separately, or we could serve it to separate automotive hosts as well.",
+      "parentUuid": "6a1d2e81_9aa02575",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 67
+      },
+      "revId": "d4f577646f94041df2a18d19e47d7962e9ff2a33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a3b5d83a_657d1533",
         "filename": "libs/libvm_payload/include/vm_payload.h",
         "patchSetId": 13
