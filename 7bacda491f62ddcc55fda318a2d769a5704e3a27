@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fbc18f8_9b7904fa",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingAdapter.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-11-01T13:05:51Z",
+      "side": 1,
+      "message": "@seungjaeyoo@google.com here you can place some code for enabling/disabling ports.",
+      "fixSuggestions": [
+        {
+          "fixId": "95fe36b5_925f948f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingAdapter.kt",
+              "range": {
+                "startLine": 58,
+                "startChar": 0,
+                "endLine": 58,
+                "endChar": 0
+              },
+              "replacement": "            // TODO(b/271052111): Enable/disable port forwarding\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7bacda491f62ddcc55fda318a2d769a5704e3a27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
