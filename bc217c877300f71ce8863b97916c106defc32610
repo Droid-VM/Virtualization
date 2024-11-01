@@ -72,6 +72,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef4b7a36_55eb89c6",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-11-01T17:47:23Z",
+      "side": 1,
+      "message": "+1 to this - loop mount seems reliable but might require \"root\" access which i think build.sh already expects it.",
+      "parentUuid": "445bb142_cd50a382",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 211,
+        "endChar": 71
+      },
+      "revId": "bc217c877300f71ce8863b97916c106defc32610",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04ac26a1_9fa39fa6",
         "filename": "build/debian/build.sh",
         "patchSetId": 5
