@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2b71b57_a0171a2d",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-01T17:44:50Z",
+      "side": 1,
+      "message": "`sfdisk --part-uuid image.raw $num` is simpler",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 92
+      },
+      "revId": "bc217c877300f71ce8863b97916c106defc32610",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6d92aa9_4c29a10f",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-01T17:44:50Z",
+      "side": 1,
+      "message": "Move functions up in the program. And consider sorting functions in the order they are executed.",
+      "range": {
+        "startLine": 193,
+        "startChar": 0,
+        "endLine": 206,
+        "endChar": 0
+      },
+      "revId": "bc217c877300f71ce8863b97916c106defc32610",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "445bb142_cd50a382",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-01T17:44:50Z",
+      "side": 1,
+      "message": "The entire function looks too verbose to me.\n\nSince we have root access.. what about this?\n\n```\nloop\u003d$(losetup -f --show --partscan image.raw)\ndd if\u003d/dev/${loop}p1 of\u003droot_part\ndd if\u003d/dev/${loop}p15 of\u003defi_part\nlosetup -d ${loop}\n```",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 211,
+        "endChar": 71
+      },
+      "revId": "bc217c877300f71ce8863b97916c106defc32610",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04ac26a1_9fa39fa6",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-01T17:44:50Z",
+      "side": 1,
+      "message": "make this also as a function",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 222,
+        "endChar": 2
+      },
+      "revId": "bc217c877300f71ce8863b97916c106defc32610",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
