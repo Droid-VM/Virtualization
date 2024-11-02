@@ -60,9 +60,6 @@ pub fn init_page_table() -> result::Result<PageTable, MapError> {
     page_table.map_data(&stack_range().into())?;
     page_table.map_code(&layout::text_range().into())?;
     page_table.map_rodata(&layout::rodata_range().into())?;
-    let payload = appended_payload_range();
-    page_table
-        .map_data_dbm(&(VirtualAddress(payload.start)..VirtualAddress(payload.end)).into())?;
     if let Err(e) = page_table.map_device(&layout::console_uart_page().into()) {
         error!("Failed to remap the UART as a dynamic page table entry: {e}");
         return Err(e);

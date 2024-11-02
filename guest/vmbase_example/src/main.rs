@@ -74,7 +74,7 @@ pub fn main(arg0: u64, arg1: u64, arg2: u64, arg3: u64) {
     let mut page_table = PageTable::default();
     init_page_table(&mut page_table).unwrap();
     info!("Activating IdMap...");
-    switch_to_dynamic_page_tables(page_table, None);
+    switch_to_dynamic_page_tables(page_table);
     info!("Activated.");
 
     info!("Checking FDT...");

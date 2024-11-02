@@ -28,8 +28,9 @@ use vmbase::{
     arch::aarch64::min_dcache_line_size,
     configure_heap, console_writeln, layout, main,
     memory::{
-        deactivate_dynamic_page_tables, switch_to_dynamic_page_tables, unshare_all_memory,
-        unshare_all_mmio_except_uart, unshare_uart, SIZE_128KB, SIZE_4KB,
+        deactivate_dynamic_page_tables, map_data_outside_main_memory,
+        switch_to_dynamic_page_tables, unshare_all_memory, unshare_all_mmio_except_uart,
+        unshare_uart, MemoryTrackerError, SIZE_128KB, SIZE_4KB,
     },
     power::reboot,
 };
@@ -111,10 +112,14 @@ fn main_wrapper(
         error!("Failed to set up the dynamic page tables: {e}");
         RebootReason::InternalError
     })?;
+    switch_to_dynamic_page_tables(page_table);
 
     // SAFETY: We only get the appended payload from here, once. The region was statically mapped,
     // then remapped by `init_page_table()`.
-    let appended_data = unsafe { get_appended_data_slice() };
+    let appended_data = unsafe { get_appended_data_slice() }.map_err(|e| {
+        error!("Failed to map the appended data: {e}");
+        RebootReason::InternalError
+    })?;
 
     let appended = AppendedPayload::new(appended_data).ok_or_else(|| {
         error!("No valid configuration found");
@@ -122,9 +127,6 @@ fn main_wrapper(
     })?;
 
     let config_entries = appended.get_entries();
-
-    // Up to this point, we were using the built-in static (from .rodata) page tables.
-    switch_to_dynamic_page_tables(page_table, Some(memory::appended_payload_range()));
 
     let slices = memory::MemorySlices::new(
         fdt,
@@ -295,11 +297,13 @@ fn jump_to_payload(fdt_address: u64, payload_start: u64, bcc: Range<usize>) -> !
 ///
 /// This must only be called once, since we are returning a mutable reference.
 /// The appended data region must be mapped.
-unsafe fn get_appended_data_slice() -> &'static mut [u8] {
+unsafe fn get_appended_data_slice() -> Result<&'static mut [u8], MemoryTrackerError> {
     let range = memory::appended_payload_range();
+    // SAFETY: The range is linker-generated and doesn't overlap with other regions.
+    unsafe { map_data_outside_main_memory(range.start, range.len().try_into().unwrap()) }?;
     // SAFETY: This region is mapped and the linker script prevents it from overlapping with other
     // objects.
-    unsafe { slice::from_raw_parts_mut(range.start as *mut u8, range.end - range.start) }
+    Ok(unsafe { slice::from_raw_parts_mut(range.start as *mut u8, range.end - range.start) })
 }
 
 enum AppendedPayload<'a> {
