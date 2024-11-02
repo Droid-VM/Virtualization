@@ -46,7 +46,7 @@ type Result<T> = result::Result<T, MemoryTrackerError>;
 /// Switch the MMU to the provided PageTable.
 ///
 /// Panics if called more than once.
-pub fn switch_to_dynamic_page_tables(pt: PageTable) {
+pub(crate) fn switch_to_dynamic_page_tables() {
     let mut locked_tracker = MEMORY.lock();
 
     if locked_tracker.is_some() {
@@ -54,7 +54,6 @@ pub fn switch_to_dynamic_page_tables(pt: PageTable) {
     }
 
     locked_tracker.replace(MemoryTracker::new(
-        pt,
         layout::crosvm::MEM_START..layout::MAX_VIRT_ADDR,
         layout::crosvm::MMIO_RANGE,
     ));
@@ -193,12 +192,13 @@ impl MemoryTracker {
     const MMIO_CAPACITY: usize = 5;
 
     /// Creates a new instance from an active page table, covering the maximum RAM size.
-    fn new(mut page_table: PageTable, total: MemoryRange, mmio_range: MemoryRange) -> Self {
+    fn new(total: MemoryRange, mmio_range: MemoryRange) -> Self {
         assert!(
             !total.overlaps(&mmio_range),
             "MMIO space should not overlap with the main memory region."
         );
 
+        let mut page_table = Self::replicate_static_page_tables();
         // Activate dirty state management first, otherwise we may get permission faults immediately
         // after activating the new page table. This has no effect before the new page table is
         // activated because none of the entries in the initial idmap have the DBM flag.
@@ -486,6 +486,38 @@ impl MemoryTracker {
         self.page_table
             .modify_range(&(addr..addr + 1).into(), &mark_dirty_block)
             .map_err(|_| MemoryTrackerError::SetPteDirtyFailed)
+    }
+
+    // TODO(ptosi): Move this to crate::arch::aarch64
+    /// Produces a `PageTable` that can safely replace the static PTs.
+    fn replicate_static_page_tables() -> PageTable {
+        let image = layout::memory_region_image();
+        let writable_data = layout::memory_region_writable_data();
+
+        let console_uart_page = layout::console_uart_page();
+        let text = layout::text_range();
+        let rodata = layout::rodata_range();
+        let scratch = layout::scratch_range();
+        let stack = layout::stack_range();
+
+        assert!(!console_uart_page.overlaps(&image));
+        assert!(!console_uart_page.overlaps(&writable_data));
+        assert!(text.is_within(&image));
+        assert!(rodata.is_within(&writable_data));
+        assert!(scratch.is_within(&writable_data));
+        assert!(stack.is_within(&writable_data));
+
+        let mut page_table = PageTable::default();
+
+        // Note that static PTs probably cover the whole "image" and "writable_data" memory regions
+        // but only the subset of pages that should be accessed under normal operation is mapped.
+        page_table.map_device(&console_uart_page.into()).unwrap();
+        page_table.map_code(&text.into()).unwrap();
+        page_table.map_rodata(&rodata.into()).unwrap();
+        page_table.map_data(&scratch.into()).unwrap();
+        page_table.map_data(&stack.into()).unwrap();
+
+        page_table
     }
 }
 
