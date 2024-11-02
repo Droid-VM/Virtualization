@@ -46,7 +46,7 @@ type Result<T> = result::Result<T, MemoryTrackerError>;
 /// Switch the MMU to the provided PageTable.
 ///
 /// Panics if called more than once.
-pub fn switch_to_dynamic_page_tables(pt: PageTable, payload: Option<Range<usize>>) {
+pub fn switch_to_dynamic_page_tables(pt: PageTable) {
     let mut locked_tracker = MEMORY.lock();
 
     if locked_tracker.is_some() {
@@ -57,7 +57,6 @@ pub fn switch_to_dynamic_page_tables(pt: PageTable, payload: Option<Range<usize>
         pt,
         layout::crosvm::MEM_START..layout::MAX_VIRT_ADDR,
         layout::crosvm::MMIO_RANGE,
-        payload,
     ));
 }
 
@@ -120,6 +119,14 @@ pub fn map_data(addr: usize, size: NonZeroUsize) -> Result<()> {
     Ok(())
 }
 
+/// Map the region potentially holding data appended to the image, with read-write permissions.
+pub fn map_image_footer() -> Result<Range<usize>> {
+    let mut locked_tracker = MEMORY.lock();
+    let tracker = locked_tracker.as_mut().ok_or(MemoryTrackerError::Unavailable)?;
+    let range = tracker.map_image_footer()?;
+    Ok(range)
+}
+
 /// Map the provided range as normal memory, with read-only permissions.
 pub fn map_rodata(addr: usize, size: NonZeroUsize) -> Result<()> {
     let mut locked_tracker = MEMORY.lock();
@@ -171,7 +178,7 @@ pub(crate) struct MemoryTracker {
     regions: ArrayVec<[MemoryRegion; MemoryTracker::CAPACITY]>,
     mmio_regions: ArrayVec<[MemoryRange; MemoryTracker::MMIO_CAPACITY]>,
     mmio_range: MemoryRange,
-    payload_range: Option<MemoryRange>,
+    image_footer_mapped: bool,
     mmio_sharer: MmioSharer,
 }
 
@@ -180,12 +187,7 @@ impl MemoryTracker {
     const MMIO_CAPACITY: usize = 5;
 
     /// Creates a new instance from an active page table, covering the maximum RAM size.
-    fn new(
-        mut page_table: PageTable,
-        total: MemoryRange,
-        mmio_range: MemoryRange,
-        payload_range: Option<Range<usize>>,
-    ) -> Self {
+    fn new(mut page_table: PageTable, total: MemoryRange, mmio_range: MemoryRange) -> Self {
         assert!(
             !total.overlaps(&mmio_range),
             "MMIO space should not overlap with the main memory region."
@@ -208,7 +210,7 @@ impl MemoryTracker {
             regions: ArrayVec::new(),
             mmio_regions: ArrayVec::new(),
             mmio_range,
-            payload_range,
+            image_footer_mapped: false,
             mmio_sharer: MmioSharer::new().unwrap(),
         }
     }
@@ -270,6 +272,19 @@ impl MemoryTracker {
             MemoryTrackerError::FailedToMap
         })?;
         self.add(region)
+    }
+
+    /// Maps the image footer read-write, with permissions.
+    fn map_image_footer(&mut self) -> Result<MemoryRange> {
+        let range = layout::image_footer_range();
+        if !self.image_footer_mapped {
+            self.page_table.map_data_dbm(&range.clone().into()).map_err(|e| {
+                error!("Error during image footer map: {e}");
+                MemoryTrackerError::FailedToMap
+            })?;
+            self.image_footer_mapped = true;
+        }
+        Ok(range.start.0..range.end.0)
     }
 
     /// Allocate the address range for a const slice; returns None if failed.
@@ -445,9 +460,15 @@ impl MemoryTracker {
         // observed before reading PTE flags to determine dirty state.
         dsb!("ish");
         // Now flush writable-dirty pages in those regions.
-        for range in writable_regions.chain(self.payload_range.as_ref().into_iter()) {
+        for range in writable_regions {
             self.page_table
                 .walk_range(&get_va_range(range), &flush_dirty_range)
+                .map_err(|_| MemoryTrackerError::FlushRegionFailed)?;
+        }
+        if self.image_footer_mapped {
+            let range = layout::image_footer_range();
+            self.page_table
+                .walk_range(&range.into(), &flush_dirty_range)
                 .map_err(|_| MemoryTrackerError::FlushRegionFailed)?;
         }
         Ok(())
