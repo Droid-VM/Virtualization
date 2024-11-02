@@ -16,8 +16,6 @@
 
 use crate::entry::RebootReason;
 use crate::fdt;
-use crate::helpers::PVMFW_PAGE_SIZE;
-use aarch64_paging::paging::VirtualAddress;
 use aarch64_paging::MapError;
 use core::num::NonZeroUsize;
 use core::ops::Range;
@@ -44,20 +42,13 @@ pub fn appended_payload_range() -> Range<usize> {
     start..end
 }
 
-/// Region allocated for the stack.
-pub fn stack_range() -> Range<VirtualAddress> {
-    const STACK_PAGES: usize = 12;
-
-    layout::stack_range(STACK_PAGES * PVMFW_PAGE_SIZE)
-}
-
 pub fn init_page_table() -> result::Result<PageTable, MapError> {
     let mut page_table = PageTable::default();
 
     // Stack and scratch ranges are explicitly zeroed and flushed before jumping to payload,
     // so dirty state management can be omitted.
     page_table.map_data(&layout::scratch_range().into())?;
-    page_table.map_data(&stack_range().into())?;
+    page_table.map_data(&layout::stack_range().into())?;
     page_table.map_code(&layout::text_range().into())?;
     page_table.map_rodata(&layout::rodata_range().into())?;
     if let Err(e) = page_table.map_device(&layout::console_uart_page().into()) {
