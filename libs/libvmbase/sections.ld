@@ -106,6 +106,9 @@ SECTIONS
 	/* Make our Bionic stack protector compatible with mainline LLVM */
 	__stack_chk_guard = __bionic_tls + 40;
 
+	/* Allow clients to optionally use limit_stack_size!() */
+	PROVIDE(vmbase_max_stack_size = default_vmbase_max_stack_size);
+
 	/*
 	 * Remove unused sections from the image.
 	 */
