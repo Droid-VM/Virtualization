@@ -121,4 +121,12 @@ SECTIONS
 		*(.eh_frame)
 		*(.note.gnu.build-id)
 	}
+
+	/*
+	 * This script uses the following user-provided memory regions:
+	 */
+	memreg_image_origin = ORIGIN(image);
+	memreg_image_end = ORIGIN(image) + LENGTH(image);
+	memreg_writable_data_origin = ORIGIN(writable_data);
+	memreg_writable_data_end = ORIGIN(writable_data) + LENGTH(writable_data);
 }
