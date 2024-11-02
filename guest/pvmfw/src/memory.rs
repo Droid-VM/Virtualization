@@ -16,10 +16,8 @@
 
 use crate::entry::RebootReason;
 use crate::fdt;
-use aarch64_paging::MapError;
 use core::num::NonZeroUsize;
 use core::ops::Range;
-use core::result;
 use core::slice;
 use log::debug;
 use log::error;
@@ -27,10 +25,7 @@ use log::info;
 use log::warn;
 use vmbase::{
     layout::{self, crosvm},
-    memory::{
-        init_shared_pool, map_data, map_rodata, resize_available_memory, PageTable, SIZE_2MB,
-        SIZE_4KB,
-    },
+    memory::{init_shared_pool, map_data, map_rodata, resize_available_memory, SIZE_2MB, SIZE_4KB},
     util::align_up,
 };
 
@@ -40,22 +35,6 @@ pub fn appended_payload_range() -> Range<usize> {
     // pvmfw is contained in a 2MiB region so the payload can't be larger than the 2MiB alignment.
     let end = align_up(start, SIZE_2MB).unwrap();
     start..end
-}
-
-pub fn init_page_table() -> result::Result<PageTable, MapError> {
-    let mut page_table = PageTable::default();
-
-    // Stack and scratch ranges are explicitly zeroed and flushed before jumping to payload,
-    // so dirty state management can be omitted.
-    page_table.map_data(&layout::scratch_range().into())?;
-    page_table.map_data(&layout::stack_range().into())?;
-    page_table.map_code(&layout::text_range().into())?;
-    page_table.map_rodata(&layout::rodata_range().into())?;
-    if let Err(e) = page_table.map_device(&layout::console_uart_page().into()) {
-        error!("Failed to remap the UART as a dynamic page table entry: {e}");
-        return Err(e);
-    }
-    Ok(page_table)
 }
 
 pub(crate) struct MemorySlices<'a> {
