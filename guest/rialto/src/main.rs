@@ -90,7 +90,7 @@ unsafe fn try_main(fdt_addr: usize) -> Result<()> {
     info!("Welcome to Rialto!");
     let page_table = new_page_table()?;
 
-    switch_to_dynamic_page_tables(page_table, None);
+    switch_to_dynamic_page_tables(page_table);
 
     let fdt_size = NonZeroUsize::new(crosvm::FDT_MAX_SIZE).unwrap();
     map_rodata(fdt_addr, fdt_size)?;
