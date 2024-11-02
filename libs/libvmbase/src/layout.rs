@@ -60,6 +60,16 @@ macro_rules! linker_region {
     }};
 }
 
+/// Linker memory region "image".
+pub fn memory_region_image() -> Range<VirtualAddress> {
+    linker_region!(memreg_image_origin, memreg_image_end)
+}
+
+/// Linker memory region "writable_data".
+pub fn memory_region_writable_data() -> Range<VirtualAddress> {
+    linker_region!(memreg_writable_data_origin, memreg_writable_data_end)
+}
+
 /// Executable code.
 pub fn text_range() -> Range<VirtualAddress> {
     linker_region!(text_begin, text_end)
