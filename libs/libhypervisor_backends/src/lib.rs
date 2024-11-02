@@ -14,6 +14,10 @@
 
 //! This library provides wrappers around various hypervisor backends.
 
+#![no_std]
+
+extern crate alloc;
+
 mod error;
 mod hypervisor;
 
@@ -21,3 +25,20 @@ pub use error::{Error, Result};
 pub use hypervisor::{
     get_device_assigner, get_mem_sharer, get_mmio_guard, DeviceAssigningHypervisor, KvmError,
 };
+
+mod memory {
+    /// The size of a 4KB memory in bytes.
+    pub const SIZE_4KB: usize = 4 << 10;
+
+    /// Computes the largest multiple of the provided alignment smaller or equal to the address.
+    ///
+    /// Note: the result is undefined if alignment isn't a power of two.
+    pub const fn unchecked_align_down(addr: usize, alignment: usize) -> usize {
+        addr & !(alignment - 1)
+    }
+
+    /// Computes the address of the 4KiB page containing a given address.
+    pub const fn page_4kb_of(addr: usize) -> usize {
+        unchecked_align_down(addr, SIZE_4KB)
+    }
+}
