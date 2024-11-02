@@ -28,9 +28,8 @@ use vmbase::{
     arch::aarch64::min_dcache_line_size,
     configure_heap, console_writeln, layout, limit_stack_size, main,
     memory::{
-        deactivate_dynamic_page_tables, map_data_outside_main_memory,
-        switch_to_dynamic_page_tables, unshare_all_memory, unshare_all_mmio_except_uart,
-        unshare_uart, MemoryTrackerError, SIZE_128KB, SIZE_4KB,
+        deactivate_dynamic_page_tables, map_data_outside_main_memory, unshare_all_memory,
+        unshare_all_mmio_except_uart, unshare_uart, MemoryTrackerError, SIZE_128KB, SIZE_4KB,
     },
     power::reboot,
 };
@@ -108,12 +107,6 @@ fn main_wrapper(
     // - only access non-pvmfw memory once (and while) it has been mapped
 
     log::set_max_level(LevelFilter::Info);
-
-    let page_table = memory::init_page_table().map_err(|e| {
-        error!("Failed to set up the dynamic page tables: {e}");
-        RebootReason::InternalError
-    })?;
-    switch_to_dynamic_page_tables(page_table);
 
     // SAFETY: We only get the appended payload from here, once. The region was statically mapped,
     // then remapped by `init_page_table()`.
