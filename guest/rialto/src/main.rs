@@ -50,9 +50,10 @@ use vmbase::{
     main,
     memory::{
         init_shared_pool, map_rodata, map_rodata_outside_main_memory, resize_available_memory,
-        switch_to_dynamic_page_tables, PageTable, PAGE_SIZE, SIZE_128KB,
+        switch_to_dynamic_page_tables, PageTable, SIZE_128KB,
     },
     power::reboot,
+    unlimited_stack_size,
     virtio::{
         pci::{self, PciTransportIterator, VirtIOSocket},
         HalImpl,
@@ -76,7 +77,7 @@ fn new_page_table() -> Result<PageTable> {
 
     page_table.map_data(&layout::data_bss_range().into())?;
     page_table.map_data(&layout::eh_stack_range().into())?;
-    page_table.map_data(&layout::stack_range(40 * PAGE_SIZE).into())?;
+    page_table.map_data(&layout::stack_range().into())?;
     page_table.map_code(&layout::text_range().into())?;
     page_table.map_rodata(&layout::rodata_range().into())?;
     page_table.map_device(&layout::console_uart_page().into())?;
@@ -182,3 +183,4 @@ pub fn main(fdt_addr: u64, _a1: u64, _a2: u64, _a3: u64) {
 generate_image_header!();
 main!(main);
 configure_heap!(SIZE_128KB * 2);
+unlimited_stack_size!();
