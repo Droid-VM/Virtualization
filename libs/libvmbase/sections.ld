@@ -21,6 +21,13 @@
 ENTRY(entry)
 
 /*
+ * Make calling the limit_stack_size!() macro optional by providing a default.
+ */
+PROVIDE(vmbase_stack_limit = DEFINED(vmbase_stack_limit_client) ?
+                                     vmbase_stack_limit_client :
+                                     vmbase_stack_limit_default);
+
+/*
  * The following would be useful to check that .init code is not called back
  * into once it has completed but it isn't supported by ld.lld.
  *
