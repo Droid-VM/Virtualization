@@ -25,7 +25,6 @@ extern crate alloc;
 
 use crate::layout::print_addresses;
 use crate::pci::{check_pci, get_bar_region};
-use aarch64_paging::MapError;
 use alloc::{vec, vec::Vec};
 use core::ptr::addr_of_mut;
 use cstr::cstr;
@@ -35,15 +34,9 @@ use vmbase::{
     bionic, configure_heap,
     fdt::pci::PciInfo,
     generate_image_header,
-    layout::{
-        console_uart_page, crosvm::FDT_MAX_SIZE, rodata_range, scratch_range, stack_range,
-        text_range,
-    },
+    layout::crosvm::FDT_MAX_SIZE,
     linker, logger, main,
-    memory::{
-        deactivate_dynamic_page_tables, map_data, map_device, switch_to_dynamic_page_tables,
-        PageTable, SIZE_64KB,
-    },
+    memory::{deactivate_dynamic_page_tables, map_data, map_device, SIZE_64KB},
 };
 
 static INITIALISED_DATA: [u32; 4] = [1, 2, 3, 4];
@@ -54,16 +47,6 @@ generate_image_header!();
 main!(main);
 configure_heap!(SIZE_64KB);
 
-fn init_page_table(page_table: &mut PageTable) -> Result<(), MapError> {
-    page_table.map_device(&console_uart_page().into())?;
-    page_table.map_code(&text_range().into())?;
-    page_table.map_rodata(&rodata_range().into())?;
-    page_table.map_data(&scratch_range().into())?;
-    page_table.map_data(&stack_range().into())?;
-
-    Ok(())
-}
-
 /// Entry point for VM bootloader.
 pub fn main(arg0: u64, arg1: u64, arg2: u64, arg3: u64) {
     log::set_max_level(LevelFilter::Debug);
@@ -73,12 +56,6 @@ pub fn main(arg0: u64, arg1: u64, arg2: u64, arg3: u64) {
     print_addresses();
     check_data();
     check_stack_guard();
-
-    let mut page_table = PageTable::default();
-    init_page_table(&mut page_table).unwrap();
-    info!("Activating IdMap...");
-    switch_to_dynamic_page_tables(page_table);
-    info!("Activated.");
 
     info!("Checking FDT...");
     let fdt_addr = usize::try_from(arg0).unwrap();
