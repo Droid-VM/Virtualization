@@ -46,7 +46,7 @@ type Result<T> = result::Result<T, MemoryTrackerError>;
 /// Switch the MMU to the provided PageTable.
 ///
 /// Panics if called more than once.
-pub fn switch_to_dynamic_page_tables(pt: PageTable, payload: Option<Range<usize>>) {
+pub fn switch_to_dynamic_page_tables(pt: PageTable) {
     let mut locked_tracker = MEMORY.lock();
 
     if locked_tracker.is_some() {
@@ -57,7 +57,6 @@ pub fn switch_to_dynamic_page_tables(pt: PageTable, payload: Option<Range<usize>
         pt,
         layout::crosvm::MEM_START..layout::MAX_VIRT_ADDR,
         layout::crosvm::MMIO_RANGE,
-        payload,
     ));
 }
 
@@ -120,6 +119,17 @@ pub fn map_data(addr: usize, size: NonZeroUsize) -> Result<()> {
     Ok(())
 }
 
+// TODO(ptosi): Merge this into map_data.
+/// Map the provided range as normal memory, with read-only permissions.
+pub fn map_data_outside_main_memory(addr: usize, size: NonZeroUsize) -> Result<()> {
+    let mut locked_tracker = MEMORY.lock();
+    let tracker = locked_tracker.as_mut().ok_or(MemoryTrackerError::Unavailable)?;
+    let end = addr + usize::from(size);
+    // SAFETY: Any range is valid for being mapped as RO; worst-case, an exception makes us panic.
+    let _ = unsafe { tracker.alloc_range_outside_main_memory_mut(&(addr..end)) }?;
+    Ok(())
+}
+
 /// Map the provided range as normal memory, with read-only permissions.
 pub fn map_rodata(addr: usize, size: NonZeroUsize) -> Result<()> {
     let mut locked_tracker = MEMORY.lock();
@@ -167,7 +177,6 @@ pub(crate) struct MemoryTracker {
     regions: ArrayVec<[MemoryRegion; MemoryTracker::CAPACITY]>,
     mmio_regions: ArrayVec<[MemoryRange; MemoryTracker::MMIO_CAPACITY]>,
     mmio_range: MemoryRange,
-    payload_range: Option<MemoryRange>,
     mmio_sharer: MmioSharer,
 }
 
@@ -176,12 +185,7 @@ impl MemoryTracker {
     const MMIO_CAPACITY: usize = 5;
 
     /// Creates a new instance from an active page table, covering the maximum RAM size.
-    fn new(
-        mut page_table: PageTable,
-        total: MemoryRange,
-        mmio_range: MemoryRange,
-        payload_range: Option<Range<usize>>,
-    ) -> Self {
+    fn new(mut page_table: PageTable, total: MemoryRange, mmio_range: MemoryRange) -> Self {
         assert!(
             !total.overlaps(&mmio_range),
             "MMIO space should not overlap with the main memory region."
@@ -204,7 +208,6 @@ impl MemoryTracker {
             regions: ArrayVec::new(),
             mmio_regions: ArrayVec::new(),
             mmio_range,
-            payload_range,
             mmio_sharer: MmioSharer::new().unwrap(),
         }
     }
@@ -261,6 +264,25 @@ impl MemoryTracker {
     fn alloc_range_mut(&mut self, range: &MemoryRange) -> Result<MemoryRange> {
         let region = MemoryRegion { range: range.clone(), mem_type: MemoryType::ReadWrite };
         self.check_allocatable(&region)?;
+        self.page_table.map_data_dbm(&get_va_range(range)).map_err(|e| {
+            error!("Error during mutable range allocation: {e}");
+            MemoryTrackerError::FailedToMap
+        })?;
+        self.add(region)
+    }
+
+    /// Allocates the address range for a mutable slice.
+    ///
+    /// # Safety
+    ///
+    /// Callers of this method need to ensure that the `range` is valid for mapping as read-write
+    /// data.
+    unsafe fn alloc_range_outside_main_memory_mut(
+        &mut self,
+        range: &MemoryRange,
+    ) -> Result<MemoryRange> {
+        let region = MemoryRegion { range: range.clone(), mem_type: MemoryType::ReadWrite };
+        self.check_no_overlap(&region)?;
         self.page_table.map_data_dbm(&get_va_range(range)).map_err(|e| {
             error!("Error during mutable range allocation: {e}");
             MemoryTrackerError::FailedToMap
@@ -441,7 +463,7 @@ impl MemoryTracker {
         // observed before reading PTE flags to determine dirty state.
         dsb!("ish");
         // Now flush writable-dirty pages in those regions.
-        for range in writable_regions.chain(self.payload_range.as_ref().into_iter()) {
+        for range in writable_regions {
             self.page_table
                 .walk_range(&get_va_range(range), &flush_dirty_range)
                 .map_err(|_| MemoryTrackerError::FlushRegionFailed)?;
