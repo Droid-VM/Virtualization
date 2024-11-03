@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3896ae8b_42e7fcb5",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-11-03T05:11:15Z",
+      "side": 1,
+      "message": "Can\u0027t we use context.getUserId() ?",
+      "fixSuggestions": [
+        {
+          "fixId": "661e0fbb_49af28d6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
+              "range": {
+                "startLine": 21,
+                "startChar": 0,
+                "endLine": 22,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
+              "range": {
+                "startLine": 143,
+                "startChar": 0,
+                "endLine": 144,
+                "endChar": 0
+              },
+              "replacement": "        rules.put(\"\\\\$USER_ID\", context.getUserId());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b8a5c9eee600f80f5c85c57fe3e391e20a58f75d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
