@@ -56,6 +56,30 @@
       },
       "revId": "2744f052eae7fc89be4e37aa32610d5e2d7421fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3125deb3_485af6c4",
+        "filename": "android/TerminalApp/proguard.flags",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2024-11-04T23:01:16Z",
+      "side": 1,
+      "message": "That said, if this recovers the major size impact, probably fine to land for now, but can we add a `TODO(b/377100096)` to refine the keep rules and enable bytecode opt?",
+      "parentUuid": "c7a7400b_65500ea1",
+      "range": {
+        "startLine": 36,
+        "startChar": 42,
+        "endLine": 36,
+        "endChar": 43
+      },
+      "revId": "2744f052eae7fc89be4e37aa32610d5e2d7421fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
