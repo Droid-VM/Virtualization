@@ -22,6 +22,30 @@
       },
       "revId": "4e9d2f6815a9317ca4a81e92bc8e01f99ee0b19c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c4da9fc_883bd3be",
+        "filename": "libs/libvmbase/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-04T17:00:25Z",
+      "side": 1,
+      "message": "See commit message; this way Git doesn\u0027t get confused, thinking that `src/arch.rs` gets modified (which Rust requires us to re-introduce) while we are adding a new file (`src/arch/aarch64.rs`).\n\nInstead, using 2 commits makes it completely clear to Git that we\u0027re \"moving\" `arch.rs`. As a result, it will properly attribute the current history of `arch.rs` to the new `aarch64.rs` instead of the new `arch.rs`. In turn, this means diffs easier to review and rebasing changes to `arch.rs` should go smoothly (as Git will actually target `aarch64.rs`).",
+      "parentUuid": "64dcfc67_9bc6f4d2",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 16
+      },
+      "revId": "4e9d2f6815a9317ca4a81e92bc8e01f99ee0b19c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
