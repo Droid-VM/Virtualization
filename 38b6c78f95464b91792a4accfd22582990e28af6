@@ -22,6 +22,30 @@
       },
       "revId": "38b6c78f95464b91792a4accfd22582990e28af6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a38d4137_29d7380a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-04T17:24:20Z",
+      "side": 1,
+      "message": "They have already been run by presubmit (invocations: [`rialto_test`](http://android-build/test_investigate/invocation/I08500010332311977/test/TR36829502332079986/) \u0026 [`VmAttestationTests`](http://android-build/test_investigate/invocation/I08500010332311977/test/TR07429502332079894)) but I have also validated those locally; `rialto_test` passes but note that `VmAttestationTests` gets `ASSUMPTION_FAILED` (both locally and in the CI). Although I don\u0027t believe that\u0027s related to this CL so marking as resolved.",
+      "parentUuid": "3e1225b8_d61bdac5",
+      "range": {
+        "startLine": 12,
+        "startChar": 6,
+        "endLine": 12,
+        "endChar": 18
+      },
+      "revId": "38b6c78f95464b91792a4accfd22582990e28af6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
