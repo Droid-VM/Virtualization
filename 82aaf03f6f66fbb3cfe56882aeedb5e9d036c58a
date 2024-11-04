@@ -16,6 +16,24 @@
       "message": "It will be with conflict with my port.. So maybe you \ncould make it as libvmbase/src/arch/arm64/.. \u0026 pvmfw/src/arch/arm64 ?",
       "revId": "82aaf03f6f66fbb3cfe56882aeedb5e9d036c58a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d8bb5d2_2bb577a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-04T17:02:41Z",
+      "side": 1,
+      "message": "As mentioned in the commit message, I\u0027d rather use the CPU arch names adopted by the Rust community for `target_arch`, which is why this CL uses the name `aarch64`.",
+      "parentUuid": "cfa3c5fc_8d5381bc",
+      "revId": "82aaf03f6f66fbb3cfe56882aeedb5e9d036c58a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
