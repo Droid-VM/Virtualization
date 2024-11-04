@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "792a480b_5f9cba88",
+        "filename": "tests/Terminal/src/com/android/virtualization/terminal/TerminalAppTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-04T00:17:28Z",
+      "side": 1,
+      "message": "Q: How does this work? I couldn\u0027t find any logic for downloading the image from the web nor building image and push to `/sdcard`.",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "45922a01_c2ec2ae4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tests/Terminal/src/com/android/virtualization/terminal/TerminalAppTest.java",
+              "range": {
+                "startLine": 59,
+                "startChar": 0,
+                "endLine": 60,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "c6acf79a8b52ef3e58f8a1f51a54c21f16035b54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
