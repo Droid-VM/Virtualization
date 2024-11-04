@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "557d0d4e_493eee5c",
+        "filename": "libs/libhypervisor_backends/rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-04T10:28:23Z",
+      "side": 1,
+      "message": "In the past, we\u0027ve been cautious about committing to API stability and I don\u0027t think it\u0027s something would like to guarantee for this library still, given the potentially higher burden of maintenance. Would that be fine with you?\n\nIf so, could you confirm that Trusty is also (and fully) hosted on this Gerrit instance and that it has CI coverage that could be triggered when changing this lib, to detect any breakage during presubmit?\n\nIf it does, would you mind configuring that CI in this CL?",
+      "revId": "5697b99217643f2eca5c65df7a709cdf309de127",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
