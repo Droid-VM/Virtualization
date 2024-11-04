@@ -21,6 +21,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.android.virtualization.vmlauncher.InstallUtils
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.IOException
@@ -33,6 +34,9 @@ class SettingsRecoveryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_recovery)
+        val toolbar: MaterialToolbar = findViewById(R.id.settings_toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = resources.getString(R.string.settings_title)
         val resetCard = findViewById<MaterialCardView>(R.id.settings_recovery_reset_card)
         val dialog = MaterialAlertDialogBuilder(this)
             .setTitle(R.string.settings_recovery_reset_dialog_title)

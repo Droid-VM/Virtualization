@@ -27,6 +27,7 @@ import android.text.style.RelativeSizeSpan
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.slider.Slider
 import java.util.regex.Pattern
@@ -46,6 +47,9 @@ class SettingsDiskResizeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_disk_resize)
+        val toolbar: MaterialToolbar = findViewById(R.id.settings_toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = resources.getString(R.string.settings_title)
         val sharedPref =
             this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
         var diskSizeMb =

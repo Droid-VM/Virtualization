@@ -28,6 +28,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.appbar.MaterialToolbar
 
 class SettingsPortForwardingActivity : AppCompatActivity() {
     val TAG: String = "VmTerminalApp"
@@ -35,6 +36,9 @@ class SettingsPortForwardingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_port_forwarding)
 
+        val toolbar: MaterialToolbar = findViewById(R.id.settings_toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = resources.getString(R.string.settings_title)
         val settingsPortForwardingItems = ArrayList<SettingsPortForwardingItem>()
 
         val sharedPref = this.getSharedPreferences(
