@@ -16,6 +16,46 @@
       "message": "With this the app is back to 4.8M and the virt apex is 85MB (was 100MB during the regression).",
       "revId": "2744f052eae7fc89be4e37aa32610d5e2d7421fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b99cb4c_ca080a04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2024-11-04T22:59:39Z",
+      "side": 1,
+      "message": "Is this test running in presubmit, at least for Terminal-specific changes?",
+      "revId": "2744f052eae7fc89be4e37aa32610d5e2d7421fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7a7400b_65500ea1",
+        "filename": "android/TerminalApp/proguard.flags",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2024-11-04T22:59:39Z",
+      "side": 1,
+      "message": "Normally you\u0027d want to use annotations like `@VisibleForTesting` for any test-specific references. Alternatively, if you can tweak the test to avoid using unnecessary class members/refs, that could also work (e.g., use a ComponentName instead of a class reference).",
+      "range": {
+        "startLine": 36,
+        "startChar": 42,
+        "endLine": 36,
+        "endChar": 43
+      },
+      "revId": "2744f052eae7fc89be4e37aa32610d5e2d7421fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
