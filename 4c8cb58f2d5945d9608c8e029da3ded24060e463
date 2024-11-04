@@ -22,6 +22,30 @@
       },
       "revId": "4c8cb58f2d5945d9608c8e029da3ded24060e463",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb3e3c10_365d2dc3",
+        "filename": "android/TerminalApp/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1064003
+      },
+      "writtenOn": "2024-11-04T20:55:03Z",
+      "side": 1,
+      "message": "This change turns off all types of shrinking and minification, not just bytecode optimization. Aren\u0027t you only seeing the issue with `optimize: true`? If so, is there a reason you didn\u0027t just revert aosp/3324096 (which keeps basic shrinking enabled)?",
+      "parentUuid": "33ba6c29_f2b83c16",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 23
+      },
+      "revId": "4c8cb58f2d5945d9608c8e029da3ded24060e463",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
