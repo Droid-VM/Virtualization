@@ -57,6 +57,7 @@ import com.android.virtualization.vmlauncher.VmLauncherService;
 import com.android.virtualization.vmlauncher.VmLauncherServices;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.common.annotation.VisibleForTesting;
 
 import java.io.File;
 import java.io.FileDescriptor;
@@ -510,6 +511,7 @@ public class MainActivity extends BaseActivity
         VmLauncherServices.startVmLauncherService(this, this, notification);
     }
 
+    @VisibleForTesting
     public boolean waitForBootCompleted(long timeoutMillis) {
         return mBootCompleted.block(timeoutMillis);
     }
