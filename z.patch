@@ -1,0 +1,38 @@
+diff --git a/tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java b/tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java
+index ceebb52db..f4fd08c56 100644
+--- a/tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java
++++ b/tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java
+@@ -594,7 +594,7 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
+         @Override
+         public void onPayloadReady(VirtualMachine vm, IBenchmarkService service)
+                 throws RemoteException {
+-            int vmPid = ProcessUtil.getCrosvmPid(Os.getpid(), mShellExecutor);
++            int vmPid = ProcessUtil.getCrosvmPid(Os.getpid(), "test_vm_mem_usage", mShellExecutor);
+ 
+             mMemTotal = service.getMemInfoEntry("MemTotal");
+             mMemFree = service.getMemInfoEntry("MemFree");
+@@ -668,7 +668,7 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
+         @SuppressWarnings("ReturnValueIgnored")
+         public void onPayloadReady(VirtualMachine vm, IBenchmarkService service)
+                 throws RemoteException {
+-            int vmPid = ProcessUtil.getCrosvmPid(Os.getpid(), mShellExecutor);
++            int vmPid = ProcessUtil.getCrosvmPid(Os.getpid(), "test_vm_mem_reclaim", mShellExecutor);
+ 
+             // Allocate 256MB of anonymous memory. This will fill all guest
+             // memory and cause swapping to start.
+diff --git a/tests/helper/src/java/com/android/microdroid/test/common/ProcessUtil.java b/tests/helper/src/java/com/android/microdroid/test/common/ProcessUtil.java
+index c4aba8165..eee5ef48e 100644
+--- a/tests/helper/src/java/com/android/microdroid/test/common/ProcessUtil.java
++++ b/tests/helper/src/java/com/android/microdroid/test/common/ProcessUtil.java
+@@ -127,9 +127,9 @@ public final class ProcessUtil {
+         return getSingleChildProcess(parentPid, VIRTMGR_BIN, shellExecutor);
+     }
+ 
+-    public static int getCrosvmPid(int parentPid, Function<String, String> shellExecutor) {
++    public static int getCrosvmPid(int parentPid, String testName, Function<String, String> shellExecutor) {
+         int virtmgrPid = getVirtmgrPid(parentPid, shellExecutor);
+-        return getSingleChildProcess(virtmgrPid, CROSVM_BIN, shellExecutor);
++        return getSingleChildProcess(virtmgrPid, "crosvm_" + testName, shellExecutor);
+     }
+ 
+     // To ensures that only one object is created at a time.
