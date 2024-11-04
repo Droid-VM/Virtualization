@@ -3,6 +3,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39431c28_16b8deba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-11-04T14:07:38Z",
+      "side": 1,
+      "message": "Do you mean \u0027add\u0027?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 2
+      },
+      "revId": "5697b99217643f2eca5c65df7a709cdf309de127",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfe6b826_5e07ebcf",
+        "filename": "libs/libhypervisor_backends/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-11-04T14:07:38Z",
+      "side": 1,
+      "message": "What\u0027s the point of having a `rust_defaults` module if you\u0027re only using it in one place?",
+      "revId": "5697b99217643f2eca5c65df7a709cdf309de127",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "557d0d4e_493eee5c",
         "filename": "libs/libhypervisor_backends/rules.mk",
         "patchSetId": 1
@@ -14,6 +54,57 @@
       "writtenOn": "2024-11-04T10:28:23Z",
       "side": 1,
       "message": "In the past, we\u0027ve been cautious about committing to API stability and I don\u0027t think it\u0027s something would like to guarantee for this library still, given the potentially higher burden of maintenance. Would that be fine with you?\n\nIf so, could you confirm that Trusty is also (and fully) hosted on this Gerrit instance and that it has CI coverage that could be triggered when changing this lib, to detect any breakage during presubmit?\n\nIf it does, would you mind configuring that CI in this CL?",
+      "revId": "5697b99217643f2eca5c65df7a709cdf309de127",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9476173a_4f178252",
+        "filename": "libs/libhypervisor_backends/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-11-04T14:07:38Z",
+      "side": 1,
+      "message": "Move this to a separate file rather than an inline module.",
+      "revId": "5697b99217643f2eca5c65df7a709cdf309de127",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba4f7231_1d3f57b1",
+        "filename": "libs/libvmbase/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-11-04T14:07:38Z",
+      "side": 1,
+      "message": "Remove this commented-out line.",
+      "revId": "5697b99217643f2eca5c65df7a709cdf309de127",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b4c8157_9c2c74f1",
+        "filename": "libs/libvmbase/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-11-04T14:07:38Z",
+      "side": 1,
+      "message": "Why do you need to reexport this crate here?",
       "revId": "5697b99217643f2eca5c65df7a709cdf309de127",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
