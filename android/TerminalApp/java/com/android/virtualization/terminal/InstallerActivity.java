@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.ConditionVariable;
 import android.os.FileUtils;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -40,7 +39,6 @@ public class InstallerActivity extends BaseActivity {
     private static final String TAG = "LinuxInstaller";
 
     private static final long ESTIMATED_IMG_SIZE_BYTES = FileUtils.parseSize("350MB");
-    static final String EXTRA_AUTO_DOWNLOAD = "auto_download";
 
     private ExecutorService mExecutorService;
     private CheckBox mWaitForWifiCheckbox;
@@ -50,7 +48,6 @@ public class InstallerActivity extends BaseActivity {
     private ServiceConnection mInstallerServiceConnection;
     private InstallProgressListener mInstallProgressListener;
     private boolean mInstallRequested;
-    private ConditionVariable mInstallCompleted = new ConditionVariable();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,17 +72,11 @@ public class InstallerActivity extends BaseActivity {
                     requestInstall();
                 });
 
-        if (getIntent().getBooleanExtra(EXTRA_AUTO_DOWNLOAD, false)) {
-            Log.i(TAG, "Auto downloading");
-            requestInstall();
-        }
-
         Intent intent = new Intent(this, InstallerService.class);
         mInstallerServiceConnection = new InstallerServiceConnection(this);
         if (!bindService(intent, mInstallerServiceConnection, Context.BIND_AUTO_CREATE)) {
             handleCriticalError(new Exception("Failed to connect to installer service"));
         }
-
     }
 
     @Override
@@ -96,10 +87,6 @@ public class InstallerActivity extends BaseActivity {
         }
 
         super.onDestroy();
-    }
-
-    public boolean waitForInstallCompleted(long timeoutMillis) {
-        return mInstallCompleted.block(timeoutMillis);
     }
 
     public void handleCriticalError(Exception e) {
@@ -115,9 +102,6 @@ public class InstallerActivity extends BaseActivity {
     }
 
     private void finishWithResult(int resultCode) {
-        if (resultCode == RESULT_OK) {
-            mInstallCompleted.open();
-        }
         setResult(resultCode);
         finish();
     }
