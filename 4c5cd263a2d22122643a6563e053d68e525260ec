@@ -1,0 +1,62 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "603167ab_9cdd5514",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-04T03:53:50Z",
+      "side": 1,
+      "message": "Did it work on non-HSUM devices? Not with this change but I wrote similar change locally(using `getFilesDir()` instead of `getDataDir()`) and tested, but it didn\u0027t work. If it\u0027s verified working on non-HSUM devices, I\u0027m fine to be submitted.",
+      "revId": "4c5cd263a2d22122643a6563e053d68e525260ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ae7085f_ebf49ba9",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-04T03:53:50Z",
+      "side": 1,
+      "message": "I think we don\u0027t need this.",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 63
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8bea642a_eea7fa01",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
+              "range": {
+                "startLine": 142,
+                "startChar": 0,
+                "endLine": 143,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "4c5cd263a2d22122643a6563e053d68e525260ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
