@@ -31,3 +31,6 @@
 -keep,allowobfuscation,allowshrinking class * extends com.google.gson.reflect.TypeToken
 
 ##---------------End: proguard configuration for Gson  ----------
+
+# Keep all classes defined in the app. They can be referenced from the test.
+-keep class com.android.virtualization.** { *; }
