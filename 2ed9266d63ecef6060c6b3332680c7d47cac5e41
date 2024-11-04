@@ -16,6 +16,75 @@
       "message": "Hi Pierre-Clément, PTAL",
       "revId": "2ed9266d63ecef6060c6b3332680c7d47cac5e41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af124125_625efc02",
+        "filename": "guest/pvmfw/src/bcc.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-04T17:50:37Z",
+      "side": 1,
+      "message": "Let\u0027s not log from type-casting functions. Have you considered wrapping the `coset::CoseError` in the `BccError::CosetError` and letting the receiver of the `BccError` log it, if they want to?",
+      "range": {
+        "startLine": 41,
+        "startChar": 8,
+        "endLine": 41,
+        "endChar": 35
+      },
+      "revId": "2ed9266d63ecef6060c6b3332680c7d47cac5e41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce8efc12_21ff59dc",
+        "filename": "guest/pvmfw/src/bcc.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-04T17:50:37Z",
+      "side": 1,
+      "message": "OOC, what\u0027s a \"subject\" pubkey? How does it differ from a (unqualified) pubkey?",
+      "range": {
+        "startLine": 132,
+        "startChar": 67,
+        "endLine": 132,
+        "endChar": 85
+      },
+      "revId": "2ed9266d63ecef6060c6b3332680c7d47cac5e41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "defe0b44_c55a1c6e",
+        "filename": "guest/pvmfw/src/bcc.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-04T17:50:37Z",
+      "side": 1,
+      "message": "Why not check that `cose_key.alg` matches `Some(Algorithm::Assigned(_))` in the constructor, allowing this to `-\u003e Algorithm`?\n\nOtherwise, I don\u0027t see the point of `PublicKey`, which can\u0027t be encapsulation of `coset` given that `PublicKey::alg()` is \"leaking\" `coset::iana::Algorithm` out of `bcc.rs` anyway.",
+      "range": {
+        "startLine": 263,
+        "startChar": 21,
+        "endLine": 263,
+        "endChar": 27
+      },
+      "revId": "2ed9266d63ecef6060c6b3332680c7d47cac5e41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
