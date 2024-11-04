@@ -18,6 +18,10 @@ set -e
 
 serial=${ANDROID_SERIAL}
 
+# Enable the terminal app (the flag is MATCH_DISABLED_COMPONENTS)
+activity_name=$(adb -s ${serial} shell pm resolve-activity --components --brief -a android.virtualization.VM_TERMINAL --query-flags 0x00000200)
+adb -s ${serial} shell pm enable ${activity_name}
+
 # Identify file to download
 arch=$(adb -s ${serial} shell getprop ro.bionic.arch)
 if [ ${arch} == "arm64" ]; then
