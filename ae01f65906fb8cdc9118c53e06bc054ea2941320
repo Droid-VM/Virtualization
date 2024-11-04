@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c1c3369_78ceca94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-11-04T18:52:39Z",
+      "side": 1,
+      "message": "`unsafe` looks fine. Swapping out the `as i32` for `as _` should make it more robust against unusual platforms.",
+      "revId": "ae01f65906fb8cdc9118c53e06bc054ea2941320",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f347263_42fff404",
+        "filename": "android/virtmgr/src/selinux.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-11-04T18:52:39Z",
+      "side": 1,
+      "message": "This should be `as _` or `as c_int`, because `selinux_set_callback` takes a `c_int`, not an `i32` - that may be correct on some platforms but not all.",
+      "range": {
+        "startLine": 35,
+        "startChar": 81,
+        "endLine": 35,
+        "endChar": 84
+      },
+      "revId": "ae01f65906fb8cdc9118c53e06bc054ea2941320",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
