@@ -196,6 +196,7 @@ public class VmLauncherService extends Service implements DebianServiceImpl.Debi
 
     private void stopDebianServer() {
         if (mServer != null) {
+            DebianServiceImpl.terminateForwarderHost();
             mServer.shutdown();
         }
     }
