@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2f4f31d1_af188bbf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-11-05T12:08:58Z",
+      "side": 1,
+      "message": "\u003e  is there a requirement that all DICE stages use the same algo?\n\nNo. At each stage, you can use any of the three[1][2] supported algorithms.\n\n\u003e Multi-algo\" means that our code supports more than one or that a given handover might use differ algos in different stages of its chain?\n\n\"multi-algo\" means that we are going to support all three algorithms in the leaf certificate of the handover, which will address issue b/341630707. We are not concerned with the choice of algorithm used in other stages of the chain.\n\nfyi this functionality is already supported in upstream DICE (aosp/3330415). However, it involves several API-breaking changes, so additional work is necessary to integrate it into AOSP.\n\n[1] https://pigweed.googlesource.com/open-dice/+/HEAD/docs/specification.md#digital-signatures\n[2] https://android.googlesource.com/platform/packages/modules/Virtualization/+/main/docs/pvm_dice_chain.md#key-derivation",
+      "parentUuid": "fd1e4184_f653806c",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 58
+      },
+      "revId": "4878e8221271ffd6879353e0a6ae9779c739211d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "12f6a4e9_1235787c",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 7
@@ -54,6 +78,30 @@
       "writtenOn": "2024-11-05T11:14:03Z",
       "side": 1,
       "message": "nit: storing the `leaf_subject_pubkey: PublicKey` will probably scale better.",
+      "range": {
+        "startLine": 96,
+        "startChar": 4,
+        "endLine": 96,
+        "endChar": 48
+      },
+      "revId": "4878e8221271ffd6879353e0a6ae9779c739211d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b26094e_08b01dc4",
+        "filename": "guest/pvmfw/src/bcc.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-11-05T12:08:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3882fb6d_3a300e62",
       "range": {
         "startLine": 96,
         "startChar": 4,
