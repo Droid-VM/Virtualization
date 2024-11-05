@@ -34,6 +34,24 @@
       "parentUuid": "fd7c19a6_90e28a35",
       "revId": "93d0e74d0d2ea2a097e1c00f93f4e47b204a7d75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43759853_3e2b8f82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-05T12:40:56Z",
+      "side": 1,
+      "message": "`adb shell am stop-app com.android.virtualization.terminal` cleans up the app process, but swiping up in recent app(kill the task) stops the TerminalActivity, VmLauncherService(except org.chromium.webview_shell/org.chromium.content.app.SandboxedProcessService0), but the process keeps existing only if the process holds the socket.\n\nI think this might be okay because forwarder follows VmLauncherService\u0027s lifecycle rather than app process itself.. but it think we\u0027d better file a bug for that.",
+      "parentUuid": "6467d61c_92f4b479",
+      "revId": "93d0e74d0d2ea2a097e1c00f93f4e47b204a7d75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
