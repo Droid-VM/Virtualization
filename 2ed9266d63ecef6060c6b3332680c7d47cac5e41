@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48e339d2_a17dfc1f",
+        "filename": "guest/pvmfw/src/bcc.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-11-05T10:29:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af124125_625efc02",
+      "range": {
+        "startLine": 41,
+        "startChar": 8,
+        "endLine": 41,
+        "endChar": 35
+      },
+      "revId": "2ed9266d63ecef6060c6b3332680c7d47cac5e41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce8efc12_21ff59dc",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea5f5180_f560e6cd",
+        "filename": "guest/pvmfw/src/bcc.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-11-05T10:29:30Z",
+      "side": 1,
+      "message": "In a certificate chain, each non-root certificate (cert\\_i) involves two keys:\n\n- Subject Public Key: This key ([subject public key]\\_i) is included as plaintext within the cert\\_i itself.\n- Authority Key: This key ([authority key]\\_i) is not explicitly present in the certificate but is used to generate the signature for cert\\_i.\n\nFor a certificate chain to be cryptographically valid, the following relationship must hold:\n\n[subject public key]\\_i \u003d [authority public key]\\_[i+1]\n\nso that the subject public key embedded in cert\\_i can be used to verify the signature of the subsequent certificate, cert\\_[i+1]. This is also shown in [2].\n\nIn the context of the DICE chain, I need to access the algorithm of the subject public key used in the leaf DICE certificate of the handover. This allows me to derive the next-stage authority key using the same algorithm, as shown in the diagram[1], to make the chain cryptographically valid.\n\n[1] https://android.googlesource.com/platform/packages/modules/Virtualization/+/main/docs/pvm_dice_chain.md#pvm-dice-handover\n[2]https://en.wikipedia.org/wiki/Chain_of_trust#/media/File:Chain_of_trust_v2.svg",
+      "parentUuid": "ce8efc12_21ff59dc",
+      "range": {
+        "startLine": 132,
+        "startChar": 67,
+        "endLine": 132,
+        "endChar": 85
+      },
+      "revId": "2ed9266d63ecef6060c6b3332680c7d47cac5e41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "defe0b44_c55a1c6e",
@@ -77,6 +125,30 @@
       "writtenOn": "2024-11-04T17:50:37Z",
       "side": 1,
       "message": "Why not check that `cose_key.alg` matches `Some(Algorithm::Assigned(_))` in the constructor, allowing this to `-\u003e Algorithm`?\n\nOtherwise, I don\u0027t see the point of `PublicKey`, which can\u0027t be encapsulation of `coset` given that `PublicKey::alg()` is \"leaking\" `coset::iana::Algorithm` out of `bcc.rs` anyway.",
+      "range": {
+        "startLine": 263,
+        "startChar": 21,
+        "endLine": 263,
+        "endChar": 27
+      },
+      "revId": "2ed9266d63ecef6060c6b3332680c7d47cac5e41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e6ba630_1ed74bf9",
+        "filename": "guest/pvmfw/src/bcc.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-11-05T10:29:30Z",
+      "side": 1,
+      "message": "\u003e Why not check that cose_key.alg matches Some(Algorithm::Assigned(_)) in the constructor, allowing this to -\u003e Algorithm?\n\nDone\n\n\u003e Otherwise, I don\u0027t see the point of PublicKey\n\nThe `PublicKey` struct primarily serves as an intermediary structure to enhance code readability and clarity here. Conceptually, it makes sense for a payload to have an associated subject public key, and for that public key to have a specified algorithm. This creates a natural flow as line 131 above. \n\nIf we were to bypass the PublicKey, we would end up with a payload directly containing an algorithm, which is less intuitive.",
+      "parentUuid": "defe0b44_c55a1c6e",
       "range": {
         "startLine": 263,
         "startChar": 21,
