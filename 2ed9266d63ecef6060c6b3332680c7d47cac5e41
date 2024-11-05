@@ -112,6 +112,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59f373c6_20af9816",
+        "filename": "guest/pvmfw/src/bcc.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-05T11:14:03Z",
+      "side": 1,
+      "message": "Thanks for the explanation, makes sense!",
+      "parentUuid": "ea5f5180_f560e6cd",
+      "range": {
+        "startLine": 132,
+        "startChar": 67,
+        "endLine": 132,
+        "endChar": 85
+      },
+      "revId": "2ed9266d63ecef6060c6b3332680c7d47cac5e41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "defe0b44_c55a1c6e",
@@ -149,6 +173,30 @@
       "side": 1,
       "message": "\u003e Why not check that cose_key.alg matches Some(Algorithm::Assigned(_)) in the constructor, allowing this to -\u003e Algorithm?\n\nDone\n\n\u003e Otherwise, I don\u0027t see the point of PublicKey\n\nThe `PublicKey` struct primarily serves as an intermediary structure to enhance code readability and clarity here. Conceptually, it makes sense for a payload to have an associated subject public key, and for that public key to have a specified algorithm. This creates a natural flow as line 131 above. \n\nIf we were to bypass the PublicKey, we would end up with a payload directly containing an algorithm, which is less intuitive.",
       "parentUuid": "defe0b44_c55a1c6e",
+      "range": {
+        "startLine": 263,
+        "startChar": 21,
+        "endLine": 263,
+        "endChar": 27
+      },
+      "revId": "2ed9266d63ecef6060c6b3332680c7d47cac5e41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "537b7d0b_1b4bb581",
+        "filename": "guest/pvmfw/src/bcc.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-05T11:14:03Z",
+      "side": 1,
+      "message": "\u003e The `PublicKey` struct primarily serves as an intermediary structure to enhance code readability and clarity here.\n\nAck, agreed it\u0027s readable.\n\n\u003e we would end up with a payload directly containing an algorithm\n\nTo be clear, the alternative I was referring to was using the \"raw\" `coset::CoseKey` directly.",
+      "parentUuid": "8e6ba630_1ed74bf9",
       "range": {
         "startLine": 263,
         "startChar": 21,

@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd1e4184_f653806c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-05T11:14:03Z",
+      "side": 1,
+      "message": "I guess this will be explained in the commit implementing this but, is there a requirement that all DICE stages use the same algo? \"Multi-algo\" means that our code supports more than one or that a given handover might use differ algos in different stages of its chain?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 58
+      },
+      "revId": "4878e8221271ffd6879353e0a6ae9779c739211d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "12f6a4e9_1235787c",
@@ -14,6 +37,29 @@
       "writtenOn": "2024-11-05T10:29:30Z",
       "side": 1,
       "message": "Thanks for the review.",
+      "revId": "4878e8221271ffd6879353e0a6ae9779c739211d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3882fb6d_3a300e62",
+        "filename": "guest/pvmfw/src/bcc.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-05T11:14:03Z",
+      "side": 1,
+      "message": "nit: storing the `leaf_subject_pubkey: PublicKey` will probably scale better.",
+      "range": {
+        "startLine": 96,
+        "startChar": 4,
+        "endLine": 96,
+        "endChar": 48
+      },
       "revId": "4878e8221271ffd6879353e0a6ae9779c739211d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
