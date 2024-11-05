@@ -15,7 +15,7 @@
 //! Structs and functions about the types used in DICE.
 //! This module mirrors the content in open-dice/include/dice/dice.h
 
-use crate::error::{check_result, Result};
+use crate::error::{check_result, DiceError, Result};
 use coset::iana;
 pub use open_dice_cbor_bindgen::DiceMode;
 use open_dice_cbor_bindgen::{
@@ -24,6 +24,8 @@ use open_dice_cbor_bindgen::{
     DICE_INLINE_CONFIG_SIZE, DICE_PRIVATE_KEY_SEED_SIZE, DICE_PRIVATE_KEY_SIZE,
     DICE_PUBLIC_KEY_BUFFER_SIZE, DICE_SIGNATURE_BUFFER_SIZE,
 };
+#[cfg(feature = "multialg")]
+use open_dice_cbor_bindgen::{DiceContext_, DiceKeyAlgorithm};
 #[cfg(feature = "serde_derive")]
 use serde_derive::{Deserialize, Serialize};
 use std::{marker::PhantomData, ptr};
@@ -80,6 +82,49 @@ impl From<KeyAlgorithm> for iana::Algorithm {
             KeyAlgorithm::Ed25519 => iana::Algorithm::EdDSA,
             KeyAlgorithm::EcdsaP256 => iana::Algorithm::ES256,
             KeyAlgorithm::EcdsaP384 => iana::Algorithm::ES384,
+        }
+    }
+}
+
+impl TryFrom<iana::Algorithm> for KeyAlgorithm {
+    type Error = DiceError;
+
+    fn try_from(alg: iana::Algorithm) -> Result<Self> {
+        match alg {
+            iana::Algorithm::EdDSA => Ok(KeyAlgorithm::Ed25519),
+            iana::Algorithm::ES256 => Ok(KeyAlgorithm::EcdsaP256),
+            iana::Algorithm::ES384 => Ok(KeyAlgorithm::EcdsaP384),
+            other => Err(DiceError::UnsupportedKeyAlgorithm(other)),
+        }
+    }
+}
+
+#[cfg(feature = "multialg")]
+impl From<KeyAlgorithm> for DiceKeyAlgorithm {
+    fn from(alg: KeyAlgorithm) -> Self {
+        match alg {
+            KeyAlgorithm::Ed25519 => DiceKeyAlgorithm::kDiceKeyAlgorithmEd25519,
+            KeyAlgorithm::EcdsaP256 => DiceKeyAlgorithm::kDiceKeyAlgorithmP256,
+            KeyAlgorithm::EcdsaP384 => DiceKeyAlgorithm::kDiceKeyAlgorithmP384,
+        }
+    }
+}
+
+/// Represents the context used for DICE operations.
+#[derive(Debug, Clone)]
+pub struct DiceContext {
+    /// The algorithm used for the authority key.
+    pub authority_algorithm: KeyAlgorithm,
+    /// The algorithm used for the subject key.
+    pub subject_algorithm: KeyAlgorithm,
+}
+
+#[cfg(feature = "multialg")]
+impl From<DiceContext> for DiceContext_ {
+    fn from(context: DiceContext) -> Self {
+        DiceContext_ {
+            authority_algorithm: context.authority_algorithm.into(),
+            subject_algorithm: context.subject_algorithm.into(),
         }
     }
 }

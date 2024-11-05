@@ -209,6 +209,7 @@ fn main(
             instance_hash,
             defer_rollback_protection,
             next_bcc,
+            bcc.leaf_subject_pubkey().cose_alg,
         )
         .map_err(|e| {
             error!("Failed to derive next-stage DICE secrets: {e:?}");

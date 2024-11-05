@@ -20,8 +20,10 @@ use alloc::vec::Vec;
 use ciborium::cbor;
 use ciborium::Value;
 use core::mem::size_of;
+use coset::iana;
 use diced_open_dice::{
-    bcc_handover_main_flow, hash, Config, DiceMode, Hash, InputValues, HIDDEN_SIZE,
+    bcc_handover_main_flow, hash, Config, DiceContext, DiceMode, Hash, InputValues,
+    DEFAULT_KEY_ALGORITHM, HIDDEN_SIZE,
 };
 use pvmfw_avb::{Capability, DebugLevel, Digest, VerifiedBootData};
 use zerocopy::AsBytes;
@@ -102,11 +104,15 @@ impl PartialInputs {
         instance_hash: Option<Hash>,
         deferred_rollback_protection: bool,
         next_bcc: &mut [u8],
+        authority_key_algorithm: iana::Algorithm,
     ) -> Result<()> {
         let config = self
             .generate_config_descriptor(instance_hash)
             .map_err(|_| diced_open_dice::DiceError::InvalidInput)?;
-
+        let context = DiceContext {
+            authority_algorithm: authority_key_algorithm.try_into()?,
+            subject_algorithm: DEFAULT_KEY_ALGORITHM,
+        };
         let dice_inputs = InputValues::new(
             self.code_hash,
             Config::Descriptor(&config),
@@ -114,7 +120,8 @@ impl PartialInputs {
             self.mode,
             self.make_hidden(salt, deferred_rollback_protection)?,
         );
-        let _ = bcc_handover_main_flow(current_bcc_handover, &dice_inputs, next_bcc)?;
+        let _ =
+            bcc_handover_main_flow(current_bcc_handover, &dice_inputs, next_bcc, Some(context))?;
         Ok(())
     }
 
@@ -201,6 +208,7 @@ mod tests {
     use ciborium::Value;
     use diced_open_dice::DiceArtifacts;
     use diced_open_dice::DiceMode;
+    use diced_open_dice::DEFAULT_KEY_ALGORITHM;
     use diced_open_dice::HIDDEN_SIZE;
     use pvmfw_avb::Capability;
     use pvmfw_avb::DebugLevel;
@@ -344,6 +352,7 @@ mod tests {
                 Some([0u8; 64]),
                 false,
                 &mut buffer_without_defer,
+                DEFAULT_KEY_ALGORITHM.into(),
             )
             .unwrap();
         let bcc_handover1 = diced_open_dice::bcc_handover_parse(&buffer_without_defer).unwrap();
@@ -356,6 +365,7 @@ mod tests {
                 Some([0u8; 64]),
                 true,
                 &mut buffer_with_defer,
+                DEFAULT_KEY_ALGORITHM.into(),
             )
             .unwrap();
         let bcc_handover2 = diced_open_dice::bcc_handover_parse(&buffer_with_defer).unwrap();
@@ -368,6 +378,7 @@ mod tests {
                 Some([0u8; 64]),
                 false,
                 &mut buffer_without_defer_retry,
+                DEFAULT_KEY_ALGORITHM.into(),
             )
             .unwrap();
         let bcc_handover3 =
