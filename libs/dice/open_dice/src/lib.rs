@@ -36,9 +36,9 @@ pub use bcc::{
 };
 pub use dice::{
     derive_cdi_certificate_id, derive_cdi_private_key_seed, dice_main_flow, Cdi, CdiValues, Config,
-    DiceArtifacts, DiceMode, Hash, Hidden, InlineConfig, InputValues, KeyAlgorithm, PrivateKey,
-    PrivateKeySeed, PublicKey, Signature, CDI_SIZE, DEFAULT_KEY_ALGORITHM, HASH_SIZE, HIDDEN_SIZE,
-    ID_SIZE, PRIVATE_KEY_SEED_SIZE,
+    DiceArtifacts, DiceContext, DiceMode, Hash, Hidden, InlineConfig, InputValues, KeyAlgorithm,
+    PrivateKey, PrivateKeySeed, PublicKey, Signature, CDI_SIZE, DEFAULT_KEY_ALGORITHM, HASH_SIZE,
+    HIDDEN_SIZE, ID_SIZE, PRIVATE_KEY_SEED_SIZE,
 };
 pub use error::{DiceError, Result};
 pub use ops::{

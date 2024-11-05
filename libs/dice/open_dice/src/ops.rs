@@ -78,13 +78,22 @@ pub fn keypair_from_seed(seed: &[u8; PRIVATE_KEY_SEED_SIZE]) -> Result<(PublicKe
     // The principal is set to `DicePrincipal::kDicePrincipalSubject` as this function only
     // derives the key pair cryptographically without caring about which principal it is.
     let principal = DicePrincipal::kDicePrincipalSubject;
+    #[cfg(feature = "multialg")]
+    let mut context = open_dice_cbor_bindgen::DiceContext_ {
+        subject_algorithm: crate::dice::DEFAULT_KEY_ALGORITHM.into(),
+        authority_algorithm: crate::dice::DEFAULT_KEY_ALGORITHM.into(),
+    };
+    #[cfg(feature = "multialg")]
+    let context_ptr = &mut context as *mut _ as *mut std::ffi::c_void;
+    #[cfg(not(feature = "multialg"))]
+    let context_ptr = ptr::null_mut();
     check_result(
         // SAFETY: The function writes to the `public_key` and `private_key` within the given
         // bounds, and only reads the `seed`. The first argument context is not used in this
         // function.
         unsafe {
             DiceKeypairFromSeed(
-                ptr::null_mut(), // context
+                context_ptr,
                 principal,
                 seed.as_ptr(),
                 public_key.as_mut_ptr(),
