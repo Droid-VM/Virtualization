@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85b0baf2_71ae6710",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstallerService.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-05T01:02:01Z",
+      "side": 1,
+      "message": "can this be something like\n\n```\n.split(\":\", 4)\n```\nand take the last element?",
+      "range": {
+        "startLine": 172,
+        "startChar": 72,
+        "endLine": 172,
+        "endChar": 86
+      },
+      "revId": "06aa6b044c3ac4083de7f1ba080493f51c0e4421",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
