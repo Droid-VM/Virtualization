@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e32f65f4_85721600",
+        "filename": "libs/libvmbase/src/memory/error.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-05T10:28:01Z",
+      "side": 1,
+      "message": "For clarity, could you `use ... as HypervisorError`, like in `guest/rialto/src/error.rs`?",
+      "range": {
+        "startLine": 19,
+        "startChar": 29,
+        "endLine": 19,
+        "endChar": 31
+      },
+      "revId": "f074fa63e6982ba8cd3e90494f4160a6f5333f40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
