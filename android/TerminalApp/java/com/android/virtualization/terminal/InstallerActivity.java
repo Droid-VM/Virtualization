@@ -35,7 +35,10 @@ import android.widget.Toast;
 
 import com.android.internal.annotations.VisibleForTesting;
 
+import com.google.android.material.appbar.MaterialToolbar;
+
 import java.lang.ref.WeakReference;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 
 public class InstallerActivity extends BaseActivity {
@@ -63,6 +66,10 @@ public class InstallerActivity extends BaseActivity {
 
         setContentView(R.layout.activity_installer);
 
+        MaterialToolbar toolbar = (MaterialToolbar) findViewById(R.id.installer_toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(
+                getString(R.string.installer_title_text));
         TextView desc = (TextView) findViewById(R.id.installer_desc);
         desc.setText(
                 getString(
