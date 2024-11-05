@@ -28,6 +28,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.virtualization.vmlauncher.DebianServiceImpl
 
 class SettingsPortForwardingActivity : AppCompatActivity() {
     val TAG: String = "VmTerminalApp"
@@ -54,6 +55,7 @@ class SettingsPortForwardingActivity : AppCompatActivity() {
                     false
                 )
             settingsPortForwardingItems.add(SettingsPortForwardingItem(port.toInt(), enabled));
+            DebianServiceImpl.updateListeningPort(port.toInt(), enabled)
         }
 
         val settingsPortForwardingAdapter =

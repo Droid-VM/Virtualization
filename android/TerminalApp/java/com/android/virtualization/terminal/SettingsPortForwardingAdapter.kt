@@ -22,6 +22,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.android.virtualization.vmlauncher.DebianServiceImpl
 import com.google.android.material.materialswitch.MaterialSwitch
 
 class SettingsPortForwardingAdapter(
@@ -55,6 +56,7 @@ class SettingsPortForwardingAdapter(
                 isChecked
             )
             editor.apply()
+            DebianServiceImpl.updateListeningPort(dataSet[position].port, isChecked)
         }
     }
 
