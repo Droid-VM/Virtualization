@@ -22,7 +22,7 @@ use open_dice_cbor_bindgen::{
     DiceConfigType, DiceDeriveCdiCertificateId, DiceDeriveCdiPrivateKeySeed, DiceInputValues,
     DiceMainFlow, DICE_CDI_SIZE, DICE_HASH_SIZE, DICE_HIDDEN_SIZE, DICE_ID_SIZE,
     DICE_INLINE_CONFIG_SIZE, DICE_PRIVATE_KEY_SEED_SIZE, DICE_PRIVATE_KEY_SIZE,
-    DICE_PUBLIC_KEY_SIZE, DICE_SIGNATURE_SIZE,
+    DICE_PUBLIC_KEY_BUFFER_SIZE, DICE_SIGNATURE_BUFFER_SIZE,
 };
 #[cfg(feature = "serde_derive")]
 use serde_derive::{Deserialize, Serialize};
@@ -42,9 +42,9 @@ pub const PRIVATE_KEY_SEED_SIZE: usize = DICE_PRIVATE_KEY_SEED_SIZE as usize;
 /// The size of a private key.
 pub const PRIVATE_KEY_SIZE: usize = DICE_PRIVATE_KEY_SIZE as usize;
 /// The size of a public key.
-pub const PUBLIC_KEY_SIZE: usize = DICE_PUBLIC_KEY_SIZE as usize;
+pub const PUBLIC_KEY_SIZE: usize = DICE_PUBLIC_KEY_BUFFER_SIZE as usize;
 /// The size of a signature.
-pub const SIGNATURE_SIZE: usize = DICE_SIGNATURE_SIZE as usize;
+pub const SIGNATURE_SIZE: usize = DICE_SIGNATURE_BUFFER_SIZE as usize;
 /// The size of an ID.
 pub const ID_SIZE: usize = DICE_ID_SIZE as usize;
 

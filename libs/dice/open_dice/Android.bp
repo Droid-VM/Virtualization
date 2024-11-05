@@ -136,6 +136,7 @@ rust_defaults {
         "--rustified-enum DiceConfigType",
         "--rustified-enum DiceMode",
         "--rustified-enum DiceResult",
+        "--rustified-enum DicePrincipal",
 
         // By generating only essential functions, we can make bindings concise and
         // optimize compilation time.
@@ -156,9 +157,9 @@ rust_defaults {
         "--allowlist-var=DICE_INLINE_CONFIG_SIZE",
         "--allowlist-var=DICE_PRIVATE_KEY_SEED_SIZE",
         "--allowlist-var=DICE_ID_SIZE",
-        "--allowlist-var=DICE_PUBLIC_KEY_SIZE",
+        "--allowlist-var=DICE_PUBLIC_KEY_BUFFER_SIZE",
         "--allowlist-var=DICE_PRIVATE_KEY_SIZE",
-        "--allowlist-var=DICE_SIGNATURE_SIZE",
+        "--allowlist-var=DICE_SIGNATURE_BUFFER_SIZE",
     ],
 }
 
