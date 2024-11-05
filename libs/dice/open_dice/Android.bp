@@ -21,6 +21,7 @@ rust_library_rlib {
     ],
     features: [
         "alloc",
+        "multialg",
     ],
     whole_static_libs: [
         "libcrypto_baremetal",
@@ -178,7 +179,11 @@ rust_bindgen {
         "libopen_dice_cbor_bindgen.rust_defaults",
         "libopen_dice_bindgen_nostd.rust_defaults",
     ],
-    whole_static_libs: ["libopen_dice_cbor_baremetal"],
+    bindgen_flags: [
+        "--rustified-enum DiceKeyAlgorithm",
+        "--allowlist-type=DiceContext",
+    ],
+    whole_static_libs: ["libopen_dice_cbor_baremetal_multialg"],
 }
 
 rust_defaults {
@@ -234,7 +239,7 @@ rust_bindgen {
     rustlibs: [
         "libopen_dice_cbor_bindgen_nostd",
     ],
-    whole_static_libs: ["libopen_dice_android_baremetal"],
+    whole_static_libs: ["libopen_dice_android_baremetal_multialg"],
 }
 
 rust_test {

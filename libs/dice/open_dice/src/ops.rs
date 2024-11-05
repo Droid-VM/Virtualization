@@ -78,13 +78,19 @@ pub fn keypair_from_seed(seed: &[u8; PRIVATE_KEY_SEED_SIZE]) -> Result<(PublicKe
     // The principal is set to `DicePrincipal::kDicePrincipalSubject` as this function only
     // derives the key pair cryptographically without caring about which principal it is.
     let principal = DicePrincipal::kDicePrincipalSubject;
+    #[cfg(feature = "multialg")]
+    let context_ptr = &crate::dice::DEFAULT_DICE_CONTEXT
+        as *const open_dice_cbor_bindgen::DiceContext_
+        as *mut std::ffi::c_void;
+    #[cfg(not(feature = "multialg"))]
+    let context_ptr = ptr::null_mut();
     check_result(
         // SAFETY: The function writes to the `public_key` and `private_key` within the given
         // bounds, and only reads the `seed`. The first argument context is not used in this
         // function.
         unsafe {
             DiceKeypairFromSeed(
-                ptr::null_mut(), // context
+                context_ptr,
                 principal,
                 seed.as_ptr(),
                 public_key.as_mut_ptr(),
@@ -113,13 +119,18 @@ pub fn derive_cdi_leaf_priv(dice_artifacts: &dyn DiceArtifacts) -> Result<Privat
 /// Signs the `message` with the give `private_key` using `DiceSign`.
 pub fn sign(message: &[u8], private_key: &[u8; PRIVATE_KEY_SIZE]) -> Result<Signature> {
     let mut signature = [0u8; SIGNATURE_SIZE];
+    #[cfg(feature = "multialg")]
+    let context_ptr = &crate::dice::DEFAULT_DICE_CONTEXT
+        as *const open_dice_cbor_bindgen::DiceContext_
+        as *mut std::ffi::c_void;
+    #[cfg(not(feature = "multialg"))]
+    let context_ptr = ptr::null_mut();
     check_result(
         // SAFETY: The function writes to the `signature` within the given bounds, and only reads
-        // the message and the private key. The first argument context is not used in this
-        // function.
+        // the message and the private key.
         unsafe {
             DiceSign(
-                ptr::null_mut(), // context
+                context_ptr,
                 message.as_ptr(),
                 message.len(),
                 private_key.as_ptr(),
@@ -133,12 +144,17 @@ pub fn sign(message: &[u8], private_key: &[u8; PRIVATE_KEY_SIZE]) -> Result<Sign
 
 /// Verifies the `signature` of the `message` with the given `public_key` using `DiceVerify`.
 pub fn verify(message: &[u8], signature: &Signature, public_key: &PublicKey) -> Result<()> {
+    #[cfg(feature = "multialg")]
+    let context_ptr = &crate::dice::DEFAULT_DICE_CONTEXT
+        as *const open_dice_cbor_bindgen::DiceContext_
+        as *mut std::ffi::c_void;
+    #[cfg(not(feature = "multialg"))]
+    let context_ptr = ptr::null_mut();
     check_result(
         // SAFETY: only reads the messages, signature and public key as constant values.
-        // The first argument context is not used in this function.
         unsafe {
             DiceVerify(
-                ptr::null_mut(), // context
+                context_ptr,
                 message.as_ptr(),
                 message.len(),
                 signature.as_ptr(),
@@ -160,14 +176,19 @@ pub fn generate_certificate(
     input_values: &InputValues,
     certificate: &mut [u8],
 ) -> Result<usize> {
+    #[cfg(feature = "multialg")]
+    let context_ptr = &crate::dice::DEFAULT_DICE_CONTEXT
+        as *const open_dice_cbor_bindgen::DiceContext_
+        as *mut std::ffi::c_void;
+    #[cfg(not(feature = "multialg"))]
+    let context_ptr = ptr::null_mut();
     let mut certificate_actual_size = 0;
     check_result(
         // SAFETY: The function writes to the `certificate` within the given bounds, and only reads
-        // the input values and the key seeds. The first argument context is not used in this
-        // function.
+        // the input values and the key seeds.
         unsafe {
             DiceGenerateCertificate(
-                ptr::null_mut(), // context
+                context_ptr,
                 subject_private_key_seed.as_ptr(),
                 authority_private_key_seed.as_ptr(),
                 input_values.as_ptr(),
