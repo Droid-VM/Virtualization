@@ -15,15 +15,16 @@
 //! Structs and functions about the types used in DICE.
 //! This module mirrors the content in open-dice/include/dice/dice.h
 
-use crate::error::{check_result, Result};
+use crate::error::{check_result, DiceError, Result};
 use coset::iana;
 pub use open_dice_cbor_bindgen::DiceMode;
 use open_dice_cbor_bindgen::{
     DiceConfigType, DiceDeriveCdiCertificateId, DiceDeriveCdiPrivateKeySeed, DiceInputValues,
     DiceMainFlow, DICE_CDI_SIZE, DICE_HASH_SIZE, DICE_HIDDEN_SIZE, DICE_ID_SIZE,
     DICE_INLINE_CONFIG_SIZE, DICE_PRIVATE_KEY_SEED_SIZE, DICE_PRIVATE_KEY_SIZE,
-    DICE_PUBLIC_KEY_BUFFER_SIZE, DICE_SIGNATURE_BUFFER_SIZE,
 };
+#[cfg(feature = "multialg")]
+use open_dice_cbor_bindgen::{DiceContext_, DiceKeyAlgorithm};
 #[cfg(feature = "serde_derive")]
 use serde_derive::{Deserialize, Serialize};
 use std::{marker::PhantomData, ptr};
@@ -41,10 +42,6 @@ pub const CDI_SIZE: usize = DICE_CDI_SIZE as usize;
 pub const PRIVATE_KEY_SEED_SIZE: usize = DICE_PRIVATE_KEY_SEED_SIZE as usize;
 /// The size of a private key.
 pub const PRIVATE_KEY_SIZE: usize = DICE_PRIVATE_KEY_SIZE as usize;
-/// The size of a public key.
-pub const PUBLIC_KEY_SIZE: usize = DICE_PUBLIC_KEY_BUFFER_SIZE as usize;
-/// The size of a signature.
-pub const SIGNATURE_SIZE: usize = DICE_SIGNATURE_BUFFER_SIZE as usize;
 /// The size of an ID.
 pub const ID_SIZE: usize = DICE_ID_SIZE as usize;
 
@@ -56,10 +53,6 @@ pub type Hidden = [u8; HIDDEN_SIZE];
 pub type InlineConfig = [u8; INLINE_CONFIG_SIZE];
 /// Array type of CDIs.
 pub type Cdi = [u8; CDI_SIZE];
-/// Array type of the public key.
-pub type PublicKey = [u8; PUBLIC_KEY_SIZE];
-/// Array type of the signature.
-pub type Signature = [u8; SIGNATURE_SIZE];
 /// Array type of DICE ID.
 pub type DiceId = [u8; ID_SIZE];
 
@@ -74,6 +67,35 @@ pub enum KeyAlgorithm {
     EcdsaP384,
 }
 
+impl KeyAlgorithm {
+    /// Returns the size of the public key.
+    pub fn public_key_size(&self) -> usize {
+        match self {
+            KeyAlgorithm::Ed25519 => 32,
+            KeyAlgorithm::EcdsaP256 => 64,
+            KeyAlgorithm::EcdsaP384 => 96,
+        }
+    }
+
+    /// Returns the size of the signature.
+    pub fn signature_size(&self) -> usize {
+        match self {
+            KeyAlgorithm::Ed25519 => 64,
+            KeyAlgorithm::EcdsaP256 => 64,
+            KeyAlgorithm::EcdsaP384 => 96,
+        }
+    }
+
+    /// Returns the size of the private key.
+    pub fn private_key_size(&self) -> usize {
+        match self {
+            KeyAlgorithm::Ed25519 => 64,
+            KeyAlgorithm::EcdsaP256 => 32,
+            KeyAlgorithm::EcdsaP384 => 48,
+        }
+    }
+}
+
 impl From<KeyAlgorithm> for iana::Algorithm {
     fn from(alg: KeyAlgorithm) -> Self {
         match alg {
@@ -84,8 +106,57 @@ impl From<KeyAlgorithm> for iana::Algorithm {
     }
 }
 
+impl TryFrom<iana::Algorithm> for KeyAlgorithm {
+    type Error = DiceError;
+
+    fn try_from(alg: iana::Algorithm) -> Result<Self> {
+        match alg {
+            iana::Algorithm::EdDSA => Ok(KeyAlgorithm::Ed25519),
+            iana::Algorithm::ES256 => Ok(KeyAlgorithm::EcdsaP256),
+            iana::Algorithm::ES384 => Ok(KeyAlgorithm::EcdsaP384),
+            other => Err(DiceError::UnsupportedKeyAlgorithm(other)),
+        }
+    }
+}
+
+#[cfg(feature = "multialg")]
+impl From<KeyAlgorithm> for DiceKeyAlgorithm {
+    fn from(alg: KeyAlgorithm) -> Self {
+        match alg {
+            KeyAlgorithm::Ed25519 => DiceKeyAlgorithm::kDiceKeyAlgorithmEd25519,
+            KeyAlgorithm::EcdsaP256 => DiceKeyAlgorithm::kDiceKeyAlgorithmP256,
+            KeyAlgorithm::EcdsaP384 => DiceKeyAlgorithm::kDiceKeyAlgorithmP384,
+        }
+    }
+}
+
+/// Represents the context used for DICE operations.
+#[derive(Debug, Clone)]
+pub struct DiceContext {
+    /// The algorithm used for the authority key.
+    pub authority_algorithm: KeyAlgorithm,
+    /// The algorithm used for the subject key.
+    pub subject_algorithm: KeyAlgorithm,
+}
+
+#[cfg(feature = "multialg")]
+impl From<DiceContext> for DiceContext_ {
+    fn from(context: DiceContext) -> Self {
+        DiceContext_ {
+            authority_algorithm: context.authority_algorithm.into(),
+            subject_algorithm: context.subject_algorithm.into(),
+        }
+    }
+}
+
 /// Default key algorithm used for DICE derivation.
 pub const DEFAULT_KEY_ALGORITHM: KeyAlgorithm = KeyAlgorithm::Ed25519;
+
+#[cfg(feature = "multialg")]
+pub(crate) const DEFAULT_DICE_CONTEXT: DiceContext_ = DiceContext_ {
+    authority_algorithm: DiceKeyAlgorithm::kDiceKeyAlgorithmEd25519,
+    subject_algorithm: DiceKeyAlgorithm::kDiceKeyAlgorithmEd25519,
+};
 
 /// A trait for types that represent Dice artifacts, which include:
 ///
@@ -292,13 +363,20 @@ pub fn dice_main_flow(
     next_cdi_values: &mut CdiValues,
 ) -> Result<usize> {
     let mut next_cdi_certificate_actual_size = 0;
+    // Multi-algorithm support is not supported in this function as this function is
+    // not used in pvmfw.
+    #[cfg(feature = "multialg")]
+    let context_ptr = &crate::dice::DEFAULT_DICE_CONTEXT
+        as *const open_dice_cbor_bindgen::DiceContext_
+        as *mut std::ffi::c_void;
+    #[cfg(not(feature = "multialg"))]
+    let context_ptr = ptr::null_mut();
     check_result(
         // SAFETY: The function only reads the current CDI values and inputs and writes
         // to `next_cdi_certificate` and next CDI values within its bounds.
-        // The first argument can be null and is not used in the current implementation.
         unsafe {
             DiceMainFlow(
-                ptr::null_mut(), // context
+                context_ptr,
                 current_cdi_attest.as_ptr(),
                 current_cdi_seal.as_ptr(),
                 input_values.as_ptr(),

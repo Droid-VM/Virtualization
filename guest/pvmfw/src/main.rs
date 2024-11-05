@@ -209,6 +209,10 @@ fn main(
             instance_hash,
             defer_rollback_protection,
             next_bcc,
+            bcc.leaf_subject_pubkey().cose_alg.try_into().map_err(|e| {
+                error!("{e}");
+                RebootReason::InternalError
+            })?,
         )
         .map_err(|e| {
             error!("Failed to derive next-stage DICE secrets: {e:?}");
