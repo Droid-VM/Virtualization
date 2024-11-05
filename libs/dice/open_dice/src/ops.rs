@@ -17,8 +17,8 @@
 //! main DICE functions depend on.
 
 use crate::dice::{
-    derive_cdi_private_key_seed, DiceArtifacts, Hash, InputValues, PrivateKey, HASH_SIZE,
-    PRIVATE_KEY_SEED_SIZE, PRIVATE_KEY_SIZE, VM_KEY_ALGORITHM,
+    derive_cdi_private_key_seed, vm_context, DiceArtifacts, Hash, InputValues, PrivateKey,
+    HASH_SIZE, PRIVATE_KEY_SEED_SIZE, PRIVATE_KEY_SIZE, VM_KEY_ALGORITHM,
 };
 use crate::error::{check_result, DiceError, Result};
 use alloc::{vec, vec::Vec};
@@ -83,11 +83,10 @@ pub fn keypair_from_seed(seed: &[u8; PRIVATE_KEY_SEED_SIZE]) -> Result<(Vec<u8>,
     let principal = DicePrincipal::kDicePrincipalSubject;
     check_result(
         // SAFETY: The function writes to the `public_key` and `private_key` within the given
-        // bounds, and only reads the `seed`. The first argument context is not used in this
-        // function.
+        // bounds, and only reads the `seed`.
         unsafe {
             DiceKeypairFromSeed(
-                ptr::null_mut(), // context
+                vm_context(),
                 principal,
                 seed.as_ptr(),
                 public_key.as_mut_ptr(),
@@ -118,11 +117,10 @@ pub fn sign(message: &[u8], private_key: &[u8; PRIVATE_KEY_SIZE]) -> Result<Vec<
     let mut signature = vec![0u8; VM_KEY_ALGORITHM.signature_size()];
     check_result(
         // SAFETY: The function writes to the `signature` within the given bounds, and only reads
-        // the message and the private key. The first argument context is not used in this
-        // function.
+        // the message and the private key.
         unsafe {
             DiceSign(
-                ptr::null_mut(), // context
+                vm_context(),
                 message.as_ptr(),
                 message.len(),
                 private_key.as_ptr(),
@@ -143,10 +141,9 @@ pub fn verify(message: &[u8], signature: &[u8], public_key: &[u8]) -> Result<()>
     }
     check_result(
         // SAFETY: only reads the messages, signature and public key as constant values.
-        // The first argument context is not used in this function.
         unsafe {
             DiceVerify(
-                ptr::null_mut(), // context
+                vm_context(),
                 message.as_ptr(),
                 message.len(),
                 signature.as_ptr(),
@@ -171,11 +168,10 @@ pub fn generate_certificate(
     let mut certificate_actual_size = 0;
     check_result(
         // SAFETY: The function writes to the `certificate` within the given bounds, and only reads
-        // the input values and the key seeds. The first argument context is not used in this
-        // function.
+        // the input values and the key seeds.
         unsafe {
             DiceGenerateCertificate(
-                ptr::null_mut(), // context
+                vm_context(),
                 subject_private_key_seed.as_ptr(),
                 authority_private_key_seed.as_ptr(),
                 input_values.as_ptr(),
