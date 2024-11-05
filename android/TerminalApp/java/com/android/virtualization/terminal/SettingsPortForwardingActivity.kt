@@ -48,7 +48,13 @@ class SettingsPortForwardingActivity : AppCompatActivity() {
                 HashSet<String>()
             )
 
-        for (port in ports!!) {
+        // TODO: Bring listenable ports from the guest instead of adding placeholder ports.
+        val mutablePorts = HashSet<String>(ports!!)
+        for (port in 8080..8089) {
+            mutablePorts.add(port.toString());
+        }
+
+        for (port in mutablePorts) {
             val enabled =
                 sharedPref.getBoolean(
                     getString(R.string.preference_forwarding_port_is_enabled) + port,
