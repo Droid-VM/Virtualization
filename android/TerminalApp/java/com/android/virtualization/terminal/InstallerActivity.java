@@ -29,13 +29,18 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.text.format.Formatter;
 import android.util.Log;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.internal.annotations.VisibleForTesting;
 
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
+
 import java.lang.ref.WeakReference;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 
 public class InstallerActivity extends BaseActivity {
@@ -75,6 +80,8 @@ public class InstallerActivity extends BaseActivity {
         mInstallButton.setOnClickListener(
                 (event) -> {
                     requestInstall();
+                    LinearProgressIndicator progressBar = findViewById(R.id.installer_progress);
+                    progressBar.setVisibility(View.VISIBLE);
                 });
 
         if (getIntent().getBooleanExtra(EXTRA_AUTO_DOWNLOAD, false)) {
