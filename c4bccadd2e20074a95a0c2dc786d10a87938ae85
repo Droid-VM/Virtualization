@@ -73,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f0a67a44_bfde9df9",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-06T03:42:48Z",
+      "side": 1,
+      "message": "This is not relying on assumption that either `DebianService` pr `forwarder`. `updateListeningPort` is working as producer of `UPDATE_EVT` and `UPDATE_QUEUE`, and `runForwarderHost` is working as the consumer of `UPDATE_EVT` and `UPDATE_QUEUE`. Regardless of the order between 2 function calls, it should work properly. Correct me if I\u0027m wrong.",
+      "parentUuid": "728ec670_6aebc6d1",
+      "range": {
+        "startLine": 58,
+        "startChar": 12,
+        "endLine": 58,
+        "endChar": 72
+      },
+      "revId": "c4bccadd2e20074a95a0c2dc786d10a87938ae85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51ff8958_efe02504",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingAdapter.kt",
         "patchSetId": 2
