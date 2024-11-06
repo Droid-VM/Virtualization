@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8943bbad_64e14f46",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-06T04:35:10Z",
+      "side": 1,
+      "message": "\u003e runForwarderHost can be notified by the event of UPDATE_EVT which is from updateListeningPort(which is called before runForwarderHost)?\n\nSince UPDATE_EVT is set as `LazyLock` with `static`, there\u0027s no correlation on the order of `runForwarderHost` and `updateListeningPort`. If `updateListeningPort` is called first, then `UPDATE_QUEUE` would have some data in it and it would be consumed when `runForwarderHost`. Vice versa, `runForwarderHost` will prepare for consuming with `poll_ctx.wait`, and consume right after `updateListeningPort` puts data into `UPDATE_QUEUE`.\n\n\u003e And also, it might be bad because we need to add DebianServiceImpl.updateListeningPort for everywhere port information can be manipulated.\n\nI can understand why it\u0027s bad. I thought it\u0027s a trivial thing. If the user manipulates port forwarding setting or listenable port is changed, shouldn\u0027t forwarder_host update its state?",
+      "parentUuid": "7bbad281_8f85aeff",
+      "range": {
+        "startLine": 58,
+        "startChar": 12,
+        "endLine": 58,
+        "endChar": 72
+      },
+      "revId": "c4bccadd2e20074a95a0c2dc786d10a87938ae85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51ff8958_efe02504",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingAdapter.kt",
         "patchSetId": 2
