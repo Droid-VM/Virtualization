@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "810ae448_4426223b",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-11-06T02:15:05Z",
+      "side": 1,
+      "message": "Do you mean there will be a function like `getPorts` from vmlauncher_lib to be called here and return a list of ports? [(8080, true), (8082, false)]\n\nI think that\u0027s fine",
+      "parentUuid": "78155d1b_339b1226",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 17
+      },
+      "revId": "c4bccadd2e20074a95a0c2dc786d10a87938ae85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "728ec670_6aebc6d1",
