@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7bbad281_8f85aeff",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-06T04:06:59Z",
+      "side": 1,
+      "message": "runForwarderHost can be notified by the event of UPDATE_EVT which is from updateListeningPort(which is called before runForwarderHost)?\n(I know the current flow `runForwarderHost` is always in prior to `updateListeningPort`, but I was worried about assumption)\n\nAnd also, it might be bad because we need to add `DebianServiceImpl.updateListeningPort` for everywhere port information can be manipulated. (Like this activity or by notification or maybe something triggered port listener).",
+      "parentUuid": "f0a67a44_bfde9df9",
+      "range": {
+        "startLine": 58,
+        "startChar": 12,
+        "endLine": 58,
+        "endChar": 72
+      },
+      "revId": "c4bccadd2e20074a95a0c2dc786d10a87938ae85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51ff8958_efe02504",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingAdapter.kt",
         "patchSetId": 2
