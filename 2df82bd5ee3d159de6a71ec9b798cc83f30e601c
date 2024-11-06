@@ -43,6 +43,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c1ee57f_9bb5ad4b",
+        "filename": "android/TerminalApp/res/layout/activity_installer.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-06T02:25:15Z",
+      "side": 1,
+      "message": "Can this be linear layout? Then you don\u0027t need things like layout_below",
+      "range": {
+        "startLine": 15,
+        "startChar": 5,
+        "endLine": 15,
+        "endChar": 19
+      },
+      "revId": "2df82bd5ee3d159de6a71ec9b798cc83f30e601c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eb516e2_487e4b9a",
+        "filename": "android/TerminalApp/res/layout/activity_installer.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-06T02:25:15Z",
+      "side": 1,
+      "message": "I think fixed width is something to be avoided. It looks odd when in landscape mode or in a big screen like tablet.  Use left/right margin instead.",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 36
+      },
+      "revId": "2df82bd5ee3d159de6a71ec9b798cc83f30e601c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4f8e7258_84eb7cba",
         "filename": "android/TerminalApp/res/layout/activity_installer.xml",
         "patchSetId": 3
