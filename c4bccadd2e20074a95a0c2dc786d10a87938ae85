@@ -205,6 +205,30 @@
       ],
       "revId": "c4bccadd2e20074a95a0c2dc786d10a87938ae85",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be568a3d_cc135aa1",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/DebianServiceImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-06T05:40:04Z",
+      "side": 1,
+      "message": "Changing this method as private causes an error. I\u0027ll be revisiting this comment if there needs a change about `updateListeningPort` so that it\u0027s no longer to be `public`.",
+      "parentUuid": "c412f80d_71e178c2",
+      "range": {
+        "startLine": 84,
+        "startChar": 4,
+        "endLine": 84,
+        "endChar": 10
+      },
+      "revId": "c4bccadd2e20074a95a0c2dc786d10a87938ae85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
