@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9db4371_4dd10307",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/DebianServiceImpl.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-06T08:13:50Z",
+      "side": 1,
+      "message": "we need to call updateListeningPort here as well to initialize port list in forwarder from sharedpreference.",
+      "range": {
+        "startLine": 31,
+        "startChar": 19,
+        "endLine": 31,
+        "endChar": 36
+      },
+      "revId": "36e0aad180683e3a7ce25ed6a3d0f40ee9fbf4cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
