@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e022aa2e_f3a3cbef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-06T02:21:09Z",
+      "side": 1,
+      "message": "For any UX change, please add me to the reviewer.",
+      "revId": "2df82bd5ee3d159de6a71ec9b798cc83f30e601c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe9c1215_37417b37",
+        "filename": "android/TerminalApp/res/layout/activity_installer.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-06T02:21:09Z",
+      "side": 1,
+      "message": "Parent is `ReleativeLayout`, so this would be unrecognized.\n\n`android:layout_alignParentTop\u003d\"true\"` instead.",
+      "range": {
+        "startLine": 13,
+        "startChar": 8,
+        "endLine": 13,
+        "endChar": 49
+      },
+      "revId": "2df82bd5ee3d159de6a71ec9b798cc83f30e601c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f8e7258_84eb7cba",
+        "filename": "android/TerminalApp/res/layout/activity_installer.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-06T02:21:09Z",
+      "side": 1,
+      "message": "`android:importantForAccessibility\u003d\"no\"` would be sufficient here.\n\n\n\nPlease fix this WARNING reported by AndroidLint: [ContentDescription] Missing `contentDescription` attribute on image\n\nAnalyzer Description: Reports AndroidLint warnings.\nOwner: colefaust@google.com\n\n[ContentDescription] Missing `contentDescription` attribute on image\n\n            \u003cImageView\n             ~~~~~~~~~\n\nNon-textual widgets like ImageViews and ImageButtons should use the `contentDescription` attribute to specify a textual description of the widget such that screen readers and other accessibility tools can adequately describe the user interface.\n\nNote that elements in application screens that are purely decorative and do not provide any content or enable a user action should not have accessibility content descriptions. In this case, set their descriptions to `@null`. If your app\u0027s minSdkVersion is 16 or higher, you can instead set these graphical elements\u0027 `android:importantForAccessibility` attributes to `no`.\n\nNote that for text fields, you should not set both the `hint` and the `contentDescription` attributes since the hint will never be shown. Just set the `hint`.\n\nSuppression and local reproduction steps: go/ayeaye-android-lint\n\nThis warning was found on the git_main branch",
+      "range": {
+        "startLine": 20,
+        "startChar": 10,
+        "endLine": 20,
+        "endChar": 18
+      },
+      "revId": "2df82bd5ee3d159de6a71ec9b798cc83f30e601c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deeea47e_f566054a",
+        "filename": "android/TerminalApp/res/layout/activity_installer.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-06T02:21:09Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by AndroidLint: [SpUsage] Should use \"`sp`\" instead of \"`dp`\" for text sizes\n\nAnalyzer Description: Reports AndroidLint warnings.\nOwner: colefaust@google.com\n\n[SpUsage] Should use \"`sp`\" instead of \"`dp`\" for text sizes\n\n                android:textSize\u003d\"16dp\"\n                ~~~~~~~~~~~~~~~~~~~~~~~\n\nWhen setting text sizes, you should normally use `sp`, or \"scale-independent pixels\". This is like the `dp` unit, but it is also scaled by the user\u0027s font size preference. It is recommend you use this unit when specifying font sizes, so they will be adjusted for both the screen density and the user\u0027s preference.\n\nThere **are** cases where you might need to use `dp`; typically this happens when the text is in a container with a specific dp-size. This will prevent the text from spilling outside the container. Note however that this means that the user\u0027s font size settings are not respected, so consider adjusting the layout itself to be more flexible.\n\nSuppression and local reproduction steps: go/ayeaye-android-lint\n\nThis warning was found on the git_main branch",
+      "range": {
+        "startLine": 44,
+        "startChar": 13,
+        "endLine": 44,
+        "endChar": 35
+      },
+      "revId": "2df82bd5ee3d159de6a71ec9b798cc83f30e601c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
