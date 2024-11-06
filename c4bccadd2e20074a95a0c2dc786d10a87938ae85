@@ -169,6 +169,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ec5c922_cf14fbcf",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-06T07:27:58Z",
+      "side": 1,
+      "message": "\u003e DebianService should watch SharedPreference\n\nThis is the weird point. This approach would make a dependency that `vm_launcher_lib` relying on terminal app. Also, shouldn\u0027t it need a hard-coded shared preference name defined in `res/values/config.xml`, isn\u0027t it?",
+      "parentUuid": "9036d876_ba2c73f0",
+      "range": {
+        "startLine": 58,
+        "startChar": 12,
+        "endLine": 58,
+        "endChar": 72
+      },
+      "revId": "c4bccadd2e20074a95a0c2dc786d10a87938ae85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51ff8958_efe02504",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingAdapter.kt",
         "patchSetId": 2
