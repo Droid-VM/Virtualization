@@ -191,6 +191,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69e183dc_b7f99b55",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-07T08:32:17Z",
+      "side": 1,
+      "message": "Changed as previous discussion:\n- Listening shared preference change at DebianService.\n- updateListeningPort as private.\n- update all port informations for every sharedpref modification.",
+      "parentUuid": "8ec5c922_cf14fbcf",
+      "range": {
+        "startLine": 58,
+        "startChar": 12,
+        "endLine": 58,
+        "endChar": 72
+      },
+      "revId": "c4bccadd2e20074a95a0c2dc786d10a87938ae85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51ff8958_efe02504",
@@ -204,6 +228,30 @@
       "writtenOn": "2024-11-06T01:42:28Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 59,
+        "startChar": 12,
+        "endLine": 59,
+        "endChar": 84
+      },
+      "revId": "c4bccadd2e20074a95a0c2dc786d10a87938ae85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a155135_161b4638",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingAdapter.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-07T08:32:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51ff8958_efe02504",
       "range": {
         "startLine": 59,
         "startChar": 12,
