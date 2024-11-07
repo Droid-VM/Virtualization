@@ -52,6 +52,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c92bee66_650cf0e1",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstallerActivity.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-11-07T15:24:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d8636a2_3782c276",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "9a9f676ff2e15c3f737ce00f5aee63367bc13ca5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6029e403_243e8568",
@@ -87,6 +111,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a281c320_e2773191",
+        "filename": "android/TerminalApp/res/drawable-nodpi/installer.png",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-11-07T15:24:40Z",
+      "side": 1,
+      "message": "Let me use the cloud icon Jaewan suggested in the bug first.",
+      "parentUuid": "059bf8a7_d158ae63",
+      "revId": "9a9f676ff2e15c3f737ce00f5aee63367bc13ca5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3493d47b_427d54b1",
@@ -100,6 +142,30 @@
       "writtenOn": "2024-11-06T14:27:45Z",
       "side": 1,
       "message": "license?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 38
+      },
+      "revId": "9a9f676ff2e15c3f737ce00f5aee63367bc13ca5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48f76415_ae9e2183",
+        "filename": "android/TerminalApp/res/drawable/ic_terminal.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-11-07T15:24:40Z",
+      "side": 1,
+      "message": "Oh, Does these xmls need license? then we should add for all of them...",
+      "parentUuid": "3493d47b_427d54b1",
       "range": {
         "startLine": 1,
         "startChar": 0,
@@ -133,6 +199,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d911f43_91b577b2",
+        "filename": "android/TerminalApp/res/layout/activity_installer.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-11-07T15:24:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba765dc0_db4a0ca9",
+      "range": {
+        "startLine": 2,
+        "startChar": 1,
+        "endLine": 2,
+        "endChar": 13
+      },
+      "revId": "9a9f676ff2e15c3f737ce00f5aee63367bc13ca5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "450f0890_97488b07",
@@ -156,6 +246,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5c251c2_0faf7158",
+        "filename": "android/TerminalApp/res/layout/activity_installer.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-11-07T15:24:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "450f0890_97488b07",
+      "range": {
+        "startLine": 15,
+        "startChar": 28,
+        "endLine": 15,
+        "endChar": 32
+      },
+      "revId": "9a9f676ff2e15c3f737ce00f5aee63367bc13ca5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ade56d7_688f2560",
@@ -169,6 +283,30 @@
       "writtenOn": "2024-11-06T14:27:45Z",
       "side": 1,
       "message": "Unroll this. Having nested layout increase danger of overdraw and impacts performance. (wouldn\u0027t be significant here, though)",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 19
+      },
+      "revId": "9a9f676ff2e15c3f737ce00f5aee63367bc13ca5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d1c9af0_cb39006c",
+        "filename": "android/TerminalApp/res/layout/activity_installer.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-11-07T15:24:40Z",
+      "side": 1,
+      "message": "I made it nested is to only let the progress bar without padding. But let me just add margin to every other elements.",
+      "parentUuid": "1ade56d7_688f2560",
       "range": {
         "startLine": 18,
         "startChar": 0,
