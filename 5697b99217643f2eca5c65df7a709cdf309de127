@@ -100,6 +100,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17eddaa0_46bbedd6",
+        "filename": "libs/libhypervisor_backends/rules.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2024-11-07T00:54:07Z",
+      "side": 1,
+      "message": "\u003e API stability [...] I don\u0027t think it\u0027s something would like to guarantee for this library\n\nUnderstood that API stability is not guaranteed at this time for the code moved into `libhypervisor_backends`.\n\n\u003e If it does, would you mind configuring that CI in this CL?\n\nTrusty is hosted on this Gerrit instance and has CI coverage. However, it cannot be configured via `TEST_MAPPINGS` as far as I\u0027m aware so the necessary CI changes will have to be configured elsewhere. We\u0027re tracking this under b/377563642.",
+      "parentUuid": "557d0d4e_493eee5c",
+      "revId": "5697b99217643f2eca5c65df7a709cdf309de127",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9476173a_4f178252",
