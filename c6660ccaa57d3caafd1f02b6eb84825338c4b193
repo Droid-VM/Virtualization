@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a78c219_89953669",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-07T13:15:29Z",
+      "side": 1,
+      "message": "nit, for clarity:\n\n\u003e to the value `none`\n\nor even\n\n\u003e to the value \"`none`\"\n\nas the shell consumes the quotes in the commands below.",
+      "range": {
+        "startLine": 495,
+        "startChar": 8,
+        "endLine": 495,
+        "endChar": 29
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a5bb4b03_7305a92d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "guest/pvmfw/README.md",
+              "range": {
+                "startLine": 495,
+                "startChar": 0,
+                "endLine": 496,
+                "endChar": 0
+              },
+              "replacement": "propety to the value `none`:\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c6660ccaa57d3caafd1f02b6eb84825338c4b193",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
