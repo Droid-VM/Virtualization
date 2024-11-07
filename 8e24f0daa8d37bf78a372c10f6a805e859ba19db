@@ -33,6 +33,75 @@
       "message": "Could you add test case for the new feature? Otherwise LGTM",
       "revId": "8e24f0daa8d37bf78a372c10f6a805e859ba19db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5e2c588_b7e1ee28",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 2022,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-11-07T08:53:56Z",
+      "side": 1,
+      "message": "Could we drop this since early_vm is now used below in line 2049?",
+      "range": {
+        "startLine": 2022,
+        "startChar": 0,
+        "endLine": 2022,
+        "endChar": 23
+      },
+      "revId": "8e24f0daa8d37bf78a372c10f6a805e859ba19db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77723922_b2ba7fba",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 2060,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-11-07T08:53:56Z",
+      "side": 1,
+      "message": "nit: Use `ensure!(...` to make this check easier to read?",
+      "range": {
+        "startLine": 2059,
+        "startChar": 11,
+        "endLine": 2060,
+        "endChar": 17
+      },
+      "revId": "8e24f0daa8d37bf78a372c10f6a805e859ba19db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "509d1cf2_bf0f7335",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 2076,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-11-07T08:53:56Z",
+      "side": 1,
+      "message": "Given that early VM configurations can now be sourced from multiple files, it\u0027s prudent to introduce a duplication check to ensure the uniqueness of VM names and CIDs. wdyt?\n\nSomehow out of scope for this cl: It can be even better if we can conduct such duplication check at build-time.",
+      "range": {
+        "startLine": 2076,
+        "startChar": 0,
+        "endLine": 2076,
+        "endChar": 65
+      },
+      "revId": "8e24f0daa8d37bf78a372c10f6a805e859ba19db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
