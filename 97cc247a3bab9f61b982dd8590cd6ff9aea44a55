@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22ff75c3_6b97237c",
+        "filename": "microdroid/bootconfig.common",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-07T23:23:05Z",
+      "side": 1,
+      "message": "I didn\u0027t see any! But it is removed now in the new CL aosp/3225466",
+      "parentUuid": "254d4994_823f922a",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 30
+      },
+      "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11405518_eaf4ee1c",
@@ -94,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4beba6a1_9d7e4791",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-07T23:23:05Z",
+      "side": 1,
+      "message": "Ack. Check out aosp/3248388 and the CL under it aosp/3225466. I\u0027m waiting for the underlying NDK APIs to go through review before starthing these reviews but we can continue the conversation there and the new CLs will provide more info!",
+      "parentUuid": "09cdc5f1_ca800873",
+      "range": {
+        "startLine": 44,
+        "startChar": 7,
+        "endLine": 44,
+        "endChar": 15
+      },
+      "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04d154eb_137b584a",
@@ -117,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34721b5c_66d9fbaa",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-07T23:23:05Z",
+      "side": 1,
+      "message": "We wouldn\u0027t end up here (matching `None`) if that were case, but the `HashMap::insert` will update the value for that entry if it existed.",
+      "parentUuid": "04d154eb_137b584a",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 72
+      },
+      "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4bf78681_1cce139b",
@@ -130,6 +202,30 @@
       "writtenOn": "2024-06-27T22:25:25Z",
       "side": 1,
       "message": "needs dupe, doesn\u0027t have implicit dupe?",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 40
+      },
+      "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b658a5a4_1ca582e9",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-07T23:23:05Z",
+      "side": 1,
+      "message": "Looks like it\u0027s a way to pass ownership of the underlying FD to a different type (from `VsockStream` to `File`). `into_raw_fd` \"consumes\" the object:https://doc.rust-lang.org/1.77.2/std/os/fd/trait.IntoRawFd.html#tymethod.into_raw_fd",
+      "parentUuid": "4bf78681_1cce139b",
       "range": {
         "startLine": 79,
         "startChar": 0,
@@ -410,6 +506,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b94085d_ecdb6e92",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-07T23:23:05Z",
+      "side": 1,
+      "message": "The payload itself doesn\u0027t interact with the accessor. The injected accesssorProvider from libvm_payload) needs to provide accessors from microdroidmgr(the processes with the permissions in the VM to create the vsock connection)",
+      "parentUuid": "19074d7e_55056174",
+      "range": {
+        "startLine": 86,
+        "startChar": 20,
+        "endLine": 86,
+        "endChar": 43
+      },
+      "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1eb50611_1047fa92",
@@ -423,6 +543,24 @@
       "writtenOn": "2024-06-27T22:25:25Z",
       "side": 1,
       "message": "license",
+      "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fef0446_4ad76163",
+        "filename": "vm_payload/src/injector.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-07T23:23:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1eb50611_1047fa92",
       "revId": "97cc247a3bab9f61b982dd8590cd6ff9aea44a55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },

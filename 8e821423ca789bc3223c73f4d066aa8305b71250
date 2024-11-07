@@ -69,6 +69,30 @@
       },
       "revId": "8e821423ca789bc3223c73f4d066aa8305b71250",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f59b2f2_521b0a98",
+        "filename": "virtualizationservice/aidl/android/system/virtualmachineservice/IVirtualMachineService.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2024-11-07T23:23:05Z",
+      "side": 1,
+      "message": "\u003e probably will want to make this a union\n\nThat could be useful in the future! In this case I think the vm_payloads can only talk over VSOCK, and only talk to host services (not other VMs) with the HOST CID, so only the port number is needed.\n\n\u003e any thought to use byte[] sockaddr? you can use the C type if you want\n\nHmmm so we could do something like this?\n```\naddr \u003d reinterpret_cast\u003csockaddr*\u003e(_aidl_return.sockaddr.data());\nlen \u003d _aidl_return.sockaddr.size()`\n```\nIt\u0027s not very useful in Java, but that might be OK.\n\nWhat about endianness? I see references saying that Android only supports little-endian and it would be handled in Parcel if we needed to support big-endian in binder_sdk.\n\nThis also requires more unsafe rust.\n\nWe will talk more about this if/when this is being added to a stable interface!",
+      "parentUuid": "073802b5_fda2c82a",
+      "range": {
+        "startLine": 68,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 14
+      },
+      "revId": "8e821423ca789bc3223c73f4d066aa8305b71250",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
