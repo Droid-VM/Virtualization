@@ -177,7 +177,7 @@ public class VmLauncherService extends Service implements DebianServiceImpl.Debi
             mServer =
                     OkHttpServerBuilder.forPort(port, InsecureServerCredentials.create())
                             .intercept(interceptor)
-                            .addService(new DebianServiceImpl(this))
+                            .addService(new DebianServiceImpl(getApplicationContext(), this))
                             .build()
                             .start();
         } catch (IOException e) {
