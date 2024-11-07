@@ -16,6 +16,8 @@
 
 package com.android.virtualization.vmlauncher;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.annotation.Keep;
@@ -28,17 +30,45 @@ import com.android.virtualization.vmlauncher.proto.ReportVmIpAddrResponse;
 
 import io.grpc.stub.StreamObserver;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 final class DebianServiceImpl extends DebianServiceGrpc.DebianServiceImplBase {
     public static final String TAG = "DebianService";
+    private SharedPreferences mSharedPref;
     private final DebianServiceCallback mCallback;
+
+    private static final String PREFERENCE_FILE_KEY =
+            "com.android.virtualization.terminal.PREFERENCE_FILE_KEY";
+    private static final String PREFERENCE_FORWARDING_PORTS = "PREFERENCE_FORWARDING_PORTS";
+    private static final String PREFERENCE_FORWARDING_PORT_IS_ENABLED_PREFIX =
+            "PREFERENCE_FORWARDING_PORT_IS_ENABLED_";
 
     static {
         System.loadLibrary("forwarder_host_jni");
     }
 
-    protected DebianServiceImpl(DebianServiceCallback callback) {
+    protected DebianServiceImpl(Context appContext, DebianServiceCallback callback) {
         super();
         mCallback = callback;
+        mSharedPref = appContext.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+
+        // TODO(b/340126051): Instead of putting fixed value, receive active port list info from the
+        // guest.
+        if (!mSharedPref.contains(PREFERENCE_FORWARDING_PORTS)) {
+            SharedPreferences.Editor editor = mSharedPref.edit();
+            Set<String> ports = new HashSet<>();
+            for (int port = 8080; port < 8090; port++) {
+                ports.add(Integer.toString(port));
+                editor.putBoolean(
+                        PREFERENCE_FORWARDING_PORT_IS_ENABLED_PREFIX + Integer.toString(port),
+                        false);
+            }
+            editor.putStringSet(PREFERENCE_FORWARDING_PORTS, ports);
+            editor.apply();
+        }
     }
 
     @Override
@@ -55,6 +85,18 @@ final class DebianServiceImpl extends DebianServiceGrpc.DebianServiceImplBase {
     public void openForwardingRequestQueue(
             QueueOpeningRequest request, StreamObserver<ForwardingRequestItem> responseObserver) {
         Log.d(DebianServiceImpl.TAG, "OpenForwardingRequestQueue");
+        mSharedPref.registerOnSharedPreferenceChangeListener(
+                new SharedPreferences.OnSharedPreferenceChangeListener() {
+                    @Override
+                    public void onSharedPreferenceChanged(
+                            SharedPreferences sharedPreferences, String key) {
+                        if (key.startsWith(PREFERENCE_FORWARDING_PORT_IS_ENABLED_PREFIX)
+                                || key.equals(PREFERENCE_FORWARDING_PORTS)) {
+                            updateListeningPorts();
+                        }
+                    }
+                });
+        updateListeningPorts();
         runForwarderHost(request.getCid(), new ForwarderHostCallback(responseObserver));
         responseObserver.onCompleted();
     }
@@ -80,6 +122,25 @@ final class DebianServiceImpl extends DebianServiceGrpc.DebianServiceImplBase {
     private static native void runForwarderHost(int cid, ForwarderHostCallback callback);
 
     public static native void terminateForwarderHost();
+
+    private static native void updateListeningPorts(int[] ports);
+
+    private void updateListeningPorts() {
+        Set<String> activePorts =
+                mSharedPref.getStringSet(PREFERENCE_FORWARDING_PORTS, Collections.emptySet());
+        ArrayList<Integer> listeningPorts = new ArrayList<Integer>();
+        for (String port : activePorts) {
+            if (mSharedPref.getBoolean(
+                    PREFERENCE_FORWARDING_PORT_IS_ENABLED_PREFIX + port, false)) {
+                try {
+                    listeningPorts.add(Integer.valueOf(port));
+                } catch (NumberFormatException e) {
+                    Log.e(DebianServiceImpl.TAG, "Failed to parse listening ports", e);
+                }
+            }
+        }
+        updateListeningPorts(listeningPorts.stream().mapToInt(Integer::intValue).toArray());
+    }
 
     protected interface DebianServiceCallback {
         void onIpAddressAvailable(String ipAddr);
