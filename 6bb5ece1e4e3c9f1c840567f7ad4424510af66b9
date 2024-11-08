@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5caa43a_3cb48886",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/VmLauncherService.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-08T04:06:43Z",
+      "side": 1,
+      "message": "can\u0027t it be just `this`(Service context)?",
+      "range": {
+        "startLine": 178,
+        "startChar": 51,
+        "endLine": 178,
+        "endChar": 75
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "75669a40_46366a62",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/VmLauncherService.java",
+              "range": {
+                "startLine": 178,
+                "startChar": 0,
+                "endLine": 179,
+                "endChar": 0
+              },
+              "replacement": "            mDebianService \u003d new DebianServiceImpl(this, this);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6bb5ece1e4e3c9f1c840567f7ad4424510af66b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
