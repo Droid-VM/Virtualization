@@ -257,6 +257,30 @@
       },
       "revId": "8e24f0daa8d37bf78a372c10f6a805e859ba19db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f16ec9ad_2111058d",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 2076,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-08T08:21:06Z",
+      "side": 1,
+      "message": "It\u0027s an error. See line 2101. There, `early_vms`, returned from `get_early_vms_in_partition`, is a union of all config files.",
+      "parentUuid": "25861d70_07c092f1",
+      "range": {
+        "startLine": 2076,
+        "startChar": 0,
+        "endLine": 2076,
+        "endChar": 65
+      },
+      "revId": "8e24f0daa8d37bf78a372c10f6a805e859ba19db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
