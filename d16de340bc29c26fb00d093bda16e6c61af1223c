@@ -104,6 +104,30 @@
       },
       "revId": "d16de340bc29c26fb00d093bda16e6c61af1223c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e3dfe1f_9d843f2d",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/DebianServiceImpl.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-08T04:01:56Z",
+      "side": 1,
+      "message": "Added cleanup method for port forwarding. Currently on testing. Perhaps, it might be better in the destructor method of `DebianServiceImpl` class object.",
+      "parentUuid": "49901725_25c5aa1a",
+      "range": {
+        "startLine": 124,
+        "startChar": 30,
+        "endLine": 124,
+        "endChar": 52
+      },
+      "revId": "d16de340bc29c26fb00d093bda16e6c61af1223c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
