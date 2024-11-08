@@ -329,6 +329,30 @@
       },
       "revId": "5061de5285ab9812c9434de7817745312fed01a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb3c7b6e_d9f3c401",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/DebianServiceImpl.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-08T07:24:39Z",
+      "side": 1,
+      "message": "the variable names are a little bit confusing, though. activePorts might be allCandidatePorts(or guestOpenPorts), listeningPorts would be forwardedPorts..",
+      "parentUuid": "a5a6a35e_42652d5f",
+      "range": {
+        "startLine": 143,
+        "startChar": 8,
+        "endLine": 143,
+        "endChar": 41
+      },
+      "revId": "5061de5285ab9812c9434de7817745312fed01a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
