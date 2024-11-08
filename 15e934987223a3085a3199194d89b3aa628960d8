@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5e22cf8_b95a2291",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/DebianServiceImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-08T08:31:57Z",
+      "side": 1,
+      "message": "I wish we don\u0027t blindly handle an exception by logging it.\n\nHere, if numberformatexception occurs, it means there\u0027s a bug, not a user error. In that case, it\u0027s better to let it crash so that we can detect it and fix it.",
+      "range": {
+        "startLine": 149,
+        "startChar": 16,
+        "endLine": 149,
+        "endChar": 51
+      },
+      "revId": "15e934987223a3085a3199194d89b3aa628960d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecf4ec44_eef66f61",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/DebianServiceImpl.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-08T08:31:57Z",
+      "side": 1,
+      "message": "Not sure why this wasn\u0027t caught in the beginning. This part is not needed.",
+      "range": {
+        "startLine": 150,
+        "startChar": 26,
+        "endLine": 150,
+        "endChar": 43
+      },
+      "revId": "15e934987223a3085a3199194d89b3aa628960d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
