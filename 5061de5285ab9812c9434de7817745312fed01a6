@@ -281,6 +281,30 @@
       },
       "revId": "5061de5285ab9812c9434de7817745312fed01a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b5fc272_3b5f53b1",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/DebianServiceImpl.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-08T07:16:24Z",
+      "side": 1,
+      "message": "why you don\u0027t add the port number to the array when  PREFERENCE_FORWARDING_PORT_IS_ENABLED_PREFIX + port is false? When user disables port forwarding a specific port, we need to stop forwarding it, right?",
+      "parentUuid": "0c0f5040_b49a2c24",
+      "range": {
+        "startLine": 143,
+        "startChar": 8,
+        "endLine": 143,
+        "endChar": 41
+      },
+      "revId": "5061de5285ab9812c9434de7817745312fed01a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
