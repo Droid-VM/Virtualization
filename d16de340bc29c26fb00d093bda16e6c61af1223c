@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "faf15114_58f6991d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-08T02:44:20Z",
+      "side": 1,
+      "message": "thanks for the change!",
+      "revId": "d16de340bc29c26fb00d093bda16e6c61af1223c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "f71976a1_8fc4dacb",
         "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/DebianServiceImpl.java",
         "patchSetId": 5
@@ -61,6 +78,30 @@
           ]
         }
       ],
+      "revId": "d16de340bc29c26fb00d093bda16e6c61af1223c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49901725_25c5aa1a",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/DebianServiceImpl.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-08T02:44:20Z",
+      "side": 1,
+      "message": "i meant we might need cleanup() method, and cleanup() calls unregisterOnSharedPreferenceChangeListener and native terminateForwarderHost()",
+      "parentUuid": "c666cc7f_0d63a301",
+      "range": {
+        "startLine": 124,
+        "startChar": 30,
+        "endLine": 124,
+        "endChar": 52
+      },
       "revId": "d16de340bc29c26fb00d093bda16e6c61af1223c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
