@@ -34,6 +34,24 @@
       "parentUuid": "eb865a6e_c1a0e8fe",
       "revId": "37bef33a87dff94b56d08d2527415290e4c2788a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6789de6c_80235648",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-11-08T18:04:42Z",
+      "side": 1,
+      "message": "Rebased and modified. Passing the prop will not override `--dump_device_tree` allowing flexibility on where to dump DT. If `--dump_device_tree` is not passed, then it defaults to the temp directory.\n\nPTAL",
+      "parentUuid": "e2c8b962_f353f4a7",
+      "revId": "37bef33a87dff94b56d08d2527415290e4c2788a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
