@@ -137,6 +137,30 @@
       },
       "revId": "5061de5285ab9812c9434de7817745312fed01a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c0f5040_b49a2c24",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/DebianServiceImpl.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-08T06:31:20Z",
+      "side": 1,
+      "message": "No, it\u0027s not determined. From the current design of SettingsPortForwardingActivity, \n- `preference_forwarding_ports`: List of ports visible in Setting UI so that users can enable/disable port forwarding. In the future, `preference_forwarding_ports` should be modified with port listener living in the guest.\n- `preference_forwarding_port_enabled_\u003cport_number\u003e`: User\u0027s preference for enabling/disabling port forwarding if the port is listenable.\n\nSo the logic should be:\n1. Retrieving candidates of ports which are visible in setting UI.\n2. Filtering candidates based on stored sharedPref that the user enabled this port or not.",
+      "parentUuid": "618ccc8e_df224c7c",
+      "range": {
+        "startLine": 143,
+        "startChar": 8,
+        "endLine": 143,
+        "endChar": 41
+      },
+      "revId": "5061de5285ab9812c9434de7817745312fed01a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
