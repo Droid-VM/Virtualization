@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58d8b7d6_4b53a3e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-11-08T22:13:04Z",
+      "side": 1,
+      "message": "Code looks safe, safetydocs are not all technically talking about the right things - safetydocs are explaining why *that* unsafe block is safe. Two of your call safetydocs seem to be trying to argue why a `drop` block is safe, which is separate.",
+      "revId": "53bb579c39ddd4c8438a141ec5e24288f0734009",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a761411_37a6a3a2",
+        "filename": "android/virtmgr/src/selinux.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-11-08T22:13:04Z",
+      "side": 1,
+      "message": "This appears to be safe, but your safety document doesn\u0027t address it - you\u0027re talking about what happens later, during the drop. This unsafe block would instead just say something like `selinux_android_tee_service_context_handle` is always safe to call.\n\nThe rest of your safety logic is handled by the safety comment you have on the `drop` unsafe block.",
+      "revId": "53bb579c39ddd4c8438a141ec5e24288f0734009",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ea8f3af_d73f1213",
+        "filename": "android/virtmgr/src/selinux.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-11-08T22:13:04Z",
+      "side": 1,
+      "message": "As previously, this safetydoc doesn\u0027t address *calling* `selabel_lookup`, it talks about what you\u0027re going to do with it afterwards.\n\nYou should be talking about all arguments being live for the duration of the call, and not retained by the call.",
+      "revId": "53bb579c39ddd4c8438a141ec5e24288f0734009",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
