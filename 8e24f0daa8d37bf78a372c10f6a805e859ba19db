@@ -75,6 +75,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db06ac5f_a41a403c",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 2022,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-08T01:24:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5e2c588_b7e1ee28",
+      "range": {
+        "startLine": 2022,
+        "startChar": 0,
+        "endLine": 2022,
+        "endChar": 23
+      },
+      "revId": "8e24f0daa8d37bf78a372c10f6a805e859ba19db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77723922_b2ba7fba",
@@ -88,6 +112,30 @@
       "writtenOn": "2024-11-07T08:53:56Z",
       "side": 1,
       "message": "nit: Use `ensure!(...` to make this check easier to read?",
+      "range": {
+        "startLine": 2059,
+        "startChar": 11,
+        "endLine": 2060,
+        "endChar": 17
+      },
+      "revId": "8e24f0daa8d37bf78a372c10f6a805e859ba19db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b484978b_e625342b",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 2060,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-08T01:24:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77723922_b2ba7fba",
       "range": {
         "startLine": 2059,
         "startChar": 11,
@@ -135,6 +183,30 @@
       "side": 1,
       "message": "Hi Inseob, this is not blocking. We can add a TODO and handle this in a subsequent cl to unblock aosp/3312210. wdyt?",
       "parentUuid": "509d1cf2_bf0f7335",
+      "range": {
+        "startLine": 2076,
+        "startChar": 0,
+        "endLine": 2076,
+        "endChar": 65
+      },
+      "revId": "8e24f0daa8d37bf78a372c10f6a805e859ba19db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1b06737_c2dde91c",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 2076,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-08T01:24:06Z",
+      "side": 1,
+      "message": "We already ensure the uniqueness of VM names. I intentionally didn\u0027t add CID checks because a single system_ext or a single product image may want to use different VM payloads for the same CIDs depending on vendors.\n\nPlease reopen if you still need to check CIDs!",
+      "parentUuid": "71e98404_50aa5b5f",
       "range": {
         "startLine": 2076,
         "startChar": 0,
