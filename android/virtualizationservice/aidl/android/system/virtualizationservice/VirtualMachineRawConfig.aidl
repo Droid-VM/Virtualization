@@ -63,7 +63,7 @@ parcelable VirtualMachineRawConfig {
     int memoryMib;
 
     /** The vCPU topology that will be generated for the VM. Default to 1 vCPU. */
-    CpuTopology cpuTopology = CpuTopology.ONE_CPU;
+    CpuTopology cpuTopology = CpuTopology.MATCH_HOST;
 
     /**
      * A version or range of versions of the virtual platform that this config is compatible with.
