@@ -15,8 +15,8 @@
 //! A client for trusty security VMs during early boot.
 
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
-    IVirtualizationService::IVirtualizationService, VirtualMachineConfig::VirtualMachineConfig,
-    VirtualMachineRawConfig::VirtualMachineRawConfig,
+    CpuTopology::CpuTopology, IVirtualizationService::IVirtualizationService,
+    VirtualMachineConfig::VirtualMachineConfig, VirtualMachineRawConfig::VirtualMachineRawConfig,
 };
 use android_system_virtualizationservice::binder::{ParcelFileDescriptor, Strong};
 use anyhow::{Context, Result};
@@ -42,12 +42,24 @@ struct Args {
     /// Memory size of the VM in MiB
     #[arg(long, default_value_t = 128)]
     memory_size_mib: i32,
+
+    /// CPU Topology exposed to the VM <one-cpu|match_host>
+    #[arg(long, default_value = "one-cpu")]
+    cpu_topology: String,
 }
 
 fn get_service() -> Result<Strong<dyn IVirtualizationService>> {
     let virtmgr = vmclient::VirtualizationService::new_early()
         .context("Failed to spawn VirtualizationService")?;
     virtmgr.connect().context("Failed to connect to VirtualizationService")
+}
+
+fn parse_cpu_topology(s: &str) -> Result<CpuTopology, String> {
+    match s {
+        "one-cpu" => Ok(CpuTopology::ONE_CPU),
+        "match-host" => Ok(CpuTopology::MATCH_HOST),
+        _ => Err(format!("Invalid cpu topology {}", s)),
+    }
 }
 
 fn main() -> Result<()> {
@@ -58,11 +70,31 @@ fn main() -> Result<()> {
     let kernel =
         File::open(&args.kernel).with_context(|| format!("Failed to open {:?}", &args.kernel))?;
 
+    match parse_cpu_topology(args.cpu_topology.as_str()) {
+        Ok(topology) => {
+            // Handle the successful case
+            println!("Parsed CPU topology: {:?}", topology);
+            // Now you can use the cpu_topology value
+        }
+        Err(err) => {
+            // Handle the error case
+            eprintln!("Error parsing CPU topology: {}", err);
+//            // process::exit(1); // Or handle the error differently
+        }
+    };
+
+    let cpu_topology_config = match args.cpu_topology.as_str() {
+       "one-cpu" => CpuTopology::ONE_CPU,
+        "match-host" => CpuTopology::MATCH_HOST,
+        _ => CpuTopology::ONE_CPU,    
+    };
+    
     let vm_config = VirtualMachineConfig::RawConfig(VirtualMachineRawConfig {
         name: args.name.to_owned(),
         kernel: Some(ParcelFileDescriptor::new(kernel)),
         protectedVm: args.protected,
         memoryMib: args.memory_size_mib,
+        cpuTopology: cpu_topology_config,
         platformVersion: "~1.0".to_owned(),
         // TODO: add instanceId
         ..Default::default()
