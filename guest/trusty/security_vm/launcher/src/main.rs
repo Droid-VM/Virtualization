@@ -15,8 +15,8 @@
 //! A client for trusty security VMs during early boot.
 
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
-    IVirtualizationService::IVirtualizationService, VirtualMachineConfig::VirtualMachineConfig,
-    VirtualMachineRawConfig::VirtualMachineRawConfig,
+    CpuTopology::CpuTopology, IVirtualizationService::IVirtualizationService,
+    VirtualMachineConfig::VirtualMachineConfig, VirtualMachineRawConfig::VirtualMachineRawConfig,
 };
 use android_system_virtualizationservice::binder::{ParcelFileDescriptor, Strong};
 use anyhow::{Context, Result};
@@ -42,6 +42,10 @@ struct Args {
     /// Memory size of the VM in MiB
     #[arg(long, default_value_t = 128)]
     memory_size_mib: i32,
+
+    /// CPU Topology exposed to the VM (ONE_CPU or MATCH_HOST)
+    #[arg(long, default_value_t = 0)]
+    cpu_topology: i32,
 }
 
 fn get_service() -> Result<Strong<dyn IVirtualizationService>> {
@@ -58,11 +62,15 @@ fn main() -> Result<()> {
     let kernel =
         File::open(&args.kernel).with_context(|| format!("Failed to open {:?}", &args.kernel))?;
 
+    let arg_cpu_topology =
+        if args.cpu_topology == 0 { CpuTopology::ONE_CPU } else { CpuTopology::MATCH_HOST };
+
     let vm_config = VirtualMachineConfig::RawConfig(VirtualMachineRawConfig {
         name: args.name.to_owned(),
         kernel: Some(ParcelFileDescriptor::new(kernel)),
         protectedVm: args.protected,
         memoryMib: args.memory_size_mib,
+        cpuTopology: arg_cpu_topology,
         platformVersion: "~1.0".to_owned(),
         // TODO: add instanceId
         ..Default::default()
