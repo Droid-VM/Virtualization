@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "08775712_41da4752",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 738,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-11-09T01:33:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98b21d13_01e63e0c",
+      "range": {
+        "startLine": 738,
+        "startChar": 13,
+        "endLine": 738,
+        "endChar": 83
+      },
+      "revId": "1c219cdb0d4bd188e6b2615246e3d2203cae46bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "6e90c8f0_2548eb55",
         "filename": "android/virtmgr/src/crosvm.rs",
         "patchSetId": 6
@@ -70,6 +94,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "851b69c9_0b11367f",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-11-09T01:33:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "192edff8_b469a1de",
+      "range": {
+        "startLine": 756,
+        "startChar": 52,
+        "endLine": 756,
+        "endChar": 62
+      },
+      "revId": "1c219cdb0d4bd188e6b2615246e3d2203cae46bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9967ceb3_4ee750ee",
@@ -95,6 +143,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba58795f_6fb8ad48",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualMachine.aidl",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-11-09T01:33:02Z",
+      "side": 1,
+      "message": "I opted for the option of zipping the snapshot with virtmgr and writing back to the FD, though I\u0027m not sure if this violates policies? Needs reviewing.",
+      "parentUuid": "9967ceb3_4ee750ee",
+      "range": {
+        "startLine": 65,
+        "startChar": 11,
+        "endLine": 65,
+        "endChar": 46
+      },
+      "revId": "1c219cdb0d4bd188e6b2615246e3d2203cae46bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58d89465_236beba0",
         "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualMachine.aidl",
         "patchSetId": 6
@@ -106,6 +178,30 @@
       "writtenOn": "2024-10-09T00:13:19Z",
       "side": 1,
       "message": "for ease of reading client server/code and ease of adding additional options, I recommend:\n\n```\nparcelable SnapshotOptions {\n    boolean compressMemory;\n    boolean encrypt;\n};\nvoid snapshot(..., SnapshotOptions);\n```\n\nAIDL style is to use camelCase, I recognize this isn\u0027t used here, so you don\u0027t have to worry about that!",
+      "range": {
+        "startLine": 64,
+        "startChar": 3,
+        "endLine": 66,
+        "endChar": 1
+      },
+      "revId": "1c219cdb0d4bd188e6b2615246e3d2203cae46bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4d764b9_1b9abc36",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualMachine.aidl",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-11-09T01:33:02Z",
+      "side": 1,
+      "message": "Added SnapshotOptions, currently zipping the directory from crosvm.",
+      "parentUuid": "58d89465_236beba0",
       "range": {
         "startLine": 64,
         "startChar": 3,
