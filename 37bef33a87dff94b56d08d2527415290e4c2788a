@@ -52,6 +52,24 @@
       "parentUuid": "e2c8b962_f353f4a7",
       "revId": "37bef33a87dff94b56d08d2527415290e4c2788a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e473a5c_673d25af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-10T14:37:11Z",
+      "side": 1,
+      "message": "I now remembered that we had added the feature to the crosvm directly. Do we still need this? If so, could you also add test for it as Pierre commented above?\n\nRegardless of the decision, could you update `debug/README.md` with the DT dump instruction?",
+      "parentUuid": "6789de6c_80235648",
+      "revId": "37bef33a87dff94b56d08d2527415290e4c2788a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
