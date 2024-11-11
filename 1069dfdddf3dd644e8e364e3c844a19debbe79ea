@@ -70,6 +70,24 @@
       "parentUuid": "deefbbb2_3d5ec699",
       "revId": "1069dfdddf3dd644e8e364e3c844a19debbe79ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b25748b_0c8fd0d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-11T13:59:44Z",
+      "side": 1,
+      "message": "if files app does, removing toast sounds okay for me.\n\nbecause it\u0027s not a mandatory permission for terminal app(app data dir is mandatory, but it can be done without permission), i think that makes sense, but there is room to improve UX, though. like not showing the setting app again and again once a user denies... but we can revise that when we add shared directories settings in the future.",
+      "parentUuid": "70055bee_dbeb4dad",
+      "revId": "1069dfdddf3dd644e8e364e3c844a19debbe79ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
