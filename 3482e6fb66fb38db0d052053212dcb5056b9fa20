@@ -26,6 +26,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3a53db6f_aee569df",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-11T08:11:58Z",
+      "side": 1,
+      "message": "can we cache this so that we don\u0027t send the same info every second?",
+      "range": {
+        "startLine": 80,
+        "startChar": 12,
+        "endLine": 80,
+        "endChar": 27
+      },
+      "revId": "3482e6fb66fb38db0d052053212dcb5056b9fa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9c188108_e4ec0338",
         "filename": "guest/forwarder_guest_launcher/src/main.rs",
         "patchSetId": 2
@@ -106,6 +129,29 @@
       "writtenOn": "2024-11-11T07:48:08Z",
       "side": 1,
       "message": "nits: make it a constant.",
+      "range": {
+        "startLine": 96,
+        "startChar": 36,
+        "endLine": 96,
+        "endChar": 40
+      },
+      "revId": "3482e6fb66fb38db0d052053212dcb5056b9fa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2e6f395_e1d13773",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-11T08:11:58Z",
+      "side": 1,
+      "message": "this seems to be too short given the amount of processing done by listeners::get_all.",
       "range": {
         "startLine": 96,
         "startChar": 36,
