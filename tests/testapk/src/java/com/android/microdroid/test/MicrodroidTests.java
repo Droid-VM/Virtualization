@@ -1931,7 +1931,11 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
         UiAutomation uiAutomation = instrumentation.getUiAutomation();
         String cmd = "setprop " + name + " " + (value.isEmpty() ? "\"\"" : value);
-        return runInShellWithStderr(TAG, uiAutomation, cmd).trim().isEmpty();
+        String output = runInShellWithStderr(TAG, uiAutomation, cmd).trim();
+        if (!output.isEmpty()) {
+            Log.e(TAG, "Failed set system property: name=" + name + ", output=" + output);
+        }
+        return output.isEmpty();
     }
 
     @Test
