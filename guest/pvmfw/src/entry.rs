@@ -19,6 +19,7 @@
 #![allow(unused_variables)]
 
 use crate::config;
+use crate::fdt;
 use crate::memory;
 use crate::uefi;
 use crate::uefi::SYSTEM_TABLE;
@@ -26,13 +27,18 @@ use crate::uefi_deps;
 use crate::uefi_deps::AllocateType;
 use crate::uefi_deps::BootServices;
 use crate::uefi_deps::MemoryType;
+use crate::uefi_deps::Status;
 use crate::uefi_deps::SystemTable;
 use core::arch::asm;
+use core::mem;
 use core::mem::{drop, size_of};
+use core::num::NonZeroUsize;
 use core::ops::Range;
 use core::ptr::addr_of_mut;
 use core::slice;
+use hypervisor_backends::get_mem_sharer;
 use hypervisor_backends::get_mmio_guard;
+use log::debug;
 use log::error;
 use log::info;
 use log::warn;
@@ -96,9 +102,10 @@ pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, _arg3: u64
     // - can't access MMIO (except the console, already configured by vmbase)
 
     match main_wrapper(fdt_address as usize, payload_start as usize, payload_size as usize) {
-        Ok((entry, bcc, use_uefi)) => {
+        Ok((entry, size, bcc, use_uefi)) => {
             if use_uefi {
-                jump_to_payload_with_efi_stub(fdt_address, entry.try_into().unwrap(), bcc)
+                info!("Jumped to EFI stub!");
+                jump_to_payload_with_efi_stub(entry, size);
             } else {
                 jump_to_payload(fdt_address, entry.try_into().unwrap(), bcc);
             }
@@ -113,6 +120,109 @@ pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, _arg3: u64
     // if we reach this point and return, vmbase::entry::rust_entry() will call power::shutdown().
 }
 
+struct MemorySlices<'a> {
+    fdt: &'a mut libfdt::Fdt,
+    kernel: &'a [u8],
+    ramdisk: Option<&'a [u8]>,
+}
+
+impl<'a> MemorySlices<'a> {
+    fn new(
+        fdt: usize,
+        kernel: usize,
+        kernel_size: usize,
+        vm_dtbo: Option<&mut [u8]>,
+        vm_ref_dt: Option<&[u8]>,
+    ) -> Result<Self, RebootReason> {
+        let fdt_size = NonZeroUsize::new(crosvm::FDT_MAX_SIZE).unwrap();
+        // TODO - Only map the FDT as read-only, until we modify it right before jump_to_payload()
+        // e.g. by generating a DTBO for a template DT in main() and, on return, re-map DT as RW,
+        // overwrite with the template DT and apply the DTBO.
+        let range = MEMORY.lock().as_mut().unwrap().alloc_mut(fdt, fdt_size).map_err(|e| {
+            error!("Failed to allocate the FDT range: {e}");
+            RebootReason::InternalError
+        })?;
+
+        // SAFETY: The tracker validated the range to be in main memory, mapped, and not overlap.
+        let fdt = unsafe { slice::from_raw_parts_mut(range.start as *mut u8, range.len()) };
+
+        let info = fdt::sanitize_device_tree(fdt, vm_dtbo, vm_ref_dt)?;
+        let fdt = libfdt::Fdt::from_mut_slice(fdt).map_err(|e| {
+            error!("Failed to load sanitized FDT: {e}");
+            RebootReason::InvalidFdt
+        })?;
+        debug!("Fdt passed validation!");
+
+        let memory_range = info.memory_range;
+        debug!("Resizing MemoryTracker to range {memory_range:#x?}");
+        MEMORY.lock().as_mut().unwrap().shrink(&memory_range).map_err(|e| {
+            error!("Failed to use memory range value from DT: {memory_range:#x?}: {e}");
+            RebootReason::InvalidFdt
+        })?;
+
+        if let Some(mem_sharer) = get_mem_sharer() {
+            let granule = mem_sharer.granule().map_err(|e| {
+                error!("Failed to get memory protection granule: {e}");
+                RebootReason::InternalError
+            })?;
+            MEMORY.lock().as_mut().unwrap().init_dynamic_shared_pool(granule).map_err(|e| {
+                error!("Failed to initialize dynamically shared pool: {e}");
+                RebootReason::InternalError
+            })?;
+        } else {
+            let range = info.swiotlb_info.fixed_range().ok_or_else(|| {
+                error!("Pre-shared pool range not specified in swiotlb node");
+                RebootReason::InvalidFdt
+            })?;
+
+            MEMORY.lock().as_mut().unwrap().init_static_shared_pool(range).map_err(|e| {
+                error!("Failed to initialize pre-shared pool {e}");
+                RebootReason::InvalidFdt
+            })?;
+        }
+
+        let kernel_range = if let Some(r) = info.kernel_range {
+            r.clone()
+        } else if cfg!(feature = "legacy") {
+            warn!("Failed to find the kernel range in the DT; falling back to legacy ABI");
+
+            let kernel_size = NonZeroUsize::new(kernel_size).ok_or_else(|| {
+                error!("Invalid kernel size: {kernel_size:#x}");
+                RebootReason::InvalidPayload
+            })?;
+
+            MEMORY.lock().as_mut().unwrap().alloc(kernel, kernel_size).map_err(|e| {
+                error!("Failed to obtain the kernel range with legacy range: {e}");
+                RebootReason::InternalError
+            })?
+        } else {
+            error!("Failed to locate the kernel from the DT");
+            return Err(RebootReason::InvalidPayload);
+        };
+
+        let kernel = kernel_range.start as *const u8;
+        // SAFETY: The tracker validated the range to be in main memory, mapped, and not overlap.
+        let kernel = unsafe { slice::from_raw_parts(kernel, kernel_range.len()) };
+
+        let ramdisk = if let Some(r) = info.initrd_range {
+            debug!("Located ramdisk at {r:?}");
+            let r = MEMORY.lock().as_mut().unwrap().alloc_range(&r).map_err(|e| {
+                error!("Failed to obtain the initrd range: {e}");
+                RebootReason::InvalidRamdisk
+            })?;
+
+            // SAFETY: The region was validated by memory to be in main memory, mapped, and
+            // not overlap.
+            Some(unsafe { slice::from_raw_parts(r.start as *const u8, r.len()) })
+        } else {
+            info!("Couldn't locate the ramdisk from the device tree");
+            None
+        };
+
+        Ok(Self { fdt, kernel, ramdisk })
+    }
+}
+
 /// Sets up the environment for main() and wraps its result for start().
 ///
 /// Provide the abstractions necessary for start() to abort the pVM boot and for main() to run with
@@ -121,7 +231,7 @@ fn main_wrapper(
     fdt: usize,
     payload: usize,
     payload_size: usize,
-) -> Result<(usize, Range<usize>, bool), RebootReason> {
+) -> Result<(usize, usize, Range<usize>, bool), RebootReason> {
     // Limitations in this function:
     // - only access MMIO once (and while) it has been mapped and configured
     // - only perform logging once the logger has been initialized
@@ -192,10 +302,7 @@ fn main_wrapper(
         }
     }
 
-    // Drop MemoryTracker and deactivate page table.
-    drop(MEMORY.lock().take());
-
-    Ok((slices.kernel.as_ptr() as usize, next_bcc, use_uefi))
+    Ok((slices.kernel.as_ptr() as usize, slices.kernel.len(), next_bcc, use_uefi))
 }
 
 fn jump_to_payload(fdt_address: u64, payload_start: u64, bcc: Range<usize>) -> ! {
@@ -322,30 +429,103 @@ fn jump_to_payload(fdt_address: u64, payload_start: u64, bcc: Range<usize>) -> !
     };
 }
 
-fn jump_to_payload_with_efi_stub(fdt_address: u64, payload_start: u64, bcc: Range<usize>) -> ! {
+/// ARM specific.
+///
+/// Kernel image header format for the EFI payloads:
+///
+/// __HEAD
+///
+/// efi_signature_nop   // special NOP to identity as PE/COFF executable
+/// b    primary_entry   // branch to kernel start, magic
+/// .quad    0   // Image load offset from start of RAM, little-endian
+/// le64sym   _kernel_size_le    // Effective size of kernel image, little-endian
+/// le64sym   _kernel_flags_le    // Informative flags, little-endian
+/// .quad   0   // reserved
+/// .quad   0   // reserved
+/// .quad   0   // reserved
+/// .ascii   ARM64_IMAGE_MAGIC   // Magic number
+/// .long   .Lpe_header_offset  // Offset to the PE header.
+///
+/// __EFI_PE_HEADER
+///
+///
+/// EFI PE header format:
+///
+/// .macro   __EFI_PE_HEADER
+///
+/// #ifdef CONFIG_EFI
+///
+/// .set   .Lpe_header_offset, . - .L_head
+/// .long   PE_MAGIC
+/// .short   IMAGE_FILE_MACHINE_ARM64   // Machine
+/// .short   .Lsection_count    // NumberOfSections
+/// .long   0   // TimeDateStamp
+/// .long   0   // PointerToSymbolTable
+/// .long   0   // NumberOfSymbols
+/// .short   .Lsection_table - .Loptional_header    // SizeOfOptionalHeader
+/// .short   IMAGE_FILE_DEBUG_STRIPPED | \
+///     IMAGE_FILE_EXECUTABLE_IMAGE | \
+///     IMAGE_FILE_LINE_NUMS_STRIPPED   // Characteristics
+///
+/// .Loptional_header:
+/// .short   PE_OPT_MAGIC_PE32PLUS  // PE32+ format
+/// .byte   0x02    // MajorLinkerVersion
+/// .byte   0x14    // MinorLinkerVersion
+/// .long   __initdata_begin - .Lefi_header_end     // SizeOfCode
+/// .long   __pecoff_data_size  // SizeOfInitializedData
+/// .long   0   // SizeOfUninitializedData
+/// .long   __efistub_efi_pe_entry - .L_head    // AddressOfEntryPoint
+/// ...
+/// #endif
+
+fn jump_to_payload_with_efi_stub(payload_start: usize, payload_size: usize) {
     let image_handle: usize = 0x19ef_781b;
-    // SAFETY: TODO.
+    // SAFETY: TODO(nikolinailic).
     let system_table: *mut SystemTable = unsafe { addr_of_mut!(SYSTEM_TABLE) };
+    info!("Start of the header of the payload (address): {payload_start:#x}");
 
-    // TODO(nikolinailic): clear the secrets before we enter the payload
+    const KERNEL_HEADER_SIZE: usize = 64;
+    const PE_HEADER_SIZE: usize = 24;
+    const PE_MAGIC: u32 = 0x4550;
+    const PE_OPT_MAGIC_PE32PLUS: u16 = 0x020b;
+    let pe_header = payload_start + KERNEL_HEADER_SIZE;
+    // Safety: TODO(nikolinailic).
+    let pe_magic = unsafe { *(pe_header as *const u32) };
+    // Sanity check: verify the PE MAGIC constant value is as defined in the UEFI spec.
+    if pe_magic != PE_MAGIC {
+        error!("PE MAGIC is not correct: {pe_magic:#x}, expected: {PE_MAGIC:#x}");
+    }
 
-    // Don't zero all memory that could hold secrets and that can't be safely written to from Rust,
-    // as we want to have all structures passed to the EFI kernel still "alive". Jump to the payload
-    // at the given address, passing it the given image handle according to the UEFI spec.
-    //
-    // SAFETY: We're exiting pvmfw by passing the register values we need to a return asm!().
-    unsafe {
-        asm!(
-            "blr x30",
-            in("x0") image_handle,
-            in("x1") system_table,
-            in("x30") payload_start,
-        );
-    };
-    // Tell the compiler to reboot if payload returns.
-    const REBOOT_REASON_CONSOLE: usize = 1;
-    console_writeln!(REBOOT_REASON_CONSOLE, "{}", "PVM_FIRMWARE_EFI_STUB_RETURN_TO_PAYLOAD_FAILED");
-    reboot()
+    let pe_opt_header = pe_header + PE_HEADER_SIZE;
+    // Safety: TODO(nikolinailic).
+    let pe_opt_magic_pe32plus = unsafe { *(pe_opt_header as *const u16) };
+    if pe_opt_magic_pe32plus != PE_OPT_MAGIC_PE32PLUS {
+        error!("PE MAGIC PE32+ is not correct: {pe_opt_magic_pe32plus:#x}");
+    }
+
+    const PE32PLUS_FIELD_AOEP: usize = 16;
+    let pe_ep_offset_field = pe_opt_header + PE32PLUS_FIELD_AOEP;
+    // Safety: TODO(nikolinailic).
+    let pe_ep_offset = usize::try_from(unsafe { *(pe_ep_offset_field as *const u32) }).unwrap();
+    if pe_ep_offset >= payload_size {
+        error!("Offset out of bounds: {pe_ep_offset:#x} (payload size: {payload_size:#x})");
+    }
+
+    // EFI entry point offset.
+    let efi_stub_payload_start = payload_start + pe_ep_offset;
+
+    info!("EFI Payload Start Address: {:#x}", efi_stub_payload_start);
+
+    let efi_entry: extern "efiapi" fn(
+        image_handle: usize,
+        system_table: *mut SystemTable,
+    ) -> uefi_deps::Status =
+    // Safety: TODO(nikolinailic).
+    unsafe { mem::transmute(efi_stub_payload_start) };
+
+    // efi_entry(image_handle, system_table)
+    let status = efi_entry(image_handle, system_table);
+    error!("EFI payload returned: {:?}", status);
 }
 
 /// # Safety

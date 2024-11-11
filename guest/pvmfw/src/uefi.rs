@@ -40,6 +40,9 @@ use crate::uefi_deps::SimpleTextOutputProtocol;
 use crate::uefi_deps::Status;
 use crate::uefi_deps::SystemTable;
 use crate::uefi_deps::Tpl;
+
+use alloc::string::String;
+use alloc::vec::Vec;
 use core::ffi::c_void;
 use core::mem;
 use core::ptr;
@@ -48,7 +51,7 @@ use log::info;
 
 pub static mut SYSTEM_TABLE: SystemTable = SystemTable {
     header: Header {
-        signature: 0,
+        signature: SystemTable::SIGNATURE,
         // Revision of the spec this table conforms to.
         revision: Revision(0),
         // The size in bytes of the entire table.
@@ -529,7 +532,9 @@ unsafe extern "efiapi" fn copy_mem(dest: *mut u8, src: *const u8, len: usize) {
     log_boot_service_call("CopyMem");
 }
 unsafe extern "efiapi" fn set_mem(buffer: *mut u8, len: usize, value: u8) {
-    log_boot_service_call("SetMem");
+    // SAFETY: TODO(nikolinailic)
+    let buffer = unsafe { core::slice::from_raw_parts_mut(buffer, len) };
+    buffer.fill(value);
 }
 
 // New event functions (UEFI 2.0 or newer) - boot services.
@@ -547,19 +552,38 @@ unsafe extern "efiapi" fn create_event_ex(
 
 // SimpleTextOutputProtocol functions.
 unsafe extern "efiapi" fn reset(this: *mut SimpleTextOutputProtocol, extended: bool) -> Status {
+    log_function_call("Reset");
     Status::SUCCESS
 }
 unsafe extern "efiapi" fn output_string(
     this: *mut SimpleTextOutputProtocol,
-    string: *const Char16,
+    raw: *const Char16,
 ) -> Status {
-    info!("{:?}", string);
+    log_function_call("OutputString");
+
+    let mut chars = Vec::new();
+    let raw = raw as *const u16;
+    for i in 0..80 {
+        // SAFETY: TODO()
+        let c = unsafe { *raw.offset(i) };
+        if c == 0 {
+            break;
+        }
+        chars.push(c);
+    }
+
+    let s = core::char::decode_utf16(chars)
+        .map(|r| r.unwrap_or(char::REPLACEMENT_CHARACTER))
+        .collect::<String>();
+    info!("{s}");
+
     Status::SUCCESS
 }
 unsafe extern "efiapi" fn test_string(
     this: *mut SimpleTextOutputProtocol,
     string: *const Char16,
 ) -> Status {
+    log_function_call("TestString");
     Status::UNSUPPORTED
 }
 unsafe extern "efiapi" fn query_mode(
@@ -568,18 +592,22 @@ unsafe extern "efiapi" fn query_mode(
     columns: *mut usize,
     rows: *mut usize,
 ) -> Status {
+    log_function_call("QueryMode");
     Status::SUCCESS
 }
 unsafe extern "efiapi" fn set_mode(this: *mut SimpleTextOutputProtocol, mode: usize) -> Status {
+    log_function_call("SetMode");
     Status::SUCCESS
 }
 unsafe extern "efiapi" fn set_attribute(
     this: *mut SimpleTextOutputProtocol,
     attribute: usize,
 ) -> Status {
+    log_function_call("SetAttribute");
     Status::UNSUPPORTED
 }
 unsafe extern "efiapi" fn clear_screen(this: *mut SimpleTextOutputProtocol) -> Status {
+    log_function_call("CleanScreen");
     Status::UNSUPPORTED
 }
 unsafe extern "efiapi" fn set_cursor_position(
@@ -587,16 +615,23 @@ unsafe extern "efiapi" fn set_cursor_position(
     column: usize,
     row: usize,
 ) -> Status {
+    log_function_call("SetCursorPosition");
     Status::UNSUPPORTED
 }
 unsafe extern "efiapi" fn enable_cursor(
     this: *mut SimpleTextOutputProtocol,
     visible: bool,
 ) -> Status {
+    log_function_call("EnableCursor");
     Status::UNSUPPORTED
 }
 
 // Make sure to log all UEFI boot service calls.
 fn log_boot_service_call(service_name: &str) {
     info!("Called EFI Boot Service: {}", service_name);
+}
+
+// Make sure to log all UEFI function calls.
+fn log_function_call(function_name: &str) {
+    info!("Called EFI function: {}", function_name);
 }
