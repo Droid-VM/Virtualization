@@ -52,6 +52,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ed4f793_f400afb1",
+        "filename": "android/virtmgr/src/selinux.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-11-11T15:28:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a761411_37a6a3a2",
+      "revId": "53bb579c39ddd4c8438a141ec5e24288f0734009",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ea8f3af_d73f1213",
@@ -65,6 +83,24 @@
       "writtenOn": "2024-11-08T22:13:04Z",
       "side": 1,
       "message": "As previously, this safetydoc doesn\u0027t address *calling* `selabel_lookup`, it talks about what you\u0027re going to do with it afterwards.\n\nYou should be talking about all arguments being live for the duration of the call, and not retained by the call.",
+      "revId": "53bb579c39ddd4c8438a141ec5e24288f0734009",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ec8dfcb_3bfa2455",
+        "filename": "android/virtmgr/src/selinux.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-11-11T15:28:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ea8f3af_d73f1213",
       "revId": "53bb579c39ddd4c8438a141ec5e24288f0734009",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
