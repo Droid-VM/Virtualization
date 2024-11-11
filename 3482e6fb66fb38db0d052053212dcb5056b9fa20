@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ae465e1b_d8674b07",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-11T08:13:19Z",
+      "side": 1,
+      "message": "I haven\u0027t tried but I considered to share it, but gave up due to this explanation in the documentation.\n\nhttps://docs.rs/tonic/latest/tonic/transport/channel/struct.Channel.html#multiplexing-requests\n\nSending a request on a channel requires a \u0026mut self and thus can only send one request in flight. This is intentional and is required to follow the Service contract from the tower library which this channel implementation is built on top of.",
+      "parentUuid": "70175b50_631081a0",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 55
+      },
+      "revId": "3482e6fb66fb38db0d052053212dcb5056b9fa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a53db6f_aee569df",
         "filename": "guest/forwarder_guest_launcher/src/main.rs",
         "patchSetId": 2
@@ -95,6 +119,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f0ee9a3d_2f1e677d",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-11T08:13:19Z",
+      "side": 1,
+      "message": "Yes, it\u0027s related to `forwarder_host.rs`.",
+      "parentUuid": "d2aaed08_eec17757",
+      "range": {
+        "startLine": 85,
+        "startChar": 12,
+        "endLine": 85,
+        "endChar": 35
+      },
+      "revId": "3482e6fb66fb38db0d052053212dcb5056b9fa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c3547b0c_6086b7fd",
         "filename": "guest/forwarder_guest_launcher/src/main.rs",
         "patchSetId": 2
@@ -106,6 +154,30 @@
       "writtenOn": "2024-11-11T07:48:08Z",
       "side": 1,
       "message": "can you keep previous listening_ports result, and report only if it is changed?",
+      "range": {
+        "startLine": 88,
+        "startChar": 13,
+        "endLine": 88,
+        "endChar": 35
+      },
+      "revId": "3482e6fb66fb38db0d052053212dcb5056b9fa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bbeb5ad_c9e2fdb8",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-11T08:13:19Z",
+      "side": 1,
+      "message": "That should be TODO definitely. I would work on this change, or in the following change.",
+      "parentUuid": "c3547b0c_6086b7fd",
       "range": {
         "startLine": 88,
         "startChar": 13,
@@ -175,6 +247,30 @@
       "writtenOn": "2024-11-11T07:48:08Z",
       "side": 1,
       "message": "nits: maybe join looks better for this semantic?",
+      "range": {
+        "startLine": 107,
+        "startChar": 4,
+        "endLine": 116,
+        "endChar": 5
+      },
+      "revId": "3482e6fb66fb38db0d052053212dcb5056b9fa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3069042c_c3a35305",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-11T08:13:19Z",
+      "side": 1,
+      "message": "I considered between `select` and `join`, but I chose `select` because either of one\u0027s termination represents improper behavior. No strong opinion here on how, in case of we can print the log at the end of each tokio task.",
+      "parentUuid": "efe03a0a_953805c2",
       "range": {
         "startLine": 107,
         "startChar": 4,
