@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "80531963_fbc3bf97",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-11T15:15:19Z",
+      "side": 1,
+      "message": "In this case, we can clone client(https://docs.rs/tonic/latest/tonic/client/index.html#concurrent-usage)",
+      "parentUuid": "ae465e1b_d8674b07",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 55
+      },
+      "revId": "3482e6fb66fb38db0d052053212dcb5056b9fa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4617498f_dcc3d6dc",
         "filename": "guest/forwarder_guest_launcher/src/main.rs",
         "patchSetId": 2
@@ -318,6 +342,30 @@
       "side": 1,
       "message": "I considered between `select` and `join`, but I chose `select` because either of one\u0027s termination represents improper behavior. No strong opinion here on how, in case of we can print the log at the end of each tokio task.",
       "parentUuid": "efe03a0a_953805c2",
+      "range": {
+        "startLine": 107,
+        "startChar": 4,
+        "endLine": 116,
+        "endChar": 5
+      },
+      "revId": "3482e6fb66fb38db0d052053212dcb5056b9fa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcdbbc5f_a0e14b1b",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-11T15:15:19Z",
+      "side": 1,
+      "message": "in this case, you can use `try_join!`",
+      "parentUuid": "3069042c_c3a35305",
       "range": {
         "startLine": 107,
         "startChar": 4,
