@@ -94,7 +94,7 @@ pub struct Event(u32);
 
 #[derive(Copy, Clone, Debug)]
 #[repr(C)]
-pub struct Char16(u32);
+pub struct Char16(u16);
 
 #[derive(Copy, Clone, Debug)]
 #[repr(C)]

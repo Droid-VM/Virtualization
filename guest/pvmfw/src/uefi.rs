@@ -16,39 +16,73 @@
 
 #![allow(dead_code)]
 #![allow(unused_variables)]
+#![allow(unused_imports)]
+#![allow(clippy::cmp_null)]
 #![allow(clippy::redundant_field_names)]
 #![allow(clippy::just_underscores_and_digits)]
 #![allow(clippy::empty_loop)]
 #![allow(improper_ctypes_definitions)]
 
-use crate::uefi_deps::BootServices;
-use crate::uefi_deps::Char16;
-use crate::uefi_deps::DevicePathProtocol;
-use crate::uefi_deps::Event;
-use crate::uefi_deps::EventNotifyFn;
-use crate::uefi_deps::EventType;
-use crate::uefi_deps::Guid;
-use crate::uefi_deps::Handle;
-use crate::uefi_deps::Header;
-use crate::uefi_deps::InterfaceType;
-use crate::uefi_deps::MemoryDescriptor;
-use crate::uefi_deps::MemoryType;
-use crate::uefi_deps::OpenProtocolInformationEntry;
-use crate::uefi_deps::PhysicalAddress;
-use crate::uefi_deps::Revision;
-use crate::uefi_deps::SimpleTextOutputProtocol;
-use crate::uefi_deps::Status;
-use crate::uefi_deps::SystemTable;
-use crate::uefi_deps::Tpl;
+use aarch64_paging::paging::Descriptor;
+use alloc::collections::BTreeMap;
+use alloc::string::String;
+use alloc::vec::Vec;
 use core::ffi::c_void;
 use core::mem;
 use core::ptr;
 use core::ptr::addr_of_mut;
+use core::ptr::null;
+use core::ptr::null_mut;
+use core::ptr::NonNull;
+use log::error;
 use log::info;
+use uefi_raw::protocol::rng::{RngAlgorithmType, RngProtocol};
+use uefi_raw::table::boot::MemoryAttribute;
+use vmbase::memory::MemoryTracker;
+
+use vmbase::memory::MEMORY;
+use vmbase::memory::SIZE_4KB;
+
+use uefi_raw::guid;
+use uefi_raw::protocol::console::SimpleTextOutputProtocol;
+use uefi_raw::protocol::device_path::DevicePathProtocol;
+use uefi_raw::protocol::loaded_image::LoadedImageProtocol;
+use uefi_raw::table::boot::{
+    BootServices, EventNotifyFn, EventType, InterfaceType, MemoryDescriptor, MemoryType,
+    OpenProtocolInformationEntry, Tpl,
+};
+use uefi_raw::table::system::SystemTable;
+use uefi_raw::table::{Header, Revision};
+use uefi_raw::{Char16, Event, Guid, Handle, PhysicalAddress, Status};
+
+use crate::entry;
+use crate::entry::EFI_IMAGE_HANDLE;
+
+use crate::entry::MEM_MAP_FREE;
+use crate::entry::MEM_MAP_INITRD;
+use crate::entry::MEM_MAP_KERNEL;
+
+const LINUX_EFI_LOADED_IMAGE_FIXED: Guid = guid!("f5a37b6d-3344-42a5-b6bb-978648c1890a");
+const LOADED_IMAGE_PROTOCOL_GUID: Guid = guid!("5b1b31a1-9562-11d2-8e3f-00a0c969723b");
+const RNG_PROTOCOL_GUID: Guid = guid!("3152bca5-eade-433d-862e-c01cdc291f44");
+
+macro_rules! log_call {
+    ($fn:ident $(,$arg:ident)*) => {{
+        log::trace!(
+            concat!(
+                stringify!($fn),
+                "(",
+                $(stringify!($arg), "={:?}, ", )*
+                ")",
+            ),
+            $($arg,)*
+        );
+    }}
+}
 
 pub static mut SYSTEM_TABLE: SystemTable = SystemTable {
     header: Header {
-        signature: 0,
+        signature: SystemTable::SIGNATURE,
         // Revision of the spec this table conforms to.
         revision: Revision(0),
         // The size in bytes of the entire table.
@@ -79,9 +113,6 @@ pub static mut SYSTEM_TABLE: SystemTable = SystemTable {
     number_of_configuration_table_entries: 0,
     configuration_table: ptr::null_mut(),
 };
-
-// SAFETY: TODO(nikolinailic).
-unsafe impl Sync for SystemTable {}
 
 pub static mut BOOT_SERVICES: BootServices = BootServices {
     header: Header {
@@ -196,9 +227,6 @@ pub static mut BOOT_SERVICES: BootServices = BootServices {
     create_event_ex: create_event_ex,
 };
 
-// SAFETY: TODO(nikolinailic).
-unsafe impl Sync for BootServices {}
-
 pub static mut SIMPLE_TEXT_OUTPUT_PROTOCOL: SimpleTextOutputProtocol = SimpleTextOutputProtocol {
     reset: reset,
     output_string: output_string,
@@ -228,13 +256,17 @@ unsafe extern "efiapi" fn allocate_pages(
     count: usize,
     addr: *mut PhysicalAddress,
 ) -> Status {
-    log_boot_service_call("AllocatePages");
+    log_call!(AllocatePages, alloc_ty, mem_ty, count, addr);
     Status::SUCCESS
 }
 unsafe extern "efiapi" fn free_pages(addr: PhysicalAddress, pages: usize) -> Status {
+    info!("{:#x}", addr);
+    info!("{:?}", pages);
+
     log_boot_service_call("FreePages");
     Status::SUCCESS
 }
+
 unsafe extern "efiapi" fn get_memory_map(
     size: *mut usize,
     map: *mut MemoryDescriptor,
@@ -242,19 +274,122 @@ unsafe extern "efiapi" fn get_memory_map(
     desc_size: *mut usize,
     desc_version: *mut u32,
 ) -> Status {
+    if size.is_null() || key.is_null() || desc_size.is_null() || desc_version.is_null() {
+        error!("get_memory_map({size:?}, {map:?}, {key:?}, {desc_size:?}, {desc_version:?})");
+        return Status::INVALID_PARAMETER;
+    }
+    let (kernel_phys_start, kernel_page_count) = MEM_MAP_KERNEL.get().unwrap();
+    let (initrd_phys_start, initrd_page_count) = MEM_MAP_INITRD.get().unwrap();
+    let (free_mem_start, free_mem_page_count) = MEM_MAP_FREE.get().unwrap();
+    // let free_mem_start = *initrd_phys_start + *initrd_page_count *
+    // u64::try_from(SIZE_4KB).unwrap(); let free_mem_page_count = 40000;
+    let memory_map = [
+        MemoryDescriptor {
+            ty: MemoryType::LOADER_DATA,
+            phys_start: *kernel_phys_start,
+            virt_start: *kernel_phys_start,
+            page_count: *kernel_page_count,
+            att: MemoryAttribute::WRITE_BACK,
+        },
+        MemoryDescriptor {
+            ty: MemoryType::LOADER_DATA,
+            phys_start: *initrd_phys_start,
+            virt_start: *initrd_phys_start,
+            page_count: *initrd_page_count,
+            att: MemoryAttribute::WRITE_BACK,
+        },
+        MemoryDescriptor {
+            ty: MemoryType::CONVENTIONAL,
+            phys_start: *free_mem_start,
+            virt_start: *free_mem_start,
+            page_count: *free_mem_page_count,
+            att: MemoryAttribute::MORE_RELIABLE,
+        },
+    ];
+
+    let memory_map_size = mem::size_of_val(&memory_map);
+    // if *size < memory_map_size { return }
+
+    for descriptor in memory_map.iter() {
+        info!(
+            "Type: {:?}, Physical Start: {:#x}, Virtual Start: {:#x}, Page Count: {}, Attributes: {:?}",
+            descriptor.ty,
+            descriptor.phys_start,
+            descriptor.virt_start,
+            descriptor.page_count,
+            descriptor.att,
+        );
+    }
+
+    let mut status = Status::SUCCESS;
+    if !map.is_null() {
+        // SAFETY: TODO(nikolinailic)
+        unsafe { ptr::copy(memory_map.as_ptr(), map, memory_map_size) };
+    } else {
+        status = Status::BUFFER_TOO_SMALL;
+    }
+    // SAFETY: TODO(nikolinailic)
+    unsafe {
+        // info!("{:?}", memory_map_size);
+        // info!("{:?}", *size);
+        *size = memory_map_size;
+        *key = 123456789;
+        *desc_size = 40;
+        *desc_version = 1;
+    }
+
+    // info!("{:?}", size);
+    // info!("{:?}", map);
+    // info!("{:?}", key);
+    // info!("{:?}", desc_size);
+    // info!("{:?}", desc_version);
+
     log_boot_service_call("GetMemoryMap");
-    Status::SUCCESS
+    status
 }
 unsafe extern "efiapi" fn allocate_pool(
     pool_type: MemoryType,
     size: usize,
     buffer: *mut *mut u8,
 ) -> Status {
-    log_boot_service_call("AllocatePool");
+    if size == 0 {
+        return Status::INVALID_PARAMETER;
+    }
+
+    if pool_type != MemoryType::LOADER_DATA {
+        log::error!("The Memory Type is not supported! {pool_type:?}");
+        return Status::OUT_OF_RESOURCES;
+    }
+
+    let Some(buffer) = NonNull::new(buffer) else {
+        return Status::INVALID_PARAMETER;
+    };
+
+    let Some(allocated) = vmbase::heap::allocate(size, true) else {
+        return Status::OUT_OF_RESOURCES;
+    };
+
+    // Safety:TODO
+    unsafe {
+        buffer.write(allocated.as_ptr().cast());
+    }
+
+    // let start = MEMORY.lock().as_mut().unwrap().find_region(size);
+
+    // let range =
+    //     MEMORY.lock().as_mut().unwrap().alloc_mut(start, core::num::NonZero::new(size).unwrap());
+
+    // // Safety: TODO.
+    // unsafe { *buffer = range.unwrap().start as *mut u8 };
+
+    // log_boot_service_call("AllocatePool");
     Status::SUCCESS
 }
 unsafe extern "efiapi" fn free_pool(buffer: *mut u8) -> Status {
-    log_boot_service_call("FreePool");
+    let void_buffer: *mut c_void = buffer as *mut c_void;
+    let Some(ptr) = NonNull::new(void_buffer) else { return Status::INVALID_PARAMETER };
+    vmbase::heap::deallocate(ptr);
+    // log_boot_service_call("FreePool");
     Status::SUCCESS
 }
 
@@ -294,6 +429,53 @@ unsafe extern "efiapi" fn check_event(event: Event) -> Status {
     Status::SUCCESS
 }
 
+pub static mut LOADED_IMAGE_PROTOCOL: LoadedImageProtocol = LoadedImageProtocol {
+    revision: 0,
+    parent_handle: 0x1111_1111usize as _,
+    system_table: unsafe { addr_of_mut!(SYSTEM_TABLE) },
+    device_handle: 0x1111_1112usize as _,
+    file_path: 0x1111_1113usize as _,
+    reserved: ptr::null(),
+    load_options_size: 0,
+    load_options: 0x1111_1114usize as _,
+    image_base: 0x1111_1115usize as _,
+    image_size: 0,
+    image_code_type: MemoryType::LOADER_DATA,
+    image_data_type: MemoryType::LOADER_DATA,
+    unload: Some(unload),
+};
+
+pub static mut RNG_PROTOCOL: RngProtocol = RngProtocol { get_info, get_rng };
+
+unsafe extern "efiapi" fn unload(image_handle: Handle) -> Status {
+    log_function_call("LoadedImageProtocol: UNLOAD");
+    Status::SUCCESS
+}
+
+unsafe extern "efiapi" fn get_info(
+    this: *mut RngProtocol,
+    algorithm_list_size: *mut usize,
+    algorithm_list: *mut RngAlgorithmType,
+) -> Status {
+    log_function_call("RngProtocol: GETINFO");
+    Status::SUCCESS
+}
+
+unsafe extern "efiapi" fn get_rng(
+    this: *mut RngProtocol,
+    algorithm: *const RngAlgorithmType,
+    value_length: usize,
+    value: *mut u8,
+) -> Status {
+    log_function_call("RngProtocol: GETRNG");
+
+    // SAFETY:TODO
+    unsafe {
+        *value = 15;
+    }
+    Status::SUCCESS
+}
+
 // Protocol handler functions - boot services.
 unsafe extern "efiapi" fn install_protocol_interface(
     handle: *mut Handle,
@@ -326,7 +508,41 @@ unsafe extern "efiapi" fn handle_protocol(
     proto: *const Guid,
     out_proto: *mut *mut c_void,
 ) -> Status {
-    log_boot_service_call("HandleProtocol");
+    if handle == ptr::null_mut() || proto == ptr::null() || out_proto == ptr::null_mut() {
+        return Status::INVALID_PARAMETER;
+    }
+    // Check whether the image handle matches what pvmfw passed via jump_to_payload_with_efi_stub
+    // function before entering the EFI stub.
+    let ptr: *mut c_void = EFI_IMAGE_HANDLE as *mut c_void;
+    if handle != ptr {
+        return Status::UNSUPPORTED;
+    }
+
+    // SAFETY: TODO(nikolinailic).
+    let proto_guid = unsafe { *proto };
+
+    let loaded_image_protocol_ptr: *mut c_void =
+        // SAFETY: TODO(nikolinailic).
+        unsafe { addr_of_mut!(LOADED_IMAGE_PROTOCOL) } as *mut c_void;
+    let rng_protocol_ptr: *mut c_void =
+        // SAFETY: TODO(nikolinailic).
+        unsafe { addr_of_mut!(RNG_PROTOCOL) } as *mut c_void;
+
+    // SAFETY: TODO
+    let out_proto = unsafe { &mut *out_proto };
+
+    *out_proto = match proto_guid {
+        LOADED_IMAGE_PROTOCOL_GUID => loaded_image_protocol_ptr,
+        RNG_PROTOCOL_GUID => rng_protocol_ptr,
+        LINUX_EFI_LOADED_IMAGE_FIXED => return Status::UNSUPPORTED,
+        _ => return Status::UNSUPPORTED,
+    };
+
+    // info!("{:?}", handle);
+    // info!("{:?}", proto);
+    // info!("{:?}", out_proto);
+
+    // log_boot_service_call("HandleProtocol");
     Status::SUCCESS
 }
 unsafe extern "efiapi" fn register_protocol_notify(
@@ -494,6 +710,25 @@ unsafe extern "efiapi" fn locate_protocol(
     registration: *mut c_void,
     out_proto: *mut *mut c_void,
 ) -> Status {
+    // SAFETY: TODO(nikolinailic).
+    let proto_guid = unsafe { *proto };
+
+    let loaded_image_protocol_ptr: *mut c_void =
+        // SAFETY: TODO(nikolinailic).
+        unsafe { addr_of_mut!(LOADED_IMAGE_PROTOCOL) } as *mut c_void;
+    let rng_protocol_ptr: *mut c_void =
+        // SAFETY: TODO(nikolinailic).
+        unsafe { addr_of_mut!(RNG_PROTOCOL) } as *mut c_void;
+
+    // SAFETY: TODO
+    let out_proto = unsafe { &mut *out_proto };
+
+    *out_proto = match proto_guid {
+        LOADED_IMAGE_PROTOCOL_GUID => loaded_image_protocol_ptr,
+        RNG_PROTOCOL_GUID => rng_protocol_ptr,
+        LINUX_EFI_LOADED_IMAGE_FIXED => return Status::UNSUPPORTED,
+        _ => return Status::UNSUPPORTED,
+    };
     log_boot_service_call("LocateProtocol");
     Status::SUCCESS
 }
@@ -526,10 +761,20 @@ unsafe extern "efiapi" fn calculate_crc32(
 
 // Misc service functions - boot services.
 unsafe extern "efiapi" fn copy_mem(dest: *mut u8, src: *const u8, len: usize) {
-    log_boot_service_call("CopyMem");
+    if src.is_null() || dest.is_null() {
+        error!("copy_mem received NULL: src={src:?}, dest={dest:?}");
+        return;
+    }
+    // SAFETY: TODO(nikolinailic).
+    unsafe { ptr::copy(src, dest, len) };
 }
 unsafe extern "efiapi" fn set_mem(buffer: *mut u8, len: usize, value: u8) {
-    log_boot_service_call("SetMem");
+    if buffer.is_null() {
+        error!("set_mem received NULL: buffer={buffer:?}");
+        return;
+    }
+    // SAFETY: TODO(nikolinailic)
+    unsafe { ptr::write_bytes(buffer, value, len) };
 }
 
 // New event functions (UEFI 2.0 or newer) - boot services.
@@ -547,19 +792,38 @@ unsafe extern "efiapi" fn create_event_ex(
 
 // SimpleTextOutputProtocol functions.
 unsafe extern "efiapi" fn reset(this: *mut SimpleTextOutputProtocol, extended: bool) -> Status {
+    log_function_call("Reset");
     Status::SUCCESS
 }
 unsafe extern "efiapi" fn output_string(
     this: *mut SimpleTextOutputProtocol,
-    string: *const Char16,
+    raw: *const Char16,
 ) -> Status {
-    info!("{:?}", string);
+    // log_function_call("OutputString");
+
+    let mut chars = Vec::new();
+    // let raw = raw as *const u16;
+    for i in 0..80 {
+        // SAFETY: TODO()
+        let c = unsafe { *raw.offset(i) };
+        if c == 0 {
+            break;
+        }
+        chars.push(c);
+    }
+
+    let s = core::char::decode_utf16(chars)
+        .map(|r| r.unwrap_or(char::REPLACEMENT_CHARACTER))
+        .collect::<String>();
+    info!("{s}");
+
     Status::SUCCESS
 }
 unsafe extern "efiapi" fn test_string(
     this: *mut SimpleTextOutputProtocol,
     string: *const Char16,
 ) -> Status {
+    log_function_call("TestString");
     Status::UNSUPPORTED
 }
 unsafe extern "efiapi" fn query_mode(
@@ -568,18 +832,22 @@ unsafe extern "efiapi" fn query_mode(
     columns: *mut usize,
     rows: *mut usize,
 ) -> Status {
+    log_function_call("QueryMode");
     Status::SUCCESS
 }
 unsafe extern "efiapi" fn set_mode(this: *mut SimpleTextOutputProtocol, mode: usize) -> Status {
+    log_function_call("SetMode");
     Status::SUCCESS
 }
 unsafe extern "efiapi" fn set_attribute(
     this: *mut SimpleTextOutputProtocol,
     attribute: usize,
 ) -> Status {
+    log_function_call("SetAttribute");
     Status::UNSUPPORTED
 }
 unsafe extern "efiapi" fn clear_screen(this: *mut SimpleTextOutputProtocol) -> Status {
+    log_function_call("CleanScreen");
     Status::UNSUPPORTED
 }
 unsafe extern "efiapi" fn set_cursor_position(
@@ -587,16 +855,23 @@ unsafe extern "efiapi" fn set_cursor_position(
     column: usize,
     row: usize,
 ) -> Status {
+    log_function_call("SetCursorPosition");
     Status::UNSUPPORTED
 }
 unsafe extern "efiapi" fn enable_cursor(
     this: *mut SimpleTextOutputProtocol,
     visible: bool,
 ) -> Status {
+    log_function_call("EnableCursor");
     Status::UNSUPPORTED
 }
 
 // Make sure to log all UEFI boot service calls.
 fn log_boot_service_call(service_name: &str) {
     info!("Called EFI Boot Service: {}", service_name);
+}
+
+// Make sure to log all UEFI function calls.
+fn log_function_call(function_name: &str) {
+    info!("Called EFI function: {}", function_name);
 }
