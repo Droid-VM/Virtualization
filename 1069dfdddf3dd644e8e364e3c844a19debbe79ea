@@ -16,6 +16,24 @@
       "message": "it turns out `adb shell am start-activity -a android.settings.MANAGE_ALL_FILES_ACCESS_PERMISSION` shows the setting page for that.(Special app access) If hardcoded string value is a problem, i think we can just remove it for now..",
       "revId": "1069dfdddf3dd644e8e364e3c844a19debbe79ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ded362b5_44e2ea01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-11T13:29:55Z",
+      "side": 1,
+      "message": "`Environment.isExternalStorageManager()` is `true`, so I couldn\u0027t find a reason to show an UI to toggle it. Do we need need logic for it?\n\nDear Akilesh, could you check whether the permission is granted for bundled apps? I think that VmTerminalApp is the same case with the files apps which doesn\u0027t ask for permission.",
+      "parentUuid": "a197b113_440d5690",
+      "revId": "1069dfdddf3dd644e8e364e3c844a19debbe79ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
