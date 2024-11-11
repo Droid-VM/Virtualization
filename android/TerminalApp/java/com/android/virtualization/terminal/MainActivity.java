@@ -26,12 +26,9 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Icon;
 import android.graphics.fonts.FontStyle;
-import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Bundle;
 import android.os.ConditionVariable;
-import android.os.Environment;
-import android.provider.Settings;
 import android.system.ErrnoException;
 import android.system.Os;
 import android.util.Log;
@@ -47,10 +44,6 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
-
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.virtualization.vmlauncher.InstallUtils;
@@ -88,7 +81,6 @@ public class MainActivity extends BaseActivity
     private AccessibilityManager mAccessibilityManager;
     private ConditionVariable mBootCompleted = new ConditionVariable();
     private static final int POST_NOTIFICATIONS_PERMISSION_REQUEST_CODE = 101;
-    private ActivityResultLauncher<Intent> manageExternalStorageActivityResultLauncher;
     private static int diskSizeStep;
 
     @Override
@@ -122,39 +114,9 @@ public class MainActivity extends BaseActivity
         readClientCertificate();
         connectToTerminalService();
 
-        manageExternalStorageActivityResultLauncher =
-                registerForActivityResult(
-                        new ActivityResultContracts.StartActivityForResult(),
-                        (ActivityResult result) -> {
-                            if (Environment.isExternalStorageManager()) {
-                                Toast.makeText(this, "Storage permission set!", Toast.LENGTH_SHORT)
-                                        .show();
-                            } else {
-                                Toast.makeText(
-                                                this,
-                                                "Storage permission not set",
-                                                Toast.LENGTH_SHORT)
-                                        .show();
-                            }
-                            startVm();
-                        });
-
-        // if installer is launched, it will be handled in onActivityResult
         if (!launchInstaller) {
-            if (!Environment.isExternalStorageManager()) {
-                requestStoragePermissions(this, manageExternalStorageActivityResultLauncher);
-            } else {
-                startVm();
-            }
+            startVm();
         }
-    }
-
-    private void requestStoragePermissions(
-            Context context, ActivityResultLauncher<Intent> activityResultLauncher) {
-        Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-        Uri uri = Uri.fromParts("package", context.getPackageName(), null);
-        intent.setData(uri);
-        activityResultLauncher.launch(intent);
     }
 
     private URL getTerminalServiceUrl() {
@@ -434,11 +396,7 @@ public class MainActivity extends BaseActivity
                 Log.e(TAG, "Failed to start VM. Installer returned error.");
                 finish();
             }
-            if (!Environment.isExternalStorageManager()) {
-                requestStoragePermissions(this, manageExternalStorageActivityResultLauncher);
-            } else {
-                startVm();
-            }
+            startVm();
         }
     }
 
