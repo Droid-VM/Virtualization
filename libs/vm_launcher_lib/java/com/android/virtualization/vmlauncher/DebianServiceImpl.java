@@ -22,11 +22,12 @@ import android.util.Log;
 
 import androidx.annotation.Keep;
 
+import com.android.virtualization.vmlauncher.proto.ActivePorts;
 import com.android.virtualization.vmlauncher.proto.DebianServiceGrpc;
 import com.android.virtualization.vmlauncher.proto.ForwardingRequestItem;
 import com.android.virtualization.vmlauncher.proto.IpAddr;
 import com.android.virtualization.vmlauncher.proto.QueueOpeningRequest;
-import com.android.virtualization.vmlauncher.proto.ReportVmIpAddrResponse;
+import com.android.virtualization.vmlauncher.proto.SimpleResponse;
 
 import io.grpc.stub.StreamObserver;
 
@@ -74,11 +75,20 @@ final class DebianServiceImpl extends DebianServiceGrpc.DebianServiceImplBase {
     }
 
     @Override
-    public void reportVmIpAddr(
-            IpAddr request, StreamObserver<ReportVmIpAddrResponse> responseObserver) {
+    public void reportVmActivePorts(
+            ActivePorts request, StreamObserver<SimpleResponse> responseObserver) {
+        Log.d(DebianServiceImpl.TAG, "updateActiveGuestPorts: " + request.toString());
+        // TODO(b/340126051): Modify shared preference based on information in the request.
+        SimpleResponse reply = SimpleResponse.newBuilder().setSuccess(true).build();
+        responseObserver.onNext(reply);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void reportVmIpAddr(IpAddr request, StreamObserver<SimpleResponse> responseObserver) {
         Log.d(DebianServiceImpl.TAG, "reportVmIpAddr: " + request.toString());
         mCallback.onIpAddressAvailable(request.getAddr());
-        ReportVmIpAddrResponse reply = ReportVmIpAddrResponse.newBuilder().setSuccess(true).build();
+        SimpleResponse reply = SimpleResponse.newBuilder().setSuccess(true).build();
         responseObserver.onNext(reply);
         responseObserver.onCompleted();
     }

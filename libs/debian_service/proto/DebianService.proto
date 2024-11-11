@@ -22,7 +22,8 @@ option java_package = "com.android.virtualization.vmlauncher.proto";
 option java_multiple_files = true;
 
 service DebianService {
-  rpc ReportVmIpAddr (IpAddr) returns (ReportVmIpAddrResponse) {}
+  rpc ReportVmIpAddr (IpAddr) returns (SimpleResponse) {}
+  rpc ReportVmActivePorts (ActivePorts) returns (SimpleResponse) {}
   rpc OpenForwardingRequestQueue (QueueOpeningRequest) returns (stream ForwardingRequestItem) {}
 }
 
@@ -34,7 +35,11 @@ message IpAddr {
   string addr = 1;
 }
 
-message ReportVmIpAddrResponse {
+message ActivePorts {
+  repeated int32 ports = 1;
+}
+
+message SimpleResponse {
   bool success = 1;
 }
 
