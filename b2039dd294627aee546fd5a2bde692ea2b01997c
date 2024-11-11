@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0753c26d_1b8937ae",
+        "filename": "libs/dice/open_dice/src/ops.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2024-11-11T15:06:14Z",
+      "side": 1,
+      "message": "The principal selects which kinds of keys are going to be derived e.g. P-256 or ed25519. E.g. if pvmfw uses P-384 as the authority but it\u0027s going to generate ed25519 for the VM it\u0027s loading then it\u0027s important to be deriving for the appropriate algorithm.",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 79,
+        "endChar": 89
+      },
+      "revId": "b2039dd294627aee546fd5a2bde692ea2b01997c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
