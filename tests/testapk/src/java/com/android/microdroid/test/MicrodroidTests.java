@@ -59,6 +59,7 @@ import android.system.virtualmachine.VirtualMachineConfig;
 import android.system.virtualmachine.VirtualMachineDescriptor;
 import android.system.virtualmachine.VirtualMachineException;
 import android.system.virtualmachine.VirtualMachineManager;
+import android.util.Log;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 
@@ -1935,7 +1936,12 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
         UiAutomation uiAutomation = instrumentation.getUiAutomation();
         String cmd = "setprop " + name + " " + (value.isEmpty() ? "\"\"" : value);
-        return runInShellWithStderr(TAG, uiAutomation, cmd).trim().isEmpty();
+        String output = runInShellWithStderr(TAG, uiAutomation, cmd).trim();
+        if (!output.isEmpty()) {
+            Log.w(TAG, "Failed set system property: name=" + name + ", value=" + value
+                    + ", output=" + output);
+        }
+        return output.isEmpty();
     }
 
     @Test
