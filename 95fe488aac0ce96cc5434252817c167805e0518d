@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dcb0143_3ab4dfb6",
+        "filename": "libs/debian_service/proto/DebianService.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-11T04:36:24Z",
+      "side": 1,
+      "message": "Create unique proto per method (for response) for future modification\nhttps://protobuf.dev/programming-guides/api/#unique-protos",
+      "range": {
+        "startLine": 25,
+        "startChar": 39,
+        "endLine": 25,
+        "endChar": 53
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a2a0efd9_f8381abd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/debian_service/proto/DebianService.proto",
+              "range": {
+                "startLine": 25,
+                "startChar": 0,
+                "endLine": 27,
+                "endChar": 0
+              },
+              "replacement": "  rpc ReportVmIpAddr (IpAddr) returns (ReportVmIpAddrResponse) {}\n  rpc ReportVmActivePorts (ActivePorts) returns (ReportVmActivePortsResponse) {}\n"
+            },
+            {
+              "path": "libs/debian_service/proto/DebianService.proto",
+              "range": {
+                "startLine": 42,
+                "startChar": 0,
+                "endLine": 43,
+                "endChar": 0
+              },
+              "replacement": "message ReportVmIpAddrResponse {\n  bool success \u003d 1;\n}\n\nmessage ReportVmActivePortsResponse {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "95fe488aac0ce96cc5434252817c167805e0518d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
