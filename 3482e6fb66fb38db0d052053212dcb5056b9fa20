@@ -50,6 +50,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4617498f_dcc3d6dc",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-11T08:37:17Z",
+      "side": 1,
+      "message": "(as a follow-up)\n\nconsider switching to netlink. https://man7.org/linux/man-pages/man7/sock_diag.7.html\n\nYou can get the list of listening sockets via a single read/write.",
+      "range": {
+        "startLine": 79,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 46
+      },
+      "revId": "3482e6fb66fb38db0d052053212dcb5056b9fa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a53db6f_aee569df",
         "filename": "guest/forwarder_guest_launcher/src/main.rs",
         "patchSetId": 2
