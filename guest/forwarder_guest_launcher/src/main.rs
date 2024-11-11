@@ -17,9 +17,10 @@
 use anyhow::Context;
 use clap::Parser;
 use debian_service::debian_service_client::DebianServiceClient;
-use debian_service::QueueOpeningRequest;
-use log::debug;
+use debian_service::{QueueOpeningRequest, ReportVmActivePortsRequest};
+use log::{debug, error};
 use tokio::process::Command;
+use tokio::time::{sleep, Duration};
 use tonic::transport::Endpoint;
 use tonic::Request;
 
@@ -40,14 +41,10 @@ pub struct Args {
     grpc_port: String,
 }
 
-#[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    env_logger::init();
-    debug!("Starting forwarder_guest_launcher");
-    let args = Args::parse();
-    let addr = format!("https://{}:{}", args.host_addr, args.grpc_port);
-
-    let channel = Endpoint::from_shared(addr)?.connect().await?;
+async fn process_forwarding_request_queue(
+    host_addr: String,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let channel = Endpoint::from_shared(host_addr)?.connect().await?;
     let mut client = DebianServiceClient::new(channel);
     let cid = vsock::get_local_cid().context("Failed to get CID of VM")?;
     let mut res_stream = client
@@ -73,4 +70,48 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             .spawn();
     }
     Ok(())
+}
+
+async fn report_active_ports(host_addr: String) -> Result<(), Box<dyn std::error::Error>> {
+    let channel = Endpoint::from_shared(host_addr)?.connect().await?;
+    let mut client = DebianServiceClient::new(channel);
+    loop {
+        let listeners = listeners::get_all()?;
+        let listening_ports = listeners
+            .iter()
+            .map(|x| x.socket)
+            .filter(|x| x.is_ipv4())
+            .map(|x| x.port().into())
+            .filter(|x| *x >= 1024)
+            .collect();
+        let res = client
+            .report_vm_active_ports(Request::new(ReportVmActivePortsRequest {
+                ports: listening_ports,
+            }))
+            .await?
+            .into_inner();
+        if !res.success {
+            error!("Failure response received from the host for reporting active ports");
+        }
+        sleep(Duration::from_millis(1000)).await;
+    }
+}
+
+#[tokio::main]
+async fn main() {
+    env_logger::init();
+    debug!("Starting forwarder_guest_launcher");
+    let args = Args::parse();
+    let addr = format!("https://{}:{}", args.host_addr, args.grpc_port);
+
+    tokio::select! {
+        forwarding_result = process_forwarding_request_queue(addr.clone()) => match forwarding_result {
+            Ok(_) => debug!("process_forwarding_request_queue is finished"),
+            Err(e) => error!("Error on process_forwarding_request_queue: {:?}", e),
+        },
+        reporting_ports_result = report_active_ports(addr) => match reporting_ports_result {
+            Ok(_) => debug!("report_active_ports is finished"),
+            Err(e) => error!("Error on report_active_ports: {:?}", e),
+        }
+    }
 }
