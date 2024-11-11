@@ -34,6 +34,24 @@
       "parentUuid": "a197b113_440d5690",
       "revId": "1069dfdddf3dd644e8e364e3c844a19debbe79ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "deefbbb2_3d5ec699",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-11T13:40:43Z",
+      "side": 1,
+      "message": "Because it\u0027s app-ops permission as well(OP_MANAGE_EXTERNAL_STORAGE), a user can revoke the permission via Settings \u003e Apps\u003e Special app access \u003e All files access. It\u0027s basically turned on, but a user can turn off app-ops permission.\n\nBTW, the string should be defined in strings.xml instead of hardcoded value or we can just remove Toast for this.",
+      "parentUuid": "ded362b5_44e2ea01",
+      "revId": "1069dfdddf3dd644e8e364e3c844a19debbe79ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
