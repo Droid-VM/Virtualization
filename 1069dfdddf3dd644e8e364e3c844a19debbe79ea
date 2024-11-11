@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a197b113_440d5690",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-11T08:22:43Z",
+      "side": 1,
+      "message": "it turns out `adb shell am start-activity -a android.settings.MANAGE_ALL_FILES_ACCESS_PERMISSION` shows the setting page for that.(Special app access) If hardcoded string value is a problem, i think we can just remove it for now..",
+      "revId": "1069dfdddf3dd644e8e364e3c844a19debbe79ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
