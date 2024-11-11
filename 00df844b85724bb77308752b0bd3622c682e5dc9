@@ -22,6 +22,30 @@
       },
       "revId": "00df844b85724bb77308752b0bd3622c682e5dc9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "204d5e7f_0e019925",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/DebianServiceImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-11T07:42:23Z",
+      "side": 1,
+      "message": "My personal thought is:\n- Show only active ports in advance, but the preference is kept though the port is getting to be disabled. If the port becomes alive again, read previous preference and apply to the setting.\n- In the future, user may be able to pin some ports which are not affected in the settings page by its state in the guest.",
+      "parentUuid": "6e20540b_fb97cb80",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 64
+      },
+      "revId": "00df844b85724bb77308752b0bd3622c682e5dc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
