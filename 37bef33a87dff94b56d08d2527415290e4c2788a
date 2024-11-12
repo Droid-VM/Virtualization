@@ -70,6 +70,24 @@
       "parentUuid": "6789de6c_80235648",
       "revId": "37bef33a87dff94b56d08d2527415290e4c2788a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7775b50_793432ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-11-12T21:00:35Z",
+      "side": 1,
+      "message": "\u003e Do we still need this?\n\nTo always dump the device tree with in debug mode when setting the system property, yes.\n\n\u003e If so, could you also add test for it as Pierre commented above?\n\nI\u0027m not quite sure what form of test I\u0027d add? The device tree would be dumped in the directory of the VM.\n\n---\n\nAdded details on how to dump device tree. Should I also mention the system property?",
+      "parentUuid": "3e473a5c_673d25af",
+      "revId": "37bef33a87dff94b56d08d2527415290e4c2788a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
