@@ -545,6 +545,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0afdeae8_07cfe510",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-12T06:04:33Z",
+      "side": 1,
+      "message": "\u003e maybe we can increase interval a little bit here, and then improve it with sock_diag later.\n\nI\u0027m on opposite side of increasing the interval. If we increase the interval, this would make more latencies for applying changes in port forwarding setting. IMO more latency can be harmful on UX. If this issue is so critical, I should use sock_diag instead right now. Anyway, I want to avoid having longer interval.",
+      "parentUuid": "3b1b8168_c14dd2fd",
+      "range": {
+        "startLine": 96,
+        "startChar": 36,
+        "endLine": 96,
+        "endChar": 40
+      },
+      "revId": "3482e6fb66fb38db0d052053212dcb5056b9fa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efe03a0a_953805c2",
