@@ -30,10 +30,14 @@ apex_test {
     platform_apis: true,
     system_ext_specific: true,
 
-    binaries: ["accessor_demo"],
+    binaries: [
+        "accessor_demo",
+        "accessor_demo2",
+    ],
     apps: ["AccessorVmApp"],
     prebuilts: [
         "accessor_demo.init.rc",
+        "accessor_demo2.init.rc",
         "accessor_demo.xml",
     ],
 }
@@ -41,6 +45,12 @@ apex_test {
 prebuilt_etc {
     name: "accessor_demo.init.rc",
     src: "accessor_demo.init.rc",
+    installable: false,
+}
+
+prebuilt_etc {
+    name: "accessor_demo2.init.rc",
+    src: "accessor_demo2.init.rc",
     installable: false,
 }
 

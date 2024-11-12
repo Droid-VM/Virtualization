@@ -21,6 +21,7 @@ use binder::{Strong, ProcessState};
 use rdroidtest::rdroidtest;
 
 const VM_SERVICE: &str = "com.android.virt.accessor_demo.vm_service.IAccessorVmService/default";
+const VM_SERVICE2: &str = "com.android.virt.accessor_demo.vm_service.IAccessorVmService/default2";
 
 fn init() {
     ProcessState::set_thread_pool_max_thread_count(5);
@@ -29,6 +30,9 @@ fn init() {
 
 fn wait_for_interface() -> Strong<dyn IAccessorVmService> {
     binder::wait_for_interface(VM_SERVICE).unwrap()
+}
+fn wait_for_interface2() -> Strong<dyn IAccessorVmService> {
+    binder::wait_for_interface(VM_SERVICE2).unwrap()
 }
 
 fn get_interface() -> Strong<dyn IAccessorVmService> {
@@ -87,7 +91,10 @@ fn test_vm_get_host_service() {
     init();
 
     let service = wait_for_interface();
+    let service2 = wait_for_interface2();
     service.tryGetHostStatsService().expect("VM payload failed to get host IStats service");
+    service2.tryGetHostStatsService().expect("VM aslekfdj");
+    std::thread::sleep(std::time::Duration::from_secs(30));
 }
 
 rdroidtest::test_main!();

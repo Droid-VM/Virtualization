@@ -477,7 +477,7 @@ fn mount_extra_apks(config: &VmPayloadConfig, zipfuse: &mut Zipfuse) -> Result<(
 fn get_vms_rpc_binder() -> Result<Strong<dyn IVirtualMachineService>> {
     // The host is running a VirtualMachineService for this VM on a port equal
     // to the CID of this VM.
-    let port = vsock::get_local_cid().context("Could not determine local CID")?;
+    let port = 2304897;
     RpcSession::new()
         .setup_vsock_client(VMADDR_CID_HOST, port)
         .context("Could not connect to IVirtualMachineService")

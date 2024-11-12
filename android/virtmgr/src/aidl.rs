@@ -450,7 +450,6 @@ impl VirtualizationService {
             .or_service_specific_exception(-1)?;
         let service = VirtualMachineService::new_binder(self.state.clone(), cid).as_binder();
 
-        // Start VM service listening for connections from the new CID on port=CID.
         let port = cid;
         let (vm_server, _) = RpcServer::new_vsock(service, cid, port)
             .context(format!("Could not start RpcServer on port {port}"))
@@ -471,15 +470,16 @@ impl VirtualizationService {
             let temp_dir: PathBuf = vm_context.getTemporaryDirectory()?.into();
             let service = VirtualMachineService::new_binder(self.state.clone(), cid).as_binder();
 
-            // Start VM service listening for connections from the new CID on port=CID.
-            let port = cid;
+            // This will always be the port that VMs connect to
+            let port = 2304897;
             match RpcServer::new_vsock(service, cid, port) {
                 Ok((vm_server, _)) => {
                     vm_server.start();
+                    info!("Succesfully started server on port {port} with cid {cid}");
                     return Ok((VmContext::new(vm_context, vm_server), cid, temp_dir));
                 }
                 Err(err) => {
-                    warn!("Could not start RpcServer on port {}: {}", port, err);
+                    warn!("Could not start RpcServer on port {} with cid {cid}: {}", port, err);
                 }
             }
         }
