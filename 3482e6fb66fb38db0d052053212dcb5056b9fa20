@@ -497,6 +497,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af3b30a5_d64d817a",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-12T05:54:09Z",
+      "side": 1,
+      "message": "Acknowledged. So the point of this comment wasn\u0027t on sleeping task, but on optimizing monitoring mechanism with `NETLINK_SOCK_DIAG`.\n\nI prefer to improve that in the following change so I left a TODO comment instead, PLMK if it\u0027s not sufficient.",
+      "parentUuid": "61f998be_40d8b73b",
+      "range": {
+        "startLine": 96,
+        "startChar": 36,
+        "endLine": 96,
+        "endChar": 40
+      },
+      "revId": "3482e6fb66fb38db0d052053212dcb5056b9fa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efe03a0a_953805c2",
