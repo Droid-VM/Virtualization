@@ -16,6 +16,24 @@
       "message": "The use if vec isn\u0027t conditional so import doesn\u0027t need to be either, this library just requires allocation.?",
       "revId": "793923cb78afa315e4d71a5894812ffe90a2955f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a73f94a9_3c1cedc7",
+        "filename": "libs/dice/open_dice/src/ops.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-11-12T11:06:25Z",
+      "side": 1,
+      "message": "Removed. It is not needed as both std and non-std variations require alloc. I removed this flag in aosp/3342532",
+      "parentUuid": "8dc57f36_ce13c1f3",
+      "revId": "793923cb78afa315e4d71a5894812ffe90a2955f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
