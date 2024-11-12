@@ -598,6 +598,16 @@ public abstract class MicrodroidDeviceTestBase {
         }
     }
 
+    protected void ensureVmAttestationSupported() throws Exception {
+        if (getVendorApiLevel() >= 202504) {
+            assertThat(getVirtualMachineManager().isRemoteAttestationSupported()).isTrue();
+        } else {
+            assumeTrue(
+                    "Vendor API lower than 202504 may not support VM remote attestation",
+                    getVirtualMachineManager().isRemoteAttestationSupported());
+        }
+    }
+
     protected SigningResult runVmAttestationService(
             String logTag, VirtualMachine vm, byte[] challenge, byte[] messageToSign)
             throws Exception {
