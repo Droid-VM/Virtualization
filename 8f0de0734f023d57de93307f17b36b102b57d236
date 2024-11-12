@@ -86,6 +86,24 @@
       "parentUuid": "9bbfecbd_95d12a36",
       "revId": "8f0de0734f023d57de93307f17b36b102b57d236",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6d020b9_37345059",
+        "filename": "libs/dice/open_dice/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-11-12T20:54:32Z",
+      "side": 1,
+      "message": "\u003e It\u0027s getting to the point that the VM libraries below might just want to reference Ed25519 directly?\n\nWhile it\u0027s possible, directly referencing Ed25519 might limit flexibility in the future. The parameter is currently used by both clients of open-dice (as in this cl) and open-dice itself (aosp/3342291). If we remove the parameter and inline the algorithm in all call sites, although it work for now, it would complicate matters if we want to switch to a different algorithm later.\n\nI think this dice wrapper is already VM-specific since it\u0027s in the AVF repo and only visible to VM libraries. However, I\u0027m also open to rename it to something less VM-specific, do you have any suggestion?",
+      "parentUuid": "ad85d077_78ed575d",
+      "revId": "8f0de0734f023d57de93307f17b36b102b57d236",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
