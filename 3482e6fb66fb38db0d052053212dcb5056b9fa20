@@ -571,6 +571,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c6235c46_0275bb5a",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-12T06:52:07Z",
+      "side": 1,
+      "message": "using cpu every second just to check if there\u0027s new port opened is not acceptable. it would be unacceptable even if we switch to the netfilter-based implementation. we shouldn\u0027t drain battery for this feature. not everyone will use port forwarding.\n\nideally, the monitoring could be done only when a certain condition is satisfied. ex:\n\n1. while the terminal app is running in the foreground\n2. and until a few seconds after user has typed in something\n3. or after a new process has started (this can be monitored also via netfilter)\n\ncan you turn this monitoring off when the terminal app is running in background?",
+      "parentUuid": "0afdeae8_07cfe510",
+      "range": {
+        "startLine": 96,
+        "startChar": 36,
+        "endLine": 96,
+        "endChar": 40
+      },
+      "revId": "3482e6fb66fb38db0d052053212dcb5056b9fa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "efe03a0a_953805c2",
         "filename": "guest/forwarder_guest_launcher/src/main.rs",
         "patchSetId": 2
