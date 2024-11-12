@@ -46,7 +46,6 @@ import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
@@ -376,14 +375,12 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onVmStop() {
-        Toast.makeText(this, R.string.vm_stop_message, Toast.LENGTH_SHORT).show();
         Log.i(TAG, "onVmStop()");
         finish();
     }
 
     @Override
     public void onVmError() {
-        Toast.makeText(this, R.string.vm_error_message, Toast.LENGTH_SHORT).show();
         Log.i(TAG, "onVmError()");
         finish();
     }
