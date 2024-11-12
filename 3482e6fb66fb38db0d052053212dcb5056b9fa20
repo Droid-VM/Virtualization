@@ -475,6 +475,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "61f998be_40d8b73b",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-12T05:12:19Z",
+      "side": 1,
+      "message": "I am not saying it will take longer than 1 sec. I meant executing `listeners::get_all()` every second might be too much of CPU usage. if you look into the function, you will find that it does quite a lot: reading all files in `/proc/*/fd/*`, and compare them against `/proc/net/tcp|tcp6...` each of which can be few hundreds of lines. \n\nwith netfilter (sock_diag(7)), it could be done much faster.",
+      "parentUuid": "60c1c102_2a801cd9",
+      "range": {
+        "startLine": 96,
+        "startChar": 36,
+        "endLine": 96,
+        "endChar": 40
+      },
+      "revId": "3482e6fb66fb38db0d052053212dcb5056b9fa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "efe03a0a_953805c2",
         "filename": "guest/forwarder_guest_launcher/src/main.rs",
         "patchSetId": 2
