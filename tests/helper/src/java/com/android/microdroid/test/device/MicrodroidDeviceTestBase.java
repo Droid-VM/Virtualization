@@ -23,6 +23,7 @@ import static android.content.pm.PackageManager.FEATURE_WATCH;
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.TruthJUnit.assume;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeFalse;
 import static org.junit.Assume.assumeTrue;
 
@@ -255,6 +256,14 @@ public abstract class MicrodroidDeviceTestBase {
 
     protected static int getVendorApiLevel() {
         return SystemProperties.getInt("ro.board.api_level", 0);
+    }
+
+    /**
+     * @return The first vendor API level when the vendor images for an SoC that is qualified for
+     *     vendor freeze are first released with this property, or 0 if the property is not set.
+     */
+    protected static int getFirstVendorApiLevel() {
+        return SystemProperties.getInt("ro.board.first_api_level", 0);
     }
 
     protected void assumeSupportedDevice() {
@@ -595,6 +604,23 @@ public abstract class MicrodroidDeviceTestBase {
                 // failure as well as the body of the test.
                 throw new RuntimeException(mException);
             }
+        }
+    }
+
+    protected void ensureVmAttestationSupported() throws Exception {
+        // The first vendor API level is checked because VM attestation requires the VM DICE chain
+        // to be ROM-rooted.
+        int firstVendorApiLevel = getFirstVendorApiLevel();
+        if (firstVendorApiLevel >= 202504) {
+            assertTrue(
+                    "First vendor API 202504 or higher must support VM remote attestation. First"
+                            + " vendor API level: "
+                            + firstVendorApiLevel,
+                    getVirtualMachineManager().isRemoteAttestationSupported());
+        } else {
+            assumeTrue(
+                    "First vendor API lower than 202504 may not support VM remote attestation",
+                    getVirtualMachineManager().isRemoteAttestationSupported());
         }
     }
 
