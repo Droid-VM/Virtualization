@@ -50,6 +50,24 @@
       "message": "nit: It what sense is this the _default_ algorithm vs the _only_ algorithm? If this library is only going to do ed25519 as this constant suggests then either inline it or avoid naming this constant in a way that makes it sound like the algorithm can change.",
       "revId": "8f0de0734f023d57de93307f17b36b102b57d236",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bbfecbd_95d12a36",
+        "filename": "libs/dice/open_dice/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-11-12T10:01:17Z",
+      "side": 1,
+      "message": "Thanks for catching this. Since this algorithm serves only as the subject algorithm in multi-alg dice and both the authority/subject algorithm in non-multi-alg DICE, inlining it might make future modifications difficult if we decide to switch to a different algorithm.\n\nWhat about `VM_KEY_ALGORITHM` (adjusted in the lates PS)? As the primary goal of the algorithm is to transition from various algorithms in vendor\u0027s DICE chain to this specific algorithm used within different components of a VM.",
+      "parentUuid": "2ba91425_0beb2f0f",
+      "revId": "8f0de0734f023d57de93307f17b36b102b57d236",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
