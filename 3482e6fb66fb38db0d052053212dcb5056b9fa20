@@ -595,6 +595,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "557492ff_c4022854",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-12T07:21:00Z",
+      "side": 1,
+      "message": "I think none of these options are available. Of course I can turn the monitoring off with certain conditions, but it can make inconsistency of port forwarding. For instance, a process opening a new TCP port after few minutes. Eventhough the terminal app is in background, user should be able to receive notification. \n\nI know it\u0027s very rare case, but I wanted to say turning monitoring off can lead inconsistency. Inconsistency would definitely bring confusion to the users. If draining battery is mattered so much, I think dropping monitoring scene is better.",
+      "parentUuid": "c6235c46_0275bb5a",
+      "range": {
+        "startLine": 96,
+        "startChar": 36,
+        "endLine": 96,
+        "endChar": 40
+      },
+      "revId": "3482e6fb66fb38db0d052053212dcb5056b9fa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "efe03a0a_953805c2",
         "filename": "guest/forwarder_guest_launcher/src/main.rs",
         "patchSetId": 2
