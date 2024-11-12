@@ -106,6 +106,24 @@
       "parentUuid": "e7775b50_793432ee",
       "revId": "37bef33a87dff94b56d08d2527415290e4c2788a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39214349_01e3b499",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-11-12T22:39:35Z",
+      "side": 1,
+      "message": "Added the section of system property.\n\nRan a manual test where I set the system property and launched a VM, confirmed the device tree is dumped in `/data/misc/virtualizationservice/CID/`",
+      "parentUuid": "03b1b156_65bb02dd",
+      "revId": "37bef33a87dff94b56d08d2527415290e4c2788a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
