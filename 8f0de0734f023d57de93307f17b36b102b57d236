@@ -68,6 +68,24 @@
       "parentUuid": "2ba91425_0beb2f0f",
       "revId": "8f0de0734f023d57de93307f17b36b102b57d236",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad85d077_78ed575d",
+        "filename": "libs/dice/open_dice/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2024-11-12T19:56:40Z",
+      "side": 1,
+      "message": "That makes sense but then it doesn\u0027t seem to git in the open_dice library since it\u0027s VM-specific. It\u0027s getting to the point that the VM libraries below might just want to reference Ed25519 directly?",
+      "parentUuid": "9bbfecbd_95d12a36",
+      "revId": "8f0de0734f023d57de93307f17b36b102b57d236",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
