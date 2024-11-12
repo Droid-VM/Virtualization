@@ -237,6 +237,30 @@
       },
       "revId": "c72bdbc492f622021f272edab0279f438bc1a6b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c25fe84a_ecf70ccc",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualizationService.aidl",
+        "patchSetId": 5
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-11-12T22:53:22Z",
+      "side": 1,
+      "message": "Modified to take an FD. I zipped the snapshot and wrote it back, that option currently works although requires `permissive` mode.",
+      "parentUuid": "1d1ffd7b_ccb27be9",
+      "range": {
+        "startLine": 122,
+        "startChar": 31,
+        "endLine": 122,
+        "endChar": 35
+      },
+      "revId": "c72bdbc492f622021f272edab0279f438bc1a6b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
