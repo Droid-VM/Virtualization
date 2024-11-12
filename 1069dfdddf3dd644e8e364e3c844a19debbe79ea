@@ -124,6 +124,24 @@
       "parentUuid": "15aca111_d50f10c3",
       "revId": "1069dfdddf3dd644e8e364e3c844a19debbe79ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b93c61fe_6bed1e8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-12T07:18:37Z",
+      "side": 1,
+      "message": "Thank you for the feedbacks. More comments inlined.\n\n\n\u003e This was primarily added so that if users revoke the permission, the settings menu would show up to re-enable. If users do not grant the permission, terminal app would still launch but the shared directory path will not be mounted in guest.\n\nAck. I didn\u0027t know that we have a switch for it.\n\n\u003e \u003e if files app does, removing toast sounds okay for me.\n\n\u003e Yes, I think we should just remove the toast.\n\nThanks. Will do in next patchset.\n\n\u003e \u003e BTW, would it make sense to launch VmTerminalApp without the permission if user doesn\u0027t want to file sharing?\n\n\u003e Do you mean disable the permission by default and users would have to explicitly enable it ? Today, it\u0027s the other way around. If this is disabled by default, there is no way intuitive way to inform users about the feature; unlike when we have a UX where users can explicitly request permission for the directory.\n\nNo, I meant that whether VM should continue booting when the permission wasn\u0027t granted by user. This is the as-is behavior, but just want to get confirmation.\n\n\u003e \u003e Plus, lazily ask permission there.\n\n\u003e Sorry. I didn\u0027t get this part; but I agree with Jeongik; If users deny it, i think we shouldn\u0027t keep showing up this setting screen again or have some limit.\n\nI meant that next release can contain extra setting page and ask for the permission only when user turns on certain switch and specify which directory to be shared. I meant lazy because we currently ask permission when VM starts.",
+      "parentUuid": "3bd7a6f2_dde15d96",
+      "revId": "1069dfdddf3dd644e8e364e3c844a19debbe79ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
