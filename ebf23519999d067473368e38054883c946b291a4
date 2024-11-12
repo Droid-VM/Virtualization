@@ -16,6 +16,177 @@
       "message": "Hi, Pierre-Clément, PTAL",
       "revId": "ebf23519999d067473368e38054883c946b291a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b706c750_f1f121f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-12T14:47:23Z",
+      "side": 1,
+      "message": "Giving +2 assuming no contention regarding my other comments.",
+      "parentUuid": "352db24f_5e141e33",
+      "revId": "ebf23519999d067473368e38054883c946b291a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f2e9393_59434fd4",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-12T14:47:23Z",
+      "side": 1,
+      "message": "Note that go/truth says:\n\n\u003e **All new code is encouraged to use Truth instead of JUnit assertions.**\n\nso I think you\u0027ll have to follow that, AFAIU.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 42
+      },
+      "revId": "ebf23519999d067473368e38054883c946b291a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f30e5004_dab5f7d7",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-12T14:47:23Z",
+      "side": 1,
+      "message": "nit: could you add this under `assumeNoUpdatableVmSupport()`, to keep similar methods grouped?",
+      "range": {
+        "startLine": 610,
+        "startChar": 19,
+        "endLine": 610,
+        "endChar": 47
+      },
+      "revId": "ebf23519999d067473368e38054883c946b291a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31f0608b_33d1a3a9",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-12T14:47:23Z",
+      "side": 1,
+      "message": "nit: simplify this to\n```suggestion\n                    \"First vendor API \" + firstVendorApiLevel + \" must support VM remote attestation\",\n```",
+      "range": {
+        "startLine": 616,
+        "startChar": 20,
+        "endLine": 618,
+        "endChar": 49
+      },
+      "revId": "ebf23519999d067473368e38054883c946b291a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "244d9ae6_f7bfa564",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-12T14:47:23Z",
+      "side": 1,
+      "message": "nit: DRY this at the top",
+      "range": {
+        "startLine": 619,
+        "startChar": 20,
+        "endLine": 619,
+        "endChar": 77
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9782dacc_d0f2633d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+              "range": {
+                "startLine": 614,
+                "startChar": 0,
+                "endLine": 614,
+                "endChar": 0
+              },
+              "replacement": "        boolean isRemoteAttestationSupported \u003d\n            getVirtualMachineManager().isRemoteAttestationSupported();\n"
+            },
+            {
+              "path": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+              "range": {
+                "startLine": 619,
+                "startChar": 0,
+                "endLine": 620,
+                "endChar": 0
+              },
+              "replacement": "                    isRemoteAttestationSupported);\n"
+            },
+            {
+              "path": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+              "range": {
+                "startLine": 623,
+                "startChar": 0,
+                "endLine": 624,
+                "endChar": 0
+              },
+              "replacement": "                    isRemoteAttestationSupported);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ebf23519999d067473368e38054883c946b291a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc1102fb_e15e9790",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-12T14:47:23Z",
+      "side": 1,
+      "message": "AFAICT, we usually clarify that we\u0027re skipping the test in this message. Also, the version check doesn\u0027t seem very relevant when running on older devices. WDYT of simply\n```suggestion\n                    \"Skip on VM remote attestation not supported\",\n```",
+      "range": {
+        "startLine": 622,
+        "startChar": 20,
+        "endLine": 622,
+        "endChar": 94
+      },
+      "revId": "ebf23519999d067473368e38054883c946b291a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
