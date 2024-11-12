@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bad668b0_5f5ccf8d",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-12T05:06:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80531963_fbc3bf97",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 55
+      },
+      "revId": "3482e6fb66fb38db0d052053212dcb5056b9fa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4617498f_dcc3d6dc",
@@ -85,6 +109,30 @@
       "writtenOn": "2024-11-11T08:37:17Z",
       "side": 1,
       "message": "(as a follow-up)\n\nconsider switching to netlink. https://man7.org/linux/man-pages/man7/sock_diag.7.html\n\nYou can get the list of listening sockets via a single read/write.",
+      "range": {
+        "startLine": 79,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 46
+      },
+      "revId": "3482e6fb66fb38db0d052053212dcb5056b9fa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b48bec3_178dc935",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-12T05:06:11Z",
+      "side": 1,
+      "message": "Added TODO comment in advance. It may optimize our code better, but it requires bunch of efforts since there\u0027s no built-in function using NETLINK_SOCK_DIAG unlike `listeners` AFAIK.",
+      "parentUuid": "4617498f_dcc3d6dc",
       "range": {
         "startLine": 79,
         "startChar": 8,
@@ -155,6 +203,30 @@
       "writtenOn": "2024-11-11T07:48:08Z",
       "side": 1,
       "message": "how about ipv6?",
+      "range": {
+        "startLine": 83,
+        "startChar": 26,
+        "endLine": 83,
+        "endChar": 33
+      },
+      "revId": "3482e6fb66fb38db0d052053212dcb5056b9fa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c00eb72a_a91a470f",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-12T05:06:11Z",
+      "side": 1,
+      "message": "Added TODO comment in advance.",
+      "parentUuid": "9c188108_e4ec0338",
       "range": {
         "startLine": 83,
         "startChar": 26,
@@ -283,6 +355,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4975ed5_a8a8090a",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-12T05:06:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2bbeb5ad_c9e2fdb8",
+      "range": {
+        "startLine": 88,
+        "startChar": 13,
+        "endLine": 88,
+        "endChar": 35
+      },
+      "revId": "3482e6fb66fb38db0d052053212dcb5056b9fa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2bd6380b_9896629b",
@@ -355,6 +451,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "60c1c102_2a801cd9",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-12T05:06:11Z",
+      "side": 1,
+      "message": "Could you elaborate? I think `sleep` is synchronously working with `await` so there\u0027s no correlation between processing time of `listeners::get_all` and `sleep`, no?",
+      "parentUuid": "d2e6f395_e1d13773",
+      "range": {
+        "startLine": 96,
+        "startChar": 36,
+        "endLine": 96,
+        "endChar": 40
+      },
+      "revId": "3482e6fb66fb38db0d052053212dcb5056b9fa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "efe03a0a_953805c2",
         "filename": "guest/forwarder_guest_launcher/src/main.rs",
         "patchSetId": 2
@@ -414,6 +534,30 @@
       "side": 1,
       "message": "in this case, you can use `try_join!`",
       "parentUuid": "3069042c_c3a35305",
+      "range": {
+        "startLine": 107,
+        "startChar": 4,
+        "endLine": 116,
+        "endChar": 5
+      },
+      "revId": "3482e6fb66fb38db0d052053212dcb5056b9fa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f75bd26_9f5569ff",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-12T05:06:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcdbbc5f_a0e14b1b",
       "range": {
         "startLine": 107,
         "startChar": 4,
