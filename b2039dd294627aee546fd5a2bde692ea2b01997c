@@ -22,6 +22,30 @@
       },
       "revId": "b2039dd294627aee546fd5a2bde692ea2b01997c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76ff594c_95bfa9cb",
+        "filename": "libs/dice/open_dice/src/ops.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-11-13T11:03:32Z",
+      "side": 1,
+      "message": "The function is not used in pvmfw, which only needs to derive DICE \nwith `bcc_handover_main_flow`. I\u0027ve modified its API to allow pvmfw to pass the necessary context (see [1]).\n\nThis function is used in RKPVM and Microdroid, both of which only need to derive the Ed25519 DICE leaf private key. Consequently, the principal is irrelevant in these cases.\n\nActually, my goal is to have the AVF open-dice wrapper absorb most of the breaking API changes of upstream open-dice, preventing those changes from cascading to all VM open-dice clients. For functions like this one, which don\u0027t require an algorithm switch, I\u0027ll maintain the existing signature to minimize changes to client code. That\u0027s the main idea here. wdyt?\n\n[1] https://r.android.com/c/platform/packages/modules/Virtualization/+/3334695/6/guest/pvmfw/src/dice.rs#123",
+      "parentUuid": "0753c26d_1b8937ae",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 79,
+        "endChar": 89
+      },
+      "revId": "b2039dd294627aee546fd5a2bde692ea2b01997c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
