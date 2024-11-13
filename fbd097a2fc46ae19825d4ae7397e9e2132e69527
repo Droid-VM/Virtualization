@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c77ed7f_a1c14253",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-13T01:04:30Z",
+      "side": 1,
+      "message": "I thought this would be done inside of crosvm.",
+      "range": {
+        "startLine": 772,
+        "startChar": 0,
+        "endLine": 777,
+        "endChar": 47
+      },
+      "revId": "fbd097a2fc46ae19825d4ae7397e9e2132e69527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdcd1654_64d17ee9",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-13T01:04:30Z",
+      "side": 1,
+      "message": "Can you make sure that we don\u0027t compress? to save cpu.",
+      "range": {
+        "startLine": 790,
+        "startChar": 8,
+        "endLine": 790,
+        "endChar": 15
+      },
+      "revId": "fbd097a2fc46ae19825d4ae7397e9e2132e69527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd00e34f_18c8370a",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-13T01:04:30Z",
+      "side": 1,
+      "message": "The buffer can be as big as the largest file. Can we use BufReader and BufWriter?",
+      "range": {
+        "startLine": 802,
+        "startChar": 0,
+        "endLine": 802,
+        "endChar": 40
+      },
+      "revId": "fbd097a2fc46ae19825d4ae7397e9e2132e69527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
