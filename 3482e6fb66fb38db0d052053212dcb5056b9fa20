@@ -763,6 +763,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e2e1c47_fd50b1b6",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-13T06:29:38Z",
+      "side": 1,
+      "message": "\u003e you can make it bigger. how much extra space do you need?\n\n2-300MB seems enough for installing `linux-headers-generic` and `bpfcc-tools`. But I prefer to enlarge about 1GB or more for retrieving buffer space to add any additional binaries \u0026 packages in the future.",
+      "parentUuid": "f089f7f7_fae558df",
+      "range": {
+        "startLine": 96,
+        "startChar": 36,
+        "endLine": 96,
+        "endChar": 40
+      },
+      "revId": "3482e6fb66fb38db0d052053212dcb5056b9fa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "efe03a0a_953805c2",
         "filename": "guest/forwarder_guest_launcher/src/main.rs",
         "patchSetId": 2
