@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07cd14ba_bb2c8069",
+        "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-13T01:29:55Z",
+      "side": 1,
+      "message": "This is not controlled by the debuggability of the build, but by the debug level of the VM.\n\nPeople (developers for example) should be able to run debuggable VMs on a production device.",
+      "range": {
+        "startLine": 972,
+        "startChar": 16,
+        "endLine": 972,
+        "endChar": 37
+      },
+      "revId": "467216645ed180a25a09cca28f47bd9b2d21fabf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
