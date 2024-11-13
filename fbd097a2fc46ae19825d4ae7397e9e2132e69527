@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2375aa67_c7e34ea0",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-11-13T18:27:06Z",
+      "side": 1,
+      "message": "That was the original idea. For prototyping, adding it in AVF was the fastest path as crosvm will require new library imports (which will potentially require AOSP library imports, as `libzip` is outdated and now replaced by `libzip2`).\n\nKeeping it in AVF would allow us to add any extra state alongside the snapshot (without modifying the snapshot directory/contents), such as logs (currently done in cuttlefish), but I\u0027m fine with starting the process to add a zip library to crosvm/AOSP, no strong feelings about either/or options.",
+      "parentUuid": "6c77ed7f_a1c14253",
+      "range": {
+        "startLine": 772,
+        "startChar": 0,
+        "endLine": 777,
+        "endChar": 47
+      },
+      "revId": "fbd097a2fc46ae19825d4ae7397e9e2132e69527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cdcd1654_64d17ee9",
         "filename": "android/virtmgr/src/crosvm.rs",
         "patchSetId": 10
@@ -37,6 +61,30 @@
       "writtenOn": "2024-11-13T01:04:30Z",
       "side": 1,
       "message": "Can you make sure that we don\u0027t compress? to save cpu.",
+      "range": {
+        "startLine": 790,
+        "startChar": 8,
+        "endLine": 790,
+        "endChar": 15
+      },
+      "revId": "fbd097a2fc46ae19825d4ae7397e9e2132e69527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4c36475_5fab89d8",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-11-13T18:27:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdcd1654_64d17ee9",
       "range": {
         "startLine": 790,
         "startChar": 8,
@@ -60,6 +108,30 @@
       "writtenOn": "2024-11-13T01:04:30Z",
       "side": 1,
       "message": "The buffer can be as big as the largest file. Can we use BufReader and BufWriter?",
+      "range": {
+        "startLine": 802,
+        "startChar": 0,
+        "endLine": 802,
+        "endChar": 40
+      },
+      "revId": "fbd097a2fc46ae19825d4ae7397e9e2132e69527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "296cfa52_bc76ca0d",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-11-13T18:27:06Z",
+      "side": 1,
+      "message": "Done, however I don\u0027t quite know how to get the largest file from the get-go without doing 2 passes. We could assume memory to always be the largest file, though I don\u0027t know if we might ever have the case where a device (GPU + GPU memory for example?) that could be larger, which would cause failures.",
+      "parentUuid": "cd00e34f_18c8370a",
       "range": {
         "startLine": 802,
         "startChar": 0,
