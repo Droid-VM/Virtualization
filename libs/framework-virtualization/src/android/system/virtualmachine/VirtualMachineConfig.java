@@ -969,6 +969,14 @@ public final class VirtualMachineConfig {
                         "debug level must be FULL to connect to the console");
             }
 
+            if (!Build.isDebuggable()) {
+                mVmOutputCaptured = false;
+                mVmConsoleInputSupported = false;
+                mConnectVmConsole = false;
+                mDebugLevel = DEBUG_LEVEL_NONE;
+                Log.d(TAG, "disable console and debug because system is non-debuggable.");
+            }
+
             return new VirtualMachineConfig(
                     packageName,
                     apkPath,
