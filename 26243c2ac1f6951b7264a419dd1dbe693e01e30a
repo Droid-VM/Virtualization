@@ -16,6 +16,24 @@
       "message": "Because it\u0027s compressed, the impact on payload size is minor(451M-\u003e459M for x86_64 image)\n\nBTW, can we remove resize logic in mainactivity?(@akailash@google.com @mulelee@google.com)",
       "revId": "26243c2ac1f6951b7264a419dd1dbe693e01e30a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70531910_8c016a1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-11-13T08:17:05Z",
+      "side": 1,
+      "message": "Yes. I think we can remove them.",
+      "parentUuid": "731c82d8_109595c2",
+      "revId": "26243c2ac1f6951b7264a419dd1dbe693e01e30a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
