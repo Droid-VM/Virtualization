@@ -124,6 +124,24 @@
       "parentUuid": "03b1b156_65bb02dd",
       "revId": "37bef33a87dff94b56d08d2527415290e4c2788a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "080b3624_761a9869",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-13T12:29:46Z",
+      "side": 1,
+      "message": "Re test: You can add a host side test (refer: `packages/modules/Virtualization/tests/pvmfw/`). Start the VM from the host device (\u003d desktop running the `atest`), and check whether DT is created as expected. For 100% coverage, you can also validate content of the DT, but it might be too much.\n\nI\u0027d recommend you to try host side test if you haven\u0027t done it. But no pressure. This CL looks straightforward to me so you may skip writing test if you\u0027re confident.",
+      "parentUuid": "39214349_01e3b499",
+      "revId": "37bef33a87dff94b56d08d2527415290e4c2788a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
