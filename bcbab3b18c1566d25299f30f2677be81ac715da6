@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6f05530_6b78e3da",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1938,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-11-14T13:08:05Z",
+      "side": 1,
+      "message": "It seems that this doesn\u0027t work in some targets.\n\n```\nFAILED: out/soong/.intermediates/packages/modules/Virtualization/tests/testapk/MicrodroidTestAppUpdated/android_common/turbine/MicrodroidTestAppUpdated.jar\n...es/modules/Virtualization/tests/testapk/MicrodroidTestAppUpdated/android_common/turbine/MicrodroidTestAppUpdated.jar; do if cmp -s ${o}.tmp ${o} ; then rm ${o}.tmp ; else mv ${o}.tmp ${o} ; fi; done )\npackages/modules/Virtualization/tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java:1941: error: could not resolve Ignore\n    @Ignore(\"b/372874464\")\n```",
+      "range": {
+        "startLine": 1938,
+        "startChar": 0,
+        "endLine": 1938,
+        "endChar": 26
+      },
+      "revId": "bcbab3b18c1566d25299f30f2677be81ac715da6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
