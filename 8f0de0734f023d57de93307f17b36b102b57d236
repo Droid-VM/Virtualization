@@ -104,6 +104,42 @@
       "parentUuid": "ad85d077_78ed575d",
       "revId": "8f0de0734f023d57de93307f17b36b102b57d236",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "085ebb53_7d7d3107",
+        "filename": "libs/dice/open_dice/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-11-14T16:05:54Z",
+      "side": 1,
+      "message": "To unblock other dependent cls, I\u0027ll go ahead and land this cl as is.  Please let me know if you still want to inline or rename this variable, and I\u0027ll address it in a follow-up cl. Thank you!",
+      "parentUuid": "ad85d077_78ed575d",
+      "revId": "8f0de0734f023d57de93307f17b36b102b57d236",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c80a6ff_8a5c3539",
+        "filename": "libs/dice/open_dice/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-11-14T16:05:54Z",
+      "side": 1,
+      "message": "Let me just land this cl as it is to unblock the other cls on top. Let me know if you still want to inline or rename this variable and I\u0027ll be sure to address it in a follow-up cl.",
+      "parentUuid": "f6d020b9_37345059",
+      "revId": "8f0de0734f023d57de93307f17b36b102b57d236",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
