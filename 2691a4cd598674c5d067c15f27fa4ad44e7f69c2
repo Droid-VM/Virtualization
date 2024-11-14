@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f151a543_46b99fbd",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-14T13:31:54Z",
+      "side": 1,
+      "message": "https://github.com/iovisor/bcc/issues/4329\nIt\u0027s about stdout\u0027s buffer.. because we don\u0027t want to patch tcpstates-bpfcc inline, `python3 -u` or `unbuffer`(from expect package) would be an option for that",
+      "parentUuid": "bd13de37_ba88c4fd",
+      "range": {
+        "startLine": 106,
+        "startChar": 31,
+        "endLine": 108,
+        "endChar": 18
+      },
+      "revId": "2691a4cd598674c5d067c15f27fa4ad44e7f69c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec73166c_5709a2fc",
