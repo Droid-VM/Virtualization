@@ -73,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2d0c49d2_1cb520e4",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-14T01:30:21Z",
+      "side": 1,
+      "message": "I think `csv` crate is not the proper one to use. It would enhance about processing csv data, but it doesn\u0027t support asynchronous scene with `tokio`. Instead, I\u0027ll be considering on using `csv-async` instead.",
+      "parentUuid": "ec73166c_5709a2fc",
+      "range": {
+        "startLine": 115,
+        "startChar": 4,
+        "endLine": 133,
+        "endChar": 67
+      },
+      "revId": "2691a4cd598674c5d067c15f27fa4ad44e7f69c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15f1a5b0_9c4e8d9d",
         "filename": "guest/forwarder_guest_launcher/src/main.rs",
         "patchSetId": 9
