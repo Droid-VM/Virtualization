@@ -221,7 +221,6 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
     @Test
     @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
-    @VsrTest(requirements = {"VSR-7.1-001.006"})
     public void vmAttestationWhenRemoteAttestationIsNotSupported() throws Exception {
         // pVM remote attestation is only supported on protected VMs.
         assumeProtectedVM();
@@ -250,7 +249,6 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
     @Test
     @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
-    @VsrTest(requirements = {"VSR-7.1-001.006"})
     public void vmAttestationWithVendorPartitionWhenSupported() throws Exception {
         // pVM remote attestation is only supported on protected VMs.
         assumeProtectedVM();
@@ -269,7 +267,6 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
     @Test
     @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
-    @VsrTest(requirements = {"VSR-7.1-001.006"})
     public void vmAttestationWhenRemoteAttestationIsSupported() throws Exception {
         // pVM remote attestation is only supported on protected VMs.
         assumeProtectedVM();
