@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "86eb3190_89bb5389",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-14T08:02:14Z",
+      "side": 1,
+      "message": "One big downside of this is that the amount of IO is x3. crosvm does the IO to the disk once, you read the files, and then write them.\n\nWhat I originally expected was crosvm generating an archive (ex: tar, or zip) on the fly, without storing individual files on the disk temporarily.",
+      "parentUuid": "2375aa67_c7e34ea0",
+      "range": {
+        "startLine": 772,
+        "startChar": 0,
+        "endLine": 777,
+        "endChar": 47
+      },
+      "revId": "fbd097a2fc46ae19825d4ae7397e9e2132e69527",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cdcd1654_64d17ee9",
         "filename": "android/virtmgr/src/crosvm.rs",
         "patchSetId": 10
