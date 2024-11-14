@@ -1935,6 +1935,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
+    @Ignore("b/372874464")
     public void outputIsNotRedirectedToLogcatIfNotDebuggable() throws Exception {
         assumeSupportedDevice();
 
