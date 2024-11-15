@@ -685,10 +685,18 @@ public final class VirtualMachineConfig {
             config.disks[i].writable = customImageConfig.getDisks()[i].isWritable();
             String diskImagePath = customImageConfig.getDisks()[i].getImagePath();
             if (diskImagePath != null) {
-                config.disks[i].image =
-                        ParcelFileDescriptor.open(
-                                new File(diskImagePath),
-                                config.disks[i].writable ? MODE_READ_WRITE : MODE_READ_ONLY);
+                try {
+                    config.disks[i].image =
+                            ParcelFileDescriptor.open(
+                                    new File(diskImagePath),
+                                    config.disks[i].writable ? MODE_READ_WRITE : MODE_READ_ONLY);
+                } catch (FileNotFoundException e) {
+                    if (customImageConfig.getDisks()[i].isOptional()) {
+                        Log.d(TAG, "file " + diskImagePath + " is not found, but optional", e);
+                    } else {
+                        throw e;
+                    }
+                }
             }
 
             List<Partition> partitions = new ArrayList<>();
