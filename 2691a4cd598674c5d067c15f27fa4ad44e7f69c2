@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09d11d1a_fc02cab1",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-15T00:19:44Z",
+      "side": 1,
+      "message": "I don\u0027t think those options are quite different from `script`. But since I need to validate again anyway, I would try with `python3 -u`, since `tcpstates-bpfcc` is already wrapped with python script for compiling BPF things.",
+      "parentUuid": "f151a543_46b99fbd",
+      "range": {
+        "startLine": 106,
+        "startChar": 31,
+        "endLine": 108,
+        "endChar": 18
+      },
+      "revId": "2691a4cd598674c5d067c15f27fa4ad44e7f69c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec73166c_5709a2fc",
