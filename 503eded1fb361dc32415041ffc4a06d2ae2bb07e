@@ -87,6 +87,30 @@
       },
       "revId": "503eded1fb361dc32415041ffc4a06d2ae2bb07e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d7787f3_4de1c908",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-15T06:38:37Z",
+      "side": 1,
+      "message": "Yes, but sending all ports require bunch of changes. I\u0027m not talking about I won\u0027t do that. But just not in this change.. Just sending all ports and no edit on the host side can make weird UX. For instance, setting activity shows toggle button for privileged ports, but nothing happened though set it as enabled.",
+      "parentUuid": "f66f6917_de424688",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 9
+      },
+      "revId": "503eded1fb361dc32415041ffc4a06d2ae2bb07e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
