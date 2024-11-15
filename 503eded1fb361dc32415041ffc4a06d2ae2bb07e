@@ -39,6 +39,30 @@
       },
       "revId": "503eded1fb361dc32415041ffc4a06d2ae2bb07e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93b42f64_4d8773cf",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-15T06:22:07Z",
+      "side": 1,
+      "message": "Your opinion sounds reasonable to me, but ignoring privileged ports in the initial state(w/ `listeners` crate) but sending privileged ports for delta(w/ `tcpstates-bpfcc`) is very weird. So I want to keep this change being merged in advance, and sending it later with another change that printing toast.",
+      "parentUuid": "8366ab4a_bafa926a",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 9
+      },
+      "revId": "503eded1fb361dc32415041ffc4a06d2ae2bb07e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
