@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90167148_aeaf3a5f",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-15T02:19:29Z",
+      "side": 1,
+      "message": "This becomes `com.android.*` on AOSP targets. So, I think we want to search for both.",
+      "range": {
+        "startLine": 96,
+        "startChar": 62,
+        "endLine": 96,
+        "endChar": 105
+      },
+      "revId": "f8b6b1498b461f8100df1beb978a8c85941ca06e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b110d1c1_16fe90c7",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1145,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-15T02:19:29Z",
+      "side": 1,
+      "message": "... but why not PACKAGE?",
+      "range": {
+        "startLine": 1145,
+        "startChar": 49,
+        "endLine": 1145,
+        "endChar": 75
+      },
+      "revId": "f8b6b1498b461f8100df1beb978a8c85941ca06e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
