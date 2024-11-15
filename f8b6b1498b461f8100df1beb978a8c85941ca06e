@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "336f9f36_aa2df826",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-15T15:22:25Z",
+      "side": 1,
+      "message": "if product name has aosp_ in it, it usually means an AOSP target, but relying on that looks fragile.\n\ncan\u0027t you just catch the assertion error and consume it?",
+      "parentUuid": "9728163d_3bb6ea6f",
+      "range": {
+        "startLine": 96,
+        "startChar": 62,
+        "endLine": 96,
+        "endChar": 105
+      },
+      "revId": "f8b6b1498b461f8100df1beb978a8c85941ca06e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b110d1c1_16fe90c7",
         "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
         "patchSetId": 1
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "The suggestion is for %s/EMPTY_PAYLOAD_PACKAGE_NAME/PACKAGE ? Sorry, it is not very clear to me.",
       "parentUuid": "b110d1c1_16fe90c7",
+      "range": {
+        "startLine": 1145,
+        "startChar": 49,
+        "endLine": 1145,
+        "endChar": 75
+      },
+      "revId": "f8b6b1498b461f8100df1beb978a8c85941ca06e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fa28ac6_0d7288f8",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1145,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-15T15:22:25Z",
+      "side": 1,
+      "message": "sorry that I wasn\u0027t clear. yes, that was my question, not a suggestion.",
+      "parentUuid": "5cbf4d09_7c9c27d0",
       "range": {
         "startLine": 1145,
         "startChar": 49,
