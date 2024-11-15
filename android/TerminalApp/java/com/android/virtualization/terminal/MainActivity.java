@@ -21,6 +21,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -58,6 +59,7 @@ import com.android.virtualization.vmlauncher.VmLauncherService;
 import com.android.virtualization.vmlauncher.VmLauncherServices;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.common.collect.Sets;
 
 import java.io.File;
 import java.io.FileDescriptor;
@@ -71,6 +73,9 @@ import java.net.UnknownHostException;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MainActivity extends BaseActivity
         implements VmLauncherServices.VmLauncherServiceCallback,
@@ -90,10 +95,16 @@ public class MainActivity extends BaseActivity
     private static final int POST_NOTIFICATIONS_PERMISSION_REQUEST_CODE = 101;
     private ActivityResultLauncher<Intent> mManageExternalStorageActivityResultLauncher;
     private static int diskSizeStep;
+    private Set<String> mPrevActivePorts;
+    private final IntentFilter mIntentFilter = new IntentFilter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mIntentFilter.addAction(PortForwardingRequestReceiver.ACTION_PORT_FORWARDING);
+        PortForwardingRequestReceiver receiver = new PortForwardingRequestReceiver();
+        registerReceiver(receiver, mIntentFilter, RECEIVER_NOT_EXPORTED);
 
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         if (notificationManager.getNotificationChannel(this.getPackageName()) == null) {
@@ -446,13 +457,7 @@ public class MainActivity extends BaseActivity
         return false;
     }
 
-    private void startVm() {
-        if (!InstallUtils.isImageInstalled(this)) {
-            return;
-        }
-
-        resizeDiskIfNecessary();
-
+    private Notification buildMainNotification() {
         Intent tapIntent = new Intent(this, MainActivity.class);
         tapIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent tapPendingIntent = PendingIntent.getActivity(this, 0, tapIntent,
@@ -473,23 +478,76 @@ public class MainActivity extends BaseActivity
                         stopIntent,
                         PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         Icon icon = Icon.createWithResource(getResources(), R.drawable.ic_launcher_foreground);
+        return new Notification.Builder(this, this.getPackageName())
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle(getResources().getString(R.string.service_notification_title))
+                .setContentText(getResources().getString(R.string.service_notification_content))
+                .setContentIntent(tapPendingIntent)
+                .setOngoing(true)
+                .addAction(
+                        new Notification.Action.Builder(
+                                        icon,
+                                        getResources()
+                                                .getString(R.string.service_notification_settings),
+                                        settingsPendingIntent)
+                                .build())
+                .addAction(
+                        new Notification.Action.Builder(
+                                        icon,
+                                        getResources()
+                                                .getString(
+                                                        R.string.service_notification_quit_action),
+                                        stopPendingIntent)
+                                .build())
+                .build();
+    }
+
+    private void showPortForwardingNotification(int port) {
+        Intent tapIntent = new Intent(this, SettingsPortForwardingActivity.class);
+        tapIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent tapPendingIntent =
+                PendingIntent.getActivity(this, 0, tapIntent, PendingIntent.FLAG_IMMUTABLE);
+
+        Intent accessIntent = new Intent(this, PortForwardingRequestReceiver.class);
+        accessIntent.setAction(PortForwardingRequestReceiver.ACTION_PORT_FORWARDING);
+        accessIntent.setIdentifier("access_" + Integer.toString(port));
+        accessIntent.putExtra("port", port);
+        accessIntent.putExtra("enabled", true);
+        PendingIntent accessPendingIntent =
+                PendingIntent.getBroadcast(this, 0, accessIntent, PendingIntent.FLAG_IMMUTABLE);
+
+        Intent denyIntent = new Intent(this, PortForwardingRequestReceiver.class);
+        denyIntent.setAction(PortForwardingRequestReceiver.ACTION_PORT_FORWARDING);
+        denyIntent.setIdentifier("deny_" + Integer.toString(port));
+        denyIntent.putExtra("port", port);
+        denyIntent.putExtra("enabled", false);
+        PendingIntent denyPendingIntent =
+                PendingIntent.getBroadcast(this, 0, denyIntent, PendingIntent.FLAG_IMMUTABLE);
+
+        Icon icon = Icon.createWithResource(getResources(), R.drawable.ic_launcher_foreground);
         Notification notification =
                 new Notification.Builder(this, this.getPackageName())
                         .setSmallIcon(R.drawable.ic_launcher_foreground)
                         .setContentTitle(
-                                getResources().getString(R.string.service_notification_title))
+                                getResources()
+                                        .getString(
+                                                R.string
+                                                        .settings_port_forwarding_notification_title))
                         .setContentText(
-                                getResources().getString(R.string.service_notification_content))
+                                getResources()
+                                        .getString(
+                                                R.string
+                                                        .settings_port_forwarding_notification_content,
+                                                port))
                         .setContentIntent(tapPendingIntent)
-                        .setOngoing(true)
                         .addAction(
                                 new Notification.Action.Builder(
                                                 icon,
                                                 getResources()
                                                         .getString(
                                                                 R.string
-                                                                        .service_notification_settings),
-                                        settingsPendingIntent)
+                                                                        .settings_port_forwarding_notification_accept),
+                                                accessPendingIntent)
                                         .build())
                         .addAction(
                                 new Notification.Action.Builder(
@@ -497,10 +555,66 @@ public class MainActivity extends BaseActivity
                                                 getResources()
                                                         .getString(
                                                                 R.string
-                                                                        .service_notification_quit_action),
-                                                stopPendingIntent)
+                                                                        .settings_port_forwarding_notification_deny),
+                                                denyPendingIntent)
                                         .build())
                         .build();
+
+        getSystemService(NotificationManager.class).notify(port, notification);
+    }
+
+    private void discardPortForwardingNotification(int port) {
+        getSystemService(NotificationManager.class).cancel(port);
+    }
+
+    private void preparePortForwardingNotifications(SharedPreferences sharedPref) {
+        mPrevActivePorts = new HashSet<>();
+        SharedPreferences.OnSharedPreferenceChangeListener portForwardingListener =
+                new SharedPreferences.OnSharedPreferenceChangeListener() {
+                    @Override
+                    public void onSharedPreferenceChanged(
+                            SharedPreferences sharedPreferences, String key) {
+                        if (!key.equals(getString(R.string.preference_forwarding_ports))) {
+                            return;
+                        }
+                        Set<String> activePorts =
+                                sharedPref.getStringSet(
+                                        getString(R.string.preference_forwarding_ports),
+                                        Collections.emptySet());
+                        for (String portStr : Sets.difference(activePorts, mPrevActivePorts)) {
+                            try {
+                                int port = Integer.parseInt(portStr);
+                                showPortForwardingNotification(port);
+                            } catch (NumberFormatException e) {
+                                Log.e(TAG, "Failed to parse port: " + portStr);
+                                return;
+                            }
+                        }
+                        for (String portStr : Sets.difference(mPrevActivePorts, activePorts)) {
+                            try {
+                                int port = Integer.parseInt(portStr);
+                                discardPortForwardingNotification(port);
+                            } catch (NumberFormatException e) {
+                                Log.e(TAG, "Failed to parse port: " + portStr);
+                                return;
+                            }
+                        }
+                        mPrevActivePorts = activePorts;
+                    }
+                };
+        sharedPref.registerOnSharedPreferenceChangeListener(portForwardingListener);
+    }
+
+    private void startVm() {
+        if (!InstallUtils.isImageInstalled(this)) {
+            return;
+        }
+        SharedPreferences sharedPref =
+                this.getSharedPreferences(
+                        getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        resizeDiskIfNecessary(sharedPref);
+        Notification notification = buildMainNotification();
+        preparePortForwardingNotifications(sharedPref);
 
         android.os.Trace.beginAsyncSection("executeTerminal", 0);
         VmLauncherServices.startVmLauncherService(this, this, notification);
@@ -534,11 +648,9 @@ public class MainActivity extends BaseActivity
         return Os.stat(file.getAbsolutePath()).st_size;
     }
 
-    private void resizeDiskIfNecessary() {
+    private void resizeDiskIfNecessary(SharedPreferences sharedPref) {
         try {
             File file = getPartitionFile(this, "root_part");
-            SharedPreferences sharedPref = this.getSharedPreferences(
-                    getString(R.string.preference_file_key), Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
 
             long currentDiskSize = getFilesystemSize(file);
