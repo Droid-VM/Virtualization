@@ -16,6 +16,24 @@
       "message": "I noticed the TODO and was curious if there was a better solution. I\u0027m not sure how to reproduce the bug though, so can\u0027t verify it works. I tried writing some big (1000s of bytes) errors, but never saw them get truncated.",
       "revId": "25d95db5b12e0038c623ce1eb4a53614ca41ef60",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca8504f6_90be45cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-15T02:38:37Z",
+      "side": 1,
+      "message": "If the error is bigger than the pipe capacity, then this CL causes a deadlock. Can reproduce with the following and a \u003e4096 failure\n\n```\n--- a/android/virtmgr/src/crosvm.rs\n+++ b/android/virtmgr/src/crosvm.rs\n@@ -315,6 +315,11 @@ impl VmState {\n             let config \u003d *config;\n             let detect_hangup \u003d config.detect_hangup;\n             let (failure_pipe_read, failure_pipe_write) \u003d create_pipe()?;\n+            nix::fcntl::fcntl(\n+                failure_pipe_read.as_raw_fd(),\n+                nix::fcntl::FcntlArg::F_SETPIPE_SZ(4096),\n+            )\n+            .unwrap();\n             let vfio_devices \u003d config.vfio_devices.clone();\n             let tap \u003d\n                 if let Some(tap_file) \u003d \u0026config.tap { Some(tap_file.try_clone()?) } else { None };\n```\n\nThat is unlikely to happen since the default capacity is huge, but we should probably move the `failure_pipe_read` read before the `child.wait()` or put it in another thread.",
+      "parentUuid": "9a0d3be3_add5440c",
+      "revId": "25d95db5b12e0038c623ce1eb4a53614ca41ef60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
