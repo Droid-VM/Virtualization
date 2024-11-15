@@ -95,6 +95,14 @@
     <string name="settings_recovery_reset_dialog_confirm">Confirm</string>
     <!-- Dialog button cancel for restarting the terminal [CHAR LIMIT=16] -->
     <string name="settings_recovery_reset_dialog_cancel">Cancel</string>
+    <!-- Dialog option to back up previous image [CHAR LIMIT=none] -->
+    <string name="settings_recovery_reset_dialog_backup_option">Back up data to <xliff:g id="path" example="/mnt/backup">/mnt/backup</xliff:g></string>
+    <!-- Snankbar to indicate recovery error due to backup [CHAR LIMIT=none] -->
+    <string name="settings_recovery_error_due_to_backup">Recovery was cancelled because backup failed.</string>
+    <!-- Settings menu title for removing backup data [CHAR LIMIT=none] -->
+    <string name="settings_recovery_remove_backup_title">Remove backup data</string>
+    <!-- Settings menu sub title for removing backup data [CHAR LIMIT=none] -->
+    <string name="settings_recovery_remove_backup_sub_title">Clean up <xliff:g id="path" example="/mnt/backup">/mnt/backup</xliff:g></string>
 
     <!-- Notification action button for settings [CHAR LIMIT=none] -->
     <string name="service_notification_settings">Settings</string>
