@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8366ab4a_bafa926a",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-15T06:09:02Z",
+      "side": 1,
+      "message": "For a better UX, I think we may want to send these ports while not allowing users to turn the port fowarding on for these ports. ex: showing message saying \"can\u0027t forward port 80\"\n\nor in the future we could allocate a random port on the host and forward it to these ports. as long as the randomly selected port is shown on the settings page, users will be good.",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 9
+      },
+      "revId": "503eded1fb361dc32415041ffc4a06d2ae2bb07e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
