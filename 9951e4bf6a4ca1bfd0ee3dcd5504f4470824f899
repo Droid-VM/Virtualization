@@ -16,6 +16,24 @@
       "message": "The CL fixed all failing tests (including Platinum tests). However, the presubmit shows that the build on git_aosp-main-future fails. If DM gets a build failure, the CL will be reverted. Thanks!",
       "revId": "9951e4bf6a4ca1bfd0ee3dcd5504f4470824f899",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69672041_20945eaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-11-15T00:50:03Z",
+      "side": 1,
+      "message": "The failure indicates that git_aosp-main-future doesn\u0027t have aosp/3314799 nor aosp/3315272 which is weird given that https://android-build.corp.google.com/where-is-my-cl/search/I8c0a31ca91b5db2a400f8389e7d4c35ef2be3c13 shows the patch being present on that branch...\n\nI\u0027ve restarted presubmit",
+      "parentUuid": "5b16a10e_cdc58ff4",
+      "revId": "9951e4bf6a4ca1bfd0ee3dcd5504f4470824f899",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
