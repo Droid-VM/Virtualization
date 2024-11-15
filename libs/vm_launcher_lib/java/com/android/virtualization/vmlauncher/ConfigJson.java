@@ -224,9 +224,10 @@ class ConfigJson {
         private boolean writable;
         private String image;
         private PartitionJson[] partitions;
+        private boolean optional;
 
         private Disk toConfig() {
-            Disk d = writable ? Disk.RWDisk(image) : Disk.RODisk(image);
+            Disk d = writable ? Disk.RWDisk(image, optional) : Disk.RODisk(image, optional);
             for (PartitionJson pj : partitions) {
                 boolean writable = this.writable && pj.writable;
                 d.addPartition(new Partition(pj.label, pj.path, writable, pj.guid));

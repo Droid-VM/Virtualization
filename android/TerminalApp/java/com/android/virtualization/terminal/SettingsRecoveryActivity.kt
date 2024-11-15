@@ -18,12 +18,16 @@ package com.android.virtualization.terminal
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.android.virtualization.vmlauncher.InstallUtils
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import java.io.IOException
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -34,30 +38,90 @@ class SettingsRecoveryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_recovery)
         val resetCard = findViewById<MaterialCardView>(R.id.settings_recovery_reset_card)
-        val dialog = MaterialAlertDialogBuilder(this)
-            .setTitle(R.string.settings_recovery_reset_dialog_title)
-            .setMessage(R.string.settings_recovery_reset_dialog_message)
-            .setPositiveButton(R.string.settings_recovery_reset_dialog_confirm) { _, _ ->
-                // This coroutine will be killed when the activity is killed. The behavior is both acceptable
-                // either removing is done or not
-                lifecycleScope.launch(Dispatchers.IO) {
-                    try {
-                        InstallUtils.unInstall(this@SettingsRecoveryActivity)
-                        // Restart terminal
-                        val intent =
-                            baseContext.packageManager.getLaunchIntentForPackage(baseContext.packageName)
-                        intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                        finish()
-                        startActivity(intent)
-                    } catch (e: IOException) {
-                        Log.e(TAG, "VM image reset failed.")
+        resetCard.setOnClickListener {
+            var keepRootfs = false
+            val dialog = MaterialAlertDialogBuilder(this)
+                .setTitle(R.string.settings_recovery_reset_dialog_title)
+                .setMultiChoiceItems(arrayOf(getString(R.string.settings_recovery_reset_dialog_backup_option)), booleanArrayOf(keepRootfs)) {_, _, checked ->
+                    keepRootfs = checked
+                }
+                .setPositiveButton(R.string.settings_recovery_reset_dialog_confirm) { _, _ ->
+                    // This coroutine will be killed when the activity is killed. The behavior is both acceptable
+                    // either removing is done or not
+                    runInBackground {
+                        uninstall(keepRootfs)
                     }
                 }
-            }
-            .setNegativeButton(R.string.settings_recovery_reset_dialog_cancel) { dialog, _ -> dialog.dismiss() }
-            .create()
-        resetCard.setOnClickListener {
+                .setNegativeButton(R.string.settings_recovery_reset_dialog_cancel) { dialog, _ -> dialog.dismiss() }
+                .create()
             dialog.show()
+        }
+        val resetBackupCard = findViewById<View>(R.id.settings_recovery_reset_backup_card)
+        resetBackupCard.isVisible = InstallUtils.getBackupFile(this).exists()
+
+        resetBackupCard.setOnClickListener {
+            val dialog = MaterialAlertDialogBuilder(this)
+                .setTitle(R.string.settings_recovery_remove_backup_title)
+                .setMessage(R.string.settings_recovery_remove_backup_sub_title)
+                .setPositiveButton(R.string.settings_recovery_reset_dialog_confirm) { _, _ ->
+                    runInBackground {
+                        removeBackup()
+                    }
+                }
+                .setNegativeButton(R.string.settings_recovery_reset_dialog_cancel) { dialog, _ -> dialog.dismiss() }
+                .create()
+            dialog.show()
+        }
+    }
+
+    private fun removeBackup(): Unit {
+        if (!InstallUtils.getBackupFile(this@SettingsRecoveryActivity).delete()) {
+            Snackbar.make(
+                findViewById(android.R.id.content),
+                R.string.settings_recovery_error_during_removing_backup,
+                Snackbar.LENGTH_SHORT
+            ).show();
+            Log.e(TAG, "cannot remove backup")
+        }
+    }
+
+    private fun uninstall(keepRootfs: Boolean): Unit {
+        var backupDone = false
+        try {
+            if (keepRootfs) {
+                InstallUtils.backupRootFs(this@SettingsRecoveryActivity)
+                backupDone = true
+            }
+            InstallUtils.unInstall(this@SettingsRecoveryActivity)
+        } catch (e: IOException) {
+            if (keepRootfs && !backupDone) {
+                Snackbar.make(
+                    findViewById(android.R.id.content),
+                    if (keepRootfs && !backupDone) R.string.settings_recovery_error_due_to_backup else R.string.settings_recovery_error,
+                    Snackbar.LENGTH_SHORT
+                ).show();
+            }
+            Log.e(TAG, "cannot recovery ", e)
+        }
+    }
+
+    private fun runInBackground(backgroundWork: suspend CoroutineScope.() -> Unit): Unit {
+        findViewById<View>(R.id.setting_recovery_card_container).visibility = View.INVISIBLE
+        findViewById<View>(R.id.recovery_boot_progress).visibility = View.VISIBLE
+        lifecycleScope.launch(Dispatchers.IO) {
+            backgroundWork()
+        }.invokeOnCompletion {
+            runOnUiThread {
+                findViewById<View>(R.id.setting_recovery_card_container).visibility =
+                    View.VISIBLE
+                findViewById<View>(R.id.recovery_boot_progress).visibility = View.INVISIBLE
+                // Restart terminal
+                val intent =
+                    baseContext.packageManager.getLaunchIntentForPackage(baseContext.packageName)
+                intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                finish()
+                startActivity(intent)
+            }
         }
     }
 }
