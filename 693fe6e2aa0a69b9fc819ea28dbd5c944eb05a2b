@@ -1,0 +1,137 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c08b79f_b0e320b8",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsRecoveryActivity.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-15T13:00:37Z",
+      "side": 1,
+      "message": "Q: no `IOException` here? We probably want to show an snackbar here as well.",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 90
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4090cfee_8a5fbdbc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsRecoveryActivity.kt",
+              "range": {
+                "startLine": 87,
+                "startChar": 0,
+                "endLine": 88,
+                "endChar": 0
+              },
+              "replacement": "                        try {\n                            InstallUtils.getBackupFile(this@SettingsRecoveryActivity).delete()\n                        } catch (e: IOException) {\n                            Log.e(TAG, \"cannot delete backup\", e)\n                        }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "693fe6e2aa0a69b9fc819ea28dbd5c944eb05a2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "966e625b_3505923e",
+        "filename": "android/TerminalApp/res/layout/settings_recovery.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-15T13:00:37Z",
+      "side": 1,
+      "message": "Could you try `layout_gravity` and `visibility` here, and remove enclosing `LinearLayout`? It would be sufficient.\n\nNote: `android:layout_*` tells parent about how to place this children.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 0
+      },
+      "revId": "693fe6e2aa0a69b9fc819ea28dbd5c944eb05a2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a22926d4_2ca45391",
+        "filename": "android/TerminalApp/res/layout/settings_recovery.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-15T13:00:37Z",
+      "side": 1,
+      "message": "please either switch to `sp` or `wrap_content`. Text height may be increased by accessibility.",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 48
+      },
+      "revId": "693fe6e2aa0a69b9fc819ea28dbd5c944eb05a2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e382fe05_a1f0d7a0",
+        "filename": "android/TerminalApp/res/layout/settings_recovery.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-15T13:00:37Z",
+      "side": 1,
+      "message": "This is the same as above `MaterialCardView`, and ditto for other settings. Right?\n\nCould you add an TODO for making our own card view?",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 62
+      },
+      "revId": "693fe6e2aa0a69b9fc819ea28dbd5c944eb05a2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abe72265_23228b83",
+        "filename": "android/TerminalApp/res/layout/settings_recovery.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-15T13:00:37Z",
+      "side": 1,
+      "message": "please either switch to `sp` or `wrap_content`. Text height may be increased by accessibility.",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 48
+      },
+      "revId": "693fe6e2aa0a69b9fc819ea28dbd5c944eb05a2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
