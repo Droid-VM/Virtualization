@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b9800122_9d63d0f0",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsRecoveryActivity.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-15T15:44:44Z",
+      "side": 1,
+      "message": "please... please... avoid deep nestings.",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 29
+      },
+      "revId": "693fe6e2aa0a69b9fc819ea28dbd5c944eb05a2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1c08b79f_b0e320b8",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsRecoveryActivity.kt",
         "patchSetId": 2
@@ -129,6 +152,98 @@
         "startChar": 0,
         "endLine": 108,
         "endChar": 48
+      },
+      "revId": "693fe6e2aa0a69b9fc819ea28dbd5c944eb05a2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99ae61aa_ec47513f",
+        "filename": "build/debian/fai_config/files/etc/systemd/system/backup_mount.service/AVF",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-15T15:44:44Z",
+      "side": 1,
+      "message": "This is so inefficient. Why don\u0027t we directly pass the previous root partition as a disk image?",
+      "range": {
+        "startLine": 10,
+        "startChar": 118,
+        "endLine": 10,
+        "endChar": 174
+      },
+      "revId": "693fe6e2aa0a69b9fc819ea28dbd5c944eb05a2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40a4aee5_25f4bf46",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-15T15:44:44Z",
+      "side": 1,
+      "message": "this is not used outside",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 10
+      },
+      "revId": "693fe6e2aa0a69b9fc819ea28dbd5c944eb05a2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e985d24_fc45f927",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-15T15:44:44Z",
+      "side": 1,
+      "message": "shouldn\u0027t we move?",
+      "range": {
+        "startLine": 59,
+        "startChar": 14,
+        "endLine": 59,
+        "endChar": 18
+      },
+      "revId": "693fe6e2aa0a69b9fc819ea28dbd5c944eb05a2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f56af6cf_9ae1885e",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-15T15:44:44Z",
+      "side": 1,
+      "message": "this is used only by the method below.",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 40
       },
       "revId": "693fe6e2aa0a69b9fc819ea28dbd5c944eb05a2b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
