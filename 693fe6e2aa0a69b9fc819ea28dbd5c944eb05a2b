@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9af4a987_0d86d8e9",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsRecoveryActivity.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-17T16:10:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9800122_9d63d0f0",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 29
+      },
+      "revId": "693fe6e2aa0a69b9fc819ea28dbd5c944eb05a2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c08b79f_b0e320b8",
@@ -65,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6402cedb_fc9aa607",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsRecoveryActivity.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-17T16:10:02Z",
+      "side": 1,
+      "message": "it doesn\u0027t throw IOException, but made it check return value",
+      "parentUuid": "1c08b79f_b0e320b8",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 90
+      },
+      "revId": "693fe6e2aa0a69b9fc819ea28dbd5c944eb05a2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "966e625b_3505923e",
@@ -78,6 +126,30 @@
       "writtenOn": "2024-11-15T13:00:37Z",
       "side": 1,
       "message": "Could you try `layout_gravity` and `visibility` here, and remove enclosing `LinearLayout`? It would be sufficient.\n\nNote: `android:layout_*` tells parent about how to place this children.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 0
+      },
+      "revId": "693fe6e2aa0a69b9fc819ea28dbd5c944eb05a2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf03ca2a_df39dcc3",
+        "filename": "android/TerminalApp/res/layout/settings_recovery.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-17T16:10:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "966e625b_3505923e",
       "range": {
         "startLine": 46,
         "startChar": 0,
@@ -111,6 +183,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ce95b68_f01c3e44",
+        "filename": "android/TerminalApp/res/layout/settings_recovery.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-17T16:10:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a22926d4_2ca45391",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 48
+      },
+      "revId": "693fe6e2aa0a69b9fc819ea28dbd5c944eb05a2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e382fe05_a1f0d7a0",
@@ -134,6 +230,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58d2f72a_8753cb28",
+        "filename": "android/TerminalApp/res/layout/settings_recovery.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-17T16:10:02Z",
+      "side": 1,
+      "message": "it is used in setting list and recovery menu, but added TODO for that.",
+      "parentUuid": "e382fe05_a1f0d7a0",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 62
+      },
+      "revId": "693fe6e2aa0a69b9fc819ea28dbd5c944eb05a2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abe72265_23228b83",
@@ -147,6 +267,30 @@
       "writtenOn": "2024-11-15T13:00:37Z",
       "side": 1,
       "message": "please either switch to `sp` or `wrap_content`. Text height may be increased by accessibility.",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 48
+      },
+      "revId": "693fe6e2aa0a69b9fc819ea28dbd5c944eb05a2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89166b53_de272464",
+        "filename": "android/TerminalApp/res/layout/settings_recovery.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-17T16:10:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abe72265_23228b83",
       "range": {
         "startLine": 108,
         "startChar": 0,
@@ -193,6 +337,30 @@
       "writtenOn": "2024-11-15T15:44:44Z",
       "side": 1,
       "message": "this is not used outside",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 10
+      },
+      "revId": "693fe6e2aa0a69b9fc819ea28dbd5c944eb05a2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f262755a_be1e50c2",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-17T16:10:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40a4aee5_25f4bf46",
       "range": {
         "startLine": 45,
         "startChar": 4,
@@ -263,6 +431,30 @@
       "writtenOn": "2024-11-15T15:44:44Z",
       "side": 1,
       "message": "this is used only by the method below.",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 40
+      },
+      "revId": "693fe6e2aa0a69b9fc819ea28dbd5c944eb05a2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8136ca5_694ee3b5",
+        "filename": "libs/vm_launcher_lib/java/com/android/virtualization/vmlauncher/InstallUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-17T16:10:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f56af6cf_9ae1885e",
       "range": {
         "startLine": 190,
         "startChar": 0,
