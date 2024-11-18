@@ -324,6 +324,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd891bf3_3e49ce10",
+        "filename": "build/debian/fai_config/files/etc/systemd/system/backup_mount.service/AVF",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-18T13:18:44Z",
+      "side": 1,
+      "message": "instead of loop device, add a disk(which is optional) in vm_config, and then mount it as /mnt/backup",
+      "parentUuid": "99ae61aa_ec47513f",
+      "range": {
+        "startLine": 10,
+        "startChar": 118,
+        "endLine": 10,
+        "endChar": 174
+      },
+      "revId": "693fe6e2aa0a69b9fc819ea28dbd5c944eb05a2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "40a4aee5_25f4bf46",
