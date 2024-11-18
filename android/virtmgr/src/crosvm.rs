@@ -1033,7 +1033,9 @@ fn run_vm(
             command.arg("--host-cpu-topology");
             cfg_if::cfg_if! {
                 if #[cfg(any(target_arch = "aarch64"))] {
-                    command.arg("--virt-cpufreq");
+                    if std::fs::metadata("/sys/devices/system/cpu/cpu0/cpufreq").is_ok() {
+                        command.arg("--virt-cpufreq");
+                    }
                 }
             }
         } else if let Some(cpus) = get_num_cpus() {
