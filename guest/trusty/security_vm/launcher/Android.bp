@@ -40,6 +40,20 @@ filegroup {
     srcs: [":avb_testkey_rsa4096"],
 }
 
+raw_binary {
+    name: "trusty_security_vm_unsigned",
+    src: ":trusty-test-lk.elf",
+    enabled: false,
+    arch: {
+        arm64: {
+            enabled: true,
+        },
+        x86_64: {
+            enabled: true,
+        },
+    },
+}
+
 // python -c "import hashlib; print(hashlib.sha256(b'trusty_security_vm_salt').hexdigest())"
 trusty_security_vm_salt = "75a71e967c1a1e0f805cca20465e7acf83e6a04e567a67c426d8b5a94f8d61c5"
 
@@ -56,11 +70,11 @@ avb_add_hash_footer {
     enabled: false,
     arch: {
         x86_64: {
-            src: ":trusty-test-lk.elf",
+            src: ":trusty_security_vm_unsigned",
             enabled: true,
         },
         arm64: {
-            src: ":trusty-test-lk.elf",
+            src: ":trusty_security_vm_unsigned",
             enabled: true,
         },
     },
