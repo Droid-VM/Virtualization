@@ -177,19 +177,29 @@ impl PartialInputs {
 /// (typically on the stack, .bss, .data, or provided BCC) from a single allocation
 /// (e.g. stack array).
 #[no_mangle]
-#[cfg(not(test))]
 unsafe extern "C" fn DiceClearMemory(
     _ctx: *mut core::ffi::c_void,
     size: usize,
     addr: *mut core::ffi::c_void,
 ) {
-    use core::slice;
-    use vmbase::memory::flushed_zeroize;
+    #[cfg(not(test))]
+    {
+        use core::slice;
+        use vmbase::memory::flushed_zeroize;
 
-    // SAFETY: We require our caller to provide a valid range within a single object. The open-dice
-    // always calls this on individual stack-allocated arrays which ensures that.
-    let region = unsafe { slice::from_raw_parts_mut(addr as *mut u8, size) };
-    flushed_zeroize(region)
+        // SAFETY: We require our caller to provide a valid range within a single object.
+        // The open-dice always calls this on individual stack-allocated arrays which ensures
+        // that.
+        let region = unsafe { slice::from_raw_parts_mut(addr as *mut u8, size) };
+        flushed_zeroize(region)
+    }
+    // The test version of this function allows the tests below to go through the same nostd
+    // open-dice library as pvmfw.
+    #[cfg(test)]
+    {
+        // SAFETY: The caller ensures that the address and size are valid for write.
+        unsafe { core::ptr::write_bytes(addr as *mut u8, 0, size) };
+    }
 }
 
 #[cfg(test)]
