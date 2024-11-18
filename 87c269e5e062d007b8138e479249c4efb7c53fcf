@@ -22,6 +22,30 @@
       },
       "revId": "87c269e5e062d007b8138e479249c4efb7c53fcf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75634d56_441e76a7",
+        "filename": "libs/dice/clear_memory/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-18T19:30:47Z",
+      "side": 1,
+      "message": "It relies on that crate and should really only be used by clients of `vmbase`, given how low-level it is. For example, we don\u0027t want users of `open-dice` across AOSP to start using it, even if they\u0027re running in a \"baremetal\" environment.",
+      "parentUuid": "c3ad4d99_bf154170",
+      "range": {
+        "startLine": 7,
+        "startChar": 14,
+        "endLine": 7,
+        "endChar": 20
+      },
+      "revId": "87c269e5e062d007b8138e479249c4efb7c53fcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
