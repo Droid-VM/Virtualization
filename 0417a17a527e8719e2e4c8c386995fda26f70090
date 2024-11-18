@@ -1,0 +1,65 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f52a4dcf_f93409dd",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsRecoveryActivity.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-18T07:29:59Z",
+      "side": 1,
+      "message": "No snackbar here?\n\nThis block seems like the `InstallUtils.unInstall()` specific (given that L93 catches it already), but you only leave log and do nothing.",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 34
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "00dd6018_c98cfc01",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsRecoveryActivity.kt",
+              "range": {
+                "startLine": 89,
+                "startChar": 0,
+                "endLine": 102,
+                "endChar": 0
+              },
+              "replacement": "        if (keepRootfs) {\n            try {\n                InstallUtils.backupRootFs(this@SettingsRecoveryActivity)\n            } catch (e: IOException) {\n                Snackbar.make(\n                    findViewById(android.R.id.content),\n                    R.string.settings_recovery_error_due_to_backup,\n                    Snackbar.LENGTH_SHORT\n                ).show();\n                Log.e(TAG, \"cannot backup\", e)\n                return\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsRecoveryActivity.kt",
+              "range": {
+                "startLine": 103,
+                "startChar": 0,
+                "endLine": 106,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsRecoveryActivity.kt",
+              "range": {
+                "startLine": 107,
+                "startChar": 0,
+                "endLine": 107,
+                "endChar": 0
+              },
+              "replacement": "        InstallUtils.unInstall(this@SettingsRecoveryActivity)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0417a17a527e8719e2e4c8c386995fda26f70090",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
