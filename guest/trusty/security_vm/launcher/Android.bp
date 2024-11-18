@@ -29,7 +29,7 @@ prebuilt_etc {
             src: ":trusty_security_vm_signed",
         },
         arm64: {
-            src: ":trusty-test-lk.elf",
+            src: ":trusty_security_vm_signed",
             enabled: true,
         },
     },
@@ -39,6 +39,17 @@ prebuilt_etc {
 filegroup {
     name: "trusty_vm_sign_key",
     srcs: [":avb_testkey_rsa4096"],
+}
+
+raw_binary {
+    name: "trusty_security_vm_unsigned",
+    src: ":trusty-test-lk.elf",
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+    },
 }
 
 // python -c "import hashlib; print(hashlib.sha256(b'trusty_security_vm_salt').hexdigest())"
@@ -61,7 +72,7 @@ avb_add_hash_footer {
             enabled: true,
         },
         arm64: {
-            src: ":trusty-test-lk.elf",
+            src: ":trusty_security_vm_unsigned",
             enabled: true,
         },
     },
