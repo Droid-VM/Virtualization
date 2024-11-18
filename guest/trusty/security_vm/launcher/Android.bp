@@ -29,7 +29,7 @@ prebuilt_etc {
             src: ":trusty_security_vm_signed",
         },
         arm64: {
-            src: ":trusty-test-lk.elf",
+            src: ":trusty_security_vm_signed",
             enabled: true,
         },
     },
