@@ -675,20 +675,27 @@ public final class VirtualMachineConfig {
                 Optional.ofNullable(customImageConfig.getParams())
                         .map((params) -> TextUtils.join(" ", params))
                         .orElse("");
-        config.disks =
-                new DiskImage
-                        [Optional.ofNullable(customImageConfig.getDisks())
-                                .map(arr -> arr.length)
-                                .orElse(0)];
-        for (int i = 0; i < config.disks.length; i++) {
-            config.disks[i] = new DiskImage();
-            config.disks[i].writable = customImageConfig.getDisks()[i].isWritable();
+        List<DiskImage> disks = new ArrayList<>();
+        int diskCnt =
+                Optional.ofNullable(customImageConfig.getDisks()).map(arr -> arr.length).orElse(0);
+        for (int i = 0; i < diskCnt; i++) {
+            DiskImage diskImage = new DiskImage();
+            diskImage.writable = customImageConfig.getDisks()[i].isWritable();
             String diskImagePath = customImageConfig.getDisks()[i].getImagePath();
             if (diskImagePath != null) {
-                config.disks[i].image =
-                        ParcelFileDescriptor.open(
-                                new File(diskImagePath),
-                                config.disks[i].writable ? MODE_READ_WRITE : MODE_READ_ONLY);
+                try {
+                    diskImage.image =
+                            ParcelFileDescriptor.open(
+                                    new File(diskImagePath),
+                                    diskImage.writable ? MODE_READ_WRITE : MODE_READ_ONLY);
+                } catch (FileNotFoundException e) {
+                    if (customImageConfig.getDisks()[i].isOptional()) {
+                        Log.d(TAG, "file " + diskImagePath + " is not found, but optional", e);
+                        continue;
+                    } else {
+                        throw e;
+                    }
+                }
             }
 
             List<Partition> partitions = new ArrayList<>();
@@ -704,9 +711,10 @@ public final class VirtualMachineConfig {
                 part.guid = TextUtils.isEmpty(p.guid) ? null : p.guid;
                 partitions.add(part);
             }
-            config.disks[i].partitions = partitions.toArray(new Partition[0]);
+            diskImage.partitions = partitions.toArray(new Partition[0]);
+            disks.add(diskImage);
         }
-
+        config.disks = disks.toArray(new DiskImage[0]);
         config.sharedPaths =
                 new SharedPath
                         [Optional.ofNullable(customImageConfig.getSharedPaths())
