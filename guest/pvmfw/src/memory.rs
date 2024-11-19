@@ -15,7 +15,7 @@
 //! Low-level allocation and tracking of main memory.
 
 use crate::entry::RebootReason;
-use crate::fdt::{read_initrd_range_from, read_kernel_range_from, sanitize_device_tree};
+use crate::fdt::{read_initrd_range_from, read_kernel_range_from};
 use core::num::NonZeroUsize;
 use core::ops::Range;
 use core::slice;
@@ -25,7 +25,7 @@ use log::info;
 use log::warn;
 use vmbase::{
     layout::{self, crosvm},
-    memory::{init_shared_pool, map_data, map_rodata, resize_available_memory, SIZE_2MB, SIZE_4KB},
+    memory::{map_data, map_rodata, resize_available_memory, SIZE_2MB, SIZE_4KB},
     util::align_up,
 };
 
@@ -44,13 +44,7 @@ pub(crate) struct MemorySlices<'a> {
 }
 
 impl<'a> MemorySlices<'a> {
-    pub fn new(
-        fdt: usize,
-        kernel: usize,
-        kernel_size: usize,
-        vm_dtbo: Option<&mut [u8]>,
-        vm_ref_dt: Option<&[u8]>,
-    ) -> Result<Self, RebootReason> {
+    pub fn new(fdt: usize, kernel: usize, kernel_size: usize) -> Result<Self, RebootReason> {
         let fdt_size = NonZeroUsize::new(crosvm::FDT_MAX_SIZE).unwrap();
         // TODO - Only map the FDT as read-only, until we modify it right before jump_to_payload()
         // e.g. by generating a DTBO for a template DT in main() and, on return, re-map DT as RW,
@@ -66,7 +60,6 @@ impl<'a> MemorySlices<'a> {
             error!("Failed to load sanitized FDT: {e}");
             RebootReason::InvalidFdt
         })?;
-        let info = sanitize_device_tree(fdt, vm_dtbo, vm_ref_dt)?;
         debug!("Fdt passed validation!");
 
         let memory_range = fdt
@@ -84,11 +77,6 @@ impl<'a> MemorySlices<'a> {
         resize_available_memory(&memory_range).map_err(|e| {
             error!("Failed to use memory range value from DT: {memory_range:#x?}: {e}");
             RebootReason::InvalidFdt
-        })?;
-
-        init_shared_pool(info.swiotlb_info.fixed_range()).map_err(|e| {
-            error!("Failed to initialize shared pool: {e}");
-            RebootReason::InternalError
         })?;
 
         let kernel_range = read_kernel_range_from(fdt).map_err(|e| {
