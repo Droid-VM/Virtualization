@@ -212,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "493a4c93_4e2713d2",
+        "filename": "build/debian/vm_config.json.aarch64",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-19T14:24:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85111156_1d82c5a3",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 28
+      },
+      "revId": "3bb53bc91db9b8300f8fad6c528400f44c926363",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "102b7012_1f3f9f21",
@@ -225,6 +249,30 @@
       "writtenOn": "2024-11-19T02:26:23Z",
       "side": 1,
       "message": "Why do we need this in the config file? We don\u0027t have disk all the time. Can we add it only when needed?",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 9
+      },
+      "revId": "3bb53bc91db9b8300f8fad6c528400f44c926363",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a24e3190_937409c0",
+        "filename": "build/debian/vm_config.json.aarch64",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-19T14:24:42Z",
+      "side": 1,
+      "message": "as we discussed, modify VirtualMachineConfig.Builder if backup file exists instead of modifying vm_config.json",
+      "parentUuid": "102b7012_1f3f9f21",
       "range": {
         "startLine": 21,
         "startChar": 0,
