@@ -35,7 +35,7 @@ mod memory;
 use crate::bcc::Bcc;
 use crate::dice::PartialInputs;
 use crate::entry::RebootReason;
-use crate::fdt::modify_for_next_stage;
+use crate::fdt::{modify_for_next_stage, sanitize_device_tree};
 use crate::helpers::GUEST_PAGE_SIZE;
 use crate::instance::EntryBody;
 use crate::instance::Error as InstanceError;
@@ -54,7 +54,7 @@ use pvmfw_avb::DebugLevel;
 use pvmfw_embedded_key::PUBLIC_KEY;
 use vmbase::fdt::pci::{PciError, PciInfo};
 use vmbase::heap;
-use vmbase::memory::flush;
+use vmbase::memory::{flush, init_shared_pool};
 use vmbase::rand;
 use vmbase::virtio::pci;
 
@@ -66,6 +66,8 @@ fn main(
     ramdisk: Option<&[u8]>,
     current_bcc_handover: &[u8],
     mut debug_policy: Option<&[u8]>,
+    vm_dtbo: Option<&mut [u8]>,
+    vm_ref_dt: Option<&[u8]>,
 ) -> Result<(Range<usize>, bool), RebootReason> {
     info!("pVM firmware");
     debug!("FDT: {:?}", fdt.as_ptr());
@@ -97,14 +99,6 @@ fn main(
         debug_policy = None;
     }
 
-    // Set up PCI bus for VirtIO devices.
-    let pci_info = PciInfo::from_fdt(fdt).map_err(handle_pci_error)?;
-    debug!("PCI: {:#x?}", pci_info);
-    let mut pci_root = pci::initialize(pci_info).map_err(|e| {
-        error!("Failed to initialize PCI: {e}");
-        RebootReason::InternalError
-    })?;
-
     let verified_boot_data = verify_payload(signed_kernel, ramdisk, PUBLIC_KEY).map_err(|e| {
         error!("Failed to verify the payload: {e}");
         RebootReason::PayloadVerificationError
@@ -114,6 +108,19 @@ fn main(
         info!("Successfully verified a debuggable payload.");
         info!("Please disregard any previous libavb ERROR about initrd_normal.");
     }
+
+    let fdt_info = sanitize_device_tree(fdt, vm_dtbo, vm_ref_dt)?;
+    let pci_info = PciInfo::from_fdt(fdt).map_err(handle_pci_error)?;
+    debug!("PCI: {:#x?}", pci_info);
+    // Set up PCI bus for VirtIO devices.
+    let mut pci_root = pci::initialize(pci_info).map_err(|e| {
+        error!("Failed to initialize PCI: {e}");
+        RebootReason::InternalError
+    })?;
+    init_shared_pool(fdt_info.swiotlb_info.fixed_range()).map_err(|e| {
+        error!("Failed to initialize shared pool: {e}");
+        RebootReason::InternalError
+    })?;
 
     let next_bcc = heap::aligned_boxed_slice(NEXT_BCC_SIZE, GUEST_PAGE_SIZE).ok_or_else(|| {
         error!("Failed to allocate the next-stage BCC");
