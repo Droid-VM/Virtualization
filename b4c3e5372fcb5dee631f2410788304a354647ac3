@@ -34,6 +34,46 @@
       "parentUuid": "f9a0b1b6_18f88d6b",
       "revId": "b4c3e5372fcb5dee631f2410788304a354647ac3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ff45e63_503f13e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-11-19T12:26:03Z",
+      "side": 1,
+      "message": "Unsafe Rust LGTM",
+      "revId": "b4c3e5372fcb5dee631f2410788304a354647ac3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a8ed368_d314ea8a",
+        "filename": "guest/pvmfw/src/dice.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-11-19T12:26:03Z",
+      "side": 1,
+      "message": "nit: I know...it\u0027s just a test...but `SAFETY` requirement on the function itself since the caller is responsible",
+      "range": {
+        "startLine": 205,
+        "startChar": 7,
+        "endLine": 205,
+        "endChar": 13
+      },
+      "revId": "b4c3e5372fcb5dee631f2410788304a354647ac3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
