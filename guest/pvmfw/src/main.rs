@@ -35,15 +35,14 @@ mod rollback;
 use crate::bcc::Bcc;
 use crate::dice::PartialInputs;
 use crate::entry::RebootReason;
-use crate::fdt::{modify_for_next_stage, sanitize_device_tree};
+use crate::fdt::{modify_for_next_stage, read_instance_id, sanitize_device_tree};
 use crate::rollback::perform_rollback_protection;
 use alloc::borrow::Cow;
 use alloc::boxed::Box;
 use bssl_avf::Digester;
 use core::ops::Range;
-use cstr::cstr;
 use diced_open_dice::{bcc_handover_parse, DiceArtifacts, DiceContext, Hidden, VM_KEY_ALGORITHM};
-use libfdt::{Fdt, FdtNode};
+use libfdt::Fdt;
 use log::{debug, error, info, trace, warn};
 use pvmfw_avb::verify_payload;
 use pvmfw_avb::DebugLevel;
@@ -212,7 +211,15 @@ fn main(
 // Get the "salt" which is one of the input for DICE derivation.
 // This provides differentiation of secrets for different VM instances with same payloads.
 fn salt_from_instance_id(fdt: &Fdt) -> Result<Hidden, RebootReason> {
-    let id = instance_id(fdt)?;
+    let id = read_instance_id(fdt)
+        .map_err(|e| {
+            error!("Failed to get instance-id in DT: {e}");
+            RebootReason::InvalidFdt
+        })?
+        .ok_or_else(|| {
+            error!("Missing instance-id");
+            RebootReason::InvalidFdt
+        })?;
     let salt = Digester::sha512()
         .digest(&[&b"InstanceId:"[..], id].concat())
         .map_err(|e| {
@@ -222,29 +229,6 @@ fn salt_from_instance_id(fdt: &Fdt) -> Result<Hidden, RebootReason> {
         .try_into()
         .map_err(|_| RebootReason::InternalError)?;
     Ok(salt)
-}
-
-fn instance_id(fdt: &Fdt) -> Result<&[u8], RebootReason> {
-    let node = avf_untrusted_node(fdt)?;
-    let id = node.getprop(cstr!("instance-id")).map_err(|e| {
-        error!("Failed to get instance-id in DT: {e}");
-        RebootReason::InvalidFdt
-    })?;
-    id.ok_or_else(|| {
-        error!("Missing instance-id");
-        RebootReason::InvalidFdt
-    })
-}
-
-fn avf_untrusted_node(fdt: &Fdt) -> Result<FdtNode, RebootReason> {
-    let node = fdt.node(cstr!("/avf/untrusted")).map_err(|e| {
-        error!("Failed to get /avf/untrusted node: {e}");
-        RebootReason::InvalidFdt
-    })?;
-    node.ok_or_else(|| {
-        error!("/avf/untrusted node is missing in DT");
-        RebootReason::InvalidFdt
-    })
 }
 
 /// Logs the given PCI error and returns the appropriate `RebootReason`.

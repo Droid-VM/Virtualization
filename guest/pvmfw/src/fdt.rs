@@ -113,6 +113,24 @@ pub fn read_initrd_range_from(fdt: &Fdt) -> libfdt::Result<Option<Range<usize>>>
     Ok(None)
 }
 
+/// Read /avf/untrusted/instance-id, if present.
+pub fn read_instance_id(fdt: &Fdt) -> libfdt::Result<Option<&[u8]>> {
+    read_untrusted_prop(fdt, cstr!("instance-id"))
+}
+
+/// Read /avf/untrusted/defer-rollback-protection, if present.
+pub fn read_defer_rollback_protection(fdt: &Fdt) -> libfdt::Result<Option<&[u8]>> {
+    read_untrusted_prop(fdt, cstr!("defer-rollback-protection"))
+}
+
+fn read_untrusted_prop<'a>(fdt: &'a Fdt, prop: &CStr) -> libfdt::Result<Option<&'a [u8]>> {
+    if let Some(node) = fdt.node(cstr!("/avf/untrusted"))? {
+        node.getprop(prop)
+    } else {
+        Ok(None)
+    }
+}
+
 fn patch_initrd_range(fdt: &mut Fdt, initrd_range: &Range<usize>) -> libfdt::Result<()> {
     let start = u32::try_from(initrd_range.start).unwrap();
     let end = u32::try_from(initrd_range.end).unwrap();
