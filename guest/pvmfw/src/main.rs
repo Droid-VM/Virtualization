@@ -83,8 +83,6 @@ fn main(
     })?;
     trace!("BCC: {bcc_handover:x?}");
 
-    let cdi_seal = bcc_handover.cdi_seal();
-
     let bcc = Bcc::new(bcc_handover.bcc()).map_err(|e| {
         error!("{e}");
         RebootReason::InvalidBcc
@@ -96,14 +94,6 @@ fn main(
         warn!("Ignoring debug policy, BCC does not indicate Debug mode");
         debug_policy = None;
     }
-
-    // Set up PCI bus for VirtIO devices.
-    let pci_info = PciInfo::from_fdt(fdt).map_err(handle_pci_error)?;
-    debug!("PCI: {:#x?}", pci_info);
-    let mut pci_root = pci::initialize(pci_info).map_err(|e| {
-        error!("Failed to initialize PCI: {e}");
-        RebootReason::InternalError
-    })?;
 
     let verified_boot_data = verify_payload(signed_kernel, ramdisk, PUBLIC_KEY).map_err(|e| {
         error!("Failed to verify the payload: {e}");
@@ -160,6 +150,14 @@ fn main(
         (false, salt_from_instance_id(fdt)?)
     } else {
         info!("Fallback to instance.img based rollback checks");
+        let pci_info = PciInfo::from_fdt(fdt).map_err(handle_pci_error)?;
+        debug!("PCI: {:#x?}", pci_info);
+        // Set up PCI bus for VirtIO devices.
+        let mut pci_root = pci::initialize(pci_info).map_err(|e| {
+            error!("Failed to initialize PCI: {e}");
+            RebootReason::InternalError
+        })?;
+        let cdi_seal = bcc_handover.cdi_seal();
         let (recorded_entry, mut instance_img, header_index) =
             get_recorded_entry(&mut pci_root, cdi_seal).map_err(|e| {
                 error!("Failed to get entry from instance.img: {e}");
