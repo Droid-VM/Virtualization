@@ -90,9 +90,15 @@ const CONSOLE_TTYS0: &str = "ttyS0";
 /// If the VM doesn't move to the Started state within this amount time, a hang-up error is
 /// triggered.
 static BOOT_HANGUP_TIMEOUT: LazyLock<Duration> = LazyLock::new(|| {
+    let hw_prop = system_properties::read("ro.hardware")
+        .expect("Unable to read system property ro.boot.hardware");
+
     if nested_virt::is_nested_virtualization().unwrap() {
         // Nested virtualization is slow, so we need a longer timeout.
         Duration::from_secs(300)
+    } else if hw_prop == Some("qemu_trusty".to_string()) {
+        // Running in qemu is slow, so use a longer timeout.
+        Duration::from_secs(60)
     } else {
         Duration::from_secs(30)
     }
