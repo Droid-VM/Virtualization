@@ -42,19 +42,24 @@ pub fn perform_rollback_protection(
     cdi_seal: &[u8],
     instance_hash: Option<Hidden>,
 ) -> Result<(bool, Hidden, bool), RebootReason> {
-    if should_defer_rollback_protection(fdt)?
+    if cfg!(llpvm_changes)
+        && should_defer_rollback_protection(fdt)?
         && verified_boot_data.has_capability(Capability::SecretkeeperProtection)
     {
         perform_deferred_rollback_protection(verified_boot_data)?;
         Ok((false, instance_hash.unwrap(), true))
-    } else if verified_boot_data.has_capability(Capability::RemoteAttest) {
+    } else if cfg!(llpvm_changes) && verified_boot_data.has_capability(Capability::RemoteAttest) {
         perform_fixed_index_rollback_protection(verified_boot_data)?;
         Ok((false, instance_hash.unwrap(), false))
-    } else if verified_boot_data.has_capability(Capability::TrustySecurityVm) {
+    } else if cfg!(llpvm_changes) && verified_boot_data.has_capability(Capability::TrustySecurityVm)
+    {
         skip_rollback_protection()?;
         Ok((false, instance_hash.unwrap(), false))
+    } else if verified_boot_data.has_capability(Capability::RemoteAttest) {
+        // Get recorded salt as updated RKP VM should retain the same CDIs post-OTA.
+        perform_legacy_rollback_protection(dice_inputs, pci_root, cdi_seal, None, false)
     } else {
-        perform_legacy_rollback_protection(dice_inputs, pci_root, cdi_seal, instance_hash)
+        perform_legacy_rollback_protection(dice_inputs, pci_root, cdi_seal, instance_hash, true)
     }
 }
 
@@ -102,6 +107,7 @@ fn perform_legacy_rollback_protection(
     pci_root: &mut PciRoot,
     cdi_seal: &[u8],
     instance_hash: Option<Hidden>,
+    hashes_must_match: bool,
 ) -> Result<(bool, Hidden, bool), RebootReason> {
     info!("Fallback to instance.img based rollback checks");
     let (recorded_entry, mut instance_img, header_index) = get_recorded_entry(pci_root, cdi_seal)
@@ -110,16 +116,21 @@ fn perform_legacy_rollback_protection(
         RebootReason::InternalError
     })?;
     let (new_instance, salt) = if let Some(entry) = recorded_entry {
-        check_dice_measurements_match_entry(dice_inputs, &entry)?;
-        let salt = instance_hash.unwrap_or(entry.salt);
+        if hashes_must_match {
+            check_dice_measurements_match_entry(dice_inputs, &entry)?;
+        }
+        let salt = if cfg!(llpvm_changes) { instance_hash.unwrap() } else { entry.salt };
         (false, salt)
     } else {
         // New instance!
-        let salt = instance_hash.map_or_else(rand::random_array, Ok).map_err(|e| {
-            error!("Failed to generated instance.img salt: {e}");
-            RebootReason::InternalError
-        })?;
-
+        let salt = if cfg!(llpvm_changes) {
+            instance_hash.unwrap()
+        } else {
+            rand::random_array().map_err(|e| {
+                error!("Failed to generated instance.img salt: {e}");
+                RebootReason::InternalError
+            })?
+        };
         let entry = EntryBody::new(dice_inputs, &salt);
         record_instance_entry(&entry, cdi_seal, &mut instance_img, header_index).map_err(|e| {
             error!("Failed to get recorded entry in instance.img: {e}");
