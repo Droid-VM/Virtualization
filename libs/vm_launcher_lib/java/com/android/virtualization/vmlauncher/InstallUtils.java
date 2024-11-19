@@ -43,6 +43,7 @@ public class InstallUtils {
     private static final String VM_CONFIG_FILENAME = "vm_config.json";
     private static final String COMPRESSED_PAYLOAD_FILENAME = "images.tar.gz";
     private static final String ROOTFS_FILENAME = "root_part";
+    private static final String BACKUP_FILENAME = "root_part_backup";
     private static final String INSTALLATION_COMPLETED_FILENAME = "completed";
     private static final String PAYLOAD_DIR = "linux";
 
@@ -52,6 +53,13 @@ public class InstallUtils {
 
     public static boolean isImageInstalled(Context context) {
         return Files.exists(getInstallationCompletedPath(context));
+    }
+
+    public static void backupRootFs(Context context) throws IOException {
+        Files.copy(
+                getRootfsFile(context).toPath(),
+                getBackupFile(context).toPath(),
+                StandardCopyOption.REPLACE_EXISTING);
     }
 
     public static void unInstall(Context context) throws IOException {
@@ -89,6 +97,10 @@ public class InstallUtils {
 
     public static File getInternalStorageDir(Context context) {
         return new File(context.getFilesDir(), PAYLOAD_DIR);
+    }
+
+    public static File getBackupFile(Context context) {
+        return new File(context.getFilesDir(), BACKUP_FILENAME);
     }
 
     private static Path getInstallationCompletedPath(Context context) {
