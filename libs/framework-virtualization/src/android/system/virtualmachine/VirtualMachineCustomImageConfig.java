@@ -31,6 +31,7 @@ public class VirtualMachineCustomImageConfig {
     private static final String KEY_BOOTLOADER = "bootloader";
     private static final String KEY_PARAMS = "params";
     private static final String KEY_DISK_WRITABLES = "disk_writables";
+    private static final String KEY_DISK_OPTIONALS = "disk_optionals";
     private static final String KEY_DISK_IMAGES = "disk_images";
     private static final String KEY_PARTITION_LABELS = "partition_labels_";
     private static final String KEY_PARTITION_IMAGES = "partition_images_";
@@ -183,13 +184,19 @@ public class VirtualMachineCustomImageConfig {
             }
         }
         boolean[] writables = customImageConfigBundle.getBooleanArray(KEY_DISK_WRITABLES);
+        boolean[] optionals = customImageConfigBundle.getBooleanArray(KEY_DISK_OPTIONALS);
         String[] diskImages = customImageConfigBundle.getStringArray(KEY_DISK_IMAGES);
         if (writables != null && diskImages != null) {
             if (writables.length == diskImages.length) {
                 for (int i = 0; i < writables.length; i++) {
                     String diskImage = diskImages[i];
                     diskImage = diskImage.equals("") ? null : diskImage;
-                    Disk disk = writables[i] ? Disk.RWDisk(diskImage) : Disk.RODisk(diskImage);
+                    boolean optional =
+                            (optionals != null && optionals.length > i) ? optionals[i] : false;
+                    Disk disk =
+                            writables[i]
+                                    ? Disk.RWDisk(diskImage, optional)
+                                    : Disk.RODisk(diskImage, optional);
                     String[] labels =
                             customImageConfigBundle.getStringArray(KEY_PARTITION_LABELS + i);
                     String[] images =
@@ -236,9 +243,11 @@ public class VirtualMachineCustomImageConfig {
 
         if (disks != null) {
             boolean[] writables = new boolean[disks.length];
+            boolean[] optionals = new boolean[disks.length];
             String[] images = new String[disks.length];
             for (int i = 0; i < disks.length; i++) {
                 writables[i] = disks[i].writable;
+                optionals[i] = disks[i].optional;
                 String imagePath = disks[i].imagePath;
                 images[i] = imagePath == null ? "" : imagePath;
 
@@ -397,21 +406,23 @@ public class VirtualMachineCustomImageConfig {
         private final boolean writable;
         private final String imagePath;
         private final List<Partition> partitions;
+        private final boolean optional;
 
-        private Disk(boolean writable, String imagePath) {
+        private Disk(boolean writable, String imagePath, boolean optional) {
             this.writable = writable;
             this.imagePath = imagePath;
             this.partitions = new ArrayList<>();
+            this.optional = optional;
         }
 
         /** @hide */
-        public static Disk RWDisk(String imagePath) {
-            return new Disk(true, imagePath);
+        public static Disk RWDisk(String imagePath, boolean optional) {
+            return new Disk(true, imagePath, optional);
         }
 
         /** @hide */
-        public static Disk RODisk(String imagePath) {
-            return new Disk(false, imagePath);
+        public static Disk RODisk(String imagePath, boolean optional) {
+            return new Disk(false, imagePath, optional);
         }
 
         /** @hide */
@@ -433,6 +444,11 @@ public class VirtualMachineCustomImageConfig {
         /** @hide */
         public List<Partition> getPartitions() {
             return partitions;
+        }
+
+        /** @hide */
+        public boolean isOptional() {
+            return optional;
         }
     }
 
