@@ -31,7 +31,7 @@ use vmclient::VmInstance;
 pub struct MicrofuchsiaInstance {
     _vm_instance: VmInstance,
     _lazy_service_guard: LazyServiceGuard,
-    _pty: Pty,
+    _pty: Option<Pty>,
 }
 
 pub struct InstanceStarter {
@@ -64,10 +64,14 @@ impl InstanceStarter {
         let initrd = Some(ParcelFileDescriptor::new(initrd_fd));
 
         // Prepare a pty for console input/output.
-        let pty = openpty()?;
-        let console_in = Some(pty.leader.try_clone().context("cloning pty")?);
-        let console_out = Some(pty.leader.try_clone().context("cloning pty")?);
-
+        let (pty, console_in, console_out) = if cfg!(enable_console) {
+            let pty = Some(openpty()?);
+            let console_in = Some(pty.leader.try_clone().context("cloning pty")?);
+            let console_out = Some(pty.leader.try_clone().context("cloning pty")?);
+            (pty, console_in, console_out)
+        } else {
+            (None, None, None)
+        };
         let config = VirtualMachineConfig::RawConfig(VirtualMachineRawConfig {
             name: "Microfuchsia".into(),
             instanceId: instance_id,
@@ -80,7 +84,7 @@ impl InstanceStarter {
             memoryMib: 256,
             cpuTopology: CpuTopology::ONE_CPU,
             platformVersion: "1.0.0".into(),
-            // Fuchsia uses serial for console by default.
+            #[cfg(enable_console)]
             consoleInputDevice: Some("ttyS0".into()),
             ..Default::default()
         });
