@@ -42,7 +42,8 @@ pub fn perform_rollback_protection(
     cdi_seal: &[u8],
     instance_hash: Option<Hidden>,
 ) -> Result<(bool, Hidden, bool), RebootReason> {
-    if verified_boot_data.has_capability(Capability::SecretkeeperProtection)
+    if cfg!(llpvm_changes)
+        && verified_boot_data.has_capability(Capability::SecretkeeperProtection)
         && should_defer_rollback_protection(fdt)?
     {
         info!("Guest OS is capable of Secretkeeper protection, deferring rollback protection");
@@ -66,17 +67,21 @@ pub fn perform_rollback_protection(
                 verified_boot_data.rollback_index
             );
             Err(RebootReason::InvalidPayload)
-        } else {
+        } else if cfg!(llpvm_changes) {
             Ok((false, instance_hash.unwrap(), false))
+        } else {
+            // Get recorded salt as updated RKP VM should retain the same CDIs post-OTA.
+            perform_legacy_rollback_protection(dice_inputs, pci_root, cdi_seal, None, true)
         }
-    } else if verified_boot_data.has_capability(Capability::TrustySecurityVm) {
+    } else if cfg!(llpvm_changes) && verified_boot_data.has_capability(Capability::TrustySecurityVm)
+    {
         // The rollback protection of Trusty VMs are handled by AuthMgr, so we don't need to
         // handle it here.
         info!("Trusty Security VM detected");
         Ok((false, instance_hash.unwrap(), false))
     } else {
         info!("Fallback to instance.img based rollback checks");
-        perform_legacy_rollback_protection(dice_inputs, pci_root, cdi_seal, instance_hash)
+        perform_legacy_rollback_protection(dice_inputs, pci_root, cdi_seal, instance_hash, false)
     }
 }
 
@@ -86,6 +91,7 @@ fn perform_legacy_rollback_protection(
     pci_root: &mut PciRoot,
     cdi_seal: &[u8],
     instance_hash: Option<Hidden>,
+    skip_check: bool,
 ) -> Result<(bool, Hidden, bool), RebootReason> {
     let (recorded_entry, mut instance_img, header_index) = get_recorded_entry(pci_root, cdi_seal)
         .map_err(|e| {
@@ -93,16 +99,24 @@ fn perform_legacy_rollback_protection(
         RebootReason::InternalError
     })?;
     let (new_instance, salt) = if let Some(entry) = recorded_entry {
-        check_dice_measurements_match_entry(dice_inputs, &entry)?;
-        let salt = instance_hash.unwrap_or(entry.salt);
-        (false, salt)
+        if !skip_check {
+            check_dice_measurements_match_entry(dice_inputs, &entry)?;
+        }
+        if cfg!(llpvm_changes) {
+            (false, instance_hash.unwrap())
+        } else {
+            (false, entry.salt)
+        }
     } else {
         // New instance!
-        let salt = instance_hash.map_or_else(rand::random_array, Ok).map_err(|e| {
-            error!("Failed to generated instance.img salt: {e}");
-            RebootReason::InternalError
-        })?;
-
+        let salt = if cfg!(llpvm_changes) {
+            instance_hash.unwrap()
+        } else {
+            rand::random_array().map_err(|e| {
+                error!("Failed to generated instance.img salt: {e}");
+                RebootReason::InternalError
+            })?
+        };
         let entry = EntryBody::new(dice_inputs, &salt);
         record_instance_entry(&entry, cdi_seal, &mut instance_img, header_index).map_err(|e| {
             error!("Failed to get recorded entry in instance.img: {e}");
