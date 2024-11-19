@@ -26,8 +26,6 @@ import com.android.virtualization.vmlauncher.proto.DebianServiceGrpc;
 import com.android.virtualization.vmlauncher.proto.ForwardingRequestItem;
 import com.android.virtualization.vmlauncher.proto.IpAddr;
 import com.android.virtualization.vmlauncher.proto.QueueOpeningRequest;
-import com.android.virtualization.vmlauncher.proto.ReportVmActivePortsRequest;
-import com.android.virtualization.vmlauncher.proto.ReportVmActivePortsResponse;
 import com.android.virtualization.vmlauncher.proto.ReportVmIpAddrResponse;
 
 import io.grpc.stub.StreamObserver;
@@ -73,18 +71,6 @@ final class DebianServiceImpl extends DebianServiceGrpc.DebianServiceImplBase {
             editor.putStringSet(PREFERENCE_FORWARDING_PORTS, ports);
             editor.apply();
         }
-    }
-
-    @Override
-    public void reportVmActivePorts(
-            ReportVmActivePortsRequest request,
-            StreamObserver<ReportVmActivePortsResponse> responseObserver) {
-        Log.d(DebianServiceImpl.TAG, "reportVmActivePorts: " + request.toString());
-        // TODO(b/340126051): Modify shared preference based on information in the request.
-        ReportVmActivePortsResponse reply =
-                ReportVmActivePortsResponse.newBuilder().setSuccess(true).build();
-        responseObserver.onNext(reply);
-        responseObserver.onCompleted();
     }
 
     @Override
