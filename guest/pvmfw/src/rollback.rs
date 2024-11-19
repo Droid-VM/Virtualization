@@ -158,7 +158,7 @@ fn ensure_dice_measurements_match_entry(
 }
 
 fn should_defer_rollback_protection(fdt: &Fdt) -> Result<bool, RebootReason> {
-    let node = avf_untrusted_node(fdt)?;
+    let Some(node) = avf_untrusted_node(fdt)? else { return Ok(false) };
     let defer_rbp = node
         .getprop(cstr!("defer-rollback-protection"))
         .map_err(|e| {
@@ -169,13 +169,10 @@ fn should_defer_rollback_protection(fdt: &Fdt) -> Result<bool, RebootReason> {
     Ok(defer_rbp)
 }
 
-fn avf_untrusted_node(fdt: &Fdt) -> Result<FdtNode, RebootReason> {
+fn avf_untrusted_node(fdt: &Fdt) -> Result<Option<FdtNode>, RebootReason> {
     let node = fdt.node(cstr!("/avf/untrusted")).map_err(|e| {
         error!("Failed to get /avf/untrusted node: {e}");
         RebootReason::InvalidFdt
     })?;
-    node.ok_or_else(|| {
-        error!("/avf/untrusted node is missing in DT");
-        RebootReason::InvalidFdt
-    })
+    Ok(node)
 }
