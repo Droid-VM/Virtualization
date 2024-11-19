@@ -127,10 +127,9 @@ fn main(
         RebootReason::InternalError
     })?;
 
-    let instance_hash = if cfg!(llpvm_changes) { Some(salt_from_instance_id(fdt)?) } else { None };
     let defer_rollback_protection = should_defer_rollback_protection(fdt)?
         && verified_boot_data.has_capability(Capability::SecretkeeperProtection);
-    let (new_instance, salt) = if defer_rollback_protection {
+    let (new_instance, salt) = if cfg!(llpvm_changes) && defer_rollback_protection {
         info!("Guest OS is capable of Secretkeeper protection, deferring rollback protection");
         // rollback_index of the image is used as security_version and is expected to be > 0 to
         // discourage implicit allocation.
@@ -138,8 +137,8 @@ fn main(
             error!("Expected positive rollback_index, found 0");
             return Err(RebootReason::InvalidPayload);
         };
-        (false, instance_hash.unwrap())
-    } else if verified_boot_data.has_capability(Capability::RemoteAttest) {
+        (false, salt_from_instance_id(fdt)?)
+    } else if cfg!(llpvm_changes) && verified_boot_data.has_capability(Capability::RemoteAttest) {
         info!("Service VM capable of remote attestation detected, performing version checks");
         if service_vm_version::VERSION != verified_boot_data.rollback_index {
             // For RKP VM, we only boot if the version in the AVB footer of its kernel matches
@@ -152,12 +151,13 @@ fn main(
             );
             return Err(RebootReason::InvalidPayload);
         }
-        (false, instance_hash.unwrap())
-    } else if verified_boot_data.has_capability(Capability::TrustySecurityVm) {
+        (false, salt_from_instance_id(fdt)?)
+    } else if cfg!(llpvm_changes) && verified_boot_data.has_capability(Capability::TrustySecurityVm)
+    {
         // The rollback protection of Trusty VMs are handled by AuthMgr, so we don't need to
         // handle it here.
         info!("Trusty Security VM detected");
-        (false, instance_hash.unwrap())
+        (false, salt_from_instance_id(fdt)?)
     } else {
         info!("Fallback to instance.img based rollback checks");
         let (recorded_entry, mut instance_img, header_index) =
@@ -165,17 +165,21 @@ fn main(
                 error!("Failed to get entry from instance.img: {e}");
                 RebootReason::InternalError
             })?;
-        let (new_instance, salt) = if let Some(entry) = recorded_entry {
-            check_dice_measurements_match_entry(&dice_inputs, &entry)?;
-            let salt = instance_hash.unwrap_or(entry.salt);
-            (false, salt)
+        let salt = if cfg!(llpvm_changes) {
+            salt_from_instance_id(fdt)?
+        } else if let Some(ref entry) = recorded_entry {
+            entry.salt
         } else {
             // New instance!
-            let salt = instance_hash.map_or_else(rand::random_array, Ok).map_err(|e| {
+            rand::random_array().map_err(|e| {
                 error!("Failed to generated instance.img salt: {e}");
                 RebootReason::InternalError
-            })?;
-
+            })?
+        };
+        if let Some(ref entry) = recorded_entry {
+            check_dice_measurements_match_entry(&dice_inputs, entry)?;
+        } else {
+            // New instance!
             let entry = EntryBody::new(&dice_inputs, &salt);
             record_instance_entry(&entry, cdi_seal, &mut instance_img, header_index).map_err(
                 |e| {
@@ -183,9 +187,8 @@ fn main(
                     RebootReason::InternalError
                 },
             )?;
-            (true, salt)
         };
-        (new_instance, salt)
+        (recorded_entry.is_some(), salt)
     };
     trace!("Got salt for instance: {salt:x?}");
 
@@ -217,7 +220,7 @@ fn main(
         .write_next_bcc(
             new_bcc_handover.as_ref(),
             &salt,
-            instance_hash,
+            cfg!(llpvm_changes).then_some(salt),
             defer_rollback_protection,
             next_bcc,
             dice_context,
