@@ -35,7 +35,7 @@ mod memory;
 use crate::bcc::Bcc;
 use crate::dice::PartialInputs;
 use crate::entry::RebootReason;
-use crate::fdt::modify_for_next_stage;
+use crate::fdt::{modify_for_next_stage, read_defer_rollback_protection, read_instance_id};
 use crate::helpers::GUEST_PAGE_SIZE;
 use crate::instance::EntryBody;
 use crate::instance::Error as InstanceError;
@@ -46,7 +46,7 @@ use bssl_avf::Digester;
 use core::ops::Range;
 use cstr::cstr;
 use diced_open_dice::{bcc_handover_parse, DiceArtifacts, DiceContext, Hidden, VM_KEY_ALGORITHM};
-use libfdt::{Fdt, FdtNode};
+use libfdt::Fdt;
 use log::{debug, error, info, trace, warn};
 use pvmfw_avb::verify_payload;
 use pvmfw_avb::Capability;
@@ -290,7 +290,15 @@ fn ensure_dice_measurements_match_entry(
 // Get the "salt" which is one of the input for DICE derivation.
 // This provides differentiation of secrets for different VM instances with same payloads.
 fn salt_from_instance_id(fdt: &Fdt) -> Result<Hidden, RebootReason> {
-    let id = instance_id(fdt)?;
+    let id = read_instance_id(fdt)
+        .map_err(|e| {
+            error!("Failed to get instance-id in DT: {e}");
+            RebootReason::InvalidFdt
+        })?
+        .ok_or_else(|| {
+            error!("Missing instance-id");
+            RebootReason::InvalidFdt
+        })?;
     let salt = Digester::sha512()
         .digest(&[&b"InstanceId:"[..], id].concat())
         .map_err(|e| {
@@ -302,39 +310,12 @@ fn salt_from_instance_id(fdt: &Fdt) -> Result<Hidden, RebootReason> {
     Ok(salt)
 }
 
-fn instance_id(fdt: &Fdt) -> Result<&[u8], RebootReason> {
-    let node = avf_untrusted_node(fdt)?;
-    let id = node.getprop(cstr!("instance-id")).map_err(|e| {
-        error!("Failed to get instance-id in DT: {e}");
-        RebootReason::InvalidFdt
-    })?;
-    id.ok_or_else(|| {
-        error!("Missing instance-id");
-        RebootReason::InvalidFdt
-    })
-}
-
 fn should_defer_rollback_protection(fdt: &Fdt) -> Result<bool, RebootReason> {
-    let node = avf_untrusted_node(fdt)?;
-    let defer_rbp = node
-        .getprop(cstr!("defer-rollback-protection"))
-        .map_err(|e| {
-            error!("Failed to get defer-rollback-protection property in DT: {e}");
-            RebootReason::InvalidFdt
-        })?
-        .is_some();
-    Ok(defer_rbp)
-}
-
-fn avf_untrusted_node(fdt: &Fdt) -> Result<FdtNode, RebootReason> {
-    let node = fdt.node(cstr!("/avf/untrusted")).map_err(|e| {
-        error!("Failed to get /avf/untrusted node: {e}");
+    let defer_rbp = read_defer_rollback_protection(fdt).map_err(|e| {
+        error!("Failed to get defer-rollback-protection property in DT: {e}");
         RebootReason::InvalidFdt
     })?;
-    node.ok_or_else(|| {
-        error!("/avf/untrusted node is missing in DT");
-        RebootReason::InvalidFdt
-    })
+    Ok(defer_rbp.is_some())
 }
 
 /// Logs the given PCI error and returns the appropriate `RebootReason`.
