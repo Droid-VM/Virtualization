@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a9b9d7f6_3b3a11dd",
+        "filename": "guest/trusty/test_vm/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-11-20T11:02:01Z",
+      "side": 1,
+      "message": "Especially, the arm64 Trusty VM cannot be loaded in protected kernel mode as specified in the cl yet. Can we add it later when we have a config that work?",
+      "parentUuid": "38be6c49_4ed5f3e0",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 44
+      },
+      "revId": "f2ee0667b0761869bc513cf50592a1fd49d4663c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b5993d97_1e3e1a17",
         "filename": "guest/trusty/test_vm/AndroidTest.xml",
         "patchSetId": 1
