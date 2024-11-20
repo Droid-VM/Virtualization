@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87c1413a_89b479a3",
+        "filename": "guest/trusty/security_vm/TEST_MAPPING",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-11-20T09:31:39Z",
+      "side": 1,
+      "message": "This test can be too slow for presubmit. Can we add some faster tests to presubmit first, such as the following?\n\n- VtsAidlSharedSecretTargetTest\n- VtsHalRemotelyProvisionedComponentTargetTest\n\nOtherwise, should we follow the convention of adding the test to postsubmit first? After collecting sufficient SLO data, we can then move it to presubmit.",
+      "range": {
+        "startLine": 2,
+        "startChar": 22,
+        "endLine": 2,
+        "endChar": 31
+      },
+      "revId": "10e7b672527ce50c835e1696742eabaf7d542ea9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
