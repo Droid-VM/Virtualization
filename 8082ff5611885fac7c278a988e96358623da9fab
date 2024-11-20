@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d717c716_1b1c5761",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1949,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-11-20T17:54:55Z",
+      "side": 1,
+      "message": "This module is packaged in system partitions is not the HAL implementation but just a proxy to HAL. The reference HAL \u0026 TA implementation are in [1] [2]\n\n[1] https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:system/secretkeeper/hal/src/lib.rs;l\u003d62-112\n\n[2] https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:system/secretkeeper/core/src/ta.rs;l\u003d97\n\nIf you\u0027re looking to unblock the HAL interface, one way would be (temporarily) having pvmfw inject the secretkeeper public_key the value of /avf/secretkeeper_public_key somewhere in ref DT[1]\n\n[1] https://source.corp.google.com/h/android/platform/superproject/+/android-14.0.0_r51:packages/modules/Virtualization/pvmfw/src/fdt.rs;l\u003d988-991?q\u003dpvmfw%20avf%2F%20device_tree",
+      "range": {
+        "startLine": 1949,
+        "startChar": 0,
+        "endLine": 1949,
+        "endChar": 24
+      },
+      "revId": "8082ff5611885fac7c278a988e96358623da9fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
