@@ -411,19 +411,3 @@ rust_library_rlib {
     srcs: [":pvmfw_fdt_template_rs"],
     crate_name: "pvmfw_fdt_template",
 }
-
-bootimg {
-    name: "pvmfw_img",
-    stem: "pvmfw.img",
-    kernel_prebuilt: ":pvmfw_bin",
-    header_version: "3",
-    partition_name: "pvmfw",
-    enabled: false,
-    target: {
-        android_arm64: {
-            enabled: true,
-        },
-    },
-    use_avb: true,
-    avb_private_key: ":pvmfw_sign_key",
-}
