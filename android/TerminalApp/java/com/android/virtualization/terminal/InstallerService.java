@@ -21,11 +21,17 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.content.pm.ServiceInfo;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.os.Build;
+import android.os.Environment;
 import android.os.IBinder;
 import android.os.SELinux;
+import android.util.DataUnit;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.internal.annotations.GuardedBy;
@@ -70,9 +76,14 @@ public class InstallerService extends Service {
     private boolean mIsInstalling;
 
     @GuardedBy("mLock")
+    private boolean mHasWifi;
+
+    @GuardedBy("mLock")
     private IInstallProgressListener mListener;
 
     private ExecutorService mExecutorService;
+    private ConnectivityManager mConnectivityManager;
+    private NetworkCallback mNetworkCallback;
 
     @Override
     public void onCreate() {
@@ -92,6 +103,18 @@ public class InstallerService extends Service {
                         .build();
 
         mExecutorService = Executors.newSingleThreadExecutor();
+
+        mConnectivityManager = getSystemService(ConnectivityManager.class);
+        Network defaultNetwork = mConnectivityManager.getBoundNetworkForProcess();
+        if (defaultNetwork != null) {
+            NetworkCapabilities capability =
+                    mConnectivityManager.getNetworkCapabilities(defaultNetwork);
+            if (capability != null) {
+                mHasWifi = capability.hasTransport(NetworkCapabilities.TRANSPORT_WIFI);
+            }
+        }
+        mNetworkCallback = new NetworkCallback();
+        mConnectivityManager.registerDefaultNetworkCallback(mNetworkCallback);
     }
 
     @Nullable
@@ -117,9 +140,10 @@ public class InstallerService extends Service {
         if (mExecutorService != null) {
             mExecutorService.shutdown();
         }
+        mConnectivityManager.unregisterNetworkCallback(mNetworkCallback);
     }
 
-    private void requestInstall() {
+    private void requestInstall(boolean isWifiOnly) {
         synchronized (mLock) {
             if (mIsInstalling) {
                 Log.i(TAG, "already installing..");
@@ -138,8 +162,7 @@ public class InstallerService extends Service {
 
         mExecutorService.execute(
                 () -> {
-                    // TODO(b/374015561): Provide progress update
-                    boolean success = downloadFromSdcard() || downloadFromUrl();
+                    boolean success = downloadFromSdcard() || downloadFromUrl(isWifiOnly);
                     if (success) {
                         reLabelImagesSELinuxContext();
                     }
@@ -188,10 +211,22 @@ public class InstallerService extends Service {
         return false;
     }
 
+    private boolean isNetworkCapable(boolean isWifiOnly) {
+        synchronized (mLock) {
+            return mHasWifi || !isWifiOnly;
+        }
+    }
+
     // TODO(b/374015561): Support pause/resume download
     // TODO(b/374015561): Wait for Wi-Fi on metered network if requested.
-    private boolean downloadFromUrl() {
+    private boolean downloadFromUrl(boolean isWifiOnly) {
         Log.i(TAG, "trying to download from " + IMAGE_URL);
+
+        if (isNetworkCapable(isWifiOnly)) {
+            Log.e(TAG, "Install isn't started because Wifi isn't available");
+            notifyError(getString(R.string.installer_error_no_wifi));
+            return false;
+        }
 
         try (BufferedInputStream inputStream =
                         new BufferedInputStream(new URL(IMAGE_URL).openStream());
@@ -201,6 +236,11 @@ public class InstallerService extends Service {
             Path baseDir = InstallUtils.getInternalStorageDir(this).toPath();
             Files.createDirectories(baseDir);
             while ((entry = tar.getNextEntry()) != null) {
+                if (!isNetworkCapable(isWifiOnly)) {
+                    Log.e(TAG, "Install failed because Wifi is gone");
+                    notifyError(getString(R.string.installer_error_no_wifi));
+                    return false;
+                }
                 Path extractTo = baseDir.resolve(entry.getName());
                 if (entry.isDirectory()) {
                     Files.createDirectories(extractTo);
@@ -214,14 +254,16 @@ public class InstallerService extends Service {
             notifyError(getString(R.string.installer_install_network_error_message));
             return false;
         } catch (IOException e) {
-            // TODO(b/374015561): Provide more finer grained error message
             Log.e(TAG, "Installation failed", e);
-            notifyError(getString(R.string.installer_error_unknown));
+            if (Environment.getDataDirectory().getFreeSpace() < DataUnit.MEGABYTES.toBytes(10)) {
+                notifyError(getString(R.string.installer_error_insufficient_storage));
+            } else {
+                notifyError(getString(R.string.installer_error_unknown));
+            }
             return false;
         }
 
         if (!InstallUtils.resolvePathInVmConfig(this)) {
-            // TODO(b/374015561): Provide more finer grained error message
             notifyError(getString(R.string.installer_error_unknown));
             return false;
         }
@@ -272,10 +314,10 @@ public class InstallerService extends Service {
         }
 
         @Override
-        public void requestInstall() {
+        public void requestInstall(boolean isWifiOnly) {
             InstallerService service = ensureServiceConnected();
             synchronized (service.mLock) {
-                service.requestInstall();
+                service.requestInstall(isWifiOnly);
             }
         }
 
@@ -300,6 +342,19 @@ public class InstallerService extends Service {
             InstallerService service = ensureServiceConnected();
             synchronized (service.mLock) {
                 return !service.mIsInstalling && InstallUtils.isImageInstalled(service);
+            }
+        }
+    }
+
+    private class NetworkCallback extends ConnectivityManager.NetworkCallback {
+        @Override
+        public void onCapabilitiesChanged(
+                @NonNull Network network, @NonNull NetworkCapabilities capability) {
+            super.onCapabilitiesChanged(network, capability);
+
+            Log.d("jaewan", "capability changed " + capability);
+            synchronized (mLock) {
+                mHasWifi = capability.hasTransport(NetworkCapabilities.TRANSPORT_WIFI);
             }
         }
     }
