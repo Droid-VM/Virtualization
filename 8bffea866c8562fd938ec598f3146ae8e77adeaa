@@ -39,6 +39,30 @@
       },
       "revId": "8bffea866c8562fd938ec598f3146ae8e77adeaa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1401eee7_826ca806",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-11-21T16:35:45Z",
+      "side": 1,
+      "message": "\u003e I thought that you wanted to use the same approach as RKP VM and have a hardcoded RB index..\n\nThat\u0027s not the case. Trusty VM has a different approach for rollback protection in comparison with RKP VM. AuthMgr is actually closer to SecretKeeper in that TEE stores the DICE policy and matches the Trusty VM DICE chain against it. Therefore, pvmfw doesn\u0027t need to do much here.\n\n\u003e How does this work w.r.t. sealing CDIs?\n\nThe Sealing CDIs are derived using a hardcoded instance ID. However, this value is less critical in the context of AuthMgr because secrets within the VM are derived through a dedicated Trusted HAL (IHwCryptoKey). This HAL is only accessible to VMs that successfully pass AuthMgr authentication.\n\n@cukie@google.com can provide more context on this topic",
+      "parentUuid": "831a052e_04e22a89",
+      "range": {
+        "startLine": 158,
+        "startChar": 12,
+        "endLine": 158,
+        "endChar": 72
+      },
+      "revId": "8bffea866c8562fd938ec598f3146ae8e77adeaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
