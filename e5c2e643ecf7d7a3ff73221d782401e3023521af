@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4c26993_2ba216b0",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstallerService.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-21T00:54:55Z",
+      "side": 1,
+      "message": "At this point, we need to check `checkForWifiOnly` and interrupt the ongoing download if it returns false, instead of waiting for the next zip entry.",
+      "range": {
+        "startLine": 350,
+        "startChar": 16,
+        "endLine": 350,
+        "endChar": 27
+      },
+      "revId": "e5c2e643ecf7d7a3ff73221d782401e3023521af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
