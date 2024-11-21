@@ -17,6 +17,7 @@
 package com.android.virtualization.terminal;
 
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -63,6 +64,7 @@ public class VmLauncherServices {
     }
 
     public static void stopVmLauncherService(Context context) {
+        context.getSystemService(NotificationManager.class).cancelAll();
         Intent i = buildVmLauncherServiceIntent(context);
         context.stopService(i);
     }
