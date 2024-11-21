@@ -17,8 +17,14 @@
 package com.android.virtualization.terminal;
 
 import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.ResultReceiver;
@@ -28,6 +34,8 @@ import android.system.virtualmachine.VirtualMachineCustomImageConfig;
 import android.system.virtualmachine.VirtualMachineCustomImageConfig.Disk;
 import android.system.virtualmachine.VirtualMachineException;
 import android.util.Log;
+
+import com.google.common.collect.Sets;
 
 import io.grpc.Grpc;
 import io.grpc.InsecureServerCredentials;
@@ -44,13 +52,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.file.Path;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class VmLauncherService extends Service implements DebianServiceImpl.DebianServiceCallback {
     public static final String EXTRA_NOTIFICATION = "EXTRA_NOTIFICATION";
-    private static final String TAG = "VmLauncherService";
+    static final String TAG = "VmLauncherService";
 
     private static final int RESULT_START = 0;
     private static final int RESULT_STOP = 1;
@@ -63,6 +74,8 @@ public class VmLauncherService extends Service implements DebianServiceImpl.Debi
     private ResultReceiver mResultReceiver;
     private Server mServer;
     private DebianServiceImpl mDebianService;
+    private Set<String> mPrevActivePorts;
+    private final IntentFilter mIntentFilter = new IntentFilter();
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -130,6 +143,7 @@ public class VmLauncherService extends Service implements DebianServiceImpl.Debi
 
         mResultReceiver.send(RESULT_START, null);
 
+        preparePortForwardingNotifications();
         startDebianServer();
 
         return START_NOT_STICKY;
@@ -223,5 +237,111 @@ public class VmLauncherService extends Service implements DebianServiceImpl.Debi
         Bundle b = new Bundle();
         b.putString(VmLauncherService.KEY_VM_IP_ADDR, ipAddr);
         mResultReceiver.send(VmLauncherService.RESULT_IPADDR, b);
+    }
+
+    private void showPortForwardingNotification(int port) {
+        Intent tapIntent = new Intent(this, SettingsPortForwardingActivity.class);
+        tapIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent tapPendingIntent =
+                PendingIntent.getActivity(this, 0, tapIntent, PendingIntent.FLAG_IMMUTABLE);
+
+        Intent accessIntent = new Intent(this, PortForwardingRequestReceiver.class);
+        accessIntent.setAction(PortForwardingRequestReceiver.ACTION_PORT_FORWARDING);
+        accessIntent.setIdentifier("access_" + Integer.toString(port));
+        accessIntent.putExtra(PortForwardingRequestReceiver.KEY_PORT, port);
+        accessIntent.putExtra(PortForwardingRequestReceiver.KEY_ENABLED, true);
+        PendingIntent accessPendingIntent =
+                PendingIntent.getBroadcast(this, 0, accessIntent, PendingIntent.FLAG_IMMUTABLE);
+
+        Intent denyIntent = new Intent(this, PortForwardingRequestReceiver.class);
+        denyIntent.setAction(PortForwardingRequestReceiver.ACTION_PORT_FORWARDING);
+        denyIntent.setIdentifier("deny_" + Integer.toString(port));
+        denyIntent.putExtra(PortForwardingRequestReceiver.KEY_PORT, port);
+        denyIntent.putExtra(PortForwardingRequestReceiver.KEY_ENABLED, false);
+        PendingIntent denyPendingIntent =
+                PendingIntent.getBroadcast(this, 0, denyIntent, PendingIntent.FLAG_IMMUTABLE);
+
+        Icon icon = Icon.createWithResource(this, R.drawable.ic_launcher_foreground);
+        Notification notification =
+                new Notification.Builder(this, this.getPackageName())
+                        .setSmallIcon(R.drawable.ic_launcher_foreground)
+                        .setContentTitle(
+                                getResources()
+                                        .getString(
+                                                R.string
+                                                        .settings_port_forwarding_notification_title))
+                        .setContentText(
+                                getResources()
+                                        .getString(
+                                                R.string
+                                                        .settings_port_forwarding_notification_content,
+                                                port))
+                        .setContentIntent(tapPendingIntent)
+                        .addAction(
+                                new Notification.Action.Builder(
+                                                icon,
+                                                getResources()
+                                                        .getString(
+                                                                R.string
+                                                                        .settings_port_forwarding_notification_accept),
+                                                accessPendingIntent)
+                                        .build())
+                        .addAction(
+                                new Notification.Action.Builder(
+                                                icon,
+                                                getResources()
+                                                        .getString(
+                                                                R.string
+                                                                        .settings_port_forwarding_notification_deny),
+                                                denyPendingIntent)
+                                        .build())
+                        .build();
+
+        getSystemService(NotificationManager.class).notify(TAG, port, notification);
+    }
+
+    private void discardPortForwardingNotification(int port) {
+        getSystemService(NotificationManager.class).cancel(TAG, port);
+    }
+
+    private void preparePortForwardingNotifications() {
+        SharedPreferences sharedPref =
+                this.getSharedPreferences(
+                        getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        mPrevActivePorts = new HashSet<>();
+        SharedPreferences.OnSharedPreferenceChangeListener portForwardingListener =
+                new SharedPreferences.OnSharedPreferenceChangeListener() {
+                    @Override
+                    public void onSharedPreferenceChanged(
+                            SharedPreferences sharedPreferences, String key) {
+                        if (!key.equals(getString(R.string.preference_forwarding_ports))) {
+                            return;
+                        }
+                        Set<String> activePorts =
+                                sharedPref.getStringSet(
+                                        getString(R.string.preference_forwarding_ports),
+                                        Collections.emptySet());
+                        for (String portStr : Sets.difference(activePorts, mPrevActivePorts)) {
+                            try {
+                                int port = Integer.parseInt(portStr);
+                                showPortForwardingNotification(port);
+                            } catch (NumberFormatException e) {
+                                Log.e(TAG, "Failed to parse port: " + portStr);
+                                return;
+                            }
+                        }
+                        for (String portStr : Sets.difference(mPrevActivePorts, activePorts)) {
+                            try {
+                                int port = Integer.parseInt(portStr);
+                                discardPortForwardingNotification(port);
+                            } catch (NumberFormatException e) {
+                                Log.e(TAG, "Failed to parse port: " + portStr);
+                                return;
+                            }
+                        }
+                        mPrevActivePorts = activePorts;
+                    }
+                };
+        sharedPref.registerOnSharedPreferenceChangeListener(portForwardingListener);
     }
 }
