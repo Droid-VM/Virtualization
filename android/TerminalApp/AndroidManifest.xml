@@ -88,6 +88,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
+        <receiver
+            android:name=".PortForwardingRequestReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.virtualization.PORT_FORWARDING" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
