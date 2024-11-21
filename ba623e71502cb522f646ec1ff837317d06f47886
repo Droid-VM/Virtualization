@@ -16,6 +16,154 @@
       "message": "In this change, bug around notification event not applied to the `SettingsPortForwardingActivity` was found. But I prefer to fix in the other change, since it\u0027s not a bug of notification side.",
       "revId": "ba623e71502cb522f646ec1ff837317d06f47886",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63ff0d1c_cd84328e",
+        "filename": "android/TerminalApp/AndroidManifest.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-21T06:29:30Z",
+      "side": 1,
+      "message": "i think you don\u0027t need to declare it because you\u0027re using a context-registered receiver",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 19
+      },
+      "revId": "ba623e71502cb522f646ec1ff837317d06f47886",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1053ea86_65c22c34",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/PortForwardingRequestReceiver.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-21T06:29:30Z",
+      "side": 1,
+      "message": "maybe we can make it inner class of VmLauncherService?",
+      "range": {
+        "startLine": 25,
+        "startChar": 12,
+        "endLine": 25,
+        "endChar": 41
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "df8f85f1_9a867bb8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/PortForwardingRequestReceiver.java",
+              "range": {
+                "startLine": 25,
+                "startChar": 0,
+                "endLine": 26,
+                "endChar": 0
+              },
+              "replacement": "final class VmLauncherService.PortForwardingRequestReceiver extends BroadcastReceiver {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ba623e71502cb522f646ec1ff837317d06f47886",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa1351a4_bbadb6ee",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-21T06:29:30Z",
+      "side": 1,
+      "message": "constants?",
+      "range": {
+        "startLine": 255,
+        "startChar": 30,
+        "endLine": 256,
+        "endChar": 39
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ae0921cc_391cdcad",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+              "range": {
+                "startLine": 72,
+                "startChar": 0,
+                "endLine": 72,
+                "endChar": 0
+              },
+              "replacement": "    private static final String PORT_FORWARDING_REQUEST_EXTRA_PORT \u003d \"port\";\n    private static final String PORT_FORWARDING_REQUEST_EXTRA_ENABLED \u003d \"enabled\";\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+              "range": {
+                "startLine": 255,
+                "startChar": 0,
+                "endLine": 257,
+                "endChar": 0
+              },
+              "replacement": "        accessIntent.putExtra(PORT_FORWARDING_REQUEST_EXTRA_PORT, port);\n        accessIntent.putExtra(PORT_FORWARDING_REQUEST_EXTRA_ENABLED, true);\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+              "range": {
+                "startLine": 263,
+                "startChar": 0,
+                "endLine": 265,
+                "endChar": 0
+              },
+              "replacement": "        denyIntent.putExtra(PORT_FORWARDING_REQUEST_EXTRA_PORT, port);\n        denyIntent.putExtra(PORT_FORWARDING_REQUEST_EXTRA_ENABLED, false);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ba623e71502cb522f646ec1ff837317d06f47886",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8289461e_c2383253",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-21T06:29:30Z",
+      "side": 1,
+      "message": "instead of calculating here, we can compare shared preference and reported ports in DebianServiceImpl.reportVmActivePorts and then use DebianServiceCallback to notify the info to VmLauncherService",
+      "range": {
+        "startLine": 304,
+        "startChar": 0,
+        "endLine": 343,
+        "endChar": 5
+      },
+      "revId": "ba623e71502cb522f646ec1ff837317d06f47886",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
