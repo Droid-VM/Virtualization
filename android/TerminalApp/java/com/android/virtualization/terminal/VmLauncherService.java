@@ -19,6 +19,7 @@ package com.android.virtualization.terminal;
 import android.app.Notification;
 import android.app.Service;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.ResultReceiver;
@@ -50,7 +51,7 @@ import java.util.concurrent.Executors;
 
 public class VmLauncherService extends Service implements DebianServiceImpl.DebianServiceCallback {
     public static final String EXTRA_NOTIFICATION = "EXTRA_NOTIFICATION";
-    private static final String TAG = "VmLauncherService";
+    static final String TAG = "VmLauncherService";
 
     private static final int RESULT_START = 0;
     private static final int RESULT_STOP = 1;
@@ -63,6 +64,7 @@ public class VmLauncherService extends Service implements DebianServiceImpl.Debi
     private ResultReceiver mResultReceiver;
     private Server mServer;
     private DebianServiceImpl mDebianService;
+    private final IntentFilter mIntentFilter = new IntentFilter();
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -130,6 +132,9 @@ public class VmLauncherService extends Service implements DebianServiceImpl.Debi
 
         mResultReceiver.send(RESULT_START, null);
 
+        mIntentFilter.addAction(PortForwardingRequestReceiver.ACTION_PORT_FORWARDING);
+        PortForwardingRequestReceiver receiver = new PortForwardingRequestReceiver();
+        registerReceiver(receiver, mIntentFilter, RECEIVER_NOT_EXPORTED);
         startDebianServer();
 
         return START_NOT_STICKY;
