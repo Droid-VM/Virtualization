@@ -191,6 +191,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "97ab6556_0a202ba6",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstallerService.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-21T15:21:58Z",
+      "side": 1,
+      "message": "You can just interrupt the thread doing the download. Thread.interrupt().",
+      "parentUuid": "ff3705db_444a52c9",
+      "range": {
+        "startLine": 350,
+        "startChar": 16,
+        "endLine": 350,
+        "endChar": 27
+      },
+      "revId": "e5c2e643ecf7d7a3ff73221d782401e3023521af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5f679652_e5f230b1",
         "filename": "android/TerminalApp/res/values/strings.xml",
         "patchSetId": 3
