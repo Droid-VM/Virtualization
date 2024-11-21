@@ -368,6 +368,7 @@ public class MainActivity extends BaseActivity
     protected void onDestroy() {
         getSystemService(AccessibilityManager.class).removeTouchExplorationStateChangeListener(this);
         VmLauncherServices.stopVmLauncherService(this);
+        getSystemService(NotificationManager.class).cancelAll();
         super.onDestroy();
     }
 
