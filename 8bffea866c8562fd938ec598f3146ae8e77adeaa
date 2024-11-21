@@ -16,6 +16,29 @@
       "message": "Hi Pierre-Clément, PTAL",
       "revId": "8bffea866c8562fd938ec598f3146ae8e77adeaa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "831a052e_04e22a89",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-21T15:50:13Z",
+      "side": 1,
+      "message": "I thought that you wanted to use the same approach as RKP VM and have a hardcoded RB index but that doesn\u0027t seem to be the case. How does this work w.r.t. sealing CDIs i.e. what prevents an attacker from performing a RB attack with an older, vulnerable, version and leaking them?",
+      "range": {
+        "startLine": 158,
+        "startChar": 12,
+        "endLine": 158,
+        "endChar": 72
+      },
+      "revId": "8bffea866c8562fd938ec598f3146ae8e77adeaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
