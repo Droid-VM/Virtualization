@@ -3,6 +3,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d3502c49_ca400a74",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstallerService.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-21T03:43:44Z",
+      "side": 1,
+      "message": "What about distinguishing catch block between `UnknownHostException` and `SocketException`? After distinguishing catch blocks, do we still need both `e.getMessage()` and `e` for logging error for each type?",
+      "range": {
+        "startLine": 249,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 0
+      },
+      "revId": "e5c2e643ecf7d7a3ff73221d782401e3023521af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09430763_9cb3274c",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstallerService.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-21T03:43:44Z",
+      "side": 1,
+      "message": "nit: Can we use other naming not to make confusion with `ConnectivityManager.NetworkCallback`?",
+      "range": {
+        "startLine": 343,
+        "startChar": 24,
+        "endLine": 343,
+        "endChar": 39
+      },
+      "revId": "e5c2e643ecf7d7a3ff73221d782401e3023521af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57aa52af_92db4924",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstallerService.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-21T03:43:44Z",
+      "side": 1,
+      "message": "Do we need this?",
+      "range": {
+        "startLine": 347,
+        "startChar": 0,
+        "endLine": 347,
+        "endChar": 61
+      },
+      "revId": "e5c2e643ecf7d7a3ff73221d782401e3023521af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f4c26993_2ba216b0",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstallerService.java",
         "patchSetId": 3
@@ -19,6 +88,29 @@
         "startChar": 16,
         "endLine": 350,
         "endChar": 27
+      },
+      "revId": "e5c2e643ecf7d7a3ff73221d782401e3023521af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f679652_e5f230b1",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-21T03:43:44Z",
+      "side": 1,
+      "message": "OOC, doesn\u0027t it matter for localization?",
+      "range": {
+        "startLine": 42,
+        "startChar": 18,
+        "endLine": 42,
+        "endChar": 41
       },
       "revId": "e5c2e643ecf7d7a3ff73221d782401e3023521af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
