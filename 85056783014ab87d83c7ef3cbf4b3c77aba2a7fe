@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34d56b28_f12d207f",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/PortForwardingRequestReceiver.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-21T06:22:16Z",
+      "side": 1,
+      "message": "Just `if (ACTION_PORT_FORWARDING.equals(intent.getAction()))`",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 40
+      },
+      "revId": "85056783014ab87d83c7ef3cbf4b3c77aba2a7fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53740ff2_1c4a3c9d",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/PortForwardingRequestReceiver.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-21T06:22:16Z",
+      "side": 1,
+      "message": "Define constants for these keys.",
+      "range": {
+        "startLine": 39,
+        "startChar": 38,
+        "endLine": 39,
+        "endChar": 44
+      },
+      "revId": "85056783014ab87d83c7ef3cbf4b3c77aba2a7fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e48b6174_e8597d3c",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-21T06:22:16Z",
+      "side": 1,
+      "message": "no need.",
+      "range": {
+        "startLine": 253,
+        "startChar": 47,
+        "endLine": 253,
+        "endChar": 64
+      },
+      "revId": "85056783014ab87d83c7ef3cbf4b3c77aba2a7fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9f361e2_052025d2",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-21T06:22:16Z",
+      "side": 1,
+      "message": "please dedup these two",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 265,
+        "endChar": 94
+      },
+      "revId": "85056783014ab87d83c7ef3cbf4b3c77aba2a7fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61378f4d_626076b3",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-21T06:22:16Z",
+      "side": 1,
+      "message": "Let\u0027s read resources separately into variables. This deep nesting hurts readability.",
+      "range": {
+        "startLine": 272,
+        "startChar": 0,
+        "endLine": 275,
+        "endChar": 102
+      },
+      "revId": "85056783014ab87d83c7ef3cbf4b3c77aba2a7fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1eb8014_0915b1d2",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-21T06:22:16Z",
+      "side": 1,
+      "message": "This can be a member of the pref change listener object.",
+      "range": {
+        "startLine": 314,
+        "startChar": 8,
+        "endLine": 314,
+        "endChar": 24
+      },
+      "revId": "85056783014ab87d83c7ef3cbf4b3c77aba2a7fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deefb66e_a6f00499",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-21T06:22:16Z",
+      "side": 1,
+      "message": "This is done twice. Consider saving it to a variable.",
+      "range": {
+        "startLine": 320,
+        "startChar": 40,
+        "endLine": 320,
+        "endChar": 87
+      },
+      "revId": "85056783014ab87d83c7ef3cbf4b3c77aba2a7fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c142510b_99ce02f1",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-21T06:22:16Z",
+      "side": 1,
+      "message": "I don\u0027t want to bring Guava just for this. You can implement this by copying the set and subtracting from it using deleteAll.",
+      "range": {
+        "startLine": 327,
+        "startChar": 46,
+        "endLine": 327,
+        "endChar": 50
+      },
+      "revId": "85056783014ab87d83c7ef3cbf4b3c77aba2a7fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c471586c_03f58161",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-21T06:22:16Z",
+      "side": 1,
+      "message": "This case should never happen. So we should either continue or crash, not return.",
+      "range": {
+        "startLine": 333,
+        "startChar": 0,
+        "endLine": 333,
+        "endChar": 39
+      },
+      "revId": "85056783014ab87d83c7ef3cbf4b3c77aba2a7fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e423eac_6cf2ca22",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-21T06:22:16Z",
+      "side": 1,
+      "message": "... or you can make this simpler:\n\n```\nSet allPorts \u003d Collections.emptySet();\nCollections.addAll(allPorts, activePorts, mPrevActivePorts);\nfor (String p : allPorts) {\n    int port \u003d Integer.parseInt(p);\n    boolean show \u003d activePorts.contains(p) \u0026\u0026 !mPrevActivePorts.contains(p);\n    boolean hide \u003d !activePorts.contains(p) \u0026\u0026 mPrevActivePorts.contains(p);\n    if (show) {\n        showPort...\n    }\n    if (hide) {\n        hidePort...\n    }\n}    \n```",
+      "range": {
+        "startLine": 327,
+        "startChar": 2,
+        "endLine": 344,
+        "endChar": 25
+      },
+      "revId": "85056783014ab87d83c7ef3cbf4b3c77aba2a7fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
