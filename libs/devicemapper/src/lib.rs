@@ -275,6 +275,7 @@ mod tests {
     // Hence, we have to create a new device with a different name for each test. Retrying
     // the test on same machine without reboot will also fail.
     fn delete_device(dm: &DeviceMapper, name: &str) -> Result<()> {
+        // See if the lookup happend in the uuid or the name
         dm.delete_device_deferred(name)?;
         wait_for_path_disappears(Path::new(MAPPER_DEV_ROOT).join(name))?;
         Ok(())

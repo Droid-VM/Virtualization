@@ -1824,6 +1824,38 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
+    public void rollbackProtectedSecretOfPayload() throws Exception {
+        assumeSupportedDevice();
+
+        VirtualMachineConfig config =
+                newVmConfigBuilderWithPayloadBinary("MicrodroidTestNativeLib.so")
+                        .setMemoryBytes(minMemoryRequired())
+                        .setEncryptedStorageBytes(ENCRYPTED_STORAGE_BYTES)
+                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .build();
+        VirtualMachine vm = forceCreateNewVirtualMachine("test_vm", config);
+        TestResults testResults =
+                runVmTestService(
+                        TAG,
+                        vm,
+                        (ts, tr) -> {
+                            ts.insecurelyWritePayloadRpData("thirtytwobyteslongreallylongword");
+                        });
+        testResults.assertNoException();
+
+        // Re-run the same VM & read th RP data & verify it what we just wrote!
+        testResults =
+                runVmTestService(
+                        TAG,
+                        vm,
+                        (ts, tr) -> {
+                            tr.mPayloadRpData = ts.insecurelyReadPayloadRpData();
+                        });
+        testResults.assertNoException();
+        assertThat(testResults.mPayloadRpData).isEqualTo("thirtytwobyteslongreallylongword");
+    }
+
+    @Test
     @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
     public void canReadFileFromAssets_debugFull() throws Exception {
         assumeSupportedDevice();

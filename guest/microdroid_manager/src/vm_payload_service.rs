@@ -54,6 +54,25 @@ impl IVmPayloadService for VmPayloadService {
         Ok(instance_secret)
     }
 
+    fn getVmRpData(&self) -> binder::Result<Option<[u8; 32]>> {
+        let data = self
+            .secret
+            .get_payload_data_rp()
+            .context("Failed to get payload's rollback protected data")
+            .with_log()
+            .or_service_specific_exception(-1)?;
+        Ok(data)
+    }
+
+    fn writePayloadRpData(&self, data: &[u8; 32]) -> binder::Result<()> {
+        self.secret
+            .write_payload_data_rp(data)
+            .context("Failed to write payload's rollback protected data")
+            .with_log()
+            .or_service_specific_exception(-1)?;
+        Ok(())
+    }
+
     fn getDiceAttestationChain(&self) -> binder::Result<Vec<u8>> {
         self.check_restricted_apis_allowed()?;
         if let Some(bcc) = self.secret.dice_artifacts().bcc() {
