@@ -20,6 +20,69 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "369838a3_3e6a674c",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-22T19:43:33Z",
+      "side": 1,
+      "message": "this might need to be something like `addCustomMemoryBackingFile(config, fd, rangeStart, rangeEnd)`. i\u0027ll confirm",
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07c7f7b7_dfc0e652",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-22T19:43:33Z",
+      "side": 1,
+      "message": "what are the tradeoffs for having the service explicitly represented in the API vs created implicitly with the VM?\n\nwith this approach, it seems like you can have multiple VMs handled by a single virtmgr. i guess that might be good for system health?",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 67
+      },
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a75aa02_539e6777",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-22T19:43:33Z",
+      "side": 1,
+      "message": "`vm` (or is this hungarian notation?)",
+      "range": {
+        "startLine": 97,
+        "startChar": 90,
+        "endLine": 97,
+        "endChar": 93
+      },
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2d76bc4d_09f27404",
         "filename": "libs/libavf/src/lib.rs",
         "patchSetId": 2
