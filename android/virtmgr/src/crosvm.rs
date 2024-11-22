@@ -1022,6 +1022,11 @@ fn run_vm(
         command.arg("--params").arg("console=hvc0");
     }
 
+    #[cfg(target_arch = "aarch64")]
+    command
+        .arg("--pci")
+        .arg("mem=[start=0x70000000,size=0x2000000],cam=[start=0x72000000,size=0x1000000]");
+
     command.arg("--mem").arg(memory_mib.to_string());
 
     if let Some(cpus) = config.cpus {
