@@ -38,8 +38,8 @@
 .align 12
 idmap:
 	/* level 1 */
-	.quad		.L_BLOCK_DEV | 0x0		// 1 GiB of device mappings
-	.quad		0x0				// 1 GiB unmapped
+	.quad		.L_BLOCK_DEV | 0x0		// 2 GiB of device mappings
+	.quad		.L_BLOCK_DEV | 0x0		//
 	.quad		.L_TT_TYPE_TABLE + 0f		// up to 1 GiB of DRAM
 	.fill		509, 8, 0x0			// 509 GiB of remaining VA space
 
