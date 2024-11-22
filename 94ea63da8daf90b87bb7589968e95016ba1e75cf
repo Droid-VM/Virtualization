@@ -16,6 +16,98 @@
       "message": "The API part looks good to me. I will review the impl part later.",
       "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d76bc4d_09f27404",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-22T12:36:11Z",
+      "side": 1,
+      "message": "Since this always success, it would be better to return the handle directly.\n\nin C:\n\n```\nAVirtualMachineConfig AVirtualMachineConfig_createRaw();\n```\n\nThen you can make this as a safe function.",
+      "range": {
+        "startLine": 52,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 5
+      },
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df4a0462_ce953cc7",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-22T12:36:11Z",
+      "side": 1,
+      "message": "Define error codes properly",
+      "range": {
+        "startLine": 344,
+        "startChar": 0,
+        "endLine": 346,
+        "endChar": 21
+      },
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcc810f9_71406bfd",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-22T12:36:11Z",
+      "side": 1,
+      "message": "The \"else\" case should return an error like \"invalid handle\".",
+      "range": {
+        "startLine": 518,
+        "startChar": 4,
+        "endLine": 518,
+        "endChar": 5
+      },
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3af72cb2_8cff1a35",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-22T12:36:11Z",
+      "side": 1,
+      "message": "In AVirtualMachine_create, you have to mention that the ownership of given fds are transferred an the caller should not close the fds by themselves.",
+      "range": {
+        "startLine": 525,
+        "startChar": 0,
+        "endLine": 525,
+        "endChar": 65
+      },
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
