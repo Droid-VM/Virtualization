@@ -78,6 +78,11 @@ interface IVmPayloadService {
     byte[] getVmInstanceSecret(in byte[] identifier, int size);
 
     /**
+     * Get rollback protected data.
+     */
+    @nullable byte[32] getVmRpData();
+
+    /**
      * Gets the DICE attestation chain for the VM.
      *
      * The DICE chain must not be made available to all VMs as it contains privacy breaking

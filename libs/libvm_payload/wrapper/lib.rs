@@ -194,3 +194,9 @@ pub fn get_vm_instance_secret(identifier: &[u8], secret: &mut [u8]) {
         )
     }
 }
+
+/// Read payload's rollback protected data!
+pub fn read_rollback_protected_secret(secret: &[u8; 32]) {
+    // SAFETY: The function only writes to `[secret]` within its bounds.
+    unsafe { AVmPayload_readRollbackProtectedSecret(secret.as_ptr() as *const c_void) }
+}

@@ -193,6 +193,31 @@ pub unsafe extern "C" fn AVmPayload_getVmInstanceSecret(
     }
 }
 
+/// Read payload's rollback protected data!
+///
+/// # Safety
+///
+/// Behavior is undefined if any of the following conditions are violated:
+///
+/// * `secret` must be [valid] for writes of 32 bytes.
+///
+/// [valid]: ptr#safety
+#[no_mangle]
+pub unsafe extern "C" fn AVmPayload_readRollbackProtectedSecret(secret: *mut u8) {
+    initialize_logging();
+
+    let rp = unwrap_or_abort(try_read_rollback_protected_data());
+
+    // SAFETY: See the requirements on `secret` above
+    unsafe {
+        if let Some(rp) = rp {
+            ptr::copy_nonoverlapping(rp.as_ptr(), secret, 32);
+        } else {
+            ptr::write_bytes(secret, 0, 32);
+        }
+    }
+}
+
 fn try_get_vm_instance_secret(identifier: &[u8], size: usize) -> Result<Vec<u8>> {
     let vm_secret = get_vm_payload_service()?
         .getVmInstanceSecret(identifier, i32::try_from(size)?)
@@ -204,6 +229,17 @@ fn try_get_vm_instance_secret(identifier: &[u8], size: usize) -> Result<Vec<u8>>
         size
     );
     Ok(vm_secret)
+}
+
+fn try_read_rollback_protected_data() -> Result<Option<[u8; 32]>> {
+    let rp =
+        get_vm_payload_service()?.getVmRpData().context("Cannot get rollback protected data")?;
+    ensure!(
+        rp.is_none() || rp.unwrap().len() == 32,
+        "Returned secret has {} bytes, expected 32",
+        rp.unwrap().len(),
+    );
+    Ok(rp)
 }
 
 /// Get the VM's attestation chain.
