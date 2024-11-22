@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "740e2451_0bc3cdde",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 865,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-11-22T21:41:45Z",
+      "side": 1,
+      "message": "\u003eSomewhat similar to vendor_hashtree_digest, we\u0027ll need to call ISecretkeeper.getSecretKeeperIdentity() \u0026 include that in the trusted_props vector.\n\nWhat should the key be (equivalent of `cstr!(\"vendor_hashtree_descriptor_root_digest\"`)? `secretkeeper_public_key`?\n\n\u003eAlso [1] says\nDone (but plz check my wording, I also suspect there is other language to update there).",
+      "parentUuid": "f957e1f5_681b4139",
+      "revId": "8082ff5611885fac7c278a988e96358623da9fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d717c716_1b1c5761",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 3
