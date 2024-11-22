@@ -63,6 +63,30 @@
       },
       "revId": "8bffea866c8562fd938ec598f3146ae8e77adeaa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d91cd325_4ec8d36f",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-22T10:27:50Z",
+      "side": 1,
+      "message": "Sounds good. To be clear, I wasn\u0027t concerned about the pvmfw logic itself: if the VM owner tells us that they don\u0027t want RBP, there\u0027s no reason for pvmfw not to comply. This is some kind of \"I know what I\u0027m doing\", \"flipping the safety switch\" thing.",
+      "parentUuid": "1401eee7_826ca806",
+      "range": {
+        "startLine": 158,
+        "startChar": 12,
+        "endLine": 158,
+        "endChar": 72
+      },
+      "revId": "8bffea866c8562fd938ec598f3146ae8e77adeaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
