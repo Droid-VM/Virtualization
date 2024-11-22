@@ -18,6 +18,47 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "31d9cb2f_d363b4d5",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-22T15:38:20Z",
+      "side": 1,
+      "message": "Question: What does `mAccessibilitymanager.isEnabled()` mean?",
+      "range": {
+        "startLine": 172,
+        "startChar": 26,
+        "endLine": 172,
+        "endChar": 59
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "204eaa2d_3350f41b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+              "range": {
+                "startLine": 171,
+                "startChar": 0,
+                "endLine": 173,
+                "endChar": 0
+              },
+              "replacement": "                        + \"\u0026screenReaderMode\u003d\" + mAccessibilityManager.isTouchExplorationEnabled()\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1d3dfc9ca2965f4035fc53f1ca708838cddcac75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "bb0cedc1_cce058f8",
@@ -65,6 +106,47 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "4321065d_965ac93c",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/TerminalView.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-22T15:38:20Z",
+      "side": 1,
+      "message": "indentation looks wierd",
+      "range": {
+        "startLine": 99,
+        "startChar": 24,
+        "endLine": 99,
+        "endChar": 28
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "13cec38b_8570da25",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/TerminalView.java",
+              "range": {
+                "startLine": 99,
+                "startChar": 0,
+                "endLine": 102,
+                "endChar": 0
+              },
+              "replacement": "                        // Skip reading texts that are too long. Right now, ttyd emits entire\n                        // text on the terminal to the live region, which is very annoying to\n                        // screen reader users.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1d3dfc9ca2965f4035fc53f1ca708838cddcac75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "021cbde6_12e51a21",
@@ -78,6 +160,157 @@
       "writtenOn": "2024-11-22T13:51:23Z",
       "side": 1,
       "message": "the message in xtermjs in similar scenario: `Too much output to announce, navigate to rows manually to read\u0027` https://github.com/xtermjs/xterm.js/blob/master/src/browser/LocalizableStrings.ts#L14",
+      "revId": "1d3dfc9ca2965f4035fc53f1ca708838cddcac75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8a14168_7f0483b1",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/TerminalView.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-22T15:38:20Z",
+      "side": 1,
+      "message": "Q: @jeongik@google.com can we read line by line with talkback?",
+      "parentUuid": "021cbde6_12e51a21",
+      "revId": "1d3dfc9ca2965f4035fc53f1ca708838cddcac75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14a1e7cd_2f4f4f46",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/TerminalView.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-22T15:38:20Z",
+      "side": 1,
+      "message": "minor: can we group members at first?",
+      "range": {
+        "startLine": 123,
+        "startChar": 44,
+        "endLine": 123,
+        "endChar": 62
+      },
+      "revId": "1d3dfc9ca2965f4035fc53f1ca708838cddcac75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ba25bdf_f7f6f66f",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/TerminalView.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-22T15:38:20Z",
+      "side": 1,
+      "message": "Questions: what about skipping to read this line + `setScreenReaderFocusable(false)`?",
+      "range": {
+        "startLine": 195,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 0
+      },
+      "revId": "1d3dfc9ca2965f4035fc53f1ca708838cddcac75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6f34a52_47c7d4b1",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/TerminalView.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-22T15:38:20Z",
+      "side": 1,
+      "message": "Question: Does `isEmptyLine(info)` return `false` when TextView is invisible?",
+      "range": {
+        "startLine": 205,
+        "startChar": 74,
+        "endLine": 206,
+        "endChar": 39
+      },
+      "revId": "1d3dfc9ca2965f4035fc53f1ca708838cddcac75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08b5b22a_c1468249",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/TerminalView.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-22T15:38:20Z",
+      "side": 1,
+      "message": "Question: Can we just use return of the parent? We\u0027d changed `AccesibilityNodeInfo` from `createAccessibilityNodeInfo()`, and I\u0027m curious whether we should consider altered info instead of parents\u0027.",
+      "range": {
+        "startLine": 247,
+        "startChar": 0,
+        "endLine": 253,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8821bd72_40e695fb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/TerminalView.java",
+              "range": {
+                "startLine": 247,
+                "startChar": 0,
+                "endLine": 248,
+                "endChar": 0
+              },
+              "replacement": "                    List\u003cAccessibilityNodeInfo\u003e infos \u003d\n                            getParent().findAccessibilityNodeInfosByText(text, virtualViewId);\n                    if (infos \u003d\u003d null) {\n                        return null;\n                    }\n                    for (AccessibilityNodeInfo info : infos) {\n                        if (info.getClassName().toString().equals(\"android.widget.EditText\")) {\n                            info.setScreenReaderFocusable(true);\n                            info.addAction(AccessibilityAction.ACTION_FOCUS);\n                        }\n                    }\n                    return infos;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1d3dfc9ca2965f4035fc53f1ca708838cddcac75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d71fecdd_16799661",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-22T15:38:20Z",
+      "side": 1,
+      "message": "`[CHAR LIMIT\u003dnone]`",
+      "range": {
+        "startLine": 23,
+        "startChar": 91,
+        "endLine": 23,
+        "endChar": 94
+      },
       "revId": "1d3dfc9ca2965f4035fc53f1ca708838cddcac75",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
