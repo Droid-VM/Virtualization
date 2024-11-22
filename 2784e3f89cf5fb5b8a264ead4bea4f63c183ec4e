@@ -22,6 +22,30 @@
       },
       "revId": "2784e3f89cf5fb5b8a264ead4bea4f63c183ec4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db633e3e_a7e5a65d",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1966865
+      },
+      "writtenOn": "2024-11-22T03:20:14Z",
+      "side": 1,
+      "message": "When running in qemu, `nested_virt::is_nested_virtualization().unwrap()` evaluates to false. Are you suggesting I check for both conditions here?",
+      "parentUuid": "9eca1cac_04126c88",
+      "range": {
+        "startLine": 96,
+        "startChar": 20,
+        "endLine": 96,
+        "endChar": 44
+      },
+      "revId": "2784e3f89cf5fb5b8a264ead4bea4f63c183ec4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
