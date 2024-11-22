@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae5efae0_8aaf9c7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-22T13:51:23Z",
+      "side": 1,
+      "message": "Thanks for tracking all of them!!!",
+      "revId": "1d3dfc9ca2965f4035fc53f1ca708838cddcac75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb0cedc1_cce058f8",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/TerminalView.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-22T13:51:23Z",
+      "side": 1,
+      "message": "just FYI, xterm.js considers 20 rows as \u0027too much output\u0027 https://github.com/xtermjs/xterm.js/blob/master/src/browser/AccessibilityManager.ts\n\nwe might reduce the row count as well..",
+      "range": {
+        "startLine": 44,
+        "startChar": 29,
+        "endLine": 44,
+        "endChar": 54
+      },
+      "revId": "1d3dfc9ca2965f4035fc53f1ca708838cddcac75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "021cbde6_12e51a21",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/TerminalView.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-22T13:51:23Z",
+      "side": 1,
+      "message": "the message in xtermjs in similar scenario: `Too much output to announce, navigate to rows manually to read\u0027` https://github.com/xtermjs/xterm.js/blob/master/src/browser/LocalizableStrings.ts#L14",
+      "revId": "1d3dfc9ca2965f4035fc53f1ca708838cddcac75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
