@@ -22,6 +22,29 @@
       },
       "revId": "8082ff5611885fac7c278a988e96358623da9fab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6d58647_0165558b",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1982,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-22T10:34:27Z",
+      "side": 1,
+      "message": "IIUC, this should then be\n```\nself.0.getSecretKeeperIdentity()\n```\n?",
+      "range": {
+        "startLine": 1973,
+        "startChar": 0,
+        "endLine": 1982,
+        "endChar": 9
+      },
+      "revId": "8082ff5611885fac7c278a988e96358623da9fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
