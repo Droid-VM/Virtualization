@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "884fb005_005e6e4a",
+        "filename": "guest/trusty/test_vm/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2024-11-22T08:13:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9b9d7f6_3b3a11dd",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 44
+      },
+      "revId": "f2ee0667b0761869bc513cf50592a1fd49d4663c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5993d97_1e3e1a17",
@@ -61,6 +85,30 @@
       "writtenOn": "2024-11-20T10:13:29Z",
       "side": 1,
       "message": "Not blocking: Can we just use our trusty VM launcher [1] here rather than adding a new launcher and involving the debugging tool `/apex/com.android.virt/bin/vm`?\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/guest/trusty/security_vm/launcher/",
+      "range": {
+        "startLine": 27,
+        "startChar": 38,
+        "endLine": 27,
+        "endChar": 118
+      },
+      "revId": "f2ee0667b0761869bc513cf50592a1fd49d4663c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e30ae375_bc5f2bdb",
+        "filename": "guest/trusty/test_vm/AndroidTest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2024-11-22T08:13:03Z",
+      "side": 1,
+      "message": "this is not a VM we expect to start with a init.rc. This is a test_vm packaged with VTS tests that can be dropped on any devices.",
+      "parentUuid": "b5993d97_1e3e1a17",
       "range": {
         "startLine": 27,
         "startChar": 38,
