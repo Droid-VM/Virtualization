@@ -236,6 +236,30 @@
       },
       "revId": "ba623e71502cb522f646ec1ff837317d06f47886",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f066028_4b38c5db",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-22T07:35:06Z",
+      "side": 1,
+      "message": "I meant comparing it in reportVmActivePorts before it updates shared preferences. With that, we don\u0027t need to keep `mPrevActivePorts` here.\n\nI don\u0027t think it violates how we manage shared preferences, though. just compare before updating, and then it updates shared preference.",
+      "parentUuid": "c1a3af6e_a64e9870",
+      "range": {
+        "startLine": 304,
+        "startChar": 0,
+        "endLine": 343,
+        "endChar": 5
+      },
+      "revId": "ba623e71502cb522f646ec1ff837317d06f47886",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
