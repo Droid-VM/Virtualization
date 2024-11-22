@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c4a28d10_e6fbb3fd",
+        "filename": "android/TerminalApp/AndroidManifest.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-22T07:45:16Z",
+      "side": 1,
+      "message": "that\u0027s because you send intent which specifies class name `.PortForwardingRequestReceiver`.. if you want to send broadcast to context-registered receiver, you need to specify action instead",
+      "parentUuid": "9f9e2b12_63db1961",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 19
+      },
+      "revId": "ba623e71502cb522f646ec1ff837317d06f47886",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1053ea86_65c22c34",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/PortForwardingRequestReceiver.java",
         "patchSetId": 9
