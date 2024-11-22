@@ -139,6 +139,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f99eef58_83cbec6a",
+        "filename": "android/TerminalApp/AndroidManifest.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-22T15:59:00Z",
+      "side": 1,
+      "message": "Let\u0027s debug together next week. Manifest declared receiver is discouraged.",
+      "parentUuid": "7f6800c8_5eee11f9",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 19
+      },
+      "revId": "ba623e71502cb522f646ec1ff837317d06f47886",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1053ea86_65c22c34",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/PortForwardingRequestReceiver.java",
         "patchSetId": 9
@@ -324,6 +348,30 @@
       "side": 1,
       "message": "I meant comparing it in reportVmActivePorts before it updates shared preferences. With that, we don\u0027t need to keep `mPrevActivePorts` here.\n\nI don\u0027t think it violates how we manage shared preferences, though. just compare before updating, and then it updates shared preference.",
       "parentUuid": "c1a3af6e_a64e9870",
+      "range": {
+        "startLine": 304,
+        "startChar": 0,
+        "endLine": 343,
+        "endChar": 5
+      },
+      "revId": "ba623e71502cb522f646ec1ff837317d06f47886",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97069539_dd1827f9",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-22T15:59:00Z",
+      "side": 1,
+      "message": "Just of curiosity, what\u0027s the \u0027violate how we manage shared preferences\u0027?",
+      "parentUuid": "5f066028_4b38c5db",
       "range": {
         "startLine": 304,
         "startChar": 0,
