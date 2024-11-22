@@ -260,4 +260,14 @@ size_t AVmAttestationResult_getCertificateAt(const AVmAttestationResult* _Nonnul
                                              size_t index, void* _Nullable data, size_t size)
         __INTRODUCED_IN(__ANDROID_API_V__);
 
+/**
+ * Write payload's rollback protected data
+ */
+bool AVmPayload_writeRollbackProtectedSecret(const void* _Nonnull secret);
+
+/**
+ * Read payload's rollback protected data
+ */
+int AVmPayload_readRollbackProtectedSecret(void* _Nonnull secret);
+
 __END_DECLS

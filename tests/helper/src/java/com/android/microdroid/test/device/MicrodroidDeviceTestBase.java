@@ -588,6 +588,7 @@ public abstract class MicrodroidDeviceTestBase {
         public String mConsoleInput;
         public byte[] mInstanceSecret;
         public int mPageSize;
+        public byte[] mPayloadRpData;
 
         public void assertNoException() {
             if (mException != null) {
