@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa6cd27a_d337c070",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1949,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-11-22T21:34:25Z",
+      "side": 1,
+      "message": "\u003eThis module is packaged in system partitions is not the HAL implementation but just a proxy to HAL. The reference HAL \u0026 TA implementation are in [1] [2]\n\nDone (I think)\n\n\u003eIf you\u0027re looking to unblock the HAL interface, one way would be (temporarily) having pvmfw inject the secretkeeper public_key the value of /avf/secretkeeper_public_key somewhere in ref DT[1]\n\nStill need this fallback (I think)",
+      "parentUuid": "d717c716_1b1c5761",
+      "range": {
+        "startLine": 1949,
+        "startChar": 0,
+        "endLine": 1949,
+        "endChar": 24
+      },
+      "revId": "8082ff5611885fac7c278a988e96358623da9fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e6d58647_0165558b",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 3
@@ -95,6 +119,30 @@
       "side": 1,
       "message": "SecretkeeperProxy is really a RPC binder service for PVM (It is called by MicrodroidManager). PVMs do not \u0026 must not (for security reason) rely on `getSecretKeeperIdentity`. So it would be good to return Err::Unimplemented on this SecretkeeperProxy!",
       "parentUuid": "e6d58647_0165558b",
+      "range": {
+        "startLine": 1973,
+        "startChar": 0,
+        "endLine": 1982,
+        "endChar": 9
+      },
+      "revId": "8082ff5611885fac7c278a988e96358623da9fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ce01989_60f42570",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1982,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-11-22T21:34:25Z",
+      "side": 1,
+      "message": "What\u0027s the right \"unimplemented\" here? `ExceptionCode::UNSUPPORTED_OPERATION`? just panic with `unimplemented!()`?",
+      "parentUuid": "c7b0241e_ddafd263",
       "range": {
         "startLine": 1973,
         "startChar": 0,
