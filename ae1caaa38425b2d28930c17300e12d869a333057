@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85db641a_11b5145f",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-22T08:36:19Z",
+      "side": 1,
+      "message": "It meant here, it should be an action-based intent instead of specifying class name to use context-registered broadcast receiver.",
+      "fixSuggestions": [
+        {
+          "fixId": "8c546873_1f121a15",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+              "range": {
+                "startLine": 278,
+                "startChar": 0,
+                "endLine": 280,
+                "endChar": 0
+              },
+              "replacement": "            Intent intent \u003d new Intent(PortForwardingRequestReceiver.ACTION_PORT_FORWARDING);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ae1caaa38425b2d28930c17300e12d869a333057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
