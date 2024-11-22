@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c1826f8_daabb571",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-11-22T11:07:33Z",
+      "side": 1,
+      "message": "Does this remove the need for host_ref_dt or do we need to keep it around for back-compat? If we keep it around for backcompat, how do we ensure DT doesn\u0027t have duplicate values.\n\n https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/android/virtmgr/src/aidl.rs;l\u003d854-855?q\u003dtrusted_props\u0026ss\u003dh%2Fgoogleplex-android%2Fplatform%2Fsuperproject%2Fmain%2F%2B%2Frefs%2Fheads%2Fmain:packages%2Fmodules%2FVirtualization%2Fandroid%2F",
+      "revId": "8082ff5611885fac7c278a988e96358623da9fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f957e1f5_681b4139",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 865,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-11-22T11:07:33Z",
+      "side": 1,
+      "message": "Somewhat similar to `vendor_hashtree_digest`, we\u0027ll need to call `ISecretkeeper.getSecretKeeperIdentity()` \u0026 include that in the trusted_props vector.\n\nAlso [1] says `When a protected VM is started, AVF populates this property in the VM DT /avf node from the corresponding property in the /avf/reference/avf node in the host DT`. Can you update this to `AVF populates this property in the VM DT /avf node by querying ISecretekeeper::getSecretKeeperIdentity`\n\n[1] https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:system/secretkeeper/README.md;bpv\u003d0#secretkeeper-public-key",
+      "revId": "8082ff5611885fac7c278a988e96358623da9fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d717c716_1b1c5761",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 3
@@ -37,6 +71,30 @@
       "writtenOn": "2024-11-22T10:34:27Z",
       "side": 1,
       "message": "IIUC, this should then be\n```\nself.0.getSecretKeeperIdentity()\n```\n?",
+      "range": {
+        "startLine": 1973,
+        "startChar": 0,
+        "endLine": 1982,
+        "endChar": 9
+      },
+      "revId": "8082ff5611885fac7c278a988e96358623da9fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7b0241e_ddafd263",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1982,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-11-22T11:07:33Z",
+      "side": 1,
+      "message": "SecretkeeperProxy is really a RPC binder service for PVM (It is called by MicrodroidManager). PVMs do not \u0026 must not (for security reason) rely on `getSecretKeeperIdentity`. So it would be good to return Err::Unimplemented on this SecretkeeperProxy!",
+      "parentUuid": "e6d58647_0165558b",
       "range": {
         "startLine": 1973,
         "startChar": 0,
