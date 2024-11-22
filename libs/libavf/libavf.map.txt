@@ -1,0 +1,24 @@
+LIBAVF { # apex llndk systemapi introduced=Baklava
+  global:
+    AVirtualMachineConfig_createRaw;
+    AVirtualMachineConfig_free;
+    AVirtualMachineConfig_setName;
+    AVirtualMachineConfig_setInstanceId;
+    AVirtualMachineConfig_setKernel;
+    AVirtualMachineConfig_setInitRd;
+    AVirtualMachineConfig_addDisk;
+    AVirtualMachineConfig_setMemoryMib;
+    AVirtualMachineConfig_setDeviceTreeOverlay;
+    AVirtualMachineConfig_setProtectedVm;
+    AVirtualMachineConfig_setBalloon;
+    AVirtualMachineConfig_setHypervisorSpecificAuthMethod;
+    AVirtualMachineConfig_addCustomMemoryBackingFile;
+    AVirtualMachineConfig_addReservedMmioRange;
+    AVirtualizationService_create;
+    AVirtualizationService_free;
+    AVirtualMachine_create;
+    AVirtualMachine_start;
+    AVirtualMachine_stop;
+    AVirtualMachine_waitForStop;
+    AVirtualMachine_free;
+};
