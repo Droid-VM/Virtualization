@@ -1,4 +1,4 @@
-rust_binary {
+/*rust_binary {
     name: "trusty_security_vm_launcher",
     crate_name: "trusty_security_vm_launcher",
     srcs: ["src/main.rs"],
@@ -10,6 +10,19 @@ rust_binary {
         "libclap",
         "libvmclient",
     ],
+    bootstrap: true,
+    apex_available: ["//apex_available:platform"],
+    system_ext_specific: true,
+    enabled: select(release_flag("RELEASE_AVF_ENABLE_EARLY_VM"), {
+        true: true,
+        false: false,
+    }),
+}*/
+
+cc_binary {
+    name: "trusty_security_vm_launcher",
+    srcs: ["src/main.cpp"],
+    shared_libs: ["libavf"],
     bootstrap: true,
     apex_available: ["//apex_available:platform"],
     system_ext_specific: true,
