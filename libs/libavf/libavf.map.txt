@@ -1,0 +1,26 @@
+LIBAVF {
+  global:
+    AVirtualMachineConfig_createRaw; # apex llndk
+    AVirtualMachineConfig_free; # apex llndk
+    AVirtualMachineConfig_setName; # apex llndk
+    AVirtualMachineConfig_setInstanceId; # apex llndk
+    AVirtualMachineConfig_setKernel; # apex llndk
+    AVirtualMachineConfig_setInitRd; # apex llndk
+    AVirtualMachineConfig_addDisk; # apex llndk
+    AVirtualMachineConfig_setMemoryMib; # apex llndk
+    AVirtualMachineConfig_setDeviceTreeOverlay; # apex llndk
+    AVirtualMachineConfig_setProtectedVm; # apex llndk
+    AVirtualMachineConfig_setBalloon; # apex llndk
+    AVirtualMachineConfig_setHypervisorSpecificAuthMethod; # apex llndk
+    AVirtualMachineConfig_addCustomMemoryBackingFile; # apex llndk
+    AVirtualMachineConfig_addReservedMmioRange; # apex llndk
+    AVirtualizationService_create; # apex llndk
+    AVirtualizationService_free; # apex llndk
+    AVirtualMachine_create; # apex llndk
+    AVirtualMachine_start; # apex llndk
+    AVirtualMachine_stop; # apex llndk
+    AVirtualMachine_waitForStop; # apex llndk
+    AVirtualMachine_free; # apex llndk
+  local:
+    *;
+};
