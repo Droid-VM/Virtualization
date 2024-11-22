@@ -16,11 +16,26 @@
 package com.android.virtualization.terminal;
 
 import android.content.Context;
+import android.text.InputType;
 import android.util.AttributeSet;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputConnection;
 import android.webkit.WebView;
 
 public class TerminalView extends WebView {
     public TerminalView(Context context, AttributeSet attrs) {
         super(context, attrs);
+    }
+
+    @Override
+    public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
+        InputConnection inputConnection = super.onCreateInputConnection(outAttrs);
+        if (outAttrs != null) {
+            // TODO(b/378642568): consider using InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            // here..
+            outAttrs.inputType =
+                    InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
+        }
+        return inputConnection;
     }
 }
