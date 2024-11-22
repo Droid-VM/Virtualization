@@ -237,6 +237,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4314d7de_2d405a4f",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstallerService.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-22T00:50:09Z",
+      "side": 1,
+      "message": "Interrupting Thread is discouraged. I don\u0027t think that stopping due to the no Wi-FI worth doing so especially because it happens when user does something (e.g. Turn off Wi-Fi or moving to somewhere else)\n\nReferences:\n - Internal [Java Practice](https://engdoc.corp.google.com/eng/doc/devguide/java/practices/interruption.md?cl\u003dhead#dont-interrupt) says almost never interrupt another thread.\n - [Effective Java](go/ej3e-78) also says \u0027A recommended way to stop one thread from another is to have the first thread poll a boolean field that is initially false but can be set to true by the second thread to indicate that the first thread is to stop itself\u0027",
+      "parentUuid": "97ab6556_0a202ba6",
+      "range": {
+        "startLine": 350,
+        "startChar": 16,
+        "endLine": 350,
+        "endChar": 27
+      },
+      "revId": "e5c2e643ecf7d7a3ff73221d782401e3023521af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f679652_e5f230b1",
