@@ -46,6 +46,30 @@
       },
       "revId": "2784e3f89cf5fb5b8a264ead4bea4f63c183ec4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f361196_60754a69",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-22T03:22:50Z",
+      "side": 1,
+      "message": "Yes, let\u0027s make is_nested_virtualzation return true even when running on qemu.",
+      "parentUuid": "db633e3e_a7e5a65d",
+      "range": {
+        "startLine": 96,
+        "startChar": 20,
+        "endLine": 96,
+        "endChar": 44
+      },
+      "revId": "2784e3f89cf5fb5b8a264ead4bea4f63c183ec4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
