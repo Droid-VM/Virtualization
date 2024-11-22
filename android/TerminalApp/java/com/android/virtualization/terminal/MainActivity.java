@@ -69,6 +69,8 @@ import java.net.UnknownHostException;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends BaseActivity
         implements VmLauncherServices.VmLauncherServiceCallback,
@@ -116,6 +118,43 @@ public class MainActivity extends BaseActivity
         mWebView.getSettings().setDomStorageEnabled(true);
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.setWebChromeClient(new WebChromeClient());
+
+        // Only ctrl key is special, it communicates with xtermjs to modify key event with ctrl key
+        findViewById(R.id.btn_ctrl)
+                .setOnClickListener(
+                        (v) -> {
+                            mWebView.loadUrl(TerminalView.CTRL_KEY_HANDLER);
+                            mWebView.loadUrl(TerminalView.ENABLE_CTRL_KEY);
+                        });
+        Map<Integer, Integer> btnKeyCodeMap = new HashMap<>();
+        btnKeyCodeMap.put(R.id.btn_tab, KeyEvent.KEYCODE_TAB);
+        // Alt key sends ESC keycode
+        btnKeyCodeMap.put(R.id.btn_alt, KeyEvent.KEYCODE_ESCAPE);
+        btnKeyCodeMap.put(R.id.btn_esc, KeyEvent.KEYCODE_ESCAPE);
+        btnKeyCodeMap.put(R.id.btn_left, KeyEvent.KEYCODE_DPAD_LEFT);
+        btnKeyCodeMap.put(R.id.btn_right, KeyEvent.KEYCODE_DPAD_RIGHT);
+        btnKeyCodeMap.put(R.id.btn_up, KeyEvent.KEYCODE_DPAD_UP);
+        btnKeyCodeMap.put(R.id.btn_down, KeyEvent.KEYCODE_DPAD_DOWN);
+        btnKeyCodeMap.put(R.id.btn_home, KeyEvent.KEYCODE_MOVE_HOME);
+        btnKeyCodeMap.put(R.id.btn_end, KeyEvent.KEYCODE_MOVE_END);
+        btnKeyCodeMap.put(R.id.btn_pgup, KeyEvent.KEYCODE_PAGE_UP);
+        btnKeyCodeMap.put(R.id.btn_pgdn, KeyEvent.KEYCODE_PAGE_DOWN);
+
+        View.OnClickListener modifierButtonClickListener =
+                v -> {
+                    if (btnKeyCodeMap.containsKey(v.getId()) && mWebView != null) {
+                        int keyCode = btnKeyCodeMap.get(v.getId());
+                        mWebView.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, keyCode));
+                        mWebView.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, keyCode));
+                    }
+                };
+
+        for (int btn : btnKeyCodeMap.keySet()) {
+            View v = findViewById(btn);
+            if (v != null) {
+                v.setOnClickListener(modifierButtonClickListener);
+            }
+        }
 
         mAccessibilityManager = getSystemService(AccessibilityManager.class);
         mAccessibilityManager.addTouchExplorationStateChangeListener(this);
@@ -243,6 +282,13 @@ public class MainActivity extends BaseActivity
                                                     .setVisibility(View.GONE);
                                             view.setVisibility(View.VISIBLE);
                                             mBootCompleted.open();
+                                            // TODO(b/376813452): support talkback as well
+                                            findViewById(R.id.keyboard_container)
+                                                    .setVisibility(
+                                                            mAccessibilityManager
+                                                                            .isTouchExplorationEnabled()
+                                                                    ? View.GONE
+                                                                    : View.VISIBLE);
                                         }
                                     }
                                 });
@@ -269,7 +315,9 @@ public class MainActivity extends BaseActivity
                         () -> {
                             waitUntilVmStarts();
                             runOnUiThread(
-                                    () -> mWebView.loadUrl(getTerminalServiceUrl().toString()));
+                                    () -> {
+                                        mWebView.loadUrl(getTerminalServiceUrl().toString());
+                                    });
                         })
                 .start();
     }
@@ -412,6 +460,7 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onTouchExplorationStateChanged(boolean enabled) {
+        findViewById(R.id.keyboard_container).setVisibility(enabled ? View.GONE : View.VISIBLE);
         connectToTerminalService();
     }
 
