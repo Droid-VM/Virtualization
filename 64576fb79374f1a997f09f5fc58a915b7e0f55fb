@@ -52,6 +52,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb659494_16c3e21c",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-22T17:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40b008c0_fef707d9",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 62
+      },
+      "revId": "64576fb79374f1a997f09f5fc58a915b7e0f55fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d6337b4_e816f6dd",
@@ -65,6 +89,30 @@
       "writtenOn": "2024-11-22T16:27:47Z",
       "side": 1,
       "message": "Question: what exactly is the keycode here? I wonder what happens if non-English (e.g. Korean) is typed after ctrl.",
+      "range": {
+        "startLine": 54,
+        "startChar": 22,
+        "endLine": 54,
+        "endChar": 29
+      },
+      "revId": "64576fb79374f1a997f09f5fc58a915b7e0f55fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6ae31d9_79bc4e1e",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/TerminalView.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-22T17:15:14Z",
+      "side": 1,
+      "message": "It\u0027s ascii code. In non-English, the input via soft keyboard is ignoring ctrl.(like character which doesn\u0027t have mapped control key)",
+      "parentUuid": "7d6337b4_e816f6dd",
       "range": {
         "startLine": 54,
         "startChar": 22,
@@ -116,6 +164,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcd12a3a_d3591207",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/TerminalView.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-22T17:15:14Z",
+      "side": 1,
+      "message": "soft keyboard normally doesn\u0027t support long press.. if input comes from physical keyboard, it will be called just once.",
+      "parentUuid": "5245254d_1619bd66",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 0
+      },
+      "revId": "64576fb79374f1a997f09f5fc58a915b7e0f55fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b6ed357_58214602",
@@ -129,6 +201,30 @@
       "writtenOn": "2024-11-22T16:27:47Z",
       "side": 1,
       "message": "LinearLayout might be more straightforward here",
+      "range": {
+        "startLine": 50,
+        "startChar": 9,
+        "endLine": 50,
+        "endChar": 23
+      },
+      "revId": "64576fb79374f1a997f09f5fc58a915b7e0f55fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5006ec7f_eaae3ed9",
+        "filename": "android/TerminalApp/res/layout/activity_headless.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-22T17:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b6ed357_58214602",
       "range": {
         "startLine": 50,
         "startChar": 9,
@@ -162,6 +258,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc927602_5b8eaf31",
+        "filename": "android/TerminalApp/res/layout/activity_headless.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-22T17:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e395a325_03f2b6d1",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 41
+      },
+      "revId": "64576fb79374f1a997f09f5fc58a915b7e0f55fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1bbaafd6_681a5204",
@@ -175,6 +295,30 @@
       "writtenOn": "2024-11-22T16:27:47Z",
       "side": 1,
       "message": "outside of your CL) This looks bit wierd because views are changed between invisible \u003c-\u003e visible in XML while Java does gone \u003c-\u003e visible. Can we match two?",
+      "range": {
+        "startLine": 57,
+        "startChar": 32,
+        "endLine": 57,
+        "endChar": 41
+      },
+      "revId": "64576fb79374f1a997f09f5fc58a915b7e0f55fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37450b24_0f3d0e26",
+        "filename": "android/TerminalApp/res/layout/activity_headless.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-22T17:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bbaafd6_681a5204",
       "range": {
         "startLine": 57,
         "startChar": 32,
@@ -208,6 +352,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c60253f_d3ad07aa",
+        "filename": "android/TerminalApp/res/layout/layout_keyboard.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-22T17:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65428b79_fbbf792a",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 43
+      },
+      "revId": "64576fb79374f1a997f09f5fc58a915b7e0f55fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "696e12c3_839fd2ec",
@@ -221,6 +389,30 @@
       "writtenOn": "2024-11-22T16:27:47Z",
       "side": 1,
       "message": "This is RelativeLayout specific. you can remove this",
+      "range": {
+        "startLine": 29,
+        "startChar": 8,
+        "endLine": 29,
+        "endChar": 47
+      },
+      "revId": "64576fb79374f1a997f09f5fc58a915b7e0f55fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc972461_d8da870a",
+        "filename": "android/TerminalApp/res/layout/layout_keyboard.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-22T17:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "696e12c3_839fd2ec",
       "range": {
         "startLine": 29,
         "startChar": 8,
@@ -254,6 +446,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4507d988_3ad0ffd3",
+        "filename": "android/TerminalApp/res/layout/layout_keyboard.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-22T17:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c07b3897_cff9a798",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 59,
+        "endChar": 47
+      },
+      "revId": "64576fb79374f1a997f09f5fc58a915b7e0f55fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a357566_58a219cc",
@@ -267,6 +483,30 @@
       "writtenOn": "2024-11-22T16:27:47Z",
       "side": 1,
       "message": "nit; you can move this to its own xml files. (e.g. `btn.xml`)",
+      "range": {
+        "startLine": 136,
+        "startChar": 18,
+        "endLine": 136,
+        "endChar": 30
+      },
+      "revId": "64576fb79374f1a997f09f5fc58a915b7e0f55fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bbe51cd_dc20630e",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-22T17:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a357566_58a219cc",
       "range": {
         "startLine": 136,
         "startChar": 18,
@@ -300,6 +540,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fab2eac0_06019324",
+        "filename": "android/TerminalApp/res/values/styles.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-22T17:15:14Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "88cdb633_55086c29",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 86
+      },
+      "revId": "64576fb79374f1a997f09f5fc58a915b7e0f55fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9dc77e2e_dbe6a1b6",
@@ -313,6 +577,30 @@
       "writtenOn": "2024-11-22T16:27:47Z",
       "side": 1,
       "message": "Q: why?",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 0
+      },
+      "revId": "64576fb79374f1a997f09f5fc58a915b7e0f55fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2deef86_2ac32217",
+        "filename": "android/TerminalApp/res/values/styles.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-22T17:15:14Z",
+      "side": 1,
+      "message": "because default padding is too much even for 4 characters.. and also because it\u0027s borderless button, it looks proper without padding.",
+      "parentUuid": "9dc77e2e_dbe6a1b6",
       "range": {
         "startLine": 24,
         "startChar": 0,
