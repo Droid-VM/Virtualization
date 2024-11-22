@@ -15,9 +15,7 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
-// apex_test allows to skips apex_available checks for dependencies.
-// However, real apex should add itself to apex_available for all dependencies.
-apex_test {
+apex {
     name: "com.android.virt.accessor_demo",
     manifest: "manifest.json",
     file_contexts: "accessor_demo-file_contexts",
@@ -27,7 +25,12 @@ apex_test {
 
     updatable: false,
     future_updatable: false,
+    validations: {
+        apex_available: false,
+    },
+
     platform_apis: true,
+
     system_ext_specific: true,
 
     binaries: ["accessor_demo"],
