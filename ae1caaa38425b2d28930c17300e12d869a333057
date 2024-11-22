@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "af663973_3fb0b00b",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-22T11:43:07Z",
+      "side": 1,
+      "message": "nit: make as final",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 247,
+        "endChar": 45
+      },
+      "revId": "ae1caaa38425b2d28930c17300e12d869a333057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "85db641a_11b5145f",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
         "patchSetId": 13
@@ -32,6 +55,29 @@
           ]
         }
       ],
+      "revId": "ae1caaa38425b2d28930c17300e12d869a333057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b05311a4_b2a19a01",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-22T11:43:07Z",
+      "side": 1,
+      "message": "nit: style: since \"notification\" is already implied in the context, this can be just \"title\". The same applies to many variables in this change. \n\nYou don\u0027t have to make a change now, but I wish we use a similar coding style in this project.",
+      "range": {
+        "startLine": 292,
+        "startChar": 19,
+        "endLine": 292,
+        "endChar": 36
+      },
       "revId": "ae1caaa38425b2d28930c17300e12d869a333057",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
