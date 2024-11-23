@@ -20,6 +20,302 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "209efe96_0d05abff",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-11-23T00:38:35Z",
+      "side": 1,
+      "message": "does this need a forward declaration here as well?\n\nCan you do it like this:\n\n```\nstruct AVirtualMachineConfig;\ntypedef struct AVirtualMachineConfig AVirtualMachineConfig;\n```\n\nThis way:\n- we don\u0027t hide pointer \u0027*\u0027 (makes memory structure more clear below)\n- we only need one struct name, no \u0027_\u0027 needed\n\nThis is how libbinder_ndk works, and other NDK APIs I\u0027ve seen, but maybe this is another standard way of doing things, I haven\u0027t seen this before.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 61
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9f955b17_1fd35cb1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 25,
+                "startChar": 0,
+                "endLine": 26,
+                "endChar": 0
+              },
+              "replacement": "struct AVirtualMachineConfig;\ntypedef struct AVirtualMachineConfig AVirtualMachineConfig;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "897cfe6b_0a2d1e7b",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-11-23T00:38:35Z",
+      "side": 1,
+      "message": "we\u0027ll add comments for all these as well? document FD ownership? Overall, looks great!",
+      "fixSuggestions": [
+        {
+          "fixId": "c74c7710_5cc3d304",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 32,
+                "startChar": 0,
+                "endLine": 32,
+                "endChar": 0
+              },
+              "replacement": "// Creates a new AVirtualMachineConfig.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 33,
+                "startChar": 0,
+                "endLine": 33,
+                "endChar": 0
+              },
+              "replacement": "// Deletes the AVirtualMachineConfig.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 34,
+                "startChar": 0,
+                "endLine": 34,
+                "endChar": 0
+              },
+              "replacement": "// Sets the name of the VM.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 35,
+                "startChar": 0,
+                "endLine": 35,
+                "endChar": 0
+              },
+              "replacement": "// Sets the instance ID of the VM.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 37,
+                "startChar": 0,
+                "endLine": 37,
+                "endChar": 0
+              },
+              "replacement": "// Sets the kernel image of the VM.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 38,
+                "startChar": 0,
+                "endLine": 38,
+                "endChar": 0
+              },
+              "replacement": "// Sets the initrd image of the VM.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 39,
+                "startChar": 0,
+                "endLine": 39,
+                "endChar": 0
+              },
+              "replacement": "// Adds a disk image to the VM.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 40,
+                "startChar": 0,
+                "endLine": 40,
+                "endChar": 0
+              },
+              "replacement": "// Sets the memory size of the VM.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 41,
+                "startChar": 0,
+                "endLine": 41,
+                "endChar": 0
+              },
+              "replacement": "// Sets the device tree overlay of the VM.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 42,
+                "startChar": 0,
+                "endLine": 42,
+                "endChar": 0
+              },
+              "replacement": "// Sets whether the VM is protected.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 43,
+                "startChar": 0,
+                "endLine": 43,
+                "endChar": 0
+              },
+              "replacement": "// Sets whether the VM has a balloon.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 44,
+                "startChar": 0,
+                "endLine": 44,
+                "endChar": 0
+              },
+              "replacement": "// Sets the CPU topology of the VM.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 46,
+                "startChar": 0,
+                "endLine": 46,
+                "endChar": 0
+              },
+              "replacement": "// Sets the auth method of the VM.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 47,
+                "startChar": 0,
+                "endLine": 47,
+                "endChar": 0
+              },
+              "replacement": "// Sets the custom memory backing file of the VM.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 48,
+                "startChar": 0,
+                "endLine": 48,
+                "endChar": 0
+              },
+              "replacement": "// Adds a reserved MMIO range to the VM.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 53,
+                "startChar": 0,
+                "endLine": 53,
+                "endChar": 0
+              },
+              "replacement": "// Creates a new AVirtualizationService.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 54,
+                "startChar": 0,
+                "endLine": 54,
+                "endChar": 0
+              },
+              "replacement": "// Creates a new AVirtualizationService for early boot.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 55,
+                "startChar": 0,
+                "endLine": 55,
+                "endChar": 0
+              },
+              "replacement": "// Deletes the AVirtualizationService.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 96,
+                "startChar": 0,
+                "endLine": 96,
+                "endChar": 0
+              },
+              "replacement": "// Creates a new AVirtualMachine.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 98,
+                "startChar": 0,
+                "endLine": 98,
+                "endChar": 0
+              },
+              "replacement": "// Starts the AVirtualMachine.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 99,
+                "startChar": 0,
+                "endLine": 99,
+                "endChar": 0
+              },
+              "replacement": "// Stops the AVirtualMachine.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 100,
+                "startChar": 0,
+                "endLine": 100,
+                "endChar": 0
+              },
+              "replacement": "// Waits for the AVirtualMachine to stop.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 101,
+                "startChar": 0,
+                "endLine": 101,
+                "endChar": 0
+              },
+              "replacement": "// Deletes the AVirtualMachine.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "369838a3_3e6a674c",
         "filename": "libs/libavf/include/android/virtualization.h",
         "patchSetId": 2
@@ -31,6 +327,57 @@
       "writtenOn": "2024-11-22T19:43:33Z",
       "side": 1,
       "message": "this might need to be something like `addCustomMemoryBackingFile(config, fd, rangeStart, rangeEnd)`. i\u0027ll confirm",
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75e0294c_30fb3b4b",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-11-23T00:38:35Z",
+      "side": 1,
+      "message": "how to know which one to call? Could we share one API for creating all VM types?",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 72
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ae25cae1_649b4aca",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 53,
+                "startChar": 0,
+                "endLine": 53,
+                "endChar": 0
+              },
+              "replacement": "// Create a VirtualizationService instance.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 54,
+                "startChar": 0,
+                "endLine": 54,
+                "endChar": 0
+              },
+              "replacement": "// Create a VirtualizationService instance early in the boot process.\n"
+            }
+          ]
+        }
+      ],
       "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -53,6 +400,29 @@
         "startChar": 0,
         "endLine": 55,
         "endChar": 67
+      },
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10d1946e_767d2186",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-11-23T00:38:35Z",
+      "side": 1,
+      "message": "should this be const btw?",
+      "range": {
+        "startLine": 96,
+        "startChar": 59,
+        "endLine": 96,
+        "endChar": 80
       },
       "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
