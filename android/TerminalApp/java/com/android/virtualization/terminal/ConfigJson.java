@@ -16,6 +16,8 @@
 
 package com.android.virtualization.terminal;
 
+import static com.android.virtualization.terminal.MainActivity.TAG;
+
 import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Rect;
@@ -29,6 +31,7 @@ import android.system.virtualmachine.VirtualMachineCustomImageConfig.GpuConfig;
 import android.system.virtualmachine.VirtualMachineCustomImageConfig.Partition;
 import android.system.virtualmachine.VirtualMachineCustomImageConfig.SharedPath;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.WindowManager;
 import android.view.WindowMetrics;
 
@@ -36,9 +39,11 @@ import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -193,14 +198,17 @@ class ConfigJson {
         private String sharedPath;
         private static final int GUEST_UID = 1000;
         private static final int GUEST_GID = 100;
+        static final String VHOST_USER_FS_SOCK_DIR = "/dev/socket/vmterminal/";
 
         private SharedPath toConfig(Context context) {
             try {
                 int terminalUid = getTerminalUid(context);
-                if (sharedPath.contains("emulated")) {
-                    if (Environment.isExternalStorageManager()) {
-                        int currentUserId = context.getUserId();
-                        String path = sharedPath + "/" + currentUserId + "/Download";
+                boolean isEmulatedStorage = sharedPath.contains("emulated");
+                boolean isExternalStorage =
+                        isEmulatedStorage && Environment.isExternalStorageManager();
+
+                if (isExternalStorage) {
+                    String path = sharedPath + "/" + context.getUserId() + "/Download";
                         return new SharedPath(
                                 path,
                                 terminalUid,
@@ -210,14 +218,63 @@ class ConfigJson {
                                 0007,
                                 "android",
                                 "android");
+                } else if (!isEmulatedStorage) {
+                    if (startCrosvmVirtiofs(sharedPath, terminalUid, 0, 0, "internal", 0007)) {
+                        return new SharedPath(
+                                sharedPath,
+                                terminalUid,
+                                terminalUid,
+                                0,
+                                0,
+                                0007,
+                                "internal",
+                                "internal");
                     }
-                    return null;
                 }
-                return new SharedPath(
-                        sharedPath, terminalUid, terminalUid, 0, 0, 0007, "internal", "internal");
+                return null;
             } catch (NameNotFoundException e) {
                 return null;
             }
+        }
+
+        public boolean startCrosvmVirtiofs(
+                String sharedPath,
+                int terminalUid,
+                int guest_uid,
+                int guest_gid,
+                String tagName,
+                int mask) {
+            String ugidMapValue =
+                    String.format(
+                            "%d %d %d %d %d /",
+                            guest_uid, guest_gid, terminalUid, terminalUid, mask);
+
+            String cfgArg = String.format("ugid_map='%s'", ugidMapValue);
+            String socketPath =
+                    new File(VHOST_USER_FS_SOCK_DIR, tagName + ".virtiofs").getAbsolutePath();
+
+            try {
+                Files.deleteIfExists(Path.of(socketPath));
+
+                ProcessBuilder pb =
+                        new ProcessBuilder(
+                                "/apex/com.android.virt/bin/crosvm",
+                                "device",
+                                "fs",
+                                "--socket=" + socketPath,
+                                "--tag=" + tagName,
+                                "--shared-dir=" + sharedPath,
+                                "--cfg",
+                                cfgArg,
+                                "--disable-sandbox",
+                                "--skip-pivot-root=true");
+
+                pb.start();
+            } catch (IOException e) {
+                Log.e(TAG, "startCrosvmVirtiofs failed", e);
+                return false;
+            }
+            return true;
         }
 
         private int getTerminalUid(Context context) throws NameNotFoundException {

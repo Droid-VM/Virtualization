@@ -59,6 +59,7 @@ use tombstoned_client::{TombstonedConnection, DebuggerdDumpType};
 use rpcbinder::RpcServer;
 
 const CROSVM_PATH: &str = "/apex/com.android.virt/bin/crosvm";
+const VHOST_USER_FS_SOCK_DIR: &str = "/dev/socket/vmterminal/";
 
 /// Version of the platform that crosvm currently implements. The format follows SemVer. This
 /// should be updated when there is a platform change in the crosvm side. Having this value here is
@@ -907,6 +908,9 @@ fn vfio_argument_for_platform_device(device: &VfioDevice) -> Result<String, Erro
 
 fn run_virtiofs(config: &CrosvmConfig) -> io::Result<()> {
     for shared_path in &config.shared_paths {
+        if shared_path.tag == "internal" {
+            continue;
+        }
         let ugid_map_value = format!(
             "{} {} {} {} {} /",
             shared_path.guest_uid,
@@ -1255,12 +1259,21 @@ fn run_vm(
     }
 
     for shared_path in &config.shared_paths {
-        if let Err(e) = wait_for_file(&shared_path.socket_path, 5) {
+        // Socket path for internal storage is from /dev/socket/
+        let socket_path = if shared_path.tag == "internal" {
+            Path::new(VHOST_USER_FS_SOCK_DIR)
+                .join(&shared_path.tag)
+                .with_extension("virtiofs")
+                .to_string_lossy()
+                .to_string()
+        } else {
+            shared_path.socket_path.clone()
+        };
+        let socket_path_str = socket_path.as_str();
+        if let Err(e) = wait_for_file(socket_path_str, 5) {
             bail!("Error waiting for file: {}", e);
         }
-        command
-            .arg("--vhost-user-fs")
-            .arg(format!("{},tag={}", &shared_path.socket_path, &shared_path.tag));
+        command.arg("--vhost-user-fs").arg(format!("{},tag={}", &socket_path, &shared_path.tag));
     }
 
     debug!("Preserving FDs {:?}", preserved_fds);
