@@ -115,6 +115,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e46b5331_208d396c",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-25T01:48:40Z",
+      "side": 1,
+      "message": "final and the mutability of the object are unrelated 😊\n\nfinal here just means you can\u0027t change this reference to point to a different object.",
+      "parentUuid": "d35262ca_909e5c53",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 247,
+        "endChar": 45
+      },
+      "revId": "ae1caaa38425b2d28930c17300e12d869a333057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ce1f34e_d546863c",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
         "patchSetId": 13
