@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dc55c05_9861bca2",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-25T01:33:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da7e89b7_314b94ab",
+      "range": {
+        "startLine": 371,
+        "startChar": 0,
+        "endLine": 371,
+        "endChar": 64
+      },
+      "revId": "ae1caaa38425b2d28930c17300e12d869a333057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af663973_3fb0b00b",
@@ -65,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d35262ca_909e5c53",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-25T01:33:31Z",
+      "side": 1,
+      "message": "Done, but not for `mPrevActivePorts` since it\u0027s modified.",
+      "parentUuid": "af663973_3fb0b00b",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 247,
+        "endChar": 45
+      },
+      "revId": "ae1caaa38425b2d28930c17300e12d869a333057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ce1f34e_d546863c",
@@ -78,6 +126,30 @@
       "writtenOn": "2024-11-22T15:59:00Z",
       "side": 1,
       "message": "what about making key as ports and value for enabled/disable status? then you only need to update one single notification in `onSharedPreferenceChanged()`. No need to keep prev active ports nor iteration..\n\nnit; this implies that the shared preference is dedicated to ports. If we need different preference, then you can create new one instead.\n\nnit; there\u0027s no problem even if you notify the same notification with the same id.",
+      "range": {
+        "startLine": 255,
+        "startChar": 83,
+        "endLine": 255,
+        "endChar": 86
+      },
+      "revId": "ae1caaa38425b2d28930c17300e12d869a333057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d88438b7_33e32f93",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-25T01:33:31Z",
+      "side": 1,
+      "message": "This listener is not about port enabled/disabled. It\u0027s for retrieving active port info from the guest.\n\nAnd also, I don\u0027t want to make an edit on shared preference format at this change. That can bring lots of change to the overall app.",
+      "parentUuid": "9ce1f34e_d546863c",
       "range": {
         "startLine": 255,
         "startChar": 83,
@@ -125,6 +197,30 @@
           ]
         }
       ],
+      "revId": "ae1caaa38425b2d28930c17300e12d869a333057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "386cc965_d35365a7",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-25T01:33:31Z",
+      "side": 1,
+      "message": "I think it\u0027s okay to throw an exception. Logically, `NumberFormatException` shouldn\u0027t be thrown. We don\u0027t handle app\u0027s behavior afterwards when this is not number-formatted.",
+      "parentUuid": "83a32b70_cc61be5b",
+      "range": {
+        "startLine": 270,
+        "startChar": 0,
+        "endLine": 272,
+        "endChar": 0
+      },
       "revId": "ae1caaa38425b2d28930c17300e12d869a333057",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -223,6 +319,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f22679c_c933b1a6",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-25T01:33:31Z",
+      "side": 1,
+      "message": "At first I wrote as you said, but changed to use only one action because I thought it can reduce code duplication. Why is it common? What\u0027s the pros for having 2 actions?",
+      "parentUuid": "eed74354_5117a71d",
+      "range": {
+        "startLine": 279,
+        "startChar": 0,
+        "endLine": 281,
+        "endChar": 0
+      },
+      "revId": "ae1caaa38425b2d28930c17300e12d869a333057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b05311a4_b2a19a01",
@@ -236,6 +356,30 @@
       "writtenOn": "2024-11-22T11:43:07Z",
       "side": 1,
       "message": "nit: style: since \"notification\" is already implied in the context, this can be just \"title\". The same applies to many variables in this change. \n\nYou don\u0027t have to make a change now, but I wish we use a similar coding style in this project.",
+      "range": {
+        "startLine": 292,
+        "startChar": 19,
+        "endLine": 292,
+        "endChar": 36
+      },
+      "revId": "ae1caaa38425b2d28930c17300e12d869a333057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1599afc7_698f588f",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-25T01:33:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b05311a4_b2a19a01",
       "range": {
         "startLine": 292,
         "startChar": 19,
@@ -293,6 +437,30 @@
           ]
         }
       ],
+      "revId": "ae1caaa38425b2d28930c17300e12d869a333057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f167719_cd804a96",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-25T01:33:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72a19363_e87189f6",
+      "range": {
+        "startLine": 312,
+        "startChar": 89,
+        "endLine": 312,
+        "endChar": 93
+      },
       "revId": "ae1caaa38425b2d28930c17300e12d869a333057",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
