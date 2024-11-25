@@ -1019,6 +1019,8 @@ fn assemble_shared_paths(
                 mask: path.mask,
                 tag: path.tag.clone(),
                 socket_path: temporary_directory.join(&path.socket).to_string_lossy().to_string(),
+                socket: maybe_clone_file(&path.socketFd)?,
+                app_domain: path.appDomain,
             })
         })
         .collect()
