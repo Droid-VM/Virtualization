@@ -24,3 +24,19 @@ adb shell "/apex/com.android.virt/bin/vm run /data/local/tmp/vm_config.json"
 
 The `vm` command also has other subcommands for debugging; run
 `/apex/com.android.virt/bin/vm help` for details.
+
+# Terminal app
+## Graphical environment (Wayland, VNC)
+By installing Wayland compositor and VNC backend, you can enable graphical environment.
+One of the options is `sway`, `wayvnc` and `xwayland`(if necessary).
+
+```
+sudo apt install sway wayvnc xwayland
+WLR_BACKENDS=headless WLR_LIBINPUT_NO_DEVICES=1 sway
+WAYLAND_DISPLAY=wayland-1 wayvnc 0.0.0.0
+```
+
+And then, use a VNC client or `novnc`.
+
+`weston` with VNC backend might be another option, but it isn't available in
+Debian package repository for bookworm.
