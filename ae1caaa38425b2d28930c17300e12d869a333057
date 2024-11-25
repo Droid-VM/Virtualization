@@ -185,6 +185,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d3a3805_fa66183e",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-25T03:49:35Z",
+      "side": 1,
+      "message": "Ah, okay. I made a confusing words. I meant `mPrevActivePorts` is reassigned, so it couldn\u0027t be the final. But, there\u0027s no `mPrevActivePorts` now, closing this comment.",
+      "parentUuid": "97a06246_d3b43647",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 247,
+        "endChar": 45
+      },
+      "revId": "ae1caaa38425b2d28930c17300e12d869a333057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ce1f34e_d546863c",
@@ -400,6 +424,24 @@
       "side": 1,
       "message": "I\u0027m wierd -- notification should be even when we pass bad intent. Could you be more specific?\n\nRe context registered: Did you specify `flags` when register receiver? `RECEIVER_NOT_EXPORTED` seems to be thr right flag.. https://developer.android.com/reference/android/content/Context#registerReceiver(android.content.BroadcastReceiver,%20android.content.IntentFilter,%20int)",
       "parentUuid": "c4976782_555b3c7a",
+      "revId": "ae1caaa38425b2d28930c17300e12d869a333057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c9545d3_995a71da",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-25T03:49:35Z",
+      "side": 1,
+      "message": "It seems defining intent with class mattered. After applying this comment, now I can set PortForwardingRequestReceiver as context-registered receiver. Thanks!",
+      "parentUuid": "f3bfab4a_2b37a454",
       "revId": "ae1caaa38425b2d28930c17300e12d869a333057",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
