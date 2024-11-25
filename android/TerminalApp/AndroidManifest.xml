@@ -46,10 +46,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".SettingsDiskResizeActivity" />
-        <activity android:name=".SettingsPortForwardingActivity" />
-        <activity android:name=".SettingsRecoveryActivity" />
+        <activity android:name=".settings.SettingsActivity" />
+        <activity android:name=".settings.SettingsDiskResizeActivity" />
+        <activity android:name=".settings.SettingsPortForwardingActivity" />
+        <activity android:name=".settings.SettingsRecoveryActivity" />
         <activity android:name=".ErrorActivity" />
         <property
             android:name="android.window.PROPERTY_ACTIVITY_EMBEDDING_SPLITS_ENABLED"

@@ -24,6 +24,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.android.virtualization.terminal.settings.SettingsRecoveryActivity;
+
 public class ErrorActivity extends BaseActivity {
     public static final String EXTRA_CAUSE = "cause";
 

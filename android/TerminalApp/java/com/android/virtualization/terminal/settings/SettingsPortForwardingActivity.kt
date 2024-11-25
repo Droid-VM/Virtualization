@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.virtualization.terminal
+package com.android.virtualization.terminal.settings
 
 import android.Manifest
 import android.app.Notification
@@ -29,6 +29,7 @@ import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.virtualization.terminal.MainActivity.TAG
+import com.android.virtualization.terminal.R
 
 class SettingsPortForwardingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

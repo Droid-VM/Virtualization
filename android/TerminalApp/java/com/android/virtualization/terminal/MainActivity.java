@@ -58,6 +58,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.virtualization.terminal.settings.SettingsActivity;
 
 import com.google.android.material.appbar.MaterialToolbar;
 
@@ -77,7 +78,7 @@ import java.util.Map;
 
 public class MainActivity extends BaseActivity
         implements VmLauncherService.VmLauncherServiceCallback, AccessibilityStateChangeListener {
-    static final String TAG = "VmTerminalApp";
+    public static final String TAG = "VmTerminalApp";
     private static final String VM_ADDR = "192.168.0.2";
     private static final int TTYD_PORT = 7681;
     private static final int REQUEST_CODE_INSTALLER = 0x33;

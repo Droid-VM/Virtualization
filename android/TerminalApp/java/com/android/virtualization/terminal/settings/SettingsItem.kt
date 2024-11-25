@@ -13,6 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.virtualization.terminal
+package com.android.virtualization.terminal.settings
 
-class SettingsPortForwardingItem(val port: Int, val enabled: Boolean) {}
+enum class SettingsItemEnum {
+    DiskResize, PortForwarding, Recovery
+}
+
+class SettingsItem(
+    val title: String,
+    val subTitle: String,
+    val icon: Int,
+    val settingsItemEnum: SettingsItemEnum
+) {
+}

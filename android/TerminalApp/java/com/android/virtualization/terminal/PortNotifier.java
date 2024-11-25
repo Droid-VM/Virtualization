@@ -29,6 +29,8 @@ import android.content.IntentFilter;
 import android.graphics.drawable.Icon;
 import android.util.Log;
 
+import com.android.virtualization.terminal.settings.SettingsPortForwardingActivity;
+
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;

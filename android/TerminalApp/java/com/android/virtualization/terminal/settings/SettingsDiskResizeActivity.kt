@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.virtualization.terminal
+package com.android.virtualization.terminal.settings
 
 import android.content.Context
 import android.content.Intent
@@ -27,6 +27,9 @@ import android.text.style.RelativeSizeSpan
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.android.virtualization.terminal.InstallUtils;
+import com.android.virtualization.terminal.MainActivity;
+import com.android.virtualization.terminal.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.slider.Slider
 import java.util.regex.Pattern

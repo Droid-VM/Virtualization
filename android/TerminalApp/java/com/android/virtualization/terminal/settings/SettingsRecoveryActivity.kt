@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.virtualization.terminal
+package com.android.virtualization.terminal.settings
 
 import android.content.Intent
 import android.os.Bundle
@@ -22,7 +22,9 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import com.android.virtualization.terminal.InstallUtils
 import com.android.virtualization.terminal.MainActivity.TAG
+import com.android.virtualization.terminal.R
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
