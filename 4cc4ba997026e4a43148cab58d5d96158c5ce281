@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10bfea32_2a0965f6",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/PortNotifier.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-25T15:24:46Z",
+      "side": 1,
+      "message": "can it be static? (it was static class)",
+      "range": {
+        "startLine": 130,
+        "startChar": 4,
+        "endLine": 130,
+        "endChar": 23
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2a412a47_0614dd91",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/PortNotifier.java",
+              "range": {
+                "startLine": 130,
+                "startChar": 0,
+                "endLine": 131,
+                "endChar": 0
+              },
+              "replacement": "    private static final class PortForwardingRequestReceiver extends BroadcastReceiver {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4cc4ba997026e4a43148cab58d5d96158c5ce281",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
