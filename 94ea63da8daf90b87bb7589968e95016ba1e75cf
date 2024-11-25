@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c7cf0f5_2ce53968",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-25T02:18:30Z",
+      "side": 1,
+      "message": "thanks",
+      "parentUuid": "59351950_70163c5d",
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "209efe96_0d05abff",
@@ -55,6 +73,30 @@
           ]
         }
       ],
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71480023_a421eea4",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-25T02:18:30Z",
+      "side": 1,
+      "message": "I did like this in patchset 1 but @jiyong@google.com suggested hiding pointers. I think both are fine, but opaque structures from other NDKs do patchset 1 approach (not hiding the pointer).\n\nReverted to patchset 1.",
+      "parentUuid": "209efe96_0d05abff",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 61
+      },
       "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -316,6 +358,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a2835b06_a34ae5c2",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-25T02:18:30Z",
+      "side": 1,
+      "message": "Actually I wrote comments in Rust implementation. Do we need to duplicate those to here? I can do but I\u0027m not sure what\u0027s best.",
+      "parentUuid": "897cfe6b_0a2d1e7b",
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4207cbb7_36a1a487",
         "filename": "libs/libavf/include/android/virtualization.h",
         "patchSetId": 2
@@ -357,6 +417,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "782ea12a_be5ec206",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-25T02:18:30Z",
+      "side": 1,
+      "message": "I\u0027m not sure about this function but do we want a boolean for `setHypervisorSpecificAuthMethod` or an enum about auth methods?\n\nfor the time being I applied your suggestion.",
+      "parentUuid": "4207cbb7_36a1a487",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 57
+      },
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "369838a3_3e6a674c",
         "filename": "libs/libavf/include/android/virtualization.h",
         "patchSetId": 2
@@ -368,6 +452,24 @@
       "writtenOn": "2024-11-22T19:43:33Z",
       "side": 1,
       "message": "this might need to be something like `addCustomMemoryBackingFile(config, fd, rangeStart, rangeEnd)`. i\u0027ll confirm",
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "287bdd45_bbc5ba32",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-25T02:18:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "369838a3_3e6a674c",
       "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -449,6 +551,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b86a433_89a6706a",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-25T02:18:30Z",
+      "side": 1,
+      "message": "\u003e how to know which one to call?\n\nnormal VMs \u003d\u003e `create`, early VMs \u003d\u003e `createEarly`. This is analogous to existing `libvmclient`.\n\n\u003e Somewhat related question: can we detect early boot or not automatically?\n\nUsers don\u0027t detect, but users should be aware of the VM type they want to use.",
+      "parentUuid": "c9e0d892_c4854896",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 72
+      },
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "07c7f7b7_dfc0e652",
         "filename": "libs/libavf/include/android/virtualization.h",
         "patchSetId": 2
@@ -460,6 +586,30 @@
       "writtenOn": "2024-11-22T19:43:33Z",
       "side": 1,
       "message": "what are the tradeoffs for having the service explicitly represented in the API vs created implicitly with the VM?\n\nwith this approach, it seems like you can have multiple VMs handled by a single virtmgr. i guess that might be good for system health?",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 67
+      },
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24f6be86_5906904e",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-25T02:18:30Z",
+      "side": 1,
+      "message": "I think the benefit of explicit representation is that it\u0027s analogous to `libvmclient`, so less errorprone. If VM functions implicitly runs this service, this library (LLNDK) must manage its own services, adding complexity.\n\n\u003e with this approach, it seems like you can have multiple VMs handled by a single virtmgr. i guess that might be good for system health?\n\nThis can be one more good reason, although I don\u0027t think we support multiple VMs in a single virtmgr.",
+      "parentUuid": "07c7f7b7_dfc0e652",
       "range": {
         "startLine": 50,
         "startChar": 0,
@@ -493,6 +643,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b89fbece_5643fa45",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-25T02:18:30Z",
+      "side": 1,
+      "message": "although adding `const` doesn\u0027t do anything special here, it sounds good.\n\ndone",
+      "parentUuid": "10d1946e_767d2186",
+      "range": {
+        "startLine": 96,
+        "startChar": 59,
+        "endLine": 96,
+        "endChar": 80
+      },
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a75aa02_539e6777",
@@ -506,6 +680,30 @@
       "writtenOn": "2024-11-22T19:43:33Z",
       "side": 1,
       "message": "`vm` (or is this hungarian notation?)",
+      "range": {
+        "startLine": 97,
+        "startChar": 90,
+        "endLine": 97,
+        "endChar": 93
+      },
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efe8c687_eca3fee1",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-25T02:18:30Z",
+      "side": 1,
+      "message": "oops, done.",
+      "parentUuid": "8a75aa02_539e6777",
       "range": {
         "startLine": 97,
         "startChar": 90,
@@ -557,6 +755,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "126c919a_8cb6d306",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-25T02:18:30Z",
+      "side": 1,
+      "message": "This is analogous to `VmInstance::wait_for_death` in `libvmclient`. As this function never fails, I think it\u0027s fine to return the enum directly.",
+      "parentUuid": "19abc07b_aba46d1b",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 64
+      },
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d76bc4d_09f27404",
@@ -570,6 +792,30 @@
       "writtenOn": "2024-11-22T12:36:11Z",
       "side": 1,
       "message": "Since this always success, it would be better to return the handle directly.\n\nin C:\n\n```\nAVirtualMachineConfig AVirtualMachineConfig_createRaw();\n```\n\nThen you can make this as a safe function.",
+      "range": {
+        "startLine": 52,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 5
+      },
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0958610_604e16f2",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-25T02:18:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d76bc4d_09f27404",
       "range": {
         "startLine": 52,
         "startChar": 4,
@@ -605,6 +851,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c0ce88af_d3ba67e2",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-25T02:18:30Z",
+      "side": 1,
+      "message": "Based on the NDK guideline, it seems like I need an explicit enum for library-specific errors.\n\nI\u0027ll resolve this in the next patchset, along with other NDK guideline fixes.",
+      "parentUuid": "df4a0462_ce953cc7",
+      "range": {
+        "startLine": 344,
+        "startChar": 0,
+        "endLine": 346,
+        "endChar": 21
+      },
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dcc810f9_71406bfd",
         "filename": "libs/libavf/src/lib.rs",
         "patchSetId": 2
@@ -616,6 +886,30 @@
       "writtenOn": "2024-11-22T12:36:11Z",
       "side": 1,
       "message": "The \"else\" case should return an error like \"invalid handle\".",
+      "range": {
+        "startLine": 518,
+        "startChar": 4,
+        "endLine": 518,
+        "endChar": 5
+      },
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6d48d01_756fe8e0",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-25T02:18:30Z",
+      "side": 1,
+      "message": "I put ```Does nothing if `vm` is null```, like `free`, so I don\u0027t think we need to return an error. Other free functions from other NDKs also do similar.",
+      "parentUuid": "dcc810f9_71406bfd",
       "range": {
         "startLine": 518,
         "startChar": 4,
@@ -639,6 +933,30 @@
       "writtenOn": "2024-11-22T12:36:11Z",
       "side": 1,
       "message": "In AVirtualMachine_create, you have to mention that the ownership of given fds are transferred an the caller should not close the fds by themselves.",
+      "range": {
+        "startLine": 525,
+        "startChar": 0,
+        "endLine": 525,
+        "endChar": 65
+      },
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e1dc49b_2a02c1cf",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-25T02:18:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3af72cb2_8cff1a35",
       "range": {
         "startLine": 525,
         "startChar": 0,
