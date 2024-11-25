@@ -40,6 +40,30 @@
       ],
       "revId": "4cc4ba997026e4a43148cab58d5d96158c5ce281",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9dc4d0d_1818e98a",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/PortNotifier.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-25T15:27:55Z",
+      "side": 1,
+      "message": "No. It accesses mNotificationManager. In the next CL, that part is replaced with a call to the discardPortForwardingNotification method in the outer class.",
+      "parentUuid": "10bfea32_2a0965f6",
+      "range": {
+        "startLine": 130,
+        "startChar": 4,
+        "endLine": 130,
+        "endChar": 23
+      },
+      "revId": "4cc4ba997026e4a43148cab58d5d96158c5ce281",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
