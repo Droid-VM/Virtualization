@@ -59,6 +59,7 @@ use tombstoned_client::{TombstonedConnection, DebuggerdDumpType};
 use rpcbinder::RpcServer;
 
 const CROSVM_PATH: &str = "/apex/com.android.virt/bin/crosvm";
+const VHOST_USER_FS_SOCK_DIR: &str = "/data/misc/virtualizationservice/";
 
 /// Version of the platform that crosvm currently implements. The format follows SemVer. This
 /// should be updated when there is a platform change in the crosvm side. Having this value here is
@@ -227,13 +228,20 @@ pub struct DiskFile {
 /// Shared path between host and guest VM.
 #[derive(Debug)]
 pub struct SharedPathConfig {
+    #[allow(dead_code)]
     pub path: String,
+    #[allow(dead_code)]
     pub host_uid: i32,
+    #[allow(dead_code)]
     pub host_gid: i32,
+    #[allow(dead_code)]
     pub guest_uid: i32,
+    #[allow(dead_code)]
     pub guest_gid: i32,
+    #[allow(dead_code)]
     pub mask: i32,
     pub tag: String,
+    #[allow(dead_code)]
     pub socket_path: String,
 }
 
@@ -318,8 +326,6 @@ impl VmState {
             let vfio_devices = config.vfio_devices.clone();
             let tap =
                 if let Some(tap_file) = &config.tap { Some(tap_file.try_clone()?) } else { None };
-
-            run_virtiofs(&config)?;
 
             // If this fails and returns an error, `self` will be left in the `Failed` state.
             let child =
@@ -905,40 +911,6 @@ fn vfio_argument_for_platform_device(device: &VfioDevice) -> Result<String, Erro
     }
 }
 
-fn run_virtiofs(config: &CrosvmConfig) -> io::Result<()> {
-    for shared_path in &config.shared_paths {
-        let ugid_map_value = format!(
-            "{} {} {} {} {} /",
-            shared_path.guest_uid,
-            shared_path.guest_gid,
-            shared_path.host_uid,
-            shared_path.host_gid,
-            shared_path.mask,
-        );
-
-        let cfg_arg = format!("ugid_map='{}'", ugid_map_value);
-
-        let mut command = Command::new(CROSVM_PATH);
-        command
-            .arg("device")
-            .arg("fs")
-            .arg(format!("--socket={}", &shared_path.socket_path))
-            .arg(format!("--tag={}", &shared_path.tag))
-            .arg(format!("--shared-dir={}", &shared_path.path))
-            .arg("--cfg")
-            .arg(cfg_arg.as_str())
-            .arg("--disable-sandbox")
-            .arg("--skip-pivot-root=true");
-
-        print_crosvm_args(&command);
-
-        let result = SharedChild::spawn(&mut command)?;
-        info!("Spawned virtiofs crosvm({})", result.id());
-    }
-
-    Ok(())
-}
-
 /// Starts an instance of `crosvm` to manage a new VM.
 fn run_vm(
     config: CrosvmConfig,
@@ -1255,12 +1227,13 @@ fn run_vm(
     }
 
     for shared_path in &config.shared_paths {
-        if let Err(e) = wait_for_file(&shared_path.socket_path, 5) {
+        let socket_path =
+            Path::new(VHOST_USER_FS_SOCK_DIR).join(&shared_path.tag).with_extension("virtiofs");
+        let socket_path_str = socket_path.to_str().unwrap();
+        if let Err(e) = wait_for_file(socket_path_str, 5) {
             bail!("Error waiting for file: {}", e);
         }
-        command
-            .arg("--vhost-user-fs")
-            .arg(format!("{},tag={}", &shared_path.socket_path, &shared_path.tag));
+        command.arg("--vhost-user-fs").arg(format!("{},tag={}", socket_path_str, &shared_path.tag));
     }
 
     debug!("Preserving FDs {:?}", preserved_fds);

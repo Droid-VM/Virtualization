@@ -31,6 +31,7 @@ use anyhow::{bail, Context, Error, Result};
 use binder::{register_lazy_service, BinderFeatures, ProcessState, ThreadState};
 use log::{error, info, LevelFilter};
 use std::fs::{create_dir, read_dir};
+use std::os::unix::fs::FileTypeExt;
 use std::os::unix::raw::{pid_t, uid_t};
 use std::path::Path;
 use virtualizationmaintenance::IVirtualizationMaintenance::BnVirtualizationMaintenance;
@@ -111,7 +112,16 @@ fn register<T: binder::FromIBinder + ?Sized>(name: &str, service: binder::Strong
 /// Remove any files under `TEMPORARY_DIRECTORY`.
 fn clear_temporary_files() -> Result<(), Error> {
     for dir_entry in read_dir(TEMPORARY_DIRECTORY)? {
-        remove_temporary_dir(&dir_entry?.path())?
+        let dir_entry = dir_entry?;
+        let path = dir_entry.path();
+        if path.metadata()?.file_type().is_socket()
+            && path.extension().map_or(false, |ext| ext == "virtiofs")
+        {
+            continue;
+        }
+        if path.as_path().is_dir() {
+            remove_temporary_dir(&path)?;
+        }
     }
     Ok(())
 }

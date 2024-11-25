@@ -35,7 +35,9 @@ import android.view.WindowMetrics;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -160,14 +162,16 @@ class ConfigJson {
         private String sharedPath;
         private static final int GUEST_UID = 1000;
         private static final int GUEST_GID = 100;
+        static final String VHOST_USER_FS_SOCK_DIR = "/data/misc/virtualizationservice/";
 
         private SharedPath toConfig(Context context) {
             try {
                 int terminalUid = getTerminalUid(context);
-                if (sharedPath.contains("emulated")) {
-                    if (Environment.isExternalStorageManager()) {
-                        int currentUserId = context.getUserId();
-                        String path = sharedPath + "/" + currentUserId + "/Download";
+
+                if (sharedPath.contains("emulated") && Environment.isExternalStorageManager()) {
+                    String path = sharedPath + "/" + context.getUserId() + "/Download";
+                    if (startCrosvmVirtiofs(
+                            path, terminalUid, GUEST_UID, GUEST_GID, "android", 0007)) {
                         return new SharedPath(
                                 path,
                                 terminalUid,
@@ -178,12 +182,69 @@ class ConfigJson {
                                 "android",
                                 "android");
                     }
-                    return null;
+                } else if (!sharedPath.contains("emulated")) {
+                    if (startCrosvmVirtiofs(sharedPath, terminalUid, 0, 0, "internal", 0007)) {
+                        return new SharedPath(
+                                sharedPath,
+                                terminalUid,
+                                terminalUid,
+                                0,
+                                0,
+                                0007,
+                                "internal",
+                                "internal");
                 }
-                return new SharedPath(
-                        sharedPath, terminalUid, terminalUid, 0, 0, 0007, "internal", "internal");
+                }
+
+                return null;
             } catch (NameNotFoundException e) {
                 return null;
+            }
+        }
+
+        public boolean startCrosvmVirtiofs(
+                String sharedPath,
+                int terminalUid,
+                int guest_uid,
+                int guest_gid,
+                String tagName,
+                int mask) {
+            String ugidMapValue =
+                    String.format(
+                            "%d %d %d %d %d /",
+                            guest_uid, guest_gid, terminalUid, terminalUid, mask);
+
+            String cfgArg = String.format("ugid_map='%s'", ugidMapValue);
+            String socketPath =
+                    new File(VHOST_USER_FS_SOCK_DIR, tagName + ".virtiofs").getAbsolutePath();
+            deleteSocketFileIfExists(socketPath);
+
+            ProcessBuilder pb =
+                    new ProcessBuilder(
+                            "/apex/com.android.virt/bin/crosvm",
+                            "device",
+                            "fs",
+                            "--socket=" + socketPath,
+                            "--tag=" + tagName,
+                            "--shared-dir=" + sharedPath,
+                            "--cfg",
+                            cfgArg,
+                            "--disable-sandbox",
+                            "--skip-pivot-root=true");
+
+            try {
+                pb.start();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+            return true;
+        }
+
+        private void deleteSocketFileIfExists(String socketPath) {
+            File socketFile = new File(socketPath);
+            if (socketFile.exists()) {
+                socketFile.delete();
             }
         }
 
