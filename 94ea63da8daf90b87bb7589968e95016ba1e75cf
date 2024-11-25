@@ -376,6 +376,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5d303bc4_59ebf64c",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-11-25T19:24:15Z",
+      "side": 1,
+      "message": "The comments should be in the C header, since that\u0027s the API people need to use directly. The implementation could be anything, or we may one day have multiple.\n\nIn many contexts, e.g. if we export this as an API, for people in Google3 or elsewhere to use, they would only build against the header and link against stubs/a prebuilt, so we wouldn\u0027t have the Rust header.",
+      "parentUuid": "a2835b06_a34ae5c2",
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4207cbb7_36a1a487",
         "filename": "libs/libavf/include/android/virtualization.h",
         "patchSetId": 2
@@ -563,6 +581,30 @@
       "side": 1,
       "message": "\u003e how to know which one to call?\n\nnormal VMs \u003d\u003e `create`, early VMs \u003d\u003e `createEarly`. This is analogous to existing `libvmclient`.\n\n\u003e Somewhat related question: can we detect early boot or not automatically?\n\nUsers don\u0027t detect, but users should be aware of the VM type they want to use.",
       "parentUuid": "c9e0d892_c4854896",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 72
+      },
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e7242c5_e90df84c",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-11-25T19:24:15Z",
+      "side": 1,
+      "message": "This also means we have two types forever. Could we put whether it is early or not in the options? We may want to introduce more options later.",
+      "parentUuid": "2b86a433_89a6706a",
       "range": {
         "startLine": 53,
         "startChar": 0,
