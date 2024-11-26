@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "944ee6ec_cb47bc9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-11-26T22:23:35Z",
+      "side": 1,
+      "message": "Still a WIP - using libfdt for comparison instead of `diff`.\n\nNeed to modify the function to:\n- take an argument (list) of fields that don\u0027t need to exist (untrusted props?)\n- take an argument (list) of fields that are expected to exist but main contain different data (seeds)",
+      "revId": "5b04c7edb991ad8c73e25d3c804d73b98a3c0ca0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
