@@ -459,6 +459,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a93eba28_5143ed65",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-26T02:17:39Z",
+      "side": 1,
+      "message": "my intuition is to not use an enum. if we decide later to have real support for multiple auth mode, i\u0027d bet this one wouldn\u0027t really fit in and so it will probably be good that it is its own distinct function",
+      "parentUuid": "782ea12a_be5ec206",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 57
+      },
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "369838a3_3e6a674c",
         "filename": "libs/libavf/include/android/virtualization.h",
         "patchSetId": 2
@@ -652,6 +676,30 @@
       "side": 1,
       "message": "I think the benefit of explicit representation is that it\u0027s analogous to `libvmclient`, so less errorprone. If VM functions implicitly runs this service, this library (LLNDK) must manage its own services, adding complexity.\n\n\u003e with this approach, it seems like you can have multiple VMs handled by a single virtmgr. i guess that might be good for system health?\n\nThis can be one more good reason, although I don\u0027t think we support multiple VMs in a single virtmgr.",
       "parentUuid": "07c7f7b7_dfc0e652",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 67
+      },
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ebc81e3_fad48612",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-26T02:17:39Z",
+      "side": 1,
+      "message": "If each service can only support one VM, then the representation of `AVirtualMachine` could internally be a tuple of the service and the VM objects. You don\u0027t necessarily need anything complex.\n\nMatching the existing API is a good argument, but, IIUC, none of the existing APIs are very stabilized. Once we commit to this one, we\u0027ll be stuck with it forever, so it is worth contemplating a bit.\n\nI don\u0027t feel strongly though, so feel free to resolve if you think this is the right choice.",
+      "parentUuid": "24f6be86_5906904e",
       "range": {
         "startLine": 50,
         "startChar": 0,

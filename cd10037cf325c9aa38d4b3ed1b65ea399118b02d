@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3377aa8b_9ae9e587",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-26T02:17:39Z",
+      "side": 1,
+      "message": "`MATCH_HOST` turns on `--virt-cpufreq`, which isn\u0027t stable enough yet\n\nwe can probably just remove `AVirtualMachineConfig_setCpuTopology` altogether, although maybe it would be good to have a \"set vCPU count\" function",
+      "range": {
+        "startLine": 30,
+        "startChar": 4,
+        "endLine": 30,
+        "endChar": 14
+      },
+      "revId": "cd10037cf325c9aa38d4b3ed1b65ea399118b02d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
