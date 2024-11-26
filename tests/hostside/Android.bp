@@ -56,4 +56,11 @@ java_test_host {
         "libsparse",
         "libz",
     ],
+    target: {
+        android: {
+            data_native_bins: [
+                "dtcompare",
+            ],
+        },
+    },
 }
