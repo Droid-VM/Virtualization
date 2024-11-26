@@ -50,7 +50,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Objects;
 import java.util.Set;
@@ -152,13 +151,14 @@ public class VmLauncherService extends Service implements DebianServiceImpl.Debi
         }
         mExecutorService = Executors.newCachedThreadPool();
 
-        ConfigJson json = ConfigJson.from(this, InstallUtils.getVmConfigPath(this));
+        InstalledImage image = InstalledImage.getDefault(this);
+        ConfigJson json = ConfigJson.from(this, image.getConfigPath());
         VirtualMachineConfig.Builder configBuilder = json.toConfigBuilder(this);
         VirtualMachineCustomImageConfig.Builder customImageConfigBuilder =
                 json.toCustomImageConfigBuilder(this);
-        Path backupFile = InstallUtils.getBackupFile(this);
-        if (Files.exists(backupFile)) {
-            customImageConfigBuilder.addDisk(Disk.RWDisk(backupFile.toString()));
+        if (image.hasBackup()) {
+            Path backup = image.getBackupFile();
+            customImageConfigBuilder.addDisk(Disk.RWDisk(backup.toString()));
             configBuilder.setCustomImageConfig(customImageConfigBuilder.build());
         }
         VirtualMachineConfig config = configBuilder.build();
