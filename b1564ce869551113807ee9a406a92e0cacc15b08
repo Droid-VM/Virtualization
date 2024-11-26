@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c3b6e22_a637993b",
+        "filename": "guest/vmbase_example/idmap.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-26T03:11:21Z",
+      "side": 1,
+      "message": "this technically isn\u0027t necessary since the PCI MMIO isn\u0027t touched until after the dynamic page table is setup, but we might move other stuff around later, so it is safest to map the whole \"below RAM\" range",
+      "revId": "b1564ce869551113807ee9a406a92e0cacc15b08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
