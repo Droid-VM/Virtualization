@@ -107,6 +107,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "bb2f21da_0c9bf382",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-11-26T21:31:16Z",
+      "side": 1,
+      "message": "I agree this is implying too much. I suspect we\u0027ll allow more detailed configuration in the future, but I hope this level of detail isn\u0027t required.\n\nDeleted the sentence.",
+      "parentUuid": "e72f687b_1f7f9d52",
+      "range": {
+        "startLine": 1027,
+        "startChar": 75,
+        "endLine": 1028,
+        "endChar": 41
+      },
+      "revId": "b1564ce869551113807ee9a406a92e0cacc15b08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "6c3b6e22_a637993b",
         "filename": "guest/vmbase_example/idmap.S",
         "patchSetId": 4
