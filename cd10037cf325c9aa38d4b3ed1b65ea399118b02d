@@ -22,6 +22,30 @@
       },
       "revId": "cd10037cf325c9aa38d4b3ed1b65ea399118b02d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a52fe62c_3f02ac9b",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-26T03:27:47Z",
+      "side": 1,
+      "message": "As we don\u0027t have corresponding \"set vCPU count\" function on AIDL service, let me just remove `CpuTopology` for now.",
+      "parentUuid": "3377aa8b_9ae9e587",
+      "range": {
+        "startLine": 30,
+        "startChar": 4,
+        "endLine": 30,
+        "endChar": 14
+      },
+      "revId": "cd10037cf325c9aa38d4b3ed1b65ea399118b02d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

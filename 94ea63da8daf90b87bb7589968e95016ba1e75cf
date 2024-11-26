@@ -392,6 +392,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7af74372_65adac63",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-26T03:27:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d303bc4_59ebf64c",
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4207cbb7_36a1a487",
@@ -471,6 +489,30 @@
       "side": 1,
       "message": "my intuition is to not use an enum. if we decide later to have real support for multiple auth mode, i\u0027d bet this one wouldn\u0027t really fit in and so it will probably be good that it is its own distinct function",
       "parentUuid": "782ea12a_be5ec206",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 57
+      },
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3c9b751_c1a87cd5",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-26T03:27:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a93eba28_5143ed65",
       "range": {
         "startLine": 46,
         "startChar": 4,
@@ -639,6 +681,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44a3ac9d_eafd47de",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-26T03:27:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e7242c5_e90df84c",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 72
+      },
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07c7f7b7_dfc0e652",
@@ -700,6 +766,30 @@
       "side": 1,
       "message": "If each service can only support one VM, then the representation of `AVirtualMachine` could internally be a tuple of the service and the VM objects. You don\u0027t necessarily need anything complex.\n\nMatching the existing API is a good argument, but, IIUC, none of the existing APIs are very stabilized. Once we commit to this one, we\u0027ll be stuck with it forever, so it is worth contemplating a bit.\n\nI don\u0027t feel strongly though, so feel free to resolve if you think this is the right choice.",
       "parentUuid": "24f6be86_5906904e",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 67
+      },
+      "revId": "94ea63da8daf90b87bb7589968e95016ba1e75cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "593d6d30_03fc9c6e",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-26T03:27:47Z",
+      "side": 1,
+      "message": "I think I still want to separate. I don\u0027t think that will happen, but if it turns out that we don\u0027t need virtualizationservice, we can turn this into a simple no-op handle. Also we might end up maintaining multiple VMs within a single virtmgr.\n\nLet me leave this as-is.",
+      "parentUuid": "4ebc81e3_fad48612",
       "range": {
         "startLine": 50,
         "startChar": 0,
