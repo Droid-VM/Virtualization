@@ -107,10 +107,14 @@ class ImageArchive {
         postInstall();
     }
 
-    // To save storage, delete the source archive on the disk.
     private void postInstall() throws IOException {
+        // To save storage, delete the source archive on the disk.
         if (mPath != null) {
             Files.deleteIfExists(mPath);
         }
+
+        // Mark the completion
+        Path marker = mPath.resolve(InstalledImage.MARKER_FILENAME);
+        Files.createFile(marker);
     }
 }
