@@ -22,6 +22,30 @@
       },
       "revId": "593a4c5afe3293a41a357c676847cbd0518a993f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "714b55ba_4bb03142",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ImageArchive.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-26T02:36:46Z",
+      "side": 1,
+      "message": "I have thought about it, but we use these two object separately in many places. For example, to check if it exists in sdcard.",
+      "parentUuid": "b90cce79_f546b63d",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 47
+      },
+      "revId": "593a4c5afe3293a41a357c676847cbd0518a993f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
