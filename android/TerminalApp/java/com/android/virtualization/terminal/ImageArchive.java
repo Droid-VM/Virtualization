@@ -77,6 +77,16 @@ class ImageArchive {
         }
     }
 
+    /** Tests if ImageArchive exists on the medium. */
+    public boolean exists() {
+        if (mPath != null) {
+            return Files.exists(mPath);
+        } else {
+            // TODO
+            return true;
+        }
+    }
+
     private InputStream getInputStream(Function<InputStream, InputStream> filter)
             throws IOException {
         InputStream is = mPath != null ? new FileInputStream(mPath.toFile()) : mUrl.openStream();

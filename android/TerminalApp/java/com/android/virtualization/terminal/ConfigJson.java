@@ -92,7 +92,7 @@ class ConfigJson {
         pipeOut.connect(pipeIn);
 
         Map<String, String> rules = new HashMap<>();
-        rules.put("\\$PAYLOAD_DIR", InstallUtils.getInternalStorageDir(context).toString());
+        rules.put("\\$PAYLOAD_DIR", InstalledImage.getDefault(context).getInstallDir().toString());
         rules.put("\\$USER_ID", String.valueOf(context.getUserId()));
         rules.put("\\$PACKAGE_NAME", context.getPackageName());
         String appDataDir = context.getDataDir().toString();

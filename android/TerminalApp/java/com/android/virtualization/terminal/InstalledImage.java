@@ -30,9 +30,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
-/**
- * Collection of files that consist of a VM image.
- */
+/** Collection of files that consist of a VM image. */
 class InstalledImage {
     private static final String INSTALL_DIRNAME = "linux";
     private static final String ROOTFS_FILENAME = "root_part";
@@ -48,9 +46,7 @@ class InstalledImage {
     private final Path mConfig;
     private final Path mMarker;
 
-    /**
-     * Returns InstalledImage for a given app context
-     */
+    /** Returns InstalledImage for a given app context */
     public static InstalledImage getDefault(Context context) {
         Path installDir = context.getFilesDir().toPath().resolve(INSTALL_DIRNAME);
         return new InstalledImage(installDir);
@@ -68,23 +64,17 @@ class InstalledImage {
         return mDir;
     }
 
-    /**
-     * Tests if this InstalledImage is actually installed.
-     */
+    /** Tests if this InstalledImage is actually installed. */
     public boolean isInstalled() {
         return Files.exists(mMarker);
     }
 
-    /**
-     * Fully understalls this InstalledImage by deleting everything.
-     */
+    /** Fully understalls this InstalledImage by deleting everything. */
     public void uninstallFully() throws IOException {
         FileUtils.deleteContentsAndDir(mDir.toFile());
     }
 
-    /**
-     * Returns the path to the VM config file.
-     */
+    /** Returns the path to the VM config file. */
     public Path getConfigPath() {
         return mConfig;
     }
@@ -117,8 +107,10 @@ class InstalledImage {
         String result = runCommand("/system/bin/resize2fs", "-P", p);
         // The return value is the number of 4k block
         try {
-            long minSize = Long.parseLong(
-                    result.lines().toArray(String[]::new)[1].substring(42)) * 4 * 1024;
+            long minSize =
+                    Long.parseLong(result.lines().toArray(String[]::new)[1].substring(42))
+                            * 4
+                            * 1024;
             return roundUp(minSize);
         } catch (NumberFormatException e) {
             throw new IOException(e);

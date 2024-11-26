@@ -35,8 +35,6 @@ import android.os.Bundle;
 import android.os.ConditionVariable;
 import android.os.Environment;
 import android.provider.Settings;
-import android.system.ErrnoException;
-import android.system.Os;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -61,14 +59,11 @@ import com.android.internal.annotations.VisibleForTesting;
 
 import com.google.android.material.appbar.MaterialToolbar;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
@@ -82,6 +77,7 @@ public class MainActivity extends BaseActivity
     private static final int REQUEST_CODE_INSTALLER = 0x33;
     private static final int FONT_SIZE_DEFAULT = 13;
 
+    private InstalledImage mImage;
     private X509Certificate[] mCertificates;
     private PrivateKey mPrivateKey;
     private WebView mWebView;
@@ -107,6 +103,8 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mImage = InstalledImage.getDefault(this);
 
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         if (notificationManager.getNotificationChannel(this.getPackageName()) == null) {
@@ -434,7 +432,7 @@ public class MainActivity extends BaseActivity
     private boolean installIfNecessary() {
         // If payload from external storage exists(only for debuggable build) or there is no
         // installed image, launch installer activity.
-        if (!InstallUtils.isImageInstalled(this)) {
+        if (!mImage.isInstalled()) {
             Intent intent = new Intent(this, InstallerActivity.class);
             startActivityForResult(intent, REQUEST_CODE_INSTALLER);
             return true;
