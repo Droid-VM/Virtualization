@@ -43,6 +43,46 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "48fa1809_be17e7f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-26T19:54:24Z",
+      "side": 1,
+      "message": "Giving +2 assuming that this CL will be rebased onto aosp/3375617, without the `.S` change, and with a more accurate comment.",
+      "revId": "b1564ce869551113807ee9a406a92e0cacc15b08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e72f687b_1f7f9d52",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-26T19:54:24Z",
+      "side": 1,
+      "message": "Is it that \"we aren\u0027t ready\" (then, yet? when will we be?) or that the AVF APIs really aren\u0027t intended to be this low-level (e.g. the caller can\u0027t even set the exact number of vCPUs!)? When you suggested doing this by default, I understood the reasoning as a desire for consistency between devices and, therefore, better test coverage resulting in a more stable implementation, not that our APIs were too constraining?",
+      "range": {
+        "startLine": 1027,
+        "startChar": 75,
+        "endLine": 1028,
+        "endChar": 41
+      },
+      "revId": "b1564ce869551113807ee9a406a92e0cacc15b08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "6c3b6e22_a637993b",
         "filename": "guest/vmbase_example/idmap.S",
         "patchSetId": 4
@@ -54,6 +94,47 @@
       "writtenOn": "2024-11-26T03:11:21Z",
       "side": 1,
       "message": "this technically isn\u0027t necessary since the PCI MMIO isn\u0027t touched until after the dynamic page table is setup, but we might move other stuff around later, so it is safest to map the whole \"below RAM\" range",
+      "revId": "b1564ce869551113807ee9a406a92e0cacc15b08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6674487d_3ce55e1b",
+        "filename": "guest/vmbase_example/idmap.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-26T19:54:24Z",
+      "side": 1,
+      "message": "Do you mind dropping this hunk? As you say, it isn\u0027t needed for your change and becomes completely unnecessary after aosp/3378614. Also, I\u0027d rather avoid having such low-level discrepancies between `vmbase_example` and other `vmbase` clients. \n\nFYI, this PTE really is intended as a single 4KiB entry (for the UART page) but that would cost us 8KiB of `.rodata` PTs to hold the single L3 PTE so instead we have this L1 PTE. Adding more doesn\u0027t really make sense.",
+      "parentUuid": "6c3b6e22_a637993b",
+      "revId": "b1564ce869551113807ee9a406a92e0cacc15b08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fb3002e_0c2c59fa",
+        "filename": "guest/vmbase_example/src/layout.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-26T19:54:24Z",
+      "side": 1,
+      "message": "I\u0027ve moved this to aosp/3375617, so that our changes can both use it without conflicting; would you mind rebasing this CL on top of it when addressing the comments here?",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 76
+      },
       "revId": "b1564ce869551113807ee9a406a92e0cacc15b08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
