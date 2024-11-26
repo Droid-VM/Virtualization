@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81df0082_a333f777",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-26T04:22:27Z",
+      "side": 1,
+      "message": "Amended change for excluding 7681 only. 7681 is for ttyd, and I think it might be okay if only 7681 is the excluded port. User would know.",
+      "parentUuid": "98d6b9eb_414e8fed",
+      "range": {
+        "startLine": 7,
+        "startChar": 13,
+        "endLine": 7,
+        "endChar": 26
+      },
+      "revId": "5560546a42676945a9605cfc24e5612c07f14ac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0f408ce_fc10c546",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-11-26T02:10:22Z",
       "side": 1,
       "message": "minor suggestion, you can ignore) what about adding function for this? you can a) reuse when filtering listening ports, and b) and the function can add comments without defining extra constants.",
+      "range": {
+        "startLine": 145,
+        "startChar": 11,
+        "endLine": 145,
+        "endChar": 94
+      },
+      "revId": "5560546a42676945a9605cfc24e5612c07f14ac0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c22859a_a9576737",
+        "filename": "guest/forwarder_guest_launcher/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-11-26T04:22:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0f408ce_fc10c546",
       "range": {
         "startLine": 145,
         "startChar": 11,
