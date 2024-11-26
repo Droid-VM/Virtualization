@@ -28,7 +28,6 @@ mod entry;
 mod exceptions;
 mod fdt;
 mod gpt;
-mod helpers;
 mod instance;
 mod memory;
 
@@ -38,7 +37,6 @@ use crate::entry::RebootReason;
 use crate::fdt::{
     modify_for_next_stage, read_defer_rollback_protection, read_instance_id, sanitize_device_tree,
 };
-use crate::helpers::GUEST_PAGE_SIZE;
 use crate::instance::EntryBody;
 use crate::instance::Error as InstanceError;
 use crate::instance::{get_recorded_entry, record_instance_entry};
@@ -56,11 +54,9 @@ use pvmfw_avb::DebugLevel;
 use pvmfw_embedded_key::PUBLIC_KEY;
 use vmbase::fdt::pci::{PciError, PciInfo};
 use vmbase::heap;
-use vmbase::memory::{flush, init_shared_pool};
+use vmbase::memory::{flush, init_shared_pool, SIZE_4KB};
 use vmbase::rand;
 use vmbase::virtio::pci;
-
-const NEXT_BCC_SIZE: usize = GUEST_PAGE_SIZE;
 
 fn main(
     fdt: &mut Fdt,
@@ -109,9 +105,11 @@ fn main(
         info!("Please disregard any previous libavb ERROR about initrd_normal.");
     }
 
-    let fdt_info = sanitize_device_tree(fdt, vm_dtbo, vm_ref_dt)?;
+    let guest_page_size = verified_boot_data.page_size.unwrap_or(SIZE_4KB);
+    let fdt_info = sanitize_device_tree(fdt, vm_dtbo, vm_ref_dt, guest_page_size)?;
 
-    let next_bcc = heap::aligned_boxed_slice(NEXT_BCC_SIZE, GUEST_PAGE_SIZE).ok_or_else(|| {
+    let next_bcc_size = guest_page_size;
+    let next_bcc = heap::aligned_boxed_slice(next_bcc_size, guest_page_size).ok_or_else(|| {
         error!("Failed to allocate the next-stage BCC");
         RebootReason::InternalError
     })?;
