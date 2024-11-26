@@ -84,4 +84,14 @@ interface IAttestationService {
      * {@link #requestAttestationForTesting}.
      */
     void validateAttestationResult();
+
+    parcelable CompareDtResult {
+        /** Result whether the device tree matches */
+        boolean identical;
+
+        /** Error pointing to a difference in the device trees */
+        String error;
+    }
+
+    CompareDtResult compareDeviceTrees(in byte[] dt1, in byte[] dt2);
 }

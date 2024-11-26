@@ -814,3 +814,11 @@ impl Fdt {
         self.header().totalsize.get().try_into().unwrap()
     }
 }
+
+/// Compares 2 device trees and returns whether they are identical
+pub fn compare_device_trees(dt1: &[u8], dt2: &[u8]) -> Result<bool> {
+    let fdt1 = Fdt::from_slice(dt1)?;
+    let fdt2 = Fdt::from_slice(dt2)?;
+    Ok(fdt1.buffer == fdt2.buffer) // Currently set to fail since some elements would be
+                                   // different
+}

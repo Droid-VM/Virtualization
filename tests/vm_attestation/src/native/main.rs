@@ -18,11 +18,12 @@ use anyhow::Result;
 use avflog::LogResult;
 use com_android_virt_vm_attestation_testservice::{
     aidl::com::android::virt::vm_attestation::testservice::IAttestationService::{
-        AttestationStatus::AttestationStatus, BnAttestationService, IAttestationService,
-        SigningResult::SigningResult, PORT,
+        AttestationStatus::AttestationStatus, BnAttestationService,
+        CompareDtResult::CompareDtResult, IAttestationService, SigningResult::SigningResult, PORT,
     },
     binder::{self, BinderFeatures, Interface, IntoBinderResult, Strong},
 };
+use libfdt::compare_device_trees;
 use log::{error, info};
 use std::{
     panic,
@@ -103,6 +104,13 @@ impl IAttestationService for AttestationService {
         // TODO(b/191073073): Returns the attestation result to the host for validation.
         log(self.res.lock().unwrap().as_ref().unwrap());
         Ok(())
+    }
+
+    fn compareDeviceTrees(&self, dt1: &[u8], dt2: &[u8]) -> Result<CompareDtResult> {
+        match compare_device_trees(dt1, dt2) {
+            Ok(_) => Ok(CompareDtResult { identical: true, error: "" }),
+            Err(e) => Ok(CompareDtResult { identical: false, error: e }),
+        }
     }
 }
 

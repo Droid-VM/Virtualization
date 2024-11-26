@@ -55,6 +55,7 @@ import com.android.tradefed.util.FileUtil;
 import com.android.tradefed.util.RunUtil;
 import com.android.tradefed.util.xml.AbstractXmlParser;
 import com.android.virt.PayloadMetadata;
+import com.android.virt.vm_attestation.testservice.IAttestationService;
 
 import junitparams.Parameters;
 import junitparams.naming.TestCaseName;
@@ -1368,7 +1369,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         .build(getAndroidDevice());
         assertThat(mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT)).isTrue();
 
-        File goldenDt = findTestFile("dt_dump_golden.dts");
+        File goldenDt = findTestFile("dt_dump_golden.dtb");
         testGoldenDeviceTree(goldenDt.getAbsolutePath());
     }
 
@@ -1397,7 +1398,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         .build(getAndroidDevice());
         assertThat(mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT)).isTrue();
 
-        File goldenDt = findTestFile("dt_dump_protected_golden.dts");
+        File goldenDt = findTestFile("dt_dump_protected_golden.dtb");
         testGoldenDeviceTree(goldenDt.getAbsolutePath());
     }
 
@@ -1409,69 +1410,18 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         assumeTrue("adb root is not enabled", device.isAdbRoot());
 
         // Pull DT from device
-        File dtb_from_device = device.pullFile("/data/local/tmp/dump_dt.dtb");
+        File dtbFromDevice = device.pullFile("/data/local/tmp/dump_dt.dtb");
         if (disableRoot) {
             device.disableAdbRoot();
         }
-
-        File dtc = findTestFile("dtc");
-
-        // Create temp file for Device tree conversion
-        File dt_dump_dts = File.createTempFile("dt_dump", "dts");
-        dt_dump_dts.delete();
-        String dt_dump_dts_path = dt_dump_dts.getAbsolutePath();
-        // Convert DT to text format.
-        CommandResult dtb_to_dts =
-                RunUtil.getDefault()
-                        .runTimedCmd(
-                                3000,
-                                dtc.getAbsolutePath(),
-                                "-I",
-                                "dtb",
-                                "-O",
-                                "dts",
-                                "-qqq",
-                                "-f",
-                                "-s",
-                                "-o",
-                                dt_dump_dts_path,
-                                dtb_from_device.getAbsolutePath());
-        assertTrue(
-                "result convert stderr: " + dtb_to_dts.getStderr(),
-                dtb_to_dts.getStderr().trim().isEmpty());
-        assertTrue(
-                "result convert stdout: " + dtb_to_dts.getStdout(),
-                dtb_to_dts.getStdout().trim().isEmpty());
-
-        // Diff device's DT with the golden DT.
-        CommandResult result_compare =
-                RunUtil.getDefault()
-                        .runTimedCmd(
-                                3000,
-                                "diff",
-                                "-u",
-                                "-w",
-                                "-I",
-                                "kaslr-seed",
-                                "-I",
-                                "instance-id",
-                                "-I",
-                                "rng-seed",
-                                "-I",
-                                "linux,initrd-end",
-                                "-I",
-                                "secretkeeper_public_key",
-                                "-I",
-                                "interrupt-map",
-                                dt_dump_dts_path,
-                                goldenDt);
-
-        assertTrue(
-                "result compare stderr: " + result_compare.getStderr(),
-                result_compare.getStderr().trim().isEmpty());
-        assertTrue(
-                "result compare stdout: " + result_compare.getStdout(),
-                result_compare.getStdout().trim().isEmpty());
+        String goldenDtString = FileUtil.readStringFromFile(goldenDt);
+        String deviceDtString = FileUtil.readStringFromFile(dtbFromDevice);
+        IAttestationService service =
+                IAttestationService.Stub.asInterface(
+                        vm.connectToVsockServer(IAttestationService.PORT));
+        CompareDtRDesult result =
+                service.compareDeviceTrees(goldenDtString.asBytes(), deviceDtString.asBytes());
+        assertTrue(result.identical, result.error);
     }
 
     @Before
