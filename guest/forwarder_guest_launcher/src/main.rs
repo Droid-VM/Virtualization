@@ -35,6 +35,7 @@ mod debian_service {
 }
 
 const NON_PREVILEGED_PORT_RANGE_START: i32 = 1024;
+const EXCLUDED_PORTS: &[i32] = &[5355 /* LLMNR */, 7681 /* ttyd */];
 const TCPSTATES_IP_4: i8 = 4;
 const TCPSTATES_STATE_CLOSE: &str = "CLOSE";
 const TCPSTATES_STATE_LISTEN: &str = "LISTEN";
@@ -131,6 +132,7 @@ async fn report_active_ports(
         .filter(|x| x.is_ipv4())
         .map(|x| x.port().into())
         .filter(|x| *x >= NON_PREVILEGED_PORT_RANGE_START) // Ignore privileged ports
+        .filter(|x| !EXCLUDED_PORTS.contains(&x))
         .collect();
     send_active_ports_report(listening_ports.clone(), &mut client).await?;
 
@@ -140,7 +142,7 @@ async fn report_active_ports(
         if row.ip != TCPSTATES_IP_4 {
             continue;
         }
-        if row.lport < NON_PREVILEGED_PORT_RANGE_START {
+        if row.lport < NON_PREVILEGED_PORT_RANGE_START || EXCLUDED_PORTS.contains(&row.lport) {
             continue;
         }
         if row.rport > 0 {
