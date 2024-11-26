@@ -92,10 +92,6 @@ use vbmeta::VbMetaImage;
 use vmconfig::{VmConfig, get_debug_level};
 use vsock::VsockStream;
 use zip::ZipArchive;
-use android_frameworks_stats::aidl::android::frameworks::stats::{
-    IStats::{BnStats, BpStats, IStats,},
-    VendorAtom::VendorAtom,
-};
 
 /// The unique ID of a VM used (together with a port number) for vsock communication.
 pub type Cid = u32;
@@ -1849,18 +1845,6 @@ impl<'a, T> AsRef<T> for BorrowedOrOwned<'a, T> {
     }
 }
 
-// TODO(b/198785815) create a rust/ndk delegator and use that instead of writing our own!
-struct StatsDelegator {
-    delegate: Mutex<Strong<dyn IStats>>,
-}
-
-impl Interface for StatsDelegator {}
-
-impl IStats for StatsDelegator {
-    fn reportVendorAtom(&self, atom: &VendorAtom) -> binder::Result<()> {
-        self.delegate.lock().unwrap().reportVendorAtom(atom)
-    }
-}
 /// Implementation of `IVirtualMachineService`, the entry point of the AIDL service.
 #[derive(Debug, Default)]
 struct VirtualMachineService {
@@ -1948,36 +1932,10 @@ impl IVirtualMachineService for VirtualMachineService {
         if let Some(p) = self.proxied_services.lock().unwrap().get(name) {
             return Ok(ServiceConnectionInfo { port: *p });
         }
-
-        let cid = self.cid;
-
-        // We currently only support the stats service. It can be used as an example
-        // to support more host services with this proxy pattern.
-        let stats_service_instance = <BpStats as IStats>::get_descriptor().to_owned() + "/default";
-        if name != stats_service_instance {
-            return Err(anyhow!("Unknown service"))
-                .with_log()
-                .or_binder_exception(ExceptionCode::SECURITY);
-        }
-
-        // don't block this service while attempting to get a service for the client in the VM.
-        let local_svc: Strong<dyn IStats> = binder::check_interface(name)
-            .context("Failed to get {name} from IVirtualMachineService")
-            .or_service_specific_exception(-1)?;
-
-        // Setup a delegator that wraps the service so we can proxy calls.
-        // This is needed because we can't use a kernel binder from
-        // another process for a new RpcServer.
-        let service = BnStats::new_binder(
-            StatsDelegator { delegate: local_svc.into() },
-            BinderFeatures::default(),
-        );
-
-        self.start_delegator_vsock_service(service.as_binder(), name, cid)
     }
+
     fn getSupportedHostServices(&self) -> binder::Result<Vec<String>> {
-        let stats_service_instance = <BpStats as IStats>::get_descriptor().to_owned() + "/default";
-        Ok(vec![stats_service_instance])
+        Ok(vec![])
     }
 }
 
