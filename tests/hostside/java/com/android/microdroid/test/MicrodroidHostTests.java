@@ -1435,7 +1435,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         .build(getAndroidDevice());
         assertThat(mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT)).isTrue();
 
-        File goldenDt = findTestFile("dt_dump_golden.dts");
+        File goldenDt = findTestFile("dt_dump_golden.dtb");
         testGoldenDeviceTree(goldenDt.getAbsolutePath());
     }
 
@@ -1464,7 +1464,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         .build(getAndroidDevice());
         assertThat(mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT)).isTrue();
 
-        File goldenDt = findTestFile("dt_dump_protected_golden.dts");
+        File goldenDt = findTestFile("dt_dump_protected_golden.dtb");
         testGoldenDeviceTree(goldenDt.getAbsolutePath());
     }
 
@@ -1476,69 +1476,40 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         assumeTrue("adb root is not enabled", device.isAdbRoot());
 
         // Pull DT from device
-        File dtb_from_device = device.pullFile("/data/local/tmp/dump_dt.dtb");
+        File goldenDtFile = new File(goldenDt);
+        device.pushFile(goldenDtFile, "/data/local/tmp/golden_dt.dtb");
         if (disableRoot) {
             device.disableAdbRoot();
         }
-
-        File dtc = findTestFile("dtc");
-
-        // Create temp file for Device tree conversion
-        File dt_dump_dts = File.createTempFile("dt_dump", "dts");
-        dt_dump_dts.delete();
-        String dt_dump_dts_path = dt_dump_dts.getAbsolutePath();
-        // Convert DT to text format.
-        CommandResult dtb_to_dts =
+        //        String[] ignore_list = {"rng-seed", "kaslr_seed", "secretkeeper_public_key"};
+        CommandResult dtcompareResult =
                 RunUtil.getDefault()
                         .runTimedCmd(
                                 3000,
-                                dtc.getAbsolutePath(),
-                                "-I",
-                                "dtb",
-                                "-O",
-                                "dts",
-                                "-qqq",
-                                "-f",
+                                // dtcompareBin.getAbsolutePath(),
+                                "adb",
                                 "-s",
-                                "-o",
-                                dt_dump_dts_path,
-                                dtb_from_device.getAbsolutePath());
-        assertTrue(
-                "result convert stderr: " + dtb_to_dts.getStderr(),
-                dtb_to_dts.getStderr().trim().isEmpty());
-        assertTrue(
-                "result convert stdout: " + dtb_to_dts.getStdout(),
-                dtb_to_dts.getStdout().trim().isEmpty());
-
-        // Diff device's DT with the golden DT.
-        CommandResult result_compare =
-                RunUtil.getDefault()
-                        .runTimedCmd(
-                                3000,
-                                "diff",
-                                "-u",
-                                "-w",
-                                "-I",
+                                device.getSerialNumber(),
+                                "shell",
+                                "dtcompare",
+                                "/data/local/tmp/golden_dt.dtb",
+                                "/data/local/tmp/dump_dt.dtb",
+                                "--ignore-value",
                                 "kaslr-seed",
-                                "-I",
-                                "instance-id",
-                                "-I",
+                                "--ignore-value",
                                 "rng-seed",
-                                "-I",
+                                "--ignore-value",
+                                "instance-id",
+                                "--ignore-value",
                                 "linux,initrd-end",
-                                "-I",
-                                "secretkeeper_public_key",
-                                "-I",
-                                "interrupt-map",
-                                dt_dump_dts_path,
-                                goldenDt);
-
+                                "--ignore-value",
+                                "secretkeeper_public_key");
         assertTrue(
-                "result compare stderr: " + result_compare.getStderr(),
-                result_compare.getStderr().trim().isEmpty());
+                "result convert stderr: " + dtcompareResult.getStderr(),
+                dtcompareResult.getStderr().trim().isEmpty());
         assertTrue(
-                "result compare stdout: " + result_compare.getStdout(),
-                result_compare.getStdout().trim().isEmpty());
+                "result convert stdout: " + dtcompareResult.getStdout(),
+                dtcompareResult.getStdout().trim().isEmpty());
     }
 
     @Before
