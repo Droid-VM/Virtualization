@@ -22,7 +22,10 @@ rust_bindgen {
     header_libs: [
         "libfdt",
     ],
-    apex_available: ["com.android.virt"],
+    apex_available: [
+        "//apex_available:platform",
+        "com.android.virt",
+    ],
 }
 
 rust_defaults {
@@ -48,7 +51,10 @@ rust_library_rlib {
     whole_static_libs: [
         "libfdt",
     ],
-    apex_available: ["com.android.virt"],
+    apex_available: [
+        "//apex_available:platform",
+        "com.android.virt",
+    ],
 }
 
 rust_library_rlib {
