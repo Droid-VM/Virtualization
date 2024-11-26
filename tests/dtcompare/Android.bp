@@ -1,0 +1,20 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_defaults {
+    name: "dtcompare.defaults",
+    crate_root: "src/main.rs",
+    srcs: ["src/main.rs"],
+    edition: "2021",
+    rustlibs: [
+        "libanyhow",
+        "libargh",
+        "liblibfdt",
+    ],
+}
+
+rust_binary {
+    name: "dtcompare",
+    defaults: ["dtcompare.defaults"],
+}
