@@ -94,20 +94,21 @@ class ConfigJson {
                 : VirtualMachineConfig.DEBUG_LEVEL_NONE;
     }
 
-    /** Converts this parsed JSON into VirtualMachieConfig Builder */
-    VirtualMachineConfig.Builder toConfigBuilder(Context context) {
+    /** Converts this parsed JSON into VirtualMachieConfig */
+    VirtualMachineConfig toConfig(Context context) {
         return new VirtualMachineConfig.Builder(context)
                 .setProtectedVm(isProtected)
                 .setMemoryBytes((long) memory_mib * 1024 * 1024)
                 .setConsoleInputDevice(console_input_device)
                 .setCpuTopology(getCpuTopology())
-                .setCustomImageConfig(toCustomImageConfigBuilder(context).build())
+                .setCustomImageConfig(toCustomImageConfig(context))
                 .setDebugLevel(getDebugLevel())
                 .setVmOutputCaptured(console_out)
-                .setConnectVmConsole(connect_console);
+                .setConnectVmConsole(connect_console)
+                .build();
     }
 
-    VirtualMachineCustomImageConfig.Builder toCustomImageConfigBuilder(Context context) {
+    private VirtualMachineCustomImageConfig toCustomImageConfig(Context context) {
         VirtualMachineCustomImageConfig.Builder builder =
                 new VirtualMachineCustomImageConfig.Builder();
 
@@ -151,7 +152,7 @@ class ConfigJson {
                     .filter(Objects::nonNull)
                     .forEach(builder::addSharedPath);
         }
-        return builder;
+        return builder.build();
     }
 
     private static class SharedPathJson {

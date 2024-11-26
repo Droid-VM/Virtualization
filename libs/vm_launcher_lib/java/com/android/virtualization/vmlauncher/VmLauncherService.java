@@ -24,8 +24,6 @@ import android.os.IBinder;
 import android.os.ResultReceiver;
 import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineConfig;
-import android.system.virtualmachine.VirtualMachineCustomImageConfig;
-import android.system.virtualmachine.VirtualMachineCustomImageConfig.Disk;
 import android.system.virtualmachine.VirtualMachineException;
 import android.util.Log;
 
@@ -87,15 +85,7 @@ public class VmLauncherService extends Service implements DebianServiceImpl.Debi
         mExecutorService = Executors.newCachedThreadPool();
 
         ConfigJson json = ConfigJson.from(InstallUtils.getVmConfigPath(this));
-        VirtualMachineConfig.Builder configBuilder = json.toConfigBuilder(this);
-        VirtualMachineCustomImageConfig.Builder customImageConfigBuilder =
-                json.toCustomImageConfigBuilder(this);
-        File backupFile = InstallUtils.getBackupFile(this);
-        if (backupFile.exists()) {
-            customImageConfigBuilder.addDisk(Disk.RWDisk(backupFile.getPath()));
-            configBuilder.setCustomImageConfig(customImageConfigBuilder.build());
-        }
-        VirtualMachineConfig config = configBuilder.build();
+        VirtualMachineConfig config = json.toConfig(this);
 
         Runner runner;
         try {
