@@ -35,6 +35,7 @@ import android.system.virtualmachine.VirtualMachineCustomImageConfig;
 import android.system.virtualmachine.VirtualMachineCustomImageConfig.Disk;
 import android.system.virtualmachine.VirtualMachineException;
 import android.util.Log;
+import android.widget.Toast;
 
 import io.grpc.Grpc;
 import io.grpc.InsecureServerCredentials;
@@ -156,6 +157,7 @@ public class VmLauncherService extends Service implements DebianServiceImpl.Debi
         VirtualMachineConfig.Builder configBuilder = json.toConfigBuilder(this);
         VirtualMachineCustomImageConfig.Builder customImageConfigBuilder =
                 json.toCustomImageConfigBuilder(this);
+        overrideGpuConfigIfNecessary(customImageConfigBuilder);
         Path backupFile = InstallUtils.getBackupFile(this);
         if (Files.exists(backupFile)) {
             customImageConfigBuilder.addDisk(Disk.RWDisk(backupFile.toString()));
@@ -200,6 +202,23 @@ public class VmLauncherService extends Service implements DebianServiceImpl.Debi
         startDebianServer();
 
         return START_NOT_STICKY;
+    }
+
+    private void overrideGpuConfigIfNecessary(VirtualMachineCustomImageConfig.Builder builder) {
+        // TODO: check if ANGLE is enabled for the app.
+        if (Files.exists(ImageArchive.getSdcardPathForTesting().resolve("virglrenderer"))) {
+            builder.setGpuConfig(
+                    new VirtualMachineCustomImageConfig.GpuConfig.Builder()
+                            .setBackend("virglrenderer")
+                            .setRendererUseEgl(true)
+                            .setRendererUseGles(true)
+                            .setRendererUseGlx(false)
+                            .setRendererUseSurfaceless(true)
+                            .setRendererUseVulkan(false)
+                            .setContextTypes(new String[] {"virgl2"})
+                            .build());
+            Toast.makeText(this, R.string.virgl_enabled, Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void startDebianServer() {
