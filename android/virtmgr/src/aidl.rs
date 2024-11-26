@@ -63,7 +63,7 @@ use anyhow::{anyhow, bail, Context, Result};
 use apkverify::{HashAlgorithm, V4Signature};
 use avflog::LogResult;
 use binder::{
-    self, wait_for_interface, Accessor, BinderFeatures, ConnectionInfo, ExceptionCode, Interface, ParcelFileDescriptor,
+    self, wait_for_interface, Accessor, BinderFeatures, ConnectionInfo, ExceptionCode, FromIBinder, Interface, ParcelFileDescriptor,
     SpIBinder, Status, StatusCode, Strong, IntoBinderResult,
 };
 use cstr::cstr;
@@ -1951,32 +1951,10 @@ impl IVirtualMachineService for VirtualMachineService {
 
         let cid = self.cid;
 
-        // We currently only support the stats service. It can be used as an example
-        // to support more host services with this proxy pattern.
-        let stats_service_instance = <BpStats as IStats>::get_descriptor().to_owned() + "/default";
-        if name != stats_service_instance {
-            return Err(anyhow!("Unknown service"))
-                .with_log()
-                .or_binder_exception(ExceptionCode::SECURITY);
-        }
-
-        // don't block this service while attempting to get a service for the client in the VM.
-        let local_svc: Strong<dyn IStats> = binder::check_interface(name)
-            .context("Failed to get {name} from IVirtualMachineService")
-            .or_service_specific_exception(-1)?;
-
-        // Setup a delegator that wraps the service so we can proxy calls.
-        // This is needed because we can't use a kernel binder from
-        // another process for a new RpcServer.
-        let service = BnStats::new_binder(
-            StatsDelegator { delegate: local_svc.into() },
-            BinderFeatures::default(),
-        );
-
-        self.start_delegator_vsock_service(service.as_binder(), name, cid)
+        self.start_delegator_vsock_service::<dyn IStats, BpStats, BnStats>(name, cid)
     }
     fn getSupportedHostServices(&self) -> binder::Result<Vec<String>> {
-        let stats_service_instance = <BpStats as IStats>::get_descriptor().to_owned() + "/default";
+        let stats_service_instance = <BpStats>::get_descriptor().to_owned() + "/default";
         Ok(vec![stats_service_instance])
     }
 }
@@ -1994,13 +1972,38 @@ impl VirtualMachineService {
         )
     }
 
-    fn start_delegator_vsock_service(
+    fn start_delegator_vsock_service<
+        T: FromIBinder + ?Sized + 'static,
+        BP: binder::Interface,
+        BN,
+    >(
         &self,
-        binder: SpIBinder,
         name: &str,
         cid: Cid,
     ) -> binder::Result<ServiceConnectionInfo> {
-        match RpcServer::new_vsock(binder, cid, VMADDR_PORT_ANY) {
+        // We currently only support the stats service. It can be used as an example
+        // to support more host services with this proxy pattern.
+        let stats_service_instance = <BP>::get_descriptor().to_owned() + "/default";
+        if name != stats_service_instance {
+            return Err(anyhow!("Unknown service"))
+                .with_log()
+                .or_binder_exception(ExceptionCode::SECURITY);
+        }
+
+        // don't block this service while attempting to get a service for the client in the VM.
+        let local_svc: Strong<T> = binder::check_interface(name)
+            .context("Failed to get {name} from IVirtualMachineService")
+            .or_service_specific_exception(-1)?;
+
+        // Setup a delegator that wraps the service so we can proxy calls.
+        // This is needed because we can't use a kernel binder from
+        // another process for a new RpcServer.
+        let service = BN::new_binder(
+            StatsDelegator { delegate: local_svc.into() },
+            BinderFeatures::default(),
+        );
+
+        match RpcServer::new_vsock(service.as_binder(), cid, VMADDR_PORT_ANY) {
             Ok((vm_server, assigned_port)) => {
                 let port: i32 = assigned_port as i32;
                 // two threads in case we need callbacks
