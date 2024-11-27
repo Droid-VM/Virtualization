@@ -237,6 +237,12 @@ if [[ "$arch" == "aarch64" ]]; then
 	)
 # TODO(b/365955006): remove these lines when uboot supports x86_64 EFI application
 elif [[ "$arch" == "x86_64" ]]; then
+	# b/381162637: In containerized builds, there are no kernels in /boot,
+	# so install a generic kernel to make libguestfs happy.
+	if ! ( dpkg -l | grep -qs linux-image ) ; then
+		DEBIAN_FRONTEND=noninteractive \
+		apt install --no-install-recommends --assume-yes linux-image-generic
+	fi
 	virt-get-kernel -a "${built_image}"
 	mv vmlinuz* vmlinuz
 	mv initrd.img* initrd.img
