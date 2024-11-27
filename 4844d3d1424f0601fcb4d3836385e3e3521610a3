@@ -22,6 +22,30 @@
       },
       "revId": "4844d3d1424f0601fcb4d3836385e3e3521610a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f31da93d_7f3a95e7",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2024-11-27T03:48:56Z",
+      "side": 1,
+      "message": "That would install `linux-image-generic` on the host machine when we perform non-containerized builds (directly invoke `sudo ./build.sh`). That may not be desirable, plus it\u0027s only required for x86_64, so I just install it here for now.\n\nWhat do you think? I would be happy to move it up to `install_prerequisites` if you think that would be okay.",
+      "parentUuid": "a7c1f24e_db2c2768",
+      "range": {
+        "startLine": 242,
+        "startChar": 0,
+        "endLine": 245,
+        "endChar": 3
+      },
+      "revId": "4844d3d1424f0601fcb4d3836385e3e3521610a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
