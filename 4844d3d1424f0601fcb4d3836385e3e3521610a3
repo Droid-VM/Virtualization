@@ -46,6 +46,30 @@
       },
       "revId": "4844d3d1424f0601fcb4d3836385e3e3521610a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b86f93f_7d172d78",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-27T03:53:59Z",
+      "side": 1,
+      "message": "I think we can just move these lines to L97 with current condition. we already have x86_64 only packages in `install_prerequisites`.(and we can remove libguestfs-tools and linux-image-generic once uboot supports x86_64 as well.",
+      "parentUuid": "f31da93d_7f3a95e7",
+      "range": {
+        "startLine": 242,
+        "startChar": 0,
+        "endLine": 245,
+        "endChar": 3
+      },
+      "revId": "4844d3d1424f0601fcb4d3836385e3e3521610a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
