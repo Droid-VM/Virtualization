@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89ea2751_06583b21",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ConfigJson.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-11-27T01:05:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df6cfe0a_41eff4d8",
+      "range": {
+        "startLine": 171,
+        "startChar": 20,
+        "endLine": 171,
+        "endChar": 93
+      },
+      "revId": "47ee278afb62e51d711c9ce84ce27097ee0f4895",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60c79b7d_aeeb2388",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-11-26T00:33:08Z",
       "side": 1,
       "message": "It\u0027s difficult to expect that calling `toConfig` which returns `SharedPath` internally spawns a crosvm process. Furthermore ConfigJson class is designed to be a purely data object.\n\nI think this part should be moved to the VirtualMachine class in the framework and called there [1].\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachine.java;drc\u003d7f1a1070dbdd1bda00223be2f21936f63a8f3850;l\u003d1577",
+      "range": {
+        "startLine": 173,
+        "startChar": 20,
+        "endLine": 174,
+        "endChar": 88
+      },
+      "revId": "47ee278afb62e51d711c9ce84ce27097ee0f4895",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b55a601d_3005ae29",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ConfigJson.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-11-27T01:05:53Z",
+      "side": 1,
+      "message": "Makes sense. Thanks for the pointer.\n\nI will follow up with a CL to refactor this flow.",
+      "parentUuid": "60c79b7d_aeeb2388",
       "range": {
         "startLine": 173,
         "startChar": 20,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86ead93f_ae3660bb",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ConfigJson.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-11-27T01:05:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2be3cacf_49b1e801",
+      "range": {
+        "startLine": 185,
+        "startChar": 27,
+        "endLine": 185,
+        "endChar": 59
+      },
+      "revId": "47ee278afb62e51d711c9ce84ce27097ee0f4895",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c31c86eb_8a4c7580",
@@ -100,6 +172,30 @@
       "writtenOn": "2024-11-26T00:33:08Z",
       "side": 1,
       "message": "nit: wrong indentation",
+      "range": {
+        "startLine": 196,
+        "startChar": 16,
+        "endLine": 196,
+        "endChar": 17
+      },
+      "revId": "47ee278afb62e51d711c9ce84ce27097ee0f4895",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bafa2011_a74517ef",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ConfigJson.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-11-27T01:05:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c31c86eb_8a4c7580",
       "range": {
         "startLine": 196,
         "startChar": 16,
@@ -133,6 +229,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "370fd4f8_4a31a5f0",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ConfigJson.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-11-27T01:05:53Z",
+      "side": 1,
+      "message": "cool. thanks.",
+      "parentUuid": "8ee3f913_6e02a9dd",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 49
+      },
+      "revId": "47ee278afb62e51d711c9ce84ce27097ee0f4895",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0fce105e_54adf80d",
@@ -146,6 +266,30 @@
       "writtenOn": "2024-11-26T00:33:08Z",
       "side": 1,
       "message": "Log instead",
+      "range": {
+        "startLine": 238,
+        "startChar": 0,
+        "endLine": 238,
+        "endChar": 36
+      },
+      "revId": "47ee278afb62e51d711c9ce84ce27097ee0f4895",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be1afd37_70f3b0b9",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ConfigJson.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-11-27T01:05:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0fce105e_54adf80d",
       "range": {
         "startLine": 238,
         "startChar": 0,
@@ -204,6 +348,30 @@
       "writtenOn": "2024-11-26T00:33:08Z",
       "side": 1,
       "message": "Ideally, we shouldn\u0027t do this. App has to pass FD via the SharedPath parcelable.",
+      "range": {
+        "startLine": 1231,
+        "startChar": 12,
+        "endLine": 1231,
+        "endChar": 96
+      },
+      "revId": "47ee278afb62e51d711c9ce84ce27097ee0f4895",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce4eb4e9_8cea5e5c",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-11-27T01:05:53Z",
+      "side": 1,
+      "message": "Passing FD would be good but that would require changes to crosvm side to pass the FD as argument. We can improve this in upcoming release. I will open a bug for tracking.",
+      "parentUuid": "acb4a36e_43235a9a",
       "range": {
         "startLine": 1231,
         "startChar": 12,
