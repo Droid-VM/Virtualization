@@ -24,6 +24,10 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.drawable.Icon
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.Window
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,6 +38,12 @@ class SettingsPortForwardingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_port_forwarding)
+
+        Handler(Looper.getMainLooper()).post {
+            val lp: WindowManager.LayoutParams = getWindow().getAttributes()
+            lp.accessibilityTitle = getString(R.string.settings_port_forwarding_title)
+            getWindow().setAttributes(lp)
+        }
 
         val settingsPortForwardingItems = ArrayList<SettingsPortForwardingItem>()
 
