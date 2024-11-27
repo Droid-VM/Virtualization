@@ -505,12 +505,9 @@ public class MainActivity extends BaseActivity
         String prefKey = getString(R.string.preference_file_key);
         String key = getString(R.string.preference_disk_size_key);
         SharedPreferences sharedPref = this.getSharedPreferences(prefKey, Context.MODE_PRIVATE);
-        long newSize = sharedPref.getLong(key, -1);
 
-        // No preferred size. Don't resize.
-        if (newSize == -1) {
-            return;
-        }
+        // Use current size as default value to ensure if its size is multiple of 4096
+        long newSize = sharedPref.getLong(key, image.getSize());
 
         try {
             Log.d(TAG, "Resizing disk to " + newSize + " bytes");
