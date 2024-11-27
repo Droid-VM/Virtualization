@@ -97,8 +97,12 @@ class InstalledImage {
         Files.deleteIfExists(mBackup);
     }
 
-    public long getSize() throws IOException {
-        return roundUp(Files.size(mRootPartition));
+    public long getRoundUpSize() throws IOException {
+        return roundUp(getSize());
+    }
+
+    private long getSize() throws IOException {
+        return Files.size(mRootPartition);
     }
 
     public long getSmallestSizePossible() throws IOException {
