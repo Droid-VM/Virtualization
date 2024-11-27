@@ -34,6 +34,24 @@
       "parentUuid": "e354de69_b4088ccf",
       "revId": "f026835279a1fcb43d0529b9b51641ab60672993",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4df48c2_96f2aa5a",
+        "filename": "guest/trusty/test_vm/AndroidTest.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1942645
+      },
+      "writtenOn": "2024-11-27T17:29:31Z",
+      "side": 1,
+      "message": "The name of the test are also incorrect on this XML, they should be `com.android.trusty.rust.hwcryptohalserver.test`,\n`com.android.trusty.rust.hwcryptohal_common.test`,\n`com.android.trusty.rust.hwcryptokey_test.test`",
+      "parentUuid": "4e2f7a79_149841e5",
+      "revId": "f026835279a1fcb43d0529b9b51641ab60672993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
