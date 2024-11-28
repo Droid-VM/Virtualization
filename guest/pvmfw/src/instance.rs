@@ -30,9 +30,8 @@ use virtio_drivers::transport::{pci::bus::PciRoot, DeviceType, Transport};
 use vmbase::util::ceiling_div;
 use vmbase::virtio::pci::{PciTransportIterator, VirtIOBlk};
 use vmbase::virtio::HalImpl;
-use zerocopy::AsBytes;
 use zerocopy::FromBytes;
-use zerocopy::FromZeroes;
+use zerocopy::IntoBytes;
 
 pub enum Error {
     /// Unexpected I/O error while accessing the underlying disk.
@@ -154,7 +153,7 @@ pub(crate) fn record_instance_entry(
     Ok(())
 }
 
-#[derive(FromZeroes, FromBytes)]
+#[derive(FromBytes)]
 #[repr(C, packed)]
 struct Header {
     magic: [u8; Header::MAGIC.len()],
@@ -238,7 +237,7 @@ fn locate_entry(partition: &mut Partition) -> Result<PvmfwEntry> {
 /// Marks the start of an instance.img entry.
 ///
 /// Note: Virtualization/guest/microdroid_manager/src/instance.rs uses the name "partition".
-#[derive(AsBytes, FromZeroes, FromBytes)]
+#[derive(IntoBytes, FromBytes)]
 #[repr(C, packed)]
 struct EntryHeader {
     uuid: u128,
@@ -259,7 +258,7 @@ impl EntryHeader {
     }
 }
 
-#[derive(AsBytes, FromZeroes, FromBytes)]
+#[derive(IntoBytes, FromBytes)]
 #[repr(C)]
 pub(crate) struct EntryBody {
     pub code_hash: Hash,
