@@ -12,6 +12,7 @@ show_help() {
 	echo "-h         Print usage and this help message and exit."
 	echo "-a ARCH    Architecture of the image [default is aarch64]"
 	echo "-r         Release mode build"
+	echo "-w         Save temp work directory (for debugging)"
 }
 
 check_sudo() {
@@ -22,7 +23,7 @@ check_sudo() {
 }
 
 parse_options() {
-	while getopts "hra:" option; do
+	while getopts "a:hrw" option; do
 		case ${option} in
 			h)
 				show_help
@@ -39,6 +40,9 @@ parse_options() {
 				;;
 			r)
 				mode=release
+				;;
+			w)
+				save_workdir=1
 				;;
 			*)
 				echo "Invalid option: $OPTARG"
@@ -213,7 +217,7 @@ extract_partitions() {
 }
 
 clean_up() {
-	rm -rf "${workdir}"
+	[ "$save_workdir" -eq 0 ] || rm -rf "${workdir}"
 }
 
 set -e
@@ -229,8 +233,14 @@ resources_dir=${debian_cloud_image}/src/debian_cloud_images/resources
 arch=aarch64
 debian_arch=arm64
 mode=debug
+<<<<<<< PATCH SET (db6f64 build/debian: Add `-w` to keep temp workdir for debugging)
+save_workdir=0
+||||||| BASE
+=======
 
+>>>>>>> BASE      (f28785 Merge "vmbase: Move stack guard page to own section" into ma)
 parse_options "$@"
+
 check_sudo
 install_prerequisites
 download_debian_cloud_image
