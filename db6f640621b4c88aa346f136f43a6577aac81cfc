@@ -22,6 +22,30 @@
       },
       "revId": "db6f640621b4c88aa346f136f43a6577aac81cfc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c549653_7ee11a63",
+        "filename": "build/debian/build_in_container.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2024-11-28T07:23:40Z",
+      "side": 1,
+      "message": "Thanks for the quick review!\n\nIf the build script fails without `-w`, I thought it might still be better to just provide an open shell -- then the user could inspect whether they may want to keep the workdir around, or the build failed due to some other issue in the container environment (like the `linux-image-generic` issue that I had reported earlier).\n\nThe `|| bash` won\u0027t be triggered anyway if the build succeeds.\n\nWhat do you think?",
+      "parentUuid": "eb0df94b_a2b8133c",
+      "range": {
+        "startLine": 35,
+        "startChar": 95,
+        "endLine": 35,
+        "endChar": 103
+      },
+      "revId": "db6f640621b4c88aa346f136f43a6577aac81cfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
