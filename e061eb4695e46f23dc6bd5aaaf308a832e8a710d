@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a71b2dd_56423c6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-28T09:43:40Z",
+      "side": 1,
+      "message": "I\u0027m fine with the direction of the change, but can someone confirm that this would be the final edit of the translation? Modifying translation cost both money and time (for both translators and me)",
+      "revId": "e061eb4695e46f23dc6bd5aaaf308a832e8a710d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae238418_f80dadb5",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-28T09:43:40Z",
+      "side": 1,
+      "message": "\u0027Resize Disk\u0027 looks better because other title has words (\u0027Port forwarding\u0027, \u0027Recovery\u0027) instead of sentence with verb",
+      "range": {
+        "startLine": 66,
+        "startChar": 46,
+        "endLine": 66,
+        "endChar": 57
+      },
+      "revId": "e061eb4695e46f23dc6bd5aaaf308a832e8a710d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d558eb80_ae99b3ce",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-28T09:43:40Z",
+      "side": 1,
+      "message": "There\u0027s no consistent way to referring our apps.\n  - Here, we use \u0027the app\u0027\n  - `settings_recovery_reset_dialog_title` uses \u0027Reset terminal\u0027\n  - `settings_port_forwarding_notification_title` says \u0027Terminal\u0027\n  - `installer_desc_text_format` says \u0027the Linux Terminal\u0027\n  - `service_notification_content` says \u0027the terminal\u0027.\n  \nCan we keep the consistency here?",
+      "range": {
+        "startLine": 125,
+        "startChar": 30,
+        "endLine": 125,
+        "endChar": 37
+      },
+      "revId": "e061eb4695e46f23dc6bd5aaaf308a832e8a710d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75de594c_cdb30a5d",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-28T09:43:40Z",
+      "side": 1,
+      "message": "- Please update description about where would this string be used\n- `CHAR LIMIT\u003d20` doesn\u0027t look realistic. Could you increas a bit? Just FYI, \"Restart to apply\u0027 required 38 chars\n- `\u003cxliff:g\u003eVirGL\u003c/xliff:g\u003e is enabled` looks safer without saying \u0027supposed not to be translated\u0027. (see: http://shortn/_cehSNzu64g)",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 58
+      },
+      "revId": "e061eb4695e46f23dc6bd5aaaf308a832e8a710d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
