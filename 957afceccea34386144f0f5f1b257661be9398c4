@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "461d4d4e_fba6fb41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-11-28T01:17:56Z",
+      "side": 1,
+      "message": "Thanks, it would be useful for the debugging.\nnits: can we provide it as an option? for now, it\u0027s okay because we don\u0027t use this script for CI, but in that case, this script hangs if there is a failure. and also, we can pass that option to build.sh to preserve tmp dir after the build to debug. WDYT?",
+      "revId": "957afceccea34386144f0f5f1b257661be9398c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
