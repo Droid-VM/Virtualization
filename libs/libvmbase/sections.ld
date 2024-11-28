@@ -96,12 +96,17 @@ SECTIONS
 		bss_end = .;
 	} >writable_data
 
-	init_stack_pointer = ORIGIN(writable_data) + LENGTH(writable_data);
-	.stack (NOLOAD) : ALIGN(4096) {
-		. += 4096; /* Ensure we have one guard page for overflow. */
-		stack_limit = .;
-		. = init_stack_pointer;
+	/* Left unmapped, to catch overflows of the stack. */
+	.stack_guard_page (NOLOAD) : ALIGN(4096) {
+		. += 4096;
 	} >writable_data
+
+	/* Stack, mapped read-write (possibly partially). */
+	.stack (NOLOAD) : ALIGN(4096) {
+		stack_limit = .;
+		. = ALIGN(LENGTH(writable_data));
+	} >writable_data
+	init_stack_pointer = ADDR(.stack) + SIZEOF(.stack);
 
 	/* Make our Bionic stack protector compatible with mainline LLVM */
 	__stack_chk_guard = __bionic_tls + 40;
