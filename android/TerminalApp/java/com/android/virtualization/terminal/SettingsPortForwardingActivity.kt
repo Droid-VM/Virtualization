@@ -34,12 +34,6 @@ class SettingsPortForwardingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_port_forwarding)
 
-        Handler(Looper.getMainLooper()).post {
-            val lp: WindowManager.LayoutParams = getWindow().getAttributes()
-            lp.accessibilityTitle = getString(R.string.settings_port_forwarding_title)
-            getWindow().setAttributes(lp)
-        }
-
         mSharedPref =
             this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
 

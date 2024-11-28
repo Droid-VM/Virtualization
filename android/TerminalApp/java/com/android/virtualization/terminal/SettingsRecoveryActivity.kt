@@ -41,12 +41,6 @@ class SettingsRecoveryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_recovery)
 
-        Handler(Looper.getMainLooper()).post {
-            val lp: WindowManager.LayoutParams = getWindow().getAttributes()
-            lp.accessibilityTitle = getString(R.string.settings_recovery_title)
-            getWindow().setAttributes(lp)
-        }
-
         val resetCard = findViewById<MaterialCardView>(R.id.settings_recovery_reset_card)
         resetCard.setOnClickListener {
             var backupRootfs = false
