@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "501f0c39_04ccd459",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-28T09:48:30Z",
+      "side": 1,
+      "message": "Q: would we change this behavior? currently only marker (plus shared preferences) would be removed.",
+      "range": {
+        "startLine": 104,
+        "startChar": 58,
+        "endLine": 104,
+        "endChar": 61
+      },
+      "revId": "c6adb7137c9abd2e1402cacc98dae54118f8204d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77512067_b7ddb481",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-28T09:48:30Z",
+      "side": 1,
+      "message": "Error messages don\u0027t have consistency.\n  - `settings_recovery_error_during_removing_backup`: \u0027Unable to\u0027 (instead of Failed)\n  - `settings_recovery_error_due_to_backup`: \u0027Recovery failed\u0027\n  - `error_desc`: \u0027The app failed\u0027\n  - \u0027installer_error_no_wifi\u0027: \u0027Failed to \u0027.\n  - \u0027installer_install_network_error_message\u0027: Network error\n  \n  \nCan we match all with \u0027Failed to xxx\u0027 (or something else) for consistency?",
+      "range": {
+        "startLine": 125,
+        "startChar": 30,
+        "endLine": 125,
+        "endChar": 44
+      },
+      "revId": "c6adb7137c9abd2e1402cacc98dae54118f8204d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
