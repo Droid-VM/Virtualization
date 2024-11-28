@@ -37,7 +37,7 @@ use vmbase::{
     bionic, configure_heap,
     fdt::pci::PciInfo,
     generate_image_header,
-    layout::{crosvm::FDT_MAX_SIZE, rodata_range, scratch_range, text_range},
+    layout::{crosvm::FDT_MAX_SIZE, data_bss_range, eh_stack_range, rodata_range, text_range},
     linker, logger, main,
     memory::{PageTable, SIZE_64KB},
     util::RangeExt as _,
@@ -55,7 +55,8 @@ fn init_page_table(page_table: &mut PageTable) -> Result<(), MapError> {
     page_table.map_device(&DEVICE_REGION)?;
     page_table.map_code(&text_range().into())?;
     page_table.map_rodata(&rodata_range().into())?;
-    page_table.map_data(&scratch_range().into())?;
+    page_table.map_data(&data_bss_range().into())?;
+    page_table.map_data(&eh_stack_range().into())?;
     page_table.map_data(&boot_stack_range().into())?;
 
     info!("Activating IdMap...");
