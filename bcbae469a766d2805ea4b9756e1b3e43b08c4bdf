@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b8522c5_0f59cb84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-28T00:39:31Z",
+      "side": 1,
+      "message": "@zyy@google.com Can I get NDK review?",
+      "revId": "bcbae469a766d2805ea4b9756e1b3e43b08c4bdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca22d369_2b197c4f",
@@ -14,6 +31,30 @@
       "writtenOn": "2024-11-26T21:06:53Z",
       "side": 1,
       "message": "hey- we will also want to follow up and add an API like \u0027AVirtualMachine_getService\u0027. We may not want to add direct or arbitrary vsock comms, or if there are arbitrary vsock, we need to make sure that we only allow arbitrary vsock to a vendor-created VM and not to a system-created VM (e.g. microdroid) which could freeze the API surfaces",
+      "range": {
+        "startLine": 319,
+        "startChar": 4,
+        "endLine": 319,
+        "endChar": 25
+      },
+      "revId": "bcbae469a766d2805ea4b9756e1b3e43b08c4bdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e0aecfc_473d67ef",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-11-28T00:39:31Z",
+      "side": 1,
+      "message": "Filed a bug b/381195818.",
+      "parentUuid": "ca22d369_2b197c4f",
       "range": {
         "startLine": 319,
         "startChar": 4,
