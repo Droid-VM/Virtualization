@@ -22,6 +22,30 @@
       },
       "revId": "0d5434d43ab686500e5c4f2019691bde1faabaa4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "722c2ef7_8afaec9d",
+        "filename": "libs/libvmbase/sections.ld",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-29T17:00:58Z",
+      "side": 1,
+      "message": "\u003e How do you make sure that this is left unmapped ? \n\nBy being careful in vmbase that we don\u0027t map it. This is another reason why such low-level code (e.g. mapping the stack) should be centralized in one place. Upcoming changes introducing the `map_data()` API (and similar) will check the provided range, making it impossible to map memory within the 4MiB region that the vmbase client occupies so client code won\u0027t be able to inadvertently map this stack guard page, for example.\n\n\u003e Do you force PTE level mappings ?\n\nRegions are mapped based on their VA/IPA (same thing, we\u0027re ID-mapped) ranges and the code always uses the coarsest granule possible.\n\n\u003e This will not work for the 16Kb pages.\n\nTrue, if we ever wanted to support 16K pages in vmbase, which I don\u0027t see much value in, given that we are limited to 4MiB anyway. FYI, I have actually considered moving this script to `COMMONPAGESIZE` but that feels overkill right now.",
+      "parentUuid": "cbcb36cf_07d3dd00",
+      "range": {
+        "startLine": 99,
+        "startChar": 1,
+        "endLine": 99,
+        "endChar": 54
+      },
+      "revId": "0d5434d43ab686500e5c4f2019691bde1faabaa4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
