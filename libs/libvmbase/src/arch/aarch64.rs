@@ -15,6 +15,7 @@
 //! Wrappers of assembly calls.
 
 pub mod platform;
+pub mod uart;
 
 /// Reads a value from a system register.
 #[macro_export]
