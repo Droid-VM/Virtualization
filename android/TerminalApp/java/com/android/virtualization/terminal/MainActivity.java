@@ -34,10 +34,12 @@ import android.os.ConditionVariable;
 import android.os.Environment;
 import android.provider.Settings;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowInsets;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityManager.AccessibilityStateChangeListener;
@@ -111,6 +113,10 @@ public class MainActivity extends BaseActivity
         MaterialToolbar toolbar = (MaterialToolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mWebView = (WebView) findViewById(R.id.webview);
+        mWebView.addOnLayoutChangeListener(
+                (v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
+                    updateActionBar();
+                });
         mWebView.getSettings().setDatabaseEnabled(true);
         mWebView.getSettings().setDomStorageEnabled(true);
         mWebView.getSettings().setJavaScriptEnabled(true);
@@ -393,6 +399,43 @@ public class MainActivity extends BaseActivity
 
         View modifierKeys = findViewById(R.id.modifier_keys);
         modifierKeys.setVisibility(showModifierKeys ? View.VISIBLE : View.GONE);
+    }
+
+    private void updateActionBar() {
+        if (getSupportActionBar() != null) {
+            TypedValue tv = new TypedValue();
+            if (!getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+                return;
+            }
+            int actionBarHeight =
+                    TypedValue.complexToDimensionPixelSize(
+                            tv.data, getResources().getDisplayMetrics());
+            View actionBar = findViewById(R.id.toolbar);
+            ViewGroup.LayoutParams lp = actionBar.getLayoutParams();
+            boolean isActionbarHidden = lp.height == 0;
+            int webViewHeightWithActionBar = mWebView.getHeight();
+            if (isActionbarHidden) {
+                webViewHeightWithActionBar -= actionBarHeight;
+            }
+            float webViewHeightInSp =
+                    TypedValue.convertPixelsToDimension(
+                            TypedValue.COMPLEX_UNIT_SP,
+                            webViewHeightWithActionBar,
+                            getResources().getDisplayMetrics());
+
+            // TODO: remove this hack. Refer to https://stackoverflow.com/a/33653288
+            // Even with ActionBar.hide(), the action bar still occupies space.
+            // Hide action bar if webView's height is smaller than font size.
+            if (webViewHeightInSp < FONT_SIZE_DEFAULT) {
+                if (!isActionbarHidden) {
+                    lp.height = 0;
+                    actionBar.setLayoutParams(lp);
+                }
+            } else if (isActionbarHidden) {
+                lp.height = actionBarHeight;
+                actionBar.setLayoutParams(lp);
+            }
+        }
     }
 
     @Override
