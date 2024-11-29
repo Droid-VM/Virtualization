@@ -17,14 +17,15 @@
 #![allow(unused_unsafe)]
 
 #[cfg(target_arch = "aarch64")]
-use crate::linker::__stack_chk_guard;
+use crate::arch::aarch64::linker::__stack_chk_guard;
 use crate::memory::{max_stack_size, PAGE_SIZE};
-#[cfg(target_arch = "aarch64")]
-use aarch64_paging::paging::VirtualAddress;
-use core::ops::Range;
 
 #[cfg(target_arch = "aarch64")]
 pub use crate::arch::aarch64::layout as crosvm;
+
+#[cfg(target_arch = "aarch64")]
+use aarch64_paging::paging::VirtualAddress;
+use core::ops::Range;
 
 /// First address that can't be translated by a level 1 TTBR0_EL1.
 pub const MAX_VIRT_ADDR: usize = 1 << 40;
@@ -34,7 +35,7 @@ pub const MAX_VIRT_ADDR: usize = 1 << 40;
 macro_rules! linker_addr {
     ($symbol:ident) => {{
         #[cfg(target_arch = "aarch64")]
-        let addr = (&raw const $crate::linker::$symbol) as usize;
+        let addr = (&raw const $crate::arch::aarch64::linker::$symbol) as usize;
         VirtualAddress(addr)
     }};
 }
