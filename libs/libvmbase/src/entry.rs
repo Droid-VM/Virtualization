@@ -15,53 +15,28 @@
 //! Rust entry point.
 
 use crate::arch::platform;
+use crate::eprintln;
 use crate::{
-    arch::aarch64::layout::{UART_ADDRESSES, UART_PAGE_ADDR},
-    bionic, console, heap, logger,
-    memory::{switch_to_dynamic_page_tables, PAGE_SIZE, SIZE_16KB, SIZE_4KB},
+    bionic, heap, logger,
+    memory::{switch_to_dynamic_page_tables, PAGE_SIZE, SIZE_4KB},
     rand,
 };
 use core::mem::size_of;
-use hypervisor_backends::{get_mmio_guard, Error};
-use static_assertions::const_assert_eq;
-
-fn try_console_init() -> Result<(), Error> {
-    if let Some(mmio_guard) = get_mmio_guard() {
-        mmio_guard.enroll()?;
-
-        // TODO(ptosi): Use MmioSharer::share() to properly track this MMIO_GUARD_MAP.
-        //
-        // The following call shares the UART but also anything else present in 0..granule.
-        //
-        // For 4KiB, that's only the UARTs. For 16KiB, it also covers the RTC and watchdog but, as
-        // neither is used by vmbase clients (and as both are outside of the UART page), they
-        // will never have valid stage-1 mappings to those devices. As a result, this
-        // MMIO_GUARD_MAP isn't affected by the granule size in any visible way. Larger granule
-        // sizes will need to be checked separately, if needed.
-        assert!({
-            let granule = mmio_guard.granule()?;
-            granule == SIZE_4KB || granule == SIZE_16KB
-        });
-        // Validate the assumption above by ensuring that the UART is not moved to another page:
-        const_assert_eq!(UART_PAGE_ADDR, 0);
-        mmio_guard.map(UART_PAGE_ADDR)?;
-    }
-
-    // SAFETY: UART_PAGE is mapped at stage-1 (see entry.S) and was just MMIO-guarded.
-    unsafe { console::init(&UART_ADDRESSES) };
-
-    Ok(())
-}
 
 /// This is the entry point to the Rust code, called from the binary entry point in `entry.S`.
 #[no_mangle]
 extern "C" fn rust_entry(x0: u64, x1: u64, x2: u64, x3: u64) -> ! {
-    heap::init();
+    // TODO(mazurekm) remove debug print before code realse
+    eprintln!("PVMFW x0: {:#x}", x0);
+    eprintln!("PVMFW x1: {:#x}", x1);
+    eprintln!("PVMFW x2: {:#x}", x2);
+    eprintln!("PVMFW x3: {:#x}", x3);
+    eprintln!("PVMFW Platform init...");
+    // Initialize platform drivers
+    platform::init();
+    eprintln!("PVMFW Platform initialized");
 
-    if try_console_init().is_err() {
-        // Don't panic (or log) here to avoid accessing the console.
-        platform::reboot()
-    }
+    heap::init();
 
     logger::init().expect("Failed to initialize the logger");
     // We initialize the logger to Off (like the log crate) and clients should log::set_max_level.
