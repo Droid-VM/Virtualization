@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba5346bf_b0244b37",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-29T07:58:21Z",
+      "side": 1,
+      "message": "prefer early return.\n\n```\nif (... \u003d\u003d null) return;\n```",
+      "range": {
+        "startLine": 405,
+        "startChar": 8,
+        "endLine": 405,
+        "endChar": 44
+      },
+      "revId": "630172aefc652b9daa1b03ef7904fbc775b9066a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37c48cd4_63ce082d",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-29T07:58:21Z",
+      "side": 1,
+      "message": "shouldn\u0027t we add?",
+      "range": {
+        "startLine": 418,
+        "startChar": 43,
+        "endLine": 418,
+        "endChar": 44
+      },
+      "revId": "630172aefc652b9daa1b03ef7904fbc775b9066a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5251edd9_b24d5384",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-29T07:58:21Z",
+      "side": 1,
+      "message": "Isn\u0027t single line too small? At least three lines?",
+      "range": {
+        "startLine": 429,
+        "startChar": 36,
+        "endLine": 429,
+        "endChar": 53
+      },
+      "revId": "630172aefc652b9daa1b03ef7904fbc775b9066a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
