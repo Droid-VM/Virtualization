@@ -16,6 +16,24 @@
       "message": "We may want to check the exit value here, and if it\u0027s non zero, read getErrorStream() and log it.",
       "revId": "b2a51b0c4548116eb89bc437af911e87ebaa18d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "176a05d1_3c40f93c",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstalledImage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-11-29T07:48:02Z",
+      "side": 1,
+      "message": "`redirectErrorStream(true)` merges the stderr with stdout, so we\u0027re already getting the stderr as well.\n\nChanged to leave log anyway.",
+      "parentUuid": "2a745366_06ff2163",
+      "revId": "b2a51b0c4548116eb89bc437af911e87ebaa18d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
