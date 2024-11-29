@@ -1,18 +1,18 @@
 #!/bin/bash
 
-if [ -z "$ANDROID_BUILD_TOP" ]; then echo "forgot to source build/envsetup.sh?" && exit 1; fi
+if [ -z "$ANDROID_BUILD_TOP" ] ; then
+  echo 'ANDROID_BUILD_TOP undefined.'
+  echo 'Please `lunch` an Android target, or manually set the variable.'
+  exit 1
+fi
 
-arch=aarch64
+arch="$(uname -m)"
 release_flag=
 save_workdir_flag=
 
 while getopts "a:rw" option; do
   case ${option} in
     a)
-      if [[ "$OPTARG" != "aarch64" && "$OPTARG" != "x86_64" ]]; then
-        echo "Invalid architecture: $OPTARG"
-        exit
-      fi
       arch="$OPTARG"
       ;;
     r)
@@ -22,11 +22,14 @@ while getopts "a:rw" option; do
       save_workdir_flag="-w"
       ;;
     *)
-      echo "Invalid option: $OPTARG"
-      exit
+      echo "Invalid option: $OPTARG" ; exit 1
       ;;
   esac
 done
+
+if [[ "$arch" != "aarch64" && "$arch" != "x86_64" ]]; then
+  echo "Invalid architecture: $arch" ; exit 1
+fi
 
 docker run --privileged -it -v /dev:/dev \
   -v "$ANDROID_BUILD_TOP/packages/modules/Virtualization:/root/Virtualization" \
