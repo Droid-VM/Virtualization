@@ -14,7 +14,7 @@
 
 //! Console driver for 8250 UART.
 
-use crate::uart::Uart;
+use crate::arch::aarch64::uart::Uart;
 use core::fmt::{write, Arguments, Write};
 use spin::{mutex::SpinMutex, Once};
 
