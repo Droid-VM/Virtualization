@@ -14,12 +14,12 @@
 
 //! Rust entry point.
 
+use crate::arch::platform;
 use crate::{
     bionic, console, heap,
     layout::{UART_ADDRESSES, UART_PAGE_ADDR},
     logger,
     memory::{switch_to_dynamic_page_tables, PAGE_SIZE, SIZE_16KB, SIZE_4KB},
-    power::{reboot, shutdown},
     rand,
 };
 use core::mem::size_of;
@@ -61,7 +61,7 @@ extern "C" fn rust_entry(x0: u64, x1: u64, x2: u64, x3: u64) -> ! {
 
     if try_console_init().is_err() {
         // Don't panic (or log) here to avoid accessing the console.
-        reboot()
+        platform::reboot()
     }
 
     logger::init().expect("Failed to initialize the logger");
@@ -92,7 +92,7 @@ extern "C" fn rust_entry(x0: u64, x1: u64, x2: u64, x3: u64) -> ! {
     unsafe {
         main(x0, x1, x2, x3);
     }
-    shutdown();
+    platform::shutdown();
 }
 
 extern "Rust" {
