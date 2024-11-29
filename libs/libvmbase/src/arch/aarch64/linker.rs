@@ -14,6 +14,7 @@
 
 //! Linker-defined symbols.
 
+#[allow(dead_code)]
 extern "C" {
     /// Stack canary value
     pub static __stack_chk_guard: u64;
