@@ -135,7 +135,7 @@ public class MainActivity extends BaseActivity
                 .getRootView()
                 .setOnApplyWindowInsetsListener(
                         (v, insets) -> {
-                            updateModifierKeysVisibility();
+                            updateActionBarAndModifierKeysVisibility();
                             return insets;
                         });
         // if installer is launched, it will be handled in onActivityResult
@@ -284,7 +284,7 @@ public class MainActivity extends BaseActivity
                                                     mAccessibilityManager.isEnabled()
                                                             ? View.GONE
                                                             : View.VISIBLE;
-                                            updateModifierKeysVisibility();
+                                            updateActionBarAndModifierKeysVisibility();
                                         }
                                     }
                                 });
@@ -384,7 +384,9 @@ public class MainActivity extends BaseActivity
         connectToTerminalService();
     }
 
-    private void updateModifierKeysVisibility() {
+    // Hide modifier keys if ime isn't shown.
+    // Hide the action bar if ime is shown and a device is landscape.
+    private void updateActionBarAndModifierKeysVisibility() {
         boolean imeShown =
                 getWindow().getDecorView().getRootWindowInsets().isVisible(WindowInsets.Type.ime());
         boolean hasHwQwertyKeyboard =
@@ -393,6 +395,23 @@ public class MainActivity extends BaseActivity
 
         View modifierKeys = findViewById(R.id.modifier_keys);
         modifierKeys.setVisibility(showModifierKeys ? View.VISIBLE : View.GONE);
+
+        if (getSupportActionBar() != null) {
+            boolean isLandscape =
+                    getResources().getConfiguration().orientation
+                            == Configuration.ORIENTATION_LANDSCAPE;
+            if (isLandscape && imeShown) {
+                getSupportActionBar().hide();
+            } else {
+                getSupportActionBar().show();
+            }
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        updateActionBarAndModifierKeysVisibility();
     }
 
     @Override
