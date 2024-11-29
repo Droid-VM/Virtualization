@@ -113,6 +113,7 @@ class InstalledImage {
                             * 1024;
             return roundUp(minSize);
         } catch (NumberFormatException e) {
+            Log.e(TAG, "Failed to parse min size, p=" + p + ", result=" + result);
             throw new IOException(e);
         }
     }
