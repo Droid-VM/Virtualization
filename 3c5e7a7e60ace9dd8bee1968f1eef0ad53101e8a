@@ -16,6 +16,24 @@
       "message": "Q: It used to map the entire MMIO region ? how are you mapping it, using DEVICE nGnRnE ? Where did layout::crosvm::MMIO_START, layout::crosvm::MMIO_END originally come from, were they hardcoded ?",
       "revId": "3c5e7a7e60ace9dd8bee1968f1eef0ad53101e8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2832aaab_9697319e",
+        "filename": "guest/vmbase_example/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-11-29T16:52:53Z",
+      "side": 0,
+      "message": "Yes, we\u0027ve \"hard-coded\" addresses from https://crosvm.dev/book/appendix/memory_layout.html in `vmbase::layout::crosvm` so yes, the previous code used to map the entirety of \"low-address\" MMIO (`0x0` to `0x4000_0000`, IIRC, which was recently bumped to `0x7fc0_0000`).\n\nFor the attributes, see `libs/libvmbase/src/memory/page_table.rs`:\n```\nconst DEVICE_NGNRE: Attributes \u003d Attributes::ATTRIBUTE_INDEX_0;\nconst DEVICE_LAZY: Attributes \u003d\n    MMIO_LAZY_MAP_FLAG.union(DEVICE_NGNRE).union(Attributes::UXN).union(Attributes::ACCESSED);\nconst DEVICE: Attributes \u003d DEVICE_LAZY.union(Attributes::VALID);\n```\nwhere `ATTRIBUTE_INDEX_0` indexes the MAIR, from `libs/libvmbase/entry.S`:\n```\n.set .L_MAIR_DEV_nGnRE,\t0x04\n.set .L_MAIR_MEM_WBWA,\t0xff\n.set .Lmairval, .L_MAIR_DEV_nGnRE | (.L_MAIR_MEM_WBWA \u003c\u003c 8)\n\nmov_i x30, .Lmairval\nmsr mair_el1, x30\n```",
+      "parentUuid": "12cb8729_2b2fad7e",
+      "revId": "3c5e7a7e60ace9dd8bee1968f1eef0ad53101e8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
