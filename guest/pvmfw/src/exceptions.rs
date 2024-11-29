@@ -15,9 +15,9 @@
 //! Exception handlers.
 
 use vmbase::{
+    arch::aarch64::exceptions::{ArmException, Esr},
     eprintln,
-    exceptions::{handle_permission_fault, handle_translation_fault},
-    exceptions::{ArmException, Esr, HandleExceptionError},
+    exceptions::{handle_permission_fault, handle_translation_fault, HandleExceptionError},
     logger,
     power::reboot,
     read_sysreg,
