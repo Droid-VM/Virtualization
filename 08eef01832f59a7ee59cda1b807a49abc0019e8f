@@ -34,6 +34,24 @@
       "parentUuid": "b1052a6b_46c9018f",
       "revId": "08eef01832f59a7ee59cda1b807a49abc0019e8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e0e48ab_d742068d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-11-29T05:04:36Z",
+      "side": 1,
+      "message": "no, then the UI will fluctuate a lot. can we just measure the bottom size of the IME inset, and hide the action bar only when the remaining size (screen height - bottom inset size) is shorter than a certain threshold?",
+      "parentUuid": "1caead61_21e9a3dc",
+      "revId": "08eef01832f59a7ee59cda1b807a49abc0019e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
