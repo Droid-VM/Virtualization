@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbcb36cf_07d3dd00",
+        "filename": "libs/libvmbase/sections.ld",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-11-29T16:27:08Z",
+      "side": 1,
+      "message": "Q: How do you make sure that this is left unmapped ? Do you force PTE level mappings ? This will not work for the 16Kb pages.",
+      "range": {
+        "startLine": 99,
+        "startChar": 1,
+        "endLine": 99,
+        "endChar": 54
+      },
+      "revId": "0d5434d43ab686500e5c4f2019691bde1faabaa4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
