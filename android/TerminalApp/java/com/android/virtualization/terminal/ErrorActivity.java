@@ -16,7 +16,6 @@
 
 package com.android.virtualization.terminal;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -26,14 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class ErrorActivity extends BaseActivity {
-    private static final String EXTRA_CAUSE = "cause";
-
-    public static void start(Context context, Exception e) {
-        Intent intent = new Intent(context, ErrorActivity.class);
-        intent.putExtra(EXTRA_CAUSE, e);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
-    }
+    public static final String EXTRA_CAUSE = "cause";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

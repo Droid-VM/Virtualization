@@ -197,7 +197,7 @@ public class MainActivity extends BaseActivity
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (Build.isDebuggable() && event.getKeyCode() == KeyEvent.KEYCODE_UNKNOWN) {
             if (event.getAction() == KeyEvent.ACTION_UP) {
-                ErrorActivity.start(this, new Exception("Debug: KeyEvent.KEYCODE_UNKNOWN"));
+                launchErrorActivity(new Exception("Debug: KeyEvent.KEYCODE_UNKNOWN"));
             }
             return true;
         }
@@ -444,8 +444,7 @@ public class MainActivity extends BaseActivity
     @Override
     public void onVmError() {
         Log.i(TAG, "onVmError()");
-        // TODO: error cause is too simple.
-        ErrorActivity.start(this, new Exception("onVmError"));
+        launchErrorActivity(new Exception("onVmError"));
     }
 
     @Override
@@ -500,6 +499,13 @@ public class MainActivity extends BaseActivity
                 startVm();
             }
         }
+    }
+
+    private void launchErrorActivity(Exception e) {
+        Intent intent = new Intent(this, ErrorActivity.class);
+        intent.putExtra(ErrorActivity.EXTRA_CAUSE, e);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        this.startActivity(intent);
     }
 
     private boolean installIfNecessary() {
