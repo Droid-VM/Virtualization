@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7948fbf1_8fa4dc25",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ConfigJson.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2024-11-30T16:18:26Z",
+      "side": 1,
+      "message": "I have moved this more where we construct the object as the logic consolidates at one place. Please take a look. I can move it to VirtualMachine class as well if this isn\u0027t ok. Thanks.",
+      "parentUuid": "b55a601d_3005ae29",
+      "range": {
+        "startLine": 173,
+        "startChar": 20,
+        "endLine": 174,
+        "endChar": 88
+      },
+      "revId": "47ee278afb62e51d711c9ce84ce27097ee0f4895",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2be3cacf_49b1e801",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ConfigJson.java",
         "patchSetId": 1
