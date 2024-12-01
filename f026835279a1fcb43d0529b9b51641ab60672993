@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a110df73_ce49b84f",
+        "filename": "guest/trusty/test_vm/AndroidTest.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2024-12-01T17:40:24Z",
+      "side": 1,
+      "message": "got it thank you!",
+      "parentUuid": "e4df48c2_96f2aa5a",
+      "revId": "f026835279a1fcb43d0529b9b51641ab60672993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "663e2ddc_37955a0f",
@@ -67,6 +85,30 @@
       "writtenOn": "2024-11-27T23:01:08Z",
       "side": 1,
       "message": "Should this also be `#!/bin/sh` instead of bash?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 11
+      },
+      "revId": "f026835279a1fcb43d0529b9b51641ab60672993",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1fd63fc_6908af0d",
+        "filename": "guest/trusty/test_vm/trusty-wait-ready.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1856745
+      },
+      "writtenOn": "2024-12-01T17:40:24Z",
+      "side": 1,
+      "message": "choosing bash for being able to barf explicitely on any test failure (set -euo pipefail)",
+      "parentUuid": "663e2ddc_37955a0f",
       "range": {
         "startLine": 1,
         "startChar": 0,
