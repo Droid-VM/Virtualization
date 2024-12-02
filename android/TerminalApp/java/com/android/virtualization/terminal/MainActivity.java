@@ -299,6 +299,8 @@ public class MainActivity extends BaseActivity
                                             updateModifierKeysVisibility();
                                             mWebView.evaluateJavascript(
                                                     TerminalView.CTRL_KEY_HANDLER, null);
+                                            mWebView.evaluateJavascript(
+                                                    TerminalView.TOUCH_TO_MOUSE_HANDLER, null);
                                         }
                                     }
                                 });
