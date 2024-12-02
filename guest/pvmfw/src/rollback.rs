@@ -23,6 +23,7 @@ use crate::instance::{get_recorded_entry, record_instance_entry};
 use diced_open_dice::Hidden;
 use libfdt::Fdt;
 use log::{error, info};
+use pvmfw_avb::AvfUuid;
 use pvmfw_avb::Capability;
 use pvmfw_avb::VerifiedBootData;
 use virtio_drivers::transport::pci::bus::{ConfigurationAccess, PciRoot};
@@ -74,10 +75,9 @@ fn perform_deferred_rollback_protection(
 }
 
 fn get_fixed_rollback_protection(verified_boot_data: &VerifiedBootData) -> Option<u64> {
-    if verified_boot_data.has_capability(Capability::RemoteAttest) {
-        Some(service_vm_version::VERSION)
-    } else {
-        None
+    match verified_boot_data.uuid? {
+        AvfUuid::RKP_VM_UUID => Some(service_vm_version::VERSION),
+        _ => None,
     }
 }
 

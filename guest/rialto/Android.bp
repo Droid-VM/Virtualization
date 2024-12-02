@@ -96,6 +96,10 @@ avb_add_hash_footer {
             name: "com.android.virt.cap",
             value: "remote_attest",
         },
+        {
+            name: "com.android.virt.uuid",
+            value: "ae6b8440-3bb3-4424-90d4-eb588c260149",
+        },
     ],
     enabled: false,
     arch: {
