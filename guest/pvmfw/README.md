@@ -463,6 +463,7 @@ that is compatible with their guest kernel. These are:
   - `trusty_security_vm`: pvmfw skips rollback protection
 - `"com.android.virt.page_size"`: the guest page size in KiB (optional, defaults to 4)
 - `"com.android.virt.name"`: VM name used in the DICE chain (optional)
+  - `"rkp_vm"` is reserved for the RKP VM for Remote Key Provisioning
 
 ## Development
 
