@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5e8b0b7c_63579bae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-02T19:06:24Z",
+      "side": 1,
+      "message": "I was under the impression that `virtmgr` would retrieve the pubkey through the HAL, is that not the case? As a result, falling back to the ref DT would be encapsulated within the HAL implementation? I\u0027m now worried that my assumptions about the architecture were wrong; do we have a block diagram describing the different components?",
+      "parentUuid": "986e2c3d_9265a1e5",
+      "revId": "8082ff5611885fac7c278a988e96358623da9fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f957e1f5_681b4139",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 3
