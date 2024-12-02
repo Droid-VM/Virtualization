@@ -172,10 +172,7 @@ public class MainActivity extends BaseActivity
         // Only ctrl key is special, it communicates with xtermjs to modify key event with ctrl key
         findViewById(R.id.btn_ctrl)
                 .setOnClickListener(
-                        (v) -> {
-                            mWebView.loadUrl(TerminalView.CTRL_KEY_HANDLER);
-                            mWebView.loadUrl(TerminalView.ENABLE_CTRL_KEY);
-                        });
+                        (v) -> mWebView.evaluateJavascript(TerminalView.ENABLE_CTRL_KEY, null));
 
         View.OnClickListener modifierButtonClickListener =
                 v -> {
@@ -300,6 +297,8 @@ public class MainActivity extends BaseActivity
                                                     .setVisibility(View.VISIBLE);
                                             mBootCompleted.open();
                                             updateModifierKeysVisibility();
+                                            mWebView.evaluateJavascript(
+                                                    TerminalView.CTRL_KEY_HANDLER, null);
                                         }
                                     }
                                 });
