@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b179bd22_33702920",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-02T16:28:30Z",
+      "side": 1,
+      "message": "\u003e Describe in the commit message why the need of splitting\n\nYes, I did mention \"_Prepare for moving the EH stack_\" but have added more details. Thanks!\n\n\u003e I would see these two CLs squashed together.\n\nThe reason why they aren\u0027t is: I want to test in isolation the \"undoing\" of the assumption that the BSS, `.data`, and stack are one big region and the actual move of the section.",
+      "parentUuid": "7dc05c6f_21a573db",
+      "range": {
+        "startLine": 9,
+        "startChar": 23,
+        "endLine": 9,
+        "endChar": 31
+      },
+      "revId": "fb60fd3805369c89f38178c74d8e65bf8789a2be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "684c801f_a5f21afb",
@@ -95,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f28991c8_b4c1d265",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-02T16:28:30Z",
+      "side": 1,
+      "message": "Yes, it was defined when the EH stack was introduced, to initialize the SP (`SP_EL0`, IIRC). The next change relocates it (with its whole section) but it\u0027s already defined at this point.",
+      "parentUuid": "aa7cda24_36c82c72",
+      "range": {
+        "startLine": 208,
+        "startChar": 27,
+        "endLine": 208,
+        "endChar": 41
+      },
+      "revId": "fb60fd3805369c89f38178c74d8e65bf8789a2be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "defcedff_a2b0eaf8",
@@ -108,6 +156,30 @@
       "writtenOn": "2024-12-02T11:45:01Z",
       "side": 1,
       "message": "Related to the commit message - This seems to me a functional change (introducing a new stack object and creating a mapping in the pagetable for it)",
+      "range": {
+        "startLine": 61,
+        "startChar": 25,
+        "endLine": 61,
+        "endChar": 39
+      },
+      "revId": "fb60fd3805369c89f38178c74d8e65bf8789a2be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52e19a33_a4db5ad8",
+        "filename": "guest/vmbase_example/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-02T16:28:30Z",
+      "side": 1,
+      "message": "True, it\u0027s hard to define where the boundary between \"functional\" and \"non-functional\" is with system code like this. I\u0027ve dropped the \"`Note:`\".",
+      "parentUuid": "defcedff_a2b0eaf8",
       "range": {
         "startLine": 61,
         "startChar": 25,
