@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3af12a29_9fc92172",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstalledImage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-02T01:56:14Z",
+      "side": 1,
+      "message": "nits: how about making it Optional or @nullable if build id is an optional value.",
+      "range": {
+        "startLine": 51,
+        "startChar": 18,
+        "endLine": 51,
+        "endChar": 33
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0b01cce8_620d85c7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/InstalledImage.java",
+              "range": {
+                "startLine": 34,
+                "startChar": 0,
+                "endLine": 34,
+                "endChar": 0
+              },
+              "replacement": "import java.util.Optional;\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/InstalledImage.java",
+              "range": {
+                "startLine": 51,
+                "startChar": 0,
+                "endLine": 52,
+                "endChar": 0
+              },
+              "replacement": "    private final Optional\u003cString\u003e mBuildId;\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/InstalledImage.java",
+              "range": {
+                "startLine": 88,
+                "startChar": 0,
+                "endLine": 89,
+                "endChar": 0
+              },
+              "replacement": "    public Optional\u003cString\u003e getBuildId() {\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/InstalledImage.java",
+              "range": {
+                "startLine": 92,
+                "startChar": 0,
+                "endLine": 93,
+                "endChar": 0
+              },
+              "replacement": "    private Optional\u003cString\u003e readBuildId() {\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/InstalledImage.java",
+              "range": {
+                "startLine": 95,
+                "startChar": 0,
+                "endLine": 96,
+                "endChar": 0
+              },
+              "replacement": "            return Optional.empty();\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/InstalledImage.java",
+              "range": {
+                "startLine": 98,
+                "startChar": 0,
+                "endLine": 99,
+                "endChar": 0
+              },
+              "replacement": "            return Optional.of(r.readLine());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "93b1b40db95e7162267d41925bc23f1681ab0b00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
