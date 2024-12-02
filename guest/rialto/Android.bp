@@ -65,6 +65,7 @@ filegroup {
 // same version number for the service VM.
 SERVICE_VM_VERSION = 1
 SERVICE_VM_VERSION_STRING = "1"
+SERVICE_VM_NAME = "rkp_vm"
 
 genrule {
     name: "service_vm_version_rs",
@@ -95,6 +96,10 @@ avb_add_hash_footer {
         {
             name: "com.android.virt.cap",
             value: "remote_attest",
+        },
+        {
+            name: "com.android.virt.name",
+            value: SERVICE_VM_NAME,
         },
     ],
     enabled: false,
