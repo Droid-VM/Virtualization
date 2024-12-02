@@ -56,6 +56,8 @@ impl<'a> MemorySlices<'a> {
             error!("Failed to read memory range from DT: {e}");
             RebootReason::InvalidFdt
         })?;
+        crate::entry::END_OF_MEMORY
+            .fetch_add(memory_range.end, core::sync::atomic::Ordering::Relaxed);
         debug!("Resizing MemoryTracker to range {memory_range:#x?}");
         resize_available_memory(&memory_range).map_err(|e| {
             error!("Failed to use memory range value from DT: {memory_range:#x?}: {e}");

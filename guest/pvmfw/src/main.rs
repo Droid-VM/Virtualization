@@ -31,6 +31,7 @@ mod gpt;
 mod instance;
 mod memory;
 mod rollback;
+mod uefi;
 
 use crate::bcc::Bcc;
 use crate::dice::PartialInputs;
@@ -61,7 +62,7 @@ fn main<'a>(
     mut debug_policy: Option<&[u8]>,
     vm_dtbo: Option<&mut [u8]>,
     vm_ref_dt: Option<&[u8]>,
-) -> Result<(&'a [u8], bool), RebootReason> {
+) -> Result<(&'a [u8], bool, bool), RebootReason> {
     info!("pVM firmware");
     debug!("FDT: {:?}", untrusted_fdt.as_ptr());
     debug!("Signed kernel: {:?} ({:#x} bytes)", signed_kernel.as_ptr(), signed_kernel.len());
@@ -129,6 +130,15 @@ fn main<'a>(
         error!("Failed to compute partial DICE inputs: {e:?}");
         RebootReason::InternalError
     })?;
+
+    // Indicates whether to use EFI stub for booting.
+    let mut use_uefi: bool = false;
+    if verified_boot_data.has_capability(pvmfw_avb::Capability::SupportsUefiBoot) {
+        info!("Guest kernel supports UEFI standard.");
+        use_uefi = true;
+    } else {
+        debug!("Guest kernel does not support UEFI standard.");
+    }
 
     let instance_hash = if cfg!(llpvm_changes) { Some(salt_from_instance_id(fdt)?) } else { None };
     let (new_instance, salt, defer_rollback_protection) = perform_rollback_protection(
@@ -200,13 +210,14 @@ fn main<'a>(
     })?;
 
     info!("Starting payload...");
-    Ok((next_bcc, debuggable))
+    Ok((next_bcc, debuggable, use_uefi))
 }
 
 // Get the "salt" which is one of the input for DICE derivation.
 // This provides differentiation of secrets for different VM instances with same payloads.
 fn salt_from_instance_id(fdt: &Fdt) -> Result<Hidden, RebootReason> {
-    let id = instance_id(fdt)?;
+    let default = [1, 2, 3, 4, 5, 6, 7, 8];
+    let id = instance_id(fdt, &default)?;
     let salt = Digester::sha512()
         .digest(&[&b"InstanceId:"[..], id].concat())
         .map_err(|e| {
@@ -218,16 +229,13 @@ fn salt_from_instance_id(fdt: &Fdt) -> Result<Hidden, RebootReason> {
     Ok(salt)
 }
 
-fn instance_id(fdt: &Fdt) -> Result<&[u8], RebootReason> {
+fn instance_id<'a>(fdt: &'a Fdt, default: &'a [u8]) -> Result<&'a [u8], RebootReason> {
     let node = avf_untrusted_node(fdt)?;
     let id = node.getprop(cstr!("instance-id")).map_err(|e| {
         error!("Failed to get instance-id in DT: {e}");
         RebootReason::InvalidFdt
     })?;
-    id.ok_or_else(|| {
-        error!("Missing instance-id");
-        RebootReason::InvalidFdt
-    })
+    Ok(id.unwrap_or(default))
 }
 
 fn avf_untrusted_node(fdt: &Fdt) -> Result<FdtNode, RebootReason> {

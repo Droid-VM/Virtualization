@@ -37,9 +37,9 @@ const MEMORY: Attributes =
 const DEVICE_LAZY: Attributes =
     MMIO_LAZY_MAP_FLAG.union(DEVICE_NGNRE).union(Attributes::UXN).union(Attributes::ACCESSED);
 const DEVICE: Attributes = DEVICE_LAZY.union(Attributes::VALID);
-const CODE: Attributes = MEMORY.union(Attributes::READ_ONLY);
-const DATA: Attributes = MEMORY.union(Attributes::UXN);
-const RODATA: Attributes = DATA.union(Attributes::READ_ONLY);
+const CODE: Attributes = MEMORY;
+const DATA: Attributes = MEMORY;
+const RODATA: Attributes = MEMORY;
 const DATA_DBM: Attributes = RODATA.union(Attributes::DBM);
 
 type Result<T> = result::Result<T, MapError>;

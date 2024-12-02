@@ -146,6 +146,11 @@ unsafe extern "C" fn __memset_chk(
 /// errors.
 unsafe extern "C" fn free(ptr: *mut c_void) {
     let Some(ptr) = NonNull::new(ptr) else { return };
+    deallocate(ptr);
+}
+
+/// TODO
+pub fn deallocate(ptr: NonNull<c_void>) {
     let heap_range = HEAP_RANGE.get().expect("free called before heap was initialised");
     assert!(
         heap_range.contains(&(ptr.as_ptr() as usize)),
@@ -167,7 +172,7 @@ unsafe extern "C" fn free(ptr: *mut c_void) {
 /// to a suitable aligned region of size bytes, optionally zeroed (and otherwise uninitialized), or
 /// None if size is 0 or allocation fails. The block can be freed by passing the returned pointer to
 /// `free()`.
-fn allocate(size: usize, zeroed: bool) -> Option<NonNull<usize>> {
+pub fn allocate(size: usize, zeroed: bool) -> Option<NonNull<usize>> {
     let size = NonZeroUsize::new(size)?.checked_add(mem::size_of::<usize>())?;
     let layout = malloc_layout(size)?;
     // SAFETY: layout is known to have non-zero size.
