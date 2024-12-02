@@ -1,0 +1,216 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5052de85_367bd7db",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ConfigJson.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-02T00:33:16Z",
+      "side": 1,
+      "message": "add a comment. ex: `/* app_domain */ false,`",
+      "range": {
+        "startLine": 215,
+        "startChar": 32,
+        "endLine": 215,
+        "endChar": 37
+      },
+      "revId": "c8d8643f627f0e4d57c6259d7ab9954a692396c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad21ae39_f49dfcc2",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ConfigJson.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-02T00:33:16Z",
+      "side": 1,
+      "message": "nit: this could be ...\n\n```\nPath path \u003d context.getFilesDir().toPath().resolve(\"internal.virtiofs\");\nFiles.deleteIfExists(path);\n```",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 99
+      },
+      "revId": "c8d8643f627f0e4d57c6259d7ab9954a692396c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5f97904_68d55fb4",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ConfigJson.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-02T00:33:16Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 231,
+        "startChar": 24,
+        "endLine": 231,
+        "endChar": 28
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b12c44f8_d420e238",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/ConfigJson.java",
+              "range": {
+                "startLine": 212,
+                "startChar": 0,
+                "endLine": 213,
+                "endChar": 0
+              },
+              "replacement": "                                0777,\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/ConfigJson.java",
+              "range": {
+                "startLine": 228,
+                "startChar": 0,
+                "endLine": 229,
+                "endChar": 0
+              },
+              "replacement": "                        0777,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c8d8643f627f0e4d57c6259d7ab9954a692396c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d975962f_f9b445d7",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-02T00:33:16Z",
+      "side": 1,
+      "message": "socket_fd",
+      "range": {
+        "startLine": 238,
+        "startChar": 8,
+        "endLine": 238,
+        "endChar": 14
+      },
+      "revId": "c8d8643f627f0e4d57c6259d7ab9954a692396c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e57ffbc_971e2145",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1279,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-02T00:33:16Z",
+      "side": 1,
+      "message": "this part is not needed. `socket` is `OwnedFd` which can be converted to `RawFd`. See below.",
+      "range": {
+        "startLine": 1278,
+        "startChar": 0,
+        "endLine": 1279,
+        "endChar": 62
+      },
+      "revId": "c8d8643f627f0e4d57c6259d7ab9954a692396c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc3d2820_e10bc83a",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1282,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-02T00:33:16Z",
+      "side": 1,
+      "message": "`socket.as_raw_fd()`",
+      "range": {
+        "startLine": 1282,
+        "startChar": 74,
+        "endLine": 1282,
+        "endChar": 80
+      },
+      "revId": "c8d8643f627f0e4d57c6259d7ab9954a692396c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bab193df_08d3db7e",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/SharedPath.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-02T00:33:16Z",
+      "side": 1,
+      "message": "consider rename this to `socketPath`.",
+      "range": {
+        "startLine": 42,
+        "startChar": 11,
+        "endLine": 42,
+        "endChar": 17
+      },
+      "revId": "c8d8643f627f0e4d57c6259d7ab9954a692396c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60c5201d_ad804a62",
+        "filename": "libs/framework-virtualization/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-02T00:33:16Z",
+      "side": 1,
+      "message": "Please add a TODO to fix this later (by using socketpair).",
+      "range": {
+        "startLine": 762,
+        "startChar": 0,
+        "endLine": 765,
+        "endChar": 21
+      },
+      "revId": "c8d8643f627f0e4d57c6259d7ab9954a692396c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
