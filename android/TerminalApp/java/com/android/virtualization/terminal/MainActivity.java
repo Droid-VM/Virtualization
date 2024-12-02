@@ -300,6 +300,16 @@ public class MainActivity extends BaseActivity
                                                     .setVisibility(View.VISIBLE);
                                             mBootCompleted.open();
                                             updateModifierKeysVisibility();
+<<<<<<< PATCH SET (595caf Implement long touch to select text)
+                                            mWebView.evaluateJavascript(
+                                                    TerminalView.CTRL_KEY_HANDLER, null);
+                                            mWebView.evaluateJavascript(
+                                                    TerminalView.TOUCH_TO_MOUSE_HANDLER, null);
+||||||| BASE
+                                            mWebView.evaluateJavascript(
+                                                    TerminalView.CTRL_KEY_HANDLER, null);
+=======
+>>>>>>> BASE      (337b26 Use evaluateJavascript instead of loadUrl)
                                         }
                                     }
                                 });
