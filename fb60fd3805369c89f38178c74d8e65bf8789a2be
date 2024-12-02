@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "244c7502_13ecd8bd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-12-02T11:43:38Z",
+      "side": 1,
+      "message": "MAYBE: Describe in the commit message why the need of splitting the scratch contiguous region in eh_stack and data_bss. It is not obvious from reading the code. eg. What do we gain by assuming that it is not contiguous the scratch region ?",
+      "range": {
+        "startLine": 9,
+        "startChar": 23,
+        "endLine": 9,
+        "endChar": 31
+      },
+      "revId": "fb60fd3805369c89f38178c74d8e65bf8789a2be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "684c801f_a5f21afb",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-12-02T11:43:38Z",
+      "side": 1,
+      "message": "Q: Where is `init_eh_stack_pointer` coming from ? It should be from the linker (I guess ?). If it is from the linker why there is no linker change in this CL ?",
+      "range": {
+        "startLine": 208,
+        "startChar": 27,
+        "endLine": 208,
+        "endChar": 41
+      },
+      "revId": "fb60fd3805369c89f38178c74d8e65bf8789a2be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
