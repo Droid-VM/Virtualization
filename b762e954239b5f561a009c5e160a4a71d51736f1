@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8b6378e_f85f0ed2",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-02T22:34:45Z",
+      "side": 1,
+      "message": "since this goes through the memory tracker now, does it still need to be unsafe?",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 320,
+        "endChar": 6
+      },
+      "revId": "b762e954239b5f561a009c5e160a4a71d51736f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d626927f_2ee353b8",
+        "filename": "libs/libvmbase/src/memory/tracker.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-02T22:34:45Z",
+      "side": 1,
+      "message": "why not error on a double mapping like the other methods?",
+      "revId": "b762e954239b5f561a009c5e160a4a71d51736f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
