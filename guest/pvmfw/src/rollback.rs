@@ -23,6 +23,7 @@ use crate::instance::{get_recorded_entry, record_instance_entry};
 use diced_open_dice::Hidden;
 use libfdt::Fdt;
 use log::{error, info};
+use pvmfw_avb::AvfUuid;
 use pvmfw_avb::Capability;
 use pvmfw_avb::VerifiedBootData;
 use virtio_drivers::transport::pci::bus::PciRoot;
@@ -76,13 +77,27 @@ fn perform_fixed_index_rollback_protection(
     verified_boot_data: &VerifiedBootData,
 ) -> Result<(), RebootReason> {
     info!("Performing fixed-index rollback protection");
-    let fixed_index = service_vm_version::VERSION;
+    let Some(uuid) = verified_boot_data.uuid else {
+        error!("Payload UUID is missing but rollback protection requires it");
+        return Err(RebootReason::InvalidPayload);
+    };
+    let Some(fixed_index) = get_fixed_rollback_index(uuid) else {
+        error!("Unknown payload UUID: {uuid}");
+        return Err(RebootReason::InvalidPayload);
+    };
     let index = verified_boot_data.rollback_index;
     if index != fixed_index {
         error!("Rollback index mismatch: expected {fixed_index}, found {index}");
         Err(RebootReason::InvalidPayload)
     } else {
         Ok(())
+    }
+}
+
+fn get_fixed_rollback_index(uuid: AvfUuid) -> Option<u64> {
+    match uuid {
+        AvfUuid::RKP_VM_UUID => Some(service_vm_version::VERSION),
+        _ => None,
     }
 }
 

@@ -23,7 +23,7 @@ use core::mem::size_of;
 use diced_open_dice::{
     bcc_handover_main_flow, hash, Config, DiceContext, DiceMode, Hash, InputValues, HIDDEN_SIZE,
 };
-use pvmfw_avb::{Capability, DebugLevel, Digest, VerifiedBootData};
+use pvmfw_avb::{AvfUuid, DebugLevel, Digest, VerifiedBootData};
 use zerocopy::Immutable;
 use zerocopy::IntoBytes;
 use zerocopy::KnownLayout;
@@ -92,7 +92,7 @@ impl PartialInputs {
         let mode = to_dice_mode(data.debug_level);
         // We use rollback_index from vbmeta as the security_version field in dice certificate.
         let security_version = data.rollback_index;
-        let rkp_vm_marker = data.has_capability(Capability::RemoteAttest);
+        let rkp_vm_marker = data.uuid == Some(AvfUuid::RKP_VM_UUID);
 
         Ok(Self { code_hash, auth_hash, mode, security_version, rkp_vm_marker })
     }
@@ -184,6 +184,7 @@ mod tests {
     use diced_open_dice::HIDDEN_SIZE;
     use diced_sample_inputs::make_sample_bcc_and_cdis;
     use hwtrust::{dice, session::Session};
+    use pvmfw_avb::AvfUuid;
     use pvmfw_avb::Capability;
     use pvmfw_avb::DebugLevel;
     use pvmfw_avb::Digest;
@@ -228,8 +229,11 @@ mod tests {
 
     #[test]
     fn rkp_vm_conversion() {
-        let vb_data =
-            VerifiedBootData { capabilities: vec![Capability::RemoteAttest], ..BASE_VB_DATA };
+        let vb_data = VerifiedBootData {
+            capabilities: vec![Capability::RemoteAttest],
+            uuid: Some(AvfUuid::RKP_VM_UUID),
+            ..BASE_VB_DATA
+        };
         let inputs = PartialInputs::new(&vb_data).unwrap();
 
         assert!(inputs.rkp_vm_marker);
@@ -250,8 +254,11 @@ mod tests {
 
     #[test]
     fn config_descriptor_with_rkp_vm() {
-        let vb_data =
-            VerifiedBootData { capabilities: vec![Capability::RemoteAttest], ..BASE_VB_DATA };
+        let vb_data = VerifiedBootData {
+            capabilities: vec![Capability::RemoteAttest],
+            uuid: Some(AvfUuid::RKP_VM_UUID),
+            ..BASE_VB_DATA
+        };
         let inputs = PartialInputs::new(&vb_data).unwrap();
         let config_map = decode_config_descriptor(&inputs, Some(HASH));
 
