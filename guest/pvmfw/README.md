@@ -462,6 +462,7 @@ that is compatible with their guest kernel. These are:
   - `supports_uefi_boot`: pvmfw boots the VM as a EFI payload (experimental)
   - `trusty_security_vm`: pvmfw skips rollback protection
 - `"com.android.virt.page_size"`: the guest page size in KiB (optional, defaults to 4)
+- `"com.android.virt.uuid"`: UUID for supporting special system VMs (optional)
 
 ## Development
 

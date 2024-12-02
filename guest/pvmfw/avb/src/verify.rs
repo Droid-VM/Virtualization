@@ -22,7 +22,9 @@ use avb::{
     Descriptor, DescriptorError, DescriptorResult, HashDescriptor, PartitionData, SlotVerifyError,
     SlotVerifyNoDataResult, VbmetaData,
 };
+use core::fmt;
 use core::str;
+use uuid::Uuid;
 
 // We use this for the rollback_index field if SlotVerifyData has empty rollback_indexes
 const DEFAULT_ROLLBACK_INDEX: u64 = 0;
@@ -41,6 +43,8 @@ pub struct VerifiedBootData<'a> {
     pub initrd_digest: Option<Digest>,
     /// Trusted public key.
     pub public_key: &'a [u8],
+    /// AVF-defined UUID of the guest payload, if present.
+    pub uuid: Option<AvfUuid>,
     /// VM capabilities.
     pub capabilities: Vec<Capability>,
     /// Rollback index of kernel.
@@ -63,6 +67,41 @@ pub enum DebugLevel {
     None,
     /// Fully debuggable.
     Full,
+}
+
+/// UUID of an AVF guest kernel.
+///
+/// This wraps `uuid::Uuid` to limit the spread of the dependency on libuuid.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct AvfUuid(Uuid);
+
+/// Macro for generating an AVF UUID.
+#[macro_export]
+macro_rules! avf_uuid {
+    ($l:tt) => {
+        if let Some(uuid) = $crate::AvfUuid::try_parse($l) {
+            uuid
+        } else {
+            panic!("Invalid AVF UUID")
+        }
+    };
+}
+
+impl AvfUuid {
+    /// Returns the UUID contained in the input string, if valid.
+    pub const fn try_parse(input: &str) -> Option<Self> {
+        if let Ok(uuid) = Uuid::try_parse(input) {
+            Some(Self(uuid))
+        } else {
+            None
+        }
+    }
+}
+
+impl fmt::Display for AvfUuid {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{}", self.0.as_hyphenated())
+    }
 }
 
 /// VM Capability.
@@ -238,6 +277,15 @@ fn read_page_size(vbmeta_data: &VbmetaData) -> Result<Option<usize>, PvmfwVerify
     Ok(Some(size))
 }
 
+/// Returns the indicated payload UUID, if present.
+fn read_uuid(vbmeta_data: &VbmetaData) -> Result<Option<AvfUuid>, PvmfwVerifyError> {
+    let Some(property) = vbmeta_data.get_property_value("com.android.virt.uuid") else {
+        return Ok(None);
+    };
+    let uuid = Uuid::try_parse_ascii(property).map_err(|_| PvmfwVerifyError::InvalidUuid)?;
+    Ok(Some(AvfUuid(uuid)))
+}
+
 /// Verifies the given initrd partition, and checks that the resulting contents looks like expected.
 fn verify_initrd(
     ops: &mut Ops,
@@ -275,6 +323,7 @@ pub fn verify_payload<'a>(
     let hash_descriptors = HashDescriptors::get(&descriptors)?;
     let capabilities = Capability::get_capabilities(vbmeta_image)?;
     let page_size = read_page_size(vbmeta_image)?;
+    let uuid = read_uuid(vbmeta_image)?;
 
     if initrd.is_none() {
         hash_descriptors.verify_no_initrd()?;
@@ -283,6 +332,7 @@ pub fn verify_payload<'a>(
             kernel_digest: copy_digest(hash_descriptors.kernel)?,
             initrd_digest: None,
             public_key: trusted_public_key,
+            uuid,
             capabilities,
             rollback_index,
             page_size,
@@ -304,6 +354,7 @@ pub fn verify_payload<'a>(
         kernel_digest: copy_digest(hash_descriptors.kernel)?,
         initrd_digest: Some(copy_digest(initrd_descriptor)?),
         public_key: trusted_public_key,
+        uuid,
         capabilities,
         rollback_index,
         page_size,

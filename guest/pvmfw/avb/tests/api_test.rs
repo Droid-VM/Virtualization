@@ -19,7 +19,9 @@ mod utils;
 use anyhow::{anyhow, Result};
 use avb::{DescriptorError, SlotVerifyError};
 use avb_bindgen::{AvbFooter, AvbVBMetaImageHeader};
-use pvmfw_avb::{verify_payload, Capability, DebugLevel, PvmfwVerifyError, VerifiedBootData};
+use pvmfw_avb::{
+    avf_uuid, verify_payload, Capability, DebugLevel, PvmfwVerifyError, VerifiedBootData,
+};
 use std::{
     fs,
     mem::{offset_of, size_of},
@@ -27,6 +29,9 @@ use std::{
 use utils::*;
 
 const TEST_IMG_WITH_ONE_HASHDESC_PATH: &str = "test_image_with_one_hashdesc.img";
+const TEST_IMG_WITH_INVALID_UUID_PATH: &str = "test_image_with_invalid_uuid.img";
+const TEST_IMG_WITH_UUID_PATH: &str = "test_image_with_uuid.img";
+const TEST_IMG_WITH_UUID_NO_HYPHENS_PATH: &str = "test_image_with_uuid_without_hyphens.img";
 const TEST_IMG_WITH_INVALID_PAGE_SIZE_PATH: &str = "test_image_with_invalid_page_size.img";
 const TEST_IMG_WITH_NEGATIVE_PAGE_SIZE_PATH: &str = "test_image_with_negative_page_size.img";
 const TEST_IMG_WITH_OVERFLOW_PAGE_SIZE_PATH: &str = "test_image_with_overflow_page_size.img";
@@ -99,6 +104,7 @@ fn payload_expecting_no_initrd_passes_verification_with_no_initrd() -> Result<()
         kernel_digest,
         initrd_digest: None,
         public_key: &public_key,
+        uuid: None,
         capabilities: vec![],
         rollback_index: 0,
         page_size: None,
@@ -144,6 +150,7 @@ fn payload_expecting_no_initrd_passes_verification_with_service_vm_prop() -> Res
         kernel_digest,
         initrd_digest: None,
         public_key: &public_key,
+        uuid: None,
         capabilities: vec![Capability::RemoteAttest],
         rollback_index: 0,
         page_size: None,
@@ -244,6 +251,36 @@ fn tampered_kernel_fails_verification() -> Result<()> {
         &load_trusted_public_key()?,
         SlotVerifyError::Verification(None).into(),
     )
+}
+
+#[test]
+fn avf_uuid_displays_properly() {
+    let uuid = avf_uuid!("d5cc4a8c-07ea-46f9-977e-dc02a944c95f");
+    assert_eq!(&uuid.to_string(), "d5cc4a8c-07ea-46f9-977e-dc02a944c95f");
+}
+
+#[test]
+fn kernel_has_expected_uuid_invalid() {
+    let kernel = fs::read(TEST_IMG_WITH_INVALID_UUID_PATH).unwrap();
+    assert_eq!(read_uuid(&kernel), Err(PvmfwVerifyError::InvalidUuid));
+}
+
+#[test]
+fn kernel_has_expected_uuid_valid() {
+    let kernel = fs::read(TEST_IMG_WITH_UUID_PATH).unwrap();
+    assert_eq!(read_uuid(&kernel), Ok(Some(avf_uuid!("d5cc4a8c-07ea-46f9-977e-dc02a944c95f"))));
+}
+
+#[test]
+fn kernel_has_expected_uuid_valid_no_hyphens() {
+    let kernel = fs::read(TEST_IMG_WITH_UUID_NO_HYPHENS_PATH).unwrap();
+    assert_eq!(read_uuid(&kernel), Ok(Some(avf_uuid!("d5cc4a8c-07ea-46f9-977e-dc02a944c95f"))));
+}
+
+#[test]
+fn kernel_has_expected_uuid_none() {
+    let kernel = fs::read(TEST_IMG_WITH_ONE_HASHDESC_PATH).unwrap();
+    assert_eq!(read_uuid(&kernel), Ok(None));
 }
 
 #[test]
@@ -454,6 +491,7 @@ fn payload_with_rollback_index() -> Result<()> {
         kernel_digest,
         initrd_digest: None,
         public_key: &public_key,
+        uuid: None,
         capabilities: vec![],
         rollback_index: 5,
         page_size: None,
