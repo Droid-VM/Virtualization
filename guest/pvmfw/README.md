@@ -463,6 +463,7 @@ that is compatible with their guest kernel. These are:
   - `trusty_security_vm`: pvmfw skips rollback protection
 - `"com.android.virt.page_size"`: the guest page size in KiB (optional, defaults to 4)
 - `"com.android.virt.uuid"`: UUID for supporting special system VMs (optional)
+  - `"ae6b8440-3bb3-4424-90d4-eb588c260149"`: RKP VM for Remote Key Provisioning
 
 ## Development
 

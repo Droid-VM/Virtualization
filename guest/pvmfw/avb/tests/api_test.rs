@@ -20,7 +20,7 @@ use anyhow::{anyhow, Result};
 use avb::{DescriptorError, SlotVerifyError};
 use avb_bindgen::{AvbFooter, AvbVBMetaImageHeader};
 use pvmfw_avb::{
-    avf_uuid, verify_payload, Capability, DebugLevel, PvmfwVerifyError, VerifiedBootData,
+    avf_uuid, verify_payload, AvfUuid, Capability, DebugLevel, PvmfwVerifyError, VerifiedBootData,
 };
 use std::{
     fs,
@@ -135,7 +135,7 @@ fn payload_with_non_initrd_descriptor_fails_verification_with_initrd() -> Result
 }
 
 #[test]
-fn payload_expecting_no_initrd_passes_verification_with_service_vm_prop() -> Result<()> {
+fn payload_expecting_no_initrd_passes_verification_with_service_vm_uuid() -> Result<()> {
     let public_key = load_trusted_public_key()?;
     let verified_boot_data = verify_payload(
         &fs::read(TEST_IMG_WITH_SERVICE_VM_PROP_PATH)?,
@@ -150,7 +150,7 @@ fn payload_expecting_no_initrd_passes_verification_with_service_vm_prop() -> Res
         kernel_digest,
         initrd_digest: None,
         public_key: &public_key,
-        uuid: None,
+        uuid: Some(AvfUuid::RKP_VM_UUID),
         capabilities: vec![Capability::RemoteAttest],
         rollback_index: 0,
         page_size: None,
@@ -281,6 +281,12 @@ fn kernel_has_expected_uuid_valid_no_hyphens() {
 fn kernel_has_expected_uuid_none() {
     let kernel = fs::read(TEST_IMG_WITH_ONE_HASHDESC_PATH).unwrap();
     assert_eq!(read_uuid(&kernel), Ok(None));
+}
+
+#[test]
+fn service_vm_has_expected_uuid() {
+    let kernel = fs::read(TEST_IMG_WITH_SERVICE_VM_PROP_PATH).unwrap();
+    assert_eq!(read_uuid(&kernel), Ok(Some(AvfUuid::RKP_VM_UUID)));
 }
 
 #[test]
