@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e937f721_db447c08",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstalledImage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-02T01:56:57Z",
+      "side": 1,
+      "message": "getBuildId?",
+      "range": {
+        "startLine": 89,
+        "startChar": 23,
+        "endLine": 89,
+        "endChar": 36
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d82a193e_e82f01b2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/InstalledImage.java",
+              "range": {
+                "startLine": 89,
+                "startChar": 0,
+                "endLine": 90,
+                "endChar": 0
+              },
+              "replacement": "            mBuildId \u003d readBuildId();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8f716bb91069b1a472d456d13271a57f6121f841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
