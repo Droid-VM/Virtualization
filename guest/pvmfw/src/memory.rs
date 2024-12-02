@@ -34,6 +34,9 @@ use vmbase::{
     util::align_up,
 };
 
+use crate::entry::END_OF_MEMORY;
+use core::sync::atomic::Ordering;
+
 /// Returns memory range reserved for the appended payload.
 pub fn appended_payload_range() -> Range<VirtualAddress> {
     let start = align_up(layout::binary_end().0, SIZE_4KB).unwrap();
@@ -100,6 +103,7 @@ impl<'a> MemorySlices<'a> {
         debug!("Fdt passed validation!");
 
         let memory_range = info.memory_range;
+        END_OF_MEMORY.fetch_add(memory_range.end, Ordering::Relaxed);
         debug!("Resizing MemoryTracker to range {memory_range:#x?}");
         MEMORY.lock().as_mut().unwrap().shrink(&memory_range).map_err(|e| {
             error!("Failed to use memory range value from DT: {memory_range:#x?}: {e}");

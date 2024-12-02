@@ -122,6 +122,18 @@ impl MemoryTracker {
         Ok(())
     }
 
+    /// TODO.
+    pub fn find_region(&mut self, size: usize) -> usize {
+        for region in self.regions.iter() {
+            if (region.range.end - region.range.start) >= size {
+                log::info!("{:?}", region.range.start);
+                return region.range.start;
+            }
+        }
+        // TODO(nikolinailic): handle error.
+        0
+    }
+
     /// Allocate the address range for a const slice; returns None if failed.
     pub fn alloc_range(&mut self, range: &MemoryRange) -> Result<MemoryRange> {
         let region = MemoryRegion { range: range.clone(), mem_type: MemoryType::ReadOnly };
