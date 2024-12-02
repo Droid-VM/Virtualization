@@ -367,6 +367,30 @@
       },
       "revId": "8082ff5611885fac7c278a988e96358623da9fab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac9696ef_17341dd9",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1982,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-12-02T22:27:18Z",
+      "side": 1,
+      "message": "IIUC, these are really intended for the corresponding Java exception codes (e.g. `java.lang.SecurityException`, `java.lang.IllegalStateException`), but I think `SECURITY` makes the most sense here, so I used that. LMK WYT.",
+      "parentUuid": "d7e8234a_c610f8df",
+      "range": {
+        "startLine": 1973,
+        "startChar": 0,
+        "endLine": 1982,
+        "endChar": 9
+      },
+      "revId": "8082ff5611885fac7c278a988e96358623da9fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
