@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ace67072_9d20d442",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-02T13:38:31Z",
+      "side": 1,
+      "message": "\u003e The HAL should wrap any access to the ref DT, which we\u0027ll keep only as a fallback (to be deprecated) to the \"actual\" call, when implementing v2. \n\nJust to clarify (Are we on the same page here?):\n1. virtmgr process on devices shipping with Secretkeeper V2 will not read host_ref_dt. Instead `getSecretKeeperIdentity` will be called.\n2. virtmgr process on devices shipping with Secretkeeper V1 will (continue to) read host_ref_dt \u0026 add appropriate DT overlay. This is needed because V1 will not have the corresponding `getSecretkeeperIdentity()` method.\n3. To unblock this patchset (in the interest of deadlines), reference implementation \u0026 product implementation on pixel (whichever ones are upgraded to Sk V2 (I\u0027d recommend upgrading all the way from Pixel6)) will read the host_ref_dt.\n4. Then the reference \u0026 product implementation is changed to read public key from Secretkeeper TA instead of DT. Similar thing is done for vendor_hash \u0026 then corresponding bootloader operation that populates host_ref_dt  is removed.",
+      "parentUuid": "b6946fb4_0f315580",
+      "revId": "8082ff5611885fac7c278a988e96358623da9fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f957e1f5_681b4139",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 3
