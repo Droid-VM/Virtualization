@@ -88,6 +88,9 @@ macro_rules! avf_uuid {
 }
 
 impl AvfUuid {
+    /// The AVF Service VM ("Rialto") implementing Remote Key Provisioning (RKP).
+    pub const RKP_VM_UUID: AvfUuid = avf_uuid!("ae6b8440-3bb3-4424-90d4-eb588c260149");
+
     /// Returns the UUID contained in the input string, if valid.
     pub const fn try_parse(input: &str) -> Option<Self> {
         if let Ok(uuid) = Uuid::try_parse(input) {
