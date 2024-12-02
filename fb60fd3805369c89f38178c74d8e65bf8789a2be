@@ -45,6 +45,29 @@
       },
       "revId": "fb60fd3805369c89f38178c74d8e65bf8789a2be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "defcedff_a2b0eaf8",
+        "filename": "guest/vmbase_example/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-12-02T11:45:01Z",
+      "side": 1,
+      "message": "Related to the commit message - This seems to me a functional change (introducing a new stack object and creating a mapping in the pagetable for it)",
+      "range": {
+        "startLine": 61,
+        "startChar": 25,
+        "endLine": 61,
+        "endChar": 39
+      },
+      "revId": "fb60fd3805369c89f38178c74d8e65bf8789a2be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
