@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa7cda24_36c82c72",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-12-02T11:47:01Z",
+      "side": 1,
+      "message": "Nevermind, looking at your next CL seems like (init_eh_stack_pointer) is already defined in the linker.",
+      "parentUuid": "684c801f_a5f21afb",
+      "range": {
+        "startLine": 208,
+        "startChar": 27,
+        "endLine": 208,
+        "endChar": 41
+      },
+      "revId": "fb60fd3805369c89f38178c74d8e65bf8789a2be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "defcedff_a2b0eaf8",
         "filename": "guest/vmbase_example/src/main.rs",
         "patchSetId": 3
