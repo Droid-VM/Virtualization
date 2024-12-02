@@ -30,6 +30,8 @@ pub enum PvmfwVerifyError {
     UnknownVbmetaProperty,
     /// VBMeta has invalid page_size property.
     InvalidPageSize,
+    /// VBMeta has invalid (AVF) uuid property.
+    InvalidUuid,
 }
 
 impl From<SlotVerifyError<'_>> for PvmfwVerifyError {
@@ -54,6 +56,7 @@ impl fmt::Display for PvmfwVerifyError {
             }
             Self::UnknownVbmetaProperty => write!(f, "Unknown vbmeta property"),
             Self::InvalidPageSize => write!(f, "Invalid page_size property"),
+            Self::InvalidUuid => write!(f, "Invalid uuid property"),
         }
     }
 }
