@@ -11,6 +11,7 @@ rust_library_rlib {
     rustlibs: [
         "libavb_rs_nostd",
         "libtinyvec_nostd",
+        "libuuid_nostd",
     ],
     whole_static_libs: [
         "libavb_baremetal",
@@ -37,6 +38,9 @@ rust_test {
         ":test_image_with_one_hashdesc",
         ":test_image_with_non_initrd_hashdesc",
         ":test_image_with_initrd_and_non_initrd_desc",
+        ":test_image_with_invalid_uuid",
+        ":test_image_with_uuid",
+        ":test_image_with_uuid_without_hyphens",
         ":test_image_with_invalid_page_size",
         ":test_image_with_negative_page_size",
         ":test_image_with_overflow_page_size",
@@ -120,6 +124,48 @@ avb_add_hash_footer {
             enabled: true,
         },
     },
+}
+
+avb_add_hash_footer {
+    name: "test_image_with_invalid_uuid",
+    src: ":unsigned_test_image",
+    partition_name: "boot",
+    private_key: ":pvmfw_sign_key",
+    salt: "2134",
+    props: [
+        {
+            name: "com.android.virt.uuid",
+            value: "invalid",
+        },
+    ],
+}
+
+avb_add_hash_footer {
+    name: "test_image_with_uuid",
+    src: ":unsigned_test_image",
+    partition_name: "boot",
+    private_key: ":pvmfw_sign_key",
+    salt: "2134",
+    props: [
+        {
+            name: "com.android.virt.uuid",
+            value: "d5cc4a8c-07ea-46f9-977e-dc02a944c95f",
+        },
+    ],
+}
+
+avb_add_hash_footer {
+    name: "test_image_with_uuid_without_hyphens",
+    src: ":unsigned_test_image",
+    partition_name: "boot",
+    private_key: ":pvmfw_sign_key",
+    salt: "2134",
+    props: [
+        {
+            name: "com.android.virt.uuid",
+            value: "d5cc4a8c07ea46f9977edc02a944c95f",
+        },
+    ],
 }
 
 avb_add_hash_footer {
@@ -244,6 +290,10 @@ avb_add_hash_footer {
         {
             name: "com.android.virt.cap",
             value: "remote_attest",
+        },
+        {
+            name: "com.android.virt.uuid",
+            value: "ae6b8440-3bb3-4424-90d4-eb588c260149",
         },
     ],
 }

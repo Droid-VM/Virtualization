@@ -23,7 +23,7 @@ use avb_bindgen::{
 };
 use openssl::sha;
 use pvmfw_avb::{
-    verify_payload, Capability, DebugLevel, Digest, PvmfwVerifyError, VerifiedBootData,
+    verify_payload, AvfUuid, Capability, DebugLevel, Digest, PvmfwVerifyError, VerifiedBootData,
 };
 use std::{
     fs,
@@ -131,6 +131,7 @@ pub fn assert_latest_payload_verification_passes(
         kernel_digest,
         initrd_digest,
         public_key: &public_key,
+        uuid: None,
         capabilities,
         rollback_index: 1,
         page_size,
@@ -163,6 +164,7 @@ pub fn assert_payload_without_initrd_passes_verification(
         kernel_digest,
         initrd_digest: None,
         public_key: &public_key,
+        uuid: None,
         capabilities,
         rollback_index: expected_rollback_index,
         page_size,
@@ -170,6 +172,16 @@ pub fn assert_payload_without_initrd_passes_verification(
     assert_eq!(expected_boot_data, verified_boot_data);
 
     Ok(())
+}
+
+pub fn read_uuid(kernel: &[u8]) -> Result<Option<AvfUuid>, PvmfwVerifyError> {
+    let public_key = load_trusted_public_key().unwrap();
+    let verified_boot_data = verify_payload(
+        kernel,
+        None, // initrd
+        &public_key,
+    )?;
+    Ok(verified_boot_data.uuid)
 }
 
 pub fn read_page_size(kernel: &[u8]) -> Result<Option<usize>, PvmfwVerifyError> {
