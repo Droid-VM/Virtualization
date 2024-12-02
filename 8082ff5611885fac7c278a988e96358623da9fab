@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "986e2c3d_9265a1e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-02T19:02:49Z",
+      "side": 1,
+      "message": "3 actually is no more valid, since r.android.com/3305807 changed the relevant HAL library to fetch the identity from TA",
+      "parentUuid": "ace67072_9d20d442",
+      "revId": "8082ff5611885fac7c278a988e96358623da9fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f957e1f5_681b4139",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 3
@@ -186,6 +204,30 @@
       "side": 1,
       "message": "\u003e If you\u0027re looking to unblock the HAL interface, one way would be (temporarily) having pvmfw inject the secretkeeper public_key \n\nI don\u0027t get this; why not just introduce the HAL to first only read from the host ref DT and use that from `virtmgr`, so that all client code changes are in, then extend the HAL internal implementation to support calling into TZ (and deprecate the host ref DT)?\n\nAt no point should things on the pvmfw (or guest) side change, AFAIU?",
       "parentUuid": "aa6cd27a_d337c070",
+      "range": {
+        "startLine": 1949,
+        "startChar": 0,
+        "endLine": 1949,
+        "endChar": 24
+      },
+      "revId": "8082ff5611885fac7c278a988e96358623da9fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a5dff2a_dded1030",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1949,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-02T19:02:49Z",
+      "side": 1,
+      "message": "I think this comment is no more relevant since Matt added teh HAL \u003c-\u003e TA comms in the r.android.com/3305807",
+      "parentUuid": "7bb0bdf8_7feec5d6",
       "range": {
         "startLine": 1949,
         "startChar": 0,
