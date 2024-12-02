@@ -74,10 +74,9 @@ fn perform_deferred_rollback_protection(
 }
 
 fn get_fixed_rollback_protection(verified_boot_data: &VerifiedBootData) -> Option<u64> {
-    if verified_boot_data.has_capability(Capability::RemoteAttest) {
-        Some(service_vm_version::VERSION)
-    } else {
-        None
+    match verified_boot_data.name.as_deref()? {
+        VerifiedBootData::RKP_VM_NAME => Some(service_vm_version::VERSION),
+        _ => None,
     }
 }
 
