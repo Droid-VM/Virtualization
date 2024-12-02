@@ -70,6 +70,23 @@
       },
       "revId": "0d5434d43ab686500e5c4f2019691bde1faabaa4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8c2d619_a593d204",
+        "filename": "libs/libvmbase/sections.ld",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-02T19:25:34Z",
+      "side": 1,
+      "message": "mostly just curious: is there an advantage to this vs `ORIGIN(writable_data) + LENGTH(writable_data)`? the new style seems a lot more subtle, you have to know that writable_data is always aligned to its length",
+      "revId": "0d5434d43ab686500e5c4f2019691bde1faabaa4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
