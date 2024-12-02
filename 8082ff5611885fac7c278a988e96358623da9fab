@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b6946fb4_0f315580",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-02T11:21:51Z",
+      "side": 1,
+      "message": "The HAL should wrap any access to the ref DT, which we\u0027ll keep only as a fallback (to be deprecated) to the \"actual\" call, when implementing v2. So, yes, combined with VBMeta parsing for the guest `/vendor` pubkey/hash it should remove the need for the ref DST in the client code (`virtmgr`). Cc: @ioffe@google.com\n\nIdeally, we\u0027d also want to make it harder for HAL implementations to rely on the DT instead of implementing the call, to discourage new implementations from shipping the deprecated API (no idea how this could be done).",
+      "parentUuid": "7c1826f8_daabb571",
+      "revId": "8082ff5611885fac7c278a988e96358623da9fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f957e1f5_681b4139",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 3
@@ -138,6 +156,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7bb0bdf8_7feec5d6",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1949,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-02T11:21:51Z",
+      "side": 1,
+      "message": "\u003e If you\u0027re looking to unblock the HAL interface, one way would be (temporarily) having pvmfw inject the secretkeeper public_key \n\nI don\u0027t get this; why not just introduce the HAL to first only read from the host ref DT and use that from `virtmgr`, so that all client code changes are in, then extend the HAL internal implementation to support calling into TZ (and deprecate the host ref DT)?\n\nAt no point should things on the pvmfw (or guest) side change, AFAIU?",
+      "parentUuid": "aa6cd27a_d337c070",
+      "range": {
+        "startLine": 1949,
+        "startChar": 0,
+        "endLine": 1949,
+        "endChar": 24
+      },
+      "revId": "8082ff5611885fac7c278a988e96358623da9fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e6d58647_0165558b",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 3
@@ -197,6 +239,30 @@
       "side": 1,
       "message": "What\u0027s the right \"unimplemented\" here? `ExceptionCode::UNSUPPORTED_OPERATION`? just panic with `unimplemented!()`?",
       "parentUuid": "c7b0241e_ddafd263",
+      "range": {
+        "startLine": 1973,
+        "startChar": 0,
+        "endLine": 1982,
+        "endChar": 9
+      },
+      "revId": "8082ff5611885fac7c278a988e96358623da9fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7e8234a_c610f8df",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1982,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-02T11:21:51Z",
+      "side": 1,
+      "message": "Thanks, for the explanation, I had misunderstood `SecretkeeperProxy` as being the entity that talks to Sk from the host.\n\n\u003e What\u0027s the right \"unimplemented\" here?\n\nLet\u0027s not panic (`unimplemented!()`) from a library. I don\u0027t know where those error codes are documented but, from the variant names alone, `ExceptionCode::SECURITY`, `ExceptionCode::ILLEGAL_STATE` or even `ExceptionCode::SERVICE_SPECIFIC` might be better candidates, given that the option _is_ actually supported (or should be) but we don\u0027t want it to be used.",
+      "parentUuid": "6ce01989_60f42570",
       "range": {
         "startLine": 1973,
         "startChar": 0,
