@@ -27,6 +27,8 @@ use std::{
 use utils::*;
 
 const TEST_IMG_WITH_ONE_HASHDESC_PATH: &str = "test_image_with_one_hashdesc.img";
+const TEST_IMG_WITH_NAME_PATH: &str = "test_image_with_name.img";
+const TEST_IMG_WITH_NAME_TOO_LONG_PATH: &str = "test_image_with_name_too_long.img";
 const TEST_IMG_WITH_INVALID_PAGE_SIZE_PATH: &str = "test_image_with_invalid_page_size.img";
 const TEST_IMG_WITH_NEGATIVE_PAGE_SIZE_PATH: &str = "test_image_with_negative_page_size.img";
 const TEST_IMG_WITH_OVERFLOW_PAGE_SIZE_PATH: &str = "test_image_with_overflow_page_size.img";
@@ -102,6 +104,7 @@ fn payload_expecting_no_initrd_passes_verification_with_no_initrd() -> Result<()
         capabilities: vec![],
         rollback_index: 0,
         page_size: None,
+        name: None,
     };
     assert_eq!(expected_boot_data, verified_boot_data);
 
@@ -147,6 +150,7 @@ fn payload_expecting_no_initrd_passes_verification_with_service_vm_prop() -> Res
         capabilities: vec![Capability::RemoteAttest],
         rollback_index: 0,
         page_size: None,
+        name: None,
     };
     assert_eq!(expected_boot_data, verified_boot_data);
 
@@ -244,6 +248,24 @@ fn tampered_kernel_fails_verification() -> Result<()> {
         &load_trusted_public_key()?,
         SlotVerifyError::Verification(None).into(),
     )
+}
+
+#[test]
+fn kernel_has_expected_name_valid() {
+    let kernel = fs::read(TEST_IMG_WITH_NAME_PATH).unwrap();
+    assert_eq!(read_name(&kernel), Ok(Some("test_vm_name".to_owned())));
+}
+
+#[test]
+fn kernel_has_expected_name_none() {
+    let kernel = fs::read(TEST_IMG_WITH_ONE_HASHDESC_PATH).unwrap();
+    assert_eq!(read_name(&kernel), Ok(None));
+}
+
+#[test]
+fn kernel_has_expected_name_too_long() {
+    let kernel = fs::read(TEST_IMG_WITH_NAME_TOO_LONG_PATH).unwrap();
+    assert_eq!(read_name(&kernel), Err(PvmfwVerifyError::InvalidVmName));
 }
 
 #[test]
@@ -483,6 +505,7 @@ fn payload_with_rollback_index() -> Result<()> {
         capabilities: vec![],
         rollback_index: 5,
         page_size: None,
+        name: None,
     };
     assert_eq!(expected_boot_data, verified_boot_data);
     Ok(())
