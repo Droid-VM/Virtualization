@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "72282ab0_5dffd6c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:46:49Z",
+      "side": 1,
+      "message": "IIRC from both the ARM ARM and the code, the DBM bit of a PTE is always set but the HW (or SW from interrupt handlers, when we don\u0027t have `FEAT_HAFDBS`) will update (clear?) the RO bit on accesses to the mapped region.\n\nTherefore, the flushing seems to operate on the RO bit but is actually directly controlled by the dirty-bit tracking, which happened in HW or SW. Or does this conflict with what you\u0027ve seen?",
+      "parentUuid": "1ec66fae_aa762117",
+      "range": {
+        "startLine": 21,
+        "startChar": 29,
+        "endLine": 21,
+        "endChar": 52
+      },
+      "revId": "b762e954239b5f561a009c5e160a4a71d51736f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c8b6378e_f85f0ed2",
         "filename": "guest/pvmfw/src/entry.rs",
         "patchSetId": 11
@@ -37,6 +61,30 @@
       "writtenOn": "2024-12-02T22:34:45Z",
       "side": 1,
       "message": "since this goes through the memory tracker now, does it still need to be unsafe?",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 320,
+        "endChar": 6
+      },
+      "revId": "b762e954239b5f561a009c5e160a4a71d51736f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42ac0f2c_de5b7b41",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:46:49Z",
+      "side": 1,
+      "message": "Yes, because it could have been (ab)used to generate aliasing `\u0026mut`.\n\nNow that `map_image_footer()` fails on successive calls, this can become safe!",
+      "parentUuid": "c8b6378e_f85f0ed2",
       "range": {
         "startLine": 316,
         "startChar": 0,
@@ -64,6 +112,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ed9e145_7bc62838",
+        "filename": "libs/libvmbase/src/memory/tracker.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:46:49Z",
+      "side": 1,
+      "message": "Good idea, thanks!",
+      "parentUuid": "d626927f_2ee353b8",
+      "revId": "b762e954239b5f561a009c5e160a4a71d51736f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80edd805_6d1a9f33",
@@ -77,6 +143,24 @@
       "writtenOn": "2024-12-03T10:23:54Z",
       "side": 1,
       "message": "Not necessarily related to this CL, but checking the API that you are calling it seems that it flushes all the non-readonly memory regions.\n\nPointers:\nhttps://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/libvmbase/src/memory/dbm.rs;l\u003d59?q\u003dflush_dirty_range\n\nAttributes definition:\nhttps://docs.rs/aarch64-paging/latest/src/aarch64_paging/paging.rs.html#542",
+      "revId": "b762e954239b5f561a009c5e160a4a71d51736f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65838192_f97cf4b4",
+        "filename": "libs/libvmbase/src/memory/tracker.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:46:49Z",
+      "side": 1,
+      "message": "(See other comment thread)",
+      "parentUuid": "80edd805_6d1a9f33",
       "revId": "b762e954239b5f561a009c5e160a4a71d51736f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
