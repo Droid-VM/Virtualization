@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a60f6c76_45dde256",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/TerminalView.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-03T07:36:36Z",
+      "side": 1,
+      "message": "I\u0027ll do that in the following CL with other javascript code.",
+      "parentUuid": "89f5e722_41bc14ad",
+      "range": {
+        "startLine": 85,
+        "startChar": 12,
+        "endLine": 85,
+        "endChar": 15
+      },
+      "revId": "21ee9936603098aa8c0f6c582cb28122809fe665",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfead234_6caa9394",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-12-02T14:01:23Z",
       "side": 1,
       "message": "nit: different indentation size with the other script in the above",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 2
+      },
+      "revId": "21ee9936603098aa8c0f6c582cb28122809fe665",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e23d4806_05f81382",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/TerminalView.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-03T07:36:36Z",
+      "side": 1,
+      "message": "actually this code follows our coding rule. I\u0027ll update it with the following CL",
+      "parentUuid": "cfead234_6caa9394",
       "range": {
         "startLine": 89,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71cf2961_832c9404",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/TerminalView.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-03T07:36:36Z",
+      "side": 1,
+      "message": "bubbles: event is delivered to the parent DOM nodes. (I enable mouse event enables bubbles and cancelable by default)\nhttps://developer.mozilla.org/ko/docs/Web/API/Event/bubbles\n\ndetail means click counts(to distinguish click and double click)\nhttps://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail",
+      "parentUuid": "bbd19a8a_9c9e4190",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 14
+      },
+      "revId": "21ee9936603098aa8c0f6c582cb28122809fe665",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2de09025_8532b7ee",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-12-02T14:01:23Z",
       "side": 1,
       "message": "what is the default behavior?",
+      "range": {
+        "startLine": 131,
+        "startChar": 13,
+        "endLine": 131,
+        "endChar": 29
+      },
+      "revId": "21ee9936603098aa8c0f6c582cb28122809fe665",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9420bf12_45fa4a95",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/TerminalView.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-03T07:36:36Z",
+      "side": 1,
+      "message": "swiping to scroll is the default behavior. instead of that, in this mode it scrolls by the position of cursor(just like mouse event)",
+      "parentUuid": "2de09025_8532b7ee",
       "range": {
         "startLine": 131,
         "startChar": 13,
