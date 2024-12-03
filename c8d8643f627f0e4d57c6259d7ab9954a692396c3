@@ -264,6 +264,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7da7e941_874da9de",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1279,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-03T09:14:16Z",
+      "side": 1,
+      "message": "we can fix(?) this later, but...\n\nadd_preservede_fd doesn\u0027t dup an FD. So, if you called `add_preserved_fd(..., f)` and FD behind `f` was 3, then the function returns `/proc/self/fd/3`.",
+      "parentUuid": "1553b43f_688b6ae6",
+      "range": {
+        "startLine": 1278,
+        "startChar": 0,
+        "endLine": 1279,
+        "endChar": 62
+      },
+      "revId": "c8d8643f627f0e4d57c6259d7ab9954a692396c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc3d2820_e10bc83a",
