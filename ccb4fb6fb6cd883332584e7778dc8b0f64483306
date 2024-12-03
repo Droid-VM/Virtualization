@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b15cd5b_d8e461dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-03T07:43:40Z",
+      "side": 1,
+      "message": "thanks!",
+      "revId": "ccb4fb6fb6cd883332584e7778dc8b0f64483306",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b3e1527_a66defcb",
+        "filename": "build/debian/kokoro/gcp_ubuntu_docker/x86_64/build.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-03T07:43:40Z",
+      "side": 1,
+      "message": "I think explicitly setting the arch might be better, and also we need to update build/debian/kokoro/gcp_ubuntu_docker/aarch64/build.sh as well.",
+      "revId": "ccb4fb6fb6cd883332584e7778dc8b0f64483306",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
