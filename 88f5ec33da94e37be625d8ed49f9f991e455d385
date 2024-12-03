@@ -3,6 +3,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b3ee2ff_7848998f",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-03T01:38:09Z",
+      "side": 1,
+      "message": "it should unconditionally take ownership of the FD. APIs that sometimes take ownership and sometimes do not are often used incorrectly",
+      "range": {
+        "startLine": 80,
+        "startChar": 85,
+        "endLine": 81,
+        "endChar": 63
+      },
+      "revId": "88f5ec33da94e37be625d8ed49f9f991e455d385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c039a9c6_b8b7b8d7",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-03T01:38:09Z",
+      "side": 1,
+      "message": "same here, always take ownership",
+      "range": {
+        "startLine": 91,
+        "startChar": 85,
+        "endLine": 92,
+        "endChar": 63
+      },
+      "revId": "88f5ec33da94e37be625d8ed49f9f991e455d385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc0c6548_f67ed884",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-03T01:38:09Z",
+      "side": 1,
+      "message": "same here, always take ownership",
+      "range": {
+        "startLine": 102,
+        "startChar": 67,
+        "endLine": 103,
+        "endChar": 61
+      },
+      "revId": "88f5ec33da94e37be625d8ed49f9f991e455d385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1b412204_ba251849",
         "filename": "libs/libavf/include/android/virtualization.h",
         "patchSetId": 10
@@ -65,6 +134,98 @@
         "startChar": 0,
         "endLine": 169,
         "endChar": 64
+      },
+      "revId": "88f5ec33da94e37be625d8ed49f9f991e455d385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6523776d_5b5a9da8",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-03T01:38:09Z",
+      "side": 1,
+      "message": "should we leave out these microdroid errors for now so we don\u0027t have to stabilize them yet? can return UNRECOGNISED. it should never happen",
+      "range": {
+        "startLine": 256,
+        "startChar": 0,
+        "endLine": 275,
+        "endChar": 37
+      },
+      "revId": "88f5ec33da94e37be625d8ed49f9f991e455d385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30dbe821_d7be86ae",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-03T01:38:09Z",
+      "side": 1,
+      "message": "have you considered using `VirtualMachineRawConfig` as the API type? if VirtualMachineConfig is used and we app config support later, it will become unclear which functions are supported for which config types. it is probably better to have the functions strongly typed and add app config variants for the common stuff when we need it later\n\nas a bonus, the implementations here will become nicer because you could delete the match expressions",
+      "range": {
+        "startLine": 37,
+        "startChar": 60,
+        "endLine": 37,
+        "endChar": 80
+      },
+      "revId": "88f5ec33da94e37be625d8ed49f9f991e455d385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5a694b6_a1b57746",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-03T01:38:09Z",
+      "side": 1,
+      "message": "nit: probably nicer to use `libc` instead of `nix` in these cases: `-libc::EINVAL`",
+      "range": {
+        "startLine": 79,
+        "startChar": 13,
+        "endLine": 79,
+        "endChar": 38
+      },
+      "revId": "88f5ec33da94e37be625d8ed49f9f991e455d385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fa80de8_e8e7221e",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-03T01:38:09Z",
+      "side": 1,
+      "message": "nit: prefer early returns to reduce the nesting\n\n```\n    let virtmgr \u003d\n        if early { VirtualizationService::new_early() } else { VirtualizationService::new() };\n    let virtmgr \u003d match virtmgr {\n        Ok(virtmgr) \u003d\u003e virtmgr,\n        Err(e) \u003d\u003e return -e.raw_os_error().ok_or(lib::EIO),\n    };\n    match virtmgr.connect() {\n        Ok(service) \u003d\u003e {\n            // SAFETY: `service` is assumed to be a valid, non-null pointer to a mutable raw\n            // pointer. `service` is the only reference here and `config` takes\n            // ownership.\n            unsafe {\n                *service_ptr \u003d Box::into_raw(Box::new(service));\n            }\n            0\n        }\n        Err(_) \u003d\u003e -lib::ECONNREFUSED,\n    }\n\n```",
+      "range": {
+        "startLine": 311,
+        "startChar": 0,
+        "endLine": 330,
+        "endChar": 5
       },
       "revId": "88f5ec33da94e37be625d8ed49f9f991e455d385",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
