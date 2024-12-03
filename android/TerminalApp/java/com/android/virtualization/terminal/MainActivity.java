@@ -173,8 +173,8 @@ public class MainActivity extends BaseActivity
         findViewById(R.id.btn_ctrl)
                 .setOnClickListener(
                         (v) -> {
-                            mWebView.evaluateJavascript(TerminalView.CTRL_KEY_HANDLER, null);
-                            mWebView.evaluateJavascript(TerminalView.ENABLE_CTRL_KEY, null);
+                            JavascriptAddon.INSTANCE.mapCtrlKey(mWebView);
+                            JavascriptAddon.INSTANCE.enableCtrlKey(mWebView);
                         });
 
         View.OnClickListener modifierButtonClickListener =
@@ -300,8 +300,7 @@ public class MainActivity extends BaseActivity
                                                     .setVisibility(View.VISIBLE);
                                             mBootCompleted.open();
                                             updateModifierKeysVisibility();
-                                            mWebView.evaluateJavascript(
-                                                    TerminalView.TOUCH_TO_MOUSE_HANDLER, null);
+                                            JavascriptAddon.INSTANCE.mapTouchToMouseEvent(mWebView);
                                         }
                                     }
                                 });
