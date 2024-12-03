@@ -39,6 +39,23 @@
       "message": "why not error on a double mapping like the other methods?",
       "revId": "b762e954239b5f561a009c5e160a4a71d51736f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80edd805_6d1a9f33",
+        "filename": "libs/libvmbase/src/memory/tracker.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-12-03T10:23:54Z",
+      "side": 1,
+      "message": "Not necessarily related to this CL, but checking the API that you are calling it seems that it flushes all the non-readonly memory regions.\n\nPointers:\nhttps://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/libvmbase/src/memory/dbm.rs;l\u003d59?q\u003dflush_dirty_range\n\nAttributes definition:\nhttps://docs.rs/aarch64-paging/latest/src/aarch64_paging/paging.rs.html#542",
+      "revId": "b762e954239b5f561a009c5e160a4a71d51736f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
