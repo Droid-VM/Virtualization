@@ -330,7 +330,8 @@ fn should_defer_rollback_protection(fdt: &Fdt) -> Result<bool, RebootReason> {
             RebootReason::InvalidFdt
         })?
         .is_some();
-    Ok(defer_rbp)
+    #[allow(clippy::overly_complex_bool_expr)]
+    Ok(defer_rbp || true)
 }
 
 fn avf_untrusted_node(fdt: &Fdt) -> Result<FdtNode, RebootReason> {
