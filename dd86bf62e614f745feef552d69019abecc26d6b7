@@ -89,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6c5faa4_008de9d3",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/PortsStateManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-12-03T06:00:24Z",
+      "side": 1,
+      "message": "I think it\u0027s outdated. PLMK if it\u0027s still valid.",
+      "parentUuid": "246a3426_d74a4f48",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 59
+      },
+      "revId": "dd86bf62e614f745feef552d69019abecc26d6b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05d6c687_5464f2a1",
@@ -163,6 +187,30 @@
       "writtenOn": "2024-12-03T05:48:44Z",
       "side": 1,
       "message": "This seems to be too harsh restriction. Is sharedpreference unsafe accross the multi-thread? If so, what about a) restrict to the main thread or b) What about creating a Handler (\u003d single worker thread) and pend actual commands there? here and other places.",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 23
+      },
+      "revId": "dd86bf62e614f745feef552d69019abecc26d6b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a5b6e70_65506c76",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/PortsStateManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-12-03T06:00:24Z",
+      "side": 1,
+      "message": "I think using GuardedBy on here is outdated. PLMK if it\u0027s still valid.",
+      "parentUuid": "c2b9a591_e0d7f691",
       "range": {
         "startLine": 85,
         "startChar": 0,
