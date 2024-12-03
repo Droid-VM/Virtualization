@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49dd5dda_1113aabe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T11:20:58Z",
+      "side": 1,
+      "message": "Thanks for the offline discussion, Shikha. I now understand that what I\u0027m describing in my last comment violates the system/vendor boundary stability. Therefore, virtmgr must keep a fallback to work on systems that were shipped with HAL v1.",
+      "parentUuid": "aa0a0a01_86098580",
+      "revId": "8082ff5611885fac7c278a988e96358623da9fab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f957e1f5_681b4139",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 3
