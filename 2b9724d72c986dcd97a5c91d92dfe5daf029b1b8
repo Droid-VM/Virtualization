@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e70e0fc_c79b613f",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 0,
+      "message": "Given that we have already unshared any shared MMIO and memory above, the only effect of this `drop` is to revert to the static PTs (which is probably not actually necessary as we still mask `SCTLR_EL1.M` and reset `TTBR0` in `jump_to_payload()` anyway). However, I\u0027m still nervous to unconditionally remove it in this patch; could you limit your change to guarding it behind `if use_uefi` by moving it to `jump_to_payload`?",
+      "range": {
+        "startLine": 174,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 31
+      },
+      "revId": "2b9724d72c986dcd97a5c91d92dfe5daf029b1b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5a2cbcf_fe50bf59",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 0,
+      "message": "Unrelated change?",
+      "revId": "2b9724d72c986dcd97a5c91d92dfe5daf029b1b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc2aec4a_7389b549",
+        "filename": "libs/libvmbase/entry.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 0,
+      "message": "We want this. If it prevents the kernel from running, we need to map it with the right permissions.",
+      "range": {
+        "startLine": 64,
+        "startChar": 85,
+        "endLine": 64,
+        "endChar": 103
+      },
+      "revId": "2b9724d72c986dcd97a5c91d92dfe5daf029b1b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6adc79c0_90a01754",
+        "filename": "tests/hostside/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 0,
+      "message": "No, not the golden DT dumps!!!!",
+      "range": {
+        "startLine": 29,
+        "startChar": 8,
+        "endLine": 29,
+        "endChar": 36
+      },
+      "revId": "2b9724d72c986dcd97a5c91d92dfe5daf029b1b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

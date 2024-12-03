@@ -1,0 +1,969 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a96221c7_3d5c0df4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "`Bug: 237386071`",
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f2b761e_275d5beb",
+        "filename": "build/microdroid/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Feel free to move the changes to this file to a parent commit.",
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92ebaadd_a517e6e9",
+        "filename": "build/microdroid/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Should we share this RB index with `microdroid_kernel_cap_defaults` through a Soong variable?",
+      "range": {
+        "startLine": 526,
+        "startChar": 28,
+        "endLine": 526,
+        "endChar": 29
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99e6475c_2f6e213c",
+        "filename": "build/microdroid/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Can we introduce another `avb_add_hash_footer_defaults` to share these with `microdroid_gki-android15-6.6_kernel_signed` e.g.\n```\navb_add_hash_footer_defaults {\n    name: \"microdroid_gki_kernel_signed_defaults\",\n    defaults: [\"microdroid_kernel_signed_defaults\"],\n    arch: {\n        arm64: {\n            src: \":microdroid_gki_kernel_prebuilts-android15-6.6-arm64\",\n        },\n        x86_64: {\n            src: \":microdroid_gki_kernel_prebuilts-android15-6.6-x86_64\",\n        },\n    },\n    include_descriptors_from_images: [\n        \":microdroid_gki-android15-6.6_initrd_normal_hashdesc\",\n        \":microdroid_gki-android15-6.6_initrd_debug_hashdesc\",\n    ],\n}\n```\n?",
+      "range": {
+        "startLine": 653,
+        "startChar": 0,
+        "endLine": 664,
+        "endChar": 6
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3b11aa2_40a05c95",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Scope this as `EfiLoader::IMAGE_HANDLE`",
+      "range": {
+        "startLine": 43,
+        "startChar": 10,
+        "endLine": 43,
+        "endChar": 26
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84632d60_4ad156f4",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Not needed?",
+      "range": {
+        "startLine": 81,
+        "startChar": 26,
+        "endLine": 81,
+        "endChar": 30
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8414ecbc_bc4eadb6",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Please don\u0027t commit commented code.",
+      "range": {
+        "startLine": 92,
+        "startChar": 16,
+        "endLine": 92,
+        "endChar": 52
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be0c39eb_5cb0dc01",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Can you adapt the existing `\"Starting payload...\"` in `main()`, instead?",
+      "range": {
+        "startLine": 93,
+        "startChar": 16,
+        "endLine": 93,
+        "endChar": 83
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67af38b0_0ce8e73a",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Unwanted hunk.",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 43
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51070eed_25956814",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "You probably also want the UART to remain mapped, to allow logging from the boot services, even if `!debuggable_payload`.",
+      "range": {
+        "startLine": 179,
+        "startChar": 15,
+        "endLine": 179,
+        "endChar": 83
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a79fa717_7a4bb51d",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 319,
+        "startChar": 0,
+        "endLine": 362,
+        "endChar": 10
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f9eeefc_43287697",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Probably not necessary now (same with other debugging `info!` statement below).",
+      "range": {
+        "startLine": 367,
+        "startChar": 4,
+        "endLine": 367,
+        "endChar": 78
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6931737_651d2588",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Could you encapsulate all of this in a e.g. `locate_linux_efi_entrypoint()` (or something like that) taking `payload_start` and locating `efi_stub_payload_start`?",
+      "range": {
+        "startLine": 369,
+        "startChar": 4,
+        "endLine": 369,
+        "endChar": 49
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c5c9fce_89e295d5",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "In this case, we shouldn\u0027t proceed (same with the other check failures below).",
+      "range": {
+        "startLine": 381,
+        "startChar": 81,
+        "endLine": 381,
+        "endChar": 82
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fc5cf09_113437a8",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Move this to `uefi.rs`, into a function called from here e.g.\n```\nlet efi_entrypoint \u003d locate_linux_efi_entrypoint(...).map_err(...)?;\nlet status \u003d execute_efi_payload(efi_entry_point);\n```",
+      "range": {
+        "startLine": 404,
+        "startChar": 3,
+        "endLine": 413,
+        "endChar": 59
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a218402_22fe150a",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Note that at this point, we\u0027ll return to the entry function and exit with a clean `shutdown`, which we probably don\u0027t want. It might make sense to return a `RebootReason` from here also and \"fail\" through the same path non-EFI would fail.",
+      "range": {
+        "startLine": 415,
+        "startChar": 0,
+        "endLine": 415,
+        "endChar": 1
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06f2445a_6b9b6b35",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Can you merge `init_efi` and `init_efi_loader` into one single \"init\" function?",
+      "range": {
+        "startLine": 419,
+        "startChar": 7,
+        "endLine": 419,
+        "endChar": 22
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac7489b9_e084dadf",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Can you introduce a method `EfiLoader::get_system_table_ptr` for this?",
+      "range": {
+        "startLine": 421,
+        "startChar": 41,
+        "endLine": 421,
+        "endChar": 79
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc0cb56a_85ef2b90",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "```\nlet use_uefi \u003d verified_boot_data.has_capability(Capability::SupportsUefiBoot);\n```",
+      "range": {
+        "startLine": 133,
+        "startChar": 4,
+        "endLine": 133,
+        "endChar": 70
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39e18fe5_719d2df2",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "We\u0027ll log that we\u0027re booting the kernel in EFI later on so no need to duplicate that here.",
+      "range": {
+        "startLine": 134,
+        "startChar": 8,
+        "endLine": 134,
+        "endChar": 54
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8f6b242_90a75cf7",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Please drop these changes.",
+      "range": {
+        "startLine": 289,
+        "startChar": 0,
+        "endLine": 323,
+        "endChar": 1
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24c12d31_190d2b8e",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "I hadn\u0027t realized that there were this many functions! WDYT of moving those functions to `src/uefi/boot_services.rs`, `src/uefi/runtime_services.rs`, and `src/uefi/stdio.rs`, each providing a `const fn` constructing their respective struct?",
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "228831b8_3dce282b",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "nit: `Support for EFI payloads.`",
+      "range": {
+        "startLine": 15,
+        "startChar": 4,
+        "endLine": 15,
+        "endChar": 30
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "520b9777_2fbc9f72",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "please don\u0027t commit this; you can have logging as a separate commit that can be cherry-picked onto the merged code, if you\u0027d like.",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 1
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "407f0567_76db0b70",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "If you want to document fields, document them in-line with their definitions using per-field `///` docs.",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 37
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1784ee9_7b2fa849",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "This is not relevant to the definition of the struct.",
+      "range": {
+        "startLine": 72,
+        "startChar": 4,
+        "endLine": 72,
+        "endChar": 85
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "151e543b_dd065368",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Does this really need to be `pub`, given that it should only be accessed by `init_efi*()` and the boot services i.e. from this file?",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 3
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffc3ec04_c12c17b8",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "So `tinyvec` did not work?",
+      "range": {
+        "startLine": 80,
+        "startChar": 25,
+        "endLine": 80,
+        "endChar": 28
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48c7bd36_5b69e5ee",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Is this `revision` correct?",
+      "range": {
+        "startLine": 88,
+        "startChar": 35,
+        "endLine": 88,
+        "endChar": 36
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09fe460c_79d45236",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Should we set these fields?",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 33
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc3a29a8_f616dc7a",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Are these `signature` and `revision` correct?",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 37
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0733e90e_5ad8f22b",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Are these `signature` and `revision` correct?",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 38
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b73476a_d3bbb94e",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Is this `revision` correct?",
+      "range": {
+        "startLine": 220,
+        "startChar": 12,
+        "endLine": 220,
+        "endChar": 23
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37cfcfb4_f9b70e17",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Is this `version` correct?",
+      "range": {
+        "startLine": 240,
+        "startChar": 41,
+        "endLine": 240,
+        "endChar": 42
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58db647f_7d7d79f7",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "`TODO`",
+      "range": {
+        "startLine": 264,
+        "startChar": 11,
+        "endLine": 264,
+        "endChar": 15
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50b97ab6_1efd305b",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "I think you need this to be `#[repr(C)]` as it\u0027s accessed from the EFI stub, IIRC.",
+      "range": {
+        "startLine": 267,
+        "startChar": 0,
+        "endLine": 267,
+        "endChar": 19
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51513e6b_774cae9c",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Hardcoded value must be obtained dynamically.",
+      "range": {
+        "startLine": 278,
+        "startChar": 43,
+        "endLine": 278,
+        "endChar": 53
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6dc32f8_8d74a965",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Do you mind returning `Status::UNSUPPORTED` from here (and `free_pool`) in this CL and add that in a follow-up so that we can focus on the mechanism (and potential tracking) separately.",
+      "range": {
+        "startLine": 321,
+        "startChar": 0,
+        "endLine": 344,
+        "endChar": 19
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15ddae92_499de2ed",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Same: `UNSUPPORTED` and dedicated commit adding support for config table.",
+      "range": {
+        "startLine": 461,
+        "startChar": 0,
+        "endLine": 490,
+        "endChar": 5
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4a8a0fe_c334e799",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "What is this function supposed to do? If it should \"exit\" the boot, we can\u0027t just hang the pVM and should probably reboot.",
+      "range": {
+        "startLine": 529,
+        "startChar": 4,
+        "endLine": 529,
+        "endChar": 11
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "214d8a35_7fc29604",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Same: `UNSUPPORTED` and dedicated commit.",
+      "range": {
+        "startLine": 693,
+        "startChar": 0,
+        "endLine": 707,
+        "endChar": 47
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "862eeb97_464fc031",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "Same: return `UNSUPPORTED` for now and add another commit introducing support for logging.",
+      "range": {
+        "startLine": 851,
+        "startChar": 0,
+        "endLine": 870,
+        "endChar": 19
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e4114e8_a0b2d699",
+        "filename": "libs/libvmbase/src/heap.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:38:43Z",
+      "side": 1,
+      "message": "This function should defined at L152, under its `SAFETY` comment.",
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
