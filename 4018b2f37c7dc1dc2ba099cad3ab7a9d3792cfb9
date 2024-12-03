@@ -1,0 +1,452 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "176b2c87_2d8da13b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "Stopped partway through, but overall:\n\n1. If you want to assume something inside a function body, that constraint must either be encoded by the type signature of the function, or documented as a requirement of an `unsafe` function.\n2. You need to be clear on how long pointers are required to live, and who continues to own it.\n3. A pointer not being null is not sufficient to write to it.\n4. Any `unsafe` function should have a comment that says what is required to call it. If it is a public function, it should be a doc comment.",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90f68cfd_6f29b710",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "Maybe it would make sense to have `jump_to_payload_with_efi_stub` take a `\u0026[u8]` to avoid most of the `unsafe` instances? The caller has knowledge about `payload_start` and `payload_size` and could construct it there.",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e69250a_2bfe6aa6",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "Knowing that `pe_header` points to a usable memory location depends on `jump_to_payload_with_efi_stub` having a constraint on `payload_start`. This means that `jump_to_payload_with_efi_stub` must be unsafe and document its requirements.",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac2abe2c_a8fec108",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "Same as above.",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e571474_bf658fd2",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "As above for the unsafe.\n\nFor the `usize` conversion, you can just use `let pe_ep_offset: usize \u003d some_u32_expr as _;`, it\u0027s a little cleaner than a `try_from` + `unwrap`",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10bdf61a_cc58aa99",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "This is insufficient - it also needs to be of the appropriate type",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5aec8e6_2a118fd9",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "Is it legal to put any value in here (seems unlikely, as it\u0027s a pointer, I expect you\u0027re at least guessing it\u0027s dereferenceable)? If not, this function probably needs to be unsafe.",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "644f9656_ec58e1bc",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "What are the conditions for this function to be safe to call? Should be in the docs.",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "156c9374_5e031042",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "What are the conditions for this function to be safe to call? Should be in a comment.",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08ada235_95929a5e",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "What are the conditions for this function to be safe to call? Should be in the docs.",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a085ce00_424145a6",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "This is insufficient - \"7\" is a non-null pointer, but you can\u0027t dereference it.",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8921d6b_9013bcea",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "As above, insufficient justification",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24cd360e_648f6916",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "Consider `*addr \u003d start` unless `addr` may point to uninitialized memory.",
+      "range": {
+        "startLine": 332,
+        "startChar": 13,
+        "endLine": 332,
+        "endChar": 30
+      },
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75ba955d_723c9108",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "Needs comment on when safe to call.",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf7b5082_12b41c41",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "Needs comment on when safe to call.",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "739b57bd_e11947d1",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "?",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee816f61_7ca4af59",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "?",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d31eb74_d2a57132",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "Need comment with when safe to call",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d36546e7_48c99e9e",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "Insufficient - it also needs to be live and point to something large enough to fit a pointer, and not have other validity constraints on it.",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8da7d631_f5812fdf",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "Need comment with when safe to call",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a75c752_2bf73945",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "Need docs with when safe to call. (Probably just say \"currently always safe, this may change in the future\" unless you already know the contracts you want to write)",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f2b2860_85ddd282",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "Needs comment about what\u0027s required to be safe.",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0be603e_31e66a6d",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "Insufficient.",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea396248_d347b9f5",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "Insufficient",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12bc3e1d_11410ebd",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "Insufficient",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2fbc478_227782a4",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-03T22:22:58Z",
+      "side": 1,
+      "message": "Insufficient",
+      "revId": "4018b2f37c7dc1dc2ba099cad3ab7a9d3792cfb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
