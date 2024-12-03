@@ -198,6 +198,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddd6d9f0_d00f8f5f",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/PortsStateManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-12-03T06:47:06Z",
+      "side": 1,
+      "message": "double-checked locking is preferred for the performance reason. If you don\u0027t like it, we don\u0027t need to use it here because it\u0027s not performance critical component.",
+      "parentUuid": "6921ad98_9e0c0a04",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 42
+      },
+      "revId": "dd86bf62e614f745feef552d69019abecc26d6b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2b9a591_e0d7f691",
