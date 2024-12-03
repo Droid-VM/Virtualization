@@ -14,30 +14,108 @@
 
 //! Support for EFI payloads.
 
+mod boot_services;
 pub mod linux;
+mod loaded_image;
+mod runtime_services;
+mod stdio;
 
+use crate::entry::FIRMWARE_REVISION;
 use core::mem;
-use core::ptr::null_mut;
+use core::ptr::{null, null_mut};
 use spin::mutex::SpinMutex;
+use uefi_raw::protocol::console::SimpleTextOutputProtocol;
+use uefi_raw::protocol::loaded_image::LoadedImageProtocol;
+use uefi_raw::table::boot::BootServices;
+use uefi_raw::table::runtime::RuntimeServices;
 use uefi_raw::table::system::SystemTable;
+use uefi_raw::table::{Header, Revision};
 use uefi_raw::Status;
-use vmbase::read_sysreg;
-use vmbase::write_sysreg;
+use vmbase::{read_sysreg, write_sysreg};
+
+const EFI_2_100_SYSTEM_TABLE_REVISION: u32 = (2 << 16) | (100);
+const EFI_SPECIFICATION_REVISION: u32 = EFI_2_100_SYSTEM_TABLE_REVISION;
 
 static EFI_LOADER: SpinMutex<EfiLoader> = SpinMutex::new(EfiLoader::new());
 
-/// Represents the UEFI structures used for booting EFI payloads.
-struct EfiLoader {}
+/// Represents UEFI structures used for booting the Linux kernel through EFI stub.
+struct EfiLoader {
+    pub system_table: SystemTable,
+    boot_services: BootServices,
+    runtime_services: RuntimeServices,
+    simple_text_output_protocol: SimpleTextOutputProtocol,
+    pub loaded_image_protocol: LoadedImageProtocol,
+    firmware_vendor: [u16; 6],
+}
 
 impl EfiLoader {
     const EFI_IMAGE_HANDLE: usize = 0x19ef_781b;
+    const FIRMWARE_VENDOR: [u16; 6] = ['p' as _, 'v' as _, 'm' as _, 'f' as _, 'w' as _, '\0' as _];
 
     pub const fn new() -> Self {
-        Self {}
+        let system_table = SystemTable {
+            header: Header {
+                signature: SystemTable::SIGNATURE,
+                revision: Revision(EFI_SPECIFICATION_REVISION),
+                size: mem::size_of::<SystemTable>() as _,
+                crc: 0,
+                reserved: 0,
+            },
+
+            firmware_vendor: null(),
+            firmware_revision: FIRMWARE_REVISION,
+
+            stdin_handle: null_mut(),
+            stdin: null_mut(),
+
+            stdout_handle: null_mut(),
+            stdout: null_mut(),
+
+            stderr_handle: null_mut(),
+            stderr: null_mut(),
+
+            runtime_services: null_mut(),
+            boot_services: null_mut(),
+
+            number_of_configuration_table_entries: 0,
+            configuration_table: null_mut(),
+        };
+
+        let boot_services = boot_services::init_boot_services();
+        let runtime_services = runtime_services::init_runtime_services();
+        let simple_text_output_protocol = stdio::init_simple_text_output_protocol();
+        let loaded_image_protocol = loaded_image::init_loaded_image_protocol();
+        let firmware_vendor = Self::FIRMWARE_VENDOR;
+
+        Self {
+            system_table,
+            boot_services,
+            runtime_services,
+            simple_text_output_protocol,
+            loaded_image_protocol,
+            firmware_vendor,
+        }
     }
 
-    fn get_system_table_ptr(&self) -> *mut SystemTable {
-        null_mut()
+    fn get_system_table_ptr(&mut self) -> *mut SystemTable {
+        &mut self.system_table as _
+    }
+
+    fn set_loaded_image_protocol(&mut self, payload_start: usize, payload_size: usize) {
+        self.loaded_image_protocol.image_base = payload_start as *const _;
+        let image_size = payload_size.try_into().unwrap();
+        self.loaded_image_protocol.image_size = image_size;
+    }
+
+    fn patch_pointers(&mut self, payload_start: usize, payload_size: usize) {
+        self.system_table.boot_services = &mut self.boot_services as *mut _;
+        self.system_table.runtime_services = &mut self.runtime_services as *mut _;
+        self.system_table.firmware_vendor = &mut self.firmware_vendor as *mut _;
+        self.system_table.stdout = &mut self.simple_text_output_protocol as *mut _;
+        self.system_table.stderr = &mut self.simple_text_output_protocol as *mut _;
+        self.loaded_image_protocol.system_table = &mut self.system_table as *mut _;
+
+        self.set_loaded_image_protocol(payload_start, payload_size);
     }
 }
 
@@ -45,6 +123,15 @@ impl EfiLoader {
 // with single-threaded system so this operation has no meaningful impact on Rust.
 unsafe impl Send for EfiLoader {}
 
+// Initialize parameters passed to the EFI stub by the EFI loader.
+pub fn init_efi(payload_start: usize, payload_size: usize) {
+    EFI_LOADER.lock().patch_pointers(payload_start, payload_size);
+}
+
+/// # Safety
+///
+/// Callers of this method need to ensure that the `efi_payload_start` is valid address of the EFI
+/// payload, according to the UEFI spec.
 pub fn execute_efi_payload(efi_payload_start: usize) -> Status {
     let efi_entry: extern "efiapi" fn(
         image_handle: usize,

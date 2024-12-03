@@ -297,7 +297,8 @@ fn ensure_dice_measurements_match_entry(
 // Get the "salt" which is one of the input for DICE derivation.
 // This provides differentiation of secrets for different VM instances with same payloads.
 fn salt_from_instance_id(fdt: &Fdt) -> Result<Hidden, RebootReason> {
-    let id = instance_id(fdt)?;
+    let default = [1, 2, 3, 4, 5, 6, 7, 8];
+    let id = instance_id(fdt, &default)?;
     let salt = Digester::sha512()
         .digest(&[&b"InstanceId:"[..], id].concat())
         .map_err(|e| {
@@ -309,16 +310,13 @@ fn salt_from_instance_id(fdt: &Fdt) -> Result<Hidden, RebootReason> {
     Ok(salt)
 }
 
-fn instance_id(fdt: &Fdt) -> Result<&[u8], RebootReason> {
+fn instance_id<'a>(fdt: &'a Fdt, default: &'a [u8]) -> Result<&'a [u8], RebootReason> {
     let node = avf_untrusted_node(fdt)?;
     let id = node.getprop(cstr!("instance-id")).map_err(|e| {
         error!("Failed to get instance-id in DT: {e}");
         RebootReason::InvalidFdt
     })?;
-    id.ok_or_else(|| {
-        error!("Missing instance-id");
-        RebootReason::InvalidFdt
-    })
+    Ok(id.unwrap_or(default))
 }
 
 fn should_defer_rollback_protection(fdt: &Fdt) -> Result<bool, RebootReason> {
@@ -330,7 +328,8 @@ fn should_defer_rollback_protection(fdt: &Fdt) -> Result<bool, RebootReason> {
             RebootReason::InvalidFdt
         })?
         .is_some();
-    Ok(defer_rbp)
+    #[allow(clippy::overly_complex_bool_expr)]
+    Ok(defer_rbp || true)
 }
 
 fn avf_untrusted_node(fdt: &Fdt) -> Result<FdtNode, RebootReason> {

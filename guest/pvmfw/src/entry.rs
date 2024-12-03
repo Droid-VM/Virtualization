@@ -16,8 +16,8 @@
 
 use crate::config;
 use crate::memory;
-use crate::uefi::execute_efi_payload;
 use crate::uefi::linux::locate_linux_efi_entrypoint;
+use crate::uefi::{execute_efi_payload, init_efi};
 use core::arch::asm;
 use core::mem::size_of;
 use core::ops::Range;
@@ -25,7 +25,7 @@ use core::slice;
 use log::error;
 use log::warn;
 use log::LevelFilter;
-use vmbase::util::RangeExt as _;
+use vmbase::util::RangeExt;
 use vmbase::{
     arch::aarch64::min_dcache_line_size,
     configure_heap, console_writeln, layout, limit_stack_size, main,
@@ -36,6 +36,8 @@ use vmbase::{
     power::reboot,
 };
 use zeroize::Zeroize;
+
+pub const FIRMWARE_REVISION: u32 = 0;
 
 #[derive(Debug, Clone)]
 pub enum RebootReason {
@@ -147,6 +149,7 @@ fn main_wrapper(
         config_entries.bcc,
         config_entries.debug_policy,
     )?;
+
     // Keep UART MMIO_GUARD-ed for debuggable payloads, to enable earlycon.
     let keep_uart = cfg!(debuggable_vms_improvements) && debuggable_payload;
 
@@ -318,6 +321,7 @@ fn jump_to_payload_with_efi_stub(
     payload_start: usize,
     payload_size: usize,
 ) -> Result<(), RebootReason> {
+    init_efi(payload_start, payload_size);
     if let Some(ep) = locate_linux_efi_entrypoint(payload_start, payload_size) {
         let status = execute_efi_payload(ep);
         error!("EFI payload returned: {:?}", status);
