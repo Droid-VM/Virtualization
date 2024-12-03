@@ -16,6 +16,24 @@
       "message": "You just introduced this in https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3378612/11\nand now you are removing it..\n\nWhy don\u0027t you structure in this way:\n1. keep the static PT for a while until you add all the machinery to use the dynamic PT\n2. the last change should be transitioning and making use of the dynamic PT",
       "revId": "8946e18c6ac7c3bfadb25ab31192ebcc0c9faac8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af48bb8c_d6cee9ba",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:47:39Z",
+      "side": 0,
+      "message": "Actually, `switch_to_dynamic_page_tables()` is introduced even before that, as part of the new API (aosp/3378610) but you\u0027re right that the current CLs are a bit convoluted as they\n\n1. aosp/3378610: Add \u0026 use `switch_to_dynamic_page_tables(PT, payload)`\n1. aosp/3378612: Change API to `switch_to_dynamic_page_tables(PT)`\n1. aosp/3378614 (here): Centralize `switch_to_dynamic_page_tables()` calls into vmbase\n\nInstead, I\u0027ve re-ordered them in a clearer way:\n\n1. aosp/3378612 now adds \u0026 uses `MemoryTracker::map_image_footer()` early\n1. aosp/3378610 now adds `switch_to_dynamic_page_tables(PT)` (final signature)\n1. aosp/3378614 (here) is limited to the centralization itself\n\nAlthough this was a pain to rebase, I agree the result is cleaner. Thanks!",
+      "parentUuid": "752e38cf_6834cb87",
+      "revId": "8946e18c6ac7c3bfadb25ab31192ebcc0c9faac8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -22,6 +22,30 @@
       },
       "revId": "f70881427a556556a04422c33023f8020625bb6a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44a293b1_9aeb467c",
+        "filename": "libs/libvmbase/src/memory/tracker.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:47:39Z",
+      "side": 1,
+      "message": "Because we don\u0027t really want to duplicate them but are actually refining them.\n\nThe static PTs are very coarse:\n\n- 1GB of MMIO at 0x0000_0000\n- 2MiB of RO+X at `image` (pvmfw: 0x7fc0_0000, Rialto: 0x8000_0000, vmbase_bios: 0x8200_0000)\n- 2MiB of RW at `writable_data` (pvmfw: 0x7fe0_0000, Rialto: 0x8200_0000, vmbase_bios: 0x8400_0000)\n\nwhile these mappings will have the fine knowledge of the exact linker sections. Also, we don\u0027t need to map the \"original\" `.data` (for example) and don\u0027t want to map the stack guard pages, which are all mapped by the static PTs. For MMIO, the client will tell us dynamically what it wants to map (and we\u0027ll `MMIO_GUARD_MAP` accordingly) so we want accesses to fault, except for UARTs.\n\nMaybe I should rename this function to `{initialize,allocate}_dynamic_page_tables()`, to remove the notion that we\u0027re relying on the static ones?",
+      "parentUuid": "7efd99bf_d2bb364e",
+      "range": {
+        "startLine": 512,
+        "startChar": 19,
+        "endLine": 512,
+        "endChar": 29
+      },
+      "revId": "f70881427a556556a04422c33023f8020625bb6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
