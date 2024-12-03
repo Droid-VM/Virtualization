@@ -95,6 +95,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0b052998_a4905bb9",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/DebianServiceImpl.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-12-03T06:14:23Z",
+      "side": 1,
+      "message": "why it\u0027s harmful? most of code complexity around the port management come from calculating diffs, even though both UX and linux changes one ports at a time. Could you elaborate details about it?",
+      "parentUuid": "2e99c8a1_9da36c2a",
+      "range": {
+        "startLine": 136,
+        "startChar": 31,
+        "endLine": 136,
+        "endChar": 51
+      },
+      "revId": "250cd6e2972ae48d8ba4313c4d706c185c491e14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c8cadea4_27a1e777",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/DebianServiceImpl.java",
         "patchSetId": 5
