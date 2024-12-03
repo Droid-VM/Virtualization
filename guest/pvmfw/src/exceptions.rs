@@ -39,8 +39,11 @@ extern "C" fn sync_exception_current(elr: u64, _spsr: u64) {
     // Disable logging in exception handler to prevent unsafe writes to UART.
     let _guard = logger::suppress();
 
+    let esr = read_sysreg!("esr_el1");
+    let far = read_sysreg!("far_el1");
     let exception = ArmException::from_el1_regs();
     if let Err(e) = handle_exception(&exception) {
+        eprintln!("ESR: {esr:#x}, FAR: {far:#x}, ELR: {elr:#x}");
         exception.print("sync_exception_current", e, elr);
         reboot()
     }
