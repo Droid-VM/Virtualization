@@ -176,6 +176,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6921ad98_9e0c0a04",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/PortsStateManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-12-03T06:17:26Z",
+      "side": 1,
+      "message": "I applied that in some previous patchsets, but discarded it. Actually I have no strong opinion, but little leaning on applying double-checked locking. @jeongik@google.com HDYT?",
+      "parentUuid": "05d6c687_5464f2a1",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 42
+      },
+      "revId": "dd86bf62e614f745feef552d69019abecc26d6b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c2b9a591_e0d7f691",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/PortsStateManager.java",
         "patchSetId": 1
