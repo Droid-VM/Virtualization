@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dda64f4_3dcb84d9",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/PortsStateManager.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-12-03T05:55:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4ed5333_ab96d517",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 5
+      },
+      "revId": "dc8eea6ffd31cf3f12e4ece127dced74aa9b4ee4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2746e5de_6f0e840f",
@@ -55,6 +79,30 @@
       "writtenOn": "2024-12-03T05:44:37Z",
       "side": 1,
       "message": "use a lock as documented..",
+      "range": {
+        "startLine": 86,
+        "startChar": 1,
+        "endLine": 92,
+        "endChar": 5
+      },
+      "revId": "dc8eea6ffd31cf3f12e4ece127dced74aa9b4ee4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "892a1d85_952e10ea",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/PortsStateManager.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-12-03T05:55:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2746e5de_6f0e840f",
       "range": {
         "startLine": 86,
         "startChar": 1,
@@ -88,6 +136,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7319f13_96f4f6ac",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/PortsStateManager.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-12-03T05:55:56Z",
+      "side": 1,
+      "message": "I don\u0027t prefer to uniting those methods as `onPortChanged`. The callback `onActivePortsUpdated` is not for modifying a single port.",
+      "parentUuid": "6401e7e4_1f35fd8d",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 149,
+        "endChar": 5
+      },
+      "revId": "dc8eea6ffd31cf3f12e4ece127dced74aa9b4ee4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f0f2521_ca5e8a7d",
@@ -101,6 +173,30 @@
       "writtenOn": "2024-12-03T05:44:37Z",
       "side": 1,
       "message": "consider onPortChanged(int port, int oldState, int newState)? which might simplify the listen implementation.",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 40
+      },
+      "revId": "dc8eea6ffd31cf3f12e4ece127dced74aa9b4ee4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9d5167f_1114cdf2",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/PortsStateManager.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-12-03T05:55:56Z",
+      "side": 1,
+      "message": "I don\u0027t prefer to uniting those methods as `onPortChanged`. The callback `onActivePortsUpdated` is not for modifying a single port.",
+      "parentUuid": "9f0f2521_ca5e8a7d",
       "range": {
         "startLine": 152,
         "startChar": 0,

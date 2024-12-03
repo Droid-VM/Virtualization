@@ -204,6 +204,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da6c2861_2164287a",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/PortsStateManager.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-12-03T05:55:56Z",
+      "side": 1,
+      "message": "I don\u0027t prefer to uniting those methods as `onPortChanged`. The callback `onActivePortsUpdated` is not for modifying a single port.",
+      "parentUuid": "e3ac9ef1_e3c07ac1",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 0
+      },
+      "revId": "250cd6e2972ae48d8ba4313c4d706c185c491e14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88cb3cef_796a6394",
