@@ -16,8 +16,10 @@
 
 use crate::config;
 use crate::memory;
+use crate::uefi::linux::locate_linux_efi_entrypoint;
+use crate::uefi::{execute_efi_payload, init_efi};
 use core::arch::asm;
-use core::mem::{drop, size_of};
+use core::mem::size_of;
 use core::ops::Range;
 use core::slice;
 use hypervisor_backends::get_mmio_guard;
@@ -25,6 +27,7 @@ use log::error;
 use log::info;
 use log::warn;
 use log::LevelFilter;
+use uefi_raw::Status;
 use vmbase::util::RangeExt as _;
 use vmbase::{
     arch::aarch64::min_dcache_line_size,
@@ -35,6 +38,8 @@ use vmbase::{
     power::reboot,
 };
 use zeroize::Zeroize;
+
+pub const FIRMWARE_REVISION: u32 = 0;
 
 #[derive(Debug, Clone)]
 pub enum RebootReason {
@@ -81,7 +86,13 @@ pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, _arg3: u64
     // - can't access MMIO (except the console, already configured by vmbase)
 
     match main_wrapper(fdt_address as usize, payload_start as usize, payload_size as usize) {
-        Ok((entry, bcc)) => jump_to_payload(fdt_address, entry.try_into().unwrap(), bcc),
+        Ok((entry, size, bcc, use_uefi)) => {
+            if use_uefi {
+                let _ = jump_to_payload_with_efi_stub(entry, size);
+            } else {
+                jump_to_payload(fdt_address, entry.try_into().unwrap(), bcc);
+            }
+        }
         Err(e) => {
             const REBOOT_REASON_CONSOLE: usize = 1;
             console_writeln!(REBOOT_REASON_CONSOLE, "{}", e.as_avf_reboot_string());
@@ -100,7 +111,7 @@ fn main_wrapper(
     fdt: usize,
     payload: usize,
     payload_size: usize,
-) -> Result<(usize, Range<usize>), RebootReason> {
+) -> Result<(usize, usize, Range<usize>, bool), RebootReason> {
     // Limitations in this function:
     // - only access MMIO once (and while) it has been mapped and configured
     // - only perform logging once the logger has been initialized
@@ -141,7 +152,7 @@ fn main_wrapper(
     )?;
 
     // This wrapper allows main() to be blissfully ignorant of platform details.
-    let (next_bcc, debuggable_payload) = crate::main(
+    let (next_bcc, debuggable_payload, use_uefi) = crate::main(
         slices.fdt,
         slices.kernel,
         slices.ramdisk,
@@ -162,7 +173,8 @@ fn main_wrapper(
 
     if let Some(mmio_guard) = get_mmio_guard() {
         if cfg!(debuggable_vms_improvements) && debuggable_payload {
-            // Keep UART MMIO_GUARD-ed for debuggable payloads, to enable earlycon.
+            // Keep UART MMIO_GUARD-ed for both debuggable and non-debuggable payloads, to enable
+            // earlycon.
         } else {
             mmio_guard.unmap(UART_PAGE_ADDR).map_err(|e| {
                 error!("Failed to unshare the UART: {e}");
@@ -171,10 +183,12 @@ fn main_wrapper(
         }
     }
 
-    // Drop MemoryTracker and deactivate page table.
-    drop(MEMORY.lock().take());
+    if !use_uefi {
+        // Drop MemoryTracker and deactivate page table.
+        drop(MEMORY.lock().take());
+    }
 
-    Ok((slices.kernel.as_ptr() as usize, next_bcc))
+    Ok((slices.kernel.as_ptr() as usize, slices.kernel.len(), next_bcc, use_uefi))
 }
 
 fn jump_to_payload(fdt_address: u64, payload_start: u64, bcc: Range<usize>) -> ! {
@@ -299,6 +313,22 @@ fn jump_to_payload(fdt_address: u64, payload_start: u64, bcc: Range<usize>) -> !
             options(noreturn),
         );
     };
+}
+
+/// Alternate path for booting Linux EFI kernel.
+fn jump_to_payload_with_efi_stub(
+    payload_start: usize,
+    payload_size: usize,
+) -> Result<Status, RebootReason> {
+    init_efi(payload_start, payload_size);
+
+    if let Some(ep) = locate_linux_efi_entrypoint(payload_start, payload_size) {
+        let status = execute_efi_payload(ep);
+        error!("...{status}...");
+        Err(RebootReason::InvalidPayload)
+    } else {
+        Ok(Status::SUCCESS)
+    }
 }
 
 /// # Safety
