@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b412204_ba251849",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-03T01:00:56Z",
+      "side": 1,
+      "message": "This one is tricky to document. How about\n\n```\n/**\n * Set whether to use an alternate, hypervisor-specific authentication method\n * for protected VMs. You don\u0027t want to use this.\n *\n * \\return It returns `-ENOTSUP` if the hypervisor doesn\u0027t have an alternate\n *         auth mode.\n */\n```",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 71
+      },
+      "revId": "88f5ec33da94e37be625d8ed49f9f991e455d385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0078b639_b22a1199",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-03T01:00:56Z",
+      "side": 1,
+      "message": "\"\"\n\n```\n/**\n * Use the specified fd as the backing memfd for a range of the guest\n * physical memory.\n *\n * \\param config a virtual machine config object.\n * \\param fd a memfd\n * \\param rangeStart range start IPA\n * \\param rangeEnd range end IPA\n *\n * \\return If successful, it returns 0.\n */\n```",
+      "range": {
+        "startLine": 156,
+        "startChar": 3,
+        "endLine": 156,
+        "endChar": 18
+      },
+      "revId": "88f5ec33da94e37be625d8ed49f9f991e455d385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ae01483_c0d0ffdd",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-03T01:00:56Z",
+      "side": 1,
+      "message": "I don\u0027t think we\u0027ll be able to support this function this release and we\u0027ve found a contingency plan. Let\u0027s delete it from this proposal",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 64
+      },
+      "revId": "88f5ec33da94e37be625d8ed49f9f991e455d385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
