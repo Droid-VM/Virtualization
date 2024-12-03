@@ -16,16 +16,16 @@
 
 use crate::config;
 use crate::memory::MemorySlices;
-use crate::uefi::execute_efi_payload;
 use crate::uefi::linux::locate_linux_efi_entrypoint;
 use crate::uefi::EfiEntrypoint;
+use crate::uefi::{execute_efi_payload, init_efi};
 use core::arch::asm;
 use core::mem::size_of;
 use core::slice;
 use log::error;
 use log::warn;
 use log::LevelFilter;
-use vmbase::util::RangeExt as _;
+use vmbase::util::RangeExt;
 use vmbase::{
     arch::aarch64::min_dcache_line_size,
     configure_heap, console_writeln, layout, limit_stack_size, main,
@@ -36,6 +36,8 @@ use vmbase::{
     power::reboot,
 };
 use zeroize::Zeroize;
+
+pub const FIRMWARE_REVISION: u32 = 0;
 
 #[derive(Debug, Clone)]
 pub enum RebootReason {
@@ -105,6 +107,7 @@ pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, _arg3: u64
                 }
             }
             NextStage::EfiBoot(ep) if cfg!(feature = "supports_uefi") => {
+                init_efi();
                 let status = execute_efi_payload(ep);
                 error!("EFI payload returned: {status:?}");
                 RebootReason::GuestBootFailed
