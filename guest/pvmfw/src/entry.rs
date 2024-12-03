@@ -16,8 +16,10 @@
 
 use crate::config;
 use crate::memory;
+use crate::uefi::{init_efi, EFI_LOADER};
 use core::arch::asm;
-use core::mem::{drop, size_of};
+use core::mem;
+use core::mem::size_of;
 use core::ops::Range;
 use core::slice;
 use hypervisor_backends::get_mmio_guard;
@@ -25,6 +27,7 @@ use log::error;
 use log::info;
 use log::warn;
 use log::LevelFilter;
+use uefi_raw::table::system::SystemTable;
 use vmbase::util::RangeExt as _;
 use vmbase::{
     arch::aarch64::min_dcache_line_size,
@@ -35,6 +38,9 @@ use vmbase::{
     power::reboot,
 };
 use zeroize::Zeroize;
+
+// The firmware allocated handle for the UEFI image.
+pub const EFI_IMAGE_HANDLE: usize = 0x19ef_781b;
 
 #[derive(Debug, Clone)]
 pub enum RebootReason {
@@ -81,7 +87,14 @@ pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, _arg3: u64
     // - can't access MMIO (except the console, already configured by vmbase)
 
     match main_wrapper(fdt_address as usize, payload_start as usize, payload_size as usize) {
-        Ok((entry, bcc)) => jump_to_payload(fdt_address, entry.try_into().unwrap(), bcc),
+        Ok((entry, size, bcc, use_uefi)) => {
+            if use_uefi {
+                info!("================== Jumped to EFI stub! ==================");
+                jump_to_payload_with_efi_stub(entry, size);
+            } else {
+                jump_to_payload(fdt_address, entry.try_into().unwrap(), bcc);
+            }
+        }
         Err(e) => {
             const REBOOT_REASON_CONSOLE: usize = 1;
             console_writeln!(REBOOT_REASON_CONSOLE, "{}", e.as_avf_reboot_string());
@@ -100,7 +113,7 @@ fn main_wrapper(
     fdt: usize,
     payload: usize,
     payload_size: usize,
-) -> Result<(usize, Range<usize>), RebootReason> {
+) -> Result<(usize, usize, Range<usize>, bool), RebootReason> {
     // Limitations in this function:
     // - only access MMIO once (and while) it has been mapped and configured
     // - only perform logging once the logger has been initialized
@@ -141,7 +154,7 @@ fn main_wrapper(
     )?;
 
     // This wrapper allows main() to be blissfully ignorant of platform details.
-    let (next_bcc, debuggable_payload) = crate::main(
+    let (next_bcc, debuggable_payload, use_uefi) = crate::main(
         slices.fdt,
         slices.kernel,
         slices.ramdisk,
@@ -171,10 +184,7 @@ fn main_wrapper(
         }
     }
 
-    // Drop MemoryTracker and deactivate page table.
-    drop(MEMORY.lock().take());
-
-    Ok((slices.kernel.as_ptr() as usize, next_bcc))
+    Ok((slices.kernel.as_ptr() as usize, slices.kernel.len(), next_bcc, use_uefi))
 }
 
 fn jump_to_payload(fdt_address: u64, payload_start: u64, bcc: Range<usize>) -> ! {
@@ -299,6 +309,75 @@ fn jump_to_payload(fdt_address: u64, payload_start: u64, bcc: Range<usize>) -> !
             options(noreturn),
         );
     };
+}
+
+/// ARM specific configuration of the kernel image.
+/// See https://docs.kernel.org/arch/arm64/booting.html#call-the-kernel-image and
+/// https://github.com/torvalds/linux/blob/feffde684ac29a3b7aec82d2df850fbdbdee55e4/arch/arm64/kernel/efi-header.S#L29
+/// for further information.
+fn jump_to_payload_with_efi_stub(payload_start: usize, payload_size: usize) {
+    // Initialize the structures used for enabling entering the EFI stub.
+    init_efi();
+
+    // Count where the actual EFI payload starts.
+    const KERNEL_HEADER_SIZE: usize = 64;
+    const PE_HEADER_SIZE: usize = 24;
+    const PE_MAGIC: u32 = 0x4550;
+    const PE_OPT_MAGIC_PE32PLUS: u16 = 0x020b;
+    const PE32PLUS_FIELD_AOEP: usize = 16;
+
+    let pe_header = payload_start + KERNEL_HEADER_SIZE;
+    // Safety: 'pe_header' points to the valid location in memory.
+    let pe_magic = unsafe { *(pe_header as *const u32) };
+    // Sanity check: verify the PE MAGIC constant value is as defined in the UEFI spec.
+    if pe_magic != PE_MAGIC {
+        error!("PE MAGIC is not correct: {pe_magic:#x}, expected: {PE_MAGIC:#x}");
+    }
+
+    let pe_opt_header = pe_header + PE_HEADER_SIZE;
+    // Safety: 'pe_opt_header' points to the valid location in memory.
+    let pe_opt_magic_pe32plus = unsafe { *(pe_opt_header as *const u16) };
+    // Sanity check: verify the PE OPT MAGIC PE32PLUS constant value is as defined in the UEFI spec.
+    if pe_opt_magic_pe32plus != PE_OPT_MAGIC_PE32PLUS {
+        error!("PE MAGIC PE32+ is not correct: {pe_opt_magic_pe32plus:#x}");
+        return;
+    }
+
+    let pe_ep_offset_field = pe_opt_header + PE32PLUS_FIELD_AOEP;
+    // Safety: 'pe_ep_offset_field' points to the valid location in memory.
+    let pe_ep_offset = usize::try_from(unsafe { *(pe_ep_offset_field as *const u32) }).unwrap();
+    if pe_ep_offset >= payload_size {
+        error!("Offset out of bounds: {pe_ep_offset:#x} (payload size: {payload_size:#x})");
+        return;
+    }
+
+    // EFI entry point offset.
+    let efi_stub_payload_start = payload_start + pe_ep_offset;
+
+    let efi_entry: extern "efiapi" fn(
+        image_handle: usize,
+        system_table: *mut SystemTable,
+    ) -> uefi_raw::Status =
+    // Safety: 'efi_stub_payload_start' points to the valid location in memory.
+    unsafe { mem::transmute(efi_stub_payload_start) };
+
+    let system_table = init_efi_loader(payload_start, payload_size);
+
+    let status = efi_entry(EFI_IMAGE_HANDLE, system_table);
+    error!("EFI payload returned: {:?}", status);
+}
+
+// Initialize the SystemTable and LoadedImageProtocol. Initialized in a separate function to
+// avoid the deadlocks.
+pub fn init_efi_loader(payload_start: usize, payload_size: usize) -> *mut SystemTable {
+    let mut efi_loader = EFI_LOADER.lock();
+    let system_table: *mut SystemTable = &mut efi_loader.system_table as *mut _;
+
+    efi_loader.loaded_image_protocol.image_base = payload_start as *const _;
+    let image_size = payload_size.try_into().unwrap();
+    efi_loader.loaded_image_protocol.image_size = image_size;
+
+    system_table
 }
 
 /// # Safety
