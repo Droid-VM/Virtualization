@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fac4056e_0f41ec80",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-12-03T07:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b3ee2ff_7848998f",
+      "range": {
+        "startLine": 80,
+        "startChar": 85,
+        "endLine": 81,
+        "endChar": 63
+      },
+      "revId": "88f5ec33da94e37be625d8ed49f9f991e455d385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c039a9c6_b8b7b8d7",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-12-03T01:38:09Z",
       "side": 1,
       "message": "same here, always take ownership",
+      "range": {
+        "startLine": 91,
+        "startChar": 85,
+        "endLine": 92,
+        "endChar": 63
+      },
+      "revId": "88f5ec33da94e37be625d8ed49f9f991e455d385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc413494_8f0d0b92",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-12-03T07:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c039a9c6_b8b7b8d7",
       "range": {
         "startLine": 91,
         "startChar": 85,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "236ba424_0d9bb2c5",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-12-03T07:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc0c6548_f67ed884",
+      "range": {
+        "startLine": 102,
+        "startChar": 67,
+        "endLine": 103,
+        "endChar": 61
+      },
+      "revId": "88f5ec33da94e37be625d8ed49f9f991e455d385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b412204_ba251849",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-12-03T01:00:56Z",
       "side": 1,
       "message": "This one is tricky to document. How about\n\n```\n/**\n * Set whether to use an alternate, hypervisor-specific authentication method\n * for protected VMs. You don\u0027t want to use this.\n *\n * \\return It returns `-ENOTSUP` if the hypervisor doesn\u0027t have an alternate\n *         auth mode.\n */\n```",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 71
+      },
+      "revId": "88f5ec33da94e37be625d8ed49f9f991e455d385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c317e2f_4e839de6",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-12-03T07:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b412204_ba251849",
       "range": {
         "startLine": 147,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c96c2e0c_cdcfc59e",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-12-03T07:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0078b639_b22a1199",
+      "range": {
+        "startLine": 156,
+        "startChar": 3,
+        "endLine": 156,
+        "endChar": 18
+      },
+      "revId": "88f5ec33da94e37be625d8ed49f9f991e455d385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ae01483_c0d0ffdd",
@@ -129,6 +249,30 @@
       "writtenOn": "2024-12-03T01:00:56Z",
       "side": 1,
       "message": "I don\u0027t think we\u0027ll be able to support this function this release and we\u0027ve found a contingency plan. Let\u0027s delete it from this proposal",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 64
+      },
+      "revId": "88f5ec33da94e37be625d8ed49f9f991e455d385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee979b9c_4d4a689a",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-12-03T07:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ae01483_c0d0ffdd",
       "range": {
         "startLine": 163,
         "startChar": 0,
@@ -162,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a3d8ccc_78c22c4e",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-12-03T07:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6523776d_5b5a9da8",
+      "range": {
+        "startLine": 256,
+        "startChar": 0,
+        "endLine": 275,
+        "endChar": 37
+      },
+      "revId": "88f5ec33da94e37be625d8ed49f9f991e455d385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30dbe821_d7be86ae",
@@ -175,6 +343,30 @@
       "writtenOn": "2024-12-03T01:38:09Z",
       "side": 1,
       "message": "have you considered using `VirtualMachineRawConfig` as the API type? if VirtualMachineConfig is used and we app config support later, it will become unclear which functions are supported for which config types. it is probably better to have the functions strongly typed and add app config variants for the common stuff when we need it later\n\nas a bonus, the implementations here will become nicer because you could delete the match expressions",
+      "range": {
+        "startLine": 37,
+        "startChar": 60,
+        "endLine": 37,
+        "endChar": 80
+      },
+      "revId": "88f5ec33da94e37be625d8ed49f9f991e455d385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27eaa3f6_7a8966a5",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-12-03T07:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30dbe821_d7be86ae",
       "range": {
         "startLine": 37,
         "startChar": 60,
@@ -221,6 +413,30 @@
       "writtenOn": "2024-12-03T01:38:09Z",
       "side": 1,
       "message": "nit: prefer early returns to reduce the nesting\n\n```\n    let virtmgr \u003d\n        if early { VirtualizationService::new_early() } else { VirtualizationService::new() };\n    let virtmgr \u003d match virtmgr {\n        Ok(virtmgr) \u003d\u003e virtmgr,\n        Err(e) \u003d\u003e return -e.raw_os_error().ok_or(lib::EIO),\n    };\n    match virtmgr.connect() {\n        Ok(service) \u003d\u003e {\n            // SAFETY: `service` is assumed to be a valid, non-null pointer to a mutable raw\n            // pointer. `service` is the only reference here and `config` takes\n            // ownership.\n            unsafe {\n                *service_ptr \u003d Box::into_raw(Box::new(service));\n            }\n            0\n        }\n        Err(_) \u003d\u003e -lib::ECONNREFUSED,\n    }\n\n```",
+      "range": {
+        "startLine": 311,
+        "startChar": 0,
+        "endLine": 330,
+        "endChar": 5
+      },
+      "revId": "88f5ec33da94e37be625d8ed49f9f991e455d385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "855a3214_35043b16",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-12-03T07:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fa80de8_e8e7221e",
       "range": {
         "startLine": 311,
         "startChar": 0,
