@@ -1,0 +1,152 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74b4b047_8a8eb343",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/DebianServiceImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-12-03T05:48:44Z",
+      "side": 1,
+      "message": "then you\u0027ll call updateListenerPorts() twice for a port change event. Is it intended?",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d7a22c2d_4074aae7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/DebianServiceImpl.java",
+              "range": {
+                "startLine": 59,
+                "startChar": 0,
+                "endLine": 69,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "dd86bf62e614f745feef552d69019abecc26d6b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "246a3426_d74a4f48",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/PortsStateManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-12-03T05:48:44Z",
+      "side": 1,
+      "message": "`@GuardedBy` means caller (or user) should use method/member with the lock hold. Please remove it because we wouldn\u0027t expect caller to call this API with lock hold.",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 59
+      },
+      "revId": "dd86bf62e614f745feef552d69019abecc26d6b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05d6c687_5464f2a1",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/PortsStateManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-12-03T05:48:44Z",
+      "side": 1,
+      "message": "Please reference https://en.wikipedia.org/wiki/Singleton_pattern#Lazy_initialization",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 42
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "be29f44e_545b4625",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/PortsStateManager.java",
+              "range": {
+                "startLine": 36,
+                "startChar": 0,
+                "endLine": 37,
+                "endChar": 0
+              },
+              "replacement": "    private static volatile PortsStateManager mInstance;\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/PortsStateManager.java",
+              "range": {
+                "startLine": 67,
+                "startChar": 0,
+                "endLine": 68,
+                "endChar": 0
+              },
+              "replacement": "    public static PortsStateManager getInstance(Context context) {\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/PortsStateManager.java",
+              "range": {
+                "startLine": 69,
+                "startChar": 0,
+                "endLine": 73,
+                "endChar": 0
+              },
+              "replacement": "            synchronized (PortsStateManager.class) {\n                if (mInstance \u003d\u003d null) {\n                    SharedPreferences sharedPref \u003d\n                            context.getSharedPreferences(\n                                    context.getPackageName() + PREFS_NAME, Context.MODE_PRIVATE);\n                    mInstance \u003d new PortsStateManager(sharedPref);\n                }\n            }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "dd86bf62e614f745feef552d69019abecc26d6b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2b9a591_e0d7f691",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/PortsStateManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-12-03T05:48:44Z",
+      "side": 1,
+      "message": "This seems to be too harsh restriction. Is sharedpreference unsafe accross the multi-thread? If so, what about a) restrict to the main thread or b) What about creating a Handler (\u003d single worker thread) and pend actual commands there? here and other places.",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 23
+      },
+      "revId": "dd86bf62e614f745feef552d69019abecc26d6b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
