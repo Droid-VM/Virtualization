@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6840d761_218d7947",
+        "filename": "libs/libvmbase/src/memory/tracker.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:46:26Z",
+      "side": 1,
+      "message": "Nice catch!\n\nInstead, `deactivate_dynamic_page_tables()` now leaks the `MEMORY` lock so that it can never be accessed again. After that, other functions (including `switch_to_dynamic_page_tables()`) will start returning `MemoryTrackerError::Unavailable` (with a more generic `Display` string).",
+      "parentUuid": "c2c03e93_c10d2976",
+      "range": {
+        "startLine": 53,
+        "startChar": 55,
+        "endLine": 53,
+        "endChar": 69
+      },
+      "revId": "23b5267ae842c1f3a5cf01c2c670e4fb79c09cec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "79077d97_ab984bb0",
         "filename": "libs/libvmbase/src/memory/tracker.rs",
         "patchSetId": 10
@@ -37,6 +61,24 @@
       "writtenOn": "2024-12-02T22:06:27Z",
       "side": 1,
       "message": "off topic: i\u0027m surprised we don\u0027t prioritize the static range when available. if i remember correctly, geniezone folks changed crosvm to have a static swiotlb region as a distinct \"memslot\" and, here, geniezone also seems to have a `get_mem_sharer()`, so something is probably depending on this ordering already. maybe the static swiotlb for geniezone isn\u0027t actually needed anymore",
+      "revId": "23b5267ae842c1f3a5cf01c2c670e4fb79c09cec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69caafd4_860526aa",
+        "filename": "libs/libvmbase/src/memory/tracker.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:46:26Z",
+      "side": 1,
+      "message": "Interesting, thanks for bringing this up. I wasn\u0027t aware of the GZ static region. Not sure if one is more efficient than the other (depends on EL2 implementation). A reason why I prefer this ordering is that, at least, the first option gets CI coverage from TH.",
+      "parentUuid": "79077d97_ab984bb0",
       "revId": "23b5267ae842c1f3a5cf01c2c670e4fb79c09cec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -54,6 +96,24 @@
       "writtenOn": "2024-12-02T22:06:27Z",
       "side": 1,
       "message": "should this case be an error in protected mode? or at least print a log, like the rialto code did?",
+      "revId": "23b5267ae842c1f3a5cf01c2c670e4fb79c09cec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d5a38f8_b75e5faf",
+        "filename": "libs/libvmbase/src/memory/tracker.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-03T22:46:26Z",
+      "side": 1,
+      "message": "Added logging.",
+      "parentUuid": "24f9445f_6a21520e",
       "revId": "23b5267ae842c1f3a5cf01c2c670e4fb79c09cec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
