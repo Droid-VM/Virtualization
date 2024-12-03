@@ -16,9 +16,16 @@
 
 pub mod linux;
 
-use core::ptr::null_mut;
+use crate::entry::FIRMWARE_REVISION;
+use core::mem;
+use core::ptr::{null, null_mut};
 use spin::mutex::SpinMutex;
+use uefi_raw::protocol::console::SimpleTextOutputProtocol;
+use uefi_raw::protocol::loaded_image::LoadedImageProtocol;
+use uefi_raw::table::boot::BootServices;
+use uefi_raw::table::runtime::RuntimeServices;
 use uefi_raw::table::system::SystemTable;
+use uefi_raw::table::{Header, Revision};
 use uefi_raw::Status;
 use vmbase::isb;
 use vmbase::{read_sysreg, write_sysreg};
@@ -28,24 +35,67 @@ const EFI_SPECIFICATION_REVISION: u32 = EFI_2_100_SYSTEM_TABLE_REVISION;
 
 static EFI_LOADER: SpinMutex<EfiLoader> = SpinMutex::new(EfiLoader::new());
 
-/// Represents the UEFI structures used for booting EFI payloads.
-struct EfiLoader {}
+/// Represents UEFI structures used for booting the Linux kernel through EFI stub.
+struct EfiLoader {
+    pub system_table: SystemTable,
+    firmware_vendor: [u16; 6],
+}
 
 impl EfiLoader {
     const EFI_IMAGE_HANDLE: usize = 0x19ef_781b;
+    const FIRMWARE_VENDOR: [u16; 6] = ['p' as _, 'v' as _, 'm' as _, 'f' as _, 'w' as _, '\0' as _];
 
     pub const fn new() -> Self {
-        Self {}
+        let system_table = SystemTable {
+            header: Header {
+                signature: SystemTable::SIGNATURE,
+                revision: Revision(EFI_SPECIFICATION_REVISION),
+                size: mem::size_of::<SystemTable>() as _,
+                crc: 0,
+                reserved: 0,
+            },
+
+            firmware_vendor: null(),
+            firmware_revision: FIRMWARE_REVISION,
+
+            stdin_handle: null_mut(),
+            stdin: null_mut(),
+
+            stdout_handle: null_mut(),
+            stdout: null_mut(),
+
+            stderr_handle: null_mut(),
+            stderr: null_mut(),
+
+            runtime_services: null_mut(),
+            boot_services: null_mut(),
+
+            number_of_configuration_table_entries: 0,
+            configuration_table: null_mut(),
+        };
+
+        let firmware_vendor = Self::FIRMWARE_VENDOR;
+
+        Self { system_table, firmware_vendor }
     }
 
-    fn get_system_table_ptr(&self) -> *mut SystemTable {
-        null_mut()
+    fn get_system_table_ptr(&mut self) -> *mut SystemTable {
+        &mut self.system_table as _
+    }
+
+    fn patch_pointers(&mut self) {
+        self.system_table.firmware_vendor = &mut self.firmware_vendor as *mut _;
     }
 }
 
 // SAFETY: Send trait indicates whether a type is safe to transfer across threads. We are working
 // with single-threaded system so this operation has no meaningful impact on Rust.
 unsafe impl Send for EfiLoader {}
+
+// Initialize parameters passed to the EFI stub by the EFI loader.
+pub fn init_efi() {
+    EFI_LOADER.lock().patch_pointers();
+}
 
 pub type EfiEntrypoint = extern "efiapi" fn(usize, *mut SystemTable) -> uefi_raw::Status;
 
