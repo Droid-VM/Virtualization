@@ -52,6 +52,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70dbca97_db0ac6b1",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/PortsStateManager.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-12-03T07:37:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b135bafd_379ffaff",
+      "range": {
+        "startLine": 129,
+        "startChar": 33,
+        "endLine": 129,
+        "endChar": 43
+      },
+      "revId": "2e966b722973e7ba806f0a94530ea5c545eb2a62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e6644e9_84cd31e3",
@@ -99,6 +123,30 @@
           ]
         }
       ],
+      "revId": "2e966b722973e7ba806f0a94530ea5c545eb2a62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2613c749_e091aaac",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingAdapter.kt",
+        "patchSetId": 9
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-12-03T07:37:19Z",
+      "side": 1,
+      "message": "`mItems` uses `SortedListAdapterCallback`. So, the adapter is aware of its change.\n\nhttps://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:recyclerview/recyclerview/src/main/java/androidx/recyclerview/widget/SortedListAdapterCallback.java",
+      "parentUuid": "8e6644e9_84cd31e3",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 0
+      },
       "revId": "2e966b722973e7ba806f0a94530ea5c545eb2a62",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
