@@ -425,6 +425,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "33205960_9874e9a9",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/PortsStateManager.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-12-03T07:58:17Z",
+      "side": 1,
+      "message": "The way for applying the comment would like this. Even if uniting callback function between active port change \u0026 enabled port change, at least callback function from the notification side needs to be aware of impl details of port state, isn\u0027t it?\n\n```\nvoid updateActivePorts(Set\u003cInteger\u003e ports) {\n    Set\u003cInteger\u003e prevPorts \u003d mActivePorts;\n    Set\u003cInteger\u003e union \u003d new HashSet\u003c\u003e(ports);\n    union.addAll(prevPorts);\n    for (int port : union) {\n        if (!prevPorts.contains(port)) {\n            synchronized (mLock) {\n                mActivePorts.add(port);\n            }\n            notifyActivePortUpdated(port, true);\n        } else if (!ports.contains(port)) {\n            synchronized (mLock) {\n                mActivePorts.remove(port);\n            }\n            notifyActivePortUpdated(port, false);\n        }\n    }\n}\n```",
+      "parentUuid": "57739a05_00947a10",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 40
+      },
+      "revId": "dc8eea6ffd31cf3f12e4ece127dced74aa9b4ee4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a252a643_a18464d7",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/PortsStateManager.java",
         "patchSetId": 4
