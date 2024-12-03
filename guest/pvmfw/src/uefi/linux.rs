@@ -111,35 +111,18 @@ impl PeOptHeader {
 /// Callers must ensure that the result of this function is properly executable before calling it.
 pub unsafe fn locate_linux_efi_entrypoint(payload: &[u8]) -> Option<EfiEntrypoint> {
     let header = KernelHeader::ref_from_prefix(payload)?;
-    {
-        // TODO: remove
-        let magic = header.magic;
-        assert_eq!(magic, KernelHeader::MAGIC);
-        let signature = header.code0_word0;
-        assert_eq!(signature, KernelHeader::EFI_SIGNATURE);
-    }
     if header.magic != KernelHeader::MAGIC || header.code0_word0 != KernelHeader::EFI_SIGNATURE {
         return None;
     }
 
     let pe_header_offset = header.pe_header_offset.try_into().unwrap();
     let pe_header = PeHeader::ref_from_prefix(&payload[pe_header_offset..])?;
-    {
-        // TODO: remove
-        let magic = pe_header.magic;
-        assert_eq!(magic, PeHeader::MAGIC);
-    }
     if pe_header.magic != PeHeader::MAGIC {
         return None;
     }
 
     let opt_header_offset = pe_header_offset + mem::size_of::<PeHeader>();
     let opt_header = PeOptHeader::ref_from_prefix(&payload[opt_header_offset..])?;
-    {
-        // TODO: remove
-        let format = opt_header.format;
-        assert_eq!(format, PeOptHeader::FORMAT);
-    }
     if opt_header.format != PeOptHeader::FORMAT {
         return None;
     }
