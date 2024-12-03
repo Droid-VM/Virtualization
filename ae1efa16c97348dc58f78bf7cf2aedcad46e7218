@@ -52,6 +52,24 @@
       "parentUuid": "7bc173ec_4b4042ca",
       "revId": "ae1efa16c97348dc58f78bf7cf2aedcad46e7218",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93ee3e00_35a936e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2024-12-03T18:31:56Z",
+      "side": 1,
+      "message": "`build/debian/kokoro/gcp_ubuntu_docker/aarch64/build.sh` isn\u0027t using the `-a` flag. Is there something else I should update in that file?",
+      "parentUuid": "30430461_1290a0b2",
+      "revId": "ae1efa16c97348dc58f78bf7cf2aedcad46e7218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

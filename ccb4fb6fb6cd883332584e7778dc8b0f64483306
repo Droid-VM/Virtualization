@@ -33,6 +33,24 @@
       "message": "I think explicitly setting the arch might be better, and also we need to update build/debian/kokoro/gcp_ubuntu_docker/aarch64/build.sh as well.",
       "revId": "ccb4fb6fb6cd883332584e7778dc8b0f64483306",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0882ee7_2aa589d4",
+        "filename": "build/debian/kokoro/gcp_ubuntu_docker/x86_64/build.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2024-12-03T18:31:56Z",
+      "side": 1,
+      "message": "`aarch64` was the default arch prior to this CL and the `-a` flag is not being used in the `aarch64/build.sh`. Only in the `x86_64/build.sh` we set `-a x86_64`.\n\nMy thought was to make Kokoro\u0027s `build.sh` script platform independent to reduce maintenance burden -- the same exact build script will run on any (supported) platform and generate an image file for that platform. Just like `apt install X` makes Debian install the `X` package for the right machine arch without us having to explicitly specify it.\n\nWhat do you think?",
+      "parentUuid": "1b3e1527_a66defcb",
+      "revId": "ccb4fb6fb6cd883332584e7778dc8b0f64483306",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
