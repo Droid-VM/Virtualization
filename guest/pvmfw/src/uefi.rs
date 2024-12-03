@@ -16,32 +16,81 @@
 
 pub mod linux;
 
-use core::ptr::null_mut;
+use crate::entry::FIRMWARE_REVISION;
+use core::mem;
+use core::ptr::{addr_of_mut, null, null_mut};
 use spin::mutex::SpinMutex;
 use uefi_raw::table::system::SystemTable;
+use uefi_raw::table::{Header, Revision};
 use uefi_raw::Handle;
 use uefi_raw::Status;
 use vmbase::arch::disable_wxn;
 
+const EFI_2_100_SYSTEM_TABLE_REVISION: u32 = (2 << 16) | (100);
+const EFI_SPECIFICATION_REVISION: u32 = EFI_2_100_SYSTEM_TABLE_REVISION;
+
 static EFI_LOADER: SpinMutex<EfiLoader> = SpinMutex::new(EfiLoader::new());
 
 /// Represents the UEFI structures used for booting EFI payloads.
-struct EfiLoader {}
+struct EfiLoader {
+    pub system_table: SystemTable,
+    firmware_vendor: [u16; 6],
+}
 
 impl EfiLoader {
     const EFI_IMAGE_HANDLE: Handle = 0x19ef_781b as _;
+    const FIRMWARE_VENDOR: [u16; 6] = ['p' as _, 'v' as _, 'm' as _, 'f' as _, 'w' as _, '\0' as _];
 
     pub const fn new() -> Self {
-        Self {}
+        let system_table = SystemTable {
+            header: Header {
+                signature: SystemTable::SIGNATURE,
+                revision: Revision(EFI_SPECIFICATION_REVISION),
+                size: mem::size_of::<SystemTable>() as _,
+                crc: 0,
+                reserved: 0,
+            },
+
+            firmware_vendor: null(),
+            firmware_revision: FIRMWARE_REVISION,
+
+            stdin_handle: null_mut(),
+            stdin: null_mut(),
+
+            stdout_handle: null_mut(),
+            stdout: null_mut(),
+
+            stderr_handle: null_mut(),
+            stderr: null_mut(),
+
+            runtime_services: null_mut(),
+            boot_services: null_mut(),
+
+            number_of_configuration_table_entries: 0,
+            configuration_table: null_mut(),
+        };
+
+        let firmware_vendor = Self::FIRMWARE_VENDOR;
+
+        Self { system_table, firmware_vendor }
+    }
+
+    fn patch_pointers(&mut self) {
+        self.system_table.firmware_vendor = addr_of_mut!(self.firmware_vendor).cast();
     }
 
     fn get_system_table_ptr(&mut self) -> *mut SystemTable {
-        null_mut()
+        addr_of_mut!(self.system_table)
     }
 }
 
 // SAFETY: `Send` is not relevant as pvmfw is single-threaded.
 unsafe impl Send for EfiLoader {}
+
+pub fn init_efi() {
+    let mut efi_loader = EFI_LOADER.lock();
+    efi_loader.patch_pointers();
+}
 
 pub type EfiEntrypoint = extern "efiapi" fn(Handle, *mut SystemTable) -> uefi_raw::Status;
 
