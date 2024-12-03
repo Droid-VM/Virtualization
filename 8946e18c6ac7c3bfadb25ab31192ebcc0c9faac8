@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "752e38cf_6834cb87",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-12-03T11:48:11Z",
+      "side": 0,
+      "message": "You just introduced this in https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3378612/11\nand now you are removing it..\n\nWhy don\u0027t you structure in this way:\n1. keep the static PT for a while until you add all the machinery to use the dynamic PT\n2. the last change should be transitioning and making use of the dynamic PT",
+      "revId": "8946e18c6ac7c3bfadb25ab31192ebcc0c9faac8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
