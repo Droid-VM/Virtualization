@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c02e7b6_f69f6487",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-04T14:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a96221c7_3d5c0df4",
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f2b761e_275d5beb",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-12-03T22:38:43Z",
       "side": 1,
       "message": "Feel free to move the changes to this file to a parent commit.",
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4798af9_415aa30d",
+        "filename": "build/microdroid/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-04T14:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f2b761e_275d5beb",
       "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -58,6 +94,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf7f1326_7ec2a9aa",
+        "filename": "build/microdroid/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-04T14:44:13Z",
+      "side": 1,
+      "message": "This comment has been addressed in another CL: aosp/3391561.",
+      "parentUuid": "92ebaadd_a517e6e9",
+      "range": {
+        "startLine": 526,
+        "startChar": 28,
+        "endLine": 526,
+        "endChar": 29
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99e6475c_2f6e213c",
@@ -71,6 +131,30 @@
       "writtenOn": "2024-12-03T22:38:43Z",
       "side": 1,
       "message": "Can we introduce another `avb_add_hash_footer_defaults` to share these with `microdroid_gki-android15-6.6_kernel_signed` e.g.\n```\navb_add_hash_footer_defaults {\n    name: \"microdroid_gki_kernel_signed_defaults\",\n    defaults: [\"microdroid_kernel_signed_defaults\"],\n    arch: {\n        arm64: {\n            src: \":microdroid_gki_kernel_prebuilts-android15-6.6-arm64\",\n        },\n        x86_64: {\n            src: \":microdroid_gki_kernel_prebuilts-android15-6.6-x86_64\",\n        },\n    },\n    include_descriptors_from_images: [\n        \":microdroid_gki-android15-6.6_initrd_normal_hashdesc\",\n        \":microdroid_gki-android15-6.6_initrd_debug_hashdesc\",\n    ],\n}\n```\n?",
+      "range": {
+        "startLine": 653,
+        "startChar": 0,
+        "endLine": 664,
+        "endChar": 6
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbc10d11_44321376",
+        "filename": "build/microdroid/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-04T14:44:13Z",
+      "side": 1,
+      "message": "This comment has been addressed in another CL: aosp/3391561.",
+      "parentUuid": "99e6475c_2f6e213c",
       "range": {
         "startLine": 653,
         "startChar": 0,
@@ -127,6 +211,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "35611458_98f2e6cd",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-04T14:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84632d60_4ad156f4",
+      "range": {
+        "startLine": 81,
+        "startChar": 26,
+        "endLine": 81,
+        "endChar": 30
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8414ecbc_bc4eadb6",
@@ -140,6 +248,30 @@
       "writtenOn": "2024-12-03T22:38:43Z",
       "side": 1,
       "message": "Please don\u0027t commit commented code.",
+      "range": {
+        "startLine": 92,
+        "startChar": 16,
+        "endLine": 92,
+        "endChar": 52
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8b91dd6_70354679",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-04T14:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8414ecbc_bc4eadb6",
       "range": {
         "startLine": 92,
         "startChar": 16,
@@ -196,6 +328,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92c31c0f_5fdf3a15",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-04T14:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67af38b0_0ce8e73a",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 43
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51070eed_25956814",
@@ -242,6 +398,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5900491a_012a5c65",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-04T14:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a79fa717_7a4bb51d",
+      "range": {
+        "startLine": 319,
+        "startChar": 0,
+        "endLine": 362,
+        "endChar": 10
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f9eeefc_43287697",
@@ -255,6 +435,30 @@
       "writtenOn": "2024-12-03T22:38:43Z",
       "side": 1,
       "message": "Probably not necessary now (same with other debugging `info!` statement below).",
+      "range": {
+        "startLine": 367,
+        "startChar": 4,
+        "endLine": 367,
+        "endChar": 78
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "891dd1ac_2d543861",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-04T14:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f9eeefc_43287697",
       "range": {
         "startLine": 367,
         "startChar": 4,
@@ -426,6 +630,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e93f2db2_7bcbd560",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-04T14:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc0cb56a_85ef2b90",
+      "range": {
+        "startLine": 133,
+        "startChar": 4,
+        "endLine": 133,
+        "endChar": 70
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39e18fe5_719d2df2",
@@ -449,6 +677,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fecd90d_75135eab",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-04T14:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39e18fe5_719d2df2",
+      "range": {
+        "startLine": 134,
+        "startChar": 8,
+        "endLine": 134,
+        "endChar": 54
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8f6b242_90a75cf7",
@@ -462,6 +714,30 @@
       "writtenOn": "2024-12-03T22:38:43Z",
       "side": 1,
       "message": "Please drop these changes.",
+      "range": {
+        "startLine": 289,
+        "startChar": 0,
+        "endLine": 323,
+        "endChar": 1
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e241bdf7_53a134dc",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-04T14:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8f6b242_90a75cf7",
       "range": {
         "startLine": 289,
         "startChar": 0,
@@ -502,6 +778,30 @@
       "writtenOn": "2024-12-03T22:38:43Z",
       "side": 1,
       "message": "nit: `Support for EFI payloads.`",
+      "range": {
+        "startLine": 15,
+        "startChar": 4,
+        "endLine": 15,
+        "endChar": 30
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8b52d22_6f3b8e67",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-04T14:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "228831b8_3dce282b",
       "range": {
         "startLine": 15,
         "startChar": 4,
@@ -617,6 +917,30 @@
       "writtenOn": "2024-12-03T22:38:43Z",
       "side": 1,
       "message": "So `tinyvec` did not work?",
+      "range": {
+        "startLine": 80,
+        "startChar": 25,
+        "endLine": 80,
+        "endChar": 28
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0c77aeb_fc90230e",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-04T14:44:13Z",
+      "side": 1,
+      "message": "I tried implementing it, but had issues with initializing the tinyvec::ArrayVec structure.",
+      "parentUuid": "ffc3ec04_c12c17b8",
       "range": {
         "startLine": 80,
         "startChar": 25,
@@ -962,6 +1286,24 @@
       "writtenOn": "2024-12-03T22:38:43Z",
       "side": 1,
       "message": "This function should defined at L152, under its `SAFETY` comment.",
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07781274_79864fdd",
+        "filename": "libs/libvmbase/src/heap.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-04T14:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e4114e8_a0b2d699",
       "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
