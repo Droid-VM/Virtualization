@@ -34,6 +34,24 @@
       "parentUuid": "2f85506b_cf0c7081",
       "revId": "518b3eb7f8b1372a076404d32ca721dd8701d931",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41a3a0ef_04113b9e",
+        "filename": "libs/libvmbase/src/memory/stack.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-12-04T23:10:41Z",
+      "side": 1,
+      "message": "Yep, that looks like a good thing to do once we have Rust 1.82 in Android. b/369422063 is the tracking bug for that.",
+      "parentUuid": "ae5ceaba_c2e50764",
+      "revId": "518b3eb7f8b1372a076404d32ca721dd8701d931",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
