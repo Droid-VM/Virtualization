@@ -16,6 +16,24 @@
       "message": "This should just be:\n\n```\nappDataDir \u003d \"/data/data/\" + context.getPackageName();\n```\n\nWe shouldn\u0027t need the `if` check at L97 and L95.\n\n```\n/data/data points to /mnt/pass_through/\u003cactive-user-id\u003e/emulated\n```\n\nSo, for every active user, this path ensures that it points to app\u0027s internal storage of that active user.\n\nPlease let me know if I am missing something here.. unless the intention here is not to support other users apart from user 0.",
       "revId": "53eae39403fbca6b617067dd9c25b312800491b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e0aac5e_f1b6bc54",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ConfigJson.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-12-04T23:30:52Z",
+      "side": 1,
+      "message": "I don\u0027t know why but I could boot terminal app with managed profile (userId\u003d10) without this hack. We assume that this is the sepolicy related issue (because it works when disabled it) for crosvm, but we couldn\u0027t find fix before. Feel free to take the bug if this look interesting.",
+      "parentUuid": "548bb6c2_b4413b1e",
+      "revId": "53eae39403fbca6b617067dd9c25b312800491b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
