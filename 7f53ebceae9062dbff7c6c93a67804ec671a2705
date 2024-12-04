@@ -279,6 +279,30 @@
       },
       "revId": "7f53ebceae9062dbff7c6c93a67804ec671a2705",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa61dc2d_9444ca0f",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-12-04T08:08:15Z",
+      "side": 1,
+      "message": "Jeongik, Jaewan, and I discussed in offline chat. The conclusion was:\n\n- We don\u0027t know whether is recoverable or not as Jiyong said.\n- So, keep going to start ErrorActivity like current, but adding TODO item for showing snackbar instead for particular cases.\n- Adding TODO item for `maxDiskSizeMb` as well. But it seems separated problem.",
+      "parentUuid": "33703d8a_17b08213",
+      "range": {
+        "startLine": 512,
+        "startChar": 12,
+        "endLine": 512,
+        "endChar": 51
+      },
+      "revId": "7f53ebceae9062dbff7c6c93a67804ec671a2705",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
