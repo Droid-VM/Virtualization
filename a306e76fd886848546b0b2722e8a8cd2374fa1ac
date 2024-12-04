@@ -22,6 +22,30 @@
       },
       "revId": "a306e76fd886848546b0b2722e8a8cd2374fa1ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc12b9b0_77112658",
+        "filename": "guest/pvmfw/src/memory.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-04T21:28:46Z",
+      "side": 1,
+      "message": "Good point. I\u0027ve added more documentation to those `map*` functions.\n\nLong term, I\u0027d like to be able to return the `\u0026\u0027a (mut) [u8]` from the tracker itself, using some guard that \"frees\" the slice with the tracker once it goes out of scope so that the same range could be \"mapped\" multiple times and without requiring the client to have `unsafe` code constructing the slice. However, for now, a comment and error on overlaps will do :)",
+      "parentUuid": "75f1a180_fae68ab5",
+      "range": {
+        "startLine": 82,
+        "startChar": 8,
+        "endLine": 82,
+        "endChar": 17
+      },
+      "revId": "a306e76fd886848546b0b2722e8a8cd2374fa1ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
