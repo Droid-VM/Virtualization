@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "537774ce_c9c7b22d",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-04T21:15:58Z",
+      "side": 0,
+      "message": "Thank you for bringing this up!\n\nI put it behind the `if !use_uefi` in the `main_wrapper` function.",
+      "parentUuid": "7e70e0fc_c79b613f",
+      "range": {
+        "startLine": 174,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 31
+      },
+      "revId": "2b9724d72c986dcd97a5c91d92dfe5daf029b1b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5a2cbcf_fe50bf59",
@@ -82,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24993a25_3d541c0b",
+        "filename": "libs/libvmbase/entry.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-04T21:15:58Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "cc2aec4a_7389b549",
+      "range": {
+        "startLine": 64,
+        "startChar": 85,
+        "endLine": 64,
+        "endChar": 103
+      },
+      "revId": "2b9724d72c986dcd97a5c91d92dfe5daf029b1b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6adc79c0_90a01754",
@@ -95,6 +143,30 @@
       "writtenOn": "2024-12-03T22:38:43Z",
       "side": 0,
       "message": "No, not the golden DT dumps!!!!",
+      "range": {
+        "startLine": 29,
+        "startChar": 8,
+        "endLine": 29,
+        "endChar": 36
+      },
+      "revId": "2b9724d72c986dcd97a5c91d92dfe5daf029b1b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abcf1e46_cbdd8867",
+        "filename": "tests/hostside/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-04T21:15:58Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "6adc79c0_90a01754",
       "range": {
         "startLine": 29,
         "startChar": 8,
