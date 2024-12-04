@@ -418,6 +418,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5a9a8b56_aaed40ad",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2024-12-04T23:39:01Z",
+      "side": 1,
+      "message": "and the same for all enum values - they are in the global namespace in C. Better to prefix them with the enum name as well. Unfortunately, enum class isn\u0027t a thing here",
+      "parentUuid": "e4d1c299_b0c8d893",
+      "range": {
+        "startLine": 211,
+        "startChar": 5,
+        "endLine": 211,
+        "endChar": 16
+      },
+      "revId": "f3536decc4750228fd709030bf324c27b4070f3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c9656ad7_204241a7",
         "filename": "libs/libavf/include/android/virtualization.h",
         "patchSetId": 11
