@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7857d0d9_de45787c",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2024-12-04T05:39:35Z",
+      "side": 1,
+      "message": "Thanks Jeongik!\n\nMaybe we also need `apt-utils` in the image? Without it, I get the following error for localdebs:\n\n```\nCalling hook: repository.LOCALDEBS                                                                                                                                                                                                                                  \n/tmp/tmp.fP8HWUYdHw/debian_cloud_image/src/debian_cloud_images/resources/fai_config/bookworm/hooks/repository.LOCALDEBS: 5: apt-ftparchive: not found                                                                                                               \nrepository.LOCALDEBS FAILED with exit code 127.\n```\n\n```suggestion\n\t\tapt-utils\n\t\tautomake\n```",
+      "revId": "7679877fec1208e777ef4580dad03210ef49d581",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
