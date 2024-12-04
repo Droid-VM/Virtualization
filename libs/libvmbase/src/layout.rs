@@ -44,7 +44,7 @@ macro_rules! linker_addr {
     ($symbol:ident) => {{
         // SAFETY: We're just getting the address of an extern static symbol provided by the linker,
         // not dereferencing it.
-        let addr = unsafe { addr_of!($crate::linker::$symbol) as usize };
+        let addr = addr_of!($crate::linker::$symbol) as usize;
         VirtualAddress(addr)
     }};
 }
