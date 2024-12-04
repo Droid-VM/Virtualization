@@ -159,6 +159,30 @@
       },
       "revId": "7f53ebceae9062dbff7c6c93a67804ec671a2705",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e78ccfa_dead5a91",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-04T07:33:55Z",
+      "side": 1,
+      "message": "I think it\u0027s a recoverable error(It depends on..), so show snackbar with the message(failed to resize disk) and maybe with the action button to settings page(resize settings) instead of error page?",
+      "parentUuid": "583b0189_ad59a520",
+      "range": {
+        "startLine": 512,
+        "startChar": 12,
+        "endLine": 512,
+        "endChar": 51
+      },
+      "revId": "7f53ebceae9062dbff7c6c93a67804ec671a2705",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
