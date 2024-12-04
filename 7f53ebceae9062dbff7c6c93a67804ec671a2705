@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "625dcc22_4751d397",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-12-04T07:21:31Z",
+      "side": 1,
+      "message": "Should we resize for the initial launch? Otherwise we\u0027d better not call this API if KEY_DISK_SIZE is empty.",
+      "range": {
+        "startLine": 510,
+        "startChar": 25,
+        "endLine": 510,
+        "endChar": 63
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "80d2c986_1bc3fe09",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+              "range": {
+                "startLine": 509,
+                "startChar": 0,
+                "endLine": 514,
+                "endChar": 0
+              },
+              "replacement": "        long diskSize \u003d getIntent().getLongExtra(KEY_DISK_SIZE, -1);\n        if (diskSize !\u003d -1) {\n            try {\n                image.resize(diskSize);\n            } catch (IOException e) {\n                Log.e(TAG, \"Failed to resize disk\", e);\n                return;\n            }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7f53ebceae9062dbff7c6c93a67804ec671a2705",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
