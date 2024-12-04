@@ -74,6 +74,7 @@ cc_defaults {
 rust_library_rlib {
     name: "libvmbase",
     defaults: ["vmbase_rlib_defaults"],
+    edition: "2021",
     crate_name: "vmbase",
     srcs: ["src/lib.rs"],
     rustlibs: [
