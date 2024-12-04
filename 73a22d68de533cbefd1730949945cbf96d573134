@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "58820e84_7af70bcf",
+        "filename": "build/microdroid/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-04T15:15:24Z",
+      "side": 1,
+      "message": "Not done? To be clear, here\u0027s what I was suggesting:\n```suggestion\n        \"microdroid_gki_kernel_signed_defaults\",\n        \"microdroid_kernel_cap_defaults\",\n```\nand, below:\n```\n    defaults: [\n        \"microdroid_gki_kernel_signed_defaults\",\n        \"microdroid_kernel_cap_with_uefi_defaults\",\n    ],\n```\nwhich follows the pattern used above (non-GKI) of\n```\n    defaults: [\n        \"microdroid_kernel_signed_defaults\",\n        \"microdroid_kernel_cap_defaults\",\n    ],\n```",
+      "parentUuid": "62fd1758_1c3ce187",
+      "range": {
+        "startLine": 630,
+        "startChar": 0,
+        "endLine": 632,
+        "endChar": 48
+      },
+      "revId": "73a22d68de533cbefd1730949945cbf96d573134",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27a96228_2a552d7e",
         "filename": "build/microdroid/Android.bp",
         "patchSetId": 2
