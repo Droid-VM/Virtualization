@@ -21,7 +21,6 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -506,15 +505,8 @@ public class MainActivity extends BaseActivity
     }
 
     private void resizeDiskIfNecessary(InstalledImage image) {
-        String prefKey = getString(R.string.preference_file_key);
-        String key = getString(R.string.preference_disk_size_key);
-        SharedPreferences sharedPref = this.getSharedPreferences(prefKey, Context.MODE_PRIVATE);
         try {
-            // Use current size as default value to ensure if its size is multiple of 4096
-            long newSize = sharedPref.getLong(key, image.getSize());
-            Log.d(TAG, "Resizing disk to " + newSize + " bytes");
-            newSize = image.resize(newSize);
-            sharedPref.edit().putLong(key, newSize).apply();
+            image.resize(getIntent().getLongExtra("disk_size", image.getSize()));
         } catch (IOException e) {
             Log.e(TAG, "Failed to resize disk", e);
             return;
