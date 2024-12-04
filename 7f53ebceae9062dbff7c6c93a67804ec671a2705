@@ -207,6 +207,30 @@
       },
       "revId": "7f53ebceae9062dbff7c6c93a67804ec671a2705",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb506909_53ce99b8",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-04T07:45:43Z",
+      "side": 1,
+      "message": "maybe if allocateSpace fails(maybe lack of disk space), a user can resize again with the proper size? I think it depends on error type... but this could be handled in another change, though.",
+      "parentUuid": "f413ef91_65e49e51",
+      "range": {
+        "startLine": 512,
+        "startChar": 12,
+        "endLine": 512,
+        "endChar": 51
+      },
+      "revId": "7f53ebceae9062dbff7c6c93a67804ec671a2705",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
