@@ -16,6 +16,24 @@
       "message": "Unsafe Rust Review: If it\u0027s always safe to call this function, then you should say that.",
       "revId": "518b3eb7f8b1372a076404d32ca721dd8701d931",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae5ceaba_c2e50764",
+        "filename": "libs/libvmbase/src/memory/stack.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-04T21:29:21Z",
+      "side": 1,
+      "message": "Thanks, I\u0027ve reworked the `SAFETY` comment.\n\nTBH, I never understood why calling an `extern \"Rust\"` was unsafe (and what conditions needed to be met for it not to be).\n\nAFAIU from the [Rust Reference](https://doc.rust-lang.org/reference/items/external-blocks.html#functions), I should be able to declare the function as\n```\nextern \"Rust\" {\n    safe fn vmbase_stack_limit() -\u003e Option\u003cusize\u003e;\n}\n```\nonce `safe` becomes stable(?)",
+      "parentUuid": "2f85506b_cf0c7081",
+      "revId": "518b3eb7f8b1372a076404d32ca721dd8701d931",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
