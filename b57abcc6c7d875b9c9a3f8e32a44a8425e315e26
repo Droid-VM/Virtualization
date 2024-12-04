@@ -46,6 +46,30 @@
       },
       "revId": "b57abcc6c7d875b9c9a3f8e32a44a8425e315e26",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2dd1348_015a9915",
+        "filename": "android/virtualizationservice/aidl/Android.bp",
+        "patchSetId": 20
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-12-04T14:40:39Z",
+      "side": 1,
+      "message": "Wait...presubmit voted +2 last night and then -2 a few hours later. The [error log](https://android-build.corp.google.com/build_explorer/artifact_viewer/P86205157/test_suites_x86_64-trunk_staging/logs/build_error.log) for the failure is suspiciously short. Are we sure this isn\u0027t some sort of spurious failure?",
+      "parentUuid": "24f6100c_2d3e5688",
+      "range": {
+        "startLine": 114,
+        "startChar": 8,
+        "endLine": 114,
+        "endChar": 52
+      },
+      "revId": "b57abcc6c7d875b9c9a3f8e32a44a8425e315e26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
