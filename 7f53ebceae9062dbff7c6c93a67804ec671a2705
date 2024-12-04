@@ -255,6 +255,30 @@
       },
       "revId": "7f53ebceae9062dbff7c6c93a67804ec671a2705",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33703d8a_17b08213",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-04T07:48:44Z",
+      "side": 1,
+      "message": "I think Jeongik is talking about a case like resize failed due to not enough space on the phone. That case certainly is recoverable by making the requested size smaller. \n\nBut here, the problem is this try-catch doesn\u0027t know if it\u0027s recoverable or not.\n\nAnyway, ErrorActivity is better than just logging. :)",
+      "parentUuid": "f413ef91_65e49e51",
+      "range": {
+        "startLine": 512,
+        "startChar": 12,
+        "endLine": 512,
+        "endChar": 51
+      },
+      "revId": "7f53ebceae9062dbff7c6c93a67804ec671a2705",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
