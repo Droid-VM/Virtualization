@@ -94,6 +94,30 @@
       },
       "revId": "b57abcc6c7d875b9c9a3f8e32a44a8425e315e26",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2f2ad04_bbdcfd5e",
+        "filename": "android/virtualizationservice/aidl/Android.bp",
+        "patchSetId": 20
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-12-04T16:46:01Z",
+      "side": 1,
+      "message": "As discussed over chat - this line only impacts the client, *not* the version of the HAL in the server. We can leave this as is and virtmgr should receive HAL version 1 when the server running it.",
+      "parentUuid": "b56321d0_ebdb0942",
+      "range": {
+        "startLine": 114,
+        "startChar": 8,
+        "endLine": 114,
+        "endChar": 52
+      },
+      "revId": "b57abcc6c7d875b9c9a3f8e32a44a8425e315e26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
