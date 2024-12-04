@@ -231,6 +231,30 @@
       },
       "revId": "7f53ebceae9062dbff7c6c93a67804ec671a2705",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "689aa4bf_36a698e4",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-12-04T07:47:55Z",
+      "side": 1,
+      "message": "And we should calculate the `maxDiskSizeMb` based on the device storage usage instead of hardcoding.",
+      "parentUuid": "cb506909_53ce99b8",
+      "range": {
+        "startLine": 512,
+        "startChar": 12,
+        "endLine": 512,
+        "endChar": 51
+      },
+      "revId": "7f53ebceae9062dbff7c6c93a67804ec671a2705",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
