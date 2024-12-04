@@ -184,6 +184,7 @@ copy_android_config() {
 	cp -R "${src}"/* "${dst}"
 	cp "$(dirname "$0")/image.yaml" "${resources_dir}"
 
+	cp -R "$(dirname "$0")/localdebs/"* "${debian_cloud_image}/localdebs"
 	build_ttyd
 	build_rust_binary_and_copy forwarder_guest
 	build_rust_binary_and_copy forwarder_guest_launcher
