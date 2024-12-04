@@ -1,0 +1,389 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49f5d205_c2013f0e",
+        "filename": "guest/pvmfw/src/exceptions.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-04T22:38:06Z",
+      "side": 1,
+      "message": "I missed this in the first pass; please drop.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 65
+      },
+      "revId": "74802cec73b50c4e5e0971ad4711ddcc5b33cc23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b95f727b_a37a35aa",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-04T22:38:06Z",
+      "side": 1,
+      "message": "Should we only introduce this with the support for the config table? Also, didn\u0027t we say this would go in `uefi/linux.rs`?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 77
+      },
+      "revId": "74802cec73b50c4e5e0971ad4711ddcc5b33cc23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b72661b8_dd8d219a",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-04T22:38:06Z",
+      "side": 1,
+      "message": "I _think_ `mod` typically come first, before any `use`.",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 10
+      },
+      "revId": "74802cec73b50c4e5e0971ad4711ddcc5b33cc23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e15124ec_4be9d4c8",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-04T22:38:06Z",
+      "side": 1,
+      "message": "😭",
+      "range": {
+        "startLine": 63,
+        "startChar": 38,
+        "endLine": 63,
+        "endChar": 99
+      },
+      "revId": "74802cec73b50c4e5e0971ad4711ddcc5b33cc23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1192cd52_8e88dc98",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-04T22:38:06Z",
+      "side": 1,
+      "message": "As discussed offline, did you check `null_mut()`-vs-`null()`?",
+      "range": {
+        "startLine": 78,
+        "startChar": 26,
+        "endLine": 78,
+        "endChar": 34
+      },
+      "revId": "74802cec73b50c4e5e0971ad4711ddcc5b33cc23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0af09a94_4900c277",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-04T22:38:06Z",
+      "side": 1,
+      "message": "Why not fuse this into `patch_pointers`?",
+      "range": {
+        "startLine": 158,
+        "startChar": 3,
+        "endLine": 158,
+        "endChar": 28
+      },
+      "revId": "74802cec73b50c4e5e0971ad4711ddcc5b33cc23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ec975a0_ce15efb5",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-04T22:38:06Z",
+      "side": 1,
+      "message": "We know that the EFI payload will always execute with our system table so why not get this from within the function?\n```\nlet system_table \u003d EFI_LOADER.lock().get_system_table_ptr();\n```",
+      "range": {
+        "startLine": 167,
+        "startChar": 4,
+        "endLine": 167,
+        "endChar": 35
+      },
+      "revId": "74802cec73b50c4e5e0971ad4711ddcc5b33cc23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf44d8bb_ed90e85d",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-04T22:38:06Z",
+      "side": 1,
+      "message": "Just return the `Status` to the caller (in `entry.rs`) and let them handle it, return the `RebootReason`, or implement a fallback, as we discussed offline.\n\nIn the end, I don\u0027t think you\u0027ll need `locate_and_execute_efi_payload` as\n```\nif let Some(ep) \u003d locate_linux_efi_entrypoint(payload_start, payload_size) {\n    let status \u003d execute_efi_payload(ep);\n    error!(\"...{status}...\");\n    return Err(RebootReason::...); // ... or something\n}\n// otherwise, do something else\n```",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 32
+      },
+      "revId": "74802cec73b50c4e5e0971ad4711ddcc5b33cc23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ceb6e2be_4ab89ca5",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-04T22:38:06Z",
+      "side": 1,
+      "message": "Missing space between functions (I\u0027m surprised `rustfmt` didn\u0027t complain!)",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 1
+      },
+      "revId": "74802cec73b50c4e5e0971ad4711ddcc5b33cc23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51f903c4_fa397faa",
+        "filename": "guest/pvmfw/src/uefi/linux.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-04T22:38:06Z",
+      "side": 1,
+      "message": "I believe we should fail early if `payload_size \u003c MIN_PAYLOAD_SIZE` where\n```\nconst MIN_PAYLOAD_SIZE: usize \u003d KERNEL_HEADER_SIZE + PE_HEADER_SIZE + PE32PLUS_FIELD_AOEP;\n```\n\nto avoid out-of-bounds accesses.",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 6
+      },
+      "revId": "74802cec73b50c4e5e0971ad4711ddcc5b33cc23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d08a13c_d36ba743",
+        "filename": "guest/pvmfw/src/uefi/linux.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-04T22:38:06Z",
+      "side": 1,
+      "message": "The \"Inclusive Language\" checker isn\u0027t happy about this word; I\u0027d say just remove the comments altogether as the code is self-documenting anyway (same for L44).",
+      "range": {
+        "startLine": 36,
+        "startChar": 7,
+        "endLine": 36,
+        "endChar": 13
+      },
+      "revId": "74802cec73b50c4e5e0971ad4711ddcc5b33cc23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76885719_ca49fbb7",
+        "filename": "guest/pvmfw/src/uefi/loaded_image.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-04T22:38:06Z",
+      "side": 1,
+      "message": "Replace magic value with `const`?",
+      "range": {
+        "startLine": 24,
+        "startChar": 18,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "74802cec73b50c4e5e0971ad4711ddcc5b33cc23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19326b8e_444a5087",
+        "filename": "guest/pvmfw/src/uefi/loaded_image.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-04T22:38:06Z",
+      "side": 1,
+      "message": "Is this correct?",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 48
+      },
+      "revId": "74802cec73b50c4e5e0971ad4711ddcc5b33cc23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c70bc134_61eafaf6",
+        "filename": "guest/pvmfw/src/uefi/loaded_image.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-04T22:38:06Z",
+      "side": 1,
+      "message": "Why not `None` and not implement `unload` at all?",
+      "range": {
+        "startLine": 40,
+        "startChar": 16,
+        "endLine": 40,
+        "endChar": 28
+      },
+      "revId": "74802cec73b50c4e5e0971ad4711ddcc5b33cc23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6592ad4_3382e03e",
+        "filename": "guest/pvmfw/src/uefi/runtime_services.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-04T22:38:06Z",
+      "side": 1,
+      "message": "`mem::size_of::\u003cRtPropertiesTable\u003e()`?",
+      "range": {
+        "startLine": 39,
+        "startChar": 46,
+        "endLine": 39,
+        "endChar": 47
+      },
+      "revId": "74802cec73b50c4e5e0971ad4711ddcc5b33cc23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92a704b9_23285759",
+        "filename": "guest/pvmfw/src/uefi/runtime_services.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-04T22:38:06Z",
+      "side": 1,
+      "message": "Replace magic value with `const`?",
+      "range": {
+        "startLine": 39,
+        "startChar": 33,
+        "endLine": 39,
+        "endChar": 36
+      },
+      "revId": "74802cec73b50c4e5e0971ad4711ddcc5b33cc23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c27af8b_71b29368",
+        "filename": "libs/libvmbase/src/heap.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-04T22:38:06Z",
+      "side": 1,
+      "message": "Delay these changes until you need them (in `{allocate,free}_pool`).",
+      "revId": "74802cec73b50c4e5e0971ad4711ddcc5b33cc23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
