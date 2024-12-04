@@ -22,6 +22,30 @@
       },
       "revId": "b57abcc6c7d875b9c9a3f8e32a44a8425e315e26",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24f6100c_2d3e5688",
+        "filename": "android/virtualizationservice/aidl/Android.bp",
+        "patchSetId": 20
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-04T13:00:20Z",
+      "side": 1,
+      "message": "SGTM iff we have at least Cuttlefish installed with Secretkeeper V2, which I think is true - Matt can you confirm? (So we have VTS coverage for V2). \n\nThere will be no client code to use Secretkeeper V2, but I think that is fine considering V2 \u0026 V1 aren\u0027t very different.",
+      "parentUuid": "74acda58_768dcb71",
+      "range": {
+        "startLine": 114,
+        "startChar": 8,
+        "endLine": 114,
+        "endChar": 52
+      },
+      "revId": "b57abcc6c7d875b9c9a3f8e32a44a8425e315e26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
