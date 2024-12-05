@@ -16,6 +16,29 @@
       "message": "Thanks for taking a look, Jiyong and Jeongik!\n\nI will wait for Junichi to take a look and then merge tomorrow if he is okay with this.",
       "revId": "de78f447ef90d57cb25ae107a600e9562ab80837",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8bd93c2_1a9db8a7",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-05T13:11:24Z",
+      "side": 1,
+      "message": "```\nmake[2]: Leaving directory \u0027/tmp/tmp.QKYDf0eDfD/kernel/avf-arm64\u0027\nmake[1]: Leaving directory \u0027/tmp/tmp.QKYDf0eDfD/kernel/avf-arm64\u0027\nmake: Nothing to be done for \u0027binary-arch_arm64_none_avf-arm64\u0027.\ncp: cannot stat \u0027linux-headers-6.1.0-28-avf-arm64_6.1.119-1_arm64.deb\u0027: No such file or directory\n```\n\ndoes it support cross compile? it looks like it fails to build arm64 variant.",
+      "range": {
+        "startLine": 264,
+        "startChar": 0,
+        "endLine": 264,
+        "endChar": 101
+      },
+      "revId": "de78f447ef90d57cb25ae107a600e9562ab80837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
