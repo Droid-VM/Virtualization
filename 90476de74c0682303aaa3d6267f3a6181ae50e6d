@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6c55c35_becdd145",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2024-12-05T09:47:40Z",
+      "side": 1,
+      "message": "Thanks! 😊",
+      "parentUuid": "6af0689c_6be1cc1f",
+      "revId": "90476de74c0682303aaa3d6267f3a6181ae50e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0eba0018_296ade00",
@@ -49,6 +67,24 @@
       "writtenOn": "2024-12-05T09:11:32Z",
       "side": 1,
       "message": "Doesn\u0027t have to be address in this CL, but will you support applying our own pathches as well?",
+      "revId": "90476de74c0682303aaa3d6267f3a6181ae50e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd24013c_4cb8adc8",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2024-12-05T09:47:40Z",
+      "side": 1,
+      "message": "Yes if we keep our patches in, let\u0027s say a `kernel_patches` directory`, we could:\n1. `cp -r` the patches into `debian/patches/`\n2. add the patch file names to `debian/patches/series`\n3. then those would be automatically applied at the `./debian/rules orig` step",
+      "parentUuid": "0eba0018_296ade00",
       "revId": "90476de74c0682303aaa3d6267f3a6181ae50e6d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -90,6 +126,30 @@
       "side": 1,
       "message": "resolved because it is already done in the latest patchset",
       "parentUuid": "4f40b9f1_5e1297fe",
+      "range": {
+        "startLine": 8,
+        "startChar": 26,
+        "endLine": 8,
+        "endChar": 30
+      },
+      "revId": "90476de74c0682303aaa3d6267f3a6181ae50e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd3d9873_590b37ff",
+        "filename": "build/debian/kokoro/gcp_ubuntu_docker/aarch64/build.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2024-12-05T09:47:40Z",
+      "side": 1,
+      "message": "Yes I removed it as per our discussion",
+      "parentUuid": "c7899a4f_b242c410",
       "range": {
         "startLine": 8,
         "startChar": 26,
