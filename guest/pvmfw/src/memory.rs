@@ -24,7 +24,7 @@ use log::info;
 use log::warn;
 use vmbase::{
     layout::crosvm,
-    memory::{map_data, map_rodata, resize_available_memory},
+    memory::{map_data, map_data_noflush, map_rodata, resize_available_memory},
 };
 
 pub(crate) struct MemorySlices<'a> {
@@ -80,7 +80,12 @@ impl<'a> MemorySlices<'a> {
             RebootReason::InvalidPayload
         })?;
 
-        map_rodata(kernel_start, kernel_size).map_err(|e| {
+        if cfg!(feature = "supports_uefi") {
+            map_data_noflush(kernel_start, kernel_size)
+        } else {
+            map_rodata(kernel_start, kernel_size)
+        }
+        .map_err(|e| {
             error!("Failed to map kernel range: {e}");
             RebootReason::InternalError
         })?;
