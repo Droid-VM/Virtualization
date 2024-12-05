@@ -90,7 +90,12 @@ impl<'a> MemorySlices<'a> {
             return Err(RebootReason::InvalidPayload);
         };
 
-        map_rodata(kernel_start, kernel_size).map_err(|e| {
+        if cfg!(feature = "supports_uefi") {
+            map_data(kernel_start, kernel_size)
+        } else {
+            map_rodata(kernel_start, kernel_size)
+        }
+        .map_err(|e| {
             error!("Failed to map kernel range: {e}");
             RebootReason::InternalError
         })?;
