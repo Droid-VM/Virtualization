@@ -16,6 +16,9 @@
 
 use crate::config;
 use crate::memory::MemorySlices;
+use crate::uefi::execute_efi_payload;
+use crate::uefi::linux::locate_linux_efi_entrypoint;
+use crate::uefi::EfiEntrypoint;
 use core::arch::asm;
 use core::mem::size_of;
 use core::slice;
@@ -52,6 +55,8 @@ pub enum RebootReason {
     PayloadVerificationError,
     /// DICE layering process failed.
     SecretDerivationError,
+    /// Failed to boot the guest.
+    GuestBootFailed,
 }
 
 impl RebootReason {
@@ -65,6 +70,7 @@ impl RebootReason {
             Self::InvalidRamdisk => "PVM_FIRMWARE_INVALID_RAMDISK",
             Self::PayloadVerificationError => "PVM_FIRMWARE_PAYLOAD_VERIFICATION_FAILED",
             Self::SecretDerivationError => "PVM_FIRMWARE_SECRET_DERIVATION_FAILED",
+            Self::GuestBootFailed => "PVM_FIRMWARE_GUEST_BOOT_FAILED",
         }
     }
 }
@@ -75,6 +81,7 @@ limit_stack_size!(SIZE_4KB * 12);
 
 #[derive(Debug)]
 enum NextStage {
+    EfiBoot(EfiEntrypoint),
     LinuxBoot(usize),
     LinuxBootWithUart(usize),
 }
@@ -97,6 +104,12 @@ pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, _arg3: u64
                     jump_to_payload(ep, &slices)
                 }
             }
+            NextStage::EfiBoot(ep) if cfg!(feature = "supports_uefi") => {
+                let status = execute_efi_payload(ep);
+                error!("EFI payload returned: {status:?}");
+                RebootReason::GuestBootFailed
+            }
+            _ => RebootReason::InternalError,
         },
     };
 
@@ -138,7 +151,7 @@ fn main_wrapper<'a>(
     let mut slices = MemorySlices::new(fdt, payload, payload_size)?;
 
     // This wrapper allows main() to be blissfully ignorant of platform details.
-    let (next_bcc, debuggable_payload) = crate::main(
+    let (next_bcc, debuggable_payload, use_uefi) = crate::main(
         slices.fdt,
         slices.kernel,
         slices.ramdisk,
@@ -160,12 +173,20 @@ fn main_wrapper<'a>(
     })?;
     unshare_all_memory();
 
-    let next_stage = select_next_stage(slices.kernel, keep_uart);
+    let next_stage = select_next_stage(slices.kernel, keep_uart, use_uefi);
 
     Ok((next_stage, slices))
 }
 
-fn select_next_stage(kernel: &[u8], keep_uart: bool) -> NextStage {
+fn select_next_stage(kernel: &[u8], keep_uart: bool, use_uefi: bool) -> NextStage {
+    if cfg!(feature = "supports_uefi") && use_uefi {
+        // SAFETY: The returned `entrypoint` is valid to execute as the slice is valid data and
+        // `execute_efi` will unset SCTLR_EL1.WXN before branching to it.
+        if let Some(ep) = unsafe { locate_linux_efi_entrypoint(kernel) } {
+            return NextStage::EfiBoot(ep);
+        }
+        warn!("Failed to locate EFI entrypoint, falling back to legacy method");
+    }
     if keep_uart {
         NextStage::LinuxBootWithUart(kernel.as_ptr() as _)
     } else {
