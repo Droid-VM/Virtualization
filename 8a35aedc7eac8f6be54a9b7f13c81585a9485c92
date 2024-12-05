@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f44999f3_58506eaa",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-05T14:16:56Z",
+      "side": 1,
+      "message": "probably NIT picking. Can we keep the `trusted_props` as was in pre-I893604ce5fc code?\n```\nlet trusted_props \u003d if let Some(ref vendor_hashtree_digest) \u003d vendor_hashtree_digest {\n   vec![(cstr!(\"vendor_hashtree_descriptor_root_digest\"), vendor_hashtree_digest.as_slice())]\n    } else {\n        vec![]\n    };\n \n \n if want_updatable \u0026\u0026 is_secretkeeper_supported() {\n trusted_props.push(...);\n }\n ```\n \n to avoid overflowing vendor_hashtree_digest logic and we won\u0027t need `secretkeeper_public_key` variable then",
+      "range": {
+        "startLine": 903,
+        "startChar": 0,
+        "endLine": 903,
+        "endChar": 43
+      },
+      "revId": "8a35aedc7eac8f6be54a9b7f13c81585a9485c92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
