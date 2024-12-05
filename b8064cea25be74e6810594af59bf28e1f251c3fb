@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe5c3c5e_2e3ace63",
+        "filename": "guest/pvmfw/src/memory.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-05T23:00:26Z",
+      "side": 1,
+      "message": "should this have a scary name like `untrusted_fdt`? i\u0027d personally probably forget to be wary of it\n\nalso, add some comments about why the usages are OK, unless it is just the SAFETY comments",
+      "range": {
+        "startLine": 55,
+        "startChar": 12,
+        "endLine": 55,
+        "endChar": 15
+      },
+      "revId": "b8064cea25be74e6810594af59bf28e1f251c3fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3e9a861_647e91ed",
+        "filename": "guest/pvmfw/src/memory.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-05T23:00:26Z",
+      "side": 1,
+      "message": "should we reparse the fdt to include the changes from `sanitize_device_tree`? or, is the parsing lazy and it will automatically pick up changes to the byte slice?\n\nif the latter, it might be violating some rust `\u0026mut` requirements, but i haven\u0027t looked into the code for it, if all the data reads are from C, it might technically be OK",
+      "range": {
+        "startLine": 128,
+        "startChar": 18,
+        "endLine": 128,
+        "endChar": 21
+      },
+      "revId": "b8064cea25be74e6810594af59bf28e1f251c3fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
