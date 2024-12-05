@@ -63,6 +63,30 @@
       },
       "revId": "de78f447ef90d57cb25ae107a600e9562ab80837",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fd18038_325c00a1",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2024-12-05T23:50:50Z",
+      "side": 1,
+      "message": "Thanks for the link, Jeongik!\nAdding a couple more cross-build packages and `export`ing `$(dpkg-architecture -a arm64)` before `make`ing worked.\n\nDone.",
+      "parentUuid": "eb97880d_b49bf52f",
+      "range": {
+        "startLine": 264,
+        "startChar": 0,
+        "endLine": 264,
+        "endChar": 101
+      },
+      "revId": "de78f447ef90d57cb25ae107a600e9562ab80837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
