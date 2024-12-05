@@ -53,3 +53,19 @@ pub(crate) fn flush_region(start: usize, size: usize) {
         }
     }
 }
+
+/// Disable any W^X protection (should be enabled when Rust is first entered).
+pub fn disable_wxn() {
+    cfg_if::cfg_if! {
+        if #[cfg(target_arch = "aarch64")] {
+            const SCTLR_EL1_WXN: usize = 0x1 << 19;
+            let sctlr = crate::read_sysreg!("SCTLR_EL1") & !SCTLR_EL1_WXN;
+            // SAFETY: SCTLR_EL1.WXN has no visible effect on Rust.
+            unsafe { crate::write_sysreg!("SCTLR_EL1", sctlr) };
+            // Wait for the MSR to complete.
+            crate::isb!();
+        } else {
+            compile_error!("Unsupported target_arch")
+        }
+    }
+}
