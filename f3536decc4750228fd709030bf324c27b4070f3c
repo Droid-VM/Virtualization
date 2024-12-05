@@ -321,6 +321,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c38dd61_c570a703",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-05T00:34:39Z",
+      "side": 1,
+      "message": "how about something like \"This option is discouraged. Prefer to use the default authentication method, which is better tested and integrated into Android\"",
+      "parentUuid": "e1ba1999_0c9d2de0",
+      "range": {
+        "startLine": 144,
+        "startChar": 22,
+        "endLine": 144,
+        "endChar": 48
+      },
+      "revId": "f3536decc4750228fd709030bf324c27b4070f3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ce34916_052eaafb",
         "filename": "libs/libavf/include/android/virtualization.h",
         "patchSetId": 11
@@ -332,6 +356,30 @@
       "writtenOn": "2024-12-04T23:33:51Z",
       "side": 1,
       "message": "nit: I don\u0027t know what it stands for",
+      "range": {
+        "startLine": 158,
+        "startChar": 33,
+        "endLine": 158,
+        "endChar": 36
+      },
+      "revId": "f3536decc4750228fd709030bf324c27b4070f3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe5a9acb_b02b4981",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-05T00:34:39Z",
+      "side": 1,
+      "message": "\"intermediate physical addresses\"\n\nIt is actually an aaarch64 specific term. Maybe we can say \"guest memory address\" instead",
+      "parentUuid": "7ce34916_052eaafb",
       "range": {
         "startLine": 158,
         "startChar": 33,
