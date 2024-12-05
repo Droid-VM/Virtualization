@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b34c7a12_a556944c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2024-12-05T16:21:58Z",
+      "side": 1,
+      "message": "Thank you for a quick comment resolution and so well detailed documentation! Added a few smaller ones",
+      "revId": "a57072f88135c0ea59e871d6cf47be2d292fbf92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aed0c719_900c7837",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2024-12-05T16:21:58Z",
+      "side": 1,
+      "message": "or `instanceIdSize` is incorrect?",
+      "range": {
+        "startLine": 79,
+        "startChar": 40,
+        "endLine": 79,
+        "endChar": 89
+      },
+      "revId": "a57072f88135c0ea59e871d6cf47be2d292fbf92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80b23c13_1bf8cf51",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2024-12-05T16:21:58Z",
+      "side": 1,
+      "message": "is it possible to call this from a 32-bit process that is configuring a 64-bit VM? In that case the process\u0027 size_t is 32-bit and isn\u0027t enough to represent 64-bit offsets in the VM - better to use uint64_t explicitly for it (but only if this is actually a usecase)",
+      "range": {
+        "startLine": 174,
+        "startChar": 64,
+        "endLine": 174,
+        "endChar": 70
+      },
+      "revId": "a57072f88135c0ea59e871d6cf47be2d292fbf92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16e07f9a_89f33069",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2024-12-05T16:21:58Z",
+      "side": 1,
+      "message": "nit: typo",
+      "range": {
+        "startLine": 365,
+        "startChar": 39,
+        "endLine": 365,
+        "endChar": 40
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "dca56d60_fee25188",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 326,
+                "startChar": 0,
+                "endLine": 327,
+                "endChar": 0
+              },
+              "replacement": " * is synchronous and `AVirtualMachine_stop` may block.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 365,
+                "startChar": 0,
+                "endLine": 366,
+                "endChar": 0
+              },
+              "replacement": " * This operation is synchronous and `AVirtualMachine_destroy` may block.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a57072f88135c0ea59e871d6cf47be2d292fbf92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
