@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "326fb77d_44334a58",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-05T18:55:07Z",
+      "side": 1,
+      "message": "What\u0027s the idea behind this return type? You ignore the `Ok(_)` anyway so why not `-\u003e Result\u003c(), RebootReason\u003e`?\n\nAlso, I don\u0027t understand why failing to locate the EFI entrypoint is `Ok` instead of being an error?",
+      "range": {
+        "startLine": 322,
+        "startChar": 5,
+        "endLine": 322,
+        "endChar": 33
+      },
+      "revId": "406b68d6ad2e3586dfb5fe9242d9969425a55502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c2a4e3f_edcb214f",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-05T18:55:07Z",
+      "side": 1,
+      "message": "nit: `EFI payloads`",
+      "range": {
+        "startLine": 41,
+        "startChar": 48,
+        "endLine": 41,
+        "endChar": 81
+      },
+      "revId": "406b68d6ad2e3586dfb5fe9242d9969425a55502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37828320_f2ae113e",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-05T18:55:07Z",
+      "side": 1,
+      "message": "Drop this newline so that `rustfmt` can re-order the `use` as it pleases",
+      "revId": "406b68d6ad2e3586dfb5fe9242d9969425a55502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94565283_fb7e14cc",
+        "filename": "guest/pvmfw/src/uefi/stdio.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-05T18:55:07Z",
+      "side": 1,
+      "message": "nit: `init_simple_text_output_protocol` as I suppose there can be other implementations of \"`stdio`\" (the filed of the system table)?",
+      "range": {
+        "startLine": 21,
+        "startChar": 13,
+        "endLine": 21,
+        "endChar": 23
+      },
+      "revId": "406b68d6ad2e3586dfb5fe9242d9969425a55502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

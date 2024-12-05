@@ -1017,6 +1017,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "17c8f3d0_226620f2",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-05T18:55:07Z",
+      "side": 1,
+      "message": "The way you have introduced the function is not what I meant. The method should take `\u0026self`/`\u0026mut self` and act on the instead, NOT grab the global lock on the `static` instance i.e.\n```\nfn get_system_table_ptr(\u0026mut self) -\u003e ... {\n    self.system_table as *mut _\n}\n```\nWhich allows you to then use it from within other methods:\n```\nself.get_system_table_ptr()\n```\nor from functions:\n```\nEFI_LOADER.lock().get_system_table_ptr()\n```\n\nSimiarly, please also make `set_loaded_image_protocol()` a method as well.",
+      "parentUuid": "9e131b5a_20d2f8b6",
+      "range": {
+        "startLine": 421,
+        "startChar": 41,
+        "endLine": 421,
+        "endChar": 79
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bc0cb56a_85ef2b90",
         "filename": "guest/pvmfw/src/main.rs",
         "patchSetId": 1
@@ -2147,6 +2171,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "fedea78b_cc7073cc",
+      "range": {
+        "startLine": 529,
+        "startChar": 4,
+        "endLine": 529,
+        "endChar": 11
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03e32f81_3b450bd7",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-05T18:55:07Z",
+      "side": 1,
+      "message": "Please log something e.g.\n```\npanic!(\"EFI payload called exit()\");\n```",
+      "parentUuid": "53d9c8a9_d16e86c3",
       "range": {
         "startLine": 529,
         "startChar": 4,
