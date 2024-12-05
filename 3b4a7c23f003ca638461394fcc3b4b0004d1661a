@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab317ce7_4648f5c7",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-05T23:53:20Z",
+      "side": 1,
+      "message": "maybe give this a scarier name like `untrusted_fdt`",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 64,
+        "endChar": 7
+      },
+      "revId": "3b4a7c23f003ca638461394fcc3b4b0004d1661a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bb94e05_bc10c456",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-05T23:53:20Z",
+      "side": 1,
+      "message": "would it make sense to move the PCI and swiotlb setup into this block? i suppose it would have the side effect of hurting their test coverage, so maybe not worth it",
+      "range": {
+        "startLine": 168,
+        "startChar": 6,
+        "endLine": 168,
+        "endChar": 12
+      },
+      "revId": "3b4a7c23f003ca638461394fcc3b4b0004d1661a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
