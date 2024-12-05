@@ -30,6 +30,12 @@ use vmbase::{
 pub(crate) struct MemorySlices<'a> {
     pub fdt: &'a mut libfdt::Fdt,
     pub kernel: &'a [u8],
+    // TODO(nikolinailic): CHange code below to
+    // let kernel = if cfg!(feature = "supports_uefi") {
+    //     map_data(...)
+    //  } else {
+    //      map_rodata(...)
+    // }
     pub ramdisk: Option<&'a [u8]>,
 }
 
