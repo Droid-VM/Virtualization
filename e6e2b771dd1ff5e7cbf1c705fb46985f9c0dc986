@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06a157a4_031d9735",
+        "filename": "build/debian/kokoro/gcp_ubuntu_docker/x86_64/build.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1067793
+      },
+      "writtenOn": "2024-12-05T23:58:26Z",
+      "side": 1,
+      "message": "I\u0027m concerned that running builds as root could lead to bugs accidentally corrupting the file system. Would running builds as a non-root user with fakeroot be a safer approach? This would limit the potential damage from bugs.\n\nDoesn\u0027t need to happen now here, but could we discuss this further and potentially create a follow-up item to investigate the feasibility of this change?",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 31
+      },
+      "revId": "e6e2b771dd1ff5e7cbf1c705fb46985f9c0dc986",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
