@@ -236,6 +236,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b49af27_13f88cf6",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-05T12:40:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46a19049_21d1047c",
+      "range": {
+        "startLine": 43,
+        "startChar": 10,
+        "endLine": 43,
+        "endChar": 26
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84632d60_4ad156f4",
@@ -495,6 +519,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08455807_fb91def8",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-05T12:40:17Z",
+      "side": 1,
+      "message": "Thanks for making the CL! I reverted this change from my commit.",
+      "parentUuid": "13cb3fe6_cd1cfbe5",
+      "range": {
+        "startLine": 179,
+        "startChar": 15,
+        "endLine": 179,
+        "endChar": 83
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a79fa717_7a4bb51d",
@@ -707,6 +755,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fd3334f_c430ad75",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-05T12:40:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa6a0efd_c70e9164",
+      "range": {
+        "startLine": 381,
+        "startChar": 81,
+        "endLine": 381,
+        "endChar": 82
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1fc5cf09_113437a8",
@@ -909,6 +981,30 @@
       "side": 1,
       "message": "Any reason why this was introduced as a stand-alone function instead of a method of `EfiLoader`? Same for `get_rt_properties_table_ptr` and `push_to_config_table`.",
       "parentUuid": "c3c1904e_772d4405",
+      "range": {
+        "startLine": 421,
+        "startChar": 41,
+        "endLine": 421,
+        "endChar": 79
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e131b5a_20d2f8b6",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-05T12:40:17Z",
+      "side": 1,
+      "message": "`get_rt_properties_table_ptr` and `push_to_config_table` will be introduced in a separate CL.",
+      "parentUuid": "5b338c5d_488afe5d",
       "range": {
         "startLine": 421,
         "startChar": 41,
@@ -1391,6 +1487,30 @@
       "side": 1,
       "message": "Ack; AFAICT, the `configuration_table` field is never used in this CL so should we remove it and only introduce it once we start making use of it?",
       "parentUuid": "c0c77aeb_fc90230e",
+      "range": {
+        "startLine": 80,
+        "startChar": 25,
+        "endLine": 80,
+        "endChar": 28
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aed2378b_11f45800",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-05T12:40:17Z",
+      "side": 1,
+      "message": "Makes sense. I also removed the `RtPropertiesTable` and will add it in a CL which introduces the `ConfigurationTable`, as `RtPropertiesTable` is a configuration table entry. Done.",
+      "parentUuid": "2a5ccdb6_29289868",
       "range": {
         "startLine": 80,
         "startChar": 25,
@@ -2003,6 +2123,30 @@
       "side": 1,
       "message": "I think `panic!()` is more appropriate (given that we have nowhere to return to, from here), as it will log a message before internally calling `reboot()`. It\u0027s also slightly higher-level.",
       "parentUuid": "1e1d6c2a_5d72308b",
+      "range": {
+        "startLine": 529,
+        "startChar": 4,
+        "endLine": 529,
+        "endChar": 11
+      },
+      "revId": "84456228d2a28aea3be454d9d300c30a119d65ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53d9c8a9_d16e86c3",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-05T12:40:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fedea78b_cc7073cc",
       "range": {
         "startLine": 529,
         "startChar": 4,
