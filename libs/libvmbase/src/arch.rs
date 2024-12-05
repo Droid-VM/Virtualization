@@ -16,6 +16,7 @@
 
 #[cfg(target_arch = "aarch64")]
 pub mod aarch64;
+use crate::{isb, read_sysreg, write_sysreg};
 
 /// Write with well-defined compiled behavior.
 ///
@@ -52,4 +53,19 @@ pub(crate) fn flush_region(start: usize, size: usize) {
             compile_error!("Unsupported target_arch")
         }
     }
+}
+
+/// Disable SCTLR_EL1.WXN bit to enable R/W data mappings.
+///
+/// # Safety
+///
+/// `SCTLR_EL1` must be valid for writes.
+pub unsafe fn disable_wxn() {
+    const SCTLR_EL1_WXN: usize = 0x1 << 19;
+    let sctlr = read_sysreg!("SCTLR_EL1");
+    let sctlr = sctlr & !SCTLR_EL1_WXN;
+    // SAFETY: SCTLR_EL1.WXN has no visible effect on Rust.
+    unsafe { write_sysreg!("SCTLR_EL1", sctlr) };
+
+    isb!();
 }

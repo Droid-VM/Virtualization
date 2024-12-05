@@ -31,6 +31,7 @@ mod gpt;
 mod instance;
 mod memory;
 mod rollback;
+mod uefi;
 
 use crate::bcc::Bcc;
 use crate::dice::PartialInputs;
@@ -61,7 +62,7 @@ fn main<'a>(
     mut debug_policy: Option<&[u8]>,
     vm_dtbo: Option<&mut [u8]>,
     vm_ref_dt: Option<&[u8]>,
-) -> Result<(&'a [u8], bool), RebootReason> {
+) -> Result<(&'a [u8], bool, bool), RebootReason> {
     info!("pVM firmware");
     debug!("FDT: {:?}", untrusted_fdt.as_ptr());
     debug!("Signed kernel: {:?} ({:#x} bytes)", signed_kernel.as_ptr(), signed_kernel.len());
@@ -129,6 +130,9 @@ fn main<'a>(
         error!("Failed to compute partial DICE inputs: {e:?}");
         RebootReason::InternalError
     })?;
+
+    let use_uefi = verified_boot_data.has_capability(Capability::SupportsUefiBoot)
+        && cfg!(feature = "supports_uefi");
 
     let instance_hash = if cfg!(llpvm_changes) { Some(salt_from_instance_id(fdt)?) } else { None };
     let (new_instance, salt, defer_rollback_protection) = perform_rollback_protection(
@@ -199,8 +203,13 @@ fn main<'a>(
         RebootReason::InternalError
     })?;
 
-    info!("Starting payload...");
-    Ok((next_bcc, debuggable))
+    if use_uefi {
+        info!("Starting EFI payload...");
+    } else {
+        info!("Starting payload...");
+    }
+
+    Ok((next_bcc, debuggable, use_uefi))
 }
 
 // Get the "salt" which is one of the input for DICE derivation.
