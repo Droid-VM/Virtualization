@@ -2,8 +2,8 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
-rust_ffi_static {
-    name: "libpvmfw",
+rust_defaults {
+    name: "libpvmfw_defaults",
     crate_name: "pvmfw",
     defaults: ["vmbase_ffi_defaults"],
     srcs: ["src/main.rs"],
@@ -27,14 +27,27 @@ rust_ffi_static {
         "libpvmfw_fdt_template",
         "libservice_vm_version",
         "libsmccc",
+        "libspin_nostd",
         "libstatic_assertions",
         "libtinyvec_nostd",
+        "libuefi_raw_nostd",
         "libuuid_nostd",
         "libvirtio_drivers",
         "libvmbase",
         "libzerocopy_nostd",
         "libzeroize_nostd",
     ],
+}
+
+rust_ffi_static {
+    name: "libpvmfw",
+    defaults: ["libpvmfw_defaults"],
+}
+
+rust_ffi_static {
+    name: "libpvmfw_with_uefi_support",
+    defaults: ["libpvmfw_defaults"],
+    features: ["supports_uefi"],
 }
 
 // Generates an empty file.
@@ -270,14 +283,13 @@ cc_genrule {
     visibility: ["//visibility:private"],
 }
 
-cc_binary {
-    name: "pvmfw",
+cc_defaults {
+    name: "pvmfw_defaults",
     defaults: ["vmbase_elf_defaults"],
     srcs: [
         "idmap.S",
     ],
     static_libs: [
-        "libpvmfw",
         "libvmbase_dice_clear_memory",
     ],
     linker_scripts: [
@@ -295,10 +307,34 @@ cc_binary {
     installable: true,
 }
 
+cc_binary {
+    name: "pvmfw",
+    defaults: ["pvmfw_defaults"],
+    static_libs: ["libpvmfw"],
+}
+
 raw_binary {
     name: "pvmfw_bin",
     stem: "pvmfw.bin",
     src: ":pvmfw",
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+    },
+}
+
+cc_binary {
+    name: "pvmfw_with_uefi_support",
+    defaults: ["pvmfw_defaults"],
+    static_libs: ["libpvmfw_with_uefi_support"],
+}
+
+raw_binary {
+    name: "pvmfw_with_uefi_support_bin",
+    stem: "pvmfw_with_uefi_support.bin",
+    src: ":pvmfw_with_uefi_support",
     enabled: false,
     target: {
         android_arm64: {
