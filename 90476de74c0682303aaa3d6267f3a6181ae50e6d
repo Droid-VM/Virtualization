@@ -51,6 +51,29 @@
       "message": "Doesn\u0027t have to be address in this CL, but will you support applying our own pathches as well?",
       "revId": "90476de74c0682303aaa3d6267f3a6181ae50e6d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f40b9f1_5e1297fe",
+        "filename": "build/debian/kokoro/gcp_ubuntu_docker/aarch64/build.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-05T09:37:33Z",
+      "side": 1,
+      "message": "as we discussed in the chat, how about adding custom kernel option for aarch64 later? or having two targets(one for \u0027cloud\u0027 kernel, the other for custom kernel) WDYT @jiyong@google.com?",
+      "range": {
+        "startLine": 8,
+        "startChar": 26,
+        "endLine": 8,
+        "endChar": 30
+      },
+      "revId": "90476de74c0682303aaa3d6267f3a6181ae50e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
