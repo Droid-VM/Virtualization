@@ -24,7 +24,7 @@ use log::info;
 use log::warn;
 use vmbase::{
     layout::crosvm,
-    memory::{init_shared_pool, map_data, map_rodata, resize_available_memory},
+    memory::{init_shared_pool, map_data, map_data_noflush, map_rodata, resize_available_memory},
 };
 
 pub(crate) struct MemorySlices<'a> {
@@ -91,7 +91,12 @@ impl<'a> MemorySlices<'a> {
             return Err(RebootReason::InvalidPayload);
         };
 
-        map_rodata(kernel_start, kernel_size).map_err(|e| {
+        if cfg!(feature = "supports_uefi") {
+            map_data_noflush(kernel_start, kernel_size)
+        } else {
+            map_rodata(kernel_start, kernel_size)
+        }
+        .map_err(|e| {
             error!("Failed to map kernel range: {e}");
             RebootReason::InternalError
         })?;
@@ -101,6 +106,19 @@ impl<'a> MemorySlices<'a> {
         let kernel = unsafe { slice::from_raw_parts(kernel, kernel_size.into()) };
 
         let ramdisk = if let Some(r) = info.initrd_range {
+            if cfg!(feature = "supports_uefi") {
+                let kernel_bss_start = kernel_start + kernel_size.get();
+                if let Some(sz) = r.start.checked_sub(kernel_bss_start).and_then(NonZeroUsize::new)
+                {
+                    map_data_noflush(kernel_bss_start, sz).map_err(|e| {
+                        error!("Failed to map kernel bss range: {e}");
+                        RebootReason::InternalError
+                    })?;
+                } else {
+                    warn!("Distance between kernel and ramdisk not valid for EFI");
+                };
+            }
+
             debug!("Located ramdisk at {r:?}");
             let ramdisk_size = r.len().try_into().map_err(|_| {
                 error!("Invalid ramdisk size: {:#x}", r.len());

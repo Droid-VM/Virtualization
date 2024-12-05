@@ -31,6 +31,7 @@ mod gpt;
 mod helpers;
 mod instance;
 mod memory;
+mod uefi;
 
 use crate::bcc::Bcc;
 use crate::dice::PartialInputs;
@@ -65,7 +66,7 @@ fn main<'a>(
     ramdisk: Option<&[u8]>,
     current_bcc_handover: &[u8],
     mut debug_policy: Option<&[u8]>,
-) -> Result<(&'a [u8], bool), RebootReason> {
+) -> Result<(&'a [u8], bool, bool), RebootReason> {
     info!("pVM firmware");
     debug!("FDT: {:?}", fdt.as_ptr());
     debug!("Signed kernel: {:?} ({:#x} bytes)", signed_kernel.as_ptr(), signed_kernel.len());
@@ -125,6 +126,8 @@ fn main<'a>(
         error!("Failed to compute partial DICE inputs: {e:?}");
         RebootReason::InternalError
     })?;
+
+    let use_uefi = verified_boot_data.has_capability(Capability::SupportsUefiBoot);
 
     let instance_hash = if cfg!(llpvm_changes) { Some(salt_from_instance_id(fdt)?) } else { None };
     let defer_rollback_protection = should_defer_rollback_protection(fdt)?
@@ -247,7 +250,7 @@ fn main<'a>(
     })?;
 
     info!("Starting payload...");
-    Ok((next_bcc, debuggable))
+    Ok((next_bcc, debuggable, use_uefi))
 }
 
 fn check_dice_measurements_match_entry(
