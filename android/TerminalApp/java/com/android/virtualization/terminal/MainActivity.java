@@ -353,7 +353,10 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onDestroy() {
         getSystemService(AccessibilityManager.class).removeAccessibilityStateChangeListener(this);
-        VmLauncherService.stop(this);
+        Intent stopIntent = new Intent();
+        stopIntent.setClass(this, VmLauncherService.class);
+        stopIntent.setAction(VmLauncherService.ACTION_STOP_VM_LAUNCHER_SERVICE);
+        startService(stopIntent);
         super.onDestroy();
     }
 

@@ -147,11 +147,11 @@ build_rust_binary_and_copy() {
 		release_flag="--release"
 		artifact_mode=release
 	fi
-	RUSTFLAGS="-C linker=${arch}-linux-gnu-gcc" cargo build \
-		--target "${arch}-unknown-linux-gnu" \
+	RUSTFLAGS="-C linker=${arch}-linux-gnu-musl" cargo build \
+		--target "${arch}-unknown-linux-musl" \
 		--target-dir "${workdir}/$1" ${release_flag}
 	mkdir -p "${dst}/files/usr/local/bin/$1"
-	cp "${workdir}/$1/${arch}-unknown-linux-gnu/${artifact_mode}/$1" "${dst}/files/usr/local/bin/$1/AVF"
+	cp "${workdir}/$1/${arch}-unknown-linux-musl/${artifact_mode}/$1" "${dst}/files/usr/local/bin/$1/AVF"
 	chmod 777 "${dst}/files/usr/local/bin/$1/AVF"
 
 	mkdir -p "${dst}/files/usr/share/doc/$1"
@@ -192,6 +192,7 @@ copy_android_config() {
 	build_rust_binary_and_copy forwarder_guest
 	build_rust_binary_and_copy forwarder_guest_launcher
 	build_rust_binary_and_copy ip_addr_reporter
+	build_rust_binary_and_copy shutdown_runner
 }
 
 run_fai() {

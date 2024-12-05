@@ -144,7 +144,10 @@ public class VmLauncherService extends Service implements DebianServiceImpl.Debi
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (Objects.equals(intent.getAction(), ACTION_STOP_VM_LAUNCHER_SERVICE)) {
-            stopSelf();
+            // If there is no Debian service or it fails to shutdown, just stop the service.
+            if (mDebianService == null || !mDebianService.shutdownDebian()) {
+                stopSelf();
+            }
             return START_NOT_STICKY;
         }
         if (mVirtualMachine != null) {
@@ -297,8 +300,15 @@ public class VmLauncherService extends Service implements DebianServiceImpl.Debi
     }
 
     @Override
+    public void onActivePortsChanged(Set<String> oldPorts, Set<String> newPorts) {
+        mPortNotifier.onActivePortsChanged(oldPorts, newPorts);
+    }
+
+    @Override
     public void onDestroy() {
-        mPortNotifier.stop();
+        if (mPortNotifier != null) {
+            mPortNotifier.stop();
+        }
         getSystemService(NotificationManager.class).cancelAll();
         stopDebianServer();
         if (mVirtualMachine != null) {
