@@ -11,6 +11,7 @@ show_help() {
 	echo "Options:"
 	echo "-h         Print usage and this help message and exit."
 	echo "-a ARCH    Architecture of the image [default is host arch: $(uname -m)]"
+	echo "-k         Build and use our custom kernel [default is cloud kernel]"
 	echo "-r         Release mode build"
 	echo "-w         Save temp work directory [for debugging]"
 }
@@ -22,13 +23,16 @@ check_sudo() {
 }
 
 parse_options() {
-	while getopts "a:hrw" option; do
+	while getopts "a:hkrw" option; do
 		case ${option} in
 			h)
 				show_help ; exit
 				;;
 			a)
 				arch="$OPTARG"
+				;;
+			k)
+				use_custom_kernel=1
 				;;
 			r)
 				mode=release
@@ -117,6 +121,27 @@ install_prerequisites() {
 			linux-image-generic
 		)
 	fi
+
+	if [[ "$use_custom_kernel" -eq 1 ]]; then
+		packages+=(
+			bc
+			bison
+			debhelper
+			dh-exec
+			flex
+			gcc-12
+			kernel-wedge
+			libelf-dev
+			libpci-dev
+			lz4
+			pahole
+			python3-jinja2
+			python3-docutils
+			quilt
+			rsync
+		)
+	fi
+
 	DEBIAN_FRONTEND=noninteractive \
 	apt install --no-install-recommends --assume-yes "${packages[@]}"
 
@@ -194,6 +219,60 @@ copy_android_config() {
 	build_rust_binary_and_copy ip_addr_reporter
 }
 
+package_custom_kernel() {
+	if [ "$use_custom_kernel" -neq 1 ] ; then
+		echo "linux-headers-generic" >> "${config_space}/package_config/AVF"
+		return
+	fi
+
+	local abi_kver="6.1.0-28"
+	local debian_kver="6.1.119-1"
+	local custom_flavour="avf"
+
+	local debian_ksrc_url="https://deb.debian.org/debian/pool/main/l/linux/linux_${debian_kver}.debian.tar.xz"
+	local orig_ksrc_url="https://deb.debian.org/debian/pool/main/l/linux/linux_${debian_kver%-*}.orig.tar.xz"
+
+	# 1. Grab original kernel source, merge debian patches etc.
+	mkdir -p "${workdir}/kernel"
+	pushd "${workdir}/kernel" > /dev/null
+	wget "$orig_ksrc_url"
+	mkdir "debian-kernel-${abi_kver}"
+	pushd "debian-kernel-${abi_kver}" > /dev/null
+	wget "${debian_ksrc_url}" -O - | tar xJ
+	./debian/rules orig
+
+	# 2. Define our custom flavour (based on `cloud` flavour) and regenerate control file
+	cat > debian/config/${debian_arch}/config.${custom_flavour}-${debian_arch} <<EOF
+# TODO: Add our custom kernel config to this file
+EOF
+
+	sed -i -z "s;\[base\]\nflavours:;[base]\nflavours:\n ${custom_flavour}-${debian_arch};" debian/config/${debian_arch}/none/defines
+	cat >> debian/config/${debian_arch}/none/defines <<EOF
+[${custom_flavour}-${debian_arch}_image]
+configs:
+ config.cloud
+ ${debian_arch}/config.${custom_flavour}-${debian_arch}
+EOF
+	cat >> debian/config/${debian_arch}/defines <<EOF
+[${custom_flavour}-${debian_arch}_description]
+hardware: ${arch} AVF
+hardware-long: ${arch} Android Virtualization Framework
+EOF
+	./debian/rules debian/control || true
+
+	# 3. Build and package the kernel
+	./debian/rules source
+	make -j$(nproc) -f debian/rules.gen binary-arch_${debian_arch}_none_${custom_flavour}-${debian_arch}
+
+	# 4. Copy the kernel packages to localdebs and add package names to package_config
+	popd > /dev/null
+	cp "linux-headers-${abi_kver}-${custom_flavour}-${debian_arch}_${debian_kver}_${debian_arch}.deb" "${debian_cloud_image}/localdebs/"
+	cp "linux-image-${abi_kver}-${custom_flavour}-${debian_arch}-unsigned_${debian_kver}_${debian_arch}.deb" "${debian_cloud_image}/localdebs/"
+	popd > /dev/null
+	echo "linux-headers-${abi_kver}-${custom_flavour}-${debian_arch}" >> "${config_space}/package_config/AVF"
+	echo "linux-image-${abi_kver}-${custom_flavour}-${debian_arch}-unsigned" >> "${config_space}/package_config/AVF"
+}
+
 run_fai() {
 	local out="${built_image}"
 	make -C "${debian_cloud_image}" "image_bookworm_nocloud_${debian_arch}"
@@ -237,12 +316,14 @@ resources_dir=${debian_cloud_image}/src/debian_cloud_images/resources
 arch="$(uname -m)"
 mode=debug
 save_workdir=0
+use_custom_kernel=0
 
 parse_options "$@"
 check_sudo
 install_prerequisites
 download_debian_cloud_image
 copy_android_config
+package_custom_kernel
 run_fai
 fdisk -l "${built_image}"
 images=()
