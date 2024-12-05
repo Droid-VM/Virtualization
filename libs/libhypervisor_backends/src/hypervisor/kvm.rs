@@ -82,7 +82,12 @@ impl RegularKvmHypervisor {
     pub(super) const UUID: Uuid = uuid!("28b46fb6-2ec5-11e9-a9ca-4b564d003a74");
 }
 
-impl Hypervisor for RegularKvmHypervisor {}
+impl Hypervisor for RegularKvmHypervisor {
+    // TODO: temporary hack to address Trusty VM bootup issue. DO NOT MERGE!!!
+    fn as_mem_sharer(&self) -> Option<&dyn MemSharingHypervisor> {
+        None
+    }
+}
 
 pub(super) struct ProtectedKvmHypervisor;
 
