@@ -15,6 +15,7 @@
 //! This library provides wrappers around various hypervisor backends.
 
 #![no_std]
+#![feature(no_sanitize)]
 
 extern crate alloc;
 

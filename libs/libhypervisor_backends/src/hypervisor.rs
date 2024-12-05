@@ -117,6 +117,7 @@ pub fn get_mmio_guard() -> Option<&'static dyn MmioGuardedHypervisor> {
 }
 
 /// Gets the dynamic memory sharing hypervisor singleton, if any.
+#[no_sanitize(cfi, kcfi)]
 pub fn get_mem_sharer() -> Option<&'static dyn MemSharingHypervisor> {
     get_hypervisor().as_mem_sharer()
 }
