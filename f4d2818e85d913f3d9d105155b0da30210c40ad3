@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "152907f6_04997e47",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-06T14:19:46Z",
+      "side": 1,
+      "message": "Why are you duplicating this?",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 76
+      },
+      "revId": "f4d2818e85d913f3d9d105155b0da30210c40ad3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5770bce5_13258520",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-06T14:19:46Z",
+      "side": 1,
+      "message": "This is not needed and will actually prevent the EFI stub from running as, by reverting to the \"static\" PTs, it will effectively unmap the kernel from the MMU.",
+      "range": {
+        "startLine": 164,
+        "startChar": 4,
+        "endLine": 164,
+        "endChar": 34
+      },
+      "revId": "f4d2818e85d913f3d9d105155b0da30210c40ad3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0463449_a00a452f",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-06T14:19:46Z",
+      "side": 1,
+      "message": "From [here](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3389807/comment/326fb77d_44334a58/):\n\n\u003e What\u0027s the idea behind this return type? You ignore the `Ok(_)` anyway so why not `-\u003e Result\u003c(), RebootReason\u003e`?\n\u003e \n\u003e Also, I don\u0027t understand why failing to locate the EFI entrypoint is `Ok` instead of being an error?\n\nI\u0027d return `InvalidPayload` if `locate_linux_efi_entrypoint(...).is_none()` and introduce a new `RebootReason` variant (e.g. `GuestBootFailed`) if the EFI payload returned to us.",
+      "range": {
+        "startLine": 323,
+        "startChar": 2,
+        "endLine": 323,
+        "endChar": 33
+      },
+      "revId": "f4d2818e85d913f3d9d105155b0da30210c40ad3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adb66bdc_2f0b4a0c",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-06T14:19:46Z",
+      "side": 1,
+      "message": "From [here](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3389807/comment/3c2a4e3f_edcb214f/):\n\n\u003e nit: `EFI payloads`",
+      "range": {
+        "startLine": 26,
+        "startChar": 48,
+        "endLine": 26,
+        "endChar": 82
+      },
+      "revId": "f4d2818e85d913f3d9d105155b0da30210c40ad3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdebb80d_f382835b",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-06T14:19:46Z",
+      "side": 1,
+      "message": "Take `\u0026self`, as discussed [here](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3389807/comment/ac7489b9_e084dadf/).",
+      "range": {
+        "startLine": 32,
+        "startChar": 27,
+        "endLine": 32,
+        "endChar": 29
+      },
+      "revId": "f4d2818e85d913f3d9d105155b0da30210c40ad3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce4fb90d_38db4601",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-06T14:19:46Z",
+      "side": 1,
+      "message": "I wonder if there\u0027s a \"less unsafe\" (but still not safe) way to achieve this than `transmute` ... Let me investigate.",
+      "range": {
+        "startLine": 43,
+        "startChar": 13,
+        "endLine": 43,
+        "endChar": 46
+      },
+      "revId": "f4d2818e85d913f3d9d105155b0da30210c40ad3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec7cfdae_7cc11e81",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-06T14:19:46Z",
+      "side": 1,
+      "message": "Ack",
+      "range": {
+        "startLine": 45,
+        "startChar": 12,
+        "endLine": 45,
+        "endChar": 17
+      },
+      "revId": "f4d2818e85d913f3d9d105155b0da30210c40ad3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de3458fd_f3dfd810",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-06T14:19:46Z",
+      "side": 1,
+      "message": "This operation is safe, as we discussed.",
+      "range": {
+        "startLine": 51,
+        "startChar": 41,
+        "endLine": 51,
+        "endChar": 57
+      },
+      "revId": "f4d2818e85d913f3d9d105155b0da30210c40ad3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90d913fe_54b94ff0",
+        "filename": "guest/pvmfw/src/uefi/linux.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-06T14:19:46Z",
+      "side": 1,
+      "message": "From [here](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3389807/comment/51f903c4_fa397faa/):\n\n\u003e What about `pe_ep_offset \u003e\u003d payload_size`?",
+      "range": {
+        "startLine": 59,
+        "startChar": 9,
+        "endLine": 59,
+        "endChar": 49
+      },
+      "revId": "f4d2818e85d913f3d9d105155b0da30210c40ad3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
