@@ -22,6 +22,30 @@
       },
       "revId": "e6e2b771dd1ff5e7cbf1c705fb46985f9c0dc986",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d26edaac_16b9228e",
+        "filename": "build/debian/kokoro/gcp_ubuntu_docker/x86_64/build.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2024-12-06T00:54:07Z",
+      "side": 1,
+      "message": "I agree.  The `build_in_container.sh` script runs a `--privileged` container with full access to `/dev`, so the potential damage extends to my gLinux host machine too!\n\nThis is worth investigating -- I can look into this next.",
+      "parentUuid": "06a157a4_031d9735",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 31
+      },
+      "revId": "e6e2b771dd1ff5e7cbf1c705fb46985f9c0dc986",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
