@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1b11d02_62c98278",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-06T01:20:41Z",
+      "side": 1,
+      "message": "Thanks! I just leave a few questions.",
+      "revId": "ac62a8b842a3a8c423a049d1c820d89f54c7e775",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3730e910_ff308536",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-06T01:20:41Z",
+      "side": 1,
+      "message": "if we want to use more recent kernel like 6.11 or something, do we need to upgrade python as well?",
+      "range": {
+        "startLine": 234,
+        "startChar": 1,
+        "endLine": 235,
+        "endChar": 79
+      },
+      "revId": "ac62a8b842a3a8c423a049d1c820d89f54c7e775",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52699a0d_1c34570f",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-06T01:20:41Z",
+      "side": 1,
+      "message": "out of curiosity, do we need to sign kernel image in the future?",
+      "range": {
+        "startLine": 287,
+        "startChar": 32,
+        "endLine": 287,
+        "endChar": 41
+      },
+      "revId": "ac62a8b842a3a8c423a049d1c820d89f54c7e775",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

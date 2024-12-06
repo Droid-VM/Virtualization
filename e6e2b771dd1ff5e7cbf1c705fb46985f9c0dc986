@@ -46,6 +46,30 @@
       },
       "revId": "e6e2b771dd1ff5e7cbf1c705fb46985f9c0dc986",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "000b29e0_5c189a8d",
+        "filename": "build/debian/kokoro/gcp_ubuntu_docker/x86_64/build.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-06T01:20:41Z",
+      "side": 1,
+      "message": "One of reasons which even docker needs privileged is to mount images(rootfs) during the build. But it would be great if we could give fine-grained permission to docker instead of giving all to them..",
+      "parentUuid": "d26edaac_16b9228e",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 31
+      },
+      "revId": "e6e2b771dd1ff5e7cbf1c705fb46985f9c0dc986",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
