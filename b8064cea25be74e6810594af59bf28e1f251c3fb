@@ -45,6 +45,30 @@
       },
       "revId": "b8064cea25be74e6810594af59bf28e1f251c3fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f56d8d98_ef7f45bd",
+        "filename": "guest/pvmfw/src/memory.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-06T18:59:37Z",
+      "side": 1,
+      "message": "nevermind, i think i was just confused. `sanitize_device_tree` is taking in a `\u0026mut Fdt` now",
+      "parentUuid": "b3e9a861_647e91ed",
+      "range": {
+        "startLine": 128,
+        "startChar": 18,
+        "endLine": 128,
+        "endChar": 21
+      },
+      "revId": "b8064cea25be74e6810594af59bf28e1f251c3fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
