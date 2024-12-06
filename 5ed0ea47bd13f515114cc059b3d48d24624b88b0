@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74ea0765_93e01d4e",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-06T16:23:13Z",
+      "side": 1,
+      "message": "This can\u0027t be safe, because you don\u0027t know whether `efi_payload_start` points at a function - the function needs to be unsafe if you\u0027re going to take a `usize`.",
+      "revId": "5ed0ea47bd13f515114cc059b3d48d24624b88b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e85122df_651c5f8b",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-06T16:23:13Z",
+      "side": 1,
+      "message": "This isn\u0027t sufficient - it needs to be a location in memory which is executable, has the ABI you specified, and is valid indefinitely.",
+      "revId": "5ed0ea47bd13f515114cc059b3d48d24624b88b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e81a0949_c0e0e867",
+        "filename": "guest/pvmfw/src/uefi/linux.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-06T16:23:13Z",
+      "side": 1,
+      "message": "This function can\u0027t be safe, because it dereferences based on the values passed in as inputs.\n\nIf the function is only safe to call on certain argument values, you need to make the function unsafe and document what needs to be true of the arguments.\n\nYou could make this safe by taking in a slice rather than a pair of `usize`",
+      "revId": "5ed0ea47bd13f515114cc059b3d48d24624b88b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d6336d8_027fd495",
+        "filename": "guest/pvmfw/src/uefi/linux.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-06T16:23:13Z",
+      "side": 1,
+      "message": "You don\u0027t have any basis for assuming this.",
+      "revId": "5ed0ea47bd13f515114cc059b3d48d24624b88b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "703d40e8_c3193312",
+        "filename": "guest/pvmfw/src/uefi/linux.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-06T16:23:13Z",
+      "side": 1,
+      "message": "You don\u0027t have any basis for assuming this.",
+      "revId": "5ed0ea47bd13f515114cc059b3d48d24624b88b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91d59e83_a1ea5423",
+        "filename": "guest/pvmfw/src/uefi/linux.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-06T16:23:13Z",
+      "side": 1,
+      "message": "You don\u0027t have any basis for assuming this.",
+      "revId": "5ed0ea47bd13f515114cc059b3d48d24624b88b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
