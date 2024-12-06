@@ -79,6 +79,12 @@ interface ITestService {
     /** Read a line from /dev/console */
     String readLineFromConsole();
 
+    /** Read payload's rollback protected data, this is _only_ done for testing  */
+    byte[32] insecurelyReadPayloadRpData();
+
+    /** Request VM to write payload's rollback protected data, this is _only_ done for testing  */
+    void insecurelyWritePayloadRpData(in byte[32] data);
+
     /**
      * Request the service to exit, triggering the termination of the VM. This may cause any
      * requests in flight to fail.

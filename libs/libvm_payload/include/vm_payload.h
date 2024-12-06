@@ -260,4 +260,18 @@ size_t AVmAttestationResult_getCertificateAt(const AVmAttestationResult* _Nonnul
                                              size_t index, void* _Nullable data, size_t size)
         __INTRODUCED_IN(__ANDROID_API_V__);
 
+/**
+ * Write `data`, on behalf of the client, to Secretkeeper.
+ * This is confidential to the pVM and protected via appropriate DICE policy
+ * on the payload's DICE chain.
+ */
+bool AVmPayload_writeRollbackProtectedSecret(const void* _Nonnull secret);
+
+/**
+ * Read payload's `data` written on behalf of the payload in Secretkeeper.
+ * The returned value can be null either due to no value written or because
+ * Android maliciously deleting the value - Secretkeeper deletion are not authenticated.
+ */
+int AVmPayload_readRollbackProtectedSecret(void* _Nonnull secret);
+
 __END_DECLS
