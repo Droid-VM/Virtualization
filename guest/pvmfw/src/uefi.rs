@@ -16,6 +16,7 @@
 
 mod boot_services;
 pub mod linux;
+mod runtime_services;
 mod stdio;
 
 use crate::entry::FIRMWARE_REVISION;
@@ -24,6 +25,7 @@ use core::ptr::{addr_of_mut, null, null_mut};
 use spin::mutex::SpinMutex;
 use uefi_raw::protocol::console::SimpleTextOutputProtocol;
 use uefi_raw::table::boot::BootServices;
+use uefi_raw::table::runtime::RuntimeServices;
 use uefi_raw::table::system::SystemTable;
 use uefi_raw::table::{Header, Revision};
 use uefi_raw::Status;
@@ -38,6 +40,7 @@ static EFI_LOADER: SpinMutex<EfiLoader> = SpinMutex::new(EfiLoader::new());
 struct EfiLoader {
     pub system_table: SystemTable,
     boot_services: BootServices,
+    runtime_services: RuntimeServices,
     simple_text_output_protocol: SimpleTextOutputProtocol,
     firmware_vendor: [u16; 6],
 }
@@ -76,10 +79,17 @@ impl EfiLoader {
         };
 
         let boot_services = boot_services::init_boot_services();
+        let runtime_services = runtime_services::init_runtime_services();
         let simple_text_output_protocol = stdio::init_simple_text_output_protocol();
         let firmware_vendor = Self::FIRMWARE_VENDOR;
 
-        Self { system_table, boot_services, simple_text_output_protocol, firmware_vendor }
+        Self {
+            system_table,
+            boot_services,
+            runtime_services,
+            simple_text_output_protocol,
+            firmware_vendor,
+        }
     }
 
     fn get_system_table_ptr(&mut self) -> *mut SystemTable {
@@ -88,6 +98,7 @@ impl EfiLoader {
 
     fn patch_pointers(&mut self) {
         self.system_table.boot_services = addr_of_mut!(self.boot_services) as _;
+        self.system_table.runtime_services = addr_of_mut!(self.runtime_services) as _;
         self.system_table.firmware_vendor = addr_of_mut!(self.firmware_vendor) as _;
         self.system_table.stdout = addr_of_mut!(self.simple_text_output_protocol) as _;
         self.system_table.stderr = addr_of_mut!(self.simple_text_output_protocol) as _;
