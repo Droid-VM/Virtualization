@@ -16,6 +16,7 @@
 
 mod boot_services;
 pub mod linux;
+mod loaded_image;
 mod runtime_services;
 mod stdio;
 
@@ -44,6 +45,7 @@ struct EfiLoader {
     boot_services: BootServices,
     runtime_services: RuntimeServices,
     simple_text_output_protocol: SimpleTextOutputProtocol,
+    pub loaded_image_protocol: LoadedImageProtocol,
     firmware_vendor: [u16; 6],
 }
 
@@ -83,6 +85,7 @@ impl EfiLoader {
         let boot_services = boot_services::init_boot_services();
         let runtime_services = runtime_services::init_runtime_services();
         let simple_text_output_protocol = stdio::init_simple_text_output_protocol();
+        let loaded_image_protocol = loaded_image::init_loaded_image_protocol();
         let firmware_vendor = Self::FIRMWARE_VENDOR;
 
         Self {
@@ -90,6 +93,7 @@ impl EfiLoader {
             boot_services,
             runtime_services,
             simple_text_output_protocol,
+            loaded_image_protocol,
             firmware_vendor,
         }
     }
@@ -98,12 +102,21 @@ impl EfiLoader {
         &mut self.system_table as _
     }
 
-    fn patch_pointers(&mut self) {
+    fn set_loaded_image_protocol(&mut self, payload_start: usize, payload_size: usize) {
+        self.loaded_image_protocol.image_base = payload_start as *const _;
+        let image_size = payload_size.try_into().unwrap();
+        self.loaded_image_protocol.image_size = image_size;
+    }
+
+    fn patch_pointers(&mut self, payload_start: usize, payload_size: usize) {
         self.system_table.boot_services = &mut self.boot_services as *mut _;
         self.system_table.runtime_services = &mut self.runtime_services as *mut _;
         self.system_table.firmware_vendor = &mut self.firmware_vendor as *mut _;
         self.system_table.stdout = &mut self.simple_text_output_protocol as *mut _;
         self.system_table.stderr = &mut self.simple_text_output_protocol as *mut _;
+        self.loaded_image_protocol.system_table = &mut self.system_table as *mut _;
+
+        self.set_loaded_image_protocol(payload_start, payload_size);
     }
 }
 
@@ -112,8 +125,8 @@ impl EfiLoader {
 unsafe impl Send for EfiLoader {}
 
 // Initialize parameters passed to the EFI stub by the EFI loader.
-pub fn init_efi() {
-    EFI_LOADER.lock().patch_pointers();
+pub fn init_efi(payload_start: usize, payload_size: usize) {
+    EFI_LOADER.lock().patch_pointers(payload_start, payload_size);
 }
 
 /// # Safety

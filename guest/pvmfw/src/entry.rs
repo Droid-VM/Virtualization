@@ -321,7 +321,7 @@ fn jump_to_payload_with_efi_stub(
     payload_start: usize,
     payload_size: usize,
 ) -> Result<(), RebootReason> {
-    init_efi();
+    init_efi(payload_start, payload_size);
     if let Some(ep) = locate_linux_efi_entrypoint(payload_start, payload_size) {
         let status = execute_efi_payload(ep);
         error!("EFI payload returned: {:?}", status);
