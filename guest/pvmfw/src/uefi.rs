@@ -15,11 +15,13 @@
 //! Support for EFI payloads.
 
 pub mod linux;
+mod stdio;
 
 use crate::entry::FIRMWARE_REVISION;
 use core::mem;
 use core::ptr::{addr_of_mut, null, null_mut};
 use spin::mutex::SpinMutex;
+use uefi_raw::protocol::console::SimpleTextOutputProtocol;
 use uefi_raw::table::system::SystemTable;
 use uefi_raw::table::{Header, Revision};
 use uefi_raw::Handle;
@@ -34,6 +36,7 @@ static EFI_LOADER: SpinMutex<EfiLoader> = SpinMutex::new(EfiLoader::new());
 /// Represents the UEFI structures used for booting EFI payloads.
 struct EfiLoader {
     pub system_table: SystemTable,
+    simple_text_output_protocol: SimpleTextOutputProtocol,
     firmware_vendor: [u16; 6],
 }
 
@@ -70,13 +73,16 @@ impl EfiLoader {
             configuration_table: null_mut(),
         };
 
+        let simple_text_output_protocol = stdio::init_simple_text_output_protocol();
         let firmware_vendor = Self::FIRMWARE_VENDOR;
 
-        Self { system_table, firmware_vendor }
+        Self { system_table, simple_text_output_protocol, firmware_vendor }
     }
 
     fn patch_pointers(&mut self) {
         self.system_table.firmware_vendor = addr_of_mut!(self.firmware_vendor).cast();
+        self.system_table.stdout = addr_of_mut!(self.simple_text_output_protocol).cast();
+        self.system_table.stderr = addr_of_mut!(self.simple_text_output_protocol).cast();
     }
 
     fn get_system_table_ptr(&mut self) -> *mut SystemTable {
