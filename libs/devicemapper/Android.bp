@@ -28,6 +28,7 @@ rust_defaults {
 rust_library {
     name: "libdm_rust",
     defaults: ["libdm_rust.defaults"],
+    host_supported: true,
 }
 
 rust_test {
