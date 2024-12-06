@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dc155a7_12dd7cfb",
+        "filename": "guest/pvmfw/src/exceptions.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-06T16:13:05Z",
+      "side": 1,
+      "message": "Thanks for noticing! Done.",
+      "parentUuid": "cabd0498_5ec75253",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 65
+      },
+      "revId": "74802cec73b50c4e5e0971ad4711ddcc5b33cc23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b95f727b_a37a35aa",
@@ -438,6 +462,30 @@
       "side": 1,
       "message": "Makes sense but we typically have exactly one newline between \"top-level\" entity such as functions, AFAIU. BTW, could you also fix `guest/pvmfw/src/uefi/stdio.rs`?",
       "parentUuid": "2f4d37c4_db75cef0",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 1
+      },
+      "revId": "74802cec73b50c4e5e0971ad4711ddcc5b33cc23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b3e90dd_49ec35b8",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-06T16:13:05Z",
+      "side": 1,
+      "message": "Thanks for the explanation. Done!",
+      "parentUuid": "9f48fea4_c176500e",
       "range": {
         "startLine": 116,
         "startChar": 0,

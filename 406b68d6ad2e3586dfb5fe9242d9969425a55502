@@ -112,6 +112,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbd00978_d5e5b462",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-06T16:13:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37828320_f2ae113e",
+      "revId": "406b68d6ad2e3586dfb5fe9242d9969425a55502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94565283_fb7e14cc",
@@ -125,6 +143,30 @@
       "writtenOn": "2024-12-05T18:55:07Z",
       "side": 1,
       "message": "nit: `init_simple_text_output_protocol` as I suppose there can be other implementations of \"`stdio`\" (the filed of the system table)?",
+      "range": {
+        "startLine": 21,
+        "startChar": 13,
+        "endLine": 21,
+        "endChar": 23
+      },
+      "revId": "406b68d6ad2e3586dfb5fe9242d9969425a55502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19500176_5c94c39c",
+        "filename": "guest/pvmfw/src/uefi/stdio.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-06T16:13:05Z",
+      "side": 1,
+      "message": "Agreed. Done.",
+      "parentUuid": "94565283_fb7e14cc",
       "range": {
         "startLine": 21,
         "startChar": 13,
