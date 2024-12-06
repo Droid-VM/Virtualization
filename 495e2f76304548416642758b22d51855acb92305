@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0aa98037_47bdc149",
+        "filename": "guest/trusty/security_vm/launcher/src/main.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1070453
+      },
+      "writtenOn": "2024-12-06T20:10:46Z",
+      "side": 1,
+      "message": "Is there a mechanism for learning the CID of the created VM? This is necessary in order to connect to services exposed over virtio-socket. The vmclient library exposes the cid directly:\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/libvmclient/src/lib.rs;l\u003d251;drc\u003df3536decc4750228fd709030bf324c27b4070f3c\n\nand also offers this convenience function for binder connection setup:\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/libvmclient/src/lib.rs;l\u003d297;drc\u003df3536decc4750228fd709030bf324c27b4070f3c",
+      "revId": "495e2f76304548416642758b22d51855acb92305",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21af1e86_3aff4cc7",
+        "filename": "guest/trusty/security_vm/launcher/src/main.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1070453
+      },
+      "writtenOn": "2024-12-06T20:10:46Z",
+      "side": 1,
+      "message": "Once the VM is started, is there a mechanism for connecting to virtio-socket",
+      "revId": "495e2f76304548416642758b22d51855acb92305",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
