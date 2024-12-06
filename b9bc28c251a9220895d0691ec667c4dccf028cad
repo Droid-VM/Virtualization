@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11a62937_51c7c0c2",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-12-06T12:07:38Z",
+      "side": 1,
+      "message": "sorry, `writable` is only in the Rust code. Added.",
+      "parentUuid": "ab5c00ea_235053f7",
+      "revId": "b9bc28c251a9220895d0691ec667c4dccf028cad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9bd10159_28007acc",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-12-05T22:27:30Z",
       "side": 1,
       "message": "maybe worth noting that \"started\" doesn\u0027t necessarily mean the VM has booted or even run any code. i\u0027m not sure what good definition is. maybe \"blocks until the virtual machine is initialized and free to start executing code\"",
+      "range": {
+        "startLine": 305,
+        "startChar": 71,
+        "endLine": 306,
+        "endChar": 21
+      },
+      "revId": "b9bc28c251a9220895d0691ec667c4dccf028cad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acdfaaac_8b6ffa14",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-12-06T12:07:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9bd10159_28007acc",
       "range": {
         "startLine": 305,
         "startChar": 71,
