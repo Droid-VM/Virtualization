@@ -107,7 +107,7 @@ pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, _arg3: u64
                 }
             }
             NextStage::EfiBoot(ep) if cfg!(feature = "supports_uefi") => {
-                init_efi();
+                init_efi(slices.kernel);
                 let status = execute_efi_payload(ep);
                 error!("EFI payload returned: {status:?}");
                 RebootReason::GuestBootFailed
