@@ -1,0 +1,85 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9be6a93_c2ab53ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-06T15:38:26Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "02edd5e84e10bc7c6bc3badaf85a89cba53b59cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77255e93_a6266303",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsDiskResizeActivity.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-06T15:38:26Z",
+      "side": 1,
+      "message": "nits: getUsableSpace? https://developer.android.com/reference/java/io/File#getUsableSpace()",
+      "range": {
+        "startLine": 76,
+        "startChar": 53,
+        "endLine": 76,
+        "endChar": 65
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e069bb1a_ec60a3ea",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsDiskResizeActivity.kt",
+              "range": {
+                "startLine": 76,
+                "startChar": 0,
+                "endLine": 77,
+                "endChar": 0
+              },
+              "replacement": "            bytesToMb(Environment.getDataDirectory().getUsableSpace()) and (diskSizeStepMb - 1).inv()\n"
+            }
+          ]
+        }
+      ],
+      "revId": "02edd5e84e10bc7c6bc3badaf85a89cba53b59cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b049c2d_3fc896b8",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsDiskResizeActivity.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-06T15:38:26Z",
+      "side": 1,
+      "message": "out of curiosity, should it be multiple of diskSizeStepMb? (it is anyway rounded down in mbToProgress below, though)",
+      "range": {
+        "startLine": 76,
+        "startChar": 12,
+        "endLine": 76,
+        "endChar": 99
+      },
+      "revId": "02edd5e84e10bc7c6bc3badaf85a89cba53b59cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
