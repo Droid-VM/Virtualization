@@ -54,7 +54,6 @@ import java.net.InetSocketAddress;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Objects;
-import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -151,7 +150,8 @@ public class VmLauncherService extends Service implements DebianServiceImpl.Debi
             Log.d(TAG, "VM instance is already started");
             return START_NOT_STICKY;
         }
-        mExecutorService = Executors.newCachedThreadPool();
+        mExecutorService =
+                Executors.newCachedThreadPool(new TerminalThreadFactory(getApplicationContext()));
 
         InstalledImage image = InstalledImage.getDefault(this);
         ConfigJson json = ConfigJson.from(this, image.getConfigPath());
@@ -170,9 +170,7 @@ public class VmLauncherService extends Service implements DebianServiceImpl.Debi
             android.os.Trace.endSection();
             android.os.Trace.beginAsyncSection("debianBoot", 0);
         } catch (VirtualMachineException e) {
-            Log.e(TAG, "cannot create runner", e);
-            stopSelf();
-            return START_NOT_STICKY;
+            throw new RuntimeException("cannot create runner", e);
         }
         mVirtualMachine = runner.getVm();
         mResultReceiver =
