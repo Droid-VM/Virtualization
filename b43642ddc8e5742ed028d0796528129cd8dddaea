@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0291896b_a992a878",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-12-06T12:05:23Z",
+      "side": 1,
+      "message": "MAYBE: %s/`Stop validating that the image only contains one single property\ndescriptor as it doesn\u0027t provide security guarantees`/Remove the assumption that the image should contain a single property descriptor ... and update the tests to prevent a verification error/ \n\nQ: Is there any documentation that has to be updated ?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 0
+      },
+      "revId": "b43642ddc8e5742ed028d0796528129cd8dddaea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
