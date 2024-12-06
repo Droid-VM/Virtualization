@@ -16,11 +16,13 @@
 
 mod boot_services;
 pub mod linux;
+mod loaded_image;
 mod runtime_services;
 mod stdio;
 
 use crate::entry::FIRMWARE_REVISION;
 use crate::uefi::linux::RT_PROPERTIES_TABLE_GUID;
+use crate::uefi::loaded_image::LOADED_IMAGE_PROTOCOL_GUID;
 use crate::uefi::runtime_services::RtPropertiesTable;
 use alloc::vec;
 use alloc::vec::Vec;
@@ -31,6 +33,7 @@ use core::ptr::{addr_of_mut, null, null_mut, NonNull};
 use runtime_services::init_rt_properties_table;
 use spin::mutex::SpinMutex;
 use uefi_raw::protocol::console::SimpleTextOutputProtocol;
+use uefi_raw::protocol::loaded_image::LoadedImageProtocol;
 use uefi_raw::table::boot::{BootServices, MemoryType};
 use uefi_raw::table::configuration::ConfigurationTable;
 use uefi_raw::table::runtime::RuntimeServices;
@@ -50,6 +53,7 @@ struct EfiLoader {
     boot_services: BootServices,
     runtime_services: RuntimeServices,
     simple_text_output_protocol: SimpleTextOutputProtocol,
+    loaded_image_protocol: LoadedImageProtocol,
     firmware_vendor: [u16; 6],
     rt_properties_table: RtPropertiesTable,
     configuration_table: Vec<ConfigurationTable>,
@@ -91,6 +95,7 @@ impl EfiLoader {
         let boot_services = boot_services::init_boot_services();
         let runtime_services = runtime_services::init_runtime_services();
         let simple_text_output_protocol = stdio::init_simple_text_output_protocol();
+        let loaded_image_protocol = loaded_image::init_loaded_image_protocol();
         let firmware_vendor = Self::FIRMWARE_VENDOR;
         let rt_properties_table = init_rt_properties_table();
         let configuration_table = Vec::new();
@@ -100,13 +105,14 @@ impl EfiLoader {
             boot_services,
             runtime_services,
             simple_text_output_protocol,
+            loaded_image_protocol,
             firmware_vendor,
             rt_properties_table,
             configuration_table,
         }
     }
 
-    fn patch_pointers(&mut self) {
+    fn patch_pointers(&mut self, payload: &[u8]) {
         self.system_table.boot_services = addr_of_mut!(self.boot_services).cast();
         self.system_table.runtime_services = addr_of_mut!(self.runtime_services).cast();
         self.system_table.firmware_vendor = addr_of_mut!(self.firmware_vendor).cast();
@@ -115,6 +121,15 @@ impl EfiLoader {
 
         let rt_properties_table = addr_of_mut!(self.rt_properties_table).cast();
         let _ = self.insert_config_table(RT_PROPERTIES_TABLE_GUID, rt_properties_table);
+
+        self.loaded_image_protocol.system_table = addr_of_mut!(self.system_table).cast();
+        self.set_loaded_image_protocol(payload);
+    }
+
+    fn set_loaded_image_protocol(&mut self, payload: &[u8]) {
+        self.loaded_image_protocol.image_base = payload.as_ptr().cast();
+        let image_size = payload.len().try_into().unwrap();
+        self.loaded_image_protocol.image_size = image_size;
     }
 
     fn uses_image_handle(&self, handle: Handle) -> bool {
@@ -164,8 +179,8 @@ impl EfiLoader {
     }
 
     pub fn get_protocol(&mut self, guid: Guid) -> Option<*mut c_void> {
-        #[allow(clippy::match_single_binding)]
         match guid {
+            LOADED_IMAGE_PROTOCOL_GUID => Some(addr_of_mut!(self.loaded_image_protocol).cast()),
             _ => None,
         }
     }
@@ -186,9 +201,9 @@ impl EfiLoader {
 // SAFETY: `Send` is not relevant as pvmfw is single-threaded.
 unsafe impl Send for EfiLoader {}
 
-pub fn init_efi() {
+pub fn init_efi(payload: &[u8]) {
     let mut efi_loader = EFI_LOADER.lock();
-    efi_loader.patch_pointers();
+    efi_loader.patch_pointers(payload);
 }
 
 pub type EfiEntrypoint = extern "efiapi" fn(Handle, *mut SystemTable) -> uefi_raw::Status;
