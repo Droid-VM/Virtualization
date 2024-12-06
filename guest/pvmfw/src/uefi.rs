@@ -16,6 +16,7 @@
 
 mod boot_services;
 pub mod linux;
+mod loaded_image;
 mod runtime_services;
 mod stdio;
 
@@ -24,6 +25,7 @@ use core::mem;
 use core::ptr::{addr_of_mut, null, null_mut};
 use spin::mutex::SpinMutex;
 use uefi_raw::protocol::console::SimpleTextOutputProtocol;
+use uefi_raw::protocol::loaded_image::LoadedImageProtocol;
 use uefi_raw::table::boot::BootServices;
 use uefi_raw::table::runtime::RuntimeServices;
 use uefi_raw::table::system::SystemTable;
@@ -42,6 +44,7 @@ struct EfiLoader {
     boot_services: BootServices,
     runtime_services: RuntimeServices,
     simple_text_output_protocol: SimpleTextOutputProtocol,
+    loaded_image_protocol: LoadedImageProtocol,
     firmware_vendor: [u16; 6],
 }
 
@@ -81,6 +84,7 @@ impl EfiLoader {
         let boot_services = boot_services::init_boot_services();
         let runtime_services = runtime_services::init_runtime_services();
         let simple_text_output_protocol = stdio::init_simple_text_output_protocol();
+        let loaded_image_protocol = loaded_image::init_loaded_image_protocol();
         let firmware_vendor = Self::FIRMWARE_VENDOR;
 
         Self {
@@ -88,6 +92,7 @@ impl EfiLoader {
             boot_services,
             runtime_services,
             simple_text_output_protocol,
+            loaded_image_protocol,
             firmware_vendor,
         }
     }
@@ -96,12 +101,22 @@ impl EfiLoader {
         &mut self.system_table as _
     }
 
-    fn patch_pointers(&mut self) {
+    fn set_loaded_image_protocol(&mut self, payload: &[u8]) {
+        self.loaded_image_protocol.image_base = payload.as_ptr().cast();
+        let image_size = payload.len().try_into().unwrap();
+        self.loaded_image_protocol.image_size = image_size;
+    }
+
+    fn patch_pointers(&mut self, payload: &[u8]) {
         self.system_table.boot_services = addr_of_mut!(self.boot_services) as _;
         self.system_table.runtime_services = addr_of_mut!(self.runtime_services) as _;
         self.system_table.firmware_vendor = addr_of_mut!(self.firmware_vendor) as _;
         self.system_table.stdout = addr_of_mut!(self.simple_text_output_protocol) as _;
         self.system_table.stderr = addr_of_mut!(self.simple_text_output_protocol) as _;
+
+        self.loaded_image_protocol.system_table = &mut self.system_table as *mut _;
+
+        self.set_loaded_image_protocol(payload);
     }
 }
 
@@ -110,8 +125,9 @@ impl EfiLoader {
 unsafe impl Send for EfiLoader {}
 
 // Initialize parameters passed to the EFI stub by the EFI loader.
-pub fn init_efi() {
-    EFI_LOADER.lock().patch_pointers();
+pub fn init_efi(payload: &[u8]) {
+    let mut efi_loader = EFI_LOADER.lock();
+    efi_loader.patch_pointers(payload);
 }
 
 pub type EfiEntrypoint = extern "efiapi" fn(usize, *mut SystemTable) -> uefi_raw::Status;
