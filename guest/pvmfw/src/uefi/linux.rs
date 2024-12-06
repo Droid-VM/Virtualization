@@ -14,7 +14,92 @@
 
 //! Support for Linux kernel image.
 
-use log::error;
+use super::EfiEntrypoint;
+use core::mem;
+use core::ptr;
+use zerocopy::{FromBytes, FromZeroes};
+
+#[repr(C, packed)]
+#[derive(FromBytes, FromZeroes)]
+struct KernelHeader {
+    code0_word0: u16,
+    code0_word1: u16,
+    code1: u32,
+    image_load_offset: u64,
+    kernel_size: u64,
+    kernel_flags: u64,
+    reserved0: u64,
+    reserved1: u64,
+    reserved2: u64,
+    magic: u32,
+    pe_header_offset: u32,
+}
+
+impl KernelHeader {
+    const EFI_SIGNATURE: u16 = u16::from_be_bytes([b'M', b'Z']);
+    const MAGIC: u32 = u32::from_be_bytes([b'A', b'R', b'M', 0x64]);
+}
+
+#[repr(C, packed)]
+#[derive(FromBytes, FromZeroes)]
+struct PeHeader {
+    magic: u32,
+    machine: u16,
+    number_of_sections: u16,
+    time_date_stamp: u32,
+    pointer_to_symbol_table: u32,
+    number_of_symbols: u32,
+    size_of_optional_header: u16,
+    characteristics: u16,
+}
+
+impl PeHeader {
+    const MAGIC: u32 = 0x4550;
+}
+
+#[repr(C, packed)]
+#[derive(FromBytes, FromZeroes)]
+struct PeOptHeader {
+    format: u16,
+    major_linker_version: u8,
+    minor_linker_version: u8,
+    size_of_code: u32,
+    size_of_initialized_data: u32,
+    size_of_uninitialized_data: u32,
+    address_of_entry_point: u32,
+    base_of_code: u32,
+    image_base: u64,
+    section_alignment: u32,
+    file_alignment: u32,
+    major_operating_system_version: u16,
+    minor_operating_system_version: u16,
+    major_image_version: u16,
+    minor_image_version: u16,
+    major_subsystem_version: u16,
+    minor_subsystem_version: u16,
+    win32_version_value: u32,
+    size_of_image: u32,
+    size_of_headers: u32,
+    check_sum: u32,
+    subsystem: u16,
+    dll_characteristics: u16,
+    size_of_stack_reserve: u64,
+    size_of_stack_commit: u64,
+    size_of_heap_reserve: u64,
+    size_of_heap_commit: u64,
+    loader_flags: u32,
+    number_of_rva_and_sizes: u32,
+    export_table: u64,
+    import_table: u64,
+    resource_table: u64,
+    exception_table: u64,
+    certification_table: u64,
+    base_relocation_table: u64,
+}
+
+impl PeOptHeader {
+    const FORMAT: u16 = 0x020b;
+}
 
 /// ARM specific configuration of the Linux kernel image.
 /// See https://docs.kernel.org/arch/arm64/booting.html#call-the-kernel-image and
@@ -22,44 +107,49 @@ use log::error;
 /// for further information.
 ///
 /// Function returns the address of the EFI payload entrypoint.
-pub fn locate_linux_efi_entrypoint(payload_start: usize, payload_size: usize) -> Option<usize> {
-    // Count where the actual EFI payload starts.
-    const KERNEL_HEADER_SIZE: usize = 64;
-    const PE_HEADER_SIZE: usize = 24;
-    const PE_MAGIC: u32 = 0x4550;
-    const PE_OPT_MAGIC_PE32PLUS: u16 = 0x020b;
-    const PE32PLUS_FIELD_AOEP: usize = 16;
-    const MIN_PAYLOAD_SIZE: usize = KERNEL_HEADER_SIZE + PE_HEADER_SIZE + PE32PLUS_FIELD_AOEP;
-
-    if payload_size < MIN_PAYLOAD_SIZE {
-        error!("Payload size is out of the bounds!");
+pub fn locate_linux_efi_entrypoint(payload: &[u8]) -> Option<EfiEntrypoint> {
+    let header = KernelHeader::ref_from_prefix(payload)?;
+    {
+        // TODO: remove
+        let magic = header.magic;
+        assert_eq!(magic, KernelHeader::MAGIC);
+        let signature = header.code0_word0;
+        assert_eq!(signature, KernelHeader::EFI_SIGNATURE);
+    }
+    if header.magic != KernelHeader::MAGIC || header.code0_word0 != KernelHeader::EFI_SIGNATURE {
         return None;
     }
 
-    let pe_header = payload_start.wrapping_add(KERNEL_HEADER_SIZE);
-    // SAFETY: 'pe_header' points to the valid location in memory.
-    let pe_magic = unsafe { *(pe_header as *const u32) };
-    if pe_magic != PE_MAGIC {
-        error!("PE MAGIC is not correct: {pe_magic:#x}, expected: {PE_MAGIC:#x}");
+    let pe_header_offset = header.pe_header_offset.try_into().unwrap();
+    let pe_header = PeHeader::ref_from_prefix(&payload[pe_header_offset..])?;
+    {
+        // TODO: remove
+        let magic = pe_header.magic;
+        assert_eq!(magic, PeHeader::MAGIC);
+    }
+    if pe_header.magic != PeHeader::MAGIC {
         return None;
     }
 
-    let pe_opt_header = pe_header.wrapping_add(PE_HEADER_SIZE);
-    // SAFETY: 'pe_opt_header' points to the valid location in memory.
-    let pe_opt_magic_pe32plus = unsafe { *(pe_opt_header as *const u16) };
-    if pe_opt_magic_pe32plus != PE_OPT_MAGIC_PE32PLUS {
-        error!("PE MAGIC PE32+ is not correct: {pe_opt_magic_pe32plus:#x}");
+    let opt_header_offset = pe_header_offset + mem::size_of::<PeHeader>();
+    let opt_header = PeOptHeader::ref_from_prefix(&payload[opt_header_offset..])?;
+    {
+        // TODO: remove
+        let format = opt_header.format;
+        assert_eq!(format, PeOptHeader::FORMAT);
+    }
+    if opt_header.format != PeOptHeader::FORMAT {
         return None;
     }
 
-    let pe_ep_offset_field = pe_opt_header.wrapping_add(PE32PLUS_FIELD_AOEP);
-    // SAFETY: 'pe_ep_offset_field' points to the valid location in memory.
-    let pe_ep_offset = usize::try_from(unsafe { *(pe_ep_offset_field as *const u32) }).unwrap();
+    let entrypoint_offset = usize::try_from(opt_header.address_of_entry_point).unwrap();
+    let _ = payload.get(entrypoint_offset)?;
 
-    if pe_ep_offset >= payload_size {
-        error!("PE entrypoint offset is out of the bounds: {pe_ep_offset:#x}");
-        return None;
+    let entrypoint = ptr::addr_of!(payload[entrypoint_offset]).cast::<u32>();
+    if !entrypoint.is_aligned() {
+        return None; // Invalid PC.
     }
 
-    Some(payload_start.wrapping_add(pe_ep_offset))
+    // SAFETY: TODO
+    Some(unsafe { mem::transmute::<*const u32, EfiEntrypoint>(entrypoint) })
 }

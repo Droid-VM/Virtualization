@@ -18,6 +18,7 @@ use crate::config;
 use crate::memory;
 use crate::uefi::execute_efi_payload;
 use crate::uefi::linux::locate_linux_efi_entrypoint;
+use crate::uefi::EfiEntrypoint;
 use core::arch::asm;
 use core::mem::size_of;
 use core::ops::Range;
@@ -81,6 +82,7 @@ limit_stack_size!(SIZE_4KB * 12);
 
 #[derive(Debug)]
 enum NextStage {
+    EfiBoot(EfiEntrypoint),
     LinuxBoot(usize),
     LinuxBootWithUart(usize),
 }
@@ -103,6 +105,12 @@ pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, _arg3: u64
                     jump_to_payload(fdt_address, ep, bcc)
                 }
             }
+            NextStage::EfiBoot(ep) if cfg!(feature = "supports_uefi") => {
+                let status = execute_efi_payload(ep);
+                error!("EFI payload returned: {status:?}");
+                RebootReason::GuestBootFailed
+            }
+            _ => RebootReason::InternalError,
         },
     };
 
@@ -169,12 +177,18 @@ fn main_wrapper(
     })?;
     unshare_all_memory();
 
-    let next_stage = select_next_stage(slices.kernel, keep_uart);
+    let next_stage = select_next_stage(slices.kernel, keep_uart, use_uefi);
 
     Ok((next_stage, next_bcc))
 }
 
-fn select_next_stage(kernel: &[u8], keep_uart: bool) -> NextStage {
+fn select_next_stage(kernel: &[u8], keep_uart: bool, use_uefi: bool) -> NextStage {
+    if cfg!(feature = "supports_uefi") && use_uefi {
+        if let Some(ep) = locate_linux_efi_entrypoint(kernel) {
+            return NextStage::EfiBoot(ep);
+        }
+        warn!("Failed to locate EFI entrypoint, falling back to legacy method");
+    }
     if keep_uart {
         NextStage::LinuxBootWithUart(kernel.as_ptr() as _)
     } else {

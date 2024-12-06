@@ -16,7 +16,6 @@
 
 pub mod linux;
 
-use core::mem;
 use core::ptr::null_mut;
 use spin::mutex::SpinMutex;
 use uefi_raw::table::system::SystemTable;
@@ -48,14 +47,9 @@ impl EfiLoader {
 // with single-threaded system so this operation has no meaningful impact on Rust.
 unsafe impl Send for EfiLoader {}
 
-pub fn execute_efi_payload(efi_payload_start: usize) -> Status {
-    let efi_entry: extern "efiapi" fn(
-        image_handle: usize,
-        system_table: *mut SystemTable,
-    ) -> uefi_raw::Status =
-    // SAFETY: 'efi_stub_payload_start' points to the valid location in memory.
-    unsafe { mem::transmute(efi_payload_start) };
+pub type EfiEntrypoint = extern "efiapi" fn(usize, *mut SystemTable) -> uefi_raw::Status;
 
+pub fn execute_efi_payload(entrypoint: EfiEntrypoint) -> Status {
     // TODO(ptosi): Parse EFI header and map executable & data sections separately.
     // Until then, allow the EFI payload to run from R/W data mappings.
     const SCTLR_EL1_WXN: usize = 0x1 << 19;
@@ -67,5 +61,5 @@ pub fn execute_efi_payload(efi_payload_start: usize) -> Status {
     isb!();
 
     let system_table = EFI_LOADER.lock().get_system_table_ptr();
-    efi_entry(EfiLoader::EFI_IMAGE_HANDLE, system_table)
+    entrypoint(EfiLoader::EFI_IMAGE_HANDLE, system_table)
 }
