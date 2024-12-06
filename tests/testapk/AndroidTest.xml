@@ -39,4 +39,18 @@
         <option name="shell-timeout" value="300000" />
         <option name="test-timeout" value="300000" />
     </test>
+<<<<<<< HEAD   (e1758a Run VirtualMachineService only for Microdroid)
+||||||| BASE
+
+    <!-- Controller that will skip the module if a native bridge situation is detected -->
+    <!-- For example: module wants to run arm and device is x86 -->
+    <object type="module_controller" class="com.android.tradefed.testtype.suite.module.NativeBridgeModuleController" />
+=======
+
+    <!-- Controller that will skip the module if a native bridge situation is detected -->
+    <!-- For example: module wants to run arm and device is x86 -->
+    <object type="module_controller" class="com.android.tradefed.testtype.suite.module.NativeBridgeModuleController" />
+
+    <!-- PLACEHOLDER_FOR_ANNOTATION -->
+>>>>>>> CHANGE (57de25 Separate CTS/VTS/general tests into different modules)
 </configuration>
