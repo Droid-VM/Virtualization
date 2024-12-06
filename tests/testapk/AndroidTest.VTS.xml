@@ -16,7 +16,8 @@
 <configuration description="Runs Microdroid device-side tests.">
     <include name="testconfig.xml" />
     <target_preparer class="com.android.tradefed.targetprep.suite.SuiteApkInstaller">
-        <option name="test-file-name" value="MicrodroidTestApp.apk" />
+        <option name="test-file-name" value="MicrodroidTestApp.VTS.apk" />
         <option name="test-file-name" value="MicrodroidVmShareApp.apk" />
     </target_preparer>
+    <option name="include-annotation" value="com.android.compatibility.common.util.VsrTest" />
 </configuration>

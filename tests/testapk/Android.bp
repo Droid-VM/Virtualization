@@ -15,11 +15,6 @@ android_app_certificate {
 
 java_defaults {
     name: "MicrodroidTestAppsDefaults",
-    test_suites: [
-        "cts",
-        "vts",
-        "general-tests",
-    ],
     static_libs: [
         "com.android.microdroid.testservice-java",
         "com.android.microdroid.test.vmshare_service-java",
@@ -64,17 +59,44 @@ java_defaults {
     min_sdk_version: "33",
 }
 
+filegroup {
+    name: "MicrodroidTestAppCommonTestConfig",
+    srcs: ["testconfig.xml"],
+}
+
+DATA = [
+    ":MicrodroidTestAppCommonTestConfig",
+    ":MicrodroidTestAppUpdated",
+    ":MicrodroidVmShareApp",
+    ":test_microdroid_vendor_image",
+    ":test_microdroid_vendor_image_unsigned",
+]
+
 android_test {
     name: "MicrodroidTestApp",
     defaults: ["MicrodroidVersionsTestAppDefaults"],
     manifest: "AndroidManifestV5.xml",
-    // Defined in ../vmshareapp/Android.bp
-    data: [
-        ":MicrodroidTestAppUpdated",
-        ":MicrodroidVmShareApp",
-        ":test_microdroid_vendor_image",
-        ":test_microdroid_vendor_image_unsigned",
-    ],
+    test_suites: ["general-tests"],
+    test_config: "AndroidTest.xml",
+    data: DATA,
+}
+
+android_test {
+    name: "MicrodroidTestApp.CTS",
+    defaults: ["MicrodroidVersionsTestAppDefaults"],
+    manifest: "AndroidManifestV5.xml",
+    test_suites: ["cts"],
+    test_config: "AndroidTest.CTS.xml",
+    data: DATA,
+}
+
+android_test {
+    name: "MicrodroidTestApp.VTS",
+    defaults: ["MicrodroidVersionsTestAppDefaults"],
+    manifest: "AndroidManifestV5.xml",
+    test_suites: ["vts"],
+    test_config: "AndroidTest.VTS.xml",
+    data: DATA,
 }
 
 android_test_helper_app {
