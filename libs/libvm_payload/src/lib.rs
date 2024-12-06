@@ -566,3 +566,58 @@ pub extern "C" fn AVmPayload_getEncryptedStoragePath() -> *const c_char {
         ptr::null()
     }
 }
+
+/// Write `data`, on behalf of the payload, to Secretkeeper.
+///
+/// # Safety
+///
+/// Behavior is undefined if any of the following conditions are violated:
+///
+/// * `data` must be [valid] 32 bytes.
+#[no_mangle]
+pub unsafe extern "C" fn AVmPayload_writeRollbackProtectedSecret(data: *const u8) {
+    initialize_logging();
+    // Safety: See the requirements on `data` above
+    let data = unsafe { std::slice::from_raw_parts(data, 32) };
+    unwrap_or_abort(try_writing_payload_rollback_protected_data(data.try_into().unwrap()));
+}
+
+/// Read `data` written on behalf of the payload in Secretkeeper.
+///
+/// # Safety
+///
+/// Behavior is undefined if any of the following conditions are violated:
+///
+/// * `data` must be [valid] for writes of 32 bytes.
+///
+/// [valid]: ptr#safety
+#[no_mangle]
+pub unsafe extern "C" fn AVmPayload_readRollbackProtectedSecret(data: *mut u8) {
+    initialize_logging();
+    let rp = unwrap_or_abort(try_read_rollback_protected_data());
+    if let Some(rp) = rp {
+        // SAFETY: See the requirements on `secret` above
+        unsafe {
+            ptr::copy_nonoverlapping(rp.as_ptr(), data, 32);
+        }
+    }
+}
+
+fn try_writing_payload_rollback_protected_data(data: &[u8; 32]) -> Result<()> {
+    get_vm_payload_service()?
+        .writePayloadRpData(data)
+        .context("Cannot write payload rollback protected data")?;
+    Ok(())
+}
+
+fn try_read_rollback_protected_data() -> Result<Option<[u8; 32]>> {
+    let rp = get_vm_payload_service()?
+        .readPayloadRpData()
+        .context("Cannot read rollback protected data")?;
+    ensure!(
+        rp.is_none() || rp.unwrap().len() == 32,
+        "Returned data has {} bytes, expected 32 bytes",
+        rp.unwrap().len(),
+    );
+    Ok(rp)
+}
