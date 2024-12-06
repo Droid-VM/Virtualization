@@ -16,17 +16,22 @@
 
 mod boot_services;
 pub mod linux;
+mod runtime_services;
 mod stdio;
 
 use crate::entry::FIRMWARE_REVISION;
+use crate::uefi::linux::RT_PROPERTIES_TABLE_GUID;
+use crate::uefi::runtime_services::RtPropertiesTable;
 use alloc::vec::Vec;
 use core::ffi::c_void;
 use core::mem;
 use core::ptr::{addr_of_mut, null, null_mut};
+use runtime_services::init_rt_properties_table;
 use spin::mutex::SpinMutex;
 use uefi_raw::protocol::console::SimpleTextOutputProtocol;
 use uefi_raw::table::boot::BootServices;
 use uefi_raw::table::configuration::ConfigurationTable;
+use uefi_raw::table::runtime::RuntimeServices;
 use uefi_raw::table::system::SystemTable;
 use uefi_raw::table::{Header, Revision};
 use uefi_raw::{Guid, Handle, Status};
@@ -41,8 +46,10 @@ static EFI_LOADER: SpinMutex<EfiLoader> = SpinMutex::new(EfiLoader::new());
 struct EfiLoader {
     pub system_table: SystemTable,
     boot_services: BootServices,
+    runtime_services: RuntimeServices,
     simple_text_output_protocol: SimpleTextOutputProtocol,
     firmware_vendor: [u16; 6],
+    rt_properties_table: RtPropertiesTable,
     configuration_table: Vec<ConfigurationTable>,
 }
 
@@ -80,24 +87,32 @@ impl EfiLoader {
         };
 
         let boot_services = boot_services::init_boot_services();
+        let runtime_services = runtime_services::init_runtime_services();
         let simple_text_output_protocol = stdio::init_simple_text_output_protocol();
         let firmware_vendor = Self::FIRMWARE_VENDOR;
+        let rt_properties_table = init_rt_properties_table();
         let configuration_table = Vec::new();
 
         Self {
             system_table,
             boot_services,
+            runtime_services,
             simple_text_output_protocol,
             firmware_vendor,
+            rt_properties_table,
             configuration_table,
         }
     }
 
     fn patch_pointers(&mut self) {
         self.system_table.boot_services = addr_of_mut!(self.boot_services).cast();
+        self.system_table.runtime_services = addr_of_mut!(self.runtime_services).cast();
         self.system_table.firmware_vendor = addr_of_mut!(self.firmware_vendor).cast();
         self.system_table.stdout = addr_of_mut!(self.simple_text_output_protocol).cast();
         self.system_table.stderr = addr_of_mut!(self.simple_text_output_protocol).cast();
+
+        let rt_properties_table = addr_of_mut!(self.rt_properties_table).cast();
+        let _ = self.insert_config_table(RT_PROPERTIES_TABLE_GUID, rt_properties_table);
     }
 
     fn get_system_table_ptr(&mut self) -> *mut SystemTable {
