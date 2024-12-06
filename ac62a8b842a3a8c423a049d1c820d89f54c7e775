@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "54632214_f5870daf",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2024-12-06T02:12:05Z",
+      "side": 1,
+      "message": "Yes, I tried building 6.6 LTS, for which Debian build scripts depend on a module that was introduced in Python 3.11.\n\nI could install `python3.11` on Ubuntu 22.04, but the build scripts didn\u0027t pick it up. We would probably have to change the `update-alternatives` for `python3`, but that might break system Python packages, so I didn\u0027t mess with it.",
+      "parentUuid": "3730e910_ff308536",
+      "range": {
+        "startLine": 234,
+        "startChar": 1,
+        "endLine": 235,
+        "endChar": 79
+      },
+      "revId": "ac62a8b842a3a8c423a049d1c820d89f54c7e775",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52699a0d_1c34570f",
         "filename": "build/debian/build.sh",
         "patchSetId": 9
@@ -54,6 +78,30 @@
       "writtenOn": "2024-12-06T01:20:41Z",
       "side": 1,
       "message": "out of curiosity, do we need to sign kernel image in the future?",
+      "range": {
+        "startLine": 287,
+        "startChar": 32,
+        "endLine": 287,
+        "endChar": 41
+      },
+      "revId": "ac62a8b842a3a8c423a049d1c820d89f54c7e775",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b88f9afc_901797e4",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2024-12-06T02:12:05Z",
+      "side": 1,
+      "message": "Debian\u0027s own `cloud` images also have the `unsigned` suffix, e.g., https://ftp.debian.org/debian/pool/main/l/linux/linux-image-6.1.0-28-cloud-amd64-unsigned_6.1.119-1_amd64.deb, so I think we don\u0027t have to?\n\n@uekawa@google.com do you have any thoughts on this?",
+      "parentUuid": "52699a0d_1c34570f",
       "range": {
         "startLine": 287,
         "startChar": 32,
