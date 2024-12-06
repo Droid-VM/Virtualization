@@ -52,6 +52,22 @@ typedef enum AVmAttestationStatus : int32_t {
 } AVmAttestationStatus;
 
 /**
+ * Introduced in API 36.
+ * Status type returned while accessing RollbackProtectedSecret.
+ */
+typedef enum AccessRollbackProtectedSecretStatus : int32_t {
+    /** Requested access succeeded */
+    ACCESS_OK = 0,
+    /**
+     * Relevant Entry not found. This can happen either due to no value was ever written or because
+     * Android maliciously deleted the value (Secretkeeper deletion are not authenticated).
+     */
+    ENTRY_NOT_FOUND = -1,
+    /** Access failed, this could be due to no support from Hardware (missing Secretkeeper HAL) */
+    ACCESS_FAILED = -2,
+} AccessRollbackProtectedSecretStatus;
+
+/**
  * Notifies the host that the payload is ready.
  *
  * If the host app has set a `VirtualMachineCallback` for the VM, its
@@ -259,5 +275,30 @@ size_t AVmAttestationResult_getCertificateCount(const AVmAttestationResult* _Non
 size_t AVmAttestationResult_getCertificateAt(const AVmAttestationResult* _Nonnull result,
                                              size_t index, void* _Nullable data, size_t size)
         __INTRODUCED_IN(__ANDROID_API_V__);
+
+/**
+ * Write `data`, on behalf of the client, to Secretkeeper.
+ * This is confidential to the pVM and protected via appropriate DICE policy
+ * on the payload's DICE chain.
+ *
+ * \param data A pointer to data to be written.
+ * \param size The number of bytes to be written. Only the value 32 is supported.
+ *
+ *  \return Appropriate AccessRollbackProtectedSecretStatus is returned.
+ */
+AccessRollbackProtectedSecretStatus AVmPayload_writeRollbackProtectedSecret(
+        const void* _Nonnull data, size_t size) __INTRODUCED_IN(36);
+/**
+ * Read payload's `data` written on behalf of the payload in Secretkeeper.
+ *
+ * \param data pointer to size bytes where the requested data is written.
+ * \param size The number of bytes to be read. Only the value 32 is supported.
+ *
+ *  \return Appropriate AccessRollbackProtectedSecretStatus is returned.
+ */
+AccessRollbackProtectedSecretStatus AVmPayload_readRollbackProtectedSecret(void* _Nonnull secret,
+                                                                           size_t size)
+        __INTRODUCED_IN(36);
+;
 
 __END_DECLS

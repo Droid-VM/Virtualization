@@ -16,14 +16,14 @@
 
 use android_system_virtualization_payload::aidl::android::system::virtualization::payload:: IVmPayloadService::{
     IVmPayloadService, ENCRYPTEDSTORE_MOUNTPOINT, VM_APK_CONTENTS_PATH,
-    VM_PAYLOAD_SERVICE_SOCKET_NAME, AttestationResult::AttestationResult,
+    VM_PAYLOAD_SERVICE_SOCKET_NAME, AttestationResult::AttestationResult
 };
 use anyhow::{bail, ensure, Context, Result};
 use binder::{
     unstable_api::{new_spibinder, AIBinder},
     Strong, ExceptionCode,
 };
-use log::{error, info, LevelFilter};
+use log::{error, info, LevelFilter, debug};
 use rpcbinder::{RpcServer, RpcSession};
 use openssl::{ec::EcKey, sha::sha256, ecdsa::EcdsaSig};
 use std::convert::Infallible;
@@ -37,10 +37,11 @@ use std::sync::{
     LazyLock,
     Mutex,
 };
-use vm_payload_status_bindgen::AVmAttestationStatus;
+use vm_payload_status_bindgen::{AVmAttestationStatus, AccessRollbackProtectedSecretStatus};
 
 /// Maximum size of an ECDSA signature for EC P-256 key is 72 bytes.
 const MAX_ECDSA_P256_SIGNATURE_SIZE: usize = 72;
+const RP_DATA_SIZE: usize = 32;
 
 static VM_APK_CONTENTS_PATH_C: LazyLock<CString> =
     LazyLock::new(|| CString::new(VM_APK_CONTENTS_PATH).expect("CString::new failed"));
@@ -565,4 +566,100 @@ pub extern "C" fn AVmPayload_getEncryptedStoragePath() -> *const c_char {
     } else {
         ptr::null()
     }
+}
+
+/// Write `data`, on behalf of the payload, to Secretkeeper.
+///
+/// # Safety
+///
+/// Behavior is undefined if any of the following conditions are violated:
+///
+/// * `data` must be [valid] for reads of 32 bytes.
+///
+/// [valid]: ptr#safety
+#[no_mangle]
+pub unsafe extern "C" fn AVmPayload_writeRollbackProtectedSecret(
+    data: *const u8,
+    size: usize,
+) -> AccessRollbackProtectedSecretStatus {
+    initialize_logging();
+    if size != RP_DATA_SIZE {
+        error!(
+            "Requesting writing {} bytes, while only {} bytes are supported",
+            size, RP_DATA_SIZE
+        );
+        return AccessRollbackProtectedSecretStatus::ACCESS_FAILED;
+    }
+    // Safety: See the requirements on `data` above
+    let data = unsafe { std::slice::from_raw_parts(data, size) };
+    match try_writing_payload_rollback_protected_data(data.try_into().unwrap()) {
+        Ok(()) => AccessRollbackProtectedSecretStatus::ACCESS_OK,
+        Err(e) => {
+            error!("Failed to write rollback protected data: {e:?}");
+            AccessRollbackProtectedSecretStatus::ACCESS_FAILED
+        }
+    }
+}
+
+/// Read `data` written on behalf of the payload in Secretkeeper.
+///
+/// # Safety
+///
+/// Behavior is undefined if any of the following conditions are violated:
+///
+/// * `data` must be [valid] for writes of 32 bytes.
+///
+/// [valid]: ptr#safety
+#[no_mangle]
+pub unsafe extern "C" fn AVmPayload_readRollbackProtectedSecret(
+    data: *mut u8,
+    size: usize,
+) -> AccessRollbackProtectedSecretStatus {
+    initialize_logging();
+    if size != RP_DATA_SIZE {
+        error!(
+            "Requesting reading {} bytes, while only {} bytes are supported",
+            size, RP_DATA_SIZE
+        );
+        return AccessRollbackProtectedSecretStatus::ACCESS_FAILED;
+    }
+    match try_read_rollback_protected_data() {
+        Err(e) => {
+            error!("Failed to write rollback protected data: {e:?}");
+            AccessRollbackProtectedSecretStatus::ACCESS_FAILED
+        }
+        Ok(stored_data) => {
+            if let Some(stored_data) = stored_data {
+                // SAFETY: See the requirements on `data` above; `stored_data` is known to have
+                // length 32, and cannot overlap `data` because we just allocated
+                // it.
+                unsafe {
+                    ptr::copy_nonoverlapping(stored_data.as_ptr(), data, size);
+                }
+                AccessRollbackProtectedSecretStatus::ACCESS_OK
+            } else {
+                debug!("No relevant entry found in Secretkeeper");
+                AccessRollbackProtectedSecretStatus::ENTRY_NOT_FOUND
+            }
+        }
+    }
+}
+
+fn try_writing_payload_rollback_protected_data(data: &[u8; RP_DATA_SIZE]) -> Result<()> {
+    get_vm_payload_service()?
+        .writePayloadRpData(data)
+        .context("Failed to write payload rollback protected data")?;
+    Ok(())
+}
+
+fn try_read_rollback_protected_data() -> Result<Option<[u8; RP_DATA_SIZE]>> {
+    let rp = get_vm_payload_service()?
+        .readPayloadRpData()
+        .context("Failed to read rollback protected data")?;
+    ensure!(
+        rp.is_none() || rp.unwrap().len() == 32,
+        "Returned data has {} bytes, expected 32 bytes",
+        rp.unwrap().len(),
+    );
+    Ok(rp)
 }
