@@ -14,7 +14,12 @@
 
 //! Support for EFI std I/O protocols.
 
+use crate::uefi::non_null_and_aligned_const;
+use alloc::string::String;
+use core::char::decode_utf16;
 use core::ptr::null_mut;
+use core::slice;
+use log::info;
 use uefi_raw::protocol::console::SimpleTextOutputProtocol;
 use uefi_raw::{Char16, Status};
 
@@ -39,9 +44,45 @@ unsafe extern "efiapi" fn reset(_this: *mut SimpleTextOutputProtocol, _extended:
 
 unsafe extern "efiapi" fn output_string(
     _this: *mut SimpleTextOutputProtocol,
-    _raw: *const Char16,
+    raw: *const Char16,
 ) -> Status {
-    Status::UNSUPPORTED
+    if !non_null_and_aligned_const(raw) {
+        return Status::INVALID_PARAMETER;
+    }
+    // SAFETY: We must trust that `raw` points to a valid null-terminated UTF16 string.
+    let size = unsafe { utf16_len(raw) };
+    // SAFETY: We trust that the slice covers a valid UTF16 string.
+    let chars = unsafe { slice::from_raw_parts(raw, size) };
+
+    let s = decode_utf16(chars.iter().cloned())
+        .map(|r| r.unwrap_or(char::REPLACEMENT_CHARACTER))
+        .collect::<String>();
+
+    for line in s.lines() {
+        info!("[EFI] {}", line);
+    }
+
+    Status::SUCCESS
+}
+
+/// Returns the length (in `Char16`) of the null-terminated UTF16 string starting at `s`.
+///
+/// Result includes the first null character.
+///
+/// # Safety
+///
+/// `s` must point to a character within a valid null-terminated UTF16 string.
+unsafe fn utf16_len(s: *const Char16) -> usize {
+    for len in 0usize.. {
+        let i = len.try_into().unwrap();
+        // SAFETY: `s` points within a UTF16 string and we still haven't reached the end.
+        let c = unsafe { s.offset(i) };
+        // SAFETY: `c` points within the same UTF16 string as `s`.
+        if unsafe { *c } == 0 {
+            return len;
+        }
+    }
+    0 // unreachable
 }
 
 unsafe extern "efiapi" fn test_string(
