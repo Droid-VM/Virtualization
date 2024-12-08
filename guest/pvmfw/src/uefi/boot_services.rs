@@ -16,8 +16,7 @@
 
 use crate::uefi::linux::LINUX_EFI_LOADED_IMAGE_FIXED_GUID;
 use crate::uefi::loaded_image::LOADED_IMAGE_PROTOCOL_GUID;
-use crate::uefi::EfiLoader;
-use crate::uefi::{EFI_LOADER, EFI_SPECIFICATION_REVISION};
+use crate::uefi::{EfiLoader, EFI_LOADER, EFI_SPECIFICATION_REVISION};
 use core::ffi::c_void;
 use core::mem;
 use core::ptr::{copy, null_mut, write_bytes, NonNull};
@@ -32,6 +31,9 @@ use uefi_raw::{Char16, Event, Guid, Handle, PhysicalAddress, Status};
 use super::{non_null_and_aligned_const, non_null_and_aligned_mut};
 
 const BOOT_SERVICES_SIGNATURE: u64 = 0x5652_4553_544f_4f42;
+const ALL_HANDLES: i32 = 0;
+const BY_REGISTER_NOTIFY: i32 = 1;
+const BY_PROTOCOL: i32 = 2;
 
 pub const fn init_boot_services() -> BootServices {
     BootServices {
@@ -234,10 +236,13 @@ unsafe extern "efiapi" fn handle_protocol(
     proto: *const Guid,
     out_proto: *mut *mut c_void,
 ) -> Status {
-    if handle.is_null() || proto.is_null() || out_proto.is_null() {
+    if !non_null_and_aligned_mut(handle)
+        || !non_null_and_aligned_const(proto)
+        || !non_null_and_aligned_mut(out_proto)
+    {
         return Status::INVALID_PARAMETER;
     }
-    // SAFETY: This is safe as raw pointer 'proto' is not null.
+    // SAFETY: 'proto' is not null and is aligned.
     let proto_guid = unsafe { *proto };
 
     // Check whether the received image handle matches the image handle pvmfw passed via
@@ -265,14 +270,14 @@ unsafe extern "efiapi" fn locate_handle(
     buf_sz: *mut usize,
     buf: *mut Handle,
 ) -> Status {
-    if search_ty != 0 && search_ty != 1 && search_ty != 2 {
+    if search_ty != ALL_HANDLES && search_ty != BY_REGISTER_NOTIFY && search_ty != BY_PROTOCOL {
         return Status::INVALID_PARAMETER;
     }
-    if (search_ty == 1 && key.is_null())
-        || (search_ty == 2 && proto.is_null())
-        || buf_sz.is_null()
-        || proto.is_null()
-        || buf.is_null()
+    if (search_ty == BY_REGISTER_NOTIFY && key.is_null())
+        || (search_ty == BY_PROTOCOL && proto.is_null())
+        || !non_null_and_aligned_mut(buf_sz)
+        || !non_null_and_aligned_const(proto)
+        || !non_null_and_aligned_mut(buf)
     {
         return Status::INVALID_PARAMETER;
     }
@@ -280,19 +285,17 @@ unsafe extern "efiapi" fn locate_handle(
     // SAFETY: This is safe as raw pointer 'proto' is not null.
     let proto_guid = unsafe { *proto };
 
-    if search_ty == 2
+    if search_ty == BY_PROTOCOL
         && proto_guid != LOADED_IMAGE_PROTOCOL_GUID
         && proto_guid != LINUX_EFI_LOADED_IMAGE_FIXED_GUID
     {
         return Status::NOT_FOUND;
     }
 
-    // SAFETY: This is safe as both raw pointers 'buf_sz' and 'buf' are not null.
+    // SAFETY: 'buf_sz' and 'buf' are not null and are aligned.
     unsafe {
         *buf_sz = 1;
-        if !buf.is_null() {
-            buf.write(EfiLoader::EFI_IMAGE_HANDLE as *mut c_void);
-        }
+        buf.write(EfiLoader::EFI_IMAGE_HANDLE as *mut c_void);
     }
 
     Status::SUCCESS
@@ -440,11 +443,11 @@ unsafe extern "efiapi" fn locate_protocol(
     _registration: *mut c_void,
     out_proto: *mut *mut c_void,
 ) -> Status {
-    if proto.is_null() || out_proto.is_null() {
+    if !non_null_and_aligned_const(proto) || !non_null_and_aligned_mut(out_proto) {
         return Status::INVALID_PARAMETER;
     }
 
-    // SAFETY: This is safe as raw pointer 'proto' is not null.
+    // SAFETY: 'proto' is not null and is aligned.
     let proto_guid = unsafe { *proto };
 
     let status = set_protocol_interface_pointer(proto_guid, out_proto);
@@ -537,21 +540,17 @@ unsafe extern "efiapi" fn create_event_ex(
 ///
 /// Returns UNSUPPORTED if no match is found.
 fn set_protocol_interface_pointer(proto_guid: Guid, out_proto: *mut *mut c_void) -> Status {
-    if out_proto.is_null() {
+    if !non_null_and_aligned_mut(out_proto) {
         return Status::UNSUPPORTED;
     };
 
-    let loaded_image_protocol_ptr =
-        &mut EFI_LOADER.lock().loaded_image_protocol as *mut _ as *mut c_void;
-
-    // SAFETY: This is safe as raw pointer 'out_proto' is not null.
+    // SAFETY: 'out_proto' is not null and is aligned.
     let out_proto = unsafe { &mut *out_proto };
 
-    *out_proto = match proto_guid {
-        LOADED_IMAGE_PROTOCOL_GUID => loaded_image_protocol_ptr,
-        LINUX_EFI_LOADED_IMAGE_FIXED_GUID => null_mut(),
-        _ => return Status::UNSUPPORTED,
-    };
-
-    Status::SUCCESS
+    if let Some(protocol) = EFI_LOADER.lock().get_protocol(proto_guid) {
+        *out_proto = protocol;
+        Status::SUCCESS
+    } else {
+        Status::UNSUPPORTED
+    }
 }
