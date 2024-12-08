@@ -14,7 +14,10 @@
 
 //! Support for EFI std I/O protocols.
 
+use alloc::string::String;
+use alloc::vec::Vec;
 use core::ptr::null_mut;
+use log::info;
 use uefi_raw::protocol::console::SimpleTextOutputProtocol;
 use uefi_raw::{Char16, Status};
 
@@ -39,9 +42,28 @@ unsafe extern "efiapi" fn reset(_this: *mut SimpleTextOutputProtocol, _extended:
 
 unsafe extern "efiapi" fn output_string(
     _this: *mut SimpleTextOutputProtocol,
-    _raw: *const Char16,
+    raw: *const Char16,
 ) -> Status {
-    Status::UNSUPPORTED
+    if raw.is_null() {
+        return Status::INVALID_PARAMETER;
+    }
+
+    let mut chars = Vec::new();
+    for i in 0..80 {
+        // SAFETY: This is safe as raw pointer 'raw' is not null.
+        let c = unsafe { *raw.offset(i) };
+        if c == 0 {
+            break;
+        }
+        chars.push(c);
+    }
+
+    let s = core::char::decode_utf16(chars)
+        .map(|r| r.unwrap_or(char::REPLACEMENT_CHARACTER))
+        .collect::<String>();
+    info!("{s}");
+
+    Status::SUCCESS
 }
 
 unsafe extern "efiapi" fn test_string(
