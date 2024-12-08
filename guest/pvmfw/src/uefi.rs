@@ -141,3 +141,7 @@ pub fn execute_efi_payload(entrypoint: EfiEntrypoint) -> Status {
     let system_table = EFI_LOADER.lock().get_system_table_ptr();
     entrypoint(EfiLoader::EFI_IMAGE_HANDLE, system_table)
 }
+
+pub fn non_null_and_aligned_const<T>(ptr: *const T) -> bool {
+    !ptr.is_null() & ptr.is_aligned()
+}
