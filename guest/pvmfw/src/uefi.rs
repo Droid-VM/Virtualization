@@ -22,11 +22,11 @@ mod stdio;
 
 use crate::entry::FIRMWARE_REVISION;
 use core::mem;
-use core::ptr::{addr_of_mut, null, null_mut};
+use core::ptr::{addr_of_mut, null, null_mut, NonNull};
 use spin::mutex::SpinMutex;
 use uefi_raw::protocol::console::SimpleTextOutputProtocol;
 use uefi_raw::protocol::loaded_image::LoadedImageProtocol;
-use uefi_raw::table::boot::BootServices;
+use uefi_raw::table::boot::{BootServices, MemoryType};
 use uefi_raw::table::runtime::RuntimeServices;
 use uefi_raw::table::system::SystemTable;
 use uefi_raw::table::{Header, Revision};
@@ -38,8 +38,8 @@ const EFI_SPECIFICATION_REVISION: u32 = EFI_2_100_SYSTEM_TABLE_REVISION;
 
 static EFI_LOADER: SpinMutex<EfiLoader> = SpinMutex::new(EfiLoader::new());
 
-/// Represents UEFI structures used for booting.
-struct EfiLoader {
+/// Represents UEFI structures used for booting the Linux kernel through EFI stub.
+pub struct EfiLoader {
     pub system_table: SystemTable,
     boot_services: BootServices,
     runtime_services: RuntimeServices,
@@ -49,7 +49,7 @@ struct EfiLoader {
 }
 
 impl EfiLoader {
-    const EFI_IMAGE_HANDLE: usize = 0x19ef_781b;
+    pub const EFI_IMAGE_HANDLE: usize = 0x19ef_781b;
     const FIRMWARE_VENDOR: [u16; 6] = ['p' as _, 'v' as _, 'm' as _, 'f' as _, 'w' as _, '\0' as _];
 
     pub const fn new() -> Self {
@@ -107,6 +107,28 @@ impl EfiLoader {
         self.loaded_image_protocol.image_size = image_size;
     }
 
+    pub fn allocate_pool(
+        &mut self,
+        pool_type: MemoryType,
+        size: usize,
+        buffer: *mut *mut u8,
+    ) -> Result<NonNull<usize>, Status> {
+        if pool_type != MemoryType::LOADER_DATA && pool_type != MemoryType::ACPI_RECLAIM {
+            log::error!("The Memory Type is not supported! {pool_type:?}");
+            return Err(Status::OUT_OF_RESOURCES);
+        }
+
+        let Some(_) = NonNull::new(buffer) else {
+            return Err(Status::INVALID_PARAMETER);
+        };
+
+        let Some(allocated) = vmbase::heap::allocate(size, true) else {
+            return Err(Status::OUT_OF_RESOURCES);
+        };
+
+        Ok(allocated)
+    }
+
     fn patch_pointers(&mut self, payload: &[u8]) {
         self.system_table.boot_services = addr_of_mut!(self.boot_services) as _;
         self.system_table.runtime_services = addr_of_mut!(self.runtime_services) as _;
@@ -143,5 +165,9 @@ pub fn execute_efi_payload(entrypoint: EfiEntrypoint) -> Status {
 }
 
 pub fn non_null_and_aligned_const<T>(ptr: *const T) -> bool {
+    !ptr.is_null() & ptr.is_aligned()
+}
+
+pub fn non_null_and_aligned_mut<T>(ptr: *const T) -> bool {
     !ptr.is_null() & ptr.is_aligned()
 }
