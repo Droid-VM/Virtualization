@@ -14,7 +14,9 @@
 
 //! Support for EFI boot services.
 
-use crate::uefi::EFI_SPECIFICATION_REVISION;
+use crate::uefi::linux::LINUX_EFI_LOADED_IMAGE_FIXED_GUID;
+use crate::uefi::loaded_image::LOADED_IMAGE_PROTOCOL_GUID;
+use crate::uefi::{EfiLoader, EFI_LOADER, EFI_SPECIFICATION_REVISION};
 use core::ffi::c_void;
 use core::mem;
 use core::ptr::{copy, null_mut, write_bytes, NonNull};
@@ -229,11 +231,24 @@ unsafe extern "efiapi" fn uninstall_protocol_interface(
 }
 
 unsafe extern "efiapi" fn handle_protocol(
-    _handle: Handle,
-    _proto: *const Guid,
-    _out_proto: *mut *mut c_void,
+    handle: Handle,
+    proto: *const Guid,
+    out_proto: *mut *mut c_void,
 ) -> Status {
-    Status::UNSUPPORTED
+    if handle.is_null() || proto.is_null() || out_proto.is_null() {
+        return Status::INVALID_PARAMETER;
+    }
+    // SAFETY: This is safe as raw pointer 'proto' is not null.
+    let proto_guid = unsafe { *proto };
+
+    // Check whether the received image handle matches the image handle pvmfw passed via
+    // 'jump_to_payload_with_efi_stub' function before entering the EFI stub.
+    let ptr = EfiLoader::EFI_IMAGE_HANDLE as *mut c_void;
+    if handle != ptr {
+        return Status::UNSUPPORTED;
+    }
+
+    set_protocol_interface_pointer(proto_guid, out_proto)
 }
 
 unsafe extern "efiapi" fn register_protocol_notify(
@@ -245,13 +260,43 @@ unsafe extern "efiapi" fn register_protocol_notify(
 }
 
 unsafe extern "efiapi" fn locate_handle(
-    _search_ty: i32,
-    _proto: *const Guid,
-    _key: *const c_void,
-    _buf_sz: *mut usize,
-    _buf: *mut Handle,
+    search_ty: i32,
+    proto: *const Guid,
+    key: *const c_void,
+    buf_sz: *mut usize,
+    buf: *mut Handle,
 ) -> Status {
-    Status::UNSUPPORTED
+    if search_ty != 0 && search_ty != 1 && search_ty != 2 {
+        return Status::INVALID_PARAMETER;
+    }
+    if (search_ty == 1 && key.is_null())
+        || (search_ty == 2 && proto.is_null())
+        || buf_sz.is_null()
+        || proto.is_null()
+        || buf.is_null()
+    {
+        return Status::INVALID_PARAMETER;
+    }
+
+    // SAFETY: This is safe as raw pointer 'proto' is not null.
+    let proto_guid = unsafe { *proto };
+
+    if search_ty == 2
+        && proto_guid != LOADED_IMAGE_PROTOCOL_GUID
+        && proto_guid != LINUX_EFI_LOADED_IMAGE_FIXED_GUID
+    {
+        return Status::NOT_FOUND;
+    }
+
+    // SAFETY: This is safe as both raw pointers 'buf_sz' and 'buf' are not null.
+    unsafe {
+        *buf_sz = 1;
+        if !buf.is_null() {
+            buf.write(EfiLoader::EFI_IMAGE_HANDLE as *mut c_void);
+        }
+    }
+
+    Status::SUCCESS
 }
 
 unsafe extern "efiapi" fn locate_device_path(
@@ -392,11 +437,24 @@ unsafe extern "efiapi" fn locate_handle_buffer(
 }
 
 unsafe extern "efiapi" fn locate_protocol(
-    _proto: *const Guid,
+    proto: *const Guid,
     _registration: *mut c_void,
-    _out_proto: *mut *mut c_void,
+    out_proto: *mut *mut c_void,
 ) -> Status {
-    Status::UNSUPPORTED
+    if proto.is_null() || out_proto.is_null() {
+        return Status::INVALID_PARAMETER;
+    }
+
+    // SAFETY: This is safe as raw pointer 'proto' is not null.
+    let proto_guid = unsafe { *proto };
+
+    let status = set_protocol_interface_pointer(proto_guid, out_proto);
+
+    // If no match is found, return NOT_FOUND instead of UNSUPPORTED (from the UEFI spec).
+    if status == Status::UNSUPPORTED {
+        return Status::NOT_FOUND;
+    }
+    status
 }
 
 // TODO(stable(c_variadic))
@@ -473,4 +531,30 @@ unsafe extern "efiapi" fn create_event_ex(
     _out_event: *mut Event,
 ) -> Status {
     Status::UNSUPPORTED
+}
+
+/// Sets the pointer to a protocol interface based on the provided protocol GUID.
+///
+/// Queries supported protocols and if it finds a match with provided protocol GUID, sets the
+/// pointer to a particular protocol interface.
+///
+/// Returns UNSUPPORTED if no match is found.
+fn set_protocol_interface_pointer(proto_guid: Guid, out_proto: *mut *mut c_void) -> Status {
+    if out_proto.is_null() {
+        return Status::UNSUPPORTED;
+    };
+
+    let loaded_image_protocol_ptr =
+        &mut EFI_LOADER.lock().loaded_image_protocol as *mut _ as *mut c_void;
+
+    // SAFETY: This is safe as raw pointer 'out_proto' is not null.
+    let out_proto = unsafe { &mut *out_proto };
+
+    *out_proto = match proto_guid {
+        LOADED_IMAGE_PROTOCOL_GUID => loaded_image_protocol_ptr,
+        LINUX_EFI_LOADED_IMAGE_FIXED_GUID => null_mut(),
+        _ => return Status::UNSUPPORTED,
+    };
+
+    Status::SUCCESS
 }

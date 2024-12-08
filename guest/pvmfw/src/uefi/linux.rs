@@ -15,6 +15,9 @@
 //! Support for Linux kernel image.
 
 use log::error;
+use uefi_raw::{guid, Guid};
+
+pub const LINUX_EFI_LOADED_IMAGE_FIXED_GUID: Guid = guid!("f5a37b6d-3344-42a5-b6bb-978648c1890a");
 
 /// ARM specific configuration of the Linux kernel image.
 /// See https://docs.kernel.org/arch/arm64/booting.html#call-the-kernel-image and

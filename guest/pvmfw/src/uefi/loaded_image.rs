@@ -17,7 +17,9 @@
 use core::ptr::{null, null_mut};
 use uefi_raw::protocol::loaded_image::LoadedImageProtocol;
 use uefi_raw::table::boot::MemoryType;
+use uefi_raw::{guid, Guid};
 
+pub const LOADED_IMAGE_PROTOCOL_GUID: Guid = guid!("5b1b31a1-9562-11d2-8e3f-00a0c969723b");
 const LOADED_IMAGE_PROTOCOL_REVISION: u32 = 0x1000;
 
 pub const fn init_loaded_image_protocol() -> LoadedImageProtocol {

@@ -40,7 +40,7 @@ const EFI_SPECIFICATION_REVISION: u32 = EFI_2_100_SYSTEM_TABLE_REVISION;
 static EFI_LOADER: SpinMutex<EfiLoader> = SpinMutex::new(EfiLoader::new());
 
 /// Represents UEFI structures used for booting the Linux kernel through EFI stub.
-struct EfiLoader {
+pub struct EfiLoader {
     pub system_table: SystemTable,
     boot_services: BootServices,
     runtime_services: RuntimeServices,
@@ -50,7 +50,7 @@ struct EfiLoader {
 }
 
 impl EfiLoader {
-    const EFI_IMAGE_HANDLE: usize = 0x19ef_781b;
+    pub const EFI_IMAGE_HANDLE: usize = 0x19ef_781b;
     const FIRMWARE_VENDOR: [u16; 6] = ['p' as _, 'v' as _, 'm' as _, 'f' as _, 'w' as _, '\0' as _];
 
     pub const fn new() -> Self {
