@@ -21,6 +21,9 @@ mod runtime_services;
 mod stdio;
 
 use crate::entry::FIRMWARE_REVISION;
+use crate::uefi::linux::LINUX_EFI_LOADED_IMAGE_FIXED_GUID;
+use crate::uefi::loaded_image::LOADED_IMAGE_PROTOCOL_GUID;
+use core::ffi::c_void;
 use core::mem;
 use core::ptr::{addr_of_mut, null, null_mut, NonNull};
 use spin::mutex::SpinMutex;
@@ -30,6 +33,7 @@ use uefi_raw::table::boot::{BootServices, MemoryType};
 use uefi_raw::table::runtime::RuntimeServices;
 use uefi_raw::table::system::SystemTable;
 use uefi_raw::table::{Header, Revision};
+use uefi_raw::Guid;
 use uefi_raw::Status;
 use vmbase::arch::disable_wxn;
 
@@ -140,6 +144,14 @@ impl EfiLoader {
 
         self.set_loaded_image_protocol(payload);
     }
+
+    pub fn get_protocol(&mut self, guid: Guid) -> Option<*mut c_void> {
+        match guid {
+            LOADED_IMAGE_PROTOCOL_GUID => Some(addr_of_mut!(self.loaded_image_protocol) as _),
+            LINUX_EFI_LOADED_IMAGE_FIXED_GUID => Some(null_mut()),
+            _ => None,
+        }
+    }
 }
 
 // SAFETY: Send trait indicates whether a type is safe to transfer across threads. We are working
@@ -168,6 +180,6 @@ pub fn non_null_and_aligned_const<T>(ptr: *const T) -> bool {
     !ptr.is_null() & ptr.is_aligned()
 }
 
-pub fn non_null_and_aligned_mut<T>(ptr: *const T) -> bool {
+pub fn non_null_and_aligned_mut<T>(ptr: *mut T) -> bool {
     !ptr.is_null() & ptr.is_aligned()
 }
