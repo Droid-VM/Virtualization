@@ -17,7 +17,8 @@
 use crate::uefi::EFI_SPECIFICATION_REVISION;
 use core::ffi::c_void;
 use core::mem;
-use core::ptr::null_mut;
+use core::ptr::{copy, null_mut, write_bytes, NonNull};
+use log::error;
 use uefi_raw::protocol::device_path::DevicePathProtocol;
 use uefi_raw::table::boot::{
     BootServices, EventNotifyFn, EventType, InterfaceType, MemoryDescriptor, MemoryType,
@@ -129,15 +130,40 @@ unsafe extern "efiapi" fn get_memory_map(
 }
 
 unsafe extern "efiapi" fn allocate_pool(
-    _pool_type: MemoryType,
-    _size: usize,
-    _buffer: *mut *mut u8,
+    pool_type: MemoryType,
+    size: usize,
+    buffer: *mut *mut u8,
 ) -> Status {
-    Status::UNSUPPORTED
+    if size == 0 || buffer.is_null() {
+        return Status::INVALID_PARAMETER;
+    }
+
+    if pool_type != MemoryType::LOADER_DATA && pool_type != MemoryType::ACPI_RECLAIM {
+        log::error!("The Memory Type is not supported! {pool_type:?}");
+        return Status::OUT_OF_RESOURCES;
+    }
+
+    let Some(buffer) = NonNull::new(buffer) else {
+        return Status::INVALID_PARAMETER;
+    };
+
+    let Some(allocated) = vmbase::heap::allocate(size, true) else {
+        return Status::OUT_OF_RESOURCES;
+    };
+
+    // Safety: This is safe as the raw pointer 'buffer' is not null.
+    unsafe {
+        buffer.write(allocated.as_ptr().cast());
+    }
+
+    Status::SUCCESS
 }
 
-unsafe extern "efiapi" fn free_pool(_buffer: *mut u8) -> Status {
-    Status::UNSUPPORTED
+unsafe extern "efiapi" fn free_pool(buffer: *mut u8) -> Status {
+    let void_buffer: *mut c_void = buffer as *mut c_void;
+    let Some(ptr) = NonNull::new(void_buffer) else { return Status::INVALID_PARAMETER };
+    vmbase::heap::deallocate(ptr);
+    Status::SUCCESS
 }
 
 /// Event & timer functions.
@@ -419,9 +445,23 @@ unsafe extern "efiapi" fn calculate_crc32(
 }
 
 /// Misc service functions.
-unsafe extern "efiapi" fn copy_mem(_dest: *mut u8, _src: *const u8, _len: usize) {}
+unsafe extern "efiapi" fn copy_mem(dest: *mut u8, src: *const u8, len: usize) {
+    if src.is_null() || dest.is_null() {
+        error!("CopyMem received NULL: src={src:?}, dest={dest:?}");
+        return;
+    }
+    // SAFETY: This is safe as both raw pointers 'src' and 'dest' are not null.
+    unsafe { copy(src, dest, len) };
+}
 
-unsafe extern "efiapi" fn set_mem(_buffer: *mut u8, _len: usize, _value: u8) {}
+unsafe extern "efiapi" fn set_mem(buffer: *mut u8, len: usize, value: u8) {
+    if buffer.is_null() {
+        error!("set_mem received NULL: buffer={buffer:?}");
+        return;
+    }
+    // SAFETY: This is safe as raw pointer 'buffer' is not null.
+    unsafe { write_bytes(buffer, value, len) };
+}
 
 /// New event functions (UEFI 2.0 or newer).
 unsafe extern "efiapi" fn create_event_ex(
