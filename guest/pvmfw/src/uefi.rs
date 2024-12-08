@@ -25,11 +25,12 @@ use crate::uefi::runtime_services::RtPropertiesTable;
 use alloc::vec::Vec;
 use core::ffi::c_void;
 use core::mem;
-use core::ptr::{addr_of_mut, null, null_mut};
+use core::num::NonZeroUsize;
+use core::ptr::{addr_of_mut, null, null_mut, NonNull};
 use runtime_services::init_rt_properties_table;
 use spin::mutex::SpinMutex;
 use uefi_raw::protocol::console::SimpleTextOutputProtocol;
-use uefi_raw::table::boot::BootServices;
+use uefi_raw::table::boot::{BootServices, MemoryType};
 use uefi_raw::table::configuration::ConfigurationTable;
 use uefi_raw::table::runtime::RuntimeServices;
 use uefi_raw::table::system::SystemTable;
@@ -143,6 +144,19 @@ impl EfiLoader {
         self.sync_system_config_table();
         Some(entry)
     }
+
+    pub fn allocate_pool(
+        &mut self,
+        memory_type: MemoryType,
+        size: NonZeroUsize,
+    ) -> Option<NonNull<u8>> {
+        match memory_type {
+            MemoryType::LOADER_DATA | MemoryType::ACPI_RECLAIM => {
+                vmbase::heap::allocate(size.get(), true).map(|p| p.cast())
+            }
+            _ => None,
+        }
+    }
 }
 
 // SAFETY: `Send` is not relevant as pvmfw is single-threaded.
@@ -166,4 +180,13 @@ pub fn execute_efi_payload(entrypoint: EfiEntrypoint) -> Status {
 
 pub fn non_null_and_aligned_const<T>(ptr: *const T) -> bool {
     !ptr.is_null() & ptr.is_aligned()
+}
+
+pub fn non_null_and_aligned_mut<T>(ptr: *mut T) -> Option<NonNull<T>> {
+    let non_null = NonNull::new(ptr)?;
+    if ptr.is_aligned() {
+        Some(non_null)
+    } else {
+        None
+    }
 }

@@ -14,10 +14,12 @@
 
 //! Support for EFI boot services.
 
-use super::{non_null_and_aligned_const, EFI_LOADER, EFI_SPECIFICATION_REVISION};
+use super::{
+    non_null_and_aligned_const, non_null_and_aligned_mut, EFI_LOADER, EFI_SPECIFICATION_REVISION,
+};
 use core::ffi::c_void;
 use core::mem;
-use core::ptr::null_mut;
+use core::ptr::{copy, null_mut, write_bytes};
 use uefi_raw::protocol::device_path::DevicePathProtocol;
 use uefi_raw::table::boot::{
     BootServices, EventNotifyFn, EventType, InterfaceType, MemoryDescriptor, MemoryType,
@@ -129,15 +131,33 @@ unsafe extern "efiapi" fn get_memory_map(
 }
 
 unsafe extern "efiapi" fn allocate_pool(
-    _pool_type: MemoryType,
-    _size: usize,
-    _buffer: *mut *mut u8,
+    pool_type: MemoryType,
+    size: usize,
+    buffer: *mut *mut u8,
 ) -> Status {
-    Status::UNSUPPORTED
+    let Some(buffer) = non_null_and_aligned_mut(buffer) else {
+        return Status::INVALID_PARAMETER;
+    };
+    let Ok(size) = size.try_into() else {
+        return Status::INVALID_PARAMETER;
+    };
+
+    let Some(pool) = EFI_LOADER.lock().allocate_pool(pool_type, size) else {
+        return Status::OUT_OF_RESOURCES;
+    };
+
+    let pool = pool.as_ptr().cast();
+    // SAFETY: `buffer` is aligned and non-null.
+    unsafe { buffer.write(pool) }
+    Status::SUCCESS
 }
 
-unsafe extern "efiapi" fn free_pool(_buffer: *mut u8) -> Status {
-    Status::UNSUPPORTED
+unsafe extern "efiapi" fn free_pool(buffer: *mut u8) -> Status {
+    let Some(buffer) = non_null_and_aligned_mut(buffer) else {
+        return Status::INVALID_PARAMETER;
+    };
+    vmbase::heap::deallocate(buffer.cast());
+    Status::SUCCESS
 }
 
 /// Event & timer functions.
@@ -430,9 +450,18 @@ unsafe extern "efiapi" fn calculate_crc32(
 }
 
 /// Misc service functions.
-unsafe extern "efiapi" fn copy_mem(_dest: *mut u8, _src: *const u8, _len: usize) {}
+unsafe extern "efiapi" fn copy_mem(dest: *mut u8, src: *const u8, len: usize) {
+    assert!(non_null_and_aligned_const(src));
+    let dest = non_null_and_aligned_mut(dest).expect("EFI CopyMem received NULL dest");
+    // SAFETY: 'src' and 'dest' are not null and are aligned.
+    unsafe { copy(src, dest.as_ptr(), len) };
+}
 
-unsafe extern "efiapi" fn set_mem(_buffer: *mut u8, _len: usize, _value: u8) {}
+unsafe extern "efiapi" fn set_mem(buffer: *mut u8, len: usize, value: u8) {
+    let buffer = non_null_and_aligned_mut(buffer).expect("EFI SetMem received NULL buffer");
+    // SAFETY: 'buffer' is not null and is aligned.
+    unsafe { write_bytes(buffer.as_ptr(), value, len) };
+}
 
 /// New event functions (UEFI 2.0 or newer).
 unsafe extern "efiapi" fn create_event_ex(
