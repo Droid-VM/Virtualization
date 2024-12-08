@@ -14,7 +14,13 @@
 
 //! Support for EFI std I/O protocols.
 
+use crate::uefi::non_null_and_aligned_const;
+use alloc::string::String;
+use core::char::decode_utf16;
+use core::ptr;
 use core::ptr::null_mut;
+use core::slice;
+use log::info;
 use uefi_raw::protocol::console::SimpleTextOutputProtocol;
 use uefi_raw::{Char16, Status};
 
@@ -39,9 +45,35 @@ unsafe extern "efiapi" fn reset(_this: *mut SimpleTextOutputProtocol, _extended:
 
 unsafe extern "efiapi" fn output_string(
     _this: *mut SimpleTextOutputProtocol,
-    _raw: *const Char16,
+    raw: *const Char16,
 ) -> Status {
-    Status::UNSUPPORTED
+    if !non_null_and_aligned_const(raw) {
+        return Status::INVALID_PARAMETER;
+    }
+
+    let mut end: *const Char16 = ptr::null();
+    for i in 0.. {
+        // SAFETY: `raw` is non-null and properly aligned.
+        end = unsafe { raw.offset(i) };
+        // SAFETY: we must trust that `raw` points to a valid null-terminated UTF16 string.
+        if unsafe { *end } == 0 {
+            break;
+        }
+    }
+    // SAFETY: `end` and `raw` point to Char16 and are properly aligned.
+    let size = unsafe { end.offset_from(raw) }.try_into().unwrap();
+    // SAFETY: We trust that the slice covers a valid UTF16 string.
+    let chars = unsafe { slice::from_raw_parts(raw, size) };
+
+    let s = decode_utf16(chars.iter().cloned())
+        .map(|r| r.unwrap_or(char::REPLACEMENT_CHARACTER))
+        .collect::<String>();
+
+    for line in s.lines() {
+        info!("[EFI] {}", line);
+    }
+
+    Status::SUCCESS
 }
 
 unsafe extern "efiapi" fn test_string(
