@@ -21,15 +21,23 @@ mod runtime_services;
 mod stdio;
 
 use crate::entry::FIRMWARE_REVISION;
+use crate::uefi::linux::DEVICE_TREE_GUID;
+use crate::uefi::linux::RT_PROPERTIES_TABLE_GUID;
+use crate::uefi::runtime_services::RtPropertiesTable;
+use alloc::vec::Vec;
+use core::ffi::c_void;
 use core::mem;
 use core::ptr::{null, null_mut};
+use runtime_services::init_rt_properties_table;
 use spin::mutex::SpinMutex;
 use uefi_raw::protocol::console::SimpleTextOutputProtocol;
 use uefi_raw::protocol::loaded_image::LoadedImageProtocol;
 use uefi_raw::table::boot::BootServices;
+use uefi_raw::table::configuration::ConfigurationTable;
 use uefi_raw::table::runtime::RuntimeServices;
 use uefi_raw::table::system::SystemTable;
 use uefi_raw::table::{Header, Revision};
+use uefi_raw::Guid;
 use uefi_raw::Status;
 use vmbase::isb;
 use vmbase::{read_sysreg, write_sysreg};
@@ -47,6 +55,8 @@ pub struct EfiLoader {
     simple_text_output_protocol: SimpleTextOutputProtocol,
     pub loaded_image_protocol: LoadedImageProtocol,
     firmware_vendor: [u16; 6],
+    rt_properties_table: RtPropertiesTable,
+    configuration_table: Vec<ConfigurationTable>,
 }
 
 impl EfiLoader {
@@ -87,6 +97,8 @@ impl EfiLoader {
         let simple_text_output_protocol = stdio::init_simple_text_output_protocol();
         let loaded_image_protocol = loaded_image::init_loaded_image_protocol();
         let firmware_vendor = Self::FIRMWARE_VENDOR;
+        let rt_properties_table = init_rt_properties_table();
+        let configuration_table = Vec::new();
 
         Self {
             system_table,
@@ -95,11 +107,17 @@ impl EfiLoader {
             simple_text_output_protocol,
             loaded_image_protocol,
             firmware_vendor,
+            rt_properties_table,
+            configuration_table,
         }
     }
 
     fn get_system_table_ptr(&mut self) -> *mut SystemTable {
         &mut self.system_table as _
+    }
+
+    fn get_rt_properties_table_ptr(&mut self) -> *mut c_void {
+        &mut self.rt_properties_table as *const _ as *mut c_void
     }
 
     fn set_loaded_image_protocol(&mut self, payload_start: usize, payload_size: usize) {
@@ -125,8 +143,21 @@ impl EfiLoader {
 unsafe impl Send for EfiLoader {}
 
 // Initialize parameters passed to the EFI stub by the EFI loader.
-pub fn init_efi(payload_start: usize, payload_size: usize) {
+pub fn init_efi(payload_start: usize, payload_size: usize, fdt_address: usize) {
+    let rt_properties_table_ptr = EFI_LOADER.lock().get_rt_properties_table_ptr();
+    push_to_config_table(RT_PROPERTIES_TABLE_GUID, rt_properties_table_ptr);
+    push_to_config_table(DEVICE_TREE_GUID, fdt_address as *mut c_void);
+
     EFI_LOADER.lock().patch_pointers(payload_start, payload_size);
+}
+
+fn push_to_config_table(vendor_guid: Guid, vendor_table: *mut c_void) {
+    let configuration_table_entry = ConfigurationTable { vendor_guid, vendor_table };
+    let mut efi_loader = EFI_LOADER.lock();
+    efi_loader.configuration_table.push(configuration_table_entry);
+    efi_loader.system_table.configuration_table = efi_loader.configuration_table.as_mut_ptr();
+    efi_loader.system_table.number_of_configuration_table_entries =
+        efi_loader.configuration_table.len();
 }
 
 pub type EfiEntrypoint = extern "efiapi" fn(usize, *mut SystemTable) -> uefi_raw::Status;

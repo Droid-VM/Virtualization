@@ -21,6 +21,8 @@ use uefi_raw::{guid, Guid};
 use zerocopy::{FromBytes, FromZeroes};
 
 pub const LINUX_EFI_LOADED_IMAGE_FIXED_GUID: Guid = guid!("f5a37b6d-3344-42a5-b6bb-978648c1890a");
+pub const RT_PROPERTIES_TABLE_GUID: Guid = guid!("eb66918a-7eef-402a-842e-931d21c38ae9");
+pub const DEVICE_TREE_GUID: Guid = guid!("b1b621d5-f19c-41a5-830b-d9152c69aae0");
 
 #[repr(C, packed)]
 #[derive(FromBytes, FromZeroes)]
