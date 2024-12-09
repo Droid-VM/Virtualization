@@ -1,0 +1,109 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0bad7a0_960c4c64",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingBaseAdapter.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-09T06:36:17Z",
+      "side": 1,
+      "message": "instead of having listener inside adapter, how about just making it refresh(), and called by listener which is registered in Activity?",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 5
+      },
+      "revId": "0868c334091303c581ba8989faa243897f52273a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "960517cd_ef549be1",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingInactiveAdapter.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-09T06:36:17Z",
+      "side": 1,
+      "message": "can we use kotlin\u0027s subtract method for set?",
+      "range": {
+        "startLine": 32,
+        "startChar": 15,
+        "endLine": 34,
+        "endChar": 49
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e61a18c2_734b72be",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingInactiveAdapter.kt",
+              "range": {
+                "startLine": 31,
+                "startChar": 0,
+                "endLine": 35,
+                "endChar": 0
+              },
+              "replacement": "        return mPortsStateManager.getEnabledPorts().subtract(mPortsStateManager.getActivePorts())\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0868c334091303c581ba8989faa243897f52273a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddac9923_a3526bc7",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingInactiveAdapter.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-09T06:36:17Z",
+      "side": 1,
+      "message": "it maybe \u0027remove port ~~~\u0027 or something like that?",
+      "range": {
+        "startLine": 55,
+        "startChar": 52,
+        "endLine": 55,
+        "endChar": 72
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0813989b_bf0b1310",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingInactiveAdapter.kt",
+              "range": {
+                "startLine": 55,
+                "startChar": 0,
+                "endLine": 56,
+                "endChar": 0
+              },
+              "replacement": "        viewHolder.closeButton.contentDescription \u003d\n            viewGroup.context.getString(R.string.remove_port, port)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0868c334091303c581ba8989faa243897f52273a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
