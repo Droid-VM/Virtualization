@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6fef8e6_062c59b9",
+        "filename": "guest/pvmfw/src/memory.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-09T21:38:26Z",
+      "side": 1,
+      "message": "Map this from `init_efi()` in the first commit that actually needs it and make sure to document _why_ you\u0027re doing this as it isn\u0027t necessarily clear to someone that isn\u0027t familiar with then internals of the EFI stub.",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 18
+      },
+      "revId": "8fc54fb6a9baa7c931418f47eb1ede907b178146",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80433f86_a9f5d948",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-09T21:38:26Z",
+      "side": 1,
+      "message": "Encapsulate this under `vmbase::arch::disable_wxn()` so that this call can be arch-agnostic.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 11
+      },
+      "revId": "8fc54fb6a9baa7c931418f47eb1ede907b178146",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f170662_652ef1ff",
+        "filename": "guest/pvmfw/src/uefi/linux.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-09T21:38:26Z",
+      "side": 1,
+      "message": "`TODO`",
+      "range": {
+        "startLine": 115,
+        "startChar": 8,
+        "endLine": 115,
+        "endChar": 23
+      },
+      "revId": "8fc54fb6a9baa7c931418f47eb1ede907b178146",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
