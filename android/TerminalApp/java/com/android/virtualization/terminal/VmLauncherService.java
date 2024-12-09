@@ -20,9 +20,11 @@ import static com.android.virtualization.terminal.MainActivity.TAG;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -144,7 +146,15 @@ public class VmLauncherService extends Service implements DebianServiceImpl.Debi
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (Objects.equals(intent.getAction(), ACTION_STOP_VM_LAUNCHER_SERVICE)) {
             // If there is no Debian service or it fails to shutdown, just stop the service.
-            if (mDebianService == null || !mDebianService.shutdownDebian()) {
+            if (mDebianService != null && mDebianService.shutdownDebian()) {
+                NotificationManager notificationManager =
+                        getSystemService(NotificationManager.class);
+                if (notificationManager != null) {
+                    notificationManager.cancel(this.hashCode());
+                    Notification notification = createNotificationForTerminalClose();
+                    notificationManager.notify(this.hashCode(), notification);
+                }
+            } else {
                 stopSelf();
             }
             return START_NOT_STICKY;
@@ -201,6 +211,32 @@ public class VmLauncherService extends Service implements DebianServiceImpl.Debi
         startDebianServer();
 
         return START_NOT_STICKY;
+    }
+
+    private Notification createNotificationForTerminalClose() {
+        Intent stopIntent = new Intent();
+        stopIntent.setClass(this, VmLauncherService.class);
+        stopIntent.setAction(VmLauncherService.ACTION_STOP_VM_LAUNCHER_SERVICE);
+        PendingIntent stopPendingIntent =
+                PendingIntent.getService(
+                        this,
+                        0,
+                        stopIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        Icon icon = Icon.createWithResource(getResources(), R.drawable.ic_launcher_foreground);
+        String stopActionText =
+                getResources().getString(R.string.service_notification_force_quit_action);
+        String stopNotificationTitle =
+                getResources().getString(R.string.service_notification_close_title);
+        return new Notification.Builder(this, this.getPackageName())
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle(stopNotificationTitle)
+                .setOngoing(true)
+                .setSilent(true)
+                .addAction(
+                        new Notification.Action.Builder(icon, stopActionText, stopPendingIntent)
+                                .build())
+                .build();
     }
 
     private boolean overrideConfigIfNecessary(VirtualMachineCustomImageConfig.Builder builder) {
