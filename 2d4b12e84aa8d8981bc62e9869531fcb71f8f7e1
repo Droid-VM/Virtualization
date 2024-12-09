@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b07662de_acd03828",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-09T22:38:11Z",
+      "side": 1,
+      "message": "A previous CL should have introduced\n```\nlet efi_loader \u003d EFI_LOADER.lock();\n```\nso that you should only take the lock once in this function.",
+      "range": {
+        "startLine": 147,
+        "startChar": 34,
+        "endLine": 147,
+        "endChar": 51
+      },
+      "revId": "2d4b12e84aa8d8981bc62e9869531fcb71f8f7e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "031b2cd4_25d4410f",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-09T22:38:11Z",
+      "side": 1,
+      "message": "Make this a `EfiLoader` method?",
+      "range": {
+        "startLine": 154,
+        "startChar": 3,
+        "endLine": 154,
+        "endChar": 23
+      },
+      "revId": "2d4b12e84aa8d8981bc62e9869531fcb71f8f7e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdc4e192_15bd97ee",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-09T22:38:11Z",
+      "side": 1,
+      "message": "Make this a `EfiLoader` method?",
+      "range": {
+        "startLine": 321,
+        "startChar": 0,
+        "endLine": 342,
+        "endChar": 5
+      },
+      "revId": "2d4b12e84aa8d8981bc62e9869531fcb71f8f7e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
