@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "497f901c_53bc6389",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-09T16:25:59Z",
+      "side": 1,
+      "message": "Whats an example of payload that pvmfw should support in Android 15+?\n\n`instance-id` is the unique Id of the VM introduced in Android 15 and is required irrespective of `defer-rbp`.\n\n1. It contributes to the differentiation of secrets in Nonprotected VM[a]. \n2. (Instance-hash derived from instance-id) is needed for RKPVM (\u0026 apparently Trusty VM too)[b]\n\n[a] https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/guest/microdroid_manager/src/dice.rs;l\u003d70?q\u003dget_instance_id\u0026ss\u003dh%2Fgoogleplex-android%2Fplatform%2Fsuperproject%2Fmain%2F%2B%2Frefs%2Fheads%2Fmain:packages%2Fmodules%2FVirtualization%2Fguest%2Fmicrodroid_manager%2F\n\n[b] https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/guest/pvmfw/src/main.rs;l\u003d130-161?q\u003dinstance-id%20file:pvmfw\u0026ss\u003dh%2Fgoogleplex-android%2Fplatform%2Fsuperproject%2Fmain%2F%2B%2Frefs%2Fheads%2Fmain:packages%2Fmodules%2FVirtualization%2F",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 46
+      },
+      "revId": "f8fe1493d32ab982d9efe39c7ccaa3eb2e4c686d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
