@@ -22,6 +22,30 @@
       },
       "revId": "f8fe1493d32ab982d9efe39c7ccaa3eb2e4c686d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc2a09e3_0c36d5db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-09T18:50:36Z",
+      "side": 1,
+      "message": "If pvmfw is built with `!cfg!(llpvm_changes)`, any \"legacy\" VM image? As mentioned in the commit message, guest image configurations that require the `instance-id` will still panic if it isn\u0027t present.",
+      "parentUuid": "497f901c_53bc6389",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 46
+      },
+      "revId": "f8fe1493d32ab982d9efe39c7ccaa3eb2e4c686d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
