@@ -43,7 +43,6 @@ use crate::instance::{get_recorded_entry, record_instance_entry};
 use alloc::borrow::Cow;
 use alloc::boxed::Box;
 use bssl_avf::Digester;
-use core::ops::Range;
 use cstr::cstr;
 use diced_open_dice::{bcc_handover_parse, DiceArtifacts, DiceContext, Hidden, VM_KEY_ALGORITHM};
 use libfdt::{Fdt, FdtNode};
@@ -60,13 +59,13 @@ use vmbase::virtio::pci;
 
 const NEXT_BCC_SIZE: usize = GUEST_PAGE_SIZE;
 
-fn main(
+fn main<'a>(
     fdt: &mut Fdt,
     signed_kernel: &[u8],
     ramdisk: Option<&[u8]>,
     current_bcc_handover: &[u8],
     mut debug_policy: Option<&[u8]>,
-) -> Result<(Range<usize>, bool), RebootReason> {
+) -> Result<(&'a [u8], bool), RebootReason> {
     info!("pVM firmware");
     debug!("FDT: {:?}", fdt.as_ptr());
     debug!("Signed kernel: {:?} ({:#x} bytes)", signed_kernel.as_ptr(), signed_kernel.len());
@@ -248,13 +247,7 @@ fn main(
     })?;
 
     info!("Starting payload...");
-
-    let bcc_range = {
-        let r = next_bcc.as_ptr_range();
-        (r.start as usize)..(r.end as usize)
-    };
-
-    Ok((bcc_range, debuggable))
+    Ok((next_bcc, debuggable))
 }
 
 fn check_dice_measurements_match_entry(
