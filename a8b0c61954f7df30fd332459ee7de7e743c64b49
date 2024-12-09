@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6ecd317_13ab0242",
+        "filename": "guest/pvmfw/avb/Android.bp",
+        "patchSetId": 15
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-09T15:21:00Z",
+      "side": 1,
+      "message": "Nice catch, thanks.",
+      "parentUuid": "1e51d0aa_4b7ca69f",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 1
+      },
+      "revId": "a8b0c61954f7df30fd332459ee7de7e743c64b49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4588b5f7_94c5bb56",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cd85ba6_e2d9cb3e",
+        "filename": "guest/pvmfw/avb/Android.bp",
+        "patchSetId": 15
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-09T15:21:00Z",
+      "side": 1,
+      "message": "Good point! Added one.",
+      "parentUuid": "4588b5f7_94c5bb56",
+      "range": {
+        "startLine": 222,
+        "startChar": 0,
+        "endLine": 222,
+        "endChar": 19
+      },
+      "revId": "a8b0c61954f7df30fd332459ee7de7e743c64b49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1160c0b4_77acda66",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-12-06T12:16:19Z",
       "side": 1,
       "message": "Q: When you inject pvmfw from userspace from crosvm, do you still have a test public key in this path ?",
+      "range": {
+        "startLine": 177,
+        "startChar": 21,
+        "endLine": 177,
+        "endChar": 44
+      },
+      "revId": "a8b0c61954f7df30fd332459ee7de7e743c64b49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b75961d_68d57fa4",
+        "filename": "guest/pvmfw/avb/tests/utils.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-09T15:21:00Z",
+      "side": 1,
+      "message": "FYI, these `#[test]` are unit-tests, which get bundled into a userspace test so the \"public key\" here is just another test file, available to the tests. In particular, they don\u0027t run in guest context.",
+      "parentUuid": "1160c0b4_77acda66",
       "range": {
         "startLine": 177,
         "startChar": 21,
