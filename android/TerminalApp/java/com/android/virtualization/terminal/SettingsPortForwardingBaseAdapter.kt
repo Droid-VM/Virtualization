@@ -15,19 +15,15 @@
  */
 package com.android.virtualization.terminal
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SortedList
 import androidx.recyclerview.widget.SortedListAdapterCallback
-import com.google.android.material.materialswitch.MaterialSwitch
 
-class SettingsPortForwardingAdapter(private val mPortsStateManager: PortsStateManager) :
-    RecyclerView.Adapter<SettingsPortForwardingAdapter.ViewHolder>() {
+abstract class SettingsPortForwardingBaseAdapter<T : RecyclerView.ViewHolder>(
+    val mPortsStateManager: PortsStateManager
+) : RecyclerView.Adapter<T>() {
 
-    private var mItems: SortedList<SettingsPortForwardingItem>
+    var mItems: SortedList<SettingsPortForwardingItem>
     private val mPortsStateListener: Listener
 
     init {
@@ -70,42 +66,13 @@ class SettingsPortForwardingAdapter(private val mPortsStateManager: PortsStateMa
         mPortsStateManager.unregisterListener(mPortsStateListener)
     }
 
-    private fun getCurrentSettingsPortForwardingItem(): ArrayList<SettingsPortForwardingItem> {
-        val enabledPorts = mPortsStateManager.getEnabledPorts()
-        return mPortsStateManager
-            .getActivePorts()
-            .map { SettingsPortForwardingItem(it, enabledPorts.contains(it)) }
-            .toCollection(ArrayList())
-    }
-
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val enabledSwitch: MaterialSwitch =
-            view.findViewById(R.id.settings_port_forwarding_item_enabled_switch)
-        val port: TextView = view.findViewById(R.id.settings_port_forwarding_item_port)
-    }
-
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        val view =
-            LayoutInflater.from(viewGroup.context)
-                .inflate(R.layout.settings_port_forwarding_item, viewGroup, false)
-        return ViewHolder(view)
-    }
-
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val port = mItems[position].port
-        viewHolder.port.text = port.toString()
-        viewHolder.enabledSwitch.contentDescription = viewHolder.port.text
-        viewHolder.enabledSwitch.isChecked = mItems[position].enabled
-        viewHolder.enabledSwitch.setOnCheckedChangeListener { _, isChecked ->
-            mPortsStateManager.updateEnabledPort(port, isChecked)
-        }
-    }
-
-    override fun getItemCount() = mItems.size()
-
     private inner class Listener : PortsStateManager.Listener {
         override fun onPortsStateUpdated(oldActivePorts: Set<Int>, newActivePorts: Set<Int>) {
             mItems.replaceAll(getCurrentSettingsPortForwardingItem())
         }
     }
+
+    override fun getItemCount() = mItems.size()
+
+    abstract fun getCurrentSettingsPortForwardingItem(): ArrayList<SettingsPortForwardingItem>
 }

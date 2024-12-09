@@ -22,18 +22,20 @@
     app:layout_constraintCircleRadius="@dimen/material_emphasis_medium">
 
     <TextView
-        android:id="@+id/settings_port_forwarding_item_port"
+        android:id="@+id/settings_port_forwarding_active_item_port"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:textSize="16sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <com.google.android.material.materialswitch.MaterialSwitch
-        android:id="@+id/settings_port_forwarding_item_enabled_switch"
+        android:id="@+id/settings_port_forwarding_active_item_enabled_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
