@@ -310,10 +310,10 @@ unsafe extern "efiapi" fn locate_device_path(
 }
 
 unsafe extern "efiapi" fn install_configuration_table(
-    _guid_entry: *const Guid,
-    _table_ptr: *const c_void,
+    guid_entry: *const Guid,
+    table_ptr: *const c_void,
 ) -> Status {
-    Status::UNSUPPORTED
+    EFI_LOADER.lock().install_configuration_table(guid_entry, table_ptr)
 }
 
 /// Image service functions.
