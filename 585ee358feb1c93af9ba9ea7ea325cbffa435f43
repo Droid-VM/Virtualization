@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cc23a43_fcccedc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1943701
+      },
+      "writtenOn": "2024-12-09T09:23:08Z",
+      "side": 1,
+      "message": "Unsafe Rust LGTM, I just think one safety comment could be make a tiny bit more precise.",
+      "revId": "585ee358feb1c93af9ba9ea7ea325cbffa435f43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27b5b151_72a9afaa",
+        "filename": "libs/libvm_payload/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1943701
+      },
+      "writtenOn": "2024-12-09T09:23:08Z",
+      "side": 1,
+      "message": "Unsafe Rust review: I think this message could be rephrased to say\n\n\u003e `data` must be a valid pointer to 32 bytes of data.\n\nor perhaps\n\n\u003e `data` must point to a `[u8; 32]`\n\nif you like.\n\nIf the `[valid]` part a Markdown link defined somewhere else?",
+      "range": {
+        "startLine": 576,
+        "startChar": 6,
+        "endLine": 576,
+        "endChar": 37
+      },
+      "revId": "585ee358feb1c93af9ba9ea7ea325cbffa435f43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7033db5d_383e7d9c",
+        "filename": "libs/libvm_payload/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1943701
+      },
+      "writtenOn": "2024-12-09T09:23:08Z",
+      "side": 1,
+      "message": "Unsafe Rust review: how do you know that `rp.as_ptr()` does not overlap with `data`? Ideally, you should document why this precondition is upheld in your SAFETY comment.",
+      "range": {
+        "startLine": 599,
+        "startChar": 37,
+        "endLine": 599,
+        "endChar": 48
+      },
+      "revId": "585ee358feb1c93af9ba9ea7ea325cbffa435f43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
