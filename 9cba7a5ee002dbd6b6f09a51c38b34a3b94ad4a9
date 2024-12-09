@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b803f629_446290ed",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-09T22:32:51Z",
+      "side": 1,
+      "message": "Also check that it\u0027s properly aligned",
+      "range": {
+        "startLine": 241,
+        "startChar": 51,
+        "endLine": 241,
+        "endChar": 63
+      },
+      "revId": "9cba7a5ee002dbd6b6f09a51c38b34a3b94ad4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a57f013b_a08b2652",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-09T22:32:51Z",
+      "side": 1,
+      "message": "define `const`? Same for `1` and `2`",
+      "range": {
+        "startLine": 269,
+        "startChar": 20,
+        "endLine": 269,
+        "endChar": 21
+      },
+      "revId": "9cba7a5ee002dbd6b6f09a51c38b34a3b94ad4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb33864f_5e9897db",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-09T22:32:51Z",
+      "side": 1,
+      "message": "Just inline `set_protocol_interface_pointer` and simplify this",
+      "range": {
+        "startLine": 453,
+        "startChar": 5,
+        "endLine": 454,
+        "endChar": 36
+      },
+      "revId": "9cba7a5ee002dbd6b6f09a51c38b34a3b94ad4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04936faa_8be7a777",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-09T22:32:51Z",
+      "side": 1,
+      "message": "Define `EfiLoader::get_protocol(\u0026self, guid: Guid) -\u003e Option\u003c*mut c_void\u003e`?",
+      "range": {
+        "startLine": 553,
+        "startChar": 17,
+        "endLine": 556,
+        "endChar": 40
+      },
+      "revId": "9cba7a5ee002dbd6b6f09a51c38b34a3b94ad4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
