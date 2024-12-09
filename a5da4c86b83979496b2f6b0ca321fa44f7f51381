@@ -1,0 +1,251 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d460dab_2b7e1e8d",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-09T23:15:28Z",
+      "side": 1,
+      "message": "prefer `clap` instead of `argh`. in AOSP, the latter is only used by crosvm and they\u0027ve said they want to switch off it\n\n(not a blocker)",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 19
+      },
+      "revId": "a5da4c86b83979496b2f6b0ca321fa44f7f51381",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d03edf6_9d59205d",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-09T23:15:28Z",
+      "side": 1,
+      "message": "maybe \"list of fields that will ignored, whether added, removed, or changed\"",
+      "range": {
+        "startLine": 46,
+        "startChar": 8,
+        "endLine": 46,
+        "endChar": 67
+      },
+      "revId": "a5da4c86b83979496b2f6b0ca321fa44f7f51381",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f30cc91_ce5b6cb0",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-09T23:15:28Z",
+      "side": 1,
+      "message": "nit: better to include the filename",
+      "range": {
+        "startLine": 52,
+        "startChar": 64,
+        "endLine": 52,
+        "endChar": 67
+      },
+      "revId": "a5da4c86b83979496b2f6b0ca321fa44f7f51381",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f96fc40_ef3a5e7d",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-09T23:15:28Z",
+      "side": 1,
+      "message": "nit: https://doc.rust-lang.org/std/fs/fn.read.html",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 52
+      },
+      "revId": "a5da4c86b83979496b2f6b0ca321fa44f7f51381",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cf54cb6_21dffcb9",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-09T23:15:28Z",
+      "side": 1,
+      "message": "nit: we should add `impl std::error::Error for FdtError { }` to the rust `libfdt`, then `Fdt::from_slice(dt1)..context(\"...\")?` ought to work out of the box",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 1
+      },
+      "revId": "a5da4c86b83979496b2f6b0ca321fa44f7f51381",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e93c395_57018ba3",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-09T23:15:28Z",
+      "side": 1,
+      "message": "it is stylistic preference, but, since these aren\u0027t closures and they are much larger than the enclosing function, i\u0027d suggest moving them out of `compare_device_trees` for easier reading",
+      "revId": "a5da4c86b83979496b2f6b0ca321fa44f7f51381",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0b4fbbb_592c5797",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-09T23:15:28Z",
+      "side": 1,
+      "message": "easier to read if you separate the \"missing field\" and \"value equality\" parts, e.g.\n\n```\n    let Some(prop1_value) \u003d prop_map.remove(name) else {\n        return Err(anyhow!(\n              \"Extra field detected in Dt2 that is not in Dt1. Field name: {}\",\n              name));\n    };\n    let prop_compare \u003d prop1_value \u003d\u003d *prop.value().map_err(fdterr_to_anyhow)?;\n\n```",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 14
+      },
+      "revId": "a5da4c86b83979496b2f6b0ca321fa44f7f51381",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf535146_b6ef7bb7",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-09T23:15:28Z",
+      "side": 1,
+      "message": "this works, but i think it would be easier to read the error messages if you printed the full path at once, e.g. `compare_props` might directly return an error message like `/pci/reg value mismatch: A vs B\"`",
+      "range": {
+        "startLine": 148,
+        "startChar": 24,
+        "endLine": 148,
+        "endChar": 61
+      },
+      "revId": "a5da4c86b83979496b2f6b0ca321fa44f7f51381",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e256b6f7_e2bf1a27",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-09T23:15:28Z",
+      "side": 1,
+      "message": "\"Dt1 missing node from Dt2\"",
+      "range": {
+        "startLine": 152,
+        "startChar": 44,
+        "endLine": 152,
+        "endChar": 68
+      },
+      "revId": "a5da4c86b83979496b2f6b0ca321fa44f7f51381",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55b50997_b921ad0a",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 1498,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-09T23:15:28Z",
+      "side": 1,
+      "message": "what do you think of providing paths, e.g. this one would be `/chosen/kaslr-seed`",
+      "range": {
+        "startLine": 1498,
+        "startChar": 33,
+        "endLine": 1498,
+        "endChar": 43
+      },
+      "revId": "a5da4c86b83979496b2f6b0ca321fa44f7f51381",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1241af0c_e43ee835",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 1504,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-09T23:15:28Z",
+      "side": 1,
+      "message": "off topic: we ought to ignore `linux,initrd-start` too. if someone updates the kernel image and it is a different size, then the initrd\u0027s start will shift around",
+      "range": {
+        "startLine": 1504,
+        "startChar": 33,
+        "endLine": 1504,
+        "endChar": 49
+      },
+      "revId": "a5da4c86b83979496b2f6b0ca321fa44f7f51381",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
