@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cbf7a34_c6147407",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-09T22:12:21Z",
+      "side": 1,
+      "message": "This doesn\u0027t return `UNSUPPORTED`, if this is intentional, would you mind documenting why?",
+      "range": {
+        "startLine": 236,
+        "startChar": 12,
+        "endLine": 236,
+        "endChar": 21
+      },
+      "revId": "df986eac163f360a078ac065a2cd4454824021ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
