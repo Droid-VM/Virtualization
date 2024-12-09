@@ -16,6 +16,7 @@
 
 use crate::uefi::linux::LINUX_EFI_LOADED_IMAGE_FIXED_GUID;
 use crate::uefi::loaded_image::LOADED_IMAGE_PROTOCOL_GUID;
+use crate::uefi::push_to_config_table;
 use crate::uefi::{EfiLoader, EFI_LOADER, EFI_SPECIFICATION_REVISION};
 use core::ffi::c_void;
 use core::mem;
@@ -308,10 +309,37 @@ unsafe extern "efiapi" fn locate_device_path(
 }
 
 unsafe extern "efiapi" fn install_configuration_table(
-    _guid_entry: *const Guid,
-    _table_ptr: *const c_void,
+    guid_entry: *const Guid,
+    table_ptr: *const c_void,
 ) -> Status {
-    Status::UNSUPPORTED
+    if guid_entry.is_null() {
+        return Status::INVALID_PARAMETER;
+    }
+
+    // SAFETY: This is safe as raw pointer 'guid_entry' is not null.
+    let proto_guid = unsafe { *guid_entry };
+
+    for (index, entry) in EFI_LOADER.lock().configuration_table.iter().enumerate() {
+        if entry.vendor_guid == proto_guid && table_ptr.is_null() {
+            // Remove this entry.
+            let mut efi_loader = EFI_LOADER.lock();
+            efi_loader.configuration_table.remove(index);
+            return Status::SUCCESS;
+        } else if entry.vendor_guid == proto_guid && !table_ptr.is_null() {
+            // Update this entry.
+            let mut efi_loader = EFI_LOADER.lock();
+            efi_loader.configuration_table[index].vendor_table = table_ptr as _;
+            return Status::SUCCESS;
+        }
+    }
+
+    if !table_ptr.is_null() {
+        // Add new entry.
+        push_to_config_table(proto_guid, table_ptr as _);
+        Status::SUCCESS
+    } else {
+        Status::NOT_FOUND
+    }
 }
 
 /// Image service functions.

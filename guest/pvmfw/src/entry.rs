@@ -90,7 +90,7 @@ pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, _arg3: u64
     match main_wrapper(fdt_address as usize, payload_start as usize, payload_size as usize) {
         Ok((entry, size, bcc, keep_uart, use_uefi)) => {
             if cfg!(feature = "supports_uefi") && use_uefi {
-                let _ = jump_to_payload_with_efi_stub(entry, size);
+                let _ = jump_to_payload_with_efi_stub(entry, size, fdt_address as _);
             } else {
                 jump_to_payload(fdt_address, entry.try_into().unwrap(), bcc, keep_uart);
             }
@@ -320,8 +320,9 @@ fn jump_to_payload(fdt_address: u64, payload_start: u64, bcc: Range<usize>, keep
 fn jump_to_payload_with_efi_stub(
     payload_start: usize,
     payload_size: usize,
+    fdt_address: usize,
 ) -> Result<(), RebootReason> {
-    init_efi(payload_start, payload_size);
+    init_efi(payload_start, payload_size, fdt_address);
     if let Some(ep) = locate_linux_efi_entrypoint(payload_start, payload_size) {
         let status = execute_efi_payload(ep);
         error!("EFI payload returned: {:?}", status);
