@@ -86,12 +86,8 @@ pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, _arg3: u64
     // - can't access MMIO (except the console, already configured by vmbase)
 
     match main_wrapper(fdt_address as usize, payload_start as usize, payload_size as usize) {
-        Ok((entry, size, bcc, keep_uart, use_uefi)) => {
-            if cfg!(feature = "supports_uefi") && use_uefi {
-                let _ = jump_to_payload_with_efi_stub(entry, size);
-            } else {
-                jump_to_payload(fdt_address, entry.try_into().unwrap(), bcc, keep_uart);
-            }
+        Ok((entry, bcc, keep_uart)) => {
+            jump_to_payload(fdt_address, entry.try_into().unwrap(), bcc, keep_uart)
         }
         Err(e) => {
             const REBOOT_REASON_CONSOLE: usize = 1;
@@ -111,7 +107,7 @@ fn main_wrapper(
     fdt: usize,
     payload: usize,
     payload_size: usize,
-) -> Result<(usize, usize, Range<usize>, bool, bool), RebootReason> {
+) -> Result<(usize, Range<usize>, bool), RebootReason> {
     // Limitations in this function:
     // - only access MMIO once (and while) it has been mapped and configured
     // - only perform logging once the logger has been initialized
@@ -140,7 +136,7 @@ fn main_wrapper(
     )?;
 
     // This wrapper allows main() to be blissfully ignorant of platform details.
-    let (next_bcc, debuggable_payload, use_uefi) = crate::main(
+    let (next_bcc, debuggable_payload) = crate::main(
         slices.fdt,
         slices.kernel,
         slices.ramdisk,
@@ -159,7 +155,7 @@ fn main_wrapper(
     })?;
     unshare_all_memory();
 
-    Ok((slices.kernel.as_ptr() as usize, slices.kernel.len(), next_bcc, keep_uart, use_uefi))
+    Ok((slices.kernel.as_ptr() as usize, next_bcc, keep_uart))
 }
 
 fn jump_to_payload(fdt_address: u64, payload_start: u64, bcc: Range<usize>, keep_uart: bool) -> ! {
@@ -310,20 +306,6 @@ fn jump_to_payload(fdt_address: u64, payload_start: u64, bcc: Range<usize>, keep
             options(noreturn),
         );
     };
-}
-
-/// Alternate path for booting Linux EFI kernel.
-fn jump_to_payload_with_efi_stub(
-    payload_start: usize,
-    payload_size: usize,
-) -> Result<(), RebootReason> {
-    if let Some(ep) = locate_linux_efi_entrypoint(payload_start, payload_size) {
-        let status = execute_efi_payload(ep);
-        error!("EFI payload returned: {:?}", status);
-        Err(RebootReason::GuestBootFailed)
-    } else {
-        Err(RebootReason::InvalidPayload)
-    }
 }
 
 fn get_appended_data_slice() -> Result<&'static mut [u8], MemoryTrackerError> {
