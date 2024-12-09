@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14fce4ba_e6ce952b",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-09T22:26:23Z",
+      "side": 1,
+      "message": "drop this as it duplicates L146?",
+      "range": {
+        "startLine": 137,
+        "startChar": 19,
+        "endLine": 137,
+        "endChar": 36
+      },
+      "revId": "ad2406acabefa3299efd046bb64cbfaab0c0ce8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5178a247_cd044470",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-09T22:26:23Z",
+      "side": 1,
+      "message": "Could you move the \"business logic\" (including the calls to `vmbase::heap`) into a method `EfiLoader::allocate_pool(\u0026mut self, MemoryType, size) -\u003e NonNull\u003cu8\u003e`, so that we have access to a data state persisting across calls (e.g. to record allocated buffers to validate arguments to `free`)?",
+      "range": {
+        "startLine": 141,
+        "startChar": 3,
+        "endLine": 148,
+        "endChar": 6
+      },
+      "revId": "ad2406acabefa3299efd046bb64cbfaab0c0ce8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0210344d_80248b31",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-09T22:26:23Z",
+      "side": 1,
+      "message": "I think we should panic here (and in `set_mem`) as the caller won\u0027t check the return value (there is none), proceeding as if the call hadn\u0027t failed, leading to UB.",
+      "range": {
+        "startLine": 451,
+        "startChar": 8,
+        "endLine": 451,
+        "endChar": 14
+      },
+      "revId": "ad2406acabefa3299efd046bb64cbfaab0c0ce8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
