@@ -120,13 +120,13 @@ impl EfiLoader {
         &mut self.rt_properties_table as *const _ as *mut c_void
     }
 
-    fn set_loaded_image_protocol(&mut self, payload_start: usize, payload_size: usize) {
-        self.loaded_image_protocol.image_base = payload_start as *const _;
-        let image_size = payload_size.try_into().unwrap();
+    fn set_loaded_image_protocol(&mut self, payload: &[u8]) {
+        self.loaded_image_protocol.image_base = payload.as_ptr().cast();
+        let image_size = payload.len().try_into().unwrap();
         self.loaded_image_protocol.image_size = image_size;
     }
 
-    fn patch_pointers(&mut self, payload_start: usize, payload_size: usize) {
+    fn patch_pointers(&mut self, payload: &[u8]) {
         self.system_table.boot_services = &mut self.boot_services as *mut _;
         self.system_table.runtime_services = &mut self.runtime_services as *mut _;
         self.system_table.firmware_vendor = &mut self.firmware_vendor as *mut _;
@@ -134,7 +134,7 @@ impl EfiLoader {
         self.system_table.stderr = &mut self.simple_text_output_protocol as *mut _;
         self.loaded_image_protocol.system_table = &mut self.system_table as *mut _;
 
-        self.set_loaded_image_protocol(payload_start, payload_size);
+        self.set_loaded_image_protocol(payload);
     }
 }
 
@@ -143,12 +143,12 @@ impl EfiLoader {
 unsafe impl Send for EfiLoader {}
 
 // Initialize parameters passed to the EFI stub by the EFI loader.
-pub fn init_efi(payload_start: usize, payload_size: usize, fdt_address: usize) {
+pub fn init_efi(payload: &[u8]) {
     let rt_properties_table_ptr = EFI_LOADER.lock().get_rt_properties_table_ptr();
     push_to_config_table(RT_PROPERTIES_TABLE_GUID, rt_properties_table_ptr);
     push_to_config_table(DEVICE_TREE_GUID, fdt_address as *mut c_void);
 
-    EFI_LOADER.lock().patch_pointers(payload_start, payload_size);
+    EFI_LOADER.lock().patch_pointers(payload);
 }
 
 fn push_to_config_table(vendor_guid: Guid, vendor_table: *mut c_void) {
