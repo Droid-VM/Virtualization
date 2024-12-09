@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d22fce43_e2466efc",
+        "filename": "guest/pvmfw/src/uefi/stdio.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-09T22:19:15Z",
+      "side": 1,
+      "message": "Check for non-null (use `NonNull`?) and that it\u0027s properly aligned",
+      "range": {
+        "startLine": 47,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 22
+      },
+      "revId": "e0268b056f611e588a82101ba2708a8e4715191a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c6dabfd_40b74b1b",
+        "filename": "guest/pvmfw/src/uefi/stdio.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-09T22:19:15Z",
+      "side": 1,
+      "message": "Where\u0027s this limit coming from? I _think_ we have to blindly trust the caller, unfortunately.",
+      "range": {
+        "startLine": 52,
+        "startChar": 16,
+        "endLine": 52,
+        "endChar": 18
+      },
+      "revId": "e0268b056f611e588a82101ba2708a8e4715191a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "005300f4_fa01e76c",
+        "filename": "guest/pvmfw/src/uefi/stdio.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-09T22:19:15Z",
+      "side": 1,
+      "message": "Would you mind splitting newlines? Also, we might want to add a prefix to `\"{s}\"` to distinguish from non-payload logs.",
+      "range": {
+        "startLine": 64,
+        "startChar": 3,
+        "endLine": 64,
+        "endChar": 17
+      },
+      "revId": "e0268b056f611e588a82101ba2708a8e4715191a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
