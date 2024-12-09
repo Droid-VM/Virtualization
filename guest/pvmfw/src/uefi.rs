@@ -21,15 +21,21 @@ mod runtime_services;
 mod stdio;
 
 use crate::entry::FIRMWARE_REVISION;
+use crate::uefi::linux::DEVICE_TREE_GUID;
 use crate::uefi::linux::LINUX_EFI_LOADED_IMAGE_FIXED_GUID;
+use crate::uefi::linux::RT_PROPERTIES_TABLE_GUID;
 use crate::uefi::loaded_image::LOADED_IMAGE_PROTOCOL_GUID;
+use crate::uefi::runtime_services::RtPropertiesTable;
+use alloc::vec::Vec;
 use core::ffi::c_void;
 use core::mem;
 use core::ptr::{addr_of_mut, null, null_mut, NonNull};
+use runtime_services::init_rt_properties_table;
 use spin::mutex::SpinMutex;
 use uefi_raw::protocol::console::SimpleTextOutputProtocol;
 use uefi_raw::protocol::loaded_image::LoadedImageProtocol;
 use uefi_raw::table::boot::{BootServices, MemoryType};
+use uefi_raw::table::configuration::ConfigurationTable;
 use uefi_raw::table::runtime::RuntimeServices;
 use uefi_raw::table::system::SystemTable;
 use uefi_raw::table::{Header, Revision};
@@ -50,6 +56,8 @@ pub struct EfiLoader {
     simple_text_output_protocol: SimpleTextOutputProtocol,
     loaded_image_protocol: LoadedImageProtocol,
     firmware_vendor: [u16; 6],
+    rt_properties_table: RtPropertiesTable,
+    configuration_table: Vec<ConfigurationTable>,
 }
 
 impl EfiLoader {
@@ -90,6 +98,8 @@ impl EfiLoader {
         let simple_text_output_protocol = stdio::init_simple_text_output_protocol();
         let loaded_image_protocol = loaded_image::init_loaded_image_protocol();
         let firmware_vendor = Self::FIRMWARE_VENDOR;
+        let rt_properties_table = init_rt_properties_table();
+        let configuration_table = Vec::new();
 
         Self {
             system_table,
@@ -98,11 +108,17 @@ impl EfiLoader {
             simple_text_output_protocol,
             loaded_image_protocol,
             firmware_vendor,
+            rt_properties_table,
+            configuration_table,
         }
     }
 
     fn get_system_table_ptr(&mut self) -> *mut SystemTable {
         &mut self.system_table as _
+    }
+
+    fn get_rt_properties_table_ptr(&mut self) -> *mut c_void {
+        &mut self.rt_properties_table as *const _ as *mut c_void
     }
 
     fn set_loaded_image_protocol(&mut self, payload: &[u8]) {
@@ -152,6 +168,47 @@ impl EfiLoader {
             _ => None,
         }
     }
+
+    fn push_to_config_table(&mut self, vendor_guid: Guid, vendor_table: *mut c_void) {
+        let configuration_table_entry = ConfigurationTable { vendor_guid, vendor_table };
+
+        self.configuration_table.push(configuration_table_entry);
+        self.system_table.configuration_table = self.configuration_table.as_mut_ptr();
+        self.system_table.number_of_configuration_table_entries = self.configuration_table.len();
+    }
+
+    pub fn install_configuration_table(
+        &mut self,
+        guid_entry: *const Guid,
+        table_ptr: *const c_void,
+    ) -> Status {
+        if !non_null_and_aligned_const(guid_entry) {
+            return Status::INVALID_PARAMETER;
+        }
+
+        // SAFETY: 'guid_entry' is not null and is aligned.
+        let proto_guid = unsafe { *guid_entry };
+
+        for (index, entry) in self.configuration_table.iter().enumerate() {
+            if entry.vendor_guid == proto_guid && table_ptr.is_null() {
+                // Remove this entry.
+                self.configuration_table.remove(index);
+                return Status::SUCCESS;
+            } else if entry.vendor_guid == proto_guid && !table_ptr.is_null() {
+                // Update this entry.
+                self.configuration_table[index].vendor_table = table_ptr as _;
+                return Status::SUCCESS;
+            }
+        }
+
+        if !table_ptr.is_null() {
+            // Add new entry.
+            self.push_to_config_table(proto_guid, table_ptr as _);
+            Status::SUCCESS
+        } else {
+            Status::NOT_FOUND
+        }
+    }
 }
 
 // SAFETY: Send trait indicates whether a type is safe to transfer across threads. We are working
@@ -159,8 +216,13 @@ impl EfiLoader {
 unsafe impl Send for EfiLoader {}
 
 // Initialize parameters passed to the EFI stub by the EFI loader.
-pub fn init_efi(payload: &[u8]) {
+pub fn init_efi(payload: &[u8], fdt: &mut [u8]) {
     let mut efi_loader = EFI_LOADER.lock();
+
+    let rt_properties_table_ptr = efi_loader.get_rt_properties_table_ptr();
+    efi_loader.push_to_config_table(RT_PROPERTIES_TABLE_GUID, rt_properties_table_ptr);
+    efi_loader.push_to_config_table(DEVICE_TREE_GUID, fdt.as_ptr() as *mut c_void);
+
     efi_loader.patch_pointers(payload);
 }
 

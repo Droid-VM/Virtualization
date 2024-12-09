@@ -26,6 +26,14 @@ use uefi_raw::{Char16, Guid, PhysicalAddress, Status};
 use crate::uefi::EFI_SPECIFICATION_REVISION;
 
 const RUNTIME_SERVICES_SIGNATURE: u64 = 0x0565_2453_544e_5552;
+const RT_PROPERTIES_TABLE_VERSION: u16 = 0x1;
+
+#[repr(C)]
+pub struct RtPropertiesTable {
+    pub version: u16,
+    pub length: u16,
+    pub runtime_services_supported: u32,
+}
 
 pub const fn init_runtime_services() -> RuntimeServices {
     RuntimeServices {
@@ -159,4 +167,12 @@ unsafe extern "efiapi" fn query_variable_info(
     _maximum_variable_size: *mut u64,
 ) -> Status {
     Status::UNSUPPORTED
+}
+
+pub const fn init_rt_properties_table() -> RtPropertiesTable {
+    RtPropertiesTable {
+        version: RT_PROPERTIES_TABLE_VERSION,
+        length: mem::size_of::<RtPropertiesTable>() as _,
+        runtime_services_supported: 0,
+    }
 }
