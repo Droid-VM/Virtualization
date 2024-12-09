@@ -16,6 +16,67 @@
       "message": "@zyy@google.com I lost NDK-API-Review. Can you do again? Thank you!",
       "revId": "04b8c6e599449a673eb211285634bec28a202e07",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05a28eec_1e3b0227",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-12-09T03:24:29Z",
+      "side": 1,
+      "message": "seems like that `struct timespec* timeout` is more common.\n\nCan we merge two with `_waitforStop()`, by `null` timeout as wait indefinitely? (not sure whether it\u0027s common in LLNDK)",
+      "range": {
+        "startLine": 360,
+        "startChar": 74,
+        "endLine": 360,
+        "endChar": 97
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "212d25bb_afacfa43",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 344,
+                "startChar": 0,
+                "endLine": 354,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 357,
+                "startChar": 0,
+                "endLine": 358,
+                "endChar": 0
+              },
+              "replacement": " *   - If the virtual machine stops within the timeout (or indefinitely if `timeout` is null), it sets\n *     `reason` and returns true.\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 360,
+                "startChar": 0,
+                "endLine": 362,
+                "endChar": 0
+              },
+              "replacement": "bool AVirtualMachine_waitForStop(AVirtualMachine* _Nonnull vm,\n                                 struct timespec* _Nullable timeout,\n                                 enum AVirtualMachineStopReason* _Nonnull reason)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "04b8c6e599449a673eb211285634bec28a202e07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
