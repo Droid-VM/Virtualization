@@ -62,8 +62,9 @@ public class CertificateUtils {
             }
             return ((KeyStore.PrivateKeyEntry) ks.getEntry(ALIAS, null));
         } catch (Exception e) {
-            throw new RuntimeException("cannot generate or get key", e);
+            Log.e(TAG, "cannot generate or get key", e);
         }
+        return null;
     }
 
     private static void createKey()
@@ -94,7 +95,7 @@ public class CertificateUtils {
                             + end_cert;
             writer.write(output.getBytes());
         } catch (IOException | CertificateEncodingException e) {
-            throw new RuntimeException("cannot write certs", e);
+            Log.d(TAG, "cannot write cert", e);
         }
     }
 }

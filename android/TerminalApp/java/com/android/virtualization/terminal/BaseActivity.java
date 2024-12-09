@@ -39,15 +39,6 @@ public abstract class BaseActivity extends AppCompatActivity {
                             NotificationManager.IMPORTANCE_DEFAULT);
             notificationManager.createNotificationChannel(channel);
         }
-
-        if (!(this instanceof ErrorActivity)) {
-            Thread currentThread = Thread.currentThread();
-            if (!(currentThread.getUncaughtExceptionHandler()
-                    instanceof TerminalExceptionHandler)) {
-                currentThread.setUncaughtExceptionHandler(
-                        new TerminalExceptionHandler(getApplicationContext()));
-            }
-        }
     }
 
     @Override
