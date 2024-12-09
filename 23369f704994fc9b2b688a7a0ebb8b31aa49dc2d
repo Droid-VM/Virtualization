@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19242adb_52667dd7",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-09T22:35:10Z",
+      "side": 1,
+      "message": "Take the lock once, as you\u0027ll re-use it in aosp/3399546:\n```\nlet efi_loader \u003d EFI_LOADER.lock();\nefi_loader.patch_pointers(...);\n```",
+      "range": {
+        "startLine": 129,
+        "startChar": 4,
+        "endLine": 129,
+        "endChar": 66
+      },
+      "revId": "23369f704994fc9b2b688a7a0ebb8b31aa49dc2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
