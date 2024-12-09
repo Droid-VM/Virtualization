@@ -70,6 +70,30 @@
       },
       "revId": "f8fe1493d32ab982d9efe39c7ccaa3eb2e4c686d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3a84598_9f857bba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-09T20:17:19Z",
+      "side": 1,
+      "message": "Sure. However, until we remove the `cfg!(...)` statements, we should still have a working implementation when `!cfg!(llpvm_changes)`, which this CL attempts to provide.\n\nNot sure about the trunk branches but I\u0027m happy to back-port if/once deemed necessary.",
+      "parentUuid": "8b0fff17_a91e48fd",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 46
+      },
+      "revId": "f8fe1493d32ab982d9efe39c7ccaa3eb2e4c686d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
