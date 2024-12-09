@@ -43,6 +43,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f321e472_1d23f692",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-09T22:10:04Z",
+      "side": 1,
+      "message": "Should we use `addr_of_mut`?",
+      "range": {
+        "startLine": 83,
+        "startChar": 44,
+        "endLine": 83,
+        "endChar": 79
+      },
+      "revId": "70a560729a4ce4bfac3250d938a00e4f1762852d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a05b01fb_98cc9598",
         "filename": "guest/pvmfw/src/uefi/linux.rs",
         "patchSetId": 19
