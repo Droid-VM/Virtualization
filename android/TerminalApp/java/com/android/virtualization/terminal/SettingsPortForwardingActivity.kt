@@ -22,27 +22,37 @@ import androidx.recyclerview.widget.RecyclerView
 
 class SettingsPortForwardingActivity : AppCompatActivity() {
     private lateinit var mPortsStateManager: PortsStateManager
-    private lateinit var mAdapter: SettingsPortForwardingAdapter
+    private lateinit var mActivePortsAdapter: SettingsPortForwardingActiveAdapter
+    private lateinit var mInactivePortsAdapter: SettingsPortForwardingInactiveAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_port_forwarding)
 
         mPortsStateManager = PortsStateManager.getInstance(this)
-        mAdapter = SettingsPortForwardingAdapter(mPortsStateManager)
 
-        val recyclerView: RecyclerView = findViewById(R.id.settings_port_forwarding_recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = mAdapter
+        mActivePortsAdapter = SettingsPortForwardingActiveAdapter(mPortsStateManager)
+        val activeRecyclerView: RecyclerView =
+            findViewById(R.id.settings_port_forwarding_active_recycler_view)
+        activeRecyclerView.layoutManager = LinearLayoutManager(this)
+        activeRecyclerView.adapter = mActivePortsAdapter
+
+        mInactivePortsAdapter = SettingsPortForwardingInactiveAdapter(mPortsStateManager)
+        val inactiveRecyclerView: RecyclerView =
+            findViewById(R.id.settings_port_forwarding_inactive_recycler_view)
+        inactiveRecyclerView.layoutManager = LinearLayoutManager(this)
+        inactiveRecyclerView.adapter = mInactivePortsAdapter
     }
 
     override fun onResume() {
         super.onResume()
-        mAdapter.registerPortsStateListener()
+        mActivePortsAdapter.registerPortsStateListener()
+        mInactivePortsAdapter.registerPortsStateListener()
     }
 
     override fun onPause() {
-        mAdapter.unregisterPortsStateListener()
+        mInactivePortsAdapter.unregisterPortsStateListener()
+        mActivePortsAdapter.unregisterPortsStateListener()
         super.onPause()
     }
 }
