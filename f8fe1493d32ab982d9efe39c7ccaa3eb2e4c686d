@@ -46,6 +46,30 @@
       },
       "revId": "f8fe1493d32ab982d9efe39c7ccaa3eb2e4c686d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b0fff17_a91e48fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-09T19:44:13Z",
+      "side": 1,
+      "message": "pvmfw from Android 15 \u0026 above must be built with `cfg!(llpvm_changes)` enabled. These were (trunk stable related) feature flags in Android 15. The idea was, since these are desert release features, these will be incrementally enabled staging branches \u0026 then trunk branches.\n\n\n@ioffe@google.com knows a lot more about these flags, but IIUC, the code you submit here will not be auto-backported to any Android 15 trunk branches with llpvm_disabled (I expect all of them to have llpvm_changes enabled).",
+      "parentUuid": "bc2a09e3_0c36d5db",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 46
+      },
+      "revId": "f8fe1493d32ab982d9efe39c7ccaa3eb2e4c686d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
