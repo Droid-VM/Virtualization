@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cefa73ba_1b7bbe6b",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2024-12-09T23:23:35Z",
+      "side": 1,
+      "message": "Please make it const if it\u0027s not an in/out parameter that gets updated after the wait in some way",
+      "range": {
+        "startLine": 346,
+        "startChar": 63,
+        "endLine": 346,
+        "endChar": 89
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2bad7df7_171daada",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 346,
+                "startChar": 0,
+                "endLine": 347,
+                "endChar": 0
+              },
+              "replacement": "bool AVirtualMachine_waitForStop(AVirtualMachine* _Nonnull vm, const struct timespec* _Nullable timeout,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "998c70bb94f08bc5665cf5befcc4fe7d131cdb19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
