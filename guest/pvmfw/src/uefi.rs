@@ -143,10 +143,10 @@ impl EfiLoader {
 unsafe impl Send for EfiLoader {}
 
 // Initialize parameters passed to the EFI stub by the EFI loader.
-pub fn init_efi(payload: &[u8]) {
+pub fn init_efi(payload: &[u8], fdt: &mut [u8]) {
     let rt_properties_table_ptr = EFI_LOADER.lock().get_rt_properties_table_ptr();
     push_to_config_table(RT_PROPERTIES_TABLE_GUID, rt_properties_table_ptr);
-    push_to_config_table(DEVICE_TREE_GUID, fdt_address as *mut c_void);
+    push_to_config_table(DEVICE_TREE_GUID, fdt.as_ptr() as *mut c_void);
 
     EFI_LOADER.lock().patch_pointers(payload);
 }
