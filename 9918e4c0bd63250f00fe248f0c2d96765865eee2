@@ -44,6 +44,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3652d6ee_c705a1a5",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActiveAdapter.kt",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-12-10T05:51:45Z",
+      "side": 1,
+      "message": "When I investigated talkback, it was okay to leave `viewHolder.port.text` for active ports. Because, materialSwitch itself provides information either `on` or `off`.\n\nBut for inactive ports, content description didn\u0027t provide enough information via talk back. That\u0027s why I added prefix string(for English at least) for the port.",
+      "parentUuid": "08f92de8_1bf1b1b5",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 0
+      },
+      "revId": "9918e4c0bd63250f00fe248f0c2d96765865eee2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4e5e68d4_e8d52587",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingBaseAdapter.kt",
         "patchSetId": 5
@@ -178,6 +202,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8242bb20_bc25eaeb",
+        "filename": "android/TerminalApp/res/layout/settings_port_forwarding_active_item.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-12-10T05:51:45Z",
+      "side": 1,
+      "message": "Because the interval between layouts for each inactive port item was too close.",
+      "parentUuid": "f81f1315_644c4ddc",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 28
+      },
+      "revId": "9918e4c0bd63250f00fe248f0c2d96765865eee2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bfe7a477_f3f445bc",
         "filename": "android/TerminalApp/res/layout/settings_port_forwarding_inactive_item.xml",
         "patchSetId": 5
@@ -189,6 +237,30 @@
       "writtenOn": "2024-12-10T05:44:44Z",
       "side": 1,
       "message": "Q: why do we need `minHeight`? If it\u0027s for image, then try `android:adjustViewBounds` to button",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 28
+      },
+      "revId": "9918e4c0bd63250f00fe248f0c2d96765865eee2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feb7eaac_88f9f27b",
+        "filename": "android/TerminalApp/res/layout/settings_port_forwarding_inactive_item.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-12-10T05:51:45Z",
+      "side": 1,
+      "message": "Is it available to make it higher though the size of image itself is 24dp*24dp?",
+      "parentUuid": "bfe7a477_f3f445bc",
       "range": {
         "startLine": 22,
         "startChar": 0,
