@@ -3,6 +3,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "08f92de8_1bf1b1b5",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActiveAdapter.kt",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-12-10T05:44:44Z",
+      "side": 1,
+      "message": "Here, you set contentDescription to number, but `SettingsPortForwardingInactiveAdapter` has `port %d`. What\u0027s better between two?",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8504df7a_a156a506",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActiveAdapter.kt",
+              "range": {
+                "startLine": 52,
+                "startChar": 0,
+                "endLine": 53,
+                "endChar": 0
+              },
+              "replacement": "        viewHolder.enabledSwitch.contentDescription \u003d\n            viewHolder.port.context.getString(R.string.settings_port_forwarding_active_item_enabled_switch_content_description, port)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9918e4c0bd63250f00fe248f0c2d96765865eee2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4e5e68d4_e8d52587",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingBaseAdapter.kt",
         "patchSetId": 5
@@ -61,6 +102,121 @@
         "startChar": 0,
         "endLine": 61,
         "endChar": 5
+      },
+      "revId": "9918e4c0bd63250f00fe248f0c2d96765865eee2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96f1ca46_3986deff",
+        "filename": "android/TerminalApp/res/layout/settings_port_forwarding.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-12-10T05:44:44Z",
+      "side": 1,
+      "message": "`wrap_content`?",
+      "range": {
+        "startLine": 47,
+        "startChar": 16,
+        "endLine": 47,
+        "endChar": 43
+      },
+      "revId": "9918e4c0bd63250f00fe248f0c2d96765865eee2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b6f2ca3_ffd92d9c",
+        "filename": "android/TerminalApp/res/layout/settings_port_forwarding.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-12-10T05:44:44Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 62,
+        "startChar": 31,
+        "endLine": 62,
+        "endChar": 43
+      },
+      "revId": "9918e4c0bd63250f00fe248f0c2d96765865eee2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f81f1315_644c4ddc",
+        "filename": "android/TerminalApp/res/layout/settings_port_forwarding_active_item.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-12-10T05:44:44Z",
+      "side": 1,
+      "message": "Q: why do we need this?",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 28
+      },
+      "revId": "9918e4c0bd63250f00fe248f0c2d96765865eee2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfe7a477_f3f445bc",
+        "filename": "android/TerminalApp/res/layout/settings_port_forwarding_inactive_item.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-12-10T05:44:44Z",
+      "side": 1,
+      "message": "Q: why do we need `minHeight`? If it\u0027s for image, then try `android:adjustViewBounds` to button",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 28
+      },
+      "revId": "9918e4c0bd63250f00fe248f0c2d96765865eee2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45f1fd99_10e1905e",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-12-10T05:44:44Z",
+      "side": 1,
+      "message": "Please also mention that this is for talkback.",
+      "range": {
+        "startLine": 92,
+        "startChar": 9,
+        "endLine": 92,
+        "endChar": 20
       },
       "revId": "9918e4c0bd63250f00fe248f0c2d96765865eee2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
