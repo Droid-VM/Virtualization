@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f50eb68_888bc59f",
+        "filename": "guest/pvmfw/src/entry.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-10T23:13:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39a8f1ae_d1ec2453",
+      "revId": "70a560729a4ce4bfac3250d938a00e4f1762852d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "098ba2f8_dd9ef2e3",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-12-09T22:06:05Z",
       "side": 1,
       "message": "Drop this? Most of this code attempts to be generic, right?",
+      "range": {
+        "startLine": 34,
+        "startChar": 48,
+        "endLine": 34,
+        "endChar": 81
+      },
+      "revId": "70a560729a4ce4bfac3250d938a00e4f1762852d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "968d21a6_ebe18fce",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-10T23:13:48Z",
+      "side": 1,
+      "message": "Yes, dropped.",
+      "parentUuid": "098ba2f8_dd9ef2e3",
       "range": {
         "startLine": 34,
         "startChar": 48,
@@ -64,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de69ee12_3c444fab",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-10T23:13:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f321e472_1d23f692",
+      "range": {
+        "startLine": 83,
+        "startChar": 44,
+        "endLine": 83,
+        "endChar": 79
+      },
+      "revId": "70a560729a4ce4bfac3250d938a00e4f1762852d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a05b01fb_98cc9598",
@@ -77,6 +143,24 @@
       "writtenOn": "2024-12-09T22:06:05Z",
       "side": 1,
       "message": "Squash the changes to this file into the parent commit",
+      "revId": "70a560729a4ce4bfac3250d938a00e4f1762852d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07a625ae_3707ba5e",
+        "filename": "guest/pvmfw/src/uefi/linux.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-10T23:13:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a05b01fb_98cc9598",
       "revId": "70a560729a4ce4bfac3250d938a00e4f1762852d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
