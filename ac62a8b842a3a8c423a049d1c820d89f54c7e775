@@ -134,6 +134,30 @@
       },
       "revId": "ac62a8b842a3a8c423a049d1c820d89f54c7e775",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05a1c0de_39283792",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-10T09:26:32Z",
+      "side": 1,
+      "message": "I don\u0027t think we want verified boot in the VM, at least for now. User can switch to a new kernel if they want. This VM is not a secure place; it\u0027s rather a sandbox.\n\nSo, using unsigned kernel is fine.",
+      "parentUuid": "3ec31da4_630004c0",
+      "range": {
+        "startLine": 287,
+        "startChar": 32,
+        "endLine": 287,
+        "endChar": 41
+      },
+      "revId": "ac62a8b842a3a8c423a049d1c820d89f54c7e775",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
