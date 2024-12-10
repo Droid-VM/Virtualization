@@ -49,6 +49,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37c260bb_b1a70d73",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2024-12-10T14:46:38Z",
+      "side": 1,
+      "message": "This was checked in line 276.",
+      "range": {
+        "startLine": 294,
+        "startChar": 8,
+        "endLine": 294,
+        "endChar": 25
+      },
+      "revId": "9cba7a5ee002dbd6b6f09a51c38b34a3b94ad4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c3de225_800e4878",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2024-12-10T14:46:38Z",
+      "side": 1,
+      "message": "If search type is `ByRegisterNotify`, we always return the same value, regardless of the key?",
+      "range": {
+        "startLine": 292,
+        "startChar": 4,
+        "endLine": 297,
+        "endChar": 5
+      },
+      "revId": "9cba7a5ee002dbd6b6f09a51c38b34a3b94ad4a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bb33864f_5e9897db",
         "filename": "guest/pvmfw/src/uefi/boot_services.rs",
         "patchSetId": 3
