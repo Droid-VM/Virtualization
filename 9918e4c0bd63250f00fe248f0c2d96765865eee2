@@ -322,6 +322,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "89345015_bd1a1572",
+        "filename": "android/TerminalApp/res/layout/settings_port_forwarding_active_item.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-12-10T08:08:50Z",
+      "side": 1,
+      "message": "I\u0027m not still certain why I need to pick `layout_height`. As you said, layout can be broken when large item is added. Why don\u0027t we setting `minHeight` for sorting most items with same height, and let just few items being larger?",
+      "parentUuid": "0a18de0f_523d242a",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 28
+      },
+      "revId": "9918e4c0bd63250f00fe248f0c2d96765865eee2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bfe7a477_f3f445bc",
         "filename": "android/TerminalApp/res/layout/settings_port_forwarding_inactive_item.xml",
         "patchSetId": 5
