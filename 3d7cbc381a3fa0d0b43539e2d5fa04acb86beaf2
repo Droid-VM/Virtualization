@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c53c6a1_8c37f8e5",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-10T21:49:10Z",
+      "side": 1,
+      "message": "paths?",
+      "range": {
+        "startLine": 39,
+        "startChar": 16,
+        "endLine": 39,
+        "endChar": 22
+      },
+      "revId": "3d7cbc381a3fa0d0b43539e2d5fa04acb86beaf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2c50595_f9483d1a",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-10T21:49:10Z",
+      "side": 1,
+      "message": "will be ignored",
+      "range": {
+        "startLine": 42,
+        "startChar": 28,
+        "endLine": 42,
+        "endChar": 40
+      },
+      "revId": "3d7cbc381a3fa0d0b43539e2d5fa04acb86beaf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e027585b_d29bdfbd",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-10T21:49:10Z",
+      "side": 1,
+      "message": "\"Flattened Device Tree\" is the name of the format. It looks like `Fdt::from_slice` will only fail if it doesn\u0027t pass some validation, so an error like \"invalid device tree\" might be more accurate",
+      "range": {
+        "startLine": 61,
+        "startChar": 45,
+        "endLine": 61,
+        "endChar": 62
+      },
+      "revId": "3d7cbc381a3fa0d0b43539e2d5fa04acb86beaf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f419008b_1850140e",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-10T21:49:10Z",
+      "side": 1,
+      "message": "maybe `prop_path`",
+      "range": {
+        "startLine": 77,
+        "startChar": 12,
+        "endLine": 77,
+        "endChar": 16
+      },
+      "revId": "3d7cbc381a3fa0d0b43539e2d5fa04acb86beaf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40d0a98a_6d0621ac",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-10T21:49:10Z",
+      "side": 1,
+      "message": "consider a more concise format for the report sent to stderr, e.g.\n\n```\nadded:   /foo \u003d $value\nremoved: /bar \u003d $value\nchanged: /baz \u003d $old -\u003e $new\ndetected 3 diffs\n```",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 15
+      },
+      "revId": "3d7cbc381a3fa0d0b43539e2d5fa04acb86beaf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a19001bb_495c0b85",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-10T21:49:10Z",
+      "side": 1,
+      "message": "we should print these to stderr and keep going, only return an error at the very end so that users will see all the issues at once\n\nalternatively, collect them into a struct and then the \"report\" printing code code can be separated from the diff detection code. up to you",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 15
+      },
+      "revId": "3d7cbc381a3fa0d0b43539e2d5fa04acb86beaf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ec77e41_829863a7",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-10T21:49:10Z",
+      "side": 1,
+      "message": "ideally we\u0027d print the values in the DTS format, but i don\u0027t see how to do that. if we\u0027ve got to print raw binary strings, consider a common format, like hex, instead of rust\u0027s Debug format, maybe using https://docs.rs/hex/latest/hex/fn.encode.html",
+      "range": {
+        "startLine": 107,
+        "startChar": 45,
+        "endLine": 107,
+        "endChar": 49
+      },
+      "revId": "3d7cbc381a3fa0d0b43539e2d5fa04acb86beaf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
