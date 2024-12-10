@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c418b990_20ba88fa",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualizationService.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-10T07:16:17Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Common Typos: Common typo found: \"debuging\" -- should it be \"debugging\"?\n\nAnalyzer Description: Linter for catching common typos motivated by go/todo-fail and go/lol-codesearch. Shared with google3 common typos library go/common-typos.\nOwner: ayeaye-team@google.com\n\nCommon typo found: \"debuging\" -- should it be \"debugging\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 86,
+        "startChar": 47,
+        "endLine": 86,
+        "endChar": 55
+      },
+      "revId": "28de865956560b0b02598decd1efef4d70b63abb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1695e21b_2fdf4bed",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1933,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-10T07:16:17Z",
+      "side": 1,
+      "message": "isDebugPolicyEnabled or similar",
+      "range": {
+        "startLine": 1933,
+        "startChar": 20,
+        "endLine": 1933,
+        "endChar": 34
+      },
+      "revId": "28de865956560b0b02598decd1efef4d70b63abb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
