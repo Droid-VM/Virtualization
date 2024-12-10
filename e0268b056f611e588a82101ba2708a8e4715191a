@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d844eb0_5ed98e37",
+        "filename": "guest/pvmfw/src/uefi/stdio.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-10T23:15:49Z",
+      "side": 1,
+      "message": "`NonNull` semantics is tied to ensuring safe mutable access and as we have *const pointer I reckon we don\u0027t have to use it.",
+      "parentUuid": "d22fce43_e2466efc",
+      "range": {
+        "startLine": 47,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 22
+      },
+      "revId": "e0268b056f611e588a82101ba2708a8e4715191a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c6dabfd_40b74b1b",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea7e5a6f_0ea43c08",
+        "filename": "guest/pvmfw/src/uefi/stdio.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-10T23:15:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c6dabfd_40b74b1b",
+      "range": {
+        "startLine": 52,
+        "startChar": 16,
+        "endLine": 52,
+        "endChar": 18
+      },
+      "revId": "e0268b056f611e588a82101ba2708a8e4715191a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "005300f4_fa01e76c",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-12-09T22:19:15Z",
       "side": 1,
       "message": "Would you mind splitting newlines? Also, we might want to add a prefix to `\"{s}\"` to distinguish from non-payload logs.",
+      "range": {
+        "startLine": 64,
+        "startChar": 3,
+        "endLine": 64,
+        "endChar": 17
+      },
+      "revId": "e0268b056f611e588a82101ba2708a8e4715191a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7fa93a3_4105d078",
+        "filename": "guest/pvmfw/src/uefi/stdio.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-10T23:15:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "005300f4_fa01e76c",
       "range": {
         "startLine": 64,
         "startChar": 3,
