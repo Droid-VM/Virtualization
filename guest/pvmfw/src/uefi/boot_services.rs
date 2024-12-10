@@ -20,6 +20,8 @@ use crate::uefi::{EfiLoader, EFI_LOADER, EFI_SPECIFICATION_REVISION};
 use core::ffi::c_void;
 use core::mem;
 use core::ptr::{copy, null_mut, write_bytes, NonNull};
+use core::sync::atomic::Ordering;
+use log::info;
 use uefi_raw::protocol::device_path::DevicePathProtocol;
 use uefi_raw::table::boot::{
     BootServices, EventNotifyFn, EventType, InterfaceType, MemoryDescriptor, MemoryType,
@@ -27,6 +29,7 @@ use uefi_raw::table::boot::{
 };
 use uefi_raw::table::{Header, Revision};
 use uefi_raw::{Char16, Event, Guid, Handle, PhysicalAddress, Status};
+use vmbase::memory::SIZE_4KB;
 
 use super::{non_null_and_aligned_const, non_null_and_aligned_mut};
 
@@ -114,25 +117,77 @@ unsafe extern "efiapi" fn restore_tpl(_new_tpl: Tpl) {}
 /// Memory allocation functions.
 unsafe extern "efiapi" fn allocate_pages(
     _alloc_ty: u32,
-    _mem_ty: MemoryType,
-    _count: usize,
-    _addr: *mut PhysicalAddress,
+    mem_ty: MemoryType,
+    count: usize,
+    addr: *mut PhysicalAddress,
 ) -> Status {
-    Status::UNSUPPORTED
+    if addr.is_null() || mem_ty == MemoryType::PERSISTENT_MEMORY || mem_ty == MemoryType::UNACCEPTED
+    {
+        return Status::INVALID_PARAMETER;
+    }
+
+    let offset = EFI_LOADER.lock().get_allocated_pages() * SIZE_4KB;
+    let start = (ALLOC_POINTER + offset).try_into().unwrap();
+    let _ = EFI_LOADER.lock().add_allocated_pages(count).unwrap();
+    // SAFETY: This is safe as raw pointer 'addr' is not null.
+    unsafe { addr.write(start) };
+
+    info!("Allocated at {start:#x}");
+    increment_mem_map_counter();
+
+    Status::SUCCESS
 }
 
 unsafe extern "efiapi" fn free_pages(_addr: PhysicalAddress, _pages: usize) -> Status {
     Status::UNSUPPORTED
 }
 
+fn as_aligned_non_null<T>(ptr: *mut T) -> Option<NonNull<T>> {
+    let non_null = NonNull::new(ptr)?;
+    non_null.is_aligned().then_some(non_null)
+}
+
 unsafe extern "efiapi" fn get_memory_map(
-    _size: *mut usize,
-    _map: *mut MemoryDescriptor,
-    _key: *mut usize,
-    _desc_size: *mut usize,
-    _desc_version: *mut u32,
+    size: *mut usize,
+    map: *mut MemoryDescriptor,
+    key: *mut usize,
+    desc_size: *mut usize,
+    desc_version: *mut u32,
 ) -> Status {
-    Status::UNSUPPORTED
+    let Some(mut size) = as_aligned_non_null(size) else { return Status::INVALID_PARAMETER };
+    let Some(mut key) = as_aligned_non_null(key) else { return Status::INVALID_PARAMETER };
+    let Some(mut desc_size) = as_aligned_non_null(desc_size) else {
+        return Status::INVALID_PARAMETER;
+    };
+    let Some(mut desc_version) = as_aligned_non_null(desc_version) else {
+        return Status::INVALID_PARAMETER;
+    };
+
+    // SAFETY: TODO(nikolinailic)
+    let size = unsafe { size.as_mut() };
+
+    // SAFETY: TODO(nikolinailic)
+    let desc_size = unsafe { desc_size.as_mut() };
+
+    // SAFETY: TODO(nikolinailic)
+    let desc_version = unsafe { desc_version.as_mut() };
+
+    // SAFETY: TODO(nikolinailic)
+    let key = unsafe { key.as_mut() };
+
+    *desc_size = EfiLoader::MEM_MAP_DESC_SIZE;
+    *desc_version = EfiLoader::MEM_MAP_DESC_VERSION;
+    let memory_map = EFI_LOADER.lock().get_memory_map();
+    *size = memory_map.len() * EfiLoader::MEM_MAP_DESC_SIZE;
+    *key = MEM_MAP_KEY_COUNTER.load(Ordering::Relaxed);
+
+    if let Some(map) = as_aligned_non_null(map) {
+        // SAFETY: TODO(nikolinailic)
+        unsafe { copy(memory_map.as_ptr(), map.as_ptr(), memory_map.len()) };
+        Status::SUCCESS
+    } else {
+        Status::BUFFER_TOO_SMALL
+    }
 }
 
 unsafe extern "efiapi" fn allocate_pool(
@@ -350,7 +405,7 @@ unsafe extern "efiapi" fn unload_image(_image_handle: Handle) -> Status {
 }
 
 unsafe extern "efiapi" fn exit_boot_services(_image_handle: Handle, _map_key: usize) -> Status {
-    Status::UNSUPPORTED
+    Status::SUCCESS
 }
 
 /// Misc service functions.
@@ -554,3 +609,28 @@ fn set_protocol_interface_pointer(proto_guid: Guid, out_proto: *mut *mut c_void)
         Status::UNSUPPORTED
     }
 }
+
+// fn get_allocated_pages() -> usize {
+//     ALLOCATED_PAGES.load(Ordering::Relaxed)
+// }
+
+fn increment_mem_map_counter() {
+    MEM_MAP_KEY_COUNTER.fetch_add(1, Ordering::Relaxed);
+}
+
+// fn add_allocated_pages(n: usize) -> Option<usize> {
+//     let allocated_pages = ALLOCATED_PAGES.load(Ordering::Relaxed) + n;
+//     // let free_mem_page_count = FREE_COUNT as usize;
+//     let initrd_phys_start = EFI_LOADER.lock().get_initrd_address() as u64;
+//     let fdt_phys_start = EFI_LOADER.lock().get_fdt_address() as u64;
+//     let free_mem_start = initrd_phys_start + EFI_LOADER.lock().get_initrd_size() as u64;
+//     let free_mem_total = fdt_phys_start - free_mem_start;
+//     let free_mem_page_count = free_mem_total.div_ceil(SIZE_4KB.try_into().unwrap()) as u64;
+
+//     if allocated_pages > free_mem_page_count as usize {
+//         return None;
+//     }
+
+//     ALLOCATED_PAGES.fetch_add(n, Ordering::Relaxed);
+//     Some(allocated_pages)
+// }

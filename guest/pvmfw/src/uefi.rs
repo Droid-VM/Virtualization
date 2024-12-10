@@ -29,12 +29,14 @@ use crate::uefi::runtime_services::RtPropertiesTable;
 use alloc::vec::Vec;
 use core::ffi::c_void;
 use core::mem;
-use core::ptr::{addr_of_mut, null, null_mut, NonNull};
+use core::ptr::{addr_of_mut, null, null_mut};
+use core::sync::atomic::{AtomicUsize, Ordering};
+use log::info;
 use runtime_services::init_rt_properties_table;
 use spin::mutex::SpinMutex;
 use uefi_raw::protocol::console::SimpleTextOutputProtocol;
 use uefi_raw::protocol::loaded_image::LoadedImageProtocol;
-use uefi_raw::table::boot::{BootServices, MemoryType};
+use uefi_raw::table::boot::{BootServices, MemoryAttribute, MemoryDescriptor, MemoryType};
 use uefi_raw::table::configuration::ConfigurationTable;
 use uefi_raw::table::runtime::RuntimeServices;
 use uefi_raw::table::system::SystemTable;
@@ -42,6 +44,7 @@ use uefi_raw::table::{Header, Revision};
 use uefi_raw::Guid;
 use uefi_raw::Status;
 use vmbase::arch::disable_wxn;
+use vmbase::memory::{map_data_noflush, SIZE_4KB};
 
 const EFI_2_100_SYSTEM_TABLE_REVISION: u32 = (2 << 16) | (100);
 const EFI_SPECIFICATION_REVISION: u32 = EFI_2_100_SYSTEM_TABLE_REVISION;
@@ -58,10 +61,21 @@ pub struct EfiLoader {
     firmware_vendor: [u16; 6],
     rt_properties_table: RtPropertiesTable,
     configuration_table: Vec<ConfigurationTable>,
+    kernel_address: usize,
+    kernel_size: usize,
+    initrd_address: usize,
+    initrd_size: usize,
+    fdt_address: usize,
+    fdt_size: usize,
 }
+
+static ALLOCATED_PAGES: AtomicUsize = AtomicUsize::new(0);
 
 impl EfiLoader {
     pub const EFI_IMAGE_HANDLE: usize = 0x19ef_781b;
+    // TODO(nikolinailic): Check whether we can use this for the desc size.
+    pub const MEM_MAP_DESC_SIZE: usize = mem::size_of::<MemoryDescriptor>();
+    pub const MEM_MAP_DESC_VERSION: u32 = 1;
     const FIRMWARE_VENDOR: [u16; 6] = ['p' as _, 'v' as _, 'm' as _, 'f' as _, 'w' as _, '\0' as _];
 
     pub const fn new() -> Self {
@@ -100,6 +114,12 @@ impl EfiLoader {
         let firmware_vendor = Self::FIRMWARE_VENDOR;
         let rt_properties_table = init_rt_properties_table();
         let configuration_table = Vec::new();
+        let kernel_address = 0 as usize;
+        let kernel_size = 0 as usize;
+        let initrd_address = 0 as usize;
+        let initrd_size = 0 as usize;
+        let fdt_address = 0 as usize;
+        let fdt_size = 0 as usize;
 
         Self {
             system_table,
@@ -110,6 +130,12 @@ impl EfiLoader {
             firmware_vendor,
             rt_properties_table,
             configuration_table,
+            kernel_address,
+            kernel_size,
+            initrd_address,
+            initrd_size,
+            fdt_address,
+            fdt_size,
         }
     }
 
@@ -147,6 +173,127 @@ impl EfiLoader {
         };
 
         Ok(allocated)
+    }
+
+    fn set_alloc_range(
+        &mut self,
+        kernel_address: usize,
+        kernel_size: usize,
+        initrd_address: usize,
+        initrd_size: usize,
+        fdt_address: usize,
+        fdt_size: usize,
+    ) {
+        self.kernel_address = kernel_address;
+        self.kernel_size = kernel_size;
+        self.initrd_address = initrd_address;
+        self.initrd_size = initrd_size;
+        self.fdt_address = fdt_address;
+        self.fdt_size = fdt_size;
+    }
+
+    pub fn get_memory_map(&mut self) -> Vec<MemoryDescriptor> {
+        let kernel_phys_start = self.kernel_address as u64;
+        let kernel_page_count = (self.kernel_size).div_ceil(SIZE_4KB.try_into().unwrap()) as u64;
+
+        let initrd_phys_start = self.initrd_address as u64;
+        let initrd_page_count = (self.initrd_size).div_ceil(SIZE_4KB.try_into().unwrap()) as u64;
+
+        let fdt_phys_start = self.fdt_address as u64;
+        let fdt_page_count = (self.fdt_size).div_ceil(SIZE_4KB.try_into().unwrap()) as u64;
+
+        let free_mem_start = initrd_phys_start + self.initrd_size as u64;
+        let free_mem_total = fdt_phys_start - free_mem_start;
+        let free_mem_page_count = free_mem_total.div_ceil(SIZE_4KB.try_into().unwrap()) as u64;
+
+        info!("----------------------------------------------- {:?}", free_mem_page_count);
+
+        // Memory map layout:
+        // - 1st entry - KERNEL.
+        // - 2nd entry - INITRD.
+        // - 3rd entry - FDT.
+        // - 4th entry - pvmfw.
+        // - 5th entry - FREE MEMORY.
+        let mut memory_map = Vec::new();
+        memory_map.push(MemoryDescriptor {
+            ty: MemoryType::LOADER_DATA,
+            phys_start: kernel_phys_start,
+            virt_start: kernel_phys_start,
+            // page_count: 12288,
+            page_count: kernel_page_count,
+            att: MemoryAttribute::WRITE_BACK,
+        });
+        memory_map.push(MemoryDescriptor {
+            ty: MemoryType::LOADER_DATA,
+            phys_start: initrd_phys_start,
+            virt_start: initrd_phys_start,
+            page_count: initrd_page_count,
+            att: MemoryAttribute::WRITE_BACK,
+        });
+        memory_map.push(MemoryDescriptor {
+            ty: MemoryType::LOADER_DATA,
+            phys_start: fdt_phys_start,
+            virt_start: fdt_phys_start,
+            page_count: fdt_page_count,
+            att: MemoryAttribute::WRITE_BACK,
+        });
+        memory_map.push(MemoryDescriptor {
+            ty: MemoryType::CONVENTIONAL,
+            phys_start: free_mem_start,
+            virt_start: free_mem_start,
+            page_count: free_mem_page_count,
+            att: MemoryAttribute::WRITE_BACK,
+        });
+
+        let allocated_pages = self.get_allocated_pages();
+        if allocated_pages > 0 {
+            let allocated_size = u64::try_from(allocated_pages * SIZE_4KB).unwrap();
+            let allocated_pages = allocated_pages.try_into().unwrap();
+            let last = memory_map.last_mut().unwrap();
+            last.page_count = allocated_pages;
+            last.ty = MemoryType::BOOT_SERVICES_DATA;
+            memory_map.push(MemoryDescriptor {
+                ty: MemoryType::CONVENTIONAL,
+                phys_start: free_mem_start + allocated_size,
+                virt_start: free_mem_start + allocated_size,
+                page_count: free_mem_page_count - allocated_pages,
+                att: MemoryAttribute::WRITE_BACK,
+            })
+        }
+
+        for descriptor in memory_map.iter() {
+            info!(
+                "Type: {:?}, Physical Start: {:#x}, Virtual Start: {:#x}, Page Count: {}, Attributes: {:?}",
+                descriptor.ty,
+                descriptor.phys_start,
+                descriptor.virt_start,
+                descriptor.page_count,
+                descriptor.att,
+            );
+        }
+
+        memory_map
+    }
+
+    pub fn add_allocated_pages(&mut self, n: usize) -> Option<usize> {
+        let allocated_pages = ALLOCATED_PAGES.load(Ordering::Relaxed) + n;
+        // let free_mem_page_count = FREE_COUNT as usize;
+        let initrd_phys_start = self.initrd_address as u64;
+        let fdt_phys_start = self.fdt_address as u64;
+        let free_mem_start = initrd_phys_start + self.initrd_size as u64;
+        let free_mem_total = fdt_phys_start - free_mem_start;
+        let free_mem_page_count = free_mem_total.div_ceil(SIZE_4KB.try_into().unwrap()) as u64;
+
+        if allocated_pages > free_mem_page_count as usize {
+            return None;
+        }
+
+        ALLOCATED_PAGES.fetch_add(n, Ordering::Relaxed);
+        Some(allocated_pages)
+    }
+
+    fn get_allocated_pages(&mut self) -> usize {
+        ALLOCATED_PAGES.load(Ordering::Relaxed)
     }
 
     fn patch_pointers(&mut self, payload: &[u8]) {
@@ -218,6 +365,38 @@ unsafe impl Send for EfiLoader {}
 // Initialize parameters passed to the EFI stub by the EFI loader.
 pub fn init_efi(payload: &[u8], fdt: &mut [u8]) {
     let mut efi_loader = EFI_LOADER.lock();
+
+    // let initrd = slices.ramdisk.unwrap();
+    // let alloc_region_start = (u64::try_from(initrd.as_ptr() as usize).unwrap()
+    //     + u64::try_from(initrd.len()).unwrap())
+    // .next_multiple_of(SIZE_4KB.try_into().unwrap()) as usize;
+
+    // let alloc_region_end = fdt;
+    // let alloc_region_size =
+    //     alloc_region_end.checked_sub(alloc_region_start).unwrap().try_into().unwrap();
+    // // TODO(nikolinailic): Add map error.
+    // let _ = map_data_noflush(alloc_region_start, alloc_region_size);
+
+    efi_loader.set_alloc_range(
+        payload_start,
+        payload_size,
+        initrd_address,
+        initrd_size,
+        fdt_address,
+        fdt_size,
+    );
+
+    let alloc_region_start = (initrd_address + initrd_size) as u64;
+    let alloc_region_end = fdt_address;
+    let alloc_region_size = alloc_region_end
+        .checked_sub(alloc_region_start.try_into().unwrap())
+        .unwrap()
+        .try_into()
+        .unwrap();
+    // TODO(nikolinailic): Add map error.
+    let _ = map_data_noflush(alloc_region_start.try_into().unwrap(), alloc_region_size);
+
+    info!("Alloc region start: {:#x}", alloc_region_start);
 
     let rt_properties_table_ptr = efi_loader.get_rt_properties_table_ptr();
     efi_loader.push_to_config_table(RT_PROPERTIES_TABLE_GUID, rt_properties_table_ptr);

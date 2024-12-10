@@ -203,7 +203,7 @@ struct MemoryRegion {
 }
 
 /// Tracks non-overlapping slices of main memory.
-pub(crate) struct MemoryTracker {
+pub struct MemoryTracker {
     total: MemoryRange,
     page_table: PageTable,
     regions: ArrayVec<[MemoryRegion; MemoryTracker::CAPACITY]>,
@@ -296,7 +296,7 @@ impl MemoryTracker {
     }
 
     /// Allocate the address range for a mutable slice; returns None if failed.
-    fn alloc_range_mut(&mut self, range: &MemoryRange) -> Result<MemoryRange> {
+    pub fn alloc_range_mut(&mut self, range: &MemoryRange) -> Result<MemoryRange> {
         let region = MemoryRegion { range: range.clone(), mem_type: MemoryType::ReadWrite };
         self.check_allocatable(&region)?;
         self.page_table.map_data_dbm(&get_va_range(range)).map_err(|e| {

@@ -22,9 +22,10 @@ use crate::uefi::{execute_efi_payload, init_efi};
 use core::arch::asm;
 use core::mem::size_of;
 use core::slice;
-use log::error;
-use log::warn;
+use core::sync::atomic::AtomicUsize;
 use log::LevelFilter;
+use log::{error, warn};
+// use vmbase::memory::map_data_noflush;
 use vmbase::util::RangeExt;
 use vmbase::{
     arch::aarch64::min_dcache_line_size,
@@ -38,6 +39,8 @@ use vmbase::{
 use zeroize::Zeroize;
 
 pub const FIRMWARE_REVISION: u32 = 0;
+
+pub static END_OF_MEMORY: AtomicUsize = AtomicUsize::new(0);
 
 #[derive(Debug, Clone)]
 pub enum RebootReason {
@@ -87,6 +90,13 @@ enum NextStage {
     LinuxBoot(usize),
     LinuxBootWithUart(usize),
 }
+
+// const KERNEL_START: u64 = 0x80000000;
+// const KERNEL_COUNT: u64 = 0x22a3;
+// const INITRD_START: u64 = 0x83000000;
+// const INITRD_COUNT: u64 = 0x206;
+// const FREE_START: u64 = 0x83206000;
+// const FREE_COUNT: u64 = 0x9c40;
 
 /// Entry point for pVM firmware.
 pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, _arg3: u64) {
@@ -152,6 +162,19 @@ fn main_wrapper<'a>(
     let config_entries = appended.get_entries();
 
     let mut slices = MemorySlices::new(fdt, payload, payload_size)?;
+
+    // let initrd = slices.ramdisk.unwrap();
+    // let alloc_region_start = (u64::try_from(initrd.as_ptr() as usize).unwrap()
+    //     + u64::try_from(initrd.len()).unwrap())
+    // .next_multiple_of(SIZE_4KB.try_into().unwrap()) as usize;
+
+    // let alloc_region_end = fdt;
+    // let alloc_region_size =
+    //     alloc_region_end.checked_sub(alloc_region_start).unwrap().try_into().unwrap();
+    // // TODO(nikolinailic): Add map error.
+    // let _ = map_data_noflush(alloc_region_start, alloc_region_size);
+
+    // info!("Alloc region start: {:#x}", alloc_region_start);
 
     // This wrapper allows main() to be blissfully ignorant of platform details.
     let (next_bcc, debuggable_payload, use_uefi) = crate::main(

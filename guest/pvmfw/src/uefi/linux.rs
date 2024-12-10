@@ -25,7 +25,7 @@ pub const RT_PROPERTIES_TABLE_GUID: Guid = guid!("eb66918a-7eef-402a-842e-931d21
 pub const DEVICE_TREE_GUID: Guid = guid!("b1b621d5-f19c-41a5-830b-d9152c69aae0");
 
 #[repr(C, packed)]
-#[derive(FromBytes, FromZeroes)]
+#[derive(Debug, FromBytes, FromZeroes)]
 struct KernelHeader {
     code0_word0: u16,
     code0_word1: u16,
@@ -46,7 +46,7 @@ impl KernelHeader {
 }
 
 #[repr(C, packed)]
-#[derive(FromBytes, FromZeroes)]
+#[derive(Debug, FromBytes, FromZeroes)]
 struct PeHeader {
     magic: u32,
     machine: u16,
@@ -63,7 +63,7 @@ impl PeHeader {
 }
 
 #[repr(C, packed)]
-#[derive(FromBytes, FromZeroes)]
+#[derive(Debug, FromBytes, FromZeroes)]
 struct PeOptHeader {
     format: u16,
     major_linker_version: u8,
@@ -119,18 +119,21 @@ pub unsafe fn locate_linux_efi_entrypoint(payload: &[u8]) -> Option<EfiEntrypoin
     if header.magic != KernelHeader::MAGIC || header.code0_word0 != KernelHeader::EFI_SIGNATURE {
         return None;
     }
+    log::info!("EFI payload HEADER: {:?}", header);
 
     let pe_header_offset = header.pe_header_offset.try_into().unwrap();
     let pe_header = PeHeader::ref_from_prefix(&payload[pe_header_offset..])?;
     if pe_header.magic != PeHeader::MAGIC {
         return None;
     }
+    log::info!("EFI payload PE_HEADER: {:?}", pe_header);
 
     let opt_header_offset = pe_header_offset + mem::size_of::<PeHeader>();
     let opt_header = PeOptHeader::ref_from_prefix(&payload[opt_header_offset..])?;
     if opt_header.format != PeOptHeader::FORMAT {
         return None;
     }
+    log::info!("EFI payload OPT_HEADER: {:?}", opt_header);
 
     let entrypoint_offset = usize::try_from(opt_header.address_of_entry_point).unwrap();
     let _ = payload.get(entrypoint_offset)?;
