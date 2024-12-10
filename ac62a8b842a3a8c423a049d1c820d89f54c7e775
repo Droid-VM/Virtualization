@@ -110,6 +110,30 @@
       },
       "revId": "ac62a8b842a3a8c423a049d1c820d89f54c7e775",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ec31da4_630004c0",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1067793
+      },
+      "writtenOn": "2024-12-10T03:05:54Z",
+      "side": 1,
+      "message": "I think the unsigned here means the kernel is cannot be used for the UEFI verified boot flow. \n\nhttps://wiki.debian.org/SecureBoot\n\nWe should have some sort of verification of the kernel binary, but this might not be what we want.",
+      "parentUuid": "b88f9afc_901797e4",
+      "range": {
+        "startLine": 287,
+        "startChar": 32,
+        "endLine": 287,
+        "endChar": 41
+      },
+      "revId": "ac62a8b842a3a8c423a049d1c820d89f54c7e775",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
