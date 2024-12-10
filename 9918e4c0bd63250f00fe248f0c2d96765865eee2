@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e5e68d4_e8d52587",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingBaseAdapter.kt",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-10T05:22:45Z",
+      "side": 1,
+      "message": "I think we should call notifyDataSetChanged here to reflect the change.",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 5
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "734121c9_3b19fabf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingBaseAdapter.kt",
+              "range": {
+                "startLine": 61,
+                "startChar": 0,
+                "endLine": 61,
+                "endChar": 0
+              },
+              "replacement": "        notifyDataSetChanged()\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9918e4c0bd63250f00fe248f0c2d96765865eee2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
