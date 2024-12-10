@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "695a50ae_9cd40098",
+        "filename": "guest/pvmfw/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-10T23:12:45Z",
+      "side": 1,
+      "message": "Thanks for noticing this! Done.",
+      "parentUuid": "095d62e8_82032562",
+      "range": {
+        "startLine": 131,
+        "startChar": 8,
+        "endLine": 131,
+        "endChar": 16
+      },
+      "revId": "8fc54fb6a9baa7c931418f47eb1ede907b178146",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6fef8e6_062c59b9",
@@ -61,6 +85,30 @@
       "writtenOn": "2024-12-09T21:38:26Z",
       "side": 1,
       "message": "Map this from `init_efi()` in the first commit that actually needs it and make sure to document _why_ you\u0027re doing this as it isn\u0027t necessarily clear to someone that isn\u0027t familiar with then internals of the EFI stub.",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 18
+      },
+      "revId": "8fc54fb6a9baa7c931418f47eb1ede907b178146",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3d14cf0_ee6d5ebb",
+        "filename": "guest/pvmfw/src/memory.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-10T23:12:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6fef8e6_062c59b9",
       "range": {
         "startLine": 109,
         "startChar": 0,
@@ -94,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fbda2dc_c9f0e948",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-10T23:12:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80433f86_a9f5d948",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 11
+      },
+      "revId": "8fc54fb6a9baa7c931418f47eb1ede907b178146",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f170662_652ef1ff",
@@ -107,6 +179,30 @@
       "writtenOn": "2024-12-09T21:38:26Z",
       "side": 1,
       "message": "`TODO`",
+      "range": {
+        "startLine": 115,
+        "startChar": 8,
+        "endLine": 115,
+        "endChar": 23
+      },
+      "revId": "8fc54fb6a9baa7c931418f47eb1ede907b178146",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e386c284_01895070",
+        "filename": "guest/pvmfw/src/uefi/linux.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-10T23:12:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f170662_652ef1ff",
       "range": {
         "startLine": 115,
         "startChar": 8,
