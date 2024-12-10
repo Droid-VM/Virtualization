@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b95719d_479e5d68",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2024-12-10T18:48:37Z",
+      "side": 1,
+      "message": "Resolving this comment to submit this CL. The `NOTE` that I left in the code explains the Python-version issue.",
+      "parentUuid": "54632214_f5870daf",
+      "range": {
+        "startLine": 234,
+        "startChar": 1,
+        "endLine": 235,
+        "endChar": 79
+      },
+      "revId": "ac62a8b842a3a8c423a049d1c820d89f54c7e775",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52699a0d_1c34570f",
@@ -150,6 +174,30 @@
       "side": 1,
       "message": "I don\u0027t think we want verified boot in the VM, at least for now. User can switch to a new kernel if they want. This VM is not a secure place; it\u0027s rather a sandbox.\n\nSo, using unsigned kernel is fine.",
       "parentUuid": "3ec31da4_630004c0",
+      "range": {
+        "startLine": 287,
+        "startChar": 32,
+        "endLine": 287,
+        "endChar": 41
+      },
+      "revId": "ac62a8b842a3a8c423a049d1c820d89f54c7e775",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3f90273_6e4db338",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2024-12-10T18:48:37Z",
+      "side": 1,
+      "message": "Thanks for the inputs everyone.\n\nResolving this thread to merge this CL.",
+      "parentUuid": "05a1c0de_39283792",
       "range": {
         "startLine": 287,
         "startChar": 32,
