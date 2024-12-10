@@ -94,6 +94,30 @@
       },
       "revId": "f8fe1493d32ab982d9efe39c7ccaa3eb2e4c686d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0cb936e_e290021e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-12-10T18:43:11Z",
+      "side": 1,
+      "message": "It should be fine to remove `cfg!(llpvm_changes)` (and corresponding negation). The flag was release with android15, so it is always enabled. I have a bug to cleanup the flags that have been released with android15 b/365767108, but didn\u0027t have time to work on it :(",
+      "parentUuid": "a3a84598_9f857bba",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 46
+      },
+      "revId": "f8fe1493d32ab982d9efe39c7ccaa3eb2e4c686d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
