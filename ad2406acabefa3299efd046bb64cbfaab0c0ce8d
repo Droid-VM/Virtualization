@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "367a4681_35a0a3f1",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-10T23:15:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14fce4ba_e6ce952b",
+      "range": {
+        "startLine": 137,
+        "startChar": 19,
+        "endLine": 137,
+        "endChar": 36
+      },
+      "revId": "ad2406acabefa3299efd046bb64cbfaab0c0ce8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5178a247_cd044470",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "475a67c1_27e673df",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-10T23:15:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5178a247_cd044470",
+      "range": {
+        "startLine": 141,
+        "startChar": 3,
+        "endLine": 148,
+        "endChar": 6
+      },
+      "revId": "ad2406acabefa3299efd046bb64cbfaab0c0ce8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0210344d_80248b31",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-12-09T22:26:23Z",
       "side": 1,
       "message": "I think we should panic here (and in `set_mem`) as the caller won\u0027t check the return value (there is none), proceeding as if the call hadn\u0027t failed, leading to UB.",
+      "range": {
+        "startLine": 451,
+        "startChar": 8,
+        "endLine": 451,
+        "endChar": 14
+      },
+      "revId": "ad2406acabefa3299efd046bb64cbfaab0c0ce8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6570c28a_c6ea1108",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-10T23:15:54Z",
+      "side": 1,
+      "message": "Agreed.",
+      "parentUuid": "0210344d_80248b31",
       "range": {
         "startLine": 451,
         "startChar": 8,
