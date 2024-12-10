@@ -16,6 +16,52 @@
       "message": "ping",
       "revId": "57de25519481e69a747314f7d3ab559c5645ed8d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbb1bfae_2bfd6ee9",
+        "filename": "tests/testapk/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-12-10T06:33:03Z",
+      "side": 1,
+      "message": "why can\u0027t we use `MicrodroidVErsionsTestAppDefaults`?",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 15
+      },
+      "revId": "57de25519481e69a747314f7d3ab559c5645ed8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1c1625d_242fb4a7",
+        "filename": "tests/testapk/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-12-10T06:33:03Z",
+      "side": 1,
+      "message": "The apk name `MicrodroidTestApp.apk` is hard-coded in the test code: https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java;l\u003d93;drc\u003d690c1ca0e22412a78b463d7acf89cfa0e956983c\n\nis this okay?",
+      "range": {
+        "startLine": 103,
+        "startChar": 37,
+        "endLine": 103,
+        "endChar": 62
+      },
+      "revId": "57de25519481e69a747314f7d3ab559c5645ed8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
