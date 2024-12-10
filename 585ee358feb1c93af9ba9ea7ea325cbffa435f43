@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e0028af_c8194e2e",
+        "filename": "libs/libvm_payload/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-10T14:16:35Z",
+      "side": 1,
+      "message": "Rephrased it. PTAL",
+      "parentUuid": "27b5b151_72a9afaa",
+      "range": {
+        "startLine": 576,
+        "startChar": 6,
+        "endLine": 576,
+        "endChar": 37
+      },
+      "revId": "585ee358feb1c93af9ba9ea7ea325cbffa435f43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7033db5d_383e7d9c",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-12-09T09:23:08Z",
       "side": 1,
       "message": "Unsafe Rust review: how do you know that `rp.as_ptr()` does not overlap with `data`? Ideally, you should document why this precondition is upheld in your SAFETY comment.",
+      "range": {
+        "startLine": 599,
+        "startChar": 37,
+        "endLine": 599,
+        "endChar": 48
+      },
+      "revId": "585ee358feb1c93af9ba9ea7ea325cbffa435f43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0308e5c_075e53eb",
+        "filename": "libs/libvm_payload/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-10T14:16:35Z",
+      "side": 1,
+      "message": "Fixed the safety comment.",
+      "parentUuid": "7033db5d_383e7d9c",
       "range": {
         "startLine": 599,
         "startChar": 37,
