@@ -176,6 +176,24 @@
       "parentUuid": "40828bd0_0aa4ffd4",
       "revId": "8d3262993bdadff8ee7bb7f930b783c2a4ee9135",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8e47019_12c71983",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-10T23:34:18Z",
+      "side": 1,
+      "message": "Hi. LL-NDK is kind of a weird place because it\u0027s reviewed by NDK API review in order to keep map txt files simple, and to keep C review consistent, but the deadlines are set by ANAPIC for vendors. We need to combine things/processes and avoid splitting the code up, to reduce complexity in Android.\n\nSo to confirm, from this thread:\n- this is not an API for apps, so it should follow HAL dates, not API dates.\n- from a technical perspective, this must happen before VINTF finalization.\n- ANAPIC has already okay\u0027d this API addition, since partners need it based on direct meetings w/ partners. We made an exception for this case, since the alternative impact to security policies and AVF is not acceptable.\n\nInseob: we should button up the LL-NDK here and get any last changes in. Can you confirm this is the last change? or the whole scope? Please add to commit message as well.\n\nYurii/Eino-Ville: this has come up for a few years running, please let me know if you want to discuss more or formalize things, we can do a joint NDK/ANAPIC meeting, add an LL-NDK person to the NDK meetings, or well yeah maybe this makes sense, let me know if there is anything else we need to follow up here.",
+      "parentUuid": "e1b03a69_9556cb61",
+      "revId": "8d3262993bdadff8ee7bb7f930b783c2a4ee9135",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
