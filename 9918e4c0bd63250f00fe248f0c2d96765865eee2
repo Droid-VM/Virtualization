@@ -40,6 +40,30 @@
       ],
       "revId": "9918e4c0bd63250f00fe248f0c2d96765865eee2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2a1e206_56aca09d",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingBaseAdapter.kt",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-12-10T05:24:40Z",
+      "side": 1,
+      "message": "It doesn\u0027t need `notifyDataSetChanged`, since it uses `SortedListAdapterCallback`. https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:recyclerview/recyclerview/src/main/java/androidx/recyclerview/widget/SortedListAdapterCallback.java",
+      "parentUuid": "4e5e68d4_e8d52587",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 5
+      },
+      "revId": "9918e4c0bd63250f00fe248f0c2d96765865eee2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
