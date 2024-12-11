@@ -16,6 +16,52 @@
       "message": "@jeongik@google.com @jaewan@google.com Could I get review again? I resolved all comments, and the latest patchset is ready to be submitted after getting code review.",
       "revId": "067eff24a8cef1b49933ef71707e3e7ff87433db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ef06893_afea7fbb",
+        "filename": "android/TerminalApp/res/layout/settings_port_forwarding_active_item.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-12-11T04:03:27Z",
+      "side": 1,
+      "message": "May be outside of this CL scope. You can handle it in next CL when you add process name.\n\nThis looks bit wierd. `layout_height\u003d\"wrap_content\"` implies sets the minial height for the switch. However, `layout_constraintTop` and `layout_constraintBottom` say to stick to the parent. Is it OK? My gut feeling says to remove `constraint{Top,Bottom}` and specify to place it at the vertical center.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 0
+      },
+      "revId": "067eff24a8cef1b49933ef71707e3e7ff87433db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcbef353_86ce1da0",
+        "filename": "android/TerminalApp/res/layout/settings_port_forwarding_inactive_item.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-12-11T04:03:27Z",
+      "side": 1,
+      "message": "ditto for the other port item.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 0
+      },
+      "revId": "067eff24a8cef1b49933ef71707e3e7ff87433db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
