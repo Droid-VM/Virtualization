@@ -22,6 +22,30 @@
       },
       "revId": "ec03e91abd581386ff0e9dec26e01b50b5dd30bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21210b5b_b8acde4d",
+        "filename": "guest/trusty/security_vm/launcher/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-11T01:59:27Z",
+      "side": 1,
+      "message": "I just wanted to reduce risk and make it obvious what\u0027s going on. I can send another CL to turn it off for these",
+      "parentUuid": "763f8b70_79428167",
+      "range": {
+        "startLine": 81,
+        "startChar": 8,
+        "endLine": 81,
+        "endChar": 63
+      },
+      "revId": "ec03e91abd581386ff0e9dec26e01b50b5dd30bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
