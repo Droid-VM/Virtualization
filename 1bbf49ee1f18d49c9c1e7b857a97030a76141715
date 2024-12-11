@@ -166,6 +166,30 @@
       },
       "revId": "1bbf49ee1f18d49c9c1e7b857a97030a76141715",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "336b3952_4df87ae9",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2024-12-11T21:42:26Z",
+      "side": 1,
+      "message": "Resolving this comment since I now `rsync` the latest debian keyrings (as recommended at https://wiki.debian.org/DebianKeyring#Via_rsync) instead of installing Ubuntu\u0027s `debian-keyring` package.",
+      "parentUuid": "fa890110_1578888e",
+      "range": {
+        "startLine": 251,
+        "startChar": 24,
+        "endLine": 254,
+        "endChar": 47
+      },
+      "revId": "1bbf49ee1f18d49c9c1e7b857a97030a76141715",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
