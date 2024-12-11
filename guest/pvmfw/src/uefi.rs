@@ -19,15 +19,17 @@ pub mod linux;
 mod stdio;
 
 use crate::entry::FIRMWARE_REVISION;
+use alloc::vec::Vec;
+use core::ffi::c_void;
 use core::mem;
 use core::ptr::{addr_of_mut, null, null_mut};
 use spin::mutex::SpinMutex;
 use uefi_raw::protocol::console::SimpleTextOutputProtocol;
 use uefi_raw::table::boot::BootServices;
+use uefi_raw::table::configuration::ConfigurationTable;
 use uefi_raw::table::system::SystemTable;
 use uefi_raw::table::{Header, Revision};
-use uefi_raw::Handle;
-use uefi_raw::Status;
+use uefi_raw::{Guid, Handle, Status};
 use vmbase::arch::disable_wxn;
 
 const EFI_2_100_SYSTEM_TABLE_REVISION: u32 = (2 << 16) | (100);
@@ -41,6 +43,7 @@ struct EfiLoader {
     boot_services: BootServices,
     simple_text_output_protocol: SimpleTextOutputProtocol,
     firmware_vendor: [u16; 6],
+    configuration_table: Vec<ConfigurationTable>,
 }
 
 impl EfiLoader {
@@ -79,8 +82,15 @@ impl EfiLoader {
         let boot_services = boot_services::init_boot_services();
         let simple_text_output_protocol = stdio::init_simple_text_output_protocol();
         let firmware_vendor = Self::FIRMWARE_VENDOR;
+        let configuration_table = Vec::new();
 
-        Self { system_table, boot_services, simple_text_output_protocol, firmware_vendor }
+        Self {
+            system_table,
+            boot_services,
+            simple_text_output_protocol,
+            firmware_vendor,
+            configuration_table,
+        }
     }
 
     fn patch_pointers(&mut self) {
@@ -92,6 +102,31 @@ impl EfiLoader {
 
     fn get_system_table_ptr(&mut self) -> *mut SystemTable {
         addr_of_mut!(self.system_table)
+    }
+
+    fn sync_system_config_table(&mut self) {
+        self.system_table.configuration_table = self.configuration_table.as_mut_ptr();
+        self.system_table.number_of_configuration_table_entries = self.configuration_table.len();
+    }
+
+    fn insert_config_table(&mut self, guid: Guid, table: *mut c_void) -> Option<*mut c_void> {
+        if let Some(i) = self.configuration_table.iter().position(|e| e.vendor_guid == guid) {
+            let prev = self.configuration_table[i].vendor_table;
+            self.configuration_table[i].vendor_table = table as _;
+            Some(prev)
+        } else {
+            let entry = ConfigurationTable { vendor_guid: guid, vendor_table: table };
+            self.configuration_table.push(entry);
+            self.sync_system_config_table();
+            None
+        }
+    }
+
+    fn remove_config_table(&mut self, guid: Guid) -> Option<*mut c_void> {
+        let i = self.configuration_table.iter().position(|e| e.vendor_guid == guid)?;
+        let entry = self.configuration_table.remove(i).vendor_table;
+        self.sync_system_config_table();
+        Some(entry)
     }
 }
 
@@ -112,4 +147,8 @@ pub fn execute_efi_payload(entrypoint: EfiEntrypoint) -> Status {
 
     let system_table = EFI_LOADER.lock().get_system_table_ptr();
     entrypoint(EfiLoader::EFI_IMAGE_HANDLE, system_table)
+}
+
+pub fn non_null_and_aligned_const<T>(ptr: *const T) -> bool {
+    !ptr.is_null() & ptr.is_aligned()
 }

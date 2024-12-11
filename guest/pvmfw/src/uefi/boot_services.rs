@@ -14,7 +14,7 @@
 
 //! Support for EFI boot services.
 
-use super::EFI_SPECIFICATION_REVISION;
+use super::{non_null_and_aligned_const, EFI_LOADER, EFI_SPECIFICATION_REVISION};
 use core::ffi::c_void;
 use core::mem;
 use core::ptr::null_mut;
@@ -237,10 +237,21 @@ unsafe extern "efiapi" fn locate_device_path(
 }
 
 unsafe extern "efiapi" fn install_configuration_table(
-    _guid_entry: *const Guid,
-    _table_ptr: *const c_void,
+    guid_entry: *const Guid,
+    table_ptr: *const c_void,
 ) -> Status {
-    Status::UNSUPPORTED
+    let Some(guid) = read_guid(guid_entry) else {
+        return Status::INVALID_PARAMETER;
+    };
+
+    if !table_ptr.is_null() {
+        EFI_LOADER.lock().insert_config_table(guid, table_ptr as _);
+        Status::SUCCESS
+    } else if EFI_LOADER.lock().remove_config_table(guid).is_some() {
+        Status::SUCCESS
+    } else {
+        Status::NOT_FOUND
+    }
 }
 
 /// Image service functions.
@@ -433,4 +444,14 @@ unsafe extern "efiapi" fn create_event_ex(
     _out_event: *mut Event,
 ) -> Status {
     Status::UNSUPPORTED
+}
+
+/// Safely reads a GUID or returns `None`.
+fn read_guid(guid: *const Guid) -> Option<Guid> {
+    if non_null_and_aligned_const(guid) {
+        // SAFETY: 'proto' is not null and is aligned.
+        Some(unsafe { guid.read() })
+    } else {
+        None
+    }
 }
