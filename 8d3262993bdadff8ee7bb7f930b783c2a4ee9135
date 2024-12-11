@@ -212,6 +212,24 @@
       "parentUuid": "b8e47019_12c71983",
       "revId": "8d3262993bdadff8ee7bb7f930b783c2a4ee9135",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52039dc2_fde8464b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2024-12-11T14:58:25Z",
+      "side": 1,
+      "message": "\u003e ANAPIC has already okay\u0027d this API addition\n\nI think the missing piece here is just ensuring these coms are passed from ANAPIC to NDK API council, possibly with an ANAPIC member doing part-time in the window between API freeze \u0026 API final (or full time if you want). This being done in response to ANAPIC feedback is indeed the purpose of differing API freeze \u0026 final dates, that context just isn\u0027t apparent here.\n\nSince HAL \u0026 API dates are (thankfully) aligned again, there\u0027s no calendar mismatch to worry about. Just hand-off on \"this is being done in response to API council feedback\"",
+      "parentUuid": "a7828dc5_8a89cce0",
+      "revId": "8d3262993bdadff8ee7bb7f930b783c2a4ee9135",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
