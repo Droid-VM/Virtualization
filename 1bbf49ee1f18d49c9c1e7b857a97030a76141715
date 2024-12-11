@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3525b11_7e9647ce",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1067793
+      },
+      "writtenOn": "2024-12-11T01:31:08Z",
+      "side": 1,
+      "message": "what key is this signed with? Is this re-signed with the Debian archive key or the individual developers  ?\n\nThe reason I ask is that debian-keyring in your stable version may not contain all keys. \n\n\nAlternatively I think `apt-get source` verifies the chain of trust (Release files contain sha1 of the packages files, Packages files contain sha1 of the individual files, and the individual tarballs sha1 can be checked) to obtain the source (but will be at the mercy of updated source of the time).\n\nIf you are hardcoding the version you might as well hardcode sha1sum of the binary.",
+      "range": {
+        "startLine": 251,
+        "startChar": 24,
+        "endLine": 254,
+        "endChar": 47
+      },
+      "revId": "1bbf49ee1f18d49c9c1e7b857a97030a76141715",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
