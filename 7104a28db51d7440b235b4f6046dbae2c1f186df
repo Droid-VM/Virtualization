@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e84bb817_7a478f3a",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-11T12:39:46Z",
+      "side": 1,
+      "message": "Don\u0027t pass this here. Instead save the result in the caller",
+      "range": {
+        "startLine": 114,
+        "startChar": 8,
+        "endLine": 114,
+        "endChar": 28
+      },
+      "revId": "7104a28db51d7440b235b4f6046dbae2c1f186df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dd3d4c0_5f77efa1",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-11T12:39:46Z",
+      "side": 1,
+      "message": "Add a comment to document why we\u0027re rejecting other values.",
+      "range": {
+        "startLine": 116,
+        "startChar": 8,
+        "endLine": 116,
+        "endChar": 11
+      },
+      "revId": "7104a28db51d7440b235b4f6046dbae2c1f186df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a6d24eee_892d80b7",
         "filename": "guest/pvmfw/src/uefi.rs",
         "patchSetId": 5
@@ -19,6 +65,144 @@
         "startChar": 41,
         "endLine": 171,
         "endChar": 46
+      },
+      "revId": "7104a28db51d7440b235b4f6046dbae2c1f186df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20f9c7dd_0f5f5f1e",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-11T12:39:46Z",
+      "side": 1,
+      "message": "Move this to `EfiLoader::allocate_pool()`",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 5
+      },
+      "revId": "7104a28db51d7440b235b4f6046dbae2c1f186df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3143245d_bd3e36a8",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-11T12:39:46Z",
+      "side": 1,
+      "message": "For symmetry with `allocate_pool()`, encapsulate this as a method of `EfiLoader`.",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 34
+      },
+      "revId": "7104a28db51d7440b235b4f6046dbae2c1f186df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ddf9e2d_ecf3a05c",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-11T12:39:46Z",
+      "side": 1,
+      "message": "Use your helper functions to check these?",
+      "range": {
+        "startLine": 237,
+        "startChar": 7,
+        "endLine": 237,
+        "endChar": 66
+      },
+      "revId": "7104a28db51d7440b235b4f6046dbae2c1f186df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23a5382d_8ba0c670",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-11T12:39:46Z",
+      "side": 1,
+      "message": "nit: casting the other way might be cleaner i.e.\n```\nif handle as usize !\u003d EfiLoader::EFI_IMAGE_HANDLE {\n```",
+      "range": {
+        "startLine": 245,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 22
+      },
+      "revId": "7104a28db51d7440b235b4f6046dbae2c1f186df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d50722cc_dc2e8f00",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-11T12:39:46Z",
+      "side": 1,
+      "message": "Introduce `const` values for these",
+      "range": {
+        "startLine": 268,
+        "startChar": 20,
+        "endLine": 268,
+        "endChar": 21
+      },
+      "revId": "7104a28db51d7440b235b4f6046dbae2c1f186df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dde98c9_96335cdd",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-11T12:39:46Z",
+      "side": 1,
+      "message": "Make this a method of `EfiLoader`?",
+      "range": {
+        "startLine": 539,
+        "startChar": 3,
+        "endLine": 539,
+        "endChar": 33
       },
       "revId": "7104a28db51d7440b235b4f6046dbae2c1f186df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
