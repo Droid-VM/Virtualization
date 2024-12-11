@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f1ccb4c_0622402b",
+        "filename": "guest/pvmfw/src/rollback.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-11T15:41:04Z",
+      "side": 1,
+      "message": "This should never be None in Android 15+. \n```suggestion\n    instance_hash: Hidden,\n```",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 34
+      },
+      "revId": "7e2b1c358ea753563bb16c31c6c9402e6a3c48ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cba9a801_195ce612",
+        "filename": "guest/pvmfw/src/rollback.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-11T15:41:04Z",
+      "side": 1,
+      "message": "NIT: pvmfw has no reliable way to return `new_instance`[in all but last case]. False is really just a default value being used. Can you comment this (somewhere in the function documentations) to avoid future confusion.",
+      "range": {
+        "startLine": 49,
+        "startChar": 12,
+        "endLine": 49,
+        "endChar": 17
+      },
+      "revId": "7e2b1c358ea753563bb16c31c6c9402e6a3c48ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4a45b6a_35287ffb",
+        "filename": "guest/pvmfw/src/rollback.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-11T15:41:04Z",
+      "side": 1,
+      "message": "This probably in not in scope of this refactoring patch.\n\nTechnically, we are deferring the rollback protection in case of trustySecurityVm as well. So I\u0027d rather rollup this `else if` branch to the first one. [We must check that verified_boot_data.rollback_index !\u003d 0 for this to]\n\nie, \n\n```\nif should_defer_rollback_protection(fdt)? \u0026\u0026 (verified_boot_data.has_capability(Capability::SecretkeeperProtection) || verified_boot_data.has_capability(Capability::TrustySecurityVm) )\n```\n\nDont want to block your patch though. So feel free to open a separate bug/tash \u0026 assign it to me.",
+      "range": {
+        "startLine": 55,
+        "startChar": 43,
+        "endLine": 55,
+        "endChar": 48
+      },
+      "revId": "7e2b1c358ea753563bb16c31c6c9402e6a3c48ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5137462e_d4d0ba9c",
+        "filename": "guest/pvmfw/src/rollback.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-11T15:41:04Z",
+      "side": 1,
+      "message": "NIT: remove this.\n\nUpdates never lead to new CDIs, they were rather blocked by `check_dice_measurements_match_entry`",
+      "range": {
+        "startLine": 94,
+        "startChar": 50,
+        "endLine": 94,
+        "endChar": 80
+      },
+      "revId": "7e2b1c358ea753563bb16c31c6c9402e6a3c48ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
