@@ -22,3 +22,10 @@ LIBAVF { # introduced=36
   local:
     *;
 };
+
+# Stub for preventing build errors
+LIBAVF_PLATFORM {
+  global:
+  local:
+    *;
+};
