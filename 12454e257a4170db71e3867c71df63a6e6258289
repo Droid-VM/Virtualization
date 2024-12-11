@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49cc3bd5_59e47757",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-11T14:44:59Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4c1c424e_38fd6c4c",
+      "range": {
+        "startLine": 14,
+        "startChar": 19,
+        "endLine": 15,
+        "endChar": 32
+      },
+      "revId": "12454e257a4170db71e3867c71df63a6e6258289",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71d191ed_72c17a10",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "See my [comment](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3378615/comment/497f901c_53bc6389/) on aosp/3378615:\n\n\u003e Ack, I\u0027ll rework this CL to remove that flag then.",
       "parentUuid": "71d191ed_72c17a10",
+      "range": {
+        "startLine": 25,
+        "startChar": 20,
+        "endLine": 25,
+        "endChar": 40
+      },
+      "revId": "12454e257a4170db71e3867c71df63a6e6258289",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "946a1772_244703b9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-11T14:44:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9924d991_18cc06a5",
       "range": {
         "startLine": 25,
         "startChar": 20,
@@ -142,6 +190,24 @@
       "writtenOn": "2024-12-11T00:05:02Z",
       "side": 1,
       "message": "maybe do `if !cfg!(llpvm_changes) \u0026\u0026 ...` so that we don\u0027t forget to delete this branch when the flag is deleted",
+      "revId": "12454e257a4170db71e3867c71df63a6e6258289",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "525eed79_8c5acb0f",
+        "filename": "guest/pvmfw/src/rollback.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-11T14:44:59Z",
+      "side": 1,
+      "message": "Obsolete: removed `llpvm_changes`",
+      "parentUuid": "c045532f_6218bb29",
       "revId": "12454e257a4170db71e3867c71df63a6e6258289",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
