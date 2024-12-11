@@ -118,6 +118,54 @@
       },
       "revId": "1bbf49ee1f18d49c9c1e7b857a97030a76141715",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d5d3efd_dcc10680",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2024-12-11T06:28:34Z",
+      "side": 1,
+      "message": "Thanks for taking a look Junichi.\n\n\u003e but I still think that if you are going to pin the file, you know the sha256, you don\u0027t need to rely on a large list of signatures\n\nI could hard code the sha256 of the `.debian.tar.xz` and the `.orig.tar.xz` but that\u0027s exactly what [the `.dsc` file specifies](https://ftp.debian.org/debian/pool/main/l/linux/linux_6.1.119-1.dsc), plus we would have multiple advantages over an ad-hoc sha256 comparison:\n(a) the signatures in the dsc also guarantee authenticity, not just integrity,\n(b) it\u0027s literally just a single extra package, `debian-keyring`, that we have to install to get all of this working, and\n(c) we don\u0027t even have to hard code any other bit of information, apart from the kernel version we want to target, which reduces the maintenance burden.",
+      "parentUuid": "cd1e6c1f_6a6f9e3c",
+      "range": {
+        "startLine": 251,
+        "startChar": 24,
+        "endLine": 254,
+        "endChar": 47
+      },
+      "revId": "1bbf49ee1f18d49c9c1e7b857a97030a76141715",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa890110_1578888e",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2024-12-11T06:28:34Z",
+      "side": 1,
+      "message": "Thnks",
+      "parentUuid": "cd1e6c1f_6a6f9e3c",
+      "range": {
+        "startLine": 251,
+        "startChar": 24,
+        "endLine": 254,
+        "endChar": 47
+      },
+      "revId": "1bbf49ee1f18d49c9c1e7b857a97030a76141715",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
