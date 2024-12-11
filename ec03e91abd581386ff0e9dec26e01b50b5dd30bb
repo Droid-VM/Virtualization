@@ -70,6 +70,47 @@
       },
       "revId": "ec03e91abd581386ff0e9dec26e01b50b5dd30bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fe9e50f_1b105f4c",
+        "filename": "guest/trusty/security_vm/launcher/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-11T18:24:21Z",
+      "side": 1,
+      "message": "Sent https://r.android.com/3407139",
+      "parentUuid": "2ee6edbe_5cf1f53e",
+      "range": {
+        "startLine": 81,
+        "startChar": 8,
+        "endLine": 81,
+        "endChar": 63
+      },
+      "revId": "ec03e91abd581386ff0e9dec26e01b50b5dd30bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e4c4cac_eb54cbda",
+        "filename": "microfuchsia/microfuchsiad/src/instance_starter.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-11T18:24:21Z",
+      "side": 1,
+      "message": "FYI @awolter@google.com, I changed this to preserve the old behavior, but if you don\u0027t care about ballooning you can remove it.",
+      "revId": "ec03e91abd581386ff0e9dec26e01b50b5dd30bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
