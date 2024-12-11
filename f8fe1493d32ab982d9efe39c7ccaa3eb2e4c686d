@@ -166,6 +166,30 @@
       },
       "revId": "f8fe1493d32ab982d9efe39c7ccaa3eb2e4c686d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae47ddf3_2a8b8bae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-11T17:09:43Z",
+      "side": 1,
+      "message": "`instance-id` is the identity of the VM \u0026 is important. But understandably, there can be buggy environments where /avf/untrusted/ is not present \u0026 if you do not wish for pvmfw to not panic in those case - SGTM. (Do we have examples of such environment?)\n\nOffline I suggested getting `fn instance_id(fdt: \u0026Fdt)` to return all 0s in those cases, but rethinking *it might* be an idea to use random bytes to differentiate instance.img of Vms in such buggy environment.\n\nBut do we want to maintain those?",
+      "parentUuid": "39f4b4bc_701b94fb",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 46
+      },
+      "revId": "f8fe1493d32ab982d9efe39c7ccaa3eb2e4c686d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
