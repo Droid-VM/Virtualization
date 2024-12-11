@@ -142,6 +142,30 @@
       },
       "revId": "f8fe1493d32ab982d9efe39c7ccaa3eb2e4c686d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39f4b4bc_701b94fb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-11T13:52:20Z",
+      "side": 1,
+      "message": "\u003e Ack, I\u0027ll rework this CL to remove that flag then.\n\nSorry, meant to comment that on aosp/3378616.\n\nI\u0027ll keep this CL as pvmfw should still not panic if the DT properties are missing while the guest doesn\u0027t require them.",
+      "parentUuid": "891f8f7e_dd63a37d",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 46
+      },
+      "revId": "f8fe1493d32ab982d9efe39c7ccaa3eb2e4c686d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
