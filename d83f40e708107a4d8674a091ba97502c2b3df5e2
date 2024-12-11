@@ -22,6 +22,30 @@
       },
       "revId": "d83f40e708107a4d8674a091ba97502c2b3df5e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5949e117_7393f200",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 3632584
+      },
+      "writtenOn": "2024-12-11T15:24:03Z",
+      "side": 1,
+      "message": "Hi! Thank you for reviewing this CL. 😊\n\nDo you have any suggestions on how to make sure the pointer points to the data is initialized, as we cannot use a borrow checker?",
+      "parentUuid": "0c30901e_5c443b11",
+      "range": {
+        "startLine": 189,
+        "startChar": 32,
+        "endLine": 189,
+        "endChar": 58
+      },
+      "revId": "d83f40e708107a4d8674a091ba97502c2b3df5e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
