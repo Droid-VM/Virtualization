@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bed4328e_b3a4caa0",
+        "filename": "guest/pvmfw/src/uefi/runtime_services.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-12-11T18:20:03Z",
+      "side": 1,
+      "message": "These unsafe functions should have doc comments with a safety section explaining what prerequisites they expect from their callers, e.g. around pointer validity.",
+      "revId": "72e75b62efc8c98468531fc3109413f00a2e7e93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
