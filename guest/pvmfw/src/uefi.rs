@@ -21,6 +21,7 @@ mod runtime_services;
 mod stdio;
 
 use crate::entry::FIRMWARE_REVISION;
+use crate::uefi::linux::LINUX_EFI_LOADED_IMAGE_FIXED_GUID;
 use crate::uefi::linux::RT_PROPERTIES_TABLE_GUID;
 use crate::uefi::loaded_image::LOADED_IMAGE_PROTOCOL_GUID;
 use crate::uefi::runtime_services::RtPropertiesTable;
@@ -181,6 +182,7 @@ impl EfiLoader {
     pub fn get_protocol(&mut self, guid: Guid) -> Option<*mut c_void> {
         match guid {
             LOADED_IMAGE_PROTOCOL_GUID => Some(addr_of_mut!(self.loaded_image_protocol).cast()),
+            LINUX_EFI_LOADED_IMAGE_FIXED_GUID => Some(null_mut()),
             _ => None,
         }
     }
