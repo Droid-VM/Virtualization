@@ -22,6 +22,30 @@
       },
       "revId": "1bbf49ee1f18d49c9c1e7b857a97030a76141715",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39a8ad80_f99052de",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2024-12-11T01:44:27Z",
+      "side": 1,
+      "message": "\u003e what key is this signed with? Is this re-signed with the Debian archive key or the individual developers ?\n\nIt it signed with a developer key.\n\n\u003e debian-keyring in your stable version may not contain all keys.\n\nNote that we use `debian-keyring` not `debian-archive-keyring`. As stated on https://packages.debian.org/bookworm/debian-keyring, the package contains the keys of all Debian developers.\n\nI have manually tested the end-to-end build, and it succeeds at signature verification step.\n\n\u003e I think `apt-get source` verifies the chain of trust ...\n\nBut I think `apt-get source` on Kokoro / our Ubuntu 22.04 container will not be able to grab sources for a newer Debian kernel that\u0027s not available on the Ubuntu 22.04 source repos?\n\n\u003e If you are hardcoding the version you might as well hardcode sha1sum of the binary.\n\nHmm, that\u0027s exactly the point of the `.dsc` file, which has the SHA256 (also contains SHA1 hashes, but I `--require-strong-checksums` so SHA256 ones are verified).",
+      "parentUuid": "c3525b11_7e9647ce",
+      "range": {
+        "startLine": 251,
+        "startChar": 24,
+        "endLine": 254,
+        "endChar": 47
+      },
+      "revId": "1bbf49ee1f18d49c9c1e7b857a97030a76141715",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
