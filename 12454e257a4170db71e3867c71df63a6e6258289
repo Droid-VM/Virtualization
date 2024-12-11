@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b6356b3_61484ead",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-11T00:05:02Z",
+      "side": 1,
+      "message": "code looks good, but i don\u0027t know RBP in any detail yet, so can\u0027t review the logic",
+      "revId": "12454e257a4170db71e3867c71df63a6e6258289",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c045532f_6218bb29",
+        "filename": "guest/pvmfw/src/rollback.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-11T00:05:02Z",
+      "side": 1,
+      "message": "maybe do `if !cfg!(llpvm_changes) \u0026\u0026 ...` so that we don\u0027t forget to delete this branch when the flag is deleted",
+      "revId": "12454e257a4170db71e3867c71df63a6e6258289",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
