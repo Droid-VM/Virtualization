@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c1c424e_38fd6c4c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-11T13:58:26Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t see RKP related flags here in pvmfw.\n\n`Capability::RemoteAttest`?\n\n\u003e Rialto [...] should, in no case on a production build, use instance-img. (aosp/3116626)\n\nOkay, thanks for confirming this as I was confused how it was supposed to work otherwise.\n\nNote that neither aosp/2868574 nor aosp/3116626 clearly implemented this.",
+      "parentUuid": "5afc18bd_e77f215f",
+      "range": {
+        "startLine": 14,
+        "startChar": 19,
+        "endLine": 15,
+        "endChar": 32
+      },
+      "revId": "12454e257a4170db71e3867c71df63a6e6258289",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "71d191ed_72c17a10",
         "filename": "/COMMIT_MSG",
         "patchSetId": 6
@@ -37,6 +61,30 @@
       "writtenOn": "2024-12-11T13:25:20Z",
       "side": 1,
       "message": "This is a pending item, but we were expected to clear up the Android 15 feature flags after release. We shouldn\u0027t be using them for new features.\n\nhttps://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3110080/comment/457935f0_0022f4c9/\n\ncc++ @ioffe@google.com",
+      "range": {
+        "startLine": 25,
+        "startChar": 20,
+        "endLine": 25,
+        "endChar": 40
+      },
+      "revId": "12454e257a4170db71e3867c71df63a6e6258289",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9924d991_18cc06a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-11T13:58:26Z",
+      "side": 1,
+      "message": "See my [comment](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3378615/comment/497f901c_53bc6389/) on aosp/3378615:\n\n\u003e Ack, I\u0027ll rework this CL to remove that flag then.",
+      "parentUuid": "71d191ed_72c17a10",
       "range": {
         "startLine": 25,
         "startChar": 20,
