@@ -105,9 +105,8 @@ fn perform_legacy_rollback_protection(
         RebootReason::InternalError
     })?;
     let (new_instance, salt) = if let Some(entry) = recorded_entry {
-        check_dice_measurements_match_entry(dice_inputs, &entry)?;
-        let salt = instance_hash.unwrap_or(entry.salt);
-        (false, salt)
+        check_dice_measurements_match_entry(dice_inputs, &entry, instance_hash)?;
+        (false, entry.salt)
     } else {
         // New instance!
         let salt = instance_hash.map_or_else(rand::random_array, Ok).map_err(|e| {
@@ -128,8 +127,9 @@ fn perform_legacy_rollback_protection(
 fn check_dice_measurements_match_entry(
     dice_inputs: &PartialInputs,
     entry: &EntryBody,
+    instance_hash: Option<Hidden>,
 ) -> Result<(), RebootReason> {
-    ensure_dice_measurements_match_entry(dice_inputs, entry).map_err(|e| {
+    ensure_dice_measurements_match_entry(dice_inputs, entry, instance_hash).map_err(|e| {
         error!(
             "Dice measurements do not match recorded entry. \
         This may be because of update: {e}"
@@ -143,6 +143,7 @@ fn check_dice_measurements_match_entry(
 fn ensure_dice_measurements_match_entry(
     dice_inputs: &PartialInputs,
     entry: &EntryBody,
+    instance_hash: Option<Hidden>,
 ) -> Result<(), InstanceError> {
     if entry.code_hash != dice_inputs.code_hash {
         Err(InstanceError::RecordedCodeHashMismatch)
@@ -150,6 +151,8 @@ fn ensure_dice_measurements_match_entry(
         Err(InstanceError::RecordedAuthHashMismatch)
     } else if entry.mode() != dice_inputs.mode {
         Err(InstanceError::RecordedDiceModeMismatch)
+    } else if instance_hash.is_some() && Some(entry.salt) != instance_hash {
+        Err(InstanceError::RecordedDiceSaltMismatch)
     } else {
         Ok(())
     }
