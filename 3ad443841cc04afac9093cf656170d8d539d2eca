@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f972b54_2304c7ad",
+        "filename": "guest/pvmfw/src/uefi/stdio.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-12-11T14:42:42Z",
+      "side": 1,
+      "message": "Unsafe Rust Review: The precondition of `offset` is that this does not go out of bounds of the allocation, so you should explain why that is. (It\u0027s because the caller passes a pointer to a nul-terminated utf16 string.)",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 39
+      },
+      "revId": "3ad443841cc04afac9093cf656170d8d539d2eca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85b16357_3234b212",
+        "filename": "guest/pvmfw/src/uefi/stdio.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-12-11T14:42:42Z",
+      "side": 1,
+      "message": "It might be more natural to implement this using a while loop that repeatedly does `end \u003d end.add(1)`. The advantage of the for loop is that you do not have to use `offset_from` to get the index, but you\u0027re already doing that anyway...\n\nAlso, seems like you\u0027re going to have multiple functions that need to read a utf16 string, so it might make sense to refactor this out into a separate function.",
+      "revId": "3ad443841cc04afac9093cf656170d8d539d2eca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e949d753_1d265e34",
+        "filename": "guest/pvmfw/src/uefi/stdio.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-12-11T14:42:42Z",
+      "side": 1,
+      "message": "Unsafe Rust Review: The precondition of `offset_from` is that the pointers come from the same allocated object, so the safety comment should explain why that is the case. It\u0027s not actually required that they are aligned, so you do not have to mention that.",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 67
+      },
+      "revId": "3ad443841cc04afac9093cf656170d8d539d2eca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a95c632_e003d1e9",
+        "filename": "guest/pvmfw/src/uefi/stdio.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-12-11T14:42:42Z",
+      "side": 1,
+      "message": "This is just [`String::from_utf16_lossy`](https://doc.rust-lang.org/stable/std/string/struct.String.html#method.from_utf16_lossy).",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 29
+      },
+      "revId": "3ad443841cc04afac9093cf656170d8d539d2eca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
