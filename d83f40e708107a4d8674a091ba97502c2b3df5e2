@@ -46,6 +46,30 @@
       },
       "revId": "d83f40e708107a4d8674a091ba97502c2b3df5e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e4f14a2_5043ea7a",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1943701
+      },
+      "writtenOn": "2024-12-11T16:11:20Z",
+      "side": 1,
+      "message": "Your most direct option is to mark this function as `unsafe` and write in the `# Safety` section that it is the responsibility of the caller.\n\nThat is the magic of unsafe: you can define your own preconditions and impose them on the caller. At some point, _someone_ should be able to write the correct `// SAFETY` comment at the call-site and then the proof burden is complete.\n\nYou seen example of this here: the `unsafe` block forces you to write a `// SAFETY` comment to explain why it is actually safe. I don\u0027t think you can do this right now, but if you strenghten the preconditions for calling `install_configuration_table`, you can rely on these stronger preconditions in your `// SAFETY` comment.\n\nAlternatively, consider why you need a pointer here? Can you update the callers to send in a `\u0026Guid` instead? If not, why not?\n\nNote that I don\u0027t have any context for the feature you are implementing, so this is completely generic advice 😄",
+      "parentUuid": "5949e117_7393f200",
+      "range": {
+        "startLine": 189,
+        "startChar": 32,
+        "endLine": 189,
+        "endChar": 58
+      },
+      "revId": "d83f40e708107a4d8674a091ba97502c2b3df5e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
