@@ -33,6 +33,23 @@
       "message": "Is this true? Can I really call `select_next_stage` with *any* slice and get a valid response?\n\n(It appears that I\u0027m being stricter than whoever the previous unsafe reviewer was in this file, as for the same reason, `main_wrapper` and `start` at a minimum are supposed to be unsafe - the rule is supposed to be that if you would do something illegal (in this case create a function pointer that\u0027s not guaranteed to point at a function with appropriate ABI and executability) on some inputs, you should mark the function as `unsafe`, and document what needs to be true. In this case, that condition would probably be something like \"`kernel` points to a kernel image following spec X\", and then eventually up the callchain, you\u0027d say something like \"We just checked the signature on this, and we only sign things that follow spec X (or \"the user asserted this follows spec X\"), so this will be fine\")",
       "revId": "76afad15947fb812eccbbce6470e8ed926afeedf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6e1c551_3000dcc5",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-11T00:15:53Z",
+      "side": 1,
+      "message": "You might be able to avoid making some of the functions *creating* this unsafe if you mark this as `unsafe extern \"efapi\"`. If you did that, then your `execute_efi_payload` would become unsafe, but your functions *producing* `EfiEntrypoint` would not need to be.",
+      "revId": "76afad15947fb812eccbbce6470e8ed926afeedf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
