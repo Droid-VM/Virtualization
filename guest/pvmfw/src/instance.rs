@@ -51,6 +51,8 @@ pub enum Error {
     RecordedCodeHashMismatch,
     /// DICE mode found in the pvmfw instance.img entry doesn't match the current one.
     RecordedDiceModeMismatch,
+    /// DICE salt found in the pvmfw instance.img entry doesn't match the current one.
+    RecordedDiceSaltMismatch,
     /// Size of the instance.img entry being read or written is not supported.
     UnsupportedEntrySize(usize),
     /// Failed to create VirtIO Block device.
@@ -70,6 +72,7 @@ impl fmt::Display for Error {
             Self::RecordedAuthHashMismatch => write!(f, "Recorded authority hash doesn't match"),
             Self::RecordedCodeHashMismatch => write!(f, "Recorded code hash doesn't match"),
             Self::RecordedDiceModeMismatch => write!(f, "Recorded DICE mode doesn't match"),
+            Self::RecordedDiceSaltMismatch => write!(f, "Recorded DICE salt doesn't match"),
             Self::UnsupportedEntrySize(sz) => write!(f, "Invalid entry size: {sz}"),
             Self::VirtIOBlkCreationFailed(e) => {
                 write!(f, "Failed to create VirtIO Block device: {e}")
