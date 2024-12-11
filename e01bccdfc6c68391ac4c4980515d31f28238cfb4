@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "850fb807_5c95b456",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-11T12:55:04Z",
+      "side": 1,
+      "message": "`addr_of`?",
+      "range": {
+        "startLine": 121,
+        "startChar": 8,
+        "endLine": 121,
+        "endChar": 49
+      },
+      "revId": "e01bccdfc6c68391ac4c4980515d31f28238cfb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2fabe7b_b32acf71",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-11T12:55:04Z",
+      "side": 1,
+      "message": "Take `guid_entry` by value and return",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 33
+      },
+      "revId": "e01bccdfc6c68391ac4c4980515d31f28238cfb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "884f7364_9ad9c518",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-11T12:55:04Z",
+      "side": 1,
+      "message": "`.as_mut_ptr().cast()`?",
+      "range": {
+        "startLine": 224,
+        "startChar": 58,
+        "endLine": 224,
+        "endChar": 80
+      },
+      "revId": "e01bccdfc6c68391ac4c4980515d31f28238cfb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28f5e834_b4f01686",
+        "filename": "guest/pvmfw/src/uefi/runtime_services.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-11T12:55:04Z",
+      "side": 1,
+      "message": "Should `reset_system` be reflected in here?",
+      "range": {
+        "startLine": 176,
+        "startChar": 36,
+        "endLine": 176,
+        "endChar": 37
+      },
+      "revId": "e01bccdfc6c68391ac4c4980515d31f28238cfb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
