@@ -80,7 +80,7 @@ public class MainActivity extends BaseActivity
     private InstalledImage mImage;
     private X509Certificate[] mCertificates;
     private PrivateKey mPrivateKey;
-    private TerminalView mTerminalView;
+    private WebView mWebView;
     private AccessibilityManager mAccessibilityManager;
     private ConditionVariable mBootCompleted = new ConditionVariable();
     private static final int POST_NOTIFICATIONS_PERMISSION_REQUEST_CODE = 101;
@@ -113,12 +113,12 @@ public class MainActivity extends BaseActivity
 
         MaterialToolbar toolbar = (MaterialToolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        mTerminalView = (TerminalView) findViewById(R.id.webview);
-        mTerminalView.getSettings().setDatabaseEnabled(true);
-        mTerminalView.getSettings().setDomStorageEnabled(true);
-        mTerminalView.getSettings().setJavaScriptEnabled(true);
-        mTerminalView.getSettings().setCacheMode(LOAD_NO_CACHE);
-        mTerminalView.setWebChromeClient(new WebChromeClient());
+        mWebView = (WebView) findViewById(R.id.webview);
+        mWebView.getSettings().setDatabaseEnabled(true);
+        mWebView.getSettings().setDomStorageEnabled(true);
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.getSettings().setCacheMode(LOAD_NO_CACHE);
+        mWebView.setWebChromeClient(new WebChromeClient());
 
         setupModifierKeys();
 
@@ -173,16 +173,16 @@ public class MainActivity extends BaseActivity
         findViewById(R.id.btn_ctrl)
                 .setOnClickListener(
                         (v) -> {
-                            mTerminalView.mapCtrlKey();
-                            mTerminalView.enableCtrlKey();
+                            mWebView.evaluateJavascript(TerminalView.CTRL_KEY_HANDLER, null);
+                            mWebView.evaluateJavascript(TerminalView.ENABLE_CTRL_KEY, null);
                         });
 
         View.OnClickListener modifierButtonClickListener =
                 v -> {
                     if (BTN_KEY_CODE_MAP.containsKey(v.getId())) {
                         int keyCode = BTN_KEY_CODE_MAP.get(v.getId());
-                        mTerminalView.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, keyCode));
-                        mTerminalView.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, keyCode));
+                        mWebView.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, keyCode));
+                        mWebView.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, keyCode));
                     }
                 };
 
@@ -246,7 +246,7 @@ public class MainActivity extends BaseActivity
 
     private void connectToTerminalService() {
         Log.i(TAG, "URL=" + getTerminalServiceUrl().toString());
-        mTerminalView.setWebViewClient(
+        mWebView.setWebViewClient(
                 new WebViewClient() {
                     private boolean mLoadFailed = false;
                     private long mRequestId = 0;
@@ -300,7 +300,8 @@ public class MainActivity extends BaseActivity
                                                     .setVisibility(View.VISIBLE);
                                             mBootCompleted.open();
                                             updateModifierKeysVisibility();
-                                            mTerminalView.mapTouchToMouseEvent();
+                                            mWebView.evaluateJavascript(
+                                                    TerminalView.TOUCH_TO_MOUSE_HANDLER, null);
                                         }
                                     }
                                 });
@@ -327,9 +328,7 @@ public class MainActivity extends BaseActivity
                         () -> {
                             waitUntilVmStarts();
                             runOnUiThread(
-                                    () ->
-                                            mTerminalView.loadUrl(
-                                                    getTerminalServiceUrl().toString()));
+                                    () -> mWebView.loadUrl(getTerminalServiceUrl().toString()));
                         })
                 .start();
     }
