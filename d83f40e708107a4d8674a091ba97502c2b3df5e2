@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c30901e_5c443b11",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1943701
+      },
+      "writtenOn": "2024-12-11T14:56:44Z",
+      "side": 1,
+      "message": "Hi from the unsafe Rust reviewer 😊 I don\u0027t think that is enough for a pointer to be valid. It must also point to data which is still initialized. This section has a lot more about this: https://doc.rust-lang.org/std/ptr/index.html#safety.\n\nYou cannot generally know if a pointer is valid from just looking at the pointer itself. The famous borrow checker is how Rust knows that references are valid, but you don\u0027t have a borrow checker for raw pointers.",
+      "range": {
+        "startLine": 189,
+        "startChar": 32,
+        "endLine": 189,
+        "endChar": 58
+      },
+      "revId": "d83f40e708107a4d8674a091ba97502c2b3df5e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
