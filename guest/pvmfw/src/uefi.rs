@@ -22,6 +22,7 @@ mod stdio;
 use crate::entry::FIRMWARE_REVISION;
 use crate::uefi::linux::RT_PROPERTIES_TABLE_GUID;
 use crate::uefi::runtime_services::RtPropertiesTable;
+use alloc::vec;
 use alloc::vec::Vec;
 use core::ffi::c_void;
 use core::mem;
@@ -116,6 +117,10 @@ impl EfiLoader {
         let _ = self.insert_config_table(RT_PROPERTIES_TABLE_GUID, rt_properties_table);
     }
 
+    fn uses_image_handle(&self, handle: Handle) -> bool {
+        handle == Self::EFI_IMAGE_HANDLE
+    }
+
     fn get_system_table_ptr(&mut self) -> *mut SystemTable {
         addr_of_mut!(self.system_table)
     }
@@ -155,6 +160,25 @@ impl EfiLoader {
                 vmbase::heap::allocate(size.get(), true).map(|p| p.cast())
             }
             _ => None,
+        }
+    }
+
+    pub fn get_protocol(&mut self, guid: Guid) -> Option<*mut c_void> {
+        #[allow(clippy::match_single_binding)]
+        match guid {
+            _ => None,
+        }
+    }
+
+    pub fn get_all_handles(&self) -> Vec<Handle> {
+        vec![Self::EFI_IMAGE_HANDLE]
+    }
+
+    pub fn get_protocol_handles(&mut self, guid: Guid) -> Vec<Handle> {
+        if self.get_protocol(guid).is_some() {
+            vec![Self::EFI_IMAGE_HANDLE]
+        } else {
+            vec![]
         }
     }
 }
