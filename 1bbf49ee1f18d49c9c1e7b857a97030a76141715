@@ -46,6 +46,30 @@
       },
       "revId": "1bbf49ee1f18d49c9c1e7b857a97030a76141715",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "695a538c_af900ba4",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1067793
+      },
+      "writtenOn": "2024-12-11T02:16:09Z",
+      "side": 1,
+      "message": "I think if you add deb-src line to /etc/apt/sources.list, then it would.\n\n```\ndeb-src http://deb.debian.org/debian/ bookworm main  # or whatever release\n```\n\nI think you can also specify like `apt-get source packagename/suite`",
+      "parentUuid": "39a8ad80_f99052de",
+      "range": {
+        "startLine": 251,
+        "startChar": 24,
+        "endLine": 254,
+        "endChar": 47
+      },
+      "revId": "1bbf49ee1f18d49c9c1e7b857a97030a76141715",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
