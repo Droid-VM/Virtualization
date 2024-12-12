@@ -211,6 +211,29 @@ void AVirtualizationService_destroy(AVirtualizationService* _Nullable service) _
 typedef struct AVirtualMachine AVirtualMachine;
 
 /**
+ * The reason of a virtual machine.
+ * @see AVirtualMachine_createRaw
+ */
+enum AVirtualMachineErrorCode : int32_t {
+    /**
+     * Error code for all other errors not listed below.
+     */
+    AVIRTUAL_MACHINE_ERROR_UNKNOWN = 0,
+    /**
+     * Error code indicating that the payload can't be verified due to various reasons
+     */
+    AVIRTUAL_MACHINE_PAYLOAD_VERIFICATION_FAILED = 1,
+    /**
+     * Error code indicating that the payload is verified, but has changed since the last boot
+     */
+    AVIRTUAL_MACHINE_PAYLOAD_CHANGED = 2,
+    /**
+     * Error code indicating that the payload config is invalid
+     */
+    AVIRTUAL_MACHINE_PAYLOAD_INVALID_CONFIG = 3,
+};
+
+/**
  * The reason why a virtual machine stopped.
  * @see AVirtualMachine_waitForStop
  */
@@ -265,6 +288,11 @@ enum AVirtualMachineStopReason : int32_t {
     AVIRTUAL_MACHINE_UNRECOGNISED = 0,
 };
 
+typedef struct {
+    void (*onError)(enum AVirtualMachineErrorCode errorCode, const char* _Nonnull messae);
+    void (*onStopped)(enum AVirtualMachineStopReason reason);
+} AVirtualMachineCallback;
+
 /**
  * Create a virtual machine with given raw `config`.
  *
@@ -284,6 +312,7 @@ enum AVirtualMachineStopReason : int32_t {
  * \param logFd a writable file descriptor for the log output, or -1. Ownership will always be
  *   transferred from the caller, even if unsuccessful.
  * \param vm an out parameter that will be set to the virtual machine handle.
+ * \param callback an optional callback to be called when VM fails to start or stopped.
  *
  * \return If successful, it sets `vm` and returns 0. Otherwise, it leaves `vm` untouched and
  *   returns `-EIO`.
@@ -291,7 +320,8 @@ enum AVirtualMachineStopReason : int32_t {
 int AVirtualMachine_createRaw(const AVirtualizationService* _Nonnull service,
                               AVirtualMachineRawConfig* _Nonnull config, int consoleOutFd,
                               int consoleInFd, int logFd,
-                              AVirtualMachine* _Null_unspecified* _Nonnull vm) __INTRODUCED_IN(36);
+                              AVirtualMachine* _Null_unspecified* _Nonnull vm,
+                              AVirtualMachineCallback callback) __INTRODUCED_IN(36);
 
 /**
  * Start a virtual machine. `AVirtualMachine_start` is synchronous and blocks until the virtual
