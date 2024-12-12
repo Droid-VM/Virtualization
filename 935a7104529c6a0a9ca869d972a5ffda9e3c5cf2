@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "805d89e4_0fdd832e",
+        "filename": "libs/libvm_payload/include/vm_payload.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-12T18:36:41Z",
+      "side": 1,
+      "message": "Wondering if we should return the number of bytes written (or read in the other method) (in case of success) \u0026 -1 in case of failure",
+      "parentUuid": "4a37864a_3a7c3d30",
+      "range": {
+        "startLine": 268,
+        "startChar": 5,
+        "endLine": 268,
+        "endChar": 44
+      },
+      "revId": "935a7104529c6a0a9ca869d972a5ffda9e3c5cf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "36c3981b_cca406d1",
         "filename": "libs/libvm_payload/include/vm_payload.h",
         "patchSetId": 8
