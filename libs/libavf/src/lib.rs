@@ -231,6 +231,28 @@ pub extern "C" fn AVirtualMachineRawConfig_addCustomMemoryBackingFile(
     -libc::ENOTSUP
 }
 
+/// Add device tree overlay blob
+///
+/// # Safety
+/// `config` must be a pointer returned by `AVirtualMachineRawConfig_create`.
+#[no_mangle]
+pub unsafe extern "C" fn AVirtualMachineRawConfig_addDeviceTreeOverlay(
+    config: *mut VirtualMachineRawConfig,
+    fd: c_int,
+) -> c_int {
+    let file = get_file_from_fd(fd);
+    let Some(fd) = file.map(ParcelFileDescriptor::new) else {
+        return -libc::EBADF;
+    };
+
+    // SAFETY: `config` is assumed to be a valid, non-null pointer returned by
+    // AVirtualMachineRawConfig_create. It's the only reference to the object.
+    let config = unsafe { &mut *config };
+    config.dtbos.push(fd);
+
+    0
+}
+
 /// Spawn a new instance of `virtmgr`, a child process that will host the `VirtualizationService`
 /// AIDL service, and connect to the child process.
 ///
