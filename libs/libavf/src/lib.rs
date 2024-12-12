@@ -231,6 +231,18 @@ pub extern "C" fn AVirtualMachineRawConfig_addCustomMemoryBackingFile(
     -libc::ENOTSUP
 }
 
+/// NOT IMPLEMENTED.
+///
+/// # Returns
+/// It always returns `-ENOTSUP`.
+#[no_mangle]
+pub extern "C" fn AVirtualMachineRawConfig_addDeviceTreeOverlay(
+    _config: *mut VirtualMachineRawConfig,
+    _fd: c_int,
+) -> c_int {
+    -libc::ENOTSUP
+}
+
 /// Spawn a new instance of `virtmgr`, a child process that will host the `VirtualizationService`
 /// AIDL service, and connect to the child process.
 ///

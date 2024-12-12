@@ -166,6 +166,17 @@ int AVirtualMachineRawConfig_setHypervisorSpecificAuthMethod(
 int AVirtualMachineRawConfig_addCustomMemoryBackingFile(AVirtualMachineRawConfig* _Nonnull config,
                                                         int fd, uint64_t rangeStart,
                                                         uint64_t rangeEnd) __INTRODUCED_IN(36);
+/**
+ * Use the specified fd as the device tree overlay for booting VM.
+ *
+ * \param config a virtual machine config object.
+ * \param fd a device tree blob for overlay
+ *
+ * \return If successful, it returns 0. It returns `-ENOTSUP` if the hypervisor doesn't support
+ *   backing memfd.
+ */
+int AVirtualMachineRawConfig_addDeviceTreeOverlay(AVirtualMachineRawConfig* _Nonnull config, int fd)
+        __INTRODUCED_IN(36);
 
 /**
  * Represents a handle on a virtualization service, responsible for managing virtual machines.
