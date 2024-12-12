@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "837acf7e_4380ae0c",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-12-12T15:15:18Z",
+      "side": 1,
+      "message": "WIP; should we expose CID?",
+      "range": {
+        "startLine": 292,
+        "startChar": 50,
+        "endLine": 293,
+        "endChar": 59
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0268d002_2cb35ca5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 292,
+                "startChar": 0,
+                "endLine": 293,
+                "endChar": 0
+              },
+              "replacement": "    void (*onError)(enum AVirtualMachineErrorCode errorCode, const char* _Nonnull message);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c44617de08461deb424117c0585b162cfbd28a2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
