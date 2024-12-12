@@ -16,9 +16,16 @@
 package com.android.virtualization.terminal
 
 import android.os.Bundle
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+
+const val PORT_RANGE_MIN: Int = 1024
+const val PORT_RANGE_MAX: Int = 65535
 
 class SettingsPortForwardingActivity : AppCompatActivity() {
     private lateinit var mPortsStateManager: PortsStateManager
@@ -45,6 +52,64 @@ class SettingsPortForwardingActivity : AppCompatActivity() {
         inactiveRecyclerView.adapter = mInactivePortsAdapter
 
         mPortsStateListener = Listener()
+
+        val addButton = findViewById<ImageButton>(R.id.settings_port_forwarding_inactive_add_button)
+        addButton.setOnClickListener {
+            val dialogLayout =
+                getLayoutInflater()
+                    .inflate(R.layout.settings_port_forwarding_inactive_add_dialog, null)
+            val editText =
+                dialogLayout.findViewById<EditText>(
+                    R.id.settings_port_forwarding_inactive_add_dialog_text
+                )
+            val dialog =
+                MaterialAlertDialogBuilder(this)
+                    .setTitle(R.string.settings_port_forwarding_dialog_title)
+                    .setView(dialogLayout)
+                    .setPositiveButton(R.string.settings_port_forwarding_dialog_save) { _, _ ->
+                        val text = editText.text.toString()
+                        val port =
+                            try {
+                                text.toInt()
+                            } catch (e: NumberFormatException) {
+                                Toast.makeText(
+                                        this,
+                                        R.string
+                                            .settings_port_forwarding_dialog_error_invalid_input,
+                                        Toast.LENGTH_SHORT,
+                                    )
+                                    .show()
+                                return@setPositiveButton
+                            }
+                        if (port > PORT_RANGE_MAX || port < PORT_RANGE_MIN) {
+                            Toast.makeText(
+                                    this,
+                                    R.string
+                                        .settings_port_forwarding_dialog_error_invalid_port_range,
+                                    Toast.LENGTH_SHORT,
+                                )
+                                .show()
+                        } else if (
+                            mPortsStateManager.getActivePorts().contains(port) ||
+                                mPortsStateManager.getEnabledPorts().contains(port)
+                        ) {
+                            Toast.makeText(
+                                    this,
+                                    R.string.settings_port_forwarding_dialog_error_existing_port,
+                                    Toast.LENGTH_SHORT,
+                                )
+                                .show()
+                        } else {
+                            mPortsStateManager.updateEnabledPort(port, true)
+                        }
+                    }
+                    .setNegativeButton(R.string.settings_port_forwarding_dialog_cancel) { dialog, _
+                        ->
+                        dialog.dismiss()
+                    }
+                    .create()
+            dialog.show()
+        }
     }
 
     private fun refreshAdapters() {
