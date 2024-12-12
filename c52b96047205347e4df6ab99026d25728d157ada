@@ -16,6 +16,24 @@
       "message": "Hi from the unsafe Rust reviewer 😊 Can you please add a `# Safety` section to the docstring for all the new unsafe functions defined in this file.\n\nSee http://go/android-rust-style#unsafe for guidance on what to write here.\n\nI get the impression that most (all?) of these functions are empty stubs? If so, I think you can simply write a section saying `Not currently unsafe` for each function. An easier alternative for you would be to avoid the `unsafe` keyword on every function. I would prefer the latter solution since it would better reflect the status of each function.",
       "revId": "c52b96047205347e4df6ab99026d25728d157ada",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64b7f617_7a86ccc3",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-12-12T15:23:49Z",
+      "side": 1,
+      "message": "That is a valid approach, but to avoid changing the comments back and forth I would suggest just writing the safety requirements you expect to have already now, if that\u0027s possible.\n\nI assume that these functions come from some EFI specification, which presumably has some requirements on how the caller must call the functions, so that would make a good basis for writing your safety requirements.",
+      "parentUuid": "3554323c_63c7b3bd",
+      "revId": "c52b96047205347e4df6ab99026d25728d157ada",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
