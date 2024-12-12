@@ -147,6 +147,15 @@ void AVirtualMachineRawConfig_setSwiotlbMiB(AVirtualMachineRawConfig* _Nonnull c
                                             int32_t swiotlbMiB) __INTRODUCED_IN(36);
 
 /**
+ * Set vCPU count.
+ *
+ * \param config a virtual machine config object.
+ * \param n number of vCPUs.
+ */
+void AVirtualMachineRawConfig_setVCpuCount(AVirtualMachineRawConfig* _Nonnull config, int32_t n)
+        __INTRODUCED_IN(36);
+
+/**
  * Set whether the virtual machine's memory will be protected from the host, so the host can't
  * access its memory.
  *
