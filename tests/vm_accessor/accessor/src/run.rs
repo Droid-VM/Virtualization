@@ -94,14 +94,8 @@ pub fn run_vm() -> Result<VmInstance, Error> {
     )?;
     info!("created instance image at: {instance_img_path:?}");
 
-    let instance_id = if cfg!(llpvm_changes) {
-        let id = service.allocateInstanceId().context("Failed to allocate instance_id")?;
+    let instance_id = service.allocateInstanceId().context("Failed to allocate instance_id")?;
         fs::write(work_dir.join("instance_id"), id)?;
-        id
-    } else {
-        // if llpvm feature flag is disabled, instance_id is not used.
-        [0u8; 64]
-    };
 
     let payload = Payload::PayloadConfig(VirtualMachinePayloadConfig {
         payloadBinaryName: PAYLOAD_BINARY_NAME.to_owned(),

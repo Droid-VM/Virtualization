@@ -91,12 +91,9 @@ fn try_main() -> Result<()> {
         register(REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME, remote_provisioning_service)?;
     }
 
-    if cfg!(llpvm_changes) {
-        let maintenance_service =
-            BnVirtualizationMaintenance::new_binder(service.clone(), BinderFeatures::default());
-        register(MAINTENANCE_SERVICE_NAME, maintenance_service)?;
-    }
-
+    let maintenance_service =
+        BnVirtualizationMaintenance::new_binder(service.clone(), BinderFeatures::default());
+    register(MAINTENANCE_SERVICE_NAME, maintenance_service)?;
     ProcessState::join_thread_pool();
     bail!("Thread pool unexpectedly ended");
 }

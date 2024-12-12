@@ -107,9 +107,7 @@ impl InstanceStarter {
         // of APEXes, and finding out it isn't is much more expensive than creating a new one.
         self.create_instance_image(virtualization_service)?;
         // TODO(b/294177871): Ping VS to delete the old instance's secret.
-        if cfg!(llpvm_changes) {
-            self.allocate_instance_id(virtualization_service)?;
-        }
+        self.allocate_instance_id(virtualization_service)?;
         // Delete existing idsig files. Ignore error in case idsig doesn't exist.
         let _ignored1 = fs::remove_file(&self.idsig);
         let _ignored2 = fs::remove_file(&self.idsig_manifest_apk);
@@ -128,13 +126,10 @@ impl InstanceStarter {
         &self,
         virtualization_service: &dyn IVirtualizationService,
     ) -> Result<CompOsInstance> {
-        let instance_id: [u8; 64] = if cfg!(llpvm_changes) {
+        let instance_id: [u8; 64] =
             fs::read(&self.instance_id_file)?
                 .try_into()
-                .map_err(|_| anyhow!("Failed to get instance_id"))?
-        } else {
-            [0u8; 64]
-        };
+                .map_err(|_| anyhow!("Failed to get instance_id"))?;
 
         let instance_image = fs::OpenOptions::new()
             .read(true)

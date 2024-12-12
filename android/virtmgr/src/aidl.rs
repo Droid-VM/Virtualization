@@ -905,24 +905,21 @@ fn maybe_create_device_tree_overlay(
         vec![]
     };
 
-    let instance_id;
     let key_material;
     let mut untrusted_props = Vec::with_capacity(2);
-    if cfg!(llpvm_changes) {
-        instance_id = extract_instance_id(config);
-        untrusted_props.push((cstr!("instance-id"), &instance_id[..]));
-        let want_updatable = extract_want_updatable(config);
-        if want_updatable && is_secretkeeper_supported() {
-            // Let guest know that it can defer rollback protection to Secretkeeper by setting
-            // an empty property in untrusted node in DT. This enables Updatable VMs.
-            untrusted_props.push((cstr!("defer-rollback-protection"), &[]));
-            let sk: Strong<dyn ISecretkeeper> =
-                binder::wait_for_interface(SECRETKEEPER_IDENTIFIER)?;
-            if sk.getInterfaceVersion()? >= 2 {
-                let PublicKey { keyMaterial } = sk.getSecretkeeperIdentity()?;
-                key_material = keyMaterial;
-                trusted_props.push((cstr!("secretkeeper_public_key"), key_material.as_slice()));
-            }
+    let instance_id = extract_instance_id(config);
+    untrusted_props.push((cstr!("instance-id"), &instance_id[..]));
+    let want_updatable = extract_want_updatable(config);
+    if want_updatable && is_secretkeeper_supported() {
+        // Let guest know that it can defer rollback protection to Secretkeeper by setting
+        // an empty property in untrusted node in DT. This enables Updatable VMs.
+        untrusted_props.push((cstr!("defer-rollback-protection"), &[]));
+        let sk: Strong<dyn ISecretkeeper> =
+            binder::wait_for_interface(SECRETKEEPER_IDENTIFIER)?;
+        if sk.getInterfaceVersion()? >= 2 {
+            let PublicKey { keyMaterial } = sk.getSecretkeeperIdentity()?;
+            key_material = keyMaterial;
+            trusted_props.push((cstr!("secretkeeper_public_key"), key_material.as_slice()));
         }
     }
 

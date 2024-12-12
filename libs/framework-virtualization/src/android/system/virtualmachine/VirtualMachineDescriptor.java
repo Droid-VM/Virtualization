@@ -40,8 +40,8 @@ import java.io.IOException;
 public final class VirtualMachineDescriptor implements Parcelable, AutoCloseable {
     private volatile boolean mClosed = false;
     @NonNull private final ParcelFileDescriptor mConfigFd;
-    // File descriptor of the file containing the instance id - will be null iff
-    // FEATURE_LLPVM_CHANGES is disabled.
+    // File descriptor of the file containing the instance id.
+    // TODO:383553863 Make this non-nullable.
     @Nullable private final ParcelFileDescriptor mInstanceIdFd;
     @NonNull private final ParcelFileDescriptor mInstanceImgFd;
     // File descriptor of the image backing the encrypted storage - Will be null if encrypted
