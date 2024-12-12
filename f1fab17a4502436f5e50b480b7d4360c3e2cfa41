@@ -1,0 +1,88 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad36daa3_bb8e1037",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-12T08:45:52Z",
+      "side": 1,
+      "message": "we don\u0027t need to inflate the layout here, instead we can just pass layout id to setView. and also we can find editText from dialog",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 89
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "441d0a67_829987b6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+              "range": {
+                "startLine": 58,
+                "startChar": 0,
+                "endLine": 65,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+              "range": {
+                "startLine": 68,
+                "startChar": 0,
+                "endLine": 69,
+                "endChar": 0
+              },
+              "replacement": "                    .setView(R.layout.settings_port_forwarding_inactive_add_dialog)\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+              "range": {
+                "startLine": 70,
+                "startChar": 0,
+                "endLine": 70,
+                "endChar": 0
+              },
+              "replacement": "                        val editText \u003d\n                            dialog.findViewById\u003cEditText\u003e(\n                                R.id.settings_port_forwarding_inactive_add_dialog_text\n                            )\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f1fab17a4502436f5e50b480b7d4360c3e2cfa41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c440a46f_e8ab86fb",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-12T08:45:52Z",
+      "side": 1,
+      "message": "can we do validate the input in edittext\u0027s ontextchanged listener and enable positive button only if the input is valid?",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 25
+      },
+      "revId": "f1fab17a4502436f5e50b480b7d4360c3e2cfa41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
