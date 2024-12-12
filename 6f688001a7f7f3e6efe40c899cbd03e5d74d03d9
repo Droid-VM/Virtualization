@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4788b78_b3e9ce44",
+        "filename": "guest/pvmfw/src/uefi.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-12-12T15:34:14Z",
+      "side": 1,
+      "message": "I realise this is not part of the change, but this is not a valid reason for `EfiLoader` to be `Send`. If pvmfw is single-threaded then you shouldn\u0027t need it to be `Send` in the first place as you shouldn\u0027t be trying to pass it between thread contexts.",
+      "revId": "6f688001a7f7f3e6efe40c899cbd03e5d74d03d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4097ab41_3e319f33",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-12-12T15:34:14Z",
+      "side": 1,
+      "message": "The safety comment should document how you know that, e.g. because you just checked it with `non_null_and_aligned_mut` above (assuming that\u0027s what it does, I can\u0027t see where it is defined).\n\nHowever, that is not sufficient for writing to a pointer to be defined; the pointer must also be [valid](https://doc.rust-lang.org/std/ptr/index.html#safety) for writes. So you also need to guarantee that somehow, perhaps by passing the requirement on to the caller of this function.",
+      "revId": "6f688001a7f7f3e6efe40c899cbd03e5d74d03d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b590c833_9adb1aec",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-12-12T15:34:14Z",
+      "side": 1,
+      "message": "So how can you assume that? If it\u0027s a requirement of the caller, then you need to document it in the `# Safety` section of `locate_handle`\u0027s Rustdoc comment.",
+      "revId": "6f688001a7f7f3e6efe40c899cbd03e5d74d03d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ca139ae_a9d2169a",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2024-12-12T15:34:14Z",
+      "side": 1,
+      "message": "Again, explain how you know this, and how you know it is valid.",
+      "revId": "6f688001a7f7f3e6efe40c899cbd03e5d74d03d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
