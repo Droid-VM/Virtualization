@@ -306,6 +306,14 @@ enum AVirtualMachineStopReason : int32_t {
 };
 
 /**
+ * A callback to be called when virtual machine stops.
+ *
+ * \param cid context index of a VM. Can be used for debugging.
+ * \param reason stop reason
+ */
+typedef void (*AVirtualMachineStopCallback)(int32_t cid, enum AVirtualMachineStopReason reason);
+
+/**
  * Create a virtual machine with given raw `config`.
  *
  * The created virtual machine is in stopped state. To run the created virtual machine, call
@@ -324,6 +332,7 @@ enum AVirtualMachineStopReason : int32_t {
  * \param logFd a writable file descriptor for the log output, or -1. Ownership will always be
  *   transferred from the caller, even if unsuccessful.
  * \param vm an out parameter that will be set to the virtual machine handle.
+ * \param callback an optional callback to be called when VM stops.
  *
  * \return If successful, it sets `vm` and returns 0. Otherwise, it leaves `vm` untouched and
  *   returns `-EIO`.
@@ -331,7 +340,9 @@ enum AVirtualMachineStopReason : int32_t {
 int AVirtualMachine_createRaw(const AVirtualizationService* _Nonnull service,
                               AVirtualMachineRawConfig* _Nonnull config, int consoleOutFd,
                               int consoleInFd, int logFd,
-                              AVirtualMachine* _Null_unspecified* _Nonnull vm) __INTRODUCED_IN(36);
+                              AVirtualMachine* _Null_unspecified* _Nonnull vm,
+                              const AVirtualMachineStopCallback _Nullable callback)
+        __INTRODUCED_IN(36);
 
 /**
  * Start a virtual machine. `AVirtualMachine_start` is synchronous and blocks until the virtual

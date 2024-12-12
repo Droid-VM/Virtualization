@@ -29,10 +29,10 @@ use android_system_virtualizationservice::{
     },
     binder::{ParcelFileDescriptor, Strong},
 };
-use avf_bindgen::AVirtualMachineStopReason;
+use avf_bindgen::{AVirtualMachineStopCallback, AVirtualMachineStopReason};
 use libc::timespec;
 use log::error;
-use vmclient::{DeathReason, VirtualizationService, VmInstance};
+use vmclient::{DeathReason, ErrorCode, VirtualizationService, VmCallback, VmInstance};
 
 /// Create a new virtual machine config object with no properties.
 #[no_mangle]
@@ -342,6 +342,35 @@ pub unsafe extern "C" fn AVirtualizationService_destroy(
     }
 }
 
+struct Callback(AVirtualMachineStopCallback);
+
+impl VmCallback for Callback {
+    fn on_payload_started(&self, _cid: i32) {
+        // Microdroid only. no-op.
+    }
+
+    fn on_payload_ready(&self, _cid: i32) {
+        // Microdroid only. no-op.
+    }
+
+    fn on_payload_finished(&self, _cid: i32, _exit_code: i32) {
+        // Microdroid only. no-op.
+    }
+
+    fn on_error(&self, _cid: i32, _error_code: ErrorCode, _message: &str) {
+        // Microdroid only. no-op.
+    }
+
+    fn on_died(&self, cid: i32, death_reason: DeathReason) {
+        if let Some(cb) = self.0 {
+            let stop_reason = death_reason_to_stop_reason(death_reason);
+            // SAFETY: `cb` is assumed to be a valid, non-null function pointer passed by
+            // `AVirtualMachine_createRaw`.
+            unsafe { cb(cid, stop_reason) };
+        }
+    }
+}
+
 /// Create a virtual machine with given `config`.
 ///
 /// # Safety
@@ -358,6 +387,7 @@ pub unsafe extern "C" fn AVirtualMachine_createRaw(
     console_in_fd: c_int,
     log_fd: c_int,
     vm_ptr: *mut *mut VmInstance,
+    callback: AVirtualMachineStopCallback,
 ) -> c_int {
     // SAFETY: `service` is assumed to be a valid, non-null pointer returned by
     // `AVirtualizationService_create` or `AVirtualizationService_create_early`. It's the only
@@ -373,7 +403,18 @@ pub unsafe extern "C" fn AVirtualMachine_createRaw(
     let console_in = get_file_from_fd(console_in_fd);
     let log = get_file_from_fd(log_fd);
 
-    match VmInstance::create(service.as_ref(), &config, console_out, console_in, log, None, None) {
+    let callback =
+        callback.map(|cb| Box::new(Callback(Some(cb))) as Box<dyn VmCallback + Send + Sync>);
+
+    match VmInstance::create(
+        service.as_ref(),
+        &config,
+        console_out,
+        console_in,
+        log,
+        None, // dump_dt
+        callback,
+    ) {
         Ok(vm) => {
             // SAFETY: `vm_ptr` is assumed to be a valid, non-null pointer to a mutable raw pointer.
             // `vm` is the only reference here and `vm_ptr` takes ownership.
