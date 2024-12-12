@@ -20,6 +20,7 @@ use super::{
 use core::ffi::c_void;
 use core::mem;
 use core::ptr::{copy, null_mut, write_bytes};
+use core::slice;
 use uefi_raw::protocol::device_path::DevicePathProtocol;
 use uefi_raw::table::boot::{
     BootServices, EventNotifyFn, EventType, InterfaceType, MemoryDescriptor, MemoryType,
@@ -96,6 +97,25 @@ pub const fn init_boot_services() -> BootServices {
         set_mem,
 
         create_event_ex,
+    }
+}
+
+#[repr(i32)]
+#[derive(Clone, Copy, Debug)]
+enum LocateSearchType {
+    AllHandles,
+    ByRegisterNotify,
+    ByProtocol,
+}
+
+impl LocateSearchType {
+    const fn new(value: i32) -> Option<Self> {
+        match value {
+            v if v == Self::AllHandles as i32 => Some(Self::AllHandles),
+            v if v == Self::ByRegisterNotify as i32 => Some(Self::ByRegisterNotify),
+            v if v == Self::ByProtocol as i32 => Some(Self::ByProtocol),
+            _ => None,
+        }
     }
 }
 
@@ -223,11 +243,27 @@ unsafe extern "efiapi" fn uninstall_protocol_interface(
 }
 
 unsafe extern "efiapi" fn handle_protocol(
-    _handle: Handle,
-    _proto: *const Guid,
-    _out_proto: *mut *mut c_void,
+    handle: Handle,
+    proto: *const Guid,
+    out_proto: *mut *mut c_void,
 ) -> Status {
-    Status::UNSUPPORTED
+    let Some(guid) = read_guid(proto) else {
+        return Status::INVALID_PARAMETER;
+    };
+    let Some(protocol) = non_null_and_aligned_mut(out_proto) else {
+        return Status::INVALID_PARAMETER;
+    };
+
+    let mut efi_loader = EFI_LOADER.lock();
+    if !efi_loader.uses_image_handle(handle) {
+        Status::UNSUPPORTED
+    } else if let Some(found) = efi_loader.get_protocol(guid) {
+        // SAFETY: 'protocol' is not null and is aligned.
+        unsafe { protocol.write(found) };
+        Status::SUCCESS
+    } else {
+        Status::UNSUPPORTED
+    }
 }
 
 unsafe extern "efiapi" fn register_protocol_notify(
@@ -239,13 +275,44 @@ unsafe extern "efiapi" fn register_protocol_notify(
 }
 
 unsafe extern "efiapi" fn locate_handle(
-    _search_ty: i32,
-    _proto: *const Guid,
-    _key: *const c_void,
-    _buf_sz: *mut usize,
-    _buf: *mut Handle,
+    search_ty: i32,
+    proto: *const Guid,
+    key: *const c_void,
+    buf_sz: *mut usize,
+    buf: *mut Handle,
 ) -> Status {
-    Status::UNSUPPORTED
+    let Some(search_type) = LocateSearchType::new(search_ty) else {
+        return Status::INVALID_PARAMETER;
+    };
+    let Some(buf_size) = non_null_and_aligned_mut(buf_sz) else { return Status::INVALID_PARAMETER };
+
+    let handles = match search_type {
+        LocateSearchType::AllHandles => EFI_LOADER.lock().get_all_handles(),
+        LocateSearchType::ByRegisterNotify if non_null_and_aligned_const(key) => {
+            // We don't support RegisterProtocolNotify yet.
+            return Status::NOT_FOUND;
+        }
+        LocateSearchType::ByProtocol => {
+            if let Some(guid) = read_guid(proto) {
+                EFI_LOADER.lock().get_protocol_handles(guid)
+            } else {
+                return Status::INVALID_PARAMETER;
+            }
+        }
+        _ => return Status::INVALID_PARAMETER,
+    };
+
+    if let Some(buf) = non_null_and_aligned_mut(buf) {
+        // SAFETY: We must assume that `buf` points to a properly aligned array of enough elements.
+        let buffer = unsafe { slice::from_raw_parts_mut(buf.as_ptr(), handles.len()) };
+        buffer.clone_from_slice(handles.as_slice());
+    }
+
+    let size = handles.len() * mem::size_of::<Handle>();
+    // SAFETY: `buf_size` is not null and aligned.
+    unsafe { buf_size.write(size) };
+
+    Status::SUCCESS
 }
 
 unsafe extern "efiapi" fn locate_device_path(
@@ -397,11 +464,24 @@ unsafe extern "efiapi" fn locate_handle_buffer(
 }
 
 unsafe extern "efiapi" fn locate_protocol(
-    _proto: *const Guid,
+    proto: *const Guid,
     _registration: *mut c_void,
-    _out_proto: *mut *mut c_void,
+    out_proto: *mut *mut c_void,
 ) -> Status {
-    Status::UNSUPPORTED
+    let Some(guid) = read_guid(proto) else {
+        return Status::INVALID_PARAMETER;
+    };
+    let Some(protocol) = non_null_and_aligned_mut(out_proto) else {
+        return Status::INVALID_PARAMETER;
+    };
+
+    if let Some(found) = EFI_LOADER.lock().get_protocol(guid) {
+        // SAFETY: 'protocol' is not null and is aligned.
+        unsafe { protocol.write(found) };
+        Status::SUCCESS
+    } else {
+        Status::NOT_FOUND
+    }
 }
 
 // TODO(stable(c_variadic))
