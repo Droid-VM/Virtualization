@@ -298,9 +298,7 @@ public class VmLauncherService extends Service implements DebianServiceImpl.Debi
 
     @Override
     public void onDestroy() {
-        if (mPortNotifier != null) {
-            mPortNotifier.stop();
-        }
+        mPortNotifier.stop();
         getSystemService(NotificationManager.class).cancelAll();
         stopDebianServer();
         if (mVirtualMachine != null) {
