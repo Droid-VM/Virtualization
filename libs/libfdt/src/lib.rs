@@ -794,6 +794,11 @@ impl Fdt {
         self.as_fdt_slice()
     }
 
+    /// Returns the device tree as a mutable slice.
+    pub fn as_slice_mut(&mut self) -> &mut [u8] {
+        self.as_fdt_slice_mut()
+    }
+
     fn get_from_ptr(&self, ptr: *const c_void, len: usize) -> Result<&[u8]> {
         get_slice_at_ptr(self.as_fdt_slice(), ptr.cast(), len).ok_or(FdtError::Internal)
     }

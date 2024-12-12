@@ -21,6 +21,7 @@ mod runtime_services;
 mod stdio;
 
 use crate::entry::FIRMWARE_REVISION;
+use crate::uefi::linux::DEVICE_TREE_GUID;
 use crate::uefi::linux::LINUX_EFI_LOADED_IMAGE_FIXED_GUID;
 use crate::uefi::linux::RT_PROPERTIES_TABLE_GUID;
 use crate::uefi::loaded_image::LOADED_IMAGE_PROTOCOL_GUID;
@@ -113,7 +114,7 @@ impl EfiLoader {
         }
     }
 
-    fn patch_pointers(&mut self, payload: &[u8]) {
+    fn patch_pointers(&mut self, payload: &[u8], fdt: &mut [u8]) {
         self.system_table.boot_services = addr_of_mut!(self.boot_services).cast();
         self.system_table.runtime_services = addr_of_mut!(self.runtime_services).cast();
         self.system_table.firmware_vendor = addr_of_mut!(self.firmware_vendor).cast();
@@ -125,6 +126,8 @@ impl EfiLoader {
 
         self.loaded_image_protocol.system_table = addr_of_mut!(self.system_table).cast();
         self.set_loaded_image_protocol(payload);
+
+        self.insert_config_table(DEVICE_TREE_GUID, fdt.as_mut_ptr().cast());
     }
 
     fn set_loaded_image_protocol(&mut self, payload: &[u8]) {
@@ -203,9 +206,9 @@ impl EfiLoader {
 // SAFETY: `Send` is not relevant as pvmfw is single-threaded.
 unsafe impl Send for EfiLoader {}
 
-pub fn init_efi(payload: &[u8]) {
+pub fn init_efi(payload: &[u8], fdt: &mut [u8]) {
     let mut efi_loader = EFI_LOADER.lock();
-    efi_loader.patch_pointers(payload);
+    efi_loader.patch_pointers(payload, fdt);
 }
 
 pub type EfiEntrypoint = extern "efiapi" fn(Handle, *mut SystemTable) -> uefi_raw::Status;
