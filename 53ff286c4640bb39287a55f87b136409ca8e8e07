@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec415e37_47cbd443",
+        "filename": "libs/libfdt/src/result.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-12T19:45:20Z",
+      "side": 1,
+      "message": "Yay, Rust 1.81!",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 33
+      },
+      "revId": "53ff286c4640bb39287a55f87b136409ca8e8e07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3caf4ef_cdf32c1c",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-12T19:45:20Z",
+      "side": 1,
+      "message": "Would it make sense to (also?) support passing the policy as a file? This might be easier/cleaner to integrate into the testing infrastructure and run manually. For example:\n```\nignore_prop_value /chosen/kaslr-seed\nignore_prop_value /chosen/rng-seed\nignore_prop_value /avf/untrusted/instance-id\nignore_prop_value /chosen/linux,initrd-start\nignore_prop_value /chosen/linux,initrd-end\nignore_prop_value /avf/secretkeeper_public_key\n\nignore_prop /avf/name\n```\n\n(space is a valid separator as it can\u0027t be present in DT paths)",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 28
+      },
+      "revId": "53ff286c4640bb39287a55f87b136409ca8e8e07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1985b72_e17fa698",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-12T19:45:20Z",
+      "side": 1,
+      "message": "Why not `\u0026[String]` but `\u0026[u8]` for the DTs? Same for `skip_field`.",
+      "range": {
+        "startLine": 58,
+        "startChar": 18,
+        "endLine": 58,
+        "endChar": 21
+      },
+      "revId": "53ff286c4640bb39287a55f87b136409ca8e8e07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f20a071c_fb861195",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1510,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-12T19:45:20Z",
+      "side": 1,
+      "message": "Commented code?",
+      "range": {
+        "startLine": 1510,
+        "startChar": 8,
+        "endLine": 1510,
+        "endChar": 95
+      },
+      "revId": "53ff286c4640bb39287a55f87b136409ca8e8e07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6896c1e6_28deba6c",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 1536,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2024-12-12T19:45:20Z",
+      "side": 1,
+      "message": "Note that, depending on the test, we might still want to check that these properties have the right \"format\" (which most probably only means number of bytes, but could also be \"is within this range\" (as `u32`/`u64`), \"is not a vendor ID\", ...). Do you consider that out of scope for the golden DT comparisons?",
+      "range": {
+        "startLine": 1529,
+        "startChar": 32,
+        "endLine": 1536,
+        "endChar": 63
+      },
+      "revId": "53ff286c4640bb39287a55f87b136409ca8e8e07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
