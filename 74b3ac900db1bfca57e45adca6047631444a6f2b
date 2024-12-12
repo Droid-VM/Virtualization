@@ -22,6 +22,30 @@
       },
       "revId": "74b3ac900db1bfca57e45adca6047631444a6f2b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab64e1fe_d9bfc9c2",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2024-12-12T01:10:13Z",
+      "side": 1,
+      "message": "The Debian wiki recommends using `rsync`: https://wiki.debian.org/DebianKeyring#Via_rsync, which I use to receive the keyring files.\n\nThe verification taken care of by `rsync`:\n\n```\nNote that rsync always verifies that each transferred file was correctly\nreconstructed on the receiving side by checking a whole-file checksum\nthat is generated as the file is transferred\n```\n\n(source: `man rsync`)",
+      "parentUuid": "fe77057a_33732790",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 251,
+        "endChar": 81
+      },
+      "revId": "74b3ac900db1bfca57e45adca6047631444a6f2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
