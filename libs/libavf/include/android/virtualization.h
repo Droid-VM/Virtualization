@@ -330,6 +330,7 @@ enum AVirtualMachineStopReason : int32_t {
  * \param logFd a writable file descriptor for the log output, or -1. Ownership will always be
  *   transferred from the caller, even if unsuccessful.
  * \param vm an out parameter that will be set to the virtual machine handle.
+ * \param callback an optional callback to be called when VM stops.
  *
  * \return If successful, it sets `vm` and returns 0. Otherwise, it leaves `vm` untouched and
  *   returns `-EIO`.
@@ -340,14 +341,26 @@ int AVirtualMachine_createRaw(const AVirtualizationService* _Nonnull service,
                               AVirtualMachine* _Null_unspecified* _Nonnull vm) __INTRODUCED_IN(36);
 
 /**
+ * A callback to be called when virtual machine stops.
+ *
+ * \param vm stopped vm
+ * \param reason stop reason
+ */
+typedef void (*AVirtualMachine_stopCallback)(const AVirtualMachine* _Nonnull vm,
+                                             enum AVirtualMachineStopReason reason);
+
+/**
  * Start a virtual machine. `AVirtualMachine_start` is synchronous and blocks until the virtual
  * machine is initialized and free to start executing code, or until an error happens.
  *
  * \param vm a handle on a virtual machine.
+ * \param callback an optional callback to be called when the virtual machine is stopped.
  *
  * \return If successful, it returns 0. Otherwise, it returns `-EIO`.
  */
-int AVirtualMachine_start(AVirtualMachine* _Nonnull vm) __INTRODUCED_IN(36);
+int AVirtualMachine_start(AVirtualMachine* _Nonnull vm,
+                          const AVirtualMachine_stopCallback _Nullable callback)
+        __INTRODUCED_IN(36);
 
 /**
  * Stop a virtual machine. Stopping a virtual machine is like pulling the plug on a real computer;

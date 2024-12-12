@@ -14,11 +14,13 @@
 
 //! Stable C library for AVF.
 
+use std::collections::HashMap;
 use std::ffi::CStr;
 use std::fs::File;
 use std::os::fd::{FromRawFd, IntoRawFd};
 use std::os::raw::{c_char, c_int};
 use std::ptr;
+use std::sync::{LazyLock, Mutex};
 use std::time::Duration;
 
 use android_system_virtualizationservice::{
@@ -29,10 +31,12 @@ use android_system_virtualizationservice::{
     },
     binder::{ParcelFileDescriptor, Strong},
 };
-use avf_bindgen::AVirtualMachineStopReason;
+use avf_bindgen::{AVirtualMachineStopReason, AVirtualMachine_stopCallback};
 use libc::timespec;
 use log::error;
-use vmclient::{DeathReason, VirtualizationService, VmInstance};
+use vmclient::{DeathReason, ErrorCode, VirtualizationService, VmCallback, VmInstance};
+
+static LOCAL_VMS: LazyLock<Mutex<LocalVmInstances>> = LazyLock::new(Default::default);
 
 /// Create a new virtual machine config object with no properties.
 #[no_mangle]
@@ -342,6 +346,75 @@ pub unsafe extern "C" fn AVirtualizationService_destroy(
     }
 }
 
+#[derive(Default)]
+struct LocalVmInstances {
+    // Use cid for the hash key because VmInstance doesn't implement Eq nor Hash.
+    vms: HashMap<i32, Box<VmInstance>>,
+    callbacks: HashMap<i32, AVirtualMachine_stopCallback>,
+}
+
+impl LocalVmInstances {
+    fn register_vm(&mut self, vm: VmInstance) -> &VmInstance {
+        let cid = vm.vm.getCid().expect("Failed to obtain cid of VM");
+        // Put it with the Box to have stable memory address
+        self.vms.insert(cid, Box::new(vm));
+        self.vms.get(&cid).expect("Failed to obtain VM that just registered")
+    }
+
+    fn register_callback(&mut self, vm: &VmInstance, callback: AVirtualMachine_stopCallback) {
+        let cid = vm.vm.getCid().expect("Failed to obtain cid of VM");
+        self.callbacks.insert(cid, callback);
+    }
+
+    fn unregister_vm_callback(
+        &mut self,
+        cid: i32,
+    ) -> (Option<Box<VmInstance>>, Option<AVirtualMachine_stopCallback>) {
+        (self.vms.remove(&cid), self.callbacks.remove(&cid))
+    }
+}
+
+#[derive(Default)]
+struct Callback {}
+
+impl VmCallback for Callback {
+    fn on_payload_started(&self, _cid: i32) {
+        // Microdroid only. no-op.
+    }
+
+    fn on_payload_ready(&self, _cid: i32) {
+        // Microdroid only. no-op.
+    }
+
+    fn on_payload_finished(&self, _cid: i32, _exit_code: i32) {
+        // Microdroid only. no-op.
+    }
+
+    fn on_error(&self, _cid: i32, _error_code: ErrorCode, _message: &str) {
+        // Microdroid only. no-op.
+    }
+
+    // Called when VM is died or failed to start. (i.e. isn't called before start())
+    fn on_died(&self, cid: i32, death_reason: DeathReason) {
+        let mut vms = LOCAL_VMS.lock().unwrap();
+
+        // Safe to remove registered callback here, because stopped VM can't be restarted.
+        let (Some(vm), Some(callback)) = vms.unregister_vm_callback(cid) else {
+            return;
+        };
+        if let Some(cb) = callback {
+            let stop_reason = death_reason_to_stop_reason(death_reason);
+            let vm_ptr: *const VmInstance = &*vm;
+
+            // SAFETY: `cb` is assumed to be a valid, non-null function pointer passed by
+            // `AVirtualMachine_start`.
+            unsafe {
+                cb(vm_ptr.cast(), stop_reason);
+            }
+        }
+    }
+}
+
 /// Create a virtual machine with given `config`.
 ///
 /// # Safety
@@ -372,13 +445,25 @@ pub unsafe extern "C" fn AVirtualMachine_createRaw(
     let console_out = get_file_from_fd(console_out_fd);
     let console_in = get_file_from_fd(console_in_fd);
     let log = get_file_from_fd(log_fd);
+    let callback: Box<Callback> = Box::default();
 
-    match VmInstance::create(service.as_ref(), &config, console_out, console_in, log, None, None) {
+    match VmInstance::create(
+        service.as_ref(),
+        &config,
+        console_out,
+        console_in,
+        log,
+        None, // dump_dt
+        Some(callback),
+    ) {
         Ok(vm) => {
+            let mut vms = LOCAL_VMS.lock().unwrap();
+            let vm = vms.register_vm(vm);
+            let vm = vm as *const VmInstance;
+
             // SAFETY: `vm_ptr` is assumed to be a valid, non-null pointer to a mutable raw pointer.
-            // `vm` is the only reference here and `vm_ptr` takes ownership.
             unsafe {
-                *vm_ptr = Box::into_raw(Box::new(vm));
+                *vm_ptr = vm.cast_mut();
             }
             0
         }
@@ -394,10 +479,17 @@ pub unsafe extern "C" fn AVirtualMachine_createRaw(
 /// # Safety
 /// `vm` must be a pointer returned by `AVirtualMachine_createRaw`.
 #[no_mangle]
-pub unsafe extern "C" fn AVirtualMachine_start(vm: *const VmInstance) -> c_int {
+pub unsafe extern "C" fn AVirtualMachine_start(
+    vm: *const VmInstance,
+    callback: AVirtualMachine_stopCallback,
+) -> c_int {
     // SAFETY: `vm` is assumed to be a valid, non-null pointer returned by
     // `AVirtualMachine_createRaw`. It's the only reference to the object.
     let vm = unsafe { &*vm };
+    if callback.is_some() {
+        let mut vms = LOCAL_VMS.lock().unwrap();
+        vms.register_callback(vm, callback);
+    }
     match vm.start() {
         Ok(_) => 0,
         Err(e) => {
