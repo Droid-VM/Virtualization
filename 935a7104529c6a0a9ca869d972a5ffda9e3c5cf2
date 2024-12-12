@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a37864a_3a7c3d30",
+        "filename": "libs/libvm_payload/include/vm_payload.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-12-12T14:16:52Z",
+      "side": 1,
+      "message": "Please document return values of this function",
+      "range": {
+        "startLine": 268,
+        "startChar": 5,
+        "endLine": 268,
+        "endChar": 44
+      },
+      "revId": "935a7104529c6a0a9ca869d972a5ffda9e3c5cf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36c3981b_cca406d1",
+        "filename": "libs/libvm_payload/include/vm_payload.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-12-12T14:16:52Z",
+      "side": 1,
+      "message": "ditto on docunmenting return value",
+      "range": {
+        "startLine": 275,
+        "startChar": 4,
+        "endLine": 275,
+        "endChar": 42
+      },
+      "revId": "935a7104529c6a0a9ca869d972a5ffda9e3c5cf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b776ddb_d35d07b3",
+        "filename": "libs/libvm_payload/src/lib.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-12-12T14:16:52Z",
+      "side": 1,
+      "message": "I am not sure we should abort in this case... How about returning -1 instead?",
+      "range": {
+        "startLine": 584,
+        "startChar": 4,
+        "endLine": 584,
+        "endChar": 19
+      },
+      "revId": "935a7104529c6a0a9ca869d972a5ffda9e3c5cf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7df98999_ade058e6",
+        "filename": "libs/libvm_payload/src/lib.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-12-12T14:16:52Z",
+      "side": 1,
+      "message": "ditto, we can return false instead of aborting, right?",
+      "range": {
+        "startLine": 597,
+        "startChar": 22,
+        "endLine": 597,
+        "endChar": 37
+      },
+      "revId": "935a7104529c6a0a9ca869d972a5ffda9e3c5cf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
