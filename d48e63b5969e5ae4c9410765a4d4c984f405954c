@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb3ef6dd_ddaab520",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-12-12T07:33:12Z",
+      "side": 1,
+      "message": "Do you think [setError](https://developer.android.com/reference/android/widget/TextView#setError(java.lang.CharSequence) will be better?",
+      "fixSuggestions": [
+        {
+          "fixId": "cd11fdcc_f072992e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+              "range": {
+                "startLine": 21,
+                "startChar": 0,
+                "endLine": 22,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+              "range": {
+                "startLine": 75,
+                "startChar": 0,
+                "endLine": 80,
+                "endChar": 0
+              },
+              "replacement": "                                editText.setError(\n                                    getString(\n                                        R.string.settings_port_forwarding_dialog_error_invalid_input\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+              "range": {
+                "startLine": 81,
+                "startChar": 0,
+                "endLine": 82,
+                "endChar": 0
+              },
+              "replacement": "                                )\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+              "range": {
+                "startLine": 85,
+                "startChar": 0,
+                "endLine": 90,
+                "endChar": 0
+              },
+              "replacement": "                            editText.setError(\n                                getString(\n                                    R.string.settings_port_forwarding_dialog_error_invalid_port_range\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+              "range": {
+                "startLine": 91,
+                "startChar": 0,
+                "endLine": 92,
+                "endChar": 0
+              },
+              "replacement": "                            )\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+              "range": {
+                "startLine": 96,
+                "startChar": 0,
+                "endLine": 102,
+                "endChar": 0
+              },
+              "replacement": "                            editText.setError(\n                                getString(R.string.settings_port_forwarding_dialog_error_existing_port)\n                            )\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d48e63b5969e5ae4c9410765a4d4c984f405954c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ea436bd_9b8b4833",
+        "filename": "android/TerminalApp/res/values/strings.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1956136
+      },
+      "writtenOn": "2024-12-12T07:33:12Z",
+      "side": 1,
+      "message": "Should have char limit for button.\n```suggestion\n    \u003c!-- Description of add button for other enabled ports. Used for talkback. [CHAR LIMIT\u003d16] --\u003e\n```",
+      "revId": "d48e63b5969e5ae4c9410765a4d4c984f405954c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
