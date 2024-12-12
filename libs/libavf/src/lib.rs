@@ -205,6 +205,22 @@ pub unsafe extern "C" fn AVirtualMachineRawConfig_setSwiotlbMib(
     config.swiotlbMib = swiotlb_mib;
 }
 
+/// Set vCPU count.
+///
+/// # Safety
+/// `config` must be a pointer returned by `AVirtualMachineRawConfig_create`.
+#[no_mangle]
+pub unsafe extern "C" fn AVirtualMachineRawConfig_setVCpuCount(
+    config: *mut VirtualMachineRawConfig,
+    n: u32,
+) {
+    // SAFETY: `config` is assumed to be a valid, non-null pointer returned by
+    // AVirtualMachineRawConfig_create. It's the only reference to the object.
+    let config = unsafe { &mut *config };
+    config.cpuTopology = CpuTopology::CUSTOM;
+    config.customVcpuCount = n;
+}
+
 /// Set whether a virtual machine is protected or not.
 ///
 /// # Safety
