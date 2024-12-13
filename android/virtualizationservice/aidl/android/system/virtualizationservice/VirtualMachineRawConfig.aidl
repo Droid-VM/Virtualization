@@ -113,4 +113,7 @@ parcelable VirtualMachineRawConfig {
 
     /** List of tee services this VM wants to access */
     String[] teeServices;
+
+    /** List of device tree overlays */
+    ParcelFileDescriptor[] dtbos;
 }
