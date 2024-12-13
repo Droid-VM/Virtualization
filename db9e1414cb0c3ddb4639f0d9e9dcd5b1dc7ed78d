@@ -16,6 +16,29 @@
       "message": "Unsafe Rust LGTM.",
       "revId": "db9e1414cb0c3ddb4639f0d9e9dcd5b1dc7ed78d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02e4dd66_41858460",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2024-12-13T15:33:07Z",
+      "side": 1,
+      "message": "document or link to documentation on what fd type(s) are allowed as well the format of the blob - presumambly there\u0027s some kernel docs on the device tree overlay blob that can be linked?",
+      "range": {
+        "startLine": 170,
+        "startChar": 3,
+        "endLine": 170,
+        "endChar": 70
+      },
+      "revId": "db9e1414cb0c3ddb4639f0d9e9dcd5b1dc7ed78d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
