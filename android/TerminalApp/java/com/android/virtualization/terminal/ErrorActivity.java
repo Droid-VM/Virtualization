@@ -19,7 +19,7 @@ package com.android.virtualization.terminal;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.provider.Settings;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,8 +41,13 @@ public class ErrorActivity extends BaseActivity {
 
         setContentView(R.layout.activity_error);
 
-        View button = findViewById(R.id.recovery);
-        button.setOnClickListener((event) -> launchRecoveryActivity());
+        findViewById(R.id.go_to_settings)
+                .setOnClickListener(
+                        (e) -> {
+                            Intent i = new Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS);
+                            startActivity(i);
+                        });
+        findViewById(R.id.recovery).setOnClickListener((e) -> launchRecoveryActivity());
     }
 
     @Override

@@ -54,13 +54,23 @@
         android:textSize="14sp" />
 
     <Button
+        android:id="@+id/go_to_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@id/recovery"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="?attr/colorPrimaryDark"
+        android:text="@string/go_to_settings_button_text" />
+    <Button
         android:id="@+id/recovery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="32dp"
-        android:layout_marginHorizontal="40dp"
+        android:layout_marginEnd="40dp"
         android:backgroundTint="?attr/colorPrimaryDark"
         android:text="@string/settings_recovery_title" />
 
