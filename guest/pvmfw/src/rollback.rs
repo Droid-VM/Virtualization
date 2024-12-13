@@ -25,7 +25,7 @@ use libfdt::{Fdt, FdtNode};
 use log::{error, info};
 use pvmfw_avb::Capability;
 use pvmfw_avb::VerifiedBootData;
-use virtio_drivers::transport::pci::bus::PciRoot;
+use virtio_drivers::transport::pci::bus::{ConfigurationAccess, PciRoot};
 use vmbase::rand;
 
 /// Performs RBP based on the input payload, current DICE chain, and host-controlled platform.
@@ -38,7 +38,7 @@ pub fn perform_rollback_protection(
     fdt: &Fdt,
     verified_boot_data: &VerifiedBootData,
     dice_inputs: &PartialInputs,
-    pci_root: &mut PciRoot,
+    pci_root: &mut PciRoot<impl ConfigurationAccess>,
     cdi_seal: &[u8],
     instance_hash: Option<Hidden>,
 ) -> Result<(bool, Hidden, bool), RebootReason> {
