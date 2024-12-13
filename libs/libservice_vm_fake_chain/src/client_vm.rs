@@ -99,7 +99,7 @@ pub fn fake_client_vm_dice_artifacts() -> Result<OwnedDiceArtifacts> {
         component_name: Some(cstr!("vm_entry")),
         component_version: Some(12),
         resettable: true,
-        ..Default::default()
+        security_version: Some(12),
     };
     let config_descriptor = retry_bcc_format_config_descriptor(&config_values)?;
     // The Microdroid kernel is signed with the same key as the one used for the service VM,
