@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ceceb6a_dcc3d1a0",
+        "filename": "guest/trusty/security_vm/launcher/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-12-13T14:54:06Z",
+      "side": 1,
+      "message": "The Option + Option combination appears a bit complex, and introducing a third term, \"raw_binary,\" for the crosvm \"bios\" (and AVF \"bootloader\") also reduces readability.\n\nCan we add a string flag like `--load-kernel-as-bootloader` instead? When this flag is enabled, the kernel would be loaded as a bootloader.",
+      "range": {
+        "startLine": 33,
+        "startChar": 12,
+        "endLine": 37,
+        "endChar": 32
+      },
+      "revId": "ecaee5ddd72501e0d9c37d00b3fcfe5d497e7f07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
