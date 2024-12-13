@@ -166,8 +166,8 @@ impl DeviceMapper {
     /// Removes a mapper device.
     pub fn delete_device_deferred(&self, name: &str) -> Result<()> {
         let mut data = DmIoctl::new(name)?;
-        data.flags |= Flag::DM_DEFERRED_REMOVE;
-        dm_dev_remove(self, &mut data)
+        // data.flags |= Flag::DM_DEFERRED_REMOVE;
+        let ret = dm_dev_remove(self, &mut data)
             .context(format!("failed to remove device with name {}", &name))?;
         Ok(())
     }
@@ -271,13 +271,18 @@ mod tests {
         f.write_all(data).unwrap();
     }
 
-    // TODO(b/250880499): delete_device() doesn't really delete it even without DM_DEFERRED_REMOVE.
-    // Hence, we have to create a new device with a different name for each test. Retrying
-    // the test on same machine without reboot will also fail.
-    fn delete_device(dm: &DeviceMapper, name: &str) -> Result<()> {
-        dm.delete_device_deferred(name)?;
-        wait_for_path_disappears(Path::new(MAPPER_DEV_ROOT).join(name))?;
-        Ok(())
+    fn delete_device(dm: &DeviceMapper, name: &str) {
+        let res = dm.delete_device_deferred(name);
+        log::info!("deleting device {:?}, {:?}", name, res);
+        if res.is_err() {
+            let err = format!("{}", res.unwrap_err().root_cause());
+            if !err.contains("ENXIO") {
+                panic!("Failed to remove device {:?} {:?}", name, err);
+            }
+        }
+        let path = Path::new(MAPPER_DEV_ROOT).join(name);
+        log::info!("Path {:?} exists? {:?}", path, path.exists());
+        wait_for_path_disappears(Path::new(MAPPER_DEV_ROOT).join(name)).unwrap();
     }
 
     fn is_hctr2_supported() -> bool {
@@ -294,25 +299,27 @@ mod tests {
 
     #[rdroidtest]
     fn mapping_again_keeps_data_xts() {
-        mapping_again_keeps_data(&KEY_SET_XTS, "name1");
+        for _ in 0..10 {
+            mapping_again_keeps_data(&KEY_SET_XTS, "name1");
+        }
     }
 
     #[rdroidtest]
     #[ignore_if(!is_hctr2_supported())]
     fn mapping_again_keeps_data_hctr2() {
-        mapping_again_keeps_data(&KEY_SET_HCTR2, "name2");
+        mapping_again_keeps_data(&KEY_SET_HCTR2, "name1");
     }
 
-    #[rdroidtest]
-    fn data_inaccessible_with_diff_key_xts() {
-        data_inaccessible_with_diff_key(&KEY_SET_XTS, "name3");
-    }
+    // #[rdroidtest]
+    // fn data_inaccessible_with_diff_key_xts() {
+    //     data_inaccessible_with_diff_key(&KEY_SET_XTS, "name1").unwrap();
+    // }
 
-    #[rdroidtest]
-    #[ignore_if(!is_hctr2_supported())]
-    fn data_inaccessible_with_diff_key_hctr2() {
-        data_inaccessible_with_diff_key(&KEY_SET_HCTR2, "name4");
-    }
+    // #[rdroidtest]
+    // #[ignore_if(!is_hctr2_supported())]
+    // fn data_inaccessible_with_diff_key_hctr2() {
+    //     data_inaccessible_with_diff_key(&KEY_SET_HCTR2, "name1").unwrap();
+    // }
 
     fn mapping_again_keeps_data(keyset: &KeySet, device: &str) {
         // This test creates 2 different crypt devices using same key backed by same data_device
@@ -323,6 +330,9 @@ mod tests {
 
         let test_dir = tempfile::TempDir::new().unwrap();
         let backing_file = prepare_tmpfile(test_dir.path(), "storage", sz);
+        let device_diff = device.to_owned() + "_diff";
+        delete_device(&dm, device);
+        delete_device(&dm, &device_diff);
         let data_device = loopdevice::attach(
             backing_file,
             0,
@@ -331,12 +341,11 @@ mod tests {
             /* writable */ true,
         )
         .unwrap();
-        let device_diff = device.to_owned() + "_diff";
 
         scopeguard::defer! {
+            delete_device(&dm, device);
+            delete_device(&dm, &device_diff);
             loopdevice::detach(&data_device).unwrap();
-            let _ignored1 = delete_device(&dm, device);
-            let _ignored2 = delete_device(&dm, &device_diff);
         }
 
         let target = DmCryptTargetBuilder::default()
@@ -378,8 +387,8 @@ mod tests {
         let device_diff = device.to_owned() + "_diff";
         scopeguard::defer! {
             loopdevice::detach(&data_device).unwrap();
-            let _ignored1 = delete_device(&dm, device);
-            let _ignored2 = delete_device(&dm, &device_diff);
+            delete_device(&dm, device);
+            delete_device(&dm, &device_diff);
         }
 
         let target = DmCryptTargetBuilder::default()

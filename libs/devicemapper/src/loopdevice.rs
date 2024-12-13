@@ -134,6 +134,7 @@ fn try_attach<P: AsRef<Path>>(
     if direct_io {
         config.info.lo_flags.insert(Flag::LO_FLAGS_DIRECT_IO);
     }
+    // config.info.lo_flags.insert(Flag::LO_FLAGS_AUTOCLEAR);
 
     // Configure the loop device to attach the backing file
     let device_path = format!("{}{}", LOOP_DEV_PREFIX, num);
@@ -143,16 +144,16 @@ fn try_attach<P: AsRef<Path>>(
         .write(true)
         .open(&device_path)
         .context(format!("failed to open {:?}", &device_path))?;
-    loop_configure(&device_file, &config)
+    let res = loop_configure(&device_file, &config)
         .context(format!("Failed to configure {:?}", &device_path))?;
-
+    assert_eq!(res, 0);
     Ok(PathBuf::from(device_path))
 }
 
 /// Detaches backing file from the loop device `path`.
 pub fn detach<P: AsRef<Path>>(path: P) -> Result<()> {
     let device_file = OpenOptions::new().read(true).write(true).open(&path)?;
-    loop_clr_fd(&device_file)?;
+    assert_eq!(loop_clr_fd(&device_file)?, 0);
     Ok(())
 }
 
