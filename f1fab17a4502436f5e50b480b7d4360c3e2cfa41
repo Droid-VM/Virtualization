@@ -107,6 +107,30 @@
       },
       "revId": "f1fab17a4502436f5e50b480b7d4360c3e2cfa41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ffe1590_6d297a71",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-12-13T05:22:05Z",
+      "side": 1,
+      "message": "For example,\n- AlertDialog cannot prevent dismissing itself when positive button(save) is clicked.\n- Thus, we cannot do any advanced impls like showing error on edittext or disabling clicking positive button.\n\nPlease let me know if you have any idea for keeping using AlertDialog with satisfying those.",
+      "parentUuid": "b0d81c66_2be4cec3",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 25
+      },
+      "revId": "f1fab17a4502436f5e50b480b7d4360c3e2cfa41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
