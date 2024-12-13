@@ -16,6 +16,29 @@
       "message": "Build should be fixed now. I\u0027m using a signed integer for the vCPU count param because it meshes with the implementation better and we won\u0027t ever need big numbers",
       "revId": "376f180cc6d5ee6e27b30cf68b0262a8f97dddab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f34ebf1_1486f6c7",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2024-12-13T15:30:23Z",
+      "side": 1,
+      "message": "what does 0 \u0026 negatives do? fail? ignored? Is there an upper bound?",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 28
+      },
+      "revId": "376f180cc6d5ee6e27b30cf68b0262a8f97dddab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
