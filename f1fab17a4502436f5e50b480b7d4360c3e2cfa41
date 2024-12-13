@@ -83,6 +83,30 @@
       },
       "revId": "f1fab17a4502436f5e50b480b7d4360c3e2cfa41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0d81c66_2be4cec3",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-12-13T05:19:02Z",
+      "side": 1,
+      "message": "Umm.. I searched about AlertDialog for a while, but it seems it\u0027s not sufficient to close all unresolved comments, due to its functionality. Perhaps I need to refactor not to use AlertDialog, but defining customized dialog instead?",
+      "parentUuid": "c440a46f_e8ab86fb",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 25
+      },
+      "revId": "f1fab17a4502436f5e50b480b7d4360c3e2cfa41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
