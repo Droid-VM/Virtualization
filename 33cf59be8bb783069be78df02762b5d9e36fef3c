@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c97772df_ccd754c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-13T22:38:36Z",
+      "side": 1,
+      "message": "i\u0027m leaving a lot of comments, but you don\u0027t need to resolve all of them before submitting. that said, i don\u0027t think we are in a rush here, so the ones that make it hard for people to debug the test failures seem worth fixing before we submit (e.g. make sure to print all the errors + include the DTS in the test output)",
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff6815cf_50b52ca7",
@@ -50,6 +67,143 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9e7d089b_f24bf62c",
+        "filename": "tests/deviceside/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-13T22:38:36Z",
+      "side": 1,
+      "message": "the new test suite name \"deviceside\" is too vague. maybe \"backcompat_test\"?",
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b058b89_930ba8f6",
+        "filename": "tests/deviceside/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-13T22:38:36Z",
+      "side": 1,
+      "message": "nice!",
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d105d62_6f798d30",
+        "filename": "tests/deviceside/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-13T22:38:36Z",
+      "side": 1,
+      "message": "this might be simpler if you use `VirtualMachineAppConfig` (aka microdroid), won\u0027t need a dependency on `vmbase_example` or to setup disk images. up to you. `vmbase_example` probably boots faster",
+      "range": {
+        "startLine": 94,
+        "startChar": 49,
+        "endLine": 94,
+        "endChar": 72
+      },
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22e0aec5_8146be01",
+        "filename": "tests/deviceside/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-13T22:38:36Z",
+      "side": 1,
+      "message": "i\u0027d guess that `vmbase_example` doesn\u0027t require any disks",
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c200877_771f3795",
+        "filename": "tests/deviceside/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-13T22:38:36Z",
+      "side": 1,
+      "message": "should be able to delete this line, 0 is the default. same the `None`s above",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 29
+      },
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d00e390_7cfd9747",
+        "filename": "tests/deviceside/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-13T22:38:36Z",
+      "side": 1,
+      "message": "can you log the dts version so that debugging is easier?",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 149,
+        "endChar": 27
+      },
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5272ffb6_a95a3fba",
+        "filename": "tests/deviceside/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-13T22:38:36Z",
+      "side": 1,
+      "message": "should assert that `dtcompare_res.status \u003d\u003d 0`. also requiring stderr to be empty is fine too, but a command might fail with no stderr, so you need to check the status",
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1ab07307_60e9c841",
         "filename": "tests/dtcompare/Android.bp",
         "patchSetId": 20
@@ -61,6 +215,137 @@
       "writtenOn": "2024-12-13T21:12:39Z",
       "side": 1,
       "message": "nit: don\u0027t add defaults if it\u0027s only used here once?",
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efe093d4_792ff9d5",
+        "filename": "tests/dtcompare/Android.bp",
+        "patchSetId": 20
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-13T22:38:36Z",
+      "side": 1,
+      "message": "restrict visibility to the Virtualization dir",
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cef9fe6d_76869112",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-13T22:38:36Z",
+      "side": 1,
+      "message": "if you want this to be a standalone tool, i suggest not using `log`, only write to stdout/stderr. whoever invokes binary can copy the output into logcat if they think it makes sense",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 15
+      },
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24dc9c72_b67f3f10",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-13T22:38:36Z",
+      "side": 1,
+      "message": "this case should follow the \"log and continue\" pattern",
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b548e5f3_1a336ee1",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-13T22:38:36Z",
+      "side": 1,
+      "message": "this case should follow the \"log and continue\" approach",
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9f6ad06_a34c228e",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-13T22:38:36Z",
+      "side": 1,
+      "message": "this case should follow the \"log and continue\" approach",
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba1e8189_b97577eb",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-13T22:38:36Z",
+      "side": 1,
+      "message": "these two logs use \"Fdt\", but the rest use \"Dt\"\n\nthat said, i\u0027d recommend completely getting rid of these ids from the logs, as suggested in https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3377134/comment/40d0a98a_6d0621ac/",
+      "range": {
+        "startLine": 172,
+        "startChar": 40,
+        "endLine": 176,
+        "endChar": 32
+      },
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69a6e9ec_90e60efc",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 1471,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-13T22:38:36Z",
+      "side": 1,
+      "message": "should we delete this test case now that you added a rust version?",
       "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
