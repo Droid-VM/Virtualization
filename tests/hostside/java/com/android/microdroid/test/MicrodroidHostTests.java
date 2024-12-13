@@ -43,6 +43,7 @@ import com.android.microdroid.test.host.CommandRunner;
 import com.android.microdroid.test.host.MicrodroidHostTestCaseBase;
 import com.android.os.AtomsProto;
 import com.android.os.StatsLog;
+import com.android.tradefed.device.CollectingOutputReceiver;
 import com.android.tradefed.device.DeviceNotAvailableException;
 import com.android.tradefed.device.DeviceRuntimeException;
 import com.android.tradefed.device.ITestDevice;
@@ -1409,6 +1410,34 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         if (disableRoot) {
             device.disableAdbRoot();
         }
+    }
+
+    @Test
+    @Parameters(method = "params")
+    @TestCaseName("{method}_protectedVm_{0}_os_{1}")
+    @CddTest(requirements = {"9.17/C-0-9"})
+    public void testSelinuxIsEnforced(boolean protectedVm, String os) throws Exception {
+        assumeKernelSupported(os);
+        assumeVmTypeSupported(os, protectedVm);
+
+        final String configPath = "assets/vm_config.json";
+        mMicrodroidDevice =
+                MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(minMemorySize())
+                        .cpuTopology("match_host")
+                        .protectedVm(protectedVm)
+                        .os(SUPPORTED_OSES.get(os))
+                        .name("test_selinux_enforced")
+                        .build(getAndroidDevice());
+        mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
+        // Enabling root to avoid getting following warning messages from shell:
+        // 'libc: Access denied finding property "heapprofd.enable"'
+        assertThat(mMicrodroidDevice.enableAdbRoot()).isTrue();
+
+        CollectingOutputReceiver out = new CollectingOutputReceiver();
+        mMicrodroidDevice.executeShellCommand("cat /sys/fs/selinux/enforce", out);
+        assertThat(out.getOutput()).isEqualTo("1");
     }
 
     @Test
