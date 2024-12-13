@@ -20,6 +20,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b6833032_7b03da3a",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2024-12-13T15:30:39Z",
+      "side": 1,
+      "message": "what\u0027s the default if this isn\u0027t called?",
+      "range": {
+        "startLine": 150,
+        "startChar": 3,
+        "endLine": 150,
+        "endChar": 18
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c8ff5f2c_8b2ef03a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 154,
+                "startChar": 0,
+                "endLine": 154,
+                "endChar": 0
+              },
+              "replacement": " *\n * The default is 1.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "376f180cc6d5ee6e27b30cf68b0262a8f97dddab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f34ebf1_1486f6c7",
         "filename": "libs/libavf/include/android/virtualization.h",
         "patchSetId": 3
