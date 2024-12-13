@@ -30,7 +30,11 @@ use vmclient::VmInstance;
 pub struct Args {
     /// Path to the trusty kernel image.
     #[arg(long)]
-    kernel: PathBuf,
+    kernel: Option<PathBuf>,
+
+    /// Path to the trusty raw image.
+    #[arg(long)]
+    raw_binary: Option<PathBuf>,
 
     /// Whether the VM is protected or not.
     #[arg(long)]
@@ -68,12 +72,27 @@ fn main() -> Result<()> {
 
     let service = get_service()?;
 
-    let kernel =
-        File::open(&args.kernel).with_context(|| format!("Failed to open {:?}", &args.kernel))?;
+    let (kernel, bootloader) = match (args.kernel, args.raw_binary) {
+        (Some(ref kernel), None) => {
+            let kernel =
+                File::open(kernel).with_context(|| format!("Failed to open {:?}", kernel))?;
+
+            (None, Some(ParcelFileDescriptor::new(kernel)))
+        }
+        (None, Some(ref raw_binary)) => {
+            // Pass raw binary as bootloader
+            let raw_binary = File::open(raw_binary)
+                .with_context(|| format!("Failed to open {:?}", raw_binary))?;
+
+            (None, Some(ParcelFileDescriptor::new(raw_binary)))
+        }
+        _ => anyhow::bail!("Either kernel image OR raw binary is required"),
+    };
 
     let vm_config = VirtualMachineConfig::RawConfig(VirtualMachineRawConfig {
         name: args.name.to_owned(),
-        kernel: Some(ParcelFileDescriptor::new(kernel)),
+        kernel,
+        bootloader,
         protectedVm: args.protected,
         memoryMib: args.memory_size_mib,
         cpuTopology: args.cpu_topology,
