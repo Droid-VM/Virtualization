@@ -88,6 +88,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe42e11c_9a34d07d",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-13T08:04:51Z",
+      "side": 1,
+      "message": ".setView(R.layout.settings_port_forwarding_inactive_add_dialog) is valid.\ni think build error happens due to omitted first argument name of setPositiveButton",
+      "parentUuid": "9aafa2ba_e81d8223",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 89
+      },
+      "revId": "f1fab17a4502436f5e50b480b7d4360c3e2cfa41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c440a46f_e8ab86fb",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
         "patchSetId": 4

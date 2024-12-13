@@ -3,6 +3,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4896d9da_25779a82",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-13T08:04:51Z",
+      "side": 1,
+      "message": "private?",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "43b6b944_8a5beb84",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
+              "range": {
+                "startLine": 29,
+                "startChar": 0,
+                "endLine": 31,
+                "endChar": 0
+              },
+              "replacement": "private const val PORT_RANGE_MIN: Int \u003d 1024\nprivate const val PORT_RANGE_MAX: Int \u003d 65535\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c9abc2ba03cbe4948c29c498d6a8cfb6664ff9c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6fe3c8e9_6d94a2ec",
         "filename": "android/TerminalApp/res/layout/settings_port_forwarding.xml",
         "patchSetId": 5
