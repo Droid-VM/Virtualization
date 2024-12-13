@@ -40,9 +40,13 @@
         <option name="test-timeout" value="300000" />
     </test>
 
+<<<<<<< HEAD   (37243a Merge "[benchmark] Add requestAttestation API call duration )
     <!-- Controller that will skip the module if a native bridge situation is detected -->
     <!-- For example: module wants to run arm and device is x86 -->
     <object type="module_controller" class="com.android.tradefed.testtype.suite.module.NativeBridgeModuleController" />
 
+||||||| BASE
+=======
+>>>>>>> BRANCH (2dee62 DO NOT MERGE: Separate CTS/VTS/general tests into different )
     <!-- PLACEHOLDER_FOR_ANNOTATION -->
 </configuration>
