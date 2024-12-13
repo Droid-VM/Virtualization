@@ -101,7 +101,7 @@ mod tests {
         assert!(file.is_err());
         assert_eq!(
             io::ErrorKind::NotFound,
-            file.unwrap_err().root_cause().downcast_ref::<io::Error>().unwrap().kind()
+            file.unwrap_err().root_cause().downcast_ref::<nix::Error>().unwrap().kind()
         );
     }
 }

@@ -222,7 +222,7 @@ mod tests {
             loopdevice::detach(ret.data_device).unwrap();
             loopdevice::detach(ret.hash_device).unwrap();
             let dm = dm::DeviceMapper::new().unwrap();
-            dm.delete_device_deferred(name).unwrap();
+            dm.delete_device(name, /*deferred*/true).unwrap();
         });
 
         check(TestContext {
@@ -370,7 +370,7 @@ mod tests {
             loopdevice::detach(ret.data_device).unwrap();
             loopdevice::detach(ret.hash_device).unwrap();
             let dm = dm::DeviceMapper::new().unwrap();
-            dm.delete_device_deferred(name).unwrap();
+            dm.delete_device(name, /*deferred*/true).unwrap();
         });
 
         let verity = fs::read(&ret.mapper_device).unwrap();
