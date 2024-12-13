@@ -104,6 +104,30 @@
       },
       "revId": "376f180cc6d5ee6e27b30cf68b0262a8f97dddab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68a6d8f2_92a1a9a6",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-13T23:59:44Z",
+      "side": 1,
+      "message": "Note I had the same question to Jiyong - it will request this many host threads. So, it\u0027s hard to come up with an upperlimit, whatever you can support.\n\nThese all set the options on the config, AVirtualizationService_create would return the error.",
+      "parentUuid": "5887f54a_3f5baf49",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 28
+      },
+      "revId": "376f180cc6d5ee6e27b30cf68b0262a8f97dddab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
