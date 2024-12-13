@@ -39,6 +39,29 @@
       },
       "revId": "db9e1414cb0c3ddb4639f0d9e9dcd5b1dc7ed78d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98d20e88_302f66f3",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2024-12-13T23:34:26Z",
+      "side": 1,
+      "message": "specify the ownership model - the function should explicitly take ownership of the fd",
+      "range": {
+        "startLine": 178,
+        "startChar": 93,
+        "endLine": 178,
+        "endChar": 99
+      },
+      "revId": "db9e1414cb0c3ddb4639f0d9e9dcd5b1dc7ed78d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
