@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6beefcb_e818b9ef",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-14T00:18:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6833032_7b03da3a",
+      "range": {
+        "startLine": 150,
+        "startChar": 3,
+        "endLine": 150,
+        "endChar": 18
+      },
+      "revId": "376f180cc6d5ee6e27b30cf68b0262a8f97dddab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f34ebf1_1486f6c7",
@@ -120,6 +144,30 @@
       "side": 1,
       "message": "Note I had the same question to Jiyong - it will request this many host threads. So, it\u0027s hard to come up with an upperlimit, whatever you can support.\n\nThese all set the options on the config, AVirtualizationService_create would return the error.",
       "parentUuid": "5887f54a_3f5baf49",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 28
+      },
+      "revId": "376f180cc6d5ee6e27b30cf68b0262a8f97dddab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33f1614c_03600130",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-14T00:18:34Z",
+      "side": 1,
+      "message": "I\u0027ve added a note that it must be `1 \u003c\u003d n \u003c\u003d num cpus`. I\u0027ll add enforcement for the upper bound a in future CL. The true upper bound is dependent on the hypervisor, but I don\u0027t think there is any good reason to make it `\u003e\u003d num cpus`, it would probably only happen by accident or perhaps if someone is getting really clever with a baremetal OS.\n\nAs Steven said, most of the config functions are infallible because they just store the option for later. `AVirtualMachine_createRaw` and `AVirtualMachine_start` are where bad configs will result in errors.\n\nIt might be smart for us to make all these config setters return an error code just case it would be useful later. I know it is late in API review, so I\u0027ll only do it if you ask :)",
+      "parentUuid": "68a6d8f2_92a1a9a6",
       "range": {
         "startLine": 153,
         "startChar": 0,
