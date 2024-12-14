@@ -176,6 +176,30 @@
       },
       "revId": "376f180cc6d5ee6e27b30cf68b0262a8f97dddab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecd2710a_d73a3918",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-14T00:35:27Z",
+      "side": 1,
+      "message": "Jiyong told me if you put 500, 500 threads would be stopped. It may be useful to simulate higher number of CPUs for Android, e.g. debugging the kernel, though we don\u0027t have those cases today.",
+      "parentUuid": "33f1614c_03600130",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 28
+      },
+      "revId": "376f180cc6d5ee6e27b30cf68b0262a8f97dddab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
