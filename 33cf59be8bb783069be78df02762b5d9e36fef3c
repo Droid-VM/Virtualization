@@ -99,6 +99,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17b7458a_4466511f",
+        "filename": "tests/deviceside/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-12-16T21:35:24Z",
+      "side": 1,
+      "message": "I thought of maybe merging other device-side tests into it (`vmbase_example` would be an example of such tests). I\u0027ll rename to `backcompat_test`, and if we find similarities in multiple tests, I\u0027ll merge them in a separate CL.\nDone",
+      "parentUuid": "9e7d089b_f24bf62c",
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "107bb174_c7c8f5bf",
@@ -112,6 +130,30 @@
       "writtenOn": "2024-12-13T23:38:16Z",
       "side": 1,
       "message": "not needed: https://chat.google.com/room/AAAAiZPAfrY/KZfZ5LG3r4g/KZfZ5LG3r4g?cls\u003d10",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 8
+      },
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af15b805_3a419be0",
+        "filename": "tests/deviceside/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-12-16T21:35:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "107bb174_c7c8f5bf",
       "range": {
         "startLine": 54,
         "startChar": 0,
@@ -145,6 +187,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a416931_c6abaf41",
+        "filename": "tests/deviceside/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-12-16T21:35:24Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1d105d62_6f798d30",
+      "range": {
+        "startLine": 94,
+        "startChar": 49,
+        "endLine": 94,
+        "endChar": 72
+      },
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22e0aec5_8146be01",
@@ -162,6 +228,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69ce27cf_fd62fae2",
+        "filename": "tests/deviceside/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-12-16T21:35:24Z",
+      "side": 1,
+      "message": "It actually does due to https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/guest/vmbase_example/src/pci.rs;l\u003d36?q\u003dguest%20pci.rs\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain",
+      "parentUuid": "22e0aec5_8146be01",
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c200877_771f3795",
@@ -175,6 +259,30 @@
       "writtenOn": "2024-12-13T22:38:36Z",
       "side": 1,
       "message": "should be able to delete this line, 0 is the default. same the `None`s above",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 29
+      },
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62dd4696_0afc4eae",
+        "filename": "tests/deviceside/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-12-16T21:35:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c200877_771f3795",
       "range": {
         "startLine": 105,
         "startChar": 0,
@@ -208,6 +316,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1b2b862_5d1c706d",
+        "filename": "tests/deviceside/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-12-16T21:35:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d00e390_7cfd9747",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 149,
+        "endChar": 27
+      },
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5272ffb6_a95a3fba",
@@ -221,6 +353,24 @@
       "writtenOn": "2024-12-13T22:38:36Z",
       "side": 1,
       "message": "should assert that `dtcompare_res.status \u003d\u003d 0`. also requiring stderr to be empty is fine too, but a command might fail with no stderr, so you need to check the status",
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "381f8c21_7b88435d",
+        "filename": "tests/deviceside/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-12-16T21:35:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5272ffb6_a95a3fba",
       "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -242,6 +392,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9636156b_9802c45f",
+        "filename": "tests/dtcompare/Android.bp",
+        "patchSetId": 20
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-12-16T21:35:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ab07307_60e9c841",
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efe093d4_792ff9d5",
@@ -255,6 +423,24 @@
       "writtenOn": "2024-12-13T22:38:36Z",
       "side": 1,
       "message": "restrict visibility to the Virtualization dir",
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39d5a87d_5fc15628",
+        "filename": "tests/dtcompare/Android.bp",
+        "patchSetId": 20
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-12-16T21:35:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efe093d4_792ff9d5",
       "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -282,6 +468,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e05c1c84_74deb867",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-12-16T21:35:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cef9fe6d_76869112",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 15
+      },
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24dc9c72_b67f3f10",
@@ -299,6 +509,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c641a5c4_ba42a07e",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-12-16T21:35:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24dc9c72_b67f3f10",
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b548e5f3_1a336ee1",
@@ -312,6 +540,24 @@
       "writtenOn": "2024-12-13T22:38:36Z",
       "side": 1,
       "message": "this case should follow the \"log and continue\" approach",
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b5e589e_9f81b352",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-12-16T21:35:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b548e5f3_1a336ee1",
       "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -356,6 +602,48 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55df2ff3_6114120c",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-12-16T21:35:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9f6ad06_a34c228e",
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cf1fe59_d55cd419",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-12-16T21:35:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba1e8189_b97577eb",
+      "range": {
+        "startLine": 172,
+        "startChar": 40,
+        "endLine": 176,
+        "endChar": 32
+      },
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69a6e9ec_90e60efc",
@@ -369,6 +657,24 @@
       "writtenOn": "2024-12-13T22:38:36Z",
       "side": 1,
       "message": "should we delete this test case now that you added a rust version?",
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69b999ad_cf1bed44",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 1471,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-12-16T21:35:24Z",
+      "side": 1,
+      "message": "I\u0027ll do that in a follow-up CL. I want to investigate and see if microdroid differs from the current VM being booted, as I\u0027m not sure if their kernels/images are different.\n\nIf they are, I\u0027d be more in favor of keeping the test and modifying as necessary.",
+      "parentUuid": "69a6e9ec_90e60efc",
       "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

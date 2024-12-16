@@ -331,6 +331,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23ce1bc7_2b65f238",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-12-16T21:35:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "143438a3_9cd12801",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 15
+      },
+      "revId": "3d7cbc381a3fa0d0b43539e2d5fa04acb86beaf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ec77e41_829863a7",
@@ -392,6 +416,30 @@
       "side": 1,
       "message": "If you use `std::fmt` on a `\u0026[u8]` or similar then you\u0027ll get a format like `[AA, BB, CC, ...]`. `hex::encode` would get you `AABBCC...` which is easier to copy paste into other tools or REPLs",
       "parentUuid": "653d5d55_16ca4920",
+      "range": {
+        "startLine": 107,
+        "startChar": 45,
+        "endLine": 107,
+        "endChar": 49
+      },
+      "revId": "3d7cbc381a3fa0d0b43539e2d5fa04acb86beaf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "920daaa9_2f8505e9",
+        "filename": "tests/dtcompare/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2024-12-16T21:35:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b184961a_3decb3ef",
       "range": {
         "startLine": 107,
         "startChar": 45,
