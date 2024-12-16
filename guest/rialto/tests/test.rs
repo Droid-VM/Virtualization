@@ -40,7 +40,6 @@ use service_vm_fake_chain::client_vm::{
 use service_vm_manager::{ServiceVm, VM_MEMORY_MB};
 use std::fs;
 use std::fs::File;
-use std::panic;
 use std::path::PathBuf;
 use std::str::FromStr;
 use vmclient::VmInstance;
@@ -301,9 +300,22 @@ fn start_service_vm(vm_type: VmType, vm_memory_mb: Option<i32>) -> Result<Servic
             .with_max_level(log::LevelFilter::Debug),
     );
     // Redirect panic messages to logcat.
-    panic::set_hook(Box::new(|panic_info| {
-        log::error!("{}", panic_info);
+    std::panic::set_hook(Box::new(|panic_info| {
+        let msg;
+        if let Some(s) = panic_info.payload().downcast_ref::<&'static str>() {
+            msg = format!("panic occurred (&'static str): {s:?}");
+        } else if let Some(s) = panic_info.payload().downcast_ref::<String>() {
+            msg = format!("panic occurred (String): {s:?}");
+        } else {
+            msg = format!("panic occurred (unknown): {panic_info:?}");
+        }
+        let msg = std::ffi::CString::new(msg).unwrap();
+        // SAFETY: asdf
+        unsafe { libc::android_set_abort_message(msg.as_ptr().cast()) };
     }));
+    if vm_instance(vm_type, vm_memory_mb).is_ok() {
+        panic!("PANICING");
+    }
     // We need to start the thread pool for Binder to work properly, especially link_to_death.
     ProcessState::start_thread_pool();
     ServiceVm::start_vm(vm_instance(vm_type, vm_memory_mb)?, vm_type)
