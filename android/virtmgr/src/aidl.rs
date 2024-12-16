@@ -449,24 +449,20 @@ impl VirtualizationService {
     fn create_early_vm_context(
         &self,
         config: &VirtualMachineConfig,
+        calling_exe_path: &Path,
     ) -> binder::Result<(VmContext, Cid, PathBuf)> {
-        let calling_exe_path = format!("/proc/{}/exe", get_calling_pid());
-        let link = fs::read_link(&calling_exe_path)
-            .context(format!("can't read_link '{calling_exe_path}'"))
-            .or_service_specific_exception(-1)?;
-        let partition = find_partition(&link)?;
-
         let name = match config {
             VirtualMachineConfig::RawConfig(config) => &config.name,
             VirtualMachineConfig::AppConfig(config) => &config.name,
         };
-        let early_vm =
-            find_early_vm_for_partition(&partition, name).or_service_specific_exception(-1)?;
-        if Path::new(&early_vm.path) != link {
+        let calling_partition = find_partition(calling_exe_path)?;
+        let early_vm = find_early_vm_for_partition(&calling_partition, name)
+            .or_service_specific_exception(-1)?;
+        if Path::new(&early_vm.path) != calling_exe_path {
             return Err(anyhow!(
-                "VM '{name}' in partition '{partition}' must be created with '{}', not '{}'",
+                "VM '{name}' in partition '{calling_partition}' must be created with '{}', not '{}'",
                 &early_vm.path,
-                link.display()
+                calling_exe_path.display()
             ))
             .or_service_specific_exception(-1);
         }
@@ -548,9 +544,14 @@ impl VirtualizationService {
         let caller_secontext = getprevcon().or_service_specific_exception(-1)?;
         info!("callers secontext: {}", caller_secontext);
 
+        let calling_exe_link = format!("/proc/{}/exe", get_calling_pid());
+        let calling_exe_path = fs::read_link(&calling_exe_link)
+            .context(format!("can't read_link '{calling_exe_link}'"))
+            .or_service_specific_exception(-1)?;
+
         // Allocating VM context checks the MANAGE_VIRTUAL_MACHINE permission.
         let (vm_context, cid, temporary_directory) = if cfg!(early) {
-            self.create_early_vm_context(config)?
+            self.create_early_vm_context(config, &calling_exe_path)?
         } else {
             self.create_vm_context(requester_debug_pid, config)?
         };
@@ -650,7 +651,8 @@ impl VirtualizationService {
         // Check if files for payloads and bases are NOT coming from /vendor and /odm, as they may
         // have unstable interfaces.
         // TODO(b/316431494): remove once Treble interfaces are stabilized.
-        check_partitions_for_files(config).or_service_specific_exception(-1)?;
+        check_partitions_for_files(config, &find_partition(&calling_exe_path)?)
+            .or_service_specific_exception(-1)?;
 
         let zero_filler_path = temporary_directory.join("zero.img");
         write_zero_filler(&zero_filler_path)
@@ -1285,7 +1287,7 @@ fn load_app_config(
     Ok(vm_config)
 }
 
-fn check_partition_for_file(fd: &ParcelFileDescriptor) -> Result<()> {
+fn check_partition_for_file(fd: &ParcelFileDescriptor, calling_partition: &str) -> Result<()> {
     let path = format!("/proc/self/fd/{}", fd.as_raw_fd());
     let link = fs::read_link(&path).context(format!("can't read_link {path}"))?;
 
@@ -1295,24 +1297,33 @@ fn check_partition_for_file(fd: &ParcelFileDescriptor) -> Result<()> {
         return Ok(());
     }
 
-    if link.starts_with("/vendor") || link.starts_with("/odm") {
-        bail!("vendor or odm file {} can't be used for VM", link.display());
+    let is_fd_vendor = link.starts_with("/vendor") || link.starts_with("/odm");
+    let is_caller_vendor = calling_partition == "vendor" || calling_partition == "odm";
+
+    if is_fd_vendor != is_caller_vendor {
+        bail!("{} can't be used for VM client in {calling_partition}", link.display());
     }
 
     Ok(())
 }
 
-fn check_partitions_for_files(config: &VirtualMachineRawConfig) -> Result<()> {
+fn check_partitions_for_files(
+    config: &VirtualMachineRawConfig,
+    calling_partition: &str,
+) -> Result<()> {
     config
         .disks
         .iter()
         .flat_map(|disk| disk.partitions.iter())
         .filter_map(|partition| partition.image.as_ref())
-        .try_for_each(check_partition_for_file)?;
+        .try_for_each(|fd| check_partition_for_file(fd, calling_partition))?;
 
-    config.kernel.as_ref().map_or(Ok(()), check_partition_for_file)?;
-    config.initrd.as_ref().map_or(Ok(()), check_partition_for_file)?;
-    config.bootloader.as_ref().map_or(Ok(()), check_partition_for_file)?;
+    config.kernel.as_ref().map_or(Ok(()), |fd| check_partition_for_file(fd, calling_partition))?;
+    config.initrd.as_ref().map_or(Ok(()), |fd| check_partition_for_file(fd, calling_partition))?;
+    config
+        .bootloader
+        .as_ref()
+        .map_or(Ok(()), |fd| check_partition_for_file(fd, calling_partition))?;
 
     Ok(())
 }
@@ -2163,6 +2174,7 @@ fn range_for_partition(partition: &str) -> Result<Range<Cid>> {
     match partition {
         "system" => Ok(100..200),
         "system_ext" | "product" => Ok(200..300),
+        "vendor" | "odm" => Ok(300..400),
         _ => Err(anyhow!("Early VMs are not supported for {partition}")),
     }
 }
