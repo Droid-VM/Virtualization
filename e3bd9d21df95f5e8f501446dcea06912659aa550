@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e77f9611_61898fe0",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-16T11:57:08Z",
+      "side": 1,
+      "message": "can you do this lazily so that we load this only once?",
+      "range": {
+        "startLine": 426,
+        "startChar": 33,
+        "endLine": 428,
+        "endChar": 52
+      },
+      "revId": "e3bd9d21df95f5e8f501446dcea06912659aa550",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67c6a060_88285f1a",
+        "filename": "android/virtmgr/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-16T11:57:08Z",
+      "side": 1,
+      "message": "`pub(crate)` as these don\u0027t have to be made available outside of this crate.",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 3
+      },
+      "revId": "e3bd9d21df95f5e8f501446dcea06912659aa550",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
