@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1910eab9_80baffb4",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineRawConfig.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2024-12-16T02:10:55Z",
+      "side": 1,
+      "message": "Plus, `--devices` implies VFIO, but new feature request says \u0027no VFIO. So I thought that we\u0027d better to pass DTBO directly. Feel free to tell me if you have different opinion.",
+      "parentUuid": "aee60e1a_a602a435",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 21
+      },
+      "revId": "983ce4263901652404feae9f70dcf26b36a779c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9b351c9b_822013ee",
         "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineRawConfig.aidl",
         "patchSetId": 1
