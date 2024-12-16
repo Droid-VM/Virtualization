@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "da0f86c5_fe5eca87",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineRawConfig.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-16T12:41:33Z",
+      "side": 1,
+      "message": "What\u0027s being suggested in the bug is to let this mean either sysfs nodes or labels.",
+      "parentUuid": "1910eab9_80baffb4",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 21
+      },
+      "revId": "983ce4263901652404feae9f70dcf26b36a779c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9b351c9b_822013ee",
         "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineRawConfig.aidl",
         "patchSetId": 1
@@ -126,6 +150,30 @@
       "side": 1,
       "message": "Yes, but I just wanted to match look \u0026 feel of crosvm command `--device-tree-overlay` which can repeated multiple time. What do you think?",
       "parentUuid": "9b351c9b_822013ee",
+      "range": {
+        "startLine": 117,
+        "startChar": 8,
+        "endLine": 117,
+        "endChar": 12
+      },
+      "revId": "983ce4263901652404feae9f70dcf26b36a779c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51135db2_6c1a1710",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineRawConfig.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-16T12:41:33Z",
+      "side": 1,
+      "message": "If we really want to go in this path, this should better be ..\n\n```\nparcelable VirtualMachineRawConfig {\n  ...\n  AssignedDevices[] devices;\n}\n\nunion AssignedDevices {\n  String[] sysfsNodes;\n  ParcelFileDescriptor[] dtbos;\n}\n```",
+      "parentUuid": "575e2ded_9a6fedc4",
       "range": {
         "startLine": 117,
         "startChar": 8,
