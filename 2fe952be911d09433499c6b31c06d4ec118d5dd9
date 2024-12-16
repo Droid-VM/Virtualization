@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c5a93c5_0e57698a",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1439,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-16T13:08:44Z",
+      "side": 1,
+      "message": "We have boot tests to check selinux is enforce. See `testMicrodroidBootsWithBuilder()` \n```\n        assertWithMessage(\"Unexpected denials during VM boot\")\n                .that(consoleText + logText)\n                .doesNotContainMatch(\"avc:\\\\s+denied\");\n\n\n        // Check that selinux is enabled\n        assertWithMessage(\"SELinux should be in enforcing mode\")\n                .that(microdroid.run(\"getenforce\"))\n                .isEqualTo(\"Enforcing\");\n\n```\n\nCan there be a difference in output of `getenfoce` \u0026 cat `/sys/fs/selinux/enforce`",
+      "range": {
+        "startLine": 1439,
+        "startChar": 8,
+        "endLine": 1439,
+        "endChar": 81
+      },
+      "revId": "2fe952be911d09433499c6b31c06d4ec118d5dd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
