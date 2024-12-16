@@ -49,19 +49,21 @@ class InstalledImage {
     private final Path mConfig;
     private final Path mMarker;
     private String mBuildId;
+    private final PortsStateManager mPortsStateManager;
 
     /** Returns InstalledImage for a given app context */
     public static InstalledImage getDefault(Context context) {
         Path installDir = context.getFilesDir().toPath().resolve(INSTALL_DIRNAME);
-        return new InstalledImage(installDir);
+        return new InstalledImage(context, installDir);
     }
 
-    private InstalledImage(Path dir) {
+    private InstalledImage(Context context, Path dir) {
         mDir = dir;
         mRootPartition = dir.resolve(ROOTFS_FILENAME);
         mBackup = dir.resolve(BACKUP_FILENAME);
         mConfig = dir.resolve(CONFIG_FILENAME);
         mMarker = dir.resolve(MARKER_FILENAME);
+        mPortsStateManager = PortsStateManager.getInstance(context);
     }
 
     public Path getInstallDir() {
@@ -75,6 +77,7 @@ class InstalledImage {
 
     /** Fully understalls this InstalledImage by deleting everything. */
     public void uninstallFully() throws IOException {
+        mPortsStateManager.clearEnabledPort();
         FileUtils.deleteContentsAndDir(mDir.toFile());
     }
 
