@@ -117,6 +117,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3373f483_2f458ab5",
+        "filename": "tests/deviceside/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-16T22:07:30Z",
+      "side": 1,
+      "message": "Smaller scoped test suites are better IMO",
+      "parentUuid": "17b7458a_4466511f",
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "107bb174_c7c8f5bf",
@@ -242,6 +260,24 @@
       "side": 1,
       "message": "It actually does due to https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/guest/vmbase_example/src/pci.rs;l\u003d36?q\u003dguest%20pci.rs\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain",
       "parentUuid": "22e0aec5_8146be01",
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb8d2912_991d598f",
+        "filename": "tests/deviceside/src/main.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-16T22:07:30Z",
+      "side": 1,
+      "message": "Ah, thanks. We probably should switch to another guest at some point so these two test suites aren\u0027t tied together, but I think it is OK as a start",
+      "parentUuid": "69ce27cf_fd62fae2",
       "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -675,6 +711,24 @@
       "side": 1,
       "message": "I\u0027ll do that in a follow-up CL. I want to investigate and see if microdroid differs from the current VM being booted, as I\u0027m not sure if their kernels/images are different.\n\nIf they are, I\u0027d be more in favor of keeping the test and modifying as necessary.",
       "parentUuid": "69a6e9ec_90e60efc",
+      "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d657b39_740830d8",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 1471,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-16T22:07:30Z",
+      "side": 1,
+      "message": "It is OK to defer, but we shouldn\u0027t have duplicate back compat tests long term. They are already going to be an annoyance, don\u0027t want to have to update two of them.",
+      "parentUuid": "69b999ad_cf1bed44",
       "revId": "33cf59be8bb783069be78df02762b5d9e36fef3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

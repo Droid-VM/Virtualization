@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4e89d3c_d2cc081e",
+        "filename": "tests/backcompat_test/src/main.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-16T22:07:30Z",
+      "side": 1,
+      "message": "here and the other `dtc_static` below: need to check the exit status\n\nmaybe easiest using https://doc.rust-lang.org/std/process/struct.ExitStatus.html#method.exit_ok, something like this (didn\u0027t test it)\n\n```\n  .output().and_then(|x| x.status.exit_ok()).context(...)?;\n```",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 17
+      },
+      "revId": "c619ddb99be81e4f848b03ea021dfcfd9faa204d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
