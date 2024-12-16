@@ -22,6 +22,30 @@
       },
       "revId": "2fe952be911d09433499c6b31c06d4ec118d5dd9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c085694e_031119ed",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1439,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-12-16T13:10:50Z",
+      "side": 1,
+      "message": "Nope, getenforce is using /sys/fs/selinux/enforce.\n\nThanks for pointing out that we are already checking that selinux is enforced. We don\u0027t need this patch then! :)",
+      "parentUuid": "6c5a93c5_0e57698a",
+      "range": {
+        "startLine": 1439,
+        "startChar": 8,
+        "endLine": 1439,
+        "endChar": 81
+      },
+      "revId": "2fe952be911d09433499c6b31c06d4ec118d5dd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
