@@ -39,11 +39,6 @@ fn try_main() -> Result<()> {
         android_logger::Config::default().with_tag("composd").with_max_level(log_level),
     );
 
-    // Redirect panic messages to logcat.
-    panic::set_hook(Box::new(|panic_info| {
-        log::error!("{}", panic_info);
-    }));
-
     ProcessState::start_thread_pool();
 
     let virtmgr =
