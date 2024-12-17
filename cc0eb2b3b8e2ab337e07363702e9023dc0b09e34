@@ -22,6 +22,30 @@
       },
       "revId": "cc0eb2b3b8e2ab337e07363702e9023dc0b09e34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "017261f6_b87d9716",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2024-12-17T17:13:15Z",
+      "side": 1,
+      "message": "still doesn\u0027t prevent 0, and I believe the general attitude around is to use signed types by default unless truly necessary",
+      "parentUuid": "7291e72c_5ffc0475",
+      "range": {
+        "startLine": 153,
+        "startChar": 29,
+        "endLine": 153,
+        "endChar": 46
+      },
+      "revId": "cc0eb2b3b8e2ab337e07363702e9023dc0b09e34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
