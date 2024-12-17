@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce0f426d_3bdeabbc",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-17T21:58:27Z",
+      "side": 1,
+      "message": "nit: there is a slightly nicer pattern for this\n\n```\nlet Some(path) \u003d path else {\n    return Ok(\"system\".to_owned());\n};\n```",
+      "range": {
+        "startLine": 425,
+        "startChar": 1,
+        "endLine": 428,
+        "endChar": 6
+      },
+      "revId": "d6f412b5d462fc54328cd5d1dff6793ea0c12239",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c142c80d_0d0c1230",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-17T21:58:27Z",
+      "side": 1,
+      "message": "should delete this, or, delete the `CALLING_EXE_PATH` global\n\nif we go with the global, i wonder if it makes sense to have `create_early_vm_context` access the global directly instead of passing by argument, but, up to you",
+      "range": {
+        "startLine": 573,
+        "startChar": 0,
+        "endLine": 575,
+        "endChar": 48
+      },
+      "revId": "d6f412b5d462fc54328cd5d1dff6793ea0c12239",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eee5d48f_f61915b2",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1342,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-17T21:58:27Z",
+      "side": 1,
+      "message": "also need to check `disk.image`",
+      "revId": "d6f412b5d462fc54328cd5d1dff6793ea0c12239",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
