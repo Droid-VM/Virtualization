@@ -16,6 +16,24 @@
       "message": "Hi Jiyong, PTAL",
       "revId": "8095d02ed6196d52f41ef26a0b95e96ddfe5def3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0185e64_d23e2bff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-12-17T13:40:59Z",
+      "side": 1,
+      "message": "Looks like this default setting will not workas older devices can also have recent vendor builds. The error message below indicates that `ro.board.api_level` is 202504 on aosp_panther_hwasan-trunk_staging-userdebug:\n\n```\nvendor \u0027202504\u0027 (\u003e\u003d202504) must support VM remote attestation\n```\n\nIn this case, Jiyong, how do you recommend we modify the check to ensure that VM remote attestation is mandatory from VSR-16 onwards on non-GRF devices?",
+      "parentUuid": "e74cac29_3e64c305",
+      "revId": "8095d02ed6196d52f41ef26a0b95e96ddfe5def3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
