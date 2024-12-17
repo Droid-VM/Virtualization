@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bcc541d_3d11cb25",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-12-17T08:52:59Z",
+      "side": 1,
+      "message": "this is already loaded once, please see ApexInfoList::load().",
+      "parentUuid": "e77f9611_61898fe0",
+      "range": {
+        "startLine": 426,
+        "startChar": 33,
+        "endLine": 428,
+        "endChar": 52
+      },
+      "revId": "e3bd9d21df95f5e8f501446dcea06912659aa550",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67c6a060_88285f1a",
@@ -49,6 +73,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8d33fb7a_42ce149c",
+        "filename": "android/virtmgr/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-12-17T08:52:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67c6a060_88285f1a",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 3
+      },
+      "revId": "e3bd9d21df95f5e8f501446dcea06912659aa550",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "203cb796_4e7488e8",
         "filename": "android/virtmgr/src/payload.rs",
         "patchSetId": 1
@@ -60,6 +108,30 @@
       "writtenOn": "2024-12-17T01:42:00Z",
       "side": 1,
       "message": "FYI `apex-info` element now has `partition` attribute. https://cs.android.com/android/platform/superproject/main/+/main:system/apex/apexd/ApexInfoList.xsd;l\u003d1?q\u003dApexInfoList.xsd\u0026sq\u003d",
+      "range": {
+        "startLine": 87,
+        "startChar": 8,
+        "endLine": 87,
+        "endChar": 25
+      },
+      "revId": "e3bd9d21df95f5e8f501446dcea06912659aa550",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4a3230a_91aa4c96",
+        "filename": "android/virtmgr/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-12-17T08:52:59Z",
+      "side": 1,
+      "message": "thank you!",
+      "parentUuid": "203cb796_4e7488e8",
       "range": {
         "startLine": 87,
         "startChar": 8,
