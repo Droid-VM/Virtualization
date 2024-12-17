@@ -79,7 +79,7 @@ public class AuthFsTestRule extends TestLogData {
     private static final String AUTHFS_BIN = "/system/bin/authfs";
 
     /** Plenty of time for authfs to get ready */
-    private static final int AUTHFS_INIT_TIMEOUT_MS = 3000;
+    private static final int AUTHFS_INIT_TIMEOUT_MS = 10000;
 
     private static final int VMADDR_CID_HOST = 2;
 
