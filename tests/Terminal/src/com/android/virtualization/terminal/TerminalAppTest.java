@@ -26,6 +26,7 @@ import android.os.Bundle;
 import androidx.test.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
 
+import com.android.microdroid.test.common.DeviceProperties;
 import com.android.microdroid.test.common.MetricsProcessor;
 
 import org.junit.After;
@@ -42,12 +43,14 @@ import java.util.Map;
 public class TerminalAppTest {
     private Instrumentation mInstr;
     private Context mTargetContext;
+    private DeviceProperties mProperties;
     private final MetricsProcessor mMetricsProc = new MetricsProcessor("avf_perf/terminal/");
 
     @Before
     public void setup() {
         mInstr = InstrumentationRegistry.getInstrumentation();
         mTargetContext = mInstr.getTargetContext();
+        mProperties = DeviceProperties.create(getDevice()::getProperty);
         installVmImage();
     }
 
@@ -66,7 +69,8 @@ public class TerminalAppTest {
 
     @Test
     public void boot() throws Exception {
-        final long BOOT_TIMEOUT_MILLIS = 30_000; // 30 sec
+        final boolean isNestedVirt = mProperties.isCuttlefish() || mProperties.isGoldfish();
+        final long BOOT_TIMEOUT_MILLIS = isNestedVirt ? 180_000 : 30_000; // 30 sec (or 3 min)
 
         Intent intent = new Intent(mTargetContext, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
