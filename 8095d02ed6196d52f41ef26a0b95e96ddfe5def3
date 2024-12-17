@@ -52,6 +52,29 @@
       "parentUuid": "a0185e64_d23e2bff",
       "revId": "8095d02ed6196d52f41ef26a0b95e96ddfe5def3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f3597e6_38b20421",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-17T15:25:01Z",
+      "side": 1,
+      "message": "Other test look at other board properties in following other:\n`ro.board.api_level`\n`ro.board.first_api_level`\n`ro.vndk.version`\n\nWill it make sense ordering them this way?\n\nhttps://source.corp.google.com/h/android/platform/superproject/main/+/main:test/suite_harness/common/host-side/util/src/com/android/compatibility/common/util/PropertyUtil.java;l\u003d117;drc\u003db4d6320e2ae398b36f0aaafb2ecd83609d2d99af;bpv\u003d1;bpt\u003d1?q\u003disVendorApiLevelAtLeast",
+      "range": {
+        "startLine": 267,
+        "startChar": 23,
+        "endLine": 267,
+        "endChar": 79
+      },
+      "revId": "8095d02ed6196d52f41ef26a0b95e96ddfe5def3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
