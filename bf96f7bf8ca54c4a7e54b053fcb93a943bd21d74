@@ -39,6 +39,30 @@
       },
       "revId": "bf96f7bf8ca54c4a7e54b053fcb93a943bd21d74",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6b3436e_2f9b3772",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1304,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-12-17T00:22:07Z",
+      "side": 1,
+      "message": "Rust\u0027s `Path` can\u0027t be used like `{link}` as they may contain non UTF-8 characters. We need something like `display()`",
+      "parentUuid": "42e14281_3076a6bc",
+      "range": {
+        "startLine": 1304,
+        "startChar": 15,
+        "endLine": 1304,
+        "endChar": 17
+      },
+      "revId": "bf96f7bf8ca54c4a7e54b053fcb93a943bd21d74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
