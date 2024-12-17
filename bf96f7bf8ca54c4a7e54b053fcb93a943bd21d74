@@ -66,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a5e1149a_f75454e3",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-12-17T02:13:42Z",
+      "side": 1,
+      "message": "it\u0027s a parent of `virtmgr`, should we worry about race condition? But I agree that PID isn\u0027t ideal. Presubmit fails on Java clients because `virtmgr` can\u0027t `readlink` the app\u0027s `/proc/{pid}/exe` with `ENOENT`. It doesn\u0027t make sense, I\u0027m trying to figure out why it happens.\n\nI\u0027m open for better ideas.",
+      "parentUuid": "10516c0b_09dd19f5",
+      "range": {
+        "startLine": 547,
+        "startChar": 55,
+        "endLine": 547,
+        "endChar": 70
+      },
+      "revId": "bf96f7bf8ca54c4a7e54b053fcb93a943bd21d74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "42e14281_3076a6bc",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 1
