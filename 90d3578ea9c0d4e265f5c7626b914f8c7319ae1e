@@ -46,6 +46,30 @@
       },
       "revId": "90d3578ea9c0d4e265f5c7626b914f8c7319ae1e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9714043c_6719f240",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-17T02:21:54Z",
+      "side": 1,
+      "message": "the client using libavf might have registered this to logd. (ex: `android_logger::init_once(...)`), could you check?",
+      "parentUuid": "009fa6f0_2dcd3f16",
+      "range": {
+        "startLine": 324,
+        "startChar": 12,
+        "endLine": 324,
+        "endChar": 17
+      },
+      "revId": "90d3578ea9c0d4e265f5c7626b914f8c7319ae1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
