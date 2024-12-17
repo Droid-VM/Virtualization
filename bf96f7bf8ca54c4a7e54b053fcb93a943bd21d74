@@ -43,6 +43,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10516c0b_09dd19f5",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-17T01:51:58Z",
+      "side": 1,
+      "message": "also - PID is racey, should avoid. Do you have another way? What if it dies, can you ping it or something, a binder it gave you, to make sure it didn\u0027t die?",
+      "range": {
+        "startLine": 547,
+        "startChar": 55,
+        "endLine": 547,
+        "endChar": 70
+      },
+      "revId": "bf96f7bf8ca54c4a7e54b053fcb93a943bd21d74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "42e14281_3076a6bc",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 1
