@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21591f8e_901564ae",
+        "filename": "libs/libvm_payload/include/vm_payload.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-17T17:56:33Z",
+      "side": 1,
+      "message": "I\u0027ve modified the API to return `AccessRollbackProtectedSecretStatus`.\n\nReturning `number of bytes` seemed inappropriate given the value can be either 0 or 32",
+      "parentUuid": "1729be34_c4eadc7a",
+      "range": {
+        "startLine": 268,
+        "startChar": 5,
+        "endLine": 268,
+        "endChar": 44
+      },
+      "revId": "935a7104529c6a0a9ca869d972a5ffda9e3c5cf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36c3981b_cca406d1",
@@ -85,6 +109,30 @@
       "writtenOn": "2024-12-12T14:16:52Z",
       "side": 1,
       "message": "ditto on docunmenting return value",
+      "range": {
+        "startLine": 275,
+        "startChar": 4,
+        "endLine": 275,
+        "endChar": 42
+      },
+      "revId": "935a7104529c6a0a9ca869d972a5ffda9e3c5cf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25820dfc_e6b4b89f",
+        "filename": "libs/libvm_payload/include/vm_payload.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-17T17:56:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36c3981b_cca406d1",
       "range": {
         "startLine": 275,
         "startChar": 4,
