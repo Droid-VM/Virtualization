@@ -166,6 +166,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "096c23c7_793ac224",
+        "filename": "libs/libvm_payload/src/lib.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-17T17:59:11Z",
+      "side": 1,
+      "message": "Returning `AccessRollbackProtectedSecretStatus::ACCESS_FAILED` now. Thanks!",
+      "parentUuid": "6b776ddb_d35d07b3",
+      "range": {
+        "startLine": 584,
+        "startChar": 4,
+        "endLine": 584,
+        "endChar": 19
+      },
+      "revId": "935a7104529c6a0a9ca869d972a5ffda9e3c5cf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7df98999_ade058e6",
@@ -179,6 +203,30 @@
       "writtenOn": "2024-12-12T14:16:52Z",
       "side": 1,
       "message": "ditto, we can return false instead of aborting, right?",
+      "range": {
+        "startLine": 597,
+        "startChar": 22,
+        "endLine": 597,
+        "endChar": 37
+      },
+      "revId": "935a7104529c6a0a9ca869d972a5ffda9e3c5cf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0abac67_028ad05e",
+        "filename": "libs/libvm_payload/src/lib.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-17T17:59:11Z",
+      "side": 1,
+      "message": "Returning `AccessRollbackProtectedSecretStatus::ACCESS_FAILED`. Thanks!",
+      "parentUuid": "7df98999_ade058e6",
       "range": {
         "startLine": 597,
         "startChar": 22,
