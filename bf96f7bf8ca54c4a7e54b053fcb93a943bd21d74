@@ -90,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cddcf413_48ce9ca5",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-12-17T02:34:13Z",
+      "side": 1,
+      "message": "Wait, this process has one instance per-client, but it\u0027s still registered over binder? How does it get registered with servicemanager? or does another service manage the instance of virtmgr?",
+      "parentUuid": "a5e1149a_f75454e3",
+      "range": {
+        "startLine": 547,
+        "startChar": 55,
+        "endLine": 547,
+        "endChar": 70
+      },
+      "revId": "bf96f7bf8ca54c4a7e54b053fcb93a943bd21d74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "42e14281_3076a6bc",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 1
