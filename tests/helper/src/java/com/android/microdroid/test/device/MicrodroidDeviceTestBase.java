@@ -260,10 +260,16 @@ public abstract class MicrodroidDeviceTestBase {
 
     /**
      * @return The first vendor API level when the vendor images for an SoC that is qualified for
-     *     vendor freeze are first released with this property, or 0 if the property is not set.
+     *     vendor freeze are first released with this property, or |ro.board.api_level| for non-GRF
+     *     chipsets.
      */
     protected static int getFirstVendorApiLevel() {
-        return SystemProperties.getInt("ro.board.first_api_level", 0);
+        int apiLevel = SystemProperties.getInt("ro.board.first_api_level", -1);
+        if (apiLevel == -1) {
+            return getVendorApiLevel();
+        } else {
+            return apiLevel;
+        }
     }
 
     protected void assumeSupportedDevice() {
