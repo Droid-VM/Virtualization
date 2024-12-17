@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "299a8558_f9c64703",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-12-17T04:35:04Z",
+      "side": 1,
+      "message": "\u003e Wait, this process has one instance per-client, but it\u0027s still registered over binder?\n\nVM clients fork virtmgr and connect to virtmgr with RPC binder.\n\n\u003e How does it get registered with servicemanager?\n\nvirtmgr isn\u0027t registered with servicemanager. Only global virtualizationservice is.",
+      "parentUuid": "cddcf413_48ce9ca5",
+      "range": {
+        "startLine": 547,
+        "startChar": 55,
+        "endLine": 547,
+        "endChar": 70
+      },
+      "revId": "bf96f7bf8ca54c4a7e54b053fcb93a943bd21d74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "42e14281_3076a6bc",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 1
