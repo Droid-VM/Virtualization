@@ -94,6 +94,30 @@
       },
       "revId": "90d3578ea9c0d4e265f5c7626b914f8c7319ae1e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2991f90e_7e708ee1",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-17T03:42:09Z",
+      "side": 1,
+      "message": "you (libavf) are linking to liblog_rust and it initializes libandroid_log_sys on Android.\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:external/rust/android-crates-io/crates/log/Android.bp;drc\u003d28782d77628c71684c79e627955020ba711db442;l\u003d34",
+      "parentUuid": "5f90f858_c18303d5",
+      "range": {
+        "startLine": 324,
+        "startChar": 12,
+        "endLine": 324,
+        "endChar": 17
+      },
+      "revId": "90d3578ea9c0d4e265f5c7626b914f8c7319ae1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
