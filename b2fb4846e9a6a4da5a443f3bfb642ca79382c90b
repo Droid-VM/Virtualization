@@ -16,6 +16,24 @@
       "message": "Hi Gil,\n\nI think there may be a misunderstanding here. My understanding was that we would reuse `libdiced_open_dice_nostd` as a crate and incorporate it by adding some make rules like this:\n\n```\nMODULE_LIBRARY_DEPS +\u003d \\\n\t$(call FIND_CRATE,diced_open_dice_nostd)\n```\n\nThis approach would be preferable to recreating the compilation process and introducing another variant of open-dice. We already have over 5 upstream open-dice variations and 3 different wrapper libraries in AOSP. Adding another wrapper library would only increase the maintenance burden, which I\u0027d prefer to avoid if possible.",
       "revId": "b2fb4846e9a6a4da5a443f3bfb642ca79382c90b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1028246b_001045ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951225
+      },
+      "writtenOn": "2024-12-18T14:18:02Z",
+      "side": 1,
+      "message": "Thanks Alice, to my knowledge pulling in a prebuilt crate that was compiled with soong and the Android toolchain is not something we\u0027ve done before in trusty and I\u0027m not sure it\u0027s supported since Android and trusty have their own build toolchains. \n\n`FIND_CRATE` is implemented to search over external deps and doesn\u0027t currently search the AOSP tree [1]. Even if it were to be updated, it\u0027s currently just a convenience wrapper and doesn\u0027t bring in prebuilts. Each dep pulled in by `FIND_CRATE` has its own rules.mk file and is built from source using the trusty build system (e.g. [2]).\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:external/trusty/lk/make/macros.mk;l\u003d19;drc\u003d8c15bc9fc345003fa9d3d8682f581b654c7ddc06\n\n[2] https://cs.android.com/android/platform/superproject/main/+/main:external/rust/android-crates-io/crates/zeroize/rules.mk;drc\u003da992a01e04655e274cf6339b13b2e879bc018594",
+      "parentUuid": "77b2fec6_41ea4e51",
+      "revId": "b2fb4846e9a6a4da5a443f3bfb642ca79382c90b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
