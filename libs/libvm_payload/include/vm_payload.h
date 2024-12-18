@@ -118,6 +118,11 @@ __attribute__((noreturn)) void AVmPayload_runVsockRpcServer(
  * byte sequences and do not need to be kept secret; typically they are
  * hardcoded in the calling code.
  *
+ * The secret is linked to the instance & will be created for a new instance.
+ * Callers should check `AVmPayload_isNewInstanceStatus()` to meaningfully use the secret.
+ * For ex, decryption of any old data is meaningless with the returned secret if
+ * `is_new_instance` is true.
+ *
  * \param identifier identifier of the secret to return.
  * \param identifier_size size of the secret identifier.
  * \param secret pointer to size bytes where the secret is written.
@@ -300,5 +305,16 @@ AccessRollbackProtectedSecretStatus AVmPayload_readRollbackProtectedSecret(void*
                                                                            size_t size)
         __INTRODUCED_IN(36);
 ;
+
+/**
+ * Checks whether the VM instance is new - i.e, if this is the first run of an instance.
+ * This is an indication of fresh new VM secrets. Payload can use this to setup the fresh
+ * instance if needed.
+ *
+ * \param is_new_instance pointer to where the resultant bool will be written.
+ *
+ *  \return 0 on successful execution the, -1 otherwise.
+ */
+int32_t AVmPayload_isNewInstanceStatus(bool* _Nonnull is_new_instance) __INTRODUCED_IN(36);
 
 __END_DECLS
