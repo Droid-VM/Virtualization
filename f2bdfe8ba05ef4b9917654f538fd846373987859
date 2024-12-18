@@ -22,6 +22,30 @@
       },
       "revId": "f2bdfe8ba05ef4b9917654f538fd846373987859",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "210f9b34_d8d2092a",
+        "filename": "guest/microdroid_manager/microdroid_manager.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-18T13:13:30Z",
+      "side": 0,
+      "message": "It\u0027s an environment variable, so no further access is required.\n\nThe microdroid launcher and manager already have read access to kmsg. See https://cs.android.com/android/platform/superproject/main/+/main:system/sepolicy/microdroid/system/private/microdroid_payload.te;drc\u003db85293be419869121d4731fe55580a3bed2f8198;l\u003d21",
+      "parentUuid": "c56456d5_46803291",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 17
+      },
+      "revId": "f2bdfe8ba05ef4b9917654f538fd846373987859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
