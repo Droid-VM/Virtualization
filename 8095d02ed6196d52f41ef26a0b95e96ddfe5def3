@@ -75,6 +75,30 @@
       },
       "revId": "8095d02ed6196d52f41ef26a0b95e96ddfe5def3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e7c4e6f_707cc8dd",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-12-18T09:29:18Z",
+      "side": 1,
+      "message": "Thank you for the suggestion, but that doesn\u0027t address this issue. The problem is that we have an assertion that requires VM attestation support if `apiLevel` \u003e\u003d 202504. However, on Panther,`ro.board.api_level` is 202504, `ro.board.first_api_level` isn\u0027t set.\n\nSimply changing the checking order won\u0027t resolve this.",
+      "parentUuid": "0f3597e6_38b20421",
+      "range": {
+        "startLine": 267,
+        "startChar": 23,
+        "endLine": 267,
+        "endChar": 79
+      },
+      "revId": "8095d02ed6196d52f41ef26a0b95e96ddfe5def3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
