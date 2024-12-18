@@ -363,6 +363,14 @@ Result<void> start_test_service() {
             return ScopedAStatus::ok();
         }
 
+        ScopedAStatus isNewInstance(bool* is_new_instance_out) override {
+            auto ret = AVmPayload_isNewInstanceStatus(is_new_instance_out);
+            if (ret != 0) {
+                return ScopedAStatus::fromServiceSpecificError(ret);
+            }
+            return ScopedAStatus::ok();
+        }
+
         ScopedAStatus quit() override { exit(0); }
     };
     auto testService = ndk::SharedRefBase::make<TestService>();
