@@ -644,3 +644,28 @@ fn try_read_rollback_protected_data() -> Result<Option<[u8; 32]>> {
     );
     Ok(rp)
 }
+
+/// Checks whether the VM instance is new (i.e, this is the first run of an instance),
+/// indicative of secrets being new.
+///
+///  # Safety
+///
+/// Behavior is undefined if any of the following conditions are violated:
+///
+/// * `is_new_instance` must be [valid] for writes of bool.
+#[no_mangle]
+pub unsafe extern "C" fn AVmPayload_isNewInstanceStatus(is_new_instance: *mut bool) -> i32 {
+    // TODO: Do not unwrap, return an error instead
+    let Ok(res) = try_is_new_instance() else {
+        return -1;
+    };
+    // SAFETY: `is_new_instance` points to a region allocated for the caller so is safe to access.
+    unsafe {
+        ptr::write(is_new_instance, res);
+    }
+    0
+}
+
+fn try_is_new_instance() -> Result<bool> {
+    get_vm_payload_service()?.isNewInstance().context("Cannot determine if the instance is new")
+}

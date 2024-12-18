@@ -138,6 +138,9 @@ impl ITestService for TestService {
     fn insecurelyWritePayloadRpData(&self, _: &[u8; 32]) -> BinderResult<()> {
         unimplemented()
     }
+    fn isNewInstance(&self) -> BinderResult<bool> {
+        unimplemented()
+    }
 }
 
 fn unimplemented<T>() -> BinderResult<T> {

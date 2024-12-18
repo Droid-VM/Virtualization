@@ -1901,6 +1901,38 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
+    public void isNewInstanceTest() throws Exception {
+        assumeSupportedDevice();
+
+        VirtualMachineConfig config =
+                newVmConfigBuilderWithPayloadBinary("MicrodroidTestNativeLib.so")
+                        .setMemoryBytes(minMemoryRequired())
+                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .build();
+        VirtualMachine vm = forceCreateNewVirtualMachine("test_vm_a", config);
+        TestResults testResults =
+                runVmTestService(
+                        TAG,
+                        vm,
+                        (ts, tr) -> {
+                            tr.mIsNewInstance = ts.isNewInstance();
+                        });
+        testResults.assertNoException();
+        assertThat(testResults.mIsNewInstance).isTrue();
+
+        // Re-run the same VM & ensure isNewInstance is false.
+        testResults =
+                runVmTestService(
+                        TAG,
+                        vm,
+                        (ts, tr) -> {
+                            tr.mIsNewInstance = ts.isNewInstance();
+                        });
+        testResults.assertNoException();
+        assertThat(testResults.mIsNewInstance).isFalse();
+    }
+
+    @Test
     @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
     public void canReadFileFromAssets_debugFull() throws Exception {
         assumeSupportedDevice();

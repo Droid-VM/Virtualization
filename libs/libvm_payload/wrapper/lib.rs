@@ -31,7 +31,7 @@ use std::path::Path;
 use std::ptr;
 use vm_payload_bindgen::{
     AIBinder, AVmPayload_getApkContentsPath, AVmPayload_getEncryptedStoragePath,
-    AVmPayload_getVmInstanceSecret, AVmPayload_notifyPayloadReady,
+    AVmPayload_getVmInstanceSecret, AVmPayload_isNewInstanceStatus, AVmPayload_notifyPayloadReady,
     AVmPayload_readRollbackProtectedSecret, AVmPayload_runVsockRpcServer,
     AVmPayload_writeRollbackProtectedSecret, AccessRollbackProtectedSecretStatus,
 };
@@ -197,6 +197,7 @@ pub fn get_vm_instance_secret(identifier: &[u8], secret: &mut [u8]) {
     }
 }
 
+// TODO: This should be mutable slice
 /// Read payload's `data` written on behalf of the payload in Secretkeeper.
 pub fn read_rollback_protected_secret(data: &[u8; 32]) -> AccessRollbackProtectedSecretStatus {
     // SAFETY: The function only reads from`[data]` within its bounds.
@@ -207,4 +208,10 @@ pub fn read_rollback_protected_secret(data: &[u8; 32]) -> AccessRollbackProtecte
 pub fn write_rollback_protected_secret(data: &[u8; 32]) -> AccessRollbackProtectedSecretStatus {
     // SAFETY: The function only writes to `[data]` within its bounds.
     unsafe { AVmPayload_writeRollbackProtectedSecret(data.as_ptr() as *const c_void) }
+}
+
+/// TODO
+pub fn is_new_instance_status(is_new_instance: &mut bool) -> i32 {
+    // SAFETY: TODO.
+    unsafe { AVmPayload_isNewInstanceStatus(is_new_instance) }
 }
