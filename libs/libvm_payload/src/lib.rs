@@ -663,3 +663,22 @@ fn try_read_rollback_protected_data() -> Result<Option<[u8; RP_DATA_SIZE]>> {
     );
     Ok(rp)
 }
+
+/// Checks whether the VM instance is new - i.e., if this is the first run of an instance.
+///
+/// Panics on error (including unexpected server exit).
+#[no_mangle]
+pub extern "C" fn AVmPayload_isNewInstance() -> bool {
+    unwrap_or_abort(try_is_new_instance())
+}
+
+fn try_is_new_instance() -> Result<bool> {
+    get_vm_payload_service()?.isNewInstance().context("Cannot determine if the instance is new")
+}
+// / # Safety
+// /
+// / Behavior is undefined if any of the following conditions are violated:
+// /
+// / * `is_new_instance` must be [valid] for writes of bool.
+// /
+// / [valid]: ptr#safety
