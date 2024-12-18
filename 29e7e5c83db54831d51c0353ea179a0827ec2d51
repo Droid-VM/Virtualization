@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf961e15_421861aa",
+        "filename": "libs/libvm_payload/include/vm_payload.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-18T15:29:08Z",
+      "side": 1,
+      "message": "The size must always be 32 bytes. I should clarify it in the documentation in this header.",
+      "parentUuid": "9b7188f0_f4db2a83",
+      "range": {
+        "startLine": 287,
+        "startChar": 8,
+        "endLine": 287,
+        "endChar": 35
+      },
+      "revId": "29e7e5c83db54831d51c0353ea179a0827ec2d51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be970f56_ded1d034",
         "filename": "libs/libvm_payload/include/vm_payload.h",
         "patchSetId": 10
