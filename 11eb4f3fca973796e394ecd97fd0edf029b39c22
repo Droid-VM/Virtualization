@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd40ef03_543b87a1",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 1011,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-18T23:49:43Z",
+      "side": 1,
+      "message": "Switched pas_id to u16 as suggested on the bug.\n\nAlso, these are passed to crosvm as decimal. If you prefer hex or something for readability, it is easy to change.",
+      "parentUuid": "90c49f8e_7b3814ef",
+      "range": {
+        "startLine": 1007,
+        "startChar": 0,
+        "endLine": 1011,
+        "endChar": 14
+      },
+      "revId": "11eb4f3fca973796e394ecd97fd0edf029b39c22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "970ea5de_1c0883ac",
