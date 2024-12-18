@@ -22,6 +22,30 @@
       },
       "revId": "d1c5a05b185d9f9d7a04399fe30fc2192b66f5e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3e942c3_629f64e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-18T18:34:47Z",
+      "side": 1,
+      "message": "I haven\u0027t looked closely, but I think instead of calling just `std::panic::set_hook`, the code in this CL could have called `std::panic::take_hook` and then constructed a new hook that logs + calls the original hook and it would have worked fine. So, it might not be a limitation of the test framework, just a bad `std::panic::set_hook` pattern being copy/pasted around",
+      "parentUuid": "509ddc7a_a5e65be9",
+      "range": {
+        "startLine": 17,
+        "startChar": 69,
+        "endLine": 19,
+        "endChar": 21
+      },
+      "revId": "d1c5a05b185d9f9d7a04399fe30fc2192b66f5e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
