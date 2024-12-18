@@ -123,6 +123,30 @@
       },
       "revId": "8095d02ed6196d52f41ef26a0b95e96ddfe5def3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffde630a_06cefab4",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-12-18T11:14:19Z",
+      "side": 1,
+      "message": "To clarify, I checked `ro.vendor.api_level` in the latest patch rather than `ro.board.api_level`. It didn\u0027t work when checking `ro.board.api_level` in PS1.",
+      "parentUuid": "3c7dcfe5_98a8d5fb",
+      "range": {
+        "startLine": 267,
+        "startChar": 23,
+        "endLine": 267,
+        "endChar": 79
+      },
+      "revId": "8095d02ed6196d52f41ef26a0b95e96ddfe5def3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
