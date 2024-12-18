@@ -1146,6 +1146,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     public void testRunEmptyPayload() throws Exception {
+        assumeUserDebug(); // b/382292481
+
         CommandRunner android = new CommandRunner(getDevice());
 
         // Create the idsig file for the APK
@@ -1631,5 +1633,11 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         String abi = android.run("getprop", "ro.product.cpu.abi");
         assertThat(abi).isNotEmpty();
         assumeTrue("Skipping test as the architecture is not supported", abi.startsWith("arm64"));
+    }
+
+    private void assumeUserDebug() throws Exception {
+        CommandRunner android = new CommandRunner(getDevice());
+        String type = android.run("getprop", "ro.build.type");
+        assumeTrue("Skipping test on user builds", !type.equals("user"));
     }
 }
