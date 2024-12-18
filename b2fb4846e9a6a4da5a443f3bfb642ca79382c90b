@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77b2fec6_41ea4e51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-12-18T10:10:48Z",
+      "side": 1,
+      "message": "Hi Gil,\n\nI think there may be a misunderstanding here. My understanding was that we would reuse `libdiced_open_dice_nostd` as a crate and incorporate it by adding some make rules like this:\n\n```\nMODULE_LIBRARY_DEPS +\u003d \\\n\t$(call FIND_CRATE,diced_open_dice_nostd)\n```\n\nThis approach would be preferable to recreating the compilation process and introducing another variant of open-dice. We already have over 5 upstream open-dice variations and 3 different wrapper libraries in AOSP. Adding another wrapper library would only increase the maintenance burden, which I\u0027d prefer to avoid if possible.",
+      "revId": "b2fb4846e9a6a4da5a443f3bfb642ca79382c90b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
