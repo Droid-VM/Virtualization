@@ -586,8 +586,9 @@ impl VirtualizationService {
         if gdb_port.is_some() {
             check_gdb_allowed(config)?;
         }
-
-        let device_tree_overlay = maybe_create_device_tree_overlay(config, &temporary_directory)?;
+        let instance_id = extract_instance_id(config);
+        let device_tree_overlay =
+            maybe_create_device_tree_overlay(config, &instance_id, &temporary_directory)?;
 
         let debug_config = DebugConfig::new(config);
         let ramdump = if !uses_gki_kernel(config) && debug_config.is_ramdump_needed() {
@@ -846,6 +847,8 @@ impl VirtualizationService {
             balloon: config.balloon,
             usb_config,
             dump_dt_fd,
+            enable_hypervisor_specific_auth_method: config.enableHypervisorSpecificAuthMethod,
+            instance_id,
         };
         let instance = Arc::new(
             VmInstance::new(
@@ -933,6 +936,7 @@ fn extract_vendor_hashtree_digest(config: &VirtualMachineConfig) -> Result<Optio
 
 fn maybe_create_device_tree_overlay(
     config: &VirtualMachineConfig,
+    instance_id: &[u8; 64],
     temporary_directory: &Path,
 ) -> binder::Result<Option<File>> {
     // Currently, VirtMgr adds the host copy of reference DT & untrusted properties
@@ -961,11 +965,9 @@ fn maybe_create_device_tree_overlay(
         vec![]
     };
 
-    let instance_id;
     let key_material;
     let mut untrusted_props = Vec::with_capacity(2);
     if cfg!(llpvm_changes) {
-        instance_id = extract_instance_id(config);
         untrusted_props.push((cstr!("instance-id"), &instance_id[..]));
         let want_updatable = extract_want_updatable(config);
         if want_updatable && is_secretkeeper_supported() {
