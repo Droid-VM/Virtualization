@@ -35,7 +35,7 @@ apex_defaults {
     name: "com.android.virt_common",
     // TODO(jiyong): make it updatable
     updatable: false,
-    future_updatable: false,
+    future_updatable: true,
     platform_apis: true,
 
     manifest: "manifest.json",
@@ -72,6 +72,8 @@ apex_defaults {
         true: "canned_fs_config_sys_nice",
         default: "canned_fs_config",
     }),
+
+    payload_fs_type: "erofs",
 }
 
 vintf_fragment {
