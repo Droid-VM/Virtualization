@@ -820,6 +820,24 @@ impl VirtualizationService {
             .unwrap_or(Ok(UsbConfig { controller: false }))
             .or_binder_exception(ExceptionCode::BAD_PARCELABLE)?;
 
+        let custom_memory_backing_files = config
+            .customMemoryBackingFiles
+            .iter()
+            .map(|x| {
+                Ok((
+                    clone_file(
+                        x.file
+                            .as_ref()
+                            .context("missing CustomMemoryBackingFile FD")
+                            .or_binder_exception(ExceptionCode::ILLEGAL_ARGUMENT)?,
+                    )?
+                    .into(),
+                    x.rangeStart as u64,
+                    x.rangeEnd as u64,
+                ))
+            })
+            .collect::<binder::Result<_>>()?;
+
         // Actually start the VM.
         let crosvm_config = CrosvmConfig {
             cid,
@@ -865,6 +883,7 @@ impl VirtualizationService {
             dump_dt_fd,
             enable_hypervisor_specific_auth_method: config.enableHypervisorSpecificAuthMethod,
             instance_id,
+            custom_memory_backing_files,
         };
         let instance = Arc::new(
             VmInstance::new(
