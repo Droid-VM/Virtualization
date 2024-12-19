@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2a02677_ddc4756e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-12-19T14:18:07Z",
+      "side": 1,
+      "message": "Unsafe Rust LGTM",
+      "revId": "29e7e5c83db54831d51c0353ea179a0827ec2d51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b7188f0_f4db2a83",
@@ -90,6 +107,29 @@
         "startChar": 75,
         "endLine": 294,
         "endChar": 96
+      },
+      "revId": "29e7e5c83db54831d51c0353ea179a0827ec2d51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0914374e_c1fee4b6",
+        "filename": "libs/libvm_payload/src/lib.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-12-19T14:18:07Z",
+      "side": 1,
+      "message": "haven\u0027t seen this syntax before, but I like it 😊\n\nnit: Do you mean to include `[valid]: ptr#safety` here as well as above?",
+      "range": {
+        "startLine": 601,
+        "startChar": 22,
+        "endLine": 601,
+        "endChar": 27
       },
       "revId": "29e7e5c83db54831d51c0353ea179a0827ec2d51",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
