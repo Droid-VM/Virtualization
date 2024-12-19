@@ -139,6 +139,7 @@ pub struct CrosvmConfig {
     pub dump_dt_fd: Option<File>,
     pub enable_hypervisor_specific_auth_method: bool,
     pub instance_id: [u8; 64],
+    pub custom_memory_backing_files: Vec<(OwnedFd, u64, u64)>,
 }
 
 #[derive(Debug)]
@@ -1358,6 +1359,15 @@ fn run_vm(
                 .arg("--vhost-user-fs")
                 .arg(format!("{},tag={}", &shared_path.socket_path, &shared_path.tag));
         }
+    }
+
+    for (fd, range_start, range_end) in config.custom_memory_backing_files {
+        let path = add_preserved_fd(&mut preserved_fds, fd);
+        let addr = range_start;
+        let size = range_end - addr;
+        command
+            .arg("--file-backed-mapping")
+            .arg(format!("{path},addr={addr:#0x},size={size:#0x},rw,ram"));
     }
 
     debug!("Preserving FDs {:?}", preserved_fds);
