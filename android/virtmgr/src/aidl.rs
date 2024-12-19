@@ -821,6 +821,25 @@ impl VirtualizationService {
 
         let detect_hangup = is_app_config && gdb_port.is_none();
 
+        let custom_memory_backing_files = config
+            .customMemoryBackingFiles
+            .iter()
+            .map(|memoryBackingFile| {
+                Ok((
+                    clone_file(
+                        memoryBackingFile
+                            .file
+                            .as_ref()
+                            .context("missing CustomMemoryBackingFile FD")
+                            .or_binder_exception(ExceptionCode::ILLEGAL_ARGUMENT)?,
+                    )?
+                    .into(),
+                    memoryBackingFile.rangeStart as u64,
+                    memoryBackingFile.rangeEnd as u64,
+                ))
+            })
+            .collect::<binder::Result<_>>()?;
+
         // Actually start the VM.
         let crosvm_config = CrosvmConfig {
             cid,
@@ -866,6 +885,7 @@ impl VirtualizationService {
             dump_dt_fd,
             enable_hypervisor_specific_auth_method: config.enableHypervisorSpecificAuthMethod,
             instance_id,
+            custom_memory_backing_files,
         };
         let instance = Arc::new(
             VmInstance::new(
