@@ -18,6 +18,7 @@ package android.system.virtualizationservice;
 import android.system.virtualizationservice.AssignedDevices;
 import android.system.virtualizationservice.AudioConfig;
 import android.system.virtualizationservice.CpuTopology;
+import android.system.virtualizationservice.CustomMemoryBackingFile;
 import android.system.virtualizationservice.DiskImage;
 import android.system.virtualizationservice.DisplayConfig;
 import android.system.virtualizationservice.GpuConfig;
@@ -126,4 +127,7 @@ parcelable VirtualMachineRawConfig {
      * VMs.
      */
     boolean enableHypervisorSpecificAuthMethod;
+
+    /** Custom memfds for a subset of guest memory */
+    CustomMemoryBackingFile[] customMemoryBackingFiles;
 }
