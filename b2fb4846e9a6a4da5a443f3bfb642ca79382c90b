@@ -79,6 +79,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2d6408f1_b980adab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951225
+      },
+      "writtenOn": "2024-12-19T14:12:12Z",
+      "side": 1,
+      "message": "Thanks Alice, I totally understand the maintainability concerns. The alternative here is to write a similar subset of the functionality in this library directly against the `external/open-dice` lib in trusty. I was thinking it would be good for longterm maintainability if we could have all AOSP VMs handling DICE handovers and operations with the same lib, but of course that depends on if we\u0027re comfortable maintaining the extra build rules.\n\n\u003e the new make rules are not covered by presubmit, I\u0027m concerned about long-term maintainability. Not everyone is familiar with the Trusty testing setup\n\nMy intent is to ensure that the build rule is exercised and the tests for this lib are covered in presubmit. Trusty builds run in presubmit and this CL (part of the current topic) includes the trusty test target in test builds aosp/3412946. I\u0027ll follow up to make sure it\u0027s running on presubmit targets.",
+      "parentUuid": "a7bac039_76fdac1a",
+      "revId": "b2fb4846e9a6a4da5a443f3bfb642ca79382c90b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8267dc8c_cccd6f27",
         "filename": "libs/dice/open_dice/bindgen/android/lib.rs",
         "patchSetId": 5
