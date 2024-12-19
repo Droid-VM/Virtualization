@@ -2224,7 +2224,7 @@ static EARLY_VMS_CACHE: LazyLock<Mutex<HashMap<String, Vec<EarlyVm>>>> =
 fn range_for_partition(partition: &str) -> Result<Range<Cid>> {
     match partition {
         "system" => Ok(100..200),
-        "system_ext" | "product" => Ok(200..300),
+        "system_ext" | "product" | "data" => Ok(200..300),
         "vendor" | "odm" => Ok(300..400),
         _ => Err(anyhow!("Early VMs are not supported for {partition}")),
     }
