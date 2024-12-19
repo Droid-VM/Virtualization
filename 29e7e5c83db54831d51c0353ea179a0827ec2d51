@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3e0079bf_7f7b002a",
+        "filename": "libs/libvm_payload/include/vm_payload.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-19T14:55:30Z",
+      "side": 1,
+      "message": "Secretkeeper allows exactly 32 bytes of secrets (as per HAL). Maybe the payload can add padding in cases when it want to store smaller data. I don\u0027t think MM should do that",
+      "parentUuid": "817ab81c_848d192d",
+      "range": {
+        "startLine": 287,
+        "startChar": 8,
+        "endLine": 287,
+        "endChar": 35
+      },
+      "revId": "29e7e5c83db54831d51c0353ea179a0827ec2d51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be970f56_ded1d034",
         "filename": "libs/libvm_payload/include/vm_payload.h",
         "patchSetId": 10
