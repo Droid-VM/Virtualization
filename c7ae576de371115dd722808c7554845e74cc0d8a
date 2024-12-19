@@ -22,6 +22,30 @@
       },
       "revId": "c7ae576de371115dd722808c7554845e74cc0d8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d46cd33_a8187527",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2024-12-19T19:09:49Z",
+      "side": 1,
+      "message": "deleted it. the header still says we use `ENOTSUP` in the unsupported case. i\u0027m leaving that as is for now",
+      "parentUuid": "1f3eb188_7e2271eb",
+      "range": {
+        "startLine": 242,
+        "startChar": 0,
+        "endLine": 243,
+        "endChar": 33
+      },
+      "revId": "c7ae576de371115dd722808c7554845e74cc0d8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
