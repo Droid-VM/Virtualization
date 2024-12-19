@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c5e9abf1_03fde5e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-12-19T09:25:11Z",
+      "side": 1,
+      "message": "The new target from the cl is not exactly an equivalent of `libdiced_open_dice_nostd`. There are several differences:\n\n1. `libdiced_open_dice_nostd` wraps the multi-algorithm version of open-dice lib. It also introduces types like `DiceContext` associated to this version. The new target wraps Ed25519 open-dice and lacks these types.\n\n2. `libdiced_open_dice_nostd` uses a custom `DiceClearMemory` implementation for secure memory handling, while the new target uses the `DiceClearMemory` provided by the upstream open-dice.",
+      "range": {
+        "startLine": 9,
+        "startChar": 26,
+        "endLine": 9,
+        "endChar": 68
+      },
+      "revId": "b2fb4846e9a6a4da5a443f3bfb642ca79382c90b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "77b2fec6_41ea4e51",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
@@ -32,6 +55,70 @@
       "side": 1,
       "message": "Thanks Alice, to my knowledge pulling in a prebuilt crate that was compiled with soong and the Android toolchain is not something we\u0027ve done before in trusty and I\u0027m not sure it\u0027s supported since Android and trusty have their own build toolchains. \n\n`FIND_CRATE` is implemented to search over external deps and doesn\u0027t currently search the AOSP tree [1]. Even if it were to be updated, it\u0027s currently just a convenience wrapper and doesn\u0027t bring in prebuilts. Each dep pulled in by `FIND_CRATE` has its own rules.mk file and is built from source using the trusty build system (e.g. [2]).\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:external/trusty/lk/make/macros.mk;l\u003d19;drc\u003d8c15bc9fc345003fa9d3d8682f581b654c7ddc06\n\n[2] https://cs.android.com/android/platform/superproject/main/+/main:external/rust/android-crates-io/crates/zeroize/rules.mk;drc\u003da992a01e04655e274cf6339b13b2e879bc018594",
       "parentUuid": "77b2fec6_41ea4e51",
+      "revId": "b2fb4846e9a6a4da5a443f3bfb642ca79382c90b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7bac039_76fdac1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-12-19T09:25:11Z",
+      "side": 1,
+      "message": "Thanks Gil for your reply. In fact, this cl introduces a new open-dice wrapper, which differs from all the existing ones. Given the ongoing changes in both upstream dice and this library (e.g., http://pwrev.dev/253672), and that the new make rules are not covered by presubmit, I\u0027m concerned about long-term maintainability. Not everyone is familiar with the Trusty testing setup.\n\nIdeally, we could avoid adding another wrapper and rely on the existing open-dice targets to simplify maintenance. @inseob@google.com and @jaewan@google.com, since you\u0027ve worked on the Trusty build system migration, could you weigh in on whether this is feasible?\n\nIf there\u0027s no alternative, we can proceed with the current approach.",
+      "parentUuid": "1028246b_001045ae",
+      "revId": "b2fb4846e9a6a4da5a443f3bfb642ca79382c90b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8267dc8c_cccd6f27",
+        "filename": "libs/dice/open_dice/bindgen/android/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-12-19T09:25:11Z",
+      "side": 1,
+      "message": "4?",
+      "range": {
+        "startLine": 2,
+        "startChar": 20,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "b2fb4846e9a6a4da5a443f3bfb642ca79382c90b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "002dc4a7_97ccc6ee",
+        "filename": "libs/dice/open_dice/bindgen/android/rules.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-12-19T09:25:11Z",
+      "side": 1,
+      "message": "This function processes a full handover CBOR array, essentially replicating the combined functionality of `DiceAndroidHandoverParse` and `DiceAndroidMainFlow`. Given the existence of these two functions, this one appears redundant. Could we remove it?\n\nSpecifically, this function is only used in the \"multialg\" configuration [1]. Since this specific target does not enable that flag, the function should be unnecessary.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/dice/open_dice/src/bcc.rs;l\u003d132;drc\u003d87fbc4bb3c53c051aa37ee00195672418d5b52fe",
+      "range": {
+        "startLine": 32,
+        "startChar": 1,
+        "endLine": 32,
+        "endChar": 30
+      },
       "revId": "b2fb4846e9a6a4da5a443f3bfb642ca79382c90b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
