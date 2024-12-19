@@ -113,6 +113,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62bc0206_fc2c0c54",
+        "filename": "libs/libvm_payload/include/vm_payload.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-19T18:42:49Z",
+      "side": 1,
+      "message": "As discussed on chat, C doesnt allow for sized array as function parameters. So I\u0027ve added `size`, adding a constraint in doc that only \u002732\u0027 is supported. The impl. checks this and returns appropriate status.",
+      "parentUuid": "3e0079bf_7f7b002a",
+      "range": {
+        "startLine": 287,
+        "startChar": 8,
+        "endLine": 287,
+        "endChar": 35
+      },
+      "revId": "29e7e5c83db54831d51c0353ea179a0827ec2d51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be970f56_ded1d034",
@@ -149,6 +173,30 @@
       "writtenOn": "2024-12-19T14:18:07Z",
       "side": 1,
       "message": "haven\u0027t seen this syntax before, but I like it 😊\n\nnit: Do you mean to include `[valid]: ptr#safety` here as well as above?",
+      "range": {
+        "startLine": 601,
+        "startChar": 22,
+        "endLine": 601,
+        "endChar": 27
+      },
+      "revId": "29e7e5c83db54831d51c0353ea179a0827ec2d51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5f55b32_478199e9",
+        "filename": "libs/libvm_payload/src/lib.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-19T18:42:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0914374e_c1fee4b6",
       "range": {
         "startLine": 601,
         "startChar": 22,
