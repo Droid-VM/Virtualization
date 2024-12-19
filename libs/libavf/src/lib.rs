@@ -23,7 +23,8 @@ use std::time::Duration;
 
 use android_system_virtualizationservice::{
     aidl::android::system::virtualizationservice::{
-        AssignedDevices::AssignedDevices, CpuTopology::CpuTopology, DiskImage::DiskImage,
+        AssignedDevices::AssignedDevices, CpuTopology::CpuTopology,
+        CustomMemoryBackingFile::CustomMemoryBackingFile, DiskImage::DiskImage,
         IVirtualizationService::IVirtualizationService, VirtualMachineConfig::VirtualMachineConfig,
         VirtualMachineRawConfig::VirtualMachineRawConfig,
     },
@@ -254,18 +255,32 @@ pub unsafe extern "C" fn AVirtualMachineRawConfig_setHypervisorSpecificAuthMetho
     0
 }
 
-/// NOT IMPLEMENTED.
+/// Use the specified fd as the backing memfd for a range of the guest physical memory.
 ///
-/// # Returns
-/// It always returns `-ENOTSUP`.
+/// # Safety
+/// `config` must be a pointer returned by `AVirtualMachineRawConfig_create`.
 #[no_mangle]
-pub extern "C" fn AVirtualMachineRawConfig_addCustomMemoryBackingFile(
-    _config: *mut VirtualMachineRawConfig,
-    _fd: c_int,
-    _range_start: u64,
-    _range_end: u64,
+pub unsafe extern "C" fn AVirtualMachineRawConfig_addCustomMemoryBackingFile(
+    config: *mut VirtualMachineRawConfig,
+    fd: c_int,
+    range_start: u64,
+    range_end: u64,
 ) -> c_int {
-    -libc::ENOTSUP
+    // SAFETY: `config` is assumed to be a valid, non-null pointer returned by
+    // AVirtualMachineRawConfig_create. It's the only reference to the object.
+    let config = unsafe { &mut *config };
+
+    let Some(file) = get_file_from_fd(fd) else {
+        return -libc::EINVAL;
+    };
+    config.customMemoryBackingFiles.push(CustomMemoryBackingFile {
+        file: Some(ParcelFileDescriptor::new(file)),
+        // AIDL doesn't support unsigned ints, so we've got to reinterpret the bytes into a signed
+        // int.
+        rangeStart: range_start as i64,
+        rangeEnd: range_end as i64,
+    });
+    0
 }
 
 /// Add device tree overlay blob
