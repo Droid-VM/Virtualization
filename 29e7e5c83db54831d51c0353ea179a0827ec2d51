@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "817ab81c_848d192d",
+        "filename": "libs/libvm_payload/include/vm_payload.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-12-19T14:07:02Z",
+      "side": 1,
+      "message": "This sounds a bit too restrictive. What if payload wants to write less than 32 bytes? Usually the write/read APIs accept the size of the data to be written/read, so I think we should follow this pattern",
+      "parentUuid": "cf961e15_421861aa",
+      "range": {
+        "startLine": 287,
+        "startChar": 8,
+        "endLine": 287,
+        "endChar": 35
+      },
+      "revId": "29e7e5c83db54831d51c0353ea179a0827ec2d51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be970f56_ded1d034",
         "filename": "libs/libvm_payload/include/vm_payload.h",
         "patchSetId": 10
