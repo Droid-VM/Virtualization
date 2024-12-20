@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c3a816f_03282629",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-20T13:56:24Z",
+      "side": 0,
+      "message": "we don\u0027t use this trace point. this was added for the measurement during the syshealth review and never used again.",
+      "parentUuid": "f7bfe0d8_f0086df2",
+      "range": {
+        "startLine": 347,
+        "startChar": 8,
+        "endLine": 347,
+        "endChar": 58
+      },
+      "revId": "82ffe1175fc9846ec14847cb14fe2c54187eef12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b15617e_0321d2c2",
@@ -61,6 +85,30 @@
       "side": 0,
       "message": "or we can ship the image including aosp/3427140(because it\u0027s still beta...)",
       "parentUuid": "7b15617e_0321d2c2",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 65
+      },
+      "revId": "82ffe1175fc9846ec14847cb14fe2c54187eef12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61ac212a_2067c903",
+        "filename": "libs/debian_service/proto/DebianService.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-20T13:56:24Z",
+      "side": 0,
+      "message": "let\u0027s not make this backwards compatible, as we are still in early stage. I wish we remove all these grpc methods in the future.",
+      "parentUuid": "b5590c43_7db01e43",
       "range": {
         "startLine": 26,
         "startChar": 0,
