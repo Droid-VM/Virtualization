@@ -66,7 +66,7 @@ avb_add_hash_footer {
             enabled: true,
         },
         arm64: {
-            src: ":trusty-test-lk.elf",
+            src: ":trusty-lk.elf",
             enabled: true,
         },
     },
