@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9eb5a28_2a08a615",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-20T11:23:12Z",
+      "side": 1,
+      "message": "nits: remoteIpAddress(or vmIpaAddress) to avoid confusion?",
+      "range": {
+        "startLine": 294,
+        "startChar": 42,
+        "endLine": 294,
+        "endChar": 51
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "126a8539_a2d7d97e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+              "range": {
+                "startLine": 294,
+                "startChar": 0,
+                "endLine": 295,
+                "endChar": 0
+              },
+              "replacement": "    private void startDebianServer(String vmIpAddress) {\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/VmLauncherService.java",
+              "range": {
+                "startLine": 308,
+                "startChar": 0,
+                "endLine": 309,
+                "endChar": 0
+              },
+              "replacement": "                                        remoteAddr.getAddress().getHostAddress(), vmIpAddress)) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ade89e21805af7015ca5be591252d94e7de30c15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
