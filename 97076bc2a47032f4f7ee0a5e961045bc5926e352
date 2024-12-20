@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1af8c842_15027cb2",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-20T13:18:35Z",
+      "side": 1,
+      "message": "rephrased it a bit",
+      "parentUuid": "b63aee30_cf68a418",
+      "range": {
+        "startLine": 79,
+        "startChar": 54,
+        "endLine": 79,
+        "endChar": 59
+      },
+      "revId": "97076bc2a47032f4f7ee0a5e961045bc5926e352",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e40d1e8_8b9ea7fc",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-12-20T13:14:38Z",
       "side": 1,
       "message": "If `instanceId` points to a 64-byte buffer, what does `instanceIdSize` represent?",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 61
+      },
+      "revId": "97076bc2a47032f4f7ee0a5e961045bc5926e352",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fed0c9f_1f715fa9",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-20T13:18:35Z",
+      "side": 1,
+      "message": "Native API headers do not support sized arrays, so it is expected to send size along with the pointer to first element, even if the size is contraint.",
+      "parentUuid": "4e40d1e8_8b9ea7fc",
       "range": {
         "startLine": 82,
         "startChar": 0,
