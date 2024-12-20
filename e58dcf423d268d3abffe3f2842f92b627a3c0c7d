@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e92b175c_33dda9b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-20T11:25:53Z",
+      "side": 1,
+      "message": "forwarder_guest_launcher relies on 192.168.0.1 [1], we need to let it find gateway ip addr runtime[2]\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/build/debian/fai_config/files/etc/systemd/system/forwarder_guest_launcher.service/AVF?q\u003d192.168.0%20f:debian\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/guest/ip_addr_reporter/src/main.rs;l\u003d21",
+      "revId": "e58dcf423d268d3abffe3f2842f92b627a3c0c7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
