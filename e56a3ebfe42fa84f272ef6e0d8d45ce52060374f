@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "12ef3792_3c383bd3",
+        "filename": "tests/vts/AndroidTest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-12-20T08:34:28Z",
+      "side": 1,
+      "message": "Do we need vts tag here as well like [1]?\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/tests/testapk/AndroidTest.xml;l\u003d18;drc\u003d57de25519481e69a747314f7d3ab559c5645ed8d",
+      "range": {
+        "startLine": 16,
+        "startChar": 50,
+        "endLine": 16,
+        "endChar": 51
+      },
+      "revId": "e56a3ebfe42fa84f272ef6e0d8d45ce52060374f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9493d079_39174f23",
         "filename": "tests/vts/src/vts_libavf_test.rs",
         "patchSetId": 1
@@ -14,6 +37,93 @@
       "writtenOn": "2024-12-20T08:05:36Z",
       "side": 1,
       "message": "Do you mean replacing this path? The unsigned rialto cannot be loaded in protected mode due to the lack of AVB footer.",
+      "revId": "e56a3ebfe42fa84f272ef6e0d8d45ce52060374f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e9c02e2_6bae034f",
+        "filename": "tests/vts/src/vts_libavf_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-12-20T08:34:28Z",
+      "side": 1,
+      "message": "The test passes on local as it is in PS1. Why do you want to change this to unsigned_rialto?",
+      "parentUuid": "9493d079_39174f23",
+      "revId": "e56a3ebfe42fa84f272ef6e0d8d45ce52060374f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "652d1385_15642b4f",
+        "filename": "tests/vts/src/vts_libavf_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-12-20T08:34:28Z",
+      "side": 1,
+      "message": "not urgent: Can we create a rust wrapper for this NDK library to facilitate the usage in Rust?",
+      "range": {
+        "startLine": 114,
+        "startChar": 8,
+        "endLine": 114,
+        "endChar": 33
+      },
+      "revId": "e56a3ebfe42fa84f272ef6e0d8d45ce52060374f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f7f167e_d332d738",
+        "filename": "tests/vts/src/vts_libavf_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-12-20T08:34:28Z",
+      "side": 1,
+      "message": "Since the host is a vsock server, maybe it\u0027s better to call this function before starting the VM so the server will be ready before the VM attempts to connect to it?",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 62
+      },
+      "revId": "e56a3ebfe42fa84f272ef6e0d8d45ce52060374f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fb7cf3e_35fb19f9",
+        "filename": "tests/vts/src/vts_libavf_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-12-20T08:34:28Z",
+      "side": 1,
+      "message": "super-nit: Use `ensure!` instead for easier reading?",
+      "range": {
+        "startLine": 154,
+        "startChar": 4,
+        "endLine": 157,
+        "endChar": 0
+      },
       "revId": "e56a3ebfe42fa84f272ef6e0d8d45ce52060374f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
