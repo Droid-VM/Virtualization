@@ -97,6 +97,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f746c3b7_fa967a8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-12-20T09:48:38Z",
+      "side": 1,
+      "message": "Quick update: @inseob@google.com may have a more efficient way to patch Android.bp for Trusty to reuse one existing target as we talked offline today. He will provide more details on Monday.\n\nMeanwhile, we are currently rolling out changes on profile name in the open-dice upstream (aosp/3426899). @seanmthomas@google.com is working on it.\n\nThis may have implications for this cl.\n\nThanks for your patience, Gil! 🙏",
+      "parentUuid": "2d6408f1_b980adab",
+      "revId": "b2fb4846e9a6a4da5a443f3bfb642ca79382c90b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8267dc8c_cccd6f27",
         "filename": "libs/dice/open_dice/bindgen/android/lib.rs",
         "patchSetId": 5
