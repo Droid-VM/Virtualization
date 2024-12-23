@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9630d9d1_602a5b2f",
+        "filename": "guest/microdroid_manager/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-23T11:48:53Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "3710b4de_4323b4ac",
+      "range": {
+        "startLine": 350,
+        "startChar": 57,
+        "endLine": 350,
+        "endChar": 167
+      },
+      "revId": "16e12db4d4a99b6f9a1d2fea4e227a3bf101d94b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3f2cf7f_31fb1a31",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a53fbf9_a964448c",
+        "filename": "libs/libvm_payload/include/vm_payload.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-23T11:48:53Z",
+      "side": 1,
+      "message": "Returning bool SGTM. Made the changes, PTAL.",
+      "parentUuid": "d3f2cf7f_31fb1a31",
+      "range": {
+        "startLine": 318,
+        "startChar": 39,
+        "endLine": 318,
+        "endChar": 69
+      },
+      "revId": "16e12db4d4a99b6f9a1d2fea4e227a3bf101d94b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49ae6bdc_9aa87694",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-12-20T15:41:09Z",
       "side": 1,
       "message": "The isNewInstance should never return an error, right? If so, i think it should be fine to panic in case an error is returned, since it means that microdroid_manager crashed",
+      "range": {
+        "startLine": 678,
+        "startChar": 3,
+        "endLine": 680,
+        "endChar": 6
+      },
+      "revId": "16e12db4d4a99b6f9a1d2fea4e227a3bf101d94b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4d42af7_cdb28def",
+        "filename": "libs/libvm_payload/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2024-12-23T11:48:53Z",
+      "side": 1,
+      "message": "Right! Changed it now. Thanks",
+      "parentUuid": "49ae6bdc_9aa87694",
       "range": {
         "startLine": 678,
         "startChar": 3,
