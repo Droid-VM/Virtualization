@@ -92,26 +92,6 @@ pub(crate) fn get_num_cpus() -> Option<usize> {
     }
 }
 
-fn get_num_vcpus(cpu_topology: CpuTopology, custom_vcpu_count: Option<i32>) -> i32 {
-    match cpu_topology {
-        CpuTopology::ONE_CPU => 1,
-        CpuTopology::MATCH_HOST => {
-            get_num_cpus().and_then(|v| v.try_into().ok()).unwrap_or_else(|| {
-                warn!("Failed to determine the number of CPUs in the host");
-                INVALID_NUM_CPUS
-            })
-        }
-        CpuTopology::CUSTOM => custom_vcpu_count.unwrap_or_else(|| {
-            warn!("AppConfig doesn't support CpuTopology::CUSTOM");
-            INVALID_NUM_CPUS
-        }),
-        _ => {
-            warn!("invalid CpuTopology: {cpu_topology:?}");
-            INVALID_NUM_CPUS
-        }
-    }
-}
-
 /// Write the stats of VMCreation to statsd
 /// The function creates a separate thread which waits for statsd to start to push atom
 pub fn write_vm_creation_stats(
@@ -135,22 +115,31 @@ pub fn write_vm_creation_stats(
             binder_exception_code = e.exception_code() as i32;
         }
     }
-
-    let (vm_identifier, config_type, num_cpus, memory_mib, apexes) = match config {
+    let (vm_identifier, config_type, cpu_topology, memory_mib, apexes) = match config {
         VirtualMachineConfig::AppConfig(config) => (
             config.name.clone(),
             vm_creation_requested::ConfigType::VirtualMachineAppConfig,
-            get_num_vcpus(config.cpuTopology, None),
+            config.cpuTopology,
             config.memoryMib,
             get_apex_list(config),
         ),
         VirtualMachineConfig::RawConfig(config) => (
             config.name.clone(),
             vm_creation_requested::ConfigType::VirtualMachineRawConfig,
-            get_num_vcpus(config.cpuTopology, Some(config.customVcpuCount)),
+            config.cpuTopology,
             config.memoryMib,
             String::new(),
         ),
+    };
+
+    let num_cpus: i32 = match cpu_topology {
+        CpuTopology::MATCH_HOST => {
+            get_num_cpus().and_then(|v| v.try_into().ok()).unwrap_or_else(|| {
+                warn!("Failed to determine the number of CPUs in the host");
+                INVALID_NUM_CPUS
+            })
+        }
+        _ => 1,
     };
 
     let atom = AtomVmCreationRequested {
