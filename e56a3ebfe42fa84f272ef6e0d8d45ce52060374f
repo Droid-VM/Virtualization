@@ -220,6 +220,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e82f897d_3de195d6",
+        "filename": "tests/vts/src/vts_libavf_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-12-24T06:32:36Z",
+      "side": 1,
+      "message": "We don\u0027t need it. It\u0027s just for convenience for Rust clients.\n\n\u003e Vendor can\u0027t use it\n\nVendors can use it if they write their clients with Rust.\n\nAnyway, I don\u0027t think we should add such library with this change, so let me resolve.",
+      "parentUuid": "e2cd43ad_5521ce41",
+      "range": {
+        "startLine": 114,
+        "startChar": 8,
+        "endLine": 114,
+        "endChar": 33
+      },
+      "revId": "e56a3ebfe42fa84f272ef6e0d8d45ce52060374f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f7f167e_d332d738",
