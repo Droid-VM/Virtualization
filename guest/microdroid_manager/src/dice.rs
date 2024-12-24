@@ -153,7 +153,8 @@ fn format_payload_config_descriptor(
             subcomponents.into_iter().map(Subcomponent::into_value).collect::<Result<Vec<_>>>()?;
         map.push((cbor!(-71002)?, cbor!(values)?));
     }
-
+    // Add a placeholder security version as it is required by the open-dice profile "Android.16"
+    map.push((cbor!(-70005)?, cbor!(0)?));
     Ok(Value::Map(map).to_vec()?)
 }
 
