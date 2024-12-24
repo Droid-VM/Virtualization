@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c611c2ad_48afb04a",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/CertificateUtils.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-12-24T07:25:37Z",
+      "side": 1,
+      "message": "Returning non-null value?",
+      "range": {
+        "startLine": 43,
+        "startChar": 26,
+        "endLine": 43,
+        "endChar": 51
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "374a2c67_b2ede30d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/CertificateUtils.kt",
+              "range": {
+                "startLine": 43,
+                "startChar": 0,
+                "endLine": 44,
+                "endChar": 0
+              },
+              "replacement": "    fun createOrGetKey(): KeyStore.PrivateKeyEntry {\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/CertificateUtils.kt",
+              "range": {
+                "startLine": 65,
+                "startChar": 0,
+                "endLine": 66,
+                "endChar": 0
+              },
+              "replacement": "            return (ks.getEntry(ALIAS, null) as KeyStore.PrivateKeyEntry)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "37274f628b76ae62b31bb49213ace2e69af6961f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3307319_93ba102e",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/CertificateUtils.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-12-24T07:25:37Z",
+      "side": 1,
+      "message": "Doesn\u0027t need to introduce this variable.",
+      "range": {
+        "startLine": 92,
+        "startChar": 12,
+        "endLine": 92,
+        "endChar": 24
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "30be3fff_33f8d792",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/CertificateUtils.kt",
+              "range": {
+                "startLine": 92,
+                "startChar": 0,
+                "endLine": 94,
+                "endChar": 0
+              },
+              "replacement": "        val certFile \u003d File(context.getFilesDir(), \"ca.crt\")\n"
+            }
+          ]
+        }
+      ],
+      "revId": "37274f628b76ae62b31bb49213ace2e69af6961f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
