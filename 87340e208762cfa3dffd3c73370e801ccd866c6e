@@ -16,6 +16,47 @@
       "message": "Dear Jiyong and Inseob,\n\nI exposed CID just to follow the `VmCallback`\u0027s signature, but I\u0027m not sure whether we should do so. Currently we wouldn\u0027t need it at all, but adding it later would be painful change. Do you have a suggestion here?",
       "revId": "87340e208762cfa3dffd3c73370e801ccd866c6e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40d9d729_fc975290",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-24T11:22:54Z",
+      "side": 1,
+      "message": "I\u0027ve made a suggestion.",
+      "parentUuid": "47dd79e0_88bd3d38",
+      "revId": "87340e208762cfa3dffd3c73370e801ccd866c6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c729752_7c71c673",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-24T11:22:54Z",
+      "side": 1,
+      "message": "This shoould be `AVirtualMachine* vm`",
+      "range": {
+        "startLine": 314,
+        "startChar": 44,
+        "endLine": 314,
+        "endChar": 55
+      },
+      "revId": "87340e208762cfa3dffd3c73370e801ccd866c6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
