@@ -244,6 +244,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc0354b5_ac14ec2a",
+        "filename": "tests/vts/src/vts_libavf_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-12-26T17:38:51Z",
+      "side": 1,
+      "message": "If someone were to write a Rust wrapper, the way this would work would be:\n\n1. LLNDK-marked copy of `libavf`\n2. Non-stably marked `libavf_rust` or whatever you choose to have it\n\nThis would produce two variants, one for vendor and one for system. The vendors would be able to use this library, and the vendor variant of `libavf_rust` would ship inside the vendor image. The vendor variant would rely on the stability guarantees of `libavf`\u0027s LLNDK variant.",
+      "parentUuid": "e82f897d_3de195d6",
+      "range": {
+        "startLine": 114,
+        "startChar": 8,
+        "endLine": 114,
+        "endChar": 33
+      },
+      "revId": "e56a3ebfe42fa84f272ef6e0d8d45ce52060374f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f7f167e_d332d738",
