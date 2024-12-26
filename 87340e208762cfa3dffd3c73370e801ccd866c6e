@@ -136,6 +136,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5828a84b_d2a42257",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2024-12-26T09:56:16Z",
+      "side": 1,
+      "message": "vm is not a user-provided context object.\n\nSee AAudioStreamBuilder_setDataCallback as a counter example.\n\n```\nAAUDIO_API void AAudioStreamBuilder_setDataCallback(\n  AAudioStreamBuilder *_Nonnull builder,\n  AAudioStream_dataCallback _Nullable callback,\n  void *_Nullable userData\n)\n\naaudio_data_callback_result_t(* AAudioStream_dataCallback)(AAudioStream *_Nonnull stream, void *_Nullable userData, void *_Nonnull audioData, int32_t numFrames)\n```\n\nhere, the `stream` parameter corresponds to the `vm` parameter in our case. we don\u0027t have `userData`, because registering the same callback multiple times for the same VM object doesn\u0027t make sense and therefore we don\u0027t need to distinguish those.",
+      "parentUuid": "47e518f8_a72a0afa",
+      "range": {
+        "startLine": 314,
+        "startChar": 44,
+        "endLine": 314,
+        "endChar": 55
+      },
+      "revId": "87340e208762cfa3dffd3c73370e801ccd866c6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dcdcdfdb_91b9b927",
         "filename": "libs/libavf/include/android/virtualization.h",
         "patchSetId": 3
