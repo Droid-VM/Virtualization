@@ -28,4 +28,18 @@
     <test class="com.android.compatibility.common.tradefed.testtype.JarHostTest" >
         <option name="jar" value="MicrodroidHostTestCases.jar" />
     </test>
+<<<<<<< HEAD   (2dee62 DO NOT MERGE: Separate CTS/VTS/general tests into different )
+||||||| BASE
+
+    <!-- Controller that will skip the module if a native bridge situation is detected -->
+    <!-- For example: module wants to run arm and device is x86 -->
+    <object type="module_controller" class="com.android.tradefed.testtype.suite.module.NativeBridgeModuleController" />
+=======
+
+    <!-- Controller that will skip the module if a native bridge situation is detected -->
+    <!-- For example: module wants to run arm and device is x86 -->
+    <object type="module_controller" class="com.android.tradefed.testtype.suite.module.NativeBridgeModuleController" />
+
+    <!-- PLACEHOLDER_FOR_ANNOTATION -->
+>>>>>>> CHANGE (adb273 Split MicrodroidHostTestCases for CTS and VTS)
 </configuration>
