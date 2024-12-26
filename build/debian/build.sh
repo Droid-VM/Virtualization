@@ -373,12 +373,12 @@ debian_version=bookworm
 config_space=${debian_cloud_image}/config_space/${debian_version}
 resources_dir=${debian_cloud_image}/src/debian_cloud_images/resources
 arch="$(uname -m)"
-vm_config="$(realpath $(dirname "$0"))/vm_config.json.${arch}"
 mode=debug
 save_workdir=0
 use_custom_kernel=0
 
 parse_options "$@"
+vm_config="$(realpath $(dirname "$0"))/vm_config.json.${arch}"
 check_sudo
 install_prerequisites
 download_debian_cloud_image
