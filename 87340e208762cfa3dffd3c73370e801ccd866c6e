@@ -57,6 +57,142 @@
       },
       "revId": "87340e208762cfa3dffd3c73370e801ccd866c6e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e979e17_991fb5c4",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-12-26T06:37:04Z",
+      "side": 1,
+      "message": "Callbacks should follow a AClassName_callbackNameCallback naming convention. go/android-ndk-api-guidelines#naming",
+      "range": {
+        "startLine": 314,
+        "startChar": 15,
+        "endLine": 314,
+        "endChar": 42
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "fd143c62_73e0ced6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 314,
+                "startChar": 0,
+                "endLine": 315,
+                "endChar": 0
+              },
+              "replacement": "typedef void (*AVirtualMachine_stopCallback)(int32_t cid, enum AVirtualMachineStopReason reason);\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 344,
+                "startChar": 0,
+                "endLine": 345,
+                "endChar": 0
+              },
+              "replacement": "                              const AVirtualMachine_stopCallback _Nullable callback)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "87340e208762cfa3dffd3c73370e801ccd866c6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47e518f8_a72a0afa",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-12-26T06:37:04Z",
+      "side": 1,
+      "message": "I think we should use `void*`, as callbacks should take a `void*` for caller-provided context based on the guideline. go/android-ndk-api-guidelines#callbacks-void",
+      "parentUuid": "8c729752_7c71c673",
+      "range": {
+        "startLine": 314,
+        "startChar": 44,
+        "endLine": 314,
+        "endChar": 55
+      },
+      "revId": "87340e208762cfa3dffd3c73370e801ccd866c6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcdcdfdb_91b9b927",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2024-12-26T06:37:04Z",
+      "side": 1,
+      "message": "Please add `AVirtualMachine_setStopCallback` or `AVirtualMachine_registerStopCallback` / `AVritualMachine_unregisterStopCallback`. go/android-ndk-api-guidelines#callbacks-setcallback, go/android-ndk-api-guidelines#callbacks-register-unregister, rather than adding parameters to `createRaw` function.",
+      "range": {
+        "startLine": 340,
+        "startChar": 0,
+        "endLine": 345,
+        "endChar": 28
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c154fb52_1f927040",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 335,
+                "startChar": 0,
+                "endLine": 336,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 343,
+                "startChar": 0,
+                "endLine": 346,
+                "endChar": 0
+              },
+              "replacement": "                              AVirtualMachine* _Null_unspecified* _Nonnull vm) __INTRODUCED_IN(36);\n"
+            },
+            {
+              "path": "libs/libavf/include/android/virtualization.h",
+              "range": {
+                "startLine": 418,
+                "startChar": 0,
+                "endLine": 418,
+                "endChar": 0
+              },
+              "replacement": "/**\n * Set a callback to be called when VM stops.\n *\n * \\param vm a handle on a virtual machine.\n * \\param callback a callback to be called when VM stops.\n *\n * \\return If successful, it returns 0. Otherwise, it returns `-EINVAL`.\n */\nint AVirtualMachine_setStopCallback(AVirtualMachine* _Nonnull vm,\n                                    const AVirtualMachineStopCallback _Nullable callback)\n        __INTRODUCED_IN(36);\n\n/**\n * Unset a callback to be called when VM stops.\n *\n * \\param vm a handle on a virtual machine.\n *\n * \\return If successful, it returns 0. Otherwise, it returns `-EINVAL`.\n */\nint AVirtualMachine_unsetStopCallback(AVirtualMachine* _Nonnull vm) __INTRODUCED_IN(36);\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "87340e208762cfa3dffd3c73370e801ccd866c6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
