@@ -73,6 +73,9 @@ java_test_host {
     defaults: ["MicrodroidHostTestCases.default"],
     test_config: ":MicrodroidHostTestCases.CTS.config",
     test_suites: ["cts"],
+    test_options: {
+        test_suite_tag: ["cts"],
+    },
     device_common_data: DEVICE_DATA,
     data_native_bins: BINS,
 }
@@ -82,6 +85,9 @@ java_test_host {
     defaults: ["MicrodroidHostTestCases.default"],
     test_config: ":MicrodroidHostTestCases.VTS.config",
     test_suites: ["vts"],
+    test_options: {
+        test_suite_tag: ["vts"],
+    },
     device_common_data: DEVICE_DATA,
     data_native_bins: BINS,
 }
@@ -91,6 +97,9 @@ java_test_host {
     defaults: ["MicrodroidHostTestCases.default"],
     test_config: ":MicrodroidHostTestCases.GTS.config",
     test_suites: ["gts"],
+    test_options: {
+        test_suite_tag: ["gts"],
+    },
     device_common_data: DEVICE_DATA,
     data_native_bins: BINS,
 }

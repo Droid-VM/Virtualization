@@ -82,6 +82,9 @@ android_test {
     defaults: ["MicrodroidVersionsTestAppDefaults"],
     manifest: "AndroidManifestV5.xml",
     test_suites: ["cts"],
+    test_options: {
+        test_suite_tag: ["cts"],
+    },
     test_config: ":MicrodroidTestApp.CTS.config",
     data: DATA,
 }
@@ -91,6 +94,9 @@ android_test {
     defaults: ["MicrodroidVersionsTestAppDefaults"],
     manifest: "AndroidManifestV5.xml",
     test_suites: ["vts"],
+    test_options: {
+        test_suite_tag: ["vts"],
+    },
     test_config: ":MicrodroidTestApp.VTS.config",
     data: DATA,
 }
@@ -100,6 +106,9 @@ android_test {
     defaults: ["MicrodroidVersionsTestAppDefaults"],
     manifest: "AndroidManifestV5.xml",
     test_suites: ["gts"],
+    test_options: {
+        test_suite_tag: ["gts"],
+    },
     test_config: ":MicrodroidTestApp.GTS.config",
     data: DATA,
 }
