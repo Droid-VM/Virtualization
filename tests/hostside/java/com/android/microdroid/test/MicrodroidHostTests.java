@@ -39,6 +39,15 @@ import android.cts.statsdatom.lib.ConfigUtils;
 import android.cts.statsdatom.lib.ReportUtils;
 
 import com.android.compatibility.common.util.CddTest;
+<<<<<<< HEAD   (2dee62 DO NOT MERGE: Separate CTS/VTS/general tests into different )
+||||||| BASE
+import com.android.compatibility.common.util.PropertyUtil;
+import com.android.compatibility.common.util.VsrTest;
+=======
+import com.android.compatibility.common.util.GmsTest;
+import com.android.compatibility.common.util.PropertyUtil;
+import com.android.compatibility.common.util.VsrTest;
+>>>>>>> CHANGE (e4e145 Annotate tests accordingly)
 import com.android.microdroid.test.common.ProcessUtil;
 import com.android.microdroid.test.host.CommandRunner;
 import com.android.microdroid.test.host.MicrodroidHostTestCaseBase;
@@ -417,6 +426,13 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     @CddTest
+<<<<<<< HEAD   (2dee62 DO NOT MERGE: Separate CTS/VTS/general tests into different )
+||||||| BASE
+    @VsrTest(requirements = {"VSR-7.1-001.008"})
+=======
+    @GmsTest(requirements = {"GMS-3-7.1-002", "GMS-VSR-7.1-001.006"})
+    @VsrTest(requirements = {"VSR-7.1-001.007"})
+>>>>>>> CHANGE (e4e145 Annotate tests accordingly)
     public void UpgradedPackageIsAcceptedWithSecretkeeper() throws Exception {
         assumeUpdatableVmSupported();
         getDevice().uninstallPackage(PACKAGE_NAME);
@@ -432,6 +448,13 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     @CddTest
+<<<<<<< HEAD   (2dee62 DO NOT MERGE: Separate CTS/VTS/general tests into different )
+||||||| BASE
+    @VsrTest(requirements = {"VSR-7.1-001.008"})
+=======
+    @GmsTest(requirements = {"GMS-3-7.1-002", "GMS-VSR-7.1-001.006"})
+    @VsrTest(requirements = {"VSR-7.1-001.007"})
+>>>>>>> CHANGE (e4e145 Annotate tests accordingly)
     public void DowngradedPackageIsRejectedProtectedVm() throws Exception {
         assumeProtectedVm(); // Rollback protection is provided only for protected VM.
 
@@ -477,8 +500,20 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+<<<<<<< HEAD   (2dee62 DO NOT MERGE: Separate CTS/VTS/general tests into different )
     @CddTest(requirements = {"9.17/C-2-1", "9.17/C-2-2", "9.17/C-2-6"})
     public void protectedVmRunsPvmfw() throws Exception {
+||||||| BASE
+    @Parameters(method = "osVersions")
+    @TestCaseName("{method}_os_{0}")
+    @CddTest(requirements = {"9.17/C-2-1", "9.17/C-2-2", "9.17/C-2-6"})
+    public void protectedVmRunsPvmfw(String os) throws Exception {
+=======
+    @Parameters(method = "osVersions")
+    @TestCaseName("{method}_os_{0}")
+    @GmsTest(requirements = {"GMS-3-7.1-010"})
+    public void protectedVmRunsPvmfw(String os) throws Exception {
+>>>>>>> CHANGE (e4e145 Annotate tests accordingly)
         // Arrange
         assumeProtectedVm();
         final String configPath = "assets/vm_config_apex.json";
@@ -506,10 +541,28 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+<<<<<<< HEAD   (2dee62 DO NOT MERGE: Separate CTS/VTS/general tests into different )
     @CddTest(requirements = {"9.17/C-2-1", "9.17/C-2-2", "9.17/C-2-6"})
     public void protectedVmWithImageSignedWithDifferentKeyFailsToVerifyPayload() throws Exception {
         // Arrange
         assumeProtectedVm();
+||||||| BASE
+    @Parameters(method = "osVersions")
+    @TestCaseName("{method}_os_{0}")
+    @CddTest(requirements = {"9.17/C-2-1", "9.17/C-2-2", "9.17/C-2-5", "9.17/C-2-6"})
+    public void protectedVmWithImageSignedWithDifferentKeyFailsToVerifyPayload(String os)
+            throws Exception {
+        assumeKernelSupported(os);
+        assumeVmTypeSupported(os, true);
+=======
+    @Parameters(method = "osVersions")
+    @TestCaseName("{method}_os_{0}")
+    @GmsTest(requirements = {"GMS-3-7.1-003", "GMS-3-7.1-010"})
+    public void protectedVmWithImageSignedWithDifferentKeyFailsToVerifyPayload(String os)
+            throws Exception {
+        assumeKernelSupported(os);
+        assumeVmTypeSupported(os, true);
+>>>>>>> CHANGE (e4e145 Annotate tests accordingly)
         File key = findTestFile("test.com.android.virt.pem");
 
         // Act
@@ -531,8 +584,20 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+<<<<<<< HEAD   (2dee62 DO NOT MERGE: Separate CTS/VTS/general tests into different )
     @CddTest(requirements = {"9.17/C-2-2", "9.17/C-2-6"})
     public void testBootSucceedsWhenNonProtectedVmStartsWithImagesSignedWithDifferentKey()
+||||||| BASE
+    @Parameters(method = "osVersions")
+    @TestCaseName("{method}_os_{0}")
+    @CddTest(requirements = {"9.17/C-2-2", "9.17/C-2-6"})
+    public void testBootSucceedsWhenNonProtectedVmStartsWithImagesSignedWithDifferentKey(String os)
+=======
+    @Parameters(method = "osVersions")
+    @TestCaseName("{method}_os_{0}")
+    @GmsTest(requirements = {"GMS-3-7.1-003", "GMS-3-7.1-010"})
+    public void testBootSucceedsWhenNonProtectedVmStartsWithImagesSignedWithDifferentKey(String os)
+>>>>>>> CHANGE (e4e145 Annotate tests accordingly)
             throws Exception {
         assumeNonProtectedVm();
         File key = findTestFile("test.com.android.virt.pem");
@@ -551,8 +616,20 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+<<<<<<< HEAD   (2dee62 DO NOT MERGE: Separate CTS/VTS/general tests into different )
     @CddTest(requirements = {"9.17/C-2-2", "9.17/C-2-6"})
     public void testBootFailsWhenVbMetaDigestDoesNotMatchBootconfig() throws Exception {
+||||||| BASE
+    @Parameters(method = "osVersions")
+    @TestCaseName("{method}_os_{0}")
+    @CddTest(requirements = {"9.17/C-2-2", "9.17/C-2-5", "9.17/C-2-6"})
+    public void testBootFailsWhenVbMetaDigestDoesNotMatchBootconfig(String os) throws Exception {
+=======
+    @Parameters(method = "osVersions")
+    @TestCaseName("{method}_os_{0}")
+    @GmsTest(requirements = {"GMS-3-7.1-006"})
+    public void testBootFailsWhenVbMetaDigestDoesNotMatchBootconfig(String os) throws Exception {
+>>>>>>> CHANGE (e4e145 Annotate tests accordingly)
         // protectedVmWithImageSignedWithDifferentKeyRunsPvmfw() is the protected case.
         assumeNonProtectedVm();
         // Sign everything with key1 except vbmeta
@@ -919,8 +996,29 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+<<<<<<< HEAD   (2dee62 DO NOT MERGE: Separate CTS/VTS/general tests into different )
     @CddTest(requirements = {"9.17/C-1-1", "9.17/C-1-2", "9.17/C/1-3"})
     public void testMicrodroidBoots() throws Exception {
+||||||| BASE
+    @Parameters(method = "params")
+    @TestCaseName("{method}_protectedVm_{0}_os_{1}")
+    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-1-2", "9.17/C/1-3"})
+    public void testMicrodroidBoots(boolean protectedVm, String os) throws Exception {
+        // Preconditions
+        assumeKernelSupported(os);
+        assumeVmTypeSupported(os, protectedVm);
+
+=======
+    @Parameters(method = "params")
+    @TestCaseName("{method}_protectedVm_{0}_os_{1}")
+    @CddTest
+    @GmsTest(requirements = {"GMS-3-7.1-001.002"})
+    public void testMicrodroidBoots(boolean protectedVm, String os) throws Exception {
+        // Preconditions
+        assumeKernelSupported(os);
+        assumeVmTypeSupported(os, protectedVm);
+
+>>>>>>> CHANGE (e4e145 Annotate tests accordingly)
         final String configPath = "assets/vm_config.json"; // path inside the APK
         testMicrodroidBootsWithBuilder(
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
@@ -975,6 +1073,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+    @CddTest
     public void testPathToBinaryIsRejected() throws Exception {
         CommandRunner android = new CommandRunner(getDevice());
 
@@ -1011,8 +1110,140 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         assertThat(ret).contains("Payload binary name must not specify a path");
     }
 
+<<<<<<< HEAD   (2dee62 DO NOT MERGE: Separate CTS/VTS/general tests into different )
+||||||| BASE
+    private boolean hasAppPackage(String pkgName, CommandRunner android) throws DeviceNotAvailableException {
+        String hasPackage =
+        android.run(
+                "pm list package | grep -w " + pkgName + " 1> /dev/null" + "; echo $?");
+        if (hasPackage.equals("0")) {
+            return true;
+        }
+
+        return false;
+    }
+
     @Test
-    @CddTest(requirements = {"9.17/C-2-2", "9.17/C-2-6"})
+    public void testRunEmptyPayload() throws Exception {
+        CommandRunner android = new CommandRunner(getDevice());
+
+        // Create the idsig file for the APK
+        String apkPath;
+        if (hasAppPackage(EMPTY_AOSP_PACKAGE_NAME, android))
+            apkPath = getPathForPackage(EMPTY_AOSP_PACKAGE_NAME);
+        else
+            apkPath = getPathForPackage(EMPTY_PACKAGE_NAME);
+
+        final String idSigPath = TEST_ROOT + "idsig";
+        final String instanceImgPath = TEST_ROOT + "instance.img";
+
+        android.run(VIRT_APEX + "bin/vm", "create-idsig", apkPath, idSigPath);
+
+        List<String> cmd =
+                new ArrayList<>(
+                        Arrays.asList(
+                                "adb",
+                                "-s",
+                                getDevice().getSerialNumber(),
+                                "shell",
+                                VIRT_APEX + "bin/vm",
+                                "run-app",
+                                "--debug full",
+                                "--console " + CONSOLE_PATH,
+                                "--payload-binary-name",
+                                "MicrodroidEmptyPayloadJniLib.so",
+                                apkPath,
+                                idSigPath,
+                                instanceImgPath));
+        if (isFeatureEnabled("com.android.kvm.LLPVM_CHANGES")) {
+            cmd.add("--instance-id-file");
+            cmd.add(TEST_ROOT + "instance_id");
+        }
+
+        PipedInputStream pis = new PipedInputStream();
+        Process process = createRunUtil().runCmdInBackground(cmd, new PipedOutputStream(pis));
+        String bufferedInput = "";
+
+        do {
+            byte[] pipeBuffer = new byte[4096];
+            pis.read(pipeBuffer, 0, 4096);
+            bufferedInput += new String(pipeBuffer);
+        } while (!bufferedInput.contains("payload is ready"));
+
+        String consoleLog = getDevice().pullFileContents(CONSOLE_PATH);
+        assertThat(consoleLog).contains("Hello Microdroid");
+
+        process.destroy();
+    }
+
+=======
+    private boolean hasAppPackage(String pkgName, CommandRunner android) throws DeviceNotAvailableException {
+        String hasPackage =
+        android.run(
+                "pm list package | grep -w " + pkgName + " 1> /dev/null" + "; echo $?");
+        if (hasPackage.equals("0")) {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Test
+    @CddTest
+    public void testRunEmptyPayload() throws Exception {
+        CommandRunner android = new CommandRunner(getDevice());
+
+        // Create the idsig file for the APK
+        String apkPath;
+        if (hasAppPackage(EMPTY_AOSP_PACKAGE_NAME, android))
+            apkPath = getPathForPackage(EMPTY_AOSP_PACKAGE_NAME);
+        else
+            apkPath = getPathForPackage(EMPTY_PACKAGE_NAME);
+
+        final String idSigPath = TEST_ROOT + "idsig";
+        final String instanceImgPath = TEST_ROOT + "instance.img";
+
+        android.run(VIRT_APEX + "bin/vm", "create-idsig", apkPath, idSigPath);
+
+        List<String> cmd =
+                new ArrayList<>(
+                        Arrays.asList(
+                                "adb",
+                                "-s",
+                                getDevice().getSerialNumber(),
+                                "shell",
+                                VIRT_APEX + "bin/vm",
+                                "run-app",
+                                "--debug full",
+                                "--console " + CONSOLE_PATH,
+                                "--payload-binary-name",
+                                "MicrodroidEmptyPayloadJniLib.so",
+                                apkPath,
+                                idSigPath,
+                                instanceImgPath));
+        if (isFeatureEnabled("com.android.kvm.LLPVM_CHANGES")) {
+            cmd.add("--instance-id-file");
+            cmd.add(TEST_ROOT + "instance_id");
+        }
+
+        PipedInputStream pis = new PipedInputStream();
+        Process process = createRunUtil().runCmdInBackground(cmd, new PipedOutputStream(pis));
+        String bufferedInput = "";
+
+        do {
+            byte[] pipeBuffer = new byte[4096];
+            pis.read(pipeBuffer, 0, 4096);
+            bufferedInput += new String(pipeBuffer);
+        } while (!bufferedInput.contains("payload is ready"));
+
+        String consoleLog = getDevice().pullFileContents(CONSOLE_PATH);
+        assertThat(consoleLog).contains("Hello Microdroid");
+
+        process.destroy();
+    }
+
+>>>>>>> CHANGE (e4e145 Annotate tests accordingly)
+    @Test
     public void testAllVbmetaUseSHA256() throws Exception {
         File virtApexDir = FileUtil.createTempDir("virt_apex");
         // Pull the virt apex's etc/ directory (which contains images)
@@ -1121,8 +1352,25 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+<<<<<<< HEAD   (2dee62 DO NOT MERGE: Separate CTS/VTS/general tests into different )
     public void testDeviceAssignment() throws Exception {
         // Check for preconditions
+||||||| BASE
+    @Parameters(method = "params")
+    @TestCaseName("{method}_protectedVm_{0}_os_{1}")
+    public void testDeviceAssignment(boolean protectedVm, String os) throws Exception {
+        // Preconditions
+        assumeKernelSupported(os);
+        assumeVmTypeSupported(os, protectedVm);
+=======
+    @Parameters(method = "params")
+    @TestCaseName("{method}_protectedVm_{0}_os_{1}")
+    @CddTest
+    public void testDeviceAssignment(boolean protectedVm, String os) throws Exception {
+        // Preconditions
+        assumeKernelSupported(os);
+        assumeVmTypeSupported(os, protectedVm);
+>>>>>>> CHANGE (e4e145 Annotate tests accordingly)
         assumeVfioPlatformSupported();
 
         List<AssignableDevice> devices = getAssignableDevices();
@@ -1173,11 +1421,23 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+<<<<<<< HEAD   (2dee62 DO NOT MERGE: Separate CTS/VTS/general tests into different )
     public void testGkiVersions() throws Exception {
         for (String gki : getSupportedGKIVersions()) {
             assertTrue(
                     "Unknown gki \"" + gki + "\". Supported gkis: " + SUPPORTED_GKI_VERSIONS,
                     SUPPORTED_GKI_VERSIONS.contains(gki));
+||||||| BASE
+    public void testOsVersions() throws Exception {
+        for (String os : getSupportedOSList()) {
+            assertWithMessage("Unknown OS \"%s\"", os).that(SUPPORTED_OSES.values()).contains(os);
+=======
+    @CddTest
+    @GmsTest(requirements = {"GMS-3-7.1-001.002"})
+    public void testOsVersions() throws Exception {
+        for (String os : getSupportedOSList()) {
+            assertWithMessage("Unknown OS \"%s\"", os).that(SUPPORTED_OSES.values()).contains(os);
+>>>>>>> CHANGE (e4e145 Annotate tests accordingly)
         }
     }
 
@@ -1215,6 +1475,272 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         }
     }
 
+<<<<<<< HEAD   (2dee62 DO NOT MERGE: Separate CTS/VTS/general tests into different )
+||||||| BASE
+    @Test
+    @Parameters(method = "osVersions")
+    @TestCaseName("{method}_os_{0}")
+    public void microdroidDeviceTreeCompat(String os) throws Exception {
+        assumeArm64Supported();
+        final String configPath = "assets/vm_config.json";
+        // Preconditions
+        assumeKernelSupported(os);
+        int mem_size = 256;
+        assertTrue("Memory size too small", mem_size >= minMemorySize());
+
+        // Start the VM with the dump DT option.
+        mMicrodroidDevice =
+                MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(mem_size)
+                        .cpuTopology("one_cpu")
+                        .protectedVm(false)
+                        .os(SUPPORTED_OSES.get(os))
+                        .name("test_device_tree")
+                        .dumpDt("/data/local/tmp/dump_dt.dtb")
+                        .build(getAndroidDevice());
+        assertThat(mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT)).isTrue();
+
+        File goldenDt = findTestFile("dt_dump_golden.dts");
+        testGoldenDeviceTree(goldenDt.getAbsolutePath());
+    }
+
+    @Test
+    @Parameters(method = "osVersions")
+    @TestCaseName("{method}_os_{0}")
+    public void microdroidProtectedDeviceTreeCompat(String os) throws Exception {
+        assumeArm64Supported();
+        final String configPath = "assets/vm_config.json";
+        // Preconditions
+        assumeKernelSupported(os);
+        assumeVmTypeSupported(os, true);
+        int mem_size = 256;
+        assertTrue("Memory size too small", mem_size >= minMemorySize());
+
+        // Start the VM with the dump DT option.
+        mMicrodroidDevice =
+                MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(mem_size)
+                        .cpuTopology("one_cpu")
+                        .protectedVm(true)
+                        .os(SUPPORTED_OSES.get(os))
+                        .name("test_device_tree")
+                        .dumpDt("/data/local/tmp/dump_dt.dtb")
+                        .build(getAndroidDevice());
+        assertThat(mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT)).isTrue();
+
+        File goldenDt = findTestFile("dt_dump_protected_golden.dts");
+        testGoldenDeviceTree(goldenDt.getAbsolutePath());
+    }
+
+    private void testGoldenDeviceTree(String goldenDt) throws Exception {
+        // Pull the device tree to host.
+        TestDevice device = getAndroidDevice();
+        boolean disableRoot = !device.isAdbRoot();
+        device.enableAdbRoot();
+        assumeTrue("adb root is not enabled", device.isAdbRoot());
+
+        // Pull DT from device
+        File dtb_from_device = device.pullFile("/data/local/tmp/dump_dt.dtb");
+        if (disableRoot) {
+            device.disableAdbRoot();
+        }
+
+        File dtc = findTestFile("dtc");
+
+        // Create temp file for Device tree conversion
+        File dt_dump_dts = File.createTempFile("dt_dump", "dts");
+        dt_dump_dts.delete();
+        String dt_dump_dts_path = dt_dump_dts.getAbsolutePath();
+        // Convert DT to text format.
+        CommandResult dtb_to_dts =
+                RunUtil.getDefault()
+                        .runTimedCmd(
+                                3000,
+                                dtc.getAbsolutePath(),
+                                "-I",
+                                "dtb",
+                                "-O",
+                                "dts",
+                                "-qqq",
+                                "-f",
+                                "-s",
+                                "-o",
+                                dt_dump_dts_path,
+                                dtb_from_device.getAbsolutePath());
+        assertTrue(
+                "result convert stderr: " + dtb_to_dts.getStderr(),
+                dtb_to_dts.getStderr().trim().isEmpty());
+        assertTrue(
+                "result convert stdout: " + dtb_to_dts.getStdout(),
+                dtb_to_dts.getStdout().trim().isEmpty());
+
+        // Diff device's DT with the golden DT.
+        CommandResult result_compare =
+                RunUtil.getDefault()
+                        .runTimedCmd(
+                                3000,
+                                "diff",
+                                "-u",
+                                "-w",
+                                "-I",
+                                "kaslr-seed",
+                                "-I",
+                                "instance-id",
+                                "-I",
+                                "rng-seed",
+                                "-I",
+                                "linux,initrd-end",
+                                "-I",
+                                "secretkeeper_public_key",
+                                "-I",
+                                "interrupt-map",
+                                dt_dump_dts_path,
+                                goldenDt);
+
+        assertTrue(
+                "result compare stderr: " + result_compare.getStderr(),
+                result_compare.getStderr().trim().isEmpty());
+        assertTrue(
+                "result compare stdout: " + result_compare.getStdout(),
+                result_compare.getStdout().trim().isEmpty());
+    }
+
+=======
+    @Test
+    @Parameters(method = "osVersions")
+    @TestCaseName("{method}_os_{0}")
+    @CddTest
+    public void microdroidDeviceTreeCompat(String os) throws Exception {
+        assumeArm64Supported();
+        final String configPath = "assets/vm_config.json";
+        // Preconditions
+        assumeKernelSupported(os);
+        int mem_size = 256;
+        assertTrue("Memory size too small", mem_size >= minMemorySize());
+
+        // Start the VM with the dump DT option.
+        mMicrodroidDevice =
+                MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(mem_size)
+                        .cpuTopology("one_cpu")
+                        .protectedVm(false)
+                        .os(SUPPORTED_OSES.get(os))
+                        .name("test_device_tree")
+                        .dumpDt("/data/local/tmp/dump_dt.dtb")
+                        .build(getAndroidDevice());
+        assertThat(mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT)).isTrue();
+
+        File goldenDt = findTestFile("dt_dump_golden.dts");
+        testGoldenDeviceTree(goldenDt.getAbsolutePath());
+    }
+
+    @Test
+    @Parameters(method = "osVersions")
+    @TestCaseName("{method}_os_{0}")
+    @CddTest
+    public void microdroidProtectedDeviceTreeCompat(String os) throws Exception {
+        assumeArm64Supported();
+        final String configPath = "assets/vm_config.json";
+        // Preconditions
+        assumeKernelSupported(os);
+        assumeVmTypeSupported(os, true);
+        int mem_size = 256;
+        assertTrue("Memory size too small", mem_size >= minMemorySize());
+
+        // Start the VM with the dump DT option.
+        mMicrodroidDevice =
+                MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(mem_size)
+                        .cpuTopology("one_cpu")
+                        .protectedVm(true)
+                        .os(SUPPORTED_OSES.get(os))
+                        .name("test_device_tree")
+                        .dumpDt("/data/local/tmp/dump_dt.dtb")
+                        .build(getAndroidDevice());
+        assertThat(mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT)).isTrue();
+
+        File goldenDt = findTestFile("dt_dump_protected_golden.dts");
+        testGoldenDeviceTree(goldenDt.getAbsolutePath());
+    }
+
+    private void testGoldenDeviceTree(String goldenDt) throws Exception {
+        // Pull the device tree to host.
+        TestDevice device = getAndroidDevice();
+        boolean disableRoot = !device.isAdbRoot();
+        device.enableAdbRoot();
+        assumeTrue("adb root is not enabled", device.isAdbRoot());
+
+        // Pull DT from device
+        File dtb_from_device = device.pullFile("/data/local/tmp/dump_dt.dtb");
+        if (disableRoot) {
+            device.disableAdbRoot();
+        }
+
+        File dtc = findTestFile("dtc");
+
+        // Create temp file for Device tree conversion
+        File dt_dump_dts = File.createTempFile("dt_dump", "dts");
+        dt_dump_dts.delete();
+        String dt_dump_dts_path = dt_dump_dts.getAbsolutePath();
+        // Convert DT to text format.
+        CommandResult dtb_to_dts =
+                RunUtil.getDefault()
+                        .runTimedCmd(
+                                3000,
+                                dtc.getAbsolutePath(),
+                                "-I",
+                                "dtb",
+                                "-O",
+                                "dts",
+                                "-qqq",
+                                "-f",
+                                "-s",
+                                "-o",
+                                dt_dump_dts_path,
+                                dtb_from_device.getAbsolutePath());
+        assertTrue(
+                "result convert stderr: " + dtb_to_dts.getStderr(),
+                dtb_to_dts.getStderr().trim().isEmpty());
+        assertTrue(
+                "result convert stdout: " + dtb_to_dts.getStdout(),
+                dtb_to_dts.getStdout().trim().isEmpty());
+
+        // Diff device's DT with the golden DT.
+        CommandResult result_compare =
+                RunUtil.getDefault()
+                        .runTimedCmd(
+                                3000,
+                                "diff",
+                                "-u",
+                                "-w",
+                                "-I",
+                                "kaslr-seed",
+                                "-I",
+                                "instance-id",
+                                "-I",
+                                "rng-seed",
+                                "-I",
+                                "linux,initrd-end",
+                                "-I",
+                                "secretkeeper_public_key",
+                                "-I",
+                                "interrupt-map",
+                                dt_dump_dts_path,
+                                goldenDt);
+
+        assertTrue(
+                "result compare stderr: " + result_compare.getStderr(),
+                result_compare.getStderr().trim().isEmpty());
+        assertTrue(
+                "result compare stdout: " + result_compare.getStdout(),
+                result_compare.getStdout().trim().isEmpty());
+    }
+
+>>>>>>> CHANGE (e4e145 Annotate tests accordingly)
     @Before
     public void setUp() throws Exception {
         assumeDeviceIsCapable(getDevice());
