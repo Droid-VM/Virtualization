@@ -70,6 +70,30 @@
       },
       "revId": "d88fed1c56bc46bbd0be6c76af46cc5ff0ff6f97",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60425d2e_5bc98312",
+        "filename": "guest/pvmfw/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2024-12-27T08:38:30Z",
+      "side": 1,
+      "message": "You can keep the comment line above this config param for example:\n```suggestion\n        // Suppress an error about the unused -c that precedes -S.\n        \"-Wno-unused-command-line-argument\",\n```",
+      "parentUuid": "872ce0e4_8173c2b4",
+      "range": {
+        "startLine": 387,
+        "startChar": 100,
+        "endLine": 387,
+        "endChar": 103
+      },
+      "revId": "d88fed1c56bc46bbd0be6c76af46cc5ff0ff6f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
