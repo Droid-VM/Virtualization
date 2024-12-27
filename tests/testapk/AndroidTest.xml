@@ -32,6 +32,9 @@
         <option name="cleanup" value="true" />
         <option name="push" value="test_microdroid_vendor_image.img->/data/local/tmp/cts/microdroid/test_microdroid_vendor_image.img" />
         <option name="push" value="test_microdroid_vendor_image_unsigned.img->/data/local/tmp/cts/microdroid/test_microdroid_vendor_image_unsigned.img" />
+        <option name="push" value="microdroid_android15_image.img->/data/local/tmp/cts/microdroid/microdroid_android15_image.img" />
+        <option name="push" value="microdroid_android15_debuggable_image.img->/data/local/tmp/cts/microdroid/microdroid_android15_debuggable_image.img" />
+        <option name="push" value="microdroid_android15_super.img->/data/local/tmp/cts/microdroid/microdroid_android15_super.img" />
     </target_preparer>
     <test class="com.android.tradefed.testtype.AndroidJUnitTest" >
         <option name="package" value="com.android.microdroid.test" />

@@ -75,6 +75,7 @@ android_test {
     test_suites: ["general-tests"],
     test_config: "AndroidTest.xml",
     data: DATA,
+    device_common_data: ["images/*.img"],
 }
 
 android_test {

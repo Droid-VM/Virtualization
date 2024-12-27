@@ -2462,6 +2462,58 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
+    public void configuringAndroid15SuperImage() throws Exception {
+        File vendorDiskImage =
+                new File("/data/local/tmp/cts/microdroid/microdroid_android15_super.img");
+        VirtualMachineConfig config = buildVmConfigWithVendor(vendorDiskImage);
+        revokePermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
+
+        VirtualMachine vm =
+                forceCreateNewVirtualMachine("test_vendor_image_req_custom_permission", config);
+        SecurityException e =
+                assertThrows(
+                        SecurityException.class, () -> runVmTestService(TAG, vm, (ts, tr) -> {}));
+        assertThat(e)
+                .hasMessageThat()
+                .contains("android.permission.USE_CUSTOM_VIRTUAL_MACHINE permission");
+    }
+
+    @Test
+    public void configuringAndroid15DebuggableImageBoot() throws Exception {
+        File vendorDiskImage =
+                new File(
+                        "/data/local/tmp/cts/microdroid/microdroid_android15_debuggable_image.img");
+        VirtualMachineConfig config = buildVmConfigWithVendor(vendorDiskImage);
+        revokePermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
+
+        VirtualMachine vm =
+                forceCreateNewVirtualMachine("test_vendor_image_req_custom_permission", config);
+        SecurityException e =
+                assertThrows(
+                        SecurityException.class, () -> runVmTestService(TAG, vm, (ts, tr) -> {}));
+        assertThat(e)
+                .hasMessageThat()
+                .contains("android.permission.USE_CUSTOM_VIRTUAL_MACHINE permission");
+    }
+
+    @Test
+    public void configuringAndroid15ImageBoot() throws Exception {
+        File vendorDiskImage =
+                new File("/data/local/tmp/cts/microdroid/microdroid_android15_image.img");
+        VirtualMachineConfig config = buildVmConfigWithVendor(vendorDiskImage);
+        revokePermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
+
+        VirtualMachine vm =
+                forceCreateNewVirtualMachine("test_vendor_image_req_custom_permission", config);
+        SecurityException e =
+                assertThrows(
+                        SecurityException.class, () -> runVmTestService(TAG, vm, (ts, tr) -> {}));
+        assertThat(e)
+                .hasMessageThat()
+                .contains("android.permission.USE_CUSTOM_VIRTUAL_MACHINE permission");
+    }
+
+    @Test
     public void bootsWithVendorPartition() throws Exception {
         File vendorDiskImage = new File("/vendor/etc/avf/microdroid/microdroid_vendor.img");
         assumeTrue("Microdroid vendor image doesn't exist, skip", vendorDiskImage.exists());
