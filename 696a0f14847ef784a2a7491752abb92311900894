@@ -1,0 +1,116 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "507af40d_b6756a31",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActiveAdapter.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-31T08:52:00Z",
+      "side": 1,
+      "message": "nits: maybe i forgot to change the name for mPortsStateManager, kotlin naming convention doesn\u0027t recommend prefix or suffix(like mFoo or something) https://kotlinlang.org/docs/coding-conventions.html#function-names",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 34
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "05695fbd_13221219",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActiveAdapter.kt",
+              "range": {
+                "startLine": 27,
+                "startChar": 0,
+                "endLine": 29,
+                "endChar": 0
+              },
+              "replacement": "    private val portsStateManager: PortsStateManager,\n    private val context: Context,\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActiveAdapter.kt",
+              "range": {
+                "startLine": 32,
+                "startChar": 0,
+                "endLine": 34,
+                "endChar": 0
+              },
+              "replacement": "        val enabledPorts \u003d portsStateManager.getEnabledPorts()\n        return portsStateManager\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActiveAdapter.kt",
+              "range": {
+                "startLine": 55,
+                "startChar": 0,
+                "endLine": 56,
+                "endChar": 0
+              },
+              "replacement": "            context.getString(\n"
+            },
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActiveAdapter.kt",
+              "range": {
+                "startLine": 64,
+                "startChar": 0,
+                "endLine": 65,
+                "endChar": 0
+              },
+              "replacement": "            portsStateManager.updateEnabledPort(port, isChecked)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "696a0f14847ef784a2a7491752abb92311900894",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30baab84_5b4ec19a",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingItem.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-31T08:52:00Z",
+      "side": 1,
+      "message": "String? if it doesn\u0027t have value for \u0027enabled\u0027 item",
+      "range": {
+        "startLine": 18,
+        "startChar": 80,
+        "endLine": 18,
+        "endChar": 86
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "dd469878_f633c50b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingItem.kt",
+              "range": {
+                "startLine": 18,
+                "startChar": 0,
+                "endLine": 19,
+                "endChar": 0
+              },
+              "replacement": "class SettingsPortForwardingItem(val port: Int, val enabled: Boolean, val name: String?) {}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "696a0f14847ef784a2a7491752abb92311900894",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
