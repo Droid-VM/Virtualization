@@ -33,6 +33,7 @@ import com.android.virtualization.terminal.proto.ShutdownRequestItem;
 
 import io.grpc.stub.StreamObserver;
 
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -56,11 +57,14 @@ final class DebianServiceImpl extends DebianServiceGrpc.DebianServiceImplBase {
     public void reportVmActivePorts(
             ReportVmActivePortsRequest request,
             StreamObserver<ReportVmActivePortsResponse> responseObserver) {
-        Log.d(TAG, "reportVmActivePorts: " + request.toString());
-        mPortsStateManager.updateActivePorts(
+        Map<Integer, String> activePorts =
                 request.getPortsList().stream()
-                        .map(activePort -> activePort.getPort())
-                        .collect(Collectors.toSet()));
+                        .collect(
+                                Collectors.toMap(
+                                        activePort -> activePort.getPort(),
+                                        activePort -> activePort.getComm()));
+        Log.d(TAG, "reportVmActivePorts: " + activePorts.toString());
+        mPortsStateManager.updateActivePorts(activePorts);
         ReportVmActivePortsResponse reply =
                 ReportVmActivePortsResponse.newBuilder().setSuccess(true).build();
         responseObserver.onNext(reply);
@@ -75,7 +79,8 @@ final class DebianServiceImpl extends DebianServiceGrpc.DebianServiceImplBase {
                 new PortsStateManager.Listener() {
                     @Override
                     public void onPortsStateUpdated(
-                            Set<Integer> oldActivePorts, Set<Integer> newActivePorts) {
+                            Map<Integer, String> oldActivePorts,
+                            Map<Integer, String> newActivePorts) {
                         updateListeningPorts();
                     }
                 };
@@ -141,7 +146,7 @@ final class DebianServiceImpl extends DebianServiceGrpc.DebianServiceImplBase {
     private static native void updateListeningPorts(int[] ports);
 
     private void updateListeningPorts() {
-        Set<Integer> activePorts = mPortsStateManager.getActivePorts();
+        Set<Integer> activePorts = mPortsStateManager.getActivePorts().keySet();
         Set<Integer> enabledPorts = mPortsStateManager.getEnabledPorts();
         updateListeningPorts(
                 activePorts.stream()

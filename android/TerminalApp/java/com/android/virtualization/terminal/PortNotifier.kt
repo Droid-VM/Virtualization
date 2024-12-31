@@ -40,11 +40,14 @@ internal class PortNotifier(val context: Context) {
         }
     private val portsStateListener: PortsStateManager.Listener =
         object : PortsStateManager.Listener {
-            override fun onPortsStateUpdated(oldActivePorts: Set<Int>, newActivePorts: Set<Int>) {
+            override fun onPortsStateUpdated(
+                oldActivePorts: Map<Int, String>,
+                newActivePorts: Map<Int, String>,
+            ) {
                 // added active ports
-                (newActivePorts - oldActivePorts).forEach { showNotificationFor(it) }
+                (newActivePorts.keys - oldActivePorts.keys).forEach { showNotificationFor(it) }
                 // removed active ports
-                (oldActivePorts - newActivePorts).forEach { discardNotificationFor(it) }
+                (oldActivePorts.keys - newActivePorts.keys).forEach { discardNotificationFor(it) }
             }
         }
     private val portsStateManager: PortsStateManager =

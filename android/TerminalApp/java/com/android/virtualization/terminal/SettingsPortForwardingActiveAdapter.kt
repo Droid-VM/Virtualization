@@ -29,6 +29,7 @@ class SettingsPortForwardingActiveAdapter(private val mPortsStateManager: PortsS
         val enabledPorts = mPortsStateManager.getEnabledPorts()
         return mPortsStateManager
             .getActivePorts()
+            .keys
             .map { SettingsPortForwardingItem(it, enabledPorts.contains(it)) }
             .toCollection(ArrayList())
     }

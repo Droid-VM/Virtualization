@@ -121,7 +121,7 @@ class SettingsPortForwardingActivity : AppCompatActivity() {
                             )
                             positiveButton.setEnabled(false)
                         } else if (
-                            mPortsStateManager.getActivePorts().contains(port) ||
+                            mPortsStateManager.getActivePorts().keys.contains(port) ||
                                 mPortsStateManager.getEnabledPorts().contains(port)
                         ) {
                             editText.setError(
@@ -158,7 +158,10 @@ class SettingsPortForwardingActivity : AppCompatActivity() {
     }
 
     private inner class Listener : PortsStateManager.Listener {
-        override fun onPortsStateUpdated(oldActivePorts: Set<Int>, newActivePorts: Set<Int>) {
+        override fun onPortsStateUpdated(
+            oldActivePorts: Map<Int, String>,
+            newActivePorts: Map<Int, String>,
+        ) {
             refreshAdapters()
         }
     }

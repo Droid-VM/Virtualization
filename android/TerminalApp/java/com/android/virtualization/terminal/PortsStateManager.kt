@@ -27,7 +27,7 @@ import java.util.HashSet
 class PortsStateManager private constructor(private val sharedPref: SharedPreferences) {
     private val lock = Any()
 
-    @GuardedBy("lock") private val activePorts: MutableSet<Int> = hashSetOf()
+    @GuardedBy("lock") private val activePorts: MutableMap<Int, String> = hashMapOf()
 
     @GuardedBy("lock")
     private val enabledPorts: MutableSet<Int> =
@@ -42,9 +42,9 @@ class PortsStateManager private constructor(private val sharedPref: SharedPrefer
 
     @GuardedBy("lock") private val listeners: MutableSet<Listener> = hashSetOf()
 
-    fun getActivePorts(): Set<Int> {
+    fun getActivePorts(): Map<Int, String> {
         synchronized(lock) {
-            return HashSet<Int>(activePorts)
+            return HashMap<Int, String>(activePorts)
         }
     }
 
@@ -54,11 +54,11 @@ class PortsStateManager private constructor(private val sharedPref: SharedPrefer
         }
     }
 
-    fun updateActivePorts(ports: Set<Int>) {
+    fun updateActivePorts(ports: Map<Int, String>) {
         val oldPorts = getActivePorts()
         synchronized(lock) {
             activePorts.clear()
-            activePorts.addAll(ports)
+            activePorts.putAll(ports)
         }
         notifyPortsStateUpdated(oldPorts, getActivePorts())
     }
@@ -97,15 +97,24 @@ class PortsStateManager private constructor(private val sharedPref: SharedPrefer
 
     // TODO: it notifies when both enabledPort and activePort are changed, but doesn't provide
     // enabledPort's value change. Make this callback provide that information as well.
-    private fun notifyPortsStateUpdated(oldActivePorts: Set<Int>, newActivePorts: Set<Int>) {
+    private fun notifyPortsStateUpdated(
+        oldActivePorts: Map<Int, String>,
+        newActivePorts: Map<Int, String>,
+    ) {
         synchronized(lock) { HashSet<Listener>(this@PortsStateManager.listeners) }
             .forEach {
-                it.onPortsStateUpdated(HashSet<Int>(oldActivePorts), HashSet<Int>(newActivePorts))
+                it.onPortsStateUpdated(
+                    HashMap<Int, String>(oldActivePorts),
+                    HashMap<Int, String>(newActivePorts),
+                )
             }
     }
 
     interface Listener {
-        fun onPortsStateUpdated(oldActivePorts: Set<Int>, newActivePorts: Set<Int>) {}
+        fun onPortsStateUpdated(
+            oldActivePorts: Map<Int, String>,
+            newActivePorts: Map<Int, String>,
+        ) {}
     }
 
     companion object {

@@ -31,7 +31,7 @@ class SettingsPortForwardingInactiveAdapter(
     override fun getItems(): ArrayList<SettingsPortForwardingItem> {
         return mPortsStateManager
             .getEnabledPorts()
-            .subtract(mPortsStateManager.getActivePorts())
+            .subtract(mPortsStateManager.getActivePorts().keys)
             .map { SettingsPortForwardingItem(it, true) }
             .toCollection(ArrayList())
     }
