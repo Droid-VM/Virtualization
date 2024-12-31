@@ -15,4 +15,4 @@
  */
 package com.android.virtualization.terminal
 
-class SettingsPortForwardingItem(val port: Int, val enabled: Boolean) {}
+class SettingsPortForwardingItem(val port: Int, val enabled: Boolean, val name: String) {}

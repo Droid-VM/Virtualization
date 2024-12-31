@@ -39,7 +39,7 @@ abstract class SettingsPortForwardingBaseAdapter<T : RecyclerView.ViewHolder>() 
                         o1: SettingsPortForwardingItem,
                         o2: SettingsPortForwardingItem,
                     ): Boolean {
-                        return o1.port == o2.port && o1.enabled == o2.enabled
+                        return o1.port == o2.port && o1.enabled == o2.enabled && o1.name == o2.name
                     }
 
                     override fun areItemsTheSame(

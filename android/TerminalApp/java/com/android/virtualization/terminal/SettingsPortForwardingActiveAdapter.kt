@@ -15,6 +15,7 @@
  */
 package com.android.virtualization.terminal
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,15 +23,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.materialswitch.MaterialSwitch
 
-class SettingsPortForwardingActiveAdapter(private val mPortsStateManager: PortsStateManager) :
-    SettingsPortForwardingBaseAdapter<SettingsPortForwardingActiveAdapter.ViewHolder>() {
+class SettingsPortForwardingActiveAdapter(
+    private val mPortsStateManager: PortsStateManager,
+    private val mContext: Context,
+) : SettingsPortForwardingBaseAdapter<SettingsPortForwardingActiveAdapter.ViewHolder>() {
 
     override fun getItems(): ArrayList<SettingsPortForwardingItem> {
         val enabledPorts = mPortsStateManager.getEnabledPorts()
         return mPortsStateManager
             .getActivePorts()
-            .keys
-            .map { SettingsPortForwardingItem(it, enabledPorts.contains(it)) }
+            .map { SettingsPortForwardingItem(it.key, enabledPorts.contains(it.key), it.value) }
             .toCollection(ArrayList())
     }
 
@@ -49,7 +51,12 @@ class SettingsPortForwardingActiveAdapter(private val mPortsStateManager: PortsS
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val port = mItems[position].port
-        viewHolder.port.text = port.toString()
+        viewHolder.port.text =
+            mContext.getString(
+                R.string.settings_port_forwarding_active_ports_content,
+                port,
+                mItems[position].name,
+            )
         viewHolder.enabledSwitch.contentDescription = viewHolder.port.text
         viewHolder.enabledSwitch.setOnCheckedChangeListener(null)
         viewHolder.enabledSwitch.isChecked = mItems[position].enabled

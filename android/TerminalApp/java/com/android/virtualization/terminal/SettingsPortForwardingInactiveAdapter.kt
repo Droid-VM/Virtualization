@@ -32,7 +32,7 @@ class SettingsPortForwardingInactiveAdapter(
         return mPortsStateManager
             .getEnabledPorts()
             .subtract(mPortsStateManager.getActivePorts().keys)
-            .map { SettingsPortForwardingItem(it, true) }
+            .map { SettingsPortForwardingItem(it, true, "") }
             .toCollection(ArrayList())
     }
 
