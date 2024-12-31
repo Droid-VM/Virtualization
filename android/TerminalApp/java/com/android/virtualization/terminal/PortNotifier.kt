@@ -45,7 +45,9 @@ internal class PortNotifier(val context: Context) {
                 newActivePorts: Map<Int, String>,
             ) {
                 // added active ports
-                (newActivePorts.keys - oldActivePorts.keys).forEach { showNotificationFor(it) }
+                (newActivePorts.keys - oldActivePorts.keys).forEach {
+                    showNotificationFor(it, newActivePorts[it]!!)
+                }
                 // removed active ports
                 (oldActivePorts.keys - newActivePorts.keys).forEach { discardNotificationFor(it) }
             }
@@ -71,7 +73,7 @@ internal class PortNotifier(val context: Context) {
         return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
     }
 
-    private fun showNotificationFor(port: Int) {
+    private fun showNotificationFor(port: Int, name: String) {
         val tapIntent = Intent(context, SettingsPortForwardingActivity::class.java)
         tapIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val tapPendingIntent =
@@ -79,7 +81,7 @@ internal class PortNotifier(val context: Context) {
 
         val title = getString(R.string.settings_port_forwarding_notification_title)
         val content =
-            context.getString(R.string.settings_port_forwarding_notification_content, port)
+            context.getString(R.string.settings_port_forwarding_notification_content, port, name)
         val acceptText = getString(R.string.settings_port_forwarding_notification_accept)
         val denyText = getString(R.string.settings_port_forwarding_notification_deny)
         val icon = Icon.createWithResource(context, R.drawable.ic_launcher_foreground)
