@@ -2687,4 +2687,25 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         }
         throw new AssertionError("Unsupported ABI: " + primaryAbi);
     }
+
+    @Test
+    public void resizeVm() throws Exception {
+        assumeSupportedDevice();
+
+        String vmName = "vmName";
+        VirtualMachineManager vmm = getVirtualMachineManager();
+
+        VirtualMachineConfig.Builder builder = newVmConfigBuilderWithPayloadBinary("binary.so");
+        VirtualMachineConfig config = builder.setEncryptedStorageBytes(ENCRYPTED_STORAGE_BYTES).build();
+        VirtualMachine vm = vmm.getOrCreate(vmName, config);
+        vm.run();
+        assertThat(vm.getEncryptedStorageBytes()).isEqualTo(ENCRYPTED_STORAGE_BYTES);
+        vm.stop();
+
+        VirtualMachineConfig compatibleConfig = builder.setEncryptedStorageBytes(12_000_000).build();
+        vm.setConfig(compatibleConfig);
+        vm.run();
+        assertThat(vm.getEncryptedStorageBytes()).isEqualTo(12_000_000);
+        vm.stop();
+    }
 }
