@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f61c5f02_21b5964c",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/PortsStateManager.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2024-12-31T08:44:18Z",
+      "side": 1,
+      "message": "nits: the function name is a little bit confusing with `getActivePorts` above, how about something like getActivePortInfo or something?",
+      "range": {
+        "startLine": 52,
+        "startChar": 8,
+        "endLine": 52,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9b73ca57_8eb1e0dc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/PortsStateManager.kt",
+              "range": {
+                "startLine": 52,
+                "startChar": 0,
+                "endLine": 53,
+                "endChar": 0
+              },
+              "replacement": "    fun getActivePortInfo(port: Int): ActivePort? {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6a8db376b773554b510d6f43b8c54f3798846568",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
