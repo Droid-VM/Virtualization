@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fbcd2607_b82f3c72",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/DebianServiceImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2024-12-31T07:07:20Z",
+      "side": 1,
+      "message": "I agree with not revealing detailed structure like `Map\u003cInteger, String\u003e` to the outside, but I\u0027m not still convinced why we should make new struct `PortDescription` from here.",
+      "parentUuid": "2c12f3f1_91728f6a",
+      "range": {
+        "startLine": 63,
+        "startChar": 43,
+        "endLine": 63,
+        "endChar": 48
+      },
+      "revId": "2dfafbfc6eb80ec3c6069a93bd687aaf6de3199e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d08ffb10_955f0d63",
         "filename": "android/TerminalApp/java/com/android/virtualization/terminal/SettingsPortForwardingActivity.kt",
         "patchSetId": 1
