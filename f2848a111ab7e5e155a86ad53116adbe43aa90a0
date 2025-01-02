@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7abe24cf_2fca8937",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/InstalledImage.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-01-02T09:14:01Z",
+      "side": 1,
+      "message": "nits: how about using firstNotNullOfOrNull instead for statement?\n```suggestion\n        val matchResult \u003d result.lines().firstNotNullOfOrNull { regex.find(it) }\n        if (matchResult !\u003d null) {\n            val size \u003d matchResult.groupValues[1].toLong()\n            // The return value is the number of 4k block\n            return roundUp(size * 4 * 1024)\n        }\n```",
+      "range": {
+        "startLine": 99,
+        "startChar": 8,
+        "endLine": 108,
+        "endChar": 9
+      },
+      "revId": "f2848a111ab7e5e155a86ad53116adbe43aa90a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
