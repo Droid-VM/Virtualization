@@ -15,7 +15,6 @@
  */
 package com.android.virtualization.terminal
 
-import android.app.Activity
 import android.content.res.Configuration
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -24,19 +23,18 @@ import android.view.ViewGroup
 import android.view.WindowInsets
 
 class ModifierKeysController(
-    val activity: Activity,
-    val terminalView: TerminalView,
+    val activity: MainActivity,
     val parent: ViewGroup,
 ) {
     private val window = activity.window
     private val keysSingleLine: View
     private val keysDoubleLine: View
-
+    private var activeTerminalView: TerminalView? = null
     private var keysInSingleLine: Boolean = false
 
     init {
-        // Prepare the two modifier keys layout, but don't add them yet because we don't know which
-        // layout will be needed.
+        // Prepare the two modifier keys layout, but only attach the double line one since the
+        // keysInSingleLine is set to true by default
         val layout = LayoutInflater.from(activity)
         keysSingleLine = layout.inflate(R.layout.modifier_keys_singleline, parent, false)
         keysDoubleLine = layout.inflate(R.layout.modifier_keys_doubleline, parent, false)
@@ -46,32 +44,42 @@ class ModifierKeysController(
 
         keysSingleLine.visibility = View.GONE
         keysDoubleLine.visibility = View.GONE
+        parent.addView(keysDoubleLine)
 
         // Setup for the update to be called when needed
         window.decorView.rootView.setOnApplyWindowInsetsListener { _: View?, insets: WindowInsets ->
             update()
             insets
         }
+    }
 
-        terminalView.setOnFocusChangeListener { _: View, _: Boolean -> update() }
+    fun addTerminalView(terminalView: TerminalView) {
+        terminalView.setOnFocusChangeListener { _: View, onFocus: Boolean ->
+            if (onFocus) {
+                activeTerminalView = terminalView
+            } else {
+                activeTerminalView = null
+                terminalView.disableCtrlKey()
+            }
+            update()
+        }
     }
 
     private fun addClickListeners(keys: View) {
         // Only ctrl key is special, it communicates with xtermjs to modify key event with ctrl key
-        keys
-            .findViewById<View>(R.id.btn_ctrl)
-            .setOnClickListener({
-                terminalView.mapCtrlKey()
-                terminalView.enableCtrlKey()
-            })
+        keys.findViewById<View>(R.id.btn_ctrl).setOnClickListener({
+            activeTerminalView!!.mapCtrlKey()
+            activeTerminalView!!.enableCtrlKey()
+        })
 
-        val listener =
-            View.OnClickListener { v: View ->
-                BTN_KEY_CODE_MAP[v.id]?.also { keyCode ->
-                    terminalView.dispatchKeyEvent(KeyEvent(KeyEvent.ACTION_DOWN, keyCode))
-                    terminalView.dispatchKeyEvent(KeyEvent(KeyEvent.ACTION_UP, keyCode))
-                }
+        val listener = View.OnClickListener { v: View ->
+            BTN_KEY_CODE_MAP[v.id]?.also { keyCode ->
+                activeTerminalView!!.dispatchKeyEvent(
+                    KeyEvent(KeyEvent.ACTION_DOWN, keyCode))
+                activeTerminalView!!.dispatchKeyEvent(
+                    KeyEvent(KeyEvent.ACTION_UP, keyCode))
             }
+        }
 
         for (btn in BTN_KEY_CODE_MAP.keys) {
             keys.findViewById<View>(btn).setOnClickListener(listener)
@@ -91,7 +99,6 @@ class ModifierKeysController(
             }
             keysInSingleLine = needSingleLine
         }
-
         // set visibility
         val needShow = needToShowKeys()
         val keys = if (keysInSingleLine) keysSingleLine else keysDoubleLine
@@ -101,7 +108,7 @@ class ModifierKeysController(
     // Modifier keys are required only when IME is shown and the HW qwerty keyboard is not present
     private fun needToShowKeys(): Boolean {
         val imeShown = activity.window.decorView.rootWindowInsets.isVisible(WindowInsets.Type.ime())
-        val hasFocus = terminalView.hasFocus()
+        val hasFocus = activeTerminalView != null && activeTerminalView!!.hasFocus()
         val hasHwQwertyKeyboard =
             activity.resources.configuration.keyboard == Configuration.KEYBOARD_QWERTY
         return imeShown && hasFocus && !hasHwQwertyKeyboard
@@ -110,7 +117,8 @@ class ModifierKeysController(
     // If terminal's height is less than 30% of the screen height, we need to show modifier keys in
     // a single line to save the vertical space
     private fun needsKeysInSingleLine(): Boolean =
-        (terminalView.height / activity.window.decorView.height.toFloat()) < 0.3f
+        activeTerminalView != null && activeTerminalView!!.height.div(
+            activity.window.decorView.height.toFloat()) < 0.3f
 
     companion object {
         private val BTN_KEY_CODE_MAP =
