@@ -22,6 +22,30 @@
       },
       "revId": "b8163283994d7e25e072d0d800e765f0fb94b599",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e80d470_38569a76",
+        "filename": "guest/microdroid_manager/src/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-06T12:19:27Z",
+      "side": 1,
+      "message": "I think I\u0027ll need to us conditional along with bail!\n\n`if (should_defer..) {bail!()}` \n\nI think in this context, single `ensure!` is just fine too.",
+      "parentUuid": "aecfa7db_5f0ec1b1",
+      "range": {
+        "startLine": 350,
+        "startChar": 12,
+        "endLine": 351,
+        "endChar": 17
+      },
+      "revId": "b8163283994d7e25e072d0d800e765f0fb94b599",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
