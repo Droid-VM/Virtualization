@@ -15,7 +15,6 @@
  */
 package com.android.virtualization.terminal
 
-import android.app.Activity
 import android.content.res.Configuration
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -24,14 +23,13 @@ import android.view.ViewGroup
 import android.view.WindowInsets
 
 class ModifierKeysController(
-    val activity: Activity,
-    val terminalView: TerminalView,
+    val activity: MainActivity,
     val parent: ViewGroup,
 ) {
     private val window = activity.window
     private val keysSingleLine: View
     private val keysDoubleLine: View
-
+    private var currentTerminalViewId: String? = null
     private var keysInSingleLine: Boolean = false
 
     init {
@@ -52,8 +50,31 @@ class ModifierKeysController(
             update()
             insets
         }
+    }
 
-        terminalView.setOnFocusChangeListener { _: View, _: Boolean -> update() }
+    fun changeTerminalView(id: String) {
+        // Remove the state of previous termianlView if there is one
+        if (currentTerminalViewId != null && activity.terminalViews.containsKey(currentTerminalViewId)) {
+            activity.terminalViews[currentTerminalViewId]?.onFocusChangeListener = null
+            activity.terminalViews[currentTerminalViewId]?.disableCtrlKey()
+        }
+        currentTerminalViewId = id
+        activity.terminalViews[currentTerminalViewId]?.setOnFocusChangeListener { _: View, _: Boolean -> update() }
+    }
+
+    fun addTerminalView(id: String, terminalView: TerminalView) {
+        activity.terminalViews[id] = terminalView
+        // Only do this on current selected tab for the situation of opening multiple tabs at startup
+        if (id == currentTerminalViewId) {
+            activity.terminalViews[currentTerminalViewId]?.setOnFocusChangeListener { _: View, _: Boolean -> update() }
+        }
+    }
+
+    fun removeTerminalView(id: String) {
+        if (currentTerminalViewId == id) {
+            currentTerminalViewId = null
+        }
+        activity.terminalViews.remove(id)
     }
 
     private fun addClickListeners(keys: View) {
@@ -61,15 +82,15 @@ class ModifierKeysController(
         keys
             .findViewById<View>(R.id.btn_ctrl)
             .setOnClickListener({
-                terminalView.mapCtrlKey()
-                terminalView.enableCtrlKey()
+                activity.terminalViews[currentTerminalViewId]?.mapCtrlKey()
+                activity.terminalViews[currentTerminalViewId]?.enableCtrlKey()
             })
 
         val listener =
             View.OnClickListener { v: View ->
                 BTN_KEY_CODE_MAP[v.id]?.also { keyCode ->
-                    terminalView.dispatchKeyEvent(KeyEvent(KeyEvent.ACTION_DOWN, keyCode))
-                    terminalView.dispatchKeyEvent(KeyEvent(KeyEvent.ACTION_UP, keyCode))
+                    activity.terminalViews[currentTerminalViewId]?.dispatchKeyEvent(KeyEvent(KeyEvent.ACTION_DOWN, keyCode))
+                    activity.terminalViews[currentTerminalViewId]?.dispatchKeyEvent(KeyEvent(KeyEvent.ACTION_UP, keyCode))
                 }
             }
 
@@ -79,29 +100,31 @@ class ModifierKeysController(
     }
 
     fun update() {
-        // select single line or double line
-        val needSingleLine = needsKeysInSingleLine()
-        if (keysInSingleLine != needSingleLine) {
-            if (needSingleLine) {
-                parent.removeView(keysDoubleLine)
-                parent.addView(keysSingleLine)
-            } else {
-                parent.removeView(keysSingleLine)
-                parent.addView(keysDoubleLine)
+        if (currentTerminalViewId != null && activity.terminalViews.containsKey(currentTerminalViewId)) {
+            // select single line or double line
+            val needSingleLine = needsKeysInSingleLine()
+            if (keysInSingleLine != needSingleLine) {
+                if (needSingleLine) {
+                    parent.removeView(keysDoubleLine)
+                    parent.addView(keysSingleLine)
+                } else {
+                    parent.removeView(keysSingleLine)
+                    parent.addView(keysDoubleLine)
+                }
+                keysInSingleLine = needSingleLine
             }
-            keysInSingleLine = needSingleLine
-        }
 
-        // set visibility
-        val needShow = needToShowKeys()
-        val keys = if (keysInSingleLine) keysSingleLine else keysDoubleLine
-        keys.visibility = if (needShow) View.VISIBLE else View.GONE
+            // set visibility
+            val needShow = needToShowKeys()
+            val keys = if (keysInSingleLine) keysSingleLine else keysDoubleLine
+            keys.visibility = if (needShow) View.VISIBLE else View.GONE
+        }
     }
 
     // Modifier keys are required only when IME is shown and the HW qwerty keyboard is not present
     private fun needToShowKeys(): Boolean {
         val imeShown = activity.window.decorView.rootWindowInsets.isVisible(WindowInsets.Type.ime())
-        val hasFocus = terminalView.hasFocus()
+        val hasFocus = activity.terminalViews[currentTerminalViewId]?.hasFocus()!!
         val hasHwQwertyKeyboard =
             activity.resources.configuration.keyboard == Configuration.KEYBOARD_QWERTY
         return imeShown && hasFocus && !hasHwQwertyKeyboard
@@ -110,7 +133,7 @@ class ModifierKeysController(
     // If terminal's height is less than 30% of the screen height, we need to show modifier keys in
     // a single line to save the vertical space
     private fun needsKeysInSingleLine(): Boolean =
-        (terminalView.height / activity.window.decorView.height.toFloat()) < 0.3f
+        (activity.terminalViews[currentTerminalViewId]?.height?.div(activity.window.decorView.height.toFloat()))!! < 0.3f
 
     companion object {
         private val BTN_KEY_CODE_MAP =
