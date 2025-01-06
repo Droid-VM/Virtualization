@@ -156,6 +156,7 @@ install_prerequisites() {
 	source "$HOME"/.cargo/env
 	rustup target add "${arch}"-unknown-linux-gnu
 	cargo install cargo-license
+	cargo install cargo-deb
 }
 
 download_debian_cloud_image() {
@@ -170,21 +171,9 @@ download_debian_cloud_image() {
 
 build_rust_binary_and_copy() {
 	pushd "$(dirname "$0")/../../guest/$1" > /dev/null
-	local release_flag=
-	local artifact_mode=debug
-	if [[ "$mode" == "release" ]]; then
-		release_flag="--release"
-		artifact_mode=release
-	fi
-	RUSTFLAGS="-C linker=${arch}-linux-gnu-gcc" cargo build \
+	cargo deb \
 		--target "${arch}-unknown-linux-gnu" \
-		--target-dir "${workdir}/$1" ${release_flag}
-	mkdir -p "${dst}/files/usr/local/bin/$1"
-	cp "${workdir}/$1/${arch}-unknown-linux-gnu/${artifact_mode}/$1" "${dst}/files/usr/local/bin/$1/AVF"
-	chmod 777 "${dst}/files/usr/local/bin/$1/AVF"
-
-	mkdir -p "${dst}/files/usr/share/doc/$1"
-	cargo license > "${dst}/files/usr/share/doc/$1/copyright"
+		--output "${debian_cloud_image}/localdebs"
 	popd > /dev/null
 }
 
