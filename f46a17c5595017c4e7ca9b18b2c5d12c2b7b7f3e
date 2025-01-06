@@ -88,6 +88,59 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ce54d86_c78e0b45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3477636
+      },
+      "writtenOn": "2025-01-06T12:36:56Z",
+      "side": 1,
+      "message": "Thanks! I also can\u0027t see any evidence of any tests being run, or even builds being done, but I\u0027m going to assume they have been.",
+      "parentUuid": "f2cefdf5_c6e50fbf",
+      "revId": "f46a17c5595017c4e7ca9b18b2c5d12c2b7b7f3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46ec289c_4d8e3c95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3477636
+      },
+      "writtenOn": "2025-01-06T12:36:56Z",
+      "side": 1,
+      "message": ":-)",
+      "parentUuid": "b131239f_13196aa0",
+      "revId": "f46a17c5595017c4e7ca9b18b2c5d12c2b7b7f3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6943060_4f6ee359",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3477636
+      },
+      "writtenOn": "2025-01-06T12:36:56Z",
+      "side": 1,
+      "message": "Could one of you override the open source licensing -1 vote?\n\nI haven\u0027t changed any license, and my commit messages doesn\u0027t mention licenses AFAICT. But I know the linter can be a bit weird - maybe it doesn\u0027t like \"C\" ?",
+      "revId": "f46a17c5595017c4e7ca9b18b2c5d12c2b7b7f3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "544fe805_9dc265d3",
@@ -101,6 +154,30 @@
       "writtenOn": "2025-01-06T12:09:23Z",
       "side": 1,
       "message": "BTW, should be removed, now? Feel free to do so in a follow-up.",
+      "range": {
+        "startLine": 6,
+        "startChar": 11,
+        "endLine": 6,
+        "endChar": 18
+      },
+      "revId": "f46a17c5595017c4e7ca9b18b2c5d12c2b7b7f3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05b8b1a0_f40c37e7",
+        "filename": "libs/cstr/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 3477636
+      },
+      "writtenOn": "2025-01-06T12:36:56Z",
+      "side": 1,
+      "message": "Yeah, I want to do that as a separate CL, since it has greater risk of causing breakage.",
+      "parentUuid": "544fe805_9dc265d3",
       "range": {
         "startLine": 6,
         "startChar": 11,
