@@ -21,10 +21,10 @@ import androidx.recyclerview.widget.SortedListAdapterCallback
 
 abstract class SettingsPortForwardingBaseAdapter<T : RecyclerView.ViewHolder>() :
     RecyclerView.Adapter<T>() {
-    var items: SortedList<SettingsPortForwardingItem>
+    var mItems: SortedList<SettingsPortForwardingItem>
 
     init {
-        items =
+        mItems =
             SortedList(
                 SettingsPortForwardingItem::class.java,
                 object : SortedListAdapterCallback<SettingsPortForwardingItem>(this) {
@@ -52,11 +52,11 @@ abstract class SettingsPortForwardingBaseAdapter<T : RecyclerView.ViewHolder>() 
             )
     }
 
-    override fun getItemCount() = items.size()
+    override fun getItemCount() = mItems.size()
 
     abstract fun getItems(): ArrayList<SettingsPortForwardingItem>
 
     fun refreshItems() {
-        items.replaceAll(getItems())
+        mItems.replaceAll(getItems())
     }
 }

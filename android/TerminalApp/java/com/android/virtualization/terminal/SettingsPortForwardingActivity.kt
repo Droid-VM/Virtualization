@@ -31,30 +31,30 @@ private const val PORT_RANGE_MIN: Int = 1024
 private const val PORT_RANGE_MAX: Int = 65535
 
 class SettingsPortForwardingActivity : AppCompatActivity() {
-    private lateinit var portsStateManager: PortsStateManager
-    private lateinit var portsStateListener: Listener
-    private lateinit var activePortsAdapter: SettingsPortForwardingActiveAdapter
-    private lateinit var inactivePortsAdapter: SettingsPortForwardingInactiveAdapter
+    private lateinit var mPortsStateManager: PortsStateManager
+    private lateinit var mPortsStateListener: Listener
+    private lateinit var mActivePortsAdapter: SettingsPortForwardingActiveAdapter
+    private lateinit var mInactivePortsAdapter: SettingsPortForwardingInactiveAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_port_forwarding)
 
-        portsStateManager = PortsStateManager.getInstance(this)
+        mPortsStateManager = PortsStateManager.getInstance(this)
 
-        activePortsAdapter = SettingsPortForwardingActiveAdapter(portsStateManager, this)
+        mActivePortsAdapter = SettingsPortForwardingActiveAdapter(mPortsStateManager, this)
         val activeRecyclerView: RecyclerView =
             findViewById(R.id.settings_port_forwarding_active_recycler_view)
         activeRecyclerView.layoutManager = LinearLayoutManager(this)
-        activeRecyclerView.adapter = activePortsAdapter
+        activeRecyclerView.adapter = mActivePortsAdapter
 
-        inactivePortsAdapter = SettingsPortForwardingInactiveAdapter(portsStateManager, this)
+        mInactivePortsAdapter = SettingsPortForwardingInactiveAdapter(mPortsStateManager, this)
         val inactiveRecyclerView: RecyclerView =
             findViewById(R.id.settings_port_forwarding_inactive_recycler_view)
         inactiveRecyclerView.layoutManager = LinearLayoutManager(this)
-        inactiveRecyclerView.adapter = inactivePortsAdapter
+        inactiveRecyclerView.adapter = mInactivePortsAdapter
 
-        portsStateListener = Listener()
+        mPortsStateListener = Listener()
 
         val addButton = findViewById<ImageButton>(R.id.settings_port_forwarding_inactive_add_button)
         addButton.setOnClickListener {
@@ -71,7 +71,7 @@ class SettingsPortForwardingActivity : AppCompatActivity() {
                                 R.id.settings_port_forwarding_inactive_add_dialog_text
                             )!!
                         val port = editText.text.toString().toInt()
-                        portsStateManager.updateEnabledPort(port, true)
+                        mPortsStateManager.updateEnabledPort(port, true)
                     }
                     .setNegativeButton(R.string.settings_port_forwarding_dialog_cancel, null)
                     .create()
@@ -121,8 +121,8 @@ class SettingsPortForwardingActivity : AppCompatActivity() {
                             )
                             positiveButton.setEnabled(false)
                         } else if (
-                            portsStateManager.getActivePorts().contains(port) ||
-                                portsStateManager.getEnabledPorts().contains(port)
+                            mPortsStateManager.getActivePorts().contains(port) ||
+                                mPortsStateManager.getEnabledPorts().contains(port)
                         ) {
                             editText.setError(
                                 getString(
@@ -141,19 +141,19 @@ class SettingsPortForwardingActivity : AppCompatActivity() {
 
     private fun refreshAdapters() {
         runOnUiThread {
-            activePortsAdapter.refreshItems()
-            inactivePortsAdapter.refreshItems()
+            mActivePortsAdapter.refreshItems()
+            mInactivePortsAdapter.refreshItems()
         }
     }
 
     override fun onResume() {
         super.onResume()
-        portsStateManager.registerListener(portsStateListener)
+        mPortsStateManager.registerListener(mPortsStateListener)
         refreshAdapters()
     }
 
     override fun onPause() {
-        portsStateManager.unregisterListener(portsStateListener)
+        mPortsStateManager.unregisterListener(mPortsStateListener)
         super.onPause()
     }
 
