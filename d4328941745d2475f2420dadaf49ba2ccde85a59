@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d89b644e_68cbc00c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1943701
+      },
+      "writtenOn": "2025-01-06T10:33:16Z",
+      "side": 1,
+      "message": "I belive the unsafe Rust needs some rework: we need to rely on some structural guarantee to ensure that the pointers remain valid when we deference them.",
+      "revId": "d4328941745d2475f2420dadaf49ba2ccde85a59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c4ff255_b20253c1",
+        "filename": "guest/pvmfw/src/uefi/boot_services.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1943701
+      },
+      "writtenOn": "2025-01-06T10:33:16Z",
+      "side": 1,
+      "message": "As mentioned in [the other comment](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3399546/comment/0c30901e_5c443b11/), this is not enough to ensure safety.\n\nRust raw pointers can point to a place in memory where the data _used_ to be. That is, a `Guid` value existed there a few milliseconds ago, but it has since then been deallocated. The pointers to the old data will stick around and it is undefined behavior if such a pointer is dereferenced.\n\nBasically, since a pointer is just an integer, you cannot know if it is valid from looking at the pointer alone. The `non_null_and_aligned_const` function should probably be removed since it provides a false sense of security.",
+      "range": {
+        "startLine": 451,
+        "startChar": 0,
+        "endLine": 452,
+        "endChar": 54
+      },
+      "revId": "d4328941745d2475f2420dadaf49ba2ccde85a59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
