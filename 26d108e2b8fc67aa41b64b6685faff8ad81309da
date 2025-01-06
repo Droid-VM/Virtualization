@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c423c4dc_1d14c31b",
+        "filename": "libs/libvm_payload/include/vm_payload.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-06T15:23:00Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "21209499_a63c5af9",
+      "range": {
+        "startLine": 60,
+        "startChar": 4,
+        "endLine": 60,
+        "endChar": 13
+      },
+      "revId": "26d108e2b8fc67aa41b64b6685faff8ad81309da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d158be10_c91ab29c",
         "filename": "libs/libvm_payload/include/vm_payload.h",
         "patchSetId": 13
@@ -83,6 +107,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb06942c_bcf560a8",
+        "filename": "libs/libvm_payload/include/vm_payload.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-06T15:23:00Z",
+      "side": 1,
+      "message": "Currently we `ACCESS_FAILED` but maybe we need a more specific `AVmAccessRollbackProtectionSecretStatus::BAD_SIZE` for this?",
+      "parentUuid": "d158be10_c91ab29c",
+      "range": {
+        "startLine": 285,
+        "startChar": 50,
+        "endLine": 285,
+        "endChar": 81
+      },
+      "revId": "26d108e2b8fc67aa41b64b6685faff8ad81309da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d04fbe1_f3131cc1",
         "filename": "libs/libvm_payload/include/vm_payload.h",
         "patchSetId": 13
@@ -94,6 +142,30 @@
       "writtenOn": "2025-01-06T14:51:55Z",
       "side": 1,
       "message": "will this _always_ be only 32? If there\u0027s any chance of this size changing someday in the future, you need a way to take the size to attempt to read and return the size actually read, which wouldn\u0027t be a very big tweak to make now but is impossible to do later",
+      "range": {
+        "startLine": 295,
+        "startChar": 47,
+        "endLine": 295,
+        "endChar": 78
+      },
+      "revId": "26d108e2b8fc67aa41b64b6685faff8ad81309da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af2391f0_656bd60e",
+        "filename": "libs/libvm_payload/include/vm_payload.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-06T15:23:00Z",
+      "side": 1,
+      "message": "\u003e will this always be only 32\n\nWell atleast currently the backing HAL only supports storing secret of exactly 32 size. So we cannot support any different size. Whether we\u0027d ever consider upgrading moving to different HAL or upgrading the current one is tbd. @ioffe@google.com We discussed this sometime back ?\n\nActually Question if the following is acceptable:\n`AVmPayload_readRollbackProtectedSecret(void* _Nonnull secret, size_t size, size_t *actually_read_size`).\n\nWe continue to throw error now if size !\u003d 32 \u0026 actually_read_size will be 32.",
+      "parentUuid": "3d04fbe1_f3131cc1",
       "range": {
         "startLine": 295,
         "startChar": 47,
