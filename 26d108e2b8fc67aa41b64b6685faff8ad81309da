@@ -178,6 +178,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "edb2f213_378313ec",
+        "filename": "libs/libvm_payload/include/vm_payload.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2025-01-06T15:53:37Z",
+      "side": 1,
+      "message": "I\u0027d suggest instead:\n\n// returns the number of bytes to be written to `secret` if `size` was sufficiently large or -STATUS on failure\n\nint AVmPayload_readRollbackProtectedSecret(void* _Nullable secret, int size);\n\nwhich mimics APIs such as `snprintf` and allows for passing {null,0} to query the size to be read without an initial allocation.",
+      "parentUuid": "af2391f0_656bd60e",
+      "range": {
+        "startLine": 295,
+        "startChar": 47,
+        "endLine": 295,
+        "endChar": 78
+      },
+      "revId": "26d108e2b8fc67aa41b64b6685faff8ad81309da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d3e51009_33bac863",
         "filename": "libs/libvm_payload/libvm_payload.map.txt",
         "patchSetId": 13
