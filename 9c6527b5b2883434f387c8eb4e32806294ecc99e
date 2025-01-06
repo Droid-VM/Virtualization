@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c051f831_336bb50d",
+        "filename": "android/TerminalApp/java/com/android/virtualization/terminal/ModifierKeysController.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-01-06T03:52:48Z",
+      "side": 1,
+      "message": "nits: `(View.OnClickListener {})` can be replaced with `{}`.",
+      "range": {
+        "startLine": 63,
+        "startChar": 31,
+        "endLine": 64,
+        "endChar": 36
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f54a8988_80e2e615",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "android/TerminalApp/java/com/android/virtualization/terminal/ModifierKeysController.kt",
+              "range": {
+                "startLine": 64,
+                "startChar": 0,
+                "endLine": 65,
+                "endChar": 0
+              },
+              "replacement": "                {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9c6527b5b2883434f387c8eb4e32806294ecc99e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
