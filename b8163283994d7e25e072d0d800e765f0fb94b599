@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aecfa7db_5f0ec1b1",
+        "filename": "guest/microdroid_manager/src/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-01-06T10:07:02Z",
+      "side": 1,
+      "message": "nit: Using `bail!(should_defer...)` to check for the positive condition would enhance readability compared to `ensure!(!should_defer...)`.",
+      "range": {
+        "startLine": 350,
+        "startChar": 12,
+        "endLine": 351,
+        "endChar": 17
+      },
+      "revId": "b8163283994d7e25e072d0d800e765f0fb94b599",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
