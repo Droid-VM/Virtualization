@@ -22,6 +22,52 @@
       },
       "revId": "5cca1cd8137898d43fd9fb8ecf9a6b9b94cab8e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac9c868f_35f39886",
+        "filename": "build/debian/fai_config/scripts/AVF/10-systemd",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-01-07T05:16:09Z",
+      "side": 1,
+      "message": "(it may be a follow-up item) can we replace them with https://github.com/kornelski/cargo-deb/blob/main/systemd.md ?",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 124
+      },
+      "revId": "5cca1cd8137898d43fd9fb8ecf9a6b9b94cab8e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c0fd6fa_b39ac07c",
+        "filename": "guest/forwarder_guest_launcher/.cargo/config.toml",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-01-07T05:16:09Z",
+      "side": 1,
+      "message": "don\u0027t we need rustflags for x86_64 as well?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 34
+      },
+      "revId": "5cca1cd8137898d43fd9fb8ecf9a6b9b94cab8e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
