@@ -214,6 +214,30 @@
       },
       "revId": "f8fe1493d32ab982d9efe39c7ccaa3eb2e4c686d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38428190_1f4ea51f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-07T16:52:15Z",
+      "side": 1,
+      "message": "Think of it this way: there\u0027s now no way to easily spawn a pVM using `crosvm` directly, which can be useful in many cases (prototyping, debugging, testing, ...), without either building and passing a DTBO or hacking and reflashing pvmfw to ignore the missing DT field.\n\nI understand that the ID is important in the broader context of AVF but is it important enough that **any** guest should be prevented from booting if it\u0027s missing? What if we want to run unit-tests that run hand-written ASM in pVMs, just to test one particular feature of the hypervisor then return? In that case, the ID isn\u0027t used at all so why abort the boot?\n\nGiven that the value itself is passed by the host, it can\u0027t be security-sensitive so pvmfw using a default value in the DICE chain (and possibly instance.img) instead of aborting the boot seems appropriate to me. IMO, it would make sense to define a value meaning \"no instance ID was passed by the host\" for this purpose; is that what you intended \"all 0s\" to represent?\n\nI don\u0027t understand the point of generating a random value, however: the host controls the value so if it decided to not pass one, why should pvmfw attempt to cover that up by generating one on its own? Being local to one \"instance\", it isn\u0027t pvmfw\u0027s problem to distinguish between instances, is it?",
+      "parentUuid": "047455ad_57db11fa",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 46
+      },
+      "revId": "f8fe1493d32ab982d9efe39c7ccaa3eb2e4c686d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
