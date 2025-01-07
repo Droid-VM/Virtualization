@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "35a435a4_75670710",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1951225
+      },
+      "writtenOn": "2025-01-07T17:13:06Z",
+      "side": 1,
+      "message": "Thanks! I\u0027ve updated the commit message. I\u0027ve started an offline discussion on `DiceClearMemory`. Since the current build rule matches other uses of the upstream `open-dice` in trusty I\u0027m going to resolve this comment but follow up after on if we need a similar custom implementation in trusty.",
+      "parentUuid": "c5e9abf1_03fde5e7",
+      "range": {
+        "startLine": 9,
+        "startChar": 26,
+        "endLine": 9,
+        "endChar": 68
+      },
+      "revId": "b2fb4846e9a6a4da5a443f3bfb642ca79382c90b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77b2fec6_41ea4e51",
@@ -148,6 +172,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce037a0e_c94d7de3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951225
+      },
+      "writtenOn": "2025-01-07T17:13:06Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f746c3b7_fa967a8e",
+      "revId": "b2fb4846e9a6a4da5a443f3bfb642ca79382c90b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68d811e4_862a7a41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951225
+      },
+      "writtenOn": "2025-01-07T17:13:06Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c28af915_5f71d405",
+      "revId": "b2fb4846e9a6a4da5a443f3bfb642ca79382c90b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8267dc8c_cccd6f27",
@@ -171,6 +231,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01fcf951_80f22a4c",
+        "filename": "libs/dice/open_dice/bindgen/android/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1951225
+      },
+      "writtenOn": "2025-01-07T17:13:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8267dc8c_cccd6f27",
+      "range": {
+        "startLine": 2,
+        "startChar": 20,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "b2fb4846e9a6a4da5a443f3bfb642ca79382c90b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "002dc4a7_97ccc6ee",
@@ -184,6 +268,30 @@
       "writtenOn": "2024-12-19T09:25:11Z",
       "side": 1,
       "message": "This function processes a full handover CBOR array, essentially replicating the combined functionality of `DiceAndroidHandoverParse` and `DiceAndroidMainFlow`. Given the existence of these two functions, this one appears redundant. Could we remove it?\n\nSpecifically, this function is only used in the \"multialg\" configuration [1]. Since this specific target does not enable that flag, the function should be unnecessary.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/libs/dice/open_dice/src/bcc.rs;l\u003d132;drc\u003d87fbc4bb3c53c051aa37ee00195672418d5b52fe",
+      "range": {
+        "startLine": 32,
+        "startChar": 1,
+        "endLine": 32,
+        "endChar": 30
+      },
+      "revId": "b2fb4846e9a6a4da5a443f3bfb642ca79382c90b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f51d0f5_be64bc68",
+        "filename": "libs/dice/open_dice/bindgen/android/rules.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1951225
+      },
+      "writtenOn": "2025-01-07T17:13:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "002dc4a7_97ccc6ee",
       "range": {
         "startLine": 32,
         "startChar": 1,
