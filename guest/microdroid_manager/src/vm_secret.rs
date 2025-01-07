@@ -167,20 +167,35 @@ impl VmSecret {
     }
 
     pub fn read_payload_data_rp(&self) -> Result<Option<[u8; SECRET_SIZE]>> {
+        log::warn!("avf read_payload_data_rp called");
         let Self::V2 { instance_id, secretkeeper_session, .. } = self else {
             return Err(anyhow!("Rollback protected data is not available with V1 secrets"));
         };
         let payload_id = sha::sha512(instance_id);
-        secretkeeper_session.get_secret(payload_id)
+        match secretkeeper_session.get_secret(payload_id) {
+            Ok(res) => Ok(res),
+            Err(e) => {
+                log::info!("Recorded error {e:?} while reading payload's rollback protected data. Refreshing & retrying...");
+                secretkeeper_session.refresh()?;
+                secretkeeper_session.get_secret(payload_id)
+            }
+        }
     }
 
     pub fn write_payload_data_rp(&self, data: &[u8; SECRET_SIZE]) -> Result<()> {
+        log::warn!("avf write_payload_data_rp called");
         let data = Zeroizing::new(*data);
         let Self::V2 { instance_id, secretkeeper_session, .. } = self else {
             return Err(anyhow!("Rollback protected data is not available with V1 secrets"));
         };
         let payload_id = sha::sha512(instance_id);
-        secretkeeper_session.store_secret(payload_id, data)
+        if let Err(e) = secretkeeper_session.store_secret(payload_id, data.clone()) {
+            log::info!("Recorded error {e:?} while writing payload's rollback protected data. Refreshing & retrying...");
+            secretkeeper_session.refresh()?;
+            secretkeeper_session.store_secret(payload_id, data)?;
+        }
+        log::warn!("avf write_payload_data_rp finished");
+        Ok(())
     }
 }
 
@@ -274,6 +289,12 @@ impl SkVmSession {
         let session = SkSession::new(secretkeeper_proxy, dice, Some(get_secretkeeper_identity()?))?;
         let session = Arc::new(Mutex::new(session));
         Ok(Self { session, sealing_policy })
+    }
+
+    fn refresh(&self) -> Result<()> {
+        let mut session = self.session.lock().unwrap();
+        session.refresh()?;
+        Ok(())
     }
 
     fn store_secret(&self, id: [u8; ID_SIZE], secret: Zeroizing<[u8; SECRET_SIZE]>) -> Result<()> {

@@ -707,6 +707,8 @@ public abstract class MicrodroidDeviceTestBase {
                     @Override
                     public void onPayloadReady(VirtualMachine vm) {
                         Log.i(logTag, "onPayloadReady");
+                        Log.i(logTag, "avf_tes: onPayloadReady");
+
                         payloadReady.complete(true);
                         testVMService(vm);
                         quitVMService();

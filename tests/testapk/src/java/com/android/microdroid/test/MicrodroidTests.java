@@ -62,6 +62,7 @@ import android.system.virtualmachine.VirtualMachineConfig;
 import android.system.virtualmachine.VirtualMachineDescriptor;
 import android.system.virtualmachine.VirtualMachineException;
 import android.system.virtualmachine.VirtualMachineManager;
+import android.util.Log;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 
@@ -117,8 +118,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.OptionalLong;
+import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
@@ -1902,14 +1905,26 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                         .setDebugLevel(DEBUG_LEVEL_FULL)
                         .build();
         VirtualMachine vm = forceCreateNewVirtualMachine("test_vm", config);
-        TestResults testResults =
-                runVmTestService(
-                        TAG,
-                        vm,
-                        (ts, tr) -> {
-                            tr.mPayloadRpData = ts.insecurelyReadPayloadRpData();
+        CompletableFuture<TestResults> testResultsFuture =
+                CompletableFuture.supplyAsync(
+                        () -> {
+                            try {
+                                TestResults testResults =
+                                        runVmTestService(
+                                                TAG,
+                                                vm,
+                                                (ts, tr) -> {
+                                                    tr.mPayloadRpData =
+                                                            ts.insecurelyReadPayloadRpData();
+                                                });
+                                return testResults;
+                            } catch (Exception e) {
+                                throw new CompletionException(e);
+                            }
                         });
-        // ainsecurelyReadPayloadRpData()` must've failed since no data was ever written!
+
+        TestResults testResults = testResultsFuture.get();
+
         assertWithMessage("The read (unexpectedly) succeeded!")
                 .that(testResults.mException)
                 .isNotNull();
@@ -1937,6 +1952,74 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                         });
         testResults.assertNoException();
         assertThat(testResults.mPayloadRpData).isEqualTo(value2);
+    }
+
+    @Test
+    public void rollbackProtectedDataCanBeAccessedPostConnectionExpiration() throws Exception {
+        final long vmSize = minMemoryRequired();
+        // The reference implementation of Secretkeeper maintains 4 live session keys,
+        // dropping the oldest one when new connections are requested. Therefore we spin 8 VMs,
+        // hoping atleast some of the connection between VM <-> Secretkeeper are expired after all
+        // the VMs have booted.
+        final int numVMs = 8;
+        final long availableMem = getAvailableMemory();
+        Random rnd = new Random();
+
+        // Let's not use more than half of the available memory
+        assume().withMessage("Available memory (" + availableMem + " bytes) too small")
+                .that((numVMs * vmSize) <= (availableMem / 2))
+                .isTrue();
+
+        VirtualMachineConfig config =
+                newVmConfigBuilderWithPayloadBinary("MicrodroidTestNativeLib.so")
+                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .setMemoryBytes(vmSize)
+                        .build();
+        byte[] data = new byte[32];
+        Arrays.fill(value1, (byte) 0xcc);
+
+        CompletableFuture<TestResults>[] resultFutureList = new CompletableFuture[numVMs];
+        for (int i = 0; i < numVMs; i++) {
+            Log.i(TAG, "avf_test looping");
+
+            final VirtualMachine vm =
+                    forceCreateNewVirtualMachine("test_concurrent_vms_" + i, config);
+            resultFutureList[i] =
+                    CompletableFuture.supplyAsync(
+                            () -> {
+                                try {
+                                    Log.i(TAG, "avf_test inside supplyAsync");
+                                    TestResults testResults =
+                                            runVmTestService(
+                                                    TAG,
+                                                    vm,
+                                                    (ts, tr) -> {
+                                                        Log.i(
+                                                                TAG,
+                                                                "avf_test inside runVmTestService");
+                                                        ts.insecurelyWritePayloadRpData(data);
+                                                        // wait(5 * 1000); // 5 seconds of wait
+                                                        tr.mPayloadRpData =
+                                                                ts.insecurelyReadPayloadRpData();
+                                                    });
+                                    return testResults;
+                                } catch (Exception e) {
+                                    Log.e(TAG, "avf_test exception", e);
+                                    throw new CompletionException(e);
+                                } finally {
+                                    Log.i(TAG, "avf_test finally closing!");
+                                    // if (vm != null) {
+                                    //     vm.close();
+                                    // }
+                                }
+                            });
+        }
+        // CompletableFuture.allOf(resultFutureList).join();
+        for (int i = 0; i < numVMs; i++) {
+            TestResults testResult = resultFutureList[i].get();
+            testResult.assertNoException();
+            assertThat(testResult.mPayloadRpData).isEqualTo(data);
+        }
     }
 
     @Test
