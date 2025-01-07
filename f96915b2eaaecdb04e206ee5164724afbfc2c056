@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e729885_b7a867f9",
+        "filename": "libs/dice/open_dice/bindgen/android/rules.mk",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-01-07T20:40:10Z",
+      "side": 1,
+      "message": "Arve has a change to make sure we reference each module via the same (canonical) path. If I understand his validation logic correctly, this path will raise an error once aosp/3418000 lands.",
+      "range": {
+        "startLine": 26,
+        "startChar": 1,
+        "endLine": 26,
+        "endChar": 21
+      },
+      "revId": "f96915b2eaaecdb04e206ee5164724afbfc2c056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
