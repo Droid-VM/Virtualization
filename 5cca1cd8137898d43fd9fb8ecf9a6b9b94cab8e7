@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27324da8_2898dd23",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-07T06:09:25Z",
+      "side": 1,
+      "message": "renamed to build_rust_as_deb.",
+      "parentUuid": "7f743866_884cc3c3",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 26
+      },
+      "revId": "5cca1cd8137898d43fd9fb8ecf9a6b9b94cab8e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac9c868f_35f39886",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c983b4e_346b5c4d",
+        "filename": "build/debian/fai_config/scripts/AVF/10-systemd",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-07T06:09:25Z",
+      "side": 1,
+      "message": "good catch. I will do that in a follow-up change.",
+      "parentUuid": "ac9c868f_35f39886",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 124
+      },
+      "revId": "5cca1cd8137898d43fd9fb8ecf9a6b9b94cab8e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c0fd6fa_b39ac07c",
@@ -60,6 +108,30 @@
       "writtenOn": "2025-01-07T05:16:09Z",
       "side": 1,
       "message": "don\u0027t we need rustflags for x86_64 as well?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 34
+      },
+      "revId": "5cca1cd8137898d43fd9fb8ecf9a6b9b94cab8e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dad0a870_56856d02",
+        "filename": "guest/forwarder_guest_launcher/.cargo/config.toml",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-07T06:09:25Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "2c0fd6fa_b39ac07c",
       "range": {
         "startLine": 1,
         "startChar": 0,
