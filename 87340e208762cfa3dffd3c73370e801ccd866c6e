@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93889f53_39797606",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-01-07T18:03:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40d9d729_fc975290",
+      "revId": "87340e208762cfa3dffd3c73370e801ccd866c6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c729752_7c71c673",
@@ -158,6 +176,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1163fb46_81771f31",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-01-07T18:03:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5828a84b_d2a42257",
+      "range": {
+        "startLine": 314,
+        "startChar": 44,
+        "endLine": 314,
+        "endChar": 55
+      },
+      "revId": "87340e208762cfa3dffd3c73370e801ccd866c6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "150627ad_13e839df",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-01-07T18:03:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e979e17_991fb5c4",
+      "range": {
+        "startLine": 314,
+        "startChar": 15,
+        "endLine": 314,
+        "endChar": 42
+      },
+      "revId": "87340e208762cfa3dffd3c73370e801ccd866c6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dcdcdfdb_91b9b927",
@@ -215,6 +281,30 @@
           ]
         }
       ],
+      "revId": "87340e208762cfa3dffd3c73370e801ccd866c6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85c4c827_4b0730dc",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-01-07T18:03:42Z",
+      "side": 1,
+      "message": "I prefer not having extra callback method, because we can\u0027t really unregister callback.\n\nTo me, this is more similar to returning the `Future`, although its name is callback.",
+      "parentUuid": "dcdcdfdb_91b9b927",
+      "range": {
+        "startLine": 340,
+        "startChar": 0,
+        "endLine": 345,
+        "endChar": 28
+      },
       "revId": "87340e208762cfa3dffd3c73370e801ccd866c6e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
