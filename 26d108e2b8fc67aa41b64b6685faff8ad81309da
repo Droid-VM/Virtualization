@@ -126,6 +126,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ee6a2c95_0d349836",
+        "filename": "libs/libvm_payload/include/vm_payload.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2025-01-07T23:40:34Z",
+      "side": 1,
+      "message": "Not done. Prefixed as in `AVMACCESSROLLBACKPROTECTEDSECRETSTATUS_ENTRY_NOT_FOUND` or similar. That\u0027s a pretty wordy prefix, but it needs to be unique. Essentially, it needs to be an appropriate namespace for the values. C enum values are introduced to the global scope, not scoped to the enum like a C++ `enum class`.",
+      "parentUuid": "2da3d3bb_3285b382",
+      "range": {
+        "startLine": 60,
+        "startChar": 4,
+        "endLine": 60,
+        "endChar": 13
+      },
+      "revId": "26d108e2b8fc67aa41b64b6685faff8ad81309da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d158be10_c91ab29c",
         "filename": "libs/libvm_payload/include/vm_payload.h",
         "patchSetId": 13
