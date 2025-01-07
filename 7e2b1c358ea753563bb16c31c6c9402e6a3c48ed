@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96cdb1c6_6b8c299b",
+        "filename": "guest/pvmfw/src/rollback.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-07T16:22:45Z",
+      "side": 1,
+      "message": "Ack; resolving as that\u0027s out of scope for this CL and our discussion on aosp/3378615 already seems to cover it.",
+      "parentUuid": "3f1ccb4c_0622402b",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 34
+      },
+      "revId": "7e2b1c358ea753563bb16c31c6c9402e6a3c48ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cba9a801_195ce612",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-12-11T15:41:04Z",
       "side": 1,
       "message": "NIT: pvmfw has no reliable way to return `new_instance`[in all but last case]. False is really just a default value being used. Can you comment this (somewhere in the function documentations) to avoid future confusion.",
+      "range": {
+        "startLine": 49,
+        "startChar": 12,
+        "endLine": 49,
+        "endChar": 17
+      },
+      "revId": "7e2b1c358ea753563bb16c31c6c9402e6a3c48ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5623b048_27767d0f",
+        "filename": "guest/pvmfw/src/rollback.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-07T16:22:45Z",
+      "side": 1,
+      "message": "I\u0027ve rephrased the documentation about this argument.",
+      "parentUuid": "cba9a801_195ce612",
       "range": {
         "startLine": 49,
         "startChar": 12,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "306978fd_07180cc2",
+        "filename": "guest/pvmfw/src/rollback.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-07T16:22:45Z",
+      "side": 1,
+      "message": "Makes sense; that\u0027s a question I had, thanks for the answer.\n\nI\u0027ll rework it when I get to fixing `Capability`.\n\nResolving for now as this CL is just splitting up a function.",
+      "parentUuid": "c4a45b6a_35287ffb",
+      "range": {
+        "startLine": 55,
+        "startChar": 43,
+        "endLine": 55,
+        "endChar": 48
+      },
+      "revId": "7e2b1c358ea753563bb16c31c6c9402e6a3c48ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5137462e_d4d0ba9c",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-12-11T15:41:04Z",
       "side": 1,
       "message": "NIT: remove this.\n\nUpdates never lead to new CDIs, they were rather blocked by `check_dice_measurements_match_entry`",
+      "range": {
+        "startLine": 94,
+        "startChar": 50,
+        "endLine": 94,
+        "endChar": 80
+      },
+      "revId": "7e2b1c358ea753563bb16c31c6c9402e6a3c48ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae8a8d0b_f0fdc8c7",
+        "filename": "guest/pvmfw/src/rollback.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-07T16:22:45Z",
+      "side": 1,
+      "message": "They do, indirectly, through the deletion of existing (old) instance.img entries; I\u0027ve rephrased this sentence to better reflect that.",
+      "parentUuid": "5137462e_d4d0ba9c",
       "range": {
         "startLine": 94,
         "startChar": 50,
