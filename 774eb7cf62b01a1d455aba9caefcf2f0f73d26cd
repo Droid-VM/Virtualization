@@ -16,6 +16,24 @@
       "message": "Unsafe Rust LGTM",
       "revId": "774eb7cf62b01a1d455aba9caefcf2f0f73d26cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd3ee201_d70167fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-01-08T01:57:42Z",
+      "side": 1,
+      "message": "@mattgilbride Dear matt Gilbride. Thank you for the unsafe Rust review. But I have one question. For FFI, I couldn\u0027t find any better way than using `cast_mut()` in the unsafe block for converting `*const T` to `*mut T`. Is it OK if FFI is related?",
+      "parentUuid": "a2d2f770_32348cdb",
+      "revId": "774eb7cf62b01a1d455aba9caefcf2f0f73d26cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
