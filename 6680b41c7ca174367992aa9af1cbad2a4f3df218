@@ -76,6 +76,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a60b6af3_71c2bafa",
+        "filename": "libs/libvm_payload/include/vm_payload.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-08T11:09:38Z",
+      "side": 1,
+      "message": "Rephrased",
+      "parentUuid": "353c3be8_a9315838",
+      "range": {
+        "startLine": 56,
+        "startChar": 24,
+        "endLine": 56,
+        "endChar": 26
+      },
+      "revId": "6680b41c7ca174367992aa9af1cbad2a4f3df218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6cc1717_4c9f60b0",
@@ -89,6 +113,30 @@
       "writtenOn": "2025-01-07T23:40:34Z",
       "side": 1,
       "message": "from?",
+      "range": {
+        "startLine": 294,
+        "startChar": 68,
+        "endLine": 294,
+        "endChar": 70
+      },
+      "revId": "6680b41c7ca174367992aa9af1cbad2a4f3df218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29e6b42f_6869c6fb",
+        "filename": "libs/libvm_payload/include/vm_payload.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-08T11:09:38Z",
+      "side": 1,
+      "message": "Rephrased it to \"Read up to n bytes of payload\u0027s data in rollback detectable storage into `buf`\"",
+      "parentUuid": "f6cc1717_4c9f60b0",
       "range": {
         "startLine": 294,
         "startChar": 68,

@@ -148,6 +148,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0058dd8d_9a31a648",
+        "filename": "libs/libvm_payload/include/vm_payload.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-08T11:09:38Z",
+      "side": 1,
+      "message": "Interesting. Somehow for the other enum defined in this file  `AVmAttestationStatus` enum values are not prefixed. Changed it for `RollbackProtectedSecretStatus`...",
+      "parentUuid": "ee6a2c95_0d349836",
+      "range": {
+        "startLine": 60,
+        "startChar": 4,
+        "endLine": 60,
+        "endChar": 13
+      },
+      "revId": "26d108e2b8fc67aa41b64b6685faff8ad81309da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d158be10_c91ab29c",
