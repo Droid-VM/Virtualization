@@ -34,6 +34,75 @@
       "parentUuid": "a2d2f770_32348cdb",
       "revId": "774eb7cf62b01a1d455aba9caefcf2f0f73d26cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee75d71c_1268dc3b",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-08T03:42:40Z",
+      "side": 1,
+      "message": "Can we move this to createRaw?",
+      "range": {
+        "startLine": 362,
+        "startChar": 26,
+        "endLine": 362,
+        "endChar": 79
+      },
+      "revId": "774eb7cf62b01a1d455aba9caefcf2f0f73d26cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf24d72f_6bef2a54",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-08T03:42:40Z",
+      "side": 1,
+      "message": "I think it\u0027s better to eliminate the need to keep this global instance.",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 86
+      },
+      "revId": "774eb7cf62b01a1d455aba9caefcf2f0f73d26cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8060e796_1eb7e475",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-08T03:42:40Z",
+      "side": 1,
+      "message": "then we can keep `AVirtualMachine_stopCallback` and `\u0026VmInstance` inside of this struct.",
+      "range": {
+        "startLine": 378,
+        "startChar": 0,
+        "endLine": 378,
+        "endChar": 18
+      },
+      "revId": "774eb7cf62b01a1d455aba9caefcf2f0f73d26cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
