@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8964e59_e5e26283",
+        "filename": "tests/early_vm_test/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-08T03:45:32Z",
+      "side": 1,
+      "message": "I should have been clearer. I meant you can get rid of this host-side test. The test directly be implemented in the rust binary.",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 1
+      },
+      "revId": "40bac1311f192f3a73916546340b1d2cbaba85a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
