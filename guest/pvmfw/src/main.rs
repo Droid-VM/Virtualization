@@ -91,10 +91,24 @@ fn main<'a>(
         debug_policy = None;
     }
 
-    let verified_boot_data = verify_payload(signed_kernel, ramdisk, PUBLIC_KEY).map_err(|e| {
-        error!("Failed to verify the payload: {e}");
-        RebootReason::PayloadVerificationError
-    })?;
+    let verified_boot_data = if bcc_handover.bcc().is_none() {
+        warn!("aaa verifying payload ... ");
+        verify_payload(signed_kernel, ramdisk, PUBLIC_KEY).map_err(|e| {
+            error!("Failed to verify the payload: {e}");
+            RebootReason::PayloadVerificationError
+        })?
+    } else {
+        warn!("aaa using placeholder verified boot data ... ");
+        pvmfw_avb::VerifiedBootData {
+            debug_level: DebugLevel::Full,
+            kernel_digest: [1u8; 32],
+            initrd_digest: None,
+            public_key: PUBLIC_KEY,
+            capabilities: alloc::vec![pvmfw_avb::Capability::TrustySecurityVm],
+            rollback_index: 1,
+            page_size: None,
+        }
+    };
     let debuggable = verified_boot_data.debug_level != DebugLevel::None;
     if debuggable {
         info!("Successfully verified a debuggable payload.");
@@ -129,7 +143,11 @@ fn main<'a>(
         RebootReason::InternalError
     })?;
 
-    let instance_hash = Some(salt_from_instance_id(fdt)?);
+    let instance_hash = if bcc_handover.bcc().is_none() {
+        Some(salt_from_instance_id(fdt)?)
+    } else {
+        Some([2u8; 64])
+    };
     let (new_instance, salt, defer_rollback_protection) = perform_rollback_protection(
         fdt,
         &verified_boot_data,

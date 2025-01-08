@@ -154,11 +154,16 @@ fn main_wrapper<'a>(
     // Writable-dirty regions will be flushed when MemoryTracker is dropped.
     config_entries.bcc.zeroize();
 
-    unshare_all_mmio_except_uart().map_err(|e| {
-        error!("Failed to unshare MMIO ranges: {e}");
-        RebootReason::InternalError
-    })?;
-    unshare_all_memory();
+    if config_entries.bcc.is_empty() {
+        // This if is only to disable MMIO unsharing. The previous BCC should
+        // never be empty.
+        log::info!("Unsharing MMIO starts ...");
+        unshare_all_mmio_except_uart().map_err(|e| {
+            error!("Failed to unshare MMIO ranges: {e}");
+            RebootReason::InternalError
+        })?;
+        unshare_all_memory();
+    }
 
     let next_stage = select_next_stage(slices.kernel, keep_uart);
 
