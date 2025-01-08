@@ -172,6 +172,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "644d8482_8dd81c37",
+        "filename": "libs/libvm_payload/include/vm_payload.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2025-01-08T19:19:52Z",
+      "side": 1,
+      "message": "Ah, yeah. They\u0027re sort of prefixed. It\u0027s `ATTESTATION_ERROR_UNSUPPORTED` and not `ERROR_UNSUPPORTED`. You\u0027re right that it would have been better for an `AVM` prefix as well, but that\u0027s the sort of mistake that human reviewers make, unfortunately.",
+      "parentUuid": "0058dd8d_9a31a648",
+      "range": {
+        "startLine": 60,
+        "startChar": 4,
+        "endLine": 60,
+        "endChar": 13
+      },
+      "revId": "26d108e2b8fc67aa41b64b6685faff8ad81309da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d158be10_c91ab29c",
