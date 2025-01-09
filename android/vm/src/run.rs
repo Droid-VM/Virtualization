@@ -14,6 +14,9 @@
 
 //! Command to run a VM.
 
+#![allow(unreachable_code)]
+#![allow(unused_variables)]
+
 use crate::create_partition::command_create_partition;
 use crate::{get_service, RunAppConfig, RunCustomVmConfig, RunMicrodroidConfig};
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
@@ -44,6 +47,7 @@ use zip::ZipArchive;
 
 /// Run a VM from the given APK, idsig, and config.
 pub fn command_run_app(config: RunAppConfig) -> Result<(), Error> {
+    println!("###############################################################");
     let service = get_service()?;
     let apk = File::open(&config.apk).context("Failed to open APK file")?;
 
@@ -105,6 +109,7 @@ pub fn command_run_app(config: RunAppConfig) -> Result<(), Error> {
 
     let storage = if let Some(ref path) = config.microdroid.storage {
         if !path.exists() {
+            println!("************************************************* Path doesn't exists {}", path.display());
             command_create_partition(
                 service.as_ref(),
                 path,
@@ -112,10 +117,21 @@ pub fn command_run_app(config: RunAppConfig) -> Result<(), Error> {
                 PartitionType::ENCRYPTEDSTORE,
             )?;
         }
+        println!("************************************************* Size {}", config.microdroid.storage_size.unwrap());
         Some(open_parcel_file(path, true)?)
     } else {
+        println!("************************************************* No Storage");
         None
     };
+
+    // service
+    // .initializeWritablePartition(
+    //     &storage.unwrap().as_ref(),
+    //     config.microdroid.storage_size.unwrap_or(40 * 1024 * 1024).try_into()?,
+    //     PartitionType::ENCRYPTEDSTORE,
+    // );
+
+    // println!("************************************************* {}", storage.unwrap().getStatSize());
 
     let vendor =
         config.microdroid.vendor().as_ref().map(|p| open_parcel_file(p, false)).transpose()?;
