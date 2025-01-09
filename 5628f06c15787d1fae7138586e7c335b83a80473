@@ -33,6 +33,24 @@
       "message": "This indirectly uses `VirtualMachineAppConfig` APIs, which don\u0027t support guest backcompat. See http://b/382556725#comment6 and http://b/382556725#comment6",
       "revId": "5628f06c15787d1fae7138586e7c335b83a80473",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5586f0e9_06d2b3eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-09T00:13:44Z",
+      "side": 1,
+      "message": "It could also be good to start understanding whether they can be backwards compatible in general, or if it allows us to catch more issues. What do you think we should do here?",
+      "parentUuid": "c9c7805f_91018c46",
+      "revId": "5628f06c15787d1fae7138586e7c335b83a80473",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
