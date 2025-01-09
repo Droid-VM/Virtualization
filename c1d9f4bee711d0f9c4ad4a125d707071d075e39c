@@ -46,6 +46,30 @@
       },
       "revId": "c1d9f4bee711d0f9c4ad4a125d707071d075e39c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc4bcfe3_86236d36",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-09T11:32:06Z",
+      "side": 1,
+      "message": "\u003e Isn\u0027t it still necessary to properly set new_instance for the guest, to keep the different instance.img entries in sync\n\nNot sure what is implied by being in sync. In case of VM is using instance.img based rbp:\n\n1) pvmfw is incapable of knowing `new_instance` from instance_hash.\n2) In case a malicious Android reruns a VM instance with a different instance_id, the Sealing CDIs change \u0026 Microdorid will not be able to decrypt its partition.\n\nStoring instance-hash in instance.img has no benefit",
+      "parentUuid": "db9e449a_43c29880",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 49
+      },
+      "revId": "c1d9f4bee711d0f9c4ad4a125d707071d075e39c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
