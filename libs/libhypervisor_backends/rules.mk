@@ -9,5 +9,6 @@ MODULE_LIBRARY_DEPS := \
 	$(call FIND_CRATE,once_cell) \
 	$(call FIND_CRATE,smccc) \
 	$(call FIND_CRATE,uuid) \
+	$(call FIND_CRATE,lazy_static) \
 
 include make/library.mk
