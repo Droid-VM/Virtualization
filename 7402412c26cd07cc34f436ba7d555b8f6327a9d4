@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9935bb19_af8d0f4d",
+        "filename": "tests/old_images_avf_test/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-09T22:34:47Z",
+      "side": 1,
+      "message": "need to mark this as aarch64 only\n\nalso, might want to indicate the rialto image is aarch64 in its filename (even though it doesn\u0027t support other arches yet)",
+      "revId": "7402412c26cd07cc34f436ba7d555b8f6327a9d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f0a222d_f003a86f",
+        "filename": "tests/old_images_avf_test/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-09T22:34:47Z",
+      "side": 1,
+      "message": "can we assert the stop reason is `AVIRTUAL_MACHINE_SHUTDOWN`",
+      "range": {
+        "startLine": 165,
+        "startChar": 12,
+        "endLine": 165,
+        "endChar": 23
+      },
+      "revId": "7402412c26cd07cc34f436ba7d555b8f6327a9d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5d59617_87cd2daa",
+        "filename": "tests/old_images_avf_test/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-09T22:34:47Z",
+      "side": 1,
+      "message": "i suggest either (1) pass a normal `\u0026str` without null and use `CString::new` to convert it or (2) use cstr literals, like `c\"test_rialto\"`, and have `run_vm` accept a `\u0026CStr` directly",
+      "range": {
+        "startLine": 182,
+        "startChar": 24,
+        "endLine": 182,
+        "endChar": 26
+      },
+      "revId": "7402412c26cd07cc34f436ba7d555b8f6327a9d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2402ca9c_d234f62e",
+        "filename": "tests/old_images_avf_test/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-09T22:34:47Z",
+      "side": 1,
+      "message": "VMs",
+      "range": {
+        "startLine": 200,
+        "startChar": 15,
+        "endLine": 200,
+        "endChar": 19
+      },
+      "revId": "7402412c26cd07cc34f436ba7d555b8f6327a9d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42866c4b_64490e1e",
+        "filename": "tests/old_images_avf_test/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-09T22:34:47Z",
+      "side": 1,
+      "message": "VMs",
+      "range": {
+        "startLine": 228,
+        "startChar": 15,
+        "endLine": 228,
+        "endChar": 19
+      },
+      "revId": "7402412c26cd07cc34f436ba7d555b8f6327a9d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
