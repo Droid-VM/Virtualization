@@ -468,11 +468,12 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
             let user_id = multiuser_get_user_id(uid);
             let app_id = multiuser_get_app_id(uid);
             info!("Recording possible existence of state for (user_id={user_id}, app_id={app_id})");
-            if let Err(e) = sk_state.add_id(&id, user_id, app_id) {
-                error!("Failed to record the instance_id: {e:?}");
-            }
+            sk_state
+                .add_id(&id, user_id, app_id)
+                .context("Failed to record the instance_id: {e:?}")
+                .with_log()
+                .or_service_specific_exception(-1)?;
         }
-
         Ok(id)
     }
 
@@ -508,9 +509,11 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
             let user_id = multiuser_get_user_id(uid);
             let app_id = multiuser_get_app_id(uid);
             info!("Recording possible new owner of state for (user_id={user_id}, app_id={app_id})");
-            if let Err(e) = sk_state.add_id(instance_id, user_id, app_id) {
-                error!("Failed to update the instance_id owner: {e:?}");
-            }
+            sk_state
+                .add_id(instance_id, user_id, app_id)
+                .context("Failed to record the instance_id: {e:?}")
+                .with_log()
+                .or_service_specific_exception(-1)?;
         } else {
             info!("ignoring claimVmInstance() as no ISecretkeeper");
         }
