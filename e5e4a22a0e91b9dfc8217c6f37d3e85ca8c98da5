@@ -16,6 +16,24 @@
       "message": "Giving -1 as, from b/388615003#comment5, it sounds like the problem isn\u0027t limited to just this test but any VTS that runs a pVM so this CL doesn\u0027t address the root cause but also doesn\u0027t ensure that VTS pass and also removes coverage for non-GSI, AFAIU.\n\nYou _could_ instead add an `if` detecting GSI and skipping only then, which would be closer to the root cause. Ideally, we would want to remove that once pvmfw gets properly built+flashed with GSI.",
       "revId": "e5e4a22a0e91b9dfc8217c6f37d3e85ca8c98da5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f48919c_4ead040b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-01-09T12:36:02Z",
+      "side": 1,
+      "message": "Let\u0027s avoid adding `if` and wait for the fix in http://b/388615003#comment7\n\npvmfw is now being flashed with GSI. `VtsHalRemotelyProvisionedComponentTargetTest ` is running with signed rialto without any GSI skip. I\u0027ve also enabled our xTS on GSIs across several targets (aosp/3412638) since one month and they look stable.\n\nOtherwise, VTS only runs on GSI. If you skip GSI, this test will never run.",
+      "parentUuid": "03fa8ef7_8914cc2e",
+      "revId": "e5e4a22a0e91b9dfc8217c6f37d3e85ca8c98da5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
