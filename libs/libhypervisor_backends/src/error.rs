@@ -16,7 +16,9 @@
 
 use core::{fmt, result};
 
-use super::hypervisor::{GeniezoneError, KvmError};
+#[cfg(not(target_arch = "x86_64"))]
+use super::hypervisor::GeniezoneError;
+use super::hypervisor::KvmError;
 use uuid::Uuid;
 
 /// Result type with hypervisor error.
@@ -29,6 +31,7 @@ pub enum Error {
     MmioGuardNotSupported,
     /// Failed to invoke a certain KVM HVC function.
     KvmError(KvmError, u32),
+    #[cfg(not(target_arch = "x86_64"))]
     /// Failed to invoke GenieZone HVC function.
     GeniezoneError(GeniezoneError, u32),
     /// Unsupported Hypervisor
@@ -42,6 +45,7 @@ impl fmt::Display for Error {
             Self::KvmError(e, function_id) => {
                 write!(f, "Failed to invoke the HVC function with function ID {function_id}: {e}")
             }
+            #[cfg(not(target_arch = "x86_64"))]
             Self::GeniezoneError(e, function_id) => {
                 write!(
                     f,
