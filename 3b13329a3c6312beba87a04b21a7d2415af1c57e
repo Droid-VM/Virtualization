@@ -34,6 +34,24 @@
       "parentUuid": "f82ec70f_c7e1811b",
       "revId": "3b13329a3c6312beba87a04b21a7d2415af1c57e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77dfad81_761ac742",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-10T15:49:48Z",
+      "side": 1,
+      "message": "\u003e I\u0027m slightly worried by the reference to ...\n\nYes, not sure if you can see it but that\u0027s causing a build failure during PS:\n```\nuefi-gbl-mainline/WORKSPACE.bzlmod:25:21: fetching new_local_repository rule //external:cstr: java.io.IOException: The repository\u0027s path is \"packages/modules/Virtualization/libs/cstr\" but this directory does not exist.\n```\n\nAdding @dimorinny@google.com, who\u0027s been working on GBL.",
+      "parentUuid": "f5501a38_fede0043",
+      "revId": "3b13329a3c6312beba87a04b21a7d2415af1c57e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
