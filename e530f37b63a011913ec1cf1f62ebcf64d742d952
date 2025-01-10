@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bcce43e_61c76d15",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2025-01-10T15:35:40Z",
+      "side": 1,
+      "message": "There\u0027s at least 3 different failure scenarios that are now possible that weren\u0027t before, so it would be good to have some testing.",
+      "revId": "e530f37b63a011913ec1cf1f62ebcf64d742d952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6c283b9_ba348d08",
+        "filename": "android/virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1836235
+      },
+      "writtenOn": "2025-01-10T15:35:40Z",
+      "side": 1,
+      "message": "I have a vague feeling that Alan and I discussed the failure behaviour here ... but I can\u0027t remember any details.\n\nIf this does now fail, what will the caller now do?",
+      "revId": "e530f37b63a011913ec1cf1f62ebcf64d742d952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
