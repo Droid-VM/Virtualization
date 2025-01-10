@@ -33,6 +33,24 @@
       "message": "I have a vague feeling that Alan and I discussed the failure behaviour here ... but I can\u0027t remember any details.\n\nIf this does now fail, what will the caller now do?",
       "revId": "e530f37b63a011913ec1cf1f62ebcf64d742d952",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e49ca8c0_e4fb8bb0",
+        "filename": "android/virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-10T15:56:47Z",
+      "side": 1,
+      "message": "There is really nothing a caller can do in case of failure to persist (VMs will not be created). An app certainly cant reset the VS database.\n\nIs that not ideal though? The behaviour will be equivalent to id allocation failing due to any other reason.\n\nAlso cc++ @jiyong@google.com Do you any views on what we should do in case we fail to persist the instance-id in global database?\n\n1. Continuing to return instance-id from `allocateInstanceId` leads to leaking state in Secretkeeper, where uninstalling the app will not clean the Sk database.\n\n2. Returning error leads to database failure prohibiting any VM creation.",
+      "parentUuid": "b6c283b9_ba348d08",
+      "revId": "e530f37b63a011913ec1cf1f62ebcf64d742d952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
