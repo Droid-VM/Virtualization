@@ -61,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3ede4d33_b3115ebc",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-01-10T05:04:16Z",
+      "side": 1,
+      "message": "I assume that current design would minimize # of APIs.\n\nGiven that this callback is only called after started, the stop callback here can be considered as completion callback ([1]). `setCallback()` isn\u0027t necessary with it.\n\nHowever, if we take callback from `createRaw(), then having explicit `setCallback()` might be better. Inseob mentioned similarily already ([2]).\n\nWDYT? If having no `setCallback()` + `createRaw()` takes callback looks OK, then I\u0027m fine with it as well.\n\n[1]: http://shortn/_myaS1kEtDi\n[2]: https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3408863/comment/dcdcdfdb_91b9b927/",
+      "parentUuid": "ee75d71c_1268dc3b",
+      "range": {
+        "startLine": 362,
+        "startChar": 26,
+        "endLine": 362,
+        "endChar": 79
+      },
+      "revId": "774eb7cf62b01a1d455aba9caefcf2f0f73d26cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cf24d72f_6bef2a54",
         "filename": "libs/libavf/src/lib.rs",
         "patchSetId": 4
