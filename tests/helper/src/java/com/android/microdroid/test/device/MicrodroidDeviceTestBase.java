@@ -393,11 +393,23 @@ public abstract class MicrodroidDeviceTestBase {
             return mProcessedBootTimeMetrics;
         }
 
+        // Stopping a virtual machine is like pulling the plug on a real computer. VM may be left in
+        // an inconsistent state.
+        // For a graceful shutdown, request the payload to call {@code exit()} and wait for
+        // VirtualMachineCallback#onPayloadFinished} to be called.
         protected void forceStop(VirtualMachine vm) {
             try {
                 vm.stop();
             } catch (VirtualMachineException e) {
                 throw new RuntimeException(e);
+            }
+        }
+
+        void tryForceStopping(String logTag, VirtualMachine vm) {
+            try {
+                forceStop(vm);
+            } catch (Exception e) {
+                Log.i(logTag, "Ignoring exception: " + e);
             }
         }
 
@@ -722,7 +734,7 @@ public abstract class MicrodroidDeviceTestBase {
                     public void onPayloadFinished(VirtualMachine vm, int exitCode) {
                         Log.i(logTag, "onPayloadFinished: " + exitCode);
                         payloadFinished.complete(true);
-                        forceStop(vm);
+                        tryForceStopping(logTag, vm);
                     }
                 };
 
