@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34ebee2d_efd309cf",
+        "filename": "guest/microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-11T00:19:32Z",
+      "side": 1,
+      "message": "I\u0027d use `or_else` for simplicity.\n\n```\nsecretkeeper_session.get_secret(payload_id).or_else(|e| {\n    log:info...\n    ...refresh()?;\n    ...get_secret()\n})\n```",
+      "range": {
+        "startLine": 174,
+        "startChar": 8,
+        "endLine": 182,
+        "endChar": 16
+      },
+      "revId": "4f7777323baac0e86a59efa81081847f407e4fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "678f1270_65c91f9c",
+        "filename": "guest/microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-11T00:19:32Z",
+      "side": 1,
+      "message": "can be omitted",
+      "range": {
+        "startLine": 294,
+        "startChar": 25,
+        "endLine": 295,
+        "endChar": 14
+      },
+      "revId": "4f7777323baac0e86a59efa81081847f407e4fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af1e94b9_ca1096c6",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1953,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-11T00:19:32Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Build Warnings: cannot find symbol\n\nAnalyzer Description: Reports warnings that originate from build.log in the build artifacts.\nOwner: farivar@google.com\n\n    cannot find symbol\n            Random rnd \u003d new Random();\n                             ^\n      symbol:   class Random\n      location: class MicrodroidTests\n\nThis finding was found on https://android-build.googleplex.com/builds/build-details/P88100936/targets/errorprone-trunk_staging, but may also be present on other builds.\n\nThis is a different branch than your cl originated on (it was automerged), and thus might better reflect the state of the code in the git_main branch.",
+      "range": {
+        "startLine": 1953,
+        "startChar": 0,
+        "endLine": 1953,
+        "endChar": 34
+      },
+      "revId": "4f7777323baac0e86a59efa81081847f407e4fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
