@@ -16,6 +16,29 @@
       "message": "we shouldn\u0027t need this. many android_test_helper_app in the cts/gts directory are not setting this.",
       "revId": "886ebef8e265cafe7135f6480466d7618c67dfd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "608135db_a6f22866",
+        "filename": "tests/vmshareapp/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-11T00:29:06Z",
+      "side": 1,
+      "message": "Setting sdk_version looks fine. But why do we need to set target_sdk_version as well?",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 42
+      },
+      "revId": "886ebef8e265cafe7135f6480466d7618c67dfd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
