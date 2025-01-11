@@ -16,6 +16,64 @@
       "message": "Admittedly, I\u0027m not super familiar with the how \u0026 where are these callbacks executed. Can VM exit (and crosvm die) while the onFinished payload is executed. Where is it executed?",
       "revId": "e2e246eb59c038514886f7232c301293639f70ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fb8f418_0402362a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-11T00:10:08Z",
+      "side": 1,
+      "message": "I don\u0027t understand what you mean by \"where\". Anyway, crosvm can die while onFinishedPayload is ongoing... because they are seperate events.\n\nThese callbacks are executed by virtmgr. See https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/android/virtmgr/src/aidl.rs;drc\u003d177a211278dd56739827e876d64b9295d603197b;l\u003d1688",
+      "parentUuid": "ccb470de_841a4fec",
+      "revId": "e2e246eb59c038514886f7232c301293639f70ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04228308_6ccfcaf4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-11T00:10:08Z",
+      "side": 1,
+      "message": "What is the problem you want to fix with this CL?",
+      "revId": "e2e246eb59c038514886f7232c301293639f70ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4e878fd_f7f53d63",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-11T00:10:08Z",
+      "side": 1,
+      "message": "What if we don\u0027t call this at all?",
+      "range": {
+        "startLine": 737,
+        "startChar": 0,
+        "endLine": 737,
+        "endChar": 53
+      },
+      "revId": "e2e246eb59c038514886f7232c301293639f70ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
