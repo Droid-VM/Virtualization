@@ -35,8 +35,7 @@
         android:theme="@style/VmTerminalAppTheme"
         android:usesCleartextTraffic="true"
         android:supportsRtl="true"
-        android:enabled="false"
-        android:name=".Application">
+        android:enabled="false">
         <activity android:name=".MainActivity"
                   android:configChanges="orientation|screenSize|keyboard|keyboardHidden|navigation|uiMode|screenLayout|smallestScreenSize"
                   android:exported="true">
@@ -47,6 +46,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".DisplayActivity"
+            android:screenOrientation="landscape"
+            android:resizeableActivity="false"
+            android:theme="@style/FullscreenTheme"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden|navigation|uiMode|screenLayout|smallestScreenSize" />
         <activity android:name=".SettingsActivity"
             android:label="@string/action_settings" />
         <activity android:name=".SettingsDiskResizeActivity"
