@@ -24,6 +24,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9d1c720_943521a8",
+        "filename": "guest/microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-13T15:32:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34ebee2d_efd309cf",
+      "range": {
+        "startLine": 174,
+        "startChar": 8,
+        "endLine": 182,
+        "endChar": 16
+      },
+      "revId": "4f7777323baac0e86a59efa81081847f407e4fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "872e8d63_45b0c9b4",
+        "filename": "guest/microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-13T15:32:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34ebee2d_efd309cf",
+      "range": {
+        "startLine": 174,
+        "startChar": 8,
+        "endLine": 182,
+        "endChar": 16
+      },
+      "revId": "4f7777323baac0e86a59efa81081847f407e4fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "678f1270_65c91f9c",
@@ -47,6 +95,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a532b90d_f1f80934",
+        "filename": "guest/microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-13T15:32:57Z",
+      "side": 1,
+      "message": "Actually `session.refresh()` returns `Result\u003c(), secretkeeper_client::Error\u003e` but this method is expected to return `std::result::Result\u003c(), anyhow::Error\u003e` \u0026 thereforce require the error conversion.",
+      "parentUuid": "678f1270_65c91f9c",
+      "range": {
+        "startLine": 294,
+        "startChar": 25,
+        "endLine": 295,
+        "endChar": 14
+      },
+      "revId": "4f7777323baac0e86a59efa81081847f407e4fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d9c9030_e7b0d344",
+        "filename": "guest/microdroid_manager/src/vm_secret.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-13T15:32:57Z",
+      "side": 1,
+      "message": "`session.refresh` return `Result\u003c(), secretkeeper_client::Error\u003e`. Converting this to anyhow::Result require this.",
+      "parentUuid": "678f1270_65c91f9c",
+      "range": {
+        "startLine": 294,
+        "startChar": 25,
+        "endLine": 295,
+        "endChar": 14
+      },
+      "revId": "4f7777323baac0e86a59efa81081847f407e4fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af1e94b9_ca1096c6",
@@ -60,6 +156,30 @@
       "writtenOn": "2025-01-11T00:19:32Z",
       "side": 1,
       "message": "Please fix this ERROR reported by Build Warnings: cannot find symbol\n\nAnalyzer Description: Reports warnings that originate from build.log in the build artifacts.\nOwner: farivar@google.com\n\n    cannot find symbol\n            Random rnd \u003d new Random();\n                             ^\n      symbol:   class Random\n      location: class MicrodroidTests\n\nThis finding was found on https://android-build.googleplex.com/builds/build-details/P88100936/targets/errorprone-trunk_staging, but may also be present on other builds.\n\nThis is a different branch than your cl originated on (it was automerged), and thus might better reflect the state of the code in the git_main branch.",
+      "range": {
+        "startLine": 1953,
+        "startChar": 0,
+        "endLine": 1953,
+        "endChar": 34
+      },
+      "revId": "4f7777323baac0e86a59efa81081847f407e4fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "433d68c5_0c614eb5",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1953,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-13T15:32:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af1e94b9_ca1096c6",
       "range": {
         "startLine": 1953,
         "startChar": 0,
