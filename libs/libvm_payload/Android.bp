@@ -34,7 +34,6 @@ rust_bindgen {
     bindgen_flags: [
         "--default-enum-style rust",
         "--allowlist-type=AVmAttestationStatus",
-        "--allowlist-type=AVmAccessRollbackProtectedSecretStatus",
     ],
     visibility: [":__subpackages__"],
 }

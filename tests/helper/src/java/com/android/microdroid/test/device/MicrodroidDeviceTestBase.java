@@ -272,11 +272,9 @@ public abstract class MicrodroidDeviceTestBase {
     }
 
     protected void assumeNoUpdatableVmSupport() throws VirtualMachineException {
-        assume().withMessage("Secretkeeper not supported").that(isUpdatableVmSupported()).isFalse();
-    }
-
-    protected boolean isUpdatableVmSupported() throws VirtualMachineException {
-        return getVirtualMachineManager().isUpdatableVmSupported();
+        assume().withMessage("Secretkeeper not supported")
+                .that(getVirtualMachineManager().isUpdatableVmSupported())
+                .isFalse();
     }
 
     public abstract static class VmEventListener implements VirtualMachineCallback {
@@ -590,7 +588,6 @@ public abstract class MicrodroidDeviceTestBase {
         public String mConsoleInput;
         public byte[] mInstanceSecret;
         public int mPageSize;
-        public byte[] mPayloadRpData;
 
         public void assertNoException() {
             if (mException != null) {
