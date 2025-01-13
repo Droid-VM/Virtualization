@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d52f0cc6_1bb45e62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-13T15:08:54Z",
+      "side": 1,
+      "message": "Calling `runVmTestService` for a test I was writing in [1] throws error when VM.stop() is executed (from `forceStop`) `Error stopping VM with CID.. `. Thereforce I need to ignore that error.\n\nI\u0027m surprised we never saw this error in any other tests.\n\n[1] https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/3442661/3/tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+      "parentUuid": "04228308_6ccfcaf4",
+      "revId": "e2e246eb59c038514886f7232c301293639f70ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4e878fd_f7f53d63",
@@ -66,6 +84,30 @@
       "writtenOn": "2025-01-11T00:10:08Z",
       "side": 1,
       "message": "What if we don\u0027t call this at all?",
+      "range": {
+        "startLine": 737,
+        "startChar": 0,
+        "endLine": 737,
+        "endChar": 53
+      },
+      "revId": "e2e246eb59c038514886f7232c301293639f70ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eeea71b_9cebf7ab",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-13T15:08:54Z",
+      "side": 1,
+      "message": "In cases when VM does not shutdown gracefully (which happens when `testVMService` throws an expected exception in one of our tests[1]), and therefore I think we should still call `vm.stop()`?\n\n\n[1] https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:packages/modules/Virtualization/tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java;l\u003d1914?q\u003d%22rollbackProtectedDataOfPayload%22",
+      "parentUuid": "f4e878fd_f7f53d63",
       "range": {
         "startLine": 737,
         "startChar": 0,
