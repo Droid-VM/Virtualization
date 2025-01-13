@@ -71,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62053592_abb0a962",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-13T15:13:54Z",
+      "side": 1,
+      "message": "Now I understand. virtmgr client (app) defines those callbacks (and in this case, the callbacks aree such that client can talk to the service inside VM). These callbacks are triggered by virtmgr when VM informs it using `VirtualMachineCallbacks` as pointed.\n\nThank you Jiyong for the pointer.",
+      "parentUuid": "0fb8f418_0402362a",
+      "revId": "e2e246eb59c038514886f7232c301293639f70ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4e878fd_f7f53d63",
