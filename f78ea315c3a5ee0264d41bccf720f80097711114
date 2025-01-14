@@ -22,6 +22,30 @@
       },
       "revId": "f78ea315c3a5ee0264d41bccf720f80097711114",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "532fa32f_20bd7385",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1981,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-14T13:20:20Z",
+      "side": 1,
+      "message": "\u003e Please fix this WARNING\n\nThe recommendation from JAVA Dev guide. The recommended class is not built in Android [1]. Other tests in Android also seem to be using `Thread.sleep`\n\n[1] https://cs.android.com/search?q\u003d%2Fgoogle%2Fcommon%2Ftime%2FSleeper.java\n\n\n\n\u003e Is 5 seconds always enough?\n\nThe expiration in case of Secretkeeper connections doesn\u0027t have anything to do with time actually. It maintain a FIFO queue of 4 sessions and drop from the front for a every new connection.\n\nGiven we start the test VMs asynchronously, the first session `test_sk_session_expiration_vm_0` would have expired after 5 seconds because (given Microdroid boot time \u003c 5) \u0026 the other VMs would\u0027ve booted by then and established a session with Sk (required for accessing their secrets). Additionally, as expected, I did see the test failing when refresh was not implemented.\n\n\n\u003e  Is there a better way to detect in tests that SK connection expired\n\nWithin a VM, ISecretkeeper returning `ApiError::UnknownKeyId` is a good indication, but that is not propagated to the API.",
+      "parentUuid": "2cd2f6cd_52db5734",
+      "range": {
+        "startLine": 1981,
+        "startChar": 56,
+        "endLine": 1981,
+        "endChar": 68
+      },
+      "revId": "f78ea315c3a5ee0264d41bccf720f80097711114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
