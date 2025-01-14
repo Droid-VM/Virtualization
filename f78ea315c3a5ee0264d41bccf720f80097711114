@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cd2f6cd_52db5734",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1981,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-01-14T02:35:05Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Do not use \"Thread.sleep()\". Please see go/avoid-thread-sleep for more details.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nDo not use \"Thread.sleep()\". Please see go/avoid-thread-sleep for more details.\n\nIs 5 seconds always enough? Is there a better way to detect in tests that SK connection expired?",
+      "range": {
+        "startLine": 1981,
+        "startChar": 56,
+        "endLine": 1981,
+        "endChar": 68
+      },
+      "revId": "f78ea315c3a5ee0264d41bccf720f80097711114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
