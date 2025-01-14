@@ -31,6 +31,8 @@ pub enum DiceError {
     PlatformError,
     /// Unsupported key algorithm.
     UnsupportedKeyAlgorithm(coset::iana::Algorithm),
+    /// Not enough memory for a fallible allocation. Used in no_std environments.
+    NoMemory,
 }
 
 /// This makes `DiceError` accepted by anyhow.
@@ -48,6 +50,7 @@ impl fmt::Display for DiceError {
             Self::UnsupportedKeyAlgorithm(algorithm) => {
                 write!(f, "Unsupported key algorithm: {algorithm:?}")
             }
+            Self::NoMemory => write!(f, "Memory allocation failed"),
         }
     }
 }
