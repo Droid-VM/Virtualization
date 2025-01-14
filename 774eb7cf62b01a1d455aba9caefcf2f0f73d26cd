@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81efc409_3b576296",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2025-01-14T14:24:29Z",
+      "side": 1,
+      "message": "LGTM again - it looks like you figured it out :)\n\nGood catch here, as I think the `cast_mut()` was a bit awkward. AFAICT you changed the underlying type to give a `*mut T` from the start. I also see you\u0027re not using an `Arc` in place of a `Box`. Curious if this is actually a shared reference somewhere, or you were just doing that to make the compiler happy.\n\ncc: aliceryhl@google.com, in case the current iteration of the code could be improved upon.",
+      "parentUuid": "bd3ee201_d70167fb",
+      "revId": "774eb7cf62b01a1d455aba9caefcf2f0f73d26cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee75d71c_1268dc3b",
