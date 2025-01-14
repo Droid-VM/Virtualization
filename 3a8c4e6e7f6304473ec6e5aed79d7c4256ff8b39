@@ -22,6 +22,30 @@
       },
       "revId": "3a8c4e6e7f6304473ec6e5aed79d7c4256ff8b39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "895e7e60_ed4d7570",
+        "filename": "libs/libvmclient/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-01-14T07:27:27Z",
+      "side": 1,
+      "message": "yes. it\u0027s accumulative. `virtmgr` keeps the `Vec` of callbacks and notify accordingly. (see: \nhttps://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/android/virtmgr/src/aidl.rs;l\u003d1557)\n\n`registerCallback` is already acculative -- `start()` registers client callback, and `create()` registers state callback.",
+      "parentUuid": "b7c2f87e_f0640de1",
+      "range": {
+        "startLine": 242,
+        "startChar": 0,
+        "endLine": 248,
+        "endChar": 9
+      },
+      "revId": "3a8c4e6e7f6304473ec6e5aed79d7c4256ff8b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
