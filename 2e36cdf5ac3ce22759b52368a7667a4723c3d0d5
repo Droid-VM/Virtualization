@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e137f83_f0d7f281",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-01-14T15:54:52Z",
+      "side": 1,
+      "message": "I assume that it\u0027s dropped when `VmInstance` is dropped. I assume that this CL doesn\u0027t change the behavior, but tell me if I did so by mistake.\n\nHere\u0027s my understanding: The boxed callback is sent to the `virtmgr` via `IVirtualMachine::registerCallback()`, and no more reference from the `libvmclient` side. In other words, the callback is dropped when `virtmgr` drops it.\n\n`virtmgr` keeps the callbacks in the `struct VmInstance` (we use the same name between `virtmgr`, and `libvmclient`), but it\u0027s returned back to the `libvmclient` when `IVirtualMachine::createVm()`. `virtmgr` doesn\u0027t seem to have strong reference to the created `IVirtualMachine` while its `struct State` only keeps weak reference.",
+      "parentUuid": "1b881c4c_d009f40d",
+      "range": {
+        "startLine": 449,
+        "startChar": 12,
+        "endLine": 449,
+        "endChar": 20
+      },
+      "revId": "2e36cdf5ac3ce22759b52368a7667a4723c3d0d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ab9a434_b0c0b6f0",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-01-14T14:24:29Z",
       "side": 1,
       "message": "nit: \"created by `AVirtualMachine_create`\", presumably?",
+      "range": {
+        "startLine": 89,
+        "startChar": 42,
+        "endLine": 89,
+        "endChar": 57
+      },
+      "revId": "2e36cdf5ac3ce22759b52368a7667a4723c3d0d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfcc0404_c80023ba",
+        "filename": "tests/vts/src/vts_libavf_test.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-01-14T15:54:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ab9a434_b0c0b6f0",
       "range": {
         "startLine": 89,
         "startChar": 42,

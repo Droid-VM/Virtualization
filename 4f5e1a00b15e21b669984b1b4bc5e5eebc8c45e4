@@ -22,6 +22,30 @@
       },
       "revId": "4f5e1a00b15e21b669984b1b4bc5e5eebc8c45e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b20b315e_e23f85ca",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-01-14T15:54:52Z",
+      "side": 0,
+      "message": "Yes. `AVirtualMachine_start` may create `LocalVmInstance` that also keeps the reference to the `vm`, so I thought that `Arc` is better fit.\n\nBecause of that, `vm_ptr` doesn\u0027t seem to takes ownership, so I simply removed the line, because `unsafe` is anyway added for `*vm_ptr` and rhs isn\u0027t `unsafe`.",
+      "parentUuid": "c5918217_8371e985",
+      "range": {
+        "startLine": 379,
+        "startChar": 15,
+        "endLine": 379,
+        "endChar": 76
+      },
+      "revId": "4f5e1a00b15e21b669984b1b4bc5e5eebc8c45e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
