@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd954085_0b7d7ee9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-14T16:18:34Z",
+      "side": 1,
+      "message": "From running\n```\nMicrodroidHostTests#testMicrodroidBoots_protectedVm_true_os_microdroid\n```\nin the first Presubmit run:\n```\nMicrodroidConsole: [INFO] Starting payload...\nMicrodroidConsole: [INFO] Expecting a bug making MMIO_GUARD_UNMAP return NOT_SUPPORTED on success\nMicrodroidConsole: [    0.000000][    T0] Booting Linux on physical CPU 0x0000000000 [0x412fd050]\nMicrodroidConsole: [    0.000000][    T0] Linux version 6.6.[...]\n```\nwhich confirms that we\u0027re now properly capturing Microdroid\u0027s early logs on the UART!",
+      "revId": "1ca665685d7656457e64a3903bd3a810943351ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
