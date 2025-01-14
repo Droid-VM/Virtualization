@@ -1,0 +1,109 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+prebuilt_etc {
+    name: "lk_trusty.elf",
+    system_ext_specific: true,
+    relative_install_path: "vm/trusty_vm",
+    filename: "lk_trusty.elf",
+    arch: {
+        x86_64: {
+            src: ":trusty_security_vm_signed",
+        },
+        arm64: {
+            src: ":security_vm_elf",
+        },
+    },
+    src: ":empty_file",
+}
+
+raw_binary {
+    name: "trusty_security_vm_unsigned",
+    src: ":trusty-test-lk.elf",
+    enabled: false,
+    arch: {
+        arm64: {
+            enabled: true,
+        },
+    },
+}
+
+filegroup {
+    name: "trusty_vm_sign_key",
+    srcs: [":avb_testkey_rsa4096"],
+}
+
+// python -c "import hashlib; print(hashlib.sha256(b'trusty_security_vm_salt').hexdigest())"
+trusty_security_vm_salt = "75a71e967c1a1e0f805cca20465e7acf83e6a04e567a67c426d8b5a94f8d61c5"
+
+TRUSTY_SECURITY_VM_VERSION = 1
+
+avb_add_hash_footer {
+    name: "trusty_security_vm_signed",
+    filename: "trusty_security_vm_signed",
+    partition_name: "boot",
+    private_key: ":trusty_vm_sign_key",
+    salt: trusty_security_vm_salt,
+    rollback_index: TRUSTY_SECURITY_VM_VERSION,
+    props: [
+        {
+            name: "com.android.virt.cap",
+            value: "trusty_security_vm",
+        },
+    ],
+    src: ":empty_file",
+    enabled: false,
+    arch: {
+        x86_64: {
+            src: ":trusty-lk.elf",
+            enabled: true,
+        },
+        arm64: {
+            src: ":trusty_security_vm_unsigned",
+            enabled: true,
+        },
+    },
+}
+
+cc_object {
+    name: "security_vm_signed_obj",
+    srcs: [
+        "security_vm.S",
+    ],
+    static_libs: [
+        "trusty_security_vm_signed",
+    ],
+    crt: false,
+    system_shared_libs: [],
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+    },
+}
+
+cc_object {
+    name: "security_vm_elf",
+    device_supported: true,
+    srcs: [
+        ":security_vm_signed_obj",
+    ],
+    linker_script: "security_vm_sections.ld",
+    asflags: [
+        // This flag prevents the linker from adding a program interpreter segment.
+        // This ensures the ELF file contains only a single loadable segment
+        // consisting of `trusty_security_vm_signed` to pass the verified boot in
+        // pvmfw.
+        "-Wl,--no-dynamic-linker",
+    ],
+    crt: false,
+    system_shared_libs: [],
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+    },
+}
