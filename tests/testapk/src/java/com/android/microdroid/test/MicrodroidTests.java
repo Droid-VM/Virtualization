@@ -39,7 +39,6 @@ import static org.junit.Assume.assumeTrue;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import static java.util.stream.Collectors.toList;
 
-import android.app.ActivityManager;
 import android.app.Instrumentation;
 import android.app.UiAutomation;
 import android.content.ComponentName;
@@ -47,7 +46,6 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.os.Build;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
@@ -84,6 +82,7 @@ import co.nstant.in.cbor.model.DataItem;
 import co.nstant.in.cbor.model.MajorType;
 
 import com.google.common.base.Strings;
+import com.google.common.time.Sleeper;
 import com.google.common.truth.BooleanSubject;
 
 import org.junit.After;
@@ -110,6 +109,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.cert.X509Certificate;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -172,11 +172,6 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     public void tearDown() {
         revokePermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
     }
-
-    private static final long ONE_MEBI = 1024 * 1024;
-
-    private static final long MIN_MEM_ARM64 = 170 * ONE_MEBI;
-    private static final long MIN_MEM_X86_64 = 196 * ONE_MEBI;
     private static final String EXAMPLE_STRING = "Literally any string!! :)";
 
     private static final String VM_SHARE_APP_PACKAGE_NAME = "com.android.microdroid.vmshare_app";
@@ -972,7 +967,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         // If we explicitly stop a VM, that triggers some tidy up; so for this test we start a VM
         // that immediately stops itself.
         while (vm.getStatus() == STATUS_RUNNING) {
-            Thread.sleep(100);
+            Sleeper.defaultSleeper().sleep(Duration.ofMillis(100));
         }
 
         // Delete the files without telling VMM. This isn't a good idea, but we can't stop an
@@ -1978,7 +1973,11 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                                                     vm,
                                                     (ts, tr) -> {
                                                         ts.insecurelyWritePayloadRpData(data);
-                                                        Thread.sleep(5 * 1000); // 5 seconds of wait
+                                                        Sleeper.defaultSleeper()
+                                                                .sleep(
+                                                                        Duration.ofSeconds(
+                                                                                5)); // 5 seconds of
+                                                        // wait
                                                         tr.mPayloadRpData =
                                                                 ts.insecurelyReadPayloadRpData();
                                                     });
@@ -2837,13 +2836,6 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         }
     }
 
-    private long getAvailableMemory() {
-        ActivityManager am = getContext().getSystemService(ActivityManager.class);
-        ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
-        am.getMemoryInfo(memoryInfo);
-        return memoryInfo.availMem;
-    }
-
     private VirtualMachineDescriptor toParcelFromParcel(VirtualMachineDescriptor descriptor) {
         Parcel parcel = Parcel.obtain();
         descriptor.writeToParcel(parcel, 0);
@@ -2875,18 +2867,5 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
             ThrowingRunnable runnable, String expectedContents) {
         Exception e = assertThrows(VirtualMachineException.class, runnable);
         assertThat(e).hasMessageThat().contains(expectedContents);
-    }
-
-    private long minMemoryRequired() {
-        assertThat(Build.SUPPORTED_ABIS).isNotEmpty();
-        String primaryAbi = Build.SUPPORTED_ABIS[0];
-        switch (primaryAbi) {
-            case "x86_64":
-                return MIN_MEM_X86_64;
-            case "arm64-v8a":
-            case "arm64-v8a-hwasan":
-                return MIN_MEM_ARM64;
-        }
-        throw new AssertionError("Unsupported ABI: " + primaryAbi);
     }
 }

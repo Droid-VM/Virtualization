@@ -69,6 +69,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -76,6 +77,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.OptionalLong;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 
@@ -764,18 +766,18 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
                                 int a = 0;
                                 int b = 1;
                                 int c;
-                                tr.mTimings = new long[NUM_REQUESTS];
+                                tr.mTimings = new long[NUM_REQUESTS][1];
                                 for (int j = 0; j < NUM_REQUESTS; j++) {
                                     long start = System.nanoTime();
                                     c = ts.addInteger(a, b);
-                                    tr.mTimings[j] = System.nanoTime() - start;
+                                    tr.mTimings[j][0] = System.nanoTime() - start;
                                     a = b;
                                     b = c;
                                 }
                             });
             testResults.assertNoException();
             assertThat(testResults.mAddInteger).isEqualTo(579);
-            for (long duration : testResults.mTimings) {
+            for (long duration : testResults.mTimings[0]) {
                 requestLatencies.add((double) duration / NANO_TO_MICRO);
             }
         }
@@ -825,21 +827,21 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
                                     }
 
                                     // Measured requests.
-                                    tr.mTimings = new long[NUM_REQUESTS];
+                                    tr.mTimings = new long[1][NUM_REQUESTS];
                                     for (int j = 0; j < NUM_REQUESTS; j++) {
                                         String text = "test" + j + "\n";
                                         long start = System.nanoTime();
                                         writer.write(text);
                                         writer.flush();
                                         reader.readLine();
-                                        tr.mTimings[j] = System.nanoTime() - start;
+                                        tr.mTimings[0][j] = System.nanoTime() - start;
                                     }
                                 }
                             });
             testResults.assertNoException();
             assertThat(testResults.mFileContent).isEqualTo("olleh");
-            for (long duration : testResults.mTimings) {
-                requestLatencies.add((double) duration / NANO_TO_MICRO);
+            for (long[] duration : testResults.mTimings) {
+                requestLatencies.add((double) duration[0] / NANO_TO_MICRO);
             }
         }
         reportMetrics(requestLatencies, "latency/vsock", "us");
@@ -926,5 +928,107 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
             assertThat(exception.getNow(null)).isNull();
         }
         reportMetrics(requestAttestationTime, "request_attestation_time", "microsecond");
+    }
+
+    @Test
+    public void testPayloadRpDataLatency() throws Exception {
+        final long vmSize = minMemoryRequired();
+        final int numVMs = 5;
+        final int NUM_REQUESTS = 10;
+        final long availableMem = getAvailableMemory();
+
+        VirtualMachineConfig config =
+                newVmConfigBuilderWithPayloadBinary("MicrodroidTestNativeLib.so")
+                        .setDebugLevel(DEBUG_LEVEL_NONE)
+                        .setMemoryBytes(vmSize)
+                        .build();
+
+        // Let's not use more than half of the available memory
+        assume().withMessage("Available memory (" + availableMem + " bytes) too small")
+                .that((numVMs * vmSize) <= (availableMem / 2))
+                .isTrue();
+        byte[] data = new byte[32];
+        Arrays.fill(data, (byte) 0xcc);
+
+        List<Double> writeRequestLatencies = new ArrayList<>(numVMs * NUM_REQUESTS);
+        List<Double> readRequestLatencies = new ArrayList<>(numVMs * NUM_REQUESTS);
+        List<Double> writeRequestLatenciesWithExistingSession =
+                new ArrayList<>(numVMs * NUM_REQUESTS);
+        List<Double> readRequestLatenciesWithExistingSession =
+                new ArrayList<>(numVMs * NUM_REQUESTS);
+        CompletableFuture<TestResults>[] resultFutureList = new CompletableFuture[numVMs];
+        for (int i = 0; i < numVMs; i++) {
+            final VirtualMachine vm =
+                    forceCreateNewVirtualMachine("test_sk_session_expiration_vm_" + i, config);
+            resultFutureList[i] =
+                    CompletableFuture.supplyAsync(
+                            () -> {
+                                try {
+                                    TestResults testResult =
+                                            runVmTestService(
+                                                    TAG,
+                                                    vm,
+                                                    (ts, tr) -> {
+                                                        tr.mTimings = new long[NUM_REQUESTS][4];
+                                                        for (int j = 0; j < NUM_REQUESTS; j++) {
+                                                            // TODO: Sleep for random time b/w 2 &
+                                                            // 3!
+                                                            Thread.sleep(2 * 1000); // Sleep
+                                                            long start = System.nanoTime();
+                                                            ts.insecurelyWritePayloadRpData(data);
+                                                            tr.mTimings[j][0] =
+                                                                    System.nanoTime() - start;
+
+                                                            Thread.sleep(2 * 1000);
+                                                            start = System.nanoTime();
+                                                            tr.mPayloadRpData =
+                                                                    ts
+                                                                            .insecurelyReadPayloadRpData();
+                                                            tr.mTimings[j][1] =
+                                                                    System.nanoTime() - start;
+
+                                                            // Read, write again with no sleep.
+                                                            // Likely re-using the session
+                                                            start = System.nanoTime();
+                                                            ts.insecurelyWritePayloadRpData(data);
+                                                            tr.mTimings[j][2] =
+                                                                    System.nanoTime() - start;
+                                                            start = System.nanoTime();
+                                                            tr.mPayloadRpData =
+                                                                    ts
+                                                                            .insecurelyReadPayloadRpData();
+                                                            // Write time
+                                                            tr.mTimings[j][3] =
+                                                                    System.nanoTime() - start;
+                                                        }
+                                                    });
+                                    // Correctness check.
+                                    testResult.assertNoException();
+                                    assertThat(testResult.mPayloadRpData).isEqualTo(data);
+                                    return testResult;
+                                } catch (Exception e) {
+                                    throw new CompletionException(e);
+                                }
+                            });
+        }
+
+        for (int i = 0; i < numVMs; i++) {
+            for (long[] timings : resultFutureList[i].get().mTimings) {
+                writeRequestLatencies.add((double) timings[0] / NANO_TO_MICRO);
+                readRequestLatencies.add((double) timings[1] / NANO_TO_MICRO);
+                writeRequestLatenciesWithExistingSession.add((double) timings[2] / NANO_TO_MICRO);
+                readRequestLatenciesWithExistingSession.add((double) timings[3] / NANO_TO_MICRO);
+            }
+        }
+        reportMetrics(writeRequestLatencies, "latency/writeRollbackProtectedSecret", "us");
+        reportMetrics(readRequestLatencies, "latency/readRollbackProtectedSecret", "us");
+        reportMetrics(
+                writeRequestLatenciesWithExistingSession,
+                "latency/writeRollbackProtectedSecret_existing_session",
+                "us");
+        reportMetrics(
+                readRequestLatenciesWithExistingSession,
+                "latency/readRollbackProtectedSecret_existing_session",
+                "us");
     }
 }
