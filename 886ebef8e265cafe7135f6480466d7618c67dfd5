@@ -39,6 +39,30 @@
       },
       "revId": "886ebef8e265cafe7135f6480466d7618c67dfd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f20cb38_334ce306",
+        "filename": "tests/vmshareapp/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-01-14T01:34:50Z",
+      "side": 1,
+      "message": "The GTS tests are built from HEAD and then executed on devices with previous desert releases. Additionaly, if you don\u0027t explicitly specify target_sdk_version, the SDK version of the branch is used.\nThis means, that if the SDK on HEAD is not finalized (like the case with Balkava right now), then resulting apk can\u0027t be installed on the devices that run finalized SDK. A bunch of test apps under vendor/xts/gts-tests are explicitly setting the target_sdk_version.",
+      "parentUuid": "608135db_a6f22866",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 42
+      },
+      "revId": "886ebef8e265cafe7135f6480466d7618c67dfd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
