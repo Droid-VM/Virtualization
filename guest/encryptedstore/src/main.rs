@@ -34,6 +34,8 @@ const MK2FS_BIN: &str = "/system/bin/mke2fs";
 const UNFORMATTED_STORAGE_MAGIC: &str = "UNFORMATTED-STORAGE";
 
 fn main() {
+    info!("************************************************* encryptedstore_init ensured");
+
     android_logger::init_once(
         android_logger::Config::default()
             .with_tag("encryptedstore")
@@ -73,6 +75,8 @@ fn clap_command() -> clap::Command {
 }
 
 fn encryptedstore_init(blkdevice: &Path, key: &str, mountpoint: &Path) -> Result<()> {
+    info!("************************************************* encryptedstore_init");
+
     ensure!(
         std::fs::metadata(blkdevice)
             .with_context(|| format!("Failed to get metadata of {:?}", blkdevice))?
@@ -82,18 +86,42 @@ fn encryptedstore_init(blkdevice: &Path, key: &str, mountpoint: &Path) -> Result
         blkdevice
     );
 
+    info!("************************************************* encryptedstore_init ensured");
+
     let needs_formatting =
         needs_formatting(blkdevice).context("Unable to check if formatting is required")?;
     let crypt_device =
         enable_crypt(blkdevice, key, "cryptdev").context("Unable to map crypt device")?;
 
+    info!("*************************************************  Crypt device path {}", &crypt_device.display());
+
     // We might need to format it with filesystem if this is a "seen-for-the-first-time" device.
     if needs_formatting {
-        info!("Freshly formatting the crypt device");
+        info!("*************************************************  Freshly formatting the crypt device");
         format_ext4(&crypt_device)?;
     }
+    // else {
+    //     info!("************************************************* Resizing the crypt device");
+    //     let status =  Command::new("/system/bin/resize2fs")
+    //         .arg(&crypt_device)
+    //         .arg("8M")
+    //         .status()
+    //         .context("failed to execute resize2fs")?;
+    //     ensure!(status.success(), "resize2fs failed with {:?}", status);
+
+    //     // info!("*************************************************  Running fsck");
+    //     // let status =  Command::new("/system/bin/e2fsck")
+    //     //     .arg(&crypt_device)
+    //     //     .status()
+    //     //     .context("failed to execute e2fsck")?;
+    //     // ensure!(status.success(), "e2fsck failed with {:?}", status);
+
+    // }
+    info!("************************************************* Mounting the crypt device");
     mount(&crypt_device, mountpoint)
         .with_context(|| format!("Unable to mount {:?}", crypt_device))?;
+    info!("************************************************* Mounting complete");
+
     if cfg!(multi_tenant) && needs_formatting {
         set_root_dir_permissions(mountpoint)?;
     }
@@ -111,7 +139,12 @@ fn set_root_dir_permissions(mountpoint: &Path) -> Result<()> {
 
 fn enable_crypt(data_device: &Path, key: &str, name: &str) -> Result<PathBuf> {
     let dev_size = util::blkgetsize64(data_device)?;
+    info!("************************************************* crypt data_device {}", data_device.display());
+    info!("************************************************* crypt dev_size {}", dev_size);
+
     let key = hex::decode(key).context("Unable to decode hex key")?;
+
+    info!("************************************************* DmCryptTargetBuilder");
 
     // Create the dm-crypt spec
     let target = dm::crypt::DmCryptTargetBuilder::default()
@@ -123,6 +156,9 @@ fn enable_crypt(data_device: &Path, key: &str, name: &str) -> Result<PathBuf> {
         .build()
         .context("Couldn't build the DMCrypt target")?;
     let dm = dm::DeviceMapper::new()?;
+
+    info!("************************************************* dm.create_crypt_device");
+
     dm.create_crypt_device(name, &target).context("Failed to create dm-crypt device")
 }
 
