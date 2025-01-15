@@ -46,6 +46,30 @@
       },
       "revId": "b136415a5d6ce3594900b60f0249f597eb53adc9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82501c7e_c0b6d33e",
+        "filename": "libs/libvmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-15T16:01:49Z",
+      "side": 1,
+      "message": "Sure, does that prevent `set_errno()` and `get_errno()` from being safe by using mutex/atomic? As a result, you wouldn\u0027t need to propagate the \"`must only be called from the main thread`\" comment/requirement to all these other functions.",
+      "parentUuid": "ac652603_e65ba597",
+      "range": {
+        "startLine": 70,
+        "startChar": 15,
+        "endLine": 70,
+        "endChar": 20
+      },
+      "revId": "b136415a5d6ce3594900b60f0249f597eb53adc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
