@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f054008_4bbea875",
+        "filename": "libs/libvmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-15T13:09:20Z",
+      "side": 1,
+      "message": "Can\u0027t we use a `SpinMutex` or an atomic and keep those functions safe? I\u0027m not sure why `ERRNO` is `pub`, does C link against the symbol directly?",
+      "range": {
+        "startLine": 70,
+        "startChar": 15,
+        "endLine": 70,
+        "endChar": 20
+      },
+      "revId": "b136415a5d6ce3594900b60f0249f597eb53adc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
