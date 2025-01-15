@@ -26,7 +26,6 @@ extern crate alloc;
 use crate::layout::print_addresses;
 use crate::pci::check_pci;
 use alloc::{vec, vec::Vec};
-use core::ptr::addr_of_mut;
 use libfdt::Fdt;
 use log::{debug, error, info, trace, warn, LevelFilter};
 use vmbase::{
@@ -115,10 +114,10 @@ fn check_data() {
 
     // SAFETY: Nowhere else in the program accesses this static mutable variable, so there is no
     // chance of concurrent access.
-    let zeroed_data = unsafe { &mut *addr_of_mut!(ZEROED_DATA) };
+    let zeroed_data = unsafe { &mut *(&raw mut ZEROED_DATA) };
     // SAFETY: Nowhere else in the program accesses this static mutable variable, so there is no
     // chance of concurrent access.
-    let mutable_data = unsafe { &mut *addr_of_mut!(MUTABLE_DATA) };
+    let mutable_data = unsafe { &mut *(&raw mut MUTABLE_DATA) };
 
     for element in zeroed_data.iter() {
         assert_eq!(*element, 0);
