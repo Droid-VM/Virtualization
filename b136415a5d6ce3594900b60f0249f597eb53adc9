@@ -22,6 +22,30 @@
       },
       "revId": "b136415a5d6ce3594900b60f0249f597eb53adc9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac652603_e65ba597",
+        "filename": "libs/libvmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-15T13:31:53Z",
+      "side": 1,
+      "message": "I think the problem is the `__errno()` function which needs to return a pointer to it.",
+      "parentUuid": "7f054008_4bbea875",
+      "range": {
+        "startLine": 70,
+        "startChar": 15,
+        "endLine": 70,
+        "endChar": 20
+      },
+      "revId": "b136415a5d6ce3594900b60f0249f597eb53adc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
