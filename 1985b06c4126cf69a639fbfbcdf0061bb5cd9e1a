@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3f70b7e_52ca6487",
+        "filename": "libs/dice/open_dice/src/error.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1951225
+      },
+      "writtenOn": "2025-01-15T16:13:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc3733a5_9176f3eb",
+      "range": {
+        "startLine": 53,
+        "startChar": 18,
+        "endLine": 53,
+        "endChar": 26
+      },
+      "revId": "1985b06c4126cf69a639fbfbcdf0061bb5cd9e1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5317e253_fc493955",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-01-15T12:36:24Z",
       "side": 1,
       "message": "super-nit: Maybe drop `if` to make the code more compact here?\n```suggestion\n            #[cfg(not(feature \u003d \"std\"))]\n            buffer.try_reserve_exact(actual_size).map_err(|_| DiceError::NoMemory)?;\n```",
+      "range": {
+        "startLine": 65,
+        "startChar": 12,
+        "endLine": 67,
+        "endChar": 13
+      },
+      "revId": "1985b06c4126cf69a639fbfbcdf0061bb5cd9e1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80afc6b5_46e9588c",
+        "filename": "libs/dice/open_dice/src/retry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1951225
+      },
+      "writtenOn": "2025-01-15T16:13:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5317e253_fc493955",
       "range": {
         "startLine": 65,
         "startChar": 12,
