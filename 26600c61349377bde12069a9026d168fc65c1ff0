@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5620c2df_1e728299",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1146974
+      },
+      "writtenOn": "2025-01-15T08:18:49Z",
+      "side": 1,
+      "message": "I added `__builtin_available` check, but I don\u0027t think these new functions `insecurelyReadPayloadRpData`, `insecurelyWritePayloadRpData` or `isNewInstance` can be called in old devices.\n@shikhapanwar@google.com, PTAL.\nFeel free to abandon this change or upload a new patchset on this CL.",
+      "revId": "26600c61349377bde12069a9026d168fc65c1ff0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
