@@ -105,6 +105,7 @@ import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
@@ -410,6 +411,11 @@ public class VirtualMachine implements AutoCloseable {
     @Nullable
     private Executor mCallbackExecutor;
 
+    /** Snapshot path */
+    @GuardedBy("mLock")
+    @Nullable
+    private String mSnapshot;
+
     private static class ExtraApkSpec {
         public final File apk;
         public final File idsig;
@@ -460,6 +466,10 @@ public class VirtualMachine implements AutoCloseable {
         mVmOutputCaptured = config.isVmOutputCaptured();
         mVmConsoleInputSupported = config.isVmConsoleInputSupported();
         mConnectVmConsole = config.isConnectVmConsole();
+        Path snapshotPath = Paths.get("./" + mName);
+        if (Files.exists(snapshotPath)) {
+            mSnapshot = mName;
+        }
 
         VirtualMachineCustomImageConfig customImageConfig;
         customImageConfig = config.getCustomImageConfig();
@@ -910,7 +920,7 @@ public class VirtualMachine implements AutoCloseable {
     }
 
     private android.system.virtualizationservice.VirtualMachineConfig
-            createVirtualMachineConfigForRawFrom(VirtualMachineConfig vmConfig)
+            createVirtualMachineConfigForRawFrom(VirtualMachineConfig vmConfig, String snapshotPath)
                     throws IllegalStateException, IOException {
         VirtualMachineRawConfig rawConfig = vmConfig.toVsRawConfig();
 
@@ -964,6 +974,7 @@ public class VirtualMachine implements AutoCloseable {
         if (vmConfig.getCustomImageConfig() != null) {
             rawConfig.networkSupported = vmConfig.getCustomImageConfig().useNetwork();
         }
+        rawConfig.snapshot = snapshotPath;
 
         return android.system.virtualizationservice.VirtualMachineConfig.rawConfig(rawConfig);
     }
@@ -1427,7 +1438,9 @@ public class VirtualMachine implements AutoCloseable {
 
     private android.system.virtualizationservice.VirtualMachineConfig
             createVirtualMachineConfigForAppFrom(
-                    VirtualMachineConfig vmConfig, IVirtualizationService service)
+                    VirtualMachineConfig vmConfig,
+                    IVirtualizationService service,
+                    String snapshotPath)
                     throws RemoteException, IOException, VirtualMachineException {
         VirtualMachineAppConfig appConfig = vmConfig.toVsConfig(mContext.getPackageManager());
         appConfig.instanceImage = ParcelFileDescriptor.open(mInstanceFilePath, MODE_READ_WRITE);
@@ -1442,6 +1455,8 @@ public class VirtualMachine implements AutoCloseable {
             appConfig.encryptedStorageImage =
                     ParcelFileDescriptor.open(mEncryptedStoreFilePath, MODE_READ_WRITE);
         }
+
+        appConfig.snapshot = snapshotPath;
 
         if (!vmConfig.getExtraApks().isEmpty()) {
             // Extra APKs were specified directly, rather than via config file.
@@ -1573,8 +1588,9 @@ public class VirtualMachine implements AutoCloseable {
                 VirtualMachineConfig vmConfig = getConfig();
                 android.system.virtualizationservice.VirtualMachineConfig vmConfigParcel =
                         vmConfig.getCustomImageConfig() != null
-                                ? createVirtualMachineConfigForRawFrom(vmConfig)
-                                : createVirtualMachineConfigForAppFrom(vmConfig, service);
+                                ? createVirtualMachineConfigForRawFrom(vmConfig, mSnapshot)
+                                : createVirtualMachineConfigForAppFrom(
+                                        vmConfig, service, mSnapshot);
 
                 mVirtualMachine =
                         service.createVm(
