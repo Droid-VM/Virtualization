@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc3733a5_9176f3eb",
+        "filename": "libs/dice/open_dice/src/error.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-01-15T12:36:24Z",
+      "side": 1,
+      "message": "nit: Could we rename this to MemoryAllocationError? It sounds slightly more readable and specific.",
+      "range": {
+        "startLine": 53,
+        "startChar": 18,
+        "endLine": 53,
+        "endChar": 26
+      },
+      "revId": "1985b06c4126cf69a639fbfbcdf0061bb5cd9e1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5317e253_fc493955",
+        "filename": "libs/dice/open_dice/src/retry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-01-15T12:36:24Z",
+      "side": 1,
+      "message": "super-nit: Maybe drop `if` to make the code more compact here?\n```suggestion\n            #[cfg(not(feature \u003d \"std\"))]\n            buffer.try_reserve_exact(actual_size).map_err(|_| DiceError::NoMemory)?;\n```",
+      "range": {
+        "startLine": 65,
+        "startChar": 12,
+        "endLine": 67,
+        "endChar": 13
+      },
+      "revId": "1985b06c4126cf69a639fbfbcdf0061bb5cd9e1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
