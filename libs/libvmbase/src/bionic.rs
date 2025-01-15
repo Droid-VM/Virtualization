@@ -69,28 +69,44 @@ extern "C" fn abort() -> ! {
 /// Error number set and read by C functions.
 pub static mut ERRNO: c_int = 0;
 
+/// # Safety
+///
+/// This must only be called from the main thread, not from exception handlers.
 #[no_mangle]
-// SAFETY: C functions which call this are only called from the main thread, not from exception
-// handlers.
 unsafe extern "C" fn __errno() -> *mut c_int {
     (&raw mut ERRNO).cast()
 }
 
-fn set_errno(value: c_int) {
-    // SAFETY: vmbase is currently single-threaded.
+/// # Safety
+///
+/// This must only be called from the main thread, not from exception handlers.
+unsafe fn set_errno(value: c_int) {
+    // SAFETY: The caller promised only to call this from the main thread, so there can't be any
+    // concurrent access.
     unsafe { ERRNO = value };
 }
 
-fn get_errno() -> c_int {
-    // SAFETY: vmbase is currently single-threaded.
+/// # Safety
+///
+/// This must only be called from the main thread, not from exception handlers.
+unsafe fn get_errno() -> c_int {
+    // SAFETY: The caller promised only to call this from the main thread, so there can't be any
+    // concurrent access.
     unsafe { ERRNO }
 }
 
+/// # Safety
+///
+/// This must only be called from the main thread, not from exception handlers.
 #[no_mangle]
-extern "C" fn getentropy(buffer: *mut c_void, length: usize) -> c_int {
+unsafe extern "C" fn getentropy(buffer: *mut c_void, length: usize) -> c_int {
+    // The maximum permitted value for the length argument is 256.
     if length > 256 {
-        // The maximum permitted value for the length argument is 256.
-        set_errno(EIO);
+        // SAFETY: The caller promised only to call this from the main thread, so there can't be any
+        // concurrent access.
+        unsafe {
+            set_errno(EIO);
+        }
         return -1;
     }
 
@@ -167,25 +183,39 @@ static stdout: CFilePtr = CFilePtr::Stdout;
 #[no_mangle]
 static stderr: CFilePtr = CFilePtr::Stderr;
 
+/// # Safety
+///
+/// This must only be called from the main thread, not from exception handlers.
+/// `c_str` must be a valid pointer to a NUL-terminated string which is not modified before this
+/// function returns.
 #[no_mangle]
-extern "C" fn fputs(c_str: *const c_char, stream: usize) -> c_int {
-    // SAFETY: Just like libc, we need to assume that `s` is a valid NULL-terminated string.
+unsafe extern "C" fn fputs(c_str: *const c_char, stream: usize) -> c_int {
+    // SAFETY: The caller promised that `c_str` is a valid NUL-terminated string.
     let c_str = unsafe { CStr::from_ptr(c_str) };
 
     if let (Ok(s), Ok(f)) = (c_str.to_str(), CFilePtr::try_from(stream)) {
         f.write_lines(s);
         0
     } else {
-        set_errno(EOF);
+        // SAFETY: The caller promised only to call this from the main thread, so there can't be any
+        // concurrent access.
+        unsafe {
+            set_errno(EOF);
+        }
         EOF
     }
 }
 
+/// # Safety
+///
+/// `ptr` must be a valid pointer to an array of at least `size * nmemb` initialised bytes, which
+/// are not modified before this function returns.
 #[no_mangle]
-extern "C" fn fwrite(ptr: *const c_void, size: usize, nmemb: usize, stream: usize) -> usize {
+unsafe extern "C" fn fwrite(ptr: *const c_void, size: usize, nmemb: usize, stream: usize) -> usize {
     let length = size.saturating_mul(nmemb);
 
-    // SAFETY: Just like libc, we need to assume that `ptr` is valid.
+    // SAFETY: The caller promised that `ptr` is a valid pointer to at least `size * nmemb`
+    // initialised bytes, and `length` is no more than that.
     let bytes = unsafe { slice::from_raw_parts(ptr as *const u8, length) };
 
     if let (Ok(s), Ok(f)) = (str::from_utf8(bytes), CFilePtr::try_from(stream)) {
@@ -201,12 +231,17 @@ extern "C" fn strerror(n: c_int) -> *mut c_char {
     cstr_error(n).as_ptr().cast_mut().cast()
 }
 
+/// # Safety
+///
+/// This must only be called from the main thread, not from exception handlers.
+/// `s` must be a valid pointer to a NUL-terminated string which is not modified before this
+/// function returns.
 #[no_mangle]
-extern "C" fn perror(s: *const c_char) {
+unsafe extern "C" fn perror(s: *const c_char) {
     let prefix = if s.is_null() {
         None
     } else {
-        // SAFETY: Just like libc, we need to assume that `s` is a valid NULL-terminated string.
+        // SAFETY: The caller promised that `s` is a valid NUL-terminated string.
         let c_str = unsafe { CStr::from_ptr(s) };
         if c_str.is_empty() {
             None
@@ -215,7 +250,9 @@ extern "C" fn perror(s: *const c_char) {
         }
     };
 
-    let error = cstr_error(get_errno()).to_str().unwrap();
+    // SAFETY: The caller promised only to call this from the main thread, so there can't be any
+    // concurrent access.
+    let error = cstr_error(unsafe { get_errno() }).to_str().unwrap();
 
     if let Some(prefix) = prefix {
         error!("{prefix}: {error}");
