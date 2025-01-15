@@ -173,6 +173,7 @@ cc_defaults {
         "liblog",
         "libprotobuf-cpp-lite-ndk",
     ],
+    min_sdk_version: "33",
 }
 
 cc_library_shared {
