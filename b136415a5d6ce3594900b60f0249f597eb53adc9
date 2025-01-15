@@ -70,6 +70,30 @@
       },
       "revId": "b136415a5d6ce3594900b60f0249f597eb53adc9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52d51575_4df7ffbe",
+        "filename": "libs/libvmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-15T18:06:56Z",
+      "side": 1,
+      "message": "If `ERRNO` were a `SpinMutex\u003cc_int\u003e` then how could `__errno` return a `*mut c_int`?",
+      "parentUuid": "82501c7e_c0b6d33e",
+      "range": {
+        "startLine": 70,
+        "startChar": 15,
+        "endLine": 70,
+        "endChar": 20
+      },
+      "revId": "b136415a5d6ce3594900b60f0249f597eb53adc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
