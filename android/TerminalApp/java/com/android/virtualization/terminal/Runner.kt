@@ -85,7 +85,16 @@ internal class Runner private constructor(val vm: VirtualMachine?, callback: Cal
 
             val cb = Callback()
             vm.setCallback(ForkJoinPool.commonPool(), cb)
+
             vm.run()
+            // val snapOpts = SnapshotOptions()
+            // val snapshotPath = File(name)
+            // snapshotPath.delete()
+            // Files.createDirectory(Paths.get("./" + name))
+            // val snapshotPfd = ParcelFileDescriptor.open(snapshotPath,
+            // ParcelFileDescriptor.MODE_READ_WRITE)
+            // vm.snapshot(snapshotPfd, snapOpts)
+            // Log.i(TAG, "Snapshotting virtual machine")
             return Runner(vm, cb)
         }
     }
