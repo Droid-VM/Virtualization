@@ -34,6 +34,24 @@
       "parentUuid": "6d30157d_aab7ae83",
       "revId": "423f18f302b03f7021a6f664fa4e16146c5099d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9d619b6_d1e5d121",
+        "filename": "guest/trusty/security_vm/vm/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2025-01-16T20:53:28Z",
+      "side": 1,
+      "message": "These flags look fine to be overridden here.  We do have problems with certain flags (-march, lto, or warnings) or flags that get propagated to dependencies.  These specific flags can be overridden if there is good reason.",
+      "parentUuid": "e9ce2cb7_5878e00c",
+      "revId": "423f18f302b03f7021a6f664fa4e16146c5099d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
