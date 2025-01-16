@@ -70,6 +70,30 @@
       },
       "revId": "c1d9f4bee711d0f9c4ad4a125d707071d075e39c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13aa7c0a_cb6058e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-16T18:31:30Z",
+      "side": 1,
+      "message": "\u003e Not sure what is implied by being in sync\n\nSee b/217376291; is that not applicable to Android 16?\n\n\u003e pvmfw is incapable of knowing `new_instance` from instance_hash\n\nAgreed, it should figure it out from `recorded_entry.is_none()`, right?\n\nBut then, why wouldn\u0027t\n```\ninstance_hash !\u003d Some(entry.salt)\n```\nbe an issue as - surely - something has gone wrong since last boot?\n\nI guess my confusion might be coming from the way we\u0027ve changed how CDIs are used between Android 13 (when `new_instance` was required) and now but I\u0027m not sure what change exactly?\n\n\u003e Storing instance-hash in instance.img has no benefit\n\nIf this is true, what\u0027s even the point of `new_instance` nowadays?",
+      "parentUuid": "dc4bcfe3_86236d36",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 49
+      },
+      "revId": "c1d9f4bee711d0f9c4ad4a125d707071d075e39c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
