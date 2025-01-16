@@ -158,6 +158,30 @@
       },
       "revId": "e2e246eb59c038514886f7232c301293639f70ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12ce200f_6c6cb3c2",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-16T17:13:26Z",
+      "side": 1,
+      "message": "But before returning `runVmTestService()`, shouldnt we be ensuring that the VM is closed (either gracefully or otherwise).\n\n\nOtherwise we run into the territory of racy tests.\n\n-----------\n\nTake an e.g., of \"test_vm\" being running for `protected` and then `non-protected VM` in the following way:\n\n```\nVirtualMachine vm \u003d forceCreateNewVirtualMachine(\"test_vm\", config);\nrunVmTestService(vm,...)\n```\n`deleteVirtualMachineIfExists`, I think, called by `forceCreateNewVirtualMachine` can itself be racy incase the deletion happen between \n\n`vmm.get(name)` \u0026 `vmm.delete(name)`.",
+      "parentUuid": "2f380c17_7c3c730b",
+      "range": {
+        "startLine": 737,
+        "startChar": 0,
+        "endLine": 737,
+        "endChar": 53
+      },
+      "revId": "e2e246eb59c038514886f7232c301293639f70ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
