@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5886362d_5f5db170",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-16T15:23:45Z",
+      "side": 1,
+      "message": "Unsafe Rust LGTM.",
+      "revId": "217488597e9a87f8fbc27697bb343c005d4635e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15686912_099ceead",
+        "filename": "libs/libhypervisor_backends/src/hypervisor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-16T15:23:45Z",
+      "side": 1,
+      "message": "Typo: query\n\nAlso, why does this function need to exist if all it does is call another function? Why not just call `kvm::determine_hyp_type()` directly?",
+      "range": {
+        "startLine": 123,
+        "startChar": 3,
+        "endLine": 123,
+        "endChar": 17
+      },
+      "revId": "217488597e9a87f8fbc27697bb343c005d4635e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58bea8f3_4f12d93e",
+        "filename": "libs/libhypervisor_backends/src/hypervisor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-16T15:23:45Z",
+      "side": 1,
+      "message": "Rather than add a return keyword here, can you just put braces around the expression? Like\n\n```rust\n#[cfg(target_arch \u003d \"aarch64\")] {\n    query_vendor_hyp_call_uid().try_into().expect(\"Failed to detect hypervisor\")\n}\n```",
+      "range": {
+        "startLine": 129,
+        "startChar": 4,
+        "endLine": 129,
+        "endChar": 10
+      },
+      "revId": "217488597e9a87f8fbc27697bb343c005d4635e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
