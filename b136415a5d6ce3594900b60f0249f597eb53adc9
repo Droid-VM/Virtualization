@@ -142,6 +142,30 @@
       },
       "revId": "b136415a5d6ce3594900b60f0249f597eb53adc9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "294d63fd_c6eebb6b",
+        "filename": "libs/libvmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-16T12:46:56Z",
+      "side": 1,
+      "message": "Agreed, but then only `__errno()` is `unsafe`, right?",
+      "parentUuid": "1cea4530_e2ffac9f",
+      "range": {
+        "startLine": 70,
+        "startChar": 15,
+        "endLine": 70,
+        "endChar": 20
+      },
+      "revId": "b136415a5d6ce3594900b60f0249f597eb53adc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
