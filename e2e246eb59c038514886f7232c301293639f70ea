@@ -134,6 +134,30 @@
       },
       "revId": "e2e246eb59c038514886f7232c301293639f70ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f380c17_7c3c730b",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-16T08:08:10Z",
+      "side": 1,
+      "message": "microdroid_manager triggers a shutdown after the payload is finished (either successfully or erroneously) [1].\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/guest/microdroid_manager/src/main.rs;drc\u003d5b7b49452ef0ad6bd7922b0353cd9ddab7498c6e;l\u003d182",
+      "parentUuid": "6eeea71b_9cebf7ab",
+      "range": {
+        "startLine": 737,
+        "startChar": 0,
+        "endLine": 737,
+        "endChar": 53
+      },
+      "revId": "e2e246eb59c038514886f7232c301293639f70ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
