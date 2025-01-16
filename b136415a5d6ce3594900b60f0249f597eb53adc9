@@ -118,6 +118,30 @@
       },
       "revId": "b136415a5d6ce3594900b60f0249f597eb53adc9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cea4530_e2ffac9f",
+        "filename": "libs/libvmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-16T11:37:21Z",
+      "side": 1,
+      "message": "If the caller of `__errno()` does non-atomic reads or writes with the pointer returned from an `AtomicI32` then there is still undefined behaviour. The only way around this is to remove `__errno()` entirely or change the contract for the caller, which I guess you can\u0027t do.",
+      "parentUuid": "58339aed_a33a61e8",
+      "range": {
+        "startLine": 70,
+        "startChar": 15,
+        "endLine": 70,
+        "endChar": 20
+      },
+      "revId": "b136415a5d6ce3594900b60f0249f597eb53adc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
