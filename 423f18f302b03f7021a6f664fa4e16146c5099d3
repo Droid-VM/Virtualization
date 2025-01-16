@@ -16,6 +16,24 @@
       "message": "@pirama@google.com I worry that this is delicate and going to place maintenance burdens on the clang team.  These 3 flags are all counteracting global flags, which suggests future toolchain updates or newly added global flags could cause similar problems that would require fixes here.",
       "revId": "423f18f302b03f7021a6f664fa4e16146c5099d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9ce2cb7_5878e00c",
+        "filename": "guest/trusty/security_vm/vm/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-01-16T20:44:21Z",
+      "side": 1,
+      "message": "These options seem to counteracting flags added by the build system, not defaults that the compiler adds. If I run ld.lld outside the build system I don\u0027t need any flags other than specifying the linker script (although I tested x86, not arm64).",
+      "parentUuid": "6d30157d_aab7ae83",
+      "revId": "423f18f302b03f7021a6f664fa4e16146c5099d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
