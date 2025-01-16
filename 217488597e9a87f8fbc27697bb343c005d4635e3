@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8bdd464_20f36feb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026646
+      },
+      "writtenOn": "2025-01-16T15:29:28Z",
+      "side": 1,
+      "message": "If possible please change asm syntax.\nAlso backport to team repo for testing.",
+      "revId": "217488597e9a87f8fbc27697bb343c005d4635e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15686912_099ceead",
@@ -59,6 +76,29 @@
         "startChar": 4,
         "endLine": 129,
         "endChar": 10
+      },
+      "revId": "217488597e9a87f8fbc27697bb343c005d4635e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dc10a2d_772bad61",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/kvm_x86.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 2026646
+      },
+      "writtenOn": "2025-01-16T15:29:28Z",
+      "side": 1,
+      "message": "Majority of x86 of code in codebase use AT\u0026T syntax. \n(Linux, Trusty, x86_64 pvmfw, coreboot... etc)",
+      "range": {
+        "startLine": 157,
+        "startChar": 7,
+        "endLine": 162,
+        "endChar": 89
       },
       "revId": "217488597e9a87f8fbc27697bb343c005d4635e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
