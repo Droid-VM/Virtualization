@@ -166,6 +166,30 @@
       },
       "revId": "b136415a5d6ce3594900b60f0249f597eb53adc9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7b83845_dded4f57",
+        "filename": "libs/libvmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-16T13:30:12Z",
+      "side": 1,
+      "message": "Sure, but then the safety requirement of `__errno()` would be that its callers must only use atomic operations to access the contents of the pointer it returns. Can you change all the callers of `__errno()` to do that?",
+      "parentUuid": "294d63fd_c6eebb6b",
+      "range": {
+        "startLine": 70,
+        "startChar": 15,
+        "endLine": 70,
+        "endChar": 20
+      },
+      "revId": "b136415a5d6ce3594900b60f0249f597eb53adc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
