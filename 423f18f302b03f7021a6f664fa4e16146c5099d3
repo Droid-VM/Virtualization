@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d30157d_aab7ae83",
+        "filename": "guest/trusty/security_vm/vm/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2025-01-16T19:36:43Z",
+      "side": 1,
+      "message": "@pirama@google.com I worry that this is delicate and going to place maintenance burdens on the clang team.  These 3 flags are all counteracting global flags, which suggests future toolchain updates or newly added global flags could cause similar problems that would require fixes here.",
+      "revId": "423f18f302b03f7021a6f664fa4e16146c5099d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
