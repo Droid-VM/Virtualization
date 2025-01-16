@@ -190,6 +190,30 @@
       },
       "revId": "b136415a5d6ce3594900b60f0249f597eb53adc9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27c47077_5e979270",
+        "filename": "libs/libvmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-16T17:51:09Z",
+      "side": 1,
+      "message": "Update following offline discussion: TBD on how to proceed given that this approach would end up propagating the \"`must only be called from the main thread`\" `unsafe`-ness to any code that - directly or indirectly - calls these functions (which is most of pvmfw/Rialto given their use of C/C++ deps such as `libfdt`, `libavb`, BoringSSL).",
+      "parentUuid": "a7b83845_dded4f57",
+      "range": {
+        "startLine": 70,
+        "startChar": 15,
+        "endLine": 70,
+        "endChar": 20
+      },
+      "revId": "b136415a5d6ce3594900b60f0249f597eb53adc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
