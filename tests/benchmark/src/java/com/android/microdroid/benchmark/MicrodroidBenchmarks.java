@@ -1110,4 +1110,69 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
                 "latency/writeRollbackProtectedSecretWithRefreshSession",
                 "us");
     }
+
+    private void assertEncryptedStorePersists(VirtualMachine vm) throws Exception {
+        final String content = "encrypted_store_data";
+        TestResults testResults =
+                runVmTestService(
+                        TAG,
+                        vm,
+                        (ts, tr) -> {
+                            ts.writeToFile(content, /* path= */ "/mnt/encryptedstore/test_file");
+                        });
+        testResults.assertNoException();
+
+        // Re-run the same VM & verify the file persisted.
+        testResults =
+                runVmTestService(
+                        TAG,
+                        vm,
+                        (ts, tr) -> {
+                            tr.mFileContent = ts.readFromFile("/mnt/encryptedstore/test_file");
+                        });
+        testResults.assertNoException();
+        assertThat(testResults.mFileContent).isEqualTo(content);
+    }
+
+    private boolean canBootMicrodroidWithStorage(long storageSizeInBytes)
+            throws VirtualMachineException, InterruptedException, IOException {
+        VirtualMachineConfig config =
+                newVmConfigBuilderWithPayloadBinary("MicrodroidTestNativeLib.so")
+                        .setMemoryBytes(minMemoryRequired())
+                        .setEncryptedStorageBytes(storageSizeInBytes)
+                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .setShouldUseHugepages(true)
+                        .build();
+        VirtualMachine vm = forceCreateNewVirtualMachine("vm_min_encryptedstore_size", config);
+        try {
+            assertEncryptedStorePersists(vm);
+            return true;
+        } catch (Exception | AssertionError e) {
+            return false;
+        }
+    }
+
+    @Test
+    public void minimumEncryptedstoreSize()
+            throws VirtualMachineException, InterruptedException, IOException {
+        assume().withMessage("Skip on CF; too slow").that(isCuttlefish()).isFalse();
+
+        long lo = 2, hi = 4_000_000, minimum = 0;
+        boolean found = false;
+
+        while (lo <= hi) {
+            long mid = (lo + hi) / 2;
+            if (canBootMicrodroidWithStorage(mid)) {
+                found = true;
+                minimum = mid;
+                hi = mid - 1;
+            } else {
+                lo = mid + 1;
+            }
+        }
+        assertThat(found).isTrue();
+        Bundle bundle = new Bundle();
+        bundle.putLong(METRIC_NAME_PREFIX + "minimum_required_encryptedstore_Bytes", minimum);
+        mInstrumentation.sendStatus(0, bundle);
+    }
 }
