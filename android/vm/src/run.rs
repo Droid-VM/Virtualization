@@ -14,6 +14,9 @@
 
 //! Command to run a VM.
 
+#![allow(unreachable_code)]
+#![allow(unused_variables)]
+
 use crate::create_partition::command_create_partition;
 use crate::{get_service, RunAppConfig, RunCustomVmConfig, RunMicrodroidConfig};
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
@@ -43,7 +46,8 @@ use vmconfig::{get_debug_level, open_parcel_file, VmConfig};
 use zip::ZipArchive;
 
 /// Run a VM from the given APK, idsig, and config.
-pub fn command_run_app(config: RunAppConfig) -> Result<(), Error> {
+pub fn command_run_app(mut config: RunAppConfig) -> Result<(), Error> {
+    println!("############################################################### start");
     let service = get_service()?;
     let apk = File::open(&config.apk).context("Failed to open APK file")?;
 
@@ -104,16 +108,20 @@ pub fn command_run_app(config: RunAppConfig) -> Result<(), Error> {
     };
 
     let storage = if let Some(ref path) = config.microdroid.storage {
-        if !path.exists() {
-            command_create_partition(
-                service.as_ref(),
-                path,
-                config.microdroid.storage_size.unwrap_or(10 * 1024 * 1024),
-                PartitionType::ENCRYPTEDSTORE,
-            )?;
+        if path.exists() {
+            config.microdroid.storage_size = Some(25 * 1024 * 1024);
         }
+        println!("************************************************* Size {}", config.microdroid.storage_size.unwrap());
+        command_create_partition(
+            service.as_ref(),
+            path,
+            config.microdroid.storage_size.unwrap_or(10 * 1024 * 1024),
+            PartitionType::ENCRYPTEDSTORE,
+        )?;
+
         Some(open_parcel_file(path, true)?)
     } else {
+        println!("************************************************* No Storage");
         None
     };
 
@@ -194,6 +202,7 @@ pub fn command_run_app(config: RunAppConfig) -> Result<(), Error> {
         hugePages: config.common.hugepages,
         boostUclamp: config.common.boost_uclamp,
     });
+    println!("############################################################### end");
     run(
         service.as_ref(),
         &vm_config,
