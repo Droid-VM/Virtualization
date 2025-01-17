@@ -50,6 +50,8 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
     DisplayConfig::DisplayConfig as DisplayConfigParcelable,
     GpuConfig::GpuConfig as GpuConfigParcelable,
     UsbConfig::UsbConfig as UsbConfigParcelable,
+    SveConfig::SveConfig as SveConfigParcelable,
+    SveConfig::SveEnabled::SveEnabled as SveEnabled,
 };
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IGlobalVmContext::IGlobalVmContext;
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IBoundDevice::IBoundDevice;
@@ -139,6 +141,7 @@ pub struct CrosvmConfig {
     pub dump_dt_fd: Option<File>,
     pub enable_hypervisor_specific_auth_method: bool,
     pub instance_id: [u8; 64],
+    pub sve: SveConfig,
 }
 
 #[derive(Debug)]
@@ -161,6 +164,17 @@ pub struct UsbConfig {
 impl UsbConfig {
     pub fn new(raw_config: &UsbConfigParcelable) -> Result<UsbConfig> {
         Ok(UsbConfig { controller: raw_config.controller })
+    }
+}
+
+#[derive(Debug)]
+pub struct SveConfig {
+    pub enabled: SveEnabled,
+}
+
+impl SveConfig {
+    pub fn new(raw_config: &SveConfigParcelable) -> Result<SveConfig> {
+        Ok(SveConfig { enabled: raw_config.enabled })
     }
 }
 
@@ -1098,6 +1112,19 @@ fn run_vm(
         // bootconfig.normal will be used, but we need log.
         command.arg("--params").arg("printk.devkmsg=on");
         command.arg("--params").arg("console=hvc0");
+    }
+    #[cfg(target_arch = "aarch64")]
+    match config.sve.enabled {
+        SveEnabled::AUTO => {
+            command.arg("--sve[auto=true]");
+        }
+        SveEnabled::TRUE => {
+            command.arg("--sve[enable=true]");
+        }
+        SveEnabled::FALSE => {}
+        _ => {
+            bail!("Undefined SVE enable value passed");
+        }
     }
 
     // Move the PCI MMIO regions to near the end of the low-MMIO space.
