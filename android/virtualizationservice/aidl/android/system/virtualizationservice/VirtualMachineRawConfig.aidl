@@ -23,6 +23,7 @@ import android.system.virtualizationservice.DisplayConfig;
 import android.system.virtualizationservice.GpuConfig;
 import android.system.virtualizationservice.InputDevice;
 import android.system.virtualizationservice.SharedPath;
+import android.system.virtualizationservice.SveConfig;
 import android.system.virtualizationservice.UsbConfig;
 
 /** Raw configuration for running a VM. */
@@ -126,4 +127,7 @@ parcelable VirtualMachineRawConfig {
      * VMs.
      */
     boolean enableHypervisorSpecificAuthMethod;
+
+    /** Sve config for Vm creation. Default is off */
+    SveConfig sve;
 }

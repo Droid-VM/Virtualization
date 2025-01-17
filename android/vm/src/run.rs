@@ -19,6 +19,7 @@ use crate::{get_service, RunAppConfig, RunCustomVmConfig, RunMicrodroidConfig};
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
     IVirtualizationService::IVirtualizationService,
     PartitionType::PartitionType,
+    SveConfig::SveConfig,
     VirtualMachineAppConfig::{
         CustomConfig::CustomConfig, DebugLevel::DebugLevel, Payload::Payload,
         VirtualMachineAppConfig,
@@ -176,6 +177,8 @@ pub fn command_run_app(config: RunAppConfig) -> Result<(), Error> {
         custom_config.extraKernelCmdlineParams.push(String::from("keep_bootcon"));
     }
 
+    let sve = SveConfig { enabled: config.common.sve };
+
     let vm_config = VirtualMachineConfig::AppConfig(VirtualMachineAppConfig {
         name: config.common.name.unwrap_or_else(|| String::from("VmRunApp")),
         apk: apk_fd.into(),
@@ -193,6 +196,7 @@ pub fn command_run_app(config: RunAppConfig) -> Result<(), Error> {
         osName: os_name.to_string(),
         hugePages: config.common.hugepages,
         boostUclamp: config.common.boost_uclamp,
+        sve,
     });
     run(
         service.as_ref(),
@@ -277,6 +281,8 @@ pub fn command_run(config: RunCustomVmConfig) -> Result<(), Error> {
     vm_config.hugePages = config.common.hugepages;
     vm_config.boostUclamp = config.common.boost_uclamp;
     vm_config.teeServices = config.common.tee_services().to_vec();
+    vm_config.sve = SveConfig { enabled: config.common.sve };
+
     run(
         get_service()?.as_ref(),
         &VirtualMachineConfig::RawConfig(vm_config),
