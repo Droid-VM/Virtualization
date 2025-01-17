@@ -59,6 +59,7 @@ internal class Runner private constructor(val vm: VirtualMachine?, callback: Cal
 
     companion object {
         /** Create a virtual machine of the given config, under the given context. */
+        @JvmStatic
         @Throws(VirtualMachineException::class)
         fun create(context: Context, config: VirtualMachineConfig): Runner {
             // context may already be the app context, but calling this again is not harmful.
