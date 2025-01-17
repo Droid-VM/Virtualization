@@ -16,6 +16,7 @@
 package android.system.virtualizationservice;
 
 import android.system.virtualizationservice.CpuTopology;
+import android.system.virtualizationservice.SveConfig;
 import android.system.virtualizationservice.VirtualMachinePayloadConfig;
 
 /** Configuration for running an App in a VM */
@@ -148,4 +149,7 @@ parcelable VirtualMachineAppConfig {
 
     /** Enable boost UClamp for less variance during testing/benchmarking */
     boolean boostUclamp;
+
+    /** Sve config for Vm creation. Default is off */
+    SveConfig sve;
 }
