@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aa71100_fda289a4",
+        "filename": "guest/pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-17T12:18:46Z",
+      "side": 1,
+      "message": "This seems to add yet more confusion to our formats; from b/373573831, it sounds like you want to distinguish between \"special\" VMs, right? Why not have the UUID in the DICE chain and use that from the RKP server, as suggested on b/378673494?",
+      "range": {
+        "startLine": 96,
+        "startChar": 15,
+        "endLine": 96,
+        "endChar": 64
+      },
+      "revId": "90564d017fdeb0daf842a089cd6b76c15db7645e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
