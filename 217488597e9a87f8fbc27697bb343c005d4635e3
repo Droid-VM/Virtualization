@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b6fc90b_6898bd12",
+        "filename": "libs/libhypervisor_backends/src/hypervisor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-01-17T18:47:21Z",
+      "side": 1,
+      "message": "Sure: it was a leftover of my previous internal version: it should be called directly.",
+      "parentUuid": "15686912_099ceead",
+      "range": {
+        "startLine": 123,
+        "startChar": 3,
+        "endLine": 123,
+        "endChar": 17
+      },
+      "revId": "217488597e9a87f8fbc27697bb343c005d4635e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58bea8f3_4f12d93e",
@@ -81,6 +105,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "370274c4_4c651a2b",
+        "filename": "libs/libhypervisor_backends/src/hypervisor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-01-17T18:47:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58bea8f3_4f12d93e",
+      "range": {
+        "startLine": 129,
+        "startChar": 4,
+        "endLine": 129,
+        "endChar": 10
+      },
+      "revId": "217488597e9a87f8fbc27697bb343c005d4635e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9dc10a2d_772bad61",
@@ -94,6 +142,30 @@
       "writtenOn": "2025-01-16T15:29:28Z",
       "side": 1,
       "message": "Majority of x86 of code in codebase use AT\u0026T syntax. \n(Linux, Trusty, x86_64 pvmfw, coreboot... etc)",
+      "range": {
+        "startLine": 157,
+        "startChar": 7,
+        "endLine": 162,
+        "endChar": 89
+      },
+      "revId": "217488597e9a87f8fbc27697bb343c005d4635e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ec7e588_86d158bd",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/kvm_x86.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-01-17T18:47:21Z",
+      "side": 1,
+      "message": "Right, AT\u0026T is more common in unix like system - done.",
+      "parentUuid": "9dc10a2d_772bad61",
       "range": {
         "startLine": 157,
         "startChar": 7,
