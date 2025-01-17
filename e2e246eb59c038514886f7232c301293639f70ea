@@ -182,6 +182,30 @@
       },
       "revId": "e2e246eb59c038514886f7232c301293639f70ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab6227ab_ba182fdd",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-17T07:59:25Z",
+      "side": 1,
+      "message": "In my reading of the code, `runVmTestService` returns only after [1] is called upon `onStopped`, which is triggered by a death of the VM. Are you experiencing the racy actually, or is it your conjecture?\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java;drc\u003d9906a10b5fe84ce113ec888af1da5dfba62949c6;l\u003d420",
+      "parentUuid": "12ce200f_6c6cb3c2",
+      "range": {
+        "startLine": 737,
+        "startChar": 0,
+        "endLine": 737,
+        "endChar": 53
+      },
+      "revId": "e2e246eb59c038514886f7232c301293639f70ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
