@@ -83,6 +83,7 @@ pub struct PartialInputs {
     pub mode: DiceMode,
     pub security_version: u64,
     pub rkp_vm_marker: bool,
+    component_name: &'static str,
 }
 
 impl PartialInputs {
@@ -93,8 +94,10 @@ impl PartialInputs {
         // We use rollback_index from vbmeta as the security_version field in dice certificate.
         let security_version = data.rollback_index;
         let rkp_vm_marker = data.has_capability(Capability::RemoteAttest);
+        let component_name =
+            if data.has_capability(Capability::RemoteAttest) { "rkp_vm" } else { "vm_entry" };
 
-        Ok(Self { code_hash, auth_hash, mode, security_version, rkp_vm_marker })
+        Ok(Self { code_hash, auth_hash, mode, security_version, rkp_vm_marker, component_name })
     }
 
     pub fn write_next_bcc(
@@ -155,7 +158,7 @@ impl PartialInputs {
 
     fn generate_config_descriptor(&self, instance_hash: Option<Hash>) -> Result<Vec<u8>> {
         let mut config = Vec::with_capacity(4);
-        config.push((cbor!(COMPONENT_NAME_KEY)?, cbor!("vm_entry")?));
+        config.push((cbor!(COMPONENT_NAME_KEY)?, cbor!(self.component_name)?));
         if cfg!(dice_changes) {
             config.push((cbor!(SECURITY_VERSION_KEY)?, cbor!(self.security_version)?));
         }
@@ -253,6 +256,16 @@ mod tests {
             assert_eq!(config_map.get(&SECURITY_VERSION_KEY), None);
         }
         assert_eq!(config_map.get(&RKP_VM_MARKER_KEY), None);
+    }
+
+    #[test]
+    fn rkp_vm_config_descriptor_has_rkp_vm_component_name() {
+        let vb_data =
+            VerifiedBootData { capabilities: vec![Capability::RemoteAttest], ..BASE_VB_DATA };
+        let inputs = PartialInputs::new(&vb_data).unwrap();
+        let config_map = decode_config_descriptor(&inputs, None);
+
+        assert_eq!(config_map.get(&COMPONENT_NAME_KEY).unwrap().as_text().unwrap(), "rkp_vm");
     }
 
     #[test]
