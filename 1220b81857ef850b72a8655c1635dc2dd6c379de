@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dd5ece6_d28d7be2",
+        "filename": "libs/dice/open_dice/src/ops.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-01-17T08:40:48Z",
+      "side": 1,
+      "message": "Would it be more convenient to provide an additional API, such as `sign_cose_sign1_with_cdi_leaf_priv`? Or do we expect this function to take other private keys as well?",
+      "range": {
+        "startLine": 143,
+        "startChar": 7,
+        "endLine": 143,
+        "endChar": 22
+      },
+      "revId": "1220b81857ef850b72a8655c1635dc2dd6c379de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63322065_890f6290",
+        "filename": "libs/dice/open_dice/src/ops.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-01-17T08:40:48Z",
+      "side": 1,
+      "message": "super-nit: Is this needed? The compiler should be able to deduct it no?",
+      "range": {
+        "startLine": 149,
+        "startChar": 41,
+        "endLine": 149,
+        "endChar": 48
+      },
+      "revId": "1220b81857ef850b72a8655c1635dc2dd6c379de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
