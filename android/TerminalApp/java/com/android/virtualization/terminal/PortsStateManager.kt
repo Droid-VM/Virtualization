@@ -121,6 +121,7 @@ class PortsStateManager private constructor(private val sharedPref: SharedPrefer
 
         private var instance: PortsStateManager? = null
 
+        @JvmStatic
         @Synchronized
         fun getInstance(context: Context): PortsStateManager {
             if (instance == null) {
