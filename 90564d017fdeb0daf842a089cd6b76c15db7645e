@@ -46,6 +46,30 @@
       },
       "revId": "90564d017fdeb0daf842a089cd6b76c15db7645e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98f12e29_2f395fb9",
+        "filename": "guest/pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-17T12:53:51Z",
+      "side": 1,
+      "message": "Surely the RKP server must have a \"database\" of those component names? How is that different from a well-defined UUID field?\n\nMy point is: the approach this CL proposes doesn\u0027t scale and has already lead to pvmfw code that is complicated to audit, given the various subtle meanings of the different fields. Instead, let\u0027s define one ABI between RKP server and pvmfw that does scale and is straightforward to review/maintain.\n\nSee aosp/3452838 for the UUID support; Cc @shikhapanwar@google.com, as we were discussing adding the UUID to the DICE chain a few days ago (if more discussion needs to happen, it might be worth creating a Buganizer ticket).",
+      "parentUuid": "9a1812c5_27ed2b0c",
+      "range": {
+        "startLine": 96,
+        "startChar": 15,
+        "endLine": 96,
+        "endChar": 64
+      },
+      "revId": "90564d017fdeb0daf842a089cd6b76c15db7645e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
