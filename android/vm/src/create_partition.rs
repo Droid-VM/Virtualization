@@ -29,21 +29,44 @@ pub fn command_create_partition(
     size: u64,
     partition_type: PartitionType,
 ) -> Result<(), Error> {
-    let image = OpenOptions::new()
-        .create_new(true)
-        .read(true)
-        .write(true)
-        .open(image_path)
-        .with_context(|| format!("Failed to create {:?}", image_path))?;
-    service
-        .initializeWritablePartition(
-            &ParcelFileDescriptor::new(image),
-            size.try_into()?,
-            partition_type,
-        )
-        .context(format!(
-            "Failed to initialize partition type: {:?}, size: {}",
-            partition_type, size
-        ))?;
+    println!("command_create_partition");
+
+    if !image_path.exists() {
+        println!("path does not exist");
+
+        let image = OpenOptions::new()
+            .create_new(true)
+            .read(true)
+            .write(true)
+            .open(image_path)
+            .with_context(|| format!("Failed to create {:?}", image_path))?;
+        service
+            .initializeWritablePartition(
+                &ParcelFileDescriptor::new(image),
+                size.try_into()?,
+                partition_type,
+            )
+            .context(format!(
+                "Failed to initialize partition type: {:?}, size: {}",
+                partition_type, size
+            ))?;
+    } else {
+        println!("path exists");
+
+        let image = OpenOptions::new()
+            .read(true)
+            .write(true)
+            .open(image_path)
+            .with_context(|| format!("Failed to create {:?}", image_path))?;
+
+        println!("opened image");
+
+        image
+            .set_len(size)
+            .context("Failed to extend file")?;
+
+        println!("Resized image");
+    }
+
     Ok(())
 }
