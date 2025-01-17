@@ -22,6 +22,30 @@
       },
       "revId": "90564d017fdeb0daf842a089cd6b76c15db7645e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a1812c5_27ed2b0c",
+        "filename": "guest/pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-01-17T12:37:07Z",
+      "side": 1,
+      "message": "\u003e It sounds like you want to distinguish between \"special\" VMs, right?\n\nThe RKP server needs to differentiate between different types of VM DICE chains. The component name allows it to distinguish between RKP VM and KeyMint VM chains, when they request provisioning.\n\nCurrently, the RKP server doesn\u0027t have a UUID database to track individual VMs or devices. Creating such a database seems unnecessary for this specific usecase.\n\nCC @sethmo@google.com for more context about RKP server\n\nNote that AL and Trusty VM employ different authentication strategies. Based on the [AL diagram](https://docs.google.com/drawings/d/1uXz31Bkc56Z0XRl-wwdqxT3fUb0-gxAHcnHRn35rLd0/edit?usp\u003dsharing\u0026resourcekey\u003d0-ENqYpFLYhnt3ebAbpBIbUA), AL needs pvmfw to compare UUID to load the AL Trusty VM. However, Trusty VM (with Trusted HAL) relies on the AuthMgr running within the VM to perform the DICE chain authentication, so pvmfw does not need to take any action in this regard.",
+      "parentUuid": "7aa71100_fda289a4",
+      "range": {
+        "startLine": 96,
+        "startChar": 15,
+        "endLine": 96,
+        "endChar": 64
+      },
+      "revId": "90564d017fdeb0daf842a089cd6b76c15db7645e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
