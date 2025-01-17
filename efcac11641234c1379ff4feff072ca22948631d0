@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bbc7588_99010f8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1327199
+      },
+      "writtenOn": "2025-01-17T19:41:35Z",
+      "side": 1,
+      "message": "At first this is a no-op since the update to Android.bp preserves the current behavior. When changing the build to ignore the `keep_runtime_invisible_annotations`, all runtime invisible annotations will be stripped from the build by R8. These annotations cannot be accessed at runtime, therefore this should not have any impact on the app (except it reduces the size of the app).\n\nSee also the documentation of RuntimeInvisibleAnnotations at https://www.guardsquare.com/manual/configuration/attributes and https://docs.oracle.com/javase/8/docs/api/java/lang/annotation/RetentionPolicy.html#CLASS.",
+      "parentUuid": "1dcf26b3_87923ac1",
+      "revId": "efcac11641234c1379ff4feff072ca22948631d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e51a1e3_00069440",
@@ -31,6 +49,30 @@
       "writtenOn": "2025-01-17T12:56:20Z",
       "side": 1,
       "message": "Does this mean that we will lose the GSON annotations?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 33
+      },
+      "revId": "efcac11641234c1379ff4feff072ca22948631d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a442237b_47d8e803",
+        "filename": "android/TerminalApp/proguard.flags",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1327199
+      },
+      "writtenOn": "2025-01-17T19:41:35Z",
+      "side": 1,
+      "message": "Do you mean @SerializedName annotations? If so, then no. These annotations are runtime visible. This only removes runtime invisible annotations (i.e., class retention annotations).",
+      "parentUuid": "5e51a1e3_00069440",
       "range": {
         "startLine": 7,
         "startChar": 0,
