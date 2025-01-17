@@ -99,6 +99,7 @@ public class MainActivity :
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         terminalView = findViewById<TerminalView>(R.id.webview)
+        terminalView.getSettings().setDatabaseEnabled(true)
         terminalView.getSettings().setDomStorageEnabled(true)
         terminalView.getSettings().setJavaScriptEnabled(true)
         terminalView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE)
@@ -388,9 +389,10 @@ public class MainActivity :
         modifierKeys.visibility = if (showModifierKeys) View.VISIBLE else View.GONE
     }
 
-    private val installerLauncher =
-        registerForActivityResult(StartActivityForResult()) { result ->
-            val resultCode = result.resultCode
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == REQUEST_CODE_INSTALLER) {
             if (resultCode != RESULT_OK) {
                 Log.e(TAG, "Failed to start VM. Installer returned error.")
                 finish()
@@ -401,13 +403,14 @@ public class MainActivity :
                 startVm()
             }
         }
+    }
 
     private fun installIfNecessary(): Boolean {
         // If payload from external storage exists(only for debuggable build) or there is no
         // installed image, launch installer activity.
         if (!image.isInstalled()) {
             val intent = Intent(this, InstallerActivity::class.java)
-            installerLauncher.launch(intent)
+            startActivityForResult(intent, REQUEST_CODE_INSTALLER)
             return true
         }
         return false
