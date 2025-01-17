@@ -50,6 +50,8 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
     DisplayConfig::DisplayConfig as DisplayConfigParcelable,
     GpuConfig::GpuConfig as GpuConfigParcelable,
     UsbConfig::UsbConfig as UsbConfigParcelable,
+    SveConfig::SveConfig as SveConfigParcelable,
+    SveConfig::SveEnabled::SveEnabled as SveEnabled,
 };
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IGlobalVmContext::IGlobalVmContext;
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IBoundDevice::IBoundDevice;
@@ -139,6 +141,7 @@ pub struct CrosvmConfig {
     pub dump_dt_fd: Option<File>,
     pub enable_hypervisor_specific_auth_method: bool,
     pub instance_id: [u8; 64],
+    pub sve: SveConfig,
 }
 
 #[derive(Debug)]
@@ -161,6 +164,17 @@ pub struct UsbConfig {
 impl UsbConfig {
     pub fn new(raw_config: &UsbConfigParcelable) -> Result<UsbConfig> {
         Ok(UsbConfig { controller: raw_config.controller })
+    }
+}
+
+#[derive(Debug)]
+pub struct SveConfig {
+    pub enabled: SveEnabled,
+}
+
+impl SveConfig {
+    pub fn new(raw_config: &SveConfigParcelable) -> Result<SveConfig> {
+        Ok(SveConfig { enabled: raw_config.enabled })
     }
 }
 
@@ -1099,7 +1113,6 @@ fn run_vm(
         command.arg("--params").arg("printk.devkmsg=on");
         command.arg("--params").arg("console=hvc0");
     }
-
     // Move the PCI MMIO regions to near the end of the low-MMIO space.
     // This is done to accommodate a limitation in a partner's hypervisor.
     #[cfg(target_arch = "aarch64")]
@@ -1110,7 +1123,25 @@ fn run_vm(
     command.arg("--mem").arg(memory_mib.to_string());
 
     if let Some(cpus) = config.cpus {
-        command.arg("--cpus").arg(cpus.to_string());
+        let mut cpus_args = cpus.to_string();
+        #[cfg(not(target_arch = "aarch64"))]
+        if config.sve.enabled == SveConfig::TRUE {
+            bail!("SVE is not supported on non-ARM architectures");
+        }
+        #[cfg(target_arch = "aarch64")]
+        match config.sve.enabled {
+            SveEnabled::AUTO => {
+                cpus_args += ",sve=[auto=true]";
+            }
+            SveEnabled::TRUE => {
+                cpus_args += ",sve=[enable=true]";
+            }
+            SveEnabled::FALSE => {}
+            _ => {
+                bail!("Undefined SVE enable value passed");
+            }
+        }
+        command.arg("--cpus").arg(cpus_args);
     }
 
     if config.host_cpu_topology {
