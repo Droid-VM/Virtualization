@@ -20,7 +20,8 @@ mod run;
 
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
     CpuTopology::CpuTopology, IVirtualizationService::IVirtualizationService,
-    PartitionType::PartitionType, VirtualMachineAppConfig::DebugLevel::DebugLevel,
+    PartitionType::PartitionType, SveConfig::SveEnabled::SveEnabled,
+    VirtualMachineAppConfig::DebugLevel::DebugLevel,
 };
 #[cfg(not(llpvm_changes))]
 use anyhow::anyhow;
@@ -77,6 +78,9 @@ pub struct CommonConfig {
     #[cfg(tee_services_allowlist)]
     #[arg(long)]
     tee_services: Vec<String>,
+
+    #[arg(long, default_value = "FALSE", value_parser = parse_sve_enabled)]
+    sve: SveEnabled,
 }
 
 impl CommonConfig {
@@ -382,6 +386,15 @@ fn parse_cpu_topology(s: &str) -> Result<CpuTopology, String> {
         "one_cpu" => Ok(CpuTopology::ONE_CPU),
         "match_host" => Ok(CpuTopology::MATCH_HOST),
         _ => Err(format!("Invalid cpu topology {}", s)),
+    }
+}
+
+fn parse_sve_enabled(s: &str) -> Result<SveEnabled, String> {
+    match s {
+        "false" | "FALSE" => Ok(SveEnabled::FALSE),
+        "true" | "TRUE" => Ok(SveEnabled::TRUE),
+        "auto" | "AUTO" => Ok(SveEnabled::AUTO),
+        _ => Err(format!("Invalid sve enabled value {}", s)),
     }
 }
 
