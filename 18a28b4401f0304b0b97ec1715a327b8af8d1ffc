@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c0dc9fd_e862935e",
+        "filename": "guest/trusty/security_vm/vm/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-01-17T18:08:55Z",
+      "side": 1,
+      "message": "I think adding a .S file to the source tree is more readable than generating it. See trusty/kernel/app/trusty/appobj.S and trusty/kernel/app/trusty/user-tasks.mk for an example in the trusty build system.",
+      "revId": "18a28b4401f0304b0b97ec1715a327b8af8d1ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d57fa68_310fd7bb",
+        "filename": "guest/trusty/security_vm/vm/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-01-17T18:08:55Z",
+      "side": 1,
+      "message": "The trusty build system already creates an lk.bin file. Is there a reason for regenerating it here instead of using that file?",
+      "revId": "18a28b4401f0304b0b97ec1715a327b8af8d1ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb2f3ff2_58aa3e94",
+        "filename": "guest/trusty/security_vm/vm/security_vm_sections.ld",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-01-17T18:08:55Z",
+      "side": 1,
+      "message": "0x200000 is used on x86, not arm64 in the original elf files. arm64 is linked at 0",
+      "revId": "18a28b4401f0304b0b97ec1715a327b8af8d1ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
