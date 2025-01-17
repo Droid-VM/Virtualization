@@ -70,6 +70,30 @@
       },
       "revId": "90564d017fdeb0daf842a089cd6b76c15db7645e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbb3060f_feed0899",
+        "filename": "guest/pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-01-17T13:18:59Z",
+      "side": 1,
+      "message": "I just read the bug b/378673494. I don\u0027t think it\u0027s the same issue here. The goal of this cl is to add RKP VM marker to the KeyMint VM DICE chain, ensuring a continuous presence of RKP VM markers on that chain. This is primarily a security measure rather than an identification one.\n\nThe identification aspect relates to the second point in http://b/373573831#comment24. Since the pvmfw DICE node is not the leaf node for KeyMint VM, setting the component name to \"keymint\" will be managed within the Trusty VM and is part of the VSR for KeyMint. I don\u0027t see a reason to introduce a UUID to the second-to-last node to the RKP server to duplicate this recognition.\n\nFor RKP VM identification, using UUIDs or the \"rkp_vm\" component name are functionally similar. If the RKP team has a preference for UUIDs, I\u0027m happy to switch to that method. Let\u0027s follow up the RKP VM naming issue in b/390527025",
+      "parentUuid": "98f12e29_2f395fb9",
+      "range": {
+        "startLine": 96,
+        "startChar": 15,
+        "endLine": 96,
+        "endChar": 64
+      },
+      "revId": "90564d017fdeb0daf842a089cd6b76c15db7645e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
