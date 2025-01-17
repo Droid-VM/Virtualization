@@ -22,6 +22,30 @@
       },
       "revId": "f28d2176f32a63416fe5b5a5fa8e6263d3c10e67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9297d7a_141fa2be",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2025-01-17T18:51:14Z",
+      "side": 1,
+      "message": "Yes, `stable` is at `6.1.123-1` now and [`stable-updates` is at `6.1.124-1`](https://packages.debian.org/bookworm-updates/linux-source), but the sources for both appear in the same pool, at https://deb.debian.org/debian/pool/main/l/linux/.\n\nThe security updates appear in https://security.debian.org/debian-security/pool/main/l/linux/. If we cover both pools, as I do in this CL, then we should be able to grab the source for any released Debian kernel version.\n\nI made this CL only about resolving the 404 and being able to build the same kernel version again. In a subsequent change I will bump up the version to `6.1.124-1`, or `6.1.123-1` whichever you recommend.",
+      "parentUuid": "0f63868f_92b50f1b",
+      "range": {
+        "startLine": 230,
+        "startChar": 19,
+        "endLine": 230,
+        "endChar": 30
+      },
+      "revId": "f28d2176f32a63416fe5b5a5fa8e6263d3c10e67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
