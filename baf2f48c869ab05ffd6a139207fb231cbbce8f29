@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a592bd40_4103b2e3",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-01-17T13:00:51Z",
+      "side": 1,
+      "message": "Could you change this to \"RKP VM\" for consistency with other places? rialto is mostly an AVF internal word.",
+      "range": {
+        "startLine": 466,
+        "startChar": 59,
+        "endLine": 466,
+        "endChar": 65
+      },
+      "revId": "baf2f48c869ab05ffd6a139207fb231cbbce8f29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "445d7fd5_d4a14645",
+        "filename": "guest/pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-01-17T13:00:51Z",
+      "side": 1,
+      "message": "Could you just call this RKP VM to avoid confusion ? In most places, we simply call it RKP VM actually.",
+      "range": {
+        "startLine": 91,
+        "startChar": 16,
+        "endLine": 91,
+        "endChar": 37
+      },
+      "revId": "baf2f48c869ab05ffd6a139207fb231cbbce8f29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "346f5075_26ac98c9",
+        "filename": "guest/rialto/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-01-17T13:00:51Z",
+      "side": 1,
+      "message": "It\u0027s confusing to have both identifiers in place for RKP VM. Could you just migrate all the `\"remote_attest\"` usages to UUID instead, and drop that capability?",
+      "range": {
+        "startLine": 95,
+        "startChar": 8,
+        "endLine": 102,
+        "endChar": 10
+      },
+      "revId": "baf2f48c869ab05ffd6a139207fb231cbbce8f29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
