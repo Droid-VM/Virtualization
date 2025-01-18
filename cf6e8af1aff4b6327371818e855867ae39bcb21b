@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7675216c_c3ac224d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-01-18T06:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c358daa_17c0fd4a",
+      "revId": "cf6e8af1aff4b6327371818e855867ae39bcb21b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "febc697c_72bd75b8",
@@ -41,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f638397c_4ce093ca",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-01-18T06:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "febc697c_72bd75b8",
+      "range": {
+        "startLine": 824,
+        "startChar": 0,
+        "endLine": 824,
+        "endChar": 98
+      },
+      "revId": "cf6e8af1aff4b6327371818e855867ae39bcb21b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2e1780b_fd4e8ce4",
@@ -54,6 +96,30 @@
       "writtenOn": "2025-01-18T01:23:20Z",
       "side": 1,
       "message": "nit: should we make a group of options for CPU settings and put SVE there?",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 50
+      },
+      "revId": "cf6e8af1aff4b6327371818e855867ae39bcb21b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4246874a_a1e10bb2",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineAppConfig.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-01-18T06:59:54Z",
+      "side": 1,
+      "message": "I agree that would be nice, however the refactor would be more involved. I think a follow-up CL would be best",
+      "parentUuid": "e2e1780b_fd4e8ce4",
       "range": {
         "startLine": 98,
         "startChar": 0,
