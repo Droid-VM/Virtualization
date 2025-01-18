@@ -16,6 +16,52 @@
       "message": "in http://b/376260018#comment11, the suggestion was to enable SVE automatically in AVF. are you doing something else here?",
       "revId": "cf6e8af1aff4b6327371818e855867ae39bcb21b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "febc697c_72bd75b8",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-18T01:23:20Z",
+      "side": 1,
+      "message": "nit: specify default in AIDL interface, rather than here, so it would also be set for clients, for visibility, and if you only want to set some options as we add more, don\u0027t need to add this one?",
+      "range": {
+        "startLine": 824,
+        "startChar": 0,
+        "endLine": 824,
+        "endChar": 98
+      },
+      "revId": "cf6e8af1aff4b6327371818e855867ae39bcb21b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2e1780b_fd4e8ce4",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineAppConfig.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2025-01-18T01:23:20Z",
+      "side": 1,
+      "message": "nit: should we make a group of options for CPU settings and put SVE there?",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 50
+      },
+      "revId": "cf6e8af1aff4b6327371818e855867ae39bcb21b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
