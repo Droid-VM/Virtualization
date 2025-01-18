@@ -81,6 +81,30 @@
       },
       "revId": "efcac11641234c1379ff4feff072ca22948631d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc872e93_a832ee6e",
+        "filename": "android/TerminalApp/proguard.flags",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-18T02:17:43Z",
+      "side": 1,
+      "message": "I meant @Expose annotations. But yeah, now I understand that they are not stripped because their retention policy is set to RUNTIME, and `RuntimeVisibleAnnotations` here captures them.",
+      "parentUuid": "a442237b_47d8e803",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 33
+      },
+      "revId": "efcac11641234c1379ff4feff072ca22948631d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
