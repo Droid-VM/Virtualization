@@ -51,6 +51,24 @@
       "parentUuid": "b6c283b9_ba348d08",
       "revId": "e530f37b63a011913ec1cf1f62ebcf64d742d952",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "045d9295_68f6ffa4",
+        "filename": "android/virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-20T06:08:20Z",
+      "side": 1,
+      "message": "Option 2 sounds better to me. But I don\u0027t understand the risk of option 1 either. aidl.rs runs on Android, which can be compromised in our threat model.",
+      "parentUuid": "e49ca8c0_e4fb8bb0",
+      "revId": "e530f37b63a011913ec1cf1f62ebcf64d742d952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
