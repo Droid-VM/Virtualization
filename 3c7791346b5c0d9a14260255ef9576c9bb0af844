@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8c2e1b2_0bf6ea72",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-20T06:29:55Z",
+      "side": 1,
+      "message": "Extending this just to measure read and write at the same time doesn\u0027t look ideal. You affected other tests as well. Can we parameterize this test so that read and write are measured separately but using the same code?",
+      "range": {
+        "startLine": 960,
+        "startChar": 50,
+        "endLine": 960,
+        "endChar": 53
+      },
+      "revId": "3c7791346b5c0d9a14260255ef9576c9bb0af844",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1bfc2c1_b11b9363",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1023,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-20T06:29:55Z",
+      "side": 1,
+      "message": "nit: perhaps we can check this before constructing the config just above.",
+      "range": {
+        "startLine": 1020,
+        "startChar": 0,
+        "endLine": 1023,
+        "endChar": 26
+      },
+      "revId": "3c7791346b5c0d9a14260255ef9576c9bb0af844",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d96c714b_34e895fa",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1051,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-20T06:29:55Z",
+      "side": 1,
+      "message": "The indentation here is so deep. Please avoid this.",
+      "range": {
+        "startLine": 1033,
+        "startChar": 0,
+        "endLine": 1051,
+        "endChar": 113
+      },
+      "revId": "3c7791346b5c0d9a14260255ef9576c9bb0af844",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e446687_2d943e28",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1099,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-20T06:29:55Z",
+      "side": 1,
+      "message": "The same applies to here. Measure read and write separately.",
+      "range": {
+        "startLine": 1092,
+        "startChar": 0,
+        "endLine": 1099,
+        "endChar": 22
+      },
+      "revId": "3c7791346b5c0d9a14260255ef9576c9bb0af844",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
