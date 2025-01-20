@@ -69,6 +69,24 @@
       "parentUuid": "e49ca8c0_e4fb8bb0",
       "revId": "e530f37b63a011913ec1cf1f62ebcf64d742d952",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "244a74c9_d9388421",
+        "filename": "android/virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-20T18:56:27Z",
+      "side": 1,
+      "message": "Deletion is best effort only, and is consider DOS like from security POV. A compromised Android can delete any/all Secretkeeper entries. It can also prevent deletions (for e.g, by modifying this maintenance database) leading to leaking entries.\n\n\n\nOn a second thought about Option1/2, if Apps cannot do anything about database error, not much point returning it to them. In another project (Secretkeeper), if Sk crashes, we dont return error to clients, instead reboot the device.\n\nNow given that crashing a device is AVF maintenance database is too aggressive, maybe leaking the state leading to increased size of Sk is a better options (i.e Option 1)\n\n\nLet me know if you think otherwise",
+      "parentUuid": "045d9295_68f6ffa4",
+      "revId": "e530f37b63a011913ec1cf1f62ebcf64d742d952",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
