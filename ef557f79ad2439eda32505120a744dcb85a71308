@@ -16,6 +16,24 @@
       "message": "Weird. When the change was submitted, the presubmit test ran, but all test methods were skipped.\n\n```\n01-18 00:46:36 D/ITestSuite: Skipping module \u0027MicrodroidHostTestCases\u0027 due to no changes in artifacts.\n```\n\nThis is not only for MicrodroidHostTestCases, but for many other modules. ex:\n\n```\n01-18 00:46:36 D/ITestSuite: Skipping module \u0027libvbmeta_rust.test\u0027 due to no changes in artifacts.\n```",
       "revId": "ef557f79ad2439eda32505120a744dcb85a71308",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53931ae2_a69b522c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-01-20T15:47:02Z",
+      "side": 1,
+      "message": "This is strange... Anyway lets revert to make presubmit \u0026 postsubmit happy and then inveistage",
+      "parentUuid": "973e3a46_ca0be613",
+      "revId": "ef557f79ad2439eda32505120a744dcb85a71308",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
