@@ -132,6 +132,9 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     private static final String VM_ATTESTATION_MESSAGE = "Hello RKP from AVF!";
     private static final int ENCRYPTED_STORAGE_BYTES = 4_000_000;
 
+    private static final String USE_RELAXED_MICRODROID_ROLLBACK_PROTECTION_PERMISSION =
+            "android.permission.USE_RELAXED_MICRODROID_ROLLBACK_PROTECTION";
+
     @Rule public Timeout globalTimeout = Timeout.seconds(300);
 
     @Parameterized.Parameters(name = "protectedVm={0},os={1}")
@@ -165,11 +168,13 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
             // Tests that rely on the state of the permission should explicitly grant or revoke it.
             revokePermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
         }
+        revokePermission(USE_RELAXED_MICRODROID_ROLLBACK_PROTECTION_PERMISSION);
     }
 
     @After
     public void tearDown() {
         revokePermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
+        revokePermission(USE_RELAXED_MICRODROID_ROLLBACK_PROTECTION_PERMISSION);
     }
 
     private static final long ONE_MEBI = 1024 * 1024;
@@ -2707,6 +2712,32 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThat(testResults.mException).isNull();
         int expectedPageSize = mOs.endsWith("_16k") ? 16384 : 4096;
         assertThat(testResults.mPageSize).isEqualTo(expectedPageSize);
+    }
+
+    @Test
+    public void libIcuIsLoadable() throws Exception {
+        assumeSupportedDevice();
+        // This test relies on the test having USE_RELAXED_MICRODROID_ROLLBACK_PROTECTION
+        // permission.
+        grantPermission(USE_RELAXED_MICRODROID_ROLLBACK_PROTECTION_PERMISSION);
+
+        VirtualMachineConfig config =
+                newVmConfigBuilderWithPayloadBinary("MicrodroidTestNativeLib.so")
+                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .build();
+
+        VirtualMachine vm = forceCreateNewVirtualMachine("test_libicu_is_loadable", config);
+
+        TestResults testResults =
+                runVmTestService(
+                        TAG,
+                        vm,
+                        (ts, tr) -> {
+                            ts.checkLibIcuIsAccessible();
+                        });
+
+        // checkLibIcuIsAccessible will throw an exception if something goes wrong.
+        assertThat(testResults.mException).isNull();
     }
 
     private static class VmShareServiceConnection implements ServiceConnection {
