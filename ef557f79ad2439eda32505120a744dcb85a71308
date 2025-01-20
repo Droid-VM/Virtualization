@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "973e3a46_ca0be613",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-20T05:54:36Z",
+      "side": 1,
+      "message": "Weird. When the change was submitted, the presubmit test ran, but all test methods were skipped.\n\n```\n01-18 00:46:36 D/ITestSuite: Skipping module \u0027MicrodroidHostTestCases\u0027 due to no changes in artifacts.\n```\n\nThis is not only for MicrodroidHostTestCases, but for many other modules. ex:\n\n```\n01-18 00:46:36 D/ITestSuite: Skipping module \u0027libvbmeta_rust.test\u0027 due to no changes in artifacts.\n```",
+      "revId": "ef557f79ad2439eda32505120a744dcb85a71308",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
