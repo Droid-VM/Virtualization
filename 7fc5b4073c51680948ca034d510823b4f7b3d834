@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f29c8c1_9e4d07e5",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1103,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-20T13:39:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7897afe_7d48861a",
+      "revId": "7fc5b4073c51680948ca034d510823b4f7b3d834",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d17292d_6d4123a8",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "I think the purpose of this benchmark is to see how small it can be.",
       "parentUuid": "3d17292d_6d4123a8",
+      "revId": "7fc5b4073c51680948ca034d510823b4f7b3d834",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29e3a083_d1e4285b",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1153,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-20T13:39:44Z",
+      "side": 1,
+      "message": "\u003e we a pre-defined constant for minimum storage for VM\u0027s to boot.\n\nNo we dont fail early if users try to configure smaller encryptedstore using `setEncryptedStorageBytes`. Instead the VM just fails to boot. I think we should fail early by using the pre-defined constant.\n\nThis benchmarks gives the value 221185 bytes. Is that a good approximation of space required for ext4 fs with journal? @akailash@google.com? In that case we can use this as the min. size. What is Android\u0027s behaviour?\n\nResolving this comment because this patch does benchmark. But would be good to get the numbers verified by your team :)",
+      "parentUuid": "56cd1ed9_76e03574",
       "revId": "7fc5b4073c51680948ca034d510823b4f7b3d834",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
