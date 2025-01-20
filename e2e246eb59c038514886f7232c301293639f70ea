@@ -254,6 +254,30 @@
       },
       "revId": "e2e246eb59c038514886f7232c301293639f70ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f87c97da_32b928bd",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-20T16:02:15Z",
+      "side": 1,
+      "message": "Note that in produced stacktrace, I was not checking `assertNoException` after `runVmTestService`, which is emulating the behaviour when api request actually fails[1] \u0026 testResult is expected to be an Exception. Is it possible that the `onStopped` is not called in those cases?\n\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java;l\u003d1904-1906?q\u003dpackages%2Fmodules%2FVirtualization%2Ftests%2Ftestapk%2Fsrc%2Fjava%2Fcom%2Fandroid%2Fmicrodroid%2Ftest%2FMicrodroidTests.java\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain",
+      "parentUuid": "52f93e0d_16d741bd",
+      "range": {
+        "startLine": 737,
+        "startChar": 0,
+        "endLine": 737,
+        "endChar": 53
+      },
+      "revId": "e2e246eb59c038514886f7232c301293639f70ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
