@@ -230,6 +230,30 @@
       },
       "revId": "e2e246eb59c038514886f7232c301293639f70ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52f93e0d_16d741bd",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-20T07:31:05Z",
+      "side": 1,
+      "message": "Thanks for trying, but I don\u0027t understand how this can happen. You called `assertNoException` after calling `runVmTestService`. This means `runToFinish` has already returned, which in turn means either the executor was requested to shutdown (by the `onStopped` callback), or 300sec has passed (which doesn\u0027t seem to be the case for you; you spent only 6.6s).\n\nin crosvm.rs, the vm\u0027s state is set to `Dead` [1], \"BEFORE\" we call `onDied` [2], which eventually calls into `onStopped`.\n\nSo, above stack trace can happen only when we are running test methods concurrently. Are we? If so, force stopping wouldn\u0027t help though.\n\n[1] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/android/virtmgr/src/crosvm.rs;drc\u003d2b65400f222409b205aba770564497220cb8f473;l\u003d554\n\n[2] https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/android/virtmgr/src/crosvm.rs;drc\u003d2b65400f222409b205aba770564497220cb8f473;l\u003d574",
+      "parentUuid": "21a50c6b_f2c1861e",
+      "range": {
+        "startLine": 737,
+        "startChar": 0,
+        "endLine": 737,
+        "endChar": 53
+      },
+      "revId": "e2e246eb59c038514886f7232c301293639f70ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
