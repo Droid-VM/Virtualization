@@ -46,6 +46,30 @@
       },
       "revId": "3a8c4e6e7f6304473ec6e5aed79d7c4256ff8b39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4eeece3c_375df7db",
+        "filename": "libs/libvmclient/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2025-01-20T04:48:46Z",
+      "side": 1,
+      "message": "sorry for the late comment, I forgot to comment here.\n\nBut it seems weird for the callbacks to be accumulative here as the function signature looks like the callback will be called only once. For example, is this intended?\n\n```\nvm.start(callback1);\nvm.wait_for_stop(); // callback1 will be called here\nvm.start(callback2);\nvm.wait_for_stop(); // both callback1 and callback2 will be called here\n```",
+      "parentUuid": "895e7e60_ed4d7570",
+      "range": {
+        "startLine": 242,
+        "startChar": 0,
+        "endLine": 248,
+        "endChar": 9
+      },
+      "revId": "3a8c4e6e7f6304473ec6e5aed79d7c4256ff8b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
