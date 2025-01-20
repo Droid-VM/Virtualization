@@ -46,6 +46,30 @@
       },
       "revId": "f28d2176f32a63416fe5b5a5fa8e6263d3c10e67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2033498_fadb7c0f",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-01-20T06:04:14Z",
+      "side": 1,
+      "message": "Ack, I think following the stable version(`6.1.123-1`) looks better. BTW, I think it might be better if the build fails for `avf` variant to forcibly follow the stable version.",
+      "parentUuid": "d9297d7a_141fa2be",
+      "range": {
+        "startLine": 230,
+        "startChar": 19,
+        "endLine": 230,
+        "endChar": 30
+      },
+      "revId": "f28d2176f32a63416fe5b5a5fa8e6263d3c10e67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
