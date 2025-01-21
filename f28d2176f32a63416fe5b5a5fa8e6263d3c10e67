@@ -70,6 +70,30 @@
       },
       "revId": "f28d2176f32a63416fe5b5a5fa8e6263d3c10e67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f692b2d1_2129d3c7",
+        "filename": "build/debian/build.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 3505705
+      },
+      "writtenOn": "2025-01-21T22:02:29Z",
+      "side": 1,
+      "message": "I agree, I will bump to the stable version `6.1.123-1` in the next PR.\n\nHowever, note that our build won\u0027t fail when a new kernel is released on the stable channel. The [default pool (containing `stable` and `stable-updates` kernels)](https://deb.debian.org/debian/pool/main/l/linux/) contain kernel versions going all the way back to `4.19.16-1`.\n\nThe `6.1.119-1` version that I had originally added to the script was in `stable-updates` (not `stable`) channel, and was _moved_ to `security-updates` channel, which broke our script because that\u0027s a different pool.\n\nI am in favor of tracking `stable` version as much as possible, but just in case we make an exception at any point in the future to use a `security-updates` kernel that has some important security fixes, it would be useful to have the changes from this CL.",
+      "parentUuid": "b2033498_fadb7c0f",
+      "range": {
+        "startLine": 230,
+        "startChar": 19,
+        "endLine": 230,
+        "endChar": 30
+      },
+      "revId": "f28d2176f32a63416fe5b5a5fa8e6263d3c10e67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
