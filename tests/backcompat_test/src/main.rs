@@ -153,6 +153,8 @@ fn run_test(protected: bool, golden_dt: &str) -> Result<(), Error> {
         .arg("--ignore-path-value")
         .arg("/chosen/rng-seed")
         .arg("--ignore-path-value")
+        .arg("/chosen/bootargs")
+        .arg("--ignore-path-value")
         .arg("/avf/untrusted/instance-id")
         .arg("--ignore-path-value")
         .arg("/chosen/linuxinitrd-start")
