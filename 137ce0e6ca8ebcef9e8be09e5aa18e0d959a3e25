@@ -16,6 +16,24 @@
       "message": "How can we test this feature?",
       "revId": "137ce0e6ca8ebcef9e8be09e5aa18e0d959a3e25",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "604094e6_fcb36237",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-01-21T17:48:24Z",
+      "side": 1,
+      "message": "To enable/disable SVE, `/apex/com.android.virt/bin/vm run-microdroid --sve auto|true|false`.\n\nI validated SVE is enabled in the VM by connecting to the VM and running `cat /proc/cpuinfo`, checking the features related to SVE are available/unavailable depending on the config.\n\nIf the question is how to test SVE, I think an app would have to be written to make use of it",
+      "parentUuid": "6c559968_982cbba5",
+      "revId": "137ce0e6ca8ebcef9e8be09e5aa18e0d959a3e25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
