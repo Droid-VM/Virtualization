@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a131463_c3296a6a",
+        "filename": "guest/trusty/security_vm/vm/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-01-21T23:04:12Z",
+      "side": 1,
+      "message": "Would it be better to have the genrule generate `security_vm_signed_obj` directly by invoking the compiler? If so, does genrule have something similar to `$(CC)` in make?",
+      "parentUuid": "dc13a844_0d68c915",
+      "revId": "18a28b4401f0304b0b97ec1715a327b8af8d1ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d57fa68_310fd7bb",
         "filename": "guest/trusty/security_vm/vm/Android.bp",
         "patchSetId": 8
