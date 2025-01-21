@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "15e242c1_21a741db",
+        "filename": "guest/trusty/security_vm/vm/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-01-21T20:08:59Z",
+      "side": 1,
+      "message": "We need to compile an assembly file with a custom define that points to a file. asflags in the example above shows pass a flag, but I don\u0027t know if it can reference a file the same way this cc_genrule does, `$(in)`.",
+      "parentUuid": "d8774873_4cac2dd7",
+      "revId": "18a28b4401f0304b0b97ec1715a327b8af8d1ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d57fa68_310fd7bb",
         "filename": "guest/trusty/security_vm/vm/Android.bp",
         "patchSetId": 8
