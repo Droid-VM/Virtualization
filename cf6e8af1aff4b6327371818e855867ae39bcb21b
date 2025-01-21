@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b88a0e6f_393b62a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-21T18:24:32Z",
+      "side": 1,
+      "message": "IMO, we should hardcode it to \"auto\" in crosvm.rs and not expand the AVF config. if a use case comes along that needs to force disable it (which seems unlikely based on the opinions in the bug), then we can consider adding an AVF option\n\nthis CL adds ~100 lines of code. if we hardcode it, it is probably 2-3 lines",
+      "parentUuid": "7675216c_c3ac224d",
+      "revId": "cf6e8af1aff4b6327371818e855867ae39bcb21b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "febc697c_72bd75b8",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 7
