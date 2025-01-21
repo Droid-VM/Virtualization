@@ -226,6 +226,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d57e5d11_027a1926",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-21T20:02:44Z",
+      "side": 1,
+      "message": "I suggest using `void*` and a user provided context object, not a `AVirtualMachine*`. `AVirtualMachine` is opaque, you can\u0027t put a custom context pointer or data in it. If the user wants some kind of closure, they\u0027ll end up needing to use global variables to access it from the callback.\n\nThat also simplifies the implementation, don\u0027t need to make the internals use `Arc`/`Weak`/etc",
+      "parentUuid": "1163fb46_81771f31",
+      "range": {
+        "startLine": 314,
+        "startChar": 44,
+        "endLine": 314,
+        "endChar": 55
+      },
+      "revId": "87340e208762cfa3dffd3c73370e801ccd866c6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dcdcdfdb_91b9b927",
         "filename": "libs/libavf/include/android/virtualization.h",
         "patchSetId": 3
