@@ -70,6 +70,30 @@
       },
       "revId": "3a8c4e6e7f6304473ec6e5aed79d7c4256ff8b39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03cbeca1_1b093b0d",
+        "filename": "libs/libvmclient/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-01-21T11:29:24Z",
+      "side": 1,
+      "message": "As I mentioned offline, VM can\u0027t be restarted after died although it\u0027s not mentioned clearly (and even incorrectly in some places)\n\n[enum PayloadState](https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/android/virtmgr/src/crosvm.rs?q\u003df:packages%2Fmodules%2FVirtualization%2Fandroid%2Fvirtmgr%2Fsrc%2Fcrosvm.rs%20%22enum%20PayloadState%22) defines payload state in order,\nand [update_payload_state()](https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/android/virtmgr/src/crosvm.rs?q\u003df:packages%2Fmodules%2FVirtualization%2Fandroid%2Fvirtmgr%2Fsrc%2Fcrosvm.rs%20%22fn%20update_payload_state%22) has explicit check that state can\u0027t go back.\n\nLet me create another CLs for clean up codes more and documentation.",
+      "parentUuid": "4eeece3c_375df7db",
+      "range": {
+        "startLine": 242,
+        "startChar": 0,
+        "endLine": 248,
+        "endChar": 9
+      },
+      "revId": "3a8c4e6e7f6304473ec6e5aed79d7c4256ff8b39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
