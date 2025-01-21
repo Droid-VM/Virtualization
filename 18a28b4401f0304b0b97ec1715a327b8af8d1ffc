@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d8774873_4cac2dd7",
+        "filename": "guest/trusty/security_vm/vm/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2025-01-21T17:25:36Z",
+      "side": 1,
+      "message": "Is the question about how to get soong to compile an assembly file?  Adding a `.S` to `srcs` should just work: https://source.corp.google.com/h/android/platform/superproject/main/+/main:art/runtime/Android.bp;l\u003d496?q\u003dquick_entrypoints_arm64.S%20file:art\u0026sq\u003drepo:android%2Fplatform%2Fsuperproject%2Fmain%20b:main.",
+      "parentUuid": "ed7d5817_c3ee8fa2",
+      "revId": "18a28b4401f0304b0b97ec1715a327b8af8d1ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d57fa68_310fd7bb",
         "filename": "guest/trusty/security_vm/vm/Android.bp",
         "patchSetId": 8
