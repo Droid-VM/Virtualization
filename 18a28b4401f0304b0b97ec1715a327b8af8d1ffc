@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dc13a844_0d68c915",
+        "filename": "guest/trusty/security_vm/vm/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2025-01-21T22:08:25Z",
+      "side": 1,
+      "message": "You can\u0027t reference arbitrary file paths from asflags, so I think you\u0027ll need the genrule.  If you want to have the .S file checked in you could make the genrule use `sed s\"MANIFEST_DATA\"$(in)\"` to rewrite the .S file with the path.\n\nThis always going to be hacky though, Soong doesn\u0027t know that compiling the .S file is going to read the `trusty_security_vm_signed` binary, and you\u0027re just hoping that the `static_libs: [\"trusty_security_vm_signed\"]` is going to cause the same file to be present at the same location when the `security_vm_signed_obj` rule is run in the RBE sandbox.",
+      "parentUuid": "15e242c1_21a741db",
+      "revId": "18a28b4401f0304b0b97ec1715a327b8af8d1ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d57fa68_310fd7bb",
         "filename": "guest/trusty/security_vm/vm/Android.bp",
         "patchSetId": 8
