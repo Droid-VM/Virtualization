@@ -38,6 +38,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8a622a0d_ab502ce9",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-22T12:05:28Z",
+      "side": 1,
+      "message": "Is this necessary?",
+      "range": {
+        "startLine": 54,
+        "startChar": 37,
+        "endLine": 54,
+        "endChar": 51
+      },
+      "revId": "137ce0e6ca8ebcef9e8be09e5aa18e0d959a3e25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e00df5e0_5bbfcbaf",
         "filename": "android/virtmgr/src/crosvm.rs",
         "patchSetId": 8
@@ -49,6 +72,52 @@
       "writtenOn": "2025-01-21T18:24:32Z",
       "side": 1,
       "message": "as written, the sve options only have an effect if other cpu options are also set",
+      "revId": "137ce0e6ca8ebcef9e8be09e5aa18e0d959a3e25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecac37f5_cbce4b4b",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineAppConfig.aidl",
+        "patchSetId": 8
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-22T12:05:28Z",
+      "side": 1,
+      "message": "I don\u0027t really understand AIDL but `SveConfig.aidl` says:\n```\nSveEnabled enabled \u003d SveEnabled.AUTO;\n```\nso is this comment accurate? (same in `VirtualMachineRawConfig.aidl`)\n\nIf it is, I\u0027d be in favor of making the default `auto`, so that we don\u0027t need to set this flag across the stack (which would be necessary as Microdroid userspace would fail with default `off`, when compiled using SVE instructions).",
+      "range": {
+        "startLine": 153,
+        "startChar": 36,
+        "endLine": 153,
+        "endChar": 50
+      },
+      "revId": "137ce0e6ca8ebcef9e8be09e5aa18e0d959a3e25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "065d68fd_cd2bb5a6",
+        "filename": "android/vm/src/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-22T12:05:28Z",
+      "side": 1,
+      "message": "nit: `match s.to_lowercase().as_str()`? Or just drop this flexibility, as we don\u0027t have it for other arguments?",
+      "range": {
+        "startLine": 394,
+        "startChar": 16,
+        "endLine": 394,
+        "endChar": 25
+      },
       "revId": "137ce0e6ca8ebcef9e8be09e5aa18e0d959a3e25",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
