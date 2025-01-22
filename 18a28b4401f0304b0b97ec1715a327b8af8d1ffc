@@ -128,6 +128,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c0a56c2e_0261ff07",
+        "filename": "guest/trusty/security_vm/vm/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-01-22T09:48:56Z",
+      "side": 1,
+      "message": "\u003e ...genrule use sed s\"MANIFEST_DATA\"$(in)\" to rewrite the .S file with the path.\n\nYou\u0027re right, this is possible but also quite hacky. I tried it as well, and we still need a `genrule` instead of directly compiling the `.S` file within `cc_object`.\n\nOtherwise, to keep things moving, could we merge the current cl first to unblock Armelle\u0027s work? We can address the refactoring of those four lines in a separate thread, that would allow us to make progress on both fronts without unnecessary delays.\n\nCC @armellel@google.com",
+      "parentUuid": "7a131463_c3296a6a",
+      "revId": "18a28b4401f0304b0b97ec1715a327b8af8d1ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d57fa68_310fd7bb",
         "filename": "guest/trusty/security_vm/vm/Android.bp",
         "patchSetId": 8
