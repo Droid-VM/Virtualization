@@ -146,6 +146,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f07702b6_e56be9e7",
+        "filename": "guest/trusty/security_vm/vm/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-01-22T18:46:20Z",
+      "side": 1,
+      "message": "I\u0027m OK with merging the current CL for now. I think it would be useful to have a follow up CL to fix the problem Colin described, so future soong changes don\u0027t suddenlt break this. I don\u0027t think generating the .C file with sed accomlish that though. I think the genrule needs to generate the security_vm_signed_obj file.",
+      "parentUuid": "c0a56c2e_0261ff07",
+      "revId": "18a28b4401f0304b0b97ec1715a327b8af8d1ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d57fa68_310fd7bb",
         "filename": "guest/trusty/security_vm/vm/Android.bp",
         "patchSetId": 8
