@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78b03d31_b61388e0",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-01-22T17:56:01Z",
+      "side": 1,
+      "message": "Nope! Missed that, thanks. I had an iteration where I added an enum that would conflict in name, but forgot to cleanup that part",
+      "parentUuid": "8a622a0d_ab502ce9",
+      "range": {
+        "startLine": 54,
+        "startChar": 37,
+        "endLine": 54,
+        "endChar": 51
+      },
+      "revId": "137ce0e6ca8ebcef9e8be09e5aa18e0d959a3e25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e00df5e0_5bbfcbaf",
@@ -99,6 +123,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6b2766f_f0ac5864",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineAppConfig.aidl",
+        "patchSetId": 8
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-01-22T17:56:01Z",
+      "side": 1,
+      "message": "Default would be auto, suggested by Frederick previously. I\u0027ll be modifying this CL and adding `sve\u003d[auto\u003dtrue]` to the CPU args instead of crosvm, then refactor the CPU flags. I think the code could be refactored to be a bit simpler and more flexible, especially if we\u0027re adding CPU features.",
+      "parentUuid": "ecac37f5_cbce4b4b",
+      "range": {
+        "startLine": 153,
+        "startChar": 36,
+        "endLine": 153,
+        "endChar": 50
+      },
+      "revId": "137ce0e6ca8ebcef9e8be09e5aa18e0d959a3e25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "065d68fd_cd2bb5a6",
@@ -112,6 +160,30 @@
       "writtenOn": "2025-01-22T12:05:28Z",
       "side": 1,
       "message": "nit: `match s.to_lowercase().as_str()`? Or just drop this flexibility, as we don\u0027t have it for other arguments?",
+      "range": {
+        "startLine": 394,
+        "startChar": 16,
+        "endLine": 394,
+        "endChar": 25
+      },
+      "revId": "137ce0e6ca8ebcef9e8be09e5aa18e0d959a3e25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34c5ea8e_8d4a40a5",
+        "filename": "android/vm/src/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-01-22T17:56:01Z",
+      "side": 1,
+      "message": "Ack - noted for the future.",
+      "parentUuid": "065d68fd_cd2bb5a6",
       "range": {
         "startLine": 394,
         "startChar": 16,
