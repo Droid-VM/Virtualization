@@ -120,6 +120,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f878c5c0_c158abb0",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 1125,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-22T18:45:59Z",
+      "side": 1,
+      "message": "I think this is still an issue. We probably need some refactoring here, but maybe a quick fix is to do something like\n\n```\n    if let Some(cpus) \u003d config.cpus {\n        command.arg(\"--cpus\").arg(cpus.to_string() + \",sve\u003d[auto\u003dtrue]\");\n    }\n    if config.host_cpu_topology {\n        ...\n    }\n    if config.cpus.is_none() \u0026\u0026 !config.host_cpu_topology) {\n        command.arg(\"--cpus\").arg(\"sve\u003d[auto\u003dtrue]\");\n    }\n```",
+      "parentUuid": "0ba956aa_95b46885",
+      "revId": "137ce0e6ca8ebcef9e8be09e5aa18e0d959a3e25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ecac37f5_cbce4b4b",
         "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineAppConfig.aidl",
         "patchSetId": 8
