@@ -132,7 +132,7 @@ fn run_vm(image_path: &str, test_name: &CStr, protected_vm: bool) -> Result<()> 
 
     // SAFETY: vm is the only reference to a valid object
     unsafe {
-        AVirtualMachine_start(vm);
+        AVirtualMachine_start(vm, None /* callback */, std::ptr::null() /* data */);
     }
 
     info!("VM started");

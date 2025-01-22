@@ -314,8 +314,8 @@ enum AVirtualMachineStopReason : int32_t {
 /**
  * Create a virtual machine with given raw `config`.
  *
- * The created virtual machine is in stopped state. To run the created virtual machine, call
- * {@link AVirtualMachine_start}.
+ * This doesn't start the virtual machine automatically. To start the created virtual machine,
+ * explicitly call {@link AVirtualMachine_start}.
  *
  * The caller takes ownership of the returned virtual machine object, and is responsible for
  * releasing it by calling {@link AVirtualMachine_destroy}.
@@ -340,14 +340,32 @@ int AVirtualMachine_createRaw(const AVirtualizationService* _Nonnull service,
                               AVirtualMachine* _Null_unspecified* _Nonnull vm) __INTRODUCED_IN(36);
 
 /**
+ * A callback to be called when virtual machine stops.
+ *
+ * \param vm stopped vm
+ * \param reason stop reason
+ * \param data an optional callback data passed by AVirtualMachine_start
+ */
+typedef void (*AVirtualMachine_stopCallback)(AVirtualMachine* _Nonnull vm,
+                                             enum AVirtualMachineStopReason reason,
+                                             const void* _Nullable data);
+
+/**
  * Start a virtual machine. `AVirtualMachine_start` is synchronous and blocks until the virtual
  * machine is initialized and free to start executing code, or until an error happens.
  *
+ * A stopped virtual machine cannot be re-started.
+ *
  * \param vm a handle on a virtual machine.
+ * \param callback an optional callback to be called when VM stops.
+ * \param data an optional callback data. If specified, it should be remain
+ *   valid until callback is called.
  *
  * \return If successful, it returns 0. Otherwise, it returns `-EIO`.
  */
-int AVirtualMachine_start(AVirtualMachine* _Nonnull vm) __INTRODUCED_IN(36);
+int AVirtualMachine_start(AVirtualMachine* _Nonnull vm,
+                          const AVirtualMachine_stopCallback _Nullable callback,
+                          const void* _Nullable data) __INTRODUCED_IN(36);
 
 /**
  * Stop a virtual machine. Stopping a virtual machine is like pulling the plug on a real computer;
