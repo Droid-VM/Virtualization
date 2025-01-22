@@ -136,6 +136,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "833918b4_9dd43110",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 1125,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-01-22T21:38:42Z",
+      "side": 1,
+      "message": "That case will never occur due to the `cpu-topology` having a default value of `one_cpu` here:\nhttps://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/android/vm/src/main.rs;l\u003d48\n\nThis then gets propagated to https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/android/virtmgr/src/aidl.rs;l\u003d717 which then triggers https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/android/virtmgr/src/crosvm.rs;l\u003d1112?q\u003dcpufreq\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain:packages%2Fmodules%2FVirtualization%2Fandroid%2F\n\nOtherwise, if the cpu_topology is set to `match_host`, the other path is triggered.",
+      "parentUuid": "f878c5c0_c158abb0",
+      "revId": "137ce0e6ca8ebcef9e8be09e5aa18e0d959a3e25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ecac37f5_cbce4b4b",
