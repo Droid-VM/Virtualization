@@ -1563,7 +1563,8 @@ impl IVirtualMachine::IVirtualMachine for VirtualMachine {
 
         // Only register callback if it may be notified.
         // This also ensures no cyclic reference between callback and VmInstance.
-        if matches!(*self.instance.vm_state.lock().unwrap(), VmState::Dead) {
+        if !matches!(*self.instance.vm_state.lock().unwrap(), VmState::Dead) {
+            warn!("Ignoring registerCallback. VM is died already.");
             self.instance.callbacks.add(callback.clone());
         }
         Ok(())
