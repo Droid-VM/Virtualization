@@ -77,6 +77,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18481507_f20878f8",
+        "filename": "libs/libhypervisor_backends/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-01-22T21:53:16Z",
+      "side": 1,
+      "message": "It is not harmfull for x86 build, not sure why probably because it is never used for x86 code. Nevertheless I\u0027ve made this rustlib dependency arm64 specific.",
+      "parentUuid": "b528d1a2_72d46210",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 19
+      },
+      "revId": "29924c736f7461576a84cd6c0b4d41828cde0b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1f7fa60_722b3d9e",
@@ -100,6 +124,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e456f61_abb25e57",
+        "filename": "libs/libhypervisor_backends/rules.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-01-22T21:53:16Z",
+      "side": 1,
+      "message": "Correct, sorry it is a lefover from my previous internal version where I used lazy static.",
+      "parentUuid": "d1f7fa60_722b3d9e",
+      "range": {
+        "startLine": 12,
+        "startChar": 1,
+        "endLine": 12,
+        "endChar": 33
+      },
+      "revId": "29924c736f7461576a84cd6c0b4d41828cde0b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7405b760_2d00ce54",
@@ -113,6 +161,30 @@
       "writtenOn": "2025-01-21T18:24:06Z",
       "side": 1,
       "message": "Similarly to `UnsupportedHypervisorUuid`, could you capture the Cpuid and print it out when displaying the error? IMO, we should have an abstraction (\"`HypId`\" or whatever) that is a UUID on AArch64 and a CPUID on x86 to encapsulate this and `detect_hypervisor()`, reducing the number of `#[cfg(target_arch)]` checks, but that can happen as a clean-up in a follow-up.",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 25
+      },
+      "revId": "29924c736f7461576a84cd6c0b4d41828cde0b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa638f92_57bef36e",
+        "filename": "libs/libhypervisor_backends/src/error.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-01-22T21:53:16Z",
+      "side": 1,
+      "message": "Sure, I\u0027ve extend `UnsupportedHypervisor` for CPUID as suggested but left the follow-up",
+      "parentUuid": "7405b760_2d00ce54",
       "range": {
         "startLine": 43,
         "startChar": 4,
@@ -148,6 +220,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fdf46cb0_12e57fed",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/kvm_x86.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-01-22T21:53:16Z",
+      "side": 1,
+      "message": "Unfortunatelly if I remove it, it builds without error and I would assume RegularKVM will just work with default one but for some unknonw to me reason, when using it with Trusty it panics because it reaches `u2d` instruction - maybe some too aggressive x86 optimization? - I have no idea.\n\nI\u0027ve checked the same on arm counterpart and default works for RegularKVM without any issue.\n\nFor now I will add TOOD and keep this one as is due to above.",
+      "parentUuid": "6fdded09_7f0c4786",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 5
+      },
+      "revId": "29924c736f7461576a84cd6c0b4d41828cde0b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fd938f8d_8dcf69f4",
         "filename": "libs/libhypervisor_backends/src/hypervisor/kvm_x86.rs",
         "patchSetId": 3
@@ -159,6 +255,30 @@
       "writtenOn": "2025-01-21T18:24:06Z",
       "side": 1,
       "message": "This states that x86 pKVM supports device assignment, which doesn\u0027t sound to be right? You probably want to remove L84-86 (and L179-L187).",
+      "range": {
+        "startLine": 85,
+        "startChar": 8,
+        "endLine": 85,
+        "endChar": 18
+      },
+      "revId": "29924c736f7461576a84cd6c0b4d41828cde0b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c25d9237_6f72e0dc",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/kvm_x86.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-01-22T21:53:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fd938f8d_8dcf69f4",
       "range": {
         "startLine": 85,
         "startChar": 8,
@@ -182,6 +302,30 @@
       "writtenOn": "2025-01-21T18:24:06Z",
       "side": 1,
       "message": "Could you introduce a macro making this look like a function call and re-use it below? Beyond simple encapsulation and DRY, this would de-dup `unsafe` and make future CLs using the macro potentially fully safe:\n```\nlet ret \u003d vmcall!(PKVM_GHC_SHARE_MEM, base_ipa, SIZE_4KB);\n```",
+      "range": {
+        "startLine": 99,
+        "startChar": 17,
+        "endLine": 99,
+        "endChar": 23
+      },
+      "revId": "29924c736f7461576a84cd6c0b4d41828cde0b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b380cc3_4c4b86c6",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/kvm_x86.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-01-22T21:53:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b891d1a0_d486359f",
       "range": {
         "startLine": 99,
         "startChar": 17,
@@ -240,6 +384,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6508216d_300dd100",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/kvm_x86.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-01-22T21:53:16Z",
+      "side": 1,
+      "message": "Sorry but I don\u0027t quite get what did you mean here and to which code you refering, could you elaborate?",
+      "parentUuid": "34d4e60b_ec185706",
+      "range": {
+        "startLine": 108,
+        "startChar": 76,
+        "endLine": 108,
+        "endChar": 77
+      },
+      "revId": "29924c736f7461576a84cd6c0b4d41828cde0b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c39d7ff_e1de997c",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/kvm_x86.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-01-22T21:53:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3d5176e5_b54c341a",
+      "range": {
+        "startLine": 108,
+        "startChar": 39,
+        "endLine": 108,
+        "endChar": 74
+      },
+      "revId": "29924c736f7461576a84cd6c0b4d41828cde0b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "72289f05_21b3e161",
         "filename": "libs/libhypervisor_backends/src/hypervisor/kvm_x86.rs",
         "patchSetId": 3
@@ -251,6 +443,30 @@
       "writtenOn": "2025-01-21T18:24:06Z",
       "side": 1,
       "message": "I\u0027m not sure why all these `asm!` are using 32-bit registers instead of 64-bit ones. If that\u0027s the intended behavior, should the Rust code ensure that the `u64` passed fits in the 32-bit value?",
+      "range": {
+        "startLine": 114,
+        "startChar": 32,
+        "endLine": 114,
+        "endChar": 35
+      },
+      "revId": "29924c736f7461576a84cd6c0b4d41828cde0b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "092e8300_6d117b4d",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/kvm_x86.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-01-22T21:53:16Z",
+      "side": 1,
+      "message": "Not sure what do you meant, the r* registers are 64-bit ones.",
+      "parentUuid": "72289f05_21b3e161",
       "range": {
         "startLine": 114,
         "startChar": 32,
@@ -274,6 +490,30 @@
       "writtenOn": "2025-01-21T18:24:06Z",
       "side": 1,
       "message": "Surely, this can\u0027t be right? Maybe `Ok(SIZE_4KB)`?",
+      "range": {
+        "startLine": 138,
+        "startChar": 8,
+        "endLine": 138,
+        "endChar": 55
+      },
+      "revId": "29924c736f7461576a84cd6c0b4d41828cde0b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91ba15ea_e8ceeb59",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/kvm_x86.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-01-22T21:53:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "51529b9c_66363b34",
       "range": {
         "startLine": 138,
         "startChar": 8,
@@ -333,6 +573,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0fb2dbbd_4450fa7b",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/kvm_x86.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-01-22T21:53:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61406770_69dd3f62",
+      "range": {
+        "startLine": 152,
+        "startChar": 36,
+        "endLine": 152,
+        "endChar": 76
+      },
+      "revId": "29924c736f7461576a84cd6c0b4d41828cde0b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "1ab7cd36_327dfc12",
         "filename": "libs/libhypervisor_backends/src/hypervisor/kvm_x86.rs",
         "patchSetId": 3
@@ -377,6 +641,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "faefdd4d_478b6da7",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/kvm_x86.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-01-22T21:53:16Z",
+      "side": 1,
+      "message": "Ack: I\u0027ve also did a shortcut in the initial implementation and check only rbx (which is sufficient to determine pkvm vs regular kvm) but the CPU signature is actually returned by all 3 registers - I\u0027ve updated the code to be more strict.",
+      "parentUuid": "37125cc9_14f37f48",
+      "range": {
+        "startLine": 161,
+        "startChar": 13,
+        "endLine": 161,
+        "endChar": 18
+      },
+      "revId": "29924c736f7461576a84cd6c0b4d41828cde0b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7fcad402_e12941ff",
@@ -390,6 +678,30 @@
       "writtenOn": "2025-01-21T18:24:06Z",
       "side": 1,
       "message": "Define these as `const` fields of the respective structs, similarly to their `UUID` on AArch64:\n```\nconst CPUID: u32 \u003d u32::from_le_bytes(*b\"PKVM\");\n```\nthen, do the comparison on the `u32` directly (instead of bytes), using a `match`:\n```\nmatch cpuid {\n    RegularKvmHypervisor::CPUID \u003d\u003e Ok(HypervisorBackend::RegularKvm),\n    ProtectedKvmHypervisor::CPUID \u003d\u003e Ok(HypervisorBackend::ProtectedKvm),\n    _ \u003d\u003e Err(Error::UnsupportedHypervisor),\n}\n```\nthen you can move this code to the common file, to implement `detect_hypervisor()`.",
+      "range": {
+        "startLine": 169,
+        "startChar": 30,
+        "endLine": 169,
+        "endChar": 47
+      },
+      "revId": "29924c736f7461576a84cd6c0b4d41828cde0b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f102624e_833b9042",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/kvm_x86.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-01-22T21:53:16Z",
+      "side": 1,
+      "message": "Done, but I left it in x86 specific file not sure why should we move it to common hypervisor file? If we will move it there we should move/expose some things there: e.g. cpuid macro, definitions which will introuce yet another #cfg since it is used only for x86",
+      "parentUuid": "7fcad402_e12941ff",
       "range": {
         "startLine": 169,
         "startChar": 30,
