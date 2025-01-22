@@ -307,6 +307,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "61406770_69dd3f62",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/kvm_x86.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-22T09:50:47Z",
+      "side": 1,
+      "message": "BTW, for using and restoring RBX, instead of `push`/`pop`, can\u0027t you `xchg`/`xchg` with the temporary register? This would allow you to mark the `asm!` as `nomem`, enabling better compiler optimization.",
+      "parentUuid": "76e321ea_cc6a0514",
+      "range": {
+        "startLine": 152,
+        "startChar": 36,
+        "endLine": 152,
+        "endChar": 76
+      },
+      "revId": "29924c736f7461576a84cd6c0b4d41828cde0b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1ab7cd36_327dfc12",
