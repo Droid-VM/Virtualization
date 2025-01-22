@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d7314cc_b82871db",
+        "filename": "guest/pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-22T09:53:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a592bd40_4103b2e3",
+      "range": {
+        "startLine": 466,
+        "startChar": 59,
+        "endLine": 466,
+        "endChar": 65
+      },
+      "revId": "baf2f48c869ab05ffd6a139207fb231cbbce8f29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "445d7fd5_d4a14645",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf35226c_1e009f6f",
+        "filename": "guest/pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-22T09:53:31Z",
+      "side": 1,
+      "message": "No problem, done.",
+      "parentUuid": "445d7fd5_d4a14645",
+      "range": {
+        "startLine": 91,
+        "startChar": 16,
+        "endLine": 91,
+        "endChar": 37
+      },
+      "revId": "baf2f48c869ab05ffd6a139207fb231cbbce8f29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "346f5075_26ac98c9",
@@ -60,6 +108,30 @@
       "writtenOn": "2025-01-17T13:00:51Z",
       "side": 1,
       "message": "It\u0027s confusing to have both identifiers in place for RKP VM. Could you just migrate all the `\"remote_attest\"` usages to UUID instead, and drop that capability?",
+      "range": {
+        "startLine": 95,
+        "startChar": 8,
+        "endLine": 102,
+        "endChar": 10
+      },
+      "revId": "baf2f48c869ab05ffd6a139207fb231cbbce8f29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b39a577_66507a93",
+        "filename": "guest/rialto/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-22T09:53:31Z",
+      "side": 1,
+      "message": "Agreed, I am cleaning up most `Capabilities` in a follow-up once I\u0027ve also introduced an alternative for specifying the expected RBP solution.",
+      "parentUuid": "346f5075_26ac98c9",
       "range": {
         "startLine": 95,
         "startChar": 8,
