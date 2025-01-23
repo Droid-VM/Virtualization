@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d12470ee_d34988ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-01-23T10:04:28Z",
+      "side": 1,
+      "message": "Hi,\n\nSomehow I missed this cl in the backlog. It looks like the introduced UUID is used as a VM identifier. I just wonder would it be possible to use a more readable format, such as a string, for easier debugging as explained in http://b/378673494#comment38? Thanks!",
+      "revId": "458cd8048897f808fefa77e1850d45d748f1b138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
