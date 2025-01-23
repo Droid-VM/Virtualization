@@ -29,9 +29,9 @@ function wait_for_cid {
     setprop trusty.test_vm.vm_cid "$cid"
 }
 
-# This script is expected to be started before the trusty_test_vm is started
+# This script is expected to be started before the trusty-test_vm is started
 # wait_for_cid gets the max cid and wait for it to be updated as an indication
-# that the trusty_test_vm has properly started.
+# that the trusty-test_vm has properly started.
 # wait_for_cid polls for the CID change at 2 seconds intervals
 # the input argument is the max number of retries (20 by default)
 wait_for_cid "$@"
