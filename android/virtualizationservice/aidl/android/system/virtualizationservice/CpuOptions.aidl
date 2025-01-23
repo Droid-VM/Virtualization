@@ -15,13 +15,11 @@
  */
 package android.system.virtualizationservice;
 
-/** The vCPU topology that will be generated for the VM. */
-@Backing(type="byte")
-enum CpuTopology {
-    /** One vCPU */
-    ONE_CPU = 0,
-    /** Match physical CPU topology of the host. */
-    MATCH_HOST = 1,
-    /** Number of vCPUs specified in the config. */
-    CUSTOM = 2,
+/** CPU options that will be used for the VM's Vcpus. */
+parcelable CpuOptions {
+    /** Number of Vcpus to boot the VM with. */
+    int cpuCount;
+
+    /** Match host number of Vcpus to boot the VM with. */
+    boolean matchHost;
 }
