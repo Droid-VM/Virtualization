@@ -33,12 +33,14 @@ mod memory;
 mod rollback;
 
 use crate::bcc::Bcc;
+use crate::config::reserved_mem::{ResMem, ResMemEntryInfo};
 use crate::dice::PartialInputs;
 use crate::entry::RebootReason;
 use crate::fdt::{modify_for_next_stage, read_instance_id, sanitize_device_tree};
 use crate::rollback::perform_rollback_protection;
 use alloc::borrow::Cow;
 use alloc::boxed::Box;
+use alloc::vec::Vec;
 use bssl_avf::Digester;
 use diced_open_dice::{bcc_handover_parse, DiceArtifacts, DiceContext, Hidden, VM_KEY_ALGORITHM};
 use hypervisor_backends::get_mem_sharer;
@@ -51,6 +53,7 @@ use vmbase::heap;
 use vmbase::memory::{flush, SIZE_4KB};
 use vmbase::rand;
 
+#[allow(clippy::too_many_arguments)]
 fn main<'a>(
     untrusted_fdt: &mut Fdt,
     signed_kernel: &[u8],
@@ -59,6 +62,7 @@ fn main<'a>(
     mut debug_policy: Option<&[u8]>,
     vm_dtbo: Option<&mut [u8]>,
     vm_ref_dt: Option<&[u8]>,
+    reserved_mem: Option<&mut [u8]>,
 ) -> Result<(&'a [u8], bool), RebootReason> {
     info!("pVM firmware");
     debug!("FDT: {:?}", untrusted_fdt.as_ptr());
@@ -112,13 +116,40 @@ fn main<'a>(
         sanitize_device_tree(untrusted_fdt, vm_dtbo, vm_ref_dt, guest_page_size, hyp_page_size)?;
     let fdt = untrusted_fdt; // DT has now been sanitized.
 
-    let next_bcc_size = guest_page_size;
-    let next_bcc = heap::aligned_boxed_slice(next_bcc_size, guest_page_size).ok_or_else(|| {
-        error!("Failed to allocate the next-stage BCC");
-        RebootReason::InternalError
-    })?;
+    let mut reserved_mem_info: Vec<ResMemEntryInfo> = if let Some(reserved_mem) = reserved_mem.as_ref() {
+        ResMem::new(reserved_mem, guest_page_size)
+            .map_err(|e| {
+                error!("Failed to parse reserved memory: {e}");
+                RebootReason::InvalidConfig
+            })?
+            .into_iter()
+            .filter(|x| Some(x.vm_name.to_str().unwrap()) == verified_boot_data.name.as_deref())
+            .collect::<Vec<_>>()
+    } else {
+        Vec::new()
+    };
+
+    let preserved_pages_size = guest_page_size * (reserved_mem_info.len() + 1);
+    let preserved_pages = heap::aligned_boxed_slice(preserved_pages_size, guest_page_size)
+        .ok_or_else(|| {
+            error!("Failed to allocate the next-stage BCC");
+            RebootReason::InternalError
+        })?;
     // By leaking the slice, its content will be left behind for the next stage.
-    let next_bcc = Box::leak(next_bcc);
+    let preserved_pages = Box::leak(preserved_pages);
+    let mut pages: Vec<&mut [u8]> = preserved_pages.chunks_mut(guest_page_size).collect();
+
+    // Move reserved memory to preserved pages.
+    for entry in reserved_mem_info.iter_mut() {
+        let dst = pages.pop().unwrap();
+        let len = entry.blob.len();
+        dst[..len].copy_from_slice(entry.blob);
+        entry.blob = &dst[..len];
+    }
+    for entry in reserved_mem_info.iter() {
+        log::error!("{:X} {}", entry.blob.as_ptr() as u64, entry.blob.len());
+        log::error!("{:?}", entry.compat);
+    }
 
     let dice_inputs = PartialInputs::new(&verified_boot_data).map_err(|e| {
         error!("Failed to compute partial DICE inputs: {e:?}");
@@ -159,6 +190,7 @@ fn main<'a>(
         })?,
         subject_algorithm: VM_KEY_ALGORITHM,
     };
+    let next_bcc = pages.pop().unwrap();
     dice_inputs
         .write_next_bcc(
             new_bcc_handover.as_ref(),
@@ -178,6 +210,7 @@ fn main<'a>(
         error!("Failed to generated guest KASLR seed: {e}");
         RebootReason::InternalError
     })?);
+
     let strict_boot = true;
     modify_for_next_stage(
         fdt,
@@ -187,14 +220,19 @@ fn main<'a>(
         debug_policy,
         debuggable,
         kaslr_seed,
+        reserved_mem_info,
     )
     .map_err(|e| {
         error!("Failed to configure device tree: {e}");
         RebootReason::InternalError
     })?;
 
+    if let Some(m) = reserved_mem {
+        m.fill(0)
+    }
+
     info!("Starting payload...");
-    Ok((next_bcc, debuggable))
+    Ok((preserved_pages, debuggable))
 }
 
 // Get the "salt" which is one of the input for DICE derivation.

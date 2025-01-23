@@ -16,6 +16,7 @@
 
 use crate::entry::RebootReason;
 use crate::fdt::{read_initrd_range_from, read_kernel_range_from};
+use alloc::vec::Vec;
 use core::num::NonZeroUsize;
 use core::slice;
 use log::debug;
@@ -32,6 +33,8 @@ pub(crate) struct MemorySlices<'a> {
     pub kernel: &'a [u8],
     pub ramdisk: Option<&'a [u8]>,
     pub dice_chain: Option<&'a [u8]>,
+    #[allow(dead_code)]
+    pub reserved_regions: Vec<&'a [u8]>,
 }
 
 impl<'a> MemorySlices<'a> {
@@ -114,10 +117,16 @@ impl<'a> MemorySlices<'a> {
 
         let dice_chain = None;
 
-        Ok(Self { fdt: untrusted_fdt, kernel, ramdisk, dice_chain })
+        let reserved_regions = Vec::new();
+
+        Ok(Self { fdt: untrusted_fdt, kernel, ramdisk, dice_chain, reserved_regions })
     }
 
     pub fn add_dice_chain(&mut self, dice_chain: &'a [u8]) {
         self.dice_chain = Some(dice_chain)
+    }
+
+    pub fn _add_reserved(&mut self, mem: &'a [u8]) {
+        self.reserved_regions.push(mem)
     }
 }
