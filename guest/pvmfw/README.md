@@ -82,6 +82,7 @@ device tree node where both address and size have been properly aligned to the
 page size used by the hypervisor. This single region must include both the pvmfw
 binary image and its configuration data (see below). For example, the following
 node describes a region of size `0x40000` at address `0x80000000`:
+
 ```
 reserved-memory {
     ...
@@ -147,6 +148,10 @@ The configuration data is described using the following [header]:
 |  offset = (FOURTH - HEAD)     |
 |  size = (FOURTH_END - FOURTH) |
 +-------------------------------+
+|           [Entry 4]           | <-- Entry 4 is present since version 1.3
+|  offset = (FIFTH - HEAD)      |
+|  size = (FIFTH_END - FIFTH)   |
++-------------------------------+
 |              ...              |
 +-------------------------------+
 |           [Entry n]           |
@@ -167,6 +172,10 @@ The configuration data is described using the following [header]:
 +===============================+ <-- FOURTH
 | {Fourth blob: VM reference DT}|
 +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+ <-- FOURTH_END
+| (Padding to 8-byte alignment) |
++===============================+ <-- FIFTH
+| {Fifth blob: Reserved Memory} |
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+ <-- FIFTH_END
 | (Padding to 8-byte alignment) |
 +===============================+
 |              ...              |
@@ -238,11 +247,37 @@ In version 1.2, a fourth blob is added.
 [secretkeeper_key]: https://android.googlesource.com/platform/system/secretkeeper/+/refs/heads/main/README.md#secretkeeper-public-key
 [vendor_hashtree_digest]: ../../build/microdroid/README.md#verification-of-vendor-image
 
+#### Version 1.3 {#pvmfw-data-v1-3}
+
+In version 1.3, a fifth blob is added.
+
+- entry 4, if present, contains potentially confidential data to be passed to
+  specific guests identified from their VM name. If the data is confidential,
+  this feature should only be used with guests using a fixed rollback
+  protection mechanism to prevent rollback attacks from a malicious host. Data
+  is passed as a reserved-memory region through the device tree with the
+  provided properties at an address which is implementation defined. Multiple
+  regions may be passed to the same guest. The format is as follows.
+
+  ```rust
+  #[repr(C)]
+  struct ReservedMemConfigEntry<const N: usize> {
+    /// The number of headers contained in this blob.
+    count: u32,
+    /// The [reserved memory headers](src/reserved_mem.rs) describing the passed data.
+    headers: [RMemHeader; N]
+    /// The actual data being passed. The reserved memory headers point to
+    /// offsets within this array.
+    data: [u8],
+  }
+  ```
+
 #### Virtual Platform DICE Chain Handover
 
 The format of the DICE chain entry mentioned above, compatible with the
 [`AndroidDiceHandover`][AndroidDiceHandover] defined by the Open Profile for
 DICE reference implementation, is described by the following [CDDL][CDDL]:
+
 ```
 PvmfwDiceHandover = {
   1 : bstr .size 32,     ; CDI_Attest
@@ -359,25 +394,25 @@ to booting the VM, are described to pvmfw using the device tree (x0):
 
 - the kernel in the `/config` DT node _e.g._
 
-    ```
-    / {
+  ```
+  / {
         config {
             kernel-address = <0x80200000>;
             kernel-size = <0x1000000>;
         };
-    };
-    ````
+  };
+  ```
 
 - the (optional) ramdisk in the standard `/chosen` node _e.g._
 
-    ```
-    / {
+  ```
+  / {
         chosen {
             linux,initrd-start = <0x82000000>;
             linux,initrd-end = <0x82800000>;
         };
-    };
-    ```
+  };
+  ```
 
 [Linux ABI]: https://www.kernel.org/doc/Documentation/arm64/booting.txt
 
