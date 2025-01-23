@@ -180,6 +180,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0343a83a_9c3aa1ae",
+        "filename": "guest/trusty/security_vm/vm/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-01-23T08:45:42Z",
+      "side": 1,
+      "message": "Hi Armelle, thanks for taking on this follow-up!\n\nColin and Arve: Regarding the concern about `static_lib`, I think it\u0027s not necessary. The object compilation actually relies solely on the path specified in the generated `.S` file to find the binary to include. Thus, I\u0027ve created a cl https://r.android.com/3463159 to clean it up.\n\n\u003e Would it be better to have the genrule generate security_vm_signed_obj directly by invoking the compiler?\n\nI don\u0027t see any examples of using `CC` directly in cc_genrule. We might still need to use `cc_object` to build objects.",
+      "parentUuid": "f1972059_bab45c08",
+      "revId": "18a28b4401f0304b0b97ec1715a327b8af8d1ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d57fa68_310fd7bb",
