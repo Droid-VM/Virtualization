@@ -73,7 +73,6 @@ cc_object {
     srcs: [
         ":security_vm.S",
     ],
-    static_libs: ["trusty_security_vm_signed"],
     crt: false,
     system_shared_libs: [],
     enabled: false,
