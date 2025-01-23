@@ -16,7 +16,8 @@
 
 use android_system_virtualizationservice::{
     aidl::android::system::virtualizationservice::AssignedDevices::AssignedDevices,
-    aidl::android::system::virtualizationservice::CpuTopology::CpuTopology,
+    aidl::android::system::virtualizationservice::CpuOptions::CpuOptions,
+    aidl::android::system::virtualizationservice::CpuOptions::CpuTopology::CpuTopology,
     aidl::android::system::virtualizationservice::DiskImage::DiskImage as AidlDiskImage,
     aidl::android::system::virtualizationservice::Partition::Partition as AidlPartition,
     aidl::android::system::virtualizationservice::UsbConfig::UsbConfig as AidlUsbConfig,
@@ -109,11 +110,12 @@ impl VmConfig {
             0
         };
         let cpu_topology = match self.cpu_topology.as_deref() {
-            None => CpuTopology::ONE_CPU,
-            Some("one_cpu") => CpuTopology::ONE_CPU,
-            Some("match_host") => CpuTopology::MATCH_HOST,
+            None => CpuTopology::CpuCount(1),
+            Some("one_cpu") => CpuTopology::CpuCount(1),
+            Some("match_host") => CpuTopology::MatchHost(true),
             Some(cpu_topology) => bail!("Invalid cpu topology {}", cpu_topology),
         };
+        let cpu_options = CpuOptions { cpuTopology: cpu_topology };
         let usb_config = self.usb_config.clone().map(|x| x.to_parcelable()).transpose()?;
         Ok(VirtualMachineRawConfig {
             kernel: maybe_open_parcel_file(&self.kernel, false)?,
@@ -123,7 +125,7 @@ impl VmConfig {
             disks: self.disks.iter().map(DiskImage::to_parcelable).collect::<Result<_, Error>>()?,
             protectedVm: self.protected,
             memoryMib: memory_mib,
-            cpuTopology: cpu_topology,
+            cpuOptions: cpu_options,
             platformVersion: self.platform_version.to_string(),
             devices: AssignedDevices::Devices(
                 self.devices
