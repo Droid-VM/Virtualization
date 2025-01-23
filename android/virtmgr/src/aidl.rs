@@ -31,7 +31,6 @@ use android_system_virtualizationcommon::aidl::android::system::virtualizationco
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
     AssignedDevices::AssignedDevices,
     AssignableDevice::AssignableDevice,
-    CpuTopology::CpuTopology,
     DiskImage::DiskImage,
     SharedPath::SharedPath,
     InputDevice::InputDevice,
@@ -712,23 +711,12 @@ impl VirtualizationService {
 
         let shared_paths = assemble_shared_paths(&config.sharedPaths, &temporary_directory)?;
 
-        let (cpus, host_cpu_topology) = match config.cpuTopology {
-            CpuTopology::MATCH_HOST => (None, true),
-            CpuTopology::ONE_CPU => (NonZeroU32::new(1), false),
-            CpuTopology::CUSTOM => (
-                NonZeroU32::new(
-                    u32::try_from(config.customVcpuCount)
-                        .context("bad customVcpuCount")
-                        .or_binder_exception(ExceptionCode::ILLEGAL_ARGUMENT)?,
-                ),
-                false,
-            ),
-            val => {
-                return Err(anyhow!("Failed to parse CPU topology value {:?}", val))
-                    .with_log()
-                    .or_service_specific_exception(-1);
-            }
-        };
+        let cpus = config
+            .cpuOptions
+            .as_ref()
+            .map(CpuOptions::new)
+            .transpose()
+            .or_binder_exception(ExceptionCode::ILLEGAL_ARGUMENT)?
 
         let (vfio_devices, dtbo) = match &config.devices {
             AssignedDevices::Devices(devices) if !devices.is_empty() => {
@@ -841,7 +829,6 @@ impl VirtualizationService {
                 .unwrap_or(NonZeroU32::new(256).unwrap()),
             swiotlb_mib: config.swiotlbMib.try_into().ok().and_then(NonZeroU32::new),
             cpus,
-            host_cpu_topology,
             console_out_fd,
             console_in_fd,
             log_fd,
@@ -1312,10 +1299,7 @@ fn load_app_config(
 
     vm_config.name.clone_from(&config.name);
     vm_config.protectedVm = config.protectedVm;
-    vm_config.cpuTopology = config.cpuTopology;
-    if config.cpuTopology == CpuTopology::CUSTOM {
-        bail!("AppConfig doesn't support CpuTopology::CUSTOM");
-    }
+    vm_config.cpuOptions = config.cpuOptions;
     vm_config.hugePages = config.hugePages || vm_payload_config.hugepages;
     vm_config.boostUclamp = config.boostUclamp;
 

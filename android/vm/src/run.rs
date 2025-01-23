@@ -188,7 +188,7 @@ pub fn command_run_app(config: RunAppConfig) -> Result<(), Error> {
         debugLevel: config.debug.debug,
         protectedVm: config.common.protected,
         memoryMib: config.common.mem.unwrap_or(0) as i32, // 0 means use the VM default
-        cpuTopology: config.common.cpu_topology,
+        cpuOptions: config.common.cpu_options,
         customConfig: Some(custom_config),
         osName: os_name.to_string(),
         hugePages: config.common.hugepages,
@@ -273,7 +273,7 @@ pub fn command_run(config: RunCustomVmConfig) -> Result<(), Error> {
     if let Some(gdb) = config.debug.gdb {
         vm_config.gdbPort = gdb.get() as i32;
     }
-    vm_config.cpuTopology = config.common.cpu_topology;
+    vm_config.cpuOptions = config.common.cpu_options;
     vm_config.hugePages = config.common.hugepages;
     vm_config.boostUclamp = config.common.boost_uclamp;
     vm_config.teeServices = config.common.tee_services().to_vec();
