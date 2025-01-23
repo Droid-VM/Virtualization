@@ -14,4 +14,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-/apex/com.android.virt/bin/vm run /data/local/tmp/trusty_test_vm/trusty-test_vm-config.json
+/apex/com.android.virt/bin/vm run /data/local/tmp/trusty_test_vm/trusty_test_vm_config.json
