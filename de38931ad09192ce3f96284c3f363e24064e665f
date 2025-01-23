@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "212986ef_bc15f322",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-23T20:26:35Z",
+      "side": 1,
+      "message": "can we drop this and use `CpuOptionsParcelable` directly? i think there isn\u0027t much value in converting `cpu_count` to `NonZeroU8`, we just turn it into a string anyways. crosvm can take care of rejecting non-positive values",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 1
+      },
+      "revId": "de38931ad09192ce3f96284c3f363e24064e665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27eab30b_8964c4a5",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-23T20:26:35Z",
+      "side": 1,
+      "message": "no need to enforce this. we previously had a discussion about it and decided not to add it because it ought to work fine and there might be an obscure case where it is useful",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 13
+      },
+      "revId": "de38931ad09192ce3f96284c3f363e24064e665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1274f1d5_7a0b88fa",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/CpuOptions.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-23T20:26:35Z",
+      "side": 1,
+      "message": "mention that this takes presence over cpuCount\n\nalternatively, maybe could use a union https://source.android.com/docs/core/architecture/aidl/aidl-language#unions. i don\u0027t have much experience with AIDL API design, so not sure if that is a good idea",
+      "revId": "de38931ad09192ce3f96284c3f363e24064e665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1bd4d37_44d3504b",
+        "filename": "android/vm/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-23T20:26:35Z",
+      "side": 1,
+      "message": "we probably don\u0027t guarantee a stable cmdline interface here, but it would be nice to not change it. maybe define a local version of the `CpuTopology` enum with only `one_cpu` and `match_host` options. then, have a separate top level flag for the cpu count",
+      "revId": "de38931ad09192ce3f96284c3f363e24064e665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14a240cc_d3375180",
+        "filename": "libs/vmconfig/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-23T20:26:35Z",
+      "side": 1,
+      "message": "changing the vm config format is going to cause some pain. let\u0027s keep it as it was\n\ni\u0027d suggest not adding support for custom cpu counts to it yet. custom counts probably only make sense for device specific vendor code for now. there are known performance issues in the general case",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 32
+      },
+      "revId": "de38931ad09192ce3f96284c3f363e24064e665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
