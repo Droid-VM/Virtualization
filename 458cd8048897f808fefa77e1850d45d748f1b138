@@ -16,6 +16,23 @@
       "message": "Hi,\n\nSomehow I missed this cl in the backlog. It looks like the introduced UUID is used as a VM identifier. I just wonder would it be possible to use a more readable format, such as a string, for easier debugging as explained in http://b/378673494#comment38? Thanks!",
       "revId": "458cd8048897f808fefa77e1850d45d748f1b138",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "771c3f0e_492aff30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-23T21:23:12Z",
+      "side": 1,
+      "message": "Code LGTM. I haven\u0027t read the related discussion, so I can\u0027t comment on the design.\n\nIt would be good know how this differs from instance ID. Having multiple vaguely named IDs is going to be confusing.",
+      "revId": "458cd8048897f808fefa77e1850d45d748f1b138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
