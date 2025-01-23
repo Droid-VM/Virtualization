@@ -308,6 +308,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04dad617_a86226a2",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/kvm_x86.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-01-23T16:31:52Z",
+      "side": 1,
+      "message": "I\u0027ve just rebased to ToT due to merge conflict and tested everything again and there is no above issue on ToT. Myabe thanks to updating Trusty build to Android Rust 1.82 -\u003e https://android-review.git.corp.google.com/q/hashtag:%22trusty-roll-rust-to-1.82%22+(status:open%20OR%20status:merged). Not sure but the problem is gone so I\u0027ve switched to default.",
+      "parentUuid": "9c4b2b37_7efd4ca3",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 5
+      },
+      "revId": "29924c736f7461576a84cd6c0b4d41828cde0b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd938f8d_8dcf69f4",
@@ -510,6 +534,30 @@
       "side": 1,
       "message": "The `0` you\u0027re currently using to instantiate the `KvmError` should be the ID of the hyp call which generated this error so should have been `PKVM_GHC_SHARE_MEM` in `share()` and `PKVM_GHC_UNSHARE_MEM` in `unshare()`.",
       "parentUuid": "6508216d_300dd100",
+      "range": {
+        "startLine": 108,
+        "startChar": 76,
+        "endLine": 108,
+        "endChar": 77
+      },
+      "revId": "29924c736f7461576a84cd6c0b4d41828cde0b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da52a3b5_3f73db95",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/kvm_x86.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-01-23T16:31:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef232dcc_72dcea7d",
       "range": {
         "startLine": 108,
         "startChar": 76,
