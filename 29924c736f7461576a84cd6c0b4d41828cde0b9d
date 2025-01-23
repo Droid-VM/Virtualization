@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3640c576_ac41680e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-23T11:15:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "af0ca24e_2a4d73cb",
+      "revId": "29924c736f7461576a84cd6c0b4d41828cde0b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b528d1a2_72d46210",
@@ -195,6 +213,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9dee519_9433bf5b",
+        "filename": "libs/libhypervisor_backends/src/error.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-23T11:15:33Z",
+      "side": 1,
+      "message": "Thanks, making it a `u128` as you did is probably even cleaner to unify with AArch64 in the future.",
+      "parentUuid": "fa638f92_57bef36e",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 25
+      },
+      "revId": "29924c736f7461576a84cd6c0b4d41828cde0b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6fdded09_7f0c4786",
@@ -232,6 +274,30 @@
       "side": 1,
       "message": "Unfortunatelly if I remove it, it builds without error and I would assume RegularKVM will just work with default one but for some unknonw to me reason, when using it with Trusty it panics because it reaches `u2d` instruction - maybe some too aggressive x86 optimization? - I have no idea.\n\nI\u0027ve checked the same on arm counterpart and default works for RegularKVM without any issue.\n\nFor now I will add TOOD and keep this one as is due to above.",
       "parentUuid": "6fdded09_7f0c4786",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 5
+      },
+      "revId": "29924c736f7461576a84cd6c0b4d41828cde0b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c4b2b37_7efd4ca3",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/kvm_x86.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-23T11:15:33Z",
+      "side": 1,
+      "message": "What you\u0027re describing is very strange and might be the symptom of a much deeper issue in Trusty? Anyway, I\u0027m fine with merging this `TODO` as we\u0027ll probably clean up this code to unify the archs down the line.",
+      "parentUuid": "fdf46cb0_12e57fed",
       "range": {
         "startLine": 72,
         "startChar": 0,
@@ -432,6 +498,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef232dcc_72dcea7d",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/kvm_x86.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-23T11:15:33Z",
+      "side": 1,
+      "message": "The `0` you\u0027re currently using to instantiate the `KvmError` should be the ID of the hyp call which generated this error so should have been `PKVM_GHC_SHARE_MEM` in `share()` and `PKVM_GHC_UNSHARE_MEM` in `unshare()`.",
+      "parentUuid": "6508216d_300dd100",
+      "range": {
+        "startLine": 108,
+        "startChar": 76,
+        "endLine": 108,
+        "endChar": 77
+      },
+      "revId": "29924c736f7461576a84cd6c0b4d41828cde0b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "72289f05_21b3e161",
         "filename": "libs/libhypervisor_backends/src/hypervisor/kvm_x86.rs",
         "patchSetId": 3
@@ -467,6 +557,30 @@
       "side": 1,
       "message": "Not sure what do you meant, the r* registers are 64-bit ones.",
       "parentUuid": "72289f05_21b3e161",
+      "range": {
+        "startLine": 114,
+        "startChar": 32,
+        "endLine": 114,
+        "endChar": 35
+      },
+      "revId": "29924c736f7461576a84cd6c0b4d41828cde0b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "103631aa_8909bdd9",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/kvm_x86.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-23T11:15:33Z",
+      "side": 1,
+      "message": "Ah, yes! My bad!",
+      "parentUuid": "092e8300_6d117b4d",
       "range": {
         "startLine": 114,
         "startChar": 32,
@@ -702,6 +816,30 @@
       "side": 1,
       "message": "Done, but I left it in x86 specific file not sure why should we move it to common hypervisor file? If we will move it there we should move/expose some things there: e.g. cpuid macro, definitions which will introuce yet another #cfg since it is used only for x86",
       "parentUuid": "7fcad402_e12941ff",
+      "range": {
+        "startLine": 169,
+        "startChar": 30,
+        "endLine": 169,
+        "endChar": 47
+      },
+      "revId": "29924c736f7461576a84cd6c0b4d41828cde0b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "373d49a9_9353c67c",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/kvm_x86.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-23T11:15:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f102624e_833b9042",
       "range": {
         "startLine": 169,
         "startChar": 30,
