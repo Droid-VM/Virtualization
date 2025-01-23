@@ -1,7 +1,36 @@
+soong_config_module_type {
+    name: "trusty_vm_prebuilt_etc",
+    module_type: "prebuilt_etc",
+    config_namespace: "trusty_system_vm",
+    variables: ["vm_mode"],
+    properties: ["src"],
+}
+
+soong_config_module_type {
+    name: "trusty_vm_avb_add_hash_footer",
+    module_type: "avb_add_hash_footer",
+    config_namespace: "trusty_system_vm",
+    variables: ["vm_mode"],
+    properties: ["src"],
+}
+
+soong_config_string_variable {
+    name: "vm_mode",
+    values: [
+        "nonsecure",
+        "secure",
+    ],
+}
+
 prebuilt_etc {
     name: "early_vms.xml",
     src: "early_vms.xml",
     filename: "early_vms.xml",
     relative_install_path: "avf",
     system_ext_specific: true,
+    enabled: select(soong_config_variable("trusty_system_vm", "vm_mode"), {
+        "secure": true,
+        "nonsecure": true,
+        default: false,
+    }),
 }
