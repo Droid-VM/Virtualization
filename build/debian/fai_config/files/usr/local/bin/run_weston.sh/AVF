@@ -1,0 +1,6 @@
+#!/bin/bash
+
+umask 000
+export XDG_RUNTIME_DIR=/tmp/xdg
+mkdir $XDG_RUNTIME_DIR
+weston --idle-time=0 --xwayland --shell=kiosk-shell.so --continue-without-input
