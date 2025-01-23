@@ -27,6 +27,8 @@ use zerocopy::Immutable;
 use zerocopy::KnownLayout;
 use zerocopy::Ref;
 
+pub mod reserved_mem;
+
 /// Configuration data header.
 #[repr(C, packed)]
 #[derive(Clone, Copy, Debug, FromBytes, Immutable, KnownLayout)]
@@ -88,6 +90,7 @@ impl Header {
     const VERSION_1_0: Version = Version { major: 1, minor: 0 };
     const VERSION_1_1: Version = Version { major: 1, minor: 1 };
     const VERSION_1_2: Version = Version { major: 1, minor: 2 };
+    const VERSION_1_3: Version = Version { major: 1, minor: 3 };
 
     pub fn total_size(&self) -> usize {
         self.total_size as usize
@@ -110,8 +113,9 @@ impl Header {
             Self::VERSION_1_0 => Entry::DebugPolicy,
             Self::VERSION_1_1 => Entry::VmDtbo,
             Self::VERSION_1_2 => Entry::VmBaseDtbo,
+            Self::VERSION_1_3 => Entry::ReservedMem,
             v @ Version { major: 1, .. } => {
-                const LATEST: Version = Header::VERSION_1_2;
+                const LATEST: Version = Header::VERSION_1_3;
                 warn!("Parsing unknown config data version {v} as version {LATEST}");
                 return Ok(Entry::COUNT);
             }
@@ -128,6 +132,7 @@ pub enum Entry {
     DebugPolicy,
     VmDtbo,
     VmBaseDtbo,
+    ReservedMem,
     #[allow(non_camel_case_types)] // TODO: Use mem::variant_count once stable.
     _VARIANT_COUNT,
 }
@@ -136,7 +141,7 @@ impl Entry {
     const COUNT: usize = Self::_VARIANT_COUNT as usize;
 
     const ALL_ENTRIES: [Entry; Self::COUNT] =
-        [Self::Bcc, Self::DebugPolicy, Self::VmDtbo, Self::VmBaseDtbo];
+        [Self::Bcc, Self::DebugPolicy, Self::VmDtbo, Self::VmBaseDtbo, Self::ReservedMem];
 }
 
 #[derive(Default)]
@@ -145,6 +150,7 @@ pub struct Entries<'a> {
     pub debug_policy: Option<&'a [u8]>,
     pub vm_dtbo: Option<&'a mut [u8]>,
     pub vm_ref_dt: Option<&'a [u8]>,
+    pub reserved_mem: Option<&'a [u8]>,
 }
 
 #[repr(packed)]
@@ -293,7 +299,7 @@ impl<'a> Config<'a> {
                 entries[i] = Some(chunk);
             }
         }
-        let [bcc, debug_policy, vm_dtbo, vm_ref_dt] = entries;
+        let [bcc, debug_policy, vm_dtbo, vm_ref_dt, reserved_mem] = entries;
 
         // The platform BCC has always been required.
         let bcc = bcc.unwrap();
@@ -301,7 +307,8 @@ impl<'a> Config<'a> {
         // We have no reason to mutate so drop the `mut`.
         let debug_policy = debug_policy.map(|x| &*x);
         let vm_ref_dt = vm_ref_dt.map(|x| &*x);
+        let reserved_mem = reserved_mem.map(|x| &*x);
 
-        Entries { bcc, debug_policy, vm_dtbo, vm_ref_dt }
+        Entries { bcc, debug_policy, vm_dtbo, vm_ref_dt, reserved_mem }
     }
 }
