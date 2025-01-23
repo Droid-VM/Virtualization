@@ -159,6 +159,7 @@ fn from_zip_error(err: ZipError, name: &'static str) -> ApexParseError {
             ApexParseError::InvalidZip(s)
         }
         ZipError::FileNotFound => ApexParseError::MissingFile(name),
+        ZipError::InvalidPassword => ApexParseError::InvalidZip(name),
     }
 }
 
