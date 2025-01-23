@@ -806,7 +806,13 @@ public final class VirtualMachineConfig {
                         .orElse(null);
         config.protectedVm = this.mProtectedVm;
         config.memoryMib = bytesToMebiBytes(mMemoryBytes);
-        config.cpuTopology = (byte) this.mCpuTopology;
+        // If CpuTopology > 1, that means the VM is matching host in vCPUs.
+        if ((byte) this.mCpuTopology > 1) {
+            config.cpuOptions.matchHost = true;
+        } else {
+            config.cpuOptions.cpuCount = 1;
+            config.cpuOptions.matchHost = false;
+        }
         config.consoleInputDevice = mConsoleInputDevice;
         config.devices = AssignedDevices.devices(EMPTY_STRING_ARRAY);
         config.platformVersion = "~1.0";
@@ -867,10 +873,11 @@ public final class VirtualMachineConfig {
         vsConfig.memoryMib = bytesToMebiBytes(mMemoryBytes);
         switch (mCpuTopology) {
             case CPU_TOPOLOGY_MATCH_HOST:
-                vsConfig.cpuTopology = android.system.virtualizationservice.CpuTopology.MATCH_HOST;
+                vsConfig.cpuOptions.matchHost = true;
                 break;
             default:
-                vsConfig.cpuTopology = android.system.virtualizationservice.CpuTopology.ONE_CPU;
+                vsConfig.cpuOptions.cpuCount = 1;
+                vsConfig.cpuOptions.matchHost = false;
                 break;
         }
 

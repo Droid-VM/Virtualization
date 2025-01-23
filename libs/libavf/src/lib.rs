@@ -23,7 +23,7 @@ use std::time::Duration;
 
 use android_system_virtualizationservice::{
     aidl::android::system::virtualizationservice::{
-        AssignedDevices::AssignedDevices, CpuTopology::CpuTopology, DiskImage::DiskImage,
+        AssignedDevices::AssignedDevices, CpuOptions::CpuOptions, DiskImage::DiskImage,
         IVirtualizationService::IVirtualizationService, VirtualMachineConfig::VirtualMachineConfig,
         VirtualMachineRawConfig::VirtualMachineRawConfig,
     },
@@ -218,8 +218,7 @@ pub unsafe extern "C" fn AVirtualMachineRawConfig_setVCpuCount(
     // SAFETY: `config` is assumed to be a valid, non-null pointer returned by
     // AVirtualMachineRawConfig_create. It's the only reference to the object.
     let config = unsafe { &mut *config };
-    config.cpuTopology = CpuTopology::CUSTOM;
-    config.customVcpuCount = n;
+    config.cpuOptions = CpuOptions { cpuCount: n, matchHost: false };
 }
 
 /// Set whether a virtual machine is protected or not.

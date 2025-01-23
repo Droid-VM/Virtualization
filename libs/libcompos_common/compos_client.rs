@@ -22,7 +22,7 @@ use crate::{
     COMPOS_APEX_ROOT, COMPOS_VSOCK_PORT,
 };
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
-    CpuTopology::CpuTopology,
+    CpuOptions::CpuOptions,
     IVirtualizationService::IVirtualizationService,
     VirtualMachineAppConfig::{
         CustomConfig::CustomConfig, DebugLevel::DebugLevel, Payload::Payload,
@@ -43,16 +43,6 @@ use vmclient::{DeathReason, ErrorCode, VmInstance, VmWaitError};
 /// This owns an instance of the CompOS VM.
 pub struct ComposClient(VmInstance);
 
-/// CPU topology configuration for a virtual machine.
-#[derive(Default, Debug, Clone)]
-pub enum VmCpuTopology {
-    /// Run VM with 1 vCPU only.
-    #[default]
-    OneCpu,
-    /// Run VM vCPU topology matching that of the host.
-    MatchHost,
-}
-
 /// Parameters to be used when creating a virtual machine instance.
 #[derive(Default, Debug, Clone)]
 pub struct VmParameters {
@@ -63,7 +53,7 @@ pub struct VmParameters {
     /// Whether the VM should be debuggable.
     pub debug_mode: bool,
     /// CPU topology of the VM. Defaults to 1 vCPU.
-    pub cpu_topology: VmCpuTopology,
+    pub host_cpu_topology: bool,
     /// If present, overrides the amount of RAM to give the VM
     pub memory_mib: Option<i32>,
     /// Whether the VM prefers staged APEXes or activated ones (false; default)
@@ -119,10 +109,7 @@ impl ComposClient {
 
         let debug_level = if parameters.debug_mode { DebugLevel::FULL } else { DebugLevel::NONE };
 
-        let cpu_topology = match parameters.cpu_topology {
-            VmCpuTopology::OneCpu => CpuTopology::ONE_CPU,
-            VmCpuTopology::MatchHost => CpuTopology::MATCH_HOST,
-        };
+        let cpu_options = CpuOptions { cpuCount: 1, matchHost: parameters.host_cpu_topology };
 
         // The CompOS VM doesn't need to be updatable (by design it should run exactly twice,
         // with the same APKs and APEXes each time). And having it so causes some interesting
@@ -141,7 +128,7 @@ impl ComposClient {
             extraIdsigs: extra_idsigs,
             protectedVm: true,
             memoryMib: parameters.memory_mib.unwrap_or(0), // 0 means use the default
-            cpuTopology: cpu_topology,
+            cpuOptions: cpu_options,
             customConfig: custom_config,
             ..Default::default()
         });
