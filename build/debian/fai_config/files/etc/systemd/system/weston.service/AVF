@@ -1,0 +1,13 @@
+[Unit]
+Description=Weston
+Before=graphical-session.target
+
+[Service]
+ExecStart=/usr/local/bin/run_weston.sh
+Type=simple
+Restart=always
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target

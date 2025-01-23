@@ -1,0 +1,7 @@
+#!/bin/bash
+
+umask 000
+mkdir /tmp/xdg
+export XDG_RUNTIME_DIR=/tmp/xdg
+export WESTON_TTY=1
+XDG_RUNTIME_DIR=/tmp/xdg weston --tty="$WESTON_TTY" --idle-time=0 --xwayland --shell=kiosk-shell.so --continue-without-input
