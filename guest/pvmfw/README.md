@@ -2,7 +2,7 @@
 
 In the context of the [Android Virtualization Framework][AVF], a hypervisor
 (_e.g._ [pKVM]) enforces full memory isolation between its virtual machines
-(VMs) and the host.  As a result, the host is only allowed to access memory that
+(VMs) and the host. As a result, the host is only allowed to access memory that
 has been explicitly shared back by a VM. Such _protected VMs_ (“pVMs”) are
 therefore able to manipulate secrets without being at risk of an attacker
 stealing them by compromising the Android host.
@@ -82,6 +82,7 @@ device tree node where both address and size have been properly aligned to the
 page size used by the hypervisor. This single region must include both the pvmfw
 binary image and its configuration data (see below). For example, the following
 node describes a region of size `0x40000` at address `0x80000000`:
+
 ```
 reserved-memory {
     ...
@@ -147,6 +148,10 @@ The configuration data is described using the following [header]:
 |  offset = (FOURTH - HEAD)     |
 |  size = (FOURTH_END - FOURTH) |
 +-------------------------------+
+|           [Entry 4]           | <-- Entry 4 is present since version 1.3
+|  offset = (FIFTH - HEAD)      |
+|  size = (FIFTH_END - FIFTH)   |
++-------------------------------+
 |              ...              |
 +-------------------------------+
 |           [Entry n]           |
@@ -167,6 +172,10 @@ The configuration data is described using the following [header]:
 +===============================+ <-- FOURTH
 | {Fourth blob: VM reference DT}|
 +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+ <-- FOURTH_END
+| (Padding to 8-byte alignment) |
++===============================+ <-- FIFTH
+| {Fifth blob: Reserved Mem Cfg}|
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+ <-- FIFTH_END
 | (Padding to 8-byte alignment) |
 +===============================+
 |              ...              |
@@ -238,11 +247,48 @@ In version 1.2, a fourth blob is added.
 [secretkeeper_key]: https://android.googlesource.com/platform/system/secretkeeper/+/refs/heads/main/README.md#secretkeeper-public-key
 [vendor_hashtree_digest]: ../../build/microdroid/README.md#verification-of-vendor-image
 
+#### Version 1.3 {#pvmfw-data-v1-3}
+
+In version 1.3, a fifth blob is added.
+
+- entry 4 if present contains reserved memory nodes to add to the device tree
+  and VM identifying UUIDs to restrict the nodes to. This blog begins with a
+  u32 representing the number of headers present followed by an array of
+  headers with offsets for each entry's data and name. After the array of
+  headers is data blob referenced by the these headers.
+
+  ```rust
+  #[repr(C)]
+  struct ReservedMemConfigEntry<const N: usize> {
+    count: u32,
+    headers: [RMemHeader; N]
+    data: [u8],
+  }
+  ```
+
+- A [reserved memory header](src/reserved_mem.rs) containes a `vm_uuid` for identifying which VM should
+  be granted access to the memory, a u32 offset from the base of the data blob
+  where this node's data blob begins, a u32 size for the data portion of the
+  blob, a u32 offset of a C string containing the name of the blob, and a u32
+  flags field.
+
+  ```rust
+  #[repr(C)]
+  struct RMemHeader {
+      vm_uuid: [u8; 16],
+      blob_offset: u32,
+      blob_size: u32,
+      compat_offset: u32,
+      flags: u32,
+  }
+  ```
+
 #### Virtual Platform DICE Chain Handover
 
 The format of the DICE chain entry mentioned above, compatible with the
 [`AndroidDiceHandover`][AndroidDiceHandover] defined by the Open Profile for
 DICE reference implementation, is described by the following [CDDL][CDDL]:
+
 ```
 PvmfwDiceHandover = {
   1 : bstr .size 32,     ; CDI_Attest
@@ -310,31 +356,31 @@ makes use of the following hypervisor calls:
 
 - Arm [SMC Calling Convention][smccc] v1.1 or above:
 
-    - `SMCCC_VERSION`
-    - Vendor Specific Hypervisor Service Call UID Query
+  - `SMCCC_VERSION`
+  - Vendor Specific Hypervisor Service Call UID Query
 
 - Arm [Power State Coordination Interface][psci] v1.0 or above:
 
-    - `PSCI_VERSION`
-    - `PSCI_FEATURES`
-    - `PSCI_SYSTEM_RESET`
-    - `PSCI_SYSTEM_SHUTDOWN`
+  - `PSCI_VERSION`
+  - `PSCI_FEATURES`
+  - `PSCI_SYSTEM_RESET`
+  - `PSCI_SYSTEM_SHUTDOWN`
 
 - Arm [True Random Number Generator Firmware Interface][smccc-trng] v1.0:
 
-    - `TRNG_VERSION`
-    - `TRNG_FEATURES`
-    - `TRNG_RND`
+  - `TRNG_VERSION`
+  - `TRNG_FEATURES`
+  - `TRNG_RND`
 
 - When running under KVM, the pKVM-specific hypervisor interface must provide:
 
-    - `MEMINFO` (function ID `0xc6000002`)
-    - `MEM_SHARE` (function ID `0xc6000003`)
-    - `MEM_UNSHARE` (function ID `0xc6000004`)
-    - `MMIO_GUARD_INFO` (function ID `0xc6000005`)
-    - `MMIO_GUARD_ENROLL` (function ID `0xc6000006`)
-    - `MMIO_GUARD_MAP` (function ID `0xc6000007`)
-    - `MMIO_GUARD_UNMAP` (function ID `0xc6000008`)
+  - `MEMINFO` (function ID `0xc6000002`)
+  - `MEM_SHARE` (function ID `0xc6000003`)
+  - `MEM_UNSHARE` (function ID `0xc6000004`)
+  - `MMIO_GUARD_INFO` (function ID `0xc6000005`)
+  - `MMIO_GUARD_ENROLL` (function ID `0xc6000006`)
+  - `MMIO_GUARD_MAP` (function ID `0xc6000007`)
+  - `MMIO_GUARD_UNMAP` (function ID `0xc6000008`)
 
 [crosvm-mem]: https://crosvm.dev/book/appendix/memory_layout.html
 [psci]: https://developer.arm.com/documentation/den0022
@@ -359,25 +405,25 @@ to booting the VM, are described to pvmfw using the device tree (x0):
 
 - the kernel in the `/config` DT node _e.g._
 
-    ```
-    / {
-        config {
-            kernel-address = <0x80200000>;
-            kernel-size = <0x1000000>;
-        };
-    };
-    ````
+  ```
+  / {
+      config {
+          kernel-address = <0x80200000>;
+          kernel-size = <0x1000000>;
+      };
+  };
+  ```
 
 - the (optional) ramdisk in the standard `/chosen` node _e.g._
 
-    ```
-    / {
-        chosen {
-            linux,initrd-start = <0x82000000>;
-            linux,initrd-end = <0x82800000>;
-        };
-    };
-    ```
+  ```
+  / {
+      chosen {
+          linux,initrd-start = <0x82000000>;
+          linux,initrd-end = <0x82800000>;
+      };
+  };
+  ```
 
 [Linux ABI]: https://www.kernel.org/doc/Documentation/arm64/booting.txt
 
