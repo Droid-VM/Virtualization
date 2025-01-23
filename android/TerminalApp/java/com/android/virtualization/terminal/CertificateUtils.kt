@@ -39,6 +39,7 @@ import java.security.cert.X509Certificate
 object CertificateUtils {
     private const val ALIAS = "ttyd"
 
+    @JvmStatic
     fun createOrGetKey(): KeyStore.PrivateKeyEntry {
         try {
             val ks = KeyStore.getInstance("AndroidKeyStore")
@@ -86,6 +87,7 @@ object CertificateUtils {
         kpg.generateKeyPair()
     }
 
+    @JvmStatic
     fun writeCertificateToFile(context: Context, cert: Certificate) {
         val certFile = File(context.getFilesDir(), "ca.crt")
         try {
