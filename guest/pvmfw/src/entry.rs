@@ -143,6 +143,7 @@ fn main_wrapper<'a>(
         config_entries.debug_policy,
         config_entries.vm_dtbo,
         config_entries.vm_ref_dt,
+        config_entries.reserved_mem,
     )?;
     slices.add_dice_chain(next_bcc);
     // Keep UART MMIO_GUARD-ed for debuggable payloads, to enable earlycon.
