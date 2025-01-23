@@ -30,6 +30,7 @@ mod fdt;
 mod gpt;
 mod instance;
 mod memory;
+mod reserved_mem;
 mod rollback;
 
 use crate::bcc::Bcc;
@@ -50,6 +51,7 @@ use vmbase::heap;
 use vmbase::memory::{flush, SIZE_4KB};
 use vmbase::rand;
 
+#[allow(clippy::too_many_arguments)]
 fn main<'a>(
     untrusted_fdt: &mut Fdt,
     signed_kernel: &[u8],
@@ -58,6 +60,7 @@ fn main<'a>(
     mut debug_policy: Option<&[u8]>,
     vm_dtbo: Option<&mut [u8]>,
     vm_ref_dt: Option<&[u8]>,
+    config: Option<&[u8]>,
 ) -> Result<(&'a [u8], bool), RebootReason> {
     info!("pVM firmware");
     debug!("FDT: {:?}", untrusted_fdt.as_ptr());
@@ -176,6 +179,7 @@ fn main<'a>(
         debug_policy,
         debuggable,
         kaslr_seed,
+        config,
     )
     .map_err(|e| {
         error!("Failed to configure device tree: {e}");
