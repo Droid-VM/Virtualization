@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fd563fe_c62f34d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951225
+      },
+      "writtenOn": "2025-01-23T14:31:06Z",
+      "side": 1,
+      "message": "@aliceywang@google.com do you mind taking a look for +2 ? This CL broke the trusty VM build in Android. It wasn\u0027t a direct cause, but it triggered rustdoc in environments where a trusty incremental build happened before and after the rust 1.82 upgrade. It wasn\u0027t caught in presubmit because presubmit ran before the upgrade to 1.82 . This should be fixed by aosp/3460724. It was validated by running presubmit on this CL before aosp/3460724 was merged and seeing the failure and then running again after and seeing it resolve.",
+      "revId": "e431d96046f8237e34b7cffc005a40290d8f4919",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
