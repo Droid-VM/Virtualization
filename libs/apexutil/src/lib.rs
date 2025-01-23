@@ -155,9 +155,9 @@ fn decode_manifest(mut manifest: &[u8]) -> Result<ApexManifestInfo, ApexParseErr
 fn from_zip_error(err: ZipError, name: &'static str) -> ApexParseError {
     match err {
         ZipError::Io(err) => ApexParseError::Io(err),
-        ZipError::InvalidArchive(s) | ZipError::UnsupportedArchive(s) => {
-            ApexParseError::InvalidZip(s)
-        }
+        ZipError::InvalidArchive(s)
+        | ZipError::UnsupportedArchive(s)
+        | ZipError::InvalidPassword => ApexParseError::InvalidZip(s),
         ZipError::FileNotFound => ApexParseError::MissingFile(name),
     }
 }
