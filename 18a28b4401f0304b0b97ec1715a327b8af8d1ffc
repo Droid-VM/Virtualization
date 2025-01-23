@@ -200,6 +200,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d244c25_713c7315",
+        "filename": "guest/trusty/security_vm/vm/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-01-23T18:38:25Z",
+      "side": 1,
+      "message": "I don\u0027t think the static_lib is the main issue. The issue is that the cc_object rule does not know that the .S file is using the $(in) file that this rule got, and the build system does not guarantee that it will be accessible in the same location in an different rule. `trusty/kernel/app/trusty/user-tasks.mk` in the trusty build, which does a similar task, is similar to a genrule manually invoking the compiler on a .S file where it has access the path it needs to pass in. The question for @ccross@android.com is: does genrule have something similar to `$(CC)` in make. It might look different though.",
+      "parentUuid": "0343a83a_9c3aa1ae",
+      "revId": "18a28b4401f0304b0b97ec1715a327b8af8d1ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d57fa68_310fd7bb",
         "filename": "guest/trusty/security_vm/vm/Android.bp",
         "patchSetId": 8
