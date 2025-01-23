@@ -19,7 +19,7 @@ mod create_partition;
 mod run;
 
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
-    CpuTopology::CpuTopology, IVirtualizationService::IVirtualizationService,
+    CpuOptions::CpuOptions as AidlCpuOptions, IVirtualizationService::IVirtualizationService,
     PartitionType::PartitionType, VirtualMachineAppConfig::DebugLevel::DebugLevel,
 };
 #[cfg(not(llpvm_changes))]
@@ -44,9 +44,9 @@ pub struct CommonConfig {
     #[arg(long)]
     name: Option<String>,
 
-    /// Run VM with vCPU topology matching that of the host. If unspecified, defaults to 1 vCPU.
-    #[arg(long, default_value = "one_cpu", value_parser = parse_cpu_topology)]
-    cpu_topology: CpuTopology,
+    /// Run VM with passed vCPU options
+    #[command(flatten)]
+    cpu_options: CpuOptions,
 
     /// Memory size (in MiB) of the VM. If unspecified, defaults to the value of `memory_mib`
     /// in the VM config file.
@@ -77,6 +77,17 @@ pub struct CommonConfig {
     #[cfg(tee_services_allowlist)]
     #[arg(long)]
     tee_services: Vec<String>,
+}
+
+#[derive(Args, Default, Clone)]
+struct CpuOptions {
+    /// Number of Vcpus to boot the VM with.
+    #[arg(long, default_value_t = 1)]
+    cpu_count: u8,
+
+    /// Match host number of Vcpus. If true, cpu_count is ignored.
+    #[arg(long, default_value_t = false)]
+    match_host: bool,
 }
 
 impl CommonConfig {
@@ -374,14 +385,6 @@ fn parse_partition_type(s: &str) -> Result<PartitionType, String> {
         "raw" => Ok(PartitionType::RAW),
         "instance" => Ok(PartitionType::ANDROID_VM_INSTANCE),
         _ => Err(format!("Invalid partition type {}", s)),
-    }
-}
-
-fn parse_cpu_topology(s: &str) -> Result<CpuTopology, String> {
-    match s {
-        "one_cpu" => Ok(CpuTopology::ONE_CPU),
-        "match_host" => Ok(CpuTopology::MATCH_HOST),
-        _ => Err(format!("Invalid cpu topology {}", s)),
     }
 }
 

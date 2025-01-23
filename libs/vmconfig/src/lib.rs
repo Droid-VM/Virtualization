@@ -16,7 +16,7 @@
 
 use android_system_virtualizationservice::{
     aidl::android::system::virtualizationservice::AssignedDevices::AssignedDevices,
-    aidl::android::system::virtualizationservice::CpuTopology::CpuTopology,
+    aidl::android::system::virtualizationservice::CpuOptions::CpuOptions as AidlCpuOptions,
     aidl::android::system::virtualizationservice::DiskImage::DiskImage as AidlDiskImage,
     aidl::android::system::virtualizationservice::Partition::Partition as AidlPartition,
     aidl::android::system::virtualizationservice::UsbConfig::UsbConfig as AidlUsbConfig,
@@ -60,8 +60,8 @@ pub struct VmConfig {
     /// The amount of RAM to give the VM, in MiB.
     #[serde(default)]
     pub memory_mib: Option<NonZeroU32>,
-    /// The CPU topology: either "one_cpu"(default) or "match_host"
-    pub cpu_topology: Option<String>,
+    /// The CPU topology: either false(default, 1 cpu) or true (match host cpu count)
+    pub host_cpu_topology: bool,
     /// Version or range of versions of the virtual platform that this config is compatible with.
     /// The format follows SemVer (https://semver.org).
     pub platform_version: VersionReq,
@@ -108,12 +108,8 @@ impl VmConfig {
         } else {
             0
         };
-        let cpu_topology = match self.cpu_topology.as_deref() {
-            None => CpuTopology::ONE_CPU,
-            Some("one_cpu") => CpuTopology::ONE_CPU,
-            Some("match_host") => CpuTopology::MATCH_HOST,
-            Some(cpu_topology) => bail!("Invalid cpu topology {}", cpu_topology),
-        };
+        // If host_cpu_topology is set, num of vcpus will match host. Else, default to 1
+        let cpu_options = AidlCpuOptions { cpuCount: 1, matchHost: self.host_cpu_topology };
         let usb_config = self.usb_config.clone().map(|x| x.to_parcelable()).transpose()?;
         Ok(VirtualMachineRawConfig {
             kernel: maybe_open_parcel_file(&self.kernel, false)?,
@@ -123,7 +119,7 @@ impl VmConfig {
             disks: self.disks.iter().map(DiskImage::to_parcelable).collect::<Result<_, Error>>()?,
             protectedVm: self.protected,
             memoryMib: memory_mib,
-            cpuTopology: cpu_topology,
+            cpuOptions: cpu_options,
             platformVersion: self.platform_version.to_string(),
             devices: AssignedDevices::Devices(
                 self.devices

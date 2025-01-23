@@ -34,7 +34,7 @@ use std::fmt;
 use std::fs::{read_to_string, File};
 use std::io::{self, Read};
 use std::mem;
-use std::num::{NonZeroU16, NonZeroU32};
+use std::num::{NonZeroU8, NonZeroU16, NonZeroU32};
 use std::os::unix::io::{AsRawFd, OwnedFd};
 use std::os::unix::process::CommandExt;
 use std::os::unix::process::ExitStatusExt;
@@ -47,6 +47,7 @@ use android_system_virtualizationcommon::aidl::android::system::virtualizationco
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
     VirtualMachineAppConfig::DebugLevel::DebugLevel,
     AudioConfig::AudioConfig as AudioConfigParcelable,
+    CpuOptions::CpuOptions as CpuOptionsParcelable,
     DisplayConfig::DisplayConfig as DisplayConfigParcelable,
     GpuConfig::GpuConfig as GpuConfigParcelable,
     UsbConfig::UsbConfig as UsbConfigParcelable,
@@ -113,8 +114,7 @@ pub struct CrosvmConfig {
     pub debug_config: DebugConfig,
     pub memory_mib: NonZeroU32,
     pub swiotlb_mib: Option<NonZeroU32>,
-    pub cpus: Option<NonZeroU32>,
-    pub host_cpu_topology: bool,
+    pub cpus: CpuOptions,
     pub console_out_fd: Option<File>,
     pub console_in_fd: Option<File>,
     pub log_fd: Option<File>,
@@ -161,6 +161,26 @@ pub struct UsbConfig {
 impl UsbConfig {
     pub fn new(raw_config: &UsbConfigParcelable) -> Result<UsbConfig> {
         Ok(UsbConfig { controller: raw_config.controller })
+    }
+}
+
+#[derive(Debug)]
+pub struct CpuOptions {
+    pub cpu_count: NonZeroU8,
+    pub match_host: bool,
+}
+
+impl CpuOptions {
+    pub fn new(cpu_options: &CpuOptionsParcelable) -> Result<CpuOptions> {
+        let (cpu_count, match_host) = if cpu_options.matchHost {
+            // Safe to unwrap since value is 1 > 0
+            (NonZeroU8::new(1).unwrap(), true)
+        } else {
+            let cpu_count = NonZeroU8::new(cpu_options.cpuCount.try_into()?)
+                .ok_or(anyhow!("value should be greater than 0"))?;
+            (cpu_count, false)
+        };
+        Ok(CpuOptions { cpu_count, match_host })
     }
 }
 
@@ -1109,11 +1129,7 @@ fn run_vm(
 
     command.arg("--mem").arg(memory_mib.to_string());
 
-    if let Some(cpus) = config.cpus {
-        command.arg("--cpus").arg(cpus.to_string());
-    }
-
-    if config.host_cpu_topology {
+    if config.cpus.match_host {
         if cfg!(virt_cpufreq) && check_if_all_cpus_allowed()? {
             command.arg("--host-cpu-topology");
             cfg_if::cfg_if! {
@@ -1121,11 +1137,9 @@ fn run_vm(
                     command.arg("--virt-cpufreq");
                 }
             }
-        } else if let Some(cpus) = get_num_cpus() {
-            command.arg("--cpus").arg(cpus.to_string());
-        } else {
-            bail!("Could not determine the number of CPUs in the system");
         }
+    } else {
+        command.arg("--cpus").arg(config.cpus.cpu_count.to_string());
     }
 
     if let Some(gdb_port) = config.gdb_port {

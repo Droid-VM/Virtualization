@@ -17,7 +17,7 @@
 use crate::{get_calling_pid, get_calling_uid, get_this_pid};
 use crate::atom::{write_vm_booted_stats, write_vm_creation_stats};
 use crate::composite::make_composite_image;
-use crate::crosvm::{AudioConfig, CrosvmConfig, DiskFile, SharedPathConfig, DisplayConfig, GpuConfig, InputDeviceOption, PayloadState, UsbConfig, VmContext, VmInstance, VmState};
+use crate::crosvm::{AudioConfig, CrosvmConfig, CpuOptions, DiskFile, SharedPathConfig, DisplayConfig, GpuConfig, InputDeviceOption, PayloadState, UsbConfig, VmContext, VmInstance, VmState};
 use crate::debug_config::{DebugConfig, DebugPolicy};
 use crate::dt_overlay::{create_device_tree_overlay, VM_DT_OVERLAY_MAX_SIZE, VM_DT_OVERLAY_PATH};
 use crate::payload::{ApexInfoList, add_microdroid_payload_images, add_microdroid_system_images, add_microdroid_vendor_image};
@@ -31,7 +31,7 @@ use android_system_virtualizationcommon::aidl::android::system::virtualizationco
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
     AssignedDevices::AssignedDevices,
     AssignableDevice::AssignableDevice,
-    CpuTopology::CpuTopology,
+    CpuOptions::CpuOptions as AidlCpuOptions,
     DiskImage::DiskImage,
     SharedPath::SharedPath,
     InputDevice::InputDevice,
@@ -712,23 +712,8 @@ impl VirtualizationService {
 
         let shared_paths = assemble_shared_paths(&config.sharedPaths, &temporary_directory)?;
 
-        let (cpus, host_cpu_topology) = match config.cpuTopology {
-            CpuTopology::MATCH_HOST => (None, true),
-            CpuTopology::ONE_CPU => (NonZeroU32::new(1), false),
-            CpuTopology::CUSTOM => (
-                NonZeroU32::new(
-                    u32::try_from(config.customVcpuCount)
-                        .context("bad customVcpuCount")
-                        .or_binder_exception(ExceptionCode::ILLEGAL_ARGUMENT)?,
-                ),
-                false,
-            ),
-            val => {
-                return Err(anyhow!("Failed to parse CPU topology value {:?}", val))
-                    .with_log()
-                    .or_service_specific_exception(-1);
-            }
-        };
+        let cpus = CpuOptions::new(&config.cpuOptions)
+            .or_binder_exception(ExceptionCode::ILLEGAL_ARGUMENT)?;
 
         let (vfio_devices, dtbo) = match &config.devices {
             AssignedDevices::Devices(devices) if !devices.is_empty() => {
@@ -841,7 +826,6 @@ impl VirtualizationService {
                 .unwrap_or(NonZeroU32::new(256).unwrap()),
             swiotlb_mib: config.swiotlbMib.try_into().ok().and_then(NonZeroU32::new),
             cpus,
-            host_cpu_topology,
             console_out_fd,
             console_in_fd,
             log_fd,
@@ -1312,10 +1296,10 @@ fn load_app_config(
 
     vm_config.name.clone_from(&config.name);
     vm_config.protectedVm = config.protectedVm;
-    vm_config.cpuTopology = config.cpuTopology;
-    if config.cpuTopology == CpuTopology::CUSTOM {
-        bail!("AppConfig doesn't support CpuTopology::CUSTOM");
-    }
+    vm_config.cpuOptions = AidlCpuOptions {
+        cpuCount: config.cpuOptions.cpuCount,
+        matchHost: config.cpuOptions.matchHost,
+    };
     vm_config.hugePages = config.hugePages || vm_payload_config.hugepages;
     vm_config.boostUclamp = config.boostUclamp;
 
