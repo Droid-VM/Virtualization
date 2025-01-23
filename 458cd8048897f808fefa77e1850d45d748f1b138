@@ -33,6 +33,29 @@
       "message": "Code LGTM. I haven\u0027t read the related discussion, so I can\u0027t comment on the design.\n\nIt would be good know how this differs from instance ID. Having multiple vaguely named IDs is going to be confusing.",
       "revId": "458cd8048897f808fefa77e1850d45d748f1b138",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baca858f_a658cb87",
+        "filename": "guest/pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-23T21:25:15Z",
+      "side": 1,
+      "message": "if you want to evaluate the panic at compile time, i think you can assign this expression to a local `const` var to force it\n\n```\nconst X: AvfUuid \u003d ...;\nX\n```",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 9
+      },
+      "revId": "458cd8048897f808fefa77e1850d45d748f1b138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
