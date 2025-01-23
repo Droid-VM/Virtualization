@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2d53cf7_f0b733a3",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-01-23T23:50:55Z",
+      "side": 1,
+      "message": "Probably ok because ANAPIC takes care of the `map.txt`, which isn\u0027t touched here.",
+      "parentUuid": "22e3cd4d_c96eac03",
+      "revId": "f3eaa9edc03ec0ea9b0f84afc22db1ae2ee5c675",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "753b669b_687de2b4",
@@ -48,6 +66,30 @@
       "writtenOn": "2025-01-21T19:50:57Z",
       "side": 1,
       "message": "do you need to cast here? based on the C header, it seems like the type should be lined up correctly already",
+      "range": {
+        "startLine": 378,
+        "startChar": 21,
+        "endLine": 378,
+        "endChar": 34
+      },
+      "revId": "f3eaa9edc03ec0ea9b0f84afc22db1ae2ee5c675",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f62c1f7_ff5d07e3",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-01-23T23:50:55Z",
+      "side": 1,
+      "message": "`vm_ptr` is `*const VmInstance` but header expects `*const AVirtualMachine`, which needs explicit cast.",
+      "parentUuid": "64da209d_7237e449",
       "range": {
         "startLine": 378,
         "startChar": 21,
@@ -95,6 +137,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49c07887_13fd924c",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-01-23T23:50:55Z",
+      "side": 1,
+      "message": "Nice catch. Will do in another CL.",
+      "parentUuid": "14997c13_a69ebb98",
+      "revId": "f3eaa9edc03ec0ea9b0f84afc22db1ae2ee5c675",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6c9d1b6a_585f74f7",
         "filename": "libs/libavf/src/lib.rs",
         "patchSetId": 12
@@ -106,6 +166,30 @@
       "writtenOn": "2025-01-21T19:50:57Z",
       "side": 1,
       "message": "this looks like it will result in circular ref counting. you probably want to store a `Weak` in the callback object",
+      "range": {
+        "startLine": 447,
+        "startChar": 0,
+        "endLine": 451,
+        "endChar": 7
+      },
+      "revId": "f3eaa9edc03ec0ea9b0f84afc22db1ae2ee5c675",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73e5895a_79823988",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-01-23T23:50:55Z",
+      "side": 1,
+      "message": "I\u0027m terribly sorry but I don\u0027t understand your comment here. Could you explain me more about the circular ref counting?",
+      "parentUuid": "6c9d1b6a_585f74f7",
       "range": {
         "startLine": 447,
         "startChar": 0,

@@ -250,6 +250,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c022b672_29d515c8",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2025-01-23T23:50:55Z",
+      "side": 1,
+      "message": "Well, I prefer `AVirtualMachine*` for following reasons:\n  - There\u0027 not much use case of launching various types of VMs.\n  - I expect that the most use case is calling `destroy(vm)`. VM would be sufficient for most cases.\n  - API guide says to accept request identifier when callback can be reused, but this callback is probably not. VM object can\u0027t be restarted, and callback is only set in start()",
+      "parentUuid": "d57e5d11_027a1926",
+      "range": {
+        "startLine": 314,
+        "startChar": 44,
+        "endLine": 314,
+        "endChar": 55
+      },
+      "revId": "87340e208762cfa3dffd3c73370e801ccd866c6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dcdcdfdb_91b9b927",
         "filename": "libs/libavf/include/android/virtualization.h",
         "patchSetId": 3
