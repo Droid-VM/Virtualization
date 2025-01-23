@@ -21,7 +21,7 @@ use android_logger::LogId;
 use anyhow::{anyhow, bail, Context, Result};
 use binder::ProcessState;
 use clap::{Parser, ValueEnum};
-use compos_common::compos_client::{ComposClient, VmCpuTopology, VmParameters};
+use compos_common::compos_client::{ComposClient, VmParameters};
 use compos_common::odrefresh::{
     CURRENT_ARTIFACTS_SUBDIR, ODREFRESH_OUTPUT_ROOT_DIR, PENDING_ARTIFACTS_SUBDIR,
     TEST_ARTIFACTS_SUBDIR,
@@ -119,7 +119,7 @@ fn try_main() -> Result<()> {
         &VmParameters {
             name: String::from("ComposVerify"),
             os: String::from("microdroid"),
-            cpu_topology: VmCpuTopology::OneCpu, // This VM runs very little work at boot
+            host_cpu_topology: false, // This VM runs very little work at boot, boot with 1 vCPU
             debug_mode: args.debug,
             ..Default::default()
         },

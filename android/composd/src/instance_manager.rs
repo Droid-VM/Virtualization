@@ -21,7 +21,7 @@ use crate::instance_starter::{CompOsInstance, InstanceStarter};
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice;
 use anyhow::{anyhow, bail, Context, Result};
 use binder::Strong;
-use compos_common::compos_client::{VmCpuTopology, VmParameters};
+use compos_common::compos_client::VmParameters;
 use compos_common::{CURRENT_INSTANCE_DIR, TEST_INSTANCE_DIR};
 use log::info;
 use rustutils::system_properties;
@@ -82,10 +82,9 @@ fn new_vm_parameters() -> Result<VmParameters> {
     // By default, dex2oat starts as many threads as there are CPUs. This can be overridden with
     // a system property. Start the VM with all CPUs and assume the guest will start a suitable
     // number of dex2oat threads.
-    let cpu_topology = VmCpuTopology::MatchHost;
     let memory_mib = Some(compos_memory_mib()?);
     let os = "microdroid".to_owned();
-    Ok(VmParameters { cpu_topology, memory_mib, os, ..Default::default() })
+    Ok(VmParameters { host_cpu_topology: true, memory_mib, os, ..Default::default() })
 }
 
 fn compos_memory_mib() -> Result<i32> {
