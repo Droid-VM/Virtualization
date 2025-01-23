@@ -41,6 +41,7 @@ import android.os.ParcelFileDescriptor;
 import android.os.PersistableBundle;
 import android.sysprop.HypervisorProperties;
 import android.system.virtualizationservice.AssignedDevices;
+import android.system.virtualizationservice.CpuOptions;
 import android.system.virtualizationservice.DiskImage;
 import android.system.virtualizationservice.Partition;
 import android.system.virtualizationservice.SharedPath;
@@ -806,7 +807,14 @@ public final class VirtualMachineConfig {
                         .orElse(null);
         config.protectedVm = this.mProtectedVm;
         config.memoryMib = bytesToMebiBytes(mMemoryBytes);
-        config.cpuTopology = (byte) this.mCpuTopology;
+        // If CpuTopology > 1, that means the VM is matching host in vCPUs.
+        if ((byte) this.mCpuTopology > 1) {
+            config.cpuOptions = new CpuOptions();
+            config.cpuOptions.cpuTopology = CpuOptions.CpuTopology.MatchHost(true);
+        } else {
+            config.cpuOptions = new CpuOptions();
+            config.cpuOptions.cpuTopology = CpuOptions.CpuTopology.CpuCount(1);
+        }
         config.consoleInputDevice = mConsoleInputDevice;
         config.devices = AssignedDevices.devices(EMPTY_STRING_ARRAY);
         config.platformVersion = "~1.0";
@@ -867,10 +875,12 @@ public final class VirtualMachineConfig {
         vsConfig.memoryMib = bytesToMebiBytes(mMemoryBytes);
         switch (mCpuTopology) {
             case CPU_TOPOLOGY_MATCH_HOST:
-                vsConfig.cpuTopology = android.system.virtualizationservice.CpuTopology.MATCH_HOST;
+                vsConfig.cpuOptions = new CpuOptions();
+                vsConfig.cpuOptions.cpuTopology = CpuOptions.CpuTopology.MatchHost(true);
                 break;
             default:
-                vsConfig.cpuTopology = android.system.virtualizationservice.CpuTopology.ONE_CPU;
+                vsConfig.cpuOptions = new CpuOptions();
+                vsConfig.cpuOptions.cpuTopology = CpuOptions.CpuTopology.CpuCount(1);
                 break;
         }
 
