@@ -88,6 +88,7 @@ impl Header {
     const VERSION_1_0: Version = Version { major: 1, minor: 0 };
     const VERSION_1_1: Version = Version { major: 1, minor: 1 };
     const VERSION_1_2: Version = Version { major: 1, minor: 2 };
+    const VERSION_1_3: Version = Version { major: 1, minor: 3 };
 
     pub fn total_size(&self) -> usize {
         self.total_size as usize
@@ -110,8 +111,9 @@ impl Header {
             Self::VERSION_1_0 => Entry::DebugPolicy,
             Self::VERSION_1_1 => Entry::VmDtbo,
             Self::VERSION_1_2 => Entry::VmBaseDtbo,
+            Self::VERSION_1_3 => Entry::Config,
             v @ Version { major: 1, .. } => {
-                const LATEST: Version = Header::VERSION_1_2;
+                const LATEST: Version = Header::VERSION_1_3;
                 warn!("Parsing unknown config data version {v} as version {LATEST}");
                 return Ok(Entry::COUNT);
             }
@@ -128,6 +130,7 @@ pub enum Entry {
     DebugPolicy,
     VmDtbo,
     VmBaseDtbo,
+    Config,
     #[allow(non_camel_case_types)] // TODO: Use mem::variant_count once stable.
     _VARIANT_COUNT,
 }
@@ -136,7 +139,7 @@ impl Entry {
     const COUNT: usize = Self::_VARIANT_COUNT as usize;
 
     const ALL_ENTRIES: [Entry; Self::COUNT] =
-        [Self::Bcc, Self::DebugPolicy, Self::VmDtbo, Self::VmBaseDtbo];
+        [Self::Bcc, Self::DebugPolicy, Self::VmDtbo, Self::VmBaseDtbo, Self::Config];
 }
 
 #[derive(Default)]
@@ -145,6 +148,7 @@ pub struct Entries<'a> {
     pub debug_policy: Option<&'a [u8]>,
     pub vm_dtbo: Option<&'a mut [u8]>,
     pub vm_ref_dt: Option<&'a [u8]>,
+    pub _config: Option<&'a [u8]>,
 }
 
 #[repr(packed)]
@@ -277,6 +281,7 @@ impl<'a> Config<'a> {
 
     /// Locate the various config entries.
     pub fn get_entries(self) -> Entries<'a> {
+        log::error!("get entries~~~~");
         // We require the blobs to be in the same order as the `Entry` enum (and this is checked
         // in `new` above)
         // So we can just work through the body range and split off the parts we are interested in.
@@ -293,7 +298,7 @@ impl<'a> Config<'a> {
                 entries[i] = Some(chunk);
             }
         }
-        let [bcc, debug_policy, vm_dtbo, vm_ref_dt] = entries;
+        let [bcc, debug_policy, vm_dtbo, vm_ref_dt, config] = entries;
 
         // The platform BCC has always been required.
         let bcc = bcc.unwrap();
@@ -301,7 +306,10 @@ impl<'a> Config<'a> {
         // We have no reason to mutate so drop the `mut`.
         let debug_policy = debug_policy.map(|x| &*x);
         let vm_ref_dt = vm_ref_dt.map(|x| &*x);
+        let config = config.map(|x| &*x);
 
-        Entries { bcc, debug_policy, vm_dtbo, vm_ref_dt }
+        log::error!("config: {:X?}", config.unwrap());
+
+        Entries { bcc, debug_policy, vm_dtbo, vm_ref_dt, _config: config}
     }
 }

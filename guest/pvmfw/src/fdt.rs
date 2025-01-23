@@ -1290,6 +1290,7 @@ fn patch_device_tree(fdt: &mut Fdt, info: &DeviceTreeInfo) -> Result<(), RebootR
 }
 
 /// Modifies the input DT according to the fields of the configuration.
+#[allow(clippy::too_many_arguments)]
 pub fn modify_for_next_stage(
     fdt: &mut Fdt,
     bcc: &[u8],
@@ -1298,6 +1299,7 @@ pub fn modify_for_next_stage(
     debug_policy: Option<&[u8]>,
     debuggable: bool,
     kaslr_seed: u64,
+    reserved_mem: Option<&[u8]>,
 ) -> libfdt::Result<()> {
     if let Some(debug_policy) = debug_policy {
         let backup = Vec::from(fdt.as_slice());
@@ -1325,6 +1327,10 @@ pub fn modify_for_next_stage(
         if let Some(bootargs) = read_bootargs_from(fdt)? {
             filter_out_dangerous_bootargs(fdt, &bootargs)?;
         }
+    }
+
+    if let Some(reserved_mem) = reserved_mem {
+        crate::reserved_mem::parse_reserved_mem(fdt, reserved_mem).map_err(|_| FdtError::BadStructure)?;
     }
 
     fdt.pack()?;
