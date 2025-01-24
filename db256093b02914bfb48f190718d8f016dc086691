@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8b3cc92_0c77cd31",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1973455
+      },
+      "writtenOn": "2025-01-24T19:10:48Z",
+      "side": 1,
+      "message": "There are no such requirements on CDD for Android 15, only `9.17/C-1-1` can be seen.\nhttps://source.android.com/docs/compatibility/15/android-15-cdd#917_android_virtualization_framework",
+      "range": {
+        "startLine": 516,
+        "startChar": 0,
+        "endLine": 516,
+        "endChar": 71
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "593a4e7a_fd63c836",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+              "range": {
+                "startLine": 516,
+                "startChar": 0,
+                "endLine": 517,
+                "endChar": 0
+              },
+              "replacement": "    @CddTest(requirements \u003d {\"9.17/C-1-1\"})\n"
+            }
+          ]
+        }
+      ],
+      "revId": "db256093b02914bfb48f190718d8f016dc086691",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
