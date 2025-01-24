@@ -70,6 +70,30 @@
       },
       "revId": "f8eaa0d4daf8d30719d3052260b02abb51ec7fdb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4de8fc7_ca2fa881",
+        "filename": "tests/hostside/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-24T08:48:25Z",
+      "side": 1,
+      "message": "Ah, yes. This module without the \".*TS\" suffix is to run \"all\" test methods regardless whether a test mothod belongs to CTS, VTS, or GTS.",
+      "parentUuid": "a78a3a1e_b77d66ca",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 0
+      },
+      "revId": "f8eaa0d4daf8d30719d3052260b02abb51ec7fdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
