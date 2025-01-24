@@ -163,7 +163,9 @@ impl VbMetaImage {
 fn verify_vbmeta_image(data: &[u8]) -> Result<(), VbMetaImageVerificationError> {
     // SAFETY: the function only reads from the provided data and the NULL pointers disable the
     // output arguments.
-    let res = unsafe { avb_vbmeta_image_verify(data.as_ptr(), data.len(), null_mut(), null_mut()) };
+    let res = unsafe {
+        avb_vbmeta_image_verify(null_mut(), data.as_ptr(), data.len(), null_mut(), null_mut())
+    };
     match res {
         AvbVBMetaVerifyResult::AVB_VBMETA_VERIFY_RESULT_OK
         | AvbVBMetaVerifyResult::AVB_VBMETA_VERIFY_RESULT_OK_NOT_SIGNED => Ok(()),
