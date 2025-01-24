@@ -16,9 +16,8 @@
 
 use crate::arch::platform;
 use crate::{
-    bionic, console, heap,
-    layout::{UART_ADDRESSES, UART_PAGE_ADDR},
-    logger,
+    arch::aarch64::layout::{UART_ADDRESSES, UART_PAGE_ADDR},
+    bionic, console, heap, logger,
     memory::{switch_to_dynamic_page_tables, PAGE_SIZE, SIZE_16KB, SIZE_4KB},
     rand,
 };

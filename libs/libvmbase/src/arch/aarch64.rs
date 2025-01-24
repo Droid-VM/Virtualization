@@ -14,6 +14,7 @@
 
 //! Wrappers of assembly calls.
 
+pub mod layout;
 pub mod platform;
 pub mod uart;
 
