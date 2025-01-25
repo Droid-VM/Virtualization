@@ -40,6 +40,30 @@
       ],
       "revId": "db256093b02914bfb48f190718d8f016dc086691",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8550e8f3_8c2ef88c",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-25T13:57:30Z",
+      "side": 1,
+      "message": "Oh, thanks for catching. This test actually was removed from CTS in aosp_main. I will drop this annotation in a follow-up change, so that I don\u0027t loose the votes.",
+      "parentUuid": "e8b3cc92_0c77cd31",
+      "range": {
+        "startLine": 516,
+        "startChar": 0,
+        "endLine": 516,
+        "endChar": 71
+      },
+      "revId": "db256093b02914bfb48f190718d8f016dc086691",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
