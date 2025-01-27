@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ce561cd_21cac553",
+        "filename": "libs/libvmbase/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-27T13:12:38Z",
+      "side": 0,
+      "message": "Why not keep using this in this file, if `power` (not `platform`) is the interface we keep exposing to `vmbase` clients anyway?",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 22,
+        "endChar": 30
+      },
+      "revId": "118a39dfe990fed68ca841af377836932e2eedcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
