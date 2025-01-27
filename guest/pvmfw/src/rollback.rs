@@ -87,6 +87,9 @@ fn get_fixed_rollback_protection(
     verified_boot_data: &VerifiedBootData,
 ) -> Option<FixedRollbackCriterion> {
     match verified_boot_data.uuid? {
+        AvfUuid::FIXED_DIGEST_VM_UUID => Some(FixedRollbackCriterion::AvbDigest {
+            digest: [0xee; 32], // TODO: This is just an example!
+        }),
         AvfUuid::RKP_VM_UUID => Some(FixedRollbackCriterion::RollbackIndexPublicKey {
             index: service_vm_version::VERSION,
             public_key: pvmfw_embedded_key::PUBLIC_KEY,

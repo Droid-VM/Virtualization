@@ -92,6 +92,8 @@ macro_rules! avf_uuid {
 impl AvfUuid {
     /// The AVF RKP VM implementing Remote Key Provisioning.
     pub const RKP_VM_UUID: AvfUuid = avf_uuid!("ae6b8440-3bb3-4424-90d4-eb588c260149");
+    /// [DO-NOT-MERGE] Example of a pVM using fixed-digest RBP.
+    pub const FIXED_DIGEST_VM_UUID: AvfUuid = avf_uuid!("9639bb3c-d21f-43e4-a8e4-a3a2a01e7008");
 
     /// Returns the UUID contained in the input string, if valid.
     pub const fn try_parse(input: &str) -> Option<Self> {
