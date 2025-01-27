@@ -22,6 +22,30 @@
       },
       "revId": "042a934a4ebb2f45ab3fbc364353779f61d3425c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "356d0e28_12c7ff32",
+        "filename": "libs/libvmbase/src/console.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 2026646
+      },
+      "writtenOn": "2025-01-27T13:50:24Z",
+      "side": 0,
+      "message": "It take adress (aka `usize` but it should take `VA` or `PA` dedicated tyle) with is not compatible with x86 I/O Ports concept.\nSeccond Console should be decoupled from low lewel driver that implements it.\nIt should take some abstrct device, that implement serial.\n\nFrom commit message:\n\"Number and and initialization code of UART may be different between platforms, for example x86_64 may use I/O ports other platform may use MMIO. This commit separate console logic from platform dependent UART implementations.\"",
+      "parentUuid": "b93ddb9f_8f08c085",
+      "range": {
+        "startLine": 45,
+        "startChar": 14,
+        "endLine": 45,
+        "endChar": 18
+      },
+      "revId": "042a934a4ebb2f45ab3fbc364353779f61d3425c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
