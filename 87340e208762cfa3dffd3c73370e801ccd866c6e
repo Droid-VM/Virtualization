@@ -274,6 +274,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5089e0e6_e0a96069",
+        "filename": "libs/libavf/include/android/virtualization.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-27T20:16:44Z",
+      "side": 1,
+      "message": "\u003e There\u0027 not much use case of launching various types of VMs.\n\nEven if there is only one VM, should we force people to use globals if they need any context besides the `AVirtualMachine*`?\n\n\u003e I expect that the most use case is calling `destroy(vm)`. VM would be sufficient for most cases.\n\nSupporting all use cases is better than only supporting most. A user provided `void*` is completely general, it covers all possible closures.\n\nI think it is OK to provide both the `void*` and the `AVirtualMachine*` and then people can provide `NULL` if they really only need the `AVirtualMachine*`",
+      "parentUuid": "c022b672_29d515c8",
+      "range": {
+        "startLine": 314,
+        "startChar": 44,
+        "endLine": 314,
+        "endChar": 55
+      },
+      "revId": "87340e208762cfa3dffd3c73370e801ccd866c6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dcdcdfdb_91b9b927",
         "filename": "libs/libavf/include/android/virtualization.h",
         "patchSetId": 3

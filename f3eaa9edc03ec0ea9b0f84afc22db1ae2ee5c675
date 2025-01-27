@@ -198,6 +198,30 @@
       },
       "revId": "f3eaa9edc03ec0ea9b0f84afc22db1ae2ee5c675",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ff7a6bd_e99fd513",
+        "filename": "libs/libavf/src/lib.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-27T20:16:44Z",
+      "side": 1,
+      "message": "`VmInstance` has a `Strong\u003cdyn IVirtualMachine\u003e`\n\n`Strong\u003cdyn IVirtualMachine\u003e` is a strong remote ref on an object in the `virtmgr` process. that object has a strong remote ref to the `Box\u003cdyn VmCallback + Send + Sync\u003e` created here\n\nthe `Box\u003cdyn VmCallback + Send + Sync\u003e` has a `LocalVmInstance`, which has a ref count on the `VmInstance`",
+      "parentUuid": "73e5895a_79823988",
+      "range": {
+        "startLine": 447,
+        "startChar": 0,
+        "endLine": 451,
+        "endChar": 7
+      },
+      "revId": "f3eaa9edc03ec0ea9b0f84afc22db1ae2ee5c675",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
