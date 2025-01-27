@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab2a3f54_c26f2275",
+        "filename": "libs/libvmbase/src/arch/aarch64/uart.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-27T13:15:13Z",
+      "side": 1,
+      "message": "Why is this moved under `aarch64`, given that none of it is (CPU) architecture-specific? Funnily, this implements a driver for a (virtual) 8250 UART, which `crosvm` carried over from x86 to ARM during their first port.",
+      "revId": "bac00e590d1671543b1b39b5cc8a24b1a6d4077c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
