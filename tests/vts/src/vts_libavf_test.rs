@@ -16,10 +16,15 @@
 
 use anyhow::{bail, ensure, Context, Result};
 use log::info;
+use nix::poll::poll;
+use nix::poll::PollFd;
+use nix::poll::PollFlags;
+use nix::poll::PollTimeout;
 use std::fs::File;
-use std::io::{self, BufWriter, Write};
+use std::io::{BufWriter, Write};
+use std::os::fd::AsFd;
 use std::os::fd::IntoRawFd;
-use std::time::{Duration, Instant};
+use std::time::Duration;
 use vsock::{VsockListener, VsockStream, VMADDR_CID_HOST};
 
 use avf_bindgen::*;
@@ -40,7 +45,7 @@ fn process_request(vsock_stream: &mut VsockStream, request: Request) -> Result<R
 }
 
 /// Sends the request to the service VM.
-fn write_request(vsock_stream: &mut VsockStream, request: &ServiceVmRequest) -> Result<()> {
+fn write_request(vsock_stream: &mut VsockStream, request: &impl serde::Serialize) -> Result<()> {
     let mut buffer = BufWriter::with_capacity(WRITE_BUFFER_CAPACITY, vsock_stream);
     ciborium::into_writer(request, &mut buffer)?;
     buffer.flush().context("Failed to flush the buffer")?;
@@ -48,29 +53,21 @@ fn write_request(vsock_stream: &mut VsockStream, request: &ServiceVmRequest) -> 
 }
 
 /// Reads the response from the service VM.
-fn read_response(vsock_stream: &mut VsockStream) -> Result<Response> {
-    let response: Response = ciborium::from_reader(vsock_stream)
-        .context("Failed to read the response from the service VM")?;
-    Ok(response)
+fn read_response<T: serde::de::DeserializeOwned>(vsock_stream: &mut VsockStream) -> Result<T> {
+    ciborium::from_reader(vsock_stream).context("Failed to read the response from the service VM")
 }
 
 fn listen_from_guest(port: u32) -> Result<VsockStream> {
     let vsock_listener =
         VsockListener::bind_with_cid_port(VMADDR_CID_HOST, port).context("Failed to bind vsock")?;
-    vsock_listener.set_nonblocking(true).context("Failed to set nonblocking")?;
-    let start_time = Instant::now();
-    loop {
-        if start_time.elapsed() >= LISTEN_TIMEOUT {
-            bail!("Timeout while listening");
-        }
-        match vsock_listener.accept() {
-            Ok((vsock_stream, _peer_addr)) => return Ok(vsock_stream),
-            Err(e) if e.kind() == io::ErrorKind::WouldBlock => {
-                std::thread::sleep(Duration::from_millis(100));
-            }
-            Err(e) => bail!("Failed to listen: {e:?}"),
-        }
+    let mut pollfds = [PollFd::new(vsock_listener.as_fd(), PollFlags::POLLIN)];
+    poll(&mut pollfds[..], PollTimeout::try_from(LISTEN_TIMEOUT).unwrap())
+        .expect("Failed to poll vsock listener");
+    if !pollfds[0].revents().unwrap_or(PollFlags::empty()).contains(PollFlags::POLLIN) {
+        bail!("Timeout while listening");
     }
+    let (vsock_stream, _peer_addr) = vsock_listener.accept().context("Failed to accept")?;
+    Ok(vsock_stream)
 }
 
 fn run_rialto(protected_vm: bool) -> Result<()> {
@@ -189,4 +186,126 @@ fn test_run_rialto_non_protected() -> Result<()> {
         info!("non-pVMs are not supported on device. skipping test");
         Ok(())
     }
+}
+
+fn run_testos(protected_vm: bool) -> Result<()> {
+    let kernel_file =
+        File::open("/data/local/tmp/testos.bin").context("Failed to open kernel file")?;
+    let kernel_fd = kernel_file.into_raw_fd();
+
+    // SAFETY: AVirtualMachineRawConfig_create() isn't unsafe but rust_bindgen forces it to be seen
+    // as unsafe
+    let config = unsafe { AVirtualMachineRawConfig_create() };
+
+    info!("raw config created");
+
+    // SAFETY: config is the only reference to a valid object
+    unsafe {
+        AVirtualMachineRawConfig_setName(config, c"vts_libavf_test_testos".as_ptr());
+        AVirtualMachineRawConfig_setKernel(config, kernel_fd);
+        AVirtualMachineRawConfig_setProtectedVm(config, protected_vm);
+        AVirtualMachineRawConfig_setMemoryMiB(config, VM_MEMORY_MB);
+    }
+
+    let custom_backing_range = (0x8040_0000_u64, 0x8040_4000_u64);
+    let custom_backing_file = tempfile::tempfile().unwrap();
+    custom_backing_file.set_len(custom_backing_range.1 - custom_backing_range.0).unwrap();
+    ensure!(
+        // SAFETY: TODO
+        unsafe {
+            AVirtualMachineRawConfig_addCustomMemoryBackingFile(
+                config,
+                custom_backing_file.into_raw_fd(),
+                custom_backing_range.0,
+                custom_backing_range.1,
+            )
+        } == 0,
+        "AVirtualMachineRawConfig_addCustomMemoryBackingFile failed"
+    );
+
+    let mut vm = std::ptr::null_mut();
+    let mut service = std::ptr::null_mut();
+
+    ensure!(
+        // SAFETY: &mut service is a valid pointer to *AVirtualizationService
+        unsafe { AVirtualizationService_create(&mut service, false) } == 0,
+        "AVirtualizationService_create failed"
+    );
+
+    scopeguard::defer! {
+        // SAFETY: service is a valid pointer to AVirtualizationService
+        unsafe { AVirtualizationService_destroy(service); }
+    }
+
+    ensure!(
+        // SAFETY: &mut vm is a valid pointer to *AVirtualMachine
+        unsafe {
+            AVirtualMachine_createRaw(
+                service, config, -1, // console_in
+                -1, // console_out
+                -1, // log
+                &mut vm,
+            )
+        } == 0,
+        "AVirtualMachine_createRaw failed"
+    );
+
+    scopeguard::defer! {
+        // SAFETY: vm is a valid pointer to AVirtualMachine
+        unsafe { AVirtualMachine_destroy(vm); }
+    }
+
+    info!("vm created");
+
+    let listener_thread = std::thread::spawn(move || listen_from_guest(8888));
+
+    // SAFETY: vm is the only reference to a valid object
+    unsafe {
+        AVirtualMachine_start(vm);
+    }
+
+    info!("VM started");
+
+    let mut vsock_stream = listener_thread.join().unwrap()?;
+    vsock_stream.set_read_timeout(Some(READ_TIMEOUT))?;
+    vsock_stream.set_write_timeout(Some(WRITE_TIMEOUT))?;
+
+    info!("client connected");
+
+    write_request(
+        &mut vsock_stream,
+        &testos_protocol::Request::ReadRange(custom_backing_range.0 as usize, 16),
+    )?;
+    match read_response(&mut vsock_stream)? {
+        testos_protocol::Response::Bytes(b) => {
+            assert_eq!(b, vec![0xff]);
+        }
+    }
+
+    info!("request processed");
+
+    write_request(&mut vsock_stream, &testos_protocol::Request::Shutdown)
+        .context("Failed to send shutdown")?;
+
+    info!("shutdown sent");
+
+    let mut stop_reason = AVirtualMachineStopReason::AVIRTUAL_MACHINE_UNRECOGNISED;
+    ensure!(
+        // SAFETY: vm is the only reference to a valid object
+        unsafe { AVirtualMachine_waitForStop(vm, &STOP_TIMEOUT, &mut stop_reason) },
+        "AVirtualMachine_waitForStop failed"
+    );
+
+    info!("stopped");
+
+    Ok(())
+}
+
+#[test]
+fn test_run_testos_non_protected() -> Result<()> {
+    if !hypervisor_props::is_vm_supported()? {
+        info!("non-pVMs are not supported on device. skipping test");
+        return Ok(());
+    }
+    run_testos(false /* protected_vm */)
 }

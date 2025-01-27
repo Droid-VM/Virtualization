@@ -1,0 +1,102 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_library {
+    name: "libtestos_protocol",
+    defaults: ["vmbase_rlib_defaults"],
+    crate_name: "testos_protocol",
+    srcs: ["testos_protocol.rs"],
+    rustlibs: [
+        "libserde",
+    ],
+}
+
+rust_library {
+    name: "libtestos_protocol_nostd",
+    defaults: ["vmbase_rlib_defaults"],
+    crate_name: "testos_protocol",
+    srcs: ["testos_protocol.rs"],
+    no_stdlibs: true,
+    rustlibs: [
+        "libserde_nostd",
+    ],
+}
+
+rust_ffi_static {
+    name: "libtestos",
+    defaults: ["vmbase_ffi_defaults"],
+    crate_name: "testos",
+    srcs: ["src/main.rs"],
+    rustlibs: [
+        "libaarch64_paging",
+        "libciborium_io_nostd",
+        "libciborium_nostd",
+        "libdiced_open_dice_nostd",
+        "liblibfdt_nostd",
+        "liblog_rust_nostd",
+        "libspin_nostd",
+        "libtestos_protocol_nostd",
+        "libtinyvec_nostd",
+        "libvirtio_drivers",
+        "libvmbase",
+    ],
+}
+
+genrule {
+    name: "testos.ld.S.mm",
+    // Soong won't let us use cc_object to preprocess *.ld.S files because it
+    // can't resist feeding any and all *.S files to the assembler, which fails
+    // because linker scripts typically aren't valid assembly. Also, cc_object
+    // rejects inputs that don't end in one of .{s,S,c,cpp,cc,cxx,mm}. So keep
+    // the proper extension (.ld.S) for the file in VCS and use this convoluted
+    // extra step to please Soong by pretending that our linker script is in
+    // fact some Object C++ code, which fortunately it doesn't try to compile.
+    srcs: ["image.ld.S"],
+    out: ["image.ld.S.mm"],
+    cmd: "cp $(in) $(out)",
+    visibility: ["//visibility:private"],
+}
+
+cc_object {
+    name: "testos.ld",
+    defaults: ["vmbase_cc_defaults"],
+    cflags: [
+        "-E",
+        "-P",
+        "-xassembler-with-cpp", // allow C preprocessor directives
+    ],
+    srcs: [":testos.ld.S.mm"],
+    visibility: ["//visibility:private"],
+}
+
+cc_defaults {
+    name: "testos_elf_defaults",
+}
+
+cc_binary {
+    name: "testos",
+    defaults: ["vmbase_elf_defaults"],
+    srcs: [
+        "idmap.S",
+    ],
+    static_libs: [
+        "libtestos",
+    ],
+    linker_scripts: [
+        ":testos.ld",
+        ":vmbase_sections",
+    ],
+}
+
+raw_binary {
+    name: "testos_bin",
+    stem: "testos.bin",
+    src: ":testos",
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+    },
+}
