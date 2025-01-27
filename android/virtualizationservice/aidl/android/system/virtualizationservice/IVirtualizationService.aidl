@@ -58,6 +58,14 @@ interface IVirtualizationService {
             in ParcelFileDescriptor imageFd, long sizeBytes, PartitionType type);
 
     /**
+     * Resize an existing writable partition image.
+     *
+     * The file must be open with both read and write permissions, and should retain it's data.
+     */
+    void resizeWritablePartition(
+            in ParcelFileDescriptor imageFd, long sizeBytes);
+
+    /**
      * Create or update an idsig file that digests the given APK file. The idsig file follows the
      * idsig format that is defined by the APK Signature Scheme V4. The idsig file is not updated
      * when it is up to date with the input file, which is checked by comparing the

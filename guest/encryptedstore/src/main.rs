@@ -73,6 +73,8 @@ fn clap_command() -> clap::Command {
 }
 
 fn encryptedstore_init(blkdevice: &Path, key: &str, mountpoint: &Path) -> Result<()> {
+    info!("encryptedstore_init");
+
     ensure!(
         std::fs::metadata(blkdevice)
             .with_context(|| format!("Failed to get metadata of {:?}", blkdevice))?
@@ -87,13 +89,19 @@ fn encryptedstore_init(blkdevice: &Path, key: &str, mountpoint: &Path) -> Result
     let crypt_device =
         enable_crypt(blkdevice, key, "cryptdev").context("Unable to map crypt device")?;
 
+    info!("Crypt device path {}", &crypt_device.display());
+
     // We might need to format it with filesystem if this is a "seen-for-the-first-time" device.
     if needs_formatting {
         info!("Freshly formatting the crypt device");
         format_ext4(&crypt_device)?;
+    } else {
+        ensure_filesystem_size(&crypt_device)?;
     }
+
     mount(&crypt_device, mountpoint)
         .with_context(|| format!("Unable to mount {:?}", crypt_device))?;
+
     if cfg!(multi_tenant) && needs_formatting {
         set_root_dir_permissions(mountpoint)?;
     }
@@ -111,7 +119,12 @@ fn set_root_dir_permissions(mountpoint: &Path) -> Result<()> {
 
 fn enable_crypt(data_device: &Path, key: &str, name: &str) -> Result<PathBuf> {
     let dev_size = util::blkgetsize64(data_device)?;
+    info!("crypt data_device {}", data_device.display());
+    info!("crypt dev_size {}", dev_size);
+
     let key = hex::decode(key).context("Unable to decode hex key")?;
+
+    info!("DmCryptTargetBuilder");
 
     // Create the dm-crypt spec
     let target = dm::crypt::DmCryptTargetBuilder::default()
@@ -123,6 +136,9 @@ fn enable_crypt(data_device: &Path, key: &str, name: &str) -> Result<PathBuf> {
         .build()
         .context("Couldn't build the DMCrypt target")?;
     let dm = dm::DeviceMapper::new()?;
+
+    info!("dm.create_crypt_device");
+
     dm.create_crypt_device(name, &target).context("Failed to create dm-crypt device")
 }
 
@@ -170,6 +186,30 @@ fn format_ext4(device: &Path) -> Result<()> {
         .status()
         .with_context(|| format!("failed to execute {}", MK2FS_BIN))?;
     ensure!(status.success(), "mkfs failed with {:?}", status);
+    Ok(())
+}
+
+fn ensure_filesystem_size(device: &Path) -> Result<()> {
+    // Check the partition
+    Command::new("/system/bin/e2fsck")
+    .arg("-fvy")
+    .arg(&device)
+    .status()
+    .context("failed to execute e2fsck")?;
+
+    // Resize the filesystem to the size of the device.
+    Command::new("/system/bin/resize2fs")
+    .arg(&device)
+    .status()
+    .context("failed to execute resize2fs")?;
+
+    // Finally check again if we were successful.
+    Command::new("/system/bin/e2fsck")
+    .arg("-fvy")
+    .arg(&device)
+    .status()
+    .context("failed to execute e2fsck")?;
+
     Ok(())
 }
 

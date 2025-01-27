@@ -43,7 +43,7 @@ use vmconfig::{get_debug_level, open_parcel_file, VmConfig};
 use zip::ZipArchive;
 
 /// Run a VM from the given APK, idsig, and config.
-pub fn command_run_app(config: RunAppConfig) -> Result<(), Error> {
+pub fn command_run_app(mut config: RunAppConfig) -> Result<(), Error> {
     let service = get_service()?;
     let apk = File::open(&config.apk).context("Failed to open APK file")?;
 
@@ -104,14 +104,17 @@ pub fn command_run_app(config: RunAppConfig) -> Result<(), Error> {
     };
 
     let storage = if let Some(ref path) = config.microdroid.storage {
-        if !path.exists() {
-            command_create_partition(
-                service.as_ref(),
-                path,
-                config.microdroid.storage_size.unwrap_or(10 * 1024 * 1024),
-                PartitionType::ENCRYPTEDSTORE,
-            )?;
+        if path.exists() {
+            config.microdroid.storage_size = Some(25 * 1024 * 1024);
         }
+        println!("Storage Size {}", config.microdroid.storage_size.unwrap());
+        command_create_partition(
+            service.as_ref(),
+            path,
+            config.microdroid.storage_size.unwrap_or(10 * 1024 * 1024),
+            PartitionType::ENCRYPTEDSTORE,
+        )?;
+
         Some(open_parcel_file(path, true)?)
     } else {
         None
