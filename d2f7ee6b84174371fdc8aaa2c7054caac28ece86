@@ -34,6 +34,24 @@
       "parentUuid": "85f2a0b1_a340ece6",
       "revId": "d2f7ee6b84174371fdc8aaa2c7054caac28ece86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd94d219_48f73864",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-27T19:18:05Z",
+      "side": 1,
+      "message": "you should also delete\n\nhttps://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/tests/hostside/Android.bp;l\u003d42;drc\u003d1a3b5a463786f5531eb084c754dd49fe51aed574\n\nand \n\nhttps://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/tests/hostside/java/com/android/microdroid/test/goldens/\n\nbut that doesn\u0027t need to happen in this CL",
+      "parentUuid": "1786ea07_3894a327",
+      "revId": "d2f7ee6b84174371fdc8aaa2c7054caac28ece86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
