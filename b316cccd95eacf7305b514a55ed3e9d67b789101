@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a68ef91_7358840e",
+        "filename": "libs/libvmbase/src/arch/aarch64/exceptions.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-27T13:31:47Z",
+      "side": 1,
+      "message": "Again, why? If this is needed for x86_64, could we add those lines then and ideally only if `cfg(target_arch \u003d x86_64)`?",
+      "range": {
+        "startLine": 82,
+        "startChar": 4,
+        "endLine": 82,
+        "endChar": 23
+      },
+      "revId": "b316cccd95eacf7305b514a55ed3e9d67b789101",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
