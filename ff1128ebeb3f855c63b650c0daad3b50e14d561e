@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c21fdcbd_1983bd29",
+        "filename": "libs/libvmbase/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-27T13:03:39Z",
+      "side": 1,
+      "message": "You could also make this conditional on `android_arm64`, as Android 13 didn\u0027t support other archs and `cpu_feat_hafdbs` is an AArch64 CPU feature (we might want to rename it in a follow-up).",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 6
+      },
+      "revId": "ff1128ebeb3f855c63b650c0daad3b50e14d561e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
