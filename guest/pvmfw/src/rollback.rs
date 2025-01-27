@@ -25,6 +25,7 @@ use libfdt::Fdt;
 use log::{error, info};
 use pvmfw_avb::AvfUuid;
 use pvmfw_avb::Capability;
+use pvmfw_avb::Digest;
 use pvmfw_avb::VerifiedBootData;
 use virtio_drivers::transport::pci::bus::{ConfigurationAccess, PciRoot};
 use vmbase::fdt::{pci::PciInfo, SwiotlbInfo};
@@ -34,6 +35,8 @@ use vmbase::virtio::pci;
 
 /// Criteria hard-coded into pvmfw, to perform fixed image verification.
 enum FixedRollbackCriterion {
+    /// Image must match the exact AVB digest (incl. image hash, rollback index, or public key).
+    AvbDigest { digest: Digest },
     /// Image must match the exact rollback index and have been signed with the given public key.
     RollbackIndexPublicKey { index: u64, public_key: &'static [u8] },
 }
@@ -109,6 +112,15 @@ fn perform_fixed_index_rollback_protection(
                 Err(RebootReason::InvalidPayload)
             } else if public_key != expected_key {
                 error!("Public key mismatch: expected {expected_key:x?}, found {public_key:x?}");
+                Err(RebootReason::InvalidPayload)
+            } else {
+                Ok(())
+            }
+        }
+        FixedRollbackCriterion::AvbDigest { digest: expected_digest } => {
+            let digest = verified_boot_data.vbmeta_digest;
+            if digest != expected_digest {
+                error!("Digest mismatch: expected {expected_digest:x?}, found {digest:x?}");
                 Err(RebootReason::InvalidPayload)
             } else {
                 Ok(())

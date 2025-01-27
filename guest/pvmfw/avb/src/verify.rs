@@ -41,6 +41,8 @@ pub struct VerifiedBootData<'a> {
     pub kernel_digest: Digest,
     /// Initrd digest if initrd exists.
     pub initrd_digest: Option<Digest>,
+    /// VBMeta digest.
+    pub vbmeta_digest: Digest,
     /// Trusted public key.
     pub public_key: &'a [u8],
     /// AVF-defined UUID of the guest payload, if present.
@@ -327,6 +329,7 @@ pub fn verify_payload<'a>(
     let capabilities = Capability::get_capabilities(vbmeta_image)?;
     let page_size = read_page_size(vbmeta_image)?;
     let uuid = read_uuid(vbmeta_image)?;
+    let vbmeta_digest = kernel_verify_result.calculate_sha256_digest();
 
     if initrd.is_none() {
         hash_descriptors.verify_no_initrd()?;
@@ -334,6 +337,7 @@ pub fn verify_payload<'a>(
             debug_level: DebugLevel::None,
             kernel_digest: copy_digest(hash_descriptors.kernel)?,
             initrd_digest: None,
+            vbmeta_digest,
             public_key: trusted_public_key,
             uuid,
             capabilities,
@@ -357,6 +361,7 @@ pub fn verify_payload<'a>(
         kernel_digest: copy_digest(hash_descriptors.kernel)?,
         initrd_digest: Some(copy_digest(initrd_descriptor)?),
         public_key: trusted_public_key,
+        vbmeta_digest,
         uuid,
         capabilities,
         rollback_index,
