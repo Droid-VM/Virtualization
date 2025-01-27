@@ -11,6 +11,19 @@ prebuilt_etc {
     visibility: ["//visibility:private"],
 }
 
+prebuilt_etc {
+    name: "vts_libavf_test_kernel2",
+    filename: "testos.bin",
+    src: ":empty_file",
+    target: {
+        android_arm64: {
+            src: ":testos_bin",
+        },
+    },
+    installable: false,
+    visibility: ["//visibility:private"],
+}
+
 rust_test {
     name: "vts_libavf_test",
     crate_name: "vts_libavf_test",
@@ -19,10 +32,14 @@ rust_test {
         "libanyhow",
         "libavf_bindgen",
         "libciborium",
-        "liblog_rust",
         "libhypervisor_props",
+        "liblog_rust",
+        "libnix",
         "libscopeguard",
+        "libserde",
         "libservice_vm_comm",
+        "libtempfile",
+        "libtestos_protocol",
         "libvsock",
     ],
     shared_libs: ["libavf"],
@@ -30,7 +47,10 @@ rust_test {
         "general-tests",
         "vts",
     ],
-    data: [":vts_libavf_test_kernel"],
+    data: [
+        ":vts_libavf_test_kernel",
+        ":vts_libavf_test_kernel2",
+    ],
     test_config: "AndroidTest.xml",
     compile_multilib: "first",
     vendor: true,

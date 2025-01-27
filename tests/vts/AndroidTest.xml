@@ -22,6 +22,7 @@
         <option name="cleanup" value="true" />
         <option name="push" value="vts_libavf_test->/data/nativetest64/vendor/vts_libavf_test" />
         <option name="push" value="rialto.bin->/data/local/tmp/rialto.bin" />
+        <option name="push" value="testos.bin->/data/local/tmp/testos.bin" />
     </target_preparer>
 
     <object type="module_controller" class="com.android.tradefed.testtype.suite.module.ArchModuleController">
