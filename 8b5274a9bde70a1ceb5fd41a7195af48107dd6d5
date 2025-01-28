@@ -16,6 +16,24 @@
       "message": "Hi Pierre-Clément,\n\nCould you please continue to review this cl when you have time? Thank you.",
       "revId": "8b5274a9bde70a1ceb5fd41a7195af48107dd6d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abf62ea3_3990bf4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-28T17:20:38Z",
+      "side": 1,
+      "message": "I\u0027m fine with merging this CL to unblock you, as long as we\u0027re okay that the host-guest ABI (such as the meaning of the `Capability`) will be reworked before the release (b/391620545). I don\u0027t expect the ABI with the RKP server (presence of RKP VM marker) to change, though. Does that work for you?",
+      "parentUuid": "df61f13f_61842175",
+      "revId": "8b5274a9bde70a1ceb5fd41a7195af48107dd6d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
