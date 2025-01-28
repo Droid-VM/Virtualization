@@ -22,6 +22,30 @@
       },
       "revId": "8bc9df150414137c55cd99c2744ce983f12bde09",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e52cd332_efdb5ff7",
+        "filename": "guest/pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-28T18:26:23Z",
+      "side": 1,
+      "message": "I\u0027ll be more concerned about maintaining this \u0026 keeping it in sync with *the expected hash hashing algorthm*.\n\nHow do we know it will be sha256? Maybe we need to check any field in vbmeta footer?\n\nAVB tool seem to allow different hashing algorithm - https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:external/avb/avbtool.py;l\u003d2672?q\u003dcalculate_vbmeta_digest\u0026sq\u003drepo:googleplex-android%2Fplatform%2Fsuperproject%2Fmain%20b:main",
+      "parentUuid": "c8bcbd40_69a7d767",
+      "range": {
+        "startLine": 332,
+        "startChar": 4,
+        "endLine": 332,
+        "endChar": 70
+      },
+      "revId": "8bc9df150414137c55cd99c2744ce983f12bde09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
