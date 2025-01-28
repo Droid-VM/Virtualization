@@ -813,11 +813,24 @@ impl AssignedDeviceInfo {
     fn parse_iommus(
         node: &FdtNode,
         pviommus: &BTreeMap<Phandle, PvIommu>,
+        physical_device_iommu: &[(PhysIommu, Sid)],
     ) -> Result<Vec<(PvIommu, Vsid)>> {
         let mut iommus = vec![];
         let Some(mut cells) = node.getprop_cells(c"iommus")? else {
             return Ok(iommus);
         };
+
+        //If crosvm has passed iommus to a node but its corresponding physical node
+        //have no iommus, then ignore the iommus from crosvm. In this way, iommu validation can be
+        //skipped for VMs not using pkvm,pviommu. There is nothing to validate if pviommu is not
+        //present. For such VMs, a device with iommu must not define the iommus property in its
+        //physcal node . i.e under /host. But it's overlayable node in vm dtbo will have iommus.
+        //Once the reg property is validated, that node will be overlayed to guest vm Dt.
+        //And also no need to patch iommus later in this case.
+        if physical_device_iommu.is_empty() {
+            return Ok(Vec::new());
+        }
+
         while let Some(cell) = cells.next() {
             // Parse pvIOMMU ID
             let phandle =
@@ -895,7 +908,7 @@ impl AssignedDeviceInfo {
 
         let interrupts = Self::parse_interrupts(&node)?;
 
-        let iommus = Self::parse_iommus(&node, pviommus)?;
+        let iommus = Self::parse_iommus(&node, pviommus, &physical_device.iommus)?;
         Self::validate_iommus(&iommus, &physical_device.iommus, hypervisor)?;
 
         Ok(Some(Self { node_path, reg, interrupts, iommus }))
@@ -911,7 +924,9 @@ impl AssignedDeviceInfo {
             iommus.extend_from_slice(&u32::from(*phandle).to_be_bytes());
             iommus.extend_from_slice(&vsid.0.to_be_bytes());
         }
-        dst.setprop(c"iommus", &iommus)?;
+        if !self.iommus.is_empty() {
+            dst.setprop(c"iommus", &iommus)?;
+        }
 
         Ok(())
     }
