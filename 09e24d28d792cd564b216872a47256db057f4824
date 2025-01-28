@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9efceeae_bf6f3703",
+        "filename": "guest/pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-28T16:32:29Z",
+      "side": 0,
+      "message": "You\u0027re now masking these errors. Instead, could you:\n```\nlet Some(prop) \u003d node.getprop_cells(c\"interrupts\")? else {\n    return Ok(Vec::new());\n};\nlet interrupts_cells \u003d prop.count();\n```\n(or similar)?",
+      "range": {
+        "startLine": 801,
+        "startChar": 41,
+        "endLine": 801,
+        "endChar": 42
+      },
+      "revId": "09e24d28d792cd564b216872a47256db057f4824",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

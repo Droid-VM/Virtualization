@@ -16,6 +16,29 @@
       "message": "Submitting the gerrit for early feedback. Until end to end testing is done, I am keeping a -1.",
       "revId": "f62fae3c978f21c80103a4ea9f7d75821fad0df0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6e60826_2f93b415",
+        "filename": "guest/pvmfw/src/device_assignment.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-28T16:32:29Z",
+      "side": 1,
+      "message": "Could make this `Option\u003cVec\u003cu8\u003e\u003e` for clarity but also to distinguish between the subtly different cases of `interrupts \u003d \u003c\u003e` (which I _think_ the code currently supports?) and no `interrupts` (which you\u0027re adding support for)?\n\nThen, return the same type out of `parse_interrupts()`?",
+      "range": {
+        "startLine": 743,
+        "startChar": 16,
+        "endLine": 743,
+        "endChar": 23
+      },
+      "revId": "f62fae3c978f21c80103a4ea9f7d75821fad0df0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
