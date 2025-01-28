@@ -101,6 +101,7 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
     private static final double NANO_TO_MICRO = 1_000.0;
     private static final String MICRODROID_IMG_PREFIX = "microdroid_";
     private static final String MICRODROID_IMG_SUFFIX = ".img";
+    static final long ENCRYPTED_STORE_SIZE = 1_073_741_824; // 1G
 
     @Parameterized.Parameters(name = "protectedVm={0},os={1}")
     public static Collection<Object[]> params() {
@@ -1096,5 +1097,64 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
                 rpDataAccessWithRefreshingSession(true),
                 "latency/writeRollbackProtectedSecretWithRefreshSession",
                 "us");
+    }
+
+    @Test
+    public void encryptedstoreReadRate() throws Exception {
+        reportMetrics(encryptedstoreIoRate(true), "encryptedstore/write", "us");
+        // reportMetrics(
+        //     encryptedstoreIoRate(false),
+        //             "encryptedstore/read",
+        //             "us");
+    }
+
+    private List<Double> encryptedstoreIoRate(boolean measureWrite) throws Exception {
+
+        VirtualMachineConfig config =
+                newVmConfigBuilderWithPayloadConfig("assets/vm_config_io.json")
+                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .setShouldUseHugepages(true)
+                        .setEncryptedStorageBytes(ENCRYPTED_STORE_SIZE)
+                        .build();
+        List<Double> ioThroughput = new ArrayList<>(IO_TEST_TRIAL_COUNT);
+
+        for (int i = 0; i < IO_TEST_TRIAL_COUNT + 1; ++i) {
+            if (i == 1) {
+                // Clear the first result because when the file was loaded the first time,
+                // the data also needs to be loaded from hard drive to host. This is
+                // not part of the virtio-blk IO throughput.
+                ioThroughput.clear();
+            }
+            String vmName = "vm_encryptedstore_io" + i;
+            VirtualMachine vm = forceCreateNewVirtualMachine(vmName, config);
+            BenchmarkVmListener.create(
+                            new EncryptedstoreBechmarksListener(ioThroughput, measureWrite))
+                    .runToFinish(TAG, vm);
+        }
+        return ioThroughput;
+    }
+
+    private static class EncryptedstoreBechmarksListener
+            implements BenchmarkVmListener.InnerListener {
+        private static final String FILENAME = "/mnt/encryptedstore/test_file";
+
+        private final List<Double> mIoThroughput;
+        private final boolean mMeasureWrite;
+
+        EncryptedstoreBechmarksListener(List<Double> ioThroughput, boolean measureWrite) {
+            mIoThroughput = ioThroughput;
+            mMeasureWrite = measureWrite;
+        }
+
+        @Override
+        public void onPayloadReady(VirtualMachine vm, IBenchmarkService benchmarkService)
+                throws RemoteException {
+            // Fill 3/4 of the storage by writing (random) data into a file!
+            double writeRate =
+                    benchmarkService.measureWriteRate(
+                            FILENAME, /*sizeBytes */ (ENCRYPTED_STORE_SIZE * 3) / 4);
+            // double readRate = benchmarkService.measureReadRate(FILENAME,/*isRand */ true);
+            mIoThroughput.add(writeRate);
+        }
     }
 }

@@ -271,8 +271,8 @@ Result<void> start_test_service() {
             if (!android::base::WriteStringToFile(content, path)) {
                 std::string msg = "Failed to write " + content + " to file " + path +
                         ". Errono: " + std::to_string(errno);
-                return ScopedAStatus::fromExceptionCodeWithMessage(EX_SERVICE_SPECIFIC,
-                                                                   msg.c_str());
+                = return ScopedAStatus::fromExceptionCodeWithMessage(EX_SERVICE_SPECIFIC,
+                                                                     msg.c_str());
             }
             return ScopedAStatus::ok();
         }
