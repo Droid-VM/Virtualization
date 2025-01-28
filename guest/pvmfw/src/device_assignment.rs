@@ -742,7 +742,7 @@ struct AssignedDeviceInfo {
     // <reg> property from the crosvm DT
     reg: Vec<DeviceReg>,
     // <interrupts> property from the crosvm DT
-    interrupts: Vec<u8>,
+    interrupts: Option<Vec<u8>>,
     // Parsed <iommus> property from the crosvm DT. Tuple of PvIommu and vSID.
     iommus: Option<Vec<(PvIommu, Vsid)>>,
 }
@@ -796,19 +796,19 @@ impl AssignedDeviceInfo {
         Ok(())
     }
 
-    fn parse_interrupts(node: &FdtNode) -> Result<Vec<u8>> {
+    fn parse_interrupts(node: &FdtNode) -> Result<Option<Vec<u8>>> {
         // Validation: Validate if interrupts cell numbers are multiple of #interrupt-cells.
         // We can't know how many interrupts would exist.
-        let interrupts_cells = node
-            .getprop_cells(c"interrupts")?
-            .ok_or(DeviceAssignmentError::InvalidInterrupts)?
-            .count();
+        let Some(cells) = node.getprop_cells(c"interrupts")? else {
+                return Ok(None);
+        };
+        let interrupts_cells = cells.count();
         if interrupts_cells % CELLS_PER_INTERRUPT != 0 {
             return Err(DeviceAssignmentError::InvalidInterrupts);
         }
 
         // Once validated, keep the raw bytes so patch can be done with setprop()
-        Ok(node.getprop(c"interrupts").unwrap().unwrap().into())
+        Ok(Some(node.getprop(c"interrupts").unwrap().unwrap().into()))
     }
 
     // TODO(b/277993056): Also validate /__local_fixups__ to ensure that <iommus> has phandle.
@@ -917,7 +917,9 @@ impl AssignedDeviceInfo {
     fn patch(&self, fdt: &mut Fdt, pviommu_phandles: &BTreeMap<PvIommu, Phandle>) -> Result<()> {
         let mut dst = fdt.node_mut(&self.node_path)?.unwrap();
         dst.setprop(c"reg", &to_be_bytes(&self.reg))?;
-        dst.setprop(c"interrupts", &self.interrupts)?;
+        if let Some(interrupts) = &self.interrupts {
+            dst.setprop(c"interrupts", interrupts)?;
+        }
 
         if let Some(iommus) = &self.iommus {
             let mut iommus_vec = Vec::with_capacity(8 * iommus.len());
