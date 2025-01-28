@@ -46,6 +46,30 @@
       },
       "revId": "8bc9df150414137c55cd99c2744ce983f12bde09",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3c81d62_c1b63fd8",
+        "filename": "guest/pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-01-28T18:33:51Z",
+      "side": 1,
+      "message": "\u003e How do we know it will be sha256? \n\nThis assumption is baked into this code, where `AvbDigest` contains a SHA-256 digest, not a SHA-512 (see its length). I\u0027ve used 256 here because that\u0027s what the kernel hash uses but using 512 would be equally simple to implement.\n\n\u003e Maybe we need to check any field in vbmeta footer?\n\nI don\u0027t believe so; note that we\u0027re computing the hash at this point (not at signing time) so this code has full control over which size it uses. If we _really_ wanted to, this code could even support both formats but I didn\u0027t want to implement this kind of flexibility without a user first.\n\n\u003e AVB tool seem to allow different hashing algorithm\n\nYes, in aosp/3467564, I\u0027m adding support for both SHA-256 and SHA-512.",
+      "parentUuid": "e52cd332_efdb5ff7",
+      "range": {
+        "startLine": 332,
+        "startChar": 4,
+        "endLine": 332,
+        "endChar": 70
+      },
+      "revId": "8bc9df150414137c55cd99c2744ce983f12bde09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
