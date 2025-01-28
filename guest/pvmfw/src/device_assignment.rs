@@ -797,10 +797,11 @@ impl AssignedDeviceInfo {
     fn parse_interrupts(node: &FdtNode) -> Result<Vec<u8>> {
         // Validation: Validate if interrupts cell numbers are multiple of #interrupt-cells.
         // We can't know how many interrupts would exist.
-        let interrupts_cells = node
-            .getprop_cells(c"interrupts")?
-            .ok_or(DeviceAssignmentError::InvalidInterrupts)?
-            .count();
+        let interrupts_cells = match node.getprop_cells(c"interrupts") {
+            Ok(Some(cells)) => cells.count(),
+            Ok(None) => return Ok(Vec::new()),
+            Err(_) => return Err(DeviceAssignmentError::InvalidInterrupts),
+        };
         if interrupts_cells % CELLS_PER_INTERRUPT != 0 {
             return Err(DeviceAssignmentError::InvalidInterrupts);
         }
@@ -917,7 +918,9 @@ impl AssignedDeviceInfo {
     fn patch(&self, fdt: &mut Fdt, pviommu_phandles: &BTreeMap<PvIommu, Phandle>) -> Result<()> {
         let mut dst = fdt.node_mut(&self.node_path)?.unwrap();
         dst.setprop(c"reg", &to_be_bytes(&self.reg))?;
-        dst.setprop(c"interrupts", &self.interrupts)?;
+        if !self.interrupts.is_empty() {
+            dst.setprop(c"interrupts", &self.interrupts)?;
+        }
         let mut iommus = Vec::with_capacity(8 * self.iommus.len());
         for (pviommu, vsid) in &self.iommus {
             let phandle = pviommu_phandles.get(pviommu).unwrap();
