@@ -218,6 +218,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d1b87be3_2b7934e5",
+        "filename": "guest/trusty/security_vm/vm/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2025-01-28T19:06:43Z",
+      "side": 1,
+      "message": "No, we don\u0027t expose the compiler to genrules.  There are [a few clang tools](https://cs.android.com/android/platform/superproject/main/+/main:prebuilts/clang/host/linux-x86/Android.bp;l\u003d544-554;drc\u003db6809d9059d816944345eb05cde0cf0e651e9cc3) that are exposed, but they are selected by the clang team in order to minimize disruption when updating the clang binaries.  Any additionalt tools would require their signoff.  If you could accomplish what you need with objcopy that seems like a tool they might allow.",
+      "parentUuid": "4d244c25_713c7315",
+      "revId": "18a28b4401f0304b0b97ec1715a327b8af8d1ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d57fa68_310fd7bb",
         "filename": "guest/trusty/security_vm/vm/Android.bp",
         "patchSetId": 8
