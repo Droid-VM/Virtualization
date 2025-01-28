@@ -28,6 +28,7 @@
 
 #include <cstdlib>
 #include <limits>
+#include <optional>
 #include <string>
 #include <string_view>
 
@@ -49,6 +50,8 @@ struct ApkManifestInfo {
     std::string package;
     uint32_t version_code;
     uint32_t version_code_major;
+    std::optional<uint32_t> rollback_index;
+    bool has_relaxed_rollback_protection_permission;
 };
 
 namespace {
@@ -58,6 +61,15 @@ constexpr u16string_view ANDROID_NAMESPACE_URL{u"http://schemas.android.com/apk/
 constexpr u16string_view PACKAGE_ATTRIBUTE_NAME{u"package"};
 constexpr u16string_view VERSION_CODE_ATTRIBUTE_NAME{u"versionCode"};
 constexpr u16string_view VERSION_CODE_MAJOR_ATTRIBUTE_NAME{u"versionCodeMajor"};
+constexpr u16string_view USES_PERMISSION_TAG_NAME{u"uses-permission"};
+// This name is awkward, but i don't have a better idea ¯\_(ツ)_/¯.
+constexpr u16string_view NAME_ATTRIBUTE_NAME{u"name"};
+constexpr u16string_view VALUE_ATTRIBUTE_NAME{u"value"};
+constexpr u16string_view PROPERTY_TAG_NAME{u"property"};
+constexpr u16string_view ROLLBACK_INDEX_PROPERTY_NAME{
+        u"android.system.virtualmachine.ROLLBACK_INDEX"};
+constexpr u16string_view USE_RELAXED_ROLLBACK_PROTECTION_PERMISSION_NAME{
+        u"android.permission.USE_RELAXED_MICRODROID_ROLLBACK_PROTECTION"};
 
 // Read through the XML parse tree up to the <manifest> element.
 Result<void> findManifestElement(ResXMLTree& tree) {
@@ -181,6 +193,125 @@ Result<unique_ptr<ApkManifestInfo>> parseManifest(const void* manifest, size_t s
         }
     }
 
+    info->has_relaxed_rollback_protection_permission = false;
+
+    // Now unfortunately we need to parse the rest of the manifest to check if it contains the
+    // `USE_RELAXED_MICRODROID_ROLLBACK_PROTECTION` permission and the
+    // `android.system.virtualmachine.ROLLBACK_INDEX` property.
+    for (;;) {
+        ResXMLParser::event_code_t event = tree.next();
+        switch (event) {
+            case ResXMLParser::END_DOCUMENT:
+                return info;
+            case ResXMLParser::BAD_DOCUMENT:
+                return Error() << "Failed to parse XML: " << statusToString(tree.getError());
+            case ResXMLParser::START_TAG: {
+                size_t len = 0;
+                const char16_t* chars = tree.getElementName(&len);
+                if (!chars) {
+                    return Error() << "Missing tag name";
+                }
+                auto tag_name = u16string_view(chars, len);
+                if (tag_name != USES_PERMISSION_TAG_NAME && tag_name != PROPERTY_TAG_NAME) {
+                    // We are only interested in <uses-permission> and <property> tags.
+                    break;
+                }
+
+                // Maintain a tiny state machine to parse the tag.
+                static constexpr const char kInUsesPermissionTag = 1;
+                static constexpr const char kInPropertyTag = 2;
+                static constexpr const char kUseRelaxedRollbackProtectionPermissionFound = 11;
+                static constexpr const char kRollbackIndexPropetyNameFound = 21;
+                static constexpr const char kRollbackIndexPropertyValueFound = 22;
+                char state = tag_name == USES_PERMISSION_TAG_NAME ? kInUsesPermissionTag
+                                                                  : kInPropertyTag;
+
+                size_t count = tree.getAttributeCount();
+
+                for (size_t i = 0; i < count; i++) {
+                    chars = tree.getAttributeNamespace(i, &len);
+                    auto namespaceUrl = chars ? u16string_view(chars, len) : u16string_view();
+
+                    chars = tree.getAttributeName(i, &len);
+                    auto attributeName = chars ? u16string_view(chars, len) : u16string_view();
+
+                    if (namespaceUrl != ANDROID_NAMESPACE_URL) {
+                        continue;
+                    }
+
+                    if (attributeName == NAME_ATTRIBUTE_NAME) {
+                        chars = tree.getAttributeStringValue(i, &len);
+                        if (!chars) {
+                            LOG(WARNING) << "expected name attribute to be non-empty";
+                            continue;
+                        }
+
+                        // What a name!
+                        auto nameName = u16string_view(chars, len);
+                        if (state == kInUsesPermissionTag) {
+                            if (nameName == USE_RELAXED_ROLLBACK_PROTECTION_PERMISSION_NAME) {
+                                state = kUseRelaxedRollbackProtectionPermissionFound;
+                            }
+                        } else if (state == kInPropertyTag) {
+                            if (nameName == ROLLBACK_INDEX_PROPERTY_NAME) {
+                                state = kRollbackIndexPropetyNameFound;
+                            }
+                        }
+                    } else if (attributeName == VALUE_ATTRIBUTE_NAME) {
+                        if (state == kRollbackIndexPropetyNameFound) {
+                            auto value = getU32Attribute(tree, i);
+                            if (!value.ok()) {
+                                return Error() << "Failed to parse value of the rollback index : "
+                                               << value.error();
+                            }
+                            state = kRollbackIndexPropertyValueFound;
+                            info->rollback_index.emplace(std::move(*value));
+                        }
+                    }
+                }
+
+                if (state == kUseRelaxedRollbackProtectionPermissionFound) {
+                    info->has_relaxed_rollback_protection_permission = true;
+                } else if (state == kRollbackIndexPropetyNameFound) {
+                    // We parsed value before parsing the name, do one more pass to parse the value
+                    // again.
+
+                    for (size_t i = 0; i < count; i++) {
+                        chars = tree.getAttributeNamespace(i, &len);
+                        auto namespaceUrl = chars ? u16string_view(chars, len) : u16string_view();
+
+                        chars = tree.getAttributeName(i, &len);
+                        auto attributeName = chars ? u16string_view(chars, len) : u16string_view();
+
+                        if (namespaceUrl != ANDROID_NAMESPACE_URL) {
+                            continue;
+                        }
+
+                        if (attributeName == VALUE_ATTRIBUTE_NAME) {
+                            auto value = getU32Attribute(tree, i);
+                            if (!value.ok()) {
+                                return Error() << "Failed to parse value of the rollback index : "
+                                               << value.error();
+                            }
+                            state = kRollbackIndexPropertyValueFound;
+                            info->rollback_index.emplace(std::move(*value));
+                        }
+                    }
+                }
+
+                break;
+            }
+            case ResXMLParser::START_NAMESPACE:
+            case ResXMLParser::END_NAMESPACE:
+            case ResXMLParser::END_TAG:
+                break;
+            default: {
+                LOG(ERROR) << "found unexpected event : " << event;
+                continue;
+            }
+        }
+    }
+
     return info;
 }
 } // namespace
@@ -204,4 +335,12 @@ const char* getPackageName(const ApkManifestInfo* info) {
 
 uint64_t getVersionCode(const ApkManifestInfo* info) {
     return info->version_code | (static_cast<uint64_t>(info->version_code_major) << 32);
+}
+
+const uint32_t* getRollbackIndex(const ApkManifestInfo* info) {
+    return info->rollback_index.has_value() ? &info->rollback_index.value() : nullptr;
+}
+
+bool hasRelaxedRollbackProtectionPermission(const ApkManifestInfo* info) {
+    return info->has_relaxed_rollback_protection_permission;
 }
