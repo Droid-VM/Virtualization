@@ -20,6 +20,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d1b97f6d_3eebb69c",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/gunyah.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2007700
+      },
+      "writtenOn": "2025-01-29T22:36:24Z",
+      "side": 1,
+      "message": "If we start supporting non 1:1 mappings for devices on gunyah we would need to fall back to this, right? Should we check internally to confirm how to handle this?",
+      "revId": "170a0aee2b083d48470ac92444892d49db868f4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "394d246d_9b4f3fb7",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/gunyah.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2007700
+      },
+      "writtenOn": "2025-01-29T22:36:24Z",
+      "side": 1,
+      "message": "Did we check with the hyp team about this?",
+      "revId": "170a0aee2b083d48470ac92444892d49db868f4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "85a046a9_30face88",
         "filename": "libs/libvmbase/src/memory/tracker.rs",
         "patchSetId": 1
@@ -31,6 +65,24 @@
       "writtenOn": "2025-01-29T15:39:20Z",
       "side": 1,
       "message": "Changed the order, because, now granule will be returned for gunyah.",
+      "revId": "170a0aee2b083d48470ac92444892d49db868f4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "082e4d1a_c10652b1",
+        "filename": "libs/libvmbase/src/memory/tracker.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 2007700
+      },
+      "writtenOn": "2025-01-29T22:36:24Z",
+      "side": 1,
+      "message": "Not sure I follow. Why do we change the order if granule is returned by Gunyah?",
+      "parentUuid": "85a046a9_30face88",
       "revId": "170a0aee2b083d48470ac92444892d49db868f4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
