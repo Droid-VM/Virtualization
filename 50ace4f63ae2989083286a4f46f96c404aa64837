@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b070e3ab_ae73212c",
+        "filename": "libs/libvmbase/src/arch/aarch64/platform.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 2026646
+      },
+      "writtenOn": "2025-01-29T15:16:42Z",
+      "side": 1,
+      "message": "This is logical error, always create new uart.\nWhatewer will be in UART initialization code just re-do it by creating new intstance.",
+      "range": {
+        "startLine": 122,
+        "startChar": 4,
+        "endLine": 125,
+        "endChar": 5
+      },
+      "revId": "50ace4f63ae2989083286a4f46f96c404aa64837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
