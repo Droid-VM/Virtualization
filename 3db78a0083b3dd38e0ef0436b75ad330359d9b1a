@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a35f5fce_cd3ed16c",
+        "filename": "libs/libvmbase/src/arch/aarch64/layout.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-01-29T13:18:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "017b3949_aec9336d",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 22
+      },
+      "revId": "3db78a0083b3dd38e0ef0436b75ad330359d9b1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a8826a4_a9a17792",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-01-27T13:22:23Z",
       "side": 1,
       "message": "Why not re-export `arch::aarch64::layout` as `arch::layout` (as you do for `arch::platform`) so that these import statements aren\u0027t arch-specific?",
+      "range": {
+        "startLine": 19,
+        "startChar": 4,
+        "endLine": 19,
+        "endChar": 26
+      },
+      "revId": "3db78a0083b3dd38e0ef0436b75ad330359d9b1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "600eb905_26a1f251",
+        "filename": "libs/libvmbase/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-01-29T13:18:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a8826a4_a9a17792",
       "range": {
         "startLine": 19,
         "startChar": 4,
