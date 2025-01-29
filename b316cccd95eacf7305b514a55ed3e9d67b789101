@@ -22,6 +22,30 @@
       },
       "revId": "b316cccd95eacf7305b514a55ed3e9d67b789101",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d8b0dcc_557ae722",
+        "filename": "libs/libvmbase/src/arch/aarch64/exceptions.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-01-29T13:25:54Z",
+      "side": 1,
+      "message": "Sorry, there is a lot of them to suppress the errors later and some slipped through my clean up.\n\nI want to switch the WIP port to using `#![cfg_attr(target_arch \u003d \"x86_64\", allow(dead_code, unused_imports))]` instead of loads and loads of `allow` or `cfg(target_arch)` in the coming changes. It would be temporary but it will help the automerger avoid conflits and those unrelated changes.\n\nAgain I apologize if I miss some.",
+      "parentUuid": "0a68ef91_7358840e",
+      "range": {
+        "startLine": 82,
+        "startChar": 4,
+        "endLine": 82,
+        "endChar": 23
+      },
+      "revId": "b316cccd95eacf7305b514a55ed3e9d67b789101",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
