@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b81cb825_c602d66a",
+        "filename": "libs/libvmbase/src/arch/aarch64/platform.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-01-29T15:44:08Z",
+      "side": 1,
+      "message": "Thank you for bringing this up. I discuessed it with @mazurekm@google.com offline and the intention behind was to allow storing the `Uart` instance in the static context, however considered that the emergency instance is meant to created for each single use, it did not make too much sense.",
+      "parentUuid": "31e846da_a1ccd1a9",
+      "revId": "b2d0cdea95f742b43ee01472c4c57d3e9fa90b90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90575579_20445022",
@@ -31,6 +49,30 @@
       "writtenOn": "2025-01-29T14:26:55Z",
       "side": 1,
       "message": "Typo: \u0027Reboot\u0027",
+      "range": {
+        "startLine": 102,
+        "startChar": 11,
+        "endLine": 102,
+        "endChar": 16
+      },
+      "revId": "b2d0cdea95f742b43ee01472c4c57d3e9fa90b90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f96211b9_1bef9482",
+        "filename": "libs/libvmbase/src/arch/aarch64/platform.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-01-29T15:44:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90575579_20445022",
       "range": {
         "startLine": 102,
         "startChar": 11,
@@ -58,6 +100,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e065cf24_ee5dbe64",
+        "filename": "libs/libvmbase/src/arch/aarch64/platform.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-01-29T15:44:08Z",
+      "side": 1,
+      "message": "Now, no longer applies.",
+      "parentUuid": "f3c90e19_6c519b2f",
+      "revId": "b2d0cdea95f742b43ee01472c4c57d3e9fa90b90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6bd8414d_4aa36b0d",
@@ -81,6 +141,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84517119_f1510074",
+        "filename": "libs/libvmbase/src/arch/aarch64/platform.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-01-29T15:44:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6bd8414d_4aa36b0d",
+      "range": {
+        "startLine": 124,
+        "startChar": 38,
+        "endLine": 124,
+        "endChar": 44
+      },
+      "revId": "b2d0cdea95f742b43ee01472c4c57d3e9fa90b90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73cca445_ea37f6e7",
@@ -94,6 +178,30 @@
       "writtenOn": "2025-01-29T14:26:55Z",
       "side": 1,
       "message": "Typo: transmute",
+      "range": {
+        "startLine": 126,
+        "startChar": 60,
+        "endLine": 126,
+        "endChar": 68
+      },
+      "revId": "b2d0cdea95f742b43ee01472c4c57d3e9fa90b90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa3bff0a_f1303a3e",
+        "filename": "libs/libvmbase/src/arch/aarch64/platform.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-01-29T15:44:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73cca445_ea37f6e7",
       "range": {
         "startLine": 126,
         "startChar": 60,

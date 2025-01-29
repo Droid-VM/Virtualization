@@ -22,6 +22,30 @@
       },
       "revId": "50ace4f63ae2989083286a4f46f96c404aa64837",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0cdd81c_0ff45242",
+        "filename": "libs/libvmbase/src/arch/aarch64/platform.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2025-01-29T15:44:08Z",
+      "side": 1,
+      "message": "Per offline discussion, having any argument here is pointless if it is reinitialized fully and could be turned into a return by value.",
+      "parentUuid": "b070e3ab_ae73212c",
+      "range": {
+        "startLine": 122,
+        "startChar": 4,
+        "endLine": 125,
+        "endChar": 5
+      },
+      "revId": "50ace4f63ae2989083286a4f46f96c404aa64837",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
