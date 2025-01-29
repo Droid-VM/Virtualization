@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28642d75_263d9adc",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1115,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-01-29T08:19:08Z",
+      "side": 1,
+      "message": "What file? 😊 Doesn\u0027t this test make a fresh encrypted store on every round?",
+      "revId": "38739faa4c52806cbe3a481a0191dd39f1e3b9ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a4af5fd_a7d554fc",
+        "filename": "tests/benchmark/src/native/benchmarkbinary.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-01-29T08:19:08Z",
+      "side": 1,
+      "message": "Yes. Either perform read and writes *both* in a fresh VM, or write \"1\" to /proc/sys/vm/drop_caches here, to drop clean pages in the buffer cache (file pages will all be clean if you add the sync() suggested below).",
+      "revId": "38739faa4c52806cbe3a481a0191dd39f1e3b9ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85c38cb1_4b244cff",
+        "filename": "tests/benchmark/src/native/benchmarkbinary.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-01-29T08:19:08Z",
+      "side": 1,
+      "message": "Call sync() to write back dirty blocks before taking end timestamp.",
+      "revId": "38739faa4c52806cbe3a481a0191dd39f1e3b9ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
