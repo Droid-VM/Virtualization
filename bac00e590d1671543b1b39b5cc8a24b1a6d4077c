@@ -16,6 +16,24 @@
       "message": "Why is this moved under `aarch64`, given that none of it is (CPU) architecture-specific? Funnily, this implements a driver for a (virtual) 8250 UART, which `crosvm` carried over from x86 to ARM during their first port.",
       "revId": "bac00e590d1671543b1b39b5cc8a24b1a6d4077c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c608394_bad78386",
+        "filename": "libs/libvmbase/src/arch/aarch64/uart.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026646
+      },
+      "writtenOn": "2025-01-29T12:28:41Z",
+      "side": 1,
+      "message": "Not exactly - \"given that none of it is (CPU) architecture-specific\" - accesing it is archetecture specific, not event teling about interrupt handling.\nIn this particular case it is discusion about x86 IO/PORTS vs arm MMIO.\n\nCurent code have many asumptions about how UART and other divices working. Especialy in case of mapping/unmaping its memory and interrupt handling.\n\nIMHO: Static IO ports numbers should be mapped as rust enum.",
+      "parentUuid": "ab2a3f54_c26f2275",
+      "revId": "bac00e590d1671543b1b39b5cc8a24b1a6d4077c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
