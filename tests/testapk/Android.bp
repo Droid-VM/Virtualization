@@ -126,6 +126,7 @@ android_test {
     name: "MicrodroidTestApp.GTS",
     defaults: ["MicrodroidVersionsTestAppDefaults"],
     manifest: "AndroidManifestV5.xml",
+<<<<<<< HEAD   (0cb7a7 [automerger skipped] Split MicrodroidHostTestCases for CTS a)
     test_config_template: "AndroidTestTemplate.xml",
     test_suites: ["gts"],
     auto_gen_config: true,
@@ -142,6 +143,61 @@ android_test {
         ],
     },
     data: DATA,
+||||||| BASE
+    cmd: "sed " +
+        "-e 's/<!-- PLACEHOLDER_FOR_ANNOTATION -->/" +
+        "<option name=\"include-annotation\" value=\"com.android.compatibility.common.util.CddTest\" \\/>/' " +
+        "-e 's/MicrodroidTestApp.apk/MicrodroidTestApp.CTS.apk/' " +
+        "$(in) > $(out)",
+}
+
+genrule {
+    name: "MicrodroidTestApp.VTS.config",
+    srcs: ["AndroidTest.xml"],
+    out: ["out.xml"],
+    cmd: "sed " +
+        "-e 's/<!-- PLACEHOLDER_FOR_ANNOTATION -->/" +
+        "<option name=\"include-annotation\" value=\"com.android.compatibility.common.util.VsrTest\" \\/>/' " +
+        "-e 's/MicrodroidTestApp.apk/MicrodroidTestApp.VTS.apk/' " +
+        "$(in) > $(out)",
+=======
+    test_suites: ["gts"],
+    test_config: ":MicrodroidTestApp.GTS.config",
+    data: DATA,
+}
+
+genrule {
+    name: "MicrodroidTestApp.CTS.config",
+    srcs: ["AndroidTest.xml"],
+    out: ["out.xml"],
+    cmd: "sed " +
+        "-e 's/<!-- PLACEHOLDER_FOR_ANNOTATION -->/" +
+        "<option name=\"include-annotation\" value=\"com.android.compatibility.common.util.CddTest\" \\/>/' " +
+        "-e 's/MicrodroidTestApp.apk/MicrodroidTestApp.CTS.apk/' " +
+        "$(in) > $(out)",
+}
+
+genrule {
+    name: "MicrodroidTestApp.VTS.config",
+    srcs: ["AndroidTest.xml"],
+    out: ["out.xml"],
+    cmd: "sed " +
+        "-e 's/<!-- PLACEHOLDER_FOR_ANNOTATION -->/" +
+        "<option name=\"include-annotation\" value=\"com.android.compatibility.common.util.VsrTest\" \\/>/' " +
+        "-e 's/MicrodroidTestApp.apk/MicrodroidTestApp.VTS.apk/' " +
+        "$(in) > $(out)",
+>>>>>>> BRANCH (a827e8 Add *.GTS variants of our tests)
+}
+
+genrule {
+    name: "MicrodroidTestApp.GTS.config",
+    srcs: ["AndroidTest.xml"],
+    out: ["out.xml"],
+    cmd: "sed " +
+        "-e 's/<!-- PLACEHOLDER_FOR_ANNOTATION -->/" +
+        "<option name=\"include-annotation\" value=\"com.android.compatibility.common.util.GmsTest\" \\/>/' " +
+        "-e 's/MicrodroidTestApp.apk/MicrodroidTestApp.GTS.apk/' " +
+        "$(in) > $(out)",
 }
 
 android_test_helper_app {

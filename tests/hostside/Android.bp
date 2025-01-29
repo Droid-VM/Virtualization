@@ -115,6 +115,7 @@ java_test_host {
 java_test_host {
     name: "MicrodroidHostTestCases.GTS",
     defaults: ["MicrodroidHostTestCases.default"],
+<<<<<<< HEAD   (0cb7a7 [automerger skipped] Split MicrodroidHostTestCases for CTS a)
     test_config_template: "AndroidTestTemplate.xml",
     test_suites: ["gts"],
     auto_gen_config: true,
@@ -132,4 +133,61 @@ java_test_host {
     },
     device_common_data: DEVICE_DATA,
     data_native_bins: BINS,
+||||||| BASE
+    out: ["out.xml"],
+    cmd: "sed " +
+        "-e 's/<!-- PLACEHOLDER_FOR_ANNOTATION -->/" +
+        "<option name=\"include-annotation\" value=\"com.android.compatibility.common.util.CddTest\" \\/>/' " +
+        "-e 's/MicrodroidHostTestCases.jar/MicrodroidHostTestCases.CTS.jar/' " +
+        "$(in) > $(out)",
+}
+
+genrule {
+    name: "MicrodroidHostTestCases.VTS.config",
+    srcs: ["AndroidTest.xml"],
+    out: ["out.xml"],
+    cmd: "sed " +
+        "-e 's/<!-- PLACEHOLDER_FOR_ANNOTATION -->/" +
+        "<option name=\"include-annotation\" value=\"com.android.compatibility.common.util.VsrTest\" \\/>/' " +
+        "-e 's/MicrodroidHostTestCases.jar/MicrodroidHostTestCases.VTS.jar/' " +
+        "$(in) > $(out)",
+=======
+    test_config: ":MicrodroidHostTestCases.GTS.config",
+    test_suites: ["gts"],
+    data: DEVICE_DATA,
+    data_native_bins: BINS,
+}
+
+genrule {
+    name: "MicrodroidHostTestCases.CTS.config",
+    srcs: ["AndroidTest.xml"],
+    out: ["out.xml"],
+    cmd: "sed " +
+        "-e 's/<!-- PLACEHOLDER_FOR_ANNOTATION -->/" +
+        "<option name=\"include-annotation\" value=\"com.android.compatibility.common.util.CddTest\" \\/>/' " +
+        "-e 's/MicrodroidHostTestCases.jar/MicrodroidHostTestCases.CTS.jar/' " +
+        "$(in) > $(out)",
+}
+
+genrule {
+    name: "MicrodroidHostTestCases.VTS.config",
+    srcs: ["AndroidTest.xml"],
+    out: ["out.xml"],
+    cmd: "sed " +
+        "-e 's/<!-- PLACEHOLDER_FOR_ANNOTATION -->/" +
+        "<option name=\"include-annotation\" value=\"com.android.compatibility.common.util.VsrTest\" \\/>/' " +
+        "-e 's/MicrodroidHostTestCases.jar/MicrodroidHostTestCases.VTS.jar/' " +
+        "$(in) > $(out)",
+>>>>>>> BRANCH (a827e8 Add *.GTS variants of our tests)
+}
+
+genrule {
+    name: "MicrodroidHostTestCases.GTS.config",
+    srcs: ["AndroidTest.xml"],
+    out: ["out.xml"],
+    cmd: "sed " +
+        "-e 's/<!-- PLACEHOLDER_FOR_ANNOTATION -->/" +
+        "<option name=\"include-annotation\" value=\"com.android.compatibility.common.util.GmsTest\" \\/>/' " +
+        "-e 's/MicrodroidHostTestCases.jar/MicrodroidHostTestCases.GTS.jar/' " +
+        "$(in) > $(out)",
 }
