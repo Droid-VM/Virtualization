@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fdbfc5ac_dbcaca76",
+        "filename": "guest/pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-01-29T09:39:39Z",
+      "side": 1,
+      "message": "Why use the vbmeta digest instead of the kernel digest directly?\n\nI understood that the fixed-digest RBP involved hard-coding the kernel digest in pvmfw and then comparing it with the `kernel_digest` in this struct.\n\nThe problem with hard-coding the `vbmeta_digest` is that it significantly complicates the resigning process compared to using the kernel digest directly, as VbMeta includes the [public key](https://cs.android.com/android/platform/superproject/main/+/main:external/avb/libavb/avb_vbmeta_image.h;l\u003d84;drc\u003d8fae81cc40d98877629b28a16fcc72b736423bdb) used to sign its authentication data.\n\nFor the AL Trusty VM to pass the generic verified boot step in pvmfw, it needs to be signed with the test key during development and the release key for production. Embedding the `vbmeta_digest` means that at release, we would need to first resign the AL Trusty kernel, then modify the embedded `vbmeta_digest` in pvmfw, and finally re-sign pvmfw. Does the AL team want to go through all this process?",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 45,
+        "endChar": 21
+      },
+      "revId": "8bc9df150414137c55cd99c2744ce983f12bde09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c8bcbd40_69a7d767",
         "filename": "guest/pvmfw/avb/src/verify.rs",
         "patchSetId": 1
