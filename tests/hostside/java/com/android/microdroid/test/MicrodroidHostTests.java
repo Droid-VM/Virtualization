@@ -37,7 +37,11 @@ import android.cts.statsdatom.lib.ReportUtils;
 
 import com.android.compatibility.common.util.CddTest;
 import com.android.compatibility.common.util.GmsTest;
+<<<<<<< HEAD   (2fd66e [automerger skipped] Add *.GTS variants of our tests am: a82)
 import com.android.compatibility.common.util.PropertyUtil;
+||||||| BASE
+=======
+>>>>>>> BRANCH (a0f45b Annotate tests accordingly)
 import com.android.compatibility.common.util.VsrTest;
 import com.android.microdroid.test.common.ProcessUtil;
 import com.android.microdroid.test.host.CommandRunner;
@@ -486,8 +490,12 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+<<<<<<< HEAD   (2fd66e [automerger skipped] Add *.GTS variants of our tests am: a82)
     @Parameters(method = "osVersions")
     @TestCaseName("{method}_os_{0}")
+||||||| BASE
+=======
+>>>>>>> BRANCH (a0f45b Annotate tests accordingly)
     @GmsTest(requirements = {"GMS-3-7.1-010"})
     public void protectedVmRunsPvmfw(String os) throws Exception {
         // Arrange
@@ -519,6 +527,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+<<<<<<< HEAD   (2fd66e [automerger skipped] Add *.GTS variants of our tests am: a82)
     @Parameters(method = "osVersions")
     @TestCaseName("{method}_os_{0}")
     @GmsTest(requirements = {"GMS-3-7.1-003", "GMS-3-7.1-010"})
@@ -526,6 +535,17 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
             throws Exception {
         assumeKernelSupported(os);
         assumeVmTypeSupported(os, true);
+||||||| BASE
+    @CddTest(requirements = {"9.17/C-2-1", "9.17/C-2-2", "9.17/C-2-6"})
+    public void protectedVmWithImageSignedWithDifferentKeyFailsToVerifyPayload() throws Exception {
+        // Arrange
+        assumeProtectedVm();
+=======
+    @GmsTest(requirements = {"GMS-3-7.1-003", "GMS-3-7.1-010"})
+    public void protectedVmWithImageSignedWithDifferentKeyFailsToVerifyPayload() throws Exception {
+        // Arrange
+        assumeProtectedVm();
+>>>>>>> BRANCH (a0f45b Annotate tests accordingly)
         File key = findTestFile("test.com.android.virt.pem");
 
         // Act
@@ -548,10 +568,18 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+<<<<<<< HEAD   (2fd66e [automerger skipped] Add *.GTS variants of our tests am: a82)
     @Parameters(method = "osVersions")
     @TestCaseName("{method}_os_{0}")
     @GmsTest(requirements = {"GMS-3-7.1-003", "GMS-3-7.1-010"})
     public void testBootSucceedsWhenNonProtectedVmStartsWithImagesSignedWithDifferentKey(String os)
+||||||| BASE
+    @CddTest(requirements = {"9.17/C-2-2", "9.17/C-2-6"})
+    public void testBootSucceedsWhenNonProtectedVmStartsWithImagesSignedWithDifferentKey()
+=======
+    @GmsTest(requirements = {"GMS-3-7.1-003", "GMS-3-7.1-010"})
+    public void testBootSucceedsWhenNonProtectedVmStartsWithImagesSignedWithDifferentKey()
+>>>>>>> BRANCH (a0f45b Annotate tests accordingly)
             throws Exception {
         // Preconditions
         assumeKernelSupported(os);
@@ -576,10 +604,18 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+<<<<<<< HEAD   (2fd66e [automerger skipped] Add *.GTS variants of our tests am: a82)
     @Parameters(method = "osVersions")
     @TestCaseName("{method}_os_{0}")
     @GmsTest(requirements = {"GMS-3-7.1-006"})
     public void testBootFailsWhenVbMetaDigestDoesNotMatchBootconfig(String os) throws Exception {
+||||||| BASE
+    @CddTest(requirements = {"9.17/C-2-2", "9.17/C-2-6"})
+    public void testBootFailsWhenVbMetaDigestDoesNotMatchBootconfig() throws Exception {
+=======
+    @GmsTest(requirements = {"GMS-3-7.1-006"})
+    public void testBootFailsWhenVbMetaDigestDoesNotMatchBootconfig() throws Exception {
+>>>>>>> BRANCH (a0f45b Annotate tests accordingly)
         // protectedVmWithImageSignedWithDifferentKeyRunsPvmfw() is the protected case.
         assumeKernelSupported(os);
 
@@ -1014,6 +1050,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+<<<<<<< HEAD   (2fd66e [automerger skipped] Add *.GTS variants of our tests am: a82)
     @Parameters(method = "params")
     @TestCaseName("{method}_protectedVm_{0}_os_{1}")
     @CddTest
@@ -1023,6 +1060,14 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         assumeKernelSupported(os);
         assumeVmTypeSupported(os, protectedVm);
 
+||||||| BASE
+    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-1-2", "9.17/C/1-3"})
+    public void testMicrodroidBoots() throws Exception {
+=======
+    @CddTest
+    @GmsTest(requirements = {"GMS-3-7.1-001.002"})
+    public void testMicrodroidBoots() throws Exception {
+>>>>>>> BRANCH (a0f45b Annotate tests accordingly)
         final String configPath = "assets/vm_config.json"; // path inside the APK
         testMicrodroidBootsWithBuilder(
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
@@ -1153,6 +1198,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+<<<<<<< HEAD   (2fd66e [automerger skipped] Add *.GTS variants of our tests am: a82)
     @CddTest
     public void testRunEmptyPayload() throws Exception {
         CommandRunner android = new CommandRunner(getDevice());
@@ -1207,6 +1253,10 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+||||||| BASE
+    @CddTest(requirements = {"9.17/C-2-2", "9.17/C-2-6"})
+=======
+>>>>>>> BRANCH (a0f45b Annotate tests accordingly)
     public void testAllVbmetaUseSHA256() throws Exception {
         File virtApexDir = FileUtil.createTempDir("virt_apex");
         // Pull the virt apex's etc/ directory (which contains images)
@@ -1315,6 +1365,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+<<<<<<< HEAD   (2fd66e [automerger skipped] Add *.GTS variants of our tests am: a82)
     @Parameters(method = "params")
     @TestCaseName("{method}_protectedVm_{0}_os_{1}")
     @CddTest
@@ -1322,6 +1373,14 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         // Preconditions
         assumeKernelSupported(os);
         assumeVmTypeSupported(os, protectedVm);
+||||||| BASE
+    public void testDeviceAssignment() throws Exception {
+        // Check for preconditions
+=======
+    @CddTest
+    public void testDeviceAssignment() throws Exception {
+        // Check for preconditions
+>>>>>>> BRANCH (a0f45b Annotate tests accordingly)
         assumeVfioPlatformSupported();
 
         List<AssignableDevice> devices = getAssignableDevices();
@@ -1375,9 +1434,21 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @Test
     @CddTest
     @GmsTest(requirements = {"GMS-3-7.1-001.002"})
+<<<<<<< HEAD   (2fd66e [automerger skipped] Add *.GTS variants of our tests am: a82)
     public void testOsVersions() throws Exception {
         for (String os : getSupportedOSList()) {
             assertWithMessage("Unknown OS \"%s\"", os).that(SUPPORTED_OSES.values()).contains(os);
+||||||| BASE
+            assertTrue(
+                    "Unknown gki \"" + gki + "\". Supported gkis: " + SUPPORTED_GKI_VERSIONS,
+                    SUPPORTED_GKI_VERSIONS.contains(gki));
+=======
+    public void testGkiVersions() throws Exception {
+        for (String gki : getSupportedGKIVersions()) {
+            assertTrue(
+                    "Unknown gki \"" + gki + "\". Supported gkis: " + SUPPORTED_GKI_VERSIONS,
+                    SUPPORTED_GKI_VERSIONS.contains(gki));
+>>>>>>> BRANCH (a0f45b Annotate tests accordingly)
         }
     }
 

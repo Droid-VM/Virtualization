@@ -222,6 +222,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
+<<<<<<< HEAD   (2fd66e [automerger skipped] Add *.GTS variants of our tests am: a82)
     @RequiresFlagsEnabled(Flags.FLAG_PROMOTE_SET_SHOULD_USE_HUGEPAGES_TO_SYSTEM_API)
     public void createAndConnectToVm_WithHugepages() throws Exception {
         // Note: setting shouldUseHugepages to true only hints that VM wants to use transparent huge
@@ -242,6 +243,9 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
+||||||| BASE
+=======
+>>>>>>> BRANCH (a0f45b Annotate tests accordingly)
     @CddTest
     @VsrTest(requirements = {"VSR-7.1-001.006"})
     @GmsTest(requirements = {"GMS-VSR-7.1-001.005"})
@@ -2029,7 +2033,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
-    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
+    @CddTest
     public void canReadFileFromAssets_debugFull() throws Exception {
         assumeSupportedDevice();
 
@@ -2519,7 +2523,50 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
+<<<<<<< HEAD   (2fd66e [automerger skipped] Add *.GTS variants of our tests am: a82)
     @CddTest
+||||||| BASE
+    @VsrTest(requirements = {"VSR-7.1-001.003"})
+    public void kernelVersionRequirement() throws Exception {
+        assumeVsrCompliant();
+        int firstApiLevel = SystemProperties.getInt("ro.product.first_api_level", 0);
+        assume().withMessage("Skip on devices launched before Android 14 (API level 34)")
+                .that(firstApiLevel)
+                .isAtLeast(34);
+
+        String[] tokens = KERNEL_VERSION.split("\\.");
+        int major = Integer.parseInt(tokens[0]);
+        int minor = Integer.parseInt(tokens[1]);
+
+        // Check kernel version >= 5.15
+        assertTrue(major >= 5);
+        if (major == 5) {
+            assertTrue(minor >= 15);
+        }
+    }
+
+    @Test
+=======
+    public void kernelVersionRequirement() throws Exception {
+        assumeVsrCompliant();
+        int firstApiLevel = SystemProperties.getInt("ro.product.first_api_level", 0);
+        assume().withMessage("Skip on devices launched before Android 14 (API level 34)")
+                .that(firstApiLevel)
+                .isAtLeast(34);
+
+        String[] tokens = KERNEL_VERSION.split("\\.");
+        int major = Integer.parseInt(tokens[0]);
+        int minor = Integer.parseInt(tokens[1]);
+
+        // Check kernel version >= 5.15
+        assertTrue(major >= 5);
+        if (major == 5) {
+            assertTrue(minor >= 15);
+        }
+    }
+
+    @Test
+>>>>>>> BRANCH (a0f45b Annotate tests accordingly)
     public void createAndRunRustVm() throws Exception {
         // This test is here mostly to exercise the Rust wrapper around the VM Payload API.
         // We're testing the same functionality as in other tests, the only difference is
