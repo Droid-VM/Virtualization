@@ -34,6 +34,24 @@
       "parentUuid": "df61f13f_61842175",
       "revId": "8b5274a9bde70a1ceb5fd41a7195af48107dd6d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc4170c5_255d0056",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-01-29T08:33:28Z",
+      "side": 1,
+      "message": "Thank you! It works. I think that the work in b/391620545 is independent of this work. This work and aosp/3455600 are mostly about the DICE chain changes contracted between the VM DICE chain and the RKP server (detailed in http://b/373573831#comment24); while b/391620545 focuses on the VM identification within pvmfw. These are not essetially related. For example, I don\u0027t expect the VM identification work impact the VM DICE chain\u0027s structure. \n\nOn the other hand, it would be beneficial to connect these two tasks, like by identifying specifial VMs using the same component name passed to the DICE chain. This would also improve code consistency.",
+      "parentUuid": "abf62ea3_3990bf4a",
+      "revId": "8b5274a9bde70a1ceb5fd41a7195af48107dd6d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
