@@ -38,9 +38,13 @@
         <option name="test-timeout" value="300000" />
     </test>
 
+<<<<<<< HEAD   (5b4a44 [automerger skipped] Annotate tests accordingly am: a0f45bfa)
     <!-- Controller that will skip the module if a native bridge situation is detected -->
     <!-- For example: module wants to run arm and device is x86 -->
     <object type="module_controller" class="com.android.tradefed.testtype.suite.module.NativeBridgeModuleController" />
 
+||||||| BASE
+=======
+>>>>>>> BRANCH (c1e7f7 Auto-generate test config from template)
     {EXTRA_CONFIGS}
 </configuration>
