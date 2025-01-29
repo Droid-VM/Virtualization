@@ -34,6 +34,24 @@
       "parentUuid": "ab2a3f54_c26f2275",
       "revId": "bac00e590d1671543b1b39b5cc8a24b1a6d4077c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9f388c6_606630a0",
+        "filename": "libs/libvmbase/src/arch/aarch64/uart.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572669
+      },
+      "writtenOn": "2025-01-29T18:57:38Z",
+      "side": 1,
+      "message": "I think it would make sense to keep the generic UART driver parts in the non-arch-specific code, but implement it in terms of some abstraction (trait or whatever) for the actual hardware access (`fn read(offset) -\u003e u8` and `fn write(offset, data)` that would do MMIO read/write on aarch64, port IN/OUT instructions on x86).\n\n(There is not really much going on in this file right now, since the driver is \"cheating\" and assuming some behavior from the virtualized UART device that it really shouldn\u0027t, like being able to send data without checking for an empty buffer first, but ideally we should fix this and make it behave correctly in the long run to ensure it won\u0027t break if we improve the crosvm serial port emulation, and we would want to share that common logic across architectures.)",
+      "parentUuid": "3c608394_bad78386",
+      "revId": "bac00e590d1671543b1b39b5cc8a24b1a6d4077c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
