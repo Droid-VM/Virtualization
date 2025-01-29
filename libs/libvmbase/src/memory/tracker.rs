@@ -88,11 +88,11 @@ pub fn resize_available_memory(memory_range: &Range<usize>) -> Result<()> {
 pub fn init_shared_pool(static_range: Option<Range<usize>>) -> Result<()> {
     let mut locked_tracker = try_lock_memory_tracker()?;
     let tracker = locked_tracker.as_mut().ok_or(MemoryTrackerError::Unavailable)?;
-    if let Some(mem_sharer) = get_mem_sharer() {
+    if let Some(r) = static_range {
+        tracker.init_static_shared_pool(r)
+    } else if let Some(mem_sharer) = get_mem_sharer() {
         let granule = mem_sharer.granule()?;
         tracker.init_dynamic_shared_pool(granule)
-    } else if let Some(r) = static_range {
-        tracker.init_static_shared_pool(r)
     } else {
         info!("Initialized shared pool from heap memory without MEM_SHARE");
         tracker.init_heap_shared_pool()
