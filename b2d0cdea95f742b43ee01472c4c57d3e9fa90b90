@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31e846da_a1ccd1a9",
+        "filename": "libs/libvmbase/src/arch/aarch64/platform.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-29T14:26:55Z",
+      "side": 1,
+      "message": "Why do you need a `MaybeUninit` here? If you just want to represent something that may or may not containt a `Uart` you can do that safely with an `Option\u003cUart\u003e`.",
+      "revId": "b2d0cdea95f742b43ee01472c4c57d3e9fa90b90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90575579_20445022",
+        "filename": "libs/libvmbase/src/arch/aarch64/platform.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-29T14:26:55Z",
+      "side": 1,
+      "message": "Typo: \u0027Reboot\u0027",
+      "range": {
+        "startLine": 102,
+        "startChar": 11,
+        "endLine": 102,
+        "endChar": 16
+      },
+      "revId": "b2d0cdea95f742b43ee01472c4c57d3e9fa90b90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3c90e19_6c519b2f",
+        "filename": "libs/libvmbase/src/arch/aarch64/platform.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-29T14:26:55Z",
+      "side": 1,
+      "message": "That\u0027s not a safety requirement. The `# Safety` section should document what the caller needs to guarantee for this function call to be safe.",
+      "revId": "b2d0cdea95f742b43ee01472c4c57d3e9fa90b90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bd8414d_4aa36b0d",
+        "filename": "libs/libvmbase/src/arch/aarch64/platform.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-29T14:26:55Z",
+      "side": 1,
+      "message": "Typos: \u0027using\u0027, \u0027address\u0027",
+      "range": {
+        "startLine": 124,
+        "startChar": 38,
+        "endLine": 124,
+        "endChar": 44
+      },
+      "revId": "b2d0cdea95f742b43ee01472c4c57d3e9fa90b90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73cca445_ea37f6e7",
+        "filename": "libs/libvmbase/src/arch/aarch64/platform.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-29T14:26:55Z",
+      "side": 1,
+      "message": "Typo: transmute",
+      "range": {
+        "startLine": 126,
+        "startChar": 60,
+        "endLine": 126,
+        "endChar": 68
+      },
+      "revId": "b2d0cdea95f742b43ee01472c4c57d3e9fa90b90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
