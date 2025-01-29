@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2f9fe71d_8f9a5541",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1106788
+      },
+      "writtenOn": "2025-01-29T21:24:38Z",
+      "side": 1,
+      "message": "overall, I believe we need to do one of the two things:\n1) go with vbmeta_digest for all checks (see CIL how this CL still relies on AVB doing RSA verification for vbmeta, which we wanted to avoid with vbmeta_digest); or\n2) go with signature verification for vbmeta + kernel digest verification for the prebuilt UUID, no point to complicate the build+sign flow with vbmeta_digest if we don\u0027t rely on it at the AVB vbmeta-verification step",
+      "revId": "8bc9df150414137c55cd99c2744ce983f12bde09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fdbfc5ac_dbcaca76",
         "filename": "guest/pvmfw/avb/src/verify.rs",
         "patchSetId": 1
@@ -14,6 +31,30 @@
       "writtenOn": "2025-01-29T09:39:39Z",
       "side": 1,
       "message": "Why use the vbmeta digest instead of the kernel digest directly?\n\nI understood that the fixed-digest RBP involved hard-coding the kernel digest in pvmfw and then comparing it with the `kernel_digest` in this struct.\n\nThe problem with hard-coding the `vbmeta_digest` is that it significantly complicates the resigning process compared to using the kernel digest directly, as VbMeta includes the [public key](https://cs.android.com/android/platform/superproject/main/+/main:external/avb/libavb/avb_vbmeta_image.h;l\u003d84;drc\u003d8fae81cc40d98877629b28a16fcc72b736423bdb) used to sign its authentication data.\n\nFor the AL Trusty VM to pass the generic verified boot step in pvmfw, it needs to be signed with the test key during development and the release key for production. Embedding the `vbmeta_digest` means that at release, we would need to first resign the AL Trusty kernel, then modify the embedded `vbmeta_digest` in pvmfw, and finally re-sign pvmfw. Does the AL team want to go through all this process?",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 45,
+        "endChar": 21
+      },
+      "revId": "8bc9df150414137c55cd99c2744ce983f12bde09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "789af648_d1f36806",
+        "filename": "guest/pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1106788
+      },
+      "writtenOn": "2025-01-29T21:24:38Z",
+      "side": 1,
+      "message": "\u003e Why use the vbmeta digest instead of the kernel digest directly?\n\n1) because having the kernel digest doesn\u0027t cover other properties in vbmeta. which may become important in the future. \n2) and the way I understoof the ast explanation, because our model assumes that after checking vbmeta integrity (through a digest in this case or signature in a general case) we trust the internal structure of vbmeta to be valid. \nI understand that the latter potentially should be improved - we shall always treat vbmeta as a data coming from untrusted location while parsing - but iiuc this is the assumption made today, so some data validity checks may be missing?\n\nthough looking at how vbmeta is verified (avb_slot_verify -\u003e avb_vbmeta_image_verify), it always performs avb_rsa_verify for it inside AVB code and does other sanity checks, so argument (2) doesn\u0027t apply for the code running in this trusty-specific hook, we already trust it based on the signature.\n\nthe idea was to add another early branch to `avb_vbmeta_image_verify` so that instead of RSA verification it performs digest comparison. but looks like there is no call to a platform-specific hook in `ops` in the current AVB impl to allow that. so, we either add that to generic AVB, modify pvmfw main to call a custom vbmeta verificatuon instead of SVB, or it\u0027s indeed sufficient to check the kernel digest at this point and rely on signed vbmeta structures to always provide correct properties for this UUID (and rely on the signing key to be specific to desktop and not available to 3p, whoc ould mess with properties).\n\n\u003e first resign the AL Trusty kernel, then modify the embedded vbmeta_digest in pvmfw, and finally re-sign pvmfw. Does the AL team want to go through all this process?\n\nthe things discussed above may make it a moot point, but if they don\u0027t:\n\nis it really that different from the need to get the current version from the prebuilt pvmfw image, then modify the embedded rollback index for it, then re-sign pvmfw. I understand that with the version number instead of digest both pvmfw and trusty can be re-signed at a later stage, while here we force: build \u0026 sign trusty image first, then build \u0026 sign desktop image, but with prebuilts we shall have a prod-signed trusty image generated whenever we release a new prod version of it, and then all OS builds picking it up (including its digest).\nthis works fine for prod releases.\n\nand for custom dev builds we make for daily debug \u0026 development, we can (shall?) use a different rollback criterion since we don\u0027t care about TEE verification in that case. the device has to be in non-green boot mode anyways to accept such a build.",
+      "parentUuid": "fdbfc5ac_dbcaca76",
       "range": {
         "startLine": 45,
         "startChar": 8,
@@ -85,6 +126,30 @@
       "side": 1,
       "message": "\u003e How do we know it will be sha256? \n\nThis assumption is baked into this code, where `AvbDigest` contains a SHA-256 digest, not a SHA-512 (see its length). I\u0027ve used 256 here because that\u0027s what the kernel hash uses but using 512 would be equally simple to implement.\n\n\u003e Maybe we need to check any field in vbmeta footer?\n\nI don\u0027t believe so; note that we\u0027re computing the hash at this point (not at signing time) so this code has full control over which size it uses. If we _really_ wanted to, this code could even support both formats but I didn\u0027t want to implement this kind of flexibility without a user first.\n\n\u003e AVB tool seem to allow different hashing algorithm\n\nYes, in aosp/3467564, I\u0027m adding support for both SHA-256 and SHA-512.",
       "parentUuid": "e52cd332_efdb5ff7",
+      "range": {
+        "startLine": 332,
+        "startChar": 4,
+        "endLine": 332,
+        "endChar": 70
+      },
+      "revId": "8bc9df150414137c55cd99c2744ce983f12bde09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06696fea_6774d5c1",
+        "filename": "guest/pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1106788
+      },
+      "writtenOn": "2025-01-29T21:24:38Z",
+      "side": 1,
+      "message": "yeah would be great to have some algo id for digest algos used here, as I\u0027m pretty sure we\u0027ll want crypto agility down the road (sha-3 or at least -384/512), but I see it\u0027s hard-coded for all digests (kernel, initrd) in VerifiedBootData. so a fix is wider than vbmeta_digest",
+      "parentUuid": "e3c81d62_c1b63fd8",
       "range": {
         "startLine": 332,
         "startChar": 4,
