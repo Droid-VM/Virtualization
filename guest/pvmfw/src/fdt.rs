@@ -807,9 +807,14 @@ impl WdtInfo {
     }
 }
 
-fn read_wdt_info_from(fdt: &Fdt) -> libfdt::Result<WdtInfo> {
+fn read_wdt_info_from(fdt: &Fdt) -> libfdt::Result<Option<WdtInfo>> {
     let mut node_iter = fdt.compatible_nodes(c"qemu,vcpu-stall-detector")?;
-    let node = node_iter.next().ok_or(FdtError::NotFound)?;
+    let node = match node_iter.next() {
+        Some(node) => node,
+        // Some VMs may not have qemu,vcpu-stall-detector compatible watchdogs
+        // So do not treat it as error.
+        None => return Ok(None),
+    };
     let mut ranges = node.reg()?.ok_or(FdtError::NotFound)?;
 
     let reg = ranges.next().ok_or(FdtError::NotFound)?;
@@ -826,7 +831,7 @@ fn read_wdt_info_from(fdt: &Fdt) -> libfdt::Result<WdtInfo> {
         warn!("Discarding extra vmwdt <interrupts> entries.");
     }
 
-    Ok(WdtInfo { addr: reg.addr, size, irq })
+    Ok(Some(WdtInfo { addr: reg.addr, size, irq }))
 }
 
 fn validate_wdt_info(wdt: &WdtInfo, num_cpus: usize) -> Result<(), RebootReason> {
@@ -844,11 +849,12 @@ fn patch_wdt_info(fdt: &mut Fdt, num_cpus: usize) -> libfdt::Result<()> {
         *v = v.to_be();
     }
 
-    let mut node = fdt
+    if let Some(mut node) = fdt
         .root_mut()
-        .next_compatible(c"qemu,vcpu-stall-detector")?
-        .ok_or(libfdt::FdtError::NotFound)?;
-    node.setprop_inplace(c"interrupts", interrupts.as_bytes())?;
+            .next_compatible(c"qemu,vcpu-stall-detector")? {
+                node.setprop_inplace(c"interrupts", interrupts.as_bytes())?;
+            }
+
     Ok(())
 }
 
@@ -1139,11 +1145,13 @@ fn parse_device_tree(
     })?;
     validate_pci_info(&pci_info, &memory_range)?;
 
-    let wdt_info = read_wdt_info_from(fdt).map_err(|e| {
+    match read_wdt_info_from(fdt).map_err(|e| {
         error!("Failed to read vCPU stall detector info from DT: {e}");
         RebootReason::InvalidFdt
-    })?;
-    validate_wdt_info(&wdt_info, cpus.len())?;
+    })? {
+        Some(wdt_info) => validate_wdt_info(&wdt_info, cpus.len())?,
+        None => warn!("No compatible vCPU stall detectors found."),
+    }
 
     let serial_info = read_serial_info_from(fdt).map_err(|e| {
         error!("Failed to read serial info from DT: {e}");
