@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21fd7671_39a7b3f7",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/gunyah.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1960706
+      },
+      "writtenOn": "2025-01-30T04:27:04Z",
+      "side": 1,
+      "message": "Oh ok. Then I need to make an actual hyp call. Hyp can return the same for now and in future chipsets a non 1:1 mapped address.",
+      "parentUuid": "d1b97f6d_3eebb69c",
+      "revId": "170a0aee2b083d48470ac92444892d49db868f4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "394d246d_9b4f3fb7",
@@ -48,6 +66,24 @@
       "writtenOn": "2025-01-29T22:36:24Z",
       "side": 1,
       "message": "Did we check with the hyp team about this?",
+      "revId": "170a0aee2b083d48470ac92444892d49db868f4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4491cf5_0216b085",
+        "filename": "libs/libhypervisor_backends/src/hypervisor/gunyah.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1960706
+      },
+      "writtenOn": "2025-01-30T04:27:04Z",
+      "side": 1,
+      "message": "I plan to include the actual hyp call in the next version of the patch. I submitted this quickly to get Pierre\u0027s early feedback",
+      "parentUuid": "394d246d_9b4f3fb7",
       "revId": "170a0aee2b083d48470ac92444892d49db868f4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -83,6 +119,24 @@
       "side": 1,
       "message": "Not sure I follow. Why do we change the order if granule is returned by Gunyah?",
       "parentUuid": "85a046a9_30face88",
+      "revId": "170a0aee2b083d48470ac92444892d49db868f4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29c3e395_1d1b86ba",
+        "filename": "libs/libvmbase/src/memory/tracker.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1960706
+      },
+      "writtenOn": "2025-01-30T04:27:04Z",
+      "side": 1,
+      "message": "I had to implement the get_mem_sharer() to get the expected value for gunyah here https://android.googlesource.com/platform/packages/modules/Virtualization/+/3392e34e7774696268d73733daff98ab91ca70e0/guest/pvmfw/src/fdt.rs#1168\nIf there it was modified to return a default value, then current error handling behaviour will be changed for other VMs too. After implementing the mem sharer for gunyah changed the order in if-else here to keep the same code flow. Otherwise it this cause a dynamic_shared_pool init for QTVMs.",
+      "parentUuid": "082e4d1a_c10652b1",
       "revId": "170a0aee2b083d48470ac92444892d49db868f4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
