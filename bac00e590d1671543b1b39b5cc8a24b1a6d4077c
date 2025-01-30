@@ -52,6 +52,24 @@
       "parentUuid": "3c608394_bad78386",
       "revId": "bac00e590d1671543b1b39b5cc8a24b1a6d4077c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a76943d_f9ef5b52",
+        "filename": "libs/libvmbase/src/arch/aarch64/uart.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026646
+      },
+      "writtenOn": "2025-01-30T14:26:01Z",
+      "side": 1,
+      "message": "As long as we don\u0027t bind type of addrss/port object to generic uart it should be fine. Current ARM implementation assume that we have something like `VA` that behave like ordinary pointer that have volatile. As Bartłomiej mention offline maybe simple acessors solve this problem for now. Long term i may be more compicated, but as Daniel say \"There is not really much going on \" yet.",
+      "parentUuid": "c9f388c6_606630a0",
+      "revId": "bac00e590d1671543b1b39b5cc8a24b1a6d4077c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
