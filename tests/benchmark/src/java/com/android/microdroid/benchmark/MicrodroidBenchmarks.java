@@ -1115,9 +1115,10 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
             VirtualMachine vm = forceCreateNewVirtualMachine(vmName, config);
             BenchmarkVmListener.create(new EncryptedstoreBenchmarkListener(writeThroughput, true))
                     .runToFinish(TAG, vm);
-            // Rerun the VM & read the storage!
-            BenchmarkVmListener.create(new EncryptedstoreBenchmarkListener(readThroughput, false))
-                    .runToFinish(TAG, vm);
+            // // Rerun the VM & read the storage!
+            // BenchmarkVmListener.create(new EncryptedstoreBenchmarkListener(readThroughput,
+            // false))
+            //         .runToFinish(TAG, vm);
         }
         reportMetrics(writeThroughput, "encryptedstore/sequential_write", "mb_per_sec");
         reportMetrics(readThroughput, "encryptedstore/sequential_read", "mb_per_sec");
