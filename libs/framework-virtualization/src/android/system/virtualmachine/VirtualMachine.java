@@ -1575,6 +1575,12 @@ public class VirtualMachine implements AutoCloseable {
                                 ? createVirtualMachineConfigForRawFrom(vmConfig)
                                 : createVirtualMachineConfigForAppFrom(vmConfig, service);
 
+                if (vmConfig.isEncryptedStorageEnabled()) {
+                    service.resizeWritablePartition(
+                        ParcelFileDescriptor.open(mEncryptedStoreFilePath, MODE_READ_WRITE),
+                        vmConfig.getEncryptedStorageBytes());
+                }
+
                 mVirtualMachine =
                         service.createVm(
                                 vmConfigParcel, consoleOutFd, consoleInFd, mLogWriter, null);
