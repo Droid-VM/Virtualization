@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e714e322_347745e3",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 1115,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-30T11:32:37Z",
+      "side": 1,
+      "message": "You\u0027re right. This is bling copy-paste from other test which reuses the apk file on host disk. Removed...",
+      "parentUuid": "28642d75_263d9adc",
+      "revId": "38739faa4c52806cbe3a481a0191dd39f1e3b9ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a4af5fd_a7d554fc",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4e51cba_96996fb9",
+        "filename": "tests/benchmark/src/native/benchmarkbinary.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-30T11:32:37Z",
+      "side": 1,
+      "message": "I\u0027ve modified the patch to re-run the VM and then read.\n\nPayload doesnt have access to write on /proc/sys/vm/drop_caches, so had to doit the other way. Thanks",
+      "parentUuid": "0a4af5fd_a7d554fc",
+      "revId": "38739faa4c52806cbe3a481a0191dd39f1e3b9ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85c38cb1_4b244cff",
@@ -48,6 +84,24 @@
       "writtenOn": "2025-01-29T08:19:08Z",
       "side": 1,
       "message": "Call sync() to write back dirty blocks before taking end timestamp.",
+      "revId": "38739faa4c52806cbe3a481a0191dd39f1e3b9ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e67fc6e7_f6521ab6",
+        "filename": "tests/benchmark/src/native/benchmarkbinary.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-30T11:32:37Z",
+      "side": 1,
+      "message": "I was thinking about this. In reality, sync is called by Microdroid manager when pVM is being turned down. But I guess, that should be included in the storage benchmarks too.\n\nFor some reason adding `O_SYNC` in the file `open` doesnt work. I\u0027ve included `syncfs` in the timings calculations. It didnt make much difference surprisingly.",
+      "parentUuid": "85c38cb1_4b244cff",
       "revId": "38739faa4c52806cbe3a481a0191dd39f1e3b9ca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
