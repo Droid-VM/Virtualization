@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "564e94b8_86a3a770",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-01-30T14:32:22Z",
+      "side": 1,
+      "message": "Took a quick pass",
+      "revId": "d5b4d1ca2ef58c58c8ee8a2c35ab791e0114d33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68763e28_52fe23d5",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-01-30T14:32:22Z",
+      "side": 1,
+      "message": "Should we return an error if size_bytes is smaller than the current size of the image?",
+      "range": {
+        "startLine": 315,
+        "startChar": 5,
+        "endLine": 315,
+        "endChar": 64
+      },
+      "revId": "d5b4d1ca2ef58c58c8ee8a2c35ab791e0114d33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75b1ff96_6300ab2e",
+        "filename": "build/microdroid/bootconfig.common",
+        "patchSetId": 18
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-01-30T14:32:22Z",
+      "side": 1,
+      "message": "Microdroid shouldn\u0027t have selinux in a permissive mode. Instead add allow rules in microdroid sepolicy (system/sepolicy/microdroid)",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 30
+      },
+      "revId": "d5b4d1ca2ef58c58c8ee8a2c35ab791e0114d33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff1cd882_ea0c754a",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-01-30T14:32:22Z",
+      "side": 1,
+      "message": "Please also update this test",
+      "range": {
+        "startLine": 708,
+        "startChar": 16,
+        "endLine": 708,
+        "endChar": 37
+      },
+      "revId": "d5b4d1ca2ef58c58c8ee8a2c35ab791e0114d33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67769880_b9587763",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 1871,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2025-01-30T14:32:22Z",
+      "side": 1,
+      "message": "Lets also add tests that:\n1. try to set a size to the value lower than before\n2. sets the size to the exactly same value as before",
+      "range": {
+        "startLine": 1871,
+        "startChar": 16,
+        "endLine": 1871,
+        "endChar": 53
+      },
+      "revId": "d5b4d1ca2ef58c58c8ee8a2c35ab791e0114d33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
