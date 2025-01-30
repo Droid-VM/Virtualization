@@ -34,6 +34,7 @@ use microdroid_payload_config::VmPayloadConfig;
 use rand::{distributions::Alphanumeric, Rng};
 use std::fs;
 use std::fs::File;
+use std::fs::OpenOptions;
 use std::io;
 use std::io::{Read, Write};
 use std::os::fd::AsFd;
@@ -110,6 +111,12 @@ pub fn command_run_app(config: RunAppConfig) -> Result<(), Error> {
                 path,
                 config.microdroid.storage_size.unwrap_or(10 * 1024 * 1024),
                 PartitionType::ENCRYPTEDSTORE,
+            )?;
+        } else {
+            resize_partition(
+                service.as_ref(),
+                path,
+                config.microdroid.storage_size,
             )?;
         }
         Some(open_parcel_file(path, true)?)
@@ -367,6 +374,24 @@ fn parse_extra_apk_list(apk: &Path, config_path: &str) -> Result<Vec<PathBuf>, E
     let config_file = archive.by_name(config_path)?;
     let config: VmPayloadConfig = serde_json::from_reader(config_file)?;
     Ok(config.extra_apks.into_iter().map(|x| x.path.into()).collect())
+}
+
+fn resize_partition(
+    service: &dyn IVirtualizationService,
+    image_path: &Path,
+    size: Option<u64>,
+) -> Result<(), Error> {
+    if let Some(size) = size {
+        let image = OpenOptions::new()
+        .create_new(false)
+        .read(true)
+        .write(true)
+        .open(image_path)
+        .with_context(|| format!("Failed to open {:?}", image_path))?;
+
+        service.resizeWritablePartition(&ParcelFileDescriptor::new(image), size.try_into()?)?;
+    }
+    Ok(())
 }
 
 struct Callback {}

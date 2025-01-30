@@ -304,6 +304,31 @@ impl IVirtualizationService for VirtualizationService {
         Ok(())
     }
 
+    fn resizeWritablePartition(
+        &self,
+        image_fd: &ParcelFileDescriptor,
+        size_bytes: i64,
+    ) -> binder::Result<()> {
+        check_manage_access()?;
+        let image = clone_file(image_fd)?;
+
+        if image.metadata().unwrap().len() < size_bytes as u64 {
+            let size_bytes = size_bytes
+                .try_into()
+                .with_context(|| format!("Invalid size: {}", size_bytes))
+                .or_binder_exception(ExceptionCode::ILLEGAL_ARGUMENT)?;
+            let size_bytes = round_up(size_bytes, PARTITION_GRANULARITY_BYTES);
+
+            // Reset the file length. In most filesystems, this will not allocate any physical disk
+            // space, it will only change the logical size.
+            image
+                .set_len(size_bytes)
+                .context("Failed to extend file")
+                .or_service_specific_exception(-1)?;
+        }
+        Ok(())
+    }
+
     /// Creates or update the idsig file by digesting the input APK file.
     fn createOrUpdateIdsigFile(
         &self,
