@@ -15,15 +15,57 @@
 //! This module support creating AFV related overlays, that can then be appended to DT by VM.
 
 use anyhow::{anyhow, Result};
-use fsfdt::FsFdt;
-use libfdt::Fdt;
+use libfdt::{Fdt, FdtNodeMut};
 use std::ffi::CStr;
+use std::fs::File;
+use std::io::Read;
 use std::path::Path;
 
 pub(crate) const AVF_NODE_NAME: &CStr = c"avf";
 pub(crate) const UNTRUSTED_NODE_NAME: &CStr = c"untrusted";
 pub(crate) const VM_DT_OVERLAY_PATH: &str = "vm_dt_overlay.dtbo";
 pub(crate) const VM_DT_OVERLAY_MAX_SIZE: usize = 2000;
+
+pub(crate) struct DeviceTreeOverlayEntries {
+    vendor_hashtree_descriptor_root_digest: Option<Vec<u8>>,
+    secretkeeper_public_key: Option<Vec<u8>>,
+    instance_id: Option<Vec<u8>>,
+}
+
+impl DeviceTreeOverlayEntries {
+    fn from(path: &Path) -> Result<Self> {
+        let mut sk_pk_file = File::open(path.join("avf").join("secretkeeper_public_key"))
+            .map_err(|e| anyhow!("Failed to locate secretkeeper_public_key in path: {e:?}"))?;
+        let mut secretkeeper_public_key = Vec::new();
+        sk_pk_file
+            .read_to_end(&mut secretkeeper_public_key)
+            .map_err(|e| anyhow!("Failed to read secretkeepr_public_key in host path: {e:?}"))?;
+
+        Ok(Self {
+            vendor_hashtree_descriptor_root_digest: None,
+            secretkeeper_public_key: Some(secretkeeper_public_key),
+            instance_id: None,
+        })
+    }
+
+    fn overlay_onto(&self, avf: &mut FdtNodeMut) -> Result<()> {
+        Self::set_prop_if_exists(c"secretkeeper_public_key", &self.secretkeeper_public_key, avf)?;
+        Self::set_prop_if_exists(
+            c"vendor_hashtree_descriptor_root_digest",
+            &self.vendor_hashtree_descriptor_root_digest,
+            avf,
+        )?;
+        Self::set_prop_if_exists(c"instance_id", &self.instance_id, avf)?;
+        Ok(())
+    }
+
+    fn set_prop_if_exists(key: &CStr, value: &Option<Vec<u8>>, avf: &mut FdtNodeMut) -> Result<()> {
+        if let Some(value) = value {
+            avf.setprop(key, value).map_err(|e| anyhow!("Failed to set {key:?}: {e:?}"))?;
+        }
+        Ok(())
+    }
+}
 
 /// Create a Device tree overlay containing the provided proc style device tree & properties!
 /// # Arguments
@@ -86,7 +128,13 @@ pub(crate) fn create_device_tree_overlay<'a>(
 
     // Read dt_path from host DT and overlay onto fdt.
     if let Some(path) = dt_path {
-        fdt.overlay_onto(c"/fragment@0/__overlay__", path)?;
+        let mut avf = fdt
+            .node_mut(c"/fragment@0/__overlay__/avf")
+            .map_err(|e| anyhow!("Failed to search avf node: {e:?}"))?
+            .ok_or(anyhow!("Failed to get avf node"))?;
+        let dt_overlay_entries = DeviceTreeOverlayEntries::from(path)?;
+        dt_overlay_entries.overlay_onto(&mut avf)?;
+        // fdt.overlay_onto(c"/fragment@0/__overlay__", path)?;
     }
 
     if !trusted_props.is_empty() {
