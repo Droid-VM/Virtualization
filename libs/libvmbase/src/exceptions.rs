@@ -14,8 +14,8 @@
 
 //! Helper functions and structs for exception handlers.
 
+use crate::arch::VirtualAddress;
 use crate::memory::{MemoryTrackerError, MEMORY};
-use aarch64_paging::paging::VirtualAddress;
 use core::fmt;
 use core::result;
 
