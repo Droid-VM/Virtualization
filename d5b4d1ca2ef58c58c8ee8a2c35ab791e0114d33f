@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e4bea429_33de302b",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-30T14:54:15Z",
+      "side": 1,
+      "message": "You\u0027d need to call `format_as_encryptedstore` the first time this img is created. That will write the header `UNFORMATTED_STORAGE_MAGIC` into the img, which is important for VM.\n\nOn seeing this header, encryptedstore binary formats a fresh filesystem on the disk.",
+      "range": {
+        "startLine": 307,
+        "startChar": 7,
+        "endLine": 307,
+        "endChar": 30
+      },
+      "revId": "d5b4d1ca2ef58c58c8ee8a2c35ab791e0114d33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68763e28_52fe23d5",
         "filename": "android/virtmgr/src/aidl.rs",
         "patchSetId": 18
@@ -43,6 +66,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f14f57dc_2d62082d",
+        "filename": "android/virtmgr/src/aidl.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-30T14:54:15Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "68763e28_52fe23d5",
+      "range": {
+        "startLine": 315,
+        "startChar": 5,
+        "endLine": 315,
+        "endChar": 64
+      },
+      "revId": "d5b4d1ca2ef58c58c8ee8a2c35ab791e0114d33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bacd76d5_013be948",
+        "filename": "android/vm/src/run.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-30T14:54:15Z",
+      "side": 1,
+      "message": "`resize_partition` should be called irrespective of `!path.exists()` \u0026 `command_create_partition` (which invokes `initializeWritablePartition`) should not be called on encryptedstore img. \n...\n\nOR are you intending on calling `initializeWritablePartition` on first run \u0026 `resize_partition` on subsequent runs?",
+      "range": {
+        "startLine": 108,
+        "startChar": 11,
+        "endLine": 108,
+        "endChar": 25
+      },
+      "revId": "d5b4d1ca2ef58c58c8ee8a2c35ab791e0114d33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "75b1ff96_6300ab2e",
         "filename": "build/microdroid/bootconfig.common",
         "patchSetId": 18
@@ -54,6 +124,30 @@
       "writtenOn": "2025-01-30T14:32:22Z",
       "side": 1,
       "message": "Microdroid shouldn\u0027t have selinux in a permissive mode. Instead add allow rules in microdroid sepolicy (system/sepolicy/microdroid)",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 30
+      },
+      "revId": "d5b4d1ca2ef58c58c8ee8a2c35ab791e0114d33f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20697f8f_0e12e309",
+        "filename": "build/microdroid/bootconfig.common",
+        "patchSetId": 18
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2025-01-30T14:54:15Z",
+      "side": 1,
+      "message": "+1 \nWe must not change the selinux permissions in Microdroid, this was ony goog for local testing.\n\nWe will need to define appropriate selinux labels in Microdroid (for e2fsck I reckon?).\n\nFor example of a Microdroid label \u0026 permissions, see how we have mke2fs defined in system/sepolicy/microdroid/ -\u003e https://source.corp.google.com/search?q\u003de2fs_exec\u0026sq\u003d\u0026ss\u003dh%2Fandroid%2Fplatform%2Fsuperproject%2Fmain%2F%2B%2Frefs%2Fheads%2Fmain:system%2Fsepolicy%2Fmicrodroid%2F\n\nFor example of how e2fsck label is defined in Android (not Microdroid), see https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:system/sepolicy/private/file_contexts;l\u003d252?q\u003dsystem%2Fbin%2Fe2fsck%20\u0026ss\u003dh%2Fgoogleplex-android%2Fplatform%2Fsuperproject%2Fmain%2F%2B%2Frefs%2Fheads%2Fmain:system%2Fsepolicy%2F",
+      "parentUuid": "75b1ff96_6300ab2e",
       "range": {
         "startLine": 4,
         "startChar": 0,
