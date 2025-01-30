@@ -22,6 +22,30 @@
       },
       "revId": "2fed405bedf89fd3dede2dc56c214e328235ec5f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8a6afb4_7c593a26",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1078119
+      },
+      "writtenOn": "2025-01-30T23:11:17Z",
+      "side": 1,
+      "message": "Caveat: I am not a security expert, the top-level AVB owners (https://cs.android.com/android/platform/superproject/main/+/main:external/avb/OWNERS) would probably have more advanced understanding here.\n\nHowever, this approach does make me a bit nervous. Generally, trying to use data before it has been verified (as this is proposing with vbmeta) is extremely risky.\n\nlibavb has some best-effort checks to try to guard against obvious malformed data - e.g. check `avb_descriptor_foreach()` which has sections like:\n\n```\n  /* The data is supposed to have been cryptographically verified at this point,\n   * This check is just adding defense in depth.\n```\n\nBut I do not believe that libavb as a whole makes a guarantee that it is hardened against corrupt vbmeta data if the user claims it has been signed properly. So even if you correctly re-verify the vbmeta blob before using it, the damage may already be done - there may be a buffer overflow somewhere deep in libavb that was already exploited by the first verification flow.\n\nThat being said, there is a flag `AVB_SLOT_VERIFY_FLAGS_ALLOW_VERIFICATION_ERROR` in libavb that explicitly allows verification to continue even in the face of things like signature mismatch. This is a well-defined way to allow untrusted vbmeta blobs and I have much higher confidence that libavb prevents any undefined behavior in this flow - is it possible to use this to somehow achieve your goals, i.e. maybe a two-pass system where you allow errors, then (carefully) extract the vbmeta data you need, then re-verify without errors allowed?\n\nAt a higher level, there\u0027s also the question of if vbmeta itself is providing information on which key to use, how can you trust it at all even if it\u0027s properly-signed? You may have some specific designs that address this, but for example if it\u0027s something like you have a pre-defined set of acceptable keys and the vbmeta has information telling you which key it uses, this would essentially mean that a leak of one key breaks them all, since now a maliciously-crafted vbmeta could always select the leaked key and properly sign itself.\n\nIn any case, sorry for the long rambling, if an actual security experts gives you advice that contradicts mine, definitely defer to them :)",
+      "parentUuid": "05fe4e56_c4080b16",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 23
+      },
+      "revId": "2fed405bedf89fd3dede2dc56c214e328235ec5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
