@@ -16,6 +16,24 @@
       "message": "Hi Jiyong, thanks for the fix! I\u0027m a little confused, though. This branch seems to be missing my parameterizer migration (aosp/3267715).  How, then, does line 487 get the \"String os\" parameter added in that CL?\n\nAlso, the test is failing on the git_25Q1-release branch. Could this change on android15-tests-dev also address the issue there?",
       "revId": "6c8b1d27ec2fc800db47660e2b4db0aced0d48b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48c7a851_34bba169",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-01-30T14:52:30Z",
+      "side": 1,
+      "message": "the test run mentioned in the bug was using tests built from aosp_android15-tests-dev branch.\n\nI made a mistake when I uploaded aosp/3445074.",
+      "parentUuid": "37adba27_8eb7781e",
+      "revId": "6c8b1d27ec2fc800db47660e2b4db0aced0d48b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
