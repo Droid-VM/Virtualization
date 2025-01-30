@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4aa5d49f_80b5d4b1",
+        "filename": "libs/libvmbase/src/uart.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1572669
+      },
+      "writtenOn": "2025-01-30T20:29:29Z",
+      "side": 1,
+      "message": "nit: `Send` should be derived automatically for structs that consist entirely of other `Send` types, so I believe this `unsafe impl Send` shouldn\u0027t be necessary.",
+      "revId": "e177db871ccd62b184884dcc152158ba95f68b25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
