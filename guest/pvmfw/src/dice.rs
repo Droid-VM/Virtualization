@@ -88,7 +88,7 @@ pub struct PartialInputs {
 impl PartialInputs {
     pub fn new(data: &VerifiedBootData) -> Result<Self> {
         let code_hash = to_dice_hash(data)?;
-        let auth_hash = hash(data.public_key)?;
+        let auth_hash = hash(&data.public_key)?;
         let mode = to_dice_mode(data.debug_level);
         // We use rollback_index from vbmeta as the security_version field in dice certificate.
         let security_version = data.rollback_index;
@@ -199,7 +199,7 @@ mod tests {
         debug_level: DebugLevel::None,
         kernel_digest: [1u8; size_of::<Digest>()],
         initrd_digest: Some([2u8; size_of::<Digest>()]),
-        public_key: b"public key",
+        public_key: b"public key".to_vec(),
         capabilities: vec![],
         rollback_index: 42,
         page_size: None,

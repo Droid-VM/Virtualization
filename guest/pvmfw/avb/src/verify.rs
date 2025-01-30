@@ -32,15 +32,15 @@ pub type Digest = [u8; 32];
 
 /// Verified data returned when the payload verification succeeds.
 #[derive(Debug, PartialEq, Eq)]
-pub struct VerifiedBootData<'a> {
+pub struct VerifiedBootData {
     /// DebugLevel of the VM.
     pub debug_level: DebugLevel,
     /// Kernel digest.
     pub kernel_digest: Digest,
     /// Initrd digest if initrd exists.
     pub initrd_digest: Option<Digest>,
-    /// Trusted public key.
-    pub public_key: &'a [u8],
+    /// Public key used to sign the VBMeta.
+    pub public_key: Vec<u8>,
     /// VM capabilities.
     pub capabilities: Vec<Capability>,
     /// Rollback index of kernel.
@@ -49,7 +49,7 @@ pub struct VerifiedBootData<'a> {
     pub page_size: Option<usize>,
 }
 
-impl VerifiedBootData<'_> {
+impl VerifiedBootData {
     /// Returns whether the kernel have the given capability
     pub fn has_capability(&self, cap: Capability) -> bool {
         self.capabilities.contains(&cap)
@@ -254,12 +254,12 @@ fn verify_initrd(
 }
 
 /// Verifies the payload (signed kernel + initrd) against the trusted public key.
-pub fn verify_payload<'a>(
+pub fn verify_payload(
     kernel: &[u8],
     initrd: Option<&[u8]>,
-    trusted_public_key: &'a [u8],
-) -> Result<VerifiedBootData<'a>, PvmfwVerifyError> {
-    let payload = Payload::new(kernel, initrd, trusted_public_key);
+    trusted_public_key: &[u8],
+) -> Result<VerifiedBootData, PvmfwVerifyError> {
+    let payload = Payload::new(kernel, initrd);
     let mut ops = Ops::new(&payload);
     let kernel_verify_result = ops.verify_partition(PartitionName::Kernel.as_cstr())?;
 
@@ -271,6 +271,10 @@ pub fn verify_payload<'a>(
     verify_only_one_vbmeta_exists(vbmeta_images)?;
     let vbmeta_image = &vbmeta_images[0];
     verify_vbmeta_is_from_kernel_partition(vbmeta_image)?;
+    let public_key = vbmeta_image.public_key().to_vec();
+    if public_key != trusted_public_key {
+        return Err(SlotVerifyError::PublicKeyRejected(None).into());
+    }
     let descriptors = vbmeta_image.descriptors()?;
     let hash_descriptors = HashDescriptors::get(&descriptors)?;
     let capabilities = Capability::get_capabilities(vbmeta_image)?;
@@ -282,7 +286,7 @@ pub fn verify_payload<'a>(
             debug_level: DebugLevel::None,
             kernel_digest: copy_digest(hash_descriptors.kernel)?,
             initrd_digest: None,
-            public_key: trusted_public_key,
+            public_key,
             capabilities,
             rollback_index,
             page_size,
@@ -303,7 +307,7 @@ pub fn verify_payload<'a>(
         debug_level,
         kernel_digest: copy_digest(hash_descriptors.kernel)?,
         initrd_digest: Some(copy_digest(initrd_descriptor)?),
-        public_key: trusted_public_key,
+        public_key,
         capabilities,
         rollback_index,
         page_size,
