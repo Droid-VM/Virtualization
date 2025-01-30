@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "04d1924b_ad8f97e3",
+        "filename": "guest/pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-01-30T14:21:00Z",
+      "side": 1,
+      "message": "Hi Andrey, I just read your doc after replying here. Somehow I think what Pierre-Clément implemented here doesn\u0027t correspond to the Option 1 you described in the doc, which suggests starting with a hash check and bypassing all existing verification steps (potentially even omitting vbmeta signing?). Let\u0027s continue the discussion in the doc.",
+      "parentUuid": "757d62e3_daf5a42b",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 45,
+        "endChar": 21
+      },
+      "revId": "8bc9df150414137c55cd99c2744ce983f12bde09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c8bcbd40_69a7d767",
         "filename": "guest/pvmfw/avb/src/verify.rs",
         "patchSetId": 1
