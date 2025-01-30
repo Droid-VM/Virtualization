@@ -24,16 +24,11 @@ use core::ffi::CStr;
 pub(crate) struct Payload<'a> {
     kernel: &'a [u8],
     initrd: Option<&'a [u8]>,
-    trusted_public_key: &'a [u8],
 }
 
 impl<'a> Payload<'a> {
-    pub(crate) fn new(
-        kernel: &'a [u8],
-        initrd: Option<&'a [u8]>,
-        trusted_public_key: &'a [u8],
-    ) -> Self {
-        Self { kernel, initrd, trusted_public_key }
+    pub(crate) fn new(kernel: &'a [u8], initrd: Option<&'a [u8]>) -> Self {
+        Self { kernel, initrd }
     }
 
     fn get_partition(&self, partition_name: &CStr) -> IoResult<&[u8]> {
@@ -96,11 +91,12 @@ impl<'a> avb::Ops<'a> for Ops<'a> {
 
     fn validate_vbmeta_public_key(
         &mut self,
-        public_key: &[u8],
+        _public_key: &[u8],
         _public_key_metadata: Option<&[u8]>,
     ) -> IoResult<bool> {
         // The public key metadata is not used when we build the VBMeta.
-        Ok(self.payload.trusted_public_key == public_key)
+        // The public key itself is validated after Self::verify_partition() has returned.
+        Ok(true)
     }
 
     fn read_rollback_index(&mut self, _rollback_index_location: usize) -> IoResult<u64> {

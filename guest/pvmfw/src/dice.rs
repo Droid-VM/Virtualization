@@ -88,7 +88,7 @@ pub struct PartialInputs {
 impl PartialInputs {
     pub fn new(data: &VerifiedBootData) -> Result<Self> {
         let code_hash = to_dice_hash(data)?;
-        let auth_hash = hash(data.public_key)?;
+        let auth_hash = hash(&data.public_key)?;
         let mode = to_dice_mode(data.debug_level);
         // We use rollback_index from vbmeta as the security_version field in dice certificate.
         let security_version = data.rollback_index;
@@ -195,20 +195,23 @@ mod tests {
 
     const COMPONENT_VERSION_KEY: i64 = -70003;
     const RESETTABLE_KEY: i64 = -70004;
-    const BASE_VB_DATA: VerifiedBootData = VerifiedBootData {
-        debug_level: DebugLevel::None,
-        kernel_digest: [1u8; size_of::<Digest>()],
-        initrd_digest: Some([2u8; size_of::<Digest>()]),
-        public_key: b"public key",
-        capabilities: vec![],
-        rollback_index: 42,
-        page_size: None,
-    };
     const HASH: Hash = *b"sixtyfourbyteslongsentencearerarebutletsgiveitatrycantbethathard";
+
+    fn base_vb_data() -> VerifiedBootData {
+        VerifiedBootData {
+            debug_level: DebugLevel::None,
+            kernel_digest: [1u8; size_of::<Digest>()],
+            initrd_digest: Some([2u8; size_of::<Digest>()]),
+            public_key: b"public key".to_vec(),
+            capabilities: vec![],
+            rollback_index: 42,
+            page_size: None,
+        }
+    }
 
     #[test]
     fn base_data_conversion() {
-        let vb_data = BASE_VB_DATA;
+        let vb_data = base_vb_data();
         let inputs = PartialInputs::new(&vb_data).unwrap();
 
         assert_eq!(inputs.mode, DiceMode::kDiceModeNormal);
@@ -220,7 +223,7 @@ mod tests {
 
     #[test]
     fn debuggable_conversion() {
-        let vb_data = VerifiedBootData { debug_level: DebugLevel::Full, ..BASE_VB_DATA };
+        let vb_data = VerifiedBootData { debug_level: DebugLevel::Full, ..base_vb_data() };
         let inputs = PartialInputs::new(&vb_data).unwrap();
 
         assert_eq!(inputs.mode, DiceMode::kDiceModeDebug);
@@ -229,7 +232,7 @@ mod tests {
     #[test]
     fn rkp_vm_conversion() {
         let vb_data =
-            VerifiedBootData { capabilities: vec![Capability::RemoteAttest], ..BASE_VB_DATA };
+            VerifiedBootData { capabilities: vec![Capability::RemoteAttest], ..base_vb_data() };
         let inputs = PartialInputs::new(&vb_data).unwrap();
 
         assert!(inputs.rkp_vm_marker);
@@ -237,7 +240,7 @@ mod tests {
 
     #[test]
     fn base_config_descriptor() {
-        let vb_data = BASE_VB_DATA;
+        let vb_data = base_vb_data();
         let inputs = PartialInputs::new(&vb_data).unwrap();
         let config_map = decode_config_descriptor(&inputs, None);
 
@@ -251,7 +254,7 @@ mod tests {
     #[test]
     fn rkp_vm_config_descriptor_has_rkp_vm_marker() {
         let vb_data =
-            VerifiedBootData { capabilities: vec![Capability::RemoteAttest], ..BASE_VB_DATA };
+            VerifiedBootData { capabilities: vec![Capability::RemoteAttest], ..base_vb_data() };
         let inputs = PartialInputs::new(&vb_data).unwrap();
         let config_map = decode_config_descriptor(&inputs, Some(HASH));
 
@@ -261,7 +264,7 @@ mod tests {
     #[test]
     fn security_vm_config_descriptor_has_rkp_vm_marker() {
         let vb_data =
-            VerifiedBootData { capabilities: vec![Capability::TrustySecurityVm], ..BASE_VB_DATA };
+            VerifiedBootData { capabilities: vec![Capability::TrustySecurityVm], ..base_vb_data() };
         let inputs = PartialInputs::new(&vb_data).unwrap();
         let config_map = decode_config_descriptor(&inputs, Some(HASH));
 
@@ -271,7 +274,7 @@ mod tests {
     #[test]
     fn config_descriptor_with_instance_hash() {
         let vb_data =
-            VerifiedBootData { capabilities: vec![Capability::RemoteAttest], ..BASE_VB_DATA };
+            VerifiedBootData { capabilities: vec![Capability::RemoteAttest], ..base_vb_data() };
         let inputs = PartialInputs::new(&vb_data).unwrap();
         let config_map = decode_config_descriptor(&inputs, Some(HASH));
         assert_eq!(*config_map.get(&INSTANCE_HASH_KEY).unwrap(), Value::from(HASH.as_slice()));
@@ -280,7 +283,7 @@ mod tests {
     #[test]
     fn config_descriptor_without_instance_hash() {
         let vb_data =
-            VerifiedBootData { capabilities: vec![Capability::RemoteAttest], ..BASE_VB_DATA };
+            VerifiedBootData { capabilities: vec![Capability::RemoteAttest], ..base_vb_data() };
         let inputs = PartialInputs::new(&vb_data).unwrap();
         let config_map = decode_config_descriptor(&inputs, None);
         assert!(!config_map.contains_key(&INSTANCE_HASH_KEY));
@@ -303,7 +306,7 @@ mod tests {
 
     #[test]
     fn changing_deferred_rpb_changes_secrets() {
-        let vb_data = VerifiedBootData { debug_level: DebugLevel::Full, ..BASE_VB_DATA };
+        let vb_data = VerifiedBootData { debug_level: DebugLevel::Full, ..base_vb_data() };
         let inputs = PartialInputs::new(&vb_data).unwrap();
         let mut buffer_without_defer = [0; 4096];
         let mut buffer_with_defer = [0; 4096];
@@ -375,7 +378,7 @@ mod tests {
     fn dice_derivation_with_different_algorithms_is_valid() {
         let dice_artifacts = make_sample_bcc_and_cdis().unwrap();
         let bcc_handover0_bytes = to_bcc_handover(&dice_artifacts);
-        let vb_data = VerifiedBootData { debug_level: DebugLevel::Full, ..BASE_VB_DATA };
+        let vb_data = VerifiedBootData { debug_level: DebugLevel::Full, ..base_vb_data() };
         let inputs = PartialInputs::new(&vb_data).unwrap();
         let mut buffer = [0; 4096];
 
