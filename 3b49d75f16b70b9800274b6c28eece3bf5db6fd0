@@ -22,6 +22,30 @@
       },
       "revId": "3b49d75f16b70b9800274b6c28eece3bf5db6fd0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebf3e077_2483b62a",
+        "filename": "tests/backcompat_test/goldens/dt_dump_golden.dts",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-30T21:23:32Z",
+      "side": 1,
+      "message": "i\u0027m guessing it is because `let plat_mmio_base \u003d vm.get_memory().end_addr().offset()` from [0] gives different results when the hypervisor requires \"static swiotlb\". we\u0027ll want to fix that so there is a more conistent memory layout between hypervisors\n\n(there shouldn\u0027t be any swiotlb enabled here since this is the file for non-protected VMs, but i\u0027m guessing you just copy the diffs from the protected file since gunyah doens\u0027t support non-protected)\n\n[0] https://cs.android.com/android/platform/superproject/main/+/main:external/crosvm/aarch64/src/lib.rs;l\u003d495;drc\u003d132d6909f2af2b213db7df0fe9cec91827eab8bb",
+      "parentUuid": "dc5df0b9_bcc1b727",
+      "range": {
+        "startLine": 105,
+        "startChar": 69,
+        "endLine": 105,
+        "endChar": 127
+      },
+      "revId": "3b49d75f16b70b9800274b6c28eece3bf5db6fd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
