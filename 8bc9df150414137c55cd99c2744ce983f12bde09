@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "757d62e3_daf5a42b",
+        "filename": "guest/pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2025-01-30T10:06:00Z",
+      "side": 1,
+      "message": "\u003e looking at how vbmeta is verified (avb_slot_verify -\u003e avb_vbmeta_image_verify), it always performs avb_rsa_verify for it inside AVB code and does other sanity checks, so argument (2) doesn\u0027t apply for the code running in this trusty-specific hook, we already trust it based on the signature.\n\nWhile `avb_vbmeta_image_verify` does indeed check the signature, signature verification is only one aspect of the verification process performed by pvmfw. Successful signature verification alone is insufficient for establishing trust. To clarify, a vbmeta consists of three parts:\n\n1/ A header defining offsets for the other fields.\n2/ An authentication block containing the core vbmeta data, including image information and hashes.\n3/ An auxiliary block containing the public key used to sign the authentication block and the signature itself.\n\nThe verification performed by pvmfw involves two steps:\n\na.  Verifying 2/ authentication block against the public key and signature in 3/.\nb.  Verifying that the public key in 3/ matches the public key embedded within pvmfw ([pvmfw/avb/src/ops.rs;l\u003d103](https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/guest/pvmfw/avb/src/ops.rs;l\u003d103;drc\u003d781afeee375709cb133743b9ded37f8954c8991e))\n\nCurrently, the root of trust resides primarily in the public key embedded in pvmfw. Since pvmfw\u0027s integrity is validated by ABL, we rely on the assumption that only OEM can modify and re-sign pvmfw with a trusted public key. While an attacker is able to generate a valid signature for any image to pass the first verification step (a), they cannot modify pvmfw to inject the malicious key.\n\n\u003e is it really that different from the need to get the current version from the prebuilt pvmfw image, then modify the embedded rollback index for it, then re-sign pvmfw.\n\nWhat you described is actually very different with today\u0027s re-signing flow. Today re-signing primarily involves using scripts (e.g., [sign_virt_apex.py](https://cs.android.com/android/platform/superproject/main/+/main:packages/modules/Virtualization/build/apex/sign_virt_apex.py;drc\u003df49350ec41fb8f2651b80c5d420925bcc509cbd4) re-signs guest kernels, [sign_target_files_apks.py](https://cs.android.com/android/platform/superproject/main/+/main:build/make/tools/releasetools/sign_target_files_apks.py;l\u003d864;drc\u003d36981b54f0ee3788457f7e9cc4d866e485cce0a8) re-signs pvmfw) to re-sign existing built images, without rebuilding any targets. Since only the public key used for vbmeta signing changes, the rollback index in pvmfw remains unaffected. Consequently, the pvmfw and guest kernel re-signing processes are completely decoupled and re-signed independently.\n\n\u003e here we force: build \u0026 sign trusty image first, then build \u0026 sign desktop image, but with prebuilts we shall have a prod-signed trusty image generated whenever we release a new prod version of it,\n\nBypassing the current re-signing process and rebuilding everything with a release key, as you described, is likely feasible for the AL trusty image. However, this approach may create a compatibility issue with existing guest kernels that depend on the current re-signing process for release key injection. So you\u0027ll need to ensure that these existing kernels remain functional with the bypassing.",
+      "parentUuid": "789af648_d1f36806",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 45,
+        "endChar": 21
+      },
+      "revId": "8bc9df150414137c55cd99c2744ce983f12bde09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c8bcbd40_69a7d767",
         "filename": "guest/pvmfw/avb/src/verify.rs",
         "patchSetId": 1
