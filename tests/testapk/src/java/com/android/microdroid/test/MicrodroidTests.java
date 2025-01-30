@@ -1866,6 +1866,49 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThat(testResults.mFileContent).isEqualTo(EXAMPLE_STRING);
     }
 
+    @Test
+    @CddTest
+    public void encryptedStorageExpansionIsPersistent() throws Exception {
+        assumeSupportedDevice();
+
+        VirtualMachineConfig config =
+                newVmConfigBuilderWithPayloadBinary("MicrodroidTestNativeLib.so")
+                        .setEncryptedStorageBytes(ENCRYPTED_STORAGE_BYTES)
+                        .build();
+
+        VirtualMachine vm = forceCreateNewVirtualMachine("test_vm", config);
+        TestResults testResults =
+                runVmTestService(
+                        TAG,
+                        vm,
+                        (ts, tr) -> {
+                            ts.writeToFile(
+                                    /* content= */ EXAMPLE_STRING,
+                                    /* path= */ "/mnt/encryptedstore/test_file");
+                        });
+        testResults.assertNoException();
+
+        // Re-run the VM with more storage size & verify the file persisted.
+        // Note, the previous `runVmTestService` stopped the VM
+        config = newVmConfigBuilderWithPayloadBinary("MicrodroidTestNativeLib.so")
+                    .setEncryptedStorageBytes(ENCRYPTED_STORAGE_BYTES * 2)
+                    .build();
+        vm.setConfig(config);
+        assertThat(vm.getConfig().getEncryptedStorageBytes()).isEqualTo(ENCRYPTED_STORAGE_BYTES * 2);
+
+        // assertThat(vm.getStatus()).isEqualTo(VirtualMachine.STATUS_RUNNING);
+        // vm.run();
+        testResults =
+                runVmTestService(
+                        TAG,
+                        vm,
+                        (ts, tr) -> {
+                            tr.mFileContent = ts.readFromFile("/mnt/encryptedstore/test_file");
+                        });
+        testResults.assertNoException();
+        assertThat(testResults.mFileContent).isEqualTo(EXAMPLE_STRING);
+    }
+
     private boolean deviceCapableOfProtectedVm() {
         int capabilities = getVirtualMachineManager().getCapabilities();
         if ((capabilities & CAPABILITY_PROTECTED_VM) != 0) {
