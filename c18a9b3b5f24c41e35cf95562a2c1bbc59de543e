@@ -16,6 +16,24 @@
       "message": "If the file created for this is an anon file, will this way of passing fds to CrosVM work?",
       "revId": "c18a9b3b5f24c41e35cf95562a2c1bbc59de543e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb42326c_86267198",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1370,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2025-01-31T23:36:10Z",
+      "side": 1,
+      "message": "Yeah, it ought to work. `virtmgr` doesn\u0027t know the file path, only the FD, then it passes it along to `crosvm` as a `/proc/self/fd/...` path. We use the same trick for the disk files, kernel image, etc (some of those use `open_file_or_duplicate`, which special cases `/proc/self/fd/...`, but I think that isn\u0027t really needed for this one)",
+      "parentUuid": "2df9e559_1506d437",
+      "revId": "c18a9b3b5f24c41e35cf95562a2c1bbc59de543e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
