@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8998dffe_b6c7478d",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-01-31T18:44:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "212986ef_bc15f322",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 1
+      },
+      "revId": "de38931ad09192ce3f96284c3f363e24064e665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27eab30b_8964c4a5",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-01-23T20:26:35Z",
       "side": 1,
       "message": "no need to enforce this. we previously had a discussion about it and decided not to add it because it ought to work fine and there might be an obscure case where it is useful",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 13
+      },
+      "revId": "de38931ad09192ce3f96284c3f363e24064e665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ff20678_d4041ab3",
+        "filename": "android/virtmgr/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-01-31T18:44:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "27eab30b_8964c4a5",
       "range": {
         "startLine": 179,
         "startChar": 0,
@@ -64,6 +112,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c232284_25e5da0a",
+        "filename": "android/virtualizationservice/aidl/android/system/virtualizationservice/CpuOptions.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-01-31T18:44:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1274f1d5_7a0b88fa",
+      "revId": "de38931ad09192ce3f96284c3f363e24064e665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1bd4d37_44d3504b",
@@ -83,6 +149,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ae30846b_8d5d3317",
+        "filename": "android/vm/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-01-31T18:44:16Z",
+      "side": 1,
+      "message": "I think adding `CpuTopology` and then a separate top level flag for `cpu_count` may complicate the logic, or just be confusing. My initial implementation also would have been confusing as it would allow both `match_host` and `cpu_count` to be set.\n\nInstead I added `cpu_count` as an option to `cpu_topology`",
+      "parentUuid": "d1bd4d37_44d3504b",
+      "revId": "de38931ad09192ce3f96284c3f363e24064e665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "14a240cc_d3375180",
         "filename": "libs/vmconfig/src/lib.rs",
         "patchSetId": 1
@@ -94,6 +178,30 @@
       "writtenOn": "2025-01-23T20:26:35Z",
       "side": 1,
       "message": "changing the vm config format is going to cause some pain. let\u0027s keep it as it was\n\ni\u0027d suggest not adding support for custom cpu counts to it yet. custom counts probably only make sense for device specific vendor code for now. there are known performance issues in the general case",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 32
+      },
+      "revId": "de38931ad09192ce3f96284c3f363e24064e665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6258017e_3d50afb4",
+        "filename": "libs/vmconfig/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2025-01-31T18:44:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14a240cc_d3375180",
       "range": {
         "startLine": 63,
         "startChar": 0,
