@@ -91,6 +91,8 @@ fn encryptedstore_init(blkdevice: &Path, key: &str, mountpoint: &Path) -> Result
     if needs_formatting {
         info!("Freshly formatting the crypt device");
         format_ext4(&crypt_device)?;
+    } else {
+        resize_fs(&crypt_device)?;
     }
     mount(&crypt_device, mountpoint)
         .with_context(|| format!("Unable to mount {:?}", crypt_device))?;
@@ -170,6 +172,30 @@ fn format_ext4(device: &Path) -> Result<()> {
         .status()
         .with_context(|| format!("failed to execute {}", MK2FS_BIN))?;
     ensure!(status.success(), "mkfs failed with {:?}", status);
+    Ok(())
+}
+
+fn resize_fs(device: &Path) -> Result<()> {
+    // Check the partition
+    Command::new("/system/bin/e2fsck")
+        .arg("-fvy")
+        .arg(device)
+        .status()
+        .context("failed to execute e2fsck")?;
+
+    // Resize the filesystem to the size of the device.
+    Command::new("/system/bin/resize2fs")
+        .arg(device)
+        .status()
+        .context("failed to execute resize2fs")?;
+
+    // Finally check again if we were successful.
+    Command::new("/system/bin/e2fsck")
+        .arg("-fvy")
+        .arg(device)
+        .status()
+        .context("failed to execute e2fsck")?;
+
     Ok(())
 }
 
