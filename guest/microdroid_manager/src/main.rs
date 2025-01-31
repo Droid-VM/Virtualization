@@ -669,6 +669,20 @@ fn load_crashkernel_if_supported() -> Result<()> {
     Ok(())
 }
 
+// Get (Stdout, stderr) redirection
+fn get_debug_redirection() -> i32 {
+    // If the VM is debuggable, send IO stream to /dev/kmsg to ease the debugging
+    let stream = if is_debuggable()? {
+        use std::os::fd::FromRawFd;
+        let kmsg_fd = env::var("ANDROID_FILE__dev_kmsg").unwrap().parse::<i32>().unwrap();
+        // SAFETY: no one closes kmsg_fd
+        unsafe { (Stdio::from_raw_fd(kmsg_fd), Stdio::from_raw_fd(kmsg_fd)) }
+    } else {
+        (Stdio::null(), Stdio::null())
+    };
+    Ok(stream)
+}
+
 /// Executes the given task.
 fn exec_task(task: &Task, service: &Strong<dyn IVirtualMachineService>) -> Result<i32> {
     info!("executing main task {:?}...", task);
@@ -702,15 +716,7 @@ fn exec_task(task: &Task, service: &Strong<dyn IVirtualMachineService>) -> Resul
     // Never accept input from outside
     command.stdin(Stdio::null());
 
-    // If the VM is debuggable, let stdout/stderr go outside via /dev/kmsg to ease the debugging
-    let (stdout, stderr) = if is_debuggable()? {
-        use std::os::fd::FromRawFd;
-        let kmsg_fd = env::var("ANDROID_FILE__dev_kmsg").unwrap().parse::<i32>().unwrap();
-        // SAFETY: no one closes kmsg_fd
-        unsafe { (Stdio::from_raw_fd(kmsg_fd), Stdio::from_raw_fd(kmsg_fd)) }
-    } else {
-        (Stdio::null(), Stdio::null())
-    };
+    let (stdout, stderr) = get_debug_redirection()?;
     command.stdout(stdout);
     command.stderr(stderr);
 
@@ -749,11 +755,14 @@ fn prepare_encryptedstore(vm_secret: &VmSecret) -> Result<Child> {
     let mut key = ZVec::new(ENCRYPTEDSTORE_KEYSIZE)?;
     vm_secret.derive_encryptedstore_key(&mut key)?;
     let mut cmd = Command::new(ENCRYPTEDSTORE_BIN);
+    let (stdout, stderr) = get_debug_redirection()?;
     cmd.arg("--blkdevice")
         .arg(ENCRYPTEDSTORE_BACKING_DEVICE)
         .arg("--key")
         .arg(hex::encode(&*key))
         .args(["--mountpoint", ENCRYPTEDSTORE_MOUNTPOINT])
+        .stdout(stdout)
+        .stderr(stderr)
         .spawn()
         .context("encryptedstore failed")
 }
