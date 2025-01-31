@@ -38,6 +38,11 @@ PRODUCT_FSVERITY_GENERATE_METADATA := true
 
 PRODUCT_AVF_ENABLED := true
 
+# AVF is not mandatory for AAOS in Android 15
+ifneq ($(findstring gsi_car,$(TARGET_PRODUCT)),)
+    PRODUCT_AVF_ENABLED := false
+endif
+
 # The cheap build flags dependency management system until there is a proper one.
 ifdef RELEASE_AVF_ENABLE_DEVICE_ASSIGNMENT
   ifndef RELEASE_AVF_ENABLE_VENDOR_MODULES
