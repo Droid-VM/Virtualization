@@ -30,9 +30,6 @@
 #include <stdio.h>
 #include <sys/capability.h>
 #include <sys/system_properties.h>
-#ifdef __MICRODROID_TEST_PAYLOAD_USES_LIBICU__
-#include <unicode/uchar.h>
-#endif
 #include <unistd.h>
 #include <vm_main.h>
 #include <vm_payload_restricted.h>
@@ -351,63 +348,25 @@ Result<void> start_test_service() {
         }
 
         ScopedAStatus insecurelyReadPayloadRpData(std::array<uint8_t, 32>* out) override {
-            if (__builtin_available(android 36, *)) {
-                int32_t ret = AVmPayload_readRollbackProtectedSecret(out->data(), 32);
-                if (ret != 32) {
-                    return ScopedAStatus::fromServiceSpecificError(ret);
-                }
-                return ScopedAStatus::ok();
-            } else {
-                return ScopedAStatus::fromExceptionCodeWithMessage(EX_SERVICE_SPECIFIC,
-                                                                   "not available before SDK 36");
+            int32_t ret = AVmPayload_readRollbackProtectedSecret(out->data(), 32);
+            if (ret != 32) {
+                return ScopedAStatus::fromServiceSpecificError(ret);
             }
+            return ScopedAStatus::ok();
         }
 
         ScopedAStatus insecurelyWritePayloadRpData(
                 const std::array<uint8_t, 32>& inputData) override {
-            if (__builtin_available(android 36, *)) {
-                int32_t ret = AVmPayload_writeRollbackProtectedSecret(inputData.data(), 32);
-                if (ret != 32) {
-                    return ScopedAStatus::fromServiceSpecificError(ret);
-                }
-                return ScopedAStatus::ok();
-            } else {
-                return ScopedAStatus::fromExceptionCodeWithMessage(EX_SERVICE_SPECIFIC,
-                                                                   "not available before SDK 36");
+            int32_t ret = AVmPayload_writeRollbackProtectedSecret(inputData.data(), 32);
+            if (ret != 32) {
+                return ScopedAStatus::fromServiceSpecificError(ret);
             }
+            return ScopedAStatus::ok();
         }
 
         ScopedAStatus isNewInstance(bool* is_new_instance_out) override {
-            if (__builtin_available(android 36, *)) {
-                *is_new_instance_out = AVmPayload_isNewInstance();
-                return ScopedAStatus::ok();
-            } else {
-                return ScopedAStatus::fromExceptionCodeWithMessage(EX_SERVICE_SPECIFIC,
-                                                                   "not available before SDK 36");
-            }
-        }
-
-        ScopedAStatus checkLibIcuIsAccessible() override {
-#ifdef __MICRODROID_TEST_PAYLOAD_USES_LIBICU__
-            static constexpr const char* kLibIcuPath = "/apex/com.android.i18n/lib64/libicu.so";
-            if (access(kLibIcuPath, R_OK) == 0) {
-                if (!u_hasBinaryProperty(U'❤' /* Emoji heart U+2764 */, UCHAR_EMOJI)) {
-                    return ScopedAStatus::fromExceptionCodeWithMessage(EX_SERVICE_SPECIFIC,
-                                                                       "libicu broken!");
-                }
-                return ScopedAStatus::ok();
-            } else {
-                std::string msg = "failed to access " + std::string(kLibIcuPath) + "(" +
-                        std::to_string(errno) + ")";
-                return ScopedAStatus::fromExceptionCodeWithMessage(EX_SERVICE_SPECIFIC,
-                                                                   msg.c_str());
-            }
-#else
-            return ScopedAStatus::
-                    fromExceptionCodeWithMessage(EX_SERVICE_SPECIFIC,
-                                                 "should be only used together with "
-                                                 "MicrodroidTestNativeLibWithLibIcu.so payload");
-#endif
+            *is_new_instance_out = AVmPayload_isNewInstance();
+            return ScopedAStatus::ok();
         }
 
         ScopedAStatus quit() override { exit(0); }

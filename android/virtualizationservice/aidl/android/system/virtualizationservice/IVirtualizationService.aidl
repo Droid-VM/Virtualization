@@ -58,6 +58,14 @@ interface IVirtualizationService {
             in ParcelFileDescriptor imageFd, long sizeBytes, PartitionType type);
 
     /**
+     * Ensure the encryptedstore partition image has enough space for the required size.
+     *
+     * The file must be open with both read and write permissions.
+     */
+    void ensurePartitionCapacity(
+            in ParcelFileDescriptor imageFd, long requiredSize);
+
+    /**
      * Create or update an idsig file that digests the given APK file. The idsig file follows the
      * idsig format that is defined by the APK Signature Scheme V4. The idsig file is not updated
      * when it is up to date with the input file, which is checked by comparing the

@@ -135,9 +135,6 @@ impl ITestService for TestService {
     fn isNewInstance(&self) -> BinderResult<bool> {
         unimplemented()
     }
-    fn checkLibIcuIsAccessible(&self) -> BinderResult<()> {
-        unimplemented()
-    }
 }
 
 fn unimplemented<T>() -> BinderResult<T> {
