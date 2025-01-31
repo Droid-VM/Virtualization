@@ -489,7 +489,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @Parameters(method = "osVersions")
     @TestCaseName("{method}_os_{0}")
     @GmsTest(requirements = {"GMS-3-7.1-010"})
-    public void protectedVmRunsPvmfw(String os) throws Exception {
+    public void protectedVmRunsPvmfw() throws Exception {
         // Arrange
         assumeKernelSupported(os);
         assumeVmTypeSupported(os, true);
