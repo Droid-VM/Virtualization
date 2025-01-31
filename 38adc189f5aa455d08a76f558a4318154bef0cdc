@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81c4abb1_31e2ed0a",
+        "filename": "libs/libvmbase/src/uart.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2025-01-31T10:00:04Z",
+      "side": 1,
+      "message": "Nit: consider calling this `write_register_u8` or something instead, as the key point is not that it uses a volatile write operation but that it writes to a register of the UART, however that is accessed.",
+      "range": {
+        "startLine": 23,
+        "startChar": 7,
+        "endLine": 23,
+        "endChar": 24
+      },
+      "revId": "38adc189f5aa455d08a76f558a4318154bef0cdc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
