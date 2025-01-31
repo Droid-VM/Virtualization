@@ -304,6 +304,32 @@ impl IVirtualizationService for VirtualizationService {
         Ok(())
     }
 
+    fn ensurePartitionCapacity(
+        &self,
+        image_fd: &ParcelFileDescriptor,
+        required_size: i64,
+    ) -> binder::Result<()> {
+        check_manage_access()?;
+
+        let required_size = required_size
+            .try_into()
+            .with_context(|| format!("Invalid size: {}", required_size))
+            .or_binder_exception(ExceptionCode::ILLEGAL_ARGUMENT)?;
+        let required_size = round_up(required_size, PARTITION_GRANULARITY_BYTES);
+
+        let image = clone_file(image_fd)?;
+
+        if image.metadata().unwrap().len() < required_size {
+            // Reset the file length. In most filesystems, this will not allocate any physical disk
+            // space, it will only change the logical size.
+            image
+                .set_len(required_size)
+                .context("Failed to extend file")
+                .or_service_specific_exception(-1)?;
+        }
+        Ok(())
+    }
+
     /// Creates or update the idsig file by digesting the input APK file.
     fn createOrUpdateIdsigFile(
         &self,
