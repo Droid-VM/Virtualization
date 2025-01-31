@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e55f8f34_5dbc08d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1943701
+      },
+      "writtenOn": "2025-01-31T09:38:30Z",
+      "side": 1,
+      "message": "Unsafe Rust LGTM! It follows https://google.github.io/comprehensive-rust/bare-metal/aps/uart.html nicely, which is no wonder since @qwandor@google.com wrote both originally 😊",
+      "revId": "e177db871ccd62b184884dcc152158ba95f68b25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4aa5d49f_80b5d4b1",
@@ -14,6 +31,24 @@
       "writtenOn": "2025-01-30T20:29:29Z",
       "side": 1,
       "message": "nit: `Send` should be derived automatically for structs that consist entirely of other `Send` types, so I believe this `unsafe impl Send` shouldn\u0027t be necessary.",
+      "revId": "e177db871ccd62b184884dcc152158ba95f68b25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58dffea4_e6474b24",
+        "filename": "libs/libvmbase/src/uart.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1943701
+      },
+      "writtenOn": "2025-01-31T09:38:30Z",
+      "side": 1,
+      "message": "Unsafe Rust review: This logic seems correct to me. `Uart` contains only a `Backed` field, so `Uart\u003cBackend\u003e` will be `Send` when `Backend` is send. So I agree that the impl shouldn\u0027t be necessary.",
+      "parentUuid": "4aa5d49f_80b5d4b1",
       "revId": "e177db871ccd62b184884dcc152158ba95f68b25",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
