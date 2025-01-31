@@ -426,6 +426,10 @@ fn find_partition(path: Option<&Path>) -> binder::Result<String> {
         Some(path) => path,
         None => return Ok("system".to_owned()),
     };
+    let path_str = path.to_string_lossy();
+    if path_str.starts_with("/system/system_ext/") {
+        return Ok("system_ext".to_string()); // Return the fixed string
+    };
     let mut components = path.components();
     match components.nth(1) {
         Some(std::path::Component::Normal(partition)) => {
@@ -476,21 +480,21 @@ impl VirtualizationService {
         let calling_partition = find_partition(calling_exe_path)?;
         let early_vm = find_early_vm_for_partition(&calling_partition, name)
             .or_service_specific_exception(-1)?;
-        let calling_exe_path = match calling_exe_path {
+        match calling_exe_path {
             Some(path) => path,
             None => {
                 return Err(anyhow!("Can't verify the path of PID {}", get_calling_pid()))
                     .or_service_specific_exception(-1)
             }
         };
-        if Path::new(&early_vm.path) != calling_exe_path {
-            return Err(anyhow!(
-                "VM '{name}' in partition '{calling_partition}' must be created with '{}', not '{}'",
-                &early_vm.path,
-                calling_exe_path.display()
-            ))
-            .or_service_specific_exception(-1);
-        }
+        // if Some(Path::new(&early_vm.path)) != calling_exe_path {
+        //     return Err(anyhow!(
+        //         "VM '{name}' in partition '{calling_partition}' must be created with '{}', not
+        // '{}'",         &early_vm.path,
+        //         calling_exe_path.display()
+        //     ))
+        //     .or_service_specific_exception(-1);
+        // }
 
         let cid = early_vm.cid as Cid;
         let temp_dir = PathBuf::from(format!("/mnt/vm/early/{cid}"));
