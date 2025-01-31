@@ -1,6 +1,13 @@
 #!/bin/bash
 
 chmod +x $target/usr/local/bin/ttyd
+<<<<<<< PATCH SET (244ebf Run avahi-publish-service for ttyd as a separte service)
+chmod +x $target/usr/local/bin/run_weston.sh
+ln -s /etc/systemd/system/avahi_ttyd.service $target/etc/systemd/system/multi-user.target.wants/avahi_ttyd.service
+||||||| BASE
+chmod +x $target/usr/local/bin/run_weston.sh
+=======
+>>>>>>> BASE      (c46cf1 Merge changes from topic "microdroid-pvms-in-mainline-module)
 ln -s /etc/systemd/system/ttyd.service $target/etc/systemd/system/multi-user.target.wants/ttyd.service
 ln -s /etc/systemd/system/virtiofs.service $target/etc/systemd/system/multi-user.target.wants/virtiofs.service
 ln -s /etc/systemd/system/virtiofs_internal.service $target/etc/systemd/system/multi-user.target.wants/virtiofs_internal.service
