@@ -16,6 +16,24 @@
       "message": "How is this done in the ordinary Linux distros??",
       "revId": "719f0dae3c4ae8bff9ddc0f96a2459ea6ae9cf22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0130a2fa_bae3a75c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2025-01-31T07:42:13Z",
+      "side": 1,
+      "message": "it looks like ordinary Linux distros doesn\u0027t use weston, it is used for mostly embeded device or something like that.\n\nI orignally follow https://developer.nvidia.com/docs/drive/drive-os/archives/6.0.3/linux/sdk/oxy_ex-1/common/topics/window_system_stub/TostartWestonwithrootprivileges67.html which is `To start Weston with root privileges`\n\nBut I found https://wayland.pages.freedesktop.org/weston/toc/running-weston.html#running-weston-from-a-systemd-service which describes how to run weston as a systemd user service. So I updated with that.",
+      "parentUuid": "b0fa4d65_a76b4d33",
+      "revId": "719f0dae3c4ae8bff9ddc0f96a2459ea6ae9cf22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
