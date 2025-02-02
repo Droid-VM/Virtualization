@@ -19,7 +19,7 @@ use crate::atom::{write_vm_booted_stats, write_vm_creation_stats};
 use crate::composite::make_composite_image;
 use crate::crosvm::{AudioConfig, CrosvmConfig, DiskFile, SharedPathConfig, DisplayConfig, GpuConfig, InputDeviceOption, PayloadState, UsbConfig, VmContext, VmInstance, VmState};
 use crate::debug_config::{DebugConfig, DebugPolicy};
-use crate::dt_overlay::{create_device_tree_overlay, VM_DT_OVERLAY_MAX_SIZE, VM_DT_OVERLAY_PATH};
+use crate::dt_overlay::{create_device_tree_overlay, ExtraDeviceTreeProperties, TrustedDeviceTreeProperties, UntrustedDeviceTreeProperties, VM_DT_OVERLAY_PATH};
 use crate::payload::{ApexInfoList, add_microdroid_payload_images, add_microdroid_system_images, add_microdroid_vendor_image};
 use crate::selinux::{check_tee_service_permission, getfilecon, getprevcon, SeContext};
 use android_os_permissions_aidl::aidl::android::os::IPermissionController;
@@ -81,7 +81,7 @@ use std::convert::TryInto;
 use std::fs;
 use std::ffi::CStr;
 use std::fs::{canonicalize, create_dir_all, read_dir, remove_dir_all, remove_file, File, OpenOptions};
-use std::io::{BufRead, BufReader, Error, ErrorKind, Seek, SeekFrom, Write};
+use std::io::{BufRead, BufReader, Error, ErrorKind, Read, Seek, SeekFrom, Write};
 use std::iter;
 use std::num::{NonZeroU16, NonZeroU32};
 use std::ops::Range;
@@ -122,7 +122,8 @@ const UNFORMATTED_STORAGE_MAGIC: &str = "UNFORMATTED-STORAGE";
 /// crosvm requires all partitions to be a multiple of 4KiB.
 const PARTITION_GRANULARITY_BYTES: u64 = 4096;
 
-const VM_REFERENCE_DT_ON_HOST_PATH: &str = "/proc/device-tree/avf/reference";
+const SECRETKEEPER_PUBLIC_KEY_ON_HOST_DT: &str =
+    "/proc/device-tree/avf/reference/avf/secretkeeper_public_key";
 
 pub static GLOBAL_SERVICE: LazyLock<Strong<dyn IVirtualizationServiceInternal>> =
     LazyLock::new(|| {
@@ -623,12 +624,25 @@ impl VirtualizationService {
         }
 
         let instance_id = extract_instance_id(config);
+        let defer_rollback_protection =
+            cfg!(llpvm_changes) && extract_want_updatable(config) && is_secretkeeper_supported();
+        let secretkeeper_public_key =
+            if defer_rollback_protection { extract_sk_public_key() } else { Ok(None) }
+                .or_service_specific_exception(-1)?;
+
+        let extra_device_tree_properties = ExtraDeviceTreeProperties {
+            trusted: TrustedDeviceTreeProperties {
+                secretkeeper_public_key,
+                vendor_hashtree_descriptor_root_digest: extract_vendor_hashtree_digest(config)
+                    .or_service_specific_exception(-1)?,
+            },
+            untrusted: UntrustedDeviceTreeProperties {
+                defer_rollback_protection,
+                instance_id: cfg!(llpvm_changes).then_some(instance_id),
+            },
+        };
+
         let mut device_tree_overlays = vec![];
-        if let Some(dt_overlay) =
-            maybe_create_reference_dt_overlay(config, &instance_id, &temporary_directory)?
-        {
-            device_tree_overlays.push(dt_overlay);
-        }
         if let Some(dtbo) = get_dtbo(config) {
             let dtbo = File::from(
                 dtbo.as_ref()
@@ -637,6 +651,16 @@ impl VirtualizationService {
                     .or_binder_exception(ExceptionCode::BAD_PARCELABLE)?,
             );
             device_tree_overlays.push(dtbo);
+        }
+
+        // The extra device tree properties DTBO should have priority over
+        // any other, thus should always be added to `device_tree_overlays` *last*.
+        let dt_output = temporary_directory.join(VM_DT_OVERLAY_PATH);
+        if let Some(dt_overlay) = extra_device_tree_properties
+            .maybe_create_device_tree_overlay(&dt_output)
+            .or_service_specific_exception(-1)?
+        {
+            device_tree_overlays.push(dt_overlay);
         }
 
         let debug_config = DebugConfig::new(config);
@@ -987,6 +1011,42 @@ fn extract_vendor_hashtree_digest(config: &VirtualMachineConfig) -> Result<Optio
     Err(anyhow!("No hashtree digest is extracted from microdroid vendor image"))
 }
 
+fn extract_sk_public_key() -> Result<Option<Vec<u8>>> {
+    let from_hal = extract_sk_public_key_from_hal()?;
+    if from_hal.is_none() {
+        return extract_sk_public_key_from_host_dt();
+    }
+    Ok(from_hal)
+}
+
+fn extract_sk_public_key_from_hal() -> Result<Option<Vec<u8>>> {
+    let sk: Strong<dyn ISecretkeeper> = binder::wait_for_interface(SECRETKEEPER_IDENTIFIER)?;
+    if sk.getInterfaceVersion()? >= 2 {
+        let PublicKey { keyMaterial } = sk.getSecretkeeperIdentity()?;
+        Ok(Some(keyMaterial))
+    } else {
+        Ok(None)
+    }
+}
+
+fn extract_sk_public_key_from_host_dt() -> Result<Option<Vec<u8>>> {
+    let sk_pk_path = Path::new(SECRETKEEPER_PUBLIC_KEY_ON_HOST_DT);
+    let mut sk_pk_file = File::open(sk_pk_path)
+        .map_err(|e| anyhow!("Failed to locate secretkeeper_public_key in host DT: {e:?}"))?;
+
+    let mut key_material: Vec<u8> = vec![];
+    sk_pk_file
+        .read_to_end(&mut key_material)
+        .map_err(|e| anyhow!("Failed to read secretkeeper_public_key in host DT: {e:?}"))?;
+
+    Ok(Some(key_material))
+}
+
+// both can become private in dt_overlay
+const VM_DT_OVERLAY_MAX_SIZE: usize = 2000;
+const VM_REFERENCE_DT_ON_HOST_PATH: &str = "/proc/device-tree/avf/reference";
+
+#[allow(dead_code)]
 fn maybe_create_reference_dt_overlay(
     config: &VirtualMachineConfig,
     instance_id: &[u8; 64],
