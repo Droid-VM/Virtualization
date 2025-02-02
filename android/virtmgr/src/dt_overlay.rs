@@ -15,94 +15,134 @@
 //! This module support creating AFV related overlays, that can then be appended to DT by VM.
 
 use anyhow::{anyhow, Result};
-use fsfdt::FsFdt;
 use libfdt::Fdt;
 use std::ffi::CStr;
-use std::path::Path;
+use std::fs::{write, File};
+use std::path::PathBuf;
 
-pub(crate) const AVF_NODE_NAME: &CStr = c"avf";
-pub(crate) const UNTRUSTED_NODE_NAME: &CStr = c"untrusted";
+const AVF_NODE_NAME: &CStr = c"avf";
+const UNTRUSTED_NODE_NAME: &CStr = c"untrusted";
+const VM_DT_OVERLAY_MAX_SIZE: usize = 2000;
 pub(crate) const VM_DT_OVERLAY_PATH: &str = "vm_dt_overlay.dtbo";
-pub(crate) const VM_DT_OVERLAY_MAX_SIZE: usize = 2000;
 
-/// Create a Device tree overlay containing the provided proc style device tree & properties!
-/// # Arguments
-/// * `dt_path` - (Optional) Path to (proc style) device tree to be included in the overlay.
-/// * `untrusted_props` - Include a property in /avf/untrusted node. This node is used to specify
-///   host provided properties such as `instance-id`.
-/// * `trusted_props` - Include a property in /avf node. This overwrites nodes included with
-///   `dt_path`. In pVM, pvmfw will reject if it doesn't match the value in pvmfw config.
-///
-/// Example: with `create_device_tree_overlay(_, _, [("instance-id", _),], [("digest", _),])`
-/// ```
-///   {
-///     fragment@0 {
-///         target-path = "/";
-///         __overlay__ {
-///             avf {
-///                 digest = [ 0xaa 0xbb .. ]
-///                 untrusted { instance-id = [ 0x01 0x23 .. ] }
-///               }
-///             };
-///         };
-///     };
-/// };
-/// ```
-pub(crate) fn create_device_tree_overlay<'a>(
-    buffer: &'a mut [u8],
-    dt_path: Option<&'a Path>,
-    untrusted_props: &[(&'a CStr, &'a [u8])],
-    trusted_props: &[(&'a CStr, &'a [u8])],
-) -> Result<&'a mut Fdt> {
-    if dt_path.is_none() && untrusted_props.is_empty() && trusted_props.is_empty() {
-        return Err(anyhow!("Expected at least one device tree addition"));
-    }
+pub(crate) struct TrustedDeviceTreeProperties {
+    pub(crate) secretkeeper_public_key: Option<Vec<u8>>,
+    pub(crate) vendor_hashtree_descriptor_root_digest: Option<Vec<u8>>,
+}
 
-    let fdt =
-        Fdt::create_empty_tree(buffer).map_err(|e| anyhow!("Failed to create empty Fdt: {e:?}"))?;
-    let mut fragment = fdt
-        .root_mut()
-        .add_subnode(c"fragment@0")
-        .map_err(|e| anyhow!("Failed to add fragment node: {e:?}"))?;
-    fragment
-        .setprop(c"target-path", b"/\0")
-        .map_err(|e| anyhow!("Failed to set target-path property: {e:?}"))?;
-    let overlay = fragment
-        .add_subnode(c"__overlay__")
-        .map_err(|e| anyhow!("Failed to add __overlay__ node: {e:?}"))?;
-    let avf =
-        overlay.add_subnode(AVF_NODE_NAME).map_err(|e| anyhow!("Failed to add avf node: {e:?}"))?;
+pub(crate) struct UntrustedDeviceTreeProperties {
+    pub(crate) defer_rollback_protection: bool,
+    pub(crate) instance_id: Option<[u8; 64]>,
+}
 
-    if !untrusted_props.is_empty() {
-        let mut untrusted = avf
-            .add_subnode(UNTRUSTED_NODE_NAME)
-            .map_err(|e| anyhow!("Failed to add untrusted node: {e:?}"))?;
-        for (name, value) in untrusted_props {
-            untrusted
-                .setprop(name, value)
-                .map_err(|e| anyhow!("Failed to set untrusted property: {e:?}"))?;
+pub(crate) struct ExtraDeviceTreeProperties {
+    pub(crate) trusted: TrustedDeviceTreeProperties,
+    pub(crate) untrusted: UntrustedDeviceTreeProperties,
+}
+
+impl ExtraDeviceTreeProperties {
+    /// Create a Device tree overlay containing the provided proc style device tree & properties!
+    /// # Arguments
+    /// * `dt_output` - The path to the output dtbo that will be populated.
+    ///
+    /// Example: with true/Some for all `ExtraDeviceTreeProperties` fields:
+    /// ```
+    ///   {
+    ///     fragment@0 {
+    ///         target-path = "/";
+    ///         __overlay__ {
+    ///             avf {
+    ///                 secretkeeper-public-key = [ 0xcc 0xdd .. ]
+    ///                 vendor-hashtree-descriptor-root-digest = [ 0xaa 0xbb .. ]
+    ///                 untrusted {
+    ///                     instance-id = [ 0x01 0x23 .. ]
+    ///                     defer-rollback-protection = []
+    ///                 };
+    ///             };
+    ///         };
+    ///     };
+    /// };
+    /// ```
+    pub(crate) fn maybe_create_device_tree_overlay(
+        &self,
+        dt_output: &PathBuf,
+    ) -> Result<Option<File>> {
+        let mut buffer = [0_u8; VM_DT_OVERLAY_MAX_SIZE];
+        let fdt = self.maybe_create_device_tree_overlay_impl(&mut buffer)?;
+
+        if let Some(fdt) = fdt {
+            write(dt_output, fdt.as_slice())?;
+            return Ok(Some(File::open(dt_output)?));
         }
+
+        Ok(None)
     }
 
-    // Read dt_path from host DT and overlay onto fdt.
-    if let Some(path) = dt_path {
-        fdt.overlay_onto(c"/fragment@0/__overlay__", path)?;
-    }
-
-    if !trusted_props.is_empty() {
-        let mut avf = fdt
-            .node_mut(c"/fragment@0/__overlay__/avf")
-            .map_err(|e| anyhow!("Failed to search avf node: {e:?}"))?
-            .ok_or(anyhow!("Failed to get avf node"))?;
-        for (name, value) in trusted_props {
-            avf.setprop(name, value)
-                .map_err(|e| anyhow!("Failed to set trusted property: {e:?}"))?;
+    fn maybe_create_device_tree_overlay_impl<'a>(
+        &self,
+        buffer: &'a mut [u8],
+    ) -> Result<Option<&'a mut Fdt>> {
+        let mut avf_props = Vec::new();
+        if let Some(secretkeeper_public_key) = &self.trusted.secretkeeper_public_key {
+            avf_props.push((c"secretkeeper-public-key", secretkeeper_public_key));
         }
+        if let Some(vendor_hashtree_descriptor_root_digest) =
+            &self.trusted.vendor_hashtree_descriptor_root_digest
+        {
+            avf_props.push((
+                c"vendor-hashtree-descriptor-root-digest",
+                vendor_hashtree_descriptor_root_digest,
+            ));
+        }
+
+        let mut untrusted_props: Vec<(&CStr, &[u8])> = Vec::new();
+        let instance_id_prop; // satisfy the borrow checker
+        if let Some(instance_id) = self.untrusted.instance_id {
+            instance_id_prop = instance_id;
+            untrusted_props.push((c"instance-id", &instance_id_prop));
+        }
+        if self.untrusted.defer_rollback_protection {
+            untrusted_props.push((c"defer-rollback-protection", &[]));
+        }
+
+        if avf_props.is_empty() && untrusted_props.is_empty() {
+            return Ok(None);
+        }
+
+        let fdt = Fdt::create_empty_tree(buffer)
+            .map_err(|e| anyhow!("Failed to create empty Fdt: {e:?}"))?;
+        let mut fragment = fdt
+            .root_mut()
+            .add_subnode(c"fragment@0")
+            .map_err(|e| anyhow!("Failed to add fragment node: {e:?}"))?;
+        fragment
+            .setprop(c"target-path", b"/\0")
+            .map_err(|e| anyhow!("Failed to set target-path property: {e:?}"))?;
+        let overlay = fragment
+            .add_subnode(c"__overlay__")
+            .map_err(|e| anyhow!("Failed to add __overlay__ node: {e:?}"))?;
+        let mut avf = overlay
+            .add_subnode(AVF_NODE_NAME)
+            .map_err(|e| anyhow!("Failed to add avf node: {e:?}"))?;
+
+        for (key, val) in avf_props {
+            avf.setprop(key, val)?;
+        }
+
+        if !untrusted_props.is_empty() {
+            let mut untrusted = avf
+                .add_subnode(UNTRUSTED_NODE_NAME)
+                .map_err(|e| anyhow!("Failed to add untrusted node: {e:?}"))?;
+
+            for (key, val) in untrusted_props {
+                untrusted.setprop(key, val)?;
+            }
+        }
+
+        fdt.pack().map_err(|e| anyhow!("Failed to pack DT overlay, {e:?}"))?;
+
+        Ok(Some(fdt))
     }
-
-    fdt.pack().map_err(|e| anyhow!("Failed to pack DT overlay, {e:?}"))?;
-
-    Ok(fdt)
 }
 
 #[cfg(test)]
@@ -110,47 +150,98 @@ mod tests {
     use super::*;
 
     #[test]
-    fn empty_overlays_not_allowed() {
-        let mut buffer = vec![0_u8; VM_DT_OVERLAY_MAX_SIZE];
-        let res = create_device_tree_overlay(&mut buffer, None, &[], &[]);
-        assert!(res.is_err());
+    fn all_props_falsy_returns_none() {
+        let extra_props = ExtraDeviceTreeProperties {
+            trusted: TrustedDeviceTreeProperties {
+                secretkeeper_public_key: None,
+                vendor_hashtree_descriptor_root_digest: None,
+            },
+            untrusted: UntrustedDeviceTreeProperties {
+                defer_rollback_protection: false,
+                instance_id: None,
+            },
+        };
+        let buf = PathBuf::new();
+
+        assert!(extra_props.maybe_create_device_tree_overlay(&buf).unwrap().is_none())
     }
 
     #[test]
     fn untrusted_prop_test() {
-        let mut buffer = vec![0_u8; VM_DT_OVERLAY_MAX_SIZE];
-        let prop_name = c"XOXO";
-        let prop_val_input = b"OXOX";
-        let fdt =
-            create_device_tree_overlay(&mut buffer, None, &[(prop_name, prop_val_input)], &[])
-                .unwrap();
+        let instance_id: [u8; 64] = [1; 64];
+        let extra_props = ExtraDeviceTreeProperties {
+            trusted: TrustedDeviceTreeProperties {
+                secretkeeper_public_key: None,
+                vendor_hashtree_descriptor_root_digest: None,
+            },
+            untrusted: UntrustedDeviceTreeProperties {
+                defer_rollback_protection: true,
+                instance_id: Some(instance_id),
+            },
+        };
 
-        let prop_value_dt = fdt
+        let mut buffer = [0_u8; VM_DT_OVERLAY_MAX_SIZE];
+        let fdt = extra_props.maybe_create_device_tree_overlay_impl(&mut buffer).unwrap().unwrap();
+
+        let untrusted_node = fdt
             .node(c"/fragment@0/__overlay__/avf/untrusted")
             .unwrap()
-            .expect("/avf/untrusted node doesn't exist")
-            .getprop(prop_name)
+            .expect("/avf/untrusted node doesn't exist");
+
+        let instance_id_prop =
+            untrusted_node.getprop(c"instance-id").unwrap().expect("instance-id not found!");
+
+        assert_eq!(instance_id_prop, instance_id, "instance ID prop incorrect");
+
+        let defer_rollback_protection: &[u8] = untrusted_node
+            .getprop(c"defer-rollback-protection")
             .unwrap()
-            .expect("Prop not found!");
-        assert_eq!(prop_value_dt, prop_val_input, "Unexpected property value");
+            .expect("defer-rollback-protection not found!");
+
+        assert_eq!(
+            defer_rollback_protection,
+            &[] as &[u8],
+            "defer rollback protection prop incorrect"
+        )
     }
 
     #[test]
     fn trusted_prop_test() {
-        let mut buffer = vec![0_u8; VM_DT_OVERLAY_MAX_SIZE];
-        let prop_name = c"XOXOXO";
-        let prop_val_input = b"OXOXOX";
-        let fdt =
-            create_device_tree_overlay(&mut buffer, None, &[], &[(prop_name, prop_val_input)])
-                .unwrap();
+        let sk_pk: [u8; 64] = [1; 64];
+        let digest: [u8; 64] = [2; 64];
+        let extra_props = ExtraDeviceTreeProperties {
+            trusted: TrustedDeviceTreeProperties {
+                secretkeeper_public_key: Some(sk_pk.to_vec()),
+                vendor_hashtree_descriptor_root_digest: Some(digest.to_vec()),
+            },
+            untrusted: UntrustedDeviceTreeProperties {
+                defer_rollback_protection: false,
+                instance_id: None,
+            },
+        };
 
-        let prop_value_dt = fdt
-            .node(c"/fragment@0/__overlay__/avf")
+        let mut buffer = [0_u8; VM_DT_OVERLAY_MAX_SIZE];
+        let fdt = extra_props.maybe_create_device_tree_overlay_impl(&mut buffer).unwrap().unwrap();
+
+        let avf_node =
+            fdt.node(c"/fragment@0/__overlay__/avf").unwrap().expect("/avf node doesn't exist");
+
+        let sk_pk_prop = avf_node
+            .getprop(c"secretkeeper-public-key")
             .unwrap()
-            .expect("/avf node doesn't exist")
-            .getprop(prop_name)
+            .expect("secretkeeper-public-key not found!");
+
+        assert_eq!(sk_pk, sk_pk_prop, "secretkeeper-public-key prop incorrect");
+
+        let digest_prop: &[u8] = avf_node
+            .getprop(c"vendor-hashtree-descriptor-root-digest")
             .unwrap()
-            .expect("Prop not found!");
-        assert_eq!(prop_value_dt, prop_val_input, "Unexpected property value");
+            .expect("vendor-hashtree-descriptor-root-digest not found!");
+
+        assert_eq!(digest, digest_prop, "defer rollback protection prop incorrect");
+
+        let untrusted_node = fdt.node(c"/fragment@0/__overlay__/avf/untrusted").unwrap();
+
+        assert!(untrusted_node.is_none());
     }
 }
