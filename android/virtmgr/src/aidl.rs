@@ -19,7 +19,7 @@ use crate::atom::{write_vm_booted_stats, write_vm_creation_stats};
 use crate::composite::make_composite_image;
 use crate::crosvm::{AudioConfig, CrosvmConfig, DiskFile, SharedPathConfig, DisplayConfig, GpuConfig, InputDeviceOption, PayloadState, UsbConfig, VmContext, VmInstance, VmState};
 use crate::debug_config::{DebugConfig, DebugPolicy};
-use crate::dt_overlay::{create_device_tree_overlay, VM_DT_OVERLAY_MAX_SIZE, VM_DT_OVERLAY_PATH};
+use crate::dt_overlay::{extract_sk_public_key_from_host_ref_dt, ExtraDeviceTreeProperties, TrustedDeviceTreeProperties, UntrustedDeviceTreeProperties};
 use crate::payload::{ApexInfoList, add_microdroid_payload_images, add_microdroid_system_images, add_microdroid_vendor_image};
 use crate::selinux::{check_tee_service_permission, getfilecon, getprevcon, SeContext};
 use android_os_permissions_aidl::aidl::android::os::IPermissionController;
@@ -122,8 +122,6 @@ const UNFORMATTED_STORAGE_MAGIC: &str = "UNFORMATTED-STORAGE";
 
 /// crosvm requires all partitions to be a multiple of 4KiB.
 const PARTITION_GRANULARITY_BYTES: u64 = 4096;
-
-const VM_REFERENCE_DT_ON_HOST_PATH: &str = "/proc/device-tree/avf/reference";
 
 pub static GLOBAL_SERVICE: LazyLock<Strong<dyn IVirtualizationServiceInternal>> =
     LazyLock::new(|| {
@@ -589,11 +587,28 @@ impl VirtualizationService {
 
         let instance_id = extract_instance_id(config);
         let mut device_tree_overlays = vec![];
-        if let Some(dt_overlay) =
-            maybe_create_reference_dt_overlay(config, &instance_id, &temporary_directory)?
+        let extra_device_tree_properties = ExtraDeviceTreeProperties {
+            trusted: TrustedDeviceTreeProperties {
+                secretkeeper_public_key: extract_secretkeeper_public_key(config)
+                    .or_service_specific_exception(-1)?,
+                vendor_hashtree_descriptor_root_digest: extract_vendor_hashtree_digest(config)
+                    .or_service_specific_exception(-1)?,
+            },
+            untrusted: UntrustedDeviceTreeProperties {
+                defer_rollback_protection: cfg!(llpvm_changes)
+                    && extract_want_updatable(config)
+                    && is_secretkeeper_supported(),
+                instance_id: if cfg!(llpvm_changes) { Some(instance_id) } else { None },
+            },
+        };
+
+        if let Some(dt_overlay) = extra_device_tree_properties
+            .maybe_create_device_tree_overlay(&temporary_directory)
+            .or_service_specific_exception(-1)?
         {
             device_tree_overlays.push(dt_overlay);
         }
+
         if let Some(dtbo) = get_dtbo(config) {
             let dtbo = File::from(
                 dtbo.as_ref()
@@ -951,72 +966,19 @@ fn extract_vendor_hashtree_digest(config: &VirtualMachineConfig) -> Result<Optio
     Err(anyhow!("No hashtree digest is extracted from microdroid vendor image"))
 }
 
-fn maybe_create_reference_dt_overlay(
-    config: &VirtualMachineConfig,
-    instance_id: &[u8; 64],
-    temporary_directory: &Path,
-) -> binder::Result<Option<File>> {
-    // Currently, VirtMgr adds the host copy of reference DT & untrusted properties
-    // (e.g. instance-id)
-    let host_ref_dt = Path::new(VM_REFERENCE_DT_ON_HOST_PATH);
-    let host_ref_dt = if host_ref_dt.exists()
-        && read_dir(host_ref_dt).or_service_specific_exception(-1)?.next().is_some()
-    {
-        Some(host_ref_dt)
-    } else {
-        warn!("VM reference DT doesn't exist in host DT");
-        None
-    };
-
-    let vendor_hashtree_digest = extract_vendor_hashtree_digest(config)
-        .context("Failed to extract vendor hashtree digest")
-        .or_service_specific_exception(-1)?;
-
-    let mut trusted_props = if let Some(ref vendor_hashtree_digest) = vendor_hashtree_digest {
-        info!(
-            "Passing vendor hashtree digest to pvmfw. This will be rejected if it doesn't \
-                match the trusted digest in the pvmfw config, causing the VM to fail to start."
-        );
-        vec![(c"vendor_hashtree_descriptor_root_digest", vendor_hashtree_digest.as_slice())]
-    } else {
-        vec![]
-    };
-
-    let key_material;
-    let mut untrusted_props = Vec::with_capacity(2);
+fn extract_secretkeeper_public_key(config: &VirtualMachineConfig) -> Result<Option<Vec<u8>>> {
     if cfg!(llpvm_changes) {
-        untrusted_props.push((c"instance-id", &instance_id[..]));
         let want_updatable = extract_want_updatable(config);
         if want_updatable && is_secretkeeper_supported() {
-            // Let guest know that it can defer rollback protection to Secretkeeper by setting
-            // an empty property in untrusted node in DT. This enables Updatable VMs.
-            untrusted_props.push((c"defer-rollback-protection", &[]));
             let sk: Strong<dyn ISecretkeeper> =
                 binder::wait_for_interface(SECRETKEEPER_IDENTIFIER)?;
             if sk.getInterfaceVersion()? >= 2 {
                 let PublicKey { keyMaterial } = sk.getSecretkeeperIdentity()?;
-                key_material = keyMaterial;
-                trusted_props.push((c"secretkeeper_public_key", key_material.as_slice()));
+                return Ok(Some(keyMaterial));
             }
         }
     }
-
-    let device_tree_overlay = if host_ref_dt.is_some()
-        || !untrusted_props.is_empty()
-        || !trusted_props.is_empty()
-    {
-        let dt_output = temporary_directory.join(VM_DT_OVERLAY_PATH);
-        let mut data = [0_u8; VM_DT_OVERLAY_MAX_SIZE];
-        let fdt =
-            create_device_tree_overlay(&mut data, host_ref_dt, &untrusted_props, &trusted_props)
-                .map_err(|e| anyhow!("Failed to create DT overlay, {e:?}"))
-                .or_service_specific_exception(-1)?;
-        fs::write(&dt_output, fdt.as_slice()).or_service_specific_exception(-1)?;
-        Some(File::open(dt_output).or_service_specific_exception(-1)?)
-    } else {
-        None
-    };
-    Ok(device_tree_overlay)
+    extract_sk_public_key_from_host_ref_dt()
 }
 
 fn get_dtbo(config: &VirtualMachineConfig) -> Option<&ParcelFileDescriptor> {
