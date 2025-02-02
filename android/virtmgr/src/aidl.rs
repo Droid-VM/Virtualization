@@ -19,7 +19,7 @@ use crate::atom::{write_vm_booted_stats, write_vm_creation_stats};
 use crate::composite::make_composite_image;
 use crate::crosvm::{AudioConfig, CrosvmConfig, DiskFile, SharedPathConfig, DisplayConfig, GpuConfig, InputDeviceOption, PayloadState, UsbConfig, VmContext, VmInstance, VmState};
 use crate::debug_config::{DebugConfig, DebugPolicy};
-use crate::dt_overlay::{create_device_tree_overlay, VM_DT_OVERLAY_MAX_SIZE, VM_DT_OVERLAY_PATH};
+use crate::dt_overlay::{DeviceTreeOverlay, VM_DT_OVERLAY_MAX_SIZE, VM_DT_OVERLAY_PATH};
 use crate::payload::{ApexInfoList, add_microdroid_payload_images, add_microdroid_system_images, add_microdroid_vendor_image};
 use crate::selinux::{check_tee_service_permission, getfilecon, getprevcon, SeContext};
 use android_os_permissions_aidl::aidl::android::os::IPermissionController;
@@ -115,7 +115,7 @@ const ANDROID_VM_INSTANCE_VERSION: u16 = 1;
 
 const MICRODROID_OS_NAME: &str = "microdroid";
 
-const SECRETKEEPER_IDENTIFIER: &str =
+pub(crate) const SECRETKEEPER_IDENTIFIER: &str =
     "android.hardware.security.secretkeeper.ISecretkeeper/default";
 
 const UNFORMATTED_STORAGE_MAGIC: &str = "UNFORMATTED-STORAGE";
@@ -123,7 +123,7 @@ const UNFORMATTED_STORAGE_MAGIC: &str = "UNFORMATTED-STORAGE";
 /// crosvm requires all partitions to be a multiple of 4KiB.
 const PARTITION_GRANULARITY_BYTES: u64 = 4096;
 
-const VM_REFERENCE_DT_ON_HOST_PATH: &str = "/proc/device-tree/avf/reference";
+pub(crate) const VM_REFERENCE_DT_ON_HOST_PATH: &str = "/proc/device-tree/avf/reference";
 
 pub static GLOBAL_SERVICE: LazyLock<Strong<dyn IVirtualizationServiceInternal>> =
     LazyLock::new(|| {
@@ -587,10 +587,11 @@ impl VirtualizationService {
             check_gdb_allowed(config)?;
         }
 
-        let instance_id = extract_instance_id(config);
         let mut device_tree_overlays = vec![];
+        let dt_overlay =
+            DeviceTreeOverlay::from_config(config).or_service_specific_exception(-1)?;
         if let Some(dt_overlay) =
-            maybe_create_reference_dt_overlay(config, &instance_id, &temporary_directory)?
+            maybe_create_reference_dt_overlay(&dt_overlay, &temporary_directory)?
         {
             device_tree_overlays.push(dt_overlay);
         }
@@ -865,7 +866,7 @@ impl VirtualizationService {
             usb_config,
             dump_dt_fd,
             enable_hypervisor_specific_auth_method: config.enableHypervisorSpecificAuthMethod,
-            instance_id,
+            instance_id: dt_overlay.instance_id(),
         };
         let instance = Arc::new(
             VmInstance::new(
@@ -925,7 +926,9 @@ fn requires_vm_service(config: &VirtualMachineConfig) -> bool {
     }
 }
 
-fn extract_vendor_hashtree_digest(config: &VirtualMachineConfig) -> Result<Option<Vec<u8>>> {
+pub(crate) fn extract_vendor_hashtree_digest(
+    config: &VirtualMachineConfig,
+) -> Result<Option<Vec<u8>>> {
     let VirtualMachineConfig::AppConfig(config) = config else {
         return Ok(None);
     };
@@ -952,71 +955,16 @@ fn extract_vendor_hashtree_digest(config: &VirtualMachineConfig) -> Result<Optio
 }
 
 fn maybe_create_reference_dt_overlay(
-    config: &VirtualMachineConfig,
-    instance_id: &[u8; 64],
+    dt_overlay: &DeviceTreeOverlay,
     temporary_directory: &Path,
 ) -> binder::Result<Option<File>> {
-    // Currently, VirtMgr adds the host copy of reference DT & untrusted properties
-    // (e.g. instance-id)
-    let host_ref_dt = Path::new(VM_REFERENCE_DT_ON_HOST_PATH);
-    let host_ref_dt = if host_ref_dt.exists()
-        && read_dir(host_ref_dt).or_service_specific_exception(-1)?.next().is_some()
-    {
-        Some(host_ref_dt)
-    } else {
-        warn!("VM reference DT doesn't exist in host DT");
-        None
-    };
+    let dt_output = temporary_directory.join(VM_DT_OVERLAY_PATH);
+    let mut data = [0_u8; VM_DT_OVERLAY_MAX_SIZE];
 
-    let vendor_hashtree_digest = extract_vendor_hashtree_digest(config)
-        .context("Failed to extract vendor hashtree digest")
-        .or_service_specific_exception(-1)?;
+    let fdt = dt_overlay.create_fdt(&mut data).or_service_specific_exception(-1)?;
 
-    let mut trusted_props = if let Some(ref vendor_hashtree_digest) = vendor_hashtree_digest {
-        info!(
-            "Passing vendor hashtree digest to pvmfw. This will be rejected if it doesn't \
-                match the trusted digest in the pvmfw config, causing the VM to fail to start."
-        );
-        vec![(c"vendor_hashtree_descriptor_root_digest", vendor_hashtree_digest.as_slice())]
-    } else {
-        vec![]
-    };
-
-    let key_material;
-    let mut untrusted_props = Vec::with_capacity(2);
-    if cfg!(llpvm_changes) {
-        untrusted_props.push((c"instance-id", &instance_id[..]));
-        let want_updatable = extract_want_updatable(config);
-        if want_updatable && is_secretkeeper_supported() {
-            // Let guest know that it can defer rollback protection to Secretkeeper by setting
-            // an empty property in untrusted node in DT. This enables Updatable VMs.
-            untrusted_props.push((c"defer-rollback-protection", &[]));
-            let sk: Strong<dyn ISecretkeeper> =
-                binder::wait_for_interface(SECRETKEEPER_IDENTIFIER)?;
-            if sk.getInterfaceVersion()? >= 2 {
-                let PublicKey { keyMaterial } = sk.getSecretkeeperIdentity()?;
-                key_material = keyMaterial;
-                trusted_props.push((c"secretkeeper_public_key", key_material.as_slice()));
-            }
-        }
-    }
-
-    let device_tree_overlay = if host_ref_dt.is_some()
-        || !untrusted_props.is_empty()
-        || !trusted_props.is_empty()
-    {
-        let dt_output = temporary_directory.join(VM_DT_OVERLAY_PATH);
-        let mut data = [0_u8; VM_DT_OVERLAY_MAX_SIZE];
-        let fdt =
-            create_device_tree_overlay(&mut data, host_ref_dt, &untrusted_props, &trusted_props)
-                .map_err(|e| anyhow!("Failed to create DT overlay, {e:?}"))
-                .or_service_specific_exception(-1)?;
-        fs::write(&dt_output, fdt.as_slice()).or_service_specific_exception(-1)?;
-        Some(File::open(dt_output).or_service_specific_exception(-1)?)
-    } else {
-        None
-    };
-    Ok(device_tree_overlay)
+    fs::write(&dt_output, fdt.as_slice()).or_service_specific_exception(-1)?;
+    Ok(Some(File::open(dt_output).or_service_specific_exception(-1)?))
 }
 
 fn get_dtbo(config: &VirtualMachineConfig) -> Option<&ParcelFileDescriptor> {
@@ -1863,14 +1811,14 @@ fn check_gdb_allowed(config: &VirtualMachineConfig) -> binder::Result<()> {
     Ok(())
 }
 
-fn extract_instance_id(config: &VirtualMachineConfig) -> [u8; 64] {
+pub(crate) fn extract_instance_id(config: &VirtualMachineConfig) -> [u8; 64] {
     match config {
         VirtualMachineConfig::RawConfig(config) => config.instanceId,
         VirtualMachineConfig::AppConfig(config) => config.instanceId,
     }
 }
 
-fn extract_want_updatable(config: &VirtualMachineConfig) -> bool {
+pub(crate) fn extract_want_updatable(config: &VirtualMachineConfig) -> bool {
     match config {
         VirtualMachineConfig::RawConfig(_) => true,
         VirtualMachineConfig::AppConfig(config) => {
@@ -2124,7 +2072,7 @@ impl IVirtualMachineService for VirtualMachineService {
     }
 }
 
-fn is_secretkeeper_supported() -> bool {
+pub(crate) fn is_secretkeeper_supported() -> bool {
     binder::is_declared(SECRETKEEPER_IDENTIFIER)
         .expect("Could not check for declared Secretkeeper interface")
 }

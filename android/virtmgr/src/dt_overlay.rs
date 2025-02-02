@@ -14,16 +14,163 @@
 
 //! This module support creating AFV related overlays, that can then be appended to DT by VM.
 
+use android_hardware_security_secretkeeper::aidl::android::hardware::security::secretkeeper::{ISecretkeeper::ISecretkeeper, PublicKey::PublicKey};
+use android_system_virtualizationservice::aidl::android::system::virtualizationservice::VirtualMachineConfig::VirtualMachineConfig;
 use anyhow::{anyhow, Result};
+use binder::Strong;
+use crate::aidl::{extract_instance_id, extract_vendor_hashtree_digest, extract_want_updatable, is_secretkeeper_supported, SECRETKEEPER_IDENTIFIER, VM_REFERENCE_DT_ON_HOST_PATH};
 use fsfdt::FsFdt;
-use libfdt::Fdt;
+use libfdt::{Fdt, FdtNodeMut};
+use std::io::Read;
 use std::ffi::CStr;
+use std::fs::{File, read_dir};
 use std::path::Path;
 
 pub(crate) const AVF_NODE_NAME: &CStr = c"avf";
 pub(crate) const UNTRUSTED_NODE_NAME: &CStr = c"untrusted";
 pub(crate) const VM_DT_OVERLAY_PATH: &str = "vm_dt_overlay.dtbo";
 pub(crate) const VM_DT_OVERLAY_MAX_SIZE: usize = 2000;
+
+enum OverlayEntry {
+    DeferRollbackProtection,
+    InstanceId([u8; 64]),
+    SecretkeeperPublicKey(Vec<u8>),
+    VendorHashtreeDescriptorRootDigest(Vec<u8>),
+}
+
+impl OverlayEntry {
+    fn key(&self) -> &CStr {
+        match self {
+            Self::DeferRollbackProtection => c"defer_rollback_protection",
+            Self::InstanceId(_) => c"instance_id",
+            Self::SecretkeeperPublicKey(_) => c"secretkeeper_public_key",
+            Self::VendorHashtreeDescriptorRootDigest(_) => {
+                c"vendor_hashtree_descriptor_root_digest"
+            }
+        }
+    }
+
+    fn value(&self) -> &[u8] {
+        match self {
+            Self::DeferRollbackProtection => &[],
+            Self::InstanceId(value) => value,
+            Self::SecretkeeperPublicKey(value)
+            | Self::VendorHashtreeDescriptorRootDigest(value) => value,
+        }
+    }
+
+    fn setprop(&self, node: &mut FdtNodeMut) -> Result<()> {
+        let key = self.key();
+        let value = self.value();
+        node.setprop(key, value).map_err(|e| anyhow!("Failed to set {key:?}: {e:?}"))?;
+        Ok(())
+    }
+}
+
+pub(crate) struct DeviceTreeOverlay {
+    defer_rollback_protection: Option<OverlayEntry>,
+    instance_id: OverlayEntry,
+    secretkeeper_public_key: Option<OverlayEntry>,
+    vendor_hashtree_descriptor_root_digest: Option<OverlayEntry>,
+}
+
+impl DeviceTreeOverlay {
+    pub(crate) fn from_config(config: &VirtualMachineConfig) -> Result<Self> {
+        let instance_id = extract_instance_id(config);
+        let (defer_rollback, sk_pk) = extract_defer_rollback_protection_and_sk_public_key(config)?;
+        let vendor_hashtree_descriptor_root_digest = extract_vendor_hashtree_digest(config)?;
+
+        Ok(Self {
+            defer_rollback_protection: if defer_rollback {
+                Some(OverlayEntry::DeferRollbackProtection)
+            } else {
+                None
+            },
+            instance_id: OverlayEntry::InstanceId(instance_id),
+            secretkeeper_public_key: sk_pk.map(OverlayEntry::SecretkeeperPublicKey),
+            vendor_hashtree_descriptor_root_digest: vendor_hashtree_descriptor_root_digest
+                .map(OverlayEntry::VendorHashtreeDescriptorRootDigest),
+        })
+    }
+
+    pub(crate) fn instance_id(&self) -> [u8; 64] {
+        match self.instance_id {
+            OverlayEntry::InstanceId(value) => value,
+            _ => panic!("wat"),
+        }
+    }
+
+    pub(crate) fn create_fdt<'a>(&self, buffer: &'a mut [u8]) -> Result<&'a mut Fdt> {
+        let fdt = Fdt::create_empty_tree(buffer)
+            .map_err(|e| anyhow!("Failed to create empty Fdt: {e:?}"))?;
+        let mut fragment = fdt
+            .root_mut()
+            .add_subnode(c"fragment@0")
+            .map_err(|e| anyhow!("Failed to add fragment node: {e:?}"))?;
+        fragment
+            .setprop(c"target-path", b"/\0")
+            .map_err(|e| anyhow!("Failed to set target-path property: {e:?}"))?;
+        let overlay = fragment
+            .add_subnode(c"__overlay__")
+            .map_err(|e| anyhow!("Failed to add __overlay__ node: {e:?}"))?;
+        let mut avf = overlay
+            .add_subnode(AVF_NODE_NAME)
+            .map_err(|e| anyhow!("Failed to add avf node: {e:?}"))?;
+
+        if let Some(sk) = &self.secretkeeper_public_key {
+            sk.setprop(&mut avf)?;
+        }
+        if let Some(ht) = &self.vendor_hashtree_descriptor_root_digest {
+            ht.setprop(&mut avf)?;
+        }
+
+        let mut untrusted = avf
+            .add_subnode(UNTRUSTED_NODE_NAME)
+            .map_err(|e| anyhow!("Failed to add untrusted node: {e:?}"))?;
+
+        self.instance_id.setprop(&mut untrusted)?;
+        if let Some(defer) = &self.defer_rollback_protection {
+            defer.setprop(&mut untrusted)?;
+        }
+
+        fdt.pack().map_err(|e| anyhow!("Failed to pack DT overlay, {e:?}"))?;
+
+        Ok(fdt)
+    }
+}
+
+fn extract_defer_rollback_protection_and_sk_public_key(
+    config: &VirtualMachineConfig,
+) -> Result<(bool, Option<Vec<u8>>)> {
+    let want_updatable = extract_want_updatable(config);
+    if want_updatable && is_secretkeeper_supported() {
+        let sk: Strong<dyn ISecretkeeper> = binder::wait_for_interface(SECRETKEEPER_IDENTIFIER)?;
+        return if sk.getInterfaceVersion()? >= 2 {
+            let PublicKey { keyMaterial } = sk.getSecretkeeperIdentity()?;
+            Ok((true, Some(keyMaterial)))
+        } else {
+            Ok((true, extract_sk_public_key_from_host_ref_dt()?))
+        };
+    }
+
+    Ok((false, extract_sk_public_key_from_host_ref_dt()?))
+}
+
+fn extract_sk_public_key_from_host_ref_dt() -> Result<Option<Vec<u8>>> {
+    let host_ref_dt = Path::new(VM_REFERENCE_DT_ON_HOST_PATH);
+    if !host_ref_dt.exists() || read_dir(host_ref_dt)?.next().is_none() {
+        return Ok(None);
+    }
+
+    let mut sk_pk_file = File::open(host_ref_dt.join("avf").join("secretkeeper_public_key"))
+        .map_err(|e| anyhow!("Failed to locate secretkeeper_public_key in path: {e:?}"))?;
+    let mut key_material: Vec<u8> = vec![];
+    sk_pk_file
+        .read_to_end(&mut key_material)
+        .map_err(|e| anyhow!("Failed to read secretkeepr_public_key in host path: {e:?}"))?;
+
+    Ok(Some(key_material))
+}
 
 /// Create a Device tree overlay containing the provided proc style device tree & properties!
 /// # Arguments
@@ -48,6 +195,7 @@ pub(crate) const VM_DT_OVERLAY_MAX_SIZE: usize = 2000;
 ///     };
 /// };
 /// ```
+#[allow(dead_code)]
 pub(crate) fn create_device_tree_overlay<'a>(
     buffer: &'a mut [u8],
     dt_path: Option<&'a Path>,
