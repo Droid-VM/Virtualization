@@ -17,13 +17,116 @@
 use anyhow::{anyhow, Result};
 use fsfdt::FsFdt;
 use libfdt::Fdt;
+use log::warn;
 use std::ffi::CStr;
+use std::fs::{read_dir, write, File};
+use std::io::Read;
 use std::path::Path;
 
-pub(crate) const AVF_NODE_NAME: &CStr = c"avf";
-pub(crate) const UNTRUSTED_NODE_NAME: &CStr = c"untrusted";
-pub(crate) const VM_DT_OVERLAY_PATH: &str = "vm_dt_overlay.dtbo";
 pub(crate) const VM_DT_OVERLAY_MAX_SIZE: usize = 2000;
+
+const AVF_NODE_NAME: &CStr = c"avf";
+const UNTRUSTED_NODE_NAME: &CStr = c"untrusted";
+const VM_DT_OVERLAY_PATH: &str = "vm_dt_overlay.dtbo";
+const VM_REFERENCE_DT_ON_HOST_PATH: &str = "/proc/device-tree/avf/reference";
+
+pub(crate) struct TrustedDeviceTreeProperties {
+    pub(crate) secretkeeper_public_key: Option<Vec<u8>>,
+    pub(crate) vendor_hashtree_descriptor_root_digest: Option<Vec<u8>>,
+}
+
+pub(crate) struct UntrustedDeviceTreeProperties {
+    pub(crate) defer_rollback_protection: bool,
+    pub(crate) instance_id: Option<[u8; 64]>,
+}
+
+pub(crate) struct ExtraDeviceTreeProperties {
+    pub(crate) trusted: TrustedDeviceTreeProperties,
+    pub(crate) untrusted: UntrustedDeviceTreeProperties,
+}
+
+impl ExtraDeviceTreeProperties {
+    pub(crate) fn maybe_create_device_tree_overlay(
+        &self,
+        buffer: &mut [u8],
+        temporary_directory: &Path,
+    ) -> Result<Option<File>> {
+        if !self.untrusted.defer_rollback_protection
+            && self.untrusted.instance_id.is_none()
+            && self.trusted.secretkeeper_public_key.is_none()
+            && self.trusted.vendor_hashtree_descriptor_root_digest.is_none()
+        {
+            return Ok(None);
+        }
+
+        let fdt = Fdt::create_empty_tree(buffer)
+            .map_err(|e| anyhow!("Failed to create empty Fdt: {e:?}"))?;
+        let mut fragment = fdt
+            .root_mut()
+            .add_subnode(c"fragment@0")
+            .map_err(|e| anyhow!("Failed to add fragment node: {e:?}"))?;
+        fragment
+            .setprop(c"target-path", b"/\0")
+            .map_err(|e| anyhow!("Failed to set target-path property: {e:?}"))?;
+        let overlay = fragment
+            .add_subnode(c"__overlay__")
+            .map_err(|e| anyhow!("Failed to add __overlay__ node: {e:?}"))?;
+        let mut avf = overlay
+            .add_subnode(AVF_NODE_NAME)
+            .map_err(|e| anyhow!("Failed to add avf node: {e:?}"))?;
+
+        if let Some(secretkeeper_public_key) = &self.trusted.secretkeeper_public_key {
+            avf.setprop(c"secretkeeper_public_key", secretkeeper_public_key)?;
+        }
+        if let Some(vendor_hashtree_descriptor_root_digest) =
+            &self.trusted.vendor_hashtree_descriptor_root_digest
+        {
+            avf.setprop(
+                c"vendor_hashtree_descriptor_root_digest",
+                vendor_hashtree_descriptor_root_digest,
+            )?;
+        }
+
+        match (self.untrusted.defer_rollback_protection, self.untrusted.instance_id) {
+            (false, None) => {}
+            (defer_rollback_protection, instance_id) => {
+                let mut untrusted = avf
+                    .add_subnode(UNTRUSTED_NODE_NAME)
+                    .map_err(|e| anyhow!("Failed to add untrusted node: {e:?}"))?;
+
+                if let Some(instance_id) = instance_id {
+                    untrusted.setprop(c"instance_id", &instance_id)?;
+                }
+                if defer_rollback_protection {
+                    untrusted.setprop(c"defer_rollback_protection", &[])?;
+                }
+            }
+        }
+
+        fdt.pack().map_err(|e| anyhow!("Failed to pack DT overlay, {e:?}"))?;
+
+        let dt_output = temporary_directory.join(VM_DT_OVERLAY_PATH);
+        write(&dt_output, fdt.as_slice())?;
+        Ok(Some(File::open(dt_output)?))
+    }
+}
+
+pub(crate) fn extract_sk_public_key_from_host_ref_dt() -> Result<Option<Vec<u8>>> {
+    let host_ref_dt = Path::new(VM_REFERENCE_DT_ON_HOST_PATH);
+    if !host_ref_dt.exists() || read_dir(host_ref_dt)?.next().is_none() {
+        warn!("VM reference DT doesn't exist in host DT");
+        return Ok(None);
+    }
+
+    let mut sk_pk_file = File::open(host_ref_dt.join("avf").join("secretkeeper_public_key"))
+        .map_err(|e| anyhow!("Failed to locate secretkeeper_public_key in path: {e:?}"))?;
+    let mut key_material: Vec<u8> = vec![];
+    sk_pk_file
+        .read_to_end(&mut key_material)
+        .map_err(|e| anyhow!("Failed to read secretkeepr_public_key in host path: {e:?}"))?;
+
+    Ok(Some(key_material))
+}
 
 /// Create a Device tree overlay containing the provided proc style device tree & properties!
 /// # Arguments
@@ -48,6 +151,7 @@ pub(crate) const VM_DT_OVERLAY_MAX_SIZE: usize = 2000;
 ///     };
 /// };
 /// ```
+#[allow(dead_code)]
 pub(crate) fn create_device_tree_overlay<'a>(
     buffer: &'a mut [u8],
     dt_path: Option<&'a Path>,
