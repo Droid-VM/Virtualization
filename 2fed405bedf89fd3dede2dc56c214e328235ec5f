@@ -46,6 +46,30 @@
       },
       "revId": "2fed405bedf89fd3dede2dc56c214e328235ec5f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adc7668b_49a106b4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2025-02-03T10:59:20Z",
+      "side": 1,
+      "message": "Thanks for reviewing this!\n\n\u003e top-level AVB owners would probably have more advanced understanding here\n\nAh, apologies! I followed the owners suggestions from Gerrit on aosp/3469433 and hadn\u0027t realized that there were different levels; I now have also added @dkrahn@google.com.\n\n\u003e Generally, trying to use data before it has been verified (as this is proposing with vbmeta) is extremely risky.\n\nAgreed, and this is particularly relevant in the case of `pvmfw`, which receives data (signed payload, device tree, virtual devices, ...) from an untrusted entity, the \"host VM\". In the case of the DT, `libfdt` is appropriately hardened and will check all offsets, properties, etc of the structures.\n\nSurely, `libavb` has to be at least partially hardened in a similar way as the data it parses must at first be untrusted. It\u0027s too bad that at some a point during the verification flow, it starts blindly trusting it because that effectively means that the signer is trusted with the security of the `libavb` client (bootloader), which is a questionable assumption to be making (in particular for probably negligible performance gains?).\n\n\u003e This is a well-defined way to allow untrusted vbmeta blobs\n\nThanks for the suggestion.\n\nI have avoided `AVB_SLOT_VERIFY_FLAGS_ALLOW_VERIFICATION_ERROR` as\n```\n * [...] It is\n * undefined which error is returned if more than one distinct error\n * is encountered.\n```\nso any return value other than `AVB_SLOT_VERIFY_RESULT_OK` is meaningless.\n\n\u003e two-pass system where you allow errors, then (carefully) extract the vbmeta data you need\n\nAre you suggesting something like\n```\nif slot_verify(..., ALLOW_VERIFICATION_ERROR).is_ok() {\n    return Ok(_);\n} // Can\u0027t trust the Err(_) returned from slot_verify so ignore it.\n\nlet pubkey \u003d vbmeta_image.public_key(); // Potentially risky!\nops.set_trusted_public_key(pubkey);\n\nslot_verify(...) // As risky as current CL?\n```\n? Because I don\u0027t see how this would be any less risky than the current CL as the `pubkey` access and second `slot_verify()` cover the same code paths, AFAIU?\n\n\u003e how can you trust it at all even if it\u0027s properly-signed?\n\nIt depends what you mean by \"trust\"; IMO, the security of the `libavb` client should never rely on the data being properly signed. I understand that the main use-case for libavb has been ABL, where only \"trusted\" payloads should be able to run on a locked device.\n\nHowever, \"properly-signed\" and \"trusted\" shouldn\u0027t be treated as synonymous as\n\n- payload was properly signed by X (no tampering)\n- X would not attempt to attack the `libavb` client\n- properly-signed payloads from X should be allowed to run\n\nare different statements which can be true/false independently of each other.\n \nFYI, long-term, we would like `pvmfw` to allow any properly-signed payload to run: it doesn\u0027t matter _who_ signed it, only that it wasn\u0027t tampered with. The payload can **never** be trusted with `pvmfw`\u0027s security. Note that the pubkey gets reflected in the DICE chain of the VM, which impacts its certificate and cryptographic keys (i.e. access to encrypted data).\n\nShort-term (context of this CL), we would like to enable logic that doesn\u0027t require shipping a trusted key at all, and instead rely on an exact AVB digest. This CL currently uses the output/parsing performed by `avb_slot_verify()` but it sounds like we should instead manually duplicate the logic to locate the VBMeta (and hash it) out of libavb, if we want a properly hardened implementation?",
+      "parentUuid": "f8a6afb4_7c593a26",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 23
+      },
+      "revId": "2fed405bedf89fd3dede2dc56c214e328235ec5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
