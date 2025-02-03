@@ -141,7 +141,7 @@ impl Entry {
 
 #[derive(Default)]
 pub struct Entries<'a> {
-    pub bcc: &'a mut [u8],
+    pub bcc: Option<&'a mut [u8]>,
     pub debug_policy: Option<&'a [u8]>,
     pub vm_dtbo: Option<&'a mut [u8]>,
     pub vm_ref_dt: Option<&'a [u8]>,
@@ -205,7 +205,7 @@ pub struct Config<'a> {
 
 impl<'a> Config<'a> {
     /// Take ownership of a pvmfw configuration consisting of its header and following entries.
-    pub fn new(bytes: &'a mut [u8]) -> Result<Self> {
+    pub fn new(bytes: &'a mut [u8], boot_flags: u64) -> Result<Self> {
         const HEADER_SIZE: usize = mem::size_of::<Header>();
         if bytes.len() < HEADER_SIZE {
             return Err(Error::BufferTooSmall);
@@ -269,8 +269,12 @@ impl<'a> Config<'a> {
                 entry_size,
             );
         }
-        // Ensures that BCC exists.
-        ranges[Entry::Bcc as usize].ok_or(Error::MissingEntry(Entry::Bcc))?;
+
+        //If bit0 is 1, BCC is optional
+        if (boot_flags & 0x1) == 0 {
+            // Ensures that BCC exists.
+            ranges[Entry::Bcc as usize].ok_or(Error::MissingEntry(Entry::Bcc))?;
+        }
 
         Ok(Self { body, ranges })
     }
@@ -295,8 +299,6 @@ impl<'a> Config<'a> {
         }
         let [bcc, debug_policy, vm_dtbo, vm_ref_dt] = entries;
 
-        // The platform BCC has always been required.
-        let bcc = bcc.unwrap();
 
         // We have no reason to mutate so drop the `mut`.
         let debug_policy = debug_policy.map(|x| &*x);

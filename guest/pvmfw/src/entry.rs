@@ -77,12 +77,12 @@ enum NextStage {
 }
 
 /// Entry point for pVM firmware.
-pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, _arg3: u64) {
+pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, boot_flags: u64) {
     let fdt_address = fdt_address.try_into().unwrap();
     let payload_start = payload_start.try_into().unwrap();
     let payload_size = payload_size.try_into().unwrap();
 
-    let reboot_reason = match main_wrapper(fdt_address, payload_start, payload_size) {
+    let reboot_reason = match main_wrapper(fdt_address, payload_start, payload_size, boot_flags) {
         Err(r) => r,
         Ok((next_stage, slices)) => match next_stage {
             NextStage::LinuxBootWithUart(ep) => jump_to_payload(ep, &slices),
@@ -112,6 +112,7 @@ fn main_wrapper<'a>(
     fdt: usize,
     payload: usize,
     payload_size: usize,
+    boot_flags: u64,
 ) -> Result<(NextStage, MemorySlices<'a>), RebootReason> {
     // Limitations in this function:
     // - only access MMIO once (and while) it has been mapped and configured
@@ -125,7 +126,7 @@ fn main_wrapper<'a>(
         RebootReason::InternalError
     })?;
 
-    let appended = AppendedPayload::new(appended_data).ok_or_else(|| {
+    let appended = AppendedPayload::new(appended_data, boot_flags).ok_or_else(|| {
         error!("No valid configuration found");
         RebootReason::InvalidConfig
     })?;
@@ -139,17 +140,19 @@ fn main_wrapper<'a>(
         slices.fdt,
         slices.kernel,
         slices.ramdisk,
-        config_entries.bcc,
+        config_entries.bcc.as_deref(),
         config_entries.debug_policy,
         config_entries.vm_dtbo,
         config_entries.vm_ref_dt,
     )?;
-    slices.add_dice_chain(next_bcc);
+
+    slices.set_dice_chain(next_bcc);
+
     // Keep UART MMIO_GUARD-ed for debuggable payloads, to enable earlycon.
     let keep_uart = cfg!(debuggable_vms_improvements) && debuggable_payload;
 
     // Writable-dirty regions will be flushed when MemoryTracker is dropped.
-    config_entries.bcc.zeroize();
+    config_entries.bcc.unwrap().zeroize();
 
     unshare_all_mmio_except_uart().map_err(|e| {
         error!("Failed to unshare MMIO ranges: {e}");
@@ -185,14 +188,14 @@ enum AppendedPayload<'a> {
 }
 
 impl<'a> AppendedPayload<'a> {
-    fn new(data: &'a mut [u8]) -> Option<Self> {
+    fn new(data: &'a mut [u8], boot_flags: u64) -> Option<Self> {
         // The borrow checker gets confused about the ownership of data (see inline comments) so we
         // intentionally obfuscate it using a raw pointer; see a similar issue (still not addressed
         // in v1.77) in https://users.rust-lang.org/t/78467.
         let data_ptr = data as *mut [u8];
 
         // Config::new() borrows data as mutable ...
-        match config::Config::new(data) {
+        match config::Config::new(data, boot_flags) {
             // ... so this branch has a mutable reference to data, from the Ok(Config<'a>). But ...
             Ok(valid) => Some(Self::Config(valid)),
             // ... if Config::new(data).is_err(), the Err holds no ref to data. However ...
@@ -215,7 +218,7 @@ impl<'a> AppendedPayload<'a> {
     fn get_entries(self) -> config::Entries<'a> {
         match self {
             Self::Config(cfg) => cfg.get_entries(),
-            Self::LegacyBcc(bcc) => config::Entries { bcc, ..Default::default() },
+            Self::LegacyBcc(bcc) => config::Entries { bcc: Some(bcc), ..Default::default() },
         }
     }
 }
